@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: ClutterGdk
+  
+    &mdash; Ruby/ClutterGDK
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "ClutterGdk";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (C)</a> &raquo;
+    
+    
+    <span class="title">ClutterGdk</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: ClutterGdk
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/clutter-gdk.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Version:</p>
+<ul class="version">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_display-instance_method" title="#default_display (instance method)">#<strong>default_display</strong>  &#x21d2; Gdk::Display </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the pointer to the default display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#disable_event_retrieval-instance_method" title="#disable_event_retrieval (instance method)">#<strong>disable_event_retrieval</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Disable the event retrieval in Clutter.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#display=-instance_method" title="#display= (instance method)">#<strong>display=</strong>(display)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the display connection Clutter should use; must be called before clutter_init(), clutter_init_with_args() or other functions pertaining Clutter's initialization process.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_stage_from_window-instance_method" title="#get_stage_from_window (instance method)">#<strong>get_stage_from_window</strong>(window)  &#x21d2; Clutter::Stage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the stage for a particular X window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_stage_window-instance_method" title="#get_stage_window (instance method)">#<strong>get_stage_window</strong>(stage)  &#x21d2; Gdk::Window </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the stages GdkWindow.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#handle_event-instance_method" title="#handle_event (instance method)">#<strong>handle_event</strong>(event)  &#x21d2; Gdk::FilterReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This function processes a single GDK event; it can be used to hook into external event processing.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_stage_foreign-instance_method" title="#set_stage_foreign (instance method)">#<strong>set_stage_foreign</strong>(stage, window)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Target the Clutter::Stage to use an existing external #GdkWindow.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#visual-instance_method" title="#visual (instance method)">#<strong>visual</strong>  &#x21d2; Gdk::Visual </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the Gdk::Visual used by Clutter.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="default_display-instance_method">
+  
+    #<strong>default_display</strong>  &#x21d2; <tt>Gdk::Display</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the pointer to the default display.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Display</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the default display</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="disable_event_retrieval-instance_method">
+  
+    #<strong>disable_event_retrieval</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Disable the event retrieval in Clutter.</p>
+<p>Callers of this function have to set up an event filter using the
+GDK API, and call clutter_gdk_handle_event().</p>
+<p>This function should only be used when embedding Clutter into
+a GDK based toolkit.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="display=-instance_method">
+  
+    #<strong>display=</strong>(display)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the display connection Clutter should use; must be called
+before clutter_init(), clutter_init_with_args() or other functions
+pertaining Clutter's initialization process.</p>
+<p>If you are parsing the command line arguments by retrieving Clutter's
+GOption::Group with clutter_get_option_group() and calling
+g_option_context_parse() yourself, you should also call
+clutter_gdk_set_display() before g_option_context_parse().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>display</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Display</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointer to a GDK display connection.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_stage_from_window-instance_method">
+  
+    #<strong>get_stage_from_window</strong>(window)  &#x21d2; <tt>Clutter::Stage</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the stage for a particular X window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>window</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Window</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::Window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::Stage</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Clutter::Stage, or% NULL if a stage
+does not exist for the window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_stage_window-instance_method">
+  
+    #<strong>get_stage_window</strong>(stage)  &#x21d2; <tt>Gdk::Window</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the stages GdkWindow.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>stage</span>
+      
+      
+        <span class='type'>(<tt>Clutter::Stage</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Clutter::Stage</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Window</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A GdkWindow* for the stage window.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="handle_event-instance_method">
+  
+    #<strong>handle_event</strong>(event)  &#x21d2; <tt>Gdk::FilterReturn</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This function processes a single GDK event; it can be used to hook
+into external event processing</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>event</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gdk::Event</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::FilterReturn</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gdk::FilterReturn. %GDK_FILTER_REMOVE indicates that
+Clutter has internally handled the event and the caller should do
+no further processing. %GDK_FILTER_CONTINUE indicates that Clutter
+is either not interested in the event, or has used the event to
+update internal state without taking any exclusive action.
+%GDK_FILTER_TRANSLATE will not occur.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_stage_foreign-instance_method">
+  
+    #<strong>set_stage_foreign</strong>(stage, window)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Target the Clutter::Stage to use an existing external #GdkWindow</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>stage</span>
+      
+      
+        <span class='type'>(<tt>Clutter::Stage</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Clutter::Stage</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>window</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Window</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an existing Gdk::Window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if foreign window is valid</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="visual-instance_method">
+  
+    #<strong>visual</strong>  &#x21d2; <tt>Gdk::Visual</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the Gdk::Visual used by Clutter.</p>
+<p>This function should be used when embedding Clutter inside GDK-based
+foreign toolkits, to ensure that the visual applied to the Gdk::Window
+used to render the Clutter::Stage is the correct one.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Visual</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gdk::Visual instance</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

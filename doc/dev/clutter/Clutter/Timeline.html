@@ -1,0 +1,3327 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Clutter::Timeline
+  
+    &mdash; Ruby/Clutter
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Clutter::Timeline";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter</a></span></span>
+     &raquo; 
+    <span class="title">Timeline</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Clutter::Timeline
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Clutter::Timeline</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The Clutter::TimelineClass structure contains only private data</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="Transition.html" title="Clutter::Transition (class)">Transition</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_marker-instance_method" title="#add_marker (instance method)">#<strong>add_marker</strong>(marker_name, progress)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a named marker that will be hit when the timeline has reached the specified <!-- raw HTML omitted -->progress<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_marker_at_time-instance_method" title="#add_marker_at_time (instance method)">#<strong>add_marker_at_time</strong>(marker_name, msecs)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a named marker that will be hit when the timeline has been running for <!-- raw HTML omitted -->msecs<!-- raw HTML omitted --> milliseconds.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#advance-instance_method" title="#advance (instance method)">#<strong>advance</strong>(msecs)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Advance timeline to the requested point.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#advance_to_marker-instance_method" title="#advance_to_marker (instance method)">#<strong>advance_to_marker</strong>(marker_name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Advances <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> to the time of the given <!-- raw HTML omitted -->marker_name<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#auto_reverse-instance_method" title="#auto_reverse (instance method)">#<strong>auto_reverse</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the value set by clutter_timeline_set_auto_reverse().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#auto_reverse=-instance_method" title="#auto_reverse= (instance method)">#<strong>auto_reverse=</strong>(auto_reverse)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If the direction of the timeline should be automatically reversed when reaching the end.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#auto_reverse%3F-instance_method" title="#auto_reverse? (instance method)">#<strong>auto_reverse?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If the direction of the timeline should be automatically reversed when reaching the end.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clone-instance_method" title="#clone (instance method)">#<strong>clone</strong>  &#x21d2; Clutter::Timeline </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new Clutter::Timeline instance which has property values matching that of supplied timeline.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_repeat-instance_method" title="#current_repeat (instance method)">#<strong>current_repeat</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the current repeat for a timeline.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delay-instance_method" title="#delay (instance method)">#<strong>delay</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A delay, in milliseconds, that should be observed by the timeline before actually starting.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delay=-instance_method" title="#delay= (instance method)">#<strong>delay=</strong>(delay)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A delay, in milliseconds, that should be observed by the timeline before actually starting.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delta-instance_method" title="#delta (instance method)">#<strong>delta</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the amount of time elapsed since the last ClutterTimeline::new-frame signal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#direction-instance_method" title="#direction (instance method)">#<strong>direction</strong>  &#x21d2; Clutter::TimelineDirection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The direction of the timeline, either %CLUTTER_TIMELINE_FORWARD or %CLUTTER_TIMELINE_BACKWARD.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#direction=-instance_method" title="#direction= (instance method)">#<strong>direction=</strong>(direction)  &#x21d2; Clutter::TimelineDirection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The direction of the timeline, either %CLUTTER_TIMELINE_FORWARD or %CLUTTER_TIMELINE_BACKWARD.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#duration-instance_method" title="#duration (instance method)">#<strong>duration</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Duration of the timeline in milliseconds, depending on the ClutterTimeline:fps value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#duration=-instance_method" title="#duration= (instance method)">#<strong>duration=</strong>(duration)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Duration of the timeline in milliseconds, depending on the ClutterTimeline:fps value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#duration_hint-instance_method" title="#duration_hint (instance method)">#<strong>duration_hint</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the full duration of the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->, taking into account the current value of the Clutter::Timeline:repeat-count property.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#elapsed_time-instance_method" title="#elapsed_time (instance method)">#<strong>elapsed_time</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Request the current time position of the timeline.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_cubic_bezier_progress-instance_method" title="#get_cubic_bezier_progress (instance method)">#<strong>get_cubic_bezier_progress</strong>(c_1, c_2)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the control points for the cubic bezier progress mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_step_progress-instance_method" title="#get_step_progress (instance method)">#<strong>get_step_progress</strong>(n_steps, step_mode)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the parameters of the step progress mode used by <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_marker-instance_method" title="#has_marker (instance method)">#<strong>has_marker</strong>(marker_name)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks whether <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> has a marker set with the given name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(msecs)  &#x21d2; Clutter::Timeline </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Clutter::Timeline with a duration of <!-- raw HTML omitted -->msecs<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_playing-instance_method" title="#is_playing (instance method)">#<strong>is_playing</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries state of a Clutter::Timeline.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_markers-instance_method" title="#list_markers (instance method)">#<strong>list_markers</strong>(msecs, n_markers)  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the list of markers at time <!-- raw HTML omitted -->msecs<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#loop-instance_method" title="#loop (instance method)">#<strong>loop</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> is looping.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#loop=-instance_method" title="#loop= (instance method)">#<strong>loop=</strong>(loop)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the timeline should automatically rewind and restart.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#loop%3F-instance_method" title="#loop? (instance method)">#<strong>loop?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the timeline should automatically rewind and restart.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pause-instance_method" title="#pause (instance method)">#<strong>pause</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Pauses the Clutter::Timeline on current frame.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#progress-instance_method" title="#progress (instance method)">#<strong>progress</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The position of the timeline in a normalized [-1, 2] interval.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#progress_mode-instance_method" title="#progress_mode (instance method)">#<strong>progress_mode</strong>  &#x21d2; Clutter::AnimationMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Controls the way a Clutter::Timeline computes the normalized progress.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#progress_mode=-instance_method" title="#progress_mode= (instance method)">#<strong>progress_mode=</strong>(progress_mode)  &#x21d2; Clutter::AnimationMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Controls the way a Clutter::Timeline computes the normalized progress.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_marker-instance_method" title="#remove_marker (instance method)">#<strong>remove_marker</strong>(marker_name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes <!-- raw HTML omitted -->marker_name<!-- raw HTML omitted -->, if found, from <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#repeat_count-instance_method" title="#repeat_count (instance method)">#<strong>repeat_count</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Defines how many times the timeline should repeat.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#repeat_count=-instance_method" title="#repeat_count= (instance method)">#<strong>repeat_count=</strong>(repeat_count)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Defines how many times the timeline should repeat.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rewind-instance_method" title="#rewind (instance method)">#<strong>rewind</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Rewinds Clutter::Timeline to the first frame if its direction is %CLUTTER_TIMELINE_FORWARD and the last frame if it is %CLUTTER_TIMELINE_BACKWARD.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_cubic_bezier_progress-instance_method" title="#set_cubic_bezier_progress (instance method)">#<strong>set_cubic_bezier_progress</strong>(c_1, c_2)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the Clutter::Timeline:progress-mode of <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> to %CLUTTER_CUBIC_BEZIER, and sets the two control points for the cubic bezier.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_progress_func-instance_method" title="#set_progress_func (instance method)">#<strong>set_progress_func</strong>(func, data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets a custom progress function for <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_step_progress-instance_method" title="#set_step_progress (instance method)">#<strong>set_step_progress</strong>(n_steps, step_mode)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the Clutter::Timeline:progress-mode of the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> to %CLUTTER_STEPS and provides the parameters of the step function.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#skip-instance_method" title="#skip (instance method)">#<strong>skip</strong>(msecs)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Advance timeline by the requested time in milliseconds.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#start-instance_method" title="#start (instance method)">#<strong>start</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Starts the Clutter::Timeline playing.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stop-instance_method" title="#stop (instance method)">#<strong>stop</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Stops the Clutter::Timeline and moves to frame 0.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(msecs)  &#x21d2; <tt><span class='object_link'><a href="" title="Clutter::Timeline (class)">Clutter::Timeline</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Clutter::Timeline with a duration of <!-- raw HTML omitted -->msecs<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>msecs</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Duration of the timeline in milliseconds</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_marker-instance_method">
+  
+    #<strong>add_marker</strong>(marker_name, progress)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a named marker that will be hit when the timeline has reached
+the specified <!-- raw HTML omitted -->progress<!-- raw HTML omitted -->.</p>
+<p>Markers are unique string identifiers for a given position on the
+timeline. Once <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> reaches the given <!-- raw HTML omitted -->progress<!-- raw HTML omitted --> of its duration,
+if will emit a ::marker-reached signal for each marker attached to
+that particular point.</p>
+<p>A marker can be removed with clutter_timeline_remove_marker(). The
+timeline can be advanced to a marker using
+clutter_timeline_advance_to_marker().</p>
+<p>See also: clutter_timeline_add_marker_at_time()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>marker_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the unique name for this marker</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>progress</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the normalized value of the position of the martke</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_marker_at_time-instance_method">
+  
+    #<strong>add_marker_at_time</strong>(marker_name, msecs)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a named marker that will be hit when the timeline has been
+running for <!-- raw HTML omitted -->msecs<!-- raw HTML omitted --> milliseconds.</p>
+<p>Markers are unique string identifiers for a given position on the
+timeline. Once <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> reaches the given <!-- raw HTML omitted -->msecs<!-- raw HTML omitted -->, it will emit
+a ::marker-reached signal for each marker attached to that position.</p>
+<p>A marker can be removed with clutter_timeline_remove_marker(). The
+timeline can be advanced to a marker using
+clutter_timeline_advance_to_marker().</p>
+<p>See also: clutter_timeline_add_marker()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>marker_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the unique name for this marker</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>msecs</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>position of the marker in milliseconds</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="advance-instance_method">
+  
+    #<strong>advance</strong>(msecs)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Advance timeline to the requested point. The point is given as a
+time in milliseconds since the timeline started.</p>
+<p>The <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> will not emit the Clutter::Timeline::new-frame
+signal for the given time. The first ::new-frame signal after the call to
+clutter_timeline_advance() will be emit the skipped markers.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>msecs</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Time to advance to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="advance_to_marker-instance_method">
+  
+    #<strong>advance_to_marker</strong>(marker_name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Advances <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> to the time of the given <!-- raw HTML omitted -->marker_name<!-- raw HTML omitted -->.</p>
+<p>Like clutter_timeline_advance(), this function will not
+emit the Clutter::Timeline::new-frame for the time where <!-- raw HTML omitted -->marker_name<!-- raw HTML omitted -->
+is set, nor it will emit Clutter::Timeline::marker-reached for
+<!-- raw HTML omitted -->marker_name<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>marker_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the marker</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="auto_reverse-instance_method">
+  
+    #<strong>auto_reverse</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the value set by clutter_timeline_set_auto_reverse().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the timeline should automatically reverse, and
+false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="auto_reverse=-instance_method">
+  
+    #<strong>auto_reverse=</strong>(auto_reverse)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If the direction of the timeline should be automatically reversed
+when reaching the end.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>auto_reverse</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>auto-reverse</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>auto-reverse</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="auto_reverse?-instance_method">
+  
+    #<strong>auto_reverse?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If the direction of the timeline should be automatically reversed
+when reaching the end.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>auto-reverse</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clone-instance_method">
+  
+    #<strong>clone</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Clutter::Timeline (class)">Clutter::Timeline</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new Clutter::Timeline instance which has property values
+matching that of supplied timeline. The cloned timeline will not
+be started and will not be positioned to the current position of
+the original <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->: you will have to start it with
+clutter_timeline_start().</p>
+<p>The only cloned properties are:</p>
+<ul>
+<li>Clutter::Timeline:duration</li>
+<li>Clutter::Timeline:loop</li>
+<li>Clutter::Timeline:delay</li>
+<li>Clutter::Timeline:direction</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Clutter::Timeline (class)">Clutter::Timeline</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Clutter::Timeline, cloned
+from <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_repeat-instance_method">
+  
+    #<strong>current_repeat</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the current repeat for a timeline.</p>
+<p>Repeats start at 0.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current repeat</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delay-instance_method">
+  
+    #<strong>delay</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A delay, in milliseconds, that should be observed by the
+timeline before actually starting.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>delay</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delay=-instance_method">
+  
+    #<strong>delay=</strong>(delay)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A delay, in milliseconds, that should be observed by the
+timeline before actually starting.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>delay</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>delay</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>delay</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delta-instance_method">
+  
+    #<strong>delta</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the amount of time elapsed since the last
+ClutterTimeline::new-frame signal.</p>
+<p>This function is only useful inside handlers for the ::new-frame
+signal, and its behaviour is undefined if the timeline is not
+playing.
+last frame</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the amount of time in milliseconds elapsed since the</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="direction-instance_method">
+  
+    #<strong>direction</strong>  &#x21d2; <tt><span class='object_link'><a href="TimelineDirection.html" title="Clutter::TimelineDirection (module)">Clutter::TimelineDirection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The direction of the timeline, either %CLUTTER_TIMELINE_FORWARD or
+%CLUTTER_TIMELINE_BACKWARD.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TimelineDirection.html" title="Clutter::TimelineDirection (module)">Clutter::TimelineDirection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>direction</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="direction=-instance_method">
+  
+    #<strong>direction=</strong>(direction)  &#x21d2; <tt><span class='object_link'><a href="TimelineDirection.html" title="Clutter::TimelineDirection (module)">Clutter::TimelineDirection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The direction of the timeline, either %CLUTTER_TIMELINE_FORWARD or
+%CLUTTER_TIMELINE_BACKWARD.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>direction</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TimelineDirection.html" title="Clutter::TimelineDirection (module)">Clutter::TimelineDirection</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TimelineDirection.html" title="Clutter::TimelineDirection (module)">Clutter::TimelineDirection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>direction</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TimelineDirection.html" title="Clutter::TimelineDirection (module)">Clutter::TimelineDirection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>direction</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="duration-instance_method">
+  
+    #<strong>duration</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Duration of the timeline in milliseconds, depending on the
+ClutterTimeline:fps value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>duration</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="duration=-instance_method">
+  
+    #<strong>duration=</strong>(duration)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Duration of the timeline in milliseconds, depending on the
+ClutterTimeline:fps value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>duration</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>duration</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>duration</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="duration_hint-instance_method">
+  
+    #<strong>duration_hint</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the full duration of the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->, taking into account the
+current value of the Clutter::Timeline:repeat-count property.</p>
+<p>If the Clutter::Timeline:repeat-count property is set to -1, this function
+will return %G_MAXINT64.</p>
+<p>The returned value is to be considered a hint, and it's only valid
+as long as the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> hasn't been changed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the full duration of the Clutter::Timeline</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="elapsed_time-instance_method">
+  
+    #<strong>elapsed_time</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Request the current time position of the timeline.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>current elapsed time in milliseconds.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_cubic_bezier_progress-instance_method">
+  
+    #<strong>get_cubic_bezier_progress</strong>(c_1, c_2)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the control points for the cubic bezier progress mode.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>c_1</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Point.html" title="Clutter::Point (class)">Clutter::Point</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the first control
+point of the cubic bezier, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>c_2</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Point.html" title="Clutter::Point (class)">Clutter::Point</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the second control
+point of the cubic bezier, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> is using a cubic bezier progress
+more, and false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_step_progress-instance_method">
+  
+    #<strong>get_step_progress</strong>(n_steps, step_mode)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the parameters of the step progress mode used by <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_steps</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the number of steps, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>step_mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StepMode.html" title="Clutter::StepMode (module)">Clutter::StepMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the value change policy,
+or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> is using a step progress
+mode, and false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_marker-instance_method">
+  
+    #<strong>has_marker</strong>(marker_name)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks whether <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> has a marker set with the given name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>marker_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the marker</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the marker was found</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_playing-instance_method">
+  
+    #<strong>is_playing</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries state of a Clutter::Timeline.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if timeline is currently playing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_markers-instance_method">
+  
+    #<strong>list_markers</strong>(msecs, n_markers)  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the list of markers at time <!-- raw HTML omitted -->msecs<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->msecs<!-- raw HTML omitted --> is a
+negative integer, all the markers attached to <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> will be
+returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>msecs</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the time to check, or -1</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_markers</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of markers returned</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly allocated, nil terminated string array containing the names
+of the markers. Use g_strfreev() when done.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="loop-instance_method">
+  
+    #<strong>loop</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> is looping</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the timeline is looping</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="loop=-instance_method">
+  
+    #<strong>loop=</strong>(loop)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the timeline should automatically rewind and restart.</p>
+<p>As a side effect, setting this property to true will set the
+Clutter::Timeline:repeat-count property to -1, while setting this
+property to false will set the Clutter::Timeline:repeat-count
+property to 0.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>loop</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>loop</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>loop</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="loop?-instance_method">
+  
+    #<strong>loop?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the timeline should automatically rewind and restart.</p>
+<p>As a side effect, setting this property to true will set the
+Clutter::Timeline:repeat-count property to -1, while setting this
+property to false will set the Clutter::Timeline:repeat-count
+property to 0.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>loop</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pause-instance_method">
+  
+    #<strong>pause</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Pauses the Clutter::Timeline on current frame</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="progress-instance_method">
+  
+    #<strong>progress</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The position of the timeline in a normalized [-1, 2] interval.</p>
+<p>The return value of this function is determined by the progress
+mode set using clutter_timeline_set_progress_mode(), or by the
+progress function set using clutter_timeline_set_progress_func().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the normalized current position in the timeline.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="progress_mode-instance_method">
+  
+    #<strong>progress_mode</strong>  &#x21d2; <tt><span class='object_link'><a href="AnimationMode.html" title="Clutter::AnimationMode (module)">Clutter::AnimationMode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Controls the way a Clutter::Timeline computes the normalized progress.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AnimationMode.html" title="Clutter::AnimationMode (module)">Clutter::AnimationMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>progress-mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="progress_mode=-instance_method">
+  
+    #<strong>progress_mode=</strong>(progress_mode)  &#x21d2; <tt><span class='object_link'><a href="AnimationMode.html" title="Clutter::AnimationMode (module)">Clutter::AnimationMode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Controls the way a Clutter::Timeline computes the normalized progress.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>progress_mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AnimationMode.html" title="Clutter::AnimationMode (module)">Clutter::AnimationMode</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AnimationMode.html" title="Clutter::AnimationMode (module)">Clutter::AnimationMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>progress-mode</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AnimationMode.html" title="Clutter::AnimationMode (module)">Clutter::AnimationMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>progress-mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_marker-instance_method">
+  
+    #<strong>remove_marker</strong>(marker_name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes <!-- raw HTML omitted -->marker_name<!-- raw HTML omitted -->, if found, from <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>marker_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the marker to remove</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="repeat_count-instance_method">
+  
+    #<strong>repeat_count</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Defines how many times the timeline should repeat.</p>
+<p>If the repeat count is 0, the timeline does not repeat.</p>
+<p>If the repeat count is set to -1, the timeline will repeat until it is
+stopped.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>repeat-count</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="repeat_count=-instance_method">
+  
+    #<strong>repeat_count=</strong>(repeat_count)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Defines how many times the timeline should repeat.</p>
+<p>If the repeat count is 0, the timeline does not repeat.</p>
+<p>If the repeat count is set to -1, the timeline will repeat until it is
+stopped.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>repeat_count</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>repeat-count</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>repeat-count</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rewind-instance_method">
+  
+    #<strong>rewind</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Rewinds Clutter::Timeline to the first frame if its direction is
+%CLUTTER_TIMELINE_FORWARD and the last frame if it is
+%CLUTTER_TIMELINE_BACKWARD.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_cubic_bezier_progress-instance_method">
+  
+    #<strong>set_cubic_bezier_progress</strong>(c_1, c_2)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the Clutter::Timeline:progress-mode of <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->
+to %CLUTTER_CUBIC_BEZIER, and sets the two control
+points for the cubic bezier.</p>
+<p>The cubic bezier curve is between (0, 0) and (1, 1). The X coordinate
+of the two control points must be in the [ 0, 1 ] range, while the
+Y coordinate of the two control points can exceed this range.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>c_1</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Point.html" title="Clutter::Point (class)">Clutter::Point</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the first control point for the cubic bezier</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>c_2</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Point.html" title="Clutter::Point (class)">Clutter::Point</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the second control point for the cubic bezier</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_progress_func-instance_method">
+  
+    #<strong>set_progress_func</strong>(func, data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets a custom progress function for <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->. The progress function will
+be called by clutter_timeline_get_progress() and will be used to compute
+the progress value based on the elapsed time and the total duration of the
+timeline.</p>
+<p>If <!-- raw HTML omitted -->func<!-- raw HTML omitted --> is not nil, the Clutter::Timeline:progress-mode property will
+be set to %CLUTTER_CUSTOM_MODE.</p>
+<p>If <!-- raw HTML omitted -->func<!-- raw HTML omitted --> is nil, any previously set progress function will be unset, and
+the Clutter::Timeline:progress-mode property will be set to %CLUTTER_LINEAR.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>Clutter::TimelineProgressFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a progress function, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>data to pass to <!-- raw HTML omitted -->func<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a function to be called when the progress function is removed
+or the timeline is disposed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_step_progress-instance_method">
+  
+    #<strong>set_step_progress</strong>(n_steps, step_mode)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the Clutter::Timeline:progress-mode of the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> to %CLUTTER_STEPS
+and provides the parameters of the step function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_steps</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of steps</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>step_mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StepMode.html" title="Clutter::StepMode (module)">Clutter::StepMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether the change should happen at the start
+or at the end of the step</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="skip-instance_method">
+  
+    #<strong>skip</strong>(msecs)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Advance timeline by the requested time in milliseconds</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>msecs</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Amount of time to skip</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="start-instance_method">
+  
+    #<strong>start</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Starts the Clutter::Timeline playing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stop-instance_method">
+  
+    #<strong>stop</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Stops the Clutter::Timeline and moves to frame 0</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

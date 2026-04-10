@@ -1,0 +1,2308 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GdkX11::X11Display
+  
+    &mdash; Ruby/GDK4
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GdkX11::X11Display";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (X)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GdkX11.html" title="GdkX11 (module)">GdkX11</a></span></span>
+     &raquo; 
+    <span class="title">X11Display</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GdkX11::X11Display
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></li>
+          
+            <li class="next">GdkX11::X11Display</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open-class_method" title="open (class method)">.<strong>open</strong>(display_name)  &#x21d2; Gdk::Display </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tries to open a new display to the X server given by <!-- raw HTML omitted -->display_name<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_program_class-class_method" title="set_program_class (class method)">.<strong>set_program_class</strong>(display, program_class)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the program class.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#broadcast_startup_message-instance_method" title="#broadcast_startup_message (instance method)">#<strong>broadcast_startup_message</strong>(message_type, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sends a startup notification message of type <!-- raw HTML omitted -->message_type<!-- raw HTML omitted --> to <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_group-instance_method" title="#default_group (instance method)">#<strong>default_group</strong>  &#x21d2; Gdk::Surface </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the default group leader surface for all toplevel surfaces on <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#egl_display-instance_method" title="#egl_display (instance method)">#<strong>egl_display</strong>  &#x21d2; GObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the EGL display connection object for the given GDK display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#error_trap_pop-instance_method" title="#error_trap_pop (instance method)">#<strong>error_trap_pop</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Pops the error trap pushed by gdk_x11_display_error_trap_push().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#error_trap_pop_ignored-instance_method" title="#error_trap_pop_ignored (instance method)">#<strong>error_trap_pop_ignored</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Pops the error trap pushed by gdk_x11_display_error_trap_push().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#error_trap_push-instance_method" title="#error_trap_push (instance method)">#<strong>error_trap_push</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Begins a range of X requests on <!-- raw HTML omitted -->display<!-- raw HTML omitted --> for which X error events will be ignored.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_egl_version-instance_method" title="#get_egl_version (instance method)">#<strong>get_egl_version</strong>(major, minor)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the version of the EGL implementation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_glx_version-instance_method" title="#get_glx_version (instance method)">#<strong>get_glx_version</strong>(major, minor)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the version of the GLX implementation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_xcursor-instance_method" title="#get_xcursor (instance method)">#<strong>get_xcursor</strong>(cursor)  &#x21d2; xlib::Cursor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the X cursor belonging to a <code>GdkCursor</code>, potentially creating the cursor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#grab-instance_method" title="#grab (instance method)">#<strong>grab</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Call XGrabServer() on <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#primary_monitor-instance_method" title="#primary_monitor (instance method)">#<strong>primary_monitor</strong>  &#x21d2; Gdk::Monitor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the primary monitor for the display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#screen-instance_method" title="#screen (instance method)">#<strong>screen</strong>  &#x21d2; GdkX11::X11Screen </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the <code>GdkX11Screen</code> of the <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_cursor_theme-instance_method" title="#set_cursor_theme (instance method)">#<strong>set_cursor_theme</strong>(theme, size)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the cursor theme from which the images for cursor should be taken.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#startup_notification_id-instance_method" title="#startup_notification_id (instance method)">#<strong>startup_notification_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the startup notification ID for a display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#startup_notification_id=-instance_method" title="#startup_notification_id= (instance method)">#<strong>startup_notification_id=</strong>(startup_id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the startup notification ID for a display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#string_to_compound_text-instance_method" title="#string_to_compound_text (instance method)">#<strong>string_to_compound_text</strong>(str, encoding, format, ctext, length)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Convert a string from the encoding of the current locale into a form suitable for storing in a window property.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#surface_scale=-instance_method" title="#surface_scale= (instance method)">#<strong>surface_scale=</strong>(scale)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Forces a specific window scale for all windows on this display, instead of using the default or user configured scale.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text_property_to_text_list-instance_method" title="#text_property_to_text_list (instance method)">#<strong>text_property_to_text_list</strong>(encoding, format, text, length, list)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Convert a text string from the encoding as it is stored in a property into an array of strings in the encoding of the current locale.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ungrab-instance_method" title="#ungrab (instance method)">#<strong>ungrab</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Ungrab <!-- raw HTML omitted -->display<!-- raw HTML omitted --> after it has been grabbed with gdk_x11_display_grab().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#user_time-instance_method" title="#user_time (instance method)">#<strong>user_time</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the timestamp of the last user interaction on <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#utf8_to_compound_text-instance_method" title="#utf8_to_compound_text (instance method)">#<strong>utf8_to_compound_text</strong>(str, encoding, format, ctext, length)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Converts from UTF-8 to compound text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xdisplay-instance_method" title="#xdisplay (instance method)">#<strong>xdisplay</strong>  &#x21d2; xlib::Display </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the X display of a <code>GdkDisplay</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xrootwindow-instance_method" title="#xrootwindow (instance method)">#<strong>xrootwindow</strong>  &#x21d2; xlib::Window </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the root X window used by <code>GdkDisplay</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xscreen-instance_method" title="#xscreen (instance method)">#<strong>xscreen</strong>  &#x21d2; xlib::Screen </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the X Screen used by <code>GdkDisplay</code>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Gdk/Display.html#app_launch_context-instance_method" title="Gdk::Display#app_launch_context (method)">#app_launch_context</a></span>, <span class='object_link'><a href="../Gdk/Display.html#beep-instance_method" title="Gdk::Display#beep (method)">#beep</a></span>, <span class='object_link'><a href="../Gdk/Display.html#clipboard-instance_method" title="Gdk::Display#clipboard (method)">#clipboard</a></span>, <span class='object_link'><a href="../Gdk/Display.html#close-instance_method" title="Gdk::Display#close (method)">#close</a></span>, <span class='object_link'><a href="../Gdk/Display.html#composited=-instance_method" title="Gdk::Display#composited= (method)">#composited=</a></span>, <span class='object_link'><a href="../Gdk/Display.html#composited%3F-instance_method" title="Gdk::Display#composited? (method)">#composited?</a></span>, <span class='object_link'><a href="../Gdk/Display.html#create_gl_context-instance_method" title="Gdk::Display#create_gl_context (method)">#create_gl_context</a></span>, <span class='object_link'><a href="../Gdk/Display.html#default-class_method" title="Gdk::Display.default (method)">default</a></span>, <span class='object_link'><a href="../Gdk/Display.html#default_seat-instance_method" title="Gdk::Display#default_seat (method)">#default_seat</a></span>, <span class='object_link'><a href="../Gdk/Display.html#device_is_grabbed-instance_method" title="Gdk::Display#device_is_grabbed (method)">#device_is_grabbed</a></span>, <span class='object_link'><a href="../Gdk/Display.html#dmabuf_formats-instance_method" title="Gdk::Display#dmabuf_formats (method)">#dmabuf_formats</a></span>, <span class='object_link'><a href="../Gdk/Display.html#dmabuf_formats=-instance_method" title="Gdk::Display#dmabuf_formats= (method)">#dmabuf_formats=</a></span>, <span class='object_link'><a href="../Gdk/Display.html#flush-instance_method" title="Gdk::Display#flush (method)">#flush</a></span>, <span class='object_link'><a href="../Gdk/Display.html#get_monitor_at_surface-instance_method" title="Gdk::Display#get_monitor_at_surface (method)">#get_monitor_at_surface</a></span>, <span class='object_link'><a href="../Gdk/Display.html#get_setting-instance_method" title="Gdk::Display#get_setting (method)">#get_setting</a></span>, <span class='object_link'><a href="../Gdk/Display.html#input_shapes=-instance_method" title="Gdk::Display#input_shapes= (method)">#input_shapes=</a></span>, <span class='object_link'><a href="../Gdk/Display.html#input_shapes%3F-instance_method" title="Gdk::Display#input_shapes? (method)">#input_shapes?</a></span>, <span class='object_link'><a href="../Gdk/Display.html#is_closed-instance_method" title="Gdk::Display#is_closed (method)">#is_closed</a></span>, <span class='object_link'><a href="../Gdk/Display.html#is_composited-instance_method" title="Gdk::Display#is_composited (method)">#is_composited</a></span>, <span class='object_link'><a href="../Gdk/Display.html#is_rgba-instance_method" title="Gdk::Display#is_rgba (method)">#is_rgba</a></span>, <span class='object_link'><a href="../Gdk/Display.html#list_seats-instance_method" title="Gdk::Display#list_seats (method)">#list_seats</a></span>, <span class='object_link'><a href="../Gdk/Display.html#map_keycode-instance_method" title="Gdk::Display#map_keycode (method)">#map_keycode</a></span>, <span class='object_link'><a href="../Gdk/Display.html#map_keyval-instance_method" title="Gdk::Display#map_keyval (method)">#map_keyval</a></span>, <span class='object_link'><a href="../Gdk/Display.html#monitors-instance_method" title="Gdk::Display#monitors (method)">#monitors</a></span>, <span class='object_link'><a href="../Gdk/Display.html#name-instance_method" title="Gdk::Display#name (method)">#name</a></span>, <span class='object_link'><a href="../Gdk/Display.html#notify_startup_complete-instance_method" title="Gdk::Display#notify_startup_complete (method)">#notify_startup_complete</a></span>, <span class='object_link'><a href="../Gdk/Display.html#prepare_gl-instance_method" title="Gdk::Display#prepare_gl (method)">#prepare_gl</a></span>, <span class='object_link'><a href="../Gdk/Display.html#primary_clipboard-instance_method" title="Gdk::Display#primary_clipboard (method)">#primary_clipboard</a></span>, <span class='object_link'><a href="../Gdk/Display.html#put_event-instance_method" title="Gdk::Display#put_event (method)">#put_event</a></span>, <span class='object_link'><a href="../Gdk/Display.html#rgba=-instance_method" title="Gdk::Display#rgba= (method)">#rgba=</a></span>, <span class='object_link'><a href="../Gdk/Display.html#rgba%3F-instance_method" title="Gdk::Display#rgba? (method)">#rgba?</a></span>, <span class='object_link'><a href="../Gdk/Display.html#shadow_width=-instance_method" title="Gdk::Display#shadow_width= (method)">#shadow_width=</a></span>, <span class='object_link'><a href="../Gdk/Display.html#shadow_width%3F-instance_method" title="Gdk::Display#shadow_width? (method)">#shadow_width?</a></span>, <span class='object_link'><a href="../Gdk/Display.html#supports_input_shapes-instance_method" title="Gdk::Display#supports_input_shapes (method)">#supports_input_shapes</a></span>, <span class='object_link'><a href="../Gdk/Display.html#supports_shadow_width-instance_method" title="Gdk::Display#supports_shadow_width (method)">#supports_shadow_width</a></span>, <span class='object_link'><a href="../Gdk/Display.html#sync-instance_method" title="Gdk::Display#sync (method)">#sync</a></span>, <span class='object_link'><a href="../Gdk/Display.html#translate_key-instance_method" title="Gdk::Display#translate_key (method)">#translate_key</a></span></p>
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="open-class_method">
+  
+    .<strong>open</strong>(display_name)  &#x21d2; <tt><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tries to open a new display to the X server given by
+<!-- raw HTML omitted -->display_name<!-- raw HTML omitted -->. If opening the display fails, nil is
+returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>display_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name of the X display.
+See the XOpenDisplay() for details.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The new display</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_program_class-class_method">
+  
+    .<strong>set_program_class</strong>(display, program_class)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the program class.</p>
+<p>The X11 backend uses the program class to set the class name part
+of the <code>WM_CLASS</code> property on toplevel windows; see the ICCCM.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>display</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GdkDisplay</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>program_class</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="broadcast_startup_message-instance_method">
+  
+    #<strong>broadcast_startup_message</strong>(message_type, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sends a startup notification message of type <!-- raw HTML omitted -->message_type<!-- raw HTML omitted --> to
+<!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+<p>This is a convenience function for use by code that implements the
+freedesktop startup notification specification. Applications should
+not normally need to call it directly. See the
+<a href="http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt">Startup Notification Protocol specification</a>
+for definitions of the message types and keys that can be used.
+or &quot;remove&quot;)
+nil key. (A nil value for a key will cause that key to be
+skipped in the output.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message_type</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>startup notification message type (&quot;new&quot;, &quot;change&quot;,</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a list of key/value pairs (as strings), terminated by a</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_group-instance_method">
+  
+    #<strong>default_group</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gdk/Surface.html" title="Gdk::Surface (class)">Gdk::Surface</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the default group leader surface for all toplevel surfaces
+on <!-- raw HTML omitted -->display<!-- raw HTML omitted -->. This surface is implicitly created by GDK.
+See gdk_x11_surface_set_group().
+for <!-- raw HTML omitted -->display<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Surface.html" title="Gdk::Surface (class)">Gdk::Surface</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The default group leader surface</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="egl_display-instance_method">
+  
+    #<strong>egl_display</strong>  &#x21d2; <tt>GObject</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the EGL display connection object for the given GDK display.</p>
+<p>This function returns <code>NULL</code> if GDK is using GLX.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the EGL display object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="error_trap_pop-instance_method">
+  
+    #<strong>error_trap_pop</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Pops the error trap pushed by gdk_x11_display_error_trap_push().
+Will XSync() if necessary and will always block until
+the error is known to have occurred or not occurred,
+so the error code can be returned.</p>
+<p>If you don’t need to use the return value,
+gdk_x11_display_error_trap_pop_ignored() would be more efficient.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>X error code or 0 on success</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="error_trap_pop_ignored-instance_method">
+  
+    #<strong>error_trap_pop_ignored</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Pops the error trap pushed by gdk_x11_display_error_trap_push().
+Does not block to see if an error occurred; merely records the
+range of requests to ignore errors for, and ignores those errors
+if they arrive asynchronously.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="error_trap_push-instance_method">
+  
+    #<strong>error_trap_push</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Begins a range of X requests on <!-- raw HTML omitted -->display<!-- raw HTML omitted --> for which X error events
+will be ignored. Unignored errors (when no trap is pushed) will abort
+the application. Use gdk_x11_display_error_trap_pop() or
+gdk_x11_display_error_trap_pop_ignored()to lift a trap pushed
+with this function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_egl_version-instance_method">
+  
+    #<strong>get_egl_version</strong>(major, minor)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the version of the EGL implementation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>major</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the EGL major version</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>minor</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the EGL minor version</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if EGL is available</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_glx_version-instance_method">
+  
+    #<strong>get_glx_version</strong>(major, minor)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the version of the GLX implementation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>major</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the GLX major version</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>minor</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the GLX minor version</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if GLX is available</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_xcursor-instance_method">
+  
+    #<strong>get_xcursor</strong>(cursor)  &#x21d2; <tt>xlib::Cursor</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the X cursor belonging to a <code>GdkCursor</code>, potentially
+creating the cursor.</p>
+<p>Be aware that the returned cursor may not be unique to <!-- raw HTML omitted -->cursor<!-- raw HTML omitted -->.
+It may for example be shared with its fallback cursor. On old
+X servers that don't support the XCursor extension, all cursors
+may even fall back to a few default cursors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cursor</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Cursor.html" title="Gdk::Cursor (class)">Gdk::Cursor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GdkCursor</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>xlib::Cursor</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an Xlib Cursor.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="grab-instance_method">
+  
+    #<strong>grab</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Call XGrabServer() on <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.
+To ungrab the display again, use gdk_x11_display_ungrab().</p>
+<p>gdk_x11_display_grab()/gdk_x11_display_ungrab() calls can be nested.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="primary_monitor-instance_method">
+  
+    #<strong>primary_monitor</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gdk/Monitor.html" title="Gdk::Monitor (class)">Gdk::Monitor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the primary monitor for the display.</p>
+<p>The primary monitor is considered the monitor where the “main desktop”
+lives. While normal application surfaces typically allow the window
+manager to place the surfaces, specialized desktop applications
+such as panels should place themselves on the primary monitor.</p>
+<p>If no monitor is the designated primary monitor, any monitor
+(usually the first) may be returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Monitor.html" title="Gdk::Monitor (class)">Gdk::Monitor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the primary monitor, or any monitor if no
+primary monitor is configured by the user</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="screen-instance_method">
+  
+    #<strong>screen</strong>  &#x21d2; <tt><span class='object_link'><a href="X11Screen.html" title="GdkX11::X11Screen (class)">GdkX11::X11Screen</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the <code>GdkX11Screen</code> of the <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="X11Screen.html" title="GdkX11::X11Screen (class)">GdkX11::X11Screen</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>GdkX11Screen</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_cursor_theme-instance_method">
+  
+    #<strong>set_cursor_theme</strong>(theme, size)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the cursor theme from which the images for cursor
+should be taken.</p>
+<p>If the windowing system supports it, existing cursors created
+with [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Cursor.new_from_name] are updated to reflect the theme
+change. Custom cursors constructed with [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Cursor.new_from_texture]
+will have to be handled by the application (GTK applications can learn
+about cursor theme changes by listening for change notification
+for the corresponding <code>GtkSetting</code>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>theme</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the cursor theme to use, or nil
+to unset a previously set value</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the cursor size to use, or 0 to keep the previous size</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="startup_notification_id-instance_method">
+  
+    #<strong>startup_notification_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the startup notification ID for a display.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the startup notification ID for <!-- raw HTML omitted -->display<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="startup_notification_id=-instance_method">
+  
+    #<strong>startup_notification_id=</strong>(startup_id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the startup notification ID for a display.</p>
+<p>This is usually taken from the value of the DESKTOP_STARTUP_ID
+environment variable, but in some cases (such as the application not
+being launched using exec()) it can come from other sources.</p>
+<p>If the ID contains the string &quot;_TIME&quot; then the portion following that
+string is taken to be the X11 timestamp of the event that triggered
+the application to be launched and the GDK current event time is set
+accordingly.</p>
+<p>The startup ID is also what is used to signal that the startup is
+complete (for example, when opening a window or when calling
+gdk_display_notify_startup_complete()).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>startup_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the startup notification ID (must be valid utf8)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="string_to_compound_text-instance_method">
+  
+    #<strong>string_to_compound_text</strong>(str, encoding, format, ctext, length)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Convert a string from the encoding of the current
+locale into a form suitable for storing in a window property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>str</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a nul-terminated string</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>encoding</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the encoding
+(to be used as the type for the property)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the format of the property</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ctext</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store newly
+allocated data for the property</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the length of <!-- raw HTML omitted -->ctext<!-- raw HTML omitted -->, in bytes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>0 upon success, non-zero upon failure</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="surface_scale=-instance_method">
+  
+    #<strong>surface_scale=</strong>(scale)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Forces a specific window scale for all windows on this display,
+instead of using the default or user configured scale. This
+is can be used to disable scaling support by setting <!-- raw HTML omitted -->scale<!-- raw HTML omitted --> to
+1, or to programmatically set the window scale.</p>
+<p>Once the scale is set by this call it will not change in response
+to later user configuration changes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>scale</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The new scale value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text_property_to_text_list-instance_method">
+  
+    #<strong>text_property_to_text_list</strong>(encoding, format, text, length, list)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Convert a text string from the encoding as it is stored
+in a property into an array of strings in the encoding of
+the current locale. (The elements of the array represent the
+nul-separated elements of the original text string.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>encoding</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a string representing the encoding. The most
+common values for this are &quot;STRING&quot;, or &quot;COMPOUND_TEXT&quot;.
+This is value used as the type for the property</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the format of the property</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The text data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of items to transform</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>list</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store an  array of strings in
+the encoding of the current locale. This array should be
+freed using gdk_x11_free_text_list().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of strings stored in list, or 0,
+if the conversion failed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ungrab-instance_method">
+  
+    #<strong>ungrab</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Ungrab <!-- raw HTML omitted -->display<!-- raw HTML omitted --> after it has been grabbed with
+gdk_x11_display_grab().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="user_time-instance_method">
+  
+    #<strong>user_time</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the timestamp of the last user interaction on
+<!-- raw HTML omitted -->display<!-- raw HTML omitted -->. The timestamp is taken from events caused
+by user interaction such as key presses or pointer
+movements. See gdk_x11_surface_set_user_time().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the timestamp of the last user interaction</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="utf8_to_compound_text-instance_method">
+  
+    #<strong>utf8_to_compound_text</strong>(str, encoding, format, ctext, length)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Converts from UTF-8 to compound text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>str</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a UTF-8 string</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>encoding</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store resulting encoding</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store format of the result</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ctext</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the data of the result</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the length of the data stored in <!-- raw HTML omitted -->ctext<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the conversion succeeded, otherwise false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="xdisplay-instance_method">
+  
+    #<strong>xdisplay</strong>  &#x21d2; <tt>xlib::Display</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the X display of a <code>GdkDisplay</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>xlib::Display</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an X display</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="xrootwindow-instance_method">
+  
+    #<strong>xrootwindow</strong>  &#x21d2; <tt>xlib::Window</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the root X window used by <code>GdkDisplay</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>xlib::Window</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an X Window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="xscreen-instance_method">
+  
+    #<strong>xscreen</strong>  &#x21d2; <tt>xlib::Screen</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the X Screen used by <code>GdkDisplay</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>xlib::Screen</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an X Screen</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

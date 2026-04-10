@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gdk::Cursor
+  
+    &mdash; Ruby/GTK3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gdk::Cursor";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gdk.html" title="Gdk (module)">Gdk</a></span></span>
+     &raquo; 
+    <span class="title">Cursor</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gdk::Cursor
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gdk::Cursor</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p><code>GdkCursor</code> is used to create and destroy cursors.</p>
+<p>Cursors are immutable objects, so once you created them, there is no way
+to modify them later. You should create a new cursor when you want to change
+something about it.</p>
+<p>Cursors by themselves are not very interesting: they must be bound to a
+window for users to see them. This is done with [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface.set_cursor]
+or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface.set_device_cursor]. Applications will typically
+use higher-level GTK functions such as <a href="../gtk4/method.Widget.set_cursor.html">gtk_widget_set_cursor()</a>
+instead.</p>
+<p>Cursors are not bound to a given [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display], so they can be shared.
+However, the appearance of cursors may vary when used on different
+platforms.</p>
+<h2>Named and texture cursors</h2>
+<p>There are multiple ways to create cursors. The platform's own cursors
+can be created with [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Cursor.new_from_name]. That function lists
+the commonly available names that are shared with the CSS specification.
+Other names may be available, depending on the platform in use. On some
+platforms, what images are used for named cursors may be influenced by
+the cursor theme.</p>
+<p>Another option to create a cursor is to use [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Cursor.new_from_texture]
+and provide an image to use for the cursor.</p>
+<p>To ease work with unsupported cursors, a fallback cursor can be provided.
+If a [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface] cannot use a cursor because of the reasons mentioned
+above, it will try the fallback cursor. Fallback cursors can themselves have
+fallback cursors again, so it is possible to provide a chain of progressively
+easier to support cursors. If none of the provided cursors can be supported,
+the default cursor will be the ultimate fallback.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fallback-instance_method" title="#fallback (instance method)">#<strong>fallback</strong>  &#x21d2; Gdk::Cursor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Cursor to fall back to if this cursor cannot be displayed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fallback=-instance_method" title="#fallback= (instance method)">#<strong>fallback=</strong>(fallback)  &#x21d2; Gdk::Cursor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Cursor to fall back to if this cursor cannot be displayed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hotspot_x-instance_method" title="#hotspot_x (instance method)">#<strong>hotspot_x</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>X position of the cursor hotspot in the cursor image.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hotspot_x=-instance_method" title="#hotspot_x= (instance method)">#<strong>hotspot_x=</strong>(hotspot_x)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>X position of the cursor hotspot in the cursor image.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hotspot_y-instance_method" title="#hotspot_y (instance method)">#<strong>hotspot_y</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Y position of the cursor hotspot in the cursor image.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hotspot_y=-instance_method" title="#hotspot_y= (instance method)">#<strong>hotspot_y=</strong>(hotspot_y)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Y position of the cursor hotspot in the cursor image.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(texture, hotspot_x, hotspot_y, fallback)  &#x21d2; Gdk::Cursor </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new cursor from a <code>GdkTexture</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of this this cursor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name=-instance_method" title="#name= (instance method)">#<strong>name=</strong>(name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of this this cursor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#texture-instance_method" title="#texture (instance method)">#<strong>texture</strong>  &#x21d2; Gdk::Texture </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The texture displayed by this cursor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#texture=-instance_method" title="#texture= (instance method)">#<strong>texture=</strong>(texture)  &#x21d2; Gdk::Texture </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The texture displayed by this cursor.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(texture, hotspot_x, hotspot_y, fallback)  &#x21d2; <tt><span class='object_link'><a href="" title="Gdk::Cursor (class)">Gdk::Cursor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new cursor from a <code>GdkTexture</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>texture</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Texture.html" title="Gdk::Texture (class)">Gdk::Texture</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the texture providing the pixel data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>hotspot_x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the horizontal offset of the “hotspot” of the cursor</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>hotspot_y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the vertical offset of the “hotspot” of the cursor</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>fallback</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gdk::Cursor (class)">Gdk::Cursor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>GdkCursor</code> to fall back to when
+this one cannot be supported</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="fallback-instance_method">
+  
+    #<strong>fallback</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gdk::Cursor (class)">Gdk::Cursor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Cursor to fall back to if this cursor cannot be displayed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gdk::Cursor (class)">Gdk::Cursor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>fallback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fallback=-instance_method">
+  
+    #<strong>fallback=</strong>(fallback)  &#x21d2; <tt><span class='object_link'><a href="" title="Gdk::Cursor (class)">Gdk::Cursor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Cursor to fall back to if this cursor cannot be displayed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>fallback</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gdk::Cursor (class)">Gdk::Cursor</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gdk::Cursor (class)">Gdk::Cursor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>fallback</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gdk::Cursor (class)">Gdk::Cursor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>fallback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="hotspot_x-instance_method">
+  
+    #<strong>hotspot_x</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>X position of the cursor hotspot in the cursor image.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>hotspot-x</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="hotspot_x=-instance_method">
+  
+    #<strong>hotspot_x=</strong>(hotspot_x)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>X position of the cursor hotspot in the cursor image.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hotspot_x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>hotspot-x</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>hotspot-x</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="hotspot_y-instance_method">
+  
+    #<strong>hotspot_y</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Y position of the cursor hotspot in the cursor image.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>hotspot-y</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="hotspot_y=-instance_method">
+  
+    #<strong>hotspot_y=</strong>(hotspot_y)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Y position of the cursor hotspot in the cursor image.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hotspot_y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>hotspot-y</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>hotspot-y</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of this this cursor.</p>
+<p>The name will be nil if the cursor was created from a texture.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name=-instance_method">
+  
+    #<strong>name=</strong>(name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of this this cursor.</p>
+<p>The name will be nil if the cursor was created from a texture.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="texture-instance_method">
+  
+    #<strong>texture</strong>  &#x21d2; <tt><span class='object_link'><a href="Texture.html" title="Gdk::Texture (class)">Gdk::Texture</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The texture displayed by this cursor.</p>
+<p>The texture will be nil if the cursor was created from a name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Texture.html" title="Gdk::Texture (class)">Gdk::Texture</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>texture</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="texture=-instance_method">
+  
+    #<strong>texture=</strong>(texture)  &#x21d2; <tt><span class='object_link'><a href="Texture.html" title="Gdk::Texture (class)">Gdk::Texture</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The texture displayed by this cursor.</p>
+<p>The texture will be nil if the cursor was created from a name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>texture</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Texture.html" title="Gdk::Texture (class)">Gdk::Texture</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Texture.html" title="Gdk::Texture (class)">Gdk::Texture</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>texture</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Texture.html" title="Gdk::Texture (class)">Gdk::Texture</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>texture</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

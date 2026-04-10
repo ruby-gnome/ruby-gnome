@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gst::TagSetter
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gst::TagSetter";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gst.html" title="Gst (module)">Gst</a></span></span>
+     &raquo; 
+    <span class="title">TagSetter</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gst::TagSetter
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Element interface that allows setting of media metadata.</p>
+<p>Elements that support changing a stream's metadata will implement this
+interface. Examples of such elements are 'vorbisenc', 'theoraenc' and
+'id3v2mux'.</p>
+<p>If you just want to retrieve metadata in your application then all you
+need to do is watch for tag messages on your pipeline's bus. This
+interface is only for setting metadata, not for extracting it. To set tags
+from the application, find tagsetter elements and set tags using e.g.
+gst_tag_setter_merge_tags() or gst_tag_setter_add_tags(). Also consider
+setting the Gst::TagMergeMode that is used for tag events that arrive at the
+tagsetter element (default mode is to keep existing tags).
+The application should do that before the element goes to %GST_STATE_PAUSED.</p>
+<p>Elements implementing the Gst::TagSetter interface often have to merge
+any tags received from upstream and the tags set by the application via
+the interface. This can be done like this:</p>
+<pre class="code ruby"><code class="ruby">GstTagMergeMode merge_mode;
+const GstTagList *application_tags;
+const GstTagList *event_tags;
+GstTagSetter *tagsetter;
+GstTagList *result;
+
+tagsetter = GST_TAG_SETTER (element);
+
+merge_mode = gst_tag_setter_get_tag_merge_mode (tagsetter);
+application_tags = gst_tag_setter_get_tag_list (tagsetter);
+event_tags = (const GstTagList *) element-&gt;event_tags;
+
+GST_LOG_OBJECT (tagsetter, &quot;merging tags, merge mode = %d&quot;, merge_mode);
+GST_LOG_OBJECT (tagsetter, &quot;event tags: %&quot; GST_PTR_FORMAT, event_tags);
+GST_LOG_OBJECT (tagsetter, &quot;set   tags: %&quot; GST_PTR_FORMAT, application_tags);
+
+result = gst_tag_list_merge (application_tags, event_tags, merge_mode);
+
+GST_LOG_OBJECT (tagsetter, &quot;final tags: %&quot; GST_PTR_FORMAT, result);
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_tag_valist-instance_method" title="#add_tag_valist (instance method)">#<strong>add_tag_valist</strong>(mode, tag, var_args)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds the given tag / value pairs on the setter using the given merge mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_tag_valist_values-instance_method" title="#add_tag_valist_values (instance method)">#<strong>add_tag_valist_values</strong>(mode, tag, var_args)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds the given tag / GValue pairs on the setter using the given merge mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_tag_value-instance_method" title="#add_tag_value (instance method)">#<strong>add_tag_value</strong>(mode, tag, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds the given tag / GValue pair on the setter using the given merge mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_tag_values-instance_method" title="#add_tag_values (instance method)">#<strong>add_tag_values</strong>(mode, tag, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds the given tag / GValue pairs on the setter using the given merge mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_tags-instance_method" title="#add_tags (instance method)">#<strong>add_tags</strong>(mode, tag, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds the given tag / value pairs on the setter using the given merge mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#merge_tags-instance_method" title="#merge_tags (instance method)">#<strong>merge_tags</strong>(list, mode)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Merges the given list into the setter's list using the given mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset_tags-instance_method" title="#reset_tags (instance method)">#<strong>reset_tags</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reset the internal taglist.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tag_list-instance_method" title="#tag_list (instance method)">#<strong>tag_list</strong>  &#x21d2; Gst::TagList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the current list of tags the setter uses.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tag_merge_mode-instance_method" title="#tag_merge_mode (instance method)">#<strong>tag_merge_mode</strong>  &#x21d2; Gst::TagMergeMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries the mode by which tags inside the setter are overwritten by tags from events.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tag_merge_mode=-instance_method" title="#tag_merge_mode= (instance method)">#<strong>tag_merge_mode=</strong>(mode)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the given merge mode that is used for adding tags from events to tags specified by this interface.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_tag_valist-instance_method">
+  
+    #<strong>add_tag_valist</strong>(mode, tag, var_args)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds the given tag / value pairs on the setter using the given merge mode.
+The list must be terminated with nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TagMergeMode.html" title="Gst::TagMergeMode (module)">Gst::TagMergeMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the mode to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tag</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>tag to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>var_args</span>
+      
+      
+        <span class='type'>(<tt>Gst::va_list</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>tag / value pairs to set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_tag_valist_values-instance_method">
+  
+    #<strong>add_tag_valist_values</strong>(mode, tag, var_args)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds the given tag / GValue pairs on the setter using the given merge mode.
+The list must be terminated with nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TagMergeMode.html" title="Gst::TagMergeMode (module)">Gst::TagMergeMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the mode to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tag</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>tag to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>var_args</span>
+      
+      
+        <span class='type'>(<tt>Gst::va_list</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>tag / GValue pairs to set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_tag_value-instance_method">
+  
+    #<strong>add_tag_value</strong>(mode, tag, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds the given tag / GValue pair on the setter using the given merge mode.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TagMergeMode.html" title="Gst::TagMergeMode (module)">Gst::TagMergeMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the mode to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tag</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>tag to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>GValue to set for the tag</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_tag_values-instance_method">
+  
+    #<strong>add_tag_values</strong>(mode, tag, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds the given tag / GValue pairs on the setter using the given merge mode.
+The list must be terminated with nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TagMergeMode.html" title="Gst::TagMergeMode (module)">Gst::TagMergeMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the mode to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tag</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>tag to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>more tag / GValue pairs to set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_tags-instance_method">
+  
+    #<strong>add_tags</strong>(mode, tag, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds the given tag / value pairs on the setter using the given merge mode.
+The list must be terminated with nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TagMergeMode.html" title="Gst::TagMergeMode (module)">Gst::TagMergeMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the mode to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tag</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>tag to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>more tag / value pairs to set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="merge_tags-instance_method">
+  
+    #<strong>merge_tags</strong>(list, mode)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Merges the given list into the setter's list using the given mode.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>list</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TagList.html" title="Gst::TagList (class)">Gst::TagList</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a tag list to merge from</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TagMergeMode.html" title="Gst::TagMergeMode (module)">Gst::TagMergeMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the mode to merge with</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset_tags-instance_method">
+  
+    #<strong>reset_tags</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reset the internal taglist. Elements should call this from within the
+state-change handler.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tag_list-instance_method">
+  
+    #<strong>tag_list</strong>  &#x21d2; <tt><span class='object_link'><a href="TagList.html" title="Gst::TagList (class)">Gst::TagList</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the current list of tags the setter uses.  The list should not be
+modified or freed.</p>
+<p>This function is not thread-safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TagList.html" title="Gst::TagList (class)">Gst::TagList</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a current snapshot of the
+taglist used in the setter or nil if none is used.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tag_merge_mode-instance_method">
+  
+    #<strong>tag_merge_mode</strong>  &#x21d2; <tt><span class='object_link'><a href="TagMergeMode.html" title="Gst::TagMergeMode (module)">Gst::TagMergeMode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries the mode by which tags inside the setter are overwritten by tags
+from events</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TagMergeMode.html" title="Gst::TagMergeMode (module)">Gst::TagMergeMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the merge mode used inside the element.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tag_merge_mode=-instance_method">
+  
+    #<strong>tag_merge_mode=</strong>(mode)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the given merge mode that is used for adding tags from events to tags
+specified by this interface. The default is #GST_TAG_MERGE_KEEP, which keeps
+the tags set with this interface and discards tags from events.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TagMergeMode.html" title="Gst::TagMergeMode (module)">Gst::TagMergeMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The mode with which tags are added</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

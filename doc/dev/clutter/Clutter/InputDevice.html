@@ -1,0 +1,3752 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Clutter::InputDevice
+  
+    &mdash; Ruby/Clutter
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Clutter::InputDevice";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (I)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter</a></span></span>
+     &raquo; 
+    <span class="title">InputDevice</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Clutter::InputDevice
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Clutter::InputDevice</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#associated_device-instance_method" title="#associated_device (instance method)">#<strong>associated_device</strong>  &#x21d2; Clutter::InputDevice </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a pointer to the Clutter::InputDevice that has been associated to <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#backend-instance_method" title="#backend (instance method)">#<strong>backend</strong>  &#x21d2; Clutter::Backend </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Clutter::Backend that created the device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#backend=-instance_method" title="#backend= (instance method)">#<strong>backend=</strong>(backend)  &#x21d2; Clutter::Backend </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Clutter::Backend that created the device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#device_id-instance_method" title="#device_id (instance method)">#<strong>device_id</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the unique identifier of <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#device_manager-instance_method" title="#device_manager (instance method)">#<strong>device_manager</strong>  &#x21d2; Clutter::DeviceManager </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Clutter::DeviceManager instance which owns the device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#device_manager=-instance_method" title="#device_manager= (instance method)">#<strong>device_manager=</strong>(device_manager)  &#x21d2; Clutter::DeviceManager </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Clutter::DeviceManager instance which owns the device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#device_mode-instance_method" title="#device_mode (instance method)">#<strong>device_mode</strong>  &#x21d2; Clutter::InputMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Device-mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#device_mode=-instance_method" title="#device_mode= (instance method)">#<strong>device_mode=</strong>(device_mode)  &#x21d2; Clutter::InputMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#device_name-instance_method" title="#device_name (instance method)">#<strong>device_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the name of the <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#device_type-instance_method" title="#device_type (instance method)">#<strong>device_type</strong>  &#x21d2; Clutter::InputDeviceType </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The type of the device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#device_type=-instance_method" title="#device_type= (instance method)">#<strong>device_type=</strong>(device_type)  &#x21d2; Clutter::InputDeviceType </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The type of the device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#enabled-instance_method" title="#enabled (instance method)">#<strong>enabled</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves whether <!-- raw HTML omitted -->device<!-- raw HTML omitted --> is enabled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#enabled=-instance_method" title="#enabled= (instance method)">#<strong>enabled=</strong>(enabled)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the device is enabled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#enabled%3F-instance_method" title="#enabled? (instance method)">#<strong>enabled?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the device is enabled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_axis-instance_method" title="#get_axis (instance method)">#<strong>get_axis</strong>(index_)  &#x21d2; Clutter::InputAxis </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the type of axis on <!-- raw HTML omitted -->device<!-- raw HTML omitted --> at the given index.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_axis_value-instance_method" title="#get_axis_value (instance method)">#<strong>get_axis_value</strong>(axes, axis, value)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Extracts the value of the given <!-- raw HTML omitted -->axis<!-- raw HTML omitted --> of a Clutter::InputDevice from an array of axis values.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_coords-instance_method" title="#get_coords (instance method)">#<strong>get_coords</strong>(sequence, point)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the latest coordinates of a pointer or touch point of <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_device_coords-instance_method" title="#get_device_coords (instance method)">#<strong>get_device_coords</strong>(x, y)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the latest coordinates of the pointer of <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_key-instance_method" title="#get_key (instance method)">#<strong>get_key</strong>(index_, keyval, modifiers)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the key set using clutter_input_device_set_key().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#grab-instance_method" title="#grab (instance method)">#<strong>grab</strong>(actor)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Acquires a grab on <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> for the given <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#grabbed_actor-instance_method" title="#grabbed_actor (instance method)">#<strong>grabbed_actor</strong>  &#x21d2; Clutter::Actor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a pointer to the Clutter::Actor currently grabbing all the events coming from <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_cursor-instance_method" title="#has_cursor (instance method)">#<strong>has_cursor</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves whether <!-- raw HTML omitted -->device<!-- raw HTML omitted --> has a pointer that follows the device motion.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_cursor=-instance_method" title="#has_cursor= (instance method)">#<strong>has_cursor=</strong>(has_cursor)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the device has an on screen cursor following its movement.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_cursor%3F-instance_method" title="#has_cursor? (instance method)">#<strong>has_cursor?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the device has an on screen cursor following its movement.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#id-instance_method" title="#id (instance method)">#<strong>id</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The unique identifier of the device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#id=-instance_method" title="#id= (instance method)">#<strong>id=</strong>(id)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The unique identifier of the device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#keycode_to_evdev-instance_method" title="#keycode_to_evdev (instance method)">#<strong>keycode_to_evdev</strong>(hardware_keycode, evdev_keycode)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Translates a hardware keycode from a Clutter::KeyEvent to the equivalent evdev keycode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#modifier_state-instance_method" title="#modifier_state (instance method)">#<strong>modifier_state</strong>  &#x21d2; Clutter::ModifierType </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the current modifiers state of the device, as seen by the last event Clutter processed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_axes-instance_method" title="#n_axes (instance method)">#<strong>n_axes</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of axes of the device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_axes=-instance_method" title="#n_axes= (instance method)">#<strong>n_axes=</strong>(n_axes)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of axes of the device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_keys-instance_method" title="#n_keys (instance method)">#<strong>n_keys</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the number of keys registered for <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The name of the device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name=-instance_method" title="#name= (instance method)">#<strong>name=</strong>(name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The name of the device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pointer_actor-instance_method" title="#pointer_actor (instance method)">#<strong>pointer_actor</strong>  &#x21d2; Clutter::Actor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the Clutter::Actor underneath the pointer of <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pointer_stage-instance_method" title="#pointer_stage (instance method)">#<strong>pointer_stage</strong>  &#x21d2; Clutter::Stage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the Clutter::Stage underneath the pointer of <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#product_id-instance_method" title="#product_id (instance method)">#<strong>product_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Product ID of this device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#product_id=-instance_method" title="#product_id= (instance method)">#<strong>product_id=</strong>(product_id)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Product ID of this device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sequence_get_grabbed_actor-instance_method" title="#sequence_get_grabbed_actor (instance method)">#<strong>sequence_get_grabbed_actor</strong>(sequence)  &#x21d2; Clutter::Actor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a pointer to the Clutter::Actor currently grabbing the touch events coming from <!-- raw HTML omitted -->device<!-- raw HTML omitted --> given the <!-- raw HTML omitted -->sequence<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sequence_grab-instance_method" title="#sequence_grab (instance method)">#<strong>sequence_grab</strong>(sequence, actor)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Acquires a grab on <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> for the given <!-- raw HTML omitted -->device<!-- raw HTML omitted --> and the given touch <!-- raw HTML omitted -->sequence<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sequence_ungrab-instance_method" title="#sequence_ungrab (instance method)">#<strong>sequence_ungrab</strong>(sequence)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Releases the grab on the <!-- raw HTML omitted -->device<!-- raw HTML omitted --> for the given <!-- raw HTML omitted -->sequence<!-- raw HTML omitted -->, if one is in place.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_key-instance_method" title="#set_key (instance method)">#<strong>set_key</strong>(index_, keyval, modifiers)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the keyval and modifiers at the given <!-- raw HTML omitted -->index_<!-- raw HTML omitted --> for <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#slave_devices-instance_method" title="#slave_devices (instance method)">#<strong>slave_devices</strong>  &#x21d2; GLib::List&lt;Clutter::InputDevice&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the slave devices attached to <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ungrab-instance_method" title="#ungrab (instance method)">#<strong>ungrab</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Releases the grab on the <!-- raw HTML omitted -->device<!-- raw HTML omitted -->, if one is in place.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_from_event-instance_method" title="#update_from_event (instance method)">#<strong>update_from_event</strong>(event, update_stage)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Forcibly updates the state of the <!-- raw HTML omitted -->device<!-- raw HTML omitted --> using a Clutter::Event.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vendor_id-instance_method" title="#vendor_id (instance method)">#<strong>vendor_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Vendor ID of this device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vendor_id=-instance_method" title="#vendor_id= (instance method)">#<strong>vendor_id=</strong>(vendor_id)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Vendor ID of this device.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="associated_device-instance_method">
+  
+    #<strong>associated_device</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Clutter::InputDevice (class)">Clutter::InputDevice</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a pointer to the Clutter::InputDevice that has been
+associated to <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+<p>If the Clutter::InputDevice:device-mode property of <!-- raw HTML omitted -->device<!-- raw HTML omitted --> is
+set to %CLUTTER_INPUT_MODE_MASTER, this function will return
+nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Clutter::InputDevice (class)">Clutter::InputDevice</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Clutter::InputDevice, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="backend-instance_method">
+  
+    #<strong>backend</strong>  &#x21d2; <tt><span class='object_link'><a href="Backend.html" title="Clutter::Backend (class)">Clutter::Backend</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The Clutter::Backend that created the device.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Backend.html" title="Clutter::Backend (class)">Clutter::Backend</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>backend</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="backend=-instance_method">
+  
+    #<strong>backend=</strong>(backend)  &#x21d2; <tt><span class='object_link'><a href="Backend.html" title="Clutter::Backend (class)">Clutter::Backend</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The Clutter::Backend that created the device.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>backend</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Backend.html" title="Clutter::Backend (class)">Clutter::Backend</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Backend.html" title="Clutter::Backend (class)">Clutter::Backend</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>backend</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Backend.html" title="Clutter::Backend (class)">Clutter::Backend</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>backend</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="device_id-instance_method">
+  
+    #<strong>device_id</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the unique identifier of <!-- raw HTML omitted -->device<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the identifier of the device</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="device_manager-instance_method">
+  
+    #<strong>device_manager</strong>  &#x21d2; <tt><span class='object_link'><a href="DeviceManager.html" title="Clutter::DeviceManager (class)">Clutter::DeviceManager</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The Clutter::DeviceManager instance which owns the device</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DeviceManager.html" title="Clutter::DeviceManager (class)">Clutter::DeviceManager</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>device-manager</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="device_manager=-instance_method">
+  
+    #<strong>device_manager=</strong>(device_manager)  &#x21d2; <tt><span class='object_link'><a href="DeviceManager.html" title="Clutter::DeviceManager (class)">Clutter::DeviceManager</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The Clutter::DeviceManager instance which owns the device</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>device_manager</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DeviceManager.html" title="Clutter::DeviceManager (class)">Clutter::DeviceManager</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DeviceManager.html" title="Clutter::DeviceManager (class)">Clutter::DeviceManager</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>device-manager</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DeviceManager.html" title="Clutter::DeviceManager (class)">Clutter::DeviceManager</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>device-manager</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="device_mode-instance_method">
+  
+    #<strong>device_mode</strong>  &#x21d2; <tt><span class='object_link'><a href="InputMode.html" title="Clutter::InputMode (module)">Clutter::InputMode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns device-mode.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputMode.html" title="Clutter::InputMode (module)">Clutter::InputMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>device-mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="device_mode=-instance_method">
+  
+    #<strong>device_mode=</strong>(device_mode)  &#x21d2; <tt><span class='object_link'><a href="InputMode.html" title="Clutter::InputMode (module)">Clutter::InputMode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>device_mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputMode.html" title="Clutter::InputMode (module)">Clutter::InputMode</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputMode.html" title="Clutter::InputMode (module)">Clutter::InputMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>device-mode</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputMode.html" title="Clutter::InputMode (module)">Clutter::InputMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>device-mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="device_name-instance_method">
+  
+    #<strong>device_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the name of the <!-- raw HTML omitted -->device<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the device, or nil. The returned string
+is owned by the Clutter::InputDevice and should never be modified
+or freed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="device_type-instance_method">
+  
+    #<strong>device_type</strong>  &#x21d2; <tt><span class='object_link'><a href="InputDeviceType.html" title="Clutter::InputDeviceType (module)">Clutter::InputDeviceType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The type of the device</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputDeviceType.html" title="Clutter::InputDeviceType (module)">Clutter::InputDeviceType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>device-type</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="device_type=-instance_method">
+  
+    #<strong>device_type=</strong>(device_type)  &#x21d2; <tt><span class='object_link'><a href="InputDeviceType.html" title="Clutter::InputDeviceType (module)">Clutter::InputDeviceType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The type of the device</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>device_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputDeviceType.html" title="Clutter::InputDeviceType (module)">Clutter::InputDeviceType</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputDeviceType.html" title="Clutter::InputDeviceType (module)">Clutter::InputDeviceType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>device-type</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputDeviceType.html" title="Clutter::InputDeviceType (module)">Clutter::InputDeviceType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>device-type</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="enabled-instance_method">
+  
+    #<strong>enabled</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves whether <!-- raw HTML omitted -->device<!-- raw HTML omitted --> is enabled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the device is enabled</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="enabled=-instance_method">
+  
+    #<strong>enabled=</strong>(enabled)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the device is enabled.</p>
+<p>A device with the Clutter::InputDevice:device-mode property set
+to %CLUTTER_INPUT_MODE_MASTER cannot be disabled.</p>
+<p>A device must be enabled in order to receive events from it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>enabled</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>enabled</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>enabled</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="enabled?-instance_method">
+  
+    #<strong>enabled?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the device is enabled.</p>
+<p>A device with the Clutter::InputDevice:device-mode property set
+to %CLUTTER_INPUT_MODE_MASTER cannot be disabled.</p>
+<p>A device must be enabled in order to receive events from it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>enabled</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_axis-instance_method">
+  
+    #<strong>get_axis</strong>(index_)  &#x21d2; <tt><span class='object_link'><a href="InputAxis.html" title="Clutter::InputAxis (module)">Clutter::InputAxis</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the type of axis on <!-- raw HTML omitted -->device<!-- raw HTML omitted --> at the given index.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>index_</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the index of the axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputAxis.html" title="Clutter::InputAxis (module)">Clutter::InputAxis</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the axis type</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_axis_value-instance_method">
+  
+    #<strong>get_axis_value</strong>(axes, axis, value)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Extracts the value of the given <!-- raw HTML omitted -->axis<!-- raw HTML omitted --> of a Clutter::InputDevice from
+an array of axis values.</p>
+<p>An example of typical usage for this function is:</p>
+<p>|[
+ClutterInputDevice *device = clutter_event_get_device (event);
+gdouble *axes = clutter_event_get_axes (event, NULL);
+gdouble pressure_value = 0;</p>
+<p>clutter_input_device_get_axis_value (device, axes,
+CLUTTER_INPUT_AXIS_PRESSURE,
+&amp;pressure_value);
+]|</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>axes</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Float&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an array of axes values, typically
+coming from clutter_event_get_axes()</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>axis</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputAxis.html" title="Clutter::InputAxis (module)">Clutter::InputAxis</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the axis to extract</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the axis value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the value was set, and false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_coords-instance_method">
+  
+    #<strong>get_coords</strong>(sequence, point)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the latest coordinates of a pointer or touch point of
+<!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sequence</span>
+      
+      
+        <span class='type'>(<tt>Clutter::EventSequence</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Clutter::EventSequence, or nil if
+the device is not touch-based</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Point.html" title="Clutter::Point (class)">Clutter::Point</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the pointer
+or touch point</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>false if the device's sequence hasn't been found,
+and true otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_device_coords-instance_method">
+  
+    #<strong>get_device_coords</strong>(x, y)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the latest coordinates of the pointer of <!-- raw HTML omitted -->device<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the X coordinate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the Y coordinate</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_key-instance_method">
+  
+    #<strong>get_key</strong>(index_, keyval, modifiers)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the key set using clutter_input_device_set_key()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>index_</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the index of the key</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>keyval</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the keyval at <!-- raw HTML omitted -->index_<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>modifiers</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ModifierType.html" title="Clutter::ModifierType (module)">Clutter::ModifierType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the modifiers at <!-- raw HTML omitted -->index_<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if a key was set at the given index</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="grab-instance_method">
+  
+    #<strong>grab</strong>(actor)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Acquires a grab on <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> for the given <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+<p>Any event coming from <!-- raw HTML omitted -->device<!-- raw HTML omitted --> will be delivered to <!-- raw HTML omitted -->actor<!-- raw HTML omitted -->, bypassing
+the usual event delivery mechanism, until the grab is released by
+calling clutter_input_device_ungrab().</p>
+<p>The grab is client-side: even if the windowing system used by the Clutter
+backend has the concept of &quot;device grabs&quot;, Clutter will not use them.</p>
+<p>Only Clutter::InputDevice of types %CLUTTER_POINTER_DEVICE and
+%CLUTTER_KEYBOARD_DEVICE can hold a grab.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>actor</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Clutter::Actor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="grabbed_actor-instance_method">
+  
+    #<strong>grabbed_actor</strong>  &#x21d2; <tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a pointer to the Clutter::Actor currently grabbing all
+the events coming from <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Clutter::Actor, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_cursor-instance_method">
+  
+    #<strong>has_cursor</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves whether <!-- raw HTML omitted -->device<!-- raw HTML omitted --> has a pointer that follows the
+device motion.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the device has a cursor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_cursor=-instance_method">
+  
+    #<strong>has_cursor=</strong>(has_cursor)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the device has an on screen cursor following its movement.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>has_cursor</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>has-cursor</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>has-cursor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_cursor?-instance_method">
+  
+    #<strong>has_cursor?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the device has an on screen cursor following its movement.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>has-cursor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="id-instance_method">
+  
+    #<strong>id</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The unique identifier of the device</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="id=-instance_method">
+  
+    #<strong>id=</strong>(id)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The unique identifier of the device</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>id</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="keycode_to_evdev-instance_method">
+  
+    #<strong>keycode_to_evdev</strong>(hardware_keycode, evdev_keycode)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Translates a hardware keycode from a Clutter::KeyEvent to the
+equivalent evdev keycode. Note that depending on the input backend
+used by Clutter this function can fail if there is no obvious
+mapping between the key codes. The hardware keycode can be taken
+from the Clutter::KeyEvent.hardware_keycode member of #ClutterKeyEvent.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hardware_keycode</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The hardware keycode from a Clutter::KeyEvent</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>evdev_keycode</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The return location for the evdev keycode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the conversion succeeded, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="modifier_state-instance_method">
+  
+    #<strong>modifier_state</strong>  &#x21d2; <tt><span class='object_link'><a href="ModifierType.html" title="Clutter::ModifierType (module)">Clutter::ModifierType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the current modifiers state of the device, as seen
+by the last event Clutter processed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ModifierType.html" title="Clutter::ModifierType (module)">Clutter::ModifierType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the last known modifier state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_axes-instance_method">
+  
+    #<strong>n_axes</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of axes of the device.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>n-axes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_axes=-instance_method">
+  
+    #<strong>n_axes=</strong>(n_axes)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of axes of the device.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_axes</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>n-axes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>n-axes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_keys-instance_method">
+  
+    #<strong>n_keys</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the number of keys registered for <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of registered keys</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The name of the device</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name=-instance_method">
+  
+    #<strong>name=</strong>(name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The name of the device</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pointer_actor-instance_method">
+  
+    #<strong>pointer_actor</strong>  &#x21d2; <tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the Clutter::Actor underneath the pointer of <!-- raw HTML omitted -->device<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the Clutter::Actor or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pointer_stage-instance_method">
+  
+    #<strong>pointer_stage</strong>  &#x21d2; <tt><span class='object_link'><a href="Stage.html" title="Clutter::Stage (class)">Clutter::Stage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the Clutter::Stage underneath the pointer of <!-- raw HTML omitted -->device<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Stage.html" title="Clutter::Stage (class)">Clutter::Stage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the Clutter::Stage or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="product_id-instance_method">
+  
+    #<strong>product_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Product ID of this device.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>product-id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="product_id=-instance_method">
+  
+    #<strong>product_id=</strong>(product_id)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Product ID of this device.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>product_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>product-id</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>product-id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sequence_get_grabbed_actor-instance_method">
+  
+    #<strong>sequence_get_grabbed_actor</strong>(sequence)  &#x21d2; <tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a pointer to the Clutter::Actor currently grabbing the
+touch events coming from <!-- raw HTML omitted -->device<!-- raw HTML omitted --> given the <!-- raw HTML omitted -->sequence<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sequence</span>
+      
+      
+        <span class='type'>(<tt>Clutter::EventSequence</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Clutter::EventSequence</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Clutter::Actor, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sequence_grab-instance_method">
+  
+    #<strong>sequence_grab</strong>(sequence, actor)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Acquires a grab on <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> for the given <!-- raw HTML omitted -->device<!-- raw HTML omitted --> and the given touch
+<!-- raw HTML omitted -->sequence<!-- raw HTML omitted -->.</p>
+<p>Any touch event coming from <!-- raw HTML omitted -->device<!-- raw HTML omitted --> and from <!-- raw HTML omitted -->sequence<!-- raw HTML omitted --> will be
+delivered to <!-- raw HTML omitted -->actor<!-- raw HTML omitted -->, bypassing the usual event delivery mechanism,
+until the grab is released by calling
+clutter_input_device_sequence_ungrab().</p>
+<p>The grab is client-side: even if the windowing system used by the Clutter
+backend has the concept of &quot;device grabs&quot;, Clutter will not use them.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sequence</span>
+      
+      
+        <span class='type'>(<tt>Clutter::EventSequence</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Clutter::EventSequence</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>actor</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Clutter::Actor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sequence_ungrab-instance_method">
+  
+    #<strong>sequence_ungrab</strong>(sequence)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Releases the grab on the <!-- raw HTML omitted -->device<!-- raw HTML omitted --> for the given <!-- raw HTML omitted -->sequence<!-- raw HTML omitted -->, if one is
+in place.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sequence</span>
+      
+      
+        <span class='type'>(<tt>Clutter::EventSequence</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Clutter::EventSequence</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_key-instance_method">
+  
+    #<strong>set_key</strong>(index_, keyval, modifiers)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the keyval and modifiers at the given <!-- raw HTML omitted -->index_<!-- raw HTML omitted --> for <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+<p>Clutter will use the keyval and modifiers set when filling out
+an event coming from the same input device.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>index_</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the index of the key</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>keyval</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the keyval</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>modifiers</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ModifierType.html" title="Clutter::ModifierType (module)">Clutter::ModifierType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a bitmask of modifiers</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="slave_devices-instance_method">
+  
+    #<strong>slave_devices</strong>  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="" title="Clutter::InputDevice (class)">Clutter::InputDevice</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the slave devices attached to <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="" title="Clutter::InputDevice (class)">Clutter::InputDevice</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a
+list of Clutter::InputDevice, or nil. The contents of the list are
+owned by the device. Use g_list_free() when done</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ungrab-instance_method">
+  
+    #<strong>ungrab</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Releases the grab on the <!-- raw HTML omitted -->device<!-- raw HTML omitted -->, if one is in place.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_from_event-instance_method">
+  
+    #<strong>update_from_event</strong>(event, update_stage)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Forcibly updates the state of the <!-- raw HTML omitted -->device<!-- raw HTML omitted --> using a Clutter::Event</p>
+<p>This function should never be used by applications: it is meant
+for integration with embedding toolkits, like clutter-gtk</p>
+<p>Embedding toolkits that disable the event collection inside Clutter
+need to use this function to update the state of input devices depending
+on a Clutter::Event that they are going to submit to the event handling code
+in Clutter though clutter_do_event(). Since the input devices hold the state
+that is going to be used to fill in fields like the Clutter::ButtonEvent
+click count, or to emit synthesized events like %CLUTTER_ENTER and
+%CLUTTER_LEAVE, it is necessary for embedding toolkits to also be
+responsible of updating the input device state.</p>
+<p>For instance, this might be the code to translate an embedding toolkit
+native motion notification into a Clutter Clutter::MotionEvent and ask
+Clutter to process it:</p>
+<p>|[
+ClutterEvent c_event;</p>
+<p>translate_native_event_to_clutter (native_event, &amp;c_event);</p>
+<p>clutter_do_event (&amp;c_event);
+]|</p>
+<p>Before letting clutter_do_event() process the event, it is necessary to call
+clutter_input_device_update_from_event():</p>
+<p>|[
+ClutterEvent c_event;
+ClutterDeviceManager *manager;
+ClutterInputDevice *device;</p>
+<p>translate_native_event_to_clutter (native_event, &amp;c_event);</p>
+<p>// get the device manager
+manager = clutter_device_manager_get_default ();</p>
+<p>// use the default Core Pointer that Clutter backends register by default
+device = clutter_device_manager_get_core_device (manager, %CLUTTER_POINTER_DEVICE);</p>
+<p>// update the state of the input device
+clutter_input_device_update_from_event (device, &amp;c_event, FALSE);</p>
+<p>clutter_do_event (&amp;c_event);
+]|</p>
+<p>The <!-- raw HTML omitted -->update_stage<!-- raw HTML omitted --> boolean argument should be used when the input device
+enters and leaves a Clutter::Stage; it will use the #ClutterStage field
+of the passed <!-- raw HTML omitted -->event<!-- raw HTML omitted --> to update the stage associated to the input device.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>event</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Event.html" title="Clutter::Event (class)">Clutter::Event</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Clutter::Event</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>update_stage</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether to update the Clutter::Stage of the <!-- raw HTML omitted -->device<!-- raw HTML omitted -->
+using the stage of the event</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vendor_id-instance_method">
+  
+    #<strong>vendor_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Vendor ID of this device.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>vendor-id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vendor_id=-instance_method">
+  
+    #<strong>vendor_id=</strong>(vendor_id)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Vendor ID of this device.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>vendor_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>vendor-id</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>vendor-id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

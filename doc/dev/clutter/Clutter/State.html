@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Clutter::State
+  
+    &mdash; Ruby/Clutter
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Clutter::State";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter</a></span></span>
+     &raquo; 
+    <span class="title">State</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Clutter::State
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Clutter::State</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The Clutter::StateClass structure contains
+only private data</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#duration-instance_method" title="#duration (instance method)">#<strong>duration</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Default duration used if an duration has not been specified for a specific source/target state pair.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#duration=-instance_method" title="#duration= (instance method)">#<strong>duration=</strong>(duration)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Default duration used if an duration has not been specified for a specific source/target state pair.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_animator-instance_method" title="#get_animator (instance method)">#<strong>get_animator</strong>(source_state_name, target_state_name)  &#x21d2; Clutter::Animator </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the Clutter::Animator that is being used for transitioning between the two states, if any has been set.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_duration-instance_method" title="#get_duration (instance method)">#<strong>get_duration</strong>(source_state_name, target_state_name)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries the duration used for transitions between a source and target state pair.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_keys-instance_method" title="#get_keys (instance method)">#<strong>get_keys</strong>(source_state_name, target_state_name, object, property_name)  &#x21d2; GLib::List&lt;Clutter::StateKey&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a list of pointers to opaque structures with accessor functions that describe the keys added to an animator.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Clutter::State </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Clutter::State.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_key-instance_method" title="#remove_key (instance method)">#<strong>remove_key</strong>(source_state_name, target_state_name, object, property_name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes all keys matching the search criteria passed in arguments.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set-instance_method" title="#set (instance method)">#<strong>set</strong>(source_state_name, target_state_name, first_object, first_property_name, first_mode, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds multiple keys to a named state of a Clutter::State instance, specifying the easing mode and value a given property of an object should have at a given progress of the animation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_animator-instance_method" title="#set_animator (instance method)">#<strong>set_animator</strong>(source_state_name, target_state_name, animator)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Specifies a Clutter::Animator to be used when transitioning between the two named states.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_duration-instance_method" title="#set_duration (instance method)">#<strong>set_duration</strong>(source_state_name, target_state_name, duration)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the duration of a transition.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_key-instance_method" title="#set_key (instance method)">#<strong>set_key</strong>(source_state_name, target_state_name, object, property_name, mode, value, pre_delay, post_delay)  &#x21d2; Clutter::State </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets one specific end key for a state name, <!-- raw HTML omitted -->object<!-- raw HTML omitted -->, <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --> combination.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#state-instance_method" title="#state (instance method)">#<strong>state</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The currently set target state, setting it causes the state machine to transition to the new state, use clutter_state_warp_to_state() to change state without a transition.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#state=-instance_method" title="#state= (instance method)">#<strong>state=</strong>(state)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The currently set target state, setting it causes the state machine to transition to the new state, use clutter_state_warp_to_state() to change state without a transition.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#states-instance_method" title="#states (instance method)">#<strong>states</strong>  &#x21d2; GLib::List&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a list of all the state names managed by this Clutter::State.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#timeline-instance_method" title="#timeline (instance method)">#<strong>timeline</strong>  &#x21d2; Clutter::Timeline </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the timeline driving the Clutter::State.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#warp_to_state-instance_method" title="#warp_to_state (instance method)">#<strong>warp_to_state</strong>(target_state_name)  &#x21d2; Clutter::Timeline </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Change to the specified target state immediately with no animation.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Clutter::State (class)">Clutter::State</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Clutter::State</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="duration-instance_method">
+  
+    #<strong>duration</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Default duration used if an duration has not been specified for a specific
+source/target state pair. The values is in milliseconds.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>duration</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="duration=-instance_method">
+  
+    #<strong>duration=</strong>(duration)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Default duration used if an duration has not been specified for a specific
+source/target state pair. The values is in milliseconds.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>duration</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>duration</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>duration</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_animator-instance_method">
+  
+    #<strong>get_animator</strong>(source_state_name, target_state_name)  &#x21d2; <tt><span class='object_link'><a href="Animator.html" title="Clutter::Animator (class)">Clutter::Animator</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the Clutter::Animator that is being used for transitioning
+between the two states, if any has been set</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of a source state</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>target_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of a target state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Animator.html" title="Clutter::Animator (class)">Clutter::Animator</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Clutter::Animator instance, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_duration-instance_method">
+  
+    #<strong>get_duration</strong>(source_state_name, target_state_name)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries the duration used for transitions between a source and
+target state pair</p>
+<p>The semantics for the query are the same as the semantics used for
+setting the duration with clutter_state_set_duration()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the source state to
+get the duration of, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>target_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the source state to
+get the duration of, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the duration, in milliseconds</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_keys-instance_method">
+  
+    #<strong>get_keys</strong>(source_state_name, target_state_name, object, property_name)  &#x21d2; <tt>GLib::List&lt;Clutter::StateKey&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a list of pointers to opaque structures with accessor functions
+that describe the keys added to an animator.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the source transition name to query,
+or nil for all source states</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>target_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the target transition name to query,
+or nil for all target states</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the specific object instance to list keys for,
+or nil for all managed objects</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the property name to search for, or nil
+for all properties.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;Clutter::StateKey&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a
+newly allocated #GList of Clutter::StateKey<!-- raw HTML omitted -->s. The contents of
+the returned list are owned by the Clutter::State and should not be
+modified or freed. Use g_list_free() to free the resources allocated
+by the returned list when done using it</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_key-instance_method">
+  
+    #<strong>remove_key</strong>(source_state_name, target_state_name, object, property_name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes all keys matching the search criteria passed in arguments.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the source state name to query,
+or nil for all source states</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>target_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the target state name to query,
+or nil for all target states</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the specific object instance to list keys for,
+or nil for all managed objects</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the property name to search for,
+or nil for all properties.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set-instance_method">
+  
+    #<strong>set</strong>(source_state_name, target_state_name, first_object, first_property_name, first_mode, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds multiple keys to a named state of a Clutter::State instance, specifying
+the easing mode and value a given property of an object should have at a
+given progress of the animation.</p>
+<p>The mode specified is the easing mode used when going to from the previous
+key to the specified key.</p>
+<p>For instance, the code below:</p>
+<p>|[
+clutter_state_set (state, NULL, &quot;hover&quot;,
+button, &quot;opacity&quot;, CLUTTER_LINEAR, 255,
+button, &quot;scale-x&quot;, CLUTTER_EASE_OUT_CUBIC, 1.2,
+button, &quot;scale-y&quot;, CLUTTER_EASE_OUT_CUBIC, 1.2,
+NULL);
+]|</p>
+<p>will create a transition from any state (a <!-- raw HTML omitted -->source_state_name<!-- raw HTML omitted --> or NULL is
+treated as a wildcard) and a state named &quot;hover&quot;; the
+button object will have the Clutter::Actor:opacity
+property animated to a value of 255 using %CLUTTER_LINEAR as the animation
+mode, and the Clutter::Actor:scale-x and #ClutterActor:scale-y properties
+animated to a value of 1.2 using %CLUTTER_EASE_OUT_CUBIC as the animation
+mode. To change the state (and start the transition) you can use the
+clutter_state_set_state() function:</p>
+<p>|[
+clutter_state_set_state (state, &quot;hover&quot;);
+]|</p>
+<p>If a given object, state_name, property tuple already exist in the
+Clutter::State instance, then the mode and value will be replaced with
+the new specified values.</p>
+<p>If a property name is prefixed with &quot;delayed::&quot; two additional
+arguments per key are expected: a value relative to the full state time
+to pause before transitioning and a similar value to pause after
+transitioning, e.g.:</p>
+<p>|[
+clutter_state_set (state, &quot;hover&quot;, &quot;toggled&quot;,
+button, &quot;delayed::scale-x&quot;, CLUTTER_LINEAR, 1.0, 0.2, 0.2,
+button, &quot;delayed::scale-y&quot;, CLUTTER_LINEAR, 1.0, 0.2, 0.2,
+NULL);
+]|</p>
+<p>will pause for 20% of the duration of the transition before animating,
+and 20% of the duration after animating.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the source state keys are being added for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>target_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the target state keys are being added for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_object</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GObject</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a property of <!-- raw HTML omitted -->first_object<!-- raw HTML omitted --> to specify a key for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_mode</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gulong</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the id of the alpha function to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the value <!-- raw HTML omitted -->first_property_name<!-- raw HTML omitted --> should have in <!-- raw HTML omitted -->target_state_name<!-- raw HTML omitted -->,
+followed by object, property name, mode, value tuples, terminated
+by nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_animator-instance_method">
+  
+    #<strong>set_animator</strong>(source_state_name, target_state_name, animator)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Specifies a Clutter::Animator to be used when transitioning between
+the two named states.</p>
+<p>The <!-- raw HTML omitted -->animator<!-- raw HTML omitted --> allows specifying a transition between the state that is
+more elaborate than the basic transitions allowed by the tweening of
+properties defined in the Clutter::State keys.</p>
+<p>If <!-- raw HTML omitted -->animator<!-- raw HTML omitted --> is nil it will unset an existing animator.</p>
+<p>Clutter::State will take a reference on the passed <!-- raw HTML omitted -->animator<!-- raw HTML omitted -->, if any</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of a source state</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>target_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of a target state</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>animator</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Animator.html" title="Clutter::Animator (class)">Clutter::Animator</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Clutter::Animator instance, or nil to
+unset an existing Clutter::Animator</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_duration-instance_method">
+  
+    #<strong>set_duration</strong>(source_state_name, target_state_name, duration)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the duration of a transition.</p>
+<p>If both state names are nil the default duration for <!-- raw HTML omitted -->state<!-- raw HTML omitted --> is set.</p>
+<p>If only <!-- raw HTML omitted -->target_state_name<!-- raw HTML omitted --> is specified, the passed <!-- raw HTML omitted -->duration<!-- raw HTML omitted --> becomes
+the default duration for transitions to the target state.</p>
+<p>If both states names are specified, the passed <!-- raw HTML omitted -->duration<!-- raw HTML omitted --> only applies
+to the specified transition.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the source state, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>target_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the target state, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>duration</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the duration of the transition, in milliseconds</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_key-instance_method">
+  
+    #<strong>set_key</strong>(source_state_name, target_state_name, object, property_name, mode, value, pre_delay, post_delay)  &#x21d2; <tt><span class='object_link'><a href="" title="Clutter::State (class)">Clutter::State</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets one specific end key for a state name, <!-- raw HTML omitted -->object<!-- raw HTML omitted -->, <!-- raw HTML omitted -->property_name<!-- raw HTML omitted -->
+combination.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the source transition to specify
+transition for, or nil to specify the default fallback when a
+more specific source state doesn't exist.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>target_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the transition to set a key value for.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the #GObject to set a key for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the property to set a key for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the id of the alpha function to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the value for property_name of object in state_name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pre_delay</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>relative time of the transition to be idle in the beginning
+of the transition</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>post_delay</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>relative time of the transition to be idle in the end of
+the transition</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Clutter::State (class)">Clutter::State</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Clutter::State instance, allowing
+chaining of multiple calls</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="state-instance_method">
+  
+    #<strong>state</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The currently set target state, setting it causes the
+state machine to transition to the new state, use
+clutter_state_warp_to_state() to change state without
+a transition.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="state=-instance_method">
+  
+    #<strong>state=</strong>(state)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The currently set target state, setting it causes the
+state machine to transition to the new state, use
+clutter_state_warp_to_state() to change state without
+a transition.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>state</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="states-instance_method">
+  
+    #<strong>states</strong>  &#x21d2; <tt>GLib::List&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a list of all the state names managed by this Clutter::State.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly allocated
+#GList of state names. The contents of the returned #GList are owned
+by the Clutter::State and should not be modified or freed. Use
+g_list_free() to free the resources allocated by the returned list when
+done using it</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="timeline-instance_method">
+  
+    #<strong>timeline</strong>  &#x21d2; <tt><span class='object_link'><a href="Timeline.html" title="Clutter::Timeline (class)">Clutter::Timeline</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the timeline driving the Clutter::State</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Timeline.html" title="Clutter::Timeline (class)">Clutter::Timeline</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Clutter::Timeline that drives
+the state change animations. The returned timeline is owned
+by the Clutter::State and it should not be unreferenced directly</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="warp_to_state-instance_method">
+  
+    #<strong>warp_to_state</strong>(target_state_name)  &#x21d2; <tt><span class='object_link'><a href="Timeline.html" title="Clutter::Timeline (class)">Clutter::Timeline</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Change to the specified target state immediately with no animation.</p>
+<p>See clutter_state_set_state().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>target_state_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the state to transition to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Timeline.html" title="Clutter::Timeline (class)">Clutter::Timeline</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Clutter::Timeline that drives the
+state transition. The returned timeline is owned by the Clutter::State
+and it should not be unreferenced</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

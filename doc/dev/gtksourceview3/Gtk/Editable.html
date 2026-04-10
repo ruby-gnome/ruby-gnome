@@ -1,0 +1,2439 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gtk::Editable
+  
+    &mdash; Ruby/GtkSourceView3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::Editable";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (E)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">Editable</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gtk::Editable
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p><code>GtkEditable</code> is an interface for text editing widgets.</p>
+<p>Typical examples of editable widgets are [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry] and
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SpinButton]. It contains functions for generically manipulating
+an editable widget, a large number of action signals used for key bindings,
+and several signals that an application can connect to modify the behavior
+of a widget.</p>
+<p>As an example of the latter usage, by connecting the following handler to
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::insert-text], an application can convert all entry
+into a widget into uppercase.</p>
+<h2>Forcing entry to uppercase.</h2>
+<pre class="code c"><code class="c">#include &lt;ctype.h&gt;
+
+void
+insert_text_handler (GtkEditable *editable,
+                     const char  *text,
+                     int          length,
+                     int         *position,
+                     gpointer     data)
+{
+  char *result = g_utf8_strup (text, length);
+
+  g_signal_handlers_block_by_func (editable,
+                               (gpointer) insert_text_handler, data);
+  gtk_editable_insert_text (editable, result, length, position);
+  g_signal_handlers_unblock_by_func (editable,
+                                     (gpointer) insert_text_handler, data);
+
+  g_signal_stop_emission_by_name (editable, &quot;insert_text&quot;);
+
+  g_free (result);
+}
+</code></pre>
+<h2>Implementing GtkEditable</h2>
+<p>The most likely scenario for implementing <code>GtkEditable</code> on your own widget
+is that you will embed a <code>GtkText</code> inside a complex widget, and want to
+delegate the editable functionality to that text widget. <code>GtkEditable</code>
+provides some utility functions to make this easy.</p>
+<p>In your class_init function, call [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.install_properties],
+passing the first available property ID:</p>
+<pre class="code c"><code class="c">static void
+my_class_init (MyClass *class)
+{
+  ...
+  g_object_class_install_properties (object_class, NUM_PROPERTIES, props);
+  gtk_editable_install_properties (object_clas, NUM_PROPERTIES);
+  ...
+}
+</code></pre>
+<p>In your interface_init function for the <code>GtkEditable</code> interface, provide
+an implementation for the get_delegate vfunc that returns your text widget:</p>
+<pre class="code c"><code class="c">GtkEditable *
+get_editable_delegate (GtkEditable *editable)
+{
+  return GTK_EDITABLE (MY_WIDGET (editable)-&gt;text_widget);
+}
+
+static void
+my_editable_init (GtkEditableInterface *iface)
+{
+  iface-&gt;get_delegate = get_editable_delegate;
+}
+</code></pre>
+<p>You don't need to provide any other vfuncs. The default implementations
+work by forwarding to the delegate that the GtkEditableInterface.get_delegate()
+vfunc returns.</p>
+<p>In your instance_init function, create your text widget, and then call
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.init_delegate]:</p>
+<pre class="code c"><code class="c">static void
+my_widget_init (MyWidget *self)
+{
+  ...
+  self-&gt;text_widget = gtk_text_new ();
+  gtk_editable_init_delegate (GTK_EDITABLE (self));
+  ...
+}
+</code></pre>
+<p>In your dispose function, call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.finish_delegate] before
+destroying your text widget:</p>
+<pre class="code c"><code class="c">static void
+my_widget_dispose (GObject *object)
+{
+  ...
+  gtk_editable_finish_delegate (GTK_EDITABLE (self));
+  g_clear_pointer (&amp;self-&gt;text_widget, gtk_widget_unparent);
+  ...
+}
+</code></pre>
+<p>Finally, use [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.delegate_set_property] in your <code>set_property</code>
+function (and similar for <code>get_property</code>), to set the editable properties:</p>
+<pre class="code c"><code class="c">  ...
+  if (gtk_editable_delegate_set_property (object, prop_id, value, pspec))
+    return;
+
+  switch (prop_id)
+  ...
+</code></pre>
+<p>It is important to note that if you create a <code>GtkEditable</code> that uses
+a delegate, the low level [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::insert-text] and
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::delete-text] signals will be propagated from the
+&quot;wrapper&quot; editable to the delegate, but they will not be propagated from
+the delegate to the &quot;wrapper&quot; editable, as they would cause an infinite
+recursion. If you wish to connect to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::insert-text]
+and [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::delete-text] signals, you will need to connect
+to them on the delegate obtained via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.get_delegate].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#alignment-instance_method" title="#alignment (instance method)">#<strong>alignment</strong>  &#x21d2; Gtk::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the alignment of the editable.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#alignment=-instance_method" title="#alignment= (instance method)">#<strong>alignment=</strong>(xalign)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the alignment for the contents of the editable.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#changed-instance_method" title="#changed (instance method)">#<strong>changed</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delegate-instance_method" title="#delegate (instance method)">#<strong>delegate</strong>  &#x21d2; Gtk::Editable </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the <code>GtkEditable</code> that <!-- raw HTML omitted -->editable<!-- raw HTML omitted --> is delegating its implementation to.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delegate_get_accessible_platform_state-instance_method" title="#delegate_get_accessible_platform_state (instance method)">#<strong>delegate_get_accessible_platform_state</strong>(state)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the accessible platform state from the editable delegate.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_selection-instance_method" title="#delete_selection (instance method)">#<strong>delete_selection</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Deletes the currently selected text of the editable.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_text-instance_method" title="#delete_text (instance method)">#<strong>delete_text</strong>(start_pos, end_pos)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Deletes a sequence of characters.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#do_delete_text-instance_method" title="#do_delete_text (instance method)">#<strong>do_delete_text</strong>(start_pos, end_pos)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Deletes a sequence of characters.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#do_insert_text-instance_method" title="#do_insert_text (instance method)">#<strong>do_insert_text</strong>(text, length, position)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inserts <!-- raw HTML omitted -->length<!-- raw HTML omitted --> bytes of <!-- raw HTML omitted -->text<!-- raw HTML omitted --> into the contents of the widget, at position <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#editable-instance_method" title="#editable (instance method)">#<strong>editable</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves whether <!-- raw HTML omitted -->editable<!-- raw HTML omitted --> is editable.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#editable=-instance_method" title="#editable= (instance method)">#<strong>editable=</strong>(is_editable)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines if the user can edit the text in the editable widget.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#enable_undo-instance_method" title="#enable_undo (instance method)">#<strong>enable_undo</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets if undo/redo actions are enabled for <!-- raw HTML omitted -->editable<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#enable_undo=-instance_method" title="#enable_undo= (instance method)">#<strong>enable_undo=</strong>(enable_undo)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If enabled, changes to <!-- raw HTML omitted -->editable<!-- raw HTML omitted --> will be saved for undo/redo actions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#finish_delegate-instance_method" title="#finish_delegate (instance method)">#<strong>finish_delegate</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Undoes the setup done by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.init_delegate].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_chars-instance_method" title="#get_chars (instance method)">#<strong>get_chars</strong>(start_pos, end_pos)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a sequence of characters.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_selection_bounds-instance_method" title="#get_selection_bounds (instance method)">#<strong>get_selection_bounds</strong>(start_pos, end_pos)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the selection bound of the editable.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#init_delegate-instance_method" title="#init_delegate (instance method)">#<strong>init_delegate</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets up a delegate for <code>GtkEditable</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_text-instance_method" title="#insert_text (instance method)">#<strong>insert_text</strong>(text, length, position)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inserts <!-- raw HTML omitted -->length<!-- raw HTML omitted --> bytes of <!-- raw HTML omitted -->text<!-- raw HTML omitted --> into the contents of the widget, at position <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_width_chars-instance_method" title="#max_width_chars (instance method)">#<strong>max_width_chars</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the desired maximum width of <!-- raw HTML omitted -->editable<!-- raw HTML omitted -->, in characters.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_width_chars=-instance_method" title="#max_width_chars= (instance method)">#<strong>max_width_chars=</strong>(n_chars)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the desired maximum width in characters of <!-- raw HTML omitted -->editable<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#position-instance_method" title="#position (instance method)">#<strong>position</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the current position of the cursor relative to the start of the content of the editable.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#position=-instance_method" title="#position= (instance method)">#<strong>position=</strong>(position)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the cursor position in the editable to the given value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#select_region-instance_method" title="#select_region (instance method)">#<strong>select_region</strong>(start_pos, end_pos)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Selects a region of text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_selection_bounds-instance_method" title="#set_selection_bounds (instance method)">#<strong>set_selection_bounds</strong>(start_pos, end_pos)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Selects a region of text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text-instance_method" title="#text (instance method)">#<strong>text</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the contents of <!-- raw HTML omitted -->editable<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text=-instance_method" title="#text= (instance method)">#<strong>text=</strong>(text)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the text in the editable to the given value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#width_chars-instance_method" title="#width_chars (instance method)">#<strong>width_chars</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the number of characters of space reserved for the contents of the editable.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#width_chars=-instance_method" title="#width_chars= (instance method)">#<strong>width_chars=</strong>(n_chars)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Changes the size request of the editable to be about the right size for <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> characters.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="alignment-instance_method">
+  
+    #<strong>alignment</strong>  &#x21d2; <tt>Gtk::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the alignment of the editable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the alignment</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="alignment=-instance_method">
+  
+    #<strong>alignment=</strong>(xalign)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the alignment for the contents of the editable.</p>
+<p>This controls the horizontal positioning of the contents when
+the displayed text is shorter than the width of the editable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>xalign</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The horizontal alignment, from 0 (left) to 1 (right).
+Reversed for RTL layouts</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="changed-instance_method">
+  
+    #<strong>changed</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delegate-instance_method">
+  
+    #<strong>delegate</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::Editable (module)">Gtk::Editable</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the <code>GtkEditable</code> that <!-- raw HTML omitted -->editable<!-- raw HTML omitted --> is delegating its
+implementation to.</p>
+<p>Typically, the delegate is a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Text] widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::Editable (module)">Gtk::Editable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the delegate <code>GtkEditable</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delegate_get_accessible_platform_state-instance_method">
+  
+    #<strong>delegate_get_accessible_platform_state</strong>(state)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the accessible platform state from the editable delegate.</p>
+<p>This is an helper function to retrieve the accessible state for
+<code>GtkEditable</code> interface implementations using a delegate pattern.</p>
+<p>You should call this function in your editable widget implementation
+of the [vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.get_platform_state] virtual function, for
+instance:</p>
+<pre class="code c"><code class="c">static void
+accessible_interface_init (GtkAccessibleInterface *iface)
+{
+  iface-&gt;get_platform_state = your_editable_get_accessible_platform_state;
+}
+
+static gboolean
+your_editable_get_accessible_platform_state (GtkAccessible *accessible,
+                                             GtkAccessiblePlatformState state)
+{
+  return gtk_editable_delegate_get_accessible_platform_state (GTK_EDITABLE (accessible), state);
+}
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccessiblePlatformState.html" title="Gtk::AccessiblePlatformState (module)">Gtk::AccessiblePlatformState</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>what kind of accessible state to retrieve</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_selection-instance_method">
+  
+    #<strong>delete_selection</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Deletes the currently selected text of the editable.</p>
+<p>This call doesn’t do anything if there is no selected text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_text-instance_method">
+  
+    #<strong>delete_text</strong>(start_pos, end_pos)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Deletes a sequence of characters.</p>
+<p>The characters that are deleted are those characters at positions
+from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> up to, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> is
+negative, then the characters deleted are those from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> to
+the end of the text.</p>
+<p>Note that the positions are specified in characters, not bytes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start_pos</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>start position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_pos</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>end position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="do_delete_text-instance_method">
+  
+    #<strong>do_delete_text</strong>(start_pos, end_pos)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Deletes a sequence of characters.</p>
+<p>The characters that are deleted are those characters at positions
+from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> up to, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> is
+negative, then the characters deleted are those from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> to
+the end of the text.</p>
+<p>Note that the positions are specified in characters, not bytes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start_pos</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>start position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_pos</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>end position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="do_insert_text-instance_method">
+  
+    #<strong>do_insert_text</strong>(text, length, position)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inserts <!-- raw HTML omitted -->length<!-- raw HTML omitted --> bytes of <!-- raw HTML omitted -->text<!-- raw HTML omitted --> into the contents of the
+widget, at position <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
+<p>Note that the position is in characters, not in bytes.
+The function updates <!-- raw HTML omitted -->position<!-- raw HTML omitted --> to point after the newly
+inserted text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the text to insert</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the length of the text in bytes, or -1</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location of the position text will be inserted at</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="editable-instance_method">
+  
+    #<strong>editable</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves whether <!-- raw HTML omitted -->editable<!-- raw HTML omitted --> is editable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->editable<!-- raw HTML omitted --> is editable.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="editable=-instance_method">
+  
+    #<strong>editable=</strong>(is_editable)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines if the user can edit the text in the editable widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>is_editable</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the user is allowed to edit the text
+in the widget</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="enable_undo-instance_method">
+  
+    #<strong>enable_undo</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets if undo/redo actions are enabled for <!-- raw HTML omitted -->editable<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if undo is enabled</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="enable_undo=-instance_method">
+  
+    #<strong>enable_undo=</strong>(enable_undo)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If enabled, changes to <!-- raw HTML omitted -->editable<!-- raw HTML omitted --> will be saved for undo/redo
+actions.</p>
+<p>This results in an additional copy of text changes and are not
+stored in secure memory. As such, undo is forcefully disabled
+when [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Text:visibility] is set to false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>enable_undo</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if undo/redo should be enabled</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="finish_delegate-instance_method">
+  
+    #<strong>finish_delegate</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Undoes the setup done by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.init_delegate].</p>
+<p>This is a helper function that should be called from dispose,
+before removing the delegate object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_chars-instance_method">
+  
+    #<strong>get_chars</strong>(start_pos, end_pos)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a sequence of characters.</p>
+<p>The characters that are retrieved are those characters at positions
+from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> up to, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> is negative,
+then the characters retrieved are those characters from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> to
+the end of the text.</p>
+<p>Note that positions are specified in characters, not bytes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start_pos</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>start of text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_pos</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>end of text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the contents of the widget as a
+string. This string is allocated by the <code>GtkEditable</code> implementation
+and should be freed by the caller.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_selection_bounds-instance_method">
+  
+    #<strong>get_selection_bounds</strong>(start_pos, end_pos)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the selection bound of the editable.</p>
+<p><!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> will be filled with the start of the selection and
+<!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> with end. If no text was selected both will be identical
+and false will be returned.</p>
+<p>Note that positions are specified in characters, not bytes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start_pos</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the starting position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_pos</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the end position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if there is a non-empty selection, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="init_delegate-instance_method">
+  
+    #<strong>init_delegate</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets up a delegate for <code>GtkEditable</code>.</p>
+<p>This is assuming that the get_delegate vfunc in the <code>GtkEditable</code>
+interface has been set up for the <!-- raw HTML omitted -->editable<!-- raw HTML omitted -->'s type.</p>
+<p>This is a helper function that should be called in instance init,
+after creating the delegate object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_text-instance_method">
+  
+    #<strong>insert_text</strong>(text, length, position)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inserts <!-- raw HTML omitted -->length<!-- raw HTML omitted --> bytes of <!-- raw HTML omitted -->text<!-- raw HTML omitted --> into the contents of the
+widget, at position <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
+<p>Note that the position is in characters, not in bytes.
+The function updates <!-- raw HTML omitted -->position<!-- raw HTML omitted --> to point after the newly
+inserted text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the text to insert</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the length of the text in bytes, or -1</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location of the position text will be inserted at</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_width_chars-instance_method">
+  
+    #<strong>max_width_chars</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the desired maximum width of <!-- raw HTML omitted -->editable<!-- raw HTML omitted -->, in characters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the maximum width of the entry, in characters</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_width_chars=-instance_method">
+  
+    #<strong>max_width_chars=</strong>(n_chars)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the desired maximum width in characters of <!-- raw HTML omitted -->editable<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_chars</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new desired maximum width, in characters</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="position-instance_method">
+  
+    #<strong>position</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the current position of the cursor relative
+to the start of the content of the editable.</p>
+<p>Note that this position is in characters, not in bytes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the cursor position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="position=-instance_method">
+  
+    #<strong>position=</strong>(position)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the cursor position in the editable to the given value.</p>
+<p>The cursor is displayed before the character with the given (base 0)
+index in the contents of the editable. The value must be less than
+or equal to the number of characters in the editable. A value of -1
+indicates that the position should be set after the last character
+of the editable. Note that <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is in characters, not in bytes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the position of the cursor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="select_region-instance_method">
+  
+    #<strong>select_region</strong>(start_pos, end_pos)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Selects a region of text.</p>
+<p>The characters that are selected are those characters at positions
+from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> up to, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> is
+negative, then the characters selected are those characters from
+<!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> to  the end of the text.</p>
+<p>Note that positions are specified in characters, not bytes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start_pos</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>start of region</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_pos</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>end of region</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_selection_bounds-instance_method">
+  
+    #<strong>set_selection_bounds</strong>(start_pos, end_pos)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Selects a region of text.</p>
+<p>The characters that are selected are those characters at positions
+from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> up to, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> is
+negative, then the characters selected are those characters from
+<!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> to  the end of the text.</p>
+<p>Note that positions are specified in characters, not bytes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start_pos</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>start of region</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_pos</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>end of region</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text-instance_method">
+  
+    #<strong>text</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the contents of <!-- raw HTML omitted -->editable<!-- raw HTML omitted -->.</p>
+<p>The returned string is owned by GTK and must not be modified or freed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the contents of the editable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text=-instance_method">
+  
+    #<strong>text=</strong>(text)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the text in the editable to the given value.</p>
+<p>This is replacing the current contents.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the text to set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="width_chars-instance_method">
+  
+    #<strong>width_chars</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the number of characters of space reserved
+for the contents of the editable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>number of chars to request space for, or negative if unset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="width_chars=-instance_method">
+  
+    #<strong>width_chars=</strong>(n_chars)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Changes the size request of the editable to be about the
+right size for <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> characters.</p>
+<p>Note that it changes the size request, the size can still
+be affected by how you pack the widget into containers.
+If <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> is -1, the size reverts to the default size.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_chars</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>width in chars</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

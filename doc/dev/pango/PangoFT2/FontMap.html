@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: PangoFT2::FontMap
+  
+    &mdash; Ruby/Pango
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "PangoFT2::FontMap";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (F)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../PangoFT2.html" title="PangoFT2 (module)">PangoFT2</a></span></span>
+     &raquo; 
+    <span class="title">FontMap</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: PangoFT2::FontMap
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="../PangoFc/FontMap.html" title="PangoFc::FontMap (class)">PangoFc::FontMap</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="../Pango/FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="../PangoFc/FontMap.html" title="PangoFc::FontMap (class)">PangoFc::FontMap</a></span></li>
+          
+            <li class="next">PangoFT2::FontMap</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The <code>PangoFT2FontMap</code> is the <code>PangoFontMap</code> implementation for FreeType fonts.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#for_display-class_method" title="for_display (class method)">.<strong>for_display</strong>  &#x21d2; Pango::FontMap </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a <code>PangoFT2FontMap</code>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_context-instance_method" title="#create_context (instance method)">#<strong>create_context</strong>  &#x21d2; Pango::Context </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a <code>PangoContext</code> for the given fontmap.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Pango::FontMap </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new <code>PangoFT2FontMap</code> object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_default_substitute-instance_method" title="#set_default_substitute (instance method)">#<strong>set_default_substitute</strong>(func, data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets a function that will be called to do final configuration substitution on a <code>FcPattern</code> before it is used to load the font.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_resolution-instance_method" title="#set_resolution (instance method)">#<strong>set_resolution</strong>(dpi_x, dpi_y)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the horizontal and vertical resolutions for the fontmap.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#substitute_changed-instance_method" title="#substitute_changed (instance method)">#<strong>substitute_changed</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Call this function any time the results of the default substitution function set with pango_ft2_font_map_set_default_substitute() change.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../PangoFc/FontMap.html" title="PangoFc::FontMap (class)">PangoFc::FontMap</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../PangoFc/FontMap.html#add_decoder_find_func-instance_method" title="PangoFc::FontMap#add_decoder_find_func (method)">#add_decoder_find_func</a></span>, <span class='object_link'><a href="../PangoFc/FontMap.html#cache_clear-instance_method" title="PangoFc::FontMap#cache_clear (method)">#cache_clear</a></span>, <span class='object_link'><a href="../PangoFc/FontMap.html#config-instance_method" title="PangoFc::FontMap#config (method)">#config</a></span>, <span class='object_link'><a href="../PangoFc/FontMap.html#config=-instance_method" title="PangoFc::FontMap#config= (method)">#config=</a></span>, <span class='object_link'><a href="../PangoFc/FontMap.html#config_changed-instance_method" title="PangoFc::FontMap#config_changed (method)">#config_changed</a></span>, <span class='object_link'><a href="../PangoFc/FontMap.html#find_decoder-instance_method" title="PangoFc::FontMap#find_decoder (method)">#find_decoder</a></span>, <span class='object_link'><a href="../PangoFc/FontMap.html#get_hb_face-instance_method" title="PangoFc::FontMap#get_hb_face (method)">#get_hb_face</a></span>, <span class='object_link'><a href="../PangoFc/FontMap.html#shutdown-instance_method" title="PangoFc::FontMap#shutdown (method)">#shutdown</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Pango/FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Pango/FontMap.html#changed-instance_method" title="Pango::FontMap#changed (method)">#changed</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#get_family-instance_method" title="Pango::FontMap#get_family (method)">#get_family</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#item_type-instance_method" title="Pango::FontMap#item_type (method)">#item_type</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#item_type=-instance_method" title="Pango::FontMap#item_type= (method)">#item_type=</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#list_families-instance_method" title="Pango::FontMap#list_families (method)">#list_families</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#load_font-instance_method" title="Pango::FontMap#load_font (method)">#load_font</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#load_fontset-instance_method" title="Pango::FontMap#load_fontset (method)">#load_fontset</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#n_items-instance_method" title="Pango::FontMap#n_items (method)">#n_items</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#n_items=-instance_method" title="Pango::FontMap#n_items= (method)">#n_items=</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#reload_font-instance_method" title="Pango::FontMap#reload_font (method)">#reload_font</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#serial-instance_method" title="Pango::FontMap#serial (method)">#serial</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="../Pango/FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new <code>PangoFT2FontMap</code> object.</p>
+<p>A fontmap is used to cache information about available fonts,
+and holds certain global parameters such as the resolution and
+the default substitute function (see
+[method<!-- raw HTML omitted -->PangoFT2<!-- raw HTML omitted -->.FontMap.set_default_substitute]).
+with g_object_unref() when you are finished with it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="for_display-class_method">
+  
+    .<strong>for_display</strong>  &#x21d2; <tt><span class='object_link'><a href="../Pango/FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a <code>PangoFT2FontMap</code>.</p>
+<p>This font map is cached and should
+not be freed. If the font map is no longer needed, it can
+be released with pango_ft2_shutdown_display(). Use of the
+global PangoFT2 fontmap is deprecated; use pango_ft2_font_map_new()
+instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Pango/FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>PangoFT2FontMap</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="create_context-instance_method">
+  
+    #<strong>create_context</strong>  &#x21d2; <tt><span class='object_link'><a href="../Pango/Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a <code>PangoContext</code> for the given fontmap.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Pango/Context.html" title="Pango::Context (class)">Pango::Context</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the newly created context; free with
+g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_default_substitute-instance_method">
+  
+    #<strong>set_default_substitute</strong>(func, data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets a function that will be called to do final configuration
+substitution on a <code>FcPattern</code> before it is used to load
+the font.</p>
+<p>This function can be used to do things like set
+hinting and antialiasing options.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>PangoFT2::SubstituteFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>function to call to to do final config tweaking
+on Fc::Pattern objects.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>data to pass to <!-- raw HTML omitted -->func<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>function to call when <!-- raw HTML omitted -->data<!-- raw HTML omitted --> is no longer used.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_resolution-instance_method">
+  
+    #<strong>set_resolution</strong>(dpi_x, dpi_y)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the horizontal and vertical resolutions for the fontmap.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>dpi_x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>dots per inch in the X direction</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dpi_y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>dots per inch in the Y direction</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="substitute_changed-instance_method">
+  
+    #<strong>substitute_changed</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Call this function any time the results of the
+default substitution function set with
+pango_ft2_font_map_set_default_substitute() change.</p>
+<p>That is, if your substitution function will return different
+results for the same input pattern, you must call this function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

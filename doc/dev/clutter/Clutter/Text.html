@@ -1,0 +1,6924 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Clutter::Text
+  
+    &mdash; Ruby/Clutter
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Clutter::Text";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter</a></span></span>
+     &raquo; 
+    <span class="title">Text</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Clutter::Text
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Actor</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Actor</a></span></li>
+          
+            <li class="next">Clutter::Text</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/clutter/text.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The Clutter::TextClass struct contains only private data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#activatable-instance_method" title="#activatable (instance method)">#<strong>activatable</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves whether a Clutter::Text is activatable or not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#activatable=-instance_method" title="#activatable= (instance method)">#<strong>activatable=</strong>(activatable)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Toggles whether return invokes the activate signal or not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#activatable%3F-instance_method" title="#activatable? (instance method)">#<strong>activatable?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Toggles whether return invokes the activate signal or not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#activate-instance_method" title="#activate (instance method)">#<strong>activate</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Emits the Clutter::Text::activate signal, if <!-- raw HTML omitted -->self<!-- raw HTML omitted --> has been set as activatable using clutter_text_set_activatable().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attributes-instance_method" title="#attributes (instance method)">#<strong>attributes</strong>  &#x21d2; Pango::AttrList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A list of Pango::StyleAttribute<!-- raw HTML omitted -->s to be applied to the contents of the Clutter::Text actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attributes=-instance_method" title="#attributes= (instance method)">#<strong>attributes=</strong>(attributes)  &#x21d2; Pango::AttrList </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A list of Pango::StyleAttribute<!-- raw HTML omitted -->s to be applied to the contents of the Clutter::Text actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#buffer-instance_method" title="#buffer (instance method)">#<strong>buffer</strong>  &#x21d2; Clutter::TextBuffer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The buffer which stores the text for this Clutter::Text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#buffer=-instance_method" title="#buffer= (instance method)">#<strong>buffer=</strong>(buffer)  &#x21d2; Clutter::TextBuffer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The buffer which stores the text for this Clutter::Text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#color-instance_method" title="#color (instance method)">#<strong>color</strong>  &#x21d2; Clutter::Color </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The color used to render the text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#color=-instance_method" title="#color= (instance method)">#<strong>color=</strong>(color)  &#x21d2; Clutter::Color </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The color used to render the text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#coords_to_position-instance_method" title="#coords_to_position (instance method)">#<strong>coords_to_position</strong>(x, y)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the position of the character at the given coordinates.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cursor_color-instance_method" title="#cursor_color (instance method)">#<strong>cursor_color</strong>  &#x21d2; Clutter::Color </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The color of the cursor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cursor_color=-instance_method" title="#cursor_color= (instance method)">#<strong>cursor_color=</strong>(cursor_color)  &#x21d2; Clutter::Color </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The color of the cursor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cursor_color_set=-instance_method" title="#cursor_color_set= (instance method)">#<strong>cursor_color_set=</strong>(cursor_color_set)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Will be set to true if Clutter::Text:cursor-color has been set.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cursor_color_set%3F-instance_method" title="#cursor_color_set? (instance method)">#<strong>cursor_color_set?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Will be set to true if Clutter::Text:cursor-color has been set.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cursor_position-instance_method" title="#cursor_position (instance method)">#<strong>cursor_position</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The current input cursor position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cursor_position=-instance_method" title="#cursor_position= (instance method)">#<strong>cursor_position=</strong>(cursor_position)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The current input cursor position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cursor_size-instance_method" title="#cursor_size (instance method)">#<strong>cursor_size</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The size of the cursor, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cursor_size=-instance_method" title="#cursor_size= (instance method)">#<strong>cursor_size=</strong>(cursor_size)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The size of the cursor, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cursor_visible-instance_method" title="#cursor_visible (instance method)">#<strong>cursor_visible</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves whether the cursor of a Clutter::Text actor is visible.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cursor_visible=-instance_method" title="#cursor_visible= (instance method)">#<strong>cursor_visible=</strong>(cursor_visible)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the input cursor is visible or not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cursor_visible%3F-instance_method" title="#cursor_visible? (instance method)">#<strong>cursor_visible?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the input cursor is visible or not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_chars-instance_method" title="#delete_chars (instance method)">#<strong>delete_chars</strong>(n_chars)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Deletes <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> inside a Clutter::Text actor, starting from the current cursor position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_selection-instance_method" title="#delete_selection (instance method)">#<strong>delete_selection</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Deletes the currently selected text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_text-instance_method" title="#delete_text (instance method)">#<strong>delete_text</strong>(start_pos, end_pos)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Deletes the text inside a Clutter::Text actor between <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#editable-instance_method" title="#editable (instance method)">#<strong>editable</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves whether a Clutter::Text is editable or not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#editable=-instance_method" title="#editable= (instance method)">#<strong>editable=</strong>(editable)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether key events delivered to the actor causes editing.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#editable%3F-instance_method" title="#editable? (instance method)">#<strong>editable?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether key events delivered to the actor causes editing.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ellipsize-instance_method" title="#ellipsize (instance method)">#<strong>ellipsize</strong>  &#x21d2; Pango::EllipsizeMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The preferred place to ellipsize the contents of the Clutter::Text actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ellipsize=-instance_method" title="#ellipsize= (instance method)">#<strong>ellipsize=</strong>(ellipsize)  &#x21d2; Pango::EllipsizeMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The preferred place to ellipsize the contents of the Clutter::Text actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#font_description-instance_method" title="#font_description (instance method)">#<strong>font_description</strong>  &#x21d2; Pango::FontDescription </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Pango::FontDescription that should be used by the #ClutterText.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#font_description=-instance_method" title="#font_description= (instance method)">#<strong>font_description=</strong>(font_description)  &#x21d2; Pango::FontDescription </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Pango::FontDescription that should be used by the #ClutterText.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#font_name-instance_method" title="#font_name (instance method)">#<strong>font_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The font to be used by the Clutter::Text, as a string that can be parsed by pango_font_description_from_string().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#font_name=-instance_method" title="#font_name= (instance method)">#<strong>font_name=</strong>(font_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The font to be used by the Clutter::Text, as a string that can be parsed by pango_font_description_from_string().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_chars-instance_method" title="#get_chars (instance method)">#<strong>get_chars</strong>(start_pos, end_pos)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the contents of the Clutter::Text actor between <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_color-instance_method" title="#get_color (instance method)">#<strong>get_color</strong>(color)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the text color as set by clutter_text_set_color().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_cursor_color-instance_method" title="#get_cursor_color (instance method)">#<strong>get_cursor_color</strong>(color)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the color of the cursor of a Clutter::Text actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_cursor_rect-instance_method" title="#get_cursor_rect (instance method)">#<strong>get_cursor_rect</strong>(rect)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the rectangle that contains the cursor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_layout_offsets-instance_method" title="#get_layout_offsets (instance method)">#<strong>get_layout_offsets</strong>(x, y)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Obtains the coordinates where the Clutter::Text will draw the #PangoLayout representing the text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_selected_text_color-instance_method" title="#get_selected_text_color (instance method)">#<strong>get_selected_text_color</strong>(color)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the color of selected text of a Clutter::Text actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_selection_color-instance_method" title="#get_selection_color (instance method)">#<strong>get_selection_color</strong>(color)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the color of the selection of a Clutter::Text actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(font_name, text)  &#x21d2; Clutter::Actor </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Clutter::Text actor, using <!-- raw HTML omitted -->font_name<!-- raw HTML omitted --> as the font description; <!-- raw HTML omitted -->text<!-- raw HTML omitted --> will be used to set the contents of the actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_text-instance_method" title="#insert_text (instance method)">#<strong>insert_text</strong>(text, position)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inserts <!-- raw HTML omitted -->text<!-- raw HTML omitted --> into a Clutter::Actor at the given position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_unichar-instance_method" title="#insert_unichar (instance method)">#<strong>insert_unichar</strong>(wc)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inserts <!-- raw HTML omitted -->wc<!-- raw HTML omitted --> at the current cursor position of a Clutter::Text actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#justify-instance_method" title="#justify (instance method)">#<strong>justify</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves whether the Clutter::Text actor should justify its contents on both margins.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#justify=-instance_method" title="#justify= (instance method)">#<strong>justify=</strong>(justify)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the contents of the Clutter::Text should be justified on both margins.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#justify%3F-instance_method" title="#justify? (instance method)">#<strong>justify?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the contents of the Clutter::Text should be justified on both margins.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#layout-instance_method" title="#layout (instance method)">#<strong>layout</strong>  &#x21d2; Pango::Layout </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the current Pango::Layout used by a #ClutterText actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#line_alignment-instance_method" title="#line_alignment (instance method)">#<strong>line_alignment</strong>  &#x21d2; Pango::Alignment </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The preferred alignment for the text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#line_alignment=-instance_method" title="#line_alignment= (instance method)">#<strong>line_alignment=</strong>(line_alignment)  &#x21d2; Pango::Alignment </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The preferred alignment for the text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#line_wrap-instance_method" title="#line_wrap (instance method)">#<strong>line_wrap</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the value set using clutter_text_set_line_wrap().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#line_wrap=-instance_method" title="#line_wrap= (instance method)">#<strong>line_wrap=</strong>(line_wrap)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to wrap the lines of Clutter::Text:text if the contents exceed the available allocation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#line_wrap%3F-instance_method" title="#line_wrap? (instance method)">#<strong>line_wrap?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to wrap the lines of Clutter::Text:text if the contents exceed the available allocation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#line_wrap_mode-instance_method" title="#line_wrap_mode (instance method)">#<strong>line_wrap_mode</strong>  &#x21d2; Pango::WrapMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If Clutter::Text:line-wrap is set to true, this property will control how the text is wrapped.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#line_wrap_mode=-instance_method" title="#line_wrap_mode= (instance method)">#<strong>line_wrap_mode=</strong>(line_wrap_mode)  &#x21d2; Pango::WrapMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If Clutter::Text:line-wrap is set to true, this property will control how the text is wrapped.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#markup=-instance_method" title="#markup= (instance method)">#<strong>markup=</strong>(markup)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets <!-- raw HTML omitted -->markup<!-- raw HTML omitted --> as the contents of a Clutter::Text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_length-instance_method" title="#max_length (instance method)">#<strong>max_length</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The maximum length of the contents of the Clutter::Text actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_length=-instance_method" title="#max_length= (instance method)">#<strong>max_length=</strong>(max_length)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The maximum length of the contents of the Clutter::Text actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#password_char-instance_method" title="#password_char (instance method)">#<strong>password_char</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If non-zero, the character that should be used in place of the actual text in a password text actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#password_char=-instance_method" title="#password_char= (instance method)">#<strong>password_char=</strong>(password_char)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If non-zero, the character that should be used in place of the actual text in a password text actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#position-instance_method" title="#position (instance method)">#<strong>position</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The current input cursor position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#position=-instance_method" title="#position= (instance method)">#<strong>position=</strong>(position)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The current input cursor position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#position_to_coords-instance_method" title="#position_to_coords (instance method)">#<strong>position_to_coords</strong>(position, x, y, line_height)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the coordinates of the given <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selectable-instance_method" title="#selectable (instance method)">#<strong>selectable</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves whether a Clutter::Text is selectable or not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selectable=-instance_method" title="#selectable= (instance method)">#<strong>selectable=</strong>(selectable)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether it is possible to select text, either using the pointer or the keyboard.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selectable%3F-instance_method" title="#selectable? (instance method)">#<strong>selectable?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether it is possible to select text, either using the pointer or the keyboard.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selected_text_color-instance_method" title="#selected_text_color (instance method)">#<strong>selected_text_color</strong>  &#x21d2; Clutter::Color </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The color of selected text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selected_text_color=-instance_method" title="#selected_text_color= (instance method)">#<strong>selected_text_color=</strong>(selected_text_color)  &#x21d2; Clutter::Color </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The color of selected text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selected_text_color_set=-instance_method" title="#selected_text_color_set= (instance method)">#<strong>selected_text_color_set=</strong>(selected_text_color_set)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Will be set to true if Clutter::Text:selected-text-color has been set.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selected_text_color_set%3F-instance_method" title="#selected_text_color_set? (instance method)">#<strong>selected_text_color_set?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Will be set to true if Clutter::Text:selected-text-color has been set.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selection-instance_method" title="#selection (instance method)">#<strong>selection</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the currently selected text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selection_bound-instance_method" title="#selection_bound (instance method)">#<strong>selection_bound</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The current input cursor position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selection_bound=-instance_method" title="#selection_bound= (instance method)">#<strong>selection_bound=</strong>(selection_bound)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The current input cursor position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selection_color-instance_method" title="#selection_color (instance method)">#<strong>selection_color</strong>  &#x21d2; Clutter::Color </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The color of the selection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selection_color=-instance_method" title="#selection_color= (instance method)">#<strong>selection_color=</strong>(selection_color)  &#x21d2; Clutter::Color </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The color of the selection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selection_color_set=-instance_method" title="#selection_color_set= (instance method)">#<strong>selection_color_set=</strong>(selection_color_set)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Will be set to true if Clutter::Text:selection-color has been set.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selection_color_set%3F-instance_method" title="#selection_color_set? (instance method)">#<strong>selection_color_set?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Will be set to true if Clutter::Text:selection-color has been set.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_preedit_string-instance_method" title="#set_preedit_string (instance method)">#<strong>set_preedit_string</strong>(preedit_str, preedit_attrs, cursor_pos)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets, or unsets, the pre-edit string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_selection-instance_method" title="#set_selection (instance method)">#<strong>set_selection</strong>(start_pos, end_pos)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Selects the region of text between <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#single_line_mode-instance_method" title="#single_line_mode (instance method)">#<strong>single_line_mode</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves whether the Clutter::Text actor is in single line mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#single_line_mode=-instance_method" title="#single_line_mode= (instance method)">#<strong>single_line_mode=</strong>(single_line_mode)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the Clutter::Text actor should be in single line mode or not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#single_line_mode%3F-instance_method" title="#single_line_mode? (instance method)">#<strong>single_line_mode?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the Clutter::Text actor should be in single line mode or not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text-instance_method" title="#text (instance method)">#<strong>text</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The text to render inside the actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text=-instance_method" title="#text= (instance method)">#<strong>text=</strong>(text)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The text to render inside the actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_markup-instance_method" title="#use_markup (instance method)">#<strong>use_markup</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves whether the contents of the Clutter::Text actor should be parsed for the Pango text markup.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_markup=-instance_method" title="#use_markup= (instance method)">#<strong>use_markup=</strong>(use_markup)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the text includes Pango markup.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_markup%3F-instance_method" title="#use_markup? (instance method)">#<strong>use_markup?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the text includes Pango markup.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Actor</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Actor.html#accessible-instance_method" title="Clutter::Actor#accessible (method)">#accessible</a></span>, <span class='object_link'><a href="Actor.html#actions-instance_method" title="Clutter::Actor#actions (method)">#actions</a></span>, <span class='object_link'><a href="Actor.html#actions=-instance_method" title="Clutter::Actor#actions= (method)">#actions=</a></span>, <span class='object_link'><a href="Actor.html#add_action-instance_method" title="Clutter::Actor#add_action (method)">#add_action</a></span>, <span class='object_link'><a href="Actor.html#add_action_with_name-instance_method" title="Clutter::Actor#add_action_with_name (method)">#add_action_with_name</a></span>, <span class='object_link'><a href="Actor.html#add_child-instance_method" title="Clutter::Actor#add_child (method)">#add_child</a></span>, <span class='object_link'><a href="Actor.html#add_constraint-instance_method" title="Clutter::Actor#add_constraint (method)">#add_constraint</a></span>, <span class='object_link'><a href="Actor.html#add_constraint_with_name-instance_method" title="Clutter::Actor#add_constraint_with_name (method)">#add_constraint_with_name</a></span>, <span class='object_link'><a href="Actor.html#add_effect-instance_method" title="Clutter::Actor#add_effect (method)">#add_effect</a></span>, <span class='object_link'><a href="Actor.html#add_effect_with_name-instance_method" title="Clutter::Actor#add_effect_with_name (method)">#add_effect_with_name</a></span>, <span class='object_link'><a href="Actor.html#add_transition-instance_method" title="Clutter::Actor#add_transition (method)">#add_transition</a></span>, <span class='object_link'><a href="Actor.html#allocate-instance_method" title="Clutter::Actor#allocate (method)">#allocate</a></span>, <span class='object_link'><a href="Actor.html#allocate_align_fill-instance_method" title="Clutter::Actor#allocate_align_fill (method)">#allocate_align_fill</a></span>, <span class='object_link'><a href="Actor.html#allocate_available_size-instance_method" title="Clutter::Actor#allocate_available_size (method)">#allocate_available_size</a></span>, <span class='object_link'><a href="Actor.html#allocate_preferred_size-instance_method" title="Clutter::Actor#allocate_preferred_size (method)">#allocate_preferred_size</a></span>, <span class='object_link'><a href="Actor.html#allocation-instance_method" title="Clutter::Actor#allocation (method)">#allocation</a></span>, <span class='object_link'><a href="Actor.html#allocation=-instance_method" title="Clutter::Actor#allocation= (method)">#allocation=</a></span>, <span class='object_link'><a href="Actor.html#anchor_gravity-instance_method" title="Clutter::Actor#anchor_gravity (method)">#anchor_gravity</a></span>, <span class='object_link'><a href="Actor.html#anchor_gravity=-instance_method" title="Clutter::Actor#anchor_gravity= (method)">#anchor_gravity=</a></span>, <span class='object_link'><a href="Actor.html#anchor_point_from_gravity=-instance_method" title="Clutter::Actor#anchor_point_from_gravity= (method)">#anchor_point_from_gravity=</a></span>, <span class='object_link'><a href="Actor.html#anchor_point_gravity-instance_method" title="Clutter::Actor#anchor_point_gravity (method)">#anchor_point_gravity</a></span>, <span class='object_link'><a href="Actor.html#anchor_x-instance_method" title="Clutter::Actor#anchor_x (method)">#anchor_x</a></span>, <span class='object_link'><a href="Actor.html#anchor_x=-instance_method" title="Clutter::Actor#anchor_x= (method)">#anchor_x=</a></span>, <span class='object_link'><a href="Actor.html#anchor_y-instance_method" title="Clutter::Actor#anchor_y (method)">#anchor_y</a></span>, <span class='object_link'><a href="Actor.html#anchor_y=-instance_method" title="Clutter::Actor#anchor_y= (method)">#anchor_y=</a></span>, <span class='object_link'><a href="Actor.html#animate-instance_method" title="Clutter::Actor#animate (method)">#animate</a></span>, <span class='object_link'><a href="Actor.html#animate_with_alpha-instance_method" title="Clutter::Actor#animate_with_alpha (method)">#animate_with_alpha</a></span>, <span class='object_link'><a href="Actor.html#animate_with_alphav-instance_method" title="Clutter::Actor#animate_with_alphav (method)">#animate_with_alphav</a></span>, <span class='object_link'><a href="Actor.html#animate_with_timeline-instance_method" title="Clutter::Actor#animate_with_timeline (method)">#animate_with_timeline</a></span>, <span class='object_link'><a href="Actor.html#animate_with_timelinev-instance_method" title="Clutter::Actor#animate_with_timelinev (method)">#animate_with_timelinev</a></span>, <span class='object_link'><a href="Actor.html#animatev-instance_method" title="Clutter::Actor#animatev (method)">#animatev</a></span>, <span class='object_link'><a href="Actor.html#animation-instance_method" title="Clutter::Actor#animation (method)">#animation</a></span>, <span class='object_link'><a href="Actor.html#apply_relative_transform_to_point-instance_method" title="Clutter::Actor#apply_relative_transform_to_point (method)">#apply_relative_transform_to_point</a></span>, <span class='object_link'><a href="Actor.html#apply_transform_to_point-instance_method" title="Clutter::Actor#apply_transform_to_point (method)">#apply_transform_to_point</a></span>, <span class='object_link'><a href="Actor.html#background_color-instance_method" title="Clutter::Actor#background_color (method)">#background_color</a></span>, <span class='object_link'><a href="Actor.html#background_color=-instance_method" title="Clutter::Actor#background_color= (method)">#background_color=</a></span>, <span class='object_link'><a href="Actor.html#background_color_set=-instance_method" title="Clutter::Actor#background_color_set= (method)">#background_color_set=</a></span>, <span class='object_link'><a href="Actor.html#background_color_set%3F-instance_method" title="Clutter::Actor#background_color_set? (method)">#background_color_set?</a></span>, <span class='object_link'><a href="Actor.html#bind_model-instance_method" title="Clutter::Actor#bind_model (method)">#bind_model</a></span>, <span class='object_link'><a href="Actor.html#bind_model_with_properties-instance_method" title="Clutter::Actor#bind_model_with_properties (method)">#bind_model_with_properties</a></span>, <span class='object_link'><a href="Actor.html#child_transform-instance_method" title="Clutter::Actor#child_transform (method)">#child_transform</a></span>, <span class='object_link'><a href="Actor.html#child_transform=-instance_method" title="Clutter::Actor#child_transform= (method)">#child_transform=</a></span>, <span class='object_link'><a href="Actor.html#child_transform_set=-instance_method" title="Clutter::Actor#child_transform_set= (method)">#child_transform_set=</a></span>, <span class='object_link'><a href="Actor.html#child_transform_set%3F-instance_method" title="Clutter::Actor#child_transform_set? (method)">#child_transform_set?</a></span>, <span class='object_link'><a href="Actor.html#children-instance_method" title="Clutter::Actor#children (method)">#children</a></span>, <span class='object_link'><a href="Actor.html#clear_actions-instance_method" title="Clutter::Actor#clear_actions (method)">#clear_actions</a></span>, <span class='object_link'><a href="Actor.html#clear_constraints-instance_method" title="Clutter::Actor#clear_constraints (method)">#clear_constraints</a></span>, <span class='object_link'><a href="Actor.html#clear_effects-instance_method" title="Clutter::Actor#clear_effects (method)">#clear_effects</a></span>, <span class='object_link'><a href="Actor.html#clip-instance_method" title="Clutter::Actor#clip (method)">#clip</a></span>, <span class='object_link'><a href="Actor.html#clip=-instance_method" title="Clutter::Actor#clip= (method)">#clip=</a></span>, <span class='object_link'><a href="Actor.html#clip_rect-instance_method" title="Clutter::Actor#clip_rect (method)">#clip_rect</a></span>, <span class='object_link'><a href="Actor.html#clip_rect=-instance_method" title="Clutter::Actor#clip_rect= (method)">#clip_rect=</a></span>, <span class='object_link'><a href="Actor.html#clip_to_allocation-instance_method" title="Clutter::Actor#clip_to_allocation (method)">#clip_to_allocation</a></span>, <span class='object_link'><a href="Actor.html#clip_to_allocation=-instance_method" title="Clutter::Actor#clip_to_allocation= (method)">#clip_to_allocation=</a></span>, <span class='object_link'><a href="Actor.html#clip_to_allocation%3F-instance_method" title="Clutter::Actor#clip_to_allocation? (method)">#clip_to_allocation?</a></span>, <span class='object_link'><a href="Actor.html#constraints-instance_method" title="Clutter::Actor#constraints (method)">#constraints</a></span>, <span class='object_link'><a href="Actor.html#constraints=-instance_method" title="Clutter::Actor#constraints= (method)">#constraints=</a></span>, <span class='object_link'><a href="Actor.html#contains-instance_method" title="Clutter::Actor#contains (method)">#contains</a></span>, <span class='object_link'><a href="Actor.html#content-instance_method" title="Clutter::Actor#content (method)">#content</a></span>, <span class='object_link'><a href="Actor.html#content=-instance_method" title="Clutter::Actor#content= (method)">#content=</a></span>, <span class='object_link'><a href="Actor.html#content_box-instance_method" title="Clutter::Actor#content_box (method)">#content_box</a></span>, <span class='object_link'><a href="Actor.html#content_box=-instance_method" title="Clutter::Actor#content_box= (method)">#content_box=</a></span>, <span class='object_link'><a href="Actor.html#content_gravity-instance_method" title="Clutter::Actor#content_gravity (method)">#content_gravity</a></span>, <span class='object_link'><a href="Actor.html#content_gravity=-instance_method" title="Clutter::Actor#content_gravity= (method)">#content_gravity=</a></span>, <span class='object_link'><a href="Actor.html#content_repeat-instance_method" title="Clutter::Actor#content_repeat (method)">#content_repeat</a></span>, <span class='object_link'><a href="Actor.html#content_repeat=-instance_method" title="Clutter::Actor#content_repeat= (method)">#content_repeat=</a></span>, <span class='object_link'><a href="Actor.html#continue_paint-instance_method" title="Clutter::Actor#continue_paint (method)">#continue_paint</a></span>, <span class='object_link'><a href="Actor.html#create_pango_context-instance_method" title="Clutter::Actor#create_pango_context (method)">#create_pango_context</a></span>, <span class='object_link'><a href="Actor.html#create_pango_layout-instance_method" title="Clutter::Actor#create_pango_layout (method)">#create_pango_layout</a></span>, <span class='object_link'><a href="Actor.html#default_paint_volume-instance_method" title="Clutter::Actor#default_paint_volume (method)">#default_paint_volume</a></span>, <span class='object_link'><a href="Actor.html#depth-instance_method" title="Clutter::Actor#depth (method)">#depth</a></span>, <span class='object_link'><a href="Actor.html#depth=-instance_method" title="Clutter::Actor#depth= (method)">#depth=</a></span>, <span class='object_link'><a href="Actor.html#destroy-instance_method" title="Clutter::Actor#destroy (method)">#destroy</a></span>, <span class='object_link'><a href="Actor.html#destroy_all_children-instance_method" title="Clutter::Actor#destroy_all_children (method)">#destroy_all_children</a></span>, <span class='object_link'><a href="Actor.html#detach_animation-instance_method" title="Clutter::Actor#detach_animation (method)">#detach_animation</a></span>, <span class='object_link'><a href="Actor.html#easing_delay-instance_method" title="Clutter::Actor#easing_delay (method)">#easing_delay</a></span>, <span class='object_link'><a href="Actor.html#easing_delay=-instance_method" title="Clutter::Actor#easing_delay= (method)">#easing_delay=</a></span>, <span class='object_link'><a href="Actor.html#easing_duration-instance_method" title="Clutter::Actor#easing_duration (method)">#easing_duration</a></span>, <span class='object_link'><a href="Actor.html#easing_duration=-instance_method" title="Clutter::Actor#easing_duration= (method)">#easing_duration=</a></span>, <span class='object_link'><a href="Actor.html#easing_mode-instance_method" title="Clutter::Actor#easing_mode (method)">#easing_mode</a></span>, <span class='object_link'><a href="Actor.html#easing_mode=-instance_method" title="Clutter::Actor#easing_mode= (method)">#easing_mode=</a></span>, <span class='object_link'><a href="Actor.html#effect=-instance_method" title="Clutter::Actor#effect= (method)">#effect=</a></span>, <span class='object_link'><a href="Actor.html#effects-instance_method" title="Clutter::Actor#effects (method)">#effects</a></span>, <span class='object_link'><a href="Actor.html#event-instance_method" title="Clutter::Actor#event (method)">#event</a></span>, <span class='object_link'><a href="Actor.html#first_child-instance_method" title="Clutter::Actor#first_child (method)">#first_child</a></span>, <span class='object_link'><a href="Actor.html#first_child=-instance_method" title="Clutter::Actor#first_child= (method)">#first_child=</a></span>, <span class='object_link'><a href="Actor.html#fixed_position_set-instance_method" title="Clutter::Actor#fixed_position_set (method)">#fixed_position_set</a></span>, <span class='object_link'><a href="Actor.html#fixed_position_set=-instance_method" title="Clutter::Actor#fixed_position_set= (method)">#fixed_position_set=</a></span>, <span class='object_link'><a href="Actor.html#fixed_position_set%3F-instance_method" title="Clutter::Actor#fixed_position_set? (method)">#fixed_position_set?</a></span>, <span class='object_link'><a href="Actor.html#fixed_x-instance_method" title="Clutter::Actor#fixed_x (method)">#fixed_x</a></span>, <span class='object_link'><a href="Actor.html#fixed_x=-instance_method" title="Clutter::Actor#fixed_x= (method)">#fixed_x=</a></span>, <span class='object_link'><a href="Actor.html#fixed_y-instance_method" title="Clutter::Actor#fixed_y (method)">#fixed_y</a></span>, <span class='object_link'><a href="Actor.html#fixed_y=-instance_method" title="Clutter::Actor#fixed_y= (method)">#fixed_y=</a></span>, <span class='object_link'><a href="Actor.html#flags-instance_method" title="Clutter::Actor#flags (method)">#flags</a></span>, <span class='object_link'><a href="Actor.html#flags=-instance_method" title="Clutter::Actor#flags= (method)">#flags=</a></span>, <span class='object_link'><a href="Actor.html#geometry=-instance_method" title="Clutter::Actor#geometry= (method)">#geometry=</a></span>, <span class='object_link'><a href="Actor.html#get_abs_allocation_vertices-instance_method" title="Clutter::Actor#get_abs_allocation_vertices (method)">#get_abs_allocation_vertices</a></span>, <span class='object_link'><a href="Actor.html#get_action-instance_method" title="Clutter::Actor#get_action (method)">#get_action</a></span>, <span class='object_link'><a href="Actor.html#get_allocation_box-instance_method" title="Clutter::Actor#get_allocation_box (method)">#get_allocation_box</a></span>, <span class='object_link'><a href="Actor.html#get_allocation_geometry-instance_method" title="Clutter::Actor#get_allocation_geometry (method)">#get_allocation_geometry</a></span>, <span class='object_link'><a href="Actor.html#get_allocation_vertices-instance_method" title="Clutter::Actor#get_allocation_vertices (method)">#get_allocation_vertices</a></span>, <span class='object_link'><a href="Actor.html#get_anchor_point-instance_method" title="Clutter::Actor#get_anchor_point (method)">#get_anchor_point</a></span>, <span class='object_link'><a href="Actor.html#get_background_color-instance_method" title="Clutter::Actor#get_background_color (method)">#get_background_color</a></span>, <span class='object_link'><a href="Actor.html#get_child_at_index-instance_method" title="Clutter::Actor#get_child_at_index (method)">#get_child_at_index</a></span>, <span class='object_link'><a href="Actor.html#get_child_transform-instance_method" title="Clutter::Actor#get_child_transform (method)">#get_child_transform</a></span>, <span class='object_link'><a href="Actor.html#get_clip-instance_method" title="Clutter::Actor#get_clip (method)">#get_clip</a></span>, <span class='object_link'><a href="Actor.html#get_constraint-instance_method" title="Clutter::Actor#get_constraint (method)">#get_constraint</a></span>, <span class='object_link'><a href="Actor.html#get_content_box-instance_method" title="Clutter::Actor#get_content_box (method)">#get_content_box</a></span>, <span class='object_link'><a href="Actor.html#get_content_scaling_filters-instance_method" title="Clutter::Actor#get_content_scaling_filters (method)">#get_content_scaling_filters</a></span>, <span class='object_link'><a href="Actor.html#get_effect-instance_method" title="Clutter::Actor#get_effect (method)">#get_effect</a></span>, <span class='object_link'><a href="Actor.html#get_geometry-instance_method" title="Clutter::Actor#get_geometry (method)">#get_geometry</a></span>, <span class='object_link'><a href="Actor.html#get_margin-instance_method" title="Clutter::Actor#get_margin (method)">#get_margin</a></span>, <span class='object_link'><a href="Actor.html#get_paint_box-instance_method" title="Clutter::Actor#get_paint_box (method)">#get_paint_box</a></span>, <span class='object_link'><a href="Actor.html#get_pivot_point-instance_method" title="Clutter::Actor#get_pivot_point (method)">#get_pivot_point</a></span>, <span class='object_link'><a href="Actor.html#get_position-instance_method" title="Clutter::Actor#get_position (method)">#get_position</a></span>, <span class='object_link'><a href="Actor.html#get_preferred_height-instance_method" title="Clutter::Actor#get_preferred_height (method)">#get_preferred_height</a></span>, <span class='object_link'><a href="Actor.html#get_preferred_size-instance_method" title="Clutter::Actor#get_preferred_size (method)">#get_preferred_size</a></span>, <span class='object_link'><a href="Actor.html#get_preferred_width-instance_method" title="Clutter::Actor#get_preferred_width (method)">#get_preferred_width</a></span>, <span class='object_link'><a href="Actor.html#get_rotation-instance_method" title="Clutter::Actor#get_rotation (method)">#get_rotation</a></span>, <span class='object_link'><a href="Actor.html#get_rotation_angle-instance_method" title="Clutter::Actor#get_rotation_angle (method)">#get_rotation_angle</a></span>, <span class='object_link'><a href="Actor.html#get_scale-instance_method" title="Clutter::Actor#get_scale (method)">#get_scale</a></span>, <span class='object_link'><a href="Actor.html#get_scale_center-instance_method" title="Clutter::Actor#get_scale_center (method)">#get_scale_center</a></span>, <span class='object_link'><a href="Actor.html#get_size-instance_method" title="Clutter::Actor#get_size (method)">#get_size</a></span>, <span class='object_link'><a href="Actor.html#get_transform-instance_method" title="Clutter::Actor#get_transform (method)">#get_transform</a></span>, <span class='object_link'><a href="Actor.html#get_transformation_matrix-instance_method" title="Clutter::Actor#get_transformation_matrix (method)">#get_transformation_matrix</a></span>, <span class='object_link'><a href="Actor.html#get_transformed_paint_volume-instance_method" title="Clutter::Actor#get_transformed_paint_volume (method)">#get_transformed_paint_volume</a></span>, <span class='object_link'><a href="Actor.html#get_transformed_position-instance_method" title="Clutter::Actor#get_transformed_position (method)">#get_transformed_position</a></span>, <span class='object_link'><a href="Actor.html#get_transformed_size-instance_method" title="Clutter::Actor#get_transformed_size (method)">#get_transformed_size</a></span>, <span class='object_link'><a href="Actor.html#get_transition-instance_method" title="Clutter::Actor#get_transition (method)">#get_transition</a></span>, <span class='object_link'><a href="Actor.html#get_translation-instance_method" title="Clutter::Actor#get_translation (method)">#get_translation</a></span>, <span class='object_link'><a href="Actor.html#gid-instance_method" title="Clutter::Actor#gid (method)">#gid</a></span>, <span class='object_link'><a href="Actor.html#grab_key_focus-instance_method" title="Clutter::Actor#grab_key_focus (method)">#grab_key_focus</a></span>, <span class='object_link'><a href="Actor.html#has_actions-instance_method" title="Clutter::Actor#has_actions (method)">#has_actions</a></span>, <span class='object_link'><a href="Actor.html#has_allocation-instance_method" title="Clutter::Actor#has_allocation (method)">#has_allocation</a></span>, <span class='object_link'><a href="Actor.html#has_clip-instance_method" title="Clutter::Actor#has_clip (method)">#has_clip</a></span>, <span class='object_link'><a href="Actor.html#has_clip=-instance_method" title="Clutter::Actor#has_clip= (method)">#has_clip=</a></span>, <span class='object_link'><a href="Actor.html#has_clip%3F-instance_method" title="Clutter::Actor#has_clip? (method)">#has_clip?</a></span>, <span class='object_link'><a href="Actor.html#has_constraints-instance_method" title="Clutter::Actor#has_constraints (method)">#has_constraints</a></span>, <span class='object_link'><a href="Actor.html#has_effects-instance_method" title="Clutter::Actor#has_effects (method)">#has_effects</a></span>, <span class='object_link'><a href="Actor.html#has_key_focus-instance_method" title="Clutter::Actor#has_key_focus (method)">#has_key_focus</a></span>, <span class='object_link'><a href="Actor.html#has_overlaps-instance_method" title="Clutter::Actor#has_overlaps (method)">#has_overlaps</a></span>, <span class='object_link'><a href="Actor.html#has_pointer-instance_method" title="Clutter::Actor#has_pointer (method)">#has_pointer</a></span>, <span class='object_link'><a href="Actor.html#has_pointer=-instance_method" title="Clutter::Actor#has_pointer= (method)">#has_pointer=</a></span>, <span class='object_link'><a href="Actor.html#has_pointer%3F-instance_method" title="Clutter::Actor#has_pointer? (method)">#has_pointer?</a></span>, <span class='object_link'><a href="Actor.html#height-instance_method" title="Clutter::Actor#height (method)">#height</a></span>, <span class='object_link'><a href="Actor.html#height=-instance_method" title="Clutter::Actor#height= (method)">#height=</a></span>, <span class='object_link'><a href="Actor.html#hide-instance_method" title="Clutter::Actor#hide (method)">#hide</a></span>, <span class='object_link'><a href="Actor.html#hide_all-instance_method" title="Clutter::Actor#hide_all (method)">#hide_all</a></span>, <span class='object_link'><a href="Actor.html#insert_child_above-instance_method" title="Clutter::Actor#insert_child_above (method)">#insert_child_above</a></span>, <span class='object_link'><a href="Actor.html#insert_child_at_index-instance_method" title="Clutter::Actor#insert_child_at_index (method)">#insert_child_at_index</a></span>, <span class='object_link'><a href="Actor.html#insert_child_below-instance_method" title="Clutter::Actor#insert_child_below (method)">#insert_child_below</a></span>, <span class='object_link'><a href="Actor.html#is_in_clone_paint-instance_method" title="Clutter::Actor#is_in_clone_paint (method)">#is_in_clone_paint</a></span>, <span class='object_link'><a href="Actor.html#is_mapped-instance_method" title="Clutter::Actor#is_mapped (method)">#is_mapped</a></span>, <span class='object_link'><a href="Actor.html#is_realized-instance_method" title="Clutter::Actor#is_realized (method)">#is_realized</a></span>, <span class='object_link'><a href="Actor.html#is_rotated-instance_method" title="Clutter::Actor#is_rotated (method)">#is_rotated</a></span>, <span class='object_link'><a href="Actor.html#is_scaled-instance_method" title="Clutter::Actor#is_scaled (method)">#is_scaled</a></span>, <span class='object_link'><a href="Actor.html#is_visible-instance_method" title="Clutter::Actor#is_visible (method)">#is_visible</a></span>, <span class='object_link'><a href="Actor.html#last_child-instance_method" title="Clutter::Actor#last_child (method)">#last_child</a></span>, <span class='object_link'><a href="Actor.html#last_child=-instance_method" title="Clutter::Actor#last_child= (method)">#last_child=</a></span>, <span class='object_link'><a href="Actor.html#layout_manager-instance_method" title="Clutter::Actor#layout_manager (method)">#layout_manager</a></span>, <span class='object_link'><a href="Actor.html#layout_manager=-instance_method" title="Clutter::Actor#layout_manager= (method)">#layout_manager=</a></span>, <span class='object_link'><a href="Actor.html#lower-instance_method" title="Clutter::Actor#lower (method)">#lower</a></span>, <span class='object_link'><a href="Actor.html#lower_bottom-instance_method" title="Clutter::Actor#lower_bottom (method)">#lower_bottom</a></span>, <span class='object_link'><a href="Actor.html#magnification_filter-instance_method" title="Clutter::Actor#magnification_filter (method)">#magnification_filter</a></span>, <span class='object_link'><a href="Actor.html#magnification_filter=-instance_method" title="Clutter::Actor#magnification_filter= (method)">#magnification_filter=</a></span>, <span class='object_link'><a href="Actor.html#map-instance_method" title="Clutter::Actor#map (method)">#map</a></span>, <span class='object_link'><a href="Actor.html#mapped=-instance_method" title="Clutter::Actor#mapped= (method)">#mapped=</a></span>, <span class='object_link'><a href="Actor.html#mapped%3F-instance_method" title="Clutter::Actor#mapped? (method)">#mapped?</a></span>, <span class='object_link'><a href="Actor.html#margin=-instance_method" title="Clutter::Actor#margin= (method)">#margin=</a></span>, <span class='object_link'><a href="Actor.html#margin_bottom-instance_method" title="Clutter::Actor#margin_bottom (method)">#margin_bottom</a></span>, <span class='object_link'><a href="Actor.html#margin_bottom=-instance_method" title="Clutter::Actor#margin_bottom= (method)">#margin_bottom=</a></span>, <span class='object_link'><a href="Actor.html#margin_left-instance_method" title="Clutter::Actor#margin_left (method)">#margin_left</a></span>, <span class='object_link'><a href="Actor.html#margin_left=-instance_method" title="Clutter::Actor#margin_left= (method)">#margin_left=</a></span>, <span class='object_link'><a href="Actor.html#margin_right-instance_method" title="Clutter::Actor#margin_right (method)">#margin_right</a></span>, <span class='object_link'><a href="Actor.html#margin_right=-instance_method" title="Clutter::Actor#margin_right= (method)">#margin_right=</a></span>, <span class='object_link'><a href="Actor.html#margin_top-instance_method" title="Clutter::Actor#margin_top (method)">#margin_top</a></span>, <span class='object_link'><a href="Actor.html#margin_top=-instance_method" title="Clutter::Actor#margin_top= (method)">#margin_top=</a></span>, <span class='object_link'><a href="Actor.html#min_height-instance_method" title="Clutter::Actor#min_height (method)">#min_height</a></span>, <span class='object_link'><a href="Actor.html#min_height=-instance_method" title="Clutter::Actor#min_height= (method)">#min_height=</a></span>, <span class='object_link'><a href="Actor.html#min_height_set=-instance_method" title="Clutter::Actor#min_height_set= (method)">#min_height_set=</a></span>, <span class='object_link'><a href="Actor.html#min_height_set%3F-instance_method" title="Clutter::Actor#min_height_set? (method)">#min_height_set?</a></span>, <span class='object_link'><a href="Actor.html#min_width-instance_method" title="Clutter::Actor#min_width (method)">#min_width</a></span>, <span class='object_link'><a href="Actor.html#min_width=-instance_method" title="Clutter::Actor#min_width= (method)">#min_width=</a></span>, <span class='object_link'><a href="Actor.html#min_width_set=-instance_method" title="Clutter::Actor#min_width_set= (method)">#min_width_set=</a></span>, <span class='object_link'><a href="Actor.html#min_width_set%3F-instance_method" title="Clutter::Actor#min_width_set? (method)">#min_width_set?</a></span>, <span class='object_link'><a href="Actor.html#minification_filter-instance_method" title="Clutter::Actor#minification_filter (method)">#minification_filter</a></span>, <span class='object_link'><a href="Actor.html#minification_filter=-instance_method" title="Clutter::Actor#minification_filter= (method)">#minification_filter=</a></span>, <span class='object_link'><a href="Actor.html#move_anchor_point-instance_method" title="Clutter::Actor#move_anchor_point (method)">#move_anchor_point</a></span>, <span class='object_link'><a href="Actor.html#move_anchor_point_from_gravity-instance_method" title="Clutter::Actor#move_anchor_point_from_gravity (method)">#move_anchor_point_from_gravity</a></span>, <span class='object_link'><a href="Actor.html#move_by-instance_method" title="Clutter::Actor#move_by (method)">#move_by</a></span>, <span class='object_link'><a href="Actor.html#n_children-instance_method" title="Clutter::Actor#n_children (method)">#n_children</a></span>, <span class='object_link'><a href="Actor.html#name-instance_method" title="Clutter::Actor#name (method)">#name</a></span>, <span class='object_link'><a href="Actor.html#name=-instance_method" title="Clutter::Actor#name= (method)">#name=</a></span>, <span class='object_link'><a href="Actor.html#natural_height-instance_method" title="Clutter::Actor#natural_height (method)">#natural_height</a></span>, <span class='object_link'><a href="Actor.html#natural_height=-instance_method" title="Clutter::Actor#natural_height= (method)">#natural_height=</a></span>, <span class='object_link'><a href="Actor.html#natural_height_set=-instance_method" title="Clutter::Actor#natural_height_set= (method)">#natural_height_set=</a></span>, <span class='object_link'><a href="Actor.html#natural_height_set%3F-instance_method" title="Clutter::Actor#natural_height_set? (method)">#natural_height_set?</a></span>, <span class='object_link'><a href="Actor.html#natural_width-instance_method" title="Clutter::Actor#natural_width (method)">#natural_width</a></span>, <span class='object_link'><a href="Actor.html#natural_width=-instance_method" title="Clutter::Actor#natural_width= (method)">#natural_width=</a></span>, <span class='object_link'><a href="Actor.html#natural_width_set=-instance_method" title="Clutter::Actor#natural_width_set= (method)">#natural_width_set=</a></span>, <span class='object_link'><a href="Actor.html#natural_width_set%3F-instance_method" title="Clutter::Actor#natural_width_set? (method)">#natural_width_set?</a></span>, <span class='object_link'><a href="Actor.html#needs_expand-instance_method" title="Clutter::Actor#needs_expand (method)">#needs_expand</a></span>, <span class='object_link'><a href="Actor.html#next_sibling-instance_method" title="Clutter::Actor#next_sibling (method)">#next_sibling</a></span>, <span class='object_link'><a href="Actor.html#offscreen_redirect-instance_method" title="Clutter::Actor#offscreen_redirect (method)">#offscreen_redirect</a></span>, <span class='object_link'><a href="Actor.html#offscreen_redirect=-instance_method" title="Clutter::Actor#offscreen_redirect= (method)">#offscreen_redirect=</a></span>, <span class='object_link'><a href="Actor.html#opacity-instance_method" title="Clutter::Actor#opacity (method)">#opacity</a></span>, <span class='object_link'><a href="Actor.html#opacity=-instance_method" title="Clutter::Actor#opacity= (method)">#opacity=</a></span>, <span class='object_link'><a href="Actor.html#paint-instance_method" title="Clutter::Actor#paint (method)">#paint</a></span>, <span class='object_link'><a href="Actor.html#paint_opacity-instance_method" title="Clutter::Actor#paint_opacity (method)">#paint_opacity</a></span>, <span class='object_link'><a href="Actor.html#paint_visibility-instance_method" title="Clutter::Actor#paint_visibility (method)">#paint_visibility</a></span>, <span class='object_link'><a href="Actor.html#paint_volume-instance_method" title="Clutter::Actor#paint_volume (method)">#paint_volume</a></span>, <span class='object_link'><a href="Actor.html#pango_context-instance_method" title="Clutter::Actor#pango_context (method)">#pango_context</a></span>, <span class='object_link'><a href="Actor.html#parent-instance_method" title="Clutter::Actor#parent (method)">#parent</a></span>, <span class='object_link'><a href="Actor.html#parent=-instance_method" title="Clutter::Actor#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="Actor.html#pivot_point-instance_method" title="Clutter::Actor#pivot_point (method)">#pivot_point</a></span>, <span class='object_link'><a href="Actor.html#pivot_point=-instance_method" title="Clutter::Actor#pivot_point= (method)">#pivot_point=</a></span>, <span class='object_link'><a href="Actor.html#pivot_point_z-instance_method" title="Clutter::Actor#pivot_point_z (method)">#pivot_point_z</a></span>, <span class='object_link'><a href="Actor.html#pivot_point_z=-instance_method" title="Clutter::Actor#pivot_point_z= (method)">#pivot_point_z=</a></span>, <span class='object_link'><a href="Actor.html#pop_internal-instance_method" title="Clutter::Actor#pop_internal (method)">#pop_internal</a></span>, <span class='object_link'><a href="Actor.html#previous_sibling-instance_method" title="Clutter::Actor#previous_sibling (method)">#previous_sibling</a></span>, <span class='object_link'><a href="Actor.html#push_internal-instance_method" title="Clutter::Actor#push_internal (method)">#push_internal</a></span>, <span class='object_link'><a href="Actor.html#queue_redraw-instance_method" title="Clutter::Actor#queue_redraw (method)">#queue_redraw</a></span>, <span class='object_link'><a href="Actor.html#queue_redraw_with_clip-instance_method" title="Clutter::Actor#queue_redraw_with_clip (method)">#queue_redraw_with_clip</a></span>, <span class='object_link'><a href="Actor.html#queue_relayout-instance_method" title="Clutter::Actor#queue_relayout (method)">#queue_relayout</a></span>, <span class='object_link'><a href="Actor.html#raise-instance_method" title="Clutter::Actor#raise (method)">#raise</a></span>, <span class='object_link'><a href="Actor.html#raise_top-instance_method" title="Clutter::Actor#raise_top (method)">#raise_top</a></span>, <span class='object_link'><a href="Actor.html#reactive-instance_method" title="Clutter::Actor#reactive (method)">#reactive</a></span>, <span class='object_link'><a href="Actor.html#reactive=-instance_method" title="Clutter::Actor#reactive= (method)">#reactive=</a></span>, <span class='object_link'><a href="Actor.html#reactive%3F-instance_method" title="Clutter::Actor#reactive? (method)">#reactive?</a></span>, <span class='object_link'><a href="Actor.html#realize-instance_method" title="Clutter::Actor#realize (method)">#realize</a></span>, <span class='object_link'><a href="Actor.html#realized=-instance_method" title="Clutter::Actor#realized= (method)">#realized=</a></span>, <span class='object_link'><a href="Actor.html#realized%3F-instance_method" title="Clutter::Actor#realized? (method)">#realized?</a></span>, <span class='object_link'><a href="Actor.html#remove_action-instance_method" title="Clutter::Actor#remove_action (method)">#remove_action</a></span>, <span class='object_link'><a href="Actor.html#remove_action_by_name-instance_method" title="Clutter::Actor#remove_action_by_name (method)">#remove_action_by_name</a></span>, <span class='object_link'><a href="Actor.html#remove_all_children-instance_method" title="Clutter::Actor#remove_all_children (method)">#remove_all_children</a></span>, <span class='object_link'><a href="Actor.html#remove_all_transitions-instance_method" title="Clutter::Actor#remove_all_transitions (method)">#remove_all_transitions</a></span>, <span class='object_link'><a href="Actor.html#remove_child-instance_method" title="Clutter::Actor#remove_child (method)">#remove_child</a></span>, <span class='object_link'><a href="Actor.html#remove_clip-instance_method" title="Clutter::Actor#remove_clip (method)">#remove_clip</a></span>, <span class='object_link'><a href="Actor.html#remove_constraint-instance_method" title="Clutter::Actor#remove_constraint (method)">#remove_constraint</a></span>, <span class='object_link'><a href="Actor.html#remove_constraint_by_name-instance_method" title="Clutter::Actor#remove_constraint_by_name (method)">#remove_constraint_by_name</a></span>, <span class='object_link'><a href="Actor.html#remove_effect-instance_method" title="Clutter::Actor#remove_effect (method)">#remove_effect</a></span>, <span class='object_link'><a href="Actor.html#remove_effect_by_name-instance_method" title="Clutter::Actor#remove_effect_by_name (method)">#remove_effect_by_name</a></span>, <span class='object_link'><a href="Actor.html#remove_transition-instance_method" title="Clutter::Actor#remove_transition (method)">#remove_transition</a></span>, <span class='object_link'><a href="Actor.html#reparent-instance_method" title="Clutter::Actor#reparent (method)">#reparent</a></span>, <span class='object_link'><a href="Actor.html#replace_child-instance_method" title="Clutter::Actor#replace_child (method)">#replace_child</a></span>, <span class='object_link'><a href="Actor.html#request_mode-instance_method" title="Clutter::Actor#request_mode (method)">#request_mode</a></span>, <span class='object_link'><a href="Actor.html#request_mode=-instance_method" title="Clutter::Actor#request_mode= (method)">#request_mode=</a></span>, <span class='object_link'><a href="Actor.html#restore_easing_state-instance_method" title="Clutter::Actor#restore_easing_state (method)">#restore_easing_state</a></span>, <span class='object_link'><a href="Actor.html#rotation_angle_x-instance_method" title="Clutter::Actor#rotation_angle_x (method)">#rotation_angle_x</a></span>, <span class='object_link'><a href="Actor.html#rotation_angle_x=-instance_method" title="Clutter::Actor#rotation_angle_x= (method)">#rotation_angle_x=</a></span>, <span class='object_link'><a href="Actor.html#rotation_angle_y-instance_method" title="Clutter::Actor#rotation_angle_y (method)">#rotation_angle_y</a></span>, <span class='object_link'><a href="Actor.html#rotation_angle_y=-instance_method" title="Clutter::Actor#rotation_angle_y= (method)">#rotation_angle_y=</a></span>, <span class='object_link'><a href="Actor.html#rotation_angle_z-instance_method" title="Clutter::Actor#rotation_angle_z (method)">#rotation_angle_z</a></span>, <span class='object_link'><a href="Actor.html#rotation_angle_z=-instance_method" title="Clutter::Actor#rotation_angle_z= (method)">#rotation_angle_z=</a></span>, <span class='object_link'><a href="Actor.html#rotation_center_x-instance_method" title="Clutter::Actor#rotation_center_x (method)">#rotation_center_x</a></span>, <span class='object_link'><a href="Actor.html#rotation_center_x=-instance_method" title="Clutter::Actor#rotation_center_x= (method)">#rotation_center_x=</a></span>, <span class='object_link'><a href="Actor.html#rotation_center_y-instance_method" title="Clutter::Actor#rotation_center_y (method)">#rotation_center_y</a></span>, <span class='object_link'><a href="Actor.html#rotation_center_y=-instance_method" title="Clutter::Actor#rotation_center_y= (method)">#rotation_center_y=</a></span>, <span class='object_link'><a href="Actor.html#rotation_center_z-instance_method" title="Clutter::Actor#rotation_center_z (method)">#rotation_center_z</a></span>, <span class='object_link'><a href="Actor.html#rotation_center_z=-instance_method" title="Clutter::Actor#rotation_center_z= (method)">#rotation_center_z=</a></span>, <span class='object_link'><a href="Actor.html#rotation_center_z_gravity-instance_method" title="Clutter::Actor#rotation_center_z_gravity (method)">#rotation_center_z_gravity</a></span>, <span class='object_link'><a href="Actor.html#rotation_center_z_gravity=-instance_method" title="Clutter::Actor#rotation_center_z_gravity= (method)">#rotation_center_z_gravity=</a></span>, <span class='object_link'><a href="Actor.html#save_easing_state-instance_method" title="Clutter::Actor#save_easing_state (method)">#save_easing_state</a></span>, <span class='object_link'><a href="Actor.html#save_easing_state_without_block-instance_method" title="Clutter::Actor#save_easing_state_without_block (method)">#save_easing_state_without_block</a></span>, <span class='object_link'><a href="Actor.html#scale_center_x-instance_method" title="Clutter::Actor#scale_center_x (method)">#scale_center_x</a></span>, <span class='object_link'><a href="Actor.html#scale_center_x=-instance_method" title="Clutter::Actor#scale_center_x= (method)">#scale_center_x=</a></span>, <span class='object_link'><a href="Actor.html#scale_center_y-instance_method" title="Clutter::Actor#scale_center_y (method)">#scale_center_y</a></span>, <span class='object_link'><a href="Actor.html#scale_center_y=-instance_method" title="Clutter::Actor#scale_center_y= (method)">#scale_center_y=</a></span>, <span class='object_link'><a href="Actor.html#scale_gravity-instance_method" title="Clutter::Actor#scale_gravity (method)">#scale_gravity</a></span>, <span class='object_link'><a href="Actor.html#scale_gravity=-instance_method" title="Clutter::Actor#scale_gravity= (method)">#scale_gravity=</a></span>, <span class='object_link'><a href="Actor.html#scale_x-instance_method" title="Clutter::Actor#scale_x (method)">#scale_x</a></span>, <span class='object_link'><a href="Actor.html#scale_x=-instance_method" title="Clutter::Actor#scale_x= (method)">#scale_x=</a></span>, <span class='object_link'><a href="Actor.html#scale_y-instance_method" title="Clutter::Actor#scale_y (method)">#scale_y</a></span>, <span class='object_link'><a href="Actor.html#scale_y=-instance_method" title="Clutter::Actor#scale_y= (method)">#scale_y=</a></span>, <span class='object_link'><a href="Actor.html#scale_z-instance_method" title="Clutter::Actor#scale_z (method)">#scale_z</a></span>, <span class='object_link'><a href="Actor.html#scale_z=-instance_method" title="Clutter::Actor#scale_z= (method)">#scale_z=</a></span>, <span class='object_link'><a href="Actor.html#set_allocation-instance_method" title="Clutter::Actor#set_allocation (method)">#set_allocation</a></span>, <span class='object_link'><a href="Actor.html#set_anchor_point-instance_method" title="Clutter::Actor#set_anchor_point (method)">#set_anchor_point</a></span>, <span class='object_link'><a href="Actor.html#set_child_above_sibling-instance_method" title="Clutter::Actor#set_child_above_sibling (method)">#set_child_above_sibling</a></span>, <span class='object_link'><a href="Actor.html#set_child_at_index-instance_method" title="Clutter::Actor#set_child_at_index (method)">#set_child_at_index</a></span>, <span class='object_link'><a href="Actor.html#set_child_below_sibling-instance_method" title="Clutter::Actor#set_child_below_sibling (method)">#set_child_below_sibling</a></span>, <span class='object_link'><a href="Actor.html#set_clip-instance_method" title="Clutter::Actor#set_clip (method)">#set_clip</a></span>, <span class='object_link'><a href="Actor.html#set_content_scaling_filters-instance_method" title="Clutter::Actor#set_content_scaling_filters (method)">#set_content_scaling_filters</a></span>, <span class='object_link'><a href="Actor.html#set_pivot_point-instance_method" title="Clutter::Actor#set_pivot_point (method)">#set_pivot_point</a></span>, <span class='object_link'><a href="Actor.html#set_position-instance_method" title="Clutter::Actor#set_position (method)">#set_position</a></span>, <span class='object_link'><a href="Actor.html#set_rotation-instance_method" title="Clutter::Actor#set_rotation (method)">#set_rotation</a></span>, <span class='object_link'><a href="Actor.html#set_rotation_angle-instance_method" title="Clutter::Actor#set_rotation_angle (method)">#set_rotation_angle</a></span>, <span class='object_link'><a href="Actor.html#set_scale-instance_method" title="Clutter::Actor#set_scale (method)">#set_scale</a></span>, <span class='object_link'><a href="Actor.html#set_scale_full-instance_method" title="Clutter::Actor#set_scale_full (method)">#set_scale_full</a></span>, <span class='object_link'><a href="Actor.html#set_scale_with_gravity-instance_method" title="Clutter::Actor#set_scale_with_gravity (method)">#set_scale_with_gravity</a></span>, <span class='object_link'><a href="Actor.html#set_shader_param-instance_method" title="Clutter::Actor#set_shader_param (method)">#set_shader_param</a></span>, <span class='object_link'><a href="Actor.html#set_shader_param_float-instance_method" title="Clutter::Actor#set_shader_param_float (method)">#set_shader_param_float</a></span>, <span class='object_link'><a href="Actor.html#set_shader_param_int-instance_method" title="Clutter::Actor#set_shader_param_int (method)">#set_shader_param_int</a></span>, <span class='object_link'><a href="Actor.html#set_size-instance_method" title="Clutter::Actor#set_size (method)">#set_size</a></span>, <span class='object_link'><a href="Actor.html#set_translation-instance_method" title="Clutter::Actor#set_translation (method)">#set_translation</a></span>, <span class='object_link'><a href="Actor.html#set_z_rotation_from_gravity-instance_method" title="Clutter::Actor#set_z_rotation_from_gravity (method)">#set_z_rotation_from_gravity</a></span>, <span class='object_link'><a href="Actor.html#shader-instance_method" title="Clutter::Actor#shader (method)">#shader</a></span>, <span class='object_link'><a href="Actor.html#shader=-instance_method" title="Clutter::Actor#shader= (method)">#shader=</a></span>, <span class='object_link'><a href="Actor.html#should_pick_paint-instance_method" title="Clutter::Actor#should_pick_paint (method)">#should_pick_paint</a></span>, <span class='object_link'><a href="Actor.html#show-instance_method" title="Clutter::Actor#show (method)">#show</a></span>, <span class='object_link'><a href="Actor.html#show_all-instance_method" title="Clutter::Actor#show_all (method)">#show_all</a></span>, <span class='object_link'><a href="Actor.html#show_on_set_parent=-instance_method" title="Clutter::Actor#show_on_set_parent= (method)">#show_on_set_parent=</a></span>, <span class='object_link'><a href="Actor.html#show_on_set_parent%3F-instance_method" title="Clutter::Actor#show_on_set_parent? (method)">#show_on_set_parent?</a></span>, <span class='object_link'><a href="Actor.html#size-instance_method" title="Clutter::Actor#size (method)">#size</a></span>, <span class='object_link'><a href="Actor.html#size=-instance_method" title="Clutter::Actor#size= (method)">#size=</a></span>, <span class='object_link'><a href="Actor.html#stage-instance_method" title="Clutter::Actor#stage (method)">#stage</a></span>, <span class='object_link'><a href="Actor.html#text_direction-instance_method" title="Clutter::Actor#text_direction (method)">#text_direction</a></span>, <span class='object_link'><a href="Actor.html#text_direction=-instance_method" title="Clutter::Actor#text_direction= (method)">#text_direction=</a></span>, <span class='object_link'><a href="Actor.html#transform-instance_method" title="Clutter::Actor#transform (method)">#transform</a></span>, <span class='object_link'><a href="Actor.html#transform=-instance_method" title="Clutter::Actor#transform= (method)">#transform=</a></span>, <span class='object_link'><a href="Actor.html#transform_set=-instance_method" title="Clutter::Actor#transform_set= (method)">#transform_set=</a></span>, <span class='object_link'><a href="Actor.html#transform_set%3F-instance_method" title="Clutter::Actor#transform_set? (method)">#transform_set?</a></span>, <span class='object_link'><a href="Actor.html#transform_stage_point-instance_method" title="Clutter::Actor#transform_stage_point (method)">#transform_stage_point</a></span>, <span class='object_link'><a href="Actor.html#translation_x-instance_method" title="Clutter::Actor#translation_x (method)">#translation_x</a></span>, <span class='object_link'><a href="Actor.html#translation_x=-instance_method" title="Clutter::Actor#translation_x= (method)">#translation_x=</a></span>, <span class='object_link'><a href="Actor.html#translation_y-instance_method" title="Clutter::Actor#translation_y (method)">#translation_y</a></span>, <span class='object_link'><a href="Actor.html#translation_y=-instance_method" title="Clutter::Actor#translation_y= (method)">#translation_y=</a></span>, <span class='object_link'><a href="Actor.html#translation_z-instance_method" title="Clutter::Actor#translation_z (method)">#translation_z</a></span>, <span class='object_link'><a href="Actor.html#translation_z=-instance_method" title="Clutter::Actor#translation_z= (method)">#translation_z=</a></span>, <span class='object_link'><a href="Actor.html#unmap-instance_method" title="Clutter::Actor#unmap (method)">#unmap</a></span>, <span class='object_link'><a href="Actor.html#unparent-instance_method" title="Clutter::Actor#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="Actor.html#unrealize-instance_method" title="Clutter::Actor#unrealize (method)">#unrealize</a></span>, <span class='object_link'><a href="Actor.html#unset_flags-instance_method" title="Clutter::Actor#unset_flags (method)">#unset_flags</a></span>, <span class='object_link'><a href="Actor.html#visible=-instance_method" title="Clutter::Actor#visible= (method)">#visible=</a></span>, <span class='object_link'><a href="Actor.html#visible%3F-instance_method" title="Clutter::Actor#visible? (method)">#visible?</a></span>, <span class='object_link'><a href="Actor.html#width-instance_method" title="Clutter::Actor#width (method)">#width</a></span>, <span class='object_link'><a href="Actor.html#width=-instance_method" title="Clutter::Actor#width= (method)">#width=</a></span>, <span class='object_link'><a href="Actor.html#x-instance_method" title="Clutter::Actor#x (method)">#x</a></span>, <span class='object_link'><a href="Actor.html#x=-instance_method" title="Clutter::Actor#x= (method)">#x=</a></span>, <span class='object_link'><a href="Actor.html#x_align-instance_method" title="Clutter::Actor#x_align (method)">#x_align</a></span>, <span class='object_link'><a href="Actor.html#x_align=-instance_method" title="Clutter::Actor#x_align= (method)">#x_align=</a></span>, <span class='object_link'><a href="Actor.html#x_expand-instance_method" title="Clutter::Actor#x_expand (method)">#x_expand</a></span>, <span class='object_link'><a href="Actor.html#x_expand=-instance_method" title="Clutter::Actor#x_expand= (method)">#x_expand=</a></span>, <span class='object_link'><a href="Actor.html#x_expand%3F-instance_method" title="Clutter::Actor#x_expand? (method)">#x_expand?</a></span>, <span class='object_link'><a href="Actor.html#y-instance_method" title="Clutter::Actor#y (method)">#y</a></span>, <span class='object_link'><a href="Actor.html#y=-instance_method" title="Clutter::Actor#y= (method)">#y=</a></span>, <span class='object_link'><a href="Actor.html#y_align-instance_method" title="Clutter::Actor#y_align (method)">#y_align</a></span>, <span class='object_link'><a href="Actor.html#y_align=-instance_method" title="Clutter::Actor#y_align= (method)">#y_align=</a></span>, <span class='object_link'><a href="Actor.html#y_expand-instance_method" title="Clutter::Actor#y_expand (method)">#y_expand</a></span>, <span class='object_link'><a href="Actor.html#y_expand=-instance_method" title="Clutter::Actor#y_expand= (method)">#y_expand=</a></span>, <span class='object_link'><a href="Actor.html#y_expand%3F-instance_method" title="Clutter::Actor#y_expand? (method)">#y_expand?</a></span>, <span class='object_link'><a href="Actor.html#z_position-instance_method" title="Clutter::Actor#z_position (method)">#z_position</a></span>, <span class='object_link'><a href="Actor.html#z_position=-instance_method" title="Clutter::Actor#z_position= (method)">#z_position=</a></span>, <span class='object_link'><a href="Actor.html#z_rotation_gravity-instance_method" title="Clutter::Actor#z_rotation_gravity (method)">#z_rotation_gravity</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(font_name, text)  &#x21d2; <tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Clutter::Text actor, using <!-- raw HTML omitted -->font_name<!-- raw HTML omitted --> as the font
+description; <!-- raw HTML omitted -->text<!-- raw HTML omitted --> will be used to set the contents of the actor.</p>
+<p>This function is equivalent to calling clutter_text_new(),
+clutter_text_set_font_name(), and clutter_text_set_text().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>font_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a string with a font description</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the contents of the actor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="activatable-instance_method">
+  
+    #<strong>activatable</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves whether a Clutter::Text is activatable or not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the actor is activatable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="activatable=-instance_method">
+  
+    #<strong>activatable=</strong>(activatable)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Toggles whether return invokes the activate signal or not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>activatable</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>activatable</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>activatable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="activatable?-instance_method">
+  
+    #<strong>activatable?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Toggles whether return invokes the activate signal or not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>activatable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="activate-instance_method">
+  
+    #<strong>activate</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Emits the Clutter::Text::activate signal, if <!-- raw HTML omitted -->self<!-- raw HTML omitted --> has been set
+as activatable using clutter_text_set_activatable().</p>
+<p>This function can be used to emit the ::activate signal inside
+a Clutter::Actor::captured-event or #ClutterActor::key-press-event
+signal handlers before the default signal handler for the
+Clutter::Text is invoked.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the ::activate signal has been emitted,
+and false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="attributes-instance_method">
+  
+    #<strong>attributes</strong>  &#x21d2; <tt>Pango::AttrList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A list of Pango::StyleAttribute<!-- raw HTML omitted -->s to be applied to the
+contents of the Clutter::Text actor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::AttrList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>attributes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="attributes=-instance_method">
+  
+    #<strong>attributes=</strong>(attributes)  &#x21d2; <tt>Pango::AttrList</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A list of Pango::StyleAttribute<!-- raw HTML omitted -->s to be applied to the
+contents of the Clutter::Text actor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attributes</span>
+      
+      
+        <span class='type'>(<tt>Pango::AttrList</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::AttrList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>attributes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::AttrList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>attributes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="buffer-instance_method">
+  
+    #<strong>buffer</strong>  &#x21d2; <tt><span class='object_link'><a href="TextBuffer.html" title="Clutter::TextBuffer (class)">Clutter::TextBuffer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The buffer which stores the text for this Clutter::Text.</p>
+<p>If set to nil, a default buffer will be created.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextBuffer.html" title="Clutter::TextBuffer (class)">Clutter::TextBuffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="buffer=-instance_method">
+  
+    #<strong>buffer=</strong>(buffer)  &#x21d2; <tt><span class='object_link'><a href="TextBuffer.html" title="Clutter::TextBuffer (class)">Clutter::TextBuffer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The buffer which stores the text for this Clutter::Text.</p>
+<p>If set to nil, a default buffer will be created.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextBuffer.html" title="Clutter::TextBuffer (class)">Clutter::TextBuffer</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextBuffer.html" title="Clutter::TextBuffer (class)">Clutter::TextBuffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextBuffer.html" title="Clutter::TextBuffer (class)">Clutter::TextBuffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="color-instance_method">
+  
+    #<strong>color</strong>  &#x21d2; <tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The color used to render the text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="color=-instance_method">
+  
+    #<strong>color=</strong>(color)  &#x21d2; <tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The color used to render the text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="coords_to_position-instance_method">
+  
+    #<strong>coords_to_position</strong>(x, y)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the position of the character at the given coordinates.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the X coordinate, relative to the actor</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Y coordinate, relative to the actor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the position of the character</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cursor_color-instance_method">
+  
+    #<strong>cursor_color</strong>  &#x21d2; <tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The color of the cursor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor-color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cursor_color=-instance_method">
+  
+    #<strong>cursor_color=</strong>(cursor_color)  &#x21d2; <tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The color of the cursor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cursor_color</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor-color</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor-color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cursor_color_set=-instance_method">
+  
+    #<strong>cursor_color_set=</strong>(cursor_color_set)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Will be set to true if Clutter::Text:cursor-color has been set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cursor_color_set</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor-color-set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor-color-set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cursor_color_set?-instance_method">
+  
+    #<strong>cursor_color_set?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Will be set to true if Clutter::Text:cursor-color has been set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor-color-set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cursor_position-instance_method">
+  
+    #<strong>cursor_position</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The current input cursor position. -1 is taken to be the end of the text</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor-position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cursor_position=-instance_method">
+  
+    #<strong>cursor_position=</strong>(cursor_position)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The current input cursor position. -1 is taken to be the end of the text</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cursor_position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor-position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor-position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cursor_size-instance_method">
+  
+    #<strong>cursor_size</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The size of the cursor, in pixels. If set to -1 the size used will
+be the default cursor size of 2 pixels.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor-size</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cursor_size=-instance_method">
+  
+    #<strong>cursor_size=</strong>(cursor_size)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The size of the cursor, in pixels. If set to -1 the size used will
+be the default cursor size of 2 pixels.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cursor_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor-size</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor-size</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cursor_visible-instance_method">
+  
+    #<strong>cursor_visible</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves whether the cursor of a Clutter::Text actor is visible.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the cursor is visible</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cursor_visible=-instance_method">
+  
+    #<strong>cursor_visible=</strong>(cursor_visible)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the input cursor is visible or not.</p>
+<p>The cursor will only be visible if this property and either
+the Clutter::Text:editable or the #ClutterText:selectable properties
+are set to true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cursor_visible</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor-visible</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor-visible</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cursor_visible?-instance_method">
+  
+    #<strong>cursor_visible?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the input cursor is visible or not.</p>
+<p>The cursor will only be visible if this property and either
+the Clutter::Text:editable or the #ClutterText:selectable properties
+are set to true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor-visible</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_chars-instance_method">
+  
+    #<strong>delete_chars</strong>(n_chars)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Deletes <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> inside a Clutter::Text actor, starting from the
+current cursor position.</p>
+<p>Somewhat awkwardly, the cursor position is decremented by the same
+number of characters you've deleted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_chars</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of characters to delete</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_selection-instance_method">
+  
+    #<strong>delete_selection</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Deletes the currently selected text</p>
+<p>This function is only useful in subclasses of Clutter::Text</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if text was deleted or if the text actor
+is empty, and false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_text-instance_method">
+  
+    #<strong>delete_text</strong>(start_pos, end_pos)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Deletes the text inside a Clutter::Text actor between <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted -->
+and <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->.</p>
+<p>The starting and ending positions are expressed in characters,
+not in bytes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start_pos</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>starting position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_pos</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ending position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="editable-instance_method">
+  
+    #<strong>editable</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves whether a Clutter::Text is editable or not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the actor is editable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="editable=-instance_method">
+  
+    #<strong>editable=</strong>(editable)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether key events delivered to the actor causes editing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>editable</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>editable</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>editable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="editable?-instance_method">
+  
+    #<strong>editable?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether key events delivered to the actor causes editing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>editable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ellipsize-instance_method">
+  
+    #<strong>ellipsize</strong>  &#x21d2; <tt>Pango::EllipsizeMode</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The preferred place to ellipsize the contents of the Clutter::Text actor</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::EllipsizeMode</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ellipsize</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ellipsize=-instance_method">
+  
+    #<strong>ellipsize=</strong>(ellipsize)  &#x21d2; <tt>Pango::EllipsizeMode</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The preferred place to ellipsize the contents of the Clutter::Text actor</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ellipsize</span>
+      
+      
+        <span class='type'>(<tt>Pango::EllipsizeMode</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::EllipsizeMode</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ellipsize</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::EllipsizeMode</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ellipsize</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="font_description-instance_method">
+  
+    #<strong>font_description</strong>  &#x21d2; <tt>Pango::FontDescription</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The Pango::FontDescription that should be used by the #ClutterText</p>
+<p>If you have a string describing the font then you should look at
+Clutter::Text:font-name instead</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::FontDescription</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>font-description</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="font_description=-instance_method">
+  
+    #<strong>font_description=</strong>(font_description)  &#x21d2; <tt>Pango::FontDescription</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The Pango::FontDescription that should be used by the #ClutterText</p>
+<p>If you have a string describing the font then you should look at
+Clutter::Text:font-name instead</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>font_description</span>
+      
+      
+        <span class='type'>(<tt>Pango::FontDescription</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::FontDescription</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>font-description</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::FontDescription</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>font-description</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="font_name-instance_method">
+  
+    #<strong>font_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The font to be used by the Clutter::Text, as a string
+that can be parsed by pango_font_description_from_string().</p>
+<p>If set to nil, the default system font will be used instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>font-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="font_name=-instance_method">
+  
+    #<strong>font_name=</strong>(font_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The font to be used by the Clutter::Text, as a string
+that can be parsed by pango_font_description_from_string().</p>
+<p>If set to nil, the default system font will be used instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>font_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>font-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>font-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_chars-instance_method">
+  
+    #<strong>get_chars</strong>(start_pos, end_pos)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the contents of the Clutter::Text actor between
+<!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->.</p>
+<p>The positions are specified in characters, not in bytes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start_pos</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>start of text, in characters</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_pos</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>end of text, in characters</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly allocated string with the contents of
+the text actor between the specified positions. Use g_free()
+to free the resources when done</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_color-instance_method">
+  
+    #<strong>get_color</strong>(color)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the text color as set by clutter_text_set_color().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for a Clutter::Color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_cursor_color-instance_method">
+  
+    #<strong>get_cursor_color</strong>(color)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the color of the cursor of a Clutter::Text actor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for a Clutter::Color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_cursor_rect-instance_method">
+  
+    #<strong>get_cursor_rect</strong>(rect)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the rectangle that contains the cursor.</p>
+<p>The coordinates of the rectangle's origin are in actor-relative
+coordinates.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rect</span>
+      
+      
+        <span class='type'>(<tt>Clutter::Rect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location of a Clutter::Rect</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_layout_offsets-instance_method">
+  
+    #<strong>get_layout_offsets</strong>(x, y)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Obtains the coordinates where the Clutter::Text will draw the #PangoLayout
+representing the text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store X offset of layout, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store Y offset of layout, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_selected_text_color-instance_method">
+  
+    #<strong>get_selected_text_color</strong>(color)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the color of selected text of a Clutter::Text actor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for a Clutter::Color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_selection_color-instance_method">
+  
+    #<strong>get_selection_color</strong>(color)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the color of the selection of a Clutter::Text actor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for a Clutter::Color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_text-instance_method">
+  
+    #<strong>insert_text</strong>(text, position)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inserts <!-- raw HTML omitted -->text<!-- raw HTML omitted --> into a Clutter::Actor at the given position.</p>
+<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is a negative number, the text will be appended
+at the end of the current contents of the Clutter::Text.</p>
+<p>The position is expressed in characters, not in bytes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the text to be inserted</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the position of the insertion, or -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_unichar-instance_method">
+  
+    #<strong>insert_unichar</strong>(wc)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inserts <!-- raw HTML omitted -->wc<!-- raw HTML omitted --> at the current cursor position of a
+Clutter::Text actor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>wc</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Unicode character</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="justify-instance_method">
+  
+    #<strong>justify</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves whether the Clutter::Text actor should justify its contents
+on both margins.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the text should be justified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="justify=-instance_method">
+  
+    #<strong>justify=</strong>(justify)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the contents of the Clutter::Text should be justified
+on both margins.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>justify</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>justify</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>justify</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="justify?-instance_method">
+  
+    #<strong>justify?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the contents of the Clutter::Text should be justified
+on both margins.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>justify</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="layout-instance_method">
+  
+    #<strong>layout</strong>  &#x21d2; <tt>Pango::Layout</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the current Pango::Layout used by a #ClutterText actor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::Layout</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Pango::Layout. The returned object is owned by
+the Clutter::Text actor and should not be modified or freed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="line_alignment-instance_method">
+  
+    #<strong>line_alignment</strong>  &#x21d2; <tt>Pango::Alignment</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The preferred alignment for the text. This property controls
+the alignment of multi-line paragraphs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::Alignment</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>line-alignment</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="line_alignment=-instance_method">
+  
+    #<strong>line_alignment=</strong>(line_alignment)  &#x21d2; <tt>Pango::Alignment</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The preferred alignment for the text. This property controls
+the alignment of multi-line paragraphs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>line_alignment</span>
+      
+      
+        <span class='type'>(<tt>Pango::Alignment</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::Alignment</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>line-alignment</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::Alignment</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>line-alignment</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="line_wrap-instance_method">
+  
+    #<strong>line_wrap</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the value set using clutter_text_set_line_wrap().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the Clutter::Text actor should wrap
+its contents</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="line_wrap=-instance_method">
+  
+    #<strong>line_wrap=</strong>(line_wrap)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to wrap the lines of Clutter::Text:text if the contents
+exceed the available allocation. The wrapping strategy is
+controlled by the Clutter::Text:line-wrap-mode property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>line_wrap</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>line-wrap</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>line-wrap</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="line_wrap?-instance_method">
+  
+    #<strong>line_wrap?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to wrap the lines of Clutter::Text:text if the contents
+exceed the available allocation. The wrapping strategy is
+controlled by the Clutter::Text:line-wrap-mode property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>line-wrap</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="line_wrap_mode-instance_method">
+  
+    #<strong>line_wrap_mode</strong>  &#x21d2; <tt>Pango::WrapMode</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If Clutter::Text:line-wrap is set to true, this property will
+control how the text is wrapped.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::WrapMode</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>line-wrap-mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="line_wrap_mode=-instance_method">
+  
+    #<strong>line_wrap_mode=</strong>(line_wrap_mode)  &#x21d2; <tt>Pango::WrapMode</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If Clutter::Text:line-wrap is set to true, this property will
+control how the text is wrapped.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>line_wrap_mode</span>
+      
+      
+        <span class='type'>(<tt>Pango::WrapMode</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::WrapMode</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>line-wrap-mode</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pango::WrapMode</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>line-wrap-mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="markup=-instance_method">
+  
+    #<strong>markup=</strong>(markup)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets <!-- raw HTML omitted -->markup<!-- raw HTML omitted --> as the contents of a Clutter::Text.</p>
+<p>This is a convenience function for setting a string containing
+Pango markup, and it is logically equivalent to:</p>
+<p>|[
+/* the order is important */
+clutter_text_set_text (CLUTTER_TEXT (actor), markup);
+clutter_text_set_use_markup (CLUTTER_TEXT (actor), TRUE);
+]|</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>markup</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a string containing Pango markup.
+Passing nil is the same as passing &quot;&quot; (the empty string)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_length-instance_method">
+  
+    #<strong>max_length</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The maximum length of the contents of the Clutter::Text actor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max-length</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_length=-instance_method">
+  
+    #<strong>max_length=</strong>(max_length)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The maximum length of the contents of the Clutter::Text actor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>max_length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max-length</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max-length</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="password_char-instance_method">
+  
+    #<strong>password_char</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If non-zero, the character that should be used in place of
+the actual text in a password text actor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>password-char</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="password_char=-instance_method">
+  
+    #<strong>password_char=</strong>(password_char)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If non-zero, the character that should be used in place of
+the actual text in a password text actor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>password_char</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>password-char</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>password-char</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="position-instance_method">
+  
+    #<strong>position</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The current input cursor position. -1 is taken to be the end of the text</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="position=-instance_method">
+  
+    #<strong>position=</strong>(position)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The current input cursor position. -1 is taken to be the end of the text</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="position_to_coords-instance_method">
+  
+    #<strong>position_to_coords</strong>(position, x, y, line_height)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the coordinates of the given <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>position in characters</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the X coordinate, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the Y coordinate, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>line_height</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the line height, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the conversion was successful</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selectable-instance_method">
+  
+    #<strong>selectable</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves whether a Clutter::Text is selectable or not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the actor is selectable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selectable=-instance_method">
+  
+    #<strong>selectable=</strong>(selectable)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether it is possible to select text, either using the pointer
+or the keyboard.</p>
+<p>This property depends on the Clutter::Actor:reactive property being
+set to true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>selectable</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selectable</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selectable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selectable?-instance_method">
+  
+    #<strong>selectable?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether it is possible to select text, either using the pointer
+or the keyboard.</p>
+<p>This property depends on the Clutter::Actor:reactive property being
+set to true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selectable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selected_text_color-instance_method">
+  
+    #<strong>selected_text_color</strong>  &#x21d2; <tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The color of selected text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selected-text-color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selected_text_color=-instance_method">
+  
+    #<strong>selected_text_color=</strong>(selected_text_color)  &#x21d2; <tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The color of selected text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>selected_text_color</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selected-text-color</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selected-text-color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selected_text_color_set=-instance_method">
+  
+    #<strong>selected_text_color_set=</strong>(selected_text_color_set)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Will be set to true if Clutter::Text:selected-text-color has been set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>selected_text_color_set</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selected-text-color-set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selected-text-color-set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selected_text_color_set?-instance_method">
+  
+    #<strong>selected_text_color_set?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Will be set to true if Clutter::Text:selected-text-color has been set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selected-text-color-set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selection-instance_method">
+  
+    #<strong>selection</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the currently selected text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly allocated string containing the currently
+selected text, or nil. Use g_free() to free the returned
+string.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selection_bound-instance_method">
+  
+    #<strong>selection_bound</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The current input cursor position. -1 is taken to be the end of the text</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selection-bound</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selection_bound=-instance_method">
+  
+    #<strong>selection_bound=</strong>(selection_bound)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The current input cursor position. -1 is taken to be the end of the text</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>selection_bound</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selection-bound</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selection-bound</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selection_color-instance_method">
+  
+    #<strong>selection_color</strong>  &#x21d2; <tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The color of the selection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selection-color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selection_color=-instance_method">
+  
+    #<strong>selection_color=</strong>(selection_color)  &#x21d2; <tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The color of the selection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>selection_color</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selection-color</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Clutter::Color (class)">Clutter::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selection-color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selection_color_set=-instance_method">
+  
+    #<strong>selection_color_set=</strong>(selection_color_set)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Will be set to true if Clutter::Text:selection-color has been set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>selection_color_set</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selection-color-set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selection-color-set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selection_color_set?-instance_method">
+  
+    #<strong>selection_color_set?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Will be set to true if Clutter::Text:selection-color has been set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selection-color-set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_preedit_string-instance_method">
+  
+    #<strong>set_preedit_string</strong>(preedit_str, preedit_attrs, cursor_pos)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets, or unsets, the pre-edit string. This function is useful
+for input methods to display a string (with eventual specific
+Pango attributes) before it is entered inside the Clutter::Text
+buffer.</p>
+<p>The preedit string and attributes are ignored if the Clutter::Text
+actor is not editable.</p>
+<p>This function should not be used by applications</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>preedit_str</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the pre-edit string, or nil to unset it</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>preedit_attrs</span>
+      
+      
+        <span class='type'>(<tt>Pango::AttrList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the pre-edit string attributes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cursor_pos</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the cursor position for the pre-edit string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_selection-instance_method">
+  
+    #<strong>set_selection</strong>(start_pos, end_pos)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Selects the region of text between <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->.</p>
+<p>This function changes the position of the cursor to match
+<!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> and the selection bound to match <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start_pos</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>start of the selection, in characters</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_pos</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>end of the selection, in characters</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="single_line_mode-instance_method">
+  
+    #<strong>single_line_mode</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves whether the Clutter::Text actor is in single line mode.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the Clutter::Text actor is in single line mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="single_line_mode=-instance_method">
+  
+    #<strong>single_line_mode=</strong>(single_line_mode)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the Clutter::Text actor should be in single line mode
+or not. A single line Clutter::Text actor will only contain a
+single line of text, scrolling it in case its length is bigger
+than the allocated size.</p>
+<p>Setting this property will also set the Clutter::Text:activatable
+property as a side-effect.</p>
+<p>The Clutter::Text:single-line-mode property is used only if the
+Clutter::Text:editable property is set to true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>single_line_mode</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>single-line-mode</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>single-line-mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="single_line_mode?-instance_method">
+  
+    #<strong>single_line_mode?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the Clutter::Text actor should be in single line mode
+or not. A single line Clutter::Text actor will only contain a
+single line of text, scrolling it in case its length is bigger
+than the allocated size.</p>
+<p>Setting this property will also set the Clutter::Text:activatable
+property as a side-effect.</p>
+<p>The Clutter::Text:single-line-mode property is used only if the
+Clutter::Text:editable property is set to true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>single-line-mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text-instance_method">
+  
+    #<strong>text</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The text to render inside the actor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text=-instance_method">
+  
+    #<strong>text=</strong>(text)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The text to render inside the actor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="use_markup-instance_method">
+  
+    #<strong>use_markup</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves whether the contents of the Clutter::Text actor should be
+parsed for the Pango text markup.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the contents will be parsed for markup</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="use_markup=-instance_method">
+  
+    #<strong>use_markup=</strong>(use_markup)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the text includes Pango markup.</p>
+<p>For more informations about the Pango markup format, see
+pango_layout_set_markup() in the Pango documentation.</p>
+<p>It is not possible to round-trip this property between
+true and false. Once a string with markup has been set on
+a Clutter::Text actor with :use-markup set to true, the markup
+is stripped from the string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>use_markup</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>use-markup</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>use-markup</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="use_markup?-instance_method">
+  
+    #<strong>use_markup?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the text includes Pango markup.</p>
+<p>For more informations about the Pango markup format, see
+pango_layout_set_markup() in the Pango documentation.</p>
+<p>It is not possible to round-trip this property between
+true and false. Once a string with markup has been set on
+a Clutter::Text actor with :use-markup set to true, the markup
+is stripped from the string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>use-markup</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

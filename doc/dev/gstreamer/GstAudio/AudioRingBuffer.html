@@ -1,0 +1,2772 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GstAudio::AudioRingBuffer
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GstAudio::AudioRingBuffer";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GstAudio.html" title="GstAudio (module)">GstAudio</a></span></span>
+     &raquo; 
+    <span class="title">AudioRingBuffer</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GstAudio::AudioRingBuffer
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></li>
+          
+            <li class="next">GstAudio::AudioRingBuffer</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The vmethods that subclasses can override to implement the ringbuffer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#debug_spec_buff-class_method" title="debug_spec_buff (class method)">.<strong>debug_spec_buff</strong>(spec)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Print debug info about the buffer sized in <!-- raw HTML omitted -->spec<!-- raw HTML omitted --> to the debug log.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#debug_spec_caps-class_method" title="debug_spec_caps (class method)">.<strong>debug_spec_caps</strong>(spec)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Print debug info about the parsed caps in <!-- raw HTML omitted -->spec<!-- raw HTML omitted --> to the debug log.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse_caps-class_method" title="parse_caps (class method)">.<strong>parse_caps</strong>(spec, caps)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Parse <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> into <!-- raw HTML omitted -->spec<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#acquire-instance_method" title="#acquire (instance method)">#<strong>acquire</strong>(spec)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Allocate the resources for the ringbuffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#activate-instance_method" title="#activate (instance method)">#<strong>activate</strong>(active)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Activate <!-- raw HTML omitted -->buf<!-- raw HTML omitted --> to start or stop pulling data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#advance-instance_method" title="#advance (instance method)">#<strong>advance</strong>(advance)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Subclasses should call this function to notify the fact that <!-- raw HTML omitted -->advance<!-- raw HTML omitted --> segments are now processed by the device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#channel_positions=-instance_method" title="#channel_positions= (instance method)">#<strong>channel_positions=</strong>(position)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tell the ringbuffer about the device's channel positions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clear-instance_method" title="#clear (instance method)">#<strong>clear</strong>(segment)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Clear the given segment of the buffer with silence samples.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clear_all-instance_method" title="#clear_all (instance method)">#<strong>clear_all</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Clear all samples from the ringbuffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_device-instance_method" title="#close_device (instance method)">#<strong>close_device</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Close the audio device associated with the ring buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#commit-instance_method" title="#commit (instance method)">#<strong>commit</strong>(sample, data, in_samples, out_samples, accum)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Commit <!-- raw HTML omitted -->in_samples<!-- raw HTML omitted --> samples pointed to by <!-- raw HTML omitted -->data<!-- raw HTML omitted --> to the ringbuffer <!-- raw HTML omitted -->buf<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#convert-instance_method" title="#convert (instance method)">#<strong>convert</strong>(src_fmt, src_val, dest_fmt, dest_val)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Convert <!-- raw HTML omitted -->src_val<!-- raw HTML omitted --> in <!-- raw HTML omitted -->src_fmt<!-- raw HTML omitted --> to the equivalent value in <!-- raw HTML omitted -->dest_fmt<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delay-instance_method" title="#delay (instance method)">#<strong>delay</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the number of samples queued in the audio device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#device_is_open-instance_method" title="#device_is_open (instance method)">#<strong>device_is_open</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks the status of the device associated with the ring buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flushing=-instance_method" title="#flushing= (instance method)">#<strong>flushing=</strong>(flushing)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set the ringbuffer to flushing mode or normal mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_acquired-instance_method" title="#is_acquired (instance method)">#<strong>is_acquired</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if the ringbuffer is acquired and ready to use.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_active-instance_method" title="#is_active (instance method)">#<strong>is_active</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if <!-- raw HTML omitted -->buf<!-- raw HTML omitted --> is activated.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_flushing-instance_method" title="#is_flushing (instance method)">#<strong>is_flushing</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if <!-- raw HTML omitted -->buf<!-- raw HTML omitted --> is flushing.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#may_start-instance_method" title="#may_start (instance method)">#<strong>may_start</strong>(allowed)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tell the ringbuffer that it is allowed to start playback when the ringbuffer is filled with samples.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open_device-instance_method" title="#open_device (instance method)">#<strong>open_device</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Open the audio device associated with the ring buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pause-instance_method" title="#pause (instance method)">#<strong>pause</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Pause processing samples from the ringbuffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#prepare_read-instance_method" title="#prepare_read (instance method)">#<strong>prepare_read</strong>(segment, readptr, len)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a pointer to memory where the data from segment <!-- raw HTML omitted -->segment<!-- raw HTML omitted --> can be found.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read-instance_method" title="#read (instance method)">#<strong>read</strong>(sample, data, len, timestamp)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Read <!-- raw HTML omitted -->len<!-- raw HTML omitted --> samples from the ringbuffer into the memory pointed to by <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#release-instance_method" title="#release (instance method)">#<strong>release</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Free the resources of the ringbuffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sample=-instance_method" title="#sample= (instance method)">#<strong>sample=</strong>(sample)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Make sure that the next sample written to the device is accounted for as being the <!-- raw HTML omitted -->sample<!-- raw HTML omitted --> sample written to the device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#samples_done-instance_method" title="#samples_done (instance method)">#<strong>samples_done</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the number of samples that were processed by the ringbuffer since it was last started.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_callback-instance_method" title="#set_callback (instance method)">#<strong>set_callback</strong>(cb, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the given callback function on the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_callback_full-instance_method" title="#set_callback_full (instance method)">#<strong>set_callback_full</strong>(cb, user_data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the given callback function on the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_errored-instance_method" title="#set_errored (instance method)">#<strong>set_errored</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Mark the ringbuffer as errored after it has started.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_timestamp-instance_method" title="#set_timestamp (instance method)">#<strong>set_timestamp</strong>(readseg, timestamp)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#start-instance_method" title="#start (instance method)">#<strong>start</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Start processing samples from the ringbuffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stop-instance_method" title="#stop (instance method)">#<strong>stop</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Stop processing samples from the ringbuffer.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Gst/Object.html#add_control_binding-instance_method" title="Gst::Object#add_control_binding (method)">#add_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#check_uniqueness-class_method" title="Gst::Object.check_uniqueness (method)">check_uniqueness</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_bindings_disabled=-instance_method" title="Gst::Object#control_bindings_disabled= (method)">#control_bindings_disabled=</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate-instance_method" title="Gst::Object#control_rate (method)">#control_rate</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate=-instance_method" title="Gst::Object#control_rate= (method)">#control_rate=</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_deep_notify-class_method" title="Gst::Object.default_deep_notify (method)">default_deep_notify</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_error-instance_method" title="Gst::Object#default_error (method)">#default_error</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_control_binding-instance_method" title="Gst::Object#get_control_binding (method)">#get_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_g_value_array-instance_method" title="Gst::Object#get_g_value_array (method)">#get_g_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value-instance_method" title="Gst::Object#get_value (method)">#get_value</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value_array-instance_method" title="Gst::Object#get_value_array (method)">#get_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_active_control_bindings-instance_method" title="Gst::Object#has_active_control_bindings (method)">#has_active_control_bindings</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_ancestor-instance_method" title="Gst::Object#has_ancestor (method)">#has_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_ancestor-instance_method" title="Gst::Object#has_as_ancestor (method)">#has_as_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_parent-instance_method" title="Gst::Object#has_as_parent (method)">#has_as_parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#name-instance_method" title="Gst::Object#name (method)">#name</a></span>, <span class='object_link'><a href="../Gst/Object.html#name=-instance_method" title="Gst::Object#name= (method)">#name=</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent-instance_method" title="Gst::Object#parent (method)">#parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent=-instance_method" title="Gst::Object#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="../Gst/Object.html#path_string-instance_method" title="Gst::Object#path_string (method)">#path_string</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref-instance_method" title="Gst::Object#ref (method)">#ref</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref_sink-class_method" title="Gst::Object.ref_sink (method)">ref_sink</a></span>, <span class='object_link'><a href="../Gst/Object.html#remove_control_binding-instance_method" title="Gst::Object#remove_control_binding (method)">#remove_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#replace-class_method" title="Gst::Object.replace (method)">replace</a></span>, <span class='object_link'><a href="../Gst/Object.html#set_control_binding_disabled-instance_method" title="Gst::Object#set_control_binding_disabled (method)">#set_control_binding_disabled</a></span>, <span class='object_link'><a href="../Gst/Object.html#suggest_next_sync-instance_method" title="Gst::Object#suggest_next_sync (method)">#suggest_next_sync</a></span>, <span class='object_link'><a href="../Gst/Object.html#sync_values-instance_method" title="Gst::Object#sync_values (method)">#sync_values</a></span>, <span class='object_link'><a href="../Gst/Object.html#unparent-instance_method" title="Gst::Object#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="../Gst/Object.html#unref-instance_method" title="Gst::Object#unref (method)">#unref</a></span></p>
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="debug_spec_buff-class_method">
+  
+    .<strong>debug_spec_buff</strong>(spec)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Print debug info about the buffer sized in <!-- raw HTML omitted -->spec<!-- raw HTML omitted --> to the debug log.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>spec</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioRingBufferSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the spec to debug</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="debug_spec_caps-class_method">
+  
+    .<strong>debug_spec_caps</strong>(spec)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Print debug info about the parsed caps in <!-- raw HTML omitted -->spec<!-- raw HTML omitted --> to the debug log.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>spec</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioRingBufferSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the spec to debug</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parse_caps-class_method">
+  
+    .<strong>parse_caps</strong>(spec, caps)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Parse <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> into <!-- raw HTML omitted -->spec<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>spec</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioRingBufferSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a spec</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>caps</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Caps</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if the caps could be parsed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="acquire-instance_method">
+  
+    #<strong>acquire</strong>(spec)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Allocate the resources for the ringbuffer. This function fills
+in the data pointer of the ring buffer with a valid Gst::Buffer
+to which samples can be written.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>spec</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioRingBufferSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the specs of the buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if the device could be acquired, FALSE on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="activate-instance_method">
+  
+    #<strong>activate</strong>(active)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Activate <!-- raw HTML omitted -->buf<!-- raw HTML omitted --> to start or stop pulling data.</p>
+<p>MT safe.
+FALSE on error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>active</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if the device could be activated in the requested mode,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="advance-instance_method">
+  
+    #<strong>advance</strong>(advance)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Subclasses should call this function to notify the fact that
+<!-- raw HTML omitted -->advance<!-- raw HTML omitted --> segments are now processed by the device.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>advance</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of segments written</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="channel_positions=-instance_method">
+  
+    #<strong>channel_positions=</strong>(position)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tell the ringbuffer about the device's channel positions. This must
+be called in when the ringbuffer is acquired.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the device channel positions</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clear-instance_method">
+  
+    #<strong>clear</strong>(segment)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Clear the given segment of the buffer with silence samples.
+This function is used by subclasses.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>segment</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the segment to clear</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clear_all-instance_method">
+  
+    #<strong>clear_all</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Clear all samples from the ringbuffer.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close_device-instance_method">
+  
+    #<strong>close_device</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Close the audio device associated with the ring buffer. The ring buffer
+should already have been released via gst_audio_ring_buffer_release().
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if the device could be closed, FALSE on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="commit-instance_method">
+  
+    #<strong>commit</strong>(sample, data, in_samples, out_samples, accum)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Commit <!-- raw HTML omitted -->in_samples<!-- raw HTML omitted --> samples pointed to by <!-- raw HTML omitted -->data<!-- raw HTML omitted --> to the ringbuffer <!-- raw HTML omitted -->buf<!-- raw HTML omitted -->.</p>
+<p><!-- raw HTML omitted -->in_samples<!-- raw HTML omitted --> and <!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> define the rate conversion to perform on the
+samples in <!-- raw HTML omitted -->data<!-- raw HTML omitted -->. For negative rates, <!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> must be negative and
+<!-- raw HTML omitted -->in_samples<!-- raw HTML omitted --> positive.</p>
+<p>When <!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> is positive, the first sample will be written at position <!-- raw HTML omitted -->sample<!-- raw HTML omitted -->
+in the ringbuffer. When <!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> is negative, the last sample will be written to
+<!-- raw HTML omitted -->sample<!-- raw HTML omitted --> in reverse order.</p>
+<p><!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> does not need to be a multiple of the segment size of the ringbuffer
+although it is recommended for optimal performance.</p>
+<p><!-- raw HTML omitted -->accum<!-- raw HTML omitted --> will hold a temporary accumulator used in rate conversion and should be
+set to 0 when this function is first called. In case the commit operation is
+interrupted, one can resume the processing by passing the previously returned
+<!-- raw HTML omitted -->accum<!-- raw HTML omitted --> value back to this function.</p>
+<p>MT safe.
+number of samples written can be less than <!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> when <!-- raw HTML omitted -->buf<!-- raw HTML omitted --> was interrupted
+with a flush or stop.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sample</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the sample position of the data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the data to commit</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>in_samples</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of samples in the data to commit</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_samples</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of samples to write to the ringbuffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>accum</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>accumulator for rate conversion.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of samples written to the ringbuffer or -1 on error. The</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="convert-instance_method">
+  
+    #<strong>convert</strong>(src_fmt, src_val, dest_fmt, dest_val)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Convert <!-- raw HTML omitted -->src_val<!-- raw HTML omitted --> in <!-- raw HTML omitted -->src_fmt<!-- raw HTML omitted --> to the equivalent value in <!-- raw HTML omitted -->dest_fmt<!-- raw HTML omitted -->. The result
+will be put in <!-- raw HTML omitted -->dest_val<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>src_fmt</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/Format.html" title="Gst::Format (module)">Gst::Format</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the source format</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>src_val</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the source value</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dest_fmt</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/Format.html" title="Gst::Format (module)">Gst::Format</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the destination format</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dest_val</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a location to store the converted value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if the conversion succeeded.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delay-instance_method">
+  
+    #<strong>delay</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the number of samples queued in the audio device. This is
+usually less than the segment size but can be bigger when the
+implementation uses another internal buffer between the audio
+device.</p>
+<p>For playback ringbuffers this is the amount of samples transferred from the
+ringbuffer to the device but still not played.</p>
+<p>For capture ringbuffers this is the amount of samples in the device that are
+not yet transferred to the ringbuffer.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of samples queued in the audio device.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="device_is_open-instance_method">
+  
+    #<strong>device_is_open</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks the status of the device associated with the ring buffer.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if the device was open, FALSE if it was closed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flushing=-instance_method">
+  
+    #<strong>flushing=</strong>(flushing)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set the ringbuffer to flushing mode or normal mode.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flushing</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_acquired-instance_method">
+  
+    #<strong>is_acquired</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if the ringbuffer is acquired and ready to use.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if the ringbuffer is acquired, FALSE on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_active-instance_method">
+  
+    #<strong>is_active</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if <!-- raw HTML omitted -->buf<!-- raw HTML omitted --> is activated.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if the device is active.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_flushing-instance_method">
+  
+    #<strong>is_flushing</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if <!-- raw HTML omitted -->buf<!-- raw HTML omitted --> is flushing.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if the device is flushing.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="may_start-instance_method">
+  
+    #<strong>may_start</strong>(allowed)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tell the ringbuffer that it is allowed to start playback when
+the ringbuffer is filled with samples.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>allowed</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open_device-instance_method">
+  
+    #<strong>open_device</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Open the audio device associated with the ring buffer. Does not perform any
+setup on the device. You must open the device before acquiring the ring
+buffer.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if the device could be opened, FALSE on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pause-instance_method">
+  
+    #<strong>pause</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Pause processing samples from the ringbuffer.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if the device could be paused, FALSE on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="prepare_read-instance_method">
+  
+    #<strong>prepare_read</strong>(segment, readptr, len)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a pointer to memory where the data from segment <!-- raw HTML omitted -->segment<!-- raw HTML omitted -->
+can be found. This function is mostly used by subclasses.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>segment</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the segment to read</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>readptr</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the pointer to the memory where samples can be read</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of bytes to read</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>FALSE if the buffer is not started.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="read-instance_method">
+  
+    #<strong>read</strong>(sample, data, len, timestamp)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Read <!-- raw HTML omitted -->len<!-- raw HTML omitted --> samples from the ringbuffer into the memory pointed
+to by <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.
+The first sample should be read from position <!-- raw HTML omitted -->sample<!-- raw HTML omitted --> in
+the ringbuffer.</p>
+<p><!-- raw HTML omitted -->len<!-- raw HTML omitted --> should not be a multiple of the segment size of the ringbuffer
+although it is recommended.</p>
+<p><!-- raw HTML omitted -->timestamp<!-- raw HTML omitted --> will return the timestamp associated with the data returned.
+error.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sample</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the sample position of the data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>where the data should be read</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of samples in data to read</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timestamp</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>where the timestamp is returned</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of samples read from the ringbuffer or -1 on</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="release-instance_method">
+  
+    #<strong>release</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Free the resources of the ringbuffer.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if the device could be released, FALSE on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sample=-instance_method">
+  
+    #<strong>sample=</strong>(sample)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Make sure that the next sample written to the device is
+accounted for as being the <!-- raw HTML omitted -->sample<!-- raw HTML omitted --> sample written to the
+device. This value will be used in reporting the current
+sample position of the ringbuffer.</p>
+<p>This function will also clear the buffer with silence.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sample</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the sample number to set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="samples_done-instance_method">
+  
+    #<strong>samples_done</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the number of samples that were processed by the ringbuffer
+since it was last started. This does not include the number of samples not
+yet processed (see gst_audio_ring_buffer_delay()).
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of samples processed by the ringbuffer.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_callback-instance_method">
+  
+    #<strong>set_callback</strong>(cb, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the given callback function on the buffer. This function
+will be called every time a segment has been written to a device.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cb</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioRingBufferCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the callback to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data passed to the callback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_callback_full-instance_method">
+  
+    #<strong>set_callback_full</strong>(cb, user_data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the given callback function on the buffer. This function
+will be called every time a segment has been written to a device.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cb</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioRingBufferCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the callback to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data passed to the callback</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>function to be called when <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> is no longer needed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_errored-instance_method">
+  
+    #<strong>set_errored</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Mark the ringbuffer as errored after it has started.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_timestamp-instance_method">
+  
+    #<strong>set_timestamp</strong>(readseg, timestamp)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>readseg</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timestamp</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="start-instance_method">
+  
+    #<strong>start</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Start processing samples from the ringbuffer.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if the device could be started, FALSE on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stop-instance_method">
+  
+    #<strong>stop</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Stop processing samples from the ringbuffer.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if the device could be stopped, FALSE on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

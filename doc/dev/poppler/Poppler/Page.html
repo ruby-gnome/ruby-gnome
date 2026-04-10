@@ -1,0 +1,3912 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Poppler::Page
+  
+    &mdash; Ruby/Poppler
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Poppler::Page";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Poppler.html" title="Poppler (module)">Poppler</a></span></span>
+     &raquo; 
+    <span class="title">Page</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Poppler::Page
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Poppler::Page</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  <dl>
+      <dt>Extended by:</dt>
+      <dd>GLib::Deprecatable</dd>
+  </dl>
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/poppler/page.rb<span class="defines">,<br />
+  lib/poppler/deprecated.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#free_annot_mapping-class_method" title="free_annot_mapping (class method)">.<strong>free_annot_mapping</strong>(list)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Frees a list of Poppler::AnnotMapping<!-- raw HTML omitted -->s allocated by poppler_page_get_annot_mapping().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#free_form_field_mapping-class_method" title="free_form_field_mapping (class method)">.<strong>free_form_field_mapping</strong>(list)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Frees a list of Poppler::FormFieldMapping<!-- raw HTML omitted -->s allocated by poppler_page_get_form_field_mapping().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#free_image_mapping-class_method" title="free_image_mapping (class method)">.<strong>free_image_mapping</strong>(list)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Frees a list of Poppler::ImageMapping<!-- raw HTML omitted -->s allocated by poppler_page_get_image_mapping().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#free_link_mapping-class_method" title="free_link_mapping (class method)">.<strong>free_link_mapping</strong>(list)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Frees a list of Poppler::LinkMapping<!-- raw HTML omitted -->s allocated by poppler_page_get_link_mapping().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#free_text_attributes-class_method" title="free_text_attributes (class method)">.<strong>free_text_attributes</strong>(list)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Frees a list of Poppler::TextAttributes<!-- raw HTML omitted -->s allocated by poppler_page_get_text_attributes().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selection_region_free-class_method" title="selection_region_free (class method)">.<strong>selection_region_free</strong>(region)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Frees <!-- raw HTML omitted -->region<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_annot-instance_method" title="#add_annot (instance method)">#<strong>add_annot</strong>(annot)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds annotation <!-- raw HTML omitted -->annot<!-- raw HTML omitted --> to <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#annot_mapping-instance_method" title="#annot_mapping (instance method)">#<strong>annot_mapping</strong>  &#x21d2; GLib::List&lt;Poppler::AnnotMapping&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a list of Poppler::AnnotMapping items that map from a location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to a Poppler::Annot.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#duration-instance_method" title="#duration (instance method)">#<strong>duration</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the duration of <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_text-instance_method" title="#find_text (instance method)">#<strong>find_text</strong>(text, options = nil)  &#x21d2; GLib::List&lt;Poppler::Rectangle&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Finds <!-- raw HTML omitted -->text<!-- raw HTML omitted --> in <!-- raw HTML omitted -->page<!-- raw HTML omitted --> with the default options (%POPPLER_FIND_DEFAULT) and returns a #GList of rectangles for each occurrence of the text on the page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_text_raw-instance_method" title="#find_text_raw (instance method)">#<strong>find_text_raw</strong>  &#x21d2; GLib::List&lt;Poppler::Rectangle&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Finds <!-- raw HTML omitted -->text<!-- raw HTML omitted --> in <!-- raw HTML omitted -->page<!-- raw HTML omitted --> with the default options (%POPPLER_FIND_DEFAULT) and returns a #GList of rectangles for each occurrence of the text on the page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_text_with_options-instance_method" title="#find_text_with_options (instance method)">#<strong>find_text_with_options</strong>(text, options)  &#x21d2; GLib::List&lt;Poppler::Rectangle&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Finds <!-- raw HTML omitted -->text<!-- raw HTML omitted --> in <!-- raw HTML omitted -->page<!-- raw HTML omitted --> with the given Poppler::FindFlags options and returns a #GList of rectangles for each occurrence of the text on the page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#form_field_mapping-instance_method" title="#form_field_mapping (instance method)">#<strong>form_field_mapping</strong>  &#x21d2; GLib::List&lt;Poppler::FormFieldMapping&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a list of Poppler::FormFieldMapping items that map from a location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to a form field.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_bounding_box-instance_method" title="#get_bounding_box (instance method)">#<strong>get_bounding_box</strong>(rect)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_crop_box-instance_method" title="#get_crop_box (instance method)">#<strong>get_crop_box</strong>(rect)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrurns the crop box of <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_image-instance_method" title="#get_image (instance method)">#<strong>get_image</strong>(image_id)  &#x21d2; cairo::Surface </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a cairo surface for the image of the <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_selected_region-instance_method" title="#get_selected_region (instance method)">#<strong>get_selected_region</strong>(scale, style, selection)  &#x21d2; cairo::Region </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a region containing the area that would be rendered by poppler_page_render_selection().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_selected_text-instance_method" title="#get_selected_text (instance method)">#<strong>get_selected_text</strong>(style, selection)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the contents of the specified <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> as text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_selection_region-instance_method" title="#get_selection_region (instance method)">#<strong>get_selection_region</strong>(scale, style, selection)  &#x21d2; GLib::List&lt;Poppler::Rectangle&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a region containing the area that would be rendered by poppler_page_render_selection() as a #GList of Poppler::Rectangle.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_size-instance_method" title="#get_size (instance method)">#<strong>get_size</strong>(width, height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the size of <!-- raw HTML omitted -->page<!-- raw HTML omitted --> at the current scale and rotation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_text-instance_method" title="#get_text (instance method)">#<strong>get_text</strong>(options = {})  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_text_attributes_for_area-instance_method" title="#get_text_attributes_for_area (instance method)">#<strong>get_text_attributes_for_area</strong>(area)  &#x21d2; GLib::List&lt;Poppler::TextAttributes&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Obtains the attributes of the text in <!-- raw HTML omitted -->area<!-- raw HTML omitted --> as a #GList of Poppler::TextAttributes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_text_for_area-instance_method" title="#get_text_for_area (instance method)">#<strong>get_text_for_area</strong>(area)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the text of <!-- raw HTML omitted -->page<!-- raw HTML omitted --> contained in <!-- raw HTML omitted -->area<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_text_layout-instance_method" title="#get_text_layout (instance method)">#<strong>get_text_layout</strong>(rectangles, n_rectangles)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Obtains the layout of the text as a list of Poppler::Rectangle This array must be freed with g_free() when done.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_text_layout_for_area-instance_method" title="#get_text_layout_for_area (instance method)">#<strong>get_text_layout_for_area</strong>(area, rectangles, n_rectangles)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Obtains the layout of the text contained in <!-- raw HTML omitted -->area<!-- raw HTML omitted --> as a list of Poppler::Rectangle This array must be freed with g_free() when done.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_thumbnail_size-instance_method" title="#get_thumbnail_size (instance method)">#<strong>get_thumbnail_size</strong>(width, height)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns true if <!-- raw HTML omitted -->page<!-- raw HTML omitted --> has a thumbnail associated with it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#image_mapping-instance_method" title="#image_mapping (instance method)">#<strong>image_mapping</strong>  &#x21d2; GLib::List&lt;Poppler::ImageMapping&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a list of Poppler::ImageMapping items that map from a location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to an image of the page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#image_mapping_raw-instance_method" title="#image_mapping_raw (instance method)">#<strong>image_mapping_raw</strong>  &#x21d2; GLib::List&lt;Poppler::ImageMapping&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a list of Poppler::ImageMapping items that map from a location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to an image of the page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#index-instance_method" title="#index (instance method)">#<strong>index</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the index of <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#label-instance_method" title="#label (instance method)">#<strong>label</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The label of the page or nil.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#label=-instance_method" title="#label= (instance method)">#<strong>label=</strong>(label)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The label of the page or nil.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#link_mapping-instance_method" title="#link_mapping (instance method)">#<strong>link_mapping</strong>  &#x21d2; GLib::List&lt;Poppler::LinkMapping&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a list of Poppler::LinkMapping items that map from a location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to a Poppler::Action.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_annot-instance_method" title="#remove_annot (instance method)">#<strong>remove_annot</strong>(annot)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes annotation <!-- raw HTML omitted -->annot<!-- raw HTML omitted --> from <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render-instance_method" title="#render (instance method)">#<strong>render</strong>(cairo)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Render the page to the given cairo context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_for_printing-instance_method" title="#render_for_printing (instance method)">#<strong>render_for_printing</strong>(cairo)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Render the page to the given cairo context for printing with #POPPLER_PRINT_ALL flags selected.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_for_printing_with_options-instance_method" title="#render_for_printing_with_options (instance method)">#<strong>render_for_printing_with_options</strong>(cairo, options)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Render the page to the given cairo context for printing with the specified options.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_selection-instance_method" title="#render_selection (instance method)">#<strong>render_selection</strong>(cairo, selection, old_selection, style, glyph_color, background_color)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Render the selection specified by <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> for <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to the given cairo context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_to_ps-instance_method" title="#render_to_ps (instance method)">#<strong>render_to_ps</strong>(ps_file)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Render the page on a postscript file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text-instance_method" title="#text (instance method)">#<strong>text</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the text of <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text_attributes-instance_method" title="#text_attributes (instance method)">#<strong>text_attributes</strong>  &#x21d2; GLib::List&lt;Poppler::TextAttributes&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Obtains the attributes of the text as a #GList of Poppler::TextAttributes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text_layout-instance_method" title="#text_layout (instance method)">#<strong>text_layout</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text_layout_raw-instance_method" title="#text_layout_raw (instance method)">#<strong>text_layout_raw</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#thumbnail-instance_method" title="#thumbnail (instance method)">#<strong>thumbnail</strong>  &#x21d2; cairo::Surface </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the embedded thumbnail for the specified page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#thumbnail_size-instance_method" title="#thumbnail_size (instance method)">#<strong>thumbnail_size</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#thumbnail_size_raw-instance_method" title="#thumbnail_size_raw (instance method)">#<strong>thumbnail_size_raw</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transition-instance_method" title="#transition (instance method)">#<strong>transition</strong>  &#x21d2; Poppler::PageTransition </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the transition effect of <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="free_annot_mapping-class_method">
+  
+    .<strong>free_annot_mapping</strong>(list)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Frees a list of Poppler::AnnotMapping<!-- raw HTML omitted -->s allocated by
+poppler_page_get_annot_mapping().  It also unreferences the Poppler::Annot<!-- raw HTML omitted -->s
+that each mapping contains, so if you want to keep them around, you need to
+reference them with g_object_ref().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>list</span>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="AnnotMapping.html" title="Poppler::AnnotMapping (class)">Poppler::AnnotMapping</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A list of
+Poppler::AnnotMapping<!-- raw HTML omitted -->s</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="free_form_field_mapping-class_method">
+  
+    .<strong>free_form_field_mapping</strong>(list)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Frees a list of Poppler::FormFieldMapping<!-- raw HTML omitted -->s allocated by
+poppler_page_get_form_field_mapping().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>list</span>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;Poppler::FormFieldMapping&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A list of
+Poppler::FormFieldMapping<!-- raw HTML omitted -->s</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="free_image_mapping-class_method">
+  
+    .<strong>free_image_mapping</strong>(list)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Frees a list of Poppler::ImageMapping<!-- raw HTML omitted -->s allocated by
+poppler_page_get_image_mapping().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>list</span>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="ImageMapping.html" title="Poppler::ImageMapping (class)">Poppler::ImageMapping</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A list of
+Poppler::ImageMapping<!-- raw HTML omitted -->s</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="free_link_mapping-class_method">
+  
+    .<strong>free_link_mapping</strong>(list)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Frees a list of Poppler::LinkMapping<!-- raw HTML omitted -->s allocated by
+poppler_page_get_link_mapping().  It also frees the Poppler::Action<!-- raw HTML omitted -->s
+that each mapping contains, so if you want to keep them around, you need to
+copy them with poppler_action_copy().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>list</span>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;Poppler::LinkMapping&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A list of
+Poppler::LinkMapping<!-- raw HTML omitted -->s</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="free_text_attributes-class_method">
+  
+    .<strong>free_text_attributes</strong>(list)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Frees a list of Poppler::TextAttributes<!-- raw HTML omitted -->s allocated by
+poppler_page_get_text_attributes().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>list</span>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;Poppler::TextAttributes&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A list of
+Poppler::TextAttributes<!-- raw HTML omitted -->s</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selection_region_free-class_method">
+  
+    .<strong>selection_region_free</strong>(region)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Frees <!-- raw HTML omitted -->region<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>region</span>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GList of
+Poppler::Rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_annot-instance_method">
+  
+    #<strong>add_annot</strong>(annot)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds annotation <!-- raw HTML omitted -->annot<!-- raw HTML omitted --> to <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>annot</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Annot.html" title="Poppler::Annot (class)">Poppler::Annot</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Poppler::Annot to add</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="annot_mapping-instance_method">
+  
+    #<strong>annot_mapping</strong>  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="AnnotMapping.html" title="Poppler::AnnotMapping (class)">Poppler::AnnotMapping</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a list of Poppler::AnnotMapping items that map from a location on
+<!-- raw HTML omitted -->page<!-- raw HTML omitted --> to a Poppler::Annot.  This list must be freed with
+poppler_page_free_annot_mapping() when done.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="AnnotMapping.html" title="Poppler::AnnotMapping (class)">Poppler::AnnotMapping</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A #GList of Poppler::AnnotMapping</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="duration-instance_method">
+  
+    #<strong>duration</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the duration of <!-- raw HTML omitted -->page<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>duration in seconds of <!-- raw HTML omitted -->page<!-- raw HTML omitted --> or -1.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="find_text-instance_method">
+  
+    #<strong>find_text</strong>(text, options = nil)  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Finds <!-- raw HTML omitted -->text<!-- raw HTML omitted --> in <!-- raw HTML omitted -->page<!-- raw HTML omitted --> with the default options (%POPPLER_FIND_DEFAULT) and
+returns a #GList of rectangles for each occurrence of the text on the page.
+The coordinates are in PDF points.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the text to search for (UTF-8 encoded)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GList of Poppler::Rectangle,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55
+56
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/poppler/page.rb', line 53</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_find_text'>find_text</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_find_text_raw'>find_text_raw</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_find_text_with_options'>find_text_with_options</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="find_text_raw-instance_method">
+  
+    #<strong>find_text_raw</strong>  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Finds <!-- raw HTML omitted -->text<!-- raw HTML omitted --> in <!-- raw HTML omitted -->page<!-- raw HTML omitted --> with the default options (%POPPLER_FIND_DEFAULT) and
+returns a #GList of rectangles for each occurrence of the text on the page.
+The coordinates are in PDF points.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the text to search for (UTF-8 encoded)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GList of Poppler::Rectangle,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/poppler/page.rb', line 52</span>
+
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="find_text_with_options-instance_method">
+  
+    #<strong>find_text_with_options</strong>(text, options)  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Finds <!-- raw HTML omitted -->text<!-- raw HTML omitted --> in <!-- raw HTML omitted -->page<!-- raw HTML omitted --> with the given Poppler::FindFlags options and
+returns a #GList of rectangles for each occurrence of the text on the page.
+The coordinates are in PDF points.</p>
+<p>When %POPPLER_FIND_MULTILINE is passed in <!-- raw HTML omitted -->options<!-- raw HTML omitted -->, matches may span more than
+one line. In this case, the returned list will contain one Poppler::Rectangle
+for each part of a match. The function poppler_rectangle_find_get_match_continued()
+will return true for all rectangles belonging to the same match, except for
+the last one. If a hyphen was ignored at the end of the part of the match,
+poppler_rectangle_find_get_ignored_hyphen() will return true for that
+rectangle.</p>
+<p>Note that currently matches spanning more than two lines are not found.
+(This limitation may be lifted in a future version.)</p>
+<p>Note also that currently finding multi-line matches backwards is not
+implemented; if you pass %POPPLER_FIND_BACKWARDS and %POPPLER_FIND_MULTILINE
+together, %POPPLER_FIND_MULTILINE will be ignored.
+of newly allocated Poppler::Rectangle. Free with g_list_free_full() using poppler_rectangle_free().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the text to search for (UTF-8 encoded)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FindFlags.html" title="Poppler::FindFlags (module)">Poppler::FindFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>find options</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly allocated list</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="form_field_mapping-instance_method">
+  
+    #<strong>form_field_mapping</strong>  &#x21d2; <tt>GLib::List&lt;Poppler::FormFieldMapping&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a list of Poppler::FormFieldMapping items that map from a
+location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to a form field.  This list must be freed
+with poppler_page_free_form_field_mapping() when done.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;Poppler::FormFieldMapping&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A #GList of Poppler::FormFieldMapping</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_bounding_box-instance_method">
+  
+    #<strong>get_bounding_box</strong>(rect)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rect</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_crop_box-instance_method">
+  
+    #<strong>get_crop_box</strong>(rect)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrurns the crop box of <!-- raw HTML omitted -->page<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rect</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Poppler::Rectangle to fill</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_image-instance_method">
+  
+    #<strong>get_image</strong>(image_id)  &#x21d2; <tt>cairo::Surface</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a cairo surface for the image of the <!-- raw HTML omitted -->page<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>image_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The image identifier</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>cairo::Surface</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A cairo surface for the image</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_selected_region-instance_method">
+  
+    #<strong>get_selected_region</strong>(scale, style, selection)  &#x21d2; <tt>cairo::Region</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a region containing the area that would be rendered by
+poppler_page_render_selection().
+The returned region must be freed with cairo_region_destroy()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>scale</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>scale specified as pixels per point</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>style</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SelectionStyle.html" title="Poppler::SelectionStyle (module)">Poppler::SelectionStyle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Poppler::SelectionStyle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>selection</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>start and end point of selection as a rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>cairo::Region</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a cairo_region_t</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_selected_text-instance_method">
+  
+    #<strong>get_selected_text</strong>(style, selection)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the contents of the specified <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> as text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>style</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SelectionStyle.html" title="Poppler::SelectionStyle (module)">Poppler::SelectionStyle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Poppler::SelectionStyle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>selection</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Poppler::Rectangle including the text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the contents of the <!-- raw HTML omitted -->selection<!-- raw HTML omitted -->
+as a string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_selection_region-instance_method">
+  
+    #<strong>get_selection_region</strong>(scale, style, selection)  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a region containing the area that would be rendered by
+poppler_page_render_selection() as a #GList of
+Poppler::Rectangle. The returned list must be freed with
+poppler_page_selection_region_free().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>scale</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>scale specified as pixels per point</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>style</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SelectionStyle.html" title="Poppler::SelectionStyle (module)">Poppler::SelectionStyle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Poppler::SelectionStyle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>selection</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>start and end point of selection as a rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GList of Poppler::Rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_size-instance_method">
+  
+    #<strong>get_size</strong>(width, height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the size of <!-- raw HTML omitted -->page<!-- raw HTML omitted --> at the current scale and rotation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the width of <!-- raw HTML omitted -->page<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the height of <!-- raw HTML omitted -->page<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_text-instance_method">
+  
+    #<strong>get_text</strong>(options = {})  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/poppler/page.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_text'>get_text</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_area'>area</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:area</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_style'>style</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:style</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_area'>area</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_style'>style</span>
+      <span class='id identifier rubyid_get_selected_text'>get_selected_text</span><span class='lparen'>(</span><span class='id identifier rubyid_style'>style</span><span class='comma'>,</span> <span class='id identifier rubyid_area'>area</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_get_text_for_area'>get_text_for_area</span><span class='lparen'>(</span><span class='id identifier rubyid_area'>area</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_text'>text</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_text_attributes_for_area-instance_method">
+  
+    #<strong>get_text_attributes_for_area</strong>(area)  &#x21d2; <tt>GLib::List&lt;Poppler::TextAttributes&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Obtains the attributes of the text in <!-- raw HTML omitted -->area<!-- raw HTML omitted --> as a #GList of Poppler::TextAttributes.
+This list must be freed with poppler_page_free_text_attributes() when done.</p>
+<p>Each list element is a Poppler::TextAttributes struct where start_index and
+end_index indicates the range of text (as returned by poppler_page_get_text_for_area())
+to which text attributes apply.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>area</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Poppler::Rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;Poppler::TextAttributes&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A #GList of Poppler::TextAttributes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_text_for_area-instance_method">
+  
+    #<strong>get_text_for_area</strong>(area)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the text of <!-- raw HTML omitted -->page<!-- raw HTML omitted --> contained in <!-- raw HTML omitted -->area<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>area</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Poppler::Rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the text as a string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_text_layout-instance_method">
+  
+    #<strong>get_text_layout</strong>(rectangles, n_rectangles)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Obtains the layout of the text as a list of Poppler::Rectangle
+This array must be freed with g_free() when done.</p>
+<p>The position in the array represents an offset in the text returned by
+poppler_page_get_text()</p>
+<p>See also poppler_page_get_text_layout_for_area().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rectangles</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for an array of Poppler::Rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_rectangles</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>length of returned array</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the page contains text, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_text_layout_for_area-instance_method">
+  
+    #<strong>get_text_layout_for_area</strong>(area, rectangles, n_rectangles)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Obtains the layout of the text contained in <!-- raw HTML omitted -->area<!-- raw HTML omitted --> as a list of Poppler::Rectangle
+This array must be freed with g_free() when done.</p>
+<p>The position in the array represents an offset in the text returned by
+poppler_page_get_text_for_area()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>area</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Poppler::Rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rectangles</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for an array of Poppler::Rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_rectangles</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>length of returned array</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the page contains text, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_thumbnail_size-instance_method">
+  
+    #<strong>get_thumbnail_size</strong>(width, height)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns true if <!-- raw HTML omitted -->page<!-- raw HTML omitted --> has a thumbnail associated with it.  It also
+fills in <!-- raw HTML omitted -->width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted --> with the width and height of the
+thumbnail.  The values of width and height are not changed if no
+appropriate thumbnail exists.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true, if <!-- raw HTML omitted -->page<!-- raw HTML omitted --> has a thumbnail associated with it.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="image_mapping-instance_method">
+  
+    #<strong>image_mapping</strong>  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="ImageMapping.html" title="Poppler::ImageMapping (class)">Poppler::ImageMapping</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a list of Poppler::ImageMapping items that map from a
+location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to an image of the page. This list must be freed
+with poppler_page_free_image_mapping() when done.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="ImageMapping.html" title="Poppler::ImageMapping (class)">Poppler::ImageMapping</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A #GList of Poppler::ImageMapping</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+30
+31
+32
+33
+34
+35
+36</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/poppler/page.rb', line 30</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_image_mapping'>image_mapping</span>
+  <span class='id identifier rubyid_mappings'>mappings</span> <span class='op'>=</span> <span class='id identifier rubyid_image_mapping_raw'>image_mapping_raw</span>
+  <span class='id identifier rubyid_mappings'>mappings</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_mapping'>mapping</span><span class='op'>|</span>
+    <span class='id identifier rubyid_mapping'>mapping</span><span class='period'>.</span><span class='id identifier rubyid_page'>page</span> <span class='op'>=</span> <span class='kw'>self</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_mappings'>mappings</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="image_mapping_raw-instance_method">
+  
+    #<strong>image_mapping_raw</strong>  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="ImageMapping.html" title="Poppler::ImageMapping (class)">Poppler::ImageMapping</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a list of Poppler::ImageMapping items that map from a
+location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to an image of the page. This list must be freed
+with poppler_page_free_image_mapping() when done.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="ImageMapping.html" title="Poppler::ImageMapping (class)">Poppler::ImageMapping</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A #GList of Poppler::ImageMapping</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/poppler/page.rb', line 29</span>
+
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="index-instance_method">
+  
+    #<strong>index</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the index of <!-- raw HTML omitted -->page<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>index value of <!-- raw HTML omitted -->page<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="label-instance_method">
+  
+    #<strong>label</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The label of the page or nil. See also poppler_page_get_label()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>label</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="label=-instance_method">
+  
+    #<strong>label=</strong>(label)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The label of the page or nil. See also poppler_page_get_label()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>label</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>label</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>label</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="link_mapping-instance_method">
+  
+    #<strong>link_mapping</strong>  &#x21d2; <tt>GLib::List&lt;Poppler::LinkMapping&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a list of Poppler::LinkMapping items that map from a
+location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to a Poppler::Action.  This list must be freed
+with poppler_page_free_link_mapping() when done.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;Poppler::LinkMapping&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A #GList of Poppler::LinkMapping</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_annot-instance_method">
+  
+    #<strong>remove_annot</strong>(annot)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes annotation <!-- raw HTML omitted -->annot<!-- raw HTML omitted --> from <!-- raw HTML omitted -->page<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>annot</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Annot.html" title="Poppler::Annot (class)">Poppler::Annot</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Poppler::Annot to remove</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render-instance_method">
+  
+    #<strong>render</strong>(cairo)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Render the page to the given cairo context. This function
+is for rendering a page that will be displayed. If you want
+to render a page that will be printed use
+poppler_page_render_for_printing() instead.  Please see the documentation
+for that function for the differences between rendering to the screen and
+rendering to a printer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cairo</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cairo context to render to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_for_printing-instance_method">
+  
+    #<strong>render_for_printing</strong>(cairo)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Render the page to the given cairo context for printing with
+#POPPLER_PRINT_ALL flags selected.  If you want a different set of flags,
+use poppler_page_render_for_printing_with_options().</p>
+<p>The difference between poppler_page_render() and this function is that some
+things get rendered differently between screens and printers:</p>
+<!-- raw HTML omitted -->
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cairo</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cairo context to render to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_for_printing_with_options-instance_method">
+  
+    #<strong>render_for_printing_with_options</strong>(cairo, options)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Render the page to the given cairo context for printing
+with the specified options</p>
+<p>See the documentation for poppler_page_render_for_printing() for the
+differences between rendering to the screen and rendering to a printer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cairo</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cairo context to render to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PrintFlags.html" title="Poppler::PrintFlags (module)">Poppler::PrintFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>print options</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_selection-instance_method">
+  
+    #<strong>render_selection</strong>(cairo, selection, old_selection, style, glyph_color, background_color)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Render the selection specified by <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> for <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to
+the given cairo context.  The selection will be rendered, using
+<!-- raw HTML omitted -->glyph_color<!-- raw HTML omitted --> for the glyphs and <!-- raw HTML omitted -->background_color<!-- raw HTML omitted --> for the selection
+background.</p>
+<p>If non-NULL, <!-- raw HTML omitted -->old_selection<!-- raw HTML omitted --> specifies the selection that is already
+rendered to <!-- raw HTML omitted -->cairo<!-- raw HTML omitted -->, in which case this function will (some day)
+only render the changed part of the selection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cairo</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cairo context to render to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>selection</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>start and end point of selection as a rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>old_selection</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>previous selection</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>style</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SelectionStyle.html" title="Poppler::SelectionStyle (module)">Poppler::SelectionStyle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Poppler::SelectionStyle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>glyph_color</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Poppler::Color (class)">Poppler::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color to use for drawing glyphs</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>background_color</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Poppler::Color (class)">Poppler::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color to use for the selection background</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_to_ps-instance_method">
+  
+    #<strong>render_to_ps</strong>(ps_file)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Render the page on a postscript file</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ps_file</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PSFile.html" title="Poppler::PSFile (class)">Poppler::PSFile</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the PopplerPSFile to render to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text-instance_method">
+  
+    #<strong>text</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the text of <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the text of the <!-- raw HTML omitted -->page<!-- raw HTML omitted -->
+as a string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text_attributes-instance_method">
+  
+    #<strong>text_attributes</strong>  &#x21d2; <tt>GLib::List&lt;Poppler::TextAttributes&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Obtains the attributes of the text as a #GList of Poppler::TextAttributes.
+This list must be freed with poppler_page_free_text_attributes() when done.</p>
+<p>Each list element is a Poppler::TextAttributes struct where start_index and
+end_index indicates the range of text (as returned by poppler_page_get_text())
+to which text attributes apply.</p>
+<p>See also poppler_page_get_text_attributes_for_area()</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;Poppler::TextAttributes&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A #GList of Poppler::TextAttributes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text_layout-instance_method">
+  
+    #<strong>text_layout</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+20
+21
+22
+23
+24
+25
+26
+27</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/poppler/page.rb', line 20</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_text_layout'>text_layout</span>
+  <span class='id identifier rubyid_success'>success</span><span class='comma'>,</span> <span class='id identifier rubyid_rectangles'>rectangles</span> <span class='op'>=</span> <span class='id identifier rubyid_text_layout_raw'>text_layout_raw</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_success'>success</span>
+    <span class='id identifier rubyid_rectangles'>rectangles</span>
+  <span class='kw'>else</span>
+    <span class='kw'>nil</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text_layout_raw-instance_method">
+  
+    #<strong>text_layout_raw</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+19</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/poppler/page.rb', line 19</span>
+
+<span class='id identifier rubyid_alias_method'>alias_method</span> <span class='symbol'>:text_layout_raw</span><span class='comma'>,</span> <span class='symbol'>:text_layout</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="thumbnail-instance_method">
+  
+    #<strong>thumbnail</strong>  &#x21d2; <tt>cairo::Surface</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the embedded thumbnail for the specified page.  If the document
+doesn't have an embedded thumbnail for the page, this function
+returns nil.
+doesn't have a thumbnail for this page.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>cairo::Surface</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the tumbnail as a cairo_surface_t or nil if the document</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="thumbnail_size-instance_method">
+  
+    #<strong>thumbnail_size</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+62
+63
+64
+65
+66
+67
+68
+69</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/poppler/page.rb', line 62</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_thumbnail_size'>thumbnail_size</span>
+  <span class='id identifier rubyid_have_thumnbial'>have_thumnbial</span><span class='comma'>,</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_height'>height</span> <span class='op'>=</span> <span class='id identifier rubyid_thumbnail_size_raw'>thumbnail_size_raw</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_have_thumnbial'>have_thumnbial</span>
+    <span class='lbracket'>[</span><span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_height'>height</span><span class='rbracket'>]</span>
+  <span class='kw'>else</span>
+    <span class='kw'>nil</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="thumbnail_size_raw-instance_method">
+  
+    #<strong>thumbnail_size_raw</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/poppler/page.rb', line 61</span>
+
+<span class='id identifier rubyid_alias_method'>alias_method</span> <span class='symbol'>:thumbnail_size_raw</span><span class='comma'>,</span> <span class='symbol'>:thumbnail_size</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="transition-instance_method">
+  
+    #<strong>transition</strong>  &#x21d2; <tt>Poppler::PageTransition</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the transition effect of <!-- raw HTML omitted -->page<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Poppler::PageTransition</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Poppler::PageTransition or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

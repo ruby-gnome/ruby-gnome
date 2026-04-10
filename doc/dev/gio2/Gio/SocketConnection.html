@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::SocketConnection
+  
+    &mdash; Ruby/GIO2
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::SocketConnection";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">SocketConnection</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::SocketConnection
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="IOStream.html" title="Gio::IOStream (class)">IOStream</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="IOStream.html" title="Gio::IOStream (class)">IOStream</a></span></li>
+          
+            <li class="next">Gio::SocketConnection</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="TcpConnection.html" title="Gio::TcpConnection (class)">TcpConnection</a></span>, <span class='object_link'><a href="UnixConnection.html" title="Gio::UnixConnection (class)">UnixConnection</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#factory_lookup_type-class_method" title="factory_lookup_type (class method)">.<strong>factory_lookup_type</strong>(family, type, protocol_id)  &#x21d2; GLib::Type </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Looks up the #GType to be used when creating socket connections on sockets with the specified <!-- raw HTML omitted -->family<!-- raw HTML omitted -->, <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and <!-- raw HTML omitted -->protocol_id<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#factory_register_type-class_method" title="factory_register_type (class method)">.<strong>factory_register_type</strong>(g_type, family, type, protocol)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Looks up the #GType to be used when creating socket connections on sockets with the specified <!-- raw HTML omitted -->family<!-- raw HTML omitted -->, <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and <!-- raw HTML omitted -->protocol<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#connect-instance_method" title="#connect (instance method)">#<strong>connect</strong>(address, cancellable)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Connect <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> to the specified remote address.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#connect_async-instance_method" title="#connect_async (instance method)">#<strong>connect_async</strong>(address, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asynchronously connect <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> to the specified remote address.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#connect_finish-instance_method" title="#connect_finish (instance method)">#<strong>connect_finish</strong>(result)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the result of a g_socket_connection_connect_async() call.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_connected-instance_method" title="#is_connected (instance method)">#<strong>is_connected</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is connected.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#local_address-instance_method" title="#local_address (instance method)">#<strong>local_address</strong>  &#x21d2; Gio::SocketAddress </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Try to get the local address of a socket connection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remote_address-instance_method" title="#remote_address (instance method)">#<strong>remote_address</strong>  &#x21d2; Gio::SocketAddress </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Try to get the remote address of a socket connection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#socket-instance_method" title="#socket (instance method)">#<strong>socket</strong>  &#x21d2; Gio::Socket </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The underlying [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#socket=-instance_method" title="#socket= (instance method)">#<strong>socket=</strong>(socket)  &#x21d2; Gio::Socket </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The underlying [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket].</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="IOStream.html" title="Gio::IOStream (class)">IOStream</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="IOStream.html#clear_pending-instance_method" title="Gio::IOStream#clear_pending (method)">#clear_pending</a></span>, <span class='object_link'><a href="IOStream.html#close-instance_method" title="Gio::IOStream#close (method)">#close</a></span>, <span class='object_link'><a href="IOStream.html#close_async-instance_method" title="Gio::IOStream#close_async (method)">#close_async</a></span>, <span class='object_link'><a href="IOStream.html#close_finish-instance_method" title="Gio::IOStream#close_finish (method)">#close_finish</a></span>, <span class='object_link'><a href="IOStream.html#closed=-instance_method" title="Gio::IOStream#closed= (method)">#closed=</a></span>, <span class='object_link'><a href="IOStream.html#closed%3F-instance_method" title="Gio::IOStream#closed? (method)">#closed?</a></span>, <span class='object_link'><a href="IOStream.html#has_pending-instance_method" title="Gio::IOStream#has_pending (method)">#has_pending</a></span>, <span class='object_link'><a href="IOStream.html#input_stream-instance_method" title="Gio::IOStream#input_stream (method)">#input_stream</a></span>, <span class='object_link'><a href="IOStream.html#input_stream=-instance_method" title="Gio::IOStream#input_stream= (method)">#input_stream=</a></span>, <span class='object_link'><a href="IOStream.html#is_closed-instance_method" title="Gio::IOStream#is_closed (method)">#is_closed</a></span>, <span class='object_link'><a href="IOStream.html#output_stream-instance_method" title="Gio::IOStream#output_stream (method)">#output_stream</a></span>, <span class='object_link'><a href="IOStream.html#output_stream=-instance_method" title="Gio::IOStream#output_stream= (method)">#output_stream=</a></span>, <span class='object_link'><a href="IOStream.html#set_pending-instance_method" title="Gio::IOStream#set_pending (method)">#set_pending</a></span>, <span class='object_link'><a href="IOStream.html#splice_async-instance_method" title="Gio::IOStream#splice_async (method)">#splice_async</a></span>, <span class='object_link'><a href="IOStream.html#splice_finish-class_method" title="Gio::IOStream.splice_finish (method)">splice_finish</a></span></p>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="factory_lookup_type-class_method">
+  
+    .<strong>factory_lookup_type</strong>(family, type, protocol_id)  &#x21d2; <tt>GLib::Type</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Looks up the #GType to be used when creating socket connections on
+sockets with the specified <!-- raw HTML omitted -->family<!-- raw HTML omitted -->, <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and <!-- raw HTML omitted -->protocol_id<!-- raw HTML omitted -->.</p>
+<p>If no type is registered, the GSocket::Connection base type is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>family</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketFamily.html" title="Gio::SocketFamily (module)">Gio::SocketFamily</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a GSocket::Family</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketType.html" title="Gio::SocketType (module)">Gio::SocketType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a GSocket::Type</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>protocol_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a protocol id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GType</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="factory_register_type-class_method">
+  
+    .<strong>factory_register_type</strong>(g_type, family, type, protocol)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Looks up the #GType to be used when creating socket connections on
+sockets with the specified <!-- raw HTML omitted -->family<!-- raw HTML omitted -->, <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and <!-- raw HTML omitted -->protocol<!-- raw HTML omitted -->.</p>
+<p>If no type is registered, the GSocket::Connection base type is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>g_type</span>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GType, inheriting from %G_TYPE_SOCKET_CONNECTION</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>family</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketFamily.html" title="Gio::SocketFamily (module)">Gio::SocketFamily</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a GSocket::Family</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketType.html" title="Gio::SocketType (module)">Gio::SocketType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a GSocket::Type</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>protocol</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a protocol id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="connect-instance_method">
+  
+    #<strong>connect</strong>(address, cancellable)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Connect <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> to the specified remote address.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>address</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a GSocket::Address specifying the remote address.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the connection succeeded, false on error</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="connect_async-instance_method">
+  
+    #<strong>connect_async</strong>(address, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asynchronously connect <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> to the specified remote address.</p>
+<p>This clears the #GSocket:blocking flag on <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->'s underlying
+socket if it is currently set.</p>
+<p>If #GSocket:timeout is set, the operation will time out and return
+%G_IO_ERROR_TIMED_OUT after that period. Otherwise, it will continue
+indefinitely until operating system timeouts (if any) are hit.</p>
+<p>Use g_socket_connection_connect_finish() to retrieve the result.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>address</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a GSocket::Address specifying the remote address.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a %GCancellable or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a GAsync::ReadyCallback</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data for the callback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="connect_finish-instance_method">
+  
+    #<strong>connect_finish</strong>(result)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the result of a g_socket_connection_connect_async() call.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncResult.html" title="Gio::AsyncResult (module)">Gio::AsyncResult</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the GAsync::Result</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the connection succeeded, false on error</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_connected-instance_method">
+  
+    #<strong>is_connected</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is connected. This is equivalent to calling
+g_socket_is_connected() on <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->'s underlying #GSocket.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is connected</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="local_address-instance_method">
+  
+    #<strong>local_address</strong>  &#x21d2; <tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Try to get the local address of a socket connection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a GSocket::Address or nil on error.
+Free the returned object with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remote_address-instance_method">
+  
+    #<strong>remote_address</strong>  &#x21d2; <tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Try to get the remote address of a socket connection.</p>
+<p>Since GLib 2.40, when used with g_socket_client_connect() or
+g_socket_client_connect_async(), during emission of
+%G_SOCKET_CLIENT_CONNECTING, this function will return the remote
+address that will be used for the connection.  This allows
+applications to print e.g. &quot;Connecting to example.com
+(10.42.77.3)...&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SocketAddress.html" title="Gio::SocketAddress (class)">Gio::SocketAddress</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a GSocket::Address or nil on error.
+Free the returned object with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="socket-instance_method">
+  
+    #<strong>socket</strong>  &#x21d2; <tt><span class='object_link'><a href="Socket.html" title="Gio::Socket (class)">Gio::Socket</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The underlying [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Socket.html" title="Gio::Socket (class)">Gio::Socket</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>socket</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="socket=-instance_method">
+  
+    #<strong>socket=</strong>(socket)  &#x21d2; <tt><span class='object_link'><a href="Socket.html" title="Gio::Socket (class)">Gio::Socket</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The underlying [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>socket</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Socket.html" title="Gio::Socket (class)">Gio::Socket</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Socket.html" title="Gio::Socket (class)">Gio::Socket</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>socket</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Socket.html" title="Gio::Socket (class)">Gio::Socket</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>socket</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

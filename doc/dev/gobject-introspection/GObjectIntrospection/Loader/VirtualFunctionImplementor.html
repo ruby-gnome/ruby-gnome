@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GObjectIntrospection::Loader::VirtualFunctionImplementor
+  
+    &mdash; Ruby/GObjectIntrospection
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GObjectIntrospection::Loader::VirtualFunctionImplementor";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (V)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../GObjectIntrospection.html" title="GObjectIntrospection (module)">GObjectIntrospection</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Loader.html" title="GObjectIntrospection::Loader (class)">Loader</a></span></span>
+     &raquo; 
+    <span class="title">VirtualFunctionImplementor</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GObjectIntrospection::Loader::VirtualFunctionImplementor
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObjectIntrospection::Loader::VirtualFunctionImplementor</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/gobject-introspection/loader.rb</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#implement-instance_method" title="#implement (instance method)">#<strong>implement</strong>(implementor_gtype, name)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(loader_class, gtype_prefix, infos)  &#x21d2; VirtualFunctionImplementor </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A new instance of VirtualFunctionImplementor.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(loader_class, gtype_prefix, infos)  &#x21d2; <tt><span class='object_link'><a href="" title="GObjectIntrospection::Loader::VirtualFunctionImplementor (class)">VirtualFunctionImplementor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a new instance of VirtualFunctionImplementor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gobject-introspection/loader.rb', line 837</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_loader_class'>loader_class</span><span class='comma'>,</span> <span class='id identifier rubyid_gtype_prefix'>gtype_prefix</span><span class='comma'>,</span> <span class='id identifier rubyid_infos'>infos</span><span class='rparen'>)</span>
+  <span class='ivar'>@loader_class</span> <span class='op'>=</span> <span class='id identifier rubyid_loader_class'>loader_class</span>
+  <span class='ivar'>@gtype_prefix</span> <span class='op'>=</span> <span class='id identifier rubyid_gtype_prefix'>gtype_prefix</span>
+  <span class='ivar'>@infos</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_prefix'>prefix</span> <span class='op'>=</span> <span class='const'>GLib</span><span class='op'>::</span><span class='const'>VIRTUAL_FUNCTION_IMPLEMENTATION_PREFIX</span>
+  <span class='id identifier rubyid_infos'>infos</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_info'>info</span><span class='op'>|</span>
+    <span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='id identifier rubyid_info'>info</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+    <span class='ivar'>@infos</span><span class='lbracket'>[</span><span class='symbol'>:&quot;#{</span><span class='id identifier rubyid_prefix'>prefix</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_info'>info</span>
+    <span class='ivar'>@infos</span><span class='lbracket'>[</span><span class='symbol'>:&quot;#{</span><span class='id identifier rubyid_prefix'>prefix</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_gtype_prefix'>gtype_prefix</span><span class='embexpr_end'>}</span><span class='tstring_content'>_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_info'>info</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="implement-instance_method">
+  
+    #<strong>implement</strong>(implementor_gtype, name)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gobject-introspection/loader.rb', line 849</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_implement'>implement</span><span class='lparen'>(</span><span class='id identifier rubyid_implementor_gtype'>implementor_gtype</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_info'>info</span> <span class='op'>=</span> <span class='ivar'>@infos</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_info'>info</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_container'>container</span> <span class='op'>=</span> <span class='id identifier rubyid_info'>info</span><span class='period'>.</span><span class='id identifier rubyid_container'>container</span>
+  <span class='id identifier rubyid_vtable_gtype'>vtable_gtype</span> <span class='op'>=</span> <span class='id identifier rubyid_container'>container</span><span class='period'>.</span><span class='id identifier rubyid_gtype'>gtype</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_container'>container</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:class_struct</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_struct'>struct</span> <span class='op'>=</span> <span class='id identifier rubyid_container'>container</span><span class='period'>.</span><span class='id identifier rubyid_class_struct'>class_struct</span>
+    <span class='comment'># This is for &quot;super&quot; in &quot;virtual_do_XXX&quot;.
+</span>    <span class='id identifier rubyid_parent_gtype'>parent_gtype</span> <span class='op'>=</span> <span class='id identifier rubyid_implementor_gtype'>implementor_gtype</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span>
+    <span class='id identifier rubyid_parent_class'>parent_class</span> <span class='op'>=</span> <span class='id identifier rubyid_parent_gtype'>parent_gtype</span><span class='period'>.</span><span class='id identifier rubyid_to_class'>to_class</span>
+    <span class='id identifier rubyid_invoker'>invoker</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Invoker.html" title="GObjectIntrospection::Loader::Invoker (class)">Invoker</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Invoker.html#initialize-instance_method" title="GObjectIntrospection::Loader::Invoker#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_info'>info</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_parent_class'>parent_class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>\#</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_parent_vfunc_callable'>parent_vfunc_callable</span> <span class='op'>=</span> <span class='const'>Module</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+    <span class='id identifier rubyid_parent_vfunc_callable'>parent_vfunc_callable</span><span class='period'>.</span><span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='op'>|</span>
+      <span class='id identifier rubyid_invoker'>invoker</span><span class='period'>.</span><span class='id identifier rubyid_invoke'>invoke</span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='id identifier rubyid_block'>block</span><span class='comma'>,</span> <span class='label'>implementor_gtype:</span> <span class='id identifier rubyid_parent_gtype'>parent_gtype</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='comment'># If we use implementor_gtype.class.include here,
+</span>    <span class='comment'># GLib::Instantiatable.include calls this method
+</span>    <span class='comment'># recursively. We don&#39;t need to call any hook for this
+</span>    <span class='comment'># method. So we use the original Module.include here.
+</span>    <span class='const'>Module</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:include</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_unbind'>unbind</span><span class='period'>.</span><span class='id identifier rubyid_bind_call'>bind_call</span><span class='lparen'>(</span><span class='id identifier rubyid_implementor_gtype'>implementor_gtype</span><span class='period'>.</span><span class='id identifier rubyid_to_class'>to_class</span><span class='comma'>,</span>
+                                             <span class='id identifier rubyid_parent_vfunc_callable'>parent_vfunc_callable</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_implementor_gtype'>implementor_gtype</span><span class='period'>.</span><span class='id identifier rubyid_type_is_a?'>type_is_a?</span><span class='lparen'>(</span><span class='id identifier rubyid_vtable_gtype'>vtable_gtype</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_struct'>struct</span> <span class='op'>=</span> <span class='id identifier rubyid_container'>container</span><span class='period'>.</span><span class='id identifier rubyid_iface_struct'>iface_struct</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_field'>field</span> <span class='op'>=</span> <span class='id identifier rubyid_struct'>struct</span><span class='period'>.</span><span class='id identifier rubyid_find_field'>find_field</span><span class='lparen'>(</span><span class='id identifier rubyid_info'>info</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='ivar'>@loader_class</span><span class='period'>.</span><span class='id identifier rubyid_implement_virtual_function'>implement_virtual_function</span><span class='lparen'>(</span><span class='id identifier rubyid_field'>field</span><span class='comma'>,</span>
+                                           <span class='id identifier rubyid_implementor_gtype'>implementor_gtype</span><span class='comma'>,</span>
+                                           <span class='id identifier rubyid_vtable_gtype'>vtable_gtype</span><span class='comma'>,</span>
+                                           <span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+  <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

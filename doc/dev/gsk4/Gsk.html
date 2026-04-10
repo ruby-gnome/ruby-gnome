@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gsk
+  
+    &mdash; Ruby/GSK4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gsk";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (G)</a> &raquo;
+    
+    
+    <span class="title">Gsk</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gsk
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/gsk4/loader.rb<span class="defines">,<br />
+  lib/gsk4.rb,<br /> lib/gsk4/version.rb,<br /> lib/gsk4/rounded-rect.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Copyright (C) 2025  Ruby-GNOME Project Team</p>
+<p>This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.</p>
+<p>This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.</p>
+<p>You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Gsk/BlendMode.html" title="Gsk::BlendMode (module)">BlendMode</a></span>, <span class='object_link'><a href="Gsk/Corner.html" title="Gsk::Corner (module)">Corner</a></span>, <span class='object_link'><a href="Gsk/FillRule.html" title="Gsk::FillRule (module)">FillRule</a></span>, <span class='object_link'><a href="Gsk/GLUniformType.html" title="Gsk::GLUniformType (module)">GLUniformType</a></span>, <span class='object_link'><a href="Gsk/LineCap.html" title="Gsk::LineCap (module)">LineCap</a></span>, <span class='object_link'><a href="Gsk/LineJoin.html" title="Gsk::LineJoin (module)">LineJoin</a></span>, <span class='object_link'><a href="Gsk/MaskMode.html" title="Gsk::MaskMode (module)">MaskMode</a></span>, <span class='object_link'><a href="Gsk/PathDirection.html" title="Gsk::PathDirection (module)">PathDirection</a></span>, <span class='object_link'><a href="Gsk/PathForeachFlags.html" title="Gsk::PathForeachFlags (module)">PathForeachFlags</a></span>, <span class='object_link'><a href="Gsk/PathOperation.html" title="Gsk::PathOperation (module)">PathOperation</a></span>, <span class='object_link'><a href="Gsk/RenderNodeType.html" title="Gsk::RenderNodeType (module)">RenderNodeType</a></span>, <span class='object_link'><a href="Gsk/ScalingFilter.html" title="Gsk::ScalingFilter (module)">ScalingFilter</a></span>, <span class='object_link'><a href="Gsk/SerializationError.html" title="Gsk::SerializationError (module)">SerializationError</a></span>, <span class='object_link'><a href="Gsk/TransformCategory.html" title="Gsk::TransformCategory (module)">TransformCategory</a></span>, <span class='object_link'><a href="Gsk/Version.html" title="Gsk::Version (module)">Version</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Gsk/BlendNode.html" title="Gsk::BlendNode (class)">BlendNode</a></span>, <span class='object_link'><a href="Gsk/BlurNode.html" title="Gsk::BlurNode (class)">BlurNode</a></span>, <span class='object_link'><a href="Gsk/BorderNode.html" title="Gsk::BorderNode (class)">BorderNode</a></span>, <span class='object_link'><a href="Gsk/BroadwayRenderer.html" title="Gsk::BroadwayRenderer (class)">BroadwayRenderer</a></span>, <span class='object_link'><a href="Gsk/CairoNode.html" title="Gsk::CairoNode (class)">CairoNode</a></span>, <span class='object_link'><a href="Gsk/CairoRenderer.html" title="Gsk::CairoRenderer (class)">CairoRenderer</a></span>, <span class='object_link'><a href="Gsk/ClipNode.html" title="Gsk::ClipNode (class)">ClipNode</a></span>, <span class='object_link'><a href="Gsk/ColorMatrixNode.html" title="Gsk::ColorMatrixNode (class)">ColorMatrixNode</a></span>, <span class='object_link'><a href="Gsk/ColorNode.html" title="Gsk::ColorNode (class)">ColorNode</a></span>, <span class='object_link'><a href="Gsk/ConicGradientNode.html" title="Gsk::ConicGradientNode (class)">ConicGradientNode</a></span>, <span class='object_link'><a href="Gsk/ContainerNode.html" title="Gsk::ContainerNode (class)">ContainerNode</a></span>, <span class='object_link'><a href="Gsk/CrossFadeNode.html" title="Gsk::CrossFadeNode (class)">CrossFadeNode</a></span>, <span class='object_link'><a href="Gsk/DebugNode.html" title="Gsk::DebugNode (class)">DebugNode</a></span>, <span class='object_link'><a href="Gsk/Error.html" title="Gsk::Error (class)">Error</a></span>, <span class='object_link'><a href="Gsk/FillNode.html" title="Gsk::FillNode (class)">FillNode</a></span>, <span class='object_link'><a href="Gsk/GLRenderer.html" title="Gsk::GLRenderer (class)">GLRenderer</a></span>, <span class='object_link'><a href="Gsk/GLShader.html" title="Gsk::GLShader (class)">GLShader</a></span>, <span class='object_link'><a href="Gsk/GLShaderNode.html" title="Gsk::GLShaderNode (class)">GLShaderNode</a></span>, <span class='object_link'><a href="Gsk/InsetShadowNode.html" title="Gsk::InsetShadowNode (class)">InsetShadowNode</a></span>, <span class='object_link'><a href="Gsk/LinearGradientNode.html" title="Gsk::LinearGradientNode (class)">LinearGradientNode</a></span>, <span class='object_link'><a href="Gsk/Loader.html" title="Gsk::Loader (class)">Loader</a></span>, <span class='object_link'><a href="Gsk/MaskNode.html" title="Gsk::MaskNode (class)">MaskNode</a></span>, <span class='object_link'><a href="Gsk/NglRenderer.html" title="Gsk::NglRenderer (class)">NglRenderer</a></span>, <span class='object_link'><a href="Gsk/OpacityNode.html" title="Gsk::OpacityNode (class)">OpacityNode</a></span>, <span class='object_link'><a href="Gsk/OutsetShadowNode.html" title="Gsk::OutsetShadowNode (class)">OutsetShadowNode</a></span>, <span class='object_link'><a href="Gsk/RadialGradientNode.html" title="Gsk::RadialGradientNode (class)">RadialGradientNode</a></span>, <span class='object_link'><a href="Gsk/RenderNode.html" title="Gsk::RenderNode (class)">RenderNode</a></span>, <span class='object_link'><a href="Gsk/Renderer.html" title="Gsk::Renderer (class)">Renderer</a></span>, <span class='object_link'><a href="Gsk/RepeatNode.html" title="Gsk::RepeatNode (class)">RepeatNode</a></span>, <span class='object_link'><a href="Gsk/RepeatingLinearGradientNode.html" title="Gsk::RepeatingLinearGradientNode (class)">RepeatingLinearGradientNode</a></span>, <span class='object_link'><a href="Gsk/RepeatingRadialGradientNode.html" title="Gsk::RepeatingRadialGradientNode (class)">RepeatingRadialGradientNode</a></span>, <span class='object_link'><a href="Gsk/RoundedClipNode.html" title="Gsk::RoundedClipNode (class)">RoundedClipNode</a></span>, <span class='object_link'><a href="Gsk/RoundedRect.html" title="Gsk::RoundedRect (class)">RoundedRect</a></span>, <span class='object_link'><a href="Gsk/ShadowNode.html" title="Gsk::ShadowNode (class)">ShadowNode</a></span>, <span class='object_link'><a href="Gsk/StrokeNode.html" title="Gsk::StrokeNode (class)">StrokeNode</a></span>, <span class='object_link'><a href="Gsk/SubsurfaceNode.html" title="Gsk::SubsurfaceNode (class)">SubsurfaceNode</a></span>, <span class='object_link'><a href="Gsk/TextNode.html" title="Gsk::TextNode (class)">TextNode</a></span>, <span class='object_link'><a href="Gsk/TextureNode.html" title="Gsk::TextureNode (class)">TextureNode</a></span>, <span class='object_link'><a href="Gsk/TextureScaleNode.html" title="Gsk::TextureScaleNode (class)">TextureScaleNode</a></span>, <span class='object_link'><a href="Gsk/TransformNode.html" title="Gsk::TransformNode (class)">TransformNode</a></span>, <span class='object_link'><a href="Gsk/VulkanRenderer.html" title="Gsk::VulkanRenderer (class)">VulkanRenderer</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="LOG_DOMAIN-constant" class="">LOG_DOMAIN =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Gsk</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#path_parse-instance_method" title="#path_parse (instance method)">#<strong>path_parse</strong>(string)  &#x21d2; Gsk::Path </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This is a convenience function that constructs a <code>GskPath</code> from a serialized form.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#serialization_error_quark-instance_method" title="#serialization_error_quark (instance method)">#<strong>serialization_error_quark</strong>  &#x21d2; GLib::Quark </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stroke_equal-instance_method" title="#stroke_equal (instance method)">#<strong>stroke_equal</strong>(stroke1, stroke2)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if 2 strokes are identical.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transform_parse-instance_method" title="#transform_parse (instance method)">#<strong>transform_parse</strong>(string, out_transform)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Parses the given <!-- raw HTML omitted -->string<!-- raw HTML omitted --> into a transform and puts it in <!-- raw HTML omitted -->out_transform<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value_dup_render_node-instance_method" title="#value_dup_render_node (instance method)">#<strong>value_dup_render_node</strong>(value)  &#x21d2; Gsk::RenderNode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the <code>GskRenderNode</code> stored inside the given <code>value</code>, and acquires a reference to it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value_get_render_node-instance_method" title="#value_get_render_node (instance method)">#<strong>value_get_render_node</strong>(value)  &#x21d2; Gsk::RenderNode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the <code>GskRenderNode</code> stored inside the given <code>value</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value_set_render_node-instance_method" title="#value_set_render_node (instance method)">#<strong>value_set_render_node</strong>(value, node)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Stores the given <code>GskRenderNode</code> inside <code>value</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value_take_render_node-instance_method" title="#value_take_render_node (instance method)">#<strong>value_take_render_node</strong>(value, node)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Stores the given <code>GskRenderNode</code> inside <code>value</code>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="path_parse-instance_method">
+  
+    #<strong>path_parse</strong>(string)  &#x21d2; <tt>Gsk::Path</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This is a convenience function that constructs a <code>GskPath</code>
+from a serialized form.</p>
+<p>The string is expected to be in (a superset of)
+<a href="https://www.w3.org/TR/SVG11/paths.htmlPath::Data">SVG path syntax</a>,
+as e.g. produced by [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Path.to_string].</p>
+<p>A high-level summary of the syntax:</p>
+<ul>
+<li><code>M x y</code> Move to <code>(x, y)</code></li>
+<li><code>L x y</code> Add a line from the current point to <code>(x, y)</code></li>
+<li><code>Q x1 y1 x2 y2</code> Add a quadratic Bézier from the current point to <code>(x2, y2)</code>, with control point <code>(x1, y1)</code></li>
+<li><code>C x1 y1 x2 y2 x3 y3</code> Add a cubic Bézier from the current point to <code>(x3, y3)</code>, with control points <code>(x1, y1)</code> and <code>(x2, y2)</code></li>
+<li><code>Z</code> Close the contour by drawing a line back to the start point</li>
+<li><code>H x</code> Add a horizontal line from the current point to the given x value</li>
+<li><code>V y</code> Add a vertical line from the current point to the given y value</li>
+<li><code>T x2 y2</code> Add a quadratic Bézier, using the reflection of the previous segments' control point as control point</li>
+<li><code>S x2 y2 x3 y3</code> Add a cubic Bézier, using the reflection of the previous segments' second control point as first control point</li>
+<li><code>A rx ry r l s x y</code> Add an elliptical arc from the current point to <code>(x, y)</code> with radii rx and ry. See the SVG documentation for how the other parameters influence the arc.</li>
+<li><code>O x1 y1 x2 y2 w</code> Add a rational quadratic Bézier from the current point to <code>(x2, y2)</code> with control point <code>(x1, y1)</code> and weight <code>w</code>.</li>
+</ul>
+<p>All the commands have lowercase variants that interpret coordinates
+relative to the current point.</p>
+<p>The <code>O</code> command is an extension that is not supported in SVG.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>string</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gsk::Path</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new <code>GskPath</code>, or <code>NULL</code> if <!-- raw HTML omitted -->string<!-- raw HTML omitted --> could not be parsed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="serialization_error_quark-instance_method">
+  
+    #<strong>serialization_error_quark</strong>  &#x21d2; <tt>GLib::Quark</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Quark</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stroke_equal-instance_method">
+  
+    #<strong>stroke_equal</strong>(stroke1, stroke2)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if 2 strokes are identical.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>stroke1</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the first <code>GskStroke</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stroke2</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the second <code>GskStroke</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> if the 2 strokes are equal, <code>FALSE</code> otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="transform_parse-instance_method">
+  
+    #<strong>transform_parse</strong>(string, out_transform)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Parses the given <!-- raw HTML omitted -->string<!-- raw HTML omitted --> into a transform and puts it in
+<!-- raw HTML omitted -->out_transform<!-- raw HTML omitted -->.</p>
+<p>Strings printed via [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Transform.to_string]
+can be read in again successfully using this function.</p>
+<p>If <!-- raw HTML omitted -->string<!-- raw HTML omitted --> does not describe a valid transform, false is
+returned and nil is put in <!-- raw HTML omitted -->out_transform<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>string</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the string to parse</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_transform</span>
+      
+      
+        <span class='type'>(<tt>Gsk::Transform</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The location to put the transform in</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->string<!-- raw HTML omitted --> described a valid transform.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="value_dup_render_node-instance_method">
+  
+    #<strong>value_dup_render_node</strong>(value)  &#x21d2; <tt><span class='object_link'><a href="Gsk/RenderNode.html" title="Gsk::RenderNode (class)">Gsk::RenderNode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the <code>GskRenderNode</code> stored inside the given <code>value</code>, and acquires
+a reference to it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a [struct<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Value] initialized with type <code>GSK_TYPE_RENDER_NODE</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsk/RenderNode.html" title="Gsk::RenderNode (class)">Gsk::RenderNode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GskRenderNode</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="value_get_render_node-instance_method">
+  
+    #<strong>value_get_render_node</strong>(value)  &#x21d2; <tt><span class='object_link'><a href="Gsk/RenderNode.html" title="Gsk::RenderNode (class)">Gsk::RenderNode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the <code>GskRenderNode</code> stored inside the given <code>value</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GValue</code> initialized with type <code>GSK_TYPE_RENDER_NODE</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsk/RenderNode.html" title="Gsk::RenderNode (class)">Gsk::RenderNode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GskRenderNode</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="value_set_render_node-instance_method">
+  
+    #<strong>value_set_render_node</strong>(value, node)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Stores the given <code>GskRenderNode</code> inside <code>value</code>.</p>
+<p>The [struct<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Value] will acquire a reference to the <code>node</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a [struct<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Value] initialized with type <code>GSK_TYPE_RENDER_NODE</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>node</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsk/RenderNode.html" title="Gsk::RenderNode (class)">Gsk::RenderNode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GskRenderNode</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="value_take_render_node-instance_method">
+  
+    #<strong>value_take_render_node</strong>(value, node)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Stores the given <code>GskRenderNode</code> inside <code>value</code>.</p>
+<p>This function transfers the ownership of the <code>node</code> to the <code>GValue</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a [struct<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Value] initialized with type <code>GSK_TYPE_RENDER_NODE</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>node</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsk/RenderNode.html" title="Gsk::RenderNode (class)">Gsk::RenderNode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GskRenderNode</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

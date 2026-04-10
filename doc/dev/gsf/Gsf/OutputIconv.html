@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gsf::OutputIconv
+  
+    &mdash; Ruby/GSF
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gsf::OutputIconv";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (O)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gsf.html" title="Gsf (module)">Gsf</a></span></span>
+     &raquo; 
+    <span class="title">OutputIconv</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gsf::OutputIconv
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Output.html" title="Gsf::Output (class)">Output</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="Output.html" title="Gsf::Output (class)">Output</a></span></li>
+          
+            <li class="next">Gsf::OutputIconv</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fallback-instance_method" title="#fallback (instance method)">#<strong>fallback</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Either NULL or a UTF-8 string (representable in the target encoding) to convert and output in place of characters that cannot be represented in the target encoding.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fallback=-instance_method" title="#fallback= (instance method)">#<strong>fallback=</strong>(fallback)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Either NULL or a UTF-8 string (representable in the target encoding) to convert and output in place of characters that cannot be represented in the target encoding.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(sink, dst, src)  &#x21d2; Gsf::Output </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a reference to <!-- raw HTML omitted -->sink<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#input_charset-instance_method" title="#input_charset (instance method)">#<strong>input_charset</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Input-charset.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#input_charset=-instance_method" title="#input_charset= (instance method)">#<strong>input_charset=</strong>(input_charset)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#output_charset-instance_method" title="#output_charset (instance method)">#<strong>output_charset</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output-charset.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#output_charset=-instance_method" title="#output_charset= (instance method)">#<strong>output_charset=</strong>(output_charset)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sink-instance_method" title="#sink (instance method)">#<strong>sink</strong>  &#x21d2; Gsf::Output </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sink.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sink=-instance_method" title="#sink= (instance method)">#<strong>sink=</strong>(sink)  &#x21d2; Gsf::Output </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Output.html" title="Gsf::Output (class)">Output</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Output.html#close-instance_method" title="Gsf::Output#close (method)">#close</a></span>, <span class='object_link'><a href="Output.html#container-instance_method" title="Gsf::Output#container (method)">#container</a></span>, <span class='object_link'><a href="Output.html#container=-instance_method" title="Gsf::Output#container= (method)">#container=</a></span>, <span class='object_link'><a href="Output.html#error-instance_method" title="Gsf::Output#error (method)">#error</a></span>, <span class='object_link'><a href="Output.html#error_id-class_method" title="Gsf::Output.error_id (method)">error_id</a></span>, <span class='object_link'><a href="Output.html#is_closed-instance_method" title="Gsf::Output#is_closed (method)">#is_closed</a></span>, <span class='object_link'><a href="Output.html#is_closed=-instance_method" title="Gsf::Output#is_closed= (method)">#is_closed=</a></span>, <span class='object_link'><a href="Output.html#is_closed%3F-instance_method" title="Gsf::Output#is_closed? (method)">#is_closed?</a></span>, <span class='object_link'><a href="Output.html#modtime-instance_method" title="Gsf::Output#modtime (method)">#modtime</a></span>, <span class='object_link'><a href="Output.html#modtime=-instance_method" title="Gsf::Output#modtime= (method)">#modtime=</a></span>, <span class='object_link'><a href="Output.html#name-instance_method" title="Gsf::Output#name (method)">#name</a></span>, <span class='object_link'><a href="Output.html#name=-instance_method" title="Gsf::Output#name= (method)">#name=</a></span>, <span class='object_link'><a href="Output.html#name_from_filename=-instance_method" title="Gsf::Output#name_from_filename= (method)">#name_from_filename=</a></span>, <span class='object_link'><a href="Output.html#position-instance_method" title="Gsf::Output#position (method)">#position</a></span>, <span class='object_link'><a href="Output.html#position=-instance_method" title="Gsf::Output#position= (method)">#position=</a></span>, <span class='object_link'><a href="Output.html#printf-instance_method" title="Gsf::Output#printf (method)">#printf</a></span>, <span class='object_link'><a href="Output.html#puts-instance_method" title="Gsf::Output#puts (method)">#puts</a></span>, <span class='object_link'><a href="Output.html#seek-instance_method" title="Gsf::Output#seek (method)">#seek</a></span>, <span class='object_link'><a href="Output.html#set_error-instance_method" title="Gsf::Output#set_error (method)">#set_error</a></span>, <span class='object_link'><a href="Output.html#size-instance_method" title="Gsf::Output#size (method)">#size</a></span>, <span class='object_link'><a href="Output.html#size=-instance_method" title="Gsf::Output#size= (method)">#size=</a></span>, <span class='object_link'><a href="Output.html#tell-instance_method" title="Gsf::Output#tell (method)">#tell</a></span>, <span class='object_link'><a href="Output.html#unwrap-class_method" title="Gsf::Output.unwrap (method)">unwrap</a></span>, <span class='object_link'><a href="Output.html#vprintf-instance_method" title="Gsf::Output#vprintf (method)">#vprintf</a></span>, <span class='object_link'><a href="Output.html#wrap-class_method" title="Gsf::Output.wrap (method)">wrap</a></span>, <span class='object_link'><a href="Output.html#write-instance_method" title="Gsf::Output#write (method)">#write</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(sink, dst, src)  &#x21d2; <tt><span class='object_link'><a href="Output.html" title="Gsf::Output (class)">Gsf::Output</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a reference to <!-- raw HTML omitted -->sink<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sink</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Output.html" title="Gsf::Output (class)">Gsf::Output</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The underlying data source.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dst</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The target character set.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>src</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The source character set.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="fallback-instance_method">
+  
+    #<strong>fallback</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Either NULL or a UTF-8 string (representable in the target encoding)
+to convert and output in place of characters that cannot be represented
+in the target encoding.  NULL means use \u1234 or \U12345678 format.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>fallback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fallback=-instance_method">
+  
+    #<strong>fallback=</strong>(fallback)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Either NULL or a UTF-8 string (representable in the target encoding)
+to convert and output in place of characters that cannot be represented
+in the target encoding.  NULL means use \u1234 or \U12345678 format.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>fallback</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>fallback</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>fallback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="input_charset-instance_method">
+  
+    #<strong>input_charset</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns input-charset.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>input-charset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="input_charset=-instance_method">
+  
+    #<strong>input_charset=</strong>(input_charset)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>input_charset</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>input-charset</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>input-charset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="output_charset-instance_method">
+  
+    #<strong>output_charset</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns output-charset.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>output-charset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="output_charset=-instance_method">
+  
+    #<strong>output_charset=</strong>(output_charset)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>output_charset</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>output-charset</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>output-charset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sink-instance_method">
+  
+    #<strong>sink</strong>  &#x21d2; <tt><span class='object_link'><a href="Output.html" title="Gsf::Output (class)">Gsf::Output</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns sink.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Output.html" title="Gsf::Output (class)">Gsf::Output</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>sink</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sink=-instance_method">
+  
+    #<strong>sink=</strong>(sink)  &#x21d2; <tt><span class='object_link'><a href="Output.html" title="Gsf::Output (class)">Gsf::Output</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sink</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Output.html" title="Gsf::Output (class)">Gsf::Output</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Output.html" title="Gsf::Output (class)">Gsf::Output</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>sink</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Output.html" title="Gsf::Output (class)">Gsf::Output</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>sink</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

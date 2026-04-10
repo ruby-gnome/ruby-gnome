@@ -1,0 +1,3503 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Handy::TabView
+  
+    &mdash; Ruby/Handy
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Handy::TabView";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Handy.html" title="Handy (module)">Handy</a></span></span>
+     &raquo; 
+    <span class="title">TabView</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Handy::TabView
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Gtk::Bin</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::Bin</li>
+          
+            <li class="next">Handy::TabView</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_page-instance_method" title="#add_page (instance method)">#<strong>add_page</strong>(child, parent)  &#x21d2; Handy::TabPage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds <!-- raw HTML omitted -->child<!-- raw HTML omitted --> to <!-- raw HTML omitted -->self<!-- raw HTML omitted --> with <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> as the parent.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append-instance_method" title="#append (instance method)">#<strong>append</strong>(child)  &#x21d2; Handy::TabPage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inserts <!-- raw HTML omitted -->child<!-- raw HTML omitted --> as the last non-pinned page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_pinned-instance_method" title="#append_pinned (instance method)">#<strong>append_pinned</strong>(child)  &#x21d2; Handy::TabPage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inserts <!-- raw HTML omitted -->child<!-- raw HTML omitted --> as the last pinned page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_other_pages-instance_method" title="#close_other_pages (instance method)">#<strong>close_other_pages</strong>(page)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Requests to close all pages other than <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_page-instance_method" title="#close_page (instance method)">#<strong>close_page</strong>(page)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Requests to close <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_page_finish-instance_method" title="#close_page_finish (instance method)">#<strong>close_page_finish</strong>(page, confirm)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Completes a [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.close_page] call for <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_pages_after-instance_method" title="#close_pages_after (instance method)">#<strong>close_pages_after</strong>(page)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Requests to close all pages after <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_pages_before-instance_method" title="#close_pages_before (instance method)">#<strong>close_pages_before</strong>(page)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Requests to close all pages before <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_icon-instance_method" title="#default_icon (instance method)">#<strong>default_icon</strong>  &#x21d2; Gio::Icon </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Default page icon.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_icon=-instance_method" title="#default_icon= (instance method)">#<strong>default_icon=</strong>(default_icon)  &#x21d2; Gio::Icon </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Default page icon.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_nth_page-instance_method" title="#get_nth_page (instance method)">#<strong>get_nth_page</strong>(position)  &#x21d2; Handy::TabPage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the [class<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->] representing the child at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_page-instance_method" title="#get_page (instance method)">#<strong>get_page</strong>(child)  &#x21d2; Handy::TabPage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the [class<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->] object representing <!-- raw HTML omitted -->child<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_page_position-instance_method" title="#get_page_position (instance method)">#<strong>get_page_position</strong>(page)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Finds the position of <!-- raw HTML omitted -->page<!-- raw HTML omitted --> in <!-- raw HTML omitted -->self<!-- raw HTML omitted -->, starting from 0.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Handy::TabView </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new <code>HdyTabView</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert-instance_method" title="#insert (instance method)">#<strong>insert</strong>(child, position)  &#x21d2; Handy::TabPage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inserts a non-pinned page at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_pinned-instance_method" title="#insert_pinned (instance method)">#<strong>insert_pinned</strong>(child, position)  &#x21d2; Handy::TabPage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inserts a pinned page at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_transferring_page-instance_method" title="#is_transferring_page (instance method)">#<strong>is_transferring_page</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether a page is being transferred.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_transferring_page=-instance_method" title="#is_transferring_page= (instance method)">#<strong>is_transferring_page=</strong>(is_transferring_page)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether a page is being transferred.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_transferring_page%3F-instance_method" title="#is_transferring_page? (instance method)">#<strong>is_transferring_page?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether a page is being transferred.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#menu_model-instance_method" title="#menu_model (instance method)">#<strong>menu_model</strong>  &#x21d2; Gio::MenuModel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tab context menu model.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#menu_model=-instance_method" title="#menu_model= (instance method)">#<strong>menu_model=</strong>(menu_model)  &#x21d2; Gio::MenuModel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tab context menu model.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_pages-instance_method" title="#n_pages (instance method)">#<strong>n_pages</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of pages in the tab view.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_pages=-instance_method" title="#n_pages= (instance method)">#<strong>n_pages=</strong>(n_pages)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of pages in the tab view.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_pinned_pages-instance_method" title="#n_pinned_pages (instance method)">#<strong>n_pinned_pages</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of pinned pages in the tab view.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_pinned_pages=-instance_method" title="#n_pinned_pages= (instance method)">#<strong>n_pinned_pages=</strong>(n_pinned_pages)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of pinned pages in the tab view.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pages-instance_method" title="#pages (instance method)">#<strong>pages</strong>  &#x21d2; Gio::ListModel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel] containing the pages of <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#prepend-instance_method" title="#prepend (instance method)">#<strong>prepend</strong>(child)  &#x21d2; Handy::TabPage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inserts <!-- raw HTML omitted -->child<!-- raw HTML omitted --> as the first non-pinned page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#prepend_pinned-instance_method" title="#prepend_pinned (instance method)">#<strong>prepend_pinned</strong>(child)  &#x21d2; Handy::TabPage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inserts <!-- raw HTML omitted -->child<!-- raw HTML omitted --> as the first pinned page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reorder_backward-instance_method" title="#reorder_backward (instance method)">#<strong>reorder_backward</strong>(page)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reorders <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to before its previous page if possible.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reorder_first-instance_method" title="#reorder_first (instance method)">#<strong>reorder_first</strong>(page)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reorders <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to the first possible position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reorder_forward-instance_method" title="#reorder_forward (instance method)">#<strong>reorder_forward</strong>(page)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reorders <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to after its next page if possible.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reorder_last-instance_method" title="#reorder_last (instance method)">#<strong>reorder_last</strong>(page)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reorders <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to the last possible position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reorder_page-instance_method" title="#reorder_page (instance method)">#<strong>reorder_page</strong>(page, position)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reorders <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#select_next_page-instance_method" title="#select_next_page (instance method)">#<strong>select_next_page</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Selects the page after the currently selected page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#select_previous_page-instance_method" title="#select_previous_page (instance method)">#<strong>select_previous_page</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Selects the page before the currently selected page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selected_page-instance_method" title="#selected_page (instance method)">#<strong>selected_page</strong>  &#x21d2; Handy::TabPage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The currently selected page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#selected_page=-instance_method" title="#selected_page= (instance method)">#<strong>selected_page=</strong>(selected_page)  &#x21d2; Handy::TabPage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The currently selected page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_page_pinned-instance_method" title="#set_page_pinned (instance method)">#<strong>set_page_pinned</strong>(page, pinned)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Pins or unpins <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shortcut_widget-instance_method" title="#shortcut_widget (instance method)">#<strong>shortcut_widget</strong>  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tab shortcut widget.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shortcut_widget=-instance_method" title="#shortcut_widget= (instance method)">#<strong>shortcut_widget=</strong>(shortcut_widget)  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tab shortcut widget.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transfer_page-instance_method" title="#transfer_page (instance method)">#<strong>transfer_page</strong>(page, other_view, position)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Transfers <!-- raw HTML omitted -->page<!-- raw HTML omitted --> from <!-- raw HTML omitted -->self<!-- raw HTML omitted --> to <!-- raw HTML omitted -->other_view<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Handy::TabView (class)">Handy::TabView</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new <code>HdyTabView</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_page-instance_method">
+  
+    #<strong>add_page</strong>(child, parent)  &#x21d2; <tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds <!-- raw HTML omitted -->child<!-- raw HTML omitted --> to <!-- raw HTML omitted -->self<!-- raw HTML omitted --> with <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> as the parent.</p>
+<p>This function can be used to automatically position new pages, and to select
+the correct page when this page is closed while being selected (see
+[method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.close_page].</p>
+<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is <code>NULL</code>, this function is equivalent to [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.append].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child</span>
+      
+      
+        <span class='type'>(<tt>Gtk::Widget</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a widget to add</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a parent page for <!-- raw HTML omitted -->child<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the page object representing <!-- raw HTML omitted -->child<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append-instance_method">
+  
+    #<strong>append</strong>(child)  &#x21d2; <tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inserts <!-- raw HTML omitted -->child<!-- raw HTML omitted --> as the last non-pinned page.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child</span>
+      
+      
+        <span class='type'>(<tt>Gtk::Widget</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a widget to add</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the page object representing <!-- raw HTML omitted -->child<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_pinned-instance_method">
+  
+    #<strong>append_pinned</strong>(child)  &#x21d2; <tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inserts <!-- raw HTML omitted -->child<!-- raw HTML omitted --> as the last pinned page.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child</span>
+      
+      
+        <span class='type'>(<tt>Gtk::Widget</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a widget to add</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the page object representing <!-- raw HTML omitted -->child<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close_other_pages-instance_method">
+  
+    #<strong>close_other_pages</strong>(page)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Requests to close all pages other than <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a page of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close_page-instance_method">
+  
+    #<strong>close_page</strong>(page)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Requests to close <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+<p>Calling this function will result in [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::close-page] signal
+being emitted for <!-- raw HTML omitted -->page<!-- raw HTML omitted -->. Closing the page can then be confirmed or denied via
+[method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.close_page_finish].</p>
+<p>If the page is waiting for a [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.close_page_finish] call, this
+function will do nothing.</p>
+<p>The default handler for [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::close-page] will immediately confirm
+closing the page if it's non-pinned, or reject it if it's pinned. This
+behavior can be changed by registering your own handler for that signal.</p>
+<p>If <!-- raw HTML omitted -->page<!-- raw HTML omitted --> was selected, another page will be selected instead:</p>
+<p>If the [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:parent] value is <code>NULL</code>, the next page will be
+selected when possible, or if the page was already last, the previous page
+will be selected instead.</p>
+<p>If it's not <code>NULL</code>, the previous page will be selected if it's a descendant
+(possibly indirect) of the parent. If both the previous page and the parent
+are pinned, the parent will be selected instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a page of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close_page_finish-instance_method">
+  
+    #<strong>close_page_finish</strong>(page, confirm)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Completes a [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.close_page] call for <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+<p>If <!-- raw HTML omitted -->confirm<!-- raw HTML omitted --> is <code>TRUE</code>, <!-- raw HTML omitted -->page<!-- raw HTML omitted --> will be closed. If it's <code>FALSE</code>, ite will be
+reverted to its previous state and [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.close_page] can be called
+for it again.</p>
+<p>This function should not be called unless a custom handler for
+[signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::close-page] is used.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a page of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>confirm</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether to confirm or deny closing <!-- raw HTML omitted -->page<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close_pages_after-instance_method">
+  
+    #<strong>close_pages_after</strong>(page)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Requests to close all pages after <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a page of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close_pages_before-instance_method">
+  
+    #<strong>close_pages_before</strong>(page)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Requests to close all pages before <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a page of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_icon-instance_method">
+  
+    #<strong>default_icon</strong>  &#x21d2; <tt>Gio::Icon</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Default page icon.</p>
+<p>If a page doesn't provide its own icon via [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:icon], default
+icon may be used instead for contexts where having an icon is necessary.</p>
+<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will use default icon for pinned tabs in case the page is
+not loading, doesn't have an icon and an indicator. Default icon is never
+used for tabs that aren't pinned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::Icon</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default-icon</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_icon=-instance_method">
+  
+    #<strong>default_icon=</strong>(default_icon)  &#x21d2; <tt>Gio::Icon</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Default page icon.</p>
+<p>If a page doesn't provide its own icon via [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:icon], default
+icon may be used instead for contexts where having an icon is necessary.</p>
+<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will use default icon for pinned tabs in case the page is
+not loading, doesn't have an icon and an indicator. Default icon is never
+used for tabs that aren't pinned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>default_icon</span>
+      
+      
+        <span class='type'>(<tt>Gio::Icon</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::Icon</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default-icon</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::Icon</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default-icon</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_nth_page-instance_method">
+  
+    #<strong>get_nth_page</strong>(position)  &#x21d2; <tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the [class<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->] representing the child at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the index of the page in <!-- raw HTML omitted -->self<!-- raw HTML omitted -->, starting from 0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the page object at <!-- raw HTML omitted -->position<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_page-instance_method">
+  
+    #<strong>get_page</strong>(child)  &#x21d2; <tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the [class<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->] object representing <!-- raw HTML omitted -->child<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child</span>
+      
+      
+        <span class='type'>(<tt>Gtk::Widget</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a child in <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the [class<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->] representing <!-- raw HTML omitted -->child<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_page_position-instance_method">
+  
+    #<strong>get_page_position</strong>(page)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Finds the position of <!-- raw HTML omitted -->page<!-- raw HTML omitted --> in <!-- raw HTML omitted -->self<!-- raw HTML omitted -->, starting from 0.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a page of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the position of <!-- raw HTML omitted -->page<!-- raw HTML omitted --> in <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert-instance_method">
+  
+    #<strong>insert</strong>(child, position)  &#x21d2; <tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inserts a non-pinned page at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
+<p>It's an error to try to insert a page before a pinned page, in that case
+[method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.insert_pinned] should be used instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child</span>
+      
+      
+        <span class='type'>(<tt>Gtk::Widget</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a widget to add</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the position to add <!-- raw HTML omitted -->child<!-- raw HTML omitted --> at, starting from 0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the page object representing <!-- raw HTML omitted -->child<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_pinned-instance_method">
+  
+    #<strong>insert_pinned</strong>(child, position)  &#x21d2; <tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inserts a pinned page at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
+<p>It's an error to try to insert a pinned page after a non-pinned page, in that
+case [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.insert] should be used instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child</span>
+      
+      
+        <span class='type'>(<tt>Gtk::Widget</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a widget to add</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the position to add <!-- raw HTML omitted -->child<!-- raw HTML omitted --> at, starting from 0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the page object representing <!-- raw HTML omitted -->child<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_transferring_page-instance_method">
+  
+    #<strong>is_transferring_page</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether a page is being transferred.</p>
+<p>Gets the value of [property<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->:is-transferring-page] property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether a page is being transferred</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_transferring_page=-instance_method">
+  
+    #<strong>is_transferring_page=</strong>(is_transferring_page)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether a page is being transferred.</p>
+<p>This property will be set to <code>TRUE</code> when a drag-n-drop tab transfer starts
+on any [class<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->], and to <code>FALSE</code> after it ends.</p>
+<p>During the transfer, children cannot receive pointer input and a tab can be
+safely dropped on the tab view.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>is_transferring_page</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>is-transferring-page</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>is-transferring-page</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_transferring_page?-instance_method">
+  
+    #<strong>is_transferring_page?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether a page is being transferred.</p>
+<p>This property will be set to <code>TRUE</code> when a drag-n-drop tab transfer starts
+on any [class<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->], and to <code>FALSE</code> after it ends.</p>
+<p>During the transfer, children cannot receive pointer input and a tab can be
+safely dropped on the tab view.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>is-transferring-page</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="menu_model-instance_method">
+  
+    #<strong>menu_model</strong>  &#x21d2; <tt>Gio::MenuModel</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tab context menu model.</p>
+<p>When a context menu is shown for a tab, it will be constructed from the
+provided menu model. Use [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::setup-menu] signal to set up the
+menu actions for the particular tab.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::MenuModel</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>menu-model</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="menu_model=-instance_method">
+  
+    #<strong>menu_model=</strong>(menu_model)  &#x21d2; <tt>Gio::MenuModel</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tab context menu model.</p>
+<p>When a context menu is shown for a tab, it will be constructed from the
+provided menu model. Use [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::setup-menu] signal to set up the
+menu actions for the particular tab.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>menu_model</span>
+      
+      
+        <span class='type'>(<tt>Gio::MenuModel</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::MenuModel</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>menu-model</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::MenuModel</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>menu-model</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_pages-instance_method">
+  
+    #<strong>n_pages</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of pages in the tab view.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>n-pages</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_pages=-instance_method">
+  
+    #<strong>n_pages=</strong>(n_pages)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of pages in the tab view.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_pages</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>n-pages</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>n-pages</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_pinned_pages-instance_method">
+  
+    #<strong>n_pinned_pages</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of pinned pages in the tab view.</p>
+<p>See [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.set_page_pinned].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>n-pinned-pages</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_pinned_pages=-instance_method">
+  
+    #<strong>n_pinned_pages=</strong>(n_pinned_pages)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of pinned pages in the tab view.</p>
+<p>See [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.set_page_pinned].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_pinned_pages</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>n-pinned-pages</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>n-pinned-pages</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pages-instance_method">
+  
+    #<strong>pages</strong>  &#x21d2; <tt>Gio::ListModel</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel] containing the pages of <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
+<p>This model can be used to keep an up to date view of the pages.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::ListModel</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the model containing pages of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="prepend-instance_method">
+  
+    #<strong>prepend</strong>(child)  &#x21d2; <tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inserts <!-- raw HTML omitted -->child<!-- raw HTML omitted --> as the first non-pinned page.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child</span>
+      
+      
+        <span class='type'>(<tt>Gtk::Widget</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a widget to add</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the page object representing <!-- raw HTML omitted -->child<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="prepend_pinned-instance_method">
+  
+    #<strong>prepend_pinned</strong>(child)  &#x21d2; <tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inserts <!-- raw HTML omitted -->child<!-- raw HTML omitted --> as the first pinned page.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child</span>
+      
+      
+        <span class='type'>(<tt>Gtk::Widget</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a widget to add</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the page object representing <!-- raw HTML omitted -->child<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reorder_backward-instance_method">
+  
+    #<strong>reorder_backward</strong>(page)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reorders <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to before its previous page if possible.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a page of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->page<!-- raw HTML omitted --> was moved</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reorder_first-instance_method">
+  
+    #<strong>reorder_first</strong>(page)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reorders <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to the first possible position.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a page of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->page<!-- raw HTML omitted --> was moved</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reorder_forward-instance_method">
+  
+    #<strong>reorder_forward</strong>(page)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reorders <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to after its next page if possible.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a page of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->page<!-- raw HTML omitted --> was moved</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reorder_last-instance_method">
+  
+    #<strong>reorder_last</strong>(page)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reorders <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to the last possible position.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a page of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->page<!-- raw HTML omitted --> was moved</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reorder_page-instance_method">
+  
+    #<strong>reorder_page</strong>(page, position)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reorders <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
+<p>It's a programmer error to try to reorder a pinned page after a non-pinned
+one, or a non-pinned page before a pinned one.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a page of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the position to insert the page at, starting at 0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->page<!-- raw HTML omitted --> was moved</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="select_next_page-instance_method">
+  
+    #<strong>select_next_page</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Selects the page after the currently selected page.</p>
+<p>If the last page was already selected, this function does nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether the selected page was changed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="select_previous_page-instance_method">
+  
+    #<strong>select_previous_page</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Selects the page before the currently selected page.</p>
+<p>If the first page was already selected, this function does nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether the selected page was changed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selected_page-instance_method">
+  
+    #<strong>selected_page</strong>  &#x21d2; <tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The currently selected page.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selected-page</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="selected_page=-instance_method">
+  
+    #<strong>selected_page=</strong>(selected_page)  &#x21d2; <tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The currently selected page.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>selected_page</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selected-page</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>selected-page</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_page_pinned-instance_method">
+  
+    #<strong>set_page_pinned</strong>(page, pinned)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Pins or unpins <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
+<p>Pinned pages are guaranteed to be placed before all non-pinned pages; at any
+given moment the first [property<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->:n-pinned-pages] pages in <!-- raw HTML omitted -->self<!-- raw HTML omitted --> are
+guaranteed to be pinned.</p>
+<p>When a page is pinned or unpinned, it's automatically reordered: pinning a
+page moves it after other pinned pages; unpinning a page moves it before
+other non-pinned pages.</p>
+<p>Pinned pages can still be reordered between each other.</p>
+<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will display pinned pages in a compact form, never showing the
+title or close button, and only showing a single icon, selected in the
+following order:</p>
+<ol>
+<li>[property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:indicator-icon]</li>
+<li>A spinner if [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:loading] is <code>TRUE</code></li>
+<li>[property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:icon]</li>
+<li>[property<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->:default-icon]</li>
+</ol>
+<p>Pinned pages cannot be closed by default, see [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::close-page]
+for how to override that behavior.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a page of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pinned</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->page<!-- raw HTML omitted --> should be pinned</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="shortcut_widget-instance_method">
+  
+    #<strong>shortcut_widget</strong>  &#x21d2; <tt>Gtk::Widget</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tab shortcut widget.</p>
+<p>Has the following shortcuts:</p>
+<ul>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Up<!-- raw HTML omitted --> - switch to the previous page</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Down<!-- raw HTML omitted --> - switch to the next page</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Home<!-- raw HTML omitted --> - switch to the first page</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->End<!-- raw HTML omitted --> - switch to the last page</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Up<!-- raw HTML omitted --> - move the current page
+backward</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Down<!-- raw HTML omitted --> - move the current
+page forward</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Home<!-- raw HTML omitted --> - move the current page at
+the start</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->End<!-- raw HTML omitted --> - move the current page at
+the end</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Tab<!-- raw HTML omitted --> - switch to the next page, with looping</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Tab<!-- raw HTML omitted --> - switch to the previous
+page, with looping</li>
+<li><!-- raw HTML omitted -->Alt<!-- raw HTML omitted -->+<!-- raw HTML omitted -->1<!-- raw HTML omitted -->⋯<!-- raw HTML omitted -->9<!-- raw HTML omitted --> - switch to pages 1-9</li>
+<li><!-- raw HTML omitted -->Alt<!-- raw HTML omitted -->+<!-- raw HTML omitted -->0<!-- raw HTML omitted --> - switch to page 10</li>
+</ul>
+<p>These shortcuts are always available on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->, this property is useful if
+they should be available globally.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::Widget</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>shortcut-widget</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="shortcut_widget=-instance_method">
+  
+    #<strong>shortcut_widget=</strong>(shortcut_widget)  &#x21d2; <tt>Gtk::Widget</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tab shortcut widget.</p>
+<p>Has the following shortcuts:</p>
+<ul>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Up<!-- raw HTML omitted --> - switch to the previous page</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Down<!-- raw HTML omitted --> - switch to the next page</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Home<!-- raw HTML omitted --> - switch to the first page</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->End<!-- raw HTML omitted --> - switch to the last page</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Up<!-- raw HTML omitted --> - move the current page
+backward</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Down<!-- raw HTML omitted --> - move the current
+page forward</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Home<!-- raw HTML omitted --> - move the current page at
+the start</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->End<!-- raw HTML omitted --> - move the current page at
+the end</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Tab<!-- raw HTML omitted --> - switch to the next page, with looping</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Tab<!-- raw HTML omitted --> - switch to the previous
+page, with looping</li>
+<li><!-- raw HTML omitted -->Alt<!-- raw HTML omitted -->+<!-- raw HTML omitted -->1<!-- raw HTML omitted -->⋯<!-- raw HTML omitted -->9<!-- raw HTML omitted --> - switch to pages 1-9</li>
+<li><!-- raw HTML omitted -->Alt<!-- raw HTML omitted -->+<!-- raw HTML omitted -->0<!-- raw HTML omitted --> - switch to page 10</li>
+</ul>
+<p>These shortcuts are always available on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->, this property is useful if
+they should be available globally.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>shortcut_widget</span>
+      
+      
+        <span class='type'>(<tt>Gtk::Widget</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::Widget</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>shortcut-widget</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gtk::Widget</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>shortcut-widget</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="transfer_page-instance_method">
+  
+    #<strong>transfer_page</strong>(page, other_view, position)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Transfers <!-- raw HTML omitted -->page<!-- raw HTML omitted --> from <!-- raw HTML omitted -->self<!-- raw HTML omitted --> to <!-- raw HTML omitted -->other_view<!-- raw HTML omitted -->.</p>
+<p>The <!-- raw HTML omitted -->page<!-- raw HTML omitted --> object will be reused.</p>
+<p>It's a programmer error to try to insert a pinned page after a non-pinned
+one, or a non-pinned page before a pinned one.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TabPage.html" title="Handy::TabPage (class)">Handy::TabPage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a page of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>other_view</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Handy::TabView (class)">Handy::TabView</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the tab view to transfer the page to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the position to insert the page at, starting at 0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

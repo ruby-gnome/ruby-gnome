@@ -1,0 +1,7972 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gst::Pad
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gst::Pad";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gst.html" title="Gst (module)">Gst</a></span></span>
+     &raquo; 
+    <span class="title">Pad</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gst::Pad
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></li>
+          
+            <li class="next">Gst::Pad</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="ProxyPad.html" title="Gst::ProxyPad (class)">ProxyPad</a></span>, <span class='object_link'><a href="../GstBase/AggregatorPad.html" title="GstBase::AggregatorPad (class)">GstBase::AggregatorPad</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#link_get_name-class_method" title="link_get_name (class method)">.<strong>link_get_name</strong>(ret)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a string representing the given pad-link return.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#activate_mode-instance_method" title="#activate_mode (instance method)">#<strong>activate_mode</strong>(mode, active)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Activates or deactivates the given pad in <!-- raw HTML omitted -->mode<!-- raw HTML omitted --> via dispatching to the pad's activatemodefunc.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#active=-instance_method" title="#active= (instance method)">#<strong>active=</strong>(active)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Activates or deactivates the given pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_probe-instance_method" title="#add_probe (instance method)">#<strong>add_probe</strong>(mask, callback, user_data, destroy_data)  &#x21d2; Gst::gulong </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Be notified of different states of pads.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#allowed_caps-instance_method" title="#allowed_caps (instance method)">#<strong>allowed_caps</strong>  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the capabilities of the allowed media types that can flow through <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and its peer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#can_link-instance_method" title="#can_link (instance method)">#<strong>can_link</strong>(sinkpad)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if the source pad and the sink pad are compatible so they can be linked.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#caps-instance_method" title="#caps (instance method)">#<strong>caps</strong>  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Caps.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#caps=-instance_method" title="#caps= (instance method)">#<strong>caps=</strong>(caps)  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#chain-instance_method" title="#chain (instance method)">#<strong>chain</strong>(buffer)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Chain a buffer to <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#chain_list-instance_method" title="#chain_list (instance method)">#<strong>chain_list</strong>(list)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Chain a bufferlist to <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#check_reconfigure-instance_method" title="#check_reconfigure (instance method)">#<strong>check_reconfigure</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check and clear the #GST_PAD_FLAG_NEED_RECONFIGURE flag on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and return true if the flag was set.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_stream_id-instance_method" title="#create_stream_id (instance method)">#<strong>create_stream_id</strong>(parent, stream_id)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a stream-id for the source Gst::Pad <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> by combining the upstream information with the optional <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> of the stream of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_stream_id_printf-instance_method" title="#create_stream_id_printf (instance method)">#<strong>create_stream_id_printf</strong>(parent, stream_id, array)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a stream-id for the source Gst::Pad <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> by combining the upstream information with the optional <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> of the stream of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_stream_id_printf_valist-instance_method" title="#create_stream_id_printf_valist (instance method)">#<strong>create_stream_id_printf_valist</strong>(parent, stream_id, var_args)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a stream-id for the source Gst::Pad <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> by combining the upstream information with the optional <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> of the stream of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_caps-instance_method" title="#current_caps (instance method)">#<strong>current_caps</strong>  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the capabilities currently configured on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> with the last #GST_EVENT_CAPS event.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#direction-instance_method" title="#direction (instance method)">#<strong>direction</strong>  &#x21d2; Gst::PadDirection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Direction.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#direction=-instance_method" title="#direction= (instance method)">#<strong>direction=</strong>(direction)  &#x21d2; Gst::PadDirection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#element_private-instance_method" title="#element_private (instance method)">#<strong>element_private</strong>  &#x21d2; GObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the private data of a pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#element_private=-instance_method" title="#element_private= (instance method)">#<strong>element_private=</strong>(priv)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set the given private data gpointer on the pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#event_default-instance_method" title="#event_default (instance method)">#<strong>event_default</strong>(parent, event)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Invokes the default event handler for the given pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#forward-instance_method" title="#forward (instance method)">#<strong>forward</strong>(forward, user_data)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Calls <!-- raw HTML omitted -->forward<!-- raw HTML omitted --> for all internally linked pads of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_range-instance_method" title="#get_range (instance method)">#<strong>get_range</strong>(offset, size, buffer)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>When <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is flushing this function returns #GST_FLOW_FLUSHING immediately and <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is nil.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_sticky_event-instance_method" title="#get_sticky_event (instance method)">#<strong>get_sticky_event</strong>(event_type, idx)  &#x21d2; Gst::Event </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a new reference of the sticky event of type <!-- raw HTML omitted -->event_type<!-- raw HTML omitted --> from the event.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_current_caps-instance_method" title="#has_current_caps (instance method)">#<strong>has_current_caps</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has caps set on it with a #GST_EVENT_CAPS event.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(templ, name)  &#x21d2; Gst::Pad </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new pad with the given name from the given template.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_active-instance_method" title="#is_active (instance method)">#<strong>is_active</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Query if a pad is active MT safe.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_blocked-instance_method" title="#is_blocked (instance method)">#<strong>is_blocked</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if the pad is blocked or not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_blocking-instance_method" title="#is_blocking (instance method)">#<strong>is_blocking</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if the pad is blocking or not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_linked-instance_method" title="#is_linked (instance method)">#<strong>is_linked</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if a <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is linked to another pad or not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iterate_internal_links-instance_method" title="#iterate_internal_links (instance method)">#<strong>iterate_internal_links</strong>  &#x21d2; Gst::Iterator </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets an iterator for the pads to which the given pad is linked to inside of the parent element.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iterate_internal_links_default-instance_method" title="#iterate_internal_links_default (instance method)">#<strong>iterate_internal_links_default</strong>(parent)  &#x21d2; Gst::Iterator </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Iterate the list of pads to which the given pad is linked to inside of the parent element.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#last_flow_return-instance_method" title="#last_flow_return (instance method)">#<strong>last_flow_return</strong>  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the Gst::FlowReturn return from the last data passed by this pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#link-instance_method" title="#link (instance method)">#<strong>link</strong>(sinkpad)  &#x21d2; Gst::PadLinkReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Links the source pad and the sink pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#link_full-instance_method" title="#link_full (instance method)">#<strong>link_full</strong>(sinkpad, flags)  &#x21d2; Gst::PadLinkReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Links the source pad and the sink pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#link_maybe_ghosting-instance_method" title="#link_maybe_ghosting (instance method)">#<strong>link_maybe_ghosting</strong>(sink)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Links <!-- raw HTML omitted -->src<!-- raw HTML omitted --> to <!-- raw HTML omitted -->sink<!-- raw HTML omitted -->, creating any Gst::GhostPad's in between as necessary.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#link_maybe_ghosting_full-instance_method" title="#link_maybe_ghosting_full (instance method)">#<strong>link_maybe_ghosting_full</strong>(sink, flags)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Links <!-- raw HTML omitted -->src<!-- raw HTML omitted --> to <!-- raw HTML omitted -->sink<!-- raw HTML omitted -->, creating any Gst::GhostPad's in between as necessary.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mark_reconfigure-instance_method" title="#mark_reconfigure (instance method)">#<strong>mark_reconfigure</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Mark a pad for needing reconfiguration.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#needs_reconfigure-instance_method" title="#needs_reconfigure (instance method)">#<strong>needs_reconfigure</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check the #GST_PAD_FLAG_NEED_RECONFIGURE flag on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and return true if the flag was set.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#offset-instance_method" title="#offset (instance method)">#<strong>offset</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The offset that will be applied to the running time of the pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#offset=-instance_method" title="#offset= (instance method)">#<strong>offset=</strong>(offset)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The offset that will be applied to the running time of the pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pad_template-instance_method" title="#pad_template (instance method)">#<strong>pad_template</strong>  &#x21d2; Gst::PadTemplate </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the template for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pad_template_caps-instance_method" title="#pad_template_caps (instance method)">#<strong>pad_template_caps</strong>  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the capabilities for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->'s template.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parent_element-instance_method" title="#parent_element (instance method)">#<strong>parent_element</strong>  &#x21d2; Gst::Element </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the parent of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, cast to a Gst::Element.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pause_task-instance_method" title="#pause_task (instance method)">#<strong>pause_task</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Pause the task of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#peer-instance_method" title="#peer (instance method)">#<strong>peer</strong>  &#x21d2; Gst::Pad </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#peer_query-instance_method" title="#peer_query (instance method)">#<strong>peer_query</strong>(query)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Performs gst_pad_query() on the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#peer_query_accept_caps-instance_method" title="#peer_query_accept_caps (instance method)">#<strong>peer_query_accept_caps</strong>(caps)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> accepts <!-- raw HTML omitted -->caps<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#peer_query_caps-instance_method" title="#peer_query_caps (instance method)">#<strong>peer_query_caps</strong>(filter)  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the capabilities of the peer connected to this pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#peer_query_convert-instance_method" title="#peer_query_convert (instance method)">#<strong>peer_query_convert</strong>(src_format, src_val, dest_format, dest_val)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries the peer pad of a given sink pad to convert <!-- raw HTML omitted -->src_val<!-- raw HTML omitted --> in <!-- raw HTML omitted -->src_format<!-- raw HTML omitted --> to <!-- raw HTML omitted -->dest_format<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#peer_query_duration-instance_method" title="#peer_query_duration (instance method)">#<strong>peer_query_duration</strong>(format, duration)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries the peer pad of a given sink pad for the total stream duration.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#peer_query_position-instance_method" title="#peer_query_position (instance method)">#<strong>peer_query_position</strong>(format, cur)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries the peer of a given sink pad for the stream position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#proxy_query_accept_caps-instance_method" title="#proxy_query_accept_caps (instance method)">#<strong>proxy_query_accept_caps</strong>(query)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if all internally linked pads of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> accepts the caps in <!-- raw HTML omitted -->query<!-- raw HTML omitted --> and returns the intersection of the results.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#proxy_query_caps-instance_method" title="#proxy_query_caps (instance method)">#<strong>proxy_query_caps</strong>(query)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Calls gst_pad_query_caps() for all internally linked pads of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and returns the intersection of the results.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pull_range-instance_method" title="#pull_range (instance method)">#<strong>pull_range</strong>(offset, size, buffer)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Pulls a <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> from the peer pad or fills up a provided buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push-instance_method" title="#push (instance method)">#<strong>push</strong>(buffer)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Pushes a buffer to the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_event-instance_method" title="#push_event (instance method)">#<strong>push_event</strong>(event)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sends the event to the peer of the given pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_list-instance_method" title="#push_list (instance method)">#<strong>push_list</strong>(list)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Pushes a buffer list to the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query-instance_method" title="#query (instance method)">#<strong>query</strong>(query)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Dispatches a query to a pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query_accept_caps-instance_method" title="#query_accept_caps (instance method)">#<strong>query_accept_caps</strong>(caps)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if the given pad accepts the caps.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query_caps-instance_method" title="#query_caps (instance method)">#<strong>query_caps</strong>(filter)  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the capabilities this pad can produce or consume.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query_convert-instance_method" title="#query_convert (instance method)">#<strong>query_convert</strong>(src_format, src_val, dest_format, dest_val)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries a pad to convert <!-- raw HTML omitted -->src_val<!-- raw HTML omitted --> in <!-- raw HTML omitted -->src_format<!-- raw HTML omitted --> to <!-- raw HTML omitted -->dest_format<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query_default-instance_method" title="#query_default (instance method)">#<strong>query_default</strong>(parent, query)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Invokes the default query handler for the given pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query_duration-instance_method" title="#query_duration (instance method)">#<strong>query_duration</strong>(format, duration)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries a pad for the total stream duration.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query_position-instance_method" title="#query_position (instance method)">#<strong>query_position</strong>(format, cur)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries a pad for the stream position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_probe-instance_method" title="#remove_probe (instance method)">#<strong>remove_probe</strong>(id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Remove the probe with <!-- raw HTML omitted -->id<!-- raw HTML omitted --> from <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_event-instance_method" title="#send_event (instance method)">#<strong>send_event</strong>(event)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sends the event to the pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_activate_function_full-instance_method" title="#set_activate_function_full (instance method)">#<strong>set_activate_function_full</strong>(activate, user_data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the given activate function for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_activatemode_function_full-instance_method" title="#set_activatemode_function_full (instance method)">#<strong>set_activatemode_function_full</strong>(activatemode, user_data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the given activate_mode function for the pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_chain_function_full-instance_method" title="#set_chain_function_full (instance method)">#<strong>set_chain_function_full</strong>(chain, user_data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the given chain function for the pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_chain_list_function_full-instance_method" title="#set_chain_list_function_full (instance method)">#<strong>set_chain_list_function_full</strong>(chainlist, user_data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the given chain list function for the pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_event_full_function_full-instance_method" title="#set_event_full_function_full (instance method)">#<strong>set_event_full_function_full</strong>(event, user_data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the given event handler for the pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_event_function_full-instance_method" title="#set_event_function_full (instance method)">#<strong>set_event_function_full</strong>(event, user_data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the given event handler for the pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_getrange_function_full-instance_method" title="#set_getrange_function_full (instance method)">#<strong>set_getrange_function_full</strong>(get, user_data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the given getrange function for the pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_iterate_internal_links_function_full-instance_method" title="#set_iterate_internal_links_function_full (instance method)">#<strong>set_iterate_internal_links_function_full</strong>(iterintlink, user_data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the given internal link iterator function for the pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_link_function_full-instance_method" title="#set_link_function_full (instance method)">#<strong>set_link_function_full</strong>(link, user_data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the given link function for the pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_query_function_full-instance_method" title="#set_query_function_full (instance method)">#<strong>set_query_function_full</strong>(query, user_data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set the given query function for the pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_unlink_function_full-instance_method" title="#set_unlink_function_full (instance method)">#<strong>set_unlink_function_full</strong>(unlink, user_data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the given unlink function for the pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#single_internal_link-instance_method" title="#single_internal_link (instance method)">#<strong>single_internal_link</strong>  &#x21d2; Gst::Pad </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If there is a single internal link of the given pad, this function will return it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#start_task-instance_method" title="#start_task (instance method)">#<strong>start_task</strong>(func, user_data, notify)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Starts a task that repeatedly calls <!-- raw HTML omitted -->func<!-- raw HTML omitted --> with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sticky_events_foreach-instance_method" title="#sticky_events_foreach (instance method)">#<strong>sticky_events_foreach</strong>(foreach_func, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Iterates all sticky events on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and calls <!-- raw HTML omitted -->foreach_func<!-- raw HTML omitted --> for every event.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stop_task-instance_method" title="#stop_task (instance method)">#<strong>stop_task</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Stop the task of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#store_sticky_event-instance_method" title="#store_sticky_event (instance method)">#<strong>store_sticky_event</strong>(event)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Store the sticky <!-- raw HTML omitted -->event<!-- raw HTML omitted --> on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> was flushing or #GST_FLOW_EOS when the pad was EOS.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stream-instance_method" title="#stream (instance method)">#<strong>stream</strong>  &#x21d2; Gst::Stream </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the current Gst::Stream for the <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, or nil if none has been set yet, i.e.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stream_id-instance_method" title="#stream_id (instance method)">#<strong>stream_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the current stream-id for the <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, or nil if none has been set yet, i.e.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#task_state-instance_method" title="#task_state (instance method)">#<strong>task_state</strong>  &#x21d2; Gst::TaskState </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> task state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#template-instance_method" title="#template (instance method)">#<strong>template</strong>  &#x21d2; Gst::PadTemplate </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Template.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#template=-instance_method" title="#template= (instance method)">#<strong>template=</strong>(template)  &#x21d2; Gst::PadTemplate </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unlink-instance_method" title="#unlink (instance method)">#<strong>unlink</strong>(sinkpad)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Unlinks the source pad from the sink pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_fixed_caps-instance_method" title="#use_fixed_caps (instance method)">#<strong>use_fixed_caps</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A helper function you can use that sets the FIXED_CAPS flag This way the default CAPS query will always return the negotiated caps or in case the pad is not negotiated, the padtemplate caps.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Object.html#add_control_binding-instance_method" title="Gst::Object#add_control_binding (method)">#add_control_binding</a></span>, <span class='object_link'><a href="Object.html#check_uniqueness-class_method" title="Gst::Object.check_uniqueness (method)">check_uniqueness</a></span>, <span class='object_link'><a href="Object.html#control_bindings_disabled=-instance_method" title="Gst::Object#control_bindings_disabled= (method)">#control_bindings_disabled=</a></span>, <span class='object_link'><a href="Object.html#control_rate-instance_method" title="Gst::Object#control_rate (method)">#control_rate</a></span>, <span class='object_link'><a href="Object.html#control_rate=-instance_method" title="Gst::Object#control_rate= (method)">#control_rate=</a></span>, <span class='object_link'><a href="Object.html#default_deep_notify-class_method" title="Gst::Object.default_deep_notify (method)">default_deep_notify</a></span>, <span class='object_link'><a href="Object.html#default_error-instance_method" title="Gst::Object#default_error (method)">#default_error</a></span>, <span class='object_link'><a href="Object.html#get_control_binding-instance_method" title="Gst::Object#get_control_binding (method)">#get_control_binding</a></span>, <span class='object_link'><a href="Object.html#get_g_value_array-instance_method" title="Gst::Object#get_g_value_array (method)">#get_g_value_array</a></span>, <span class='object_link'><a href="Object.html#get_value-instance_method" title="Gst::Object#get_value (method)">#get_value</a></span>, <span class='object_link'><a href="Object.html#get_value_array-instance_method" title="Gst::Object#get_value_array (method)">#get_value_array</a></span>, <span class='object_link'><a href="Object.html#has_active_control_bindings-instance_method" title="Gst::Object#has_active_control_bindings (method)">#has_active_control_bindings</a></span>, <span class='object_link'><a href="Object.html#has_ancestor-instance_method" title="Gst::Object#has_ancestor (method)">#has_ancestor</a></span>, <span class='object_link'><a href="Object.html#has_as_ancestor-instance_method" title="Gst::Object#has_as_ancestor (method)">#has_as_ancestor</a></span>, <span class='object_link'><a href="Object.html#has_as_parent-instance_method" title="Gst::Object#has_as_parent (method)">#has_as_parent</a></span>, <span class='object_link'><a href="Object.html#name-instance_method" title="Gst::Object#name (method)">#name</a></span>, <span class='object_link'><a href="Object.html#name=-instance_method" title="Gst::Object#name= (method)">#name=</a></span>, <span class='object_link'><a href="Object.html#parent-instance_method" title="Gst::Object#parent (method)">#parent</a></span>, <span class='object_link'><a href="Object.html#parent=-instance_method" title="Gst::Object#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="Object.html#path_string-instance_method" title="Gst::Object#path_string (method)">#path_string</a></span>, <span class='object_link'><a href="Object.html#ref-instance_method" title="Gst::Object#ref (method)">#ref</a></span>, <span class='object_link'><a href="Object.html#ref_sink-class_method" title="Gst::Object.ref_sink (method)">ref_sink</a></span>, <span class='object_link'><a href="Object.html#remove_control_binding-instance_method" title="Gst::Object#remove_control_binding (method)">#remove_control_binding</a></span>, <span class='object_link'><a href="Object.html#replace-class_method" title="Gst::Object.replace (method)">replace</a></span>, <span class='object_link'><a href="Object.html#set_control_binding_disabled-instance_method" title="Gst::Object#set_control_binding_disabled (method)">#set_control_binding_disabled</a></span>, <span class='object_link'><a href="Object.html#suggest_next_sync-instance_method" title="Gst::Object#suggest_next_sync (method)">#suggest_next_sync</a></span>, <span class='object_link'><a href="Object.html#sync_values-instance_method" title="Gst::Object#sync_values (method)">#sync_values</a></span>, <span class='object_link'><a href="Object.html#unparent-instance_method" title="Gst::Object#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="Object.html#unref-instance_method" title="Gst::Object#unref (method)">#unref</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(templ, name)  &#x21d2; <tt><span class='object_link'><a href="" title="Gst::Pad (class)">Gst::Pad</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new pad with the given name from the given template.
+If name is nil, a guaranteed unique name (across all pads)
+will be assigned.
+This function makes a copy of the name so you can safely free the name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>templ</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadTemplate.html" title="Gst::PadTemplate (class)">Gst::PadTemplate</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the pad template to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the pad</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="link_get_name-class_method">
+  
+    .<strong>link_get_name</strong>(ret)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a string representing the given pad-link return.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ret</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadLinkReturn.html" title="Gst::PadLinkReturn (module)">Gst::PadLinkReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::PadLinkReturn to get the name of.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a static string with the name of the pad-link return.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="activate_mode-instance_method">
+  
+    #<strong>activate_mode</strong>(mode, active)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Activates or deactivates the given pad in <!-- raw HTML omitted -->mode<!-- raw HTML omitted --> via dispatching to the
+pad's activatemodefunc. For use from within pad activation functions only.</p>
+<p>If you don't know what this is, you probably don't want to call it.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadMode.html" title="Gst::PadMode (module)">Gst::PadMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the requested activation mode</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>active</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether or not the pad should be active.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the operation was successful.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="active=-instance_method">
+  
+    #<strong>active=</strong>(active)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Activates or deactivates the given pad.
+Normally called from within core state change functions.</p>
+<p>If <!-- raw HTML omitted -->active<!-- raw HTML omitted -->, makes sure the pad is active. If it is already active, either in
+push or pull mode, just return. Otherwise dispatches to the pad's activate
+function to perform the actual activation.</p>
+<p>If not <!-- raw HTML omitted -->active<!-- raw HTML omitted -->, calls gst_pad_activate_mode() with the pad's current mode
+and a false argument.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>active</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether or not the pad should be active.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the operation was successful.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_probe-instance_method">
+  
+    #<strong>add_probe</strong>(mask, callback, user_data, destroy_data)  &#x21d2; <tt>Gst::gulong</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Be notified of different states of pads. The provided callback is called for
+every state that matches <!-- raw HTML omitted -->mask<!-- raw HTML omitted -->.</p>
+<p>Probes are called in groups: First GST_PAD_PROBE_TYPE_BLOCK probes are
+called, then others, then finally GST_PAD_PROBE_TYPE_IDLE. The only
+exception here are GST_PAD_PROBE_TYPE_IDLE probes that are called
+immediately if the pad is already idle while calling gst_pad_add_probe().
+In each of the groups, probes are called in the order in which they were
+added.
+probe with gst_pad_remove_probe(). When using GST_PAD_PROBE_TYPE_IDLE it can
+happen that the probe can be run immediately and if the probe returns
+GST_PAD_PROBE_REMOVE this functions returns 0.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mask</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadProbeType.html" title="Gst::PadProbeType (module)">Gst::PadProbeType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the probe mask</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gst::PadProbeCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gst::PadProbeCallback that will be called with notifications of
+the pad state</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data passed to the callback</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>destroy_data</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>GDestroy::Notify for user_data</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::gulong</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an id or 0 if no probe is pending. The id can be used to remove the</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="allowed_caps-instance_method">
+  
+    #<strong>allowed_caps</strong>  &#x21d2; <tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the capabilities of the allowed media types that can flow through
+<!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and its peer.</p>
+<p>The allowed capabilities is calculated as the intersection of the results of
+calling gst_pad_query_caps() on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and its peer. The caller owns a reference
+on the resulting caps.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the allowed Gst::Caps of the
+pad link. Unref the caps when you no longer need it. This
+function returns nil when <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no peer.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="can_link-instance_method">
+  
+    #<strong>can_link</strong>(sinkpad)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if the source pad and the sink pad are compatible so they can be
+linked.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sinkpad</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the sink Gst::Pad.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the pads can be linked.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="caps-instance_method">
+  
+    #<strong>caps</strong>  &#x21d2; <tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns caps.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>caps</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="caps=-instance_method">
+  
+    #<strong>caps=</strong>(caps)  &#x21d2; <tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>caps</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>caps</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>caps</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="chain-instance_method">
+  
+    #<strong>chain</strong>(buffer)  &#x21d2; <tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Chain a buffer to <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+<p>The function returns #GST_FLOW_FLUSHING if the pad was flushing.</p>
+<p>If the buffer type is not acceptable for <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> (as negotiated with a
+preceding GST_EVENT_CAPS event), this function returns
+#GST_FLOW_NOT_NEGOTIATED.</p>
+<p>The function proceeds calling the chain function installed on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> (see
+gst_pad_set_chain_function()) and the return value of that function is
+returned to the caller. #GST_FLOW_NOT_SUPPORTED is returned if <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no
+chain function.</p>
+<p>In all cases, success or failure, the caller loses its reference to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->
+after calling this function.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Buffer to send, return GST_FLOW_ERROR
+if not.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::FlowReturn from the pad.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="chain_list-instance_method">
+  
+    #<strong>chain_list</strong>(list)  &#x21d2; <tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Chain a bufferlist to <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+<p>The function returns #GST_FLOW_FLUSHING if the pad was flushing.</p>
+<p>If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> was not negotiated properly with a CAPS event, this function
+returns #GST_FLOW_NOT_NEGOTIATED.</p>
+<p>The function proceeds calling the chainlist function installed on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> (see
+gst_pad_set_chain_list_function()) and the return value of that function is
+returned to the caller. #GST_FLOW_NOT_SUPPORTED is returned if <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no
+chainlist function.</p>
+<p>In all cases, success or failure, the caller loses its reference to <!-- raw HTML omitted -->list<!-- raw HTML omitted -->
+after calling this function.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>list</span>
+      
+      
+        <span class='type'>(<tt>Gst::BufferList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::BufferList to send, return GST_FLOW_ERROR
+if not.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::FlowReturn from the pad.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="check_reconfigure-instance_method">
+  
+    #<strong>check_reconfigure</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check and clear the #GST_PAD_FLAG_NEED_RECONFIGURE flag on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and return true
+if the flag was set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true is the GST_PAD_FLAG_NEED_RECONFIGURE flag was set on <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_stream_id-instance_method">
+  
+    #<strong>create_stream_id</strong>(parent, stream_id)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a stream-id for the source Gst::Pad <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> by combining the
+upstream information with the optional <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> of the stream
+of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> must have a parent Gst::Element and which must have zero
+or one sinkpad. <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> can only be nil if the parent element
+of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has only a single source pad.</p>
+<p>This function generates an unique stream-id by getting the upstream
+stream-start event stream ID and appending <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> to it. If the
+element has no sinkpad it will generate an upstream stream-id by
+doing an URI query on the element and in the worst case just uses
+a random number. Source elements that don't implement the URI
+handler interface should ideally generate a unique, deterministic
+stream-id manually instead.</p>
+<p>Since stream IDs are sorted alphabetically, any numbers in the
+stream ID should be printed with a fixed number of characters,
+preceded by 0's, such as by using the format %03u instead of %u.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Parent Gst::Element of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stream_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The stream-id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A stream-id for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. g_free() after usage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_stream_id_printf-instance_method">
+  
+    #<strong>create_stream_id_printf</strong>(parent, stream_id, array)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a stream-id for the source Gst::Pad <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> by combining the
+upstream information with the optional <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> of the stream
+of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> must have a parent Gst::Element and which must have zero
+or one sinkpad. <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> can only be nil if the parent element
+of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has only a single source pad.</p>
+<p>This function generates an unique stream-id by getting the upstream
+stream-start event stream ID and appending <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> to it. If the
+element has no sinkpad it will generate an upstream stream-id by
+doing an URI query on the element and in the worst case just uses
+a random number. Source elements that don't implement the URI
+handler interface should ideally generate a unique, deterministic
+stream-id manually instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Parent Gst::Element of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stream_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The stream-id</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>parameters for the <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> format string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A stream-id for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. g_free() after usage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_stream_id_printf_valist-instance_method">
+  
+    #<strong>create_stream_id_printf_valist</strong>(parent, stream_id, var_args)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a stream-id for the source Gst::Pad <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> by combining the
+upstream information with the optional <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> of the stream
+of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> must have a parent Gst::Element and which must have zero
+or one sinkpad. <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> can only be nil if the parent element
+of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has only a single source pad.</p>
+<p>This function generates an unique stream-id by getting the upstream
+stream-start event stream ID and appending <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> to it. If the
+element has no sinkpad it will generate an upstream stream-id by
+doing an URI query on the element and in the worst case just uses
+a random number. Source elements that don't implement the URI
+handler interface should ideally generate a unique, deterministic
+stream-id manually instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Parent Gst::Element of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stream_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The stream-id</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>var_args</span>
+      
+      
+        <span class='type'>(<tt>Gst::va_list</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>parameters for the <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> format string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A stream-id for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. g_free() after usage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_caps-instance_method">
+  
+    #<strong>current_caps</strong>  &#x21d2; <tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the capabilities currently configured on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> with the last
+#GST_EVENT_CAPS event.
+incremented ref-count or nil when pad has no caps. Unref after usage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current caps of the pad with</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="direction-instance_method">
+  
+    #<strong>direction</strong>  &#x21d2; <tt><span class='object_link'><a href="PadDirection.html" title="Gst::PadDirection (module)">Gst::PadDirection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns direction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadDirection.html" title="Gst::PadDirection (module)">Gst::PadDirection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>direction</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="direction=-instance_method">
+  
+    #<strong>direction=</strong>(direction)  &#x21d2; <tt><span class='object_link'><a href="PadDirection.html" title="Gst::PadDirection (module)">Gst::PadDirection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>direction</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadDirection.html" title="Gst::PadDirection (module)">Gst::PadDirection</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadDirection.html" title="Gst::PadDirection (module)">Gst::PadDirection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>direction</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadDirection.html" title="Gst::PadDirection (module)">Gst::PadDirection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>direction</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="element_private-instance_method">
+  
+    #<strong>element_private</strong>  &#x21d2; <tt>GObject</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the private data of a pad.
+No locking is performed in this function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #gpointer to the private data.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="element_private=-instance_method">
+  
+    #<strong>element_private=</strong>(priv)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set the given private data gpointer on the pad.
+This function can only be used by the element that owns the pad.
+No locking is performed in this function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>priv</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The private data to attach to the pad.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="event_default-instance_method">
+  
+    #<strong>event_default</strong>(parent, event)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Invokes the default event handler for the given pad.</p>
+<p>The EOS event will pause the task associated with <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> before it is forwarded
+to all internally linked pads,</p>
+<p>The event is sent to all pads internally linked to <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. This function
+takes ownership of <!-- raw HTML omitted -->event<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>event</span>
+      
+      
+        <span class='type'>(<tt>Gst::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Event to handle.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the event was sent successfully.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="forward-instance_method">
+  
+    #<strong>forward</strong>(forward, user_data)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Calls <!-- raw HTML omitted -->forward<!-- raw HTML omitted --> for all internally linked pads of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. This function deals with
+dynamically changing internal pads and will make sure that the <!-- raw HTML omitted -->forward<!-- raw HTML omitted -->
+function is only called once for each pad.</p>
+<p>When <!-- raw HTML omitted -->forward<!-- raw HTML omitted --> returns true, no further pads will be processed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>forward</span>
+      
+      
+        <span class='type'>(<tt>Gst::PadForwardFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::PadForwardFunction</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data passed to <!-- raw HTML omitted -->forward<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if one of the dispatcher functions returned true.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_range-instance_method">
+  
+    #<strong>get_range</strong>(offset, size, buffer)  &#x21d2; <tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>When <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is flushing this function returns #GST_FLOW_FLUSHING
+immediately and <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is nil.</p>
+<p>Calls the getrange function of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, see Gst::PadGetRangeFunction for a
+description of a getrange function. If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no getrange function
+installed (see gst_pad_set_getrange_function()) this function returns
+#GST_FLOW_NOT_SUPPORTED.</p>
+<p>If <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> points to a variable holding nil, a valid new Gst::Buffer will be
+placed in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> when this function returns #GST_FLOW_OK. The new buffer
+must be freed with gst_buffer_unref() after usage.</p>
+<p>When <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> points to a variable that points to a valid Gst::Buffer, the
+buffer will be filled with the result data when this function returns
+#GST_FLOW_OK. If the provided buffer is larger than <!-- raw HTML omitted -->size<!-- raw HTML omitted -->, only
+<!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes will be filled in the result buffer and its size will be updated
+accordingly.</p>
+<p>Note that less than <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes can be returned in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> when, for example,
+an EOS condition is near or when <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is not large enough to hold <!-- raw HTML omitted -->size<!-- raw HTML omitted -->
+bytes. The caller should check the result buffer size to get the result size.</p>
+<p>When this function returns any other result value than #GST_FLOW_OK, <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->
+will be unchanged.</p>
+<p>This is a lowlevel function. Usually gst_pad_pull_range() is used.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The start offset of the buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The length of the buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to hold the Gst::Buffer,
+returns #GST_FLOW_ERROR if nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::FlowReturn from the pad.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_sticky_event-instance_method">
+  
+    #<strong>get_sticky_event</strong>(event_type, idx)  &#x21d2; <tt>Gst::Event</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a new reference of the sticky event of type <!-- raw HTML omitted -->event_type<!-- raw HTML omitted -->
+from the event.
+<!-- raw HTML omitted -->event_type<!-- raw HTML omitted --> or nil when no event of <!-- raw HTML omitted -->event_type<!-- raw HTML omitted --> was on
+<!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. Unref after usage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>event_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="EventType.html" title="Gst::EventType (module)">Gst::EventType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::EventType that should be retrieved.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>idx</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the index of the event</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Event of type</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_current_caps-instance_method">
+  
+    #<strong>has_current_caps</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has caps set on it with a #GST_EVENT_CAPS event.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true when <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has caps associated with it.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_active-instance_method">
+  
+    #<strong>is_active</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Query if a pad is active
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the pad is active.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_blocked-instance_method">
+  
+    #<strong>is_blocked</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if the pad is blocked or not. This function returns the
+last requested state of the pad. It is not certain that the pad
+is actually blocking at this point (see gst_pad_is_blocking()).
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the pad is blocked.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_blocking-instance_method">
+  
+    #<strong>is_blocking</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if the pad is blocking or not. This is a guaranteed state
+of whether the pad is actually blocking on a Gst::Buffer or a #GstEvent.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the pad is blocking.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_linked-instance_method">
+  
+    #<strong>is_linked</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if a <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is linked to another pad or not.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the pad is linked, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iterate_internal_links-instance_method">
+  
+    #<strong>iterate_internal_links</strong>  &#x21d2; <tt>Gst::Iterator</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets an iterator for the pads to which the given pad is linked to inside
+of the parent element.</p>
+<p>Each Gst::Pad element yielded by the iterator will have its refcount increased,
+so unref after use.</p>
+<p>Free-function: gst_iterator_free</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Iterator</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Gst::Iterator of #GstPad
+or nil when the pad does not have an iterator function
+configured. Use gst_iterator_free() after usage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iterate_internal_links_default-instance_method">
+  
+    #<strong>iterate_internal_links_default</strong>(parent)  &#x21d2; <tt>Gst::Iterator</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Iterate the list of pads to which the given pad is linked to inside of
+the parent element.
+This is the default handler, and thus returns an iterator of all of the
+pads inside the parent element with opposite direction.</p>
+<p>The caller must free this iterator after use with gst_iterator_free().
+has no parent. Unref each returned pad with gst_object_unref().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Iterator</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Iterator of #GstPad, or nil if <!-- raw HTML omitted -->pad<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="last_flow_return-instance_method">
+  
+    #<strong>last_flow_return</strong>  &#x21d2; <tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the Gst::FlowReturn return from the last data passed by this pad.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="link-instance_method">
+  
+    #<strong>link</strong>(sinkpad)  &#x21d2; <tt><span class='object_link'><a href="PadLinkReturn.html" title="Gst::PadLinkReturn (module)">Gst::PadLinkReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Links the source pad and the sink pad.
+MT Safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sinkpad</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the sink Gst::Pad to link.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadLinkReturn.html" title="Gst::PadLinkReturn (module)">Gst::PadLinkReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A result code indicating if the connection worked or
+what went wrong.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="link_full-instance_method">
+  
+    #<strong>link_full</strong>(sinkpad, flags)  &#x21d2; <tt><span class='object_link'><a href="PadLinkReturn.html" title="Gst::PadLinkReturn (module)">Gst::PadLinkReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Links the source pad and the sink pad.</p>
+<p>This variant of #gst_pad_link provides a more granular control on the
+checks being done when linking. While providing some considerable speedups
+the caller of this method must be aware that wrong usage of those flags
+can cause severe issues. Refer to the documentation of Gst::PadLinkCheck
+for more information.</p>
+<p>MT Safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sinkpad</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the sink Gst::Pad to link.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadLinkCheck.html" title="Gst::PadLinkCheck (module)">Gst::PadLinkCheck</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the checks to validate when linking</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadLinkReturn.html" title="Gst::PadLinkReturn (module)">Gst::PadLinkReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A result code indicating if the connection worked or
+what went wrong.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="link_maybe_ghosting-instance_method">
+  
+    #<strong>link_maybe_ghosting</strong>(sink)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Links <!-- raw HTML omitted -->src<!-- raw HTML omitted --> to <!-- raw HTML omitted -->sink<!-- raw HTML omitted -->, creating any Gst::GhostPad's in between as necessary.</p>
+<p>This is a convenience function to save having to create and add intermediate
+Gst::GhostPad's as required for linking across #GstBin boundaries.</p>
+<p>If <!-- raw HTML omitted -->src<!-- raw HTML omitted --> or <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> pads don't have parent elements or do not share a common
+ancestor, the link will fail.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sink</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Pad</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether the link succeeded.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="link_maybe_ghosting_full-instance_method">
+  
+    #<strong>link_maybe_ghosting_full</strong>(sink, flags)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Links <!-- raw HTML omitted -->src<!-- raw HTML omitted --> to <!-- raw HTML omitted -->sink<!-- raw HTML omitted -->, creating any Gst::GhostPad's in between as necessary.</p>
+<p>This is a convenience function to save having to create and add intermediate
+Gst::GhostPad's as required for linking across #GstBin boundaries.</p>
+<p>If <!-- raw HTML omitted -->src<!-- raw HTML omitted --> or <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> pads don't have parent elements or do not share a common
+ancestor, the link will fail.</p>
+<p>Calling gst_pad_link_maybe_ghosting_full() with
+<!-- raw HTML omitted -->flags<!-- raw HTML omitted --> == %GST_PAD_LINK_CHECK_DEFAULT is the recommended way of linking
+pads with safety checks applied.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sink</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Pad</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadLinkCheck.html" title="Gst::PadLinkCheck (module)">Gst::PadLinkCheck</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>some Gst::PadLinkCheck flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether the link succeeded.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mark_reconfigure-instance_method">
+  
+    #<strong>mark_reconfigure</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Mark a pad for needing reconfiguration. The next call to
+gst_pad_check_reconfigure() will return true after this call.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="needs_reconfigure-instance_method">
+  
+    #<strong>needs_reconfigure</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check the #GST_PAD_FLAG_NEED_RECONFIGURE flag on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and return true
+if the flag was set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true is the GST_PAD_FLAG_NEED_RECONFIGURE flag is set on <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="offset-instance_method">
+  
+    #<strong>offset</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The offset that will be applied to the running time of the pad.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>offset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="offset=-instance_method">
+  
+    #<strong>offset=</strong>(offset)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The offset that will be applied to the running time of the pad.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>offset</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>offset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pad_template-instance_method">
+  
+    #<strong>pad_template</strong>  &#x21d2; <tt><span class='object_link'><a href="PadTemplate.html" title="Gst::PadTemplate (class)">Gst::PadTemplate</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the template for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadTemplate.html" title="Gst::PadTemplate (class)">Gst::PadTemplate</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::PadTemplate from which
+this pad was instantiated, or nil if this pad has no
+template. Unref after usage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pad_template_caps-instance_method">
+  
+    #<strong>pad_template_caps</strong>  &#x21d2; <tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the capabilities for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->'s template.
+Unref after usage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Caps of this pad template.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parent_element-instance_method">
+  
+    #<strong>parent_element</strong>  &#x21d2; <tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the parent of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, cast to a Gst::Element. If a <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no parent or
+its parent is not an element, return nil.
+caller has a reference on the parent, so unref when you're finished
+with it.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent of the pad. The</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pause_task-instance_method">
+  
+    #<strong>pause_task</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Pause the task of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. This function will also wait until the
+function executed by the task is finished if this function is not
+called from the task function.
+has no task.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a true if the task could be paused or false when the pad</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="peer-instance_method">
+  
+    #<strong>peer</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gst::Pad (class)">Gst::Pad</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. This function refs the peer pad so
+you need to unref it after use.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the peer Gst::Pad. Unref after usage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="peer_query-instance_method">
+  
+    #<strong>peer_query</strong>(query)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Performs gst_pad_query() on the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+<p>The caller is responsible for both the allocation and deallocation of
+the query structure.
+if <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no peer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>query</span>
+      
+      
+        <span class='type'>(<tt>Gst::Query</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Query to perform.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the query could be performed. This function returns false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="peer_query_accept_caps-instance_method">
+  
+    #<strong>peer_query_accept_caps</strong>(caps)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> accepts <!-- raw HTML omitted -->caps<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no peer, this function
+returns true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>caps</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Caps to check on the pad</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> can accept the caps or <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no peer.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="peer_query_caps-instance_method">
+  
+    #<strong>peer_query_caps</strong>(filter)  &#x21d2; <tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the capabilities of the peer connected to this pad. Similar to
+gst_pad_query_caps().</p>
+<p>When called on srcpads <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> contains the caps that
+upstream could produce in the order preferred by upstream. When
+called on sinkpads <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> contains the caps accepted by
+downstream in the preferred order. <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> might be nil but
+if it is not nil the returned caps will be a subset of <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->.
+ref-count. When there is no peer pad, this function returns <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> or,
+when <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> is nil, ANY caps.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filter</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Caps filter, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the caps of the peer pad with incremented</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="peer_query_convert-instance_method">
+  
+    #<strong>peer_query_convert</strong>(src_format, src_val, dest_format, dest_val)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries the peer pad of a given sink pad to convert <!-- raw HTML omitted -->src_val<!-- raw HTML omitted --> in <!-- raw HTML omitted -->src_format<!-- raw HTML omitted -->
+to <!-- raw HTML omitted -->dest_format<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>src_format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Format.html" title="Gst::Format (module)">Gst::Format</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Format to convert from.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>src_val</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a value to convert.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dest_format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Format.html" title="Gst::Format (module)">Gst::Format</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Format to convert to.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dest_val</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the result.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the query could be performed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="peer_query_duration-instance_method">
+  
+    #<strong>peer_query_duration</strong>(format, duration)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries the peer pad of a given sink pad for the total stream duration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Format.html" title="Gst::Format (module)">Gst::Format</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Format requested</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>duration</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a location in which to store the total
+duration, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the query could be performed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="peer_query_position-instance_method">
+  
+    #<strong>peer_query_position</strong>(format, cur)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries the peer of a given sink pad for the stream position.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Format.html" title="Gst::Format (module)">Gst::Format</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Format requested</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cur</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a location in which to store the current
+position, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the query could be performed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="proxy_query_accept_caps-instance_method">
+  
+    #<strong>proxy_query_accept_caps</strong>(query)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if all internally linked pads of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> accepts the caps in <!-- raw HTML omitted -->query<!-- raw HTML omitted --> and
+returns the intersection of the results.</p>
+<p>This function is useful as a default accept caps query function for an element
+that can handle any stream format, but requires caps that are acceptable for
+all opposite pads.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>query</span>
+      
+      
+        <span class='type'>(<tt>Gst::Query</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an ACCEPT_CAPS Gst::Query.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->query<!-- raw HTML omitted --> could be executed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="proxy_query_caps-instance_method">
+  
+    #<strong>proxy_query_caps</strong>(query)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Calls gst_pad_query_caps() for all internally linked pads of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and returns
+the intersection of the results.</p>
+<p>This function is useful as a default caps query function for an element
+that can handle any stream format, but requires all its pads to have
+the same caps.  Two such elements are tee and adder.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>query</span>
+      
+      
+        <span class='type'>(<tt>Gst::Query</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a CAPS Gst::Query.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->query<!-- raw HTML omitted --> could be executed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pull_range-instance_method">
+  
+    #<strong>pull_range</strong>(offset, size, buffer)  &#x21d2; <tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Pulls a <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> from the peer pad or fills up a provided buffer.</p>
+<p>This function will first trigger the pad block signal if it was
+installed.</p>
+<p>When <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is not linked #GST_FLOW_NOT_LINKED is returned else this
+function returns the result of gst_pad_get_range() on the peer pad.
+See gst_pad_get_range() for a list of return values and for the
+semantics of the arguments of this function.</p>
+<p>If <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> points to a variable holding nil, a valid new Gst::Buffer will be
+placed in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> when this function returns #GST_FLOW_OK. The new buffer
+must be freed with gst_buffer_unref() after usage. When this function
+returns any other result value, <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> will still point to nil.</p>
+<p>When <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> points to a variable that points to a valid Gst::Buffer, the
+buffer will be filled with the result data when this function returns
+#GST_FLOW_OK. When this function returns any other result value,
+<!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> will be unchanged. If the provided buffer is larger than <!-- raw HTML omitted -->size<!-- raw HTML omitted -->, only
+<!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes will be filled in the result buffer and its size will be updated
+accordingly.</p>
+<p>Note that less than <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes can be returned in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> when, for example,
+an EOS condition is near or when <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is not large enough to hold <!-- raw HTML omitted -->size<!-- raw HTML omitted -->
+bytes. The caller should check the result buffer size to get the result size.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The start offset of the buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The length of the buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to hold the Gst::Buffer, returns
+GST_FLOW_ERROR if nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::FlowReturn from the peer pad.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push-instance_method">
+  
+    #<strong>push</strong>(buffer)  &#x21d2; <tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Pushes a buffer to the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+<p>This function will call installed block probes before triggering any
+installed data probes.</p>
+<p>The function proceeds calling gst_pad_chain() on the peer pad and returns
+the value from that function. If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no peer, #GST_FLOW_NOT_LINKED will
+be returned.</p>
+<p>In all cases, success or failure, the caller loses its reference to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->
+after calling this function.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Buffer to push returns GST_FLOW_ERROR
+if not.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::FlowReturn from the peer pad.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_event-instance_method">
+  
+    #<strong>push_event</strong>(event)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sends the event to the peer of the given pad. This function is
+mainly used by elements to send events to their peer
+elements.</p>
+<p>This function takes ownership of the provided event so you should
+gst_event_ref() it if you want to reuse the event after this call.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>event</span>
+      
+      
+        <span class='type'>(<tt>Gst::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Event to send to the pad.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the event was handled.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_list-instance_method">
+  
+    #<strong>push_list</strong>(list)  &#x21d2; <tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Pushes a buffer list to the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+<p>This function will call installed block probes before triggering any
+installed data probes.</p>
+<p>The function proceeds calling the chain function on the peer pad and returns
+the value from that function. If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no peer, #GST_FLOW_NOT_LINKED will
+be returned. If the peer pad does not have any installed chainlist function
+every group buffer of the list will be merged into a normal Gst::Buffer and
+chained via gst_pad_chain().</p>
+<p>In all cases, success or failure, the caller loses its reference to <!-- raw HTML omitted -->list<!-- raw HTML omitted -->
+after calling this function.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>list</span>
+      
+      
+        <span class='type'>(<tt>Gst::BufferList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::BufferList to push returns GST_FLOW_ERROR
+if not.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::FlowReturn from the peer pad.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="query-instance_method">
+  
+    #<strong>query</strong>(query)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Dispatches a query to a pad. The query should have been allocated by the
+caller via one of the type-specific allocation functions. The element that
+the pad belongs to is responsible for filling the query with an appropriate
+response, which should then be parsed with a type-specific query parsing
+function.</p>
+<p>Again, the caller is responsible for both the allocation and deallocation of
+the query structure.</p>
+<p>Please also note that some queries might need a running pipeline to work.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>query</span>
+      
+      
+        <span class='type'>(<tt>Gst::Query</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Query to perform.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the query could be performed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="query_accept_caps-instance_method">
+  
+    #<strong>query_accept_caps</strong>(caps)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if the given pad accepts the caps.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>caps</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Caps to check on the pad</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the pad can accept the caps.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="query_caps-instance_method">
+  
+    #<strong>query_caps</strong>(filter)  &#x21d2; <tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the capabilities this pad can produce or consume.
+Note that this method doesn't necessarily return the caps set by sending a
+gst_event_new_caps() - use gst_pad_get_current_caps() for that instead.
+gst_pad_query_caps returns all possible caps a pad can operate with, using
+the pad's CAPS query function, If the query fails, this function will return
+<!-- raw HTML omitted -->filter<!-- raw HTML omitted -->, if not nil, otherwise ANY.</p>
+<p>When called on sinkpads <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> contains the caps that
+upstream could produce in the order preferred by upstream. When
+called on srcpads <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> contains the caps accepted by
+downstream in the preferred order. <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> might be nil but
+if it is not nil the returned caps will be a subset of <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->.</p>
+<p>Note that this function does not return writable Gst::Caps, use
+gst_caps_make_writable() before modifying the caps.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filter</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>suggested Gst::Caps, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the caps of the pad with incremented ref-count.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="query_convert-instance_method">
+  
+    #<strong>query_convert</strong>(src_format, src_val, dest_format, dest_val)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries a pad to convert <!-- raw HTML omitted -->src_val<!-- raw HTML omitted --> in <!-- raw HTML omitted -->src_format<!-- raw HTML omitted --> to <!-- raw HTML omitted -->dest_format<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>src_format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Format.html" title="Gst::Format (module)">Gst::Format</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Format to convert from.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>src_val</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a value to convert.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dest_format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Format.html" title="Gst::Format (module)">Gst::Format</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Format to convert to.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dest_val</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the result.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the query could be performed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="query_default-instance_method">
+  
+    #<strong>query_default</strong>(parent, query)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Invokes the default query handler for the given pad.
+The query is sent to all pads internally linked to <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. Note that
+if there are many possible sink pads that are internally linked to
+<!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, only one will be sent the query.
+Multi-sinkpad elements should implement custom query handlers.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>query</span>
+      
+      
+        <span class='type'>(<tt>Gst::Query</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Query to handle.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the query was performed successfully.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="query_duration-instance_method">
+  
+    #<strong>query_duration</strong>(format, duration)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries a pad for the total stream duration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Format.html" title="Gst::Format (module)">Gst::Format</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Format requested</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>duration</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a location in which to store the total
+duration, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the query could be performed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="query_position-instance_method">
+  
+    #<strong>query_position</strong>(format, cur)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries a pad for the stream position.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Format.html" title="Gst::Format (module)">Gst::Format</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Format requested</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cur</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A location in which to store the current position, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the query could be performed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_probe-instance_method">
+  
+    #<strong>remove_probe</strong>(id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Remove the probe with <!-- raw HTML omitted -->id<!-- raw HTML omitted --> from <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>Gst::gulong</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the probe id to remove</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="send_event-instance_method">
+  
+    #<strong>send_event</strong>(event)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sends the event to the pad. This function can be used
+by applications to send events in the pipeline.</p>
+<p>If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is a source pad, <!-- raw HTML omitted -->event<!-- raw HTML omitted --> should be an upstream event. If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is a
+sink pad, <!-- raw HTML omitted -->event<!-- raw HTML omitted --> should be a downstream event. For example, you would not
+send a #GST_EVENT_EOS on a src pad; EOS events only propagate downstream.
+Furthermore, some downstream events have to be serialized with data flow,
+like EOS, while some can travel out-of-band, like #GST_EVENT_FLUSH_START. If
+the event needs to be serialized with data flow, this function will take the
+pad's stream lock while calling its event function.</p>
+<p>To find out whether an event type is upstream, downstream, or downstream and
+serialized, see Gst::EventTypeFlags, gst_event_type_get_flags(),
+#GST_EVENT_IS_UPSTREAM, #GST_EVENT_IS_DOWNSTREAM, and
+#GST_EVENT_IS_SERIALIZED. Note that in practice that an application or
+plugin doesn't need to bother itself with this information; the core handles
+all necessary locks and checks.</p>
+<p>This function takes ownership of the provided event so you should
+gst_event_ref() it if you want to reuse the event after this call.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>event</span>
+      
+      
+        <span class='type'>(<tt>Gst::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Event to send to the pad.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the event was handled.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_activate_function_full-instance_method">
+  
+    #<strong>set_activate_function_full</strong>(activate, user_data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the given activate function for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. The activate function will
+dispatch to gst_pad_activate_mode() to perform the actual activation.
+Only makes sense to set on sink pads.</p>
+<p>Call this function if your sink pad can start a pull-based task.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>activate</span>
+      
+      
+        <span class='type'>(<tt>Gst::PadActivateFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::PadActivateFunction to set.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user_data passed to <!-- raw HTML omitted -->notify<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>notify called when <!-- raw HTML omitted -->activate<!-- raw HTML omitted --> will not be used anymore.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_activatemode_function_full-instance_method">
+  
+    #<strong>set_activatemode_function_full</strong>(activatemode, user_data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the given activate_mode function for the pad. An activate_mode function
+prepares the element for data passing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>activatemode</span>
+      
+      
+        <span class='type'>(<tt>Gst::PadActivateModeFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::PadActivateModeFunction to set.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user_data passed to <!-- raw HTML omitted -->notify<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>notify called when <!-- raw HTML omitted -->activatemode<!-- raw HTML omitted --> will not be used anymore.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_chain_function_full-instance_method">
+  
+    #<strong>set_chain_function_full</strong>(chain, user_data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the given chain function for the pad. The chain function is called to
+process a Gst::Buffer input buffer. see #GstPadChainFunction for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>chain</span>
+      
+      
+        <span class='type'>(<tt>Gst::PadChainFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::PadChainFunction to set.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user_data passed to <!-- raw HTML omitted -->notify<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>notify called when <!-- raw HTML omitted -->chain<!-- raw HTML omitted --> will not be used anymore.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_chain_list_function_full-instance_method">
+  
+    #<strong>set_chain_list_function_full</strong>(chainlist, user_data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the given chain list function for the pad. The chainlist function is
+called to process a Gst::BufferList input buffer list. See
+Gst::PadChainListFunction for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>chainlist</span>
+      
+      
+        <span class='type'>(<tt>Gst::PadChainListFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::PadChainListFunction to set.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user_data passed to <!-- raw HTML omitted -->notify<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>notify called when <!-- raw HTML omitted -->chainlist<!-- raw HTML omitted --> will not be used anymore.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_event_full_function_full-instance_method">
+  
+    #<strong>set_event_full_function_full</strong>(event, user_data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the given event handler for the pad.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>event</span>
+      
+      
+        <span class='type'>(<tt>Gst::PadEventFullFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::PadEventFullFunction to set.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user_data passed to <!-- raw HTML omitted -->notify<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>notify called when <!-- raw HTML omitted -->event<!-- raw HTML omitted --> will not be used anymore.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_event_function_full-instance_method">
+  
+    #<strong>set_event_function_full</strong>(event, user_data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the given event handler for the pad.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>event</span>
+      
+      
+        <span class='type'>(<tt>Gst::PadEventFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::PadEventFunction to set.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user_data passed to <!-- raw HTML omitted -->notify<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>notify called when <!-- raw HTML omitted -->event<!-- raw HTML omitted --> will not be used anymore.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_getrange_function_full-instance_method">
+  
+    #<strong>set_getrange_function_full</strong>(get, user_data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the given getrange function for the pad. The getrange function is
+called to produce a new Gst::Buffer to start the processing pipeline. see
+Gst::PadGetRangeFunction for a description of the getrange function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>get</span>
+      
+      
+        <span class='type'>(<tt>Gst::PadGetRangeFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::PadGetRangeFunction to set.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user_data passed to <!-- raw HTML omitted -->notify<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>notify called when <!-- raw HTML omitted -->get<!-- raw HTML omitted --> will not be used anymore.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_iterate_internal_links_function_full-instance_method">
+  
+    #<strong>set_iterate_internal_links_function_full</strong>(iterintlink, user_data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the given internal link iterator function for the pad.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iterintlink</span>
+      
+      
+        <span class='type'>(<tt>Gst::PadIterIntLinkFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::PadIterIntLinkFunction to set.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user_data passed to <!-- raw HTML omitted -->notify<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>notify called when <!-- raw HTML omitted -->iterintlink<!-- raw HTML omitted --> will not be used anymore.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_link_function_full-instance_method">
+  
+    #<strong>set_link_function_full</strong>(link, user_data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the given link function for the pad. It will be called when
+the pad is linked with another pad.</p>
+<p>The return value #GST_PAD_LINK_OK should be used when the connection can be
+made.</p>
+<p>The return value #GST_PAD_LINK_REFUSED should be used when the connection
+cannot be made for some reason.</p>
+<p>If <!-- raw HTML omitted -->link<!-- raw HTML omitted --> is installed on a source pad, it should call the Gst::PadLinkFunction
+of the peer sink pad, if present.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>link</span>
+      
+      
+        <span class='type'>(<tt>Gst::PadLinkFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::PadLinkFunction to set.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user_data passed to <!-- raw HTML omitted -->notify<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>notify called when <!-- raw HTML omitted -->link<!-- raw HTML omitted --> will not be used anymore.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_query_function_full-instance_method">
+  
+    #<strong>set_query_function_full</strong>(query, user_data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set the given query function for the pad.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>query</span>
+      
+      
+        <span class='type'>(<tt>Gst::PadQueryFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::PadQueryFunction to set.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user_data passed to <!-- raw HTML omitted -->notify<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>notify called when <!-- raw HTML omitted -->query<!-- raw HTML omitted --> will not be used anymore.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_unlink_function_full-instance_method">
+  
+    #<strong>set_unlink_function_full</strong>(unlink, user_data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the given unlink function for the pad. It will be called
+when the pad is unlinked.</p>
+<p>Note that the pad's lock is already held when the unlink
+function is called, so most pad functions cannot be called
+from within the callback.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>unlink</span>
+      
+      
+        <span class='type'>(<tt>Gst::PadUnlinkFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::PadUnlinkFunction to set.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user_data passed to <!-- raw HTML omitted -->notify<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>notify called when <!-- raw HTML omitted -->unlink<!-- raw HTML omitted --> will not be used anymore.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="single_internal_link-instance_method">
+  
+    #<strong>single_internal_link</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gst::Pad (class)">Gst::Pad</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If there is a single internal link of the given pad, this function will
+return it. Otherwise, it will return NULL.
+or more than one internal links. Unref returned pad with
+gst_object_unref().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Pad, or nil if <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has none</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="start_task-instance_method">
+  
+    #<strong>start_task</strong>(func, user_data, notify)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Starts a task that repeatedly calls <!-- raw HTML omitted -->func<!-- raw HTML omitted --> with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->. This function
+is mostly used in pad activation functions to start the dataflow.
+The #GST_PAD_STREAM_LOCK of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> will automatically be acquired
+before <!-- raw HTML omitted -->func<!-- raw HTML omitted --> is called.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>Gst::TaskFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the task function to call</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data passed to the task function</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>called when <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> is no longer referenced</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a true if the task could be started.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sticky_events_foreach-instance_method">
+  
+    #<strong>sticky_events_foreach</strong>(foreach_func, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Iterates all sticky events on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and calls <!-- raw HTML omitted -->foreach_func<!-- raw HTML omitted --> for every
+event. If <!-- raw HTML omitted -->foreach_func<!-- raw HTML omitted --> returns false the iteration is immediately stopped.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>foreach_func</span>
+      
+      
+        <span class='type'>(<tt>Gst::PadStickyEventsForeachFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::PadStickyEventsForeachFunction that
+should be called for every event.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the optional user data.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stop_task-instance_method">
+  
+    #<strong>stop_task</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Stop the task of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. This function will also make sure that the
+function executed by the task will effectively stop if not called
+from the GstTaskFunction.</p>
+<p>This function will deadlock if called from the GstTaskFunction of
+the task. Use gst_task_pause() instead.</p>
+<p>Regardless of whether the pad has a task, the stream lock is acquired and
+released so as to ensure that streaming through this pad has finished.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a true if the task could be stopped or false on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="store_sticky_event-instance_method">
+  
+    #<strong>store_sticky_event</strong>(event)  &#x21d2; <tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Store the sticky <!-- raw HTML omitted -->event<!-- raw HTML omitted --> on <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->
+was flushing or #GST_FLOW_EOS when the pad was EOS.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>event</span>
+      
+      
+        <span class='type'>(<tt>Gst::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Event</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>#GST_FLOW_OK on success, #GST_FLOW_FLUSHING when the pad</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stream-instance_method">
+  
+    #<strong>stream</strong>  &#x21d2; <tt><span class='object_link'><a href="Stream.html" title="Gst::Stream (class)">Gst::Stream</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the current Gst::Stream for the <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, or nil if none has been
+set yet, i.e. the pad has not received a stream-start event yet.</p>
+<p>This is a convenience wrapper around gst_pad_get_sticky_event() and
+gst_event_parse_stream().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Stream.html" title="Gst::Stream (class)">Gst::Stream</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current Gst::Stream for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, or nil.
+unref the returned stream when no longer needed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stream_id-instance_method">
+  
+    #<strong>stream_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the current stream-id for the <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, or nil if none has been
+set yet, i.e. the pad has not received a stream-start event yet.</p>
+<p>This is a convenience wrapper around gst_pad_get_sticky_event() and
+gst_event_parse_stream_start().</p>
+<p>The returned stream-id string should be treated as an opaque string, its
+contents should not be interpreted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly-allocated copy of the stream-id for
+<!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, or nil.  g_free() the returned string when no longer
+needed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="task_state-instance_method">
+  
+    #<strong>task_state</strong>  &#x21d2; <tt><span class='object_link'><a href="TaskState.html" title="Gst::TaskState (module)">Gst::TaskState</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> task state. If no task is currently
+set, #GST_TASK_STOPPED is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TaskState.html" title="Gst::TaskState (module)">Gst::TaskState</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The current state of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->'s task.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="template-instance_method">
+  
+    #<strong>template</strong>  &#x21d2; <tt><span class='object_link'><a href="PadTemplate.html" title="Gst::PadTemplate (class)">Gst::PadTemplate</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns template.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadTemplate.html" title="Gst::PadTemplate (class)">Gst::PadTemplate</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>template</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="template=-instance_method">
+  
+    #<strong>template=</strong>(template)  &#x21d2; <tt><span class='object_link'><a href="PadTemplate.html" title="Gst::PadTemplate (class)">Gst::PadTemplate</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>template</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadTemplate.html" title="Gst::PadTemplate (class)">Gst::PadTemplate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadTemplate.html" title="Gst::PadTemplate (class)">Gst::PadTemplate</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>template</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadTemplate.html" title="Gst::PadTemplate (class)">Gst::PadTemplate</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>template</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unlink-instance_method">
+  
+    #<strong>unlink</strong>(sinkpad)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Unlinks the source pad from the sink pad. Will emit the Gst::Pad::unlinked
+signal on both pads.
+the pads were not linked together.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sinkpad</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the sink Gst::Pad to unlink.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the pads were unlinked. This function returns false if</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="use_fixed_caps-instance_method">
+  
+    #<strong>use_fixed_caps</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A helper function you can use that sets the FIXED_CAPS flag
+This way the default CAPS query will always return the negotiated caps
+or in case the pad is not negotiated, the padtemplate caps.</p>
+<p>The negotiated caps are the caps of the last CAPS event that passed on the
+pad. Use this function on a pad that, once it negotiated to a CAPS, cannot
+be renegotiated to something else.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

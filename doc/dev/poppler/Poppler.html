@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Poppler
+  
+    &mdash; Ruby/Poppler
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Poppler";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (P)</a> &raquo;
+    
+    
+    <span class="title">Poppler</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Poppler
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  <dl>
+      <dt>Extended by:</dt>
+      <dd>GLib::Deprecatable</dd>
+  </dl>
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/poppler/page.rb<span class="defines">,<br />
+  lib/poppler.rb,<br /> lib/poppler/color.rb,<br /> lib/poppler/loader.rb,<br /> lib/poppler/version.rb,<br /> lib/poppler/document.rb,<br /> lib/poppler/rectangle.rb,<br /> lib/poppler/deprecated.rb,<br /> lib/poppler/index-iter.rb,<br /> lib/poppler/image-mapping.rb,<br /> lib/poppler/annot-callout-line.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Copyright (C) 2017  Ruby-GNOME2 Project Team</p>
+<p>This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.</p>
+<p>This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.</p>
+<p>You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Poppler/ActionLayerAction.html" title="Poppler::ActionLayerAction (module)">ActionLayerAction</a></span>, <span class='object_link'><a href="Poppler/ActionMovieOperation.html" title="Poppler::ActionMovieOperation (module)">ActionMovieOperation</a></span>, <span class='object_link'><a href="Poppler/ActionType.html" title="Poppler::ActionType (module)">ActionType</a></span>, <span class='object_link'><a href="Poppler/AdditionalActionType.html" title="Poppler::AdditionalActionType (module)">AdditionalActionType</a></span>, <span class='object_link'><a href="Poppler/AnnotExternalDataType.html" title="Poppler::AnnotExternalDataType (module)">AnnotExternalDataType</a></span>, <span class='object_link'><a href="Poppler/AnnotFlag.html" title="Poppler::AnnotFlag (module)">AnnotFlag</a></span>, <span class='object_link'><a href="Poppler/AnnotFreeTextQuadding.html" title="Poppler::AnnotFreeTextQuadding (module)">AnnotFreeTextQuadding</a></span>, <span class='object_link'><a href="Poppler/AnnotMarkupReplyType.html" title="Poppler::AnnotMarkupReplyType (module)">AnnotMarkupReplyType</a></span>, <span class='object_link'><a href="Poppler/AnnotStampIcon.html" title="Poppler::AnnotStampIcon (module)">AnnotStampIcon</a></span>, <span class='object_link'><a href="Poppler/AnnotTextState.html" title="Poppler::AnnotTextState (module)">AnnotTextState</a></span>, <span class='object_link'><a href="Poppler/AnnotType.html" title="Poppler::AnnotType (module)">AnnotType</a></span>, <span class='object_link'><a href="Poppler/Backend.html" title="Poppler::Backend (module)">Backend</a></span>, <span class='object_link'><a href="Poppler/CertificateStatus.html" title="Poppler::CertificateStatus (module)">CertificateStatus</a></span>, <span class='object_link'><a href="Poppler/DestType.html" title="Poppler::DestType (module)">DestType</a></span>, <span class='object_link'><a href="Poppler/Error.html" title="Poppler::Error (module)">Error</a></span>, <span class='object_link'><a href="Poppler/FindFlags.html" title="Poppler::FindFlags (module)">FindFlags</a></span>, <span class='object_link'><a href="Poppler/FontType.html" title="Poppler::FontType (module)">FontType</a></span>, <span class='object_link'><a href="Poppler/FormButtonType.html" title="Poppler::FormButtonType (module)">FormButtonType</a></span>, <span class='object_link'><a href="Poppler/FormChoiceType.html" title="Poppler::FormChoiceType (module)">FormChoiceType</a></span>, <span class='object_link'><a href="Poppler/FormFieldType.html" title="Poppler::FormFieldType (module)">FormFieldType</a></span>, <span class='object_link'><a href="Poppler/FormTextType.html" title="Poppler::FormTextType (module)">FormTextType</a></span>, <span class='object_link'><a href="Poppler/MoviePlayMode.html" title="Poppler::MoviePlayMode (module)">MoviePlayMode</a></span>, <span class='object_link'><a href="Poppler/PDFConformance.html" title="Poppler::PDFConformance (module)">PDFConformance</a></span>, <span class='object_link'><a href="Poppler/PDFPart.html" title="Poppler::PDFPart (module)">PDFPart</a></span>, <span class='object_link'><a href="Poppler/PDFSubtype.html" title="Poppler::PDFSubtype (module)">PDFSubtype</a></span>, <span class='object_link'><a href="Poppler/PageLayout.html" title="Poppler::PageLayout (module)">PageLayout</a></span>, <span class='object_link'><a href="Poppler/PageMode.html" title="Poppler::PageMode (module)">PageMode</a></span>, <span class='object_link'><a href="Poppler/PageTransitionAlignment.html" title="Poppler::PageTransitionAlignment (module)">PageTransitionAlignment</a></span>, <span class='object_link'><a href="Poppler/PageTransitionDirection.html" title="Poppler::PageTransitionDirection (module)">PageTransitionDirection</a></span>, <span class='object_link'><a href="Poppler/PageTransitionType.html" title="Poppler::PageTransitionType (module)">PageTransitionType</a></span>, <span class='object_link'><a href="Poppler/Permissions.html" title="Poppler::Permissions (module)">Permissions</a></span>, <span class='object_link'><a href="Poppler/PrintDuplex.html" title="Poppler::PrintDuplex (module)">PrintDuplex</a></span>, <span class='object_link'><a href="Poppler/PrintFlags.html" title="Poppler::PrintFlags (module)">PrintFlags</a></span>, <span class='object_link'><a href="Poppler/PrintScaling.html" title="Poppler::PrintScaling (module)">PrintScaling</a></span>, <span class='object_link'><a href="Poppler/SelectionStyle.html" title="Poppler::SelectionStyle (module)">SelectionStyle</a></span>, <span class='object_link'><a href="Poppler/SignatureStatus.html" title="Poppler::SignatureStatus (module)">SignatureStatus</a></span>, <span class='object_link'><a href="Poppler/SignatureValidationFlags.html" title="Poppler::SignatureValidationFlags (module)">SignatureValidationFlags</a></span>, <span class='object_link'><a href="Poppler/StructureBlockAlign.html" title="Poppler::StructureBlockAlign (module)">StructureBlockAlign</a></span>, <span class='object_link'><a href="Poppler/StructureBorderStyle.html" title="Poppler::StructureBorderStyle (module)">StructureBorderStyle</a></span>, <span class='object_link'><a href="Poppler/StructureElementKind.html" title="Poppler::StructureElementKind (module)">StructureElementKind</a></span>, <span class='object_link'><a href="Poppler/StructureFormRole.html" title="Poppler::StructureFormRole (module)">StructureFormRole</a></span>, <span class='object_link'><a href="Poppler/StructureFormState.html" title="Poppler::StructureFormState (module)">StructureFormState</a></span>, <span class='object_link'><a href="Poppler/StructureGetTextFlags.html" title="Poppler::StructureGetTextFlags (module)">StructureGetTextFlags</a></span>, <span class='object_link'><a href="Poppler/StructureGlyphOrientation.html" title="Poppler::StructureGlyphOrientation (module)">StructureGlyphOrientation</a></span>, <span class='object_link'><a href="Poppler/StructureInlineAlign.html" title="Poppler::StructureInlineAlign (module)">StructureInlineAlign</a></span>, <span class='object_link'><a href="Poppler/StructureListNumbering.html" title="Poppler::StructureListNumbering (module)">StructureListNumbering</a></span>, <span class='object_link'><a href="Poppler/StructurePlacement.html" title="Poppler::StructurePlacement (module)">StructurePlacement</a></span>, <span class='object_link'><a href="Poppler/StructureRubyAlign.html" title="Poppler::StructureRubyAlign (module)">StructureRubyAlign</a></span>, <span class='object_link'><a href="Poppler/StructureRubyPosition.html" title="Poppler::StructureRubyPosition (module)">StructureRubyPosition</a></span>, <span class='object_link'><a href="Poppler/StructureTableScope.html" title="Poppler::StructureTableScope (module)">StructureTableScope</a></span>, <span class='object_link'><a href="Poppler/StructureTextAlign.html" title="Poppler::StructureTextAlign (module)">StructureTextAlign</a></span>, <span class='object_link'><a href="Poppler/StructureTextDecoration.html" title="Poppler::StructureTextDecoration (module)">StructureTextDecoration</a></span>, <span class='object_link'><a href="Poppler/StructureWritingMode.html" title="Poppler::StructureWritingMode (module)">StructureWritingMode</a></span>, <span class='object_link'><a href="Poppler/Version.html" title="Poppler::Version (module)">Version</a></span>, <span class='object_link'><a href="Poppler/ViewerPreferences.html" title="Poppler::ViewerPreferences (module)">ViewerPreferences</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Poppler/Annot.html" title="Poppler::Annot (class)">Annot</a></span>, <span class='object_link'><a href="Poppler/AnnotCalloutLine.html" title="Poppler::AnnotCalloutLine (class)">AnnotCalloutLine</a></span>, <span class='object_link'><a href="Poppler/AnnotCircle.html" title="Poppler::AnnotCircle (class)">AnnotCircle</a></span>, <span class='object_link'><a href="Poppler/AnnotFileAttachment.html" title="Poppler::AnnotFileAttachment (class)">AnnotFileAttachment</a></span>, <span class='object_link'><a href="Poppler/AnnotFreeText.html" title="Poppler::AnnotFreeText (class)">AnnotFreeText</a></span>, <span class='object_link'><a href="Poppler/AnnotLine.html" title="Poppler::AnnotLine (class)">AnnotLine</a></span>, <span class='object_link'><a href="Poppler/AnnotMapping.html" title="Poppler::AnnotMapping (class)">AnnotMapping</a></span>, <span class='object_link'><a href="Poppler/AnnotMarkup.html" title="Poppler::AnnotMarkup (class)">AnnotMarkup</a></span>, <span class='object_link'><a href="Poppler/AnnotMovie.html" title="Poppler::AnnotMovie (class)">AnnotMovie</a></span>, <span class='object_link'><a href="Poppler/AnnotScreen.html" title="Poppler::AnnotScreen (class)">AnnotScreen</a></span>, <span class='object_link'><a href="Poppler/AnnotSquare.html" title="Poppler::AnnotSquare (class)">AnnotSquare</a></span>, <span class='object_link'><a href="Poppler/AnnotStamp.html" title="Poppler::AnnotStamp (class)">AnnotStamp</a></span>, <span class='object_link'><a href="Poppler/AnnotText.html" title="Poppler::AnnotText (class)">AnnotText</a></span>, <span class='object_link'><a href="Poppler/AnnotTextMarkup.html" title="Poppler::AnnotTextMarkup (class)">AnnotTextMarkup</a></span>, <span class='object_link'><a href="Poppler/Attachment.html" title="Poppler::Attachment (class)">Attachment</a></span>, <span class='object_link'><a href="Poppler/Color.html" title="Poppler::Color (class)">Color</a></span>, <span class='object_link'><a href="Poppler/Document.html" title="Poppler::Document (class)">Document</a></span>, <span class='object_link'><a href="Poppler/FontInfo.html" title="Poppler::FontInfo (class)">FontInfo</a></span>, <span class='object_link'><a href="Poppler/FormField.html" title="Poppler::FormField (class)">FormField</a></span>, <span class='object_link'><a href="Poppler/ImageMapping.html" title="Poppler::ImageMapping (class)">ImageMapping</a></span>, <span class='object_link'><a href="Poppler/IndexIter.html" title="Poppler::IndexIter (class)">IndexIter</a></span>, <span class='object_link'><a href="Poppler/Layer.html" title="Poppler::Layer (class)">Layer</a></span>, <span class='object_link'><a href="Poppler/Loader.html" title="Poppler::Loader (class)">Loader</a></span>, <span class='object_link'><a href="Poppler/Media.html" title="Poppler::Media (class)">Media</a></span>, <span class='object_link'><a href="Poppler/Movie.html" title="Poppler::Movie (class)">Movie</a></span>, <span class='object_link'><a href="Poppler/PSFile.html" title="Poppler::PSFile (class)">PSFile</a></span>, <span class='object_link'><a href="Poppler/Page.html" title="Poppler::Page (class)">Page</a></span>, <span class='object_link'><a href="Poppler/Rectangle.html" title="Poppler::Rectangle (class)">Rectangle</a></span>, <span class='object_link'><a href="Poppler/StructureElement.html" title="Poppler::StructureElement (class)">StructureElement</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="ANNOT_TEXT_ICON_CIRCLE-constant" class="">ANNOT_TEXT_ICON_CIRCLE =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Circle</span></pre></dd>
+      
+        <dt id="ANNOT_TEXT_ICON_COMMENT-constant" class="">ANNOT_TEXT_ICON_COMMENT =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Comment</span></pre></dd>
+      
+        <dt id="ANNOT_TEXT_ICON_CROSS-constant" class="">ANNOT_TEXT_ICON_CROSS =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Cross</span></pre></dd>
+      
+        <dt id="ANNOT_TEXT_ICON_HELP-constant" class="">ANNOT_TEXT_ICON_HELP =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Help</span></pre></dd>
+      
+        <dt id="ANNOT_TEXT_ICON_INSERT-constant" class="">ANNOT_TEXT_ICON_INSERT =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Insert</span></pre></dd>
+      
+        <dt id="ANNOT_TEXT_ICON_KEY-constant" class="">ANNOT_TEXT_ICON_KEY =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Key</span></pre></dd>
+      
+        <dt id="ANNOT_TEXT_ICON_NEW_PARAGRAPH-constant" class="">ANNOT_TEXT_ICON_NEW_PARAGRAPH =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>NewParagraph</span></pre></dd>
+      
+        <dt id="ANNOT_TEXT_ICON_NOTE-constant" class="">ANNOT_TEXT_ICON_NOTE =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Note</span></pre></dd>
+      
+        <dt id="ANNOT_TEXT_ICON_PARAGRAPH-constant" class="">ANNOT_TEXT_ICON_PARAGRAPH =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Paragraph</span></pre></dd>
+      
+        <dt id="HAS_CAIRO-constant" class="">HAS_CAIRO =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Defined if poppler was compiled with cairo support.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span></pre></dd>
+      
+        <dt id="MAJOR_VERSION-constant" class="">MAJOR_VERSION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The major version number of the poppler header files (e.g. in poppler version
+0.1.2 this is 0.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>24</span></pre></dd>
+      
+        <dt id="MICRO_VERSION-constant" class="">MICRO_VERSION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The micro version number of the poppler header files (e.g. in poppler version
+0.1.2 this is 2.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="MINOR_VERSION-constant" class="">MINOR_VERSION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The major version number of the poppler header files (e.g. in poppler version
+0.1.2 this is 1.)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span></pre></dd>
+      
+        <dt id="LOG_DOMAIN-constant" class="">LOG_DOMAIN =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Poppler</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#available_signing_certificates-instance_method" title="#available_signing_certificates (instance method)">#<strong>available_signing_certificates</strong>  &#x21d2; GLib::List&lt;Poppler::CertificateInfo&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get all available signing certificate information.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#backend-instance_method" title="#backend (instance method)">#<strong>backend</strong>  &#x21d2; Poppler::Backend </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the backend compiled into the poppler library.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#date_parse-instance_method" title="#date_parse (instance method)">#<strong>date_parse</strong>(date, timet)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Parses a PDF format date string and converts it to a #time_t.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#error_quark-instance_method" title="#error_quark (instance method)">#<strong>error_quark</strong>  &#x21d2; GLib::Quark </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_certificate_info_by_id-instance_method" title="#get_certificate_info_by_id (instance method)">#<strong>get_certificate_info_by_id</strong>(id)  &#x21d2; Poppler::CertificateInfo </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get certificate by nick name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#named_dest_from_bytestring-instance_method" title="#named_dest_from_bytestring (instance method)">#<strong>named_dest_from_bytestring</strong>(data, length)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Converts a bytestring into a zero-terminated string suitable to pass to poppler_document_find_dest().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#named_dest_to_bytestring-instance_method" title="#named_dest_to_bytestring (instance method)">#<strong>named_dest_to_bytestring</strong>(name, length)  &#x21d2; Array&lt;Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Converts a named dest string (e.g. from Poppler::Dest.named_dest) into a bytestring, inverting the transformation of poppler_named_dest_from_bytestring().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#nss_dir-instance_method" title="#nss_dir (instance method)">#<strong>nss_dir</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get NSS directory.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#nss_dir=-instance_method" title="#nss_dir= (instance method)">#<strong>nss_dir=</strong>(path)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set NSS directory.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#nss_password_callback=-instance_method" title="#nss_password_callback= (instance method)">#<strong>nss_password_callback=</strong>(func)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A callback which asks for certificate password.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#version-instance_method" title="#version (instance method)">#<strong>version</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the version of poppler in use.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="available_signing_certificates-instance_method">
+  
+    #<strong>available_signing_certificates</strong>  &#x21d2; <tt>GLib::List&lt;Poppler::CertificateInfo&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get all available signing certificate information</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;Poppler::CertificateInfo&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>all available signing certificate information</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="backend-instance_method">
+  
+    #<strong>backend</strong>  &#x21d2; <tt><span class='object_link'><a href="Poppler/Backend.html" title="Poppler::Backend (module)">Poppler::Backend</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the backend compiled into the poppler library.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Poppler/Backend.html" title="Poppler::Backend (module)">Poppler::Backend</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The backend used by poppler</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="date_parse-instance_method">
+  
+    #<strong>date_parse</strong>(date, timet)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Parses a PDF format date string and converts it to a #time_t. Returns #FALSE
+if the parsing fails or the input string is not a valid PDF format date string</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>date</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>string to parse</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timet</span>
+      
+      
+        <span class='type'>(<tt>Poppler::time_t</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an uninitialized #time_t</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>#TRUE, if <!-- raw HTML omitted -->timet<!-- raw HTML omitted --> was set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="error_quark-instance_method">
+  
+    #<strong>error_quark</strong>  &#x21d2; <tt>GLib::Quark</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Quark</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_certificate_info_by_id-instance_method">
+  
+    #<strong>get_certificate_info_by_id</strong>(id)  &#x21d2; <tt>Poppler::CertificateInfo</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get certificate by nick name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Poppler::CertificateInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Poppler::CertificateInfo or nil if not found</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="named_dest_from_bytestring-instance_method">
+  
+    #<strong>named_dest_from_bytestring</strong>(data, length)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Converts a bytestring into a zero-terminated string suitable to
+pass to poppler_document_find_dest().</p>
+<p>Note that the returned string has no defined encoding and is not
+suitable for display to the user.</p>
+<p>The returned data must be freed using g_free().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the bytestring data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the bytestring length</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the named dest</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="named_dest_to_bytestring-instance_method">
+  
+    #<strong>named_dest_to_bytestring</strong>(name, length)  &#x21d2; <tt>Array&lt;Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Converts a named dest string (e.g. from Poppler::Dest.named_dest) into a
+bytestring, inverting the transformation of
+poppler_named_dest_from_bytestring().</p>
+<p>Note that the returned data is not zero terminated and may also
+contains embedded NUL bytes.</p>
+<p>If <!-- raw HTML omitted -->name<!-- raw HTML omitted --> is not a valid named dest string, returns nil.</p>
+<p>The returned data must be freed using g_free().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the named dest string</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a location to store the length of the returned bytestring</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new bytestring,
+or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="nss_dir-instance_method">
+  
+    #<strong>nss_dir</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get NSS directory</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nss directroy.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="nss_dir=-instance_method">
+  
+    #<strong>nss_dir=</strong>(path)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set NSS directory</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="nss_password_callback=-instance_method">
+  
+    #<strong>nss_password_callback=</strong>(func)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A callback which asks for certificate password</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>Poppler::NssPasswordFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Poppler::NssPasswordFunc that represents a signature annotation</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="version-instance_method">
+  
+    #<strong>version</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the version of poppler in use.  This result is not to be freed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the version of poppler.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

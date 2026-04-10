@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gtk::AccessibleRole
+  
+    &mdash; Ruby/GTK3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::AccessibleRole";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">AccessibleRole</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gtk::AccessibleRole
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="ALERT-constant" class="">ALERT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An element with important, and usually
+time-sensitive, information</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:alert</span></pre></dd>
+      
+        <dt id="ALERT_DIALOG-constant" class="">ALERT_DIALOG =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A type of dialog that contains an
+alert message</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:alert_dialog</span></pre></dd>
+      
+        <dt id="BANNER-constant" class="">BANNER =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:banner</span></pre></dd>
+      
+        <dt id="BUTTON-constant" class="">BUTTON =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An input element that allows for
+user-triggered actions when clicked or pressed</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:button</span></pre></dd>
+      
+        <dt id="CAPTION-constant" class="">CAPTION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:caption</span></pre></dd>
+      
+        <dt id="CELL-constant" class="">CELL =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:cell</span></pre></dd>
+      
+        <dt id="CHECKBOX-constant" class="">CHECKBOX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A checkable input element that has
+three possible values: <code>true</code>, <code>false</code>, or <code>mixed</code></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:checkbox</span></pre></dd>
+      
+        <dt id="COLUMN_HEADER-constant" class="">COLUMN_HEADER =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A header in a columned list.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:column_header</span></pre></dd>
+      
+        <dt id="COMBO_BOX-constant" class="">COMBO_BOX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An input that controls another element,
+such as a list or a grid, that can dynamically pop up to help the user
+set the value of the input</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:combo_box</span></pre></dd>
+      
+        <dt id="COMMAND-constant" class="">COMMAND =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Abstract role.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span> <span class='kw'>or</span> <span class='symbol'>:command</span></pre></dd>
+      
+        <dt id="COMPOSITE-constant" class="">COMPOSITE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Abstract role.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:composite</span></pre></dd>
+      
+        <dt id="DIALOG-constant" class="">DIALOG =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A dialog is a window that is designed to interrupt
+the current processing of an application in order to prompt the user to enter
+information or require a response.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span> <span class='kw'>or</span> <span class='symbol'>:dialog</span></pre></dd>
+      
+        <dt id="DOCUMENT-constant" class="">DOCUMENT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Content that assistive technology users may want to
+browse in a reading mode.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span> <span class='kw'>or</span> <span class='symbol'>:document</span></pre></dd>
+      
+        <dt id="FEED-constant" class="">FEED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>13</span> <span class='kw'>or</span> <span class='symbol'>:feed</span></pre></dd>
+      
+        <dt id="FORM-constant" class="">FORM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>14</span> <span class='kw'>or</span> <span class='symbol'>:form</span></pre></dd>
+      
+        <dt id="GENERIC-constant" class="">GENERIC =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A nameless container that has no semantic meaning
+of its own. This is the role that GTK uses by default for widgets.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>15</span> <span class='kw'>or</span> <span class='symbol'>:generic</span></pre></dd>
+      
+        <dt id="GRID-constant" class="">GRID =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A grid of items.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span> <span class='kw'>or</span> <span class='symbol'>:grid</span></pre></dd>
+      
+        <dt id="GRID_CELL-constant" class="">GRID_CELL =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An item in a grid or tree grid.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>17</span> <span class='kw'>or</span> <span class='symbol'>:grid_cell</span></pre></dd>
+      
+        <dt id="GROUP-constant" class="">GROUP =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An element that groups multiple related widgets. GTK uses
+this role for various containers, like [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.HeaderBar] or [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Notebook].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>18</span> <span class='kw'>or</span> <span class='symbol'>:group</span></pre></dd>
+      
+        <dt id="HEADING-constant" class="">HEADING =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>19</span> <span class='kw'>or</span> <span class='symbol'>:heading</span></pre></dd>
+      
+        <dt id="IMG-constant" class="">IMG =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An image.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>20</span> <span class='kw'>or</span> <span class='symbol'>:img</span></pre></dd>
+      
+        <dt id="INPUT-constant" class="">INPUT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Abstract role.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>21</span> <span class='kw'>or</span> <span class='symbol'>:input</span></pre></dd>
+      
+        <dt id="LABEL-constant" class="">LABEL =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A visible name or caption for a user interface component.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>22</span> <span class='kw'>or</span> <span class='symbol'>:label</span></pre></dd>
+      
+        <dt id="LANDMARK-constant" class="">LANDMARK =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Abstract role.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>23</span> <span class='kw'>or</span> <span class='symbol'>:landmark</span></pre></dd>
+      
+        <dt id="LEGEND-constant" class="">LEGEND =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>24</span> <span class='kw'>or</span> <span class='symbol'>:legend</span></pre></dd>
+      
+        <dt id="LINK-constant" class="">LINK =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A clickable link.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>25</span> <span class='kw'>or</span> <span class='symbol'>:link</span></pre></dd>
+      
+        <dt id="LIST-constant" class="">LIST =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A list of items.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>26</span> <span class='kw'>or</span> <span class='symbol'>:list</span></pre></dd>
+      
+        <dt id="LIST_BOX-constant" class="">LIST_BOX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>27</span> <span class='kw'>or</span> <span class='symbol'>:list_box</span></pre></dd>
+      
+        <dt id="LIST_ITEM-constant" class="">LIST_ITEM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An item in a list.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>28</span> <span class='kw'>or</span> <span class='symbol'>:list_item</span></pre></dd>
+      
+        <dt id="LOG-constant" class="">LOG =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>29</span> <span class='kw'>or</span> <span class='symbol'>:log</span></pre></dd>
+      
+        <dt id="MAIN-constant" class="">MAIN =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>30</span> <span class='kw'>or</span> <span class='symbol'>:main</span></pre></dd>
+      
+        <dt id="MARQUEE-constant" class="">MARQUEE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>31</span> <span class='kw'>or</span> <span class='symbol'>:marquee</span></pre></dd>
+      
+        <dt id="MATH-constant" class="">MATH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>32</span> <span class='kw'>or</span> <span class='symbol'>:math</span></pre></dd>
+      
+        <dt id="METER-constant" class="">METER =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An element that represents a value within a known range.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>33</span> <span class='kw'>or</span> <span class='symbol'>:meter</span></pre></dd>
+      
+        <dt id="MENU-constant" class="">MENU =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A menu.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>34</span> <span class='kw'>or</span> <span class='symbol'>:menu</span></pre></dd>
+      
+        <dt id="MENU_BAR-constant" class="">MENU_BAR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A menubar.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>35</span> <span class='kw'>or</span> <span class='symbol'>:menu_bar</span></pre></dd>
+      
+        <dt id="MENU_ITEM-constant" class="">MENU_ITEM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An item in a menu.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>36</span> <span class='kw'>or</span> <span class='symbol'>:menu_item</span></pre></dd>
+      
+        <dt id="MENU_ITEM_CHECKBOX-constant" class="">MENU_ITEM_CHECKBOX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A check item in a menu.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>37</span> <span class='kw'>or</span> <span class='symbol'>:menu_item_checkbox</span></pre></dd>
+      
+        <dt id="MENU_ITEM_RADIO-constant" class="">MENU_ITEM_RADIO =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A radio item in a menu.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>38</span> <span class='kw'>or</span> <span class='symbol'>:menu_item_radio</span></pre></dd>
+      
+        <dt id="NAVIGATION-constant" class="">NAVIGATION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>39</span> <span class='kw'>or</span> <span class='symbol'>:navigation</span></pre></dd>
+      
+        <dt id="NONE-constant" class="">NONE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An element that is not represented to accessibility technologies.
+This role is synonymous to <!-- raw HTML omitted -->GTK_ACCESSIBLE_ROLE_PRESENTATION<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>40</span> <span class='kw'>or</span> <span class='symbol'>:none</span></pre></dd>
+      
+        <dt id="NOTE-constant" class="">NOTE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>41</span> <span class='kw'>or</span> <span class='symbol'>:note</span></pre></dd>
+      
+        <dt id="OPTION-constant" class="">OPTION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>42</span> <span class='kw'>or</span> <span class='symbol'>:option</span></pre></dd>
+      
+        <dt id="PRESENTATION-constant" class="">PRESENTATION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An element that is not represented to accessibility technologies.
+This role is synonymous to <!-- raw HTML omitted -->GTK_ACCESSIBLE_ROLE_NONE<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>43</span> <span class='kw'>or</span> <span class='symbol'>:presentation</span></pre></dd>
+      
+        <dt id="PROGRESS_BAR-constant" class="">PROGRESS_BAR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An element that displays the progress
+status for tasks that take a long time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>44</span> <span class='kw'>or</span> <span class='symbol'>:progress_bar</span></pre></dd>
+      
+        <dt id="RADIO-constant" class="">RADIO =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A checkable input in a group of radio roles,
+only one of which can be checked at a time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>45</span> <span class='kw'>or</span> <span class='symbol'>:radio</span></pre></dd>
+      
+        <dt id="RADIO_GROUP-constant" class="">RADIO_GROUP =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>46</span> <span class='kw'>or</span> <span class='symbol'>:radio_group</span></pre></dd>
+      
+        <dt id="RANGE-constant" class="">RANGE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Abstract role.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>47</span> <span class='kw'>or</span> <span class='symbol'>:range</span></pre></dd>
+      
+        <dt id="REGION-constant" class="">REGION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>48</span> <span class='kw'>or</span> <span class='symbol'>:region</span></pre></dd>
+      
+        <dt id="ROW-constant" class="">ROW =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A row in a columned list.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>49</span> <span class='kw'>or</span> <span class='symbol'>:row</span></pre></dd>
+      
+        <dt id="ROW_GROUP-constant" class="">ROW_GROUP =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>50</span> <span class='kw'>or</span> <span class='symbol'>:row_group</span></pre></dd>
+      
+        <dt id="ROW_HEADER-constant" class="">ROW_HEADER =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>51</span> <span class='kw'>or</span> <span class='symbol'>:row_header</span></pre></dd>
+      
+        <dt id="SCROLLBAR-constant" class="">SCROLLBAR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A graphical object that controls the scrolling
+of content within a viewing area, regardless of whether the content is fully
+displayed within the viewing area.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>52</span> <span class='kw'>or</span> <span class='symbol'>:scrollbar</span></pre></dd>
+      
+        <dt id="SEARCH-constant" class="">SEARCH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>53</span> <span class='kw'>or</span> <span class='symbol'>:search</span></pre></dd>
+      
+        <dt id="SEARCH_BOX-constant" class="">SEARCH_BOX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A type of textbox intended for specifying
+search criteria.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>54</span> <span class='kw'>or</span> <span class='symbol'>:search_box</span></pre></dd>
+      
+        <dt id="SECTION-constant" class="">SECTION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Abstract role.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>55</span> <span class='kw'>or</span> <span class='symbol'>:section</span></pre></dd>
+      
+        <dt id="SECTION_HEAD-constant" class="">SECTION_HEAD =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Abstract role.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>56</span> <span class='kw'>or</span> <span class='symbol'>:section_head</span></pre></dd>
+      
+        <dt id="SELECT-constant" class="">SELECT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Abstract role.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>57</span> <span class='kw'>or</span> <span class='symbol'>:select</span></pre></dd>
+      
+        <dt id="SEPARATOR-constant" class="">SEPARATOR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A divider that separates and distinguishes
+sections of content or groups of menuitems.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>58</span> <span class='kw'>or</span> <span class='symbol'>:separator</span></pre></dd>
+      
+        <dt id="SLIDER-constant" class="">SLIDER =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A user input where the user selects a value
+from within a given range.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>59</span> <span class='kw'>or</span> <span class='symbol'>:slider</span></pre></dd>
+      
+        <dt id="SPIN_BUTTON-constant" class="">SPIN_BUTTON =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A form of range that expects the user to
+select from among discrete choices.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>60</span> <span class='kw'>or</span> <span class='symbol'>:spin_button</span></pre></dd>
+      
+        <dt id="STATUS-constant" class="">STATUS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>61</span> <span class='kw'>or</span> <span class='symbol'>:status</span></pre></dd>
+      
+        <dt id="STRUCTURE-constant" class="">STRUCTURE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Abstract role.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>62</span> <span class='kw'>or</span> <span class='symbol'>:structure</span></pre></dd>
+      
+        <dt id="SWITCH-constant" class="">SWITCH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A type of checkbox that represents on/off values,
+as opposed to checked/unchecked values.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>63</span> <span class='kw'>or</span> <span class='symbol'>:switch</span></pre></dd>
+      
+        <dt id="TAB-constant" class="">TAB =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An item in a list of tab used for switching pages.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>64</span> <span class='kw'>or</span> <span class='symbol'>:tab</span></pre></dd>
+      
+        <dt id="TABLE-constant" class="">TABLE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>65</span> <span class='kw'>or</span> <span class='symbol'>:table</span></pre></dd>
+      
+        <dt id="TAB_LIST-constant" class="">TAB_LIST =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A list of tabs for switching pages.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>66</span> <span class='kw'>or</span> <span class='symbol'>:tab_list</span></pre></dd>
+      
+        <dt id="TAB_PANEL-constant" class="">TAB_PANEL =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A page in a notebook or stack.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>67</span> <span class='kw'>or</span> <span class='symbol'>:tab_panel</span></pre></dd>
+      
+        <dt id="TEXT_BOX-constant" class="">TEXT_BOX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A type of input that allows free-form text
+as its value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>68</span> <span class='kw'>or</span> <span class='symbol'>:text_box</span></pre></dd>
+      
+        <dt id="TIME-constant" class="">TIME =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>69</span> <span class='kw'>or</span> <span class='symbol'>:time</span></pre></dd>
+      
+        <dt id="TIMER-constant" class="">TIMER =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>70</span> <span class='kw'>or</span> <span class='symbol'>:timer</span></pre></dd>
+      
+        <dt id="TOOLBAR-constant" class="">TOOLBAR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>71</span> <span class='kw'>or</span> <span class='symbol'>:toolbar</span></pre></dd>
+      
+        <dt id="TOOLTIP-constant" class="">TOOLTIP =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>72</span> <span class='kw'>or</span> <span class='symbol'>:tooltip</span></pre></dd>
+      
+        <dt id="TREE-constant" class="">TREE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>73</span> <span class='kw'>or</span> <span class='symbol'>:tree</span></pre></dd>
+      
+        <dt id="TREE_GRID-constant" class="">TREE_GRID =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A treeview-like, columned list.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>74</span> <span class='kw'>or</span> <span class='symbol'>:tree_grid</span></pre></dd>
+      
+        <dt id="TREE_ITEM-constant" class="">TREE_ITEM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Unused</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>75</span> <span class='kw'>or</span> <span class='symbol'>:tree_item</span></pre></dd>
+      
+        <dt id="WIDGET-constant" class="">WIDGET =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Abstract role for interactive components of a
+graphical user interface</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>76</span> <span class='kw'>or</span> <span class='symbol'>:widget</span></pre></dd>
+      
+        <dt id="WINDOW-constant" class="">WINDOW =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Abstract role for windows.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>77</span> <span class='kw'>or</span> <span class='symbol'>:window</span></pre></dd>
+      
+        <dt id="TOGGLE_BUTTON-constant" class="">TOGGLE_BUTTON =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A type of push button which stays pressed until depressed by a second
+activation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>78</span> <span class='kw'>or</span> <span class='symbol'>:toggle_button</span></pre></dd>
+      
+        <dt id="APPLICATION-constant" class="">APPLICATION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A toplevel element of a graphical user interface.</p>
+<p>This is the role that GTK uses by default for windows.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>79</span> <span class='kw'>or</span> <span class='symbol'>:application</span></pre></dd>
+      
+        <dt id="PARAGRAPH-constant" class="">PARAGRAPH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A paragraph of content.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>80</span> <span class='kw'>or</span> <span class='symbol'>:paragraph</span></pre></dd>
+      
+        <dt id="BLOCK_QUOTE-constant" class="">BLOCK_QUOTE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A section of content that is quoted from another source.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>81</span> <span class='kw'>or</span> <span class='symbol'>:block_quote</span></pre></dd>
+      
+        <dt id="ARTICLE-constant" class="">ARTICLE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A section of a page that consists of a composition that forms an independent
+part of a document, page, or site.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>82</span> <span class='kw'>or</span> <span class='symbol'>:article</span></pre></dd>
+      
+        <dt id="COMMENT-constant" class="">COMMENT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A comment contains content expressing reaction to other content.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>83</span> <span class='kw'>or</span> <span class='symbol'>:comment</span></pre></dd>
+      
+        <dt id="TERMINAL-constant" class="">TERMINAL =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A virtual terminal.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>84</span> <span class='kw'>or</span> <span class='symbol'>:terminal</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

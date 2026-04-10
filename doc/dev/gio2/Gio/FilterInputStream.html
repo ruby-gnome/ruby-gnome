@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::FilterInputStream
+  
+    &mdash; Ruby/GIO2
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::FilterInputStream";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (F)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">FilterInputStream</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::FilterInputStream
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="InputStream.html" title="Gio::InputStream (class)">InputStream</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="InputStream.html" title="Gio::InputStream (class)">InputStream</a></span></li>
+          
+            <li class="next">Gio::FilterInputStream</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="BufferedInputStream.html" title="Gio::BufferedInputStream (class)">BufferedInputStream</a></span>, <span class='object_link'><a href="ConverterInputStream.html" title="Gio::ConverterInputStream (class)">ConverterInputStream</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#base_stream-instance_method" title="#base_stream (instance method)">#<strong>base_stream</strong>  &#x21d2; Gio::InputStream </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The underlying base stream on which the I/O ops will be done.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#base_stream=-instance_method" title="#base_stream= (instance method)">#<strong>base_stream=</strong>(base_stream)  &#x21d2; Gio::InputStream </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The underlying base stream on which the I/O ops will be done.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_base_stream-instance_method" title="#close_base_stream (instance method)">#<strong>close_base_stream</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether the base stream will be closed when <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is closed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_base_stream=-instance_method" title="#close_base_stream= (instance method)">#<strong>close_base_stream=</strong>(close_base_stream)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the base stream should be closed when the filter stream is closed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_base_stream%3F-instance_method" title="#close_base_stream? (instance method)">#<strong>close_base_stream?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the base stream should be closed when the filter stream is closed.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="InputStream.html" title="Gio::InputStream (class)">InputStream</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="InputStream.html#clear_pending-instance_method" title="Gio::InputStream#clear_pending (method)">#clear_pending</a></span>, <span class='object_link'><a href="InputStream.html#close-instance_method" title="Gio::InputStream#close (method)">#close</a></span>, <span class='object_link'><a href="InputStream.html#close_async-instance_method" title="Gio::InputStream#close_async (method)">#close_async</a></span>, <span class='object_link'><a href="InputStream.html#close_finish-instance_method" title="Gio::InputStream#close_finish (method)">#close_finish</a></span>, <span class='object_link'><a href="InputStream.html#has_pending-instance_method" title="Gio::InputStream#has_pending (method)">#has_pending</a></span>, <span class='object_link'><a href="InputStream.html#is_closed-instance_method" title="Gio::InputStream#is_closed (method)">#is_closed</a></span>, <span class='object_link'><a href="InputStream.html#open-class_method" title="Gio::InputStream.open (method)">open</a></span>, <span class='object_link'><a href="InputStream.html#read-instance_method" title="Gio::InputStream#read (method)">#read</a></span>, <span class='object_link'><a href="InputStream.html#read_all-instance_method" title="Gio::InputStream#read_all (method)">#read_all</a></span>, <span class='object_link'><a href="InputStream.html#read_all_async-instance_method" title="Gio::InputStream#read_all_async (method)">#read_all_async</a></span>, <span class='object_link'><a href="InputStream.html#read_all_finish-instance_method" title="Gio::InputStream#read_all_finish (method)">#read_all_finish</a></span>, <span class='object_link'><a href="InputStream.html#read_all_raw-instance_method" title="Gio::InputStream#read_all_raw (method)">#read_all_raw</a></span>, <span class='object_link'><a href="InputStream.html#read_async-instance_method" title="Gio::InputStream#read_async (method)">#read_async</a></span>, <span class='object_link'><a href="InputStream.html#read_bytes-instance_method" title="Gio::InputStream#read_bytes (method)">#read_bytes</a></span>, <span class='object_link'><a href="InputStream.html#read_bytes_async-instance_method" title="Gio::InputStream#read_bytes_async (method)">#read_bytes_async</a></span>, <span class='object_link'><a href="InputStream.html#read_bytes_finish-instance_method" title="Gio::InputStream#read_bytes_finish (method)">#read_bytes_finish</a></span>, <span class='object_link'><a href="InputStream.html#read_finish-instance_method" title="Gio::InputStream#read_finish (method)">#read_finish</a></span>, <span class='object_link'><a href="InputStream.html#read_raw-instance_method" title="Gio::InputStream#read_raw (method)">#read_raw</a></span>, <span class='object_link'><a href="InputStream.html#set_pending-instance_method" title="Gio::InputStream#set_pending (method)">#set_pending</a></span>, <span class='object_link'><a href="InputStream.html#skip-instance_method" title="Gio::InputStream#skip (method)">#skip</a></span>, <span class='object_link'><a href="InputStream.html#skip_async-instance_method" title="Gio::InputStream#skip_async (method)">#skip_async</a></span>, <span class='object_link'><a href="InputStream.html#skip_finish-instance_method" title="Gio::InputStream#skip_finish (method)">#skip_finish</a></span></p>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="base_stream-instance_method">
+  
+    #<strong>base_stream</strong>  &#x21d2; <tt><span class='object_link'><a href="InputStream.html" title="Gio::InputStream (class)">Gio::InputStream</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The underlying base stream on which the I/O ops will be done.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputStream.html" title="Gio::InputStream (class)">Gio::InputStream</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>base-stream</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="base_stream=-instance_method">
+  
+    #<strong>base_stream=</strong>(base_stream)  &#x21d2; <tt><span class='object_link'><a href="InputStream.html" title="Gio::InputStream (class)">Gio::InputStream</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The underlying base stream on which the I/O ops will be done.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>base_stream</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputStream.html" title="Gio::InputStream (class)">Gio::InputStream</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputStream.html" title="Gio::InputStream (class)">Gio::InputStream</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>base-stream</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputStream.html" title="Gio::InputStream (class)">Gio::InputStream</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>base-stream</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close_base_stream-instance_method">
+  
+    #<strong>close_base_stream</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether the base stream will be closed when <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is
+closed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the base stream will be closed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close_base_stream=-instance_method">
+  
+    #<strong>close_base_stream=</strong>(close_base_stream)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the base stream should be closed when the filter stream is closed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>close_base_stream</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>close-base-stream</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>close-base-stream</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close_base_stream?-instance_method">
+  
+    #<strong>close_base_stream?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the base stream should be closed when the filter stream is closed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>close-base-stream</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

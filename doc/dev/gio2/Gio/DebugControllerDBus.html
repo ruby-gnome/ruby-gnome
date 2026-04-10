@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::DebugControllerDBus
+  
+    &mdash; Ruby/GIO2
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::DebugControllerDBus";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">DebugControllerDBus</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::DebugControllerDBus
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::DebugControllerDBus</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The virtual function table for GDebug::ControllerDBus.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#connection-instance_method" title="#connection (instance method)">#<strong>connection</strong>  &#x21d2; Gio::DBusConnection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The D-Bus connection to expose the debugging interface on.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#connection=-instance_method" title="#connection= (instance method)">#<strong>connection=</strong>(connection)  &#x21d2; Gio::DBusConnection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The D-Bus connection to expose the debugging interface on.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(connection, cancellable)  &#x21d2; Gio::DebugControllerDBus </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new GDebug::ControllerDBus and synchronously initialize it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stop-instance_method" title="#stop (instance method)">#<strong>stop</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Stop the debug controller, unregistering its object from the bus.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(connection, cancellable)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::DebugControllerDBus (class)">Gio::DebugControllerDBus</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new GDebug::ControllerDBus and synchronously initialize it.</p>
+<p>Initializing the object will export the debug object on <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->. The
+object will remain registered until the last reference to the
+GDebug::ControllerDBus is dropped.</p>
+<p>Initialization may fail if registering the object on <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> fails.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>connection</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a GDBus::Connection to register the debug object on</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="connection-instance_method">
+  
+    #<strong>connection</strong>  &#x21d2; <tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The D-Bus connection to expose the debugging interface on.</p>
+<p>Typically this will be the same connection (to the system or session bus)
+which the rest of the application or service’s D-Bus objects are registered
+on.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>connection</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="connection=-instance_method">
+  
+    #<strong>connection=</strong>(connection)  &#x21d2; <tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The D-Bus connection to expose the debugging interface on.</p>
+<p>Typically this will be the same connection (to the system or session bus)
+which the rest of the application or service’s D-Bus objects are registered
+on.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>connection</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>connection</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>connection</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stop-instance_method">
+  
+    #<strong>stop</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Stop the debug controller, unregistering its object from the bus.</p>
+<p>Any pending method calls to the object will complete successfully, but new
+ones will return an error. This method will block until all pending
+GDebug::ControllerDBus::authorize signals have been handled. This is expected
+to not take long, as it will just be waiting for threads to join. If any
+GDebug::ControllerDBus::authorize signal handlers are still executing in other
+threads, this will block until after they have returned.</p>
+<p>This method will be called automatically when the final reference to the
+GDebug::ControllerDBus is dropped. You may want to call it explicitly to know
+when the controller has been fully removed from the bus, or to break
+reference count cycles.</p>
+<p>Calling this method from within a GDebug::ControllerDBus::authorize signal
+handler will cause a deadlock and must not be done.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

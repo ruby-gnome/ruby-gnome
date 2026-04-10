@@ -1,0 +1,2935 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GtkSource::Buffer
+  
+    &mdash; Ruby/GtkSourceView4
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GtkSource::Buffer";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GtkSource.html" title="GtkSource (module)">GtkSource</a></span></span>
+     &raquo; 
+    <span class="title">Buffer</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GtkSource::Buffer
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="../Gtk/TextBuffer.html" title="Gtk::TextBuffer (class)">Gtk::TextBuffer</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="../Gtk/TextBuffer.html" title="Gtk::TextBuffer (class)">Gtk::TextBuffer</a></span></li>
+          
+            <li class="next">GtkSource::Buffer</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  <dl>
+      <dt>Extended by:</dt>
+      <dd>GLib::Deprecatable</dd>
+  </dl>
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/gtksourceview4/deprecated.rb</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#backward_iter_to_source_mark-instance_method" title="#backward_iter_to_source_mark (instance method)">#<strong>backward_iter_to_source_mark</strong>(iter, category)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Moves <code>iter</code> to the position of the previous [class<!-- raw HTML omitted -->Mark<!-- raw HTML omitted -->] of the given category.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#change_case-instance_method" title="#change_case (instance method)">#<strong>change_case</strong>(case_type, start, end)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Changes the case of the text between the specified iterators.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_source_mark-instance_method" title="#create_source_mark (instance method)">#<strong>create_source_mark</strong>(name, category, where)  &#x21d2; GtkSource::Mark </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a source mark in the <code>buffer</code> of category <code>category</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_source_tag-instance_method" title="#create_source_tag (instance method)">#<strong>create_source_tag</strong>(tag_name, first_property_name, array)  &#x21d2; Gtk::TextTag </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>In short, this is the same function as [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.create_tag] but instead of creating a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTag], this function creates a [class<!-- raw HTML omitted -->Tag<!-- raw HTML omitted -->].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ensure_highlight-instance_method" title="#ensure_highlight (instance method)">#<strong>ensure_highlight</strong>(start, end)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Forces buffer to analyze and highlight the given area synchronously.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#forward_iter_to_source_mark-instance_method" title="#forward_iter_to_source_mark (instance method)">#<strong>forward_iter_to_source_mark</strong>(iter, category)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Moves <code>iter</code> to the position of the next [class<!-- raw HTML omitted -->Mark<!-- raw HTML omitted -->] of the given <code>category</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_context_classes_at_iter-instance_method" title="#get_context_classes_at_iter (instance method)">#<strong>get_context_classes_at_iter</strong>(iter)  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get all defined context classes at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_source_marks_at_iter-instance_method" title="#get_source_marks_at_iter (instance method)">#<strong>get_source_marks_at_iter</strong>(iter, category)  &#x21d2; GLib::SList&lt;GtkSource::Mark&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the list of marks of the given category at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_source_marks_at_line-instance_method" title="#get_source_marks_at_line (instance method)">#<strong>get_source_marks_at_line</strong>(line, category)  &#x21d2; GLib::SList&lt;GtkSource::Mark&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the list of marks of the given category at <!-- raw HTML omitted -->line<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#highlight_matching_brackets-instance_method" title="#highlight_matching_brackets (instance method)">#<strong>highlight_matching_brackets</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines whether bracket match highlighting is activated for the source buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#highlight_matching_brackets=-instance_method" title="#highlight_matching_brackets= (instance method)">#<strong>highlight_matching_brackets=</strong>(highlight_matching_brackets)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to highlight matching brackets in the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#highlight_matching_brackets%3F-instance_method" title="#highlight_matching_brackets? (instance method)">#<strong>highlight_matching_brackets?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to highlight matching brackets in the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#highlight_syntax-instance_method" title="#highlight_syntax (instance method)">#<strong>highlight_syntax</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines whether syntax highlighting is activated in the source buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#highlight_syntax=-instance_method" title="#highlight_syntax= (instance method)">#<strong>highlight_syntax=</strong>(highlight_syntax)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to highlight syntax in the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#highlight_syntax%3F-instance_method" title="#highlight_syntax? (instance method)">#<strong>highlight_syntax?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to highlight syntax in the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#implicit_trailing_newline-instance_method" title="#implicit_trailing_newline (instance method)">#<strong>implicit_trailing_newline</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> has an implicit trailing newline.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#implicit_trailing_newline=-instance_method" title="#implicit_trailing_newline= (instance method)">#<strong>implicit_trailing_newline=</strong>(implicit_trailing_newline)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the buffer has an implicit trailing newline.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#implicit_trailing_newline%3F-instance_method" title="#implicit_trailing_newline? (instance method)">#<strong>implicit_trailing_newline?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the buffer has an implicit trailing newline.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(language)  &#x21d2; GtkSource::Buffer </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new source buffer using the highlighting patterns in <code>language</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iter_backward_to_context_class_toggle-instance_method" title="#iter_backward_to_context_class_toggle (instance method)">#<strong>iter_backward_to_context_class_toggle</strong>(iter, context_class)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Moves backward to the next toggle (on or off) of the context class.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iter_forward_to_context_class_toggle-instance_method" title="#iter_forward_to_context_class_toggle (instance method)">#<strong>iter_forward_to_context_class_toggle</strong>(iter, context_class)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Moves forward to the next toggle (on or off) of the context class.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iter_has_context_class-instance_method" title="#iter_has_context_class (instance method)">#<strong>iter_has_context_class</strong>(iter, context_class)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if the class <!-- raw HTML omitted -->context_class<!-- raw HTML omitted --> is set on <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#join_lines-instance_method" title="#join_lines (instance method)">#<strong>join_lines</strong>(start, end)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Joins the lines of text between the specified iterators.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#language-instance_method" title="#language (instance method)">#<strong>language</strong>  &#x21d2; GtkSource::Language </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Language.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#language=-instance_method" title="#language= (instance method)">#<strong>language=</strong>(language)  &#x21d2; GtkSource::Language </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#loading-instance_method" title="#loading (instance method)">#<strong>loading</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#loading=-instance_method" title="#loading= (instance method)">#<strong>loading=</strong>(loading)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The &quot;loading&quot; property denotes that a <code>GtkSourceFileLoader</code> is currently loading the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#loading%3F-instance_method" title="#loading? (instance method)">#<strong>loading?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The &quot;loading&quot; property denotes that a <code>GtkSourceFileLoader</code> is currently loading the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_source_marks-instance_method" title="#remove_source_marks (instance method)">#<strong>remove_source_marks</strong>(start, end, category)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Remove all marks of <!-- raw HTML omitted -->category<!-- raw HTML omitted --> between <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> from the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sort_lines-instance_method" title="#sort_lines (instance method)">#<strong>sort_lines</strong>(start, end, flags, column)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sort the lines of text between the specified iterators.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#style_scheme-instance_method" title="#style_scheme (instance method)">#<strong>style_scheme</strong>  &#x21d2; GtkSource::StyleScheme </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Style scheme.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#style_scheme=-instance_method" title="#style_scheme= (instance method)">#<strong>style_scheme=</strong>(style_scheme)  &#x21d2; GtkSource::StyleScheme </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Style scheme.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gtk/TextBuffer.html" title="Gtk::TextBuffer (class)">Gtk::TextBuffer</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Gtk/TextBuffer.html#add_mark-instance_method" title="Gtk::TextBuffer#add_mark (method)">#add_mark</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#add_selection_clipboard-instance_method" title="Gtk::TextBuffer#add_selection_clipboard (method)">#add_selection_clipboard</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#apply_tag-instance_method" title="Gtk::TextBuffer#apply_tag (method)">#apply_tag</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#apply_tag_by_name-instance_method" title="Gtk::TextBuffer#apply_tag_by_name (method)">#apply_tag_by_name</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#backspace-instance_method" title="Gtk::TextBuffer#backspace (method)">#backspace</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#begin_irreversible_action-instance_method" title="Gtk::TextBuffer#begin_irreversible_action (method)">#begin_irreversible_action</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#begin_user_action-instance_method" title="Gtk::TextBuffer#begin_user_action (method)">#begin_user_action</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#can_redo-instance_method" title="Gtk::TextBuffer#can_redo (method)">#can_redo</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#can_redo=-instance_method" title="Gtk::TextBuffer#can_redo= (method)">#can_redo=</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#can_redo%3F-instance_method" title="Gtk::TextBuffer#can_redo? (method)">#can_redo?</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#can_undo-instance_method" title="Gtk::TextBuffer#can_undo (method)">#can_undo</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#can_undo=-instance_method" title="Gtk::TextBuffer#can_undo= (method)">#can_undo=</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#can_undo%3F-instance_method" title="Gtk::TextBuffer#can_undo? (method)">#can_undo?</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#char_count-instance_method" title="Gtk::TextBuffer#char_count (method)">#char_count</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#copy_clipboard-instance_method" title="Gtk::TextBuffer#copy_clipboard (method)">#copy_clipboard</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#create_child_anchor-instance_method" title="Gtk::TextBuffer#create_child_anchor (method)">#create_child_anchor</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#create_mark-instance_method" title="Gtk::TextBuffer#create_mark (method)">#create_mark</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#create_tag-instance_method" title="Gtk::TextBuffer#create_tag (method)">#create_tag</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#cursor_position-instance_method" title="Gtk::TextBuffer#cursor_position (method)">#cursor_position</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#cursor_position=-instance_method" title="Gtk::TextBuffer#cursor_position= (method)">#cursor_position=</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#cut_clipboard-instance_method" title="Gtk::TextBuffer#cut_clipboard (method)">#cut_clipboard</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#delete-instance_method" title="Gtk::TextBuffer#delete (method)">#delete</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#delete_interactive-instance_method" title="Gtk::TextBuffer#delete_interactive (method)">#delete_interactive</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#delete_mark-instance_method" title="Gtk::TextBuffer#delete_mark (method)">#delete_mark</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#delete_mark_by_name-instance_method" title="Gtk::TextBuffer#delete_mark_by_name (method)">#delete_mark_by_name</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#delete_selection-instance_method" title="Gtk::TextBuffer#delete_selection (method)">#delete_selection</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#enable_undo-instance_method" title="Gtk::TextBuffer#enable_undo (method)">#enable_undo</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#enable_undo=-instance_method" title="Gtk::TextBuffer#enable_undo= (method)">#enable_undo=</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#enable_undo%3F-instance_method" title="Gtk::TextBuffer#enable_undo? (method)">#enable_undo?</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#end_irreversible_action-instance_method" title="Gtk::TextBuffer#end_irreversible_action (method)">#end_irreversible_action</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#end_user_action-instance_method" title="Gtk::TextBuffer#end_user_action (method)">#end_user_action</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#get_bounds-instance_method" title="Gtk::TextBuffer#get_bounds (method)">#get_bounds</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#get_end_iter-instance_method" title="Gtk::TextBuffer#get_end_iter (method)">#get_end_iter</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#get_iter_at_child_anchor-instance_method" title="Gtk::TextBuffer#get_iter_at_child_anchor (method)">#get_iter_at_child_anchor</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#get_iter_at_line-instance_method" title="Gtk::TextBuffer#get_iter_at_line (method)">#get_iter_at_line</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#get_iter_at_line_index-instance_method" title="Gtk::TextBuffer#get_iter_at_line_index (method)">#get_iter_at_line_index</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#get_iter_at_line_offset-instance_method" title="Gtk::TextBuffer#get_iter_at_line_offset (method)">#get_iter_at_line_offset</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#get_iter_at_mark-instance_method" title="Gtk::TextBuffer#get_iter_at_mark (method)">#get_iter_at_mark</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#get_iter_at_offset-instance_method" title="Gtk::TextBuffer#get_iter_at_offset (method)">#get_iter_at_offset</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#get_mark-instance_method" title="Gtk::TextBuffer#get_mark (method)">#get_mark</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#get_selection_bounds-instance_method" title="Gtk::TextBuffer#get_selection_bounds (method)">#get_selection_bounds</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#get_slice-instance_method" title="Gtk::TextBuffer#get_slice (method)">#get_slice</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#get_start_iter-instance_method" title="Gtk::TextBuffer#get_start_iter (method)">#get_start_iter</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#get_text-instance_method" title="Gtk::TextBuffer#get_text (method)">#get_text</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#has_selection-instance_method" title="Gtk::TextBuffer#has_selection (method)">#has_selection</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#has_selection=-instance_method" title="Gtk::TextBuffer#has_selection= (method)">#has_selection=</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#has_selection%3F-instance_method" title="Gtk::TextBuffer#has_selection? (method)">#has_selection?</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#insert-instance_method" title="Gtk::TextBuffer#insert (method)">#insert</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#insert_at_cursor-instance_method" title="Gtk::TextBuffer#insert_at_cursor (method)">#insert_at_cursor</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#insert_child_anchor-instance_method" title="Gtk::TextBuffer#insert_child_anchor (method)">#insert_child_anchor</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#insert_interactive-instance_method" title="Gtk::TextBuffer#insert_interactive (method)">#insert_interactive</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#insert_interactive_at_cursor-instance_method" title="Gtk::TextBuffer#insert_interactive_at_cursor (method)">#insert_interactive_at_cursor</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#insert_markup-instance_method" title="Gtk::TextBuffer#insert_markup (method)">#insert_markup</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#insert_paintable-instance_method" title="Gtk::TextBuffer#insert_paintable (method)">#insert_paintable</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#insert_range-instance_method" title="Gtk::TextBuffer#insert_range (method)">#insert_range</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#insert_range_interactive-instance_method" title="Gtk::TextBuffer#insert_range_interactive (method)">#insert_range_interactive</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#insert_with_tags-instance_method" title="Gtk::TextBuffer#insert_with_tags (method)">#insert_with_tags</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#insert_with_tags_by_name-instance_method" title="Gtk::TextBuffer#insert_with_tags_by_name (method)">#insert_with_tags_by_name</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#line_count-instance_method" title="Gtk::TextBuffer#line_count (method)">#line_count</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#max_undo_levels-instance_method" title="Gtk::TextBuffer#max_undo_levels (method)">#max_undo_levels</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#max_undo_levels=-instance_method" title="Gtk::TextBuffer#max_undo_levels= (method)">#max_undo_levels=</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#modified-instance_method" title="Gtk::TextBuffer#modified (method)">#modified</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#modified=-instance_method" title="Gtk::TextBuffer#modified= (method)">#modified=</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#move_mark-instance_method" title="Gtk::TextBuffer#move_mark (method)">#move_mark</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#move_mark_by_name-instance_method" title="Gtk::TextBuffer#move_mark_by_name (method)">#move_mark_by_name</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#paste_clipboard-instance_method" title="Gtk::TextBuffer#paste_clipboard (method)">#paste_clipboard</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#place_cursor-instance_method" title="Gtk::TextBuffer#place_cursor (method)">#place_cursor</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#redo-instance_method" title="Gtk::TextBuffer#redo (method)">#redo</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#remove_all_tags-instance_method" title="Gtk::TextBuffer#remove_all_tags (method)">#remove_all_tags</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#remove_selection_clipboard-instance_method" title="Gtk::TextBuffer#remove_selection_clipboard (method)">#remove_selection_clipboard</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#remove_tag-instance_method" title="Gtk::TextBuffer#remove_tag (method)">#remove_tag</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#remove_tag_by_name-instance_method" title="Gtk::TextBuffer#remove_tag_by_name (method)">#remove_tag_by_name</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#select_range-instance_method" title="Gtk::TextBuffer#select_range (method)">#select_range</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#selection_bound-instance_method" title="Gtk::TextBuffer#selection_bound (method)">#selection_bound</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#selection_content-instance_method" title="Gtk::TextBuffer#selection_content (method)">#selection_content</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#set_text-instance_method" title="Gtk::TextBuffer#set_text (method)">#set_text</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#tag_table-instance_method" title="Gtk::TextBuffer#tag_table (method)">#tag_table</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#tag_table=-instance_method" title="Gtk::TextBuffer#tag_table= (method)">#tag_table=</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#text-instance_method" title="Gtk::TextBuffer#text (method)">#text</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#text=-instance_method" title="Gtk::TextBuffer#text= (method)">#text=</a></span>, <span class='object_link'><a href="../Gtk/TextBuffer.html#undo-instance_method" title="Gtk::TextBuffer#undo (method)">#undo</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(language)  &#x21d2; <tt><span class='object_link'><a href="" title="GtkSource::Buffer (class)">GtkSource::Buffer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new source buffer using the highlighting patterns in <code>language</code>.</p>
+<p>This is equivalent to creating a new source buffer with
+a new tag table and then calling [method<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->.set_language].
+according to the highlighting patterns in <code>language</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>language</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Language.html" title="GtkSource::Language (class)">GtkSource::Language</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::SourceLanguage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="backward_iter_to_source_mark-instance_method">
+  
+    #<strong>backward_iter_to_source_mark</strong>(iter, category)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Moves <code>iter</code> to the position of the previous [class<!-- raw HTML omitted -->Mark<!-- raw HTML omitted -->] of the given
+category.</p>
+<p>Returns true if <code>iter</code> was moved. If <code>category</code> is NULL, the
+previous source mark can be of any category.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an iterator.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>category</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>category to search for, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <code>iter</code> was moved.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="change_case-instance_method">
+  
+    #<strong>change_case</strong>(case_type, start, end)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Changes the case of the text between the specified iterators.</p>
+<p>Since 5.4, this function will update the position of <code>start</code> and
+<code>end</code> to surround the modified text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>case_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ChangeCaseType.html" title="GtkSource::ChangeCaseType (module)">GtkSource::ChangeCaseType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>how to change the case.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::TextIter.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::TextIter.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_source_mark-instance_method">
+  
+    #<strong>create_source_mark</strong>(name, category, where)  &#x21d2; <tt><span class='object_link'><a href="Mark.html" title="GtkSource::Mark (class)">GtkSource::Mark</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a source mark in the <code>buffer</code> of category <code>category</code>.</p>
+<p>A source mark is a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextMark] but organized into categories.
+Depending on the category a pixbuf can be specified that will be displayed
+along the line of the mark.</p>
+<p>Like a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextMark], a [class<!-- raw HTML omitted -->Mark<!-- raw HTML omitted -->] can be anonymous if the
+passed <code>name</code> is nil.  Also, the buffer owns the marks so you
+shouldn't unreference it.</p>
+<p>Marks always have left gravity and are moved to the beginning of
+the line when the user deletes the line they were in.</p>
+<p>Typical uses for a source mark are bookmarks, breakpoints, current
+executing instruction indication in a source file, etc..</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the mark, or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>category</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a string defining the mark category.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>where</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to place the mark.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Mark.html" title="GtkSource::Mark (class)">GtkSource::Mark</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new [class<!-- raw HTML omitted -->Mark<!-- raw HTML omitted -->], owned by the buffer.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_source_tag-instance_method">
+  
+    #<strong>create_source_tag</strong>(tag_name, first_property_name, array)  &#x21d2; <tt><span class='object_link'><a href="../Gtk/TextTag.html" title="Gtk::TextTag (class)">Gtk::TextTag</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>In short, this is the same function as [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.create_tag] but
+instead of creating a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTag], this function creates a [class<!-- raw HTML omitted -->Tag<!-- raw HTML omitted -->].</p>
+<p>This function creates a [class<!-- raw HTML omitted -->Tag<!-- raw HTML omitted -->] and adds it to the tag table for
+<code>buffer</code>.  Equivalent to calling [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTag.new] and then adding the tag to
+the buffer’s tag table. The returned tag is owned by the buffer’s tag table,
+so the ref count will be equal to one.</p>
+<p>If <code>tag_name</code> is nil, the tag is anonymous.</p>
+<p>If <code>tag_name</code> is non-nil, a tag called <code>tag_name</code> must not already
+exist in the tag table for this buffer.</p>
+<p>The <code>first_property_name</code> argument and subsequent arguments are a list
+of properties to set on the tag, as with [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.set].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tag_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name of the new tag, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name of first property to set, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nil-terminated list of property names and values</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/TextTag.html" title="Gtk::TextTag (class)">Gtk::TextTag</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new [class<!-- raw HTML omitted -->Tag<!-- raw HTML omitted -->].</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ensure_highlight-instance_method">
+  
+    #<strong>ensure_highlight</strong>(start, end)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Forces buffer to analyze and highlight the given area synchronously.</p>
+<p><strong>Note</strong>:</p>
+<p>This is a potentially slow operation and should be used only
+when you need to make sure that some text not currently
+visible is highlighted, for instance before printing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>start of the area to highlight.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>end of the area to highlight.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="forward_iter_to_source_mark-instance_method">
+  
+    #<strong>forward_iter_to_source_mark</strong>(iter, category)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Moves <code>iter</code> to the position of the next [class<!-- raw HTML omitted -->Mark<!-- raw HTML omitted -->] of the given
+<code>category</code>.</p>
+<p>Returns true if <code>iter</code> was moved. If <code>category</code> is NULL, the
+next source mark can be of any category.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an iterator.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>category</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>category to search for, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <code>iter</code> was moved.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_context_classes_at_iter-instance_method">
+  
+    #<strong>get_context_classes_at_iter</strong>(iter)  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get all defined context classes at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
+<p>See the [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->] description for the list of default context classes.
+terminated array of context class names.
+Use g_strfreev() to free the array if it is no longer needed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::TextIter.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_source_marks_at_iter-instance_method">
+  
+    #<strong>get_source_marks_at_iter</strong>(iter, category)  &#x21d2; <tt>GLib::SList&lt;<span class='object_link'><a href="Mark.html" title="GtkSource::Mark (class)">GtkSource::Mark</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the list of marks of the given category at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
+<p>If <!-- raw HTML omitted -->category<!-- raw HTML omitted --> is nil it returns all marks at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.
+a newly allocated #GSList.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an iterator.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>category</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>category to search for, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::SList&lt;<span class='object_link'><a href="Mark.html" title="GtkSource::Mark (class)">GtkSource::Mark</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_source_marks_at_line-instance_method">
+  
+    #<strong>get_source_marks_at_line</strong>(line, category)  &#x21d2; <tt>GLib::SList&lt;<span class='object_link'><a href="Mark.html" title="GtkSource::Mark (class)">GtkSource::Mark</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the list of marks of the given category at <!-- raw HTML omitted -->line<!-- raw HTML omitted -->.</p>
+<p>If <!-- raw HTML omitted -->category<!-- raw HTML omitted --> is nil, all marks at <!-- raw HTML omitted -->line<!-- raw HTML omitted --> are returned.
+a newly allocated #GSList.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>line</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a line number.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>category</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>category to search for, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::SList&lt;<span class='object_link'><a href="Mark.html" title="GtkSource::Mark (class)">GtkSource::Mark</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="highlight_matching_brackets-instance_method">
+  
+    #<strong>highlight_matching_brackets</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines whether bracket match highlighting is activated for the
+source buffer.
+brackets.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the source buffer will highlight matching</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="highlight_matching_brackets=-instance_method">
+  
+    #<strong>highlight_matching_brackets=</strong>(highlight_matching_brackets)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to highlight matching brackets in the buffer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>highlight_matching_brackets</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>highlight-matching-brackets</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>highlight-matching-brackets</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="highlight_matching_brackets?-instance_method">
+  
+    #<strong>highlight_matching_brackets?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to highlight matching brackets in the buffer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>highlight-matching-brackets</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="highlight_syntax-instance_method">
+  
+    #<strong>highlight_syntax</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines whether syntax highlighting is activated in the source
+buffer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if syntax highlighting is enabled, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="highlight_syntax=-instance_method">
+  
+    #<strong>highlight_syntax=</strong>(highlight_syntax)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to highlight syntax in the buffer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>highlight_syntax</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>highlight-syntax</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>highlight-syntax</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="highlight_syntax?-instance_method">
+  
+    #<strong>highlight_syntax?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to highlight syntax in the buffer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>highlight-syntax</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="implicit_trailing_newline-instance_method">
+  
+    #<strong>implicit_trailing_newline</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> has an implicit trailing newline.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> has an implicit trailing newline.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="implicit_trailing_newline=-instance_method">
+  
+    #<strong>implicit_trailing_newline=</strong>(implicit_trailing_newline)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the buffer has an implicit trailing newline. See
+[method<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->.set_implicit_trailing_newline].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>implicit_trailing_newline</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>implicit-trailing-newline</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>implicit-trailing-newline</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="implicit_trailing_newline?-instance_method">
+  
+    #<strong>implicit_trailing_newline?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the buffer has an implicit trailing newline. See
+[method<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->.set_implicit_trailing_newline].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>implicit-trailing-newline</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iter_backward_to_context_class_toggle-instance_method">
+  
+    #<strong>iter_backward_to_context_class_toggle</strong>(iter, context_class)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Moves backward to the next toggle (on or off) of the context class.</p>
+<p>If no matching context class toggles are found, returns false, otherwise true.
+Does not return toggles located at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->, only toggles after <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->. Sets
+<!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to the location of the toggle, or to the end of the buffer if no
+toggle is found.</p>
+<p>See the [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->] description for the list of default context classes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::TextIter.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>context_class</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the context class.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether we found a context class toggle before <!-- raw HTML omitted -->iter<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iter_forward_to_context_class_toggle-instance_method">
+  
+    #<strong>iter_forward_to_context_class_toggle</strong>(iter, context_class)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Moves forward to the next toggle (on or off) of the context class.</p>
+<p>If no matching context class toggles are found, returns false, otherwise true.
+Does not return toggles located at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->, only toggles after <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->. Sets
+<!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to the location of the toggle, or to the end of the buffer if no
+toggle is found.</p>
+<p>See the [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->] description for the list of default context classes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::TextIter.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>context_class</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the context class.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether we found a context class toggle after <!-- raw HTML omitted -->iter<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iter_has_context_class-instance_method">
+  
+    #<strong>iter_has_context_class</strong>(iter, context_class)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if the class <!-- raw HTML omitted -->context_class<!-- raw HTML omitted --> is set on <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
+<p>See the [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->] description for the list of default context classes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iter</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::TextIter.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>context_class</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>class to search for.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> has the context class.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="join_lines-instance_method">
+  
+    #<strong>join_lines</strong>(start, end)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Joins the lines of text between the specified iterators.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::TextIter.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::TextIter.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="language-instance_method">
+  
+    #<strong>language</strong>  &#x21d2; <tt><span class='object_link'><a href="Language.html" title="GtkSource::Language (class)">GtkSource::Language</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns language.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Language.html" title="GtkSource::Language (class)">GtkSource::Language</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>language</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="language=-instance_method">
+  
+    #<strong>language=</strong>(language)  &#x21d2; <tt><span class='object_link'><a href="Language.html" title="GtkSource::Language (class)">GtkSource::Language</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>language</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Language.html" title="GtkSource::Language (class)">GtkSource::Language</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Language.html" title="GtkSource::Language (class)">GtkSource::Language</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>language</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Language.html" title="GtkSource::Language (class)">GtkSource::Language</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>language</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="loading-instance_method">
+  
+    #<strong>loading</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="loading=-instance_method">
+  
+    #<strong>loading=</strong>(loading)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The &quot;loading&quot; property denotes that a <code>GtkSourceFileLoader</code> is
+currently loading the buffer.</p>
+<p>Applications may want to use this setting to avoid doing work
+while the buffer is loading such as spellchecking.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>loading</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>loading</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>loading</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="loading?-instance_method">
+  
+    #<strong>loading?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The &quot;loading&quot; property denotes that a <code>GtkSourceFileLoader</code> is
+currently loading the buffer.</p>
+<p>Applications may want to use this setting to avoid doing work
+while the buffer is loading such as spellchecking.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>loading</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_source_marks-instance_method">
+  
+    #<strong>remove_source_marks</strong>(start, end, category)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Remove all marks of <!-- raw HTML omitted -->category<!-- raw HTML omitted --> between <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> from the buffer.</p>
+<p>If <!-- raw HTML omitted -->category<!-- raw HTML omitted --> is NULL, all marks in the range will be removed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::TextIter.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::TextIter.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>category</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>category to search for, or nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sort_lines-instance_method">
+  
+    #<strong>sort_lines</strong>(start, end, flags, column)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sort the lines of text between the specified iterators.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::TextIter.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::TextIter.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SortFlags.html" title="GtkSource::SortFlags (module)">GtkSource::SortFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gtk::SourceSortFlags specifying how the sort should behave</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>column</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>sort considering the text starting at the given column</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="style_scheme-instance_method">
+  
+    #<strong>style_scheme</strong>  &#x21d2; <tt><span class='object_link'><a href="StyleScheme.html" title="GtkSource::StyleScheme (class)">GtkSource::StyleScheme</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Style scheme. It contains styles for syntax highlighting, optionally
+foreground, background, cursor color, current line color, and matching
+brackets style.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleScheme.html" title="GtkSource::StyleScheme (class)">GtkSource::StyleScheme</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>style-scheme</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="style_scheme=-instance_method">
+  
+    #<strong>style_scheme=</strong>(style_scheme)  &#x21d2; <tt><span class='object_link'><a href="StyleScheme.html" title="GtkSource::StyleScheme (class)">GtkSource::StyleScheme</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Style scheme. It contains styles for syntax highlighting, optionally
+foreground, background, cursor color, current line color, and matching
+brackets style.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>style_scheme</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleScheme.html" title="GtkSource::StyleScheme (class)">GtkSource::StyleScheme</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleScheme.html" title="GtkSource::StyleScheme (class)">GtkSource::StyleScheme</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>style-scheme</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleScheme.html" title="GtkSource::StyleScheme (class)">GtkSource::StyleScheme</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>style-scheme</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

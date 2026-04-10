@@ -1,0 +1,8410 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::Settings
+  
+    &mdash; Ruby/GtkSourceView4
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::Settings";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">Settings</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::Settings
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::Settings</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p><code>GtkSettings</code> provides a mechanism to share global settings between
+applications.</p>
+<p>On the X window system, this sharing is realized by an
+<a href="http://www.freedesktop.org/wiki/Specifications/xsettings-spec">XSettings</a>
+manager that is usually part of the desktop environment, along with
+utilities that let the user change these settings.</p>
+<p>On Wayland, the settings are obtained either via a settings portal,
+or by reading desktop settings from [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings].</p>
+<p>On macOS, the settings are obtained from <code>NSUserDefaults</code>.</p>
+<p>In the absence of these sharing mechanisms, GTK reads default values for
+settings from <code>settings.ini</code> files in <code>/etc/gtk-4.0</code>, <code>$XDG_CONFIG_DIRS/gtk-4.0</code>
+and <code>$XDG_CONFIG_HOME/gtk-4.0</code>. These files must be valid key files (see
+<code>GKeyFile</code>), and have a section called Settings. Themes can also provide
+default values for settings by installing a <code>settings.ini</code> file
+next to their <code>gtk.css</code> file.</p>
+<p>Applications can override system-wide settings by setting the property
+of the <code>GtkSettings</code> object with g_object_set(). This should be restricted
+to special cases though; <code>GtkSettings</code> are not meant as an application
+configuration facility.</p>
+<p>There is one <code>GtkSettings</code> instance per display. It can be obtained with
+[func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings.get_for_display], but in many cases, it is more
+convenient to use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.get_settings].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default-class_method" title="default (class method)">.<strong>default</strong>  &#x21d2; Gtk::Settings </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the <code>GtkSettings</code> object for the default display, creating it if necessary.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_for_display-class_method" title="get_for_display (class method)">.<strong>get_for_display</strong>(display)  &#x21d2; Gtk::Settings </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the <code>GtkSettings</code> object for <!-- raw HTML omitted -->display<!-- raw HTML omitted -->, creating it if necessary.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_alternative_button_order=-instance_method" title="#gtk_alternative_button_order= (instance method)">#<strong>gtk_alternative_button_order=</strong>(gtk_alternative_button_order)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether buttons in dialogs should use the alternative button order.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_alternative_button_order%3F-instance_method" title="#gtk_alternative_button_order? (instance method)">#<strong>gtk_alternative_button_order?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether buttons in dialogs should use the alternative button order.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_alternative_sort_arrows=-instance_method" title="#gtk_alternative_sort_arrows= (instance method)">#<strong>gtk_alternative_sort_arrows=</strong>(gtk_alternative_sort_arrows)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Controls the direction of the sort indicators in sorted list and tree views.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_alternative_sort_arrows%3F-instance_method" title="#gtk_alternative_sort_arrows? (instance method)">#<strong>gtk_alternative_sort_arrows?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Controls the direction of the sort indicators in sorted list and tree views.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_application_prefer_dark_theme=-instance_method" title="#gtk_application_prefer_dark_theme= (instance method)">#<strong>gtk_application_prefer_dark_theme=</strong>(gtk_application_prefer_dark_theme)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the application prefers to use a dark theme.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_application_prefer_dark_theme%3F-instance_method" title="#gtk_application_prefer_dark_theme? (instance method)">#<strong>gtk_application_prefer_dark_theme?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the application prefers to use a dark theme.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_cursor_aspect_ratio-instance_method" title="#gtk_cursor_aspect_ratio (instance method)">#<strong>gtk_cursor_aspect_ratio</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The aspect ratio of the text caret.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_cursor_aspect_ratio=-instance_method" title="#gtk_cursor_aspect_ratio= (instance method)">#<strong>gtk_cursor_aspect_ratio=</strong>(gtk_cursor_aspect_ratio)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The aspect ratio of the text caret.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_cursor_blink=-instance_method" title="#gtk_cursor_blink= (instance method)">#<strong>gtk_cursor_blink=</strong>(gtk_cursor_blink)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the cursor should blink.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_cursor_blink%3F-instance_method" title="#gtk_cursor_blink? (instance method)">#<strong>gtk_cursor_blink?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the cursor should blink.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_cursor_blink_time-instance_method" title="#gtk_cursor_blink_time (instance method)">#<strong>gtk_cursor_blink_time</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Length of the cursor blink cycle, in milliseconds.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_cursor_blink_time=-instance_method" title="#gtk_cursor_blink_time= (instance method)">#<strong>gtk_cursor_blink_time=</strong>(gtk_cursor_blink_time)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Length of the cursor blink cycle, in milliseconds.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_cursor_blink_timeout-instance_method" title="#gtk_cursor_blink_timeout (instance method)">#<strong>gtk_cursor_blink_timeout</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Time after which the cursor stops blinking, in seconds.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_cursor_blink_timeout=-instance_method" title="#gtk_cursor_blink_timeout= (instance method)">#<strong>gtk_cursor_blink_timeout=</strong>(gtk_cursor_blink_timeout)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Time after which the cursor stops blinking, in seconds.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_cursor_theme_name-instance_method" title="#gtk_cursor_theme_name (instance method)">#<strong>gtk_cursor_theme_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the cursor theme to use.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_cursor_theme_name=-instance_method" title="#gtk_cursor_theme_name= (instance method)">#<strong>gtk_cursor_theme_name=</strong>(gtk_cursor_theme_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the cursor theme to use.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_cursor_theme_size-instance_method" title="#gtk_cursor_theme_size (instance method)">#<strong>gtk_cursor_theme_size</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The size to use for cursors.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_cursor_theme_size=-instance_method" title="#gtk_cursor_theme_size= (instance method)">#<strong>gtk_cursor_theme_size=</strong>(gtk_cursor_theme_size)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The size to use for cursors.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_decoration_layout-instance_method" title="#gtk_decoration_layout (instance method)">#<strong>gtk_decoration_layout</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines which buttons should be put in the titlebar of client-side decorated windows, and whether they should be placed on the left or right.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_decoration_layout=-instance_method" title="#gtk_decoration_layout= (instance method)">#<strong>gtk_decoration_layout=</strong>(gtk_decoration_layout)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines which buttons should be put in the titlebar of client-side decorated windows, and whether they should be placed on the left or right.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_dialogs_use_header=-instance_method" title="#gtk_dialogs_use_header= (instance method)">#<strong>gtk_dialogs_use_header=</strong>(gtk_dialogs_use_header)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether builtin GTK dialogs such as the file chooser, the color chooser or the font chooser will use a header bar at the top to show action widgets, or an action area at the bottom.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_dialogs_use_header%3F-instance_method" title="#gtk_dialogs_use_header? (instance method)">#<strong>gtk_dialogs_use_header?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether builtin GTK dialogs such as the file chooser, the color chooser or the font chooser will use a header bar at the top to show action widgets, or an action area at the bottom.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_dnd_drag_threshold-instance_method" title="#gtk_dnd_drag_threshold (instance method)">#<strong>gtk_dnd_drag_threshold</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of pixels the cursor can move before dragging.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_dnd_drag_threshold=-instance_method" title="#gtk_dnd_drag_threshold= (instance method)">#<strong>gtk_dnd_drag_threshold=</strong>(gtk_dnd_drag_threshold)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of pixels the cursor can move before dragging.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_double_click_distance-instance_method" title="#gtk_double_click_distance (instance method)">#<strong>gtk_double_click_distance</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The maximum distance allowed between two clicks for them to be considered a double click, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_double_click_distance=-instance_method" title="#gtk_double_click_distance= (instance method)">#<strong>gtk_double_click_distance=</strong>(gtk_double_click_distance)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The maximum distance allowed between two clicks for them to be considered a double click, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_double_click_time-instance_method" title="#gtk_double_click_time (instance method)">#<strong>gtk_double_click_time</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The maximum time to allow between two clicks for them to be considered a double click, in milliseconds.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_double_click_time=-instance_method" title="#gtk_double_click_time= (instance method)">#<strong>gtk_double_click_time=</strong>(gtk_double_click_time)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The maximum time to allow between two clicks for them to be considered a double click, in milliseconds.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_enable_accels=-instance_method" title="#gtk_enable_accels= (instance method)">#<strong>gtk_enable_accels=</strong>(gtk_enable_accels)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether menu items should have visible accelerators which can be activated.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_enable_accels%3F-instance_method" title="#gtk_enable_accels? (instance method)">#<strong>gtk_enable_accels?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether menu items should have visible accelerators which can be activated.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_enable_animations=-instance_method" title="#gtk_enable_animations= (instance method)">#<strong>gtk_enable_animations=</strong>(gtk_enable_animations)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to enable toolkit-wide animations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_enable_animations%3F-instance_method" title="#gtk_enable_animations? (instance method)">#<strong>gtk_enable_animations?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to enable toolkit-wide animations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_enable_event_sounds=-instance_method" title="#gtk_enable_event_sounds= (instance method)">#<strong>gtk_enable_event_sounds=</strong>(gtk_enable_event_sounds)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to play any event sounds at all.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_enable_event_sounds%3F-instance_method" title="#gtk_enable_event_sounds? (instance method)">#<strong>gtk_enable_event_sounds?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to play any event sounds at all.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_enable_input_feedback_sounds=-instance_method" title="#gtk_enable_input_feedback_sounds= (instance method)">#<strong>gtk_enable_input_feedback_sounds=</strong>(gtk_enable_input_feedback_sounds)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to play event sounds as feedback to user input.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_enable_input_feedback_sounds%3F-instance_method" title="#gtk_enable_input_feedback_sounds? (instance method)">#<strong>gtk_enable_input_feedback_sounds?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to play event sounds as feedback to user input.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_enable_primary_paste=-instance_method" title="#gtk_enable_primary_paste= (instance method)">#<strong>gtk_enable_primary_paste=</strong>(gtk_enable_primary_paste)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether a middle click on a mouse should paste the 'PRIMARY' clipboard content at the cursor location.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_enable_primary_paste%3F-instance_method" title="#gtk_enable_primary_paste? (instance method)">#<strong>gtk_enable_primary_paste?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether a middle click on a mouse should paste the 'PRIMARY' clipboard content at the cursor location.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_entry_password_hint_timeout-instance_method" title="#gtk_entry_password_hint_timeout (instance method)">#<strong>gtk_entry_password_hint_timeout</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>How long to show the last input character in hidden entries.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_entry_password_hint_timeout=-instance_method" title="#gtk_entry_password_hint_timeout= (instance method)">#<strong>gtk_entry_password_hint_timeout=</strong>(gtk_entry_password_hint_timeout)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>How long to show the last input character in hidden entries.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_entry_select_on_focus=-instance_method" title="#gtk_entry_select_on_focus= (instance method)">#<strong>gtk_entry_select_on_focus=</strong>(gtk_entry_select_on_focus)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to select the contents of an entry when it is focused.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_entry_select_on_focus%3F-instance_method" title="#gtk_entry_select_on_focus? (instance method)">#<strong>gtk_entry_select_on_focus?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to select the contents of an entry when it is focused.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_error_bell=-instance_method" title="#gtk_error_bell= (instance method)">#<strong>gtk_error_bell=</strong>(gtk_error_bell)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>When true, keyboard navigation and other input-related errors will cause a beep.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_error_bell%3F-instance_method" title="#gtk_error_bell? (instance method)">#<strong>gtk_error_bell?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>When true, keyboard navigation and other input-related errors will cause a beep.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_font_name-instance_method" title="#gtk_font_name (instance method)">#<strong>gtk_font_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The default font to use.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_font_name=-instance_method" title="#gtk_font_name= (instance method)">#<strong>gtk_font_name=</strong>(gtk_font_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The default font to use.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_fontconfig_timestamp-instance_method" title="#gtk_fontconfig_timestamp (instance method)">#<strong>gtk_fontconfig_timestamp</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Timestamp of the current fontconfig configuration.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_fontconfig_timestamp=-instance_method" title="#gtk_fontconfig_timestamp= (instance method)">#<strong>gtk_fontconfig_timestamp=</strong>(gtk_fontconfig_timestamp)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Timestamp of the current fontconfig configuration.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_hint_font_metrics=-instance_method" title="#gtk_hint_font_metrics= (instance method)">#<strong>gtk_hint_font_metrics=</strong>(gtk_hint_font_metrics)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether hinting should be applied to font metrics.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_hint_font_metrics%3F-instance_method" title="#gtk_hint_font_metrics? (instance method)">#<strong>gtk_hint_font_metrics?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether hinting should be applied to font metrics.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_icon_theme_name-instance_method" title="#gtk_icon_theme_name (instance method)">#<strong>gtk_icon_theme_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the icon theme to use.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_icon_theme_name=-instance_method" title="#gtk_icon_theme_name= (instance method)">#<strong>gtk_icon_theme_name=</strong>(gtk_icon_theme_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the icon theme to use.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_im_module-instance_method" title="#gtk_im_module (instance method)">#<strong>gtk_im_module</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Which IM (input method) module should be used by default.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_im_module=-instance_method" title="#gtk_im_module= (instance method)">#<strong>gtk_im_module=</strong>(gtk_im_module)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Which IM (input method) module should be used by default.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_keynav_use_caret=-instance_method" title="#gtk_keynav_use_caret= (instance method)">#<strong>gtk_keynav_use_caret=</strong>(gtk_keynav_use_caret)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether GTK should make sure that text can be navigated with a caret, even if it is not editable.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_keynav_use_caret%3F-instance_method" title="#gtk_keynav_use_caret? (instance method)">#<strong>gtk_keynav_use_caret?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether GTK should make sure that text can be navigated with a caret, even if it is not editable.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_label_select_on_focus=-instance_method" title="#gtk_label_select_on_focus= (instance method)">#<strong>gtk_label_select_on_focus=</strong>(gtk_label_select_on_focus)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to select the contents of a selectable label when it is focused.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_label_select_on_focus%3F-instance_method" title="#gtk_label_select_on_focus? (instance method)">#<strong>gtk_label_select_on_focus?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to select the contents of a selectable label when it is focused.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_long_press_time-instance_method" title="#gtk_long_press_time (instance method)">#<strong>gtk_long_press_time</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The time for a button or touch press to be considered a “long press”.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_long_press_time=-instance_method" title="#gtk_long_press_time= (instance method)">#<strong>gtk_long_press_time=</strong>(gtk_long_press_time)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The time for a button or touch press to be considered a “long press”.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_overlay_scrolling=-instance_method" title="#gtk_overlay_scrolling= (instance method)">#<strong>gtk_overlay_scrolling=</strong>(gtk_overlay_scrolling)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether scrolled windows may use overlaid scrolling indicators.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_overlay_scrolling%3F-instance_method" title="#gtk_overlay_scrolling? (instance method)">#<strong>gtk_overlay_scrolling?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether scrolled windows may use overlaid scrolling indicators.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_primary_button_warps_slider=-instance_method" title="#gtk_primary_button_warps_slider= (instance method)">#<strong>gtk_primary_button_warps_slider=</strong>(gtk_primary_button_warps_slider)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If the value of this setting is true, clicking the primary button in a <code>GtkRange</code> trough will move the slider, and hence set the range’s value, to the point that you clicked.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_primary_button_warps_slider%3F-instance_method" title="#gtk_primary_button_warps_slider? (instance method)">#<strong>gtk_primary_button_warps_slider?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If the value of this setting is true, clicking the primary button in a <code>GtkRange</code> trough will move the slider, and hence set the range’s value, to the point that you clicked.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_print_backends-instance_method" title="#gtk_print_backends (instance method)">#<strong>gtk_print_backends</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A comma-separated list of print backends to use in the print dialog.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_print_backends=-instance_method" title="#gtk_print_backends= (instance method)">#<strong>gtk_print_backends=</strong>(gtk_print_backends)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A comma-separated list of print backends to use in the print dialog.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_print_preview_command-instance_method" title="#gtk_print_preview_command (instance method)">#<strong>gtk_print_preview_command</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A command to run for displaying the print preview.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_print_preview_command=-instance_method" title="#gtk_print_preview_command= (instance method)">#<strong>gtk_print_preview_command=</strong>(gtk_print_preview_command)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A command to run for displaying the print preview.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_recent_files_enabled=-instance_method" title="#gtk_recent_files_enabled= (instance method)">#<strong>gtk_recent_files_enabled=</strong>(gtk_recent_files_enabled)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether GTK should keep track of items inside the recently used resources list.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_recent_files_enabled%3F-instance_method" title="#gtk_recent_files_enabled? (instance method)">#<strong>gtk_recent_files_enabled?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether GTK should keep track of items inside the recently used resources list.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_recent_files_max_age-instance_method" title="#gtk_recent_files_max_age (instance method)">#<strong>gtk_recent_files_max_age</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The maximum age, in days, of the items inside the recently used resources list.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_recent_files_max_age=-instance_method" title="#gtk_recent_files_max_age= (instance method)">#<strong>gtk_recent_files_max_age=</strong>(gtk_recent_files_max_age)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The maximum age, in days, of the items inside the recently used resources list.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_shell_shows_app_menu=-instance_method" title="#gtk_shell_shows_app_menu= (instance method)">#<strong>gtk_shell_shows_app_menu=</strong>(gtk_shell_shows_app_menu)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set to true if the desktop environment is displaying the app menu, false if the app should display it itself.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_shell_shows_app_menu%3F-instance_method" title="#gtk_shell_shows_app_menu? (instance method)">#<strong>gtk_shell_shows_app_menu?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set to true if the desktop environment is displaying the app menu, false if the app should display it itself.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_shell_shows_desktop=-instance_method" title="#gtk_shell_shows_desktop= (instance method)">#<strong>gtk_shell_shows_desktop=</strong>(gtk_shell_shows_desktop)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set to true if the desktop environment is displaying the desktop folder, false if not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_shell_shows_desktop%3F-instance_method" title="#gtk_shell_shows_desktop? (instance method)">#<strong>gtk_shell_shows_desktop?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set to true if the desktop environment is displaying the desktop folder, false if not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_shell_shows_menubar=-instance_method" title="#gtk_shell_shows_menubar= (instance method)">#<strong>gtk_shell_shows_menubar=</strong>(gtk_shell_shows_menubar)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set to true if the desktop environment is displaying the menubar, false if the app should display it itself.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_shell_shows_menubar%3F-instance_method" title="#gtk_shell_shows_menubar? (instance method)">#<strong>gtk_shell_shows_menubar?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set to true if the desktop environment is displaying the menubar, false if the app should display it itself.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_show_status_shapes=-instance_method" title="#gtk_show_status_shapes= (instance method)">#<strong>gtk_show_status_shapes=</strong>(gtk_show_status_shapes)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>When true, widgets like switches include shapes to indicate their on/off state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_show_status_shapes%3F-instance_method" title="#gtk_show_status_shapes? (instance method)">#<strong>gtk_show_status_shapes?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>When true, widgets like switches include shapes to indicate their on/off state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_sound_theme_name-instance_method" title="#gtk_sound_theme_name (instance method)">#<strong>gtk_sound_theme_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The XDG sound theme to use for event sounds.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_sound_theme_name=-instance_method" title="#gtk_sound_theme_name= (instance method)">#<strong>gtk_sound_theme_name=</strong>(gtk_sound_theme_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The XDG sound theme to use for event sounds.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_split_cursor=-instance_method" title="#gtk_split_cursor= (instance method)">#<strong>gtk_split_cursor=</strong>(gtk_split_cursor)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether two cursors should be displayed for mixed left-to-right and right-to-left text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_split_cursor%3F-instance_method" title="#gtk_split_cursor? (instance method)">#<strong>gtk_split_cursor?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether two cursors should be displayed for mixed left-to-right and right-to-left text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_theme_name-instance_method" title="#gtk_theme_name (instance method)">#<strong>gtk_theme_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the theme to load.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_theme_name=-instance_method" title="#gtk_theme_name= (instance method)">#<strong>gtk_theme_name=</strong>(gtk_theme_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the theme to load.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_titlebar_double_click-instance_method" title="#gtk_titlebar_double_click (instance method)">#<strong>gtk_titlebar_double_click</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines the action to take when a double-click occurs on the titlebar of client-side decorated windows.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_titlebar_double_click=-instance_method" title="#gtk_titlebar_double_click= (instance method)">#<strong>gtk_titlebar_double_click=</strong>(gtk_titlebar_double_click)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines the action to take when a double-click occurs on the titlebar of client-side decorated windows.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_titlebar_middle_click-instance_method" title="#gtk_titlebar_middle_click (instance method)">#<strong>gtk_titlebar_middle_click</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines the action to take when a middle-click occurs on the titlebar of client-side decorated windows.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_titlebar_middle_click=-instance_method" title="#gtk_titlebar_middle_click= (instance method)">#<strong>gtk_titlebar_middle_click=</strong>(gtk_titlebar_middle_click)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines the action to take when a middle-click occurs on the titlebar of client-side decorated windows.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_titlebar_right_click-instance_method" title="#gtk_titlebar_right_click (instance method)">#<strong>gtk_titlebar_right_click</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines the action to take when a right-click occurs on the titlebar of client-side decorated windows.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_titlebar_right_click=-instance_method" title="#gtk_titlebar_right_click= (instance method)">#<strong>gtk_titlebar_right_click=</strong>(gtk_titlebar_right_click)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines the action to take when a right-click occurs on the titlebar of client-side decorated windows.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_xft_antialias-instance_method" title="#gtk_xft_antialias (instance method)">#<strong>gtk_xft_antialias</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to antialias fonts.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_xft_antialias=-instance_method" title="#gtk_xft_antialias= (instance method)">#<strong>gtk_xft_antialias=</strong>(gtk_xft_antialias)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to antialias fonts.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_xft_dpi-instance_method" title="#gtk_xft_dpi (instance method)">#<strong>gtk_xft_dpi</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The font resolution, in 1024 * dots/inch.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_xft_dpi=-instance_method" title="#gtk_xft_dpi= (instance method)">#<strong>gtk_xft_dpi=</strong>(gtk_xft_dpi)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The font resolution, in 1024 * dots/inch.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_xft_hinting-instance_method" title="#gtk_xft_hinting (instance method)">#<strong>gtk_xft_hinting</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to enable font hinting.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_xft_hinting=-instance_method" title="#gtk_xft_hinting= (instance method)">#<strong>gtk_xft_hinting=</strong>(gtk_xft_hinting)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to enable font hinting.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_xft_hintstyle-instance_method" title="#gtk_xft_hintstyle (instance method)">#<strong>gtk_xft_hintstyle</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>What degree of font hinting to use.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_xft_hintstyle=-instance_method" title="#gtk_xft_hintstyle= (instance method)">#<strong>gtk_xft_hintstyle=</strong>(gtk_xft_hintstyle)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>What degree of font hinting to use.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_xft_rgba-instance_method" title="#gtk_xft_rgba (instance method)">#<strong>gtk_xft_rgba</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The type of subpixel antialiasing to use.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_xft_rgba=-instance_method" title="#gtk_xft_rgba= (instance method)">#<strong>gtk_xft_rgba=</strong>(gtk_xft_rgba)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The type of subpixel antialiasing to use.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset_property-instance_method" title="#reset_property (instance method)">#<strong>reset_property</strong>(name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Undoes the effect of calling g_object_set() to install an application-specific value for a setting.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="default-class_method">
+  
+    .<strong>default</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::Settings (class)">Gtk::Settings</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the <code>GtkSettings</code> object for the default display, creating
+it if necessary.</p>
+<p>See [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings.get_for_display].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::Settings (class)">Gtk::Settings</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GtkSettings</code> object. If there is
+no default display, then returns nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_for_display-class_method">
+  
+    .<strong>get_for_display</strong>(display)  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::Settings (class)">Gtk::Settings</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the <code>GtkSettings</code> object for <!-- raw HTML omitted -->display<!-- raw HTML omitted -->, creating it if necessary.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>display</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Display</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GdkDisplay</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::Settings (class)">Gtk::Settings</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GtkSettings</code> object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="gtk_alternative_button_order=-instance_method">
+  
+    #<strong>gtk_alternative_button_order=</strong>(gtk_alternative_button_order)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether buttons in dialogs should use the alternative button order.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_alternative_button_order</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-alternative-button-order</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-alternative-button-order</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_alternative_button_order?-instance_method">
+  
+    #<strong>gtk_alternative_button_order?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether buttons in dialogs should use the alternative button order.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-alternative-button-order</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_alternative_sort_arrows=-instance_method">
+  
+    #<strong>gtk_alternative_sort_arrows=</strong>(gtk_alternative_sort_arrows)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Controls the direction of the sort indicators in sorted list and tree
+views.</p>
+<p>By default an arrow pointing down means the column is sorted
+in ascending order. When set to true, this order will be inverted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_alternative_sort_arrows</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-alternative-sort-arrows</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-alternative-sort-arrows</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_alternative_sort_arrows?-instance_method">
+  
+    #<strong>gtk_alternative_sort_arrows?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Controls the direction of the sort indicators in sorted list and tree
+views.</p>
+<p>By default an arrow pointing down means the column is sorted
+in ascending order. When set to true, this order will be inverted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-alternative-sort-arrows</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_application_prefer_dark_theme=-instance_method">
+  
+    #<strong>gtk_application_prefer_dark_theme=</strong>(gtk_application_prefer_dark_theme)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the application prefers to use a dark theme.</p>
+<p>If a GTK theme includes a dark variant, it will be used
+instead of the configured theme.</p>
+<p>Some applications benefit from minimizing the amount of light
+pollution that interferes with the content. Good candidates for
+dark themes are photo and video editors that make the actual
+content get all the attention and minimize the distraction of
+the chrome.</p>
+<p>Dark themes should not be used for documents, where large spaces
+are white/light and the dark chrome creates too much contrast
+(web browser, text editor...).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_application_prefer_dark_theme</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-application-prefer-dark-theme</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-application-prefer-dark-theme</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_application_prefer_dark_theme?-instance_method">
+  
+    #<strong>gtk_application_prefer_dark_theme?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the application prefers to use a dark theme.</p>
+<p>If a GTK theme includes a dark variant, it will be used
+instead of the configured theme.</p>
+<p>Some applications benefit from minimizing the amount of light
+pollution that interferes with the content. Good candidates for
+dark themes are photo and video editors that make the actual
+content get all the attention and minimize the distraction of
+the chrome.</p>
+<p>Dark themes should not be used for documents, where large spaces
+are white/light and the dark chrome creates too much contrast
+(web browser, text editor...).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-application-prefer-dark-theme</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_cursor_aspect_ratio-instance_method">
+  
+    #<strong>gtk_cursor_aspect_ratio</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The aspect ratio of the text caret.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-aspect-ratio</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_cursor_aspect_ratio=-instance_method">
+  
+    #<strong>gtk_cursor_aspect_ratio=</strong>(gtk_cursor_aspect_ratio)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The aspect ratio of the text caret.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_cursor_aspect_ratio</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-aspect-ratio</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-aspect-ratio</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_cursor_blink=-instance_method">
+  
+    #<strong>gtk_cursor_blink=</strong>(gtk_cursor_blink)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the cursor should blink.</p>
+<p>Also see the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-cursor-blink-timeout] setting,
+which allows more flexible control over cursor blinking.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_cursor_blink</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-blink</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-blink</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_cursor_blink?-instance_method">
+  
+    #<strong>gtk_cursor_blink?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the cursor should blink.</p>
+<p>Also see the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-cursor-blink-timeout] setting,
+which allows more flexible control over cursor blinking.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-blink</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_cursor_blink_time-instance_method">
+  
+    #<strong>gtk_cursor_blink_time</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Length of the cursor blink cycle, in milliseconds.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-blink-time</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_cursor_blink_time=-instance_method">
+  
+    #<strong>gtk_cursor_blink_time=</strong>(gtk_cursor_blink_time)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Length of the cursor blink cycle, in milliseconds.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_cursor_blink_time</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-blink-time</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-blink-time</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_cursor_blink_timeout-instance_method">
+  
+    #<strong>gtk_cursor_blink_timeout</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Time after which the cursor stops blinking, in seconds.</p>
+<p>The timer is reset after each user interaction.</p>
+<p>Setting this to zero has the same effect as setting
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-cursor-blink] to false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-blink-timeout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_cursor_blink_timeout=-instance_method">
+  
+    #<strong>gtk_cursor_blink_timeout=</strong>(gtk_cursor_blink_timeout)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Time after which the cursor stops blinking, in seconds.</p>
+<p>The timer is reset after each user interaction.</p>
+<p>Setting this to zero has the same effect as setting
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-cursor-blink] to false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_cursor_blink_timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-blink-timeout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-blink-timeout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_cursor_theme_name-instance_method">
+  
+    #<strong>gtk_cursor_theme_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of the cursor theme to use.</p>
+<p>Use nil to use the default theme.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-theme-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_cursor_theme_name=-instance_method">
+  
+    #<strong>gtk_cursor_theme_name=</strong>(gtk_cursor_theme_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of the cursor theme to use.</p>
+<p>Use nil to use the default theme.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_cursor_theme_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-theme-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-theme-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_cursor_theme_size-instance_method">
+  
+    #<strong>gtk_cursor_theme_size</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The size to use for cursors.</p>
+<p>0 means to use the default size.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-theme-size</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_cursor_theme_size=-instance_method">
+  
+    #<strong>gtk_cursor_theme_size=</strong>(gtk_cursor_theme_size)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The size to use for cursors.</p>
+<p>0 means to use the default size.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_cursor_theme_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-theme-size</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-cursor-theme-size</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_decoration_layout-instance_method">
+  
+    #<strong>gtk_decoration_layout</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines which buttons should be put in the
+titlebar of client-side decorated windows, and whether they
+should be placed on the left or right.</p>
+<p>The format of the string is button names, separated by commas.
+A colon separates the buttons that should appear on the left
+from those on the right. Recognized button names are minimize,
+maximize, close, icon (the window icon) and menu (a menu button
+for the fallback app menu).</p>
+<p>For example, &quot;menu:minimize,maximize,close&quot; specifies a menu
+on the left, and minimize, maximize and close buttons on the right.</p>
+<p>Note that buttons will only be shown when they are meaningful.
+E.g. a menu button only appears when the desktop shell does not
+show the app menu, and a close button only appears on a window
+that can be closed.</p>
+<p>Also note that the setting can be overridden with the
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.HeaderBar:decoration-layout] property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-decoration-layout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_decoration_layout=-instance_method">
+  
+    #<strong>gtk_decoration_layout=</strong>(gtk_decoration_layout)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines which buttons should be put in the
+titlebar of client-side decorated windows, and whether they
+should be placed on the left or right.</p>
+<p>The format of the string is button names, separated by commas.
+A colon separates the buttons that should appear on the left
+from those on the right. Recognized button names are minimize,
+maximize, close, icon (the window icon) and menu (a menu button
+for the fallback app menu).</p>
+<p>For example, &quot;menu:minimize,maximize,close&quot; specifies a menu
+on the left, and minimize, maximize and close buttons on the right.</p>
+<p>Note that buttons will only be shown when they are meaningful.
+E.g. a menu button only appears when the desktop shell does not
+show the app menu, and a close button only appears on a window
+that can be closed.</p>
+<p>Also note that the setting can be overridden with the
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.HeaderBar:decoration-layout] property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_decoration_layout</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-decoration-layout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-decoration-layout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_dialogs_use_header=-instance_method">
+  
+    #<strong>gtk_dialogs_use_header=</strong>(gtk_dialogs_use_header)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether builtin GTK dialogs such as the file chooser, the
+color chooser or the font chooser will use a header bar at
+the top to show action widgets, or an action area at the bottom.</p>
+<p>This setting does not affect custom dialogs using <code>GtkDialog</code>
+directly, or message dialogs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_dialogs_use_header</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-dialogs-use-header</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-dialogs-use-header</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_dialogs_use_header?-instance_method">
+  
+    #<strong>gtk_dialogs_use_header?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether builtin GTK dialogs such as the file chooser, the
+color chooser or the font chooser will use a header bar at
+the top to show action widgets, or an action area at the bottom.</p>
+<p>This setting does not affect custom dialogs using <code>GtkDialog</code>
+directly, or message dialogs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-dialogs-use-header</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_dnd_drag_threshold-instance_method">
+  
+    #<strong>gtk_dnd_drag_threshold</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of pixels the cursor can move before dragging.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-dnd-drag-threshold</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_dnd_drag_threshold=-instance_method">
+  
+    #<strong>gtk_dnd_drag_threshold=</strong>(gtk_dnd_drag_threshold)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of pixels the cursor can move before dragging.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_dnd_drag_threshold</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-dnd-drag-threshold</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-dnd-drag-threshold</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_double_click_distance-instance_method">
+  
+    #<strong>gtk_double_click_distance</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The maximum distance allowed between two clicks for them to be considered
+a double click, in pixels.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-double-click-distance</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_double_click_distance=-instance_method">
+  
+    #<strong>gtk_double_click_distance=</strong>(gtk_double_click_distance)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The maximum distance allowed between two clicks for them to be considered
+a double click, in pixels.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_double_click_distance</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-double-click-distance</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-double-click-distance</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_double_click_time-instance_method">
+  
+    #<strong>gtk_double_click_time</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The maximum time to allow between two clicks for them to be considered
+a double click, in milliseconds.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-double-click-time</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_double_click_time=-instance_method">
+  
+    #<strong>gtk_double_click_time=</strong>(gtk_double_click_time)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The maximum time to allow between two clicks for them to be considered
+a double click, in milliseconds.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_double_click_time</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-double-click-time</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-double-click-time</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_enable_accels=-instance_method">
+  
+    #<strong>gtk_enable_accels=</strong>(gtk_enable_accels)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether menu items should have visible accelerators which can be
+activated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_enable_accels</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-enable-accels</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-enable-accels</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_enable_accels?-instance_method">
+  
+    #<strong>gtk_enable_accels?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether menu items should have visible accelerators which can be
+activated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-enable-accels</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_enable_animations=-instance_method">
+  
+    #<strong>gtk_enable_animations=</strong>(gtk_enable_animations)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to enable toolkit-wide animations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_enable_animations</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-enable-animations</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-enable-animations</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_enable_animations?-instance_method">
+  
+    #<strong>gtk_enable_animations?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to enable toolkit-wide animations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-enable-animations</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_enable_event_sounds=-instance_method">
+  
+    #<strong>gtk_enable_event_sounds=</strong>(gtk_enable_event_sounds)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to play any event sounds at all.</p>
+<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a>
+for more information on event sounds and sound themes.</p>
+<p>GTK itself does not support event sounds, you have to use a loadable
+module like the one that comes with libcanberra.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_enable_event_sounds</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-enable-event-sounds</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-enable-event-sounds</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_enable_event_sounds?-instance_method">
+  
+    #<strong>gtk_enable_event_sounds?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to play any event sounds at all.</p>
+<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a>
+for more information on event sounds and sound themes.</p>
+<p>GTK itself does not support event sounds, you have to use a loadable
+module like the one that comes with libcanberra.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-enable-event-sounds</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_enable_input_feedback_sounds=-instance_method">
+  
+    #<strong>gtk_enable_input_feedback_sounds=</strong>(gtk_enable_input_feedback_sounds)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to play event sounds as feedback to user input.</p>
+<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a>
+for more information on event sounds and sound themes.</p>
+<p>GTK itself does not support event sounds, you have to use a loadable
+module like the one that comes with libcanberra.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_enable_input_feedback_sounds</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-enable-input-feedback-sounds</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-enable-input-feedback-sounds</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_enable_input_feedback_sounds?-instance_method">
+  
+    #<strong>gtk_enable_input_feedback_sounds?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to play event sounds as feedback to user input.</p>
+<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a>
+for more information on event sounds and sound themes.</p>
+<p>GTK itself does not support event sounds, you have to use a loadable
+module like the one that comes with libcanberra.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-enable-input-feedback-sounds</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_enable_primary_paste=-instance_method">
+  
+    #<strong>gtk_enable_primary_paste=</strong>(gtk_enable_primary_paste)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether a middle click on a mouse should paste the
+'PRIMARY' clipboard content at the cursor location.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_enable_primary_paste</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-enable-primary-paste</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-enable-primary-paste</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_enable_primary_paste?-instance_method">
+  
+    #<strong>gtk_enable_primary_paste?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether a middle click on a mouse should paste the
+'PRIMARY' clipboard content at the cursor location.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-enable-primary-paste</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_entry_password_hint_timeout-instance_method">
+  
+    #<strong>gtk_entry_password_hint_timeout</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>How long to show the last input character in hidden
+entries.</p>
+<p>This value is in milliseconds. 0 disables showing the
+last char. 600 is a good value for enabling it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-entry-password-hint-timeout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_entry_password_hint_timeout=-instance_method">
+  
+    #<strong>gtk_entry_password_hint_timeout=</strong>(gtk_entry_password_hint_timeout)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>How long to show the last input character in hidden
+entries.</p>
+<p>This value is in milliseconds. 0 disables showing the
+last char. 600 is a good value for enabling it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_entry_password_hint_timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-entry-password-hint-timeout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-entry-password-hint-timeout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_entry_select_on_focus=-instance_method">
+  
+    #<strong>gtk_entry_select_on_focus=</strong>(gtk_entry_select_on_focus)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to select the contents of an entry when it is focused.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_entry_select_on_focus</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-entry-select-on-focus</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-entry-select-on-focus</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_entry_select_on_focus?-instance_method">
+  
+    #<strong>gtk_entry_select_on_focus?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to select the contents of an entry when it is focused.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-entry-select-on-focus</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_error_bell=-instance_method">
+  
+    #<strong>gtk_error_bell=</strong>(gtk_error_bell)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>When true, keyboard navigation and other input-related errors
+will cause a beep.</p>
+<p>Since the error bell is implemented using gdk_surface_beep(), the
+windowing system may offer ways to configure the error bell in many
+ways, such as flashing the window or similar visual effects.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_error_bell</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-error-bell</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-error-bell</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_error_bell?-instance_method">
+  
+    #<strong>gtk_error_bell?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>When true, keyboard navigation and other input-related errors
+will cause a beep.</p>
+<p>Since the error bell is implemented using gdk_surface_beep(), the
+windowing system may offer ways to configure the error bell in many
+ways, such as flashing the window or similar visual effects.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-error-bell</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_font_name-instance_method">
+  
+    #<strong>gtk_font_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The default font to use.</p>
+<p>GTK uses the family name and size from this string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-font-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_font_name=-instance_method">
+  
+    #<strong>gtk_font_name=</strong>(gtk_font_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The default font to use.</p>
+<p>GTK uses the family name and size from this string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_font_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-font-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-font-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_fontconfig_timestamp-instance_method">
+  
+    #<strong>gtk_fontconfig_timestamp</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Timestamp of the current fontconfig configuration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-fontconfig-timestamp</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_fontconfig_timestamp=-instance_method">
+  
+    #<strong>gtk_fontconfig_timestamp=</strong>(gtk_fontconfig_timestamp)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Timestamp of the current fontconfig configuration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_fontconfig_timestamp</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-fontconfig-timestamp</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-fontconfig-timestamp</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_hint_font_metrics=-instance_method">
+  
+    #<strong>gtk_hint_font_metrics=</strong>(gtk_hint_font_metrics)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether hinting should be applied to font metrics.</p>
+<p>Note that this also turns off subpixel positioning of glyphs,
+since it conflicts with metrics hinting.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_hint_font_metrics</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-hint-font-metrics</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-hint-font-metrics</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_hint_font_metrics?-instance_method">
+  
+    #<strong>gtk_hint_font_metrics?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether hinting should be applied to font metrics.</p>
+<p>Note that this also turns off subpixel positioning of glyphs,
+since it conflicts with metrics hinting.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-hint-font-metrics</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_icon_theme_name-instance_method">
+  
+    #<strong>gtk_icon_theme_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of the icon theme to use.</p>
+<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconTheme] for details about how
+GTK handles icon themes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-icon-theme-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_icon_theme_name=-instance_method">
+  
+    #<strong>gtk_icon_theme_name=</strong>(gtk_icon_theme_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of the icon theme to use.</p>
+<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconTheme] for details about how
+GTK handles icon themes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_icon_theme_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-icon-theme-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-icon-theme-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_im_module-instance_method">
+  
+    #<strong>gtk_im_module</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Which IM (input method) module should be used by default.</p>
+<p>This is the input method that will be used if the user has not
+explicitly chosen another input method from the IM context menu.
+This also can be a colon-separated list of input methods, which GTK
+will try in turn until it finds one available on the system.</p>
+<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-im-module</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_im_module=-instance_method">
+  
+    #<strong>gtk_im_module=</strong>(gtk_im_module)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Which IM (input method) module should be used by default.</p>
+<p>This is the input method that will be used if the user has not
+explicitly chosen another input method from the IM context menu.
+This also can be a colon-separated list of input methods, which GTK
+will try in turn until it finds one available on the system.</p>
+<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_im_module</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-im-module</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-im-module</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_keynav_use_caret=-instance_method">
+  
+    #<strong>gtk_keynav_use_caret=</strong>(gtk_keynav_use_caret)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether GTK should make sure that text can be navigated with
+a caret, even if it is not editable.</p>
+<p>This is useful when using a screen reader.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_keynav_use_caret</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-keynav-use-caret</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-keynav-use-caret</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_keynav_use_caret?-instance_method">
+  
+    #<strong>gtk_keynav_use_caret?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether GTK should make sure that text can be navigated with
+a caret, even if it is not editable.</p>
+<p>This is useful when using a screen reader.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-keynav-use-caret</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_label_select_on_focus=-instance_method">
+  
+    #<strong>gtk_label_select_on_focus=</strong>(gtk_label_select_on_focus)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to select the contents of a selectable
+label when it is focused.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_label_select_on_focus</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-label-select-on-focus</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-label-select-on-focus</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_label_select_on_focus?-instance_method">
+  
+    #<strong>gtk_label_select_on_focus?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to select the contents of a selectable
+label when it is focused.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-label-select-on-focus</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_long_press_time-instance_method">
+  
+    #<strong>gtk_long_press_time</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The time for a button or touch press to be considered a “long press”.</p>
+<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureLongPress].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-long-press-time</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_long_press_time=-instance_method">
+  
+    #<strong>gtk_long_press_time=</strong>(gtk_long_press_time)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The time for a button or touch press to be considered a “long press”.</p>
+<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureLongPress].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_long_press_time</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-long-press-time</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-long-press-time</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_overlay_scrolling=-instance_method">
+  
+    #<strong>gtk_overlay_scrolling=</strong>(gtk_overlay_scrolling)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether scrolled windows may use overlaid scrolling indicators.</p>
+<p>If this is set to false, scrolled windows will have permanent
+scrollbars.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_overlay_scrolling</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-overlay-scrolling</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-overlay-scrolling</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_overlay_scrolling?-instance_method">
+  
+    #<strong>gtk_overlay_scrolling?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether scrolled windows may use overlaid scrolling indicators.</p>
+<p>If this is set to false, scrolled windows will have permanent
+scrollbars.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-overlay-scrolling</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_primary_button_warps_slider=-instance_method">
+  
+    #<strong>gtk_primary_button_warps_slider=</strong>(gtk_primary_button_warps_slider)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If the value of this setting is true, clicking the primary button in a
+<code>GtkRange</code> trough will move the slider, and hence set the range’s value, to
+the point that you clicked.</p>
+<p>If it is false, a primary click will cause the slider/value to move
+by the range’s page-size towards the point clicked.</p>
+<p>Whichever action you choose for the primary button, the other action will
+be available by holding Shift and primary-clicking, or clicking the middle
+mouse button.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_primary_button_warps_slider</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-primary-button-warps-slider</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-primary-button-warps-slider</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_primary_button_warps_slider?-instance_method">
+  
+    #<strong>gtk_primary_button_warps_slider?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If the value of this setting is true, clicking the primary button in a
+<code>GtkRange</code> trough will move the slider, and hence set the range’s value, to
+the point that you clicked.</p>
+<p>If it is false, a primary click will cause the slider/value to move
+by the range’s page-size towards the point clicked.</p>
+<p>Whichever action you choose for the primary button, the other action will
+be available by holding Shift and primary-clicking, or clicking the middle
+mouse button.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-primary-button-warps-slider</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_print_backends-instance_method">
+  
+    #<strong>gtk_print_backends</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A comma-separated list of print backends to use in the print
+dialog.</p>
+<p>Available print backends depend on the GTK installation,
+and may include &quot;file&quot;, &quot;cups&quot;, &quot;lpr&quot; or &quot;papi&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-print-backends</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_print_backends=-instance_method">
+  
+    #<strong>gtk_print_backends=</strong>(gtk_print_backends)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A comma-separated list of print backends to use in the print
+dialog.</p>
+<p>Available print backends depend on the GTK installation,
+and may include &quot;file&quot;, &quot;cups&quot;, &quot;lpr&quot; or &quot;papi&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_print_backends</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-print-backends</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-print-backends</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_print_preview_command-instance_method">
+  
+    #<strong>gtk_print_preview_command</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A command to run for displaying the print preview.</p>
+<p>The command should contain a <code>%f</code> placeholder, which will get
+replaced by the path to the pdf file. The command may also
+contain a <code>%s</code> placeholder, which will get replaced by the
+path to a file containing the print settings in the format
+produced by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintSettings.to_file].</p>
+<p>The preview application is responsible for removing the pdf
+file and the print settings file when it is done.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-print-preview-command</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_print_preview_command=-instance_method">
+  
+    #<strong>gtk_print_preview_command=</strong>(gtk_print_preview_command)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A command to run for displaying the print preview.</p>
+<p>The command should contain a <code>%f</code> placeholder, which will get
+replaced by the path to the pdf file. The command may also
+contain a <code>%s</code> placeholder, which will get replaced by the
+path to a file containing the print settings in the format
+produced by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintSettings.to_file].</p>
+<p>The preview application is responsible for removing the pdf
+file and the print settings file when it is done.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_print_preview_command</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-print-preview-command</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-print-preview-command</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_recent_files_enabled=-instance_method">
+  
+    #<strong>gtk_recent_files_enabled=</strong>(gtk_recent_files_enabled)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether GTK should keep track of items inside the recently used
+resources list.</p>
+<p>If set to false, the list will always be empty.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_recent_files_enabled</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-recent-files-enabled</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-recent-files-enabled</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_recent_files_enabled?-instance_method">
+  
+    #<strong>gtk_recent_files_enabled?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether GTK should keep track of items inside the recently used
+resources list.</p>
+<p>If set to false, the list will always be empty.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-recent-files-enabled</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_recent_files_max_age-instance_method">
+  
+    #<strong>gtk_recent_files_max_age</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The maximum age, in days, of the items inside the recently used
+resources list.</p>
+<p>Items older than this setting will be excised from the list.
+If set to 0, the list will always be empty; if set to -1, no
+item will be removed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-recent-files-max-age</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_recent_files_max_age=-instance_method">
+  
+    #<strong>gtk_recent_files_max_age=</strong>(gtk_recent_files_max_age)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The maximum age, in days, of the items inside the recently used
+resources list.</p>
+<p>Items older than this setting will be excised from the list.
+If set to 0, the list will always be empty; if set to -1, no
+item will be removed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_recent_files_max_age</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-recent-files-max-age</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-recent-files-max-age</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_shell_shows_app_menu=-instance_method">
+  
+    #<strong>gtk_shell_shows_app_menu=</strong>(gtk_shell_shows_app_menu)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set to true if the desktop environment is displaying
+the app menu, false if the app should display it itself.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_shell_shows_app_menu</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-shell-shows-app-menu</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-shell-shows-app-menu</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_shell_shows_app_menu?-instance_method">
+  
+    #<strong>gtk_shell_shows_app_menu?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set to true if the desktop environment is displaying
+the app menu, false if the app should display it itself.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-shell-shows-app-menu</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_shell_shows_desktop=-instance_method">
+  
+    #<strong>gtk_shell_shows_desktop=</strong>(gtk_shell_shows_desktop)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set to true if the desktop environment is displaying
+the desktop folder, false if not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_shell_shows_desktop</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-shell-shows-desktop</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-shell-shows-desktop</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_shell_shows_desktop?-instance_method">
+  
+    #<strong>gtk_shell_shows_desktop?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set to true if the desktop environment is displaying
+the desktop folder, false if not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-shell-shows-desktop</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_shell_shows_menubar=-instance_method">
+  
+    #<strong>gtk_shell_shows_menubar=</strong>(gtk_shell_shows_menubar)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set to true if the desktop environment is displaying
+the menubar, false if the app should display it itself.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_shell_shows_menubar</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-shell-shows-menubar</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-shell-shows-menubar</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_shell_shows_menubar?-instance_method">
+  
+    #<strong>gtk_shell_shows_menubar?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set to true if the desktop environment is displaying
+the menubar, false if the app should display it itself.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-shell-shows-menubar</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_show_status_shapes=-instance_method">
+  
+    #<strong>gtk_show_status_shapes=</strong>(gtk_show_status_shapes)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>When true, widgets like switches include shapes to indicate their on/off state.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_show_status_shapes</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-show-status-shapes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-show-status-shapes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_show_status_shapes?-instance_method">
+  
+    #<strong>gtk_show_status_shapes?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>When true, widgets like switches include shapes to indicate their on/off state.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-show-status-shapes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_sound_theme_name-instance_method">
+  
+    #<strong>gtk_sound_theme_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The XDG sound theme to use for event sounds.</p>
+<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a>
+for more information on event sounds and sound themes.</p>
+<p>GTK itself does not support event sounds, you have to use
+a loadable module like the one that comes with libcanberra.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-sound-theme-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_sound_theme_name=-instance_method">
+  
+    #<strong>gtk_sound_theme_name=</strong>(gtk_sound_theme_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The XDG sound theme to use for event sounds.</p>
+<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a>
+for more information on event sounds and sound themes.</p>
+<p>GTK itself does not support event sounds, you have to use
+a loadable module like the one that comes with libcanberra.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_sound_theme_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-sound-theme-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-sound-theme-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_split_cursor=-instance_method">
+  
+    #<strong>gtk_split_cursor=</strong>(gtk_split_cursor)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether two cursors should be displayed for mixed left-to-right and
+right-to-left text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_split_cursor</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-split-cursor</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-split-cursor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_split_cursor?-instance_method">
+  
+    #<strong>gtk_split_cursor?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether two cursors should be displayed for mixed left-to-right and
+right-to-left text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-split-cursor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_theme_name-instance_method">
+  
+    #<strong>gtk_theme_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of the theme to load.</p>
+<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CssProvider] for details about how
+GTK finds the CSS stylesheet for a theme.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-theme-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_theme_name=-instance_method">
+  
+    #<strong>gtk_theme_name=</strong>(gtk_theme_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of the theme to load.</p>
+<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CssProvider] for details about how
+GTK finds the CSS stylesheet for a theme.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_theme_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-theme-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-theme-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_titlebar_double_click-instance_method">
+  
+    #<strong>gtk_titlebar_double_click</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines the action to take when a double-click
+occurs on the titlebar of client-side decorated windows.</p>
+<p>Recognized actions are minimize, toggle-maximize, menu, lower
+or none.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-titlebar-double-click</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_titlebar_double_click=-instance_method">
+  
+    #<strong>gtk_titlebar_double_click=</strong>(gtk_titlebar_double_click)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines the action to take when a double-click
+occurs on the titlebar of client-side decorated windows.</p>
+<p>Recognized actions are minimize, toggle-maximize, menu, lower
+or none.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_titlebar_double_click</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-titlebar-double-click</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-titlebar-double-click</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_titlebar_middle_click-instance_method">
+  
+    #<strong>gtk_titlebar_middle_click</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines the action to take when a middle-click
+occurs on the titlebar of client-side decorated windows.</p>
+<p>Recognized actions are minimize, toggle-maximize, menu, lower
+or none.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-titlebar-middle-click</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_titlebar_middle_click=-instance_method">
+  
+    #<strong>gtk_titlebar_middle_click=</strong>(gtk_titlebar_middle_click)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines the action to take when a middle-click
+occurs on the titlebar of client-side decorated windows.</p>
+<p>Recognized actions are minimize, toggle-maximize, menu, lower
+or none.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_titlebar_middle_click</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-titlebar-middle-click</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-titlebar-middle-click</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_titlebar_right_click-instance_method">
+  
+    #<strong>gtk_titlebar_right_click</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines the action to take when a right-click
+occurs on the titlebar of client-side decorated windows.</p>
+<p>Recognized actions are minimize, toggle-maximize, menu, lower
+or none.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-titlebar-right-click</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_titlebar_right_click=-instance_method">
+  
+    #<strong>gtk_titlebar_right_click=</strong>(gtk_titlebar_right_click)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines the action to take when a right-click
+occurs on the titlebar of client-side decorated windows.</p>
+<p>Recognized actions are minimize, toggle-maximize, menu, lower
+or none.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_titlebar_right_click</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-titlebar-right-click</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-titlebar-right-click</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_xft_antialias-instance_method">
+  
+    #<strong>gtk_xft_antialias</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to antialias fonts.</p>
+<p>The values are 0 for no, 1 for yes, or -1 for the system default.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-xft-antialias</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_xft_antialias=-instance_method">
+  
+    #<strong>gtk_xft_antialias=</strong>(gtk_xft_antialias)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to antialias fonts.</p>
+<p>The values are 0 for no, 1 for yes, or -1 for the system default.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_xft_antialias</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-xft-antialias</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-xft-antialias</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_xft_dpi-instance_method">
+  
+    #<strong>gtk_xft_dpi</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The font resolution, in 1024 * dots/inch.</p>
+<p>-1 to use the default value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-xft-dpi</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_xft_dpi=-instance_method">
+  
+    #<strong>gtk_xft_dpi=</strong>(gtk_xft_dpi)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The font resolution, in 1024 * dots/inch.</p>
+<p>-1 to use the default value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_xft_dpi</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-xft-dpi</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-xft-dpi</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_xft_hinting-instance_method">
+  
+    #<strong>gtk_xft_hinting</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to enable font hinting.</p>
+<p>The values are 0 for no, 1 for yes, or -1 for the system default.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-xft-hinting</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_xft_hinting=-instance_method">
+  
+    #<strong>gtk_xft_hinting=</strong>(gtk_xft_hinting)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to enable font hinting.</p>
+<p>The values are 0 for no, 1 for yes, or -1 for the system default.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_xft_hinting</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-xft-hinting</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-xft-hinting</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_xft_hintstyle-instance_method">
+  
+    #<strong>gtk_xft_hintstyle</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>What degree of font hinting to use.</p>
+<p>The possible vaues are hintnone, hintslight,
+hintmedium, hintfull.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-xft-hintstyle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_xft_hintstyle=-instance_method">
+  
+    #<strong>gtk_xft_hintstyle=</strong>(gtk_xft_hintstyle)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>What degree of font hinting to use.</p>
+<p>The possible vaues are hintnone, hintslight,
+hintmedium, hintfull.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_xft_hintstyle</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-xft-hintstyle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-xft-hintstyle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_xft_rgba-instance_method">
+  
+    #<strong>gtk_xft_rgba</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The type of subpixel antialiasing to use.</p>
+<p>The possible values are none, rgb, bgr, vrgb, vbgr.</p>
+<p>Note that GSK does not support subpixel antialiasing, and this
+setting has no effect on font rendering in GTK.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-xft-rgba</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_xft_rgba=-instance_method">
+  
+    #<strong>gtk_xft_rgba=</strong>(gtk_xft_rgba)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The type of subpixel antialiasing to use.</p>
+<p>The possible values are none, rgb, bgr, vrgb, vbgr.</p>
+<p>Note that GSK does not support subpixel antialiasing, and this
+setting has no effect on font rendering in GTK.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_xft_rgba</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-xft-rgba</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-xft-rgba</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset_property-instance_method">
+  
+    #<strong>reset_property</strong>(name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Undoes the effect of calling g_object_set() to install an
+application-specific value for a setting.</p>
+<p>After this call, the setting will again follow the session-wide
+value for this setting.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the setting to reset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gst::DebugLevel
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gst::DebugLevel";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gst.html" title="Gst (module)">Gst</a></span></span>
+     &raquo; 
+    <span class="title">DebugLevel</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gst::DebugLevel
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="NONE-constant" class="">NONE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>No debugging level specified or desired. Used to deactivate
+debugging output.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:none</span></pre></dd>
+      
+        <dt id="ERROR-constant" class="">ERROR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Error messages are to be used only when an error occurred
+that stops the application from keeping working correctly.
+An examples is gst_element_error, which outputs a message with this priority.
+It does not mean that the application is terminating as with g_error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:error</span></pre></dd>
+      
+        <dt id="WARNING-constant" class="">WARNING =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Warning messages are to inform about abnormal behaviour
+that could lead to problems or weird behaviour later on. An example of this
+would be clocking issues (&quot;your computer is pretty slow&quot;) or broken input
+data (&quot;Can't synchronize to stream.&quot;)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:warning</span></pre></dd>
+      
+        <dt id="FIXME-constant" class="">FIXME =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Fixme messages are messages that indicate that something
+in the executed code path is not fully implemented or handled yet. Note
+that this does not replace proper error handling in any way, the purpose
+of this message is to make it easier to spot incomplete/unfinished pieces
+of code when reading the debug log.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:fixme</span></pre></dd>
+      
+        <dt id="INFO-constant" class="">INFO =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Informational messages should be used to keep the developer
+updated about what is happening.
+Examples where this should be used are when a typefind function has
+successfully determined the type of the stream or when an mp3 plugin detects
+the format to be used. (&quot;This file has mono sound.&quot;)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:info</span></pre></dd>
+      
+        <dt id="DEBUG-constant" class="">DEBUG =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Debugging messages should be used when something common
+happens that is not the expected default behavior, or something that's
+useful to know but doesn't happen all the time (ie. per loop iteration or
+buffer processed or event handled).
+An example would be notifications about state changes or receiving/sending
+of events.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:debug</span></pre></dd>
+      
+        <dt id="LOG-constant" class="">LOG =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Log messages are messages that are very common but might be
+useful to know. As a rule of thumb a pipeline that is running as expected
+should never output anything else but LOG messages whilst processing data.
+Use this log level to log recurring information in chain functions and
+loop functions, for example.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:log</span></pre></dd>
+      
+        <dt id="TRACE-constant" class="">TRACE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Tracing-related messages.
+Examples for this are referencing/dereferencing of objects.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:trace</span></pre></dd>
+      
+        <dt id="MEMDUMP-constant" class="">MEMDUMP =
+          <div class="docstring">
+  <div class="discussion">
+    <p>memory dump messages are used to log (small) chunks of
+data as memory dumps in the log. They will be displayed as hexdump with
+ASCII characters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span> <span class='kw'>or</span> <span class='symbol'>:memdump</span></pre></dd>
+      
+        <dt id="COUNT-constant" class="">COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The number of defined debugging levels.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:count</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

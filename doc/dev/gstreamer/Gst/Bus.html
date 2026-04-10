@@ -1,0 +1,2335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gst::Bus
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gst::Bus";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gst.html" title="Gst (module)">Gst</a></span></span>
+     &raquo; 
+    <span class="title">Bus</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gst::Bus
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></li>
+          
+            <li class="next">Gst::Bus</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/gst/bus.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>GStreamer bus class.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_signal_watch-instance_method" title="#add_signal_watch (instance method)">#<strong>add_signal_watch</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a bus signal watch to the default main context with the default priority ( %G_PRIORITY_DEFAULT ).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_signal_watch_full-instance_method" title="#add_signal_watch_full (instance method)">#<strong>add_signal_watch_full</strong>(priority)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a bus signal watch to the default main context with the given <!-- raw HTML omitted -->priority<!-- raw HTML omitted --> (e.g. %G_PRIORITY_DEFAULT).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_watch-instance_method" title="#add_watch (instance method)">#<strong>add_watch</strong>(priority = GLib::PRIORITY_DEFAULT, &amp;block)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a bus watch to the default main context with the default priority ( %G_PRIORITY_DEFAULT ).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_watch_full-instance_method" title="#add_watch_full (instance method)">#<strong>add_watch_full</strong>(priority, func, user_data, notify)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a bus watch to the default main context with the default priority ( %G_PRIORITY_DEFAULT ).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#async_signal_func-instance_method" title="#async_signal_func (instance method)">#<strong>async_signal_func</strong>(message, data)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A helper Gst::BusFunc that can be used to convert all asynchronous messages into signals.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_watch-instance_method" title="#create_watch (instance method)">#<strong>create_watch</strong>  &#x21d2; GLib::Source </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create watch for this bus.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#disable_sync_message_emission-instance_method" title="#disable_sync_message_emission (instance method)">#<strong>disable_sync_message_emission</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Instructs GStreamer to stop emitting the &quot;sync-message&quot; signal for this bus.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#enable_async=-instance_method" title="#enable_async= (instance method)">#<strong>enable_async=</strong>(enable_async)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Enables async message delivery support for bus watches, gst_bus_pop() and similar API.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#enable_sync_message_emission-instance_method" title="#enable_sync_message_emission (instance method)">#<strong>enable_sync_message_emission</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Instructs GStreamer to emit the &quot;sync-message&quot; signal after running the bus's sync handler.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flushing=-instance_method" title="#flushing= (instance method)">#<strong>flushing=</strong>(flushing)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If <!-- raw HTML omitted -->flushing<!-- raw HTML omitted -->, flushes out and unrefs any messages queued in the bus.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_pollfd-instance_method" title="#get_pollfd (instance method)">#<strong>get_pollfd</strong>(fd)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the file descriptor from the bus which can be used to get notified about messages being available with functions like g_poll(), and allows integration into other event loops based on file descriptors.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#have_pending-instance_method" title="#have_pending (instance method)">#<strong>have_pending</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if there are pending messages on the bus that should be handled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Gst::Bus </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Gst::Bus instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#peek-instance_method" title="#peek (instance method)">#<strong>peek</strong>  &#x21d2; Gst::Message </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Peeks the message on the top of the bus' queue.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#poll-instance_method" title="#poll (instance method)">#<strong>poll</strong>(*args)  &#x21d2; Gst::Message </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Polls the bus for messages.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#poll_raw-instance_method" title="#poll_raw (instance method)">#<strong>poll_raw</strong>  &#x21d2; Gst::Message </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Polls the bus for messages.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pop-instance_method" title="#pop (instance method)">#<strong>pop</strong>  &#x21d2; Gst::Message </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a message from the bus.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pop_filtered-instance_method" title="#pop_filtered (instance method)">#<strong>pop_filtered</strong>(types)  &#x21d2; Gst::Message </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a message matching <!-- raw HTML omitted -->type<!-- raw HTML omitted --> from the bus.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#post-instance_method" title="#post (instance method)">#<strong>post</strong>(message)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Posts a message on the given bus.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_signal_watch-instance_method" title="#remove_signal_watch (instance method)">#<strong>remove_signal_watch</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes a signal watch previously added with gst_bus_add_signal_watch().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_watch-instance_method" title="#remove_watch (instance method)">#<strong>remove_watch</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes an installed bus watch from <!-- raw HTML omitted -->bus<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sync_handler-instance_method" title="#sync_handler (instance method)">#<strong>sync_handler</strong>(&amp;block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sync_signal_handler-instance_method" title="#sync_signal_handler (instance method)">#<strong>sync_signal_handler</strong>(message, data)  &#x21d2; Gst::BusSyncReply </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A helper Gst::BusSyncHandler that can be used to convert all synchronous messages into signals.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#timed_pop-instance_method" title="#timed_pop (instance method)">#<strong>timed_pop</strong>(timeout)  &#x21d2; Gst::Message </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a message from the bus, waiting up to the specified timeout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#timed_pop_filtered-instance_method" title="#timed_pop_filtered (instance method)">#<strong>timed_pop_filtered</strong>(timeout, types)  &#x21d2; Gst::Message </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a message from the bus whose type matches the message type mask <!-- raw HTML omitted -->types<!-- raw HTML omitted -->, waiting up to the specified timeout (and discarding any messages that do not match the mask provided).</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Object.html#add_control_binding-instance_method" title="Gst::Object#add_control_binding (method)">#add_control_binding</a></span>, <span class='object_link'><a href="Object.html#check_uniqueness-class_method" title="Gst::Object.check_uniqueness (method)">check_uniqueness</a></span>, <span class='object_link'><a href="Object.html#control_bindings_disabled=-instance_method" title="Gst::Object#control_bindings_disabled= (method)">#control_bindings_disabled=</a></span>, <span class='object_link'><a href="Object.html#control_rate-instance_method" title="Gst::Object#control_rate (method)">#control_rate</a></span>, <span class='object_link'><a href="Object.html#control_rate=-instance_method" title="Gst::Object#control_rate= (method)">#control_rate=</a></span>, <span class='object_link'><a href="Object.html#default_deep_notify-class_method" title="Gst::Object.default_deep_notify (method)">default_deep_notify</a></span>, <span class='object_link'><a href="Object.html#default_error-instance_method" title="Gst::Object#default_error (method)">#default_error</a></span>, <span class='object_link'><a href="Object.html#get_control_binding-instance_method" title="Gst::Object#get_control_binding (method)">#get_control_binding</a></span>, <span class='object_link'><a href="Object.html#get_g_value_array-instance_method" title="Gst::Object#get_g_value_array (method)">#get_g_value_array</a></span>, <span class='object_link'><a href="Object.html#get_value-instance_method" title="Gst::Object#get_value (method)">#get_value</a></span>, <span class='object_link'><a href="Object.html#get_value_array-instance_method" title="Gst::Object#get_value_array (method)">#get_value_array</a></span>, <span class='object_link'><a href="Object.html#has_active_control_bindings-instance_method" title="Gst::Object#has_active_control_bindings (method)">#has_active_control_bindings</a></span>, <span class='object_link'><a href="Object.html#has_ancestor-instance_method" title="Gst::Object#has_ancestor (method)">#has_ancestor</a></span>, <span class='object_link'><a href="Object.html#has_as_ancestor-instance_method" title="Gst::Object#has_as_ancestor (method)">#has_as_ancestor</a></span>, <span class='object_link'><a href="Object.html#has_as_parent-instance_method" title="Gst::Object#has_as_parent (method)">#has_as_parent</a></span>, <span class='object_link'><a href="Object.html#name-instance_method" title="Gst::Object#name (method)">#name</a></span>, <span class='object_link'><a href="Object.html#name=-instance_method" title="Gst::Object#name= (method)">#name=</a></span>, <span class='object_link'><a href="Object.html#parent-instance_method" title="Gst::Object#parent (method)">#parent</a></span>, <span class='object_link'><a href="Object.html#parent=-instance_method" title="Gst::Object#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="Object.html#path_string-instance_method" title="Gst::Object#path_string (method)">#path_string</a></span>, <span class='object_link'><a href="Object.html#ref-instance_method" title="Gst::Object#ref (method)">#ref</a></span>, <span class='object_link'><a href="Object.html#ref_sink-class_method" title="Gst::Object.ref_sink (method)">ref_sink</a></span>, <span class='object_link'><a href="Object.html#remove_control_binding-instance_method" title="Gst::Object#remove_control_binding (method)">#remove_control_binding</a></span>, <span class='object_link'><a href="Object.html#replace-class_method" title="Gst::Object.replace (method)">replace</a></span>, <span class='object_link'><a href="Object.html#set_control_binding_disabled-instance_method" title="Gst::Object#set_control_binding_disabled (method)">#set_control_binding_disabled</a></span>, <span class='object_link'><a href="Object.html#suggest_next_sync-instance_method" title="Gst::Object#suggest_next_sync (method)">#suggest_next_sync</a></span>, <span class='object_link'><a href="Object.html#sync_values-instance_method" title="Gst::Object#sync_values (method)">#sync_values</a></span>, <span class='object_link'><a href="Object.html#unparent-instance_method" title="Gst::Object#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="Object.html#unref-instance_method" title="Gst::Object#unref (method)">#unref</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gst::Bus (class)">Gst::Bus</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Gst::Bus instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_signal_watch-instance_method">
+  
+    #<strong>add_signal_watch</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a bus signal watch to the default main context with the default priority
+( %G_PRIORITY_DEFAULT ). It is also possible to use a non-default
+main context set up using g_main_context_push_thread_default() (before
+one had to create a bus watch source and attach it to the desired main
+context 'manually').</p>
+<p>After calling this statement, the bus will emit the &quot;message&quot; signal for each
+message posted on the bus.</p>
+<p>This function may be called multiple times. To clean up, the caller is
+responsible for calling gst_bus_remove_signal_watch() as many times as this
+function is called.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_signal_watch_full-instance_method">
+  
+    #<strong>add_signal_watch_full</strong>(priority)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a bus signal watch to the default main context with the given <!-- raw HTML omitted -->priority<!-- raw HTML omitted -->
+(e.g. %G_PRIORITY_DEFAULT). It is also possible to use a non-default main
+context set up using g_main_context_push_thread_default()
+(before one had to create a bus watch source and attach it to the desired
+main context 'manually').</p>
+<p>After calling this statement, the bus will emit the &quot;message&quot; signal for each
+message posted on the bus when the GMain::Loop is running.</p>
+<p>This function may be called multiple times. To clean up, the caller is
+responsible for calling gst_bus_remove_signal_watch() as many times as this
+function is called.</p>
+<p>There can only be a single bus watch per bus, you must remove any signal
+watch before you can set another type of watch.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>priority</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The priority of the watch.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_watch-instance_method">
+  
+    #<strong>add_watch</strong>(priority = GLib::PRIORITY_DEFAULT, &amp;block)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a bus watch to the default main context with the default priority
+( %G_PRIORITY_DEFAULT ). It is also possible to use a non-default main
+context set up using g_main_context_push_thread_default() (before
+one had to create a bus watch source and attach it to the desired main
+context 'manually').</p>
+<p>This function is used to receive asynchronous messages in the main loop.
+There can only be a single bus watch per bus, you must remove it before you
+can set a new one.</p>
+<p>The bus watch will only work if a GMain::Loop is being run.</p>
+<p>The watch can be removed using gst_bus_remove_watch() or by returning false
+from <!-- raw HTML omitted -->func<!-- raw HTML omitted -->. If the watch was added to the default main context it is also
+possible to remove the watch using g_source_remove().</p>
+<p>The bus watch will take its own reference to the <!-- raw HTML omitted -->bus<!-- raw HTML omitted -->, so it is safe to unref
+<!-- raw HTML omitted -->bus<!-- raw HTML omitted --> using gst_object_unref() after setting the bus watch.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>Gst::BusFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A function to call when a message is received.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data passed to <!-- raw HTML omitted -->func<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The event source id or 0 if <!-- raw HTML omitted -->bus<!-- raw HTML omitted --> already got an event source.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gst/bus.rb', line 20</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_watch'>add_watch</span><span class='lparen'>(</span><span class='id identifier rubyid_priority'>priority</span><span class='op'>=</span><span class='const'>GLib</span><span class='op'>::</span><span class='const'>PRIORITY_DEFAULT</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_add_watch_full'>add_watch_full</span><span class='lparen'>(</span><span class='id identifier rubyid_priority'>priority</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_watch_full-instance_method">
+  
+    #<strong>add_watch_full</strong>(priority, func, user_data, notify)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a bus watch to the default main context with the default priority
+( %G_PRIORITY_DEFAULT ). It is also possible to use a non-default main
+context set up using g_main_context_push_thread_default() (before
+one had to create a bus watch source and attach it to the desired main
+context 'manually').</p>
+<p>This function is used to receive asynchronous messages in the main loop.
+There can only be a single bus watch per bus, you must remove it before you
+can set a new one.</p>
+<p>The bus watch will only work if a GMain::Loop is being run.</p>
+<p>The watch can be removed using gst_bus_remove_watch() or by returning false
+from <!-- raw HTML omitted -->func<!-- raw HTML omitted -->. If the watch was added to the default main context it is also
+possible to remove the watch using g_source_remove().</p>
+<p>The bus watch will take its own reference to the <!-- raw HTML omitted -->bus<!-- raw HTML omitted -->, so it is safe to unref
+<!-- raw HTML omitted -->bus<!-- raw HTML omitted --> using gst_object_unref() after setting the bus watch.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>Gst::BusFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A function to call when a message is received.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data passed to <!-- raw HTML omitted -->func<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The event source id or 0 if <!-- raw HTML omitted -->bus<!-- raw HTML omitted --> already got an event source.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gst/bus.rb', line 19</span>
+
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="async_signal_func-instance_method">
+  
+    #<strong>async_signal_func</strong>(message, data)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A helper Gst::BusFunc that can be used to convert all asynchronous messages
+into signals.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt>Gst::Message</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Message received</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_watch-instance_method">
+  
+    #<strong>create_watch</strong>  &#x21d2; <tt>GLib::Source</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create watch for this bus. The #GSource will be dispatched whenever
+a message is on the bus. After the GSource is dispatched, the
+message is popped off the bus and unreffed.</p>
+<p>As with other watches, there can only be one watch on the bus, including
+any signal watch added with #gst_bus_add_signal_watch.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Source</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GSource that can be added to a GMain::Loop.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="disable_sync_message_emission-instance_method">
+  
+    #<strong>disable_sync_message_emission</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Instructs GStreamer to stop emitting the &quot;sync-message&quot; signal for this bus.
+See gst_bus_enable_sync_message_emission() for more information.</p>
+<p>In the event that multiple pieces of code have called
+gst_bus_enable_sync_message_emission(), the sync-message emissions will only
+be stopped after all calls to gst_bus_enable_sync_message_emission() were
+&quot;cancelled&quot; by calling this function. In this way the semantics are exactly
+the same as gst_object_ref() that which calls enable should also call
+disable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="enable_async=-instance_method">
+  
+    #<strong>enable_async=</strong>(enable_async)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Enables async message delivery support for bus watches,
+gst_bus_pop() and similar API. Without this only the
+synchronous message handlers are called.</p>
+<p>This property is used to create the child element buses
+in Gst::Bin.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>enable_async</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>enable-async</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="enable_sync_message_emission-instance_method">
+  
+    #<strong>enable_sync_message_emission</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Instructs GStreamer to emit the &quot;sync-message&quot; signal after running the bus's
+sync handler. This function is here so that code can ensure that they can
+synchronously receive messages without having to affect what the bin's sync
+handler is.</p>
+<p>This function may be called multiple times. To clean up, the caller is
+responsible for calling gst_bus_disable_sync_message_emission() as many times
+as this function is called.</p>
+<p>While this function looks similar to gst_bus_add_signal_watch(), it is not
+exactly the same -- this function enables <em>synchronous</em> emission of
+signals when messages arrive; gst_bus_add_signal_watch() adds an idle callback
+to pop messages off the bus <em>asynchronously</em>. The sync-message signal
+comes from the thread of whatever object posted the message; the &quot;message&quot;
+signal is marshalled to the main thread via the GMain::Loop.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flushing=-instance_method">
+  
+    #<strong>flushing=</strong>(flushing)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If <!-- raw HTML omitted -->flushing<!-- raw HTML omitted -->, flushes out and unrefs any messages queued in the bus. Releases
+references to the message origin objects. Will flush future messages until
+gst_bus_set_flushing() sets <!-- raw HTML omitted -->flushing<!-- raw HTML omitted --> to false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flushing</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether or not to flush the bus</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_pollfd-instance_method">
+  
+    #<strong>get_pollfd</strong>(fd)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the file descriptor from the bus which can be used to get notified about
+messages being available with functions like g_poll(), and allows integration
+into other event loops based on file descriptors.
+Whenever a message is available, the POLLIN / %G_IO_IN event is set.</p>
+<p>Warning: NEVER read or write anything to the returned fd but only use it
+for getting notifications via g_poll() or similar and then use the normal
+GstBus API, e.g. gst_bus_pop().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>fd</span>
+      
+      
+        <span class='type'>(<tt>GLib::PollFD</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A GPollFD to fill</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="have_pending-instance_method">
+  
+    #<strong>have_pending</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if there are pending messages on the bus that
+should be handled.
+otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if there are messages on the bus to be handled, false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="peek-instance_method">
+  
+    #<strong>peek</strong>  &#x21d2; <tt>Gst::Message</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Peeks the message on the top of the bus' queue. The message will remain
+on the bus' message queue.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Message</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Message that is on the
+bus, or nil if the bus is empty.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="poll-instance_method">
+  
+    #<strong>poll</strong>(*args)  &#x21d2; <tt>Gst::Message</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Polls the bus for messages. Will block while waiting for messages to come.
+You can specify a maximum time to poll with the <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> parameter. If
+<!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is negative, this function will block indefinitely.</p>
+<p>All messages not in <!-- raw HTML omitted -->events<!-- raw HTML omitted --> will be popped off the bus and will be ignored.
+It is not possible to use message enums beyond #GST_MESSAGE_EXTENDED in the
+<!-- raw HTML omitted -->events<!-- raw HTML omitted --> mask</p>
+<p>Because poll is implemented using the &quot;message&quot; signal enabled by
+gst_bus_add_signal_watch(), calling gst_bus_poll() will cause the &quot;message&quot;
+signal to be emitted for every message that poll sees. Thus a &quot;message&quot;
+signal handler will see the same messages that this function sees -- neither
+will steal messages from the other.</p>
+<p>This function will run a GMain::Loop from the default main context when
+polling.</p>
+<p>You should never use this function, since it is pure evil. This is
+especially true for GUI applications based on Gtk+ or Qt, but also for any
+other non-trivial application that uses the GLib main loop. As this function
+runs a GLib main loop, any callback attached to the default GLib main
+context may be invoked. This could be timeouts, GUI events, I/O events etc.;
+even if gst_bus_poll() is called with a 0 timeout. Any of these callbacks
+may do things you do not expect, e.g. destroy the main application window or
+some other resource; change other application state; display a dialog and
+run another main loop until the user clicks it away. In short, using this
+function may add a lot of complexity to your code through unexpected
+re-entrancy and unexpected changes to your application's state.</p>
+<p>For 0 timeouts use gst_bus_pop_filtered() instead of this function; for
+other short timeouts use gst_bus_timed_pop_filtered(); everything else is
+better handled by setting up an asynchronous bus watch and doing things
+from there.
+poll for (note special handling of extended message types below)
+indefinitely.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>events</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MessageType.html" title="Gst::MessageType (module)">Gst::MessageType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a mask of Gst::MessageType, representing the set of message types to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the poll timeout, as a Gst::ClockTime, or #GST_CLOCK_TIME_NONE to poll</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Message</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the message that was received,
+or nil if the poll timed out.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gst/bus.rb', line 41</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_poll'>poll</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_events'>events</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>=</span> <span class='kw'>nil</span>
+
+  <span class='id identifier rubyid_n_args'>n_args</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_n_args'>n_args</span>
+  <span class='kw'>when</span> <span class='int'>0</span>
+  <span class='kw'>when</span> <span class='int'>1</span>
+    <span class='kw'>case</span> <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+    <span class='kw'>when</span> <span class='const'>Hash</span>
+      <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+      <span class='id identifier rubyid_events'>events</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:events</span><span class='rbracket'>]</span>
+      <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:timeout</span><span class='rbracket'>]</span>
+    <span class='kw'>when</span> <span class='const'>Integer</span>
+      <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_events'>events</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+    <span class='kw'>end</span>
+  <span class='kw'>when</span> <span class='int'>2</span>
+    <span class='id identifier rubyid_events'>events</span><span class='comma'>,</span> <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>wrong number of arguments </span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_message'>message</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>(given </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_n_args'>n_args</span><span class='embexpr_end'>}</span><span class='tstring_content'>, expected 0..2)</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_poll_raw'>poll_raw</span><span class='lparen'>(</span><span class='id identifier rubyid_events'>events</span> <span class='op'>||</span> <span class='symbol'>:any</span><span class='comma'>,</span>
+           <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="../Gst.html#CLOCK_TIME_NONE-constant" title="Gst::CLOCK_TIME_NONE (constant)">CLOCK_TIME_NONE</a></span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="poll_raw-instance_method">
+  
+    #<strong>poll_raw</strong>  &#x21d2; <tt>Gst::Message</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Polls the bus for messages. Will block while waiting for messages to come.
+You can specify a maximum time to poll with the <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> parameter. If
+<!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is negative, this function will block indefinitely.</p>
+<p>All messages not in <!-- raw HTML omitted -->events<!-- raw HTML omitted --> will be popped off the bus and will be ignored.
+It is not possible to use message enums beyond #GST_MESSAGE_EXTENDED in the
+<!-- raw HTML omitted -->events<!-- raw HTML omitted --> mask</p>
+<p>Because poll is implemented using the &quot;message&quot; signal enabled by
+gst_bus_add_signal_watch(), calling gst_bus_poll() will cause the &quot;message&quot;
+signal to be emitted for every message that poll sees. Thus a &quot;message&quot;
+signal handler will see the same messages that this function sees -- neither
+will steal messages from the other.</p>
+<p>This function will run a GMain::Loop from the default main context when
+polling.</p>
+<p>You should never use this function, since it is pure evil. This is
+especially true for GUI applications based on Gtk+ or Qt, but also for any
+other non-trivial application that uses the GLib main loop. As this function
+runs a GLib main loop, any callback attached to the default GLib main
+context may be invoked. This could be timeouts, GUI events, I/O events etc.;
+even if gst_bus_poll() is called with a 0 timeout. Any of these callbacks
+may do things you do not expect, e.g. destroy the main application window or
+some other resource; change other application state; display a dialog and
+run another main loop until the user clicks it away. In short, using this
+function may add a lot of complexity to your code through unexpected
+re-entrancy and unexpected changes to your application's state.</p>
+<p>For 0 timeouts use gst_bus_pop_filtered() instead of this function; for
+other short timeouts use gst_bus_timed_pop_filtered(); everything else is
+better handled by setting up an asynchronous bus watch and doing things
+from there.
+poll for (note special handling of extended message types below)
+indefinitely.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>events</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MessageType.html" title="Gst::MessageType (module)">Gst::MessageType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a mask of Gst::MessageType, representing the set of message types to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the poll timeout, as a Gst::ClockTime, or #GST_CLOCK_TIME_NONE to poll</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Message</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the message that was received,
+or nil if the poll timed out.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gst/bus.rb', line 40</span>
+
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pop-instance_method">
+  
+    #<strong>pop</strong>  &#x21d2; <tt>Gst::Message</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a message from the bus.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Message</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Message that is on the
+bus, or nil if the bus is empty.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pop_filtered-instance_method">
+  
+    #<strong>pop_filtered</strong>(types)  &#x21d2; <tt>Gst::Message</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a message matching <!-- raw HTML omitted -->type<!-- raw HTML omitted --> from the bus.  Will discard all messages on
+the bus that do not match <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and that have been posted before the first
+message that does match <!-- raw HTML omitted -->type<!-- raw HTML omitted -->.  If there is no message matching <!-- raw HTML omitted -->type<!-- raw HTML omitted --> on
+the bus, all messages will be discarded. It is not possible to use message
+enums beyond #GST_MESSAGE_EXTENDED in the <!-- raw HTML omitted -->events<!-- raw HTML omitted --> mask.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>types</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MessageType.html" title="Gst::MessageType (module)">Gst::MessageType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>message types to take into account</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Message</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the next Gst::Message matching
+<!-- raw HTML omitted -->type<!-- raw HTML omitted --> that is on the bus, or nil if the bus is empty or there
+is no message matching <!-- raw HTML omitted -->type<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="post-instance_method">
+  
+    #<strong>post</strong>(message)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Posts a message on the given bus. Ownership of the message
+is taken by the bus.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt>Gst::Message</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Message to post</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the message could be posted, false if the bus is flushing.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_signal_watch-instance_method">
+  
+    #<strong>remove_signal_watch</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes a signal watch previously added with gst_bus_add_signal_watch().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_watch-instance_method">
+  
+    #<strong>remove_watch</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes an installed bus watch from <!-- raw HTML omitted -->bus<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true on success or false if <!-- raw HTML omitted -->bus<!-- raw HTML omitted --> has no event source.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sync_handler-instance_method">
+  
+    #<strong>sync_handler</strong>(&amp;block)  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gst/bus.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sync_handler'>sync_handler</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='ivar'>@sync_handler</span> <span class='op'>=</span> <span class='id identifier rubyid_lambda'>lambda</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_bus'>bus</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span><span class='op'>|</span>
+    <span class='kw'>begin</span>
+      <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_bus'>bus</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
+    <span class='kw'>rescue</span> <span class='const'>Exception</span>
+      <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>An exception is raised in </span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span>
+                     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'>\#</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid___method__'>__method__</span><span class='embexpr_end'>}</span><span class='tstring_content'> callback: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_block'>block</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='gvar'>$!</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='gvar'>$!</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span><span class='lparen'>(</span><span class='gvar'>$@</span><span class='rparen'>)</span>
+      <span class='const'><span class='object_link'><a href="BusSyncReply.html" title="Gst::BusSyncReply (module)">BusSyncReply</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="BusSyncReply.html#DROP-constant" title="Gst::BusSyncReply::DROP (constant)">DROP</a></span></span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_set_sync_handler'>set_sync_handler</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='ivar'>@sync_handler</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sync_signal_handler-instance_method">
+  
+    #<strong>sync_signal_handler</strong>(message, data)  &#x21d2; <tt><span class='object_link'><a href="BusSyncReply.html" title="Gst::BusSyncReply (module)">Gst::BusSyncReply</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A helper Gst::BusSyncHandler that can be used to convert all synchronous
+messages into signals.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt>Gst::Message</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Message received</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BusSyncReply.html" title="Gst::BusSyncReply (module)">Gst::BusSyncReply</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>%GST_BUS_PASS</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="timed_pop-instance_method">
+  
+    #<strong>timed_pop</strong>(timeout)  &#x21d2; <tt>Gst::Message</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a message from the bus, waiting up to the specified timeout.</p>
+<p>If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is 0, this function behaves like gst_bus_pop(). If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is
+#GST_CLOCK_TIME_NONE, this function will block forever until a message was
+posted on the bus.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a timeout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Message</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Message that is on the
+bus after the specified timeout or nil if the bus is empty
+after the timeout expired.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="timed_pop_filtered-instance_method">
+  
+    #<strong>timed_pop_filtered</strong>(timeout, types)  &#x21d2; <tt>Gst::Message</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a message from the bus whose type matches the message type mask <!-- raw HTML omitted -->types<!-- raw HTML omitted -->,
+waiting up to the specified timeout (and discarding any messages that do not
+match the mask provided).</p>
+<p>If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is 0, this function behaves like gst_bus_pop_filtered(). If
+<!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is #GST_CLOCK_TIME_NONE, this function will block forever until a
+matching message was posted on the bus.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a timeout in nanoseconds, or %GST_CLOCK_TIME_NONE to wait forever</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>types</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MessageType.html" title="Gst::MessageType (module)">Gst::MessageType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>message types to take into account, %GST_MESSAGE_ANY for any type</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Message</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Message matching the
+filter in <!-- raw HTML omitted -->types<!-- raw HTML omitted -->, or nil if no matching message was found on
+the bus until the timeout expired.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

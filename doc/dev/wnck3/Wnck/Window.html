@@ -1,0 +1,5580 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Wnck::Window
+  
+    &mdash; Ruby/WNCK3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Wnck::Window";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (W)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Wnck.html" title="Wnck (module)">Wnck</a></span></span>
+     &raquo; 
+    <span class="title">Window</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Wnck::Window
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Wnck::Window</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get-class_method" title="get (class method)">.<strong>get</strong>(xwindow)  &#x21d2; Wnck::Window </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a preexisting Wnck::Window for the X window <!-- raw HTML omitted -->xwindow<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#actions-instance_method" title="#actions (instance method)">#<strong>actions</strong>  &#x21d2; Wnck::WindowActions </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the actions that can be done for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#activate-instance_method" title="#activate (instance method)">#<strong>activate</strong>(timestamp)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to make <!-- raw HTML omitted -->window<!-- raw HTML omitted --> the active window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#activate_transient-instance_method" title="#activate_transient (instance method)">#<strong>activate_transient</strong>(timestamp)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has transients, activates the most likely transient instead of the window itself.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#application-instance_method" title="#application (instance method)">#<strong>application</strong>  &#x21d2; Wnck::Application </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the Wnck::Application to which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#class_group-instance_method" title="#class_group (instance method)">#<strong>class_group</strong>  &#x21d2; Wnck::ClassGroup </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the Wnck::ClassGroup to which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#class_group_name-instance_method" title="#class_group_name (instance method)">#<strong>class_group_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the class group name from the <!-- raw HTML omitted -->WM_CLASS Property<!-- raw HTML omitted --> for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#class_instance_name-instance_method" title="#class_instance_name (instance method)">#<strong>class_instance_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the class instance name from the <!-- raw HTML omitted -->WM_CLASS Property<!-- raw HTML omitted --> for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close-instance_method" title="#close (instance method)">#<strong>close</strong>(timestamp)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Closes <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fullscreen=-instance_method" title="#fullscreen= (instance method)">#<strong>fullscreen=</strong>(fullscreen)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to set the fullscreen state of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> according to <!-- raw HTML omitted -->fullscreen<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_client_window_geometry-instance_method" title="#get_client_window_geometry (instance method)">#<strong>get_client_window_geometry</strong>(xp, yp, widthp, heightp)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the size and position of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, as last received in a ConfigureNotify event (i.e. this call does not round-trip to the server, just gets the last size we were notified of).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_geometry-instance_method" title="#get_geometry (instance method)">#<strong>get_geometry</strong>(xp, yp, widthp, heightp)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the size and position of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, including decorations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#group_leader-instance_method" title="#group_leader (instance method)">#<strong>group_leader</strong>  &#x21d2; Wnck::gulong </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the group leader of the group of windows to which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_icon_name-instance_method" title="#has_icon_name (instance method)">#<strong>has_icon_name</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks whether or not <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has an icon name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_name-instance_method" title="#has_name (instance method)">#<strong>has_name</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks whether or not <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has a name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#icon-instance_method" title="#icon (instance method)">#<strong>icon</strong>  &#x21d2; GdkPixbuf::Pixbuf </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the icon to be used for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#icon_is_fallback-instance_method" title="#icon_is_fallback (instance method)">#<strong>icon_is_fallback</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether a default fallback icon is used for <!-- raw HTML omitted -->window<!-- raw HTML omitted --> (because none was set on <!-- raw HTML omitted -->window<!-- raw HTML omitted -->).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#icon_name-instance_method" title="#icon_name (instance method)">#<strong>icon_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the icon name of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, as it should be displayed for an icon (minimized state).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_above-instance_method" title="#is_above (instance method)">#<strong>is_above</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is above other windows.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_active-instance_method" title="#is_active (instance method)">#<strong>is_active</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is the active window on its Wnck::Screen.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_below-instance_method" title="#is_below (instance method)">#<strong>is_below</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is below other windows.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_fullscreen-instance_method" title="#is_fullscreen (instance method)">#<strong>is_fullscreen</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is fullscreen.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_in_viewport-instance_method" title="#is_in_viewport (instance method)">#<strong>is_in_viewport</strong>(workspace)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> appears in the current viewport of <!-- raw HTML omitted -->workspace<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_maximized-instance_method" title="#is_maximized (instance method)">#<strong>is_maximized</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is maximized.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_maximized_horizontally-instance_method" title="#is_maximized_horizontally (instance method)">#<strong>is_maximized_horizontally</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is maximized horizontally.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_maximized_vertically-instance_method" title="#is_maximized_vertically (instance method)">#<strong>is_maximized_vertically</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is maximized vertically.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_minimized-instance_method" title="#is_minimized (instance method)">#<strong>is_minimized</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is minimized.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_most_recently_activated-instance_method" title="#is_most_recently_activated (instance method)">#<strong>is_most_recently_activated</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is the most recently activated window on its Wnck::Screen.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_on_workspace-instance_method" title="#is_on_workspace (instance method)">#<strong>is_on_workspace</strong>(workspace)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> appears on <!-- raw HTML omitted -->workspace<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_pinned-instance_method" title="#is_pinned (instance method)">#<strong>is_pinned</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is on all workspace.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_shaded-instance_method" title="#is_shaded (instance method)">#<strong>is_shaded</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is shaded.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_skip_pager-instance_method" title="#is_skip_pager (instance method)">#<strong>is_skip_pager</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is included on pagers.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_skip_tasklist-instance_method" title="#is_skip_tasklist (instance method)">#<strong>is_skip_tasklist</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is included on tasklists.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_sticky-instance_method" title="#is_sticky (instance method)">#<strong>is_sticky</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is sticky.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_visible_on_workspace-instance_method" title="#is_visible_on_workspace (instance method)">#<strong>is_visible_on_workspace</strong>(workspace)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Like wnck_window_is_on_workspace(), but also checks that the window is in a visible state (i.e. not minimized or shaded).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#keyboard_move-instance_method" title="#keyboard_move (instance method)">#<strong>keyboard_move</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to start moving <!-- raw HTML omitted -->window<!-- raw HTML omitted --> via the keyboard.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#keyboard_size-instance_method" title="#keyboard_size (instance method)">#<strong>keyboard_size</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to start resizing <!-- raw HTML omitted -->window<!-- raw HTML omitted --> via the keyboard.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#make_above-instance_method" title="#make_above (instance method)">#<strong>make_above</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> on top of most windows (<!-- raw HTML omitted -->window<!-- raw HTML omitted --> will not be on top of focused fullscreen windows, of other windows with this setting and of dock windows).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#make_below-instance_method" title="#make_below (instance method)">#<strong>make_below</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> below most windows.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#maximize-instance_method" title="#maximize (instance method)">#<strong>maximize</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to maximize <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#maximize_horizontally-instance_method" title="#maximize_horizontally (instance method)">#<strong>maximize_horizontally</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to maximize horizontally <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#maximize_vertically-instance_method" title="#maximize_vertically (instance method)">#<strong>maximize_vertically</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to maximize vertically <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mini_icon-instance_method" title="#mini_icon (instance method)">#<strong>mini_icon</strong>  &#x21d2; GdkPixbuf::Pixbuf </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the mini-icon to be used for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#minimize-instance_method" title="#minimize (instance method)">#<strong>minimize</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Minimizes <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#move_to_workspace-instance_method" title="#move_to_workspace (instance method)">#<strong>move_to_workspace</strong>(space)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to move <!-- raw HTML omitted -->window<!-- raw HTML omitted --> to <!-- raw HTML omitted -->space<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the name of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, as it should be displayed in a pager or tasklist.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#needs_attention-instance_method" title="#needs_attention (instance method)">#<strong>needs_attention</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> needs attention.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#or_transient_needs_attention-instance_method" title="#or_transient_needs_attention (instance method)">#<strong>or_transient_needs_attention</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> or one of its transients needs attention.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pid-instance_method" title="#pid (instance method)">#<strong>pid</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the process ID of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pin-instance_method" title="#pin (instance method)">#<strong>pin</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> on all workspaces.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#role-instance_method" title="#role (instance method)">#<strong>role</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the role for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#screen-instance_method" title="#screen (instance method)">#<strong>screen</strong>  &#x21d2; Wnck::Screen </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the Wnck::Screen <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is on.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#session_id-instance_method" title="#session_id (instance method)">#<strong>session_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the session ID for <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in Latin-1 encoding.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#session_id_utf8-instance_method" title="#session_id_utf8 (instance method)">#<strong>session_id_utf8</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the session ID for <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in UTF-8 encoding.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_geometry-instance_method" title="#set_geometry (instance method)">#<strong>set_geometry</strong>(gravity, geometry_mask, x, y, width, height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the size and position of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_icon_geometry-instance_method" title="#set_icon_geometry (instance method)">#<strong>set_icon_geometry</strong>(x, y, width, height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the icon geometry for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shade-instance_method" title="#shade (instance method)">#<strong>shade</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to shade <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#skip_pager=-instance_method" title="#skip_pager= (instance method)">#<strong>skip_pager=</strong>(skip)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to make <!-- raw HTML omitted -->window<!-- raw HTML omitted --> included or not included on pagers.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#skip_tasklist=-instance_method" title="#skip_tasklist= (instance method)">#<strong>skip_tasklist=</strong>(skip)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to make <!-- raw HTML omitted -->window<!-- raw HTML omitted --> included or not included on tasklists.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sort_order-instance_method" title="#sort_order (instance method)">#<strong>sort_order</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the sort order of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, used for ordering of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in Wnck::Selector and #WnckTasklist.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sort_order=-instance_method" title="#sort_order= (instance method)">#<strong>sort_order=</strong>(order)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the sort order of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#state-instance_method" title="#state (instance method)">#<strong>state</strong>  &#x21d2; Wnck::WindowState </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the state of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stick-instance_method" title="#stick (instance method)">#<strong>stick</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to keep the <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s position fixed on the screen, even when the workspace or viewport scrolls.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transient-instance_method" title="#transient (instance method)">#<strong>transient</strong>  &#x21d2; Wnck::Window </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the Wnck::Window for which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is transient.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transient_is_most_recently_activated-instance_method" title="#transient_is_most_recently_activated (instance method)">#<strong>transient_is_most_recently_activated</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether one of the transients of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is the most recently activated window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unmake_above-instance_method" title="#unmake_above (instance method)">#<strong>unmake_above</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to not put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> on top of most windows, and to put it again in the stack with other windows.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unmake_below-instance_method" title="#unmake_below (instance method)">#<strong>unmake_below</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to not put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> below most windows, and to put it again in the stack with other windows.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unmaximize-instance_method" title="#unmaximize (instance method)">#<strong>unmaximize</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to unmaximize <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unmaximize_horizontally-instance_method" title="#unmaximize_horizontally (instance method)">#<strong>unmaximize_horizontally</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to unmaximize horizontally <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unmaximize_vertically-instance_method" title="#unmaximize_vertically (instance method)">#<strong>unmaximize_vertically</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to unmaximize vertically <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unminimize-instance_method" title="#unminimize (instance method)">#<strong>unminimize</strong>(timestamp)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Unminimizes <!-- raw HTML omitted -->window<!-- raw HTML omitted --> by activating it or one of its transients.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unpin-instance_method" title="#unpin (instance method)">#<strong>unpin</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> only in the currently active workspace, if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> was previously pinned.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unshade-instance_method" title="#unshade (instance method)">#<strong>unshade</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to unshade <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unstick-instance_method" title="#unstick (instance method)">#<strong>unstick</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks the window manager to not have <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s position fixed on the screen when the workspace or viewport scrolls.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#window_type-instance_method" title="#window_type (instance method)">#<strong>window_type</strong>  &#x21d2; Wnck::WindowType </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the semantic type of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#window_type=-instance_method" title="#window_type= (instance method)">#<strong>window_type=</strong>(wintype)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the semantic type of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> to <!-- raw HTML omitted -->wintype<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#workspace-instance_method" title="#workspace (instance method)">#<strong>workspace</strong>  &#x21d2; Wnck::Workspace </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the current workspace <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is on.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xid-instance_method" title="#xid (instance method)">#<strong>xid</strong>  &#x21d2; Wnck::gulong </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the X window ID of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="get-class_method">
+  
+    .<strong>get</strong>(xwindow)  &#x21d2; <tt><span class='object_link'><a href="" title="Wnck::Window (class)">Wnck::Window</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a preexisting Wnck::Window for the X window <!-- raw HTML omitted -->xwindow<!-- raw HTML omitted -->. This will not
+create a Wnck::Window if none exists. The function is robust against bogus
+window IDs.
+Wnck::Window is owned by libwnck and must not be referenced or unreferenced.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>xwindow</span>
+      
+      
+        <span class='type'>(<tt>Wnck::gulong</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an X window ID.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Wnck::Window (class)">Wnck::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Wnck::Window for <!-- raw HTML omitted -->xwindow<!-- raw HTML omitted -->. The returned</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="actions-instance_method">
+  
+    #<strong>actions</strong>  &#x21d2; <tt><span class='object_link'><a href="WindowActions.html" title="Wnck::WindowActions (module)">Wnck::WindowActions</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the actions that can be done for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="WindowActions.html" title="Wnck::WindowActions (module)">Wnck::WindowActions</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>bitmask of actions that can be done for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="activate-instance_method">
+  
+    #<strong>activate</strong>(timestamp)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to make <!-- raw HTML omitted -->window<!-- raw HTML omitted --> the active window. The
+window manager may choose to raise <!-- raw HTML omitted -->window<!-- raw HTML omitted --> along with focusing it, and may
+decide to refuse the request (to not steal the focus if there is a more
+recent user activity, for example).</p>
+<p>This function existed before 2.10, but the <!-- raw HTML omitted -->timestamp<!-- raw HTML omitted --> argument was missing
+in earlier versions.
+this call to occur.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>timestamp</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the X server timestamp of the user interaction event that caused</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="activate_transient-instance_method">
+  
+    #<strong>activate_transient</strong>(timestamp)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has transients, activates the most likely transient
+instead of the window itself. Otherwise activates <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+<p>FIXME the ideal behavior of this function is probably to activate
+the most recently active window among <!-- raw HTML omitted -->window<!-- raw HTML omitted --> and its transients.
+This is probably best implemented on the window manager side.</p>
+<p>This function existed before 2.10, but the <!-- raw HTML omitted -->timestamp<!-- raw HTML omitted --> argument was missing
+in earlier versions.
+this call to occur.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>timestamp</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the X server timestamp of the user interaction event that caused</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="application-instance_method">
+  
+    #<strong>application</strong>  &#x21d2; <tt><span class='object_link'><a href="Application.html" title="Wnck::Application (class)">Wnck::Application</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the Wnck::Application to which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.
+The returned Wnck::Application is owned by libwnck and must not be referenced
+or unreferenced.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Application.html" title="Wnck::Application (class)">Wnck::Application</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Wnck::Application to which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="class_group-instance_method">
+  
+    #<strong>class_group</strong>  &#x21d2; <tt><span class='object_link'><a href="ClassGroup.html" title="Wnck::ClassGroup (class)">Wnck::ClassGroup</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the Wnck::ClassGroup to which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.
+The returned Wnck::ClassGroup is owned by libwnck and must not be referenced
+or unreferenced.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ClassGroup.html" title="Wnck::ClassGroup (class)">Wnck::ClassGroup</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Wnck::ClassGroup to which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="class_group_name-instance_method">
+  
+    #<strong>class_group_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the class group name from the <!-- raw HTML omitted -->WM_CLASS Property<!-- raw HTML omitted -->
+for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+<p>The class group name is also the identifier name of the Wnck::ClassGroup to
+which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.
+to no class group.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the class group name for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, or nil if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="class_instance_name-instance_method">
+  
+    #<strong>class_instance_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the class instance name from the <!-- raw HTML omitted -->WM_CLASS Property<!-- raw HTML omitted -->
+for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+<p>The class instance name allows to differentiate windows belonging to the
+same class group, so that they can use different resources.
+no class instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the class instance name for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, or nil if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close-instance_method">
+  
+    #<strong>close</strong>(timestamp)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Closes <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+<p>This function existed before 2.6, but the <!-- raw HTML omitted -->timestamp<!-- raw HTML omitted --> argument was missing
+in earlier versions.
+this call to occur.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>timestamp</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the X server timestamp of the user interaction event that caused</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fullscreen=-instance_method">
+  
+    #<strong>fullscreen=</strong>(fullscreen)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to set the fullscreen state of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> according to
+<!-- raw HTML omitted -->fullscreen<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>fullscreen</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether to make <!-- raw HTML omitted -->window<!-- raw HTML omitted --> fullscreen.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_client_window_geometry-instance_method">
+  
+    #<strong>get_client_window_geometry</strong>(xp, yp, widthp, heightp)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the size and position of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, as last received
+in a ConfigureNotify event (i.e. this call does not round-trip
+to the server, just gets the last size we were notified of).
+The X and Y coordinates are relative to the root window.</p>
+<p>The window manager usually adds a frame around windows. If
+you need to know the size of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> with the frame, use
+wnck_window_get_geometry().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>xp</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for X coordinate in pixels of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>yp</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for Y coordinate in pixels of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>widthp</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for width in pixels of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>heightp</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for height in pixels of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_geometry-instance_method">
+  
+    #<strong>get_geometry</strong>(xp, yp, widthp, heightp)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the size and position of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, including decorations. This
+function uses the information last received in a ConfigureNotify
+event and adjusts it according to the size of the frame that is
+added by the window manager (this call does not round-trip to the
+server, it just gets the last sizes that were notified). The
+X and Y coordinates are relative to the root window.</p>
+<p>If you need to know the actual size of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> ignoring the frame
+added by the window manager, use wnck_window_get_client_window_geometry().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>xp</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for X coordinate in pixels of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>yp</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for Y coordinate in pixels of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>widthp</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for width in pixels of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>heightp</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for height in pixels of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="group_leader-instance_method">
+  
+    #<strong>group_leader</strong>  &#x21d2; <tt>Wnck::gulong</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the group leader of the group of windows to which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.
+belongs, or the X window ID of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> does not belong to any
+group.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Wnck::gulong</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the group leader of the group of windows to which <!-- raw HTML omitted -->window<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_icon_name-instance_method">
+  
+    #<strong>has_icon_name</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks whether or not <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has an icon name.
+wnck_window_get_icon_name() will always return some value, even if
+<!-- raw HTML omitted -->window<!-- raw HTML omitted --> has no icon name set; wnck_window_has_icon_name() can
+be used to tell if that icon name is real or not.</p>
+<p>(Note that if wnck_window_has_icon_name() returns false, but
+wnck_window_has_name() returns true, then the name returned by
+wnck_window_get_icon_name() is <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s name. Only when both
+methods return false does wnck_window_get_icon_name() return a
+generic fallback name.)
+<!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s icon name, false if it returns a fallback name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if wnck_window_get_icon_name() returns</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_name-instance_method">
+  
+    #<strong>has_name</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks whether or not <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has a name. wnck_window_get_name()
+will always return some value, even if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has no name set;
+wnck_window_has_name() can be used to tell if that name is
+real or not.</p>
+<p>For icons titles, use wnck_window_has_icon_name() instead.
+name, false if it returns a fallback name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if wnck_window_get_name() returns <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="icon-instance_method">
+  
+    #<strong>icon</strong>  &#x21d2; <tt>GdkPixbuf::Pixbuf</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the icon to be used for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. If no icon was found, a fallback
+icon is used. wnck_window_get_icon_is_fallback() can be used to tell if the
+icon is the fallback icon.
+reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs to keep
+the icon around.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GdkPixbuf::Pixbuf</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the icon for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. The caller should</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="icon_is_fallback-instance_method">
+  
+    #<strong>icon_is_fallback</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether a default fallback icon is used for <!-- raw HTML omitted -->window<!-- raw HTML omitted --> (because none
+was set on <!-- raw HTML omitted -->window<!-- raw HTML omitted -->).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the icon for <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is a fallback, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="icon_name-instance_method">
+  
+    #<strong>icon_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the icon name of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, as it should be displayed for an icon
+(minimized state). Always returns some value, even if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has no icon
+name set; use wnck_window_has_icon_name() if you need to know whether the
+returned icon name is &quot;real&quot; or not.</p>
+<p>Contrast with wnck_window_get_name(), which returns <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s
+title, not its icon title.
+name is available.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the icon name of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, or a fallback icon name if no icon</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_above-instance_method">
+  
+    #<strong>is_above</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is above other windows. This state may change
+anytime a Wnck::Window::state-changed signal gets emitted.</p>
+<p>See wnck_window_make_above() for more details on this state.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is above other windows, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_active-instance_method">
+  
+    #<strong>is_active</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is the active window on its Wnck::Screen.
+false otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is the active window on its Wnck::Screen,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_below-instance_method">
+  
+    #<strong>is_below</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is below other windows. This state may change
+anytime a Wnck::Window::state-changed signal gets emitted.</p>
+<p>See wnck_window_make_below() for more details on this state.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is below other windows, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_fullscreen-instance_method">
+  
+    #<strong>is_fullscreen</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is fullscreen. Fullscreen state may change
+anytime a Wnck::Window::state-changed signal gets emitted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is fullscreen, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_in_viewport-instance_method">
+  
+    #<strong>is_in_viewport</strong>(workspace)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> appears in the current viewport of <!-- raw HTML omitted -->workspace<!-- raw HTML omitted -->.
+false otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>workspace</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Workspace.html" title="Wnck::Workspace (class)">Wnck::Workspace</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Wnck::Workspace.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> appears in current viewport of <!-- raw HTML omitted -->workspace<!-- raw HTML omitted -->,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_maximized-instance_method">
+  
+    #<strong>is_maximized</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is maximized. Maximization state may change
+anytime a Wnck::Window::state-changed signal gets emitted.</p>
+<p>As for GDK, &quot;maximized&quot; means both vertically and horizontally. If <!-- raw HTML omitted -->window<!-- raw HTML omitted -->
+is maximized in only one direction, then <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is not considered
+maximized.
+otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is maximized in both directions, false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_maximized_horizontally-instance_method">
+  
+    #<strong>is_maximized_horizontally</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is maximized horizontally. Horizontal maximization
+state may change anytime a Wnck::Window::state-changed signal gets emitted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is maximized horizontally, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_maximized_vertically-instance_method">
+  
+    #<strong>is_maximized_vertically</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is maximized vertically. vertiVal maximization
+state may change anytime a Wnck::Window::state-changed signal gets emitted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is maximized vertically, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_minimized-instance_method">
+  
+    #<strong>is_minimized</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is minimized. Minimization state may change anytime
+a Wnck::Window::state-changed signal gets emitted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is minimized, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_most_recently_activated-instance_method">
+  
+    #<strong>is_most_recently_activated</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is the most recently activated window on its
+Wnck::Screen.</p>
+<p>The most recently activated window is identical to the active
+window for click and sloppy focus methods (since a window is always
+active in those cases) but differs slightly for mouse focus since
+there often is no active window.
+Wnck::Screen, false otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> was the most recently activated window on its</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_on_workspace-instance_method">
+  
+    #<strong>is_on_workspace</strong>(workspace)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> appears on <!-- raw HTML omitted -->workspace<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>workspace</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Workspace.html" title="Wnck::Workspace (class)">Wnck::Workspace</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Wnck::Workspace.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> appears on <!-- raw HTML omitted -->workspace<!-- raw HTML omitted -->, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_pinned-instance_method">
+  
+    #<strong>is_pinned</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is on all workspace. Pinned state may change
+anytime a Wnck::Window::workspace-changed signal gets emitted, but not when
+a Wnck::Window::state-changed gets emitted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is on all workspaces, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_shaded-instance_method">
+  
+    #<strong>is_shaded</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is shaded. Shade state may change anytime
+a Wnck::Window::state-changed signal gets emitted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is shaded, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_skip_pager-instance_method">
+  
+    #<strong>is_skip_pager</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is included on pagers. This state may change
+anytime a Wnck::Window::state-changed signal gets emitted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is included on pagers, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_skip_tasklist-instance_method">
+  
+    #<strong>is_skip_tasklist</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is included on tasklists. This state may change
+anytime a Wnck::Window::state-changed signal gets emitted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is included on tasklists, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_sticky-instance_method">
+  
+    #<strong>is_sticky</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is sticky. Sticky state may change
+anytime a Wnck::Window::state-changed signal gets emitted.</p>
+<p>Sticky here means &quot;stuck to the glass&quot;, i.e. does not scroll with the
+viewport. In GDK/GTK+ (e.g. gdk_window_stick()/gtk_window_stick()), sticky
+means &quot;stuck to the glass&quot; and <!-- raw HTML omitted -->also<!-- raw HTML omitted --> that the window is
+on all workspaces. But here it only means the viewport aspect of it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is &quot;stuck to the glass&quot;, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_visible_on_workspace-instance_method">
+  
+    #<strong>is_visible_on_workspace</strong>(workspace)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Like wnck_window_is_on_workspace(), but also checks that
+the window is in a visible state (i.e. not minimized or shaded).
+otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>workspace</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Workspace.html" title="Wnck::Workspace (class)">Wnck::Workspace</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Wnck::Workspace.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> appears on <!-- raw HTML omitted -->workspace<!-- raw HTML omitted --> in normal state, false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="keyboard_move-instance_method">
+  
+    #<strong>keyboard_move</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to start moving <!-- raw HTML omitted -->window<!-- raw HTML omitted --> via the keyboard.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="keyboard_size-instance_method">
+  
+    #<strong>keyboard_size</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to start resizing <!-- raw HTML omitted -->window<!-- raw HTML omitted --> via the keyboard.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="make_above-instance_method">
+  
+    #<strong>make_above</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> on top of most windows (<!-- raw HTML omitted -->window<!-- raw HTML omitted --> will
+not be on top of focused fullscreen windows, of other windows with this
+setting and of dock windows).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="make_below-instance_method">
+  
+    #<strong>make_below</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> below most windows.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="maximize-instance_method">
+  
+    #<strong>maximize</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to maximize <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="maximize_horizontally-instance_method">
+  
+    #<strong>maximize_horizontally</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to maximize horizontally <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="maximize_vertically-instance_method">
+  
+    #<strong>maximize_vertically</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to maximize vertically <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mini_icon-instance_method">
+  
+    #<strong>mini_icon</strong>  &#x21d2; <tt>GdkPixbuf::Pixbuf</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the mini-icon to be used for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. If no mini-icon was found, a
+fallback mini-icon is used. wnck_window_get_icon_is_fallback() can be used
+to tell if the mini-icon is the fallback mini-icon.
+reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs to keep
+the icon around.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GdkPixbuf::Pixbuf</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the mini-icon for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. The caller should</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="minimize-instance_method">
+  
+    #<strong>minimize</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Minimizes <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="move_to_workspace-instance_method">
+  
+    #<strong>move_to_workspace</strong>(space)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to move <!-- raw HTML omitted -->window<!-- raw HTML omitted --> to <!-- raw HTML omitted -->space<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->window<!-- raw HTML omitted --> was pinned, it
+will also result in <!-- raw HTML omitted -->window<!-- raw HTML omitted --> being visible only on <!-- raw HTML omitted -->space<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>space</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Workspace.html" title="Wnck::Workspace (class)">Wnck::Workspace</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Wnck::Workspace.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the name of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, as it should be displayed in a pager
+or tasklist. Always returns some value, even if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has no name
+set; use wnck_window_has_name() if you need to know whether the returned
+name is &quot;real&quot; or not.</p>
+<p>For icons titles, use wnck_window_get_icon_name() instead.
+available.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, or a fallback name if no name is</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="needs_attention-instance_method">
+  
+    #<strong>needs_attention</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> needs attention. This state may change anytime
+a Wnck::Window::state-changed signal gets emitted.</p>
+<p>This state depends on flags such as the demands_attention and is_urgent
+hints.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> needs attention, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="or_transient_needs_attention-instance_method">
+  
+    #<strong>or_transient_needs_attention</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> or one of its transients needs attention. This state
+may change anytime a Wnck::Window::state-changed signal gets emitted.
+false otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> or one of its transients needs attention,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pid-instance_method">
+  
+    #<strong>pid</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the process ID of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the process ID of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, or 0 if none is available.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pin-instance_method">
+  
+    #<strong>pin</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> on all workspaces.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="role-instance_method">
+  
+    #<strong>role</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the role for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.
+The role uniquely identifies a window among all windows that have the same
+client leader window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>role for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, or nil if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has no role.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="screen-instance_method">
+  
+    #<strong>screen</strong>  &#x21d2; <tt><span class='object_link'><a href="Screen.html" title="Wnck::Screen (class)">Wnck::Screen</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the Wnck::Screen <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is on.
+Wnck::Screen is owned by libwnck and must not be referenced or unreferenced.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Screen.html" title="Wnck::Screen (class)">Wnck::Screen</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Wnck::Screen <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is on. The returned</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="session_id-instance_method">
+  
+    #<strong>session_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the session ID for <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in Latin-1 encoding.
+NOTE: this is invalid UTF-8. You can't display this
+string in a GTK+ widget without converting to UTF-8.
+See wnck_window_get_session_id_utf8().
+no session ID.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the session ID for <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in Latin-1, or nil if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="session_id_utf8-instance_method">
+  
+    #<strong>session_id_utf8</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the session ID for <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in UTF-8 encoding.
+The session ID should be in Latin-1 encoding, so the conversion should work,
+but a broken client could set a session ID that might not be convertable to
+UTF-8.
+no session ID.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the session ID for <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in UTF-8, or nil if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_geometry-instance_method">
+  
+    #<strong>set_geometry</strong>(gravity, geometry_mask, x, y, width, height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the size and position of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. The X and Y coordinates should be
+relative to the root window.</p>
+<p>Note that the new size and position apply to <!-- raw HTML omitted -->window<!-- raw HTML omitted --> with its frame added
+by the window manager. Therefore, using wnck_window_set_geometry() with
+the values returned by wnck_window_get_geometry() should be a no-op, while
+using wnck_window_set_geometry() with the values returned by
+wnck_window_get_client_window_geometry() should reduce the size of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->
+and move it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gravity</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="WindowGravity.html" title="Wnck::WindowGravity (module)">Wnck::WindowGravity</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the gravity point to use as a reference for the new position.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>geometry_mask</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="WindowMoveResizeMask.html" title="Wnck::WindowMoveResizeMask (module)">Wnck::WindowMoveResizeMask</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a bitmask containing flags for what should be set.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>new X coordinate in pixels of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>new Y coordinate in pixels of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>new width in pixels of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>new height in pixels of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_icon_geometry-instance_method">
+  
+    #<strong>set_icon_geometry</strong>(x, y, width, height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the icon geometry for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. A typical use case for this is the
+destination of the minimization animation of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>X coordinate in pixels.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Y coordinate in pixels.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>width in pixels.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>height in pixels.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="shade-instance_method">
+  
+    #<strong>shade</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to shade <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="skip_pager=-instance_method">
+  
+    #<strong>skip_pager=</strong>(skip)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to make <!-- raw HTML omitted -->window<!-- raw HTML omitted --> included or not included on pagers.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>skip</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> should be included on pagers.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="skip_tasklist=-instance_method">
+  
+    #<strong>skip_tasklist=</strong>(skip)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to make <!-- raw HTML omitted -->window<!-- raw HTML omitted --> included or not included on
+tasklists.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>skip</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> should be included on tasklists.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sort_order-instance_method">
+  
+    #<strong>sort_order</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the sort order of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, used for ordering of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in
+Wnck::Selector and #WnckTasklist. The sort order is an internal state in
+libwnck. The initial value is defined when the window is created.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the sort order of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, or G_MAXINT if none is available.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sort_order=-instance_method">
+  
+    #<strong>sort_order=</strong>(order)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the sort order of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. The sort order is used for ordering of
+<!-- raw HTML omitted -->window<!-- raw HTML omitted --> in Wnck::Selector and #WnckTasklist.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>order</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>new sort order for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="state-instance_method">
+  
+    #<strong>state</strong>  &#x21d2; <tt><span class='object_link'><a href="WindowState.html" title="Wnck::WindowState (module)">Wnck::WindowState</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the state of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="WindowState.html" title="Wnck::WindowState (module)">Wnck::WindowState</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>bitmask of active states for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stick-instance_method">
+  
+    #<strong>stick</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to keep the <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s position fixed on the
+screen, even when the workspace or viewport scrolls.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="transient-instance_method">
+  
+    #<strong>transient</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Wnck::Window (class)">Wnck::Window</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the Wnck::Window for which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is transient.
+transient, or nil if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is not transient for any Wnck::Window.
+The returned Wnck::Window is owned by libwnck and must not be referenced or
+unreferenced.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Wnck::Window (class)">Wnck::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Wnck::Window for which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="transient_is_most_recently_activated-instance_method">
+  
+    #<strong>transient_is_most_recently_activated</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether one of the transients of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is the most
+recently activated window. See
+wnck_window_is_most_recently_activated() for a more complete
+description of what is meant by most recently activated.  This
+function is needed because clicking on a Wnck::Tasklist once will
+activate a transient instead of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> itself
+(wnck_window_activate_transient), and clicking again should
+minimize <!-- raw HTML omitted -->window<!-- raw HTML omitted --> and its transients.  (Not doing this can be
+especially annoying in the case of modal dialogs that don't appear
+in the Wnck::Tasklist).
+activated window, false otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if one of the transients of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is the most recently</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unmake_above-instance_method">
+  
+    #<strong>unmake_above</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to not put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> on top of most windows, and to
+put it again in the stack with other windows.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unmake_below-instance_method">
+  
+    #<strong>unmake_below</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to not put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> below most windows, and to
+put it again in the stack with other windows.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unmaximize-instance_method">
+  
+    #<strong>unmaximize</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to unmaximize <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unmaximize_horizontally-instance_method">
+  
+    #<strong>unmaximize_horizontally</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to unmaximize horizontally <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unmaximize_vertically-instance_method">
+  
+    #<strong>unmaximize_vertically</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to unmaximize vertically <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unminimize-instance_method">
+  
+    #<strong>unminimize</strong>(timestamp)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Unminimizes <!-- raw HTML omitted -->window<!-- raw HTML omitted --> by activating it or one of its transients. See
+wnck_window_activate_transient() for details on how the activation is done.
+this call to occur.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>timestamp</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the X server timestamp of the user interaction event that caused</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unpin-instance_method">
+  
+    #<strong>unpin</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> only in the currently active
+workspace, if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> was previously pinned. If <!-- raw HTML omitted -->window<!-- raw HTML omitted --> was not pinned,
+does not change <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s workspace. If the active workspace
+is not known for some reason (it should not happen much), sets
+<!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s workspace to the first workspace.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unshade-instance_method">
+  
+    #<strong>unshade</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to unshade <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unstick-instance_method">
+  
+    #<strong>unstick</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks the window manager to not have <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s position fixed on the
+screen when the workspace or viewport scrolls.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="window_type-instance_method">
+  
+    #<strong>window_type</strong>  &#x21d2; <tt><span class='object_link'><a href="WindowType.html" title="Wnck::WindowType (module)">Wnck::WindowType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the semantic type of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="WindowType.html" title="Wnck::WindowType (module)">Wnck::WindowType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the semantic type of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="window_type=-instance_method">
+  
+    #<strong>window_type=</strong>(wintype)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the semantic type of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> to <!-- raw HTML omitted -->wintype<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>wintype</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="WindowType.html" title="Wnck::WindowType (module)">Wnck::WindowType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a semantic type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="workspace-instance_method">
+  
+    #<strong>workspace</strong>  &#x21d2; <tt><span class='object_link'><a href="Workspace.html" title="Wnck::Workspace (class)">Wnck::Workspace</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the current workspace <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is on. If the window is pinned (on all
+workspaces), or not on any workspaces, nil may be returned.
+nil. The returned Wnck::Workspace is owned by libwnck and must not be
+referenced or unreferenced.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Workspace.html" title="Wnck::Workspace (class)">Wnck::Workspace</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the single current workspace <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is on, or</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="xid-instance_method">
+  
+    #<strong>xid</strong>  &#x21d2; <tt>Wnck::gulong</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the X window ID of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Wnck::gulong</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the X window ID of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

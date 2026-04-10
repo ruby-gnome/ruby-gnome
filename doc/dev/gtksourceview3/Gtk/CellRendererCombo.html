@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::CellRendererCombo
+  
+    &mdash; Ruby/GtkSourceView3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::CellRendererCombo";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">CellRendererCombo</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::CellRendererCombo
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="CellRendererText.html" title="Gtk::CellRendererText (class)">CellRendererText</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">CellRenderer</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="CellRendererText.html" title="Gtk::CellRendererText (class)">CellRendererText</a></span></li>
+          
+            <li class="next">Gtk::CellRendererCombo</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Renders a combobox in a cell</p>
+<p><code>GtkCellRendererCombo</code> renders text in a cell like <code>GtkCellRendererText</code> from
+which it is derived. But while <code>GtkCellRendererText</code> offers a simple entry to
+edit the text, <code>GtkCellRendererCombo</code> offers a <code>GtkComboBox</code>
+widget to edit the text. The values to display in the combo box are taken from
+the tree model specified in the <code>GtkCellRendererCombo</code>:model property.</p>
+<p>The combo cell renderer takes care of adding a text cell renderer to the combo
+box and sets it to display the column specified by its
+<code>GtkCellRendererCombo</code>:text-column property. Further properties of the combo box
+can be set in a handler for the <code>GtkCellRenderer::editing-started</code> signal.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_entry=-instance_method" title="#has_entry= (instance method)">#<strong>has_entry=</strong>(has_entry)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If true, the cell renderer will include an entry and allow to enter values other than the ones in the popup list.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_entry%3F-instance_method" title="#has_entry? (instance method)">#<strong>has_entry?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If true, the cell renderer will include an entry and allow to enter values other than the ones in the popup list.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Gtk::CellRenderer </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new <code>GtkCellRendererCombo</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#model-instance_method" title="#model (instance method)">#<strong>model</strong>  &#x21d2; Gtk::TreeModel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Holds a tree model containing the possible values for the combo box.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#model=-instance_method" title="#model= (instance method)">#<strong>model=</strong>(model)  &#x21d2; Gtk::TreeModel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Holds a tree model containing the possible values for the combo box.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text_column-instance_method" title="#text_column (instance method)">#<strong>text_column</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Specifies the model column which holds the possible values for the combo box.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text_column=-instance_method" title="#text_column= (instance method)">#<strong>text_column=</strong>(text_column)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Specifies the model column which holds the possible values for the combo box.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="CellRendererText.html" title="Gtk::CellRendererText (class)">CellRendererText</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="CellRendererText.html#align_set=-instance_method" title="Gtk::CellRendererText#align_set= (method)">#align_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#align_set%3F-instance_method" title="Gtk::CellRendererText#align_set? (method)">#align_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#alignment-instance_method" title="Gtk::CellRendererText#alignment (method)">#alignment</a></span>, <span class='object_link'><a href="CellRendererText.html#alignment=-instance_method" title="Gtk::CellRendererText#alignment= (method)">#alignment=</a></span>, <span class='object_link'><a href="CellRendererText.html#attributes-instance_method" title="Gtk::CellRendererText#attributes (method)">#attributes</a></span>, <span class='object_link'><a href="CellRendererText.html#attributes=-instance_method" title="Gtk::CellRendererText#attributes= (method)">#attributes=</a></span>, <span class='object_link'><a href="CellRendererText.html#background=-instance_method" title="Gtk::CellRendererText#background= (method)">#background=</a></span>, <span class='object_link'><a href="CellRendererText.html#background_rgba-instance_method" title="Gtk::CellRendererText#background_rgba (method)">#background_rgba</a></span>, <span class='object_link'><a href="CellRendererText.html#background_rgba=-instance_method" title="Gtk::CellRendererText#background_rgba= (method)">#background_rgba=</a></span>, <span class='object_link'><a href="CellRendererText.html#background_set=-instance_method" title="Gtk::CellRendererText#background_set= (method)">#background_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#background_set%3F-instance_method" title="Gtk::CellRendererText#background_set? (method)">#background_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#editable=-instance_method" title="Gtk::CellRendererText#editable= (method)">#editable=</a></span>, <span class='object_link'><a href="CellRendererText.html#editable%3F-instance_method" title="Gtk::CellRendererText#editable? (method)">#editable?</a></span>, <span class='object_link'><a href="CellRendererText.html#editable_set=-instance_method" title="Gtk::CellRendererText#editable_set= (method)">#editable_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#editable_set%3F-instance_method" title="Gtk::CellRendererText#editable_set? (method)">#editable_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#ellipsize-instance_method" title="Gtk::CellRendererText#ellipsize (method)">#ellipsize</a></span>, <span class='object_link'><a href="CellRendererText.html#ellipsize=-instance_method" title="Gtk::CellRendererText#ellipsize= (method)">#ellipsize=</a></span>, <span class='object_link'><a href="CellRendererText.html#ellipsize_set=-instance_method" title="Gtk::CellRendererText#ellipsize_set= (method)">#ellipsize_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#ellipsize_set%3F-instance_method" title="Gtk::CellRendererText#ellipsize_set? (method)">#ellipsize_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#family-instance_method" title="Gtk::CellRendererText#family (method)">#family</a></span>, <span class='object_link'><a href="CellRendererText.html#family=-instance_method" title="Gtk::CellRendererText#family= (method)">#family=</a></span>, <span class='object_link'><a href="CellRendererText.html#family_set=-instance_method" title="Gtk::CellRendererText#family_set= (method)">#family_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#family_set%3F-instance_method" title="Gtk::CellRendererText#family_set? (method)">#family_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#fixed_height_from_font=-instance_method" title="Gtk::CellRendererText#fixed_height_from_font= (method)">#fixed_height_from_font=</a></span>, <span class='object_link'><a href="CellRendererText.html#font-instance_method" title="Gtk::CellRendererText#font (method)">#font</a></span>, <span class='object_link'><a href="CellRendererText.html#font=-instance_method" title="Gtk::CellRendererText#font= (method)">#font=</a></span>, <span class='object_link'><a href="CellRendererText.html#font_desc-instance_method" title="Gtk::CellRendererText#font_desc (method)">#font_desc</a></span>, <span class='object_link'><a href="CellRendererText.html#font_desc=-instance_method" title="Gtk::CellRendererText#font_desc= (method)">#font_desc=</a></span>, <span class='object_link'><a href="CellRendererText.html#foreground=-instance_method" title="Gtk::CellRendererText#foreground= (method)">#foreground=</a></span>, <span class='object_link'><a href="CellRendererText.html#foreground_rgba-instance_method" title="Gtk::CellRendererText#foreground_rgba (method)">#foreground_rgba</a></span>, <span class='object_link'><a href="CellRendererText.html#foreground_rgba=-instance_method" title="Gtk::CellRendererText#foreground_rgba= (method)">#foreground_rgba=</a></span>, <span class='object_link'><a href="CellRendererText.html#foreground_set=-instance_method" title="Gtk::CellRendererText#foreground_set= (method)">#foreground_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#foreground_set%3F-instance_method" title="Gtk::CellRendererText#foreground_set? (method)">#foreground_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#language-instance_method" title="Gtk::CellRendererText#language (method)">#language</a></span>, <span class='object_link'><a href="CellRendererText.html#language=-instance_method" title="Gtk::CellRendererText#language= (method)">#language=</a></span>, <span class='object_link'><a href="CellRendererText.html#language_set=-instance_method" title="Gtk::CellRendererText#language_set= (method)">#language_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#language_set%3F-instance_method" title="Gtk::CellRendererText#language_set? (method)">#language_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#markup=-instance_method" title="Gtk::CellRendererText#markup= (method)">#markup=</a></span>, <span class='object_link'><a href="CellRendererText.html#max_width_chars-instance_method" title="Gtk::CellRendererText#max_width_chars (method)">#max_width_chars</a></span>, <span class='object_link'><a href="CellRendererText.html#max_width_chars=-instance_method" title="Gtk::CellRendererText#max_width_chars= (method)">#max_width_chars=</a></span>, <span class='object_link'><a href="CellRendererText.html#placeholder_text-instance_method" title="Gtk::CellRendererText#placeholder_text (method)">#placeholder_text</a></span>, <span class='object_link'><a href="CellRendererText.html#placeholder_text=-instance_method" title="Gtk::CellRendererText#placeholder_text= (method)">#placeholder_text=</a></span>, <span class='object_link'><a href="CellRendererText.html#rise-instance_method" title="Gtk::CellRendererText#rise (method)">#rise</a></span>, <span class='object_link'><a href="CellRendererText.html#rise=-instance_method" title="Gtk::CellRendererText#rise= (method)">#rise=</a></span>, <span class='object_link'><a href="CellRendererText.html#rise_set=-instance_method" title="Gtk::CellRendererText#rise_set= (method)">#rise_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#rise_set%3F-instance_method" title="Gtk::CellRendererText#rise_set? (method)">#rise_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#scale-instance_method" title="Gtk::CellRendererText#scale (method)">#scale</a></span>, <span class='object_link'><a href="CellRendererText.html#scale=-instance_method" title="Gtk::CellRendererText#scale= (method)">#scale=</a></span>, <span class='object_link'><a href="CellRendererText.html#scale_set=-instance_method" title="Gtk::CellRendererText#scale_set= (method)">#scale_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#scale_set%3F-instance_method" title="Gtk::CellRendererText#scale_set? (method)">#scale_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#single_paragraph_mode=-instance_method" title="Gtk::CellRendererText#single_paragraph_mode= (method)">#single_paragraph_mode=</a></span>, <span class='object_link'><a href="CellRendererText.html#single_paragraph_mode%3F-instance_method" title="Gtk::CellRendererText#single_paragraph_mode? (method)">#single_paragraph_mode?</a></span>, <span class='object_link'><a href="CellRendererText.html#size-instance_method" title="Gtk::CellRendererText#size (method)">#size</a></span>, <span class='object_link'><a href="CellRendererText.html#size=-instance_method" title="Gtk::CellRendererText#size= (method)">#size=</a></span>, <span class='object_link'><a href="CellRendererText.html#size_points-instance_method" title="Gtk::CellRendererText#size_points (method)">#size_points</a></span>, <span class='object_link'><a href="CellRendererText.html#size_points=-instance_method" title="Gtk::CellRendererText#size_points= (method)">#size_points=</a></span>, <span class='object_link'><a href="CellRendererText.html#size_set=-instance_method" title="Gtk::CellRendererText#size_set= (method)">#size_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#size_set%3F-instance_method" title="Gtk::CellRendererText#size_set? (method)">#size_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#stretch-instance_method" title="Gtk::CellRendererText#stretch (method)">#stretch</a></span>, <span class='object_link'><a href="CellRendererText.html#stretch=-instance_method" title="Gtk::CellRendererText#stretch= (method)">#stretch=</a></span>, <span class='object_link'><a href="CellRendererText.html#stretch_set=-instance_method" title="Gtk::CellRendererText#stretch_set= (method)">#stretch_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#stretch_set%3F-instance_method" title="Gtk::CellRendererText#stretch_set? (method)">#stretch_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#strikethrough=-instance_method" title="Gtk::CellRendererText#strikethrough= (method)">#strikethrough=</a></span>, <span class='object_link'><a href="CellRendererText.html#strikethrough%3F-instance_method" title="Gtk::CellRendererText#strikethrough? (method)">#strikethrough?</a></span>, <span class='object_link'><a href="CellRendererText.html#strikethrough_set=-instance_method" title="Gtk::CellRendererText#strikethrough_set= (method)">#strikethrough_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#strikethrough_set%3F-instance_method" title="Gtk::CellRendererText#strikethrough_set? (method)">#strikethrough_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#style-instance_method" title="Gtk::CellRendererText#style (method)">#style</a></span>, <span class='object_link'><a href="CellRendererText.html#style=-instance_method" title="Gtk::CellRendererText#style= (method)">#style=</a></span>, <span class='object_link'><a href="CellRendererText.html#style_set=-instance_method" title="Gtk::CellRendererText#style_set= (method)">#style_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#style_set%3F-instance_method" title="Gtk::CellRendererText#style_set? (method)">#style_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#text-instance_method" title="Gtk::CellRendererText#text (method)">#text</a></span>, <span class='object_link'><a href="CellRendererText.html#text=-instance_method" title="Gtk::CellRendererText#text= (method)">#text=</a></span>, <span class='object_link'><a href="CellRendererText.html#underline-instance_method" title="Gtk::CellRendererText#underline (method)">#underline</a></span>, <span class='object_link'><a href="CellRendererText.html#underline=-instance_method" title="Gtk::CellRendererText#underline= (method)">#underline=</a></span>, <span class='object_link'><a href="CellRendererText.html#underline_set=-instance_method" title="Gtk::CellRendererText#underline_set= (method)">#underline_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#underline_set%3F-instance_method" title="Gtk::CellRendererText#underline_set? (method)">#underline_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#variant-instance_method" title="Gtk::CellRendererText#variant (method)">#variant</a></span>, <span class='object_link'><a href="CellRendererText.html#variant=-instance_method" title="Gtk::CellRendererText#variant= (method)">#variant=</a></span>, <span class='object_link'><a href="CellRendererText.html#variant_set=-instance_method" title="Gtk::CellRendererText#variant_set= (method)">#variant_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#variant_set%3F-instance_method" title="Gtk::CellRendererText#variant_set? (method)">#variant_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#weight-instance_method" title="Gtk::CellRendererText#weight (method)">#weight</a></span>, <span class='object_link'><a href="CellRendererText.html#weight=-instance_method" title="Gtk::CellRendererText#weight= (method)">#weight=</a></span>, <span class='object_link'><a href="CellRendererText.html#weight_set=-instance_method" title="Gtk::CellRendererText#weight_set= (method)">#weight_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#weight_set%3F-instance_method" title="Gtk::CellRendererText#weight_set? (method)">#weight_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#width_chars-instance_method" title="Gtk::CellRendererText#width_chars (method)">#width_chars</a></span>, <span class='object_link'><a href="CellRendererText.html#width_chars=-instance_method" title="Gtk::CellRendererText#width_chars= (method)">#width_chars=</a></span>, <span class='object_link'><a href="CellRendererText.html#wrap_mode-instance_method" title="Gtk::CellRendererText#wrap_mode (method)">#wrap_mode</a></span>, <span class='object_link'><a href="CellRendererText.html#wrap_mode=-instance_method" title="Gtk::CellRendererText#wrap_mode= (method)">#wrap_mode=</a></span>, <span class='object_link'><a href="CellRendererText.html#wrap_width-instance_method" title="Gtk::CellRendererText#wrap_width (method)">#wrap_width</a></span>, <span class='object_link'><a href="CellRendererText.html#wrap_width=-instance_method" title="Gtk::CellRendererText#wrap_width= (method)">#wrap_width=</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">CellRenderer</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="CellRenderer.html#activate-instance_method" title="Gtk::CellRenderer#activate (method)">#activate</a></span>, <span class='object_link'><a href="CellRenderer.html#cell_background=-instance_method" title="Gtk::CellRenderer#cell_background= (method)">#cell_background=</a></span>, <span class='object_link'><a href="CellRenderer.html#cell_background_rgba-instance_method" title="Gtk::CellRenderer#cell_background_rgba (method)">#cell_background_rgba</a></span>, <span class='object_link'><a href="CellRenderer.html#cell_background_rgba=-instance_method" title="Gtk::CellRenderer#cell_background_rgba= (method)">#cell_background_rgba=</a></span>, <span class='object_link'><a href="CellRenderer.html#cell_background_set=-instance_method" title="Gtk::CellRenderer#cell_background_set= (method)">#cell_background_set=</a></span>, <span class='object_link'><a href="CellRenderer.html#cell_background_set%3F-instance_method" title="Gtk::CellRenderer#cell_background_set? (method)">#cell_background_set?</a></span>, <span class='object_link'><a href="CellRenderer.html#editing=-instance_method" title="Gtk::CellRenderer#editing= (method)">#editing=</a></span>, <span class='object_link'><a href="CellRenderer.html#editing%3F-instance_method" title="Gtk::CellRenderer#editing? (method)">#editing?</a></span>, <span class='object_link'><a href="CellRenderer.html#get_aligned_area-instance_method" title="Gtk::CellRenderer#get_aligned_area (method)">#get_aligned_area</a></span>, <span class='object_link'><a href="CellRenderer.html#get_alignment-instance_method" title="Gtk::CellRenderer#get_alignment (method)">#get_alignment</a></span>, <span class='object_link'><a href="CellRenderer.html#get_fixed_size-instance_method" title="Gtk::CellRenderer#get_fixed_size (method)">#get_fixed_size</a></span>, <span class='object_link'><a href="CellRenderer.html#get_padding-instance_method" title="Gtk::CellRenderer#get_padding (method)">#get_padding</a></span>, <span class='object_link'><a href="CellRenderer.html#get_preferred_height-instance_method" title="Gtk::CellRenderer#get_preferred_height (method)">#get_preferred_height</a></span>, <span class='object_link'><a href="CellRenderer.html#get_preferred_height_for_width-instance_method" title="Gtk::CellRenderer#get_preferred_height_for_width (method)">#get_preferred_height_for_width</a></span>, <span class='object_link'><a href="CellRenderer.html#get_preferred_size-instance_method" title="Gtk::CellRenderer#get_preferred_size (method)">#get_preferred_size</a></span>, <span class='object_link'><a href="CellRenderer.html#get_preferred_width-instance_method" title="Gtk::CellRenderer#get_preferred_width (method)">#get_preferred_width</a></span>, <span class='object_link'><a href="CellRenderer.html#get_preferred_width_for_height-instance_method" title="Gtk::CellRenderer#get_preferred_width_for_height (method)">#get_preferred_width_for_height</a></span>, <span class='object_link'><a href="CellRenderer.html#get_state-instance_method" title="Gtk::CellRenderer#get_state (method)">#get_state</a></span>, <span class='object_link'><a href="CellRenderer.html#height-instance_method" title="Gtk::CellRenderer#height (method)">#height</a></span>, <span class='object_link'><a href="CellRenderer.html#height=-instance_method" title="Gtk::CellRenderer#height= (method)">#height=</a></span>, <span class='object_link'><a href="CellRenderer.html#is_activatable-instance_method" title="Gtk::CellRenderer#is_activatable (method)">#is_activatable</a></span>, <span class='object_link'><a href="CellRenderer.html#is_expanded-instance_method" title="Gtk::CellRenderer#is_expanded (method)">#is_expanded</a></span>, <span class='object_link'><a href="CellRenderer.html#is_expanded=-instance_method" title="Gtk::CellRenderer#is_expanded= (method)">#is_expanded=</a></span>, <span class='object_link'><a href="CellRenderer.html#is_expanded%3F-instance_method" title="Gtk::CellRenderer#is_expanded? (method)">#is_expanded?</a></span>, <span class='object_link'><a href="CellRenderer.html#is_expander-instance_method" title="Gtk::CellRenderer#is_expander (method)">#is_expander</a></span>, <span class='object_link'><a href="CellRenderer.html#is_expander=-instance_method" title="Gtk::CellRenderer#is_expander= (method)">#is_expander=</a></span>, <span class='object_link'><a href="CellRenderer.html#is_expander%3F-instance_method" title="Gtk::CellRenderer#is_expander? (method)">#is_expander?</a></span>, <span class='object_link'><a href="CellRenderer.html#mode-instance_method" title="Gtk::CellRenderer#mode (method)">#mode</a></span>, <span class='object_link'><a href="CellRenderer.html#mode=-instance_method" title="Gtk::CellRenderer#mode= (method)">#mode=</a></span>, <span class='object_link'><a href="CellRenderer.html#request_mode-instance_method" title="Gtk::CellRenderer#request_mode (method)">#request_mode</a></span>, <span class='object_link'><a href="CellRenderer.html#sensitive-instance_method" title="Gtk::CellRenderer#sensitive (method)">#sensitive</a></span>, <span class='object_link'><a href="CellRenderer.html#sensitive=-instance_method" title="Gtk::CellRenderer#sensitive= (method)">#sensitive=</a></span>, <span class='object_link'><a href="CellRenderer.html#sensitive%3F-instance_method" title="Gtk::CellRenderer#sensitive? (method)">#sensitive?</a></span>, <span class='object_link'><a href="CellRenderer.html#set_alignment-instance_method" title="Gtk::CellRenderer#set_alignment (method)">#set_alignment</a></span>, <span class='object_link'><a href="CellRenderer.html#set_fixed_size-instance_method" title="Gtk::CellRenderer#set_fixed_size (method)">#set_fixed_size</a></span>, <span class='object_link'><a href="CellRenderer.html#set_padding-instance_method" title="Gtk::CellRenderer#set_padding (method)">#set_padding</a></span>, <span class='object_link'><a href="CellRenderer.html#snapshot-instance_method" title="Gtk::CellRenderer#snapshot (method)">#snapshot</a></span>, <span class='object_link'><a href="CellRenderer.html#start_editing-instance_method" title="Gtk::CellRenderer#start_editing (method)">#start_editing</a></span>, <span class='object_link'><a href="CellRenderer.html#stop_editing-instance_method" title="Gtk::CellRenderer#stop_editing (method)">#stop_editing</a></span>, <span class='object_link'><a href="CellRenderer.html#visible-instance_method" title="Gtk::CellRenderer#visible (method)">#visible</a></span>, <span class='object_link'><a href="CellRenderer.html#visible=-instance_method" title="Gtk::CellRenderer#visible= (method)">#visible=</a></span>, <span class='object_link'><a href="CellRenderer.html#visible%3F-instance_method" title="Gtk::CellRenderer#visible? (method)">#visible?</a></span>, <span class='object_link'><a href="CellRenderer.html#width-instance_method" title="Gtk::CellRenderer#width (method)">#width</a></span>, <span class='object_link'><a href="CellRenderer.html#width=-instance_method" title="Gtk::CellRenderer#width= (method)">#width=</a></span>, <span class='object_link'><a href="CellRenderer.html#xalign-instance_method" title="Gtk::CellRenderer#xalign (method)">#xalign</a></span>, <span class='object_link'><a href="CellRenderer.html#xalign=-instance_method" title="Gtk::CellRenderer#xalign= (method)">#xalign=</a></span>, <span class='object_link'><a href="CellRenderer.html#xpad-instance_method" title="Gtk::CellRenderer#xpad (method)">#xpad</a></span>, <span class='object_link'><a href="CellRenderer.html#xpad=-instance_method" title="Gtk::CellRenderer#xpad= (method)">#xpad=</a></span>, <span class='object_link'><a href="CellRenderer.html#yalign-instance_method" title="Gtk::CellRenderer#yalign (method)">#yalign</a></span>, <span class='object_link'><a href="CellRenderer.html#yalign=-instance_method" title="Gtk::CellRenderer#yalign= (method)">#yalign=</a></span>, <span class='object_link'><a href="CellRenderer.html#ypad-instance_method" title="Gtk::CellRenderer#ypad (method)">#ypad</a></span>, <span class='object_link'><a href="CellRenderer.html#ypad=-instance_method" title="Gtk::CellRenderer#ypad= (method)">#ypad=</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new <code>GtkCellRendererCombo</code>.
+Adjust how text is drawn using object properties.
+Object properties can be set globally (with g_object_set()).
+Also, with <code>GtkTreeViewColumn</code>, you can bind a property to a value
+in a <code>GtkTreeModel</code>. For example, you can bind the “text” property
+on the cell renderer to a string value in the model, thus rendering
+a different string in each row of the <code>GtkTreeView</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="has_entry=-instance_method">
+  
+    #<strong>has_entry=</strong>(has_entry)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If true, the cell renderer will include an entry and allow to enter
+values other than the ones in the popup list.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>has_entry</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>has-entry</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>has-entry</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_entry?-instance_method">
+  
+    #<strong>has_entry?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If true, the cell renderer will include an entry and allow to enter
+values other than the ones in the popup list.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>has-entry</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="model-instance_method">
+  
+    #<strong>model</strong>  &#x21d2; <tt><span class='object_link'><a href="TreeModel.html" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Holds a tree model containing the possible values for the combo box.
+Use the text_column property to specify the column holding the values.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TreeModel.html" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>model</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="model=-instance_method">
+  
+    #<strong>model=</strong>(model)  &#x21d2; <tt><span class='object_link'><a href="TreeModel.html" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Holds a tree model containing the possible values for the combo box.
+Use the text_column property to specify the column holding the values.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TreeModel.html" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TreeModel.html" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>model</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TreeModel.html" title="Gtk::TreeModel (module)">Gtk::TreeModel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>model</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text_column-instance_method">
+  
+    #<strong>text_column</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Specifies the model column which holds the possible values for the
+combo box.</p>
+<p>Note that this refers to the model specified in the model property,
+not the model backing the tree view to which
+this cell renderer is attached.</p>
+<p><code>GtkCellRendererCombo</code> automatically adds a text cell renderer for
+this column to its combo box.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>text-column</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text_column=-instance_method">
+  
+    #<strong>text_column=</strong>(text_column)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Specifies the model column which holds the possible values for the
+combo box.</p>
+<p>Note that this refers to the model specified in the model property,
+not the model backing the tree view to which
+this cell renderer is attached.</p>
+<p><code>GtkCellRendererCombo</code> automatically adds a text cell renderer for
+this column to its combo box.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text_column</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>text-column</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>text-column</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

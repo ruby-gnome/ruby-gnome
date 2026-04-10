@@ -1,0 +1,3912 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::Application
+  
+    &mdash; Ruby/GIO2
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::Application";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">Application</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::Application
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::Application</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Virtual function table for #GApplication.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default-class_method" title="default (class method)">.<strong>default</strong>  &#x21d2; Gio::Application </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the default #GApplication instance for this process.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#id_is_valid-class_method" title="id_is_valid (class method)">.<strong>id_is_valid</strong>(application_id)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if <!-- raw HTML omitted -->application_id<!-- raw HTML omitted --> is a valid application identifier.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#action_group=-instance_method" title="#action_group= (instance method)">#<strong>action_group=</strong>(action_group)  &#x21d2; Gio::ActionGroup </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The group of actions that the application exports.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#activate-instance_method" title="#activate (instance method)">#<strong>activate</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Activates the application.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_main_option-instance_method" title="#add_main_option (instance method)">#<strong>add_main_option</strong>(long_name, short_name, flags, arg, description, arg_description)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Add an option to be handled by <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_main_option_entries-instance_method" title="#add_main_option_entries (instance method)">#<strong>add_main_option_entries</strong>(entries)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds main option entries to be handled by <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_option_group-instance_method" title="#add_option_group (instance method)">#<strong>add_option_group</strong>(group)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a GOption::Group to the commandline handling of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#application_id-instance_method" title="#application_id (instance method)">#<strong>application_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The unique identifier for the application.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#application_id=-instance_method" title="#application_id= (instance method)">#<strong>application_id=</strong>(application_id)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The unique identifier for the application.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bind_busy_property-instance_method" title="#bind_busy_property (instance method)">#<strong>bind_busy_property</strong>(object, property)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Marks <!-- raw HTML omitted -->application<!-- raw HTML omitted --> as busy (see g_application_mark_busy()) while <!-- raw HTML omitted -->property<!-- raw HTML omitted --> on <!-- raw HTML omitted -->object<!-- raw HTML omitted --> is true.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dbus_connection-instance_method" title="#dbus_connection (instance method)">#<strong>dbus_connection</strong>  &#x21d2; Gio::DBusConnection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the GDBus::Connection being used by the application, or nil.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dbus_object_path-instance_method" title="#dbus_object_path (instance method)">#<strong>dbus_object_path</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the D-Bus object path being used by the application, or nil.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flags-instance_method" title="#flags (instance method)">#<strong>flags</strong>  &#x21d2; Gio::ApplicationFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Flags specifying the behaviour of the application.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flags=-instance_method" title="#flags= (instance method)">#<strong>flags=</strong>(flags)  &#x21d2; Gio::ApplicationFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Flags specifying the behaviour of the application.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hold-instance_method" title="#hold (instance method)">#<strong>hold</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Increases the use count of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#inactivity_timeout-instance_method" title="#inactivity_timeout (instance method)">#<strong>inactivity_timeout</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Time (in milliseconds) to stay alive after becoming idle.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#inactivity_timeout=-instance_method" title="#inactivity_timeout= (instance method)">#<strong>inactivity_timeout=</strong>(inactivity_timeout)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Time (in milliseconds) to stay alive after becoming idle.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(application_id, flags)  &#x21d2; Gio::Application </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new #GApplication instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_busy-instance_method" title="#is_busy (instance method)">#<strong>is_busy</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the application's current busy state, as set through g_application_mark_busy() or g_application_bind_busy_property().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_busy=-instance_method" title="#is_busy= (instance method)">#<strong>is_busy=</strong>(is_busy)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the application is currently marked as busy through g_application_mark_busy() or g_application_bind_busy_property().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_busy%3F-instance_method" title="#is_busy? (instance method)">#<strong>is_busy?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the application is currently marked as busy through g_application_mark_busy() or g_application_bind_busy_property().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_registered-instance_method" title="#is_registered (instance method)">#<strong>is_registered</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is registered.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_registered=-instance_method" title="#is_registered= (instance method)">#<strong>is_registered=</strong>(is_registered)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Application.register] has been called.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_registered%3F-instance_method" title="#is_registered? (instance method)">#<strong>is_registered?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Application.register] has been called.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_remote-instance_method" title="#is_remote (instance method)">#<strong>is_remote</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is remote.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_remote=-instance_method" title="#is_remote= (instance method)">#<strong>is_remote=</strong>(is_remote)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether this application instance is remote.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_remote%3F-instance_method" title="#is_remote? (instance method)">#<strong>is_remote?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether this application instance is remote.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mark_busy-instance_method" title="#mark_busy (instance method)">#<strong>mark_busy</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Increases the busy count of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open-instance_method" title="#open (instance method)">#<strong>open</strong>(files, n_files, hint)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Opens the given files.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#option_context_description=-instance_method" title="#option_context_description= (instance method)">#<strong>option_context_description=</strong>(description)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a description to the <!-- raw HTML omitted -->application<!-- raw HTML omitted --> option context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#option_context_parameter_string=-instance_method" title="#option_context_parameter_string= (instance method)">#<strong>option_context_parameter_string=</strong>(parameter_string)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the parameter string to be used by the commandline handling of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#option_context_summary=-instance_method" title="#option_context_summary= (instance method)">#<strong>option_context_summary=</strong>(summary)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a summary to the <!-- raw HTML omitted -->application<!-- raw HTML omitted --> option context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#quit-instance_method" title="#quit (instance method)">#<strong>quit</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Immediately quits the application.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register-instance_method" title="#register (instance method)">#<strong>register</strong>(cancellable)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Attempts registration of the application.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#release-instance_method" title="#release (instance method)">#<strong>release</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Decrease the use count of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resource_base_path-instance_method" title="#resource_base_path (instance method)">#<strong>resource_base_path</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The base resource path for the application.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resource_base_path=-instance_method" title="#resource_base_path= (instance method)">#<strong>resource_base_path=</strong>(resource_base_path)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The base resource path for the application.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#run-instance_method" title="#run (instance method)">#<strong>run</strong>(argc, argv)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Runs the application.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_notification-instance_method" title="#send_notification (instance method)">#<strong>send_notification</strong>(id, notification)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sends a notification on behalf of <!-- raw HTML omitted -->application<!-- raw HTML omitted --> to the desktop shell.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_default-instance_method" title="#set_default (instance method)">#<strong>set_default</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets or unsets the default application for the process, as returned by g_application_get_default().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unbind_busy_property-instance_method" title="#unbind_busy_property (instance method)">#<strong>unbind_busy_property</strong>(object, property)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Destroys a binding between <!-- raw HTML omitted -->property<!-- raw HTML omitted --> and the busy state of <!-- raw HTML omitted -->application<!-- raw HTML omitted --> that was previously created with g_application_bind_busy_property().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unmark_busy-instance_method" title="#unmark_busy (instance method)">#<strong>unmark_busy</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Decreases the busy count of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#version-instance_method" title="#version (instance method)">#<strong>version</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The human-readable version number of the application.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#version=-instance_method" title="#version= (instance method)">#<strong>version=</strong>(version)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The human-readable version number of the application.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#withdraw_notification-instance_method" title="#withdraw_notification (instance method)">#<strong>withdraw_notification</strong>(id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Withdraws a notification that was sent with g_application_send_notification().</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(application_id, flags)  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::Application (class)">Gio::Application</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new #GApplication instance.</p>
+<p>If non-nil, the application id must be valid.  See
+g_application_id_is_valid().</p>
+<p>If no application ID is given then some features of #GApplication
+(most notably application uniqueness) will be disabled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>application_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the application id</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ApplicationFlags.html" title="Gio::ApplicationFlags (module)">Gio::ApplicationFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the application flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="default-class_method">
+  
+    .<strong>default</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::Application (class)">Gio::Application</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the default #GApplication instance for this process.</p>
+<p>Normally there is only one #GApplication per process and it becomes
+the default when it is created.  You can exercise more control over
+this by using g_application_set_default().</p>
+<p>If there is no default application then nil is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::Application (class)">Gio::Application</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the default application for this process, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="id_is_valid-class_method">
+  
+    .<strong>id_is_valid</strong>(application_id)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if <!-- raw HTML omitted -->application_id<!-- raw HTML omitted --> is a valid application identifier.</p>
+<p>A valid ID is required for calls to g_application_new() and
+g_application_set_application_id().</p>
+<p>Application identifiers follow the same format as
+<a href="https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-bus">D-Bus well-known bus names</a>.
+For convenience, the restrictions on application identifiers are
+reproduced here:</p>
+<ul>
+<li>
+<p>Application identifiers are composed of 1 or more elements separated by a
+period (<code>.</code>) character. All elements must contain at least one character.</p>
+</li>
+<li>
+<p>Each element must only contain the ASCII characters <code>[A-Z][a-z][0-9]_-</code>,
+with <code>-</code> discouraged in new application identifiers. Each element must not
+begin with a digit.</p>
+</li>
+<li>
+<p>Application identifiers must contain at least one <code>.</code> (period) character
+(and thus at least two elements).</p>
+</li>
+<li>
+<p>Application identifiers must not begin with a <code>.</code> (period) character.</p>
+</li>
+<li>
+<p>Application identifiers must not exceed 255 characters.</p>
+</li>
+</ul>
+<p>Note that the hyphen (<code>-</code>) character is allowed in application identifiers,
+but is problematic or not allowed in various specifications and APIs that
+refer to D-Bus, such as
+<a href="http://docs.flatpak.org/en/latest/introduction.html#identifiers">Flatpak application IDs</a>,
+the
+<a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html#dbus"><code>DBusActivatable</code> interface in the Desktop Entry Specification</a>,
+and the convention that an application's &quot;main&quot; interface and object path
+resemble its application identifier and bus name. To avoid situations that
+require special-case handling, it is recommended that new application
+identifiers consistently replace hyphens with underscores.</p>
+<p>Like D-Bus interface names, application identifiers should start with the
+reversed DNS domain name of the author of the interface (in lower-case), and
+it is conventional for the rest of the application identifier to consist of
+words run together, with initial capital letters.</p>
+<p>As with D-Bus interface names, if the author's DNS domain name contains
+hyphen/minus characters they should be replaced by underscores, and if it
+contains leading digits they should be escaped by prepending an underscore.
+For example, if the owner of 7-zip.org used an application identifier for an
+archiving application, it might be named <code>org._7_zip.Archiver</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>application_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a potential application identifier</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->application_id<!-- raw HTML omitted --> is valid</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="action_group=-instance_method">
+  
+    #<strong>action_group=</strong>(action_group)  &#x21d2; <tt><span class='object_link'><a href="ActionGroup.html" title="Gio::ActionGroup (module)">Gio::ActionGroup</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The group of actions that the application exports.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_group</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ActionGroup.html" title="Gio::ActionGroup (module)">Gio::ActionGroup</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ActionGroup.html" title="Gio::ActionGroup (module)">Gio::ActionGroup</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>action-group</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="activate-instance_method">
+  
+    #<strong>activate</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Activates the application.</p>
+<p>In essence, this results in the #GApplication::activate signal being
+emitted in the primary instance.</p>
+<p>The application must be registered before calling this function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_main_option-instance_method">
+  
+    #<strong>add_main_option</strong>(long_name, short_name, flags, arg, description, arg_description)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Add an option to be handled by <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+<p>Calling this function is the equivalent of calling
+g_application_add_main_option_entries() with a single GOption::Entry
+that has its arg_data member set to nil.</p>
+<p>The parsed arguments will be packed into a GVariant::Dict which
+is passed to #GApplication::handle-local-options. If
+%G_APPLICATION_HANDLES_COMMAND_LINE is set, then it will also
+be sent to the primary instance. See
+g_application_add_main_option_entries() for more details.</p>
+<p>See GOption::Entry for more documentation of the arguments.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>long_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the long name of an option used to specify it in a commandline</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>short_name</span>
+      
+      
+        <span class='type'>(<tt>Gio::gchar</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the short name of an option</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GLib/OptionFlags.html" title="GLib::OptionFlags (module)">GLib::OptionFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags from GOption::Flags</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>arg</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../GLib/OptionArg.html" title="GLib::OptionArg (module)">GLib::OptionArg</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the type of the option, as a GOption::Arg</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>description</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the description for the option in <code>--help</code> output</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>arg_description</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the placeholder to use for the extra argument
+parsed by the option in <code>--help</code> output</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_main_option_entries-instance_method">
+  
+    #<strong>add_main_option_entries</strong>(entries)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds main option entries to be handled by <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+<p>This function is comparable to g_option_context_add_main_entries().</p>
+<p>After the commandline arguments are parsed, the
+#GApplication::handle-local-options signal will be emitted.  At this
+point, the application can inspect the values pointed to by <!-- raw HTML omitted -->arg_data<!-- raw HTML omitted -->
+in the given GOption::Entrys.</p>
+<p>Unlike GOption::Context, #GApplication supports giving a nil
+<!-- raw HTML omitted -->arg_data<!-- raw HTML omitted --> for a non-callback GOption::Entry.  This results in the
+argument in question being packed into a GVariant::Dict which is also
+passed to #GApplication::handle-local-options, where it can be
+inspected and modified.  If %G_APPLICATION_HANDLES_COMMAND_LINE is
+set, then the resulting dictionary is sent to the primary instance,
+where g_application_command_line_get_options_dict() will return it.
+As it has been passed outside the process at this point, the types of all
+values in the options dict must be checked before being used.
+This &quot;packing&quot; is done according to the type of the argument --
+booleans for normal flags, strings for strings, bytestrings for
+filenames, etc.  The packing only occurs if the flag is given (ie: we
+do not pack a &quot;false&quot; #GVariant in the case that a flag is missing).</p>
+<p>In general, it is recommended that all commandline arguments are
+parsed locally.  The options dictionary should then be used to
+transmit the result of the parsing to the primary instance, where
+g_variant_dict_lookup() can be used.  For local options, it is
+possible to either use <!-- raw HTML omitted -->arg_data<!-- raw HTML omitted --> in the usual way, or to consult (and
+potentially remove) the option from the options dictionary.</p>
+<p>This function is new in GLib 2.40.  Before then, the only real choice
+was to send all of the commandline arguments (options and all) to the
+primary instance for handling.  #GApplication ignored them completely
+on the local side.  Calling this function &quot;opts in&quot; to the new
+behaviour, and in particular, means that unrecognised options will be
+treated as errors.  Unrecognised options have never been ignored when
+%G_APPLICATION_HANDLES_COMMAND_LINE is unset.</p>
+<p>If #GApplication::handle-local-options needs to see the list of
+filenames, then the use of %G_OPTION_REMAINING is recommended.  If
+<!-- raw HTML omitted -->arg_data<!-- raw HTML omitted --> is nil then %G_OPTION_REMAINING can be used as a key into
+the options dictionary.  If you do use %G_OPTION_REMAINING then you
+need to handle these arguments for yourself because once they are
+consumed, they will no longer be visible to the default handling
+(which treats them as filenames to be opened).</p>
+<p>It is important to use the proper GVariant format when retrieving
+the options with g_variant_dict_lookup():</p>
+<ul>
+<li>for %G_OPTION_ARG_NONE, use <code>b</code></li>
+<li>for %G_OPTION_ARG_STRING, use <code>&amp;s</code></li>
+<li>for %G_OPTION_ARG_INT, use <code>i</code></li>
+<li>for %G_OPTION_ARG_INT64, use <code>x</code></li>
+<li>for %G_OPTION_ARG_DOUBLE, use <code>d</code></li>
+<li>for %G_OPTION_ARG_FILENAME, use <code>^&amp;ay</code></li>
+<li>for %G_OPTION_ARG_STRING_ARRAY, use <code>^a&amp;s</code></li>
+<li>for %G_OPTION_ARG_FILENAME_ARRAY, use <code>^a&amp;ay</code></li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>entries</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;GLib::OptionEntry&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the
+main options for the application</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_option_group-instance_method">
+  
+    #<strong>add_option_group</strong>(group)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a GOption::Group to the commandline handling of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+<p>This function is comparable to g_option_context_add_group().</p>
+<p>Unlike g_application_add_main_option_entries(), this function does
+not deal with nil <!-- raw HTML omitted -->arg_data<!-- raw HTML omitted --> and never transmits options to the
+primary instance.</p>
+<p>The reason for that is because, by the time the options arrive at the
+primary instance, it is typically too late to do anything with them.
+Taking the GTK option group as an example: GTK will already have been
+initialised by the time the #GApplication::command-line handler runs.
+In the case that this is not the first-running instance of the
+application, the existing instance may already have been running for
+a very long time.</p>
+<p>This means that the options from GOption::Group are only really usable
+in the case that the instance of the application being run is the
+first instance.  Passing options like <code>--display=</code> or <code>--gdk-debug=</code>
+on future runs will have no effect on the existing primary instance.</p>
+<p>Calling this function will cause the options in the supplied option
+group to be parsed, but it does not cause you to be &quot;opted in&quot; to the
+new functionality whereby unrecognised options are rejected even if
+%G_APPLICATION_HANDLES_COMMAND_LINE was given.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>group</span>
+      
+      
+        <span class='type'>(<tt>GLib::OptionGroup</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a GOption::Group</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="application_id-instance_method">
+  
+    #<strong>application_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The unique identifier for the application.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>application-id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="application_id=-instance_method">
+  
+    #<strong>application_id=</strong>(application_id)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The unique identifier for the application.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>application_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>application-id</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>application-id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="bind_busy_property-instance_method">
+  
+    #<strong>bind_busy_property</strong>(object, property)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Marks <!-- raw HTML omitted -->application<!-- raw HTML omitted --> as busy (see g_application_mark_busy()) while
+<!-- raw HTML omitted -->property<!-- raw HTML omitted --> on <!-- raw HTML omitted -->object<!-- raw HTML omitted --> is true.</p>
+<p>The binding holds a reference to <!-- raw HTML omitted -->application<!-- raw HTML omitted --> while it is active, but
+not to <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. Instead, the binding is destroyed when <!-- raw HTML omitted -->object<!-- raw HTML omitted --> is
+finalized.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GObject</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>property</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of a boolean property of <!-- raw HTML omitted -->object<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dbus_connection-instance_method">
+  
+    #<strong>dbus_connection</strong>  &#x21d2; <tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the GDBus::Connection being used by the application, or nil.</p>
+<p>If #GApplication is using its D-Bus backend then this function will
+return the GDBus::Connection being used for uniqueness and
+communication with the desktop environment and other instances of the
+application.</p>
+<p>If #GApplication is not using D-Bus then this function will return
+nil.  This includes the situation where the D-Bus backend would
+normally be in use but we were unable to connect to the bus.</p>
+<p>This function must not be called before the application has been
+registered.  See g_application_get_is_registered().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DBusConnection.html" title="Gio::DBusConnection (class)">Gio::DBusConnection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a GDBus::Connection, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dbus_object_path-instance_method">
+  
+    #<strong>dbus_object_path</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the D-Bus object path being used by the application, or nil.</p>
+<p>If #GApplication is using its D-Bus backend then this function will
+return the D-Bus object path that #GApplication is using.  If the
+application is the primary instance then there is an object published
+at this path.  If the application is not the primary instance then
+the result of this function is undefined.</p>
+<p>If #GApplication is not using D-Bus then this function will return
+nil.  This includes the situation where the D-Bus backend would
+normally be in use but we were unable to connect to the bus.</p>
+<p>This function must not be called before the application has been
+registered.  See g_application_get_is_registered().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the object path, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flags-instance_method">
+  
+    #<strong>flags</strong>  &#x21d2; <tt><span class='object_link'><a href="ApplicationFlags.html" title="Gio::ApplicationFlags (module)">Gio::ApplicationFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Flags specifying the behaviour of the application.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ApplicationFlags.html" title="Gio::ApplicationFlags (module)">Gio::ApplicationFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flags=-instance_method">
+  
+    #<strong>flags=</strong>(flags)  &#x21d2; <tt><span class='object_link'><a href="ApplicationFlags.html" title="Gio::ApplicationFlags (module)">Gio::ApplicationFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Flags specifying the behaviour of the application.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ApplicationFlags.html" title="Gio::ApplicationFlags (module)">Gio::ApplicationFlags</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ApplicationFlags.html" title="Gio::ApplicationFlags (module)">Gio::ApplicationFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ApplicationFlags.html" title="Gio::ApplicationFlags (module)">Gio::ApplicationFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="hold-instance_method">
+  
+    #<strong>hold</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Increases the use count of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+<p>Use this function to indicate that the application has a reason to
+continue to run.  For example, g_application_hold() is called by GTK
+when a toplevel window is on the screen.</p>
+<p>To cancel the hold, call g_application_release().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="inactivity_timeout-instance_method">
+  
+    #<strong>inactivity_timeout</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Time (in milliseconds) to stay alive after becoming idle.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>inactivity-timeout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="inactivity_timeout=-instance_method">
+  
+    #<strong>inactivity_timeout=</strong>(inactivity_timeout)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Time (in milliseconds) to stay alive after becoming idle.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>inactivity_timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>inactivity-timeout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>inactivity-timeout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_busy-instance_method">
+  
+    #<strong>is_busy</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the application's current busy state, as set through
+g_application_mark_busy() or g_application_bind_busy_property().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is currently marked as busy</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_busy=-instance_method">
+  
+    #<strong>is_busy=</strong>(is_busy)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the application is currently marked as busy through
+g_application_mark_busy() or g_application_bind_busy_property().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>is_busy</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>is-busy</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>is-busy</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_busy?-instance_method">
+  
+    #<strong>is_busy?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the application is currently marked as busy through
+g_application_mark_busy() or g_application_bind_busy_property().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>is-busy</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_registered-instance_method">
+  
+    #<strong>is_registered</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is registered.</p>
+<p>An application is registered if g_application_register() has been
+successfully called.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is registered</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_registered=-instance_method">
+  
+    #<strong>is_registered=</strong>(is_registered)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Application.register] has been called.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>is_registered</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>is-registered</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>is-registered</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_registered?-instance_method">
+  
+    #<strong>is_registered?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Application.register] has been called.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>is-registered</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_remote-instance_method">
+  
+    #<strong>is_remote</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is remote.</p>
+<p>If <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is remote then it means that another instance of
+application already exists (the 'primary' instance).  Calls to
+perform actions on <!-- raw HTML omitted -->application<!-- raw HTML omitted --> will result in the actions being
+performed by the primary instance.</p>
+<p>The value of this property cannot be accessed before
+g_application_register() has been called.  See
+g_application_get_is_registered().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is remote</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_remote=-instance_method">
+  
+    #<strong>is_remote=</strong>(is_remote)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether this application instance is remote.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>is_remote</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>is-remote</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>is-remote</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_remote?-instance_method">
+  
+    #<strong>is_remote?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether this application instance is remote.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>is-remote</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mark_busy-instance_method">
+  
+    #<strong>mark_busy</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Increases the busy count of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+<p>Use this function to indicate that the application is busy, for instance
+while a long running operation is pending.</p>
+<p>The busy state will be exposed to other processes, so a session shell will
+use that information to indicate the state to the user (e.g. with a
+spinner).</p>
+<p>To cancel the busy indication, use g_application_unmark_busy().</p>
+<p>The application must be registered before calling this function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open-instance_method">
+  
+    #<strong>open</strong>(files, n_files, hint)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Opens the given files.</p>
+<p>In essence, this results in the #GApplication::open signal being emitted
+in the primary instance.</p>
+<p><!-- raw HTML omitted -->n_files<!-- raw HTML omitted --> must be greater than zero.</p>
+<p><!-- raw HTML omitted -->hint<!-- raw HTML omitted --> is simply passed through to the ::open signal.  It is
+intended to be used by applications that have multiple modes for
+opening files (eg: &quot;view&quot; vs &quot;edit&quot;, etc).  Unless you have a need
+for this functionality, you should use &quot;&quot;.</p>
+<p>The application must be registered before calling this function
+and it must have the %G_APPLICATION_HANDLES_OPEN flag set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>files</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="File.html" title="Gio::File (module)">Gio::File</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an array of #GFiles to open</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_files</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the length of the <!-- raw HTML omitted -->files<!-- raw HTML omitted --> array</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>hint</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a hint (or &quot;&quot;), but never nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="option_context_description=-instance_method">
+  
+    #<strong>option_context_description=</strong>(description)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a description to the <!-- raw HTML omitted -->application<!-- raw HTML omitted --> option context.</p>
+<p>See g_option_context_set_description() for more information.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>description</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a string to be shown in <code>--help</code> output
+after the list of options, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="option_context_parameter_string=-instance_method">
+  
+    #<strong>option_context_parameter_string=</strong>(parameter_string)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the parameter string to be used by the commandline handling of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+<p>This function registers the argument to be passed to g_option_context_new()
+when the internal GOption::Context of <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is created.</p>
+<p>See g_option_context_new() for more information about <!-- raw HTML omitted -->parameter_string<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parameter_string</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a string which is displayed
+in the first line of <code>--help</code> output, after the usage summary <code>programname [OPTION...]</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="option_context_summary=-instance_method">
+  
+    #<strong>option_context_summary=</strong>(summary)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a summary to the <!-- raw HTML omitted -->application<!-- raw HTML omitted --> option context.</p>
+<p>See g_option_context_set_summary() for more information.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>summary</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a string to be shown in <code>--help</code> output
+before the list of options, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="quit-instance_method">
+  
+    #<strong>quit</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Immediately quits the application.</p>
+<p>Upon return to the mainloop, g_application_run() will return,
+calling only the 'shutdown' function before doing so.</p>
+<p>The hold count is ignored.
+Take care if your code has called g_application_hold() on the application and
+is therefore still expecting it to exist.
+(Note that you may have called g_application_hold() indirectly, for example
+through gtk_application_add_window().)</p>
+<p>The result of calling g_application_run() again after it returns is
+unspecified.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="register-instance_method">
+  
+    #<strong>register</strong>(cancellable)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Attempts registration of the application.</p>
+<p>This is the point at which the application discovers if it is the
+primary instance or merely acting as a remote for an already-existing
+primary instance.  This is implemented by attempting to acquire the
+application identifier as a unique bus name on the session bus using
+GDBus.</p>
+<p>If there is no application ID or if %G_APPLICATION_NON_UNIQUE was
+given, then this process will always become the primary instance.</p>
+<p>Due to the internal architecture of GDBus, method calls can be
+dispatched at any time (even if a main loop is not running).  For
+this reason, you must ensure that any object paths that you wish to
+register are registered before calling this function.</p>
+<p>If the application has already been registered then true is
+returned with no work performed.</p>
+<p>The #GApplication::startup signal is emitted if registration succeeds
+and <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is the primary instance (including the non-unique
+case).</p>
+<p>In the event of an error (such as <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> being cancelled, or a
+failure to connect to the session bus), false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
+is set appropriately.</p>
+<p>Note: the return value of this function is not an indicator that this
+instance is or is not the primary instance of the application.  See
+g_application_get_is_remote() for that.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GCancellable, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if registration succeeded</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="release-instance_method">
+  
+    #<strong>release</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Decrease the use count of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+<p>When the use count reaches zero, the application will stop running.</p>
+<p>Never call this function except to cancel the effect of a previous
+call to g_application_hold().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resource_base_path-instance_method">
+  
+    #<strong>resource_base_path</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The base resource path for the application.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>resource-base-path</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resource_base_path=-instance_method">
+  
+    #<strong>resource_base_path=</strong>(resource_base_path)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The base resource path for the application.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>resource_base_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>resource-base-path</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>resource-base-path</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="run-instance_method">
+  
+    #<strong>run</strong>(argc, argv)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Runs the application.</p>
+<p>This function is intended to be run from main() and its return value
+is intended to be returned by main(). Although you are expected to pass
+the <!-- raw HTML omitted -->argc<!-- raw HTML omitted -->, <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> parameters from main() to this function, it is possible
+to pass nil if <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> is not available or commandline handling is not
+required.  Note that on Windows, <!-- raw HTML omitted -->argc<!-- raw HTML omitted --> and <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> are ignored, and
+g_win32_get_command_line() is called internally (for proper support
+of Unicode commandline arguments).</p>
+<p>#GApplication will attempt to parse the commandline arguments.  You
+can add commandline flags to the list of recognised options by way of
+g_application_add_main_option_entries().  After this, the
+#GApplication::handle-local-options signal is emitted, from which the
+application can inspect the values of its GOption::Entrys.</p>
+<p>#GApplication::handle-local-options is a good place to handle options
+such as <code>--version</code>, where an immediate reply from the local process is
+desired (instead of communicating with an already-running instance).
+A #GApplication::handle-local-options handler can stop further processing
+by returning a non-negative value, which then becomes the exit status of
+the process.</p>
+<p>What happens next depends on the flags: if
+%G_APPLICATION_HANDLES_COMMAND_LINE was specified then the remaining
+commandline arguments are sent to the primary instance, where a
+#GApplication::command-line signal is emitted.  Otherwise, the
+remaining commandline arguments are assumed to be a list of files.
+If there are no files listed, the application is activated via the
+#GApplication::activate signal.  If there are one or more files, and
+%G_APPLICATION_HANDLES_OPEN was specified then the files are opened
+via the #GApplication::open signal.</p>
+<p>If you are interested in doing more complicated local handling of the
+commandline then you should implement your own #GApplication subclass
+and override local_command_line(). In this case, you most likely want
+to return true from your local_command_line() implementation to
+suppress the default handling. See
+[gapplication-example-cmdline2.c][https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline2.c]
+for an example.</p>
+<p>If, after the above is done, the use count of the application is zero
+then the exit status is returned immediately.  If the use count is
+non-zero then the default main context is iterated until the use count
+falls to zero, at which point 0 is returned.</p>
+<p>If the %G_APPLICATION_IS_SERVICE flag is set, then the service will
+run for as much as 10 seconds with a use count of zero while waiting
+for the message that caused the activation to arrive.  After that,
+if the use count falls to zero the application will exit immediately,
+except in the case that g_application_set_inactivity_timeout() is in
+use.</p>
+<p>This function sets the prgname (g_set_prgname()), if not already set,
+to the basename of argv[0].</p>
+<p>Much like g_main_loop_run(), this function will acquire the main context
+for the duration that the application is running.</p>
+<p>Since 2.40, applications that are not explicitly flagged as services
+or launchers (ie: neither %G_APPLICATION_IS_SERVICE or
+%G_APPLICATION_IS_LAUNCHER are given as flags) will check (from the
+default handler for local_command_line) if &quot;--gapplication-service&quot;
+was given in the command line.  If this flag is present then normal
+commandline processing is interrupted and the
+%G_APPLICATION_IS_SERVICE flag is set.  This provides a &quot;compromise&quot;
+solution whereby running an application directly from the commandline
+will invoke it in the normal way (which can be useful for debugging)
+while still allowing applications to be D-Bus activated in service
+mode.  The D-Bus service file should invoke the executable with
+&quot;--gapplication-service&quot; as the sole commandline argument.  This
+approach is suitable for use by most graphical applications but
+should not be used from applications like editors that need precise
+control over when processes invoked via the commandline will exit and
+what their exit status will be.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>argc</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the argc from main() (or 0 if <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> is nil)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>argv</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gio::filename&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the argv from main(), or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the exit status</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="send_notification-instance_method">
+  
+    #<strong>send_notification</strong>(id, notification)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sends a notification on behalf of <!-- raw HTML omitted -->application<!-- raw HTML omitted --> to the desktop shell.
+There is no guarantee that the notification is displayed immediately,
+or even at all.</p>
+<p>Notifications may persist after the application exits. It will be
+D-Bus-activated when the notification or one of its actions is
+activated.</p>
+<p>Modifying <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> after this call has no effect. However, the
+object can be reused for a later call to this function.</p>
+<p><!-- raw HTML omitted -->id<!-- raw HTML omitted --> may be any string that uniquely identifies the event for the
+application. It does not need to be in any special format. For
+example, &quot;new-message&quot; might be appropriate for a notification about
+new messages.</p>
+<p>If a previous notification was sent with the same <!-- raw HTML omitted -->id<!-- raw HTML omitted -->, it will be
+replaced with <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> and shown again as if it was a new
+notification. This works even for notifications sent from a previous
+execution of the application, as long as <!-- raw HTML omitted -->id<!-- raw HTML omitted --> is the same string.</p>
+<p><!-- raw HTML omitted -->id<!-- raw HTML omitted --> may be nil, but it is impossible to replace or withdraw
+notifications without an id.</p>
+<p>If <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> is no longer relevant, it can be withdrawn with
+g_application_withdraw_notification().</p>
+<p>It is an error to call this function if <!-- raw HTML omitted -->application<!-- raw HTML omitted --> has no
+application ID.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>id of the notification, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notification</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Notification.html" title="Gio::Notification (class)">Gio::Notification</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the #GNotification to send</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_default-instance_method">
+  
+    #<strong>set_default</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets or unsets the default application for the process, as returned
+by g_application_get_default().</p>
+<p>This function does not take its own reference on <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.  If
+<!-- raw HTML omitted -->application<!-- raw HTML omitted --> is destroyed then the default application will revert
+back to nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unbind_busy_property-instance_method">
+  
+    #<strong>unbind_busy_property</strong>(object, property)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Destroys a binding between <!-- raw HTML omitted -->property<!-- raw HTML omitted --> and the busy state of
+<!-- raw HTML omitted -->application<!-- raw HTML omitted --> that was previously created with
+g_application_bind_busy_property().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GObject</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>property</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of a boolean property of <!-- raw HTML omitted -->object<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unmark_busy-instance_method">
+  
+    #<strong>unmark_busy</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Decreases the busy count of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
+<p>When the busy count reaches zero, the new state will be propagated
+to other processes.</p>
+<p>This function must only be called to cancel the effect of a previous
+call to g_application_mark_busy().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="version-instance_method">
+  
+    #<strong>version</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The human-readable version number of the application.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>version</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="version=-instance_method">
+  
+    #<strong>version=</strong>(version)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The human-readable version number of the application.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>version</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>version</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>version</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="withdraw_notification-instance_method">
+  
+    #<strong>withdraw_notification</strong>(id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Withdraws a notification that was sent with
+g_application_send_notification().</p>
+<p>This call does nothing if a notification with <!-- raw HTML omitted -->id<!-- raw HTML omitted --> doesn't exist or
+the notification was never sent.</p>
+<p>This function works even for notifications sent in previous
+executions of this application, as long <!-- raw HTML omitted -->id<!-- raw HTML omitted --> is the same as it was for
+the sent notification.</p>
+<p>Note that notifications are dismissed when the user clicks on one
+of the buttons in a notification or triggers its default action, so
+there is no need to explicitly withdraw the notification in that case.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>id of a previously sent notification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

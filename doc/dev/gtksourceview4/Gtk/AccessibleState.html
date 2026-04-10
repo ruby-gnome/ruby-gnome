@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gtk::AccessibleState
+  
+    &mdash; Ruby/GtkSourceView4
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::AccessibleState";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">AccessibleState</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gtk::AccessibleState
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="BUSY-constant" class="">BUSY =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A “busy” state. This state has boolean values</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:busy</span></pre></dd>
+      
+        <dt id="CHECKED-constant" class="">CHECKED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A “checked” state; indicates the current
+state of a [class<!-- raw HTML omitted -->CheckButton<!-- raw HTML omitted -->]. Value type: [enum<!-- raw HTML omitted -->AccessibleTristate<!-- raw HTML omitted -->]</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:checked</span></pre></dd>
+      
+        <dt id="DISABLED-constant" class="">DISABLED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A “disabled” state; corresponds to the
+[property<!-- raw HTML omitted -->Widget<!-- raw HTML omitted -->:sensitive] property. It indicates a UI element
+that is perceivable, but not editable or operable. Value type: boolean</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:disabled</span></pre></dd>
+      
+        <dt id="EXPANDED-constant" class="">EXPANDED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An “expanded” state; corresponds to the
+[property<!-- raw HTML omitted -->Expander<!-- raw HTML omitted -->:expanded] property. Value type: boolean
+or undefined</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:expanded</span></pre></dd>
+      
+        <dt id="HIDDEN-constant" class="">HIDDEN =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A “hidden” state; corresponds to the
+[property<!-- raw HTML omitted -->Widget<!-- raw HTML omitted -->:visible] property. You can use this state
+explicitly on UI elements that should not be exposed to an assistive
+technology. Value type: boolean
+See also: %GTK_ACCESSIBLE_STATE_DISABLED</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:hidden</span></pre></dd>
+      
+        <dt id="INVALID-constant" class="">INVALID =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An “invalid” state; set when a widget
+is showing an error. Value type: [enum<!-- raw HTML omitted -->AccessibleInvalidState<!-- raw HTML omitted -->]</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:invalid</span></pre></dd>
+      
+        <dt id="PRESSED-constant" class="">PRESSED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A “pressed” state; indicates the current
+state of a [class<!-- raw HTML omitted -->ToggleButton<!-- raw HTML omitted -->]. Value type: [enum<!-- raw HTML omitted -->AccessibleTristate<!-- raw HTML omitted -->]
+enumeration</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:pressed</span></pre></dd>
+      
+        <dt id="SELECTED-constant" class="">SELECTED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A “selected” state; set when a widget
+is selected. Value type: boolean or undefined</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:selected</span></pre></dd>
+      
+        <dt id="VISITED-constant" class="">VISITED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Indicates that a widget with the GTK_ACCESSIBLE_ROLE_LINK has been visited.
+Value type: boolean.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:visited</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

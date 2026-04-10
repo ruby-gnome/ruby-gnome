@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gdk::MemoryFormat
+  
+    &mdash; Ruby/GDK3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gdk::MemoryFormat";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (M)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gdk.html" title="Gdk (module)">Gdk</a></span></span>
+     &raquo; 
+    <span class="title">MemoryFormat</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gdk::MemoryFormat
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="B8G8R8A8_PREMULTIPLIED-constant" class="">B8G8R8A8_PREMULTIPLIED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 bytes; for blue, green, red, alpha.
+The color values are premultiplied with the alpha value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:b8g8r8a8_premultiplied</span></pre></dd>
+      
+        <dt id="A8R8G8B8_PREMULTIPLIED-constant" class="">A8R8G8B8_PREMULTIPLIED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 bytes; for alpha, red, green, blue.
+The color values are premultiplied with the alpha value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:a8r8g8b8_premultiplied</span></pre></dd>
+      
+        <dt id="R8G8B8A8_PREMULTIPLIED-constant" class="">R8G8B8A8_PREMULTIPLIED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 bytes; for red, green, blue, alpha
+The color values are premultiplied with the alpha value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:r8g8b8a8_premultiplied</span></pre></dd>
+      
+        <dt id="B8G8R8A8-constant" class="">B8G8R8A8 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 bytes; for blue, green, red, alpha.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:b8g8r8a8</span></pre></dd>
+      
+        <dt id="A8R8G8B8-constant" class="">A8R8G8B8 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 bytes; for alpha, red, green, blue.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:a8r8g8b8</span></pre></dd>
+      
+        <dt id="R8G8B8A8-constant" class="">R8G8B8A8 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 bytes; for red, green, blue, alpha.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:r8g8b8a8</span></pre></dd>
+      
+        <dt id="A8B8G8R8-constant" class="">A8B8G8R8 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 bytes; for alpha, blue, green, red.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:a8b8g8r8</span></pre></dd>
+      
+        <dt id="R8G8B8-constant" class="">R8G8B8 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>3 bytes; for red, green, blue. The data is opaque.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:r8g8b8</span></pre></dd>
+      
+        <dt id="B8G8R8-constant" class="">B8G8R8 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>3 bytes; for blue, green, red. The data is opaque.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:b8g8r8</span></pre></dd>
+      
+        <dt id="R16G16B16-constant" class="">R16G16B16 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>3 guint16 values; for red, green, blue.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span> <span class='kw'>or</span> <span class='symbol'>:r16g16b16</span></pre></dd>
+      
+        <dt id="R16G16B16A16_PREMULTIPLIED-constant" class="">R16G16B16A16_PREMULTIPLIED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 guint16 values; for red, green, blue, alpha. The color values are
+premultiplied with the alpha value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:r16g16b16a16_premultiplied</span></pre></dd>
+      
+        <dt id="R16G16B16A16-constant" class="">R16G16B16A16 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 guint16 values; for red, green, blue, alpha.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span> <span class='kw'>or</span> <span class='symbol'>:r16g16b16a16</span></pre></dd>
+      
+        <dt id="R16G16B16_FLOAT-constant" class="">R16G16B16_FLOAT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>3 half-float values; for red, green, blue. The data is opaque.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span> <span class='kw'>or</span> <span class='symbol'>:r16g16b16_float</span></pre></dd>
+      
+        <dt id="R16G16B16A16_FLOAT_PREMULTIPLIED-constant" class="">R16G16B16A16_FLOAT_PREMULTIPLIED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 half-float values; for red, green, blue and alpha. The color values are
+premultiplied with the alpha value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>13</span> <span class='kw'>or</span> <span class='symbol'>:r16g16b16a16_float_premultiplied</span></pre></dd>
+      
+        <dt id="R16G16B16A16_FLOAT-constant" class="">R16G16B16A16_FLOAT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 half-float values; for red, green, blue and alpha.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>14</span> <span class='kw'>or</span> <span class='symbol'>:r16g16b16a16_float</span></pre></dd>
+      
+        <dt id="R32G32B32_FLOAT-constant" class="">R32G32B32_FLOAT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>3 float values; for red, green, blue.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>15</span> <span class='kw'>or</span> <span class='symbol'>:r32g32b32_float</span></pre></dd>
+      
+        <dt id="R32G32B32A32_FLOAT_PREMULTIPLIED-constant" class="">R32G32B32A32_FLOAT_PREMULTIPLIED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 float values; for red, green, blue and alpha. The color values are
+premultiplied with the alpha value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span> <span class='kw'>or</span> <span class='symbol'>:r32g32b32a32_float_premultiplied</span></pre></dd>
+      
+        <dt id="R32G32B32A32_FLOAT-constant" class="">R32G32B32A32_FLOAT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 float values; for red, green, blue and alpha.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>17</span> <span class='kw'>or</span> <span class='symbol'>:r32g32b32a32_float</span></pre></dd>
+      
+        <dt id="G8A8_PREMULTIPLIED-constant" class="">G8A8_PREMULTIPLIED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>2 bytes; for grayscale, alpha. The color values are premultiplied with the
+alpha value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>18</span> <span class='kw'>or</span> <span class='symbol'>:g8a8_premultiplied</span></pre></dd>
+      
+        <dt id="G8A8-constant" class="">G8A8 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>2 bytes; for grayscale, alpha.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>19</span> <span class='kw'>or</span> <span class='symbol'>:g8a8</span></pre></dd>
+      
+        <dt id="G8-constant" class="">G8 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>One byte; for grayscale. The data is opaque.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>20</span> <span class='kw'>or</span> <span class='symbol'>:g8</span></pre></dd>
+      
+        <dt id="G16A16_PREMULTIPLIED-constant" class="">G16A16_PREMULTIPLIED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>2 guint16 values; for grayscale, alpha. The color values are premultiplied
+with the alpha value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>21</span> <span class='kw'>or</span> <span class='symbol'>:g16a16_premultiplied</span></pre></dd>
+      
+        <dt id="G16A16-constant" class="">G16A16 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>2 guint16 values; for grayscale, alpha.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>22</span> <span class='kw'>or</span> <span class='symbol'>:g16a16</span></pre></dd>
+      
+        <dt id="G16-constant" class="">G16 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>One guint16 value; for grayscale. The data is opaque.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>23</span> <span class='kw'>or</span> <span class='symbol'>:g16</span></pre></dd>
+      
+        <dt id="A8-constant" class="">A8 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>One byte; for alpha.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>24</span> <span class='kw'>or</span> <span class='symbol'>:a8</span></pre></dd>
+      
+        <dt id="A16-constant" class="">A16 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>One guint16 value; for alpha.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>25</span> <span class='kw'>or</span> <span class='symbol'>:a16</span></pre></dd>
+      
+        <dt id="A16_FLOAT-constant" class="">A16_FLOAT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>One half-float value; for alpha.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>26</span> <span class='kw'>or</span> <span class='symbol'>:a16_float</span></pre></dd>
+      
+        <dt id="A32_FLOAT-constant" class="">A32_FLOAT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>One float value; for alpha.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>27</span> <span class='kw'>or</span> <span class='symbol'>:a32_float</span></pre></dd>
+      
+        <dt id="A8B8G8R8_PREMULTIPLIED-constant" class="">A8B8G8R8_PREMULTIPLIED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 bytes; for alpha, blue, green, red, The color values are premultiplied with
+the alpha value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>28</span> <span class='kw'>or</span> <span class='symbol'>:a8b8g8r8_premultiplied</span></pre></dd>
+      
+        <dt id="B8G8R8X8-constant" class="">B8G8R8X8 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 bytes; for blue, green, red, unused.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>29</span> <span class='kw'>or</span> <span class='symbol'>:b8g8r8x8</span></pre></dd>
+      
+        <dt id="X8R8G8B8-constant" class="">X8R8G8B8 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 bytes; for unused, red, green, blue.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>30</span> <span class='kw'>or</span> <span class='symbol'>:x8r8g8b8</span></pre></dd>
+      
+        <dt id="R8G8B8X8-constant" class="">R8G8B8X8 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 bytes; for red, green, blue, unused.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>31</span> <span class='kw'>or</span> <span class='symbol'>:r8g8b8x8</span></pre></dd>
+      
+        <dt id="X8B8G8R8-constant" class="">X8B8G8R8 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>4 bytes; for unused, blue, green, red.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>32</span> <span class='kw'>or</span> <span class='symbol'>:x8b8g8r8</span></pre></dd>
+      
+        <dt id="N_FORMATS-constant" class="">N_FORMATS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The number of formats. This value will change as
+more formats get added, so do not rely on its concrete integer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>33</span> <span class='kw'>or</span> <span class='symbol'>:n_formats</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

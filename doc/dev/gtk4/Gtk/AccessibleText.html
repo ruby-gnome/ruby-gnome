@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gtk::AccessibleText
+  
+    &mdash; Ruby/GTK4
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::AccessibleText";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">AccessibleText</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gtk::AccessibleText
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>An interface for accessible objects containing formatted text.</p>
+<p>The <code>GtkAccessibleText</code> interfaces is meant to be implemented by accessible
+objects that have text formatted with attributes, or non-trivial text contents.</p>
+<p>You should use the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleProperty.LABEL] or the
+[enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleProperty.DESCRIPTION] properties for accessible
+objects containing simple, unformatted text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#caret_position-instance_method" title="#caret_position (instance method)">#<strong>caret_position</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the position of the caret inside the accessible object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_attributes-instance_method" title="#get_attributes (instance method)">#<strong>get_attributes</strong>(offset, n_ranges, ranges, attribute_names, attribute_values)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the text attributes inside the accessible object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_contents-instance_method" title="#get_contents (instance method)">#<strong>get_contents</strong>(start, end)  &#x21d2; GLib::Bytes </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieve the current contents of the accessible object within the given range.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_contents_at-instance_method" title="#get_contents_at (instance method)">#<strong>get_contents_at</strong>(offset, granularity, start, end)  &#x21d2; GLib::Bytes </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieve the current contents of the accessible object starting from the given offset, and using the given granularity.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_default_attributes-instance_method" title="#get_default_attributes (instance method)">#<strong>get_default_attributes</strong>(attribute_names, attribute_values)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the default text attributes inside the accessible object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_selection-instance_method" title="#get_selection (instance method)">#<strong>get_selection</strong>(n_ranges, ranges)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the selection ranges in the accessible object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_caret_position-instance_method" title="#update_caret_position (instance method)">#<strong>update_caret_position</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Updates the position of the caret.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_contents-instance_method" title="#update_contents (instance method)">#<strong>update_contents</strong>(change, start, end)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Notifies assistive technologies of a change in contents.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_selection_bound-instance_method" title="#update_selection_bound (instance method)">#<strong>update_selection_bound</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Updates the boundary of the selection.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="caret_position-instance_method">
+  
+    #<strong>caret_position</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the position of the caret inside the accessible object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the position of the caret, in characters</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_attributes-instance_method">
+  
+    #<strong>get_attributes</strong>(offset, n_ranges, ranges, attribute_names, attribute_values)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the text attributes inside the accessible object.</p>
+<p>Each attribute is composed by:</p>
+<ul>
+<li>a range</li>
+<li>a name</li>
+<li>a value</li>
+</ul>
+<p>It is left to the implementation to determine the serialization format
+of the value to a string.</p>
+<p>GTK provides support for various text attribute names and values, but
+implementations of this interface are free to add their own attributes.</p>
+<p>If this function returns true, <code>n_ranges</code> will be set to a value
+greater than or equal to one, <!-- raw HTML omitted -->ranges<!-- raw HTML omitted --> will be set to a newly
+allocated array of [struct#Gtk.AccessibleTextRange].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the offset, in characters</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_ranges</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of attributes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ranges</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gtk::AccessibleTextRange&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the ranges of the attributes
+inside the accessible object</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>attribute_names</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the
+names of the attributes inside the accessible object</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>attribute_values</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the
+values of the attributes inside the accessible object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the accessible object has at least an attribute,
+and false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_contents-instance_method">
+  
+    #<strong>get_contents</strong>(start, end)  &#x21d2; <tt>GLib::Bytes</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieve the current contents of the accessible object within
+the given range.</p>
+<p>If <!-- raw HTML omitted -->end<!-- raw HTML omitted --> is <code>G_MAXUINT</code>, the end of the range is the full content
+of the accessible object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the beginning of the range, in characters</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the end of the range, in characters</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Bytes</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the requested slice of the contents of the
+accessible object, as UTF-8. Note that the slice does not have to
+be NUL-terminated</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_contents_at-instance_method">
+  
+    #<strong>get_contents_at</strong>(offset, granularity, start, end)  &#x21d2; <tt>GLib::Bytes</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieve the current contents of the accessible object starting
+from the given offset, and using the given granularity.</p>
+<p>The <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> values contain the boundaries of the text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the offset, in characters</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>granularity</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccessibleTextGranularity.html" title="Gtk::AccessibleTextGranularity (module)">Gtk::AccessibleTextGranularity</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the granularity of the query</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the start of the range, in characters</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the end of the range, in characters</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Bytes</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the requested slice of the contents of the
+accessible object, as UTF-8. Note that the slice does not have to
+be NUL-terminated</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_default_attributes-instance_method">
+  
+    #<strong>get_default_attributes</strong>(attribute_names, attribute_values)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the default text attributes inside the accessible object.</p>
+<p>Each attribute is composed by:</p>
+<ul>
+<li>a name</li>
+<li>a value</li>
+</ul>
+<p>It is left to the implementation to determine the serialization format
+of the value to a string.</p>
+<p>GTK provides support for various text attribute names and values, but
+implementations of this interface are free to add their own attributes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attribute_names</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the
+names of the default attributes inside the accessible object</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>attribute_values</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the
+values of the default attributes inside the accessible object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_selection-instance_method">
+  
+    #<strong>get_selection</strong>(n_ranges, ranges)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the selection ranges in the accessible object.</p>
+<p>If this function returns true, <code>n_ranges</code> will be set to a value
+greater than or equal to one, and <!-- raw HTML omitted -->ranges<!-- raw HTML omitted --> will be set to a newly
+allocated array of [struct#Gtk.AccessibleTextRange].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_ranges</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of selection ranges</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ranges</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gtk::AccessibleTextRange&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the selection ranges</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if there is at least a selection inside the
+accessible object, and false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_caret_position-instance_method">
+  
+    #<strong>update_caret_position</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Updates the position of the caret.</p>
+<p>Implementations of the <code>GtkAccessibleText</code> interface should call this
+function every time the caret has moved, in order to notify assistive
+technologies.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_contents-instance_method">
+  
+    #<strong>update_contents</strong>(change, start, end)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Notifies assistive technologies of a change in contents.</p>
+<p>Implementations of the <code>GtkAccessibleText</code> interface should call this
+function every time their contents change as the result of an operation,
+like an insertion or a removal.</p>
+<p>Note: If the change is a deletion, this function must be called <em>before</em>
+removing the contents, if it is an insertion, it must be called <em>after</em>
+inserting the new contents.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>change</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccessibleTextContentChange.html" title="Gtk::AccessibleTextContentChange (module)">Gtk::AccessibleTextContentChange</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the type of change in the contents</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the starting offset of the change, in characters</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the end offset of the change, in characters</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_selection_bound-instance_method">
+  
+    #<strong>update_selection_bound</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Updates the boundary of the selection.</p>
+<p>Implementations of the <code>GtkAccessibleText</code> interface should call this
+function every time the selection has moved, in order to notify assistive
+technologies.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

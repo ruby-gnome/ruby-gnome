@@ -1,0 +1,2389 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GstBase::CollectPads
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GstBase::CollectPads";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GstBase.html" title="GstBase (module)">GstBase</a></span></span>
+     &raquo; 
+    <span class="title">CollectPads</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GstBase::CollectPads
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></li>
+          
+            <li class="next">GstBase::CollectPads</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_pad-instance_method" title="#add_pad (instance method)">#<strong>add_pad</strong>(pad, size, destroy_notify, lock)  &#x21d2; GstBase::CollectData </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Add a pad to the collection of collect pads.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#available-instance_method" title="#available (instance method)">#<strong>available</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Query how much bytes can be read from each queued buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clip_running_time-instance_method" title="#clip_running_time (instance method)">#<strong>clip_running_time</strong>(cdata, buf, outbuf, user_data)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Convenience clipping function that converts incoming buffer's timestamp to running time, or clips the buffer if outside configured segment.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#event_default-instance_method" title="#event_default (instance method)">#<strong>event_default</strong>(data, event, discard)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Default Gst::CollectPads event handling that elements should always chain up to to ensure proper operation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flush-instance_method" title="#flush (instance method)">#<strong>flush</strong>(data, size)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Flush <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from the pad <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flushing=-instance_method" title="#flushing= (instance method)">#<strong>flushing=</strong>(flushing)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Change the flushing state of all the pads in the collection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; GstBase::CollectPads </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new instance of Gst::CollectPads.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#peek-instance_method" title="#peek (instance method)">#<strong>peek</strong>(data)  &#x21d2; Gst::Buffer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Peek at the buffer currently queued in <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pop-instance_method" title="#pop (instance method)">#<strong>pop</strong>(data)  &#x21d2; Gst::Buffer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Pop the buffer currently queued in <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query_default-instance_method" title="#query_default (instance method)">#<strong>query_default</strong>(data, query, discard)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Default Gst::CollectPads query handling that elements should always chain up to to ensure proper operation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_buffer-instance_method" title="#read_buffer (instance method)">#<strong>read_buffer</strong>(data, size)  &#x21d2; Gst::Buffer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get a subbuffer of <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from the given pad <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_pad-instance_method" title="#remove_pad (instance method)">#<strong>remove_pad</strong>(pad)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Remove a pad from the collection of collect pads.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_buffer_function-instance_method" title="#set_buffer_function (instance method)">#<strong>set_buffer_function</strong>(func, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set the callback function and user data that will be called with the oldest buffer when all pads have been collected, or nil on EOS.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_clip_function-instance_method" title="#set_clip_function (instance method)">#<strong>set_clip_function</strong>(clipfunc, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Install a clipping function that is called right after a buffer is received on a pad managed by <!-- raw HTML omitted -->pads<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_compare_function-instance_method" title="#set_compare_function (instance method)">#<strong>set_compare_function</strong>(func, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set the timestamp comparison function.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_event_function-instance_method" title="#set_event_function (instance method)">#<strong>set_event_function</strong>(func, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set the event callback function and user data that will be called when collectpads has received an event originating from one of the collected pads.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_flush_function-instance_method" title="#set_flush_function (instance method)">#<strong>set_flush_function</strong>(func, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Install a flush function that is called when the internal state of all pads should be flushed as part of flushing seek handling.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_function-instance_method" title="#set_function (instance method)">#<strong>set_function</strong>(func, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>CollectPads provides a default collection algorithm that will determine the oldest buffer available on all of its pads, and then delegate to a configured callback.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_query_function-instance_method" title="#set_query_function (instance method)">#<strong>set_query_function</strong>(func, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set the query callback function and user data that will be called after collectpads has received a query originating from one of the collected pads.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_waiting-instance_method" title="#set_waiting (instance method)">#<strong>set_waiting</strong>(data, waiting)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets a pad to waiting or non-waiting mode, if at least this pad has not been created with locked waiting state, in which case nothing happens.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#src_event_default-instance_method" title="#src_event_default (instance method)">#<strong>src_event_default</strong>(pad, event)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Default Gst::CollectPads event handling for the src pad of elements.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#start-instance_method" title="#start (instance method)">#<strong>start</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Starts the processing of data in the collect_pads.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stop-instance_method" title="#stop (instance method)">#<strong>stop</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Stops the processing of data in the collect_pads.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#take_buffer-instance_method" title="#take_buffer (instance method)">#<strong>take_buffer</strong>(data, size)  &#x21d2; Gst::Buffer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get a subbuffer of <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from the given pad <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Gst/Object.html#add_control_binding-instance_method" title="Gst::Object#add_control_binding (method)">#add_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#check_uniqueness-class_method" title="Gst::Object.check_uniqueness (method)">check_uniqueness</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_bindings_disabled=-instance_method" title="Gst::Object#control_bindings_disabled= (method)">#control_bindings_disabled=</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate-instance_method" title="Gst::Object#control_rate (method)">#control_rate</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate=-instance_method" title="Gst::Object#control_rate= (method)">#control_rate=</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_deep_notify-class_method" title="Gst::Object.default_deep_notify (method)">default_deep_notify</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_error-instance_method" title="Gst::Object#default_error (method)">#default_error</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_control_binding-instance_method" title="Gst::Object#get_control_binding (method)">#get_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_g_value_array-instance_method" title="Gst::Object#get_g_value_array (method)">#get_g_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value-instance_method" title="Gst::Object#get_value (method)">#get_value</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value_array-instance_method" title="Gst::Object#get_value_array (method)">#get_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_active_control_bindings-instance_method" title="Gst::Object#has_active_control_bindings (method)">#has_active_control_bindings</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_ancestor-instance_method" title="Gst::Object#has_ancestor (method)">#has_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_ancestor-instance_method" title="Gst::Object#has_as_ancestor (method)">#has_as_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_parent-instance_method" title="Gst::Object#has_as_parent (method)">#has_as_parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#name-instance_method" title="Gst::Object#name (method)">#name</a></span>, <span class='object_link'><a href="../Gst/Object.html#name=-instance_method" title="Gst::Object#name= (method)">#name=</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent-instance_method" title="Gst::Object#parent (method)">#parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent=-instance_method" title="Gst::Object#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="../Gst/Object.html#path_string-instance_method" title="Gst::Object#path_string (method)">#path_string</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref-instance_method" title="Gst::Object#ref (method)">#ref</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref_sink-class_method" title="Gst::Object.ref_sink (method)">ref_sink</a></span>, <span class='object_link'><a href="../Gst/Object.html#remove_control_binding-instance_method" title="Gst::Object#remove_control_binding (method)">#remove_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#replace-class_method" title="Gst::Object.replace (method)">replace</a></span>, <span class='object_link'><a href="../Gst/Object.html#set_control_binding_disabled-instance_method" title="Gst::Object#set_control_binding_disabled (method)">#set_control_binding_disabled</a></span>, <span class='object_link'><a href="../Gst/Object.html#suggest_next_sync-instance_method" title="Gst::Object#suggest_next_sync (method)">#suggest_next_sync</a></span>, <span class='object_link'><a href="../Gst/Object.html#sync_values-instance_method" title="Gst::Object#sync_values (method)">#sync_values</a></span>, <span class='object_link'><a href="../Gst/Object.html#unparent-instance_method" title="Gst::Object#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="../Gst/Object.html#unref-instance_method" title="Gst::Object#unref (method)">#unref</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="GstBase::CollectPads (class)">GstBase::CollectPads</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new instance of Gst::CollectPads.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_pad-instance_method">
+  
+    #<strong>add_pad</strong>(pad, size, destroy_notify, lock)  &#x21d2; <tt>GstBase::CollectData</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Add a pad to the collection of collect pads. The pad has to be
+a sinkpad. The refcount of the pad is incremented. Use
+gst_collect_pads_remove_pad() to remove the pad from the collection
+again.</p>
+<p>You specify a size for the returned Gst::CollectData structure
+so that you can use it to store additional information.</p>
+<p>You can also specify a Gst::CollectDataDestroyNotify that will be called
+just before the Gst::CollectData structure is freed. It is passed the
+pointer to the structure and should free any custom memory and resources
+allocated for it.</p>
+<p>Keeping a pad locked in waiting state is only relevant when using
+the default collection algorithm (providing the oldest buffer).
+It ensures a buffer must be available on this pad for a collection
+to take place.  This is of typical use to a muxer element where
+non-subtitle streams should always be in waiting state,
+e.g. to assure that caps information is available on all these streams
+when initial headers have to be written.</p>
+<p>The pad will be automatically activated in push mode when <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> is
+started.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pad</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/Pad.html" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the pad to add</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the size of the returned Gst::CollectData structure</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>destroy_notify</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectDataDestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>function to be called before the returned
+Gst::CollectData structure is freed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>lock</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether to lock this pad in usual waiting state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectData</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Gst::CollectData to identify the
+new pad. Or nil if wrong parameters are supplied.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="available-instance_method">
+  
+    #<strong>available</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Query how much bytes can be read from each queued buffer. This means
+that the result of this call is the maximum number of bytes that can
+be read from each of the pads.</p>
+<p>This function should be called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as
+in the callback.</p>
+<p>MT safe.
+returns 0 if a pad has no queued buffer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The maximum number of bytes queued on all pads. This function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clip_running_time-instance_method">
+  
+    #<strong>clip_running_time</strong>(cdata, buf, outbuf, user_data)  &#x21d2; <tt><span class='object_link'><a href="../Gst/FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Convenience clipping function that converts incoming buffer's timestamp
+to running time, or clips the buffer if outside configured segment.</p>
+<p>Since 1.6, this clipping function also sets the DTS parameter of the
+GstCollectData structure. This version of the running time DTS can be
+negative. G_MININT64 is used to indicate invalid value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cdata</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectData</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>collect data of corresponding pad</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>buf</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>buffer being clipped</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>outbuf</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>output buffer with running time, or NULL if clipped</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data (unused)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="event_default-instance_method">
+  
+    #<strong>event_default</strong>(data, event, discard)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Default Gst::CollectPads event handling that elements should always
+chain up to to ensure proper operation.  Element might however indicate
+event should not be forwarded downstream.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectData</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>collect data of corresponding pad</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>event</span>
+      
+      
+        <span class='type'>(<tt>Gst::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>event being processed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>discard</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>process but do not send event downstream</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flush-instance_method">
+  
+    #<strong>flush</strong>(data, size)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Flush <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from the pad <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
+<p>This function should be called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as
+in the callback.</p>
+<p>MT safe.
+is 0 if the pad was end-of-stream.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectData</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the data to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of bytes to flush</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of bytes flushed This can be less than <!-- raw HTML omitted -->size<!-- raw HTML omitted --> and</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flushing=-instance_method">
+  
+    #<strong>flushing=</strong>(flushing)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Change the flushing state of all the pads in the collection. No pad
+is able to accept anymore data when <!-- raw HTML omitted -->flushing<!-- raw HTML omitted --> is true. Calling this
+function with <!-- raw HTML omitted -->flushing<!-- raw HTML omitted --> false makes <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> accept data again.
+Caller must ensure that downstream streaming (thread) is not blocked,
+e.g. by sending a FLUSH_START downstream.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flushing</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>desired state of the pads</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="peek-instance_method">
+  
+    #<strong>peek</strong>(data)  &#x21d2; <tt>Gst::Buffer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Peek at the buffer currently queued in <!-- raw HTML omitted -->data<!-- raw HTML omitted -->. This function
+should be called with the <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as in the callback
+handler.</p>
+<p>MT safe.
+buffer is queued. should unref the buffer after usage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectData</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the data to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The buffer in <!-- raw HTML omitted -->data<!-- raw HTML omitted --> or nil if no</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pop-instance_method">
+  
+    #<strong>pop</strong>(data)  &#x21d2; <tt>Gst::Buffer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Pop the buffer currently queued in <!-- raw HTML omitted -->data<!-- raw HTML omitted -->. This function
+should be called with the <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as in the callback
+handler.</p>
+<p>MT safe.
+buffer was queued. You should unref the buffer after usage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectData</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the data to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The buffer in <!-- raw HTML omitted -->data<!-- raw HTML omitted --> or nil if no</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="query_default-instance_method">
+  
+    #<strong>query_default</strong>(data, query, discard)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Default Gst::CollectPads query handling that elements should always
+chain up to to ensure proper operation.  Element might however indicate
+query should not be forwarded downstream.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectData</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>collect data of corresponding pad</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>query</span>
+      
+      
+        <span class='type'>(<tt>Gst::Query</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>query being processed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>discard</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>process but do not send event downstream</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="read_buffer-instance_method">
+  
+    #<strong>read_buffer</strong>(data, size)  &#x21d2; <tt>Gst::Buffer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get a subbuffer of <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from the given pad <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
+<p>This function should be called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as in the
+callback.</p>
+<p>MT safe.
+be less that requested. A return of nil signals that the pad is
+end-of-stream. Unref the buffer after use.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectData</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the data to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of bytes to read</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A sub buffer. The size of the buffer can</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_pad-instance_method">
+  
+    #<strong>remove_pad</strong>(pad)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Remove a pad from the collection of collect pads. This function will also
+free the Gst::CollectData and all the resources that were allocated with
+gst_collect_pads_add_pad().</p>
+<p>The pad will be deactivated automatically when <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> is stopped.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pad</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/Pad.html" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the pad to remove</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the pad could be removed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_buffer_function-instance_method">
+  
+    #<strong>set_buffer_function</strong>(func, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set the callback function and user data that will be called with
+the oldest buffer when all pads have been collected, or nil on EOS.
+If a buffer is passed, the callback owns a reference and must unref
+it.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectPadsBufferFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the function to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data passed to the function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_clip_function-instance_method">
+  
+    #<strong>set_clip_function</strong>(clipfunc, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Install a clipping function that is called right after a buffer is received
+on a pad managed by <!-- raw HTML omitted -->pads<!-- raw HTML omitted -->. See Gst::CollectPadsClipFunction for more info.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>clipfunc</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectPadsClipFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>clip function to install</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data to pass to <!-- raw HTML omitted -->clip_func<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_compare_function-instance_method">
+  
+    #<strong>set_compare_function</strong>(func, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set the timestamp comparison function.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectPadsCompareFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the function to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data passed to the function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_event_function-instance_method">
+  
+    #<strong>set_event_function</strong>(func, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set the event callback function and user data that will be called when
+collectpads has received an event originating from one of the collected
+pads.  If the event being processed is a serialized one, this callback is
+called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, otherwise not.  As this lock should be
+held when calling a number of CollectPads functions, it should be acquired
+if so (unusually) needed.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectPadsEventFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the function to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data passed to the function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_flush_function-instance_method">
+  
+    #<strong>set_flush_function</strong>(func, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Install a flush function that is called when the internal
+state of all pads should be flushed as part of flushing seek
+handling. See Gst::CollectPadsFlushFunction for more info.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectPadsFlushFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flush function to install</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data to pass to <!-- raw HTML omitted -->func<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_function-instance_method">
+  
+    #<strong>set_function</strong>(func, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>CollectPads provides a default collection algorithm that will determine
+the oldest buffer available on all of its pads, and then delegate
+to a configured callback.
+However, if circumstances are more complicated and/or more control
+is desired, this sets a callback that will be invoked instead when
+all the pads added to the collection have buffers queued.
+Evidently, this callback is not compatible with
+gst_collect_pads_set_buffer_function() callback.
+If this callback is set, the former will be unset.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectPadsFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the function to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data passed to the function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_query_function-instance_method">
+  
+    #<strong>set_query_function</strong>(func, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set the query callback function and user data that will be called after
+collectpads has received a query originating from one of the collected
+pads.  If the query being processed is a serialized one, this callback is
+called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, otherwise not.  As this lock should be
+held when calling a number of CollectPads functions, it should be acquired
+if so (unusually) needed.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectPadsQueryFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the function to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data passed to the function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_waiting-instance_method">
+  
+    #<strong>set_waiting</strong>(data, waiting)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets a pad to waiting or non-waiting mode, if at least this pad
+has not been created with locked waiting state,
+in which case nothing happens.</p>
+<p>This function should be called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as
+in the callback.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectData</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the data to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>waiting</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>boolean indicating whether this pad should operate
+in waiting or non-waiting mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="src_event_default-instance_method">
+  
+    #<strong>src_event_default</strong>(pad, event)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Default Gst::CollectPads event handling for the src pad of elements.
+Elements can chain up to this to let flushing seek event handling
+be done by Gst::CollectPads.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pad</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/Pad.html" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>src Gst::Pad that received the event</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>event</span>
+      
+      
+        <span class='type'>(<tt>Gst::Event</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>event being processed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="start-instance_method">
+  
+    #<strong>start</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Starts the processing of data in the collect_pads.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stop-instance_method">
+  
+    #<strong>stop</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Stops the processing of data in the collect_pads. this function
+will also unblock any blocking operations.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="take_buffer-instance_method">
+  
+    #<strong>take_buffer</strong>(data, size)  &#x21d2; <tt>Gst::Buffer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get a subbuffer of <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from the given pad <!-- raw HTML omitted -->data<!-- raw HTML omitted -->. Flushes the amount
+of read bytes.</p>
+<p>This function should be called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as in the
+callback.</p>
+<p>MT safe.
+be less that requested. A return of nil signals that the pad is
+end-of-stream. Unref the buffer after use.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GstBase::CollectData</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the data to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of bytes to read</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A sub buffer. The size of the buffer can</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

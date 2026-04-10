@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Wnck::Tasklist
+  
+    &mdash; Ruby/WNCK3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Wnck::Tasklist";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Wnck.html" title="Wnck (module)">Wnck</a></span></span>
+     &raquo; 
+    <span class="title">Tasklist</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Wnck::Tasklist
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Gtk::Container</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::Container</li>
+          
+            <li class="next">Wnck::Tasklist</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#button_relief=-instance_method" title="#button_relief= (instance method)">#<strong>button_relief=</strong>(relief)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the relief type of the buttons in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to <!-- raw HTML omitted -->relief<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_size_hint_list-instance_method" title="#get_size_hint_list (instance method)">#<strong>get_size_hint_list</strong>(n_elements)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Since a Wnck::Tasklist does not have a fixed size (#WnckWindow can be grouped when needed, for example), the standard size request mechanism in GTK+ is not enough to announce what sizes can be used by <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#grouping=-instance_method" title="#grouping= (instance method)">#<strong>grouping=</strong>(grouping)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the grouping policy for <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to <!-- raw HTML omitted -->grouping<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#grouping_limit=-instance_method" title="#grouping_limit= (instance method)">#<strong>grouping_limit=</strong>(limit)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the maximum size of buttons in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> before <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> tries to group Wnck::Window in the same #WnckApplication in only one button.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#handle-instance_method" title="#handle (instance method)">#<strong>handle</strong>  &#x21d2; Wnck::Handle </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Handle.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#handle=-instance_method" title="#handle= (instance method)">#<strong>handle=</strong>(handle)  &#x21d2; Wnck::Handle </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#include_all_workspaces=-instance_method" title="#include_all_workspaces= (instance method)">#<strong>include_all_workspaces=</strong>(include_all_workspaces)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to display Wnck::Window from all #WnckWorkspace or not, according to <!-- raw HTML omitted -->include_all_workspaces<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(handle)  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Wnck::Tasklist.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#middle_click_close=-instance_method" title="#middle_click_close= (instance method)">#<strong>middle_click_close=</strong>(middle_click_close)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to close windows with mouse middle click on button, according to <!-- raw HTML omitted -->middle_click_close<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#orientation=-instance_method" title="#orientation= (instance method)">#<strong>orientation=</strong>(orient)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set the orientation of the <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to match <!-- raw HTML omitted -->orient<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scroll_enabled-instance_method" title="#scroll_enabled (instance method)">#<strong>scroll_enabled</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the scroll behavior of the <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scroll_enabled=-instance_method" title="#scroll_enabled= (instance method)">#<strong>scroll_enabled=</strong>(scroll_enabled)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the scroll behavior of the <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_icon_loader-instance_method" title="#set_icon_loader (instance method)">#<strong>set_icon_loader</strong>(load_icon_func, data, free_data_func)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets a function to be used for loading icons.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#switch_workspace_on_unminimize=-instance_method" title="#switch_workspace_on_unminimize= (instance method)">#<strong>switch_workspace_on_unminimize=</strong>(switch_workspace_on_unminimize)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to activate or not the Wnck::Workspace a #WnckWindow is on when unminimizing it, according to <!-- raw HTML omitted -->switch_workspace_on_unminimize<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(handle)  &#x21d2; <tt>Gtk::Widget</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Wnck::Tasklist. The #WnckTasklist will list #WnckWindow of the
+Wnck::Screen it is on.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>handle</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Handle.html" title="Wnck::Handle (class)">Wnck::Handle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Wnck::Handle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="button_relief=-instance_method">
+  
+    #<strong>button_relief=</strong>(relief)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the relief type of the buttons in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to <!-- raw HTML omitted -->relief<!-- raw HTML omitted -->. The main use of
+this function is proper integration of Wnck::Tasklist in panels with
+non-system backgrounds.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>relief</span>
+      
+      
+        <span class='type'>(<tt>Gtk::ReliefStyle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a relief type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_size_hint_list-instance_method">
+  
+    #<strong>get_size_hint_list</strong>(n_elements)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Since a Wnck::Tasklist does not have a fixed size (#WnckWindow can be grouped
+when needed, for example), the standard size request mechanism in GTK+ is
+not enough to announce what sizes can be used by <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->. The size hints
+mechanism is a solution for this. See panel_applet_set_size_hints() for more
+information.
+returned by this function. This number should always be pair.
+appropriate size for <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_elements</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the number of elements in the array</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a list of size hints that can be used to allocate an</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="grouping=-instance_method">
+  
+    #<strong>grouping=</strong>(grouping)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the grouping policy for <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to <!-- raw HTML omitted -->grouping<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>grouping</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TasklistGroupingType.html" title="Wnck::TasklistGroupingType (module)">Wnck::TasklistGroupingType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a grouping policy.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="grouping_limit=-instance_method">
+  
+    #<strong>grouping_limit=</strong>(limit)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the maximum size of buttons in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> before <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> tries to
+group Wnck::Window in the same #WnckApplication in only one button. This
+limit is valid only when the grouping policy of <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> is
+%WNCK_TASKLIST_AUTO_GROUP.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>limit</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a size in pixels.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="handle-instance_method">
+  
+    #<strong>handle</strong>  &#x21d2; <tt><span class='object_link'><a href="Handle.html" title="Wnck::Handle (class)">Wnck::Handle</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns handle.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Handle.html" title="Wnck::Handle (class)">Wnck::Handle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>handle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="handle=-instance_method">
+  
+    #<strong>handle=</strong>(handle)  &#x21d2; <tt><span class='object_link'><a href="Handle.html" title="Wnck::Handle (class)">Wnck::Handle</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>handle</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Handle.html" title="Wnck::Handle (class)">Wnck::Handle</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Handle.html" title="Wnck::Handle (class)">Wnck::Handle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>handle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Handle.html" title="Wnck::Handle (class)">Wnck::Handle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>handle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="include_all_workspaces=-instance_method">
+  
+    #<strong>include_all_workspaces=</strong>(include_all_workspaces)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to display Wnck::Window from all #WnckWorkspace or not,
+according to <!-- raw HTML omitted -->include_all_workspaces<!-- raw HTML omitted -->.</p>
+<p>Note that if the active Wnck::Workspace has a viewport and if
+<!-- raw HTML omitted -->include_all_workspaces<!-- raw HTML omitted --> is false, then only the Wnck::Window visible in the
+viewport are displayed in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->. The rationale for this is that the
+viewport is generally used to implement workspace-like behavior. A
+side-effect of this is that, when using multiple Wnck::Workspace with
+viewport, it is not possible to show all Wnck::Window from a #WnckWorkspace
+(even those that are not visible in the viewport) in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> without
+showing all Wnck::Window from all #WnckWorkspace.
+Wnck::Workspace in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>include_all_workspaces</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether to display Wnck::Window from all</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="middle_click_close=-instance_method">
+  
+    #<strong>middle_click_close=</strong>(middle_click_close)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to close windows with mouse middle click on button,
+according to <!-- raw HTML omitted -->middle_click_close<!-- raw HTML omitted -->.
+button.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>middle_click_close</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether to close windows with middle click on</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="orientation=-instance_method">
+  
+    #<strong>orientation=</strong>(orient)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set the orientation of the <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to match <!-- raw HTML omitted -->orient<!-- raw HTML omitted -->.
+This function can be used to integrate a Wnck::Tasklist in vertical panels.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>orient</span>
+      
+      
+        <span class='type'>(<tt>Gtk::Orientation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a GtkOrientation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scroll_enabled-instance_method">
+  
+    #<strong>scroll_enabled</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the scroll behavior of the <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scroll_enabled=-instance_method">
+  
+    #<strong>scroll_enabled=</strong>(scroll_enabled)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the scroll behavior of the <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->. When set to true, a scroll
+event over the tasklist will change the current window accordingly.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>scroll_enabled</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a boolean.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_icon_loader-instance_method">
+  
+    #<strong>set_icon_loader</strong>(load_icon_func, data, free_data_func)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets a function to be used for loading icons.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>load_icon_func</span>
+      
+      
+        <span class='type'>(<tt>Wnck::LoadIconFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>icon loader function</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>data for icon loader function</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>free_data_func</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>function to free the data</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="switch_workspace_on_unminimize=-instance_method">
+  
+    #<strong>switch_workspace_on_unminimize=</strong>(switch_workspace_on_unminimize)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to activate or not the Wnck::Workspace a #WnckWindow is on
+when unminimizing it, according to <!-- raw HTML omitted -->switch_workspace_on_unminimize<!-- raw HTML omitted -->.</p>
+<p>FIXME: does it still work?
+Wnck::Window is on when unminimizing it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>switch_workspace_on_unminimize</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether to activate the Wnck::Workspace a</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

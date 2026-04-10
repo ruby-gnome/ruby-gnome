@@ -1,0 +1,4856 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Rsvg::Handle
+  
+    &mdash; Ruby/RSVG2
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Rsvg::Handle";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (H)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rsvg.html" title="Rsvg (module)">Rsvg</a></span></span>
+     &raquo; 
+    <span class="title">Handle</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Rsvg::Handle
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Rsvg::Handle</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/rsvg2/handle.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Class structure for [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_from_data-class_method" title="new_from_data (class method)">.<strong>new_from_data</strong>(data)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>For backward compatibility.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_from_file-class_method" title="new_from_file (class method)">.<strong>new_from_file</strong>(file_name, options = {})  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>For backward compatibility.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#base_gfile=-instance_method" title="#base_gfile= (instance method)">#<strong>base_gfile=</strong>(base_file)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set the base URI for <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> from <!-- raw HTML omitted -->file<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#base_uri-instance_method" title="#base_uri (instance method)">#<strong>base_uri</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Base URI, to be used to resolve relative references for resources.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#base_uri=-instance_method" title="#base_uri= (instance method)">#<strong>base_uri=</strong>(base_uri)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Base URI, to be used to resolve relative references for resources.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close-instance_method" title="#close (instance method)">#<strong>close</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This is used after calling [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.write] to indicate that there is no more data to consume, and to start the actual parsing of the SVG document.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#desc-instance_method" title="#desc (instance method)">#<strong>desc</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>SVG's description.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#desc=-instance_method" title="#desc= (instance method)">#<strong>desc=</strong>(desc)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>SVG's description.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dpi=-instance_method" title="#dpi= (instance method)">#<strong>dpi=</strong>(dpi)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the DPI at which the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> will be rendered.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dpi_x-instance_method" title="#dpi_x (instance method)">#<strong>dpi_x</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Horizontal resolution in dots per inch.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dpi_x=-instance_method" title="#dpi_x= (instance method)">#<strong>dpi_x=</strong>(dpi_x)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Horizontal resolution in dots per inch.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dpi_y-instance_method" title="#dpi_y (instance method)">#<strong>dpi_y</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Horizontal resolution in dots per inch.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dpi_y=-instance_method" title="#dpi_y= (instance method)">#<strong>dpi_y=</strong>(dpi_y)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Horizontal resolution in dots per inch.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#em-instance_method" title="#em (instance method)">#<strong>em</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Exact width, in pixels, of the rendered SVG before calling the size callback as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#em=-instance_method" title="#em= (instance method)">#<strong>em=</strong>(em)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Exact width, in pixels, of the rendered SVG before calling the size callback as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ex-instance_method" title="#ex (instance method)">#<strong>ex</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Exact height, in pixels, of the rendered SVG before calling the size callback as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ex=-instance_method" title="#ex= (instance method)">#<strong>ex=</strong>(ex)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Exact height, in pixels, of the rendered SVG before calling the size callback as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flags-instance_method" title="#flags (instance method)">#<strong>flags</strong>  &#x21d2; Rsvg::HandleFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Flags from [flags<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.HandleFlags].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flags=-instance_method" title="#flags= (instance method)">#<strong>flags=</strong>(flags)  &#x21d2; Rsvg::HandleFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Flags from [flags<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.HandleFlags].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#free-instance_method" title="#free (instance method)">#<strong>free</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Frees <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_dimensions-instance_method" title="#get_dimensions (instance method)">#<strong>get_dimensions</strong>(dimension_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the SVG's size.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_dimensions_sub-instance_method" title="#get_dimensions_sub (instance method)">#<strong>get_dimensions_sub</strong>(dimension_data, id)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the size of a subelement of the SVG file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_geometry_for_element-instance_method" title="#get_geometry_for_element (instance method)">#<strong>get_geometry_for_element</strong>(id, out_ink_rect, out_logical_rect)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Computes the ink rectangle and logical rectangle of a single SVG element.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_geometry_for_layer-instance_method" title="#get_geometry_for_layer (instance method)">#<strong>get_geometry_for_layer</strong>(id, viewport, out_ink_rect, out_logical_rect)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Computes the ink rectangle and logical rectangle of an SVG element, or the whole SVG, as if the whole SVG were rendered to a specific viewport.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_intrinsic_dimensions-instance_method" title="#get_intrinsic_dimensions (instance method)">#<strong>get_intrinsic_dimensions</strong>(out_has_width, out_width, out_has_height, out_height, out_has_viewbox, out_viewbox)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>In simple terms, queries the <code>width</code>, <code>height</code>, and <code>viewBox</code> attributes in an SVG document.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_intrinsic_size_in_pixels-instance_method" title="#get_intrinsic_size_in_pixels (instance method)">#<strong>get_intrinsic_size_in_pixels</strong>(out_width, out_height)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Converts an SVG document's intrinsic dimensions to pixels, and returns the result.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_pixbuf_sub-instance_method" title="#get_pixbuf_sub (instance method)">#<strong>get_pixbuf_sub</strong>(id)  &#x21d2; GdkPixbuf::Pixbuf </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a <code>GdkPixbuf</code> the same size as the entire SVG loaded into <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->, but only renders the sub-element that has the specified <!-- raw HTML omitted -->id<!-- raw HTML omitted --> (and all its sub-sub-elements recursively).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_position_sub-instance_method" title="#get_position_sub (instance method)">#<strong>get_position_sub</strong>(position_data, id)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the position of a subelement of the SVG file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_sub-instance_method" title="#has_sub (instance method)">#<strong>has_sub</strong>(id)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks whether the element <!-- raw HTML omitted -->id<!-- raw HTML omitted --> exists in the SVG document.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#height-instance_method" title="#height (instance method)">#<strong>height</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Height, in pixels, of the rendered SVG after calling the size callback as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#height=-instance_method" title="#height= (instance method)">#<strong>height=</strong>(height)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Height, in pixels, of the rendered SVG after calling the size callback as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(options = {})  &#x21d2; Rsvg::Handle </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle] with flags <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize_raw-instance_method" title="#initialize_raw (instance method)">#<strong>initialize_raw</strong>  &#x21d2; Rsvg::Handle </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle] with flags <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#internal_set_testing-instance_method" title="#internal_set_testing (instance method)">#<strong>internal_set_testing</strong>(testing)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Do not call this function.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#metadata-instance_method" title="#metadata (instance method)">#<strong>metadata</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>SVG's metadata.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#metadata=-instance_method" title="#metadata= (instance method)">#<strong>metadata=</strong>(metadata)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>SVG's metadata.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pixbuf-instance_method" title="#pixbuf (instance method)">#<strong>pixbuf</strong>  &#x21d2; GdkPixbuf::Pixbuf </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the pixbuf loaded by <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_stream_sync-instance_method" title="#read_stream_sync (instance method)">#<strong>read_stream_sync</strong>(stream, cancellable)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reads <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> and writes the data from it to <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_cairo-instance_method" title="#render_cairo (instance method)">#<strong>render_cairo</strong>(cr)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Draws a loaded SVG handle to a Cairo context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_cairo_sub-instance_method" title="#render_cairo_sub (instance method)">#<strong>render_cairo_sub</strong>(cr, id)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Renders a single SVG element in the same place as for a whole SVG document (a &quot;subset&quot; of the document).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_document-instance_method" title="#render_document (instance method)">#<strong>render_document</strong>(cr, viewport)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Renders the whole SVG document fitted to a viewport.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_element-instance_method" title="#render_element (instance method)">#<strong>render_element</strong>(cr, id, element_viewport)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Renders a single SVG element to a given viewport.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_layer-instance_method" title="#render_layer (instance method)">#<strong>render_layer</strong>(cr, id, viewport)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Renders a single SVG element in the same place as for a whole SVG document.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_dpi_x_y-instance_method" title="#set_dpi_x_y (instance method)">#<strong>set_dpi_x_y</strong>(dpi_x, dpi_y)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the DPI at which the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> will be rendered.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_size_callback-instance_method" title="#set_size_callback (instance method)">#<strong>set_size_callback</strong>(size_func, user_data, user_data_destroy)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the sizing function for the <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->, which can be used to override the size that librsvg computes for SVG images.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_stylesheet-instance_method" title="#set_stylesheet (instance method)">#<strong>set_stylesheet</strong>(css, css_len)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets a CSS stylesheet to use for an SVG document.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#title-instance_method" title="#title (instance method)">#<strong>title</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>SVG's title.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#title=-instance_method" title="#title= (instance method)">#<strong>title=</strong>(title)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>SVG's title.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#width-instance_method" title="#width (instance method)">#<strong>width</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Width, in pixels, of the rendered SVG after calling the size callback as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#width=-instance_method" title="#width= (instance method)">#<strong>width=</strong>(width)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Width, in pixels, of the rendered SVG after calling the size callback as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#write-instance_method" title="#write (instance method)">#<strong>write</strong>(buf, count)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Loads the next <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes of the image.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(options = {})  &#x21d2; <tt><span class='object_link'><a href="" title="Rsvg::Handle (class)">Rsvg::Handle</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle] with flags <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->.  After calling this function,
+you can feed the resulting handle with SVG data by using
+[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.read_stream_sync].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="HandleFlags.html" title="Rsvg::HandleFlags (module)">Rsvg::HandleFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags from [flags<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.HandleFlags]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rsvg2/handle.rb', line 32</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_flags'>flags</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:flags</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:file</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:data</span><span class='rbracket'>]</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_path'>path</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_flags'>flags</span>
+      <span class='const'>Gio</span><span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='symbol'>:path</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_file'>file</span><span class='op'>|</span>
+        <span class='id identifier rubyid_initialize_new_from_gfile_sync'>initialize_new_from_gfile_sync</span><span class='lparen'>(</span><span class='id identifier rubyid_file'>file</span><span class='comma'>,</span> <span class='id identifier rubyid_flags'>flags</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_initialize_new_from_file'>initialize_new_from_file</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_data'>data</span>
+    <span class='id identifier rubyid_initialize_new_from_data'>initialize_new_from_data</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_initialize_raw'>initialize_raw</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="new_from_data-class_method">
+  
+    .<strong>new_from_data</strong>(data)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>For backward compatibility</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+21
+22
+23</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rsvg2/handle.rb', line 21</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new_from_data'>new_from_data</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:data</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_from_file-class_method">
+  
+    .<strong>new_from_file</strong>(file_name, options = {})  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>For backward compatibility</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rsvg2/handle.rb', line 26</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new_from_file'>new_from_file</span><span class='lparen'>(</span><span class='id identifier rubyid_file_name'>file_name</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='symbol'>:file</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_file_name'>file_name</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="base_gfile=-instance_method">
+  
+    #<strong>base_gfile=</strong>(base_file)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set the base URI for <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> from <!-- raw HTML omitted -->file<!-- raw HTML omitted -->.</p>
+<p>Note: This function may only be called before [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.write] or
+[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.read_stream_sync] have been called.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>base_file</span>
+      
+      
+        <span class='type'>(<tt>Gio::File</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GFile</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="base_uri-instance_method">
+  
+    #<strong>base_uri</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Base URI, to be used to resolve relative references for resources.  See the section
+&quot;Security and locations of referenced files&quot; for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>base-uri</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="base_uri=-instance_method">
+  
+    #<strong>base_uri=</strong>(base_uri)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Base URI, to be used to resolve relative references for resources.  See the section
+&quot;Security and locations of referenced files&quot; for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>base_uri</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>base-uri</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>base-uri</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close-instance_method">
+  
+    #<strong>close</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This is used after calling [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.write] to indicate that there is no more data
+to consume, and to start the actual parsing of the SVG document.  The only reason to
+call this function is if you use use [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.write] to feed data into the <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->;
+if you use the other methods like [ctor<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.new_from_file] or
+[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.read_stream_sync], then you do not need to call this function.</p>
+<p>This will return <code>TRUE</code> if the loader closed successfully and the
+SVG data was parsed correctly.  Note that <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> isn't freed until
+[method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.unref] is called.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> on success, or <code>FALSE</code> on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="desc-instance_method">
+  
+    #<strong>desc</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>SVG's description.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>desc</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="desc=-instance_method">
+  
+    #<strong>desc=</strong>(desc)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>SVG's description.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>desc</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>desc</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>desc</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dpi=-instance_method">
+  
+    #<strong>dpi=</strong>(dpi)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the DPI at which the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> will be rendered. Common values are
+75, 90, and 300 DPI.</p>
+<p>Passing a number &lt;= 0 to <!-- raw HTML omitted -->dpi<!-- raw HTML omitted --> will reset the DPI to whatever the default
+value happens to be, but since [id<!-- raw HTML omitted -->rsvg_set_default_dpi<!-- raw HTML omitted -->] is deprecated, please
+do not pass values &lt;= 0 to this function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>dpi</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Dots Per Inch (i.e. as Pixels Per Inch)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dpi_x-instance_method">
+  
+    #<strong>dpi_x</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Horizontal resolution in dots per inch.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>dpi-x</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dpi_x=-instance_method">
+  
+    #<strong>dpi_x=</strong>(dpi_x)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Horizontal resolution in dots per inch.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>dpi_x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>dpi-x</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>dpi-x</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dpi_y-instance_method">
+  
+    #<strong>dpi_y</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Horizontal resolution in dots per inch.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>dpi-y</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dpi_y=-instance_method">
+  
+    #<strong>dpi_y=</strong>(dpi_y)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Horizontal resolution in dots per inch.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>dpi_y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>dpi-y</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>dpi-y</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="em-instance_method">
+  
+    #<strong>em</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Exact width, in pixels, of the rendered SVG before calling the size callback
+as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>em</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="em=-instance_method">
+  
+    #<strong>em=</strong>(em)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Exact width, in pixels, of the rendered SVG before calling the size callback
+as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>em</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>em</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>em</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ex-instance_method">
+  
+    #<strong>ex</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Exact height, in pixels, of the rendered SVG before calling the size callback
+as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ex</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ex=-instance_method">
+  
+    #<strong>ex=</strong>(ex)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Exact height, in pixels, of the rendered SVG before calling the size callback
+as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ex</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ex</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ex</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flags-instance_method">
+  
+    #<strong>flags</strong>  &#x21d2; <tt><span class='object_link'><a href="HandleFlags.html" title="Rsvg::HandleFlags (module)">Rsvg::HandleFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Flags from [flags<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.HandleFlags].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="HandleFlags.html" title="Rsvg::HandleFlags (module)">Rsvg::HandleFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flags=-instance_method">
+  
+    #<strong>flags=</strong>(flags)  &#x21d2; <tt><span class='object_link'><a href="HandleFlags.html" title="Rsvg::HandleFlags (module)">Rsvg::HandleFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Flags from [flags<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.HandleFlags].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="HandleFlags.html" title="Rsvg::HandleFlags (module)">Rsvg::HandleFlags</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="HandleFlags.html" title="Rsvg::HandleFlags (module)">Rsvg::HandleFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="HandleFlags.html" title="Rsvg::HandleFlags (module)">Rsvg::HandleFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="free-instance_method">
+  
+    #<strong>free</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Frees <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_dimensions-instance_method">
+  
+    #<strong>get_dimensions</strong>(dimension_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the SVG's size. Do not call from within the size_func callback, because
+an infinite loop will occur.</p>
+<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s DPI to compute dimensions in
+pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi] beforehand.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>dimension_data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DimensionData.html" title="Rsvg::DimensionData (class)">Rsvg::DimensionData</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A place to store the SVG's size</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_dimensions_sub-instance_method">
+  
+    #<strong>get_dimensions_sub</strong>(dimension_data, id)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the size of a subelement of the SVG file. Do not call from within the
+size_func callback, because an infinite loop will occur.</p>
+<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s DPI to compute dimensions in
+pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi] beforehand.</p>
+<p>Element IDs should look like an URL fragment identifier; for example, pass
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
+has an <code>id=&quot;foo&quot;</code> attribute.
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a
+URL's fragment ID.  Alternatively, pass <code>NULL</code> to use the whole SVG.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>dimension_data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DimensionData.html" title="Rsvg::DimensionData (class)">Rsvg::DimensionData</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A place to store the SVG's size</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An element's id within the SVG, starting with &quot;#&quot; (a single</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> if the dimensions could be obtained, <code>FALSE</code> if there was an error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_geometry_for_element-instance_method">
+  
+    #<strong>get_geometry_for_element</strong>(id, out_ink_rect, out_logical_rect)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Computes the ink rectangle and logical rectangle of a single SVG element.</p>
+<p>While <code>rsvg_handle_get_geometry_for_layer</code> computes the geometry of an SVG element subtree with
+its transformation matrix, this other function will compute the element's geometry
+as if it were being rendered under an identity transformation by itself.  That is,
+the resulting geometry is as if the element got extracted by itself from the SVG.</p>
+<p>This function is the counterpart to <code>rsvg_handle_render_element</code>.</p>
+<p>Element IDs should look like an URL fragment identifier; for example, pass
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
+has an <code>id=&quot;foo&quot;</code> attribute.</p>
+<p>The &quot;ink rectangle&quot; is the bounding box that would be painted
+for fully- stroked and filled elements.</p>
+<p>The &quot;logical rectangle&quot; just takes into account the unstroked
+paths and text outlines.</p>
+<p>Note that these bounds are not minimum bounds; for example,
+clipping paths are not taken into account.</p>
+<p>You can pass <code>NULL</code> for the <!-- raw HTML omitted -->id<!-- raw HTML omitted --> if you want to measure all
+the elements in the SVG, i.e. to measure everything from the
+root element.</p>
+<p>This operation is not constant-time, as it involves going through all
+the child elements.
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a
+URL's fragment ID.  Alternatively, pass <code>NULL</code> to compute the geometry for the
+whole SVG.
+are returned in the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> argument.</p>
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
+the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.</p>
+<p>Panics: this function will panic if the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> is not fully-loaded.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An element's id within the SVG, starting with &quot;#&quot; (a single</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_ink_rect</span>
+      
+      
+        <span class='type'>(<tt>Rsvg::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Place to store the ink rectangle of the element.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_logical_rect</span>
+      
+      
+        <span class='type'>(<tt>Rsvg::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Place to store the logical rectangle of the element.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> if the geometry could be obtained, or <code>FALSE</code> on error.  Errors</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_geometry_for_layer-instance_method">
+  
+    #<strong>get_geometry_for_layer</strong>(id, viewport, out_ink_rect, out_logical_rect)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Computes the ink rectangle and logical rectangle of an SVG element, or the
+whole SVG, as if the whole SVG were rendered to a specific viewport.</p>
+<p>Element IDs should look like an URL fragment identifier; for example, pass
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
+has an <code>id=&quot;foo&quot;</code> attribute.</p>
+<p>The &quot;ink rectangle&quot; is the bounding box that would be painted
+for fully-stroked and filled elements.</p>
+<p>The &quot;logical rectangle&quot; just takes into account the unstroked
+paths and text outlines.</p>
+<p>Note that these bounds are not minimum bounds; for example,
+clipping paths are not taken into account.</p>
+<p>You can pass <code>NULL</code> for the <!-- raw HTML omitted -->id<!-- raw HTML omitted --> if you want to measure all
+the elements in the SVG, i.e. to measure everything from the
+root element.</p>
+<p>This operation is not constant-time, as it involves going through all
+the child elements.
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a
+URL's fragment ID.  Alternatively, pass <code>NULL</code> to compute the geometry for the
+whole SVG.
+are returned in the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> argument.</p>
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
+the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.</p>
+<p>Panics: this function will panic if the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> is not fully-loaded.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An element's id within the SVG, starting with &quot;#&quot; (a single</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>viewport</span>
+      
+      
+        <span class='type'>(<tt>Rsvg::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Viewport size at which the whole SVG would be fitted.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_ink_rect</span>
+      
+      
+        <span class='type'>(<tt>Rsvg::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Place to store the ink rectangle of the element.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_logical_rect</span>
+      
+      
+        <span class='type'>(<tt>Rsvg::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Place to store the logical rectangle of the element.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> if the geometry could be obtained, or <code>FALSE</code> on error.  Errors</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_intrinsic_dimensions-instance_method">
+  
+    #<strong>get_intrinsic_dimensions</strong>(out_has_width, out_width, out_has_height, out_height, out_has_viewbox, out_viewbox)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>In simple terms, queries the <code>width</code>, <code>height</code>, and <code>viewBox</code> attributes in an SVG document.</p>
+<p>If you are calling this function to compute a scaling factor to render the SVG,
+consider simply using [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_document] instead; it will do the
+scaling computations automatically.</p>
+<p>Before librsvg 2.54.0, the <code>out_has_width</code> and <code>out_has_height</code> arguments would be set to true or false
+depending on whether the SVG document actually had <code>width</code> and <code>height</code> attributes, respectively.</p>
+<p>However, since librsvg 2.54.0, <code>width</code> and <code>height</code> are now <a href="https://www.w3.org/TR/SVG2/geometry.html">geometry
+properties</a> per the SVG2 specification; they
+are not plain attributes.  SVG2 made it so that the initial value of those properties
+is <code>auto</code>, which is equivalent to specifing a value of <code>100%</code>.  In this sense, even SVG
+documents which lack <code>width</code> or <code>height</code> attributes semantically have to make them
+default to <code>100%</code>.  This is why since librsvg 2.54.0, <code>out_has_width</code> and
+<code>out_has_heigth</code> are always returned as <code>TRUE</code>, since with SVG2 all documents <em>have</em> a
+default width and height of <code>100%</code>.</p>
+<p>As an example, the following SVG element has a <code>width</code> of 100 pixels and a <code>height</code> of 400 pixels, but no <code>viewBox</code>.  This
+function will return those sizes in <code>out_width</code> and <code>out_height</code>, and set <code>out_has_viewbox</code> to <code>FALSE</code>.</p>
+<pre class="code ruby"><code class="ruby">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;100&quot; height=&quot;400&quot;&gt;
+</code></pre>
+<p>Conversely, the following element has a <code>viewBox</code>, but no <code>width</code> or <code>height</code>.  This function will
+set <code>out_has_viewbox</code> to <code>TRUE</code>, and it will also set <code>out_has_width</code> and <code>out_has_height</code> to <code>TRUE</code> but
+return both length values as <code>100%</code>.</p>
+<pre class="code ruby"><code class="ruby">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 400&quot;&gt;
+</code></pre>
+<p>Note that the <code>RsvgLength</code> return values have <code>RsvgUnits</code> in them; you should
+not assume that they are always in pixels.  For example, the following SVG element
+will return width and height values whose <code>units</code> fields are <code>RSVG_UNIT_MM</code>.</p>
+<pre class="code ruby"><code class="ruby">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;210mm&quot; height=&quot;297mm&quot;&gt;
+</code></pre>
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
+the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.</p>
+<p>Panics: this function will panic if the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> is not fully-loaded.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>out_has_width</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Will be set to <code>TRUE</code>; see below.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_width</span>
+      
+      
+        <span class='type'>(<tt>Rsvg::Length</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Will be set to the computed value of the <code>width</code> property in the toplevel SVG.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_has_height</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Will be set to <code>TRUE</code>; see below.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_height</span>
+      
+      
+        <span class='type'>(<tt>Rsvg::Length</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Will be set to the computed value of the <code>height</code> property in the toplevel SVG.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_has_viewbox</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Will be set to <code>TRUE</code> if the toplevel SVG has a <code>viewBox</code> attribute</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_viewbox</span>
+      
+      
+        <span class='type'>(<tt>Rsvg::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Will be set to the value of the <code>viewBox</code> attribute in the toplevel SVG</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_intrinsic_size_in_pixels-instance_method">
+  
+    #<strong>get_intrinsic_size_in_pixels</strong>(out_width, out_height)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Converts an SVG document's intrinsic dimensions to pixels, and returns the result.</p>
+<p>This function is able to extract the size in pixels from an SVG document if the
+document has both <code>width</code> and <code>height</code> attributes
+with physical units (px, in, cm, mm, pt, pc) or font-based units (em, ex).  For
+physical units, the dimensions are normalized to pixels using the dots-per-inch (DPI)
+value set previously with [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi].  For font-based units, this function
+uses the computed value of the <code>font-size</code> property for the toplevel
+<code>&lt;svg&gt;</code> element.  In those cases, this function returns <code>TRUE</code>.</p>
+<p>This function is not able to extract the size in pixels directly from the intrinsic
+dimensions of the SVG document if the <code>width</code> or
+<code>height</code> are in percentage units (or if they do not exist, in which
+case the SVG spec mandates that they default to 100%), as these require a
+<!-- raw HTML omitted -->viewport<!-- raw HTML omitted --> to be resolved to a final size.  In this case, the
+function returns <code>FALSE</code>.</p>
+<p>For example, the following document fragment has intrinsic dimensions that will resolve
+to 20x30 pixels.</p>
+<pre class="code ruby"><code class="ruby">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;20&quot; height=&quot;30&quot;/&gt;
+</code></pre>
+<p>Similarly, if the DPI is set to 96, this document will resolve to 192×288 pixels (i.e. 96×2 × 96×3).</p>
+<pre class="code ruby"><code class="ruby">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;2in&quot; height=&quot;3in&quot;/&gt;
+</code></pre>
+<p>The dimensions of the following documents cannot be resolved to pixels directly, and
+this function would return <code>FALSE</code> for them:</p>
+<pre class="code ruby"><code class="ruby">&lt;!-- Needs a viewport against which to compute the percentages. --&gt;
+&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;100%&quot; height=&quot;100%&quot;/&gt;
+
+&lt;!-- Does not have intrinsic width/height, just a 1:2 aspect ratio which
+     needs to be fitted within a viewport. --&gt;
+&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 200&quot;/&gt;
+</code></pre>
+<p>Instead of querying an SVG document's size, applications are encouraged to render SVG
+documents to a size chosen by the application, by passing a suitably-sized viewport to
+[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_document].
+<!-- raw HTML omitted -->out_width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->out_height<!-- raw HTML omitted --> will be set accordingly.  Note that the dimensions are
+floating-point numbers, so your application can know the exact size of an SVG document.
+To get integer dimensions, you should use <code>ceil()</code> to round up to the nearest integer
+(just using <code>round()</code>, may may chop off pixels with fractional coverage).  If the
+dimensions cannot be converted to pixels, returns <code>FALSE</code> and puts 0.0 in both
+<!-- raw HTML omitted -->out_width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->out_height<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>out_width</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Will be set to the computed width; you should round this up to get integer pixels.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_height</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Will be set to the computed height; you should round this up to get integer pixels.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> if the dimensions could be converted directly to pixels; in this case</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_pixbuf_sub-instance_method">
+  
+    #<strong>get_pixbuf_sub</strong>(id)  &#x21d2; <tt>GdkPixbuf::Pixbuf</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a <code>GdkPixbuf</code> the same size as the entire SVG loaded into <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->, but
+only renders the sub-element that has the specified <!-- raw HTML omitted -->id<!-- raw HTML omitted --> (and all its
+sub-sub-elements recursively).  If <!-- raw HTML omitted -->id<!-- raw HTML omitted --> is <code>NULL</code>, this function renders the
+whole SVG.</p>
+<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s dots-per-inch value (DPI) to compute the
+&quot;natural size&quot; of the document in pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi]
+beforehand.</p>
+<p>If you need to render an image which is only big enough to fit a particular
+sub-element of the SVG, consider using [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_element].</p>
+<p>Element IDs should look like an URL fragment identifier; for example, pass
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
+has an <code>id=&quot;foo&quot;</code> attribute.</p>
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
+the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a
+URL's fragment ID.  Alternatively, pass <code>NULL</code> to use the whole SVG.
+during rendering.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An element's id within the SVG, starting with &quot;#&quot; (a single</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GdkPixbuf::Pixbuf</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pixbuf, or <code>NULL</code> if an error occurs</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_position_sub-instance_method">
+  
+    #<strong>get_position_sub</strong>(position_data, id)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the position of a subelement of the SVG file. Do not call from within
+the size_func callback, because an infinite loop will occur.</p>
+<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s DPI to compute dimensions in
+pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi] beforehand.</p>
+<p>Element IDs should look like an URL fragment identifier; for example, pass
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
+has an <code>id=&quot;foo&quot;</code> attribute.
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a
+URL's fragment ID.  Alternatively, pass nil to use the whole SVG.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>position_data</span>
+      
+      
+        <span class='type'>(<tt>Rsvg::PositionData</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A place to store the SVG fragment's position.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An element's id within the SVG, starting with &quot;#&quot; (a single</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> if the position could be obtained, <code>FALSE</code> if there was an error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_sub-instance_method">
+  
+    #<strong>has_sub</strong>(id)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks whether the element <!-- raw HTML omitted -->id<!-- raw HTML omitted --> exists in the SVG document.</p>
+<p>Element IDs should look like an URL fragment identifier; for example, pass
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
+has an <code>id=&quot;foo&quot;</code> attribute.
+character), for example, <code>#layer1</code>.  This notation corresponds to a URL's
+fragment ID.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An element's id within the SVG, starting with &quot;#&quot; (a single hash</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> if <!-- raw HTML omitted -->id<!-- raw HTML omitted --> exists in the SVG document, <code>FALSE</code> otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="height-instance_method">
+  
+    #<strong>height</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Height, in pixels, of the rendered SVG after calling the size callback
+as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="height=-instance_method">
+  
+    #<strong>height=</strong>(height)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Height, in pixels, of the rendered SVG after calling the size callback
+as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>height</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="initialize_raw-instance_method">
+  
+    #<strong>initialize_raw</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Rsvg::Handle (class)">Rsvg::Handle</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle] with flags <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->.  After calling this function,
+you can feed the resulting handle with SVG data by using
+[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.read_stream_sync].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="HandleFlags.html" title="Rsvg::HandleFlags (module)">Rsvg::HandleFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags from [flags<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.HandleFlags]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Rsvg::Handle (class)">Rsvg::Handle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rsvg2/handle.rb', line 31</span>
+
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="internal_set_testing-instance_method">
+  
+    #<strong>internal_set_testing</strong>(testing)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Do not call this function.  This is intended for librsvg's internal
+test suite only.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>testing</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to enable testing mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="metadata-instance_method">
+  
+    #<strong>metadata</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>SVG's metadata</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>metadata</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="metadata=-instance_method">
+  
+    #<strong>metadata=</strong>(metadata)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>SVG's metadata</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>metadata</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>metadata</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>metadata</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pixbuf-instance_method">
+  
+    #<strong>pixbuf</strong>  &#x21d2; <tt>GdkPixbuf::Pixbuf</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the pixbuf loaded by <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  The pixbuf returned will be reffed, so
+the caller of this function must assume that ref.</p>
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
+the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.</p>
+<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s dots-per-inch value (DPI) to compute the
+&quot;natural size&quot; of the document in pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi]
+beforehand.
+during rendering.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GdkPixbuf::Pixbuf</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A pixbuf, or nil on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="read_stream_sync-instance_method">
+  
+    #<strong>read_stream_sync</strong>(stream, cancellable)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reads <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> and writes the data from it to <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.</p>
+<p>Before calling this function, you may need to call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_base_uri]
+or [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_base_gfile] to set the &quot;base file&quot; for resolving
+references to external resources.  SVG elements like
+<code>&lt;image&gt;</code> which reference external resources will be
+resolved relative to the location you specify with those functions.</p>
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not <code>NULL</code>, then the operation can be cancelled by
+triggering the cancellable object from another thread. If the
+operation was cancelled, the error <code>G_IO_ERROR_CANCELLED</code> will be
+returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>stream</span>
+      
+      
+        <span class='type'>(<tt>Gio::InputStream</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GInputStream</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt>Gio::Cancellable</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GCancellable</code>, or <code>NULL</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> if reading <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> succeeded, or <code>FALSE</code> otherwise
+with <!-- raw HTML omitted -->error<!-- raw HTML omitted --> filled in</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_cairo-instance_method">
+  
+    #<strong>render_cairo</strong>(cr)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Draws a loaded SVG handle to a Cairo context.  Please try to use
+[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_document] instead, which allows you to pick the size
+at which the document will be rendered.</p>
+<p>Historically this function has picked a size by itself, based on the following rules:</p>
+<ul>
+<li>
+<p>If the SVG document has both <code>width</code> and <code>height</code>
+attributes with physical units (px, in, cm, mm, pt, pc) or font-based units (em,
+ex), the function computes the size directly based on the dots-per-inch (DPI) you
+have configured with [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi].  This is the same approach as
+[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.get_intrinsic_size_in_pixels].</p>
+</li>
+<li>
+<p>Otherwise, if there is a <code>viewBox</code> attribute and both
+<code>width</code> and <code>height</code> are set to
+<code>100%</code> (or if they don't exist at all and thus default to 100%),
+the function uses the width and height of the <code>viewBox</code> as a pixel size.  This
+produces a rendered document with the correct aspect ratio.</p>
+</li>
+<li>
+<p>Otherwise, this function computes the extents of every graphical object in the SVG
+document to find the total extents.  This is moderately expensive, but no more expensive
+than rendering the whole document, for example.</p>
+</li>
+<li>
+<p>This function cannot deal with percentage-based units for <code>width</code>
+and <code>height</code> because there is no viewport against which they could
+be resolved; that is why it will compute the extents of objects in that case.  This
+is why we recommend that you use [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_document] instead, which takes
+in a viewport and follows the sizing policy from the web platform.</p>
+</li>
+</ul>
+<p>Drawing will occur with respect to the <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->'s current transformation: for example, if
+the <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> has a rotated current transformation matrix, the whole SVG will be rotated in
+the rendered version.</p>
+<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s DPI to compute dimensions in
+pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi] beforehand.</p>
+<p>Note that <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> must be a Cairo context that is not in an error state, that is,
+<code>cairo_status()</code> must return <code>CAIRO_STATUS_SUCCESS</code> for it.  Cairo can set a
+context to be in an error state in various situations, for example, if it was
+passed an invalid matrix or if it was created for an invalid surface.
+if a rendering error occurs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Cairo context</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> if drawing succeeded; <code>FALSE</code> otherwise.  This function will emit a g_warning()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_cairo_sub-instance_method">
+  
+    #<strong>render_cairo_sub</strong>(cr, id)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Renders a single SVG element in the same place as for a whole SVG document (a &quot;subset&quot;
+of the document).  Please try to use [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_layer] instead, which allows
+you to pick the size at which the document with the layer will be rendered.</p>
+<p>This is equivalent to [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_cairo], but it renders only a single
+element and its children, as if they composed an individual layer in the SVG.</p>
+<p>Historically this function has picked a size for the whole document by itself, based
+on the following rules:</p>
+<ul>
+<li>
+<p>If the SVG document has both <code>width</code> and <code>height</code>
+attributes with physical units (px, in, cm, mm, pt, pc) or font-based units (em,
+ex), the function computes the size directly based on the dots-per-inch (DPI) you
+have configured with [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi].  This is the same approach as
+[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.get_intrinsic_size_in_pixels].</p>
+</li>
+<li>
+<p>Otherwise, if there is a <code>viewBox</code> attribute and both
+<code>width</code> and <code>height</code> are set to
+<code>100%</code> (or if they don't exist at all and thus default to 100%),
+the function uses the width and height of the <code>viewBox</code> as a pixel size.  This
+produces a rendered document with the correct aspect ratio.</p>
+</li>
+<li>
+<p>Otherwise, this function computes the extents of every graphical object in the SVG
+document to find the total extents.  This is moderately expensive, but no more expensive
+than rendering the whole document, for example.</p>
+</li>
+<li>
+<p>This function cannot deal with percentage-based units for <code>width</code>
+and <code>height</code> because there is no viewport against which they could
+be resolved; that is why it will compute the extents of objects in that case.  This
+is why we recommend that you use [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_layer] instead, which takes
+in a viewport and follows the sizing policy from the web platform.</p>
+</li>
+</ul>
+<p>Drawing will occur with respect to the <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->'s current transformation: for example, if
+the <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> has a rotated current transformation matrix, the whole SVG will be rotated in
+the rendered version.</p>
+<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s DPI to compute dimensions in
+pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi] beforehand.</p>
+<p>Note that <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> must be a Cairo context that is not in an error state, that is,
+<code>cairo_status()</code> must return <code>CAIRO_STATUS_SUCCESS</code> for it.  Cairo can set a
+context to be in an error state in various situations, for example, if it was
+passed an invalid matrix or if it was created for an invalid surface.</p>
+<p>Element IDs should look like an URL fragment identifier; for example, pass
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
+has an <code>id=&quot;foo&quot;</code> attribute.
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a
+URL's fragment ID.  Alternatively, pass <code>NULL</code> to render the whole SVG.
+if a rendering error occurs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An element's id within the SVG, starting with &quot;#&quot; (a single</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> if drawing succeeded; <code>FALSE</code> otherwise.  This function will emit a g_warning()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_document-instance_method">
+  
+    #<strong>render_document</strong>(cr, viewport)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Renders the whole SVG document fitted to a viewport.</p>
+<p>The <!-- raw HTML omitted -->viewport<!-- raw HTML omitted --> gives the position and size at which the whole SVG document will be
+rendered.  The document is scaled proportionally to fit into this viewport.</p>
+<p>The <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> must be in a <code>CAIRO_STATUS_SUCCESS</code> state, or this function will not
+render anything, and instead will return an error.
+in the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> argument.</p>
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
+the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.</p>
+<p>Panics: this function will panic if the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> is not fully-loaded.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>viewport</span>
+      
+      
+        <span class='type'>(<tt>Rsvg::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Viewport size at which the whole SVG would be fitted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> on success, <code>FALSE</code> on error.  Errors are returned</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_element-instance_method">
+  
+    #<strong>render_element</strong>(cr, id, element_viewport)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Renders a single SVG element to a given viewport.</p>
+<p>This function can be used to extract individual element subtrees and render them,
+scaled to a given <!-- raw HTML omitted -->element_viewport<!-- raw HTML omitted -->.  This is useful for applications which have
+reusable objects in an SVG and want to render them individually; for example, an
+SVG full of icons that are meant to be be rendered independently of each other.</p>
+<p>Element IDs should look like an URL fragment identifier; for example, pass
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
+has an <code>id=&quot;foo&quot;</code> attribute.</p>
+<p>You can pass <code>NULL</code> for the <!-- raw HTML omitted -->id<!-- raw HTML omitted --> if you want to render all
+the elements in the SVG, i.e. to render everything from the
+root element.</p>
+<p>The <code>element_viewport</code> gives the position and size at which the named element will
+be rendered.  FIXME: mention proportional scaling.
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a
+URL's fragment ID.  Alternatively, pass <code>NULL</code> to render the whole SVG document tree.
+in the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> argument.</p>
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
+the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.</p>
+<p>Panics: this function will panic if the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> is not fully-loaded.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An element's id within the SVG, starting with &quot;#&quot; (a single</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>element_viewport</span>
+      
+      
+        <span class='type'>(<tt>Rsvg::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Viewport size in which to fit the element</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> on success, <code>FALSE</code> on error.  Errors are returned</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_layer-instance_method">
+  
+    #<strong>render_layer</strong>(cr, id, viewport)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Renders a single SVG element in the same place as for a whole SVG document.</p>
+<p>The <!-- raw HTML omitted -->viewport<!-- raw HTML omitted --> gives the position and size at which the whole SVG document would be
+rendered.  The document is scaled proportionally to fit into this viewport; hence the
+individual layer may be smaller than this.</p>
+<p>This is equivalent to [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_document], but it renders only a
+single element and its children, as if they composed an individual layer in
+the SVG.  The element is rendered with the same transformation matrix as it
+has within the whole SVG document.  Applications can use this to re-render a
+single element and repaint it on top of a previously-rendered document, for
+example.</p>
+<p>Element IDs should look like an URL fragment identifier; for example, pass
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
+has an <code>id=&quot;foo&quot;</code> attribute.</p>
+<p>You can pass <code>NULL</code> for the <!-- raw HTML omitted -->id<!-- raw HTML omitted --> if you want to render all
+the elements in the SVG, i.e. to render everything from the
+root element.
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a
+URL's fragment ID.  Alternatively, pass <code>NULL</code> to render the whole SVG document tree.
+in the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> argument.</p>
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
+the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.</p>
+<p>Panics: this function will panic if the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> is not fully-loaded.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Cairo context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An element's id within the SVG, starting with &quot;#&quot; (a single</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>viewport</span>
+      
+      
+        <span class='type'>(<tt>Rsvg::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Viewport size at which the whole SVG would be fitted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> on success, <code>FALSE</code> on error.  Errors are returned</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_dpi_x_y-instance_method">
+  
+    #<strong>set_dpi_x_y</strong>(dpi_x, dpi_y)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the DPI at which the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> will be rendered. Common values are
+75, 90, and 300 DPI.</p>
+<p>Passing a number &lt;= 0 to <!-- raw HTML omitted -->dpi<!-- raw HTML omitted --> will reset the DPI to whatever the default
+value happens to be, but since [id<!-- raw HTML omitted -->rsvg_set_default_dpi_x_y<!-- raw HTML omitted -->] is deprecated,
+please do not pass values &lt;= 0 to this function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>dpi_x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Dots Per Inch (i.e. Pixels Per Inch)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dpi_y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Dots Per Inch (i.e. Pixels Per Inch)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_size_callback-instance_method">
+  
+    #<strong>set_size_callback</strong>(size_func, user_data, user_data_destroy)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the sizing function for the <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->, which can be used to override the
+size that librsvg computes for SVG images.  The <!-- raw HTML omitted -->size_func<!-- raw HTML omitted --> is called from the
+following functions:</p>
+<ul>
+<li>[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.get_dimensions]</li>
+<li>[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.get_dimensions_sub]</li>
+<li>[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.get_position_sub]</li>
+<li>[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_cairo]</li>
+<li>[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_cairo_sub]</li>
+</ul>
+<p>Librsvg computes the size of the SVG being rendered, and passes it to the
+<!-- raw HTML omitted -->size_func<!-- raw HTML omitted -->, which may then modify these values to set the final size of the
+generated image.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>size_func</span>
+      
+      
+        <span class='type'>(<tt>Rsvg::SizeFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A sizing function, or <code>NULL</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>User data to pass to <!-- raw HTML omitted -->size_func<!-- raw HTML omitted -->, or <code>NULL</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data_destroy</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Function to be called to destroy the data passed in <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->,
+or <code>NULL</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_stylesheet-instance_method">
+  
+    #<strong>set_stylesheet</strong>(css, css_len)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets a CSS stylesheet to use for an SVG document.</p>
+<p>The <!-- raw HTML omitted -->css_len<!-- raw HTML omitted --> argument is mandatory; this function will not compute the length
+of the <!-- raw HTML omitted -->css<!-- raw HTML omitted --> string.  This is because a provided stylesheet, which the calling
+program could read from a file, can have nul characters in it.</p>
+<p>During the CSS cascade, the specified stylesheet will be used with a &quot;User&quot;
+<a href="https://drafts.csswg.org/css-cascade-3/#cascading-origins">origin</a>.</p>
+<p>Note that <code>&lt;b&gt;import&lt;/b&gt;</code> rules will not be resolved, except for <code>data:</code> URLs.
+in the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> argument.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>css</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>String with CSS data; must be valid UTF-8.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>css_len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Length of the <!-- raw HTML omitted -->css<!-- raw HTML omitted --> data in bytes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> on success, <code>FALSE</code> on error.  Errors are returned</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="title-instance_method">
+  
+    #<strong>title</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>SVG's title.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>title</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="title=-instance_method">
+  
+    #<strong>title=</strong>(title)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>SVG's title.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>title</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>title</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>title</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="width-instance_method">
+  
+    #<strong>width</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Width, in pixels, of the rendered SVG after calling the size callback
+as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>width</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="width=-instance_method">
+  
+    #<strong>width=</strong>(width)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Width, in pixels, of the rendered SVG after calling the size callback
+as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>width</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="write-instance_method">
+  
+    #<strong>write</strong>(buf, count)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Loads the next <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes of the image.  You can call this function multiple
+times until the whole document is consumed; then you must call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.close]
+to actually parse the document.</p>
+<p>Before calling this function for the first time, you may need to call
+[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_base_uri] or [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_base_gfile] to set the &quot;base
+file&quot; for resolving references to external resources.  SVG elements like
+<code>&lt;image&gt;</code> which reference external resources will be
+resolved relative to the location you specify with those functions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buf</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointer to svg data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>count</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>length of the <!-- raw HTML omitted -->buf<!-- raw HTML omitted --> buffer in bytes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>TRUE</code> on success, or <code>FALSE</code> on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,3399 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GstBase::BaseSink
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GstBase::BaseSink";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GstBase.html" title="GstBase (module)">GstBase</a></span></span>
+     &raquo; 
+    <span class="title">BaseSink</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GstBase::BaseSink
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="../Gst/Element.html" title="Gst::Element (class)">Gst::Element</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="../Gst/Element.html" title="Gst::Element (class)">Gst::Element</a></span></li>
+          
+            <li class="next">GstBase::BaseSink</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Subclasses can override any of the available virtual methods or not, as
+needed. At the minimum, the <!-- raw HTML omitted -->render<!-- raw HTML omitted --> method should be overridden to
+output/present buffers.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="../GstAudio/AudioBaseSink.html" title="GstAudio::AudioBaseSink (class)">GstAudio::AudioBaseSink</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#async=-instance_method" title="#async= (instance method)">#<strong>async=</strong>(async)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If set to true, the basesink will perform asynchronous state changes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#async%3F-instance_method" title="#async? (instance method)">#<strong>async?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If set to true, the basesink will perform asynchronous state changes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#async_enabled=-instance_method" title="#async_enabled= (instance method)">#<strong>async_enabled=</strong>(enabled)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Configures <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> to perform all state changes asynchronously.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#blocksize-instance_method" title="#blocksize (instance method)">#<strong>blocksize</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The amount of bytes to pull when operating in pull mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#blocksize=-instance_method" title="#blocksize= (instance method)">#<strong>blocksize=</strong>(blocksize)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The amount of bytes to pull when operating in pull mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#do_preroll-instance_method" title="#do_preroll (instance method)">#<strong>do_preroll</strong>(obj)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If the <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> spawns its own thread for pulling buffers from upstream it should call this method after it has pulled a buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#drop_out_of_segment-instance_method" title="#drop_out_of_segment (instance method)">#<strong>drop_out_of_segment</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> is currently configured to drop buffers which are outside the current segment current segment.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#drop_out_of_segment=-instance_method" title="#drop_out_of_segment= (instance method)">#<strong>drop_out_of_segment=</strong>(drop_out_of_segment)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Configure <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> to drop buffers which are outside the current segment.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#enable_last_sample=-instance_method" title="#enable_last_sample= (instance method)">#<strong>enable_last_sample=</strong>(enable_last_sample)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Enable the last-sample property.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#enable_last_sample%3F-instance_method" title="#enable_last_sample? (instance method)">#<strong>enable_last_sample?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Enable the last-sample property.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_async_enabled-instance_method" title="#is_async_enabled (instance method)">#<strong>is_async_enabled</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> is currently configured to perform asynchronous state changes to PAUSED.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_last_sample_enabled-instance_method" title="#is_last_sample_enabled (instance method)">#<strong>is_last_sample_enabled</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> is currently configured to store the last received sample in the last-sample property.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_qos_enabled-instance_method" title="#is_qos_enabled (instance method)">#<strong>is_qos_enabled</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> is currently configured to send Quality-of-Service events upstream.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#last_sample-instance_method" title="#last_sample (instance method)">#<strong>last_sample</strong>  &#x21d2; Gst::Sample </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The last buffer that arrived in the sink and was used for preroll or for rendering.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#last_sample=-instance_method" title="#last_sample= (instance method)">#<strong>last_sample=</strong>(last_sample)  &#x21d2; Gst::Sample </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The last buffer that arrived in the sink and was used for preroll or for rendering.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#last_sample_enabled=-instance_method" title="#last_sample_enabled= (instance method)">#<strong>last_sample_enabled=</strong>(enabled)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Configures <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> to store the last received sample in the last-sample property.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#latency-instance_method" title="#latency (instance method)">#<strong>latency</strong>  &#x21d2; Gst::ClockTime </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the currently configured latency.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_bitrate-instance_method" title="#max_bitrate (instance method)">#<strong>max_bitrate</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Control the maximum amount of bits that will be rendered per second.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_bitrate=-instance_method" title="#max_bitrate= (instance method)">#<strong>max_bitrate=</strong>(max_bitrate)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Control the maximum amount of bits that will be rendered per second.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_lateness-instance_method" title="#max_lateness (instance method)">#<strong>max_lateness</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Max-lateness.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_lateness=-instance_method" title="#max_lateness= (instance method)">#<strong>max_lateness=</strong>(max_lateness)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#processing_deadline-instance_method" title="#processing_deadline (instance method)">#<strong>processing_deadline</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Maximum amount of time (in nanoseconds) that the pipeline can take for processing the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#processing_deadline=-instance_method" title="#processing_deadline= (instance method)">#<strong>processing_deadline=</strong>(processing_deadline)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Maximum amount of time (in nanoseconds) that the pipeline can take for processing the buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#qos=-instance_method" title="#qos= (instance method)">#<strong>qos=</strong>(qos)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#qos%3F-instance_method" title="#qos? (instance method)">#<strong>qos?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Qos.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#qos_enabled=-instance_method" title="#qos_enabled= (instance method)">#<strong>qos_enabled=</strong>(enabled)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Configures <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> to send Quality-of-Service events upstream.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query_latency-instance_method" title="#query_latency (instance method)">#<strong>query_latency</strong>(live, upstream_live, min_latency, max_latency)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Query the sink for the latency parameters.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_delay-instance_method" title="#render_delay (instance method)">#<strong>render_delay</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The additional delay between synchronisation and actual rendering of the media.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_delay=-instance_method" title="#render_delay= (instance method)">#<strong>render_delay=</strong>(render_delay)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The additional delay between synchronisation and actual rendering of the media.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stats-instance_method" title="#stats (instance method)">#<strong>stats</strong>  &#x21d2; Gst::Structure </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Various Gst::BaseSink statistics.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stats=-instance_method" title="#stats= (instance method)">#<strong>stats=</strong>(stats)  &#x21d2; Gst::Structure </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Various Gst::BaseSink statistics.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sync-instance_method" title="#sync (instance method)">#<strong>sync</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> is currently configured to synchronize against the clock.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sync=-instance_method" title="#sync= (instance method)">#<strong>sync=</strong>(sync)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sync%3F-instance_method" title="#sync? (instance method)">#<strong>sync?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sync.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#throttle_time-instance_method" title="#throttle_time (instance method)">#<strong>throttle_time</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The time to insert between buffers.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#throttle_time=-instance_method" title="#throttle_time= (instance method)">#<strong>throttle_time=</strong>(throttle_time)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The time to insert between buffers.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ts_offset-instance_method" title="#ts_offset (instance method)">#<strong>ts_offset</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Controls the final synchronisation, a negative value will render the buffer earlier while a positive value delays playback.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ts_offset=-instance_method" title="#ts_offset= (instance method)">#<strong>ts_offset=</strong>(ts_offset)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Controls the final synchronisation, a negative value will render the buffer earlier while a positive value delays playback.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait-instance_method" title="#wait (instance method)">#<strong>wait</strong>(time, jitter)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This function will wait for preroll to complete and will then block until <!-- raw HTML omitted -->time<!-- raw HTML omitted --> is reached.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_clock-instance_method" title="#wait_clock (instance method)">#<strong>wait_clock</strong>(time, jitter)  &#x21d2; Gst::ClockReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This function will block until <!-- raw HTML omitted -->time<!-- raw HTML omitted --> is reached.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_preroll-instance_method" title="#wait_preroll (instance method)">#<strong>wait_preroll</strong>  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If the Gst::BaseSinkClass::render method performs its own synchronisation against the clock it must unblock when going from PLAYING to the PAUSED state and call this method before continuing to render the remaining data.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gst/Element.html" title="Gst::Element (class)">Gst::Element</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Gst/Element.html#>>-instance_method" title="Gst::Element#&gt;&gt; (method)">#>></a></span>, <span class='object_link'><a href="../Gst/Element.html#[]-class_method" title="Gst::Element.[] (method)">[]</a></span>, <span class='object_link'><a href="../Gst/Element.html#abort_state-instance_method" title="Gst::Element#abort_state (method)">#abort_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_metadata-instance_method" title="Gst::Element#add_metadata (method)">#add_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_pad-instance_method" title="Gst::Element#add_pad (method)">#add_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_pad_template-instance_method" title="Gst::Element#add_pad_template (method)">#add_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_property_deep_notify_watch-instance_method" title="Gst::Element#add_property_deep_notify_watch (method)">#add_property_deep_notify_watch</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_property_notify_watch-instance_method" title="Gst::Element#add_property_notify_watch (method)">#add_property_notify_watch</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_static_metadata-instance_method" title="Gst::Element#add_static_metadata (method)">#add_static_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_static_pad_template-instance_method" title="Gst::Element#add_static_pad_template (method)">#add_static_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_static_pad_template_with_gtype-instance_method" title="Gst::Element#add_static_pad_template_with_gtype (method)">#add_static_pad_template_with_gtype</a></span>, <span class='object_link'><a href="../Gst/Element.html#base_time-instance_method" title="Gst::Element#base_time (method)">#base_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#base_time=-instance_method" title="Gst::Element#base_time= (method)">#base_time=</a></span>, <span class='object_link'><a href="../Gst/Element.html#bus-instance_method" title="Gst::Element#bus (method)">#bus</a></span>, <span class='object_link'><a href="../Gst/Element.html#bus=-instance_method" title="Gst::Element#bus= (method)">#bus=</a></span>, <span class='object_link'><a href="../Gst/Element.html#call_async-instance_method" title="Gst::Element#call_async (method)">#call_async</a></span>, <span class='object_link'><a href="../Gst/Element.html#change_state-instance_method" title="Gst::Element#change_state (method)">#change_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#clock-instance_method" title="Gst::Element#clock (method)">#clock</a></span>, <span class='object_link'><a href="../Gst/Element.html#clock=-instance_method" title="Gst::Element#clock= (method)">#clock=</a></span>, <span class='object_link'><a href="../Gst/Element.html#context=-instance_method" title="Gst::Element#context= (method)">#context=</a></span>, <span class='object_link'><a href="../Gst/Element.html#contexts-instance_method" title="Gst::Element#contexts (method)">#contexts</a></span>, <span class='object_link'><a href="../Gst/Element.html#continue_state-instance_method" title="Gst::Element#continue_state (method)">#continue_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#create_all_pads-instance_method" title="Gst::Element#create_all_pads (method)">#create_all_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#current_clock_time-instance_method" title="Gst::Element#current_clock_time (method)">#current_clock_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#current_running_time-instance_method" title="Gst::Element#current_running_time (method)">#current_running_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#decorate_stream_id-instance_method" title="Gst::Element#decorate_stream_id (method)">#decorate_stream_id</a></span>, <span class='object_link'><a href="../Gst/Element.html#decorate_stream_id_printf-instance_method" title="Gst::Element#decorate_stream_id_printf (method)">#decorate_stream_id_printf</a></span>, <span class='object_link'><a href="../Gst/Element.html#decorate_stream_id_printf_valist-instance_method" title="Gst::Element#decorate_stream_id_printf_valist (method)">#decorate_stream_id_printf_valist</a></span>, <span class='object_link'><a href="../Gst/Element.html#factory-instance_method" title="Gst::Element#factory (method)">#factory</a></span>, <span class='object_link'><a href="../Gst/Element.html#flags-instance_method" title="Gst::Element#flags (method)">#flags</a></span>, <span class='object_link'><a href="../Gst/Element.html#flags_raw-instance_method" title="Gst::Element#flags_raw (method)">#flags_raw</a></span>, <span class='object_link'><a href="../Gst/Element.html#foreach_pad-instance_method" title="Gst::Element#foreach_pad (method)">#foreach_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#foreach_sink_pad-instance_method" title="Gst::Element#foreach_sink_pad (method)">#foreach_sink_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#foreach_src_pad-instance_method" title="Gst::Element#foreach_src_pad (method)">#foreach_src_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_compatible_pad-instance_method" title="Gst::Element#get_compatible_pad (method)">#get_compatible_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_compatible_pad_template-instance_method" title="Gst::Element#get_compatible_pad_template (method)">#get_compatible_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_context-instance_method" title="Gst::Element#get_context (method)">#get_context</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_context_unlocked-instance_method" title="Gst::Element#get_context_unlocked (method)">#get_context_unlocked</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_metadata-instance_method" title="Gst::Element#get_metadata (method)">#get_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_pad_template-instance_method" title="Gst::Element#get_pad_template (method)">#get_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_request_pad-instance_method" title="Gst::Element#get_request_pad (method)">#get_request_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_state-instance_method" title="Gst::Element#get_state (method)">#get_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_static_pad-instance_method" title="Gst::Element#get_static_pad (method)">#get_static_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#is_locked_state-instance_method" title="Gst::Element#is_locked_state (method)">#is_locked_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#iterate_pads-instance_method" title="Gst::Element#iterate_pads (method)">#iterate_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#iterate_sink_pads-instance_method" title="Gst::Element#iterate_sink_pads (method)">#iterate_sink_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#iterate_src_pads-instance_method" title="Gst::Element#iterate_src_pads (method)">#iterate_src_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_elements-instance_method" title="Gst::Element#link_elements (method)">#link_elements</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_filtered-instance_method" title="Gst::Element#link_filtered (method)">#link_filtered</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_many-instance_method" title="Gst::Element#link_many (method)">#link_many</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_pads-instance_method" title="Gst::Element#link_pads (method)">#link_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_pads_filtered-instance_method" title="Gst::Element#link_pads_filtered (method)">#link_pads_filtered</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_pads_full-instance_method" title="Gst::Element#link_pads_full (method)">#link_pads_full</a></span>, <span class='object_link'><a href="../Gst/Element.html#locked_state=-instance_method" title="Gst::Element#locked_state= (method)">#locked_state=</a></span>, <span class='object_link'><a href="../Gst/Element.html#lost_state-instance_method" title="Gst::Element#lost_state (method)">#lost_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#make_from_uri-class_method" title="Gst::Element.make_from_uri (method)">make_from_uri</a></span>, <span class='object_link'><a href="../Gst/Element.html#message_full-instance_method" title="Gst::Element#message_full (method)">#message_full</a></span>, <span class='object_link'><a href="../Gst/Element.html#message_full_with_details-instance_method" title="Gst::Element#message_full_with_details (method)">#message_full_with_details</a></span>, <span class='object_link'><a href="../Gst/Element.html#no_more_pads-instance_method" title="Gst::Element#no_more_pads (method)">#no_more_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#pad_template_list-instance_method" title="Gst::Element#pad_template_list (method)">#pad_template_list</a></span>, <span class='object_link'><a href="../Gst/Element.html#pause-instance_method" title="Gst::Element#pause (method)">#pause</a></span>, <span class='object_link'><a href="../Gst/Element.html#play-instance_method" title="Gst::Element#play (method)">#play</a></span>, <span class='object_link'><a href="../Gst/Element.html#post_message-instance_method" title="Gst::Element#post_message (method)">#post_message</a></span>, <span class='object_link'><a href="../Gst/Element.html#provide_clock-instance_method" title="Gst::Element#provide_clock (method)">#provide_clock</a></span>, <span class='object_link'><a href="../Gst/Element.html#query-instance_method" title="Gst::Element#query (method)">#query</a></span>, <span class='object_link'><a href="../Gst/Element.html#query_convert-instance_method" title="Gst::Element#query_convert (method)">#query_convert</a></span>, <span class='object_link'><a href="../Gst/Element.html#query_duration-instance_method" title="Gst::Element#query_duration (method)">#query_duration</a></span>, <span class='object_link'><a href="../Gst/Element.html#query_position-instance_method" title="Gst::Element#query_position (method)">#query_position</a></span>, <span class='object_link'><a href="../Gst/Element.html#ready-instance_method" title="Gst::Element#ready (method)">#ready</a></span>, <span class='object_link'><a href="../Gst/Element.html#register-class_method" title="Gst::Element.register (method)">register</a></span>, <span class='object_link'><a href="../Gst/Element.html#release_request_pad-instance_method" title="Gst::Element#release_request_pad (method)">#release_request_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#remove_pad-instance_method" title="Gst::Element#remove_pad (method)">#remove_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#remove_property_notify_watch-instance_method" title="Gst::Element#remove_property_notify_watch (method)">#remove_property_notify_watch</a></span>, <span class='object_link'><a href="../Gst/Element.html#request_pad-instance_method" title="Gst::Element#request_pad (method)">#request_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#request_pad_simple-instance_method" title="Gst::Element#request_pad_simple (method)">#request_pad_simple</a></span>, <span class='object_link'><a href="../Gst/Element.html#seek-instance_method" title="Gst::Element#seek (method)">#seek</a></span>, <span class='object_link'><a href="../Gst/Element.html#seek_simple-instance_method" title="Gst::Element#seek_simple (method)">#seek_simple</a></span>, <span class='object_link'><a href="../Gst/Element.html#send_event-instance_method" title="Gst::Element#send_event (method)">#send_event</a></span>, <span class='object_link'><a href="../Gst/Element.html#set_metadata-instance_method" title="Gst::Element#set_metadata (method)">#set_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#set_static_metadata-instance_method" title="Gst::Element#set_static_metadata (method)">#set_static_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#start_time-instance_method" title="Gst::Element#start_time (method)">#start_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#start_time=-instance_method" title="Gst::Element#start_time= (method)">#start_time=</a></span>, <span class='object_link'><a href="../Gst/Element.html#state=-instance_method" title="Gst::Element#state= (method)">#state=</a></span>, <span class='object_link'><a href="../Gst/Element.html#state_change_return_get_name-class_method" title="Gst::Element.state_change_return_get_name (method)">state_change_return_get_name</a></span>, <span class='object_link'><a href="../Gst/Element.html#state_get_name-class_method" title="Gst::Element.state_get_name (method)">state_get_name</a></span>, <span class='object_link'><a href="../Gst/Element.html#stop-instance_method" title="Gst::Element#stop (method)">#stop</a></span>, <span class='object_link'><a href="../Gst/Element.html#sync_state_with_parent-instance_method" title="Gst::Element#sync_state_with_parent (method)">#sync_state_with_parent</a></span>, <span class='object_link'><a href="../Gst/Element.html#type_set_skip_documentation-class_method" title="Gst::Element.type_set_skip_documentation (method)">type_set_skip_documentation</a></span>, <span class='object_link'><a href="../Gst/Element.html#unlink-instance_method" title="Gst::Element#unlink (method)">#unlink</a></span>, <span class='object_link'><a href="../Gst/Element.html#unlink_many-instance_method" title="Gst::Element#unlink_many (method)">#unlink_many</a></span>, <span class='object_link'><a href="../Gst/Element.html#unlink_pads-instance_method" title="Gst::Element#unlink_pads (method)">#unlink_pads</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Gst/Object.html#add_control_binding-instance_method" title="Gst::Object#add_control_binding (method)">#add_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#check_uniqueness-class_method" title="Gst::Object.check_uniqueness (method)">check_uniqueness</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_bindings_disabled=-instance_method" title="Gst::Object#control_bindings_disabled= (method)">#control_bindings_disabled=</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate-instance_method" title="Gst::Object#control_rate (method)">#control_rate</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate=-instance_method" title="Gst::Object#control_rate= (method)">#control_rate=</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_deep_notify-class_method" title="Gst::Object.default_deep_notify (method)">default_deep_notify</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_error-instance_method" title="Gst::Object#default_error (method)">#default_error</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_control_binding-instance_method" title="Gst::Object#get_control_binding (method)">#get_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_g_value_array-instance_method" title="Gst::Object#get_g_value_array (method)">#get_g_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value-instance_method" title="Gst::Object#get_value (method)">#get_value</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value_array-instance_method" title="Gst::Object#get_value_array (method)">#get_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_active_control_bindings-instance_method" title="Gst::Object#has_active_control_bindings (method)">#has_active_control_bindings</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_ancestor-instance_method" title="Gst::Object#has_ancestor (method)">#has_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_ancestor-instance_method" title="Gst::Object#has_as_ancestor (method)">#has_as_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_parent-instance_method" title="Gst::Object#has_as_parent (method)">#has_as_parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#name-instance_method" title="Gst::Object#name (method)">#name</a></span>, <span class='object_link'><a href="../Gst/Object.html#name=-instance_method" title="Gst::Object#name= (method)">#name=</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent-instance_method" title="Gst::Object#parent (method)">#parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent=-instance_method" title="Gst::Object#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="../Gst/Object.html#path_string-instance_method" title="Gst::Object#path_string (method)">#path_string</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref-instance_method" title="Gst::Object#ref (method)">#ref</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref_sink-class_method" title="Gst::Object.ref_sink (method)">ref_sink</a></span>, <span class='object_link'><a href="../Gst/Object.html#remove_control_binding-instance_method" title="Gst::Object#remove_control_binding (method)">#remove_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#replace-class_method" title="Gst::Object.replace (method)">replace</a></span>, <span class='object_link'><a href="../Gst/Object.html#set_control_binding_disabled-instance_method" title="Gst::Object#set_control_binding_disabled (method)">#set_control_binding_disabled</a></span>, <span class='object_link'><a href="../Gst/Object.html#suggest_next_sync-instance_method" title="Gst::Object#suggest_next_sync (method)">#suggest_next_sync</a></span>, <span class='object_link'><a href="../Gst/Object.html#sync_values-instance_method" title="Gst::Object#sync_values (method)">#sync_values</a></span>, <span class='object_link'><a href="../Gst/Object.html#unparent-instance_method" title="Gst::Object#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="../Gst/Object.html#unref-instance_method" title="Gst::Object#unref (method)">#unref</a></span></p>
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="async=-instance_method">
+  
+    #<strong>async=</strong>(async)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If set to true, the basesink will perform asynchronous state changes.
+When set to false, the sink will not signal the parent when it prerolls.
+Use this option when dealing with sparse streams or when synchronisation is
+not required.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>async</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>async</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>async</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="async?-instance_method">
+  
+    #<strong>async?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If set to true, the basesink will perform asynchronous state changes.
+When set to false, the sink will not signal the parent when it prerolls.
+Use this option when dealing with sparse streams or when synchronisation is
+not required.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>async</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="async_enabled=-instance_method">
+  
+    #<strong>async_enabled=</strong>(enabled)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Configures <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> to perform all state changes asynchronously. When async is
+disabled, the sink will immediately go to PAUSED instead of waiting for a
+preroll buffer. This feature is useful if the sink does not synchronize
+against the clock or when it is dealing with sparse streams.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>enabled</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new async value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="blocksize-instance_method">
+  
+    #<strong>blocksize</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The amount of bytes to pull when operating in pull mode.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>blocksize</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="blocksize=-instance_method">
+  
+    #<strong>blocksize=</strong>(blocksize)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The amount of bytes to pull when operating in pull mode.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>blocksize</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>blocksize</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>blocksize</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="do_preroll-instance_method">
+  
+    #<strong>do_preroll</strong>(obj)  &#x21d2; <tt><span class='object_link'><a href="../Gst/FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If the <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> spawns its own thread for pulling buffers from upstream it
+should call this method after it has pulled a buffer. If the element needed
+to preroll, this function will perform the preroll and will then block
+until the element state is changed.</p>
+<p>This function should be called with the PREROLL_LOCK held.
+continue. Any other return value should be returned from the render vmethod.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt>Gst::MiniObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the mini object that caused the preroll</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>%GST_FLOW_OK if the preroll completed and processing can</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="drop_out_of_segment-instance_method">
+  
+    #<strong>drop_out_of_segment</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> is currently configured to drop buffers which are outside
+the current segment
+current segment.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the sink is configured to drop buffers outside the</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="drop_out_of_segment=-instance_method">
+  
+    #<strong>drop_out_of_segment=</strong>(drop_out_of_segment)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Configure <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> to drop buffers which are outside the current segment</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>drop_out_of_segment</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>drop buffers outside the segment</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="enable_last_sample=-instance_method">
+  
+    #<strong>enable_last_sample=</strong>(enable_last_sample)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Enable the last-sample property. If false, basesink doesn't keep a
+reference to the last buffer arrived and the last-sample property is always
+set to nil. This can be useful if you need buffers to be released as soon
+as possible, eg. if you're using a buffer pool.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>enable_last_sample</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>enable-last-sample</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>enable-last-sample</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="enable_last_sample?-instance_method">
+  
+    #<strong>enable_last_sample?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Enable the last-sample property. If false, basesink doesn't keep a
+reference to the last buffer arrived and the last-sample property is always
+set to nil. This can be useful if you need buffers to be released as soon
+as possible, eg. if you're using a buffer pool.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>enable-last-sample</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_async_enabled-instance_method">
+  
+    #<strong>is_async_enabled</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> is currently configured to perform asynchronous state
+changes to PAUSED.
+changes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the sink is configured to perform asynchronous state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_last_sample_enabled-instance_method">
+  
+    #<strong>is_last_sample_enabled</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> is currently configured to store the last received sample in
+the last-sample property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the sink is configured to store the last received sample.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_qos_enabled-instance_method">
+  
+    #<strong>is_qos_enabled</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> is currently configured to send Quality-of-Service events
+upstream.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the sink is configured to perform Quality-of-Service.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="last_sample-instance_method">
+  
+    #<strong>last_sample</strong>  &#x21d2; <tt>Gst::Sample</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The last buffer that arrived in the sink and was used for preroll or for
+rendering. This property can be used to generate thumbnails. This property
+can be nil when the sink has not yet received a buffer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Sample</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>last-sample</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="last_sample=-instance_method">
+  
+    #<strong>last_sample=</strong>(last_sample)  &#x21d2; <tt>Gst::Sample</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The last buffer that arrived in the sink and was used for preroll or for
+rendering. This property can be used to generate thumbnails. This property
+can be nil when the sink has not yet received a buffer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>last_sample</span>
+      
+      
+        <span class='type'>(<tt>Gst::Sample</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Sample</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>last-sample</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Sample</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>last-sample</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="last_sample_enabled=-instance_method">
+  
+    #<strong>last_sample_enabled=</strong>(enabled)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Configures <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> to store the last received sample in the last-sample
+property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>enabled</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new enable-last-sample value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="latency-instance_method">
+  
+    #<strong>latency</strong>  &#x21d2; <tt>Gst::ClockTime</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the currently configured latency.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The configured latency.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_bitrate-instance_method">
+  
+    #<strong>max_bitrate</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Control the maximum amount of bits that will be rendered per second.
+Setting this property to a value bigger than 0 will make the sink delay
+rendering of the buffers when it would exceed to max-bitrate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max-bitrate</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_bitrate=-instance_method">
+  
+    #<strong>max_bitrate=</strong>(max_bitrate)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Control the maximum amount of bits that will be rendered per second.
+Setting this property to a value bigger than 0 will make the sink delay
+rendering of the buffers when it would exceed to max-bitrate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>max_bitrate</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max-bitrate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max-bitrate</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_lateness-instance_method">
+  
+    #<strong>max_lateness</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns max-lateness.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max-lateness</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_lateness=-instance_method">
+  
+    #<strong>max_lateness=</strong>(max_lateness)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>max_lateness</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max-lateness</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max-lateness</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="processing_deadline-instance_method">
+  
+    #<strong>processing_deadline</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Maximum amount of time (in nanoseconds) that the pipeline can take
+for processing the buffer. This is added to the latency of live
+pipelines.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>processing-deadline</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="processing_deadline=-instance_method">
+  
+    #<strong>processing_deadline=</strong>(processing_deadline)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Maximum amount of time (in nanoseconds) that the pipeline can take
+for processing the buffer. This is added to the latency of live
+pipelines.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>processing_deadline</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>processing-deadline</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>processing-deadline</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="qos=-instance_method">
+  
+    #<strong>qos=</strong>(qos)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>qos</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>qos</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>qos</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="qos?-instance_method">
+  
+    #<strong>qos?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns qos.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>qos</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="qos_enabled=-instance_method">
+  
+    #<strong>qos_enabled=</strong>(enabled)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Configures <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> to send Quality-of-Service events upstream.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>enabled</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new qos value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="query_latency-instance_method">
+  
+    #<strong>query_latency</strong>(live, upstream_live, min_latency, max_latency)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Query the sink for the latency parameters. The latency will be queried from
+the upstream elements. <!-- raw HTML omitted -->live<!-- raw HTML omitted --> will be true if <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> is configured to
+synchronize against the clock. <!-- raw HTML omitted -->upstream_live<!-- raw HTML omitted --> will be true if an upstream
+element is live.</p>
+<p>If both <!-- raw HTML omitted -->live<!-- raw HTML omitted --> and <!-- raw HTML omitted -->upstream_live<!-- raw HTML omitted --> are true, the sink will want to compensate
+for the latency introduced by the upstream elements by setting the
+<!-- raw HTML omitted -->min_latency<!-- raw HTML omitted --> to a strictly positive value.</p>
+<p>This function is mostly used by subclasses.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>live</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the sink is live</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>upstream_live</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if an upstream element is live</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>min_latency</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the min latency of the upstream elements</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_latency</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the max latency of the upstream elements</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the query succeeded.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_delay-instance_method">
+  
+    #<strong>render_delay</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The additional delay between synchronisation and actual rendering of the
+media. This property will add additional latency to the device in order to
+make other sinks compensate for the delay.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>render-delay</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_delay=-instance_method">
+  
+    #<strong>render_delay=</strong>(render_delay)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The additional delay between synchronisation and actual rendering of the
+media. This property will add additional latency to the device in order to
+make other sinks compensate for the delay.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>render_delay</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>render-delay</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>render-delay</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stats-instance_method">
+  
+    #<strong>stats</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gst/Structure.html" title="Gst::Structure (class)">Gst::Structure</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Various Gst::BaseSink statistics. This property returns a #GstStructure
+with name <code>application/x-gst-base-sink-stats</code> with the following fields:</p>
+<ul>
+<li>&quot;average-rate&quot;  G_TYPE_DOUBLE   average frame rate</li>
+<li>&quot;dropped&quot; G_TYPE_UINT64   Number of dropped frames</li>
+<li>&quot;rendered&quot; G_TYPE_UINT64   Number of rendered frames</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/Structure.html" title="Gst::Structure (class)">Gst::Structure</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>stats</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stats=-instance_method">
+  
+    #<strong>stats=</strong>(stats)  &#x21d2; <tt><span class='object_link'><a href="../Gst/Structure.html" title="Gst::Structure (class)">Gst::Structure</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Various Gst::BaseSink statistics. This property returns a #GstStructure
+with name <code>application/x-gst-base-sink-stats</code> with the following fields:</p>
+<ul>
+<li>&quot;average-rate&quot;  G_TYPE_DOUBLE   average frame rate</li>
+<li>&quot;dropped&quot; G_TYPE_UINT64   Number of dropped frames</li>
+<li>&quot;rendered&quot; G_TYPE_UINT64   Number of rendered frames</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>stats</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/Structure.html" title="Gst::Structure (class)">Gst::Structure</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/Structure.html" title="Gst::Structure (class)">Gst::Structure</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>stats</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/Structure.html" title="Gst::Structure (class)">Gst::Structure</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>stats</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sync-instance_method">
+  
+    #<strong>sync</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> is currently configured to synchronize against the
+clock.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the sink is configured to synchronize against the clock.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sync=-instance_method">
+  
+    #<strong>sync=</strong>(sync)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sync</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>sync</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>sync</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sync?-instance_method">
+  
+    #<strong>sync?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns sync.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>sync</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="throttle_time-instance_method">
+  
+    #<strong>throttle_time</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The time to insert between buffers. This property can be used to control
+the maximum amount of buffers per second to render. Setting this property
+to a value bigger than 0 will make the sink create THROTTLE QoS events.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>throttle-time</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="throttle_time=-instance_method">
+  
+    #<strong>throttle_time=</strong>(throttle_time)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The time to insert between buffers. This property can be used to control
+the maximum amount of buffers per second to render. Setting this property
+to a value bigger than 0 will make the sink create THROTTLE QoS events.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>throttle_time</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>throttle-time</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>throttle-time</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ts_offset-instance_method">
+  
+    #<strong>ts_offset</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Controls the final synchronisation, a negative value will render the buffer
+earlier while a positive value delays playback. This property can be
+used to fix synchronisation in bad files.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ts-offset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ts_offset=-instance_method">
+  
+    #<strong>ts_offset=</strong>(ts_offset)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Controls the final synchronisation, a negative value will render the buffer
+earlier while a positive value delays playback. This property can be
+used to fix synchronisation in bad files.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ts_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ts-offset</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ts-offset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wait-instance_method">
+  
+    #<strong>wait</strong>(time, jitter)  &#x21d2; <tt><span class='object_link'><a href="../Gst/FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This function will wait for preroll to complete and will then block until <!-- raw HTML omitted -->time<!-- raw HTML omitted -->
+is reached. It is usually called by subclasses that use their own internal
+synchronisation but want to let some synchronization (like EOS) be handled
+by the base class.</p>
+<p>This function should only be called with the PREROLL_LOCK held (like when
+receiving an EOS event in the ::event vmethod or when handling buffers in
+::render).</p>
+<p>The <!-- raw HTML omitted -->time<!-- raw HTML omitted --> argument should be the running_time of when the timeout should happen
+and will be adjusted with any latency and offset configured in the sink.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>time</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the running_time to be reached</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>jitter</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTimeDiff</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the jitter to be filled with time diff, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gst::FlowReturn</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wait_clock-instance_method">
+  
+    #<strong>wait_clock</strong>(time, jitter)  &#x21d2; <tt><span class='object_link'><a href="../Gst/ClockReturn.html" title="Gst::ClockReturn (module)">Gst::ClockReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This function will block until <!-- raw HTML omitted -->time<!-- raw HTML omitted --> is reached. It is usually called by
+subclasses that use their own internal synchronisation.</p>
+<p>If <!-- raw HTML omitted -->time<!-- raw HTML omitted --> is not valid, no synchronisation is done and %GST_CLOCK_BADTIME is
+returned. Likewise, if synchronisation is disabled in the element or there
+is no clock, no synchronisation is done and %GST_CLOCK_BADTIME is returned.</p>
+<p>This function should only be called with the PREROLL_LOCK held, like when
+receiving an EOS event in the Gst::BaseSinkClass::event vmethod or when
+receiving a buffer in
+the Gst::BaseSinkClass::render vmethod.</p>
+<p>The <!-- raw HTML omitted -->time<!-- raw HTML omitted --> argument should be the running_time of when this method should
+return and is not adjusted with any latency or offset configured in the
+sink.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>time</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the running_time to be reached</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>jitter</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTimeDiff</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the jitter to be filled with time diff, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/ClockReturn.html" title="Gst::ClockReturn (module)">Gst::ClockReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gst::ClockReturn</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wait_preroll-instance_method">
+  
+    #<strong>wait_preroll</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gst/FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If the Gst::BaseSinkClass::render method performs its own synchronisation
+against the clock it must unblock when going from PLAYING to the PAUSED state
+and call this method before continuing to render the remaining data.</p>
+<p>If the Gst::BaseSinkClass::render method can block on something else than
+the clock, it must also be ready to unblock immediately on
+the Gst::BaseSinkClass::unlock method and cause the
+Gst::BaseSinkClass::render method to immediately call this function.
+In this case, the subclass must be prepared to continue rendering where it
+left off if this function returns %GST_FLOW_OK.</p>
+<p>This function will block until a state change to PLAYING happens (in which
+case this function returns %GST_FLOW_OK) or the processing must be stopped due
+to a state change to READY or a FLUSH event (in which case this function
+returns %GST_FLOW_FLUSHING).</p>
+<p>This function should only be called with the PREROLL_LOCK held, like in the
+render function.
+continue. Any other return value should be returned from the render vmethod.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>%GST_FLOW_OK if the preroll completed and processing can</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

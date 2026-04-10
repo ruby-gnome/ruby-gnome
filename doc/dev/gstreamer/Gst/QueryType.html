@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gst::QueryType
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gst::QueryType";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (Q)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gst.html" title="Gst (module)">Gst</a></span></span>
+     &raquo; 
+    <span class="title">QueryType</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gst::QueryType
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="UNKNOWN-constant" class="">UNKNOWN =
+          <div class="docstring">
+  <div class="discussion">
+    <p>unknown query type</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:unknown</span></pre></dd>
+      
+        <dt id="POSITION-constant" class="">POSITION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>current position in stream</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2563</span> <span class='kw'>or</span> <span class='symbol'>:position</span></pre></dd>
+      
+        <dt id="DURATION-constant" class="">DURATION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>total duration of the stream</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5123</span> <span class='kw'>or</span> <span class='symbol'>:duration</span></pre></dd>
+      
+        <dt id="LATENCY-constant" class="">LATENCY =
+          <div class="docstring">
+  <div class="discussion">
+    <p>latency of stream</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7683</span> <span class='kw'>or</span> <span class='symbol'>:latency</span></pre></dd>
+      
+        <dt id="JITTER-constant" class="">JITTER =
+          <div class="docstring">
+  <div class="discussion">
+    <p>current jitter of stream</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10243</span> <span class='kw'>or</span> <span class='symbol'>:jitter</span></pre></dd>
+      
+        <dt id="RATE-constant" class="">RATE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>current rate of the stream</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12803</span> <span class='kw'>or</span> <span class='symbol'>:rate</span></pre></dd>
+      
+        <dt id="SEEKING-constant" class="">SEEKING =
+          <div class="docstring">
+  <div class="discussion">
+    <p>seeking capabilities</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>15363</span> <span class='kw'>or</span> <span class='symbol'>:seeking</span></pre></dd>
+      
+        <dt id="SEGMENT-constant" class="">SEGMENT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>segment start/stop positions</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>17923</span> <span class='kw'>or</span> <span class='symbol'>:segment</span></pre></dd>
+      
+        <dt id="CONVERT-constant" class="">CONVERT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>convert values between formats</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>20483</span> <span class='kw'>or</span> <span class='symbol'>:convert</span></pre></dd>
+      
+        <dt id="FORMATS-constant" class="">FORMATS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>query supported formats for convert</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>23043</span> <span class='kw'>or</span> <span class='symbol'>:formats</span></pre></dd>
+      
+        <dt id="BUFFERING-constant" class="">BUFFERING =
+          <div class="docstring">
+  <div class="discussion">
+    <p>query available media for efficient seeking.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>28163</span> <span class='kw'>or</span> <span class='symbol'>:buffering</span></pre></dd>
+      
+        <dt id="CUSTOM-constant" class="">CUSTOM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>a custom application or element defined query.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>30723</span> <span class='kw'>or</span> <span class='symbol'>:custom</span></pre></dd>
+      
+        <dt id="URI-constant" class="">URI =
+          <div class="docstring">
+  <div class="discussion">
+    <p>query the URI of the source or sink.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>33283</span> <span class='kw'>or</span> <span class='symbol'>:uri</span></pre></dd>
+      
+        <dt id="ALLOCATION-constant" class="">ALLOCATION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>the buffer allocation properties</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>35846</span> <span class='kw'>or</span> <span class='symbol'>:allocation</span></pre></dd>
+      
+        <dt id="SCHEDULING-constant" class="">SCHEDULING =
+          <div class="docstring">
+  <div class="discussion">
+    <p>the scheduling properties</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>38401</span> <span class='kw'>or</span> <span class='symbol'>:scheduling</span></pre></dd>
+      
+        <dt id="ACCEPT_CAPS-constant" class="">ACCEPT_CAPS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>the accept caps query</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>40963</span> <span class='kw'>or</span> <span class='symbol'>:accept_caps</span></pre></dd>
+      
+        <dt id="CAPS-constant" class="">CAPS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>the caps query</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>43523</span> <span class='kw'>or</span> <span class='symbol'>:caps</span></pre></dd>
+      
+        <dt id="DRAIN-constant" class="">DRAIN =
+          <div class="docstring">
+  <div class="discussion">
+    <p>wait till all serialized data is consumed downstream</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>46086</span> <span class='kw'>or</span> <span class='symbol'>:drain</span></pre></dd>
+      
+        <dt id="CONTEXT-constant" class="">CONTEXT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>query the pipeline-local context from
+downstream or upstream (since 1.2)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>48643</span> <span class='kw'>or</span> <span class='symbol'>:context</span></pre></dd>
+      
+        <dt id="BITRATE-constant" class="">BITRATE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>the bitrate query (since 1.16)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>51202</span> <span class='kw'>or</span> <span class='symbol'>:bitrate</span></pre></dd>
+      
+        <dt id="SELECTABLE-constant" class="">SELECTABLE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Query stream selection capability.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>53763</span> <span class='kw'>or</span> <span class='symbol'>:selectable</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

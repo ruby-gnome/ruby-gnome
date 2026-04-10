@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GdkX11::X11Screen
+  
+    &mdash; Ruby/GDK3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GdkX11::X11Screen";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (X)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GdkX11.html" title="GdkX11 (module)">GdkX11</a></span></span>
+     &raquo; 
+    <span class="title">X11Screen</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GdkX11::X11Screen
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GdkX11::X11Screen</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_desktop-instance_method" title="#current_desktop (instance method)">#<strong>current_desktop</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the current workspace for <!-- raw HTML omitted -->screen<!-- raw HTML omitted --> when running under a window manager that supports multiple workspaces, as described in the <a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Manager Hints</a> specification.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_monitor_output-instance_method" title="#get_monitor_output (instance method)">#<strong>get_monitor_output</strong>(monitor_num)  &#x21d2; xlib::XID </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the XID of the specified output/monitor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#number_of_desktops-instance_method" title="#number_of_desktops (instance method)">#<strong>number_of_desktops</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the number of workspaces for <!-- raw HTML omitted -->screen<!-- raw HTML omitted --> when running under a window manager that supports multiple workspaces, as described in the <a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Manager Hints</a> specification.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#screen_number-instance_method" title="#screen_number (instance method)">#<strong>screen_number</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the index of a <code>GdkX11Screen</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#supports_net_wm_hint-instance_method" title="#supports_net_wm_hint (instance method)">#<strong>supports_net_wm_hint</strong>(property_name)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This function is specific to the X11 backend of GDK, and indicates whether the window manager supports a certain hint from the <a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Manager Hints</a> specification.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#window_manager_name-instance_method" title="#window_manager_name (instance method)">#<strong>window_manager_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the name of the window manager for <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xscreen-instance_method" title="#xscreen (instance method)">#<strong>xscreen</strong>  &#x21d2; xlib::Screen </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the screen of a <code>GdkX11Screen</code>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="current_desktop-instance_method">
+  
+    #<strong>current_desktop</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the current workspace for <!-- raw HTML omitted -->screen<!-- raw HTML omitted --> when running under a
+window manager that supports multiple workspaces, as described
+in the
+<a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Manager Hints</a> specification.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current workspace, or 0 if workspaces are not supported</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_monitor_output-instance_method">
+  
+    #<strong>get_monitor_output</strong>(monitor_num)  &#x21d2; <tt>xlib::XID</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the XID of the specified output/monitor.
+If the X server does not support version 1.2 of the RANDR
+extension, 0 is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>monitor_num</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>xlib::XID</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the XID of the monitor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="number_of_desktops-instance_method">
+  
+    #<strong>number_of_desktops</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the number of workspaces for <!-- raw HTML omitted -->screen<!-- raw HTML omitted --> when running under a
+window manager that supports multiple workspaces, as described
+in the
+<a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Manager Hints</a> specification.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of workspaces, or 0 if workspaces are not supported</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="screen_number-instance_method">
+  
+    #<strong>screen_number</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the index of a <code>GdkX11Screen</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the position of <!-- raw HTML omitted -->screen<!-- raw HTML omitted --> among the screens
+of its display</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="supports_net_wm_hint-instance_method">
+  
+    #<strong>supports_net_wm_hint</strong>(property_name)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This function is specific to the X11 backend of GDK, and indicates
+whether the window manager supports a certain hint from the
+<a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Manager Hints</a> specification.</p>
+<p>When using this function, keep in mind that the window manager
+can change over time; so you shouldn’t use this function in
+a way that impacts persistent application state. A common bug
+is that your application can start up before the window manager
+does when the user logs in, and before the window manager starts
+gdk_x11_screen_supports_net_wm_hint() will return false for every property.
+You can monitor the window_manager_changed signal on <code>GdkX11Screen</code> to detect
+a window manager change.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name of the WM property</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the window manager supports <!-- raw HTML omitted -->property<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="window_manager_name-instance_method">
+  
+    #<strong>window_manager_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the name of the window manager for <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->.
+&quot;unknown&quot; if the window manager is unknown. The string is owned by GDK
+and should not be freed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the window manager screen <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->, or</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="xscreen-instance_method">
+  
+    #<strong>xscreen</strong>  &#x21d2; <tt>xlib::Screen</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the screen of a <code>GdkX11Screen</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>xlib::Screen</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an Xlib Screen*</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

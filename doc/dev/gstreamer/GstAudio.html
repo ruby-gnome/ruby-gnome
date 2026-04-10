@@ -1,0 +1,6383 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: GstAudio
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GstAudio";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (G)</a> &raquo;
+    
+    
+    <span class="title">GstAudio</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: GstAudio
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/gst/audio-loader.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Copyright (C) 2024  Ruby-GNOME Project Team</p>
+<p>This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.</p>
+<p>This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.</p>
+<p>You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="GstAudio/AudioBaseSinkDiscontReason.html" title="GstAudio::AudioBaseSinkDiscontReason (module)">AudioBaseSinkDiscontReason</a></span>, <span class='object_link'><a href="GstAudio/AudioBaseSinkSlaveMethod.html" title="GstAudio::AudioBaseSinkSlaveMethod (module)">AudioBaseSinkSlaveMethod</a></span>, <span class='object_link'><a href="GstAudio/AudioBaseSrcSlaveMethod.html" title="GstAudio::AudioBaseSrcSlaveMethod (module)">AudioBaseSrcSlaveMethod</a></span>, <span class='object_link'><a href="GstAudio/AudioCdSrcMode.html" title="GstAudio::AudioCdSrcMode (module)">AudioCdSrcMode</a></span>, <span class='object_link'><a href="GstAudio/AudioChannelMixerFlags.html" title="GstAudio::AudioChannelMixerFlags (module)">AudioChannelMixerFlags</a></span>, <span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">AudioChannelPosition</a></span>, <span class='object_link'><a href="GstAudio/AudioConverterFlags.html" title="GstAudio::AudioConverterFlags (module)">AudioConverterFlags</a></span>, <span class='object_link'><a href="GstAudio/AudioDitherMethod.html" title="GstAudio::AudioDitherMethod (module)">AudioDitherMethod</a></span>, <span class='object_link'><a href="GstAudio/AudioFlags.html" title="GstAudio::AudioFlags (module)">AudioFlags</a></span>, <span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">AudioFormat</a></span>, <span class='object_link'><a href="GstAudio/AudioFormatFlags.html" title="GstAudio::AudioFormatFlags (module)">AudioFormatFlags</a></span>, <span class='object_link'><a href="GstAudio/AudioLayout.html" title="GstAudio::AudioLayout (module)">AudioLayout</a></span>, <span class='object_link'><a href="GstAudio/AudioNoiseShapingMethod.html" title="GstAudio::AudioNoiseShapingMethod (module)">AudioNoiseShapingMethod</a></span>, <span class='object_link'><a href="GstAudio/AudioPackFlags.html" title="GstAudio::AudioPackFlags (module)">AudioPackFlags</a></span>, <span class='object_link'><a href="GstAudio/AudioQuantizeFlags.html" title="GstAudio::AudioQuantizeFlags (module)">AudioQuantizeFlags</a></span>, <span class='object_link'><a href="GstAudio/AudioResamplerFilterInterpolation.html" title="GstAudio::AudioResamplerFilterInterpolation (module)">AudioResamplerFilterInterpolation</a></span>, <span class='object_link'><a href="GstAudio/AudioResamplerFilterMode.html" title="GstAudio::AudioResamplerFilterMode (module)">AudioResamplerFilterMode</a></span>, <span class='object_link'><a href="GstAudio/AudioResamplerFlags.html" title="GstAudio::AudioResamplerFlags (module)">AudioResamplerFlags</a></span>, <span class='object_link'><a href="GstAudio/AudioResamplerMethod.html" title="GstAudio::AudioResamplerMethod (module)">AudioResamplerMethod</a></span>, <span class='object_link'><a href="GstAudio/AudioRingBufferFormatType.html" title="GstAudio::AudioRingBufferFormatType (module)">AudioRingBufferFormatType</a></span>, <span class='object_link'><a href="GstAudio/AudioRingBufferState.html" title="GstAudio::AudioRingBufferState (module)">AudioRingBufferState</a></span>, <span class='object_link'><a href="GstAudio/DsdFormat.html" title="GstAudio::DsdFormat (module)">DsdFormat</a></span>, <span class='object_link'><a href="GstAudio/StreamVolume.html" title="GstAudio::StreamVolume (module)">StreamVolume</a></span>, <span class='object_link'><a href="GstAudio/StreamVolumeFormat.html" title="GstAudio::StreamVolumeFormat (module)">StreamVolumeFormat</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="GstAudio/AudioAggregator.html" title="GstAudio::AudioAggregator (class)">AudioAggregator</a></span>, <span class='object_link'><a href="GstAudio/AudioAggregatorConvertPad.html" title="GstAudio::AudioAggregatorConvertPad (class)">AudioAggregatorConvertPad</a></span>, <span class='object_link'><a href="GstAudio/AudioAggregatorPad.html" title="GstAudio::AudioAggregatorPad (class)">AudioAggregatorPad</a></span>, <span class='object_link'><a href="GstAudio/AudioBaseSink.html" title="GstAudio::AudioBaseSink (class)">AudioBaseSink</a></span>, <span class='object_link'><a href="GstAudio/AudioBaseSrc.html" title="GstAudio::AudioBaseSrc (class)">AudioBaseSrc</a></span>, <span class='object_link'><a href="GstAudio/AudioCdSrc.html" title="GstAudio::AudioCdSrc (class)">AudioCdSrc</a></span>, <span class='object_link'><a href="GstAudio/AudioClock.html" title="GstAudio::AudioClock (class)">AudioClock</a></span>, <span class='object_link'><a href="GstAudio/AudioDecoder.html" title="GstAudio::AudioDecoder (class)">AudioDecoder</a></span>, <span class='object_link'><a href="GstAudio/AudioEncoder.html" title="GstAudio::AudioEncoder (class)">AudioEncoder</a></span>, <span class='object_link'><a href="GstAudio/AudioFilter.html" title="GstAudio::AudioFilter (class)">AudioFilter</a></span>, <span class='object_link'><a href="GstAudio/AudioRingBuffer.html" title="GstAudio::AudioRingBuffer (class)">AudioRingBuffer</a></span>, <span class='object_link'><a href="GstAudio/AudioSink.html" title="GstAudio::AudioSink (class)">AudioSink</a></span>, <span class='object_link'><a href="GstAudio/AudioSrc.html" title="GstAudio::AudioSrc (class)">AudioSrc</a></span>, <span class='object_link'><a href="GstAudio/Loader.html" title="GstAudio::Loader (class)">Loader</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="AUDIO_CHANNELS_RANGE-constant" class="">AUDIO_CHANNELS_RANGE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Maximum range of allowed channels, for use in template caps strings.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lparen'>(</span><span class='id identifier rubyid_int'>int</span><span class='rparen'>)</span> <span class='lbracket'>[</span> <span class='int'>1</span><span class='comma'>,</span> <span class='id identifier rubyid_max'>max</span> <span class='rbracket'>]</span></pre></dd>
+      
+        <dt id="AUDIO_CONVERTER_OPT_DITHER_METHOD-constant" class="">AUDIO_CONVERTER_OPT_DITHER_METHOD =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Gst::AudioDitherMethod, The dither method to use when
+changing bit depth.
+Default is #GST_AUDIO_DITHER_NONE.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioConverter</span><span class='period'>.</span><span class='id identifier rubyid_dither'>dither</span><span class='op'>-</span><span class='id identifier rubyid_method'>method</span></pre></dd>
+      
+        <dt id="AUDIO_CONVERTER_OPT_DITHER_THRESHOLD-constant" class="">AUDIO_CONVERTER_OPT_DITHER_THRESHOLD =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Threshold for the output bit depth at/below which to apply dithering.</p>
+<p>Default is 20 bit.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioConverter</span><span class='period'>.</span><span class='id identifier rubyid_dither'>dither</span><span class='op'>-</span><span class='id identifier rubyid_threshold'>threshold</span></pre></dd>
+      
+        <dt id="AUDIO_CONVERTER_OPT_MIX_MATRIX-constant" class="">AUDIO_CONVERTER_OPT_MIX_MATRIX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>#GST_TYPE_LIST, The channel mapping matrix.</p>
+<p>The matrix coefficients must be between -1 and 1: the number of rows is equal
+to the number of output channels and the number of columns is equal to the
+number of input channels.</p>
+<h2>Example matrix generation code</h2>
+<p>To generate the matrix using code:</p>
+<p>|[
+GValue v = G_VALUE_INIT;
+GValue v2 = G_VALUE_INIT;
+GValue v3 = G_VALUE_INIT;</p>
+<p>g_value_init (&amp;v2, GST_TYPE_ARRAY);
+g_value_init (&amp;v3, G_TYPE_DOUBLE);
+g_value_set_double (&amp;v3, 1);
+gst_value_array_append_value (&amp;v2, &amp;v3);
+g_value_unset (&amp;v3);
+[ Repeat for as many double as your input channels - unset and reinit v3 ]
+g_value_init (&amp;v, GST_TYPE_ARRAY);
+gst_value_array_append_value (&amp;v, &amp;v2);
+g_value_unset (&amp;v2);
+[ Repeat for as many v2's as your output channels - unset and reinit v2]
+g_object_set_property (G_OBJECT (audiomixmatrix), &quot;matrix&quot;, &amp;v);
+g_value_unset (&amp;v);
+]|</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioConverter</span><span class='period'>.</span><span class='id identifier rubyid_mix'>mix</span><span class='op'>-</span><span class='id identifier rubyid_matrix'>matrix</span></pre></dd>
+      
+        <dt id="AUDIO_CONVERTER_OPT_NOISE_SHAPING_METHOD-constant" class="">AUDIO_CONVERTER_OPT_NOISE_SHAPING_METHOD =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Gst::AudioNoiseShapingMethod, The noise shaping method to use
+to mask noise from quantization errors.
+Default is #GST_AUDIO_NOISE_SHAPING_NONE.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioConverter</span><span class='period'>.</span><span class='id identifier rubyid_noise'>noise</span><span class='op'>-</span><span class='id identifier rubyid_shaping'>shaping</span><span class='op'>-</span><span class='id identifier rubyid_method'>method</span></pre></dd>
+      
+        <dt id="AUDIO_CONVERTER_OPT_QUANTIZATION-constant" class="">AUDIO_CONVERTER_OPT_QUANTIZATION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>#G_TYPE_UINT, The quantization amount. Components will be
+quantized to multiples of this value.
+Default is 1</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioConverter</span><span class='period'>.</span><span class='id identifier rubyid_quantization'>quantization</span></pre></dd>
+      
+        <dt id="AUDIO_CONVERTER_OPT_RESAMPLER_METHOD-constant" class="">AUDIO_CONVERTER_OPT_RESAMPLER_METHOD =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Gst::AudioResamplerMethod, The resampler method to use when
+changing sample rates.
+Default is #GST_AUDIO_RESAMPLER_METHOD_BLACKMAN_NUTTALL.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioConverter</span><span class='period'>.</span><span class='id identifier rubyid_resampler'>resampler</span><span class='op'>-</span><span class='id identifier rubyid_method'>method</span></pre></dd>
+      
+        <dt id="AUDIO_DECODER_MAX_ERRORS-constant" class="">AUDIO_DECODER_MAX_ERRORS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Default maximum number of errors tolerated before signaling error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='op'>-</span><span class='int'>1</span></pre></dd>
+      
+        <dt id="AUDIO_DECODER_SINK_NAME-constant" class="">AUDIO_DECODER_SINK_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The name of the templates for the sink pad.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_sink'>sink</span></pre></dd>
+      
+        <dt id="AUDIO_DECODER_SRC_NAME-constant" class="">AUDIO_DECODER_SRC_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The name of the templates for the source pad.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_src'>src</span></pre></dd>
+      
+        <dt id="AUDIO_DEF_CHANNELS-constant" class="">AUDIO_DEF_CHANNELS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Standard number of channels used in consumer audio.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span></pre></dd>
+      
+        <dt id="AUDIO_DEF_FORMAT-constant" class="">AUDIO_DEF_FORMAT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Standard format used in consumer audio.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>S16LE</span></pre></dd>
+      
+        <dt id="AUDIO_DEF_RATE-constant" class="">AUDIO_DEF_RATE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Standard sampling rate used in consumer audio.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>44100</span></pre></dd>
+      
+        <dt id="AUDIO_ENCODER_SINK_NAME-constant" class="">AUDIO_ENCODER_SINK_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    <p>the name of the templates for the sink pad</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_sink'>sink</span></pre></dd>
+      
+        <dt id="AUDIO_ENCODER_SRC_NAME-constant" class="">AUDIO_ENCODER_SRC_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    <p>the name of the templates for the source pad</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_src'>src</span></pre></dd>
+      
+        <dt id="AUDIO_FORMATS_ALL-constant" class="">AUDIO_FORMATS_ALL =
+          <div class="docstring">
+  <div class="discussion">
+    <p>List of all audio formats, for use in template caps strings.</p>
+<p>Formats are sorted by decreasing &quot;quality&quot;, using these criteria by priority:</p>
+<ul>
+<li>depth</li>
+<li>width</li>
+<li>Float &gt; Signed &gt; Unsigned</li>
+<li>native endianness preferred</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code">{ F64BE, F64LE, F32BE, F32LE, S32BE, S32LE, U32BE, U32LE, S24_32BE, S24_32LE, U24_32BE, U24_32LE, S24BE, S24LE, U24BE, U24LE, S20BE, S20LE, U20BE, U20LE, S18BE, S18LE, U18BE, U18LE, S16BE, S16LE, U16BE, U16LE, S8, U8 }</pre></dd>
+      
+        <dt id="AUDIO_RATE_RANGE-constant" class="">AUDIO_RATE_RANGE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Maximum range of allowed sample rates, for use in template caps strings.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lparen'>(</span><span class='id identifier rubyid_int'>int</span><span class='rparen'>)</span> <span class='lbracket'>[</span> <span class='int'>1</span><span class='comma'>,</span> <span class='id identifier rubyid_max'>max</span> <span class='rbracket'>]</span></pre></dd>
+      
+        <dt id="AUDIO_RESAMPLER_OPT_CUBIC_B-constant" class="">AUDIO_RESAMPLER_OPT_CUBIC_B =
+          <div class="docstring">
+  <div class="discussion">
+    <p>G_TYPE_DOUBLE, B parameter of the cubic filter.
+Values between 0.0 and 2.0 are accepted. 1.0 is the default.</p>
+<p>Below are some values of popular filters:
+B       C
+Hermite           0.0     0.0
+Spline            1.0     0.0
+Catmull-Rom       0.0     1/2</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioResampler</span><span class='period'>.</span><span class='id identifier rubyid_cubic'>cubic</span><span class='op'>-</span><span class='id identifier rubyid_b'>b</span></pre></dd>
+      
+        <dt id="AUDIO_RESAMPLER_OPT_CUBIC_C-constant" class="">AUDIO_RESAMPLER_OPT_CUBIC_C =
+          <div class="docstring">
+  <div class="discussion">
+    <p>G_TYPE_DOUBLE, C parameter of the cubic filter.
+Values between 0.0 and 2.0 are accepted. 0.0 is the default.</p>
+<p>See #GST_AUDIO_RESAMPLER_OPT_CUBIC_B for some more common values</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioResampler</span><span class='period'>.</span><span class='id identifier rubyid_cubic'>cubic</span><span class='op'>-</span><span class='id identifier rubyid_c'>c</span></pre></dd>
+      
+        <dt id="AUDIO_RESAMPLER_OPT_CUTOFF-constant" class="">AUDIO_RESAMPLER_OPT_CUTOFF =
+          <div class="docstring">
+  <div class="discussion">
+    <p>G_TYPE_DOUBLE, Cutoff parameter for the filter. 0.940 is the default.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioResampler</span><span class='period'>.</span><span class='id identifier rubyid_cutoff'>cutoff</span></pre></dd>
+      
+        <dt id="AUDIO_RESAMPLER_OPT_FILTER_INTERPOLATION-constant" class="">AUDIO_RESAMPLER_OPT_FILTER_INTERPOLATION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>GST_TYPE_AUDIO_RESAMPLER_INTERPOLATION: how the filter coefficients should be
+interpolated.
+GST_AUDIO_RESAMPLER_FILTER_INTERPOLATION_CUBIC is default.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioResampler</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='op'>-</span><span class='id identifier rubyid_interpolation'>interpolation</span></pre></dd>
+      
+        <dt id="AUDIO_RESAMPLER_OPT_FILTER_MODE-constant" class="">AUDIO_RESAMPLER_OPT_FILTER_MODE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>GST_TYPE_AUDIO_RESAMPLER_FILTER_MODE: how the filter tables should be
+constructed.
+GST_AUDIO_RESAMPLER_FILTER_MODE_AUTO is the default.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioResampler</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='op'>-</span><span class='id identifier rubyid_mode'>mode</span></pre></dd>
+      
+        <dt id="AUDIO_RESAMPLER_OPT_FILTER_MODE_THRESHOLD-constant" class="">AUDIO_RESAMPLER_OPT_FILTER_MODE_THRESHOLD =
+          <div class="docstring">
+  <div class="discussion">
+    <p>G_TYPE_UINT: the amount of memory to use for full filter tables before
+switching to interpolated filter tables.
+1048576 is the default.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioResampler</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='op'>-</span><span class='id identifier rubyid_mode'>mode</span><span class='op'>-</span><span class='id identifier rubyid_threshold'>threshold</span></pre></dd>
+      
+        <dt id="AUDIO_RESAMPLER_OPT_FILTER_OVERSAMPLE-constant" class="">AUDIO_RESAMPLER_OPT_FILTER_OVERSAMPLE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>G_TYPE_UINT, oversampling to use when interpolating filters
+8 is the default.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioResampler</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='op'>-</span><span class='id identifier rubyid_oversample'>oversample</span></pre></dd>
+      
+        <dt id="AUDIO_RESAMPLER_OPT_MAX_PHASE_ERROR-constant" class="">AUDIO_RESAMPLER_OPT_MAX_PHASE_ERROR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>G_TYPE_DOUBLE: The maximum allowed phase error when switching sample
+rates.
+0.1 is the default.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioResampler</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span><span class='op'>-</span><span class='id identifier rubyid_phase'>phase</span><span class='op'>-</span><span class='id identifier rubyid_error'>error</span></pre></dd>
+      
+        <dt id="AUDIO_RESAMPLER_OPT_N_TAPS-constant" class="">AUDIO_RESAMPLER_OPT_N_TAPS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>G_TYPE_INT: the number of taps to use for the filter.
+0 is the default and selects the taps automatically.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioResampler</span><span class='period'>.</span><span class='id identifier rubyid_n'>n</span><span class='op'>-</span><span class='id identifier rubyid_taps'>taps</span></pre></dd>
+      
+        <dt id="AUDIO_RESAMPLER_OPT_STOP_ATTENUATION-constant" class="">AUDIO_RESAMPLER_OPT_STOP_ATTENUATION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>G_TYPE_DOUBLE, stopband attenuation in decibels. The attenuation
+after the stopband for the kaiser window. 85 dB is the default.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioResampler</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span><span class='op'>-</span><span class='id identifier rubyid_attenutation'>attenutation</span></pre></dd>
+      
+        <dt id="AUDIO_RESAMPLER_OPT_TRANSITION_BANDWIDTH-constant" class="">AUDIO_RESAMPLER_OPT_TRANSITION_BANDWIDTH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>G_TYPE_DOUBLE, transition bandwidth. The width of the
+transition band for the kaiser window. 0.087 is the default.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>GstAudioResampler</span><span class='period'>.</span><span class='id identifier rubyid_transition'>transition</span><span class='op'>-</span><span class='id identifier rubyid_bandwidth'>bandwidth</span></pre></dd>
+      
+        <dt id="AUDIO_RESAMPLER_QUALITY_DEFAULT-constant" class="">AUDIO_RESAMPLER_QUALITY_DEFAULT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span></pre></dd>
+      
+        <dt id="AUDIO_RESAMPLER_QUALITY_MAX-constant" class="">AUDIO_RESAMPLER_QUALITY_MAX =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span></pre></dd>
+      
+        <dt id="AUDIO_RESAMPLER_QUALITY_MIN-constant" class="">AUDIO_RESAMPLER_QUALITY_MIN =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="DSD_FORMATS_ALL-constant" class="">DSD_FORMATS_ALL =
+          <div class="docstring">
+  <div class="discussion">
+    <p>List of all DSD formats, for use in template caps strings.</p>
+<p>Big endian formats are preferred, since little-endian ones flip around
+the DSD bytes, and most DSD hardware uses big endian formats.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code">{ DSDU32BE, DSDU16BE, DSDU8, DSDU32LE, DSDU16LE }</pre></dd>
+      
+        <dt id="DSD_MEDIA_TYPE-constant" class="">DSD_MEDIA_TYPE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The GStreamer media type for DSD.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_audio'>audio</span><span class='op'>/</span><span class='id identifier rubyid_x'>x</span><span class='op'>-</span><span class='id identifier rubyid_dsd'>dsd</span></pre></dd>
+      
+        <dt id="DSD_SILENCE_PATTERN_BYTE-constant" class="">DSD_SILENCE_PATTERN_BYTE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Silence pattern for DSD data.</p>
+<p>In DSD, a nullbyte does not correspond to silence. To fill memory regions
+with &quot;DSD silence&quot;, these regions must be filled with byte 0x69 instead
+(this is the DSD silence pattern). This constant provides that pattern
+in a more readable fashion.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>105</span></pre></dd>
+      
+        <dt id="META_TAG_AUDIO_CHANNELS_STR-constant" class="">META_TAG_AUDIO_CHANNELS_STR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>This metadata stays relevant as long as channels are unchanged.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_channels'>channels</span></pre></dd>
+      
+        <dt id="META_TAG_AUDIO_RATE_STR-constant" class="">META_TAG_AUDIO_RATE_STR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>This metadata stays relevant as long as sample rate is unchanged.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_rate'>rate</span></pre></dd>
+      
+        <dt id="META_TAG_AUDIO_STR-constant" class="">META_TAG_AUDIO_STR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>This metadata is relevant for audio streams.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_audio'>audio</span></pre></dd>
+      
+        <dt id="META_TAG_DSD_PLANE_OFFSETS_STR-constant" class="">META_TAG_DSD_PLANE_OFFSETS_STR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>This metadata stays relevant as long as the DSD plane offsets are unchanged.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_dsdplaneoffsets'>dsdplaneoffsets</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_buffer_clip-instance_method" title="#audio_buffer_clip (instance method)">#<strong>audio_buffer_clip</strong>(buffer, segment, rate, bpf)  &#x21d2; Gst::Buffer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Clip the buffer to the given %GstSegment.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_buffer_map-instance_method" title="#audio_buffer_map (instance method)">#<strong>audio_buffer_map</strong>(buffer, info, gstbuffer, flags)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Maps an audio <!-- raw HTML omitted -->gstbuffer<!-- raw HTML omitted --> so that it can be read or written and stores the result of the map operation in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_buffer_reorder_channels-instance_method" title="#audio_buffer_reorder_channels (instance method)">#<strong>audio_buffer_reorder_channels</strong>(buffer, format, channels, from, to)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reorders <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> from the channel positions <!-- raw HTML omitted -->from<!-- raw HTML omitted --> to the channel positions <!-- raw HTML omitted -->to<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_buffer_truncate-instance_method" title="#audio_buffer_truncate (instance method)">#<strong>audio_buffer_truncate</strong>(buffer, bpf, trim, samples)  &#x21d2; Gst::Buffer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Truncate the buffer to finally have <!-- raw HTML omitted -->samples<!-- raw HTML omitted --> number of samples, removing the necessary amount of samples from the end and <!-- raw HTML omitted -->trim<!-- raw HTML omitted --> number of samples from the beginning.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_channel_get_fallback_mask-instance_method" title="#audio_channel_get_fallback_mask (instance method)">#<strong>audio_channel_get_fallback_mask</strong>(channels)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the fallback channel-mask for the given number of channels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_channel_mixer_new-instance_method" title="#audio_channel_mixer_new (instance method)">#<strong>audio_channel_mixer_new</strong>(flags, format, in_channels, in_position, out_channels, out_position)  &#x21d2; GstAudio::AudioChannelMixer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new channel mixer object for the given parameters.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_channel_mixer_new_with_matrix-instance_method" title="#audio_channel_mixer_new_with_matrix (instance method)">#<strong>audio_channel_mixer_new_with_matrix</strong>(flags, format, in_channels, out_channels, matrix)  &#x21d2; GstAudio::AudioChannelMixer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new channel mixer object for the given parameters.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_channel_positions_from_mask-instance_method" title="#audio_channel_positions_from_mask (instance method)">#<strong>audio_channel_positions_from_mask</strong>(channels, channel_mask, position)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Convert the <!-- raw HTML omitted -->channels<!-- raw HTML omitted --> present in <!-- raw HTML omitted -->channel_mask<!-- raw HTML omitted --> to a <!-- raw HTML omitted -->position<!-- raw HTML omitted --> array (which should have at least <!-- raw HTML omitted -->channels<!-- raw HTML omitted --> entries ensured by caller).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_channel_positions_to_mask-instance_method" title="#audio_channel_positions_to_mask (instance method)">#<strong>audio_channel_positions_to_mask</strong>(position, channels, force_order, channel_mask)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Convert the <!-- raw HTML omitted -->position<!-- raw HTML omitted --> array of <!-- raw HTML omitted -->channels<!-- raw HTML omitted --> channels to a bitmask.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_channel_positions_to_string-instance_method" title="#audio_channel_positions_to_string (instance method)">#<strong>audio_channel_positions_to_string</strong>(position, channels)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Converts <!-- raw HTML omitted -->position<!-- raw HTML omitted --> to a human-readable string representation for debugging purposes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_channel_positions_to_valid_order-instance_method" title="#audio_channel_positions_to_valid_order (instance method)">#<strong>audio_channel_positions_to_valid_order</strong>(position, channels)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reorders the channel positions in <!-- raw HTML omitted -->position<!-- raw HTML omitted --> from any order to the GStreamer channel order.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_check_valid_channel_positions-instance_method" title="#audio_check_valid_channel_positions (instance method)">#<strong>audio_check_valid_channel_positions</strong>(position, channels, force_order)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if <!-- raw HTML omitted -->position<!-- raw HTML omitted --> contains valid channel positions for <!-- raw HTML omitted -->channels<!-- raw HTML omitted --> channels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_clipping_meta_api_get_type-instance_method" title="#audio_clipping_meta_api_get_type (instance method)">#<strong>audio_clipping_meta_api_get_type</strong>  &#x21d2; GLib::Type </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_clipping_meta_get_info-instance_method" title="#audio_clipping_meta_get_info (instance method)">#<strong>audio_clipping_meta_get_info</strong>  &#x21d2; Gst::MetaInfo </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_downmix_meta_api_get_type-instance_method" title="#audio_downmix_meta_api_get_type (instance method)">#<strong>audio_downmix_meta_api_get_type</strong>  &#x21d2; GLib::Type </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_downmix_meta_get_info-instance_method" title="#audio_downmix_meta_get_info (instance method)">#<strong>audio_downmix_meta_get_info</strong>  &#x21d2; Gst::MetaInfo </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_format_build_integer-instance_method" title="#audio_format_build_integer (instance method)">#<strong>audio_format_build_integer</strong>(sign, endianness, width, depth)  &#x21d2; GstAudio::AudioFormat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Construct a Gst::AudioFormat with given parameters.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_format_fill_silence-instance_method" title="#audio_format_fill_silence (instance method)">#<strong>audio_format_fill_silence</strong>(info, dest, length)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Fill <!-- raw HTML omitted -->length<!-- raw HTML omitted --> bytes in <!-- raw HTML omitted -->dest<!-- raw HTML omitted --> with silence samples for <!-- raw HTML omitted -->info<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_format_from_string-instance_method" title="#audio_format_from_string (instance method)">#<strong>audio_format_from_string</strong>(format)  &#x21d2; GstAudio::AudioFormat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Convert the <!-- raw HTML omitted -->format<!-- raw HTML omitted --> string to its Gst::AudioFormat.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_format_get_info-instance_method" title="#audio_format_get_info (instance method)">#<strong>audio_format_get_info</strong>(format)  &#x21d2; GstAudio::AudioFormatInfo </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the Gst::AudioFormatInfo for <!-- raw HTML omitted -->format<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_format_info_get_type-instance_method" title="#audio_format_info_get_type (instance method)">#<strong>audio_format_info_get_type</strong>  &#x21d2; GLib::Type </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_format_to_string-instance_method" title="#audio_format_to_string (instance method)">#<strong>audio_format_to_string</strong>(format)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_formats_raw-instance_method" title="#audio_formats_raw (instance method)">#<strong>audio_formats_raw</strong>(len)  &#x21d2; Array&lt;GstAudio::AudioFormat&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return all the raw audio formats supported by GStreamer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_get_channel_reorder_map-instance_method" title="#audio_get_channel_reorder_map (instance method)">#<strong>audio_get_channel_reorder_map</strong>(channels, from, to, reorder_map)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a reorder map for <!-- raw HTML omitted -->from<!-- raw HTML omitted --> to <!-- raw HTML omitted -->to<!-- raw HTML omitted --> that can be used in custom channel reordering code, e.g.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_iec61937_frame_size-instance_method" title="#audio_iec61937_frame_size (instance method)">#<strong>audio_iec61937_frame_size</strong>(spec)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Calculated the size of the buffer expected by gst_audio_iec61937_payload() for payloading type from <!-- raw HTML omitted -->spec<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_iec61937_payload-instance_method" title="#audio_iec61937_payload (instance method)">#<strong>audio_iec61937_payload</strong>(src, src_n, dst, dst_n, spec, endianness)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Payloads <!-- raw HTML omitted -->src<!-- raw HTML omitted --> in the form specified by IEC 61937 for the type from <!-- raw HTML omitted -->spec<!-- raw HTML omitted --> and stores the result in <!-- raw HTML omitted -->dst<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_info_from_caps-instance_method" title="#audio_info_from_caps (instance method)">#<strong>audio_info_from_caps</strong>(info, caps)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Parse <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> and update <!-- raw HTML omitted -->info<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_info_init-instance_method" title="#audio_info_init (instance method)">#<strong>audio_info_init</strong>(info)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Initialize <!-- raw HTML omitted -->info<!-- raw HTML omitted --> with default values.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_level_meta_api_get_type-instance_method" title="#audio_level_meta_api_get_type (instance method)">#<strong>audio_level_meta_api_get_type</strong>  &#x21d2; GLib::Type </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return the #GType associated with Gst::AudioLevelMeta.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_level_meta_get_info-instance_method" title="#audio_level_meta_get_info (instance method)">#<strong>audio_level_meta_get_info</strong>  &#x21d2; Gst::MetaInfo </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return the Gst::MetaInfo associated with #GstAudioLevelMeta.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_make_raw_caps-instance_method" title="#audio_make_raw_caps (instance method)">#<strong>audio_make_raw_caps</strong>(formats, len, layout)  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return a generic raw audio caps for formats defined in <!-- raw HTML omitted -->formats<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_meta_api_get_type-instance_method" title="#audio_meta_api_get_type (instance method)">#<strong>audio_meta_api_get_type</strong>  &#x21d2; GLib::Type </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_meta_get_info-instance_method" title="#audio_meta_get_info (instance method)">#<strong>audio_meta_get_info</strong>  &#x21d2; Gst::MetaInfo </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_quantize_new-instance_method" title="#audio_quantize_new (instance method)">#<strong>audio_quantize_new</strong>(dither, ns, flags, format, channels, quantizer)  &#x21d2; GstAudio::AudioQuantize </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new quantizer object with the given parameters.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_reorder_channels-instance_method" title="#audio_reorder_channels (instance method)">#<strong>audio_reorder_channels</strong>(data, size, format, channels, from, to)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reorders <!-- raw HTML omitted -->data<!-- raw HTML omitted --> from the channel positions <!-- raw HTML omitted -->from<!-- raw HTML omitted --> to the channel positions <!-- raw HTML omitted -->to<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_resampler_new-instance_method" title="#audio_resampler_new (instance method)">#<strong>audio_resampler_new</strong>(method, flags, format, channels, in_rate, out_rate, options)  &#x21d2; GstAudio::AudioResampler </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Make a new resampler.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_resampler_options_set_quality-instance_method" title="#audio_resampler_options_set_quality (instance method)">#<strong>audio_resampler_options_set_quality</strong>(method, quality, in_rate, out_rate, options)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set the parameters for resampling from <!-- raw HTML omitted -->in_rate<!-- raw HTML omitted --> to <!-- raw HTML omitted -->out_rate<!-- raw HTML omitted --> using <!-- raw HTML omitted -->method<!-- raw HTML omitted --> for <!-- raw HTML omitted -->quality<!-- raw HTML omitted --> in <!-- raw HTML omitted -->options<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#buffer_add_audio_clipping_meta-instance_method" title="#buffer_add_audio_clipping_meta (instance method)">#<strong>buffer_add_audio_clipping_meta</strong>(buffer, format, start, end)  &#x21d2; GstAudio::AudioClippingMeta </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Attaches Gst::AudioClippingMeta metadata to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> with the given parameters.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#buffer_add_audio_downmix_meta-instance_method" title="#buffer_add_audio_downmix_meta (instance method)">#<strong>buffer_add_audio_downmix_meta</strong>(buffer, from_position, from_channels, to_position, to_channels, matrix)  &#x21d2; GstAudio::AudioDownmixMeta </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Attaches Gst::AudioDownmixMeta metadata to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> with the given parameters.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#buffer_add_audio_level_meta-instance_method" title="#buffer_add_audio_level_meta (instance method)">#<strong>buffer_add_audio_level_meta</strong>(buffer, level, voice_activity)  &#x21d2; GstAudio::AudioLevelMeta </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Attaches audio level information to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#buffer_add_audio_meta-instance_method" title="#buffer_add_audio_meta (instance method)">#<strong>buffer_add_audio_meta</strong>(buffer, info, samples, offsets)  &#x21d2; GstAudio::AudioMeta </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Allocates and attaches a Gst::AudioMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, which must be writable for that purpose.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#buffer_add_dsd_plane_offset_meta-instance_method" title="#buffer_add_dsd_plane_offset_meta (instance method)">#<strong>buffer_add_dsd_plane_offset_meta</strong>(buffer, num_channels, num_bytes_per_channel, offsets)  &#x21d2; GstAudio::DsdPlaneOffsetMeta </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Allocates and attaches a Gst::DsdPlaneOffsetMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, which must be writable for that purpose.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#buffer_get_audio_downmix_meta_for_channels-instance_method" title="#buffer_get_audio_downmix_meta_for_channels (instance method)">#<strong>buffer_get_audio_downmix_meta_for_channels</strong>(buffer, to_position, to_channels)  &#x21d2; GstAudio::AudioDownmixMeta </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Find the Gst::AudioDownmixMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> for the given destination channel positions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#buffer_get_audio_level_meta-instance_method" title="#buffer_get_audio_level_meta (instance method)">#<strong>buffer_get_audio_level_meta</strong>(buffer)  &#x21d2; GstAudio::AudioLevelMeta </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Find the Gst::AudioLevelMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dsd_convert-instance_method" title="#dsd_convert (instance method)">#<strong>dsd_convert</strong>(input_data, output_data, input_format, output_format, input_layout, output_layout, input_plane_offsets, output_plane_offsets, num_dsd_bytes, num_channels, reverse_byte_bits)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Converts DSD data from one layout and grouping format to another.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dsd_format_from_string-instance_method" title="#dsd_format_from_string (instance method)">#<strong>dsd_format_from_string</strong>(str)  &#x21d2; GstAudio::DsdFormat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Convert the DSD format string <!-- raw HTML omitted -->str<!-- raw HTML omitted --> to its Gst::DsdFormat.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dsd_format_get_width-instance_method" title="#dsd_format_get_width (instance method)">#<strong>dsd_format_get_width</strong>(format)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Number of bytes in this DSD grouping format.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dsd_format_to_string-instance_method" title="#dsd_format_to_string (instance method)">#<strong>dsd_format_to_string</strong>(format)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a string containing a descriptive name for the Gst::DsdFormat if there is one, or NULL otherwise.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dsd_info_from_caps-instance_method" title="#dsd_info_from_caps (instance method)">#<strong>dsd_info_from_caps</strong>(info, caps)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Parse <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> and update <!-- raw HTML omitted -->info<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dsd_info_init-instance_method" title="#dsd_info_init (instance method)">#<strong>dsd_info_init</strong>(info)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Initialize <!-- raw HTML omitted -->info<!-- raw HTML omitted --> with default values.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dsd_plane_offset_meta_api_get_type-instance_method" title="#dsd_plane_offset_meta_api_get_type (instance method)">#<strong>dsd_plane_offset_meta_api_get_type</strong>  &#x21d2; GLib::Type </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dsd_plane_offset_meta_get_info-instance_method" title="#dsd_plane_offset_meta_get_info (instance method)">#<strong>dsd_plane_offset_meta_get_info</strong>  &#x21d2; Gst::MetaInfo </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stream_volume_convert_volume-instance_method" title="#stream_volume_convert_volume (instance method)">#<strong>stream_volume_convert_volume</strong>(from, to, val)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The converted volume.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="audio_buffer_clip-instance_method">
+  
+    #<strong>audio_buffer_clip</strong>(buffer, segment, rate, bpf)  &#x21d2; <tt>Gst::Buffer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Clip the buffer to the given %GstSegment.</p>
+<p>After calling this function the caller does not own a reference to
+<!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> anymore.
+number of channels.
+otherwise the clipped buffer is returned.</p>
+<p>If the buffer has no timestamp, it is assumed to be inside the segment and
+is not clipped</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The buffer to clip.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>segment</span>
+      
+      
+        <span class='type'>(<tt>Gst::Segment</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Segment in %GST_FORMAT_TIME or %GST_FORMAT_DEFAULT to which
+the buffer should be clipped.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rate</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>sample rate.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bpf</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>size of one audio frame in bytes. This is the size of one sample *</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nil if the buffer is completely outside the configured segment,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_buffer_map-instance_method">
+  
+    #<strong>audio_buffer_map</strong>(buffer, info, gstbuffer, flags)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Maps an audio <!-- raw HTML omitted -->gstbuffer<!-- raw HTML omitted --> so that it can be read or written and stores the
+result of the map operation in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
+<p>This is especially useful when the <!-- raw HTML omitted -->gstbuffer<!-- raw HTML omitted --> is in non-interleaved (planar)
+layout, in which case this function will use the information in the
+<!-- raw HTML omitted -->gstbuffer<!-- raw HTML omitted -->'s attached Gst::AudioMeta in order to map each channel in a
+separate &quot;plane&quot; in Gst::AudioBuffer. If a #GstAudioMeta is not attached
+on the <!-- raw HTML omitted -->gstbuffer<!-- raw HTML omitted -->, then it must be in interleaved layout.</p>
+<p>If a Gst::AudioMeta is attached, then the #GstAudioInfo on the meta is checked
+against <!-- raw HTML omitted -->info<!-- raw HTML omitted -->. Normally, they should be equal, but in case they are not,
+a g_critical will be printed and the Gst::AudioInfo from the meta will be
+used.</p>
+<p>In non-interleaved buffers, it is possible to have each channel on a separate
+Gst::Memory. In this case, each memory will be mapped separately to avoid
+copying their contents in a larger memory area. Do note though that it is
+not supported to have a single channel spanning over two or more different
+Gst::Memory objects. Although the map operation will likely succeed in this
+case, it will be highly sub-optimal and it is recommended to merge all the
+memories in the buffer before calling this function.</p>
+<p>Note: The actual Gst::Buffer is not ref'ed, but it is required to stay valid
+as long as it's mapped.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioBuffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointer to a Gst::AudioBuffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>info</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the audio properties of the buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>gstbuffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Buffer to be mapped</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/MapFlags.html" title="Gst::MapFlags (module)">Gst::MapFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the access mode for the memory</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the map operation succeeded or false on failure</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_buffer_reorder_channels-instance_method">
+  
+    #<strong>audio_buffer_reorder_channels</strong>(buffer, format, channels, from, to)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reorders <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> from the channel positions <!-- raw HTML omitted -->from<!-- raw HTML omitted --> to the channel
+positions <!-- raw HTML omitted -->to<!-- raw HTML omitted -->. <!-- raw HTML omitted -->from<!-- raw HTML omitted --> and <!-- raw HTML omitted -->to<!-- raw HTML omitted --> must contain the same number of
+positions and the same positions, only in a different order.
+<!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> must be writable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The buffer to reorder.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">GstAudio::AudioFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The %GstAudioFormat of the buffer.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of channels.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>from</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The channel positions in the buffer.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The channel positions to convert to.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the reordering was possible.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_buffer_truncate-instance_method">
+  
+    #<strong>audio_buffer_truncate</strong>(buffer, bpf, trim, samples)  &#x21d2; <tt>Gst::Buffer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Truncate the buffer to finally have <!-- raw HTML omitted -->samples<!-- raw HTML omitted --> number of samples, removing
+the necessary amount of samples from the end and <!-- raw HTML omitted -->trim<!-- raw HTML omitted --> number of samples
+from the beginning.</p>
+<p>This function does not know the audio rate, therefore the caller is
+responsible for re-setting the correct timestamp and duration to the
+buffer. However, timestamp will be preserved if trim == 0, and duration
+will also be preserved if there is no trimming to be done. Offset and
+offset end will be preserved / updated.</p>
+<p>After calling this function the caller does not own a reference to
+<!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> anymore.
+number of channels.
+to use all the remaining samples if you are only removing samples from the
+beginning.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The buffer to truncate.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bpf</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>size of one audio frame in bytes. This is the size of one sample *</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>trim</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of samples to remove from the beginning of the buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>samples</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the final number of samples that should exist in this buffer or -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the truncated buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_channel_get_fallback_mask-instance_method">
+  
+    #<strong>audio_channel_get_fallback_mask</strong>(channels)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the fallback channel-mask for the given number of channels.</p>
+<p>This function returns a reasonable fallback channel-mask and should be
+called as a last resort when the specific channel map is unknown.
+mask and mono.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of channels</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a fallback channel-mask for <!-- raw HTML omitted -->channels<!-- raw HTML omitted --> or 0 when there is no</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_channel_mixer_new-instance_method">
+  
+    #<strong>audio_channel_mixer_new</strong>(flags, format, in_channels, in_position, out_channels, out_position)  &#x21d2; <tt>GstAudio::AudioChannelMixer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new channel mixer object for the given parameters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioChannelMixerFlags.html" title="GstAudio::AudioChannelMixerFlags (module)">GstAudio::AudioChannelMixerFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gst::AudioChannelMixerFlags</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">GstAudio::AudioFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>in_channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>number of input channels</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>in_position</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>positions of input channels</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>number of output channels</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_position</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>positions of output channels</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioChannelMixer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Gst::AudioChannelMixer object.
+Free with gst_audio_channel_mixer_free() after usage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_channel_mixer_new_with_matrix-instance_method">
+  
+    #<strong>audio_channel_mixer_new_with_matrix</strong>(flags, format, in_channels, out_channels, matrix)  &#x21d2; <tt>GstAudio::AudioChannelMixer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new channel mixer object for the given parameters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioChannelMixerFlags.html" title="GstAudio::AudioChannelMixerFlags (module)">GstAudio::AudioChannelMixerFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gst::AudioChannelMixerFlags</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">GstAudio::AudioFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>in_channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>number of input channels</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>number of output channels</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>matrix</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>channel conversion matrix, m[<!-- raw HTML omitted -->in_channels<!-- raw HTML omitted -->][<!-- raw HTML omitted -->out_channels<!-- raw HTML omitted -->].
+If identity matrix, passthrough applies. If nil, a (potentially truncated)
+identity matrix is generated.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioChannelMixer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Gst::AudioChannelMixer object.
+Free with gst_audio_channel_mixer_free() after usage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_channel_positions_from_mask-instance_method">
+  
+    #<strong>audio_channel_positions_from_mask</strong>(channels, channel_mask, position)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Convert the <!-- raw HTML omitted -->channels<!-- raw HTML omitted --> present in <!-- raw HTML omitted -->channel_mask<!-- raw HTML omitted --> to a <!-- raw HTML omitted -->position<!-- raw HTML omitted --> array
+(which should have at least <!-- raw HTML omitted -->channels<!-- raw HTML omitted --> entries ensured by caller).
+If <!-- raw HTML omitted -->channel_mask<!-- raw HTML omitted --> is set to 0, it is considered as 'not present' for purpose
+of conversion.
+A partially valid <!-- raw HTML omitted -->channel_mask<!-- raw HTML omitted --> with less bits set than the number
+of channels is considered valid.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of channels</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>channel_mask</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The input channel_mask</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The
+%GstAudioChannelPosition<!-- raw HTML omitted -->s</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if channel and channel mask are valid and could be converted</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_channel_positions_to_mask-instance_method">
+  
+    #<strong>audio_channel_positions_to_mask</strong>(position, channels, force_order, channel_mask)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Convert the <!-- raw HTML omitted -->position<!-- raw HTML omitted --> array of <!-- raw HTML omitted -->channels<!-- raw HTML omitted --> channels to a bitmask.</p>
+<p>If <!-- raw HTML omitted -->force_order<!-- raw HTML omitted --> is true it additionally checks if the channels are
+in the order required by GStreamer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The %GstAudioChannelPositions</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of channels.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>force_order</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Only consider the GStreamer channel order.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>channel_mask</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the output channel mask</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the channel positions are valid and could be converted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_channel_positions_to_string-instance_method">
+  
+    #<strong>audio_channel_positions_to_string</strong>(position, channels)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Converts <!-- raw HTML omitted -->position<!-- raw HTML omitted --> to a human-readable string representation for
+debugging purposes.
+<!-- raw HTML omitted -->position<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The %GstAudioChannelPositions
+to convert.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of channels.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly allocated string representing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_channel_positions_to_valid_order-instance_method">
+  
+    #<strong>audio_channel_positions_to_valid_order</strong>(position, channels)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reorders the channel positions in <!-- raw HTML omitted -->position<!-- raw HTML omitted --> from any order to
+the GStreamer channel order.
+was successful.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The channel positions to
+reorder to.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of channels.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the channel positions are valid and reordering</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_check_valid_channel_positions-instance_method">
+  
+    #<strong>audio_check_valid_channel_positions</strong>(position, channels, force_order)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if <!-- raw HTML omitted -->position<!-- raw HTML omitted --> contains valid channel positions for
+<!-- raw HTML omitted -->channels<!-- raw HTML omitted --> channels. If <!-- raw HTML omitted -->force_order<!-- raw HTML omitted --> is true it additionally
+checks if the channels are in the order required by GStreamer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The %GstAudioChannelPositions
+to check.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of channels.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>force_order</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Only consider the GStreamer channel order.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the channel positions are valid.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_clipping_meta_api_get_type-instance_method">
+  
+    #<strong>audio_clipping_meta_api_get_type</strong>  &#x21d2; <tt>GLib::Type</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_clipping_meta_get_info-instance_method">
+  
+    #<strong>audio_clipping_meta_get_info</strong>  &#x21d2; <tt>Gst::MetaInfo</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::MetaInfo</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_downmix_meta_api_get_type-instance_method">
+  
+    #<strong>audio_downmix_meta_api_get_type</strong>  &#x21d2; <tt>GLib::Type</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_downmix_meta_get_info-instance_method">
+  
+    #<strong>audio_downmix_meta_get_info</strong>  &#x21d2; <tt>Gst::MetaInfo</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::MetaInfo</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_format_build_integer-instance_method">
+  
+    #<strong>audio_format_build_integer</strong>(sign, endianness, width, depth)  &#x21d2; <tt><span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">GstAudio::AudioFormat</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Construct a Gst::AudioFormat with given parameters.
+exists with the given parameters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sign</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>signed or unsigned format</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>endianness</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>G_LITTLE_ENDIAN or G_BIG_ENDIAN</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>amount of bits used per sample</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>depth</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>amount of used bits in <!-- raw HTML omitted -->width<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">GstAudio::AudioFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::AudioFormat or GST_AUDIO_FORMAT_UNKNOWN when no audio format</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_format_fill_silence-instance_method">
+  
+    #<strong>audio_format_fill_silence</strong>(info, dest, length)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Fill <!-- raw HTML omitted -->length<!-- raw HTML omitted --> bytes in <!-- raw HTML omitted -->dest<!-- raw HTML omitted --> with silence samples for <!-- raw HTML omitted -->info<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>info</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioFormatInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::AudioFormatInfo</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dest</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a destination
+to fill</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the length to fill</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_format_from_string-instance_method">
+  
+    #<strong>audio_format_from_string</strong>(format)  &#x21d2; <tt><span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">GstAudio::AudioFormat</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Convert the <!-- raw HTML omitted -->format<!-- raw HTML omitted --> string to its Gst::AudioFormat.
+string is not a known format.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a format string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">GstAudio::AudioFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::AudioFormat for <!-- raw HTML omitted -->format<!-- raw HTML omitted --> or GST_AUDIO_FORMAT_UNKNOWN when the</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_format_get_info-instance_method">
+  
+    #<strong>audio_format_get_info</strong>(format)  &#x21d2; <tt>GstAudio::AudioFormatInfo</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the Gst::AudioFormatInfo for <!-- raw HTML omitted -->format<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">GstAudio::AudioFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::AudioFormat</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioFormatInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The Gst::AudioFormatInfo for <!-- raw HTML omitted -->format<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_format_info_get_type-instance_method">
+  
+    #<strong>audio_format_info_get_type</strong>  &#x21d2; <tt>GLib::Type</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_format_to_string-instance_method">
+  
+    #<strong>audio_format_to_string</strong>(format)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">GstAudio::AudioFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_formats_raw-instance_method">
+  
+    #<strong>audio_formats_raw</strong>(len)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">GstAudio::AudioFormat</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return all the raw audio formats supported by GStreamer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of elements in the returned array</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">GstAudio::AudioFormat</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an array of Gst::AudioFormat</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_get_channel_reorder_map-instance_method">
+  
+    #<strong>audio_get_channel_reorder_map</strong>(channels, from, to, reorder_map)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a reorder map for <!-- raw HTML omitted -->from<!-- raw HTML omitted --> to <!-- raw HTML omitted -->to<!-- raw HTML omitted --> that can be used in
+custom channel reordering code, e.g. to convert from or to the
+GStreamer channel order. <!-- raw HTML omitted -->from<!-- raw HTML omitted --> and <!-- raw HTML omitted -->to<!-- raw HTML omitted --> must contain the same
+number of positions and the same positions, only in a
+different order.</p>
+<p>The resulting <!-- raw HTML omitted -->reorder_map<!-- raw HTML omitted --> can be used for reordering by assigning
+channel i of the input to channel reorder_map[i] of the output.
+is possible.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of channels.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>from</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The channel positions to reorder from.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The channel positions to reorder to.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>reorder_map</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Pointer to the reorder map.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the channel positions are valid and reordering</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_iec61937_frame_size-instance_method">
+  
+    #<strong>audio_iec61937_frame_size</strong>(spec)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Calculated the size of the buffer expected by gst_audio_iec61937_payload() for
+payloading type from <!-- raw HTML omitted -->spec<!-- raw HTML omitted -->.
+payloaded.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>spec</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioRingBufferSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the ringbufer spec</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the size or 0 if the given <!-- raw HTML omitted -->type<!-- raw HTML omitted --> is not supported or cannot be</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_iec61937_payload-instance_method">
+  
+    #<strong>audio_iec61937_payload</strong>(src, src_n, dst, dst_n, spec, endianness)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Payloads <!-- raw HTML omitted -->src<!-- raw HTML omitted --> in the form specified by IEC 61937 for the type from <!-- raw HTML omitted -->spec<!-- raw HTML omitted --> and
+stores the result in <!-- raw HTML omitted -->dst<!-- raw HTML omitted -->. <!-- raw HTML omitted -->src<!-- raw HTML omitted --> must contain exactly one frame of data and
+the frame is not checked for errors.
+otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>src</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a buffer containing the data to payload</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>src_n</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>size of <!-- raw HTML omitted -->src<!-- raw HTML omitted --> in bytes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dst</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the destination buffer to store the
+payloaded contents in. Should not overlap with <!-- raw HTML omitted -->src<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dst_n</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>size of <!-- raw HTML omitted -->dst<!-- raw HTML omitted --> in bytes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>spec</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioRingBufferSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the ringbufer spec for <!-- raw HTML omitted -->src<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>endianness</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the expected byte order of the payloaded data</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>transfer-full: true if the payloading was successful, false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_info_from_caps-instance_method">
+  
+    #<strong>audio_info_from_caps</strong>(info, caps)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Parse <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> and update <!-- raw HTML omitted -->info<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>info</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::AudioInfo</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>caps</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Caps</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> could be parsed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_info_init-instance_method">
+  
+    #<strong>audio_info_init</strong>(info)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Initialize <!-- raw HTML omitted -->info<!-- raw HTML omitted --> with default values.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>info</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::AudioInfo</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_level_meta_api_get_type-instance_method">
+  
+    #<strong>audio_level_meta_api_get_type</strong>  &#x21d2; <tt>GLib::Type</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return the #GType associated with Gst::AudioLevelMeta.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GType</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_level_meta_get_info-instance_method">
+  
+    #<strong>audio_level_meta_get_info</strong>  &#x21d2; <tt>Gst::MetaInfo</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return the Gst::MetaInfo associated with #GstAudioLevelMeta.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::MetaInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::MetaInfo</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_make_raw_caps-instance_method">
+  
+    #<strong>audio_make_raw_caps</strong>(formats, len, layout)  &#x21d2; <tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return a generic raw audio caps for formats defined in <!-- raw HTML omitted -->formats<!-- raw HTML omitted -->.
+If <!-- raw HTML omitted -->formats<!-- raw HTML omitted --> is nil returns a caps for all the supported raw audio formats,
+see gst_audio_formats_raw().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>formats</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">GstAudio::AudioFormat</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an array of raw Gst::AudioFormat, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the size of <!-- raw HTML omitted -->formats<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>layout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioLayout.html" title="GstAudio::AudioLayout (module)">GstAudio::AudioLayout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the layout of audio samples</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an audio <!-- raw HTML omitted -->GstCaps<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_meta_api_get_type-instance_method">
+  
+    #<strong>audio_meta_api_get_type</strong>  &#x21d2; <tt>GLib::Type</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_meta_get_info-instance_method">
+  
+    #<strong>audio_meta_get_info</strong>  &#x21d2; <tt>Gst::MetaInfo</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::MetaInfo</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_quantize_new-instance_method">
+  
+    #<strong>audio_quantize_new</strong>(dither, ns, flags, format, channels, quantizer)  &#x21d2; <tt>GstAudio::AudioQuantize</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new quantizer object with the given parameters.</p>
+<p>Output samples will be quantized to a multiple of <!-- raw HTML omitted -->quantizer<!-- raw HTML omitted -->. Better
+performance is achieved when <!-- raw HTML omitted -->quantizer<!-- raw HTML omitted --> is a power of 2.</p>
+<p>Dithering and noise-shaping can be performed during quantization with
+the <!-- raw HTML omitted -->dither<!-- raw HTML omitted --> and <!-- raw HTML omitted -->ns<!-- raw HTML omitted --> parameters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>dither</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioDitherMethod.html" title="GstAudio::AudioDitherMethod (module)">GstAudio::AudioDitherMethod</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::AudioDitherMethod</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ns</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioNoiseShapingMethod.html" title="GstAudio::AudioNoiseShapingMethod (module)">GstAudio::AudioNoiseShapingMethod</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::AudioNoiseShapingMethod</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioQuantizeFlags.html" title="GstAudio::AudioQuantizeFlags (module)">GstAudio::AudioQuantizeFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gst::AudioQuantizeFlags</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">GstAudio::AudioFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::AudioFormat of the samples</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the amount of channels in the samples</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>quantizer</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the quantizer to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioQuantize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Gst::AudioQuantize. Free with gst_audio_quantize_free().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_reorder_channels-instance_method">
+  
+    #<strong>audio_reorder_channels</strong>(data, size, format, channels, from, to)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reorders <!-- raw HTML omitted -->data<!-- raw HTML omitted --> from the channel positions <!-- raw HTML omitted -->from<!-- raw HTML omitted --> to the channel
+positions <!-- raw HTML omitted -->to<!-- raw HTML omitted -->. <!-- raw HTML omitted -->from<!-- raw HTML omitted --> and <!-- raw HTML omitted -->to<!-- raw HTML omitted --> must contain the same number of
+positions and the same positions, only in a different order.</p>
+<p>Note: this function assumes the audio data is in interleaved layout</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The pointer to
+the memory.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The size of the memory.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">GstAudio::AudioFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The %GstAudioFormat of the buffer.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of channels.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>from</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The channel positions in the buffer.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The channel positions to convert to.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the reordering was possible.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_resampler_new-instance_method">
+  
+    #<strong>audio_resampler_new</strong>(method, flags, format, channels, in_rate, out_rate, options)  &#x21d2; <tt>GstAudio::AudioResampler</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Make a new resampler.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>method</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioResamplerMethod.html" title="GstAudio::AudioResamplerMethod (module)">GstAudio::AudioResamplerMethod</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::AudioResamplerMethod</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioResamplerFlags.html" title="GstAudio::AudioResamplerFlags (module)">GstAudio::AudioResamplerFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gst::AudioResamplerFlags</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioFormat.html" title="GstAudio::AudioFormat (module)">GstAudio::AudioFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::AudioFormat</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of channels</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>in_rate</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>input rate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_rate</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>output rate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Structure.html" title="Gst::Structure (class)">Gst::Structure</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>extra options</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioResampler</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The new Gst::AudioResampler.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="audio_resampler_options_set_quality-instance_method">
+  
+    #<strong>audio_resampler_options_set_quality</strong>(method, quality, in_rate, out_rate, options)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set the parameters for resampling from <!-- raw HTML omitted -->in_rate<!-- raw HTML omitted --> to <!-- raw HTML omitted -->out_rate<!-- raw HTML omitted --> using <!-- raw HTML omitted -->method<!-- raw HTML omitted -->
+for <!-- raw HTML omitted -->quality<!-- raw HTML omitted --> in <!-- raw HTML omitted -->options<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>method</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioResamplerMethod.html" title="GstAudio::AudioResamplerMethod (module)">GstAudio::AudioResamplerMethod</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::AudioResamplerMethod</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>quality</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the quality</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>in_rate</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the input rate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out_rate</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the output rate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Structure.html" title="Gst::Structure (class)">Gst::Structure</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Structure</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="buffer_add_audio_clipping_meta-instance_method">
+  
+    #<strong>buffer_add_audio_clipping_meta</strong>(buffer, format, start, end)  &#x21d2; <tt>GstAudio::AudioClippingMeta</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Attaches Gst::AudioClippingMeta metadata to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> with the given parameters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Format.html" title="Gst::Format (module)">Gst::Format</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>GstFormat of <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->stop<!-- raw HTML omitted -->, GST_FORMAT_DEFAULT is samples</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Amount of audio to clip from start of buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Amount of  to clip from end of buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioClippingMeta</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::AudioClippingMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="buffer_add_audio_downmix_meta-instance_method">
+  
+    #<strong>buffer_add_audio_downmix_meta</strong>(buffer, from_position, from_channels, to_position, to_channels, matrix)  &#x21d2; <tt>GstAudio::AudioDownmixMeta</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Attaches Gst::AudioDownmixMeta metadata to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> with the given parameters.</p>
+<p><!-- raw HTML omitted -->matrix<!-- raw HTML omitted --> is an two-dimensional array of <!-- raw HTML omitted -->to_channels<!-- raw HTML omitted --> times <!-- raw HTML omitted -->from_channels<!-- raw HTML omitted -->
+coefficients, i.e. the i-th output channels is constructed by multiplicating
+the input channels with the coefficients in <!-- raw HTML omitted -->matrix<!-- raw HTML omitted -->[i] and taking the sum
+of the results.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>from_position</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the channel positions
+of the source</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>from_channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of channels of the source</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to_position</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the channel positions of
+the destination</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to_channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of channels of the destination</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>matrix</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The matrix coefficients.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioDownmixMeta</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::AudioDownmixMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="buffer_add_audio_level_meta-instance_method">
+  
+    #<strong>buffer_add_audio_level_meta</strong>(buffer, level, voice_activity)  &#x21d2; <tt>GstAudio::AudioLevelMeta</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Attaches audio level information to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->. (RFC 6464)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>level</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the -dBov from 0-127 (127 is silence).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>voice_activity</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether the buffer contains voice activity.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioLevelMeta</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::AudioLevelMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="buffer_add_audio_meta-instance_method">
+  
+    #<strong>buffer_add_audio_meta</strong>(buffer, info, samples, offsets)  &#x21d2; <tt>GstAudio::AudioMeta</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Allocates and attaches a Gst::AudioMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, which must be writable
+for that purpose. The fields of the Gst::AudioMeta are directly populated
+from the arguments of this function.</p>
+<p>When <!-- raw HTML omitted -->info<!-- raw HTML omitted -->-&gt;layout is %GST_AUDIO_LAYOUT_NON_INTERLEAVED and <!-- raw HTML omitted -->offsets<!-- raw HTML omitted --> is
+nil, the offsets are calculated with a formula that assumes the planes are
+tightly packed and in sequence:
+offsets[channel] = channel * <!-- raw HTML omitted -->samples<!-- raw HTML omitted --> * sample_stride</p>
+<p>It is not allowed for channels to overlap in memory,
+i.e. for each i in [0, channels), the range
+[<!-- raw HTML omitted -->offsets<!-- raw HTML omitted -->[i], <!-- raw HTML omitted -->offsets<!-- raw HTML omitted -->[i] + <!-- raw HTML omitted -->samples<!-- raw HTML omitted --> * sample_stride) must not overlap
+with any other such range. This function will assert if the parameters
+specified cause this restriction to be violated.</p>
+<p>It is, obviously, also not allowed to specify parameters that would cause
+out-of-bounds memory access on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->. This is also checked, which means
+that you must add enough memory on the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> before adding this meta.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>info</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the audio properties of the buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>samples</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of valid samples in the buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offsets</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the offsets (in bytes) where each channel plane starts
+in the buffer or nil to calculate it (see below); must be nil also
+when <!-- raw HTML omitted -->info<!-- raw HTML omitted -->-&gt;layout is %GST_AUDIO_LAYOUT_INTERLEAVED</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioMeta</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::AudioMeta that was attached on the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="buffer_add_dsd_plane_offset_meta-instance_method">
+  
+    #<strong>buffer_add_dsd_plane_offset_meta</strong>(buffer, num_channels, num_bytes_per_channel, offsets)  &#x21d2; <tt>GstAudio::DsdPlaneOffsetMeta</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Allocates and attaches a Gst::DsdPlaneOffsetMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, which must be
+writable for that purpose. The fields of the Gst::DsdPlaneOffsetMeta are
+directly populated from the arguments of this function.</p>
+<p>If <!-- raw HTML omitted -->offsets<!-- raw HTML omitted --> is NULL, then the meta's offsets field is left uninitialized.
+This is useful if for example offset values are to be calculated in the
+meta's offsets field in-place. Similarly, <!-- raw HTML omitted -->num_bytes_per_channel<!-- raw HTML omitted --> can be
+set to 0, but only if <!-- raw HTML omitted -->offsets<!-- raw HTML omitted --> is NULL. This is useful if the number of
+bytes per channel is known only later.</p>
+<p>It is not allowed for channels to overlap in memory,
+i.e. for each i in [0, channels), the range
+[<!-- raw HTML omitted -->offsets<!-- raw HTML omitted -->[i], <!-- raw HTML omitted -->offsets<!-- raw HTML omitted -->[i] + <!-- raw HTML omitted -->num_bytes_per_channel<!-- raw HTML omitted -->) must not overlap
+with any other such range. This function will assert if the parameters
+specified cause this restriction to be violated.</p>
+<p>It is, obviously, also not allowed to specify parameters that would cause
+out-of-bounds memory access on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->. This is also checked, which means
+that you must add enough memory on the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> before adding this meta.</p>
+<p>This meta is only needed for non-interleaved (= planar) DSD data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Number of channels in the DSD data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_bytes_per_channel</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Number of bytes per channel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offsets</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the offsets (in bytes) where each channel plane starts
+in the buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstAudio::DsdPlaneOffsetMeta</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::DsdPlaneOffsetMeta that was attached
+on the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="buffer_get_audio_downmix_meta_for_channels-instance_method">
+  
+    #<strong>buffer_get_audio_downmix_meta_for_channels</strong>(buffer, to_position, to_channels)  &#x21d2; <tt>GstAudio::AudioDownmixMeta</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Find the Gst::AudioDownmixMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> for the given destination
+channel positions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to_position</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="GstAudio/AudioChannelPosition.html" title="GstAudio::AudioChannelPosition (module)">GstAudio::AudioChannelPosition</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the channel positions of
+the destination</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to_channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of channels of the destination</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioDownmixMeta</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::AudioDownmixMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="buffer_get_audio_level_meta-instance_method">
+  
+    #<strong>buffer_get_audio_level_meta</strong>(buffer)  &#x21d2; <tt>GstAudio::AudioLevelMeta</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Find the Gst::AudioLevelMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.
+there is no such metadata on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioLevelMeta</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::AudioLevelMeta or nil when</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dsd_convert-instance_method">
+  
+    #<strong>dsd_convert</strong>(input_data, output_data, input_format, output_format, input_layout, output_layout, input_plane_offsets, output_plane_offsets, num_dsd_bytes, num_channels, reverse_byte_bits)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Converts DSD data from one layout and grouping format to another.
+<!-- raw HTML omitted -->num_bytes<!-- raw HTML omitted --> must be an integer multiple of the width of both input
+and output format. For example, if the input format is GST_DSD_FORMAT_U32LE,
+and the output format is GST_DSD_FORMAT_U16BE, then <!-- raw HTML omitted -->num_bytes<!-- raw HTML omitted --> must
+be an integer multiple of both 4 (U32LE width) and 2 (U16BE width).</p>
+<p><!-- raw HTML omitted -->reverse_byte_bits<!-- raw HTML omitted --> is necessary if the bit order within the DSD bytes
+needs to be reversed. This is rarely necessary, and is not to be
+confused with the endianness of formats (which determines the ordering
+of <em>bytes</em>).</p>
+<p><!-- raw HTML omitted -->input_plane_offsets<!-- raw HTML omitted --> must not be NULL if <!-- raw HTML omitted -->input_layout<!-- raw HTML omitted --> is set to
+#GST_AUDIO_LAYOUT_NON_INTERLEAVED. The same applies to <!-- raw HTML omitted -->output_plane_offsets<!-- raw HTML omitted -->.
+These plane offsets define the starting offset of the planes (there is
+exactly one plane per channel) within <!-- raw HTML omitted -->input_data<!-- raw HTML omitted --> and <!-- raw HTML omitted -->output_data<!-- raw HTML omitted -->
+respectively. If GST_AUDIO_LAYOUT_INTERLEAVED is used, the plane offsets
+are ignored.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>input_data</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the DSD format conversion's input source</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>output_data</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the DSD format conversion's output destination</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>input_format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/DsdFormat.html" title="GstAudio::DsdFormat (module)">GstAudio::DsdFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>DSD format of the input data to convert from</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>output_format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/DsdFormat.html" title="GstAudio::DsdFormat (module)">GstAudio::DsdFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>DSD format of the output data to convert to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>input_layout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioLayout.html" title="GstAudio::AudioLayout (module)">GstAudio::AudioLayout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Input data layout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>output_layout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/AudioLayout.html" title="GstAudio::AudioLayout (module)">GstAudio::AudioLayout</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output data layout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>input_plane_offsets</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Plane offsets for non-interleaved input data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>output_plane_offsets</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Plane offsets for non-interleaved output data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_dsd_bytes</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>How many bytes with DSD data to convert</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Number of channels (must be at least 1)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>reverse_byte_bits</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If TRUE, reverse the bits in each DSD byte</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dsd_format_from_string-instance_method">
+  
+    #<strong>dsd_format_from_string</strong>(str)  &#x21d2; <tt><span class='object_link'><a href="GstAudio/DsdFormat.html" title="GstAudio::DsdFormat (module)">GstAudio::DsdFormat</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Convert the DSD format string <!-- raw HTML omitted -->str<!-- raw HTML omitted --> to its Gst::DsdFormat.
+string is not a known format.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>str</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a DSD format string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/DsdFormat.html" title="GstAudio::DsdFormat (module)">GstAudio::DsdFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::DsdFormat for <!-- raw HTML omitted -->format<!-- raw HTML omitted --> or GST_DSD_FORMAT_UNKNOWN when the</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dsd_format_get_width-instance_method">
+  
+    #<strong>dsd_format_get_width</strong>(format)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Number of bytes in this DSD grouping format.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/DsdFormat.html" title="GstAudio::DsdFormat (module)">GstAudio::DsdFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::DsdFormat</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Number of bytes in this DSD grouping format.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dsd_format_to_string-instance_method">
+  
+    #<strong>dsd_format_to_string</strong>(format)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a string containing a descriptive name for
+the Gst::DsdFormat if there is one, or NULL otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/DsdFormat.html" title="GstAudio::DsdFormat (module)">GstAudio::DsdFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::DsdFormat</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name corresponding to <!-- raw HTML omitted -->format<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dsd_info_from_caps-instance_method">
+  
+    #<strong>dsd_info_from_caps</strong>(info, caps)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Parse <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> and update <!-- raw HTML omitted -->info<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>info</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::DsdInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::DsdInfo</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>caps</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Caps</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> could be parsed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dsd_info_init-instance_method">
+  
+    #<strong>dsd_info_init</strong>(info)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Initialize <!-- raw HTML omitted -->info<!-- raw HTML omitted --> with default values.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>info</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::DsdInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::DsdInfo</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dsd_plane_offset_meta_api_get_type-instance_method">
+  
+    #<strong>dsd_plane_offset_meta_api_get_type</strong>  &#x21d2; <tt>GLib::Type</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dsd_plane_offset_meta_get_info-instance_method">
+  
+    #<strong>dsd_plane_offset_meta_get_info</strong>  &#x21d2; <tt>Gst::MetaInfo</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::MetaInfo</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stream_volume_convert_volume-instance_method">
+  
+    #<strong>stream_volume_convert_volume</strong>(from, to, val)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the converted volume.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>from</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/StreamVolumeFormat.html" title="GstAudio::StreamVolumeFormat (module)">GstAudio::StreamVolumeFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gst::StreamVolumeFormat to convert from</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GstAudio/StreamVolumeFormat.html" title="GstAudio::StreamVolumeFormat (module)">GstAudio::StreamVolumeFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gst::StreamVolumeFormat to convert to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>val</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Volume in <!-- raw HTML omitted -->from<!-- raw HTML omitted --> format that should be converted</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the converted volume</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Clutter::Effect
+  
+    &mdash; Ruby/Clutter
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Clutter::Effect";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (E)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter</a></span></span>
+     &raquo; 
+    <span class="title">Effect</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Clutter::Effect
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="ActorMeta.html" title="Clutter::ActorMeta (class)">ActorMeta</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="ActorMeta.html" title="Clutter::ActorMeta (class)">ActorMeta</a></span></li>
+          
+            <li class="next">Clutter::Effect</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The Clutter::EffectClass structure contains only private data</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="OffscreenEffect.html" title="Clutter::OffscreenEffect (class)">OffscreenEffect</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#queue_repaint-instance_method" title="#queue_repaint (instance method)">#<strong>queue_repaint</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queues a repaint of the effect.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ActorMeta.html" title="Clutter::ActorMeta (class)">ActorMeta</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="ActorMeta.html#actor-instance_method" title="Clutter::ActorMeta#actor (method)">#actor</a></span>, <span class='object_link'><a href="ActorMeta.html#actor=-instance_method" title="Clutter::ActorMeta#actor= (method)">#actor=</a></span>, <span class='object_link'><a href="ActorMeta.html#enabled-instance_method" title="Clutter::ActorMeta#enabled (method)">#enabled</a></span>, <span class='object_link'><a href="ActorMeta.html#enabled=-instance_method" title="Clutter::ActorMeta#enabled= (method)">#enabled=</a></span>, <span class='object_link'><a href="ActorMeta.html#enabled%3F-instance_method" title="Clutter::ActorMeta#enabled? (method)">#enabled?</a></span>, <span class='object_link'><a href="ActorMeta.html#name-instance_method" title="Clutter::ActorMeta#name (method)">#name</a></span>, <span class='object_link'><a href="ActorMeta.html#name=-instance_method" title="Clutter::ActorMeta#name= (method)">#name=</a></span></p>
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="queue_repaint-instance_method">
+  
+    #<strong>queue_repaint</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queues a repaint of the effect. The effect can detect when the ‘paint’
+method is called as a result of this function because it will not
+have the %CLUTTER_EFFECT_PAINT_ACTOR_DIRTY flag set. In that case the
+effect is free to assume that the actor has not changed its
+appearance since the last time it was painted so it doesn't need to
+call clutter_actor_continue_paint() if it can draw a cached
+image. This is mostly intended for effects that are using a
+%CoglOffscreen to redirect the actor (such as
+%ClutterOffscreenEffect). In that case the effect can save a bit of
+rendering time by painting the cached texture without causing the
+entire actor to be painted.</p>
+<p>This function can be used by effects that have their own animatable
+parameters. For example, an effect which adds a varying degree of a
+red tint to an actor by redirecting it through a CoglOffscreen
+might have a property to specify the level of tint. When this value
+changes, the underlying actor doesn't need to be redrawn so the
+effect can call clutter_effect_queue_repaint() to make sure the
+effect is repainted.</p>
+<p>Note however that modifying the position of the parent of an actor
+may change the appearance of the actor because its transformation
+matrix would change. In this case a redraw wouldn't be queued on
+the actor itself so the %CLUTTER_EFFECT_PAINT_ACTOR_DIRTY would still
+not be set. The effect can detect this case by keeping track of the
+last modelview matrix that was used to render the actor and
+veryifying that it remains the same in the next paint.</p>
+<p>Any other effects that are layered on top of the passed in effect
+will still be passed the %CLUTTER_EFFECT_PAINT_ACTOR_DIRTY flag. If
+anything queues a redraw on the actor without specifying an effect
+or with an effect that is lower in the chain of effects than this
+one then that will override this call. In that case this effect
+will instead be called with the %CLUTTER_EFFECT_PAINT_ACTOR_DIRTY
+flag set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,2239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::StyleContext
+  
+    &mdash; Ruby/GTK3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::StyleContext";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">StyleContext</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::StyleContext
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::StyleContext</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/gtk3/style-context.rb</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_provider_for_display-class_method" title="add_provider_for_display (class method)">.<strong>add_provider_for_display</strong>(display, provider, priority)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a global style provider to <!-- raw HTML omitted -->display<!-- raw HTML omitted -->, which will be used in style construction for all <code>GtkStyleContexts</code> under <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_provider_for_screen-class_method" title="add_provider_for_screen (class method)">.<strong>add_provider_for_screen</strong>(screen, provider, priority = nil)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_provider_for_screen_raw-class_method" title="add_provider_for_screen_raw (class method)">.<strong>add_provider_for_screen_raw</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_provider_for_display-class_method" title="remove_provider_for_display (class method)">.<strong>remove_provider_for_display</strong>(display, provider)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> from the global style providers list in <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset_widgets-class_method" title="reset_widgets (class method)">.<strong>reset_widgets</strong>(screen = nil)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset_widgets_raw-class_method" title="reset_widgets_raw (class method)">.<strong>reset_widgets_raw</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resolve_priority-class_method" title="resolve_priority (class method)">.<strong>resolve_priority</strong>(priority)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_class-instance_method" title="#add_class (instance method)">#<strong>add_class</strong>(class_name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a style class to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, so later uses of the style context will make use of this new class for styling.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_provider-instance_method" title="#add_provider (instance method)">#<strong>add_provider</strong>(provider, priority = nil)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a style provider to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, to be used in style construction.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_provider_raw-instance_method" title="#add_provider_raw (instance method)">#<strong>add_provider_raw</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a style provider to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, to be used in style construction.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#display-instance_method" title="#display (instance method)">#<strong>display</strong>  &#x21d2; Gdk::Display </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#display=-instance_method" title="#display= (instance method)">#<strong>display=</strong>(display)  &#x21d2; Gdk::Display </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_border-instance_method" title="#get_border (instance method)">#<strong>get_border</strong>(border)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the border for a given state as a <code>GtkBorder</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_color-instance_method" title="#get_color (instance method)">#<strong>get_color</strong>(color)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the foreground color for a given state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_margin-instance_method" title="#get_margin (instance method)">#<strong>get_margin</strong>(margin)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the margin for a given state as a <code>GtkBorder</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_padding-instance_method" title="#get_padding (instance method)">#<strong>get_padding</strong>(padding)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the padding for a given state as a <code>GtkBorder</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_class-instance_method" title="#has_class (instance method)">#<strong>has_class</strong>(class_name)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns true if <!-- raw HTML omitted -->context<!-- raw HTML omitted --> currently has defined the given class name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_color-instance_method" title="#lookup_color (instance method)">#<strong>lookup_color</strong>(color_name, color)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Looks up and resolves a color name in the <!-- raw HTML omitted -->context<!-- raw HTML omitted --> color map.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_class-instance_method" title="#remove_class (instance method)">#<strong>remove_class</strong>(class_name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes <!-- raw HTML omitted -->class_name<!-- raw HTML omitted --> from <!-- raw HTML omitted -->context<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_provider-instance_method" title="#remove_provider (instance method)">#<strong>remove_provider</strong>(provider)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> from the style providers list in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#restore-instance_method" title="#restore (instance method)">#<strong>restore</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Restores <!-- raw HTML omitted -->context<!-- raw HTML omitted --> state to a previous stage.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save-instance_method" title="#save (instance method)">#<strong>save</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Saves the <!-- raw HTML omitted -->context<!-- raw HTML omitted --> state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scale-instance_method" title="#scale (instance method)">#<strong>scale</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the scale used for assets.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scale=-instance_method" title="#scale= (instance method)">#<strong>scale=</strong>(scale)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the scale to use when getting image assets for the style.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#state-instance_method" title="#state (instance method)">#<strong>state</strong>  &#x21d2; Gtk::StateFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the state used for style matching.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#state=-instance_method" title="#state= (instance method)">#<strong>state=</strong>(flags)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the state to be used for style matching.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_string-instance_method" title="#to_string (instance method)">#<strong>to_string</strong>(flags)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Converts the style context into a string representation.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_provider_for_display-class_method">
+  
+    .<strong>add_provider_for_display</strong>(display, provider, priority)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a global style provider to <!-- raw HTML omitted -->display<!-- raw HTML omitted -->, which will be used
+in style construction for all <code>GtkStyleContexts</code> under <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+<p>GTK uses this to make styling information from <code>GtkSettings</code>
+available.</p>
+<p>Note: If both priorities are the same, A <code>GtkStyleProvider</code>
+added through [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.add_provider] takes
+precedence over another added through this function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>display</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GdkDisplay</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>provider</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleProvider.html" title="Gtk::StyleProvider (module)">Gtk::StyleProvider</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GtkStyleProvider</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>priority</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the priority of the style provider. The lower
+it is, the earlier it will be used in the style construction.
+Typically this will be in the range between
+%GTK_STYLE_PROVIDER_PRIORITY_FALLBACK and
+%GTK_STYLE_PROVIDER_PRIORITY_USER</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_provider_for_screen-class_method">
+  
+    .<strong>add_provider_for_screen</strong>(screen, provider, priority = nil)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+30
+31
+32
+33</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gtk3/style-context.rb', line 30</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_provider_for_screen'>add_provider_for_screen</span><span class='lparen'>(</span><span class='id identifier rubyid_screen'>screen</span><span class='comma'>,</span> <span class='id identifier rubyid_provider'>provider</span><span class='comma'>,</span> <span class='id identifier rubyid_priority'>priority</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_priority'>priority</span> <span class='op'>=</span> <span class='id identifier rubyid_resolve_priority'>resolve_priority</span><span class='lparen'>(</span><span class='id identifier rubyid_priority'>priority</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_add_provider_for_screen_raw'>add_provider_for_screen_raw</span><span class='lparen'>(</span><span class='id identifier rubyid_screen'>screen</span><span class='comma'>,</span> <span class='id identifier rubyid_provider'>provider</span><span class='comma'>,</span> <span class='id identifier rubyid_priority'>priority</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_provider_for_screen_raw-class_method">
+  
+    .<strong>add_provider_for_screen_raw</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+29</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gtk3/style-context.rb', line 29</span>
+
+<span class='id identifier rubyid_alias_method'>alias_method</span> <span class='symbol'>:add_provider_for_screen_raw</span><span class='comma'>,</span> <span class='symbol'>:add_provider_for_screen</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_provider_for_display-class_method">
+  
+    .<strong>remove_provider_for_display</strong>(display, provider)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> from the global style providers list in <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>display</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GdkDisplay</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>provider</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleProvider.html" title="Gtk::StyleProvider (module)">Gtk::StyleProvider</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GtkStyleProvider</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset_widgets-class_method">
+  
+    .<strong>reset_widgets</strong>(screen = nil)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gtk3/style-context.rb', line 36</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reset_widgets'>reset_widgets</span><span class='lparen'>(</span><span class='id identifier rubyid_screen'>screen</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_reset_widgets_raw'>reset_widgets_raw</span><span class='lparen'>(</span><span class='id identifier rubyid_screen'>screen</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="../Gdk.html" title="Gdk (module)">Gdk</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Gdk/Screen.html" title="Gdk::Screen (class)">Screen</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset_widgets_raw-class_method">
+  
+    .<strong>reset_widgets_raw</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gtk3/style-context.rb', line 35</span>
+
+<span class='id identifier rubyid_alias_method'>alias_method</span> <span class='symbol'>:reset_widgets_raw</span><span class='comma'>,</span> <span class='symbol'>:reset_widgets</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resolve_priority-class_method">
+  
+    .<strong>resolve_priority</strong>(priority)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+20
+21
+22
+23
+24
+25
+26
+27</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gtk3/style-context.rb', line 20</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_resolve_priority'>resolve_priority</span><span class='lparen'>(</span><span class='id identifier rubyid_priority'>priority</span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_priority'>priority</span>
+  <span class='kw'>when</span> <span class='const'>Symbol</span><span class='comma'>,</span> <span class='const'>String</span>
+    <span class='const'><span class='object_link'><a href="StyleProvider.html" title="Gtk::StyleProvider (module)">StyleProvider</a></span></span><span class='period'>.</span><span class='id identifier rubyid_const_get'>const_get</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>PRIORITY_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_priority'>priority</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_upcase'>upcase</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_priority'>priority</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="StyleProvider.html" title="Gtk::StyleProvider (module)">StyleProvider</a></span></span><span class='op'>::</span><span class='const'>PRIORITY_APPLICATION</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_class-instance_method">
+  
+    #<strong>add_class</strong>(class_name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a style class to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, so later uses of the
+style context will make use of this new class for styling.</p>
+<p>In the CSS file format, a <code>GtkEntry</code> defining a “search”
+class, would be matched by:</p>
+<pre class="code css"><code class="css">entry.search { ... }
+</code></pre>
+<p>While any widget defining a “search” class would be
+matched by:</p>
+<pre class="code css"><code class="css">.search { ... }
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>class_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>class name to use in styling</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_provider-instance_method">
+  
+    #<strong>add_provider</strong>(provider, priority = nil)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a style provider to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, to be used in style construction.</p>
+<p>Note that a style provider added by this function only affects
+the style of the widget to which <!-- raw HTML omitted -->context<!-- raw HTML omitted --> belongs. If you want
+to affect the style of all widgets, use
+[func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.add_provider_for_display].</p>
+<p>Note: If both priorities are the same, a <code>GtkStyleProvider</code>
+added through this function takes precedence over another added
+through [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.add_provider_for_display].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>provider</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleProvider.html" title="Gtk::StyleProvider (module)">Gtk::StyleProvider</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GtkStyleProvider</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>priority</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>the priority of the style provider. The lower
+it is, the earlier it will be used in the style construction.
+Typically this will be in the range between
+%GTK_STYLE_PROVIDER_PRIORITY_FALLBACK and
+%GTK_STYLE_PROVIDER_PRIORITY_USER</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44
+45</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gtk3/style-context.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_provider'>add_provider</span><span class='lparen'>(</span><span class='id identifier rubyid_provider'>provider</span><span class='comma'>,</span> <span class='id identifier rubyid_priority'>priority</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_priority'>priority</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_resolve_priority'>resolve_priority</span><span class='lparen'>(</span><span class='id identifier rubyid_priority'>priority</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_add_provider_raw'>add_provider_raw</span><span class='lparen'>(</span><span class='id identifier rubyid_provider'>provider</span><span class='comma'>,</span> <span class='id identifier rubyid_priority'>priority</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_provider_raw-instance_method">
+  
+    #<strong>add_provider_raw</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a style provider to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, to be used in style construction.</p>
+<p>Note that a style provider added by this function only affects
+the style of the widget to which <!-- raw HTML omitted -->context<!-- raw HTML omitted --> belongs. If you want
+to affect the style of all widgets, use
+[func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.add_provider_for_display].</p>
+<p>Note: If both priorities are the same, a <code>GtkStyleProvider</code>
+added through this function takes precedence over another added
+through [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.add_provider_for_display].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>provider</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleProvider.html" title="Gtk::StyleProvider (module)">Gtk::StyleProvider</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GtkStyleProvider</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>priority</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the priority of the style provider. The lower
+it is, the earlier it will be used in the style construction.
+Typically this will be in the range between
+%GTK_STYLE_PROVIDER_PRIORITY_FALLBACK and
+%GTK_STYLE_PROVIDER_PRIORITY_USER</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gtk3/style-context.rb', line 41</span>
+
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="display-instance_method">
+  
+    #<strong>display</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns display.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>display</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="display=-instance_method">
+  
+    #<strong>display=</strong>(display)  &#x21d2; <tt><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>display</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>display</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>display</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_border-instance_method">
+  
+    #<strong>get_border</strong>(border)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the border for a given state as a <code>GtkBorder</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>border</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Border.html" title="Gtk::Border (class)">Gtk::Border</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return value for the border settings</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_color-instance_method">
+  
+    #<strong>get_color</strong>(color)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the foreground color for a given state.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>Gdk::RGBA</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return value for the foreground color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_margin-instance_method">
+  
+    #<strong>get_margin</strong>(margin)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the margin for a given state as a <code>GtkBorder</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>margin</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Border.html" title="Gtk::Border (class)">Gtk::Border</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return value for the margin settings</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_padding-instance_method">
+  
+    #<strong>get_padding</strong>(padding)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the padding for a given state as a <code>GtkBorder</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>padding</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Border.html" title="Gtk::Border (class)">Gtk::Border</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return value for the padding settings</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_class-instance_method">
+  
+    #<strong>has_class</strong>(class_name)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns true if <!-- raw HTML omitted -->context<!-- raw HTML omitted --> currently has defined the
+given class name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>class_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a class name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->context<!-- raw HTML omitted --> has <!-- raw HTML omitted -->class_name<!-- raw HTML omitted --> defined</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_color-instance_method">
+  
+    #<strong>lookup_color</strong>(color_name, color)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Looks up and resolves a color name in the <!-- raw HTML omitted -->context<!-- raw HTML omitted --> color map.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>color_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color name to lookup</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>Gdk::RGBA</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Return location for the looked up color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->color_name<!-- raw HTML omitted --> was found and resolved, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_class-instance_method">
+  
+    #<strong>remove_class</strong>(class_name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes <!-- raw HTML omitted -->class_name<!-- raw HTML omitted --> from <!-- raw HTML omitted -->context<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>class_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>class name to remove</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_provider-instance_method">
+  
+    #<strong>remove_provider</strong>(provider)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> from the style providers list in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>provider</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleProvider.html" title="Gtk::StyleProvider (module)">Gtk::StyleProvider</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GtkStyleProvider</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="restore-instance_method">
+  
+    #<strong>restore</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Restores <!-- raw HTML omitted -->context<!-- raw HTML omitted --> state to a previous stage.</p>
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.save].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="save-instance_method">
+  
+    #<strong>save</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Saves the <!-- raw HTML omitted -->context<!-- raw HTML omitted --> state.</p>
+<p>This allows temporary modifications done through
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.add_class],
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.remove_class],
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.set_state] to be quickly
+reverted in one go through [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.restore].</p>
+<p>The matching call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.restore]
+must be done before GTK returns to the main loop.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scale-instance_method">
+  
+    #<strong>scale</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the scale used for assets.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the scale</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scale=-instance_method">
+  
+    #<strong>scale=</strong>(scale)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the scale to use when getting image assets for the style.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>scale</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>scale</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="state-instance_method">
+  
+    #<strong>state</strong>  &#x21d2; <tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the state used for style matching.</p>
+<p>This method should only be used to retrieve the <code>GtkStateFlags</code>
+to pass to <code>GtkStyleContext</code> methods, like
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.get_padding].
+If you need to retrieve the current state of a <code>GtkWidget</code>, use
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.get_state_flags].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the state flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="state=-instance_method">
+  
+    #<strong>state=</strong>(flags)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the state to be used for style matching.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StateFlags.html" title="Gtk::StateFlags (module)">Gtk::StateFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>state to represent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_string-instance_method">
+  
+    #<strong>to_string</strong>(flags)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Converts the style context into a string representation.</p>
+<p>The string representation always includes information about
+the name, state, id, visibility and style classes of the CSS
+node that is backing <!-- raw HTML omitted -->context<!-- raw HTML omitted -->. Depending on the flags, more
+information may be included.</p>
+<p>This function is intended for testing and debugging of the
+CSS implementation in GTK. There are no guarantees about
+the format of the returned string, it may change.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleContextPrintFlags.html" title="Gtk::StyleContextPrintFlags (module)">Gtk::StyleContextPrintFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Flags that determine what to print</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly allocated string representing <!-- raw HTML omitted -->context<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

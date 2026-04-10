@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::ShortcutsWindow
+  
+    &mdash; Ruby/GTK4
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::ShortcutsWindow";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">ShortcutsWindow</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::ShortcutsWindow
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Window.html" title="Gtk::Window (class)">Window</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Widget</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="Window.html" title="Gtk::Window (class)">Window</a></span></li>
+          
+            <li class="next">Gtk::ShortcutsWindow</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>A <code>GtkShortcutsWindow</code> shows information about the keyboard shortcuts
+and gestures of an application.</p>
+<p>The shortcuts can be grouped, and you can have multiple sections in this
+window, corresponding to the major modes of your application.</p>
+<p>Additionally, the shortcuts can be filtered by the current view, to avoid
+showing information that is not relevant in the current application context.</p>
+<p>The recommended way to construct a <code>GtkShortcutsWindow</code> is with
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Builder], by using the <code>&lt;child&gt;</code> tag to populate a
+<code>GtkShortcutsWindow</code> with one or more [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsSection] objects,
+which contain one or more [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsGroup] instances, which, in turn,
+contain [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsShortcut] instances.</p>
+<p>If you need to add a section programmatically, use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsWindow.add_section]
+instead of [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.set_child], as the shortcuts window manages
+its children directly.</p>
+<h1>A simple example:</h1>
+<p><img src="gedit-shortcuts.png" alt="" /></p>
+<p>This example has as single section. As you can see, the shortcut groups
+are arranged in columns, and spread across several pages if there are too
+many to find on a single page.</p>
+<p>The .ui file for this example can be found <a href="https://gitlab.gnome.org/GNOME/gtk/tree/main/demos/gtk-demo/shortcuts-gedit.ui">here</a>.</p>
+<h1>An example with multiple views:</h1>
+<p><img src="clocks-shortcuts.png" alt="" /></p>
+<p>This example shows a <code>GtkShortcutsWindow</code> that has been configured to show only
+the shortcuts relevant to the &quot;stopwatch&quot; view.</p>
+<p>The .ui file for this example can be found <a href="https://gitlab.gnome.org/GNOME/gtk/tree/main/demos/gtk-demo/shortcuts-clocks.ui">here</a>.</p>
+<h1>An example with multiple sections:</h1>
+<p><img src="builder-shortcuts.png" alt="" /></p>
+<p>This example shows a <code>GtkShortcutsWindow</code> with two sections, &quot;Editor Shortcuts&quot;
+and &quot;Terminal Shortcuts&quot;.</p>
+<p>The .ui file for this example can be found <a href="https://gitlab.gnome.org/GNOME/gtk/tree/main/demos/gtk-demo/shortcuts-builder.ui">here</a>.</p>
+<h2>CSS nodes</h2>
+<p><code>GtkShortcutsWindow</code> has a single CSS node with the name <code>window</code> and style
+class <code>.shortcuts</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_section-instance_method" title="#add_section (instance method)">#<strong>add_section</strong>(section)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a section to the shortcuts window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#section_name-instance_method" title="#section_name (instance method)">#<strong>section_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The name of the section to show.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#section_name=-instance_method" title="#section_name= (instance method)">#<strong>section_name=</strong>(section_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The name of the section to show.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#view_name-instance_method" title="#view_name (instance method)">#<strong>view_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The view name by which to filter the contents.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#view_name=-instance_method" title="#view_name= (instance method)">#<strong>view_name=</strong>(view_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The view name by which to filter the contents.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Window.html" title="Gtk::Window (class)">Window</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Window.html#application-instance_method" title="Gtk::Window#application (method)">#application</a></span>, <span class='object_link'><a href="Window.html#application=-instance_method" title="Gtk::Window#application= (method)">#application=</a></span>, <span class='object_link'><a href="Window.html#auto_startup_notification=-class_method" title="Gtk::Window.auto_startup_notification= (method)">auto_startup_notification=</a></span>, <span class='object_link'><a href="Window.html#child-instance_method" title="Gtk::Window#child (method)">#child</a></span>, <span class='object_link'><a href="Window.html#child=-instance_method" title="Gtk::Window#child= (method)">#child=</a></span>, <span class='object_link'><a href="Window.html#close-instance_method" title="Gtk::Window#close (method)">#close</a></span>, <span class='object_link'><a href="Window.html#decorated-instance_method" title="Gtk::Window#decorated (method)">#decorated</a></span>, <span class='object_link'><a href="Window.html#decorated=-instance_method" title="Gtk::Window#decorated= (method)">#decorated=</a></span>, <span class='object_link'><a href="Window.html#decorated%3F-instance_method" title="Gtk::Window#decorated? (method)">#decorated?</a></span>, <span class='object_link'><a href="Window.html#default_height-instance_method" title="Gtk::Window#default_height (method)">#default_height</a></span>, <span class='object_link'><a href="Window.html#default_height=-instance_method" title="Gtk::Window#default_height= (method)">#default_height=</a></span>, <span class='object_link'><a href="Window.html#default_icon_name-class_method" title="Gtk::Window.default_icon_name (method)">default_icon_name</a></span>, <span class='object_link'><a href="Window.html#default_icon_name=-class_method" title="Gtk::Window.default_icon_name= (method)">default_icon_name=</a></span>, <span class='object_link'><a href="Window.html#default_widget-instance_method" title="Gtk::Window#default_widget (method)">#default_widget</a></span>, <span class='object_link'><a href="Window.html#default_widget=-instance_method" title="Gtk::Window#default_widget= (method)">#default_widget=</a></span>, <span class='object_link'><a href="Window.html#default_width-instance_method" title="Gtk::Window#default_width (method)">#default_width</a></span>, <span class='object_link'><a href="Window.html#default_width=-instance_method" title="Gtk::Window#default_width= (method)">#default_width=</a></span>, <span class='object_link'><a href="Window.html#deletable-instance_method" title="Gtk::Window#deletable (method)">#deletable</a></span>, <span class='object_link'><a href="Window.html#deletable=-instance_method" title="Gtk::Window#deletable= (method)">#deletable=</a></span>, <span class='object_link'><a href="Window.html#deletable%3F-instance_method" title="Gtk::Window#deletable? (method)">#deletable?</a></span>, <span class='object_link'><a href="Window.html#destroy-instance_method" title="Gtk::Window#destroy (method)">#destroy</a></span>, <span class='object_link'><a href="Window.html#destroy_with_parent-instance_method" title="Gtk::Window#destroy_with_parent (method)">#destroy_with_parent</a></span>, <span class='object_link'><a href="Window.html#destroy_with_parent=-instance_method" title="Gtk::Window#destroy_with_parent= (method)">#destroy_with_parent=</a></span>, <span class='object_link'><a href="Window.html#destroy_with_parent%3F-instance_method" title="Gtk::Window#destroy_with_parent? (method)">#destroy_with_parent?</a></span>, <span class='object_link'><a href="Window.html#display-instance_method" title="Gtk::Window#display (method)">#display</a></span>, <span class='object_link'><a href="Window.html#display=-instance_method" title="Gtk::Window#display= (method)">#display=</a></span>, <span class='object_link'><a href="Window.html#focus-instance_method" title="Gtk::Window#focus (method)">#focus</a></span>, <span class='object_link'><a href="Window.html#focus=-instance_method" title="Gtk::Window#focus= (method)">#focus=</a></span>, <span class='object_link'><a href="Window.html#focus_visible-instance_method" title="Gtk::Window#focus_visible (method)">#focus_visible</a></span>, <span class='object_link'><a href="Window.html#focus_visible=-instance_method" title="Gtk::Window#focus_visible= (method)">#focus_visible=</a></span>, <span class='object_link'><a href="Window.html#focus_visible%3F-instance_method" title="Gtk::Window#focus_visible? (method)">#focus_visible?</a></span>, <span class='object_link'><a href="Window.html#focus_widget-instance_method" title="Gtk::Window#focus_widget (method)">#focus_widget</a></span>, <span class='object_link'><a href="Window.html#focus_widget=-instance_method" title="Gtk::Window#focus_widget= (method)">#focus_widget=</a></span>, <span class='object_link'><a href="Window.html#fullscreen-instance_method" title="Gtk::Window#fullscreen (method)">#fullscreen</a></span>, <span class='object_link'><a href="Window.html#fullscreen_on_monitor-instance_method" title="Gtk::Window#fullscreen_on_monitor (method)">#fullscreen_on_monitor</a></span>, <span class='object_link'><a href="Window.html#fullscreened=-instance_method" title="Gtk::Window#fullscreened= (method)">#fullscreened=</a></span>, <span class='object_link'><a href="Window.html#fullscreened%3F-instance_method" title="Gtk::Window#fullscreened? (method)">#fullscreened?</a></span>, <span class='object_link'><a href="Window.html#get_default_size-instance_method" title="Gtk::Window#get_default_size (method)">#get_default_size</a></span>, <span class='object_link'><a href="Window.html#group-instance_method" title="Gtk::Window#group (method)">#group</a></span>, <span class='object_link'><a href="Window.html#handle_menubar_accel-instance_method" title="Gtk::Window#handle_menubar_accel (method)">#handle_menubar_accel</a></span>, <span class='object_link'><a href="Window.html#handle_menubar_accel=-instance_method" title="Gtk::Window#handle_menubar_accel= (method)">#handle_menubar_accel=</a></span>, <span class='object_link'><a href="Window.html#handle_menubar_accel%3F-instance_method" title="Gtk::Window#handle_menubar_accel? (method)">#handle_menubar_accel?</a></span>, <span class='object_link'><a href="Window.html#has_group-instance_method" title="Gtk::Window#has_group (method)">#has_group</a></span>, <span class='object_link'><a href="Window.html#hide_on_close-instance_method" title="Gtk::Window#hide_on_close (method)">#hide_on_close</a></span>, <span class='object_link'><a href="Window.html#hide_on_close=-instance_method" title="Gtk::Window#hide_on_close= (method)">#hide_on_close=</a></span>, <span class='object_link'><a href="Window.html#hide_on_close%3F-instance_method" title="Gtk::Window#hide_on_close? (method)">#hide_on_close?</a></span>, <span class='object_link'><a href="Window.html#icon_name-instance_method" title="Gtk::Window#icon_name (method)">#icon_name</a></span>, <span class='object_link'><a href="Window.html#icon_name=-instance_method" title="Gtk::Window#icon_name= (method)">#icon_name=</a></span>, <span class='object_link'><a href="Window.html#initialize-instance_method" title="Gtk::Window#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="Window.html#interactive_debugging=-class_method" title="Gtk::Window.interactive_debugging= (method)">interactive_debugging=</a></span>, <span class='object_link'><a href="Window.html#is_active-instance_method" title="Gtk::Window#is_active (method)">#is_active</a></span>, <span class='object_link'><a href="Window.html#is_active=-instance_method" title="Gtk::Window#is_active= (method)">#is_active=</a></span>, <span class='object_link'><a href="Window.html#is_active%3F-instance_method" title="Gtk::Window#is_active? (method)">#is_active?</a></span>, <span class='object_link'><a href="Window.html#is_fullscreen-instance_method" title="Gtk::Window#is_fullscreen (method)">#is_fullscreen</a></span>, <span class='object_link'><a href="Window.html#is_maximized-instance_method" title="Gtk::Window#is_maximized (method)">#is_maximized</a></span>, <span class='object_link'><a href="Window.html#is_suspended-instance_method" title="Gtk::Window#is_suspended (method)">#is_suspended</a></span>, <span class='object_link'><a href="Window.html#list_toplevels-class_method" title="Gtk::Window.list_toplevels (method)">list_toplevels</a></span>, <span class='object_link'><a href="Window.html#maximize-instance_method" title="Gtk::Window#maximize (method)">#maximize</a></span>, <span class='object_link'><a href="Window.html#maximized=-instance_method" title="Gtk::Window#maximized= (method)">#maximized=</a></span>, <span class='object_link'><a href="Window.html#maximized%3F-instance_method" title="Gtk::Window#maximized? (method)">#maximized?</a></span>, <span class='object_link'><a href="Window.html#minimize-instance_method" title="Gtk::Window#minimize (method)">#minimize</a></span>, <span class='object_link'><a href="Window.html#mnemonics_visible-instance_method" title="Gtk::Window#mnemonics_visible (method)">#mnemonics_visible</a></span>, <span class='object_link'><a href="Window.html#mnemonics_visible=-instance_method" title="Gtk::Window#mnemonics_visible= (method)">#mnemonics_visible=</a></span>, <span class='object_link'><a href="Window.html#mnemonics_visible%3F-instance_method" title="Gtk::Window#mnemonics_visible? (method)">#mnemonics_visible?</a></span>, <span class='object_link'><a href="Window.html#modal-instance_method" title="Gtk::Window#modal (method)">#modal</a></span>, <span class='object_link'><a href="Window.html#modal=-instance_method" title="Gtk::Window#modal= (method)">#modal=</a></span>, <span class='object_link'><a href="Window.html#modal%3F-instance_method" title="Gtk::Window#modal? (method)">#modal?</a></span>, <span class='object_link'><a href="Window.html#present-instance_method" title="Gtk::Window#present (method)">#present</a></span>, <span class='object_link'><a href="Window.html#present_with_time-instance_method" title="Gtk::Window#present_with_time (method)">#present_with_time</a></span>, <span class='object_link'><a href="Window.html#resizable-instance_method" title="Gtk::Window#resizable (method)">#resizable</a></span>, <span class='object_link'><a href="Window.html#resizable=-instance_method" title="Gtk::Window#resizable= (method)">#resizable=</a></span>, <span class='object_link'><a href="Window.html#resizable%3F-instance_method" title="Gtk::Window#resizable? (method)">#resizable?</a></span>, <span class='object_link'><a href="Window.html#set_default_size-instance_method" title="Gtk::Window#set_default_size (method)">#set_default_size</a></span>, <span class='object_link'><a href="Window.html#startup_id=-instance_method" title="Gtk::Window#startup_id= (method)">#startup_id=</a></span>, <span class='object_link'><a href="Window.html#suspended=-instance_method" title="Gtk::Window#suspended= (method)">#suspended=</a></span>, <span class='object_link'><a href="Window.html#suspended%3F-instance_method" title="Gtk::Window#suspended? (method)">#suspended?</a></span>, <span class='object_link'><a href="Window.html#title-instance_method" title="Gtk::Window#title (method)">#title</a></span>, <span class='object_link'><a href="Window.html#title=-instance_method" title="Gtk::Window#title= (method)">#title=</a></span>, <span class='object_link'><a href="Window.html#titlebar-instance_method" title="Gtk::Window#titlebar (method)">#titlebar</a></span>, <span class='object_link'><a href="Window.html#titlebar=-instance_method" title="Gtk::Window#titlebar= (method)">#titlebar=</a></span>, <span class='object_link'><a href="Window.html#toplevels-class_method" title="Gtk::Window.toplevels (method)">toplevels</a></span>, <span class='object_link'><a href="Window.html#transient_for-instance_method" title="Gtk::Window#transient_for (method)">#transient_for</a></span>, <span class='object_link'><a href="Window.html#transient_for=-instance_method" title="Gtk::Window#transient_for= (method)">#transient_for=</a></span>, <span class='object_link'><a href="Window.html#unfullscreen-instance_method" title="Gtk::Window#unfullscreen (method)">#unfullscreen</a></span>, <span class='object_link'><a href="Window.html#unmaximize-instance_method" title="Gtk::Window#unmaximize (method)">#unmaximize</a></span>, <span class='object_link'><a href="Window.html#unminimize-instance_method" title="Gtk::Window#unminimize (method)">#unminimize</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Widget</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Widget.html#accessible_role-instance_method" title="Gtk::Widget#accessible_role (method)">#accessible_role</a></span>, <span class='object_link'><a href="Widget.html#accessible_role=-instance_method" title="Gtk::Widget#accessible_role= (method)">#accessible_role=</a></span>, <span class='object_link'><a href="Widget.html#action_set_enabled-instance_method" title="Gtk::Widget#action_set_enabled (method)">#action_set_enabled</a></span>, <span class='object_link'><a href="Widget.html#activate-instance_method" title="Gtk::Widget#activate (method)">#activate</a></span>, <span class='object_link'><a href="Widget.html#activate_action-instance_method" title="Gtk::Widget#activate_action (method)">#activate_action</a></span>, <span class='object_link'><a href="Widget.html#activate_action_variant-instance_method" title="Gtk::Widget#activate_action_variant (method)">#activate_action_variant</a></span>, <span class='object_link'><a href="Widget.html#activate_default-instance_method" title="Gtk::Widget#activate_default (method)">#activate_default</a></span>, <span class='object_link'><a href="Widget.html#activate_signal-instance_method" title="Gtk::Widget#activate_signal (method)">#activate_signal</a></span>, <span class='object_link'><a href="Widget.html#activate_signal=-instance_method" title="Gtk::Widget#activate_signal= (method)">#activate_signal=</a></span>, <span class='object_link'><a href="Widget.html#activate_signal_from_name=-instance_method" title="Gtk::Widget#activate_signal_from_name= (method)">#activate_signal_from_name=</a></span>, <span class='object_link'><a href="Widget.html#add_binding-instance_method" title="Gtk::Widget#add_binding (method)">#add_binding</a></span>, <span class='object_link'><a href="Widget.html#add_binding_action-instance_method" title="Gtk::Widget#add_binding_action (method)">#add_binding_action</a></span>, <span class='object_link'><a href="Widget.html#add_binding_signal-instance_method" title="Gtk::Widget#add_binding_signal (method)">#add_binding_signal</a></span>, <span class='object_link'><a href="Widget.html#add_controller-instance_method" title="Gtk::Widget#add_controller (method)">#add_controller</a></span>, <span class='object_link'><a href="Widget.html#add_css_class-instance_method" title="Gtk::Widget#add_css_class (method)">#add_css_class</a></span>, <span class='object_link'><a href="Widget.html#add_mnemonic_label-instance_method" title="Gtk::Widget#add_mnemonic_label (method)">#add_mnemonic_label</a></span>, <span class='object_link'><a href="Widget.html#add_shortcut-instance_method" title="Gtk::Widget#add_shortcut (method)">#add_shortcut</a></span>, <span class='object_link'><a href="Widget.html#add_tick_callback-instance_method" title="Gtk::Widget#add_tick_callback (method)">#add_tick_callback</a></span>, <span class='object_link'><a href="Widget.html#allocate-instance_method" title="Gtk::Widget#allocate (method)">#allocate</a></span>, <span class='object_link'><a href="Widget.html#allocated_baseline-instance_method" title="Gtk::Widget#allocated_baseline (method)">#allocated_baseline</a></span>, <span class='object_link'><a href="Widget.html#allocated_height-instance_method" title="Gtk::Widget#allocated_height (method)">#allocated_height</a></span>, <span class='object_link'><a href="Widget.html#allocated_width-instance_method" title="Gtk::Widget#allocated_width (method)">#allocated_width</a></span>, <span class='object_link'><a href="Widget.html#baseline-instance_method" title="Gtk::Widget#baseline (method)">#baseline</a></span>, <span class='object_link'><a href="Widget.html#bind_template_callback_full-instance_method" title="Gtk::Widget#bind_template_callback_full (method)">#bind_template_callback_full</a></span>, <span class='object_link'><a href="Widget.html#bind_template_child-instance_method" title="Gtk::Widget#bind_template_child (method)">#bind_template_child</a></span>, <span class='object_link'><a href="Widget.html#bind_template_child_full-instance_method" title="Gtk::Widget#bind_template_child_full (method)">#bind_template_child_full</a></span>, <span class='object_link'><a href="Widget.html#can_focus-instance_method" title="Gtk::Widget#can_focus (method)">#can_focus</a></span>, <span class='object_link'><a href="Widget.html#can_focus=-instance_method" title="Gtk::Widget#can_focus= (method)">#can_focus=</a></span>, <span class='object_link'><a href="Widget.html#can_focus%3F-instance_method" title="Gtk::Widget#can_focus? (method)">#can_focus?</a></span>, <span class='object_link'><a href="Widget.html#can_target-instance_method" title="Gtk::Widget#can_target (method)">#can_target</a></span>, <span class='object_link'><a href="Widget.html#can_target=-instance_method" title="Gtk::Widget#can_target= (method)">#can_target=</a></span>, <span class='object_link'><a href="Widget.html#can_target%3F-instance_method" title="Gtk::Widget#can_target? (method)">#can_target?</a></span>, <span class='object_link'><a href="Widget.html#child_focus-instance_method" title="Gtk::Widget#child_focus (method)">#child_focus</a></span>, <span class='object_link'><a href="Widget.html#child_visible-instance_method" title="Gtk::Widget#child_visible (method)">#child_visible</a></span>, <span class='object_link'><a href="Widget.html#child_visible=-instance_method" title="Gtk::Widget#child_visible= (method)">#child_visible=</a></span>, <span class='object_link'><a href="Widget.html#children-instance_method" title="Gtk::Widget#children (method)">#children</a></span>, <span class='object_link'><a href="Widget.html#clipboard-instance_method" title="Gtk::Widget#clipboard (method)">#clipboard</a></span>, <span class='object_link'><a href="Widget.html#compute_bounds-instance_method" title="Gtk::Widget#compute_bounds (method)">#compute_bounds</a></span>, <span class='object_link'><a href="Widget.html#compute_expand-instance_method" title="Gtk::Widget#compute_expand (method)">#compute_expand</a></span>, <span class='object_link'><a href="Widget.html#compute_point-instance_method" title="Gtk::Widget#compute_point (method)">#compute_point</a></span>, <span class='object_link'><a href="Widget.html#compute_transform-instance_method" title="Gtk::Widget#compute_transform (method)">#compute_transform</a></span>, <span class='object_link'><a href="Widget.html#contains-instance_method" title="Gtk::Widget#contains (method)">#contains</a></span>, <span class='object_link'><a href="Widget.html#create_pango_context-instance_method" title="Gtk::Widget#create_pango_context (method)">#create_pango_context</a></span>, <span class='object_link'><a href="Widget.html#create_pango_layout-instance_method" title="Gtk::Widget#create_pango_layout (method)">#create_pango_layout</a></span>, <span class='object_link'><a href="Widget.html#css_classes-instance_method" title="Gtk::Widget#css_classes (method)">#css_classes</a></span>, <span class='object_link'><a href="Widget.html#css_classes=-instance_method" title="Gtk::Widget#css_classes= (method)">#css_classes=</a></span>, <span class='object_link'><a href="Widget.html#css_name-instance_method" title="Gtk::Widget#css_name (method)">#css_name</a></span>, <span class='object_link'><a href="Widget.html#css_name=-instance_method" title="Gtk::Widget#css_name= (method)">#css_name=</a></span>, <span class='object_link'><a href="Widget.html#cursor-instance_method" title="Gtk::Widget#cursor (method)">#cursor</a></span>, <span class='object_link'><a href="Widget.html#cursor=-instance_method" title="Gtk::Widget#cursor= (method)">#cursor=</a></span>, <span class='object_link'><a href="Widget.html#cursor_from_name=-instance_method" title="Gtk::Widget#cursor_from_name= (method)">#cursor_from_name=</a></span>, <span class='object_link'><a href="Widget.html#default_direction-class_method" title="Gtk::Widget.default_direction (method)">default_direction</a></span>, <span class='object_link'><a href="Widget.html#default_direction=-class_method" title="Gtk::Widget.default_direction= (method)">default_direction=</a></span>, <span class='object_link'><a href="Widget.html#direction-instance_method" title="Gtk::Widget#direction (method)">#direction</a></span>, <span class='object_link'><a href="Widget.html#direction=-instance_method" title="Gtk::Widget#direction= (method)">#direction=</a></span>, <span class='object_link'><a href="Widget.html#display-instance_method" title="Gtk::Widget#display (method)">#display</a></span>, <span class='object_link'><a href="Widget.html#dispose_template-instance_method" title="Gtk::Widget#dispose_template (method)">#dispose_template</a></span>, <span class='object_link'><a href="Widget.html#drag_check_threshold-instance_method" title="Gtk::Widget#drag_check_threshold (method)">#drag_check_threshold</a></span>, <span class='object_link'><a href="Widget.html#error_bell-instance_method" title="Gtk::Widget#error_bell (method)">#error_bell</a></span>, <span class='object_link'><a href="Widget.html#first_child-instance_method" title="Gtk::Widget#first_child (method)">#first_child</a></span>, <span class='object_link'><a href="Widget.html#focus_child-instance_method" title="Gtk::Widget#focus_child (method)">#focus_child</a></span>, <span class='object_link'><a href="Widget.html#focus_child=-instance_method" title="Gtk::Widget#focus_child= (method)">#focus_child=</a></span>, <span class='object_link'><a href="Widget.html#focus_on_click-instance_method" title="Gtk::Widget#focus_on_click (method)">#focus_on_click</a></span>, <span class='object_link'><a href="Widget.html#focus_on_click=-instance_method" title="Gtk::Widget#focus_on_click= (method)">#focus_on_click=</a></span>, <span class='object_link'><a href="Widget.html#focus_on_click%3F-instance_method" title="Gtk::Widget#focus_on_click? (method)">#focus_on_click?</a></span>, <span class='object_link'><a href="Widget.html#focusable-instance_method" title="Gtk::Widget#focusable (method)">#focusable</a></span>, <span class='object_link'><a href="Widget.html#focusable=-instance_method" title="Gtk::Widget#focusable= (method)">#focusable=</a></span>, <span class='object_link'><a href="Widget.html#focusable%3F-instance_method" title="Gtk::Widget#focusable? (method)">#focusable?</a></span>, <span class='object_link'><a href="Widget.html#font_map-instance_method" title="Gtk::Widget#font_map (method)">#font_map</a></span>, <span class='object_link'><a href="Widget.html#font_map=-instance_method" title="Gtk::Widget#font_map= (method)">#font_map=</a></span>, <span class='object_link'><a href="Widget.html#font_options-instance_method" title="Gtk::Widget#font_options (method)">#font_options</a></span>, <span class='object_link'><a href="Widget.html#font_options=-instance_method" title="Gtk::Widget#font_options= (method)">#font_options=</a></span>, <span class='object_link'><a href="Widget.html#frame_clock-instance_method" title="Gtk::Widget#frame_clock (method)">#frame_clock</a></span>, <span class='object_link'><a href="Widget.html#get_allocation-instance_method" title="Gtk::Widget#get_allocation (method)">#get_allocation</a></span>, <span class='object_link'><a href="Widget.html#get_ancestor-instance_method" title="Gtk::Widget#get_ancestor (method)">#get_ancestor</a></span>, <span class='object_link'><a href="Widget.html#get_color-instance_method" title="Gtk::Widget#get_color (method)">#get_color</a></span>, <span class='object_link'><a href="Widget.html#get_preferred_size-instance_method" title="Gtk::Widget#get_preferred_size (method)">#get_preferred_size</a></span>, <span class='object_link'><a href="Widget.html#get_size-instance_method" title="Gtk::Widget#get_size (method)">#get_size</a></span>, <span class='object_link'><a href="Widget.html#get_size_request-instance_method" title="Gtk::Widget#get_size_request (method)">#get_size_request</a></span>, <span class='object_link'><a href="Widget.html#get_template_child-instance_method" title="Gtk::Widget#get_template_child (method)">#get_template_child</a></span>, <span class='object_link'><a href="Widget.html#grab_focus-instance_method" title="Gtk::Widget#grab_focus (method)">#grab_focus</a></span>, <span class='object_link'><a href="Widget.html#halign-instance_method" title="Gtk::Widget#halign (method)">#halign</a></span>, <span class='object_link'><a href="Widget.html#halign=-instance_method" title="Gtk::Widget#halign= (method)">#halign=</a></span>, <span class='object_link'><a href="Widget.html#has_css_class-instance_method" title="Gtk::Widget#has_css_class (method)">#has_css_class</a></span>, <span class='object_link'><a href="Widget.html#has_default-instance_method" title="Gtk::Widget#has_default (method)">#has_default</a></span>, <span class='object_link'><a href="Widget.html#has_default=-instance_method" title="Gtk::Widget#has_default= (method)">#has_default=</a></span>, <span class='object_link'><a href="Widget.html#has_default%3F-instance_method" title="Gtk::Widget#has_default? (method)">#has_default?</a></span>, <span class='object_link'><a href="Widget.html#has_focus-instance_method" title="Gtk::Widget#has_focus (method)">#has_focus</a></span>, <span class='object_link'><a href="Widget.html#has_focus=-instance_method" title="Gtk::Widget#has_focus= (method)">#has_focus=</a></span>, <span class='object_link'><a href="Widget.html#has_focus%3F-instance_method" title="Gtk::Widget#has_focus? (method)">#has_focus?</a></span>, <span class='object_link'><a href="Widget.html#has_tooltip-instance_method" title="Gtk::Widget#has_tooltip (method)">#has_tooltip</a></span>, <span class='object_link'><a href="Widget.html#has_tooltip=-instance_method" title="Gtk::Widget#has_tooltip= (method)">#has_tooltip=</a></span>, <span class='object_link'><a href="Widget.html#has_tooltip%3F-instance_method" title="Gtk::Widget#has_tooltip? (method)">#has_tooltip?</a></span>, <span class='object_link'><a href="Widget.html#has_visible_focus-instance_method" title="Gtk::Widget#has_visible_focus (method)">#has_visible_focus</a></span>, <span class='object_link'><a href="Widget.html#have_template%3F-class_method" title="Gtk::Widget.have_template? (method)">have_template?</a></span>, <span class='object_link'><a href="Widget.html#height-instance_method" title="Gtk::Widget#height (method)">#height</a></span>, <span class='object_link'><a href="Widget.html#height_request-instance_method" title="Gtk::Widget#height_request (method)">#height_request</a></span>, <span class='object_link'><a href="Widget.html#height_request=-instance_method" title="Gtk::Widget#height_request= (method)">#height_request=</a></span>, <span class='object_link'><a href="Widget.html#hexpand-instance_method" title="Gtk::Widget#hexpand (method)">#hexpand</a></span>, <span class='object_link'><a href="Widget.html#hexpand=-instance_method" title="Gtk::Widget#hexpand= (method)">#hexpand=</a></span>, <span class='object_link'><a href="Widget.html#hexpand%3F-instance_method" title="Gtk::Widget#hexpand? (method)">#hexpand?</a></span>, <span class='object_link'><a href="Widget.html#hexpand_set-instance_method" title="Gtk::Widget#hexpand_set (method)">#hexpand_set</a></span>, <span class='object_link'><a href="Widget.html#hexpand_set=-instance_method" title="Gtk::Widget#hexpand_set= (method)">#hexpand_set=</a></span>, <span class='object_link'><a href="Widget.html#hexpand_set%3F-instance_method" title="Gtk::Widget#hexpand_set? (method)">#hexpand_set?</a></span>, <span class='object_link'><a href="Widget.html#hide-instance_method" title="Gtk::Widget#hide (method)">#hide</a></span>, <span class='object_link'><a href="Widget.html#in_destruction-instance_method" title="Gtk::Widget#in_destruction (method)">#in_destruction</a></span>, <span class='object_link'><a href="Widget.html#init_template-instance_method" title="Gtk::Widget#init_template (method)">#init_template</a></span>, <span class='object_link'><a href="Widget.html#insert_action_group-instance_method" title="Gtk::Widget#insert_action_group (method)">#insert_action_group</a></span>, <span class='object_link'><a href="Widget.html#insert_action_group_raw-instance_method" title="Gtk::Widget#insert_action_group_raw (method)">#insert_action_group_raw</a></span>, <span class='object_link'><a href="Widget.html#insert_after-instance_method" title="Gtk::Widget#insert_after (method)">#insert_after</a></span>, <span class='object_link'><a href="Widget.html#insert_before-instance_method" title="Gtk::Widget#insert_before (method)">#insert_before</a></span>, <span class='object_link'><a href="Widget.html#install_action-instance_method" title="Gtk::Widget#install_action (method)">#install_action</a></span>, <span class='object_link'><a href="Widget.html#install_property_action-instance_method" title="Gtk::Widget#install_property_action (method)">#install_property_action</a></span>, <span class='object_link'><a href="Widget.html#is_ancestor-instance_method" title="Gtk::Widget#is_ancestor (method)">#is_ancestor</a></span>, <span class='object_link'><a href="Widget.html#is_drawable-instance_method" title="Gtk::Widget#is_drawable (method)">#is_drawable</a></span>, <span class='object_link'><a href="Widget.html#is_focus-instance_method" title="Gtk::Widget#is_focus (method)">#is_focus</a></span>, <span class='object_link'><a href="Widget.html#is_sensitive-instance_method" title="Gtk::Widget#is_sensitive (method)">#is_sensitive</a></span>, <span class='object_link'><a href="Widget.html#is_visible-instance_method" title="Gtk::Widget#is_visible (method)">#is_visible</a></span>, <span class='object_link'><a href="Widget.html#keynav_failed-instance_method" title="Gtk::Widget#keynav_failed (method)">#keynav_failed</a></span>, <span class='object_link'><a href="Widget.html#last_child-instance_method" title="Gtk::Widget#last_child (method)">#last_child</a></span>, <span class='object_link'><a href="Widget.html#layout_manager-instance_method" title="Gtk::Widget#layout_manager (method)">#layout_manager</a></span>, <span class='object_link'><a href="Widget.html#layout_manager=-instance_method" title="Gtk::Widget#layout_manager= (method)">#layout_manager=</a></span>, <span class='object_link'><a href="Widget.html#layout_manager_type-instance_method" title="Gtk::Widget#layout_manager_type (method)">#layout_manager_type</a></span>, <span class='object_link'><a href="Widget.html#layout_manager_type=-instance_method" title="Gtk::Widget#layout_manager_type= (method)">#layout_manager_type=</a></span>, <span class='object_link'><a href="Widget.html#list_mnemonic_labels-instance_method" title="Gtk::Widget#list_mnemonic_labels (method)">#list_mnemonic_labels</a></span>, <span class='object_link'><a href="Widget.html#map-instance_method" title="Gtk::Widget#map (method)">#map</a></span>, <span class='object_link'><a href="Widget.html#mapped-instance_method" title="Gtk::Widget#mapped (method)">#mapped</a></span>, <span class='object_link'><a href="Widget.html#margin_bottom-instance_method" title="Gtk::Widget#margin_bottom (method)">#margin_bottom</a></span>, <span class='object_link'><a href="Widget.html#margin_bottom=-instance_method" title="Gtk::Widget#margin_bottom= (method)">#margin_bottom=</a></span>, <span class='object_link'><a href="Widget.html#margin_end-instance_method" title="Gtk::Widget#margin_end (method)">#margin_end</a></span>, <span class='object_link'><a href="Widget.html#margin_end=-instance_method" title="Gtk::Widget#margin_end= (method)">#margin_end=</a></span>, <span class='object_link'><a href="Widget.html#margin_start-instance_method" title="Gtk::Widget#margin_start (method)">#margin_start</a></span>, <span class='object_link'><a href="Widget.html#margin_start=-instance_method" title="Gtk::Widget#margin_start= (method)">#margin_start=</a></span>, <span class='object_link'><a href="Widget.html#margin_top-instance_method" title="Gtk::Widget#margin_top (method)">#margin_top</a></span>, <span class='object_link'><a href="Widget.html#margin_top=-instance_method" title="Gtk::Widget#margin_top= (method)">#margin_top=</a></span>, <span class='object_link'><a href="Widget.html#measure-instance_method" title="Gtk::Widget#measure (method)">#measure</a></span>, <span class='object_link'><a href="Widget.html#mnemonic_activate-instance_method" title="Gtk::Widget#mnemonic_activate (method)">#mnemonic_activate</a></span>, <span class='object_link'><a href="Widget.html#name-instance_method" title="Gtk::Widget#name (method)">#name</a></span>, <span class='object_link'><a href="Widget.html#name=-instance_method" title="Gtk::Widget#name= (method)">#name=</a></span>, <span class='object_link'><a href="Widget.html#native-instance_method" title="Gtk::Widget#native (method)">#native</a></span>, <span class='object_link'><a href="Widget.html#next_sibling-instance_method" title="Gtk::Widget#next_sibling (method)">#next_sibling</a></span>, <span class='object_link'><a href="Widget.html#observe_children-instance_method" title="Gtk::Widget#observe_children (method)">#observe_children</a></span>, <span class='object_link'><a href="Widget.html#observe_controllers-instance_method" title="Gtk::Widget#observe_controllers (method)">#observe_controllers</a></span>, <span class='object_link'><a href="Widget.html#opacity-instance_method" title="Gtk::Widget#opacity (method)">#opacity</a></span>, <span class='object_link'><a href="Widget.html#opacity=-instance_method" title="Gtk::Widget#opacity= (method)">#opacity=</a></span>, <span class='object_link'><a href="Widget.html#overflow-instance_method" title="Gtk::Widget#overflow (method)">#overflow</a></span>, <span class='object_link'><a href="Widget.html#overflow=-instance_method" title="Gtk::Widget#overflow= (method)">#overflow=</a></span>, <span class='object_link'><a href="Widget.html#pango_context-instance_method" title="Gtk::Widget#pango_context (method)">#pango_context</a></span>, <span class='object_link'><a href="Widget.html#parent-instance_method" title="Gtk::Widget#parent (method)">#parent</a></span>, <span class='object_link'><a href="Widget.html#parent=-instance_method" title="Gtk::Widget#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="Widget.html#pick-instance_method" title="Gtk::Widget#pick (method)">#pick</a></span>, <span class='object_link'><a href="Widget.html#prev_sibling-instance_method" title="Gtk::Widget#prev_sibling (method)">#prev_sibling</a></span>, <span class='object_link'><a href="Widget.html#primary_clipboard-instance_method" title="Gtk::Widget#primary_clipboard (method)">#primary_clipboard</a></span>, <span class='object_link'><a href="Widget.html#query_action-instance_method" title="Gtk::Widget#query_action (method)">#query_action</a></span>, <span class='object_link'><a href="Widget.html#queue_allocate-instance_method" title="Gtk::Widget#queue_allocate (method)">#queue_allocate</a></span>, <span class='object_link'><a href="Widget.html#queue_draw-instance_method" title="Gtk::Widget#queue_draw (method)">#queue_draw</a></span>, <span class='object_link'><a href="Widget.html#queue_resize-instance_method" title="Gtk::Widget#queue_resize (method)">#queue_resize</a></span>, <span class='object_link'><a href="Widget.html#realize-instance_method" title="Gtk::Widget#realize (method)">#realize</a></span>, <span class='object_link'><a href="Widget.html#realized-instance_method" title="Gtk::Widget#realized (method)">#realized</a></span>, <span class='object_link'><a href="Widget.html#receives_default-instance_method" title="Gtk::Widget#receives_default (method)">#receives_default</a></span>, <span class='object_link'><a href="Widget.html#receives_default=-instance_method" title="Gtk::Widget#receives_default= (method)">#receives_default=</a></span>, <span class='object_link'><a href="Widget.html#receives_default%3F-instance_method" title="Gtk::Widget#receives_default? (method)">#receives_default?</a></span>, <span class='object_link'><a href="Widget.html#remove_controller-instance_method" title="Gtk::Widget#remove_controller (method)">#remove_controller</a></span>, <span class='object_link'><a href="Widget.html#remove_css_class-instance_method" title="Gtk::Widget#remove_css_class (method)">#remove_css_class</a></span>, <span class='object_link'><a href="Widget.html#remove_mnemonic_label-instance_method" title="Gtk::Widget#remove_mnemonic_label (method)">#remove_mnemonic_label</a></span>, <span class='object_link'><a href="Widget.html#remove_tick_callback-instance_method" title="Gtk::Widget#remove_tick_callback (method)">#remove_tick_callback</a></span>, <span class='object_link'><a href="Widget.html#request_mode-instance_method" title="Gtk::Widget#request_mode (method)">#request_mode</a></span>, <span class='object_link'><a href="Widget.html#root-instance_method" title="Gtk::Widget#root (method)">#root</a></span>, <span class='object_link'><a href="Widget.html#root=-instance_method" title="Gtk::Widget#root= (method)">#root=</a></span>, <span class='object_link'><a href="Widget.html#scale_factor-instance_method" title="Gtk::Widget#scale_factor (method)">#scale_factor</a></span>, <span class='object_link'><a href="Widget.html#scale_factor=-instance_method" title="Gtk::Widget#scale_factor= (method)">#scale_factor=</a></span>, <span class='object_link'><a href="Widget.html#sensitive-instance_method" title="Gtk::Widget#sensitive (method)">#sensitive</a></span>, <span class='object_link'><a href="Widget.html#sensitive=-instance_method" title="Gtk::Widget#sensitive= (method)">#sensitive=</a></span>, <span class='object_link'><a href="Widget.html#sensitive%3F-instance_method" title="Gtk::Widget#sensitive? (method)">#sensitive?</a></span>, <span class='object_link'><a href="Widget.html#set_size_request-instance_method" title="Gtk::Widget#set_size_request (method)">#set_size_request</a></span>, <span class='object_link'><a href="Widget.html#set_size_request_raw-instance_method" title="Gtk::Widget#set_size_request_raw (method)">#set_size_request_raw</a></span>, <span class='object_link'><a href="Widget.html#set_state_flags-instance_method" title="Gtk::Widget#set_state_flags (method)">#set_state_flags</a></span>, <span class='object_link'><a href="Widget.html#set_template-instance_method" title="Gtk::Widget#set_template (method)">#set_template</a></span>, <span class='object_link'><a href="Widget.html#set_template_raw-instance_method" title="Gtk::Widget#set_template_raw (method)">#set_template_raw</a></span>, <span class='object_link'><a href="Widget.html#settings-instance_method" title="Gtk::Widget#settings (method)">#settings</a></span>, <span class='object_link'><a href="Widget.html#should_layout-instance_method" title="Gtk::Widget#should_layout (method)">#should_layout</a></span>, <span class='object_link'><a href="Widget.html#show-instance_method" title="Gtk::Widget#show (method)">#show</a></span>, <span class='object_link'><a href="Widget.html#size_allocate-instance_method" title="Gtk::Widget#size_allocate (method)">#size_allocate</a></span>, <span class='object_link'><a href="Widget.html#snapshot_child-instance_method" title="Gtk::Widget#snapshot_child (method)">#snapshot_child</a></span>, <span class='object_link'><a href="Widget.html#state_flags-instance_method" title="Gtk::Widget#state_flags (method)">#state_flags</a></span>, <span class='object_link'><a href="Widget.html#style_context-instance_method" title="Gtk::Widget#style_context (method)">#style_context</a></span>, <span class='object_link'><a href="Widget.html#style_context_raw-instance_method" title="Gtk::Widget#style_context_raw (method)">#style_context_raw</a></span>, <span class='object_link'><a href="Widget.html#template=-instance_method" title="Gtk::Widget#template= (method)">#template=</a></span>, <span class='object_link'><a href="Widget.html#template_children-class_method" title="Gtk::Widget.template_children (method)">template_children</a></span>, <span class='object_link'><a href="Widget.html#template_from_resource=-instance_method" title="Gtk::Widget#template_from_resource= (method)">#template_from_resource=</a></span>, <span class='object_link'><a href="Widget.html#template_scope=-instance_method" title="Gtk::Widget#template_scope= (method)">#template_scope=</a></span>, <span class='object_link'><a href="Widget.html#tooltip_markup-instance_method" title="Gtk::Widget#tooltip_markup (method)">#tooltip_markup</a></span>, <span class='object_link'><a href="Widget.html#tooltip_markup=-instance_method" title="Gtk::Widget#tooltip_markup= (method)">#tooltip_markup=</a></span>, <span class='object_link'><a href="Widget.html#tooltip_text-instance_method" title="Gtk::Widget#tooltip_text (method)">#tooltip_text</a></span>, <span class='object_link'><a href="Widget.html#tooltip_text=-instance_method" title="Gtk::Widget#tooltip_text= (method)">#tooltip_text=</a></span>, <span class='object_link'><a href="Widget.html#translate_coordinates-instance_method" title="Gtk::Widget#translate_coordinates (method)">#translate_coordinates</a></span>, <span class='object_link'><a href="Widget.html#translate_coordinates_raw-instance_method" title="Gtk::Widget#translate_coordinates_raw (method)">#translate_coordinates_raw</a></span>, <span class='object_link'><a href="Widget.html#trigger_tooltip_query-instance_method" title="Gtk::Widget#trigger_tooltip_query (method)">#trigger_tooltip_query</a></span>, <span class='object_link'><a href="Widget.html#unmap-instance_method" title="Gtk::Widget#unmap (method)">#unmap</a></span>, <span class='object_link'><a href="Widget.html#unparent-instance_method" title="Gtk::Widget#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="Widget.html#unrealize-instance_method" title="Gtk::Widget#unrealize (method)">#unrealize</a></span>, <span class='object_link'><a href="Widget.html#unset_state_flags-instance_method" title="Gtk::Widget#unset_state_flags (method)">#unset_state_flags</a></span>, <span class='object_link'><a href="Widget.html#valign-instance_method" title="Gtk::Widget#valign (method)">#valign</a></span>, <span class='object_link'><a href="Widget.html#valign=-instance_method" title="Gtk::Widget#valign= (method)">#valign=</a></span>, <span class='object_link'><a href="Widget.html#vexpand-instance_method" title="Gtk::Widget#vexpand (method)">#vexpand</a></span>, <span class='object_link'><a href="Widget.html#vexpand=-instance_method" title="Gtk::Widget#vexpand= (method)">#vexpand=</a></span>, <span class='object_link'><a href="Widget.html#vexpand%3F-instance_method" title="Gtk::Widget#vexpand? (method)">#vexpand?</a></span>, <span class='object_link'><a href="Widget.html#vexpand_set-instance_method" title="Gtk::Widget#vexpand_set (method)">#vexpand_set</a></span>, <span class='object_link'><a href="Widget.html#vexpand_set=-instance_method" title="Gtk::Widget#vexpand_set= (method)">#vexpand_set=</a></span>, <span class='object_link'><a href="Widget.html#vexpand_set%3F-instance_method" title="Gtk::Widget#vexpand_set? (method)">#vexpand_set?</a></span>, <span class='object_link'><a href="Widget.html#visible-instance_method" title="Gtk::Widget#visible (method)">#visible</a></span>, <span class='object_link'><a href="Widget.html#visible=-instance_method" title="Gtk::Widget#visible= (method)">#visible=</a></span>, <span class='object_link'><a href="Widget.html#visible%3F-instance_method" title="Gtk::Widget#visible? (method)">#visible?</a></span>, <span class='object_link'><a href="Widget.html#width-instance_method" title="Gtk::Widget#width (method)">#width</a></span>, <span class='object_link'><a href="Widget.html#width_request-instance_method" title="Gtk::Widget#width_request (method)">#width_request</a></span>, <span class='object_link'><a href="Widget.html#width_request=-instance_method" title="Gtk::Widget#width_request= (method)">#width_request=</a></span></p>
+
+  
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <p class="notice">This class inherits a constructor from <span class='object_link'><a href="Window.html#initialize-instance_method" title="Gtk::Window#initialize (method)">Gtk::Window</a></span></p>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_section-instance_method">
+  
+    #<strong>add_section</strong>(section)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a section to the shortcuts window.</p>
+<p>This is the programmatic equivalent to using [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Builder] and a
+<code>&lt;child&gt;</code> tag to add the child.</p>
+<p>Using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.set_child] is not appropriate as the shortcuts
+window manages its children internally.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>section</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ShortcutsSection.html" title="Gtk::ShortcutsSection (class)">Gtk::ShortcutsSection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>GtkShortcutsSection</code> to add</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="section_name-instance_method">
+  
+    #<strong>section_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The name of the section to show.</p>
+<p>This should be the section-name of one of the <code>GtkShortcutsSection</code>
+objects that are in this shortcuts window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>section-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="section_name=-instance_method">
+  
+    #<strong>section_name=</strong>(section_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The name of the section to show.</p>
+<p>This should be the section-name of one of the <code>GtkShortcutsSection</code>
+objects that are in this shortcuts window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>section_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>section-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>section-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="view_name-instance_method">
+  
+    #<strong>view_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The view name by which to filter the contents.</p>
+<p>This should correspond to the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsGroup:view]
+property of some of the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsGroup] objects that
+are inside this shortcuts window.</p>
+<p>Set this to nil to show all groups.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>view-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="view_name=-instance_method">
+  
+    #<strong>view_name=</strong>(view_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The view name by which to filter the contents.</p>
+<p>This should correspond to the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsGroup:view]
+property of some of the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsGroup] objects that
+are inside this shortcuts window.</p>
+<p>Set this to nil to show all groups.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>view_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>view-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>view-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

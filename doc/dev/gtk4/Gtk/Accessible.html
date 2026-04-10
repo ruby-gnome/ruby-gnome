@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gtk::Accessible
+  
+    &mdash; Ruby/GTK4
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::Accessible";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">Accessible</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gtk::Accessible
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p><code>GtkAccessible</code> is an interface for describing UI elements for
+Assistive Technologies.</p>
+<p>Every accessible implementation has:</p>
+<ul>
+<li>a “role”, represented by a value of the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleRole] enumeration</li>
+<li>an “attribute”, represented by a set of [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleState],
+[enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleProperty] and [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleRelation] values</li>
+</ul>
+<p>The role cannot be changed after instantiating a <code>GtkAccessible</code>
+implementation.</p>
+<p>The attributes are updated every time a UI element's state changes in
+a way that should be reflected by assistive technologies. For instance,
+if a <code>GtkWidget</code> visibility changes, the %GTK_ACCESSIBLE_STATE_HIDDEN
+state will also change to reflect the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:visible] property.</p>
+<p>Every accessible implementation is part of a tree of accessible objects.
+Normally, this tree corresponds to the widget tree, but can be customized
+by reimplementing the [vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.get_accessible_parent],
+[vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.get_first_accessible_child] and
+[vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.get_next_accessible_sibling] virtual functions.
+Note that you can not create a top-level accessible object as of now,
+which means that you must always have a parent accessible object.
+Also note that when an accessible object does not correspond to a widget,
+and it has children, whose implementation you don't control,
+it is necessary to ensure the correct shape of the a11y tree
+by calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.set_accessible_parent] and
+updating the sibling by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.update_next_accessible_sibling].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accessible_parent-instance_method" title="#accessible_parent (instance method)">#<strong>accessible_parent</strong>  &#x21d2; Gtk::Accessible </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the accessible parent for an accessible object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accessible_role-instance_method" title="#accessible_role (instance method)">#<strong>accessible_role</strong>  &#x21d2; Gtk::AccessibleRole </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the accessible role of an accessible object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#announce-instance_method" title="#announce (instance method)">#<strong>announce</strong>(message, priority)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Requests the user's screen reader to announce the given message.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#at_context-instance_method" title="#at_context (instance method)">#<strong>at_context</strong>  &#x21d2; Gtk::ATContext </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the accessible implementation for the given <code>GtkAccessible</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#first_accessible_child-instance_method" title="#first_accessible_child (instance method)">#<strong>first_accessible_child</strong>  &#x21d2; Gtk::Accessible </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the first accessible child of an accessible object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_bounds-instance_method" title="#get_bounds (instance method)">#<strong>get_bounds</strong>(x, y, width, height)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries the coordinates and dimensions of this accessible.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_platform_state-instance_method" title="#get_platform_state (instance method)">#<strong>get_platform_state</strong>(state)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Query a platform state, such as focus.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#next_accessible_sibling-instance_method" title="#next_accessible_sibling (instance method)">#<strong>next_accessible_sibling</strong>  &#x21d2; Gtk::Accessible </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the next accessible sibling of an accessible object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset_property-instance_method" title="#reset_property (instance method)">#<strong>reset_property</strong>(property)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Resets the accessible <!-- raw HTML omitted -->property<!-- raw HTML omitted --> to its default value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset_relation-instance_method" title="#reset_relation (instance method)">#<strong>reset_relation</strong>(relation)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Resets the accessible <!-- raw HTML omitted -->relation<!-- raw HTML omitted --> to its default value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset_state-instance_method" title="#reset_state (instance method)">#<strong>reset_state</strong>(state)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Resets the accessible <!-- raw HTML omitted -->state<!-- raw HTML omitted --> to its default value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_accessible_parent-instance_method" title="#set_accessible_parent (instance method)">#<strong>set_accessible_parent</strong>(parent, next_sibling)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the parent and sibling of an accessible object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_next_accessible_sibling-instance_method" title="#update_next_accessible_sibling (instance method)">#<strong>update_next_accessible_sibling</strong>(new_sibling)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Updates the next accessible sibling of <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_property-instance_method" title="#update_property (instance method)">#<strong>update_property</strong>(first_property, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Updates a list of accessible properties.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_property_value-instance_method" title="#update_property_value (instance method)">#<strong>update_property_value</strong>(n_properties, properties, values)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Updates an array of accessible properties.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_relation-instance_method" title="#update_relation (instance method)">#<strong>update_relation</strong>(first_relation, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Updates a list of accessible relations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_relation_value-instance_method" title="#update_relation_value (instance method)">#<strong>update_relation_value</strong>(n_relations, relations, values)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Updates an array of accessible relations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_state-instance_method" title="#update_state (instance method)">#<strong>update_state</strong>(first_state, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Updates a list of accessible states.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_state_value-instance_method" title="#update_state_value (instance method)">#<strong>update_state_value</strong>(n_states, states, values)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Updates an array of accessible states.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="accessible_parent-instance_method">
+  
+    #<strong>accessible_parent</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::Accessible (module)">Gtk::Accessible</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the accessible parent for an accessible object.</p>
+<p>This function returns <code>NULL</code> for top level widgets.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::Accessible (module)">Gtk::Accessible</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the accessible parent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="accessible_role-instance_method">
+  
+    #<strong>accessible_role</strong>  &#x21d2; <tt><span class='object_link'><a href="AccessibleRole.html" title="Gtk::AccessibleRole (module)">Gtk::AccessibleRole</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the accessible role of an accessible object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccessibleRole.html" title="Gtk::AccessibleRole (module)">Gtk::AccessibleRole</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the accessible role</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="announce-instance_method">
+  
+    #<strong>announce</strong>(message, priority)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Requests the user's screen reader to announce the given message.</p>
+<p>This kind of notification is useful for messages that
+either have only a visual representation or that are not
+exposed visually at all, e.g. a notification about a
+successful operation.</p>
+<p>Also, by using this API, you can ensure that the message
+does not interrupts the user's current screen reader output.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the string to announce</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>priority</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccessibleAnnouncementPriority.html" title="Gtk::AccessibleAnnouncementPriority (module)">Gtk::AccessibleAnnouncementPriority</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the priority of the announcement</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="at_context-instance_method">
+  
+    #<strong>at_context</strong>  &#x21d2; <tt><span class='object_link'><a href="ATContext.html" title="Gtk::ATContext (class)">Gtk::ATContext</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the accessible implementation for the given <code>GtkAccessible</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ATContext.html" title="Gtk::ATContext (class)">Gtk::ATContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the accessible implementation object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="first_accessible_child-instance_method">
+  
+    #<strong>first_accessible_child</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::Accessible (module)">Gtk::Accessible</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the first accessible child of an accessible object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::Accessible (module)">Gtk::Accessible</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the first accessible child</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_bounds-instance_method">
+  
+    #<strong>get_bounds</strong>(x, y, width, height)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries the coordinates and dimensions of this accessible</p>
+<p>This functionality can be overridden by <code>GtkAccessible</code>
+implementations, e.g. to get the bounds from an ignored
+child widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the x coordinate of the top left corner of the accessible</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the y coordinate of the top left corner of the widget</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the width of the accessible object</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the height of the accessible object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the bounds are valid, and false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_platform_state-instance_method">
+  
+    #<strong>get_platform_state</strong>(state)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Query a platform state, such as focus.</p>
+<p>See gtk_accessible_platform_changed().</p>
+<p>This functionality can be overridden by <code>GtkAccessible</code>
+implementations, e.g. to get platform state from an ignored
+child widget, as is the case for <code>GtkText</code> wrappers.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccessiblePlatformState.html" title="Gtk::AccessiblePlatformState (module)">Gtk::AccessiblePlatformState</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>platform state to query</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the value of <!-- raw HTML omitted -->state<!-- raw HTML omitted --> for the accessible</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="next_accessible_sibling-instance_method">
+  
+    #<strong>next_accessible_sibling</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::Accessible (module)">Gtk::Accessible</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the next accessible sibling of an accessible object</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::Accessible (module)">Gtk::Accessible</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the next accessible sibling</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset_property-instance_method">
+  
+    #<strong>reset_property</strong>(property)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Resets the accessible <!-- raw HTML omitted -->property<!-- raw HTML omitted --> to its default value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>property</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccessibleProperty.html" title="Gtk::AccessibleProperty (module)">Gtk::AccessibleProperty</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GtkAccessibleProperty</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset_relation-instance_method">
+  
+    #<strong>reset_relation</strong>(relation)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Resets the accessible <!-- raw HTML omitted -->relation<!-- raw HTML omitted --> to its default value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>relation</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccessibleRelation.html" title="Gtk::AccessibleRelation (module)">Gtk::AccessibleRelation</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GtkAccessibleRelation</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset_state-instance_method">
+  
+    #<strong>reset_state</strong>(state)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Resets the accessible <!-- raw HTML omitted -->state<!-- raw HTML omitted --> to its default value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccessibleState.html" title="Gtk::AccessibleState (module)">Gtk::AccessibleState</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GtkAccessibleState</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_accessible_parent-instance_method">
+  
+    #<strong>set_accessible_parent</strong>(parent, next_sibling)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the parent and sibling of an accessible object.</p>
+<p>This function is meant to be used by accessible implementations that are
+not part of the widget hierarchy, and but act as a logical bridge between
+widgets. For instance, if a widget creates an object that holds metadata
+for each child, and you want that object to implement the <code>GtkAccessible</code>
+interface, you will use this function to ensure that the parent of each
+child widget is the metadata object, and the parent of each metadata
+object is the container widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::Accessible (module)">Gtk::Accessible</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent accessible object</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>next_sibling</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::Accessible (module)">Gtk::Accessible</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the sibling accessible object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_next_accessible_sibling-instance_method">
+  
+    #<strong>update_next_accessible_sibling</strong>(new_sibling)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Updates the next accessible sibling of <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
+<p>That might be useful when a new child of a custom <code>GtkAccessible</code>
+is created, and it needs to be linked to a previous child.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>new_sibling</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::Accessible (module)">Gtk::Accessible</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new next accessible sibling to set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_property-instance_method">
+  
+    #<strong>update_property</strong>(first_property, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Updates a list of accessible properties.</p>
+<p>See the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleProperty] documentation for the
+value types of accessible properties.</p>
+<p>This function should be called by <code>GtkWidget</code> types whenever
+an accessible property change must be communicated to assistive
+technologies.</p>
+<p>Example:</p>
+<pre class="code c"><code class="c">value = gtk_adjustment_get_value (adjustment);
+gtk_accessible_update_property (GTK_ACCESSIBLE (spin_button),
+                                   GTK_ACCESSIBLE_PROPERTY_VALUE_NOW, value,
+                                   -1);
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>first_property</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccessibleProperty.html" title="Gtk::AccessibleProperty (module)">Gtk::AccessibleProperty</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the first <code>GtkAccessibleProperty</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a list of property and value pairs, terminated by -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_property_value-instance_method">
+  
+    #<strong>update_property_value</strong>(n_properties, properties, values)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Updates an array of accessible properties.</p>
+<p>This function should be called by <code>GtkWidget</code> types whenever an accessible
+property change must be communicated to assistive technologies.</p>
+<p>This function is meant to be used by language bindings.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_properties</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of accessible properties to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>properties</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="AccessibleProperty.html" title="Gtk::AccessibleProperty (module)">Gtk::AccessibleProperty</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an array of <code>GtkAccessibleProperty</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>values</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;GObject::Value&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an array of <code>GValues</code>, one for each property</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_relation-instance_method">
+  
+    #<strong>update_relation</strong>(first_relation, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Updates a list of accessible relations.</p>
+<p>This function should be called by <code>GtkWidget</code> types whenever an accessible
+relation change must be communicated to assistive technologies.</p>
+<p>If the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleRelation] requires a list of references,
+you should pass each reference individually, followed by nil, e.g.</p>
+<pre class="code c"><code class="c">gtk_accessible_update_relation (accessible,
+                                GTK_ACCESSIBLE_RELATION_CONTROLS,
+                                  ref1, NULL,
+                                GTK_ACCESSIBLE_RELATION_LABELLED_BY,
+                                  ref1, ref2, ref3, NULL,
+                                -1);
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>first_relation</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccessibleRelation.html" title="Gtk::AccessibleRelation (module)">Gtk::AccessibleRelation</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the first <code>GtkAccessibleRelation</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a list of relation and value pairs, terminated by -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_relation_value-instance_method">
+  
+    #<strong>update_relation_value</strong>(n_relations, relations, values)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Updates an array of accessible relations.</p>
+<p>This function should be called by <code>GtkWidget</code> types whenever an accessible
+relation change must be communicated to assistive technologies.</p>
+<p>This function is meant to be used by language bindings.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_relations</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of accessible relations to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>relations</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="AccessibleRelation.html" title="Gtk::AccessibleRelation (module)">Gtk::AccessibleRelation</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an array of <code>GtkAccessibleRelation</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>values</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;GObject::Value&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an array of <code>GValues</code>, one for each relation</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_state-instance_method">
+  
+    #<strong>update_state</strong>(first_state, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Updates a list of accessible states. See the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleState]
+documentation for the value types of accessible states.</p>
+<p>This function should be called by <code>GtkWidget</code> types whenever an accessible
+state change must be communicated to assistive technologies.</p>
+<p>Example:</p>
+<pre class="code c"><code class="c">value = GTK_ACCESSIBLE_TRISTATE_MIXED;
+gtk_accessible_update_state (GTK_ACCESSIBLE (check_button),
+                             GTK_ACCESSIBLE_STATE_CHECKED, value,
+                             -1);
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>first_state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AccessibleState.html" title="Gtk::AccessibleState (module)">Gtk::AccessibleState</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the first <code>GtkAccessibleState</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a list of state and value pairs, terminated by -1</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_state_value-instance_method">
+  
+    #<strong>update_state_value</strong>(n_states, states, values)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Updates an array of accessible states.</p>
+<p>This function should be called by <code>GtkWidget</code> types whenever an accessible
+state change must be communicated to assistive technologies.</p>
+<p>This function is meant to be used by language bindings.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_states</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of accessible states to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>states</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="AccessibleState.html" title="Gtk::AccessibleState (module)">Gtk::AccessibleState</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an array of <code>GtkAccessibleState</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>values</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;GObject::Value&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an array of <code>GValues</code>, one for each state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

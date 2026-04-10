@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Clutter::SnapConstraint
+  
+    &mdash; Ruby/Clutter
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Clutter::SnapConstraint";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter</a></span></span>
+     &raquo; 
+    <span class="title">SnapConstraint</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Clutter::SnapConstraint
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Constraint.html" title="Clutter::Constraint (class)">Constraint</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="ActorMeta.html" title="Clutter::ActorMeta (class)">ActorMeta</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="Constraint.html" title="Clutter::Constraint (class)">Constraint</a></span></li>
+          
+            <li class="next">Clutter::SnapConstraint</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#from_edge-instance_method" title="#from_edge (instance method)">#<strong>from_edge</strong>  &#x21d2; Clutter::SnapEdge </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The edge of the Clutter::Actor that should be snapped.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#from_edge=-instance_method" title="#from_edge= (instance method)">#<strong>from_edge=</strong>(from_edge)  &#x21d2; Clutter::SnapEdge </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The edge of the Clutter::Actor that should be snapped.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_edges-instance_method" title="#get_edges (instance method)">#<strong>get_edges</strong>(from_edge, to_edge)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the edges used by the <!-- raw HTML omitted -->constraint<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(source, from_edge, to_edge, offset)  &#x21d2; Clutter::Constraint </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Clutter::SnapConstraint that will snap a #ClutterActor to the <!-- raw HTML omitted -->edge<!-- raw HTML omitted --> of <!-- raw HTML omitted -->source<!-- raw HTML omitted -->, with the given <!-- raw HTML omitted -->offset<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#offset-instance_method" title="#offset (instance method)">#<strong>offset</strong>  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The offset, in pixels, between Clutter::SnapConstraint:from-edge and Clutter::SnapConstraint:to-edge.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#offset=-instance_method" title="#offset= (instance method)">#<strong>offset=</strong>(offset)  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The offset, in pixels, between Clutter::SnapConstraint:from-edge and Clutter::SnapConstraint:to-edge.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_edges-instance_method" title="#set_edges (instance method)">#<strong>set_edges</strong>(from_edge, to_edge)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the edges to be used by the <!-- raw HTML omitted -->constraint<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source-instance_method" title="#source (instance method)">#<strong>source</strong>  &#x21d2; Clutter::Actor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Clutter::Actor used as the source for the constraint.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source=-instance_method" title="#source= (instance method)">#<strong>source=</strong>(source)  &#x21d2; Clutter::Actor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Clutter::Actor used as the source for the constraint.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_edge-instance_method" title="#to_edge (instance method)">#<strong>to_edge</strong>  &#x21d2; Clutter::SnapEdge </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The edge of the Clutter::SnapConstraint:source that should be snapped.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_edge=-instance_method" title="#to_edge= (instance method)">#<strong>to_edge=</strong>(to_edge)  &#x21d2; Clutter::SnapEdge </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The edge of the Clutter::SnapConstraint:source that should be snapped.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ActorMeta.html" title="Clutter::ActorMeta (class)">ActorMeta</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="ActorMeta.html#actor-instance_method" title="Clutter::ActorMeta#actor (method)">#actor</a></span>, <span class='object_link'><a href="ActorMeta.html#actor=-instance_method" title="Clutter::ActorMeta#actor= (method)">#actor=</a></span>, <span class='object_link'><a href="ActorMeta.html#enabled-instance_method" title="Clutter::ActorMeta#enabled (method)">#enabled</a></span>, <span class='object_link'><a href="ActorMeta.html#enabled=-instance_method" title="Clutter::ActorMeta#enabled= (method)">#enabled=</a></span>, <span class='object_link'><a href="ActorMeta.html#enabled%3F-instance_method" title="Clutter::ActorMeta#enabled? (method)">#enabled?</a></span>, <span class='object_link'><a href="ActorMeta.html#name-instance_method" title="Clutter::ActorMeta#name (method)">#name</a></span>, <span class='object_link'><a href="ActorMeta.html#name=-instance_method" title="Clutter::ActorMeta#name= (method)">#name=</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(source, from_edge, to_edge, offset)  &#x21d2; <tt><span class='object_link'><a href="Constraint.html" title="Clutter::Constraint (class)">Clutter::Constraint</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Clutter::SnapConstraint that will snap a #ClutterActor
+to the <!-- raw HTML omitted -->edge<!-- raw HTML omitted --> of <!-- raw HTML omitted -->source<!-- raw HTML omitted -->, with the given <!-- raw HTML omitted -->offset<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Clutter::Actor to use as the source of
+the constraint, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>from_edge</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the edge of the actor to use in the constraint</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to_edge</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the edge of <!-- raw HTML omitted -->source<!-- raw HTML omitted --> to use in the constraint</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the offset to apply to the constraint, in pixels</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="from_edge-instance_method">
+  
+    #<strong>from_edge</strong>  &#x21d2; <tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The edge of the Clutter::Actor that should be snapped</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>from-edge</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="from_edge=-instance_method">
+  
+    #<strong>from_edge=</strong>(from_edge)  &#x21d2; <tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The edge of the Clutter::Actor that should be snapped</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>from_edge</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>from-edge</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>from-edge</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_edges-instance_method">
+  
+    #<strong>get_edges</strong>(from_edge, to_edge)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the edges used by the <!-- raw HTML omitted -->constraint<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>from_edge</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the actor's edge, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to_edge</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the source's edge, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="offset-instance_method">
+  
+    #<strong>offset</strong>  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The offset, in pixels, between Clutter::SnapConstraint:from-edge
+and Clutter::SnapConstraint:to-edge</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>offset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="offset=-instance_method">
+  
+    #<strong>offset=</strong>(offset)  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The offset, in pixels, between Clutter::SnapConstraint:from-edge
+and Clutter::SnapConstraint:to-edge</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>offset</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>offset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_edges-instance_method">
+  
+    #<strong>set_edges</strong>(from_edge, to_edge)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the edges to be used by the <!-- raw HTML omitted -->constraint<!-- raw HTML omitted --></p>
+<p>The <!-- raw HTML omitted -->from_edge<!-- raw HTML omitted --> is the edge on the Clutter::Actor to which <!-- raw HTML omitted -->constraint<!-- raw HTML omitted -->
+has been added. The <!-- raw HTML omitted -->to_edge<!-- raw HTML omitted --> is the edge of the Clutter::Actor inside
+the Clutter::SnapConstraint:source property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>from_edge</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the edge on the actor</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to_edge</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the edge on the source</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source-instance_method">
+  
+    #<strong>source</strong>  &#x21d2; <tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The Clutter::Actor used as the source for the constraint</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>source</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source=-instance_method">
+  
+    #<strong>source=</strong>(source)  &#x21d2; <tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The Clutter::Actor used as the source for the constraint</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>source</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>source</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_edge-instance_method">
+  
+    #<strong>to_edge</strong>  &#x21d2; <tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The edge of the Clutter::SnapConstraint:source that should be snapped</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>to-edge</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_edge=-instance_method">
+  
+    #<strong>to_edge=</strong>(to_edge)  &#x21d2; <tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The edge of the Clutter::SnapConstraint:source that should be snapped</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>to_edge</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>to-edge</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SnapEdge.html" title="Clutter::SnapEdge (module)">Clutter::SnapEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>to-edge</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

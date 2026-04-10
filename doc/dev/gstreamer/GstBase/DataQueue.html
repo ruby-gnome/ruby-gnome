@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GstBase::DataQueue
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GstBase::DataQueue";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GstBase.html" title="GstBase (module)">GstBase</a></span></span>
+     &raquo; 
+    <span class="title">DataQueue</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GstBase::DataQueue
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GstBase::DataQueue</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_level_bytes-instance_method" title="#current_level_bytes (instance method)">#<strong>current_level_bytes</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Current-level-bytes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_level_bytes=-instance_method" title="#current_level_bytes= (instance method)">#<strong>current_level_bytes=</strong>(current_level_bytes)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_level_time-instance_method" title="#current_level_time (instance method)">#<strong>current_level_time</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Current-level-time.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_level_time=-instance_method" title="#current_level_time= (instance method)">#<strong>current_level_time=</strong>(current_level_time)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_level_visible-instance_method" title="#current_level_visible (instance method)">#<strong>current_level_visible</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Current-level-visible.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_level_visible=-instance_method" title="#current_level_visible= (instance method)">#<strong>current_level_visible=</strong>(current_level_visible)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#drop_head-instance_method" title="#drop_head (instance method)">#<strong>drop_head</strong>(type)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Pop and unref the head-most Gst::MiniObject with the given #GType.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flush-instance_method" title="#flush (instance method)">#<strong>flush</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Flushes all the contents of the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flushing=-instance_method" title="#flushing= (instance method)">#<strong>flushing=</strong>(flushing)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the queue to flushing state if <!-- raw HTML omitted -->flushing<!-- raw HTML omitted --> is true.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_level-instance_method" title="#get_level (instance method)">#<strong>get_level</strong>(level)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the current level of the queue.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(checkfull, fullcallback, emptycallback, checkdata)  &#x21d2; GstBase::DataQueue </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Gst::DataQueue.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_empty-instance_method" title="#is_empty (instance method)">#<strong>is_empty</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries if there are any items in the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_full-instance_method" title="#is_full (instance method)">#<strong>is_full</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries if <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is full.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#limits_changed-instance_method" title="#limits_changed (instance method)">#<strong>limits_changed</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inform the queue that the limits for the fullness check have changed and that any blocking gst_data_queue_push() should be unblocked to recheck the limits.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#peek-instance_method" title="#peek (instance method)">#<strong>peek</strong>(item)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the first <!-- raw HTML omitted -->item<!-- raw HTML omitted --> available on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> without removing it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pop-instance_method" title="#pop (instance method)">#<strong>pop</strong>(item)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the first <!-- raw HTML omitted -->item<!-- raw HTML omitted --> available on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push-instance_method" title="#push (instance method)">#<strong>push</strong>(item)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Pushes a Gst::DataQueueItem (or a structure that begins with the same fields) on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_force-instance_method" title="#push_force (instance method)">#<strong>push_force</strong>(item)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Pushes a Gst::DataQueueItem (or a structure that begins with the same fields) on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(checkfull, fullcallback, emptycallback, checkdata)  &#x21d2; <tt><span class='object_link'><a href="" title="GstBase::DataQueue (class)">GstBase::DataQueue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Gst::DataQueue. If <!-- raw HTML omitted -->fullcallback<!-- raw HTML omitted --> or <!-- raw HTML omitted -->emptycallback<!-- raw HTML omitted --> are supplied, then
+the Gst::DataQueue will call the respective callback to signal full or empty condition.
+If the callbacks are NULL the Gst::DataQueue will instead emit 'full' and 'empty'
+signals.
+or not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>checkfull</span>
+      
+      
+        <span class='type'>(<tt>GstBase::DataQueueCheckFullFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the callback used to tell if the element considers the queue full</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>fullcallback</span>
+      
+      
+        <span class='type'>(<tt>GstBase::DataQueueFullCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the callback which will be called when the queue is considered full.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>emptycallback</span>
+      
+      
+        <span class='type'>(<tt>GstBase::DataQueueEmptyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the callback which will be called when the queue is considered empty.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>checkdata</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #gpointer that will be passed to the <!-- raw HTML omitted -->checkfull<!-- raw HTML omitted -->, <!-- raw HTML omitted -->fullcallback<!-- raw HTML omitted -->,
+and <!-- raw HTML omitted -->emptycallback<!-- raw HTML omitted --> callbacks.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="current_level_bytes-instance_method">
+  
+    #<strong>current_level_bytes</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns current-level-bytes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>current-level-bytes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_level_bytes=-instance_method">
+  
+    #<strong>current_level_bytes=</strong>(current_level_bytes)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>current_level_bytes</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>current-level-bytes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>current-level-bytes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_level_time-instance_method">
+  
+    #<strong>current_level_time</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns current-level-time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>current-level-time</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_level_time=-instance_method">
+  
+    #<strong>current_level_time=</strong>(current_level_time)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>current_level_time</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>current-level-time</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>current-level-time</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_level_visible-instance_method">
+  
+    #<strong>current_level_visible</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns current-level-visible.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>current-level-visible</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_level_visible=-instance_method">
+  
+    #<strong>current_level_visible=</strong>(current_level_visible)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>current_level_visible</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>current-level-visible</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>current-level-visible</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="drop_head-instance_method">
+  
+    #<strong>drop_head</strong>(type)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Pop and unref the head-most Gst::MiniObject with the given #GType.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The #GType of the item to drop.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if an element was removed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flush-instance_method">
+  
+    #<strong>flush</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Flushes all the contents of the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->. Any call to #gst_data_queue_push and
+#gst_data_queue_pop will be released.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flushing=-instance_method">
+  
+    #<strong>flushing=</strong>(flushing)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the queue to flushing state if <!-- raw HTML omitted -->flushing<!-- raw HTML omitted --> is true. If set to flushing
+state, any incoming data on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> will be discarded. Any call currently
+blocking on #gst_data_queue_push or #gst_data_queue_pop will return straight
+away with a return value of false. While the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is in flushing state,
+all calls to those two functions will return false.</p>
+<p>MT Safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flushing</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #gboolean stating if the queue will be flushing or not.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_level-instance_method">
+  
+    #<strong>get_level</strong>(level)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the current level of the queue.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>level</span>
+      
+      
+        <span class='type'>(<tt>GstBase::DataQueueSize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the location to store the result</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_empty-instance_method">
+  
+    #<strong>is_empty</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries if there are any items in the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is empty.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_full-instance_method">
+  
+    #<strong>is_full</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries if <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is full. This check will be done using the
+Gst::DataQueueCheckFullFunction registered with <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is full.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="limits_changed-instance_method">
+  
+    #<strong>limits_changed</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inform the queue that the limits for the fullness check have changed and that
+any blocking gst_data_queue_push() should be unblocked to recheck the limits.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="peek-instance_method">
+  
+    #<strong>peek</strong>(item)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the first <!-- raw HTML omitted -->item<!-- raw HTML omitted --> available on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> without removing it.
+If the queue is currently empty, the call will block until at least
+one item is available, OR the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is set to the flushing state.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>item</span>
+      
+      
+        <span class='type'>(<tt>GstBase::DataQueueItem</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointer to store the returned Gst::DataQueueItem.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if an <!-- raw HTML omitted -->item<!-- raw HTML omitted --> was successfully retrieved from the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pop-instance_method">
+  
+    #<strong>pop</strong>(item)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the first <!-- raw HTML omitted -->item<!-- raw HTML omitted --> available on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->. If the queue is currently
+empty, the call will block until at least one item is available, OR the
+<!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is set to the flushing state.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>item</span>
+      
+      
+        <span class='type'>(<tt>GstBase::DataQueueItem</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointer to store the returned Gst::DataQueueItem.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if an <!-- raw HTML omitted -->item<!-- raw HTML omitted --> was successfully retrieved from the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push-instance_method">
+  
+    #<strong>push</strong>(item)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Pushes a Gst::DataQueueItem (or a structure that begins with the same fields)
+on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->. If the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is full, the call will block until space is
+available, OR the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is set to flushing state.
+MT safe.</p>
+<p>Note that this function has slightly different semantics than gst_pad_push()
+and gst_pad_push_event(): this function only takes ownership of <!-- raw HTML omitted -->item<!-- raw HTML omitted --> and
+the Gst::MiniObject contained in <!-- raw HTML omitted -->item<!-- raw HTML omitted --> if the push was successful. If false
+is returned, the caller is responsible for freeing <!-- raw HTML omitted -->item<!-- raw HTML omitted --> and its contents.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>item</span>
+      
+      
+        <span class='type'>(<tt>GstBase::DataQueueItem</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::DataQueueItem.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the <!-- raw HTML omitted -->item<!-- raw HTML omitted --> was successfully pushed on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_force-instance_method">
+  
+    #<strong>push_force</strong>(item)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Pushes a Gst::DataQueueItem (or a structure that begins with the same fields)
+on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->. It ignores if the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is full or not and forces the <!-- raw HTML omitted -->item<!-- raw HTML omitted -->
+to be pushed anyway.
+MT safe.</p>
+<p>Note that this function has slightly different semantics than gst_pad_push()
+and gst_pad_push_event(): this function only takes ownership of <!-- raw HTML omitted -->item<!-- raw HTML omitted --> and
+the Gst::MiniObject contained in <!-- raw HTML omitted -->item<!-- raw HTML omitted --> if the push was successful. If false
+is returned, the caller is responsible for freeing <!-- raw HTML omitted -->item<!-- raw HTML omitted --> and its contents.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>item</span>
+      
+      
+        <span class='type'>(<tt>GstBase::DataQueueItem</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::DataQueueItem.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the <!-- raw HTML omitted -->item<!-- raw HTML omitted --> was successfully pushed on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

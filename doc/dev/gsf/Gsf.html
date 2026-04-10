@@ -1,0 +1,6226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gsf
+  
+    &mdash; Ruby/GSF
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gsf";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (G)</a> &raquo;
+    
+    
+    <span class="title">Gsf</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gsf
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/gsf/input.rb<span class="defines">,<br />
+  lib/gsf.rb,<br /> lib/gsf/loader.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Copyright (C) 2016  Ruby-GNOME2 Project Team</p>
+<p>This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.</p>
+<p>This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.</p>
+<p>You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Gsf/ClipFormat.html" title="Gsf::ClipFormat (module)">ClipFormat</a></span>, <span class='object_link'><a href="Gsf/ClipFormatWindows.html" title="Gsf::ClipFormatWindows (module)">ClipFormatWindows</a></span>, <span class='object_link'><a href="Gsf/Error.html" title="Gsf::Error (module)">Error</a></span>, <span class='object_link'><a href="Gsf/OutputCsvQuotingMode.html" title="Gsf::OutputCsvQuotingMode (module)">OutputCsvQuotingMode</a></span>, <span class='object_link'><a href="Gsf/XMLContent.html" title="Gsf::XMLContent (module)">XMLContent</a></span>, <span class='object_link'><a href="Gsf/ZipCompressionMethod.html" title="Gsf::ZipCompressionMethod (module)">ZipCompressionMethod</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Gsf/Blob.html" title="Gsf::Blob (class)">Blob</a></span>, <span class='object_link'><a href="Gsf/ClipData.html" title="Gsf::ClipData (class)">ClipData</a></span>, <span class='object_link'><a href="Gsf/DocMetaData.html" title="Gsf::DocMetaData (class)">DocMetaData</a></span>, <span class='object_link'><a href="Gsf/DocPropVector.html" title="Gsf::DocPropVector (class)">DocPropVector</a></span>, <span class='object_link'><a href="Gsf/Infile.html" title="Gsf::Infile (class)">Infile</a></span>, <span class='object_link'><a href="Gsf/InfileMSOle.html" title="Gsf::InfileMSOle (class)">InfileMSOle</a></span>, <span class='object_link'><a href="Gsf/InfileMSVBA.html" title="Gsf::InfileMSVBA (class)">InfileMSVBA</a></span>, <span class='object_link'><a href="Gsf/InfileStdio.html" title="Gsf::InfileStdio (class)">InfileStdio</a></span>, <span class='object_link'><a href="Gsf/InfileTar.html" title="Gsf::InfileTar (class)">InfileTar</a></span>, <span class='object_link'><a href="Gsf/InfileZip.html" title="Gsf::InfileZip (class)">InfileZip</a></span>, <span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Input</a></span>, <span class='object_link'><a href="Gsf/InputGZip.html" title="Gsf::InputGZip (class)">InputGZip</a></span>, <span class='object_link'><a href="Gsf/InputGio.html" title="Gsf::InputGio (class)">InputGio</a></span>, <span class='object_link'><a href="Gsf/InputHTTP.html" title="Gsf::InputHTTP (class)">InputHTTP</a></span>, <span class='object_link'><a href="Gsf/InputMemory.html" title="Gsf::InputMemory (class)">InputMemory</a></span>, <span class='object_link'><a href="Gsf/InputProxy.html" title="Gsf::InputProxy (class)">InputProxy</a></span>, <span class='object_link'><a href="Gsf/InputStdio.html" title="Gsf::InputStdio (class)">InputStdio</a></span>, <span class='object_link'><a href="Gsf/InputTextline.html" title="Gsf::InputTextline (class)">InputTextline</a></span>, <span class='object_link'><a href="Gsf/Loader.html" title="Gsf::Loader (class)">Loader</a></span>, <span class='object_link'><a href="Gsf/ODFOut.html" title="Gsf::ODFOut (class)">ODFOut</a></span>, <span class='object_link'><a href="Gsf/Outfile.html" title="Gsf::Outfile (class)">Outfile</a></span>, <span class='object_link'><a href="Gsf/OutfileMSOle.html" title="Gsf::OutfileMSOle (class)">OutfileMSOle</a></span>, <span class='object_link'><a href="Gsf/OutfileOpenPkg.html" title="Gsf::OutfileOpenPkg (class)">OutfileOpenPkg</a></span>, <span class='object_link'><a href="Gsf/OutfileStdio.html" title="Gsf::OutfileStdio (class)">OutfileStdio</a></span>, <span class='object_link'><a href="Gsf/OutfileZip.html" title="Gsf::OutfileZip (class)">OutfileZip</a></span>, <span class='object_link'><a href="Gsf/Output.html" title="Gsf::Output (class)">Output</a></span>, <span class='object_link'><a href="Gsf/OutputBzip.html" title="Gsf::OutputBzip (class)">OutputBzip</a></span>, <span class='object_link'><a href="Gsf/OutputCsv.html" title="Gsf::OutputCsv (class)">OutputCsv</a></span>, <span class='object_link'><a href="Gsf/OutputGZip.html" title="Gsf::OutputGZip (class)">OutputGZip</a></span>, <span class='object_link'><a href="Gsf/OutputGio.html" title="Gsf::OutputGio (class)">OutputGio</a></span>, <span class='object_link'><a href="Gsf/OutputIOChannel.html" title="Gsf::OutputIOChannel (class)">OutputIOChannel</a></span>, <span class='object_link'><a href="Gsf/OutputIconv.html" title="Gsf::OutputIconv (class)">OutputIconv</a></span>, <span class='object_link'><a href="Gsf/OutputMemory.html" title="Gsf::OutputMemory (class)">OutputMemory</a></span>, <span class='object_link'><a href="Gsf/OutputStdio.html" title="Gsf::OutputStdio (class)">OutputStdio</a></span>, <span class='object_link'><a href="Gsf/SharedMemory.html" title="Gsf::SharedMemory (class)">SharedMemory</a></span>, <span class='object_link'><a href="Gsf/StructuredBlob.html" title="Gsf::StructuredBlob (class)">StructuredBlob</a></span>, <span class='object_link'><a href="Gsf/XMLOut.html" title="Gsf::XMLOut (class)">XMLOut</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="META_NAME_BYTE_COUNT-constant" class="">META_NAME_BYTE_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of bytes in the document.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:byte</span><span class='op'>-</span><span class='id identifier rubyid_count'>count</span></pre></dd>
+      
+        <dt id="META_NAME_CASE_SENSITIVE-constant" class="">META_NAME_CASE_SENSITIVE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Unsigned Integer) Identifier representing the case-sensitiveness.
+<!-- raw HTML omitted -->of what ?? why is it an integer ??<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:case</span><span class='op'>-</span><span class='id identifier rubyid_sensitivity'>sensitivity</span></pre></dd>
+      
+        <dt id="META_NAME_CATEGORY-constant" class="">META_NAME_CATEGORY =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(String) Category of the document. <!-- raw HTML omitted -->example???<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:category</span></pre></dd>
+      
+        <dt id="META_NAME_CELL_COUNT-constant" class="">META_NAME_CELL_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of cells in the spread-sheet document, if appropriate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:cell</span><span class='op'>-</span><span class='id identifier rubyid_count'>count</span></pre></dd>
+      
+        <dt id="META_NAME_CHARACTER_COUNT-constant" class="">META_NAME_CHARACTER_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of characters in the document.</p>
+<p>TODO See how to sync this with ODF's document-statistic</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:character</span><span class='op'>-</span><span class='id identifier rubyid_count'>count</span></pre></dd>
+      
+        <dt id="META_NAME_CODEPAGE-constant" class="">META_NAME_CODEPAGE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(UnsignedShort) The MS codepage to encode strings for metadata
+1.14.0	Clarified that this is unique from _NAME_CODEPAGE in msole</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_msole'>msole</span><span class='symbol'>:codepage</span></pre></dd>
+      
+        <dt id="META_NAME_COMPANY-constant" class="">META_NAME_COMPANY =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(String) Name of the company/organization that the &quot;CREATOR&quot; entity is
+associated with.</p>
+<p>1.14.1	Moved from &quot;gsf:company&quot; to &quot;dc:publisher&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_dc'>dc</span><span class='symbol'>:publisher</span></pre></dd>
+      
+        <dt id="META_NAME_CREATOR-constant" class="">META_NAME_CREATOR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(String) An entity primarily responsible for making the content of the
+resource typically a person, organization, or service.</p>
+<p>1.14.0	Moved from &quot;gsf&quot; to &quot;dc&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_dc'>dc</span><span class='symbol'>:creator</span></pre></dd>
+      
+        <dt id="META_NAME_DATE_CREATED-constant" class="">META_NAME_DATE_CREATED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Date as ISO String) A date associated with an event in the life cycle of
+the resource (creation/publication date).
+Moved from gsf:date-created to meta:creation-date. This way can be used correctly
+by OpenDocument and Gnumeric.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_meta'>meta</span><span class='symbol'>:creation</span><span class='op'>-</span><span class='id identifier rubyid_date'>date</span></pre></dd>
+      
+        <dt id="META_NAME_DATE_MODIFIED-constant" class="">META_NAME_DATE_MODIFIED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(GsfTimestamp) The last time this document was saved.</p>
+<p>1.14.0	Moved from dc:date-modified to dc:date.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_dc'>dc</span><span class='symbol'>:date</span></pre></dd>
+      
+        <dt id="META_NAME_DESCRIPTION-constant" class="">META_NAME_DESCRIPTION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(String) An account of the content of the resource.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_dc'>dc</span><span class='symbol'>:description</span></pre></dd>
+      
+        <dt id="META_NAME_DICTIONARY-constant" class="">META_NAME_DICTIONARY =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(None) Reserved name (PID) for Dictionary</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:dictionary</span></pre></dd>
+      
+        <dt id="META_NAME_DOCUMENT_PARTS-constant" class="">META_NAME_DOCUMENT_PARTS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Vector of strings) Names of the 'interesting' parts of the document.  In
+spreadsheets this is a list of the sheet names, and the named expressions.
+From MSOLE</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:document</span><span class='op'>-</span><span class='id identifier rubyid_parts'>parts</span></pre></dd>
+      
+        <dt id="META_NAME_EDITING_DURATION-constant" class="">META_NAME_EDITING_DURATION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Date as ISO String) The total-time taken until the last modification.
+Moved from &quot;gsf&quot; to &quot;meta&quot;. This way can be used correctly by OpenDocument
+and Gnumeric.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_meta'>meta</span><span class='symbol'>:editing</span><span class='op'>-</span><span class='id identifier rubyid_duration'>duration</span></pre></dd>
+      
+        <dt id="META_NAME_GENERATOR-constant" class="">META_NAME_GENERATOR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(String) The application that generated this document. AbiWord, Gnumeric,
+etc...</p>
+<p>1.14.0 Moved from &quot;gsf&quot; to &quot;meta&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_meta'>meta</span><span class='symbol'>:generator</span></pre></dd>
+      
+        <dt id="META_NAME_HEADING_PAIRS-constant" class="">META_NAME_HEADING_PAIRS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Vector of string value pairs stored in alternating elements) Store the
+counts of objects in the document as names 'worksheet' and count '4'
+From MSOLE</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:heading</span><span class='op'>-</span><span class='id identifier rubyid_pairs'>pairs</span></pre></dd>
+      
+        <dt id="META_NAME_HIDDEN_SLIDE_COUNT-constant" class="">META_NAME_HIDDEN_SLIDE_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of hidden-slides in the presentation document.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:hidden</span><span class='op'>-</span><span class='id identifier rubyid_slide'>slide</span><span class='op'>-</span><span class='id identifier rubyid_count'>count</span></pre></dd>
+      
+        <dt id="META_NAME_IMAGE_COUNT-constant" class="">META_NAME_IMAGE_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of images in the document, if appropriate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:image</span><span class='op'>-</span><span class='id identifier rubyid_count'>count</span></pre></dd>
+      
+        <dt id="META_NAME_INITIAL_CREATOR-constant" class="">META_NAME_INITIAL_CREATOR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(String) Specifies the name of the person who created the document
+initially.
+1.14.0 Moved from &quot;gsf&quot; to &quot;meta&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_meta'>meta</span><span class='symbol'>:initial</span><span class='op'>-</span><span class='id identifier rubyid_creator'>creator</span></pre></dd>
+      
+        <dt id="META_NAME_KEYWORD-constant" class="">META_NAME_KEYWORD =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(String) Searchable, indexable keywords. Similar to PDF keywords or HTML's
+meta block.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_meta'>meta</span><span class='symbol'>:keyword</span></pre></dd>
+      
+        <dt id="META_NAME_KEYWORDS-constant" class="">META_NAME_KEYWORDS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(GsfDocPropVector of String) Searchable, indexable keywords. Similar to PDF
+keywords or HTML's meta block.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_dc'>dc</span><span class='symbol'>:keywords</span></pre></dd>
+      
+        <dt id="META_NAME_LANGUAGE-constant" class="">META_NAME_LANGUAGE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(String) The locale language of the intellectual content of the resource
+(basically xx_YY form for us).
+1.14.0	Clarified that this is unique from _NAME_CODEPAGE in msole</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_dc'>dc</span><span class='symbol'>:language</span></pre></dd>
+      
+        <dt id="META_NAME_LAST_PRINTED-constant" class="">META_NAME_LAST_PRINTED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(GSF_META_NAME_HEADING_PAIRS) The last time this document was printed.</p>
+<p>1.14.0	Moved from &quot;gsf&quot; to &quot;dc&quot;.
+1.14.1	Moved back to &quot;gsf&quot; from &quot;dc&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:last</span><span class='op'>-</span><span class='id identifier rubyid_printed'>printed</span></pre></dd>
+      
+        <dt id="META_NAME_LAST_SAVED_BY-constant" class="">META_NAME_LAST_SAVED_BY =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(String) The entity that made the last change to the document, typically a
+person, organization, or service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:last</span><span class='op'>-</span><span class='id identifier rubyid_saved'>saved</span><span class='op'>-</span><span class='id identifier rubyid_by'>by</span></pre></dd>
+      
+        <dt id="META_NAME_LINE_COUNT-constant" class="">META_NAME_LINE_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of liness in the document.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:line</span><span class='op'>-</span><span class='id identifier rubyid_count'>count</span></pre></dd>
+      
+        <dt id="META_NAME_LINKS_DIRTY-constant" class="">META_NAME_LINKS_DIRTY =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Boolean) ???????</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:links</span><span class='op'>-</span><span class='id identifier rubyid_dirty'>dirty</span></pre></dd>
+      
+        <dt id="META_NAME_LOCALE_SYSTEM_DEFAULT-constant" class="">META_NAME_LOCALE_SYSTEM_DEFAULT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Unsigned Integer) Identifier representing the default system locale.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:default</span><span class='op'>-</span><span class='id identifier rubyid_locale'>locale</span></pre></dd>
+      
+        <dt id="META_NAME_MANAGER-constant" class="">META_NAME_MANAGER =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(String) Name of the manager of &quot;CREATOR&quot; entity.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:manager</span></pre></dd>
+      
+        <dt id="META_NAME_MM_CLIP_COUNT-constant" class="">META_NAME_MM_CLIP_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of &quot;multi-media&quot; clips in the document.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:MM</span><span class='op'>-</span><span class='id identifier rubyid_clip'>clip</span><span class='op'>-</span><span class='id identifier rubyid_count'>count</span></pre></dd>
+      
+        <dt id="META_NAME_MSOLE_UNKNOWN_17-constant" class="">META_NAME_MSOLE_UNKNOWN_17 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Unknown) User-defined name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_msole'>msole</span><span class='symbol'>:unknown</span><span class='op'>-</span><span class='id identifier rubyid_doc'>doc</span><span class='op'>-</span><span class='int'>17</span></pre></dd>
+      
+        <dt id="META_NAME_MSOLE_UNKNOWN_18-constant" class="">META_NAME_MSOLE_UNKNOWN_18 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Unknown) User-defined name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_msole'>msole</span><span class='symbol'>:unknown</span><span class='op'>-</span><span class='id identifier rubyid_doc'>doc</span><span class='op'>-</span><span class='int'>18</span></pre></dd>
+      
+        <dt id="META_NAME_MSOLE_UNKNOWN_19-constant" class="">META_NAME_MSOLE_UNKNOWN_19 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Boolean) User-defined name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_msole'>msole</span><span class='symbol'>:unknown</span><span class='op'>-</span><span class='id identifier rubyid_doc'>doc</span><span class='op'>-</span><span class='int'>19</span></pre></dd>
+      
+        <dt id="META_NAME_MSOLE_UNKNOWN_20-constant" class="">META_NAME_MSOLE_UNKNOWN_20 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Unknown) User-defined name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_msole'>msole</span><span class='symbol'>:unknown</span><span class='op'>-</span><span class='id identifier rubyid_doc'>doc</span><span class='op'>-</span><span class='int'>20</span></pre></dd>
+      
+        <dt id="META_NAME_MSOLE_UNKNOWN_21-constant" class="">META_NAME_MSOLE_UNKNOWN_21 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Unknown) User-defined name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_msole'>msole</span><span class='symbol'>:unknown</span><span class='op'>-</span><span class='id identifier rubyid_doc'>doc</span><span class='op'>-</span><span class='int'>21</span></pre></dd>
+      
+        <dt id="META_NAME_MSOLE_UNKNOWN_22-constant" class="">META_NAME_MSOLE_UNKNOWN_22 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Boolean) User-defined name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_msole'>msole</span><span class='symbol'>:unknown</span><span class='op'>-</span><span class='id identifier rubyid_doc'>doc</span><span class='op'>-</span><span class='int'>22</span></pre></dd>
+      
+        <dt id="META_NAME_MSOLE_UNKNOWN_23-constant" class="">META_NAME_MSOLE_UNKNOWN_23 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(i4) User-defined name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_msole'>msole</span><span class='symbol'>:unknown</span><span class='op'>-</span><span class='id identifier rubyid_doc'>doc</span><span class='op'>-</span><span class='int'>23</span></pre></dd>
+      
+        <dt id="META_NAME_NOTE_COUNT-constant" class="">META_NAME_NOTE_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of &quot;notes&quot; in the document.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:note</span><span class='op'>-</span><span class='id identifier rubyid_count'>count</span></pre></dd>
+      
+        <dt id="META_NAME_OBJECT_COUNT-constant" class="">META_NAME_OBJECT_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of objects (OLE and other graphics) in the document, if
+appropriate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:object</span><span class='op'>-</span><span class='id identifier rubyid_count'>count</span></pre></dd>
+      
+        <dt id="META_NAME_PAGE_COUNT-constant" class="">META_NAME_PAGE_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of pages in the document, if appropriate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:page</span><span class='op'>-</span><span class='id identifier rubyid_count'>count</span></pre></dd>
+      
+        <dt id="META_NAME_PARAGRAPH_COUNT-constant" class="">META_NAME_PARAGRAPH_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of paragraphs in the document, if appropriate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:paragraph</span><span class='op'>-</span><span class='id identifier rubyid_count'>count</span></pre></dd>
+      
+        <dt id="META_NAME_PRESENTATION_FORMAT-constant" class="">META_NAME_PRESENTATION_FORMAT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(String) Type of presentation, like &quot;On-screen Show&quot;, &quot;SlideView&quot; etc.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:presentation</span><span class='op'>-</span><span class='id identifier rubyid_format'>format</span></pre></dd>
+      
+        <dt id="META_NAME_PRINTED_BY-constant" class="">META_NAME_PRINTED_BY =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(String) Specifies the name of the last person who printed the document.</p>
+<p>1.14.0	Moved from &quot;gsf&quot; to &quot;meta&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_meta'>meta</span><span class='symbol'>:printed</span><span class='op'>-</span><span class='id identifier rubyid_by'>by</span></pre></dd>
+      
+        <dt id="META_NAME_PRINT_DATE-constant" class="">META_NAME_PRINT_DATE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(GsfTimestamp) Specifies the date and time when the document was last
+printed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_meta'>meta</span><span class='symbol'>:print</span><span class='op'>-</span><span class='id identifier rubyid_date'>date</span></pre></dd>
+      
+        <dt id="META_NAME_REVISION_COUNT-constant" class="">META_NAME_REVISION_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of revision on the document, if appropriate.
+Moved from gsf:revision-count to meta:editing-cycles. This way can be used
+correctly by OpenDocument and Gnumeric.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_meta'>meta</span><span class='symbol'>:editing</span><span class='op'>-</span><span class='id identifier rubyid_cycles'>cycles</span></pre></dd>
+      
+        <dt id="META_NAME_SCALE-constant" class="">META_NAME_SCALE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Boolean) ?????</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:scale</span></pre></dd>
+      
+        <dt id="META_NAME_SECURITY-constant" class="">META_NAME_SECURITY =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Level of security.</p>
+<!-- raw HTML omitted -->
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:security</span></pre></dd>
+      
+        <dt id="META_NAME_SLIDE_COUNT-constant" class="">META_NAME_SLIDE_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of slides in the presentation document.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:slide</span><span class='op'>-</span><span class='id identifier rubyid_count'>count</span></pre></dd>
+      
+        <dt id="META_NAME_SPREADSHEET_COUNT-constant" class="">META_NAME_SPREADSHEET_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of pages in the document, if appropriate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:spreadsheet</span><span class='op'>-</span><span class='id identifier rubyid_count'>count</span></pre></dd>
+      
+        <dt id="META_NAME_SUBJECT-constant" class="">META_NAME_SUBJECT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(String) The topic of the content of the resource,
+<!-- raw HTML omitted -->typically<!-- raw HTML omitted --> including keywords.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_dc'>dc</span><span class='symbol'>:subject</span></pre></dd>
+      
+        <dt id="META_NAME_TABLE_COUNT-constant" class="">META_NAME_TABLE_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of tables in the document, if appropriate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:table</span><span class='op'>-</span><span class='id identifier rubyid_count'>count</span></pre></dd>
+      
+        <dt id="META_NAME_TEMPLATE-constant" class="">META_NAME_TEMPLATE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(String) The template file that is been used to generate this document.</p>
+<p>1.14.0 Moved from &quot;gsf&quot; to &quot;meta&quot;</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_meta'>meta</span><span class='symbol'>:template</span></pre></dd>
+      
+        <dt id="META_NAME_THUMBNAIL-constant" class="">META_NAME_THUMBNAIL =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(GsfClipData) Thumbnail data of the document, typically a
+preview image of the document.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:thumbnail</span></pre></dd>
+      
+        <dt id="META_NAME_TITLE-constant" class="">META_NAME_TITLE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(String) A formal name given to the resource.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_dc'>dc</span><span class='symbol'>:title</span></pre></dd>
+      
+        <dt id="META_NAME_WORD_COUNT-constant" class="">META_NAME_WORD_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>(Integer) Count of words in the document.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_gsf'>gsf</span><span class='symbol'>:word</span><span class='op'>-</span><span class='id identifier rubyid_count'>count</span></pre></dd>
+      
+        <dt id="LOG_DOMAIN-constant" class="">LOG_DOMAIN =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Gsf</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#const_missing-class_method" title="const_missing (class method)">.<strong>const_missing</strong>(name)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#init-class_method" title="init (class method)">.<strong>init</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#base64_decode_simple-instance_method" title="#base64_decode_simple (instance method)">#<strong>base64_decode_simple</strong>(data, len)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Decodes a chunk of base64 encoded data from <!-- raw HTML omitted -->data<!-- raw HTML omitted --> back into <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#base64_decode_step-instance_method" title="#base64_decode_step (instance method)">#<strong>base64_decode_step</strong>(in, len, out, state, save)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Decodes a chunk of base64 encoded data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#base64_encode_close-instance_method" title="#base64_encode_close (instance method)">#<strong>base64_encode_close</strong>(in, inlen, break_lines, out, state, save)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This funcion should be called to when finished encoding everything, to flush off the last little bit.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#base64_encode_simple-instance_method" title="#base64_encode_simple (instance method)">#<strong>base64_encode_simple</strong>(data, len)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Encodes data from <!-- raw HTML omitted -->data<!-- raw HTML omitted --> back into <!-- raw HTML omitted -->data<!-- raw HTML omitted --> using base64 encoding.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#base64_encode_step-instance_method" title="#base64_encode_step (instance method)">#<strong>base64_encode_step</strong>(in, len, break_lines, out, state, save)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Performs an 'encode step', only encodes blocks of 3 characters from <!-- raw HTML omitted -->in<!-- raw HTML omitted --> into the output <!-- raw HTML omitted -->out<!-- raw HTML omitted --> at a time, saves left-over state in <!-- raw HTML omitted -->state<!-- raw HTML omitted --> and <!-- raw HTML omitted -->save<!-- raw HTML omitted --> (initialise to 0 on first invocation).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#debug_flag-instance_method" title="#debug_flag (instance method)">#<strong>debug_flag</strong>(flag)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#doc_meta_dump-instance_method" title="#doc_meta_dump (instance method)">#<strong>doc_meta_dump</strong>(meta)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A debugging utility to dump the content of <!-- raw HTML omitted -->meta<!-- raw HTML omitted --> via g_print.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#error_quark-instance_method" title="#error_quark (instance method)">#<strong>error_quark</strong>  &#x21d2; GLib::Quark </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The #GQuark used to identify libgsf errors in #GError structures.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#extension_pointer-instance_method" title="#extension_pointer (instance method)">#<strong>extension_pointer</strong>(path)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Extracts the extension from the end of a filename (the part after the final '.' in the filename).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#filename_to_utf8-instance_method" title="#filename_to_utf8 (instance method)">#<strong>filename_to_utf8</strong>(filename, quoted)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A utility wrapper to make sure filenames are valid utf8.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iconv_close-instance_method" title="#iconv_close (instance method)">#<strong>iconv_close</strong>(handle)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A utility wrapper to safely close an iconv handle.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#init-instance_method" title="#init (instance method)">#<strong>init</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Initializes the GSF library.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#init_dynamic-instance_method" title="#init_dynamic (instance method)">#<strong>init_dynamic</strong>(module)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Initializes the GSF library and associates it with a type module <!-- raw HTML omitted -->mod<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#le_get_double-instance_method" title="#le_get_double (instance method)">#<strong>le_get_double</strong>(p)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Interpret binary data as a double in little endian order.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#le_get_float-instance_method" title="#le_get_float (instance method)">#<strong>le_get_float</strong>(p)  &#x21d2; Gsf::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Interpret binary data as a float in little endian order.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#le_get_guint64-instance_method" title="#le_get_guint64 (instance method)">#<strong>le_get_guint64</strong>(p)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Interpret binary data as a guint64 (8 byte unsigned integer type) in little endian order.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#le_set_double-instance_method" title="#le_set_double (instance method)">#<strong>le_set_double</strong>(p, d)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Store a value of type double in memory in little endian order.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#le_set_float-instance_method" title="#le_set_float (instance method)">#<strong>le_set_float</strong>(p, f)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Store a value of type float in memory in little endian order.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mem_dump-instance_method" title="#mem_dump (instance method)">#<strong>mem_dump</strong>(ptr, len)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Dump <!-- raw HTML omitted -->len<!-- raw HTML omitted --> bytes from the memory location given by <!-- raw HTML omitted -->ptr<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#msole_codepage_to_lid-instance_method" title="#msole_codepage_to_lid (instance method)">#<strong>msole_codepage_to_lid</strong>(codepage)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#msole_iconv_open_codepage_for_export-instance_method" title="#msole_iconv_open_codepage_for_export (instance method)">#<strong>msole_iconv_open_codepage_for_export</strong>(codepage_to)  &#x21d2; GLib::IConv </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>NOTE: skipped since GIConv is not exported to introspection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#msole_iconv_open_codepage_for_import-instance_method" title="#msole_iconv_open_codepage_for_import (instance method)">#<strong>msole_iconv_open_codepage_for_import</strong>(to, codepage)  &#x21d2; GLib::IConv </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>NOTE: skipped since GIConv is not exported to introspection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#msole_iconv_open_codepages_for_export-instance_method" title="#msole_iconv_open_codepages_for_export (instance method)">#<strong>msole_iconv_open_codepages_for_export</strong>(codepage_to, from)  &#x21d2; GLib::IConv </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>NOTE: skipped since GIConv is not exported to introspection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#msole_iconv_open_for_export-instance_method" title="#msole_iconv_open_for_export (instance method)">#<strong>msole_iconv_open_for_export</strong>  &#x21d2; GLib::IConv </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>NOTE: skipped since GIConv is not exported to introspection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#msole_iconv_open_for_import-instance_method" title="#msole_iconv_open_for_import (instance method)">#<strong>msole_iconv_open_for_import</strong>(codepage)  &#x21d2; GLib::IConv </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>NOTE: skipped since GIConv is not exported to introspection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#msole_iconv_win_codepage-instance_method" title="#msole_iconv_win_codepage (instance method)">#<strong>msole_iconv_win_codepage</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Our best guess at the applicable windows code page based on an environment variable or the current locale.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#msole_inflate-instance_method" title="#msole_inflate (instance method)">#<strong>msole_inflate</strong>(input, offset)  &#x21d2; Array&lt;Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Decompresses an LZ compressed stream.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#msole_language_for_lid-instance_method" title="#msole_language_for_lid (instance method)">#<strong>msole_language_for_lid</strong>(lid)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>xxx) for the given LID.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#msole_lid_for_language-instance_method" title="#msole_lid_for_language (instance method)">#<strong>msole_lid_for_language</strong>(lang)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The LID (Language Identifier) for the input language.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#msole_lid_to_codepage-instance_method" title="#msole_lid_to_codepage (instance method)">#<strong>msole_lid_to_codepage</strong>(lid)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Our best guess at the codepage for the given language id.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#msole_lid_to_codepage_str-instance_method" title="#msole_lid_to_codepage_str (instance method)">#<strong>msole_lid_to_codepage_str</strong>(lid)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>LID.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#odf_get_ns-instance_method" title="#odf_get_ns (instance method)">#<strong>odf_get_ns</strong>  &#x21d2; Gsf::XMLInNS </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The used ODF namespace.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#odf_get_version-instance_method" title="#odf_get_version (instance method)">#<strong>odf_get_version</strong>  &#x21d2; Gsf::gshort </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gives the ODF version used by libgsf when writing Open Document files.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#odf_get_version_string-instance_method" title="#odf_get_version_string (instance method)">#<strong>odf_get_version_string</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gives the ODF version used by libgsf when writing Open Document files.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open_pkg_error_id-instance_method" title="#open_pkg_error_id (instance method)">#<strong>open_pkg_error_id</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open_pkg_foreach_rel-instance_method" title="#open_pkg_foreach_rel (instance method)">#<strong>open_pkg_foreach_rel</strong>(opkg, func, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>New in 1.14.9.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open_pkg_lookup_rel_by_id-instance_method" title="#open_pkg_lookup_rel_by_id (instance method)">#<strong>open_pkg_lookup_rel_by_id</strong>(opkg, id)  &#x21d2; Gsf::OpenPkgRel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>New in 1.14.6.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open_pkg_lookup_rel_by_type-instance_method" title="#open_pkg_lookup_rel_by_type (instance method)">#<strong>open_pkg_lookup_rel_by_type</strong>(opkg, type)  &#x21d2; Gsf::OpenPkgRel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>New in 1.14.6.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open_pkg_open_rel-instance_method" title="#open_pkg_open_rel (instance method)">#<strong>open_pkg_open_rel</strong>(opkg, rel)  &#x21d2; Gsf::Input </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A new Gsf::Input which the called needs to unref, or nil and sets <!-- raw HTML omitted -->err<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open_pkg_open_rel_by_id-instance_method" title="#open_pkg_open_rel_by_id (instance method)">#<strong>open_pkg_open_rel_by_id</strong>(opkg, id)  &#x21d2; Gsf::Input </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>New in 1.14.7.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open_pkg_open_rel_by_type-instance_method" title="#open_pkg_open_rel_by_type (instance method)">#<strong>open_pkg_open_rel_by_type</strong>(opkg, type)  &#x21d2; Gsf::Input </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>New in 1.14.9.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open_pkg_parse_rel_by_id-instance_method" title="#open_pkg_parse_rel_by_id (instance method)">#<strong>open_pkg_parse_rel_by_id</strong>(xin, id, dtd, ns)  &#x21d2; GLib::Error </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Convenience function to parse a related part.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#property_settings_collect-instance_method" title="#property_settings_collect (instance method)">#<strong>property_settings_collect</strong>(object_type, p_params, p_n_params, first_property_name, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#property_settings_collect_valist-instance_method" title="#property_settings_collect_valist (instance method)">#<strong>property_settings_collect_valist</strong>(object_type, p_params, p_n_params, first_property_name, var_args)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This function builds a GParameter array suitable for g_object_newv.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#property_settings_find-instance_method" title="#property_settings_find (instance method)">#<strong>property_settings_find</strong>(name, params, n_params)  &#x21d2; GObject::Parameter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#property_settings_free-instance_method" title="#property_settings_free (instance method)">#<strong>property_settings_free</strong>(params, n_params)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shutdown-instance_method" title="#shutdown (instance method)">#<strong>shutdown</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>De-intializes the GSF library Currently does nothing.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shutdown_dynamic-instance_method" title="#shutdown_dynamic (instance method)">#<strong>shutdown_dynamic</strong>(module)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>De-intializes the GSF library from a type module.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value_get_docprop_array-instance_method" title="#value_get_docprop_array (instance method)">#<strong>value_get_docprop_array</strong>(value)  &#x21d2; Array&lt;GObject::Value&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This function returns the array of values inside Gsf::DocPropVector.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value_get_docprop_varray-instance_method" title="#value_get_docprop_varray (instance method)">#<strong>value_get_docprop_varray</strong>(value)  &#x21d2; GObject::ValueArray </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value_get_docprop_vector-instance_method" title="#value_get_docprop_vector (instance method)">#<strong>value_get_docprop_vector</strong>(value)  &#x21d2; Gsf::DocPropVector </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This function returns a pointer to the GsfDocPropVector structure in <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vba_inflate-instance_method" title="#vba_inflate (instance method)">#<strong>vba_inflate</strong>(input, offset, size, add_null_terminator)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Decompresses VBA stream.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xml_gvalue_from_str-instance_method" title="#xml_gvalue_from_str (instance method)">#<strong>xml_gvalue_from_str</strong>(res, t, str)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Try to parse <!-- raw HTML omitted -->str<!-- raw HTML omitted --> as a value of type <!-- raw HTML omitted -->t<!-- raw HTML omitted --> into <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xml_parser_context-instance_method" title="#xml_parser_context (instance method)">#<strong>xml_parser_context</strong>(input)  &#x21d2; Gsf:: </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a libxml2 pull style parser context wrapper around gsf input <!-- raw HTML omitted -->input<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xml_probe-instance_method" title="#xml_probe (instance method)">#<strong>xml_probe</strong>(input, func)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>TRUE on success.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xmlDocFormatDump-instance_method" title="#xmlDocFormatDump (instance method)">#<strong>xmlDocFormatDump</strong>(output, cur, encoding, format)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Dumps the document <!-- raw HTML omitted -->cur<!-- raw HTML omitted --> into <!-- raw HTML omitted -->output<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="const_missing-class_method">
+  
+    .<strong>const_missing</strong>(name)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26
+27
+28
+29
+30
+31
+32
+33</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gsf.rb', line 26</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_const_missing'>const_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_init'>init</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_const_defined?'>const_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_const_get'>const_get</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='kw'>super</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="init-class_method">
+  
+    .<strong>init</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gsf.rb', line 35</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_init'>init</span>
+  <span class='kw'>class</span> <span class='op'>&lt;&lt;</span> <span class='kw'>self</span>
+    <span class='id identifier rubyid_remove_method'>remove_method</span><span class='lparen'>(</span><span class='symbol'>:init</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_remove_method'>remove_method</span><span class='lparen'>(</span><span class='symbol'>:const_missing</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='const'>Gio</span><span class='period'>.</span><span class='id identifier rubyid_init'>init</span> <span class='kw'>if</span> <span class='const'>Gio</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:init</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_loader'>loader</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Gsf/Loader.html" title="Gsf::Loader (class)">Loader</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_loader'>loader</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Gsf</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="base64_decode_simple-instance_method">
+  
+    #<strong>base64_decode_simple</strong>(data, len)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Decodes a chunk of base64 encoded data from <!-- raw HTML omitted -->data<!-- raw HTML omitted --> back into <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>data stream</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max length of data to decode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of bytes converted</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="base64_decode_step-instance_method">
+  
+    #<strong>base64_decode_step</strong>(in, len, out, state, save)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Decodes a chunk of base64 encoded data</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>in</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>input stream</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max length of data to decode</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>output stream</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>holds the number of bits that are stored in <!-- raw HTML omitted -->save<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>save</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>leftover bits that have not yet been decoded</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of bytes converted</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="base64_encode_close-instance_method">
+  
+    #<strong>base64_encode_close</strong>(in, inlen, break_lines, out, state, save)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This funcion should be called to when finished encoding everything, to
+flush off the last little bit.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>in</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Data to be encoded</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>inlen</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Length of data to be encoded</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>break_lines</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to use line breaks</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Encoded data.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>holds the number of bits that are stored in <!-- raw HTML omitted -->save<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>save</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>leftover bits that have not yet been decoded</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a count of the number of bytes in the final block.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="base64_encode_simple-instance_method">
+  
+    #<strong>base64_encode_simple</strong>(data, len)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Encodes data from <!-- raw HTML omitted -->data<!-- raw HTML omitted --> back into <!-- raw HTML omitted -->data<!-- raw HTML omitted --> using base64 encoding.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>data stream</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max length of data to encode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of bytes encoded</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="base64_encode_step-instance_method">
+  
+    #<strong>base64_encode_step</strong>(in, len, break_lines, out, state, save)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Performs an 'encode step', only encodes blocks of 3 characters from <!-- raw HTML omitted -->in<!-- raw HTML omitted --> into
+the output <!-- raw HTML omitted -->out<!-- raw HTML omitted --> at a time, saves left-over state in <!-- raw HTML omitted -->state<!-- raw HTML omitted --> and <!-- raw HTML omitted -->save<!-- raw HTML omitted -->
+(initialise to 0 on first invocation).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>in</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>input stream</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max length of data to decode</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>break_lines</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to use line breaks</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>out</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>output stream</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>holds the number of bits that are stored in <!-- raw HTML omitted -->save<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>save</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>leftover bits that have not yet been decoded</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of bytes encoded</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="debug_flag-instance_method">
+  
+    #<strong>debug_flag</strong>(flag)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flag</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="doc_meta_dump-instance_method">
+  
+    #<strong>doc_meta_dump</strong>(meta)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A debugging utility to dump the content of <!-- raw HTML omitted -->meta<!-- raw HTML omitted --> via g_print</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>meta</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/DocMetaData.html" title="Gsf::DocMetaData (class)">Gsf::DocMetaData</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::DocMetaData</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="error_quark-instance_method">
+  
+    #<strong>error_quark</strong>  &#x21d2; <tt>GLib::Quark</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the #GQuark used to identify libgsf errors in #GError structures.
+Specific error codes come from the Gsf::Error enumeration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Quark</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the #GQuark used to identify libgsf errors in #GError structures.
+Specific error codes come from the Gsf::Error enumeration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="extension_pointer-instance_method">
+  
+    #<strong>extension_pointer</strong>(path)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Extracts the extension from the end of a filename (the part after the final
+'.' in the filename).
+filename, or a pointer to the end of the string if the filename
+does not have an extension.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A filename or file path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A pointer to the extension part of the</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="filename_to_utf8-instance_method">
+  
+    #<strong>filename_to_utf8</strong>(filename, quoted)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A utility wrapper to make sure filenames are valid utf8.
+Caller must g_free the result.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filename</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>file name suitable for open(2).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>quoted</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if true, the resulting utf8 file name will be quoted
+(unless it is invalid).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><!-- raw HTML omitted -->filename<!-- raw HTML omitted --> using utf-8 encoding for display</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iconv_close-instance_method">
+  
+    #<strong>iconv_close</strong>(handle)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A utility wrapper to safely close an iconv handle.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>handle</span>
+      
+      
+        <span class='type'>(<tt>GLib::IConv</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>handle to be closed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="init-instance_method">
+  
+    #<strong>init</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Initializes the GSF library</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="init_dynamic-instance_method">
+  
+    #<strong>init_dynamic</strong>(module)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Initializes the GSF library and associates it with a type module <!-- raw HTML omitted -->mod<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>module</span>
+      
+      
+        <span class='type'>(<tt>GObject::TypeModule</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>GType::Module.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="le_get_double-instance_method">
+  
+    #<strong>le_get_double</strong>(p)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Interpret binary data as a double in little endian order.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>p</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointer to storage</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>interpreted data</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="le_get_float-instance_method">
+  
+    #<strong>le_get_float</strong>(p)  &#x21d2; <tt>Gsf::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Interpret binary data as a float in little endian order.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>p</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointer to storage</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gsf::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>interpreted data</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="le_get_guint64-instance_method">
+  
+    #<strong>le_get_guint64</strong>(p)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Interpret binary data as a guint64 (8 byte unsigned integer type) in little
+endian order.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>p</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointer to storage</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>interpreted data</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="le_set_double-instance_method">
+  
+    #<strong>le_set_double</strong>(p, d)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Store a value of type double in memory in little endian order</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>p</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointer to storage</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>d</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>double to be stored</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="le_set_float-instance_method">
+  
+    #<strong>le_set_float</strong>(p, f)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Store a value of type float in memory in little endian order.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>p</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointer to storage</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>f</span>
+      
+      
+        <span class='type'>(<tt>Gsf::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>float to be stored</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mem_dump-instance_method">
+  
+    #<strong>mem_dump</strong>(ptr, len)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Dump <!-- raw HTML omitted -->len<!-- raw HTML omitted --> bytes from the memory location given by <!-- raw HTML omitted -->ptr<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ptr</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>memory area to be dumped.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>how many bytes will be dumped.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="msole_codepage_to_lid-instance_method">
+  
+    #<strong>msole_codepage_to_lid</strong>(codepage)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>codepage</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="msole_iconv_open_codepage_for_export-instance_method">
+  
+    #<strong>msole_iconv_open_codepage_for_export</strong>(codepage_to)  &#x21d2; <tt>GLib::IConv</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>NOTE: skipped since GIConv is not exported to introspection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>codepage_to</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the target code page.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::IConv</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an iconv converter to go from utf8 -&gt; to our best guess at a useful
+windows codepage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="msole_iconv_open_codepage_for_import-instance_method">
+  
+    #<strong>msole_iconv_open_codepage_for_import</strong>(to, codepage)  &#x21d2; <tt>GLib::IConv</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>NOTE: skipped since GIConv is not exported to introspection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>to</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the target encoding.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>codepage</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the source code page.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::IConv</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an iconv converter for <!-- raw HTML omitted -->codepage<!-- raw HTML omitted --> -&gt; utf8.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="msole_iconv_open_codepages_for_export-instance_method">
+  
+    #<strong>msole_iconv_open_codepages_for_export</strong>(codepage_to, from)  &#x21d2; <tt>GLib::IConv</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>NOTE: skipped since GIConv is not exported to introspection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>codepage_to</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the target code page.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>from</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the source encoding.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::IConv</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an iconv converter to go from utf8 -&gt; to our best guess at a useful
+windows codepage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="msole_iconv_open_for_export-instance_method">
+  
+    #<strong>msole_iconv_open_for_export</strong>  &#x21d2; <tt>GLib::IConv</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>NOTE: skipped since GIConv is not exported to introspection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::IConv</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an iconv convert to go from utf8 -&gt; to our best guess at a useful
+windows codepage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="msole_iconv_open_for_import-instance_method">
+  
+    #<strong>msole_iconv_open_for_import</strong>(codepage)  &#x21d2; <tt>GLib::IConv</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>NOTE: skipped since GIConv is not exported to introspection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>codepage</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the source code page.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::IConv</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an iconv converter for single byte encodings <!-- raw HTML omitted -->codepage<!-- raw HTML omitted --> -&gt; utf8.
+Attempt to handle the semantics of a specification for multibyte encodings
+since this is only supposed to be used for single bytes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="msole_iconv_win_codepage-instance_method">
+  
+    #<strong>msole_iconv_win_codepage</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns our best guess at the applicable windows code page based on an
+environment variable or the current locale.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>our best guess at the applicable windows code page based on an
+environment variable or the current locale.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="msole_inflate-instance_method">
+  
+    #<strong>msole_inflate</strong>(input, offset)  &#x21d2; <tt>Array&lt;Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Decompresses an LZ compressed stream.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>input</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>stream to read from</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Gsf::gsf_off_t</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>offset into it for start byte of compresse stream</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A GByteArray that the caller is responsible for freeing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="msole_language_for_lid-instance_method">
+  
+    #<strong>msole_language_for_lid</strong>(lid)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>xxx) for the given LID.  If the LID is not found, is set to 0x0400,
+or is set to 0x0000, will return &quot;-none-&quot;</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>lid</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>numerical language id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the xx_YY style string (can be just xx or</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="msole_lid_for_language-instance_method">
+  
+    #<strong>msole_lid_for_language</strong>(lang)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the LID (Language Identifier) for the input language.
+If lang is nil, return 0x0400 (&quot;-none-&quot;), and not 0x0000 (&quot;no proofing&quot;).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>lang</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Language id, i.e., locale name.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the LID (Language Identifier) for the input language.
+If lang is nil, return 0x0400 (&quot;-none-&quot;), and not 0x0000 (&quot;no proofing&quot;)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="msole_lid_to_codepage-instance_method">
+  
+    #<strong>msole_lid_to_codepage</strong>(lid)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns our best guess at the codepage for the given language id.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>lid</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>numerical language id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>our best guess at the codepage for the given language id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="msole_lid_to_codepage_str-instance_method">
+  
+    #<strong>msole_lid_to_codepage_str</strong>(lid)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>LID.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>lid</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>numerical language id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Iconv codepage string for the given</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="odf_get_ns-instance_method">
+  
+    #<strong>odf_get_ns</strong>  &#x21d2; <tt>Gsf::XMLInNS</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the used ODF namespace.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gsf::XMLInNS</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the used ODF namespace</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="odf_get_version-instance_method">
+  
+    #<strong>odf_get_version</strong>  &#x21d2; <tt>Gsf::gshort</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gives the ODF version used by libgsf when writing Open Document files.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gsf::gshort</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the ODF version: 102.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="odf_get_version_string-instance_method">
+  
+    #<strong>odf_get_version_string</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gives the ODF version used by libgsf when writing Open Document files.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the ODF version as a string: &quot;1.2&quot;.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open_pkg_error_id-instance_method">
+  
+    #<strong>open_pkg_error_id</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open_pkg_foreach_rel-instance_method">
+  
+    #<strong>open_pkg_foreach_rel</strong>(opkg, func, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>New in 1.14.9</p>
+<p>Walks each relationship associated with <!-- raw HTML omitted -->opkg<!-- raw HTML omitted --> and calls <!-- raw HTML omitted -->func<!-- raw HTML omitted --> with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>opkg</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::Input</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>Gsf::OpenPkgIter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::OpenPkgIter</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gpointer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open_pkg_lookup_rel_by_id-instance_method">
+  
+    #<strong>open_pkg_lookup_rel_by_id</strong>(opkg, id)  &#x21d2; <tt>Gsf::OpenPkgRel</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>New in 1.14.6</p>
+<p>Finds <!-- raw HTML omitted -->opkg<!-- raw HTML omitted -->'s relation with <!-- raw HTML omitted -->id<!-- raw HTML omitted --></p>
+<p>NOTE: skipping because gsf_open_pkg_rel_get_type() does not return a GType.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>opkg</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::Input</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>identifier.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gsf::OpenPkgRel</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Gsf::OpenPkgRel or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open_pkg_lookup_rel_by_type-instance_method">
+  
+    #<strong>open_pkg_lookup_rel_by_type</strong>(opkg, type)  &#x21d2; <tt>Gsf::OpenPkgRel</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>New in 1.14.6</p>
+<p>Finds <em>a</em> relation of <!-- raw HTML omitted -->opkg<!-- raw HTML omitted --> with <!-- raw HTML omitted -->type<!-- raw HTML omitted --> (no order is guaranteed)</p>
+<p>NOTE: skipping because gsf_open_pkg_rel_get_type() does not return a GType.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>opkg</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::Input</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>target</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gsf::OpenPkgRel</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Gsf::OpenPkgRel or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open_pkg_open_rel-instance_method">
+  
+    #<strong>open_pkg_open_rel</strong>(opkg, rel)  &#x21d2; <tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a new Gsf::Input which the called needs to unref, or nil and sets <!-- raw HTML omitted -->err<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>opkg</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::Input</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rel</span>
+      
+      
+        <span class='type'>(<tt>Gsf::OpenPkgRel</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::OpenPkgRel</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Gsf::Input which the called needs to unref, or nil and sets <!-- raw HTML omitted -->err<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open_pkg_open_rel_by_id-instance_method">
+  
+    #<strong>open_pkg_open_rel_by_id</strong>(opkg, id)  &#x21d2; <tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>New in 1.14.7</p>
+<p>Open <!-- raw HTML omitted -->opkg<!-- raw HTML omitted -->'s relation <!-- raw HTML omitted -->id<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>opkg</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::Input</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>target id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A new GsfInput or nil, and sets <!-- raw HTML omitted -->err<!-- raw HTML omitted --> if possible.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open_pkg_open_rel_by_type-instance_method">
+  
+    #<strong>open_pkg_open_rel_by_type</strong>(opkg, type)  &#x21d2; <tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>New in 1.14.9</p>
+<p>Open one of <!-- raw HTML omitted -->opkg<!-- raw HTML omitted -->'s relationships with type=<!-- raw HTML omitted -->type<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>opkg</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::Input</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>target type</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A new GsfInput or nil, and sets <!-- raw HTML omitted -->err<!-- raw HTML omitted --> if possible.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open_pkg_parse_rel_by_id-instance_method">
+  
+    #<strong>open_pkg_parse_rel_by_id</strong>(xin, id, dtd, ns)  &#x21d2; <tt>GLib::Error</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Convenience function to parse a related part.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>xin</span>
+      
+      
+        <span class='type'>(<tt>Gsf::XMLIn</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::XMLIn</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>target id</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dtd</span>
+      
+      
+        <span class='type'>(<tt>Gsf::XMLInNode</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::XMLInNode</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ns</span>
+      
+      
+        <span class='type'>(<tt>Gsf::XMLInNS</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::XMLInNS</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nil on success or a #GError on failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="property_settings_collect-instance_method">
+  
+    #<strong>property_settings_collect</strong>(object_type, p_params, p_n_params, first_property_name, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>object_type</span>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>p_params</span>
+      
+      
+        <span class='type'>(<tt>GObject::Parameter</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>p_n_params</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="property_settings_collect_valist-instance_method">
+  
+    #<strong>property_settings_collect_valist</strong>(object_type, p_params, p_n_params, first_property_name, var_args)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This function builds a GParameter array suitable for g_object_newv.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>object_type</span>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the GType for which the properties are being set.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>p_params</span>
+      
+      
+        <span class='type'>(<tt>GObject::Parameter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the GParameter array that holds the properties.
+(Used for both input and output.  This may point to a nil pointer if
+there are no properties collected yet.)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>p_n_params</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the number of properties collected.  (Used for
+both input and output.)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the first property being set, or nil.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>var_args</span>
+      
+      
+        <span class='type'>(<tt>Gsf::va_list</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a va_list holding the remainder of the property names and
+values, terminated by a nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="property_settings_find-instance_method">
+  
+    #<strong>property_settings_find</strong>(name, params, n_params)  &#x21d2; <tt>GObject::Parameter</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;GObject::Parameter&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_params</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::Parameter</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="property_settings_free-instance_method">
+  
+    #<strong>property_settings_free</strong>(params, n_params)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;GObject::Parameter&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_params</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="shutdown-instance_method">
+  
+    #<strong>shutdown</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>De-intializes the GSF library
+Currently does nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="shutdown_dynamic-instance_method">
+  
+    #<strong>shutdown_dynamic</strong>(module)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>De-intializes the GSF library from a type module.
+Currently does nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>module</span>
+      
+      
+        <span class='type'>(<tt>GObject::TypeModule</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>currently unused</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="value_get_docprop_array-instance_method">
+  
+    #<strong>value_get_docprop_array</strong>(value)  &#x21d2; <tt>Array&lt;GObject::Value&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This function returns the array of values inside Gsf::DocPropVector.
+No additional references are created.
+of #GValue</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A GValue of type Gsf::DocPropVector.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;GObject::Value&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A #GArray</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="value_get_docprop_varray-instance_method">
+  
+    #<strong>value_get_docprop_varray</strong>(value)  &#x21d2; <tt>GObject::ValueArray</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::ValueArray</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="value_get_docprop_vector-instance_method">
+  
+    #<strong>value_get_docprop_vector</strong>(value)  &#x21d2; <tt><span class='object_link'><a href="Gsf/DocPropVector.html" title="Gsf::DocPropVector (class)">Gsf::DocPropVector</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This function returns a pointer to the GsfDocPropVector structure in <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.
+No additional references are created.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A GValue of type Gsf::DocPropVector.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/DocPropVector.html" title="Gsf::DocPropVector (class)">Gsf::DocPropVector</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A pointer to the Gsf::DocPropVector structure in <!-- raw HTML omitted -->value<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vba_inflate-instance_method">
+  
+    #<strong>vba_inflate</strong>(input, offset, size, add_null_terminator)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Decompresses VBA stream.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>input</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>stream to read from</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Gsf::gsf_off_t</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>offset into it for start byte of compressed stream</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>size of the returned array</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>add_null_terminator</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whenever add or not null at the end of array</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A pointer to guint8 array</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="xml_gvalue_from_str-instance_method">
+  
+    #<strong>xml_gvalue_from_str</strong>(res, t, str)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Try to parse <!-- raw HTML omitted -->str<!-- raw HTML omitted --> as a value of type <!-- raw HTML omitted -->t<!-- raw HTML omitted --> into <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.
+false otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>res</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Result value</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>t</span>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Type of data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>str</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Value string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>True when parsing of <!-- raw HTML omitted -->str<!-- raw HTML omitted --> as a value of type <!-- raw HTML omitted -->t<!-- raw HTML omitted --> was succesfull;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="xml_parser_context-instance_method">
+  
+    #<strong>xml_parser_context</strong>(input)  &#x21d2; <tt><span class='object_link'><a href="" title="Gsf (module)">Gsf::</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a libxml2 pull style parser context wrapper around gsf input <!-- raw HTML omitted -->input<!-- raw HTML omitted -->.
+This signature will probably change to supply a SAX structure.</p>
+<p><!-- raw HTML omitted -->This adds a reference to <!-- raw HTML omitted -->input<!-- raw HTML omitted -->.<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->A simple wrapper around a cleaner implementation that will fold in
+when we add other api changes.  Its not worth bumping just for this.<!-- raw HTML omitted --></p>
+<p>NOTE: skipped since xmlParserCtxt is not exported to introspection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>input</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::Input</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gsf (module)">Gsf::</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A parser context</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="xml_probe-instance_method">
+  
+    #<strong>xml_probe</strong>(input, func)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns TRUE on success.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>input</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/Input.html" title="Gsf::Input (class)">Gsf::Input</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::Input</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>Gsf::XMLProbeFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::XMLProbeFunc</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE on success.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="xmlDocFormatDump-instance_method">
+  
+    #<strong>xmlDocFormatDump</strong>(output, cur, encoding, format)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Dumps the document <!-- raw HTML omitted -->cur<!-- raw HTML omitted --> into <!-- raw HTML omitted -->output<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>output</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gsf/Output.html" title="Gsf::Output (class)">Gsf::Output</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gsf::Output</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cur</span>
+      
+      
+        <span class='type'>(<tt>libxml2::Doc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>#xmlDocPtr</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>encoding</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The encoding to use.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true to reformat the output.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>status from xmlSaveFormatFileTo.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

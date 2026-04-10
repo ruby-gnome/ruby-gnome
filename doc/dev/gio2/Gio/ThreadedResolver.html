@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::ThreadedResolver
+  
+    &mdash; Ruby/GIO2
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::ThreadedResolver";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">ThreadedResolver</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::ThreadedResolver
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Resolver.html" title="Gio::Resolver (class)">Resolver</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="Resolver.html" title="Gio::Resolver (class)">Resolver</a></span></li>
+          
+            <li class="next">Gio::ThreadedResolver</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <h2>Method Summary</h2>
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Resolver.html" title="Gio::Resolver (class)">Resolver</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Resolver.html#default-class_method" title="Gio::Resolver.default (method)">default</a></span>, <span class='object_link'><a href="Resolver.html#free_addresses-class_method" title="Gio::Resolver.free_addresses (method)">free_addresses</a></span>, <span class='object_link'><a href="Resolver.html#free_targets-class_method" title="Gio::Resolver.free_targets (method)">free_targets</a></span>, <span class='object_link'><a href="Resolver.html#lookup_by_address-instance_method" title="Gio::Resolver#lookup_by_address (method)">#lookup_by_address</a></span>, <span class='object_link'><a href="Resolver.html#lookup_by_address_async-instance_method" title="Gio::Resolver#lookup_by_address_async (method)">#lookup_by_address_async</a></span>, <span class='object_link'><a href="Resolver.html#lookup_by_address_finish-instance_method" title="Gio::Resolver#lookup_by_address_finish (method)">#lookup_by_address_finish</a></span>, <span class='object_link'><a href="Resolver.html#lookup_by_name-instance_method" title="Gio::Resolver#lookup_by_name (method)">#lookup_by_name</a></span>, <span class='object_link'><a href="Resolver.html#lookup_by_name_async-instance_method" title="Gio::Resolver#lookup_by_name_async (method)">#lookup_by_name_async</a></span>, <span class='object_link'><a href="Resolver.html#lookup_by_name_finish-instance_method" title="Gio::Resolver#lookup_by_name_finish (method)">#lookup_by_name_finish</a></span>, <span class='object_link'><a href="Resolver.html#lookup_by_name_with_flags-instance_method" title="Gio::Resolver#lookup_by_name_with_flags (method)">#lookup_by_name_with_flags</a></span>, <span class='object_link'><a href="Resolver.html#lookup_by_name_with_flags_async-instance_method" title="Gio::Resolver#lookup_by_name_with_flags_async (method)">#lookup_by_name_with_flags_async</a></span>, <span class='object_link'><a href="Resolver.html#lookup_by_name_with_flags_finish-instance_method" title="Gio::Resolver#lookup_by_name_with_flags_finish (method)">#lookup_by_name_with_flags_finish</a></span>, <span class='object_link'><a href="Resolver.html#lookup_records-instance_method" title="Gio::Resolver#lookup_records (method)">#lookup_records</a></span>, <span class='object_link'><a href="Resolver.html#lookup_records_async-instance_method" title="Gio::Resolver#lookup_records_async (method)">#lookup_records_async</a></span>, <span class='object_link'><a href="Resolver.html#lookup_records_finish-instance_method" title="Gio::Resolver#lookup_records_finish (method)">#lookup_records_finish</a></span>, <span class='object_link'><a href="Resolver.html#lookup_service-instance_method" title="Gio::Resolver#lookup_service (method)">#lookup_service</a></span>, <span class='object_link'><a href="Resolver.html#lookup_service_async-instance_method" title="Gio::Resolver#lookup_service_async (method)">#lookup_service_async</a></span>, <span class='object_link'><a href="Resolver.html#lookup_service_finish-instance_method" title="Gio::Resolver#lookup_service_finish (method)">#lookup_service_finish</a></span>, <span class='object_link'><a href="Resolver.html#set_default-instance_method" title="Gio::Resolver#set_default (method)">#set_default</a></span>, <span class='object_link'><a href="Resolver.html#timeout-instance_method" title="Gio::Resolver#timeout (method)">#timeout</a></span>, <span class='object_link'><a href="Resolver.html#timeout=-instance_method" title="Gio::Resolver#timeout= (method)">#timeout=</a></span></p>
+
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

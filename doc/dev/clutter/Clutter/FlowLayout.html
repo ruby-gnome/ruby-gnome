@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Clutter::FlowLayout
+  
+    &mdash; Ruby/Clutter
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Clutter::FlowLayout";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (F)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter</a></span></span>
+     &raquo; 
+    <span class="title">FlowLayout</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Clutter::FlowLayout
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="LayoutManager.html" title="Clutter::LayoutManager (class)">LayoutManager</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="LayoutManager.html" title="Clutter::LayoutManager (class)">LayoutManager</a></span></li>
+          
+            <li class="next">Clutter::FlowLayout</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The Clutter::FlowLayoutClass structure contains only private data
+and should be accessed using the provided API</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#column_spacing-instance_method" title="#column_spacing (instance method)">#<strong>column_spacing</strong>  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The spacing between columns, in pixels; the value of this property is honoured by horizontal non-overflowing layouts and by vertical overflowing layouts.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#column_spacing=-instance_method" title="#column_spacing= (instance method)">#<strong>column_spacing=</strong>(column_spacing)  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The spacing between columns, in pixels; the value of this property is honoured by horizontal non-overflowing layouts and by vertical overflowing layouts.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_column_width-instance_method" title="#get_column_width (instance method)">#<strong>get_column_width</strong>(min_width, max_width)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the minimum and maximum column widths.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_row_height-instance_method" title="#get_row_height (instance method)">#<strong>get_row_height</strong>(min_height, max_height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the minimum and maximum row heights.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#homogeneous-instance_method" title="#homogeneous (instance method)">#<strong>homogeneous</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves whether the <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> is homogeneous.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#homogeneous=-instance_method" title="#homogeneous= (instance method)">#<strong>homogeneous=</strong>(homogeneous)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether each child inside the Clutter::FlowLayout should receive the same allocation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#homogeneous%3F-instance_method" title="#homogeneous? (instance method)">#<strong>homogeneous?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether each child inside the Clutter::FlowLayout should receive the same allocation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(orientation)  &#x21d2; Clutter::LayoutManager </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Clutter::FlowLayout with the given <!-- raw HTML omitted -->orientation<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_column_width-instance_method" title="#max_column_width (instance method)">#<strong>max_column_width</strong>  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Maximum width for each column in the layout, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_column_width=-instance_method" title="#max_column_width= (instance method)">#<strong>max_column_width=</strong>(max_column_width)  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Maximum width for each column in the layout, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_row_height-instance_method" title="#max_row_height (instance method)">#<strong>max_row_height</strong>  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Maximum height for each row in the layout, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_row_height=-instance_method" title="#max_row_height= (instance method)">#<strong>max_row_height=</strong>(max_row_height)  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Maximum height for each row in the layout, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#min_column_width-instance_method" title="#min_column_width (instance method)">#<strong>min_column_width</strong>  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Minimum width for each column in the layout, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#min_column_width=-instance_method" title="#min_column_width= (instance method)">#<strong>min_column_width=</strong>(min_column_width)  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Minimum width for each column in the layout, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#min_row_height-instance_method" title="#min_row_height (instance method)">#<strong>min_row_height</strong>  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Minimum height for each row in the layout, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#min_row_height=-instance_method" title="#min_row_height= (instance method)">#<strong>min_row_height=</strong>(min_row_height)  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Minimum height for each row in the layout, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#orientation-instance_method" title="#orientation (instance method)">#<strong>orientation</strong>  &#x21d2; Clutter::FlowOrientation </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The orientation of the Clutter::FlowLayout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#orientation=-instance_method" title="#orientation= (instance method)">#<strong>orientation=</strong>(orientation)  &#x21d2; Clutter::FlowOrientation </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The orientation of the Clutter::FlowLayout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#row_spacing-instance_method" title="#row_spacing (instance method)">#<strong>row_spacing</strong>  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The spacing between rows, in pixels; the value of this property is honoured by vertical non-overflowing layouts and by horizontal overflowing layouts.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#row_spacing=-instance_method" title="#row_spacing= (instance method)">#<strong>row_spacing=</strong>(row_spacing)  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The spacing between rows, in pixels; the value of this property is honoured by vertical non-overflowing layouts and by horizontal overflowing layouts.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_column_width-instance_method" title="#set_column_width (instance method)">#<strong>set_column_width</strong>(min_width, max_width)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the minimum and maximum widths that a column can have.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_row_height-instance_method" title="#set_row_height (instance method)">#<strong>set_row_height</strong>(min_height, max_height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the minimum and maximum heights that a row can have.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#snap_to_grid-instance_method" title="#snap_to_grid (instance method)">#<strong>snap_to_grid</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the value of Clutter::FlowLayout:snap-to-grid property.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#snap_to_grid=-instance_method" title="#snap_to_grid= (instance method)">#<strong>snap_to_grid=</strong>(snap_to_grid)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the Clutter::FlowLayout should arrange its children on a grid.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#snap_to_grid%3F-instance_method" title="#snap_to_grid? (instance method)">#<strong>snap_to_grid?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the Clutter::FlowLayout should arrange its children on a grid.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="LayoutManager.html" title="Clutter::LayoutManager (class)">LayoutManager</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="LayoutManager.html#allocate-instance_method" title="Clutter::LayoutManager#allocate (method)">#allocate</a></span>, <span class='object_link'><a href="LayoutManager.html#animation_progress-instance_method" title="Clutter::LayoutManager#animation_progress (method)">#animation_progress</a></span>, <span class='object_link'><a href="LayoutManager.html#begin_animation-instance_method" title="Clutter::LayoutManager#begin_animation (method)">#begin_animation</a></span>, <span class='object_link'><a href="LayoutManager.html#child_get-instance_method" title="Clutter::LayoutManager#child_get (method)">#child_get</a></span>, <span class='object_link'><a href="LayoutManager.html#child_get_property-instance_method" title="Clutter::LayoutManager#child_get_property (method)">#child_get_property</a></span>, <span class='object_link'><a href="LayoutManager.html#child_set-instance_method" title="Clutter::LayoutManager#child_set (method)">#child_set</a></span>, <span class='object_link'><a href="LayoutManager.html#child_set_property-instance_method" title="Clutter::LayoutManager#child_set_property (method)">#child_set_property</a></span>, <span class='object_link'><a href="LayoutManager.html#container=-instance_method" title="Clutter::LayoutManager#container= (method)">#container=</a></span>, <span class='object_link'><a href="LayoutManager.html#end_animation-instance_method" title="Clutter::LayoutManager#end_animation (method)">#end_animation</a></span>, <span class='object_link'><a href="LayoutManager.html#find_child_property-instance_method" title="Clutter::LayoutManager#find_child_property (method)">#find_child_property</a></span>, <span class='object_link'><a href="LayoutManager.html#get_child_meta-instance_method" title="Clutter::LayoutManager#get_child_meta (method)">#get_child_meta</a></span>, <span class='object_link'><a href="LayoutManager.html#get_preferred_height-instance_method" title="Clutter::LayoutManager#get_preferred_height (method)">#get_preferred_height</a></span>, <span class='object_link'><a href="LayoutManager.html#get_preferred_width-instance_method" title="Clutter::LayoutManager#get_preferred_width (method)">#get_preferred_width</a></span>, <span class='object_link'><a href="LayoutManager.html#layout_changed-instance_method" title="Clutter::LayoutManager#layout_changed (method)">#layout_changed</a></span>, <span class='object_link'><a href="LayoutManager.html#list_child_properties-instance_method" title="Clutter::LayoutManager#list_child_properties (method)">#list_child_properties</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(orientation)  &#x21d2; <tt><span class='object_link'><a href="LayoutManager.html" title="Clutter::LayoutManager (class)">Clutter::LayoutManager</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Clutter::FlowLayout with the given <!-- raw HTML omitted -->orientation<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>orientation</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowOrientation.html" title="Clutter::FlowOrientation (module)">Clutter::FlowOrientation</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the orientation of the flow layout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="column_spacing-instance_method">
+  
+    #<strong>column_spacing</strong>  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The spacing between columns, in pixels; the value of this
+property is honoured by horizontal non-overflowing layouts
+and by vertical overflowing layouts</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>column-spacing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="column_spacing=-instance_method">
+  
+    #<strong>column_spacing=</strong>(column_spacing)  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The spacing between columns, in pixels; the value of this
+property is honoured by horizontal non-overflowing layouts
+and by vertical overflowing layouts</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>column_spacing</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>column-spacing</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>column-spacing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_column_width-instance_method">
+  
+    #<strong>get_column_width</strong>(min_width, max_width)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the minimum and maximum column widths</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>min_width</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the minimum column width, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_width</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the maximum column width, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_row_height-instance_method">
+  
+    #<strong>get_row_height</strong>(min_height, max_height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the minimum and maximum row heights</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>min_height</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the minimum row height, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_height</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the maximum row height, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="homogeneous-instance_method">
+  
+    #<strong>homogeneous</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves whether the <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> is homogeneous</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the Clutter::FlowLayout is homogeneous</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="homogeneous=-instance_method">
+  
+    #<strong>homogeneous=</strong>(homogeneous)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether each child inside the Clutter::FlowLayout should receive
+the same allocation</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>homogeneous</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>homogeneous</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>homogeneous</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="homogeneous?-instance_method">
+  
+    #<strong>homogeneous?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether each child inside the Clutter::FlowLayout should receive
+the same allocation</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>homogeneous</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_column_width-instance_method">
+  
+    #<strong>max_column_width</strong>  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Maximum width for each column in the layout, in pixels. If
+set to -1 the width will be the maximum child width</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max-column-width</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_column_width=-instance_method">
+  
+    #<strong>max_column_width=</strong>(max_column_width)  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Maximum width for each column in the layout, in pixels. If
+set to -1 the width will be the maximum child width</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>max_column_width</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max-column-width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max-column-width</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_row_height-instance_method">
+  
+    #<strong>max_row_height</strong>  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Maximum height for each row in the layout, in pixels. If
+set to -1 the width will be the maximum child height</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max-row-height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_row_height=-instance_method">
+  
+    #<strong>max_row_height=</strong>(max_row_height)  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Maximum height for each row in the layout, in pixels. If
+set to -1 the width will be the maximum child height</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>max_row_height</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max-row-height</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>max-row-height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="min_column_width-instance_method">
+  
+    #<strong>min_column_width</strong>  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Minimum width for each column in the layout, in pixels</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>min-column-width</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="min_column_width=-instance_method">
+  
+    #<strong>min_column_width=</strong>(min_column_width)  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Minimum width for each column in the layout, in pixels</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>min_column_width</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>min-column-width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>min-column-width</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="min_row_height-instance_method">
+  
+    #<strong>min_row_height</strong>  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Minimum height for each row in the layout, in pixels</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>min-row-height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="min_row_height=-instance_method">
+  
+    #<strong>min_row_height=</strong>(min_row_height)  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Minimum height for each row in the layout, in pixels</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>min_row_height</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>min-row-height</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>min-row-height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="orientation-instance_method">
+  
+    #<strong>orientation</strong>  &#x21d2; <tt><span class='object_link'><a href="FlowOrientation.html" title="Clutter::FlowOrientation (module)">Clutter::FlowOrientation</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The orientation of the Clutter::FlowLayout. The children
+of the layout will be layed out following the orientation.</p>
+<p>This property also controls the overflowing directions</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowOrientation.html" title="Clutter::FlowOrientation (module)">Clutter::FlowOrientation</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>orientation</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="orientation=-instance_method">
+  
+    #<strong>orientation=</strong>(orientation)  &#x21d2; <tt><span class='object_link'><a href="FlowOrientation.html" title="Clutter::FlowOrientation (module)">Clutter::FlowOrientation</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The orientation of the Clutter::FlowLayout. The children
+of the layout will be layed out following the orientation.</p>
+<p>This property also controls the overflowing directions</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>orientation</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowOrientation.html" title="Clutter::FlowOrientation (module)">Clutter::FlowOrientation</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowOrientation.html" title="Clutter::FlowOrientation (module)">Clutter::FlowOrientation</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>orientation</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowOrientation.html" title="Clutter::FlowOrientation (module)">Clutter::FlowOrientation</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>orientation</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="row_spacing-instance_method">
+  
+    #<strong>row_spacing</strong>  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The spacing between rows, in pixels; the value of this
+property is honoured by vertical non-overflowing layouts and
+by horizontal overflowing layouts</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>row-spacing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="row_spacing=-instance_method">
+  
+    #<strong>row_spacing=</strong>(row_spacing)  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The spacing between rows, in pixels; the value of this
+property is honoured by vertical non-overflowing layouts and
+by horizontal overflowing layouts</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>row_spacing</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>row-spacing</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>row-spacing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_column_width-instance_method">
+  
+    #<strong>set_column_width</strong>(min_width, max_width)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the minimum and maximum widths that a column can have</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>min_width</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>minimum width of a column</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_width</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>maximum width of a column</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_row_height-instance_method">
+  
+    #<strong>set_row_height</strong>(min_height, max_height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the minimum and maximum heights that a row can have</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>min_height</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the minimum height of a row</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_height</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the maximum height of a row</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="snap_to_grid-instance_method">
+  
+    #<strong>snap_to_grid</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the value of Clutter::FlowLayout:snap-to-grid property</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> is placing its children on a grid</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="snap_to_grid=-instance_method">
+  
+    #<strong>snap_to_grid=</strong>(snap_to_grid)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the Clutter::FlowLayout should arrange its children
+on a grid</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>snap_to_grid</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>snap-to-grid</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>snap-to-grid</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="snap_to_grid?-instance_method">
+  
+    #<strong>snap_to_grid?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the Clutter::FlowLayout should arrange its children
+on a grid</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>snap-to-grid</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GOffice::GraphView
+  
+    &mdash; Ruby/GOffice
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GOffice::GraphView";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (G)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GOffice.html" title="GOffice (module)">GOffice</a></span></span>
+     &raquo; 
+    <span class="title">GraphView</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GOffice::GraphView
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GOffice::GraphView</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="Graph3DBoxView.html" title="GOffice::Graph3DBoxView (class)">Graph3DBoxView</a></span>, <span class='object_link'><a href="GraphOutlinedView.html" title="GOffice::GraphOutlinedView (class)">GraphOutlinedView</a></span>, <span class='object_link'><a href="GraphPlotView.html" title="GOffice::GraphPlotView (class)">GraphPlotView</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_child_view-instance_method" title="#find_child_view (instance method)">#<strong>find_child_view</strong>(target_model)  &#x21d2; GOffice::GraphView </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Find the GogView contained in <!-- raw HTML omitted -->container<!-- raw HTML omitted --> that corresponds to <!-- raw HTML omitted -->model<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_natural_size-instance_method" title="#get_natural_size (instance method)">#<strong>get_natural_size</strong>(requisition)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_tip_at_point-instance_method" title="#get_tip_at_point (instance method)">#<strong>get_tip_at_point</strong>(x, y)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a tip string related to the position as defined by (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y<!-- raw HTML omitted -->) in <!-- raw HTML omitted -->view<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_tool_at_point-instance_method" title="#get_tool_at_point (instance method)">#<strong>get_tool_at_point</strong>(x, y, gobj)  &#x21d2; GOffice::GraphTool </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tool under cursor for a given view, or nil.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_view_at_point-instance_method" title="#get_view_at_point (instance method)">#<strong>get_view_at_point</strong>(x, y, obj, tool)  &#x21d2; GOffice::GraphView </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets view under cursor, searching recursively from <!-- raw HTML omitted -->view<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#model-instance_method" title="#model (instance method)">#<strong>model</strong>  &#x21d2; GOffice::GraphObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Gog::Object owning the view.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#model=-instance_method" title="#model= (instance method)">#<strong>model=</strong>(model)  &#x21d2; GOffice::GraphObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Model.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#padding_request-instance_method" title="#padding_request (instance method)">#<strong>padding_request</strong>(bbox, padding)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parent=-instance_method" title="#parent= (instance method)">#<strong>parent=</strong>(parent)  &#x21d2; GOffice::GraphView </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Parent.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#queue_redraw-instance_method" title="#queue_redraw (instance method)">#<strong>queue_redraw</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Requests a redraw for the entire graph.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#queue_resize-instance_method" title="#queue_resize (instance method)">#<strong>queue_resize</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Flags a view to have its size renegotiated; should be called when a model for some reason has a new size request.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render-instance_method" title="#render (instance method)">#<strong>render</strong>(bbox)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_toolkit-instance_method" title="#render_toolkit (instance method)">#<strong>render_toolkit</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Render toolkit elements.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#size_allocate-instance_method" title="#size_allocate (instance method)">#<strong>size_allocate</strong>(allocation)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Assign a size and position to a GogView.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#size_child_request-instance_method" title="#size_child_request (instance method)">#<strong>size_child_request</strong>(available, req, min_req)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Computes additional requision in <!-- raw HTML omitted -->req<!-- raw HTML omitted --> which must be added to parent requisition, and minimum requisition in <!-- raw HTML omitted -->min_req<!-- raw HTML omitted --> which is minimum space for displaying all children.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#size_request-instance_method" title="#size_request (instance method)">#<strong>size_request</strong>(available, requisition)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines the desired size of a view.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#toolkit-instance_method" title="#toolkit (instance method)">#<strong>toolkit</strong>  &#x21d2; GLib::SList&lt;GOffice::GraphTool&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Toolkit associated with given view.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_sizes-instance_method" title="#update_sizes (instance method)">#<strong>update_sizes</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>True if a redraw is necessary.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="find_child_view-instance_method">
+  
+    #<strong>find_child_view</strong>(target_model)  &#x21d2; <tt><span class='object_link'><a href="" title="GOffice::GraphView (class)">GOffice::GraphView</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Find the GogView contained in <!-- raw HTML omitted -->container<!-- raw HTML omitted --> that corresponds to <!-- raw HTML omitted -->model<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>target_model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphObject.html" title="GOffice::GraphObject (class)">GOffice::GraphObject</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gog::Object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="GOffice::GraphView (class)">GOffice::GraphView</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>NULL on error or if <!-- raw HTML omitted -->target_model<!-- raw HTML omitted --> has no view.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_natural_size-instance_method">
+  
+    #<strong>get_natural_size</strong>(requisition)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>requisition</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphViewRequisition</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_tip_at_point-instance_method">
+  
+    #<strong>get_tip_at_point</strong>(x, y)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a tip string related to the position as defined by (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y<!-- raw HTML omitted -->) in <!-- raw HTML omitted -->view<!-- raw HTML omitted -->.
+that or nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>x position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>y position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the newly allocated tip string if the view class supports</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_tool_at_point-instance_method">
+  
+    #<strong>get_tool_at_point</strong>(x, y, gobj)  &#x21d2; <tt>GOffice::GraphTool</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns tool under cursor for a given view, or nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>in coords</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>in coords</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>gobj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphObject.html" title="GOffice::GraphObject (class)">GOffice::GraphObject</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointed object or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphTool</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>tool under cursor for a given view, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_view_at_point-instance_method">
+  
+    #<strong>get_view_at_point</strong>(x, y, obj, tool)  &#x21d2; <tt><span class='object_link'><a href="" title="GOffice::GraphView (class)">GOffice::GraphView</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets view under cursor, searching recursively from <!-- raw HTML omitted -->view<!-- raw HTML omitted -->. Corresponding object
+is stored in <!-- raw HTML omitted -->obj<!-- raw HTML omitted -->. This object may or may not be <!-- raw HTML omitted -->view<!-- raw HTML omitted -->-&gt;model of pointed view.
+This function also stores tool under cursor, for the pointed view.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor x position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cursor y position</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphObject.html" title="GOffice::GraphObject (class)">GOffice::GraphObject</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointed object or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tool</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphTool</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointed tool or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="GOffice::GraphView (class)">GOffice::GraphView</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gog::View at x,y position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="model-instance_method">
+  
+    #<strong>model</strong>  &#x21d2; <tt><span class='object_link'><a href="GraphObject.html" title="GOffice::GraphObject (class)">GOffice::GraphObject</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the Gog::Object owning the view.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphObject.html" title="GOffice::GraphObject (class)">GOffice::GraphObject</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gog::Object owning the view.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="model=-instance_method">
+  
+    #<strong>model=</strong>(model)  &#x21d2; <tt><span class='object_link'><a href="GraphObject.html" title="GOffice::GraphObject (class)">GOffice::GraphObject</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns model.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>model</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphObject.html" title="GOffice::GraphObject (class)">GOffice::GraphObject</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphObject.html" title="GOffice::GraphObject (class)">GOffice::GraphObject</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>model</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="padding_request-instance_method">
+  
+    #<strong>padding_request</strong>(bbox, padding)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bbox</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphViewAllocation</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>padding</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphViewPadding</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parent=-instance_method">
+  
+    #<strong>parent=</strong>(parent)  &#x21d2; <tt><span class='object_link'><a href="" title="GOffice::GraphView (class)">GOffice::GraphView</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns parent.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="GOffice::GraphView (class)">GOffice::GraphView</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="GOffice::GraphView (class)">GOffice::GraphView</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>parent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="queue_redraw-instance_method">
+  
+    #<strong>queue_redraw</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Requests a redraw for the entire graph.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="queue_resize-instance_method">
+  
+    #<strong>queue_resize</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Flags a view to have its size renegotiated; should
+be called when a model for some reason has a new size request.
+For example, when you change the size of a legend.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render-instance_method">
+  
+    #<strong>render</strong>(bbox)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bbox</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphViewAllocation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_toolkit-instance_method">
+  
+    #<strong>render_toolkit</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Render toolkit elements.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="size_allocate-instance_method">
+  
+    #<strong>size_allocate</strong>(allocation)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Assign a size and position to a GogView.  Primarilly used by containers.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>allocation</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphViewAllocation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>position and size to be allocated to <!-- raw HTML omitted -->view<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="size_child_request-instance_method">
+  
+    #<strong>size_child_request</strong>(available, req, min_req)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Computes additional requision in <!-- raw HTML omitted -->req<!-- raw HTML omitted --> which must be added to parent requisition,
+and minimum requisition in <!-- raw HTML omitted -->min_req<!-- raw HTML omitted --> which is minimum space for displaying all
+children.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>available</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphViewRequisition</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the amount of space available in total</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>req</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphViewRequisition</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>additionnal requisition</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>min_req</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphViewRequisition</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>minimum size for displaying all children</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="size_request-instance_method">
+  
+    #<strong>size_request</strong>(available, requisition)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines the desired size of a view.</p>
+<p>Note, that the virtual method deviates slightly from this function.  This
+function will zero <!-- raw HTML omitted -->requisition<!-- raw HTML omitted --> before calling the virtual method.</p>
+<p>Remember that the size request is not necessarily the size a view will
+actually be allocated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>available</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphViewRequisition</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>available space.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>requisition</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphViewRequisition</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gog::ViewRequisition.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="toolkit-instance_method">
+  
+    #<strong>toolkit</strong>  &#x21d2; <tt>GLib::SList&lt;GOffice::GraphTool&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns toolkit associated with given view.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::SList&lt;GOffice::GraphTool&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>toolkit associated with given view.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_sizes-instance_method">
+  
+    #<strong>update_sizes</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns true if a redraw is necessary.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if a redraw is necessary.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

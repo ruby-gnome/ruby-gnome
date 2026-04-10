@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gst::PadProbeType
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gst::PadProbeType";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gst.html" title="Gst (module)">Gst</a></span></span>
+     &raquo; 
+    <span class="title">PadProbeType</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gst::PadProbeType
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="INVALID-constant" class="">INVALID =
+          <div class="docstring">
+  <div class="discussion">
+    <p>invalid probe type</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:invalid</span></pre></dd>
+      
+        <dt id="IDLE-constant" class="">IDLE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe idle pads and block while the callback is called</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:idle</span></pre></dd>
+      
+        <dt id="BLOCK-constant" class="">BLOCK =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe and block pads</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:block</span></pre></dd>
+      
+        <dt id="BUFFER-constant" class="">BUFFER =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe buffers</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span> <span class='kw'>or</span> <span class='symbol'>:buffer</span></pre></dd>
+      
+        <dt id="BUFFER_LIST-constant" class="">BUFFER_LIST =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe buffer lists</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>32</span> <span class='kw'>or</span> <span class='symbol'>:buffer_list</span></pre></dd>
+      
+        <dt id="EVENT_DOWNSTREAM-constant" class="">EVENT_DOWNSTREAM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe downstream events</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>64</span> <span class='kw'>or</span> <span class='symbol'>:event_downstream</span></pre></dd>
+      
+        <dt id="EVENT_UPSTREAM-constant" class="">EVENT_UPSTREAM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe upstream events</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>128</span> <span class='kw'>or</span> <span class='symbol'>:event_upstream</span></pre></dd>
+      
+        <dt id="EVENT_FLUSH-constant" class="">EVENT_FLUSH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe flush events. This probe has to be
+explicitly enabled and is not included in the
+@<!-- raw HTML omitted -->GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM<!-- raw HTML omitted --> or
+@<!-- raw HTML omitted -->GST_PAD_PROBE_TYPE_EVENT_UPSTREAM<!-- raw HTML omitted --> probe types.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>256</span> <span class='kw'>or</span> <span class='symbol'>:event_flush</span></pre></dd>
+      
+        <dt id="QUERY_DOWNSTREAM-constant" class="">QUERY_DOWNSTREAM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe downstream queries</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>512</span> <span class='kw'>or</span> <span class='symbol'>:query_downstream</span></pre></dd>
+      
+        <dt id="QUERY_UPSTREAM-constant" class="">QUERY_UPSTREAM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe upstream queries</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1024</span> <span class='kw'>or</span> <span class='symbol'>:query_upstream</span></pre></dd>
+      
+        <dt id="PUSH-constant" class="">PUSH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe push</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4096</span> <span class='kw'>or</span> <span class='symbol'>:push</span></pre></dd>
+      
+        <dt id="PULL-constant" class="">PULL =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe pull</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8192</span> <span class='kw'>or</span> <span class='symbol'>:pull</span></pre></dd>
+      
+        <dt id="BLOCKING-constant" class="">BLOCKING =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe and block at the next opportunity, at data flow or when idle</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:blocking</span></pre></dd>
+      
+        <dt id="DATA_DOWNSTREAM-constant" class="">DATA_DOWNSTREAM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe downstream data (buffers, buffer lists, and events)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>112</span> <span class='kw'>or</span> <span class='symbol'>:data_downstream</span></pre></dd>
+      
+        <dt id="DATA_UPSTREAM-constant" class="">DATA_UPSTREAM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe upstream data (events)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>128</span> <span class='kw'>or</span> <span class='symbol'>:data_upstream</span></pre></dd>
+      
+        <dt id="DATA_BOTH-constant" class="">DATA_BOTH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe upstream and downstream data (buffers, buffer lists, and events)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>240</span> <span class='kw'>or</span> <span class='symbol'>:data_both</span></pre></dd>
+      
+        <dt id="BLOCK_DOWNSTREAM-constant" class="">BLOCK_DOWNSTREAM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe and block downstream data (buffers, buffer lists, and events)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>114</span> <span class='kw'>or</span> <span class='symbol'>:block_downstream</span></pre></dd>
+      
+        <dt id="BLOCK_UPSTREAM-constant" class="">BLOCK_UPSTREAM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe and block upstream data (events)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>130</span> <span class='kw'>or</span> <span class='symbol'>:block_upstream</span></pre></dd>
+      
+        <dt id="EVENT_BOTH-constant" class="">EVENT_BOTH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe upstream and downstream events</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>192</span> <span class='kw'>or</span> <span class='symbol'>:event_both</span></pre></dd>
+      
+        <dt id="QUERY_BOTH-constant" class="">QUERY_BOTH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe upstream and downstream queries</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1536</span> <span class='kw'>or</span> <span class='symbol'>:query_both</span></pre></dd>
+      
+        <dt id="ALL_BOTH-constant" class="">ALL_BOTH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe upstream events and queries and downstream buffers, buffer lists, events and queries</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1776</span> <span class='kw'>or</span> <span class='symbol'>:all_both</span></pre></dd>
+      
+        <dt id="SCHEDULING-constant" class="">SCHEDULING =
+          <div class="docstring">
+  <div class="discussion">
+    <p>probe push and pull</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12288</span> <span class='kw'>or</span> <span class='symbol'>:scheduling</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

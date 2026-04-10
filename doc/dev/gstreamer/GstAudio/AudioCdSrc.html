@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GstAudio::AudioCdSrc
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GstAudio::AudioCdSrc";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GstAudio.html" title="GstAudio (module)">GstAudio</a></span></span>
+     &raquo; 
+    <span class="title">AudioCdSrc</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GstAudio::AudioCdSrc
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="../GstBase/PushSrc.html" title="GstBase::PushSrc (class)">GstBase::PushSrc</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="../Gst/Element.html" title="Gst::Element (class)">Gst::Element</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="../GstBase/BaseSrc.html" title="GstBase::BaseSrc (class)">GstBase::BaseSrc</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="../GstBase/PushSrc.html" title="GstBase::PushSrc (class)">GstBase::PushSrc</a></span></li>
+          
+            <li class="next">GstAudio::AudioCdSrc</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Audio CD source base class.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_track-instance_method" title="#add_track (instance method)">#<strong>add_track</strong>(track)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>CDDA sources use this function from their start vfunc to announce the available data and audio tracks to the base source class.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#device-instance_method" title="#device (instance method)">#<strong>device</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Device.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#device=-instance_method" title="#device= (instance method)">#<strong>device=</strong>(device)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mode-instance_method" title="#mode (instance method)">#<strong>mode</strong>  &#x21d2; GstAudio::AudioCdSrcMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mode=-instance_method" title="#mode= (instance method)">#<strong>mode=</strong>(mode)  &#x21d2; GstAudio::AudioCdSrcMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#track-instance_method" title="#track (instance method)">#<strong>track</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Track.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#track=-instance_method" title="#track= (instance method)">#<strong>track=</strong>(track)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../GstBase/BaseSrc.html" title="GstBase::BaseSrc (class)">GstBase::BaseSrc</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../GstBase/BaseSrc.html#async=-instance_method" title="GstBase::BaseSrc#async= (method)">#async=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#automatic_eos=-instance_method" title="GstBase::BaseSrc#automatic_eos= (method)">#automatic_eos=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#automatic_eos%3F-instance_method" title="GstBase::BaseSrc#automatic_eos? (method)">#automatic_eos?</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#blocksize-instance_method" title="GstBase::BaseSrc#blocksize (method)">#blocksize</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#blocksize=-instance_method" title="GstBase::BaseSrc#blocksize= (method)">#blocksize=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#buffer_pool-instance_method" title="GstBase::BaseSrc#buffer_pool (method)">#buffer_pool</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#caps=-instance_method" title="GstBase::BaseSrc#caps= (method)">#caps=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#do_timestamp-instance_method" title="GstBase::BaseSrc#do_timestamp (method)">#do_timestamp</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#do_timestamp=-instance_method" title="GstBase::BaseSrc#do_timestamp= (method)">#do_timestamp=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#do_timestamp%3F-instance_method" title="GstBase::BaseSrc#do_timestamp? (method)">#do_timestamp?</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#dynamic_size=-instance_method" title="GstBase::BaseSrc#dynamic_size= (method)">#dynamic_size=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#format=-instance_method" title="GstBase::BaseSrc#format= (method)">#format=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#get_allocator-instance_method" title="GstBase::BaseSrc#get_allocator (method)">#get_allocator</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#is_async-instance_method" title="GstBase::BaseSrc#is_async (method)">#is_async</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#is_live-instance_method" title="GstBase::BaseSrc#is_live (method)">#is_live</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#live=-instance_method" title="GstBase::BaseSrc#live= (method)">#live=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#negotiate-instance_method" title="GstBase::BaseSrc#negotiate (method)">#negotiate</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#new_seamless_segment-instance_method" title="GstBase::BaseSrc#new_seamless_segment (method)">#new_seamless_segment</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#new_segment-instance_method" title="GstBase::BaseSrc#new_segment (method)">#new_segment</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#num_buffers-instance_method" title="GstBase::BaseSrc#num_buffers (method)">#num_buffers</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#num_buffers=-instance_method" title="GstBase::BaseSrc#num_buffers= (method)">#num_buffers=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#push_segment-instance_method" title="GstBase::BaseSrc#push_segment (method)">#push_segment</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#query_latency-instance_method" title="GstBase::BaseSrc#query_latency (method)">#query_latency</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#start_complete-instance_method" title="GstBase::BaseSrc#start_complete (method)">#start_complete</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#start_wait-instance_method" title="GstBase::BaseSrc#start_wait (method)">#start_wait</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#submit_buffer_list-instance_method" title="GstBase::BaseSrc#submit_buffer_list (method)">#submit_buffer_list</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#typefind=-instance_method" title="GstBase::BaseSrc#typefind= (method)">#typefind=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#typefind%3F-instance_method" title="GstBase::BaseSrc#typefind? (method)">#typefind?</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#wait_playing-instance_method" title="GstBase::BaseSrc#wait_playing (method)">#wait_playing</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gst/Element.html" title="Gst::Element (class)">Gst::Element</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Gst/Element.html#>>-instance_method" title="Gst::Element#&gt;&gt; (method)">#>></a></span>, <span class='object_link'><a href="../Gst/Element.html#[]-class_method" title="Gst::Element.[] (method)">[]</a></span>, <span class='object_link'><a href="../Gst/Element.html#abort_state-instance_method" title="Gst::Element#abort_state (method)">#abort_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_metadata-instance_method" title="Gst::Element#add_metadata (method)">#add_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_pad-instance_method" title="Gst::Element#add_pad (method)">#add_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_pad_template-instance_method" title="Gst::Element#add_pad_template (method)">#add_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_property_deep_notify_watch-instance_method" title="Gst::Element#add_property_deep_notify_watch (method)">#add_property_deep_notify_watch</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_property_notify_watch-instance_method" title="Gst::Element#add_property_notify_watch (method)">#add_property_notify_watch</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_static_metadata-instance_method" title="Gst::Element#add_static_metadata (method)">#add_static_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_static_pad_template-instance_method" title="Gst::Element#add_static_pad_template (method)">#add_static_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_static_pad_template_with_gtype-instance_method" title="Gst::Element#add_static_pad_template_with_gtype (method)">#add_static_pad_template_with_gtype</a></span>, <span class='object_link'><a href="../Gst/Element.html#base_time-instance_method" title="Gst::Element#base_time (method)">#base_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#base_time=-instance_method" title="Gst::Element#base_time= (method)">#base_time=</a></span>, <span class='object_link'><a href="../Gst/Element.html#bus-instance_method" title="Gst::Element#bus (method)">#bus</a></span>, <span class='object_link'><a href="../Gst/Element.html#bus=-instance_method" title="Gst::Element#bus= (method)">#bus=</a></span>, <span class='object_link'><a href="../Gst/Element.html#call_async-instance_method" title="Gst::Element#call_async (method)">#call_async</a></span>, <span class='object_link'><a href="../Gst/Element.html#change_state-instance_method" title="Gst::Element#change_state (method)">#change_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#clock-instance_method" title="Gst::Element#clock (method)">#clock</a></span>, <span class='object_link'><a href="../Gst/Element.html#clock=-instance_method" title="Gst::Element#clock= (method)">#clock=</a></span>, <span class='object_link'><a href="../Gst/Element.html#context=-instance_method" title="Gst::Element#context= (method)">#context=</a></span>, <span class='object_link'><a href="../Gst/Element.html#contexts-instance_method" title="Gst::Element#contexts (method)">#contexts</a></span>, <span class='object_link'><a href="../Gst/Element.html#continue_state-instance_method" title="Gst::Element#continue_state (method)">#continue_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#create_all_pads-instance_method" title="Gst::Element#create_all_pads (method)">#create_all_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#current_clock_time-instance_method" title="Gst::Element#current_clock_time (method)">#current_clock_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#current_running_time-instance_method" title="Gst::Element#current_running_time (method)">#current_running_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#decorate_stream_id-instance_method" title="Gst::Element#decorate_stream_id (method)">#decorate_stream_id</a></span>, <span class='object_link'><a href="../Gst/Element.html#decorate_stream_id_printf-instance_method" title="Gst::Element#decorate_stream_id_printf (method)">#decorate_stream_id_printf</a></span>, <span class='object_link'><a href="../Gst/Element.html#decorate_stream_id_printf_valist-instance_method" title="Gst::Element#decorate_stream_id_printf_valist (method)">#decorate_stream_id_printf_valist</a></span>, <span class='object_link'><a href="../Gst/Element.html#factory-instance_method" title="Gst::Element#factory (method)">#factory</a></span>, <span class='object_link'><a href="../Gst/Element.html#flags-instance_method" title="Gst::Element#flags (method)">#flags</a></span>, <span class='object_link'><a href="../Gst/Element.html#flags_raw-instance_method" title="Gst::Element#flags_raw (method)">#flags_raw</a></span>, <span class='object_link'><a href="../Gst/Element.html#foreach_pad-instance_method" title="Gst::Element#foreach_pad (method)">#foreach_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#foreach_sink_pad-instance_method" title="Gst::Element#foreach_sink_pad (method)">#foreach_sink_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#foreach_src_pad-instance_method" title="Gst::Element#foreach_src_pad (method)">#foreach_src_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_compatible_pad-instance_method" title="Gst::Element#get_compatible_pad (method)">#get_compatible_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_compatible_pad_template-instance_method" title="Gst::Element#get_compatible_pad_template (method)">#get_compatible_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_context-instance_method" title="Gst::Element#get_context (method)">#get_context</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_context_unlocked-instance_method" title="Gst::Element#get_context_unlocked (method)">#get_context_unlocked</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_metadata-instance_method" title="Gst::Element#get_metadata (method)">#get_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_pad_template-instance_method" title="Gst::Element#get_pad_template (method)">#get_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_request_pad-instance_method" title="Gst::Element#get_request_pad (method)">#get_request_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_state-instance_method" title="Gst::Element#get_state (method)">#get_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_static_pad-instance_method" title="Gst::Element#get_static_pad (method)">#get_static_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#is_locked_state-instance_method" title="Gst::Element#is_locked_state (method)">#is_locked_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#iterate_pads-instance_method" title="Gst::Element#iterate_pads (method)">#iterate_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#iterate_sink_pads-instance_method" title="Gst::Element#iterate_sink_pads (method)">#iterate_sink_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#iterate_src_pads-instance_method" title="Gst::Element#iterate_src_pads (method)">#iterate_src_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_elements-instance_method" title="Gst::Element#link_elements (method)">#link_elements</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_filtered-instance_method" title="Gst::Element#link_filtered (method)">#link_filtered</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_many-instance_method" title="Gst::Element#link_many (method)">#link_many</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_pads-instance_method" title="Gst::Element#link_pads (method)">#link_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_pads_filtered-instance_method" title="Gst::Element#link_pads_filtered (method)">#link_pads_filtered</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_pads_full-instance_method" title="Gst::Element#link_pads_full (method)">#link_pads_full</a></span>, <span class='object_link'><a href="../Gst/Element.html#locked_state=-instance_method" title="Gst::Element#locked_state= (method)">#locked_state=</a></span>, <span class='object_link'><a href="../Gst/Element.html#lost_state-instance_method" title="Gst::Element#lost_state (method)">#lost_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#make_from_uri-class_method" title="Gst::Element.make_from_uri (method)">make_from_uri</a></span>, <span class='object_link'><a href="../Gst/Element.html#message_full-instance_method" title="Gst::Element#message_full (method)">#message_full</a></span>, <span class='object_link'><a href="../Gst/Element.html#message_full_with_details-instance_method" title="Gst::Element#message_full_with_details (method)">#message_full_with_details</a></span>, <span class='object_link'><a href="../Gst/Element.html#no_more_pads-instance_method" title="Gst::Element#no_more_pads (method)">#no_more_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#pad_template_list-instance_method" title="Gst::Element#pad_template_list (method)">#pad_template_list</a></span>, <span class='object_link'><a href="../Gst/Element.html#pause-instance_method" title="Gst::Element#pause (method)">#pause</a></span>, <span class='object_link'><a href="../Gst/Element.html#play-instance_method" title="Gst::Element#play (method)">#play</a></span>, <span class='object_link'><a href="../Gst/Element.html#post_message-instance_method" title="Gst::Element#post_message (method)">#post_message</a></span>, <span class='object_link'><a href="../Gst/Element.html#provide_clock-instance_method" title="Gst::Element#provide_clock (method)">#provide_clock</a></span>, <span class='object_link'><a href="../Gst/Element.html#query-instance_method" title="Gst::Element#query (method)">#query</a></span>, <span class='object_link'><a href="../Gst/Element.html#query_convert-instance_method" title="Gst::Element#query_convert (method)">#query_convert</a></span>, <span class='object_link'><a href="../Gst/Element.html#query_duration-instance_method" title="Gst::Element#query_duration (method)">#query_duration</a></span>, <span class='object_link'><a href="../Gst/Element.html#query_position-instance_method" title="Gst::Element#query_position (method)">#query_position</a></span>, <span class='object_link'><a href="../Gst/Element.html#ready-instance_method" title="Gst::Element#ready (method)">#ready</a></span>, <span class='object_link'><a href="../Gst/Element.html#register-class_method" title="Gst::Element.register (method)">register</a></span>, <span class='object_link'><a href="../Gst/Element.html#release_request_pad-instance_method" title="Gst::Element#release_request_pad (method)">#release_request_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#remove_pad-instance_method" title="Gst::Element#remove_pad (method)">#remove_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#remove_property_notify_watch-instance_method" title="Gst::Element#remove_property_notify_watch (method)">#remove_property_notify_watch</a></span>, <span class='object_link'><a href="../Gst/Element.html#request_pad-instance_method" title="Gst::Element#request_pad (method)">#request_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#request_pad_simple-instance_method" title="Gst::Element#request_pad_simple (method)">#request_pad_simple</a></span>, <span class='object_link'><a href="../Gst/Element.html#seek-instance_method" title="Gst::Element#seek (method)">#seek</a></span>, <span class='object_link'><a href="../Gst/Element.html#seek_simple-instance_method" title="Gst::Element#seek_simple (method)">#seek_simple</a></span>, <span class='object_link'><a href="../Gst/Element.html#send_event-instance_method" title="Gst::Element#send_event (method)">#send_event</a></span>, <span class='object_link'><a href="../Gst/Element.html#set_metadata-instance_method" title="Gst::Element#set_metadata (method)">#set_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#set_static_metadata-instance_method" title="Gst::Element#set_static_metadata (method)">#set_static_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#start_time-instance_method" title="Gst::Element#start_time (method)">#start_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#start_time=-instance_method" title="Gst::Element#start_time= (method)">#start_time=</a></span>, <span class='object_link'><a href="../Gst/Element.html#state=-instance_method" title="Gst::Element#state= (method)">#state=</a></span>, <span class='object_link'><a href="../Gst/Element.html#state_change_return_get_name-class_method" title="Gst::Element.state_change_return_get_name (method)">state_change_return_get_name</a></span>, <span class='object_link'><a href="../Gst/Element.html#state_get_name-class_method" title="Gst::Element.state_get_name (method)">state_get_name</a></span>, <span class='object_link'><a href="../Gst/Element.html#stop-instance_method" title="Gst::Element#stop (method)">#stop</a></span>, <span class='object_link'><a href="../Gst/Element.html#sync_state_with_parent-instance_method" title="Gst::Element#sync_state_with_parent (method)">#sync_state_with_parent</a></span>, <span class='object_link'><a href="../Gst/Element.html#type_set_skip_documentation-class_method" title="Gst::Element.type_set_skip_documentation (method)">type_set_skip_documentation</a></span>, <span class='object_link'><a href="../Gst/Element.html#unlink-instance_method" title="Gst::Element#unlink (method)">#unlink</a></span>, <span class='object_link'><a href="../Gst/Element.html#unlink_many-instance_method" title="Gst::Element#unlink_many (method)">#unlink_many</a></span>, <span class='object_link'><a href="../Gst/Element.html#unlink_pads-instance_method" title="Gst::Element#unlink_pads (method)">#unlink_pads</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Gst/Object.html#add_control_binding-instance_method" title="Gst::Object#add_control_binding (method)">#add_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#check_uniqueness-class_method" title="Gst::Object.check_uniqueness (method)">check_uniqueness</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_bindings_disabled=-instance_method" title="Gst::Object#control_bindings_disabled= (method)">#control_bindings_disabled=</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate-instance_method" title="Gst::Object#control_rate (method)">#control_rate</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate=-instance_method" title="Gst::Object#control_rate= (method)">#control_rate=</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_deep_notify-class_method" title="Gst::Object.default_deep_notify (method)">default_deep_notify</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_error-instance_method" title="Gst::Object#default_error (method)">#default_error</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_control_binding-instance_method" title="Gst::Object#get_control_binding (method)">#get_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_g_value_array-instance_method" title="Gst::Object#get_g_value_array (method)">#get_g_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value-instance_method" title="Gst::Object#get_value (method)">#get_value</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value_array-instance_method" title="Gst::Object#get_value_array (method)">#get_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_active_control_bindings-instance_method" title="Gst::Object#has_active_control_bindings (method)">#has_active_control_bindings</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_ancestor-instance_method" title="Gst::Object#has_ancestor (method)">#has_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_ancestor-instance_method" title="Gst::Object#has_as_ancestor (method)">#has_as_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_parent-instance_method" title="Gst::Object#has_as_parent (method)">#has_as_parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#name-instance_method" title="Gst::Object#name (method)">#name</a></span>, <span class='object_link'><a href="../Gst/Object.html#name=-instance_method" title="Gst::Object#name= (method)">#name=</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent-instance_method" title="Gst::Object#parent (method)">#parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent=-instance_method" title="Gst::Object#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="../Gst/Object.html#path_string-instance_method" title="Gst::Object#path_string (method)">#path_string</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref-instance_method" title="Gst::Object#ref (method)">#ref</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref_sink-class_method" title="Gst::Object.ref_sink (method)">ref_sink</a></span>, <span class='object_link'><a href="../Gst/Object.html#remove_control_binding-instance_method" title="Gst::Object#remove_control_binding (method)">#remove_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#replace-class_method" title="Gst::Object.replace (method)">replace</a></span>, <span class='object_link'><a href="../Gst/Object.html#set_control_binding_disabled-instance_method" title="Gst::Object#set_control_binding_disabled (method)">#set_control_binding_disabled</a></span>, <span class='object_link'><a href="../Gst/Object.html#suggest_next_sync-instance_method" title="Gst::Object#suggest_next_sync (method)">#suggest_next_sync</a></span>, <span class='object_link'><a href="../Gst/Object.html#sync_values-instance_method" title="Gst::Object#sync_values (method)">#sync_values</a></span>, <span class='object_link'><a href="../Gst/Object.html#unparent-instance_method" title="Gst::Object#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="../Gst/Object.html#unref-instance_method" title="Gst::Object#unref (method)">#unref</a></span></p>
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_track-instance_method">
+  
+    #<strong>add_track</strong>(track)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>CDDA sources use this function from their start vfunc to announce the
+available data and audio tracks to the base source class. The caller
+should allocate <!-- raw HTML omitted -->track<!-- raw HTML omitted --> on the stack, the base source will do a shallow
+copy of the structure (and take ownership of the taglist if there is one).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>track</span>
+      
+      
+        <span class='type'>(<tt>GstAudio::AudioCdSrcTrack</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>address of Gst::AudioCdSrcTrack to add</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>FALSE on error, otherwise TRUE.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="device-instance_method">
+  
+    #<strong>device</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns device.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>device</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="device=-instance_method">
+  
+    #<strong>device=</strong>(device)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>device</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>device</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>device</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mode-instance_method">
+  
+    #<strong>mode</strong>  &#x21d2; <tt><span class='object_link'><a href="AudioCdSrcMode.html" title="GstAudio::AudioCdSrcMode (module)">GstAudio::AudioCdSrcMode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns mode.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AudioCdSrcMode.html" title="GstAudio::AudioCdSrcMode (module)">GstAudio::AudioCdSrcMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mode=-instance_method">
+  
+    #<strong>mode=</strong>(mode)  &#x21d2; <tt><span class='object_link'><a href="AudioCdSrcMode.html" title="GstAudio::AudioCdSrcMode (module)">GstAudio::AudioCdSrcMode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AudioCdSrcMode.html" title="GstAudio::AudioCdSrcMode (module)">GstAudio::AudioCdSrcMode</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AudioCdSrcMode.html" title="GstAudio::AudioCdSrcMode (module)">GstAudio::AudioCdSrcMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>mode</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AudioCdSrcMode.html" title="GstAudio::AudioCdSrcMode (module)">GstAudio::AudioCdSrcMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="track-instance_method">
+  
+    #<strong>track</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns track.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>track</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="track=-instance_method">
+  
+    #<strong>track=</strong>(track)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>track</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>track</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>track</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,6517 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::Window
+  
+    &mdash; Ruby/GtkSourceView3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::Window";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (W)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">Window</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::Window
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Widget</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Widget</a></span></li>
+          
+            <li class="next">Gtk::Window</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="AboutDialog.html" title="Gtk::AboutDialog (class)">AboutDialog</a></span>, <span class='object_link'><a href="ApplicationWindow.html" title="Gtk::ApplicationWindow (class)">ApplicationWindow</a></span>, <span class='object_link'><a href="Assistant.html" title="Gtk::Assistant (class)">Assistant</a></span>, <span class='object_link'><a href="Dialog.html" title="Gtk::Dialog (class)">Dialog</a></span>, <span class='object_link'><a href="ShortcutsWindow.html" title="Gtk::ShortcutsWindow (class)">ShortcutsWindow</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#auto_startup_notification=-class_method" title="auto_startup_notification= (class method)">.<strong>auto_startup_notification=</strong>(setting)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets whether the window should request startup notification.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_icon_name-class_method" title="default_icon_name (class method)">.<strong>default_icon_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the fallback icon name for windows.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_icon_name=-class_method" title="default_icon_name= (class method)">.<strong>default_icon_name=</strong>(name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets an icon to be used as fallback.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#interactive_debugging=-class_method" title="interactive_debugging= (class method)">.<strong>interactive_debugging=</strong>(enable)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Opens or closes the <a href="running.html#interactive-debugging">interactive debugger</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_toplevels-class_method" title="list_toplevels (class method)">.<strong>list_toplevels</strong>  &#x21d2; GLib::List&lt;Gtk::Widget&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a list of all existing toplevel windows.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#toplevels-class_method" title="toplevels (class method)">.<strong>toplevels</strong>  &#x21d2; Gio::ListModel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a list of all existing toplevel windows.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#application-instance_method" title="#application (instance method)">#<strong>application</strong>  &#x21d2; Gtk::Application </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The <code>GtkApplication</code> associated with the window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#application=-instance_method" title="#application= (instance method)">#<strong>application=</strong>(application)  &#x21d2; Gtk::Application </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The <code>GtkApplication</code> associated with the window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#child-instance_method" title="#child (instance method)">#<strong>child</strong>  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The child widget.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#child=-instance_method" title="#child= (instance method)">#<strong>child=</strong>(child)  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The child widget.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close-instance_method" title="#close (instance method)">#<strong>close</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Requests that the window is closed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#decorated-instance_method" title="#decorated (instance method)">#<strong>decorated</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether the window has been set to have decorations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#decorated=-instance_method" title="#decorated= (instance method)">#<strong>decorated=</strong>(decorated)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the window should have a frame (also known as <em>decorations</em>).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#decorated%3F-instance_method" title="#decorated? (instance method)">#<strong>decorated?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the window should have a frame (also known as <em>decorations</em>).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_height-instance_method" title="#default_height (instance method)">#<strong>default_height</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The default height of the window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_height=-instance_method" title="#default_height= (instance method)">#<strong>default_height=</strong>(default_height)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The default height of the window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_widget-instance_method" title="#default_widget (instance method)">#<strong>default_widget</strong>  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The default widget.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_widget=-instance_method" title="#default_widget= (instance method)">#<strong>default_widget=</strong>(default_widget)  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The default widget.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_width-instance_method" title="#default_width (instance method)">#<strong>default_width</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The default width of the window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_width=-instance_method" title="#default_width= (instance method)">#<strong>default_width=</strong>(default_width)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The default width of the window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#deletable-instance_method" title="#deletable (instance method)">#<strong>deletable</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether the window has been set to have a close button.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#deletable=-instance_method" title="#deletable= (instance method)">#<strong>deletable=</strong>(deletable)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the window frame should have a close button.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#deletable%3F-instance_method" title="#deletable? (instance method)">#<strong>deletable?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the window frame should have a close button.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#destroy-instance_method" title="#destroy (instance method)">#<strong>destroy</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Drop the internal reference GTK holds on toplevel windows.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#destroy_with_parent-instance_method" title="#destroy_with_parent (instance method)">#<strong>destroy_with_parent</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether the window will be destroyed with its transient parent.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#destroy_with_parent=-instance_method" title="#destroy_with_parent= (instance method)">#<strong>destroy_with_parent=</strong>(destroy_with_parent)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If this window should be destroyed when the parent is destroyed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#destroy_with_parent%3F-instance_method" title="#destroy_with_parent? (instance method)">#<strong>destroy_with_parent?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If this window should be destroyed when the parent is destroyed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#display-instance_method" title="#display (instance method)">#<strong>display</strong>  &#x21d2; Gdk::Display </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The display that will display this window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#display=-instance_method" title="#display= (instance method)">#<strong>display=</strong>(display)  &#x21d2; Gdk::Display </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The display that will display this window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#focus-instance_method" title="#focus (instance method)">#<strong>focus</strong>  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the current focused widget within the window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#focus=-instance_method" title="#focus= (instance method)">#<strong>focus=</strong>(focus)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the focus widget.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#focus_visible-instance_method" title="#focus_visible (instance method)">#<strong>focus_visible</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether “focus rectangles” are supposed to be visible.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#focus_visible=-instance_method" title="#focus_visible= (instance method)">#<strong>focus_visible=</strong>(focus_visible)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether 'focus rectangles' are currently visible in this window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#focus_visible%3F-instance_method" title="#focus_visible? (instance method)">#<strong>focus_visible?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether 'focus rectangles' are currently visible in this window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#focus_widget-instance_method" title="#focus_widget (instance method)">#<strong>focus_widget</strong>  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The focus widget.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#focus_widget=-instance_method" title="#focus_widget= (instance method)">#<strong>focus_widget=</strong>(focus_widget)  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The focus widget.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fullscreen-instance_method" title="#fullscreen (instance method)">#<strong>fullscreen</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks to place <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in the fullscreen state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fullscreen_on_monitor-instance_method" title="#fullscreen_on_monitor (instance method)">#<strong>fullscreen_on_monitor</strong>(monitor)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks to place <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in the fullscreen state on the given <!-- raw HTML omitted -->monitor<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fullscreened=-instance_method" title="#fullscreened= (instance method)">#<strong>fullscreened=</strong>(fullscreened)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the window is fullscreen.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fullscreened%3F-instance_method" title="#fullscreened? (instance method)">#<strong>fullscreened?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the window is fullscreen.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_default_size-instance_method" title="#get_default_size (instance method)">#<strong>get_default_size</strong>(width, height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the default size of the window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#group-instance_method" title="#group (instance method)">#<strong>group</strong>  &#x21d2; Gtk::WindowGroup </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the group for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#handle_menubar_accel-instance_method" title="#handle_menubar_accel (instance method)">#<strong>handle_menubar_accel</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether this window reacts to F10 key presses by activating a menubar it contains.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#handle_menubar_accel=-instance_method" title="#handle_menubar_accel= (instance method)">#<strong>handle_menubar_accel=</strong>(handle_menubar_accel)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the window frame should handle F10 for activating menubars.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#handle_menubar_accel%3F-instance_method" title="#handle_menubar_accel? (instance method)">#<strong>handle_menubar_accel?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the window frame should handle F10 for activating menubars.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_group-instance_method" title="#has_group (instance method)">#<strong>has_group</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has an explicit window group.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hide_on_close-instance_method" title="#hide_on_close (instance method)">#<strong>hide_on_close</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether the window will be hidden when the close button is clicked.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hide_on_close=-instance_method" title="#hide_on_close= (instance method)">#<strong>hide_on_close=</strong>(hide_on_close)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If this window should be hidden when the users clicks the close button.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hide_on_close%3F-instance_method" title="#hide_on_close? (instance method)">#<strong>hide_on_close?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If this window should be hidden when the users clicks the close button.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#icon_name-instance_method" title="#icon_name (instance method)">#<strong>icon_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Specifies the name of the themed icon to use as the window icon.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#icon_name=-instance_method" title="#icon_name= (instance method)">#<strong>icon_name=</strong>(icon_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Specifies the name of the themed icon to use as the window icon.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new <code>GtkWindow</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_active-instance_method" title="#is_active (instance method)">#<strong>is_active</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether the window is part of the current active toplevel.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_active=-instance_method" title="#is_active= (instance method)">#<strong>is_active=</strong>(is_active)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the toplevel is the currently active window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_active%3F-instance_method" title="#is_active? (instance method)">#<strong>is_active?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the toplevel is the currently active window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_fullscreen-instance_method" title="#is_fullscreen (instance method)">#<strong>is_fullscreen</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the current fullscreen state of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_maximized-instance_method" title="#is_maximized (instance method)">#<strong>is_maximized</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the current maximized state of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_suspended-instance_method" title="#is_suspended (instance method)">#<strong>is_suspended</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the current suspended state of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#maximize-instance_method" title="#maximize (instance method)">#<strong>maximize</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks to maximize <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, so that it fills the screen.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#maximized=-instance_method" title="#maximized= (instance method)">#<strong>maximized=</strong>(maximized)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the window is maximized.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#maximized%3F-instance_method" title="#maximized? (instance method)">#<strong>maximized?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the window is maximized.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#minimize-instance_method" title="#minimize (instance method)">#<strong>minimize</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks to minimize the specified <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mnemonics_visible-instance_method" title="#mnemonics_visible (instance method)">#<strong>mnemonics_visible</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether mnemonics are supposed to be visible.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mnemonics_visible=-instance_method" title="#mnemonics_visible= (instance method)">#<strong>mnemonics_visible=</strong>(mnemonics_visible)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether mnemonics are currently visible in this window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mnemonics_visible%3F-instance_method" title="#mnemonics_visible? (instance method)">#<strong>mnemonics_visible?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether mnemonics are currently visible in this window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#modal-instance_method" title="#modal (instance method)">#<strong>modal</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether the window is modal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#modal=-instance_method" title="#modal= (instance method)">#<strong>modal=</strong>(modal)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If true, the window is modal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#modal%3F-instance_method" title="#modal? (instance method)">#<strong>modal?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If true, the window is modal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#present-instance_method" title="#present (instance method)">#<strong>present</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Presents a window to the user.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#present_with_time-instance_method" title="#present_with_time (instance method)">#<strong>present_with_time</strong>(timestamp)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Presents a window to the user in response to an user interaction.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resizable-instance_method" title="#resizable (instance method)">#<strong>resizable</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the value set by gtk_window_set_resizable().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resizable=-instance_method" title="#resizable= (instance method)">#<strong>resizable=</strong>(resizable)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If true, users can resize the window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resizable%3F-instance_method" title="#resizable? (instance method)">#<strong>resizable?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If true, users can resize the window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_default_size-instance_method" title="#set_default_size (instance method)">#<strong>set_default_size</strong>(width, height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the default size of a window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#startup_id=-instance_method" title="#startup_id= (instance method)">#<strong>startup_id=</strong>(startup_id)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A write-only property for setting window's startup notification identifier.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#suspended=-instance_method" title="#suspended= (instance method)">#<strong>suspended=</strong>(suspended)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the window is suspended.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#suspended%3F-instance_method" title="#suspended? (instance method)">#<strong>suspended?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the window is suspended.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#title-instance_method" title="#title (instance method)">#<strong>title</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The title of the window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#title=-instance_method" title="#title= (instance method)">#<strong>title=</strong>(title)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The title of the window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#titlebar-instance_method" title="#titlebar (instance method)">#<strong>titlebar</strong>  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The titlebar widget.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#titlebar=-instance_method" title="#titlebar= (instance method)">#<strong>titlebar=</strong>(titlebar)  &#x21d2; Gtk::Widget </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The titlebar widget.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transient_for-instance_method" title="#transient_for (instance method)">#<strong>transient_for</strong>  &#x21d2; Gtk::Window </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The transient parent of the window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transient_for=-instance_method" title="#transient_for= (instance method)">#<strong>transient_for=</strong>(transient_for)  &#x21d2; Gtk::Window </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The transient parent of the window.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unfullscreen-instance_method" title="#unfullscreen (instance method)">#<strong>unfullscreen</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks to remove the fullscreen state for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, and return to its previous state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unmaximize-instance_method" title="#unmaximize (instance method)">#<strong>unmaximize</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks to unmaximize <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unminimize-instance_method" title="#unminimize (instance method)">#<strong>unminimize</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asks to unminimize the specified <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Widget</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Widget.html#accessible_role-instance_method" title="Gtk::Widget#accessible_role (method)">#accessible_role</a></span>, <span class='object_link'><a href="Widget.html#accessible_role=-instance_method" title="Gtk::Widget#accessible_role= (method)">#accessible_role=</a></span>, <span class='object_link'><a href="Widget.html#action_set_enabled-instance_method" title="Gtk::Widget#action_set_enabled (method)">#action_set_enabled</a></span>, <span class='object_link'><a href="Widget.html#activate-instance_method" title="Gtk::Widget#activate (method)">#activate</a></span>, <span class='object_link'><a href="Widget.html#activate_action-instance_method" title="Gtk::Widget#activate_action (method)">#activate_action</a></span>, <span class='object_link'><a href="Widget.html#activate_action_variant-instance_method" title="Gtk::Widget#activate_action_variant (method)">#activate_action_variant</a></span>, <span class='object_link'><a href="Widget.html#activate_default-instance_method" title="Gtk::Widget#activate_default (method)">#activate_default</a></span>, <span class='object_link'><a href="Widget.html#activate_signal-instance_method" title="Gtk::Widget#activate_signal (method)">#activate_signal</a></span>, <span class='object_link'><a href="Widget.html#activate_signal=-instance_method" title="Gtk::Widget#activate_signal= (method)">#activate_signal=</a></span>, <span class='object_link'><a href="Widget.html#activate_signal_from_name=-instance_method" title="Gtk::Widget#activate_signal_from_name= (method)">#activate_signal_from_name=</a></span>, <span class='object_link'><a href="Widget.html#add_binding-instance_method" title="Gtk::Widget#add_binding (method)">#add_binding</a></span>, <span class='object_link'><a href="Widget.html#add_binding_action-instance_method" title="Gtk::Widget#add_binding_action (method)">#add_binding_action</a></span>, <span class='object_link'><a href="Widget.html#add_binding_signal-instance_method" title="Gtk::Widget#add_binding_signal (method)">#add_binding_signal</a></span>, <span class='object_link'><a href="Widget.html#add_controller-instance_method" title="Gtk::Widget#add_controller (method)">#add_controller</a></span>, <span class='object_link'><a href="Widget.html#add_css_class-instance_method" title="Gtk::Widget#add_css_class (method)">#add_css_class</a></span>, <span class='object_link'><a href="Widget.html#add_mnemonic_label-instance_method" title="Gtk::Widget#add_mnemonic_label (method)">#add_mnemonic_label</a></span>, <span class='object_link'><a href="Widget.html#add_shortcut-instance_method" title="Gtk::Widget#add_shortcut (method)">#add_shortcut</a></span>, <span class='object_link'><a href="Widget.html#add_tick_callback-instance_method" title="Gtk::Widget#add_tick_callback (method)">#add_tick_callback</a></span>, <span class='object_link'><a href="Widget.html#allocate-instance_method" title="Gtk::Widget#allocate (method)">#allocate</a></span>, <span class='object_link'><a href="Widget.html#allocated_baseline-instance_method" title="Gtk::Widget#allocated_baseline (method)">#allocated_baseline</a></span>, <span class='object_link'><a href="Widget.html#allocated_height-instance_method" title="Gtk::Widget#allocated_height (method)">#allocated_height</a></span>, <span class='object_link'><a href="Widget.html#allocated_width-instance_method" title="Gtk::Widget#allocated_width (method)">#allocated_width</a></span>, <span class='object_link'><a href="Widget.html#baseline-instance_method" title="Gtk::Widget#baseline (method)">#baseline</a></span>, <span class='object_link'><a href="Widget.html#bind_template_callback_full-instance_method" title="Gtk::Widget#bind_template_callback_full (method)">#bind_template_callback_full</a></span>, <span class='object_link'><a href="Widget.html#bind_template_child_full-instance_method" title="Gtk::Widget#bind_template_child_full (method)">#bind_template_child_full</a></span>, <span class='object_link'><a href="Widget.html#can_focus-instance_method" title="Gtk::Widget#can_focus (method)">#can_focus</a></span>, <span class='object_link'><a href="Widget.html#can_focus=-instance_method" title="Gtk::Widget#can_focus= (method)">#can_focus=</a></span>, <span class='object_link'><a href="Widget.html#can_focus%3F-instance_method" title="Gtk::Widget#can_focus? (method)">#can_focus?</a></span>, <span class='object_link'><a href="Widget.html#can_target-instance_method" title="Gtk::Widget#can_target (method)">#can_target</a></span>, <span class='object_link'><a href="Widget.html#can_target=-instance_method" title="Gtk::Widget#can_target= (method)">#can_target=</a></span>, <span class='object_link'><a href="Widget.html#can_target%3F-instance_method" title="Gtk::Widget#can_target? (method)">#can_target?</a></span>, <span class='object_link'><a href="Widget.html#child_focus-instance_method" title="Gtk::Widget#child_focus (method)">#child_focus</a></span>, <span class='object_link'><a href="Widget.html#child_visible-instance_method" title="Gtk::Widget#child_visible (method)">#child_visible</a></span>, <span class='object_link'><a href="Widget.html#child_visible=-instance_method" title="Gtk::Widget#child_visible= (method)">#child_visible=</a></span>, <span class='object_link'><a href="Widget.html#clipboard-instance_method" title="Gtk::Widget#clipboard (method)">#clipboard</a></span>, <span class='object_link'><a href="Widget.html#compute_bounds-instance_method" title="Gtk::Widget#compute_bounds (method)">#compute_bounds</a></span>, <span class='object_link'><a href="Widget.html#compute_expand-instance_method" title="Gtk::Widget#compute_expand (method)">#compute_expand</a></span>, <span class='object_link'><a href="Widget.html#compute_point-instance_method" title="Gtk::Widget#compute_point (method)">#compute_point</a></span>, <span class='object_link'><a href="Widget.html#compute_transform-instance_method" title="Gtk::Widget#compute_transform (method)">#compute_transform</a></span>, <span class='object_link'><a href="Widget.html#contains-instance_method" title="Gtk::Widget#contains (method)">#contains</a></span>, <span class='object_link'><a href="Widget.html#create_pango_context-instance_method" title="Gtk::Widget#create_pango_context (method)">#create_pango_context</a></span>, <span class='object_link'><a href="Widget.html#create_pango_layout-instance_method" title="Gtk::Widget#create_pango_layout (method)">#create_pango_layout</a></span>, <span class='object_link'><a href="Widget.html#css_classes-instance_method" title="Gtk::Widget#css_classes (method)">#css_classes</a></span>, <span class='object_link'><a href="Widget.html#css_classes=-instance_method" title="Gtk::Widget#css_classes= (method)">#css_classes=</a></span>, <span class='object_link'><a href="Widget.html#css_name-instance_method" title="Gtk::Widget#css_name (method)">#css_name</a></span>, <span class='object_link'><a href="Widget.html#css_name=-instance_method" title="Gtk::Widget#css_name= (method)">#css_name=</a></span>, <span class='object_link'><a href="Widget.html#cursor-instance_method" title="Gtk::Widget#cursor (method)">#cursor</a></span>, <span class='object_link'><a href="Widget.html#cursor=-instance_method" title="Gtk::Widget#cursor= (method)">#cursor=</a></span>, <span class='object_link'><a href="Widget.html#cursor_from_name=-instance_method" title="Gtk::Widget#cursor_from_name= (method)">#cursor_from_name=</a></span>, <span class='object_link'><a href="Widget.html#default_direction-class_method" title="Gtk::Widget.default_direction (method)">default_direction</a></span>, <span class='object_link'><a href="Widget.html#default_direction=-class_method" title="Gtk::Widget.default_direction= (method)">default_direction=</a></span>, <span class='object_link'><a href="Widget.html#direction-instance_method" title="Gtk::Widget#direction (method)">#direction</a></span>, <span class='object_link'><a href="Widget.html#direction=-instance_method" title="Gtk::Widget#direction= (method)">#direction=</a></span>, <span class='object_link'><a href="Widget.html#dispose_template-instance_method" title="Gtk::Widget#dispose_template (method)">#dispose_template</a></span>, <span class='object_link'><a href="Widget.html#drag_check_threshold-instance_method" title="Gtk::Widget#drag_check_threshold (method)">#drag_check_threshold</a></span>, <span class='object_link'><a href="Widget.html#error_bell-instance_method" title="Gtk::Widget#error_bell (method)">#error_bell</a></span>, <span class='object_link'><a href="Widget.html#first_child-instance_method" title="Gtk::Widget#first_child (method)">#first_child</a></span>, <span class='object_link'><a href="Widget.html#focus_child-instance_method" title="Gtk::Widget#focus_child (method)">#focus_child</a></span>, <span class='object_link'><a href="Widget.html#focus_child=-instance_method" title="Gtk::Widget#focus_child= (method)">#focus_child=</a></span>, <span class='object_link'><a href="Widget.html#focus_on_click-instance_method" title="Gtk::Widget#focus_on_click (method)">#focus_on_click</a></span>, <span class='object_link'><a href="Widget.html#focus_on_click=-instance_method" title="Gtk::Widget#focus_on_click= (method)">#focus_on_click=</a></span>, <span class='object_link'><a href="Widget.html#focus_on_click%3F-instance_method" title="Gtk::Widget#focus_on_click? (method)">#focus_on_click?</a></span>, <span class='object_link'><a href="Widget.html#focusable-instance_method" title="Gtk::Widget#focusable (method)">#focusable</a></span>, <span class='object_link'><a href="Widget.html#focusable=-instance_method" title="Gtk::Widget#focusable= (method)">#focusable=</a></span>, <span class='object_link'><a href="Widget.html#focusable%3F-instance_method" title="Gtk::Widget#focusable? (method)">#focusable?</a></span>, <span class='object_link'><a href="Widget.html#font_map-instance_method" title="Gtk::Widget#font_map (method)">#font_map</a></span>, <span class='object_link'><a href="Widget.html#font_map=-instance_method" title="Gtk::Widget#font_map= (method)">#font_map=</a></span>, <span class='object_link'><a href="Widget.html#font_options-instance_method" title="Gtk::Widget#font_options (method)">#font_options</a></span>, <span class='object_link'><a href="Widget.html#font_options=-instance_method" title="Gtk::Widget#font_options= (method)">#font_options=</a></span>, <span class='object_link'><a href="Widget.html#frame_clock-instance_method" title="Gtk::Widget#frame_clock (method)">#frame_clock</a></span>, <span class='object_link'><a href="Widget.html#get_allocation-instance_method" title="Gtk::Widget#get_allocation (method)">#get_allocation</a></span>, <span class='object_link'><a href="Widget.html#get_ancestor-instance_method" title="Gtk::Widget#get_ancestor (method)">#get_ancestor</a></span>, <span class='object_link'><a href="Widget.html#get_color-instance_method" title="Gtk::Widget#get_color (method)">#get_color</a></span>, <span class='object_link'><a href="Widget.html#get_preferred_size-instance_method" title="Gtk::Widget#get_preferred_size (method)">#get_preferred_size</a></span>, <span class='object_link'><a href="Widget.html#get_size-instance_method" title="Gtk::Widget#get_size (method)">#get_size</a></span>, <span class='object_link'><a href="Widget.html#get_size_request-instance_method" title="Gtk::Widget#get_size_request (method)">#get_size_request</a></span>, <span class='object_link'><a href="Widget.html#get_template_child-instance_method" title="Gtk::Widget#get_template_child (method)">#get_template_child</a></span>, <span class='object_link'><a href="Widget.html#grab_focus-instance_method" title="Gtk::Widget#grab_focus (method)">#grab_focus</a></span>, <span class='object_link'><a href="Widget.html#halign-instance_method" title="Gtk::Widget#halign (method)">#halign</a></span>, <span class='object_link'><a href="Widget.html#halign=-instance_method" title="Gtk::Widget#halign= (method)">#halign=</a></span>, <span class='object_link'><a href="Widget.html#has_css_class-instance_method" title="Gtk::Widget#has_css_class (method)">#has_css_class</a></span>, <span class='object_link'><a href="Widget.html#has_default-instance_method" title="Gtk::Widget#has_default (method)">#has_default</a></span>, <span class='object_link'><a href="Widget.html#has_default=-instance_method" title="Gtk::Widget#has_default= (method)">#has_default=</a></span>, <span class='object_link'><a href="Widget.html#has_default%3F-instance_method" title="Gtk::Widget#has_default? (method)">#has_default?</a></span>, <span class='object_link'><a href="Widget.html#has_focus-instance_method" title="Gtk::Widget#has_focus (method)">#has_focus</a></span>, <span class='object_link'><a href="Widget.html#has_focus=-instance_method" title="Gtk::Widget#has_focus= (method)">#has_focus=</a></span>, <span class='object_link'><a href="Widget.html#has_focus%3F-instance_method" title="Gtk::Widget#has_focus? (method)">#has_focus?</a></span>, <span class='object_link'><a href="Widget.html#has_tooltip-instance_method" title="Gtk::Widget#has_tooltip (method)">#has_tooltip</a></span>, <span class='object_link'><a href="Widget.html#has_tooltip=-instance_method" title="Gtk::Widget#has_tooltip= (method)">#has_tooltip=</a></span>, <span class='object_link'><a href="Widget.html#has_tooltip%3F-instance_method" title="Gtk::Widget#has_tooltip? (method)">#has_tooltip?</a></span>, <span class='object_link'><a href="Widget.html#has_visible_focus-instance_method" title="Gtk::Widget#has_visible_focus (method)">#has_visible_focus</a></span>, <span class='object_link'><a href="Widget.html#height-instance_method" title="Gtk::Widget#height (method)">#height</a></span>, <span class='object_link'><a href="Widget.html#height_request-instance_method" title="Gtk::Widget#height_request (method)">#height_request</a></span>, <span class='object_link'><a href="Widget.html#height_request=-instance_method" title="Gtk::Widget#height_request= (method)">#height_request=</a></span>, <span class='object_link'><a href="Widget.html#hexpand-instance_method" title="Gtk::Widget#hexpand (method)">#hexpand</a></span>, <span class='object_link'><a href="Widget.html#hexpand=-instance_method" title="Gtk::Widget#hexpand= (method)">#hexpand=</a></span>, <span class='object_link'><a href="Widget.html#hexpand%3F-instance_method" title="Gtk::Widget#hexpand? (method)">#hexpand?</a></span>, <span class='object_link'><a href="Widget.html#hexpand_set-instance_method" title="Gtk::Widget#hexpand_set (method)">#hexpand_set</a></span>, <span class='object_link'><a href="Widget.html#hexpand_set=-instance_method" title="Gtk::Widget#hexpand_set= (method)">#hexpand_set=</a></span>, <span class='object_link'><a href="Widget.html#hexpand_set%3F-instance_method" title="Gtk::Widget#hexpand_set? (method)">#hexpand_set?</a></span>, <span class='object_link'><a href="Widget.html#hide-instance_method" title="Gtk::Widget#hide (method)">#hide</a></span>, <span class='object_link'><a href="Widget.html#in_destruction-instance_method" title="Gtk::Widget#in_destruction (method)">#in_destruction</a></span>, <span class='object_link'><a href="Widget.html#init_template-instance_method" title="Gtk::Widget#init_template (method)">#init_template</a></span>, <span class='object_link'><a href="Widget.html#insert_action_group-instance_method" title="Gtk::Widget#insert_action_group (method)">#insert_action_group</a></span>, <span class='object_link'><a href="Widget.html#insert_after-instance_method" title="Gtk::Widget#insert_after (method)">#insert_after</a></span>, <span class='object_link'><a href="Widget.html#insert_before-instance_method" title="Gtk::Widget#insert_before (method)">#insert_before</a></span>, <span class='object_link'><a href="Widget.html#install_action-instance_method" title="Gtk::Widget#install_action (method)">#install_action</a></span>, <span class='object_link'><a href="Widget.html#install_property_action-instance_method" title="Gtk::Widget#install_property_action (method)">#install_property_action</a></span>, <span class='object_link'><a href="Widget.html#is_ancestor-instance_method" title="Gtk::Widget#is_ancestor (method)">#is_ancestor</a></span>, <span class='object_link'><a href="Widget.html#is_drawable-instance_method" title="Gtk::Widget#is_drawable (method)">#is_drawable</a></span>, <span class='object_link'><a href="Widget.html#is_focus-instance_method" title="Gtk::Widget#is_focus (method)">#is_focus</a></span>, <span class='object_link'><a href="Widget.html#is_sensitive-instance_method" title="Gtk::Widget#is_sensitive (method)">#is_sensitive</a></span>, <span class='object_link'><a href="Widget.html#is_visible-instance_method" title="Gtk::Widget#is_visible (method)">#is_visible</a></span>, <span class='object_link'><a href="Widget.html#keynav_failed-instance_method" title="Gtk::Widget#keynav_failed (method)">#keynav_failed</a></span>, <span class='object_link'><a href="Widget.html#last_child-instance_method" title="Gtk::Widget#last_child (method)">#last_child</a></span>, <span class='object_link'><a href="Widget.html#layout_manager-instance_method" title="Gtk::Widget#layout_manager (method)">#layout_manager</a></span>, <span class='object_link'><a href="Widget.html#layout_manager=-instance_method" title="Gtk::Widget#layout_manager= (method)">#layout_manager=</a></span>, <span class='object_link'><a href="Widget.html#layout_manager_type-instance_method" title="Gtk::Widget#layout_manager_type (method)">#layout_manager_type</a></span>, <span class='object_link'><a href="Widget.html#layout_manager_type=-instance_method" title="Gtk::Widget#layout_manager_type= (method)">#layout_manager_type=</a></span>, <span class='object_link'><a href="Widget.html#list_mnemonic_labels-instance_method" title="Gtk::Widget#list_mnemonic_labels (method)">#list_mnemonic_labels</a></span>, <span class='object_link'><a href="Widget.html#map-instance_method" title="Gtk::Widget#map (method)">#map</a></span>, <span class='object_link'><a href="Widget.html#mapped-instance_method" title="Gtk::Widget#mapped (method)">#mapped</a></span>, <span class='object_link'><a href="Widget.html#margin_bottom-instance_method" title="Gtk::Widget#margin_bottom (method)">#margin_bottom</a></span>, <span class='object_link'><a href="Widget.html#margin_bottom=-instance_method" title="Gtk::Widget#margin_bottom= (method)">#margin_bottom=</a></span>, <span class='object_link'><a href="Widget.html#margin_end-instance_method" title="Gtk::Widget#margin_end (method)">#margin_end</a></span>, <span class='object_link'><a href="Widget.html#margin_end=-instance_method" title="Gtk::Widget#margin_end= (method)">#margin_end=</a></span>, <span class='object_link'><a href="Widget.html#margin_start-instance_method" title="Gtk::Widget#margin_start (method)">#margin_start</a></span>, <span class='object_link'><a href="Widget.html#margin_start=-instance_method" title="Gtk::Widget#margin_start= (method)">#margin_start=</a></span>, <span class='object_link'><a href="Widget.html#margin_top-instance_method" title="Gtk::Widget#margin_top (method)">#margin_top</a></span>, <span class='object_link'><a href="Widget.html#margin_top=-instance_method" title="Gtk::Widget#margin_top= (method)">#margin_top=</a></span>, <span class='object_link'><a href="Widget.html#measure-instance_method" title="Gtk::Widget#measure (method)">#measure</a></span>, <span class='object_link'><a href="Widget.html#mnemonic_activate-instance_method" title="Gtk::Widget#mnemonic_activate (method)">#mnemonic_activate</a></span>, <span class='object_link'><a href="Widget.html#name-instance_method" title="Gtk::Widget#name (method)">#name</a></span>, <span class='object_link'><a href="Widget.html#name=-instance_method" title="Gtk::Widget#name= (method)">#name=</a></span>, <span class='object_link'><a href="Widget.html#native-instance_method" title="Gtk::Widget#native (method)">#native</a></span>, <span class='object_link'><a href="Widget.html#next_sibling-instance_method" title="Gtk::Widget#next_sibling (method)">#next_sibling</a></span>, <span class='object_link'><a href="Widget.html#observe_children-instance_method" title="Gtk::Widget#observe_children (method)">#observe_children</a></span>, <span class='object_link'><a href="Widget.html#observe_controllers-instance_method" title="Gtk::Widget#observe_controllers (method)">#observe_controllers</a></span>, <span class='object_link'><a href="Widget.html#opacity-instance_method" title="Gtk::Widget#opacity (method)">#opacity</a></span>, <span class='object_link'><a href="Widget.html#opacity=-instance_method" title="Gtk::Widget#opacity= (method)">#opacity=</a></span>, <span class='object_link'><a href="Widget.html#overflow-instance_method" title="Gtk::Widget#overflow (method)">#overflow</a></span>, <span class='object_link'><a href="Widget.html#overflow=-instance_method" title="Gtk::Widget#overflow= (method)">#overflow=</a></span>, <span class='object_link'><a href="Widget.html#pango_context-instance_method" title="Gtk::Widget#pango_context (method)">#pango_context</a></span>, <span class='object_link'><a href="Widget.html#parent-instance_method" title="Gtk::Widget#parent (method)">#parent</a></span>, <span class='object_link'><a href="Widget.html#parent=-instance_method" title="Gtk::Widget#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="Widget.html#pick-instance_method" title="Gtk::Widget#pick (method)">#pick</a></span>, <span class='object_link'><a href="Widget.html#prev_sibling-instance_method" title="Gtk::Widget#prev_sibling (method)">#prev_sibling</a></span>, <span class='object_link'><a href="Widget.html#primary_clipboard-instance_method" title="Gtk::Widget#primary_clipboard (method)">#primary_clipboard</a></span>, <span class='object_link'><a href="Widget.html#query_action-instance_method" title="Gtk::Widget#query_action (method)">#query_action</a></span>, <span class='object_link'><a href="Widget.html#queue_allocate-instance_method" title="Gtk::Widget#queue_allocate (method)">#queue_allocate</a></span>, <span class='object_link'><a href="Widget.html#queue_draw-instance_method" title="Gtk::Widget#queue_draw (method)">#queue_draw</a></span>, <span class='object_link'><a href="Widget.html#queue_resize-instance_method" title="Gtk::Widget#queue_resize (method)">#queue_resize</a></span>, <span class='object_link'><a href="Widget.html#realize-instance_method" title="Gtk::Widget#realize (method)">#realize</a></span>, <span class='object_link'><a href="Widget.html#realized-instance_method" title="Gtk::Widget#realized (method)">#realized</a></span>, <span class='object_link'><a href="Widget.html#receives_default-instance_method" title="Gtk::Widget#receives_default (method)">#receives_default</a></span>, <span class='object_link'><a href="Widget.html#receives_default=-instance_method" title="Gtk::Widget#receives_default= (method)">#receives_default=</a></span>, <span class='object_link'><a href="Widget.html#receives_default%3F-instance_method" title="Gtk::Widget#receives_default? (method)">#receives_default?</a></span>, <span class='object_link'><a href="Widget.html#remove_controller-instance_method" title="Gtk::Widget#remove_controller (method)">#remove_controller</a></span>, <span class='object_link'><a href="Widget.html#remove_css_class-instance_method" title="Gtk::Widget#remove_css_class (method)">#remove_css_class</a></span>, <span class='object_link'><a href="Widget.html#remove_mnemonic_label-instance_method" title="Gtk::Widget#remove_mnemonic_label (method)">#remove_mnemonic_label</a></span>, <span class='object_link'><a href="Widget.html#remove_tick_callback-instance_method" title="Gtk::Widget#remove_tick_callback (method)">#remove_tick_callback</a></span>, <span class='object_link'><a href="Widget.html#request_mode-instance_method" title="Gtk::Widget#request_mode (method)">#request_mode</a></span>, <span class='object_link'><a href="Widget.html#root-instance_method" title="Gtk::Widget#root (method)">#root</a></span>, <span class='object_link'><a href="Widget.html#root=-instance_method" title="Gtk::Widget#root= (method)">#root=</a></span>, <span class='object_link'><a href="Widget.html#scale_factor-instance_method" title="Gtk::Widget#scale_factor (method)">#scale_factor</a></span>, <span class='object_link'><a href="Widget.html#scale_factor=-instance_method" title="Gtk::Widget#scale_factor= (method)">#scale_factor=</a></span>, <span class='object_link'><a href="Widget.html#sensitive-instance_method" title="Gtk::Widget#sensitive (method)">#sensitive</a></span>, <span class='object_link'><a href="Widget.html#sensitive=-instance_method" title="Gtk::Widget#sensitive= (method)">#sensitive=</a></span>, <span class='object_link'><a href="Widget.html#sensitive%3F-instance_method" title="Gtk::Widget#sensitive? (method)">#sensitive?</a></span>, <span class='object_link'><a href="Widget.html#set_size_request-instance_method" title="Gtk::Widget#set_size_request (method)">#set_size_request</a></span>, <span class='object_link'><a href="Widget.html#set_state_flags-instance_method" title="Gtk::Widget#set_state_flags (method)">#set_state_flags</a></span>, <span class='object_link'><a href="Widget.html#settings-instance_method" title="Gtk::Widget#settings (method)">#settings</a></span>, <span class='object_link'><a href="Widget.html#should_layout-instance_method" title="Gtk::Widget#should_layout (method)">#should_layout</a></span>, <span class='object_link'><a href="Widget.html#show-instance_method" title="Gtk::Widget#show (method)">#show</a></span>, <span class='object_link'><a href="Widget.html#size_allocate-instance_method" title="Gtk::Widget#size_allocate (method)">#size_allocate</a></span>, <span class='object_link'><a href="Widget.html#snapshot_child-instance_method" title="Gtk::Widget#snapshot_child (method)">#snapshot_child</a></span>, <span class='object_link'><a href="Widget.html#state_flags-instance_method" title="Gtk::Widget#state_flags (method)">#state_flags</a></span>, <span class='object_link'><a href="Widget.html#style_context-instance_method" title="Gtk::Widget#style_context (method)">#style_context</a></span>, <span class='object_link'><a href="Widget.html#template=-instance_method" title="Gtk::Widget#template= (method)">#template=</a></span>, <span class='object_link'><a href="Widget.html#template_from_resource=-instance_method" title="Gtk::Widget#template_from_resource= (method)">#template_from_resource=</a></span>, <span class='object_link'><a href="Widget.html#template_scope=-instance_method" title="Gtk::Widget#template_scope= (method)">#template_scope=</a></span>, <span class='object_link'><a href="Widget.html#tooltip_markup-instance_method" title="Gtk::Widget#tooltip_markup (method)">#tooltip_markup</a></span>, <span class='object_link'><a href="Widget.html#tooltip_markup=-instance_method" title="Gtk::Widget#tooltip_markup= (method)">#tooltip_markup=</a></span>, <span class='object_link'><a href="Widget.html#tooltip_text-instance_method" title="Gtk::Widget#tooltip_text (method)">#tooltip_text</a></span>, <span class='object_link'><a href="Widget.html#tooltip_text=-instance_method" title="Gtk::Widget#tooltip_text= (method)">#tooltip_text=</a></span>, <span class='object_link'><a href="Widget.html#translate_coordinates-instance_method" title="Gtk::Widget#translate_coordinates (method)">#translate_coordinates</a></span>, <span class='object_link'><a href="Widget.html#trigger_tooltip_query-instance_method" title="Gtk::Widget#trigger_tooltip_query (method)">#trigger_tooltip_query</a></span>, <span class='object_link'><a href="Widget.html#unmap-instance_method" title="Gtk::Widget#unmap (method)">#unmap</a></span>, <span class='object_link'><a href="Widget.html#unparent-instance_method" title="Gtk::Widget#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="Widget.html#unrealize-instance_method" title="Gtk::Widget#unrealize (method)">#unrealize</a></span>, <span class='object_link'><a href="Widget.html#unset_state_flags-instance_method" title="Gtk::Widget#unset_state_flags (method)">#unset_state_flags</a></span>, <span class='object_link'><a href="Widget.html#valign-instance_method" title="Gtk::Widget#valign (method)">#valign</a></span>, <span class='object_link'><a href="Widget.html#valign=-instance_method" title="Gtk::Widget#valign= (method)">#valign=</a></span>, <span class='object_link'><a href="Widget.html#vexpand-instance_method" title="Gtk::Widget#vexpand (method)">#vexpand</a></span>, <span class='object_link'><a href="Widget.html#vexpand=-instance_method" title="Gtk::Widget#vexpand= (method)">#vexpand=</a></span>, <span class='object_link'><a href="Widget.html#vexpand%3F-instance_method" title="Gtk::Widget#vexpand? (method)">#vexpand?</a></span>, <span class='object_link'><a href="Widget.html#vexpand_set-instance_method" title="Gtk::Widget#vexpand_set (method)">#vexpand_set</a></span>, <span class='object_link'><a href="Widget.html#vexpand_set=-instance_method" title="Gtk::Widget#vexpand_set= (method)">#vexpand_set=</a></span>, <span class='object_link'><a href="Widget.html#vexpand_set%3F-instance_method" title="Gtk::Widget#vexpand_set? (method)">#vexpand_set?</a></span>, <span class='object_link'><a href="Widget.html#visible-instance_method" title="Gtk::Widget#visible (method)">#visible</a></span>, <span class='object_link'><a href="Widget.html#visible=-instance_method" title="Gtk::Widget#visible= (method)">#visible=</a></span>, <span class='object_link'><a href="Widget.html#visible%3F-instance_method" title="Gtk::Widget#visible? (method)">#visible?</a></span>, <span class='object_link'><a href="Widget.html#width-instance_method" title="Gtk::Widget#width (method)">#width</a></span>, <span class='object_link'><a href="Widget.html#width_request-instance_method" title="Gtk::Widget#width_request (method)">#width_request</a></span>, <span class='object_link'><a href="Widget.html#width_request=-instance_method" title="Gtk::Widget#width_request= (method)">#width_request=</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new <code>GtkWindow</code>.</p>
+<p>To get an undecorated window (no window borders), use
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.set_decorated].</p>
+<p>All top-level windows created by gtk_window_new() are stored
+in an internal top-level window list. This list can be obtained
+from [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.list_toplevels]. Due to GTK keeping a
+reference to the window internally, gtk_window_new() does not
+return a reference to the caller.</p>
+<p>To delete a <code>GtkWindow</code>, call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.destroy].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="auto_startup_notification=-class_method">
+  
+    .<strong>auto_startup_notification=</strong>(setting)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets whether the window should request startup notification.</p>
+<p>By default, after showing the first <code>GtkWindow</code>, GTK calls
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel.set_startup_id]. Call this function
+to disable the automatic startup notification. You might do this
+if your first window is a splash screen, and you want to delay
+notification until after your real main window has been shown,
+for example.</p>
+<p>In that example, you would disable startup notification
+temporarily, show your splash screen, then re-enable it so that
+showing the main window would automatically result in notification.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>setting</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true to automatically do startup notification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_icon_name-class_method">
+  
+    .<strong>default_icon_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the fallback icon name for windows.</p>
+<p>The returned string is owned by GTK and should not
+be modified. It is only valid until the next call to
+[func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.set_default_icon_name].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the fallback icon name for windows</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_icon_name=-class_method">
+  
+    .<strong>default_icon_name=</strong>(name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets an icon to be used as fallback.</p>
+<p>The fallback icon is used for windows that
+haven't had [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.set_icon_name]
+called on them.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the themed icon</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="interactive_debugging=-class_method">
+  
+    .<strong>interactive_debugging=</strong>(enable)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Opens or closes the <a href="running.html#interactive-debugging">interactive debugger</a>.</p>
+<p>The debugger offers access to the widget hierarchy of the application
+and to useful debugging tools.</p>
+<p>This function allows applications that already use
+<!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->I<!-- raw HTML omitted -->
+(or <!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->D<!-- raw HTML omitted -->)
+for their own key shortcuts to add a different shortcut to open the Inspector.</p>
+<p>If you are not overriding the default key shortcuts for the Inspector,
+you should not use this function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>enable</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true to enable interactive debugging</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_toplevels-class_method">
+  
+    .<strong>list_toplevels</strong>  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a list of all existing toplevel windows.</p>
+<p>The widgets in the list are not individually referenced.
+If you want to iterate through the list and perform actions
+involving callbacks that might destroy the widgets, you must
+call <code>g_list_foreach (result, (GFunc)g_object_ref, NULL)</code> first,
+and then unref all the widgets afterwards.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>list of
+toplevel widgets</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="toplevels-class_method">
+  
+    .<strong>toplevels</strong>  &#x21d2; <tt>Gio::ListModel</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a list of all existing toplevel windows.</p>
+<p>If you want to iterate through the list and perform actions involving
+callbacks that might destroy the widgets or add new ones, be aware that
+the list of toplevels will change and emit the &quot;items-changed&quot; signal.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::ListModel</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the list
+of toplevel widgets</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="application-instance_method">
+  
+    #<strong>application</strong>  &#x21d2; <tt><span class='object_link'><a href="Application.html" title="Gtk::Application (class)">Gtk::Application</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The <code>GtkApplication</code> associated with the window.</p>
+<p>The application will be kept alive for at least as long as it
+has any windows associated with it (see g_application_hold()
+for a way to keep it alive without windows).</p>
+<p>Normally, the connection between the application and the window
+will remain until the window is destroyed, but you can explicitly
+remove it by setting the :application property to nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Application.html" title="Gtk::Application (class)">Gtk::Application</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>application</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="application=-instance_method">
+  
+    #<strong>application=</strong>(application)  &#x21d2; <tt><span class='object_link'><a href="Application.html" title="Gtk::Application (class)">Gtk::Application</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The <code>GtkApplication</code> associated with the window.</p>
+<p>The application will be kept alive for at least as long as it
+has any windows associated with it (see g_application_hold()
+for a way to keep it alive without windows).</p>
+<p>Normally, the connection between the application and the window
+will remain until the window is destroyed, but you can explicitly
+remove it by setting the :application property to nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>application</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Application.html" title="Gtk::Application (class)">Gtk::Application</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Application.html" title="Gtk::Application (class)">Gtk::Application</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>application</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Application.html" title="Gtk::Application (class)">Gtk::Application</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>application</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="child-instance_method">
+  
+    #<strong>child</strong>  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The child widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>child</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="child=-instance_method">
+  
+    #<strong>child=</strong>(child)  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The child widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>child</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>child</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close-instance_method">
+  
+    #<strong>close</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Requests that the window is closed.</p>
+<p>This is similar to what happens when a window manager
+close button is clicked.</p>
+<p>This function can be used with close buttons in custom
+titlebars.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="decorated-instance_method">
+  
+    #<strong>decorated</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether the window has been set to have decorations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the window has been set to have decorations</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="decorated=-instance_method">
+  
+    #<strong>decorated=</strong>(decorated)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the window should have a frame (also known as <em>decorations</em>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>decorated</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>decorated</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>decorated</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="decorated?-instance_method">
+  
+    #<strong>decorated?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the window should have a frame (also known as <em>decorations</em>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>decorated</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_height-instance_method">
+  
+    #<strong>default_height</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The default height of the window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default-height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_height=-instance_method">
+  
+    #<strong>default_height=</strong>(default_height)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The default height of the window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>default_height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default-height</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default-height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_widget-instance_method">
+  
+    #<strong>default_widget</strong>  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The default widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default-widget</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_widget=-instance_method">
+  
+    #<strong>default_widget=</strong>(default_widget)  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The default widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>default_widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default-widget</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default-widget</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_width-instance_method">
+  
+    #<strong>default_width</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The default width of the window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default-width</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_width=-instance_method">
+  
+    #<strong>default_width=</strong>(default_width)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The default width of the window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>default_width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default-width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default-width</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="deletable-instance_method">
+  
+    #<strong>deletable</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether the window has been set to have a close button.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the window has been set to have a close button</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="deletable=-instance_method">
+  
+    #<strong>deletable=</strong>(deletable)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the window frame should have a close button.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>deletable</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>deletable</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>deletable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="deletable?-instance_method">
+  
+    #<strong>deletable?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the window frame should have a close button.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>deletable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="destroy-instance_method">
+  
+    #<strong>destroy</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Drop the internal reference GTK holds on toplevel windows.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="destroy_with_parent-instance_method">
+  
+    #<strong>destroy_with_parent</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether the window will be destroyed with its transient parent.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the window will be destroyed with its transient parent.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="destroy_with_parent=-instance_method">
+  
+    #<strong>destroy_with_parent=</strong>(destroy_with_parent)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If this window should be destroyed when the parent is destroyed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>destroy_with_parent</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>destroy-with-parent</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>destroy-with-parent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="destroy_with_parent?-instance_method">
+  
+    #<strong>destroy_with_parent?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If this window should be destroyed when the parent is destroyed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>destroy-with-parent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="display-instance_method">
+  
+    #<strong>display</strong>  &#x21d2; <tt>Gdk::Display</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The display that will display this window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Display</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>display</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="display=-instance_method">
+  
+    #<strong>display=</strong>(display)  &#x21d2; <tt>Gdk::Display</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The display that will display this window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>display</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Display</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Display</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>display</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Display</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>display</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="focus-instance_method">
+  
+    #<strong>focus</strong>  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the current focused widget within the window.</p>
+<p>Note that this is the widget that would have the focus
+if the toplevel window focused; if the toplevel window
+is not focused then <code>gtk_widget_has_focus (widget)</code> will
+not be true for the widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the currently focused widget</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="focus=-instance_method">
+  
+    #<strong>focus=</strong>(focus)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the focus widget.</p>
+<p>If <!-- raw HTML omitted -->focus<!-- raw HTML omitted --> is not the current focus widget, and is focusable,
+sets it as the focus widget for the window. If <!-- raw HTML omitted -->focus<!-- raw HTML omitted --> is nil,
+unsets the focus widget for this window. To set the focus to a
+particular widget in the toplevel, it is usually more convenient
+to use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.grab_focus] instead of this function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>focus</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>widget to be the new focus widget, or nil to unset
+any focus widget for the toplevel window.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="focus_visible-instance_method">
+  
+    #<strong>focus_visible</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether “focus rectangles” are supposed to be visible.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if “focus rectangles” are supposed to be visible
+in this window.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="focus_visible=-instance_method">
+  
+    #<strong>focus_visible=</strong>(focus_visible)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether 'focus rectangles' are currently visible in this window.</p>
+<p>This property is maintained by GTK based on user input
+and should not be set by applications.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>focus_visible</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>focus-visible</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>focus-visible</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="focus_visible?-instance_method">
+  
+    #<strong>focus_visible?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether 'focus rectangles' are currently visible in this window.</p>
+<p>This property is maintained by GTK based on user input
+and should not be set by applications.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>focus-visible</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="focus_widget-instance_method">
+  
+    #<strong>focus_widget</strong>  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The focus widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>focus-widget</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="focus_widget=-instance_method">
+  
+    #<strong>focus_widget=</strong>(focus_widget)  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The focus widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>focus_widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>focus-widget</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>focus-widget</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fullscreen-instance_method">
+  
+    #<strong>fullscreen</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks to place <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in the fullscreen state.</p>
+<p>Note that you shouldn’t assume the window is definitely fullscreen
+afterward, because other entities (e.g. the user or window manager)
+unfullscreen it again, and not all window managers honor requests
+to fullscreen windows.</p>
+<p>You can track the result of this operation via the
+[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property, or by listening to
+notifications of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window:fullscreened] property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fullscreen_on_monitor-instance_method">
+  
+    #<strong>fullscreen_on_monitor</strong>(monitor)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks to place <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in the fullscreen state on the given <!-- raw HTML omitted -->monitor<!-- raw HTML omitted -->.</p>
+<p>Note that you shouldn't assume the window is definitely fullscreen
+afterward, or that the windowing system allows fullscreen windows on
+any given monitor.</p>
+<p>You can track the result of this operation via the
+[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property, or by listening to
+notifications of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window:fullscreened] property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>monitor</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Monitor</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>which monitor to go fullscreen on</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fullscreened=-instance_method">
+  
+    #<strong>fullscreened=</strong>(fullscreened)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the window is fullscreen.</p>
+<p>Setting this property is the equivalent of calling
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.fullscreen] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unfullscreen];
+either operation is asynchronous, which means you will need to
+connect to the ::notify signal in order to know whether the
+operation was successful.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>fullscreened</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>fullscreened</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>fullscreened</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fullscreened?-instance_method">
+  
+    #<strong>fullscreened?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the window is fullscreen.</p>
+<p>Setting this property is the equivalent of calling
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.fullscreen] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unfullscreen];
+either operation is asynchronous, which means you will need to
+connect to the ::notify signal in order to know whether the
+operation was successful.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>fullscreened</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_default_size-instance_method">
+  
+    #<strong>get_default_size</strong>(width, height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the default size of the window.</p>
+<p>A value of 0 for the width or height indicates that a default
+size has not been explicitly set for that dimension, so the
+“natural” size of the window will be used.</p>
+<p>This function is the recommended way for <a href="https://developer.gnome.org/documentation/tutorials/save-state.html">saving window state
+across restarts of applications</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the default width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the default height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="group-instance_method">
+  
+    #<strong>group</strong>  &#x21d2; <tt><span class='object_link'><a href="WindowGroup.html" title="Gtk::WindowGroup (class)">Gtk::WindowGroup</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the group for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+<p>If the window has no group, then the default group is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="WindowGroup.html" title="Gtk::WindowGroup (class)">Gtk::WindowGroup</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>GtkWindowGroup</code> for a window
+or the default group</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="handle_menubar_accel-instance_method">
+  
+    #<strong>handle_menubar_accel</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether this window reacts to F10 key presses by
+activating a menubar it contains.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the window handles F10</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="handle_menubar_accel=-instance_method">
+  
+    #<strong>handle_menubar_accel=</strong>(handle_menubar_accel)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the window frame should handle F10 for activating
+menubars.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>handle_menubar_accel</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>handle-menubar-accel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>handle-menubar-accel</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="handle_menubar_accel?-instance_method">
+  
+    #<strong>handle_menubar_accel?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the window frame should handle F10 for activating
+menubars.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>handle-menubar-accel</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_group-instance_method">
+  
+    #<strong>has_group</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has an explicit window group.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has an explicit window group.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="hide_on_close-instance_method">
+  
+    #<strong>hide_on_close</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether the window will be hidden when the close button is clicked.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the window will be hidden</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="hide_on_close=-instance_method">
+  
+    #<strong>hide_on_close=</strong>(hide_on_close)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If this window should be hidden when the users clicks the close button.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hide_on_close</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>hide-on-close</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>hide-on-close</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="hide_on_close?-instance_method">
+  
+    #<strong>hide_on_close?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If this window should be hidden when the users clicks the close button.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>hide-on-close</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="icon_name-instance_method">
+  
+    #<strong>icon_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Specifies the name of the themed icon to use as the window icon.</p>
+<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconTheme] for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>icon-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="icon_name=-instance_method">
+  
+    #<strong>icon_name=</strong>(icon_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Specifies the name of the themed icon to use as the window icon.</p>
+<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconTheme] for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>icon_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>icon-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>icon-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_active-instance_method">
+  
+    #<strong>is_active</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether the window is part of the current active toplevel.</p>
+<p>The active toplevel is the window receiving keystrokes.</p>
+<p>The return value is true if the window is active toplevel itself.
+You might use this function if you wanted to draw a widget
+differently in an active window from a widget in an inactive window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the window part of the current active window.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_active=-instance_method">
+  
+    #<strong>is_active=</strong>(is_active)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the toplevel is the currently active window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>is_active</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>is-active</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>is-active</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_active?-instance_method">
+  
+    #<strong>is_active?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the toplevel is the currently active window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>is-active</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_fullscreen-instance_method">
+  
+    #<strong>is_fullscreen</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the current fullscreen state of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+<p>Note that since fullscreening is ultimately handled by the window
+manager and happens asynchronously to an application request, you
+shouldn’t assume the return value of this function changing
+immediately (or at all), as an effect of calling
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.fullscreen] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unfullscreen].</p>
+<p>If the window isn't yet mapped, the value returned will whether the
+initial requested state is fullscreen.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether the window has a fullscreen state.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_maximized-instance_method">
+  
+    #<strong>is_maximized</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the current maximized state of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+<p>Note that since maximization is ultimately handled by the window
+manager and happens asynchronously to an application request, you
+shouldn’t assume the return value of this function changing
+immediately (or at all), as an effect of calling
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.maximize] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unmaximize].</p>
+<p>If the window isn't yet mapped, the value returned will whether the
+initial requested state is maximized.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether the window has a maximized state.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_suspended-instance_method">
+  
+    #<strong>is_suspended</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the current suspended state of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+<p>A window being suspended means it's currently not visible to the user, for
+example by being on a inactive workspace, minimized, obstructed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether the window is suspended.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="maximize-instance_method">
+  
+    #<strong>maximize</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks to maximize <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, so that it fills the screen.</p>
+<p>Note that you shouldn’t assume the window is definitely maximized
+afterward, because other entities (e.g. the user or window manager)
+could unmaximize it again, and not all window managers support
+maximization.</p>
+<p>It’s permitted to call this function before showing a window,
+in which case the window will be maximized when it appears onscreen
+initially.</p>
+<p>You can track the result of this operation via the
+[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property, or by listening to
+notifications on the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window:maximized]
+property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="maximized=-instance_method">
+  
+    #<strong>maximized=</strong>(maximized)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the window is maximized.</p>
+<p>Setting this property is the equivalent of calling
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.maximize] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unmaximize];
+either operation is asynchronous, which means you will need to
+connect to the ::notify signal in order to know whether the
+operation was successful.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>maximized</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>maximized</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>maximized</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="maximized?-instance_method">
+  
+    #<strong>maximized?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the window is maximized.</p>
+<p>Setting this property is the equivalent of calling
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.maximize] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unmaximize];
+either operation is asynchronous, which means you will need to
+connect to the ::notify signal in order to know whether the
+operation was successful.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>maximized</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="minimize-instance_method">
+  
+    #<strong>minimize</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks to minimize the specified <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+<p>Note that you shouldn’t assume the window is definitely minimized
+afterward, because the windowing system might not support this
+functionality; other entities (e.g. the user or the window manager)
+could unminimize it again, or there may not be a window manager in
+which case minimization isn’t possible, etc.</p>
+<p>It’s permitted to call this function before showing a window,
+in which case the window will be minimized before it ever appears
+onscreen.</p>
+<p>You can track result of this operation via the
+[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mnemonics_visible-instance_method">
+  
+    #<strong>mnemonics_visible</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether mnemonics are supposed to be visible.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if mnemonics are supposed to be visible
+in this window.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mnemonics_visible=-instance_method">
+  
+    #<strong>mnemonics_visible=</strong>(mnemonics_visible)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether mnemonics are currently visible in this window.</p>
+<p>This property is maintained by GTK based on user input,
+and should not be set by applications.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mnemonics_visible</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>mnemonics-visible</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>mnemonics-visible</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mnemonics_visible?-instance_method">
+  
+    #<strong>mnemonics_visible?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether mnemonics are currently visible in this window.</p>
+<p>This property is maintained by GTK based on user input,
+and should not be set by applications.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>mnemonics-visible</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="modal-instance_method">
+  
+    #<strong>modal</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether the window is modal.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the window is set to be modal and
+establishes a grab when shown</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="modal=-instance_method">
+  
+    #<strong>modal=</strong>(modal)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If true, the window is modal.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>modal</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>modal</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>modal</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="modal?-instance_method">
+  
+    #<strong>modal?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If true, the window is modal.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>modal</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="present-instance_method">
+  
+    #<strong>present</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Presents a window to the user.</p>
+<p>This may mean raising the window in the stacking order,
+unminimizing it, moving it to the current desktop and/or
+giving it the keyboard focus (possibly dependent on the user’s
+platform, window manager and preferences).</p>
+<p>If <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is hidden, this function also makes it visible.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="present_with_time-instance_method">
+  
+    #<strong>present_with_time</strong>(timestamp)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Presents a window to the user in response to an user interaction.</p>
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.present] for more details.</p>
+<p>The timestamp should be gathered when the window was requested
+to be shown (when clicking a link for example), rather than once
+the window is ready to be shown.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>timestamp</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the timestamp of the user interaction (typically a
+button or key press event) which triggered this call</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resizable-instance_method">
+  
+    #<strong>resizable</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the value set by gtk_window_set_resizable().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the user can resize the window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resizable=-instance_method">
+  
+    #<strong>resizable=</strong>(resizable)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If true, users can resize the window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>resizable</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>resizable</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>resizable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resizable?-instance_method">
+  
+    #<strong>resizable?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If true, users can resize the window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>resizable</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_default_size-instance_method">
+  
+    #<strong>set_default_size</strong>(width, height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the default size of a window.</p>
+<p>The default size of a window is the size that will be used if no other constraints apply.</p>
+<p>The default size will be updated whenever the window is resized
+to reflect the new size, unless the window is forced to a size,
+like when it is maximized or fullscreened.</p>
+<p>If the window’s minimum size request is larger than
+the default, the default will be ignored.</p>
+<p>Setting the default size to a value &lt;= 0 will cause it to be
+ignored and the natural size request will be used instead. It
+is possible to do this while the window is showing to &quot;reset&quot;
+it to its initial size.</p>
+<p>Unlike [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_size_request], which sets a size
+request for a widget and thus would keep users from shrinking
+the window, this function only sets the initial size, just as
+if the user had resized the window themselves. Users can still
+shrink the window again as they normally would. Setting a default
+size of -1 means to use the “natural” default size (the size request
+of the window).</p>
+<p>If you use this function to reestablish a previously saved window size,
+note that the appropriate size to save is the one returned by
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.get_default_size]. Using the window allocation
+directly will not work in all circumstances and can lead to growing
+or shrinking windows.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>width in pixels, or -1 to unset the default width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>height in pixels, or -1 to unset the default height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="startup_id=-instance_method">
+  
+    #<strong>startup_id=</strong>(startup_id)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A write-only property for setting window's startup notification identifier.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>startup_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>startup-id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="suspended=-instance_method">
+  
+    #<strong>suspended=</strong>(suspended)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the window is suspended.</p>
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.is_suspended] for details about what suspended means.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>suspended</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>suspended</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>suspended</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="suspended?-instance_method">
+  
+    #<strong>suspended?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the window is suspended.</p>
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.is_suspended] for details about what suspended means.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>suspended</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="title-instance_method">
+  
+    #<strong>title</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The title of the window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>title</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="title=-instance_method">
+  
+    #<strong>title=</strong>(title)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The title of the window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>title</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>title</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>title</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="titlebar-instance_method">
+  
+    #<strong>titlebar</strong>  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The titlebar widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>titlebar</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="titlebar=-instance_method">
+  
+    #<strong>titlebar=</strong>(titlebar)  &#x21d2; <tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The titlebar widget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>titlebar</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>titlebar</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>titlebar</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="transient_for-instance_method">
+  
+    #<strong>transient_for</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::Window (class)">Gtk::Window</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The transient parent of the window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::Window (class)">Gtk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>transient-for</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="transient_for=-instance_method">
+  
+    #<strong>transient_for=</strong>(transient_for)  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::Window (class)">Gtk::Window</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The transient parent of the window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>transient_for</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::Window (class)">Gtk::Window</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::Window (class)">Gtk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>transient-for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::Window (class)">Gtk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>transient-for</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unfullscreen-instance_method">
+  
+    #<strong>unfullscreen</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks to remove the fullscreen state for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, and return to
+its previous state.</p>
+<p>Note that you shouldn’t assume the window is definitely not
+fullscreen afterward, because other entities (e.g. the user or
+window manager) could fullscreen it again, and not all window
+managers honor requests to unfullscreen windows; normally the
+window will end up restored to its normal state. Just don’t
+write code that crashes if not.</p>
+<p>You can track the result of this operation via the
+[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property, or by listening to
+notifications of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window:fullscreened] property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unmaximize-instance_method">
+  
+    #<strong>unmaximize</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks to unmaximize <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+<p>Note that you shouldn’t assume the window is definitely unmaximized
+afterward, because other entities (e.g. the user or window manager)
+maximize it again, and not all window managers honor requests to
+unmaximize.</p>
+<p>You can track the result of this operation via the
+[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property, or by listening to
+notifications on the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window:maximized] property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unminimize-instance_method">
+  
+    #<strong>unminimize</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asks to unminimize the specified <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
+<p>Note that you shouldn’t assume the window is definitely unminimized
+afterward, because the windowing system might not support this
+functionality; other entities (e.g. the user or the window manager)
+could minimize it again, or there may not be a window manager in
+which case minimization isn’t possible, etc.</p>
+<p>You can track result of this operation via the
+[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

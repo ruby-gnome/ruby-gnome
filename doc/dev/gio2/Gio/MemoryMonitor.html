@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gio::MemoryMonitor
+  
+    &mdash; Ruby/GIO2
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::MemoryMonitor";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (M)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">MemoryMonitor</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gio::MemoryMonitor
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p><code>GMemoryMonitor</code> will monitor system memory and suggest to the application
+when to free memory so as to leave more room for other applications.
+It is implemented on Linux using the
+<a href="https://gitlab.freedesktop.org/hadess/low-memory-monitor/">Low Memory Monitor</a>
+(<a href="https://hadess.pages.freedesktop.org/low-memory-monitor/">API documentation</a>).</p>
+<p>There is also an implementation for use inside Flatpak sandboxes.</p>
+<p>Possible actions to take when the signal is received are:</p>
+<ul>
+<li>Free caches</li>
+<li>Save files that haven’t been looked at in a while to disk, ready to be reopened when needed</li>
+<li>Run a garbage collection cycle</li>
+<li>Try and compress fragmented allocations</li>
+<li>Exit on idle if the process has no reason to stay around</li>
+<li>Call <a href="man:malloc_trim(3)"><code>malloc_trim(3)</code></a> to return cached heap pages to
+the kernel (if supported by your libc)</li>
+</ul>
+<p>Note that some actions may not always improve system performance, and so
+should be profiled for your application. <code>malloc_trim()</code>, for example, may
+make future heap allocations slower (due to releasing cached heap pages back
+to the kernel).</p>
+<p>See [type<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.MemoryMonitorWarningLevel] for details on the various warning
+levels.</p>
+<pre class="code c"><code class="c">static void
+warning_cb (GMemoryMonitor *m, GMemoryMonitorWarningLevel level)
+{
+  g_debug (&quot;Warning level: %d&quot;, level);
+  if (warning_level &gt; G_MEMORY_MONITOR_WARNING_LEVEL_LOW)
+    drop_caches ();
+}
+
+static GMemoryMonitor *
+monitor_low_memory (void)
+{
+  GMemoryMonitor *m;
+  m = g_memory_monitor_dup_default ();
+  g_signal_connect (G_OBJECT (m), &quot;low-memory-warning&quot;,
+                    G_CALLBACK (warning_cb), NULL);
+  return m;
+}
+</code></pre>
+<p>Don’t forget to disconnect the [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.MemoryMonitor::low-memory-warning]
+signal, and unref the <code>GMemoryMonitor</code> itself when exiting.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#low_memory_warning-instance_method" title="#low_memory_warning (instance method)">#<strong>low_memory_warning</strong>(level)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>the virtual function pointer for the  GMemory::Monitor::low-memory-warning signal.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="low_memory_warning-instance_method">
+  
+    #<strong>low_memory_warning</strong>(level)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>the virtual function pointer for the
+GMemory::Monitor::low-memory-warning signal.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>level</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MemoryMonitorWarningLevel.html" title="Gio::MemoryMonitorWarningLevel (module)">Gio::MemoryMonitorWarningLevel</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gdk::Popup
+  
+    &mdash; Ruby/GTK3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gdk::Popup";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gdk.html" title="Gdk (module)">Gdk</a></span></span>
+     &raquo; 
+    <span class="title">Popup</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gdk::Popup
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>A <code>GdkPopup</code> is a surface that is attached to another surface.</p>
+<p>The <code>GdkPopup</code> is positioned relative to its parent surface.</p>
+<p><code>GdkPopup</code>s are typically used to implement menus and similar popups.
+They can be modal, which is indicated by the [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Popup:autohide]
+property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#autohide-instance_method" title="#autohide (instance method)">#<strong>autohide</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether this popup is set to hide on outside clicks.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parent-instance_method" title="#parent (instance method)">#<strong>parent</strong>  &#x21d2; Gdk::Surface </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the parent surface of a popup.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#position_x-instance_method" title="#position_x (instance method)">#<strong>position_x</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Obtains the position of the popup relative to its parent.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#position_y-instance_method" title="#position_y (instance method)">#<strong>position_y</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Obtains the position of the popup relative to its parent.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#present-instance_method" title="#present (instance method)">#<strong>present</strong>(width, height, layout)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Present <!-- raw HTML omitted -->popup<!-- raw HTML omitted --> after having processed the <code>GdkPopupLayout</code> rules.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rect_anchor-instance_method" title="#rect_anchor (instance method)">#<strong>rect_anchor</strong>  &#x21d2; Gdk::Gravity </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the current popup rectangle anchor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#surface_anchor-instance_method" title="#surface_anchor (instance method)">#<strong>surface_anchor</strong>  &#x21d2; Gdk::Gravity </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the current popup surface anchor.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="autohide-instance_method">
+  
+    #<strong>autohide</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether this popup is set to hide on outside clicks.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->popup<!-- raw HTML omitted --> will autohide</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parent-instance_method">
+  
+    #<strong>parent</strong>  &#x21d2; <tt><span class='object_link'><a href="Surface.html" title="Gdk::Surface (class)">Gdk::Surface</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the parent surface of a popup.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Surface.html" title="Gdk::Surface (class)">Gdk::Surface</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent surface</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="position_x-instance_method">
+  
+    #<strong>position_x</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Obtains the position of the popup relative to its parent.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the X coordinate of <!-- raw HTML omitted -->popup<!-- raw HTML omitted --> position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="position_y-instance_method">
+  
+    #<strong>position_y</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Obtains the position of the popup relative to its parent.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Y coordinate of <!-- raw HTML omitted -->popup<!-- raw HTML omitted --> position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="present-instance_method">
+  
+    #<strong>present</strong>(width, height, layout)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Present <!-- raw HTML omitted -->popup<!-- raw HTML omitted --> after having processed the <code>GdkPopupLayout</code> rules.</p>
+<p>If the popup was previously now showing, it will be showed,
+otherwise it will change position according to <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
+<p>After calling this function, the result should be handled in response
+to the [signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface::layout] signal being emitted. The resulting
+popup position can be queried using [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Popup.get_position_x],
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Popup.get_position_y], and the resulting size will be sent as
+parameters in the layout signal. Use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Popup.get_rect_anchor]
+and [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Popup.get_surface_anchor] to get the resulting anchors.</p>
+<p>Presenting may fail, for example if the <!-- raw HTML omitted -->popup<!-- raw HTML omitted --> is set to autohide
+and is immediately hidden upon being presented. If presenting failed,
+the [signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface::layout] signal will not me emitted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the unconstrained popup width to layout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the unconstrained popup height to layout</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>layout</span>
+      
+      
+        <span class='type'>(<tt>Gdk::PopupLayout</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>GdkPopupLayout</code> object used to layout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>false if it failed to be presented, otherwise true.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rect_anchor-instance_method">
+  
+    #<strong>rect_anchor</strong>  &#x21d2; <tt><span class='object_link'><a href="Gravity.html" title="Gdk::Gravity (module)">Gdk::Gravity</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the current popup rectangle anchor.</p>
+<p>The value returned may change after calling [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Popup.present],
+or after the [signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface::layout] signal is emitted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gravity.html" title="Gdk::Gravity (module)">Gdk::Gravity</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current rectangle anchor value of <!-- raw HTML omitted -->popup<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="surface_anchor-instance_method">
+  
+    #<strong>surface_anchor</strong>  &#x21d2; <tt><span class='object_link'><a href="Gravity.html" title="Gdk::Gravity (module)">Gdk::Gravity</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the current popup surface anchor.</p>
+<p>The value returned may change after calling [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Popup.present],
+or after the [signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface::layout] signal is emitted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gravity.html" title="Gdk::Gravity (module)">Gdk::Gravity</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current surface anchor value of <!-- raw HTML omitted -->popup<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

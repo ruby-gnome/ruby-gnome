@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Clutter::GridLayout
+  
+    &mdash; Ruby/Clutter
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Clutter::GridLayout";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (G)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter</a></span></span>
+     &raquo; 
+    <span class="title">GridLayout</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Clutter::GridLayout
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="LayoutManager.html" title="Clutter::LayoutManager (class)">LayoutManager</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="LayoutManager.html" title="Clutter::LayoutManager (class)">LayoutManager</a></span></li>
+          
+            <li class="next">Clutter::GridLayout</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The Clutter::GridLayoutClass structure contains only private
+data and should be accessed using the provided API</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attach-instance_method" title="#attach (instance method)">#<strong>attach</strong>(child, left, top, width, height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a widget to the grid.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attach_next_to-instance_method" title="#attach_next_to (instance method)">#<strong>attach_next_to</strong>(child, sibling, side, width, height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a actor to the grid.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#column_homogeneous-instance_method" title="#column_homogeneous (instance method)">#<strong>column_homogeneous</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether all columns of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> have the same width.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#column_homogeneous=-instance_method" title="#column_homogeneous= (instance method)">#<strong>column_homogeneous=</strong>(column_homogeneous)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether all columns of the layout should have the same width.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#column_homogeneous%3F-instance_method" title="#column_homogeneous? (instance method)">#<strong>column_homogeneous?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether all columns of the layout should have the same width.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#column_spacing-instance_method" title="#column_spacing (instance method)">#<strong>column_spacing</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The amount of space in pixels between two consecutive columns.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#column_spacing=-instance_method" title="#column_spacing= (instance method)">#<strong>column_spacing=</strong>(column_spacing)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The amount of space in pixels between two consecutive columns.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_child_at-instance_method" title="#get_child_at (instance method)">#<strong>get_child_at</strong>(left, top)  &#x21d2; Clutter::Actor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the child of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> whose area covers the grid cell whose upper left corner is at <!-- raw HTML omitted -->left<!-- raw HTML omitted -->, <!-- raw HTML omitted -->top<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Clutter::LayoutManager </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Clutter::GridLayout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_column-instance_method" title="#insert_column (instance method)">#<strong>insert_column</strong>(position)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inserts a column at the specified position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_next_to-instance_method" title="#insert_next_to (instance method)">#<strong>insert_next_to</strong>(sibling, side)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inserts a row or column at the specified position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_row-instance_method" title="#insert_row (instance method)">#<strong>insert_row</strong>(position)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inserts a row at the specified position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#orientation-instance_method" title="#orientation (instance method)">#<strong>orientation</strong>  &#x21d2; Clutter::Orientation </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The orientation of the layout, either horizontal or vertical.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#orientation=-instance_method" title="#orientation= (instance method)">#<strong>orientation=</strong>(orientation)  &#x21d2; Clutter::Orientation </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The orientation of the layout, either horizontal or vertical.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#row_homogeneous-instance_method" title="#row_homogeneous (instance method)">#<strong>row_homogeneous</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether all rows of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> have the same height.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#row_homogeneous=-instance_method" title="#row_homogeneous= (instance method)">#<strong>row_homogeneous=</strong>(row_homogeneous)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether all rows of the layout should have the same height.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#row_homogeneous%3F-instance_method" title="#row_homogeneous? (instance method)">#<strong>row_homogeneous?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether all rows of the layout should have the same height.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#row_spacing-instance_method" title="#row_spacing (instance method)">#<strong>row_spacing</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The amount of space in pixels between two consecutive rows.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#row_spacing=-instance_method" title="#row_spacing= (instance method)">#<strong>row_spacing=</strong>(row_spacing)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The amount of space in pixels between two consecutive rows.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="LayoutManager.html" title="Clutter::LayoutManager (class)">LayoutManager</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="LayoutManager.html#allocate-instance_method" title="Clutter::LayoutManager#allocate (method)">#allocate</a></span>, <span class='object_link'><a href="LayoutManager.html#animation_progress-instance_method" title="Clutter::LayoutManager#animation_progress (method)">#animation_progress</a></span>, <span class='object_link'><a href="LayoutManager.html#begin_animation-instance_method" title="Clutter::LayoutManager#begin_animation (method)">#begin_animation</a></span>, <span class='object_link'><a href="LayoutManager.html#child_get-instance_method" title="Clutter::LayoutManager#child_get (method)">#child_get</a></span>, <span class='object_link'><a href="LayoutManager.html#child_get_property-instance_method" title="Clutter::LayoutManager#child_get_property (method)">#child_get_property</a></span>, <span class='object_link'><a href="LayoutManager.html#child_set-instance_method" title="Clutter::LayoutManager#child_set (method)">#child_set</a></span>, <span class='object_link'><a href="LayoutManager.html#child_set_property-instance_method" title="Clutter::LayoutManager#child_set_property (method)">#child_set_property</a></span>, <span class='object_link'><a href="LayoutManager.html#container=-instance_method" title="Clutter::LayoutManager#container= (method)">#container=</a></span>, <span class='object_link'><a href="LayoutManager.html#end_animation-instance_method" title="Clutter::LayoutManager#end_animation (method)">#end_animation</a></span>, <span class='object_link'><a href="LayoutManager.html#find_child_property-instance_method" title="Clutter::LayoutManager#find_child_property (method)">#find_child_property</a></span>, <span class='object_link'><a href="LayoutManager.html#get_child_meta-instance_method" title="Clutter::LayoutManager#get_child_meta (method)">#get_child_meta</a></span>, <span class='object_link'><a href="LayoutManager.html#get_preferred_height-instance_method" title="Clutter::LayoutManager#get_preferred_height (method)">#get_preferred_height</a></span>, <span class='object_link'><a href="LayoutManager.html#get_preferred_width-instance_method" title="Clutter::LayoutManager#get_preferred_width (method)">#get_preferred_width</a></span>, <span class='object_link'><a href="LayoutManager.html#layout_changed-instance_method" title="Clutter::LayoutManager#layout_changed (method)">#layout_changed</a></span>, <span class='object_link'><a href="LayoutManager.html#list_child_properties-instance_method" title="Clutter::LayoutManager#list_child_properties (method)">#list_child_properties</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="LayoutManager.html" title="Clutter::LayoutManager (class)">Clutter::LayoutManager</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Clutter::GridLayout</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="attach-instance_method">
+  
+    #<strong>attach</strong>(child, left, top, width, height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a widget to the grid.</p>
+<p>The position of <!-- raw HTML omitted -->child<!-- raw HTML omitted --> is determined by <!-- raw HTML omitted -->left<!-- raw HTML omitted --> and <!-- raw HTML omitted -->top<!-- raw HTML omitted -->. The
+number of 'cells' that <!-- raw HTML omitted -->child<!-- raw HTML omitted --> will occupy is determined by
+<!-- raw HTML omitted -->width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Clutter::Actor to add</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>left</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the column number to attach the left side of <!-- raw HTML omitted -->child<!-- raw HTML omitted --> to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>top</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the row number to attach the top side of <!-- raw HTML omitted -->child<!-- raw HTML omitted --> to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of columns that <!-- raw HTML omitted -->child<!-- raw HTML omitted --> will span</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of rows that <!-- raw HTML omitted -->child<!-- raw HTML omitted --> will span</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="attach_next_to-instance_method">
+  
+    #<strong>attach_next_to</strong>(child, sibling, side, width, height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a actor to the grid.</p>
+<p>The actor is placed next to <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->, on the side determined by
+<!-- raw HTML omitted -->side<!-- raw HTML omitted -->. When <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil, the actor is placed in row (for
+left or right placement) or column 0 (for top or bottom placement),
+at the end indicated by <!-- raw HTML omitted -->side<!-- raw HTML omitted -->.</p>
+<p>Attaching widgets labeled [1], [2], [3] with <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> == nil and
+<!-- raw HTML omitted -->side<!-- raw HTML omitted --> == %CLUTTER_GRID_POSITION_LEFT yields a layout of [3][2][1].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>child</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the actor to add</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sibling</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the child of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> that <!-- raw HTML omitted -->child<!-- raw HTML omitted --> will be placed
+next to, or nil to place <!-- raw HTML omitted -->child<!-- raw HTML omitted --> at the beginning or end</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>side</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GridPosition.html" title="Clutter::GridPosition (module)">Clutter::GridPosition</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the side of <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> that <!-- raw HTML omitted -->child<!-- raw HTML omitted --> is positioned next to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of columns that <!-- raw HTML omitted -->child<!-- raw HTML omitted --> will span</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of rows that <!-- raw HTML omitted -->child<!-- raw HTML omitted --> will span</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="column_homogeneous-instance_method">
+  
+    #<strong>column_homogeneous</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether all columns of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> have the same width.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether all columns of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> have the same width.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="column_homogeneous=-instance_method">
+  
+    #<strong>column_homogeneous=</strong>(column_homogeneous)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether all columns of the layout should have the same width</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>column_homogeneous</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>column-homogeneous</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>column-homogeneous</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="column_homogeneous?-instance_method">
+  
+    #<strong>column_homogeneous?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether all columns of the layout should have the same width</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>column-homogeneous</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="column_spacing-instance_method">
+  
+    #<strong>column_spacing</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The amount of space in pixels between two consecutive columns</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>column-spacing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="column_spacing=-instance_method">
+  
+    #<strong>column_spacing=</strong>(column_spacing)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The amount of space in pixels between two consecutive columns</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>column_spacing</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>column-spacing</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>column-spacing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_child_at-instance_method">
+  
+    #<strong>get_child_at</strong>(left, top)  &#x21d2; <tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the child of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> whose area covers the grid
+cell whose upper left corner is at <!-- raw HTML omitted -->left<!-- raw HTML omitted -->, <!-- raw HTML omitted -->top<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>left</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the left edge of the cell</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>top</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the top edge of the cell</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the child at the given position, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_column-instance_method">
+  
+    #<strong>insert_column</strong>(position)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inserts a column at the specified position.</p>
+<p>Children which are attached at or to the right of this position
+are moved one column to the right. Children which span across this
+position are grown to span the new column.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the position to insert the column at</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_next_to-instance_method">
+  
+    #<strong>insert_next_to</strong>(sibling, side)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inserts a row or column at the specified position.</p>
+<p>The new row or column is placed next to <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->, on the side
+determined by <!-- raw HTML omitted -->side<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->side<!-- raw HTML omitted --> is %CLUTTER_GRID_POSITION_LEFT or
+%CLUTTER_GRID_POSITION_BOTTOM, a row is inserted. If <!-- raw HTML omitted -->side<!-- raw HTML omitted --> is
+%CLUTTER_GRID_POSITION_LEFT of %CLUTTER_GRID_POSITION_RIGHT,
+a column is inserted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sibling</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Actor.html" title="Clutter::Actor (class)">Clutter::Actor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the child of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> that the new row or column will be
+placed next to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>side</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GridPosition.html" title="Clutter::GridPosition (module)">Clutter::GridPosition</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the side of <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> that <!-- raw HTML omitted -->child<!-- raw HTML omitted --> is positioned next to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="insert_row-instance_method">
+  
+    #<strong>insert_row</strong>(position)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inserts a row at the specified position.</p>
+<p>Children which are attached at or below this position
+are moved one row down. Children which span across this
+position are grown to span the new row.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the position to insert the row at</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="orientation-instance_method">
+  
+    #<strong>orientation</strong>  &#x21d2; <tt><span class='object_link'><a href="Orientation.html" title="Clutter::Orientation (module)">Clutter::Orientation</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The orientation of the layout, either horizontal or vertical</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Orientation.html" title="Clutter::Orientation (module)">Clutter::Orientation</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>orientation</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="orientation=-instance_method">
+  
+    #<strong>orientation=</strong>(orientation)  &#x21d2; <tt><span class='object_link'><a href="Orientation.html" title="Clutter::Orientation (module)">Clutter::Orientation</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The orientation of the layout, either horizontal or vertical</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>orientation</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Orientation.html" title="Clutter::Orientation (module)">Clutter::Orientation</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Orientation.html" title="Clutter::Orientation (module)">Clutter::Orientation</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>orientation</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Orientation.html" title="Clutter::Orientation (module)">Clutter::Orientation</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>orientation</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="row_homogeneous-instance_method">
+  
+    #<strong>row_homogeneous</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether all rows of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> have the same height.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether all rows of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> have the same height.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="row_homogeneous=-instance_method">
+  
+    #<strong>row_homogeneous=</strong>(row_homogeneous)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether all rows of the layout should have the same height</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>row_homogeneous</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>row-homogeneous</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>row-homogeneous</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="row_homogeneous?-instance_method">
+  
+    #<strong>row_homogeneous?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether all rows of the layout should have the same height</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>row-homogeneous</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="row_spacing-instance_method">
+  
+    #<strong>row_spacing</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The amount of space in pixels between two consecutive rows</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>row-spacing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="row_spacing=-instance_method">
+  
+    #<strong>row_spacing=</strong>(row_spacing)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The amount of space in pixels between two consecutive rows</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>row_spacing</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>row-spacing</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>row-spacing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

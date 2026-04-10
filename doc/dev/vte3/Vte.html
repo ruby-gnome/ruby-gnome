@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Vte
+  
+    &mdash; Ruby/VTE3
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Vte";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (V)</a> &raquo;
+    
+    
+    <span class="title">Vte</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Vte
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  <dl>
+      <dt>Extended by:</dt>
+      <dd>GLib::Deprecatable</dd>
+  </dl>
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/vte3/pty.rb<span class="defines">,<br />
+  lib/vte3.rb,<br /> lib/vte3/regex.rb,<br /> lib/vte3/loader.rb,<br /> lib/vte3/version.rb,<br /> lib/vte3/terminal.rb,<br /> lib/vte3/deprecated.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Copyright (C) 2014-2015  Ruby-GNOME2 Project Team</p>
+<p>This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.</p>
+<p>This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.</p>
+<p>You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Vte/Align.html" title="Vte::Align (module)">Align</a></span>, <span class='object_link'><a href="Vte/CursorBlinkMode.html" title="Vte::CursorBlinkMode (module)">CursorBlinkMode</a></span>, <span class='object_link'><a href="Vte/CursorShape.html" title="Vte::CursorShape (module)">CursorShape</a></span>, <span class='object_link'><a href="Vte/EraseBinding.html" title="Vte::EraseBinding (module)">EraseBinding</a></span>, <span class='object_link'><a href="Vte/FeatureFlags.html" title="Vte::FeatureFlags (module)">FeatureFlags</a></span>, <span class='object_link'><a href="Vte/Format.html" title="Vte::Format (module)">Format</a></span>, <span class='object_link'><a href="Vte/PtyError.html" title="Vte::PtyError (module)">PtyError</a></span>, <span class='object_link'><a href="Vte/PtyFlags.html" title="Vte::PtyFlags (module)">PtyFlags</a></span>, <span class='object_link'><a href="Vte/RegexError.html" title="Vte::RegexError (module)">RegexError</a></span>, <span class='object_link'><a href="Vte/TextBlinkMode.html" title="Vte::TextBlinkMode (module)">TextBlinkMode</a></span>, <span class='object_link'><a href="Vte/Version.html" title="Vte::Version (module)">Version</a></span>, <span class='object_link'><a href="Vte/WriteFlags.html" title="Vte::WriteFlags (module)">WriteFlags</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Vte/Error.html" title="Vte::Error (class)">Error</a></span>, <span class='object_link'><a href="Vte/Loader.html" title="Vte::Loader (class)">Loader</a></span>, <span class='object_link'><a href="Vte/Pty.html" title="Vte::Pty (class)">Pty</a></span>, <span class='object_link'><a href="Vte/Regex.html" title="Vte::Regex (class)">Regex</a></span>, <span class='object_link'><a href="Vte/Terminal.html" title="Vte::Terminal (class)">Terminal</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="MAJOR_VERSION-constant" class="">MAJOR_VERSION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The major version number of the VTE library
+(e.g. in version 3.1.4 this is 3).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="MICRO_VERSION-constant" class="">MICRO_VERSION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The micro version number of the VTE library
+(e.g. in version 3.1.4 this is 4).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="MINOR_VERSION-constant" class="">MINOR_VERSION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The minor version number of the VTE library
+(e.g. in version 3.1.4 this is 1).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>76</span></pre></dd>
+      
+        <dt id="REGEX_FLAGS_DEFAULT-constant" class="">REGEX_FLAGS_DEFAULT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>1075314688</span></pre></dd>
+      
+        <dt id="SPAWN_NO_PARENT_ENVV-constant" class="">SPAWN_NO_PARENT_ENVV =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Use this as a spawn flag (together with flags from GSpawn::Flags) in
+vte_pty_spawn_async().</p>
+<p>Normally, the spawned process inherits the environment from the parent
+process; when this flag is used, only the environment variables passed
+to vte_pty_spawn_async() etc. are passed to the child process.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>33554432</span></pre></dd>
+      
+        <dt id="SPAWN_NO_SYSTEMD_SCOPE-constant" class="">SPAWN_NO_SYSTEMD_SCOPE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Use this as a spawn flag (together with flags from GSpawn::Flags) in
+vte_pty_spawn_async().</p>
+<p>Prevents vte_pty_spawn_async() etc. from moving the newly created child
+process to a systemd user scope.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>67108864</span></pre></dd>
+      
+        <dt id="SPAWN_REQUIRE_SYSTEMD_SCOPE-constant" class="">SPAWN_REQUIRE_SYSTEMD_SCOPE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Use this as a spawn flag (together with flags from GSpawn::Flags) in
+vte_pty_spawn_async().</p>
+<p>Requires vte_pty_spawn_async() etc. to move the newly created child
+process to a systemd user scope; if that fails, the whole spawn fails.</p>
+<p>This is supported on Linux only.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>134217728</span></pre></dd>
+      
+        <dt id="TEST_FLAGS_ALL-constant" class="">TEST_FLAGS_ALL =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>18446744073709551615</span></pre></dd>
+      
+        <dt id="TEST_FLAGS_NONE-constant" class="">TEST_FLAGS_NONE =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="LOG_DOMAIN-constant" class="">LOG_DOMAIN =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Vte</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#event_context_get_type-instance_method" title="#event_context_get_type (instance method)">#<strong>event_context_get_type</strong>  &#x21d2; GLib::Type </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#feature_flags-instance_method" title="#feature_flags (instance method)">#<strong>feature_flags</strong>  &#x21d2; Vte::FeatureFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets features VTE was compiled with.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#features-instance_method" title="#features (instance method)">#<strong>features</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a list of features vte was compiled with.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_encoding_supported-instance_method" title="#get_encoding_supported (instance method)">#<strong>get_encoding_supported</strong>(encoding)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries whether the legacy encoding <!-- raw HTML omitted -->encoding<!-- raw HTML omitted --> is supported.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_encodings-instance_method" title="#get_encodings (instance method)">#<strong>get_encodings</strong>(include_aliases)  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the list of supported legacy encodings.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#major_version-instance_method" title="#major_version (instance method)">#<strong>major_version</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the major version of the VTE library at runtime.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#micro_version-instance_method" title="#micro_version (instance method)">#<strong>micro_version</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the micro version of the VTE library at runtime.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#minor_version-instance_method" title="#minor_version (instance method)">#<strong>minor_version</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the minor version of the VTE library at runtime.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pty_error_quark-instance_method" title="#pty_error_quark (instance method)">#<strong>pty_error_quark</strong>  &#x21d2; GLib::Quark </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Error domain for VTE PTY errors.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#regex_error_quark-instance_method" title="#regex_error_quark (instance method)">#<strong>regex_error_quark</strong>  &#x21d2; GLib::Quark </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#test_flags=-instance_method" title="#test_flags= (instance method)">#<strong>test_flags=</strong>(flags)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets test flags.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#user_shell-instance_method" title="#user_shell (instance method)">#<strong>user_shell</strong>  &#x21d2; Vte::filename </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the user's shell, or nil.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="event_context_get_type-instance_method">
+  
+    #<strong>event_context_get_type</strong>  &#x21d2; <tt>GLib::Type</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="feature_flags-instance_method">
+  
+    #<strong>feature_flags</strong>  &#x21d2; <tt><span class='object_link'><a href="Vte/FeatureFlags.html" title="Vte::FeatureFlags (module)">Vte::FeatureFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets features VTE was compiled with.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Vte/FeatureFlags.html" title="Vte::FeatureFlags (module)">Vte::FeatureFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags from Vte::FeatureFlags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="features-instance_method">
+  
+    #<strong>features</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a list of features vte was compiled with.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a string with features</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_encoding_supported-instance_method">
+  
+    #<strong>get_encoding_supported</strong>(encoding)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries whether the legacy encoding <!-- raw HTML omitted -->encoding<!-- raw HTML omitted --> is supported.</p>
+<p>If ICU support is not available, this function always returns false.</p>
+<p>Note that UTF-8 is always supported; you can select it by
+passing nil to vte_terminal_set_encoding().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>encoding</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the legacy encoding</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true iff the legacy encoding <!-- raw HTML omitted -->encoding<!-- raw HTML omitted --> is supported</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_encodings-instance_method">
+  
+    #<strong>get_encodings</strong>(include_aliases)  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the list of supported legacy encodings.</p>
+<p>If ICU support is not available, this returns an empty vector.
+Note that UTF-8 is always supported; you can select it by
+passing nil to vte_terminal_set_encoding().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>include_aliases</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether to include alias names</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the list of supported encodings; free with
+g_strfreev()</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="major_version-instance_method">
+  
+    #<strong>major_version</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the major version of the VTE library at runtime.
+Contrast this with %VTE_MAJOR_VERSION which represents
+the version of the VTE library that the code was compiled
+with.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the major version</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="micro_version-instance_method">
+  
+    #<strong>micro_version</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the micro version of the VTE library at runtime.
+Contrast this with %VTE_MICRO_VERSION which represents
+the version of the VTE library that the code was compiled
+with.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the micro version</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="minor_version-instance_method">
+  
+    #<strong>minor_version</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the minor version of the VTE library at runtime.
+Contrast this with %VTE_MINOR_VERSION which represents
+the version of the VTE library that the code was compiled
+with.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the minor version</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pty_error_quark-instance_method">
+  
+    #<strong>pty_error_quark</strong>  &#x21d2; <tt>GLib::Quark</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Error domain for VTE PTY errors. Errors in this domain will be from the Vte::PtyError
+enumeration. See #GError for more information on error domains.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Quark</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error domain for VTE PTY errors</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="regex_error_quark-instance_method">
+  
+    #<strong>regex_error_quark</strong>  &#x21d2; <tt>GLib::Quark</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Quark</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="test_flags=-instance_method">
+  
+    #<strong>test_flags=</strong>(flags)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets test flags. This function is only useful for implementing
+unit tests for vte itself; it is a no-op in non-debug builds.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="user_shell-instance_method">
+  
+    #<strong>user_shell</strong>  &#x21d2; <tt>Vte::filename</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the user's shell, or nil. In the latter case, the
+system default (usually &quot;/bin/sh&quot;) should be used.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Vte::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly allocated string with the
+user's shell, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::SizeGroup
+  
+    &mdash; Ruby/GtkSourceView5
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::SizeGroup";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">SizeGroup</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::SizeGroup
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::SizeGroup</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p><code>GtkSizeGroup</code> groups widgets together so they all request the same size.</p>
+<p>This is typically useful when you want a column of widgets to have the
+same size, but you can’t use a <code>GtkGrid</code>.</p>
+<p>In detail, the size requested for each widget in a <code>GtkSizeGroup</code> is
+the maximum of the sizes that would have been requested for each
+widget in the size group if they were not in the size group. The mode
+of the size group (see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SizeGroup.set_mode]) determines whether
+this applies to the horizontal size, the vertical size, or both sizes.</p>
+<p>Note that size groups only affect the amount of space requested, not
+the size that the widgets finally receive. If you want the widgets in
+a <code>GtkSizeGroup</code> to actually be the same size, you need to pack them in
+such a way that they get the size they request and not more.</p>
+<p><code>GtkSizeGroup</code> objects are referenced by each widget in the size group,
+so once you have added all widgets to a <code>GtkSizeGroup</code>, you can drop
+the initial reference to the size group with g_object_unref(). If the
+widgets in the size group are subsequently destroyed, then they will
+be removed from the size group and drop their references on the size
+group; when all widgets have been removed, the size group will be
+freed.</p>
+<p>Widgets can be part of multiple size groups; GTK will compute the
+horizontal size of a widget from the horizontal requisition of all
+widgets that can be reached from the widget by a chain of size groups
+of type %GTK_SIZE_GROUP_HORIZONTAL or %GTK_SIZE_GROUP_BOTH, and the
+vertical size from the vertical requisition of all widgets that can be
+reached from the widget by a chain of size groups of type
+%GTK_SIZE_GROUP_VERTICAL or %GTK_SIZE_GROUP_BOTH.</p>
+<p>Note that only non-contextual sizes of every widget are ever consulted
+by size groups (since size groups have no knowledge of what size a widget
+will be allocated in one dimension, it cannot derive how much height
+a widget will receive for a given width). When grouping widgets that
+trade height for width in mode %GTK_SIZE_GROUP_VERTICAL or %GTK_SIZE_GROUP_BOTH:
+the height for the minimum width will be the requested height for all
+widgets in the group. The same is of course true when horizontally grouping
+width for height widgets.</p>
+<p>Widgets that trade height-for-width should set a reasonably large minimum
+width by way of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:width-chars] for instance. Widgets with
+static sizes as well as widgets that grow (such as ellipsizing text) need no
+such considerations.</p>
+<h1>GtkSizeGroup as GtkBuildable</h1>
+<p>Size groups can be specified in a UI definition by placing an <code>&lt;object&gt;</code>
+element with <code>class=&quot;GtkSizeGroup&quot;</code> somewhere in the UI definition. The
+widgets that belong to the size group are specified by a <code>&lt;widgets&gt;</code> element
+that may contain multiple <code>&lt;widget&gt;</code> elements, one for each member of the
+size group. The ”name” attribute gives the id of the widget.</p>
+<p>An example of a UI definition fragment with <code>GtkSizeGroup</code>:</p>
+<pre class="code xml"><code class="xml">&lt;object class=&quot;GtkSizeGroup&quot;&gt;
+  &lt;property name=&quot;mode&quot;&gt;horizontal&lt;/property&gt;
+  &lt;widgets&gt;
+    &lt;widget name=&quot;radio1&quot;/&gt;
+    &lt;widget name=&quot;radio2&quot;/&gt;
+  &lt;/widgets&gt;
+&lt;/object&gt;
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_widget-instance_method" title="#add_widget (instance method)">#<strong>add_widget</strong>(widget)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a widget to a <code>GtkSizeGroup</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(mode)  &#x21d2; Gtk::SizeGroup </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new <code>GtkSizeGroup</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mode-instance_method" title="#mode (instance method)">#<strong>mode</strong>  &#x21d2; Gtk::SizeGroupMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The direction in which the size group affects requested sizes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mode=-instance_method" title="#mode= (instance method)">#<strong>mode=</strong>(mode)  &#x21d2; Gtk::SizeGroupMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The direction in which the size group affects requested sizes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_widget-instance_method" title="#remove_widget (instance method)">#<strong>remove_widget</strong>(widget)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes a widget from a <code>GtkSizeGroup</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#widgets-instance_method" title="#widgets (instance method)">#<strong>widgets</strong>  &#x21d2; GLib::SList&lt;Gtk::Widget&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the list of widgets associated with <!-- raw HTML omitted -->size_group<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(mode)  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::SizeGroup (class)">Gtk::SizeGroup</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new <code>GtkSizeGroup</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SizeGroupMode.html" title="Gtk::SizeGroupMode (module)">Gtk::SizeGroupMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the mode for the new size group.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_widget-instance_method">
+  
+    #<strong>add_widget</strong>(widget)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a widget to a <code>GtkSizeGroup</code>.</p>
+<p>In the future, the requisition
+of the widget will be determined as the maximum of its requisition
+and the requisition of the other widgets in the size group.
+Whether this applies horizontally, vertically, or in both directions
+depends on the mode of the size group.
+See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SizeGroup.set_mode].</p>
+<p>When the widget is destroyed or no longer referenced elsewhere, it
+will be removed from the size group.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>GtkWidget</code> to add</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mode-instance_method">
+  
+    #<strong>mode</strong>  &#x21d2; <tt><span class='object_link'><a href="SizeGroupMode.html" title="Gtk::SizeGroupMode (module)">Gtk::SizeGroupMode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The direction in which the size group affects requested sizes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SizeGroupMode.html" title="Gtk::SizeGroupMode (module)">Gtk::SizeGroupMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mode=-instance_method">
+  
+    #<strong>mode=</strong>(mode)  &#x21d2; <tt><span class='object_link'><a href="SizeGroupMode.html" title="Gtk::SizeGroupMode (module)">Gtk::SizeGroupMode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The direction in which the size group affects requested sizes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SizeGroupMode.html" title="Gtk::SizeGroupMode (module)">Gtk::SizeGroupMode</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SizeGroupMode.html" title="Gtk::SizeGroupMode (module)">Gtk::SizeGroupMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>mode</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SizeGroupMode.html" title="Gtk::SizeGroupMode (module)">Gtk::SizeGroupMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_widget-instance_method">
+  
+    #<strong>remove_widget</strong>(widget)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes a widget from a <code>GtkSizeGroup</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>widget</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>GtkWidget</code> to remove</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="widgets-instance_method">
+  
+    #<strong>widgets</strong>  &#x21d2; <tt>GLib::SList&lt;<span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the list of widgets associated with <!-- raw HTML omitted -->size_group<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::SList&lt;<span class='object_link'><a href="Widget.html" title="Gtk::Widget (class)">Gtk::Widget</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GSList</code> of
+widgets. The list is owned by GTK and should not be modified.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

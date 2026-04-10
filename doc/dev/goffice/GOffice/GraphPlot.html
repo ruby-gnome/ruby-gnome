@@ -1,0 +1,3897 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GOffice::GraphPlot
+  
+    &mdash; Ruby/GOffice
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GOffice::GraphPlot";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (G)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GOffice.html" title="GOffice (module)">GOffice</a></span></span>
+     &raquo; 
+    <span class="title">GraphPlot</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GOffice::GraphPlot
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="GraphObject.html" title="GOffice::GraphObject (class)">GraphObject</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="GraphObject.html" title="GOffice::GraphObject (class)">GraphObject</a></span></li>
+          
+            <li class="next">GOffice::GraphPlot</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#families-class_method" title="families (class method)">.<strong>families</strong>  &#x21d2; GLib::HashTable&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>registered plot families.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#family_by_name-class_method" title="family_by_name (class method)">.<strong>family_by_name</strong>(name)  &#x21d2; GOffice::GraphPlotFamily </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The plot family if it exists.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#family_register-class_method" title="family_register (class method)">.<strong>family_register</strong>(name, sample_image_file, priority, axis_set)  &#x21d2; GOffice::GraphPlotFamily </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The new Gog::PlotFamily.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#family_unregister-class_method" title="family_unregister (class method)">.<strong>family_unregister</strong>(family)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type_register-class_method" title="type_register (class method)">.<strong>type_register</strong>(family, col, row, name, sample_image_file, description, engine)  &#x21d2; GOffice::GraphPlotType </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The new Gog::PlotType.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#axis=-instance_method" title="#axis= (instance method)">#<strong>axis=</strong>(axis)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Connect <!-- raw HTML omitted -->axis<!-- raw HTML omitted --> and <!-- raw HTML omitted -->plot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#axis_clear-instance_method" title="#axis_clear (instance method)">#<strong>axis_clear</strong>(filter)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A utility method to clear all existing axis associations flagged by <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#axis_set_assign-instance_method" title="#axis_set_assign (instance method)">#<strong>axis_set_assign</strong>(type)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#axis_set_is_valid-instance_method" title="#axis_set_is_valid (instance method)">#<strong>axis_set_is_valid</strong>(type)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#axis_set_pref-instance_method" title="#axis_set_pref (instance method)">#<strong>axis_set_pref</strong>  &#x21d2; GOffice::GraphAxisSet </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bubble_axis-instance_method" title="#bubble_axis (instance method)">#<strong>bubble_axis</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Bubble-axis.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bubble_axis=-instance_method" title="#bubble_axis= (instance method)">#<strong>bubble_axis=</strong>(bubble_axis)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#circ_axis-instance_method" title="#circ_axis (instance method)">#<strong>circ_axis</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Circ-axis.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#circ_axis=-instance_method" title="#circ_axis= (instance method)">#<strong>circ_axis=</strong>(circ_axis)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clear_series-instance_method" title="#clear_series (instance method)">#<strong>clear_series</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#color_axis-instance_method" title="#color_axis (instance method)">#<strong>color_axis</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Color-axis.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#color_axis=-instance_method" title="#color_axis= (instance method)">#<strong>color_axis=</strong>(color_axis)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#description-instance_method" title="#description (instance method)">#<strong>description</strong>  &#x21d2; GOffice::GraphPlotDesc </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Gog::PlotDesc for <!-- raw HTML omitted -->plot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#foreach_elem-instance_method" title="#foreach_elem (instance method)">#<strong>foreach_elem</strong>(only_visible, handler, data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Executes <!-- raw HTML omitted -->funcfor<!-- raw HTML omitted --> each plot element.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_axis-instance_method" title="#get_axis (instance method)">#<strong>get_axis</strong>(type)  &#x21d2; GOffice::GraphAxis </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The axis if any.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_axis_bounds-instance_method" title="#get_axis_bounds (instance method)">#<strong>get_axis_bounds</strong>(axis, bounds)  &#x21d2; GOffice::Data </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries <!-- raw HTML omitted -->plot<!-- raw HTML omitted --> for its axis preferences for <!-- raw HTML omitted -->axis<!-- raw HTML omitted --> and stores the results in <!-- raw HTML omitted -->bounds<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_cardinality-instance_method" title="#get_cardinality (instance method)">#<strong>get_cardinality</strong>(full, visible)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return the number of logical elements in the plot.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_percent_value-instance_method" title="#get_percent_value (instance method)">#<strong>get_percent_value</strong>(series, index)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#guru_helper-instance_method" title="#guru_helper (instance method)">#<strong>guru_helper</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#guru_hints-instance_method" title="#guru_hints (instance method)">#<strong>guru_hints</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Guru-hints.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#guru_hints=-instance_method" title="#guru_hints= (instance method)">#<strong>guru_hints=</strong>(guru_hints)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(type)  &#x21d2; GOffice::GraphPlot </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#interpolation-instance_method" title="#interpolation (instance method)">#<strong>interpolation</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Interpolation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#interpolation=-instance_method" title="#interpolation= (instance method)">#<strong>interpolation=</strong>(interpolation)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_series-instance_method" title="#new_series (instance method)">#<strong>new_series</strong>  &#x21d2; GOffice::GraphSeries </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A new GogSeries of a type consistent with <!-- raw HTML omitted -->plot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#plot_group-instance_method" title="#plot_group (instance method)">#<strong>plot_group</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Plot-group.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#plot_group=-instance_method" title="#plot_group= (instance method)">#<strong>plot_group=</strong>(plot_group)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pseudo_3d_axis-instance_method" title="#pseudo_3d_axis (instance method)">#<strong>pseudo_3d_axis</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Pseudo-3d-axis.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pseudo_3d_axis=-instance_method" title="#pseudo_3d_axis= (instance method)">#<strong>pseudo_3d_axis=</strong>(pseudo_3d_axis)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#radial_axis-instance_method" title="#radial_axis (instance method)">#<strong>radial_axis</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Radial-axis.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#radial_axis=-instance_method" title="#radial_axis= (instance method)">#<strong>radial_axis=</strong>(radial_axis)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#request_cardinality_update-instance_method" title="#request_cardinality_update (instance method)">#<strong>request_cardinality_update</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#series-instance_method" title="#series (instance method)">#<strong>series</strong>  &#x21d2; GLib::SList&lt;GOffice::GraphSeries&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A list of the series in <!-- raw HTML omitted -->plot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#supports_vary_style_by_element-instance_method" title="#supports_vary_style_by_element (instance method)">#<strong>supports_vary_style_by_element</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_3d-instance_method" title="#update_3d (instance method)">#<strong>update_3d</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_cardinality-instance_method" title="#update_cardinality (instance method)">#<strong>update_cardinality</strong>(index_num)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Update cardinality and cache result.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vary_style_by_element=-instance_method" title="#vary_style_by_element= (instance method)">#<strong>vary_style_by_element=</strong>(vary_style_by_element)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vary_style_by_element%3F-instance_method" title="#vary_style_by_element? (instance method)">#<strong>vary_style_by_element?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Vary-style-by-element.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#x_axis-instance_method" title="#x_axis (instance method)">#<strong>x_axis</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>X-axis.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#x_axis=-instance_method" title="#x_axis= (instance method)">#<strong>x_axis=</strong>(x_axis)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#y_axis-instance_method" title="#y_axis (instance method)">#<strong>y_axis</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Y-axis.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#y_axis=-instance_method" title="#y_axis= (instance method)">#<strong>y_axis=</strong>(y_axis)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#z_axis-instance_method" title="#z_axis (instance method)">#<strong>z_axis</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Z-axis.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#z_axis=-instance_method" title="#z_axis= (instance method)">#<strong>z_axis=</strong>(z_axis)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="GraphObject.html" title="GOffice::GraphObject (class)">GraphObject</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="GraphObject.html#add_by_name-instance_method" title="GOffice::GraphObject#add_by_name (method)">#add_by_name</a></span>, <span class='object_link'><a href="GraphObject.html#add_by_role-instance_method" title="GOffice::GraphObject#add_by_role (method)">#add_by_role</a></span>, <span class='object_link'><a href="GraphObject.html#alignment-instance_method" title="GOffice::GraphObject#alignment (method)">#alignment</a></span>, <span class='object_link'><a href="GraphObject.html#alignment=-instance_method" title="GOffice::GraphObject#alignment= (method)">#alignment=</a></span>, <span class='object_link'><a href="GraphObject.html#anchor-instance_method" title="GOffice::GraphObject#anchor (method)">#anchor</a></span>, <span class='object_link'><a href="GraphObject.html#anchor=-instance_method" title="GOffice::GraphObject#anchor= (method)">#anchor=</a></span>, <span class='object_link'><a href="GraphObject.html#can_reorder-instance_method" title="GOffice::GraphObject#can_reorder (method)">#can_reorder</a></span>, <span class='object_link'><a href="GraphObject.html#clear_parent-instance_method" title="GOffice::GraphObject#clear_parent (method)">#clear_parent</a></span>, <span class='object_link'><a href="GraphObject.html#compass-instance_method" title="GOffice::GraphObject#compass (method)">#compass</a></span>, <span class='object_link'><a href="GraphObject.html#compass=-instance_method" title="GOffice::GraphObject#compass= (method)">#compass=</a></span>, <span class='object_link'><a href="GraphObject.html#document_changed-instance_method" title="GOffice::GraphObject#document_changed (method)">#document_changed</a></span>, <span class='object_link'><a href="GraphObject.html#dup-instance_method" title="GOffice::GraphObject#dup (method)">#dup</a></span>, <span class='object_link'><a href="GraphObject.html#emit_changed-instance_method" title="GOffice::GraphObject#emit_changed (method)">#emit_changed</a></span>, <span class='object_link'><a href="GraphObject.html#find_role_by_name-instance_method" title="GOffice::GraphObject#find_role_by_name (method)">#find_role_by_name</a></span>, <span class='object_link'><a href="GraphObject.html#get_child_by_name-instance_method" title="GOffice::GraphObject#get_child_by_name (method)">#get_child_by_name</a></span>, <span class='object_link'><a href="GraphObject.html#get_child_by_role-instance_method" title="GOffice::GraphObject#get_child_by_role (method)">#get_child_by_role</a></span>, <span class='object_link'><a href="GraphObject.html#get_children-instance_method" title="GOffice::GraphObject#get_children (method)">#get_children</a></span>, <span class='object_link'><a href="GraphObject.html#get_editor-instance_method" title="GOffice::GraphObject#get_editor (method)">#get_editor</a></span>, <span class='object_link'><a href="GraphObject.html#get_manual_allocation-instance_method" title="GOffice::GraphObject#get_manual_allocation (method)">#get_manual_allocation</a></span>, <span class='object_link'><a href="GraphObject.html#get_manual_position-instance_method" title="GOffice::GraphObject#get_manual_position (method)">#get_manual_position</a></span>, <span class='object_link'><a href="GraphObject.html#get_parent_typed-instance_method" title="GOffice::GraphObject#get_parent_typed (method)">#get_parent_typed</a></span>, <span class='object_link'><a href="GraphObject.html#get_position_flags-instance_method" title="GOffice::GraphObject#get_position_flags (method)">#get_position_flags</a></span>, <span class='object_link'><a href="GraphObject.html#graph-instance_method" title="GOffice::GraphObject#graph (method)">#graph</a></span>, <span class='object_link'><a href="GraphObject.html#id-instance_method" title="GOffice::GraphObject#id (method)">#id</a></span>, <span class='object_link'><a href="GraphObject.html#id=-instance_method" title="GOffice::GraphObject#id= (method)">#id=</a></span>, <span class='object_link'><a href="GraphObject.html#invisible=-instance_method" title="GOffice::GraphObject#invisible= (method)">#invisible=</a></span>, <span class='object_link'><a href="GraphObject.html#invisible%3F-instance_method" title="GOffice::GraphObject#invisible? (method)">#invisible?</a></span>, <span class='object_link'><a href="GraphObject.html#is_default_position_flags-instance_method" title="GOffice::GraphObject#is_default_position_flags (method)">#is_default_position_flags</a></span>, <span class='object_link'><a href="GraphObject.html#is_deletable-instance_method" title="GOffice::GraphObject#is_deletable (method)">#is_deletable</a></span>, <span class='object_link'><a href="GraphObject.html#is_position_manual=-instance_method" title="GOffice::GraphObject#is_position_manual= (method)">#is_position_manual=</a></span>, <span class='object_link'><a href="GraphObject.html#is_position_manual%3F-instance_method" title="GOffice::GraphObject#is_position_manual? (method)">#is_position_manual?</a></span>, <span class='object_link'><a href="GraphObject.html#manual_position=-instance_method" title="GOffice::GraphObject#manual_position= (method)">#manual_position=</a></span>, <span class='object_link'><a href="GraphObject.html#manual_size-instance_method" title="GOffice::GraphObject#manual_size (method)">#manual_size</a></span>, <span class='object_link'><a href="GraphObject.html#manual_size=-instance_method" title="GOffice::GraphObject#manual_size= (method)">#manual_size=</a></span>, <span class='object_link'><a href="GraphObject.html#manual_size_mode-instance_method" title="GOffice::GraphObject#manual_size_mode (method)">#manual_size_mode</a></span>, <span class='object_link'><a href="GraphObject.html#name-instance_method" title="GOffice::GraphObject#name (method)">#name</a></span>, <span class='object_link'><a href="GraphObject.html#name=-instance_method" title="GOffice::GraphObject#name= (method)">#name=</a></span>, <span class='object_link'><a href="GraphObject.html#new_view-instance_method" title="GOffice::GraphObject#new_view (method)">#new_view</a></span>, <span class='object_link'><a href="GraphObject.html#parent-instance_method" title="GOffice::GraphObject#parent (method)">#parent</a></span>, <span class='object_link'><a href="GraphObject.html#position-instance_method" title="GOffice::GraphObject#position (method)">#position</a></span>, <span class='object_link'><a href="GraphObject.html#position=-instance_method" title="GOffice::GraphObject#position= (method)">#position=</a></span>, <span class='object_link'><a href="GraphObject.html#possible_additions-instance_method" title="GOffice::GraphObject#possible_additions (method)">#possible_additions</a></span>, <span class='object_link'><a href="GraphObject.html#register_roles-class_method" title="GOffice::GraphObject.register_roles (method)">register_roles</a></span>, <span class='object_link'><a href="GraphObject.html#reorder-instance_method" title="GOffice::GraphObject#reorder (method)">#reorder</a></span>, <span class='object_link'><a href="GraphObject.html#request_editor_update-instance_method" title="GOffice::GraphObject#request_editor_update (method)">#request_editor_update</a></span>, <span class='object_link'><a href="GraphObject.html#request_update-instance_method" title="GOffice::GraphObject#request_update (method)">#request_update</a></span>, <span class='object_link'><a href="GraphObject.html#sax_push_parser-class_method" title="GOffice::GraphObject.sax_push_parser (method)">sax_push_parser</a></span>, <span class='object_link'><a href="GraphObject.html#set_arg-class_method" title="GOffice::GraphObject.set_arg (method)">set_arg</a></span>, <span class='object_link'><a href="GraphObject.html#set_parent-instance_method" title="GOffice::GraphObject#set_parent (method)">#set_parent</a></span>, <span class='object_link'><a href="GraphObject.html#set_position_flags-instance_method" title="GOffice::GraphObject#set_position_flags (method)">#set_position_flags</a></span>, <span class='object_link'><a href="GraphObject.html#theme-instance_method" title="GOffice::GraphObject#theme (method)">#theme</a></span>, <span class='object_link'><a href="GraphObject.html#update-instance_method" title="GOffice::GraphObject#update (method)">#update</a></span>, <span class='object_link'><a href="GraphObject.html#write_xml_sax-instance_method" title="GOffice::GraphObject#write_xml_sax (method)">#write_xml_sax</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(type)  &#x21d2; <tt><span class='object_link'><a href="" title="GOffice::GraphPlot (class)">GOffice::GraphPlot</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphPlotType</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="families-class_method">
+  
+    .<strong>families</strong>  &#x21d2; <tt>GLib::HashTable&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>registered plot families.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::HashTable&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="family_by_name-class_method">
+  
+    .<strong>family_by_name</strong>(name)  &#x21d2; <tt>GOffice::GraphPlotFamily</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the plot family if it exists.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>family name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphPlotFamily</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the plot family if it exists.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="family_register-class_method">
+  
+    .<strong>family_register</strong>(name, sample_image_file, priority, axis_set)  &#x21d2; <tt>GOffice::GraphPlotFamily</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the new Gog::PlotFamily.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>family name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sample_image_file</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the sample image file name.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>priority</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>axis_set</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphAxisSet.html" title="GOffice::GraphAxisSet (module)">GOffice::GraphAxisSet</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the used axis set.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphPlotFamily</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new Gog::PlotFamily.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="family_unregister-class_method">
+  
+    .<strong>family_unregister</strong>(family)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>family</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphPlotFamily</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type_register-class_method">
+  
+    .<strong>type_register</strong>(family, col, row, name, sample_image_file, description, engine)  &#x21d2; <tt>GOffice::GraphPlotType</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the new Gog::PlotType.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>family</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphPlotFamily</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gog::PlotFamily</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>col</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the column where the sample should appear.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>row</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the row where the sample should appear.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the plot type name.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sample_image_file</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the sample image file name.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>description</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the plot type description.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>engine</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the plot engine name.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphPlotType</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new Gog::PlotType.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="axis=-instance_method">
+  
+    #<strong>axis=</strong>(axis)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Connect <!-- raw HTML omitted -->axis<!-- raw HTML omitted --> and <!-- raw HTML omitted -->plot<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>axis</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphAxis.html" title="GOffice::GraphAxis (class)">GOffice::GraphAxis</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gog::Axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="axis_clear-instance_method">
+  
+    #<strong>axis_clear</strong>(filter)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A utility method to clear all existing axis associations flagged by <!-- raw HTML omitted -->filter<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filter</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphAxisSet.html" title="GOffice::GraphAxisSet (module)">GOffice::GraphAxisSet</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gog::AxisSet</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="axis_set_assign-instance_method">
+  
+    #<strong>axis_set_assign</strong>(type)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphAxisSet.html" title="GOffice::GraphAxisSet (module)">GOffice::GraphAxisSet</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="axis_set_is_valid-instance_method">
+  
+    #<strong>axis_set_is_valid</strong>(type)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphAxisSet.html" title="GOffice::GraphAxisSet (module)">GOffice::GraphAxisSet</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="axis_set_pref-instance_method">
+  
+    #<strong>axis_set_pref</strong>  &#x21d2; <tt><span class='object_link'><a href="GraphAxisSet.html" title="GOffice::GraphAxisSet (module)">GOffice::GraphAxisSet</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphAxisSet.html" title="GOffice::GraphAxisSet (module)">GOffice::GraphAxisSet</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="bubble_axis-instance_method">
+  
+    #<strong>bubble_axis</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns bubble-axis.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>bubble-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="bubble_axis=-instance_method">
+  
+    #<strong>bubble_axis=</strong>(bubble_axis)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bubble_axis</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>bubble-axis</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>bubble-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="circ_axis-instance_method">
+  
+    #<strong>circ_axis</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns circ-axis.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>circ-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="circ_axis=-instance_method">
+  
+    #<strong>circ_axis=</strong>(circ_axis)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>circ_axis</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>circ-axis</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>circ-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clear_series-instance_method">
+  
+    #<strong>clear_series</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="color_axis-instance_method">
+  
+    #<strong>color_axis</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns color-axis.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="color_axis=-instance_method">
+  
+    #<strong>color_axis=</strong>(color_axis)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>color_axis</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color-axis</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="description-instance_method">
+  
+    #<strong>description</strong>  &#x21d2; <tt>GOffice::GraphPlotDesc</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the Gog::PlotDesc for <!-- raw HTML omitted -->plot<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphPlotDesc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gog::PlotDesc for <!-- raw HTML omitted -->plot<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="foreach_elem-instance_method">
+  
+    #<strong>foreach_elem</strong>(only_visible, handler, data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Executes <!-- raw HTML omitted -->funcfor<!-- raw HTML omitted --> each plot element. Used to build a legend.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>only_visible</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether to restrict to visible elements.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>handler</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphEnumFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gog::EnumFunc</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data for <!-- raw HTML omitted -->func<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_axis-instance_method">
+  
+    #<strong>get_axis</strong>(type)  &#x21d2; <tt><span class='object_link'><a href="GraphAxis.html" title="GOffice::GraphAxis (class)">GOffice::GraphAxis</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the axis if any.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphAxisType.html" title="GOffice::GraphAxisType (module)">GOffice::GraphAxisType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gog::AxisType</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphAxis.html" title="GOffice::GraphAxis (class)">GOffice::GraphAxis</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the axis if any.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_axis_bounds-instance_method">
+  
+    #<strong>get_axis_bounds</strong>(axis, bounds)  &#x21d2; <tt><span class='object_link'><a href="Data.html" title="GOffice::Data (class)">GOffice::Data</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries <!-- raw HTML omitted -->plot<!-- raw HTML omitted --> for its axis preferences for <!-- raw HTML omitted -->axis<!-- raw HTML omitted --> and stores the results in
+<!-- raw HTML omitted -->bounds<!-- raw HTML omitted -->.  All elements of <!-- raw HTML omitted -->bounds<!-- raw HTML omitted --> are initialized to sane values before the
+query <em>EXCEPT</em> ::fmt.  The caller is responsible for initializing it.  This
+is done so that once on plot has selected a format the others need not do
+the lookup too if so desired.</p>
+<p>Caller is responsible for unrefing ::fmt.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>axis</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphAxisType.html" title="GOffice::GraphAxisType (module)">GOffice::GraphAxisType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gog::AxisType</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bounds</span>
+      
+      
+        <span class='type'>(<tt>GOffice::GraphPlotBoundInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gog::PlotBoundInfo</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Data.html" title="GOffice::Data (class)">GOffice::Data</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The data providing the bound (does not add a ref)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_cardinality-instance_method">
+  
+    #<strong>get_cardinality</strong>(full, visible)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return the number of logical elements in the plot.
+See <!-- raw HTML omitted -->gog_chart_get_cardinality<!-- raw HTML omitted -->.</p>
+<p><!-- raw HTML omitted -->full<!-- raw HTML omitted --> and <!-- raw HTML omitted -->visible<!-- raw HTML omitted --> may be nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>full</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>placeholder for full cardinality</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>visible</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>placeholder for visible cardinality</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_percent_value-instance_method">
+  
+    #<strong>get_percent_value</strong>(series, index)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>series</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="guru_helper-instance_method">
+  
+    #<strong>guru_helper</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="guru_hints-instance_method">
+  
+    #<strong>guru_hints</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns guru-hints.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>guru-hints</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="guru_hints=-instance_method">
+  
+    #<strong>guru_hints=</strong>(guru_hints)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>guru_hints</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>guru-hints</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>guru-hints</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="interpolation-instance_method">
+  
+    #<strong>interpolation</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns interpolation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>interpolation</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="interpolation=-instance_method">
+  
+    #<strong>interpolation=</strong>(interpolation)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>interpolation</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>interpolation</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>interpolation</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_series-instance_method">
+  
+    #<strong>new_series</strong>  &#x21d2; <tt><span class='object_link'><a href="GraphSeries.html" title="GOffice::GraphSeries (class)">GOffice::GraphSeries</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a new GogSeries of a type consistent with <!-- raw HTML omitted -->plot<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphSeries.html" title="GOffice::GraphSeries (class)">GOffice::GraphSeries</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new GogSeries of a type consistent with <!-- raw HTML omitted -->plot<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="plot_group-instance_method">
+  
+    #<strong>plot_group</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns plot-group.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>plot-group</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="plot_group=-instance_method">
+  
+    #<strong>plot_group=</strong>(plot_group)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>plot_group</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>plot-group</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>plot-group</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pseudo_3d_axis-instance_method">
+  
+    #<strong>pseudo_3d_axis</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns pseudo-3d-axis.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pseudo-3d-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pseudo_3d_axis=-instance_method">
+  
+    #<strong>pseudo_3d_axis=</strong>(pseudo_3d_axis)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pseudo_3d_axis</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pseudo-3d-axis</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pseudo-3d-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="radial_axis-instance_method">
+  
+    #<strong>radial_axis</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns radial-axis.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>radial-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="radial_axis=-instance_method">
+  
+    #<strong>radial_axis=</strong>(radial_axis)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>radial_axis</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>radial-axis</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>radial-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="request_cardinality_update-instance_method">
+  
+    #<strong>request_cardinality_update</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="series-instance_method">
+  
+    #<strong>series</strong>  &#x21d2; <tt>GLib::SList&lt;<span class='object_link'><a href="GraphSeries.html" title="GOffice::GraphSeries (class)">GOffice::GraphSeries</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A list of the series in <!-- raw HTML omitted -->plot<!-- raw HTML omitted -->.  Do not modify or free the list.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::SList&lt;<span class='object_link'><a href="GraphSeries.html" title="GOffice::GraphSeries (class)">GOffice::GraphSeries</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A list of the series in <!-- raw HTML omitted -->plot<!-- raw HTML omitted -->.  Do not modify or free the list.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="supports_vary_style_by_element-instance_method">
+  
+    #<strong>supports_vary_style_by_element</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_3d-instance_method">
+  
+    #<strong>update_3d</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_cardinality-instance_method">
+  
+    #<strong>update_cardinality</strong>(index_num)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Update cardinality and cache result. See <!-- raw HTML omitted -->gog_chart_get_cardinality<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>index_num</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>index offset for this plot</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vary_style_by_element=-instance_method">
+  
+    #<strong>vary_style_by_element=</strong>(vary_style_by_element)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>vary_style_by_element</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>vary-style-by-element</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>vary-style-by-element</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vary_style_by_element?-instance_method">
+  
+    #<strong>vary_style_by_element?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns vary-style-by-element.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>vary-style-by-element</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="x_axis-instance_method">
+  
+    #<strong>x_axis</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns x-axis.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>x-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="x_axis=-instance_method">
+  
+    #<strong>x_axis=</strong>(x_axis)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x_axis</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>x-axis</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>x-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="y_axis-instance_method">
+  
+    #<strong>y_axis</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns y-axis.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>y-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="y_axis=-instance_method">
+  
+    #<strong>y_axis=</strong>(y_axis)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>y_axis</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>y-axis</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>y-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="z_axis-instance_method">
+  
+    #<strong>z_axis</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns z-axis.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>z-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="z_axis=-instance_method">
+  
+    #<strong>z_axis=</strong>(z_axis)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>z_axis</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>z-axis</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>z-axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

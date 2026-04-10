@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gdk::Texture
+  
+    &mdash; Ruby/GTK4
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gdk::Texture";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gdk.html" title="Gdk (module)">Gdk</a></span></span>
+     &raquo; 
+    <span class="title">Texture</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gdk::Texture
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gdk::Texture</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="DmabufTexture.html" title="Gdk::DmabufTexture (class)">DmabufTexture</a></span>, <span class='object_link'><a href="GLTexture.html" title="Gdk::GLTexture (class)">GLTexture</a></span>, <span class='object_link'><a href="MemoryTexture.html" title="Gdk::MemoryTexture (class)">MemoryTexture</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#download-instance_method" title="#download (instance method)">#<strong>download</strong>(data, stride)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Downloads the <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> into local memory.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#format-instance_method" title="#format (instance method)">#<strong>format</strong>  &#x21d2; Gdk::MemoryFormat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the memory format most closely associated with the data of the texture.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#height-instance_method" title="#height (instance method)">#<strong>height</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The height of the texture, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#height=-instance_method" title="#height= (instance method)">#<strong>height=</strong>(height)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The height of the texture, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(resource_path)  &#x21d2; Gdk::Texture </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new texture by loading an image from a resource.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save_to_png-instance_method" title="#save_to_png (instance method)">#<strong>save_to_png</strong>(filename)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Store the given <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> to the <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> as a PNG file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save_to_png_bytes-instance_method" title="#save_to_png_bytes (instance method)">#<strong>save_to_png_bytes</strong>  &#x21d2; GLib::Bytes </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Store the given <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> in memory as a PNG file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save_to_tiff-instance_method" title="#save_to_tiff (instance method)">#<strong>save_to_tiff</strong>(filename)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Store the given <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> to the <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> as a TIFF file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save_to_tiff_bytes-instance_method" title="#save_to_tiff_bytes (instance method)">#<strong>save_to_tiff_bytes</strong>  &#x21d2; GLib::Bytes </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Store the given <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> in memory as a TIFF file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#width-instance_method" title="#width (instance method)">#<strong>width</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The width of the texture, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#width=-instance_method" title="#width= (instance method)">#<strong>width=</strong>(width)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The width of the texture, in pixels.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(resource_path)  &#x21d2; <tt><span class='object_link'><a href="" title="Gdk::Texture (class)">Gdk::Texture</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new texture by loading an image from a resource.</p>
+<p>The file format is detected automatically. The supported formats
+are PNG and JPEG, though more formats might be available.</p>
+<p>It is a fatal error if <!-- raw HTML omitted -->resource_path<!-- raw HTML omitted --> does not specify a valid
+image resource and the program will abort if that happens.
+If you are unsure about the validity of a resource, use
+[ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.new_from_file] to load it.</p>
+<p>This function is threadsafe, so that you can e.g. use GTask
+and [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Task.run_in_thread] to avoid blocking the main thread
+while loading a big image.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>resource_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the path of the resource file</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="download-instance_method">
+  
+    #<strong>download</strong>(data, stride)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Downloads the <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> into local memory.</p>
+<p>This may be an expensive operation, as the actual texture data
+may reside on a GPU or on a remote display server.</p>
+<p>The data format of the downloaded data is equivalent to
+%CAIRO_FORMAT_ARGB32, so every downloaded pixel requires
+4 bytes of memory.</p>
+<p>Downloading a texture into a Cairo image surface:</p>
+<pre class="code c"><code class="c">surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
+                                      gdk_texture_get_width (texture),
+                                      gdk_texture_get_height (texture));
+gdk_texture_download (texture,
+                      cairo_image_surface_get_data (surface),
+                      cairo_image_surface_get_stride (surface));
+cairo_surface_mark_dirty (surface);
+</code></pre>
+<p>For more flexible download capabilities, see
+[struct<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.TextureDownloader].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointer to enough memory to be filled with the
+downloaded data of <!-- raw HTML omitted -->texture<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stride</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>rowstride in bytes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="format-instance_method">
+  
+    #<strong>format</strong>  &#x21d2; <tt><span class='object_link'><a href="MemoryFormat.html" title="Gdk::MemoryFormat (module)">Gdk::MemoryFormat</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the memory format most closely associated with the data of
+the texture.</p>
+<p>Note that it may not be an exact match for texture data
+stored on the GPU or with compression.</p>
+<p>The format can give an indication about the bit depth and opacity
+of the texture and is useful to determine the best format for
+downloading the texture.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MemoryFormat.html" title="Gdk::MemoryFormat (module)">Gdk::MemoryFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the preferred format for the texture's data</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="height-instance_method">
+  
+    #<strong>height</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The height of the texture, in pixels.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="height=-instance_method">
+  
+    #<strong>height=</strong>(height)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The height of the texture, in pixels.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>height</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="save_to_png-instance_method">
+  
+    #<strong>save_to_png</strong>(filename)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Store the given <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> to the <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> as a PNG file.</p>
+<p>This is a utility function intended for debugging and testing.
+If you want more control over formats, proper error handling or
+want to store to a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File] or other location, you might want to
+use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.save_to_png_bytes] or look into the
+gdk-pixbuf library.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filename</span>
+      
+      
+        <span class='type'>(<tt>Gdk::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the filename to store to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if saving succeeded, false on failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="save_to_png_bytes-instance_method">
+  
+    #<strong>save_to_png_bytes</strong>  &#x21d2; <tt>GLib::Bytes</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Store the given <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> in memory as a PNG file.</p>
+<p>Use [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.new_from_bytes] to read it back.</p>
+<p>If you want to serialize a texture, this is a convenient and
+portable way to do that.</p>
+<p>If you need more control over the generated image, such as
+attaching metadata, you should look into an image handling
+library such as the gdk-pixbuf library.</p>
+<p>If you are dealing with high dynamic range float data, you
+might also want to consider [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.save_to_tiff_bytes]
+instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Bytes</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly allocated <code>GBytes</code> containing PNG data</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="save_to_tiff-instance_method">
+  
+    #<strong>save_to_tiff</strong>(filename)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Store the given <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> to the <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> as a TIFF file.</p>
+<p>GTK will attempt to store data without loss.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filename</span>
+      
+      
+        <span class='type'>(<tt>Gdk::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the filename to store to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if saving succeeded, false on failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="save_to_tiff_bytes-instance_method">
+  
+    #<strong>save_to_tiff_bytes</strong>  &#x21d2; <tt>GLib::Bytes</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Store the given <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> in memory as a TIFF file.</p>
+<p>Use [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.new_from_bytes] to read it back.</p>
+<p>This function is intended to store a representation of the
+texture's data that is as accurate as possible. This is
+particularly relevant when working with high dynamic range
+images and floating-point texture data.</p>
+<p>If that is not your concern and you are interested in a
+smaller size and a more portable format, you might want to
+use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.save_to_png_bytes].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Bytes</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly allocated <code>GBytes</code> containing TIFF data</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="width-instance_method">
+  
+    #<strong>width</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The width of the texture, in pixels.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>width</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="width=-instance_method">
+  
+    #<strong>width=</strong>(width)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The width of the texture, in pixels.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>width</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

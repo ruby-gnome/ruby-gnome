@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Clutter::GestureAction
+  
+    &mdash; Ruby/Clutter
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Clutter::GestureAction";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (G)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter</a></span></span>
+     &raquo; 
+    <span class="title">GestureAction</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Clutter::GestureAction
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Action.html" title="Clutter::Action (class)">Action</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="ActorMeta.html" title="Clutter::ActorMeta (class)">ActorMeta</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="Action.html" title="Clutter::Action (class)">Action</a></span></li>
+          
+            <li class="next">Clutter::GestureAction</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The Clutter::GestureClass structure contains only
+private data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="PanAction.html" title="Clutter::PanAction (class)">PanAction</a></span>, <span class='object_link'><a href="RotateAction.html" title="Clutter::RotateAction (class)">RotateAction</a></span>, <span class='object_link'><a href="SwipeAction.html" title="Clutter::SwipeAction (class)">SwipeAction</a></span>, <span class='object_link'><a href="TapAction.html" title="Clutter::TapAction (class)">TapAction</a></span>, <span class='object_link'><a href="ZoomAction.html" title="Clutter::ZoomAction (class)">ZoomAction</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cancel-instance_method" title="#cancel (instance method)">#<strong>cancel</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Cancel a Clutter::GestureAction before it begins.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_device-instance_method" title="#get_device (instance method)">#<strong>get_device</strong>(point)  &#x21d2; Clutter::InputDevice </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the Clutter::InputDevice of a touch point.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_last_event-instance_method" title="#get_last_event (instance method)">#<strong>get_last_event</strong>(point)  &#x21d2; Clutter::Event </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a reference to the last Clutter::Event for a touch point.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_motion_coords-instance_method" title="#get_motion_coords (instance method)">#<strong>get_motion_coords</strong>(point, motion_x, motion_y)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the coordinates, in stage space, of the latest motion event during the dragging.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_motion_delta-instance_method" title="#get_motion_delta (instance method)">#<strong>get_motion_delta</strong>(point, delta_x, delta_y)  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the incremental delta since the last motion event during the dragging.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_press_coords-instance_method" title="#get_press_coords (instance method)">#<strong>get_press_coords</strong>(point, press_x, press_y)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the coordinates, in stage space, of the press event that started the dragging for a specific touch point.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_release_coords-instance_method" title="#get_release_coords (instance method)">#<strong>get_release_coords</strong>(point, release_x, release_y)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the coordinates, in stage space, where the touch point was last released.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_sequence-instance_method" title="#get_sequence (instance method)">#<strong>get_sequence</strong>(point)  &#x21d2; Clutter::EventSequence </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the Clutter::EventSequence of a touch point.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_threshold_trigger_distance-instance_method" title="#get_threshold_trigger_distance (instance method)">#<strong>get_threshold_trigger_distance</strong>(x, y)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the threshold trigger distance of the gesture <!-- raw HTML omitted -->action<!-- raw HTML omitted -->, as set using clutter_gesture_action_set_threshold_trigger_distance().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_velocity-instance_method" title="#get_velocity (instance method)">#<strong>get_velocity</strong>(point, velocity_x, velocity_y)  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the velocity, in stage pixels per millisecond, of the latest motion event during the dragging.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Clutter::Action </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Clutter::GestureAction instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_current_points-instance_method" title="#n_current_points (instance method)">#<strong>n_current_points</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the number of points currently active.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_touch_points-instance_method" title="#n_touch_points (instance method)">#<strong>n_touch_points</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Number of touch points to trigger a gesture action.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_touch_points=-instance_method" title="#n_touch_points= (instance method)">#<strong>n_touch_points=</strong>(n_touch_points)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Number of touch points to trigger a gesture action.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_threshold_trigger_distance-instance_method" title="#set_threshold_trigger_distance (instance method)">#<strong>set_threshold_trigger_distance</strong>(x, y)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the threshold trigger distance for the gesture drag threshold, if any.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#threshold_trigger_distance_x-instance_method" title="#threshold_trigger_distance_x (instance method)">#<strong>threshold_trigger_distance_x</strong>  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The horizontal trigger distance to be used by the action to either emit the Clutter::GestureAction::gesture-begin signal or to emit the Clutter::GestureAction::gesture-cancel signal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#threshold_trigger_distance_x=-instance_method" title="#threshold_trigger_distance_x= (instance method)">#<strong>threshold_trigger_distance_x=</strong>(threshold_trigger_distance_x)  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The horizontal trigger distance to be used by the action to either emit the Clutter::GestureAction::gesture-begin signal or to emit the Clutter::GestureAction::gesture-cancel signal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#threshold_trigger_distance_y-instance_method" title="#threshold_trigger_distance_y (instance method)">#<strong>threshold_trigger_distance_y</strong>  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The vertical trigger distance to be used by the action to either emit the Clutter::GestureAction::gesture-begin signal or to emit the Clutter::GestureAction::gesture-cancel signal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#threshold_trigger_distance_y=-instance_method" title="#threshold_trigger_distance_y= (instance method)">#<strong>threshold_trigger_distance_y=</strong>(threshold_trigger_distance_y)  &#x21d2; Clutter::gfloat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The vertical trigger distance to be used by the action to either emit the Clutter::GestureAction::gesture-begin signal or to emit the Clutter::GestureAction::gesture-cancel signal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#threshold_trigger_edge-instance_method" title="#threshold_trigger_edge (instance method)">#<strong>threshold_trigger_edge</strong>  &#x21d2; Clutter::GestureTriggerEdge </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The trigger edge to be used by the action to either emit the Clutter::GestureAction::gesture-begin signal or to emit the Clutter::GestureAction::gesture-cancel signal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#threshold_trigger_edge=-instance_method" title="#threshold_trigger_edge= (instance method)">#<strong>threshold_trigger_edge=</strong>(threshold_trigger_edge)  &#x21d2; Clutter::GestureTriggerEdge </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The trigger edge to be used by the action to either emit the Clutter::GestureAction::gesture-begin signal or to emit the Clutter::GestureAction::gesture-cancel signal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#threshold_trigger_egde-instance_method" title="#threshold_trigger_egde (instance method)">#<strong>threshold_trigger_egde</strong>  &#x21d2; Clutter::GestureTriggerEdge </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the edge trigger of the gesture <!-- raw HTML omitted -->action<!-- raw HTML omitted -->, as set using clutter_gesture_action_set_threshold_trigger_edge().</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ActorMeta.html" title="Clutter::ActorMeta (class)">ActorMeta</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="ActorMeta.html#actor-instance_method" title="Clutter::ActorMeta#actor (method)">#actor</a></span>, <span class='object_link'><a href="ActorMeta.html#actor=-instance_method" title="Clutter::ActorMeta#actor= (method)">#actor=</a></span>, <span class='object_link'><a href="ActorMeta.html#enabled-instance_method" title="Clutter::ActorMeta#enabled (method)">#enabled</a></span>, <span class='object_link'><a href="ActorMeta.html#enabled=-instance_method" title="Clutter::ActorMeta#enabled= (method)">#enabled=</a></span>, <span class='object_link'><a href="ActorMeta.html#enabled%3F-instance_method" title="Clutter::ActorMeta#enabled? (method)">#enabled?</a></span>, <span class='object_link'><a href="ActorMeta.html#name-instance_method" title="Clutter::ActorMeta#name (method)">#name</a></span>, <span class='object_link'><a href="ActorMeta.html#name=-instance_method" title="Clutter::ActorMeta#name= (method)">#name=</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="Action.html" title="Clutter::Action (class)">Clutter::Action</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Clutter::GestureAction instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="cancel-instance_method">
+  
+    #<strong>cancel</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Cancel a Clutter::GestureAction before it begins</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_device-instance_method">
+  
+    #<strong>get_device</strong>(point)  &#x21d2; <tt><span class='object_link'><a href="InputDevice.html" title="Clutter::InputDevice (class)">Clutter::InputDevice</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the Clutter::InputDevice of a touch point.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the touch point index, with 0 being the first touch
+point received by the action</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputDevice.html" title="Clutter::InputDevice (class)">Clutter::InputDevice</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Clutter::InputDevice of a touch point.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_last_event-instance_method">
+  
+    #<strong>get_last_event</strong>(point)  &#x21d2; <tt><span class='object_link'><a href="Event.html" title="Clutter::Event (class)">Clutter::Event</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a reference to the last Clutter::Event for a touch point. Call
+clutter_event_copy() if you need to store the reference somewhere.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>index of a point currently active</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Event.html" title="Clutter::Event (class)">Clutter::Event</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the last Clutter::Event for a touch point.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_motion_coords-instance_method">
+  
+    #<strong>get_motion_coords</strong>(point, motion_x, motion_y)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the coordinates, in stage space, of the latest motion
+event during the dragging.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the touch point index, with 0 being the first touch
+point received by the action</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>motion_x</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the latest motion
+event's X coordinate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>motion_y</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the latest motion
+event's Y coordinate</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_motion_delta-instance_method">
+  
+    #<strong>get_motion_delta</strong>(point, delta_x, delta_y)  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the incremental delta since the last motion event
+during the dragging.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the touch point index, with 0 being the first touch
+point received by the action</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>delta_x</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the X axis
+component of the incremental motion delta</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>delta_y</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the Y axis
+component of the incremental motion delta</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the distance since last motion event</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_press_coords-instance_method">
+  
+    #<strong>get_press_coords</strong>(point, press_x, press_y)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the coordinates, in stage space, of the press event
+that started the dragging for a specific touch point.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the touch point index, with 0 being the first touch
+point received by the action</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>press_x</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the press
+event's X coordinate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>press_y</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the press
+event's Y coordinate</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_release_coords-instance_method">
+  
+    #<strong>get_release_coords</strong>(point, release_x, release_y)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the coordinates, in stage space, where the touch point was
+last released.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the touch point index, with 0 being the first touch
+point received by the action</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>release_x</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the X coordinate of
+the last release</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>release_y</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the Y coordinate of
+the last release</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_sequence-instance_method">
+  
+    #<strong>get_sequence</strong>(point)  &#x21d2; <tt>Clutter::EventSequence</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the Clutter::EventSequence of a touch point.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>index of a point currently active</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::EventSequence</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Clutter::EventSequence of a touch point.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_threshold_trigger_distance-instance_method">
+  
+    #<strong>get_threshold_trigger_distance</strong>(x, y)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the threshold trigger distance of the gesture <!-- raw HTML omitted -->action<!-- raw HTML omitted -->,
+as set using clutter_gesture_action_set_threshold_trigger_distance().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The return location for the horizontal distance, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The return location for the vertical distance, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_velocity-instance_method">
+  
+    #<strong>get_velocity</strong>(point, velocity_x, velocity_y)  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the velocity, in stage pixels per millisecond, of the
+latest motion event during the dragging.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the touch point index, with 0 being the first touch
+point received by the action</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>velocity_x</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the latest motion
+event's X velocity</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>velocity_y</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the latest motion
+event's Y velocity</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_current_points-instance_method">
+  
+    #<strong>n_current_points</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the number of points currently active.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of points currently active.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_touch_points-instance_method">
+  
+    #<strong>n_touch_points</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Number of touch points to trigger a gesture action.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>n-touch-points</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_touch_points=-instance_method">
+  
+    #<strong>n_touch_points=</strong>(n_touch_points)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Number of touch points to trigger a gesture action.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_touch_points</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>n-touch-points</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>n-touch-points</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_threshold_trigger_distance-instance_method">
+  
+    #<strong>set_threshold_trigger_distance</strong>(x, y)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the threshold trigger distance for the gesture drag threshold, if any.</p>
+<p>This function should only be called by sub-classes of
+Clutter::GestureAction during their construction phase.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the distance on the horizontal axis</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the distance on the vertical axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="threshold_trigger_distance_x-instance_method">
+  
+    #<strong>threshold_trigger_distance_x</strong>  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The horizontal trigger distance to be used by the action to either
+emit the Clutter::GestureAction::gesture-begin signal or to emit
+the Clutter::GestureAction::gesture-cancel signal.</p>
+<p>A negative value will be interpreted as the default drag threshold.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>threshold-trigger-distance-x</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="threshold_trigger_distance_x=-instance_method">
+  
+    #<strong>threshold_trigger_distance_x=</strong>(threshold_trigger_distance_x)  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The horizontal trigger distance to be used by the action to either
+emit the Clutter::GestureAction::gesture-begin signal or to emit
+the Clutter::GestureAction::gesture-cancel signal.</p>
+<p>A negative value will be interpreted as the default drag threshold.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>threshold_trigger_distance_x</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>threshold-trigger-distance-x</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>threshold-trigger-distance-x</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="threshold_trigger_distance_y-instance_method">
+  
+    #<strong>threshold_trigger_distance_y</strong>  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The vertical trigger distance to be used by the action to either
+emit the Clutter::GestureAction::gesture-begin signal or to emit
+the Clutter::GestureAction::gesture-cancel signal.</p>
+<p>A negative value will be interpreted as the default drag threshold.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>threshold-trigger-distance-y</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="threshold_trigger_distance_y=-instance_method">
+  
+    #<strong>threshold_trigger_distance_y=</strong>(threshold_trigger_distance_y)  &#x21d2; <tt>Clutter::gfloat</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The vertical trigger distance to be used by the action to either
+emit the Clutter::GestureAction::gesture-begin signal or to emit
+the Clutter::GestureAction::gesture-cancel signal.</p>
+<p>A negative value will be interpreted as the default drag threshold.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>threshold_trigger_distance_y</span>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>threshold-trigger-distance-y</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Clutter::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>threshold-trigger-distance-y</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="threshold_trigger_edge-instance_method">
+  
+    #<strong>threshold_trigger_edge</strong>  &#x21d2; <tt><span class='object_link'><a href="GestureTriggerEdge.html" title="Clutter::GestureTriggerEdge (module)">Clutter::GestureTriggerEdge</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The trigger edge to be used by the action to either emit the
+Clutter::GestureAction::gesture-begin signal or to emit the
+Clutter::GestureAction::gesture-cancel signal.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GestureTriggerEdge.html" title="Clutter::GestureTriggerEdge (module)">Clutter::GestureTriggerEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>threshold-trigger-edge</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="threshold_trigger_edge=-instance_method">
+  
+    #<strong>threshold_trigger_edge=</strong>(threshold_trigger_edge)  &#x21d2; <tt><span class='object_link'><a href="GestureTriggerEdge.html" title="Clutter::GestureTriggerEdge (module)">Clutter::GestureTriggerEdge</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The trigger edge to be used by the action to either emit the
+Clutter::GestureAction::gesture-begin signal or to emit the
+Clutter::GestureAction::gesture-cancel signal.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>threshold_trigger_edge</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GestureTriggerEdge.html" title="Clutter::GestureTriggerEdge (module)">Clutter::GestureTriggerEdge</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GestureTriggerEdge.html" title="Clutter::GestureTriggerEdge (module)">Clutter::GestureTriggerEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>threshold-trigger-edge</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GestureTriggerEdge.html" title="Clutter::GestureTriggerEdge (module)">Clutter::GestureTriggerEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>threshold-trigger-edge</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="threshold_trigger_egde-instance_method">
+  
+    #<strong>threshold_trigger_egde</strong>  &#x21d2; <tt><span class='object_link'><a href="GestureTriggerEdge.html" title="Clutter::GestureTriggerEdge (module)">Clutter::GestureTriggerEdge</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the edge trigger of the gesture <!-- raw HTML omitted -->action<!-- raw HTML omitted -->, as set using
+clutter_gesture_action_set_threshold_trigger_edge().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GestureTriggerEdge.html" title="Clutter::GestureTriggerEdge (module)">Clutter::GestureTriggerEdge</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the edge trigger</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

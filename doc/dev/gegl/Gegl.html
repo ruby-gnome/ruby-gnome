@@ -1,0 +1,6832 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gegl
+  
+    &mdash; Ruby/GEGL
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gegl";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (G)</a> &raquo;
+    
+    
+    <span class="title">Gegl</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gegl
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/gegl/node.rb<span class="defines">,<br />
+  lib/gegl.rb,<br /> lib/gegl/loader.rb,<br /> lib/gegl/version.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Copyright (C) 2018  Ruby-GNOME2 Project Team</p>
+<p>This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.</p>
+<p>This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.</p>
+<p>You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Gegl/AbyssPolicy.html" title="Gegl::AbyssPolicy (module)">AbyssPolicy</a></span>, <span class='object_link'><a href="Gegl/AccessMode.html" title="Gegl::AccessMode (module)">AccessMode</a></span>, <span class='object_link'><a href="Gegl/BablVariant.html" title="Gegl::BablVariant (module)">BablVariant</a></span>, <span class='object_link'><a href="Gegl/BlitFlags.html" title="Gegl::BlitFlags (module)">BlitFlags</a></span>, <span class='object_link'><a href="Gegl/CachePolicy.html" title="Gegl::CachePolicy (module)">CachePolicy</a></span>, <span class='object_link'><a href="Gegl/DistanceMetric.html" title="Gegl::DistanceMetric (module)">DistanceMetric</a></span>, <span class='object_link'><a href="Gegl/DitherMethod.html" title="Gegl::DitherMethod (module)">DitherMethod</a></span>, <span class='object_link'><a href="Gegl/MapFlags.html" title="Gegl::MapFlags (module)">MapFlags</a></span>, <span class='object_link'><a href="Gegl/Metadata.html" title="Gegl::Metadata (module)">Metadata</a></span>, <span class='object_link'><a href="Gegl/Orientation.html" title="Gegl::Orientation (module)">Orientation</a></span>, <span class='object_link'><a href="Gegl/PadType.html" title="Gegl::PadType (module)">PadType</a></span>, <span class='object_link'><a href="Gegl/RectangleAlignment.html" title="Gegl::RectangleAlignment (module)">RectangleAlignment</a></span>, <span class='object_link'><a href="Gegl/ResolutionUnit.html" title="Gegl::ResolutionUnit (module)">ResolutionUnit</a></span>, <span class='object_link'><a href="Gegl/SamplerType.html" title="Gegl::SamplerType (module)">SamplerType</a></span>, <span class='object_link'><a href="Gegl/SerializeFlag.html" title="Gegl::SerializeFlag (module)">SerializeFlag</a></span>, <span class='object_link'><a href="Gegl/SplitStrategy.html" title="Gegl::SplitStrategy (module)">SplitStrategy</a></span>, <span class='object_link'><a href="Gegl/TileCommand.html" title="Gegl::TileCommand (module)">TileCommand</a></span>, <span class='object_link'><a href="Gegl/Version.html" title="Gegl::Version (module)">Version</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Gegl/AudioFragment.html" title="Gegl::AudioFragment (class)">AudioFragment</a></span>, <span class='object_link'><a href="Gegl/Buffer.html" title="Gegl::Buffer (class)">Buffer</a></span>, <span class='object_link'><a href="Gegl/Color.html" title="Gegl::Color (class)">Color</a></span>, <span class='object_link'><a href="Gegl/Config.html" title="Gegl::Config (class)">Config</a></span>, <span class='object_link'><a href="Gegl/Curve.html" title="Gegl::Curve (class)">Curve</a></span>, <span class='object_link'><a href="Gegl/Loader.html" title="Gegl::Loader (class)">Loader</a></span>, <span class='object_link'><a href="Gegl/MetadataHash.html" title="Gegl::MetadataHash (class)">MetadataHash</a></span>, <span class='object_link'><a href="Gegl/MetadataStore.html" title="Gegl::MetadataStore (class)">MetadataStore</a></span>, <span class='object_link'><a href="Gegl/Node.html" title="Gegl::Node (class)">Node</a></span>, <span class='object_link'><a href="Gegl/Operation.html" title="Gegl::Operation (class)">Operation</a></span>, <span class='object_link'><a href="Gegl/ParamAudioFragment.html" title="Gegl::ParamAudioFragment (class)">ParamAudioFragment</a></span>, <span class='object_link'><a href="Gegl/ParamColor.html" title="Gegl::ParamColor (class)">ParamColor</a></span>, <span class='object_link'><a href="Gegl/ParamCurve.html" title="Gegl::ParamCurve (class)">ParamCurve</a></span>, <span class='object_link'><a href="Gegl/ParamDouble.html" title="Gegl::ParamDouble (class)">ParamDouble</a></span>, <span class='object_link'><a href="Gegl/ParamEnum.html" title="Gegl::ParamEnum (class)">ParamEnum</a></span>, <span class='object_link'><a href="Gegl/ParamFilePath.html" title="Gegl::ParamFilePath (class)">ParamFilePath</a></span>, <span class='object_link'><a href="Gegl/ParamFormat.html" title="Gegl::ParamFormat (class)">ParamFormat</a></span>, <span class='object_link'><a href="Gegl/ParamInt.html" title="Gegl::ParamInt (class)">ParamInt</a></span>, <span class='object_link'><a href="Gegl/ParamPath.html" title="Gegl::ParamPath (class)">ParamPath</a></span>, <span class='object_link'><a href="Gegl/ParamSeed.html" title="Gegl::ParamSeed (class)">ParamSeed</a></span>, <span class='object_link'><a href="Gegl/ParamString.html" title="Gegl::ParamString (class)">ParamString</a></span>, <span class='object_link'><a href="Gegl/ParamUri.html" title="Gegl::ParamUri (class)">ParamUri</a></span>, <span class='object_link'><a href="Gegl/Path.html" title="Gegl::Path (class)">Path</a></span>, <span class='object_link'><a href="Gegl/Processor.html" title="Gegl::Processor (class)">Processor</a></span>, <span class='object_link'><a href="Gegl/Stats.html" title="Gegl::Stats (class)">Stats</a></span>, <span class='object_link'><a href="Gegl/TileBackend.html" title="Gegl::TileBackend (class)">TileBackend</a></span>, <span class='object_link'><a href="Gegl/TileHandler.html" title="Gegl::TileHandler (class)">TileHandler</a></span>, <span class='object_link'><a href="Gegl/TileSource.html" title="Gegl::TileSource (class)">TileSource</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="AUTO_ROWSTRIDE-constant" class="">AUTO_ROWSTRIDE =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_BACK_CENTER-constant" class="">CH_BACK_CENTER =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>256</span></pre></dd>
+      
+        <dt id="CH_BACK_LEFT-constant" class="">CH_BACK_LEFT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span></pre></dd>
+      
+        <dt id="CH_BACK_RIGHT-constant" class="">CH_BACK_RIGHT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>32</span></pre></dd>
+      
+        <dt id="CH_FRONT_CENTER-constant" class="">CH_FRONT_CENTER =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span></pre></dd>
+      
+        <dt id="CH_FRONT_LEFT-constant" class="">CH_FRONT_LEFT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span></pre></dd>
+      
+        <dt id="CH_FRONT_LEFT_OF_CENTER-constant" class="">CH_FRONT_LEFT_OF_CENTER =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>64</span></pre></dd>
+      
+        <dt id="CH_FRONT_RIGHT-constant" class="">CH_FRONT_RIGHT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span></pre></dd>
+      
+        <dt id="CH_FRONT_RIGHT_OF_CENTER-constant" class="">CH_FRONT_RIGHT_OF_CENTER =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>128</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_2POINT1-constant" class="">CH_LAYOUT_2POINT1 =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_2_1-constant" class="">CH_LAYOUT_2_1 =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_2_2-constant" class="">CH_LAYOUT_2_2 =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_3POINT1-constant" class="">CH_LAYOUT_3POINT1 =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_4POINT0-constant" class="">CH_LAYOUT_4POINT0 =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_4POINT1-constant" class="">CH_LAYOUT_4POINT1 =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_5POINT0-constant" class="">CH_LAYOUT_5POINT0 =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_5POINT0_BACK-constant" class="">CH_LAYOUT_5POINT0_BACK =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_5POINT1-constant" class="">CH_LAYOUT_5POINT1 =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_5POINT1_BACK-constant" class="">CH_LAYOUT_5POINT1_BACK =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_6POINT0-constant" class="">CH_LAYOUT_6POINT0 =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_6POINT0_FRONT-constant" class="">CH_LAYOUT_6POINT0_FRONT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_6POINT1-constant" class="">CH_LAYOUT_6POINT1 =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_6POINT1_BACK-constant" class="">CH_LAYOUT_6POINT1_BACK =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_6POINT1_FRONT-constant" class="">CH_LAYOUT_6POINT1_FRONT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_7POINT0-constant" class="">CH_LAYOUT_7POINT0 =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_7POINT0_FRONT-constant" class="">CH_LAYOUT_7POINT0_FRONT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_7POINT1-constant" class="">CH_LAYOUT_7POINT1 =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_7POINT1_WIDE-constant" class="">CH_LAYOUT_7POINT1_WIDE =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_7POINT1_WIDE_BACK-constant" class="">CH_LAYOUT_7POINT1_WIDE_BACK =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_HEXADECAGONAL-constant" class="">CH_LAYOUT_HEXADECAGONAL =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_HEXAGONAL-constant" class="">CH_LAYOUT_HEXAGONAL =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_NATIVE-constant" class="">CH_LAYOUT_NATIVE =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>9223372036854775808</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_OCTAGONAL-constant" class="">CH_LAYOUT_OCTAGONAL =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_QUAD-constant" class="">CH_LAYOUT_QUAD =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_STEREO-constant" class="">CH_LAYOUT_STEREO =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_STEREO_DOWNMIX-constant" class="">CH_LAYOUT_STEREO_DOWNMIX =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LAYOUT_SURROUND-constant" class="">CH_LAYOUT_SURROUND =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="CH_LOW_FREQUENCY-constant" class="">CH_LOW_FREQUENCY =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span></pre></dd>
+      
+        <dt id="CH_LOW_FREQUENCY_2-constant" class="">CH_LOW_FREQUENCY_2 =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>34359738368</span></pre></dd>
+      
+        <dt id="CH_SIDE_LEFT-constant" class="">CH_SIDE_LEFT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>512</span></pre></dd>
+      
+        <dt id="CH_SIDE_RIGHT-constant" class="">CH_SIDE_RIGHT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>1024</span></pre></dd>
+      
+        <dt id="CH_STEREO_LEFT-constant" class="">CH_STEREO_LEFT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>536870912</span></pre></dd>
+      
+        <dt id="CH_STEREO_RIGHT-constant" class="">CH_STEREO_RIGHT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>1073741824</span></pre></dd>
+      
+        <dt id="CH_SURROUND_DIRECT_LEFT-constant" class="">CH_SURROUND_DIRECT_LEFT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>8589934592</span></pre></dd>
+      
+        <dt id="CH_SURROUND_DIRECT_RIGHT-constant" class="">CH_SURROUND_DIRECT_RIGHT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>17179869184</span></pre></dd>
+      
+        <dt id="CH_TOP_BACK_CENTER-constant" class="">CH_TOP_BACK_CENTER =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>65536</span></pre></dd>
+      
+        <dt id="CH_TOP_BACK_LEFT-constant" class="">CH_TOP_BACK_LEFT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>32768</span></pre></dd>
+      
+        <dt id="CH_TOP_BACK_RIGHT-constant" class="">CH_TOP_BACK_RIGHT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>131072</span></pre></dd>
+      
+        <dt id="CH_TOP_CENTER-constant" class="">CH_TOP_CENTER =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>2048</span></pre></dd>
+      
+        <dt id="CH_TOP_FRONT_CENTER-constant" class="">CH_TOP_FRONT_CENTER =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>8192</span></pre></dd>
+      
+        <dt id="CH_TOP_FRONT_LEFT-constant" class="">CH_TOP_FRONT_LEFT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>4096</span></pre></dd>
+      
+        <dt id="CH_TOP_FRONT_RIGHT-constant" class="">CH_TOP_FRONT_RIGHT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>16384</span></pre></dd>
+      
+        <dt id="CH_WIDE_LEFT-constant" class="">CH_WIDE_LEFT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>2147483648</span></pre></dd>
+      
+        <dt id="CH_WIDE_RIGHT-constant" class="">CH_WIDE_RIGHT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>4294967296</span></pre></dd>
+      
+        <dt id="FLOAT_EPSILON-constant" class="">FLOAT_EPSILON =
+          
+        </dt>
+        <dd><pre class="code"><span class='float'>0.000010</span></pre></dd>
+      
+        <dt id="LOOKUP_MAX_ENTRIES-constant" class="">LOOKUP_MAX_ENTRIES =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>819200</span></pre></dd>
+      
+        <dt id="MAJOR_VERSION-constant" class="">MAJOR_VERSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="MAX_AUDIO_CHANNELS-constant" class="">MAX_AUDIO_CHANNELS =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span></pre></dd>
+      
+        <dt id="MICRO_VERSION-constant" class="">MICRO_VERSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>48</span></pre></dd>
+      
+        <dt id="MINOR_VERSION-constant" class="">MINOR_VERSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span></pre></dd>
+      
+        <dt id="PARAM_NO_VALIDATE-constant" class="">PARAM_NO_VALIDATE =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>64</span></pre></dd>
+      
+        <dt id="LOG_DOMAIN-constant" class="">LOG_DOMAIN =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Gegl</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#apply_op-instance_method" title="#apply_op (instance method)">#<strong>apply_op</strong>(buffer, operation_name, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Apply the operation to buffer, overwritting the contents of buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#apply_op_valist-instance_method" title="#apply_op_valist (instance method)">#<strong>apply_op_valist</strong>(buffer, operation_name, var_args)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Apply the operation to buffer, overwritting the contents of buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#babl_variant-instance_method" title="#babl_variant (instance method)">#<strong>babl_variant</strong>(format, variant)  &#x21d2; Babl::Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#buffer_iterator_empty_new-instance_method" title="#buffer_iterator_empty_new (instance method)">#<strong>buffer_iterator_empty_new</strong>(max_slots)  &#x21d2; Gegl::BufferIterator </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new buffer iterator without adding any buffers.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#calloc-instance_method" title="#calloc (instance method)">#<strong>calloc</strong>(size, n_memb)  &#x21d2; GObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>allocated 0'd memory.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cl_disable-instance_method" title="#cl_disable (instance method)">#<strong>cl_disable</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Disable OpenCL.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cl_init-instance_method" title="#cl_init (instance method)">#<strong>cl_init</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Initialize and enable OpenCL, calling this function again will re-enable OpenCL if it has been disabled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cl_is_accelerated-instance_method" title="#cl_is_accelerated (instance method)">#<strong>cl_is_accelerated</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if OpenCL is enabled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#config-instance_method" title="#config (instance method)">#<strong>config</strong>  &#x21d2; Gegl::Config </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a GeglConfig object with properties that can be manipulated to control GEGLs behavior.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_chain-instance_method" title="#create_chain (instance method)">#<strong>create_chain</strong>(ops, op_start, op_end, time, rel_dim, path_root)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a node chain from an unparsed commandline string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_chain_argv-instance_method" title="#create_chain_argv (instance method)">#<strong>create_chain_argv</strong>(ops, op_start, op_end, time, rel_dim, path_root)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a node chain from argv style list of op data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exit-instance_method" title="#exit (instance method)">#<strong>exit</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Call this function when you're done using GEGL.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#filter_op-instance_method" title="#filter_op (instance method)">#<strong>filter_op</strong>(source_buffer, operation_name, array)  &#x21d2; Gegl::Buffer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Apply the operation to source_buffer, returning the result in a new buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#filter_op_valist-instance_method" title="#filter_op_valist (instance method)">#<strong>filter_op_valist</strong>(source_buffer, operation_name, var_args)  &#x21d2; Gegl::Buffer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Apply the operation to source_buffer, returning the result in a new buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#format-instance_method" title="#format (instance method)">#<strong>format</strong>(format_name)  &#x21d2; GObject::Value </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a value sutable to pass to the GeglBuffer constructor or any other property that expects a Babl format.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#format_get_name-instance_method" title="#format_get_name (instance method)">#<strong>format_get_name</strong>(format)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The format name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#free-instance_method" title="#free (instance method)">#<strong>free</strong>(mem)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Frees the memory pointed to by <!-- raw HTML omitted -->mem<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_version-instance_method" title="#get_version (instance method)">#<strong>get_version</strong>(major, minor, micro)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This function fetches the version of the GEGL library being used by the running process.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#graph_dump_outputs-instance_method" title="#graph_dump_outputs (instance method)">#<strong>graph_dump_outputs</strong>(node)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Dump the bounds and format of each node in the graph to stdout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#graph_dump_request-instance_method" title="#graph_dump_request (instance method)">#<strong>graph_dump_request</strong>(node, roi)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Dump the region that will be rendered for each node to fulfill the request.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_operation-instance_method" title="#has_operation (instance method)">#<strong>has_operation</strong>(operation_type)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>also returns true for any compat-name registered by operations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#init-instance_method" title="#init (instance method)">#<strong>init</strong>(argc, argv)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Call this function before using any other GEGL functions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_main_thread-instance_method" title="#is_main_thread (instance method)">#<strong>is_main_thread</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_operations-instance_method" title="#list_operations (instance method)">#<strong>list_operations</strong>(n_operations_p)  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>alphabetically sorted array of available operation names.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#load_module_directory-instance_method" title="#load_module_directory (instance method)">#<strong>load_module_directory</strong>(path)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Load all gegl modules found in the given directory.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_new-instance_method" title="#lookup_new (instance method)">#<strong>lookup_new</strong>(function, data)  &#x21d2; Gegl::Lookup </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A Gegl::Lookup.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_new_full-instance_method" title="#lookup_new_full (instance method)">#<strong>lookup_new_full</strong>(function, data, start, end, precision)  &#x21d2; Gegl::Lookup </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A Gegl::Lookup.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#malloc-instance_method" title="#malloc (instance method)">#<strong>malloc</strong>(n_bytes)  &#x21d2; GObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Allocates <!-- raw HTML omitted -->n_bytes<!-- raw HTML omitted --> of memory.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#memeq_zero-instance_method" title="#memeq_zero (instance method)">#<strong>memeq_zero</strong>(ptr, size)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if all the bytes of the memory block <!-- raw HTML omitted -->ptr<!-- raw HTML omitted -->, of size <!-- raw HTML omitted -->size<!-- raw HTML omitted -->, are equal to zero.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#memset_pattern-instance_method" title="#memset_pattern (instance method)">#<strong>memset_pattern</strong>(dst_ptr, src_ptr, pattern_size, count)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Fill <!-- raw HTML omitted -->dst_ptr<!-- raw HTML omitted --> with <!-- raw HTML omitted -->count<!-- raw HTML omitted --> copies of the bytes in <!-- raw HTML omitted -->src_ptr<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#option_group-instance_method" title="#option_group (instance method)">#<strong>option_group</strong>  &#x21d2; GLib::OptionGroup </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a GOptionGroup for the commandline arguments recognized by GEGL.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parallel_distribute-instance_method" title="#parallel_distribute (instance method)">#<strong>parallel_distribute</strong>(max_n, func, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Distributes the execution of a function across multiple threads, by calling it with a different index on each thread.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parallel_distribute_area-instance_method" title="#parallel_distribute_area (instance method)">#<strong>parallel_distribute_area</strong>(area, thread_cost, split_strategy, func, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Distributes the processing of a planar data-structure across multiple threads, by calling the given function with different sub-areas on different threads.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parallel_distribute_range-instance_method" title="#parallel_distribute_range (instance method)">#<strong>parallel_distribute_range</strong>(size, thread_cost, func, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Distributes the processing of a linear data-structure across multiple threads, by calling the given function with different sub-ranges on different threads.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_audio_fragment-instance_method" title="#param_spec_audio_fragment (instance method)">#<strong>param_spec_audio_fragment</strong>(name, nick, blurb, flags)  &#x21d2; GObject::ParamSpec </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new GParam::Spec instance specifying a #GeglAudioFragment property.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_color-instance_method" title="#param_spec_color (instance method)">#<strong>param_spec_color</strong>(name, nick, blurb, default_color, flags)  &#x21d2; GObject::ParamSpec </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new GParam::Spec instance specifying a #GeglColor property.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_color_from_string-instance_method" title="#param_spec_color_from_string (instance method)">#<strong>param_spec_color_from_string</strong>(name, nick, blurb, default_color_string, flags)  &#x21d2; GObject::ParamSpec </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new GParam::Spec instance specifying a #GeglColor property.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_color_get_default-instance_method" title="#param_spec_color_get_default (instance method)">#<strong>param_spec_color_get_default</strong>(self)  &#x21d2; Gegl::Color </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the default color value of the param spec.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_curve-instance_method" title="#param_spec_curve (instance method)">#<strong>param_spec_curve</strong>(name, nick, blurb, default_curve, flags)  &#x21d2; GObject::ParamSpec </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new GParam::Spec instance specifying a #GeglCurve property.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_double-instance_method" title="#param_spec_double (instance method)">#<strong>param_spec_double</strong>(name, nick, blurb, minimum, maximum, default_value, ui_minimum, ui_maximum, ui_gamma, flags)  &#x21d2; GObject::ParamSpec </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Gegl::ParamSpecDouble instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_enum-instance_method" title="#param_spec_enum (instance method)">#<strong>param_spec_enum</strong>(name, nick, blurb, enum_type, default_value, flags)  &#x21d2; GObject::ParamSpec </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Gegl::ParamSpecEnum instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_file_path-instance_method" title="#param_spec_file_path (instance method)">#<strong>param_spec_file_path</strong>(name, nick, blurb, no_validate, null_ok, default_value, flags)  &#x21d2; GObject::ParamSpec </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Gegl::ParamSpecFilePath instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_format-instance_method" title="#param_spec_format (instance method)">#<strong>param_spec_format</strong>(name, nick, blurb, flags)  &#x21d2; GObject::ParamSpec </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Gegl::ParamSpecFormat instance specifying a Babl format.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_get_property_key-instance_method" title="#param_spec_get_property_key (instance method)">#<strong>param_spec_get_property_key</strong>(pspec, key_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_int-instance_method" title="#param_spec_int (instance method)">#<strong>param_spec_int</strong>(name, nick, blurb, minimum, maximum, default_value, ui_minimum, ui_maximum, ui_gamma, flags)  &#x21d2; GObject::ParamSpec </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Gegl::ParamSpecInt instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_path-instance_method" title="#param_spec_path (instance method)">#<strong>param_spec_path</strong>(name, nick, blurb, default_path, flags)  &#x21d2; GObject::ParamSpec </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new GParam::Spec instance specifying a #GeglPath property.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_seed-instance_method" title="#param_spec_seed (instance method)">#<strong>param_spec_seed</strong>(name, nick, blurb, flags)  &#x21d2; GObject::ParamSpec </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Gegl::ParamSpecSeed instance specifying an integer random seed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_set_property_key-instance_method" title="#param_spec_set_property_key (instance method)">#<strong>param_spec_set_property_key</strong>(pspec, key_name, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_string-instance_method" title="#param_spec_string (instance method)">#<strong>param_spec_string</strong>(name, nick, blurb, no_validate, null_ok, default_value, flags)  &#x21d2; GObject::ParamSpec </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Gegl::ParamSpecString instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_spec_uri-instance_method" title="#param_spec_uri (instance method)">#<strong>param_spec_uri</strong>(name, nick, blurb, no_validate, null_ok, default_value, flags)  &#x21d2; GObject::ParamSpec </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Gegl::ParamSpecUri instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rectangle_infinite_plane-instance_method" title="#rectangle_infinite_plane (instance method)">#<strong>rectangle_infinite_plane</strong>  &#x21d2; Gegl::Rectangle </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a GeglRectangle that represents an infininte plane.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_op-instance_method" title="#render_op (instance method)">#<strong>render_op</strong>(source_buffer, target_buffer, operation_name, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Apply the operation to source_buffer, writing the results to target_buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_op_valist-instance_method" title="#render_op_valist (instance method)">#<strong>render_op_valist</strong>(source_buffer, target_buffer, operation_name, var_args)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Apply the operation to source_buffer, writing the results to target_buffer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset_stats-instance_method" title="#reset_stats (instance method)">#<strong>reset_stats</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Resets the cumulative data gathered by the Gegl::Stats object returned by #gegl_stats().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scratch_alloc-instance_method" title="#scratch_alloc (instance method)">#<strong>scratch_alloc</strong>(size)  &#x21d2; GObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Allocates <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes of scratch memory.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scratch_alloc0-instance_method" title="#scratch_alloc0 (instance method)">#<strong>scratch_alloc0</strong>(size)  &#x21d2; GObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Allocates <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes of scratch memory, initialized to zero.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scratch_free-instance_method" title="#scratch_free (instance method)">#<strong>scratch_free</strong>(ptr)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Frees the memory pointed to by <!-- raw HTML omitted -->ptr<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#serialize-instance_method" title="#serialize (instance method)">#<strong>serialize</strong>(start, end, basepath, serialize_flags)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>GEGL_SERIALIZE_TRIM_DEFAULTS, GEGL_SERIALIZE_VERSION, GEGL_SERIALIZE_INDENT.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stats-instance_method" title="#stats (instance method)">#<strong>stats</strong>  &#x21d2; Gegl::Stats </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a GeglStats object with properties that can be read to monitor GEGL statistics.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#try_malloc-instance_method" title="#try_malloc (instance method)">#<strong>try_malloc</strong>(n_bytes)  &#x21d2; GObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Allocates <!-- raw HTML omitted -->n_bytes<!-- raw HTML omitted --> of memory.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="apply_op-instance_method">
+  
+    #<strong>apply_op</strong>(buffer, operation_name, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Apply the operation to buffer, overwritting the contents of buffer.
+ended terminated with NULL.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Buffer.html" title="Gegl::Buffer (class)">Gegl::Buffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gegl::Buffer to apply onto</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name of the operation to apply</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the settings for the operation. Zero or more key/value pairs,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="apply_op_valist-instance_method">
+  
+    #<strong>apply_op_valist</strong>(buffer, operation_name, var_args)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Apply the operation to buffer, overwritting the contents of buffer.
+ended terminated with NULL.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Buffer.html" title="Gegl::Buffer (class)">Gegl::Buffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gegl::Buffer to apply onto</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name of the operation to apply</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>var_args</span>
+      
+      
+        <span class='type'>(<tt>Gegl::va_list</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the settings for the operation. Zero or more key/value pairs,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="babl_variant-instance_method">
+  
+    #<strong>babl_variant</strong>(format, variant)  &#x21d2; <tt>Babl::Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>Babl::Object</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>variant</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/BablVariant.html" title="Gegl::BablVariant (module)">Gegl::BablVariant</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Babl::Object</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="buffer_iterator_empty_new-instance_method">
+  
+    #<strong>buffer_iterator_empty_new</strong>(max_slots)  &#x21d2; <tt>Gegl::BufferIterator</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new buffer iterator without adding any buffers.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>max_slots</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gegl::BufferIterator</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new buffer iterator.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="calloc-instance_method">
+  
+    #<strong>calloc</strong>(size, n_memb)  &#x21d2; <tt>GObject</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>allocated 0'd memory.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>size of items to allocate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_memb</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>number of members</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cl_disable-instance_method">
+  
+    #<strong>cl_disable</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Disable OpenCL</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cl_init-instance_method">
+  
+    #<strong>cl_init</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Initialize and enable OpenCL, calling this function again
+will re-enable OpenCL if it has been disabled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>True if OpenCL was initialized</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cl_is_accelerated-instance_method">
+  
+    #<strong>cl_is_accelerated</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if OpenCL is enabled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>True if OpenCL is initialized and enabled</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="config-instance_method">
+  
+    #<strong>config</strong>  &#x21d2; <tt><span class='object_link'><a href="Gegl/Config.html" title="Gegl::Config (class)">Gegl::Config</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a GeglConfig object with properties that can be manipulated to control
+GEGLs behavior.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Config.html" title="Gegl::Config (class)">Gegl::Config</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gegl::Config</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_chain-instance_method">
+  
+    #<strong>create_chain</strong>(ops, op_start, op_end, time, rel_dim, path_root)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a node chain from an unparsed commandline string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ops</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an argv style, NULL terminated array of arguments</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>op_start</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Node.html" title="Gegl::Node (class)">Gegl::Node</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>node to pass in as input of chain</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>op_end</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Node.html" title="Gegl::Node (class)">Gegl::Node</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>node to get processed data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>time</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the time to use for interpolatino of keyframed values</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rel_dim</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>relative dimension to scale rel suffixed values by</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path_root</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>path in filesystem to use as relative root</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_chain_argv-instance_method">
+  
+    #<strong>create_chain_argv</strong>(ops, op_start, op_end, time, rel_dim, path_root)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a node chain from argv style list of op data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ops</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an argv style, NULL terminated array of arguments</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>op_start</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Node.html" title="Gegl::Node (class)">Gegl::Node</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>node to pass in as input of chain</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>op_end</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Node.html" title="Gegl::Node (class)">Gegl::Node</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>node to get processed data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>time</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the time to use for interpolatino of keyframed values</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rel_dim</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>relative dimension to scale rel suffixed values by</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path_root</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>path in filesystem to use as relative root</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="exit-instance_method">
+  
+    #<strong>exit</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Call this function when you're done using GEGL. It will clean up
+caches and write/dump debug information if the correct debug flags
+are set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="filter_op-instance_method">
+  
+    #<strong>filter_op</strong>(source_buffer, operation_name, array)  &#x21d2; <tt><span class='object_link'><a href="Gegl/Buffer.html" title="Gegl::Buffer (class)">Gegl::Buffer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Apply the operation to source_buffer, returning the result in a new buffer.
+ended terminated with NULL.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_buffer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Buffer.html" title="Gegl::Buffer (class)">Gegl::Buffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the source Gegl::Buffer for the filter</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name of the operation to apply</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the settings for the operation. Zero or more key/value pairs,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Buffer.html" title="Gegl::Buffer (class)">Gegl::Buffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the result of the filter</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="filter_op_valist-instance_method">
+  
+    #<strong>filter_op_valist</strong>(source_buffer, operation_name, var_args)  &#x21d2; <tt><span class='object_link'><a href="Gegl/Buffer.html" title="Gegl::Buffer (class)">Gegl::Buffer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Apply the operation to source_buffer, returning the result in a new buffer.
+ended terminated with NULL.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_buffer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Buffer.html" title="Gegl::Buffer (class)">Gegl::Buffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the source Gegl::Buffer for the filter</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name of the operation to apply</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>var_args</span>
+      
+      
+        <span class='type'>(<tt>Gegl::va_list</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the settings for the operation. Zero or more key/value pairs,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Buffer.html" title="Gegl::Buffer (class)">Gegl::Buffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the result of the filter</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="format-instance_method">
+  
+    #<strong>format</strong>(format_name)  &#x21d2; <tt>GObject::Value</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a value sutable to pass to the GeglBuffer constructor
+or any other property that expects a Babl format.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Babl format name, e.g. &quot;RGBA float&quot;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the format pointer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="format_get_name-instance_method">
+  
+    #<strong>format_get_name</strong>(format)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the format name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Babl pointer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the format name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="free-instance_method">
+  
+    #<strong>free</strong>(mem)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Frees the memory pointed to by <!-- raw HTML omitted -->mem<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->mem<!-- raw HTML omitted --> is NULL, does nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mem</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the memory to free.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_version-instance_method">
+  
+    #<strong>get_version</strong>(major, minor, micro)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This function fetches the version of the GEGL library being used by
+the running process.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>major</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to a int where the major version number will be stored</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>minor</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ditto for the minor version number</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>micro</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ditto for the micro version number</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="graph_dump_outputs-instance_method">
+  
+    #<strong>graph_dump_outputs</strong>(node)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Dump the bounds and format of each node in the graph to stdout.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>node</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Node.html" title="Gegl::Node (class)">Gegl::Node</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The final node of the graph</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="graph_dump_request-instance_method">
+  
+    #<strong>graph_dump_request</strong>(node, roi)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Dump the region that will be rendered for each node to fulfill
+the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>node</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Node.html" title="Gegl::Node (class)">Gegl::Node</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The final node of the graph</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>roi</span>
+      
+      
+        <span class='type'>(<tt>Gegl::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The request rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_operation-instance_method">
+  
+    #<strong>has_operation</strong>(operation_type)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>also returns true for any compat-name registered by operations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>operation_type</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A boolean telling whether the operation is present or not. This</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="init-instance_method">
+  
+    #<strong>init</strong>(argc, argv)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Call this function before using any other GEGL functions. It will
+initialize everything needed to operate GEGL and parses some
+standard command line options.  <!-- raw HTML omitted -->argc<!-- raw HTML omitted --> and <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> are adjusted
+accordingly so your own code will never see those standard
+arguments.</p>
+<p>Note that there is an alternative way to initialize GEGL: if you
+are calling g_option_context_parse() with the option group returned
+by #gegl_get_option_group(), you don't have to call #gegl_init().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>argc</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the number of command line arguments.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>argv</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the array of command line arguments.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_main_thread-instance_method">
+  
+    #<strong>is_main_thread</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_operations-instance_method">
+  
+    #<strong>list_operations</strong>(n_operations_p)  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <h2>alphabetically sorted array of available operation names. This excludes any
+compat-name registered by operations. The list should be freed with g_free
+after use.</h2>
+<p>gchar **operations;
+guint   n_operations;
+gint i;</p>
+<p>operations = gegl_list_operations (&amp;n_operations);
+g_print (&quot;Available operations:\n&quot;);
+for (i=0; i &lt; n_operations; i++)
+{
+g_print (&quot;\t%s\n&quot;, operations[i]);
+}
+g_free (operations);</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_operations_p</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for number of operations.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="load_module_directory-instance_method">
+  
+    #<strong>load_module_directory</strong>(path)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Load all gegl modules found in the given directory.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the directory to load modules from</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_new-instance_method">
+  
+    #<strong>lookup_new</strong>(function, data)  &#x21d2; <tt>Gegl::Lookup</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a Gegl::Lookup.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>function</span>
+      
+      
+        <span class='type'>(<tt>Gegl::LookupFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The function to build a lookup for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A user data pointer passed to lookup calls</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gegl::Lookup</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gegl::Lookup</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup_new_full-instance_method">
+  
+    #<strong>lookup_new_full</strong>(function, data, start, end, precision)  &#x21d2; <tt>Gegl::Lookup</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a Gegl::Lookup.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>function</span>
+      
+      
+        <span class='type'>(<tt>Gegl::LookupFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The function to build a lookup for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A user data pointer passed to lookup calls</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gegl::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Lower bound of the lookup</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gegl::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Upper bound of the lookup</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>precision</span>
+      
+      
+        <span class='type'>(<tt>Gegl::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The precision of the lookup table</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gegl::Lookup</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gegl::Lookup</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="malloc-instance_method">
+  
+    #<strong>malloc</strong>(n_bytes)  &#x21d2; <tt>GObject</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Allocates <!-- raw HTML omitted -->n_bytes<!-- raw HTML omitted --> of memory. If <!-- raw HTML omitted -->n_bytes<!-- raw HTML omitted --> is 0, returns NULL.</p>
+<p>Returns a pointer to the allocated memory.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_bytes</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of bytes to allocte.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="memeq_zero-instance_method">
+  
+    #<strong>memeq_zero</strong>(ptr, size)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if all the bytes of the memory block <!-- raw HTML omitted -->ptr<!-- raw HTML omitted -->, of size <!-- raw HTML omitted -->size<!-- raw HTML omitted -->,
+are equal to zero.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ptr</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointer to the memory block</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>block size</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>TRUE if all the bytes are equal to zero.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="memset_pattern-instance_method">
+  
+    #<strong>memset_pattern</strong>(dst_ptr, src_ptr, pattern_size, count)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Fill <!-- raw HTML omitted -->dst_ptr<!-- raw HTML omitted --> with <!-- raw HTML omitted -->count<!-- raw HTML omitted --> copies of the bytes in <!-- raw HTML omitted -->src_ptr<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>dst_ptr</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointer to copy to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>src_ptr</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointer to copy from</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pattern_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the length of <!-- raw HTML omitted -->src_ptr<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>count</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>number of copies</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="option_group-instance_method">
+  
+    #<strong>option_group</strong>  &#x21d2; <tt>GLib::OptionGroup</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a GOptionGroup for the commandline arguments recognized
+by GEGL. You should add this group to your GOptionContext
+with g_option_context_add_group() if you are using
+g_option_context_parse() to parse your commandline arguments.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::OptionGroup</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parallel_distribute-instance_method">
+  
+    #<strong>parallel_distribute</strong>(max_n, func, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Distributes the execution of a function across multiple threads,
+by calling it with a different index on each thread.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>max_n</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the maximal number of threads to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>Gegl::ParallelDistributeFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the function to call</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data to pass to the function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parallel_distribute_area-instance_method">
+  
+    #<strong>parallel_distribute_area</strong>(area, thread_cost, split_strategy, func, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Distributes the processing of a planar data-structure across
+multiple threads, by calling the given function with different
+sub-areas on different threads.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>area</span>
+      
+      
+        <span class='type'>(<tt>Gegl::Rectangle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the area to process</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>thread_cost</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the cost of using each additional thread, relative
+to the cost of processing a single data element</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>split_strategy</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/SplitStrategy.html" title="Gegl::SplitStrategy (module)">Gegl::SplitStrategy</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the strategy to use for dividing the area</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>Gegl::ParallelDistributeAreaFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the function to call</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data to pass to the function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parallel_distribute_range-instance_method">
+  
+    #<strong>parallel_distribute_range</strong>(size, thread_cost, func, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Distributes the processing of a linear data-structure across
+multiple threads, by calling the given function with different
+sub-ranges on different threads.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the total size of the data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>thread_cost</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the cost of using each additional thread, relative
+to the cost of processing a single data element</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>Gegl::ParallelDistributeRangeFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the function to call</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>user data to pass to the function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_audio_fragment-instance_method">
+  
+    #<strong>param_spec_audio_fragment</strong>(name, nick, blurb, flags)  &#x21d2; <tt>GObject::ParamSpec</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new GParam::Spec instance specifying a #GeglAudioFragment property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>canonical name of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nick</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nick name for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blurb</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>description of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamFlags</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags for the property specified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly created parameter specification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_color-instance_method">
+  
+    #<strong>param_spec_color</strong>(name, nick, blurb, default_color, flags)  &#x21d2; <tt>GObject::ParamSpec</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new GParam::Spec instance specifying a #GeglColor property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>canonical name of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nick</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nick name for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blurb</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>description of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_color</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Color.html" title="Gegl::Color (class)">Gegl::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the default value for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamFlags</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags for the property specified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly created parameter specification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_color_from_string-instance_method">
+  
+    #<strong>param_spec_color_from_string</strong>(name, nick, blurb, default_color_string, flags)  &#x21d2; <tt>GObject::ParamSpec</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new GParam::Spec instance specifying a #GeglColor property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>canonical name of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nick</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nick name for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blurb</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>description of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_color_string</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the default value for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamFlags</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags for the property specified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly created parameter specification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_color_get_default-instance_method">
+  
+    #<strong>param_spec_color_get_default</strong>(self)  &#x21d2; <tt><span class='object_link'><a href="Gegl/Color.html" title="Gegl::Color (class)">Gegl::Color</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the default color value of the param spec</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>self</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gegl::Color #GParamSpec</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Color.html" title="Gegl::Color (class)">Gegl::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the default Gegl::Color</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_curve-instance_method">
+  
+    #<strong>param_spec_curve</strong>(name, nick, blurb, default_curve, flags)  &#x21d2; <tt>GObject::ParamSpec</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new GParam::Spec instance specifying a #GeglCurve property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>canonical name of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nick</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nick name for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blurb</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>description of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_curve</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Curve.html" title="Gegl::Curve (class)">Gegl::Curve</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the default value for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamFlags</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags for the property specified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly created parameter specification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_double-instance_method">
+  
+    #<strong>param_spec_double</strong>(name, nick, blurb, minimum, maximum, default_value, ui_minimum, ui_maximum, ui_gamma, flags)  &#x21d2; <tt>GObject::ParamSpec</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Gegl::ParamSpecDouble instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>canonical name of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nick</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nick name for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blurb</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>description of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>minimum</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>minimum value for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>maximum</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>maximum value for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_value</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default value for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ui_minimum</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>minimum value a user should be allowed to input</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ui_maximum</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>maximum value a user should be allowed to input</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ui_gamma</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the gamma that should be used when adjusting the value</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamFlags</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags for the property specified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly created parameter specification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_enum-instance_method">
+  
+    #<strong>param_spec_enum</strong>(name, nick, blurb, enum_type, default_value, flags)  &#x21d2; <tt>GObject::ParamSpec</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Gegl::ParamSpecEnum instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>canonical name of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nick</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nick name for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blurb</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>description of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>enum_type</span>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the enum type to get valid values from</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_value</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default value for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamFlags</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags for the property specified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly created parameter specification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_file_path-instance_method">
+  
+    #<strong>param_spec_file_path</strong>(name, nick, blurb, no_validate, null_ok, default_value, flags)  &#x21d2; <tt>GObject::ParamSpec</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Gegl::ParamSpecFilePath instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>canonical name of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nick</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nick name for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blurb</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>description of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>no_validate</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the string should be validated with g_utf8_validate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>null_ok</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the string can be NULL</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_value</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default value for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamFlags</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags for the property specified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly created parameter specification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_format-instance_method">
+  
+    #<strong>param_spec_format</strong>(name, nick, blurb, flags)  &#x21d2; <tt>GObject::ParamSpec</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Gegl::ParamSpecFormat instance specifying a Babl format.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>canonical name of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nick</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nick name for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blurb</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>description of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamFlags</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags for the property specified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly created parameter specification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_get_property_key-instance_method">
+  
+    #<strong>param_spec_get_property_key</strong>(pspec, key_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pspec</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>key_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_int-instance_method">
+  
+    #<strong>param_spec_int</strong>(name, nick, blurb, minimum, maximum, default_value, ui_minimum, ui_maximum, ui_gamma, flags)  &#x21d2; <tt>GObject::ParamSpec</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Gegl::ParamSpecInt instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>canonical name of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nick</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nick name for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blurb</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>description of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>minimum</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>minimum value for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>maximum</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>maximum value for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_value</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default value for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ui_minimum</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>minimum value a user should be allowed to input</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ui_maximum</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>maximum value a user should be allowed to input</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ui_gamma</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the gamma that should be used when adjusting the value</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamFlags</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags for the property specified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly created parameter specification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_path-instance_method">
+  
+    #<strong>param_spec_path</strong>(name, nick, blurb, default_path, flags)  &#x21d2; <tt>GObject::ParamSpec</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new GParam::Spec instance specifying a #GeglPath property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>canonical name of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nick</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nick name for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blurb</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>description of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_path</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Path.html" title="Gegl::Path (class)">Gegl::Path</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the default value for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamFlags</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags for the property specified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly created parameter specification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_seed-instance_method">
+  
+    #<strong>param_spec_seed</strong>(name, nick, blurb, flags)  &#x21d2; <tt>GObject::ParamSpec</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Gegl::ParamSpecSeed instance specifying an integer random seed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>canonical name of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nick</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nick name for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blurb</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>description of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamFlags</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags for the property specified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly created parameter specification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_set_property_key-instance_method">
+  
+    #<strong>param_spec_set_property_key</strong>(pspec, key_name, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pspec</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>key_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_string-instance_method">
+  
+    #<strong>param_spec_string</strong>(name, nick, blurb, no_validate, null_ok, default_value, flags)  &#x21d2; <tt>GObject::ParamSpec</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Gegl::ParamSpecString instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>canonical name of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nick</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nick name for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blurb</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>description of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>no_validate</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the string should be validated with g_utf8_validate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>null_ok</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the string can be NULL</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_value</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default value for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamFlags</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags for the property specified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly created parameter specification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="param_spec_uri-instance_method">
+  
+    #<strong>param_spec_uri</strong>(name, nick, blurb, no_validate, null_ok, default_value, flags)  &#x21d2; <tt>GObject::ParamSpec</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Gegl::ParamSpecUri instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>canonical name of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nick</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nick name for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blurb</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>description of the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>no_validate</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the string should be validated with g_utf8_validate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>null_ok</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the string can be NULL</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_value</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default value for the property specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamFlags</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags for the property specified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly created parameter specification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rectangle_infinite_plane-instance_method">
+  
+    #<strong>rectangle_infinite_plane</strong>  &#x21d2; <tt>Gegl::Rectangle</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a GeglRectangle that represents an infininte plane.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gegl::Rectangle</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_op-instance_method">
+  
+    #<strong>render_op</strong>(source_buffer, target_buffer, operation_name, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Apply the operation to source_buffer, writing the results to target_buffer.
+ended terminated with NULL.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_buffer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Buffer.html" title="Gegl::Buffer (class)">Gegl::Buffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the source Gegl::Buffer for the filter</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>target_buffer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Buffer.html" title="Gegl::Buffer (class)">Gegl::Buffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the source Gegl::Buffer for the filter</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name of the operation to apply</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the settings for the operation. Zero or more key/value pairs,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_op_valist-instance_method">
+  
+    #<strong>render_op_valist</strong>(source_buffer, target_buffer, operation_name, var_args)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Apply the operation to source_buffer, writing the results to target_buffer.
+ended terminated with NULL.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_buffer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Buffer.html" title="Gegl::Buffer (class)">Gegl::Buffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the source Gegl::Buffer for the filter</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>target_buffer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Buffer.html" title="Gegl::Buffer (class)">Gegl::Buffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the source Gegl::Buffer for the filter</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name of the operation to apply</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>var_args</span>
+      
+      
+        <span class='type'>(<tt>Gegl::va_list</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the settings for the operation. Zero or more key/value pairs,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset_stats-instance_method">
+  
+    #<strong>reset_stats</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Resets the cumulative data gathered by the Gegl::Stats object returned
+by #gegl_stats().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scratch_alloc-instance_method">
+  
+    #<strong>scratch_alloc</strong>(size)  &#x21d2; <tt>GObject</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Allocates <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes of scratch memory.</p>
+<p>Returns a pointer to the allocated memory.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of bytes to allocte.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scratch_alloc0-instance_method">
+  
+    #<strong>scratch_alloc0</strong>(size)  &#x21d2; <tt>GObject</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Allocates <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes of scratch memory, initialized to zero.</p>
+<p>Returns a pointer to the allocated memory.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of bytes to allocte.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scratch_free-instance_method">
+  
+    #<strong>scratch_free</strong>(ptr)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Frees the memory pointed to by <!-- raw HTML omitted -->ptr<!-- raw HTML omitted -->.</p>
+<p>The memory must have been allocated using one of the scratch-memory
+allocation functions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ptr</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the memory to free.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="serialize-instance_method">
+  
+    #<strong>serialize</strong>(start, end, basepath, serialize_flags)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>GEGL_SERIALIZE_TRIM_DEFAULTS, GEGL_SERIALIZE_VERSION, GEGL_SERIALIZE_INDENT.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Node.html" title="Gegl::Node (class)">Gegl::Node</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>first node in chain to serialize</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Node.html" title="Gegl::Node (class)">Gegl::Node</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>last node in chain to serialize</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>basepath</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>top-level absolute path to turn into relative root</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>serialize_flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/SerializeFlag.html" title="Gegl::SerializeFlag (module)">Gegl::SerializeFlag</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>anded together combination of:</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stats-instance_method">
+  
+    #<strong>stats</strong>  &#x21d2; <tt><span class='object_link'><a href="Gegl/Stats.html" title="Gegl::Stats (class)">Gegl::Stats</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a GeglStats object with properties that can be read to monitor
+GEGL statistics.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gegl/Stats.html" title="Gegl::Stats (class)">Gegl::Stats</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gegl::Stats</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="try_malloc-instance_method">
+  
+    #<strong>try_malloc</strong>(n_bytes)  &#x21d2; <tt>GObject</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Allocates <!-- raw HTML omitted -->n_bytes<!-- raw HTML omitted --> of memory. If allocation fails, or if <!-- raw HTML omitted -->n_bytes<!-- raw HTML omitted --> is 0,
+returns nil.</p>
+<p>Returns a pointer to the allocated memory, or NULL.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_bytes</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of bytes to allocte.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Wnck::Application
+  
+    &mdash; Ruby/WNCK3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Wnck::Application";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Wnck.html" title="Wnck (module)">Wnck</a></span></span>
+     &raquo; 
+    <span class="title">Application</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Wnck::Application
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Wnck::Application</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get-class_method" title="get (class method)">.<strong>get</strong>(xwindow)  &#x21d2; Wnck::Application </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the Wnck::Application corresponding to the group leader with <!-- raw HTML omitted -->xwindow<!-- raw HTML omitted --> as X window ID.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#icon-instance_method" title="#icon (instance method)">#<strong>icon</strong>  &#x21d2; GdkPixbuf::Pixbuf </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the icon to be used for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#icon_is_fallback-instance_method" title="#icon_is_fallback (instance method)">#<strong>icon_is_fallback</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets whether a default fallback icon is used for <!-- raw HTML omitted -->app<!-- raw HTML omitted --> (because none was set on <!-- raw HTML omitted -->app<!-- raw HTML omitted -->).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#icon_name-instance_method" title="#icon_name (instance method)">#<strong>icon_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the icon name of <!-- raw HTML omitted -->app<!-- raw HTML omitted --> (to be used when <!-- raw HTML omitted -->app<!-- raw HTML omitted --> is minimized).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mini_icon-instance_method" title="#mini_icon (instance method)">#<strong>mini_icon</strong>  &#x21d2; GdkPixbuf::Pixbuf </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the mini-icon to be used for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_windows-instance_method" title="#n_windows (instance method)">#<strong>n_windows</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the number of Wnck::Window belonging to <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the name of <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pid-instance_method" title="#pid (instance method)">#<strong>pid</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the process ID of <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#startup_id-instance_method" title="#startup_id (instance method)">#<strong>startup_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the startup sequence ID used for startup notification of <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#windows-instance_method" title="#windows (instance method)">#<strong>windows</strong>  &#x21d2; GLib::List&lt;Wnck::Window&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the list of Wnck::Window belonging to <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xid-instance_method" title="#xid (instance method)">#<strong>xid</strong>  &#x21d2; Wnck::gulong </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the X window ID of the group leader window for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="get-class_method">
+  
+    .<strong>get</strong>(xwindow)  &#x21d2; <tt><span class='object_link'><a href="" title="Wnck::Application (class)">Wnck::Application</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the Wnck::Application corresponding to the group leader with <!-- raw HTML omitted -->xwindow<!-- raw HTML omitted -->
+as X window ID.
+<!-- raw HTML omitted -->xwindow<!-- raw HTML omitted -->, or nil if there no such Wnck::Application could be found. The
+returned Wnck::Application is owned by libwnck and must not be referenced or
+unreferenced.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>xwindow</span>
+      
+      
+        <span class='type'>(<tt>Wnck::gulong</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the X window ID of a group leader.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Wnck::Application (class)">Wnck::Application</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Wnck::Application corresponding to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="icon-instance_method">
+  
+    #<strong>icon</strong>  &#x21d2; <tt>GdkPixbuf::Pixbuf</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the icon to be used for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->. If no icon is set for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->, a
+suboptimal heuristic is used to find an appropriate icon. If no icon was
+found, a fallback icon is used.
+reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs to keep
+the icon around.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GdkPixbuf::Pixbuf</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the icon for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->. The caller should</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="icon_is_fallback-instance_method">
+  
+    #<strong>icon_is_fallback</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets whether a default fallback icon is used for <!-- raw HTML omitted -->app<!-- raw HTML omitted --> (because none
+was set on <!-- raw HTML omitted -->app<!-- raw HTML omitted -->).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the icon for <!-- raw HTML omitted -->app<!-- raw HTML omitted --> is a fallback, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="icon_name-instance_method">
+  
+    #<strong>icon_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the icon name of <!-- raw HTML omitted -->app<!-- raw HTML omitted --> (to be used when <!-- raw HTML omitted -->app<!-- raw HTML omitted --> is minimized). Since
+there is no way to properly find this name, various suboptimal heuristics
+are used to find it.
+is available.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the icon name of <!-- raw HTML omitted -->app<!-- raw HTML omitted -->, or a fallback icon name if no icon name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mini_icon-instance_method">
+  
+    #<strong>mini_icon</strong>  &#x21d2; <tt>GdkPixbuf::Pixbuf</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the mini-icon to be used for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->. If no mini-icon is set for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->,
+a suboptimal heuristic is used to find an appropriate icon. If no mini-icon
+was found, a fallback mini-icon is used.
+reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs to keep
+the mini-icon around.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GdkPixbuf::Pixbuf</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the mini-icon for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->. The caller should</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_windows-instance_method">
+  
+    #<strong>n_windows</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the number of Wnck::Window belonging to <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of Wnck::Window belonging to <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the name of <!-- raw HTML omitted -->app<!-- raw HTML omitted -->. Since there is no way to properly find this name,
+various suboptimal heuristics are used to find it. GTK+ should probably have
+a function to allow applications to set the _NET_WM_NAME property on the
+group leader as the application name, and the <!-- raw HTML omitted -->EWMH<!-- raw HTML omitted -->
+should say that this is where the application name goes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of <!-- raw HTML omitted -->app<!-- raw HTML omitted -->, or a fallback name if no name is available.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pid-instance_method">
+  
+    #<strong>pid</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the process ID of <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the process ID of <!-- raw HTML omitted -->app<!-- raw HTML omitted -->, or 0 if none is available.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="startup_id-instance_method">
+  
+    #<strong>startup_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the startup sequence ID used for startup notification of <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.
+or nil if none is available.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the startup sequence ID used for startup notification of <!-- raw HTML omitted -->app<!-- raw HTML omitted -->,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="windows-instance_method">
+  
+    #<strong>windows</strong>  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="Window.html" title="Wnck::Window (class)">Wnck::Window</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the list of Wnck::Window belonging to <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.
+Wnck::Window belonging to <!-- raw HTML omitted -->app<!-- raw HTML omitted -->, or nil if the application contains no
+window. The list should not be modified nor freed, as it is owned by <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="Window.html" title="Wnck::Window (class)">Wnck::Window</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the list of</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="xid-instance_method">
+  
+    #<strong>xid</strong>  &#x21d2; <tt>Wnck::gulong</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the X window ID of the group leader window for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Wnck::gulong</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the X window ID of the group leader window for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

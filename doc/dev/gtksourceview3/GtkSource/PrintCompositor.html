@@ -1,0 +1,3663 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GtkSource::PrintCompositor
+  
+    &mdash; Ruby/GtkSourceView3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GtkSource::PrintCompositor";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GtkSource.html" title="GtkSource (module)">GtkSource</a></span></span>
+     &raquo; 
+    <span class="title">PrintCompositor</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GtkSource::PrintCompositor
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GtkSource::PrintCompositor</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#body_font_name-instance_method" title="#body_font_name (instance method)">#<strong>body_font_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the font used for the text body.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#body_font_name=-instance_method" title="#body_font_name= (instance method)">#<strong>body_font_name=</strong>(body_font_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the font used for the text body.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#buffer-instance_method" title="#buffer (instance method)">#<strong>buffer</strong>  &#x21d2; GtkSource::Buffer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->] object to print.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#buffer=-instance_method" title="#buffer= (instance method)">#<strong>buffer=</strong>(buffer)  &#x21d2; GtkSource::Buffer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->] object to print.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#draw_page-instance_method" title="#draw_page (instance method)">#<strong>draw_page</strong>(context, page_nr)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Draw page <!-- raw HTML omitted -->page_nr<!-- raw HTML omitted --> for printing on the the Cairo context encapsuled in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#footer_font_name-instance_method" title="#footer_font_name (instance method)">#<strong>footer_font_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the font used to print page footer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#footer_font_name=-instance_method" title="#footer_font_name= (instance method)">#<strong>footer_font_name=</strong>(footer_font_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the font used to print page footer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_bottom_margin-instance_method" title="#get_bottom_margin (instance method)">#<strong>get_bottom_margin</strong>(unit)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the bottom margin in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_left_margin-instance_method" title="#get_left_margin (instance method)">#<strong>get_left_margin</strong>(unit)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the left margin in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_right_margin-instance_method" title="#get_right_margin (instance method)">#<strong>get_right_margin</strong>(unit)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the right margin in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_top_margin-instance_method" title="#get_top_margin (instance method)">#<strong>get_top_margin</strong>(unit)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the top margin in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#header_font_name-instance_method" title="#header_font_name (instance method)">#<strong>header_font_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the font used to print page header.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#header_font_name=-instance_method" title="#header_font_name= (instance method)">#<strong>header_font_name=</strong>(header_font_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the font used to print page header.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#highlight_syntax-instance_method" title="#highlight_syntax (instance method)">#<strong>highlight_syntax</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines whether the printed text will be highlighted according to the buffer rules.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#highlight_syntax=-instance_method" title="#highlight_syntax= (instance method)">#<strong>highlight_syntax=</strong>(highlight_syntax)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to print the document with highlighted syntax.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#highlight_syntax%3F-instance_method" title="#highlight_syntax? (instance method)">#<strong>highlight_syntax?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to print the document with highlighted syntax.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ignore_tag-instance_method" title="#ignore_tag (instance method)">#<strong>ignore_tag</strong>(tag)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Specifies a tag whose style should be ignored when compositing the document to the printable page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(view)  &#x21d2; GtkSource::PrintCompositor </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new print compositor that can be used to print the buffer associated with <!-- raw HTML omitted -->view<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#line_numbers_font_name-instance_method" title="#line_numbers_font_name (instance method)">#<strong>line_numbers_font_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the font used to print line numbers on the left margin.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#line_numbers_font_name=-instance_method" title="#line_numbers_font_name= (instance method)">#<strong>line_numbers_font_name=</strong>(line_numbers_font_name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the font used to print line numbers on the left margin.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_pages-instance_method" title="#n_pages (instance method)">#<strong>n_pages</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of pages in the document or <!-- raw HTML omitted -->-1<!-- raw HTML omitted --> if the document has not been completely paginated.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#n_pages=-instance_method" title="#n_pages= (instance method)">#<strong>n_pages=</strong>(n_pages)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of pages in the document or <!-- raw HTML omitted -->-1<!-- raw HTML omitted --> if the document has not been completely paginated.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#paginate-instance_method" title="#paginate (instance method)">#<strong>paginate</strong>(context)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Paginate the document associated with the <!-- raw HTML omitted -->compositor<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pagination_progress-instance_method" title="#pagination_progress (instance method)">#<strong>pagination_progress</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the current fraction of the document pagination that has been completed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#print_footer-instance_method" title="#print_footer (instance method)">#<strong>print_footer</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines if a footer is set to be printed for each page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#print_footer=-instance_method" title="#print_footer= (instance method)">#<strong>print_footer=</strong>(print_footer)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to print a footer in each page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#print_footer%3F-instance_method" title="#print_footer? (instance method)">#<strong>print_footer?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to print a footer in each page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#print_header-instance_method" title="#print_header (instance method)">#<strong>print_header</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines if a header is set to be printed for each page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#print_header=-instance_method" title="#print_header= (instance method)">#<strong>print_header=</strong>(print_header)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to print a header in each page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#print_header%3F-instance_method" title="#print_header? (instance method)">#<strong>print_header?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to print a header in each page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#print_line_numbers-instance_method" title="#print_line_numbers (instance method)">#<strong>print_line_numbers</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Interval of printed line numbers.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#print_line_numbers=-instance_method" title="#print_line_numbers= (instance method)">#<strong>print_line_numbers=</strong>(print_line_numbers)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Interval of printed line numbers.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_bottom_margin-instance_method" title="#set_bottom_margin (instance method)">#<strong>set_bottom_margin</strong>(margin, unit)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the bottom margin used by <!-- raw HTML omitted -->compositor<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_footer_format-instance_method" title="#set_footer_format (instance method)">#<strong>set_footer_format</strong>(separator, left, center, right)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>See [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.set_header_format] for more information about the parameters.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_header_format-instance_method" title="#set_header_format (instance method)">#<strong>set_header_format</strong>(separator, left, center, right)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets strftime like header format strings, to be printed on the left, center and right of the top of each page.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_left_margin-instance_method" title="#set_left_margin (instance method)">#<strong>set_left_margin</strong>(margin, unit)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the left margin used by <!-- raw HTML omitted -->compositor<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_right_margin-instance_method" title="#set_right_margin (instance method)">#<strong>set_right_margin</strong>(margin, unit)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the right margin used by <!-- raw HTML omitted -->compositor<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_top_margin-instance_method" title="#set_top_margin (instance method)">#<strong>set_top_margin</strong>(margin, unit)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the top margin used by <!-- raw HTML omitted -->compositor<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tab_width-instance_method" title="#tab_width (instance method)">#<strong>tab_width</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Width of a tab character expressed in spaces.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tab_width=-instance_method" title="#tab_width= (instance method)">#<strong>tab_width=</strong>(tab_width)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Width of a tab character expressed in spaces.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wrap_mode-instance_method" title="#wrap_mode (instance method)">#<strong>wrap_mode</strong>  &#x21d2; Gtk::WrapMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to wrap lines never, at word boundaries, or at character boundaries.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wrap_mode=-instance_method" title="#wrap_mode= (instance method)">#<strong>wrap_mode=</strong>(wrap_mode)  &#x21d2; Gtk::WrapMode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to wrap lines never, at word boundaries, or at character boundaries.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(view)  &#x21d2; <tt><span class='object_link'><a href="" title="GtkSource::PrintCompositor (class)">GtkSource::PrintCompositor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new print compositor that can be used to print the buffer
+associated with <!-- raw HTML omitted -->view<!-- raw HTML omitted -->.</p>
+<p>This constructor sets some configuration properties to make the
+printed output match <!-- raw HTML omitted -->view<!-- raw HTML omitted --> as much as possible.  The properties set are
+[property<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->:tab-width], [property<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->:highlight-syntax],
+[property<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->:wrap-mode], [property<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->:body-font-name] and
+[property<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->:print-line-numbers].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>view</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="View.html" title="GtkSource::View (class)">GtkSource::View</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::SourceView to get configuration from.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="body_font_name-instance_method">
+  
+    #<strong>body_font_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of the font used for the text body.</p>
+<p>Accepted values are strings representing a font description Pango can understand.
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+for a description of the format of the string representation.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>body-font-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="body_font_name=-instance_method">
+  
+    #<strong>body_font_name=</strong>(body_font_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of the font used for the text body.</p>
+<p>Accepted values are strings representing a font description Pango can understand.
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+for a description of the format of the string representation.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>body_font_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>body-font-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>body-font-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="buffer-instance_method">
+  
+    #<strong>buffer</strong>  &#x21d2; <tt><span class='object_link'><a href="Buffer.html" title="GtkSource::Buffer (class)">GtkSource::Buffer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->] object to print.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Buffer.html" title="GtkSource::Buffer (class)">GtkSource::Buffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="buffer=-instance_method">
+  
+    #<strong>buffer=</strong>(buffer)  &#x21d2; <tt><span class='object_link'><a href="Buffer.html" title="GtkSource::Buffer (class)">GtkSource::Buffer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->] object to print.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Buffer.html" title="GtkSource::Buffer (class)">GtkSource::Buffer</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Buffer.html" title="GtkSource::Buffer (class)">GtkSource::Buffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Buffer.html" title="GtkSource::Buffer (class)">GtkSource::Buffer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="draw_page-instance_method">
+  
+    #<strong>draw_page</strong>(context, page_nr)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Draw page <!-- raw HTML omitted -->page_nr<!-- raw HTML omitted --> for printing on the the Cairo context encapsuled in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->.</p>
+<p>This method has been designed to be called in the handler of the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::draw_page] signal
+as shown in the following example:</p>
+<pre class="code c"><code class="c">// Signal handler for the GtkPrintOperation::draw_page signal
+
+static void
+draw_page (GtkPrintOperation *operation,
+           GtkPrintContext   *context,
+           gint               page_nr,
+           gpointer           user_data)
+{
+    GtkSourcePrintCompositor *compositor;
+
+    compositor = GTK_SOURCE_PRINT_COMPOSITOR (user_data);
+
+    gtk_source_print_compositor_draw_page (compositor,
+                                           context,
+                                           page_nr);
+}
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/PrintContext.html" title="Gtk::PrintContext (class)">Gtk::PrintContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gtk::PrintContext encapsulating the context information that is required when
+drawing the page for printing.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page_nr</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of the page to print.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="footer_font_name-instance_method">
+  
+    #<strong>footer_font_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of the font used to print page footer.
+If this property is unspecified, the text body font is used.</p>
+<p>Accepted values are strings representing a font description Pango can understand.
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+for a description of the format of the string representation.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>footer-font-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="footer_font_name=-instance_method">
+  
+    #<strong>footer_font_name=</strong>(footer_font_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of the font used to print page footer.
+If this property is unspecified, the text body font is used.</p>
+<p>Accepted values are strings representing a font description Pango can understand.
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+for a description of the format of the string representation.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>footer_font_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>footer-font-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>footer-font-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_bottom_margin-instance_method">
+  
+    #<strong>get_bottom_margin</strong>(unit)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the bottom margin in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the unit for the return value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the bottom margin.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_left_margin-instance_method">
+  
+    #<strong>get_left_margin</strong>(unit)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the left margin in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the unit for the return value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the left margin</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_right_margin-instance_method">
+  
+    #<strong>get_right_margin</strong>(unit)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the right margin in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the unit for the return value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the right margin.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_top_margin-instance_method">
+  
+    #<strong>get_top_margin</strong>(unit)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the top margin in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the unit for the return value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the top margin.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="header_font_name-instance_method">
+  
+    #<strong>header_font_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of the font used to print page header.
+If this property is unspecified, the text body font is used.</p>
+<p>Accepted values are strings representing a font description Pango can understand.
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+for a description of the format of the string representation.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>header-font-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="header_font_name=-instance_method">
+  
+    #<strong>header_font_name=</strong>(header_font_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of the font used to print page header.
+If this property is unspecified, the text body font is used.</p>
+<p>Accepted values are strings representing a font description Pango can understand.
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+for a description of the format of the string representation.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>header_font_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>header-font-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>header-font-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="highlight_syntax-instance_method">
+  
+    #<strong>highlight_syntax</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines whether the printed text will be highlighted according to the
+buffer rules.</p>
+<p>Note that highlighting will happen only if the buffer to print has highlighting activated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the printed output will be highlighted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="highlight_syntax=-instance_method">
+  
+    #<strong>highlight_syntax=</strong>(highlight_syntax)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to print the document with highlighted syntax.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>highlight_syntax</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>highlight-syntax</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>highlight-syntax</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="highlight_syntax?-instance_method">
+  
+    #<strong>highlight_syntax?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to print the document with highlighted syntax.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>highlight-syntax</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ignore_tag-instance_method">
+  
+    #<strong>ignore_tag</strong>(tag)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Specifies a tag whose style should be ignored when compositing the
+document to the printable page.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tag</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/TextTag.html" title="Gtk::TextTag (class)">Gtk::TextTag</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gtk::TextTag</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="line_numbers_font_name-instance_method">
+  
+    #<strong>line_numbers_font_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of the font used to print line numbers on the left margin.
+If this property is unspecified, the text body font is used.</p>
+<p>Accepted values are strings representing a font description Pango can understand.
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+for a description of the format of the string representation.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>line-numbers-font-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="line_numbers_font_name=-instance_method">
+  
+    #<strong>line_numbers_font_name=</strong>(line_numbers_font_name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of the font used to print line numbers on the left margin.
+If this property is unspecified, the text body font is used.</p>
+<p>Accepted values are strings representing a font description Pango can understand.
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+for a description of the format of the string representation.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>line_numbers_font_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>line-numbers-font-name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>line-numbers-font-name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_pages-instance_method">
+  
+    #<strong>n_pages</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of pages in the document or <!-- raw HTML omitted -->-1<!-- raw HTML omitted --> if the
+document has not been completely paginated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>n-pages</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="n_pages=-instance_method">
+  
+    #<strong>n_pages=</strong>(n_pages)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of pages in the document or <!-- raw HTML omitted -->-1<!-- raw HTML omitted --> if the
+document has not been completely paginated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_pages</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>n-pages</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>n-pages</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="paginate-instance_method">
+  
+    #<strong>paginate</strong>(context)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Paginate the document associated with the <!-- raw HTML omitted -->compositor<!-- raw HTML omitted -->.</p>
+<p>In order to support non-blocking pagination, document is paginated in small chunks.
+Each time [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] is invoked, a chunk of the document
+is paginated. To paginate the entire document, [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate]
+must be invoked multiple times.
+It returns true if the document has been completely paginated, otherwise it returns false.</p>
+<p>This method has been designed to be invoked in the handler of the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::paginate] signal,
+as shown in the following example:</p>
+<pre class="code c"><code class="c">// Signal handler for the GtkPrintOperation::paginate signal
+
+static gboolean
+paginate (GtkPrintOperation *operation,
+          GtkPrintContext   *context,
+          gpointer           user_data)
+{
+    GtkSourcePrintCompositor *compositor;
+
+    compositor = GTK_SOURCE_PRINT_COMPOSITOR (user_data);
+
+    if (gtk_source_print_compositor_paginate (compositor, context))
+    {
+        gint n_pages;
+
+        n_pages = gtk_source_print_compositor_get_n_pages (compositor);
+        gtk_print_operation_set_n_pages (operation, n_pages);
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
+</code></pre>
+<p>If you don't need to do pagination in chunks, you can simply do it all in the
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::begin-print] handler, and set the number of pages from there, like
+in the following example:</p>
+<pre class="code c"><code class="c">// Signal handler for the GtkPrintOperation::begin-print signal
+
+static void
+begin_print (GtkPrintOperation *operation,
+             GtkPrintContext   *context,
+             gpointer           user_data)
+{
+    GtkSourcePrintCompositor *compositor;
+    gint n_pages;
+
+    compositor = GTK_SOURCE_PRINT_COMPOSITOR (user_data);
+
+    while (!gtk_source_print_compositor_paginate (compositor, context));
+
+    n_pages = gtk_source_print_compositor_get_n_pages (compositor);
+    gtk_print_operation_set_n_pages (operation, n_pages);
+}
+</code></pre>
+<p>are used by the the <!-- raw HTML omitted -->compositor<!-- raw HTML omitted --> to paginate the document.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/PrintContext.html" title="Gtk::PrintContext (class)">Gtk::PrintContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gtk::PrintContext whose parameters (e.g. paper size, print margins, etc.)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the document has been completely paginated, false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pagination_progress-instance_method">
+  
+    #<strong>pagination_progress</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the current fraction of the document pagination that has been completed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a fraction from 0.0 to 1.0 inclusive.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="print_footer-instance_method">
+  
+    #<strong>print_footer</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines if a footer is set to be printed for each page.</p>
+<p>A footer will be printed if this function returns true
+<strong>and</strong> some format strings have been specified
+with [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.set_footer_format].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the footer is set to be printed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="print_footer=-instance_method">
+  
+    #<strong>print_footer=</strong>(print_footer)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to print a footer in each page.</p>
+<p>Note that by default the footer format is unspecified, and if it is
+unspecified the footer will not be printed, regardless of the value of
+this property.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>print_footer</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>print-footer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>print-footer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="print_footer?-instance_method">
+  
+    #<strong>print_footer?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to print a footer in each page.</p>
+<p>Note that by default the footer format is unspecified, and if it is
+unspecified the footer will not be printed, regardless of the value of
+this property.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>print-footer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="print_header-instance_method">
+  
+    #<strong>print_header</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines if a header is set to be printed for each page.</p>
+<p>A header will be printed if this function returns true
+<strong>and</strong> some format strings have been specified
+with [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.set_header_format].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the header is set to be printed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="print_header=-instance_method">
+  
+    #<strong>print_header=</strong>(print_header)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to print a header in each page.</p>
+<p>Note that by default the header format is unspecified, and if it is
+unspecified the header will not be printed, regardless of the value of
+this property.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>print_header</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>print-header</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>print-header</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="print_header?-instance_method">
+  
+    #<strong>print_header?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to print a header in each page.</p>
+<p>Note that by default the header format is unspecified, and if it is
+unspecified the header will not be printed, regardless of the value of
+this property.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>print-header</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="print_line_numbers-instance_method">
+  
+    #<strong>print_line_numbers</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Interval of printed line numbers.</p>
+<p>If this property is set to 0 no numbers will be printed.
+If greater than 0, a number will be printed every &quot;print-line-numbers&quot;
+lines (i.e. 1 will print all line numbers).</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>print-line-numbers</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="print_line_numbers=-instance_method">
+  
+    #<strong>print_line_numbers=</strong>(print_line_numbers)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Interval of printed line numbers.</p>
+<p>If this property is set to 0 no numbers will be printed.
+If greater than 0, a number will be printed every &quot;print-line-numbers&quot;
+lines (i.e. 1 will print all line numbers).</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>print_line_numbers</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>print-line-numbers</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>print-line-numbers</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_bottom_margin-instance_method">
+  
+    #<strong>set_bottom_margin</strong>(margin, unit)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the bottom margin used by <!-- raw HTML omitted -->compositor<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>margin</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new bottom margin in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the units for <!-- raw HTML omitted -->margin<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_footer_format-instance_method">
+  
+    #<strong>set_footer_format</strong>(separator, left, center, right)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>See [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.set_header_format] for more information
+about the parameters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>separator</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if you want a separator line to be printed.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>left</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a format string to print on the left of the footer.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>center</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a format string to print on the center of the footer.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>right</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a format string to print on the right of the footer.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_header_format-instance_method">
+  
+    #<strong>set_header_format</strong>(separator, left, center, right)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets strftime like header format strings, to be printed on the
+left, center and right of the top of each page.</p>
+<p>The strings may include strftime(3) codes which will be expanded at print time.
+A subset of strftime() codes are accepted, see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.DateTime.format]
+for more details on the accepted format specifiers.
+Additionally the following format specifiers are accepted:</p>
+<ul>
+<li>#N: the page number</li>
+<li>#Q: the page count.</li>
+</ul>
+<p><!-- raw HTML omitted -->separator<!-- raw HTML omitted --> specifies if a solid line should be drawn to separate
+the header from the document text.</p>
+<p>If nil is given for any of the three arguments, that particular
+string will not be printed.</p>
+<p>For the header to be printed, in
+addition to specifying format strings, you need to enable header
+printing with [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.set_print_header].</p>
+<p>This function cannot be called anymore after the first call to the
+[method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>separator</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if you want a separator line to be printed.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>left</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a format string to print on the left of the header.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>center</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a format string to print on the center of the header.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>right</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a format string to print on the right of the header.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_left_margin-instance_method">
+  
+    #<strong>set_left_margin</strong>(margin, unit)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the left margin used by <!-- raw HTML omitted -->compositor<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>margin</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new left margin in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the units for <!-- raw HTML omitted -->margin<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_right_margin-instance_method">
+  
+    #<strong>set_right_margin</strong>(margin, unit)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the right margin used by <!-- raw HTML omitted -->compositor<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>margin</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new right margin in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the units for <!-- raw HTML omitted -->margin<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_top_margin-instance_method">
+  
+    #<strong>set_top_margin</strong>(margin, unit)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the top margin used by <!-- raw HTML omitted -->compositor<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>margin</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new top margin in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>unit</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/Unit.html" title="Gtk::Unit (module)">Gtk::Unit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the units for <!-- raw HTML omitted -->margin<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tab_width-instance_method">
+  
+    #<strong>tab_width</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Width of a tab character expressed in spaces.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>tab-width</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tab_width=-instance_method">
+  
+    #<strong>tab_width=</strong>(tab_width)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Width of a tab character expressed in spaces.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tab_width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>tab-width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>tab-width</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wrap_mode-instance_method">
+  
+    #<strong>wrap_mode</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gtk/WrapMode.html" title="Gtk::WrapMode (module)">Gtk::WrapMode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to wrap lines never, at word boundaries, or at character boundaries.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/WrapMode.html" title="Gtk::WrapMode (module)">Gtk::WrapMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>wrap-mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wrap_mode=-instance_method">
+  
+    #<strong>wrap_mode=</strong>(wrap_mode)  &#x21d2; <tt><span class='object_link'><a href="../Gtk/WrapMode.html" title="Gtk::WrapMode (module)">Gtk::WrapMode</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether to wrap lines never, at word boundaries, or at character boundaries.</p>
+<p>The value of this property cannot be changed anymore after the first
+call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>wrap_mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/WrapMode.html" title="Gtk::WrapMode (module)">Gtk::WrapMode</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/WrapMode.html" title="Gtk::WrapMode (module)">Gtk::WrapMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>wrap-mode</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk/WrapMode.html" title="Gtk::WrapMode (module)">Gtk::WrapMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>wrap-mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

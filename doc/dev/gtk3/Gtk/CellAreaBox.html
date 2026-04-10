@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::CellAreaBox
+  
+    &mdash; Ruby/GTK3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::CellAreaBox";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">CellAreaBox</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::CellAreaBox
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="CellArea.html" title="Gtk::CellArea (class)">CellArea</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="CellArea.html" title="Gtk::CellArea (class)">CellArea</a></span></li>
+          
+            <li class="next">Gtk::CellAreaBox</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>A cell area that renders GtkCellRenderers into a row or a column</p>
+<p>The <code>GtkCellAreaBox</code> renders cell renderers into a row or a column
+depending on its <code>GtkOrientation</code>.</p>
+<p>GtkCellAreaBox uses a notion of packing. Packing
+refers to adding cell renderers with reference to a particular position
+in a <code>GtkCellAreaBox</code>. There are two reference positions: the
+start and the end of the box.
+When the <code>GtkCellAreaBox</code> is oriented in the %GTK_ORIENTATION_VERTICAL
+orientation, the start is defined as the top of the box and the end is
+defined as the bottom. In the %GTK_ORIENTATION_HORIZONTAL orientation
+start is defined as the left side and the end is defined as the right
+side.</p>
+<p>Alignments of <code>GtkCellRenderer</code>s rendered in adjacent rows can be
+configured by configuring the <code>GtkCellAreaBox</code> align child cell property
+with gtk_cell_area_cell_set_property() or by specifying the &quot;align&quot;
+argument to gtk_cell_area_box_pack_start() and gtk_cell_area_box_pack_end().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Gtk::CellArea </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new <code>GtkCellAreaBox</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pack_end-instance_method" title="#pack_end (instance method)">#<strong>pack_end</strong>(renderer, expand, align, fixed)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> to <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, packed with reference to the end of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pack_start-instance_method" title="#pack_start (instance method)">#<strong>pack_start</strong>(renderer, expand, align, fixed)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> to <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, packed with reference to the start of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#spacing-instance_method" title="#spacing (instance method)">#<strong>spacing</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The amount of space to reserve between cells.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#spacing=-instance_method" title="#spacing= (instance method)">#<strong>spacing=</strong>(spacing)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The amount of space to reserve between cells.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="CellArea.html" title="Gtk::CellArea (class)">CellArea</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="CellArea.html#activate-instance_method" title="Gtk::CellArea#activate (method)">#activate</a></span>, <span class='object_link'><a href="CellArea.html#activate_cell-instance_method" title="Gtk::CellArea#activate_cell (method)">#activate_cell</a></span>, <span class='object_link'><a href="CellArea.html#add-instance_method" title="Gtk::CellArea#add (method)">#add</a></span>, <span class='object_link'><a href="CellArea.html#add_focus_sibling-instance_method" title="Gtk::CellArea#add_focus_sibling (method)">#add_focus_sibling</a></span>, <span class='object_link'><a href="CellArea.html#add_with_properties-instance_method" title="Gtk::CellArea#add_with_properties (method)">#add_with_properties</a></span>, <span class='object_link'><a href="CellArea.html#apply_attributes-instance_method" title="Gtk::CellArea#apply_attributes (method)">#apply_attributes</a></span>, <span class='object_link'><a href="CellArea.html#attribute_connect-instance_method" title="Gtk::CellArea#attribute_connect (method)">#attribute_connect</a></span>, <span class='object_link'><a href="CellArea.html#attribute_disconnect-instance_method" title="Gtk::CellArea#attribute_disconnect (method)">#attribute_disconnect</a></span>, <span class='object_link'><a href="CellArea.html#attribute_get_column-instance_method" title="Gtk::CellArea#attribute_get_column (method)">#attribute_get_column</a></span>, <span class='object_link'><a href="CellArea.html#cell_get-instance_method" title="Gtk::CellArea#cell_get (method)">#cell_get</a></span>, <span class='object_link'><a href="CellArea.html#cell_get_property-instance_method" title="Gtk::CellArea#cell_get_property (method)">#cell_get_property</a></span>, <span class='object_link'><a href="CellArea.html#cell_get_valist-instance_method" title="Gtk::CellArea#cell_get_valist (method)">#cell_get_valist</a></span>, <span class='object_link'><a href="CellArea.html#cell_set-instance_method" title="Gtk::CellArea#cell_set (method)">#cell_set</a></span>, <span class='object_link'><a href="CellArea.html#cell_set_property-instance_method" title="Gtk::CellArea#cell_set_property (method)">#cell_set_property</a></span>, <span class='object_link'><a href="CellArea.html#cell_set_valist-instance_method" title="Gtk::CellArea#cell_set_valist (method)">#cell_set_valist</a></span>, <span class='object_link'><a href="CellArea.html#copy_context-instance_method" title="Gtk::CellArea#copy_context (method)">#copy_context</a></span>, <span class='object_link'><a href="CellArea.html#create_context-instance_method" title="Gtk::CellArea#create_context (method)">#create_context</a></span>, <span class='object_link'><a href="CellArea.html#current_path_string-instance_method" title="Gtk::CellArea#current_path_string (method)">#current_path_string</a></span>, <span class='object_link'><a href="CellArea.html#edit_widget-instance_method" title="Gtk::CellArea#edit_widget (method)">#edit_widget</a></span>, <span class='object_link'><a href="CellArea.html#edit_widget=-instance_method" title="Gtk::CellArea#edit_widget= (method)">#edit_widget=</a></span>, <span class='object_link'><a href="CellArea.html#edited_cell-instance_method" title="Gtk::CellArea#edited_cell (method)">#edited_cell</a></span>, <span class='object_link'><a href="CellArea.html#edited_cell=-instance_method" title="Gtk::CellArea#edited_cell= (method)">#edited_cell=</a></span>, <span class='object_link'><a href="CellArea.html#event-instance_method" title="Gtk::CellArea#event (method)">#event</a></span>, <span class='object_link'><a href="CellArea.html#find_cell_property-instance_method" title="Gtk::CellArea#find_cell_property (method)">#find_cell_property</a></span>, <span class='object_link'><a href="CellArea.html#focus-instance_method" title="Gtk::CellArea#focus (method)">#focus</a></span>, <span class='object_link'><a href="CellArea.html#focus_cell-instance_method" title="Gtk::CellArea#focus_cell (method)">#focus_cell</a></span>, <span class='object_link'><a href="CellArea.html#focus_cell=-instance_method" title="Gtk::CellArea#focus_cell= (method)">#focus_cell=</a></span>, <span class='object_link'><a href="CellArea.html#foreach-instance_method" title="Gtk::CellArea#foreach (method)">#foreach</a></span>, <span class='object_link'><a href="CellArea.html#foreach_alloc-instance_method" title="Gtk::CellArea#foreach_alloc (method)">#foreach_alloc</a></span>, <span class='object_link'><a href="CellArea.html#get_cell_allocation-instance_method" title="Gtk::CellArea#get_cell_allocation (method)">#get_cell_allocation</a></span>, <span class='object_link'><a href="CellArea.html#get_cell_at_position-instance_method" title="Gtk::CellArea#get_cell_at_position (method)">#get_cell_at_position</a></span>, <span class='object_link'><a href="CellArea.html#get_focus_from_sibling-instance_method" title="Gtk::CellArea#get_focus_from_sibling (method)">#get_focus_from_sibling</a></span>, <span class='object_link'><a href="CellArea.html#get_focus_siblings-instance_method" title="Gtk::CellArea#get_focus_siblings (method)">#get_focus_siblings</a></span>, <span class='object_link'><a href="CellArea.html#get_preferred_height-instance_method" title="Gtk::CellArea#get_preferred_height (method)">#get_preferred_height</a></span>, <span class='object_link'><a href="CellArea.html#get_preferred_height_for_width-instance_method" title="Gtk::CellArea#get_preferred_height_for_width (method)">#get_preferred_height_for_width</a></span>, <span class='object_link'><a href="CellArea.html#get_preferred_width-instance_method" title="Gtk::CellArea#get_preferred_width (method)">#get_preferred_width</a></span>, <span class='object_link'><a href="CellArea.html#get_preferred_width_for_height-instance_method" title="Gtk::CellArea#get_preferred_width_for_height (method)">#get_preferred_width_for_height</a></span>, <span class='object_link'><a href="CellArea.html#has_renderer-instance_method" title="Gtk::CellArea#has_renderer (method)">#has_renderer</a></span>, <span class='object_link'><a href="CellArea.html#inner_cell_area-instance_method" title="Gtk::CellArea#inner_cell_area (method)">#inner_cell_area</a></span>, <span class='object_link'><a href="CellArea.html#install_cell_property-instance_method" title="Gtk::CellArea#install_cell_property (method)">#install_cell_property</a></span>, <span class='object_link'><a href="CellArea.html#is_activatable-instance_method" title="Gtk::CellArea#is_activatable (method)">#is_activatable</a></span>, <span class='object_link'><a href="CellArea.html#is_focus_sibling-instance_method" title="Gtk::CellArea#is_focus_sibling (method)">#is_focus_sibling</a></span>, <span class='object_link'><a href="CellArea.html#list_cell_properties-instance_method" title="Gtk::CellArea#list_cell_properties (method)">#list_cell_properties</a></span>, <span class='object_link'><a href="CellArea.html#remove-instance_method" title="Gtk::CellArea#remove (method)">#remove</a></span>, <span class='object_link'><a href="CellArea.html#remove_focus_sibling-instance_method" title="Gtk::CellArea#remove_focus_sibling (method)">#remove_focus_sibling</a></span>, <span class='object_link'><a href="CellArea.html#request_mode-instance_method" title="Gtk::CellArea#request_mode (method)">#request_mode</a></span>, <span class='object_link'><a href="CellArea.html#request_renderer-instance_method" title="Gtk::CellArea#request_renderer (method)">#request_renderer</a></span>, <span class='object_link'><a href="CellArea.html#snapshot-instance_method" title="Gtk::CellArea#snapshot (method)">#snapshot</a></span>, <span class='object_link'><a href="CellArea.html#stop_editing-instance_method" title="Gtk::CellArea#stop_editing (method)">#stop_editing</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="CellArea.html" title="Gtk::CellArea (class)">Gtk::CellArea</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new <code>GtkCellAreaBox</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="pack_end-instance_method">
+  
+    #<strong>pack_end</strong>(renderer, expand, align, fixed)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> to <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, packed with reference to the end of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->.</p>
+<p>The <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> is packed after (away from end of) any other
+<code>GtkCellRenderer</code> packed with reference to the end of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->.
+more than its natural size</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>GtkCellRenderer</code> to add</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>expand</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> should receive extra space when the area receives</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>align</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> should be aligned in adjacent rows</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>fixed</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> should have the same size in all rows</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pack_start-instance_method">
+  
+    #<strong>pack_start</strong>(renderer, expand, align, fixed)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> to <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, packed with reference to the start of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->.</p>
+<p>The <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> is packed after any other <code>GtkCellRenderer</code> packed
+with reference to the start of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->.
+more than its natural size</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>renderer</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CellRenderer.html" title="Gtk::CellRenderer (class)">Gtk::CellRenderer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>GtkCellRenderer</code> to add</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>expand</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> should receive extra space when the area receives</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>align</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> should be aligned in adjacent rows</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>fixed</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> should have the same size in all rows</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="spacing-instance_method">
+  
+    #<strong>spacing</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The amount of space to reserve between cells.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>spacing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="spacing=-instance_method">
+  
+    #<strong>spacing=</strong>(spacing)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The amount of space to reserve between cells.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>spacing</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>spacing</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>spacing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

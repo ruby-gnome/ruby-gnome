@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gtk::ConstraintAttribute
+  
+    &mdash; Ruby/GtkSourceView5
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::ConstraintAttribute";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">ConstraintAttribute</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gtk::ConstraintAttribute
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="NONE-constant" class="">NONE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>No attribute, used for constant
+relations</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:none</span></pre></dd>
+      
+        <dt id="LEFT-constant" class="">LEFT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The left edge of a widget, regardless of
+text direction</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:left</span></pre></dd>
+      
+        <dt id="RIGHT-constant" class="">RIGHT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The right edge of a widget, regardless
+of text direction</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:right</span></pre></dd>
+      
+        <dt id="TOP-constant" class="">TOP =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The top edge of a widget</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:top</span></pre></dd>
+      
+        <dt id="BOTTOM-constant" class="">BOTTOM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The bottom edge of a widget</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:bottom</span></pre></dd>
+      
+        <dt id="START-constant" class="">START =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The leading edge of a widget, depending
+on text direction; equivalent to %GTK_CONSTRAINT_ATTRIBUTE_LEFT for LTR
+languages, and %GTK_CONSTRAINT_ATTRIBUTE_RIGHT for RTL ones</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:start</span></pre></dd>
+      
+        <dt id="END-constant" class="">END =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The trailing edge of a widget, depending
+on text direction; equivalent to %GTK_CONSTRAINT_ATTRIBUTE_RIGHT for LTR
+languages, and %GTK_CONSTRAINT_ATTRIBUTE_LEFT for RTL ones</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:end</span></pre></dd>
+      
+        <dt id="WIDTH-constant" class="">WIDTH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The width of a widget</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:width</span></pre></dd>
+      
+        <dt id="HEIGHT-constant" class="">HEIGHT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The height of a widget</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:height</span></pre></dd>
+      
+        <dt id="CENTER_X-constant" class="">CENTER_X =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The center of a widget, on the
+horizontal axis</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span> <span class='kw'>or</span> <span class='symbol'>:center_x</span></pre></dd>
+      
+        <dt id="CENTER_Y-constant" class="">CENTER_Y =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The center of a widget, on the
+vertical axis</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:center_y</span></pre></dd>
+      
+        <dt id="BASELINE-constant" class="">BASELINE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The baseline of a widget</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span> <span class='kw'>or</span> <span class='symbol'>:baseline</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

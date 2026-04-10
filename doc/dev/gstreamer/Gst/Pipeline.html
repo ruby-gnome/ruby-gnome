@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gst::Pipeline
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gst::Pipeline";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gst.html" title="Gst (module)">Gst</a></span></span>
+     &raquo; 
+    <span class="title">Pipeline</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gst::Pipeline
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Bin.html" title="Gst::Bin (class)">Bin</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Element</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="Bin.html" title="Gst::Bin (class)">Bin</a></span></li>
+          
+            <li class="next">Gst::Pipeline</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#auto_clock-instance_method" title="#auto_clock (instance method)">#<strong>auto_clock</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Let <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted --> select a clock automatically.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#auto_flush_bus-instance_method" title="#auto_flush_bus (instance method)">#<strong>auto_flush_bus</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted --> will automatically flush messages when going to the NULL state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#auto_flush_bus=-instance_method" title="#auto_flush_bus= (instance method)">#<strong>auto_flush_bus=</strong>(auto_flush_bus)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether or not to automatically flush all messages on the pipeline's bus when going from READY to NULL state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#auto_flush_bus%3F-instance_method" title="#auto_flush_bus? (instance method)">#<strong>auto_flush_bus?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether or not to automatically flush all messages on the pipeline's bus when going from READY to NULL state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bus-instance_method" title="#bus (instance method)">#<strong>bus</strong>  &#x21d2; Gst::Bus </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the Gst::Bus of <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clock-instance_method" title="#clock (instance method)">#<strong>clock</strong>  &#x21d2; Gst::Clock </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the current clock used by <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clock=-instance_method" title="#clock= (instance method)">#<strong>clock=</strong>(clock)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set the clock for <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#configured_latency-instance_method" title="#configured_latency (instance method)">#<strong>configured_latency</strong>  &#x21d2; Gst::ClockTime </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return the configured latency on <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delay-instance_method" title="#delay (instance method)">#<strong>delay</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The expected delay needed for elements to spin up to the PLAYING state expressed in nanoseconds.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delay=-instance_method" title="#delay= (instance method)">#<strong>delay=</strong>(delay)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The expected delay needed for elements to spin up to the PLAYING state expressed in nanoseconds.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(name)  &#x21d2; Gst::Element </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new pipeline with the given name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_live-instance_method" title="#is_live (instance method)">#<strong>is_live</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted --> is live.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#latency-instance_method" title="#latency (instance method)">#<strong>latency</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Latency to configure on the pipeline.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#latency=-instance_method" title="#latency= (instance method)">#<strong>latency=</strong>(latency)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Latency to configure on the pipeline.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pipeline_clock-instance_method" title="#pipeline_clock (instance method)">#<strong>pipeline_clock</strong>  &#x21d2; Gst::Clock </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the current clock used by <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_clock-instance_method" title="#use_clock (instance method)">#<strong>use_clock</strong>(clock)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Force <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted --> to use the given <!-- raw HTML omitted -->clock<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Bin.html" title="Gst::Bin (class)">Bin</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Bin.html#<<-instance_method" title="Gst::Bin#&lt;&lt; (method)">#<<</a></span>, <span class='object_link'><a href="Bin.html#add_elements-instance_method" title="Gst::Bin#add_elements (method)">#add_elements</a></span>, <span class='object_link'><a href="Bin.html#add_many-instance_method" title="Gst::Bin#add_many (method)">#add_many</a></span>, <span class='object_link'><a href="Bin.html#async_handling=-instance_method" title="Gst::Bin#async_handling= (method)">#async_handling=</a></span>, <span class='object_link'><a href="Bin.html#async_handling%3F-instance_method" title="Gst::Bin#async_handling? (method)">#async_handling?</a></span>, <span class='object_link'><a href="Bin.html#each-instance_method" title="Gst::Bin#each (method)">#each</a></span>, <span class='object_link'><a href="Bin.html#find_unlinked_pad-instance_method" title="Gst::Bin#find_unlinked_pad (method)">#find_unlinked_pad</a></span>, <span class='object_link'><a href="Bin.html#get_by_interface-instance_method" title="Gst::Bin#get_by_interface (method)">#get_by_interface</a></span>, <span class='object_link'><a href="Bin.html#get_by_name-instance_method" title="Gst::Bin#get_by_name (method)">#get_by_name</a></span>, <span class='object_link'><a href="Bin.html#get_by_name_recurse_up-instance_method" title="Gst::Bin#get_by_name_recurse_up (method)">#get_by_name_recurse_up</a></span>, <span class='object_link'><a href="Bin.html#iterate_all_by_element_factory_name-instance_method" title="Gst::Bin#iterate_all_by_element_factory_name (method)">#iterate_all_by_element_factory_name</a></span>, <span class='object_link'><a href="Bin.html#iterate_all_by_interface-instance_method" title="Gst::Bin#iterate_all_by_interface (method)">#iterate_all_by_interface</a></span>, <span class='object_link'><a href="Bin.html#iterate_elements-instance_method" title="Gst::Bin#iterate_elements (method)">#iterate_elements</a></span>, <span class='object_link'><a href="Bin.html#iterate_recurse-instance_method" title="Gst::Bin#iterate_recurse (method)">#iterate_recurse</a></span>, <span class='object_link'><a href="Bin.html#iterate_sinks-instance_method" title="Gst::Bin#iterate_sinks (method)">#iterate_sinks</a></span>, <span class='object_link'><a href="Bin.html#iterate_sorted-instance_method" title="Gst::Bin#iterate_sorted (method)">#iterate_sorted</a></span>, <span class='object_link'><a href="Bin.html#iterate_sources-instance_method" title="Gst::Bin#iterate_sources (method)">#iterate_sources</a></span>, <span class='object_link'><a href="Bin.html#message_forward=-instance_method" title="Gst::Bin#message_forward= (method)">#message_forward=</a></span>, <span class='object_link'><a href="Bin.html#message_forward%3F-instance_method" title="Gst::Bin#message_forward? (method)">#message_forward?</a></span>, <span class='object_link'><a href="Bin.html#recalculate_latency-instance_method" title="Gst::Bin#recalculate_latency (method)">#recalculate_latency</a></span>, <span class='object_link'><a href="Bin.html#remove-instance_method" title="Gst::Bin#remove (method)">#remove</a></span>, <span class='object_link'><a href="Bin.html#remove_many-instance_method" title="Gst::Bin#remove_many (method)">#remove_many</a></span>, <span class='object_link'><a href="Bin.html#suppressed_flags-instance_method" title="Gst::Bin#suppressed_flags (method)">#suppressed_flags</a></span>, <span class='object_link'><a href="Bin.html#suppressed_flags=-instance_method" title="Gst::Bin#suppressed_flags= (method)">#suppressed_flags=</a></span>, <span class='object_link'><a href="Bin.html#sync_children_states-instance_method" title="Gst::Bin#sync_children_states (method)">#sync_children_states</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Element.html" title="Gst::Element (class)">Element</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Element.html#>>-instance_method" title="Gst::Element#&gt;&gt; (method)">#>></a></span>, <span class='object_link'><a href="Element.html#[]-class_method" title="Gst::Element.[] (method)">[]</a></span>, <span class='object_link'><a href="Element.html#abort_state-instance_method" title="Gst::Element#abort_state (method)">#abort_state</a></span>, <span class='object_link'><a href="Element.html#add_metadata-instance_method" title="Gst::Element#add_metadata (method)">#add_metadata</a></span>, <span class='object_link'><a href="Element.html#add_pad-instance_method" title="Gst::Element#add_pad (method)">#add_pad</a></span>, <span class='object_link'><a href="Element.html#add_pad_template-instance_method" title="Gst::Element#add_pad_template (method)">#add_pad_template</a></span>, <span class='object_link'><a href="Element.html#add_property_deep_notify_watch-instance_method" title="Gst::Element#add_property_deep_notify_watch (method)">#add_property_deep_notify_watch</a></span>, <span class='object_link'><a href="Element.html#add_property_notify_watch-instance_method" title="Gst::Element#add_property_notify_watch (method)">#add_property_notify_watch</a></span>, <span class='object_link'><a href="Element.html#add_static_metadata-instance_method" title="Gst::Element#add_static_metadata (method)">#add_static_metadata</a></span>, <span class='object_link'><a href="Element.html#add_static_pad_template-instance_method" title="Gst::Element#add_static_pad_template (method)">#add_static_pad_template</a></span>, <span class='object_link'><a href="Element.html#add_static_pad_template_with_gtype-instance_method" title="Gst::Element#add_static_pad_template_with_gtype (method)">#add_static_pad_template_with_gtype</a></span>, <span class='object_link'><a href="Element.html#base_time-instance_method" title="Gst::Element#base_time (method)">#base_time</a></span>, <span class='object_link'><a href="Element.html#base_time=-instance_method" title="Gst::Element#base_time= (method)">#base_time=</a></span>, <span class='object_link'><a href="Element.html#bus=-instance_method" title="Gst::Element#bus= (method)">#bus=</a></span>, <span class='object_link'><a href="Element.html#call_async-instance_method" title="Gst::Element#call_async (method)">#call_async</a></span>, <span class='object_link'><a href="Element.html#change_state-instance_method" title="Gst::Element#change_state (method)">#change_state</a></span>, <span class='object_link'><a href="Element.html#context=-instance_method" title="Gst::Element#context= (method)">#context=</a></span>, <span class='object_link'><a href="Element.html#contexts-instance_method" title="Gst::Element#contexts (method)">#contexts</a></span>, <span class='object_link'><a href="Element.html#continue_state-instance_method" title="Gst::Element#continue_state (method)">#continue_state</a></span>, <span class='object_link'><a href="Element.html#create_all_pads-instance_method" title="Gst::Element#create_all_pads (method)">#create_all_pads</a></span>, <span class='object_link'><a href="Element.html#current_clock_time-instance_method" title="Gst::Element#current_clock_time (method)">#current_clock_time</a></span>, <span class='object_link'><a href="Element.html#current_running_time-instance_method" title="Gst::Element#current_running_time (method)">#current_running_time</a></span>, <span class='object_link'><a href="Element.html#decorate_stream_id-instance_method" title="Gst::Element#decorate_stream_id (method)">#decorate_stream_id</a></span>, <span class='object_link'><a href="Element.html#decorate_stream_id_printf-instance_method" title="Gst::Element#decorate_stream_id_printf (method)">#decorate_stream_id_printf</a></span>, <span class='object_link'><a href="Element.html#decorate_stream_id_printf_valist-instance_method" title="Gst::Element#decorate_stream_id_printf_valist (method)">#decorate_stream_id_printf_valist</a></span>, <span class='object_link'><a href="Element.html#factory-instance_method" title="Gst::Element#factory (method)">#factory</a></span>, <span class='object_link'><a href="Element.html#flags-instance_method" title="Gst::Element#flags (method)">#flags</a></span>, <span class='object_link'><a href="Element.html#flags_raw-instance_method" title="Gst::Element#flags_raw (method)">#flags_raw</a></span>, <span class='object_link'><a href="Element.html#foreach_pad-instance_method" title="Gst::Element#foreach_pad (method)">#foreach_pad</a></span>, <span class='object_link'><a href="Element.html#foreach_sink_pad-instance_method" title="Gst::Element#foreach_sink_pad (method)">#foreach_sink_pad</a></span>, <span class='object_link'><a href="Element.html#foreach_src_pad-instance_method" title="Gst::Element#foreach_src_pad (method)">#foreach_src_pad</a></span>, <span class='object_link'><a href="Element.html#get_compatible_pad-instance_method" title="Gst::Element#get_compatible_pad (method)">#get_compatible_pad</a></span>, <span class='object_link'><a href="Element.html#get_compatible_pad_template-instance_method" title="Gst::Element#get_compatible_pad_template (method)">#get_compatible_pad_template</a></span>, <span class='object_link'><a href="Element.html#get_context-instance_method" title="Gst::Element#get_context (method)">#get_context</a></span>, <span class='object_link'><a href="Element.html#get_context_unlocked-instance_method" title="Gst::Element#get_context_unlocked (method)">#get_context_unlocked</a></span>, <span class='object_link'><a href="Element.html#get_metadata-instance_method" title="Gst::Element#get_metadata (method)">#get_metadata</a></span>, <span class='object_link'><a href="Element.html#get_pad_template-instance_method" title="Gst::Element#get_pad_template (method)">#get_pad_template</a></span>, <span class='object_link'><a href="Element.html#get_request_pad-instance_method" title="Gst::Element#get_request_pad (method)">#get_request_pad</a></span>, <span class='object_link'><a href="Element.html#get_state-instance_method" title="Gst::Element#get_state (method)">#get_state</a></span>, <span class='object_link'><a href="Element.html#get_static_pad-instance_method" title="Gst::Element#get_static_pad (method)">#get_static_pad</a></span>, <span class='object_link'><a href="Element.html#is_locked_state-instance_method" title="Gst::Element#is_locked_state (method)">#is_locked_state</a></span>, <span class='object_link'><a href="Element.html#iterate_pads-instance_method" title="Gst::Element#iterate_pads (method)">#iterate_pads</a></span>, <span class='object_link'><a href="Element.html#iterate_sink_pads-instance_method" title="Gst::Element#iterate_sink_pads (method)">#iterate_sink_pads</a></span>, <span class='object_link'><a href="Element.html#iterate_src_pads-instance_method" title="Gst::Element#iterate_src_pads (method)">#iterate_src_pads</a></span>, <span class='object_link'><a href="Element.html#link_elements-instance_method" title="Gst::Element#link_elements (method)">#link_elements</a></span>, <span class='object_link'><a href="Element.html#link_filtered-instance_method" title="Gst::Element#link_filtered (method)">#link_filtered</a></span>, <span class='object_link'><a href="Element.html#link_many-instance_method" title="Gst::Element#link_many (method)">#link_many</a></span>, <span class='object_link'><a href="Element.html#link_pads-instance_method" title="Gst::Element#link_pads (method)">#link_pads</a></span>, <span class='object_link'><a href="Element.html#link_pads_filtered-instance_method" title="Gst::Element#link_pads_filtered (method)">#link_pads_filtered</a></span>, <span class='object_link'><a href="Element.html#link_pads_full-instance_method" title="Gst::Element#link_pads_full (method)">#link_pads_full</a></span>, <span class='object_link'><a href="Element.html#locked_state=-instance_method" title="Gst::Element#locked_state= (method)">#locked_state=</a></span>, <span class='object_link'><a href="Element.html#lost_state-instance_method" title="Gst::Element#lost_state (method)">#lost_state</a></span>, <span class='object_link'><a href="Element.html#make_from_uri-class_method" title="Gst::Element.make_from_uri (method)">make_from_uri</a></span>, <span class='object_link'><a href="Element.html#message_full-instance_method" title="Gst::Element#message_full (method)">#message_full</a></span>, <span class='object_link'><a href="Element.html#message_full_with_details-instance_method" title="Gst::Element#message_full_with_details (method)">#message_full_with_details</a></span>, <span class='object_link'><a href="Element.html#no_more_pads-instance_method" title="Gst::Element#no_more_pads (method)">#no_more_pads</a></span>, <span class='object_link'><a href="Element.html#pad_template_list-instance_method" title="Gst::Element#pad_template_list (method)">#pad_template_list</a></span>, <span class='object_link'><a href="Element.html#pause-instance_method" title="Gst::Element#pause (method)">#pause</a></span>, <span class='object_link'><a href="Element.html#play-instance_method" title="Gst::Element#play (method)">#play</a></span>, <span class='object_link'><a href="Element.html#post_message-instance_method" title="Gst::Element#post_message (method)">#post_message</a></span>, <span class='object_link'><a href="Element.html#provide_clock-instance_method" title="Gst::Element#provide_clock (method)">#provide_clock</a></span>, <span class='object_link'><a href="Element.html#query-instance_method" title="Gst::Element#query (method)">#query</a></span>, <span class='object_link'><a href="Element.html#query_convert-instance_method" title="Gst::Element#query_convert (method)">#query_convert</a></span>, <span class='object_link'><a href="Element.html#query_duration-instance_method" title="Gst::Element#query_duration (method)">#query_duration</a></span>, <span class='object_link'><a href="Element.html#query_position-instance_method" title="Gst::Element#query_position (method)">#query_position</a></span>, <span class='object_link'><a href="Element.html#ready-instance_method" title="Gst::Element#ready (method)">#ready</a></span>, <span class='object_link'><a href="Element.html#register-class_method" title="Gst::Element.register (method)">register</a></span>, <span class='object_link'><a href="Element.html#release_request_pad-instance_method" title="Gst::Element#release_request_pad (method)">#release_request_pad</a></span>, <span class='object_link'><a href="Element.html#remove_pad-instance_method" title="Gst::Element#remove_pad (method)">#remove_pad</a></span>, <span class='object_link'><a href="Element.html#remove_property_notify_watch-instance_method" title="Gst::Element#remove_property_notify_watch (method)">#remove_property_notify_watch</a></span>, <span class='object_link'><a href="Element.html#request_pad-instance_method" title="Gst::Element#request_pad (method)">#request_pad</a></span>, <span class='object_link'><a href="Element.html#request_pad_simple-instance_method" title="Gst::Element#request_pad_simple (method)">#request_pad_simple</a></span>, <span class='object_link'><a href="Element.html#seek-instance_method" title="Gst::Element#seek (method)">#seek</a></span>, <span class='object_link'><a href="Element.html#seek_simple-instance_method" title="Gst::Element#seek_simple (method)">#seek_simple</a></span>, <span class='object_link'><a href="Element.html#send_event-instance_method" title="Gst::Element#send_event (method)">#send_event</a></span>, <span class='object_link'><a href="Element.html#set_metadata-instance_method" title="Gst::Element#set_metadata (method)">#set_metadata</a></span>, <span class='object_link'><a href="Element.html#set_static_metadata-instance_method" title="Gst::Element#set_static_metadata (method)">#set_static_metadata</a></span>, <span class='object_link'><a href="Element.html#start_time-instance_method" title="Gst::Element#start_time (method)">#start_time</a></span>, <span class='object_link'><a href="Element.html#start_time=-instance_method" title="Gst::Element#start_time= (method)">#start_time=</a></span>, <span class='object_link'><a href="Element.html#state=-instance_method" title="Gst::Element#state= (method)">#state=</a></span>, <span class='object_link'><a href="Element.html#state_change_return_get_name-class_method" title="Gst::Element.state_change_return_get_name (method)">state_change_return_get_name</a></span>, <span class='object_link'><a href="Element.html#state_get_name-class_method" title="Gst::Element.state_get_name (method)">state_get_name</a></span>, <span class='object_link'><a href="Element.html#stop-instance_method" title="Gst::Element#stop (method)">#stop</a></span>, <span class='object_link'><a href="Element.html#sync_state_with_parent-instance_method" title="Gst::Element#sync_state_with_parent (method)">#sync_state_with_parent</a></span>, <span class='object_link'><a href="Element.html#type_set_skip_documentation-class_method" title="Gst::Element.type_set_skip_documentation (method)">type_set_skip_documentation</a></span>, <span class='object_link'><a href="Element.html#unlink-instance_method" title="Gst::Element#unlink (method)">#unlink</a></span>, <span class='object_link'><a href="Element.html#unlink_many-instance_method" title="Gst::Element#unlink_many (method)">#unlink_many</a></span>, <span class='object_link'><a href="Element.html#unlink_pads-instance_method" title="Gst::Element#unlink_pads (method)">#unlink_pads</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Object.html#add_control_binding-instance_method" title="Gst::Object#add_control_binding (method)">#add_control_binding</a></span>, <span class='object_link'><a href="Object.html#check_uniqueness-class_method" title="Gst::Object.check_uniqueness (method)">check_uniqueness</a></span>, <span class='object_link'><a href="Object.html#control_bindings_disabled=-instance_method" title="Gst::Object#control_bindings_disabled= (method)">#control_bindings_disabled=</a></span>, <span class='object_link'><a href="Object.html#control_rate-instance_method" title="Gst::Object#control_rate (method)">#control_rate</a></span>, <span class='object_link'><a href="Object.html#control_rate=-instance_method" title="Gst::Object#control_rate= (method)">#control_rate=</a></span>, <span class='object_link'><a href="Object.html#default_deep_notify-class_method" title="Gst::Object.default_deep_notify (method)">default_deep_notify</a></span>, <span class='object_link'><a href="Object.html#default_error-instance_method" title="Gst::Object#default_error (method)">#default_error</a></span>, <span class='object_link'><a href="Object.html#get_control_binding-instance_method" title="Gst::Object#get_control_binding (method)">#get_control_binding</a></span>, <span class='object_link'><a href="Object.html#get_g_value_array-instance_method" title="Gst::Object#get_g_value_array (method)">#get_g_value_array</a></span>, <span class='object_link'><a href="Object.html#get_value-instance_method" title="Gst::Object#get_value (method)">#get_value</a></span>, <span class='object_link'><a href="Object.html#get_value_array-instance_method" title="Gst::Object#get_value_array (method)">#get_value_array</a></span>, <span class='object_link'><a href="Object.html#has_active_control_bindings-instance_method" title="Gst::Object#has_active_control_bindings (method)">#has_active_control_bindings</a></span>, <span class='object_link'><a href="Object.html#has_ancestor-instance_method" title="Gst::Object#has_ancestor (method)">#has_ancestor</a></span>, <span class='object_link'><a href="Object.html#has_as_ancestor-instance_method" title="Gst::Object#has_as_ancestor (method)">#has_as_ancestor</a></span>, <span class='object_link'><a href="Object.html#has_as_parent-instance_method" title="Gst::Object#has_as_parent (method)">#has_as_parent</a></span>, <span class='object_link'><a href="Object.html#name-instance_method" title="Gst::Object#name (method)">#name</a></span>, <span class='object_link'><a href="Object.html#name=-instance_method" title="Gst::Object#name= (method)">#name=</a></span>, <span class='object_link'><a href="Object.html#parent-instance_method" title="Gst::Object#parent (method)">#parent</a></span>, <span class='object_link'><a href="Object.html#parent=-instance_method" title="Gst::Object#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="Object.html#path_string-instance_method" title="Gst::Object#path_string (method)">#path_string</a></span>, <span class='object_link'><a href="Object.html#ref-instance_method" title="Gst::Object#ref (method)">#ref</a></span>, <span class='object_link'><a href="Object.html#ref_sink-class_method" title="Gst::Object.ref_sink (method)">ref_sink</a></span>, <span class='object_link'><a href="Object.html#remove_control_binding-instance_method" title="Gst::Object#remove_control_binding (method)">#remove_control_binding</a></span>, <span class='object_link'><a href="Object.html#replace-class_method" title="Gst::Object.replace (method)">replace</a></span>, <span class='object_link'><a href="Object.html#set_control_binding_disabled-instance_method" title="Gst::Object#set_control_binding_disabled (method)">#set_control_binding_disabled</a></span>, <span class='object_link'><a href="Object.html#suggest_next_sync-instance_method" title="Gst::Object#suggest_next_sync (method)">#suggest_next_sync</a></span>, <span class='object_link'><a href="Object.html#sync_values-instance_method" title="Gst::Object#sync_values (method)">#sync_values</a></span>, <span class='object_link'><a href="Object.html#unparent-instance_method" title="Gst::Object#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="Object.html#unref-instance_method" title="Gst::Object#unref (method)">#unref</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(name)  &#x21d2; <tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new pipeline with the given name.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name of new pipeline</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="auto_clock-instance_method">
+  
+    #<strong>auto_clock</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Let <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted --> select a clock automatically. This is the default
+behaviour.</p>
+<p>Use this function if you previous forced a fixed clock with
+gst_pipeline_use_clock() and want to restore the default
+pipeline clock selection algorithm.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="auto_flush_bus-instance_method">
+  
+    #<strong>auto_flush_bus</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted --> will automatically flush messages when going to
+the NULL state.
+going from READY to NULL state or not.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether the pipeline will automatically flush its bus when</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="auto_flush_bus=-instance_method">
+  
+    #<strong>auto_flush_bus=</strong>(auto_flush_bus)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether or not to automatically flush all messages on the
+pipeline's bus when going from READY to NULL state. Please see
+gst_pipeline_set_auto_flush_bus() for more information on this option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>auto_flush_bus</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>auto-flush-bus</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>auto-flush-bus</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="auto_flush_bus?-instance_method">
+  
+    #<strong>auto_flush_bus?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether or not to automatically flush all messages on the
+pipeline's bus when going from READY to NULL state. Please see
+gst_pipeline_set_auto_flush_bus() for more information on this option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>auto-flush-bus</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="bus-instance_method">
+  
+    #<strong>bus</strong>  &#x21d2; <tt><span class='object_link'><a href="Bus.html" title="Gst::Bus (class)">Gst::Bus</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the Gst::Bus of <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted -->. The bus allows applications to receive
+Gst::Message packets.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Bus.html" title="Gst::Bus (class)">Gst::Bus</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Bus, unref after usage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clock-instance_method">
+  
+    #<strong>clock</strong>  &#x21d2; <tt><span class='object_link'><a href="Clock.html" title="Gst::Clock (class)">Gst::Clock</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the current clock used by <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted -->. Users of object
+oriented languages should use gst_pipeline_get_pipeline_clock()
+to avoid confusion with gst_element_get_clock() which has a different behavior.</p>
+<p>Unlike gst_element_get_clock(), this function will always return a
+clock, even if the pipeline is not in the PLAYING state.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Clock.html" title="Gst::Clock (class)">Gst::Clock</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Clock, unref after usage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clock=-instance_method">
+  
+    #<strong>clock=</strong>(clock)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set the clock for <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted -->. The clock will be distributed
+to all the elements managed by the pipeline.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>clock</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Clock.html" title="Gst::Clock (class)">Gst::Clock</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the clock to set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the clock could be set on the pipeline. false if
+some element did not accept the clock.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="configured_latency-instance_method">
+  
+    #<strong>configured_latency</strong>  &#x21d2; <tt>Gst::ClockTime</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return the configured latency on <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted -->.
+because <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted --> did not reach the PLAYING state yet.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><!-- raw HTML omitted -->pipeline<!-- raw HTML omitted --> configured latency, or %GST_CLOCK_TIME_NONE if none has been configured</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delay-instance_method">
+  
+    #<strong>delay</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The expected delay needed for elements to spin up to the
+PLAYING state expressed in nanoseconds.
+see gst_pipeline_set_delay() for more information on this option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>delay</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delay=-instance_method">
+  
+    #<strong>delay=</strong>(delay)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The expected delay needed for elements to spin up to the
+PLAYING state expressed in nanoseconds.
+see gst_pipeline_set_delay() for more information on this option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>delay</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>delay</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>delay</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_live-instance_method">
+  
+    #<strong>is_live</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted --> is live.
+MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted --> is live, false if not or if it did not reach the PAUSED state yet.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="latency-instance_method">
+  
+    #<strong>latency</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Latency to configure on the pipeline. See gst_pipeline_set_latency().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>latency</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="latency=-instance_method">
+  
+    #<strong>latency=</strong>(latency)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Latency to configure on the pipeline. See gst_pipeline_set_latency().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>latency</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>latency</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>latency</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pipeline_clock-instance_method">
+  
+    #<strong>pipeline_clock</strong>  &#x21d2; <tt><span class='object_link'><a href="Clock.html" title="Gst::Clock (class)">Gst::Clock</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the current clock used by <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted -->.</p>
+<p>Unlike gst_element_get_clock(), this function will always return a
+clock, even if the pipeline is not in the PLAYING state.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Clock.html" title="Gst::Clock (class)">Gst::Clock</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Clock, unref after usage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="use_clock-instance_method">
+  
+    #<strong>use_clock</strong>(clock)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Force <!-- raw HTML omitted -->pipeline<!-- raw HTML omitted --> to use the given <!-- raw HTML omitted -->clock<!-- raw HTML omitted -->. The pipeline will
+always use the given clock even if new clock providers are added
+to this pipeline.</p>
+<p>If <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> is nil all clocking will be disabled which will make
+the pipeline run as fast as possible.</p>
+<p>MT safe.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>clock</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Clock.html" title="Gst::Clock (class)">Gst::Clock</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the clock to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

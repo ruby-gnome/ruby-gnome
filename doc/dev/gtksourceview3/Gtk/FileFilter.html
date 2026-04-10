@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::FileFilter
+  
+    &mdash; Ruby/GtkSourceView3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::FileFilter";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (F)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">FileFilter</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::FileFilter
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Filter.html" title="Gtk::Filter (class)">Filter</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="Filter.html" title="Gtk::Filter (class)">Filter</a></span></li>
+          
+            <li class="next">Gtk::FileFilter</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p><code>GtkFileFilter</code> filters files by name or mime type.</p>
+<p><code>GtkFileFilter</code> can be used to restrict the files being shown in a
+<code>GtkFileChooser</code>. Files can be filtered based on their name (with
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_pattern] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_suffix])
+or on their mime type (with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_mime_type]).</p>
+<p>Filtering by mime types handles aliasing and subclassing of mime
+types; e.g. a filter for text/plain also matches a file with mime
+type application/rtf, since application/rtf is a subclass of
+text/plain. Note that <code>GtkFileFilter</code> allows wildcards for the
+subtype of a mime type, so you can e.g. filter for image/*.</p>
+<p>Normally, file filters are used by adding them to a <code>GtkFileChooser</code>
+(see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooser.add_filter]), but it is also possible to
+manually use a file filter on any [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FilterListModel] containing
+<code>GFileInfo</code> objects.</p>
+<h1>GtkFileFilter as GtkBuildable</h1>
+<p>The <code>GtkFileFilter</code> implementation of the <code>GtkBuildable</code> interface
+supports adding rules using the <code>&lt;mime-types&gt;</code> and <code>&lt;patterns&gt;</code> and
+<code>&lt;suffixes&gt;</code> elements and listing the rules within. Specifying a
+<code>&lt;mime-type&gt;</code> or <code>&lt;pattern&gt;</code> or <code>&lt;suffix&gt;</code> has the same effect as
+as calling
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_mime_type] or
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_pattern] or
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_suffix].</p>
+<p>An example of a UI definition fragment specifying <code>GtkFileFilter</code>
+rules:</p>
+<pre class="code xml"><code class="xml">&lt;object class=&quot;GtkFileFilter&quot;&gt;
+  &lt;property name=&quot;name&quot; translatable=&quot;yes&quot;&gt;Text and Images&lt;/property&gt;
+  &lt;mime-types&gt;
+    &lt;mime-type&gt;text/plain&lt;/mime-type&gt;
+    &lt;mime-type&gt;image/ *&lt;/mime-type&gt;
+  &lt;/mime-types&gt;
+  &lt;patterns&gt;
+    &lt;pattern&gt;*.txt&lt;/pattern&gt;
+  &lt;/patterns&gt;
+  &lt;suffixes&gt;
+    &lt;suffix&gt;png&lt;/suffix&gt;
+  &lt;/suffixes&gt;
+&lt;/object&gt;
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_mime_type-instance_method" title="#add_mime_type (instance method)">#<strong>add_mime_type</strong>(mime_type)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a rule allowing a given mime type to <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_pattern-instance_method" title="#add_pattern (instance method)">#<strong>add_pattern</strong>(pattern)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a rule allowing a shell style glob to a filter.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_pixbuf_formats-instance_method" title="#add_pixbuf_formats (instance method)">#<strong>add_pixbuf_formats</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a rule allowing image files in the formats supported by GdkPixbuf.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_suffix-instance_method" title="#add_suffix (instance method)">#<strong>add_suffix</strong>(suffix)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a suffix match rule to a filter.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attributes-instance_method" title="#attributes (instance method)">#<strong>attributes</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the attributes that need to be filled in for the <code>GFileInfo</code> passed to this filter.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(variant)  &#x21d2; Gtk::FileFilter </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Deserialize a file filter from a <code>GVariant</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mime_types=-instance_method" title="#mime_types= (instance method)">#<strong>mime_types=</strong>(mime_types)  &#x21d2; Gtk:: </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The MIME types that this filter matches.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The human-readable name of the filter.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name=-instance_method" title="#name= (instance method)">#<strong>name=</strong>(name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The human-readable name of the filter.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#patterns=-instance_method" title="#patterns= (instance method)">#<strong>patterns=</strong>(patterns)  &#x21d2; Gtk:: </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The patterns that this filter matches.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#suffixes=-instance_method" title="#suffixes= (instance method)">#<strong>suffixes=</strong>(suffixes)  &#x21d2; Gtk:: </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The suffixes that this filter matches.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_gvariant-instance_method" title="#to_gvariant (instance method)">#<strong>to_gvariant</strong>  &#x21d2; GLib::Variant </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Serialize a file filter to an <code>a{sv}</code> variant.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Filter.html" title="Gtk::Filter (class)">Filter</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Filter.html#changed-instance_method" title="Gtk::Filter#changed (method)">#changed</a></span>, <span class='object_link'><a href="Filter.html#match-instance_method" title="Gtk::Filter#match (method)">#match</a></span>, <span class='object_link'><a href="Filter.html#strictness-instance_method" title="Gtk::Filter#strictness (method)">#strictness</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(variant)  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::FileFilter (class)">Gtk::FileFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Deserialize a file filter from a <code>GVariant</code>.</p>
+<p>The variant must be in the format produced by
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.to_gvariant].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>variant</span>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an <code>a{sv}</code> <code>GVariant</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_mime_type-instance_method">
+  
+    #<strong>add_mime_type</strong>(mime_type)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a rule allowing a given mime type to <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mime_type</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name of a MIME type</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_pattern-instance_method">
+  
+    #<strong>add_pattern</strong>(pattern)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a rule allowing a shell style glob to a filter.</p>
+<p>Note that it depends on the platform whether pattern
+matching ignores case or not. On Windows, it does, on
+other platforms, it doesn't.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pattern</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a shell style glob</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_pixbuf_formats-instance_method">
+  
+    #<strong>add_pixbuf_formats</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a rule allowing image files in the formats supported
+by GdkPixbuf.</p>
+<p>This is equivalent to calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_mime_type]
+for all the supported mime types.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_suffix-instance_method">
+  
+    #<strong>add_suffix</strong>(suffix)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a suffix match rule to a filter.</p>
+<p>This is similar to adding a match for the pattern
+&quot;*.<!-- raw HTML omitted -->suffix<!-- raw HTML omitted -->&quot;.</p>
+<p>In contrast to pattern matches, suffix matches
+are <em>always</em> case-insensitive.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>suffix</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>filename suffix to match</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="attributes-instance_method">
+  
+    #<strong>attributes</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the attributes that need to be filled in for the <code>GFileInfo</code>
+passed to this filter.</p>
+<p>This function will not typically be used by applications;
+it is intended principally for use in the implementation
+of <code>GtkFileChooser</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the attributes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mime_types=-instance_method">
+  
+    #<strong>mime_types=</strong>(mime_types)  &#x21d2; <tt><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk::</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The MIME types that this filter matches.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mime_types</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk::</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk::</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>mime-types</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The human-readable name of the filter.</p>
+<p>This is the string that will be displayed in the file chooser
+user interface if there is a selectable list of filters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name=-instance_method">
+  
+    #<strong>name=</strong>(name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The human-readable name of the filter.</p>
+<p>This is the string that will be displayed in the file chooser
+user interface if there is a selectable list of filters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="patterns=-instance_method">
+  
+    #<strong>patterns=</strong>(patterns)  &#x21d2; <tt><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk::</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The patterns that this filter matches.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>patterns</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk::</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk::</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>patterns</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="suffixes=-instance_method">
+  
+    #<strong>suffixes=</strong>(suffixes)  &#x21d2; <tt><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk::</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The suffixes that this filter matches.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>suffixes</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk::</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk::</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>suffixes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_gvariant-instance_method">
+  
+    #<strong>to_gvariant</strong>  &#x21d2; <tt>GLib::Variant</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Serialize a file filter to an <code>a{sv}</code> variant.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Variant</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new, floating, <code>GVariant</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

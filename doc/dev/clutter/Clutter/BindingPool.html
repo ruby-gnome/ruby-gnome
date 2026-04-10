@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Clutter::BindingPool
+  
+    &mdash; Ruby/Clutter
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Clutter::BindingPool";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter</a></span></span>
+     &raquo; 
+    <span class="title">BindingPool</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Clutter::BindingPool
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Clutter::BindingPool</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find-class_method" title="find (class method)">.<strong>find</strong>(name)  &#x21d2; Clutter::BindingPool </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Finds the Clutter::BindingPool with <!-- raw HTML omitted -->name<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_for_class-class_method" title="get_for_class (class method)">.<strong>get_for_class</strong>(klass)  &#x21d2; Clutter::BindingPool </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the Clutter::BindingPool for the given #GObject class and, eventually, creates it.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#activate-instance_method" title="#activate (instance method)">#<strong>activate</strong>(key_val, modifiers, gobject)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Activates the callback associated to the action that is bound to the <!-- raw HTML omitted -->key_val<!-- raw HTML omitted --> and <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> pair.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#block_action-instance_method" title="#block_action (instance method)">#<strong>block_action</strong>(action_name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Blocks all the actions with name <!-- raw HTML omitted -->action_name<!-- raw HTML omitted --> inside <!-- raw HTML omitted -->pool<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_action-instance_method" title="#find_action (instance method)">#<strong>find_action</strong>(key_val, modifiers)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the name of the action matching the given key symbol and modifiers bitmask.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(name)  &#x21d2; Clutter::BindingPool </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Clutter::BindingPool that can be used to store key bindings for an actor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#install_action-instance_method" title="#install_action (instance method)">#<strong>install_action</strong>(action_name, key_val, modifiers, callback, data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Installs a new action inside a Clutter::BindingPool.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#install_closure-instance_method" title="#install_closure (instance method)">#<strong>install_closure</strong>(action_name, key_val, modifiers, closure)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A #GClosure variant of clutter_binding_pool_install_action().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The unique name of the Clutter::BindingPool.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name=-instance_method" title="#name= (instance method)">#<strong>name=</strong>(name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The unique name of the Clutter::BindingPool.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#override_action-instance_method" title="#override_action (instance method)">#<strong>override_action</strong>(key_val, modifiers, callback, data, notify)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Allows overriding the action for <!-- raw HTML omitted -->key_val<!-- raw HTML omitted --> and <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> inside a Clutter::BindingPool.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#override_closure-instance_method" title="#override_closure (instance method)">#<strong>override_closure</strong>(key_val, modifiers, closure)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A #GClosure variant of clutter_binding_pool_override_action().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_action-instance_method" title="#remove_action (instance method)">#<strong>remove_action</strong>(key_val, modifiers)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes the action matching the given <!-- raw HTML omitted -->key_val<!-- raw HTML omitted -->, <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> pair, if any exists.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unblock_action-instance_method" title="#unblock_action (instance method)">#<strong>unblock_action</strong>(action_name)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Unblockes all the actions with name <!-- raw HTML omitted -->action_name<!-- raw HTML omitted --> inside <!-- raw HTML omitted -->pool<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(name)  &#x21d2; <tt><span class='object_link'><a href="" title="Clutter::BindingPool (class)">Clutter::BindingPool</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Clutter::BindingPool that can be used to store
+key bindings for an actor. The <!-- raw HTML omitted -->name<!-- raw HTML omitted --> must be a unique identifier
+for the binding pool, so that clutter_binding_pool_find() will
+be able to return the correct binding pool.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the binding pool</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="find-class_method">
+  
+    .<strong>find</strong>(name)  &#x21d2; <tt><span class='object_link'><a href="" title="Clutter::BindingPool (class)">Clutter::BindingPool</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Finds the Clutter::BindingPool with <!-- raw HTML omitted -->name<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the binding pool to find</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Clutter::BindingPool (class)">Clutter::BindingPool</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the Clutter::BindingPool, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_for_class-class_method">
+  
+    .<strong>get_for_class</strong>(klass)  &#x21d2; <tt><span class='object_link'><a href="" title="Clutter::BindingPool (class)">Clutter::BindingPool</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the Clutter::BindingPool for the given #GObject class
+and, eventually, creates it. This function is a wrapper around
+clutter_binding_pool_new() and uses the class type name as the
+unique name for the binding pool.</p>
+<p>Calling this function multiple times will return the same
+Clutter::BindingPool.</p>
+<p>A binding pool for a class can also be retrieved using
+clutter_binding_pool_find() with the class type name:</p>
+<p>|[
+pool = clutter_binding_pool_find (G_OBJECT_TYPE_NAME (instance));
+]|</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>klass</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a GObject::Class pointer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Clutter::BindingPool (class)">Clutter::BindingPool</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the binding pool for the given class.
+The returned Clutter::BindingPool is owned by Clutter and should not
+be freed directly</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="activate-instance_method">
+  
+    #<strong>activate</strong>(key_val, modifiers, gobject)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Activates the callback associated to the action that is
+bound to the <!-- raw HTML omitted -->key_val<!-- raw HTML omitted --> and <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> pair.</p>
+<p>The callback has the following signature:</p>
+<p>|[
+void (* callback) (GObject             *gobject,
+const gchar         *action_name,
+guint                key_val,
+ClutterModifierType  modifiers,
+gpointer             user_data);
+]|</p>
+<p>Where the #GObject instance is <!-- raw HTML omitted -->gobject<!-- raw HTML omitted --> and the user data
+is the one passed when installing the action with
+clutter_binding_pool_install_action().</p>
+<p>If the action bound to the <!-- raw HTML omitted -->key_val<!-- raw HTML omitted -->, <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> pair has been
+blocked using clutter_binding_pool_block_action(), the callback
+will not be invoked, and this function will return false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key_val</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the key symbol</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>modifiers</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ModifierType.html" title="Clutter::ModifierType (module)">Clutter::ModifierType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>bitmask for the modifiers</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>gobject</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GObject</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if an action was found and was activated</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="block_action-instance_method">
+  
+    #<strong>block_action</strong>(action_name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Blocks all the actions with name <!-- raw HTML omitted -->action_name<!-- raw HTML omitted --> inside <!-- raw HTML omitted -->pool<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an action name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="find_action-instance_method">
+  
+    #<strong>find_action</strong>(key_val, modifiers)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the name of the action matching the given key symbol
+and modifiers bitmask.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key_val</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a key symbol</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>modifiers</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ModifierType.html" title="Clutter::ModifierType (module)">Clutter::ModifierType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a bitmask for the modifiers</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the action, if found, or nil. The
+returned string is owned by the binding pool and should never
+be modified or freed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="install_action-instance_method">
+  
+    #<strong>install_action</strong>(action_name, key_val, modifiers, callback, data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Installs a new action inside a Clutter::BindingPool. The action
+is bound to <!-- raw HTML omitted -->key_val<!-- raw HTML omitted --> and <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted -->.</p>
+<p>The same action name can be used for multiple <!-- raw HTML omitted -->key_val<!-- raw HTML omitted -->, <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted -->
+pairs.</p>
+<p>When an action has been activated using clutter_binding_pool_activate()
+the passed <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked (with <!-- raw HTML omitted -->data<!-- raw HTML omitted -->).</p>
+<p>Actions can be blocked with clutter_binding_pool_block_action()
+and then unblocked using clutter_binding_pool_unblock_action().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the action</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>key_val</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>key symbol</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>modifiers</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ModifierType.html" title="Clutter::ModifierType (module)">Clutter::ModifierType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>bitmask of modifiers</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Clutter::BindingActionFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>function to be called
+when the action is activated</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>data to be passed to <!-- raw HTML omitted -->callback<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>function to be called when the action is removed
+from the pool</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="install_closure-instance_method">
+  
+    #<strong>install_closure</strong>(action_name, key_val, modifiers, closure)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A #GClosure variant of clutter_binding_pool_install_action().</p>
+<p>Installs a new action inside a Clutter::BindingPool. The action
+is bound to <!-- raw HTML omitted -->key_val<!-- raw HTML omitted --> and <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted -->.</p>
+<p>The same action name can be used for multiple <!-- raw HTML omitted -->key_val<!-- raw HTML omitted -->, <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted -->
+pairs.</p>
+<p>When an action has been activated using clutter_binding_pool_activate()
+the passed <!-- raw HTML omitted -->closure<!-- raw HTML omitted --> will be invoked.</p>
+<p>Actions can be blocked with clutter_binding_pool_block_action()
+and then unblocked using clutter_binding_pool_unblock_action().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the action</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>key_val</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>key symbol</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>modifiers</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ModifierType.html" title="Clutter::ModifierType (module)">Clutter::ModifierType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>bitmask of modifiers</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>closure</span>
+      
+      
+        <span class='type'>(<tt>GObject::Closure</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GClosure</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The unique name of the Clutter::BindingPool.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name=-instance_method">
+  
+    #<strong>name=</strong>(name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The unique name of the Clutter::BindingPool.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="override_action-instance_method">
+  
+    #<strong>override_action</strong>(key_val, modifiers, callback, data, notify)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Allows overriding the action for <!-- raw HTML omitted -->key_val<!-- raw HTML omitted --> and <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> inside a
+Clutter::BindingPool. See clutter_binding_pool_install_action().</p>
+<p>When an action has been activated using clutter_binding_pool_activate()
+the passed <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked (with <!-- raw HTML omitted -->data<!-- raw HTML omitted -->).</p>
+<p>Actions can be blocked with clutter_binding_pool_block_action()
+and then unblocked using clutter_binding_pool_unblock_action().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key_val</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>key symbol</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>modifiers</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ModifierType.html" title="Clutter::ModifierType (module)">Clutter::ModifierType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>bitmask of modifiers</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Clutter::BindingActionFunc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>function to be called when the action is activated</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>data to be passed to <!-- raw HTML omitted -->callback<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>notify</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>function to be called when the action is removed
+from the pool</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="override_closure-instance_method">
+  
+    #<strong>override_closure</strong>(key_val, modifiers, closure)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A #GClosure variant of clutter_binding_pool_override_action().</p>
+<p>Allows overriding the action for <!-- raw HTML omitted -->key_val<!-- raw HTML omitted --> and <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> inside a
+Clutter::BindingPool. See clutter_binding_pool_install_closure().</p>
+<p>When an action has been activated using clutter_binding_pool_activate()
+the passed <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked (with <!-- raw HTML omitted -->data<!-- raw HTML omitted -->).</p>
+<p>Actions can be blocked with clutter_binding_pool_block_action()
+and then unblocked using clutter_binding_pool_unblock_action().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key_val</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>key symbol</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>modifiers</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ModifierType.html" title="Clutter::ModifierType (module)">Clutter::ModifierType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>bitmask of modifiers</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>closure</span>
+      
+      
+        <span class='type'>(<tt>GObject::Closure</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GClosure</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_action-instance_method">
+  
+    #<strong>remove_action</strong>(key_val, modifiers)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes the action matching the given <!-- raw HTML omitted -->key_val<!-- raw HTML omitted -->, <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> pair,
+if any exists.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key_val</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a key symbol</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>modifiers</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ModifierType.html" title="Clutter::ModifierType (module)">Clutter::ModifierType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a bitmask for the modifiers</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unblock_action-instance_method">
+  
+    #<strong>unblock_action</strong>(action_name)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Unblockes all the actions with name <!-- raw HTML omitted -->action_name<!-- raw HTML omitted --> inside <!-- raw HTML omitted -->pool<!-- raw HTML omitted -->.</p>
+<p>Unblocking an action does not cause the callback bound to it to
+be invoked in case clutter_binding_pool_activate() was called on
+an action previously blocked with clutter_binding_pool_block_action().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an action name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

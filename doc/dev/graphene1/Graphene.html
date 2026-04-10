@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Graphene
+  
+    &mdash; Ruby/Graphene
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Graphene";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (G)</a> &raquo;
+    
+    
+    <span class="title">Graphene</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Graphene
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/graphene1/rect.rb<span class="defines">,<br />
+  lib/graphene1.rb,<br /> lib/graphene1/size.rb,<br /> lib/graphene1/vec2.rb,<br /> lib/graphene1/point.rb,<br /> lib/graphene1/loader.rb,<br /> lib/graphene1/version.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Copyright (C) 2025  Ruby-GNOME Project Team</p>
+<p>This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.</p>
+<p>This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.</p>
+<p>You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Graphene/EulerOrder.html" title="Graphene::EulerOrder (module)">EulerOrder</a></span>, <span class='object_link'><a href="Graphene/RayIntersectionKind.html" title="Graphene::RayIntersectionKind (module)">RayIntersectionKind</a></span>, <span class='object_link'><a href="Graphene/Version.html" title="Graphene::Version (module)">Version</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Graphene/Error.html" title="Graphene::Error (class)">Error</a></span>, <span class='object_link'><a href="Graphene/Loader.html" title="Graphene::Loader (class)">Loader</a></span>, <span class='object_link'><a href="Graphene/Point.html" title="Graphene::Point (class)">Point</a></span>, <span class='object_link'><a href="Graphene/Rect.html" title="Graphene::Rect (class)">Rect</a></span>, <span class='object_link'><a href="Graphene/Size.html" title="Graphene::Size (class)">Size</a></span>, <span class='object_link'><a href="Graphene/Vec2.html" title="Graphene::Vec2 (class)">Vec2</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="PI-constant" class="">PI =
+          
+        </dt>
+        <dd><pre class="code"><span class='float'>3.141593</span></pre></dd>
+      
+        <dt id="PI_2-constant" class="">PI_2 =
+          
+        </dt>
+        <dd><pre class="code"><span class='float'>1.570796</span></pre></dd>
+      
+        <dt id="VEC2_LEN-constant" class="">VEC2_LEN =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Evaluates to the number of components of a #graphene_vec2_t.</p>
+<p>This symbol is useful when declaring a C array of floating
+point values to be used with graphene_vec2_init_from_float() and
+graphene_vec2_to_float(), e.g.</p>
+<p>|[
+float v[GRAPHENE_VEC2_LEN];</p>
+<p>// vec is defined elsewhere
+graphene_vec2_to_float (&amp;vec, v);</p>
+<p>for (int i = 0; i &lt; GRAPHENE_VEC2_LEN; i++)
+fprintf (stdout, &quot;component %d: %g\n&quot;, i, v[i]);
+]|</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span></pre></dd>
+      
+        <dt id="VEC3_LEN-constant" class="">VEC3_LEN =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Evaluates to the number of components of a #graphene_vec3_t.</p>
+<p>This symbol is useful when declaring a C array of floating
+point values to be used with graphene_vec3_init_from_float() and
+graphene_vec3_to_float(), e.g.</p>
+<p>|[
+float v[GRAPHENE_VEC3_LEN];</p>
+<p>// vec is defined elsewhere
+graphene_vec3_to_float (&amp;vec, v);</p>
+<p>for (int i = 0; i &lt; GRAPHENE_VEC2_LEN; i++)
+fprintf (stdout, &quot;component %d: %g\n&quot;, i, v[i]);
+]|</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span></pre></dd>
+      
+        <dt id="VEC4_LEN-constant" class="">VEC4_LEN =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Evaluates to the number of components of a #graphene_vec4_t.</p>
+<p>This symbol is useful when declaring a C array of floating
+point values to be used with graphene_vec4_init_from_float() and
+graphene_vec4_to_float(), e.g.</p>
+<p>|[
+float v[GRAPHENE_VEC4_LEN];</p>
+<p>// vec is defined elsewhere
+graphene_vec4_to_float (&amp;vec, v);</p>
+<p>for (int i = 0; i &lt; GRAPHENE_VEC4_LEN; i++)
+fprintf (stdout, &quot;component %d: %g\n&quot;, i, v[i]);
+]|</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span></pre></dd>
+      
+        <dt id="LOG_DOMAIN-constant" class="">LOG_DOMAIN =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Graphene</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#box_empty-instance_method" title="#box_empty (instance method)">#<strong>box_empty</strong>  &#x21d2; Graphene::Box </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A degenerate #graphene_box_t that can only be expanded.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#box_infinite-instance_method" title="#box_infinite (instance method)">#<strong>box_infinite</strong>  &#x21d2; Graphene::Box </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A degenerate #graphene_box_t that cannot be expanded.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#box_minus_one-instance_method" title="#box_minus_one (instance method)">#<strong>box_minus_one</strong>  &#x21d2; Graphene::Box </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A #graphene_box_t with the minimum vertex set at (-1, -1, -1) and the maximum vertex set at (0, 0, 0).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#box_one-instance_method" title="#box_one (instance method)">#<strong>box_one</strong>  &#x21d2; Graphene::Box </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A #graphene_box_t with the minimum vertex set at (0, 0, 0) and the maximum vertex set at (1, 1, 1).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#box_one_minus_one-instance_method" title="#box_one_minus_one (instance method)">#<strong>box_one_minus_one</strong>  &#x21d2; Graphene::Box </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A #graphene_box_t with the minimum vertex set at (-1, -1, -1) and the maximum vertex set at (1, 1, 1).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#box_zero-instance_method" title="#box_zero (instance method)">#<strong>box_zero</strong>  &#x21d2; Graphene::Box </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A #graphene_box_t with both the minimum and maximum vertices set at (0, 0, 0).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#point3d_zero-instance_method" title="#point3d_zero (instance method)">#<strong>point3d_zero</strong>  &#x21d2; Graphene::Point3D </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a constant point with all three coordinates set to 0.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#point_zero-instance_method" title="#point_zero (instance method)">#<strong>point_zero</strong>  &#x21d2; Graphene::Point </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a point fixed at (0, 0).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rect_alloc-instance_method" title="#rect_alloc (instance method)">#<strong>rect_alloc</strong>  &#x21d2; Graphene::Rect </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Allocates a new #graphene_rect_t.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rect_zero-instance_method" title="#rect_zero (instance method)">#<strong>rect_zero</strong>  &#x21d2; Graphene::Rect </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a degenerate rectangle with origin fixed at (0, 0) and a size of 0, 0.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#size_zero-instance_method" title="#size_zero (instance method)">#<strong>size_zero</strong>  &#x21d2; Graphene::Size </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A constant pointer to a zero #graphene_size_t, useful for equality checks and interpolations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vec2_one-instance_method" title="#vec2_one (instance method)">#<strong>vec2_one</strong>  &#x21d2; Graphene::Vec2 </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a constant vector with (1, 1) components.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vec2_x_axis-instance_method" title="#vec2_x_axis (instance method)">#<strong>vec2_x_axis</strong>  &#x21d2; Graphene::Vec2 </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a constant vector with (1, 0) components.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vec2_y_axis-instance_method" title="#vec2_y_axis (instance method)">#<strong>vec2_y_axis</strong>  &#x21d2; Graphene::Vec2 </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a constant vector with (0, 1) components.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vec2_zero-instance_method" title="#vec2_zero (instance method)">#<strong>vec2_zero</strong>  &#x21d2; Graphene::Vec2 </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a constant vector with (0, 0) components.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vec3_one-instance_method" title="#vec3_one (instance method)">#<strong>vec3_one</strong>  &#x21d2; Graphene::Vec3 </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Provides a constant pointer to a vector with three components, all sets to 1.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vec3_x_axis-instance_method" title="#vec3_x_axis (instance method)">#<strong>vec3_x_axis</strong>  &#x21d2; Graphene::Vec3 </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Provides a constant pointer to a vector with three components with values set to (1, 0, 0).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vec3_y_axis-instance_method" title="#vec3_y_axis (instance method)">#<strong>vec3_y_axis</strong>  &#x21d2; Graphene::Vec3 </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Provides a constant pointer to a vector with three components with values set to (0, 1, 0).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vec3_z_axis-instance_method" title="#vec3_z_axis (instance method)">#<strong>vec3_z_axis</strong>  &#x21d2; Graphene::Vec3 </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Provides a constant pointer to a vector with three components with values set to (0, 0, 1).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vec3_zero-instance_method" title="#vec3_zero (instance method)">#<strong>vec3_zero</strong>  &#x21d2; Graphene::Vec3 </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Provides a constant pointer to a vector with three components, all sets to 0.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vec4_one-instance_method" title="#vec4_one (instance method)">#<strong>vec4_one</strong>  &#x21d2; Graphene::Vec4 </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a pointer to a #graphene_vec4_t with all its components set to 1.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vec4_w_axis-instance_method" title="#vec4_w_axis (instance method)">#<strong>vec4_w_axis</strong>  &#x21d2; Graphene::Vec4 </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a pointer to a #graphene_vec4_t with its components set to (0, 0, 0, 1).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vec4_x_axis-instance_method" title="#vec4_x_axis (instance method)">#<strong>vec4_x_axis</strong>  &#x21d2; Graphene::Vec4 </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a pointer to a #graphene_vec4_t with its components set to (1, 0, 0, 0).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vec4_y_axis-instance_method" title="#vec4_y_axis (instance method)">#<strong>vec4_y_axis</strong>  &#x21d2; Graphene::Vec4 </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a pointer to a #graphene_vec4_t with its components set to (0, 1, 0, 0).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vec4_z_axis-instance_method" title="#vec4_z_axis (instance method)">#<strong>vec4_z_axis</strong>  &#x21d2; Graphene::Vec4 </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a pointer to a #graphene_vec4_t with its components set to (0, 0, 1, 0).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vec4_zero-instance_method" title="#vec4_zero (instance method)">#<strong>vec4_zero</strong>  &#x21d2; Graphene::Vec4 </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a pointer to a #graphene_vec4_t with all its components set to 0.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="box_empty-instance_method">
+  
+    #<strong>box_empty</strong>  &#x21d2; <tt>Graphene::Box</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A degenerate #graphene_box_t that can only be expanded.</p>
+<p>The returned value is owned by Graphene and should not be modified or freed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Box</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #graphene_box_t</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="box_infinite-instance_method">
+  
+    #<strong>box_infinite</strong>  &#x21d2; <tt>Graphene::Box</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A degenerate #graphene_box_t that cannot be expanded.</p>
+<p>The returned value is owned by Graphene and should not be modified or freed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Box</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #graphene_box_t</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="box_minus_one-instance_method">
+  
+    #<strong>box_minus_one</strong>  &#x21d2; <tt>Graphene::Box</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A #graphene_box_t with the minimum vertex set at (-1, -1, -1) and the
+maximum vertex set at (0, 0, 0).</p>
+<p>The returned value is owned by Graphene and should not be modified or freed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Box</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #graphene_box_t</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="box_one-instance_method">
+  
+    #<strong>box_one</strong>  &#x21d2; <tt>Graphene::Box</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A #graphene_box_t with the minimum vertex set at (0, 0, 0) and the
+maximum vertex set at (1, 1, 1).</p>
+<p>The returned value is owned by Graphene and should not be modified or freed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Box</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #graphene_box_t</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="box_one_minus_one-instance_method">
+  
+    #<strong>box_one_minus_one</strong>  &#x21d2; <tt>Graphene::Box</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A #graphene_box_t with the minimum vertex set at (-1, -1, -1) and the
+maximum vertex set at (1, 1, 1).</p>
+<p>The returned value is owned by Graphene and should not be modified or freed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Box</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #graphene_box_t</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="box_zero-instance_method">
+  
+    #<strong>box_zero</strong>  &#x21d2; <tt>Graphene::Box</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A #graphene_box_t with both the minimum and maximum vertices set at (0, 0, 0).</p>
+<p>The returned value is owned by Graphene and should not be modified or freed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Box</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #graphene_box_t</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="point3d_zero-instance_method">
+  
+    #<strong>point3d_zero</strong>  &#x21d2; <tt>Graphene::Point3D</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a constant point with all three coordinates set to 0.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Point3D</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a zero point</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="point_zero-instance_method">
+  
+    #<strong>point_zero</strong>  &#x21d2; <tt><span class='object_link'><a href="Graphene/Point.html" title="Graphene::Point (class)">Graphene::Point</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a point fixed at (0, 0).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Graphene/Point.html" title="Graphene::Point (class)">Graphene::Point</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a fixed point</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rect_alloc-instance_method">
+  
+    #<strong>rect_alloc</strong>  &#x21d2; <tt><span class='object_link'><a href="Graphene/Rect.html" title="Graphene::Rect (class)">Graphene::Rect</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Allocates a new #graphene_rect_t.</p>
+<p>The contents of the returned rectangle are undefined.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Graphene/Rect.html" title="Graphene::Rect (class)">Graphene::Rect</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the newly allocated rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rect_zero-instance_method">
+  
+    #<strong>rect_zero</strong>  &#x21d2; <tt><span class='object_link'><a href="Graphene/Rect.html" title="Graphene::Rect (class)">Graphene::Rect</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a degenerate rectangle with origin fixed at (0, 0) and
+a size of 0, 0.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Graphene/Rect.html" title="Graphene::Rect (class)">Graphene::Rect</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a fixed rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="size_zero-instance_method">
+  
+    #<strong>size_zero</strong>  &#x21d2; <tt><span class='object_link'><a href="Graphene/Size.html" title="Graphene::Size (class)">Graphene::Size</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A constant pointer to a zero #graphene_size_t, useful for
+equality checks and interpolations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Graphene/Size.html" title="Graphene::Size (class)">Graphene::Size</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a constant size</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vec2_one-instance_method">
+  
+    #<strong>vec2_one</strong>  &#x21d2; <tt><span class='object_link'><a href="Graphene/Vec2.html" title="Graphene::Vec2 (class)">Graphene::Vec2</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a constant vector with (1, 1) components.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Graphene/Vec2.html" title="Graphene::Vec2 (class)">Graphene::Vec2</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the one vector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vec2_x_axis-instance_method">
+  
+    #<strong>vec2_x_axis</strong>  &#x21d2; <tt><span class='object_link'><a href="Graphene/Vec2.html" title="Graphene::Vec2 (class)">Graphene::Vec2</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a constant vector with (1, 0) components.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Graphene/Vec2.html" title="Graphene::Vec2 (class)">Graphene::Vec2</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the X axis vector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vec2_y_axis-instance_method">
+  
+    #<strong>vec2_y_axis</strong>  &#x21d2; <tt><span class='object_link'><a href="Graphene/Vec2.html" title="Graphene::Vec2 (class)">Graphene::Vec2</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a constant vector with (0, 1) components.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Graphene/Vec2.html" title="Graphene::Vec2 (class)">Graphene::Vec2</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Y axis vector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vec2_zero-instance_method">
+  
+    #<strong>vec2_zero</strong>  &#x21d2; <tt><span class='object_link'><a href="Graphene/Vec2.html" title="Graphene::Vec2 (class)">Graphene::Vec2</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a constant vector with (0, 0) components.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Graphene/Vec2.html" title="Graphene::Vec2 (class)">Graphene::Vec2</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the zero vector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vec3_one-instance_method">
+  
+    #<strong>vec3_one</strong>  &#x21d2; <tt>Graphene::Vec3</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Provides a constant pointer to a vector with three components,
+all sets to 1.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Vec3</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a constant vector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vec3_x_axis-instance_method">
+  
+    #<strong>vec3_x_axis</strong>  &#x21d2; <tt>Graphene::Vec3</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Provides a constant pointer to a vector with three components
+with values set to (1, 0, 0).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Vec3</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a constant vector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vec3_y_axis-instance_method">
+  
+    #<strong>vec3_y_axis</strong>  &#x21d2; <tt>Graphene::Vec3</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Provides a constant pointer to a vector with three components
+with values set to (0, 1, 0).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Vec3</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a constant vector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vec3_z_axis-instance_method">
+  
+    #<strong>vec3_z_axis</strong>  &#x21d2; <tt>Graphene::Vec3</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Provides a constant pointer to a vector with three components
+with values set to (0, 0, 1).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Vec3</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a constant vector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vec3_zero-instance_method">
+  
+    #<strong>vec3_zero</strong>  &#x21d2; <tt>Graphene::Vec3</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Provides a constant pointer to a vector with three components,
+all sets to 0.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Vec3</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a constant vector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vec4_one-instance_method">
+  
+    #<strong>vec4_one</strong>  &#x21d2; <tt>Graphene::Vec4</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a pointer to a #graphene_vec4_t with all its
+components set to 1.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Vec4</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a constant vector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vec4_w_axis-instance_method">
+  
+    #<strong>vec4_w_axis</strong>  &#x21d2; <tt>Graphene::Vec4</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a pointer to a #graphene_vec4_t with its
+components set to (0, 0, 0, 1).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Vec4</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a constant vector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vec4_x_axis-instance_method">
+  
+    #<strong>vec4_x_axis</strong>  &#x21d2; <tt>Graphene::Vec4</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a pointer to a #graphene_vec4_t with its
+components set to (1, 0, 0, 0).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Vec4</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a constant vector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vec4_y_axis-instance_method">
+  
+    #<strong>vec4_y_axis</strong>  &#x21d2; <tt>Graphene::Vec4</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a pointer to a #graphene_vec4_t with its
+components set to (0, 1, 0, 0).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Vec4</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a constant vector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vec4_z_axis-instance_method">
+  
+    #<strong>vec4_z_axis</strong>  &#x21d2; <tt>Graphene::Vec4</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a pointer to a #graphene_vec4_t with its
+components set to (0, 0, 1, 0).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Vec4</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a constant vector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vec4_zero-instance_method">
+  
+    #<strong>vec4_zero</strong>  &#x21d2; <tt>Graphene::Vec4</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a pointer to a #graphene_vec4_t with all its
+components set to 0.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Graphene::Vec4</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a constant vector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gio::VolumeMonitor
+  
+    &mdash; Ruby/GIO2
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gio::VolumeMonitor";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (V)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gio.html" title="Gio (module)">Gio</a></span></span>
+     &raquo; 
+    <span class="title">VolumeMonitor</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gio::VolumeMonitor
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gio::VolumeMonitor</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="NativeVolumeMonitor.html" title="Gio::NativeVolumeMonitor (class)">NativeVolumeMonitor</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#adopt_orphan_mount-class_method" title="adopt_orphan_mount (class method)">.<strong>adopt_orphan_mount</strong>(mount)  &#x21d2; Gio::Volume </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This function should be called by any GVolume::Monitor implementation when a new #GMount object is created that is not associated with a #GVolume object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get-class_method" title="get (class method)">.<strong>get</strong>  &#x21d2; Gio::VolumeMonitor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the volume monitor used by gio.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#connected_drives-instance_method" title="#connected_drives (instance method)">#<strong>connected_drives</strong>  &#x21d2; GLib::List&lt;Gio::Drive&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a list of drives connected to the system.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_mount_for_uuid-instance_method" title="#get_mount_for_uuid (instance method)">#<strong>get_mount_for_uuid</strong>(uuid)  &#x21d2; Gio::Mount </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Finds a #GMount object by its UUID (see g_mount_get_uuid()).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_volume_for_uuid-instance_method" title="#get_volume_for_uuid (instance method)">#<strong>get_volume_for_uuid</strong>(uuid)  &#x21d2; Gio::Volume </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Finds a #GVolume object by its UUID (see g_volume_get_uuid()).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mounts-instance_method" title="#mounts (instance method)">#<strong>mounts</strong>  &#x21d2; GLib::List&lt;Gio::Mount&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a list of the mounts on the system.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#volumes-instance_method" title="#volumes (instance method)">#<strong>volumes</strong>  &#x21d2; GLib::List&lt;Gio::Volume&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a list of the volumes on the system.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="adopt_orphan_mount-class_method">
+  
+    .<strong>adopt_orphan_mount</strong>(mount)  &#x21d2; <tt><span class='object_link'><a href="Volume.html" title="Gio::Volume (module)">Gio::Volume</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This function should be called by any GVolume::Monitor
+implementation when a new #GMount object is created that is not
+associated with a #GVolume object. It must be called just before
+emitting the <!-- raw HTML omitted -->mount_added<!-- raw HTML omitted --> signal.</p>
+<p>If the return value is not nil, the caller must associate the
+returned #GVolume object with the #GMount. This involves returning
+it in its g_mount_get_volume() implementation. The caller must
+also listen for the &quot;removed&quot; signal on the returned object
+and give up its reference when handling that signal</p>
+<p>Similarly, if implementing g_volume_monitor_adopt_orphan_mount(),
+the implementor must take a reference to <!-- raw HTML omitted -->mount<!-- raw HTML omitted --> and return it in
+its g_volume_get_mount() implemented. Also, the implementor must
+listen for the &quot;unmounted&quot; signal on <!-- raw HTML omitted -->mount<!-- raw HTML omitted --> and give up its
+reference upon handling that signal.</p>
+<p>There are two main use cases for this function.</p>
+<p>One is when implementing a user space file system driver that reads
+blocks of a block device that is already represented by the native
+volume monitor (for example a CD Audio file system driver). Such
+a driver will generate its own #GMount object that needs to be
+associated with the #GVolume object that represents the volume.</p>
+<p>The other is for implementing a GVolume::Monitor whose sole purpose
+is to return #GVolume objects representing entries in the users
+&quot;favorite servers&quot; list or similar.
+if no wants to adopt the #GMount.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mount</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Mount.html" title="Gio::Mount (module)">Gio::Mount</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GMount object to find a parent for</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Volume.html" title="Gio::Volume (module)">Gio::Volume</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the #GVolume object that is the parent for <!-- raw HTML omitted -->mount<!-- raw HTML omitted --> or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get-class_method">
+  
+    .<strong>get</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gio::VolumeMonitor (class)">Gio::VolumeMonitor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the volume monitor used by gio.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::VolumeMonitor (class)">Gio::VolumeMonitor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a reference to the GVolume::Monitor used by gio. Call
+g_object_unref() when done with it.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="connected_drives-instance_method">
+  
+    #<strong>connected_drives</strong>  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="Drive.html" title="Gio::Drive (module)">Gio::Drive</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a list of drives connected to the system.</p>
+<p>The returned list should be freed with g_list_free(), after
+its elements have been unreffed with g_object_unref().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="Drive.html" title="Gio::Drive (module)">Gio::Drive</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GList of connected #GDrive objects.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_mount_for_uuid-instance_method">
+  
+    #<strong>get_mount_for_uuid</strong>(uuid)  &#x21d2; <tt><span class='object_link'><a href="Mount.html" title="Gio::Mount (module)">Gio::Mount</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Finds a #GMount object by its UUID (see g_mount_get_uuid())</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uuid</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the UUID to look for</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Mount.html" title="Gio::Mount (module)">Gio::Mount</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GMount or nil if no such mount is available.
+Free the returned object with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_volume_for_uuid-instance_method">
+  
+    #<strong>get_volume_for_uuid</strong>(uuid)  &#x21d2; <tt><span class='object_link'><a href="Volume.html" title="Gio::Volume (module)">Gio::Volume</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Finds a #GVolume object by its UUID (see g_volume_get_uuid())</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uuid</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the UUID to look for</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Volume.html" title="Gio::Volume (module)">Gio::Volume</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GVolume or nil if no such volume is available.
+Free the returned object with g_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mounts-instance_method">
+  
+    #<strong>mounts</strong>  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="Mount.html" title="Gio::Mount (module)">Gio::Mount</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a list of the mounts on the system.</p>
+<p>The returned list should be freed with g_list_free(), after
+its elements have been unreffed with g_object_unref().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="Mount.html" title="Gio::Mount (module)">Gio::Mount</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GList of #GMount objects.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="volumes-instance_method">
+  
+    #<strong>volumes</strong>  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="Volume.html" title="Gio::Volume (module)">Gio::Volume</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a list of the volumes on the system.</p>
+<p>The returned list should be freed with g_list_free(), after
+its elements have been unreffed with g_object_unref().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="Volume.html" title="Gio::Volume (module)">Gio::Volume</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GList of #GVolume objects.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

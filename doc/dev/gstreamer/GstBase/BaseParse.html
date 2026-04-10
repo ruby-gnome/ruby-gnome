@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GstBase::BaseParse
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GstBase::BaseParse";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GstBase.html" title="GstBase (module)">GstBase</a></span></span>
+     &raquo; 
+    <span class="title">BaseParse</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GstBase::BaseParse
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="../Gst/Element.html" title="Gst::Element (class)">Gst::Element</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="../Gst/Element.html" title="Gst::Element (class)">Gst::Element</a></span></li>
+          
+            <li class="next">GstBase::BaseParse</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Subclasses can override any of the available virtual methods or not, as
+needed. At minimum <!-- raw HTML omitted -->handle_frame<!-- raw HTML omitted --> needs to be overridden.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_index_entry-instance_method" title="#add_index_entry (instance method)">#<strong>add_index_entry</strong>(offset, ts, key, force)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds an entry to the index associating <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> to <!-- raw HTML omitted -->ts<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#average_bitrate=-instance_method" title="#average_bitrate= (instance method)">#<strong>average_bitrate=</strong>(bitrate)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optionally sets the average bitrate detected in media (if non-zero), e.g.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#convert_default-instance_method" title="#convert_default (instance method)">#<strong>convert_default</strong>(src_format, src_value, dest_format, dest_value)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Default implementation of Gst::BaseParseClass::convert.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#disable_passthrough=-instance_method" title="#disable_passthrough= (instance method)">#<strong>disable_passthrough=</strong>(disable_passthrough)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If set to true, baseparse will unconditionally force parsing of the incoming data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#disable_passthrough%3F-instance_method" title="#disable_passthrough? (instance method)">#<strong>disable_passthrough?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If set to true, baseparse will unconditionally force parsing of the incoming data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#drain-instance_method" title="#drain (instance method)">#<strong>drain</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Drains the adapter until it is empty.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#finish_frame-instance_method" title="#finish_frame (instance method)">#<strong>finish_frame</strong>(frame, size)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Collects parsed data and pushes it downstream.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_timing_info=-instance_method" title="#has_timing_info= (instance method)">#<strong>has_timing_info=</strong>(has_timing)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set if frames carry timing information which the subclass can (generally) parse and provide.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#infer_ts=-instance_method" title="#infer_ts= (instance method)">#<strong>infer_ts=</strong>(infer_ts)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>By default, the base class might try to infer PTS from DTS and vice versa.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#merge_tags-instance_method" title="#merge_tags (instance method)">#<strong>merge_tags</strong>(tags, mode)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the parser subclass's tags and how they should be merged with any upstream stream tags.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#min_frame_size=-instance_method" title="#min_frame_size= (instance method)">#<strong>min_frame_size=</strong>(min_size)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Subclass can use this function to tell the base class that it needs to be given buffers of at least <!-- raw HTML omitted -->min_size<!-- raw HTML omitted --> bytes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#passthrough=-instance_method" title="#passthrough= (instance method)">#<strong>passthrough=</strong>(passthrough)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set if the nature of the format or configuration does not allow (much) parsing, and the parser should operate in passthrough mode (which only applies when operating in push mode).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pts_interpolation=-instance_method" title="#pts_interpolation= (instance method)">#<strong>pts_interpolation=</strong>(pts_interpolate)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>By default, the base class will guess PTS timestamps using a simple interpolation (previous timestamp + duration), which is incorrect for data streams with reordering, where PTS can go backward.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_frame-instance_method" title="#push_frame (instance method)">#<strong>push_frame</strong>(frame)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Pushes the frame's buffer downstream, sends any pending events and does some timestamp and segment handling.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_duration-instance_method" title="#set_duration (instance method)">#<strong>set_duration</strong>(fmt, duration, interval)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the duration of the currently playing media.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_frame_rate-instance_method" title="#set_frame_rate (instance method)">#<strong>set_frame_rate</strong>(fps_num, fps_den, lead_in, lead_out)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If frames per second is configured, parser can take care of buffer duration and timestamping.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_latency-instance_method" title="#set_latency (instance method)">#<strong>set_latency</strong>(min_latency, max_latency)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the minimum and maximum (which may likely be equal) latency introduced by the parsing process.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#syncable=-instance_method" title="#syncable= (instance method)">#<strong>syncable=</strong>(syncable)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set if frame starts can be identified.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ts_at_offset=-instance_method" title="#ts_at_offset= (instance method)">#<strong>ts_at_offset=</strong>(offset)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This function should only be called from a <!-- raw HTML omitted -->handle_frame<!-- raw HTML omitted --> implementation.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gst/Element.html" title="Gst::Element (class)">Gst::Element</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Gst/Element.html#>>-instance_method" title="Gst::Element#&gt;&gt; (method)">#>></a></span>, <span class='object_link'><a href="../Gst/Element.html#[]-class_method" title="Gst::Element.[] (method)">[]</a></span>, <span class='object_link'><a href="../Gst/Element.html#abort_state-instance_method" title="Gst::Element#abort_state (method)">#abort_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_metadata-instance_method" title="Gst::Element#add_metadata (method)">#add_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_pad-instance_method" title="Gst::Element#add_pad (method)">#add_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_pad_template-instance_method" title="Gst::Element#add_pad_template (method)">#add_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_property_deep_notify_watch-instance_method" title="Gst::Element#add_property_deep_notify_watch (method)">#add_property_deep_notify_watch</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_property_notify_watch-instance_method" title="Gst::Element#add_property_notify_watch (method)">#add_property_notify_watch</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_static_metadata-instance_method" title="Gst::Element#add_static_metadata (method)">#add_static_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_static_pad_template-instance_method" title="Gst::Element#add_static_pad_template (method)">#add_static_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_static_pad_template_with_gtype-instance_method" title="Gst::Element#add_static_pad_template_with_gtype (method)">#add_static_pad_template_with_gtype</a></span>, <span class='object_link'><a href="../Gst/Element.html#base_time-instance_method" title="Gst::Element#base_time (method)">#base_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#base_time=-instance_method" title="Gst::Element#base_time= (method)">#base_time=</a></span>, <span class='object_link'><a href="../Gst/Element.html#bus-instance_method" title="Gst::Element#bus (method)">#bus</a></span>, <span class='object_link'><a href="../Gst/Element.html#bus=-instance_method" title="Gst::Element#bus= (method)">#bus=</a></span>, <span class='object_link'><a href="../Gst/Element.html#call_async-instance_method" title="Gst::Element#call_async (method)">#call_async</a></span>, <span class='object_link'><a href="../Gst/Element.html#change_state-instance_method" title="Gst::Element#change_state (method)">#change_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#clock-instance_method" title="Gst::Element#clock (method)">#clock</a></span>, <span class='object_link'><a href="../Gst/Element.html#clock=-instance_method" title="Gst::Element#clock= (method)">#clock=</a></span>, <span class='object_link'><a href="../Gst/Element.html#context=-instance_method" title="Gst::Element#context= (method)">#context=</a></span>, <span class='object_link'><a href="../Gst/Element.html#contexts-instance_method" title="Gst::Element#contexts (method)">#contexts</a></span>, <span class='object_link'><a href="../Gst/Element.html#continue_state-instance_method" title="Gst::Element#continue_state (method)">#continue_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#create_all_pads-instance_method" title="Gst::Element#create_all_pads (method)">#create_all_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#current_clock_time-instance_method" title="Gst::Element#current_clock_time (method)">#current_clock_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#current_running_time-instance_method" title="Gst::Element#current_running_time (method)">#current_running_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#decorate_stream_id-instance_method" title="Gst::Element#decorate_stream_id (method)">#decorate_stream_id</a></span>, <span class='object_link'><a href="../Gst/Element.html#decorate_stream_id_printf-instance_method" title="Gst::Element#decorate_stream_id_printf (method)">#decorate_stream_id_printf</a></span>, <span class='object_link'><a href="../Gst/Element.html#decorate_stream_id_printf_valist-instance_method" title="Gst::Element#decorate_stream_id_printf_valist (method)">#decorate_stream_id_printf_valist</a></span>, <span class='object_link'><a href="../Gst/Element.html#factory-instance_method" title="Gst::Element#factory (method)">#factory</a></span>, <span class='object_link'><a href="../Gst/Element.html#flags-instance_method" title="Gst::Element#flags (method)">#flags</a></span>, <span class='object_link'><a href="../Gst/Element.html#flags_raw-instance_method" title="Gst::Element#flags_raw (method)">#flags_raw</a></span>, <span class='object_link'><a href="../Gst/Element.html#foreach_pad-instance_method" title="Gst::Element#foreach_pad (method)">#foreach_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#foreach_sink_pad-instance_method" title="Gst::Element#foreach_sink_pad (method)">#foreach_sink_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#foreach_src_pad-instance_method" title="Gst::Element#foreach_src_pad (method)">#foreach_src_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_compatible_pad-instance_method" title="Gst::Element#get_compatible_pad (method)">#get_compatible_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_compatible_pad_template-instance_method" title="Gst::Element#get_compatible_pad_template (method)">#get_compatible_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_context-instance_method" title="Gst::Element#get_context (method)">#get_context</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_context_unlocked-instance_method" title="Gst::Element#get_context_unlocked (method)">#get_context_unlocked</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_metadata-instance_method" title="Gst::Element#get_metadata (method)">#get_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_pad_template-instance_method" title="Gst::Element#get_pad_template (method)">#get_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_request_pad-instance_method" title="Gst::Element#get_request_pad (method)">#get_request_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_state-instance_method" title="Gst::Element#get_state (method)">#get_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_static_pad-instance_method" title="Gst::Element#get_static_pad (method)">#get_static_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#is_locked_state-instance_method" title="Gst::Element#is_locked_state (method)">#is_locked_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#iterate_pads-instance_method" title="Gst::Element#iterate_pads (method)">#iterate_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#iterate_sink_pads-instance_method" title="Gst::Element#iterate_sink_pads (method)">#iterate_sink_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#iterate_src_pads-instance_method" title="Gst::Element#iterate_src_pads (method)">#iterate_src_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_elements-instance_method" title="Gst::Element#link_elements (method)">#link_elements</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_filtered-instance_method" title="Gst::Element#link_filtered (method)">#link_filtered</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_many-instance_method" title="Gst::Element#link_many (method)">#link_many</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_pads-instance_method" title="Gst::Element#link_pads (method)">#link_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_pads_filtered-instance_method" title="Gst::Element#link_pads_filtered (method)">#link_pads_filtered</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_pads_full-instance_method" title="Gst::Element#link_pads_full (method)">#link_pads_full</a></span>, <span class='object_link'><a href="../Gst/Element.html#locked_state=-instance_method" title="Gst::Element#locked_state= (method)">#locked_state=</a></span>, <span class='object_link'><a href="../Gst/Element.html#lost_state-instance_method" title="Gst::Element#lost_state (method)">#lost_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#make_from_uri-class_method" title="Gst::Element.make_from_uri (method)">make_from_uri</a></span>, <span class='object_link'><a href="../Gst/Element.html#message_full-instance_method" title="Gst::Element#message_full (method)">#message_full</a></span>, <span class='object_link'><a href="../Gst/Element.html#message_full_with_details-instance_method" title="Gst::Element#message_full_with_details (method)">#message_full_with_details</a></span>, <span class='object_link'><a href="../Gst/Element.html#no_more_pads-instance_method" title="Gst::Element#no_more_pads (method)">#no_more_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#pad_template_list-instance_method" title="Gst::Element#pad_template_list (method)">#pad_template_list</a></span>, <span class='object_link'><a href="../Gst/Element.html#pause-instance_method" title="Gst::Element#pause (method)">#pause</a></span>, <span class='object_link'><a href="../Gst/Element.html#play-instance_method" title="Gst::Element#play (method)">#play</a></span>, <span class='object_link'><a href="../Gst/Element.html#post_message-instance_method" title="Gst::Element#post_message (method)">#post_message</a></span>, <span class='object_link'><a href="../Gst/Element.html#provide_clock-instance_method" title="Gst::Element#provide_clock (method)">#provide_clock</a></span>, <span class='object_link'><a href="../Gst/Element.html#query-instance_method" title="Gst::Element#query (method)">#query</a></span>, <span class='object_link'><a href="../Gst/Element.html#query_convert-instance_method" title="Gst::Element#query_convert (method)">#query_convert</a></span>, <span class='object_link'><a href="../Gst/Element.html#query_duration-instance_method" title="Gst::Element#query_duration (method)">#query_duration</a></span>, <span class='object_link'><a href="../Gst/Element.html#query_position-instance_method" title="Gst::Element#query_position (method)">#query_position</a></span>, <span class='object_link'><a href="../Gst/Element.html#ready-instance_method" title="Gst::Element#ready (method)">#ready</a></span>, <span class='object_link'><a href="../Gst/Element.html#register-class_method" title="Gst::Element.register (method)">register</a></span>, <span class='object_link'><a href="../Gst/Element.html#release_request_pad-instance_method" title="Gst::Element#release_request_pad (method)">#release_request_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#remove_pad-instance_method" title="Gst::Element#remove_pad (method)">#remove_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#remove_property_notify_watch-instance_method" title="Gst::Element#remove_property_notify_watch (method)">#remove_property_notify_watch</a></span>, <span class='object_link'><a href="../Gst/Element.html#request_pad-instance_method" title="Gst::Element#request_pad (method)">#request_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#request_pad_simple-instance_method" title="Gst::Element#request_pad_simple (method)">#request_pad_simple</a></span>, <span class='object_link'><a href="../Gst/Element.html#seek-instance_method" title="Gst::Element#seek (method)">#seek</a></span>, <span class='object_link'><a href="../Gst/Element.html#seek_simple-instance_method" title="Gst::Element#seek_simple (method)">#seek_simple</a></span>, <span class='object_link'><a href="../Gst/Element.html#send_event-instance_method" title="Gst::Element#send_event (method)">#send_event</a></span>, <span class='object_link'><a href="../Gst/Element.html#set_metadata-instance_method" title="Gst::Element#set_metadata (method)">#set_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#set_static_metadata-instance_method" title="Gst::Element#set_static_metadata (method)">#set_static_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#start_time-instance_method" title="Gst::Element#start_time (method)">#start_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#start_time=-instance_method" title="Gst::Element#start_time= (method)">#start_time=</a></span>, <span class='object_link'><a href="../Gst/Element.html#state=-instance_method" title="Gst::Element#state= (method)">#state=</a></span>, <span class='object_link'><a href="../Gst/Element.html#state_change_return_get_name-class_method" title="Gst::Element.state_change_return_get_name (method)">state_change_return_get_name</a></span>, <span class='object_link'><a href="../Gst/Element.html#state_get_name-class_method" title="Gst::Element.state_get_name (method)">state_get_name</a></span>, <span class='object_link'><a href="../Gst/Element.html#stop-instance_method" title="Gst::Element#stop (method)">#stop</a></span>, <span class='object_link'><a href="../Gst/Element.html#sync_state_with_parent-instance_method" title="Gst::Element#sync_state_with_parent (method)">#sync_state_with_parent</a></span>, <span class='object_link'><a href="../Gst/Element.html#type_set_skip_documentation-class_method" title="Gst::Element.type_set_skip_documentation (method)">type_set_skip_documentation</a></span>, <span class='object_link'><a href="../Gst/Element.html#unlink-instance_method" title="Gst::Element#unlink (method)">#unlink</a></span>, <span class='object_link'><a href="../Gst/Element.html#unlink_many-instance_method" title="Gst::Element#unlink_many (method)">#unlink_many</a></span>, <span class='object_link'><a href="../Gst/Element.html#unlink_pads-instance_method" title="Gst::Element#unlink_pads (method)">#unlink_pads</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Gst/Object.html#add_control_binding-instance_method" title="Gst::Object#add_control_binding (method)">#add_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#check_uniqueness-class_method" title="Gst::Object.check_uniqueness (method)">check_uniqueness</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_bindings_disabled=-instance_method" title="Gst::Object#control_bindings_disabled= (method)">#control_bindings_disabled=</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate-instance_method" title="Gst::Object#control_rate (method)">#control_rate</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate=-instance_method" title="Gst::Object#control_rate= (method)">#control_rate=</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_deep_notify-class_method" title="Gst::Object.default_deep_notify (method)">default_deep_notify</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_error-instance_method" title="Gst::Object#default_error (method)">#default_error</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_control_binding-instance_method" title="Gst::Object#get_control_binding (method)">#get_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_g_value_array-instance_method" title="Gst::Object#get_g_value_array (method)">#get_g_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value-instance_method" title="Gst::Object#get_value (method)">#get_value</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value_array-instance_method" title="Gst::Object#get_value_array (method)">#get_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_active_control_bindings-instance_method" title="Gst::Object#has_active_control_bindings (method)">#has_active_control_bindings</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_ancestor-instance_method" title="Gst::Object#has_ancestor (method)">#has_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_ancestor-instance_method" title="Gst::Object#has_as_ancestor (method)">#has_as_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_parent-instance_method" title="Gst::Object#has_as_parent (method)">#has_as_parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#name-instance_method" title="Gst::Object#name (method)">#name</a></span>, <span class='object_link'><a href="../Gst/Object.html#name=-instance_method" title="Gst::Object#name= (method)">#name=</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent-instance_method" title="Gst::Object#parent (method)">#parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent=-instance_method" title="Gst::Object#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="../Gst/Object.html#path_string-instance_method" title="Gst::Object#path_string (method)">#path_string</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref-instance_method" title="Gst::Object#ref (method)">#ref</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref_sink-class_method" title="Gst::Object.ref_sink (method)">ref_sink</a></span>, <span class='object_link'><a href="../Gst/Object.html#remove_control_binding-instance_method" title="Gst::Object#remove_control_binding (method)">#remove_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#replace-class_method" title="Gst::Object.replace (method)">replace</a></span>, <span class='object_link'><a href="../Gst/Object.html#set_control_binding_disabled-instance_method" title="Gst::Object#set_control_binding_disabled (method)">#set_control_binding_disabled</a></span>, <span class='object_link'><a href="../Gst/Object.html#suggest_next_sync-instance_method" title="Gst::Object#suggest_next_sync (method)">#suggest_next_sync</a></span>, <span class='object_link'><a href="../Gst/Object.html#sync_values-instance_method" title="Gst::Object#sync_values (method)">#sync_values</a></span>, <span class='object_link'><a href="../Gst/Object.html#unparent-instance_method" title="Gst::Object#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="../Gst/Object.html#unref-instance_method" title="Gst::Object#unref (method)">#unref</a></span></p>
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_index_entry-instance_method">
+  
+    #<strong>add_index_entry</strong>(offset, ts, key, force)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds an entry to the index associating <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> to <!-- raw HTML omitted -->ts<!-- raw HTML omitted -->.  It is recommended
+to only add keyframe entries.  <!-- raw HTML omitted -->force<!-- raw HTML omitted --> allows to bypass checks, such as
+whether the stream is (upstream) seekable, another entry is already &quot;close&quot;
+to the new entry, etc.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>offset of entry</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ts</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>timestamp associated with offset</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether entry refers to keyframe</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>force</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>add entry disregarding sanity checks</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>#gboolean indicating whether entry was added</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="average_bitrate=-instance_method">
+  
+    #<strong>average_bitrate=</strong>(bitrate)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Optionally sets the average bitrate detected in media (if non-zero),
+e.g. based on metadata, as it will be posted to the application.</p>
+<p>By default, announced average bitrate is estimated. The average bitrate
+is used to estimate the total duration of the stream and to estimate
+a seek position, if there's no index and the format is syncable
+(see gst_base_parse_set_syncable()).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bitrate</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>average bitrate in bits/second</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="convert_default-instance_method">
+  
+    #<strong>convert_default</strong>(src_format, src_value, dest_format, dest_value)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Default implementation of Gst::BaseParseClass::convert.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>src_format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/Format.html" title="Gst::Format (module)">Gst::Format</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gst::Format describing the source format.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>src_value</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Source value to be converted.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dest_format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/Format.html" title="Gst::Format (module)">Gst::Format</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gst::Format defining the converted format.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dest_value</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Pointer where the conversion result will be put.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if conversion was successful.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="disable_passthrough=-instance_method">
+  
+    #<strong>disable_passthrough=</strong>(disable_passthrough)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If set to true, baseparse will unconditionally force parsing of the
+incoming data. This can be required in the rare cases where the incoming
+side-data (caps, pts, dts, ...) is not trusted by the user and wants to
+force validation and parsing of the incoming data.
+If set to false, decision of whether to parse the data or not is up to
+the implementation (standard behaviour).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>disable_passthrough</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>disable-passthrough</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>disable-passthrough</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="disable_passthrough?-instance_method">
+  
+    #<strong>disable_passthrough?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If set to true, baseparse will unconditionally force parsing of the
+incoming data. This can be required in the rare cases where the incoming
+side-data (caps, pts, dts, ...) is not trusted by the user and wants to
+force validation and parsing of the incoming data.
+If set to false, decision of whether to parse the data or not is up to
+the implementation (standard behaviour).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>disable-passthrough</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="drain-instance_method">
+  
+    #<strong>drain</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Drains the adapter until it is empty. It decreases the min_frame_size to
+match the current adapter size and calls chain method until the adapter
+is emptied or chain returns with error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="finish_frame-instance_method">
+  
+    #<strong>finish_frame</strong>(frame, size)  &#x21d2; <tt><span class='object_link'><a href="../Gst/FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Collects parsed data and pushes it downstream.
+Source pad caps must be set when this is called.</p>
+<p>If <!-- raw HTML omitted -->frame<!-- raw HTML omitted -->'s out_buffer is set, that will be used as subsequent frame data,
+and <!-- raw HTML omitted -->size<!-- raw HTML omitted --> amount will be flushed from the input data. The output_buffer size
+can differ from the consumed size indicated by <!-- raw HTML omitted -->size<!-- raw HTML omitted -->.</p>
+<p>Otherwise, <!-- raw HTML omitted -->size<!-- raw HTML omitted --> samples will be taken from the input and used for output,
+and the output's metadata (timestamps etc) will be taken as (optionally)
+set by the subclass on <!-- raw HTML omitted -->frame<!-- raw HTML omitted -->'s (input) buffer (which is otherwise
+ignored for any but the above purpose/information).</p>
+<p>Note that the latter buffer is invalidated by this call, whereas the
+caller retains ownership of <!-- raw HTML omitted -->frame<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>frame</span>
+      
+      
+        <span class='type'>(<tt>GstBase::BaseParseFrame</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::BaseParseFrame</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>consumed input data represented by frame</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::FlowReturn that should be escalated to caller (of caller)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_timing_info=-instance_method">
+  
+    #<strong>has_timing_info=</strong>(has_timing)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set if frames carry timing information which the subclass can (generally)
+parse and provide.  In particular, intrinsic (rather than estimated) time
+can be obtained following a seek.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>has_timing</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether frames carry timing information</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="infer_ts=-instance_method">
+  
+    #<strong>infer_ts=</strong>(infer_ts)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>By default, the base class might try to infer PTS from DTS and vice
+versa.  While this is generally correct for audio data, it may not
+be otherwise. Sub-classes implementing such formats should disable
+timestamp inferring.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>infer_ts</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if parser should infer DTS/PTS from each other</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="merge_tags-instance_method">
+  
+    #<strong>merge_tags</strong>(tags, mode)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the parser subclass's tags and how they should be merged with any
+upstream stream tags. This will override any tags previously-set
+with gst_base_parse_merge_tags().</p>
+<p>Note that this is provided for convenience, and the subclass is
+not required to use this and can still do tag handling on its own.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/TagList.html" title="Gst::TagList (class)">Gst::TagList</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::TagList to merge, or NULL to unset
+previously-set tags</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/TagMergeMode.html" title="Gst::TagMergeMode (module)">Gst::TagMergeMode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::TagMergeMode to use, usually #GST_TAG_MERGE_REPLACE</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="min_frame_size=-instance_method">
+  
+    #<strong>min_frame_size=</strong>(min_size)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Subclass can use this function to tell the base class that it needs to
+be given buffers of at least <!-- raw HTML omitted -->min_size<!-- raw HTML omitted --> bytes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>min_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Minimum size in bytes of the data that this base class should
+give to subclass.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="passthrough=-instance_method">
+  
+    #<strong>passthrough=</strong>(passthrough)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set if the nature of the format or configuration does not allow (much)
+parsing, and the parser should operate in passthrough mode (which only
+applies when operating in push mode). That is, incoming buffers are
+pushed through unmodified, i.e. no Gst::BaseParseClass::handle_frame
+will be invoked, but Gst::BaseParseClass::pre_push_frame will still be
+invoked, so subclass can perform as much or as little is appropriate for
+passthrough semantics in Gst::BaseParseClass::pre_push_frame.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>passthrough</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if parser should run in passthrough mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pts_interpolation=-instance_method">
+  
+    #<strong>pts_interpolation=</strong>(pts_interpolate)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>By default, the base class will guess PTS timestamps using a simple
+interpolation (previous timestamp + duration), which is incorrect for
+data streams with reordering, where PTS can go backward. Sub-classes
+implementing such formats should disable PTS interpolation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pts_interpolate</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if parser should interpolate PTS timestamps</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_frame-instance_method">
+  
+    #<strong>push_frame</strong>(frame)  &#x21d2; <tt><span class='object_link'><a href="../Gst/FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Pushes the frame's buffer downstream, sends any pending events and
+does some timestamp and segment handling. Takes ownership of
+frame's buffer, though caller retains ownership of <!-- raw HTML omitted -->frame<!-- raw HTML omitted -->.</p>
+<p>This must be called with sinkpad STREAM_LOCK held.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>frame</span>
+      
+      
+        <span class='type'>(<tt>GstBase::BaseParseFrame</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::BaseParseFrame</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gst::FlowReturn</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_duration-instance_method">
+  
+    #<strong>set_duration</strong>(fmt, duration, interval)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the duration of the currently playing media. Subclass can use this
+when it is able to determine duration and/or notices a change in the media
+duration.  Alternatively, if <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> is non-zero (default), then stream
+duration is determined based on estimated bitrate, and updated every <!-- raw HTML omitted -->interval<!-- raw HTML omitted -->
+frames.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>fmt</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gst/Format.html" title="Gst::Format (module)">Gst::Format</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Gst::Format.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>duration</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>duration value.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interval</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>how often to update the duration estimate based on bitrate, or 0.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_frame_rate-instance_method">
+  
+    #<strong>set_frame_rate</strong>(fps_num, fps_den, lead_in, lead_out)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If frames per second is configured, parser can take care of buffer duration
+and timestamping.  When performing segment clipping, or seeking to a specific
+location, a corresponding decoder might need an initial <!-- raw HTML omitted -->lead_in<!-- raw HTML omitted --> and a
+following <!-- raw HTML omitted -->lead_out<!-- raw HTML omitted --> number of frames to ensure the desired segment is
+entirely filled upon decoding.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>fps_num</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>frames per second (numerator).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>fps_den</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>frames per second (denominator).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>lead_in</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>frames needed before a segment for subsequent decode</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>lead_out</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>frames needed after a segment</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_latency-instance_method">
+  
+    #<strong>set_latency</strong>(min_latency, max_latency)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the minimum and maximum (which may likely be equal) latency introduced
+by the parsing process. If there is such a latency, which depends on the
+particular parsing of the format, it typically corresponds to 1 frame duration.</p>
+<p>If the provided values changed from previously provided ones, this will
+also post a LATENCY message on the bus so the pipeline can reconfigure its
+global latency.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>min_latency</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>minimum parse latency</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_latency</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>maximum parse latency</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="syncable=-instance_method">
+  
+    #<strong>syncable=</strong>(syncable)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set if frame starts can be identified. This is set by default and
+determines whether seeking based on bitrate averages
+is possible for a format/stream.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>syncable</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>set if frame starts can be identified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ts_at_offset=-instance_method">
+  
+    #<strong>ts_at_offset=</strong>(offset)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This function should only be called from a <!-- raw HTML omitted -->handle_frame<!-- raw HTML omitted --> implementation.</p>
+<p>Gst::BaseParse creates initial timestamps for frames by using the last
+timestamp seen in the stream before the frame starts.  In certain
+cases, the correct timestamps will occur in the stream after the
+start of the frame, but before the start of the actual picture data.
+This function can be used to set the timestamps based on the offset
+into the frame data that the picture starts.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>offset into current buffer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

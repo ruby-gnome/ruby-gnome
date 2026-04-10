@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GdkX11::X11Surface
+  
+    &mdash; Ruby/GDK4
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GdkX11::X11Surface";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (X)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GdkX11.html" title="GdkX11 (module)">GdkX11</a></span></span>
+     &raquo; 
+    <span class="title">X11Surface</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GdkX11::X11Surface
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="../Gdk/Surface.html" title="Gdk::Surface (class)">Gdk::Surface</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="../Gdk/Surface.html" title="Gdk::Surface (class)">Gdk::Surface</a></span></li>
+          
+            <li class="next">GdkX11::X11Surface</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup_for_display-class_method" title="lookup_for_display (class method)">.<strong>lookup_for_display</strong>(display, window)  &#x21d2; GdkX11::X11Surface </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Looks up the <code>GdkSurface</code> that wraps the given native window handle.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#desktop-instance_method" title="#desktop (instance method)">#<strong>desktop</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the number of the workspace <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> is on.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#frame_sync_enabled=-instance_method" title="#frame_sync_enabled= (instance method)">#<strong>frame_sync_enabled=</strong>(frame_sync_enabled)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This function can be used to disable frame synchronization for a surface.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#group-instance_method" title="#group (instance method)">#<strong>group</strong>  &#x21d2; Gdk::Surface </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the group this surface belongs to.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#group=-instance_method" title="#group= (instance method)">#<strong>group=</strong>(leader)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the group leader of <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> to be <!-- raw HTML omitted -->leader<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#move_to_current_desktop-instance_method" title="#move_to_current_desktop (instance method)">#<strong>move_to_current_desktop</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Moves the surface to the correct workspace when running under a window manager that supports multiple workspaces, as described in the <a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Manager Hints</a> specification.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#move_to_desktop-instance_method" title="#move_to_desktop (instance method)">#<strong>move_to_desktop</strong>(desktop)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Moves the surface to the given workspace when running unde a window manager that supports multiple workspaces, as described in the <a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Manager Hints</a> specification.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_utf8_property-instance_method" title="#set_utf8_property (instance method)">#<strong>set_utf8_property</strong>(name, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This function modifies or removes an arbitrary X11 window property of type UTF8_STRING.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#skip_pager_hint=-instance_method" title="#skip_pager_hint= (instance method)">#<strong>skip_pager_hint=</strong>(skips_pager)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets a hint on <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> that pagers should not display it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#skip_taskbar_hint=-instance_method" title="#skip_taskbar_hint= (instance method)">#<strong>skip_taskbar_hint=</strong>(skips_taskbar)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets a hint on <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> that taskbars should not display it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#theme_variant=-instance_method" title="#theme_variant= (instance method)">#<strong>theme_variant=</strong>(variant)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>GTK applications can request a dark theme variant.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#urgency_hint=-instance_method" title="#urgency_hint= (instance method)">#<strong>urgency_hint=</strong>(urgent)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets a hint on <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> that it needs user attention.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#user_time=-instance_method" title="#user_time= (instance method)">#<strong>user_time=</strong>(timestamp)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The application can use this call to update the _NET_WM_USER_TIME property on a toplevel surface.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xid-instance_method" title="#xid (instance method)">#<strong>xid</strong>  &#x21d2; xlib::Window </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the X resource (surface) belonging to a <code>GdkSurface</code>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gdk/Surface.html" title="Gdk::Surface (class)">Gdk::Surface</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Gdk/Surface.html#beep-instance_method" title="Gdk::Surface#beep (method)">#beep</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#create_cairo_context-instance_method" title="Gdk::Surface#create_cairo_context (method)">#create_cairo_context</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#create_gl_context-instance_method" title="Gdk::Surface#create_gl_context (method)">#create_gl_context</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#create_similar_surface-instance_method" title="Gdk::Surface#create_similar_surface (method)">#create_similar_surface</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#create_vulkan_context-instance_method" title="Gdk::Surface#create_vulkan_context (method)">#create_vulkan_context</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#cursor-instance_method" title="Gdk::Surface#cursor (method)">#cursor</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#cursor=-instance_method" title="Gdk::Surface#cursor= (method)">#cursor=</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#destroy-instance_method" title="Gdk::Surface#destroy (method)">#destroy</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#display-instance_method" title="Gdk::Surface#display (method)">#display</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#display=-instance_method" title="Gdk::Surface#display= (method)">#display=</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#frame_clock-instance_method" title="Gdk::Surface#frame_clock (method)">#frame_clock</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#frame_clock=-instance_method" title="Gdk::Surface#frame_clock= (method)">#frame_clock=</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#get_device_cursor-instance_method" title="Gdk::Surface#get_device_cursor (method)">#get_device_cursor</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#get_device_position-instance_method" title="Gdk::Surface#get_device_position (method)">#get_device_position</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#height-instance_method" title="Gdk::Surface#height (method)">#height</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#height=-instance_method" title="Gdk::Surface#height= (method)">#height=</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#hide-instance_method" title="Gdk::Surface#hide (method)">#hide</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#initialize-instance_method" title="Gdk::Surface#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#input_region=-instance_method" title="Gdk::Surface#input_region= (method)">#input_region=</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#is_destroyed-instance_method" title="Gdk::Surface#is_destroyed (method)">#is_destroyed</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#mapped-instance_method" title="Gdk::Surface#mapped (method)">#mapped</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#mapped=-instance_method" title="Gdk::Surface#mapped= (method)">#mapped=</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#mapped%3F-instance_method" title="Gdk::Surface#mapped? (method)">#mapped?</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#opaque_region=-instance_method" title="Gdk::Surface#opaque_region= (method)">#opaque_region=</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#queue_render-instance_method" title="Gdk::Surface#queue_render (method)">#queue_render</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#request_layout-instance_method" title="Gdk::Surface#request_layout (method)">#request_layout</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#scale-instance_method" title="Gdk::Surface#scale (method)">#scale</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#scale=-instance_method" title="Gdk::Surface#scale= (method)">#scale=</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#scale_factor-instance_method" title="Gdk::Surface#scale_factor (method)">#scale_factor</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#scale_factor=-instance_method" title="Gdk::Surface#scale_factor= (method)">#scale_factor=</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#set_device_cursor-instance_method" title="Gdk::Surface#set_device_cursor (method)">#set_device_cursor</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#translate_coordinates-instance_method" title="Gdk::Surface#translate_coordinates (method)">#translate_coordinates</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#width-instance_method" title="Gdk::Surface#width (method)">#width</a></span>, <span class='object_link'><a href="../Gdk/Surface.html#width=-instance_method" title="Gdk::Surface#width= (method)">#width=</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <p class="notice">This class inherits a constructor from <span class='object_link'><a href="../Gdk/Surface.html#initialize-instance_method" title="Gdk::Surface#initialize (method)">Gdk::Surface</a></span></p>
+  
+</div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="lookup_for_display-class_method">
+  
+    .<strong>lookup_for_display</strong>(display, window)  &#x21d2; <tt><span class='object_link'><a href="" title="GdkX11::X11Surface (class)">GdkX11::X11Surface</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Looks up the <code>GdkSurface</code> that wraps the given native window handle.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>display</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="X11Display.html" title="GdkX11::X11Display (class)">GdkX11::X11Display</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>GdkDisplay</code> corresponding to the
+window handle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>window</span>
+      
+      
+        <span class='type'>(<tt>xlib::Window</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an Xlib Window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="GdkX11::X11Surface (class)">GdkX11::X11Surface</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>GdkSurface</code> wrapper
+for the native  window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="desktop-instance_method">
+  
+    #<strong>desktop</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the number of the workspace <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> is on.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current workspace of <!-- raw HTML omitted -->surface<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="frame_sync_enabled=-instance_method">
+  
+    #<strong>frame_sync_enabled=</strong>(frame_sync_enabled)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This function can be used to disable frame synchronization for a surface.
+Normally frame synchronziation will be enabled or disabled based on whether
+the system has a compositor that supports frame synchronization, but if
+the surface is not directly managed by the window manager, then frame
+synchronziation may need to be disabled. This is the case for a surface
+embedded via the XEMBED protocol.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>frame_sync_enabled</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether frame-synchronization should be enabled</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="group-instance_method">
+  
+    #<strong>group</strong>  &#x21d2; <tt><span class='object_link'><a href="../Gdk/Surface.html" title="Gdk::Surface (class)">Gdk::Surface</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the group this surface belongs to.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Surface.html" title="Gdk::Surface (class)">Gdk::Surface</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The group of this surface;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="group=-instance_method">
+  
+    #<strong>group=</strong>(leader)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the group leader of <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> to be <!-- raw HTML omitted -->leader<!-- raw HTML omitted -->.
+See the ICCCM for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>leader</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Surface.html" title="Gdk::Surface (class)">Gdk::Surface</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GdkSurface</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="move_to_current_desktop-instance_method">
+  
+    #<strong>move_to_current_desktop</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Moves the surface to the correct workspace when running under a
+window manager that supports multiple workspaces, as described
+in the <a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Manager Hints</a> specification.
+Will not do anything if the surface is already on all workspaces.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="move_to_desktop-instance_method">
+  
+    #<strong>move_to_desktop</strong>(desktop)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Moves the surface to the given workspace when running unde a
+window manager that supports multiple workspaces, as described
+in the <a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Manager Hints</a> specification.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>desktop</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of the workspace to move the surface to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_utf8_property-instance_method">
+  
+    #<strong>set_utf8_property</strong>(name, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This function modifies or removes an arbitrary X11 window
+property of type UTF8_STRING.  If the given <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> is
+not a toplevel surface, it is ignored.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Property name, will be interned as an X atom</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Property value, or nil to delete</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="skip_pager_hint=-instance_method">
+  
+    #<strong>skip_pager_hint=</strong>(skips_pager)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets a hint on <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> that pagers should not
+display it. See the EWMH for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>skips_pager</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true to skip pagers</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="skip_taskbar_hint=-instance_method">
+  
+    #<strong>skip_taskbar_hint=</strong>(skips_taskbar)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets a hint on <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> that taskbars should not
+display it. See the EWMH for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>skips_taskbar</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true to skip taskbars</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="theme_variant=-instance_method">
+  
+    #<strong>theme_variant=</strong>(variant)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>GTK applications can request a dark theme variant. In order to
+make other applications - namely window managers using GTK for
+themeing - aware of this choice, GTK uses this function to
+export the requested theme variant as _GTK_THEME_VARIANT property
+on toplevel surfaces.</p>
+<p>Note that this property is automatically updated by GTK, so this
+function should only be used by applications which do not use GTK
+to create toplevel surfaces.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>variant</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the theme variant to export</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="urgency_hint=-instance_method">
+  
+    #<strong>urgency_hint=</strong>(urgent)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets a hint on <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> that it needs user attention.
+See the ICCCM for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>urgent</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true to indicate urgenct attention needed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="user_time=-instance_method">
+  
+    #<strong>user_time=</strong>(timestamp)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The application can use this call to update the _NET_WM_USER_TIME
+property on a toplevel surface.  This property stores an Xserver
+time which represents the time of the last user input event
+received for this surface.  This property may be used by the window
+manager to alter the focus, stacking, and/or placement behavior of
+surfaces when they are mapped depending on whether the new surface
+was created by a user action or is a &quot;pop-up&quot; surface activated by a
+timer or some other event.</p>
+<p>Note that this property is automatically updated by GDK, so this
+function should only be used by applications which handle input
+events bypassing GDK.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>timestamp</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An XServer timestamp to which the property should be set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="xid-instance_method">
+  
+    #<strong>xid</strong>  &#x21d2; <tt>xlib::Window</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the X resource (surface) belonging to a <code>GdkSurface</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>xlib::Window</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the ID of <!-- raw HTML omitted -->drawable<!-- raw HTML omitted -->’s X resource.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

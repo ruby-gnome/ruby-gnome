@@ -1,0 +1,3173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gdk::Display
+  
+    &mdash; Ruby/GTK3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gdk::Display";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gdk.html" title="Gdk (module)">Gdk</a></span></span>
+     &raquo; 
+    <span class="title">Display</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gdk::Display
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gdk::Display</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p><code>GdkDisplay</code> objects are the GDK representation of a workstation.</p>
+<p>Their purpose are two-fold:</p>
+<ul>
+<li>To manage and provide information about input devices (pointers, keyboards, etc)</li>
+<li>To manage and provide information about output devices (monitors, projectors, etc)</li>
+</ul>
+<p>Most of the input device handling has been factored out into separate
+[class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Seat] objects. Every display has a one or more seats, which
+can be accessed with [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.get_default_seat] and
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.list_seats].</p>
+<p>Output devices are represented by [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Monitor] objects, which can
+be accessed with [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.get_monitor_at_surface] and similar APIs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default-class_method" title="default (class method)">.<strong>default</strong>  &#x21d2; Gdk::Display </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the default <code>GdkDisplay</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open-class_method" title="open (class method)">.<strong>open</strong>(display_name)  &#x21d2; Gdk::Display </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Opens a display.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#app_launch_context-instance_method" title="#app_launch_context (instance method)">#<strong>app_launch_context</strong>  &#x21d2; Gdk::AppLaunchContext </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a <code>GdkAppLaunchContext</code> suitable for launching applications on the given display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#beep-instance_method" title="#beep (instance method)">#<strong>beep</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Emits a short beep on <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clipboard-instance_method" title="#clipboard (instance method)">#<strong>clipboard</strong>  &#x21d2; Gdk::Clipboard </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the clipboard used for copy/paste operations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close-instance_method" title="#close (instance method)">#<strong>close</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Closes the connection to the windowing system for the given display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#composited=-instance_method" title="#composited= (instance method)">#<strong>composited=</strong>(composited)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>true if the display properly composites the alpha channel.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#composited%3F-instance_method" title="#composited? (instance method)">#<strong>composited?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>true if the display properly composites the alpha channel.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_gl_context-instance_method" title="#create_gl_context (instance method)">#<strong>create_gl_context</strong>  &#x21d2; Gdk::GLContext </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new <code>GdkGLContext</code> for the <code>GdkDisplay</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_seat-instance_method" title="#default_seat (instance method)">#<strong>default_seat</strong>  &#x21d2; Gdk::Seat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the default <code>GdkSeat</code> for this display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#device_is_grabbed-instance_method" title="#device_is_grabbed (instance method)">#<strong>device_is_grabbed</strong>(device)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns true if there is an ongoing grab on <!-- raw HTML omitted -->device<!-- raw HTML omitted --> for <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dmabuf_formats-instance_method" title="#dmabuf_formats (instance method)">#<strong>dmabuf_formats</strong>  &#x21d2; Gdk::DmabufFormats </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The dma-buf formats that are supported on this display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dmabuf_formats=-instance_method" title="#dmabuf_formats= (instance method)">#<strong>dmabuf_formats=</strong>(dmabuf_formats)  &#x21d2; Gdk::DmabufFormats </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The dma-buf formats that are supported on this display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flush-instance_method" title="#flush (instance method)">#<strong>flush</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Flushes any requests queued for the windowing system.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_monitor_at_surface-instance_method" title="#get_monitor_at_surface (instance method)">#<strong>get_monitor_at_surface</strong>(surface)  &#x21d2; Gdk::Monitor </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the monitor in which the largest area of <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> resides.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_setting-instance_method" title="#get_setting (instance method)">#<strong>get_setting</strong>(name, value)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a desktop-wide setting such as double-click time for the <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#input_shapes=-instance_method" title="#input_shapes= (instance method)">#<strong>input_shapes=</strong>(input_shapes)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>true if the display supports input shapes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#input_shapes%3F-instance_method" title="#input_shapes? (instance method)">#<strong>input_shapes?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>true if the display supports input shapes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_closed-instance_method" title="#is_closed (instance method)">#<strong>is_closed</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Finds out if the display has been closed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_composited-instance_method" title="#is_composited (instance method)">#<strong>is_composited</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether surfaces can reasonably be expected to have their alpha channel drawn correctly on the screen.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_rgba-instance_method" title="#is_rgba (instance method)">#<strong>is_rgba</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether surfaces on this <!-- raw HTML omitted -->display<!-- raw HTML omitted --> are created with an alpha channel.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_seats-instance_method" title="#list_seats (instance method)">#<strong>list_seats</strong>  &#x21d2; GLib::List&lt;Gdk::Seat&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the list of seats known to <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#map_keycode-instance_method" title="#map_keycode (instance method)">#<strong>map_keycode</strong>(keycode, keys, keyvals, n_entries)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the keyvals bound to <!-- raw HTML omitted -->keycode<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#map_keyval-instance_method" title="#map_keyval (instance method)">#<strong>map_keyval</strong>(keyval, keys, n_keys)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Obtains a list of keycode/group/level combinations that will generate <!-- raw HTML omitted -->keyval<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#monitors-instance_method" title="#monitors (instance method)">#<strong>monitors</strong>  &#x21d2; Gio::ListModel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the list of monitors associated with this display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the name of the display.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#notify_startup_complete-instance_method" title="#notify_startup_complete (instance method)">#<strong>notify_startup_complete</strong>(startup_id)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Indicates to the GUI environment that the application has finished loading, using a given identifier.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#prepare_gl-instance_method" title="#prepare_gl (instance method)">#<strong>prepare_gl</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks that OpenGL is available for <!-- raw HTML omitted -->self<!-- raw HTML omitted --> and ensures that it is properly initialized.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#primary_clipboard-instance_method" title="#primary_clipboard (instance method)">#<strong>primary_clipboard</strong>  &#x21d2; Gdk::Clipboard </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the clipboard used for the primary selection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#put_event-instance_method" title="#put_event (instance method)">#<strong>put_event</strong>(event)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds the given event to the event queue for <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rgba=-instance_method" title="#rgba= (instance method)">#<strong>rgba=</strong>(rgba)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>true if the display supports an alpha channel.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rgba%3F-instance_method" title="#rgba? (instance method)">#<strong>rgba?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>true if the display supports an alpha channel.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shadow_width=-instance_method" title="#shadow_width= (instance method)">#<strong>shadow_width=</strong>(shadow_width)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>true if the display supports extensible frames.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shadow_width%3F-instance_method" title="#shadow_width? (instance method)">#<strong>shadow_width?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>true if the display supports extensible frames.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#startup_notification_id-instance_method" title="#startup_notification_id (instance method)">#<strong>startup_notification_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the startup notification ID for a Wayland display, or nil if no ID has been defined.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#supports_input_shapes-instance_method" title="#supports_input_shapes (instance method)">#<strong>supports_input_shapes</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns true if the display supports input shapes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#supports_shadow_width-instance_method" title="#supports_shadow_width (instance method)">#<strong>supports_shadow_width</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether it's possible for a surface to draw outside of the window area.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sync-instance_method" title="#sync (instance method)">#<strong>sync</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Flushes any requests queued for the windowing system and waits until all requests have been handled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#translate_key-instance_method" title="#translate_key (instance method)">#<strong>translate_key</strong>(keycode, state, group, keyval, effective_group, level, consumed)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Translates the contents of a <code>GdkEventKey</code> into a keyval, effective group, and level.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="default-class_method">
+  
+    .<strong>default</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gdk::Display (class)">Gdk::Display</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the default <code>GdkDisplay</code>.</p>
+<p>This is a convenience function for:</p>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gdk_display_manager_get_default_display'>gdk_display_manager_get_default_display</span> <span class='lparen'>(</span><span class='id identifier rubyid_gdk_display_manager_get'>gdk_display_manager_get</span> <span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gdk::Display (class)">Gdk::Display</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GdkDisplay</code>, or nil if
+there is no default display</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open-class_method">
+  
+    .<strong>open</strong>(display_name)  &#x21d2; <tt><span class='object_link'><a href="" title="Gdk::Display (class)">Gdk::Display</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Opens a display.</p>
+<p>If opening the display fails, <code>NULL</code> is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>display_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the display to open</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gdk::Display (class)">Gdk::Display</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GdkDisplay</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="app_launch_context-instance_method">
+  
+    #<strong>app_launch_context</strong>  &#x21d2; <tt><span class='object_link'><a href="AppLaunchContext.html" title="Gdk::AppLaunchContext (class)">Gdk::AppLaunchContext</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a <code>GdkAppLaunchContext</code> suitable for launching
+applications on the given display.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AppLaunchContext.html" title="Gdk::AppLaunchContext (class)">Gdk::AppLaunchContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new <code>GdkAppLaunchContext</code> for <!-- raw HTML omitted -->display<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="beep-instance_method">
+  
+    #<strong>beep</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Emits a short beep on <!-- raw HTML omitted -->display<!-- raw HTML omitted --></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clipboard-instance_method">
+  
+    #<strong>clipboard</strong>  &#x21d2; <tt><span class='object_link'><a href="Clipboard.html" title="Gdk::Clipboard (class)">Gdk::Clipboard</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the clipboard used for copy/paste operations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Clipboard.html" title="Gdk::Clipboard (class)">Gdk::Clipboard</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the display's clipboard</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close-instance_method">
+  
+    #<strong>close</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Closes the connection to the windowing system for the given display.</p>
+<p>This cleans up associated resources.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="composited=-instance_method">
+  
+    #<strong>composited=</strong>(composited)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>true if the display properly composites the alpha channel.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>composited</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>composited</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>composited</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="composited?-instance_method">
+  
+    #<strong>composited?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>true if the display properly composites the alpha channel.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>composited</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_gl_context-instance_method">
+  
+    #<strong>create_gl_context</strong>  &#x21d2; <tt><span class='object_link'><a href="GLContext.html" title="Gdk::GLContext (class)">Gdk::GLContext</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new <code>GdkGLContext</code> for the <code>GdkDisplay</code>.</p>
+<p>The context is disconnected from any particular surface or surface
+and cannot be used to draw to any surface. It can only be used to
+draw to non-surface framebuffers like textures.</p>
+<p>If the creation of the <code>GdkGLContext</code> failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set.
+Before using the returned <code>GdkGLContext</code>, you will need to
+call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.make_current] or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.realize].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GLContext.html" title="Gdk::GLContext (class)">Gdk::GLContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the newly created <code>GdkGLContext</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_seat-instance_method">
+  
+    #<strong>default_seat</strong>  &#x21d2; <tt><span class='object_link'><a href="Seat.html" title="Gdk::Seat (class)">Gdk::Seat</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the default <code>GdkSeat</code> for this display.</p>
+<p>Note that a display may not have a seat. In this case,
+this function will return nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Seat.html" title="Gdk::Seat (class)">Gdk::Seat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the default seat.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="device_is_grabbed-instance_method">
+  
+    #<strong>device_is_grabbed</strong>(device)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns true if there is an ongoing grab on <!-- raw HTML omitted -->device<!-- raw HTML omitted --> for <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>device</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Device.html" title="Gdk::Device (class)">Gdk::Device</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GdkDevice</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if there is a grab in effect for <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dmabuf_formats-instance_method">
+  
+    #<strong>dmabuf_formats</strong>  &#x21d2; <tt>Gdk::DmabufFormats</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The dma-buf formats that are supported on this display</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::DmabufFormats</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>dmabuf-formats</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dmabuf_formats=-instance_method">
+  
+    #<strong>dmabuf_formats=</strong>(dmabuf_formats)  &#x21d2; <tt>Gdk::DmabufFormats</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The dma-buf formats that are supported on this display</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>dmabuf_formats</span>
+      
+      
+        <span class='type'>(<tt>Gdk::DmabufFormats</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::DmabufFormats</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>dmabuf-formats</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::DmabufFormats</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>dmabuf-formats</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flush-instance_method">
+  
+    #<strong>flush</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Flushes any requests queued for the windowing system.</p>
+<p>This happens automatically when the main loop blocks waiting for new events,
+but if your application is drawing without returning control to the main loop,
+you may need to call this function explicitly. A common case where this function
+needs to be called is when an application is executing drawing commands
+from a thread other than the thread where the main loop is running.</p>
+<p>This is most useful for X11. On windowing systems where requests are
+handled synchronously, this function will do nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_monitor_at_surface-instance_method">
+  
+    #<strong>get_monitor_at_surface</strong>(surface)  &#x21d2; <tt><span class='object_link'><a href="Monitor.html" title="Gdk::Monitor (class)">Gdk::Monitor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the monitor in which the largest area of <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->
+resides.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>surface</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Surface.html" title="Gdk::Surface (class)">Gdk::Surface</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GdkSurface</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Monitor.html" title="Gdk::Monitor (class)">Gdk::Monitor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the monitor with the largest
+overlap with <!-- raw HTML omitted -->surface<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_setting-instance_method">
+  
+    #<strong>get_setting</strong>(name, value)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a desktop-wide setting such as double-click time
+for the <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the setting</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the value of the setting</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the setting existed and a value was stored
+in <!-- raw HTML omitted -->value<!-- raw HTML omitted -->, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="input_shapes=-instance_method">
+  
+    #<strong>input_shapes=</strong>(input_shapes)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>true if the display supports input shapes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>input_shapes</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>input-shapes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>input-shapes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="input_shapes?-instance_method">
+  
+    #<strong>input_shapes?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>true if the display supports input shapes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>input-shapes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_closed-instance_method">
+  
+    #<strong>is_closed</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Finds out if the display has been closed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the display is closed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_composited-instance_method">
+  
+    #<strong>is_composited</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether surfaces can reasonably be expected to have
+their alpha channel drawn correctly on the screen.</p>
+<p>Check [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.is_rgba] for whether the display
+supports an alpha channel.</p>
+<p>On X11 this function returns whether a compositing manager is
+compositing on <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+<p>On modern displays, this value is always true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether surfaces with RGBA visuals can reasonably
+be expected to have their alpha channels drawn correctly
+on the screen.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_rgba-instance_method">
+  
+    #<strong>is_rgba</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether surfaces on this <!-- raw HTML omitted -->display<!-- raw HTML omitted --> are created with an
+alpha channel.</p>
+<p>Even if a true is returned, it is possible that the
+surface’s alpha channel won’t be honored when displaying the
+surface on the screen: in particular, for X an appropriate
+windowing manager and compositing manager must be running to
+provide appropriate display. Use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.is_composited]
+to check if that is the case.</p>
+<p>On modern displays, this value is always true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if surfaces are created with an alpha channel or
+false if the display does not support this functionality.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_seats-instance_method">
+  
+    #<strong>list_seats</strong>  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="Seat.html" title="Gdk::Seat (class)">Gdk::Seat</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the list of seats known to <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="Seat.html" title="Gdk::Seat (class)">Gdk::Seat</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the
+list of seats known to the <code>GdkDisplay</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="map_keycode-instance_method">
+  
+    #<strong>map_keycode</strong>(keycode, keys, keyvals, n_entries)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the keyvals bound to <!-- raw HTML omitted -->keycode<!-- raw HTML omitted -->.</p>
+<p>The Nth <code>GdkKeymapKey</code> in <!-- raw HTML omitted -->keys<!-- raw HTML omitted --> is bound to the Nth keyval in <!-- raw HTML omitted -->keyvals<!-- raw HTML omitted -->.</p>
+<p>When a keycode is pressed by the user, the keyval from
+this list of entries is selected by considering the effective
+keyboard group and level.</p>
+<p>Free the returned arrays with g_free().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>keycode</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a keycode</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>keys</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gdk::KeymapKey&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return
+location for array of <code>GdkKeymapKey</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>keyvals</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return
+location for array of keyvals</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_entries</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>length of <!-- raw HTML omitted -->keys<!-- raw HTML omitted --> and <!-- raw HTML omitted -->keyvals<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if there were any entries</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="map_keyval-instance_method">
+  
+    #<strong>map_keyval</strong>(keyval, keys, n_keys)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Obtains a list of keycode/group/level combinations that will
+generate <!-- raw HTML omitted -->keyval<!-- raw HTML omitted -->.</p>
+<p>Groups and levels are two kinds of keyboard mode; in general, the level
+determines whether the top or bottom symbol on a key is used, and the
+group determines whether the left or right symbol is used.</p>
+<p>On US keyboards, the shift key changes the keyboard level, and there
+are no groups. A group switch key might convert a keyboard between
+Hebrew to English modes, for example.</p>
+<p><code>GdkEventKey</code> contains a %group field that indicates the active
+keyboard group. The level is computed from the modifier mask.</p>
+<p>The returned array should be freed with g_free().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>keyval</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a keyval, such as %GDK_KEY_a, %GDK_KEY_Up, %GDK_KEY_Return, etc.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>keys</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gdk::KeymapKey&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location
+for an array of <code>GdkKeymapKey</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_keys</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for number of elements in returned array</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if keys were found and returned</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="monitors-instance_method">
+  
+    #<strong>monitors</strong>  &#x21d2; <tt>Gio::ListModel</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the list of monitors associated with this display.</p>
+<p>Subsequent calls to this function will always return the
+same list for the same display.</p>
+<p>You can listen to the GListModel::items-changed signal on
+this list to monitor changes to the monitor of this display.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::ListModel</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GListModel</code> of <code>GdkMonitor</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the name of the display.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a string representing the display name. This string is owned
+by GDK and should not be modified or freed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="notify_startup_complete-instance_method">
+  
+    #<strong>notify_startup_complete</strong>(startup_id)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Indicates to the GUI environment that the application has
+finished loading, using a given identifier.</p>
+<p>GTK will call this function automatically for <a href="../gtk4/class.Window.html">GtkWindow</a>
+with custom startup-notification identifier unless
+<a href="../gtk4/method.Window.set_auto_startup_notification.html">gtk_window_set_auto_startup_notification()</a>
+is called to disable that feature.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>startup_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a startup-notification identifier, for which
+notification process should be completed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="prepare_gl-instance_method">
+  
+    #<strong>prepare_gl</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks that OpenGL is available for <!-- raw HTML omitted -->self<!-- raw HTML omitted --> and ensures that it is
+properly initialized.
+When this fails, an <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set describing the error and this
+function returns false.</p>
+<p>Note that even if this function succeeds, creating a <code>GdkGLContext</code>
+may still fail.</p>
+<p>This function is idempotent. Calling it multiple times will just
+return the same value or error.</p>
+<p>You never need to call this function, GDK will call it automatically
+as needed. But you can use it as a check when setting up code that
+might make use of OpenGL.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the display supports OpenGL</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="primary_clipboard-instance_method">
+  
+    #<strong>primary_clipboard</strong>  &#x21d2; <tt><span class='object_link'><a href="Clipboard.html" title="Gdk::Clipboard (class)">Gdk::Clipboard</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the clipboard used for the primary selection.</p>
+<p>On backends where the primary clipboard is not supported natively,
+GDK emulates this clipboard locally.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Clipboard.html" title="Gdk::Clipboard (class)">Gdk::Clipboard</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the primary clipboard</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="put_event-instance_method">
+  
+    #<strong>put_event</strong>(event)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds the given event to the event queue for <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>event</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Event.html" title="Gdk::Event (class)">Gdk::Event</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GdkEvent</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rgba=-instance_method">
+  
+    #<strong>rgba=</strong>(rgba)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>true if the display supports an alpha channel.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rgba</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>rgba</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>rgba</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rgba?-instance_method">
+  
+    #<strong>rgba?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>true if the display supports an alpha channel.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>rgba</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="shadow_width=-instance_method">
+  
+    #<strong>shadow_width=</strong>(shadow_width)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>true if the display supports extensible frames.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>shadow_width</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>shadow-width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>shadow-width</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="shadow_width?-instance_method">
+  
+    #<strong>shadow_width?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>true if the display supports extensible frames.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>shadow-width</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="startup_notification_id-instance_method">
+  
+    #<strong>startup_notification_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the startup notification ID for a Wayland display, or nil
+if no ID has been defined.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the startup notification ID for <!-- raw HTML omitted -->display<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="supports_input_shapes-instance_method">
+  
+    #<strong>supports_input_shapes</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns true if the display supports input shapes.</p>
+<p>This means that [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface.set_input_region] can
+be used to modify the input shape of surfaces on <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
+<p>On modern displays, this value is always true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if surfaces with modified input shape are supported</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="supports_shadow_width-instance_method">
+  
+    #<strong>supports_shadow_width</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether it's possible for a surface to draw outside of the window area.</p>
+<p>If true is returned the application decides if it wants to draw shadows.
+If false is returned, the compositor decides if it wants to draw shadows.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if surfaces can draw shadows or
+false if the display does not support this functionality.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sync-instance_method">
+  
+    #<strong>sync</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Flushes any requests queued for the windowing system and waits until all
+requests have been handled.</p>
+<p>This is often used for making sure that the display is synchronized
+with the current state of the program. Calling [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.sync]
+before [method<!-- raw HTML omitted -->GdkX11<!-- raw HTML omitted -->.Display.error_trap_pop] makes sure that any errors
+generated from earlier requests are handled before the error trap is removed.</p>
+<p>This is most useful for X11. On windowing systems where requests are
+handled synchronously, this function will do nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="translate_key-instance_method">
+  
+    #<strong>translate_key</strong>(keycode, state, group, keyval, effective_group, level, consumed)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Translates the contents of a <code>GdkEventKey</code> into a keyval, effective group,
+and level.</p>
+<p>Modifiers that affected the translation and are thus unavailable for
+application use are returned in <!-- raw HTML omitted -->consumed_modifiers<!-- raw HTML omitted -->.</p>
+<p>The <!-- raw HTML omitted -->effective_group<!-- raw HTML omitted --> is the group that was actually used for the
+translation; some keys such as Enter are not affected by the active
+keyboard group. The <!-- raw HTML omitted -->level<!-- raw HTML omitted --> is derived from <!-- raw HTML omitted -->state<!-- raw HTML omitted -->.</p>
+<p><!-- raw HTML omitted -->consumed_modifiers<!-- raw HTML omitted --> gives modifiers that should be masked out
+from <!-- raw HTML omitted -->state<!-- raw HTML omitted --> when comparing this key press to a keyboard shortcut.
+For instance, on a US keyboard, the <code>plus</code> symbol is shifted, so
+when comparing a key press to a <code>&lt;Control&gt;plus</code> accelerator <code>&lt;Shift&gt;</code>
+should be masked out.</p>
+<p>This function should rarely be needed, since <code>GdkEventKey</code> already
+contains the translated keyval. It is exported for the benefit of
+virtualized test environments.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>keycode</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a keycode</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>state</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ModifierType.html" title="Gdk::ModifierType (module)">Gdk::ModifierType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a modifier state</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>group</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>active keyboard group</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>keyval</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for keyval</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>effective_group</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for effective group</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>level</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for level</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>consumed</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ModifierType.html" title="Gdk::ModifierType (module)">Gdk::ModifierType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for modifiers that were used
+to determine the group or level</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if there was a keyval bound to keycode/state/group.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

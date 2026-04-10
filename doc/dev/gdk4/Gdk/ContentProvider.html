@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gdk::ContentProvider
+  
+    &mdash; Ruby/GDK4
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gdk::ContentProvider";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gdk.html" title="Gdk (module)">Gdk</a></span></span>
+     &raquo; 
+    <span class="title">ContentProvider</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gdk::ContentProvider
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gdk::ContentProvider</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Class structure for <code>GdkContentProvider</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#content_changed-instance_method" title="#content_changed (instance method)">#<strong>content_changed</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Emits the ::content-changed signal.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#formats-instance_method" title="#formats (instance method)">#<strong>formats</strong>  &#x21d2; Gdk::ContentFormats </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The possible formats that the provider can provide its data in.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#formats=-instance_method" title="#formats= (instance method)">#<strong>formats=</strong>(formats)  &#x21d2; Gdk::ContentFormats </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The possible formats that the provider can provide its data in.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_value-instance_method" title="#get_value (instance method)">#<strong>get_value</strong>(value)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the contents of <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> stored in <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(providers, n_providers)  &#x21d2; Gdk::ContentProvider </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a content provider that represents all the given <!-- raw HTML omitted -->providers<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ref_formats-instance_method" title="#ref_formats (instance method)">#<strong>ref_formats</strong>  &#x21d2; Gdk::ContentFormats </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the formats that the provider can provide its current contents in.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ref_storable_formats-instance_method" title="#ref_storable_formats (instance method)">#<strong>ref_storable_formats</strong>  &#x21d2; Gdk::ContentFormats </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the formats that the provider suggests other applications to store the data in.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#storable_formats-instance_method" title="#storable_formats (instance method)">#<strong>storable_formats</strong>  &#x21d2; Gdk::ContentFormats </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The subset of formats that clipboard managers should store this provider's data in.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#storable_formats=-instance_method" title="#storable_formats= (instance method)">#<strong>storable_formats=</strong>(storable_formats)  &#x21d2; Gdk::ContentFormats </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The subset of formats that clipboard managers should store this provider's data in.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#write_mime_type_async-instance_method" title="#write_mime_type_async (instance method)">#<strong>write_mime_type_async</strong>(mime_type, stream, io_priority, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asynchronously writes the contents of <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> to <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> in the given <!-- raw HTML omitted -->mime_type<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#write_mime_type_finish-instance_method" title="#write_mime_type_finish (instance method)">#<strong>write_mime_type_finish</strong>(result)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Finishes an asynchronous write operation.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(providers, n_providers)  &#x21d2; <tt><span class='object_link'><a href="" title="Gdk::ContentProvider (class)">Gdk::ContentProvider</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a content provider that represents all the given <!-- raw HTML omitted -->providers<!-- raw HTML omitted -->.</p>
+<p>Whenever data needs to be written, the union provider will try the given
+<!-- raw HTML omitted -->providers<!-- raw HTML omitted --> in the given order and the first one supporting a format will
+be chosen to provide it.</p>
+<p>This allows an easy way to support providing data in different formats.
+For example, an image may be provided by its file and by the image
+contents with a call such as</p>
+<pre class="code c"><code class="c">gdk_content_provider_new_union ((GdkContentProvider *[2]) {
+                                  gdk_content_provider_new_typed (G_TYPE_FILE, file),
+                                  gdk_content_provider_new_typed (G_TYPE_TEXTURE, texture)
+                                }, 2);
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>providers</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="" title="Gdk::ContentProvider (class)">Gdk::ContentProvider</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The <code>GdkContentProvider</code>s to present the union of</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_providers</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of providers</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="content_changed-instance_method">
+  
+    #<strong>content_changed</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Emits the ::content-changed signal.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="formats-instance_method">
+  
+    #<strong>formats</strong>  &#x21d2; <tt>Gdk::ContentFormats</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The possible formats that the provider can provide its data in.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::ContentFormats</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>formats</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="formats=-instance_method">
+  
+    #<strong>formats=</strong>(formats)  &#x21d2; <tt>Gdk::ContentFormats</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The possible formats that the provider can provide its data in.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>formats</span>
+      
+      
+        <span class='type'>(<tt>Gdk::ContentFormats</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::ContentFormats</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>formats</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::ContentFormats</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>formats</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_value-instance_method">
+  
+    #<strong>get_value</strong>(value)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the contents of <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> stored in <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
+<p>The <!-- raw HTML omitted -->value<!-- raw HTML omitted --> will have been initialized to the <code>GType</code> the value should be
+provided in. This given <code>GType</code> does not need to be listed in the formats
+returned by [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvider.ref_formats]. However, if the
+given <code>GType</code> is not supported, this operation can fail and
+<code>G_IO_ERROR_NOT_SUPPORTED</code> will be reported.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>GValue</code> to fill</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the value was set successfully. Otherwise
+<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set to describe the failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ref_formats-instance_method">
+  
+    #<strong>ref_formats</strong>  &#x21d2; <tt>Gdk::ContentFormats</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the formats that the provider can provide its current contents in.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::ContentFormats</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The formats of the provider</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ref_storable_formats-instance_method">
+  
+    #<strong>ref_storable_formats</strong>  &#x21d2; <tt>Gdk::ContentFormats</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the formats that the provider suggests other applications to store
+the data in.</p>
+<p>An example of such an application would be a clipboard manager.</p>
+<p>This can be assumed to be a subset of [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvider.ref_formats].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::ContentFormats</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The storable formats of the provider</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="storable_formats-instance_method">
+  
+    #<strong>storable_formats</strong>  &#x21d2; <tt>Gdk::ContentFormats</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The subset of formats that clipboard managers should store this provider's data in.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::ContentFormats</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>storable-formats</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="storable_formats=-instance_method">
+  
+    #<strong>storable_formats=</strong>(storable_formats)  &#x21d2; <tt>Gdk::ContentFormats</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The subset of formats that clipboard managers should store this provider's data in.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>storable_formats</span>
+      
+      
+        <span class='type'>(<tt>Gdk::ContentFormats</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::ContentFormats</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>storable-formats</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::ContentFormats</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>storable-formats</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="write_mime_type_async-instance_method">
+  
+    #<strong>write_mime_type_async</strong>(mime_type, stream, io_priority, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asynchronously writes the contents of <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> to <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> in the given
+<!-- raw HTML omitted -->mime_type<!-- raw HTML omitted -->.</p>
+<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then call
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvider.write_mime_type_finish] to get the result
+of the operation.</p>
+<p>The given mime type does not need to be listed in the formats returned by
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvider.ref_formats]. However, if the given <code>GType</code> is
+not supported, <code>G_IO_ERROR_NOT_SUPPORTED</code> will be reported.</p>
+<p>The given <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> will not be closed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mime_type</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the mime type to provide the data in</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stream</span>
+      
+      
+        <span class='type'>(<tt>Gio::OutputStream</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>GOutputStream</code> to write to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>io_priority</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>I/O priority of the request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt>Gio::Cancellable</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>optional <code>GCancellable</code> object, nil to ignore.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>callback to call when the request is satisfied</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the data to pass to callback function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="write_mime_type_finish-instance_method">
+  
+    #<strong>write_mime_type_finish</strong>(result)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Finishes an asynchronous write operation.</p>
+<p>See [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvider.write_mime_type_async].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncResult</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GAsyncResult</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the operation was completed successfully. Otherwise
+<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set to describe the failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

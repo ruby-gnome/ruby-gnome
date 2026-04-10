@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gtk::BuilderScope
+  
+    &mdash; Ruby/GTK4
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::BuilderScope";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">BuilderScope</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gtk::BuilderScope
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+  <dl>
+    <dt>Included in:</dt>
+    <dd><span class='object_link'><a href="RubyBuilderScope.html" title="Gtk::RubyBuilderScope (class)">RubyBuilderScope</a></span></dd>
+  </dl>
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p><code>GtkBuilderScope</code> is an interface to provide language binding support
+to <code>GtkBuilder</code>.</p>
+<p>The goal of <code>GtkBuilderScope</code> is to look up programming-language-specific
+values for strings that are given in a <code>GtkBuilder</code> UI file.</p>
+<p>The primary intended audience is bindings that want to provide deeper
+integration of <code>GtkBuilder</code> into the language.</p>
+<p>A <code>GtkBuilderScope</code> instance may be used with multiple <code>GtkBuilder</code> objects,
+even at once.</p>
+<p>By default, GTK will use its own implementation of <code>GtkBuilderScope</code>
+for the C language which can be created via [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.BuilderCScope.new].</p>
+<p>If you implement <code>GtkBuilderScope</code> for a language binding, you
+may want to (partially) derive from or fall back to a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.BuilderCScope],
+as that class implements support for automatic lookups from C symbols.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_closure-instance_method" title="#create_closure (instance method)">#<strong>create_closure</strong>(builder, function_name, flags, object)  &#x21d2; GObject::Closure </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a closure with the given arguments.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_type_from_function-instance_method" title="#get_type_from_function (instance method)">#<strong>get_type_from_function</strong>(builder, function_name)  &#x21d2; GLib::Type </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Try to lookup a <code>GType</code> via the given function name, specified   explicitly in a GtkBuilder file, like via the &quot;type-func&quot; attribute in the <code>&lt;object&gt;</code> tag.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_type_from_name-instance_method" title="#get_type_from_name (instance method)">#<strong>get_type_from_name</strong>(builder, type_name)  &#x21d2; GLib::Type </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Try to lookup a <code>GType</code> via the its name.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="create_closure-instance_method">
+  
+    #<strong>create_closure</strong>(builder, function_name, flags, object)  &#x21d2; <tt>GObject::Closure</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a closure with the given arguments. See gtk_builder_create_closure()
+for more details on those.
+The C implementation will try to use dlsym() to locate the function name and then
+g_cclosure_new() to create a closure for the symbol.
+The default implementation just fails and returns nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>builder</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Builder.html" title="Gtk::Builder (class)">Gtk::Builder</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>function_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BuilderClosureFlags.html" title="Gtk::BuilderClosureFlags (module)">Gtk::BuilderClosureFlags</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::Closure</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_type_from_function-instance_method">
+  
+    #<strong>get_type_from_function</strong>(builder, function_name)  &#x21d2; <tt>GLib::Type</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Try to lookup a <code>GType</code> via the given function name, specified
+explicitly in a GtkBuilder file, like via the &quot;type-func&quot; attribute in the <code>&lt;object&gt;</code> tag.
+This function is very rarely used.
+The C implementation will use dlsym() and call the resulting function as a <code>GTypeFunc</code>.
+The default implementation will fail and just return %G_TYPE_INVALID.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>builder</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Builder.html" title="Gtk::Builder (class)">Gtk::Builder</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>function_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_type_from_name-instance_method">
+  
+    #<strong>get_type_from_name</strong>(builder, type_name)  &#x21d2; <tt>GLib::Type</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Try to lookup a <code>GType</code> via the its name. See
+gtk_builder_get_type_from_name() for more details.
+The C implementation will use g_type_from_name() and if that fails try to guess the
+correct function name for registering the type and then use dlsym() to load it.
+The default implementation just tries g_type_from_name() and otherwise fails.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>builder</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Builder.html" title="Gtk::Builder (class)">Gtk::Builder</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>type_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gst::ProxyPad
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gst::ProxyPad";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gst.html" title="Gst (module)">Gst</a></span></span>
+     &raquo; 
+    <span class="title">ProxyPad</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gst::ProxyPad
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Pad.html" title="Gst::Pad (class)">Pad</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="Pad.html" title="Gst::Pad (class)">Pad</a></span></li>
+          
+            <li class="next">Gst::ProxyPad</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="GhostPad.html" title="Gst::GhostPad (class)">GhostPad</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#chain_default-class_method" title="chain_default (class method)">.<strong>chain_default</strong>(pad, parent, buffer)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Invoke the default chain function of the proxy pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#chain_list_default-class_method" title="chain_list_default (class method)">.<strong>chain_list_default</strong>(pad, parent, list)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Invoke the default chain list function of the proxy pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getrange_default-class_method" title="getrange_default (class method)">.<strong>getrange_default</strong>(pad, parent, offset, size, buffer)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Invoke the default getrange function of the proxy pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iterate_internal_links_default-class_method" title="iterate_internal_links_default (class method)">.<strong>iterate_internal_links_default</strong>(pad, parent)  &#x21d2; Gst::Iterator </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Invoke the default iterate internal links function of the proxy pad.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#internal-instance_method" title="#internal (instance method)">#<strong>internal</strong>  &#x21d2; Gst::ProxyPad </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the internal pad of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Pad.html" title="Gst::Pad (class)">Pad</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Pad.html#activate_mode-instance_method" title="Gst::Pad#activate_mode (method)">#activate_mode</a></span>, <span class='object_link'><a href="Pad.html#active=-instance_method" title="Gst::Pad#active= (method)">#active=</a></span>, <span class='object_link'><a href="Pad.html#add_probe-instance_method" title="Gst::Pad#add_probe (method)">#add_probe</a></span>, <span class='object_link'><a href="Pad.html#allowed_caps-instance_method" title="Gst::Pad#allowed_caps (method)">#allowed_caps</a></span>, <span class='object_link'><a href="Pad.html#can_link-instance_method" title="Gst::Pad#can_link (method)">#can_link</a></span>, <span class='object_link'><a href="Pad.html#caps-instance_method" title="Gst::Pad#caps (method)">#caps</a></span>, <span class='object_link'><a href="Pad.html#caps=-instance_method" title="Gst::Pad#caps= (method)">#caps=</a></span>, <span class='object_link'><a href="Pad.html#chain-instance_method" title="Gst::Pad#chain (method)">#chain</a></span>, <span class='object_link'><a href="Pad.html#chain_list-instance_method" title="Gst::Pad#chain_list (method)">#chain_list</a></span>, <span class='object_link'><a href="Pad.html#check_reconfigure-instance_method" title="Gst::Pad#check_reconfigure (method)">#check_reconfigure</a></span>, <span class='object_link'><a href="Pad.html#create_stream_id-instance_method" title="Gst::Pad#create_stream_id (method)">#create_stream_id</a></span>, <span class='object_link'><a href="Pad.html#create_stream_id_printf-instance_method" title="Gst::Pad#create_stream_id_printf (method)">#create_stream_id_printf</a></span>, <span class='object_link'><a href="Pad.html#create_stream_id_printf_valist-instance_method" title="Gst::Pad#create_stream_id_printf_valist (method)">#create_stream_id_printf_valist</a></span>, <span class='object_link'><a href="Pad.html#current_caps-instance_method" title="Gst::Pad#current_caps (method)">#current_caps</a></span>, <span class='object_link'><a href="Pad.html#direction-instance_method" title="Gst::Pad#direction (method)">#direction</a></span>, <span class='object_link'><a href="Pad.html#direction=-instance_method" title="Gst::Pad#direction= (method)">#direction=</a></span>, <span class='object_link'><a href="Pad.html#element_private-instance_method" title="Gst::Pad#element_private (method)">#element_private</a></span>, <span class='object_link'><a href="Pad.html#element_private=-instance_method" title="Gst::Pad#element_private= (method)">#element_private=</a></span>, <span class='object_link'><a href="Pad.html#event_default-instance_method" title="Gst::Pad#event_default (method)">#event_default</a></span>, <span class='object_link'><a href="Pad.html#forward-instance_method" title="Gst::Pad#forward (method)">#forward</a></span>, <span class='object_link'><a href="Pad.html#get_range-instance_method" title="Gst::Pad#get_range (method)">#get_range</a></span>, <span class='object_link'><a href="Pad.html#get_sticky_event-instance_method" title="Gst::Pad#get_sticky_event (method)">#get_sticky_event</a></span>, <span class='object_link'><a href="Pad.html#has_current_caps-instance_method" title="Gst::Pad#has_current_caps (method)">#has_current_caps</a></span>, <span class='object_link'><a href="Pad.html#initialize-instance_method" title="Gst::Pad#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="Pad.html#is_active-instance_method" title="Gst::Pad#is_active (method)">#is_active</a></span>, <span class='object_link'><a href="Pad.html#is_blocked-instance_method" title="Gst::Pad#is_blocked (method)">#is_blocked</a></span>, <span class='object_link'><a href="Pad.html#is_blocking-instance_method" title="Gst::Pad#is_blocking (method)">#is_blocking</a></span>, <span class='object_link'><a href="Pad.html#is_linked-instance_method" title="Gst::Pad#is_linked (method)">#is_linked</a></span>, <span class='object_link'><a href="Pad.html#iterate_internal_links-instance_method" title="Gst::Pad#iterate_internal_links (method)">#iterate_internal_links</a></span>, <span class='object_link'><a href="Pad.html#iterate_internal_links_default-instance_method" title="Gst::Pad#iterate_internal_links_default (method)">#iterate_internal_links_default</a></span>, <span class='object_link'><a href="Pad.html#last_flow_return-instance_method" title="Gst::Pad#last_flow_return (method)">#last_flow_return</a></span>, <span class='object_link'><a href="Pad.html#link-instance_method" title="Gst::Pad#link (method)">#link</a></span>, <span class='object_link'><a href="Pad.html#link_full-instance_method" title="Gst::Pad#link_full (method)">#link_full</a></span>, <span class='object_link'><a href="Pad.html#link_get_name-class_method" title="Gst::Pad.link_get_name (method)">link_get_name</a></span>, <span class='object_link'><a href="Pad.html#link_maybe_ghosting-instance_method" title="Gst::Pad#link_maybe_ghosting (method)">#link_maybe_ghosting</a></span>, <span class='object_link'><a href="Pad.html#link_maybe_ghosting_full-instance_method" title="Gst::Pad#link_maybe_ghosting_full (method)">#link_maybe_ghosting_full</a></span>, <span class='object_link'><a href="Pad.html#mark_reconfigure-instance_method" title="Gst::Pad#mark_reconfigure (method)">#mark_reconfigure</a></span>, <span class='object_link'><a href="Pad.html#needs_reconfigure-instance_method" title="Gst::Pad#needs_reconfigure (method)">#needs_reconfigure</a></span>, <span class='object_link'><a href="Pad.html#offset-instance_method" title="Gst::Pad#offset (method)">#offset</a></span>, <span class='object_link'><a href="Pad.html#offset=-instance_method" title="Gst::Pad#offset= (method)">#offset=</a></span>, <span class='object_link'><a href="Pad.html#pad_template-instance_method" title="Gst::Pad#pad_template (method)">#pad_template</a></span>, <span class='object_link'><a href="Pad.html#pad_template_caps-instance_method" title="Gst::Pad#pad_template_caps (method)">#pad_template_caps</a></span>, <span class='object_link'><a href="Pad.html#parent_element-instance_method" title="Gst::Pad#parent_element (method)">#parent_element</a></span>, <span class='object_link'><a href="Pad.html#pause_task-instance_method" title="Gst::Pad#pause_task (method)">#pause_task</a></span>, <span class='object_link'><a href="Pad.html#peer-instance_method" title="Gst::Pad#peer (method)">#peer</a></span>, <span class='object_link'><a href="Pad.html#peer_query-instance_method" title="Gst::Pad#peer_query (method)">#peer_query</a></span>, <span class='object_link'><a href="Pad.html#peer_query_accept_caps-instance_method" title="Gst::Pad#peer_query_accept_caps (method)">#peer_query_accept_caps</a></span>, <span class='object_link'><a href="Pad.html#peer_query_caps-instance_method" title="Gst::Pad#peer_query_caps (method)">#peer_query_caps</a></span>, <span class='object_link'><a href="Pad.html#peer_query_convert-instance_method" title="Gst::Pad#peer_query_convert (method)">#peer_query_convert</a></span>, <span class='object_link'><a href="Pad.html#peer_query_duration-instance_method" title="Gst::Pad#peer_query_duration (method)">#peer_query_duration</a></span>, <span class='object_link'><a href="Pad.html#peer_query_position-instance_method" title="Gst::Pad#peer_query_position (method)">#peer_query_position</a></span>, <span class='object_link'><a href="Pad.html#proxy_query_accept_caps-instance_method" title="Gst::Pad#proxy_query_accept_caps (method)">#proxy_query_accept_caps</a></span>, <span class='object_link'><a href="Pad.html#proxy_query_caps-instance_method" title="Gst::Pad#proxy_query_caps (method)">#proxy_query_caps</a></span>, <span class='object_link'><a href="Pad.html#pull_range-instance_method" title="Gst::Pad#pull_range (method)">#pull_range</a></span>, <span class='object_link'><a href="Pad.html#push-instance_method" title="Gst::Pad#push (method)">#push</a></span>, <span class='object_link'><a href="Pad.html#push_event-instance_method" title="Gst::Pad#push_event (method)">#push_event</a></span>, <span class='object_link'><a href="Pad.html#push_list-instance_method" title="Gst::Pad#push_list (method)">#push_list</a></span>, <span class='object_link'><a href="Pad.html#query-instance_method" title="Gst::Pad#query (method)">#query</a></span>, <span class='object_link'><a href="Pad.html#query_accept_caps-instance_method" title="Gst::Pad#query_accept_caps (method)">#query_accept_caps</a></span>, <span class='object_link'><a href="Pad.html#query_caps-instance_method" title="Gst::Pad#query_caps (method)">#query_caps</a></span>, <span class='object_link'><a href="Pad.html#query_convert-instance_method" title="Gst::Pad#query_convert (method)">#query_convert</a></span>, <span class='object_link'><a href="Pad.html#query_default-instance_method" title="Gst::Pad#query_default (method)">#query_default</a></span>, <span class='object_link'><a href="Pad.html#query_duration-instance_method" title="Gst::Pad#query_duration (method)">#query_duration</a></span>, <span class='object_link'><a href="Pad.html#query_position-instance_method" title="Gst::Pad#query_position (method)">#query_position</a></span>, <span class='object_link'><a href="Pad.html#remove_probe-instance_method" title="Gst::Pad#remove_probe (method)">#remove_probe</a></span>, <span class='object_link'><a href="Pad.html#send_event-instance_method" title="Gst::Pad#send_event (method)">#send_event</a></span>, <span class='object_link'><a href="Pad.html#set_activate_function_full-instance_method" title="Gst::Pad#set_activate_function_full (method)">#set_activate_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_activatemode_function_full-instance_method" title="Gst::Pad#set_activatemode_function_full (method)">#set_activatemode_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_chain_function_full-instance_method" title="Gst::Pad#set_chain_function_full (method)">#set_chain_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_chain_list_function_full-instance_method" title="Gst::Pad#set_chain_list_function_full (method)">#set_chain_list_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_event_full_function_full-instance_method" title="Gst::Pad#set_event_full_function_full (method)">#set_event_full_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_event_function_full-instance_method" title="Gst::Pad#set_event_function_full (method)">#set_event_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_getrange_function_full-instance_method" title="Gst::Pad#set_getrange_function_full (method)">#set_getrange_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_iterate_internal_links_function_full-instance_method" title="Gst::Pad#set_iterate_internal_links_function_full (method)">#set_iterate_internal_links_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_link_function_full-instance_method" title="Gst::Pad#set_link_function_full (method)">#set_link_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_query_function_full-instance_method" title="Gst::Pad#set_query_function_full (method)">#set_query_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_unlink_function_full-instance_method" title="Gst::Pad#set_unlink_function_full (method)">#set_unlink_function_full</a></span>, <span class='object_link'><a href="Pad.html#single_internal_link-instance_method" title="Gst::Pad#single_internal_link (method)">#single_internal_link</a></span>, <span class='object_link'><a href="Pad.html#start_task-instance_method" title="Gst::Pad#start_task (method)">#start_task</a></span>, <span class='object_link'><a href="Pad.html#sticky_events_foreach-instance_method" title="Gst::Pad#sticky_events_foreach (method)">#sticky_events_foreach</a></span>, <span class='object_link'><a href="Pad.html#stop_task-instance_method" title="Gst::Pad#stop_task (method)">#stop_task</a></span>, <span class='object_link'><a href="Pad.html#store_sticky_event-instance_method" title="Gst::Pad#store_sticky_event (method)">#store_sticky_event</a></span>, <span class='object_link'><a href="Pad.html#stream-instance_method" title="Gst::Pad#stream (method)">#stream</a></span>, <span class='object_link'><a href="Pad.html#stream_id-instance_method" title="Gst::Pad#stream_id (method)">#stream_id</a></span>, <span class='object_link'><a href="Pad.html#task_state-instance_method" title="Gst::Pad#task_state (method)">#task_state</a></span>, <span class='object_link'><a href="Pad.html#template-instance_method" title="Gst::Pad#template (method)">#template</a></span>, <span class='object_link'><a href="Pad.html#template=-instance_method" title="Gst::Pad#template= (method)">#template=</a></span>, <span class='object_link'><a href="Pad.html#unlink-instance_method" title="Gst::Pad#unlink (method)">#unlink</a></span>, <span class='object_link'><a href="Pad.html#use_fixed_caps-instance_method" title="Gst::Pad#use_fixed_caps (method)">#use_fixed_caps</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Object.html#add_control_binding-instance_method" title="Gst::Object#add_control_binding (method)">#add_control_binding</a></span>, <span class='object_link'><a href="Object.html#check_uniqueness-class_method" title="Gst::Object.check_uniqueness (method)">check_uniqueness</a></span>, <span class='object_link'><a href="Object.html#control_bindings_disabled=-instance_method" title="Gst::Object#control_bindings_disabled= (method)">#control_bindings_disabled=</a></span>, <span class='object_link'><a href="Object.html#control_rate-instance_method" title="Gst::Object#control_rate (method)">#control_rate</a></span>, <span class='object_link'><a href="Object.html#control_rate=-instance_method" title="Gst::Object#control_rate= (method)">#control_rate=</a></span>, <span class='object_link'><a href="Object.html#default_deep_notify-class_method" title="Gst::Object.default_deep_notify (method)">default_deep_notify</a></span>, <span class='object_link'><a href="Object.html#default_error-instance_method" title="Gst::Object#default_error (method)">#default_error</a></span>, <span class='object_link'><a href="Object.html#get_control_binding-instance_method" title="Gst::Object#get_control_binding (method)">#get_control_binding</a></span>, <span class='object_link'><a href="Object.html#get_g_value_array-instance_method" title="Gst::Object#get_g_value_array (method)">#get_g_value_array</a></span>, <span class='object_link'><a href="Object.html#get_value-instance_method" title="Gst::Object#get_value (method)">#get_value</a></span>, <span class='object_link'><a href="Object.html#get_value_array-instance_method" title="Gst::Object#get_value_array (method)">#get_value_array</a></span>, <span class='object_link'><a href="Object.html#has_active_control_bindings-instance_method" title="Gst::Object#has_active_control_bindings (method)">#has_active_control_bindings</a></span>, <span class='object_link'><a href="Object.html#has_ancestor-instance_method" title="Gst::Object#has_ancestor (method)">#has_ancestor</a></span>, <span class='object_link'><a href="Object.html#has_as_ancestor-instance_method" title="Gst::Object#has_as_ancestor (method)">#has_as_ancestor</a></span>, <span class='object_link'><a href="Object.html#has_as_parent-instance_method" title="Gst::Object#has_as_parent (method)">#has_as_parent</a></span>, <span class='object_link'><a href="Object.html#name-instance_method" title="Gst::Object#name (method)">#name</a></span>, <span class='object_link'><a href="Object.html#name=-instance_method" title="Gst::Object#name= (method)">#name=</a></span>, <span class='object_link'><a href="Object.html#parent-instance_method" title="Gst::Object#parent (method)">#parent</a></span>, <span class='object_link'><a href="Object.html#parent=-instance_method" title="Gst::Object#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="Object.html#path_string-instance_method" title="Gst::Object#path_string (method)">#path_string</a></span>, <span class='object_link'><a href="Object.html#ref-instance_method" title="Gst::Object#ref (method)">#ref</a></span>, <span class='object_link'><a href="Object.html#ref_sink-class_method" title="Gst::Object.ref_sink (method)">ref_sink</a></span>, <span class='object_link'><a href="Object.html#remove_control_binding-instance_method" title="Gst::Object#remove_control_binding (method)">#remove_control_binding</a></span>, <span class='object_link'><a href="Object.html#replace-class_method" title="Gst::Object.replace (method)">replace</a></span>, <span class='object_link'><a href="Object.html#set_control_binding_disabled-instance_method" title="Gst::Object#set_control_binding_disabled (method)">#set_control_binding_disabled</a></span>, <span class='object_link'><a href="Object.html#suggest_next_sync-instance_method" title="Gst::Object#suggest_next_sync (method)">#suggest_next_sync</a></span>, <span class='object_link'><a href="Object.html#sync_values-instance_method" title="Gst::Object#sync_values (method)">#sync_values</a></span>, <span class='object_link'><a href="Object.html#unparent-instance_method" title="Gst::Object#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="Object.html#unref-instance_method" title="Gst::Object#unref (method)">#unref</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <p class="notice">This class inherits a constructor from <span class='object_link'><a href="Pad.html#initialize-instance_method" title="Gst::Pad#initialize (method)">Gst::Pad</a></span></p>
+  
+</div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="chain_default-class_method">
+  
+    .<strong>chain_default</strong>(pad, parent, buffer)  &#x21d2; <tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Invoke the default chain function of the proxy pad.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pad</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pad.html" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a sink Gst::Pad, returns GST_FLOW_ERROR if not.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Buffer to send, return GST_FLOW_ERROR
+if not.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::FlowReturn from the pad.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="chain_list_default-class_method">
+  
+    .<strong>chain_list_default</strong>(pad, parent, list)  &#x21d2; <tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Invoke the default chain list function of the proxy pad.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pad</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pad.html" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a sink Gst::Pad, returns GST_FLOW_ERROR if not.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>list</span>
+      
+      
+        <span class='type'>(<tt>Gst::BufferList</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::BufferList to send, return GST_FLOW_ERROR
+if not.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::FlowReturn from the pad.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="getrange_default-class_method">
+  
+    .<strong>getrange_default</strong>(pad, parent, offset, size, buffer)  &#x21d2; <tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Invoke the default getrange function of the proxy pad.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pad</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pad.html" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a src Gst::Pad, returns #GST_FLOW_ERROR if not.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The start offset of the buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The length of the buffer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>buffer</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to hold the Gst::Buffer,
+returns #GST_FLOW_ERROR if nil.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::FlowReturn from the pad.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iterate_internal_links_default-class_method">
+  
+    .<strong>iterate_internal_links_default</strong>(pad, parent)  &#x21d2; <tt>Gst::Iterator</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Invoke the default iterate internal links function of the proxy pad.
+has no parent. Unref each returned pad with gst_object_unref().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pad</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pad.html" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Pad to get the internal links of.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Iterator</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Iterator of #GstPad, or nil if <!-- raw HTML omitted -->pad<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="internal-instance_method">
+  
+    #<strong>internal</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gst::ProxyPad (class)">Gst::ProxyPad</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the internal pad of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. Unref target pad after usage.</p>
+<p>The internal pad of a Gst::GhostPad is the internally used
+pad of opposite direction, which is used to link to the target.
+be nil.  Unref target pad after usage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::ProxyPad (class)">Gst::ProxyPad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the target Gst::ProxyPad, can</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

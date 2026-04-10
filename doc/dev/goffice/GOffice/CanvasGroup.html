@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GOffice::CanvasGroup
+  
+    &mdash; Ruby/GOffice
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GOffice::CanvasGroup";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GOffice.html" title="GOffice (module)">GOffice</a></span></span>
+     &raquo; 
+    <span class="title">CanvasGroup</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GOffice::CanvasGroup
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="CanvasItem.html" title="GOffice::CanvasItem (class)">CanvasItem</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="CanvasItem.html" title="GOffice::CanvasItem (class)">CanvasItem</a></span></li>
+          
+            <li class="next">GOffice::CanvasGroup</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_child-instance_method" title="#add_child (instance method)">#<strong>add_child</strong>(item)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds <!-- raw HTML omitted -->item<!-- raw HTML omitted --> as a new child to <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#adjust_bounds-instance_method" title="#adjust_bounds (instance method)">#<strong>adjust_bounds</strong>(x0, y0, x1, y1)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds <!-- raw HTML omitted -->group<!-- raw HTML omitted --> horizontal offset to <!-- raw HTML omitted -->x0<!-- raw HTML omitted --> and <!-- raw HTML omitted -->x1<!-- raw HTML omitted -->, and vertical offset to <!-- raw HTML omitted -->y0<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y1<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#adjust_coords-instance_method" title="#adjust_coords (instance method)">#<strong>adjust_coords</strong>(x, y)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds <!-- raw HTML omitted -->group<!-- raw HTML omitted --> horizontal offset to <!-- raw HTML omitted -->x0<!-- raw HTML omitted -->, and vertical offset to <!-- raw HTML omitted -->y0<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cairo_transform-instance_method" title="#cairo_transform (instance method)">#<strong>cairo_transform</strong>(cr, x, y)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Translates <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> current context so that operations start at (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y<!-- raw HTML omitted -->), which are <!-- raw HTML omitted -->group<!-- raw HTML omitted --> relative coordinates, and is scaled according to the containing Goc::Canvas current scale (see goc_canvas_get_pixels_per_unit()).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#children-instance_method" title="#children (instance method)">#<strong>children</strong>  &#x21d2; Array&lt;GOffice::CanvasItem&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>the items in <!-- raw HTML omitted -->group<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clear-instance_method" title="#clear (instance method)">#<strong>clear</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Destroys all <!-- raw HTML omitted -->group<!-- raw HTML omitted --> children.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_child-instance_method" title="#find_child (instance method)">#<strong>find_child</strong>(item)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The index of <!-- raw HTML omitted -->item<!-- raw HTML omitted --> in <!-- raw HTML omitted -->group<!-- raw HTML omitted -->, or -1 if <!-- raw HTML omitted -->item<!-- raw HTML omitted --> is not in <!-- raw HTML omitted -->group<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#freeze-instance_method" title="#freeze (instance method)">#<strong>freeze</strong>(freeze)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_child-instance_method" title="#get_child (instance method)">#<strong>get_child</strong>(n)  &#x21d2; GOffice::CanvasItem </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>group or nil if <!-- raw HTML omitted -->n<!-- raw HTML omitted --> is too big.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">#<strong>new</strong>  &#x21d2; GOffice::CanvasGroup </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Goc::Group as a child of <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_child-instance_method" title="#remove_child (instance method)">#<strong>remove_child</strong>(item)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes <!-- raw HTML omitted -->item<!-- raw HTML omitted --> from <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_clip_path-instance_method" title="#set_clip_path (instance method)">#<strong>set_clip_path</strong>(clip_path, clip_rule)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Clips the drawing inside <!-- raw HTML omitted -->path<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#x-instance_method" title="#x (instance method)">#<strong>x</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>X.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#x=-instance_method" title="#x= (instance method)">#<strong>x=</strong>(x)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#y-instance_method" title="#y (instance method)">#<strong>y</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Y.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#y=-instance_method" title="#y= (instance method)">#<strong>y=</strong>(y)  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="CanvasItem.html" title="GOffice::CanvasItem (class)">CanvasItem</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="CanvasItem.html#bounds_changed-instance_method" title="GOffice::CanvasItem#bounds_changed (method)">#bounds_changed</a></span>, <span class='object_link'><a href="CanvasItem.html#canvas-instance_method" title="GOffice::CanvasItem#canvas (method)">#canvas</a></span>, <span class='object_link'><a href="CanvasItem.html#canvas=-instance_method" title="GOffice::CanvasItem#canvas= (method)">#canvas=</a></span>, <span class='object_link'><a href="CanvasItem.html#copy-instance_method" title="GOffice::CanvasItem#copy (method)">#copy</a></span>, <span class='object_link'><a href="CanvasItem.html#destroy-instance_method" title="GOffice::CanvasItem#destroy (method)">#destroy</a></span>, <span class='object_link'><a href="CanvasItem.html#distance-instance_method" title="GOffice::CanvasItem#distance (method)">#distance</a></span>, <span class='object_link'><a href="CanvasItem.html#draw-instance_method" title="GOffice::CanvasItem#draw (method)">#draw</a></span>, <span class='object_link'><a href="CanvasItem.html#draw_region-instance_method" title="GOffice::CanvasItem#draw_region (method)">#draw_region</a></span>, <span class='object_link'><a href="CanvasItem.html#duplicate-instance_method" title="GOffice::CanvasItem#duplicate (method)">#duplicate</a></span>, <span class='object_link'><a href="CanvasItem.html#get_bounds-instance_method" title="GOffice::CanvasItem#get_bounds (method)">#get_bounds</a></span>, <span class='object_link'><a href="CanvasItem.html#grab-instance_method" title="GOffice::CanvasItem#grab (method)">#grab</a></span>, <span class='object_link'><a href="CanvasItem.html#hide-instance_method" title="GOffice::CanvasItem#hide (method)">#hide</a></span>, <span class='object_link'><a href="CanvasItem.html#initialize-instance_method" title="GOffice::CanvasItem#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="CanvasItem.html#invalidate-instance_method" title="GOffice::CanvasItem#invalidate (method)">#invalidate</a></span>, <span class='object_link'><a href="CanvasItem.html#is_visible-instance_method" title="GOffice::CanvasItem#is_visible (method)">#is_visible</a></span>, <span class='object_link'><a href="CanvasItem.html#lower-instance_method" title="GOffice::CanvasItem#lower (method)">#lower</a></span>, <span class='object_link'><a href="CanvasItem.html#lower_to_bottom-instance_method" title="GOffice::CanvasItem#lower_to_bottom (method)">#lower_to_bottom</a></span>, <span class='object_link'><a href="CanvasItem.html#operator-instance_method" title="GOffice::CanvasItem#operator (method)">#operator</a></span>, <span class='object_link'><a href="CanvasItem.html#operator=-instance_method" title="GOffice::CanvasItem#operator= (method)">#operator=</a></span>, <span class='object_link'><a href="CanvasItem.html#parent-instance_method" title="GOffice::CanvasItem#parent (method)">#parent</a></span>, <span class='object_link'><a href="CanvasItem.html#parent=-instance_method" title="GOffice::CanvasItem#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="CanvasItem.html#raise-instance_method" title="GOffice::CanvasItem#raise (method)">#raise</a></span>, <span class='object_link'><a href="CanvasItem.html#raise_to_top-instance_method" title="GOffice::CanvasItem#raise_to_top (method)">#raise_to_top</a></span>, <span class='object_link'><a href="CanvasItem.html#set-instance_method" title="GOffice::CanvasItem#set (method)">#set</a></span>, <span class='object_link'><a href="CanvasItem.html#show-instance_method" title="GOffice::CanvasItem#show (method)">#show</a></span>, <span class='object_link'><a href="CanvasItem.html#style_context-instance_method" title="GOffice::CanvasItem#style_context (method)">#style_context</a></span>, <span class='object_link'><a href="CanvasItem.html#transform=-instance_method" title="GOffice::CanvasItem#transform= (method)">#transform=</a></span>, <span class='object_link'><a href="CanvasItem.html#ungrab-instance_method" title="GOffice::CanvasItem#ungrab (method)">#ungrab</a></span>, <span class='object_link'><a href="CanvasItem.html#visible=-instance_method" title="GOffice::CanvasItem#visible= (method)">#visible=</a></span>, <span class='object_link'><a href="CanvasItem.html#window-instance_method" title="GOffice::CanvasItem#window (method)">#window</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <p class="notice">This class inherits a constructor from <span class='object_link'><a href="CanvasItem.html#initialize-instance_method" title="GOffice::CanvasItem#initialize (method)">GOffice::CanvasItem</a></span></p>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_child-instance_method">
+  
+    #<strong>add_child</strong>(item)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds <!-- raw HTML omitted -->item<!-- raw HTML omitted --> as a new child to <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>item</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CanvasItem.html" title="GOffice::CanvasItem (class)">GOffice::CanvasItem</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Goc::Item</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="adjust_bounds-instance_method">
+  
+    #<strong>adjust_bounds</strong>(x0, y0, x1, y1)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds <!-- raw HTML omitted -->group<!-- raw HTML omitted --> horizontal offset to <!-- raw HTML omitted -->x0<!-- raw HTML omitted --> and <!-- raw HTML omitted -->x1<!-- raw HTML omitted -->, and vertical offset to <!-- raw HTML omitted -->y0<!-- raw HTML omitted -->
+and <!-- raw HTML omitted -->y1<!-- raw HTML omitted -->. This function is called recursively so that when returning <!-- raw HTML omitted -->x0<!-- raw HTML omitted -->,
+<!-- raw HTML omitted -->y0<!-- raw HTML omitted -->, <!-- raw HTML omitted -->x1<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->y1<!-- raw HTML omitted --> are absolute coordinates in canvas space,</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x0</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>first horizontal coordinate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y0</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>first vertical coordinate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x1</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>last horizontal coordinate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y1</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>last vertical coordinate</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="adjust_coords-instance_method">
+  
+    #<strong>adjust_coords</strong>(x, y)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds <!-- raw HTML omitted -->group<!-- raw HTML omitted --> horizontal offset to <!-- raw HTML omitted -->x0<!-- raw HTML omitted -->, and vertical offset to <!-- raw HTML omitted -->y0<!-- raw HTML omitted -->.
+This function is called recursively so that when returning <!-- raw HTML omitted -->x0<!-- raw HTML omitted --> and
+<!-- raw HTML omitted -->y0<!-- raw HTML omitted --> are absolute coordinates in canvas space,</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>horizontal coordinate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>vertical coordinate</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cairo_transform-instance_method">
+  
+    #<strong>cairo_transform</strong>(cr, x, y)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Translates <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> current context so that operations start at (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y<!-- raw HTML omitted -->), which
+are <!-- raw HTML omitted -->group<!-- raw HTML omitted --> relative coordinates, and is scaled according to the containing
+Goc::Canvas current scale (see goc_canvas_get_pixels_per_unit()). The
+translation takes all <!-- raw HTML omitted -->group<!-- raw HTML omitted --> ancestors into account.</p>
+<p>This function does not call cairo_save().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cr</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>#cairo_t</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>horizontal coordinate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>vertical coordinate</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="children-instance_method">
+  
+    #<strong>children</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="CanvasItem.html" title="GOffice::CanvasItem (class)">GOffice::CanvasItem</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>the items in <!-- raw HTML omitted -->group<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="CanvasItem.html" title="GOffice::CanvasItem (class)">GOffice::CanvasItem</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An array of</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clear-instance_method">
+  
+    #<strong>clear</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Destroys all <!-- raw HTML omitted -->group<!-- raw HTML omitted --> children.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="find_child-instance_method">
+  
+    #<strong>find_child</strong>(item)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The index of <!-- raw HTML omitted -->item<!-- raw HTML omitted --> in <!-- raw HTML omitted -->group<!-- raw HTML omitted -->, or -1 if <!-- raw HTML omitted -->item<!-- raw HTML omitted --> is not in <!-- raw HTML omitted -->group<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>item</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CanvasItem.html" title="GOffice::CanvasItem (class)">GOffice::CanvasItem</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Goc::Item</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The index of <!-- raw HTML omitted -->item<!-- raw HTML omitted --> in <!-- raw HTML omitted -->group<!-- raw HTML omitted -->, or -1 if <!-- raw HTML omitted -->item<!-- raw HTML omitted --> is not in <!-- raw HTML omitted -->group<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="freeze-instance_method">
+  
+    #<strong>freeze</strong>(freeze)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>freeze</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_child-instance_method">
+  
+    #<strong>get_child</strong>(n)  &#x21d2; <tt><span class='object_link'><a href="CanvasItem.html" title="GOffice::CanvasItem (class)">GOffice::CanvasItem</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>group or nil if <!-- raw HTML omitted -->n<!-- raw HTML omitted --> is too big.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>number</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CanvasItem.html" title="GOffice::CanvasItem (class)">GOffice::CanvasItem</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The <!-- raw HTML omitted -->n<!-- raw HTML omitted -->'th item, zero-bases, in the</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    #<strong>new</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="GOffice::CanvasGroup (class)">GOffice::CanvasGroup</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Goc::Group as a child of <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="GOffice::CanvasGroup (class)">GOffice::CanvasGroup</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the newly created Goc::Group.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_child-instance_method">
+  
+    #<strong>remove_child</strong>(item)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes <!-- raw HTML omitted -->item<!-- raw HTML omitted --> from <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->. This function will fail if <!-- raw HTML omitted -->item<!-- raw HTML omitted --> is not a
+child of <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>item</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CanvasItem.html" title="GOffice::CanvasItem (class)">GOffice::CanvasItem</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Goc::Item</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_clip_path-instance_method">
+  
+    #<strong>set_clip_path</strong>(clip_path, clip_rule)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Clips the drawing inside <!-- raw HTML omitted -->path<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>clip_path</span>
+      
+      
+        <span class='type'>(<tt>GOffice::Path</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>#GOPath</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>clip_rule</span>
+      
+      
+        <span class='type'>(<tt>cairo::FillRule</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>#cairo_fill_rule_t</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="x-instance_method">
+  
+    #<strong>x</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns x.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>x</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="x=-instance_method">
+  
+    #<strong>x=</strong>(x)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>x</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>x</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="y-instance_method">
+  
+    #<strong>y</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns y.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>y</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="y=-instance_method">
+  
+    #<strong>y=</strong>(y)  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>y</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>y</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

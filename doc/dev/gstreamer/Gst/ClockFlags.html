@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gst::ClockFlags
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gst::ClockFlags";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gst.html" title="Gst (module)">Gst</a></span></span>
+     &raquo; 
+    <span class="title">ClockFlags</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gst::ClockFlags
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="CAN_DO_SINGLE_SYNC-constant" class="">CAN_DO_SINGLE_SYNC =
+          <div class="docstring">
+  <div class="discussion">
+    <p>clock can do a single sync timeout request</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span> <span class='kw'>or</span> <span class='symbol'>:can_do_single_sync</span></pre></dd>
+      
+        <dt id="CAN_DO_SINGLE_ASYNC-constant" class="">CAN_DO_SINGLE_ASYNC =
+          <div class="docstring">
+  <div class="discussion">
+    <p>clock can do a single async timeout request</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>32</span> <span class='kw'>or</span> <span class='symbol'>:can_do_single_async</span></pre></dd>
+      
+        <dt id="CAN_DO_PERIODIC_SYNC-constant" class="">CAN_DO_PERIODIC_SYNC =
+          <div class="docstring">
+  <div class="discussion">
+    <p>clock can do sync periodic timeout requests</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>64</span> <span class='kw'>or</span> <span class='symbol'>:can_do_periodic_sync</span></pre></dd>
+      
+        <dt id="CAN_DO_PERIODIC_ASYNC-constant" class="">CAN_DO_PERIODIC_ASYNC =
+          <div class="docstring">
+  <div class="discussion">
+    <p>clock can do async periodic timeout callbacks</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>128</span> <span class='kw'>or</span> <span class='symbol'>:can_do_periodic_async</span></pre></dd>
+      
+        <dt id="CAN_SET_RESOLUTION-constant" class="">CAN_SET_RESOLUTION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>clock's resolution can be changed</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>256</span> <span class='kw'>or</span> <span class='symbol'>:can_set_resolution</span></pre></dd>
+      
+        <dt id="CAN_SET_MASTER-constant" class="">CAN_SET_MASTER =
+          <div class="docstring">
+  <div class="discussion">
+    <p>clock can be slaved to a master clock</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>512</span> <span class='kw'>or</span> <span class='symbol'>:can_set_master</span></pre></dd>
+      
+        <dt id="NEEDS_STARTUP_SYNC-constant" class="">NEEDS_STARTUP_SYNC =
+          <div class="docstring">
+  <div class="discussion">
+    <p>clock needs to be synced before it can be used</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1024</span> <span class='kw'>or</span> <span class='symbol'>:needs_startup_sync</span></pre></dd>
+      
+        <dt id="LAST-constant" class="">LAST =
+          <div class="docstring">
+  <div class="discussion">
+    <p>subclasses can add additional flags starting from this flag</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4096</span> <span class='kw'>or</span> <span class='symbol'>:last</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

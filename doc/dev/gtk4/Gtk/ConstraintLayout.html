@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::ConstraintLayout
+  
+    &mdash; Ruby/GTK4
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::ConstraintLayout";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">ConstraintLayout</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::ConstraintLayout
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="LayoutManager.html" title="Gtk::LayoutManager (class)">LayoutManager</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="LayoutManager.html" title="Gtk::LayoutManager (class)">LayoutManager</a></span></li>
+          
+            <li class="next">Gtk::ConstraintLayout</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_constraint-instance_method" title="#add_constraint (instance method)">#<strong>add_constraint</strong>(constraint)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a constraint to the layout manager.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_constraints_from_description-instance_method" title="#add_constraints_from_description (instance method)">#<strong>add_constraints_from_description</strong>(lines, n_lines, hspacing, vspacing, error, first_view, array)  &#x21d2; GLib::List&lt;Gtk::Constraint&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a list of constraints from a VFL description.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_constraints_from_descriptionv-instance_method" title="#add_constraints_from_descriptionv (instance method)">#<strong>add_constraints_from_descriptionv</strong>(lines, n_lines, hspacing, vspacing, views)  &#x21d2; GLib::List&lt;Gtk::Constraint&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a list of constraints from a VFL description.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_guide-instance_method" title="#add_guide (instance method)">#<strong>add_guide</strong>(guide)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a guide to <code>layout</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Gtk::LayoutManager </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new <code>GtkConstraintLayout</code> layout manager.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#observe_constraints-instance_method" title="#observe_constraints (instance method)">#<strong>observe_constraints</strong>  &#x21d2; Gio::ListModel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a <code>GListModel</code> to track the constraints that are part of the layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#observe_guides-instance_method" title="#observe_guides (instance method)">#<strong>observe_guides</strong>  &#x21d2; Gio::ListModel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a <code>GListModel</code> to track the guides that are part of the layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_all_constraints-instance_method" title="#remove_all_constraints (instance method)">#<strong>remove_all_constraints</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes all constraints from the layout manager.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_constraint-instance_method" title="#remove_constraint (instance method)">#<strong>remove_constraint</strong>(constraint)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes <code>constraint</code> from the layout manager, so that it no longer influences the layout.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_guide-instance_method" title="#remove_guide (instance method)">#<strong>remove_guide</strong>(guide)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes <code>guide</code> from the layout manager, so that it no longer influences the layout.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="LayoutManager.html" title="Gtk::LayoutManager (class)">LayoutManager</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="LayoutManager.html#allocate-instance_method" title="Gtk::LayoutManager#allocate (method)">#allocate</a></span>, <span class='object_link'><a href="LayoutManager.html#get_layout_child-instance_method" title="Gtk::LayoutManager#get_layout_child (method)">#get_layout_child</a></span>, <span class='object_link'><a href="LayoutManager.html#layout_changed-instance_method" title="Gtk::LayoutManager#layout_changed (method)">#layout_changed</a></span>, <span class='object_link'><a href="LayoutManager.html#measure-instance_method" title="Gtk::LayoutManager#measure (method)">#measure</a></span>, <span class='object_link'><a href="LayoutManager.html#request_mode-instance_method" title="Gtk::LayoutManager#request_mode (method)">#request_mode</a></span>, <span class='object_link'><a href="LayoutManager.html#widget-instance_method" title="Gtk::LayoutManager#widget (method)">#widget</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="LayoutManager.html" title="Gtk::LayoutManager (class)">Gtk::LayoutManager</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new <code>GtkConstraintLayout</code> layout manager.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_constraint-instance_method">
+  
+    #<strong>add_constraint</strong>(constraint)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a constraint to the layout manager.</p>
+<p>The [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Constraint:source] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Constraint:target]
+properties of <code>constraint</code> can be:</p>
+<ul>
+<li>set to <code>NULL</code> to indicate that the constraint refers to the
+widget using <code>layout</code></li>
+<li>set to the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget] using <code>layout</code></li>
+<li>set to a child of the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget] using <code>layout</code></li>
+<li>set to a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ConstraintGuide] that is part of <code>layout</code></li>
+</ul>
+<p>The <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> acquires the ownership of <!-- raw HTML omitted -->constraint<!-- raw HTML omitted --> after calling
+this function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>constraint</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Constraint.html" title="Gtk::Constraint (class)">Gtk::Constraint</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Constraint]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_constraints_from_description-instance_method">
+  
+    #<strong>add_constraints_from_description</strong>(lines, n_lines, hspacing, vspacing, error, first_view, array)  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="Constraint.html" title="Gtk::Constraint (class)">Gtk::Constraint</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a list of constraints from a VFL description.</p>
+<p>This function is a convenience wrapper around
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ConstraintLayout.add_constraints_from_descriptionv], using
+variadic arguments to populate the view/target map.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>lines</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an array of Visual Format Language lines
+defining a set of constraints</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_lines</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of lines</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>hspacing</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default horizontal spacing value, or -1 for the fallback value</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>vspacing</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default vertical spacing value, or -1 for the fallback value</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>error</span>
+      
+      
+        <span class='type'>(<tt>GLib::Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for a <code>GError</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>first_view</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of a view in the VFL description, followed by the
+[iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ConstraintTarget] to which it maps</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>NULL</code>-terminated list of view names and [iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ConstraintTarget]s</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="Constraint.html" title="Gtk::Constraint (class)">Gtk::Constraint</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the list of
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Constraint]s that were added to the layout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_constraints_from_descriptionv-instance_method">
+  
+    #<strong>add_constraints_from_descriptionv</strong>(lines, n_lines, hspacing, vspacing, views)  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="Constraint.html" title="Gtk::Constraint (class)">Gtk::Constraint</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a list of constraints from a VFL description.</p>
+<p>The Visual Format Language, VFL, is based on Apple's AutoLayout <a href="https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html">VFL</a>.</p>
+<p>The <code>views</code> dictionary is used to match [iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ConstraintTarget]
+instances to the symbolic view name inside the VFL.</p>
+<p>The VFL grammar is:</p>
+<pre class="code ruby"><code class="ruby">       &lt;visualFormatString&gt; = (&lt;orientation&gt;)?
+                              (&lt;superview&gt;&lt;connection&gt;)?
+                              &lt;view&gt;(&lt;connection&gt;&lt;view&gt;)*
+                              (&lt;connection&gt;&lt;superview&gt;)?
+              &lt;orientation&gt; = &#39;H&#39; | &#39;V&#39;
+                &lt;superview&gt; = &#39;|&#39;
+               &lt;connection&gt; = &#39;&#39; | &#39;-&#39; &lt;predicateList&gt; &#39;-&#39; | &#39;-&#39;
+            &lt;predicateList&gt; = &lt;simplePredicate&gt; | &lt;predicateListWithParens&gt;
+          &lt;simplePredicate&gt; = &lt;metricName&gt; | &lt;positiveNumber&gt;
+  &lt;predicateListWithParens&gt; = &#39;(&#39; &lt;predicate&gt; (&#39;,&#39; &lt;predicate&gt;)* &#39;)&#39;
+                &lt;predicate&gt; = (&lt;relation&gt;)? &lt;objectOfPredicate&gt; (&lt;operatorList&gt;)? (&#39;@&#39; &lt;priority&gt;)?
+                 &lt;relation&gt; = &#39;==&#39; | &#39;&lt;=&#39; | &#39;&gt;=&#39;
+        &lt;objectOfPredicate&gt; = &lt;constant&gt; | &lt;viewName&gt; | (&#39;.&#39; &lt;attributeName&gt;)?
+                 &lt;priority&gt; = &lt;positiveNumber&gt; | &#39;required&#39; | &#39;strong&#39; | &#39;medium&#39; | &#39;weak&#39;
+                 &lt;constant&gt; = &lt;number&gt;
+             &lt;operatorList&gt; = (&lt;multiplyOperator&gt;)? (&lt;addOperator&gt;)?
+         &lt;multiplyOperator&gt; = [ &#39;*&#39; | &#39;/&#39; ] &lt;positiveNumber&gt;
+              &lt;addOperator&gt; = [ &#39;+&#39; | &#39;-&#39; ] &lt;positiveNumber&gt;
+                 &lt;viewName&gt; = [A-Za-z_]([A-Za-z0-9_]*) // A C identifier
+               &lt;metricName&gt; = [A-Za-z_]([A-Za-z0-9_]*) // A C identifier
+            &lt;attributeName&gt; = &#39;top&#39; | &#39;bottom&#39; | &#39;left&#39; | &#39;right&#39; | &#39;width&#39; | &#39;height&#39; |
+                              &#39;start&#39; | &#39;end&#39; | &#39;centerX&#39; | &#39;centerY&#39; | &#39;baseline&#39;
+           &lt;positiveNumber&gt; // A positive real number parseable by g_ascii_strtod()
+                   &lt;number&gt; // A real number parseable by g_ascii_strtod()
+</code></pre>
+<p><strong>Note</strong>: The VFL grammar used by GTK is slightly different than the one
+defined by Apple, as it can use symbolic values for the constraint's
+strength instead of numeric values; additionally, GTK allows adding
+simple arithmetic operations inside predicates.</p>
+<p>Examples of VFL descriptions are:</p>
+<pre class="code ruby"><code class="ruby">  // Default spacing
+  [button]-[textField]
+
+  // Width constraint
+  [button(&gt;=50)]
+
+  // Connection to super view
+  |-50-[purpleBox]-50-|
+
+  // Vertical layout
+  V:[topField]-10-[bottomField]
+
+  // Flush views
+  [maroonView][blueView]
+
+  // Priority
+  [button(100&lt;b&gt;strong&lt;/b&gt;)]
+
+  // Equal widths
+  [button1(==button2)]
+
+  // Multiple predicates
+  [flexibleButton(&gt;=70,&lt;=100)]
+
+  // A complete line of layout
+  |-[find]-[findNext]-[findField(&gt;=20)]-|
+
+  // Operators
+  [button1(button2 / 3 + 50)]
+
+  // Named attributes
+  [button1(==button2.height)]
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>lines</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an array of Visual Format Language lines
+defining a set of constraints</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_lines</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of lines</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>hspacing</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default horizontal spacing value, or -1 for the fallback value</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>vspacing</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>default vertical spacing value, or -1 for the fallback value</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>views</span>
+      
+      
+        <span class='type'>(<tt>GLib::HashTable&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a dictionary of <code>[ name, target ]</code>
+pairs; the <code>name</code> keys map to the view names in the VFL lines, while
+the <code>target</code> values map to children of the widget using a <code>GtkConstraintLayout</code>,
+or guides</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="Constraint.html" title="Gtk::Constraint (class)">Gtk::Constraint</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the list of
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Constraint] instances that were added to the layout</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_guide-instance_method">
+  
+    #<strong>add_guide</strong>(guide)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a guide to <code>layout</code>.</p>
+<p>A guide can be used as the source or target of constraints,
+like a widget, but it is not visible.</p>
+<p>The <code>layout</code> acquires the ownership of <code>guide</code> after calling
+this function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>guide</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ConstraintGuide.html" title="Gtk::ConstraintGuide (class)">Gtk::ConstraintGuide</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ConstraintGuide] object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="observe_constraints-instance_method">
+  
+    #<strong>observe_constraints</strong>  &#x21d2; <tt>Gio::ListModel</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a <code>GListModel</code> to track the constraints that are
+part of the layout.</p>
+<p>Calling this function will enable extra internal bookkeeping
+to track constraints and emit signals on the returned listmodel.
+It may slow down operations a lot.</p>
+<p>Applications should try hard to avoid calling this function
+because of the slowdowns.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::ListModel</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a
+<code>GListModel</code> tracking the layout's constraints</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="observe_guides-instance_method">
+  
+    #<strong>observe_guides</strong>  &#x21d2; <tt>Gio::ListModel</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a <code>GListModel</code> to track the guides that are
+part of the layout.</p>
+<p>Calling this function will enable extra internal bookkeeping
+to track guides and emit signals on the returned listmodel.
+It may slow down operations a lot.</p>
+<p>Applications should try hard to avoid calling this function
+because of the slowdowns.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::ListModel</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a
+<code>GListModel</code> tracking the layout's guides</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_all_constraints-instance_method">
+  
+    #<strong>remove_all_constraints</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes all constraints from the layout manager.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_constraint-instance_method">
+  
+    #<strong>remove_constraint</strong>(constraint)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes <code>constraint</code> from the layout manager,
+so that it no longer influences the layout.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>constraint</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Constraint.html" title="Gtk::Constraint (class)">Gtk::Constraint</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Constraint]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_guide-instance_method">
+  
+    #<strong>remove_guide</strong>(guide)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes <code>guide</code> from the layout manager,
+so that it no longer influences the layout.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>guide</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ConstraintGuide.html" title="Gtk::ConstraintGuide (class)">Gtk::ConstraintGuide</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ConstraintGuide] object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

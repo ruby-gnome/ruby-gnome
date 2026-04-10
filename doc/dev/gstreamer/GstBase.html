@@ -1,0 +1,2747 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: GstBase
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GstBase";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (G)</a> &raquo;
+    
+    
+    <span class="title">GstBase</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: GstBase
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/gst/base-loader.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Copyright (C) 2013-2021  Ruby-GNOME Project Team</p>
+<p>This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.</p>
+<p>This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.</p>
+<p>You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="GstBase/AggregatorStartTimeSelection.html" title="GstBase::AggregatorStartTimeSelection (module)">AggregatorStartTimeSelection</a></span>, <span class='object_link'><a href="GstBase/BaseParseFrameFlags.html" title="GstBase::BaseParseFrameFlags (module)">BaseParseFrameFlags</a></span>, <span class='object_link'><a href="GstBase/BaseSrcFlags.html" title="GstBase::BaseSrcFlags (module)">BaseSrcFlags</a></span>, <span class='object_link'><a href="GstBase/CollectPadsStateFlags.html" title="GstBase::CollectPadsStateFlags (module)">CollectPadsStateFlags</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="GstBase/Adapter.html" title="GstBase::Adapter (class)">Adapter</a></span>, <span class='object_link'><a href="GstBase/Aggregator.html" title="GstBase::Aggregator (class)">Aggregator</a></span>, <span class='object_link'><a href="GstBase/AggregatorPad.html" title="GstBase::AggregatorPad (class)">AggregatorPad</a></span>, <span class='object_link'><a href="GstBase/BaseParse.html" title="GstBase::BaseParse (class)">BaseParse</a></span>, <span class='object_link'><a href="GstBase/BaseSink.html" title="GstBase::BaseSink (class)">BaseSink</a></span>, <span class='object_link'><a href="GstBase/BaseSrc.html" title="GstBase::BaseSrc (class)">BaseSrc</a></span>, <span class='object_link'><a href="GstBase/BaseTransform.html" title="GstBase::BaseTransform (class)">BaseTransform</a></span>, <span class='object_link'><a href="GstBase/CollectPads.html" title="GstBase::CollectPads (class)">CollectPads</a></span>, <span class='object_link'><a href="GstBase/DataQueue.html" title="GstBase::DataQueue (class)">DataQueue</a></span>, <span class='object_link'><a href="GstBase/Loader.html" title="GstBase::Loader (class)">Loader</a></span>, <span class='object_link'><a href="GstBase/PushSrc.html" title="GstBase::PushSrc (class)">PushSrc</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="BASE_PARSE_FLAG_DRAINING-constant" class="">BASE_PARSE_FLAG_DRAINING =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span></pre></dd>
+      
+        <dt id="BASE_PARSE_FLAG_LOST_SYNC-constant" class="">BASE_PARSE_FLAG_LOST_SYNC =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span></pre></dd>
+      
+        <dt id="BASE_TRANSFORM_SINK_NAME-constant" class="">BASE_TRANSFORM_SINK_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The name of the templates for the sink pad.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_sink'>sink</span></pre></dd>
+      
+        <dt id="BASE_TRANSFORM_SRC_NAME-constant" class="">BASE_TRANSFORM_SRC_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The name of the templates for the source pad.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_src'>src</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bit_reader_new-instance_method" title="#bit_reader_new (instance method)">#<strong>bit_reader_new</strong>(data, size)  &#x21d2; GstBase::BitReader </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new Gst::BitReader instance, which will read from <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bit_writer_new-instance_method" title="#bit_writer_new (instance method)">#<strong>bit_writer_new</strong>  &#x21d2; GstBase::BitWriter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new, empty Gst::BitWriter instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bit_writer_new_with_data-instance_method" title="#bit_writer_new_with_data (instance method)">#<strong>bit_writer_new_with_data</strong>(data, size, initialized)  &#x21d2; GstBase::BitWriter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Gst::BitWriter instance with the given memory area.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bit_writer_new_with_size-instance_method" title="#bit_writer_new_with_size (instance method)">#<strong>bit_writer_new_with_size</strong>(size, fixed)  &#x21d2; GstBase::BitWriter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a Gst::BitWriter instance with the given initial data size.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#byte_reader_new-instance_method" title="#byte_reader_new (instance method)">#<strong>byte_reader_new</strong>(data, size)  &#x21d2; GstBase::ByteReader </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new Gst::ByteReader instance, which will read from <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#byte_writer_new-instance_method" title="#byte_writer_new (instance method)">#<strong>byte_writer_new</strong>  &#x21d2; GstBase::ByteWriter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new, empty Gst::ByteWriter instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#byte_writer_new_with_data-instance_method" title="#byte_writer_new_with_data (instance method)">#<strong>byte_writer_new_with_data</strong>(data, size, initialized)  &#x21d2; GstBase::ByteWriter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Gst::ByteWriter instance with the given memory area.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#byte_writer_new_with_size-instance_method" title="#byte_writer_new_with_size (instance method)">#<strong>byte_writer_new_with_size</strong>(size, fixed)  &#x21d2; GstBase::ByteWriter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Gst::ByteWriter instance with the given initial data size.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#queue_array_new-instance_method" title="#queue_array_new (instance method)">#<strong>queue_array_new</strong>(initial_size)  &#x21d2; GstBase::QueueArray </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Allocates a new Gst::QueueArray object with an initial queue size of <!-- raw HTML omitted -->initial_size<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#queue_array_new_for_struct-instance_method" title="#queue_array_new_for_struct (instance method)">#<strong>queue_array_new_for_struct</strong>(struct_size, initial_size)  &#x21d2; GstBase::QueueArray </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Allocates a new Gst::QueueArray object for elements (e.g. structures) of size <!-- raw HTML omitted -->struct_size<!-- raw HTML omitted -->, with an initial queue size of <!-- raw HTML omitted -->initial_size<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type_find_data_new-instance_method" title="#type_find_data_new (instance method)">#<strong>type_find_data_new</strong>(obj, data, size)  &#x21d2; GstBase::TypeFindData </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Free-function: gst_type_find_data_free.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type_find_helper-instance_method" title="#type_find_helper (instance method)">#<strong>type_find_helper</strong>(src, size)  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tries to find what type of data is flowing from the given source Gst::Pad.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type_find_helper_for_buffer-instance_method" title="#type_find_helper_for_buffer (instance method)">#<strong>type_find_helper_for_buffer</strong>(obj, buf, prob)  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tries to find what type of data is contained in the given Gst::Buffer, the assumption being that the buffer represents the beginning of the stream or file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type_find_helper_for_buffer_with_caps-instance_method" title="#type_find_helper_for_buffer_with_caps (instance method)">#<strong>type_find_helper_for_buffer_with_caps</strong>(obj, buf, caps, prob)  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tries to find if type of media contained in the given Gst::Buffer, matches <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> specified, assumption being that the buffer represents the beginning of the stream or file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type_find_helper_for_buffer_with_extension-instance_method" title="#type_find_helper_for_buffer_with_extension (instance method)">#<strong>type_find_helper_for_buffer_with_extension</strong>(obj, buf, extension, prob)  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tries to find what type of data is contained in the given Gst::Buffer, the assumption being that the buffer represents the beginning of the stream or file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type_find_helper_for_data-instance_method" title="#type_find_helper_for_data (instance method)">#<strong>type_find_helper_for_data</strong>(obj, data, size, prob)  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tries to find what type of data is contained in the given <!-- raw HTML omitted -->data<!-- raw HTML omitted -->, the assumption being that the data represents the beginning of the stream or file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type_find_helper_for_data_with_caps-instance_method" title="#type_find_helper_for_data_with_caps (instance method)">#<strong>type_find_helper_for_data_with_caps</strong>(obj, data, size, caps, prob)  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tries to find if type of media contained in the given <!-- raw HTML omitted -->data<!-- raw HTML omitted -->, matches the <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> specified, assumption being that the data represents the beginning of the stream or file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type_find_helper_for_data_with_extension-instance_method" title="#type_find_helper_for_data_with_extension (instance method)">#<strong>type_find_helper_for_data_with_extension</strong>(obj, data, size, extension, prob)  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tries to find what type of data is contained in the given <!-- raw HTML omitted -->data<!-- raw HTML omitted -->, the assumption being that the data represents the beginning of the stream or file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type_find_helper_for_extension-instance_method" title="#type_find_helper_for_extension (instance method)">#<strong>type_find_helper_for_extension</strong>(obj, extension)  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tries to find the best Gst::Caps associated with <!-- raw HTML omitted -->extension<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type_find_helper_get_range-instance_method" title="#type_find_helper_get_range (instance method)">#<strong>type_find_helper_get_range</strong>(obj, parent, func, size, extension, prob)  &#x21d2; Gst::Caps </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Utility function to do pull-based typefinding.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type_find_helper_get_range_full-instance_method" title="#type_find_helper_get_range_full (instance method)">#<strong>type_find_helper_get_range_full</strong>(obj, parent, func, size, extension, caps, prob)  &#x21d2; Gst::FlowReturn </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Utility function to do pull-based typefinding.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type_find_list_factories_for_caps-instance_method" title="#type_find_list_factories_for_caps (instance method)">#<strong>type_find_list_factories_for_caps</strong>(obj, caps)  &#x21d2; GLib::List&lt;Gst::TypeFindFactory&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tries to find the best Gst::TypeFindFactory associated with <!-- raw HTML omitted -->caps<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="bit_reader_new-instance_method">
+  
+    #<strong>bit_reader_new</strong>(data, size)  &#x21d2; <tt>GstBase::BitReader</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new Gst::BitReader instance, which will read from <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
+<p>Free-function: gst_bit_reader_free</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Data from which the Gst::BitReader
+should read</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Size of <!-- raw HTML omitted -->data<!-- raw HTML omitted --> in bytes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstBase::BitReader</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Gst::BitReader instance</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="bit_writer_new-instance_method">
+  
+    #<strong>bit_writer_new</strong>  &#x21d2; <tt>GstBase::BitWriter</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new, empty Gst::BitWriter instance.</p>
+<p>Free-function: gst_bit_writer_free</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstBase::BitWriter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new, empty Gst::ByteWriter instance</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="bit_writer_new_with_data-instance_method">
+  
+    #<strong>bit_writer_new_with_data</strong>(data, size, initialized)  &#x21d2; <tt>GstBase::BitWriter</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Gst::BitWriter instance with the given memory area. If
+<!-- raw HTML omitted -->initialized<!-- raw HTML omitted --> is true it is possible to read <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bits from the
+Gst::BitWriter from the beginning.</p>
+<p>Free-function: gst_bit_writer_free</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Memory area for writing</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Size of <!-- raw HTML omitted -->data<!-- raw HTML omitted --> in bytes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>initialized</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if true the complete data can be read from the beginning</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstBase::BitWriter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Gst::BitWriter instance</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="bit_writer_new_with_size-instance_method">
+  
+    #<strong>bit_writer_new_with_size</strong>(size, fixed)  &#x21d2; <tt>GstBase::BitWriter</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a Gst::BitWriter instance with the given initial data size.</p>
+<p>Free-function: gst_bit_writer_free</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Initial size of data in bytes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>fixed</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If true the data can't be reallocated</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstBase::BitWriter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Gst::BitWriter instance</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="byte_reader_new-instance_method">
+  
+    #<strong>byte_reader_new</strong>(data, size)  &#x21d2; <tt>GstBase::ByteReader</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new Gst::ByteReader instance, which will read from <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
+<p>Free-function: gst_byte_reader_free</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>data from which the
+Gst::ByteReader should read</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Size of <!-- raw HTML omitted -->data<!-- raw HTML omitted --> in bytes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstBase::ByteReader</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Gst::ByteReader instance</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="byte_writer_new-instance_method">
+  
+    #<strong>byte_writer_new</strong>  &#x21d2; <tt>GstBase::ByteWriter</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new, empty Gst::ByteWriter instance</p>
+<p>Free-function: gst_byte_writer_free</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstBase::ByteWriter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new, empty Gst::ByteWriter instance</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="byte_writer_new_with_data-instance_method">
+  
+    #<strong>byte_writer_new_with_data</strong>(data, size, initialized)  &#x21d2; <tt>GstBase::ByteWriter</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Gst::ByteWriter instance with the given
+memory area. If <!-- raw HTML omitted -->initialized<!-- raw HTML omitted --> is true it is possible to
+read <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from the Gst::ByteWriter from the beginning.</p>
+<p>Free-function: gst_byte_writer_free</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Memory area for writing</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Size of <!-- raw HTML omitted -->data<!-- raw HTML omitted --> in bytes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>initialized</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If true the complete data can be read from the beginning</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstBase::ByteWriter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Gst::ByteWriter instance</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="byte_writer_new_with_size-instance_method">
+  
+    #<strong>byte_writer_new_with_size</strong>(size, fixed)  &#x21d2; <tt>GstBase::ByteWriter</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Gst::ByteWriter instance with the given
+initial data size.</p>
+<p>Free-function: gst_byte_writer_free</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Initial size of data</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>fixed</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If true the data can't be reallocated</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstBase::ByteWriter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Gst::ByteWriter instance</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="queue_array_new-instance_method">
+  
+    #<strong>queue_array_new</strong>(initial_size)  &#x21d2; <tt>GstBase::QueueArray</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Allocates a new Gst::QueueArray object with an initial
+queue size of <!-- raw HTML omitted -->initial_size<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>initial_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Initial size of the new queue</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstBase::QueueArray</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Gst::QueueArray object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="queue_array_new_for_struct-instance_method">
+  
+    #<strong>queue_array_new_for_struct</strong>(struct_size, initial_size)  &#x21d2; <tt>GstBase::QueueArray</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Allocates a new Gst::QueueArray object for elements (e.g. structures)
+of size <!-- raw HTML omitted -->struct_size<!-- raw HTML omitted -->, with an initial queue size of <!-- raw HTML omitted -->initial_size<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>struct_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Size of each element (e.g. structure) in the array</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>initial_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Initial size of the new queue</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstBase::QueueArray</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Gst::QueueArray object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type_find_data_new-instance_method">
+  
+    #<strong>type_find_data_new</strong>(obj, data, size)  &#x21d2; <tt>GstBase::TypeFindData</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Free-function: gst_type_find_data_free</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>object doing the typefinding, or nil (used for logging)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer with data to typefind</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the size of <!-- raw HTML omitted -->data<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GstBase::TypeFindData</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::TypeFindData. The caller should free
+the returned Gst::TypeFindData with gst_type_find_data_free().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type_find_helper-instance_method">
+  
+    #<strong>type_find_helper</strong>(src, size)  &#x21d2; <tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tries to find what type of data is flowing from the given source Gst::Pad.</p>
+<p>Free-function: gst_caps_unref</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>src</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Pad.html" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A source Gst::Pad</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The length in bytes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Caps corresponding to the data
+stream.  Returns nil if no Gst::Caps matches the data stream.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type_find_helper_for_buffer-instance_method">
+  
+    #<strong>type_find_helper_for_buffer</strong>(obj, buf, prob)  &#x21d2; <tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tries to find what type of data is contained in the given Gst::Buffer, the
+assumption being that the buffer represents the beginning of the stream or
+file.</p>
+<p>All available typefinders will be called on the data in order of rank. If
+a typefinding function returns a probability of %GST_TYPE_FIND_MAXIMUM,
+typefinding is stopped immediately and the found caps will be returned
+right away. Otherwise, all available typefind functions will the tried,
+and the caps with the highest probability will be returned, or nil if
+the content of the buffer could not be identified.</p>
+<p>Free-function: gst_caps_unref</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>object doing the typefinding, or nil (used for logging)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>buf</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Buffer with data to typefind</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prob</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/TypeFindProbability.html" title="Gst::TypeFindProbability (module)">Gst::TypeFindProbability</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the probability of the found
+caps, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Caps corresponding to the data,
+or nil if no type could be found. The caller should free the caps
+returned with gst_caps_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type_find_helper_for_buffer_with_caps-instance_method">
+  
+    #<strong>type_find_helper_for_buffer_with_caps</strong>(obj, buf, caps, prob)  &#x21d2; <tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tries to find if type of media contained in the given Gst::Buffer, matches
+<!-- raw HTML omitted -->caps<!-- raw HTML omitted --> specified, assumption being that the buffer represents the beginning
+of the stream or file.</p>
+<p>Tries to find what type of data is contained in the given <!-- raw HTML omitted -->data<!-- raw HTML omitted -->, the
+assumption being that the data represents the beginning of the stream or
+file.</p>
+<p>Only the typefinder matching the given caps will be called, if found. The
+caps with the highest probability will be returned, or nil if the content
+of the <!-- raw HTML omitted -->data<!-- raw HTML omitted --> could not be identified.</p>
+<p>Free-function: gst_caps_unref</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>object doing the typefinding, or nil (used for logging)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>buf</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Buffer with data to typefind</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>caps</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>caps of the media</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prob</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/TypeFindProbability.html" title="Gst::TypeFindProbability (module)">Gst::TypeFindProbability</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the probability of the found
+caps, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Caps corresponding to the data,
+or nil if no type could be found. The caller should free the caps
+returned with gst_caps_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type_find_helper_for_buffer_with_extension-instance_method">
+  
+    #<strong>type_find_helper_for_buffer_with_extension</strong>(obj, buf, extension, prob)  &#x21d2; <tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tries to find what type of data is contained in the given Gst::Buffer, the
+assumption being that the buffer represents the beginning of the stream or
+file.</p>
+<p>All available typefinders will be called on the data in order of rank. If
+a typefinding function returns a probability of %GST_TYPE_FIND_MAXIMUM,
+typefinding is stopped immediately and the found caps will be returned
+right away. Otherwise, all available typefind functions will the tried,
+and the caps with the highest probability will be returned, or nil if
+the content of the buffer could not be identified.</p>
+<p>When <!-- raw HTML omitted -->extension<!-- raw HTML omitted --> is not nil, this function will first try the typefind
+functions for the given extension, which might speed up the typefinding
+in many cases.</p>
+<p>Free-function: gst_caps_unref</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>object doing the typefinding, or nil (used for logging)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>buf</span>
+      
+      
+        <span class='type'>(<tt>Gst::Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Buffer with data to typefind</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>extension</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>extension of the media, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prob</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/TypeFindProbability.html" title="Gst::TypeFindProbability (module)">Gst::TypeFindProbability</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the probability of the found
+caps, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Caps corresponding to the data,
+or nil if no type could be found. The caller should free the caps
+returned with gst_caps_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type_find_helper_for_data-instance_method">
+  
+    #<strong>type_find_helper_for_data</strong>(obj, data, size, prob)  &#x21d2; <tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tries to find what type of data is contained in the given <!-- raw HTML omitted -->data<!-- raw HTML omitted -->, the
+assumption being that the data represents the beginning of the stream or
+file.</p>
+<p>All available typefinders will be called on the data in order of rank. If
+a typefinding function returns a probability of %GST_TYPE_FIND_MAXIMUM,
+typefinding is stopped immediately and the found caps will be returned
+right away. Otherwise, all available typefind functions will the tried,
+and the caps with the highest probability will be returned, or nil if
+the content of <!-- raw HTML omitted -->data<!-- raw HTML omitted --> could not be identified.</p>
+<p>Free-function: gst_caps_unref</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>object doing the typefinding, or nil (used for logging)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li>a pointer with data to typefind</li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the size of <!-- raw HTML omitted -->data<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prob</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/TypeFindProbability.html" title="Gst::TypeFindProbability (module)">Gst::TypeFindProbability</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the probability of the found
+caps, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Caps corresponding to the data,
+or nil if no type could be found. The caller should free the caps
+returned with gst_caps_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type_find_helper_for_data_with_caps-instance_method">
+  
+    #<strong>type_find_helper_for_data_with_caps</strong>(obj, data, size, caps, prob)  &#x21d2; <tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tries to find if type of media contained in the given <!-- raw HTML omitted -->data<!-- raw HTML omitted -->, matches the
+<!-- raw HTML omitted -->caps<!-- raw HTML omitted --> specified, assumption being that the data represents the beginning
+of the stream or file.</p>
+<p>Only the typefinder matching the given caps will be called, if found. The
+caps with the highest probability will be returned, or nil if the content
+of the <!-- raw HTML omitted -->data<!-- raw HTML omitted --> could not be identified.</p>
+<p>Free-function: gst_caps_unref</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>object doing the typefinding, or nil (used for logging)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer with data to typefind</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the size of <!-- raw HTML omitted -->data<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>caps</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>caps of the media</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prob</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/TypeFindProbability.html" title="Gst::TypeFindProbability (module)">Gst::TypeFindProbability</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the probability of the found
+caps, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Caps corresponding to the data,
+or nil if no type could be found. The caller should free the caps
+returned with gst_caps_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type_find_helper_for_data_with_extension-instance_method">
+  
+    #<strong>type_find_helper_for_data_with_extension</strong>(obj, data, size, extension, prob)  &#x21d2; <tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tries to find what type of data is contained in the given <!-- raw HTML omitted -->data<!-- raw HTML omitted -->, the
+assumption being that the data represents the beginning of the stream or
+file.</p>
+<p>All available typefinders will be called on the data in order of rank. If
+a typefinding function returns a probability of %GST_TYPE_FIND_MAXIMUM,
+typefinding is stopped immediately and the found caps will be returned
+right away. Otherwise, all available typefind functions will the tried,
+and the caps with the highest probability will be returned, or nil if
+the content of <!-- raw HTML omitted -->data<!-- raw HTML omitted --> could not be identified.</p>
+<p>When <!-- raw HTML omitted -->extension<!-- raw HTML omitted --> is not nil, this function will first try the typefind
+functions for the given extension, which might speed up the typefinding
+in many cases.</p>
+<p>Free-function: gst_caps_unref</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>object doing the typefinding, or nil (used for logging)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li>a pointer with data to typefind</li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the size of <!-- raw HTML omitted -->data<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>extension</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>extension of the media, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prob</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/TypeFindProbability.html" title="Gst::TypeFindProbability (module)">Gst::TypeFindProbability</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the probability of the found
+caps, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Caps corresponding to the data,
+or nil if no type could be found. The caller should free the caps
+returned with gst_caps_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type_find_helper_for_extension-instance_method">
+  
+    #<strong>type_find_helper_for_extension</strong>(obj, extension)  &#x21d2; <tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tries to find the best Gst::Caps associated with <!-- raw HTML omitted -->extension<!-- raw HTML omitted -->.</p>
+<p>All available typefinders will be checked against the extension in order
+of rank. The caps of the first typefinder that can handle <!-- raw HTML omitted -->extension<!-- raw HTML omitted --> will be
+returned.</p>
+<p>Free-function: gst_caps_unref</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>object doing the typefinding, or nil (used for logging)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>extension</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an extension</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Caps corresponding to
+<!-- raw HTML omitted -->extension<!-- raw HTML omitted -->, or nil if no type could be found. The caller should free
+the caps returned with gst_caps_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type_find_helper_get_range-instance_method">
+  
+    #<strong>type_find_helper_get_range</strong>(obj, parent, func, size, extension, prob)  &#x21d2; <tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Utility function to do pull-based typefinding. Unlike gst_type_find_helper()
+however, this function will use the specified function <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to obtain the
+data needed by the typefind functions, rather than operating on a given
+source pad. This is useful mostly for elements like tag demuxers which
+strip off data at the beginning and/or end of a file and want to typefind
+the stripped data stream before adding their own source pad (the specified
+callback can then call the upstream peer pad with offsets adjusted for the
+tag size, for example).</p>
+<p>When <!-- raw HTML omitted -->extension<!-- raw HTML omitted --> is not nil, this function will first try the typefind
+functions for the given extension, which might speed up the typefinding
+in many cases.</p>
+<p>Free-function: gst_caps_unref</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Gst::Object that will be passed as first argument to <!-- raw HTML omitted -->func<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent of <!-- raw HTML omitted -->obj<!-- raw HTML omitted --> or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>GstBase::TypeFindHelperGetRangeFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A generic Gst::TypeFindHelperGetRangeFunction that will
+be used to access data at random offsets when doing the typefinding</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The length in bytes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>extension</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>extension of the media, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prob</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/TypeFindProbability.html" title="Gst::TypeFindProbability (module)">Gst::TypeFindProbability</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the probability of the found
+caps, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Caps corresponding to the data
+stream.  Returns nil if no Gst::Caps matches the data stream.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type_find_helper_get_range_full-instance_method">
+  
+    #<strong>type_find_helper_get_range_full</strong>(obj, parent, func, size, extension, caps, prob)  &#x21d2; <tt><span class='object_link'><a href="Gst/FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Utility function to do pull-based typefinding. Unlike gst_type_find_helper()
+however, this function will use the specified function <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to obtain the
+data needed by the typefind functions, rather than operating on a given
+source pad. This is useful mostly for elements like tag demuxers which
+strip off data at the beginning and/or end of a file and want to typefind
+the stripped data stream before adding their own source pad (the specified
+callback can then call the upstream peer pad with offsets adjusted for the
+tag size, for example).</p>
+<p>When <!-- raw HTML omitted -->extension<!-- raw HTML omitted --> is not nil, this function will first try the typefind
+functions for the given extension, which might speed up the typefinding
+in many cases.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Gst::Object that will be passed as first argument to <!-- raw HTML omitted -->func<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent of <!-- raw HTML omitted -->obj<!-- raw HTML omitted --> or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>func</span>
+      
+      
+        <span class='type'>(<tt>GstBase::TypeFindHelperGetRangeFunction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A generic Gst::TypeFindHelperGetRangeFunction that will
+be used to access data at random offsets when doing the typefinding</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The length in bytes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>extension</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>extension of the media, or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>caps</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>returned caps</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prob</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/TypeFindProbability.html" title="Gst::TypeFindProbability (module)">Gst::TypeFindProbability</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the probability of the found
+caps, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/FlowReturn.html" title="Gst::FlowReturn (module)">Gst::FlowReturn</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the last %GstFlowReturn from pulling a buffer or %GST_FLOW_OK if
+typefinding was successful.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type_find_list_factories_for_caps-instance_method">
+  
+    #<strong>type_find_list_factories_for_caps</strong>(obj, caps)  &#x21d2; <tt>GLib::List&lt;<span class='object_link'><a href="Gst/TypeFindFactory.html" title="Gst::TypeFindFactory (class)">Gst::TypeFindFactory</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tries to find the best Gst::TypeFindFactory associated with <!-- raw HTML omitted -->caps<!-- raw HTML omitted -->.</p>
+<p>The typefinder that can handle <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> will be returned.</p>
+<p>Free-function: g_list_free</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>object doing the typefinding, or nil (used for logging)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>caps</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gst/Caps.html" title="Gst::Caps (class)">Gst::Caps</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>caps of the media</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="Gst/TypeFindFactory.html" title="Gst::TypeFindFactory (class)">Gst::TypeFindFactory</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the list of Gst::TypeFindFactory
+corresponding to <!-- raw HTML omitted -->caps<!-- raw HTML omitted -->, or nil if no typefinder could be
+found. Caller should free the returned list with g_list_free()
+and list elements with gst_object_unref().</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

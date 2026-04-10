@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gsf::ClipData
+  
+    &mdash; Ruby/GSF
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gsf::ClipData";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gsf.html" title="Gsf (module)">Gsf</a></span></span>
+     &raquo; 
+    <span class="title">ClipData</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gsf::ClipData
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gsf::ClipData</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#data_blob-instance_method" title="#data_blob (instance method)">#<strong>data_blob</strong>  &#x21d2; Gsf::Blob </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries the data blob that actually stores a Gsf::ClipData's binary data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#format-instance_method" title="#format (instance method)">#<strong>format</strong>  &#x21d2; Gsf::ClipFormat </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries the clipboard data format of a Gsf::ClipData.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(format, data_blob)  &#x21d2; Gsf::ClipData </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Gsf::ClipData object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#peek_real_data-instance_method" title="#peek_real_data (instance method)">#<strong>peek_real_data</strong>(ret_size)  &#x21d2; GObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries a pointer directly to the clipboard data of a Gsf::ClipData.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#windows_clipboard_format-instance_method" title="#windows_clipboard_format (instance method)">#<strong>windows_clipboard_format</strong>  &#x21d2; Gsf::ClipFormatWindows </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries the Windows clipboard data format for a Gsf::ClipData.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(format, data_blob)  &#x21d2; <tt><span class='object_link'><a href="" title="Gsf::ClipData (class)">Gsf::ClipData</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Gsf::ClipData object.  This function acquires a reference to the
+<!-- raw HTML omitted -->data_blob<!-- raw HTML omitted -->, so you should unref the blob on your own if you no longer need it
+directly.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ClipFormat.html" title="Gsf::ClipFormat (module)">Gsf::ClipFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Format for the data inside the <!-- raw HTML omitted -->data_blob<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data_blob</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Blob.html" title="Gsf::Blob (class)">Gsf::Blob</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Object which holds the binary contents for the Gsf::ClipData</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="data_blob-instance_method">
+  
+    #<strong>data_blob</strong>  &#x21d2; <tt><span class='object_link'><a href="Blob.html" title="Gsf::Blob (class)">Gsf::Blob</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries the data blob that actually stores a Gsf::ClipData's binary data.
+binary data.  You must use g_object_unref() to dispose of that data blob when
+you are done with it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Blob.html" title="Gsf::Blob (class)">Gsf::Blob</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A new reference to the Gsf::Blob that stores this <!-- raw HTML omitted -->clip_data<!-- raw HTML omitted -->'s</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="format-instance_method">
+  
+    #<strong>format</strong>  &#x21d2; <tt><span class='object_link'><a href="ClipFormat.html" title="Gsf::ClipFormat (module)">Gsf::ClipFormat</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries the clipboard data format of a Gsf::ClipData.  The format refers to the data
+blob inside the <!-- raw HTML omitted -->clip_data<!-- raw HTML omitted -->; use gsf_clip_data_get_data_blob() to get that data blob.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ClipFormat.html" title="Gsf::ClipFormat (module)">Gsf::ClipFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The format in which the Gsf::ClipData's data blob is stored.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="peek_real_data-instance_method">
+  
+    #<strong>peek_real_data</strong>(ret_size)  &#x21d2; <tt>GObject</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries a pointer directly to the clipboard data of a Gsf::ClipData.  The
+resulting pointer is not necessarily the same data pointer that was passed to
+gsf_blob_new() prior to creating the <!-- raw HTML omitted -->clip_data<!-- raw HTML omitted -->.  For example, if the data is
+in #GSF_CLIP_FORMAT_WINDOWS_CLIPBOARD format, then it will have extra header
+bytes in front of the actual metafile data.  This function will skip over
+those header bytes if necessary and return a pointer to the &quot;real&quot; data.
+buffer is returned in the <!-- raw HTML omitted -->ret_size<!-- raw HTML omitted --> argument.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ret_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Location to return the size of the returned data buffer.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Pointer to the real clipboard data.  The size in bytes of this</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="windows_clipboard_format-instance_method">
+  
+    #<strong>windows_clipboard_format</strong>  &#x21d2; <tt><span class='object_link'><a href="ClipFormatWindows.html" title="Gsf::ClipFormatWindows (module)">Gsf::ClipFormatWindows</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries the Windows clipboard data format for a Gsf::ClipData.  The <!-- raw HTML omitted -->clip_data<!-- raw HTML omitted --> must
+have been created with #GSF_CLIP_FORMAT_WINDOWS_CLIPBOARD.
+Possible errors: #GSF_ERROR_INVALID_DATA if the data blob in the <!-- raw HTML omitted -->clip_data<!-- raw HTML omitted --> is
+smaller than it should be; in this case GSF_CLIP_FORMAT_WINDOWS_ERROR will be returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ClipFormatWindows.html" title="Gsf::ClipFormatWindows (module)">Gsf::ClipFormatWindows</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Gsf::ClipFormatWindows value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

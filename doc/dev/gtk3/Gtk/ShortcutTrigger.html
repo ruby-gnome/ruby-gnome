@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::ShortcutTrigger
+  
+    &mdash; Ruby/GTK3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::ShortcutTrigger";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">ShortcutTrigger</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::ShortcutTrigger
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gtk::ShortcutTrigger</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="AlternativeTrigger.html" title="Gtk::AlternativeTrigger (class)">AlternativeTrigger</a></span>, <span class='object_link'><a href="KeyvalTrigger.html" title="Gtk::KeyvalTrigger (class)">KeyvalTrigger</a></span>, <span class='object_link'><a href="MnemonicTrigger.html" title="Gtk::MnemonicTrigger (class)">MnemonicTrigger</a></span>, <span class='object_link'><a href="NeverTrigger.html" title="Gtk::NeverTrigger (class)">NeverTrigger</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#compare-instance_method" title="#compare (instance method)">#<strong>compare</strong>(trigger2)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The types of <!-- raw HTML omitted -->trigger1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->trigger2<!-- raw HTML omitted --> are <code>gconstpointer</code> only to allow use of this function as a <code>GCompareFunc</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#equal-instance_method" title="#equal (instance method)">#<strong>equal</strong>(trigger2)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if <!-- raw HTML omitted -->trigger1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->trigger2<!-- raw HTML omitted --> trigger under the same conditions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hash-instance_method" title="#hash (instance method)">#<strong>hash</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Generates a hash value for a <code>GtkShortcutTrigger</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(string)  &#x21d2; Gtk::ShortcutTrigger </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tries to parse the given string into a trigger.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#print-instance_method" title="#print (instance method)">#<strong>print</strong>(string)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Prints the given trigger into a string for the developer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#print_label-instance_method" title="#print_label (instance method)">#<strong>print_label</strong>(display, string)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Prints the given trigger into a string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_label-instance_method" title="#to_label (instance method)">#<strong>to_label</strong>(display)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets textual representation for the given trigger.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_string-instance_method" title="#to_string (instance method)">#<strong>to_string</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Prints the given trigger into a human-readable string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#trigger-instance_method" title="#trigger (instance method)">#<strong>trigger</strong>(event, enable_mnemonics)  &#x21d2; Gdk::KeyMatch </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if the given <!-- raw HTML omitted -->event<!-- raw HTML omitted --> triggers <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(string)  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::ShortcutTrigger (class)">Gtk::ShortcutTrigger</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Tries to parse the given string into a trigger.</p>
+<p>On success, the parsed trigger is returned.
+When parsing failed, nil is returned.</p>
+<p>The accepted strings are:</p>
+<ul>
+<li><code>never</code>, for <code>GtkNeverTrigger</code></li>
+<li>a string parsed by gtk_accelerator_parse(), for a <code>GtkKeyvalTrigger</code>, e.g. <code>&lt;Control&gt;C</code></li>
+<li>underscore, followed by a single character, for <code>GtkMnemonicTrigger</code>, e.g. <code>_l</code></li>
+<li>two valid trigger strings, separated by a <code>|</code> character, for a
+<code>GtkAlternativeTrigger</code>: <code>&lt;Control&gt;q|&lt;Control&gt;w</code></li>
+</ul>
+<p>Note that you will have to escape the <code>&lt;</code> and <code>&gt;</code> characters when specifying
+triggers in XML files, such as GtkBuilder ui files. Use <code>&amp;lt;</code> instead of
+<code>&lt;</code> and <code>&amp;gt;</code> instead of <code>&gt;</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>string</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the string to parse</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="compare-instance_method">
+  
+    #<strong>compare</strong>(trigger2)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The types of <!-- raw HTML omitted -->trigger1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->trigger2<!-- raw HTML omitted --> are <code>gconstpointer</code> only to allow
+use of this function as a <code>GCompareFunc</code>.</p>
+<p>They must each be a <code>GtkShortcutTrigger</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>trigger2</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::ShortcutTrigger (class)">Gtk::ShortcutTrigger</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GtkShortcutTrigger</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An integer less than, equal to, or greater than zero if
+<!-- raw HTML omitted -->trigger1<!-- raw HTML omitted --> is found, respectively, to be less than, to match,
+or be greater than <!-- raw HTML omitted -->trigger2<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="equal-instance_method">
+  
+    #<strong>equal</strong>(trigger2)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if <!-- raw HTML omitted -->trigger1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->trigger2<!-- raw HTML omitted --> trigger under the same conditions.</p>
+<p>The types of <!-- raw HTML omitted -->one<!-- raw HTML omitted --> and <!-- raw HTML omitted -->two<!-- raw HTML omitted --> are <code>gconstpointer</code> only to allow use of this
+function with <code>GHashTable</code>. They must each be a <code>GtkShortcutTrigger</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>trigger2</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gtk::ShortcutTrigger (class)">Gtk::ShortcutTrigger</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GtkShortcutTrigger</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->trigger1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->trigger2<!-- raw HTML omitted --> are equal</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="hash-instance_method">
+  
+    #<strong>hash</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Generates a hash value for a <code>GtkShortcutTrigger</code>.</p>
+<p>The output of this function is guaranteed to be the same for a given
+value only per-process. It may change between different processor
+architectures or even different versions of GTK. Do not use this
+function as a basis for building protocols or file formats.</p>
+<p>The types of <!-- raw HTML omitted -->trigger<!-- raw HTML omitted --> is <code>gconstpointer</code> only to allow use of this
+function with <code>GHashTable</code>. They must each be a <code>GtkShortcutTrigger</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a hash value corresponding to <!-- raw HTML omitted -->trigger<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="print-instance_method">
+  
+    #<strong>print</strong>(string)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Prints the given trigger into a string for the developer.
+This is meant for debugging and logging.</p>
+<p>The form of the representation may change at any time
+and is not guaranteed to stay identical.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>string</span>
+      
+      
+        <span class='type'>(<tt>GLib::String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GString</code> to print into</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="print_label-instance_method">
+  
+    #<strong>print_label</strong>(display, string)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Prints the given trigger into a string.</p>
+<p>This function is returning a translated string for presentation
+to end users for example in menu items or in help texts.</p>
+<p>The <!-- raw HTML omitted -->display<!-- raw HTML omitted --> in use may influence the resulting string in
+various forms, such as resolving hardware keycodes or by
+causing display-specific modifier names.</p>
+<p>The form of the representation may change at any time and is
+not guaranteed to stay identical.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>display</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>GdkDisplay</code> to print for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>string</span>
+      
+      
+        <span class='type'>(<tt>GLib::String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GString</code> to print into</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if something was printed or false if the
+trigger did not have a textual representation suitable
+for end users.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_label-instance_method">
+  
+    #<strong>to_label</strong>(display)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets textual representation for the given trigger.</p>
+<p>This function is returning a translated string for
+presentation to end users for example in menu items
+or in help texts.</p>
+<p>The <!-- raw HTML omitted -->display<!-- raw HTML omitted --> in use may influence the resulting string in
+various forms, such as resolving hardware keycodes or by
+causing display-specific modifier names.</p>
+<p>The form of the representation may change at any time and is
+not guaranteed to stay identical.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>display</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Display.html" title="Gdk::Display (class)">Gdk::Display</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>GdkDisplay</code> to print for</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_string-instance_method">
+  
+    #<strong>to_string</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Prints the given trigger into a human-readable string.</p>
+<p>This is a small wrapper around [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutTrigger.print]
+to help when debugging.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="trigger-instance_method">
+  
+    #<strong>trigger</strong>(event, enable_mnemonics)  &#x21d2; <tt><span class='object_link'><a href="../Gdk/KeyMatch.html" title="Gdk::KeyMatch (module)">Gdk::KeyMatch</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if the given <!-- raw HTML omitted -->event<!-- raw HTML omitted --> triggers <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>event</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/Event.html" title="Gdk::Event (class)">Gdk::Event</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the event to check</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>enable_mnemonics</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if mnemonics should trigger. Usually the
+value of this property is determined by checking that the passed
+in <!-- raw HTML omitted -->event<!-- raw HTML omitted --> is a Key event and has the right modifiers set.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Gdk/KeyMatch.html" title="Gdk::KeyMatch (module)">Gdk::KeyMatch</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether the event triggered the shortcut</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

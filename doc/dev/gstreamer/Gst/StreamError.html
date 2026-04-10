@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gst::StreamError
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gst::StreamError";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gst.html" title="Gst (module)">Gst</a></span></span>
+     &raquo; 
+    <span class="title">StreamError</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gst::StreamError
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="FAILED-constant" class="">FAILED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>a general error which doesn't fit in any other
+category.  Make sure you add a custom message to the error call.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:failed</span></pre></dd>
+      
+        <dt id="TOO_LAZY-constant" class="">TOO_LAZY =
+          <div class="docstring">
+  <div class="discussion">
+    <p>do not use this except as a placeholder for
+deciding where to go while developing code.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:too_lazy</span></pre></dd>
+      
+        <dt id="NOT_IMPLEMENTED-constant" class="">NOT_IMPLEMENTED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>use this when you do not want to implement
+this functionality yet.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:not_implemented</span></pre></dd>
+      
+        <dt id="TYPE_NOT_FOUND-constant" class="">TYPE_NOT_FOUND =
+          <div class="docstring">
+  <div class="discussion">
+    <p>used when the element doesn't know the
+stream's type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:type_not_found</span></pre></dd>
+      
+        <dt id="WRONG_TYPE-constant" class="">WRONG_TYPE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>used when the element doesn't handle this type
+of stream.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:wrong_type</span></pre></dd>
+      
+        <dt id="CODEC_NOT_FOUND-constant" class="">CODEC_NOT_FOUND =
+          <div class="docstring">
+  <div class="discussion">
+    <p>used when there's no codec to handle the
+stream's type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:codec_not_found</span></pre></dd>
+      
+        <dt id="DECODE-constant" class="">DECODE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>used when decoding fails.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:decode</span></pre></dd>
+      
+        <dt id="ENCODE-constant" class="">ENCODE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>used when encoding fails.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:encode</span></pre></dd>
+      
+        <dt id="DEMUX-constant" class="">DEMUX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>used when demuxing fails.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span> <span class='kw'>or</span> <span class='symbol'>:demux</span></pre></dd>
+      
+        <dt id="MUX-constant" class="">MUX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>used when muxing fails.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:mux</span></pre></dd>
+      
+        <dt id="FORMAT-constant" class="">FORMAT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>used when the stream is of the wrong format
+(for example, wrong caps).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span> <span class='kw'>or</span> <span class='symbol'>:format</span></pre></dd>
+      
+        <dt id="DECRYPT-constant" class="">DECRYPT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>used when the stream is encrypted and can't be
+decrypted because this is not supported by the element.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span> <span class='kw'>or</span> <span class='symbol'>:decrypt</span></pre></dd>
+      
+        <dt id="DECRYPT_NOKEY-constant" class="">DECRYPT_NOKEY =
+          <div class="docstring">
+  <div class="discussion">
+    <p>used when the stream is encrypted and
+can't be decrypted because no suitable key is available.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>13</span> <span class='kw'>or</span> <span class='symbol'>:decrypt_nokey</span></pre></dd>
+      
+        <dt id="NUM_ERRORS-constant" class="">NUM_ERRORS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>the number of stream error types.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>14</span> <span class='kw'>or</span> <span class='symbol'>:num_errors</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

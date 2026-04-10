@@ -1,0 +1,2671 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gst::Object
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gst::Object";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (O)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gst.html" title="Gst (module)">Gst</a></span></span>
+     &raquo; 
+    <span class="title">Object</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gst::Object
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">GObject::InitiallyUnowned</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next">Gst::Object</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>GStreamer base object class.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="Allocator.html" title="Gst::Allocator (class)">Allocator</a></span>, <span class='object_link'><a href="BufferPool.html" title="Gst::BufferPool (class)">BufferPool</a></span>, <span class='object_link'><a href="Bus.html" title="Gst::Bus (class)">Bus</a></span>, <span class='object_link'><a href="Clock.html" title="Gst::Clock (class)">Clock</a></span>, <span class='object_link'><a href="ControlBinding.html" title="Gst::ControlBinding (class)">ControlBinding</a></span>, <span class='object_link'><a href="ControlSource.html" title="Gst::ControlSource (class)">ControlSource</a></span>, <span class='object_link'><a href="Device.html" title="Gst::Device (class)">Device</a></span>, <span class='object_link'><a href="DeviceMonitor.html" title="Gst::DeviceMonitor (class)">DeviceMonitor</a></span>, <span class='object_link'><a href="DeviceProvider.html" title="Gst::DeviceProvider (class)">DeviceProvider</a></span>, <span class='object_link'><a href="Element.html" title="Gst::Element (class)">Element</a></span>, <span class='object_link'><a href="Pad.html" title="Gst::Pad (class)">Pad</a></span>, <span class='object_link'><a href="PadTemplate.html" title="Gst::PadTemplate (class)">PadTemplate</a></span>, <span class='object_link'><a href="Plugin.html" title="Gst::Plugin (class)">Plugin</a></span>, <span class='object_link'><a href="PluginFeature.html" title="Gst::PluginFeature (class)">PluginFeature</a></span>, <span class='object_link'><a href="Registry.html" title="Gst::Registry (class)">Registry</a></span>, <span class='object_link'><a href="Stream.html" title="Gst::Stream (class)">Stream</a></span>, <span class='object_link'><a href="StreamCollection.html" title="Gst::StreamCollection (class)">StreamCollection</a></span>, <span class='object_link'><a href="Task.html" title="Gst::Task (class)">Task</a></span>, <span class='object_link'><a href="TaskPool.html" title="Gst::TaskPool (class)">TaskPool</a></span>, <span class='object_link'><a href="Tracer.html" title="Gst::Tracer (class)">Tracer</a></span>, <span class='object_link'><a href="TracerRecord.html" title="Gst::TracerRecord (class)">TracerRecord</a></span>, <span class='object_link'><a href="../GstAudio/AudioRingBuffer.html" title="GstAudio::AudioRingBuffer (class)">GstAudio::AudioRingBuffer</a></span>, <span class='object_link'><a href="../GstBase/CollectPads.html" title="GstBase::CollectPads (class)">GstBase::CollectPads</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#check_uniqueness-class_method" title="check_uniqueness (class method)">.<strong>check_uniqueness</strong>(list, name)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks to see if there is any object named <!-- raw HTML omitted -->name<!-- raw HTML omitted --> in <!-- raw HTML omitted -->list<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_deep_notify-class_method" title="default_deep_notify (class method)">.<strong>default_deep_notify</strong>(object, orig, pspec, excluded_props)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A default deep_notify signal callback for an object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ref_sink-class_method" title="ref_sink (class method)">.<strong>ref_sink</strong>(object)  &#x21d2; GObject </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Increase the reference count of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->, and possibly remove the floating reference, if <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has a floating reference.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#replace-class_method" title="replace (class method)">.<strong>replace</strong>(oldobj, newobj)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Atomically modifies a pointer to point to a new object.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_control_binding-instance_method" title="#add_control_binding (instance method)">#<strong>add_control_binding</strong>(binding)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Attach the Gst::ControlBinding to the object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#control_bindings_disabled=-instance_method" title="#control_bindings_disabled= (instance method)">#<strong>control_bindings_disabled=</strong>(disabled)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This function is used to disable all controlled properties of the <!-- raw HTML omitted -->object<!-- raw HTML omitted --> for some time, i.e.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#control_rate-instance_method" title="#control_rate (instance method)">#<strong>control_rate</strong>  &#x21d2; Gst::ClockTime </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Obtain the control-rate for this <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#control_rate=-instance_method" title="#control_rate= (instance method)">#<strong>control_rate=</strong>(control_rate)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Change the control-rate for this <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_error-instance_method" title="#default_error (instance method)">#<strong>default_error</strong>(error, debug)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A default error function that uses g_printerr() to display the error message and the optional debug string..</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_control_binding-instance_method" title="#get_control_binding (instance method)">#<strong>get_control_binding</strong>(property_name)  &#x21d2; Gst::ControlBinding </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the corresponding Gst::ControlBinding for the property.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_g_value_array-instance_method" title="#get_g_value_array (instance method)">#<strong>get_g_value_array</strong>(property_name, timestamp, interval, n_values, values)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a number of #GValues for the given controlled property starting at the requested time.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_value-instance_method" title="#get_value (instance method)">#<strong>get_value</strong>(property_name, timestamp)  &#x21d2; GObject::Value </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the value for the given controlled property at the requested time.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_value_array-instance_method" title="#get_value_array (instance method)">#<strong>get_value_array</strong>(property_name, timestamp, interval, n_values, values)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a number of values for the given controlled property starting at the requested time.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_active_control_bindings-instance_method" title="#has_active_control_bindings (instance method)">#<strong>has_active_control_bindings</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if the <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has active controlled properties.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_ancestor-instance_method" title="#has_ancestor (instance method)">#<strong>has_ancestor</strong>(ancestor)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has an ancestor <!-- raw HTML omitted -->ancestor<!-- raw HTML omitted --> somewhere up in the hierarchy.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_as_ancestor-instance_method" title="#has_as_ancestor (instance method)">#<strong>has_as_ancestor</strong>(ancestor)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has an ancestor <!-- raw HTML omitted -->ancestor<!-- raw HTML omitted --> somewhere up in the hierarchy.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_as_parent-instance_method" title="#has_as_parent (instance method)">#<strong>has_as_parent</strong>(parent)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is the parent of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name=-instance_method" title="#name= (instance method)">#<strong>name=</strong>(name)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parent-instance_method" title="#parent (instance method)">#<strong>parent</strong>  &#x21d2; Gst::Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The parent of the object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parent=-instance_method" title="#parent= (instance method)">#<strong>parent=</strong>(parent)  &#x21d2; Gst::Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The parent of the object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#path_string-instance_method" title="#path_string (instance method)">#<strong>path_string</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Generates a string describing the path of <!-- raw HTML omitted -->object<!-- raw HTML omitted --> in the object hierarchy.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ref-instance_method" title="#ref (instance method)">#<strong>ref</strong>  &#x21d2; Gst::Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Increments the reference count on <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_control_binding-instance_method" title="#remove_control_binding (instance method)">#<strong>remove_control_binding</strong>(binding)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes the corresponding Gst::ControlBinding.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_control_binding_disabled-instance_method" title="#set_control_binding_disabled (instance method)">#<strong>set_control_binding_disabled</strong>(property_name, disabled)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This function is used to disable the control bindings on a property for some time, i.e.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#suggest_next_sync-instance_method" title="#suggest_next_sync (instance method)">#<strong>suggest_next_sync</strong>  &#x21d2; Gst::ClockTime </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a suggestion for timestamps where buffers should be split to get best controller results.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sync_values-instance_method" title="#sync_values (instance method)">#<strong>sync_values</strong>(timestamp)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the properties of the object, according to the Gst::ControlSources that (maybe) handle them and for the given timestamp.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unparent-instance_method" title="#unparent (instance method)">#<strong>unparent</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Clear the parent of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->, removing the associated reference.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unref-instance_method" title="#unref (instance method)">#<strong>unref</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Decrements the reference count on <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="check_uniqueness-class_method">
+  
+    .<strong>check_uniqueness</strong>(list, name)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks to see if there is any object named <!-- raw HTML omitted -->name<!-- raw HTML omitted --> in <!-- raw HTML omitted -->list<!-- raw HTML omitted -->. This function
+does not do any locking of any kind. You might want to protect the
+provided list with the lock of the owner of the list. This function
+will lock each Gst::Object in the list to compare the name, so be
+careful when passing a list with a locked object.
+false if it does.</p>
+<p>MT safe. Grabs and releases the LOCK of each object in the list.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>list</span>
+      
+      
+        <span class='type'>(<tt>GLib::List&lt;<span class='object_link'><a href="" title="Gst::Object (class)">Gst::Object</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a list of Gst::Object to
+check through</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name to search for</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if a Gst::Object named <!-- raw HTML omitted -->name<!-- raw HTML omitted --> does not appear in <!-- raw HTML omitted -->list<!-- raw HTML omitted -->,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_deep_notify-class_method">
+  
+    .<strong>default_deep_notify</strong>(object, orig, pspec, excluded_props)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A default deep_notify signal callback for an object. The user data
+should contain a pointer to an array of strings that should be excluded
+from the notify. The default handler will print the new value of the property
+using g_print.</p>
+<p>MT safe. This function grabs and releases <!-- raw HTML omitted -->object<!-- raw HTML omitted -->'s LOCK for getting its
+path string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>object</span>
+      
+      
+        <span class='type'>(<tt>GObject::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the #GObject that signalled the notify.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>orig</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Object that initiated the notify.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pspec</span>
+      
+      
+        <span class='type'>(<tt>GObject::ParamSpec</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a GParam::Spec of the property.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>excluded_props</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a set of user-specified properties to exclude or nil to show
+all changes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ref_sink-class_method">
+  
+    .<strong>ref_sink</strong>(object)  &#x21d2; <tt>GObject</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Increase the reference count of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->, and possibly remove the floating
+reference, if <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has a floating reference.</p>
+<p>In other words, if the object is floating, then this call &quot;assumes ownership&quot;
+of the floating reference, converting it to a normal reference by clearing
+the floating flag while leaving the reference count unchanged. If the object
+is not floating, then this call adds a new normal reference increasing the
+reference count by one.</p>
+<p>For more background on &quot;floating references&quot; please see the #GObject
+documentation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>object</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Object to sink</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="replace-class_method">
+  
+    .<strong>replace</strong>(oldobj, newobj)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Atomically modifies a pointer to point to a new object.
+The reference count of <!-- raw HTML omitted -->oldobj<!-- raw HTML omitted --> is decreased and the reference count of
+<!-- raw HTML omitted -->newobj<!-- raw HTML omitted --> is increased.</p>
+<p>Either <!-- raw HTML omitted -->newobj<!-- raw HTML omitted --> and the value pointed to by <!-- raw HTML omitted -->oldobj<!-- raw HTML omitted --> may be nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>oldobj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>pointer to a place of
+a Gst::Object to replace</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>newobj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Gst::Object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->newobj<!-- raw HTML omitted --> was different from <!-- raw HTML omitted -->oldobj<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_control_binding-instance_method">
+  
+    #<strong>add_control_binding</strong>(binding)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Attach the Gst::ControlBinding to the object. If there already was a
+Gst::ControlBinding for this property it will be replaced.</p>
+<p>The object's reference count will be incremented, and any floating
+reference will be removed (see gst_object_ref_sink())
+has been setup for a non suitable property, true otherwise.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>binding</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ControlBinding.html" title="Gst::ControlBinding (class)">Gst::ControlBinding</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::ControlBinding that should be used</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>false if the given <!-- raw HTML omitted -->binding<!-- raw HTML omitted --> has not been setup for this object or</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="control_bindings_disabled=-instance_method">
+  
+    #<strong>control_bindings_disabled=</strong>(disabled)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This function is used to disable all controlled properties of the <!-- raw HTML omitted -->object<!-- raw HTML omitted --> for
+some time, i.e. gst_object_sync_values() will do nothing.
+or not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>disabled</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>boolean that specifies whether to disable the controller</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="control_rate-instance_method">
+  
+    #<strong>control_rate</strong>  &#x21d2; <tt>Gst::ClockTime</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Obtain the control-rate for this <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. Audio processing Gst::Element
+objects will use this rate to sub-divide their processing loop and call
+gst_object_sync_values() in between. The length of the processing segment
+should be up to <!-- raw HTML omitted -->control<!-- raw HTML omitted -->-rate nanoseconds.</p>
+<p>If the <!-- raw HTML omitted -->object<!-- raw HTML omitted --> is not under property control, this will return
+%GST_CLOCK_TIME_NONE. This allows the element to avoid the sub-dividing.</p>
+<p>The control-rate is not expected to change if the element is in
+%GST_STATE_PAUSED or %GST_STATE_PLAYING.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the control rate in nanoseconds</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="control_rate=-instance_method">
+  
+    #<strong>control_rate=</strong>(control_rate)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Change the control-rate for this <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. Audio processing Gst::Element
+objects will use this rate to sub-divide their processing loop and call
+gst_object_sync_values() in between. The length of the processing segment
+should be up to <!-- raw HTML omitted -->control<!-- raw HTML omitted -->-rate nanoseconds.</p>
+<p>The control-rate should not change if the element is in %GST_STATE_PAUSED or
+%GST_STATE_PLAYING.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>control_rate</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new control-rate in nanoseconds.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_error-instance_method">
+  
+    #<strong>default_error</strong>(error, debug)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A default error function that uses g_printerr() to display the error message
+and the optional debug string..</p>
+<p>The default handler will simply print the error string using g_print.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>error</span>
+      
+      
+        <span class='type'>(<tt>GLib::Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the GError.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>debug</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an additional debug information string, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_control_binding-instance_method">
+  
+    #<strong>get_control_binding</strong>(property_name)  &#x21d2; <tt><span class='object_link'><a href="ControlBinding.html" title="Gst::ControlBinding (class)">Gst::ControlBinding</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the corresponding Gst::ControlBinding for the property. This should be
+unreferenced again after use.
+<!-- raw HTML omitted -->property_name<!-- raw HTML omitted --> or nil if the property is not controlled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name of the property</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ControlBinding.html" title="Gst::ControlBinding (class)">Gst::ControlBinding</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::ControlBinding for</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_g_value_array-instance_method">
+  
+    #<strong>get_g_value_array</strong>(property_name, timestamp, interval, n_values, values)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a number of #GValues for the given controlled property starting at the
+requested time. The array <!-- raw HTML omitted -->values<!-- raw HTML omitted --> need to hold enough space for <!-- raw HTML omitted -->n_values<!-- raw HTML omitted --> of
+#GValue.</p>
+<p>This function is useful if one wants to e.g. draw a graph of the control
+curve or apply a control curve sample by sample.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the property to get</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timestamp</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the time that should be processed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interval</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the time spacing between subsequent values</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_values</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of values</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>values</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;GObject::Value&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>array to put control-values in</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the given array could be filled, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_value-instance_method">
+  
+    #<strong>get_value</strong>(property_name, timestamp)  &#x21d2; <tt>GObject::Value</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the value for the given controlled property at the requested time.
+or nil if the property isn't controlled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the property to get</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timestamp</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the time the control-change should be read from</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the GValue of the property at the given time,</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_value_array-instance_method">
+  
+    #<strong>get_value_array</strong>(property_name, timestamp, interval, n_values, values)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a number of values for the given controlled property starting at the
+requested time. The array <!-- raw HTML omitted -->values<!-- raw HTML omitted --> need to hold enough space for <!-- raw HTML omitted -->n_values<!-- raw HTML omitted --> of
+the same type as the objects property's type.</p>
+<p>This function is useful if one wants to e.g. draw a graph of the control
+curve or apply a control curve sample by sample.</p>
+<p>The values are unboxed and ready to be used. The similar function
+gst_object_get_g_value_array() returns the array as #GValues and is
+better suites for bindings.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the property to get</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timestamp</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the time that should be processed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interval</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the time spacing between subsequent values</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_values</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of values</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>values</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;GObject&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>array to put control-values in</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the given array could be filled, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_active_control_bindings-instance_method">
+  
+    #<strong>has_active_control_bindings</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if the <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has active controlled properties.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the object has active controlled properties</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_ancestor-instance_method">
+  
+    #<strong>has_ancestor</strong>(ancestor)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has an ancestor <!-- raw HTML omitted -->ancestor<!-- raw HTML omitted --> somewhere up in
+the hierarchy. One can e.g. check if a Gst::Element is inside a #GstPipeline.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ancestor</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Object to check as ancestor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->ancestor<!-- raw HTML omitted --> is an ancestor of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_as_ancestor-instance_method">
+  
+    #<strong>has_as_ancestor</strong>(ancestor)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has an ancestor <!-- raw HTML omitted -->ancestor<!-- raw HTML omitted --> somewhere up in
+the hierarchy. One can e.g. check if a Gst::Element is inside a #GstPipeline.
+MT safe. Grabs and releases <!-- raw HTML omitted -->object<!-- raw HTML omitted -->'s locks.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ancestor</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Object to check as ancestor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if <!-- raw HTML omitted -->ancestor<!-- raw HTML omitted --> is an ancestor of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_as_parent-instance_method">
+  
+    #<strong>has_as_parent</strong>(parent)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is the parent of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.
+E.g. a Gst::Element can check if it owns a given #GstPad.
+MT safe. Grabs and releases <!-- raw HTML omitted -->object<!-- raw HTML omitted -->'s locks.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Object to check as parent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>false if either <!-- raw HTML omitted -->object<!-- raw HTML omitted --> or <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is nil. true if <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is
+the parent of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. Otherwise false.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="name=-instance_method">
+  
+    #<strong>name=</strong>(name)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parent-instance_method">
+  
+    #<strong>parent</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gst::Object (class)">Gst::Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The parent of the object. Please note, that when changing the 'parent'
+property, we don't emit #GObject::notify and Gst::Object::deep-notify
+signals due to locking issues. In some cases one can use
+Gst::Bin::element-added or #GstBin::element-removed signals on the parent to
+achieve a similar effect.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>parent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parent=-instance_method">
+  
+    #<strong>parent=</strong>(parent)  &#x21d2; <tt><span class='object_link'><a href="" title="Gst::Object (class)">Gst::Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The parent of the object. Please note, that when changing the 'parent'
+property, we don't emit #GObject::notify and Gst::Object::deep-notify
+signals due to locking issues. In some cases one can use
+Gst::Bin::element-added or #GstBin::element-removed signals on the parent to
+achieve a similar effect.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>parent</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>parent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="path_string-instance_method">
+  
+    #<strong>path_string</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Generates a string describing the path of <!-- raw HTML omitted -->object<!-- raw HTML omitted --> in
+the object hierarchy. Only useful (or used) for debugging.</p>
+<p>Free-function: g_free
+MT safe. Grabs and releases the Gst::Object's LOCK for all objects
+in the hierarchy.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a string describing the path of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. You must
+g_free() the string after usage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ref-instance_method">
+  
+    #<strong>ref</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gst::Object (class)">Gst::Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Increments the reference count on <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. This function
+does not take the lock on <!-- raw HTML omitted -->object<!-- raw HTML omitted --> because it relies on
+atomic refcounting.</p>
+<p>This object returns the input parameter to ease writing
+constructs like :
+result = gst_object_ref (object-&gt;parent);</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gst::Object (class)">Gst::Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A pointer to <!-- raw HTML omitted -->object<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_control_binding-instance_method">
+  
+    #<strong>remove_control_binding</strong>(binding)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes the corresponding Gst::ControlBinding. If it was the
+last ref of the binding, it will be disposed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>binding</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ControlBinding.html" title="Gst::ControlBinding (class)">Gst::ControlBinding</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the binding</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the binding could be removed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_control_binding_disabled-instance_method">
+  
+    #<strong>set_control_binding_disabled</strong>(property_name, disabled)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This function is used to disable the control bindings on a property for
+some time, i.e. gst_object_sync_values() will do nothing for the
+property.
+or not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>property_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>property to disable</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>disabled</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>boolean that specifies whether to disable the controller</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="suggest_next_sync-instance_method">
+  
+    #<strong>suggest_next_sync</strong>  &#x21d2; <tt>Gst::ClockTime</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a suggestion for timestamps where buffers should be split
+to get best controller results.
+if no control-rate was set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Returns the suggested timestamp or %GST_CLOCK_TIME_NONE</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sync_values-instance_method">
+  
+    #<strong>sync_values</strong>(timestamp)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the properties of the object, according to the Gst::ControlSources that
+(maybe) handle them and for the given timestamp.</p>
+<p>If this function fails, it is most likely the application developers fault.
+Most probably the control sources are not setup correctly.
+properties, false otherwise</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>timestamp</span>
+      
+      
+        <span class='type'>(<tt>Gst::ClockTime</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the time that should be processed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the controller values could be applied to the object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unparent-instance_method">
+  
+    #<strong>unparent</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Clear the parent of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->, removing the associated reference.
+This function decreases the refcount of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.</p>
+<p>MT safe. Grabs and releases <!-- raw HTML omitted -->object<!-- raw HTML omitted -->'s lock.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unref-instance_method">
+  
+    #<strong>unref</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Decrements the reference count on <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.  If reference count hits
+zero, destroy <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. This function does not take the lock
+on <!-- raw HTML omitted -->object<!-- raw HTML omitted --> as it relies on atomic refcounting.</p>
+<p>The unref method should never be called with the LOCK held since
+this might deadlock the dispose function.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

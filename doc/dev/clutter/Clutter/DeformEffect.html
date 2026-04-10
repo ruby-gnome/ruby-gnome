@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Clutter::DeformEffect
+  
+    &mdash; Ruby/Clutter
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Clutter::DeformEffect";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter</a></span></span>
+     &raquo; 
+    <span class="title">DeformEffect</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Clutter::DeformEffect
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="OffscreenEffect.html" title="Clutter::OffscreenEffect (class)">OffscreenEffect</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="ActorMeta.html" title="Clutter::ActorMeta (class)">ActorMeta</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="Effect.html" title="Clutter::Effect (class)">Effect</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="OffscreenEffect.html" title="Clutter::OffscreenEffect (class)">OffscreenEffect</a></span></li>
+          
+            <li class="next">Clutter::DeformEffect</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The Clutter::DeformEffectClass structure contains
+only private data</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="PageTurnEffect.html" title="Clutter::PageTurnEffect (class)">PageTurnEffect</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#back_material-instance_method" title="#back_material (instance method)">#<strong>back_material</strong>  &#x21d2; Clutter:: </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A material to be used when painting the back of the actor to which this effect has been applied.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#back_material=-instance_method" title="#back_material= (instance method)">#<strong>back_material=</strong>(back_material)  &#x21d2; Clutter:: </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A material to be used when painting the back of the actor to which this effect has been applied.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_n_tiles-instance_method" title="#get_n_tiles (instance method)">#<strong>get_n_tiles</strong>(x_tiles, y_tiles)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the number of horizontal and vertical tiles used to sub-divide the actor's geometry during the effect.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#invalidate-instance_method" title="#invalidate (instance method)">#<strong>invalidate</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Invalidates the <!-- raw HTML omitted -->effect<!-- raw HTML omitted --><!-- raw HTML omitted -->'s vertices and, if it is associated to an actor, it will queue a redraw.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_n_tiles-instance_method" title="#set_n_tiles (instance method)">#<strong>set_n_tiles</strong>(x_tiles, y_tiles)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the number of horizontal and vertical tiles to be used when applying the effect.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#x_tiles-instance_method" title="#x_tiles (instance method)">#<strong>x_tiles</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of horizontal tiles.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#x_tiles=-instance_method" title="#x_tiles= (instance method)">#<strong>x_tiles=</strong>(x_tiles)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of horizontal tiles.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#y_tiles-instance_method" title="#y_tiles (instance method)">#<strong>y_tiles</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of vertical tiles.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#y_tiles=-instance_method" title="#y_tiles= (instance method)">#<strong>y_tiles=</strong>(y_tiles)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of vertical tiles.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="OffscreenEffect.html" title="Clutter::OffscreenEffect (class)">OffscreenEffect</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="OffscreenEffect.html#create_texture-instance_method" title="Clutter::OffscreenEffect#create_texture (method)">#create_texture</a></span>, <span class='object_link'><a href="OffscreenEffect.html#get_target_rect-instance_method" title="Clutter::OffscreenEffect#get_target_rect (method)">#get_target_rect</a></span>, <span class='object_link'><a href="OffscreenEffect.html#get_target_size-instance_method" title="Clutter::OffscreenEffect#get_target_size (method)">#get_target_size</a></span>, <span class='object_link'><a href="OffscreenEffect.html#paint_target-instance_method" title="Clutter::OffscreenEffect#paint_target (method)">#paint_target</a></span>, <span class='object_link'><a href="OffscreenEffect.html#target-instance_method" title="Clutter::OffscreenEffect#target (method)">#target</a></span>, <span class='object_link'><a href="OffscreenEffect.html#texture-instance_method" title="Clutter::OffscreenEffect#texture (method)">#texture</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Effect.html" title="Clutter::Effect (class)">Effect</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Effect.html#queue_repaint-instance_method" title="Clutter::Effect#queue_repaint (method)">#queue_repaint</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ActorMeta.html" title="Clutter::ActorMeta (class)">ActorMeta</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="ActorMeta.html#actor-instance_method" title="Clutter::ActorMeta#actor (method)">#actor</a></span>, <span class='object_link'><a href="ActorMeta.html#actor=-instance_method" title="Clutter::ActorMeta#actor= (method)">#actor=</a></span>, <span class='object_link'><a href="ActorMeta.html#enabled-instance_method" title="Clutter::ActorMeta#enabled (method)">#enabled</a></span>, <span class='object_link'><a href="ActorMeta.html#enabled=-instance_method" title="Clutter::ActorMeta#enabled= (method)">#enabled=</a></span>, <span class='object_link'><a href="ActorMeta.html#enabled%3F-instance_method" title="Clutter::ActorMeta#enabled? (method)">#enabled?</a></span>, <span class='object_link'><a href="ActorMeta.html#name-instance_method" title="Clutter::ActorMeta#name (method)">#name</a></span>, <span class='object_link'><a href="ActorMeta.html#name=-instance_method" title="Clutter::ActorMeta#name= (method)">#name=</a></span></p>
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="back_material-instance_method">
+  
+    #<strong>back_material</strong>  &#x21d2; <tt><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter::</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A material to be used when painting the back of the actor
+to which this effect has been applied</p>
+<p>By default, no material will be used</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter::</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>back-material</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="back_material=-instance_method">
+  
+    #<strong>back_material=</strong>(back_material)  &#x21d2; <tt><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter::</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A material to be used when painting the back of the actor
+to which this effect has been applied</p>
+<p>By default, no material will be used</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>back_material</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter::</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter::</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>back-material</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter::</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>back-material</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_n_tiles-instance_method">
+  
+    #<strong>get_n_tiles</strong>(x_tiles, y_tiles)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the number of horizontal and vertical tiles used to sub-divide
+the actor's geometry during the effect</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x_tiles</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the number of horizontal tiles,
+or nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y_tiles</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the number of vertical tiles,
+or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="invalidate-instance_method">
+  
+    #<strong>invalidate</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Invalidates the <!-- raw HTML omitted -->effect<!-- raw HTML omitted --><!-- raw HTML omitted -->'s vertices and, if it is associated
+to an actor, it will queue a redraw</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_n_tiles-instance_method">
+  
+    #<strong>set_n_tiles</strong>(x_tiles, y_tiles)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the number of horizontal and vertical tiles to be used
+when applying the effect</p>
+<p>More tiles allow a finer grained deformation at the expenses
+of computation</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x_tiles</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>number of horizontal tiles</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y_tiles</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>number of vertical tiles</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="x_tiles-instance_method">
+  
+    #<strong>x_tiles</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of horizontal tiles. The bigger the number, the
+smaller the tiles</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>x-tiles</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="x_tiles=-instance_method">
+  
+    #<strong>x_tiles=</strong>(x_tiles)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of horizontal tiles. The bigger the number, the
+smaller the tiles</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x_tiles</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>x-tiles</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>x-tiles</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="y_tiles-instance_method">
+  
+    #<strong>y_tiles</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of vertical tiles. The bigger the number, the
+smaller the tiles</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>y-tiles</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="y_tiles=-instance_method">
+  
+    #<strong>y_tiles=</strong>(y_tiles)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of vertical tiles. The bigger the number, the
+smaller the tiles</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>y_tiles</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>y-tiles</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>y-tiles</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: GstAudio::AudioFormat
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GstAudio::AudioFormat";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GstAudio.html" title="GstAudio (module)">GstAudio</a></span></span>
+     &raquo; 
+    <span class="title">AudioFormat</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: GstAudio::AudioFormat
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="UNKNOWN-constant" class="">UNKNOWN =
+          <div class="docstring">
+  <div class="discussion">
+    <p>unknown or unset audio format</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:unknown</span></pre></dd>
+      
+        <dt id="ENCODED-constant" class="">ENCODED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>encoded audio format</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:encoded</span></pre></dd>
+      
+        <dt id="S8-constant" class="">S8 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>8 bits in 8 bits, signed</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:s8</span></pre></dd>
+      
+        <dt id="U8-constant" class="">U8 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>8 bits in 8 bits, unsigned</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:u8</span></pre></dd>
+      
+        <dt id="S16LE-constant" class="">S16LE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>16 bits in 16 bits, signed, little endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:s16le</span></pre></dd>
+      
+        <dt id="S16BE-constant" class="">S16BE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>16 bits in 16 bits, signed, big endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:s16be</span></pre></dd>
+      
+        <dt id="U16LE-constant" class="">U16LE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>16 bits in 16 bits, unsigned, little endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:u16le</span></pre></dd>
+      
+        <dt id="U16BE-constant" class="">U16BE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>16 bits in 16 bits, unsigned, big endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:u16be</span></pre></dd>
+      
+        <dt id="S24_32LE-constant" class="">S24_32LE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>24 bits in 32 bits, signed, little endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:s24_32le</span></pre></dd>
+      
+        <dt id="S24_32BE-constant" class="">S24_32BE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>24 bits in 32 bits, signed, big endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span> <span class='kw'>or</span> <span class='symbol'>:s24_32be</span></pre></dd>
+      
+        <dt id="U24_32LE-constant" class="">U24_32LE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>24 bits in 32 bits, unsigned, little endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:u24_32le</span></pre></dd>
+      
+        <dt id="U24_32BE-constant" class="">U24_32BE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>24 bits in 32 bits, unsigned, big endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span> <span class='kw'>or</span> <span class='symbol'>:u24_32be</span></pre></dd>
+      
+        <dt id="S32LE-constant" class="">S32LE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>32 bits in 32 bits, signed, little endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span> <span class='kw'>or</span> <span class='symbol'>:s32le</span></pre></dd>
+      
+        <dt id="S32BE-constant" class="">S32BE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>32 bits in 32 bits, signed, big endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>13</span> <span class='kw'>or</span> <span class='symbol'>:s32be</span></pre></dd>
+      
+        <dt id="U32LE-constant" class="">U32LE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>32 bits in 32 bits, unsigned, little endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>14</span> <span class='kw'>or</span> <span class='symbol'>:u32le</span></pre></dd>
+      
+        <dt id="U32BE-constant" class="">U32BE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>32 bits in 32 bits, unsigned, big endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>15</span> <span class='kw'>or</span> <span class='symbol'>:u32be</span></pre></dd>
+      
+        <dt id="S24LE-constant" class="">S24LE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>24 bits in 24 bits, signed, little endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span> <span class='kw'>or</span> <span class='symbol'>:s24le</span></pre></dd>
+      
+        <dt id="S24BE-constant" class="">S24BE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>24 bits in 24 bits, signed, big endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>17</span> <span class='kw'>or</span> <span class='symbol'>:s24be</span></pre></dd>
+      
+        <dt id="U24LE-constant" class="">U24LE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>24 bits in 24 bits, unsigned, little endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>18</span> <span class='kw'>or</span> <span class='symbol'>:u24le</span></pre></dd>
+      
+        <dt id="U24BE-constant" class="">U24BE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>24 bits in 24 bits, unsigned, big endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>19</span> <span class='kw'>or</span> <span class='symbol'>:u24be</span></pre></dd>
+      
+        <dt id="S20LE-constant" class="">S20LE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>20 bits in 24 bits, signed, little endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>20</span> <span class='kw'>or</span> <span class='symbol'>:s20le</span></pre></dd>
+      
+        <dt id="S20BE-constant" class="">S20BE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>20 bits in 24 bits, signed, big endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>21</span> <span class='kw'>or</span> <span class='symbol'>:s20be</span></pre></dd>
+      
+        <dt id="U20LE-constant" class="">U20LE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>20 bits in 24 bits, unsigned, little endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>22</span> <span class='kw'>or</span> <span class='symbol'>:u20le</span></pre></dd>
+      
+        <dt id="U20BE-constant" class="">U20BE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>20 bits in 24 bits, unsigned, big endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>23</span> <span class='kw'>or</span> <span class='symbol'>:u20be</span></pre></dd>
+      
+        <dt id="S18LE-constant" class="">S18LE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>18 bits in 24 bits, signed, little endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>24</span> <span class='kw'>or</span> <span class='symbol'>:s18le</span></pre></dd>
+      
+        <dt id="S18BE-constant" class="">S18BE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>18 bits in 24 bits, signed, big endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>25</span> <span class='kw'>or</span> <span class='symbol'>:s18be</span></pre></dd>
+      
+        <dt id="U18LE-constant" class="">U18LE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>18 bits in 24 bits, unsigned, little endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>26</span> <span class='kw'>or</span> <span class='symbol'>:u18le</span></pre></dd>
+      
+        <dt id="U18BE-constant" class="">U18BE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>18 bits in 24 bits, unsigned, big endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>27</span> <span class='kw'>or</span> <span class='symbol'>:u18be</span></pre></dd>
+      
+        <dt id="F32LE-constant" class="">F32LE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>32-bit floating point samples, little endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>28</span> <span class='kw'>or</span> <span class='symbol'>:f32le</span></pre></dd>
+      
+        <dt id="F32BE-constant" class="">F32BE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>32-bit floating point samples, big endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>29</span> <span class='kw'>or</span> <span class='symbol'>:f32be</span></pre></dd>
+      
+        <dt id="F64LE-constant" class="">F64LE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>64-bit floating point samples, little endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>30</span> <span class='kw'>or</span> <span class='symbol'>:f64le</span></pre></dd>
+      
+        <dt id="F64BE-constant" class="">F64BE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>64-bit floating point samples, big endian</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>31</span> <span class='kw'>or</span> <span class='symbol'>:f64be</span></pre></dd>
+      
+        <dt id="S16-constant" class="">S16 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>16 bits in 16 bits, signed, native endianness</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:s16</span></pre></dd>
+      
+        <dt id="U16-constant" class="">U16 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>16 bits in 16 bits, unsigned, native endianness</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:u16</span></pre></dd>
+      
+        <dt id="S24_32-constant" class="">S24_32 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>24 bits in 32 bits, signed, native endianness</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:s24_32</span></pre></dd>
+      
+        <dt id="U24_32-constant" class="">U24_32 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>24 bits in 32 bits, unsigned, native endianness</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:u24_32</span></pre></dd>
+      
+        <dt id="S32-constant" class="">S32 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>32 bits in 32 bits, signed, native endianness</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span> <span class='kw'>or</span> <span class='symbol'>:s32</span></pre></dd>
+      
+        <dt id="U32-constant" class="">U32 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>32 bits in 32 bits, unsigned, native endianness</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>14</span> <span class='kw'>or</span> <span class='symbol'>:u32</span></pre></dd>
+      
+        <dt id="S24-constant" class="">S24 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>24 bits in 24 bits, signed, native endianness</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span> <span class='kw'>or</span> <span class='symbol'>:s24</span></pre></dd>
+      
+        <dt id="U24-constant" class="">U24 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>24 bits in 24 bits, unsigned, native endianness</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>18</span> <span class='kw'>or</span> <span class='symbol'>:u24</span></pre></dd>
+      
+        <dt id="S20-constant" class="">S20 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>20 bits in 24 bits, signed, native endianness</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>20</span> <span class='kw'>or</span> <span class='symbol'>:s20</span></pre></dd>
+      
+        <dt id="U20-constant" class="">U20 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>20 bits in 24 bits, unsigned, native endianness</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>22</span> <span class='kw'>or</span> <span class='symbol'>:u20</span></pre></dd>
+      
+        <dt id="S18-constant" class="">S18 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>18 bits in 24 bits, signed, native endianness</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>24</span> <span class='kw'>or</span> <span class='symbol'>:s18</span></pre></dd>
+      
+        <dt id="U18-constant" class="">U18 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>18 bits in 24 bits, unsigned, native endianness</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>26</span> <span class='kw'>or</span> <span class='symbol'>:u18</span></pre></dd>
+      
+        <dt id="F32-constant" class="">F32 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>32-bit floating point samples, native endianness</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>28</span> <span class='kw'>or</span> <span class='symbol'>:f32</span></pre></dd>
+      
+        <dt id="F64-constant" class="">F64 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>64-bit floating point samples, native endianness</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>30</span> <span class='kw'>or</span> <span class='symbol'>:f64</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

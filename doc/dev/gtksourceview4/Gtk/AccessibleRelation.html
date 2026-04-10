@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Gtk::AccessibleRelation
+  
+    &mdash; Ruby/GtkSourceView4
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::AccessibleRelation";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">AccessibleRelation</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Gtk::AccessibleRelation
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="ACTIVE_DESCENDANT-constant" class="">ACTIVE_DESCENDANT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Identifies the currently active
+element when focus is on a composite widget, combobox, textbox, group,
+or application. Value type: reference</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span> <span class='kw'>or</span> <span class='symbol'>:active_descendant</span></pre></dd>
+      
+        <dt id="COL_COUNT-constant" class="">COL_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Defines the total number of columns
+in a table, grid, or treegrid. Value type: integer</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span> <span class='kw'>or</span> <span class='symbol'>:col_count</span></pre></dd>
+      
+        <dt id="COL_INDEX-constant" class="">COL_INDEX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Defines an element's column index or
+position with respect to the total number of columns within a table,
+grid, or treegrid. Value type: integer</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:col_index</span></pre></dd>
+      
+        <dt id="COL_INDEX_TEXT-constant" class="">COL_INDEX_TEXT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Defines a human readable text
+alternative of %GTK_ACCESSIBLE_RELATION_COL_INDEX. Value type: string</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:col_index_text</span></pre></dd>
+      
+        <dt id="COL_SPAN-constant" class="">COL_SPAN =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Defines the number of columns spanned
+by a cell or gridcell within a table, grid, or treegrid. Value type: integer</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:col_span</span></pre></dd>
+      
+        <dt id="CONTROLS-constant" class="">CONTROLS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Identifies the element (or elements) whose
+contents or presence are controlled by the current element. Value type: reference</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:controls</span></pre></dd>
+      
+        <dt id="DESCRIBED_BY-constant" class="">DESCRIBED_BY =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Identifies the element (or elements)
+that describes the object. Value type: reference</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span> <span class='kw'>or</span> <span class='symbol'>:described_by</span></pre></dd>
+      
+        <dt id="DETAILS-constant" class="">DETAILS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Identifies the element (or elements) that
+provide additional information related to the object. Value type: reference</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span> <span class='kw'>or</span> <span class='symbol'>:details</span></pre></dd>
+      
+        <dt id="ERROR_MESSAGE-constant" class="">ERROR_MESSAGE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Identifies the element that provides
+an error message for an object. Value type: reference</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:error_message</span></pre></dd>
+      
+        <dt id="FLOW_TO-constant" class="">FLOW_TO =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Identifies the next element (or elements)
+in an alternate reading order of content which, at the user's discretion,
+allows assistive technology to override the general default of reading in
+document source order. Value type: reference</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span> <span class='kw'>or</span> <span class='symbol'>:flow_to</span></pre></dd>
+      
+        <dt id="LABELLED_BY-constant" class="">LABELLED_BY =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Identifies the element (or elements)
+that labels the current element. Value type: reference</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span> <span class='kw'>or</span> <span class='symbol'>:labelled_by</span></pre></dd>
+      
+        <dt id="OWNS-constant" class="">OWNS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Identifies an element (or elements) in order
+to define a visual, functional, or contextual parent/child relationship
+between elements where the widget hierarchy cannot be used to represent
+the relationship. Value type: reference</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span> <span class='kw'>or</span> <span class='symbol'>:owns</span></pre></dd>
+      
+        <dt id="POS_IN_SET-constant" class="">POS_IN_SET =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Defines an element's number or position
+in the current set of listitems or treeitems. Value type: integer</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span> <span class='kw'>or</span> <span class='symbol'>:pos_in_set</span></pre></dd>
+      
+        <dt id="ROW_COUNT-constant" class="">ROW_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Defines the total number of rows in a table,
+grid, or treegrid. Value type: integer</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>13</span> <span class='kw'>or</span> <span class='symbol'>:row_count</span></pre></dd>
+      
+        <dt id="ROW_INDEX-constant" class="">ROW_INDEX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Defines an element's row index or position
+with respect to the total number of rows within a table, grid, or treegrid.
+Value type: integer</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>14</span> <span class='kw'>or</span> <span class='symbol'>:row_index</span></pre></dd>
+      
+        <dt id="ROW_INDEX_TEXT-constant" class="">ROW_INDEX_TEXT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Defines a human readable text
+alternative of aria-rowindex. Value type: string</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>15</span> <span class='kw'>or</span> <span class='symbol'>:row_index_text</span></pre></dd>
+      
+        <dt id="ROW_SPAN-constant" class="">ROW_SPAN =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Defines the number of rows spanned by a
+cell or gridcell within a table, grid, or treegrid. Value type: integer</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span> <span class='kw'>or</span> <span class='symbol'>:row_span</span></pre></dd>
+      
+        <dt id="SET_SIZE-constant" class="">SET_SIZE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Defines the number of items in the current
+set of listitems or treeitems. Value type: integer</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>17</span> <span class='kw'>or</span> <span class='symbol'>:set_size</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

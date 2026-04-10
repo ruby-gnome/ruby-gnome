@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Clutter::ShaderEffect
+  
+    &mdash; Ruby/Clutter
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Clutter::ShaderEffect";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Clutter.html" title="Clutter (module)">Clutter</a></span></span>
+     &raquo; 
+    <span class="title">ShaderEffect</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Clutter::ShaderEffect
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="OffscreenEffect.html" title="Clutter::OffscreenEffect (class)">OffscreenEffect</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="ActorMeta.html" title="Clutter::ActorMeta (class)">ActorMeta</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="Effect.html" title="Clutter::Effect (class)">Effect</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="OffscreenEffect.html" title="Clutter::OffscreenEffect (class)">OffscreenEffect</a></span></li>
+          
+            <li class="next">Clutter::ShaderEffect</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The Clutter::ShaderEffectClass structure contains
+only private data</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(shader_type)  &#x21d2; Clutter::Effect </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Clutter::ShaderEffect, to be applied to an actor using clutter_actor_add_effect().</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#program-instance_method" title="#program (instance method)">#<strong>program</strong>  &#x21d2; Cogl::Handle </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a pointer to the program's handle.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_uniform-instance_method" title="#set_uniform (instance method)">#<strong>set_uniform</strong>(name, gtype, n_values, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets a list of values as the payload for the uniform <!-- raw HTML omitted -->name<!-- raw HTML omitted --> inside the shader effect.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_uniform_value-instance_method" title="#set_uniform_value (instance method)">#<strong>set_uniform_value</strong>(name, value)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets <!-- raw HTML omitted -->value<!-- raw HTML omitted --> as the payload for the uniform <!-- raw HTML omitted -->name<!-- raw HTML omitted --> inside the shader effect.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shader-instance_method" title="#shader (instance method)">#<strong>shader</strong>  &#x21d2; Cogl::Handle </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a pointer to the shader's handle.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shader_source=-instance_method" title="#shader_source= (instance method)">#<strong>shader_source=</strong>(source)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the source of the GLSL shader used by <!-- raw HTML omitted -->effect<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shader_type=-instance_method" title="#shader_type= (instance method)">#<strong>shader_type=</strong>(shader_type)  &#x21d2; Clutter::ShaderType </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The type of shader that is used by the effect.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="OffscreenEffect.html" title="Clutter::OffscreenEffect (class)">OffscreenEffect</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="OffscreenEffect.html#create_texture-instance_method" title="Clutter::OffscreenEffect#create_texture (method)">#create_texture</a></span>, <span class='object_link'><a href="OffscreenEffect.html#get_target_rect-instance_method" title="Clutter::OffscreenEffect#get_target_rect (method)">#get_target_rect</a></span>, <span class='object_link'><a href="OffscreenEffect.html#get_target_size-instance_method" title="Clutter::OffscreenEffect#get_target_size (method)">#get_target_size</a></span>, <span class='object_link'><a href="OffscreenEffect.html#paint_target-instance_method" title="Clutter::OffscreenEffect#paint_target (method)">#paint_target</a></span>, <span class='object_link'><a href="OffscreenEffect.html#target-instance_method" title="Clutter::OffscreenEffect#target (method)">#target</a></span>, <span class='object_link'><a href="OffscreenEffect.html#texture-instance_method" title="Clutter::OffscreenEffect#texture (method)">#texture</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Effect.html" title="Clutter::Effect (class)">Effect</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Effect.html#queue_repaint-instance_method" title="Clutter::Effect#queue_repaint (method)">#queue_repaint</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ActorMeta.html" title="Clutter::ActorMeta (class)">ActorMeta</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="ActorMeta.html#actor-instance_method" title="Clutter::ActorMeta#actor (method)">#actor</a></span>, <span class='object_link'><a href="ActorMeta.html#actor=-instance_method" title="Clutter::ActorMeta#actor= (method)">#actor=</a></span>, <span class='object_link'><a href="ActorMeta.html#enabled-instance_method" title="Clutter::ActorMeta#enabled (method)">#enabled</a></span>, <span class='object_link'><a href="ActorMeta.html#enabled=-instance_method" title="Clutter::ActorMeta#enabled= (method)">#enabled=</a></span>, <span class='object_link'><a href="ActorMeta.html#enabled%3F-instance_method" title="Clutter::ActorMeta#enabled? (method)">#enabled?</a></span>, <span class='object_link'><a href="ActorMeta.html#name-instance_method" title="Clutter::ActorMeta#name (method)">#name</a></span>, <span class='object_link'><a href="ActorMeta.html#name=-instance_method" title="Clutter::ActorMeta#name= (method)">#name=</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(shader_type)  &#x21d2; <tt><span class='object_link'><a href="Effect.html" title="Clutter::Effect (class)">Clutter::Effect</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new Clutter::ShaderEffect, to be applied to an actor using
+clutter_actor_add_effect().</p>
+<p>The effect will be empty until clutter_shader_effect_set_shader_source()
+is called.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>shader_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ShaderType.html" title="Clutter::ShaderType (module)">Clutter::ShaderType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the type of the shader, either %CLUTTER_FRAGMENT_SHADER,
+or %CLUTTER_VERTEX_SHADER</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="program-instance_method">
+  
+    #<strong>program</strong>  &#x21d2; <tt>Cogl::Handle</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a pointer to the program's handle</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Cogl::Handle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the program's handle,
+or %COGL_INVALID_HANDLE</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_uniform-instance_method">
+  
+    #<strong>set_uniform</strong>(name, gtype, n_values, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets a list of values as the payload for the uniform <!-- raw HTML omitted -->name<!-- raw HTML omitted --> inside
+the shader effect</p>
+<p>The <!-- raw HTML omitted -->gtype<!-- raw HTML omitted --> must be one of: %G_TYPE_INT, for 1 or more integer values;
+%G_TYPE_FLOAT, for 1 or more floating point values;
+%CLUTTER_TYPE_SHADER_INT, for a pointer to an array of integer values;
+%CLUTTER_TYPE_SHADER_FLOAT, for a pointer to an array of floating point
+values; and %CLUTTER_TYPE_SHADER_MATRIX, for a pointer to an array of
+floating point values mapping a matrix</p>
+<p>The number of values interepreted is defined by the <!-- raw HTML omitted -->n_value<!-- raw HTML omitted -->
+argument, and by the <!-- raw HTML omitted -->gtype<!-- raw HTML omitted --> argument. For instance, a uniform named
+&quot;sampler0&quot; and containing a single integer value is set using:</p>
+<pre class="code ruby"><code class="ruby">  clutter_shader_effect_set_uniform (effect, &quot;map&quot;,
+                                     CLUTTER_TYPE_SHADER_MATRIX, 1,
+                                     cogl_matrix_get_array (&amp;matrix));
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the uniform to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>gtype</span>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the type of the uniform to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_values</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of values</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a list of values</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_uniform_value-instance_method">
+  
+    #<strong>set_uniform_value</strong>(name, value)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets <!-- raw HTML omitted -->value<!-- raw HTML omitted --> as the payload for the uniform <!-- raw HTML omitted -->name<!-- raw HTML omitted --> inside the shader
+effect</p>
+<p>The #GType of the <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be one of: %G_TYPE_INT, for a single
+integer value; %G_TYPE_FLOAT, for a single floating point value;
+%CLUTTER_TYPE_SHADER_INT, for an array of integer values;
+%CLUTTER_TYPE_SHADER_FLOAT, for an array of floating point values;
+and %CLUTTER_TYPE_SHADER_MATRIX, for a matrix of floating point
+values. It also accepts %G_TYPE_DOUBLE for compatibility with other
+languages than C.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the uniform to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>GObject::Value</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a #GValue with the value of the uniform to set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="shader-instance_method">
+  
+    #<strong>shader</strong>  &#x21d2; <tt>Cogl::Handle</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a pointer to the shader's handle</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Cogl::Handle</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a pointer to the shader's handle,
+or %COGL_INVALID_HANDLE</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="shader_source=-instance_method">
+  
+    #<strong>shader_source=</strong>(source)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the source of the GLSL shader used by <!-- raw HTML omitted -->effect<!-- raw HTML omitted --></p>
+<p>This function should only be called by implementations of
+the Clutter::ShaderEffect class, and not by application code.</p>
+<p>This function can only be called once; subsequent calls will
+yield no result.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the source of a GLSL shader</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the source was set</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="shader_type=-instance_method">
+  
+    #<strong>shader_type=</strong>(shader_type)  &#x21d2; <tt><span class='object_link'><a href="ShaderType.html" title="Clutter::ShaderType (module)">Clutter::ShaderType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The type of shader that is used by the effect. This property
+should be set by the constructor of Clutter::ShaderEffect
+sub-classes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>shader_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ShaderType.html" title="Clutter::ShaderType (module)">Clutter::ShaderType</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ShaderType.html" title="Clutter::ShaderType (module)">Clutter::ShaderType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>shader-type</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

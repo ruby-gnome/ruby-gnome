@@ -1,0 +1,5422 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gtk::Snapshot
+  
+    &mdash; Ruby/GtkSourceView4
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gtk::Snapshot";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gtk.html" title="Gtk (module)">Gtk</a></span></span>
+     &raquo; 
+    <span class="title">Snapshot</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gtk::Snapshot
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Gdk::Snapshot</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Gdk::Snapshot</li>
+          
+            <li class="next">Gtk::Snapshot</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>(unknown)</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_border-instance_method" title="#append_border (instance method)">#<strong>append_border</strong>(outline, border_width, border_color)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Appends a stroked border rectangle inside the given <!-- raw HTML omitted -->outline<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_cairo-instance_method" title="#append_cairo (instance method)">#<strong>append_cairo</strong>(bounds)  &#x21d2; cairo::Context </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.CairoNode] and appends it to the current render node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing the current node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_color-instance_method" title="#append_color (instance method)">#<strong>append_color</strong>(color, bounds)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new render node drawing the <!-- raw HTML omitted -->color<!-- raw HTML omitted --> into the given <!-- raw HTML omitted -->bounds<!-- raw HTML omitted --> and appends it to the current render node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_conic_gradient-instance_method" title="#append_conic_gradient (instance method)">#<strong>append_conic_gradient</strong>(bounds, center, rotation, stops, n_stops)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Appends a conic gradient node with the given stops to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_fill-instance_method" title="#append_fill (instance method)">#<strong>append_fill</strong>(path, fill_rule, color)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A convenience method to fill a path with a color.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_inset_shadow-instance_method" title="#append_inset_shadow (instance method)">#<strong>append_inset_shadow</strong>(outline, color, dx, dy, spread, blur_radius)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Appends an inset shadow into the box given by <!-- raw HTML omitted -->outline<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_layout-instance_method" title="#append_layout (instance method)">#<strong>append_layout</strong>(layout, color)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_linear_gradient-instance_method" title="#append_linear_gradient (instance method)">#<strong>append_linear_gradient</strong>(bounds, start_point, end_point, stops, n_stops)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Appends a linear gradient node with the given stops to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_node-instance_method" title="#append_node (instance method)">#<strong>append_node</strong>(node)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Appends <!-- raw HTML omitted -->node<!-- raw HTML omitted --> to the current render node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing the current node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_outset_shadow-instance_method" title="#append_outset_shadow (instance method)">#<strong>append_outset_shadow</strong>(outline, color, dx, dy, spread, blur_radius)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Appends an outset shadow node around the box given by <!-- raw HTML omitted -->outline<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_radial_gradient-instance_method" title="#append_radial_gradient (instance method)">#<strong>append_radial_gradient</strong>(bounds, center, hradius, vradius, start, end, stops, n_stops)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Appends a radial gradient node with the given stops to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_repeating_linear_gradient-instance_method" title="#append_repeating_linear_gradient (instance method)">#<strong>append_repeating_linear_gradient</strong>(bounds, start_point, end_point, stops, n_stops)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Appends a repeating linear gradient node with the given stops to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_repeating_radial_gradient-instance_method" title="#append_repeating_radial_gradient (instance method)">#<strong>append_repeating_radial_gradient</strong>(bounds, center, hradius, vradius, start, end, stops, n_stops)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Appends a repeating radial gradient node with the given stops to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_scaled_texture-instance_method" title="#append_scaled_texture (instance method)">#<strong>append_scaled_texture</strong>(texture, filter, bounds)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new render node drawing the <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> into the given <!-- raw HTML omitted -->bounds<!-- raw HTML omitted --> and appends it to the current render node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_stroke-instance_method" title="#append_stroke (instance method)">#<strong>append_stroke</strong>(path, stroke, color)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A convenience method to stroke a path with a color.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_texture-instance_method" title="#append_texture (instance method)">#<strong>append_texture</strong>(texture, bounds)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new render node drawing the <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> into the given <!-- raw HTML omitted -->bounds<!-- raw HTML omitted --> and appends it to the current render node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#free_to_node-instance_method" title="#free_to_node (instance method)">#<strong>free_to_node</strong>  &#x21d2; Gsk::RenderNode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the node that was constructed by <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> and frees <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#free_to_paintable-instance_method" title="#free_to_paintable (instance method)">#<strong>free_to_paintable</strong>(size)  &#x21d2; Gdk::Paintable </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a paintable for the node that was constructed by <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> and frees <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gl_shader_pop_texture-instance_method" title="#gl_shader_pop_texture (instance method)">#<strong>gl_shader_pop_texture</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes the top element from the stack of render nodes and adds it to the nearest [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShaderNode] below it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Gtk::Snapshot </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new <code>GtkSnapshot</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#perspective-instance_method" title="#perspective (instance method)">#<strong>perspective</strong>(depth)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Applies a perspective projection transform.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pop-instance_method" title="#pop (instance method)">#<strong>pop</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes the top element from the stack of render nodes, and appends it to the node underneath it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_blend-instance_method" title="#push_blend (instance method)">#<strong>push_blend</strong>(blend_mode)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Blends together two images with the given blend mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_blur-instance_method" title="#push_blur (instance method)">#<strong>push_blur</strong>(radius)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Blurs an image.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_clip-instance_method" title="#push_clip (instance method)">#<strong>push_clip</strong>(bounds)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Clips an image to a rectangle.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_color_matrix-instance_method" title="#push_color_matrix (instance method)">#<strong>push_color_matrix</strong>(color_matrix, color_offset)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Modifies the colors of an image by applying an affine transformation in RGB space.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_cross_fade-instance_method" title="#push_cross_fade (instance method)">#<strong>push_cross_fade</strong>(progress)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Snapshots a cross-fade operation between two images with the given <!-- raw HTML omitted -->progress<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_debug-instance_method" title="#push_debug (instance method)">#<strong>push_debug</strong>(message, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Inserts a debug node with a message.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_fill-instance_method" title="#push_fill (instance method)">#<strong>push_fill</strong>(path, fill_rule)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Fills the area given by <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->fill_rule<!-- raw HTML omitted --> with an image and discards everything outside of it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_gl_shader-instance_method" title="#push_gl_shader (instance method)">#<strong>push_gl_shader</strong>(shader, bounds, take_args)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Push a [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShaderNode].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_mask-instance_method" title="#push_mask (instance method)">#<strong>push_mask</strong>(mask_mode)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Until the first call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop], the mask image for the mask operation will be recorded.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_opacity-instance_method" title="#push_opacity (instance method)">#<strong>push_opacity</strong>(opacity)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Modifies the opacity of an image.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_repeat-instance_method" title="#push_repeat (instance method)">#<strong>push_repeat</strong>(bounds, child_bounds)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a node that repeats the child node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_rounded_clip-instance_method" title="#push_rounded_clip (instance method)">#<strong>push_rounded_clip</strong>(bounds)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Clips an image to a rounded rectangle.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_shadow-instance_method" title="#push_shadow (instance method)">#<strong>push_shadow</strong>(shadow, n_shadows)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Applies a shadow to an image.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_stroke-instance_method" title="#push_stroke (instance method)">#<strong>push_stroke</strong>(path, stroke)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Strokes the given <!-- raw HTML omitted -->path<!-- raw HTML omitted --> with the attributes given by <!-- raw HTML omitted -->stroke<!-- raw HTML omitted --> and an image.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_background-instance_method" title="#render_background (instance method)">#<strong>render_background</strong>(context, x, y, width, height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a render node for the CSS background according to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing the current node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_focus-instance_method" title="#render_focus (instance method)">#<strong>render_focus</strong>(context, x, y, width, height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a render node for the focus outline according to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing the current node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_frame-instance_method" title="#render_frame (instance method)">#<strong>render_frame</strong>(context, x, y, width, height)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a render node for the CSS border according to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing the current node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_insertion_cursor-instance_method" title="#render_insertion_cursor (instance method)">#<strong>render_insertion_cursor</strong>(context, x, y, layout, index, direction)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Draws a text caret using <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> at the specified index of <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_layout-instance_method" title="#render_layout (instance method)">#<strong>render_layout</strong>(context, x, y, layout)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a render node for rendering <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> according to the style information in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing the current node.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#restore-instance_method" title="#restore (instance method)">#<strong>restore</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Restores <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> to the state saved by a preceding call to [method<!-- raw HTML omitted -->Snapshot<!-- raw HTML omitted -->.save] and removes that state from the stack of saved states.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rotate-instance_method" title="#rotate (instance method)">#<strong>rotate</strong>(angle)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Rotates @<!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system by <!-- raw HTML omitted -->angle<!-- raw HTML omitted --> degrees in 2D space - or in 3D speak, rotates around the Z axis.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rotate_3d-instance_method" title="#rotate_3d (instance method)">#<strong>rotate_3d</strong>(angle, axis)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Rotates <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system by <!-- raw HTML omitted -->angle<!-- raw HTML omitted --> degrees around <!-- raw HTML omitted -->axis<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save-instance_method" title="#save (instance method)">#<strong>save</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Makes a copy of the current state of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> and saves it on an internal stack.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scale-instance_method" title="#scale (instance method)">#<strong>scale</strong>(factor_x, factor_y)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Scales <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system in 2-dimensional space by the given factors.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scale_3d-instance_method" title="#scale_3d (instance method)">#<strong>scale_3d</strong>(factor_x, factor_y, factor_z)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Scales <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system by the given factors.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_node-instance_method" title="#to_node (instance method)">#<strong>to_node</strong>  &#x21d2; Gsk::RenderNode </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the render node that was constructed by <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_paintable-instance_method" title="#to_paintable (instance method)">#<strong>to_paintable</strong>(size)  &#x21d2; Gdk::Paintable </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a paintable encapsulating the render node that was constructed by <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transform-instance_method" title="#transform (instance method)">#<strong>transform</strong>(transform)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Transforms <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system with the given <!-- raw HTML omitted -->transform<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transform_matrix-instance_method" title="#transform_matrix (instance method)">#<strong>transform_matrix</strong>(matrix)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Transforms <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system with the given <!-- raw HTML omitted -->matrix<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#translate-instance_method" title="#translate (instance method)">#<strong>translate</strong>(point)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Translates <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system by <!-- raw HTML omitted -->point<!-- raw HTML omitted --> in 2-dimensional space.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#translate_3d-instance_method" title="#translate_3d (instance method)">#<strong>translate_3d</strong>(point)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Translates <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system by <!-- raw HTML omitted -->point<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Gtk::Snapshot (class)">Gtk::Snapshot</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new <code>GtkSnapshot</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="append_border-instance_method">
+  
+    #<strong>append_border</strong>(outline, border_width, border_color)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Appends a stroked border rectangle inside the given <!-- raw HTML omitted -->outline<!-- raw HTML omitted -->.</p>
+<p>The four sides of the border can have different widths and colors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>outline</span>
+      
+      
+        <span class='type'>(<tt>Gsk::RoundedRect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the outline of the border</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>border_width</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gtk::gfloat&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the stroke width of the border on
+the top, right, bottom and left side respectively.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>border_color</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gdk::RGBA&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the color used on the top, right,
+bottom and left side.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_cairo-instance_method">
+  
+    #<strong>append_cairo</strong>(bounds)  &#x21d2; <tt>cairo::Context</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.CairoNode] and appends it to the current
+render node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing the current node.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bounds</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Rect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the bounds for the new node</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>cairo_t</code> suitable for drawing the contents of
+the newly created render node</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_color-instance_method">
+  
+    #<strong>append_color</strong>(color, bounds)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new render node drawing the <!-- raw HTML omitted -->color<!-- raw HTML omitted --> into the
+given <!-- raw HTML omitted -->bounds<!-- raw HTML omitted --> and appends it to the current render node
+of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+<p>You should try to avoid calling this function if
+<!-- raw HTML omitted -->color<!-- raw HTML omitted --> is transparent.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>Gdk::RGBA</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the color to draw</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bounds</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Rect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the bounds for the new node</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_conic_gradient-instance_method">
+  
+    #<strong>append_conic_gradient</strong>(bounds, center, rotation, stops, n_stops)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Appends a conic gradient node with the given stops to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bounds</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Rect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the rectangle to render the gradient into</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>center</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Point</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the center point of the conic gradient</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rotation</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the clockwise rotation in degrees of the starting angle.
+0 means the starting angle is the top.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stops</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gsk::ColorStop&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the color stops defining the gradient</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_stops</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of elements in <!-- raw HTML omitted -->stops<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_fill-instance_method">
+  
+    #<strong>append_fill</strong>(path, fill_rule, color)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A convenience method to fill a path with a color.</p>
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.push_fill] if you need
+to fill a path with more complex content than
+a color.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Gsk::Path</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The path describing the area to fill</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>fill_rule</span>
+      
+      
+        <span class='type'>(<tt>Gsk::FillRule</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The fill rule to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>Gdk::RGBA</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the color to fill the path with</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_inset_shadow-instance_method">
+  
+    #<strong>append_inset_shadow</strong>(outline, color, dx, dy, spread, blur_radius)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Appends an inset shadow into the box given by <!-- raw HTML omitted -->outline<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>outline</span>
+      
+      
+        <span class='type'>(<tt>Gsk::RoundedRect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>outline of the region surrounded by shadow</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>Gdk::RGBA</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color of the shadow</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dx</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>horizontal offset of shadow</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dy</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>vertical offset of shadow</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>spread</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>how far the shadow spreads towards the inside</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blur_radius</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>how much blur to apply to the shadow</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_layout-instance_method">
+  
+    #<strong>append_layout</strong>(layout, color)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>layout</span>
+      
+      
+        <span class='type'>(<tt>Pango::Layout</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>Gdk::RGBA</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_linear_gradient-instance_method">
+  
+    #<strong>append_linear_gradient</strong>(bounds, start_point, end_point, stops, n_stops)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Appends a linear gradient node with the given stops to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bounds</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Rect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the rectangle to render the linear gradient into</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_point</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Point</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the point at which the linear gradient will begin</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_point</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Point</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the point at which the linear gradient will finish</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stops</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gsk::ColorStop&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the color stops defining the gradient</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_stops</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of elements in <!-- raw HTML omitted -->stops<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_node-instance_method">
+  
+    #<strong>append_node</strong>(node)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Appends <!-- raw HTML omitted -->node<!-- raw HTML omitted --> to the current render node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->,
+without changing the current node.</p>
+<p>If <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> does not have a current node yet, <!-- raw HTML omitted -->node<!-- raw HTML omitted -->
+will become the initial node.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>node</span>
+      
+      
+        <span class='type'>(<tt>Gsk::RenderNode</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GskRenderNode</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_outset_shadow-instance_method">
+  
+    #<strong>append_outset_shadow</strong>(outline, color, dx, dy, spread, blur_radius)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Appends an outset shadow node around the box given by <!-- raw HTML omitted -->outline<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>outline</span>
+      
+      
+        <span class='type'>(<tt>Gsk::RoundedRect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>outline of the region surrounded by shadow</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>Gdk::RGBA</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color of the shadow</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dx</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>horizontal offset of shadow</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dy</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>vertical offset of shadow</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>spread</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>how far the shadow spreads towards the outside</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blur_radius</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>how much blur to apply to the shadow</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_radial_gradient-instance_method">
+  
+    #<strong>append_radial_gradient</strong>(bounds, center, hradius, vradius, start, end, stops, n_stops)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Appends a radial gradient node with the given stops to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bounds</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Rect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the rectangle to render the readial gradient into</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>center</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Point</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the center point for the radial gradient</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>hradius</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the horizontal radius</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>vradius</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the vertical radius</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the start position (on the horizontal axis)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the end position (on the horizontal axis)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stops</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gsk::ColorStop&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the color stops defining the gradient</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_stops</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of elements in <!-- raw HTML omitted -->stops<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_repeating_linear_gradient-instance_method">
+  
+    #<strong>append_repeating_linear_gradient</strong>(bounds, start_point, end_point, stops, n_stops)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Appends a repeating linear gradient node with the given stops to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bounds</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Rect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the rectangle to render the linear gradient into</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_point</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Point</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the point at which the linear gradient will begin</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_point</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Point</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the point at which the linear gradient will finish</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stops</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gsk::ColorStop&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the color stops defining the gradient</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_stops</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of elements in <!-- raw HTML omitted -->stops<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_repeating_radial_gradient-instance_method">
+  
+    #<strong>append_repeating_radial_gradient</strong>(bounds, center, hradius, vradius, start, end, stops, n_stops)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Appends a repeating radial gradient node with the given stops to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bounds</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Rect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the rectangle to render the readial gradient into</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>center</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Point</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the center point for the radial gradient</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>hradius</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the horizontal radius</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>vradius</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the vertical radius</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the start position (on the horizontal axis)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the end position (on the horizontal axis)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stops</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gsk::ColorStop&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the color stops defining the gradient</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_stops</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the number of elements in <!-- raw HTML omitted -->stops<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_scaled_texture-instance_method">
+  
+    #<strong>append_scaled_texture</strong>(texture, filter, bounds)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new render node drawing the <!-- raw HTML omitted -->texture<!-- raw HTML omitted -->
+into the given <!-- raw HTML omitted -->bounds<!-- raw HTML omitted --> and appends it to the
+current render node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+<p>In contrast to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_texture],
+this function provides control about how the filter
+that is used when scaling.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>texture</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Texture</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the texture to render</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>filter</span>
+      
+      
+        <span class='type'>(<tt>Gsk::ScalingFilter</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the filter to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bounds</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Rect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the bounds for the new node</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_stroke-instance_method">
+  
+    #<strong>append_stroke</strong>(path, stroke, color)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A convenience method to stroke a path with a color.</p>
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.push_stroke] if you need
+to stroke a path with more complex content than
+a color.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Gsk::Path</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The path describing the area to fill</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stroke</span>
+      
+      
+        <span class='type'>(<tt>Gsk::Stroke</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The stroke attributes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>Gdk::RGBA</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the color to fill the path with</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_texture-instance_method">
+  
+    #<strong>append_texture</strong>(texture, bounds)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new render node drawing the <!-- raw HTML omitted -->texture<!-- raw HTML omitted -->
+into the given <!-- raw HTML omitted -->bounds<!-- raw HTML omitted --> and appends it to the
+current render node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+<p>If the texture needs to be scaled to fill <!-- raw HTML omitted -->bounds<!-- raw HTML omitted -->,
+linear filtering is used. See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_scaled_texture]
+if you need other filtering, such as nearest-neighbour.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>texture</span>
+      
+      
+        <span class='type'>(<tt>Gdk::Texture</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the texture to render</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bounds</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Rect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the bounds for the new node</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="free_to_node-instance_method">
+  
+    #<strong>free_to_node</strong>  &#x21d2; <tt>Gsk::RenderNode</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the node that was constructed by <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->
+and frees <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+<p>See also [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.to_node].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gsk::RenderNode</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly-created [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.RenderNode]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="free_to_paintable-instance_method">
+  
+    #<strong>free_to_paintable</strong>(size)  &#x21d2; <tt>Gdk::Paintable</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a paintable for the node that was
+constructed by <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> and frees <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Size</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The size of the resulting paintable
+or nil to use the bounds of the snapshot</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Paintable</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a newly-created [iface<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gl_shader_pop_texture-instance_method">
+  
+    #<strong>gl_shader_pop_texture</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes the top element from the stack of render nodes and
+adds it to the nearest [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShaderNode] below it.</p>
+<p>This must be called the same number of times as the number
+of textures is needed for the shader in
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.push_gl_shader].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="perspective-instance_method">
+  
+    #<strong>perspective</strong>(depth)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Applies a perspective projection transform.</p>
+<p>See [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Transform.perspective] for a discussion on the details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>depth</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>distance of the z=0 plane</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pop-instance_method">
+  
+    #<strong>pop</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes the top element from the stack of render nodes,
+and appends it to the node underneath it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_blend-instance_method">
+  
+    #<strong>push_blend</strong>(blend_mode)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Blends together two images with the given blend mode.</p>
+<p>Until the first call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop], the
+bottom image for the blend operation will be recorded.
+After that call, the top image to be blended will be
+recorded until the second call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+<p>Calling this function requires two subsequent calls
+to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>blend_mode</span>
+      
+      
+        <span class='type'>(<tt>Gsk::BlendMode</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>blend mode to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_blur-instance_method">
+  
+    #<strong>push_blur</strong>(radius)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Blurs an image.</p>
+<p>The image is recorded until the next call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>radius</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the blur radius to use. Must be positive</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_clip-instance_method">
+  
+    #<strong>push_clip</strong>(bounds)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Clips an image to a rectangle.</p>
+<p>The image is recorded until the next call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bounds</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Rect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the rectangle to clip to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_color_matrix-instance_method">
+  
+    #<strong>push_color_matrix</strong>(color_matrix, color_offset)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Modifies the colors of an image by applying an affine transformation
+in RGB space.</p>
+<p>In particular, the colors will be transformed by applying</p>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_pixel'>pixel</span> <span class='op'>=</span> <span class='id identifier rubyid_transpose'>transpose</span><span class='lparen'>(</span><span class='id identifier rubyid_color_matrix'>color_matrix</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_pixel'>pixel</span> <span class='op'>+</span> <span class='id identifier rubyid_color_offset'>color_offset</span>
+</code></pre>
+<p>for every pixel. The transformation operates on unpremultiplied
+colors, with color components ordered R, G, B, A.</p>
+<p>The image is recorded until the next call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>color_matrix</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Matrix</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the color matrix to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>color_offset</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Vec4</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the color offset to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_cross_fade-instance_method">
+  
+    #<strong>push_cross_fade</strong>(progress)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Snapshots a cross-fade operation between two images with the
+given <!-- raw HTML omitted -->progress<!-- raw HTML omitted -->.</p>
+<p>Until the first call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop], the start image
+will be snapshot. After that call, the end image will be recorded
+until the second call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+<p>Calling this function requires two subsequent calls
+to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>progress</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>progress between 0.0 and 1.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_debug-instance_method">
+  
+    #<strong>push_debug</strong>(message, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Inserts a debug node with a message.</p>
+<p>Debug nodes don't affect the rendering at all, but can be
+helpful in identifying parts of a render node tree dump,
+for example in the GTK inspector.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a printf-style format string</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>arguments for <!-- raw HTML omitted -->message<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_fill-instance_method">
+  
+    #<strong>push_fill</strong>(path, fill_rule)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Fills the area given by <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->fill_rule<!-- raw HTML omitted --> with an image and discards everything
+outside of it.</p>
+<p>The image is recorded until the next call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+<p>If you want to fill the path with a color, [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_fill]
+may be more convenient.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Gsk::Path</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The path describing the area to fill</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>fill_rule</span>
+      
+      
+        <span class='type'>(<tt>Gsk::FillRule</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The fill rule to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_gl_shader-instance_method">
+  
+    #<strong>push_gl_shader</strong>(shader, bounds, take_args)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Push a [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShaderNode].</p>
+<p>The node uses the given [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShader] and uniform values
+Additionally this takes a list of <!-- raw HTML omitted -->n_children<!-- raw HTML omitted --> other nodes
+which will be passed to the [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShaderNode].</p>
+<p>The <!-- raw HTML omitted -->take_args<!-- raw HTML omitted --> argument is a block of data to use for uniform
+arguments, as per types and offsets defined by the <!-- raw HTML omitted -->shader<!-- raw HTML omitted -->.
+Normally this is generated by [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShader.format_args]
+or [struct<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.ShaderArgsBuilder].</p>
+<p>The snapshotter takes ownership of <!-- raw HTML omitted -->take_args<!-- raw HTML omitted -->, so the caller should
+not free it after this.</p>
+<p>If the renderer doesn't support GL shaders, or if there is any
+problem when compiling the shader, then the node will draw pink.
+You should use [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShader.compile] to ensure the <!-- raw HTML omitted -->shader<!-- raw HTML omitted -->
+will work for the renderer before using it.</p>
+<p>If the shader requires textures (see [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShader.get_n_textures]),
+then it is expected that you call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.gl_shader_pop_texture]
+the number of times that are required. Each of these calls will generate
+a node that is added as a child to the <code>GskGLShaderNode</code>, which in turn
+will render these offscreen and pass as a texture to the shader.</p>
+<p>Once all textures (if any) are pop:ed, you must call the regular
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+<p>If you want to use pre-existing textures as input to the shader rather
+than rendering new ones, use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_texture] to
+push a texture node. These will be used directly rather than being
+re-rendered.</p>
+<p>For details on how to write shaders, see [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShader].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>shader</span>
+      
+      
+        <span class='type'>(<tt>Gsk::GLShader</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The code to run</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bounds</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Rect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the rectangle to render into</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>take_args</span>
+      
+      
+        <span class='type'>(<tt>GLib::Bytes</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Data block with arguments for the shader.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_mask-instance_method">
+  
+    #<strong>push_mask</strong>(mask_mode)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Until the first call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop], the
+mask image for the mask operation will be recorded.</p>
+<p>After that call, the source image will be recorded until
+the second call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+<p>Calling this function requires 2 subsequent calls to gtk_snapshot_pop().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mask_mode</span>
+      
+      
+        <span class='type'>(<tt>Gsk::MaskMode</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>mask mode to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_opacity-instance_method">
+  
+    #<strong>push_opacity</strong>(opacity)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Modifies the opacity of an image.</p>
+<p>The image is recorded until the next call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>opacity</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the opacity to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_repeat-instance_method">
+  
+    #<strong>push_repeat</strong>(bounds, child_bounds)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a node that repeats the child node.</p>
+<p>The child is recorded until the next call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bounds</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Rect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the bounds within which to repeat</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>child_bounds</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Rect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the bounds of the child or nil
+to use the full size of the collected child node</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_rounded_clip-instance_method">
+  
+    #<strong>push_rounded_clip</strong>(bounds)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Clips an image to a rounded rectangle.</p>
+<p>The image is recorded until the next call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bounds</span>
+      
+      
+        <span class='type'>(<tt>Gsk::RoundedRect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the rounded rectangle to clip to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_shadow-instance_method">
+  
+    #<strong>push_shadow</strong>(shadow, n_shadows)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Applies a shadow to an image.</p>
+<p>The image is recorded until the next call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>shadow</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gsk::Shadow&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the first shadow specification</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>n_shadows</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>number of shadow specifications</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_stroke-instance_method">
+  
+    #<strong>push_stroke</strong>(path, stroke)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Strokes the given <!-- raw HTML omitted -->path<!-- raw HTML omitted --> with the attributes given by <!-- raw HTML omitted -->stroke<!-- raw HTML omitted --> and
+an image.</p>
+<p>The image is recorded until the next call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+<p>Note that the strokes are subject to the same transformation as
+everything else, so uneven scaling will cause horizontal and vertical
+strokes to have different widths.</p>
+<p>If you want to stroke the path with a color, [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_stroke]
+may be more convenient.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Gsk::Path</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The path to stroke</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>stroke</span>
+      
+      
+        <span class='type'>(<tt>Gsk::Stroke</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The stroke attributes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_background-instance_method">
+  
+    #<strong>render_background</strong>(context, x, y, width, height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a render node for the CSS background according to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->,
+and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing
+the current node.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleContext.html" title="Gtk::StyleContext (class)">Gtk::StyleContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the style context that defines the background</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>X origin of the rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Y origin of the rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>rectangle width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>rectangle height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_focus-instance_method">
+  
+    #<strong>render_focus</strong>(context, x, y, width, height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a render node for the focus outline according to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->,
+and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing
+the current node.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleContext.html" title="Gtk::StyleContext (class)">Gtk::StyleContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the style context that defines the focus ring</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>X origin of the rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Y origin of the rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>rectangle width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>rectangle height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_frame-instance_method">
+  
+    #<strong>render_frame</strong>(context, x, y, width, height)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a render node for the CSS border according to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->,
+and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing
+the current node.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleContext.html" title="Gtk::StyleContext (class)">Gtk::StyleContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the style context that defines the frame</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>X origin of the rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Y origin of the rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>rectangle width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>rectangle height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_insertion_cursor-instance_method">
+  
+    #<strong>render_insertion_cursor</strong>(context, x, y, layout, index, direction)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Draws a text caret using <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> at the specified index of <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleContext.html" title="Gtk::StyleContext (class)">Gtk::StyleContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GtkStyleContext</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>X origin</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Y origin</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>layout</span>
+      
+      
+        <span class='type'>(<tt>Pango::Layout</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>PangoLayout</code> of the text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the index in the <code>PangoLayout</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>direction</span>
+      
+      
+        <span class='type'>(<tt>Pango::Direction</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>PangoDirection</code> of the text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_layout-instance_method">
+  
+    #<strong>render_layout</strong>(context, x, y, layout)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a render node for rendering <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> according to the style
+information in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->,
+without changing the current node.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StyleContext.html" title="Gtk::StyleContext (class)">Gtk::StyleContext</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the style context that defines the text</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>X origin of the rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Y origin of the rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>layout</span>
+      
+      
+        <span class='type'>(<tt>Pango::Layout</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <code>PangoLayout</code> to render</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="restore-instance_method">
+  
+    #<strong>restore</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Restores <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> to the state saved by a preceding call to
+[method<!-- raw HTML omitted -->Snapshot<!-- raw HTML omitted -->.save] and removes that state from the stack of
+saved states.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rotate-instance_method">
+  
+    #<strong>rotate</strong>(angle)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Rotates @<!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system by <!-- raw HTML omitted -->angle<!-- raw HTML omitted --> degrees in 2D space -
+or in 3D speak, rotates around the Z axis. The rotation happens around
+the origin point of (0, 0) in the <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s current coordinate system.</p>
+<p>To rotate around axes other than the Z axis, use [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Transform.rotate_3d].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>angle</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the rotation angle, in degrees (clockwise)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rotate_3d-instance_method">
+  
+    #<strong>rotate_3d</strong>(angle, axis)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Rotates <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system by <!-- raw HTML omitted -->angle<!-- raw HTML omitted --> degrees around <!-- raw HTML omitted -->axis<!-- raw HTML omitted -->.</p>
+<p>For a rotation in 2D space, use [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Transform.rotate].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>angle</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the rotation angle, in degrees (clockwise)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>axis</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Vec3</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The rotation axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="save-instance_method">
+  
+    #<strong>save</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Makes a copy of the current state of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> and saves it
+on an internal stack.</p>
+<p>When [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.restore] is called, <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> will
+be restored to the saved state.</p>
+<p>Multiple calls to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.save] and [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.restore]
+can be nested; each call to <code>gtk_snapshot_restore()</code> restores the state from
+the matching paired <code>gtk_snapshot_save()</code>.</p>
+<p>It is necessary to clear all saved states with corresponding
+calls to <code>gtk_snapshot_restore()</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scale-instance_method">
+  
+    #<strong>scale</strong>(factor_x, factor_y)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Scales <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system in 2-dimensional space by
+the given factors.</p>
+<p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.scale_3d] to scale in all 3 dimensions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>factor_x</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>scaling factor on the X axis</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>factor_y</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>scaling factor on the Y axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scale_3d-instance_method">
+  
+    #<strong>scale_3d</strong>(factor_x, factor_y, factor_z)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Scales <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system by the given factors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>factor_x</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>scaling factor on the X axis</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>factor_y</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>scaling factor on the Y axis</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>factor_z</span>
+      
+      
+        <span class='type'>(<tt>Gtk::gfloat</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>scaling factor on the Z axis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_node-instance_method">
+  
+    #<strong>to_node</strong>  &#x21d2; <tt>Gsk::RenderNode</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the render node that was constructed
+by <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+<p>Note that this function may return nil if nothing has been
+added to the snapshot or if its content does not produce pixels
+to be rendered.</p>
+<p>After calling this function, it is no longer possible to
+add more nodes to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->. The only function that should
+be called after this is [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.unref].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gsk::RenderNode</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the constructed <code>GskRenderNode</code> or
+nil if there are no nodes to render.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_paintable-instance_method">
+  
+    #<strong>to_paintable</strong>(size)  &#x21d2; <tt>Gdk::Paintable</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a paintable encapsulating the render node
+that was constructed by <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+<p>After calling this function, it is no longer possible to
+add more nodes to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->. The only function that should
+be called after this is [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.unref].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Size</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The size of the resulting paintable
+or nil to use the bounds of the snapshot</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::Paintable</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new <code>GdkPaintable</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="transform-instance_method">
+  
+    #<strong>transform</strong>(transform)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Transforms <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system with the given <!-- raw HTML omitted -->transform<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>transform</span>
+      
+      
+        <span class='type'>(<tt>Gsk::Transform</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the transform to apply</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="transform_matrix-instance_method">
+  
+    #<strong>transform_matrix</strong>(matrix)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Transforms <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system with the given <!-- raw HTML omitted -->matrix<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>matrix</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Matrix</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the matrix to multiply the transform with</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="translate-instance_method">
+  
+    #<strong>translate</strong>(point)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Translates <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system by <!-- raw HTML omitted -->point<!-- raw HTML omitted --> in 2-dimensional space.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Point</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the point to translate the snapshot by</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="translate_3d-instance_method">
+  
+    #<strong>translate_3d</strong>(point)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Translates <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system by <!-- raw HTML omitted -->point<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Point3D</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the point to translate the snapshot by</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>

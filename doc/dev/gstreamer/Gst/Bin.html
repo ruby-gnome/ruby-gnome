@@ -1,0 +1,2180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Gst::Bin
+  
+    &mdash; Ruby/GStreamer
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Gst::Bin";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Gst.html" title="Gst (module)">Gst</a></span></span>
+     &raquo; 
+    <span class="title">Bin</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Gst::Bin
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Element</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">GObject::InitiallyUnowned</li>
+          
+            <li class="next"><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Element</a></span></li>
+          
+            <li class="next">Gst::Bin</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd>Enumerable</dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/gst/bin.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Subclasses can override Gst::BinClass::add_element and #GstBinClass::remove_element
+to update the list of children in the bin.</p>
+<p>The Gst::BinClass::handle_message method can be overridden to implement custom
+message handling.</p>
+<p>Gst::BinClass::deep_element_added will be called when a new element has been
+added to any bin inside this bin, so it will also be called if a new child
+was added to a sub-bin of this bin. Gst::Bin implementations that override
+this message should chain up to the parent class implementation so the
+Gst::Bin::deep-element-added signal is emitted on all parents.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="Pipeline.html" title="Gst::Pipeline (class)">Pipeline</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#<<-instance_method" title="#&lt;&lt; (instance method)">#<strong>&lt;&lt;</strong>(element)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_elements-instance_method" title="#add_elements (instance method)">#<strong>add_elements</strong>(*elements)  &#x21d2; Object </a>
+    
+
+    
+      (also: #add)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_many-instance_method" title="#add_many (instance method)">#<strong>add_many</strong>(element_1, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a nil-terminated list of elements to a bin.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#async_handling=-instance_method" title="#async_handling= (instance method)">#<strong>async_handling=</strong>(async_handling)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If set to true, the bin will handle asynchronous state changes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#async_handling%3F-instance_method" title="#async_handling? (instance method)">#<strong>async_handling?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If set to true, the bin will handle asynchronous state changes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each-instance_method" title="#each (instance method)">#<strong>each</strong>(options = {})  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_unlinked_pad-instance_method" title="#find_unlinked_pad (instance method)">#<strong>find_unlinked_pad</strong>(direction)  &#x21d2; Gst::Pad </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Recursively looks for elements with an unlinked pad of the given direction within the specified bin and returns an unlinked pad if one is found, or nil otherwise.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_by_interface-instance_method" title="#get_by_interface (instance method)">#<strong>get_by_interface</strong>(iface)  &#x21d2; Gst::Element </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Looks for an element inside the bin that implements the given interface.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_by_name-instance_method" title="#get_by_name (instance method)">#<strong>get_by_name</strong>(name)  &#x21d2; Gst::Element </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the element with the given name from a bin.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_by_name_recurse_up-instance_method" title="#get_by_name_recurse_up (instance method)">#<strong>get_by_name_recurse_up</strong>(name)  &#x21d2; Gst::Element </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the element with the given name from this bin.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(name)  &#x21d2; Gst::Element </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new bin with the given name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iterate_all_by_element_factory_name-instance_method" title="#iterate_all_by_element_factory_name (instance method)">#<strong>iterate_all_by_element_factory_name</strong>(factory_name)  &#x21d2; Gst::Iterator </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Looks for all elements inside the bin with the given element factory name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iterate_all_by_interface-instance_method" title="#iterate_all_by_interface (instance method)">#<strong>iterate_all_by_interface</strong>(iface)  &#x21d2; Gst::Iterator </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Looks for all elements inside the bin that implements the given interface.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iterate_elements-instance_method" title="#iterate_elements (instance method)">#<strong>iterate_elements</strong>  &#x21d2; Gst::Iterator </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets an iterator for the elements in this bin.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iterate_recurse-instance_method" title="#iterate_recurse (instance method)">#<strong>iterate_recurse</strong>  &#x21d2; Gst::Iterator </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets an iterator for the elements in this bin.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iterate_sinks-instance_method" title="#iterate_sinks (instance method)">#<strong>iterate_sinks</strong>  &#x21d2; Gst::Iterator </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets an iterator for all elements in the bin that have the #GST_ELEMENT_FLAG_SINK flag set.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iterate_sorted-instance_method" title="#iterate_sorted (instance method)">#<strong>iterate_sorted</strong>  &#x21d2; Gst::Iterator </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets an iterator for the elements in this bin in topologically sorted order.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iterate_sources-instance_method" title="#iterate_sources (instance method)">#<strong>iterate_sources</strong>  &#x21d2; Gst::Iterator </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets an iterator for all elements in the bin that have the #GST_ELEMENT_FLAG_SOURCE flag set.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#message_forward=-instance_method" title="#message_forward= (instance method)">#<strong>message_forward=</strong>(message_forward)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Forward all children messages, even those that would normally be filtered by the bin.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#message_forward%3F-instance_method" title="#message_forward? (instance method)">#<strong>message_forward?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Forward all children messages, even those that would normally be filtered by the bin.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#recalculate_latency-instance_method" title="#recalculate_latency (instance method)">#<strong>recalculate_latency</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries <!-- raw HTML omitted -->bin<!-- raw HTML omitted --> for the current latency and reconfigures this latency on all the elements using a LATENCY event.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove-instance_method" title="#remove (instance method)">#<strong>remove</strong>(element)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes the element from the bin, unparenting it as well.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_many-instance_method" title="#remove_many (instance method)">#<strong>remove_many</strong>(element_1, array)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes a list of elements from a bin.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#suppressed_flags-instance_method" title="#suppressed_flags (instance method)">#<strong>suppressed_flags</strong>  &#x21d2; Gst::ElementFlags </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The bin's suppressed Gst::ElementFlags.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#suppressed_flags=-instance_method" title="#suppressed_flags= (instance method)">#<strong>suppressed_flags=</strong>(flags)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Suppresses the given flags on the bin.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sync_children_states-instance_method" title="#sync_children_states (instance method)">#<strong>sync_children_states</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Synchronizes the state of every child of <!-- raw HTML omitted -->bin<!-- raw HTML omitted --> with the state of <!-- raw HTML omitted -->bin<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Element.html" title="Gst::Element (class)">Element</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Element.html#>>-instance_method" title="Gst::Element#&gt;&gt; (method)">#>></a></span>, <span class='object_link'><a href="Element.html#[]-class_method" title="Gst::Element.[] (method)">[]</a></span>, <span class='object_link'><a href="Element.html#abort_state-instance_method" title="Gst::Element#abort_state (method)">#abort_state</a></span>, <span class='object_link'><a href="Element.html#add_metadata-instance_method" title="Gst::Element#add_metadata (method)">#add_metadata</a></span>, <span class='object_link'><a href="Element.html#add_pad-instance_method" title="Gst::Element#add_pad (method)">#add_pad</a></span>, <span class='object_link'><a href="Element.html#add_pad_template-instance_method" title="Gst::Element#add_pad_template (method)">#add_pad_template</a></span>, <span class='object_link'><a href="Element.html#add_property_deep_notify_watch-instance_method" title="Gst::Element#add_property_deep_notify_watch (method)">#add_property_deep_notify_watch</a></span>, <span class='object_link'><a href="Element.html#add_property_notify_watch-instance_method" title="Gst::Element#add_property_notify_watch (method)">#add_property_notify_watch</a></span>, <span class='object_link'><a href="Element.html#add_static_metadata-instance_method" title="Gst::Element#add_static_metadata (method)">#add_static_metadata</a></span>, <span class='object_link'><a href="Element.html#add_static_pad_template-instance_method" title="Gst::Element#add_static_pad_template (method)">#add_static_pad_template</a></span>, <span class='object_link'><a href="Element.html#add_static_pad_template_with_gtype-instance_method" title="Gst::Element#add_static_pad_template_with_gtype (method)">#add_static_pad_template_with_gtype</a></span>, <span class='object_link'><a href="Element.html#base_time-instance_method" title="Gst::Element#base_time (method)">#base_time</a></span>, <span class='object_link'><a href="Element.html#base_time=-instance_method" title="Gst::Element#base_time= (method)">#base_time=</a></span>, <span class='object_link'><a href="Element.html#bus-instance_method" title="Gst::Element#bus (method)">#bus</a></span>, <span class='object_link'><a href="Element.html#bus=-instance_method" title="Gst::Element#bus= (method)">#bus=</a></span>, <span class='object_link'><a href="Element.html#call_async-instance_method" title="Gst::Element#call_async (method)">#call_async</a></span>, <span class='object_link'><a href="Element.html#change_state-instance_method" title="Gst::Element#change_state (method)">#change_state</a></span>, <span class='object_link'><a href="Element.html#clock-instance_method" title="Gst::Element#clock (method)">#clock</a></span>, <span class='object_link'><a href="Element.html#clock=-instance_method" title="Gst::Element#clock= (method)">#clock=</a></span>, <span class='object_link'><a href="Element.html#context=-instance_method" title="Gst::Element#context= (method)">#context=</a></span>, <span class='object_link'><a href="Element.html#contexts-instance_method" title="Gst::Element#contexts (method)">#contexts</a></span>, <span class='object_link'><a href="Element.html#continue_state-instance_method" title="Gst::Element#continue_state (method)">#continue_state</a></span>, <span class='object_link'><a href="Element.html#create_all_pads-instance_method" title="Gst::Element#create_all_pads (method)">#create_all_pads</a></span>, <span class='object_link'><a href="Element.html#current_clock_time-instance_method" title="Gst::Element#current_clock_time (method)">#current_clock_time</a></span>, <span class='object_link'><a href="Element.html#current_running_time-instance_method" title="Gst::Element#current_running_time (method)">#current_running_time</a></span>, <span class='object_link'><a href="Element.html#decorate_stream_id-instance_method" title="Gst::Element#decorate_stream_id (method)">#decorate_stream_id</a></span>, <span class='object_link'><a href="Element.html#decorate_stream_id_printf-instance_method" title="Gst::Element#decorate_stream_id_printf (method)">#decorate_stream_id_printf</a></span>, <span class='object_link'><a href="Element.html#decorate_stream_id_printf_valist-instance_method" title="Gst::Element#decorate_stream_id_printf_valist (method)">#decorate_stream_id_printf_valist</a></span>, <span class='object_link'><a href="Element.html#factory-instance_method" title="Gst::Element#factory (method)">#factory</a></span>, <span class='object_link'><a href="Element.html#flags-instance_method" title="Gst::Element#flags (method)">#flags</a></span>, <span class='object_link'><a href="Element.html#flags_raw-instance_method" title="Gst::Element#flags_raw (method)">#flags_raw</a></span>, <span class='object_link'><a href="Element.html#foreach_pad-instance_method" title="Gst::Element#foreach_pad (method)">#foreach_pad</a></span>, <span class='object_link'><a href="Element.html#foreach_sink_pad-instance_method" title="Gst::Element#foreach_sink_pad (method)">#foreach_sink_pad</a></span>, <span class='object_link'><a href="Element.html#foreach_src_pad-instance_method" title="Gst::Element#foreach_src_pad (method)">#foreach_src_pad</a></span>, <span class='object_link'><a href="Element.html#get_compatible_pad-instance_method" title="Gst::Element#get_compatible_pad (method)">#get_compatible_pad</a></span>, <span class='object_link'><a href="Element.html#get_compatible_pad_template-instance_method" title="Gst::Element#get_compatible_pad_template (method)">#get_compatible_pad_template</a></span>, <span class='object_link'><a href="Element.html#get_context-instance_method" title="Gst::Element#get_context (method)">#get_context</a></span>, <span class='object_link'><a href="Element.html#get_context_unlocked-instance_method" title="Gst::Element#get_context_unlocked (method)">#get_context_unlocked</a></span>, <span class='object_link'><a href="Element.html#get_metadata-instance_method" title="Gst::Element#get_metadata (method)">#get_metadata</a></span>, <span class='object_link'><a href="Element.html#get_pad_template-instance_method" title="Gst::Element#get_pad_template (method)">#get_pad_template</a></span>, <span class='object_link'><a href="Element.html#get_request_pad-instance_method" title="Gst::Element#get_request_pad (method)">#get_request_pad</a></span>, <span class='object_link'><a href="Element.html#get_state-instance_method" title="Gst::Element#get_state (method)">#get_state</a></span>, <span class='object_link'><a href="Element.html#get_static_pad-instance_method" title="Gst::Element#get_static_pad (method)">#get_static_pad</a></span>, <span class='object_link'><a href="Element.html#is_locked_state-instance_method" title="Gst::Element#is_locked_state (method)">#is_locked_state</a></span>, <span class='object_link'><a href="Element.html#iterate_pads-instance_method" title="Gst::Element#iterate_pads (method)">#iterate_pads</a></span>, <span class='object_link'><a href="Element.html#iterate_sink_pads-instance_method" title="Gst::Element#iterate_sink_pads (method)">#iterate_sink_pads</a></span>, <span class='object_link'><a href="Element.html#iterate_src_pads-instance_method" title="Gst::Element#iterate_src_pads (method)">#iterate_src_pads</a></span>, <span class='object_link'><a href="Element.html#link_elements-instance_method" title="Gst::Element#link_elements (method)">#link_elements</a></span>, <span class='object_link'><a href="Element.html#link_filtered-instance_method" title="Gst::Element#link_filtered (method)">#link_filtered</a></span>, <span class='object_link'><a href="Element.html#link_many-instance_method" title="Gst::Element#link_many (method)">#link_many</a></span>, <span class='object_link'><a href="Element.html#link_pads-instance_method" title="Gst::Element#link_pads (method)">#link_pads</a></span>, <span class='object_link'><a href="Element.html#link_pads_filtered-instance_method" title="Gst::Element#link_pads_filtered (method)">#link_pads_filtered</a></span>, <span class='object_link'><a href="Element.html#link_pads_full-instance_method" title="Gst::Element#link_pads_full (method)">#link_pads_full</a></span>, <span class='object_link'><a href="Element.html#locked_state=-instance_method" title="Gst::Element#locked_state= (method)">#locked_state=</a></span>, <span class='object_link'><a href="Element.html#lost_state-instance_method" title="Gst::Element#lost_state (method)">#lost_state</a></span>, <span class='object_link'><a href="Element.html#make_from_uri-class_method" title="Gst::Element.make_from_uri (method)">make_from_uri</a></span>, <span class='object_link'><a href="Element.html#message_full-instance_method" title="Gst::Element#message_full (method)">#message_full</a></span>, <span class='object_link'><a href="Element.html#message_full_with_details-instance_method" title="Gst::Element#message_full_with_details (method)">#message_full_with_details</a></span>, <span class='object_link'><a href="Element.html#no_more_pads-instance_method" title="Gst::Element#no_more_pads (method)">#no_more_pads</a></span>, <span class='object_link'><a href="Element.html#pad_template_list-instance_method" title="Gst::Element#pad_template_list (method)">#pad_template_list</a></span>, <span class='object_link'><a href="Element.html#pause-instance_method" title="Gst::Element#pause (method)">#pause</a></span>, <span class='object_link'><a href="Element.html#play-instance_method" title="Gst::Element#play (method)">#play</a></span>, <span class='object_link'><a href="Element.html#post_message-instance_method" title="Gst::Element#post_message (method)">#post_message</a></span>, <span class='object_link'><a href="Element.html#provide_clock-instance_method" title="Gst::Element#provide_clock (method)">#provide_clock</a></span>, <span class='object_link'><a href="Element.html#query-instance_method" title="Gst::Element#query (method)">#query</a></span>, <span class='object_link'><a href="Element.html#query_convert-instance_method" title="Gst::Element#query_convert (method)">#query_convert</a></span>, <span class='object_link'><a href="Element.html#query_duration-instance_method" title="Gst::Element#query_duration (method)">#query_duration</a></span>, <span class='object_link'><a href="Element.html#query_position-instance_method" title="Gst::Element#query_position (method)">#query_position</a></span>, <span class='object_link'><a href="Element.html#ready-instance_method" title="Gst::Element#ready (method)">#ready</a></span>, <span class='object_link'><a href="Element.html#register-class_method" title="Gst::Element.register (method)">register</a></span>, <span class='object_link'><a href="Element.html#release_request_pad-instance_method" title="Gst::Element#release_request_pad (method)">#release_request_pad</a></span>, <span class='object_link'><a href="Element.html#remove_pad-instance_method" title="Gst::Element#remove_pad (method)">#remove_pad</a></span>, <span class='object_link'><a href="Element.html#remove_property_notify_watch-instance_method" title="Gst::Element#remove_property_notify_watch (method)">#remove_property_notify_watch</a></span>, <span class='object_link'><a href="Element.html#request_pad-instance_method" title="Gst::Element#request_pad (method)">#request_pad</a></span>, <span class='object_link'><a href="Element.html#request_pad_simple-instance_method" title="Gst::Element#request_pad_simple (method)">#request_pad_simple</a></span>, <span class='object_link'><a href="Element.html#seek-instance_method" title="Gst::Element#seek (method)">#seek</a></span>, <span class='object_link'><a href="Element.html#seek_simple-instance_method" title="Gst::Element#seek_simple (method)">#seek_simple</a></span>, <span class='object_link'><a href="Element.html#send_event-instance_method" title="Gst::Element#send_event (method)">#send_event</a></span>, <span class='object_link'><a href="Element.html#set_metadata-instance_method" title="Gst::Element#set_metadata (method)">#set_metadata</a></span>, <span class='object_link'><a href="Element.html#set_static_metadata-instance_method" title="Gst::Element#set_static_metadata (method)">#set_static_metadata</a></span>, <span class='object_link'><a href="Element.html#start_time-instance_method" title="Gst::Element#start_time (method)">#start_time</a></span>, <span class='object_link'><a href="Element.html#start_time=-instance_method" title="Gst::Element#start_time= (method)">#start_time=</a></span>, <span class='object_link'><a href="Element.html#state=-instance_method" title="Gst::Element#state= (method)">#state=</a></span>, <span class='object_link'><a href="Element.html#state_change_return_get_name-class_method" title="Gst::Element.state_change_return_get_name (method)">state_change_return_get_name</a></span>, <span class='object_link'><a href="Element.html#state_get_name-class_method" title="Gst::Element.state_get_name (method)">state_get_name</a></span>, <span class='object_link'><a href="Element.html#stop-instance_method" title="Gst::Element#stop (method)">#stop</a></span>, <span class='object_link'><a href="Element.html#sync_state_with_parent-instance_method" title="Gst::Element#sync_state_with_parent (method)">#sync_state_with_parent</a></span>, <span class='object_link'><a href="Element.html#type_set_skip_documentation-class_method" title="Gst::Element.type_set_skip_documentation (method)">type_set_skip_documentation</a></span>, <span class='object_link'><a href="Element.html#unlink-instance_method" title="Gst::Element#unlink (method)">#unlink</a></span>, <span class='object_link'><a href="Element.html#unlink_many-instance_method" title="Gst::Element#unlink_many (method)">#unlink_many</a></span>, <span class='object_link'><a href="Element.html#unlink_pads-instance_method" title="Gst::Element#unlink_pads (method)">#unlink_pads</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Object.html#add_control_binding-instance_method" title="Gst::Object#add_control_binding (method)">#add_control_binding</a></span>, <span class='object_link'><a href="Object.html#check_uniqueness-class_method" title="Gst::Object.check_uniqueness (method)">check_uniqueness</a></span>, <span class='object_link'><a href="Object.html#control_bindings_disabled=-instance_method" title="Gst::Object#control_bindings_disabled= (method)">#control_bindings_disabled=</a></span>, <span class='object_link'><a href="Object.html#control_rate-instance_method" title="Gst::Object#control_rate (method)">#control_rate</a></span>, <span class='object_link'><a href="Object.html#control_rate=-instance_method" title="Gst::Object#control_rate= (method)">#control_rate=</a></span>, <span class='object_link'><a href="Object.html#default_deep_notify-class_method" title="Gst::Object.default_deep_notify (method)">default_deep_notify</a></span>, <span class='object_link'><a href="Object.html#default_error-instance_method" title="Gst::Object#default_error (method)">#default_error</a></span>, <span class='object_link'><a href="Object.html#get_control_binding-instance_method" title="Gst::Object#get_control_binding (method)">#get_control_binding</a></span>, <span class='object_link'><a href="Object.html#get_g_value_array-instance_method" title="Gst::Object#get_g_value_array (method)">#get_g_value_array</a></span>, <span class='object_link'><a href="Object.html#get_value-instance_method" title="Gst::Object#get_value (method)">#get_value</a></span>, <span class='object_link'><a href="Object.html#get_value_array-instance_method" title="Gst::Object#get_value_array (method)">#get_value_array</a></span>, <span class='object_link'><a href="Object.html#has_active_control_bindings-instance_method" title="Gst::Object#has_active_control_bindings (method)">#has_active_control_bindings</a></span>, <span class='object_link'><a href="Object.html#has_ancestor-instance_method" title="Gst::Object#has_ancestor (method)">#has_ancestor</a></span>, <span class='object_link'><a href="Object.html#has_as_ancestor-instance_method" title="Gst::Object#has_as_ancestor (method)">#has_as_ancestor</a></span>, <span class='object_link'><a href="Object.html#has_as_parent-instance_method" title="Gst::Object#has_as_parent (method)">#has_as_parent</a></span>, <span class='object_link'><a href="Object.html#name-instance_method" title="Gst::Object#name (method)">#name</a></span>, <span class='object_link'><a href="Object.html#name=-instance_method" title="Gst::Object#name= (method)">#name=</a></span>, <span class='object_link'><a href="Object.html#parent-instance_method" title="Gst::Object#parent (method)">#parent</a></span>, <span class='object_link'><a href="Object.html#parent=-instance_method" title="Gst::Object#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="Object.html#path_string-instance_method" title="Gst::Object#path_string (method)">#path_string</a></span>, <span class='object_link'><a href="Object.html#ref-instance_method" title="Gst::Object#ref (method)">#ref</a></span>, <span class='object_link'><a href="Object.html#ref_sink-class_method" title="Gst::Object.ref_sink (method)">ref_sink</a></span>, <span class='object_link'><a href="Object.html#remove_control_binding-instance_method" title="Gst::Object#remove_control_binding (method)">#remove_control_binding</a></span>, <span class='object_link'><a href="Object.html#replace-class_method" title="Gst::Object.replace (method)">replace</a></span>, <span class='object_link'><a href="Object.html#set_control_binding_disabled-instance_method" title="Gst::Object#set_control_binding_disabled (method)">#set_control_binding_disabled</a></span>, <span class='object_link'><a href="Object.html#suggest_next_sync-instance_method" title="Gst::Object#suggest_next_sync (method)">#suggest_next_sync</a></span>, <span class='object_link'><a href="Object.html#sync_values-instance_method" title="Gst::Object#sync_values (method)">#sync_values</a></span>, <span class='object_link'><a href="Object.html#unparent-instance_method" title="Gst::Object#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="Object.html#unref-instance_method" title="Gst::Object#unref (method)">#unref</a></span></p>
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(name)  &#x21d2; <tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new bin with the given name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the new bin</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="<<-instance_method">
+  
+    #<strong>&lt;&lt;</strong>(element)  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+29
+30
+31
+32</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gst/bin.rb', line 29</span>
+
+<span class='kw'>def</span> <span class='op'>&lt;&lt;</span><span class='lparen'>(</span><span class='id identifier rubyid_element'>element</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_add_element'>add_element</span><span class='lparen'>(</span><span class='id identifier rubyid_element'>element</span><span class='rparen'>)</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_elements-instance_method">
+  
+    #<strong>add_elements</strong>(*elements)  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='add-instance_method'>add</span></span>
+    </span>
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gst/bin.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_elements'>add_elements</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_elements'>elements</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_elements'>elements</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_element'>element</span><span class='op'>|</span>
+    <span class='id identifier rubyid_add_element'>add_element</span><span class='lparen'>(</span><span class='id identifier rubyid_element'>element</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_many-instance_method">
+  
+    #<strong>add_many</strong>(element_1, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a nil-terminated list of elements to a bin.  This function is
+equivalent to calling gst_bin_add() for each member of the list. The return
+value of each gst_bin_add() is ignored.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>element_1</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Element element to add to the bin</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>additional elements to add to the bin</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="async_handling=-instance_method">
+  
+    #<strong>async_handling=</strong>(async_handling)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If set to true, the bin will handle asynchronous state changes.
+This should be used only if the bin subclass is modifying the state
+of its children on its own.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>async_handling</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>async-handling</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>async-handling</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="async_handling?-instance_method">
+  
+    #<strong>async_handling?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>If set to true, the bin will handle asynchronous state changes.
+This should be used only if the bin subclass is modifying the state
+of its children on its own.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>async-handling</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="each-instance_method">
+  
+    #<strong>each</strong>(options = {})  &#x21d2; <tt><span class='object_link'><a href="Object.html" title="Gst::Object (class)">Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gst/bin.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_to_enum'>to_enum</span><span class='lparen'>(</span><span class='symbol'>:each</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:recurse</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_iterator'>iterator</span> <span class='op'>=</span> <span class='id identifier rubyid_iterate_recurse'>iterate_recurse</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:sink</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_iterator'>iterator</span> <span class='op'>=</span> <span class='id identifier rubyid_iterate_sinks'>iterate_sinks</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:sorted</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_iterator'>iterator</span> <span class='op'>=</span> <span class='id identifier rubyid_iterate_sorted'>iterate_sorted</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:sources</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_iterator'>iterator</span> <span class='op'>=</span> <span class='id identifier rubyid_iterate_sources'>iterate_sources</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:interface</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_iterator'>iterator</span> <span class='op'>=</span> <span class='id identifier rubyid_iterate_all_by_interface'>iterate_all_by_interface</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:interface</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_iterator'>iterator</span> <span class='op'>=</span> <span class='id identifier rubyid_iterate_elements'>iterate_elements</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_loop'>loop</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_element'>element</span> <span class='op'>=</span> <span class='id identifier rubyid_iterator'>iterator</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span>
+    <span class='kw'>case</span> <span class='id identifier rubyid_result'>result</span>
+    <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="IteratorResult.html" title="Gst::IteratorResult (module)">IteratorResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="IteratorResult.html#DONE-constant" title="Gst::IteratorResult::DONE (constant)">DONE</a></span></span>
+      <span class='kw'>break</span>
+    <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="IteratorResult.html" title="Gst::IteratorResult (module)">IteratorResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="IteratorResult.html#OK-constant" title="Gst::IteratorResult::OK (constant)">OK</a></span></span>
+      <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_element'>element</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="IteratorResult.html" title="Gst::IteratorResult (module)">IteratorResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="IteratorResult.html#RESYNC-constant" title="Gst::IteratorResult::RESYNC (constant)">RESYNC</a></span></span>
+      <span class='id identifier rubyid_iterator'>iterator</span><span class='period'>.</span><span class='id identifier rubyid_resync'>resync</span>
+    <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="IteratorResult.html" title="Gst::IteratorResult (module)">IteratorResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="IteratorResult.html#ERROR-constant" title="Gst::IteratorResult::ERROR (constant)">ERROR</a></span></span>
+      <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>failed to iterate</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="find_unlinked_pad-instance_method">
+  
+    #<strong>find_unlinked_pad</strong>(direction)  &#x21d2; <tt><span class='object_link'><a href="Pad.html" title="Gst::Pad (class)">Gst::Pad</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Recursively looks for elements with an unlinked pad of the given
+direction within the specified bin and returns an unlinked pad
+if one is found, or nil otherwise. If a pad is found, the caller
+owns a reference to it and should use gst_object_unref() on the
+pad when it is not needed any longer.
+direction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>direction</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PadDirection.html" title="Gst::PadDirection (module)">Gst::PadDirection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether to look for an unlinked source or sink pad</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pad.html" title="Gst::Pad (class)">Gst::Pad</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>unlinked pad of the given</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_by_interface-instance_method">
+  
+    #<strong>get_by_interface</strong>(iface)  &#x21d2; <tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Looks for an element inside the bin that implements the given
+interface. If such an element is found, it returns the element.
+You can cast this element to the given interface afterwards.  If you want
+all elements that implement the interface, use
+gst_bin_iterate_all_by_interface(). This function recurses into child bins.
+implementing the interface</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iface</span>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the #GType of an interface</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Gst::Element inside the bin</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_by_name-instance_method">
+  
+    #<strong>get_by_name</strong>(name)  &#x21d2; <tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the element with the given name from a bin. This
+function recurses into child bins.
+name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the element name to search for</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Element with the given</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_by_name_recurse_up-instance_method">
+  
+    #<strong>get_by_name_recurse_up</strong>(name)  &#x21d2; <tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the element with the given name from this bin. If the
+element is not found, a recursion is performed on the parent bin.
+name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the element name to search for</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Element with the given</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iterate_all_by_element_factory_name-instance_method">
+  
+    #<strong>iterate_all_by_element_factory_name</strong>(factory_name)  &#x21d2; <tt>Gst::Iterator</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Looks for all elements inside the bin with the given element factory name.
+The function recurses inside child bins. The iterator will yield a series of
+Gst::Element.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>factory_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the Gst::ElementFactory</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Iterator</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Iterator of #GstElement
+for all elements in the bin with the given element factory name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iterate_all_by_interface-instance_method">
+  
+    #<strong>iterate_all_by_interface</strong>(iface)  &#x21d2; <tt>Gst::Iterator</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Looks for all elements inside the bin that implements the given
+interface. You can safely cast all returned elements to the given interface.
+The function recurses inside child bins. The iterator will yield a series
+of Gst::Element.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>iface</span>
+      
+      
+        <span class='type'>(<tt>GLib::Type</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the #GType of an interface</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Iterator</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Iterator of #GstElement
+for all elements in the bin implementing the given interface</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iterate_elements-instance_method">
+  
+    #<strong>iterate_elements</strong>  &#x21d2; <tt>Gst::Iterator</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets an iterator for the elements in this bin.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Iterator</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Iterator of #GstElement</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iterate_recurse-instance_method">
+  
+    #<strong>iterate_recurse</strong>  &#x21d2; <tt>Gst::Iterator</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets an iterator for the elements in this bin.
+This iterator recurses into GstBin children.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Iterator</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Iterator of #GstElement</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iterate_sinks-instance_method">
+  
+    #<strong>iterate_sinks</strong>  &#x21d2; <tt>Gst::Iterator</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets an iterator for all elements in the bin that have the
+#GST_ELEMENT_FLAG_SINK flag set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Iterator</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Iterator of #GstElement</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iterate_sorted-instance_method">
+  
+    #<strong>iterate_sorted</strong>  &#x21d2; <tt>Gst::Iterator</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets an iterator for the elements in this bin in topologically
+sorted order. This means that the elements are returned from
+the most downstream elements (sinks) to the sources.</p>
+<p>This function is used internally to perform the state changes
+of the bin elements and for clock selection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Iterator</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Iterator of #GstElement</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iterate_sources-instance_method">
+  
+    #<strong>iterate_sources</strong>  &#x21d2; <tt>Gst::Iterator</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets an iterator for all elements in the bin that have the
+#GST_ELEMENT_FLAG_SOURCE flag set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gst::Iterator</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Gst::Iterator of #GstElement</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="message_forward=-instance_method">
+  
+    #<strong>message_forward=</strong>(message_forward)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Forward all children messages, even those that would normally be filtered by
+the bin. This can be interesting when one wants to be notified of the EOS
+state of individual elements, for example.</p>
+<p>The messages are converted to an ELEMENT message with the bin as the
+source. The structure of the message is named <code>GstBinForwarded</code> and contains
+a field named <code>message</code> that contains the original forwarded Gst::Message.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message_forward</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>message-forward</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>message-forward</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="message_forward?-instance_method">
+  
+    #<strong>message_forward?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Forward all children messages, even those that would normally be filtered by
+the bin. This can be interesting when one wants to be notified of the EOS
+state of individual elements, for example.</p>
+<p>The messages are converted to an ELEMENT message with the bin as the
+source. The structure of the message is named <code>GstBinForwarded</code> and contains
+a field named <code>message</code> that contains the original forwarded Gst::Message.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>message-forward</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="recalculate_latency-instance_method">
+  
+    #<strong>recalculate_latency</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries <!-- raw HTML omitted -->bin<!-- raw HTML omitted --> for the current latency and reconfigures this latency on all the
+elements using a LATENCY event.</p>
+<p>This method is typically called on the pipeline when a #GST_MESSAGE_LATENCY
+is posted on the bus.</p>
+<p>This function simply emits the Gst::Bin::do-latency signal so any custom latency
+calculations will be performed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the latency could be queried and reconfigured.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove-instance_method">
+  
+    #<strong>remove</strong>(element)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes the element from the bin, unparenting it as well.
+Unparenting the element means that the element will be dereferenced,
+so if the bin holds the only reference to the element, the element
+will be freed in the process of removing it from the bin.  If you
+want the element to still exist after removing, you need to call
+gst_object_ref() before removing it from the bin.</p>
+<p>If the element's pads are linked to other pads, the pads will be unlinked
+before the element is removed from the bin.
+the bin does not want to remove the element.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>element</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::Element to remove</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the element could be removed, false if</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_many-instance_method">
+  
+    #<strong>remove_many</strong>(element_1, array)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes a list of elements from a bin. This function is equivalent
+to calling gst_bin_remove() with each member of the list.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>element_1</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Element.html" title="Gst::Element (class)">Gst::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the first Gst::Element to remove from the bin</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>array</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>nil-terminated list of elements to remove from the bin</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="suppressed_flags-instance_method">
+  
+    #<strong>suppressed_flags</strong>  &#x21d2; <tt><span class='object_link'><a href="ElementFlags.html" title="Gst::ElementFlags (module)">Gst::ElementFlags</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the bin's suppressed Gst::ElementFlags.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ElementFlags.html" title="Gst::ElementFlags (module)">Gst::ElementFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the bin's suppressed Gst::ElementFlags.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="suppressed_flags=-instance_method">
+  
+    #<strong>suppressed_flags=</strong>(flags)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Suppresses the given flags on the bin. Gst::ElementFlags of a
+child element are propagated when it is added to the bin.
+When suppressed flags are set, those specified flags will
+not be propagated to the bin.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ElementFlags.html" title="Gst::ElementFlags (module)">Gst::ElementFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the Gst::ElementFlags to suppress</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sync_children_states-instance_method">
+  
+    #<strong>sync_children_states</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Synchronizes the state of every child of <!-- raw HTML omitted -->bin<!-- raw HTML omitted --> with the state
+of <!-- raw HTML omitted -->bin<!-- raw HTML omitted -->. See also gst_element_sync_state_with_parent().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if syncing the state was successful for all children,
+otherwise false.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.2).
+</div>
+
+    </div>
+  </body>
+</html>
