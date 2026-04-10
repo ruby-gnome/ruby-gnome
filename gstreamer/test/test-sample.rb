@@ -17,10 +17,14 @@
 require "fiddle"
 
 class TestSample < Test::Unit::TestCase
+  include GStreamerTestUtils
+
   AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER = 1024
   AUDIO_TEST_SRC_RAMP = 1
 
   def test_memory_view_mono
+    only_gstreamer_version(1, 20)
+
     samples = generate_samples
 
     samples.each_with_index do |sample, i|
@@ -48,6 +52,8 @@ class TestSample < Test::Unit::TestCase
   end
 
   def test_memory_view_stereo
+    only_gstreamer_version(1, 20)
+
     samples = generate_samples(channels: 2)
 
     samples.each_with_index do |sample, i|
@@ -74,6 +80,8 @@ class TestSample < Test::Unit::TestCase
   end
 
   def test_memory_view_non_interleaved
+    only_gstreamer_version(1, 20)
+
     samples = generate_samples(layout: "non-interleaved", channels: 2)
 
     assert_raise(ArgumentError) do
@@ -82,6 +90,8 @@ class TestSample < Test::Unit::TestCase
   end
 
   def test_memory_view_unsupported_format
+    only_gstreamer_version(1, 20)
+
     samples = generate_samples(format: "S24_32LE")
 
     assert_raise(ArgumentError) do
@@ -90,6 +100,8 @@ class TestSample < Test::Unit::TestCase
   end
 
   def test_memory_view_from_buffer_list
+    only_gstreamer_version(1, 20)
+
     samples = generate_samples
     assert_equal(15, samples.size)
 
