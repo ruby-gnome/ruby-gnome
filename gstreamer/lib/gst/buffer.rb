@@ -19,20 +19,14 @@ module Gst
     alias_method :map_raw, :map
     def map(flags)
       success, info = map_raw(flags)
-      unless success
-        unmap
-        raise "failed to map buffer"
-      end
+      raise "failed to map buffer" unless success
       info
     end
 
     alias_method :map_range_raw, :map_range
     def map_range(idx, length, flags)
       success, info = map_range_raw(idx, length, flags)
-      unless success
-        unmap
-        raise "failed to map buffer"
-      end
+      raise "failed to map buffer range" unless success
       info
     end
   end
