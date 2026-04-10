@@ -19,7 +19,7 @@ module Gst
     alias_method :map_raw, :map
     def map(flags)
       success, info = map_raw(flags)
-      raise "failed to map buffer" unless success
+      raise Gst::CoreError::Failed.new("failed to map buffer") unless success
       info
     end
 
