@@ -14,10 +14,15 @@ RUN \
     git \
     gnumeric \
     gstreamer1.0-plugins-good \
+    libffi-dev \
     make \
     ruby-dev \
     sudo \
     xvfb
+
+RUN \
+  gem install --no-user-install \
+    fiddle
 
 RUN \
   useradd --user-group --create-home ruby-gnome

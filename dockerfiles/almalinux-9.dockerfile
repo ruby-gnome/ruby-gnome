@@ -11,6 +11,7 @@ RUN \
     gcc-c++ \
     git \
     gstreamer1-plugins-good \
+    libffi-devel \
     make \
     redhat-rpm-config \
     ruby-devel \
@@ -19,6 +20,10 @@ RUN \
     which \
     xorg-x11-server-Xvfb && \
   dnf clean all
+
+RUN \
+  gem install --no-user-install \
+    fiddle
 
 RUN \
   useradd --user-group --create-home ruby-gnome

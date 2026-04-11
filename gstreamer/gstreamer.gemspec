@@ -44,18 +44,32 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("gobject-introspection", "= #{s.version}")
 
-  [
-    ["alpine_linux", "gstreamer-dev"],
-    ["alt_linux", "gstreamer1.0-devel"],
-    ["arch_linux", "gstreamer"],
-    ["conda", "gstreamer"],
-    ["debian", "libgstreamer1.0-dev"],
-    ["homebrew", "gstreamer"],
-    ["macports", "gstreamer"],
-    ["msys2", "gstreamer"],
-    ["rhel", "pkgconfig(gstreamer-1.0)"],
-  ].each do |platform, package|
-    s.requirements << "system: gstreamer-1.0: #{platform}: #{package}"
+  {
+    "gstreamer-1.0" => [
+      ["alpine_linux", "gstreamer-dev"],
+      ["alt_linux", "gstreamer1.0-devel"],
+      ["arch_linux", "gstreamer"],
+      ["conda", "gstreamer"],
+      ["debian", "libgstreamer1.0-dev"],
+      ["homebrew", "gstreamer"],
+      ["macports", "gstreamer"],
+      ["msys2", "gstreamer"],
+      ["rhel", "pkgconfig(gstreamer-1.0)"]
+    ],
+    "gstreamer-audio-1.0" => [
+      ["alpine_linux", "gst-plugins-base-dev"],
+      ["alt_linux", "liborc-devel"],
+      ["alt_linux", "gst-plugins1.0-devel"],
+      ["arch_linux", "gst-plugins-base"],
+      ["conda", "gst-plugins-base"],
+      ["debian", "libgstreamer-plugins-base1.0-dev"],
+      ["msys2", "gst-plugins-base"],
+      ["rhel", "pkgconfig(gstreamer-audio-1.0)"]
+    ]
+  }.each_pair do |id, requirements|
+    requirements.each do |platform, package|
+      s.requirements << "system: #{id}: #{platform}: #{package}"
+    end
   end
 
   s.metadata["msys2_mingw_dependencies"] = "gstreamer"
