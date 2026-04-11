@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2023  Ruby-GNOME Project Team
+# Copyright (C) 2026  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,26 +14,20 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestMapInfo < Test::Unit::TestCase
-  def setup
-    unless Gst::ElementFactory.find("videotestsrc")
-      omit("gst-plugins-good is needed")
+module Gst
+  class Buffer
+    alias_method :map_raw, :map
+    def map(flags)
+      success, info = map_raw(flags)
+      raise Gst::CoreError::Failed.new("failed to map buffer") unless success
+      info
     end
-    @pipeline = Gst.parse_launch("videotestsrc ! appsink name=sink")
-    @sink = @pipeline.get_by_name("sink")
-  end
 
-  def test_data
-    @pipeline.play
-    begin
-      sample = @sink.try_pull_sample(Gst::SECOND)
-      buffer = sample.buffer
-      map_info = buffer.map(:read)
-      assert do
-        map_info.data.size >= 115200
-      end
-    ensure
-      @pipeline.stop
+    alias_method :map_range_raw, :map_range
+    def map_range(idx, length, flags)
+      success, info = map_range_raw(idx, length, flags)
+      raise Gst::CoreError::Failed.new("failed to map buffer") unless success
+      info
     end
   end
 end
