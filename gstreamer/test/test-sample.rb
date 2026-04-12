@@ -110,10 +110,9 @@ class TestSample < Test::Unit::TestCase
 
     samples.each do |sample|
       buffer = sample.buffer
-      success, map = buffer.map(:read)
-      assert_true(success)
-      expected_data << map.data.pack("C*")
-      buffer.unmap(map)
+      buffer.map(:read) do |map|
+        expected_data << map.data.pack("C*")
+      end
       buffer_list.insert(-1, buffer)
     end
 
