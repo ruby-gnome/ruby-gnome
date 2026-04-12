@@ -38,6 +38,21 @@ class TestBuffer < Test::Unit::TestCase
     end
   end
 
+  def test_map_with_block
+    @pipeline.play
+    begin
+      sample = @sink.try_pull_sample(Gst::SECOND)
+      buffer = sample.buffer
+      buffer.map(:read) do |map_info|
+        assert do
+          map_info.data.size >= 115200
+        end
+      end
+    ensure
+      @pipeline.stop
+    end
+  end
+
   def test_map_fail
     @pipeline.play
     begin
@@ -61,6 +76,21 @@ class TestBuffer < Test::Unit::TestCase
 
       assert do
         map_info.data.size >= 115200
+      end
+    ensure
+      @pipeline.stop
+    end
+  end
+
+  def test_map_range_with_block
+    @pipeline.play
+    begin
+      sample = @sink.try_pull_sample(Gst::SECOND)
+      buffer = sample.buffer
+      buffer.map_range(0, -1, :read) do |map_info|
+        assert do
+          map_info.data.size >= 115200
+        end
       end
     ensure
       @pipeline.stop
