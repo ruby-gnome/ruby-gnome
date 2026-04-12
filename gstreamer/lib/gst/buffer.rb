@@ -20,14 +20,26 @@ module Gst
     def map(flags)
       success, info = map_raw(flags)
       raise Gst::CoreError::Failed.new("failed to map buffer") unless success
-      info
+      return info unless block_given?
+
+      begin
+        yield info
+      ensure
+        unmap(info)
+      end
     end
 
     alias_method :map_range_raw, :map_range
     def map_range(idx, length, flags)
       success, info = map_range_raw(idx, length, flags)
       raise Gst::CoreError::Failed.new("failed to map buffer") unless success
-      info
+      return info unless block_given?
+
+      begin
+        yield info
+      ensure
+        unmap(info)
+      end
     end
   end
 end
