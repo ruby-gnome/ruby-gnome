@@ -252,7 +252,13 @@
 21
 22
 23
-24</pre>
+24
+25
+26
+27
+28
+29
+30</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/gst/buffer.rb', line 20</span>
@@ -260,7 +266,13 @@
 <span class='kw'>def</span> <span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='id identifier rubyid_flags'>flags</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_success'>success</span><span class='comma'>,</span> <span class='id identifier rubyid_info'>info</span> <span class='op'>=</span> <span class='id identifier rubyid_map_raw'>map_raw</span><span class='lparen'>(</span><span class='id identifier rubyid_flags'>flags</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Gst.html" title="Gst (module)">Gst</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="CoreError.html" title="Gst::CoreError (module)">CoreError</a></span></span><span class='op'>::</span><span class='const'>Failed</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>failed to map buffer</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_success'>success</span>
-  <span class='id identifier rubyid_info'>info</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_info'>info</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+
+  <span class='kw'>begin</span>
+    <span class='kw'>yield</span> <span class='id identifier rubyid_info'>info</span>
+  <span class='kw'>ensure</span>
+    <span class='id identifier rubyid_unmap'>unmap</span><span class='lparen'>(</span><span class='id identifier rubyid_info'>info</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -304,19 +316,31 @@
       <pre class="lines">
 
 
-27
-28
-29
-30
-31</pre>
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gst/buffer.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/gst/buffer.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_map_range'>map_range</span><span class='lparen'>(</span><span class='id identifier rubyid_idx'>idx</span><span class='comma'>,</span> <span class='id identifier rubyid_length'>length</span><span class='comma'>,</span> <span class='id identifier rubyid_flags'>flags</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_success'>success</span><span class='comma'>,</span> <span class='id identifier rubyid_info'>info</span> <span class='op'>=</span> <span class='id identifier rubyid_map_range_raw'>map_range_raw</span><span class='lparen'>(</span><span class='id identifier rubyid_idx'>idx</span><span class='comma'>,</span> <span class='id identifier rubyid_length'>length</span><span class='comma'>,</span> <span class='id identifier rubyid_flags'>flags</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Gst.html" title="Gst (module)">Gst</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="CoreError.html" title="Gst::CoreError (module)">CoreError</a></span></span><span class='op'>::</span><span class='const'>Failed</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>failed to map buffer</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_success'>success</span>
-  <span class='id identifier rubyid_info'>info</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_info'>info</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+
+  <span class='kw'>begin</span>
+    <span class='kw'>yield</span> <span class='id identifier rubyid_info'>info</span>
+  <span class='kw'>ensure</span>
+    <span class='id identifier rubyid_unmap'>unmap</span><span class='lparen'>(</span><span class='id identifier rubyid_info'>info</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -338,10 +362,10 @@
       <pre class="lines">
 
 
-26</pre>
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gst/buffer.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/gst/buffer.rb', line 32</span>
 
 <span class='id identifier rubyid_alias_method'>alias_method</span> <span class='symbol'>:map_range_raw</span><span class='comma'>,</span> <span class='symbol'>:map_range</span></pre>
     </td>
