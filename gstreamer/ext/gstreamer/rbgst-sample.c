@@ -85,10 +85,18 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
         return false;
     }
 
+    is_writable_requested = flags & RUBY_MEMORY_VIEW_WRITABLE;
+
     buffer_list = gst_sample_get_buffer_list(sample);
     if (buffer_list) {
-        buffer = gst_buffer_new();
-        gst_buffer_list_foreach(buffer_list, rg_gst_combine_buffer_list, &buffer);
+      if (is_writable_requested) {
+          gst_audio_info_free(audio_info);
+          rb_warn("Gst::Sample: currently writable buffer list is not supported");
+
+          return false;
+      }
+      buffer = gst_buffer_new();
+      gst_buffer_list_foreach(buffer_list, rg_gst_combine_buffer_list, &buffer);
     } else {
         buffer = gst_sample_get_buffer(sample);
         if (!buffer) {
@@ -100,7 +108,6 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
         buffer = gst_buffer_ref(buffer);
     }
 
-    is_writable_requested = flags & RUBY_MEMORY_VIEW_WRITABLE;
     is_writable = gst_sample_is_writable(sample);
     if (is_writable_requested && !is_writable) {
         rb_warn("Gst::Sample: sample is not writable but writable memory view is requested");
