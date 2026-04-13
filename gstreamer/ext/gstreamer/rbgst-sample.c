@@ -279,6 +279,15 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
         return false;
     }
 
+    if (map_info->size % (width * audio_info->channels) != 0) {
+        rb_warn("Gst::Sample: buffer size is not aligned with sample width and channels");
+        gst_buffer_unmap(buffer, map_info);
+        xfree(map_info);
+        gst_buffer_unref(buffer);
+        gst_audio_info_free(audio_info);
+
+        return false;
+    }
     n_samples = map_info->size / width / audio_info->channels;
     shape = ALLOC_N(ssize_t, 2);
     strides = ALLOC_N(ssize_t, 2);
