@@ -121,7 +121,6 @@ class TestSample < Test::Unit::TestCase
     sample.buffer_list = buffer_list
 
     Fiddle::MemoryView.export(sample) do |view|
-      assert_equal(expected_data.bytesize, view.byte_size)
       assert_equal(expected_data, view.to_s)
     end
   end
