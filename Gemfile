@@ -30,7 +30,7 @@ group :development, :docs, :test do
 end
 
 group :docs do
-  gem "commonmarker", "~> 0.21"
+  gem "commonmarker"
   gem "rdoc"
   gem "yard"
   gem "yard-gobject-introspection",
