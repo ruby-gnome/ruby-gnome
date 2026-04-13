@@ -27,7 +27,7 @@ group :development, :docs, :test do
   gem "bundler"
   gem "erb"
   gem "rake"
-  gem "fiddle", ">= 1.0.9"
+  gem "fiddle"
 end
 
 group :docs do
