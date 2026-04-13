@@ -59,7 +59,7 @@ class TestSample < Test::Unit::TestCase
     samples.each_with_index do |sample, i|
       Fiddle::MemoryView.export(sample) do |view|
         assert_equal({
-                        byte_size: AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER * 4 * 2
+                        byte_size: AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER * 4 * 2,
                         readonly?: true,
                         format: "e",
                         item_size: 4,
@@ -70,7 +70,7 @@ class TestSample < Test::Unit::TestCase
                      },
                      {
                        byte_size: view.byte_size,
-                       readonly?: view.readonly?
+                       readonly?: view.readonly?,
                        format: view.format,
                        item_size: view.item_size,
                        ndim: view.ndim,
