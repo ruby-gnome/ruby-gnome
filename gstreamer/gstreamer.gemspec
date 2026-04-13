@@ -52,7 +52,7 @@ Gem::Specification.new do |s|
       ["conda", "gstreamer"],
       ["debian", "libgstreamer1.0-dev"],
       ["homebrew", "gstreamer"],
-      ["macports", "gstreamer"],
+      ["macports", "gstreamer1"],
       ["msys2", "gstreamer"],
       ["rhel", "pkgconfig(gstreamer-1.0)"]
     ],
@@ -63,6 +63,7 @@ Gem::Specification.new do |s|
       ["arch_linux", "gst-plugins-base"],
       ["conda", "gst-plugins-base"],
       ["debian", "libgstreamer-plugins-base1.0-dev"],
+      ["macports", "gstreamer1-gst-plugins-base"],
       ["msys2", "gst-plugins-base"],
       ["rhel", "pkgconfig(gstreamer-audio-1.0)"]
     ]

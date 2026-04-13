@@ -46,7 +46,7 @@ unless required_pkg_config_package(package_id,
                                    :redhat => "pkgconfig(#{package_id})",
                                    :arch_linux => "gstreamer",
                                    :homebrew => "gstreamer",
-                                   :macports => "gstreamer",
+                                   :macports => "gstreamer1",
                                    :msys2 => "gstreamer")
   exit(false)
 end
@@ -58,6 +58,7 @@ unless required_pkg_config_package(audio_package_id,
                                    :debian => "libgstreamer-plugins-base1.0-dev",
                                    :redhat => "pkgconfig(#{audio_package_id})",
                                    :arch_linux => "gst-plugins-base",
+                                   :macports => "gstreamer1-gst-plugins-base",
                                    :msys2 => "gst-plugins-base")
   exit(false)
 end
