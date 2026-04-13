@@ -29,16 +29,26 @@ class TestSample < Test::Unit::TestCase
 
     samples.each_with_index do |sample, i|
       Fiddle::MemoryView.export(sample) do |view|
-        assert_equal(AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER * 4, view.byte_size)
-        assert do
-          view.readonly?
-        end
-        assert_equal("e", view.format)
-        assert_equal(4, view.item_size)
-        assert_equal(2, view.ndim)
-        assert_equal([AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER, 1], view.shape)
-        assert_equal([4, 4], view.strides)
-        assert_nil(view.sub_offsets)
+        assert_equal({
+                       byte_size: AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER * 4,
+                       readonly?: true,
+                       format: "e",
+                       item_size: 4,
+                       ndim: 2,
+                       shape: [AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER, 1],
+                       strides: [4, 4],
+                       sub_offsets: nil,
+                     },
+                     {
+                       byte_size: view.byte_size,
+                       readonly?: view.readonly?,
+                       format: view.format,
+                       item_size: view.item_size,
+                       ndim: view.ndim,
+                       shape: view.shape,
+                       strides: view.strides,
+                       sub_offsets: view.sub_offsets,
+                     })
 
         offset = AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER * i
         (view.byte_size / view.item_size).times do |j|
