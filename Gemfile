@@ -26,8 +26,8 @@ end
 group :development, :docs, :test do
   gem "bundler"
   gem "erb"
-  gem "rake"
   gem "fiddle"
+  gem "rake"
 end
 
 group :docs do
