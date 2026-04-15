@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::SearchEntry";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,43 +99,44 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkSearchEntry</code> is an entry widget that has been tailored for use
+    <p><code>GtkSearchEntry</code> is an entry widget that has been tailored for use<br />
 as a search entry.</p>
-<p>The main API for interacting with a <code>GtkSearchEntry</code> as entry
+<p>The main API for interacting with a <code>GtkSearchEntry</code> as entry<br />
 is the <code>GtkEditable</code> interface.</p>
 <p><img src="search-entry.png" alt="An example GtkSearchEntry" /></p>
-<p>It will show an inactive symbolic “find” icon when the search
-entry is empty, and a symbolic “clear” icon when there is text.
+<p>It will show an inactive symbolic “find” icon when the search<br />
+entry is empty, and a symbolic “clear” icon when there is text.<br />
 Clicking on the “clear” icon will empty the search entry.</p>
-<p>To make filtering appear more reactive, it is a good idea to
-not react to every change in the entry text immediately, but
-only after a short delay. To support this, <code>GtkSearchEntry</code>
-emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchEntry::search-changed] signal which
+<p>To make filtering appear more reactive, it is a good idea to<br />
+not react to every change in the entry text immediately, but<br />
+only after a short delay. To support this, <code>GtkSearchEntry</code><br />
+emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchEntry::search-changed] signal which<br />
 can be used instead of the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::changed] signal.</p>
-<p>The [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchEntry::previous-match],
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchEntry::next-match] and
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchEntry::stop-search] signals can be used to
+<p>The [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchEntry::previous-match],<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchEntry::next-match] and<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchEntry::stop-search] signals can be used to<br />
 implement moving between search results and ending the search.</p>
-<p>Often, <code>GtkSearchEntry</code> will be fed events by means of being
-placed inside a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchBar]. If that is not the case,
-you can use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchEntry.set_key_capture_widget] to
+<p>Often, <code>GtkSearchEntry</code> will be fed events by means of being<br />
+placed inside a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchBar]. If that is not the case,<br />
+you can use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchEntry.set_key_capture_widget] to<br />
 let it capture key input from another widget.</p>
-<p><code>GtkSearchEntry</code> provides only minimal API and should be used with
+<p><code>GtkSearchEntry</code> provides only minimal API and should be used with<br />
 the [iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable] API.</p>
-<h2>CSS Nodes</h2>
+<h2><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS Nodes</h2>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_search'>search</span>
 <span class='id identifier rubyid_╰──'>╰──</span> <span class='id identifier rubyid_text'>text</span>
 </code></pre>
-<p><code>GtkSearchEntry</code> has a single CSS node with name entry that carries
+<p><code>GtkSearchEntry</code> has a single CSS node with name entry that carries<br />
 a <code>.search</code> style class, and the text node is a child of that.</p>
-<h2>Accessibility</h2>
+<h2><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h2>
 <p><code>GtkSearchEntry</code> uses the %GTK_ACCESSIBLE_ROLE_SEARCH_BOX role.</p>
 
 
@@ -460,9 +462,11 @@ a <code>.search</code> style class, and the text node is a child of that.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -623,7 +627,7 @@ a <code>.search</code> style class, and the text node is a child of that.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The hints about input for the <code>GtkSearchEntry</code> used to alter the
+    <p>The hints about input for the <code>GtkSearchEntry</code> used to alter the<br />
 behaviour of input methods.</p>
 
 
@@ -663,7 +667,7 @@ behaviour of input methods.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The hints about input for the <code>GtkSearchEntry</code> used to alter the
+    <p>The hints about input for the <code>GtkSearchEntry</code> used to alter the<br />
 behaviour of input methods.</p>
 
 
@@ -731,7 +735,7 @@ behaviour of input methods.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The purpose for the <code>GtkSearchEntry</code> input used to alter the
+    <p>The purpose for the <code>GtkSearchEntry</code> input used to alter the<br />
 behaviour of input methods.</p>
 
 
@@ -771,7 +775,7 @@ behaviour of input methods.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The purpose for the <code>GtkSearchEntry</code> input used to alter the
+    <p>The purpose for the <code>GtkSearchEntry</code> input used to alter the<br />
 behaviour of input methods.</p>
 
 
@@ -878,19 +882,19 @@ behaviour of input methods.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> as the widget that <!-- raw HTML omitted -->entry<!-- raw HTML omitted --> will capture key
+    <p>Sets <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> as the widget that <!-- raw HTML omitted -->entry<!-- raw HTML omitted --> will capture key<br />
 events from.</p>
-<p>Key events are consumed by the search entry to start or
+<p>Key events are consumed by the search entry to start or<br />
 continue a search.</p>
-<p>If the entry is part of a <code>GtkSearchBar</code>, it is preferable
-to call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchBar.set_key_capture_widget] instead,
-which will reveal the entry in addition to triggering the
+<p>If the entry is part of a <code>GtkSearchBar</code>, it is preferable<br />
+to call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchBar.set_key_capture_widget] instead,<br />
+which will reveal the entry in addition to triggering the<br />
 search entry.</p>
-<p>Note that despite the name of this function, the events
-are only 'captured' in the bubble phase, which means that
-editable child widgets of <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> will receive text input
-before it gets captured. If that is not desired, you can
-capture and forward the events yourself with
+<p>Note that despite the name of this function, the events<br />
+are only 'captured' in the bubble phase, which means that<br />
+editable child widgets of <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> will receive text input<br />
+before it gets captured. If that is not desired, you can<br />
+capture and forward the events yourself with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EventControllerKey.forward].</p>
 
 
@@ -945,7 +949,7 @@ capture and forward the events yourself with
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The text that will be displayed in the <code>GtkSearchEntry</code>
+    <p>The text that will be displayed in the <code>GtkSearchEntry</code><br />
 when it is empty and unfocused.</p>
 
 
@@ -985,7 +989,7 @@ when it is empty and unfocused.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The text that will be displayed in the <code>GtkSearchEntry</code>
+    <p>The text that will be displayed in the <code>GtkSearchEntry</code><br />
 when it is empty and unfocused.</p>
 
 
@@ -1053,7 +1057,7 @@ when it is empty and unfocused.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The delay in milliseconds from last keypress to the search
+    <p>The delay in milliseconds from last keypress to the search<br />
 changed signal.</p>
 
 
@@ -1093,7 +1097,7 @@ changed signal.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The delay in milliseconds from last keypress to the search
+    <p>The delay in milliseconds from last keypress to the search<br />
 changed signal.</p>
 
 
@@ -1157,7 +1161,7 @@ changed signal.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

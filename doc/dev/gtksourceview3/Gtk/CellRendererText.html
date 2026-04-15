@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::CellRendererText";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -2184,9 +2186,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -2212,12 +2216,12 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>GtkCellRendererText</code>. Adjust how text is drawn using
-object properties. Object properties can be
-set globally (with g_object_set()). Also, with <code>GtkTreeViewColumn</code>,
-you can bind a property to a value in a <code>GtkTreeModel</code>. For example,
-you can bind the “text” property on the cell renderer to a string
-value in the model, thus rendering a different string in each row
+    <p>Creates a new <code>GtkCellRendererText</code>. Adjust how text is drawn using<br />
+object properties. Object properties can be<br />
+set globally (with g_object_set()). Also, with <code>GtkTreeViewColumn</code>,<br />
+you can bind a property to a value in a <code>GtkTreeModel</code>. For example,<br />
+you can bind the “text” property on the cell renderer to a string<br />
+value in the model, thus rendering a different string in each row<br />
 of the <code>GtkTreeView</code>.</p>
 
 
@@ -2353,8 +2357,8 @@ of the <code>GtkTreeView</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Specifies how to align the lines of text with respect to each other.</p>
-<p>Note that this property describes how to align the lines of text in
-case there are several of them. The &quot;xalign&quot; property of <code>GtkCellRenderer</code>,
+<p>Note that this property describes how to align the lines of text in<br />
+case there are several of them. The &quot;xalign&quot; property of <code>GtkCellRenderer</code>,<br />
 on the other hand, sets the horizontal alignment of the whole text.</p>
 
 
@@ -2395,8 +2399,8 @@ on the other hand, sets the horizontal alignment of the whole text.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Specifies how to align the lines of text with respect to each other.</p>
-<p>Note that this property describes how to align the lines of text in
-case there are several of them. The &quot;xalign&quot; property of <code>GtkCellRenderer</code>,
+<p>Note that this property describes how to align the lines of text in<br />
+case there are several of them. The &quot;xalign&quot; property of <code>GtkCellRenderer</code>,<br />
 on the other hand, sets the horizontal alignment of the whole text.</p>
 
 
@@ -3044,9 +3048,9 @@ on the other hand, sets the horizontal alignment of the whole text.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Specifies the preferred place to ellipsize the string, if the cell renderer
-does not have enough room to display the entire string. Setting it to
-%PANGO_ELLIPSIZE_NONE turns off ellipsizing. See the wrap-width property
+    <p>Specifies the preferred place to ellipsize the string, if the cell renderer<br />
+does not have enough room to display the entire string. Setting it to<br />
+%PANGO_ELLIPSIZE_NONE turns off ellipsizing. See the wrap-width property<br />
 for another way of making the text fit into a given width.</p>
 
 
@@ -3086,9 +3090,9 @@ for another way of making the text fit into a given width.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Specifies the preferred place to ellipsize the string, if the cell renderer
-does not have enough room to display the entire string. Setting it to
-%PANGO_ELLIPSIZE_NONE turns off ellipsizing. See the wrap-width property
+    <p>Specifies the preferred place to ellipsize the string, if the cell renderer<br />
+does not have enough room to display the entire string. Setting it to<br />
+%PANGO_ELLIPSIZE_NONE turns off ellipsizing. See the wrap-width property<br />
 for another way of making the text fit into a given width.</p>
 
 
@@ -3471,12 +3475,12 @@ for another way of making the text fit into a given width.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the height of a renderer to explicitly be determined by the “font” and
-“y_pad” property set on it.  Further changes in these properties do not
-affect the height, so they must be accompanied by a subsequent call to this
-function.  Using this function is inflexible, and should really only be used
-if calculating the size of a cell is too slow (ie, a massive number of cells
-displayed).  If <!-- raw HTML omitted -->number_of_rows<!-- raw HTML omitted --> is -1, then the fixed height is unset, and
+    <p>Sets the height of a renderer to explicitly be determined by the “font” and<br />
+“y_pad” property set on it.  Further changes in these properties do not<br />
+affect the height, so they must be accompanied by a subsequent call to this<br />
+function.  Using this function is inflexible, and should really only be used<br />
+if calculating the size of a cell is too slow (ie, a massive number of cells<br />
+displayed).  If <!-- raw HTML omitted -->number_of_rows<!-- raw HTML omitted --> is -1, then the fixed height is unset, and<br />
 the height is determined by the properties again.</p>
 
 
@@ -4270,12 +4274,12 @@ the height is determined by the properties again.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The desired maximum width of the cell, in characters. If this property
+    <p>The desired maximum width of the cell, in characters. If this property<br />
 is set to -1, the width will be calculated automatically.</p>
-<p>For cell renderers that ellipsize or wrap text; this property
-controls the maximum reported width of the cell. The
-cell should not receive any greater allocation unless it is
-set to expand in its <code>GtkCellLayout</code> and all of the cell's siblings
+<p>For cell renderers that ellipsize or wrap text; this property<br />
+controls the maximum reported width of the cell. The<br />
+cell should not receive any greater allocation unless it is<br />
+set to expand in its <code>GtkCellLayout</code> and all of the cell's siblings<br />
 have received their natural width.</p>
 
 
@@ -4315,12 +4319,12 @@ have received their natural width.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The desired maximum width of the cell, in characters. If this property
+    <p>The desired maximum width of the cell, in characters. If this property<br />
 is set to -1, the width will be calculated automatically.</p>
-<p>For cell renderers that ellipsize or wrap text; this property
-controls the maximum reported width of the cell. The
-cell should not receive any greater allocation unless it is
-set to expand in its <code>GtkCellLayout</code> and all of the cell's siblings
+<p>For cell renderers that ellipsize or wrap text; this property<br />
+controls the maximum reported width of the cell. The<br />
+cell should not receive any greater allocation unless it is<br />
+set to expand in its <code>GtkCellLayout</code> and all of the cell's siblings<br />
 have received their natural width.</p>
 
 
@@ -4388,7 +4392,7 @@ have received their natural width.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The text that will be displayed in the <code>GtkCellRenderer</code> if
+    <p>The text that will be displayed in the <code>GtkCellRenderer</code> if<br />
 <code>GtkCellRendererText:editable</code> is true and the cell is empty.</p>
 
 
@@ -4428,7 +4432,7 @@ have received their natural width.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The text that will be displayed in the <code>GtkCellRenderer</code> if
+    <p>The text that will be displayed in the <code>GtkCellRenderer</code> if<br />
 <code>GtkCellRendererText:editable</code> is true and the cell is empty.</p>
 
 
@@ -6701,8 +6705,8 @@ have received their natural width.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The desired width of the cell, in characters. If this property is set to
--1, the width will be calculated automatically, otherwise the cell will
+    <p>The desired width of the cell, in characters. If this property is set to<br />
+-1, the width will be calculated automatically, otherwise the cell will<br />
 request either 3 characters or the property value, whichever is greater.</p>
 
 
@@ -6742,8 +6746,8 @@ request either 3 characters or the property value, whichever is greater.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The desired width of the cell, in characters. If this property is set to
--1, the width will be calculated automatically, otherwise the cell will
+    <p>The desired width of the cell, in characters. If this property is set to<br />
+-1, the width will be calculated automatically, otherwise the cell will<br />
 request either 3 characters or the property value, whichever is greater.</p>
 
 
@@ -6811,8 +6815,8 @@ request either 3 characters or the property value, whichever is greater.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Specifies how to break the string into multiple lines, if the cell
-renderer does not have enough room to display the entire string.
+    <p>Specifies how to break the string into multiple lines, if the cell<br />
+renderer does not have enough room to display the entire string.<br />
 This property has no effect unless the wrap-width property is set.</p>
 
 
@@ -6852,8 +6856,8 @@ This property has no effect unless the wrap-width property is set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Specifies how to break the string into multiple lines, if the cell
-renderer does not have enough room to display the entire string.
+    <p>Specifies how to break the string into multiple lines, if the cell<br />
+renderer does not have enough room to display the entire string.<br />
 This property has no effect unless the wrap-width property is set.</p>
 
 
@@ -6921,8 +6925,8 @@ This property has no effect unless the wrap-width property is set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Specifies the minimum width at which the text is wrapped. The wrap-mode property can
-be used to influence at what character positions the line breaks can be placed.
+    <p>Specifies the minimum width at which the text is wrapped. The wrap-mode property can<br />
+be used to influence at what character positions the line breaks can be placed.<br />
 Setting wrap-width to -1 turns wrapping off.</p>
 
 
@@ -6962,8 +6966,8 @@ Setting wrap-width to -1 turns wrapping off.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Specifies the minimum width at which the text is wrapped. The wrap-mode property can
-be used to influence at what character positions the line breaks can be placed.
+    <p>Specifies the minimum width at which the text is wrapped. The wrap-mode property can<br />
+be used to influence at what character positions the line breaks can be placed.<br />
 Setting wrap-width to -1 turns wrapping off.</p>
 
 
@@ -7027,7 +7031,7 @@ Setting wrap-width to -1 turns wrapping off.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

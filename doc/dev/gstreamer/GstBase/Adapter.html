@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GstBase::Adapter";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -807,6 +809,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -852,8 +855,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the maximum amount of bytes available, that is it returns the maximum
-value that can be supplied to gst_adapter_map() without that function
+    <p>Gets the maximum amount of bytes available, that is it returns the maximum<br />
+value that can be supplied to gst_adapter_map() without that function<br />
 returning nil.</p>
 
 
@@ -893,9 +896,9 @@ returning nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the maximum number of bytes that are immediately available without
-requiring any expensive operations (like copying the data into a
-temporary buffer).
+    <p>Gets the maximum number of bytes that are immediately available without<br />
+requiring any expensive operations (like copying the data into a<br />
+temporary buffer).<br />
 operations</p>
 
 
@@ -970,10 +973,10 @@ operations</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Copies <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes of data starting at <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> out of the buffers
+    <p>Copies <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes of data starting at <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> out of the buffers<br />
 contained in Gst::Adapter into an array <!-- raw HTML omitted -->dest<!-- raw HTML omitted --> provided by the caller.</p>
-<p>The array <!-- raw HTML omitted -->dest<!-- raw HTML omitted --> should be large enough to contain <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes.
-The user should check that the adapter has (<!-- raw HTML omitted -->offset<!-- raw HTML omitted --> + <!-- raw HTML omitted -->size<!-- raw HTML omitted -->) bytes
+<p>The array <!-- raw HTML omitted -->dest<!-- raw HTML omitted --> should be large enough to contain <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes.<br />
+The user should check that the adapter has (<!-- raw HTML omitted -->offset<!-- raw HTML omitted --> + <!-- raw HTML omitted -->size<!-- raw HTML omitted -->) bytes<br />
 available before calling this function.</p>
 
 
@@ -1058,9 +1061,9 @@ available before calling this function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Similar to gst_adapter_copy, but more suitable for language bindings. <!-- raw HTML omitted -->size<!-- raw HTML omitted -->
-bytes of data starting at <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> will be copied out of the buffers contained
-in <!-- raw HTML omitted -->adapter<!-- raw HTML omitted --> and into a new #GBytes structure which is returned. Depending on
+    <p>Similar to gst_adapter_copy, but more suitable for language bindings. <!-- raw HTML omitted -->size<!-- raw HTML omitted --><br />
+bytes of data starting at <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> will be copied out of the buffers contained<br />
+in <!-- raw HTML omitted -->adapter<!-- raw HTML omitted --> and into a new #GBytes structure which is returned. Depending on<br />
 the value of the <!-- raw HTML omitted -->size<!-- raw HTML omitted --> argument an empty #GBytes structure may be returned.</p>
 
 
@@ -1134,10 +1137,10 @@ the value of the <!-- raw HTML omitted -->size<!-- raw HTML omitted --> argument
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the distance in bytes since the last buffer with the
+    <p>Get the distance in bytes since the last buffer with the<br />
 %GST_BUFFER_FLAG_DISCONT flag.</p>
-<p>The distance will be reset to 0 for all buffers with
-%GST_BUFFER_FLAG_DISCONT on them, and then calculated for all other
+<p>The distance will be reset to 0 for all buffers with<br />
+%GST_BUFFER_FLAG_DISCONT on them, and then calculated for all other<br />
 following buffers based on their size.</p>
 
 
@@ -1177,7 +1180,7 @@ following buffers based on their size.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the DTS that was on the last buffer with the GST_BUFFER_FLAG_DISCONT
+    <p>Get the DTS that was on the last buffer with the GST_BUFFER_FLAG_DISCONT<br />
 flag, or GST_CLOCK_TIME_NONE.</p>
 
 
@@ -1217,7 +1220,7 @@ flag, or GST_CLOCK_TIME_NONE.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Flushes the first <!-- raw HTML omitted -->flush<!-- raw HTML omitted --> bytes in the <!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->. The caller must ensure that
+    <p>Flushes the first <!-- raw HTML omitted -->flush<!-- raw HTML omitted --> bytes in the <!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->. The caller must ensure that<br />
 at least this many bytes are available.</p>
 <p>See also: gst_adapter_map(), gst_adapter_unmap()</p>
 
@@ -1273,10 +1276,10 @@ at least this many bytes are available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a Gst::Buffer containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the <!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->, but
-does not flush them from the adapter. See gst_adapter_take_buffer()
+    <p>Returns a Gst::Buffer containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the <!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->, but<br />
+does not flush them from the adapter. See gst_adapter_take_buffer()<br />
 for details.</p>
-<p>Caller owns a reference to the returned buffer. gst_buffer_unref() after
+<p>Caller owns a reference to the returned buffer. gst_buffer_unref() after<br />
 usage.</p>
 <p>Free-function: gst_buffer_unref</p>
 
@@ -1315,8 +1318,8 @@ usage.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Gst::Buffer containing the first
-<!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes are not available.
+        <div class='inline'><p>a Gst::Buffer containing the first<br />
+<!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes are not available.<br />
 gst_buffer_unref() when no longer needed.</p>
 </div>
       
@@ -1338,10 +1341,10 @@ gst_buffer_unref() when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a Gst::Buffer containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the <!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->, but
-does not flush them from the adapter. See gst_adapter_take_buffer_fast()
+    <p>Returns a Gst::Buffer containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the <!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->, but<br />
+does not flush them from the adapter. See gst_adapter_take_buffer_fast()<br />
 for details.</p>
-<p>Caller owns a reference to the returned buffer. gst_buffer_unref() after
+<p>Caller owns a reference to the returned buffer. gst_buffer_unref() after<br />
 usage.</p>
 <p>Free-function: gst_buffer_unref</p>
 
@@ -1380,8 +1383,8 @@ usage.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Gst::Buffer containing the first
-<!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes are not available.
+        <div class='inline'><p>a Gst::Buffer containing the first<br />
+<!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes are not available.<br />
 gst_buffer_unref() when no longer needed.</p>
 </div>
       
@@ -1403,10 +1406,10 @@ gst_buffer_unref() when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a Gst::BufferList of buffers containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes of
-the <!-- raw HTML omitted -->adapter<!-- raw HTML omitted --> but does not flush them from the adapter. See
+    <p>Returns a Gst::BufferList of buffers containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes of<br />
+the <!-- raw HTML omitted -->adapter<!-- raw HTML omitted --> but does not flush them from the adapter. See<br />
 gst_adapter_take_buffer_list() for details.</p>
-<p>Caller owns the returned list. Call gst_buffer_list_unref() to free
+<p>Caller owns the returned list. Call gst_buffer_list_unref() to free<br />
 the list after usage.</p>
 
 
@@ -1444,8 +1447,8 @@ the list after usage.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Gst::BufferList of buffers containing
-the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes are not
+        <div class='inline'><p>a Gst::BufferList of buffers containing<br />
+the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes are not<br />
 available</p>
 </div>
       
@@ -1467,10 +1470,10 @@ available</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a #GList of buffers containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes of the
-<!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->, but does not flush them from the adapter. See
+    <p>Returns a #GList of buffers containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes of the<br />
+<!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->, but does not flush them from the adapter. See<br />
 gst_adapter_take_list() for details.</p>
-<p>Caller owns returned list and contained buffers. gst_buffer_unref() each
+<p>Caller owns returned list and contained buffers. gst_buffer_unref() each<br />
 buffer in the list before freeing the list after usage.</p>
 
 
@@ -1508,8 +1511,8 @@ buffer in the list before freeing the list after usage.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GList of
-buffers containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted -->
+        <div class='inline'><p>a #GList of<br />
+buffers containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --><br />
 bytes are not available</p>
 </div>
       
@@ -1531,15 +1534,15 @@ bytes are not available</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the first <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes stored in the <!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->. The returned pointer is
+    <p>Gets the first <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes stored in the <!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->. The returned pointer is<br />
 valid until the next function is called on the adapter.</p>
-<p>Note that setting the returned pointer as the data of a Gst::Buffer is
-incorrect for general-purpose plugins. The reason is that if a downstream
-element stores the buffer so that it has access to it outside of the bounds
-of its chain function, the buffer will have an invalid data pointer after
-your element flushes the bytes. In that case you should use
-gst_adapter_take(), which returns a freshly-allocated buffer that you can set
-as Gst::Buffer memory or the potentially more performant
+<p>Note that setting the returned pointer as the data of a Gst::Buffer is<br />
+incorrect for general-purpose plugins. The reason is that if a downstream<br />
+element stores the buffer so that it has access to it outside of the bounds<br />
+of its chain function, the buffer will have an invalid data pointer after<br />
+your element flushes the bytes. In that case you should use<br />
+gst_adapter_take(), which returns a freshly-allocated buffer that you can set<br />
+as Gst::Buffer memory or the potentially more performant<br />
 gst_adapter_take_buffer().</p>
 <p>Returns nil if <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes are not available.</p>
 
@@ -1599,32 +1602,32 @@ gst_adapter_take_buffer().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Scan for pattern <!-- raw HTML omitted -->pattern<!-- raw HTML omitted --> with applied mask <!-- raw HTML omitted -->mask<!-- raw HTML omitted --> in the adapter data,
+    <p>Scan for pattern <!-- raw HTML omitted -->pattern<!-- raw HTML omitted --> with applied mask <!-- raw HTML omitted -->mask<!-- raw HTML omitted --> in the adapter data,<br />
 starting from offset <!-- raw HTML omitted -->offset<!-- raw HTML omitted -->.</p>
-<p>The bytes in <!-- raw HTML omitted -->pattern<!-- raw HTML omitted --> and <!-- raw HTML omitted -->mask<!-- raw HTML omitted --> are interpreted left-to-right, regardless
-of endianness.  All four bytes of the pattern must be present in the
+<p>The bytes in <!-- raw HTML omitted -->pattern<!-- raw HTML omitted --> and <!-- raw HTML omitted -->mask<!-- raw HTML omitted --> are interpreted left-to-right, regardless<br />
+of endianness.  All four bytes of the pattern must be present in the<br />
 adapter for it to match, even if the first or last bytes are masked out.</p>
-<p>It is an error to call this function without making sure that there is
+<p>It is an error to call this function without making sure that there is<br />
 enough data (offset+size bytes) in the adapter.</p>
-<p>This function calls gst_adapter_masked_scan_uint32_peek() passing nil
-for value.
-Example:
-|[
+<p>This function calls gst_adapter_masked_scan_uint32_peek() passing nil<br />
+for value.<br />
+Example:<br />
+|[<br />
 // Assume the adapter contains 0x00 0x01 0x02 ... 0xfe 0xff</p>
-<p>gst_adapter_masked_scan_uint32 (adapter, 0xffffffff, 0x00010203, 0, 256);
-// -&gt; returns 0
-gst_adapter_masked_scan_uint32 (adapter, 0xffffffff, 0x00010203, 1, 255);
-// -&gt; returns -1
-gst_adapter_masked_scan_uint32 (adapter, 0xffffffff, 0x01020304, 1, 255);
-// -&gt; returns 1
-gst_adapter_masked_scan_uint32 (adapter, 0xffff, 0x0001, 0, 256);
-// -&gt; returns -1
-gst_adapter_masked_scan_uint32 (adapter, 0xffff, 0x0203, 0, 256);
-// -&gt; returns 0
-gst_adapter_masked_scan_uint32 (adapter, 0xffff0000, 0x02030000, 0, 256);
-// -&gt; returns 2
-gst_adapter_masked_scan_uint32 (adapter, 0xffff0000, 0x02030000, 0, 4);
-// -&gt; returns -1
+<p>gst_adapter_masked_scan_uint32 (adapter, 0xffffffff, 0x00010203, 0, 256);<br />
+// -&gt; returns 0<br />
+gst_adapter_masked_scan_uint32 (adapter, 0xffffffff, 0x00010203, 1, 255);<br />
+// -&gt; returns -1<br />
+gst_adapter_masked_scan_uint32 (adapter, 0xffffffff, 0x01020304, 1, 255);<br />
+// -&gt; returns 1<br />
+gst_adapter_masked_scan_uint32 (adapter, 0xffff, 0x0001, 0, 256);<br />
+// -&gt; returns -1<br />
+gst_adapter_masked_scan_uint32 (adapter, 0xffff, 0x0203, 0, 256);<br />
+// -&gt; returns 0<br />
+gst_adapter_masked_scan_uint32 (adapter, 0xffff0000, 0x02030000, 0, 256);<br />
+// -&gt; returns 2<br />
+gst_adapter_masked_scan_uint32 (adapter, 0xffff0000, 0x02030000, 0, 4);<br />
+// -&gt; returns -1<br />
 ]|</p>
 
 
@@ -1674,7 +1677,7 @@ gst_adapter_masked_scan_uint32 (adapter, 0xffff0000, 0x02030000, 0, 4);
       
       
         &mdash;
-        <div class='inline'><p>offset into the adapter data from which to start scanning, returns
+        <div class='inline'><p>offset into the adapter data from which to start scanning, returns<br />
 the last scanned position.</p>
 </div>
       
@@ -1729,13 +1732,13 @@ the last scanned position.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Scan for pattern <!-- raw HTML omitted -->pattern<!-- raw HTML omitted --> with applied mask <!-- raw HTML omitted -->mask<!-- raw HTML omitted --> in the adapter data,
-starting from offset <!-- raw HTML omitted -->offset<!-- raw HTML omitted -->.  If a match is found, the value that matched
+    <p>Scan for pattern <!-- raw HTML omitted -->pattern<!-- raw HTML omitted --> with applied mask <!-- raw HTML omitted -->mask<!-- raw HTML omitted --> in the adapter data,<br />
+starting from offset <!-- raw HTML omitted -->offset<!-- raw HTML omitted -->.  If a match is found, the value that matched<br />
 is returned through <!-- raw HTML omitted -->value<!-- raw HTML omitted -->, otherwise <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is left untouched.</p>
-<p>The bytes in <!-- raw HTML omitted -->pattern<!-- raw HTML omitted --> and <!-- raw HTML omitted -->mask<!-- raw HTML omitted --> are interpreted left-to-right, regardless
-of endianness.  All four bytes of the pattern must be present in the
+<p>The bytes in <!-- raw HTML omitted -->pattern<!-- raw HTML omitted --> and <!-- raw HTML omitted -->mask<!-- raw HTML omitted --> are interpreted left-to-right, regardless<br />
+of endianness.  All four bytes of the pattern must be present in the<br />
 adapter for it to match, even if the first or last bytes are masked out.</p>
-<p>It is an error to call this function without making sure that there is
+<p>It is an error to call this function without making sure that there is<br />
 enough data (offset+size bytes) in the adapter.</p>
 
 
@@ -1785,7 +1788,7 @@ enough data (offset+size bytes) in the adapter.</p>
       
       
         &mdash;
-        <div class='inline'><p>offset into the adapter data from which to start scanning, returns
+        <div class='inline'><p>offset into the adapter data from which to start scanning, returns<br />
 the last scanned position.</p>
 </div>
       
@@ -1855,7 +1858,7 @@ the last scanned position.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the offset that was on the last buffer with the GST_BUFFER_FLAG_DISCONT
+    <p>Get the offset that was on the last buffer with the GST_BUFFER_FLAG_DISCONT<br />
 flag, or GST_BUFFER_OFFSET_NONE.</p>
 
 
@@ -1895,12 +1898,12 @@ flag, or GST_BUFFER_OFFSET_NONE.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the dts that was before the current byte in the adapter. When
-<!-- raw HTML omitted -->distance<!-- raw HTML omitted --> is given, the amount of bytes between the dts and the current
+    <p>Get the dts that was before the current byte in the adapter. When<br />
+<!-- raw HTML omitted -->distance<!-- raw HTML omitted --> is given, the amount of bytes between the dts and the current<br />
 position is returned.</p>
-<p>The dts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when
-the adapter is first created or when it is cleared. This also means that before
-the first byte with a dts is removed from the adapter, the dts
+<p>The dts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when<br />
+the adapter is first created or when it is cleared. This also means that before<br />
+the first byte with a dts is removed from the adapter, the dts<br />
 and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.</p>
 
 
@@ -1959,12 +1962,12 @@ and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the dts that was before the byte at offset <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> in the adapter. When
-<!-- raw HTML omitted -->distance<!-- raw HTML omitted --> is given, the amount of bytes between the dts and the current
+    <p>Get the dts that was before the byte at offset <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> in the adapter. When<br />
+<!-- raw HTML omitted -->distance<!-- raw HTML omitted --> is given, the amount of bytes between the dts and the current<br />
 position is returned.</p>
-<p>The dts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when
-the adapter is first created or when it is cleared. This also means that before
-the first byte with a dts is removed from the adapter, the dts
+<p>The dts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when<br />
+the adapter is first created or when it is cleared. This also means that before<br />
+the first byte with a dts is removed from the adapter, the dts<br />
 and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.</p>
 
 
@@ -2038,12 +2041,12 @@ and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the offset that was before the current byte in the adapter. When
-<!-- raw HTML omitted -->distance<!-- raw HTML omitted --> is given, the amount of bytes between the offset and the current
+    <p>Get the offset that was before the current byte in the adapter. When<br />
+<!-- raw HTML omitted -->distance<!-- raw HTML omitted --> is given, the amount of bytes between the offset and the current<br />
 position is returned.</p>
-<p>The offset is reset to GST_BUFFER_OFFSET_NONE and the distance is set to 0
-when the adapter is first created or when it is cleared. This also means that
-before the first byte with an offset is removed from the adapter, the offset
+<p>The offset is reset to GST_BUFFER_OFFSET_NONE and the distance is set to 0<br />
+when the adapter is first created or when it is cleared. This also means that<br />
+before the first byte with an offset is removed from the adapter, the offset<br />
 and distance returned are GST_BUFFER_OFFSET_NONE and 0 respectively.</p>
 
 
@@ -2102,12 +2105,12 @@ and distance returned are GST_BUFFER_OFFSET_NONE and 0 respectively.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the pts that was before the current byte in the adapter. When
-<!-- raw HTML omitted -->distance<!-- raw HTML omitted --> is given, the amount of bytes between the pts and the current
+    <p>Get the pts that was before the current byte in the adapter. When<br />
+<!-- raw HTML omitted -->distance<!-- raw HTML omitted --> is given, the amount of bytes between the pts and the current<br />
 position is returned.</p>
-<p>The pts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when
-the adapter is first created or when it is cleared. This also means that before
-the first byte with a pts is removed from the adapter, the pts
+<p>The pts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when<br />
+the adapter is first created or when it is cleared. This also means that before<br />
+the first byte with a pts is removed from the adapter, the pts<br />
 and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.</p>
 
 
@@ -2166,12 +2169,12 @@ and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the pts that was before the byte at offset <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> in the adapter. When
-<!-- raw HTML omitted -->distance<!-- raw HTML omitted --> is given, the amount of bytes between the pts and the current
+    <p>Get the pts that was before the byte at offset <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> in the adapter. When<br />
+<!-- raw HTML omitted -->distance<!-- raw HTML omitted --> is given, the amount of bytes between the pts and the current<br />
 position is returned.</p>
-<p>The pts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when
-the adapter is first created or when it is cleared. This also means that before
-the first byte with a pts is removed from the adapter, the pts
+<p>The pts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when<br />
+the adapter is first created or when it is cleared. This also means that before<br />
+the first byte with a pts is removed from the adapter, the pts<br />
 and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.</p>
 
 
@@ -2245,7 +2248,7 @@ and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the PTS that was on the last buffer with the GST_BUFFER_FLAG_DISCONT
+    <p>Get the PTS that was on the last buffer with the GST_BUFFER_FLAG_DISCONT<br />
 flag, or GST_CLOCK_TIME_NONE.</p>
 
 
@@ -2285,7 +2288,7 @@ flag, or GST_CLOCK_TIME_NONE.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds the data from <!-- raw HTML omitted -->buf<!-- raw HTML omitted --> to the data stored inside <!-- raw HTML omitted -->adapter<!-- raw HTML omitted --> and takes
+    <p>Adds the data from <!-- raw HTML omitted -->buf<!-- raw HTML omitted --> to the data stored inside <!-- raw HTML omitted -->adapter<!-- raw HTML omitted --> and takes<br />
 ownership of the buffer.</p>
 
 
@@ -2340,7 +2343,7 @@ ownership of the buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a freshly allocated buffer containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes of the
+    <p>Returns a freshly allocated buffer containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes of the<br />
 <!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->. The returned bytes will be flushed from the adapter.</p>
 <p>Caller owns returned value. g_free after usage.</p>
 <p>Free-function: g_free</p>
@@ -2401,19 +2404,19 @@ ownership of the buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a Gst::Buffer containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes of the
-<!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->. The returned bytes will be flushed from the adapter.
-This function is potentially more performant than
-gst_adapter_take() since it can reuse the memory in pushed buffers
-by subbuffering or merging. This function will always return a
+    <p>Returns a Gst::Buffer containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes of the<br />
+<!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->. The returned bytes will be flushed from the adapter.<br />
+This function is potentially more performant than<br />
+gst_adapter_take() since it can reuse the memory in pushed buffers<br />
+by subbuffering or merging. This function will always return a<br />
 buffer with a single memory region.</p>
-<p>Note that no assumptions should be made as to whether certain buffer
-flags such as the DISCONT flag are set on the returned buffer, or not.
-The caller needs to explicitly set or unset flags that should be set or
+<p>Note that no assumptions should be made as to whether certain buffer<br />
+flags such as the DISCONT flag are set on the returned buffer, or not.<br />
+The caller needs to explicitly set or unset flags that should be set or<br />
 unset.</p>
-<p>Since 1.6 this will also copy over all GstMeta of the input buffers except
+<p>Since 1.6 this will also copy over all GstMeta of the input buffers except<br />
 for meta with the %GST_META_FLAG_POOLED flag or with the &quot;memory&quot; tag.</p>
-<p>Caller owns a reference to the returned buffer. gst_buffer_unref() after
+<p>Caller owns a reference to the returned buffer. gst_buffer_unref() after<br />
 usage.</p>
 <p>Free-function: gst_buffer_unref</p>
 
@@ -2452,8 +2455,8 @@ usage.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Gst::Buffer containing the first
-<!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes are not available.
+        <div class='inline'><p>a Gst::Buffer containing the first<br />
+<!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes are not available.<br />
 gst_buffer_unref() when no longer needed.</p>
 </div>
       
@@ -2475,22 +2478,22 @@ gst_buffer_unref() when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a Gst::Buffer containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the <!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->.
-The returned bytes will be flushed from the adapter.  This function
-is potentially more performant than gst_adapter_take_buffer() since
-it can reuse the memory in pushed buffers by subbuffering or
-merging. Unlike gst_adapter_take_buffer(), the returned buffer may
-be composed of multiple non-contiguous Gst::Memory objects, no
+    <p>Returns a Gst::Buffer containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the <!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->.<br />
+The returned bytes will be flushed from the adapter.  This function<br />
+is potentially more performant than gst_adapter_take_buffer() since<br />
+it can reuse the memory in pushed buffers by subbuffering or<br />
+merging. Unlike gst_adapter_take_buffer(), the returned buffer may<br />
+be composed of multiple non-contiguous Gst::Memory objects, no<br />
 copies are made.</p>
-<p>Note that no assumptions should be made as to whether certain buffer
-flags such as the DISCONT flag are set on the returned buffer, or not.
-The caller needs to explicitly set or unset flags that should be set or
+<p>Note that no assumptions should be made as to whether certain buffer<br />
+flags such as the DISCONT flag are set on the returned buffer, or not.<br />
+The caller needs to explicitly set or unset flags that should be set or<br />
 unset.</p>
-<p>This will also copy over all GstMeta of the input buffers except
+<p>This will also copy over all GstMeta of the input buffers except<br />
 for meta with the %GST_META_FLAG_POOLED flag or with the &quot;memory&quot; tag.</p>
-<p>This function can return buffer up to the return value of
+<p>This function can return buffer up to the return value of<br />
 gst_adapter_available() without making copies if possible.</p>
-<p>Caller owns a reference to the returned buffer. gst_buffer_unref() after
+<p>Caller owns a reference to the returned buffer. gst_buffer_unref() after<br />
 usage.</p>
 <p>Free-function: gst_buffer_unref</p>
 
@@ -2529,8 +2532,8 @@ usage.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Gst::Buffer containing the first
-<!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes are not available.
+        <div class='inline'><p>a Gst::Buffer containing the first<br />
+<!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes are not available.<br />
 gst_buffer_unref() when no longer needed.</p>
 </div>
       
@@ -2552,11 +2555,11 @@ gst_buffer_unref() when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a Gst::BufferList of buffers containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes of
-the <!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->. The returned bytes will be flushed from the adapter.
-When the caller can deal with individual buffers, this function is more
+    <p>Returns a Gst::BufferList of buffers containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes of<br />
+the <!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->. The returned bytes will be flushed from the adapter.<br />
+When the caller can deal with individual buffers, this function is more<br />
 performant because no memory should be copied.</p>
-<p>Caller owns the returned list. Call gst_buffer_list_unref() to free
+<p>Caller owns the returned list. Call gst_buffer_list_unref() to free<br />
 the list after usage.</p>
 
 
@@ -2594,8 +2597,8 @@ the list after usage.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Gst::BufferList of buffers containing
-the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes are not
+        <div class='inline'><p>a Gst::BufferList of buffers containing<br />
+the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes are not<br />
 available</p>
 </div>
       
@@ -2617,11 +2620,11 @@ available</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a #GList of buffers containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes of the
-<!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->. The returned bytes will be flushed from the adapter.
-When the caller can deal with individual buffers, this function is more
+    <p>Returns a #GList of buffers containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> bytes of the<br />
+<!-- raw HTML omitted -->adapter<!-- raw HTML omitted -->. The returned bytes will be flushed from the adapter.<br />
+When the caller can deal with individual buffers, this function is more<br />
 performant because no memory should be copied.</p>
-<p>Caller owns returned list and contained buffers. gst_buffer_unref() each
+<p>Caller owns returned list and contained buffers. gst_buffer_unref() each<br />
 buffer in the list before freeing the list after usage.</p>
 
 
@@ -2659,8 +2662,8 @@ buffer in the list before freeing the list after usage.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GList of
-buffers containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted -->
+        <div class='inline'><p>a #GList of<br />
+buffers containing the first <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --> of the adapter, or nil if <!-- raw HTML omitted -->nbytes<!-- raw HTML omitted --><br />
 bytes are not available</p>
 </div>
       
@@ -2713,7 +2716,7 @@ bytes are not available</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

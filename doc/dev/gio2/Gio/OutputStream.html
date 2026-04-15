@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::OutputStream";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gio2/output-stream.rb</dd>
+    <dd>lib/gio2/output-stream.rb
+</dd>
   </dl>
   
 </div>
@@ -141,6 +143,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -863,6 +866,7 @@
 
       
     </ul>
+    
   
 
 
@@ -968,27 +972,27 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Closes the stream, releasing resources related to it.</p>
-<p>Once the stream is closed, all other operations will return %G_IO_ERROR_CLOSED.
+<p>Once the stream is closed, all other operations will return %G_IO_ERROR_CLOSED.<br />
 Closing a stream multiple times will not return an error.</p>
-<p>Closing a stream will automatically flush any outstanding buffers in the
+<p>Closing a stream will automatically flush any outstanding buffers in the<br />
 stream.</p>
-<p>Streams will be automatically closed when the last reference
-is dropped, but you might want to call this function to make sure
+<p>Streams will be automatically closed when the last reference<br />
+is dropped, but you might want to call this function to make sure<br />
 resources are released as early as possible.</p>
-<p>Some streams might keep the backing store of the stream (e.g. a file descriptor)
-open after the stream is closed. See the documentation for the individual
+<p>Some streams might keep the backing store of the stream (e.g. a file descriptor)<br />
+open after the stream is closed. See the documentation for the individual<br />
 stream for details.</p>
-<p>On failure the first error that happened will be reported, but the close
-operation will finish as much as possible. A stream that failed to
-close will still return %G_IO_ERROR_CLOSED for all operations. Still, it
-is important to check and report the error to the user, otherwise
+<p>On failure the first error that happened will be reported, but the close<br />
+operation will finish as much as possible. A stream that failed to<br />
+close will still return %G_IO_ERROR_CLOSED for all operations. Still, it<br />
+is important to check and report the error to the user, otherwise<br />
 there might be a loss of data as all data might not be written.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
-Cancelling a close will still leave the stream closed, but there some streams
-can use a faster close that doesn't block to e.g. check errors. On
-cancellation (as with any error) there is no guarantee that all written
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.<br />
+Cancelling a close will still leave the stream closed, but there some streams<br />
+can use a faster close that doesn't block to e.g. check errors. On<br />
+cancellation (as with any error) there is no guarantee that all written<br />
 data will reach the target.</p>
 
 
@@ -1047,13 +1051,13 @@ data will reach the target.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Requests an asynchronous close of the stream, releasing resources
-related to it. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be
-called. You can then call g_output_stream_close_finish() to get
+    <p>Requests an asynchronous close of the stream, releasing resources<br />
+related to it. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be<br />
+called. You can then call g_output_stream_close_finish() to get<br />
 the result of the operation.</p>
 <p>For behaviour details see g_output_stream_close().</p>
-<p>The asynchronous methods have a default fallback that uses threads
-to implement asynchronicity, so they are optional for inheriting
+<p>The asynchronous methods have a default fallback that uses threads<br />
+to implement asynchronicity, so they are optional for inheriting<br />
 classes. However, if you override one you must override all.</p>
 
 
@@ -1103,7 +1107,7 @@ classes. However, if you override one you must override all.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -1212,12 +1216,12 @@ to call when the request is satisfied</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Forces a write of all user-space buffered data for the given
-<!-- raw HTML omitted -->stream<!-- raw HTML omitted -->. Will block during the operation. Closing the stream will
+    <p>Forces a write of all user-space buffered data for the given<br />
+<!-- raw HTML omitted -->stream<!-- raw HTML omitted -->. Will block during the operation. Closing the stream will<br />
 implicitly cause a flush.</p>
 <p>This function is optional for inherited classes.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
 was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.</p>
 
 
@@ -1276,11 +1280,11 @@ was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Forces an asynchronous write of all user-space buffered data for
-the given <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.
+    <p>Forces an asynchronous write of all user-space buffered data for<br />
+the given <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.<br />
 For behaviour details see g_output_stream_flush().</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be
-called. You can then call g_output_stream_flush_finish() to get the
+<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be<br />
+called. You can then call g_output_stream_flush_finish() to get the<br />
 result of the operation.</p>
 
 
@@ -1330,7 +1334,7 @@ result of the operation.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -1517,9 +1521,9 @@ to call when the request is satisfied</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if an output stream is being closed. This can be
-used inside e.g. a flush implementation to see if the
-flush (or other i/o operation) is called from within
+    <p>Checks if an output stream is being closed. This can be<br />
+used inside e.g. a flush implementation to see if the<br />
+flush (or other i/o operation) is called from within<br />
 the closing operation.</p>
 
 
@@ -1559,15 +1563,15 @@ the closing operation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is a utility function around g_output_stream_write_all(). It
-uses g_strdup_vprintf() to turn <!-- raw HTML omitted -->format<!-- raw HTML omitted --> and @... into a string that
+    <p>This is a utility function around g_output_stream_write_all(). It<br />
+uses g_strdup_vprintf() to turn <!-- raw HTML omitted -->format<!-- raw HTML omitted --> and @... into a string that<br />
 is then written to <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.</p>
-<p>See the documentation of g_output_stream_write_all() about the
+<p>See the documentation of g_output_stream_write_all() about the<br />
 behavior of the actual write operation.</p>
-<p>Note that partial writes cannot be properly checked with this
-function due to the variable length of the written string, if you
-need precise control over partial write failures, you need to
-create you own printf()-like wrapper around g_output_stream_write()
+<p>Note that partial writes cannot be properly checked with this<br />
+function due to the variable length of the written string, if you<br />
+need precise control over partial write failures, you need to<br />
+create you own printf()-like wrapper around g_output_stream_write()<br />
 or g_output_stream_write_all().</p>
 
 
@@ -1587,7 +1591,7 @@ or g_output_stream_write_all().</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the number of bytes that was
+        <div class='inline'><p>location to store the number of bytes that was<br />
 written to the stream</p>
 </div>
       
@@ -1687,8 +1691,8 @@ written to the stream</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> to have actions pending. If the pending flag is
-already set or <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is closed, it will return false and set
+    <p>Sets <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> to have actions pending. If the pending flag is<br />
+already set or <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is closed, it will return false and set<br />
 <!-- raw HTML omitted -->error<!-- raw HTML omitted -->.</p>
 
 
@@ -1795,10 +1799,10 @@ already set or <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is close
       
       
         &mdash;
-        <div class='inline'><p>a #gssize containing the size of the data spliced, or
--1 if an error occurred. Note that if the number of bytes
-spliced is greater than %G_MAXSSIZE, then that will be
-returned, and there is no way to determine the actual number
+        <div class='inline'><p>a #gssize containing the size of the data spliced, or<br />
+-1 if an error occurred. Note that if the number of bytes<br />
+spliced is greater than %G_MAXSSIZE, then that will be<br />
+returned, and there is no way to determine the actual number<br />
 of bytes spliced.</p>
 </div>
       
@@ -1820,11 +1824,11 @@ of bytes spliced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Splices a stream asynchronously.
-When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.
-You can then call g_output_stream_splice_finish() to get the
+    <p>Splices a stream asynchronously.<br />
+When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.<br />
+You can then call g_output_stream_splice_finish() to get the<br />
 result of the operation.</p>
-<p>For the synchronous, blocking version of this function, see
+<p>For the synchronous, blocking version of this function, see<br />
 g_output_stream_splice().</p>
 
 
@@ -1904,7 +1908,7 @@ g_output_stream_splice().</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -1992,9 +1996,9 @@ to call when the request is satisfied</p>
       
       
         &mdash;
-        <div class='inline'><p>a #gssize of the number of bytes spliced. Note that if the
-number of bytes spliced is greater than %G_MAXSSIZE, then that
-will be returned, and there is no way to determine the actual
+        <div class='inline'><p>a #gssize of the number of bytes spliced. Note that if the<br />
+number of bytes spliced is greater than %G_MAXSSIZE, then that<br />
+will be returned, and there is no way to determine the actual<br />
 number of bytes spliced.</p>
 </div>
       
@@ -2016,15 +2020,15 @@ number of bytes spliced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is a utility function around g_output_stream_write_all(). It
-uses g_strdup_vprintf() to turn <!-- raw HTML omitted -->format<!-- raw HTML omitted --> and <!-- raw HTML omitted -->args<!-- raw HTML omitted --> into a string that
+    <p>This is a utility function around g_output_stream_write_all(). It<br />
+uses g_strdup_vprintf() to turn <!-- raw HTML omitted -->format<!-- raw HTML omitted --> and <!-- raw HTML omitted -->args<!-- raw HTML omitted --> into a string that<br />
 is then written to <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.</p>
-<p>See the documentation of g_output_stream_write_all() about the
+<p>See the documentation of g_output_stream_write_all() about the<br />
 behavior of the actual write operation.</p>
-<p>Note that partial writes cannot be properly checked with this
-function due to the variable length of the written string, if you
-need precise control over partial write failures, you need to
-create you own printf()-like wrapper around g_output_stream_write()
+<p>Note that partial writes cannot be properly checked with this<br />
+function due to the variable length of the written string, if you<br />
+need precise control over partial write failures, you need to<br />
+create you own printf()-like wrapper around g_output_stream_write()<br />
 or g_output_stream_write_all().</p>
 
 
@@ -2044,7 +2048,7 @@ or g_output_stream_write_all().</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the number of bytes that was
+        <div class='inline'><p>location to store the number of bytes that was<br />
 written to the stream</p>
 </div>
       
@@ -2144,20 +2148,20 @@ written to the stream</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to write <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> into the stream. Will block
+    <p>Tries to write <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> into the stream. Will block<br />
 during the operation.</p>
-<p>If count is 0, returns 0 and does nothing. A value of <!-- raw HTML omitted -->count<!-- raw HTML omitted -->
+<p>If count is 0, returns 0 and does nothing. A value of <!-- raw HTML omitted -->count<!-- raw HTML omitted --><br />
 larger than %G_MAXSSIZE will cause a %G_IO_ERROR_INVALID_ARGUMENT error.</p>
-<p>On success, the number of bytes written to the stream is returned.
-It is not an error if this is not the same as the requested size, as it
-can happen e.g. on a partial I/O error, or if there is not enough
-storage in the stream. All writes block until at least one byte
-is written or an error occurs; 0 is never returned (unless
+<p>On success, the number of bytes written to the stream is returned.<br />
+It is not an error if this is not the same as the requested size, as it<br />
+can happen e.g. on a partial I/O error, or if there is not enough<br />
+storage in the stream. All writes block until at least one byte<br />
+is written or an error occurs; 0 is never returned (unless<br />
 <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is 0).</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an
-operation was partially finished when the operation was cancelled the
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an<br />
+operation was partially finished when the operation was cancelled the<br />
 partial result will be returned, without an error.</p>
 <p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.</p>
 
@@ -2247,20 +2251,20 @@ partial result will be returned, without an error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to write <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> into the stream. Will block
+    <p>Tries to write <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> into the stream. Will block<br />
 during the operation.</p>
-<p>This function is similar to g_output_stream_write(), except it tries to
+<p>This function is similar to g_output_stream_write(), except it tries to<br />
 write as many bytes as requested, only stopping on an error.</p>
-<p>On a successful write of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes, true is returned, and <!-- raw HTML omitted -->bytes_written<!-- raw HTML omitted -->
+<p>On a successful write of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes, true is returned, and <!-- raw HTML omitted -->bytes_written<!-- raw HTML omitted --><br />
 is set to <!-- raw HTML omitted -->count<!-- raw HTML omitted -->.</p>
-<p>If there is an error during the operation false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
+<p>If there is an error during the operation false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --><br />
 is set to indicate the error status.</p>
-<p>As a special exception to the normal conventions for functions that
-use #GError, if this function returns false (and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) then
-<!-- raw HTML omitted -->bytes_written<!-- raw HTML omitted --> will be set to the number of bytes that were
-successfully written before the error was encountered.  This
-functionality is only available from C.  If you need it from another
-language then you must write your own loop around
+<p>As a special exception to the normal conventions for functions that<br />
+use #GError, if this function returns false (and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) then<br />
+<!-- raw HTML omitted -->bytes_written<!-- raw HTML omitted --> will be set to the number of bytes that were<br />
+successfully written before the error was encountered.  This<br />
+functionality is only available from C.  If you need it from another<br />
+language then you must write your own loop around<br />
 g_output_stream_write().</p>
 
 
@@ -2310,7 +2314,7 @@ g_output_stream_write().</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the number of bytes that was
+        <div class='inline'><p>location to store the number of bytes that was<br />
 written to the stream</p>
 </div>
       
@@ -2365,16 +2369,16 @@ written to the stream</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Request an asynchronous write of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> into
-the stream. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.
-You can then call g_output_stream_write_all_finish() to get the result of the
+    <p>Request an asynchronous write of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> into<br />
+the stream. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.<br />
+You can then call g_output_stream_write_all_finish() to get the result of the<br />
 operation.</p>
 <p>This is the asynchronous version of g_output_stream_write_all().</p>
 <p>Call g_output_stream_write_all_finish() to collect the result.</p>
-<p>Any outstanding I/O request with higher priority (lower numerical
-value) will be executed before an outstanding request with lower
+<p>Any outstanding I/O request with higher priority (lower numerical<br />
+value) will be executed before an outstanding request with lower<br />
 priority. Default priority is %G_PRIORITY_DEFAULT.</p>
-<p>Note that no copy of <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> will be made, so it must stay valid
+<p>Note that no copy of <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> will be made, so it must stay valid<br />
 until <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is called.</p>
 
 
@@ -2454,7 +2458,7 @@ until <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is called.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -2505,14 +2509,14 @@ to call when the request is satisfied</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes an asynchronous stream write operation started with
+    <p>Finishes an asynchronous stream write operation started with<br />
 g_output_stream_write_all_async().</p>
-<p>As a special exception to the normal conventions for functions that
-use #GError, if this function returns false (and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) then
-<!-- raw HTML omitted -->bytes_written<!-- raw HTML omitted --> will be set to the number of bytes that were
-successfully written before the error was encountered.  This
-functionality is only available from C.  If you need it from another
-language then you must write your own loop around
+<p>As a special exception to the normal conventions for functions that<br />
+use #GError, if this function returns false (and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) then<br />
+<!-- raw HTML omitted -->bytes_written<!-- raw HTML omitted --> will be set to the number of bytes that were<br />
+successfully written before the error was encountered.  This<br />
+functionality is only available from C.  If you need it from another<br />
+language then you must write your own loop around<br />
 g_output_stream_write_async().</p>
 
 
@@ -2586,32 +2590,32 @@ g_output_stream_write_async().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Request an asynchronous write of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> into
-the stream. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.
-You can then call g_output_stream_write_finish() to get the result of the
+    <p>Request an asynchronous write of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> into<br />
+the stream. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.<br />
+You can then call g_output_stream_write_finish() to get the result of the<br />
 operation.</p>
-<p>During an async request no other sync and async calls are allowed,
+<p>During an async request no other sync and async calls are allowed,<br />
 and will result in %G_IO_ERROR_PENDING errors.</p>
-<p>A value of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> larger than %G_MAXSSIZE will cause a
+<p>A value of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> larger than %G_MAXSSIZE will cause a<br />
 %G_IO_ERROR_INVALID_ARGUMENT error.</p>
-<p>On success, the number of bytes written will be passed to the
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted -->. It is not an error if this is not the same as the
-requested size, as it can happen e.g. on a partial I/O error,
+<p>On success, the number of bytes written will be passed to the<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted -->. It is not an error if this is not the same as the<br />
+requested size, as it can happen e.g. on a partial I/O error,<br />
 but generally we try to write as many bytes as requested.</p>
-<p>You are guaranteed that this method will never fail with
-%G_IO_ERROR_WOULD_BLOCK - if <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> can't accept more data, the
+<p>You are guaranteed that this method will never fail with<br />
+%G_IO_ERROR_WOULD_BLOCK - if <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> can't accept more data, the<br />
 method will just wait until this changes.</p>
-<p>Any outstanding I/O request with higher priority (lower numerical
-value) will be executed before an outstanding request with lower
+<p>Any outstanding I/O request with higher priority (lower numerical<br />
+value) will be executed before an outstanding request with lower<br />
 priority. Default priority is %G_PRIORITY_DEFAULT.</p>
-<p>The asynchronous methods have a default fallback that uses threads
-to implement asynchronicity, so they are optional for inheriting
+<p>The asynchronous methods have a default fallback that uses threads<br />
+to implement asynchronicity, so they are optional for inheriting<br />
 classes. However, if you override one you must override all.</p>
-<p>For the synchronous, blocking version of this function, see
+<p>For the synchronous, blocking version of this function, see<br />
 g_output_stream_write().</p>
-<p>Note that no copy of <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> will be made, so it must stay valid
-until <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is called. See g_output_stream_write_bytes_async()
-for a #GBytes version that will automatically hold a reference to
+<p>Note that no copy of <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> will be made, so it must stay valid<br />
+until <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is called. See g_output_stream_write_bytes_async()<br />
+for a #GBytes version that will automatically hold a reference to<br />
 the contents (without copying) for the duration of the call.</p>
 
 
@@ -2691,7 +2695,7 @@ the contents (without copying) for the duration of the call.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -2742,15 +2746,15 @@ to call when the request is satisfied</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A wrapper function for g_output_stream_write() which takes a
-#GBytes as input.  This can be more convenient for use by language
-bindings or in other cases where the refcounted nature of #GBytes
+    <p>A wrapper function for g_output_stream_write() which takes a<br />
+#GBytes as input.  This can be more convenient for use by language<br />
+bindings or in other cases where the refcounted nature of #GBytes<br />
 is helpful over a bare pointer interface.</p>
-<p>However, note that this function may still perform partial writes,
-just like g_output_stream_write().  If that occurs, to continue
-writing, you will need to create a new #GBytes containing just the
-remaining bytes, using g_bytes_new_from_bytes(). Passing the same
-#GBytes instance multiple times potentially can result in duplicated
+<p>However, note that this function may still perform partial writes,<br />
+just like g_output_stream_write().  If that occurs, to continue<br />
+writing, you will need to create a new #GBytes containing just the<br />
+remaining bytes, using g_bytes_new_from_bytes(). Passing the same<br />
+#GBytes instance multiple times potentially can result in duplicated<br />
 data in the output stream.</p>
 
 
@@ -2824,16 +2828,16 @@ data in the output stream.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function is similar to g_output_stream_write_async(), but
-takes a #GBytes as input.  Due to the refcounted nature of #GBytes,
+    <p>This function is similar to g_output_stream_write_async(), but<br />
+takes a #GBytes as input.  Due to the refcounted nature of #GBytes,<br />
 this allows the stream to avoid taking a copy of the data.</p>
-<p>However, note that this function may still perform partial writes,
-just like g_output_stream_write_async(). If that occurs, to continue
-writing, you will need to create a new #GBytes containing just the
-remaining bytes, using g_bytes_new_from_bytes(). Passing the same
-#GBytes instance multiple times potentially can result in duplicated
+<p>However, note that this function may still perform partial writes,<br />
+just like g_output_stream_write_async(). If that occurs, to continue<br />
+writing, you will need to create a new #GBytes containing just the<br />
+remaining bytes, using g_bytes_new_from_bytes(). Passing the same<br />
+#GBytes instance multiple times potentially can result in duplicated<br />
 data in the output stream.</p>
-<p>For the synchronous, blocking version of this function, see
+<p>For the synchronous, blocking version of this function, see<br />
 g_output_stream_write_bytes().</p>
 
 
@@ -2898,7 +2902,7 @@ g_output_stream_write_bytes().</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -3065,24 +3069,24 @@ to call when the request is satisfied</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to write the bytes contained in the <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> into the
+    <p>Tries to write the bytes contained in the <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> into the<br />
 stream. Will block during the operation.</p>
-<p>If <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> is 0 or the sum of all bytes in <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> is 0, returns 0 and
+<p>If <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> is 0 or the sum of all bytes in <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> is 0, returns 0 and<br />
 does nothing.</p>
-<p>On success, the number of bytes written to the stream is returned.
-It is not an error if this is not the same as the requested size, as it
-can happen e.g. on a partial I/O error, or if there is not enough
-storage in the stream. All writes block until at least one byte
-is written or an error occurs; 0 is never returned (unless
+<p>On success, the number of bytes written to the stream is returned.<br />
+It is not an error if this is not the same as the requested size, as it<br />
+can happen e.g. on a partial I/O error, or if there is not enough<br />
+storage in the stream. All writes block until at least one byte<br />
+is written or an error occurs; 0 is never returned (unless<br />
 <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> is 0 or the sum of all bytes in <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> is 0).</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an
-operation was partially finished when the operation was cancelled the
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an<br />
+operation was partially finished when the operation was cancelled the<br />
 partial result will be returned, without an error.</p>
-<p>Some implementations of g_output_stream_writev() may have limitations on the
-aggregate buffer size, and will return %G_IO_ERROR_INVALID_ARGUMENT if these
-are exceeded. For example, when writing to a local file on UNIX platforms,
+<p>Some implementations of g_output_stream_writev() may have limitations on the<br />
+aggregate buffer size, and will return %G_IO_ERROR_INVALID_ARGUMENT if these<br />
+are exceeded. For example, when writing to a local file on UNIX platforms,<br />
 the aggregate buffer size must not exceed %G_MAXSSIZE bytes.</p>
 
 
@@ -3132,7 +3136,7 @@ the aggregate buffer size must not exceed %G_MAXSSIZE bytes.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the number of bytes that were
+        <div class='inline'><p>location to store the number of bytes that were<br />
 written to the stream</p>
 </div>
       
@@ -3187,22 +3191,22 @@ written to the stream</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to write the bytes contained in the <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> into the
+    <p>Tries to write the bytes contained in the <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> into the<br />
 stream. Will block during the operation.</p>
-<p>This function is similar to g_output_stream_writev(), except it tries to
+<p>This function is similar to g_output_stream_writev(), except it tries to<br />
 write as many bytes as requested, only stopping on an error.</p>
-<p>On a successful write of all <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> vectors, true is returned, and
+<p>On a successful write of all <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> vectors, true is returned, and<br />
 <!-- raw HTML omitted -->bytes_written<!-- raw HTML omitted --> is set to the sum of all the sizes of <!-- raw HTML omitted -->vectors<!-- raw HTML omitted -->.</p>
-<p>If there is an error during the operation false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
+<p>If there is an error during the operation false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --><br />
 is set to indicate the error status.</p>
-<p>As a special exception to the normal conventions for functions that
-use #GError, if this function returns false (and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) then
-<!-- raw HTML omitted -->bytes_written<!-- raw HTML omitted --> will be set to the number of bytes that were
-successfully written before the error was encountered.  This
-functionality is only available from C. If you need it from another
-language then you must write your own loop around
+<p>As a special exception to the normal conventions for functions that<br />
+use #GError, if this function returns false (and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) then<br />
+<!-- raw HTML omitted -->bytes_written<!-- raw HTML omitted --> will be set to the number of bytes that were<br />
+successfully written before the error was encountered.  This<br />
+functionality is only available from C. If you need it from another<br />
+language then you must write your own loop around<br />
 g_output_stream_write().</p>
-<p>The content of the individual elements of <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> might be changed by this
+<p>The content of the individual elements of <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> might be changed by this<br />
 function.</p>
 
 
@@ -3252,7 +3256,7 @@ function.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the number of bytes that were
+        <div class='inline'><p>location to store the number of bytes that were<br />
 written to the stream</p>
 </div>
       
@@ -3307,17 +3311,17 @@ written to the stream</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Request an asynchronous write of the bytes contained in the <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> into
-the stream. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.
-You can then call g_output_stream_writev_all_finish() to get the result of the
+    <p>Request an asynchronous write of the bytes contained in the <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> into<br />
+the stream. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.<br />
+You can then call g_output_stream_writev_all_finish() to get the result of the<br />
 operation.</p>
 <p>This is the asynchronous version of g_output_stream_writev_all().</p>
 <p>Call g_output_stream_writev_all_finish() to collect the result.</p>
-<p>Any outstanding I/O request with higher priority (lower numerical
-value) will be executed before an outstanding request with lower
+<p>Any outstanding I/O request with higher priority (lower numerical<br />
+value) will be executed before an outstanding request with lower<br />
 priority. Default priority is %G_PRIORITY_DEFAULT.</p>
-<p>Note that no copy of <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> will be made, so it must stay valid
-until <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is called. The content of the individual elements
+<p>Note that no copy of <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> will be made, so it must stay valid<br />
+until <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is called. The content of the individual elements<br />
 of <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> might be changed by this function.</p>
 
 
@@ -3397,7 +3401,7 @@ of <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> might be changed by
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -3448,14 +3452,14 @@ to call when the request is satisfied</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes an asynchronous stream write operation started with
+    <p>Finishes an asynchronous stream write operation started with<br />
 g_output_stream_writev_all_async().</p>
-<p>As a special exception to the normal conventions for functions that
-use #GError, if this function returns false (and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) then
-<!-- raw HTML omitted -->bytes_written<!-- raw HTML omitted --> will be set to the number of bytes that were
-successfully written before the error was encountered.  This
-functionality is only available from C.  If you need it from another
-language then you must write your own loop around
+<p>As a special exception to the normal conventions for functions that<br />
+use #GError, if this function returns false (and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) then<br />
+<!-- raw HTML omitted -->bytes_written<!-- raw HTML omitted --> will be set to the number of bytes that were<br />
+successfully written before the error was encountered.  This<br />
+functionality is only available from C.  If you need it from another<br />
+language then you must write your own loop around<br />
 g_output_stream_writev_async().</p>
 
 
@@ -3529,28 +3533,28 @@ g_output_stream_writev_async().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Request an asynchronous write of the bytes contained in <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> into
-the stream. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.
-You can then call g_output_stream_writev_finish() to get the result of the
+    <p>Request an asynchronous write of the bytes contained in <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> into<br />
+the stream. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.<br />
+You can then call g_output_stream_writev_finish() to get the result of the<br />
 operation.</p>
-<p>During an async request no other sync and async calls are allowed,
+<p>During an async request no other sync and async calls are allowed,<br />
 and will result in %G_IO_ERROR_PENDING errors.</p>
-<p>On success, the number of bytes written will be passed to the
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted -->. It is not an error if this is not the same as the
-requested size, as it can happen e.g. on a partial I/O error,
+<p>On success, the number of bytes written will be passed to the<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted -->. It is not an error if this is not the same as the<br />
+requested size, as it can happen e.g. on a partial I/O error,<br />
 but generally we try to write as many bytes as requested.</p>
-<p>You are guaranteed that this method will never fail with
-%G_IO_ERROR_WOULD_BLOCK — if <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> can't accept more data, the
+<p>You are guaranteed that this method will never fail with<br />
+%G_IO_ERROR_WOULD_BLOCK — if <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> can't accept more data, the<br />
 method will just wait until this changes.</p>
-<p>Any outstanding I/O request with higher priority (lower numerical
-value) will be executed before an outstanding request with lower
+<p>Any outstanding I/O request with higher priority (lower numerical<br />
+value) will be executed before an outstanding request with lower<br />
 priority. Default priority is %G_PRIORITY_DEFAULT.</p>
-<p>The asynchronous methods have a default fallback that uses threads
-to implement asynchronicity, so they are optional for inheriting
+<p>The asynchronous methods have a default fallback that uses threads<br />
+to implement asynchronicity, so they are optional for inheriting<br />
 classes. However, if you override one you must override all.</p>
-<p>For the synchronous, blocking version of this function, see
+<p>For the synchronous, blocking version of this function, see<br />
 g_output_stream_writev().</p>
-<p>Note that no copy of <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> will be made, so it must stay valid
+<p>Note that no copy of <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> will be made, so it must stay valid<br />
 until <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is called.</p>
 
 
@@ -3630,7 +3634,7 @@ until <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is called.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -3750,7 +3754,7 @@ to call when the request is satisfied</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

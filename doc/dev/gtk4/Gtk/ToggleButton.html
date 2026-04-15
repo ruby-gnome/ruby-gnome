@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::ToggleButton";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -105,8 +106,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/deprecated.rb<span class="defines">,<br />
+    <dd>lib/gtk4/deprecated.rb<span class="defines">,<br>
   lib/gtk4/toggle-button.rb</span>
+
 </dd>
   </dl>
   
@@ -291,9 +293,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -306,6 +310,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Button.html" title="Gtk::Button (class)">Button</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Button.html#can_shrink-instance_method" title="Gtk::Button#can_shrink (method)">#can_shrink</a></span>, <span class='object_link'><a href="Button.html#can_shrink=-instance_method" title="Gtk::Button#can_shrink= (method)">#can_shrink=</a></span>, <span class='object_link'><a href="Button.html#can_shrink%3F-instance_method" title="Gtk::Button#can_shrink? (method)">#can_shrink?</a></span>, <span class='object_link'><a href="Button.html#child-instance_method" title="Gtk::Button#child (method)">#child</a></span>, <span class='object_link'><a href="Button.html#child=-instance_method" title="Gtk::Button#child= (method)">#child=</a></span>, <span class='object_link'><a href="Button.html#has_frame-instance_method" title="Gtk::Button#has_frame (method)">#has_frame</a></span>, <span class='object_link'><a href="Button.html#has_frame=-instance_method" title="Gtk::Button#has_frame= (method)">#has_frame=</a></span>, <span class='object_link'><a href="Button.html#has_frame%3F-instance_method" title="Gtk::Button#has_frame? (method)">#has_frame?</a></span>, <span class='object_link'><a href="Button.html#icon_name-instance_method" title="Gtk::Button#icon_name (method)">#icon_name</a></span>, <span class='object_link'><a href="Button.html#icon_name=-instance_method" title="Gtk::Button#icon_name= (method)">#icon_name=</a></span>, <span class='object_link'><a href="Button.html#label-instance_method" title="Gtk::Button#label (method)">#label</a></span>, <span class='object_link'><a href="Button.html#label=-instance_method" title="Gtk::Button#label= (method)">#label=</a></span>, <span class='object_link'><a href="Button.html#use_underline-instance_method" title="Gtk::Button#use_underline (method)">#use_underline</a></span>, <span class='object_link'><a href="Button.html#use_underline=-instance_method" title="Gtk::Button#use_underline= (method)">#use_underline=</a></span>, <span class='object_link'><a href="Button.html#use_underline%3F-instance_method" title="Gtk::Button#use_underline? (method)">#use_underline?</a></span></p>
 
+  
   
   
   
@@ -334,7 +339,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkToggleButton</code> containing a label.</p>
-<p>The label will be created using [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.new_with_mnemonic],
+<p>The label will be created using [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.new_with_mnemonic],<br />
 so underscores in <!-- raw HTML omitted -->label<!-- raw HTML omitted --> indicate the mnemonic for the button.</p>
 
 
@@ -354,7 +359,7 @@ so underscores in <!-- raw HTML omitted -->label<!-- raw HTML omitted --> indica
       
       
         &mdash;
-        <div class='inline'><p>the text of the button, with an underscore in front of the
+        <div class='inline'><p>the text of the button, with an underscore in front of the<br />
 mnemonic character</p>
 </div>
       
@@ -425,7 +430,7 @@ mnemonic character</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queries a <code>GtkToggleButton</code> and returns its current state.</p>
-<p>Returns true if the toggle button is pressed in and false
+<p>Returns true if the toggle button is pressed in and false<br />
 if it is raised.</p>
 
 
@@ -626,7 +631,7 @@ if it is raised.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkToggleButton</code> containing a label.</p>
-<p>The label will be created using [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.new_with_mnemonic],
+<p>The label will be created using [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.new_with_mnemonic],<br />
 so underscores in <!-- raw HTML omitted -->label<!-- raw HTML omitted --> indicate the mnemonic for the button.</p>
 
 
@@ -646,7 +651,7 @@ so underscores in <!-- raw HTML omitted -->label<!-- raw HTML omitted --> indica
       
       
         &mdash;
-        <div class='inline'><p>the text of the button, with an underscore in front of the
+        <div class='inline'><p>the text of the button, with an underscore in front of the<br />
 mnemonic character</p>
 </div>
       
@@ -731,7 +736,7 @@ mnemonic character</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

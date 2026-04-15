@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::ScrolledWindow";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -106,55 +108,55 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p><code>GtkScrolledWindow</code> is a container that makes its child scrollable.</p>
-<p>It does so using either internally added scrollbars or externally
+<p>It does so using either internally added scrollbars or externally<br />
 associated adjustments, and optionally draws a frame around the child.</p>
-<p>Widgets with native scrolling support, i.e. those whose classes implement
-the [iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scrollable] interface, are added directly. For other types
-of widget, the class [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Viewport] acts as an adaptor, giving
-scrollability to other widgets. [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.set_child]
-intelligently accounts for whether or not the added child is a <code>GtkScrollable</code>.
-If it isn’t, then it wraps the child in a <code>GtkViewport</code>. Therefore, you can
+<p>Widgets with native scrolling support, i.e. those whose classes implement<br />
+the [iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scrollable] interface, are added directly. For other types<br />
+of widget, the class [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Viewport] acts as an adaptor, giving<br />
+scrollability to other widgets. [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.set_child]<br />
+intelligently accounts for whether or not the added child is a <code>GtkScrollable</code>.<br />
+If it isn’t, then it wraps the child in a <code>GtkViewport</code>. Therefore, you can<br />
 just add any child widget and not worry about the details.</p>
-<p>If [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.set_child] has added a <code>GtkViewport</code> for you,
-it will be automatically removed when you unset the child.
-Unless [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow:hscrollbar-policy] and
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow:vscrollbar-policy] are %GTK_POLICY_NEVER or
-%GTK_POLICY_EXTERNAL, <code>GtkScrolledWindow</code> adds internal <code>GtkScrollbar</code> widgets
-around its child. The scroll position of the child, and if applicable the
-scrollbars, is controlled by the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow:hadjustment]
-and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow:vadjustment] that are associated with the
-<code>GtkScrolledWindow</code>. See the docs on [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scrollbar] for the details,
-but note that the “step_increment” and “page_increment” fields are only
+<p>If [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.set_child] has added a <code>GtkViewport</code> for you,<br />
+it will be automatically removed when you unset the child.<br />
+Unless [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow:hscrollbar-policy] and<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow:vscrollbar-policy] are %GTK_POLICY_NEVER or<br />
+%GTK_POLICY_EXTERNAL, <code>GtkScrolledWindow</code> adds internal <code>GtkScrollbar</code> widgets<br />
+around its child. The scroll position of the child, and if applicable the<br />
+scrollbars, is controlled by the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow:hadjustment]<br />
+and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow:vadjustment] that are associated with the<br />
+<code>GtkScrolledWindow</code>. See the docs on [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scrollbar] for the details,<br />
+but note that the “step_increment” and “page_increment” fields are only<br />
 effective if the policy causes scrollbars to be present.</p>
-<p>If a <code>GtkScrolledWindow</code> doesn’t behave quite as you would like, or
-doesn’t have exactly the right layout, it’s very possible to set up
+<p>If a <code>GtkScrolledWindow</code> doesn’t behave quite as you would like, or<br />
+doesn’t have exactly the right layout, it’s very possible to set up<br />
 your own scrolling with <code>GtkScrollbar</code> and for example a <code>GtkGrid</code>.</p>
-<h1>Touch support</h1>
-<p><code>GtkScrolledWindow</code> has built-in support for touch devices. When a
-touchscreen is used, swiping will move the scrolled window, and will
-expose 'kinetic' behavior. This can be turned off with the
+<h1><a href="#touch-support" aria-hidden="true" class="anchor" id="touch-support"></a>Touch support</h1>
+<p><code>GtkScrolledWindow</code> has built-in support for touch devices. When a<br />
+touchscreen is used, swiping will move the scrolled window, and will<br />
+expose 'kinetic' behavior. This can be turned off with the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow:kinetic-scrolling] property if it is undesired.</p>
-<p><code>GtkScrolledWindow</code> also displays visual 'overshoot' indication when
-the content is pulled beyond the end, and this situation can be
+<p><code>GtkScrolledWindow</code> also displays visual 'overshoot' indication when<br />
+the content is pulled beyond the end, and this situation can be<br />
 captured with the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow::edge-overshot] signal.</p>
-<p>If no mouse device is present, the scrollbars will overlaid as
-narrow, auto-hiding indicators over the content. If traditional
-scrollbars are desired although no mouse is present, this behaviour
-can be turned off with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow:overlay-scrolling]
+<p>If no mouse device is present, the scrollbars will overlaid as<br />
+narrow, auto-hiding indicators over the content. If traditional<br />
+scrollbars are desired although no mouse is present, this behaviour<br />
+can be turned off with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow:overlay-scrolling]<br />
 property.</p>
-<h1>CSS nodes</h1>
-<p><code>GtkScrolledWindow</code> has a main CSS node with name scrolledwindow.
-It gets a .frame style class added when [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow:has-frame]
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
+<p><code>GtkScrolledWindow</code> has a main CSS node with name scrolledwindow.<br />
+It gets a .frame style class added when [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow:has-frame]<br />
 is true.</p>
-<p>It uses subnodes with names overshoot and undershoot to draw the overflow
-and underflow indications. These nodes get the .left, .right, .top or .bottom
+<p>It uses subnodes with names overshoot and undershoot to draw the overflow<br />
+and underflow indications. These nodes get the .left, .right, .top or .bottom<br />
 style class added depending on where the indication is drawn.</p>
-<p><code>GtkScrolledWindow</code> also sets the positional style classes (.left, .right,
-.top, .bottom) and style classes related to overlay scrolling
+<p><code>GtkScrolledWindow</code> also sets the positional style classes (.left, .right,<br />
+.top, .bottom) and style classes related to overlay scrolling<br />
 (.overlay-indicator, .dragging, .hovering) on its scrollbars.</p>
-<p>If both scrollbars are visible, the area where they meet is drawn
+<p>If both scrollbars are visible, the area where they meet is drawn<br />
 with a subnode named junction.</p>
-<h1>Accessibility</h1>
+<h1><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h1>
 <p>Until GTK 4.10, <code>GtkScrolledWindow</code> used the <code>GTK_ACCESSIBLE_ROLE_GROUP</code> role.</p>
 <p>Starting from GTK 4.12, <code>GtkScrolledWindow</code> uses the <code>GTK_ACCESSIBLE_ROLE_GENERIC</code> role.</p>
 
@@ -1169,9 +1171,11 @@ with a subnode named junction.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -1227,8 +1231,8 @@ with a subnode named junction.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The child widget.</p>
-<p>When setting this property, if the child widget does not implement
-[iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scrollable], the scrolled window will add the child to
+<p>When setting this property, if the child widget does not implement<br />
+[iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scrollable], the scrolled window will add the child to<br />
 a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Viewport] and then set the viewport as the child.</p>
 
 
@@ -1269,8 +1273,8 @@ a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Viewport] and then
 </h3><div class="docstring">
   <div class="discussion">
     <p>The child widget.</p>
-<p>When setting this property, if the child widget does not implement
-[iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scrollable], the scrolled window will add the child to
+<p>When setting this property, if the child widget does not implement<br />
+[iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scrollable], the scrolled window will add the child to<br />
 a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Viewport] and then set the viewport as the child.</p>
 
 
@@ -1338,7 +1342,7 @@ a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Viewport] and then
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the current policy values for the horizontal and vertical
+    <p>Retrieves the current policy values for the horizontal and vertical<br />
 scrollbars.</p>
 <p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.set_policy].</p>
 
@@ -1359,7 +1363,7 @@ scrollbars.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the policy
+        <div class='inline'><p>location to store the policy<br />
 for the horizontal scrollbar</p>
 </div>
       
@@ -1375,7 +1379,7 @@ for the horizontal scrollbar</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the policy
+        <div class='inline'><p>location to store the policy<br />
 for the vertical scrollbar</p>
 </div>
       
@@ -1701,7 +1705,7 @@ for the vertical scrollbar</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>When the horizontal scrollbar is displayed.</p>
-<p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.set_policy] to set
+<p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.set_policy] to set<br />
 this property.</p>
 
 
@@ -1742,7 +1746,7 @@ this property.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>When the horizontal scrollbar is displayed.</p>
-<p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.set_policy] to set
+<p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.set_policy] to set<br />
 this property.</p>
 
 
@@ -2421,10 +2425,10 @@ this property.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether overlay scrolling is enabled or not.</p>
-<p>If it is, the scrollbars are only added as traditional widgets
-when a mouse is present. Otherwise, they are overlaid on top of
+<p>If it is, the scrollbars are only added as traditional widgets<br />
+when a mouse is present. Otherwise, they are overlaid on top of<br />
 the content, as narrow indicators.</p>
-<p>Note that overlay scrolling can also be globally disabled, with
+<p>Note that overlay scrolling can also be globally disabled, with<br />
 the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-overlay-scrolling] setting.</p>
 
 
@@ -2493,10 +2497,10 @@ the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether overlay scrolling is enabled or not.</p>
-<p>If it is, the scrollbars are only added as traditional widgets
-when a mouse is present. Otherwise, they are overlaid on top of
+<p>If it is, the scrollbars are only added as traditional widgets<br />
+when a mouse is present. Otherwise, they are overlaid on top of<br />
 the content, as narrow indicators.</p>
-<p>Note that overlay scrolling can also be globally disabled, with
+<p>Note that overlay scrolling can also be globally disabled, with<br />
 the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-overlay-scrolling] setting.</p>
 
 
@@ -2575,13 +2579,13 @@ the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the placement of the contents with respect to the scrollbars
+    <p>Sets the placement of the contents with respect to the scrollbars<br />
 for the scrolled window.</p>
-<p>The default is %GTK_CORNER_TOP_LEFT, meaning the child is
-in the top left, with the scrollbars underneath and to the right.
-Other values in [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CornerType] are %GTK_CORNER_TOP_RIGHT,
+<p>The default is %GTK_CORNER_TOP_LEFT, meaning the child is<br />
+in the top left, with the scrollbars underneath and to the right.<br />
+Other values in [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CornerType] are %GTK_CORNER_TOP_RIGHT,<br />
 %GTK_CORNER_BOTTOM_LEFT, and %GTK_CORNER_BOTTOM_RIGHT.</p>
-<p>See also [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.get_placement] and
+<p>See also [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.get_placement] and<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.unset_placement].</p>
 
 
@@ -2636,7 +2640,7 @@ Other values in [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Corne
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reports whether the natural height of the child will be calculated
+    <p>Reports whether the natural height of the child will be calculated<br />
 and propagated through the scrolled window’s requested natural height.</p>
 
 
@@ -2676,9 +2680,9 @@ and propagated through the scrolled window’s requested natural height.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the natural height of the child should be calculated and propagated
+    <p>Whether the natural height of the child should be calculated and propagated<br />
 through the scrolled window’s requested natural height.</p>
-<p>This is useful in cases where an attempt should be made to allocate exactly
+<p>This is useful in cases where an attempt should be made to allocate exactly<br />
 enough space for the natural size of the child.</p>
 
 
@@ -2746,9 +2750,9 @@ enough space for the natural size of the child.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the natural height of the child should be calculated and propagated
+    <p>Whether the natural height of the child should be calculated and propagated<br />
 through the scrolled window’s requested natural height.</p>
-<p>This is useful in cases where an attempt should be made to allocate exactly
+<p>This is useful in cases where an attempt should be made to allocate exactly<br />
 enough space for the natural size of the child.</p>
 
 
@@ -2788,7 +2792,7 @@ enough space for the natural size of the child.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reports whether the natural width of the child will be calculated
+    <p>Reports whether the natural width of the child will be calculated<br />
 and propagated through the scrolled window’s requested natural width.</p>
 
 
@@ -2828,9 +2832,9 @@ and propagated through the scrolled window’s requested natural width.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the natural width of the child should be calculated and propagated
+    <p>Whether the natural width of the child should be calculated and propagated<br />
 through the scrolled window’s requested natural width.</p>
-<p>This is useful in cases where an attempt should be made to allocate exactly
+<p>This is useful in cases where an attempt should be made to allocate exactly<br />
 enough space for the natural size of the child.</p>
 
 
@@ -2898,9 +2902,9 @@ enough space for the natural size of the child.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the natural width of the child should be calculated and propagated
+    <p>Whether the natural width of the child should be calculated and propagated<br />
 through the scrolled window’s requested natural width.</p>
-<p>This is useful in cases where an attempt should be made to allocate exactly
+<p>This is useful in cases where an attempt should be made to allocate exactly<br />
 enough space for the natural size of the child.</p>
 
 
@@ -2941,11 +2945,11 @@ enough space for the natural size of the child.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the scrollbar policy for the horizontal and vertical scrollbars.</p>
-<p>The policy determines when the scrollbar should appear; it is a value
-from the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PolicyType] enumeration. If %GTK_POLICY_ALWAYS, the
-scrollbar is always present; if %GTK_POLICY_NEVER, the scrollbar is
-never present; if %GTK_POLICY_AUTOMATIC, the scrollbar is present only
-if needed (that is, if the slider part of the bar would be smaller
+<p>The policy determines when the scrollbar should appear; it is a value<br />
+from the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PolicyType] enumeration. If %GTK_POLICY_ALWAYS, the<br />
+scrollbar is always present; if %GTK_POLICY_NEVER, the scrollbar is<br />
+never present; if %GTK_POLICY_AUTOMATIC, the scrollbar is present only<br />
+if needed (that is, if the slider part of the bar would be smaller<br />
 than the trough — the display is larger than the page size).</p>
 
 
@@ -3016,7 +3020,7 @@ than the trough — the display is larger than the page size).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Unsets the placement of the contents with respect to the scrollbars.</p>
-<p>If no window placement is set for a scrolled window,
+<p>If no window placement is set for a scrolled window,<br />
 it defaults to %GTK_CORNER_TOP_LEFT.</p>
 
 
@@ -3197,7 +3201,7 @@ it defaults to %GTK_CORNER_TOP_LEFT.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>When the vertical scrollbar is displayed.</p>
-<p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.set_policy] to set
+<p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.set_policy] to set<br />
 this property.</p>
 
 
@@ -3238,7 +3242,7 @@ this property.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>When the vertical scrollbar is displayed.</p>
-<p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.set_policy] to set
+<p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.set_policy] to set<br />
 this property.</p>
 
 
@@ -3408,7 +3412,7 @@ this property.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

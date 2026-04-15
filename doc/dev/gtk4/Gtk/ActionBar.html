@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::ActionBar";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -107,18 +109,18 @@
   <div class="discussion">
     <p><code>GtkActionBar</code> is designed to present contextual actions.</p>
 <p><img src="action-bar.png" alt="An example GtkActionBar" /></p>
-<p>It is expected to be displayed below the content and expand
+<p>It is expected to be displayed below the content and expand<br />
 horizontally to fill the area.</p>
-<p>It allows placing children at the start or the end. In addition, it
-contains an internal centered box which is centered with respect to
-the full width of the box, even if the children at either side take
+<p>It allows placing children at the start or the end. In addition, it<br />
+contains an internal centered box which is centered with respect to<br />
+the full width of the box, even if the children at either side take<br />
 up different amounts of space.</p>
-<h1>GtkActionBar as GtkBuildable</h1>
-<p>The <code>GtkActionBar</code> implementation of the <code>GtkBuildable</code> interface supports
-adding children at the start or end sides by specifying “start” or “end” as
-the “type” attribute of a <code>&lt;child&gt;</code> element, or setting the center widget
+<h1><a href="#gtkactionbar-as-gtkbuildable" aria-hidden="true" class="anchor" id="gtkactionbar-as-gtkbuildable"></a>GtkActionBar as GtkBuildable</h1>
+<p>The <code>GtkActionBar</code> implementation of the <code>GtkBuildable</code> interface supports<br />
+adding children at the start or end sides by specifying “start” or “end” as<br />
+the “type” attribute of a <code>&lt;child&gt;</code> element, or setting the center widget<br />
 by specifying “center” value.</p>
-<h1>CSS nodes</h1>
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
 <pre class="code ruby"><code class="ruby">actionbar
 ╰── revealer
     ╰── box
@@ -128,9 +130,9 @@ by specifying “center” value.</p>
         ╰── box.end
             ╰── [end children]
 </code></pre>
-<p>A <code>GtkActionBar</code>'s CSS node is called <code>actionbar</code>. It contains a <code>revealer</code>
-subnode, which contains a <code>box</code> subnode, which contains two <code>box</code> subnodes at
-the start and end of the action bar, with <code>start</code> and `end style classes
+<p>A <code>GtkActionBar</code>'s CSS node is called <code>actionbar</code>. It contains a <code>revealer</code><br />
+subnode, which contains a <code>box</code> subnode, which contains two <code>box</code> subnodes at<br />
+the start and end of the action bar, with <code>start</code> and `end style classes<br />
 respectively, as well as a center node that represents the center child.</p>
 <p>Each of the boxes contains children packed for that side.</p>
 
@@ -365,9 +367,11 @@ respectively, as well as a center node that represents the center child.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -516,7 +520,7 @@ respectively, as well as a center node that represents the center child.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->child<!-- raw HTML omitted --> to <!-- raw HTML omitted -->action_bar<!-- raw HTML omitted -->, packed with reference to the
+    <p>Adds <!-- raw HTML omitted -->child<!-- raw HTML omitted --> to <!-- raw HTML omitted -->action_bar<!-- raw HTML omitted -->, packed with reference to the<br />
 end of the <!-- raw HTML omitted -->action_bar<!-- raw HTML omitted -->.</p>
 
 
@@ -571,7 +575,7 @@ end of the <!-- raw HTML omitted -->action_bar<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->child<!-- raw HTML omitted --> to <!-- raw HTML omitted -->action_bar<!-- raw HTML omitted -->, packed with reference to the
+    <p>Adds <!-- raw HTML omitted -->child<!-- raw HTML omitted --> to <!-- raw HTML omitted -->action_bar<!-- raw HTML omitted -->, packed with reference to the<br />
 start of the <!-- raw HTML omitted -->action_bar<!-- raw HTML omitted -->.</p>
 
 
@@ -698,7 +702,7 @@ start of the <!-- raw HTML omitted -->action_bar<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>the current value of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ActionBar:revealed]
+        <div class='inline'><p>the current value of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ActionBar:revealed]<br />
 property</p>
 </div>
       
@@ -822,7 +826,7 @@ property</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

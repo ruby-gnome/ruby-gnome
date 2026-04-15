@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::UnixFDList";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -255,6 +257,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -271,9 +274,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new GUnix::FDList containing the file descriptors given in
-<!-- raw HTML omitted -->fds<!-- raw HTML omitted -->.  The file descriptors become the property of the new list and
-may no longer be used by the caller.  The array itself is owned by
+    <p>Creates a new GUnix::FDList containing the file descriptors given in<br />
+<!-- raw HTML omitted -->fds<!-- raw HTML omitted -->.  The file descriptors become the property of the new list and<br />
+may no longer be used by the caller.  The array itself is owned by<br />
 the caller.</p>
 <p>Each file descriptor in the array should be set to close-on-exec.</p>
 <p>If <!-- raw HTML omitted -->n_fds<!-- raw HTML omitted --> is -1 then <!-- raw HTML omitted -->fds<!-- raw HTML omitted --> must be terminated with -1.</p>
@@ -340,13 +343,13 @@ the caller.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a file descriptor to <!-- raw HTML omitted -->list<!-- raw HTML omitted -->.</p>
-<p>The file descriptor is duplicated using dup(). You keep your copy
-of the descriptor and the copy contained in <!-- raw HTML omitted -->list<!-- raw HTML omitted --> will be closed
+<p>The file descriptor is duplicated using dup(). You keep your copy<br />
+of the descriptor and the copy contained in <!-- raw HTML omitted -->list<!-- raw HTML omitted --> will be closed<br />
 when <!-- raw HTML omitted -->list<!-- raw HTML omitted --> is finalized.</p>
-<p>A possible cause of failure is exceeding the per-process or
+<p>A possible cause of failure is exceeding the per-process or<br />
 system-wide file descriptor limit.</p>
-<p>The index of the file descriptor in the list is returned.  If you use
-this index with g_unix_fd_list_get() then you will receive back a
+<p>The index of the file descriptor in the list is returned.  If you use<br />
+this index with g_unix_fd_list_get() then you will receive back a<br />
 duplicated copy of the same file descriptor.</p>
 
 
@@ -384,7 +387,7 @@ duplicated copy of the same file descriptor.</p>
       
       
         &mdash;
-        <div class='inline'><p>the index of the appended fd in case of success, else -1
+        <div class='inline'><p>the index of the appended fd in case of success, else -1<br />
 (and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set)</p>
 </div>
       
@@ -407,13 +410,13 @@ duplicated copy of the same file descriptor.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets a file descriptor out of <!-- raw HTML omitted -->list<!-- raw HTML omitted -->.</p>
-<p><!-- raw HTML omitted -->index_<!-- raw HTML omitted --> specifies the index of the file descriptor to get.  It is a
-programmer error for <!-- raw HTML omitted -->index_<!-- raw HTML omitted --> to be out of range; see
+<p><!-- raw HTML omitted -->index_<!-- raw HTML omitted --> specifies the index of the file descriptor to get.  It is a<br />
+programmer error for <!-- raw HTML omitted -->index_<!-- raw HTML omitted --> to be out of range; see<br />
 g_unix_fd_list_get_length().</p>
-<p>The file descriptor is duplicated using dup() and set as
-close-on-exec before being returned.  You must call close() on it
+<p>The file descriptor is duplicated using dup() and set as<br />
+close-on-exec before being returned.  You must call close() on it<br />
 when you are done.</p>
-<p>A possible cause of failure is exceeding the per-process or
+<p>A possible cause of failure is exceeding the per-process or<br />
 system-wide file descriptor limit.</p>
 
 
@@ -472,7 +475,7 @@ system-wide file descriptor limit.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the length of <!-- raw HTML omitted -->list<!-- raw HTML omitted --> (ie: the number of file descriptors
+    <p>Gets the length of <!-- raw HTML omitted -->list<!-- raw HTML omitted --> (ie: the number of file descriptors<br />
 contained within).</p>
 
 
@@ -512,15 +515,15 @@ contained within).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the array of file descriptors that is contained in this
+    <p>Returns the array of file descriptors that is contained in this<br />
 object.</p>
-<p>After this call, the descriptors remain the property of <!-- raw HTML omitted -->list<!-- raw HTML omitted -->.  The
-caller must not close them and must not free the array.  The array is
+<p>After this call, the descriptors remain the property of <!-- raw HTML omitted -->list<!-- raw HTML omitted -->.  The<br />
+caller must not close them and must not free the array.  The array is<br />
 valid only until <!-- raw HTML omitted -->list<!-- raw HTML omitted --> is changed in any way.</p>
-<p>If <!-- raw HTML omitted -->length<!-- raw HTML omitted --> is non-nil then it is set to the number of file
-descriptors in the returned array. The returned array is also
+<p>If <!-- raw HTML omitted -->length<!-- raw HTML omitted --> is non-nil then it is set to the number of file<br />
+descriptors in the returned array. The returned array is also<br />
 terminated with -1.</p>
-<p>This function never returns nil. In case there are no file
+<p>This function never returns nil. In case there are no file<br />
 descriptors contained in <!-- raw HTML omitted -->list<!-- raw HTML omitted -->, an empty array is returned.</p>
 
 
@@ -540,7 +543,7 @@ descriptors contained in <!-- raw HTML omitted -->list<!-- raw HTML omitted -->,
       
       
         &mdash;
-        <div class='inline'><p>pointer to the length of the returned
+        <div class='inline'><p>pointer to the length of the returned<br />
 array, or nil</p>
 </div>
       
@@ -559,7 +562,7 @@ array, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>an array of file
+        <div class='inline'><p>an array of file<br />
 descriptors</p>
 </div>
       
@@ -581,19 +584,19 @@ descriptors</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the array of file descriptors that is contained in this
+    <p>Returns the array of file descriptors that is contained in this<br />
 object.</p>
-<p>After this call, the descriptors are no longer contained in
-<!-- raw HTML omitted -->list<!-- raw HTML omitted -->. Further calls will return an empty list (unless more
+<p>After this call, the descriptors are no longer contained in<br />
+<!-- raw HTML omitted -->list<!-- raw HTML omitted -->. Further calls will return an empty list (unless more<br />
 descriptors have been added).</p>
-<p>The return result of this function must be freed with g_free().
-The caller is also responsible for closing all of the file
-descriptors.  The file descriptors in the array are set to
+<p>The return result of this function must be freed with g_free().<br />
+The caller is also responsible for closing all of the file<br />
+descriptors.  The file descriptors in the array are set to<br />
 close-on-exec.</p>
-<p>If <!-- raw HTML omitted -->length<!-- raw HTML omitted --> is non-nil then it is set to the number of file
-descriptors in the returned array. The returned array is also
+<p>If <!-- raw HTML omitted -->length<!-- raw HTML omitted --> is non-nil then it is set to the number of file<br />
+descriptors in the returned array. The returned array is also<br />
 terminated with -1.</p>
-<p>This function never returns nil. In case there are no file
+<p>This function never returns nil. In case there are no file<br />
 descriptors contained in <!-- raw HTML omitted -->list<!-- raw HTML omitted -->, an empty array is returned.</p>
 
 
@@ -613,7 +616,7 @@ descriptors contained in <!-- raw HTML omitted -->list<!-- raw HTML omitted -->,
       
       
         &mdash;
-        <div class='inline'><p>pointer to the length of the returned
+        <div class='inline'><p>pointer to the length of the returned<br />
 array, or nil</p>
 </div>
       
@@ -632,7 +635,7 @@ array, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>an array of file
+        <div class='inline'><p>an array of file<br />
 descriptors</p>
 </div>
       
@@ -650,7 +653,7 @@ descriptors</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gst/bin.rb<span class="defines">,<br />
-  lib/gst.rb,<br /> lib/gst/bus.rb,<br /> lib/gst/caps.rb,<br /> lib/gst/buffer.rb,<br /> lib/gst/loader.rb,<br /> lib/gst/element.rb,<br /> lib/gst/version.rb,<br /> lib/gst/registry.rb,<br /> lib/gst/tag-list.rb,<br /> lib/gst/structure.rb,<br /> lib/gst/plugin-feature.rb,<br /> lib/gst/element-factory.rb,<br /> lib/gst/type-find-factory.rb</span>
+    <dd>lib/gst/bin.rb<span class="defines">,<br>
+  lib/gst.rb,<br> lib/gst/bus.rb,<br> lib/gst/caps.rb,<br> lib/gst/buffer.rb,<br> lib/gst/loader.rb,<br> lib/gst/element.rb,<br> lib/gst/version.rb,<br> lib/gst/registry.rb,<br> lib/gst/tag-list.rb,<br> lib/gst/structure.rb,<br> lib/gst/plugin-feature.rb,<br> lib/gst/element-factory.rb,<br> lib/gst/type-find-factory.rb</span>
+
 </dd>
   </dl>
   
@@ -88,16 +90,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2015  Ruby-GNOME2 Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -145,7 +147,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
         <dt id="BUFFER_COPY_ALL-constant" class="">BUFFER_COPY_ALL =
           <div class="docstring">
   <div class="discussion">
-    <p>Combination of all possible fields that can be copied with
+    <p>Combination of all possible fields that can be copied with<br />
 gst_buffer_copy_into().</p>
 
 
@@ -161,7 +163,7 @@ gst_buffer_copy_into().</p>
         <dt id="BUFFER_COPY_METADATA-constant" class="">BUFFER_COPY_METADATA =
           <div class="docstring">
   <div class="discussion">
-    <p>Combination of all possible metadata fields that can be copied with
+    <p>Combination of all possible metadata fields that can be copied with<br />
 gst_buffer_copy_into().</p>
 
 
@@ -267,8 +269,8 @@ gst_buffer_copy_into().</p>
         <dt id="ELEMENT_FACTORY_KLASS_HARDWARE-constant" class="">ELEMENT_FACTORY_KLASS_HARDWARE =
           <div class="docstring">
   <div class="discussion">
-    <p>Elements interacting with hardware devices should specify this classifier in
-their metadata. You may need to put the element in &quot;READY&quot; state to test if
+    <p>Elements interacting with hardware devices should specify this classifier in<br />
+their metadata. You may need to put the element in &quot;READY&quot; state to test if<br />
 the hardware is present in the system.</p>
 
 
@@ -440,8 +442,8 @@ the hardware is present in the system.</p>
           <div class="docstring">
   <div class="discussion">
     <p>Elements matching any of the defined GST_ELEMENT_FACTORY_TYPE_MEDIA types</p>
-<p>Note: Do not use this if you wish to not filter against any of the defined
-media types. If you wish to do this, simply don't specify any
+<p>Note: Do not use this if you wish to not filter against any of the defined<br />
+media types. If you wish to do this, simply don't specify any<br />
 GST_ELEMENT_FACTORY_TYPE_MEDIA flag.</p>
 
 
@@ -537,8 +539,8 @@ GST_ELEMENT_FACTORY_TYPE_MEDIA flag.</p>
         <dt id="ELEMENT_METADATA_AUTHOR-constant" class="">ELEMENT_METADATA_AUTHOR =
           <div class="docstring">
   <div class="discussion">
-    <p>Name and contact details of the author(s). Use \n to separate
-multiple author details.
+    <p>Name and contact details of the author(s). Use \n to separate<br />
+multiple author details.<br />
 E.g: &quot;Joe Bloggs &lt;joe.blogs at foo.com&gt;&quot;</p>
 
 
@@ -554,7 +556,7 @@ E.g: &quot;Joe Bloggs &lt;joe.blogs at foo.com&gt;&quot;</p>
         <dt id="ELEMENT_METADATA_DESCRIPTION-constant" class="">ELEMENT_METADATA_DESCRIPTION =
           <div class="docstring">
   <div class="discussion">
-    <p>Sentence describing the purpose of the element.
+    <p>Sentence describing the purpose of the element.<br />
 E.g: &quot;Write stream to a file&quot;</p>
 
 
@@ -570,7 +572,7 @@ E.g: &quot;Write stream to a file&quot;</p>
         <dt id="ELEMENT_METADATA_DOC_URI-constant" class="">ELEMENT_METADATA_DOC_URI =
           <div class="docstring">
   <div class="discussion">
-    <p>Set uri pointing to user documentation. Applications can use this to show
+    <p>Set uri pointing to user documentation. Applications can use this to show<br />
 help for e.g. effects to users.</p>
 
 
@@ -586,8 +588,8 @@ help for e.g. effects to users.</p>
         <dt id="ELEMENT_METADATA_ICON_NAME-constant" class="">ELEMENT_METADATA_ICON_NAME =
           <div class="docstring">
   <div class="discussion">
-    <p>Elements that bridge to certain other products can include an icon of that
-used product. Application can show the icon in menus/selectors to help
+    <p>Elements that bridge to certain other products can include an icon of that<br />
+used product. Application can show the icon in menus/selectors to help<br />
 identifying specific elements.</p>
 
 
@@ -603,8 +605,8 @@ identifying specific elements.</p>
         <dt id="ELEMENT_METADATA_KLASS-constant" class="">ELEMENT_METADATA_KLASS =
           <div class="docstring">
   <div class="discussion">
-    <p>String describing the type of element, as an unordered list
-separated with slashes ('/'). See draft-klass.txt of the design docs
+    <p>String describing the type of element, as an unordered list<br />
+separated with slashes ('/'). See draft-klass.txt of the design docs<br />
 for more details and common types. E.g: &quot;Sink/File&quot;</p>
 
 
@@ -635,7 +637,7 @@ for more details and common types. E.g: &quot;Sink/File&quot;</p>
         <dt id="ERROR_SYSTEM-constant" class="">ERROR_SYSTEM =
           <div class="docstring">
   <div class="discussion">
-    <p>Builds a string using errno describing the previously failed system
+    <p>Builds a string using errno describing the previously failed system<br />
 call.  To be used as the debug argument in #GST_ELEMENT_ERROR.</p>
 
 
@@ -671,8 +673,8 @@ call.  To be used as the debug argument in #GST_ELEMENT_ERROR.</p>
         <dt id="FLAG_SET_MASK_EXACT-constant" class="">FLAG_SET_MASK_EXACT =
           <div class="docstring">
   <div class="discussion">
-    <p>A mask value with all bits set, for use as a
-GstFlagSet mask where all flag bits must match
+    <p>A mask value with all bits set, for use as a<br />
+GstFlagSet mask where all flag bits must match<br />
 exactly</p>
 
 
@@ -703,7 +705,7 @@ exactly</p>
         <dt id="FORMAT_PERCENT_SCALE-constant" class="">FORMAT_PERCENT_SCALE =
           <div class="docstring">
   <div class="discussion">
-    <p>The value used to scale down the reported PERCENT format value to
+    <p>The value used to scale down the reported PERCENT format value to<br />
 its real value.</p>
 
 
@@ -719,10 +721,10 @@ its real value.</p>
         <dt id="FOURCC_FORMAT-constant" class="">FOURCC_FORMAT =
           <div class="docstring">
   <div class="discussion">
-    <p>Can be used together with #GST_FOURCC_ARGS to properly output a
-#guint32 fourcc value in a printf()-style text message.</p>
-<p>|[
-printf (&quot;fourcc: %&quot; GST_FOURCC_FORMAT &quot;\n&quot;, GST_FOURCC_ARGS (fcc));
+    <p>Can be used together with #GST_FOURCC_ARGS to properly output a<br />
+#guint32 fourcc value in a printf<span data-escaped-char>(</span>)-style text message.</p>
+<p>|[<br />
+printf (&quot;fourcc: %&quot; GST_FOURCC_FORMAT &quot;\n&quot;, GST_FOURCC_ARGS (fcc));<br />
 ]|</p>
 
 
@@ -738,7 +740,7 @@ printf (&quot;fourcc: %&quot; GST_FOURCC_FORMAT &quot;\n&quot;, GST_FOURCC_ARGS 
         <dt id="GROUP_ID_INVALID-constant" class="">GROUP_ID_INVALID =
           <div class="docstring">
   <div class="discussion">
-    <p>A value which is guaranteed to never be returned by
+    <p>A value which is guaranteed to never be returned by<br />
 gst_util_group_id_next().</p>
 <p>Can be used as a default value in variables used to store group_id.</p>
 
@@ -815,7 +817,7 @@ gst_util_group_id_next().</p>
         <dt id="META_TAG_MEMORY_STR-constant" class="">META_TAG_MEMORY_STR =
           <div class="docstring">
   <div class="discussion">
-    <p>This metadata stays relevant as long as memory layout is unchanged.
+    <p>This metadata stays relevant as long as memory layout is unchanged.<br />
 In hindsight, this tag should have been called &quot;memory-layout&quot;.</p>
 
 
@@ -861,9 +863,9 @@ In hindsight, this tag should have been called &quot;memory-layout&quot;.</p>
         <dt id="PARAM_CONDITIONALLY_AVAILABLE-constant" class="">PARAM_CONDITIONALLY_AVAILABLE =
           <div class="docstring">
   <div class="discussion">
-    <p>Use this flag on GObject properties of GstObject to indicate that
-they might not be available depending on environment such as OS, device, etc,
-so such properties will be installed conditionally only if the GstObject is
+    <p>Use this flag on GObject properties of GstObject to indicate that<br />
+they might not be available depending on environment such as OS, device, etc,<br />
+so such properties will be installed conditionally only if the GstObject is<br />
 able to support it.</p>
 
 
@@ -879,7 +881,7 @@ able to support it.</p>
         <dt id="PARAM_CONTROLLABLE-constant" class="">PARAM_CONTROLLABLE =
           <div class="docstring">
   <div class="discussion">
-    <p>Use this flag on GObject properties to signal they can make sense to be.
+    <p>Use this flag on GObject properties to signal they can make sense to be.<br />
 controlled over time. This hint is used by the GstController.</p>
 
 
@@ -895,8 +897,8 @@ controlled over time. This hint is used by the GstController.</p>
         <dt id="PARAM_DOC_SHOW_DEFAULT-constant" class="">PARAM_DOC_SHOW_DEFAULT =
           <div class="docstring">
   <div class="discussion">
-    <p>Use this flag on GObject properties of GstObject to indicate that
-during <code>gst-inspect</code> and friends, the default value should be used
+    <p>Use this flag on GObject properties of GstObject to indicate that<br />
+during <code>gst-inspect</code> and friends, the default value should be used<br />
 as default instead of the current value.</p>
 
 
@@ -912,8 +914,8 @@ as default instead of the current value.</p>
         <dt id="PARAM_MUTABLE_PAUSED-constant" class="">PARAM_MUTABLE_PAUSED =
           <div class="docstring">
   <div class="discussion">
-    <p>Use this flag on GObject properties of GstElements to indicate that
-they can be changed when the element is in the PAUSED or lower state.
+    <p>Use this flag on GObject properties of GstElements to indicate that<br />
+they can be changed when the element is in the PAUSED or lower state.<br />
 This flag implies GST_PARAM_MUTABLE_READY.</p>
 
 
@@ -929,8 +931,8 @@ This flag implies GST_PARAM_MUTABLE_READY.</p>
         <dt id="PARAM_MUTABLE_PLAYING-constant" class="">PARAM_MUTABLE_PLAYING =
           <div class="docstring">
   <div class="discussion">
-    <p>Use this flag on GObject properties of GstElements to indicate that
-they can be changed when the element is in the PLAYING or lower state.
+    <p>Use this flag on GObject properties of GstElements to indicate that<br />
+they can be changed when the element is in the PLAYING or lower state.<br />
 This flag implies GST_PARAM_MUTABLE_PAUSED.</p>
 
 
@@ -946,7 +948,7 @@ This flag implies GST_PARAM_MUTABLE_PAUSED.</p>
         <dt id="PARAM_MUTABLE_READY-constant" class="">PARAM_MUTABLE_READY =
           <div class="docstring">
   <div class="discussion">
-    <p>Use this flag on GObject properties of GstElements to indicate that
+    <p>Use this flag on GObject properties of GstElements to indicate that<br />
 they can be changed when the element is in the READY or lower state.</p>
 
 
@@ -977,7 +979,7 @@ they can be changed when the element is in the READY or lower state.</p>
         <dt id="PROTECTION_SYSTEM_ID_CAPS_FIELD-constant" class="">PROTECTION_SYSTEM_ID_CAPS_FIELD =
           <div class="docstring">
   <div class="discussion">
-    <p>The field name in a GstCaps that is used to signal the UUID of the protection
+    <p>The field name in a GstCaps that is used to signal the UUID of the protection<br />
 system.</p>
 
 
@@ -993,14 +995,14 @@ system.</p>
         <dt id="PROTECTION_UNSPECIFIED_SYSTEM_ID-constant" class="">PROTECTION_UNSPECIFIED_SYSTEM_ID =
           <div class="docstring">
   <div class="discussion">
-    <p>The protection system value of the unspecified UUID.
-In some cases the system protection ID is not present in the contents or in their
-metadata, as encrypted WebM.
-This define is used to set the value of the &quot;system_id&quot; field in GstProtectionEvent,
-with this value, the application will use an external information to choose which
+    <p>The protection system value of the unspecified UUID.<br />
+In some cases the system protection ID is not present in the contents or in their<br />
+metadata, as encrypted WebM.<br />
+This define is used to set the value of the &quot;system_id&quot; field in GstProtectionEvent,<br />
+with this value, the application will use an external information to choose which<br />
 protection system to use.</p>
-<p>Example: The matroskademux uses this value in the case of encrypted WebM,
-the application will choose the appropriate protection system based on the information
+<p>Example: The matroskademux uses this value in the case of encrypted WebM,<br />
+the application will choose the appropriate protection system based on the information<br />
 received through EME API.</p>
 
 
@@ -1016,13 +1018,13 @@ received through EME API.</p>
         <dt id="PTR_FORMAT-constant" class="">PTR_FORMAT =
           <div class="docstring">
   <div class="discussion">
-    <p>printf format type used to debug GStreamer types. You can use this in
-combination with GStreamer's debug logging system as well as the functions
-gst_info_vasprintf(), gst_info_strdup_vprintf() and gst_info_strdup_printf()
-to pretty-print the following types: Gst::Caps, #GstStructure,
-Gst::CapsFeatures, #GstTagList, #GstDateTime, #GstBuffer, #GstBufferList,
-Gst::Message, #GstEvent, #GstQuery, #GstContext, #GstPad, #GstObject. All
-#GObject types will be printed as typename plus pointer, and everything
+    <p>printf format type used to debug GStreamer types. You can use this in<br />
+combination with GStreamer's debug logging system as well as the functions<br />
+gst_info_vasprintf(), gst_info_strdup_vprintf() and gst_info_strdup_printf()<br />
+to pretty-print the following types: Gst::Caps, #GstStructure,<br />
+Gst::CapsFeatures, #GstTagList, #GstDateTime, #GstBuffer, #GstBufferList,<br />
+Gst::Message, #GstEvent, #GstQuery, #GstContext, #GstPad, #GstObject. All<br />
+#GObject types will be printed as typename plus pointer, and everything<br />
 else will simply be printed as pointer address.</p>
 <p>This can only be used on types whose size is &gt;= sizeof(gpointer).</p>
 
@@ -1074,10 +1076,10 @@ else will simply be printed as pointer address.</p>
         <dt id="SEGMENT_FORMAT-constant" class="">SEGMENT_FORMAT =
           <div class="docstring">
   <div class="discussion">
-    <p>printf format type used to debug GStreamer segments. You can use this in
-combination with GStreamer's debug logging system as well as the functions
-gst_info_vasprintf(), gst_info_strdup_vprintf() and gst_info_strdup_printf()
-to pretty-print Gst::Segment structures.
+    <p>printf format type used to debug GStreamer segments. You can use this in<br />
+combination with GStreamer's debug logging system as well as the functions<br />
+gst_info_vasprintf(), gst_info_strdup_vprintf() and gst_info_strdup_printf()<br />
+to pretty-print Gst::Segment structures.<br />
 This can only be used on pointers to GstSegment structures.</p>
 
 
@@ -1098,7 +1100,7 @@ This can only be used on pointers to GstSegment structures.</p>
         <dt id="SEQNUM_INVALID-constant" class="">SEQNUM_INVALID =
           <div class="docstring">
   <div class="discussion">
-    <p>A value which is guaranteed to never be returned by
+    <p>A value which is guaranteed to never be returned by<br />
 gst_util_seqnum_next().</p>
 <p>Can be used as a default value in variables used to store seqnum.</p>
 
@@ -1115,10 +1117,10 @@ gst_util_seqnum_next().</p>
         <dt id="STIMEP_FORMAT-constant" class="">STIMEP_FORMAT =
           <div class="docstring">
   <div class="discussion">
-    <p>printf format type used to debug GStreamer signed time value pointers. You
-can use this in combination with GStreamer's debug logging system as well as
-the functions gst_info_vasprintf(), gst_info_strdup_vprintf() and
-gst_info_strdup_printf() to pretty-print signed time (pointers to
+    <p>printf format type used to debug GStreamer signed time value pointers. You<br />
+can use this in combination with GStreamer's debug logging system as well as<br />
+the functions gst_info_vasprintf(), gst_info_strdup_vprintf() and<br />
+gst_info_strdup_printf() to pretty-print signed time (pointers to<br />
 Gst::ClockTimeDiff or #gint64).</p>
 
 
@@ -1134,8 +1136,8 @@ Gst::ClockTimeDiff or #gint64).</p>
         <dt id="STIME_FORMAT-constant" class="">STIME_FORMAT =
           <div class="docstring">
   <div class="discussion">
-    <p>A string that can be used in printf-like format strings to display a signed
-Gst::ClockTimeDiff or #gint64 value in <code>h:m:s</code> format.  Use GST_TIME_ARGS() to
+    <p>A string that can be used in printf-like format strings to display a signed<br />
+Gst::ClockTimeDiff or #gint64 value in <code>h:m:s</code> format.  Use GST_TIME_ARGS() to<br />
 construct the matching arguments.</p>
 <p>Example:</p>
 <pre class="code C"><code class="C">printf(&quot;%&quot; GST_STIME_FORMAT &quot;\n&quot;, GST_STIME_ARGS(ts));
@@ -1277,7 +1279,7 @@ construct the matching arguments.</p>
           <div class="docstring">
   <div class="discussion">
     <p>Arbitrary application data (sample)</p>
-<p>Some formats allow applications to add their own arbitrary data
+<p>Some formats allow applications to add their own arbitrary data<br />
 into files. This data is application dependent.</p>
 
 
@@ -1309,7 +1311,7 @@ into files. This data is application dependent.</p>
           <div class="docstring">
   <div class="discussion">
     <p>person(s) responsible for the recording (string)</p>
-<p>The artist name as it should be displayed, e.g. 'Jimi Hendrix' or
+<p>The artist name as it should be displayed, e.g. 'Jimi Hendrix' or<br />
 'The Guitar Heroes'</p>
 
 
@@ -1326,7 +1328,7 @@ into files. This data is application dependent.</p>
           <div class="docstring">
   <div class="discussion">
     <p>person(s) responsible for the recording, as used for sorting (string)</p>
-<p>The artist name as it should be sorted, e.g. 'Hendrix, Jimi' or
+<p>The artist name as it should be sorted, e.g. 'Hendrix, Jimi' or<br />
 'Guitar Heroes, The'</p>
 
 
@@ -1342,8 +1344,8 @@ into files. This data is application dependent.</p>
         <dt id="TAG_ATTACHMENT-constant" class="">TAG_ATTACHMENT =
           <div class="docstring">
   <div class="discussion">
-    <p>generic file attachment (sample) (sample taglist should specify the content
-type and if possible set &quot;filename&quot; to the file name of the
+    <p>generic file attachment (sample) (sample taglist should specify the content<br />
+type and if possible set &quot;filename&quot; to the file name of the<br />
 attachment)</p>
 
 
@@ -1509,9 +1511,9 @@ attachment)</p>
         <dt id="TAG_CONTAINER_SPECIFIC_TRACK_ID-constant" class="">TAG_CONTAINER_SPECIFIC_TRACK_ID =
           <div class="docstring">
   <div class="discussion">
-    <p>Unique identifier for the audio, video or text track this tag is associated
-with. The mappings for several container formats are defined in the <a href="https://dev.w3.org/html5/html-sourcing-inband-tracks/">Sourcing
-In-band Media Resource Tracks from Media Containers into HTML
+    <p>Unique identifier for the audio, video or text track this tag is associated<br />
+with. The mappings for several container formats are defined in the <a href="https://dev.w3.org/html5/html-sourcing-inband-tracks/">Sourcing<br />
+In-band Media Resource Tracks from Media Containers into HTML<br />
 specification</a>.</p>
 
 
@@ -1647,10 +1649,10 @@ specification</a>.</p>
         <dt id="TAG_ENCODED_BY-constant" class="">TAG_ENCODED_BY =
           <div class="docstring">
   <div class="discussion">
-    <p>name of the person or organisation that encoded the file. May contain a
-copyright message if the person or organisation also holds the copyright
+    <p>name of the person or organisation that encoded the file. May contain a<br />
+copyright message if the person or organisation also holds the copyright<br />
 (string)</p>
-<p>Note: do not use this field to describe the encoding application. Use
+<p>Note: do not use this field to describe the encoding application. Use<br />
 #GST_TAG_APPLICATION_NAME or #GST_TAG_COMMENT for that.</p>
 
 
@@ -1697,10 +1699,10 @@ copyright message if the person or organisation also holds the copyright
           <div class="docstring">
   <div class="discussion">
     <p>key/value text commenting the data (string)</p>
-<p>Must be in the form of 'key=comment' or
-'key[lc]=comment' where 'lc' is an ISO-639
+<p>Must be in the form of 'key=comment' or<br />
+'key[lc]=comment' where 'lc' is an ISO-639<br />
 language code.</p>
-<p>This tag is used for unknown Vorbis comment tags,
+<p>This tag is used for unknown Vorbis comment tags,<br />
 unknown APE tags and certain ID3v2 comment fields.</p>
 
 
@@ -1731,8 +1733,8 @@ unknown APE tags and certain ID3v2 comment fields.</p>
         <dt id="TAG_GEO_LOCATION_CAPTURE_DIRECTION-constant" class="">TAG_GEO_LOCATION_CAPTURE_DIRECTION =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates the direction the device is pointing to when capturing
-a media. It is represented as degrees in floating point representation,
+    <p>Indicates the direction the device is pointing to when capturing<br />
+a media. It is represented as degrees in floating point representation,<br />
 0 means the geographic north, and increases clockwise (double from 0 to 360)</p>
 <p>See also #GST_TAG_GEO_LOCATION_MOVEMENT_DIRECTION</p>
 
@@ -1779,7 +1781,7 @@ a media. It is represented as degrees in floating point representation,
         <dt id="TAG_GEO_LOCATION_ELEVATION-constant" class="">TAG_GEO_LOCATION_ELEVATION =
           <div class="docstring">
   <div class="discussion">
-    <p>geo elevation of where the media has been recorded or produced in meters
+    <p>geo elevation of where the media has been recorded or produced in meters<br />
 according to WGS84 (zero is average sea level) (double).</p>
 
 
@@ -1795,7 +1797,7 @@ according to WGS84 (zero is average sea level) (double).</p>
         <dt id="TAG_GEO_LOCATION_HORIZONTAL_ERROR-constant" class="">TAG_GEO_LOCATION_HORIZONTAL_ERROR =
           <div class="docstring">
   <div class="discussion">
-    <p>Represents the expected error on the horizontal positioning in
+    <p>Represents the expected error on the horizontal positioning in<br />
 meters (double).</p>
 
 
@@ -1811,8 +1813,8 @@ meters (double).</p>
         <dt id="TAG_GEO_LOCATION_LATITUDE-constant" class="">TAG_GEO_LOCATION_LATITUDE =
           <div class="docstring">
   <div class="discussion">
-    <p>geo latitude location of where the media has been recorded or produced in
-degrees according to WGS84 (zero at the equator, negative values for southern
+    <p>geo latitude location of where the media has been recorded or produced in<br />
+degrees according to WGS84 (zero at the equator, negative values for southern<br />
 latitudes) (double).</p>
 
 
@@ -1828,8 +1830,8 @@ latitudes) (double).</p>
         <dt id="TAG_GEO_LOCATION_LONGITUDE-constant" class="">TAG_GEO_LOCATION_LONGITUDE =
           <div class="docstring">
   <div class="discussion">
-    <p>geo longitude location of where the media has been recorded or produced in
-degrees according to WGS84 (zero at the prime meridian in Greenwich/UK,
+    <p>geo longitude location of where the media has been recorded or produced in<br />
+degrees according to WGS84 (zero at the prime meridian in Greenwich/UK,<br />
 negative values for western longitudes). (double).</p>
 
 
@@ -1845,8 +1847,8 @@ negative values for western longitudes). (double).</p>
         <dt id="TAG_GEO_LOCATION_MOVEMENT_DIRECTION-constant" class="">TAG_GEO_LOCATION_MOVEMENT_DIRECTION =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates the movement direction of the device performing the capture
-of a media. It is represented as degrees in floating point representation,
+    <p>Indicates the movement direction of the device performing the capture<br />
+of a media. It is represented as degrees in floating point representation,<br />
 0 means the geographic north, and increases clockwise (double from 0 to 360)</p>
 <p>See also #GST_TAG_GEO_LOCATION_CAPTURE_DIRECTION</p>
 
@@ -1863,7 +1865,7 @@ of a media. It is represented as degrees in floating point representation,
         <dt id="TAG_GEO_LOCATION_MOVEMENT_SPEED-constant" class="">TAG_GEO_LOCATION_MOVEMENT_SPEED =
           <div class="docstring">
   <div class="discussion">
-    <p>Speed of the capturing device when performing the capture.
+    <p>Speed of the capturing device when performing the capture.<br />
 Represented in m/s. (double)</p>
 <p>See also #GST_TAG_GEO_LOCATION_MOVEMENT_DIRECTION</p>
 
@@ -1880,7 +1882,7 @@ Represented in m/s. (double)</p>
         <dt id="TAG_GEO_LOCATION_NAME-constant" class="">TAG_GEO_LOCATION_NAME =
           <div class="docstring">
   <div class="discussion">
-    <p>human readable descriptive location of where the media has been recorded or
+    <p>human readable descriptive location of where the media has been recorded or<br />
 produced. (string).</p>
 
 
@@ -1896,9 +1898,9 @@ produced. (string).</p>
         <dt id="TAG_GEO_LOCATION_SUBLOCATION-constant" class="">TAG_GEO_LOCATION_SUBLOCATION =
           <div class="docstring">
   <div class="discussion">
-    <p>A location 'smaller' than GST_TAG_GEO_LOCATION_CITY that specifies better
+    <p>A location 'smaller' than GST_TAG_GEO_LOCATION_CITY that specifies better<br />
 where the media has been produced. (e.g. the neighborhood) (string).</p>
-<p>This tag has been added as this is how it is handled/named in XMP's
+<p>This tag has been added as this is how it is handled/named in XMP's<br />
 Iptc4xmpcore schema.</p>
 
 
@@ -1914,7 +1916,7 @@ Iptc4xmpcore schema.</p>
         <dt id="TAG_GROUPING-constant" class="">TAG_GROUPING =
           <div class="docstring">
   <div class="discussion">
-    <p>Groups together media that are related and spans multiple tracks. An
+    <p>Groups together media that are related and spans multiple tracks. An<br />
 example are multiple pieces of a concerto. (string)</p>
 
 
@@ -1945,7 +1947,7 @@ example are multiple pieces of a concerto. (string)</p>
         <dt id="TAG_IMAGE-constant" class="">TAG_IMAGE =
           <div class="docstring">
   <div class="discussion">
-    <p>image (sample) (sample taglist should specify the content type and preferably
+    <p>image (sample) (sample taglist should specify the content type and preferably<br />
 also set &quot;image-type&quot; field as <code>GstTagImageType</code>)</p>
 
 
@@ -1961,21 +1963,21 @@ also set &quot;image-type&quot; field as <code>GstTagImageType</code>)</p>
         <dt id="TAG_IMAGE_ORIENTATION-constant" class="">TAG_IMAGE_ORIENTATION =
           <div class="docstring">
   <div class="discussion">
-    <p>Represents the 'Orientation' tag from EXIF. Defines how the image
+    <p>Represents the 'Orientation' tag from EXIF. Defines how the image<br />
 should be rotated and mirrored for display. (string)</p>
-<p>This tag has a predefined set of allowed values:
-&quot;rotate-0&quot;
-&quot;rotate-90&quot;
-&quot;rotate-180&quot;
-&quot;rotate-270&quot;
-&quot;flip-rotate-0&quot;
-&quot;flip-rotate-90&quot;
-&quot;flip-rotate-180&quot;
+<p>This tag has a predefined set of allowed values:<br />
+&quot;rotate-0&quot;<br />
+&quot;rotate-90&quot;<br />
+&quot;rotate-180&quot;<br />
+&quot;rotate-270&quot;<br />
+&quot;flip-rotate-0&quot;<br />
+&quot;flip-rotate-90&quot;<br />
+&quot;flip-rotate-180&quot;<br />
 &quot;flip-rotate-270&quot;</p>
-<p>The naming is adopted according to a possible transformation to perform
-on the image to fix its orientation, obviously equivalent operations will
+<p>The naming is adopted according to a possible transformation to perform<br />
+on the image to fix its orientation, obviously equivalent operations will<br />
 yield the same result.</p>
-<p>Rotations indicated by the values are in clockwise direction and
+<p>Rotations indicated by the values are in clockwise direction and<br />
 'flip' means an horizontal mirroring.</p>
 
 
@@ -1991,7 +1993,7 @@ yield the same result.</p>
         <dt id="TAG_INTERPRETED_BY-constant" class="">TAG_INTERPRETED_BY =
           <div class="docstring">
   <div class="discussion">
-    <p>Information about the people behind a remix and similar
+    <p>Information about the people behind a remix and similar<br />
 interpretations of another existing piece (string)</p>
 
 
@@ -2038,7 +2040,7 @@ interpretations of another existing piece (string)</p>
           <div class="docstring">
   <div class="discussion">
     <p>ISO-639-2 or ISO-639-1 code for the language the content is in (string)</p>
-<p>There is utility API in libgsttag in gst-plugins-base to obtain a translated
+<p>There is utility API in libgsttag in gst-plugins-base to obtain a translated<br />
 language name from the language code: <code>gst_tag_get_language_name()</code></p>
 
 
@@ -2055,8 +2057,8 @@ language name from the language code: <code>gst_tag_get_language_name()</code></
           <div class="docstring">
   <div class="discussion">
     <p>Name of the language the content is in (string)</p>
-<p>Free-form name of the language the content is in, if a language code
-is not available. This tag should not be set in addition to a language
+<p>Free-form name of the language the content is in, if a language code<br />
+is not available. This tag should not be set in addition to a language<br />
 code. It is undefined what language or locale the language name is in.</p>
 
 
@@ -2102,7 +2104,7 @@ code. It is undefined what language or locale the language name is in.</p>
         <dt id="TAG_LOCATION-constant" class="">TAG_LOCATION =
           <div class="docstring">
   <div class="discussion">
-    <p>Origin of media as a URI (location, where the original of the file or stream
+    <p>Origin of media as a URI (location, where the original of the file or stream<br />
 is hosted) (string)</p>
 
 
@@ -2148,8 +2150,8 @@ is hosted) (string)</p>
         <dt id="TAG_MIDI_BASE_NOTE-constant" class="">TAG_MIDI_BASE_NOTE =
           <div class="docstring">
   <div class="discussion">
-    <p><a href="http://en.wikipedia.org/wiki/Note#Note_designation_in_accordance_with_octave_name">Midi note number</a>
-of the audio track. This is useful for sample instruments and in particular
+    <p><a href="http://en.wikipedia.org/wiki/Note#Note_designation_in_accordance_with_octave_name">Midi note number</a><br />
+of the audio track. This is useful for sample instruments and in particular<br />
 for multi-samples.</p>
 
 
@@ -2180,7 +2182,7 @@ for multi-samples.</p>
         <dt id="TAG_NOMINAL_BITRATE-constant" class="">TAG_NOMINAL_BITRATE =
           <div class="docstring">
   <div class="discussion">
-    <p>nominal bitrate in bits/s (unsigned integer). The actual bitrate might be
+    <p>nominal bitrate in bits/s (unsigned integer). The actual bitrate might be<br />
 different from this target bitrate.</p>
 
 
@@ -2226,7 +2228,7 @@ different from this target bitrate.</p>
         <dt id="TAG_PREVIEW_IMAGE-constant" class="">TAG_PREVIEW_IMAGE =
           <div class="docstring">
   <div class="discussion">
-    <p>image that is meant for preview purposes, e.g. small icon-sized version
+    <p>image that is meant for preview purposes, e.g. small icon-sized version<br />
 (sample) (sample taglist should specify the content type)</p>
 
 
@@ -2243,12 +2245,12 @@ different from this target bitrate.</p>
           <div class="docstring">
   <div class="discussion">
     <p>Any private data that may be contained in tags (sample).</p>
-<p>It is represented by Gst::Sample in which #GstBuffer contains the
-binary data and the sample's info Gst::Structure may contain any
+<p>It is represented by Gst::Sample in which #GstBuffer contains the<br />
+binary data and the sample's info Gst::Structure may contain any<br />
 extra information that identifies the origin or meaning of the data.</p>
-<p>Private frames in ID3v2 tags ('PRIV' frames) will be represented
-using this tag, in which case the GstStructure will be named
-&quot;ID3PrivateFrame&quot; and contain a field named &quot;owner&quot; of type string
+<p>Private frames in ID3v2 tags ('PRIV' frames) will be represented<br />
+using this tag, in which case the GstStructure will be named<br />
+&quot;ID3PrivateFrame&quot; and contain a field named &quot;owner&quot; of type string<br />
 which contains the owner-identification string from the tag.</p>
 
 
@@ -2476,8 +2478,8 @@ which contains the owner-identification string from the tag.</p>
         <dt id="TAG_USER_RATING-constant" class="">TAG_USER_RATING =
           <div class="docstring">
   <div class="discussion">
-    <p>Rating attributed by a person (likely the application user).
-The higher the value, the more the user likes this media
+    <p>Rating attributed by a person (likely the application user).<br />
+The higher the value, the more the user likes this media<br />
 (unsigned int from 0 to 100)</p>
 
 
@@ -2523,10 +2525,10 @@ The higher the value, the more the user likes this media
         <dt id="TIMEP_FORMAT-constant" class="">TIMEP_FORMAT =
           <div class="docstring">
   <div class="discussion">
-    <p>printf format type used to debug GStreamer ClockTime pointers. You can use
-this in combination with GStreamer's debug logging system as well as the
-functions gst_info_vasprintf(), gst_info_strdup_vprintf() and
-gst_info_strdup_printf() to pretty-print Gst::ClockTime pointers. This can
+    <p>printf format type used to debug GStreamer ClockTime pointers. You can use<br />
+this in combination with GStreamer's debug logging system as well as the<br />
+functions gst_info_vasprintf(), gst_info_strdup_vprintf() and<br />
+gst_info_strdup_printf() to pretty-print Gst::ClockTime pointers. This can<br />
 only be used on pointers to GstClockTime values.</p>
 
 
@@ -2542,8 +2544,8 @@ only be used on pointers to GstClockTime values.</p>
         <dt id="TIME_FORMAT-constant" class="">TIME_FORMAT =
           <div class="docstring">
   <div class="discussion">
-    <p>A string that can be used in printf-like format strings to display a
-Gst::ClockTime value in <code>h:m:s</code> format.  Use GST_TIME_ARGS() to construct
+    <p>A string that can be used in printf-like format strings to display a<br />
+Gst::ClockTime value in <code>h:m:s</code> format.  Use GST_TIME_ARGS() to construct<br />
 the matching arguments.</p>
 <p>Example:</p>
 <pre class="code C"><code class="C">printf(&quot;%&quot; GST_TIME_FORMAT &quot;\n&quot;, GST_TIME_ARGS(ts));
@@ -2562,7 +2564,7 @@ the matching arguments.</p>
         <dt id="TOC_REPEAT_COUNT_INFINITE-constant" class="">TOC_REPEAT_COUNT_INFINITE =
           <div class="docstring">
   <div class="discussion">
-    <p>Special value for the repeat_count set in gst_toc_entry_set_loop() or
+    <p>Special value for the repeat_count set in gst_toc_entry_set_loop() or<br />
 returned by gst_toc_entry_set_loop() to indicate infinite looping.</p>
 
 
@@ -2608,7 +2610,7 @@ returned by gst_toc_entry_set_loop() to indicate infinite looping.</p>
         <dt id="VALUE_EQUAL-constant" class="">VALUE_EQUAL =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that the first value provided to a comparison function
+    <p>Indicates that the first value provided to a comparison function<br />
 (gst_value_compare()) is equal to the second one.</p>
 
 
@@ -2624,7 +2626,7 @@ returned by gst_toc_entry_set_loop() to indicate infinite looping.</p>
         <dt id="VALUE_GREATER_THAN-constant" class="">VALUE_GREATER_THAN =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that the first value provided to a comparison function
+    <p>Indicates that the first value provided to a comparison function<br />
 (gst_value_compare()) is greater than the second one.</p>
 
 
@@ -2640,7 +2642,7 @@ returned by gst_toc_entry_set_loop() to indicate infinite looping.</p>
         <dt id="VALUE_LESS_THAN-constant" class="">VALUE_LESS_THAN =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that the first value provided to a comparison function
+    <p>Indicates that the first value provided to a comparison function<br />
 (gst_value_compare()) is lesser than the second one.</p>
 
 
@@ -2656,7 +2658,7 @@ returned by gst_toc_entry_set_loop() to indicate infinite looping.</p>
         <dt id="VALUE_UNORDERED-constant" class="">VALUE_UNORDERED =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that the comparison function (gst_value_compare()) can not
+    <p>Indicates that the comparison function (gst_value_compare()) can not<br />
 determine a order for the two provided values.</p>
 
 
@@ -2717,7 +2719,7 @@ determine a order for the two provided values.</p>
         <dt id="VERSION_NANO-constant" class="">VERSION_NANO =
           <div class="docstring">
   <div class="discussion">
-    <p>The nano version of GStreamer at compile time:
+    <p>The nano version of GStreamer at compile time:<br />
 Actual releases have 0, GIT versions have 1, prerelease versions have 2-...</p>
 
 
@@ -2819,6 +2821,7 @@ Actual releases have 0, GIT versions have 1, prerelease versions have 2-...</p>
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -8198,6 +8201,7 @@ Actual releases have 0, GIT versions have 1, prerelease versions have 2-...</p>
 
       
     </ul>
+    
   
 
 
@@ -8351,9 +8355,9 @@ Actual releases have 0, GIT versions have 1, prerelease versions have 2-...</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the maximum amount of memory blocks that a buffer can hold. This is a
+    <p>Gets the maximum amount of memory blocks that a buffer can hold. This is a<br />
 compile time constant that can be queried with the function.</p>
-<p>When more memory blocks are added, existing memory blocks will be merged
+<p>When more memory blocks are added, existing memory blocks will be merged<br />
 together to make room for the new block.</p>
 
 
@@ -8393,19 +8397,19 @@ together to make room for the new block.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calculates the linear regression of the values <!-- raw HTML omitted -->xy<!-- raw HTML omitted --> and places the
-result in <!-- raw HTML omitted -->m_num<!-- raw HTML omitted -->, <!-- raw HTML omitted -->m_denom<!-- raw HTML omitted -->, <!-- raw HTML omitted -->b<!-- raw HTML omitted --> and <!-- raw HTML omitted -->xbase<!-- raw HTML omitted -->, representing the function
-y(x) = m_num/m_denom * (x - xbase) + b
+    <p>Calculates the linear regression of the values <!-- raw HTML omitted -->xy<!-- raw HTML omitted --> and places the<br />
+result in <!-- raw HTML omitted -->m_num<!-- raw HTML omitted -->, <!-- raw HTML omitted -->m_denom<!-- raw HTML omitted -->, <!-- raw HTML omitted -->b<!-- raw HTML omitted --> and <!-- raw HTML omitted -->xbase<!-- raw HTML omitted -->, representing the function<br />
+y(x) = m_num/m_denom * (x - xbase) + b<br />
 that has the least-square distance from all points <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted -->.</p>
 <p><!-- raw HTML omitted -->r_squared<!-- raw HTML omitted --> will contain the remaining error.</p>
-<p>If <!-- raw HTML omitted -->temp<!-- raw HTML omitted --> is not nil, it will be used as temporary space for the function,
-in which case the function works without any allocation at all. If <!-- raw HTML omitted -->temp<!-- raw HTML omitted --> is
-nil, an allocation will take place. <!-- raw HTML omitted -->temp<!-- raw HTML omitted --> should have at least the same
+<p>If <!-- raw HTML omitted -->temp<!-- raw HTML omitted --> is not nil, it will be used as temporary space for the function,<br />
+in which case the function works without any allocation at all. If <!-- raw HTML omitted -->temp<!-- raw HTML omitted --> is<br />
+nil, an allocation will take place. <!-- raw HTML omitted -->temp<!-- raw HTML omitted --> should have at least the same<br />
 amount of memory allocated as <!-- raw HTML omitted -->xy<!-- raw HTML omitted -->, i.e. 2<em>n</em>sizeof(GstClockTime).</p>
 <blockquote>
-<p>This function assumes (x,y) values with reasonable large differences
-between them. It will not calculate the exact results if the differences
-between neighbouring values are too small due to not being able to
+<p>This function assumes (x,y) values with reasonable large differences<br />
+between them. It will not calculate the exact results if the differences<br />
+between neighbouring values are too small due to not being able to<br />
 represent sub-integer values during the calculations.</p>
 </blockquote>
 
@@ -8607,7 +8611,7 @@ represent sub-integer values during the calculations.</p>
       
       
         &mdash;
-        <div class='inline'><p>a new Gst::CapsFeatures or
+        <div class='inline'><p>a new Gst::CapsFeatures or<br />
 nil when the string could not be parsed.</p>
 </div>
       
@@ -8630,7 +8634,7 @@ nil when the string could not be parsed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Converts <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> from a string representation.</p>
-<p>The implementation of serialization up to 1.20 would lead to unexpected results
+<p>The implementation of serialization up to 1.20 would lead to unexpected results<br />
 when there were nested Gst::Caps / #GstStructure deeper than one level.</p>
 
 
@@ -8691,10 +8695,10 @@ when there were nested Gst::Caps / #GstStructure deeper than one level.</p>
   <div class="discussion">
     <p>Clears a reference to a Gst::MiniObject.</p>
 <p><!-- raw HTML omitted -->object_ptr<!-- raw HTML omitted --> must not be nil.</p>
-<p>If the reference is nil then this function does nothing.
-Otherwise, the reference count of the object is decreased using
+<p>If the reference is nil then this function does nothing.<br />
+Otherwise, the reference count of the object is decreased using<br />
 gst_mini_object_unref() and the pointer is set to nil.</p>
-<p>A macro is also included that allows this function to be used without
+<p>A macro is also included that allows this function to be used without<br />
 pointer casts.</p>
 
 
@@ -8751,10 +8755,10 @@ pointer casts.</p>
   <div class="discussion">
     <p>Clears a reference to a Gst::Object.</p>
 <p><!-- raw HTML omitted -->object_ptr<!-- raw HTML omitted --> must not be nil.</p>
-<p>If the reference is nil then this function does nothing.
-Otherwise, the reference count of the object is decreased using
+<p>If the reference is nil then this function does nothing.<br />
+Otherwise, the reference count of the object is decreased using<br />
 gst_object_unref() and the pointer is set to nil.</p>
-<p>A macro is also included that allows this function to be used without
+<p>A macro is also included that allows this function to be used without<br />
 pointer casts.</p>
 
 
@@ -8811,10 +8815,10 @@ pointer casts.</p>
   <div class="discussion">
     <p>Clears a reference to a Gst::Structure.</p>
 <p><!-- raw HTML omitted -->structure_ptr<!-- raw HTML omitted --> must not be nil.</p>
-<p>If the reference is nil then this function does nothing.
-Otherwise, the structure is free'd using gst_structure_free() and the
+<p>If the reference is nil then this function does nothing.<br />
+Otherwise, the structure is free'd using gst_structure_free() and the<br />
 pointer is set to nil.</p>
-<p>A macro is also included that allows this function to be used without
+<p>A macro is also included that allows this function to be used without<br />
 pointer casts.</p>
 
 
@@ -8903,7 +8907,7 @@ pointer casts.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds the logging function to the list of logging functions.
+    <p>Adds the logging function to the list of logging functions.<br />
 Be sure to use #G_GNUC_NO_INSTRUMENT on that function, it is needed.</p>
 
 
@@ -8988,11 +8992,11 @@ Be sure to use #G_GNUC_NO_INSTRUMENT on that function, it is needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a memory ringbuffer based debug logger that stores up to
-<!-- raw HTML omitted -->max_size_per_thread<!-- raw HTML omitted --> bytes of logs per thread and times out threads after
+    <p>Adds a memory ringbuffer based debug logger that stores up to<br />
+<!-- raw HTML omitted -->max_size_per_thread<!-- raw HTML omitted --> bytes of logs per thread and times out threads after<br />
 <!-- raw HTML omitted -->thread_timeout<!-- raw HTML omitted --> seconds of inactivity.</p>
-<p>Logs can be fetched with gst_debug_ring_buffer_logger_get_logs() and the
-logger can be removed again with gst_debug_remove_ring_buffer_logger().
+<p>Logs can be fetched with gst_debug_ring_buffer_logger_get_logs() and the<br />
+logger can be removed again with gst_debug_remove_ring_buffer_logger().<br />
 Only one logger at a time is possible.</p>
 
 
@@ -9062,9 +9066,9 @@ Only one logger at a time is possible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>To aid debugging applications one can use this method to obtain the whole
-network of gstreamer elements that form the pipeline into a dot file.
-This data can be processed with graphviz to get an image.
+    <p>To aid debugging applications one can use this method to obtain the whole<br />
+network of gstreamer elements that form the pipeline into a dot file.<br />
+This data can be processed with graphviz to get an image.<br />
 dot format.</p>
 
 
@@ -9138,8 +9142,8 @@ dot format.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>To aid debugging applications one can use this method to write out the whole
-network of gstreamer elements that form the pipeline into a dot file.
+    <p>To aid debugging applications one can use this method to write out the whole<br />
+network of gstreamer elements that form the pipeline into a dot file.<br />
 This file can be processed with graphviz to get an image.</p>
 <pre class="code shell"><code class="shell"> dot -Tpng -oimage.png graph_lowlevel.dot
 </code></pre>
@@ -9226,7 +9230,7 @@ This file can be processed with graphviz to get an image.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This works like gst_debug_bin_to_dot_file(), but adds the current timestamp
+    <p>This works like gst_debug_bin_to_dot_file(), but adds the current timestamp<br />
 to the filename, so that it can be used to take multiple snapshots.</p>
 
 
@@ -9311,8 +9315,8 @@ to the filename, so that it can be used to take multiple snapshots.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Constructs a string that can be used for getting the desired color in color
-terminals.
+    <p>Constructs a string that can be used for getting the desired color in color<br />
+terminals.<br />
 You need to free the string after use.</p>
 
 
@@ -9350,7 +9354,7 @@ You need to free the string after use.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string containing the color
+        <div class='inline'><p>a string containing the color<br />
 definition</p>
 </div>
       
@@ -9372,8 +9376,8 @@ definition</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Constructs an integer that can be used for getting the desired color in
-windows' terminals (cmd.exe). As there is no mean to underline, we simply
+    <p>Constructs an integer that can be used for getting the desired color in<br />
+windows' terminals (cmd.exe). As there is no mean to underline, we simply<br />
 ignore this attribute.</p>
 <p>This function returns 0 on non-windows machines.</p>
 
@@ -9433,8 +9437,8 @@ ignore this attribute.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a snapshot of a all categories that are currently in use . This list
-may change anytime.
+    <p>Returns a snapshot of a all categories that are currently in use . This list<br />
+may change anytime.<br />
 The caller has to free the list after use.</p>
 
 
@@ -9453,7 +9457,7 @@ The caller has to free the list after use.</p>
       
       
         &mdash;
-        <div class='inline'><p>the list of
+        <div class='inline'><p>the list of<br />
 debug categories</p>
 </div>
       
@@ -9553,7 +9557,7 @@ debug categories</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>look like. Pass #GST_STACK_TRACE_SHOW_NONE to retrieve a minimal backtrace.
+    <p>look like. Pass #GST_STACK_TRACE_SHOW_NONE to retrieve a minimal backtrace.<br />
 present, else nil.</p>
 
 
@@ -9842,7 +9846,7 @@ present, else nil.</p>
       
       
         &mdash;
-        <div class='inline'><p>the object this message relates to,
+        <div class='inline'><p>the object this message relates to,<br />
 or nil if none</p>
 </div>
       
@@ -9908,13 +9912,13 @@ or nil if none</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The default logging handler used by GStreamer. Logging functions get called
-whenever a macro like GST_DEBUG or similar is used. By default this function
-is setup to output the message and additional info to stderr (or the log file
-specified via the GST_DEBUG_FILE environment variable) as received via
+    <p>The default logging handler used by GStreamer. Logging functions get called<br />
+whenever a macro like GST_DEBUG or similar is used. By default this function<br />
+is setup to output the message and additional info to stderr (or the log file<br />
+specified via the GST_DEBUG_FILE environment variable) as received via<br />
 <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->.</p>
-<p>You can add other handlers by using gst_debug_add_log_function().
-And you can remove this handler by calling
+<p>You can add other handlers by using gst_debug_add_log_function().<br />
+And you can remove this handler by calling<br />
 gst_debug_remove_log_function(gst_debug_log_default);</p>
 
 
@@ -10009,7 +10013,7 @@ gst_debug_remove_log_function(gst_debug_log_default);</p>
       
       
         &mdash;
-        <div class='inline'><p>the object this message relates to,
+        <div class='inline'><p>the object this message relates to,<br />
 or nil if none</p>
 </div>
       
@@ -10075,10 +10079,10 @@ or nil if none</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the string representation for the specified debug log message
-formatted in the same way as gst_debug_log_default() (the default handler),
-without color. The purpose is to make it easy for custom log output
-handlers to get a log output that is identical to what the default handler
+    <p>Returns the string representation for the specified debug log message<br />
+formatted in the same way as gst_debug_log_default() (the default handler),<br />
+without color. The purpose is to make it easy for custom log output<br />
+handlers to get a log output that is identical to what the default handler<br />
 would write out.</p>
 
 
@@ -10173,7 +10177,7 @@ would write out.</p>
       
       
         &mdash;
-        <div class='inline'><p>the object this message relates to,
+        <div class='inline'><p>the object this message relates to,<br />
 or nil if none</p>
 </div>
       
@@ -10318,7 +10322,7 @@ or nil if none</p>
       
       
         &mdash;
-        <div class='inline'><p>the identifier of the object this message
+        <div class='inline'><p>the identifier of the object this message<br />
 relates to, or nil if none.</p>
 </div>
       
@@ -10478,7 +10482,7 @@ relates to, or nil if none.</p>
       
       
         &mdash;
-        <div class='inline'><p>the identifier of the object this message relates to
+        <div class='inline'><p>the identifier of the object this message relates to<br />
 or nil if none</p>
 </div>
       
@@ -10623,7 +10627,7 @@ or nil if none</p>
       
       
         &mdash;
-        <div class='inline'><p>the identifier of the object this message
+        <div class='inline'><p>the identifier of the object this message<br />
 relates to or nil if none.</p>
 </div>
       
@@ -10783,7 +10787,7 @@ relates to or nil if none.</p>
       
       
         &mdash;
-        <div class='inline'><p>the object this message relates to,
+        <div class='inline'><p>the object this message relates to,<br />
 or nil if none</p>
 </div>
       
@@ -10928,7 +10932,7 @@ or nil if none</p>
       
       
         &mdash;
-        <div class='inline'><p>the object this message relates to,
+        <div class='inline'><p>the object this message relates to,<br />
 or nil if none</p>
 </div>
       
@@ -10994,7 +10998,7 @@ or nil if none</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If libunwind, glibc backtrace or DbgHelp are present
+    <p>If libunwind, glibc backtrace or DbgHelp are present<br />
 a stack trace is printed.</p>
 
 
@@ -11049,7 +11053,7 @@ a stack trace is printed.</p>
       
       
         &mdash;
-        <div class='inline'><p>the log function to remove, or nil to
+        <div class='inline'><p>the log function to remove, or nil to<br />
 remove the default log function</p>
 </div>
       
@@ -11147,7 +11151,7 @@ remove the default log function</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes any previously added ring buffer logger with
+    <p>Removes any previously added ring buffer logger with<br />
 gst_debug_add_ring_buffer_logger().</p>
 
 
@@ -11183,8 +11187,8 @@ gst_debug_add_ring_buffer_logger().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Fetches the current logs per thread from the ring buffer logger. See
-gst_debug_add_ring_buffer_logger() for details.
+    <p>Fetches the current logs per thread from the ring buffer logger. See<br />
+gst_debug_add_ring_buffer_logger() for details.<br />
 strings with the debug output per thread</p>
 
 
@@ -11224,11 +11228,11 @@ strings with the debug output per thread</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If activated, debugging messages are sent to the debugging
-handlers.
+    <p>If activated, debugging messages are sent to the debugging<br />
+handlers.<br />
 It makes sense to deactivate it for speed issues.</p>
 <blockquote>
-<p>This function is not threadsafe. It makes sense to only call it
+<p>This function is not threadsafe. It makes sense to only call it<br />
 during initialization.</p>
 </blockquote>
 
@@ -11340,7 +11344,7 @@ during initialization.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Changes the coloring mode for debug output.</p>
-<p>This function may be called before gst_init().
+<p>This function may be called before gst_init().<br />
 &quot;on&quot;, &quot;auto&quot;, &quot;off&quot;, &quot;disable&quot;, &quot;unix&quot;.</p>
 
 
@@ -11395,8 +11399,8 @@ during initialization.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets or unsets the use of coloured debugging output.
-Same as gst_debug_set_color_mode () with the argument being
+    <p>Sets or unsets the use of coloured debugging output.<br />
+Same as gst_debug_set_color_mode () with the argument being<br />
 being GST_DEBUG_COLOR_MODE_ON or GST_DEBUG_COLOR_MODE_OFF.</p>
 <p>This function may be called before gst_init().</p>
 
@@ -11452,7 +11456,7 @@ being GST_DEBUG_COLOR_MODE_ON or GST_DEBUG_COLOR_MODE_OFF.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the default threshold to the given level and updates all categories to
+    <p>Sets the default threshold to the given level and updates all categories to<br />
 use this threshold.</p>
 <p>This function may be called before gst_init().</p>
 
@@ -11508,7 +11512,7 @@ use this threshold.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets all categories which match the given glob style pattern to the given
+    <p>Sets all categories which match the given glob style pattern to the given<br />
 level.</p>
 
 
@@ -11578,10 +11582,10 @@ level.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the debug logging wanted in the same form as with the GST_DEBUG
-environment variable. You can use wildcards such as <code>*</code>, but note that
-the order matters when you use wild cards, e.g. <code>foosrc:6,*src:3,*:2</code> sets
-everything to log level 2.
+    <p>Sets the debug logging wanted in the same form as with the GST_DEBUG<br />
+environment variable. You can use wildcards such as <code>*</code>, but note that<br />
+the order matters when you use wild cards, e.g. <code>foosrc:6,*src:3,*:2</code> sets<br />
+everything to log level 2.<br />
 false if adding the threshold described by <!-- raw HTML omitted -->list<!-- raw HTML omitted --> to the one already set.</p>
 
 
@@ -11601,7 +11605,7 @@ false if adding the threshold described by <!-- raw HTML omitted -->list<!-- raw
       
       
         &mdash;
-        <div class='inline'><p>comma-separated list of &quot;category:level&quot; pairs to be used
+        <div class='inline'><p>comma-separated list of &quot;category:level&quot; pairs to be used<br />
 as debug logging levels</p>
 </div>
       
@@ -11617,7 +11621,7 @@ as debug logging levels</p>
       
       
         &mdash;
-        <div class='inline'><p>true to clear all previously-set debug levels before setting
+        <div class='inline'><p>true to clear all previously-set debug levels before setting<br />
 new thresholds</p>
 </div>
       
@@ -11708,9 +11712,9 @@ new thresholds</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Clean up any resources created by GStreamer in gst_init().</p>
-<p>It is normally not needed to call this function in a normal application
-as the resources will automatically be freed when the program terminates.
-This function is therefore mostly used by testsuites and other memory
+<p>It is normally not needed to call this function in a normal application<br />
+as the resources will automatically be freed when the program terminates.<br />
+This function is therefore mostly used by testsuites and other memory<br />
 profiling tools.</p>
 <p>After this call GStreamer (including this method) should not be used anymore.</p>
 
@@ -11868,7 +11872,7 @@ profiling tools.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string describing
+        <div class='inline'><p>a newly allocated string describing<br />
 the error message (in UTF-8 encoding)</p>
 </div>
       
@@ -12064,8 +12068,8 @@ the error message (in UTF-8 encoding)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts the Gst::EventType to an unsigned integer that
-represents the ordering of sticky events when re-sending them.
+    <p>Converts the Gst::EventType to an unsigned integer that<br />
+represents the ordering of sticky events when re-sending them.<br />
 A lower value represents a higher-priority event.</p>
 
 
@@ -12124,9 +12128,9 @@ A lower value represents a higher-priority event.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Similar to g_filename_to_uri(), but attempts to handle relative file paths
-as well. Before converting <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> into an URI, it will be prefixed by
-the current working directory if it is a relative path, and then the path
+    <p>Similar to g_filename_to_uri(), but attempts to handle relative file paths<br />
+as well. Before converting <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> into an URI, it will be prefixed by<br />
+the current working directory if it is a relative path, and then the path<br />
 will be canonicalised so that it doesn't contain any './' or '../' segments.</p>
 <p>On Windows <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> should be in UTF-8 encoding.</p>
 
@@ -12165,7 +12169,7 @@ will be canonicalised so that it doesn't contain any './' or '../' segments.</p>
       
       
         &mdash;
-        <div class='inline'><p>newly-allocated URI string, or NULL on error. The caller must
+        <div class='inline'><p>newly-allocated URI string, or NULL on error. The caller must<br />
 free the URI string with g_free() when no longer needed.</p>
 </div>
       
@@ -12245,7 +12249,7 @@ free the URI string with g_free() when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the unique quark for the given GstFlowReturn.
+    <p>Get the unique quark for the given GstFlowReturn.<br />
 invalid return was specified.</p>
 
 
@@ -12304,7 +12308,7 @@ invalid return was specified.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return the format registered with the given nick.
+    <p>Return the format registered with the given nick.<br />
 if the format was not registered.</p>
 
 
@@ -12363,7 +12367,7 @@ if the format was not registered.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get details about the given format.
+    <p>Get details about the given format.<br />
 on failure.</p>
 <p>MT safe.</p>
 
@@ -12423,7 +12427,7 @@ on failure.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get a printable name for the given format. Do not modify or free.
+    <p>Get a printable name for the given format. Do not modify or free.<br />
 or nil if the format is unknown.</p>
 
 
@@ -12482,7 +12486,7 @@ or nil if the format is unknown.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Iterate all the registered formats. The format definition is read
+    <p>Iterate all the registered formats. The format definition is read<br />
 only.</p>
 
 
@@ -12522,8 +12526,8 @@ only.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new GstFormat based on the nick or return an
-already registered format with that nick.
+    <p>Create a new GstFormat based on the nick or return an<br />
+already registered format with that nick.<br />
 with the same nick.</p>
 <p>MT safe.</p>
 
@@ -12598,7 +12602,7 @@ with the same nick.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the unique quark for the given format.
+    <p>Get the unique quark for the given format.<br />
 is unknown.</p>
 
 
@@ -12730,7 +12734,7 @@ is unknown.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Allocates, fills and returns a 0-terminated string from the printf style
+    <p>Allocates, fills and returns a 0-terminated string from the printf style<br />
 <!-- raw HTML omitted -->format<!-- raw HTML omitted --> string and corresponding arguments.</p>
 <p>See gst_info_vasprintf() for when this function is required.</p>
 <p>Free with g_free().</p>
@@ -12806,7 +12810,7 @@ is unknown.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Allocates, fills and returns a null terminated string from the printf style
+    <p>Allocates, fills and returns a null terminated string from the printf style<br />
 <!-- raw HTML omitted -->format<!-- raw HTML omitted --> string and <!-- raw HTML omitted -->args<!-- raw HTML omitted -->.</p>
 <p>See gst_info_vasprintf() for when this function is required.</p>
 <p>Free with g_free().</p>
@@ -12882,11 +12886,11 @@ is unknown.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Allocates and fills a string large enough (including the terminating null
+    <p>Allocates and fills a string large enough (including the terminating null<br />
 byte) to hold the specified printf style <!-- raw HTML omitted -->format<!-- raw HTML omitted --> and <!-- raw HTML omitted -->args<!-- raw HTML omitted -->.</p>
-<p>This function deals with the GStreamer specific printf specifiers
-#GST_PTR_FORMAT and #GST_SEGMENT_FORMAT.  If you do not have these specifiers
-in your <!-- raw HTML omitted -->format<!-- raw HTML omitted --> string, you do not need to use this function and can use
+<p>This function deals with the GStreamer specific printf specifiers<br />
+#GST_PTR_FORMAT and #GST_SEGMENT_FORMAT.  If you do not have these specifiers<br />
+in your <!-- raw HTML omitted -->format<!-- raw HTML omitted --> string, you do not need to use this function and can use<br />
 alternatives such as g_vasprintf().</p>
 <p>Free <!-- raw HTML omitted -->result<!-- raw HTML omitted --> with g_free().</p>
 
@@ -12976,15 +12980,15 @@ alternatives such as g_vasprintf().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Initializes the GStreamer library, setting up internal path lists,
+    <p>Initializes the GStreamer library, setting up internal path lists,<br />
 registering built-in elements, and loading standard plugins.</p>
-<p>Unless the plugin registry is disabled at compile time, the registry will be
-loaded. By default this will also check if the registry cache needs to be
-updated and rescan all plugins if needed. See gst_update_registry() for
+<p>Unless the plugin registry is disabled at compile time, the registry will be<br />
+loaded. By default this will also check if the registry cache needs to be<br />
+updated and rescan all plugins if needed. See gst_update_registry() for<br />
 details and section</p>
 <!-- raw HTML omitted -->
-<p>WARNING: This function will terminate your program if it was unable to
-initialize GStreamer for some reason. If you want your program to fall back,
+<p>WARNING: This function will terminate your program if it was unable to<br />
+initialize GStreamer for some reason. If you want your program to fall back,<br />
 use gst_init_check() instead.</p>
 
 
@@ -13054,10 +13058,10 @@ use gst_init_check() instead.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Initializes the GStreamer library, setting up internal path lists,
+    <p>Initializes the GStreamer library, setting up internal path lists,<br />
 registering built-in elements, and loading standard plugins.</p>
-<p>This function will return false if GStreamer could not be initialized
-for some reason.  If you want your program to fail fatally,
+<p>This function will return false if GStreamer could not be initialized<br />
+for some reason.  If you want your program to fail fatally,<br />
 use gst_init() instead.</p>
 
 
@@ -13131,14 +13135,14 @@ use gst_init() instead.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a GOption::Group with GStreamer's argument specifications. The
-group is set up to use standard GOption callbacks, so when using this
-group in combination with GOption parsing methods, all argument parsing
+    <p>Returns a GOption::Group with GStreamer's argument specifications. The<br />
+group is set up to use standard GOption callbacks, so when using this<br />
+group in combination with GOption parsing methods, all argument parsing<br />
 and initialization is automated.</p>
-<p>This function is useful if you want to integrate GStreamer with other
+<p>This function is useful if you want to integrate GStreamer with other<br />
 libraries that use GOption (see g_option_context_add_group() ).</p>
-<p>If you use this function, you should make sure you initialise the GLib
-threading system as one of the very first things in your program
+<p>If you use this function, you should make sure you initialise the GLib<br />
+threading system as one of the very first things in your program<br />
 (see the example at the beginning of this section).</p>
 
 
@@ -13232,7 +13236,7 @@ threading system as one of the very first things in your program
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Use this function to check if GStreamer has been initialized with gst_init()
+    <p>Use this function to check if GStreamer has been initialized with gst_init()<br />
 or gst_init_check().</p>
 
 
@@ -13306,11 +13310,11 @@ or gst_init_check().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This helper is mostly helpful for plugins that need to
-inspect the folder of the main executable to determine
+    <p>This helper is mostly helpful for plugins that need to<br />
+inspect the folder of the main executable to determine<br />
 their set of features.</p>
-<p>When a plugin is initialized from the gst-plugin-scanner
-external process, the returned path will be the same as from the
+<p>When a plugin is initialized from the gst-plugin-scanner<br />
+external process, the returned path will be the same as from the<br />
 parent process.</p>
 
 
@@ -13329,7 +13333,7 @@ parent process.</p>
       
       
         &mdash;
-        <div class='inline'><p>The path of the executable that
+        <div class='inline'><p>The path of the executable that<br />
 initialized GStreamer, or nil if it could not be determined.</p>
 </div>
       
@@ -13351,7 +13355,7 @@ initialized GStreamer, or nil if it could not be determined.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a Gst::Structure to be used with #gst_element_message_full_with_details.
+    <p>Create a Gst::Structure to be used with #gst_element_message_full_with_details.<br />
 nil terminator required.</p>
 
 
@@ -13668,7 +13672,7 @@ nil terminator required.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Register and return a GType for the <!-- raw HTML omitted -->api<!-- raw HTML omitted --> and associate it with
+    <p>Register and return a GType for the <!-- raw HTML omitted -->api<!-- raw HTML omitted --> and associate it with<br />
 <!-- raw HTML omitted -->tags<!-- raw HTML omitted -->.</p>
 
 
@@ -13742,12 +13746,12 @@ nil terminator required.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Recreate a Gst::Meta from serialized data returned by
+    <p>Recreate a Gst::Meta from serialized data returned by<br />
 gst_meta_serialize() and add it to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>Note that the meta must have been previously registered by calling one of
+<p>Note that the meta must have been previously registered by calling one of<br />
 <code>gst_*_meta_get_info ()</code> functions.</p>
-<p><!-- raw HTML omitted -->consumed<!-- raw HTML omitted --> is set to the number of bytes that can be skipped from <!-- raw HTML omitted -->data<!-- raw HTML omitted --> to
-find the next meta serialization, if any. In case of parsing error that does
+<p><!-- raw HTML omitted -->consumed<!-- raw HTML omitted --> is set to the number of bytes that can be skipped from <!-- raw HTML omitted -->data<!-- raw HTML omitted --> to<br />
+find the next meta serialization, if any. In case of parsing error that does<br />
 not allow to determine that size, <!-- raw HTML omitted -->consumed<!-- raw HTML omitted --> is set to 0.</p>
 
 
@@ -13851,8 +13855,8 @@ not allow to determine that size, <!-- raw HTML omitted -->consumed<!-- raw HTML
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Lookup a previously registered meta info structure by its implementation name
-<!-- raw HTML omitted -->impl<!-- raw HTML omitted -->.
+    <p>Lookup a previously registered meta info structure by its implementation name<br />
+<!-- raw HTML omitted -->impl<!-- raw HTML omitted -->.<br />
 nil when no such metainfo exists.</p>
 
 
@@ -13911,8 +13915,8 @@ nil when no such metainfo exists.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new structure that needs to be filled before being
-registered.  This structure should filled and then registered with
+    <p>Creates a new structure that needs to be filled before being<br />
+registered.  This structure should filled and then registered with<br />
 gst_meta_info_register().</p>
 <p>Example:</p>
 <pre class="code c"><code class="c">const GstMetaInfo *
@@ -14027,8 +14031,8 @@ gst_my_meta_get_info (void)
 </h3><div class="docstring">
   <div class="discussion">
     <p>Register a new Gst::Meta implementation.</p>
-<p>The same <!-- raw HTML omitted -->info<!-- raw HTML omitted --> can be retrieved later with gst_meta_get_info() by using
-<!-- raw HTML omitted -->impl<!-- raw HTML omitted --> as the key.
+<p>The same <!-- raw HTML omitted -->info<!-- raw HTML omitted --> can be retrieved later with gst_meta_get_info() by using<br />
+<!-- raw HTML omitted -->impl<!-- raw HTML omitted --> as the key.<br />
 access metadata.</p>
 
 
@@ -14162,16 +14166,16 @@ access metadata.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Register a new custom Gst::Meta implementation, backed by an opaque
+    <p>Register a new custom Gst::Meta implementation, backed by an opaque<br />
 structure holding a Gst::Structure.</p>
-<p>The registered info can be retrieved later with gst_meta_get_info() by using
+<p>The registered info can be retrieved later with gst_meta_get_info() by using<br />
 <!-- raw HTML omitted -->name<!-- raw HTML omitted --> as the key.</p>
-<p>The backing Gst::Structure can be retrieved with
-gst_custom_meta_get_structure(), its mutability is conditioned by the
+<p>The backing Gst::Structure can be retrieved with<br />
+gst_custom_meta_get_structure(), its mutability is conditioned by the<br />
 writability of the buffer the meta is attached to.</p>
-<p>When <!-- raw HTML omitted -->transform_func<!-- raw HTML omitted --> is nil, the meta and its backing Gst::Structure
-will always be copied when the transform operation is copy, other operations
-are discarded, copy regions are ignored.
+<p>When <!-- raw HTML omitted -->transform_func<!-- raw HTML omitted --> is nil, the meta and its backing Gst::Structure<br />
+will always be copied when the transform operation is copy, other operations<br />
+are discarded, copy regions are ignored.<br />
 access metadata.</p>
 
 
@@ -14290,7 +14294,7 @@ access metadata.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Simplified version of gst_meta_register_custom(), with no tags and no
+    <p>Simplified version of gst_meta_register_custom(), with no tags and no<br />
 transform function.</p>
 
 
@@ -14349,8 +14353,8 @@ transform function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Atomically modifies a pointer to point to a new mini-object.
-The reference count of <!-- raw HTML omitted -->olddata<!-- raw HTML omitted --> is decreased and the reference count of
+    <p>Atomically modifies a pointer to point to a new mini-object.<br />
+The reference count of <!-- raw HTML omitted -->olddata<!-- raw HTML omitted --> is decreased and the reference count of<br />
 <!-- raw HTML omitted -->newdata<!-- raw HTML omitted --> is increased.</p>
 <p>Either <!-- raw HTML omitted -->newdata<!-- raw HTML omitted --> and the value pointed to by <!-- raw HTML omitted -->olddata<!-- raw HTML omitted --> may be nil.</p>
 
@@ -14371,7 +14375,7 @@ The reference count of <!-- raw HTML omitted -->olddata<!-- raw HTML omitted -->
       
       
         &mdash;
-        <div class='inline'><p>pointer to a pointer to a
+        <div class='inline'><p>pointer to a pointer to a<br />
 mini-object to be replaced</p>
 </div>
       
@@ -14426,7 +14430,7 @@ mini-object to be replaced</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Replace the current Gst::MiniObject pointer to by <!-- raw HTML omitted -->olddata<!-- raw HTML omitted --> with nil and
+    <p>Replace the current Gst::MiniObject pointer to by <!-- raw HTML omitted -->olddata<!-- raw HTML omitted --> with nil and<br />
 return the old value.</p>
 
 
@@ -14446,7 +14450,7 @@ return the old value.</p>
       
       
         &mdash;
-        <div class='inline'><p>pointer to a pointer to a mini-object to
+        <div class='inline'><p>pointer to a pointer to a mini-object to<br />
 be stolen</p>
 </div>
       
@@ -14486,9 +14490,9 @@ be stolen</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Modifies a pointer to point to a new mini-object. The modification
-is done atomically. This version is similar to gst_mini_object_replace()
-except that it does not increase the refcount of <!-- raw HTML omitted -->newdata<!-- raw HTML omitted --> and thus
+    <p>Modifies a pointer to point to a new mini-object. The modification<br />
+is done atomically. This version is similar to gst_mini_object_replace()<br />
+except that it does not increase the refcount of <!-- raw HTML omitted -->newdata<!-- raw HTML omitted --> and thus<br />
 takes ownership of <!-- raw HTML omitted -->newdata<!-- raw HTML omitted -->.</p>
 <p>Either <!-- raw HTML omitted -->newdata<!-- raw HTML omitted --> and the value pointed to by <!-- raw HTML omitted -->olddata<!-- raw HTML omitted --> may be nil.</p>
 
@@ -14509,7 +14513,7 @@ takes ownership of <!-- raw HTML omitted -->newdata<!-- raw HTML omitted -->.</p
       
       
         &mdash;
-        <div class='inline'><p>pointer to a pointer to a mini-object to
+        <div class='inline'><p>pointer to a pointer to a mini-object to<br />
 be replaced</p>
 </div>
       
@@ -14622,9 +14626,9 @@ be replaced</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function creates a GstArray GParamSpec for use by objects/elements
-that want to expose properties of GstArray type. This function is
-typically * used in connection with g_object_class_install_property() in a
+    <p>This function creates a GstArray GParamSpec for use by objects/elements<br />
+that want to expose properties of GstArray type. This function is<br />
+typically * used in connection with g_object_class_install_property() in a<br />
 GObjects's instance_init function.</p>
 
 
@@ -14743,9 +14747,9 @@ GObjects's instance_init function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function creates a fraction GParamSpec for use by objects/elements
-that want to expose properties of fraction type. This function is typically
-used in connection with g_object_class_install_property() in a GObjects's
+    <p>This function creates a fraction GParamSpec for use by objects/elements<br />
+that want to expose properties of fraction type. This function is typically<br />
+used in connection with g_object_class_install_property() in a GObjects's<br />
 instance_init function.</p>
 
 
@@ -15012,14 +15016,14 @@ instance_init function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is a convenience wrapper around gst_parse_launch() to create a
-Gst::Bin from a gst-launch-style pipeline description. See
-gst_parse_launch() and the gst-launch man page for details about the
-syntax. Ghost pads on the bin for unlinked source or sink pads
-within the bin can automatically be created (but only a maximum of
-one ghost pad for each direction will be created; if you expect
-multiple unlinked source pads or multiple unlinked sink pads
-and want them all ghosted, you will have to create the ghost pads
+    <p>This is a convenience wrapper around gst_parse_launch() to create a<br />
+Gst::Bin from a gst-launch-style pipeline description. See<br />
+gst_parse_launch() and the gst-launch man page for details about the<br />
+syntax. Ghost pads on the bin for unlinked source or sink pads<br />
+within the bin can automatically be created (but only a maximum of<br />
+one ghost pad for each direction will be created; if you expect<br />
+multiple unlinked source pads or multiple unlinked sink pads<br />
+and want them all ghosted, you will have to create the ghost pads<br />
 yourself).</p>
 
 
@@ -15054,7 +15058,7 @@ yourself).</p>
       
       
         &mdash;
-        <div class='inline'><p>whether to automatically create ghost pads
+        <div class='inline'><p>whether to automatically create ghost pads<br />
 for unlinked source or sink pads within the bin</p>
 </div>
       
@@ -15073,7 +15077,7 @@ for unlinked source or sink pads within the bin</p>
       
       
         &mdash;
-        <div class='inline'><p>a
+        <div class='inline'><p>a<br />
 newly-created bin, or nil if an error occurred.</p>
 </div>
       
@@ -15095,14 +15099,14 @@ newly-created bin, or nil if an error occurred.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is a convenience wrapper around gst_parse_launch() to create a
-Gst::Bin from a gst-launch-style pipeline description. See
-gst_parse_launch() and the gst-launch man page for details about the
-syntax. Ghost pads on the bin for unlinked source or sink pads
-within the bin can automatically be created (but only a maximum of
-one ghost pad for each direction will be created; if you expect
-multiple unlinked source pads or multiple unlinked sink pads
-and want them all ghosted, you will have to create the ghost pads
+    <p>This is a convenience wrapper around gst_parse_launch() to create a<br />
+Gst::Bin from a gst-launch-style pipeline description. See<br />
+gst_parse_launch() and the gst-launch man page for details about the<br />
+syntax. Ghost pads on the bin for unlinked source or sink pads<br />
+within the bin can automatically be created (but only a maximum of<br />
+one ghost pad for each direction will be created; if you expect<br />
+multiple unlinked source pads or multiple unlinked sink pads<br />
+and want them all ghosted, you will have to create the ghost pads<br />
 yourself).</p>
 
 
@@ -15137,7 +15141,7 @@ yourself).</p>
       
       
         &mdash;
-        <div class='inline'><p>whether to automatically create ghost pads
+        <div class='inline'><p>whether to automatically create ghost pads<br />
 for unlinked source or sink pads within the bin</p>
 </div>
       
@@ -15153,7 +15157,7 @@ for unlinked source or sink pads within the bin</p>
       
       
         &mdash;
-        <div class='inline'><p>a parse context allocated with
+        <div class='inline'><p>a parse context allocated with<br />
 gst_parse_context_new(), or nil</p>
 </div>
       
@@ -15187,9 +15191,9 @@ gst_parse_context_new(), or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly-created
-element, which is guaranteed to be a bin unless
-#GST_PARSE_FLAG_NO_SINGLE_ELEMENT_BINS was passed, or nil if an error
+        <div class='inline'><p>a newly-created<br />
+element, which is guaranteed to be a bin unless<br />
+#GST_PARSE_FLAG_NO_SINGLE_ELEMENT_BINS was passed, or nil if an error<br />
 occurred.</p>
 </div>
       
@@ -15250,11 +15254,11 @@ occurred.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new pipeline based on command line syntax.
-Please note that you might get a return value that is not nil even though
-the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set. In this case there was a recoverable parsing error and you
+    <p>Create a new pipeline based on command line syntax.<br />
+Please note that you might get a return value that is not nil even though<br />
+the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set. In this case there was a recoverable parsing error and you<br />
 can try to play the pipeline.</p>
-<p>To create a sub-pipeline (bin) for embedding into an existing pipeline
+<p>To create a sub-pipeline (bin) for embedding into an existing pipeline<br />
 use gst_parse_bin_from_description().</p>
 
 
@@ -15292,9 +15296,9 @@ use gst_parse_bin_from_description().</p>
       
       
         &mdash;
-        <div class='inline'><p>a new element on success, nil on
-failure. If more than one toplevel element is specified by the
-<!-- raw HTML omitted -->pipeline_description<!-- raw HTML omitted -->, all elements are put into a Gst::Pipeline, which
+        <div class='inline'><p>a new element on success, nil on<br />
+failure. If more than one toplevel element is specified by the<br />
+<!-- raw HTML omitted -->pipeline_description<!-- raw HTML omitted -->, all elements are put into a Gst::Pipeline, which<br />
 than is returned.</p>
 </div>
       
@@ -15316,11 +15320,11 @@ than is returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new pipeline based on command line syntax.
-Please note that you might get a return value that is not nil even though
-the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set. In this case there was a recoverable parsing error and you
+    <p>Create a new pipeline based on command line syntax.<br />
+Please note that you might get a return value that is not nil even though<br />
+the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set. In this case there was a recoverable parsing error and you<br />
 can try to play the pipeline.</p>
-<p>To create a sub-pipeline (bin) for embedding into an existing pipeline
+<p>To create a sub-pipeline (bin) for embedding into an existing pipeline<br />
 use gst_parse_bin_from_description_full().</p>
 
 
@@ -15355,7 +15359,7 @@ use gst_parse_bin_from_description_full().</p>
       
       
         &mdash;
-        <div class='inline'><p>a parse context allocated with
+        <div class='inline'><p>a parse context allocated with<br />
 gst_parse_context_new(), or nil</p>
 </div>
       
@@ -15389,10 +15393,10 @@ gst_parse_context_new(), or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>a new element on success, nil on
-failure. If more than one toplevel element is specified by the
-<!-- raw HTML omitted -->pipeline_description<!-- raw HTML omitted -->, all elements are put into a Gst::Pipeline, which
-then is returned (unless the GST_PARSE_FLAG_PLACE_IN_BIN flag is set, in
+        <div class='inline'><p>a new element on success, nil on<br />
+failure. If more than one toplevel element is specified by the<br />
+<!-- raw HTML omitted -->pipeline_description<!-- raw HTML omitted -->, all elements are put into a Gst::Pipeline, which<br />
+then is returned (unless the GST_PARSE_FLAG_PLACE_IN_BIN flag is set, in<br />
 which case they are put in a Gst::Bin instead).</p>
 </div>
       
@@ -15414,9 +15418,9 @@ which case they are put in a Gst::Bin instead).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new element based on command line syntax.
-<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will contain an error message if an erroneous pipeline is specified.
-An error does not mean that the pipeline could not be constructed.
+    <p>Create a new element based on command line syntax.<br />
+<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will contain an error message if an erroneous pipeline is specified.<br />
+An error does not mean that the pipeline could not be constructed.<br />
 on failure.</p>
 
 
@@ -15475,8 +15479,8 @@ on failure.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new element based on command line syntax.
-<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will contain an error message if an erroneous pipeline is specified.
+    <p>Create a new element based on command line syntax.<br />
+<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will contain an error message if an erroneous pipeline is specified.<br />
 An error does not mean that the pipeline could not be constructed.</p>
 
 
@@ -15511,7 +15515,7 @@ An error does not mean that the pipeline could not be constructed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a parse context allocated with
+        <div class='inline'><p>a parse context allocated with<br />
 gst_parse_context_new(), or nil</p>
 </div>
       
@@ -15545,10 +15549,10 @@ gst_parse_context_new(), or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>a new element on success; on
-failure, either nil or a partially-constructed bin or element will be
-returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set (unless you passed
-#GST_PARSE_FLAG_FATAL_ERRORS in <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->, then nil will always be returned
+        <div class='inline'><p>a new element on success; on<br />
+failure, either nil or a partially-constructed bin or element will be<br />
+returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set (unless you passed<br />
+#GST_PARSE_FLAG_FATAL_ERRORS in <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->, then nil will always be returned<br />
 on failure)</p>
 </div>
       
@@ -15609,8 +15613,8 @@ on failure)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new file descriptor set. If <!-- raw HTML omitted -->controllable<!-- raw HTML omitted -->, it
-is possible to restart or flush a call to gst_poll_wait() with
+    <p>Create a new file descriptor set. If <!-- raw HTML omitted -->controllable<!-- raw HTML omitted -->, it<br />
+is possible to restart or flush a call to gst_poll_wait() with<br />
 gst_poll_restart() and gst_poll_set_flushing() respectively.</p>
 <p>Free-function: gst_poll_free</p>
 
@@ -15649,7 +15653,7 @@ gst_poll_restart() and gst_poll_set_flushing() respectively.</p>
       
       
         &mdash;
-        <div class='inline'><p>a new Gst::Poll, or nil in
+        <div class='inline'><p>a new Gst::Poll, or nil in<br />
 case of an error.  Free with gst_poll_free().</p>
 </div>
       
@@ -15671,9 +15675,9 @@ case of an error.  Free with gst_poll_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new poll object that can be used for scheduling cancellable
+    <p>Create a new poll object that can be used for scheduling cancellable<br />
 timeouts.</p>
-<p>A timeout is performed with gst_poll_wait(). Multiple timeouts can be
+<p>A timeout is performed with gst_poll_wait(). Multiple timeouts can be<br />
 performed from different threads.</p>
 <p>Free-function: gst_poll_free</p>
 
@@ -15693,7 +15697,7 @@ performed from different threads.</p>
       
       
         &mdash;
-        <div class='inline'><p>a new Gst::Poll, or nil in
+        <div class='inline'><p>a new Gst::Poll, or nil in<br />
 case of an error.  Free with gst_poll_free().</p>
 </div>
       
@@ -15715,8 +15719,8 @@ case of an error.  Free with gst_poll_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the directory for application specific presets if set by the
-application.
+    <p>Gets the directory for application specific presets if set by the<br />
+application.<br />
 the string</p>
 
 
@@ -15756,8 +15760,8 @@ the string</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets an extra directory as an absolute path that should be considered when
-looking for presets. Any presets in the application dir will shadow the
+    <p>Sets an extra directory as an absolute path that should be considered when<br />
+looking for presets. Any presets in the application dir will shadow the<br />
 system presets.</p>
 
 
@@ -15816,13 +15820,13 @@ system presets.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Outputs a formatted message via the GLib print handler. The default print
+    <p>Outputs a formatted message via the GLib print handler. The default print<br />
 handler simply outputs the message to stdout.</p>
-<p>This function will not append a new-line character at the end, unlike
+<p>This function will not append a new-line character at the end, unlike<br />
 gst_println() which will.</p>
 <p>All strings must be in ASCII or UTF-8 encoding.</p>
-<p>This function differs from g_print() in that it supports all the additional
-printf specifiers that are supported by GStreamer's debug logging system,
+<p>This function differs from g_print() in that it supports all the additional<br />
+printf specifiers that are supported by GStreamer's debug logging system,<br />
 such as #GST_PTR_FORMAT and #GST_SEGMENT_FORMAT.</p>
 <p>This function is primarily for printing debug output.</p>
 
@@ -15893,13 +15897,13 @@ such as #GST_PTR_FORMAT and #GST_SEGMENT_FORMAT.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Outputs a formatted message via the GLib error message handler. The default
+    <p>Outputs a formatted message via the GLib error message handler. The default<br />
 handler simply outputs the message to stderr.</p>
-<p>This function will not append a new-line character at the end, unlike
+<p>This function will not append a new-line character at the end, unlike<br />
 gst_printerrln() which will.</p>
 <p>All strings must be in ASCII or UTF-8 encoding.</p>
-<p>This function differs from g_printerr() in that it supports the additional
-printf specifiers that are supported by GStreamer's debug logging system,
+<p>This function differs from g_printerr() in that it supports the additional<br />
+printf specifiers that are supported by GStreamer's debug logging system,<br />
 such as #GST_PTR_FORMAT and #GST_SEGMENT_FORMAT.</p>
 <p>This function is primarily for printing debug output.</p>
 
@@ -15970,13 +15974,13 @@ such as #GST_PTR_FORMAT and #GST_SEGMENT_FORMAT.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Outputs a formatted message via the GLib error message handler. The default
+    <p>Outputs a formatted message via the GLib error message handler. The default<br />
 handler simply outputs the message to stderr.</p>
-<p>This function will append a new-line character at the end, unlike
+<p>This function will append a new-line character at the end, unlike<br />
 gst_printerr() which will not.</p>
 <p>All strings must be in ASCII or UTF-8 encoding.</p>
-<p>This function differs from g_printerr() in that it supports the additional
-printf specifiers that are supported by GStreamer's debug logging system,
+<p>This function differs from g_printerr() in that it supports the additional<br />
+printf specifiers that are supported by GStreamer's debug logging system,<br />
 such as #GST_PTR_FORMAT and #GST_SEGMENT_FORMAT.</p>
 <p>This function is primarily for printing debug output.</p>
 
@@ -16047,13 +16051,13 @@ such as #GST_PTR_FORMAT and #GST_SEGMENT_FORMAT.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Outputs a formatted message via the GLib print handler. The default print
+    <p>Outputs a formatted message via the GLib print handler. The default print<br />
 handler simply outputs the message to stdout.</p>
-<p>This function will append a new-line character at the end, unlike
+<p>This function will append a new-line character at the end, unlike<br />
 gst_print() which will not.</p>
 <p>All strings must be in ASCII or UTF-8 encoding.</p>
-<p>This function differs from g_print() in that it supports all the additional
-printf specifiers that are supported by GStreamer's debug logging system,
+<p>This function differs from g_print() in that it supports all the additional<br />
+printf specifiers that are supported by GStreamer's debug logging system,<br />
 such as #GST_PTR_FORMAT and #GST_SEGMENT_FORMAT.</p>
 <p>This function is primarily for printing debug output.</p>
 
@@ -16124,12 +16128,12 @@ such as #GST_PTR_FORMAT and #GST_SEGMENT_FORMAT.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Iterates the supplied list of UUIDs and checks the GstRegistry for
-all the decryptors supporting one of the supplied UUIDs.
-A null terminated array of strings that contains the UUID values of each
-protection system that is to be checked.
-A null terminated array containing all
-the <!-- raw HTML omitted -->system_identifiers<!-- raw HTML omitted --> supported by the set of available decryptors, or
+    <p>Iterates the supplied list of UUIDs and checks the GstRegistry for<br />
+all the decryptors supporting one of the supplied UUIDs.<br />
+A null terminated array of strings that contains the UUID values of each<br />
+protection system that is to be checked.<br />
+A null terminated array containing all<br />
+the <!-- raw HTML omitted -->system_identifiers<!-- raw HTML omitted --> supported by the set of available decryptors, or<br />
 nil if no matches were found.</p>
 
 
@@ -16248,13 +16252,13 @@ nil if no matches were found.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Iterates the supplied list of UUIDs and checks the GstRegistry for
-an element that supports one of the supplied UUIDs. If more than one
-element matches, the system ID of the highest ranked element is selected.
-that contains the UUID values of each protection system that is to be
-checked.
-<!-- raw HTML omitted -->system_identifiers<!-- raw HTML omitted --> that indicates the highest ranked element that
-implements the protection system indicated by that system ID, or nil if no
+    <p>Iterates the supplied list of UUIDs and checks the GstRegistry for<br />
+an element that supports one of the supplied UUIDs. If more than one<br />
+element matches, the system ID of the highest ranked element is selected.<br />
+that contains the UUID values of each protection system that is to be<br />
+checked.<br />
+<!-- raw HTML omitted -->system_identifiers<!-- raw HTML omitted --> that indicates the highest ranked element that<br />
+implements the protection system indicated by that system ID, or nil if no<br />
 element has been found.</p>
 
 
@@ -16594,11 +16598,11 @@ element has been found.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Some functions in the GStreamer core might install a custom SIGSEGV handler
-to better catch and report errors to the application. Currently this feature
+    <p>Some functions in the GStreamer core might install a custom SIGSEGV handler<br />
+to better catch and report errors to the application. Currently this feature<br />
 is enabled by default when loading plugins.</p>
-<p>Applications might want to disable this behaviour with the
-gst_segtrap_set_enabled() function. This is typically done if the application
+<p>Applications might want to disable this behaviour with the<br />
+gst_segtrap_set_enabled() function. This is typically done if the application<br />
 wants to install its own handler without GStreamer interfering.</p>
 
 
@@ -16638,7 +16642,7 @@ wants to install its own handler without GStreamer interfering.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Applications might want to disable/enable the SIGSEGV handling of
+    <p>Applications might want to disable/enable the SIGSEGV handling of<br />
 the GStreamer core. See gst_segtrap_is_enabled() for more information.</p>
 
 
@@ -16730,7 +16734,7 @@ the GStreamer core. See gst_segtrap_is_enabled() for more information.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string with the name of the state
+        <div class='inline'><p>a string with the name of the state<br />
 result.</p>
 </div>
       
@@ -16912,11 +16916,11 @@ result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Atomically modifies a pointer to point to a new structure.
-The Gst::Structure <!-- raw HTML omitted -->oldstr_ptr<!-- raw HTML omitted --> is pointing to is freed and
+    <p>Atomically modifies a pointer to point to a new structure.<br />
+The Gst::Structure <!-- raw HTML omitted -->oldstr_ptr<!-- raw HTML omitted --> is pointing to is freed and<br />
 <!-- raw HTML omitted -->newstr<!-- raw HTML omitted --> is taken ownership over.</p>
 <p>Either <!-- raw HTML omitted -->newstr<!-- raw HTML omitted --> and the value pointed to by <!-- raw HTML omitted -->oldstr_ptr<!-- raw HTML omitted --> may be nil.</p>
-<p>It is a programming error if both <!-- raw HTML omitted -->newstr<!-- raw HTML omitted --> and the value pointed to by
+<p>It is a programming error if both <!-- raw HTML omitted -->newstr<!-- raw HTML omitted --> and the value pointed to by<br />
 <!-- raw HTML omitted -->oldstr_ptr<!-- raw HTML omitted --> refer to the same, non-nil structure.</p>
 
 
@@ -16936,7 +16940,7 @@ The Gst::Structure <!-- raw HTML omitted -->oldstr_ptr<!-- raw HTML omitted --> 
       
       
         &mdash;
-        <div class='inline'><p>pointer to a place of
+        <div class='inline'><p>pointer to a place of<br />
 a Gst::Structure to take</p>
 </div>
       
@@ -17049,7 +17053,7 @@ a Gst::Structure to take</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the human-readable description of this tag, You must not change or
+    <p>Returns the human-readable description of this tag, You must not change or<br />
 free this string.</p>
 
 
@@ -17166,7 +17170,7 @@ free this string.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the human-readable name of this tag, You must not change or free
+    <p>Returns the human-readable name of this tag, You must not change or free<br />
 this string.</p>
 
 
@@ -17283,7 +17287,7 @@ this string.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if the given tag is fixed. A fixed tag can only contain one value.
+    <p>Checks if the given tag is fixed. A fixed tag can only contain one value.<br />
 Unfixed tags can contain lists of values.</p>
 
 
@@ -17342,9 +17346,9 @@ Unfixed tags can contain lists of values.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Copies the contents for the given tag into the value,
-merging multiple values into one if multiple values are associated
-with the tag.
+    <p>Copies the contents for the given tag into the value,<br />
+merging multiple values into one if multiple values are associated<br />
+with the tag.<br />
 You must g_value_unset() the value after use.</p>
 
 
@@ -17412,7 +17416,7 @@ You must g_value_unset() the value after use.</p>
       
       
         &mdash;
-        <div class='inline'><p>true, if a value was copied, false if the tag didn't exist in the
+        <div class='inline'><p>true, if a value was copied, false if the tag didn't exist in the<br />
 given list.</p>
 </div>
       
@@ -17434,8 +17438,8 @@ given list.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is a convenience function for the func argument of gst_tag_register().
-It concatenates all given strings using a comma. The tag must be registered
+    <p>This is a convenience function for the func argument of gst_tag_register().<br />
+It concatenates all given strings using a comma. The tag must be registered<br />
 as a G_TYPE_STRING or this function will fail.</p>
 
 
@@ -17505,7 +17509,7 @@ as a G_TYPE_STRING or this function will fail.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is a convenience function for the func argument of gst_tag_register().
+    <p>This is a convenience function for the func argument of gst_tag_register().<br />
 It creates a copy of the first value from the list.</p>
 
 
@@ -17575,23 +17579,23 @@ It creates a copy of the first value from the list.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers a new tag type for the use with GStreamer's type system. If a type
-with that name is already registered, that one is used.
-The old registration may have used a different type however. So don't rely
+    <p>Registers a new tag type for the use with GStreamer's type system. If a type<br />
+with that name is already registered, that one is used.<br />
+The old registration may have used a different type however. So don't rely<br />
 on your supplied values.</p>
-<p>Important: if you do not supply a merge function the implication will be
-that there can only be one single value for this tag in a tag list and
-any additional values will silently be discarded when being added (unless
-#GST_TAG_MERGE_REPLACE, #GST_TAG_MERGE_REPLACE_ALL, or
-#GST_TAG_MERGE_PREPEND is used as merge mode, in which case the new
+<p>Important: if you do not supply a merge function the implication will be<br />
+that there can only be one single value for this tag in a tag list and<br />
+any additional values will silently be discarded when being added (unless<br />
+#GST_TAG_MERGE_REPLACE, #GST_TAG_MERGE_REPLACE_ALL, or<br />
+#GST_TAG_MERGE_PREPEND is used as merge mode, in which case the new<br />
 value will replace the old one in the list).</p>
-<p>The merge function will be called from gst_tag_list_copy_value() when
-it is required that one or more values for a tag be condensed into
-one single value. This may happen from gst_tag_list_get_string(),
-gst_tag_list_get_int(), gst_tag_list_get_double() etc. What will happen
-exactly in that case depends on how the tag was registered and if a
+<p>The merge function will be called from gst_tag_list_copy_value() when<br />
+it is required that one or more values for a tag be condensed into<br />
+one single value. This may happen from gst_tag_list_get_string(),<br />
+gst_tag_list_get_int(), gst_tag_list_get_double() etc. What will happen<br />
+exactly in that case depends on how the tag was registered and if a<br />
 merge function was supplied and if so which one.</p>
-<p>Two default merge functions are provided: gst_tag_merge_use_first() and
+<p>Two default merge functions are provided: gst_tag_merge_use_first() and<br />
 gst_tag_merge_strings_with_comma().</p>
 
 
@@ -17722,9 +17726,9 @@ gst_tag_merge_strings_with_comma().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Registers a new tag type for the use with GStreamer's type system.</p>
-<p>Same as gst_tag_register(), but <!-- raw HTML omitted -->name<!-- raw HTML omitted -->, <!-- raw HTML omitted -->nick<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->blurb<!-- raw HTML omitted --> must be
-static strings or inlined strings, as they will not be copied. (GStreamer
-plugins will be made resident once loaded, so this function can be used
+<p>Same as gst_tag_register(), but <!-- raw HTML omitted -->name<!-- raw HTML omitted -->, <!-- raw HTML omitted -->nick<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->blurb<!-- raw HTML omitted --> must be<br />
+static strings or inlined strings, as they will not be copied. (GStreamer<br />
+plugins will be made resident once loaded, so this function can be used<br />
 even from dynamically loaded plugins.)</p>
 
 
@@ -17891,8 +17895,8 @@ even from dynamically loaded plugins.)</p>
       
       
         &mdash;
-        <div class='inline'><p>Returns a human-readable string for <!-- raw HTML omitted -->type<!-- raw HTML omitted -->. This string is
-only for debugging purpose and should not be displayed in a user
+        <div class='inline'><p>Returns a human-readable string for <!-- raw HTML omitted -->type<!-- raw HTML omitted -->. This string is<br />
+only for debugging purpose and should not be displayed in a user<br />
 interface.</p>
 </div>
       
@@ -17914,8 +17918,8 @@ interface.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get a list of all active tracer objects owned by the tracing framework for
-the entirety of the run-time of the process or till gst_deinit() is called.
+    <p>Get a list of all active tracer objects owned by the tracing framework for<br />
+the entirety of the run-time of the process or till gst_deinit() is called.<br />
 Gst::Tracer objects</p>
 
 
@@ -17955,7 +17959,7 @@ Gst::Tracer objects</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Register <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to be called when the trace hook <!-- raw HTML omitted -->detail<!-- raw HTML omitted --> is getting invoked.
+    <p>Register <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to be called when the trace hook <!-- raw HTML omitted -->detail<!-- raw HTML omitted --> is getting invoked.<br />
 Use nil for <!-- raw HTML omitted -->detail<!-- raw HTML omitted --> to register to all hooks.</p>
 
 
@@ -18074,8 +18078,8 @@ Use nil for <!-- raw HTML omitted -->detail<!-- raw HTML omitted --> to register
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers a new typefind function to be used for typefinding. After
-registering this function will be available for typefinding.
+    <p>Registers a new typefind function to be used for typefinding. After<br />
+registering this function will be available for typefinding.<br />
 This function is typically called during an element's plugin initialization.</p>
 
 
@@ -18155,7 +18159,7 @@ This function is typically called during an element's plugin initialization.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional comma-separated list of extensions
+        <div class='inline'><p>Optional comma-separated list of extensions<br />
 that could belong to this type</p>
 </div>
       
@@ -18171,7 +18175,7 @@ that could belong to this type</p>
       
       
         &mdash;
-        <div class='inline'><p>Optionally the caps that could be returned when typefinding
+        <div class='inline'><p>Optionally the caps that could be returned when typefinding<br />
 succeeds</p>
 </div>
       
@@ -18187,7 +18191,7 @@ succeeds</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional user data. This user data must be available until the plugin
+        <div class='inline'><p>Optional user data. This user data must be available until the plugin<br />
 is unloaded.</p>
 </div>
       
@@ -18203,7 +18207,7 @@ is unloaded.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GDestroy::Notify that will be called on <!-- raw HTML omitted -->data<!-- raw HTML omitted --> when the plugin
+        <div class='inline'><p>a GDestroy::Notify that will be called on <!-- raw HTML omitted -->data<!-- raw HTML omitted --> when the plugin<br />
 is unloaded.</p>
 </div>
       
@@ -18243,7 +18247,7 @@ is unloaded.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if <!-- raw HTML omitted -->type<!-- raw HTML omitted --> is plugin API. See gst_type_mark_as_plugin_api() for
+    <p>Checks if <!-- raw HTML omitted -->type<!-- raw HTML omitted --> is plugin API. See gst_type_mark_as_plugin_api() for<br />
 details.</p>
 
 
@@ -18317,13 +18321,13 @@ details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Marks <!-- raw HTML omitted -->type<!-- raw HTML omitted --> as plugin API. This should be called in <code>class_init</code> of
-elements that expose new types (i.e. enums, flags or internal GObjects) via
+    <p>Marks <!-- raw HTML omitted -->type<!-- raw HTML omitted --> as plugin API. This should be called in <code>class_init</code> of<br />
+elements that expose new types (i.e. enums, flags or internal GObjects) via<br />
 properties, signals or pad templates.</p>
-<p>Types exposed by plugins are not automatically added to the documentation
-as they might originate from another library and should in that case be
+<p>Types exposed by plugins are not automatically added to the documentation<br />
+as they might originate from another library and should in that case be<br />
 documented via that library instead.</p>
-<p>By marking a type as plugin API it will be included in the documentation of
+<p>By marking a type as plugin API it will be included in the documentation of<br />
 the plugin that defines it.</p>
 
 
@@ -18393,17 +18397,17 @@ the plugin that defines it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Forces GStreamer to re-scan its plugin paths and update the default
+    <p>Forces GStreamer to re-scan its plugin paths and update the default<br />
 plugin registry.</p>
-<p>Applications will almost never need to call this function, it is only
-useful if the application knows new plugins have been installed (or old
-ones removed) since the start of the application (or, to be precise, the
-first call to gst_init()) and the application wants to make use of any
+<p>Applications will almost never need to call this function, it is only<br />
+useful if the application knows new plugins have been installed (or old<br />
+ones removed) since the start of the application (or, to be precise, the<br />
+first call to gst_init()) and the application wants to make use of any<br />
 newly-installed plugins without restarting the application.</p>
-<p>Applications should assume that the registry update is neither atomic nor
-thread-safe and should therefore not have any dynamic pipelines running
-(including the playbin and decodebin elements) and should also not create
-any elements or access the GStreamer registry while the update is in
+<p>Applications should assume that the registry update is neither atomic nor<br />
+thread-safe and should therefore not have any dynamic pipelines running<br />
+(including the playbin and decodebin elements) and should also not create<br />
+any elements or access the GStreamer registry while the update is in<br />
 progress.</p>
 <p>Note that this function may block for a significant amount of time.</p>
 
@@ -18423,7 +18427,7 @@ progress.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the registry has been updated successfully (does not
+        <div class='inline'><p>true if the registry has been updated successfully (does not<br />
 imply that there were changes), otherwise false.</p>
 </div>
       
@@ -18553,7 +18557,7 @@ imply that there were changes), otherwise false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Parses a URI string into a new Gst::Uri object. Will return NULL if the URI
+    <p>Parses a URI string into a new Gst::Uri object. Will return NULL if the URI<br />
 cannot be parsed.</p>
 
 
@@ -18612,16 +18616,16 @@ cannot be parsed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Parses a URI string into a new Gst::Uri object. Will return NULL if the URI
-cannot be parsed. This is identical to gst_uri_from_string() except that
-the userinfo and fragment components of the URI will not be unescaped while
+    <p>Parses a URI string into a new Gst::Uri object. Will return NULL if the URI<br />
+cannot be parsed. This is identical to gst_uri_from_string() except that<br />
+the userinfo and fragment components of the URI will not be unescaped while<br />
 parsing.</p>
-<p>Use this when you need to extract a username and password from the userinfo
-such as <a href="https://user:password">https://user:password</a><!-- raw HTML omitted -->example<!-- raw HTML omitted -->.com since either may contain
-a URI-escaped ':' character. gst_uri_from_string() will unescape the entire
-userinfo component, which will make it impossible to know which ':'
+<p>Use this when you need to extract a username and password from the userinfo<br />
+such as https://user:password<!-- raw HTML omitted -->example<!-- raw HTML omitted -->.com since either may contain<br />
+a URI-escaped ':' character. gst_uri_from_string() will unescape the entire<br />
+userinfo component, which will make it impossible to know which ':'<br />
 delineates the username and password.</p>
-<p>The same applies to the fragment component of the URI, such as
+<p>The same applies to the fragment component of the URI, such as<br />
 <a href="https://example.com/path#fragment">https://example.com/path#fragment</a> which may contain a URI-escaped '#'.</p>
 
 
@@ -18680,9 +18684,9 @@ delineates the username and password.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Extracts the location out of a given valid URI, ie. the protocol and &quot;://&quot;
-are stripped from the URI, which means that the location returned includes
-the hostname if one is specified. The returned string must be freed using
+    <p>Extracts the location out of a given valid URI, ie. the protocol and &quot;://&quot;<br />
+are stripped from the URI, which means that the location returned includes<br />
+the hostname if one is specified. The returned string must be freed using<br />
 g_free().</p>
 <p>Free-function: g_free</p>
 
@@ -18721,8 +18725,8 @@ g_free().</p>
       
       
         &mdash;
-        <div class='inline'><p>the location for this URI. Returns
-nil if the URI isn't valid. If the URI does not contain a location, an
+        <div class='inline'><p>the location for this URI. Returns<br />
+nil if the URI isn't valid. If the URI does not contain a location, an<br />
 empty string is returned.</p>
 </div>
       
@@ -18744,7 +18748,7 @@ empty string is returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Extracts the protocol out of a given valid URI. The returned string must be
+    <p>Extracts the protocol out of a given valid URI. The returned string must be<br />
 freed using g_free().</p>
 
 
@@ -18876,7 +18880,7 @@ freed using g_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tests if the given string is a valid URI identifier. URIs start with a valid
+    <p>Tests if the given string is a valid URI identifier. URIs start with a valid<br />
 scheme followed by &quot;:&quot; and maybe a string identifying the location.</p>
 
 
@@ -18935,7 +18939,7 @@ scheme followed by &quot;:&quot; and maybe a string identifying the location.</p
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is a convenience function to join two URI strings and return the result.
+    <p>This is a convenience function to join two URI strings and return the result.<br />
 The returned string should be g_free()'d after use.</p>
 
 
@@ -18988,7 +18992,7 @@ The returned string should be g_free()'d after use.</p>
       
       
         &mdash;
-        <div class='inline'><p>A string representing the percent-encoded join of
+        <div class='inline'><p>A string representing the percent-encoded join of<br />
 the two URIs.</p>
 </div>
       
@@ -19010,8 +19014,8 @@ the two URIs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if an element exists that supports the given URI protocol. Note
-that a positive return value does not imply that a subsequent call to
+    <p>Checks if an element exists that supports the given URI protocol. Note<br />
+that a positive return value does not imply that a subsequent call to<br />
 gst_element_make_from_uri() is guaranteed to work.</p>
 
 
@@ -19085,8 +19089,8 @@ gst_element_make_from_uri() is guaranteed to work.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tests if the given string is a valid protocol identifier. Protocols
-must consist of alphanumeric characters, '+', '-' and '.' and must
+    <p>Tests if the given string is a valid protocol identifier. Protocols<br />
+must consist of alphanumeric characters, '+', '-' and '.' and must<br />
 start with a alphabetic character. See RFC 3986 Section 3.1.</p>
 
 
@@ -19145,11 +19149,11 @@ start with a alphabetic character. See RFC 3986 Section 3.1.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Searches inside <!-- raw HTML omitted -->array<!-- raw HTML omitted --> for <!-- raw HTML omitted -->search_data<!-- raw HTML omitted --> by using the comparison function
+    <p>Searches inside <!-- raw HTML omitted -->array<!-- raw HTML omitted --> for <!-- raw HTML omitted -->search_data<!-- raw HTML omitted --> by using the comparison function<br />
 <!-- raw HTML omitted -->search_func<!-- raw HTML omitted -->. <!-- raw HTML omitted -->array<!-- raw HTML omitted --> must be sorted ascending.</p>
-<p>As <!-- raw HTML omitted -->search_data<!-- raw HTML omitted --> is always passed as second argument to <!-- raw HTML omitted -->search_func<!-- raw HTML omitted --> it's
+<p>As <!-- raw HTML omitted -->search_data<!-- raw HTML omitted --> is always passed as second argument to <!-- raw HTML omitted -->search_func<!-- raw HTML omitted --> it's<br />
 not required that <!-- raw HTML omitted -->search_data<!-- raw HTML omitted --> has the same type as the array elements.</p>
-<p>The complexity of this search function is O(log (num_elements)).
+<p>The complexity of this search function is O(log (num_elements)).<br />
 element or nil if nothing was found</p>
 
 
@@ -19356,7 +19360,7 @@ element or nil if nothing was found</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Transforms a #gdouble to a fraction and simplifies
+    <p>Transforms a #gdouble to a fraction and simplifies<br />
 the result.</p>
 
 
@@ -19633,7 +19637,7 @@ the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds the fractions <!-- raw HTML omitted -->a_n<!-- raw HTML omitted -->/<!-- raw HTML omitted -->a_d<!-- raw HTML omitted --> and <!-- raw HTML omitted -->b_n<!-- raw HTML omitted -->/<!-- raw HTML omitted -->b_d<!-- raw HTML omitted --> and stores
+    <p>Adds the fractions <!-- raw HTML omitted -->a_n<!-- raw HTML omitted -->/<!-- raw HTML omitted -->a_d<!-- raw HTML omitted --> and <!-- raw HTML omitted -->b_n<!-- raw HTML omitted -->/<!-- raw HTML omitted -->b_d<!-- raw HTML omitted --> and stores<br />
 the result in <!-- raw HTML omitted -->res_n<!-- raw HTML omitted --> and <!-- raw HTML omitted -->res_d<!-- raw HTML omitted -->.</p>
 
 
@@ -19767,7 +19771,7 @@ the result in <!-- raw HTML omitted -->res_n<!-- raw HTML omitted --> and <!-- r
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Compares the fractions <!-- raw HTML omitted -->a_n<!-- raw HTML omitted -->/<!-- raw HTML omitted -->a_d<!-- raw HTML omitted --> and <!-- raw HTML omitted -->b_n<!-- raw HTML omitted -->/<!-- raw HTML omitted -->b_d<!-- raw HTML omitted --> and returns
+    <p>Compares the fractions <!-- raw HTML omitted -->a_n<!-- raw HTML omitted -->/<!-- raw HTML omitted -->a_d<!-- raw HTML omitted --> and <!-- raw HTML omitted -->b_n<!-- raw HTML omitted -->/<!-- raw HTML omitted -->b_d<!-- raw HTML omitted --> and returns<br />
 -1 if a &lt; b, 0 if a = b and 1 if a &gt; b.</p>
 
 
@@ -19871,7 +19875,7 @@ the result in <!-- raw HTML omitted -->res_n<!-- raw HTML omitted --> and <!-- r
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Multiplies the fractions <!-- raw HTML omitted -->a_n<!-- raw HTML omitted -->/<!-- raw HTML omitted -->a_d<!-- raw HTML omitted --> and <!-- raw HTML omitted -->b_n<!-- raw HTML omitted -->/<!-- raw HTML omitted -->b_d<!-- raw HTML omitted --> and stores
+    <p>Multiplies the fractions <!-- raw HTML omitted -->a_n<!-- raw HTML omitted -->/<!-- raw HTML omitted -->a_d<!-- raw HTML omitted --> and <!-- raw HTML omitted -->b_n<!-- raw HTML omitted -->/<!-- raw HTML omitted -->b_d<!-- raw HTML omitted --> and stores<br />
 the result in <!-- raw HTML omitted -->res_n<!-- raw HTML omitted --> and <!-- raw HTML omitted -->res_d<!-- raw HTML omitted -->.</p>
 
 
@@ -20147,8 +20151,8 @@ the result in <!-- raw HTML omitted -->res_n<!-- raw HTML omitted --> and <!-- r
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get a property of type %GST_TYPE_ARRAY and transform it into a
-GValue::Array. This allow language bindings to get GST_TYPE_ARRAY
+    <p>Get a property of type %GST_TYPE_ARRAY and transform it into a<br />
+GValue::Array. This allow language bindings to get GST_TYPE_ARRAY<br />
 properties which are otherwise not an accessible type.</p>
 
 
@@ -20233,7 +20237,7 @@ properties which are otherwise not an accessible type.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get a timestamp as GstClockTime to be used for interval measurements.
+    <p>Get a timestamp as GstClockTime to be used for interval measurements.<br />
 The timestamp should not be interpreted in any other way.</p>
 
 
@@ -20273,7 +20277,7 @@ The timestamp should not be interpreted in any other way.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calculates the greatest common divisor of <!-- raw HTML omitted -->a<!-- raw HTML omitted -->
+    <p>Calculates the greatest common divisor of <!-- raw HTML omitted -->a<!-- raw HTML omitted --><br />
 and <!-- raw HTML omitted -->b<!-- raw HTML omitted -->.</p>
 
 
@@ -20347,7 +20351,7 @@ and <!-- raw HTML omitted -->b<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calculates the greatest common divisor of <!-- raw HTML omitted -->a<!-- raw HTML omitted -->
+    <p>Calculates the greatest common divisor of <!-- raw HTML omitted -->a<!-- raw HTML omitted --><br />
 and <!-- raw HTML omitted -->b<!-- raw HTML omitted -->.</p>
 
 
@@ -20422,9 +20426,9 @@ and <!-- raw HTML omitted -->b<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Return a constantly incrementing group id.</p>
-<p>This function is used to generate a new group-id for the
+<p>This function is used to generate a new group-id for the<br />
 stream-start event.</p>
-<p>This function never returns %GST_GROUP_ID_INVALID (which is 0)
+<p>This function never returns %GST_GROUP_ID_INVALID (which is 0)<br />
 overflow back to 0 at some point.</p>
 
 
@@ -20523,7 +20527,7 @@ overflow back to 0 at some point.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Compare two sequence numbers, handling wraparound.</p>
-<p>The current implementation just returns (gint32)(<!-- raw HTML omitted -->s1<!-- raw HTML omitted --> - <!-- raw HTML omitted -->s2<!-- raw HTML omitted -->).
+<p>The current implementation just returns (gint32)(<!-- raw HTML omitted -->s1<!-- raw HTML omitted --> - <!-- raw HTML omitted -->s2<!-- raw HTML omitted -->).<br />
 positive number if <!-- raw HTML omitted -->s1<!-- raw HTML omitted --> is after <!-- raw HTML omitted -->s2<!-- raw HTML omitted -->.</p>
 
 
@@ -20598,12 +20602,12 @@ positive number if <!-- raw HTML omitted -->s1<!-- raw HTML omitted --> is after
 </h3><div class="docstring">
   <div class="discussion">
     <p>Return a constantly incrementing sequence number.</p>
-<p>This function is used internally to GStreamer to be able to determine which
-events and messages are &quot;the same&quot;. For example, elements may set the seqnum
-on a segment-done message to be the same as that of the last seek event, to
+<p>This function is used internally to GStreamer to be able to determine which<br />
+events and messages are &quot;the same&quot;. For example, elements may set the seqnum<br />
+on a segment-done message to be the same as that of the last seek event, to<br />
 indicate that event and the message correspond to the same segment.</p>
-<p>This function never returns %GST_SEQNUM_INVALID (which is 0).
-overflow at some point. Use gst_util_seqnum_compare() to make sure
+<p>This function never returns %GST_SEQNUM_INVALID (which is 0).<br />
+overflow at some point. Use gst_util_seqnum_compare() to make sure<br />
 you handle wraparound correctly.</p>
 
 
@@ -20643,9 +20647,9 @@ you handle wraparound correctly.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts the string value to the type of the objects argument and
+    <p>Converts the string value to the type of the objects argument and<br />
 sets the argument with it.</p>
-<p>Note that this function silently returns if <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has no property named
+<p>Note that this function silently returns if <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has no property named<br />
 <!-- raw HTML omitted -->name<!-- raw HTML omitted --> or when <!-- raw HTML omitted -->value<!-- raw HTML omitted --> cannot be converted to the type of the property.</p>
 
 
@@ -20730,8 +20734,8 @@ sets the argument with it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Transfer a GValue::Array to %GST_TYPE_ARRAY and set this value on the
-specified property name. This allow language bindings to set GST_TYPE_ARRAY
+    <p>Transfer a GValue::Array to %GST_TYPE_ARRAY and set this value on the<br />
+specified property name. This allow language bindings to set GST_TYPE_ARRAY<br />
 properties which are otherwise not an accessible type.</p>
 
 
@@ -20816,9 +20820,9 @@ properties which are otherwise not an accessible type.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts the string to the type of the value and
+    <p>Converts the string to the type of the value and<br />
 sets the value with it.</p>
-<p>Note that this function is dangerous as it does not return any indication
+<p>Note that this function is dangerous as it does not return any indication<br />
 if the conversion worked or not.</p>
 
 
@@ -20888,13 +20892,13 @@ if the conversion worked or not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calculates the simpler representation of <!-- raw HTML omitted -->numerator<!-- raw HTML omitted --> and <!-- raw HTML omitted -->denominator<!-- raw HTML omitted --> and
+    <p>Calculates the simpler representation of <!-- raw HTML omitted -->numerator<!-- raw HTML omitted --> and <!-- raw HTML omitted -->denominator<!-- raw HTML omitted --> and<br />
 update both values with the resulting simplified fraction.</p>
-<p>Simplify a fraction using a simple continued fraction decomposition.
-The idea here is to convert fractions such as 333333/10000000 to 1/30
-using 32 bit arithmetic only. The algorithm is not perfect and relies
-upon two arbitrary parameters to remove non-significative terms from
-the simple continued fraction decomposition. Using 8 and 333 for
+<p>Simplify a fraction using a simple continued fraction decomposition.<br />
+The idea here is to convert fractions such as 333333/10000000 to 1/30<br />
+using 32 bit arithmetic only. The algorithm is not perfect and relies<br />
+upon two arbitrary parameters to remove non-significative terms from<br />
+the simple continued fraction decomposition. Using 8 and 333 for<br />
 <!-- raw HTML omitted -->n_terms<!-- raw HTML omitted --> and <!-- raw HTML omitted -->threshold<!-- raw HTML omitted --> respectively seems to give nice results.</p>
 
 
@@ -20994,14 +20998,14 @@ the simple continued fraction decomposition. Using 8 and 333 for
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Scale <!-- raw HTML omitted -->val<!-- raw HTML omitted --> by the rational number <!-- raw HTML omitted -->num<!-- raw HTML omitted --> / <!-- raw HTML omitted -->denom<!-- raw HTML omitted -->, avoiding overflows and
+    <p>Scale <!-- raw HTML omitted -->val<!-- raw HTML omitted --> by the rational number <!-- raw HTML omitted -->num<!-- raw HTML omitted --> / <!-- raw HTML omitted -->denom<!-- raw HTML omitted -->, avoiding overflows and<br />
 underflows and without loss of precision.</p>
-<p>This function can potentially be very slow if val and num are both
-greater than G_MAXUINT32.
-function returns G_MAXUINT64.  If the result is not exactly
-representable as an integer it is truncated.  See also
-gst_util_uint64_scale_round(), gst_util_uint64_scale_ceil(),
-gst_util_uint64_scale_int(), gst_util_uint64_scale_int_round(),
+<p>This function can potentially be very slow if val and num are both<br />
+greater than G_MAXUINT32.<br />
+function returns G_MAXUINT64.  If the result is not exactly<br />
+representable as an integer it is truncated.  See also<br />
+gst_util_uint64_scale_round(), gst_util_uint64_scale_ceil(),<br />
+gst_util_uint64_scale_int(), gst_util_uint64_scale_int_round(),<br />
 gst_util_uint64_scale_int_ceil().</p>
 
 
@@ -21090,14 +21094,14 @@ gst_util_uint64_scale_int_ceil().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Scale <!-- raw HTML omitted -->val<!-- raw HTML omitted --> by the rational number <!-- raw HTML omitted -->num<!-- raw HTML omitted --> / <!-- raw HTML omitted -->denom<!-- raw HTML omitted -->, avoiding overflows and
+    <p>Scale <!-- raw HTML omitted -->val<!-- raw HTML omitted --> by the rational number <!-- raw HTML omitted -->num<!-- raw HTML omitted --> / <!-- raw HTML omitted -->denom<!-- raw HTML omitted -->, avoiding overflows and<br />
 underflows and without loss of precision.</p>
-<p>This function can potentially be very slow if val and num are both
-greater than G_MAXUINT32.
-function returns G_MAXUINT64.  If the result is not exactly
-representable as an integer, it is rounded up.  See also
-gst_util_uint64_scale(), gst_util_uint64_scale_round(),
-gst_util_uint64_scale_int(), gst_util_uint64_scale_int_round(),
+<p>This function can potentially be very slow if val and num are both<br />
+greater than G_MAXUINT32.<br />
+function returns G_MAXUINT64.  If the result is not exactly<br />
+representable as an integer, it is rounded up.  See also<br />
+gst_util_uint64_scale(), gst_util_uint64_scale_round(),<br />
+gst_util_uint64_scale_int(), gst_util_uint64_scale_int_round(),<br />
 gst_util_uint64_scale_int_ceil().</p>
 
 
@@ -21186,13 +21190,13 @@ gst_util_uint64_scale_int_ceil().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Scale <!-- raw HTML omitted -->val<!-- raw HTML omitted --> by the rational number <!-- raw HTML omitted -->num<!-- raw HTML omitted --> / <!-- raw HTML omitted -->denom<!-- raw HTML omitted -->, avoiding overflows and
-underflows and without loss of precision.  <!-- raw HTML omitted -->num<!-- raw HTML omitted --> must be non-negative and
-<!-- raw HTML omitted -->denom<!-- raw HTML omitted --> must be positive.
-function returns G_MAXUINT64.  If the result is not exactly
-representable as an integer, it is truncated.  See also
-gst_util_uint64_scale_int_round(), gst_util_uint64_scale_int_ceil(),
-gst_util_uint64_scale(), gst_util_uint64_scale_round(),
+    <p>Scale <!-- raw HTML omitted -->val<!-- raw HTML omitted --> by the rational number <!-- raw HTML omitted -->num<!-- raw HTML omitted --> / <!-- raw HTML omitted -->denom<!-- raw HTML omitted -->, avoiding overflows and<br />
+underflows and without loss of precision.  <!-- raw HTML omitted -->num<!-- raw HTML omitted --> must be non-negative and<br />
+<!-- raw HTML omitted -->denom<!-- raw HTML omitted --> must be positive.<br />
+function returns G_MAXUINT64.  If the result is not exactly<br />
+representable as an integer, it is truncated.  See also<br />
+gst_util_uint64_scale_int_round(), gst_util_uint64_scale_int_ceil(),<br />
+gst_util_uint64_scale(), gst_util_uint64_scale_round(),<br />
 gst_util_uint64_scale_ceil().</p>
 
 
@@ -21281,13 +21285,13 @@ gst_util_uint64_scale_ceil().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Scale <!-- raw HTML omitted -->val<!-- raw HTML omitted --> by the rational number <!-- raw HTML omitted -->num<!-- raw HTML omitted --> / <!-- raw HTML omitted -->denom<!-- raw HTML omitted -->, avoiding overflows and
-underflows and without loss of precision.  <!-- raw HTML omitted -->num<!-- raw HTML omitted --> must be non-negative and
-<!-- raw HTML omitted -->denom<!-- raw HTML omitted --> must be positive.
-function returns G_MAXUINT64.  If the result is not exactly
-representable as an integer, it is rounded up.  See also
-gst_util_uint64_scale_int(), gst_util_uint64_scale_int_round(),
-gst_util_uint64_scale(), gst_util_uint64_scale_round(),
+    <p>Scale <!-- raw HTML omitted -->val<!-- raw HTML omitted --> by the rational number <!-- raw HTML omitted -->num<!-- raw HTML omitted --> / <!-- raw HTML omitted -->denom<!-- raw HTML omitted -->, avoiding overflows and<br />
+underflows and without loss of precision.  <!-- raw HTML omitted -->num<!-- raw HTML omitted --> must be non-negative and<br />
+<!-- raw HTML omitted -->denom<!-- raw HTML omitted --> must be positive.<br />
+function returns G_MAXUINT64.  If the result is not exactly<br />
+representable as an integer, it is rounded up.  See also<br />
+gst_util_uint64_scale_int(), gst_util_uint64_scale_int_round(),<br />
+gst_util_uint64_scale(), gst_util_uint64_scale_round(),<br />
 gst_util_uint64_scale_ceil().</p>
 
 
@@ -21376,13 +21380,13 @@ gst_util_uint64_scale_ceil().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Scale <!-- raw HTML omitted -->val<!-- raw HTML omitted --> by the rational number <!-- raw HTML omitted -->num<!-- raw HTML omitted --> / <!-- raw HTML omitted -->denom<!-- raw HTML omitted -->, avoiding overflows and
-underflows and without loss of precision.  <!-- raw HTML omitted -->num<!-- raw HTML omitted --> must be non-negative and
-<!-- raw HTML omitted -->denom<!-- raw HTML omitted --> must be positive.
-function returns G_MAXUINT64.  If the result is not exactly
-representable as an integer, it is rounded to the nearest integer
-(half-way cases are rounded up).  See also gst_util_uint64_scale_int(),
-gst_util_uint64_scale_int_ceil(), gst_util_uint64_scale(),
+    <p>Scale <!-- raw HTML omitted -->val<!-- raw HTML omitted --> by the rational number <!-- raw HTML omitted -->num<!-- raw HTML omitted --> / <!-- raw HTML omitted -->denom<!-- raw HTML omitted -->, avoiding overflows and<br />
+underflows and without loss of precision.  <!-- raw HTML omitted -->num<!-- raw HTML omitted --> must be non-negative and<br />
+<!-- raw HTML omitted -->denom<!-- raw HTML omitted --> must be positive.<br />
+function returns G_MAXUINT64.  If the result is not exactly<br />
+representable as an integer, it is rounded to the nearest integer<br />
+(half-way cases are rounded up).  See also gst_util_uint64_scale_int(),<br />
+gst_util_uint64_scale_int_ceil(), gst_util_uint64_scale(),<br />
 gst_util_uint64_scale_round(), gst_util_uint64_scale_ceil().</p>
 
 
@@ -21471,14 +21475,14 @@ gst_util_uint64_scale_round(), gst_util_uint64_scale_ceil().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Scale <!-- raw HTML omitted -->val<!-- raw HTML omitted --> by the rational number <!-- raw HTML omitted -->num<!-- raw HTML omitted --> / <!-- raw HTML omitted -->denom<!-- raw HTML omitted -->, avoiding overflows and
+    <p>Scale <!-- raw HTML omitted -->val<!-- raw HTML omitted --> by the rational number <!-- raw HTML omitted -->num<!-- raw HTML omitted --> / <!-- raw HTML omitted -->denom<!-- raw HTML omitted -->, avoiding overflows and<br />
 underflows and without loss of precision.</p>
-<p>This function can potentially be very slow if val and num are both
-greater than G_MAXUINT32.
-function returns G_MAXUINT64.  If the result is not exactly
-representable as an integer, it is rounded to the nearest integer
-(half-way cases are rounded up).  See also gst_util_uint64_scale(),
-gst_util_uint64_scale_ceil(), gst_util_uint64_scale_int(),
+<p>This function can potentially be very slow if val and num are both<br />
+greater than G_MAXUINT32.<br />
+function returns G_MAXUINT64.  If the result is not exactly<br />
+representable as an integer, it is rounded to the nearest integer<br />
+(half-way cases are rounded up).  See also gst_util_uint64_scale(),<br />
+gst_util_uint64_scale_ceil(), gst_util_uint64_scale_int(),<br />
 gst_util_uint64_scale_int_round(), gst_util_uint64_scale_int_ceil().</p>
 
 
@@ -21640,8 +21644,8 @@ gst_util_uint64_scale_int_round(), gst_util_uint64_scale_int_ceil().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines if intersecting two values will produce a valid result.
-Two values will produce a valid intersection if they have the same
+    <p>Determines if intersecting two values will produce a valid result.<br />
+Two values will produce a valid intersection if they have the same<br />
 type.</p>
 
 
@@ -21788,13 +21792,13 @@ type.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines if <!-- raw HTML omitted -->value1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->value2<!-- raw HTML omitted --> can be non-trivially unioned.
-Any two values can be trivially unioned by adding both of them
-to a GstValueList.  However, certain types have the possibility
-to be unioned in a simpler way.  For example, an integer range
-and an integer can be unioned if the integer is a subset of the
-integer range.  If there is the possibility that two values can
-be unioned, this function returns true.
+    <p>Determines if <!-- raw HTML omitted -->value1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->value2<!-- raw HTML omitted --> can be non-trivially unioned.<br />
+Any two values can be trivially unioned by adding both of them<br />
+to a GstValueList.  However, certain types have the possibility<br />
+to be unioned in a simpler way.  For example, an integer range<br />
+and an integer can be unioned if the integer is a subset of the<br />
+integer range.  If there is the possibility that two values can<br />
+be unioned, this function returns true.<br />
 be unioned.</p>
 
 
@@ -21868,10 +21872,10 @@ be unioned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Compares <!-- raw HTML omitted -->value1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->value2<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->value1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->value2<!-- raw HTML omitted --> cannot be
-compared, the function returns GST_VALUE_UNORDERED.  Otherwise,
-if <!-- raw HTML omitted -->value1<!-- raw HTML omitted --> is greater than <!-- raw HTML omitted -->value2<!-- raw HTML omitted -->, GST_VALUE_GREATER_THAN is returned.
-If <!-- raw HTML omitted -->value1<!-- raw HTML omitted --> is less than <!-- raw HTML omitted -->value2<!-- raw HTML omitted -->, GST_VALUE_LESS_THAN is returned.
+    <p>Compares <!-- raw HTML omitted -->value1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->value2<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->value1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->value2<!-- raw HTML omitted --> cannot be<br />
+compared, the function returns GST_VALUE_UNORDERED.  Otherwise,<br />
+if <!-- raw HTML omitted -->value1<!-- raw HTML omitted --> is greater than <!-- raw HTML omitted -->value2<!-- raw HTML omitted -->, GST_VALUE_GREATER_THAN is returned.<br />
+If <!-- raw HTML omitted -->value1<!-- raw HTML omitted --> is less than <!-- raw HTML omitted -->value2<!-- raw HTML omitted -->, GST_VALUE_LESS_THAN is returned.<br />
 If the values are equal, GST_VALUE_EQUAL is returned.</p>
 
 
@@ -21945,7 +21949,7 @@ If the values are equal, GST_VALUE_EQUAL is returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to deserialize a string into the type specified by the given GValue.
+    <p>Tries to deserialize a string into the type specified by the given GValue.<br />
 If the operation succeeds, true is returned, false otherwise.</p>
 
 
@@ -21965,7 +21969,7 @@ If the operation succeeds, true is returned, false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>#GValue to fill with contents of
+        <div class='inline'><p>#GValue to fill with contents of<br />
 deserialization</p>
 </div>
       
@@ -22020,8 +22024,8 @@ deserialization</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to deserialize a string into the type specified by the given GValue.
-<!-- raw HTML omitted -->pspec<!-- raw HTML omitted --> may be used to guide the deserializing of nested members.
+    <p>Tries to deserialize a string into the type specified by the given GValue.<br />
+<!-- raw HTML omitted -->pspec<!-- raw HTML omitted --> may be used to guide the deserializing of nested members.<br />
 If the operation succeeds, true is returned, false otherwise.</p>
 
 
@@ -22041,7 +22045,7 @@ If the operation succeeds, true is returned, false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>#GValue to fill with contents of
+        <div class='inline'><p>#GValue to fill with contents of<br />
 deserialization</p>
 </div>
       
@@ -22111,9 +22115,9 @@ deserialization</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Fixate <!-- raw HTML omitted -->src<!-- raw HTML omitted --> into a new value <!-- raw HTML omitted -->dest<!-- raw HTML omitted -->.
-For ranges, the first element is taken. For lists and arrays, the
-first item is fixated and returned.
+    <p>Fixate <!-- raw HTML omitted -->src<!-- raw HTML omitted --> into a new value <!-- raw HTML omitted -->dest<!-- raw HTML omitted -->.<br />
+For ranges, the first element is taken. For lists and arrays, the<br />
+first item is fixated and returned.<br />
 If <!-- raw HTML omitted -->src<!-- raw HTML omitted --> is already fixed, this function returns false.</p>
 
 
@@ -22187,7 +22191,7 @@ If <!-- raw HTML omitted -->src<!-- raw HTML omitted --> is already fixed, this 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Multiplies the two #GValue items containing a #GST_TYPE_FRACTION and sets
+    <p>Multiplies the two #GValue items containing a #GST_TYPE_FRACTION and sets<br />
 <!-- raw HTML omitted -->product<!-- raw HTML omitted --> to the product of the two fractions.</p>
 
 
@@ -22422,8 +22426,8 @@ If <!-- raw HTML omitted -->src<!-- raw HTML omitted --> is already fixed, this 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the contents of <!-- raw HTML omitted -->value<!-- raw HTML omitted -->. The reference count of the returned
-Gst::Caps will not be modified, therefore the caller must take one
+    <p>Gets the contents of <!-- raw HTML omitted -->value<!-- raw HTML omitted -->. The reference count of the returned<br />
+Gst::Caps will not be modified, therefore the caller must take one<br />
 before getting rid of the <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
 
 
@@ -23410,7 +23414,7 @@ before getting rid of the <!-- raw HTML omitted -->value<!-- raw HTML omitted --
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Initialises the target value to be of the same type as source and then copies
+    <p>Initialises the target value to be of the same type as source and then copies<br />
 the contents from source to target.</p>
 
 
@@ -23480,9 +23484,9 @@ the contents from source to target.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calculates the intersection of two values.  If the values have
-a non-empty intersection, the value representing the intersection
-is placed in <!-- raw HTML omitted -->dest<!-- raw HTML omitted -->, unless nil.  If the intersection is non-empty,
+    <p>Calculates the intersection of two values.  If the values have<br />
+a non-empty intersection, the value representing the intersection<br />
+is placed in <!-- raw HTML omitted -->dest<!-- raw HTML omitted -->, unless nil.  If the intersection is non-empty,<br />
 <!-- raw HTML omitted -->dest<!-- raw HTML omitted --> is not modified.</p>
 
 
@@ -23502,8 +23506,8 @@ is placed in <!-- raw HTML omitted -->dest<!-- raw HTML omitted -->, unless nil.
       
       
         &mdash;
-        <div class='inline'><p>a uninitialized #GValue that will hold the calculated
-intersection value. May be nil if the resulting set if not
+        <div class='inline'><p>a uninitialized #GValue that will hold the calculated<br />
+intersection value. May be nil if the resulting set if not<br />
 needed.</p>
 </div>
       
@@ -23573,9 +23577,9 @@ needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tests if the given GValue, if available in a GstStructure (or any other
-container) contains a &quot;fixed&quot; (which means: one value) or an &quot;unfixed&quot;
-(which means: multiple possible values, such as data lists or data
+    <p>Tests if the given GValue, if available in a GstStructure (or any other<br />
+container) contains a &quot;fixed&quot; (which means: one value) or an &quot;unfixed&quot;<br />
+(which means: multiple possible values, such as data lists or data<br />
 ranges) value.</p>
 
 
@@ -23707,7 +23711,7 @@ ranges) value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers functions to perform calculations on #GValue items of a given
+    <p>Registers functions to perform calculations on #GValue items of a given<br />
 type. Each type can only be added once.</p>
 
 
@@ -23762,9 +23766,9 @@ type. Each type can only be added once.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>tries to transform the given <!-- raw HTML omitted -->value<!-- raw HTML omitted --> into a string representation that allows
+    <p>tries to transform the given <!-- raw HTML omitted -->value<!-- raw HTML omitted --> into a string representation that allows<br />
 getting back this string later on using gst_value_deserialize().</p>
-<p>Free-function: g_free
+<p>Free-function: g_free<br />
 or nil if none exists</p>
 
 
@@ -23892,7 +23896,7 @@ or nil if none exists</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the contents of <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to <!-- raw HTML omitted -->caps<!-- raw HTML omitted -->. A reference to the
+    <p>Sets the contents of <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to <!-- raw HTML omitted -->caps<!-- raw HTML omitted -->. A reference to the<br />
 provided <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> will be taken by the <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
 
 
@@ -24115,8 +24119,8 @@ provided <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> will be taken by
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to the flags and mask values provided in <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> and <!-- raw HTML omitted -->mask<!-- raw HTML omitted -->.
-The <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> value indicates the values of flags, the <!-- raw HTML omitted -->mask<!-- raw HTML omitted --> represents
+    <p>Sets <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to the flags and mask values provided in <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> and <!-- raw HTML omitted -->mask<!-- raw HTML omitted -->.<br />
+The <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> value indicates the values of flags, the <!-- raw HTML omitted -->mask<!-- raw HTML omitted --> represents<br />
 which bits in the flag value have been set, and which are &quot;don't care&quot;</p>
 
 
@@ -24201,8 +24205,8 @@ which bits in the flag value have been set, and which are &quot;don't care&quot;
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to the fraction specified by <!-- raw HTML omitted -->numerator<!-- raw HTML omitted --> over <!-- raw HTML omitted -->denominator<!-- raw HTML omitted -->.
-The fraction gets reduced to the smallest numerator and denominator,
+    <p>Sets <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to the fraction specified by <!-- raw HTML omitted -->numerator<!-- raw HTML omitted --> over <!-- raw HTML omitted -->denominator<!-- raw HTML omitted -->.<br />
+The fraction gets reduced to the smallest numerator and denominator,<br />
 and if necessary the sign is moved to the numerator.</p>
 
 
@@ -24371,7 +24375,7 @@ and if necessary the sign is moved to the numerator.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to the range specified by <!-- raw HTML omitted -->numerator_start<!-- raw HTML omitted -->/<!-- raw HTML omitted -->denominator_start<!-- raw HTML omitted -->
+    <p>Sets <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to the range specified by <!-- raw HTML omitted -->numerator_start<!-- raw HTML omitted -->/<!-- raw HTML omitted -->denominator_start<!-- raw HTML omitted --><br />
 and <!-- raw HTML omitted -->numerator_end<!-- raw HTML omitted -->/<!-- raw HTML omitted -->denominator_end<!-- raw HTML omitted -->.</p>
 
 
@@ -24921,7 +24925,7 @@ and <!-- raw HTML omitted -->numerator_end<!-- raw HTML omitted -->/<!-- raw HTM
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Subtracts <!-- raw HTML omitted -->subtrahend<!-- raw HTML omitted --> from <!-- raw HTML omitted -->minuend<!-- raw HTML omitted --> and stores the result in <!-- raw HTML omitted -->dest<!-- raw HTML omitted -->.
+    <p>Subtracts <!-- raw HTML omitted -->subtrahend<!-- raw HTML omitted --> from <!-- raw HTML omitted -->minuend<!-- raw HTML omitted --> and stores the result in <!-- raw HTML omitted -->dest<!-- raw HTML omitted -->.<br />
 Note that this means subtraction as in sets, not as in mathematics.</p>
 
 
@@ -24941,9 +24945,9 @@ Note that this means subtraction as in sets, not as in mathematics.</p>
       
       
         &mdash;
-        <div class='inline'><p>the destination value
-for the result if the subtraction is not empty. May be nil,
-in which case the resulting set will not be computed, which can
+        <div class='inline'><p>the destination value<br />
+for the result if the subtraction is not empty. May be nil,<br />
+in which case the resulting set will not be computed, which can<br />
 give a fair speedup.</p>
 </div>
       
@@ -25200,7 +25204,7 @@ give a fair speedup.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function returns a string that is useful for describing this version
+    <p>This function returns a string that is useful for describing this version<br />
 of GStreamer to the outside world: user agent strings, logging, ...</p>
 
 
@@ -25219,7 +25223,7 @@ of GStreamer to the outside world: user agent strings, logging, ...</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string describing this version
+        <div class='inline'><p>a newly allocated string describing this version<br />
 of GStreamer.</p>
 </div>
       
@@ -25237,7 +25241,7 @@ of GStreamer.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::StringList";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -370,6 +372,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -435,7 +438,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Appends <!-- raw HTML omitted -->string<!-- raw HTML omitted --> to <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
-<p>The <!-- raw HTML omitted -->string<!-- raw HTML omitted --> will be copied. See
+<p>The <!-- raw HTML omitted -->string<!-- raw HTML omitted --> will be copied. See<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StringList.take] for a way to avoid that.</p>
 
 
@@ -492,7 +495,7 @@
   <div class="discussion">
     <p>Gets the string that is at <!-- raw HTML omitted -->position<!-- raw HTML omitted --> in <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
 <p>If <!-- raw HTML omitted -->self<!-- raw HTML omitted --> does not contain <!-- raw HTML omitted -->position<!-- raw HTML omitted --> items, nil is returned.</p>
-<p>This function returns the const char *. To get the
+<p>This function returns the const char *. To get the<br />
 object wrapping it, use g_list_model_get_item().</p>
 
 
@@ -764,7 +767,7 @@ object wrapping it, use g_list_model_get_item().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Removes the string at <!-- raw HTML omitted -->position<!-- raw HTML omitted --> from <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
-<p><!-- raw HTML omitted -->position<!-- raw HTML omitted --> must be smaller than the current
+<p><!-- raw HTML omitted -->position<!-- raw HTML omitted --> must be smaller than the current<br />
 length of the list.</p>
 
 
@@ -819,14 +822,14 @@ length of the list.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Changes <!-- raw HTML omitted -->self<!-- raw HTML omitted --> by removing <!-- raw HTML omitted -->n_removals<!-- raw HTML omitted --> strings and adding <!-- raw HTML omitted -->additions<!-- raw HTML omitted -->
+    <p>Changes <!-- raw HTML omitted -->self<!-- raw HTML omitted --> by removing <!-- raw HTML omitted -->n_removals<!-- raw HTML omitted --> strings and adding <!-- raw HTML omitted -->additions<!-- raw HTML omitted --><br />
 to it.</p>
-<p>This function is more efficient than [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StringList.append]
-and [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StringList.remove], because it only emits the
+<p>This function is more efficient than [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StringList.append]<br />
+and [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StringList.remove], because it only emits the<br />
 ::items-changed signal once for the change.</p>
 <p>This function copies the strings in <!-- raw HTML omitted -->additions<!-- raw HTML omitted -->.</p>
-<p>The parameters <!-- raw HTML omitted -->position<!-- raw HTML omitted --> and <!-- raw HTML omitted -->n_removals<!-- raw HTML omitted --> must be correct (ie:
-<!-- raw HTML omitted -->position<!-- raw HTML omitted --> + <!-- raw HTML omitted -->n_removals<!-- raw HTML omitted --> must be less than or equal to the length
+<p>The parameters <!-- raw HTML omitted -->position<!-- raw HTML omitted --> and <!-- raw HTML omitted -->n_removals<!-- raw HTML omitted --> must be correct (ie:<br />
+<!-- raw HTML omitted -->position<!-- raw HTML omitted --> + <!-- raw HTML omitted -->n_removals<!-- raw HTML omitted --> must be less than or equal to the length<br />
 of the list at the time this function is called).</p>
 
 
@@ -965,9 +968,9 @@ of the list at the time this function is called).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->string<!-- raw HTML omitted --> to self at the end, and takes
+    <p>Adds <!-- raw HTML omitted -->string<!-- raw HTML omitted --> to self at the end, and takes<br />
 ownership of it.</p>
-<p>This variant of [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StringList.append]
+<p>This variant of [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StringList.append]<br />
 is convenient for formatting strings:</p>
 <pre class="code c"><code class="c">gtk_string_list_take (self, g_strdup_print (&quot;%d dollars&quot;, lots));
 </code></pre>
@@ -1020,7 +1023,7 @@ is convenient for formatting strings:</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

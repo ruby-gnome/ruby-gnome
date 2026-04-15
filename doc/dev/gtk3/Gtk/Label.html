@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Label";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk3/label.rb</dd>
+    <dd>lib/gtk3/label.rb
+</dd>
   </dl>
   
 </div>
@@ -106,29 +108,29 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkLabel</code> widget displays a small amount of text.</p>
-<p>As the name implies, most labels are used to label another widget
+<p>As the name implies, most labels are used to label another widget<br />
 such as a [class<!-- raw HTML omitted -->Button<!-- raw HTML omitted -->].</p>
 <p><img src="label.png" alt="An example GtkLabel" /></p>
-<h2>CSS nodes</h2>
+<h2><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h2>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_label'>label</span>
 <span class='id identifier rubyid_├──'>├──</span> <span class='lbracket'>[</span><span class='id identifier rubyid_selection'>selection</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_├──'>├──</span> <span class='lbracket'>[</span><span class='id identifier rubyid_link'>link</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_┊'>┊</span>
 <span class='id identifier rubyid_╰──'>╰──</span> <span class='lbracket'>[</span><span class='id identifier rubyid_link'>link</span><span class='rbracket'>]</span>
 </code></pre>
-<p><code>GtkLabel</code> has a single CSS node with the name label. A wide variety
-of style classes may be applied to labels, such as .title, .subtitle,
-.dim-label, etc. In the <code>GtkShortcutsWindow</code>, labels are used with the
+<p><code>GtkLabel</code> has a single CSS node with the name label. A wide variety<br />
+of style classes may be applied to labels, such as .title, .subtitle,<br />
+.dim-label, etc. In the <code>GtkShortcutsWindow</code>, labels are used with the<br />
 .keycap style class.</p>
 <p>If the label has a selection, it gets a subnode with name selection.</p>
-<p>If the label has links, there is one subnode per link. These subnodes
-carry the link or visited state depending on whether they have been
+<p>If the label has links, there is one subnode per link. These subnodes<br />
+carry the link or visited state depending on whether they have been<br />
 visited. In this case, label node also gets a .link style class.</p>
-<h2>GtkLabel as GtkBuildable</h2>
-<p>The GtkLabel implementation of the GtkBuildable interface supports a
-custom <code>&lt;attributes&gt;</code> element, which supports any number of <code>&lt;attribute&gt;</code>
-elements. The <code>&lt;attribute&gt;</code> element has attributes named “name“, “value“,
-“start“ and “end“ and allows you to specify [struct<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Attribute]
+<h2><a href="#gtklabel-as-gtkbuildable" aria-hidden="true" class="anchor" id="gtklabel-as-gtkbuildable"></a>GtkLabel as GtkBuildable</h2>
+<p>The GtkLabel implementation of the GtkBuildable interface supports a<br />
+custom <code>&lt;attributes&gt;</code> element, which supports any number of <code>&lt;attribute&gt;</code><br />
+elements. The <code>&lt;attribute&gt;</code> element has attributes named “name“, “value“,<br />
+“start“ and “end“ and allows you to specify [struct<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Attribute]<br />
 values for this label.</p>
 <p>An example of a UI definition fragment specifying Pango attributes:</p>
 <pre class="code xml"><code class="xml">&lt;object class=&quot;GtkLabel&quot;&gt;
@@ -138,22 +140,22 @@ values for this label.</p>
   &lt;/attributes&gt;
 &lt;/object&gt;
 </code></pre>
-<p>The start and end attributes specify the range of characters to which the
-Pango attribute applies. If start and end are not specified, the attribute is
-applied to the whole text. Note that specifying ranges does not make much
-sense with translatable attributes. Use markup embedded in the translatable
+<p>The start and end attributes specify the range of characters to which the<br />
+Pango attribute applies. If start and end are not specified, the attribute is<br />
+applied to the whole text. Note that specifying ranges does not make much<br />
+sense with translatable attributes. Use markup embedded in the translatable<br />
 content instead.</p>
-<h2>Accessibility</h2>
+<h2><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h2>
 <p><code>GtkLabel</code> uses the %GTK_ACCESSIBLE_ROLE_LABEL role.</p>
-<h2>Mnemonics</h2>
-<p>Labels may contain “mnemonics”. Mnemonics are underlined characters in the
-label, used for keyboard navigation. Mnemonics are created by providing a
-string with an underscore before the mnemonic character, such as <code>&quot;_File&quot;</code>,
-to the functions [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.new_with_mnemonic] or
+<h2><a href="#mnemonics" aria-hidden="true" class="anchor" id="mnemonics"></a>Mnemonics</h2>
+<p>Labels may contain “mnemonics”. Mnemonics are underlined characters in the<br />
+label, used for keyboard navigation. Mnemonics are created by providing a<br />
+string with an underscore before the mnemonic character, such as <code>&quot;_File&quot;</code>,<br />
+to the functions [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.new_with_mnemonic] or<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_text_with_mnemonic].</p>
-<p>Mnemonics automatically activate any activatable widget the label is
-inside, such as a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Button]; if the label is not inside the
-mnemonic’s target widget, you have to tell the label about the target
+<p>Mnemonics automatically activate any activatable widget the label is<br />
+inside, such as a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Button]; if the label is not inside the<br />
+mnemonic’s target widget, you have to tell the label about the target<br />
 using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_mnemonic_widget].</p>
 <p>Here’s a simple example where the label is inside a button:</p>
 <pre class="code c"><code class="c">// Pressing Alt+H will activate this button
@@ -161,71 +163,71 @@ GtkWidget *button = gtk_button_new ();
 GtkWidget *label = gtk_label_new_with_mnemonic (&quot;_Hello&quot;);
 gtk_button_set_child (GTK_BUTTON (button), label);
 </code></pre>
-<p>There’s a convenience function to create buttons with a mnemonic label
+<p>There’s a convenience function to create buttons with a mnemonic label<br />
 already inside:</p>
 <pre class="code c"><code class="c">// Pressing Alt+H will activate this button
 GtkWidget *button = gtk_button_new_with_mnemonic (&quot;_Hello&quot;);
 </code></pre>
-<p>To create a mnemonic for a widget alongside the label, such as a
-[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry], you have to point the label at the entry with
+<p>To create a mnemonic for a widget alongside the label, such as a<br />
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry], you have to point the label at the entry with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_mnemonic_widget]:</p>
 <pre class="code c"><code class="c">// Pressing Alt+H will focus the entry
 GtkWidget *entry = gtk_entry_new ();
 GtkWidget *label = gtk_label_new_with_mnemonic (&quot;_Hello&quot;);
 gtk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
 </code></pre>
-<h2>Markup (styled text)</h2>
-<p>To make it easy to format text in a label (changing colors,
-fonts, etc.), label text can be provided in a simple
+<h2><a href="#markup-styled-text" aria-hidden="true" class="anchor" id="markup-styled-text"></a>Markup (styled text)</h2>
+<p>To make it easy to format text in a label (changing colors,<br />
+fonts, etc.), label text can be provided in a simple<br />
 markup format:</p>
 <p>Here’s how to create a label with a small font:</p>
 <pre class="code c"><code class="c">GtkWidget *label = gtk_label_new (NULL);
 gtk_label_set_markup (GTK_LABEL (label), &quot;&lt;small&gt;Small text&lt;/small&gt;&quot;);
 </code></pre>
-<p>(See the Pango manual for complete documentation] of available
+<p>(See the Pango manual for complete documentation] of available<br />
 tags, [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.parse_markup])</p>
-<p>The markup passed to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_markup] must be valid; for example,
-literal <code>&lt;</code>, <code>&gt;</code> and <code>&amp;</code> characters must be escaped as <code>&amp;lt;</code>, <code>&amp;gt;</code>, and <code>&amp;amp;</code>.
-If you pass text obtained from the user, file, or a network to
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_markup], you’ll want to escape it with
+<p>The markup passed to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_markup] must be valid; for example,<br />
+literal <code>&lt;</code>, <code>&gt;</code> and <code>&amp;</code> characters must be escaped as <code>&amp;lt;</code>, <code>&amp;gt;</code>, and <code>&amp;amp;</code>.<br />
+If you pass text obtained from the user, file, or a network to<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_markup], you’ll want to escape it with<br />
 [func<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.markup_escape_text] or [func<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.markup_printf_escaped].</p>
-<p>Markup strings are just a convenient way to set the [struct<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.AttrList]
-on a label; [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_attributes] may be a simpler way to set
-attributes in some cases. Be careful though; [struct<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.AttrList] tends
-to cause internationalization problems, unless you’re applying attributes
-to the entire string (i.e. unless you set the range of each attribute
-to [0, %G_MAXINT)). The reason is that specifying the start_index and
-end_index for a [struct<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Attribute] requires knowledge of the exact
+<p>Markup strings are just a convenient way to set the [struct<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.AttrList]<br />
+on a label; [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_attributes] may be a simpler way to set<br />
+attributes in some cases. Be careful though; [struct<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.AttrList] tends<br />
+to cause internationalization problems, unless you’re applying attributes<br />
+to the entire string (i.e. unless you set the range of each attribute<br />
+to [0, %G_MAXINT)). The reason is that specifying the start_index and<br />
+end_index for a [struct<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Attribute] requires knowledge of the exact<br />
 string being displayed, so translations will cause problems.</p>
-<h2>Selectable labels</h2>
-<p>Labels can be made selectable with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_selectable].
-Selectable labels allow the user to copy the label contents to
-the clipboard. Only labels that contain useful-to-copy information—such
+<h2><a href="#selectable-labels" aria-hidden="true" class="anchor" id="selectable-labels"></a>Selectable labels</h2>
+<p>Labels can be made selectable with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_selectable].<br />
+Selectable labels allow the user to copy the label contents to<br />
+the clipboard. Only labels that contain useful-to-copy information—such<br />
 as error messages—should be made selectable.</p>
-<h2>Text layout</h2>
-<p>A label can contain any number of paragraphs, but will have
-performance problems if it contains more than a small number.
-Paragraphs are separated by newlines or other paragraph separators
+<h2><a href="#text-layout" aria-hidden="true" class="anchor" id="text-layout"></a>Text layout</h2>
+<p>A label can contain any number of paragraphs, but will have<br />
+performance problems if it contains more than a small number.<br />
+Paragraphs are separated by newlines or other paragraph separators<br />
 understood by Pango.</p>
 <p>Labels can automatically wrap text if you call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_wrap].</p>
-<p>[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_justify] sets how the lines in a label align
-with one another. If you want to set how the label as a whole aligns
-in its available space, see the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign] and
+<p>[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_justify] sets how the lines in a label align<br />
+with one another. If you want to set how the label as a whole aligns<br />
+in its available space, see the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign] and<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:valign] properties.</p>
-<p>The [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:width-chars] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:max-width-chars]
-properties can be used to control the size allocation of ellipsized or
-wrapped labels. For ellipsizing labels, if either is specified (and less
-than the actual text size), it is used as the minimum width, and the actual
-text size is used as the natural width of the label. For wrapping labels,
-width-chars is used as the minimum width, if specified, and max-width-chars
-is used as the natural width. Even if max-width-chars specified, wrapping
+<p>The [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:width-chars] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:max-width-chars]<br />
+properties can be used to control the size allocation of ellipsized or<br />
+wrapped labels. For ellipsizing labels, if either is specified (and less<br />
+than the actual text size), it is used as the minimum width, and the actual<br />
+text size is used as the natural width of the label. For wrapping labels,<br />
+width-chars is used as the minimum width, if specified, and max-width-chars<br />
+is used as the natural width. Even if max-width-chars specified, wrapping<br />
 labels will be rewrapped to use all of the available width.</p>
-<h2>Links</h2>
-<p>GTK supports markup for clickable hyperlinks in addition to regular Pango
-markup. The markup for links is borrowed from HTML, using the <code>&lt;a&gt;</code> with
-“href“, “title“ and “class“ attributes. GTK renders links similar to the
-way they appear in web browsers, with colored, underlined text. The “title“
-attribute is displayed as a tooltip on the link. The “class“ attribute is
+<h2><a href="#links" aria-hidden="true" class="anchor" id="links"></a>Links</h2>
+<p>GTK supports markup for clickable hyperlinks in addition to regular Pango<br />
+markup. The markup for links is borrowed from HTML, using the <code>&lt;a&gt;</code> with<br />
+“href“, “title“ and “class“ attributes. GTK renders links similar to the<br />
+way they appear in web browsers, with colored, underlined text. The “title“<br />
+attribute is displayed as a tooltip on the link. The “class“ attribute is<br />
 used as style class on the CSS node for the link.</p>
 <p>An example of inline links looks like this:</p>
 <pre class="code c"><code class="c">const char *text =
@@ -235,8 +237,8 @@ used as style class on the CSS node for the link.</p>
 GtkWidget *label = gtk_label_new (NULL);
 gtk_label_set_markup (GTK_LABEL (label), text);
 </code></pre>
-<p>It is possible to implement custom handling for links and their tooltips
-with the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label::activate-link] signal and the
+<p>It is possible to implement custom handling for links and their tooltips<br />
+with the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label::activate-link] signal and the<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.get_current_uri] function.</p>
 
 
@@ -1618,9 +1620,11 @@ with the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label::act
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -1648,16 +1652,16 @@ with the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label::act
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkLabel</code>, containing the text in <!-- raw HTML omitted -->str<!-- raw HTML omitted -->.</p>
-<p>If characters in <!-- raw HTML omitted -->str<!-- raw HTML omitted --> are preceded by an underscore, they are
-underlined. If you need a literal underscore character in a label, use
-'__' (two underscores). The first underlined character represents a
-keyboard accelerator called a mnemonic. The mnemonic key can be used
-to activate another widget, chosen automatically, or explicitly using
+<p>If characters in <!-- raw HTML omitted -->str<!-- raw HTML omitted --> are preceded by an underscore, they are<br />
+underlined. If you need a literal underscore character in a label, use<br />
+'__' (two underscores). The first underlined character represents a<br />
+keyboard accelerator called a mnemonic. The mnemonic key can be used<br />
+to activate another widget, chosen automatically, or explicitly using<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_mnemonic_widget].</p>
-<p>If [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_mnemonic_widget] is not called, then the first
-activatable ancestor of the <code>GtkLabel</code> will be chosen as the mnemonic
-widget. For instance, if the label is inside a button or menu item,
-the button or menu item will automatically become the mnemonic widget
+<p>If [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_mnemonic_widget] is not called, then the first<br />
+activatable ancestor of the <code>GtkLabel</code> will be chosen as the mnemonic<br />
+widget. For instance, if the label is inside a button or menu item,<br />
+the button or menu item will automatically become the mnemonic widget<br />
 and be activated by the mnemonic.</p>
 
 
@@ -1677,7 +1681,7 @@ and be activated by the mnemonic.</p>
       
       
         &mdash;
-        <div class='inline'><p>The text of the label, with an underscore in front of the
+        <div class='inline'><p>The text of the label, with an underscore in front of the<br />
 mnemonic character</p>
 </div>
       
@@ -1856,10 +1860,10 @@ mnemonic character</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the URI for the currently active link in the label.</p>
-<p>The active link is the one under the mouse pointer or, in a
-selectable label, the link in which the text cursor is currently
+<p>The active link is the one under the mouse pointer or, in a<br />
+selectable label, the link in which the text cursor is currently<br />
 positioned.</p>
-<p>This function is intended for use in a [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label::activate-link]
+<p>This function is intended for use in a [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label::activate-link]<br />
 handler or for use in a [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget::query-tooltip] handler.</p>
 
 
@@ -1899,14 +1903,14 @@ handler or for use in a [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The preferred place to ellipsize the string, if the label does
+    <p>The preferred place to ellipsize the string, if the label does<br />
 not have enough room to display the entire string.</p>
-<p>Note that setting this property to a value other than
-%PANGO_ELLIPSIZE_NONE has the side-effect that the label requests
-only enough space to display the ellipsis &quot;...&quot;. In particular, this
-means that ellipsizing labels do not work well in notebook tabs, unless
-the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.NotebookPage:tab-expand] child property is set to true.
-Other ways to set a label's width are [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_size_request]
+<p>Note that setting this property to a value other than<br />
+%PANGO_ELLIPSIZE_NONE has the side-effect that the label requests<br />
+only enough space to display the ellipsis &quot;...&quot;. In particular, this<br />
+means that ellipsizing labels do not work well in notebook tabs, unless<br />
+the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.NotebookPage:tab-expand] child property is set to true.<br />
+Other ways to set a label's width are [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_size_request]<br />
 and [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_width_chars].</p>
 
 
@@ -1946,14 +1950,14 @@ and [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_width
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The preferred place to ellipsize the string, if the label does
+    <p>The preferred place to ellipsize the string, if the label does<br />
 not have enough room to display the entire string.</p>
-<p>Note that setting this property to a value other than
-%PANGO_ELLIPSIZE_NONE has the side-effect that the label requests
-only enough space to display the ellipsis &quot;...&quot;. In particular, this
-means that ellipsizing labels do not work well in notebook tabs, unless
-the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.NotebookPage:tab-expand] child property is set to true.
-Other ways to set a label's width are [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_size_request]
+<p>Note that setting this property to a value other than<br />
+%PANGO_ELLIPSIZE_NONE has the side-effect that the label requests<br />
+only enough space to display the ellipsis &quot;...&quot;. In particular, this<br />
+means that ellipsizing labels do not work well in notebook tabs, unless<br />
+the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.NotebookPage:tab-expand] child property is set to true.<br />
+Other ways to set a label's width are [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_size_request]<br />
 and [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_width_chars].</p>
 
 
@@ -2128,10 +2132,10 @@ and [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_width
 </h3><div class="docstring">
   <div class="discussion">
     <p>Obtains the coordinates where the label will draw its <code>PangoLayout</code>.</p>
-<p>The coordinates are useful to convert mouse events into coordinates
-inside the [class<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout], e.g. to take some action if some part
-of the label is clicked. Remember when using the [class<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout]
-functions you need to convert to and from pixels using PANGO_PIXELS()
+<p>The coordinates are useful to convert mouse events into coordinates<br />
+inside the [class<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout], e.g. to take some action if some part<br />
+of the label is clicked. Remember when using the [class<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout]<br />
+functions you need to convert to and from pixels using PANGO_PIXELS()<br />
 or [const<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.SCALE].</p>
 
 
@@ -2275,16 +2279,16 @@ or [const<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.SCALE].</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkLabel</code>, containing the text in <!-- raw HTML omitted -->str<!-- raw HTML omitted -->.</p>
-<p>If characters in <!-- raw HTML omitted -->str<!-- raw HTML omitted --> are preceded by an underscore, they are
-underlined. If you need a literal underscore character in a label, use
-'__' (two underscores). The first underlined character represents a
-keyboard accelerator called a mnemonic. The mnemonic key can be used
-to activate another widget, chosen automatically, or explicitly using
+<p>If characters in <!-- raw HTML omitted -->str<!-- raw HTML omitted --> are preceded by an underscore, they are<br />
+underlined. If you need a literal underscore character in a label, use<br />
+'__' (two underscores). The first underlined character represents a<br />
+keyboard accelerator called a mnemonic. The mnemonic key can be used<br />
+to activate another widget, chosen automatically, or explicitly using<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_mnemonic_widget].</p>
-<p>If [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_mnemonic_widget] is not called, then the first
-activatable ancestor of the <code>GtkLabel</code> will be chosen as the mnemonic
-widget. For instance, if the label is inside a button or menu item,
-the button or menu item will automatically become the mnemonic widget
+<p>If [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_mnemonic_widget] is not called, then the first<br />
+activatable ancestor of the <code>GtkLabel</code> will be chosen as the mnemonic<br />
+widget. For instance, if the label is inside a button or menu item,<br />
+the button or menu item will automatically become the mnemonic widget<br />
 and be activated by the mnemonic.</p>
 
 
@@ -2304,7 +2308,7 @@ and be activated by the mnemonic.</p>
       
       
         &mdash;
-        <div class='inline'><p>The text of the label, with an underscore in front of the
+        <div class='inline'><p>The text of the label, with an underscore in front of the<br />
 mnemonic character</p>
 </div>
       
@@ -2359,7 +2363,7 @@ mnemonic character</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The alignment of the lines in the text of the label, relative to each other.</p>
-<p>This does <em>not</em> affect the alignment of the label within its allocation.
+<p>This does <em>not</em> affect the alignment of the label within its allocation.<br />
 See [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:xalign] for that.</p>
 
 
@@ -2400,7 +2404,7 @@ See [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:xalign]
 </h3><div class="docstring">
   <div class="discussion">
     <p>The alignment of the lines in the text of the label, relative to each other.</p>
-<p>This does <em>not</em> affect the alignment of the label within its allocation.
+<p>This does <em>not</em> affect the alignment of the label within its allocation.<br />
 See [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:xalign] for that.</p>
 
 
@@ -2469,14 +2473,14 @@ See [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:xalign]
 </h3><div class="docstring">
   <div class="discussion">
     <p>The contents of the label.</p>
-<p>If the string contains Pango markup (see [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.parse_markup]),
-you will have to set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-markup] property to
-true in order for the label to display the markup attributes. See also
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_markup] for a convenience function that sets both
-this property and the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-markup] property at the
+<p>If the string contains Pango markup (see [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.parse_markup]),<br />
+you will have to set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-markup] property to<br />
+true in order for the label to display the markup attributes. See also<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_markup] for a convenience function that sets both<br />
+this property and the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-markup] property at the<br />
 same time.</p>
-<p>If the string contains underlines acting as mnemonics, you will have to
-set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-underline] property to true in order
+<p>If the string contains underlines acting as mnemonics, you will have to<br />
+set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-underline] property to true in order<br />
 for the label to display them.</p>
 
 
@@ -2517,14 +2521,14 @@ for the label to display them.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The contents of the label.</p>
-<p>If the string contains Pango markup (see [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.parse_markup]),
-you will have to set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-markup] property to
-true in order for the label to display the markup attributes. See also
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_markup] for a convenience function that sets both
-this property and the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-markup] property at the
+<p>If the string contains Pango markup (see [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.parse_markup]),<br />
+you will have to set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-markup] property to<br />
+true in order for the label to display the markup attributes. See also<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_markup] for a convenience function that sets both<br />
+this property and the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-markup] property at the<br />
 same time.</p>
-<p>If the string contains underlines acting as mnemonics, you will have to
-set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-underline] property to true in order
+<p>If the string contains underlines acting as mnemonics, you will have to<br />
+set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-underline] property to true in order<br />
 for the label to display them.</p>
 
 
@@ -2593,10 +2597,10 @@ for the label to display them.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the <code>PangoLayout</code> used to display the label.</p>
-<p>The layout is useful to e.g. convert text positions to pixel
-positions, in combination with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.get_layout_offsets].
-The returned layout is owned by the <!-- raw HTML omitted -->label<!-- raw HTML omitted --> so need not be
-freed by the caller. The <!-- raw HTML omitted -->label<!-- raw HTML omitted --> is free to recreate its layout
+<p>The layout is useful to e.g. convert text positions to pixel<br />
+positions, in combination with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.get_layout_offsets].<br />
+The returned layout is owned by the <!-- raw HTML omitted -->label<!-- raw HTML omitted --> so need not be<br />
+freed by the caller. The <!-- raw HTML omitted -->label<!-- raw HTML omitted --> is free to recreate its layout<br />
 at any time, so it should be considered read-only.</p>
 
 
@@ -2636,9 +2640,9 @@ at any time, so it should be considered read-only.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The number of lines to which an ellipsized, wrapping label
+    <p>The number of lines to which an ellipsized, wrapping label<br />
 should be limited.</p>
-<p>This property has no effect if the label is not wrapping or ellipsized.
+<p>This property has no effect if the label is not wrapping or ellipsized.<br />
 Set this property to -1 if you don't want to limit the number of lines.</p>
 
 
@@ -2678,9 +2682,9 @@ Set this property to -1 if you don't want to limit the number of lines.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The number of lines to which an ellipsized, wrapping label
+    <p>The number of lines to which an ellipsized, wrapping label<br />
 should be limited.</p>
-<p>This property has no effect if the label is not wrapping or ellipsized.
+<p>This property has no effect if the label is not wrapping or ellipsized.<br />
 Set this property to -1 if you don't want to limit the number of lines.</p>
 
 
@@ -2749,9 +2753,9 @@ Set this property to -1 if you don't want to limit the number of lines.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the labels text and attributes from markup.</p>
-<p>The string must be marked up with Pango markup
+<p>The string must be marked up with Pango markup<br />
 (see [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.parse_markup]).</p>
-<p>If the <!-- raw HTML omitted -->str<!-- raw HTML omitted --> is external data, you may need to escape it
+<p>If the <!-- raw HTML omitted -->str<!-- raw HTML omitted --> is external data, you may need to escape it<br />
 with g_markup_escape_text() or g_markup_printf_escaped():</p>
 <pre class="code c"><code class="c">GtkWidget *self = gtk_label_new (NULL);
 const char *str = &quot;...&quot;;
@@ -2762,10 +2766,10 @@ markup = g_markup_printf_escaped (format, str);
 gtk_label_set_markup (GTK_LABEL (self), markup);
 g_free (markup);
 </code></pre>
-<p>This function will set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-markup] property
+<p>This function will set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-markup] property<br />
 to true as a side effect.</p>
-<p>If you set the label contents using the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:label]
-property you should also ensure that you set the
+<p>If you set the label contents using the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:label]<br />
+property you should also ensure that you set the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-markup] property accordingly.</p>
 <p>See also: [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_text]</p>
 
@@ -2822,11 +2826,11 @@ property you should also ensure that you set the
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the labels text, attributes and mnemonic from markup.</p>
-<p>Parses <!-- raw HTML omitted -->str<!-- raw HTML omitted --> which is marked up with Pango markup (see [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.parse_markup]),
-setting the label’s text and attribute list based on the parse results.
-If characters in <!-- raw HTML omitted -->str<!-- raw HTML omitted --> are preceded by an underscore, they are underlined
+<p>Parses <!-- raw HTML omitted -->str<!-- raw HTML omitted --> which is marked up with Pango markup (see [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.parse_markup]),<br />
+setting the label’s text and attribute list based on the parse results.<br />
+If characters in <!-- raw HTML omitted -->str<!-- raw HTML omitted --> are preceded by an underscore, they are underlined<br />
 indicating that they represent a keyboard accelerator called a mnemonic.</p>
-<p>The mnemonic key can be used to activate another widget, chosen
+<p>The mnemonic key can be used to activate another widget, chosen<br />
 automatically, or explicitly using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_mnemonic_widget].</p>
 
 
@@ -2883,8 +2887,8 @@ automatically, or explicitly using [method<!-- raw HTML omitted -->Gtk<!-- raw H
   <div class="discussion">
     <p>The desired maximum width of the label, in characters.</p>
 <p>If this property is set to -1, the width will be calculated automatically.</p>
-<p>See the section on <a href="class.Label.html#text-layout">text layout</a> for details of how
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:width-chars] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:max-width-chars]
+<p>See the section on <a href="class.Label.html#text-layout">text layout</a> for details of how<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:width-chars] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:max-width-chars]<br />
 determine the width of ellipsized and wrapped labels.</p>
 
 
@@ -2926,8 +2930,8 @@ determine the width of ellipsized and wrapped labels.</p>
   <div class="discussion">
     <p>The desired maximum width of the label, in characters.</p>
 <p>If this property is set to -1, the width will be calculated automatically.</p>
-<p>See the section on <a href="class.Label.html#text-layout">text layout</a> for details of how
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:width-chars] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:max-width-chars]
+<p>See the section on <a href="class.Label.html#text-layout">text layout</a> for details of how<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:width-chars] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:max-width-chars]<br />
 determine the width of ellipsized and wrapped labels.</p>
 
 
@@ -3208,9 +3212,9 @@ determine the width of ellipsized and wrapped labels.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Select the line wrapping for the natural size request.</p>
-<p>This only affects the natural size requested. For the actual wrapping used,
+<p>This only affects the natural size requested. For the actual wrapping used,<br />
 see the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:wrap-mode] property.</p>
-<p>The default is %GTK_NATURAL_WRAP_INHERIT, which inherits the behavior of the
+<p>The default is %GTK_NATURAL_WRAP_INHERIT, which inherits the behavior of the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:wrap-mode] property.</p>
 
 
@@ -3251,9 +3255,9 @@ see the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:wra
 </h3><div class="docstring">
   <div class="discussion">
     <p>Select the line wrapping for the natural size request.</p>
-<p>This only affects the natural size requested. For the actual wrapping used,
+<p>This only affects the natural size requested. For the actual wrapping used,<br />
 see the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:wrap-mode] property.</p>
-<p>The default is %GTK_NATURAL_WRAP_INHERIT, which inherits the behavior of the
+<p>The default is %GTK_NATURAL_WRAP_INHERIT, which inherits the behavior of the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:wrap-mode] property.</p>
 
 
@@ -3322,8 +3326,8 @@ see the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:wra
 </h3><div class="docstring">
   <div class="discussion">
     <p>Selects a range of characters in the label, if the label is selectable.</p>
-<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_selectable]. If the label is not selectable,
-this function has no effect. If <!-- raw HTML omitted -->start_offset<!-- raw HTML omitted --> or
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_selectable]. If the label is not selectable,<br />
+this function has no effect. If <!-- raw HTML omitted -->start_offset<!-- raw HTML omitted --> or<br />
 <!-- raw HTML omitted -->end_offset<!-- raw HTML omitted --> are -1, then the end of the label will be substituted.</p>
 
 
@@ -3658,9 +3662,9 @@ this function has no effect. If <!-- raw HTML omitted -->start_offset<!-- raw HT
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the label is in single line mode.</p>
-<p>In single line mode, the height of the label does not depend on the
-actual text, it is always set to ascent + descent of the font. This
-can be an advantage in situations where resizing the label because
+<p>In single line mode, the height of the label does not depend on the<br />
+actual text, it is always set to ascent + descent of the font. This<br />
+can be an advantage in situations where resizing the label because<br />
 of text changes would be distracting, e.g. in a statusbar.</p>
 
 
@@ -3729,9 +3733,9 @@ of text changes would be distracting, e.g. in a statusbar.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the label is in single line mode.</p>
-<p>In single line mode, the height of the label does not depend on the
-actual text, it is always set to ascent + descent of the font. This
-can be an advantage in situations where resizing the label because
+<p>In single line mode, the height of the label does not depend on the<br />
+actual text, it is always set to ascent + descent of the font. This<br />
+can be an advantage in situations where resizing the label because<br />
 of text changes would be distracting, e.g. in a statusbar.</p>
 
 
@@ -3878,8 +3882,8 @@ of text changes would be distracting, e.g. in a statusbar.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Fetches the text from a label.</p>
-<p>The returned text is as it appears on screen. This does not include
-any embedded underlines indicating mnemonics or Pango markup. (See
+<p>The returned text is as it appears on screen. This does not include<br />
+any embedded underlines indicating mnemonics or Pango markup. (See<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.get_label])</p>
 
 
@@ -3898,7 +3902,7 @@ any embedded underlines indicating mnemonics or Pango markup. (See
       
       
         &mdash;
-        <div class='inline'><p>the text in the label widget. This is the internal
+        <div class='inline'><p>the text in the label widget. This is the internal<br />
 string used by the label, and must not be modified.</p>
 </div>
       
@@ -3922,10 +3926,10 @@ string used by the label, and must not be modified.</p>
   <div class="discussion">
     <p>Sets the text within the <code>GtkLabel</code> widget.</p>
 <p>It overwrites any text that was there before.</p>
-<p>This function will clear any previously set mnemonic accelerators,
-and set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-underline] property to false as
+<p>This function will clear any previously set mnemonic accelerators,<br />
+and set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-underline] property to false as<br />
 a side effect.</p>
-<p>This function will set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-markup] property
+<p>This function will set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:use-markup] property<br />
 to false as a side effect.</p>
 <p>See also: [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_markup]</p>
 
@@ -3982,9 +3986,9 @@ to false as a side effect.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the label’s text from the string <!-- raw HTML omitted -->str<!-- raw HTML omitted -->.</p>
-<p>If characters in <!-- raw HTML omitted -->str<!-- raw HTML omitted --> are preceded by an underscore, they are underlined
-indicating that they represent a keyboard accelerator called a mnemonic.
-The mnemonic key can be used to activate another widget, chosen
+<p>If characters in <!-- raw HTML omitted -->str<!-- raw HTML omitted --> are preceded by an underscore, they are underlined<br />
+indicating that they represent a keyboard accelerator called a mnemonic.<br />
+The mnemonic key can be used to activate another widget, chosen<br />
 automatically, or explicitly using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_mnemonic_widget].</p>
 
 
@@ -4206,7 +4210,7 @@ automatically, or explicitly using [method<!-- raw HTML omitted -->Gtk<!-- raw H
       
       
         &mdash;
-        <div class='inline'><p>true whether an embedded underline in the label indicates
+        <div class='inline'><p>true whether an embedded underline in the label indicates<br />
 the mnemonic accelerator keys.</p>
 </div>
       
@@ -4228,7 +4232,7 @@ the mnemonic accelerator keys.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>true if the text of the label indicates a mnemonic with an _
+    <p>true if the text of the label indicates a mnemonic with an _<br />
 before the mnemonic character.</p>
 
 
@@ -4296,7 +4300,7 @@ before the mnemonic character.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>true if the text of the label indicates a mnemonic with an _
+    <p>true if the text of the label indicates a mnemonic with an _<br />
 before the mnemonic character.</p>
 
 
@@ -4338,8 +4342,8 @@ before the mnemonic character.</p>
   <div class="discussion">
     <p>The desired width of the label, in characters.</p>
 <p>If this property is set to -1, the width will be calculated automatically.</p>
-<p>See the section on <a href="class.Label.html#text-layout">text layout</a> for details of how
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:width-chars] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:max-width-chars]
+<p>See the section on <a href="class.Label.html#text-layout">text layout</a> for details of how<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:width-chars] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:max-width-chars]<br />
 determine the width of ellipsized and wrapped labels.</p>
 
 
@@ -4381,8 +4385,8 @@ determine the width of ellipsized and wrapped labels.</p>
   <div class="discussion">
     <p>The desired width of the label, in characters.</p>
 <p>If this property is set to -1, the width will be calculated automatically.</p>
-<p>See the section on <a href="class.Label.html#text-layout">text layout</a> for details of how
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:width-chars] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:max-width-chars]
+<p>See the section on <a href="class.Label.html#text-layout">text layout</a> for details of how<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:width-chars] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:max-width-chars]<br />
 determine the width of ellipsized and wrapped labels.</p>
 
 
@@ -4597,10 +4601,10 @@ determine the width of ellipsized and wrapped labels.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Controls how the line wrapping is done.</p>
-<p>This only affects the formatting if line wrapping is on (see the
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:wrap] property). The default is %PANGO_WRAP_WORD,
+<p>This only affects the formatting if line wrapping is on (see the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:wrap] property). The default is %PANGO_WRAP_WORD,<br />
 which means wrap on word boundaries.</p>
-<p>For sizing behavior, also consider the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:natural-wrap-mode]
+<p>For sizing behavior, also consider the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:natural-wrap-mode]<br />
 property.</p>
 
 
@@ -4641,10 +4645,10 @@ property.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Controls how the line wrapping is done.</p>
-<p>This only affects the formatting if line wrapping is on (see the
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:wrap] property). The default is %PANGO_WRAP_WORD,
+<p>This only affects the formatting if line wrapping is on (see the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:wrap] property). The default is %PANGO_WRAP_WORD,<br />
 which means wrap on word boundaries.</p>
-<p>For sizing behavior, also consider the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:natural-wrap-mode]
+<p>For sizing behavior, also consider the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label:natural-wrap-mode]<br />
 property.</p>
 
 
@@ -4713,7 +4717,7 @@ property.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The horizontal alignment of the label text inside its size allocation.</p>
-<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign], which determines how the
+<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign], which determines how the<br />
 labels size allocation is positioned in the space available for the label.</p>
 
 
@@ -4754,7 +4758,7 @@ labels size allocation is positioned in the space available for the label.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The horizontal alignment of the label text inside its size allocation.</p>
-<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign], which determines how the
+<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign], which determines how the<br />
 labels size allocation is positioned in the space available for the label.</p>
 
 
@@ -4823,7 +4827,7 @@ labels size allocation is positioned in the space available for the label.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The vertical alignment of the label text inside its size allocation.</p>
-<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:valign], which determines how the
+<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:valign], which determines how the<br />
 labels size allocation is positioned in the space available for the label.</p>
 
 
@@ -4864,7 +4868,7 @@ labels size allocation is positioned in the space available for the label.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The vertical alignment of the label text inside its size allocation.</p>
-<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:valign], which determines how the
+<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:valign], which determines how the<br />
 labels size allocation is positioned in the space available for the label.</p>
 
 
@@ -4928,7 +4932,7 @@ labels size allocation is positioned in the space available for the label.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

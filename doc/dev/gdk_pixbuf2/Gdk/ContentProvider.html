@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::ContentProvider";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -380,6 +382,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -397,11 +400,11 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a content provider that represents all the given <!-- raw HTML omitted -->providers<!-- raw HTML omitted -->.</p>
-<p>Whenever data needs to be written, the union provider will try the given
-<!-- raw HTML omitted -->providers<!-- raw HTML omitted --> in the given order and the first one supporting a format will
+<p>Whenever data needs to be written, the union provider will try the given<br />
+<!-- raw HTML omitted -->providers<!-- raw HTML omitted --> in the given order and the first one supporting a format will<br />
 be chosen to provide it.</p>
-<p>This allows an easy way to support providing data in different formats.
-For example, an image may be provided by its file and by the image
+<p>This allows an easy way to support providing data in different formats.<br />
+For example, an image may be provided by its file and by the image<br />
 contents with a call such as</p>
 <pre class="code c"><code class="c">gdk_content_provider_new_union ((GdkContentProvider *[2]) {
                                   gdk_content_provider_new_typed (G_TYPE_FILE, file),
@@ -612,10 +615,10 @@ contents with a call such as</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the contents of <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> stored in <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
-<p>The <!-- raw HTML omitted -->value<!-- raw HTML omitted --> will have been initialized to the <code>GType</code> the value should be
-provided in. This given <code>GType</code> does not need to be listed in the formats
-returned by [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvider.ref_formats]. However, if the
-given <code>GType</code> is not supported, this operation can fail and
+<p>The <!-- raw HTML omitted -->value<!-- raw HTML omitted --> will have been initialized to the <code>GType</code> the value should be<br />
+provided in. This given <code>GType</code> does not need to be listed in the formats<br />
+returned by [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvider.ref_formats]. However, if the<br />
+given <code>GType</code> is not supported, this operation can fail and<br />
 <code>G_IO_ERROR_NOT_SUPPORTED</code> will be reported.</p>
 
 
@@ -653,7 +656,7 @@ given <code>GType</code> is not supported, this operation can fail and
       
       
         &mdash;
-        <div class='inline'><p>true if the value was set successfully. Otherwise
+        <div class='inline'><p>true if the value was set successfully. Otherwise<br />
 <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set to describe the failure.</p>
 </div>
       
@@ -714,7 +717,7 @@ given <code>GType</code> is not supported, this operation can fail and
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the formats that the provider suggests other applications to store
+    <p>Gets the formats that the provider suggests other applications to store<br />
 the data in.</p>
 <p>An example of such an application would be a clipboard manager.</p>
 <p>This can be assumed to be a subset of [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvider.ref_formats].</p>
@@ -862,13 +865,13 @@ the data in.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously writes the contents of <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> to <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> in the given
+    <p>Asynchronously writes the contents of <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> to <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> in the given<br />
 <!-- raw HTML omitted -->mime_type<!-- raw HTML omitted -->.</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then call
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvider.write_mime_type_finish] to get the result
+<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then call<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvider.write_mime_type_finish] to get the result<br />
 of the operation.</p>
-<p>The given mime type does not need to be listed in the formats returned by
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvider.ref_formats]. However, if the given <code>GType</code> is
+<p>The given mime type does not need to be listed in the formats returned by<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvider.ref_formats]. However, if the given <code>GType</code> is<br />
 not supported, <code>G_IO_ERROR_NOT_SUPPORTED</code> will be reported.</p>
 <p>The given <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> will not be closed.</p>
 
@@ -1037,7 +1040,7 @@ not supported, <code>G_IO_ERROR_NOT_SUPPORTED</code> will be reported.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the operation was completed successfully. Otherwise
+        <div class='inline'><p>true if the operation was completed successfully. Otherwise<br />
 <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set to describe the failure.</p>
 </div>
       
@@ -1055,7 +1058,7 @@ not supported, <code>G_IO_ERROR_NOT_SUPPORTED</code> will be reported.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

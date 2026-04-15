@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::Resolver";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -188,6 +190,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -611,6 +614,7 @@
 
       
     </ul>
+    
   
 
 
@@ -630,8 +634,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the default #GResolver. You should unref it when you are done
-with it. #GResolver may use its reference count as a hint about how
+    <p>Gets the default #GResolver. You should unref it when you are done<br />
+with it. #GResolver may use its reference count as a hint about how<br />
 many threads it should allocate for concurrent DNS resolutions.</p>
 
 
@@ -671,9 +675,9 @@ many threads it should allocate for concurrent DNS resolutions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Frees <!-- raw HTML omitted -->addresses<!-- raw HTML omitted --> (which should be the return value from
-g_resolver_lookup_by_name() or g_resolver_lookup_by_name_finish()).
-(This is a convenience method; you can also simply free the results
+    <p>Frees <!-- raw HTML omitted -->addresses<!-- raw HTML omitted --> (which should be the return value from<br />
+g_resolver_lookup_by_name() or g_resolver_lookup_by_name_finish()).<br />
+(This is a convenience method; you can also simply free the results<br />
 by hand.)</p>
 
 
@@ -728,9 +732,9 @@ by hand.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Frees <!-- raw HTML omitted -->targets<!-- raw HTML omitted --> (which should be the return value from
-g_resolver_lookup_service() or g_resolver_lookup_service_finish()).
-(This is a convenience method; you can also simply free the
+    <p>Frees <!-- raw HTML omitted -->targets<!-- raw HTML omitted --> (which should be the return value from<br />
+g_resolver_lookup_service() or g_resolver_lookup_service_finish()).<br />
+(This is a convenience method; you can also simply free the<br />
 results by hand.)</p>
 
 
@@ -791,12 +795,12 @@ results by hand.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Synchronously reverse-resolves <!-- raw HTML omitted -->address<!-- raw HTML omitted --> to determine its
+    <p>Synchronously reverse-resolves <!-- raw HTML omitted -->address<!-- raw HTML omitted --> to determine its<br />
 associated hostname.</p>
-<p>If the DNS resolution fails, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to
+<p>If the DNS resolution fails, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to<br />
 a value from GResolver::Error.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is non-nil, it can be used to cancel the
-operation, in which case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is non-nil, it can be used to cancel the<br />
+operation, in which case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to<br />
 %G_IO_ERROR_CANCELLED.</p>
 
 
@@ -849,7 +853,7 @@ operation, in which case <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
       
       
         &mdash;
-        <div class='inline'><p>a hostname (either ASCII-only, or in ASCII-encoded
+        <div class='inline'><p>a hostname (either ASCII-only, or in ASCII-encoded<br />
 form), or nil on error.</p>
 </div>
       
@@ -871,8 +875,8 @@ form), or nil on error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Begins asynchronously reverse-resolving <!-- raw HTML omitted -->address<!-- raw HTML omitted --> to determine its
-associated hostname, and eventually calls <!-- raw HTML omitted -->callback<!-- raw HTML omitted -->, which must
+    <p>Begins asynchronously reverse-resolving <!-- raw HTML omitted -->address<!-- raw HTML omitted --> to determine its<br />
+associated hostname, and eventually calls <!-- raw HTML omitted -->callback<!-- raw HTML omitted -->, which must<br />
 call g_resolver_lookup_by_address_finish() to get the final result.</p>
 
 
@@ -972,11 +976,11 @@ call g_resolver_lookup_by_address_finish() to get the final result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the result of a previous call to
+    <p>Retrieves the result of a previous call to<br />
 g_resolver_lookup_by_address_async().</p>
-<p>If the DNS resolution failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to
-a value from GResolver::Error. If the operation was cancelled,
-<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set to %G_IO_ERROR_CANCELLED.
+<p>If the DNS resolution failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to<br />
+a value from GResolver::Error. If the operation was cancelled,<br />
+<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set to %G_IO_ERROR_CANCELLED.<br />
 form), or nil on error.</p>
 
 
@@ -1035,27 +1039,27 @@ form), or nil on error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Synchronously resolves <!-- raw HTML omitted -->hostname<!-- raw HTML omitted --> to determine its associated IP
-address(es). <!-- raw HTML omitted -->hostname<!-- raw HTML omitted --> may be an ASCII-only or UTF-8 hostname, or
-the textual form of an IP address (in which case this just becomes
+    <p>Synchronously resolves <!-- raw HTML omitted -->hostname<!-- raw HTML omitted --> to determine its associated IP<br />
+address(es). <!-- raw HTML omitted -->hostname<!-- raw HTML omitted --> may be an ASCII-only or UTF-8 hostname, or<br />
+the textual form of an IP address (in which case this just becomes<br />
 a wrapper around g_inet_address_new_from_string()).</p>
-<p>On success, g_resolver_lookup_by_name() will return a non-empty #GList of
-GInet::Address, sorted in order of preference and guaranteed to not
-contain duplicates. That is, if using the result to connect to
-<!-- raw HTML omitted -->hostname<!-- raw HTML omitted -->, you should attempt to connect to the first address
-first, then the second if the first fails, etc. If you are using
-the result to listen on a socket, it is appropriate to add each
+<p>On success, g_resolver_lookup_by_name() will return a non-empty #GList of<br />
+GInet::Address, sorted in order of preference and guaranteed to not<br />
+contain duplicates. That is, if using the result to connect to<br />
+<!-- raw HTML omitted -->hostname<!-- raw HTML omitted -->, you should attempt to connect to the first address<br />
+first, then the second if the first fails, etc. If you are using<br />
+the result to listen on a socket, it is appropriate to add each<br />
 result using e.g. g_socket_listener_add_address().</p>
-<p>If the DNS resolution fails, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to a
+<p>If the DNS resolution fails, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to a<br />
 value from GResolver::Error and nil will be returned.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is non-nil, it can be used to cancel the
-operation, in which case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is non-nil, it can be used to cancel the<br />
+operation, in which case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to<br />
 %G_IO_ERROR_CANCELLED.</p>
-<p>If you are planning to connect to a socket on the resolved IP
-address, it may be easier to create a GNetwork::Address and use its
-GSocket::Connectable interface.
-of GInet::Address, or nil on error. You
-must unref each of the addresses and free the list when you are
+<p>If you are planning to connect to a socket on the resolved IP<br />
+address, it may be easier to create a GNetwork::Address and use its<br />
+GSocket::Connectable interface.<br />
+of GInet::Address, or nil on error. You<br />
+must unref each of the addresses and free the list when you are<br />
 done with it. (You can use g_resolver_free_addresses() to do this.)</p>
 
 
@@ -1129,9 +1133,9 @@ done with it. (You can use g_resolver_free_addresses() to do this.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Begins asynchronously resolving <!-- raw HTML omitted -->hostname<!-- raw HTML omitted --> to determine its
-associated IP address(es), and eventually calls <!-- raw HTML omitted -->callback<!-- raw HTML omitted -->, which
-must call g_resolver_lookup_by_name_finish() to get the result.
+    <p>Begins asynchronously resolving <!-- raw HTML omitted -->hostname<!-- raw HTML omitted --> to determine its<br />
+associated IP address(es), and eventually calls <!-- raw HTML omitted -->callback<!-- raw HTML omitted -->, which<br />
+must call g_resolver_lookup_by_name_finish() to get the result.<br />
 See g_resolver_lookup_by_name() for more details.</p>
 
 
@@ -1231,12 +1235,12 @@ See g_resolver_lookup_by_name() for more details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the result of a call to
+    <p>Retrieves the result of a call to<br />
 g_resolver_lookup_by_name_async().</p>
-<p>If the DNS resolution failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to
-a value from GResolver::Error. If the operation was cancelled,
-<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set to %G_IO_ERROR_CANCELLED.
-of GInet::Address, or nil on error. See g_resolver_lookup_by_name()
+<p>If the DNS resolution failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to<br />
+a value from GResolver::Error. If the operation was cancelled,<br />
+<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set to %G_IO_ERROR_CANCELLED.<br />
+of GInet::Address, or nil on error. See g_resolver_lookup_by_name()<br />
 for more details.</p>
 
 
@@ -1295,11 +1299,11 @@ for more details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This differs from g_resolver_lookup_by_name() in that you can modify
-the lookup behavior with <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->. For example this can be used to limit
-results with %G_RESOLVER_NAME_LOOKUP_FLAGS_IPV4_ONLY.
-of GInet::Address, or nil on error. You
-must unref each of the addresses and free the list when you are
+    <p>This differs from g_resolver_lookup_by_name() in that you can modify<br />
+the lookup behavior with <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->. For example this can be used to limit<br />
+results with %G_RESOLVER_NAME_LOOKUP_FLAGS_IPV4_ONLY.<br />
+of GInet::Address, or nil on error. You<br />
+must unref each of the addresses and free the list when you are<br />
 done with it. (You can use g_resolver_free_addresses() to do this.)</p>
 
 
@@ -1388,9 +1392,9 @@ done with it. (You can use g_resolver_free_addresses() to do this.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Begins asynchronously resolving <!-- raw HTML omitted -->hostname<!-- raw HTML omitted --> to determine its
-associated IP address(es), and eventually calls <!-- raw HTML omitted -->callback<!-- raw HTML omitted -->, which
-must call g_resolver_lookup_by_name_with_flags_finish() to get the result.
+    <p>Begins asynchronously resolving <!-- raw HTML omitted -->hostname<!-- raw HTML omitted --> to determine its<br />
+associated IP address(es), and eventually calls <!-- raw HTML omitted -->callback<!-- raw HTML omitted -->, which<br />
+must call g_resolver_lookup_by_name_with_flags_finish() to get the result.<br />
 See g_resolver_lookup_by_name() for more details.</p>
 
 
@@ -1505,12 +1509,12 @@ See g_resolver_lookup_by_name() for more details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the result of a call to
+    <p>Retrieves the result of a call to<br />
 g_resolver_lookup_by_name_with_flags_async().</p>
-<p>If the DNS resolution failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to
-a value from GResolver::Error. If the operation was cancelled,
-<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set to %G_IO_ERROR_CANCELLED.
-of GInet::Address, or nil on error. See g_resolver_lookup_by_name()
+<p>If the DNS resolution failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to<br />
+a value from GResolver::Error. If the operation was cancelled,<br />
+<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set to %G_IO_ERROR_CANCELLED.<br />
+of GInet::Address, or nil on error. See g_resolver_lookup_by_name()<br />
 for more details.</p>
 
 
@@ -1569,16 +1573,16 @@ for more details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Synchronously performs a DNS record lookup for the given <!-- raw HTML omitted -->rrname<!-- raw HTML omitted --> and returns
-a list of records as #GVariant tuples. See GResolver::RecordType for
+    <p>Synchronously performs a DNS record lookup for the given <!-- raw HTML omitted -->rrname<!-- raw HTML omitted --> and returns<br />
+a list of records as #GVariant tuples. See GResolver::RecordType for<br />
 information on what the records contain for each <!-- raw HTML omitted -->record_type<!-- raw HTML omitted -->.</p>
-<p>If the DNS resolution fails, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to
+<p>If the DNS resolution fails, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to<br />
 a value from GResolver::Error and nil will be returned.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is non-nil, it can be used to cancel the
-operation, in which case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to
-%G_IO_ERROR_CANCELLED.
-#GVariant, or nil on error. You must free each of the records and the list
-when you are done with it. (You can use g_list_free_full() with
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is non-nil, it can be used to cancel the<br />
+operation, in which case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to<br />
+%G_IO_ERROR_CANCELLED.<br />
+#GVariant, or nil on error. You must free each of the records and the list<br />
+when you are done with it. (You can use g_list_free_full() with<br />
 g_variant_unref() to do this.)</p>
 
 
@@ -1667,9 +1671,9 @@ g_variant_unref() to do this.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Begins asynchronously performing a DNS lookup for the given
-<!-- raw HTML omitted -->rrname<!-- raw HTML omitted -->, and eventually calls <!-- raw HTML omitted -->callback<!-- raw HTML omitted -->, which must call
-g_resolver_lookup_records_finish() to get the final result. See
+    <p>Begins asynchronously performing a DNS lookup for the given<br />
+<!-- raw HTML omitted -->rrname<!-- raw HTML omitted -->, and eventually calls <!-- raw HTML omitted -->callback<!-- raw HTML omitted -->, which must call<br />
+g_resolver_lookup_records_finish() to get the final result. See<br />
 g_resolver_lookup_records() for more details.</p>
 
 
@@ -1784,15 +1788,15 @@ g_resolver_lookup_records() for more details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the result of a previous call to
-g_resolver_lookup_records_async(). Returns a non-empty list of records as
-#GVariant tuples. See GResolver::RecordType for information on what the
+    <p>Retrieves the result of a previous call to<br />
+g_resolver_lookup_records_async(). Returns a non-empty list of records as<br />
+#GVariant tuples. See GResolver::RecordType for information on what the<br />
 records contain.</p>
-<p>If the DNS resolution failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to
-a value from GResolver::Error. If the operation was cancelled,
-<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set to %G_IO_ERROR_CANCELLED.
-#GVariant, or nil on error. You must free each of the records and the list
-when you are done with it. (You can use g_list_free_full() with
+<p>If the DNS resolution failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to<br />
+a value from GResolver::Error. If the operation was cancelled,<br />
+<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set to %G_IO_ERROR_CANCELLED.<br />
+#GVariant, or nil on error. You must free each of the records and the list<br />
+when you are done with it. (You can use g_list_free_full() with<br />
 g_variant_unref() to do this.)</p>
 
 
@@ -1851,25 +1855,25 @@ g_variant_unref() to do this.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Synchronously performs a DNS SRV lookup for the given <!-- raw HTML omitted -->service<!-- raw HTML omitted --> and
-<!-- raw HTML omitted -->protocol<!-- raw HTML omitted --> in the given <!-- raw HTML omitted -->domain<!-- raw HTML omitted --> and returns an array of GSrv::Target.
-<!-- raw HTML omitted -->domain<!-- raw HTML omitted --> may be an ASCII-only or UTF-8 hostname. Note also that the
-<!-- raw HTML omitted -->service<!-- raw HTML omitted --> and <!-- raw HTML omitted -->protocol<!-- raw HTML omitted --> arguments do not include the leading underscore
+    <p>Synchronously performs a DNS SRV lookup for the given <!-- raw HTML omitted -->service<!-- raw HTML omitted --> and<br />
+<!-- raw HTML omitted -->protocol<!-- raw HTML omitted --> in the given <!-- raw HTML omitted -->domain<!-- raw HTML omitted --> and returns an array of GSrv::Target.<br />
+<!-- raw HTML omitted -->domain<!-- raw HTML omitted --> may be an ASCII-only or UTF-8 hostname. Note also that the<br />
+<!-- raw HTML omitted -->service<!-- raw HTML omitted --> and <!-- raw HTML omitted -->protocol<!-- raw HTML omitted --> arguments do not include the leading underscore<br />
 that appears in the actual DNS entry.</p>
-<p>On success, g_resolver_lookup_service() will return a non-empty #GList of
-GSrv::Target, sorted in order of preference. (That is, you should
-attempt to connect to the first target first, then the second if
+<p>On success, g_resolver_lookup_service() will return a non-empty #GList of<br />
+GSrv::Target, sorted in order of preference. (That is, you should<br />
+attempt to connect to the first target first, then the second if<br />
 the first fails, etc.)</p>
-<p>If the DNS resolution fails, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to
+<p>If the DNS resolution fails, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to<br />
 a value from GResolver::Error and nil will be returned.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is non-nil, it can be used to cancel the
-operation, in which case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is non-nil, it can be used to cancel the<br />
+operation, in which case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to<br />
 %G_IO_ERROR_CANCELLED.</p>
-<p>If you are planning to connect to the service, it is usually easier
-to create a GNetwork::Service and use its #GSocketConnectable
-interface.
-GSrv::Target, or nil on error. You must free each of the targets and the
-list when you are done with it. (You can use g_resolver_free_targets() to do
+<p>If you are planning to connect to the service, it is usually easier<br />
+to create a GNetwork::Service and use its #GSocketConnectable<br />
+interface.<br />
+GSrv::Target, or nil on error. You must free each of the targets and the<br />
+list when you are done with it. (You can use g_resolver_free_targets() to do<br />
 this.)</p>
 
 
@@ -1973,10 +1977,10 @@ this.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Begins asynchronously performing a DNS SRV lookup for the given
-<!-- raw HTML omitted -->service<!-- raw HTML omitted --> and <!-- raw HTML omitted -->protocol<!-- raw HTML omitted --> in the given <!-- raw HTML omitted -->domain<!-- raw HTML omitted -->, and eventually calls
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted -->, which must call g_resolver_lookup_service_finish() to
-get the final result. See g_resolver_lookup_service() for more
+    <p>Begins asynchronously performing a DNS SRV lookup for the given<br />
+<!-- raw HTML omitted -->service<!-- raw HTML omitted --> and <!-- raw HTML omitted -->protocol<!-- raw HTML omitted --> in the given <!-- raw HTML omitted -->domain<!-- raw HTML omitted -->, and eventually calls<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted -->, which must call g_resolver_lookup_service_finish() to<br />
+get the final result. See g_resolver_lookup_service() for more<br />
 details.</p>
 
 
@@ -2106,12 +2110,12 @@ details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the result of a previous call to
+    <p>Retrieves the result of a previous call to<br />
 g_resolver_lookup_service_async().</p>
-<p>If the DNS resolution failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to
-a value from GResolver::Error. If the operation was cancelled,
-<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set to %G_IO_ERROR_CANCELLED.
-GSrv::Target, or nil on error. See g_resolver_lookup_service() for more
+<p>If the DNS resolution failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) will be set to<br />
+a value from GResolver::Error. If the operation was cancelled,<br />
+<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set to %G_IO_ERROR_CANCELLED.<br />
+GSrv::Target, or nil on error. See g_resolver_lookup_service() for more<br />
 details.</p>
 
 
@@ -2170,13 +2174,13 @@ details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->resolver<!-- raw HTML omitted --> to be the application's default resolver (reffing
-<!-- raw HTML omitted -->resolver<!-- raw HTML omitted -->, and unreffing the previous default resolver, if any).
+    <p>Sets <!-- raw HTML omitted -->resolver<!-- raw HTML omitted --> to be the application's default resolver (reffing<br />
+<!-- raw HTML omitted -->resolver<!-- raw HTML omitted -->, and unreffing the previous default resolver, if any).<br />
 Future calls to g_resolver_get_default() will return this resolver.</p>
-<p>This can be used if an application wants to perform any sort of DNS
-caching or &quot;pinning&quot;; it can implement its own #GResolver that
-calls the original default resolver for DNS operations, and
-implements its own cache policies on top of that, and then set
+<p>This can be used if an application wants to perform any sort of DNS<br />
+caching or &quot;pinning&quot;; it can implement its own #GResolver that<br />
+calls the original default resolver for DNS operations, and<br />
+implements its own cache policies on top of that, and then set<br />
 itself as the default resolver for all later code to use.</p>
 
 
@@ -2213,11 +2217,11 @@ itself as the default resolver for all later code to use.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The timeout applied to all resolver lookups, in milliseconds.</p>
-<p>This may be changed through the lifetime of the #GResolver. The new value
-will apply to any lookups started after the change, but not to any
+<p>This may be changed through the lifetime of the #GResolver. The new value<br />
+will apply to any lookups started after the change, but not to any<br />
 already-ongoing lookups.</p>
 <p>If this is <code>0</code>, no timeout is applied to lookups.</p>
-<p>No timeout was applied to lookups before this property was added in
+<p>No timeout was applied to lookups before this property was added in<br />
 GLib 2.78.</p>
 
 
@@ -2258,11 +2262,11 @@ GLib 2.78.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The timeout applied to all resolver lookups, in milliseconds.</p>
-<p>This may be changed through the lifetime of the #GResolver. The new value
-will apply to any lookups started after the change, but not to any
+<p>This may be changed through the lifetime of the #GResolver. The new value<br />
+will apply to any lookups started after the change, but not to any<br />
 already-ongoing lookups.</p>
 <p>If this is <code>0</code>, no timeout is applied to lookups.</p>
-<p>No timeout was applied to lookups before this property was added in
+<p>No timeout was applied to lookups before this property was added in<br />
 GLib 2.78.</p>
 
 
@@ -2326,7 +2330,7 @@ GLib 2.78.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

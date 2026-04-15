@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::FileInfo";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -1750,6 +1752,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1795,13 +1798,13 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the access time of the current <!-- raw HTML omitted -->info<!-- raw HTML omitted --> and returns it as a
+    <p>Gets the access time of the current <!-- raw HTML omitted -->info<!-- raw HTML omitted --> and returns it as a<br />
 GDate::Time.</p>
-<p>It is an error to call this if the GFile::Info does not contain
-%G_FILE_ATTRIBUTE_TIME_ACCESS. If %G_FILE_ATTRIBUTE_TIME_ACCESS_USEC is
-provided, the resulting GDate::Time will additionally have microsecond
+<p>It is an error to call this if the GFile::Info does not contain<br />
+%G_FILE_ATTRIBUTE_TIME_ACCESS. If %G_FILE_ATTRIBUTE_TIME_ACCESS_USEC is<br />
+provided, the resulting GDate::Time will additionally have microsecond<br />
 precision.</p>
-<p>If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC must
+<p>If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC must<br />
 be queried separately using g_file_info_get_attribute_uint32().</p>
 
 
@@ -1841,8 +1844,8 @@ be queried separately using g_file_info_get_attribute_uint32().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the %G_FILE_ATTRIBUTE_TIME_ACCESS and
-%G_FILE_ATTRIBUTE_TIME_ACCESS_USEC attributes in the file info to the
+    <p>Sets the %G_FILE_ATTRIBUTE_TIME_ACCESS and<br />
+%G_FILE_ATTRIBUTE_TIME_ACCESS_USEC attributes in the file info to the<br />
 given date/time value.</p>
 <p>%G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC will be cleared.</p>
 
@@ -1988,8 +1991,8 @@ given date/time value.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the file's content type.</p>
-<p>It is an error to call this if the GFile::Info does not contain
-%G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE.
+<p>It is an error to call this if the GFile::Info does not contain<br />
+%G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE.<br />
 or nil if unknown.</p>
 
 
@@ -2029,7 +2032,7 @@ or nil if unknown.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the content type attribute for a given GFile::Info.
+    <p>Sets the content type attribute for a given GFile::Info.<br />
 See %G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE.</p>
 
 
@@ -2084,7 +2087,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>First clears all of the [GFileAttribute][gio-GFileAttribute] of <!-- raw HTML omitted -->dest_info<!-- raw HTML omitted -->,
+    <p>First clears all of the [GFileAttribute][gio-GFileAttribute] of <!-- raw HTML omitted -->dest_info<!-- raw HTML omitted -->,<br />
 and then copies all of the file attributes from <!-- raw HTML omitted -->src_info<!-- raw HTML omitted --> to <!-- raw HTML omitted -->dest_info<!-- raw HTML omitted -->.</p>
 
 
@@ -2139,13 +2142,13 @@ and then copies all of the file attributes from <!-- raw HTML omitted -->src_inf
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the creation time of the current <!-- raw HTML omitted -->info<!-- raw HTML omitted --> and returns it as a
+    <p>Gets the creation time of the current <!-- raw HTML omitted -->info<!-- raw HTML omitted --> and returns it as a<br />
 GDate::Time.</p>
-<p>It is an error to call this if the GFile::Info does not contain
-%G_FILE_ATTRIBUTE_TIME_CREATED. If %G_FILE_ATTRIBUTE_TIME_CREATED_USEC is
-provided, the resulting GDate::Time will additionally have microsecond
+<p>It is an error to call this if the GFile::Info does not contain<br />
+%G_FILE_ATTRIBUTE_TIME_CREATED. If %G_FILE_ATTRIBUTE_TIME_CREATED_USEC is<br />
+provided, the resulting GDate::Time will additionally have microsecond<br />
 precision.</p>
-<p>If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_CREATED_NSEC must
+<p>If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_CREATED_NSEC must<br />
 be queried separately using g_file_info_get_attribute_uint32().</p>
 
 
@@ -2185,8 +2188,8 @@ be queried separately using g_file_info_get_attribute_uint32().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the %G_FILE_ATTRIBUTE_TIME_CREATED and
-%G_FILE_ATTRIBUTE_TIME_CREATED_USEC attributes in the file info to the
+    <p>Sets the %G_FILE_ATTRIBUTE_TIME_CREATED and<br />
+%G_FILE_ATTRIBUTE_TIME_CREATED_USEC attributes in the file info to the<br />
 given date/time value.</p>
 <p>%G_FILE_ATTRIBUTE_TIME_CREATED_NSEC will be cleared.</p>
 
@@ -2242,8 +2245,8 @@ given date/time value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the GDate::Time representing the deletion date of the file, as
-available in %G_FILE_ATTRIBUTE_TRASH_DELETION_DATE. If the
+    <p>Returns the GDate::Time representing the deletion date of the file, as<br />
+available in %G_FILE_ATTRIBUTE_TRASH_DELETION_DATE. If the<br />
 %G_FILE_ATTRIBUTE_TRASH_DELETION_DATE attribute is unset, nil is returned.</p>
 
 
@@ -2284,7 +2287,7 @@ available in %G_FILE_ATTRIBUTE_TRASH_DELETION_DATE. If the
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets a display name for a file. This is guaranteed to always be set.</p>
-<p>It is an error to call this if the GFile::Info does not contain
+<p>It is an error to call this if the GFile::Info does not contain<br />
 %G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME.</p>
 
 
@@ -2324,7 +2327,7 @@ available in %G_FILE_ATTRIBUTE_TRASH_DELETION_DATE. If the
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the display name for the current GFile::Info.
+    <p>Sets the display name for the current GFile::Info.<br />
 See %G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME.</p>
 
 
@@ -2419,7 +2422,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the edit name for a file.</p>
-<p>It is an error to call this if the GFile::Info does not contain
+<p>It is an error to call this if the GFile::Info does not contain<br />
 %G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME.</p>
 
 
@@ -2459,7 +2462,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the edit name for the current file.
+    <p>Sets the edit name for the current file.<br />
 See %G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME.</p>
 
 
@@ -2514,9 +2517,9 @@ See %G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the <a href="iface.File.html#entity-tags">entity tag</a> for a given
+    <p>Gets the <a href="iface.File.html#entity-tags">entity tag</a> for a given<br />
 GFile::Info. See %G_FILE_ATTRIBUTE_ETAG_VALUE.</p>
-<p>It is an error to call this if the GFile::Info does not contain
+<p>It is an error to call this if the GFile::Info does not contain<br />
 %G_FILE_ATTRIBUTE_ETAG_VALUE.</p>
 
 
@@ -2556,9 +2559,9 @@ GFile::Info. See %G_FILE_ATTRIBUTE_ETAG_VALUE.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a file's type (whether it is a regular file, symlink, etc).
+    <p>Gets a file's type (whether it is a regular file, symlink, etc).<br />
 This is different from the file's content type, see g_file_info_get_content_type().</p>
-<p>It is an error to call this if the GFile::Info does not contain
+<p>It is an error to call this if the GFile::Info does not contain<br />
 %G_FILE_ATTRIBUTE_STANDARD_TYPE.</p>
 
 
@@ -2598,7 +2601,7 @@ This is different from the file's content type, see g_file_info_get_content_type
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the file type in a GFile::Info to <!-- raw HTML omitted -->type<!-- raw HTML omitted -->.
+    <p>Sets the file type in a GFile::Info to <!-- raw HTML omitted -->type<!-- raw HTML omitted -->.<br />
 See %G_FILE_ATTRIBUTE_STANDARD_TYPE.</p>
 
 
@@ -2653,8 +2656,8 @@ See %G_FILE_ATTRIBUTE_STANDARD_TYPE.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of an attribute, formatted as a string.
-This escapes things as needed to make the string valid
+    <p>Gets the value of an attribute, formatted as a string.<br />
+This escapes things as needed to make the string valid<br />
 UTF-8.</p>
 
 
@@ -2692,8 +2695,8 @@ UTF-8.</p>
       
       
         &mdash;
-        <div class='inline'><p>a UTF-8 string associated with the given <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->, or
-nil if the attribute wasn’t set.
+        <div class='inline'><p>a UTF-8 string associated with the given <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->, or<br />
+nil if the attribute wasn’t set.<br />
 When you're done with the string it must be freed with g_free().</p>
 </div>
       
@@ -2715,7 +2718,7 @@ When you're done with the string it must be freed with g_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of a boolean attribute. If the attribute does not
+    <p>Gets the value of a boolean attribute. If the attribute does not<br />
 contain a boolean value, false will be returned.</p>
 
 
@@ -2774,8 +2777,8 @@ contain a boolean value, false will be returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of a byte string attribute. If the attribute does
-not contain a byte string, nil will be returned.
+    <p>Gets the value of a byte string attribute. If the attribute does<br />
+not contain a byte string, nil will be returned.<br />
 nil otherwise.</p>
 
 
@@ -2883,7 +2886,7 @@ nil otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the
+        <div class='inline'><p>return location for the<br />
 attribute value, or nil; the attribute value will not be nil</p>
 </div>
       
@@ -2917,7 +2920,7 @@ attribute value, or nil; the attribute value will not be nil</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->info<!-- raw HTML omitted --> has an attribute named <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->,
+        <div class='inline'><p>true if <!-- raw HTML omitted -->info<!-- raw HTML omitted --> has an attribute named <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->,<br />
 false otherwise.</p>
 </div>
       
@@ -2941,8 +2944,8 @@ false otherwise.</p>
   <div class="discussion">
     <p>Gets the value of a byte string attribute as a file path.</p>
 <p>If the attribute does not contain a byte string, <code>NULL</code> will be returned.</p>
-<p>This function is meant to be used by language bindings that have specific
-handling for Unix paths.
+<p>This function is meant to be used by language bindings that have specific<br />
+handling for Unix paths.<br />
 a file path, or nil otherwise.</p>
 
 
@@ -3001,8 +3004,8 @@ a file path, or nil otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a signed 32-bit integer contained within the attribute. If the
-attribute does not contain a signed 32-bit integer, or is invalid,
+    <p>Gets a signed 32-bit integer contained within the attribute. If the<br />
+attribute does not contain a signed 32-bit integer, or is invalid,<br />
 0 will be returned.</p>
 
 
@@ -3061,8 +3064,8 @@ attribute does not contain a signed 32-bit integer, or is invalid,
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a signed 64-bit integer contained within the attribute. If the
-attribute does not contain a signed 64-bit integer, or is invalid,
+    <p>Gets a signed 64-bit integer contained within the attribute. If the<br />
+attribute does not contain a signed 64-bit integer, or is invalid,<br />
 0 will be returned.</p>
 
 
@@ -3121,8 +3124,8 @@ attribute does not contain a signed 64-bit integer, or is invalid,
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of a #GObject attribute. If the attribute does
-not contain a #GObject, nil will be returned.
+    <p>Gets the value of a #GObject attribute. If the attribute does<br />
+not contain a #GObject, nil will be returned.<br />
 or nil otherwise.</p>
 
 
@@ -3218,7 +3221,7 @@ or nil otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GFile::AttributeStatus for the given <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->, or
+        <div class='inline'><p>a GFile::AttributeStatus for the given <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->, or<br />
 %G_FILE_ATTRIBUTE_STATUS_UNSET if the key is invalid.</p>
 </div>
       
@@ -3240,8 +3243,8 @@ or nil otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of a string attribute. If the attribute does
-not contain a string, nil will be returned.
+    <p>Gets the value of a string attribute. If the attribute does<br />
+not contain a string, nil will be returned.<br />
 or nil otherwise.</p>
 
 
@@ -3300,8 +3303,8 @@ or nil otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of a stringv attribute. If the attribute does
-not contain a stringv, nil will be returned.
+    <p>Gets the value of a stringv attribute. If the attribute does<br />
+not contain a stringv, nil will be returned.<br />
 or nil otherwise. Do not free. These returned strings are UTF-8.</p>
 
 
@@ -3360,7 +3363,7 @@ or nil otherwise. Do not free. These returned strings are UTF-8.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the attribute type for an attribute key.
+    <p>Gets the attribute type for an attribute key.<br />
 %G_FILE_ATTRIBUTE_TYPE_INVALID if the key is not set.</p>
 
 
@@ -3419,8 +3422,8 @@ or nil otherwise. Do not free. These returned strings are UTF-8.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets an unsigned 32-bit integer contained within the attribute. If the
-attribute does not contain an unsigned 32-bit integer, or is invalid,
+    <p>Gets an unsigned 32-bit integer contained within the attribute. If the<br />
+attribute does not contain an unsigned 32-bit integer, or is invalid,<br />
 0 will be returned.</p>
 
 
@@ -3479,8 +3482,8 @@ attribute does not contain an unsigned 32-bit integer, or is invalid,
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a unsigned 64-bit integer contained within the attribute. If the
-attribute does not contain an unsigned 64-bit integer, or is invalid,
+    <p>Gets a unsigned 64-bit integer contained within the attribute. If the<br />
+attribute does not contain an unsigned 64-bit integer, or is invalid,<br />
 0 will be returned.</p>
 
 
@@ -3539,10 +3542,10 @@ attribute does not contain an unsigned 64-bit integer, or is invalid,
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the modification time of the current <!-- raw HTML omitted -->info<!-- raw HTML omitted --> and sets it
+    <p>Gets the modification time of the current <!-- raw HTML omitted -->info<!-- raw HTML omitted --> and sets it<br />
 in <!-- raw HTML omitted -->result<!-- raw HTML omitted -->.</p>
-<p>It is an error to call this if the GFile::Info does not contain
-%G_FILE_ATTRIBUTE_TIME_MODIFIED. If %G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC is
+<p>It is an error to call this if the GFile::Info does not contain<br />
+%G_FILE_ATTRIBUTE_TIME_MODIFIED. If %G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC is<br />
 provided it will be used too.</p>
 
 
@@ -3634,7 +3637,7 @@ provided it will be used too.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->info<!-- raw HTML omitted --> has an attribute named <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->,
+        <div class='inline'><p>true if <!-- raw HTML omitted -->info<!-- raw HTML omitted --> has an attribute named <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->,<br />
 false otherwise.</p>
 </div>
       
@@ -3656,7 +3659,7 @@ false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if a file info structure has an attribute in the
+    <p>Checks if a file info structure has an attribute in the<br />
 specified <!-- raw HTML omitted -->name_space<!-- raw HTML omitted -->.</p>
 
 
@@ -3694,7 +3697,7 @@ specified <!-- raw HTML omitted -->name_space<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->info<!-- raw HTML omitted --> has an attribute in <!-- raw HTML omitted -->name_space<!-- raw HTML omitted -->,
+        <div class='inline'><p>true if <!-- raw HTML omitted -->info<!-- raw HTML omitted --> has an attribute in <!-- raw HTML omitted -->name_space<!-- raw HTML omitted -->,<br />
 false otherwise.</p>
 </div>
       
@@ -3717,7 +3720,7 @@ false otherwise.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the icon for a file.</p>
-<p>It is an error to call this if the GFile::Info does not contain
+<p>It is an error to call this if the GFile::Info does not contain<br />
 %G_FILE_ATTRIBUTE_STANDARD_ICON.</p>
 
 
@@ -3757,7 +3760,7 @@ false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the icon for a given GFile::Info.
+    <p>Sets the icon for a given GFile::Info.<br />
 See %G_FILE_ATTRIBUTE_STANDARD_ICON.</p>
 
 
@@ -3813,7 +3816,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_ICON.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if a file is a backup file.</p>
-<p>It is an error to call this if the GFile::Info does not contain
+<p>It is an error to call this if the GFile::Info does not contain<br />
 %G_FILE_ATTRIBUTE_STANDARD_IS_BACKUP.</p>
 
 
@@ -3854,7 +3857,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_ICON.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if a file is hidden.</p>
-<p>It is an error to call this if the GFile::Info does not contain
+<p>It is an error to call this if the GFile::Info does not contain<br />
 %G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN.</p>
 
 
@@ -3894,7 +3897,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_ICON.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the &quot;is_hidden&quot; attribute in a GFile::Info according to <!-- raw HTML omitted -->is_hidden<!-- raw HTML omitted -->.
+    <p>Sets the &quot;is_hidden&quot; attribute in a GFile::Info according to <!-- raw HTML omitted -->is_hidden<!-- raw HTML omitted -->.<br />
 See %G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN.</p>
 
 
@@ -3950,7 +3953,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if a file is a symlink.</p>
-<p>It is an error to call this if the GFile::Info does not contain
+<p>It is an error to call this if the GFile::Info does not contain<br />
 %G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK.</p>
 
 
@@ -3990,7 +3993,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the &quot;is_symlink&quot; attribute in a GFile::Info according to <!-- raw HTML omitted -->is_symlink<!-- raw HTML omitted -->.
+    <p>Sets the &quot;is_symlink&quot; attribute in a GFile::Info according to <!-- raw HTML omitted -->is_symlink<!-- raw HTML omitted -->.<br />
 See %G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK.</p>
 
 
@@ -4045,8 +4048,8 @@ See %G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Lists the file info structure's attributes.
-null-terminated array of strings of all of the possible attribute
+    <p>Lists the file info structure's attributes.<br />
+null-terminated array of strings of all of the possible attribute<br />
 types for the given <!-- raw HTML omitted -->name_space<!-- raw HTML omitted -->, or nil on error.</p>
 
 
@@ -4066,7 +4069,7 @@ types for the given <!-- raw HTML omitted -->name_space<!-- raw HTML omitted -->
       
       
         &mdash;
-        <div class='inline'><p>a file attribute key's namespace, or nil to list
+        <div class='inline'><p>a file attribute key's namespace, or nil to list<br />
 all attributes.</p>
 </div>
       
@@ -4106,13 +4109,13 @@ all attributes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the modification time of the current <!-- raw HTML omitted -->info<!-- raw HTML omitted --> and returns it as a
+    <p>Gets the modification time of the current <!-- raw HTML omitted -->info<!-- raw HTML omitted --> and returns it as a<br />
 GDate::Time.</p>
-<p>It is an error to call this if the GFile::Info does not contain
-%G_FILE_ATTRIBUTE_TIME_MODIFIED. If %G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC is
-provided, the resulting GDate::Time will additionally have microsecond
+<p>It is an error to call this if the GFile::Info does not contain<br />
+%G_FILE_ATTRIBUTE_TIME_MODIFIED. If %G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC is<br />
+provided, the resulting GDate::Time will additionally have microsecond<br />
 precision.</p>
-<p>If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC must
+<p>If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC must<br />
 be queried separately using g_file_info_get_attribute_uint32().</p>
 
 
@@ -4152,8 +4155,8 @@ be queried separately using g_file_info_get_attribute_uint32().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the %G_FILE_ATTRIBUTE_TIME_MODIFIED and
-%G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC attributes in the file info to the
+    <p>Sets the %G_FILE_ATTRIBUTE_TIME_MODIFIED and<br />
+%G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC attributes in the file info to the<br />
 given date/time value.</p>
 <p>%G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC will be cleared.</p>
 
@@ -4209,8 +4212,8 @@ given date/time value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the %G_FILE_ATTRIBUTE_TIME_MODIFIED and
-%G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC attributes in the file info to the
+    <p>Sets the %G_FILE_ATTRIBUTE_TIME_MODIFIED and<br />
+%G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC attributes in the file info to the<br />
 given time value.</p>
 <p>%G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC will be cleared.</p>
 
@@ -4267,7 +4270,7 @@ given time value.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the name for a file. This is guaranteed to always be set.</p>
-<p>It is an error to call this if the GFile::Info does not contain
+<p>It is an error to call this if the GFile::Info does not contain<br />
 %G_FILE_ATTRIBUTE_STANDARD_NAME.</p>
 
 
@@ -4307,7 +4310,7 @@ given time value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the name attribute for the current GFile::Info.
+    <p>Sets the name attribute for the current GFile::Info.<br />
 See %G_FILE_ATTRIBUTE_STANDARD_NAME.</p>
 
 
@@ -4416,7 +4419,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_NAME.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given value, if possible. To unset the
+    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given value, if possible. To unset the<br />
 attribute, use %G_FILE_ATTRIBUTE_TYPE_INVALID for <!-- raw HTML omitted -->type<!-- raw HTML omitted -->.</p>
 
 
@@ -4501,7 +4504,7 @@ attribute, use %G_FILE_ATTRIBUTE_TYPE_INVALID for <!-- raw HTML omitted -->type<
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,
+    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,<br />
 if possible.</p>
 
 
@@ -4571,7 +4574,7 @@ if possible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,
+    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,<br />
 if possible.</p>
 
 
@@ -4641,9 +4644,9 @@ if possible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,
+    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,<br />
 if possible.</p>
-<p>This function is meant to be used by language bindings that have specific
+<p>This function is meant to be used by language bindings that have specific<br />
 handling for Unix paths.</p>
 
 
@@ -4713,7 +4716,7 @@ handling for Unix paths.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,
+    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,<br />
 if possible.</p>
 
 
@@ -4783,7 +4786,7 @@ if possible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,
+    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,<br />
 if possible.</p>
 
 
@@ -4853,7 +4856,7 @@ if possible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,
+    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,<br />
 if possible.</p>
 
 
@@ -4923,10 +4926,10 @@ if possible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the attribute status for an attribute key. This is only
-needed by external code that implement g_file_set_attributes_from_info()
+    <p>Sets the attribute status for an attribute key. This is only<br />
+needed by external code that implement g_file_set_attributes_from_info()<br />
 or similar functions.</p>
-<p>The attribute must exist in <!-- raw HTML omitted -->info<!-- raw HTML omitted --> for this to work. Otherwise false
+<p>The attribute must exist in <!-- raw HTML omitted -->info<!-- raw HTML omitted --> for this to work. Otherwise false<br />
 is returned and <!-- raw HTML omitted -->info<!-- raw HTML omitted --> is unchanged.</p>
 
 
@@ -5000,7 +5003,7 @@ is returned and <!-- raw HTML omitted -->info<!-- raw HTML omitted --> is unchan
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,
+    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,<br />
 if possible.</p>
 
 
@@ -5070,7 +5073,7 @@ if possible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,
+    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,<br />
 if possible.</p>
 <p>Sinze: 2.22</p>
 
@@ -5106,7 +5109,7 @@ if possible.</p>
       
       
         &mdash;
-        <div class='inline'><p>a nil
+        <div class='inline'><p>a nil<br />
 terminated array of UTF-8 strings.</p>
 </div>
       
@@ -5142,7 +5145,7 @@ terminated array of UTF-8 strings.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,
+    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,<br />
 if possible.</p>
 
 
@@ -5212,7 +5215,7 @@ if possible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,
+    <p>Sets the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to contain the given <!-- raw HTML omitted -->attr_value<!-- raw HTML omitted -->,<br />
 if possible.</p>
 
 
@@ -5282,10 +5285,10 @@ if possible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the file's size (in bytes). The size is retrieved through the value of
-the %G_FILE_ATTRIBUTE_STANDARD_SIZE attribute and is converted
+    <p>Gets the file's size (in bytes). The size is retrieved through the value of<br />
+the %G_FILE_ATTRIBUTE_STANDARD_SIZE attribute and is converted<br />
 from #guint64 to #goffset before returning the result.</p>
-<p>It is an error to call this if the GFile::Info does not contain
+<p>It is an error to call this if the GFile::Info does not contain<br />
 %G_FILE_ATTRIBUTE_STANDARD_SIZE.</p>
 
 
@@ -5325,7 +5328,7 @@ from #guint64 to #goffset before returning the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the %G_FILE_ATTRIBUTE_STANDARD_SIZE attribute in the file info
+    <p>Sets the %G_FILE_ATTRIBUTE_STANDARD_SIZE attribute in the file info<br />
 to the given size.</p>
 
 
@@ -5380,9 +5383,9 @@ to the given size.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of the sort_order attribute from the GFile::Info.
+    <p>Gets the value of the sort_order attribute from the GFile::Info.<br />
 See %G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER.</p>
-<p>It is an error to call this if the GFile::Info does not contain
+<p>It is an error to call this if the GFile::Info does not contain<br />
 %G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER.</p>
 
 
@@ -5422,7 +5425,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the sort order attribute in the file info structure. See
+    <p>Sets the sort order attribute in the file info structure. See<br />
 %G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER.</p>
 
 
@@ -5478,7 +5481,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the symbolic icon for a file.</p>
-<p>It is an error to call this if the GFile::Info does not contain
+<p>It is an error to call this if the GFile::Info does not contain<br />
 %G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON.</p>
 
 
@@ -5518,7 +5521,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the symbolic icon for a given GFile::Info.
+    <p>Sets the symbolic icon for a given GFile::Info.<br />
 See %G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON.</p>
 
 
@@ -5574,7 +5577,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the symlink target for a given GFile::Info.</p>
-<p>It is an error to call this if the GFile::Info does not contain
+<p>It is an error to call this if the GFile::Info does not contain<br />
 %G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET.</p>
 
 
@@ -5614,7 +5617,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the %G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET attribute in the file info
+    <p>Sets the %G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET attribute in the file info<br />
 to the given symlink target.</p>
 
 
@@ -5669,7 +5672,7 @@ to the given symlink target.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unsets a mask set by g_file_info_set_attribute_mask(), if one
+    <p>Unsets a mask set by g_file_info_set_attribute_mask(), if one<br />
 is set.</p>
 
 
@@ -5701,7 +5704,7 @@ is set.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

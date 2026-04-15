@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::SpaceDrawer";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -324,6 +326,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -371,11 +374,11 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Binds the [property<!-- raw HTML omitted -->SpaceDrawer<!-- raw HTML omitted -->:matrix] property to a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings] key.</p>
-<p>The [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings] key must be of the same type as the
+<p>The [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings] key must be of the same type as the<br />
 [property<!-- raw HTML omitted -->SpaceDrawer<!-- raw HTML omitted -->:matrix] property, that is, <code>&quot;au&quot;</code>.</p>
-<p>The [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings.bind] function cannot be used, because the default GIO
-mapping functions don't support [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] properties (maybe it will be
-supported by a future GIO version, in which case this function can be
+<p>The [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings.bind] function cannot be used, because the default GIO<br />
+mapping functions don't support [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] properties (maybe it will be<br />
+supported by a future GIO version, in which case this function can be<br />
 deprecated).</p>
 
 
@@ -605,12 +608,12 @@ deprecated).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If only one location is specified, this function returns what kind of
+    <p>If only one location is specified, this function returns what kind of<br />
 white spaces are drawn at that location.</p>
 <p>The value is retrieved from the [property<!-- raw HTML omitted -->SpaceDrawer<!-- raw HTML omitted -->:matrix] property.</p>
-<p>If several locations are specified, this function returns the logical AND for
-those locations. Which means that if a certain kind of white space is present
-in the return value, then that kind of white space is drawn at all the
+<p>If several locations are specified, this function returns the logical AND for<br />
+those locations. Which means that if a certain kind of white space is present<br />
+in the return value, then that kind of white space is drawn at all the<br />
 specified <!-- raw HTML omitted -->locations<!-- raw HTML omitted -->.</p>
 
 
@@ -669,14 +672,14 @@ specified <!-- raw HTML omitted -->locations<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The property is a [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] property to specify where and
+    <p>The property is a [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] property to specify where and<br />
 what kind of white spaces to draw.</p>
-<p>The [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] is of type <code>&quot;au&quot;</code>, an array of unsigned integers. Each
-integer is a combination of [flags<!-- raw HTML omitted -->SpaceTypeFlags<!-- raw HTML omitted -->]. There is one
-integer for each [flags<!-- raw HTML omitted -->SpaceLocationFlags<!-- raw HTML omitted -->], in the same order as
-they are defined in the enum (%GTK_SOURCE_SPACE_LOCATION_NONE and
+<p>The [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] is of type <code>&quot;au&quot;</code>, an array of unsigned integers. Each<br />
+integer is a combination of [flags<!-- raw HTML omitted -->SpaceTypeFlags<!-- raw HTML omitted -->]. There is one<br />
+integer for each [flags<!-- raw HTML omitted -->SpaceLocationFlags<!-- raw HTML omitted -->], in the same order as<br />
+they are defined in the enum (%GTK_SOURCE_SPACE_LOCATION_NONE and<br />
 %GTK_SOURCE_SPACE_LOCATION_ALL are not taken into account).</p>
-<p>If the array is shorter than the number of locations, then the value
+<p>If the array is shorter than the number of locations, then the value<br />
 for the missing locations will be %GTK_SOURCE_SPACE_TYPE_NONE.</p>
 <p>By default, %GTK_SOURCE_SPACE_TYPE_ALL is set for all locations.4</p>
 
@@ -717,14 +720,14 @@ for the missing locations will be %GTK_SOURCE_SPACE_TYPE_NONE.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The property is a [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] property to specify where and
+    <p>The property is a [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] property to specify where and<br />
 what kind of white spaces to draw.</p>
-<p>The [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] is of type <code>&quot;au&quot;</code>, an array of unsigned integers. Each
-integer is a combination of [flags<!-- raw HTML omitted -->SpaceTypeFlags<!-- raw HTML omitted -->]. There is one
-integer for each [flags<!-- raw HTML omitted -->SpaceLocationFlags<!-- raw HTML omitted -->], in the same order as
-they are defined in the enum (%GTK_SOURCE_SPACE_LOCATION_NONE and
+<p>The [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] is of type <code>&quot;au&quot;</code>, an array of unsigned integers. Each<br />
+integer is a combination of [flags<!-- raw HTML omitted -->SpaceTypeFlags<!-- raw HTML omitted -->]. There is one<br />
+integer for each [flags<!-- raw HTML omitted -->SpaceLocationFlags<!-- raw HTML omitted -->], in the same order as<br />
+they are defined in the enum (%GTK_SOURCE_SPACE_LOCATION_NONE and<br />
 %GTK_SOURCE_SPACE_LOCATION_ALL are not taken into account).</p>
-<p>If the array is shorter than the number of locations, then the value
+<p>If the array is shorter than the number of locations, then the value<br />
 for the missing locations will be %GTK_SOURCE_SPACE_TYPE_NONE.</p>
 <p>By default, %GTK_SOURCE_SPACE_TYPE_ALL is set for all locations.4</p>
 
@@ -793,7 +796,7 @@ for the missing locations will be %GTK_SOURCE_SPACE_TYPE_NONE.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Modifies the [property<!-- raw HTML omitted -->SpaceDrawer<!-- raw HTML omitted -->:matrix] property at the specified
+    <p>Modifies the [property<!-- raw HTML omitted -->SpaceDrawer<!-- raw HTML omitted -->:matrix] property at the specified<br />
 <!-- raw HTML omitted -->locations<!-- raw HTML omitted -->.</p>
 
 
@@ -859,7 +862,7 @@ for the missing locations will be %GTK_SOURCE_SPACE_TYPE_NONE.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

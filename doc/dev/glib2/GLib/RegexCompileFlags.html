@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GLib::RegexCompileFlags";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -110,8 +112,8 @@
         <dt id="CASELESS-constant" class="">CASELESS =
           <div class="docstring">
   <div class="discussion">
-    <p>Letters in the pattern match both upper- and
-lowercase letters. This option can be changed within a pattern
+    <p>Letters in the pattern match both upper- and<br />
+lowercase letters. This option can be changed within a pattern<br />
 by a &quot;(?i)&quot; option setting.</p>
 
 
@@ -127,16 +129,16 @@ by a &quot;(?i)&quot; option setting.</p>
         <dt id="MULTILINE-constant" class="">MULTILINE =
           <div class="docstring">
   <div class="discussion">
-    <p>By default, GRegex treats the strings as consisting
-of a single line of characters (even if it actually contains
-newlines). The &quot;start of line&quot; metacharacter (&quot;^&quot;) matches only
-at the start of the string, while the &quot;end of line&quot; metacharacter
-(&quot;$&quot;) matches only at the end of the string, or before a terminating
-newline (unless %G_REGEX_DOLLAR_ENDONLY is set). When
-%G_REGEX_MULTILINE is set, the &quot;start of line&quot; and &quot;end of line&quot;
-constructs match immediately following or immediately before any
-newline in the string, respectively, as well as at the very start
-and end. This can be changed within a pattern by a &quot;(?m)&quot; option
+    <p>By default, GRegex treats the strings as consisting<br />
+of a single line of characters (even if it actually contains<br />
+newlines). The &quot;start of line&quot; metacharacter (&quot;^&quot;) matches only<br />
+at the start of the string, while the &quot;end of line&quot; metacharacter<br />
+(&quot;$&quot;) matches only at the end of the string, or before a terminating<br />
+newline (unless %G_REGEX_DOLLAR_ENDONLY is set). When<br />
+%G_REGEX_MULTILINE is set, the &quot;start of line&quot; and &quot;end of line&quot;<br />
+constructs match immediately following or immediately before any<br />
+newline in the string, respectively, as well as at the very start<br />
+and end. This can be changed within a pattern by a &quot;(?m)&quot; option<br />
 setting.</p>
 
 
@@ -152,8 +154,8 @@ setting.</p>
         <dt id="DOTALL-constant" class="">DOTALL =
           <div class="docstring">
   <div class="discussion">
-    <p>A dot metacharacter (&quot;.&quot;) in the pattern matches all
-characters, including newlines. Without it, newlines are excluded.
+    <p>A dot metacharacter (&quot;.&quot;) in the pattern matches all<br />
+characters, including newlines. Without it, newlines are excluded.<br />
 This option can be changed within a pattern by a (&quot;?s&quot;) option setting.</p>
 
 
@@ -169,11 +171,11 @@ This option can be changed within a pattern by a (&quot;?s&quot;) option setting
         <dt id="EXTENDED-constant" class="">EXTENDED =
           <div class="docstring">
   <div class="discussion">
-    <p>Whitespace data characters in the pattern are
-totally ignored except when escaped or inside a character class.
-Whitespace does not include the VT character (code 11). In addition,
-characters between an unescaped &quot;#&quot; outside a character class and
-the next newline character, inclusive, are also ignored. This can
+    <p>Whitespace data characters in the pattern are<br />
+totally ignored except when escaped or inside a character class.<br />
+Whitespace does not include the VT character (code 11). In addition,<br />
+characters between an unescaped &quot;#&quot; outside a character class and<br />
+the next newline character, inclusive, are also ignored. This can<br />
 be changed within a pattern by a &quot;(?x)&quot; option setting.</p>
 
 
@@ -189,10 +191,10 @@ be changed within a pattern by a &quot;(?x)&quot; option setting.</p>
         <dt id="ANCHORED-constant" class="">ANCHORED =
           <div class="docstring">
   <div class="discussion">
-    <p>The pattern is forced to be &quot;anchored&quot;, that is,
-it is constrained to match only at the first matching point in the
-string that is being searched. This effect can also be achieved by
-appropriate constructs in the pattern itself such as the &quot;^&quot;
+    <p>The pattern is forced to be &quot;anchored&quot;, that is,<br />
+it is constrained to match only at the first matching point in the<br />
+string that is being searched. This effect can also be achieved by<br />
+appropriate constructs in the pattern itself such as the &quot;^&quot;<br />
 metacharacter.</p>
 
 
@@ -208,10 +210,10 @@ metacharacter.</p>
         <dt id="DOLLAR_ENDONLY-constant" class="">DOLLAR_ENDONLY =
           <div class="docstring">
   <div class="discussion">
-    <p>A dollar metacharacter (&quot;$&quot;) in the pattern
-matches only at the end of the string. Without this option, a
-dollar also matches immediately before the final character if
-it is a newline (but not before any other newlines). This option
+    <p>A dollar metacharacter (&quot;$&quot;) in the pattern<br />
+matches only at the end of the string. Without this option, a<br />
+dollar also matches immediately before the final character if<br />
+it is a newline (but not before any other newlines). This option<br />
 is ignored if %G_REGEX_MULTILINE is set.</p>
 
 
@@ -227,8 +229,8 @@ is ignored if %G_REGEX_MULTILINE is set.</p>
         <dt id="UNGREEDY-constant" class="">UNGREEDY =
           <div class="docstring">
   <div class="discussion">
-    <p>Inverts the &quot;greediness&quot; of the quantifiers so that
-they are not greedy by default, but become greedy if followed by &quot;?&quot;.
+    <p>Inverts the &quot;greediness&quot; of the quantifiers so that<br />
+they are not greedy by default, but become greedy if followed by &quot;?&quot;.<br />
 It can also be set by a &quot;(?U)&quot; option setting within the pattern.</p>
 
 
@@ -244,7 +246,7 @@ It can also be set by a &quot;(?U)&quot; option setting within the pattern.</p>
         <dt id="RAW-constant" class="">RAW =
           <div class="docstring">
   <div class="discussion">
-    <p>Usually strings must be valid UTF-8 strings, using this
+    <p>Usually strings must be valid UTF-8 strings, using this<br />
 flag they are considered as a raw sequence of bytes.</p>
 
 
@@ -260,10 +262,10 @@ flag they are considered as a raw sequence of bytes.</p>
         <dt id="NO_AUTO_CAPTURE-constant" class="">NO_AUTO_CAPTURE =
           <div class="docstring">
   <div class="discussion">
-    <p>Disables the use of numbered capturing
-parentheses in the pattern. Any opening parenthesis that is not
-followed by &quot;?&quot; behaves as if it were followed by &quot;?:&quot; but named
-parentheses can still be used for capturing (and they acquire numbers
+    <p>Disables the use of numbered capturing<br />
+parentheses in the pattern. Any opening parenthesis that is not<br />
+followed by &quot;?&quot; behaves as if it were followed by &quot;?:&quot; but named<br />
+parentheses can still be used for capturing (and they acquire numbers<br />
 in the usual way).</p>
 
 
@@ -279,12 +281,12 @@ in the usual way).</p>
         <dt id="OPTIMIZE-constant" class="">OPTIMIZE =
           <div class="docstring">
   <div class="discussion">
-    <p>Since 2.74 and the port to pcre2, requests JIT
-compilation, which, if the just-in-time compiler is available, further
-processes a compiled pattern into machine code that executes much
-faster. However, it comes at the cost of extra processing before the
-match is performed, so it is most beneficial to use this when the same
-compiled pattern is used for matching many times. Before 2.74 this
+    <p>Since 2.74 and the port to pcre2, requests JIT<br />
+compilation, which, if the just-in-time compiler is available, further<br />
+processes a compiled pattern into machine code that executes much<br />
+faster. However, it comes at the cost of extra processing before the<br />
+match is performed, so it is most beneficial to use this when the same<br />
+compiled pattern is used for matching many times. Before 2.74 this<br />
 option used the built-in non-JIT optimizations in pcre1.</p>
 
 
@@ -300,7 +302,7 @@ option used the built-in non-JIT optimizations in pcre1.</p>
         <dt id="FIRSTLINE-constant" class="">FIRSTLINE =
           <div class="docstring">
   <div class="discussion">
-    <p>Limits an unanchored pattern to match before (or at) the
+    <p>Limits an unanchored pattern to match before (or at) the<br />
 first newline. Since: 2.34</p>
 
 
@@ -316,9 +318,9 @@ first newline. Since: 2.34</p>
         <dt id="DUPNAMES-constant" class="">DUPNAMES =
           <div class="docstring">
   <div class="discussion">
-    <p>Names used to identify capturing subpatterns need not
-be unique. This can be helpful for certain types of pattern when it
-is known that only one instance of the named subpattern can ever be
+    <p>Names used to identify capturing subpatterns need not<br />
+be unique. This can be helpful for certain types of pattern when it<br />
+is known that only one instance of the named subpattern can ever be<br />
 matched.</p>
 
 
@@ -334,8 +336,8 @@ matched.</p>
         <dt id="NEWLINE_CR-constant" class="">NEWLINE_CR =
           <div class="docstring">
   <div class="discussion">
-    <p>Usually any newline character or character sequence is
-recognized. If this option is set, the only recognized newline character
+    <p>Usually any newline character or character sequence is<br />
+recognized. If this option is set, the only recognized newline character<br />
 is '\r'.</p>
 
 
@@ -351,8 +353,8 @@ is '\r'.</p>
         <dt id="NEWLINE_LF-constant" class="">NEWLINE_LF =
           <div class="docstring">
   <div class="discussion">
-    <p>Usually any newline character or character sequence is
-recognized. If this option is set, the only recognized newline character
+    <p>Usually any newline character or character sequence is<br />
+recognized. If this option is set, the only recognized newline character<br />
 is '\n'.</p>
 
 
@@ -368,8 +370,8 @@ is '\n'.</p>
         <dt id="NEWLINE_CRLF-constant" class="">NEWLINE_CRLF =
           <div class="docstring">
   <div class="discussion">
-    <p>Usually any newline character or character sequence is
-recognized. If this option is set, the only recognized newline character
+    <p>Usually any newline character or character sequence is<br />
+recognized. If this option is set, the only recognized newline character<br />
 sequence is '\r\n'.</p>
 
 
@@ -385,8 +387,8 @@ sequence is '\r\n'.</p>
         <dt id="NEWLINE_ANYCRLF-constant" class="">NEWLINE_ANYCRLF =
           <div class="docstring">
   <div class="discussion">
-    <p>Usually any newline character or character sequence
-is recognized. If this option is set, the only recognized newline character
+    <p>Usually any newline character or character sequence<br />
+is recognized. If this option is set, the only recognized newline character<br />
 sequences are '\r', '\n', and '\r\n'. Since: 2.34</p>
 
 
@@ -402,8 +404,8 @@ sequences are '\r', '\n', and '\r\n'. Since: 2.34</p>
         <dt id="BSR_ANYCRLF-constant" class="">BSR_ANYCRLF =
           <div class="docstring">
   <div class="discussion">
-    <p>Usually any newline character or character sequence
-is recognised. If this option is set, then &quot;\R&quot; only recognizes the newline
+    <p>Usually any newline character or character sequence<br />
+is recognised. If this option is set, then &quot;\R&quot; only recognizes the newline<br />
 characters '\r', '\n' and '\r\n'. Since: 2.34</p>
 
 
@@ -419,8 +421,8 @@ characters '\r', '\n' and '\r\n'. Since: 2.34</p>
         <dt id="JAVASCRIPT_COMPAT-constant" class="">JAVASCRIPT_COMPAT =
           <div class="docstring">
   <div class="discussion">
-    <p>Changes behaviour so that it is compatible with
-JavaScript rather than PCRE. Since GLib 2.74 this is no longer supported,
+    <p>Changes behaviour so that it is compatible with<br />
+JavaScript rather than PCRE. Since GLib 2.74 this is no longer supported,<br />
 as libpcre2 does not support it. Since: 2.34 Deprecated: 2.74</p>
 
 
@@ -449,7 +451,7 @@ as libpcre2 does not support it. Since: 2.34 Deprecated: 2.74</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

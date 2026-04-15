@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Pango::Context";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -99,7 +100,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/pango/deprecated.rb</dd>
+    <dd>lib/pango/deprecated.rb
+</dd>
   </dl>
   
 </div>
@@ -674,6 +676,7 @@
 
       
     </ul>
+    
   
 
 
@@ -692,13 +695,13 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>PangoContext</code> initialized to default values.</p>
-<p>This function is not particularly useful as it should always
-be followed by a [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Context.set_font_map] call, and the
-function [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontMap.create_context] does these two steps
+<p>This function is not particularly useful as it should always<br />
+be followed by a [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Context.set_font_map] call, and the<br />
+function [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontMap.create_context] does these two steps<br />
 together and hence users are recommended to use that.</p>
-<p>If you are using Pango as part of a higher-level system,
-that system may have it's own way of create a <code>PangoContext</code>.
-For instance, the GTK toolkit has, among others,
+<p>If you are using Pango as part of a higher-level system,<br />
+that system may have it's own way of create a <code>PangoContext</code>.<br />
+For instance, the GTK toolkit has, among others,<br />
 <code>gtk_widget_get_pango_context()</code>. Use those instead.</p>
 
 
@@ -769,11 +772,11 @@ For instance, the GTK toolkit has, among others,
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the base direction for the context.</p>
-<p>The base direction is used in applying the Unicode bidirectional
-algorithm; if the <!-- raw HTML omitted -->direction<!-- raw HTML omitted --> is %PANGO_DIRECTION_LTR or
-%PANGO_DIRECTION_RTL, then the value will be used as the paragraph
-direction in the Unicode bidirectional algorithm. A value of
-%PANGO_DIRECTION_WEAK_LTR or %PANGO_DIRECTION_WEAK_RTL is used only
+<p>The base direction is used in applying the Unicode bidirectional<br />
+algorithm; if the <!-- raw HTML omitted -->direction<!-- raw HTML omitted --> is %PANGO_DIRECTION_LTR or<br />
+%PANGO_DIRECTION_RTL, then the value will be used as the paragraph<br />
+direction in the Unicode bidirectional algorithm. A value of<br />
+%PANGO_DIRECTION_WEAK_LTR or %PANGO_DIRECTION_WEAK_RTL is used only<br />
 for paragraphs that do not contain any strong characters themselves.</p>
 
 
@@ -923,11 +926,11 @@ for paragraphs that do not contain any strong characters themselves.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Forces a change in the context, which will cause any <code>PangoLayout</code>
+    <p>Forces a change in the context, which will cause any <code>PangoLayout</code><br />
 using this context to re-layout.</p>
-<p>This function is only useful when implementing a new backend
-for Pango, something applications won't do. Backends should
-call this function if they have attached extra data to the context
+<p>This function is only useful when implementing a new backend<br />
+for Pango, something applications won't do. Backends should<br />
+call this function if they have attached extra data to the context<br />
 and such data is changed.</p>
 
 
@@ -981,7 +984,7 @@ and such data is changed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the context's default font
+        <div class='inline'><p>a pointer to the context's default font<br />
 description. This value must not be modified or freed.</p>
 </div>
       
@@ -1075,8 +1078,8 @@ description. This value must not be modified or freed.</p>
       
       
         &mdash;
-        <div class='inline'><p>the font map for the.
-<code>PangoContext</code> This value is owned by Pango and should not be
+        <div class='inline'><p>the font map for the.<br />
+<code>PangoContext</code> This value is owned by Pango and should not be<br />
 unreferenced.</p>
 </div>
       
@@ -1098,10 +1101,10 @@ unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the font map to be searched when fonts are looked-up
+    <p>Sets the font map to be searched when fonts are looked-up<br />
 in this context.</p>
-<p>This is only for internal use by Pango backends, a <code>PangoContext</code>
-obtained via one of the recommended methods should already have a
+<p>This is only for internal use by Pango backends, a <code>PangoContext</code><br />
+obtained via one of the recommended methods should already have a<br />
 suitable font map.</p>
 
 
@@ -1157,13 +1160,13 @@ suitable font map.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Get overall metric information for a particular font description.</p>
-<p>Since the metrics may be substantially different for different scripts,
-a language tag can be provided to indicate that the metrics should be
+<p>Since the metrics may be substantially different for different scripts,<br />
+a language tag can be provided to indicate that the metrics should be<br />
 retrieved that correspond to the script(s) used by that language.</p>
-<p>The <code>PangoFontDescription</code> is interpreted in the same way as by [func<!-- raw HTML omitted -->itemize<!-- raw HTML omitted -->],
-and the family name may be a comma separated list of names. If characters
-from multiple of these families would be used to render the string, then
-the returned fonts would be a composite of the metrics for the fonts loaded
+<p>The <code>PangoFontDescription</code> is interpreted in the same way as by [func<!-- raw HTML omitted -->itemize<!-- raw HTML omitted -->],<br />
+and the family name may be a comma separated list of names. If characters<br />
+from multiple of these families would be used to render the string, then<br />
+the returned fonts would be a composite of the metrics for the fonts loaded<br />
 for the individual families.</p>
 
 
@@ -1183,7 +1186,7 @@ for the individual families.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>PangoFontDescription</code> structure. nil means that the
+        <div class='inline'><p>a <code>PangoFontDescription</code> structure. nil means that the<br />
 font description from the context will be used.</p>
 </div>
       
@@ -1199,10 +1202,10 @@ font description from the context will be used.</p>
       
       
         &mdash;
-        <div class='inline'><p>language tag used to determine which script to get
-the metrics for. nil means that the language tag from the context
-will be used. If no language tag is set on the context, metrics
-for the default language (as determined by [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Language.get_default]
+        <div class='inline'><p>language tag used to determine which script to get<br />
+the metrics for. nil means that the language tag from the context<br />
+will be used. If no language tag is set on the context, metrics<br />
+for the default language (as determined by [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Language.get_default]<br />
 will be returned.</p>
 </div>
       
@@ -1221,7 +1224,7 @@ will be returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>PangoFontMetrics</code> object. The caller must call
+        <div class='inline'><p>a <code>PangoFontMetrics</code> object. The caller must call<br />
 [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontMetrics.unref] when finished using the object.</p>
 </div>
       
@@ -1244,9 +1247,9 @@ will be returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the gravity for the context.</p>
-<p>This is similar to [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Context.get_base_gravity],
-except for when the base gravity is %PANGO_GRAVITY_AUTO for
-which [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Gravity.get_for_matrix] is used to return the
+<p>This is similar to [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Context.get_base_gravity],<br />
+except for when the base gravity is %PANGO_GRAVITY_AUTO for<br />
+which [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Gravity.get_for_matrix] is used to return the<br />
 gravity from the current context matrix.</p>
 
 
@@ -1327,9 +1330,9 @@ gravity from the current context matrix.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the gravity hint for the context.</p>
-<p>The gravity hint is used in laying vertical text out, and
-is only relevant if gravity of the context as returned by
-[method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Context.get_gravity] is set to %PANGO_GRAVITY_EAST
+<p>The gravity hint is used in laying vertical text out, and<br />
+is only relevant if gravity of the context as returned by<br />
+[method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Context.get_gravity] is set to %PANGO_GRAVITY_EAST<br />
 or %PANGO_GRAVITY_WEST.</p>
 
 
@@ -1424,7 +1427,7 @@ or %PANGO_GRAVITY_WEST.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the global language tag for the context.</p>
-<p>The default language for the locale of the running process
+<p>The default language for the locale of the running process<br />
 can be found using [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Language.get_default].</p>
 
 
@@ -1498,8 +1501,8 @@ can be found using [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.
       
       
         &mdash;
-        <div class='inline'><p>location
-to store a pointer to an array of <code>PangoFontFamily</code>. This array should
+        <div class='inline'><p>location<br />
+to store a pointer to an array of <code>PangoFontFamily</code>. This array should<br />
 be freed with g_free().</p>
 </div>
       
@@ -1550,7 +1553,7 @@ be freed with g_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads the font in one of the fontmaps in the context
+    <p>Loads the font in one of the fontmaps in the context<br />
 that is the closest match for <!-- raw HTML omitted -->desc<!-- raw HTML omitted -->.</p>
 
 
@@ -1588,7 +1591,7 @@ that is the closest match for <!-- raw HTML omitted -->desc<!-- raw HTML omitted
       
       
         &mdash;
-        <div class='inline'><p>the newly allocated <code>PangoFont</code>
+        <div class='inline'><p>the newly allocated <code>PangoFont</code><br />
 that was loaded, or nil if no font matched.</p>
 </div>
       
@@ -1610,7 +1613,7 @@ that was loaded, or nil if no font matched.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Load a set of fonts in the context that can be used to render
+    <p>Load a set of fonts in the context that can be used to render<br />
 a font matching <!-- raw HTML omitted -->desc<!-- raw HTML omitted -->.</p>
 
 
@@ -1663,7 +1666,7 @@ a font matching <!-- raw HTML omitted -->desc<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>the newly allocated
+        <div class='inline'><p>the newly allocated<br />
 <code>PangoFontset</code> loaded, or nil if no font matched.</p>
 </div>
       
@@ -1685,7 +1688,7 @@ a font matching <!-- raw HTML omitted -->desc<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the transformation matrix that will be applied when
+    <p>Gets the transformation matrix that will be applied when<br />
 rendering with this context.</p>
 <p>See [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Context.set_matrix].</p>
 
@@ -1705,9 +1708,9 @@ rendering with this context.</p>
       
       
         &mdash;
-        <div class='inline'><p>the matrix, or nil if no
-matrix has been set (which is the same as the identity matrix).
-The returned matrix is owned by Pango and must not be modified
+        <div class='inline'><p>the matrix, or nil if no<br />
+matrix has been set (which is the same as the identity matrix).<br />
+The returned matrix is owned by Pango and must not be modified<br />
 or freed.</p>
 </div>
       
@@ -1729,13 +1732,13 @@ or freed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the transformation matrix that will be applied when rendering
+    <p>Sets the transformation matrix that will be applied when rendering<br />
 with this context.</p>
-<p>Note that reported metrics are in the user space coordinates before
-the application of the matrix, not device-space coordinates after the
-application of the matrix. So, they don't scale with the matrix, though
-they may change slightly for different matrices, depending on how the
-text is fit to the pixel grid.
+<p>Note that reported metrics are in the user space coordinates before<br />
+the application of the matrix, not device-space coordinates after the<br />
+application of the matrix. So, they don't scale with the matrix, though<br />
+they may change slightly for different matrices, depending on how the<br />
+text is fit to the pixel grid.<br />
 matrix. (No matrix set is the same as setting the identity matrix.)</p>
 
 
@@ -1790,7 +1793,7 @@ matrix. (No matrix set is the same as setting the identity matrix.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether font rendering with this context should
+    <p>Returns whether font rendering with this context should<br />
 round glyph positions and widths.</p>
 
 
@@ -1826,12 +1829,12 @@ round glyph positions and widths.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether font rendering with this context should
-round glyph positions and widths to integral positions,
+    <p>Sets whether font rendering with this context should<br />
+round glyph positions and widths to integral positions,<br />
 in device units.</p>
-<p>This is useful when the renderer can't handle subpixel
+<p>This is useful when the renderer can't handle subpixel<br />
 positioning of glyphs.</p>
-<p>The default value is to round glyph positions, to remain
+<p>The default value is to round glyph positions, to remain<br />
 compatible with previous Pango behavior.</p>
 
 
@@ -1887,14 +1890,14 @@ compatible with previous Pango behavior.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the current serial number of <!-- raw HTML omitted -->context<!-- raw HTML omitted -->.</p>
-<p>The serial number is initialized to an small number larger than zero
-when a new context is created and is increased whenever the context
-is changed using any of the setter functions, or the <code>PangoFontMap</code> it
-uses to find fonts has changed. The serial may wrap, but will never
-have the value 0. Since it can wrap, never compare it with &quot;less than&quot;,
+<p>The serial number is initialized to an small number larger than zero<br />
+when a new context is created and is increased whenever the context<br />
+is changed using any of the setter functions, or the <code>PangoFontMap</code> it<br />
+uses to find fonts has changed. The serial may wrap, but will never<br />
+have the value 0. Since it can wrap, never compare it with &quot;less than&quot;,<br />
 always use &quot;not equals&quot;.</p>
-<p>This can be used to automatically detect changes to a <code>PangoContext</code>,
-and is only useful when implementing objects that need update when their
+<p>This can be used to automatically detect changes to a <code>PangoContext</code>,<br />
+and is only useful when implementing objects that need update when their<br />
 <code>PangoContext</code> changes, like <code>PangoLayout</code>.</p>
 
 
@@ -1930,7 +1933,7 @@ and is only useful when implementing objects that need update when their
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

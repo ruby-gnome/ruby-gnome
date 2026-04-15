@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gsf";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gsf/input.rb<span class="defines">,<br />
-  lib/gsf.rb,<br /> lib/gsf/loader.rb</span>
+    <dd>lib/gsf/input.rb<span class="defines">,<br>
+  lib/gsf.rb,<br> lib/gsf/loader.rb</span>
+
 </dd>
   </dl>
   
@@ -88,16 +90,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2016  Ruby-GNOME2 Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -145,7 +147,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
         <dt id="META_NAME_CASE_SENSITIVE-constant" class="">META_NAME_CASE_SENSITIVE =
           <div class="docstring">
   <div class="discussion">
-    <p>(Unsigned Integer) Identifier representing the case-sensitiveness.
+    <p>(Unsigned Integer) Identifier representing the case-sensitiveness.<br />
 <!-- raw HTML omitted -->of what ?? why is it an integer ??<!-- raw HTML omitted --></p>
 
 
@@ -207,7 +209,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
         <dt id="META_NAME_CODEPAGE-constant" class="">META_NAME_CODEPAGE =
           <div class="docstring">
   <div class="discussion">
-    <p>(UnsignedShort) The MS codepage to encode strings for metadata
+    <p>(UnsignedShort) The MS codepage to encode strings for metadata<br />
 1.14.0	Clarified that this is unique from _NAME_CODEPAGE in msole</p>
 
 
@@ -223,7 +225,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
         <dt id="META_NAME_COMPANY-constant" class="">META_NAME_COMPANY =
           <div class="docstring">
   <div class="discussion">
-    <p>(String) Name of the company/organization that the &quot;CREATOR&quot; entity is
+    <p>(String) Name of the company/organization that the &quot;CREATOR&quot; entity is<br />
 associated with.</p>
 <p>1.14.1	Moved from &quot;gsf:company&quot; to &quot;dc:publisher&quot;.</p>
 
@@ -240,7 +242,7 @@ associated with.</p>
         <dt id="META_NAME_CREATOR-constant" class="">META_NAME_CREATOR =
           <div class="docstring">
   <div class="discussion">
-    <p>(String) An entity primarily responsible for making the content of the
+    <p>(String) An entity primarily responsible for making the content of the<br />
 resource typically a person, organization, or service.</p>
 <p>1.14.0	Moved from &quot;gsf&quot; to &quot;dc&quot;.</p>
 
@@ -257,9 +259,9 @@ resource typically a person, organization, or service.</p>
         <dt id="META_NAME_DATE_CREATED-constant" class="">META_NAME_DATE_CREATED =
           <div class="docstring">
   <div class="discussion">
-    <p>(Date as ISO String) A date associated with an event in the life cycle of
-the resource (creation/publication date).
-Moved from gsf:date-created to meta:creation-date. This way can be used correctly
+    <p>(Date as ISO String) A date associated with an event in the life cycle of<br />
+the resource (creation/publication date).<br />
+Moved from gsf:date-created to meta:creation-date. This way can be used correctly<br />
 by OpenDocument and Gnumeric.</p>
 
 
@@ -321,8 +323,8 @@ by OpenDocument and Gnumeric.</p>
         <dt id="META_NAME_DOCUMENT_PARTS-constant" class="">META_NAME_DOCUMENT_PARTS =
           <div class="docstring">
   <div class="discussion">
-    <p>(Vector of strings) Names of the 'interesting' parts of the document.  In
-spreadsheets this is a list of the sheet names, and the named expressions.
+    <p>(Vector of strings) Names of the 'interesting' parts of the document.  In<br />
+spreadsheets this is a list of the sheet names, and the named expressions.<br />
 From MSOLE</p>
 
 
@@ -338,8 +340,8 @@ From MSOLE</p>
         <dt id="META_NAME_EDITING_DURATION-constant" class="">META_NAME_EDITING_DURATION =
           <div class="docstring">
   <div class="discussion">
-    <p>(Date as ISO String) The total-time taken until the last modification.
-Moved from &quot;gsf&quot; to &quot;meta&quot;. This way can be used correctly by OpenDocument
+    <p>(Date as ISO String) The total-time taken until the last modification.<br />
+Moved from &quot;gsf&quot; to &quot;meta&quot;. This way can be used correctly by OpenDocument<br />
 and Gnumeric.</p>
 
 
@@ -355,7 +357,7 @@ and Gnumeric.</p>
         <dt id="META_NAME_GENERATOR-constant" class="">META_NAME_GENERATOR =
           <div class="docstring">
   <div class="discussion">
-    <p>(String) The application that generated this document. AbiWord, Gnumeric,
+    <p>(String) The application that generated this document. AbiWord, Gnumeric,<br />
 etc...</p>
 <p>1.14.0 Moved from &quot;gsf&quot; to &quot;meta&quot;.</p>
 
@@ -372,8 +374,8 @@ etc...</p>
         <dt id="META_NAME_HEADING_PAIRS-constant" class="">META_NAME_HEADING_PAIRS =
           <div class="docstring">
   <div class="discussion">
-    <p>(Vector of string value pairs stored in alternating elements) Store the
-counts of objects in the document as names 'worksheet' and count '4'
+    <p>(Vector of string value pairs stored in alternating elements) Store the<br />
+counts of objects in the document as names 'worksheet' and count '4'<br />
 From MSOLE</p>
 
 
@@ -419,8 +421,8 @@ From MSOLE</p>
         <dt id="META_NAME_INITIAL_CREATOR-constant" class="">META_NAME_INITIAL_CREATOR =
           <div class="docstring">
   <div class="discussion">
-    <p>(String) Specifies the name of the person who created the document
-initially.
+    <p>(String) Specifies the name of the person who created the document<br />
+initially.<br />
 1.14.0 Moved from &quot;gsf&quot; to &quot;meta&quot;.</p>
 
 
@@ -436,7 +438,7 @@ initially.
         <dt id="META_NAME_KEYWORD-constant" class="">META_NAME_KEYWORD =
           <div class="docstring">
   <div class="discussion">
-    <p>(String) Searchable, indexable keywords. Similar to PDF keywords or HTML's
+    <p>(String) Searchable, indexable keywords. Similar to PDF keywords or HTML's<br />
 meta block.</p>
 
 
@@ -452,7 +454,7 @@ meta block.</p>
         <dt id="META_NAME_KEYWORDS-constant" class="">META_NAME_KEYWORDS =
           <div class="docstring">
   <div class="discussion">
-    <p>(GsfDocPropVector of String) Searchable, indexable keywords. Similar to PDF
+    <p>(GsfDocPropVector of String) Searchable, indexable keywords. Similar to PDF<br />
 keywords or HTML's meta block.</p>
 
 
@@ -468,8 +470,8 @@ keywords or HTML's meta block.</p>
         <dt id="META_NAME_LANGUAGE-constant" class="">META_NAME_LANGUAGE =
           <div class="docstring">
   <div class="discussion">
-    <p>(String) The locale language of the intellectual content of the resource
-(basically xx_YY form for us).
+    <p>(String) The locale language of the intellectual content of the resource<br />
+(basically xx_YY form for us).<br />
 1.14.0	Clarified that this is unique from _NAME_CODEPAGE in msole</p>
 
 
@@ -486,7 +488,7 @@ keywords or HTML's meta block.</p>
           <div class="docstring">
   <div class="discussion">
     <p>(GSF_META_NAME_HEADING_PAIRS) The last time this document was printed.</p>
-<p>1.14.0	Moved from &quot;gsf&quot; to &quot;dc&quot;.
+<p>1.14.0	Moved from &quot;gsf&quot; to &quot;dc&quot;.<br />
 1.14.1	Moved back to &quot;gsf&quot; from &quot;dc&quot;.</p>
 
 
@@ -502,7 +504,7 @@ keywords or HTML's meta block.</p>
         <dt id="META_NAME_LAST_SAVED_BY-constant" class="">META_NAME_LAST_SAVED_BY =
           <div class="docstring">
   <div class="discussion">
-    <p>(String) The entity that made the last change to the document, typically a
+    <p>(String) The entity that made the last change to the document, typically a<br />
 person, organization, or service.</p>
 
 
@@ -713,7 +715,7 @@ person, organization, or service.</p>
         <dt id="META_NAME_OBJECT_COUNT-constant" class="">META_NAME_OBJECT_COUNT =
           <div class="docstring">
   <div class="discussion">
-    <p>(Integer) Count of objects (OLE and other graphics) in the document, if
+    <p>(Integer) Count of objects (OLE and other graphics) in the document, if<br />
 appropriate.</p>
 
 
@@ -790,7 +792,7 @@ appropriate.</p>
         <dt id="META_NAME_PRINT_DATE-constant" class="">META_NAME_PRINT_DATE =
           <div class="docstring">
   <div class="discussion">
-    <p>(GsfTimestamp) Specifies the date and time when the document was last
+    <p>(GsfTimestamp) Specifies the date and time when the document was last<br />
 printed.</p>
 
 
@@ -806,8 +808,8 @@ printed.</p>
         <dt id="META_NAME_REVISION_COUNT-constant" class="">META_NAME_REVISION_COUNT =
           <div class="docstring">
   <div class="discussion">
-    <p>(Integer) Count of revision on the document, if appropriate.
-Moved from gsf:revision-count to meta:editing-cycles. This way can be used
+    <p>(Integer) Count of revision on the document, if appropriate.<br />
+Moved from gsf:revision-count to meta:editing-cycles. This way can be used<br />
 correctly by OpenDocument and Gnumeric.</p>
 
 
@@ -884,7 +886,7 @@ correctly by OpenDocument and Gnumeric.</p>
         <dt id="META_NAME_SUBJECT-constant" class="">META_NAME_SUBJECT =
           <div class="docstring">
   <div class="discussion">
-    <p>(String) The topic of the content of the resource,
+    <p>(String) The topic of the content of the resource,<br />
 <!-- raw HTML omitted -->typically<!-- raw HTML omitted --> including keywords.</p>
 
 
@@ -931,7 +933,7 @@ correctly by OpenDocument and Gnumeric.</p>
         <dt id="META_NAME_THUMBNAIL-constant" class="">META_NAME_THUMBNAIL =
           <div class="docstring">
   <div class="discussion">
-    <p>(GsfClipData) Thumbnail data of the document, typically a
+    <p>(GsfClipData) Thumbnail data of the document, typically a<br />
 preview image of the document.</p>
 
 
@@ -1041,6 +1043,7 @@ preview image of the document.</p>
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -2331,6 +2334,7 @@ preview image of the document.</p>
 
       
     </ul>
+    
   
 
 
@@ -2629,7 +2633,7 @@ preview image of the document.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This funcion should be called to when finished encoding everything, to
+    <p>This funcion should be called to when finished encoding everything, to<br />
 flush off the last little bit.</p>
 
 
@@ -2836,8 +2840,8 @@ flush off the last little bit.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Performs an 'encode step', only encodes blocks of 3 characters from <!-- raw HTML omitted -->in<!-- raw HTML omitted --> into
-the output <!-- raw HTML omitted -->out<!-- raw HTML omitted --> at a time, saves left-over state in <!-- raw HTML omitted -->state<!-- raw HTML omitted --> and <!-- raw HTML omitted -->save<!-- raw HTML omitted -->
+    <p>Performs an 'encode step', only encodes blocks of 3 characters from <!-- raw HTML omitted -->in<!-- raw HTML omitted --> into<br />
+the output <!-- raw HTML omitted -->out<!-- raw HTML omitted --> at a time, saves left-over state in <!-- raw HTML omitted -->state<!-- raw HTML omitted --> and <!-- raw HTML omitted -->save<!-- raw HTML omitted --><br />
 (initialise to 0 on first invocation).</p>
 
 
@@ -3074,7 +3078,7 @@ the output <!-- raw HTML omitted -->out<!-- raw HTML omitted --> at a time, save
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the #GQuark used to identify libgsf errors in #GError structures.
+    <p>Returns the #GQuark used to identify libgsf errors in #GError structures.<br />
 Specific error codes come from the Gsf::Error enumeration.</p>
 
 
@@ -3093,7 +3097,7 @@ Specific error codes come from the Gsf::Error enumeration.</p>
       
       
         &mdash;
-        <div class='inline'><p>the #GQuark used to identify libgsf errors in #GError structures.
+        <div class='inline'><p>the #GQuark used to identify libgsf errors in #GError structures.<br />
 Specific error codes come from the Gsf::Error enumeration.</p>
 </div>
       
@@ -3115,9 +3119,9 @@ Specific error codes come from the Gsf::Error enumeration.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Extracts the extension from the end of a filename (the part after the final
-'.' in the filename).
-filename, or a pointer to the end of the string if the filename
+    <p>Extracts the extension from the end of a filename (the part after the final<br />
+'.' in the filename).<br />
+filename, or a pointer to the end of the string if the filename<br />
 does not have an extension.</p>
 
 
@@ -3176,7 +3180,7 @@ does not have an extension.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A utility wrapper to make sure filenames are valid utf8.
+    <p>A utility wrapper to make sure filenames are valid utf8.<br />
 Caller must g_free the result.</p>
 
 
@@ -3211,7 +3215,7 @@ Caller must g_free the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>if true, the resulting utf8 file name will be quoted
+        <div class='inline'><p>if true, the resulting utf8 file name will be quoted<br />
 (unless it is invalid).</p>
 </div>
       
@@ -3510,7 +3514,7 @@ Caller must g_free the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Interpret binary data as a guint64 (8 byte unsigned integer type) in little
+    <p>Interpret binary data as a guint64 (8 byte unsigned integer type) in little<br />
 endian order.</p>
 
 
@@ -3862,7 +3866,7 @@ endian order.</p>
       
       
         &mdash;
-        <div class='inline'><p>an iconv converter to go from utf8 -&gt; to our best guess at a useful
+        <div class='inline'><p>an iconv converter to go from utf8 -&gt; to our best guess at a useful<br />
 windows codepage.</p>
 </div>
       
@@ -4009,7 +4013,7 @@ windows codepage.</p>
       
       
         &mdash;
-        <div class='inline'><p>an iconv converter to go from utf8 -&gt; to our best guess at a useful
+        <div class='inline'><p>an iconv converter to go from utf8 -&gt; to our best guess at a useful<br />
 windows codepage.</p>
 </div>
       
@@ -4049,7 +4053,7 @@ windows codepage.</p>
       
       
         &mdash;
-        <div class='inline'><p>an iconv convert to go from utf8 -&gt; to our best guess at a useful
+        <div class='inline'><p>an iconv convert to go from utf8 -&gt; to our best guess at a useful<br />
 windows codepage.</p>
 </div>
       
@@ -4108,8 +4112,8 @@ windows codepage.</p>
       
       
         &mdash;
-        <div class='inline'><p>an iconv converter for single byte encodings <!-- raw HTML omitted -->codepage<!-- raw HTML omitted --> -&gt; utf8.
-Attempt to handle the semantics of a specification for multibyte encodings
+        <div class='inline'><p>an iconv converter for single byte encodings <!-- raw HTML omitted -->codepage<!-- raw HTML omitted --> -&gt; utf8.<br />
+Attempt to handle the semantics of a specification for multibyte encodings<br />
 since this is only supposed to be used for single bytes.</p>
 </div>
       
@@ -4131,7 +4135,7 @@ since this is only supposed to be used for single bytes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns our best guess at the applicable windows code page based on an
+    <p>Returns our best guess at the applicable windows code page based on an<br />
 environment variable or the current locale.</p>
 
 
@@ -4150,7 +4154,7 @@ environment variable or the current locale.</p>
       
       
         &mdash;
-        <div class='inline'><p>our best guess at the applicable windows code page based on an
+        <div class='inline'><p>our best guess at the applicable windows code page based on an<br />
 environment variable or the current locale.</p>
 </div>
       
@@ -4245,7 +4249,7 @@ environment variable or the current locale.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>xxx) for the given LID.  If the LID is not found, is set to 0x0400,
+    <p>xxx) for the given LID.  If the LID is not found, is set to 0x0400,<br />
 or is set to 0x0000, will return &quot;-none-&quot;</p>
 
 
@@ -4304,7 +4308,7 @@ or is set to 0x0000, will return &quot;-none-&quot;</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the LID (Language Identifier) for the input language.
+    <p>Returns the LID (Language Identifier) for the input language.<br />
 If lang is nil, return 0x0400 (&quot;-none-&quot;), and not 0x0000 (&quot;no proofing&quot;).</p>
 
 
@@ -4342,7 +4346,7 @@ If lang is nil, return 0x0400 (&quot;-none-&quot;), and not 0x0000 (&quot;no pro
       
       
         &mdash;
-        <div class='inline'><p>the LID (Language Identifier) for the input language.
+        <div class='inline'><p>the LID (Language Identifier) for the input language.<br />
 If lang is nil, return 0x0400 (&quot;-none-&quot;), and not 0x0000 (&quot;no proofing&quot;)</p>
 </div>
       
@@ -5317,8 +5321,8 @@ If lang is nil, return 0x0400 (&quot;-none-&quot;), and not 0x0000 (&quot;no pro
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the GParameter array that holds the properties.
-(Used for both input and output.  This may point to a nil pointer if
+        <div class='inline'><p>a pointer to the GParameter array that holds the properties.<br />
+(Used for both input and output.  This may point to a nil pointer if<br />
 there are no properties collected yet.)</p>
 </div>
       
@@ -5334,7 +5338,7 @@ there are no properties collected yet.)</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the number of properties collected.  (Used for
+        <div class='inline'><p>a pointer to the number of properties collected.  (Used for<br />
 both input and output.)</p>
 </div>
       
@@ -5365,7 +5369,7 @@ both input and output.)</p>
       
       
         &mdash;
-        <div class='inline'><p>a va_list holding the remainder of the property names and
+        <div class='inline'><p>a va_list holding the remainder of the property names and<br />
 values, terminated by a nil.</p>
 </div>
       
@@ -5532,7 +5536,7 @@ values, terminated by a nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>De-intializes the GSF library
+    <p>De-intializes the GSF library<br />
 Currently does nothing.</p>
 
 
@@ -5568,7 +5572,7 @@ Currently does nothing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>De-intializes the GSF library from a type module.
+    <p>De-intializes the GSF library from a type module.<br />
 Currently does nothing.</p>
 
 
@@ -5623,8 +5627,8 @@ Currently does nothing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function returns the array of values inside Gsf::DocPropVector.
-No additional references are created.
+    <p>This function returns the array of values inside Gsf::DocPropVector.<br />
+No additional references are created.<br />
 of #GValue</p>
 
 
@@ -5732,7 +5736,7 @@ of #GValue</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function returns a pointer to the GsfDocPropVector structure in <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.
+    <p>This function returns a pointer to the GsfDocPropVector structure in <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.<br />
 No additional references are created.</p>
 
 
@@ -5894,7 +5898,7 @@ No additional references are created.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Try to parse <!-- raw HTML omitted -->str<!-- raw HTML omitted --> as a value of type <!-- raw HTML omitted -->t<!-- raw HTML omitted --> into <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.
+    <p>Try to parse <!-- raw HTML omitted -->str<!-- raw HTML omitted --> as a value of type <!-- raw HTML omitted -->t<!-- raw HTML omitted --> into <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.<br />
 false otherwise.</p>
 
 
@@ -5983,10 +5987,10 @@ false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a libxml2 pull style parser context wrapper around gsf input <!-- raw HTML omitted -->input<!-- raw HTML omitted -->.
+    <p>Create a libxml2 pull style parser context wrapper around gsf input <!-- raw HTML omitted -->input<!-- raw HTML omitted -->.<br />
 This signature will probably change to supply a SAX structure.</p>
-<p><!-- raw HTML omitted -->This adds a reference to <!-- raw HTML omitted -->input<!-- raw HTML omitted -->.<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->A simple wrapper around a cleaner implementation that will fold in
+<p><!-- raw HTML omitted -->This adds a reference to <!-- raw HTML omitted -->input<!-- raw HTML omitted -->.<!-- raw HTML omitted --><br />
+<!-- raw HTML omitted -->A simple wrapper around a cleaner implementation that will fold in<br />
 when we add other api changes.  Its not worth bumping just for this.<!-- raw HTML omitted --></p>
 <p>NOTE: skipped since xmlParserCtxt is not exported to introspection.</p>
 
@@ -6218,7 +6222,7 @@ when we add other api changes.  Its not worth bumping just for this.<!-- raw HTM
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

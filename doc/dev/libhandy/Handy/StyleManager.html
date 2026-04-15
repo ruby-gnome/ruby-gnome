@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Handy::StyleManager";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -161,6 +163,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -469,6 +472,7 @@
 
       
     </ul>
+    
   
 
 
@@ -489,7 +493,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the default [class<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->] instance.</p>
-<p>It manages all [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display] instances unless the style manager for
+<p>It manages all [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display] instances unless the style manager for<br />
 that display has an override.</p>
 <p>See [func<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->.get_for_display].</p>
 
@@ -531,7 +535,7 @@ that display has an override.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the [class<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->] instance managing <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
-<p>It can be used to override styles for that specific display instead of the
+<p>It can be used to override styles for that specific display instead of the<br />
 whole application.</p>
 <p>Most applications should use [func<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->.get_default] instead.</p>
 
@@ -598,28 +602,28 @@ whole application.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The requested application color scheme.</p>
-<p>The effective appearance will be decided based on the application color
-scheme and the system preferred color scheme. The
-[property<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->:dark] property can be used to query the current
+<p>The effective appearance will be decided based on the application color<br />
+scheme and the system preferred color scheme. The<br />
+[property<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->:dark] property can be used to query the current<br />
 effective appearance.</p>
-<p>The <code>HDY_COLOR_SCHEME_PREFER_LIGHT</code> color scheme results in the application
-using light appearance unless the system prefers dark colors. This is the
+<p>The <code>HDY_COLOR_SCHEME_PREFER_LIGHT</code> color scheme results in the application<br />
+using light appearance unless the system prefers dark colors. This is the<br />
 default value.</p>
-<p>The <code>HDY_COLOR_SCHEME_PREFER_DARK</code> color scheme results in the application
-using dark appearance, but can still switch to the light appearance if the
-system can prefers it, for example, when the high contrast preference is
+<p>The <code>HDY_COLOR_SCHEME_PREFER_DARK</code> color scheme results in the application<br />
+using dark appearance, but can still switch to the light appearance if the<br />
+system can prefers it, for example, when the high contrast preference is<br />
 enabled.</p>
-<p>The <code>HDY_COLOR_SCHEME_FORCE_LIGHT</code> and <code>HDY_COLOR_SCHEME_FORCE_DARK</code> values
-ignore the system preference entirely, they are useful if the application
-wants to match its UI to its content or to provide a separate color scheme
+<p>The <code>HDY_COLOR_SCHEME_FORCE_LIGHT</code> and <code>HDY_COLOR_SCHEME_FORCE_DARK</code> values<br />
+ignore the system preference entirely, they are useful if the application<br />
+wants to match its UI to its content or to provide a separate color scheme<br />
 switcher.</p>
-<p>If a per-[class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display] style manager has its color scheme set to
-<code>HDY_COLOR_SCHEME_DEFAULT</code>, it will inherit the color scheme from the
+<p>If a per-[class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display] style manager has its color scheme set to<br />
+<code>HDY_COLOR_SCHEME_DEFAULT</code>, it will inherit the color scheme from the<br />
 default style manager.</p>
-<p>For the default style manager, <code>HDY_COLOR_SCHEME_DEFAULT</code> is equivalent to
+<p>For the default style manager, <code>HDY_COLOR_SCHEME_DEFAULT</code> is equivalent to<br />
 <code>HDY_COLOR_SCHEME_FORCE_LIGHT</code>.</p>
-<p>The [property<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->:system-supports-color-schemes] property can be
-used to check if the current environment provides a color scheme
+<p>The [property<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->:system-supports-color-schemes] property can be<br />
+used to check if the current environment provides a color scheme<br />
 preference.</p>
 
 
@@ -660,28 +664,28 @@ preference.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The requested application color scheme.</p>
-<p>The effective appearance will be decided based on the application color
-scheme and the system preferred color scheme. The
-[property<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->:dark] property can be used to query the current
+<p>The effective appearance will be decided based on the application color<br />
+scheme and the system preferred color scheme. The<br />
+[property<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->:dark] property can be used to query the current<br />
 effective appearance.</p>
-<p>The <code>HDY_COLOR_SCHEME_PREFER_LIGHT</code> color scheme results in the application
-using light appearance unless the system prefers dark colors. This is the
+<p>The <code>HDY_COLOR_SCHEME_PREFER_LIGHT</code> color scheme results in the application<br />
+using light appearance unless the system prefers dark colors. This is the<br />
 default value.</p>
-<p>The <code>HDY_COLOR_SCHEME_PREFER_DARK</code> color scheme results in the application
-using dark appearance, but can still switch to the light appearance if the
-system can prefers it, for example, when the high contrast preference is
+<p>The <code>HDY_COLOR_SCHEME_PREFER_DARK</code> color scheme results in the application<br />
+using dark appearance, but can still switch to the light appearance if the<br />
+system can prefers it, for example, when the high contrast preference is<br />
 enabled.</p>
-<p>The <code>HDY_COLOR_SCHEME_FORCE_LIGHT</code> and <code>HDY_COLOR_SCHEME_FORCE_DARK</code> values
-ignore the system preference entirely, they are useful if the application
-wants to match its UI to its content or to provide a separate color scheme
+<p>The <code>HDY_COLOR_SCHEME_FORCE_LIGHT</code> and <code>HDY_COLOR_SCHEME_FORCE_DARK</code> values<br />
+ignore the system preference entirely, they are useful if the application<br />
+wants to match its UI to its content or to provide a separate color scheme<br />
 switcher.</p>
-<p>If a per-[class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display] style manager has its color scheme set to
-<code>HDY_COLOR_SCHEME_DEFAULT</code>, it will inherit the color scheme from the
+<p>If a per-[class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display] style manager has its color scheme set to<br />
+<code>HDY_COLOR_SCHEME_DEFAULT</code>, it will inherit the color scheme from the<br />
 default style manager.</p>
-<p>For the default style manager, <code>HDY_COLOR_SCHEME_DEFAULT</code> is equivalent to
+<p>For the default style manager, <code>HDY_COLOR_SCHEME_DEFAULT</code> is equivalent to<br />
 <code>HDY_COLOR_SCHEME_FORCE_LIGHT</code>.</p>
-<p>The [property<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->:system-supports-color-schemes] property can be
-used to check if the current environment provides a color scheme
+<p>The [property<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->:system-supports-color-schemes] property can be<br />
+used to check if the current environment provides a color scheme<br />
 preference.</p>
 
 
@@ -789,7 +793,7 @@ preference.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the application is using dark appearance.</p>
-<p>This property can be used to query the current appearance, as requested via
+<p>This property can be used to query the current appearance, as requested via<br />
 [property<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->:color-scheme].</p>
 
 
@@ -858,7 +862,7 @@ preference.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the application is using dark appearance.</p>
-<p>This property can be used to query the current appearance, as requested via
+<p>This property can be used to query the current appearance, as requested via<br />
 [property<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->:color-scheme].</p>
 
 
@@ -899,7 +903,7 @@ preference.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The display the style manager is associated with.</p>
-<p>The display will be <code>NULL</code> for the style manager returned by
+<p>The display will be <code>NULL</code> for the style manager returned by<br />
 [func<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->.get_default].</p>
 
 
@@ -940,7 +944,7 @@ preference.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The display the style manager is associated with.</p>
-<p>The display will be <code>NULL</code> for the style manager returned by
+<p>The display will be <code>NULL</code> for the style manager returned by<br />
 [func<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->.get_default].</p>
 
 
@@ -1195,8 +1199,8 @@ preference.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the system supports color schemes.</p>
-<p>This property can be used to check if the current environment provides a
-color scheme preference. For example, applications might want to show a
+<p>This property can be used to check if the current environment provides a<br />
+color scheme preference. For example, applications might want to show a<br />
 separate appearance switcher if it's set to <code>FALSE</code>.</p>
 <p>It's only set at startup and cannot change its value later.</p>
 <p>See [property<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->:color-scheme].</p>
@@ -1267,8 +1271,8 @@ separate appearance switcher if it's set to <code>FALSE</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the system supports color schemes.</p>
-<p>This property can be used to check if the current environment provides a
-color scheme preference. For example, applications might want to show a
+<p>This property can be used to check if the current environment provides a<br />
+color scheme preference. For example, applications might want to show a<br />
 separate appearance switcher if it's set to <code>FALSE</code>.</p>
 <p>It's only set at startup and cannot change its value later.</p>
 <p>See [property<!-- raw HTML omitted -->StyleManager<!-- raw HTML omitted -->:color-scheme].</p>
@@ -1306,7 +1310,7 @@ separate appearance switcher if it's set to <code>FALSE</code>.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

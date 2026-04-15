@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::ApplicationFlags";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -95,7 +97,7 @@
         <dt id="FLAGS_NONE-constant" class="">FLAGS_NONE =
           <div class="docstring">
   <div class="discussion">
-    <p>Default. Deprecated in 2.74, use
+    <p>Default. Deprecated in 2.74, use<br />
 %G_APPLICATION_DEFAULT_FLAGS instead</p>
 
 
@@ -126,9 +128,9 @@
         <dt id="IS_SERVICE-constant" class="">IS_SERVICE =
           <div class="docstring">
   <div class="discussion">
-    <p>Run as a service. In this mode, registration
-fails if the service is already running, and the application
-will initially wait up to 10 seconds for an initial activation
+    <p>Run as a service. In this mode, registration<br />
+fails if the service is already running, and the application<br />
+will initially wait up to 10 seconds for an initial activation<br />
 message to arrive.</p>
 
 
@@ -159,10 +161,10 @@ message to arrive.</p>
         <dt id="HANDLES_OPEN-constant" class="">HANDLES_OPEN =
           <div class="docstring">
   <div class="discussion">
-    <p>This application handles opening files (in
-the primary instance). Note that this flag only affects the default
-implementation of local_command_line(), and has no effect if
-%G_APPLICATION_HANDLES_COMMAND_LINE is given.
+    <p>This application handles opening files (in<br />
+the primary instance). Note that this flag only affects the default<br />
+implementation of local_command_line(), and has no effect if<br />
+%G_APPLICATION_HANDLES_COMMAND_LINE is given.<br />
 See g_application_run() for details.</p>
 
 
@@ -178,9 +180,9 @@ See g_application_run() for details.</p>
         <dt id="HANDLES_COMMAND_LINE-constant" class="">HANDLES_COMMAND_LINE =
           <div class="docstring">
   <div class="discussion">
-    <p>This application handles command line
-arguments (in the primary instance). Note that this flag only affect
-the default implementation of local_command_line().
+    <p>This application handles command line<br />
+arguments (in the primary instance). Note that this flag only affect<br />
+the default implementation of local_command_line().<br />
 See g_application_run() for details.</p>
 
 
@@ -196,13 +198,13 @@ See g_application_run() for details.</p>
         <dt id="SEND_ENVIRONMENT-constant" class="">SEND_ENVIRONMENT =
           <div class="docstring">
   <div class="discussion">
-    <p>Send the environment of the
-launching process to the primary instance. Set this flag if your
-application is expected to behave differently depending on certain
-environment variables. For instance, an editor might be expected
-to use the <code>GIT_COMMITTER_NAME</code> environment variable
-when editing a git commit message. The environment is available
-to the #GApplication::command-line signal handler, via
+    <p>Send the environment of the<br />
+launching process to the primary instance. Set this flag if your<br />
+application is expected to behave differently depending on certain<br />
+environment variables. For instance, an editor might be expected<br />
+to use the <code>GIT_COMMITTER_NAME</code> environment variable<br />
+when editing a git commit message. The environment is available<br />
+to the #GApplication::command-line signal handler, via<br />
 g_application_command_line_getenv().</p>
 
 
@@ -218,11 +220,11 @@ g_application_command_line_getenv().</p>
         <dt id="NON_UNIQUE-constant" class="">NON_UNIQUE =
           <div class="docstring">
   <div class="discussion">
-    <p>Make no attempts to do any of the typical
-single-instance application negotiation, even if the application
-ID is given.  The application neither attempts to become the
-owner of the application ID nor does it check if an existing
-owner already exists.  Everything occurs in the local process.
+    <p>Make no attempts to do any of the typical<br />
+single-instance application negotiation, even if the application<br />
+ID is given.  The application neither attempts to become the<br />
+owner of the application ID nor does it check if an existing<br />
+owner already exists.  Everything occurs in the local process.<br />
 Since: 2.30.</p>
 
 
@@ -238,8 +240,8 @@ Since: 2.30.</p>
         <dt id="CAN_OVERRIDE_APP_ID-constant" class="">CAN_OVERRIDE_APP_ID =
           <div class="docstring">
   <div class="discussion">
-    <p>Allow users to override the
-application ID from the command line with <code>--gapplication-app-id</code>.
+    <p>Allow users to override the<br />
+application ID from the command line with <code>--gapplication-app-id</code>.<br />
 Since: 2.48</p>
 
 
@@ -255,7 +257,7 @@ Since: 2.48</p>
         <dt id="ALLOW_REPLACEMENT-constant" class="">ALLOW_REPLACEMENT =
           <div class="docstring">
   <div class="discussion">
-    <p>Allow another instance to take over
+    <p>Allow another instance to take over<br />
 the bus name. Since: 2.60</p>
 
 
@@ -271,8 +273,8 @@ the bus name. Since: 2.60</p>
         <dt id="REPLACE-constant" class="">REPLACE =
           <div class="docstring">
   <div class="discussion">
-    <p>Take over from another instance. This flag is
-usually set by passing <code>--gapplication-replace</code> on the commandline.
+    <p>Take over from another instance. This flag is<br />
+usually set by passing <code>--gapplication-replace</code> on the commandline.<br />
 Since: 2.60</p>
 
 
@@ -301,7 +303,7 @@ Since: 2.60</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

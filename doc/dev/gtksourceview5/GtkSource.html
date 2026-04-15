@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -83,8 +84,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtksourceview5/loader.rb<span class="defines">,<br />
-  lib/gtksourceview5.rb,<br /> lib/gtksourceview5/deprecated.rb,<br /> lib/gtksourceview5/mark-attributes.rb</span>
+    <dd>lib/gtksourceview5/loader.rb<span class="defines">,<br>
+  lib/gtksourceview5.rb,<br> lib/gtksourceview5/deprecated.rb,<br> lib/gtksourceview5/mark-attributes.rb</span>
+
 </dd>
   </dl>
   
@@ -93,16 +95,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2015-2022  Ruby-GNOME Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -135,8 +137,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
         <dt id="MAJOR_VERSION-constant" class="">MAJOR_VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>Like gtk_source_get_major_version(), but from the headers used at
-application compile time, rather than from the library linked
+    <p>Like gtk_source_get_major_version(), but from the headers used at<br />
+application compile time, rather than from the library linked<br />
 against at application run time.</p>
 
 
@@ -152,8 +154,8 @@ against at application run time.</p>
         <dt id="MICRO_VERSION-constant" class="">MICRO_VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>Like gtk_source_get_micro_version(), but from the headers used at
-application compile time, rather than from the library linked
+    <p>Like gtk_source_get_micro_version(), but from the headers used at<br />
+application compile time, rather than from the library linked<br />
 against at application run time.</p>
 
 
@@ -169,8 +171,8 @@ against at application run time.</p>
         <dt id="MINOR_VERSION-constant" class="">MINOR_VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>Like gtk_source_get_minor_version(), but from the headers used at
-application compile time, rather than from the library linked
+    <p>Like gtk_source_get_minor_version(), but from the headers used at<br />
+application compile time, rather than from the library linked<br />
 against at application run time.</p>
 
 
@@ -618,6 +620,7 @@ against at application run time.</p>
 
       
     </ul>
+    
   
 
 
@@ -638,10 +641,10 @@ against at application run time.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like GTK_SOURCE_CHECK_VERSION, but the check for gtk_source_check_version is
-at runtime instead of compile time. This is useful for compiling
-against older versions of GtkSourceView, but using features from newer
-versions.
+    <p>Like GTK_SOURCE_CHECK_VERSION, but the check for gtk_source_check_version is<br />
+at runtime instead of compile time. This is useful for compiling<br />
+against older versions of GtkSourceView, but using features from newer<br />
+versions.<br />
 is the same as or newer than the passed-in version.</p>
 
 
@@ -730,7 +733,7 @@ is the same as or newer than the passed-in version.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets all encodings.
+    <p>Gets all encodings.<br />
 all Gtk::SourceEncoding's. Free with g_slist_free().</p>
 
 
@@ -812,9 +815,9 @@ all Gtk::SourceEncoding's. Free with g_slist_free().</p>
   <div class="discussion">
     <p>Gets the list of default candidate encodings to try when loading a file.</p>
 <p>See [method<!-- raw HTML omitted -->FileLoader<!-- raw HTML omitted -->.set_candidate_encodings].</p>
-<p>This function returns a different list depending on the current locale (i.e.
-language, country and default encoding). The UTF-8 encoding and the current
-locale encoding are guaranteed to be present in the returned list.
+<p>This function returns a different list depending on the current locale (i.e.<br />
+language, country and default encoding). The UTF-8 encoding and the current<br />
+locale encoding are guaranteed to be present in the returned list.<br />
 default candidate encodings. Free with g_slist_free().</p>
 
 
@@ -854,8 +857,8 @@ default candidate encodings. Free with g_slist_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a Gtk::SourceEncoding from a character set such as &quot;UTF-8&quot; or
-&quot;ISO-8859-1&quot;.
+    <p>Gets a Gtk::SourceEncoding from a character set such as &quot;UTF-8&quot; or<br />
+&quot;ISO-8859-1&quot;.<br />
 if not found.</p>
 
 
@@ -1021,10 +1024,10 @@ if not found.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Free the resources allocated by GtkSourceView. For example it unrefs the
+    <p>Free the resources allocated by GtkSourceView. For example it unrefs the<br />
 singleton objects.</p>
-<p>It is not mandatory to call this function, it's just to be friendlier to
-memory debugging tools. This function is meant to be called at the end of
+<p>It is not mandatory to call this function, it's just to be friendlier to<br />
+memory debugging tools. This function is meant to be called at the end of<br />
 main(). It can be called several times.</p>
 
 
@@ -1061,7 +1064,7 @@ main(). It can be called several times.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Initializes the GtkSourceView library (e.g. for the internationalization).</p>
-<p>This function can be called several times, but is meant to be called at the
+<p>This function can be called several times, but is meant to be called at the<br />
 beginning of main(), before any other GtkSourceView function call.</p>
 
 
@@ -1097,11 +1100,11 @@ beginning of main(), before any other GtkSourceView function call.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the major version number of the GtkSourceView library.
+    <p>Returns the major version number of the GtkSourceView library.<br />
 (e.g. in GtkSourceView version 3.20.0 this is 3.)</p>
-<p>This function is in the library, so it represents the GtkSourceView library
-your code is running against. Contrast with the #GTK_SOURCE_MAJOR_VERSION
-macro, which represents the major version of the GtkSourceView headers you
+<p>This function is in the library, so it represents the GtkSourceView library<br />
+your code is running against. Contrast with the #GTK_SOURCE_MAJOR_VERSION<br />
+macro, which represents the major version of the GtkSourceView headers you<br />
 have included when compiling your code.</p>
 
 
@@ -1141,11 +1144,11 @@ have included when compiling your code.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the micro version number of the GtkSourceView library.
+    <p>Returns the micro version number of the GtkSourceView library.<br />
 (e.g. in GtkSourceView version 3.20.0 this is 0.)</p>
-<p>This function is in the library, so it represents the GtkSourceView library
-your code is running against. Contrast with the #GTK_SOURCE_MICRO_VERSION
-macro, which represents the micro version of the GtkSourceView headers you
+<p>This function is in the library, so it represents the GtkSourceView library<br />
+your code is running against. Contrast with the #GTK_SOURCE_MICRO_VERSION<br />
+macro, which represents the micro version of the GtkSourceView headers you<br />
 have included when compiling your code.</p>
 
 
@@ -1185,11 +1188,11 @@ have included when compiling your code.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the minor version number of the GtkSourceView library.
+    <p>Returns the minor version number of the GtkSourceView library.<br />
 (e.g. in GtkSourceView version 3.20.0 this is 20.)</p>
-<p>This function is in the library, so it represents the GtkSourceView library
-your code is running against. Contrast with the #GTK_SOURCE_MINOR_VERSION
-macro, which represents the minor version of the GtkSourceView headers you
+<p>This function is in the library, so it represents the GtkSourceView library<br />
+your code is running against. Contrast with the #GTK_SOURCE_MINOR_VERSION<br />
+macro, which represents the minor version of the GtkSourceView headers you<br />
 have included when compiling your code.</p>
 
 
@@ -1299,9 +1302,9 @@ have included when compiling your code.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a new callback that will be executed as time permits on the main thread.</p>
-<p>This is useful when you need to do a lot of background work but want to do
+<p>This is useful when you need to do a lot of background work but want to do<br />
 it incrementally.</p>
-<p><!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be provided a deadline that it should complete it's work by
+<p><!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be provided a deadline that it should complete it's work by<br />
 (or near) and can be checked using [func<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.get_monotonic_time] for comparison.</p>
 <p>Use [func<!-- raw HTML omitted -->scheduler_remove<!-- raw HTML omitted -->] to remove the handler.</p>
 
@@ -1387,7 +1390,7 @@ it incrementally.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes a scheduler callback previously registered with
+    <p>Removes a scheduler callback previously registered with<br />
 [func<!-- raw HTML omitted -->scheduler_add<!-- raw HTML omitted -->] or [func<!-- raw HTML omitted -->scheduler_add_full<!-- raw HTML omitted -->].</p>
 
 
@@ -1444,8 +1447,8 @@ it incrementally.</p>
   <div class="discussion">
     <p>Use this function to escape the following characters: <code>\n</code>, <code>\r</code>, <code>\t</code> and <code>\</code>.</p>
 <p>For a regular expression search, use g_regex_escape_string() instead.</p>
-<p>One possible use case is to take the Gtk::TextBuffer's selection and put it in a
-search entry. The selection can contain tabulations, newlines, etc. So it's
+<p>One possible use case is to take the Gtk::TextBuffer's selection and put it in a<br />
+search entry. The selection can contain tabulations, newlines, etc. So it's<br />
 better to escape those special characters to better fit in the search entry.</p>
 <p>See also: [func<!-- raw HTML omitted -->utils_unescape_search_text<!-- raw HTML omitted -->].</p>
 <!-- raw HTML omitted -->
@@ -1506,10 +1509,10 @@ better to escape those special characters to better fit in the search entry.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Use this function before [method<!-- raw HTML omitted -->SearchSettings<!-- raw HTML omitted -->.set_search_text], to
-unescape the following sequences of characters: <code>\n</code>, <code>\r</code>, <code>\t</code> and <code>\\</code>.
+    <p>Use this function before [method<!-- raw HTML omitted -->SearchSettings<!-- raw HTML omitted -->.set_search_text], to<br />
+unescape the following sequences of characters: <code>\n</code>, <code>\r</code>, <code>\t</code> and <code>\\</code>.<br />
 The purpose is to easily write those characters in a search entry.</p>
-<p>Note that unescaping the search text is not needed for regular expression
+<p>Note that unescaping the search text is not needed for regular expression<br />
 searches.</p>
 <p>See also: [func<!-- raw HTML omitted -->utils_escape_search_text<!-- raw HTML omitted -->].</p>
 
@@ -1565,7 +1568,7 @@ searches.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

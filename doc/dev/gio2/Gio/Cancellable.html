@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::Cancellable";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -138,6 +140,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -448,6 +451,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -465,10 +469,10 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new #GCancellable object.</p>
-<p>Applications that want to start one or more operations
-that should be cancellable should create a #GCancellable
+<p>Applications that want to start one or more operations<br />
+that should be cancellable should create a #GCancellable<br />
 and pass it to the operations.</p>
-<p>One #GCancellable can be used in multiple consecutive
+<p>One #GCancellable can be used in multiple consecutive<br />
 operations or in multiple concurrent operations.</p>
 
 
@@ -498,7 +502,7 @@ operations or in multiple concurrent operations.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the top cancellable from the stack.
+    <p>Gets the top cancellable from the stack.<br />
 of the stack, or nil if the stack is empty.</p>
 
 
@@ -544,18 +548,18 @@ of the stack, or nil if the stack is empty.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Will set <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> to cancelled, and will emit the
-#GCancellable::cancelled signal. (However, see the warning about
-race conditions in the documentation for that signal if you are
+    <p>Will set <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> to cancelled, and will emit the<br />
+#GCancellable::cancelled signal. (However, see the warning about<br />
+race conditions in the documentation for that signal if you are<br />
 planning to connect to it.)</p>
-<p>This function is thread-safe. In other words, you can safely call
-it from a thread other than the one running the operation that was
+<p>This function is thread-safe. In other words, you can safely call<br />
+it from a thread other than the one running the operation that was<br />
 passed the <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted -->.</p>
 <p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is nil, this function returns immediately for convenience.</p>
-<p>The convention within GIO is that cancelling an asynchronous
-operation causes it to complete asynchronously. That is, if you
-cancel the operation from the same thread in which it is running,
-then the operation's GAsync::ReadyCallback will not be invoked until
+<p>The convention within GIO is that cancelling an asynchronous<br />
+operation causes it to complete asynchronously. That is, if you<br />
+cancel the operation from the same thread in which it is running,<br />
+then the operation's GAsync::ReadyCallback will not be invoked until<br />
 the application returns to the main loop.</p>
 
 
@@ -591,19 +595,19 @@ the application returns to the main loop.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convenience function to connect to the #GCancellable::cancelled
-signal. Also handles the race condition that may happen
+    <p>Convenience function to connect to the #GCancellable::cancelled<br />
+signal. Also handles the race condition that may happen<br />
 if the cancellable is cancelled right before connecting.</p>
-<p><!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is called at most once, either directly at the
-time of the connect if <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is already cancelled,
+<p><!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is called at most once, either directly at the<br />
+time of the connect if <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is already cancelled,<br />
 or when <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled in some thread.</p>
-<p><!-- raw HTML omitted -->data_destroy_func<!-- raw HTML omitted --> will be called when the handler is
-disconnected, or immediately if the cancellable is already
+<p><!-- raw HTML omitted -->data_destroy_func<!-- raw HTML omitted --> will be called when the handler is<br />
+disconnected, or immediately if the cancellable is already<br />
 cancelled.</p>
 <p>See #GCancellable::cancelled for details on how to use this.</p>
-<p>Since GLib 2.40, the lock protecting <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not held when
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is invoked.  This lifts a restriction in place for
-earlier GLib versions which now makes it easier to write cleanup
+<p>Since GLib 2.40, the lock protecting <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not held when<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is invoked.  This lifts a restriction in place for<br />
+earlier GLib versions which now makes it easier to write cleanup<br />
 code that unconditionally invokes e.g. g_cancellable_cancel().</p>
 
 
@@ -671,7 +675,7 @@ code that unconditionally invokes e.g. g_cancellable_cancel().</p>
       
       
         &mdash;
-        <div class='inline'><p>The id of the signal handler or 0 if <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> has already
+        <div class='inline'><p>The id of the signal handler or 0 if <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> has already<br />
 been cancelled.</p>
 </div>
       
@@ -693,17 +697,17 @@ been cancelled.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Disconnects a handler from a cancellable instance similar to
-g_signal_handler_disconnect().  Additionally, in the event that a
-signal handler is currently running, this call will block until the
-handler has finished.  Calling this function from a
-#GCancellable::cancelled signal handler will therefore result in a
+    <p>Disconnects a handler from a cancellable instance similar to<br />
+g_signal_handler_disconnect().  Additionally, in the event that a<br />
+signal handler is currently running, this call will block until the<br />
+handler has finished.  Calling this function from a<br />
+#GCancellable::cancelled signal handler will therefore result in a<br />
 deadlock.</p>
-<p>This avoids a race condition where a thread cancels at the
-same time as the cancellable operation is finished and the
-signal handler is removed. See #GCancellable::cancelled for
+<p>This avoids a race condition where a thread cancels at the<br />
+same time as the cancellable operation is finished and the<br />
+signal handler is removed. See #GCancellable::cancelled for<br />
 details on how to use this.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is nil or <!-- raw HTML omitted -->handler_id<!-- raw HTML omitted --> is <code>0</code> this function does
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is nil or <!-- raw HTML omitted -->handler_id<!-- raw HTML omitted --> is <code>0</code> this function does<br />
 nothing.</p>
 
 
@@ -758,16 +762,16 @@ nothing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the file descriptor for a cancellable job. This can be used to
-implement cancellable operations on Unix systems. The returned fd will
+    <p>Gets the file descriptor for a cancellable job. This can be used to<br />
+implement cancellable operations on Unix systems. The returned fd will<br />
 turn readable when <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled.</p>
-<p>You are not supposed to read from the fd yourself, just check for
-readable status. Reading to unset the readable status is done
+<p>You are not supposed to read from the fd yourself, just check for<br />
+readable status. Reading to unset the readable status is done<br />
 with g_cancellable_reset().</p>
-<p>After a successful return from this function, you should use
-g_cancellable_release_fd() to free up resources allocated for
+<p>After a successful return from this function, you should use<br />
+g_cancellable_release_fd() to free up resources allocated for<br />
 the returned file descriptor.</p>
-<p>See also g_cancellable_make_pollfd().
+<p>See also g_cancellable_make_pollfd().<br />
 is not supported, or on errors.</p>
 
 
@@ -807,7 +811,7 @@ is not supported, or on errors.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if a cancellable job has been cancelled.
+    <p>Checks if a cancellable job has been cancelled.<br />
 FALSE if called with nil or if item is not cancelled.</p>
 
 
@@ -847,20 +851,20 @@ FALSE if called with nil or if item is not cancelled.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a GPoll::FD corresponding to <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted -->; this can be passed
-to g_poll() and used to poll for cancellation. This is useful both
-for unix systems without a native poll and for portability to
+    <p>Creates a GPoll::FD corresponding to <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted -->; this can be passed<br />
+to g_poll() and used to poll for cancellation. This is useful both<br />
+for unix systems without a native poll and for portability to<br />
 windows.</p>
-<p>When this function returns true, you should use
-g_cancellable_release_fd() to free up resources allocated for the
+<p>When this function returns true, you should use<br />
+g_cancellable_release_fd() to free up resources allocated for the<br />
 <!-- raw HTML omitted -->pollfd<!-- raw HTML omitted -->. After a false return, do not call g_cancellable_release_fd().</p>
-<p>If this function returns false, either no <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> was given or
-resource limits prevent this function from allocating the necessary
-structures for polling. (On Linux, you will likely have reached
-the maximum number of file descriptors.) The suggested way to handle
+<p>If this function returns false, either no <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> was given or<br />
+resource limits prevent this function from allocating the necessary<br />
+structures for polling. (On Linux, you will likely have reached<br />
+the maximum number of file descriptors.) The suggested way to handle<br />
 these cases is to ignore the <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted -->.</p>
-<p>You are not supposed to read from the fd yourself, just check for
-readable status. Reading to unset the readable status is done
+<p>You are not supposed to read from the fd yourself, just check for<br />
+readable status. Reading to unset the readable status is done<br />
 with g_cancellable_reset().</p>
 
 
@@ -898,7 +902,7 @@ with g_cancellable_reset().</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->pollfd<!-- raw HTML omitted --> was successfully initialized, false on
+        <div class='inline'><p>true if <!-- raw HTML omitted -->pollfd<!-- raw HTML omitted --> was successfully initialized, false on<br />
 failure to prepare the cancellable.</p>
 </div>
       
@@ -920,7 +924,7 @@ failure to prepare the cancellable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Pops <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> off the cancellable stack (verifying that <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted -->
+    <p>Pops <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> off the cancellable stack (verifying that <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --><br />
 is on the top of the stack).</p>
 
 
@@ -956,11 +960,11 @@ is on the top of the stack).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Pushes <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> onto the cancellable stack. The current
+    <p>Pushes <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> onto the cancellable stack. The current<br />
 cancellable can then be received using g_cancellable_get_current().</p>
-<p>This is useful when implementing cancellable operations in
+<p>This is useful when implementing cancellable operations in<br />
 code that does not allow you to pass down the cancellable object.</p>
-<p>This is typically called automatically by e.g. #GFile operations,
+<p>This is typically called automatically by e.g. #GFile operations,<br />
 so you rarely have to call this yourself.</p>
 
 
@@ -996,13 +1000,13 @@ so you rarely have to call this yourself.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Releases a resources previously allocated by g_cancellable_get_fd()
+    <p>Releases a resources previously allocated by g_cancellable_get_fd()<br />
 or g_cancellable_make_pollfd().</p>
-<p>For compatibility reasons with older releases, calling this function
-is not strictly required, the resources will be automatically freed
-when the <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is finalized. However, the <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> will
-block scarce file descriptors until it is finalized if this function
-is not called. This can cause the application to run out of file
+<p>For compatibility reasons with older releases, calling this function<br />
+is not strictly required, the resources will be automatically freed<br />
+when the <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is finalized. However, the <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> will<br />
+block scarce file descriptors until it is finalized if this function<br />
+is not called. This can cause the application to run out of file<br />
 descriptors when many #GCancellables are used at the same time.</p>
 
 
@@ -1039,13 +1043,13 @@ descriptors when many #GCancellables are used at the same time.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Resets <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> to its uncancelled state.</p>
-<p>If cancellable is currently in use by any cancellable operation
+<p>If cancellable is currently in use by any cancellable operation<br />
 then the behavior of this function is undefined.</p>
-<p>Note that it is generally not a good idea to reuse an existing
-cancellable for more operations after it has been cancelled once,
-as this function might tempt you to do. The recommended practice
-is to drop the reference to a cancellable after cancelling it,
-and let it die with the outstanding async operations. You should
+<p>Note that it is generally not a good idea to reuse an existing<br />
+cancellable for more operations after it has been cancelled once,<br />
+as this function might tempt you to do. The recommended practice<br />
+is to drop the reference to a cancellable after cancelling it,<br />
+and let it die with the outstanding async operations. You should<br />
 create a fresh cancellable for further async operations.</p>
 
 
@@ -1081,7 +1085,7 @@ create a fresh cancellable for further async operations.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If the <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled, sets the error to notify
+    <p>If the <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled, sets the error to notify<br />
 that the operation was cancelled.</p>
 
 
@@ -1121,11 +1125,11 @@ that the operation was cancelled.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a source that triggers if <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled and
-calls its callback of type GCancellable::SourceFunc. This is
-primarily useful for attaching to another (non-cancellable) source
+    <p>Creates a source that triggers if <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled and<br />
+calls its callback of type GCancellable::SourceFunc. This is<br />
+primarily useful for attaching to another (non-cancellable) source<br />
 with g_source_add_child_source() to add cancellability to it.</p>
-<p>For convenience, you can call this with a nil #GCancellable,
+<p>For convenience, you can call this with a nil #GCancellable,<br />
 in which case the source will never trigger.</p>
 <p>The new #GSource will hold a reference to the #GCancellable.</p>
 
@@ -1162,7 +1166,7 @@ in which case the source will never trigger.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

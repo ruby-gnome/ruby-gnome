@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gnm";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gnm/loader.rb<span class="defines">,<br />
+    <dd>lib/gnm/loader.rb<span class="defines">,<br>
   lib/gnm.rb</span>
+
 </dd>
   </dl>
   
@@ -88,16 +90,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2016-2021  Ruby-GNOME Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -849,6 +851,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -32398,6 +32401,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 
       
     </ul>
+    
   
 
 
@@ -32513,8 +32517,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Simplified variant of rangeref_as_string that old versions of gnumeric can
-read.  It drops support for full col/row references.  We can remap them on
+    <p>Simplified variant of rangeref_as_string that old versions of gnumeric can<br />
+read.  It drops support for full col/row references.  We can remap them on<br />
 import.</p>
 <p>This function also ignores R1C1 settings.</p>
 
@@ -36543,7 +36547,7 @@ import.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>An internal routine to autofill a region.  It does NOT
+    <p>An internal routine to autofill a region.  It does NOT<br />
 queue a recalc, flag a status update, or regen spans.</p>
 
 
@@ -37471,10 +37475,10 @@ queue a recalc, flag a status update, or regen spans.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set an array expression for a range.
-Uses cell_set_expr_internal to store the expr as an
-'array-formula'.  The supplied expression is wrapped in an array
-operator for each cell in the range and scheduled for recalc.
+    <p>Set an array expression for a range.<br />
+Uses cell_set_expr_internal to store the expr as an<br />
+'array-formula'.  The supplied expression is wrapped in an array<br />
+operator for each cell in the range and scheduled for recalc.<br />
 NOTE : This adds a reference to the expression.</p>
 <p>Does not regenerate spans, dimensions or autosize cols/rows.</p>
 <p>DOES CHECK for array partitioning.</p>
@@ -37565,10 +37569,10 @@ NOTE : This adds a reference to the expression.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Uses cell_set_expr_internal to store the expr as an
-'array-formula'.  The supplied expression is wrapped in an array
+    <p>Uses cell_set_expr_internal to store the expr as an<br />
+'array-formula'.  The supplied expression is wrapped in an array<br />
 operator for each cell in the range and scheduled for recalc.</p>
-<p>NOTE : Does not add a reference to the expression.  It takes over the
+<p>NOTE : Does not add a reference to the expression.  It takes over the<br />
 caller's reference.</p>
 <p>Does not regenerate spans, dimensions or autosize cols/rows.</p>
 <p>DOES NOT CHECK for array partitioning.</p>
@@ -38278,8 +38282,8 @@ caller's reference.</p>
       
       
         &mdash;
-        <div class='inline'><p>if this is true, then parsing stops at possible errors,
-otherwise an attempt is made to return cell names with
+        <div class='inline'><p>if this is true, then parsing stops at possible errors,<br />
+otherwise an attempt is made to return cell names with<br />
 trailing garbage.</p>
 </div>
       
@@ -38319,8 +38323,8 @@ trailing garbage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Emits a string containing representation of <!-- raw HTML omitted -->ref<!-- raw HTML omitted --> as evaluated at <!-- raw HTML omitted -->pp<!-- raw HTML omitted -->.
-<!-- raw HTML omitted -->no_sheetname<!-- raw HTML omitted --> can be used to suppress the addition of the sheetname
+    <p>Emits a string containing representation of <!-- raw HTML omitted -->ref<!-- raw HTML omitted --> as evaluated at <!-- raw HTML omitted -->pp<!-- raw HTML omitted -->.<br />
+<!-- raw HTML omitted -->no_sheetname<!-- raw HTML omitted --> can be used to suppress the addition of the sheetname<br />
 for non-local references.</p>
 
 
@@ -38401,8 +38405,8 @@ for non-local references.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts the string representation of a Gnm::CellRef into
-an internal representation.
+    <p>Converts the string representation of a Gnm::CellRef into<br />
+an internal representation.<br />
 cellref.</p>
 
 
@@ -38911,7 +38915,7 @@ cellref.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a cell region with copies of objects in list.  Caller is responsible
+    <p>Returns a cell region with copies of objects in list.  Caller is responsible<br />
 for cellregion_unref-ing the result.</p>
 
 
@@ -39222,9 +39226,9 @@ for cellregion_unref-ing the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Pastes the supplied GnmCellRegion (<!-- raw HTML omitted -->cr<!-- raw HTML omitted -->) into the supplied
-GnmPasteTarget (<!-- raw HTML omitted -->pt<!-- raw HTML omitted -->).  This operation is not undoable.  It does not auto grow
-the destination if the target is a singleton.  This is a simple interface to
+    <p>Pastes the supplied GnmCellRegion (<!-- raw HTML omitted -->cr<!-- raw HTML omitted -->) into the supplied<br />
+GnmPasteTarget (<!-- raw HTML omitted -->pt<!-- raw HTML omitted -->).  This operation is not undoable.  It does not auto grow<br />
+the destination if the target is a singleton.  This is a simple interface to<br />
 paste a region.</p>
 
 
@@ -39347,7 +39351,7 @@ paste a region.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Note: this takes ownership of specs and dao if the command
+    <p>Note: this takes ownership of specs and dao if the command<br />
 succeeds.</p>
 
 
@@ -39984,7 +39988,7 @@ succeeds.</p>
   <div class="discussion">
     <p>checks whether the cells are effectively locked</p>
 <p>static gboolean cmd_cell_range_is_locked_effective</p>
-<p>Do not use this function unless the sheet is part of the
+<p>Do not use this function unless the sheet is part of the<br />
 workbook with the given wbc (otherwise the results may be strange)</p>
 
 
@@ -40695,8 +40699,8 @@ workbook with the given wbc (otherwise the results may be strange)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If the <!-- raw HTML omitted -->name<!-- raw HTML omitted --> has never been defined in context <!-- raw HTML omitted -->pp<!-- raw HTML omitted --> create a new name
-If it is a placeholder, assign <!-- raw HTML omitted -->texpr<!-- raw HTML omitted --> to it and make it real
+    <p>If the <!-- raw HTML omitted -->name<!-- raw HTML omitted --> has never been defined in context <!-- raw HTML omitted -->pp<!-- raw HTML omitted --> create a new name<br />
+If it is a placeholder, assign <!-- raw HTML omitted -->texpr<!-- raw HTML omitted --> to it and make it real<br />
 If it already exists as a real name just assign <!-- raw HTML omitted -->expr<!-- raw HTML omitted -->.</p>
 
 
@@ -42064,11 +42068,11 @@ If it already exists as a real name just assign <!-- raw HTML omitted -->expr<!-
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Pastes the current cut buffer, copy buffer, or X selection to
+    <p>Pastes the current cut buffer, copy buffer, or X selection to<br />
 the destination sheet range.</p>
 <p>When pasting a cut the destination MUST be the same size as the src.</p>
-<p>When pasting a copy the destination can be a singleton, or an integer
-multiple of the size of the source.  This is not tested here.
+<p>When pasting a copy the destination can be a singleton, or an integer<br />
+multiple of the size of the source.  This is not tested here.<br />
 Full undo support.</p>
 
 
@@ -42283,7 +42287,7 @@ Full undo support.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Using the current selection as a target
+    <p>Using the current selection as a target<br />
 Full undo support.</p>
 
 
@@ -43656,9 +43660,9 @@ Full undo support.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>checks whether the selection is effectively locked
+    <p>checks whether the selection is effectively locked<br />
 static gboolean cmd_selection_is_locked_effective</p>
-<p>Do not use this function unless the sheet is part of the
+<p>Do not use this function unless the sheet is part of the<br />
 workbook with the given wbcg (otherwise the results may be strange)</p>
 
 
@@ -44036,7 +44040,7 @@ workbook with the given wbcg (otherwise the results may be strange)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Takes the cells in the region (start_col,row):(end_col,MAX_ROW)
+    <p>Takes the cells in the region (start_col,row):(end_col,MAX_ROW)<br />
 and copies them <!-- raw HTML omitted -->count<!-- raw HTML omitted --> units (possibly negative) downwards.</p>
 
 
@@ -44131,8 +44135,8 @@ and copies them <!-- raw HTML omitted -->count<!-- raw HTML omitted --> units (p
       
       
         &mdash;
-        <div class='inline'><p>numbers of rows to shift.  a negative numbers will
-delete count rows, positive number will insert
+        <div class='inline'><p>numbers of rows to shift.  a negative numbers will<br />
+delete count rows, positive number will insert<br />
 count rows.</p>
 </div>
       
@@ -44168,14 +44172,14 @@ count rows.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Takes the cells in the region (col,start_row):(MAX_COL,end_row)
-and copies them <!-- raw HTML omitted -->count<!-- raw HTML omitted --> units (possibly negative) to the right.
-<!-- raw HTML omitted -->sheet<!-- raw HTML omitted -->	the sheet
-<!-- raw HTML omitted -->col<!-- raw HTML omitted -->		column marking the start of the shift
-<!-- raw HTML omitted -->start_row<!-- raw HTML omitted -->	first row
-<!-- raw HTML omitted -->end_row<!-- raw HTML omitted -->	end row
-<!-- raw HTML omitted -->count<!-- raw HTML omitted -->	numbers of columns to shift.  negative numbers will
-delete count columns, positive number will insert
+    <p>Takes the cells in the region (col,start_row):(MAX_COL,end_row)<br />
+and copies them <!-- raw HTML omitted -->count<!-- raw HTML omitted --> units (possibly negative) to the right.<br />
+<!-- raw HTML omitted -->sheet<!-- raw HTML omitted -->	the sheet<br />
+<!-- raw HTML omitted -->col<!-- raw HTML omitted -->		column marking the start of the shift<br />
+<!-- raw HTML omitted -->start_row<!-- raw HTML omitted -->	first row<br />
+<!-- raw HTML omitted -->end_row<!-- raw HTML omitted -->	end row<br />
+<!-- raw HTML omitted -->count<!-- raw HTML omitted -->	numbers of columns to shift.  negative numbers will<br />
+delete count columns, positive number will insert<br />
 count columns.</p>
 
 
@@ -45860,11 +45864,11 @@ count columns.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If <!-- raw HTML omitted -->n<!-- raw HTML omitted --> is not positive upon return, no data has been allocated.
+    <p>If <!-- raw HTML omitted -->n<!-- raw HTML omitted --> is not positive upon return, no data has been allocated.<br />
 If <!-- raw HTML omitted -->n<!-- raw HTML omitted --> is negative upon return, the two ranges had different sizes.</p>
-<p>Note: introspection cannot handle this functions parameter mix.
-the vectors returned in <!-- raw HTML omitted -->xs0<!-- raw HTML omitted --> and <!-- raw HTML omitted -->xs1<!-- raw HTML omitted -->.  If present and true, the
-resulting data vectors in <!-- raw HTML omitted -->xs0<!-- raw HTML omitted --> and <!-- raw HTML omitted -->xs1<!-- raw HTML omitted --> are not owned by the caller.
+<p>Note: introspection cannot handle this functions parameter mix.<br />
+the vectors returned in <!-- raw HTML omitted -->xs0<!-- raw HTML omitted --> and <!-- raw HTML omitted -->xs1<!-- raw HTML omitted -->.  If present and true, the<br />
+resulting data vectors in <!-- raw HTML omitted -->xs0<!-- raw HTML omitted --> and <!-- raw HTML omitted -->xs1<!-- raw HTML omitted --> are not owned by the caller.<br />
 If not-present or false, the callers owns and must free the result.</p>
 
 
@@ -46028,20 +46032,20 @@ If not-present or false, the callers owns and must free the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>exprlist:       List of expressions to evaluate.
-cr:             Current location (for resolving relative cells).
-flags:          COLLECT_IGNORE_STRINGS: silently ignore strings.
-COLLECT_COERCE_STRINGS: coerce string into numbers
-COLLECT_ZERO_STRINGS: count strings as 0.
-(Alternative: return #VALUE!.)
-COLLECT_IGNORE_BOOLS: silently ignore bools.
-COLLECT_ZEROONE_BOOLS: count FALSE as 0, TRUE as 1.
-(Alternative: return #VALUE!.)
-COLLECT_IGNORE_SUBTOTAL : ignore expressions that include
-the function SUBTOTAL directly and ignore any content
-in filtered rows.
-n:              Output parameter for number of floats.
-Evaluate a list of expressions and return the result as an array of
+    <p>exprlist:       List of expressions to evaluate.<br />
+cr:             Current location (for resolving relative cells).<br />
+flags:          COLLECT_IGNORE_STRINGS: silently ignore strings.<br />
+COLLECT_COERCE_STRINGS: coerce string into numbers<br />
+COLLECT_ZERO_STRINGS: count strings as 0.<br />
+(Alternative: return #VALUE!.)<br />
+COLLECT_IGNORE_BOOLS: silently ignore bools.<br />
+COLLECT_ZEROONE_BOOLS: count FALSE as 0, TRUE as 1.<br />
+(Alternative: return #VALUE!.)<br />
+COLLECT_IGNORE_SUBTOTAL : ignore expressions that include<br />
+the function SUBTOTAL directly and ignore any content<br />
+in filtered rows.<br />
+n:              Output parameter for number of floats.<br />
+Evaluate a list of expressions and return the result as an array of<br />
 gnm_float.</p>
 
 
@@ -46152,8 +46156,8 @@ gnm_float.</p>
       
       
         &mdash;
-        <div class='inline'><p>NULL in case of strict and a blank.
-A copy of the error in the case of strict and an error.
+        <div class='inline'><p>NULL in case of strict and a blank.<br />
+A copy of the error in the case of strict and an error.<br />
 Non-NULL in case of success.  Then n will be set.</p>
 </div>
       
@@ -46939,7 +46943,7 @@ Non-NULL in case of success.  Then n will be set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>find the next/prev col/row at the designated depth starting from the
+    <p>find the next/prev col/row at the designated depth starting from the<br />
 supplied <!-- raw HTML omitted -->index<!-- raw HTML omitted -->.</p>
 
 
@@ -47083,7 +47087,7 @@ supplied <!-- raw HTML omitted -->index<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Collect the sets of visibility changes required to change the visibility of
+    <p>Collect the sets of visibility changes required to change the visibility of<br />
 all outlined columns/rows such that those depth less then  <!-- raw HTML omitted -->depth<!-- raw HTML omitted --> are visible.</p>
 
 
@@ -47190,7 +47194,7 @@ all outlined columns/rows such that those depth less then  <!-- raw HTML omitted
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Build an ordered list of pairs doing intelligent merging
+    <p>Build an ordered list of pairs doing intelligent merging<br />
 of overlapping regions.</p>
 
 
@@ -47556,7 +47560,7 @@ of overlapping regions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Searches the selection list and generates a list of index,count
+    <p>Searches the selection list and generates a list of index,count<br />
 pairs of row/col ranges that need to be hidden or unhidden.</p>
 
 
@@ -48070,7 +48074,7 @@ pairs of row/col ranges that need to be hidden or unhidden.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Change the visibility of the selected range of contiguous cols/rows.
+    <p>Change the visibility of the selected range of contiguous cols/rows.<br />
 NOTE : only changes the collapsed state for the LAST+1 element.</p>
 
 
@@ -48185,7 +48189,7 @@ NOTE : only changes the collapsed state for the LAST+1 element.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is the high level command that is wrapped by undo and redo.
+    <p>This is the high level command that is wrapped by undo and redo.<br />
 It should not be called by other commands.</p>
 
 
@@ -48397,8 +48401,8 @@ It should not be called by other commands.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Iterates through the existing rows or columns within the range supplied.
-Currently only support left-to-right iteration.  If a callback returns
+    <p>Iterates through the existing rows or columns within the range supplied.<br />
+Currently only support left-to-right iteration.  If a callback returns<br />
 true, iteration stops.</p>
 
 
@@ -48478,7 +48482,7 @@ true, iteration stops.</p>
       
       
         &mdash;
-        <div class='inline'><p>A callback function which should
+        <div class='inline'><p>A callback function which should<br />
 return true to stop the iteration.</p>
 </div>
       
@@ -48784,10 +48788,10 @@ return true to stop the iteration.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function differs from Excel's parsing in at least the following
-ways:
-(1) We allow spaces before the imaginary unit used with an implied &quot;1&quot;.
-Therefore we allow &quot;+ i&quot;.
+    <p>This function differs from Excel's parsing in at least the following<br />
+ways:<br />
+(1) We allow spaces before the imaginary unit used with an implied &quot;1&quot;.<br />
+Therefore we allow &quot;+ i&quot;.<br />
 (2) We do not allow a thousands separator as in &quot;1,000i&quot;.</p>
 
 
@@ -67302,7 +67306,7 @@ Therefore we allow &quot;+ i&quot;.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>link a list of dependents.  (The list used to get freed, but is not
+    <p>link a list of dependents.  (The list used to get freed, but is not<br />
 freed anymore.)</p>
 
 
@@ -67357,7 +67361,7 @@ freed anymore.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Fixes references to or from a region that is going to be moved.
+    <p>Fixes references to or from a region that is going to be moved.<br />
 the region.</p>
 
 
@@ -68327,8 +68331,8 @@ the region.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function will show the AutoFormatTemplate dialog and apply
-the template the user chooses to the current selection in the active
+    <p>This function will show the AutoFormatTemplate dialog and apply<br />
+the template the user chooses to the current selection in the active<br />
 sheet of the workbook if the user desires.</p>
 
 
@@ -74458,12 +74462,12 @@ sheet of the workbook if the user desires.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Make the &quot;activate&quot; signal of an editable click the default dialog button.</p>
-<p>This is a literal copy of gnome_dialog_editable_enters, but not restricted
+<p>This is a literal copy of gnome_dialog_editable_enters, but not restricted<br />
 to GnomeDialogs.</p>
-<p>Normally if there's an editable widget (such as Gtk::Entry) in your
-dialog, pressing Enter will activate the editable rather than the
-default dialog button. However, in most cases, the user expects to
-type something in and then press enter to close the dialog. This
+<p>Normally if there's an editable widget (such as Gtk::Entry) in your<br />
+dialog, pressing Enter will activate the editable rather than the<br />
+default dialog button. However, in most cases, the user expects to<br />
+type something in and then press enter to close the dialog. This<br />
 function enables that behavior.</p>
 
 
@@ -75028,7 +75032,7 @@ function enables that behavior.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>characters.</p>
-<p>The is the implementation of Excel's SEARCH function.
+<p>The is the implementation of Excel's SEARCH function.<br />
 However, note that <!-- raw HTML omitted -->skip<!-- raw HTML omitted --> and return value are zero-based.</p>
 
 
@@ -75321,8 +75325,8 @@ However, note that <!-- raw HTML omitted -->skip<!-- raw HTML omitted --> and re
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Can the supplied string be an expression ?  It does not guarantee that it is,
-however, it is possible.  If it is possible it strips off any header
+    <p>Can the supplied string be an expression ?  It does not guarantee that it is,<br />
+however, it is possible.  If it is possible it strips off any header<br />
 characters that are not relevant.</p>
 <p>NOTE : things like -1,234 will match</p>
 
@@ -75784,15 +75788,15 @@ characters that are not relevant.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Absorbs the reference to <!-- raw HTML omitted -->texpr<!-- raw HTML omitted -->.
-If <!-- raw HTML omitted -->error_msg<!-- raw HTML omitted --> is non NULL it may hold a pointer to a translated descriptive
+    <p>Absorbs the reference to <!-- raw HTML omitted -->texpr<!-- raw HTML omitted -->.<br />
+If <!-- raw HTML omitted -->error_msg<!-- raw HTML omitted --> is non NULL it may hold a pointer to a translated descriptive<br />
 string.  NOTE : caller is responsible for freeing the error message.</p>
 <p>The reference semantics of the new expression are</p>
 <ol>
-<li>new names with <!-- raw HTML omitted -->link_to_container<!-- raw HTML omitted --> TRUE are referenced by the container.
-The caller DOES NOT OWN a reference to the result, and needs to add their
+<li>new names with <!-- raw HTML omitted -->link_to_container<!-- raw HTML omitted --> TRUE are referenced by the container.<br />
+The caller DOES NOT OWN a reference to the result, and needs to add their<br />
 own.</li>
-<li>if <!-- raw HTML omitted -->link_to_container<!-- raw HTML omitted --> is false the caller DOES OWN a reference, and
+<li>if <!-- raw HTML omitted -->link_to_container<!-- raw HTML omitted --> is false the caller DOES OWN a reference, and<br />
 can free the result by unrefing the name.</li>
 </ol>
 
@@ -76052,7 +76056,7 @@ can free the result by unrefing the name.</li>
 </h3><div class="docstring">
   <div class="discussion">
     <p>name reference.</p>
-<p>NOTE: if we already have a circular reference beforehand, we will come
+<p>NOTE: if we already have a circular reference beforehand, we will come<br />
 to serious grief.</p>
 
 
@@ -76186,7 +76190,7 @@ to serious grief.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Takes a real non-placeholder name and converts it to being a placeholder.
+    <p>Takes a real non-placeholder name and converts it to being a placeholder.<br />
 unrefing its expression</p>
 
 
@@ -76325,7 +76329,7 @@ unrefing its expression</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>approximation only, as we only look at the workbook in which the name is
+    <p>approximation only, as we only look at the workbook in which the name is<br />
 defined.</p>
 
 
@@ -76803,8 +76807,8 @@ defined.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Remove a <!-- raw HTML omitted -->nexpr<!-- raw HTML omitted --> from its container and deactivate it.
-NOTE : <!-- raw HTML omitted -->nexpr<!-- raw HTML omitted --> may continue to exist if things still have references to it,
+    <p>Remove a <!-- raw HTML omitted -->nexpr<!-- raw HTML omitted --> from its container and deactivate it.<br />
+NOTE : <!-- raw HTML omitted -->nexpr<!-- raw HTML omitted --> may continue to exist if things still have references to it,<br />
 but they will evaluate to #REF!</p>
 
 
@@ -77170,7 +77174,7 @@ but they will evaluate to #REF!</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a translated error string which the caller must free if something
+    <p>Returns a translated error string which the caller must free if something<br />
 goes wrong.</p>
 
 
@@ -77743,8 +77747,8 @@ goes wrong.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function determines what sheets to save.
-this function will return nil if no sheets were explicitly selected.
+    <p>This function determines what sheets to save.<br />
+this function will return nil if no sheets were explicitly selected.<br />
 Note: the return value should be unreffed, not freed.</p>
 
 
@@ -78299,9 +78303,9 @@ Note: the return value should be unreffed, not freed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This implements a Gnumeric sheet function that operates on a list of
-numbers.  This function collects the arguments and uses <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to do
-the actual computation.
+    <p>This implements a Gnumeric sheet function that operates on a list of<br />
+numbers.  This function collects the arguments and uses <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to do<br />
+the actual computation.<br />
 of values from <!-- raw HTML omitted -->argv<!-- raw HTML omitted -->.</p>
 
 
@@ -78435,9 +78439,9 @@ of values from <!-- raw HTML omitted -->argv<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This implements a Gnumeric sheet function that operates on a matched
-pair of ranges.  This function collects the arguments and uses <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to do
-the actual computation.
+    <p>This implements a Gnumeric sheet function that operates on a matched<br />
+pair of ranges.  This function collects the arguments and uses <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to do<br />
+the actual computation.<br />
 of values from <!-- raw HTML omitted -->val0<!-- raw HTML omitted --> and <!-- raw HTML omitted -->val1<!-- raw HTML omitted -->.</p>
 
 
@@ -78571,9 +78575,9 @@ of values from <!-- raw HTML omitted -->val0<!-- raw HTML omitted --> and <!-- r
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This implements a Gnumeric sheet function that operates on a matched
-pair of ranges.  This function collects the arguments and uses <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to do
-the actual computation.
+    <p>This implements a Gnumeric sheet function that operates on a matched<br />
+pair of ranges.  This function collects the arguments and uses <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to do<br />
+the actual computation.<br />
 of values from <!-- raw HTML omitted -->val0<!-- raw HTML omitted --> and <!-- raw HTML omitted -->val1<!-- raw HTML omitted -->.</p>
 
 
@@ -78974,7 +78978,7 @@ of values from <!-- raw HTML omitted -->val0<!-- raw HTML omitted --> and <!-- r
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a codepage for the named Win32 font, or -1 if no such codepage
+    <p>Returns a codepage for the named Win32 font, or -1 if no such codepage<br />
 is known.</p>
 
 
@@ -79517,7 +79521,7 @@ is known.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Attempts to parse the supplied string to see if it matches a known value
+    <p>Attempts to parse the supplied string to see if it matches a known value<br />
 format.  The caller is responsible for releasing the resulting value.</p>
 
 
@@ -79788,10 +79792,10 @@ format.  The caller is responsible for releasing the resulting value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Attempts to parse the supplied string to see if it matches a known value format.
-Will eventually use the current cell format in preference to canned formats.
-If <!-- raw HTML omitted -->format<!-- raw HTML omitted --> is supplied it will get a copy of the matching format with no
-additional references.   The caller is responsible for releasing the
+    <p>Attempts to parse the supplied string to see if it matches a known value format.<br />
+Will eventually use the current cell format in preference to canned formats.<br />
+If <!-- raw HTML omitted -->format<!-- raw HTML omitted --> is supplied it will get a copy of the matching format with no<br />
+additional references.   The caller is responsible for releasing the<br />
 resulting value.  Will ONLY return numbers.</p>
 
 
@@ -79877,8 +79881,8 @@ resulting value.  Will ONLY return numbers.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Attempt to match the supplied string as a simple value.</p>
-<p>WARNING WARNING WARNING : This routine should NEVER be changed to match
-VALUE_STRING that will break the parsers
+<p>WARNING WARNING WARNING : This routine should NEVER be changed to match<br />
+VALUE_STRING that will break the parsers<br />
 handling of named expressions.</p>
 
 
@@ -80460,7 +80464,7 @@ handling of named expressions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>freed.
+    <p>freed.<br />
 Frees the allocated memory.</p>
 
 
@@ -80628,7 +80632,7 @@ Frees the allocated memory.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the list of Gnm::FTCategoryGroup which should be freed using
+    <p>the list of Gnm::FTCategoryGroup which should be freed using<br />
 gnm_ft_category_group_list_free().</p>
 
 
@@ -81060,9 +81064,9 @@ gnm_ft_category_group_list_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This routine provides a simple way for internal functions with variable
-number of arguments to be written: this would iterate over a list of
-expressions (expr_node_list) and will invoke the callback for every
+    <p>This routine provides a simple way for internal functions with variable<br />
+number of arguments to be written: this would iterate over a list of<br />
+expressions (expr_node_list) and will invoke the callback for every<br />
 GnmValue found on the list (this means that ranges get properly expanded).</p>
 
 
@@ -81149,10 +81153,10 @@ GnmValue found on the list (this means that ranges get properly expanded).</p>
       
       
         &mdash;
-        <div class='inline'><p>If TRUE, the function is considered &quot;strict&quot;.  This means
-that if an error value occurs as an argument, the iteration
-will stop and that error will be returned.  If FALSE, an
-error will be passed on to the callback (as a GnmValue *
+        <div class='inline'><p>If TRUE, the function is considered &quot;strict&quot;.  This means<br />
+that if an error value occurs as an argument, the iteration<br />
+will stop and that error will be returned.  If FALSE, an<br />
+error will be passed on to the callback (as a GnmValue *<br />
 of type VALUE_ERROR).</p>
 </div>
       
@@ -81182,8 +81186,8 @@ of type VALUE_ERROR).</p>
       
       
         &mdash;
-        <div class='inline'><p>NULL            : if no errors were reported.
-GnmValue *         : if an error was found during strict evaluation
+        <div class='inline'><p>NULL            : if no errors were reported.<br />
+GnmValue *         : if an error was found during strict evaluation<br />
 VALUE_TERMINATE : if the callback requested termination of the iteration.</p>
 </div>
       
@@ -81621,7 +81625,7 @@ VALUE_TERMINATE : if the callback requested termination of the iteration.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Parses a list of ranges, relative to the <!-- raw HTML omitted -->sheet<!-- raw HTML omitted --> and returns a list with the
+    <p>Parses a list of ranges, relative to the <!-- raw HTML omitted -->sheet<!-- raw HTML omitted --> and returns a list with the<br />
 results.</p>
 
 
@@ -82193,11 +82197,11 @@ results.</p>
     <p>Seek a goal (root) using bisection methods.</p>
 <p>The supplied function must (should) be continuous over the interval.</p>
 <p>Caller must have located a positive and a negative point.</p>
-<p>This method will find a root steadily using bisection to narrow the
+<p>This method will find a root steadily using bisection to narrow the<br />
 interval in which a root lies.</p>
-<p>It alternates between mid-point-bisection (semi-slow, but guaranteed
-progress), secant-bisection (usually quite fast, but sometimes gets
-nowhere), and Ridder's Method (usually fast, harder to fool than
+<p>It alternates between mid-point-bisection (semi-slow, but guaranteed<br />
+progress), secant-bisection (usually quite fast, but sometimes gets<br />
+nowhere), and Ridder's Method (usually fast, harder to fool than<br />
 the secant method).</p>
 
 
@@ -82480,12 +82484,12 @@ the secant method).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Seek a goal (root) using Newton's iterative method.</p>
-<p>The supplied function must (should) be continuously differentiable in
-the supplied interval.  If <!-- raw HTML omitted -->df<!-- raw HTML omitted --> is nil, this function will
+<p>The supplied function must (should) be continuously differentiable in<br />
+the supplied interval.  If <!-- raw HTML omitted -->df<!-- raw HTML omitted --> is nil, this function will<br />
 estimate the derivative.</p>
-<p>This method will find a root rapidly provided the initial guess, x0,
-is sufficiently close to the root.  (The number of significant digits
-(asymptotically) goes like i^2 unless the root is a multiple root in
+<p>This method will find a root rapidly provided the initial guess, x0,<br />
+is sufficiently close to the root.  (The number of significant digits<br />
+(asymptotically) goes like i^2 unless the root is a multiple root in<br />
 which case it is only like c*i.)</p>
 
 
@@ -84152,9 +84156,9 @@ which case it is only like c*i.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This implements a Gnumeric sheet database function of the &quot;*IFS&quot; type
-This function collects the arguments and uses <!-- raw HTML omitted -->fun<!-- raw HTML omitted --> to do
-the actual computation.
+    <p>This implements a Gnumeric sheet database function of the &quot;*IFS&quot; type<br />
+This function collects the arguments and uses <!-- raw HTML omitted -->fun<!-- raw HTML omitted --> to do<br />
+the actual computation.<br />
 of values from <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
 
 
@@ -84569,9 +84573,9 @@ of values from <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Make dialog a transient child of wbcg, attaching to wbcg object data to
-identify the dialog. The object data makes it possible to ensure that
-only one dialog of a kind can be displayed for a wbcg. Deallocation of
+    <p>Make dialog a transient child of wbcg, attaching to wbcg object data to<br />
+identify the dialog. The object data makes it possible to ensure that<br />
+only one dialog of a kind can be displayed for a wbcg. Deallocation of<br />
 the object data is managed here.</p>
 
 
@@ -84789,8 +84793,8 @@ the object data is managed here.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>evaluated at <!-- raw HTML omitted -->a<!-- raw HTML omitted --> and <!-- raw HTML omitted -->b<!-- raw HTML omitted -->.  The sign will be stored in <!-- raw HTML omitted -->sign<!-- raw HTML omitted --> as -1 or
-+1.  This function is useful because the result of the beta
+    <p>evaluated at <!-- raw HTML omitted -->a<!-- raw HTML omitted --> and <!-- raw HTML omitted -->b<!-- raw HTML omitted -->.  The sign will be stored in <!-- raw HTML omitted -->sign<!-- raw HTML omitted --> as -1 or<br />
++1.  This function is useful because the result of the beta<br />
 function can be too large for doubles.</p>
 
 
@@ -85809,10 +85813,10 @@ function can be too large for doubles.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>A convenience function to build HIG compliant message dialogs.</p>
-<p>parent : transient parent, or nil for none.
-flags
-type : type of dialog
-primary_message : message displayed in bold
+<p>parent : transient parent, or nil for none.<br />
+flags<br />
+type : type of dialog<br />
+primary_message : message displayed in bold<br />
 secondary_message : message displayed below</p>
 
 
@@ -86087,11 +86091,11 @@ secondary_message : message displayed below</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a GOption::Group for the commandline arguments recognized
-by libspreadsheet. You should add this group to your GOption::Context with
-g_option_context_add_group(), if you are using g_option_context_parse() to
+    <p>Returns a GOption::Group for the commandline arguments recognized<br />
+by libspreadsheet. You should add this group to your GOption::Context with<br />
+g_option_context_add_group(), if you are using g_option_context_parse() to<br />
 parse your commandline arguments.</p>
-<p>Returns a GOption::Group for the commandline arguments recognized
+<p>Returns a GOption::Group for the commandline arguments recognized<br />
 by libspreadsheet</p>
 
 
@@ -86440,12 +86444,12 @@ by libspreadsheet</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>&quot;&gt;=value&quot;
-&quot;&lt;=value&quot;
-&quot;&lt;&gt;value&quot;
-&quot;&lt;value&quot;
-&quot;&gt;value&quot;
-&quot;=value&quot;
+    <p>&quot;&gt;=value&quot;<br />
+&quot;&lt;=value&quot;<br />
+&quot;&lt;&gt;value&quot;<br />
+&quot;&lt;value&quot;<br />
+&quot;&gt;value&quot;<br />
+&quot;=value&quot;<br />
 &quot;pattern&quot;</p>
 
 
@@ -86676,7 +86680,7 @@ by libspreadsheet</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Utility routine to parse a string and convert it into an expression or value.</p>
-<p>If there is a parse failure for an expression an error GnmValue with
+<p>If there is a parse failure for an expression an error GnmValue with<br />
 the syntax error is returned in <!-- raw HTML omitted -->val<!-- raw HTML omitted -->.</p>
 
 
@@ -88763,9 +88767,9 @@ the syntax error is returned in <!-- raw HTML omitted -->val<!-- raw HTML omitte
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes Pochhammer's symbol at <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->n<!-- raw HTML omitted -->, i.e.,
-Gamma(<!-- raw HTML omitted -->x<!-- raw HTML omitted -->+<!-- raw HTML omitted -->n<!-- raw HTML omitted -->)/Gamma(<!-- raw HTML omitted -->x<!-- raw HTML omitted -->).  This is well defined unless <!-- raw HTML omitted -->x<!-- raw HTML omitted --> or <!-- raw HTML omitted -->x<!-- raw HTML omitted -->+<!-- raw HTML omitted -->n<!-- raw HTML omitted --> is a
-non-negative integer.  The ratio has a removable singlularity at <!-- raw HTML omitted -->n<!-- raw HTML omitted -->=0
+    <p>This function computes Pochhammer's symbol at <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->n<!-- raw HTML omitted -->, i.e.,<br />
+Gamma(<!-- raw HTML omitted -->x<!-- raw HTML omitted -->+<!-- raw HTML omitted -->n<!-- raw HTML omitted -->)/Gamma(<!-- raw HTML omitted -->x<!-- raw HTML omitted -->).  This is well defined unless <!-- raw HTML omitted -->x<!-- raw HTML omitted --> or <!-- raw HTML omitted -->x<!-- raw HTML omitted -->+<!-- raw HTML omitted -->n<!-- raw HTML omitted --> is a<br />
+non-negative integer.  The ratio has a removable singlularity at <!-- raw HTML omitted -->n<!-- raw HTML omitted -->=0<br />
 and the result is 1.</p>
 
 
@@ -88893,7 +88897,7 @@ and the result is 1.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Bring up a popup and if <!-- raw HTML omitted -->event<!-- raw HTML omitted --> is non-nil ensure that the popup is on the
+    <p>Bring up a popup and if <!-- raw HTML omitted -->event<!-- raw HTML omitted --> is non-nil ensure that the popup is on the<br />
 right screen.</p>
 
 
@@ -89397,7 +89401,7 @@ right screen.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Initialization to be done before cmd line arguments are handled.
+    <p>Initialization to be done before cmd line arguments are handled.<br />
 Needs to be called first, before any other initialization.</p>
 
 
@@ -90408,8 +90412,8 @@ Needs to be called first, before any other initialization.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>NOTE: This reads from a globally stored configuration. If a
-configuration is stored along with a sheet then that will
+    <p>NOTE: This reads from a globally stored configuration. If a<br />
+configuration is stored along with a sheet then that will<br />
 override these global defaults.</p>
 
 
@@ -91098,8 +91102,8 @@ override these global defaults.</p>
 <p>WHY WHY WHY</p>
 <ol>
 <li>
-<p>The life cycle in here is a tad odd, the load_defaults does nothing for the
-case of an existing page_setup, and seems like it should be ignored for the
+<p>The life cycle in here is a tad odd, the load_defaults does nothing for the<br />
+case of an existing page_setup, and seems like it should be ignored for the<br />
 case of a new one.</p>
 </li>
 <li>
@@ -92088,8 +92092,8 @@ case of a new one.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the current locale, and sets the locale and the value-format
-engine's locale to 'C'.  The caller must call gnm_pop_C_locale to free the
+    <p>Returns the current locale, and sets the locale and the value-format<br />
+engine's locale to 'C'.  The caller must call gnm_pop_C_locale to free the<br />
 result and restore the previous locale.</p>
 
 
@@ -97058,8 +97062,8 @@ result and restore the previous locale.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Destroys a list of ranges returned from parse_cell_range_list.  Note:
-the element type here is GnmValue, not GnmRange.
+    <p>Destroys a list of ranges returned from parse_cell_range_list.  Note:<br />
+the element type here is GnmValue, not GnmRange.<br />
 to destroy.</p>
 
 
@@ -98060,8 +98064,8 @@ to destroy.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function performs range reduction for trigonometric functions.
-number j and |xr| &lt;=  Pi/2^(<!-- raw HTML omitted -->e<!-- raw HTML omitted -->+1).  The lower <!-- raw HTML omitted -->e<!-- raw HTML omitted -->+1 bits of j will be
+    <p>This function performs range reduction for trigonometric functions.<br />
+number j and |xr| &lt;=  Pi/2^(<!-- raw HTML omitted -->e<!-- raw HTML omitted -->+1).  The lower <!-- raw HTML omitted -->e<!-- raw HTML omitted -->+1 bits of j will be<br />
 returned in <!-- raw HTML omitted -->k<!-- raw HTML omitted -->.</p>
 
 
@@ -98794,7 +98798,7 @@ returned in <!-- raw HTML omitted -->k<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Use this function having changed the font size to auto-resize the row
+    <p>Use this function having changed the font size to auto-resize the row<br />
 heights to make the text fit nicely.</p>
 
 
@@ -100944,7 +100948,7 @@ heights to make the text fit nicely.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If <!-- raw HTML omitted -->cc<!-- raw HTML omitted --> is the current cell comment being edited/displayed shutdown the
+    <p>If <!-- raw HTML omitted -->cc<!-- raw HTML omitted --> is the current cell comment being edited/displayed shutdown the<br />
 display mechanism.</p>
 
 
@@ -101144,7 +101148,7 @@ display mechanism.</p>
       
       
         &mdash;
-        <div class='inline'><p>Move to transitions between cells and blanks,
+        <div class='inline'><p>Move to transitions between cells and blanks,<br />
 or move in single steps.</p>
 </div>
       
@@ -101244,7 +101248,7 @@ or move in single steps.</p>
       
       
         &mdash;
-        <div class='inline'><p>skip from the start to the end of ranges
+        <div class='inline'><p>skip from the start to the end of ranges<br />
 of filled or unfilled cells.</p>
 </div>
       
@@ -101655,7 +101659,7 @@ of filled or unfilled cells.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Ensure that cell (col, row) is visible.
+    <p>Ensure that cell (col, row) is visible.<br />
 Sheet is scrolled if cell is outside viewport.</p>
 
 
@@ -101727,7 +101731,7 @@ Sheet is scrolled if cell is outside viewport.</p>
       
       
         &mdash;
-        <div class='inline'><p>Scroll scroll dynamic panes back to bounds if target
+        <div class='inline'><p>Scroll scroll dynamic panes back to bounds if target<br />
 is in frozen segment.</p>
 </div>
       
@@ -101763,8 +101767,8 @@ is in frozen segment.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Put <!-- raw HTML omitted -->sheet<!-- raw HTML omitted --> into the standard state 'edit mode'.  This shuts down
-any object editing and frees any objects that are created but not
+    <p>Put <!-- raw HTML omitted -->sheet<!-- raw HTML omitted --> into the standard state 'edit mode'.  This shuts down<br />
+any object editing and frees any objects that are created but not<br />
 realized.</p>
 
 
@@ -101961,7 +101965,7 @@ realized.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->so<!-- raw HTML omitted --> to the set of selected objects and prepares it for user editing.
+    <p>Adds <!-- raw HTML omitted -->so<!-- raw HTML omitted --> to the set of selected objects and prepares it for user editing.<br />
 Adds a reference to <!-- raw HTML omitted -->ref<!-- raw HTML omitted --> if it is selected.</p>
 
 
@@ -102091,7 +102095,7 @@ Adds a reference to <!-- raw HTML omitted -->ref<!-- raw HTML omitted --> if it 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>unselect the supplied object, and drop out of edit mode if this is the last
+    <p>unselect the supplied object, and drop out of edit mode if this is the last<br />
 one.  If <!-- raw HTML omitted -->so<!-- raw HTML omitted --> == NULL unselect <em>all</em> objects.</p>
 
 
@@ -102161,8 +102165,8 @@ one.  If <!-- raw HTML omitted -->so<!-- raw HTML omitted --> == NULL unselect <
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Move the control points and drag views of the currently selected objects to
-a new position.  This movement is only made in <!-- raw HTML omitted -->scg<!-- raw HTML omitted --> not in the actual
+    <p>Move the control points and drag views of the currently selected objects to<br />
+a new position.  This movement is only made in <!-- raw HTML omitted -->scg<!-- raw HTML omitted --> not in the actual<br />
 objects.</p>
 
 
@@ -102683,7 +102687,7 @@ objects.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Do motion compression when possible to avoid redrawing an area that will
+    <p>Do motion compression when possible to avoid redrawing an area that will<br />
 disappear when we scroll again.</p>
 
 
@@ -104989,8 +104993,8 @@ disappear when we scroll again.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Does NOT check for array division.
-Does NOT redraw
+    <p>Does NOT check for array division.<br />
+Does NOT redraw<br />
 Does NOT generate spans.</p>
 
 
@@ -105263,7 +105267,7 @@ Does NOT generate spans.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>gnm_slist_sort_merge merges two lists of unsigned integers.
+    <p>gnm_slist_sort_merge merges two lists of unsigned integers.<br />
 unsigned integers with no duplicates.</p>
 
 
@@ -105528,7 +105532,7 @@ unsigned integers with no duplicates.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This will start the import.
+    <p>This will start the import.<br />
 (NOTE: you have to free the DialogStfResult_t that this function returns yourself)</p>
 
 
@@ -106113,7 +106117,7 @@ unsigned integers with no duplicates.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This will prepare the widgets on the format page before
+    <p>This will prepare the widgets on the format page before<br />
 the page gets displayed</p>
 
 
@@ -106277,7 +106281,7 @@ the page gets displayed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This will prepare the widgets on the format page before
+    <p>This will prepare the widgets on the format page before<br />
 the page gets displayed</p>
 
 
@@ -106401,7 +106405,7 @@ the page gets displayed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This routine will properly free the members of <!-- raw HTML omitted -->dialogresult<!-- raw HTML omitted --> and
+    <p>This routine will properly free the members of <!-- raw HTML omitted -->dialogresult<!-- raw HTML omitted --> and<br />
 <!-- raw HTML omitted -->dialogresult<!-- raw HTML omitted --> itself</p>
 
 
@@ -106732,7 +106736,7 @@ the page gets displayed</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>GPtrArray of strings.</p>
-<p>The caller must free this entire structure, for example by calling
+<p>The caller must free this entire structure, for example by calling<br />
 stf_parse_general_free.</p>
 
 
@@ -106870,7 +106874,7 @@ stf_parse_general_free.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>GPtrArray of strings.</p>
-<p>The caller must free this entire structure, for example by calling
+<p>The caller must free this entire structure, for example by calling<br />
 stf_parse_general_free.</p>
 
 
@@ -107275,8 +107279,8 @@ stf_parse_general_free.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This will add an entry to the <!-- raw HTML omitted -->renderdata<!-- raw HTML omitted -->-&gt;colformats array.
-The widths of the columns will be set to at least have the width of
+    <p>This will add an entry to the <!-- raw HTML omitted -->renderdata<!-- raw HTML omitted -->-&gt;colformats array.<br />
+The widths of the columns will be set to at least have the width of<br />
 the <!-- raw HTML omitted -->format<!-- raw HTML omitted -->.</p>
 
 
@@ -107346,7 +107350,7 @@ the <!-- raw HTML omitted -->format<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This will clear the <!-- raw HTML omitted -->renderdata<!-- raw HTML omitted -->-&gt;colformats array which contains the format of
+    <p>This will clear the <!-- raw HTML omitted -->renderdata<!-- raw HTML omitted -->-&gt;colformats array which contains the format of<br />
 each column.</p>
 
 
@@ -108005,9 +108009,9 @@ each column.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This implements a Gnumeric sheet function that operates on a list of
-strings.  This function collects the arguments and uses <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to do
-the actual computation.
+    <p>This implements a Gnumeric sheet function that operates on a list of<br />
+strings.  This function collects the arguments and uses <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to do<br />
+the actual computation.<br />
 of values from <!-- raw HTML omitted -->argv<!-- raw HTML omitted -->.</p>
 
 
@@ -108152,8 +108156,8 @@ of values from <!-- raw HTML omitted -->argv<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This removes the data elements from <!-- raw HTML omitted -->data<!-- raw HTML omitted --> whose indices are given by
-<!-- raw HTML omitted -->missing<!-- raw HTML omitted -->.  <!-- raw HTML omitted -->n<!-- raw HTML omitted --> is the number of elements and it updated upon return.
+    <p>This removes the data elements from <!-- raw HTML omitted -->data<!-- raw HTML omitted --> whose indices are given by<br />
+<!-- raw HTML omitted -->missing<!-- raw HTML omitted -->.  <!-- raw HTML omitted -->n<!-- raw HTML omitted --> is the number of elements and it updated upon return.<br />
 order.</p>
 
 
@@ -108463,13 +108467,13 @@ order.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function updates the color of gnm_style_border_none when the wanted grid
-color is known. gnm_style_border_none tells how to render the grid. Because
-the grid color may be different for different sheets, the functions which
-render the grid call this function first.  The rule for selecting the
-grid color, which is the same as in Excel, is: - if the auto pattern
-color is default (which is black), the grid color is gray, as returned by
-style_color_grid ().  - otherwise, the auto pattern color is used for the
+    <p>This function updates the color of gnm_style_border_none when the wanted grid<br />
+color is known. gnm_style_border_none tells how to render the grid. Because<br />
+the grid color may be different for different sheets, the functions which<br />
+render the grid call this function first.  The rule for selecting the<br />
+grid color, which is the same as in Excel, is: - if the auto pattern<br />
+color is default (which is black), the grid color is gray, as returned by<br />
+style_color_grid ().  - otherwise, the auto pattern color is used for the<br />
 grid.</p>
 
 
@@ -108744,7 +108748,7 @@ grid.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>TODO : This is not the final resting place for this.
+    <p>TODO : This is not the final resting place for this.<br />
 It will move into the gui layer eventually.</p>
 
 
@@ -109603,7 +109607,7 @@ It will move into the gui layer eventually.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Free up the resources in the style list.  This includes unreferencing the
+    <p>Free up the resources in the style list.  This includes unreferencing the<br />
 styles.</p>
 
 
@@ -109658,8 +109662,8 @@ styles.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Attempts to find the style associated with the <!-- raw HTML omitted -->pos<!-- raw HTML omitted --> offset within the 0,0
-based style list.
+    <p>Attempts to find the style associated with the <!-- raw HTML omitted -->pos<!-- raw HTML omitted --> offset within the 0,0<br />
+based style list.<br />
 The resulting style does not have its reference count bumped.</p>
 
 
@@ -109736,7 +109740,7 @@ The resulting style does not have its reference count bumped.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A small utility routine to initialize the grid drawing GnmStyleRow data
+    <p>A small utility routine to initialize the grid drawing GnmStyleRow data<br />
 structure.</p>
 
 
@@ -110248,7 +110252,7 @@ structure.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>See if the 1st selected region is a singleton.
+    <p>See if the 1st selected region is a singleton.<br />
 a singleton</p>
 
 
@@ -110469,7 +110473,7 @@ a singleton</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Select all cells that are direct potential inputs to the
+    <p>Select all cells that are direct potential inputs to the<br />
 current cell.</p>
 
 
@@ -110863,8 +110867,8 @@ current cell.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Applies the specified function for all ranges in the selection.  Optionally
-select whether to use the high level potentially over lapped ranges, rather
+    <p>Applies the specified function for all ranges in the selection.  Optionally<br />
+select whether to use the high level potentially over lapped ranges, rather<br />
 than the smaller system created non-intersection regions.</p>
 
 
@@ -111113,8 +111117,8 @@ than the smaller system created non-intersection regions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Iterate through the ranges in a selection.
-NOTE : The function assumes that the callback routine does NOT change the
+    <p>Iterate through the ranges in a selection.<br />
+NOTE : The function assumes that the callback routine does NOT change the<br />
 selection list.  This can be changed in the future if it is a requirement.</p>
 
 
@@ -111196,7 +111200,7 @@ selection list.  This can be changed in the future if it is a requirement.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Releases the selection associated with <!-- raw HTML omitted -->sv<!-- raw HTML omitted --></p>
-<p>WARNING: This does not set a new selection and leaves the view in an
+<p>WARNING: This does not set a new selection and leaves the view in an<br />
 INVALID STATE.</p>
 
 
@@ -111251,9 +111255,9 @@ INVALID STATE.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Releases the selection associated with <!-- raw HTML omitted -->sv<!-- raw HTML omitted --> , and forces a redraw of the
+    <p>Releases the selection associated with <!-- raw HTML omitted -->sv<!-- raw HTML omitted --> , and forces a redraw of the<br />
 previously selected regions and headers.</p>
-<p>WARNING: This does not set a new selection and leaves the view in an
+<p>WARNING: This does not set a new selection and leaves the view in an<br />
 INVALID STATE.</p>
 
 
@@ -111640,12 +111644,12 @@ INVALID STATE.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Move the edit_pos of <!-- raw HTML omitted -->sv<!-- raw HTML omitted --> 1 step according to <!-- raw HTML omitted -->forward<!-- raw HTML omitted --> and <!-- raw HTML omitted -->horizontal<!-- raw HTML omitted -->.  The
+    <p>Move the edit_pos of <!-- raw HTML omitted -->sv<!-- raw HTML omitted --> 1 step according to <!-- raw HTML omitted -->forward<!-- raw HTML omitted --> and <!-- raw HTML omitted -->horizontal<!-- raw HTML omitted -->.  The<br />
 behavior depends several factors</p>
 <ul>
 <li>How many ranges are selected</li>
 <li>The shape of the selected ranges</li>
-<li>Previous movements (A sequence of tabs followed by an enter can jump
+<li>Previous movements (A sequence of tabs followed by an enter can jump<br />
 to the 1st col).</li>
 </ul>
 
@@ -112290,7 +112294,7 @@ to the 1st col).</li>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>load the current selection in the output and input entries
+    <p>load the current selection in the output and input entries<br />
 show the dialog and focus the input_entry</p>
 
 
@@ -112828,7 +112832,7 @@ show the dialog and focus the input_entry</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>(The result will be something like: &quot;A1:C3, D4:E5&quot;). The string will be
+    <p>(The result will be something like: &quot;A1:C3, D4:E5&quot;). The string will be<br />
 truncated to max_descriptor_width.</p>
 
 
@@ -113226,7 +113230,7 @@ truncated to max_descriptor_width.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks the validation in <!-- raw HTML omitted -->mstyle<!-- raw HTML omitted -->, if any.  Set <!-- raw HTML omitted -->showed_dialog<!-- raw HTML omitted --> to true
+    <p>Checks the validation in <!-- raw HTML omitted -->mstyle<!-- raw HTML omitted -->, if any.  Set <!-- raw HTML omitted -->showed_dialog<!-- raw HTML omitted --> to true<br />
 if a dialog was showed as a result.</p>
 
 
@@ -115196,8 +115200,8 @@ if a dialog was showed as a result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>1 : ignore invalid and accept result
-0 : discard invalid and finish editing
+    <p>1 : ignore invalid and accept result<br />
+0 : discard invalid and finish editing<br />
 -1 : continue editing</p>
 
 
@@ -115663,7 +115667,7 @@ if a dialog was showed as a result.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Load the edit line with the value of the cell in <!-- raw HTML omitted -->sheet<!-- raw HTML omitted -->'s edit_pos.</p>
-<p>Calculate what to display on the edit line then display it either in the
+<p>Calculate what to display on the edit line then display it either in the<br />
 control <!-- raw HTML omitted -->wbc<!-- raw HTML omitted -->, or if that is nil, in all controls.</p>
 
 
@@ -116084,7 +116088,7 @@ control <!-- raw HTML omitted -->wbc<!-- raw HTML omitted -->, or if that is nil
 </h3><div class="docstring">
   <div class="discussion">
     <p>Load the edit line with the value of the cell in sheet's edit_pos.</p>
-<p>Calculate what to display on the edit line then display it either in the
+<p>Calculate what to display on the edit line then display it either in the<br />
 control <!-- raw HTML omitted -->wbc<!-- raw HTML omitted -->, or if that is nil, in all controls.</p>
 
 
@@ -117025,11 +117029,11 @@ control <!-- raw HTML omitted -->wbc<!-- raw HTML omitted -->, or if that is nil
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Initiate editing of a cell in the sheet.  Note that we have two modes of
+    <p>Initiate editing of a cell in the sheet.  Note that we have two modes of<br />
 editing:</p>
 <ol>
 <li>in-cell editing when you just start typing, and</li>
-<li>above sheet editing when you hit F2.
+<li>above sheet editing when you hit F2.<br />
 cell-to-be-edited was locked.</li>
 </ol>
 
@@ -117065,7 +117069,7 @@ cell-to-be-edited was locked.</li>
       
       
         &mdash;
-        <div class='inline'><p>If true, erase current cell contents first.  If false, leave the
+        <div class='inline'><p>If true, erase current cell contents first.  If false, leave the<br />
 contents alone.</p>
 </div>
       
@@ -117081,8 +117085,8 @@ contents alone.</p>
       
       
         &mdash;
-        <div class='inline'><p>If true, create an editing cursor in the current sheet.  (If
-false, the text will be editing in the edit box above the sheet,
+        <div class='inline'><p>If true, create an editing cursor in the current sheet.  (If<br />
+false, the text will be editing in the edit box above the sheet,<br />
 but this is not handled by this function.)</p>
 </div>
       
@@ -117356,8 +117360,8 @@ but this is not handled by this function.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A utility routine to safely ensure that the keyboard focus
-is attached to the item-grid.  This is required when a user
+    <p>A utility routine to safely ensure that the keyboard focus<br />
+is attached to the item-grid.  This is required when a user<br />
 edits a combo-box or and entry-line which grab focus.</p>
 <p>It is called for zoom, font name/size, and accept/cancel for the editline.</p>
 
@@ -117798,7 +117802,7 @@ edits a combo-box or and entry-line which grab focus.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p><!-- raw HTML omitted -->wbcg<!-- raw HTML omitted -->'s notebook.
+    <p><!-- raw HTML omitted -->wbcg<!-- raw HTML omitted -->'s notebook.<br />
 NOTE : <!-- raw HTML omitted -->i<!-- raw HTML omitted --> != scg-&gt;sv-&gt;sheet-&gt;index_in_wb</p>
 
 
@@ -117868,7 +117872,7 @@ NOTE : <!-- raw HTML omitted -->i<!-- raw HTML omitted --> != scg-&gt;sv-&gt;she
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Takes a newly created Sheet::Object that has not yet been realized and
+    <p>Takes a newly created Sheet::Object that has not yet been realized and<br />
 prepares to place it on the sheet.</p>
 <p>NOTE : Absorbs a reference to the object.</p>
 
@@ -117939,8 +117943,8 @@ prepares to place it on the sheet.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If we are preparing to insert a new object, unref the object, and restore
-a normal state to the scgs that was changed in wbcg_insert_object
+    <p>If we are preparing to insert a new object, unref the object, and restore<br />
+a normal state to the scgs that was changed in wbcg_insert_object<br />
 (e.g., visibility of cursors)</p>
 
 
@@ -118104,8 +118108,8 @@ a normal state to the scgs that was changed in wbcg_insert_object
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if the cursor keys should be used to select
-a cell range (if the cursor is in a spot in the expression
+    <p>Returns true if the cursor keys should be used to select<br />
+a cell range (if the cursor is in a spot in the expression<br />
 where it makes sense to have a cell reference), false if not.</p>
 
 
@@ -119466,8 +119470,8 @@ where it makes sense to have a cell reference), false if not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Closes an xml tag, expected it to be <!-- raw HTML omitted -->id<!-- raw HTML omitted -->.  If it is not, tags will
-continue to be closed until the expected one is found in the hope
+    <p>Closes an xml tag, expected it to be <!-- raw HTML omitted -->id<!-- raw HTML omitted -->.  If it is not, tags will<br />
+continue to be closed until the expected one is found in the hope<br />
 that getting back to sync will make the result less corrupted.</p>
 
 
@@ -119826,7 +119830,7 @@ that getting back to sync will make the result less corrupted.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

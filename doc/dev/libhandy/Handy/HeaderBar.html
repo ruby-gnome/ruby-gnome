@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Handy::HeaderBar";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -832,6 +834,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1091,17 +1094,17 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>The decoration layout for buttons.</p>
-<p>If this property is not set, the
+<p>If this property is not set, the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-decoration-layout] setting is used.</p>
-<p>There can be valid reasons for overriding the setting, such as a header bar
-design that does not allow for buttons to take room on the right, or only
-offers room for a single close button. Split header bars are another example
+<p>There can be valid reasons for overriding the setting, such as a header bar<br />
+design that does not allow for buttons to take room on the right, or only<br />
+offers room for a single close button. Split header bars are another example<br />
 for overriding the setting.</p>
-<p>The format of the string is button names, separated by commas. A colon
-separates the buttons that should appear on the start from those on the
-end. Recognized button names are minimize, maximize, close, icon (the
+<p>The format of the string is button names, separated by commas. A colon<br />
+separates the buttons that should appear on the start from those on the<br />
+end. Recognized button names are minimize, maximize, close, icon (the<br />
 window icon) and menu (a menu button for the fallback app menu).</p>
-<p>For example, “menu:minimize,maximize,close” specifies a menu on the left, and
+<p>For example, “menu:minimize,maximize,close” specifies a menu on the left, and<br />
 minimize, maximize and close buttons on the right.</p>
 
 
@@ -1142,17 +1145,17 @@ minimize, maximize and close buttons on the right.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The decoration layout for buttons.</p>
-<p>If this property is not set, the
+<p>If this property is not set, the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-decoration-layout] setting is used.</p>
-<p>There can be valid reasons for overriding the setting, such as a header bar
-design that does not allow for buttons to take room on the right, or only
-offers room for a single close button. Split header bars are another example
+<p>There can be valid reasons for overriding the setting, such as a header bar<br />
+design that does not allow for buttons to take room on the right, or only<br />
+offers room for a single close button. Split header bars are another example<br />
 for overriding the setting.</p>
-<p>The format of the string is button names, separated by commas. A colon
-separates the buttons that should appear on the start from those on the
-end. Recognized button names are minimize, maximize, close, icon (the
+<p>The format of the string is button names, separated by commas. A colon<br />
+separates the buttons that should appear on the start from those on the<br />
+end. Recognized button names are minimize, maximize, close, icon (the<br />
 window icon) and menu (a menu button for the fallback app menu).</p>
-<p>For example, “menu:minimize,maximize,close” specifies a menu on the left, and
+<p>For example, “menu:minimize,maximize,close” specifies a menu on the left, and<br />
 minimize, maximize and close buttons on the right.</p>
 
 
@@ -1326,7 +1329,7 @@ minimize, maximize and close buttons on the right.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether space is reserved for a subtitle, regardless if one is currently
+    <p>Gets whether space is reserved for a subtitle, regardless if one is currently<br />
 set or not.</p>
 
 
@@ -1512,9 +1515,9 @@ set or not.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the size should smoothly change when changing between children.</p>
-<p>If <code>TRUE</code>, the header bar will interpolate its size between the one of the
-previous visible child and the one of the new visible child, according to
-the set transition duration and the orientation, e.g. if the orientation is
+<p>If <code>TRUE</code>, the header bar will interpolate its size between the one of the<br />
+previous visible child and the one of the new visible child, according to<br />
+the set transition duration and the orientation, e.g. if the orientation is<br />
 horizontal, it will interpolate the its height.</p>
 
 
@@ -1583,9 +1586,9 @@ horizontal, it will interpolate the its height.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the size should smoothly change when changing between children.</p>
-<p>If <code>TRUE</code>, the header bar will interpolate its size between the one of the
-previous visible child and the one of the new visible child, according to
-the set transition duration and the orientation, e.g. if the orientation is
+<p>If <code>TRUE</code>, the header bar will interpolate its size between the one of the<br />
+previous visible child and the one of the new visible child, according to<br />
+the set transition duration and the orientation, e.g. if the orientation is<br />
 horizontal, it will interpolate the its height.</p>
 
 
@@ -1773,9 +1776,9 @@ horizontal, it will interpolate the its height.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to show window decorations.</p>
-<p>Which buttons are actually shown and where is determined by the
-[property<!-- raw HTML omitted -->HeaderBar<!-- raw HTML omitted -->:decoration-layout] property, and by the state of the
-window (e.g. a close button will not be shown if the window can't be
+<p>Which buttons are actually shown and where is determined by the<br />
+[property<!-- raw HTML omitted -->HeaderBar<!-- raw HTML omitted -->:decoration-layout] property, and by the state of the<br />
+window (e.g. a close button will not be shown if the window can't be<br />
 closed).</p>
 
 
@@ -1844,9 +1847,9 @@ closed).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to show window decorations.</p>
-<p>Which buttons are actually shown and where is determined by the
-[property<!-- raw HTML omitted -->HeaderBar<!-- raw HTML omitted -->:decoration-layout] property, and by the state of the
-window (e.g. a close button will not be shown if the window can't be
+<p>Which buttons are actually shown and where is determined by the<br />
+[property<!-- raw HTML omitted -->HeaderBar<!-- raw HTML omitted -->:decoration-layout] property, and by the state of the<br />
+window (e.g. a close button will not be shown if the window can't be<br />
 closed).</p>
 
 
@@ -2451,7 +2454,7 @@ closed).</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GdkPixbuf::PixbufAnimation";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,15 +95,16 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Modules supporting animations must derive a type from
-Gdk::PixbufAnimation, providing suitable implementations of the
+    <p>Modules supporting animations must derive a type from<br />
+Gdk::PixbufAnimation, providing suitable implementations of the<br />
 virtual functions.</p>
 
 
@@ -154,6 +156,7 @@ virtual functions.</p>
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -349,6 +352,7 @@ virtual functions.</p>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -365,7 +369,7 @@ virtual functions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes an asynchronous pixbuf animation creation operation started with
+    <p>Finishes an asynchronous pixbuf animation creation operation started with<br />
 [func<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.PixbufAnimation.new_from_stream_async].</p>
 
 
@@ -415,10 +419,10 @@ virtual functions.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new animation by asynchronously loading an image from an input stream.</p>
-<p>For more details see gdk_pixbuf_new_from_stream(), which is the synchronous
+<p>For more details see gdk_pixbuf_new_from_stream(), which is the synchronous<br />
 version of this function.</p>
-<p>When the operation is finished, <code>callback</code> will be called in the main thread.
-You can then call gdk_pixbuf_animation_new_from_stream_finish() to get the
+<p>When the operation is finished, <code>callback</code> will be called in the main thread.<br />
+You can then call gdk_pixbuf_animation_new_from_stream_finish() to get the<br />
 result of the operation.</p>
 
 
@@ -525,31 +529,31 @@ result of the operation.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Get an iterator for displaying an animation.</p>
-<p>The iterator provides the frames that should be displayed at a
+<p>The iterator provides the frames that should be displayed at a<br />
 given time.</p>
-<p><!-- raw HTML omitted -->start_time<!-- raw HTML omitted --> would normally come from g_get_current_time(), and marks
-the beginning of animation playback. After creating an iterator, you
-should immediately display the pixbuf returned by
-gdk_pixbuf_animation_iter_get_pixbuf(). Then, you should install
-a timeout (with g_timeout_add()) or by some other mechanism ensure
-that you'll update the image after
-gdk_pixbuf_animation_iter_get_delay_time() milliseconds. Each time
-the image is updated, you should reinstall the timeout with the new,
+<p><!-- raw HTML omitted -->start_time<!-- raw HTML omitted --> would normally come from g_get_current_time(), and marks<br />
+the beginning of animation playback. After creating an iterator, you<br />
+should immediately display the pixbuf returned by<br />
+gdk_pixbuf_animation_iter_get_pixbuf(). Then, you should install<br />
+a timeout (with g_timeout_add()) or by some other mechanism ensure<br />
+that you'll update the image after<br />
+gdk_pixbuf_animation_iter_get_delay_time() milliseconds. Each time<br />
+the image is updated, you should reinstall the timeout with the new,<br />
 possibly-changed delay time.</p>
-<p>As a shortcut, if <!-- raw HTML omitted -->start_time<!-- raw HTML omitted --> is <code>NULL</code>, the result of
+<p>As a shortcut, if <!-- raw HTML omitted -->start_time<!-- raw HTML omitted --> is <code>NULL</code>, the result of<br />
 g_get_current_time() will be used automatically.</p>
-<p>To update the image (i.e. possibly change the result of
-gdk_pixbuf_animation_iter_get_pixbuf() to a new frame of the animation),
+<p>To update the image (i.e. possibly change the result of<br />
+gdk_pixbuf_animation_iter_get_pixbuf() to a new frame of the animation),<br />
 call gdk_pixbuf_animation_iter_advance().</p>
-<p>If you're using Gdk::PixbufLoader, in addition to updating the image
-after the delay time, you should also update it whenever you
-receive the area_updated signal and
-gdk_pixbuf_animation_iter_on_currently_loading_frame() returns
-<code>TRUE</code>. In this case, the frame currently being fed into the loader
-has received new data, so needs to be refreshed. The delay time for
-a frame may also be modified after an area_updated signal, for
-example if the delay time for a frame is encoded in the data after
-the frame itself. So your timeout should be reinstalled after any
+<p>If you're using Gdk::PixbufLoader, in addition to updating the image<br />
+after the delay time, you should also update it whenever you<br />
+receive the area_updated signal and<br />
+gdk_pixbuf_animation_iter_on_currently_loading_frame() returns<br />
+<code>TRUE</code>. In this case, the frame currently being fed into the loader<br />
+has received new data, so needs to be refreshed. The delay time for<br />
+a frame may also be modified after an area_updated signal, for<br />
+example if the delay time for a frame is encoded in the data after<br />
+the frame itself. So your timeout should be reinstalled after any<br />
 area_updated signal.</p>
 <p>A delay time of -1 is possible, indicating &quot;infinite&quot;.</p>
 
@@ -649,9 +653,9 @@ area_updated signal.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks whether the animation is a static image.</p>
-<p>If you load a file with gdk_pixbuf_animation_new_from_file() and it
-turns out to be a plain, unanimated image, then this function will
-return <code>TRUE</code>. Use gdk_pixbuf_animation_get_static_image() to retrieve
+<p>If you load a file with gdk_pixbuf_animation_new_from_file() and it<br />
+turns out to be a plain, unanimated image, then this function will<br />
+return <code>TRUE</code>. Use gdk_pixbuf_animation_get_static_image() to retrieve<br />
 the image.</p>
 
 
@@ -731,12 +735,12 @@ the image.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves a static image for the animation.</p>
-<p>If an animation is really just a plain image (has only one frame),
+<p>If an animation is really just a plain image (has only one frame),<br />
 this function returns that image.</p>
-<p>If the animation is an animation, this function returns a reasonable
-image to use as a static unanimated image, which might be the first
+<p>If the animation is an animation, this function returns a reasonable<br />
+image to use as a static unanimated image, which might be the first<br />
 frame, or something more sophisticated depending on the file format.</p>
-<p>If an animation hasn't loaded any frames yet, this function will
+<p>If an animation hasn't loaded any frames yet, this function will<br />
 return <code>NULL</code>.</p>
 
 
@@ -846,7 +850,7 @@ return <code>NULL</code>.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

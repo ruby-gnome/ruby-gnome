@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GLib::RegexMatchFlags";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -110,10 +112,10 @@
         <dt id="ANCHORED-constant" class="">ANCHORED =
           <div class="docstring">
   <div class="discussion">
-    <p>The pattern is forced to be &quot;anchored&quot;, that is,
-it is constrained to match only at the first matching point in the
-string that is being searched. This effect can also be achieved by
-appropriate constructs in the pattern itself such as the &quot;^&quot;
+    <p>The pattern is forced to be &quot;anchored&quot;, that is,<br />
+it is constrained to match only at the first matching point in the<br />
+string that is being searched. This effect can also be achieved by<br />
+appropriate constructs in the pattern itself such as the &quot;^&quot;<br />
 metacharacter.</p>
 
 
@@ -129,11 +131,11 @@ metacharacter.</p>
         <dt id="NOTBOL-constant" class="">NOTBOL =
           <div class="docstring">
   <div class="discussion">
-    <p>Specifies that first character of the string is
-not the beginning of a line, so the circumflex metacharacter should
-not match before it. Setting this without %G_REGEX_MULTILINE (at
-compile time) causes circumflex never to match. This option affects
-only the behaviour of the circumflex metacharacter, it does not
+    <p>Specifies that first character of the string is<br />
+not the beginning of a line, so the circumflex metacharacter should<br />
+not match before it. Setting this without %G_REGEX_MULTILINE (at<br />
+compile time) causes circumflex never to match. This option affects<br />
+only the behaviour of the circumflex metacharacter, it does not<br />
 affect &quot;\A&quot;.</p>
 
 
@@ -149,11 +151,11 @@ affect &quot;\A&quot;.</p>
         <dt id="NOTEOL-constant" class="">NOTEOL =
           <div class="docstring">
   <div class="discussion">
-    <p>Specifies that the end of the subject string is
-not the end of a line, so the dollar metacharacter should not match
-it nor (except in multiline mode) a newline immediately before it.
-Setting this without %G_REGEX_MULTILINE (at compile time) causes
-dollar never to match. This option affects only the behaviour of
+    <p>Specifies that the end of the subject string is<br />
+not the end of a line, so the dollar metacharacter should not match<br />
+it nor (except in multiline mode) a newline immediately before it.<br />
+Setting this without %G_REGEX_MULTILINE (at compile time) causes<br />
+dollar never to match. This option affects only the behaviour of<br />
 the dollar metacharacter, it does not affect &quot;\Z&quot; or &quot;\z&quot;.</p>
 
 
@@ -169,13 +171,13 @@ the dollar metacharacter, it does not affect &quot;\Z&quot; or &quot;\z&quot;.</
         <dt id="NOTEMPTY-constant" class="">NOTEMPTY =
           <div class="docstring">
   <div class="discussion">
-    <p>An empty string is not considered to be a valid
-match if this option is set. If there are alternatives in the pattern,
-they are tried. If all the alternatives match the empty string, the
-entire match fails. For example, if the pattern &quot;a?b?&quot; is applied to
-a string not beginning with &quot;a&quot; or &quot;b&quot;, it matches the empty string
-at the start of the string. With this flag set, this match is not
-valid, so GRegex searches further into the string for occurrences
+    <p>An empty string is not considered to be a valid<br />
+match if this option is set. If there are alternatives in the pattern,<br />
+they are tried. If all the alternatives match the empty string, the<br />
+entire match fails. For example, if the pattern &quot;a?b?&quot; is applied to<br />
+a string not beginning with &quot;a&quot; or &quot;b&quot;, it matches the empty string<br />
+at the start of the string. With this flag set, this match is not<br />
+valid, so GRegex searches further into the string for occurrences<br />
 of &quot;a&quot; or &quot;b&quot;.</p>
 
 
@@ -191,7 +193,7 @@ of &quot;a&quot; or &quot;b&quot;.</p>
         <dt id="PARTIAL-constant" class="">PARTIAL =
           <div class="docstring">
   <div class="discussion">
-    <p>Turns on the partial matching feature, for more
+    <p>Turns on the partial matching feature, for more<br />
 documentation on partial matching see g_match_info_is_partial_match().</p>
 
 
@@ -207,7 +209,7 @@ documentation on partial matching see g_match_info_is_partial_match().</p>
         <dt id="NEWLINE_CR-constant" class="">NEWLINE_CR =
           <div class="docstring">
   <div class="discussion">
-    <p>Overrides the newline definition set when
+    <p>Overrides the newline definition set when<br />
 creating a new #GRegex, setting the '\r' character as line terminator.</p>
 
 
@@ -223,7 +225,7 @@ creating a new #GRegex, setting the '\r' character as line terminator.</p>
         <dt id="NEWLINE_LF-constant" class="">NEWLINE_LF =
           <div class="docstring">
   <div class="discussion">
-    <p>Overrides the newline definition set when
+    <p>Overrides the newline definition set when<br />
 creating a new #GRegex, setting the '\n' character as line terminator.</p>
 
 
@@ -239,7 +241,7 @@ creating a new #GRegex, setting the '\n' character as line terminator.</p>
         <dt id="NEWLINE_CRLF-constant" class="">NEWLINE_CRLF =
           <div class="docstring">
   <div class="discussion">
-    <p>Overrides the newline definition set when
+    <p>Overrides the newline definition set when<br />
 creating a new #GRegex, setting the '\r\n' characters sequence as line terminator.</p>
 
 
@@ -255,11 +257,11 @@ creating a new #GRegex, setting the '\r\n' characters sequence as line terminato
         <dt id="NEWLINE_ANY-constant" class="">NEWLINE_ANY =
           <div class="docstring">
   <div class="discussion">
-    <p>Overrides the newline definition set when
-creating a new #GRegex, any Unicode newline sequence
-is recognised as a newline. These are '\r', '\n' and '\rn', and the
-single characters U+000B LINE TABULATION, U+000C FORM FEED (FF),
-U+0085 NEXT LINE (NEL), U+2028 LINE SEPARATOR and
+    <p>Overrides the newline definition set when<br />
+creating a new #GRegex, any Unicode newline sequence<br />
+is recognised as a newline. These are '\r', '\n' and '\rn', and the<br />
+single characters U+000B LINE TABULATION, U+000C FORM FEED (FF),<br />
+U+0085 NEXT LINE (NEL), U+2028 LINE SEPARATOR and<br />
 U+2029 PARAGRAPH SEPARATOR.</p>
 
 
@@ -275,8 +277,8 @@ U+2029 PARAGRAPH SEPARATOR.</p>
         <dt id="NEWLINE_ANYCRLF-constant" class="">NEWLINE_ANYCRLF =
           <div class="docstring">
   <div class="discussion">
-    <p>Overrides the newline definition set when
-creating a new #GRegex; any '\r', '\n', or '\r\n' character sequence
+    <p>Overrides the newline definition set when<br />
+creating a new #GRegex; any '\r', '\n', or '\r\n' character sequence<br />
 is recognized as a newline. Since: 2.34</p>
 
 
@@ -292,8 +294,8 @@ is recognized as a newline. Since: 2.34</p>
         <dt id="BSR_ANYCRLF-constant" class="">BSR_ANYCRLF =
           <div class="docstring">
   <div class="discussion">
-    <p>Overrides the newline definition for &quot;\R&quot; set when
-creating a new #GRegex; only '\r', '\n', or '\r\n' character sequences
+    <p>Overrides the newline definition for &quot;\R&quot; set when<br />
+creating a new #GRegex; only '\r', '\n', or '\r\n' character sequences<br />
 are recognized as a newline by &quot;\R&quot;. Since: 2.34</p>
 
 
@@ -309,11 +311,11 @@ are recognized as a newline by &quot;\R&quot;. Since: 2.34</p>
         <dt id="BSR_ANY-constant" class="">BSR_ANY =
           <div class="docstring">
   <div class="discussion">
-    <p>Overrides the newline definition for &quot;\R&quot; set when
-creating a new #GRegex; any Unicode newline character or character sequence
-are recognized as a newline by &quot;\R&quot;. These are '\r', '\n' and '\rn', and the
-single characters U+000B LINE TABULATION, U+000C FORM FEED (FF),
-U+0085 NEXT LINE (NEL), U+2028 LINE SEPARATOR and
+    <p>Overrides the newline definition for &quot;\R&quot; set when<br />
+creating a new #GRegex; any Unicode newline character or character sequence<br />
+are recognized as a newline by &quot;\R&quot;. These are '\r', '\n' and '\rn', and the<br />
+single characters U+000B LINE TABULATION, U+000C FORM FEED (FF),<br />
+U+0085 NEXT LINE (NEL), U+2028 LINE SEPARATOR and<br />
 U+2029 PARAGRAPH SEPARATOR. Since: 2.34</p>
 
 
@@ -344,9 +346,9 @@ U+2029 PARAGRAPH SEPARATOR. Since: 2.34</p>
         <dt id="PARTIAL_HARD-constant" class="">PARTIAL_HARD =
           <div class="docstring">
   <div class="discussion">
-    <p>Turns on the partial matching feature. In contrast to
-to %G_REGEX_MATCH_PARTIAL_SOFT, this stops matching as soon as a partial match
-is found, without continuing to search for a possible complete match. See
+    <p>Turns on the partial matching feature. In contrast to<br />
+to %G_REGEX_MATCH_PARTIAL_SOFT, this stops matching as soon as a partial match<br />
+is found, without continuing to search for a possible complete match. See<br />
 g_match_info_is_partial_match() for more information. Since: 2.34</p>
 
 
@@ -362,8 +364,8 @@ g_match_info_is_partial_match() for more information. Since: 2.34</p>
         <dt id="NOTEMPTY_ATSTART-constant" class="">NOTEMPTY_ATSTART =
           <div class="docstring">
   <div class="discussion">
-    <p>Like %G_REGEX_MATCH_NOTEMPTY, but only applied to
-the start of the matched string. For anchored
+    <p>Like %G_REGEX_MATCH_NOTEMPTY, but only applied to<br />
+the start of the matched string. For anchored<br />
 patterns this can only happen for pattern containing &quot;\K&quot;. Since: 2.34</p>
 
 
@@ -392,7 +394,7 @@ patterns this can only happen for pattern containing &quot;\K&quot;. Since: 2.34
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

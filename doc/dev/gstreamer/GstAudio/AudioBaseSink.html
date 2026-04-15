@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GstAudio::AudioBaseSink";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -102,14 +103,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Gst::AudioBaseSink class. Override the vmethod to implement
+    <p>Gst::AudioBaseSink class. Override the vmethod to implement<br />
 functionality.</p>
 
 
@@ -592,9 +594,11 @@ functionality.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -614,9 +618,11 @@ functionality.</p>
   
   
   
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gst/Element.html" title="Gst::Element (class)">Gst::Element</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../Gst/Element.html#>>-instance_method" title="Gst::Element#&gt;&gt; (method)">#>></a></span>, <span class='object_link'><a href="../Gst/Element.html#[]-class_method" title="Gst::Element.[] (method)">[]</a></span>, <span class='object_link'><a href="../Gst/Element.html#abort_state-instance_method" title="Gst::Element#abort_state (method)">#abort_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_metadata-instance_method" title="Gst::Element#add_metadata (method)">#add_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_pad-instance_method" title="Gst::Element#add_pad (method)">#add_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_pad_template-instance_method" title="Gst::Element#add_pad_template (method)">#add_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_property_deep_notify_watch-instance_method" title="Gst::Element#add_property_deep_notify_watch (method)">#add_property_deep_notify_watch</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_property_notify_watch-instance_method" title="Gst::Element#add_property_notify_watch (method)">#add_property_notify_watch</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_static_metadata-instance_method" title="Gst::Element#add_static_metadata (method)">#add_static_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_static_pad_template-instance_method" title="Gst::Element#add_static_pad_template (method)">#add_static_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_static_pad_template_with_gtype-instance_method" title="Gst::Element#add_static_pad_template_with_gtype (method)">#add_static_pad_template_with_gtype</a></span>, <span class='object_link'><a href="../Gst/Element.html#base_time-instance_method" title="Gst::Element#base_time (method)">#base_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#base_time=-instance_method" title="Gst::Element#base_time= (method)">#base_time=</a></span>, <span class='object_link'><a href="../Gst/Element.html#bus-instance_method" title="Gst::Element#bus (method)">#bus</a></span>, <span class='object_link'><a href="../Gst/Element.html#bus=-instance_method" title="Gst::Element#bus= (method)">#bus=</a></span>, <span class='object_link'><a href="../Gst/Element.html#call_async-instance_method" title="Gst::Element#call_async (method)">#call_async</a></span>, <span class='object_link'><a href="../Gst/Element.html#change_state-instance_method" title="Gst::Element#change_state (method)">#change_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#clock-instance_method" title="Gst::Element#clock (method)">#clock</a></span>, <span class='object_link'><a href="../Gst/Element.html#clock=-instance_method" title="Gst::Element#clock= (method)">#clock=</a></span>, <span class='object_link'><a href="../Gst/Element.html#context=-instance_method" title="Gst::Element#context= (method)">#context=</a></span>, <span class='object_link'><a href="../Gst/Element.html#contexts-instance_method" title="Gst::Element#contexts (method)">#contexts</a></span>, <span class='object_link'><a href="../Gst/Element.html#continue_state-instance_method" title="Gst::Element#continue_state (method)">#continue_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#create_all_pads-instance_method" title="Gst::Element#create_all_pads (method)">#create_all_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#current_clock_time-instance_method" title="Gst::Element#current_clock_time (method)">#current_clock_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#current_running_time-instance_method" title="Gst::Element#current_running_time (method)">#current_running_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#decorate_stream_id-instance_method" title="Gst::Element#decorate_stream_id (method)">#decorate_stream_id</a></span>, <span class='object_link'><a href="../Gst/Element.html#decorate_stream_id_printf-instance_method" title="Gst::Element#decorate_stream_id_printf (method)">#decorate_stream_id_printf</a></span>, <span class='object_link'><a href="../Gst/Element.html#decorate_stream_id_printf_valist-instance_method" title="Gst::Element#decorate_stream_id_printf_valist (method)">#decorate_stream_id_printf_valist</a></span>, <span class='object_link'><a href="../Gst/Element.html#factory-instance_method" title="Gst::Element#factory (method)">#factory</a></span>, <span class='object_link'><a href="../Gst/Element.html#flags-instance_method" title="Gst::Element#flags (method)">#flags</a></span>, <span class='object_link'><a href="../Gst/Element.html#flags_raw-instance_method" title="Gst::Element#flags_raw (method)">#flags_raw</a></span>, <span class='object_link'><a href="../Gst/Element.html#foreach_pad-instance_method" title="Gst::Element#foreach_pad (method)">#foreach_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#foreach_sink_pad-instance_method" title="Gst::Element#foreach_sink_pad (method)">#foreach_sink_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#foreach_src_pad-instance_method" title="Gst::Element#foreach_src_pad (method)">#foreach_src_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_compatible_pad-instance_method" title="Gst::Element#get_compatible_pad (method)">#get_compatible_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_compatible_pad_template-instance_method" title="Gst::Element#get_compatible_pad_template (method)">#get_compatible_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_context-instance_method" title="Gst::Element#get_context (method)">#get_context</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_context_unlocked-instance_method" title="Gst::Element#get_context_unlocked (method)">#get_context_unlocked</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_metadata-instance_method" title="Gst::Element#get_metadata (method)">#get_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_pad_template-instance_method" title="Gst::Element#get_pad_template (method)">#get_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_request_pad-instance_method" title="Gst::Element#get_request_pad (method)">#get_request_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_state-instance_method" title="Gst::Element#get_state (method)">#get_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_static_pad-instance_method" title="Gst::Element#get_static_pad (method)">#get_static_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#is_locked_state-instance_method" title="Gst::Element#is_locked_state (method)">#is_locked_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#iterate_pads-instance_method" title="Gst::Element#iterate_pads (method)">#iterate_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#iterate_sink_pads-instance_method" title="Gst::Element#iterate_sink_pads (method)">#iterate_sink_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#iterate_src_pads-instance_method" title="Gst::Element#iterate_src_pads (method)">#iterate_src_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_elements-instance_method" title="Gst::Element#link_elements (method)">#link_elements</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_filtered-instance_method" title="Gst::Element#link_filtered (method)">#link_filtered</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_many-instance_method" title="Gst::Element#link_many (method)">#link_many</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_pads-instance_method" title="Gst::Element#link_pads (method)">#link_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_pads_filtered-instance_method" title="Gst::Element#link_pads_filtered (method)">#link_pads_filtered</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_pads_full-instance_method" title="Gst::Element#link_pads_full (method)">#link_pads_full</a></span>, <span class='object_link'><a href="../Gst/Element.html#locked_state=-instance_method" title="Gst::Element#locked_state= (method)">#locked_state=</a></span>, <span class='object_link'><a href="../Gst/Element.html#lost_state-instance_method" title="Gst::Element#lost_state (method)">#lost_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#make_from_uri-class_method" title="Gst::Element.make_from_uri (method)">make_from_uri</a></span>, <span class='object_link'><a href="../Gst/Element.html#message_full-instance_method" title="Gst::Element#message_full (method)">#message_full</a></span>, <span class='object_link'><a href="../Gst/Element.html#message_full_with_details-instance_method" title="Gst::Element#message_full_with_details (method)">#message_full_with_details</a></span>, <span class='object_link'><a href="../Gst/Element.html#no_more_pads-instance_method" title="Gst::Element#no_more_pads (method)">#no_more_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#pad_template_list-instance_method" title="Gst::Element#pad_template_list (method)">#pad_template_list</a></span>, <span class='object_link'><a href="../Gst/Element.html#pause-instance_method" title="Gst::Element#pause (method)">#pause</a></span>, <span class='object_link'><a href="../Gst/Element.html#play-instance_method" title="Gst::Element#play (method)">#play</a></span>, <span class='object_link'><a href="../Gst/Element.html#post_message-instance_method" title="Gst::Element#post_message (method)">#post_message</a></span>, <span class='object_link'><a href="../Gst/Element.html#query-instance_method" title="Gst::Element#query (method)">#query</a></span>, <span class='object_link'><a href="../Gst/Element.html#query_convert-instance_method" title="Gst::Element#query_convert (method)">#query_convert</a></span>, <span class='object_link'><a href="../Gst/Element.html#query_duration-instance_method" title="Gst::Element#query_duration (method)">#query_duration</a></span>, <span class='object_link'><a href="../Gst/Element.html#query_position-instance_method" title="Gst::Element#query_position (method)">#query_position</a></span>, <span class='object_link'><a href="../Gst/Element.html#ready-instance_method" title="Gst::Element#ready (method)">#ready</a></span>, <span class='object_link'><a href="../Gst/Element.html#register-class_method" title="Gst::Element.register (method)">register</a></span>, <span class='object_link'><a href="../Gst/Element.html#release_request_pad-instance_method" title="Gst::Element#release_request_pad (method)">#release_request_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#remove_pad-instance_method" title="Gst::Element#remove_pad (method)">#remove_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#remove_property_notify_watch-instance_method" title="Gst::Element#remove_property_notify_watch (method)">#remove_property_notify_watch</a></span>, <span class='object_link'><a href="../Gst/Element.html#request_pad-instance_method" title="Gst::Element#request_pad (method)">#request_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#request_pad_simple-instance_method" title="Gst::Element#request_pad_simple (method)">#request_pad_simple</a></span>, <span class='object_link'><a href="../Gst/Element.html#seek-instance_method" title="Gst::Element#seek (method)">#seek</a></span>, <span class='object_link'><a href="../Gst/Element.html#seek_simple-instance_method" title="Gst::Element#seek_simple (method)">#seek_simple</a></span>, <span class='object_link'><a href="../Gst/Element.html#send_event-instance_method" title="Gst::Element#send_event (method)">#send_event</a></span>, <span class='object_link'><a href="../Gst/Element.html#set_metadata-instance_method" title="Gst::Element#set_metadata (method)">#set_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#set_static_metadata-instance_method" title="Gst::Element#set_static_metadata (method)">#set_static_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#start_time-instance_method" title="Gst::Element#start_time (method)">#start_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#start_time=-instance_method" title="Gst::Element#start_time= (method)">#start_time=</a></span>, <span class='object_link'><a href="../Gst/Element.html#state=-instance_method" title="Gst::Element#state= (method)">#state=</a></span>, <span class='object_link'><a href="../Gst/Element.html#state_change_return_get_name-class_method" title="Gst::Element.state_change_return_get_name (method)">state_change_return_get_name</a></span>, <span class='object_link'><a href="../Gst/Element.html#state_get_name-class_method" title="Gst::Element.state_get_name (method)">state_get_name</a></span>, <span class='object_link'><a href="../Gst/Element.html#stop-instance_method" title="Gst::Element#stop (method)">#stop</a></span>, <span class='object_link'><a href="../Gst/Element.html#sync_state_with_parent-instance_method" title="Gst::Element#sync_state_with_parent (method)">#sync_state_with_parent</a></span>, <span class='object_link'><a href="../Gst/Element.html#type_set_skip_documentation-class_method" title="Gst::Element.type_set_skip_documentation (method)">type_set_skip_documentation</a></span>, <span class='object_link'><a href="../Gst/Element.html#unlink-instance_method" title="Gst::Element#unlink (method)">#unlink</a></span>, <span class='object_link'><a href="../Gst/Element.html#unlink_many-instance_method" title="Gst::Element#unlink_many (method)">#unlink_many</a></span>, <span class='object_link'><a href="../Gst/Element.html#unlink_pads-instance_method" title="Gst::Element#unlink_pads (method)">#unlink_pads</a></span></p>
 
+  
   
   
   
@@ -960,8 +966,8 @@ functionality.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create and return the Gst::AudioRingBuffer for <!-- raw HTML omitted -->sink<!-- raw HTML omitted -->. This function will
-call the ::create_ringbuffer vmethod and will set <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> as the parent of
+    <p>Create and return the Gst::AudioRingBuffer for <!-- raw HTML omitted -->sink<!-- raw HTML omitted -->. This function will<br />
+call the ::create_ringbuffer vmethod and will set <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> as the parent of<br />
 the returned buffer (see gst_object_set_parent()).</p>
 
 
@@ -1001,7 +1007,7 @@ the returned buffer (see gst_object_set_parent()).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A window of time in nanoseconds to wait before creating a discontinuity as
+    <p>A window of time in nanoseconds to wait before creating a discontinuity as<br />
 a result of breaching the drift-tolerance.</p>
 
 
@@ -1041,7 +1047,7 @@ a result of breaching the drift-tolerance.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A window of time in nanoseconds to wait before creating a discontinuity as
+    <p>A window of time in nanoseconds to wait before creating a discontinuity as<br />
 a result of breaching the drift-tolerance.</p>
 
 
@@ -1109,7 +1115,7 @@ a result of breaching the drift-tolerance.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls the amount of time in microseconds that clocks are allowed
+    <p>Controls the amount of time in microseconds that clocks are allowed<br />
 to drift before resynchronisation happens.</p>
 
 
@@ -1149,7 +1155,7 @@ to drift before resynchronisation happens.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls the amount of time in microseconds that clocks are allowed
+    <p>Controls the amount of time in microseconds that clocks are allowed<br />
 to drift before resynchronisation happens.</p>
 
 
@@ -1322,7 +1328,7 @@ to drift before resynchronisation happens.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries whether <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> will provide a clock or not. See also
+    <p>Queries whether <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> will provide a clock or not. See also<br />
 gst_audio_base_sink_set_provide_clock.</p>
 
 
@@ -1467,10 +1473,10 @@ gst_audio_base_sink_set_provide_clock.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Informs this base class that the audio output device has failed for
-some reason, causing a discontinuity (for example, because the device
-recovered from the error, but lost all contents of its ring buffer).
-This function is typically called by derived classes, and is useful
+    <p>Informs this base class that the audio output device has failed for<br />
+some reason, causing a discontinuity (for example, because the device<br />
+recovered from the error, but lost all contents of its ring buffer).<br />
+This function is typically called by derived classes, and is useful<br />
 for the custom slave method.</p>
 
 
@@ -1506,12 +1512,12 @@ for the custom slave method.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the custom slaving callback. This callback will
-be invoked if the slave-method property is set to
-GST_AUDIO_BASE_SINK_SLAVE_CUSTOM and the audio sink
+    <p>Sets the custom slaving callback. This callback will<br />
+be invoked if the slave-method property is set to<br />
+GST_AUDIO_BASE_SINK_SLAVE_CUSTOM and the audio sink<br />
 receives and plays samples.</p>
-<p>Setting the callback to NULL causes the sink to
-behave as if the GST_AUDIO_BASE_SINK_SLAVE_NONE
+<p>Setting the callback to NULL causes the sink to<br />
+behave as if the GST_AUDIO_BASE_SINK_SLAVE_NONE<br />
 method were used.</p>
 
 
@@ -1697,7 +1703,7 @@ method were used.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::ModelIter";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -470,6 +472,7 @@
 
       
     </ul>
+    
   
 
 
@@ -528,15 +531,15 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of one or more cells in the row referenced by <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->. The
-variable argument list should contain integer column numbers, each column
-column number followed by a place to store the value being retrieved. The
+    <p>Gets the value of one or more cells in the row referenced by <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->. The<br />
+variable argument list should contain integer column numbers, each column<br />
+column number followed by a place to store the value being retrieved. The<br />
 list is terminated by a -1.</p>
-<p>For example, to get a value from column 0 with type %G_TYPE_STRING use:
-<!-- raw HTML omitted --><!-- raw HTML omitted -->
-clutter_model_iter_get (iter, 0, &amp;place_string_here, -1);
+<p>For example, to get a value from column 0 with type %G_TYPE_STRING use:<br />
+<!-- raw HTML omitted --><!-- raw HTML omitted --><br />
+clutter_model_iter_get (iter, 0, &amp;place_string_here, -1);<br />
 <!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<p>where place_string_here is a gchar* to be filled with the string. If
+<p>where place_string_here is a gchar* to be filled with the string. If<br />
 appropriate, the returned values have to be freed or unreferenced.</p>
 
 
@@ -591,7 +594,7 @@ appropriate, the returned values have to be freed or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>See clutter_model_iter_get(). This version takes a va_list for language
+    <p>See clutter_model_iter_get(). This version takes a va_list for language<br />
 bindings.</p>
 
 
@@ -646,7 +649,7 @@ bindings.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets an initializes <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to that at <!-- raw HTML omitted -->column<!-- raw HTML omitted -->. When done with <!-- raw HTML omitted -->value<!-- raw HTML omitted -->,
+    <p>Sets an initializes <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to that at <!-- raw HTML omitted -->column<!-- raw HTML omitted -->. When done with <!-- raw HTML omitted -->value<!-- raw HTML omitted -->,<br />
 g_value_unset() needs to be called to free any allocated memory.</p>
 
 
@@ -716,7 +719,7 @@ g_value_unset() needs to be called to free any allocated memory.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether the current iterator is at the beginning of the model
+    <p>Gets whether the current iterator is at the beginning of the model<br />
 to which it belongs.</p>
 
 
@@ -756,7 +759,7 @@ to which it belongs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether the iterator is at the end of the model to which it
+    <p>Gets whether the iterator is at the end of the model to which it<br />
 belongs.</p>
 
 
@@ -902,8 +905,8 @@ belongs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Updates the <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to point at the next position in the model.
-The model implementation should take into account the presence of
+    <p>Updates the <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to point at the next position in the model.<br />
+The model implementation should take into account the presence of<br />
 a filter function.</p>
 
 
@@ -922,7 +925,7 @@ a filter function.</p>
       
       
         &mdash;
-        <div class='inline'><p>The passed iterator, updated to point at the next
+        <div class='inline'><p>The passed iterator, updated to point at the next<br />
 row in the model.</p>
 </div>
       
@@ -944,8 +947,8 @@ row in the model.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to point at the previous position in the model.
-The model implementation should take into account the presence of
+    <p>Sets the <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to point at the previous position in the model.<br />
+The model implementation should take into account the presence of<br />
 a filter function.</p>
 
 
@@ -964,7 +967,7 @@ a filter function.</p>
       
       
         &mdash;
-        <div class='inline'><p>The passed iterator, updated to point at the previous
+        <div class='inline'><p>The passed iterator, updated to point at the previous<br />
 row in the model.</p>
 </div>
       
@@ -1092,13 +1095,13 @@ row in the model.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the value of one or more cells in the row referenced by <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->. The
-variable argument list should contain integer column numbers, each column
-column number followed by the value to be set. The  list is terminated by a
+    <p>Sets the value of one or more cells in the row referenced by <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->. The<br />
+variable argument list should contain integer column numbers, each column<br />
+column number followed by the value to be set. The  list is terminated by a<br />
 -1.</p>
-<p>For example, to set column 0 with type %G_TYPE_STRING, use:
-<!-- raw HTML omitted --><!-- raw HTML omitted -->
-clutter_model_iter_set (iter, 0, &quot;foo&quot;, -1);
+<p>For example, to set column 0 with type %G_TYPE_STRING, use:<br />
+<!-- raw HTML omitted --><!-- raw HTML omitted --><br />
+clutter_model_iter_set (iter, 0, &quot;foo&quot;, -1);<br />
 <!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
 
@@ -1153,7 +1156,7 @@ clutter_model_iter_set (iter, 0, &quot;foo&quot;, -1);
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the data in the cell specified by <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> and <!-- raw HTML omitted -->column<!-- raw HTML omitted -->. The type of
+    <p>Sets the data in the cell specified by <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> and <!-- raw HTML omitted -->column<!-- raw HTML omitted -->. The type of<br />
 <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be convertable to the type of the column.</p>
 
 
@@ -1223,7 +1226,7 @@ clutter_model_iter_set (iter, 0, &quot;foo&quot;, -1);
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>See clutter_model_iter_set(); this version takes a va_list for language
+    <p>See clutter_model_iter_set(); this version takes a va_list for language<br />
 bindings.</p>
 
 
@@ -1274,7 +1277,7 @@ bindings.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::Vfs";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -161,6 +163,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -331,6 +334,7 @@
 
       
     </ul>
+    
   
 
 
@@ -368,7 +372,7 @@
       
       
         &mdash;
-        <div class='inline'><p>a #GVfs, which will be the local
+        <div class='inline'><p>a #GVfs, which will be the local<br />
 file system #GVfs if no other implementation is available.</p>
 </div>
       
@@ -472,7 +476,7 @@ file system #GVfs if no other implementation is available.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GFile.
+        <div class='inline'><p>a #GFile.<br />
 Free the returned object with g_object_unref().</p>
 </div>
       
@@ -495,8 +499,8 @@ Free the returned object with g_object_unref().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets a #GFile for <!-- raw HTML omitted -->uri<!-- raw HTML omitted -->.</p>
-<p>This operation never fails, but the returned object
-might not support any I/O operation if the URI
+<p>This operation never fails, but the returned object<br />
+might not support any I/O operation if the URI<br />
 is malformed or if the URI scheme is not supported.</p>
 
 
@@ -534,7 +538,7 @@ is malformed or if the URI scheme is not supported.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GFile.
+        <div class='inline'><p>a #GFile.<br />
 Free the returned object with g_object_unref().</p>
 </div>
       
@@ -574,7 +578,7 @@ Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>true if construction of the <!-- raw HTML omitted -->vfs<!-- raw HTML omitted --> was successful
+        <div class='inline'><p>true if construction of the <!-- raw HTML omitted -->vfs<!-- raw HTML omitted --> was successful<br />
 and it is now active.</p>
 </div>
       
@@ -596,8 +600,8 @@ and it is now active.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This operation never fails, but the returned object might
-not support any I/O operations if the <!-- raw HTML omitted -->parse_name<!-- raw HTML omitted --> cannot
+    <p>This operation never fails, but the returned object might<br />
+not support any I/O operations if the <!-- raw HTML omitted -->parse_name<!-- raw HTML omitted --> cannot<br />
 be parsed by the #GVfs module.</p>
 
 
@@ -635,7 +639,7 @@ be parsed by the #GVfs module.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GFile for the given <!-- raw HTML omitted -->parse_name<!-- raw HTML omitted -->.
+        <div class='inline'><p>a #GFile for the given <!-- raw HTML omitted -->parse_name<!-- raw HTML omitted -->.<br />
 Free the returned object with g_object_unref().</p>
 </div>
       
@@ -657,22 +661,22 @@ Free the returned object with g_object_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers <!-- raw HTML omitted -->uri_func<!-- raw HTML omitted --> and <!-- raw HTML omitted -->parse_name_func<!-- raw HTML omitted --> as the #GFile URI and parse name
-lookup functions for URIs with a scheme matching <!-- raw HTML omitted -->scheme<!-- raw HTML omitted -->.
-Note that <!-- raw HTML omitted -->scheme<!-- raw HTML omitted --> is registered only within the running application, as
+    <p>Registers <!-- raw HTML omitted -->uri_func<!-- raw HTML omitted --> and <!-- raw HTML omitted -->parse_name_func<!-- raw HTML omitted --> as the #GFile URI and parse name<br />
+lookup functions for URIs with a scheme matching <!-- raw HTML omitted -->scheme<!-- raw HTML omitted -->.<br />
+Note that <!-- raw HTML omitted -->scheme<!-- raw HTML omitted --> is registered only within the running application, as<br />
 opposed to desktop-wide as it happens with GVfs backends.</p>
-<p>When a #GFile is requested with an URI containing <!-- raw HTML omitted -->scheme<!-- raw HTML omitted --> (e.g. through
-g_file_new_for_uri()), <!-- raw HTML omitted -->uri_func<!-- raw HTML omitted --> will be called to allow a custom
-constructor. The implementation of <!-- raw HTML omitted -->uri_func<!-- raw HTML omitted --> should not be blocking, and
+<p>When a #GFile is requested with an URI containing <!-- raw HTML omitted -->scheme<!-- raw HTML omitted --> (e.g. through<br />
+g_file_new_for_uri()), <!-- raw HTML omitted -->uri_func<!-- raw HTML omitted --> will be called to allow a custom<br />
+constructor. The implementation of <!-- raw HTML omitted -->uri_func<!-- raw HTML omitted --> should not be blocking, and<br />
 must not call g_vfs_register_uri_scheme() or g_vfs_unregister_uri_scheme().</p>
-<p>When g_file_parse_name() is called with a parse name obtained from such file,
-<!-- raw HTML omitted -->parse_name_func<!-- raw HTML omitted --> will be called to allow the #GFile to be created again. In
-that case, it's responsibility of <!-- raw HTML omitted -->parse_name_func<!-- raw HTML omitted --> to make sure the parse
-name matches what the custom #GFile implementation returned when
-g_file_get_parse_name() was previously called. The implementation of
-<!-- raw HTML omitted -->parse_name_func<!-- raw HTML omitted --> should not be blocking, and must not call
+<p>When g_file_parse_name() is called with a parse name obtained from such file,<br />
+<!-- raw HTML omitted -->parse_name_func<!-- raw HTML omitted --> will be called to allow the #GFile to be created again. In<br />
+that case, it's responsibility of <!-- raw HTML omitted -->parse_name_func<!-- raw HTML omitted --> to make sure the parse<br />
+name matches what the custom #GFile implementation returned when<br />
+g_file_get_parse_name() was previously called. The implementation of<br />
+<!-- raw HTML omitted -->parse_name_func<!-- raw HTML omitted --> should not be blocking, and must not call<br />
 g_vfs_register_uri_scheme() or g_vfs_unregister_uri_scheme().</p>
-<p>It's an error to call this function twice with the same scheme. To unregister
+<p>It's an error to call this function twice with the same scheme. To unregister<br />
 a custom URI scheme, use g_vfs_unregister_uri_scheme().</p>
 
 
@@ -737,8 +741,8 @@ a custom URI scheme, use g_vfs_unregister_uri_scheme().</p>
       
       
         &mdash;
-        <div class='inline'><p>function to be called when unregistering the
-URI scheme, or when <!-- raw HTML omitted -->vfs<!-- raw HTML omitted --> is disposed, to free the resources used
+        <div class='inline'><p>function to be called when unregistering the<br />
+URI scheme, or when <!-- raw HTML omitted -->vfs<!-- raw HTML omitted --> is disposed, to free the resources used<br />
 by the URI lookup function</p>
 </div>
       
@@ -769,7 +773,7 @@ by the URI lookup function</p>
       
       
         &mdash;
-        <div class='inline'><p>custom data passed to be passed to
+        <div class='inline'><p>custom data passed to be passed to<br />
 <!-- raw HTML omitted -->parse_name_func<!-- raw HTML omitted -->, or nil</p>
 </div>
       
@@ -785,8 +789,8 @@ by the URI lookup function</p>
       
       
         &mdash;
-        <div class='inline'><p>function to be called when unregistering the
-URI scheme, or when <!-- raw HTML omitted -->vfs<!-- raw HTML omitted --> is disposed, to free the resources used
+        <div class='inline'><p>function to be called when unregistering the<br />
+URI scheme, or when <!-- raw HTML omitted -->vfs<!-- raw HTML omitted --> is disposed, to free the resources used<br />
 by the parse name lookup function</p>
 </div>
       
@@ -805,7 +809,7 @@ by the parse name lookup function</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->scheme<!-- raw HTML omitted --> was successfully registered, or false if a handler
+        <div class='inline'><p>true if <!-- raw HTML omitted -->scheme<!-- raw HTML omitted --> was successfully registered, or false if a handler<br />
 for <!-- raw HTML omitted -->scheme<!-- raw HTML omitted --> already exists.</p>
 </div>
       
@@ -845,8 +849,8 @@ for <!-- raw HTML omitted -->scheme<!-- raw HTML omitted --> already exists.</p>
       
       
         &mdash;
-        <div class='inline'><p>an array of strings.
-The returned array belongs to GIO and must
+        <div class='inline'><p>an array of strings.<br />
+The returned array belongs to GIO and must<br />
 not be freed or modified.</p>
 </div>
       
@@ -868,7 +872,7 @@ not be freed or modified.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unregisters the URI handler for <!-- raw HTML omitted -->scheme<!-- raw HTML omitted --> previously registered with
+    <p>Unregisters the URI handler for <!-- raw HTML omitted -->scheme<!-- raw HTML omitted --> previously registered with<br />
 g_vfs_register_uri_scheme().</p>
 
 
@@ -906,7 +910,7 @@ g_vfs_register_uri_scheme().</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->scheme<!-- raw HTML omitted --> was successfully unregistered, or false if a
+        <div class='inline'><p>true if <!-- raw HTML omitted -->scheme<!-- raw HTML omitted --> was successfully unregistered, or false if a<br />
 handler for <!-- raw HTML omitted -->scheme<!-- raw HTML omitted --> does not exist.</p>
 </div>
       
@@ -924,7 +928,7 @@ handler for <!-- raw HTML omitted -->scheme<!-- raw HTML omitted --> does not ex
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

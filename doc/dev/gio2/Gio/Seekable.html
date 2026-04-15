@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::Seekable";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -83,23 +84,24 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GSeekable</code> is implemented by streams (implementations of
+    <p><code>GSeekable</code> is implemented by streams (implementations of<br />
 [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.InputStream] or [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.OutputStream]) that support seeking.</p>
-<p>Seekable streams largely fall into two categories: resizable and
+<p>Seekable streams largely fall into two categories: resizable and<br />
 fixed-size.</p>
-<p><code>GSeekable</code> on fixed-sized streams is approximately the same as POSIX
-<a href="man:lseek(2)"><code>lseek()</code></a> on a block device (for example: attempting to seek
-past the end of the device is an error).  Fixed streams typically cannot be
+<p><code>GSeekable</code> on fixed-sized streams is approximately the same as POSIX<br />
+<a href="man:lseek(2)"><code>lseek()</code></a> on a block device (for example: attempting to seek<br />
+past the end of the device is an error).  Fixed streams typically cannot be<br />
 truncated.</p>
-<p><code>GSeekable</code> on resizable streams is approximately the same as POSIX
-<a href="man:lseek(2)"><code>lseek()</code></a> on a normal file.  Seeking past the end and writing
+<p><code>GSeekable</code> on resizable streams is approximately the same as POSIX<br />
+<a href="man:lseek(2)"><code>lseek()</code></a> on a normal file.  Seeking past the end and writing<br />
 data will usually cause the stream to resize by introducing zero bytes.</p>
 
 
@@ -262,6 +264,7 @@ data will usually cause the stream to resize by introducing zero bytes.</p>
 
       
     </ul>
+    
   
 
 
@@ -397,8 +400,8 @@ data will usually cause the stream to resize by introducing zero bytes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if successful. If an error
-has occurred, this function will return false and set <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
+    <p>Returns true if successful. If an error<br />
+has occurred, this function will return false and set <!-- raw HTML omitted -->error<!-- raw HTML omitted --><br />
 appropriately if present.</p>
 
 
@@ -481,8 +484,8 @@ appropriately if present.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if successful. If an error
-has occurred, this function will return false and set <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
+        <div class='inline'><p>true if successful. If an error<br />
+has occurred, this function will return false and set <!-- raw HTML omitted -->error<!-- raw HTML omitted --><br />
 appropriately if present.</p>
 </div>
       
@@ -562,13 +565,13 @@ appropriately if present.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the length of the stream to <!-- raw HTML omitted -->offset<!-- raw HTML omitted -->. If the stream was previously
-larger than <!-- raw HTML omitted -->offset<!-- raw HTML omitted -->, the extra data is discarded. If the stream was
+    <p>Sets the length of the stream to <!-- raw HTML omitted -->offset<!-- raw HTML omitted -->. If the stream was previously<br />
+larger than <!-- raw HTML omitted -->offset<!-- raw HTML omitted -->, the extra data is discarded. If the stream was<br />
 previously shorter than <!-- raw HTML omitted -->offset<!-- raw HTML omitted -->, it is extended with NUL ('\0') bytes.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an
-operation was partially finished when the operation was cancelled the
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an<br />
+operation was partially finished when the operation was cancelled the<br />
 partial result will be returned, without an error.</p>
 
 
@@ -621,8 +624,8 @@ partial result will be returned, without an error.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if successful. If an error
-has occurred, this function will return false and set <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
+        <div class='inline'><p>true if successful. If an error<br />
+has occurred, this function will return false and set <!-- raw HTML omitted -->error<!-- raw HTML omitted --><br />
 appropriately if present.</p>
 </div>
       
@@ -644,8 +647,8 @@ appropriately if present.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if successful. If an error
-has occurred, this function will return false and set <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
+    <p>Returns true if successful. If an error<br />
+has occurred, this function will return false and set <!-- raw HTML omitted -->error<!-- raw HTML omitted --><br />
 appropriately if present.</p>
 
 
@@ -713,8 +716,8 @@ appropriately if present.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if successful. If an error
-has occurred, this function will return false and set <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
+        <div class='inline'><p>true if successful. If an error<br />
+has occurred, this function will return false and set <!-- raw HTML omitted -->error<!-- raw HTML omitted --><br />
 appropriately if present.</p>
 </div>
       
@@ -732,7 +735,7 @@ appropriately if present.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

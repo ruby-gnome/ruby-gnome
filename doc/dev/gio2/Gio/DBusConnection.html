@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::DBusConnection";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,51 +95,52 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The <code>GDBusConnection</code> type is used for D-Bus connections to remote
+    <p>The <code>GDBusConnection</code> type is used for D-Bus connections to remote<br />
 peers such as a message buses.</p>
-<p>It is a low-level API that offers a lot of flexibility. For instance,
-it lets you establish a connection over any transport that can by represented
+<p>It is a low-level API that offers a lot of flexibility. For instance,<br />
+it lets you establish a connection over any transport that can by represented<br />
 as a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.IOStream].</p>
-<p>This class is rarely used directly in D-Bus clients. If you are writing
-a D-Bus client, it is often easier to use the [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.bus_own_name],
+<p>This class is rarely used directly in D-Bus clients. If you are writing<br />
+a D-Bus client, it is often easier to use the [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.bus_own_name],<br />
 [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.bus_watch_name] or [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusProxy.new_for_bus] APIs.</p>
-<p>As an exception to the usual GLib rule that a particular object must not
-be used by two threads at the same time, <code>GDBusConnection</code>s methods may be
-called from any thread. This is so that [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.bus_get] and
-[func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.bus_get_sync] can safely return the same <code>GDBusConnection</code> when
+<p>As an exception to the usual GLib rule that a particular object must not<br />
+be used by two threads at the same time, <code>GDBusConnection</code>s methods may be<br />
+called from any thread. This is so that [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.bus_get] and<br />
+[func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.bus_get_sync] can safely return the same <code>GDBusConnection</code> when<br />
 called from any thread.</p>
-<p>Most of the ways to obtain a <code>GDBusConnection</code> automatically initialize it
-(i.e. connect to D-Bus): for instance, [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection.new] and
-[func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.bus_get], and the synchronous versions of those methods, give you
-an initialized connection. Language bindings for GIO should use
-[func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Initable.new] or [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncInitable.new_async], which also
+<p>Most of the ways to obtain a <code>GDBusConnection</code> automatically initialize it<br />
+(i.e. connect to D-Bus): for instance, [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection.new] and<br />
+[func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.bus_get], and the synchronous versions of those methods, give you<br />
+an initialized connection. Language bindings for GIO should use<br />
+[func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Initable.new] or [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncInitable.new_async], which also<br />
 initialize the connection.</p>
-<p>If you construct an uninitialized <code>GDBusConnection</code>, such as via
-[ctor<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.new], you must initialize it via [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Initable.init] or
-[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncInitable.init_async] before using its methods or properties.
-Calling methods or accessing properties on a <code>GDBusConnection</code> that has not
-completed initialization successfully is considered to be invalid, and leads
-to undefined behaviour. In particular, if initialization fails with a
-<code>GError</code>, the only valid thing you can do with that <code>GDBusConnection</code> is to
+<p>If you construct an uninitialized <code>GDBusConnection</code>, such as via<br />
+[ctor<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.new], you must initialize it via [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Initable.init] or<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncInitable.init_async] before using its methods or properties.<br />
+Calling methods or accessing properties on a <code>GDBusConnection</code> that has not<br />
+completed initialization successfully is considered to be invalid, and leads<br />
+to undefined behaviour. In particular, if initialization fails with a<br />
+<code>GError</code>, the only valid thing you can do with that <code>GDBusConnection</code> is to<br />
 free it with [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.unref].</p>
-<h2>An example D-Bus server</h2>
-<p>Here is an example for a D-Bus server:
+<h2><a href="#an-example-d-bus-server" aria-hidden="true" class="anchor" id="an-example-d-bus-server"></a>An example D-Bus server</h2>
+<p>Here is an example for a D-Bus server:<br />
 <a href="https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-server.c">gdbus-example-server.c</a></p>
-<h2>An example for exporting a subtree</h2>
-<p>Here is an example for exporting a subtree:
+<h2><a href="#an-example-for-exporting-a-subtree" aria-hidden="true" class="anchor" id="an-example-for-exporting-a-subtree"></a>An example for exporting a subtree</h2>
+<p>Here is an example for exporting a subtree:<br />
 <a href="https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-subtree.c">gdbus-example-subtree.c</a></p>
-<h2>An example for file descriptor passing</h2>
-<p>Here is an example for passing UNIX file descriptors:
+<h2><a href="#an-example-for-file-descriptor-passing" aria-hidden="true" class="anchor" id="an-example-for-file-descriptor-passing"></a>An example for file descriptor passing</h2>
+<p>Here is an example for passing UNIX file descriptors:<br />
 <a href="https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-unix-fd-client.c">gdbus-unix-fd-client.c</a></p>
-<h2>An example for exporting a GObject</h2>
-<p>Here is an example for exporting a #GObject:
+<h2><a href="#an-example-for-exporting-a-gobject" aria-hidden="true" class="anchor" id="an-example-for-exporting-a-gobject"></a>An example for exporting a GObject</h2>
+<p>Here is an example for exporting a #GObject:<br />
 <a href="https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-export.c">gdbus-example-export.c</a></p>
 
 
@@ -209,6 +211,7 @@ free it with [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Ob
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1416,6 +1419,7 @@ free it with [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Ob
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1432,16 +1436,16 @@ free it with [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Ob
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Synchronously sets up a D-Bus connection for exchanging D-Bus messages
+    <p>Synchronously sets up a D-Bus connection for exchanging D-Bus messages<br />
 with the end represented by <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is a GSocket::Connection, then the corresponding #GSocket
+<p>If <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is a GSocket::Connection, then the corresponding #GSocket<br />
 will be put into non-blocking mode.</p>
-<p>The D-Bus connection will interact with <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> from a worker thread.
-As a result, the caller should not interact with <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> after this
+<p>The D-Bus connection will interact with <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> from a worker thread.<br />
+As a result, the caller should not interact with <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> after this<br />
 method has been called, except by calling g_object_unref() on it.</p>
-<p>If <!-- raw HTML omitted -->observer<!-- raw HTML omitted --> is not nil it may be used to control the
+<p>If <!-- raw HTML omitted -->observer<!-- raw HTML omitted --> is not nil it may be used to control the<br />
 authentication process.</p>
-<p>This is a synchronous failable constructor. See
+<p>This is a synchronous failable constructor. See<br />
 g_dbus_connection_new() for the asynchronous version.</p>
 
 
@@ -1550,20 +1554,20 @@ g_dbus_connection_new() for the asynchronous version.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously sets up a D-Bus connection for exchanging D-Bus messages
+    <p>Asynchronously sets up a D-Bus connection for exchanging D-Bus messages<br />
 with the end represented by <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is a GSocket::Connection, then the corresponding #GSocket
+<p>If <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is a GSocket::Connection, then the corresponding #GSocket<br />
 will be put into non-blocking mode.</p>
-<p>The D-Bus connection will interact with <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> from a worker thread.
-As a result, the caller should not interact with <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> after this
+<p>The D-Bus connection will interact with <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> from a worker thread.<br />
+As a result, the caller should not interact with <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> after this<br />
 method has been called, except by calling g_object_unref() on it.</p>
-<p>If <!-- raw HTML omitted -->observer<!-- raw HTML omitted --> is not nil it may be used to control the
+<p>If <!-- raw HTML omitted -->observer<!-- raw HTML omitted --> is not nil it may be used to control the<br />
 authentication process.</p>
-<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked. You can
-then call g_dbus_connection_new_finish() to get the result of the
+<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked. You can<br />
+then call g_dbus_connection_new_finish() to get the result of the<br />
 operation.</p>
-<p>This is an asynchronous failable constructor. See
-g_dbus_connection_new_sync() for the synchronous
+<p>This is an asynchronous failable constructor. See<br />
+g_dbus_connection_new_sync() for the synchronous<br />
 version.</p>
 
 
@@ -1708,23 +1712,23 @@ version.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously connects and sets up a D-Bus client connection for
-exchanging D-Bus messages with an endpoint specified by <!-- raw HTML omitted -->address<!-- raw HTML omitted -->
-which must be in the
+    <p>Asynchronously connects and sets up a D-Bus client connection for<br />
+exchanging D-Bus messages with an endpoint specified by <!-- raw HTML omitted -->address<!-- raw HTML omitted --><br />
+which must be in the<br />
 <a href="https://dbus.freedesktop.org/doc/dbus-specification.html#addresses">D-Bus address format</a>.</p>
-<p>This constructor can only be used to initiate client-side
-connections - use g_dbus_connection_new() if you need to act as the
-server. In particular, <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> cannot contain the
-%G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER,
-%G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS or
+<p>This constructor can only be used to initiate client-side<br />
+connections - use g_dbus_connection_new() if you need to act as the<br />
+server. In particular, <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> cannot contain the<br />
+%G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER,<br />
+%G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS or<br />
 %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER flags.</p>
-<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked. You can
-then call g_dbus_connection_new_for_address_finish() to get the result of
+<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked. You can<br />
+then call g_dbus_connection_new_for_address_finish() to get the result of<br />
 the operation.</p>
-<p>If <!-- raw HTML omitted -->observer<!-- raw HTML omitted --> is not nil it may be used to control the
+<p>If <!-- raw HTML omitted -->observer<!-- raw HTML omitted --> is not nil it may be used to control the<br />
 authentication process.</p>
-<p>This is an asynchronous failable constructor. See
-g_dbus_connection_new_for_address_sync() for the synchronous
+<p>This is an asynchronous failable constructor. See<br />
+g_dbus_connection_new_for_address_sync() for the synchronous<br />
 version.</p>
 
 
@@ -1860,29 +1864,29 @@ version.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a message filter. Filters are handlers that are run on all
-incoming and outgoing messages, prior to standard dispatch. Filters
-are run in the order that they were added.  The same handler can be
-added as a filter more than once, in which case it will be run more
-than once.  Filters added during a filter callback won't be run on
-the message being processed. Filter functions are allowed to modify
+    <p>Adds a message filter. Filters are handlers that are run on all<br />
+incoming and outgoing messages, prior to standard dispatch. Filters<br />
+are run in the order that they were added.  The same handler can be<br />
+added as a filter more than once, in which case it will be run more<br />
+than once.  Filters added during a filter callback won't be run on<br />
+the message being processed. Filter functions are allowed to modify<br />
 and even drop messages.</p>
-<p>Note that filters are run in a dedicated message handling thread so
-they can't block and, generally, can't do anything but signal a
-worker thread. Also note that filters are rarely needed - use API
-such as g_dbus_connection_send_message_with_reply(),
+<p>Note that filters are run in a dedicated message handling thread so<br />
+they can't block and, generally, can't do anything but signal a<br />
+worker thread. Also note that filters are rarely needed - use API<br />
+such as g_dbus_connection_send_message_with_reply(),<br />
 g_dbus_connection_signal_subscribe() or g_dbus_connection_call() instead.</p>
-<p>If a filter consumes an incoming message the message is not
-dispatched anywhere else - not even the standard dispatch machinery
-(that API such as g_dbus_connection_signal_subscribe() and
-g_dbus_connection_send_message_with_reply() relies on) will see the
-message. Similarly, if a filter consumes an outgoing message, the
+<p>If a filter consumes an incoming message the message is not<br />
+dispatched anywhere else - not even the standard dispatch machinery<br />
+(that API such as g_dbus_connection_signal_subscribe() and<br />
+g_dbus_connection_send_message_with_reply() relies on) will see the<br />
+message. Similarly, if a filter consumes an outgoing message, the<br />
 message will not be sent to the other peer.</p>
-<p>If <!-- raw HTML omitted -->user_data_free_func<!-- raw HTML omitted --> is non-nil, it will be called (in the
-thread-default main context of the thread you are calling this
-method from) at some point after <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> is no longer
-needed. (It is not guaranteed to be called synchronously when the
-filter is removed, and may be called after <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> has been
+<p>If <!-- raw HTML omitted -->user_data_free_func<!-- raw HTML omitted --> is non-nil, it will be called (in the<br />
+thread-default main context of the thread you are calling this<br />
+method from) at some point after <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> is no longer<br />
+needed. (It is not guaranteed to be called synchronously when the<br />
+filter is removed, and may be called after <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> has been<br />
 destroyed.)</p>
 
 
@@ -1932,7 +1936,7 @@ destroyed.)</p>
       
       
         &mdash;
-        <div class='inline'><p>function to free <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> with when filter
+        <div class='inline'><p>function to free <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> with when filter<br />
 is removed or nil</p>
 </div>
       
@@ -1951,7 +1955,7 @@ is removed or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>a filter identifier that can be used with
+        <div class='inline'><p>a filter identifier that can be used with<br />
 g_dbus_connection_remove_filter()</p>
 </div>
       
@@ -1973,7 +1977,7 @@ g_dbus_connection_remove_filter()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A D-Bus address specifying potential endpoints that can be used
+    <p>A D-Bus address specifying potential endpoints that can be used<br />
 when establishing the connection.</p>
 
 
@@ -2082,20 +2086,20 @@ when establishing the connection.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously invokes the <!-- raw HTML omitted -->method_name<!-- raw HTML omitted --> method on the
-<!-- raw HTML omitted -->interface_name<!-- raw HTML omitted --> D-Bus interface on the remote object at
+    <p>Asynchronously invokes the <!-- raw HTML omitted -->method_name<!-- raw HTML omitted --> method on the<br />
+<!-- raw HTML omitted -->interface_name<!-- raw HTML omitted --> D-Bus interface on the remote object at<br />
 <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> owned by <!-- raw HTML omitted -->bus_name<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is closed then the operation will fail with
-%G_IO_ERROR_CLOSED. If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is canceled, the operation will
-fail with %G_IO_ERROR_CANCELLED. If <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> contains a value
-not compatible with the D-Bus protocol, the operation fails with
+<p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is closed then the operation will fail with<br />
+%G_IO_ERROR_CLOSED. If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is canceled, the operation will<br />
+fail with %G_IO_ERROR_CANCELLED. If <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> contains a value<br />
+not compatible with the D-Bus protocol, the operation fails with<br />
 %G_IO_ERROR_INVALID_ARGUMENT.</p>
-<p>If <!-- raw HTML omitted -->reply_type<!-- raw HTML omitted --> is non-nil then the reply will be checked for having this type and an
-error will be raised if it does not match.  Said another way, if you give a <!-- raw HTML omitted -->reply_type<!-- raw HTML omitted -->
-then any non-nil return value will be of this type. Unless it’s
-%G_VARIANT_TYPE_UNIT, the <!-- raw HTML omitted -->reply_type<!-- raw HTML omitted --> will be a tuple containing one or more
+<p>If <!-- raw HTML omitted -->reply_type<!-- raw HTML omitted --> is non-nil then the reply will be checked for having this type and an<br />
+error will be raised if it does not match.  Said another way, if you give a <!-- raw HTML omitted -->reply_type<!-- raw HTML omitted --><br />
+then any non-nil return value will be of this type. Unless it’s<br />
+%G_VARIANT_TYPE_UNIT, the <!-- raw HTML omitted -->reply_type<!-- raw HTML omitted --> will be a tuple containing one or more<br />
 values.</p>
-<p>If the <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> #GVariant is floating, it is consumed. This allows
+<p>If the <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> #GVariant is floating, it is consumed. This allows<br />
 convenient 'inline' use of g_variant_new(), e.g.:</p>
 <pre class="code ruby"><code class="ruby"> g_dbus_connection_call (connection,
                          &quot;org.freedesktop.StringThings&quot;,
@@ -2112,14 +2116,14 @@ convenient 'inline' use of g_variant_new(), e.g.:</p>
                          (GAsyncReadyCallback) two_strings_done,
                          NULL);
 </code></pre>
-<p>This is an asynchronous method. When the operation is finished,
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the
-[thread-default main context][g-main-context-push-thread-default]
-of the thread you are calling this method from. You can then call
-g_dbus_connection_call_finish() to get the result of the operation.
-See g_dbus_connection_call_sync() for the synchronous version of this
+<p>This is an asynchronous method. When the operation is finished,<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the<br />
+[thread-default main context][g-main-context-push-thread-default]<br />
+of the thread you are calling this method from. You can then call<br />
+g_dbus_connection_call_finish() to get the result of the operation.<br />
+See g_dbus_connection_call_sync() for the synchronous version of this<br />
 function.</p>
-<p>If <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is nil then the D-Bus method call message will be sent with
+<p>If <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is nil then the D-Bus method call message will be sent with<br />
 the %G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED flag set.</p>
 
 
@@ -2139,7 +2143,7 @@ the %G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED flag set.</p>
       
       
         &mdash;
-        <div class='inline'><p>a unique or well-known bus name or nil if
+        <div class='inline'><p>a unique or well-known bus name or nil if<br />
 <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is not a message bus connection</p>
 </div>
       
@@ -2200,7 +2204,7 @@ the %G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED flag set.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GVariant tuple with parameters for the method
+        <div class='inline'><p>a #GVariant tuple with parameters for the method<br />
 or nil if not passing parameters</p>
 </div>
       
@@ -2216,7 +2220,7 @@ or nil if not passing parameters</p>
       
       
         &mdash;
-        <div class='inline'><p>the expected type of the reply (which will be a
+        <div class='inline'><p>the expected type of the reply (which will be a<br />
 tuple), or nil</p>
 </div>
       
@@ -2247,7 +2251,7 @@ tuple), or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>the timeout in milliseconds, -1 to use the default
+        <div class='inline'><p>the timeout in milliseconds, -1 to use the default<br />
 timeout or %G_MAXINT for no timeout</p>
 </div>
       
@@ -2278,8 +2282,8 @@ timeout or %G_MAXINT for no timeout</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback to call when the request
-is satisfied or nil if you don't care about the result of the
+        <div class='inline'><p>a GAsync::ReadyCallback to call when the request<br />
+is satisfied or nil if you don't care about the result of the<br />
 method invocation</p>
 </div>
       
@@ -2367,7 +2371,7 @@ method invocation</p>
       
       
         &mdash;
-        <div class='inline'><p>nil if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set. Otherwise a non-floating
+        <div class='inline'><p>nil if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set. Otherwise a non-floating<br />
 #GVariant tuple with return values. Free with g_variant_unref().</p>
 </div>
       
@@ -2389,19 +2393,19 @@ method invocation</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Synchronously invokes the <!-- raw HTML omitted -->method_name<!-- raw HTML omitted --> method on the
-<!-- raw HTML omitted -->interface_name<!-- raw HTML omitted --> D-Bus interface on the remote object at
+    <p>Synchronously invokes the <!-- raw HTML omitted -->method_name<!-- raw HTML omitted --> method on the<br />
+<!-- raw HTML omitted -->interface_name<!-- raw HTML omitted --> D-Bus interface on the remote object at<br />
 <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> owned by <!-- raw HTML omitted -->bus_name<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is closed then the operation will fail with
-%G_IO_ERROR_CLOSED. If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is canceled, the
-operation will fail with %G_IO_ERROR_CANCELLED. If <!-- raw HTML omitted -->parameters<!-- raw HTML omitted -->
-contains a value not compatible with the D-Bus protocol, the operation
+<p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is closed then the operation will fail with<br />
+%G_IO_ERROR_CLOSED. If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is canceled, the<br />
+operation will fail with %G_IO_ERROR_CANCELLED. If <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --><br />
+contains a value not compatible with the D-Bus protocol, the operation<br />
 fails with %G_IO_ERROR_INVALID_ARGUMENT.</p>
-<p>If <!-- raw HTML omitted -->reply_type<!-- raw HTML omitted --> is non-nil then the reply will be checked for having
-this type and an error will be raised if it does not match.  Said
-another way, if you give a <!-- raw HTML omitted -->reply_type<!-- raw HTML omitted --> then any non-nil return
+<p>If <!-- raw HTML omitted -->reply_type<!-- raw HTML omitted --> is non-nil then the reply will be checked for having<br />
+this type and an error will be raised if it does not match.  Said<br />
+another way, if you give a <!-- raw HTML omitted -->reply_type<!-- raw HTML omitted --> then any non-nil return<br />
 value will be of this type.</p>
-<p>If the <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> #GVariant is floating, it is consumed.
+<p>If the <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> #GVariant is floating, it is consumed.<br />
 This allows convenient 'inline' use of g_variant_new(), e.g.:</p>
 <pre class="code ruby"><code class="ruby"> g_dbus_connection_call_sync (connection,
                               &quot;org.freedesktop.StringThings&quot;,
@@ -2417,8 +2421,8 @@ This allows convenient 'inline' use of g_variant_new(), e.g.:</p>
                               NULL,
                               &amp;error);
 </code></pre>
-<p>The calling thread is blocked until a reply is received. See
-g_dbus_connection_call() for the asynchronous version of
+<p>The calling thread is blocked until a reply is received. See<br />
+g_dbus_connection_call() for the asynchronous version of<br />
 this method.</p>
 
 
@@ -2438,7 +2442,7 @@ this method.</p>
       
       
         &mdash;
-        <div class='inline'><p>a unique or well-known bus name or nil if
+        <div class='inline'><p>a unique or well-known bus name or nil if<br />
 <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is not a message bus connection</p>
 </div>
       
@@ -2499,7 +2503,7 @@ this method.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GVariant tuple with parameters for the method
+        <div class='inline'><p>a #GVariant tuple with parameters for the method<br />
 or nil if not passing parameters</p>
 </div>
       
@@ -2545,7 +2549,7 @@ or nil if not passing parameters</p>
       
       
         &mdash;
-        <div class='inline'><p>the timeout in milliseconds, -1 to use the default
+        <div class='inline'><p>the timeout in milliseconds, -1 to use the default<br />
 timeout or %G_MAXINT for no timeout</p>
 </div>
       
@@ -2579,7 +2583,7 @@ timeout or %G_MAXINT for no timeout</p>
       
       
         &mdash;
-        <div class='inline'><p>nil if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set. Otherwise a non-floating
+        <div class='inline'><p>nil if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set. Otherwise a non-floating<br />
 #GVariant tuple with return values. Free with g_variant_unref().</p>
 </div>
       
@@ -2602,15 +2606,15 @@ timeout or %G_MAXINT for no timeout</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Like g_dbus_connection_call() but also takes a GUnix::FDList object.</p>
-<p>The file descriptors normally correspond to %G_VARIANT_TYPE_HANDLE
-values in the body of the message. For example, if a message contains
-two file descriptors, <!-- raw HTML omitted -->fd_list<!-- raw HTML omitted --> would have length 2, and
-<code>g_variant_new_handle (0)</code> and <code>g_variant_new_handle (1)</code> would appear
-somewhere in the body of the message (not necessarily in that order!)
+<p>The file descriptors normally correspond to %G_VARIANT_TYPE_HANDLE<br />
+values in the body of the message. For example, if a message contains<br />
+two file descriptors, <!-- raw HTML omitted -->fd_list<!-- raw HTML omitted --> would have length 2, and<br />
+<code>g_variant_new_handle (0)</code> and <code>g_variant_new_handle (1)</code> would appear<br />
+somewhere in the body of the message (not necessarily in that order!)<br />
 to represent the file descriptors at indexes 0 and 1 respectively.</p>
-<p>When designing D-Bus APIs that are intended to be interoperable,
-please note that non-GDBus implementations of D-Bus can usually only
-access file descriptors if they are referenced in this way by a
+<p>When designing D-Bus APIs that are intended to be interoperable,<br />
+please note that non-GDBus implementations of D-Bus can usually only<br />
+access file descriptors if they are referenced in this way by a<br />
 value of type %G_VARIANT_TYPE_HANDLE in the body of the message.</p>
 <p>This method is only available on UNIX.</p>
 
@@ -2631,7 +2635,7 @@ value of type %G_VARIANT_TYPE_HANDLE in the body of the message.</p>
       
       
         &mdash;
-        <div class='inline'><p>a unique or well-known bus name or nil if
+        <div class='inline'><p>a unique or well-known bus name or nil if<br />
 <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is not a message bus connection</p>
 </div>
       
@@ -2692,7 +2696,7 @@ value of type %G_VARIANT_TYPE_HANDLE in the body of the message.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GVariant tuple with parameters for the method
+        <div class='inline'><p>a #GVariant tuple with parameters for the method<br />
 or nil if not passing parameters</p>
 </div>
       
@@ -2738,7 +2742,7 @@ or nil if not passing parameters</p>
       
       
         &mdash;
-        <div class='inline'><p>the timeout in milliseconds, -1 to use the default
+        <div class='inline'><p>the timeout in milliseconds, -1 to use the default<br />
 timeout or %G_MAXINT for no timeout</p>
 </div>
       
@@ -2784,8 +2788,8 @@ timeout or %G_MAXINT for no timeout</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback to call when the request is
-satisfied or nil if you don't * care about the result of the
+        <div class='inline'><p>a GAsync::ReadyCallback to call when the request is<br />
+satisfied or nil if you don't * care about the result of the<br />
 method invocation</p>
 </div>
       
@@ -2837,14 +2841,14 @@ method invocation</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finishes an operation started with g_dbus_connection_call_with_unix_fd_list().</p>
-<p>The file descriptors normally correspond to %G_VARIANT_TYPE_HANDLE
-values in the body of the message. For example,
-if g_variant_get_handle() returns 5, that is intended to be a reference
-to the file descriptor that can be accessed by
+<p>The file descriptors normally correspond to %G_VARIANT_TYPE_HANDLE<br />
+values in the body of the message. For example,<br />
+if g_variant_get_handle() returns 5, that is intended to be a reference<br />
+to the file descriptor that can be accessed by<br />
 <code>g_unix_fd_list_get (*out_fd_list, 5, ...)</code>.</p>
-<p>When designing D-Bus APIs that are intended to be interoperable,
-please note that non-GDBus implementations of D-Bus can usually only
-access file descriptors if they are referenced in this way by a
+<p>When designing D-Bus APIs that are intended to be interoperable,<br />
+please note that non-GDBus implementations of D-Bus can usually only<br />
+access file descriptors if they are referenced in this way by a<br />
 value of type %G_VARIANT_TYPE_HANDLE in the body of the message.</p>
 
 
@@ -2879,7 +2883,7 @@ value of type %G_VARIANT_TYPE_HANDLE in the body of the message.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::Result obtained from the #GAsyncReadyCallback passed to
+        <div class='inline'><p>a GAsync::Result obtained from the #GAsyncReadyCallback passed to<br />
 g_dbus_connection_call_with_unix_fd_list()</p>
 </div>
       
@@ -2898,7 +2902,7 @@ g_dbus_connection_call_with_unix_fd_list()</p>
       
       
         &mdash;
-        <div class='inline'><p>nil if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set. Otherwise a non-floating
+        <div class='inline'><p>nil if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set. Otherwise a non-floating<br />
 #GVariant tuple with return values. Free with g_variant_unref().</p>
 </div>
       
@@ -2920,8 +2924,8 @@ g_dbus_connection_call_with_unix_fd_list()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like g_dbus_connection_call_sync() but also takes and returns GUnix::FDList objects.
-See g_dbus_connection_call_with_unix_fd_list() and
+    <p>Like g_dbus_connection_call_sync() but also takes and returns GUnix::FDList objects.<br />
+See g_dbus_connection_call_with_unix_fd_list() and<br />
 g_dbus_connection_call_with_unix_fd_list_finish() for more details.</p>
 <p>This method is only available on UNIX.</p>
 
@@ -2942,7 +2946,7 @@ g_dbus_connection_call_with_unix_fd_list_finish() for more details.</p>
       
       
         &mdash;
-        <div class='inline'><p>a unique or well-known bus name or nil
+        <div class='inline'><p>a unique or well-known bus name or nil<br />
 if <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is not a message bus connection</p>
 </div>
       
@@ -3003,7 +3007,7 @@ if <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is not a message
       
       
         &mdash;
-        <div class='inline'><p>a #GVariant tuple with parameters for
+        <div class='inline'><p>a #GVariant tuple with parameters for<br />
 the method or nil if not passing parameters</p>
 </div>
       
@@ -3049,7 +3053,7 @@ the method or nil if not passing parameters</p>
       
       
         &mdash;
-        <div class='inline'><p>the timeout in milliseconds, -1 to use the default
+        <div class='inline'><p>the timeout in milliseconds, -1 to use the default<br />
 timeout or %G_MAXINT for no timeout</p>
 </div>
       
@@ -3113,7 +3117,7 @@ timeout or %G_MAXINT for no timeout</p>
       
       
         &mdash;
-        <div class='inline'><p>nil if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set. Otherwise a non-floating
+        <div class='inline'><p>nil if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set. Otherwise a non-floating<br />
 #GVariant tuple with return values. Free with g_variant_unref().</p>
 </div>
       
@@ -3135,7 +3139,7 @@ timeout or %G_MAXINT for no timeout</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Flags from the GDBus::CapabilityFlags enumeration
+    <p>Flags from the GDBus::CapabilityFlags enumeration<br />
 representing connection features negotiated with the other peer.</p>
 
 
@@ -3175,7 +3179,7 @@ representing connection features negotiated with the other peer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Flags from the GDBus::CapabilityFlags enumeration
+    <p>Flags from the GDBus::CapabilityFlags enumeration<br />
 representing connection features negotiated with the other peer.</p>
 
 
@@ -3243,25 +3247,25 @@ representing connection features negotiated with the other peer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Closes <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->. Note that this never causes the process to
-exit (this might only happen if the other end of a shared message
+    <p>Closes <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->. Note that this never causes the process to<br />
+exit (this might only happen if the other end of a shared message<br />
 bus connection disconnects, see GDBus::Connection:exit-on-close).</p>
-<p>Once the connection is closed, operations such as sending a message
-will return with the error %G_IO_ERROR_CLOSED. Closing a connection
-will not automatically flush the connection so queued messages may
+<p>Once the connection is closed, operations such as sending a message<br />
+will return with the error %G_IO_ERROR_CLOSED. Closing a connection<br />
+will not automatically flush the connection so queued messages may<br />
 be lost. Use g_dbus_connection_flush() if you need such guarantees.</p>
-<p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is already closed, this method fails with
+<p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is already closed, this method fails with<br />
 %G_IO_ERROR_CLOSED.</p>
-<p>When <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> has been closed, the GDBus::Connection::closed
-signal is emitted in the
-[thread-default main context][g-main-context-push-thread-default]
+<p>When <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> has been closed, the GDBus::Connection::closed<br />
+signal is emitted in the<br />
+[thread-default main context][g-main-context-push-thread-default]<br />
 of the thread that <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> was constructed in.</p>
-<p>This is an asynchronous method. When the operation is finished,
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the
-[thread-default main context][g-main-context-push-thread-default]
-of the thread you are calling this method from. You can
-then call g_dbus_connection_close_finish() to get the result of the
-operation. See g_dbus_connection_close_sync() for the synchronous
+<p>This is an asynchronous method. When the operation is finished,<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the<br />
+[thread-default main context][g-main-context-push-thread-default]<br />
+of the thread you are calling this method from. You can<br />
+then call g_dbus_connection_close_finish() to get the result of the<br />
+operation. See g_dbus_connection_close_sync() for the synchronous<br />
 version.</p>
 
 
@@ -3296,7 +3300,7 @@ version.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback to call when the request is
+        <div class='inline'><p>a GAsync::ReadyCallback to call when the request is<br />
 satisfied or nil if you don't care about the result</p>
 </div>
       
@@ -3366,7 +3370,7 @@ satisfied or nil if you don't care about the result</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::Result obtained from the #GAsyncReadyCallback passed
+        <div class='inline'><p>a GAsync::Result obtained from the #GAsyncReadyCallback passed<br />
 to g_dbus_connection_close()</p>
 </div>
       
@@ -3406,9 +3410,9 @@ to g_dbus_connection_close()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Synchronously closes <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->. The calling thread is blocked
-until this is done. See g_dbus_connection_close() for the
-asynchronous version of this method and more details about what it
+    <p>Synchronously closes <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->. The calling thread is blocked<br />
+until this is done. See g_dbus_connection_close() for the<br />
+asynchronous version of this method and more details about what it<br />
 does.</p>
 
 
@@ -3575,8 +3579,8 @@ does.</p>
   <div class="discussion">
     <p>Emits a signal.</p>
 <p>If the parameters GVariant is floating, it is consumed.</p>
-<p>This can only fail if <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> is not compatible with the D-Bus protocol
-(%G_IO_ERROR_INVALID_ARGUMENT), or if <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> has been closed
+<p>This can only fail if <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> is not compatible with the D-Bus protocol<br />
+(%G_IO_ERROR_INVALID_ARGUMENT), or if <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> has been closed<br />
 (%G_IO_ERROR_CLOSED).</p>
 
 
@@ -3596,7 +3600,7 @@ does.</p>
       
       
         &mdash;
-        <div class='inline'><p>the unique bus name for the destination
+        <div class='inline'><p>the unique bus name for the destination<br />
 for the signal or nil to emit to all listeners</p>
 </div>
       
@@ -3657,7 +3661,7 @@ for the signal or nil to emit to all listeners</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GVariant tuple with parameters for the signal
+        <div class='inline'><p>a #GVariant tuple with parameters for the signal<br />
 or nil if not passing parameters</p>
 </div>
       
@@ -3697,8 +3701,8 @@ or nil if not passing parameters</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether the process is terminated when <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is
-closed by the remote peer. See
+    <p>Gets whether the process is terminated when <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is<br />
+closed by the remote peer. See<br />
 GDBus::Connection:exit-on-close for more details.</p>
 
 
@@ -3717,7 +3721,7 @@ GDBus::Connection:exit-on-close for more details.</p>
       
       
         &mdash;
-        <div class='inline'><p>whether the process is terminated when <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is
+        <div class='inline'><p>whether the process is terminated when <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is<br />
 closed by the remote peer</p>
 </div>
       
@@ -3739,10 +3743,10 @@ closed by the remote peer</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A boolean specifying whether the process will be terminated (by
-calling <code>raise(SIGTERM)</code>) if the connection is closed by the
+    <p>A boolean specifying whether the process will be terminated (by<br />
+calling <code>raise(SIGTERM)</code>) if the connection is closed by the<br />
 remote peer.</p>
-<p>Note that GDBus::Connection objects returned by g_bus_get_finish()
+<p>Note that GDBus::Connection objects returned by g_bus_get_finish()<br />
 and g_bus_get_sync() will (usually) have this property set to true.</p>
 
 
@@ -3810,10 +3814,10 @@ and g_bus_get_sync() will (usually) have this property set to true.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A boolean specifying whether the process will be terminated (by
-calling <code>raise(SIGTERM)</code>) if the connection is closed by the
+    <p>A boolean specifying whether the process will be terminated (by<br />
+calling <code>raise(SIGTERM)</code>) if the connection is closed by the<br />
 remote peer.</p>
-<p>Note that GDBus::Connection objects returned by g_bus_get_finish()
+<p>Note that GDBus::Connection objects returned by g_bus_get_finish()<br />
 and g_bus_get_sync() will (usually) have this property set to true.</p>
 
 
@@ -3854,21 +3858,21 @@ and g_bus_get_sync() will (usually) have this property set to true.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Exports <!-- raw HTML omitted -->action_group<!-- raw HTML omitted --> on <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> at <!-- raw HTML omitted -->object_path<!-- raw HTML omitted -->.</p>
-<p>The implemented D-Bus API should be considered private.  It is
+<p>The implemented D-Bus API should be considered private.  It is<br />
 subject to change in the future.</p>
-<p>A given object path can only have one action group exported on it.
-If this constraint is violated, the export will fail and 0 will be
+<p>A given object path can only have one action group exported on it.<br />
+If this constraint is violated, the export will fail and 0 will be<br />
 returned (with <!-- raw HTML omitted -->error<!-- raw HTML omitted --> set accordingly).</p>
-<p>You can unexport the action group using
-g_dbus_connection_unexport_action_group() with the return value of
+<p>You can unexport the action group using<br />
+g_dbus_connection_unexport_action_group() with the return value of<br />
 this function.</p>
-<p>The thread default main context is taken at the time of this call.
-All incoming action activations and state change requests are
-reported from this context.  Any changes on the action group that
-cause it to emit signals must also come from this same context.
-Since incoming action activations and state change requests are
-rather likely to cause changes on the action group, this effectively
-limits a given action group to being exported from only one main
+<p>The thread default main context is taken at the time of this call.<br />
+All incoming action activations and state change requests are<br />
+reported from this context.  Any changes on the action group that<br />
+cause it to emit signals must also come from this same context.<br />
+Since incoming action activations and state change requests are<br />
+rather likely to cause changes on the action group, this effectively<br />
+limits a given action group to being exported from only one main<br />
 context.</p>
 
 
@@ -3943,16 +3947,16 @@ context.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Exports <!-- raw HTML omitted -->menu<!-- raw HTML omitted --> on <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> at <!-- raw HTML omitted -->object_path<!-- raw HTML omitted -->.</p>
-<p>The implemented D-Bus API should be considered private.
+<p>The implemented D-Bus API should be considered private.<br />
 It is subject to change in the future.</p>
-<p>An object path can only have one menu model exported on it. If this
-constraint is violated, the export will fail and 0 will be
+<p>An object path can only have one menu model exported on it. If this<br />
+constraint is violated, the export will fail and 0 will be<br />
 returned (with <!-- raw HTML omitted -->error<!-- raw HTML omitted --> set accordingly).</p>
-<p>Exporting menus with sections containing more than
-%G_MENU_EXPORTER_MAX_SECTION_SIZE items is not supported and results in
+<p>Exporting menus with sections containing more than<br />
+%G_MENU_EXPORTER_MAX_SECTION_SIZE items is not supported and results in<br />
 undefined behavior.</p>
-<p>You can unexport the menu model using
-g_dbus_connection_unexport_menu_model() with the return value of
+<p>You can unexport the menu model using<br />
+g_dbus_connection_unexport_menu_model() with the return value of<br />
 this function.</p>
 
 
@@ -4132,18 +4136,18 @@ this function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously flushes <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->, that is, writes all queued
-outgoing message to the transport and then flushes the transport
-(using g_output_stream_flush_async()). This is useful in programs
-that wants to emit a D-Bus signal and then exit immediately. Without
-flushing the connection, there is no guaranteed that the message has
+    <p>Asynchronously flushes <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->, that is, writes all queued<br />
+outgoing message to the transport and then flushes the transport<br />
+(using g_output_stream_flush_async()). This is useful in programs<br />
+that wants to emit a D-Bus signal and then exit immediately. Without<br />
+flushing the connection, there is no guaranteed that the message has<br />
 been sent to the networking buffers in the OS kernel.</p>
-<p>This is an asynchronous method. When the operation is finished,
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the
-[thread-default main context][g-main-context-push-thread-default]
-of the thread you are calling this method from. You can
-then call g_dbus_connection_flush_finish() to get the result of the
-operation. See g_dbus_connection_flush_sync() for the synchronous
+<p>This is an asynchronous method. When the operation is finished,<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the<br />
+[thread-default main context][g-main-context-push-thread-default]<br />
+of the thread you are calling this method from. You can<br />
+then call g_dbus_connection_flush_finish() to get the result of the<br />
+operation. See g_dbus_connection_flush_sync() for the synchronous<br />
 version.</p>
 
 
@@ -4178,7 +4182,7 @@ version.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback to call when the
+        <div class='inline'><p>a GAsync::ReadyCallback to call when the<br />
 request is satisfied or nil if you don't care about the result</p>
 </div>
       
@@ -4248,7 +4252,7 @@ request is satisfied or nil if you don't care about the result</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::Result obtained from the #GAsyncReadyCallback passed
+        <div class='inline'><p>a GAsync::Result obtained from the #GAsyncReadyCallback passed<br />
 to g_dbus_connection_flush()</p>
 </div>
       
@@ -4288,9 +4292,9 @@ to g_dbus_connection_flush()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Synchronously flushes <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->. The calling thread is blocked
-until this is done. See g_dbus_connection_flush() for the
-asynchronous version of this method and more details about what it
+    <p>Synchronously flushes <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->. The calling thread is blocked<br />
+until this is done. See g_dbus_connection_flush() for the<br />
+asynchronous version of this method and more details about what it<br />
 does.</p>
 
 
@@ -4349,23 +4353,23 @@ does.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The GUID of the peer performing the role of server when
+    <p>The GUID of the peer performing the role of server when<br />
 authenticating.</p>
-<p>If you are constructing a GDBus::Connection and pass
-%G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER in the
-GDBus::Connection:flags property then you <strong>must</strong> also set this
+<p>If you are constructing a GDBus::Connection and pass<br />
+%G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER in the<br />
+GDBus::Connection:flags property then you <strong>must</strong> also set this<br />
 property to a valid guid.</p>
-<p>If you are constructing a GDBus::Connection and pass
-%G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT in the
-GDBus::Connection:flags property you will be able to read the GUID
-of the other peer here after the connection has been successfully
+<p>If you are constructing a GDBus::Connection and pass<br />
+%G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT in the<br />
+GDBus::Connection:flags property you will be able to read the GUID<br />
+of the other peer here after the connection has been successfully<br />
 initialized.</p>
-<p>Note that the
-<a href="https://dbus.freedesktop.org/doc/dbus-specification.html#addresses">D-Bus specification</a>
-uses the term ‘UUID’ to refer to this, whereas GLib consistently uses the
+<p>Note that the<br />
+<a href="https://dbus.freedesktop.org/doc/dbus-specification.html#addresses">D-Bus specification</a><br />
+uses the term ‘UUID’ to refer to this, whereas GLib consistently uses the<br />
 term ‘GUID’ for historical reasons.</p>
-<p>Despite its name, the format of GDBus::Connection:guid does not follow
-<a href="https://datatracker.ietf.org/doc/html/rfc4122">RFC 4122</a> or the Microsoft
+<p>Despite its name, the format of GDBus::Connection:guid does not follow<br />
+<a href="https://datatracker.ietf.org/doc/html/rfc4122">RFC 4122</a> or the Microsoft<br />
 GUID format.</p>
 
 
@@ -4405,23 +4409,23 @@ GUID format.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The GUID of the peer performing the role of server when
+    <p>The GUID of the peer performing the role of server when<br />
 authenticating.</p>
-<p>If you are constructing a GDBus::Connection and pass
-%G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER in the
-GDBus::Connection:flags property then you <strong>must</strong> also set this
+<p>If you are constructing a GDBus::Connection and pass<br />
+%G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER in the<br />
+GDBus::Connection:flags property then you <strong>must</strong> also set this<br />
 property to a valid guid.</p>
-<p>If you are constructing a GDBus::Connection and pass
-%G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT in the
-GDBus::Connection:flags property you will be able to read the GUID
-of the other peer here after the connection has been successfully
+<p>If you are constructing a GDBus::Connection and pass<br />
+%G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT in the<br />
+GDBus::Connection:flags property you will be able to read the GUID<br />
+of the other peer here after the connection has been successfully<br />
 initialized.</p>
-<p>Note that the
-<a href="https://dbus.freedesktop.org/doc/dbus-specification.html#addresses">D-Bus specification</a>
-uses the term ‘UUID’ to refer to this, whereas GLib consistently uses the
+<p>Note that the<br />
+<a href="https://dbus.freedesktop.org/doc/dbus-specification.html#addresses">D-Bus specification</a><br />
+uses the term ‘UUID’ to refer to this, whereas GLib consistently uses the<br />
 term ‘GUID’ for historical reasons.</p>
-<p>Despite its name, the format of GDBus::Connection:guid does not follow
-<a href="https://datatracker.ietf.org/doc/html/rfc4122">RFC 4122</a> or the Microsoft
+<p>Despite its name, the format of GDBus::Connection:guid does not follow<br />
+<a href="https://datatracker.ietf.org/doc/html/rfc4122">RFC 4122</a> or the Microsoft<br />
 GUID format.</p>
 
 
@@ -4528,10 +4532,10 @@ GUID format.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the last serial number assigned to a GDBus::Message on
-the current thread. This includes messages sent via both low-level
-API such as g_dbus_connection_send_message() as well as
-high-level API such as g_dbus_connection_emit_signal(),
+    <p>Retrieves the last serial number assigned to a GDBus::Message on<br />
+the current thread. This includes messages sent via both low-level<br />
+API such as g_dbus_connection_send_message() as well as<br />
+high-level API such as g_dbus_connection_emit_signal(),<br />
 g_dbus_connection_call() or g_dbus_proxy_call().</p>
 
 
@@ -4550,7 +4554,7 @@ g_dbus_connection_call() or g_dbus_proxy_call().</p>
       
       
         &mdash;
-        <div class='inline'><p>the last used serial or zero when no message has been sent
+        <div class='inline'><p>the last used serial or zero when no message has been sent<br />
 within the current thread</p>
 </div>
       
@@ -4572,13 +4576,13 @@ within the current thread</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the credentials of the authenticated peer. This will always
-return nil unless <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> acted as a server
-(e.g. %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER was passed)
-when set up and the client passed credentials as part of the
+    <p>Gets the credentials of the authenticated peer. This will always<br />
+return nil unless <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> acted as a server<br />
+(e.g. %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER was passed)<br />
+when set up and the client passed credentials as part of the<br />
 authentication process.</p>
-<p>In a message bus setup, the message bus is always the server and
-each application is a client. So this method will always return
+<p>In a message bus setup, the message bus is always the server and<br />
+each application is a client. So this method will always return<br />
 nil for message bus clients.</p>
 
 
@@ -4597,7 +4601,7 @@ nil for message bus clients.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GCredentials or nil if not
+        <div class='inline'><p>a #GCredentials or nil if not<br />
 available. Do not free this object, it is owned by <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->.</p>
 </div>
       
@@ -4619,34 +4623,34 @@ available. Do not free this object, it is owned by <!-- raw HTML omitted -->conn
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers callbacks for exported objects at <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> with the
+    <p>Registers callbacks for exported objects at <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> with the<br />
 D-Bus interface that is described in <!-- raw HTML omitted -->interface_info<!-- raw HTML omitted -->.</p>
-<p>Calls to functions in <!-- raw HTML omitted -->vtable<!-- raw HTML omitted --> (and <!-- raw HTML omitted -->user_data_free_func<!-- raw HTML omitted -->) will happen
-in the
-[thread-default main context][g-main-context-push-thread-default]
+<p>Calls to functions in <!-- raw HTML omitted -->vtable<!-- raw HTML omitted --> (and <!-- raw HTML omitted -->user_data_free_func<!-- raw HTML omitted -->) will happen<br />
+in the<br />
+[thread-default main context][g-main-context-push-thread-default]<br />
 of the thread you are calling this method from.</p>
-<p>Note that all #GVariant values passed to functions in <!-- raw HTML omitted -->vtable<!-- raw HTML omitted --> will match
-the signature given in <!-- raw HTML omitted -->interface_info<!-- raw HTML omitted --> - if a remote caller passes
-incorrect values, the <code>org.freedesktop.DBus.Error.InvalidArgs</code>
+<p>Note that all #GVariant values passed to functions in <!-- raw HTML omitted -->vtable<!-- raw HTML omitted --> will match<br />
+the signature given in <!-- raw HTML omitted -->interface_info<!-- raw HTML omitted --> - if a remote caller passes<br />
+incorrect values, the <code>org.freedesktop.DBus.Error.InvalidArgs</code><br />
 is returned to the remote caller.</p>
-<p>Additionally, if the remote caller attempts to invoke methods or
-access properties not mentioned in <!-- raw HTML omitted -->interface_info<!-- raw HTML omitted --> the
-<code>org.freedesktop.DBus.Error.UnknownMethod</code> resp.
-<code>org.freedesktop.DBus.Error.InvalidArgs</code> errors
+<p>Additionally, if the remote caller attempts to invoke methods or<br />
+access properties not mentioned in <!-- raw HTML omitted -->interface_info<!-- raw HTML omitted --> the<br />
+<code>org.freedesktop.DBus.Error.UnknownMethod</code> resp.<br />
+<code>org.freedesktop.DBus.Error.InvalidArgs</code> errors<br />
 are returned to the caller.</p>
-<p>It is considered a programming error if the
-GDBus::InterfaceGetPropertyFunc function in <!-- raw HTML omitted -->vtable<!-- raw HTML omitted --> returns a
+<p>It is considered a programming error if the<br />
+GDBus::InterfaceGetPropertyFunc function in <!-- raw HTML omitted -->vtable<!-- raw HTML omitted --> returns a<br />
 #GVariant of incorrect type.</p>
-<p>If an existing callback is already registered at <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> and
+<p>If an existing callback is already registered at <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> and<br />
 <!-- raw HTML omitted -->interface_name<!-- raw HTML omitted -->, then <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set to %G_IO_ERROR_EXISTS.</p>
-<p>GDBus automatically implements the standard D-Bus interfaces
-org.freedesktop.DBus.Properties, org.freedesktop.DBus.Introspectable
-and org.freedesktop.Peer, so you don't have to implement those for the
-objects you export. You can implement org.freedesktop.DBus.Properties
+<p>GDBus automatically implements the standard D-Bus interfaces<br />
+org.freedesktop.DBus.Properties, org.freedesktop.DBus.Introspectable<br />
+and org.freedesktop.Peer, so you don't have to implement those for the<br />
+objects you export. You can implement org.freedesktop.DBus.Properties<br />
 yourself, e.g. to handle getting and setting of properties asynchronously.</p>
-<p>Note that the reference count on <!-- raw HTML omitted -->interface_info<!-- raw HTML omitted --> will be
-incremented by 1 (unless allocated statically, e.g. if the
-reference count is -1, see g_dbus_interface_info_ref()) for as long
+<p>Note that the reference count on <!-- raw HTML omitted -->interface_info<!-- raw HTML omitted --> will be<br />
+incremented by 1 (unless allocated statically, e.g. if the<br />
+reference count is -1, see g_dbus_interface_info_ref()) for as long<br />
 as the object is exported. Also note that <!-- raw HTML omitted -->vtable<!-- raw HTML omitted --> will be copied.</p>
 <p>See this [server][gdbus-server] for an example of how to use this method.</p>
 
@@ -4745,7 +4749,7 @@ as the object is exported. Also note that <!-- raw HTML omitted -->vtable<!-- ra
       
       
         &mdash;
-        <div class='inline'><p>0 if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, otherwise a registration id (never 0)
+        <div class='inline'><p>0 if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, otherwise a registration id (never 0)<br />
 that can be used with g_dbus_connection_unregister_object()</p>
 </div>
       
@@ -4767,8 +4771,8 @@ that can be used with g_dbus_connection_unregister_object()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Version of g_dbus_connection_register_object() using closures instead of a
-GDBus::InterfaceVTable for easier binding in other languages.
+    <p>Version of g_dbus_connection_register_object() using closures instead of a<br />
+GDBus::InterfaceVTable for easier binding in other languages.<br />
 that can be used with g_dbus_connection_unregister_object() .</p>
 
 
@@ -4888,32 +4892,32 @@ that can be used with g_dbus_connection_unregister_object() .</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Registers a whole subtree of dynamic objects.</p>
-<p>The <!-- raw HTML omitted -->enumerate<!-- raw HTML omitted --> and <!-- raw HTML omitted -->introspection<!-- raw HTML omitted --> functions in <!-- raw HTML omitted -->vtable<!-- raw HTML omitted --> are used to
-convey, to remote callers, what nodes exist in the subtree rooted
+<p>The <!-- raw HTML omitted -->enumerate<!-- raw HTML omitted --> and <!-- raw HTML omitted -->introspection<!-- raw HTML omitted --> functions in <!-- raw HTML omitted -->vtable<!-- raw HTML omitted --> are used to<br />
+convey, to remote callers, what nodes exist in the subtree rooted<br />
 by <!-- raw HTML omitted -->object_path<!-- raw HTML omitted -->.</p>
-<p>When handling remote calls into any node in the subtree, first the
-<!-- raw HTML omitted -->enumerate<!-- raw HTML omitted --> function is used to check if the node exists. If the node exists
-or the %G_DBUS_SUBTREE_FLAGS_DISPATCH_TO_UNENUMERATED_NODES flag is set
-the <!-- raw HTML omitted -->introspection<!-- raw HTML omitted --> function is used to check if the node supports the
-requested method. If so, the <!-- raw HTML omitted -->dispatch<!-- raw HTML omitted --> function is used to determine
-where to dispatch the call. The collected GDBus::InterfaceVTable and
-#gpointer will be used to call into the interface vtable for processing
+<p>When handling remote calls into any node in the subtree, first the<br />
+<!-- raw HTML omitted -->enumerate<!-- raw HTML omitted --> function is used to check if the node exists. If the node exists<br />
+or the %G_DBUS_SUBTREE_FLAGS_DISPATCH_TO_UNENUMERATED_NODES flag is set<br />
+the <!-- raw HTML omitted -->introspection<!-- raw HTML omitted --> function is used to check if the node supports the<br />
+requested method. If so, the <!-- raw HTML omitted -->dispatch<!-- raw HTML omitted --> function is used to determine<br />
+where to dispatch the call. The collected GDBus::InterfaceVTable and<br />
+#gpointer will be used to call into the interface vtable for processing<br />
 the request.</p>
-<p>All calls into user-provided code will be invoked in the
-[thread-default main context][g-main-context-push-thread-default]
+<p>All calls into user-provided code will be invoked in the<br />
+[thread-default main context][g-main-context-push-thread-default]<br />
 of the thread you are calling this method from.</p>
-<p>If an existing subtree is already registered at <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> or
+<p>If an existing subtree is already registered at <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> or<br />
 then <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set to %G_IO_ERROR_EXISTS.</p>
-<p>Note that it is valid to register regular objects (using
-g_dbus_connection_register_object()) in a subtree registered with
-g_dbus_connection_register_subtree() - if so, the subtree handler
-is tried as the last resort. One way to think about a subtree
-handler is to consider it a fallback handler for object paths not
+<p>Note that it is valid to register regular objects (using<br />
+g_dbus_connection_register_object()) in a subtree registered with<br />
+g_dbus_connection_register_subtree() - if so, the subtree handler<br />
+is tried as the last resort. One way to think about a subtree<br />
+handler is to consider it a fallback handler for object paths not<br />
 registered via g_dbus_connection_register_object() or other bindings.</p>
-<p>Note that <!-- raw HTML omitted -->vtable<!-- raw HTML omitted --> will be copied so you cannot change it after
+<p>Note that <!-- raw HTML omitted -->vtable<!-- raw HTML omitted --> will be copied so you cannot change it after<br />
 registration.</p>
-<p>See this [server][gdbus-subtree-server] for an example of how to use
-this method.
+<p>See this [server][gdbus-subtree-server] for an example of how to use<br />
+this method.<br />
 that can be used with g_dbus_connection_unregister_subtree()</p>
 
 
@@ -4948,7 +4952,7 @@ that can be used with g_dbus_connection_unregister_subtree()</p>
       
       
         &mdash;
-        <div class='inline'><p>a GDBus::SubtreeVTable to enumerate, introspect and
+        <div class='inline'><p>a GDBus::SubtreeVTable to enumerate, introspect and<br />
 dispatch nodes in the subtree</p>
 </div>
       
@@ -5034,11 +5038,11 @@ dispatch nodes in the subtree</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Removes a filter.</p>
-<p>Note that since filters run in a different thread, there is a race
-condition where it is possible that the filter will be running even
-after calling g_dbus_connection_remove_filter(), so you cannot just
-free data that the filter might be using. Instead, you should pass
-a GDestroy::Notify to g_dbus_connection_add_filter(), which will be
+<p>Note that since filters run in a different thread, there is a race<br />
+condition where it is possible that the filter will be running even<br />
+after calling g_dbus_connection_remove_filter(), so you cannot just<br />
+free data that the filter might be using. Instead, you should pass<br />
+a GDestroy::Notify to g_dbus_connection_add_filter(), which will be<br />
 called when it is guaranteed that the data is no longer needed.</p>
 
 
@@ -5094,21 +5098,21 @@ called when it is guaranteed that the data is no longer needed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asynchronously sends <!-- raw HTML omitted -->message<!-- raw HTML omitted --> to the peer represented by <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->.</p>
-<p>Unless <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> contain the
-%G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number
-will be assigned by <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> and set on <!-- raw HTML omitted -->message<!-- raw HTML omitted --> via
-g_dbus_message_set_serial(). If <!-- raw HTML omitted -->out_serial<!-- raw HTML omitted --> is not nil, then the
-serial number used will be written to this location prior to
-submitting the message to the underlying transport. While it has a <code>volatile</code>
-qualifier, this is a historical artifact and the argument passed to it should
+<p>Unless <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> contain the<br />
+%G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number<br />
+will be assigned by <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> and set on <!-- raw HTML omitted -->message<!-- raw HTML omitted --> via<br />
+g_dbus_message_set_serial(). If <!-- raw HTML omitted -->out_serial<!-- raw HTML omitted --> is not nil, then the<br />
+serial number used will be written to this location prior to<br />
+submitting the message to the underlying transport. While it has a <code>volatile</code><br />
+qualifier, this is a historical artifact and the argument passed to it should<br />
 not be <code>volatile</code>.</p>
-<p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is closed then the operation will fail with
-%G_IO_ERROR_CLOSED. If <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not well-formed,
+<p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is closed then the operation will fail with<br />
+%G_IO_ERROR_CLOSED. If <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not well-formed,<br />
 the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.</p>
-<p>See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
-for an example of how to use this low-level API to send and receive
+<p>See this [server][gdbus-server] and [client][gdbus-unix-fd-client]<br />
+for an example of how to use this low-level API to send and receive<br />
 UNIX file descriptors.</p>
-<p>Note that <!-- raw HTML omitted -->message<!-- raw HTML omitted --> must be unlocked, unless <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> contain the
+<p>Note that <!-- raw HTML omitted -->message<!-- raw HTML omitted --> must be unlocked, unless <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> contain the<br />
 %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.</p>
 
 
@@ -5158,7 +5162,7 @@ UNIX file descriptors.</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for serial number assigned
+        <div class='inline'><p>return location for serial number assigned<br />
 to <!-- raw HTML omitted -->message<!-- raw HTML omitted --> when sending it or nil</p>
 </div>
       
@@ -5177,7 +5181,7 @@ to <!-- raw HTML omitted -->message<!-- raw HTML omitted --> when sending it or 
       
       
         &mdash;
-        <div class='inline'><p>true if the message was well-formed and queued for
+        <div class='inline'><p>true if the message was well-formed and queued for<br />
 transmission, false if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
 </div>
       
@@ -5200,28 +5204,28 @@ transmission, false if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> i
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asynchronously sends <!-- raw HTML omitted -->message<!-- raw HTML omitted --> to the peer represented by <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->.</p>
-<p>Unless <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> contain the
-%G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number
-will be assigned by <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> and set on <!-- raw HTML omitted -->message<!-- raw HTML omitted --> via
-g_dbus_message_set_serial(). If <!-- raw HTML omitted -->out_serial<!-- raw HTML omitted --> is not nil, then the
-serial number used will be written to this location prior to
-submitting the message to the underlying transport. While it has a <code>volatile</code>
-qualifier, this is a historical artifact and the argument passed to it should
+<p>Unless <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> contain the<br />
+%G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number<br />
+will be assigned by <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> and set on <!-- raw HTML omitted -->message<!-- raw HTML omitted --> via<br />
+g_dbus_message_set_serial(). If <!-- raw HTML omitted -->out_serial<!-- raw HTML omitted --> is not nil, then the<br />
+serial number used will be written to this location prior to<br />
+submitting the message to the underlying transport. While it has a <code>volatile</code><br />
+qualifier, this is a historical artifact and the argument passed to it should<br />
 not be <code>volatile</code>.</p>
-<p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is closed then the operation will fail with
-%G_IO_ERROR_CLOSED. If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is canceled, the operation will
-fail with %G_IO_ERROR_CANCELLED. If <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not well-formed,
+<p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is closed then the operation will fail with<br />
+%G_IO_ERROR_CLOSED. If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is canceled, the operation will<br />
+fail with %G_IO_ERROR_CANCELLED. If <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not well-formed,<br />
 the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.</p>
-<p>This is an asynchronous method. When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted -->
-will be invoked in the
-[thread-default main context][g-main-context-push-thread-default]
-of the thread you are calling this method from. You can then call
-g_dbus_connection_send_message_with_reply_finish() to get the result of the operation.
+<p>This is an asynchronous method. When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --><br />
+will be invoked in the<br />
+[thread-default main context][g-main-context-push-thread-default]<br />
+of the thread you are calling this method from. You can then call<br />
+g_dbus_connection_send_message_with_reply_finish() to get the result of the operation.<br />
 See g_dbus_connection_send_message_with_reply_sync() for the synchronous version.</p>
-<p>Note that <!-- raw HTML omitted -->message<!-- raw HTML omitted --> must be unlocked, unless <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> contain the
+<p>Note that <!-- raw HTML omitted -->message<!-- raw HTML omitted --> must be unlocked, unless <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> contain the<br />
 %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.</p>
-<p>See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
-for an example of how to use this low-level API to send and receive
+<p>See this [server][gdbus-server] and [client][gdbus-unix-fd-client]<br />
+for an example of how to use this low-level API to send and receive<br />
 UNIX file descriptors.</p>
 
 
@@ -5271,7 +5275,7 @@ UNIX file descriptors.</p>
       
       
         &mdash;
-        <div class='inline'><p>the timeout in milliseconds, -1 to use the default
+        <div class='inline'><p>the timeout in milliseconds, -1 to use the default<br />
 timeout or %G_MAXINT for no timeout</p>
 </div>
       
@@ -5287,7 +5291,7 @@ timeout or %G_MAXINT for no timeout</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for serial number assigned
+        <div class='inline'><p>return location for serial number assigned<br />
 to <!-- raw HTML omitted -->message<!-- raw HTML omitted --> when sending it or nil</p>
 </div>
       
@@ -5318,7 +5322,7 @@ to <!-- raw HTML omitted -->message<!-- raw HTML omitted --> when sending it or 
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback to call when the request
+        <div class='inline'><p>a GAsync::ReadyCallback to call when the request<br />
 is satisfied or nil if you don't care about the result</p>
 </div>
       
@@ -5370,12 +5374,12 @@ is satisfied or nil if you don't care about the result</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finishes an operation started with g_dbus_connection_send_message_with_reply().</p>
-<p>Note that <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is only set if a local in-process error
-occurred. That is to say that the returned GDBus::Message object may
-be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use
+<p>Note that <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is only set if a local in-process error<br />
+occurred. That is to say that the returned GDBus::Message object may<br />
+be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use<br />
 g_dbus_message_to_gerror() to transcode this to a #GError.</p>
-<p>See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
-for an example of how to use this low-level API to send and receive
+<p>See this [server][gdbus-server] and [client][gdbus-unix-fd-client]<br />
+for an example of how to use this low-level API to send and receive<br />
 UNIX file descriptors.</p>
 
 
@@ -5395,7 +5399,7 @@ UNIX file descriptors.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::Result obtained from the #GAsyncReadyCallback passed to
+        <div class='inline'><p>a GAsync::Result obtained from the #GAsyncReadyCallback passed to<br />
 g_dbus_connection_send_message_with_reply()</p>
 </div>
       
@@ -5435,30 +5439,30 @@ g_dbus_connection_send_message_with_reply()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Synchronously sends <!-- raw HTML omitted -->message<!-- raw HTML omitted --> to the peer represented by <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->
-and blocks the calling thread until a reply is received or the
-timeout is reached. See g_dbus_connection_send_message_with_reply()
+    <p>Synchronously sends <!-- raw HTML omitted -->message<!-- raw HTML omitted --> to the peer represented by <!-- raw HTML omitted -->connection<!-- raw HTML omitted --><br />
+and blocks the calling thread until a reply is received or the<br />
+timeout is reached. See g_dbus_connection_send_message_with_reply()<br />
 for the asynchronous version of this method.</p>
-<p>Unless <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> contain the
-%G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number
-will be assigned by <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> and set on <!-- raw HTML omitted -->message<!-- raw HTML omitted --> via
-g_dbus_message_set_serial(). If <!-- raw HTML omitted -->out_serial<!-- raw HTML omitted --> is not nil, then the
-serial number used will be written to this location prior to
-submitting the message to the underlying transport. While it has a <code>volatile</code>
-qualifier, this is a historical artifact and the argument passed to it should
+<p>Unless <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> contain the<br />
+%G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number<br />
+will be assigned by <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> and set on <!-- raw HTML omitted -->message<!-- raw HTML omitted --> via<br />
+g_dbus_message_set_serial(). If <!-- raw HTML omitted -->out_serial<!-- raw HTML omitted --> is not nil, then the<br />
+serial number used will be written to this location prior to<br />
+submitting the message to the underlying transport. While it has a <code>volatile</code><br />
+qualifier, this is a historical artifact and the argument passed to it should<br />
 not be <code>volatile</code>.</p>
-<p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is closed then the operation will fail with
-%G_IO_ERROR_CLOSED. If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is canceled, the operation will
-fail with %G_IO_ERROR_CANCELLED. If <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not well-formed,
+<p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is closed then the operation will fail with<br />
+%G_IO_ERROR_CLOSED. If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is canceled, the operation will<br />
+fail with %G_IO_ERROR_CANCELLED. If <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not well-formed,<br />
 the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.</p>
-<p>Note that <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is only set if a local in-process error
-occurred. That is to say that the returned GDBus::Message object may
-be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use
+<p>Note that <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is only set if a local in-process error<br />
+occurred. That is to say that the returned GDBus::Message object may<br />
+be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use<br />
 g_dbus_message_to_gerror() to transcode this to a #GError.</p>
-<p>See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
-for an example of how to use this low-level API to send and receive
+<p>See this [server][gdbus-server] and [client][gdbus-unix-fd-client]<br />
+for an example of how to use this low-level API to send and receive<br />
 UNIX file descriptors.</p>
-<p>Note that <!-- raw HTML omitted -->message<!-- raw HTML omitted --> must be unlocked, unless <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> contain the
+<p>Note that <!-- raw HTML omitted -->message<!-- raw HTML omitted --> must be unlocked, unless <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> contain the<br />
 %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.</p>
 
 
@@ -5508,7 +5512,7 @@ UNIX file descriptors.</p>
       
       
         &mdash;
-        <div class='inline'><p>the timeout in milliseconds, -1 to use the default
+        <div class='inline'><p>the timeout in milliseconds, -1 to use the default<br />
 timeout or %G_MAXINT for no timeout</p>
 </div>
       
@@ -5524,7 +5528,7 @@ timeout or %G_MAXINT for no timeout</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for serial number
+        <div class='inline'><p>return location for serial number<br />
 assigned to <!-- raw HTML omitted -->message<!-- raw HTML omitted --> when sending it or nil</p>
 </div>
       
@@ -5558,7 +5562,7 @@ assigned to <!-- raw HTML omitted -->message<!-- raw HTML omitted --> when sendi
       
       
         &mdash;
-        <div class='inline'><p>a locked GDBus::Message that is the reply
+        <div class='inline'><p>a locked GDBus::Message that is the reply<br />
 to <!-- raw HTML omitted -->message<!-- raw HTML omitted --> or nil if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
 </div>
       
@@ -5580,45 +5584,45 @@ to <!-- raw HTML omitted -->message<!-- raw HTML omitted --> or nil if <!-- raw 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Subscribes to signals on <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> and invokes <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> whenever
-the signal is received. Note that <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the
-[thread-default main context][g-main-context-push-thread-default]
+    <p>Subscribes to signals on <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> and invokes <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> whenever<br />
+the signal is received. Note that <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the<br />
+[thread-default main context][g-main-context-push-thread-default]<br />
 of the thread you are calling this method from.</p>
-<p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is not a message bus connection, <!-- raw HTML omitted -->sender<!-- raw HTML omitted --> must be
+<p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is not a message bus connection, <!-- raw HTML omitted -->sender<!-- raw HTML omitted --> must be<br />
 nil.</p>
-<p>If <!-- raw HTML omitted -->sender<!-- raw HTML omitted --> is a well-known name note that <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is invoked with
-the unique name for the owner of <!-- raw HTML omitted -->sender<!-- raw HTML omitted -->, not the well-known name
-as one would expect. This is because the message bus rewrites the
-name. As such, to avoid certain race conditions, users should be
-tracking the name owner of the well-known name and use that when
+<p>If <!-- raw HTML omitted -->sender<!-- raw HTML omitted --> is a well-known name note that <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is invoked with<br />
+the unique name for the owner of <!-- raw HTML omitted -->sender<!-- raw HTML omitted -->, not the well-known name<br />
+as one would expect. This is because the message bus rewrites the<br />
+name. As such, to avoid certain race conditions, users should be<br />
+tracking the name owner of the well-known name and use that when<br />
 processing the received signal.</p>
-<p>If one of %G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_NAMESPACE or
-%G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_PATH are given, <!-- raw HTML omitted -->arg0<!-- raw HTML omitted --> is
-interpreted as part of a namespace or path.  The first argument
+<p>If one of %G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_NAMESPACE or<br />
+%G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_PATH are given, <!-- raw HTML omitted -->arg0<!-- raw HTML omitted --> is<br />
+interpreted as part of a namespace or path.  The first argument<br />
 of a signal is matched against that part as specified by D-Bus.</p>
-<p>If <!-- raw HTML omitted -->user_data_free_func<!-- raw HTML omitted --> is non-nil, it will be called (in the
-thread-default main context of the thread you are calling this
-method from) at some point after <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> is no longer
-needed. (It is not guaranteed to be called synchronously when the
-signal is unsubscribed from, and may be called after <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->
+<p>If <!-- raw HTML omitted -->user_data_free_func<!-- raw HTML omitted --> is non-nil, it will be called (in the<br />
+thread-default main context of the thread you are calling this<br />
+method from) at some point after <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> is no longer<br />
+needed. (It is not guaranteed to be called synchronously when the<br />
+signal is unsubscribed from, and may be called after <!-- raw HTML omitted -->connection<!-- raw HTML omitted --><br />
 has been destroyed.)</p>
-<p>As <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is potentially invoked in a different thread from where it’s
-emitted, it’s possible for this to happen after
-g_dbus_connection_signal_unsubscribe() has been called in another thread.
-Due to this, <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> should have a strong reference which is freed with
-<!-- raw HTML omitted -->user_data_free_func<!-- raw HTML omitted -->, rather than pointing to data whose lifecycle is tied
-to the signal subscription. For example, if a #GObject is used to store the
-subscription ID from g_dbus_connection_signal_subscribe(), a strong reference
-to that #GObject must be passed to <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->, and g_object_unref() passed to
-<!-- raw HTML omitted -->user_data_free_func<!-- raw HTML omitted -->. You are responsible for breaking the resulting
-reference count cycle by explicitly unsubscribing from the signal when
-dropping the last external reference to the #GObject. Alternatively, a weak
+<p>As <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is potentially invoked in a different thread from where it’s<br />
+emitted, it’s possible for this to happen after<br />
+g_dbus_connection_signal_unsubscribe() has been called in another thread.<br />
+Due to this, <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> should have a strong reference which is freed with<br />
+<!-- raw HTML omitted -->user_data_free_func<!-- raw HTML omitted -->, rather than pointing to data whose lifecycle is tied<br />
+to the signal subscription. For example, if a #GObject is used to store the<br />
+subscription ID from g_dbus_connection_signal_subscribe(), a strong reference<br />
+to that #GObject must be passed to <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->, and g_object_unref() passed to<br />
+<!-- raw HTML omitted -->user_data_free_func<!-- raw HTML omitted -->. You are responsible for breaking the resulting<br />
+reference count cycle by explicitly unsubscribing from the signal when<br />
+dropping the last external reference to the #GObject. Alternatively, a weak<br />
 reference may be used.</p>
-<p>It is guaranteed that if you unsubscribe from a signal using
-g_dbus_connection_signal_unsubscribe() from the same thread which made the
-corresponding g_dbus_connection_signal_subscribe() call, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will not
+<p>It is guaranteed that if you unsubscribe from a signal using<br />
+g_dbus_connection_signal_unsubscribe() from the same thread which made the<br />
+corresponding g_dbus_connection_signal_subscribe() call, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will not<br />
 be invoked after g_dbus_connection_signal_unsubscribe() returns.</p>
-<p>The returned subscription identifier is an opaque value which is guaranteed
+<p>The returned subscription identifier is an opaque value which is guaranteed<br />
 to never be zero.</p>
 <p>This function can never fail.</p>
 
@@ -5639,7 +5643,7 @@ to never be zero.</p>
       
       
         &mdash;
-        <div class='inline'><p>sender name to match on (unique or well-known name)
+        <div class='inline'><p>sender name to match on (unique or well-known name)<br />
 or nil to listen from all senders</p>
 </div>
       
@@ -5655,7 +5659,7 @@ or nil to listen from all senders</p>
       
       
         &mdash;
-        <div class='inline'><p>D-Bus interface name to match on or nil to
+        <div class='inline'><p>D-Bus interface name to match on or nil to<br />
 match on all interfaces</p>
 </div>
       
@@ -5671,7 +5675,7 @@ match on all interfaces</p>
       
       
         &mdash;
-        <div class='inline'><p>D-Bus signal name to match on or nil to match on
+        <div class='inline'><p>D-Bus signal name to match on or nil to match on<br />
 all signals</p>
 </div>
       
@@ -5687,7 +5691,7 @@ all signals</p>
       
       
         &mdash;
-        <div class='inline'><p>object path to match on or nil to match on
+        <div class='inline'><p>object path to match on or nil to match on<br />
 all object paths</p>
 </div>
       
@@ -5703,7 +5707,7 @@ all object paths</p>
       
       
         &mdash;
-        <div class='inline'><p>contents of first string argument to match on or nil
+        <div class='inline'><p>contents of first string argument to match on or nil<br />
 to match on all kinds of arguments</p>
 </div>
       
@@ -5719,7 +5723,7 @@ to match on all kinds of arguments</p>
       
       
         &mdash;
-        <div class='inline'><p>GDBus::SignalFlags describing how arg0 is used in subscribing to the
+        <div class='inline'><p>GDBus::SignalFlags describing how arg0 is used in subscribing to the<br />
 signal</p>
 </div>
       
@@ -5765,7 +5769,7 @@ signal</p>
       
       
         &mdash;
-        <div class='inline'><p>function to free <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> with when
+        <div class='inline'><p>function to free <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> with when<br />
 subscription is removed or nil</p>
 </div>
       
@@ -5806,15 +5810,15 @@ subscription is removed or nil</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Unsubscribes from signals.</p>
-<p>Note that there may still be D-Bus traffic to process (relating to this
-signal subscription) in the current thread-default GMain::Context after this
-function has returned. You should continue to iterate the GMain::Context
-until the GDestroy::Notify function passed to
-g_dbus_connection_signal_subscribe() is called, in order to avoid memory
-leaks through callbacks queued on the GMain::Context after it’s stopped being
-iterated.
-Alternatively, any idle source with a priority lower than %G_PRIORITY_DEFAULT
-that was scheduled after unsubscription, also indicates that all resources
+<p>Note that there may still be D-Bus traffic to process (relating to this<br />
+signal subscription) in the current thread-default GMain::Context after this<br />
+function has returned. You should continue to iterate the GMain::Context<br />
+until the GDestroy::Notify function passed to<br />
+g_dbus_connection_signal_subscribe() is called, in order to avoid memory<br />
+leaks through callbacks queued on the GMain::Context after it’s stopped being<br />
+iterated.<br />
+Alternatively, any idle source with a priority lower than %G_PRIORITY_DEFAULT<br />
+that was scheduled after unsubscription, also indicates that all resources<br />
 of this subscription are released.</p>
 
 
@@ -5834,7 +5838,7 @@ of this subscription are released.</p>
       
       
         &mdash;
-        <div class='inline'><p>a subscription id obtained from
+        <div class='inline'><p>a subscription id obtained from<br />
 g_dbus_connection_signal_subscribe()</p>
 </div>
       
@@ -5870,9 +5874,9 @@ g_dbus_connection_signal_subscribe()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> was created with
-%G_DBUS_CONNECTION_FLAGS_DELAY_MESSAGE_PROCESSING, this method
-starts processing messages. Does nothing on if <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> wasn't
+    <p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> was created with<br />
+%G_DBUS_CONNECTION_FLAGS_DELAY_MESSAGE_PROCESSING, this method<br />
+starts processing messages. Does nothing on if <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> wasn't<br />
 created with this flag or if the method has already been called.</p>
 
 
@@ -5909,10 +5913,10 @@ created with this flag or if the method has already been called.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The underlying #GIOStream used for I/O.</p>
-<p>If this is passed on construction and is a GSocket::Connection,
+<p>If this is passed on construction and is a GSocket::Connection,<br />
 then the corresponding #GSocket will be put into non-blocking mode.</p>
-<p>While the GDBus::Connection is active, it will interact with this
-stream from a worker thread, so it is not safe to interact with
+<p>While the GDBus::Connection is active, it will interact with this<br />
+stream from a worker thread, so it is not safe to interact with<br />
 the stream directly.</p>
 
 
@@ -5953,10 +5957,10 @@ the stream directly.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The underlying #GIOStream used for I/O.</p>
-<p>If this is passed on construction and is a GSocket::Connection,
+<p>If this is passed on construction and is a GSocket::Connection,<br />
 then the corresponding #GSocket will be put into non-blocking mode.</p>
-<p>While the GDBus::Connection is active, it will interact with this
-stream from a worker thread, so it is not safe to interact with
+<p>While the GDBus::Connection is active, it will interact with this<br />
+stream from a worker thread, so it is not safe to interact with<br />
 the stream directly.</p>
 
 
@@ -6024,10 +6028,10 @@ the stream directly.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reverses the effect of a previous call to
+    <p>Reverses the effect of a previous call to<br />
 g_dbus_connection_export_action_group().</p>
-<p>It is an error to call this function with an ID that wasn't returned
-from g_dbus_connection_export_action_group() or to call it with the
+<p>It is an error to call this function with an ID that wasn't returned<br />
+from g_dbus_connection_export_action_group() or to call it with the<br />
 same ID more than once.</p>
 
 
@@ -6082,10 +6086,10 @@ same ID more than once.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reverses the effect of a previous call to
+    <p>Reverses the effect of a previous call to<br />
 g_dbus_connection_export_menu_model().</p>
-<p>It is an error to call this function with an ID that wasn't returned
-from g_dbus_connection_export_menu_model() or to call it with the
+<p>It is an error to call this function with an ID that wasn't returned<br />
+from g_dbus_connection_export_menu_model() or to call it with the<br />
 same ID more than once.</p>
 
 
@@ -6140,7 +6144,7 @@ same ID more than once.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The unique name as assigned by the message bus or nil if the
+    <p>The unique name as assigned by the message bus or nil if the<br />
 connection is not open or not a message bus connection.</p>
 
 
@@ -6180,7 +6184,7 @@ connection is not open or not a message bus connection.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The unique name as assigned by the message bus or nil if the
+    <p>The unique name as assigned by the message bus or nil if the<br />
 connection is not open or not a message bus connection.</p>
 
 
@@ -6267,7 +6271,7 @@ connection is not open or not a message bus connection.</p>
       
       
         &mdash;
-        <div class='inline'><p>a registration id obtained from
+        <div class='inline'><p>a registration id obtained from<br />
 g_dbus_connection_register_object()</p>
 </div>
       
@@ -6326,7 +6330,7 @@ g_dbus_connection_register_object()</p>
       
       
         &mdash;
-        <div class='inline'><p>a subtree registration id obtained from
+        <div class='inline'><p>a subtree registration id obtained from<br />
 g_dbus_connection_register_subtree()</p>
 </div>
       
@@ -6362,7 +6366,7 @@ g_dbus_connection_register_subtree()</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

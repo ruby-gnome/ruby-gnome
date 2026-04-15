@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Entry";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,17 +99,18 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk3/entry.rb</dd>
+    <dd>lib/gtk3/entry.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Class structure for <code>GtkEntry</code>. All virtual functions have a default
-implementation. Derived classes may set the virtual function pointers for the
-signal handlers to nil, but must keep <!-- raw HTML omitted -->get_text_area_size<!-- raw HTML omitted --> and
-<!-- raw HTML omitted -->get_frame_size<!-- raw HTML omitted --> non-nil; either use the default implementation, or provide
+    <p>Class structure for <code>GtkEntry</code>. All virtual functions have a default<br />
+implementation. Derived classes may set the virtual function pointers for the<br />
+signal handlers to nil, but must keep <!-- raw HTML omitted -->get_text_area_size<!-- raw HTML omitted --> and<br />
+<!-- raw HTML omitted -->get_frame_size<!-- raw HTML omitted --> non-nil; either use the default implementation, or provide<br />
 a custom one.</p>
 
 
@@ -2641,9 +2643,11 @@ a custom one.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -2904,7 +2908,7 @@ a custom one.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the alignment for the contents of the entry.</p>
-<p>This controls the horizontal positioning of the contents when
+<p>This controls the horizontal positioning of the contents when<br />
 the displayed text is shorter than the width of the entry.</p>
 <p>See also: [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable:xalign]</p>
 
@@ -2925,7 +2929,7 @@ the displayed text is shorter than the width of the entry.</p>
       
       
         &mdash;
-        <div class='inline'><p>The horizontal alignment, from 0 (left) to 1 (right).
+        <div class='inline'><p>The horizontal alignment, from 0 (left) to 1 (right).<br />
 Reversed for RTL layouts</p>
 </div>
       
@@ -2963,7 +2967,7 @@ Reversed for RTL layouts</p>
   <div class="discussion">
     <p>A list of Pango attributes to apply to the text of the entry.</p>
 <p>This is mainly useful to change the size or weight of the text.</p>
-<p>The <code>PangoAttribute</code>'s <!-- raw HTML omitted -->start_index<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_index<!-- raw HTML omitted --> must refer to the
+<p>The <code>PangoAttribute</code>'s <!-- raw HTML omitted -->start_index<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_index<!-- raw HTML omitted --> must refer to the<br />
 [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryBuffer] text, i.e. without the preedit string.</p>
 
 
@@ -3215,7 +3219,7 @@ Reversed for RTL layouts</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the index of the icon which is the source of the
+    <p>Returns the index of the icon which is the source of the<br />
 current  DND operation, or -1.</p>
 
 
@@ -3234,7 +3238,7 @@ current  DND operation, or -1.</p>
       
       
         &mdash;
-        <div class='inline'><p>index of the icon which is the source of the
+        <div class='inline'><p>index of the icon which is the source of the<br />
 current DND operation, or -1.</p>
 </div>
       
@@ -3256,7 +3260,7 @@ current DND operation, or -1.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether to suggest Emoji replacements for :-delimited names
+    <p>Whether to suggest Emoji replacements for :-delimited names<br />
 like <code>:heart:</code>.</p>
 
 
@@ -3324,7 +3328,7 @@ like <code>:heart:</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether to suggest Emoji replacements for :-delimited names
+    <p>Whether to suggest Emoji replacements for :-delimited names<br />
 like <code>:heart:</code>.</p>
 
 
@@ -3529,11 +3533,11 @@ like <code>:heart:</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the area where entry’s icon at <!-- raw HTML omitted -->icon_pos<!-- raw HTML omitted --> is drawn.</p>
-<p>This function is useful when drawing something to the
+<p>This function is useful when drawing something to the<br />
 entry in a draw callback.</p>
-<p>If the entry is not realized or has no icon at the given
-position, <!-- raw HTML omitted -->icon_area<!-- raw HTML omitted --> is filled with zeros. Otherwise,
-<!-- raw HTML omitted -->icon_area<!-- raw HTML omitted --> will be filled with the icon's allocation,
+<p>If the entry is not realized or has no icon at the given<br />
+position, <!-- raw HTML omitted -->icon_area<!-- raw HTML omitted --> is filled with zeros. Otherwise,<br />
+<!-- raw HTML omitted -->icon_area<!-- raw HTML omitted --> will be filled with the icon's allocation,<br />
 relative to <!-- raw HTML omitted -->entry<!-- raw HTML omitted -->'s allocation.</p>
 
 
@@ -3604,9 +3608,9 @@ relative to <!-- raw HTML omitted -->entry<!-- raw HTML omitted -->'s allocation
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finds the icon at the given position and return its index.</p>
-<p>The position’s coordinates are relative to the <!-- raw HTML omitted -->entry<!-- raw HTML omitted -->’s
-top left corner. If <!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted --> doesn’t lie inside an icon,
--1 is returned. This function is intended for use in a
+<p>The position’s coordinates are relative to the <!-- raw HTML omitted -->entry<!-- raw HTML omitted -->’s<br />
+top left corner. If <!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted --> doesn’t lie inside an icon,<br />
+-1 is returned. This function is intended for use in a<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget::query-tooltip] signal handler.</p>
 
 
@@ -3681,7 +3685,7 @@ top left corner. If <!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- ra
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the <code>GIcon</code> used for the icon.</p>
-<p>nil will be returned if there is no icon or if the icon was
+<p>nil will be returned if there is no icon or if the icon was<br />
 set by some other method (e.g., by <code>GdkPaintable</code> or icon name).</p>
 
 
@@ -3741,7 +3745,7 @@ set by some other method (e.g., by <code>GdkPaintable</code> or icon name).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the icon name used for the icon.</p>
-<p>nil is returned if there is no icon or if the icon was set
+<p>nil is returned if there is no icon or if the icon was set<br />
 by some other method (e.g., by <code>GdkPaintable</code> or gicon).</p>
 
 
@@ -3838,8 +3842,8 @@ by some other method (e.g., by <code>GdkPaintable</code> or gicon).</p>
       
       
         &mdash;
-        <div class='inline'><p>A <code>GdkPaintable</code>
-if no icon is set for this position or the icon set is not
+        <div class='inline'><p>A <code>GdkPaintable</code><br />
+if no icon is set for this position or the icon set is not<br />
 a <code>GdkPaintable</code>.</p>
 </div>
       
@@ -3919,9 +3923,9 @@ a <code>GdkPaintable</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the type of representation being used by the icon
+    <p>Gets the type of representation being used by the icon<br />
 to store image data.</p>
-<p>If the icon has no image data, the return value will
+<p>If the icon has no image data, the return value will<br />
 be %GTK_IMAGE_EMPTY.</p>
 
 
@@ -3980,7 +3984,7 @@ be %GTK_IMAGE_EMPTY.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the contents of the tooltip on the icon at the specified
+    <p>Gets the contents of the tooltip on the icon at the specified<br />
 position in <!-- raw HTML omitted -->entry<!-- raw HTML omitted -->.</p>
 
 
@@ -4039,7 +4043,7 @@ position in <!-- raw HTML omitted -->entry<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the contents of the tooltip on the icon at the specified
+    <p>Gets the contents of the tooltip on the icon at the specified<br />
 position in <!-- raw HTML omitted -->entry<!-- raw HTML omitted -->.</p>
 
 
@@ -4099,9 +4103,9 @@ position in <!-- raw HTML omitted -->entry<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Causes <!-- raw HTML omitted -->entry<!-- raw HTML omitted --> to have keyboard focus.</p>
-<p>It behaves like [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.grab_focus], except that it doesn't
-select the contents of the entry. You only want to call this on some
-special entries which the user usually doesn't want to replace all text
+<p>It behaves like [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.grab_focus], except that it doesn't<br />
+select the contents of the entry. You only want to call this on some<br />
+special entries which the user usually doesn't want to replace all text<br />
 in, such as search-as-you-type entries.</p>
 
 
@@ -4288,8 +4292,8 @@ in, such as search-as-you-type entries.</p>
   <div class="discussion">
     <p>Which IM (input method) module should be used for this entry.</p>
 <p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext].</p>
-<p>Setting this to a non-nil value overrides the system-wide IM
-module setting. See the GtkSettings [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-im-module]
+<p>Setting this to a non-nil value overrides the system-wide IM<br />
+module setting. See the GtkSettings [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-im-module]<br />
 property.</p>
 
 
@@ -4331,8 +4335,8 @@ property.</p>
   <div class="discussion">
     <p>Which IM (input method) module should be used for this entry.</p>
 <p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext].</p>
-<p>Setting this to a non-nil value overrides the system-wide IM
-module setting. See the GtkSettings [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-im-module]
+<p>Setting this to a non-nil value overrides the system-wide IM<br />
+module setting. See the GtkSettings [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-im-module]<br />
 property.</p>
 
 
@@ -4509,10 +4513,10 @@ property.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The purpose of this text field.</p>
-<p>This property can be used by on-screen keyboards and other input
+<p>This property can be used by on-screen keyboards and other input<br />
 methods to adjust their behaviour.</p>
-<p>Note that setting the purpose to %GTK_INPUT_PURPOSE_PASSWORD or
-%GTK_INPUT_PURPOSE_PIN is independent from setting
+<p>Note that setting the purpose to %GTK_INPUT_PURPOSE_PASSWORD or<br />
+%GTK_INPUT_PURPOSE_PIN is independent from setting<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry:visibility].</p>
 
 
@@ -4553,10 +4557,10 @@ methods to adjust their behaviour.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The purpose of this text field.</p>
-<p>This property can be used by on-screen keyboards and other input
+<p>This property can be used by on-screen keyboards and other input<br />
 methods to adjust their behaviour.</p>
-<p>Note that setting the purpose to %GTK_INPUT_PURPOSE_PASSWORD or
-%GTK_INPUT_PURPOSE_PIN is independent from setting
+<p>Note that setting the purpose to %GTK_INPUT_PURPOSE_PASSWORD or<br />
+%GTK_INPUT_PURPOSE_PIN is independent from setting<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry:visibility].</p>
 
 
@@ -5087,7 +5091,7 @@ methods to adjust their behaviour.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The text that will be displayed in the <code>GtkEntry</code> when it is empty
+    <p>The text that will be displayed in the <code>GtkEntry</code> when it is empty<br />
 and unfocused.</p>
 
 
@@ -5127,7 +5131,7 @@ and unfocused.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The text that will be displayed in the <code>GtkEntry</code> when it is empty
+    <p>The text that will be displayed in the <code>GtkEntry</code> when it is empty<br />
 and unfocused.</p>
 
 
@@ -5196,10 +5200,10 @@ and unfocused.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the primary icon is activatable.</p>
-<p>GTK emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press] and
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release] signals only on sensitive,
+<p>GTK emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press] and<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release] signals only on sensitive,<br />
 activatable icons.</p>
-<p>Sensitive, but non-activatable icons can be used for purely
+<p>Sensitive, but non-activatable icons can be used for purely<br />
 informational purposes.</p>
 
 
@@ -5268,10 +5272,10 @@ informational purposes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the primary icon is activatable.</p>
-<p>GTK emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press] and
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release] signals only on sensitive,
+<p>GTK emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press] and<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release] signals only on sensitive,<br />
 activatable icons.</p>
-<p>Sensitive, but non-activatable icons can be used for purely
+<p>Sensitive, but non-activatable icons can be used for purely<br />
 informational purposes.</p>
 
 
@@ -5630,10 +5634,10 @@ informational purposes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the primary icon is sensitive.</p>
-<p>An insensitive icon appears grayed out. GTK does not emit the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press] and [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release]
+<p>An insensitive icon appears grayed out. GTK does not emit the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press] and [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release]<br />
 signals and does not allow DND from insensitive icons.</p>
-<p>An icon should be set insensitive if the action that would trigger
+<p>An icon should be set insensitive if the action that would trigger<br />
 when clicked is currently not available.</p>
 
 
@@ -5702,10 +5706,10 @@ when clicked is currently not available.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the primary icon is sensitive.</p>
-<p>An insensitive icon appears grayed out. GTK does not emit the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press] and [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release]
+<p>An insensitive icon appears grayed out. GTK does not emit the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press] and [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release]<br />
 signals and does not allow DND from insensitive icons.</p>
-<p>An icon should be set insensitive if the action that would trigger
+<p>An icon should be set insensitive if the action that would trigger<br />
 when clicked is currently not available.</p>
 
 
@@ -6173,12 +6177,12 @@ when clicked is currently not available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Indicates that some progress is made, but you don’t
+    <p>Indicates that some progress is made, but you don’t<br />
 know how much.</p>
-<p>Causes the entry’s progress indicator to enter “activity
-mode”, where a block bounces back and forth. Each call to
-gtk_entry_progress_pulse() causes the block to move by a
-little bit (the amount of movement per pulse is determined
+<p>Causes the entry’s progress indicator to enter “activity<br />
+mode”, where a block bounces back and forth. Each call to<br />
+gtk_entry_progress_pulse() causes the block to move by a<br />
+little bit (the amount of movement per pulse is determined<br />
 by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry.set_progress_pulse_step]).</p>
 
 
@@ -6214,7 +6218,7 @@ by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry.set_progre
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The fraction of total entry width to move the progress
+    <p>The fraction of total entry width to move the progress<br />
 bouncing block for each pulse.</p>
 <p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry.progress_pulse].</p>
 
@@ -6255,7 +6259,7 @@ bouncing block for each pulse.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The fraction of total entry width to move the progress
+    <p>The fraction of total entry width to move the progress<br />
 bouncing block for each pulse.</p>
 <p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry.progress_pulse].</p>
 
@@ -6325,7 +6329,7 @@ bouncing block for each pulse.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Reset the input method context of the entry if needed.</p>
-<p>This can be necessary in the case where modifying the buffer
+<p>This can be necessary in the case where modifying the buffer<br />
 would confuse on-going input method behavior.</p>
 
 
@@ -6468,10 +6472,10 @@ would confuse on-going input method behavior.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the secondary icon is activatable.</p>
-<p>GTK emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press] and
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release] signals only on sensitive,
+<p>GTK emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press] and<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release] signals only on sensitive,<br />
 activatable icons.</p>
-<p>Sensitive, but non-activatable icons can be used for purely
+<p>Sensitive, but non-activatable icons can be used for purely<br />
 informational purposes.</p>
 
 
@@ -6540,10 +6544,10 @@ informational purposes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the secondary icon is activatable.</p>
-<p>GTK emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press] and
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release] signals only on sensitive,
+<p>GTK emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press] and<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release] signals only on sensitive,<br />
 activatable icons.</p>
-<p>Sensitive, but non-activatable icons can be used for purely
+<p>Sensitive, but non-activatable icons can be used for purely<br />
 informational purposes.</p>
 
 
@@ -6902,10 +6906,10 @@ informational purposes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the secondary icon is sensitive.</p>
-<p>An insensitive icon appears grayed out. GTK does not emit the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press[ and [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release]
+<p>An insensitive icon appears grayed out. GTK does not emit the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press[ and [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release]<br />
 signals and does not allow DND from insensitive icons.</p>
-<p>An icon should be set insensitive if the action that would trigger
+<p>An icon should be set insensitive if the action that would trigger<br />
 when clicked is currently not available.</p>
 
 
@@ -6974,10 +6978,10 @@ when clicked is currently not available.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the secondary icon is sensitive.</p>
-<p>An insensitive icon appears grayed out. GTK does not emit the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press[ and [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release]
+<p>An insensitive icon appears grayed out. GTK does not emit the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-press[ and [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry::icon-release]<br />
 signals and does not allow DND from insensitive icons.</p>
-<p>An icon should be set insensitive if the action that would trigger
+<p>An icon should be set insensitive if the action that would trigger<br />
 when clicked is currently not available.</p>
 
 
@@ -7375,8 +7379,8 @@ when clicked is currently not available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>TODO: It's workaround for a GTK+ problem:
-It should be removed when GTK+ fix the problem.
+    <p>TODO: It's workaround for a GTK+ problem:<br />
+It should be removed when GTK+ fix the problem.<br />
 <a href="https://github.com/ruby-gnome2/ruby-gnome2/issues/1176">https://github.com/ruby-gnome2/ruby-gnome2/issues/1176</a></p>
 
 
@@ -7483,7 +7487,7 @@ It should be removed when GTK+ fix the problem.
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets up the icon at the given position as drag source.</p>
-<p>This makes it so that GTK will start a drag
+<p>This makes it so that GTK will start a drag<br />
 operation when the user clicks and drags the icon.</p>
 
 
@@ -7568,11 +7572,11 @@ operation when the user clicks and drags the icon.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the icon shown in the entry at the specified position
+    <p>Sets the icon shown in the entry at the specified position<br />
 from the current icon theme.</p>
-<p>If the icon isn’t known, a “broken image” icon will be
+<p>If the icon isn’t known, a “broken image” icon will be<br />
 displayed instead.</p>
-<p>If <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> is nil, no icon will be shown in the
+<p>If <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> is nil, no icon will be shown in the<br />
 specified position.</p>
 
 
@@ -7642,11 +7646,11 @@ specified position.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the icon shown in the entry at the specified position
+    <p>Sets the icon shown in the entry at the specified position<br />
 from the current icon theme.</p>
-<p>If the icon name isn’t known, a “broken image” icon will be
+<p>If the icon name isn’t known, a “broken image” icon will be<br />
 displayed instead.</p>
-<p>If <!-- raw HTML omitted -->icon_name<!-- raw HTML omitted --> is nil, no icon will be shown in the
+<p>If <!-- raw HTML omitted -->icon_name<!-- raw HTML omitted --> is nil, no icon will be shown in the<br />
 specified position.</p>
 
 
@@ -7820,7 +7824,7 @@ specified position.</p>
       
       
         &mdash;
-        <div class='inline'><p>Specifies whether the icon should appear
+        <div class='inline'><p>Specifies whether the icon should appear<br />
 sensitive or insensitive</p>
 </div>
       
@@ -7856,11 +7860,11 @@ sensitive or insensitive</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->tooltip<!-- raw HTML omitted --> as the contents of the tooltip for the icon at
+    <p>Sets <!-- raw HTML omitted -->tooltip<!-- raw HTML omitted --> as the contents of the tooltip for the icon at<br />
 the specified position.</p>
 <p><!-- raw HTML omitted -->tooltip<!-- raw HTML omitted --> is assumed to be marked up with Pango Markup.</p>
 <p>Use nil for <!-- raw HTML omitted -->tooltip<!-- raw HTML omitted --> to remove an existing tooltip.</p>
-<p>See also [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_tooltip_markup] and
+<p>See also [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_tooltip_markup] and<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry.set_icon_tooltip_text].</p>
 
 
@@ -7930,19 +7934,19 @@ the specified position.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->tooltip<!-- raw HTML omitted --> as the contents of the tooltip for the icon
+    <p>Sets <!-- raw HTML omitted -->tooltip<!-- raw HTML omitted --> as the contents of the tooltip for the icon<br />
 at the specified position.</p>
 <p>Use nil for <!-- raw HTML omitted -->tooltip<!-- raw HTML omitted --> to remove an existing tooltip.</p>
-<p>See also [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_tooltip_text] and
+<p>See also [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_tooltip_text] and<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry.set_icon_tooltip_markup].</p>
-<p>If you unset the widget tooltip via
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_tooltip_text] or
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_tooltip_markup], this sets
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:has-tooltip] to false, which suppresses
-icon tooltips too. You can resolve this by then calling
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_has_tooltip] to set
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:has-tooltip] back to true, or
-setting at least one non-empty tooltip on any icon
+<p>If you unset the widget tooltip via<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_tooltip_text] or<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_tooltip_markup], this sets<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:has-tooltip] to false, which suppresses<br />
+icon tooltips too. You can resolve this by then calling<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_has_tooltip] to set<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:has-tooltip] back to true, or<br />
+setting at least one non-empty tooltip on any icon<br />
 achieves the same result.</p>
 
 
@@ -8434,7 +8438,7 @@ achieves the same result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unsets the invisible char, so that the default invisible char
+    <p>Unsets the invisible char, so that the default invisible char<br />
 is used again. See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry.set_invisible_char].</p>
 
 
@@ -8510,7 +8514,7 @@ is used again. See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the entry should show the “invisible char” instead of the
+    <p>Whether the entry should show the “invisible char” instead of the<br />
 actual text (“password mode”).</p>
 
 
@@ -8578,7 +8582,7 @@ actual text (“password mode”).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the entry should show the “invisible char” instead of the
+    <p>Whether the entry should show the “invisible char” instead of the<br />
 actual text (“password mode”).</p>
 
 
@@ -8614,7 +8618,7 @@ actual text (“password mode”).</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

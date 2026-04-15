@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::TagSetter";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -86,19 +88,19 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Element interface that allows setting of media metadata.</p>
-<p>Elements that support changing a stream's metadata will implement this
-interface. Examples of such elements are 'vorbisenc', 'theoraenc' and
+<p>Elements that support changing a stream's metadata will implement this<br />
+interface. Examples of such elements are 'vorbisenc', 'theoraenc' and<br />
 'id3v2mux'.</p>
-<p>If you just want to retrieve metadata in your application then all you
-need to do is watch for tag messages on your pipeline's bus. This
-interface is only for setting metadata, not for extracting it. To set tags
-from the application, find tagsetter elements and set tags using e.g.
-gst_tag_setter_merge_tags() or gst_tag_setter_add_tags(). Also consider
-setting the Gst::TagMergeMode that is used for tag events that arrive at the
-tagsetter element (default mode is to keep existing tags).
+<p>If you just want to retrieve metadata in your application then all you<br />
+need to do is watch for tag messages on your pipeline's bus. This<br />
+interface is only for setting metadata, not for extracting it. To set tags<br />
+from the application, find tagsetter elements and set tags using e.g.<br />
+gst_tag_setter_merge_tags() or gst_tag_setter_add_tags(). Also consider<br />
+setting the Gst::TagMergeMode that is used for tag events that arrive at the<br />
+tagsetter element (default mode is to keep existing tags).<br />
 The application should do that before the element goes to %GST_STATE_PAUSED.</p>
-<p>Elements implementing the Gst::TagSetter interface often have to merge
-any tags received from upstream and the tags set by the application via
+<p>Elements implementing the Gst::TagSetter interface often have to merge<br />
+any tags received from upstream and the tags set by the application via<br />
 the interface. This can be done like this:</p>
 <pre class="code ruby"><code class="ruby">GstTagMergeMode merge_mode;
 const GstTagList *application_tags;
@@ -373,6 +375,7 @@ GST_LOG_OBJECT (tagsetter, &quot;final tags: %&quot; GST_PTR_FORMAT, result);
 
       
     </ul>
+    
   
 
 
@@ -392,7 +395,7 @@ GST_LOG_OBJECT (tagsetter, &quot;final tags: %&quot; GST_PTR_FORMAT, result);
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds the given tag / value pairs on the setter using the given merge mode.
+    <p>Adds the given tag / value pairs on the setter using the given merge mode.<br />
 The list must be terminated with nil.</p>
 
 
@@ -477,7 +480,7 @@ The list must be terminated with nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds the given tag / GValue pairs on the setter using the given merge mode.
+    <p>Adds the given tag / GValue pairs on the setter using the given merge mode.<br />
 The list must be terminated with nil.</p>
 
 
@@ -646,7 +649,7 @@ The list must be terminated with nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds the given tag / GValue pairs on the setter using the given merge mode.
+    <p>Adds the given tag / GValue pairs on the setter using the given merge mode.<br />
 The list must be terminated with nil.</p>
 
 
@@ -731,7 +734,7 @@ The list must be terminated with nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds the given tag / value pairs on the setter using the given merge mode.
+    <p>Adds the given tag / value pairs on the setter using the given merge mode.<br />
 The list must be terminated with nil.</p>
 
 
@@ -885,7 +888,7 @@ The list must be terminated with nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reset the internal taglist. Elements should call this from within the
+    <p>Reset the internal taglist. Elements should call this from within the<br />
 state-change handler.</p>
 
 
@@ -921,7 +924,7 @@ state-change handler.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the current list of tags the setter uses.  The list should not be
+    <p>Returns the current list of tags the setter uses.  The list should not be<br />
 modified or freed.</p>
 <p>This function is not thread-safe.</p>
 
@@ -941,7 +944,7 @@ modified or freed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a current snapshot of the
+        <div class='inline'><p>a current snapshot of the<br />
 taglist used in the setter or nil if none is used.</p>
 </div>
       
@@ -963,7 +966,7 @@ taglist used in the setter or nil if none is used.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries the mode by which tags inside the setter are overwritten by tags
+    <p>Queries the mode by which tags inside the setter are overwritten by tags<br />
 from events</p>
 
 
@@ -1003,8 +1006,8 @@ from events</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the given merge mode that is used for adding tags from events to tags
-specified by this interface. The default is #GST_TAG_MERGE_KEEP, which keeps
+    <p>Sets the given merge mode that is used for adding tags from events to tags<br />
+specified by this interface. The default is #GST_TAG_MERGE_KEEP, which keeps<br />
 the tags set with this interface and discards tags from events.</p>
 
 
@@ -1055,7 +1058,7 @@ the tags set with this interface and discards tags from events.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

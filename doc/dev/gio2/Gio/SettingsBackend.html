@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::SettingsBackend";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -171,6 +173,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -318,6 +321,7 @@
 
       
     </ul>
+    
   
 
 
@@ -337,8 +341,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the default GSettings::Backend. It is possible to override
-the default by setting the <code>GSETTINGS_BACKEND</code> environment variable
+    <p>Returns the default GSettings::Backend. It is possible to override<br />
+the default by setting the <code>GSETTINGS_BACKEND</code> environment variable<br />
 to the name of a settings backend.</p>
 <p>The user gets a reference to the backend.</p>
 
@@ -358,8 +362,8 @@ to the name of a settings backend.</p>
       
       
         &mdash;
-        <div class='inline'><p>the default GSettings::Backend,
-which will be a dummy (memory) settings backend if no other settings
+        <div class='inline'><p>the default GSettings::Backend,<br />
+which will be a dummy (memory) settings backend if no other settings<br />
 backend is available.</p>
 </div>
       
@@ -381,11 +385,11 @@ backend is available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calculate the longest common prefix of all keys in a tree and write
-out an array of the key names relative to that prefix and,
+    <p>Calculate the longest common prefix of all keys in a tree and write<br />
+out an array of the key names relative to that prefix and,<br />
 optionally, the value to store at each of those keys.</p>
-<p>You must free the value returned in <!-- raw HTML omitted -->path<!-- raw HTML omitted -->, <!-- raw HTML omitted -->keys<!-- raw HTML omitted --> and <!-- raw HTML omitted -->values<!-- raw HTML omitted --> using
-g_free().  You should not attempt to free or unref the contents of
+<p>You must free the value returned in <!-- raw HTML omitted -->path<!-- raw HTML omitted -->, <!-- raw HTML omitted -->keys<!-- raw HTML omitted --> and <!-- raw HTML omitted -->values<!-- raw HTML omitted --> using<br />
+g_free().  You should not attempt to free or unref the contents of<br />
 <!-- raw HTML omitted -->keys<!-- raw HTML omitted --> or <!-- raw HTML omitted -->values<!-- raw HTML omitted -->.</p>
 
 
@@ -435,7 +439,7 @@ g_free().  You should not attempt to free or unref the contents of
       
       
         &mdash;
-        <div class='inline'><p>the
+        <div class='inline'><p>the<br />
 location to save the relative keys</p>
 </div>
       
@@ -492,23 +496,23 @@ location to save the relative keys</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Signals that a single key has possibly changed.  Backend
-implementations should call this if a key has possibly changed its
+    <p>Signals that a single key has possibly changed.  Backend<br />
+implementations should call this if a key has possibly changed its<br />
 value.</p>
-<p><!-- raw HTML omitted -->key<!-- raw HTML omitted --> must be a valid key (ie starting with a slash, not containing
+<p><!-- raw HTML omitted -->key<!-- raw HTML omitted --> must be a valid key (ie starting with a slash, not containing<br />
 '//', and not ending with a slash).</p>
-<p>The implementation must call this function during any call to
-g_settings_backend_write(), before the call returns (except in the
-case that no keys are actually changed and it cares to detect this
-fact).  It may not rely on the existence of a mainloop for
+<p>The implementation must call this function during any call to<br />
+g_settings_backend_write(), before the call returns (except in the<br />
+case that no keys are actually changed and it cares to detect this<br />
+fact).  It may not rely on the existence of a mainloop for<br />
 dispatching the signal later.</p>
-<p>The implementation may call this function at any other time it likes
-in response to other events (such as changes occurring outside of the
-program).  These calls may originate from a mainloop or may originate
-in response to any other action (including from calls to
+<p>The implementation may call this function at any other time it likes<br />
+in response to other events (such as changes occurring outside of the<br />
+program).  These calls may originate from a mainloop or may originate<br />
+in response to any other action (including from calls to<br />
 g_settings_backend_write()).</p>
-<p>In the case that this call is in response to a call to
-g_settings_backend_write() then <!-- raw HTML omitted -->origin_tag<!-- raw HTML omitted --> must be set to the same
+<p>In the case that this call is in response to a call to<br />
+g_settings_backend_write() then <!-- raw HTML omitted -->origin_tag<!-- raw HTML omitted --> must be set to the same<br />
 value that was passed to that call.</p>
 
 
@@ -578,8 +582,8 @@ value that was passed to that call.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This call is a convenience wrapper.  It gets the list of changes from
-<!-- raw HTML omitted -->tree<!-- raw HTML omitted -->, computes the longest common prefix and calls
+    <p>This call is a convenience wrapper.  It gets the list of changes from<br />
+<!-- raw HTML omitted -->tree<!-- raw HTML omitted -->, computes the longest common prefix and calls<br />
 g_settings_backend_changed().</p>
 
 
@@ -649,22 +653,22 @@ g_settings_backend_changed().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Signals that a list of keys have possibly changed.  Backend
-implementations should call this if keys have possibly changed their
+    <p>Signals that a list of keys have possibly changed.  Backend<br />
+implementations should call this if keys have possibly changed their<br />
 values.</p>
-<p><!-- raw HTML omitted -->path<!-- raw HTML omitted --> must be a valid path (ie starting and ending with a slash and
-not containing '//').  Each string in <!-- raw HTML omitted -->items<!-- raw HTML omitted --> must form a valid key
-name when <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is prefixed to it (ie: each item must not start or
+<p><!-- raw HTML omitted -->path<!-- raw HTML omitted --> must be a valid path (ie starting and ending with a slash and<br />
+not containing '//').  Each string in <!-- raw HTML omitted -->items<!-- raw HTML omitted --> must form a valid key<br />
+name when <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is prefixed to it (ie: each item must not start or<br />
 end with '/' and must not contain '//').</p>
-<p>The meaning of this signal is that any of the key names resulting
-from the contatenation of <!-- raw HTML omitted -->path<!-- raw HTML omitted --> with each item in <!-- raw HTML omitted -->items<!-- raw HTML omitted --> may have
+<p>The meaning of this signal is that any of the key names resulting<br />
+from the contatenation of <!-- raw HTML omitted -->path<!-- raw HTML omitted --> with each item in <!-- raw HTML omitted -->items<!-- raw HTML omitted --> may have<br />
 changed.</p>
-<p>The same rules for when notifications must occur apply as per
-g_settings_backend_changed().  These two calls can be used
-interchangeably if exactly one item has changed (although in that
+<p>The same rules for when notifications must occur apply as per<br />
+g_settings_backend_changed().  These two calls can be used<br />
+interchangeably if exactly one item has changed (although in that<br />
 case g_settings_backend_changed() is definitely preferred).</p>
-<p>For efficiency reasons, the implementation should strive for <!-- raw HTML omitted -->path<!-- raw HTML omitted --> to
-be as long as possible (ie: the longest common prefix of all of the
+<p>For efficiency reasons, the implementation should strive for <!-- raw HTML omitted -->path<!-- raw HTML omitted --> to<br />
+be as long as possible (ie: the longest common prefix of all of the<br />
 keys that were changed) but this is not strictly required.</p>
 
 
@@ -749,22 +753,22 @@ keys that were changed) but this is not strictly required.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Signals that all keys below a given path may have possibly changed.
-Backend implementations should call this if an entire path of keys
+    <p>Signals that all keys below a given path may have possibly changed.<br />
+Backend implementations should call this if an entire path of keys<br />
 have possibly changed their values.</p>
-<p><!-- raw HTML omitted -->path<!-- raw HTML omitted --> must be a valid path (ie starting and ending with a slash and
+<p><!-- raw HTML omitted -->path<!-- raw HTML omitted --> must be a valid path (ie starting and ending with a slash and<br />
 not containing '//').</p>
-<p>The meaning of this signal is that any of the key which has a name
+<p>The meaning of this signal is that any of the key which has a name<br />
 starting with <!-- raw HTML omitted -->path<!-- raw HTML omitted --> may have changed.</p>
-<p>The same rules for when notifications must occur apply as per
-g_settings_backend_changed().  This call might be an appropriate
-reasponse to a 'reset' call but implementations are also free to
-explicitly list the keys that were affected by that call if they can
+<p>The same rules for when notifications must occur apply as per<br />
+g_settings_backend_changed().  This call might be an appropriate<br />
+reasponse to a 'reset' call but implementations are also free to<br />
+explicitly list the keys that were affected by that call if they can<br />
 easily do so.</p>
-<p>For efficiency reasons, the implementation should strive for <!-- raw HTML omitted -->path<!-- raw HTML omitted --> to
-be as long as possible (ie: the longest common prefix of all of the
-keys that were changed) but this is not strictly required.  As an
-example, if this function is called with the path of &quot;/&quot; then every
+<p>For efficiency reasons, the implementation should strive for <!-- raw HTML omitted -->path<!-- raw HTML omitted --> to<br />
+be as long as possible (ie: the longest common prefix of all of the<br />
+keys that were changed) but this is not strictly required.  As an<br />
+example, if this function is called with the path of &quot;/&quot; then every<br />
 single key in the application will be notified of a possible change.</p>
 
 
@@ -834,9 +838,9 @@ single key in the application will be notified of a possible change.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Signals that the writability of all keys below a given path may have
+    <p>Signals that the writability of all keys below a given path may have<br />
 changed.</p>
-<p>Since GSettings performs no locking operations for itself, this call
+<p>Since GSettings performs no locking operations for itself, this call<br />
 will always be made in response to external events.</p>
 
 
@@ -892,7 +896,7 @@ will always be made in response to external events.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Signals that the writability of a single key has possibly changed.</p>
-<p>Since GSettings performs no locking operations for itself, this call
+<p>Since GSettings performs no locking operations for itself, this call<br />
 will always be made in response to external events.</p>
 
 
@@ -943,7 +947,7 @@ will always be made in response to external events.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

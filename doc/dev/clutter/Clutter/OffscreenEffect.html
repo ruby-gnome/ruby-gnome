@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::OffscreenEffect";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,7 +101,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -273,9 +275,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -287,6 +291,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Effect.html" title="Clutter::Effect (class)">Effect</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Effect.html#queue_repaint-instance_method" title="Clutter::Effect#queue_repaint (method)">#queue_repaint</a></span></p>
 
+  
   
   
   
@@ -367,8 +372,8 @@
       
       
         &mdash;
-        <div class='inline'><p>a handle to a Cogl texture, or
-%COGL_INVALID_HANDLE. The returned handle has its reference
+        <div class='inline'><p>a handle to a Cogl texture, or<br />
+%COGL_INVALID_HANDLE. The returned handle has its reference<br />
 count increased.</p>
 </div>
       
@@ -390,10 +395,10 @@ count increased.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the origin and size of the offscreen buffer used by <!-- raw HTML omitted -->effect<!-- raw HTML omitted --> to
+    <p>Retrieves the origin and size of the offscreen buffer used by <!-- raw HTML omitted -->effect<!-- raw HTML omitted --> to<br />
 paint the actor to which it has been applied.</p>
-<p>This function should only be called by Clutter::OffscreenEffect
-implementations, from within the Clutter::OffscreenEffectClass.paint_target()
+<p>This function should only be called by Clutter::OffscreenEffect<br />
+implementations, from within the Clutter::OffscreenEffectClass.paint_target()<br />
 virtual function.</p>
 
 
@@ -431,7 +436,7 @@ virtual function.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the offscreen buffer has a valid rectangle,
+        <div class='inline'><p>true if the offscreen buffer has a valid rectangle,<br />
 and false otherwise</p>
 </div>
       
@@ -453,10 +458,10 @@ and false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the size of the offscreen buffer used by <!-- raw HTML omitted -->effect<!-- raw HTML omitted --> to
+    <p>Retrieves the size of the offscreen buffer used by <!-- raw HTML omitted -->effect<!-- raw HTML omitted --> to<br />
 paint the actor to which it has been applied.</p>
-<p>This function should only be called by Clutter::OffscreenEffect
-implementations, from within the Clutter::OffscreenEffectClass.paint_target()
+<p>This function should only be called by Clutter::OffscreenEffect<br />
+implementations, from within the Clutter::OffscreenEffectClass.paint_target()<br />
 virtual function.</p>
 
 
@@ -509,7 +514,7 @@ virtual function.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the offscreen buffer has a valid size,
+        <div class='inline'><p>true if the offscreen buffer has a valid size,<br />
 and false otherwise</p>
 </div>
       
@@ -566,9 +571,9 @@ and false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the material used as a render target for the offscreen
+    <p>Retrieves the material used as a render target for the offscreen<br />
 buffer created by <!-- raw HTML omitted -->effect<!-- raw HTML omitted --></p>
-<p>You should only use the returned Cogl::Material when painting. The
+<p>You should only use the returned Cogl::Material when painting. The<br />
 returned material might change between different frames.</p>
 
 
@@ -587,8 +592,8 @@ returned material might change between different frames.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Cogl::Material or nil. The
-returned material is owned by Clutter and it should not be
+        <div class='inline'><p>a Cogl::Material or nil. The<br />
+returned material is owned by Clutter and it should not be<br />
 modified or freed</p>
 </div>
       
@@ -610,13 +615,13 @@ modified or freed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the texture used as a render target for the offscreen
+    <p>Retrieves the texture used as a render target for the offscreen<br />
 buffer created by <!-- raw HTML omitted -->effect<!-- raw HTML omitted --></p>
-<p>You should only use the returned texture when painting. The texture
-may change after ClutterEffect::pre_paint is called so the effect
-implementation should update any references to the texture after
-chaining-up to the parent's pre_paint implementation. This can be
-used instead of clutter_offscreen_effect_get_target() when the
+<p>You should only use the returned texture when painting. The texture<br />
+may change after ClutterEffect::pre_paint is called so the effect<br />
+implementation should update any references to the texture after<br />
+chaining-up to the parent's pre_paint implementation. This can be<br />
+used instead of clutter_offscreen_effect_get_target() when the<br />
 effect subclass wants to paint using its own material.</p>
 
 
@@ -635,8 +640,8 @@ effect subclass wants to paint using its own material.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Cogl::Handle or %COGL_INVALID_HANDLE. The
-returned texture is owned by Clutter and it should not be
+        <div class='inline'><p>a Cogl::Handle or %COGL_INVALID_HANDLE. The<br />
+returned texture is owned by Clutter and it should not be<br />
 modified or freed</p>
 </div>
       
@@ -654,7 +659,7 @@ modified or freed</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::FileEnumerator";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -414,6 +416,7 @@
 
       
     </ul>
+    
   
 
 
@@ -433,10 +436,10 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Releases all resources used by this enumerator, making the
+    <p>Releases all resources used by this enumerator, making the<br />
 enumerator return %G_IO_ERROR_CLOSED on all calls.</p>
-<p>This will be automatically called when the last reference
-is dropped, but you might want to call this function to make
+<p>This will be automatically called when the last reference<br />
+is dropped, but you might want to call this function to make<br />
 sure resources are released as early as possible.</p>
 
 
@@ -496,9 +499,9 @@ sure resources are released as early as possible.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asynchronously closes the file enumerator.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned in
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned in<br />
 g_file_enumerator_close_finish().</p>
 
 
@@ -548,7 +551,7 @@ g_file_enumerator_close_finish().</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -600,13 +603,13 @@ to call when the request is satisfied</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finishes closing a file enumerator, started from g_file_enumerator_close_async().</p>
-<p>If the file enumerator was already closed when g_file_enumerator_close_async()
-was called, then this function will report %G_IO_ERROR_CLOSED in <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, and
-return false. If the file enumerator had pending operation when the close
-operation was started, then this function will report %G_IO_ERROR_PENDING, and
-return false.  If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> was not nil, then the operation may have been
-cancelled by triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be set, and false will be
+<p>If the file enumerator was already closed when g_file_enumerator_close_async()<br />
+was called, then this function will report %G_IO_ERROR_CLOSED in <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, and<br />
+return false. If the file enumerator had pending operation when the close<br />
+operation was started, then this function will report %G_IO_ERROR_PENDING, and<br />
+return false.  If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> was not nil, then the operation may have been<br />
+cancelled by triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be set, and false will be<br />
 returned.</p>
 
 
@@ -758,10 +761,10 @@ returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return a new #GFile which refers to the file named by <!-- raw HTML omitted -->info<!-- raw HTML omitted --> in the source
-directory of <!-- raw HTML omitted -->enumerator<!-- raw HTML omitted -->.  This function is primarily intended to be used
+    <p>Return a new #GFile which refers to the file named by <!-- raw HTML omitted -->info<!-- raw HTML omitted --> in the source<br />
+directory of <!-- raw HTML omitted -->enumerator<!-- raw HTML omitted -->.  This function is primarily intended to be used<br />
 inside loops with g_file_enumerator_next_file().</p>
-<p>To use this, %G_FILE_ATTRIBUTE_STANDARD_NAME must have been listed in the
+<p>To use this, %G_FILE_ATTRIBUTE_STANDARD_NAME must have been listed in the<br />
 attributes list used when creating the GFile::Enumerator.</p>
 <p>This is a convenience method that's equivalent to:</p>
 <pre class="code ruby"><code class="ruby">  gchar *name = g_file_info_get_name (info);
@@ -786,7 +789,7 @@ attributes list used when creating the GFile::Enumerator.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GFile::Info gotten from g_file_enumerator_next_file()
+        <div class='inline'><p>a GFile::Info gotten from g_file_enumerator_next_file()<br />
 or the async equivalents.</p>
 </div>
       
@@ -904,36 +907,36 @@ or the async equivalents.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is a version of g_file_enumerator_next_file() that's easier to
-use correctly from C programs.  With g_file_enumerator_next_file(),
-the gboolean return value signifies &quot;end of iteration or error&quot;, which
+    <p>This is a version of g_file_enumerator_next_file() that's easier to<br />
+use correctly from C programs.  With g_file_enumerator_next_file(),<br />
+the gboolean return value signifies &quot;end of iteration or error&quot;, which<br />
 requires allocation of a temporary #GError.</p>
-<p>In contrast, with this function, a false return from
-g_file_enumerator_iterate() <em>always</em> means
+<p>In contrast, with this function, a false return from<br />
+g_file_enumerator_iterate() <em>always</em> means<br />
 &quot;error&quot;.  End of iteration is signaled by <!-- raw HTML omitted -->out_info<!-- raw HTML omitted --> or <!-- raw HTML omitted -->out_child<!-- raw HTML omitted --> being nil.</p>
-<p>Another crucial difference is that the references for <!-- raw HTML omitted -->out_info<!-- raw HTML omitted --> and
-<!-- raw HTML omitted -->out_child<!-- raw HTML omitted --> are owned by <!-- raw HTML omitted -->direnum<!-- raw HTML omitted --> (they are cached as hidden
-properties).  You must not unref them in your own code.  This makes
-memory management significantly easier for C code in combination
+<p>Another crucial difference is that the references for <!-- raw HTML omitted -->out_info<!-- raw HTML omitted --> and<br />
+<!-- raw HTML omitted -->out_child<!-- raw HTML omitted --> are owned by <!-- raw HTML omitted -->direnum<!-- raw HTML omitted --> (they are cached as hidden<br />
+properties).  You must not unref them in your own code.  This makes<br />
+memory management significantly easier for C code in combination<br />
 with loops.</p>
-<p>Finally, this function optionally allows retrieving a #GFile as
+<p>Finally, this function optionally allows retrieving a #GFile as<br />
 well.</p>
 <p>You must specify at least one of <!-- raw HTML omitted -->out_info<!-- raw HTML omitted --> or <!-- raw HTML omitted -->out_child<!-- raw HTML omitted -->.</p>
-<p>The code pattern for correctly using g_file_enumerator_iterate() from C
+<p>The code pattern for correctly using g_file_enumerator_iterate() from C<br />
 is:</p>
-<p>|[
-direnum = g_file_enumerate_children (file, ...);
-while (TRUE)
-{
-GFileInfo *info;
-if (!g_file_enumerator_iterate (direnum, &amp;info, NULL, cancellable, error))
-goto out;
-if (!info)
-break;
-... do stuff with &quot;info&quot;; do not unref it! ...
+<p>|[<br />
+direnum = g_file_enumerate_children (file, ...);<br />
+while (TRUE)<br />
+{<br />
+GFileInfo *info;<br />
+if (!g_file_enumerator_iterate (direnum, &amp;info, NULL, cancellable, error))<br />
+goto out;<br />
+if (!info)<br />
+break;<br />
+... do stuff with &quot;info&quot;; do not unref it! ...<br />
 }</p>
-<p>out:
-g_object_unref (direnum); // Note: frees the last <!-- raw HTML omitted -->info<!-- raw HTML omitted -->
+<p>out:<br />
+g_object_unref (direnum); // Note: frees the last <!-- raw HTML omitted -->info<!-- raw HTML omitted --><br />
 ]|</p>
 
 
@@ -1018,14 +1021,14 @@ g_object_unref (direnum); // Note: frees the last <!-- raw HTML omitted -->info<
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns information for the next file in the enumerated object.
-Will block until the information is available. The GFile::Info
-returned from this function will contain attributes that match the
+    <p>Returns information for the next file in the enumerated object.<br />
+Will block until the information is available. The GFile::Info<br />
+returned from this function will contain attributes that match the<br />
 attribute string that was passed when the GFile::Enumerator was created.</p>
-<p>See the documentation of GFile::Enumerator for information about the
+<p>See the documentation of GFile::Enumerator for information about the<br />
 order of returned files.</p>
-<p>On error, returns nil and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted --> to the error. If the
-enumerator is at the end, nil will be returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will
+<p>On error, returns nil and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted --> to the error. If the<br />
+enumerator is at the end, nil will be returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will<br />
 be unset.</p>
 
 
@@ -1063,8 +1066,8 @@ be unset.</p>
       
       
         &mdash;
-        <div class='inline'><p>A GFile::Info or nil on error
-or end of enumerator.  Free the returned object with
+        <div class='inline'><p>A GFile::Info or nil on error<br />
+or end of enumerator.  Free the returned object with<br />
 g_object_unref() when no longer needed.</p>
 </div>
       
@@ -1086,42 +1089,42 @@ g_object_unref() when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Request information for a number of files from the enumerator asynchronously.
-When all I/O for the operation is finished the <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called with
+    <p>Request information for a number of files from the enumerator asynchronously.<br />
+When all I/O for the operation is finished the <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called with<br />
 the requested information.</p>
-<p>See the documentation of GFile::Enumerator for information about the
+<p>See the documentation of GFile::Enumerator for information about the<br />
 order of returned files.</p>
-<p>Once the end of the enumerator is reached, or if an error occurs, the
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called with an empty list. In this case, the previous call
-to g_file_enumerator_next_files_async() will typically have returned fewer
+<p>Once the end of the enumerator is reached, or if an error occurs, the<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called with an empty list. In this case, the previous call<br />
+to g_file_enumerator_next_files_async() will typically have returned fewer<br />
 than <!-- raw HTML omitted -->num_files<!-- raw HTML omitted --> items.</p>
-<p>If a request is cancelled the callback will be called with
+<p>If a request is cancelled the callback will be called with<br />
 %G_IO_ERROR_CANCELLED.</p>
-<p>This leads to the following pseudo-code usage:
-|[
-g_autoptr(GFile) dir = get_directory ();
-g_autoptr(GFileEnumerator) enumerator = NULL;
-g_autolist(GFileInfo) files = NULL;
+<p>This leads to the following pseudo-code usage:<br />
+|[<br />
+g_autoptr(GFile) dir = get_directory ();<br />
+g_autoptr(GFileEnumerator) enumerator = NULL;<br />
+g_autolist(GFileInfo) files = NULL;<br />
 g_autoptr(GError) local_error = NULL;</p>
-<p>enumerator = yield g_file_enumerate_children_async (dir,
-G_FILE_ATTRIBUTE_STANDARD_NAME &quot;,&quot;
-G_FILE_ATTRIBUTE_STANDARD_TYPE,
-G_FILE_QUERY_INFO_NONE,
-G_PRIORITY_DEFAULT,
-cancellable,
-…,
-&amp;local_error);
-if (enumerator == NULL)
+<p>enumerator = yield g_file_enumerate_children_async (dir,<br />
+G_FILE_ATTRIBUTE_STANDARD_NAME &quot;,&quot;<br />
+G_FILE_ATTRIBUTE_STANDARD_TYPE,<br />
+G_FILE_QUERY_INFO_NONE,<br />
+G_PRIORITY_DEFAULT,<br />
+cancellable,<br />
+…,<br />
+&amp;local_error);<br />
+if (enumerator == NULL)<br />
 g_error (&quot;Error enumerating: %s&quot;, local_error-&gt;message);</p>
-<p>// Loop until no files are returned, either because the end of the enumerator
-// has been reached, or an error was returned.
-do
-{
-files = yield g_file_enumerator_next_files_async (enumerator,
-5,  // number of files to request
-G_PRIORITY_DEFAULT,
-cancellable,
-…,
+<p>// Loop until no files are returned, either because the end of the enumerator<br />
+// has been reached, or an error was returned.<br />
+do<br />
+{<br />
+files = yield g_file_enumerator_next_files_async (enumerator,<br />
+5,  // number of files to request<br />
+G_PRIORITY_DEFAULT,<br />
+cancellable,<br />
+…,<br />
 &amp;local_error);</p>
 <pre class="code ruby"><code class="ruby">// Process the returned files, but don’t assume that exactly 5 were returned.
 for (GList *l = files; l != NULL; l = l-&gt;next)
@@ -1130,16 +1133,16 @@ for (GList *l = files; l != NULL; l = l-&gt;next)
     handle_file_info (info);
   }
 </code></pre>
-<p>}
+<p>}<br />
 while (files != NULL);</p>
-<p>if (local_error != NULL &amp;&amp;
-!g_error_matches (local_error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-g_error (&quot;Error while enumerating: %s&quot;, local_error-&gt;message);
+<p>if (local_error != NULL &amp;&amp;<br />
+!g_error_matches (local_error, G_IO_ERROR, G_IO_ERROR_CANCELLED))<br />
+g_error (&quot;Error while enumerating: %s&quot;, local_error-&gt;message);<br />
 ]|</p>
-<p>During an async request no other sync and async calls are allowed, and will
+<p>During an async request no other sync and async calls are allowed, and will<br />
 result in %G_IO_ERROR_PENDING errors.</p>
-<p>Any outstanding I/O request with higher priority (lower numerical value) will
-be executed before an outstanding request with lower priority. Default
+<p>Any outstanding I/O request with higher priority (lower numerical value) will<br />
+be executed before an outstanding request with lower priority. Default<br />
 priority is %G_PRIORITY_DEFAULT.</p>
 
 
@@ -1204,7 +1207,7 @@ priority is %G_PRIORITY_DEFAULT.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -1292,8 +1295,8 @@ to call when the request is satisfied</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GList of GFile::Infos. You must free the list with
-g_list_free() and unref the infos with g_object_unref() when you're
+        <div class='inline'><p>a #GList of GFile::Infos. You must free the list with<br />
+g_list_free() and unref the infos with g_object_unref() when you're<br />
 done with them.</p>
 </div>
       
@@ -1365,7 +1368,7 @@ done with them.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GdkX11::X11Surface";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -140,6 +142,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -448,9 +451,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -503,7 +508,7 @@
       
       
         &mdash;
-        <div class='inline'><p>the <code>GdkDisplay</code> corresponding to the
+        <div class='inline'><p>the <code>GdkDisplay</code> corresponding to the<br />
 window handle</p>
 </div>
       
@@ -537,7 +542,7 @@ window handle</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GdkSurface</code> wrapper
+        <div class='inline'><p>the <code>GdkSurface</code> wrapper<br />
 for the native  window</p>
 </div>
       
@@ -604,11 +609,11 @@ for the native  window</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function can be used to disable frame synchronization for a surface.
-Normally frame synchronziation will be enabled or disabled based on whether
-the system has a compositor that supports frame synchronization, but if
-the surface is not directly managed by the window manager, then frame
-synchronziation may need to be disabled. This is the case for a surface
+    <p>This function can be used to disable frame synchronization for a surface.<br />
+Normally frame synchronziation will be enabled or disabled based on whether<br />
+the system has a compositor that supports frame synchronization, but if<br />
+the surface is not directly managed by the window manager, then frame<br />
+synchronziation may need to be disabled. This is the case for a surface<br />
 embedded via the XEMBED protocol.</p>
 
 
@@ -702,7 +707,7 @@ embedded via the XEMBED protocol.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the group leader of <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> to be <!-- raw HTML omitted -->leader<!-- raw HTML omitted -->.
+    <p>Sets the group leader of <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> to be <!-- raw HTML omitted -->leader<!-- raw HTML omitted -->.<br />
 See the ICCCM for details.</p>
 
 
@@ -757,9 +762,9 @@ See the ICCCM for details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Moves the surface to the correct workspace when running under a
-window manager that supports multiple workspaces, as described
-in the <a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Manager Hints</a> specification.
+    <p>Moves the surface to the correct workspace when running under a<br />
+window manager that supports multiple workspaces, as described<br />
+in the <a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Manager Hints</a> specification.<br />
 Will not do anything if the surface is already on all workspaces.</p>
 
 
@@ -795,8 +800,8 @@ Will not do anything if the surface is already on all workspaces.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Moves the surface to the given workspace when running unde a
-window manager that supports multiple workspaces, as described
+    <p>Moves the surface to the given workspace when running unde a<br />
+window manager that supports multiple workspaces, as described<br />
 in the <a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Manager Hints</a> specification.</p>
 
 
@@ -851,8 +856,8 @@ in the <a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Ma
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function modifies or removes an arbitrary X11 window
-property of type UTF8_STRING.  If the given <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> is
+    <p>This function modifies or removes an arbitrary X11 window<br />
+property of type UTF8_STRING.  If the given <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> is<br />
 not a toplevel surface, it is ignored.</p>
 
 
@@ -922,7 +927,7 @@ not a toplevel surface, it is ignored.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a hint on <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> that pagers should not
+    <p>Sets a hint on <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> that pagers should not<br />
 display it. See the EWMH for details.</p>
 
 
@@ -977,7 +982,7 @@ display it. See the EWMH for details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a hint on <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> that taskbars should not
+    <p>Sets a hint on <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> that taskbars should not<br />
 display it. See the EWMH for details.</p>
 
 
@@ -1032,13 +1037,13 @@ display it. See the EWMH for details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>GTK applications can request a dark theme variant. In order to
-make other applications - namely window managers using GTK for
-themeing - aware of this choice, GTK uses this function to
-export the requested theme variant as _GTK_THEME_VARIANT property
+    <p>GTK applications can request a dark theme variant. In order to<br />
+make other applications - namely window managers using GTK for<br />
+themeing - aware of this choice, GTK uses this function to<br />
+export the requested theme variant as _GTK_THEME_VARIANT property<br />
 on toplevel surfaces.</p>
-<p>Note that this property is automatically updated by GTK, so this
-function should only be used by applications which do not use GTK
+<p>Note that this property is automatically updated by GTK, so this<br />
+function should only be used by applications which do not use GTK<br />
 to create toplevel surfaces.</p>
 
 
@@ -1093,7 +1098,7 @@ to create toplevel surfaces.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a hint on <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> that it needs user attention.
+    <p>Sets a hint on <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> that it needs user attention.<br />
 See the ICCCM for details.</p>
 
 
@@ -1148,16 +1153,16 @@ See the ICCCM for details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The application can use this call to update the _NET_WM_USER_TIME
-property on a toplevel surface.  This property stores an Xserver
-time which represents the time of the last user input event
-received for this surface.  This property may be used by the window
-manager to alter the focus, stacking, and/or placement behavior of
-surfaces when they are mapped depending on whether the new surface
-was created by a user action or is a &quot;pop-up&quot; surface activated by a
+    <p>The application can use this call to update the _NET_WM_USER_TIME<br />
+property on a toplevel surface.  This property stores an Xserver<br />
+time which represents the time of the last user input event<br />
+received for this surface.  This property may be used by the window<br />
+manager to alter the focus, stacking, and/or placement behavior of<br />
+surfaces when they are mapped depending on whether the new surface<br />
+was created by a user action or is a &quot;pop-up&quot; surface activated by a<br />
 timer or some other event.</p>
-<p>Note that this property is automatically updated by GDK, so this
-function should only be used by applications which handle input
+<p>Note that this property is automatically updated by GDK, so this<br />
+function should only be used by applications which handle input<br />
 events bypassing GDK.</p>
 
 
@@ -1247,7 +1252,7 @@ events bypassing GDK.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

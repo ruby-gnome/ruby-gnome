@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Atk::Value";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -86,20 +88,20 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The ATK interface implemented by valuators and components which display or select a value from a bounded range of values.</p>
-<p>Atk::Value should be implemented for components which either display
-a value from a bounded range, or which allow the user to specify a
-value from a bounded range, or both. For instance, most sliders and
-range controls, as well as dials, should have Atk::Object
-representations which implement Atk::Value on the component's
-behalf. At::KValues may be read-only, in which case attempts to
+<p>Atk::Value should be implemented for components which either display<br />
+a value from a bounded range, or which allow the user to specify a<br />
+value from a bounded range, or both. For instance, most sliders and<br />
+range controls, as well as dials, should have Atk::Object<br />
+representations which implement Atk::Value on the component's<br />
+behalf. At::KValues may be read-only, in which case attempts to<br />
 alter the value return would fail.</p>
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
-<p>A level bar whose value changes to reflect the battery charge. The
-color remains the same regardless of the charge and there is no
-on-screen text reflecting the fullness of the battery. In this
-case, because the position within the bar is the only indication
-the user has of the current charge, value text should not be
+<p>A level bar whose value changes to reflect the battery charge. The<br />
+color remains the same regardless of the charge and there is no<br />
+on-screen text reflecting the fullness of the battery. In this<br />
+case, because the position within the bar is the only indication<br />
+the user has of the current charge, value text should not be<br />
 provided by the implementor.</p>
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
@@ -471,6 +473,7 @@ provided by the implementor.</p>
 
       
     </ul>
+    
   
 
 
@@ -878,7 +881,7 @@ provided by the implementor.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>that represents the minimum, maximum and descriptor (if available)
+    <p>that represents the minimum, maximum and descriptor (if available)<br />
 of <!-- raw HTML omitted -->obj<!-- raw HTML omitted -->. NULL if that range is not defined.</p>
 
 
@@ -937,7 +940,7 @@ of <!-- raw HTML omitted -->obj<!-- raw HTML omitted -->. NULL if that range is 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Atk::Range which each of the subranges defined for this object. Free
+    <p>Atk::Range which each of the subranges defined for this object. Free<br />
 the returns list with g_slist_free().</p>
 
 
@@ -1080,10 +1083,10 @@ the returns list with g_slist_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the minimum increment by which the value of this object may be
-changed.  If zero, the minimum increment is undefined, which may
-mean that it is limited only by the floating point precision of the
-platform.
+    <p>Gets the minimum increment by which the value of this object may be<br />
+changed.  If zero, the minimum increment is undefined, which may<br />
+mean that it is limited only by the floating point precision of the<br />
+platform.<br />
 object may be changed. zero if undefined.</p>
 
 
@@ -1123,8 +1126,8 @@ object may be changed. zero if undefined.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the range of this object.
-that represents the minimum, maximum and descriptor (if available)
+    <p>Gets the range of this object.<br />
+that represents the minimum, maximum and descriptor (if available)<br />
 of <!-- raw HTML omitted -->obj<!-- raw HTML omitted -->. NULL if that range is not defined.</p>
 
 
@@ -1305,9 +1308,9 @@ of <!-- raw HTML omitted -->obj<!-- raw HTML omitted -->. NULL if that range is 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the list of subranges defined for this object. See Atk::Value
-introduction for examples of subranges and when to expose them.
-Atk::Range which each of the subranges defined for this object. Free
+    <p>Gets the list of subranges defined for this object. See Atk::Value<br />
+introduction for examples of subranges and when to expose them.<br />
+Atk::Range which each of the subranges defined for this object. Free<br />
 the returns list with g_slist_free().</p>
 
 
@@ -1348,16 +1351,16 @@ the returns list with g_slist_free().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the value of this object.</p>
-<p>This method is intended to provide a way to change the value of the
-object. In any case, it is possible that the value can't be
-modified (ie: a read-only component). If the value changes due this
-call, it is possible that the text could change, and will trigger
+<p>This method is intended to provide a way to change the value of the<br />
+object. In any case, it is possible that the value can't be<br />
+modified (ie: a read-only component). If the value changes due this<br />
+call, it is possible that the text could change, and will trigger<br />
 an Atk::Value::value-changed signal emission.</p>
-<p>Note for implementors: the deprecated atk_value_set_current_value()
-method returned TRUE or FALSE depending if the value was assigned
-or not. In the practice several implementors were not able to
-decide it, and returned TRUE in any case. For that reason it is not
-required anymore to return if the value was properly assigned or
+<p>Note for implementors: the deprecated atk_value_set_current_value()<br />
+method returned TRUE or FALSE depending if the value was assigned<br />
+or not. In the practice several implementors were not able to<br />
+decide it, and returned TRUE in any case. For that reason it is not<br />
+required anymore to return if the value was properly assigned or<br />
 not.</p>
 
 
@@ -1408,7 +1411,7 @@ not.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

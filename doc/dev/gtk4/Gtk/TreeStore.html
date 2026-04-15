@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::TreeStore";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/tree-store.rb</dd>
+    <dd>lib/gtk4/tree-store.rb
+</dd>
   </dl>
   
 </div>
@@ -761,6 +763,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -860,10 +863,10 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Appends a new row to <!-- raw HTML omitted -->tree_store<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is non-nil, then it will append the new row after the last
+<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is non-nil, then it will append the new row after the last<br />
 child of <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->, otherwise it will append a row to the top level.</p>
-<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row will
-be empty after this function is called. To fill in values, you need to call
+<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row will<br />
+be empty after this function is called. To fill in values, you need to call<br />
 gtk_tree_store_set() or gtk_tree_store_set_value().</p>
 
 
@@ -956,10 +959,10 @@ gtk_tree_store_set() or gtk_tree_store_set_value().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Appends a new row to <!-- raw HTML omitted -->tree_store<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is non-nil, then it will append the new row after the last
+<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is non-nil, then it will append the new row after the last<br />
 child of <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->, otherwise it will append a row to the top level.</p>
-<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row will
-be empty after this function is called. To fill in values, you need to call
+<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row will<br />
+be empty after this function is called. To fill in values, you need to call<br />
 gtk_tree_store_set() or gtk_tree_store_set_value().</p>
 
 
@@ -1167,12 +1170,12 @@ gtk_tree_store_set() or gtk_tree_store_set_value().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new row at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
-<p>If parent is non-nil, then the row will be made a child of <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->.
+<p>If parent is non-nil, then the row will be made a child of <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->.<br />
 Otherwise, the row will be created at the toplevel.</p>
-<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is <code>-1</code> or is larger than the number of rows at that level,
+<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is <code>-1</code> or is larger than the number of rows at that level,<br />
 then the new row will be inserted to the end of the list.</p>
-<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row
-will be empty after this function is called. To fill in values, you
+<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row<br />
+will be empty after this function is called. To fill in values, you<br />
 need to call gtk_tree_store_set() or gtk_tree_store_set_value().</p>
 
 
@@ -1283,12 +1286,12 @@ need to call gtk_tree_store_set() or gtk_tree_store_set_value().</p>
   <div class="discussion">
     <p>Inserts a new row after <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->.</p>
 <p>If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil, then the row will be prepended to <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->’s children.</p>
-<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> and <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> are nil, then the row will be prepended to the
+<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> and <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> are nil, then the row will be prepended to the<br />
 toplevel.</p>
-<p>If both <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> and <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> are set, then <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> must be the parent
+<p>If both <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> and <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> are set, then <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> must be the parent<br />
 of <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->. When <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is set, <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is optional.</p>
-<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row will
-be empty after this function is called. To fill in values, you need to call
+<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row will<br />
+be empty after this function is called. To fill in values, you need to call<br />
 gtk_tree_store_set() or gtk_tree_store_set_value().</p>
 
 
@@ -1397,12 +1400,12 @@ gtk_tree_store_set() or gtk_tree_store_set_value().</p>
   <div class="discussion">
     <p>Inserts a new row after <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->.</p>
 <p>If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil, then the row will be prepended to <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->’s children.</p>
-<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> and <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> are nil, then the row will be prepended to the
+<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> and <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> are nil, then the row will be prepended to the<br />
 toplevel.</p>
-<p>If both <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> and <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> are set, then <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> must be the parent
+<p>If both <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> and <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> are set, then <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> must be the parent<br />
 of <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->. When <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is set, <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is optional.</p>
-<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row will
-be empty after this function is called. To fill in values, you need to call
+<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row will<br />
+be empty after this function is called. To fill in values, you need to call<br />
 gtk_tree_store_set() or gtk_tree_store_set_value().</p>
 
 
@@ -1503,12 +1506,12 @@ gtk_tree_store_set() or gtk_tree_store_set_value().</p>
   <div class="discussion">
     <p>Inserts a new row before <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->.</p>
 <p>If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil, then the row will be appended to <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->’s children.</p>
-<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> and <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> are nil, then the row will be appended to the
+<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> and <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> are nil, then the row will be appended to the<br />
 toplevel.</p>
-<p>If both <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> and <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> are set, then <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> must be the parent
+<p>If both <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> and <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> are set, then <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> must be the parent<br />
 of <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->. When <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is set, <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is optional.</p>
-<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row will
-be empty after this function is called. To fill in values, you need to call
+<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row will<br />
+be empty after this function is called. To fill in values, you need to call<br />
 gtk_tree_store_set() or gtk_tree_store_set_value().</p>
 
 
@@ -1617,12 +1620,12 @@ gtk_tree_store_set() or gtk_tree_store_set_value().</p>
   <div class="discussion">
     <p>Inserts a new row before <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->.</p>
 <p>If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil, then the row will be appended to <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->’s children.</p>
-<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> and <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> are nil, then the row will be appended to the
+<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> and <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> are nil, then the row will be appended to the<br />
 toplevel.</p>
-<p>If both <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> and <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> are set, then <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> must be the parent
+<p>If both <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> and <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> are set, then <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> must be the parent<br />
 of <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->. When <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is set, <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is optional.</p>
-<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row will
-be empty after this function is called. To fill in values, you need to call
+<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row will<br />
+be empty after this function is called. To fill in values, you need to call<br />
 gtk_tree_store_set() or gtk_tree_store_set_value().</p>
 
 
@@ -1722,12 +1725,12 @@ gtk_tree_store_set() or gtk_tree_store_set_value().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new row at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
-<p>If parent is non-nil, then the row will be made a child of <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->.
+<p>If parent is non-nil, then the row will be made a child of <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->.<br />
 Otherwise, the row will be created at the toplevel.</p>
-<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is <code>-1</code> or is larger than the number of rows at that level,
+<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is <code>-1</code> or is larger than the number of rows at that level,<br />
 then the new row will be inserted to the end of the list.</p>
-<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row
-will be empty after this function is called. To fill in values, you
+<p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this new row. The row<br />
+will be empty after this function is called. To fill in values, you<br />
 need to call gtk_tree_store_set() or gtk_tree_store_set_value().</p>
 
 
@@ -1828,8 +1831,8 @@ need to call gtk_tree_store_set() or gtk_tree_store_set_value().</p>
   <div class="discussion">
     <p>Creates a new row at the given <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
 <p>The <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> parameter will be changed to point to this  new row.</p>
-<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is -1, or larger than the number of rows on the list, then
-the new row will be appended to the list. The row will be filled with
+<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is -1, or larger than the number of rows on the list, then<br />
+the new row will be appended to the list. The row will be filled with<br />
 the values given to this function.</p>
 <p>Calling</p>
 <pre class="code ruby"><code class="ruby">gtk_tree_store_insert_with_values (tree_store, iter, position, ...)
@@ -1838,11 +1841,11 @@ the values given to this function.</p>
 <pre class="code c"><code class="c">gtk_tree_store_insert (tree_store, iter, position);
 gtk_tree_store_set (tree_store, iter, ...);
 </code></pre>
-<p>with the different that the former will only emit a row_inserted signal,
-while the latter will emit row_inserted, row_changed and if the tree store
+<p>with the different that the former will only emit a row_inserted signal,<br />
+while the latter will emit row_inserted, row_changed and if the tree store<br />
 is sorted, rows_reordered.</p>
-<p>Since emitting the rows_reordered signal repeatedly can affect the
-performance of the program, gtk_tree_store_insert_with_values() should
+<p>Since emitting the rows_reordered signal repeatedly can affect the<br />
+performance of the program, gtk_tree_store_insert_with_values() should<br />
 generally be preferred when inserting rows in a sorted tree store.</p>
 
 
@@ -1942,7 +1945,7 @@ generally be preferred when inserting rows in a sorted tree store.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A variant of gtk_tree_store_insert_with_values() which takes
+    <p>A variant of gtk_tree_store_insert_with_values() which takes<br />
 the columns and values as two arrays, instead of varargs.</p>
 <p>This function is mainly intended for language bindings.</p>
 
@@ -2147,7 +2150,7 @@ the columns and values as two arrays, instead of varargs.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the depth of the position pointed by the iterator</p>
-<p>The depth will be 0 for anything on the root level, 1 for anything down
+<p>The depth will be 0 for anything on the root level, 1 for anything down<br />
 a level, etc.</p>
 
 
@@ -2207,7 +2210,7 @@ a level, etc.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if the given iter is a valid iter for this <code>GtkTreeStore</code>.</p>
-<p>This function is slow. Only use it for debugging and/or testing
+<p>This function is slow. Only use it for debugging and/or testing<br />
 purposes.</p>
 
 
@@ -2411,10 +2414,10 @@ purposes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Prepends a new row to <!-- raw HTML omitted -->tree_store<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is non-nil, then it will prepend the new row before the first
-child of <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->, otherwise it will prepend a row to the top level. The
-<code>iter</code> parameter will be changed to point to this new row.  The row will
-be empty after this function is called. To fill in values, you need to
+<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is non-nil, then it will prepend the new row before the first<br />
+child of <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->, otherwise it will prepend a row to the top level. The<br />
+<code>iter</code> parameter will be changed to point to this new row.  The row will<br />
+be empty after this function is called. To fill in values, you need to<br />
 call gtk_tree_store_set() or gtk_tree_store_set_value().</p>
 
 
@@ -2507,10 +2510,10 @@ call gtk_tree_store_set() or gtk_tree_store_set_value().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Prepends a new row to <!-- raw HTML omitted -->tree_store<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is non-nil, then it will prepend the new row before the first
-child of <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->, otherwise it will prepend a row to the top level. The
-<code>iter</code> parameter will be changed to point to this new row.  The row will
-be empty after this function is called. To fill in values, you need to
+<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is non-nil, then it will prepend the new row before the first<br />
+child of <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->, otherwise it will prepend a row to the top level. The<br />
+<code>iter</code> parameter will be changed to point to this new row.  The row will<br />
+be empty after this function is called. To fill in values, you need to<br />
 call gtk_tree_store_set() or gtk_tree_store_set_value().</p>
 
 
@@ -2595,7 +2598,7 @@ call gtk_tree_store_set() or gtk_tree_store_set_value().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Removes <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> from <!-- raw HTML omitted -->tree_store<!-- raw HTML omitted -->.</p>
-<p>After being removed, <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is set to the next valid row at that level, or
+<p>After being removed, <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is set to the next valid row at that level, or<br />
 invalidated if it previously pointed to the last one.</p>
 
 
@@ -2654,7 +2657,7 @@ invalidated if it previously pointed to the last one.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reorders the children of <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> in <!-- raw HTML omitted -->tree_store<!-- raw HTML omitted --> to follow the order
+    <p>Reorders the children of <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> in <!-- raw HTML omitted -->tree_store<!-- raw HTML omitted --> to follow the order<br />
 indicated by <!-- raw HTML omitted -->new_order<!-- raw HTML omitted -->.</p>
 <p>Note that this function only works with unsorted stores.</p>
 
@@ -2690,8 +2693,8 @@ indicated by <!-- raw HTML omitted -->new_order<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>an array of integers mapping the new position
-of each child to its old position before the re-ordering,
+        <div class='inline'><p>an array of integers mapping the new position<br />
+of each child to its old position before the re-ordering,<br />
 i.e. <code>new_order[newpos] = oldpos</code></p>
 </div>
       
@@ -2728,14 +2731,14 @@ i.e. <code>new_order[newpos] = oldpos</code></p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the value of one or more cells in the row referenced by <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
-<p>The variable argument list should contain integer column numbers,
+<p>The variable argument list should contain integer column numbers,<br />
 each column number followed by the value to be set.</p>
 <p>The list is terminated by a value of <code>-1</code>.</p>
-<p>For example, to set column 0 with type <code>G_TYPE_STRING</code> to “Foo”, you would
+<p>For example, to set column 0 with type <code>G_TYPE_STRING</code> to “Foo”, you would<br />
 write</p>
 <pre class="code c"><code class="c">gtk_tree_store_set (store, iter, 0, &quot;Foo&quot;, -1);
 </code></pre>
-<p>The value will be referenced by the store if it is a <code>G_TYPE_OBJECT</code>, and it
+<p>The value will be referenced by the store if it is a <code>G_TYPE_OBJECT</code>, and it<br />
 will be copied if it is a <code>G_TYPE_STRING</code> or <code>G_TYPE_BOXED</code>.</p>
 
 
@@ -2806,11 +2809,11 @@ will be copied if it is a <code>G_TYPE_STRING</code> or <code>G_TYPE_BOXED</code
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the type of the columns in a tree store.</p>
-<p>This function is meant primarily for types that inherit from
-<code>GtkTreeStore</code>, and should only be used when constructing a new
+<p>This function is meant primarily for types that inherit from<br />
+<code>GtkTreeStore</code>, and should only be used when constructing a new<br />
 <code>GtkTreeStore</code>.</p>
-<p>This functions cannot be called after a row has been added,
-or a method on the <code>GtkTreeModel</code> interface is called on the
+<p>This functions cannot be called after a row has been added,<br />
+or a method on the <code>GtkTreeModel</code> interface is called on the<br />
 tree store.</p>
 
 
@@ -2950,7 +2953,7 @@ tree store.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the data in the cell specified by <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> and <!-- raw HTML omitted -->column<!-- raw HTML omitted -->.</p>
-<p>The type of <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be convertible to the type of the
+<p>The type of <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be convertible to the type of the<br />
 column.</p>
 
 
@@ -3035,10 +3038,10 @@ column.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A variant of gtk_tree_store_set_valist() which takes
-the columns and values as two arrays, instead of using variadic
+    <p>A variant of gtk_tree_store_set_valist() which takes<br />
+the columns and values as two arrays, instead of using variadic<br />
 arguments.</p>
-<p>This function is mainly intended for language bindings or in case
+<p>This function is mainly intended for language bindings or in case<br />
 the number of columns to change is not known until run-time.</p>
 
 
@@ -3204,7 +3207,7 @@ the number of columns to change is not known until run-time.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

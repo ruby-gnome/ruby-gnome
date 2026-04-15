@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::DeviceProviderFactory";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,7 +101,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -200,6 +202,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -347,9 +350,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -361,6 +366,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="PluginFeature.html" title="Gst::PluginFeature (class)">PluginFeature</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="PluginFeature.html#check_version-instance_method" title="Gst::PluginFeature#check_version (method)">#check_version</a></span>, <span class='object_link'><a href="PluginFeature.html#list_copy-class_method" title="Gst::PluginFeature.list_copy (method)">list_copy</a></span>, <span class='object_link'><a href="PluginFeature.html#list_debug-class_method" title="Gst::PluginFeature.list_debug (method)">list_debug</a></span>, <span class='object_link'><a href="PluginFeature.html#list_free-class_method" title="Gst::PluginFeature.list_free (method)">list_free</a></span>, <span class='object_link'><a href="PluginFeature.html#load-instance_method" title="Gst::PluginFeature#load (method)">#load</a></span>, <span class='object_link'><a href="PluginFeature.html#plugin-instance_method" title="Gst::PluginFeature#plugin (method)">#plugin</a></span>, <span class='object_link'><a href="PluginFeature.html#plugin_name-instance_method" title="Gst::PluginFeature#plugin_name (method)">#plugin_name</a></span>, <span class='object_link'><a href="PluginFeature.html#rank-instance_method" title="Gst::PluginFeature#rank (method)">#rank</a></span>, <span class='object_link'><a href="PluginFeature.html#rank=-instance_method" title="Gst::PluginFeature#rank= (method)">#rank=</a></span>, <span class='object_link'><a href="PluginFeature.html#rank_compare_func-class_method" title="Gst::PluginFeature.rank_compare_func (method)">rank_compare_func</a></span>, <span class='object_link'><a href="PluginFeature.html#rank_raw-instance_method" title="Gst::PluginFeature#rank_raw (method)">#rank_raw</a></span></p>
 
+  
   
   
   
@@ -389,8 +395,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Search for an device provider factory of the given name. Refs the returned
-device provider factory; caller is responsible for unreffing.
+    <p>Search for an device provider factory of the given name. Refs the returned<br />
+device provider factory; caller is responsible for unreffing.<br />
 found, nil otherwise</p>
 
 
@@ -449,8 +455,8 @@ found, nil otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the device provider of the type defined by the given device
-provider factory.
+    <p>Returns the device provider of the type defined by the given device<br />
+provider factory.<br />
 if unable to create device provider</p>
 
 
@@ -509,9 +515,9 @@ if unable to create device provider</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get a list of factories with a rank greater or equal to <!-- raw HTML omitted -->minrank<!-- raw HTML omitted -->.
-The list of factories is returned by decreasing rank.
-a #GList of Gst::DeviceProviderFactory device providers. Use
+    <p>Get a list of factories with a rank greater or equal to <!-- raw HTML omitted -->minrank<!-- raw HTML omitted -->.<br />
+The list of factories is returned by decreasing rank.<br />
+a #GList of Gst::DeviceProviderFactory device providers. Use<br />
 gst_plugin_feature_list_free() after usage.</p>
 
 
@@ -572,8 +578,8 @@ gst_plugin_feature_list_free() after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the #GType for device providers managed by this factory. The type can
-only be retrieved if the device provider factory is loaded, which can be
+    <p>Get the #GType for device providers managed by this factory. The type can<br />
+only be retrieved if the device provider factory is loaded, which can be<br />
 assured with gst_plugin_feature_load().</p>
 
 
@@ -613,8 +619,8 @@ assured with gst_plugin_feature_load().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the device provider of the type defined by the given device
-providerfactory.
+    <p>Returns the device provider of the type defined by the given device<br />
+providerfactory.<br />
 if the device provider couldn't be created</p>
 
 
@@ -654,7 +660,7 @@ if the device provider couldn't be created</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the metadata on <!-- raw HTML omitted -->factory<!-- raw HTML omitted --> with <!-- raw HTML omitted -->key<!-- raw HTML omitted -->.
+    <p>Get the metadata on <!-- raw HTML omitted -->factory<!-- raw HTML omitted --> with <!-- raw HTML omitted -->key<!-- raw HTML omitted -->.<br />
 when there was no metadata with the given <!-- raw HTML omitted -->key<!-- raw HTML omitted -->.</p>
 
 
@@ -732,7 +738,7 @@ when there was no metadata with the given <!-- raw HTML omitted -->key<!-- raw H
       
       
         &mdash;
-        <div class='inline'><p>a &quot;/&quot; separate list of classes to match, only match
+        <div class='inline'><p>a &quot;/&quot; separate list of classes to match, only match<br />
 if all classes are matched</p>
 </div>
       
@@ -791,7 +797,7 @@ if all classes are matched</p>
       
       
         &mdash;
-        <div class='inline'><p>a nil terminated array
+        <div class='inline'><p>a nil terminated array<br />
 of classes to match, only match if all classes are matched</p>
 </div>
       
@@ -831,8 +837,8 @@ of classes to match, only match if all classes are matched</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the available keys for the metadata on <!-- raw HTML omitted -->factory<!-- raw HTML omitted -->.
-an array of key strings, or nil when there is no
+    <p>Get the available keys for the metadata on <!-- raw HTML omitted -->factory<!-- raw HTML omitted -->.<br />
+an array of key strings, or nil when there is no<br />
 metadata. Free with g_strfreev() when no longer needed.</p>
 
 
@@ -864,7 +870,7 @@ metadata. Free with g_strfreev() when no longer needed.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

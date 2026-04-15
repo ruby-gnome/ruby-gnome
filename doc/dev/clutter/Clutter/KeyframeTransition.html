@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::KeyframeTransition";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,14 +101,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The <code>ClutterKeyframeTransitionClass</code> structure contains only
+    <p>The <code>ClutterKeyframeTransitionClass</code> structure contains only<br />
 private data.</p>
 
 
@@ -341,9 +343,11 @@ private data.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -363,9 +367,11 @@ private data.</p>
   
   
   
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Transition.html" title="Clutter::Transition (class)">Transition</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Transition.html#animatable-instance_method" title="Clutter::Transition#animatable (method)">#animatable</a></span>, <span class='object_link'><a href="Transition.html#animatable=-instance_method" title="Clutter::Transition#animatable= (method)">#animatable=</a></span>, <span class='object_link'><a href="Transition.html#from_value=-instance_method" title="Clutter::Transition#from_value= (method)">#from_value=</a></span>, <span class='object_link'><a href="Transition.html#interval-instance_method" title="Clutter::Transition#interval (method)">#interval</a></span>, <span class='object_link'><a href="Transition.html#interval=-instance_method" title="Clutter::Transition#interval= (method)">#interval=</a></span>, <span class='object_link'><a href="Transition.html#remove_on_complete-instance_method" title="Clutter::Transition#remove_on_complete (method)">#remove_on_complete</a></span>, <span class='object_link'><a href="Transition.html#remove_on_complete=-instance_method" title="Clutter::Transition#remove_on_complete= (method)">#remove_on_complete=</a></span>, <span class='object_link'><a href="Transition.html#remove_on_complete%3F-instance_method" title="Clutter::Transition#remove_on_complete? (method)">#remove_on_complete?</a></span>, <span class='object_link'><a href="Transition.html#set_from-instance_method" title="Clutter::Transition#set_from (method)">#set_from</a></span>, <span class='object_link'><a href="Transition.html#set_to-instance_method" title="Clutter::Transition#set_to (method)">#set_to</a></span>, <span class='object_link'><a href="Transition.html#to_value=-instance_method" title="Clutter::Transition#to_value= (method)">#to_value=</a></span></p>
 
+  
   
   
   
@@ -474,7 +480,7 @@ private data.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the details of the key frame at <!-- raw HTML omitted -->index_<!-- raw HTML omitted --> inside <!-- raw HTML omitted -->transition<!-- raw HTML omitted -->.</p>
-<p>The <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> must already have key frames set, and <!-- raw HTML omitted -->index_<!-- raw HTML omitted --> must be
+<p>The <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> must already have key frames set, and <!-- raw HTML omitted -->index_<!-- raw HTML omitted --> must be<br />
 smaller than the number of key frames.</p>
 
 
@@ -539,7 +545,7 @@ smaller than the number of key frames.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GValue initialized with the type of
+        <div class='inline'><p>a #GValue initialized with the type of<br />
 the values</p>
 </div>
       
@@ -615,9 +621,9 @@ the values</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the key frames of the <!-- raw HTML omitted -->transition<!-- raw HTML omitted -->.</p>
-<p>This variadic arguments function is a convenience for C developers;
-language bindings should use clutter_keyframe_transition_set_key_frames(),
-clutter_keyframe_transition_set_modes(), and
+<p>This variadic arguments function is a convenience for C developers;<br />
+language bindings should use clutter_keyframe_transition_set_key_frames(),<br />
+clutter_keyframe_transition_set_modes(), and<br />
 clutter_keyframe_transition_set_values() instead.</p>
 
 
@@ -652,7 +658,7 @@ clutter_keyframe_transition_set_values() instead.</p>
       
       
         &mdash;
-        <div class='inline'><p>the number of key frames between the initial
+        <div class='inline'><p>the number of key frames between the initial<br />
 and final values</p>
 </div>
       
@@ -668,7 +674,7 @@ and final values</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of tuples, containing the key frame index, the value
+        <div class='inline'><p>a list of tuples, containing the key frame index, the value<br />
 at the key frame, and the animation mode</p>
 </div>
       
@@ -705,7 +711,7 @@ at the key frame, and the animation mode</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the details of the key frame at <!-- raw HTML omitted -->index_<!-- raw HTML omitted --> inside <!-- raw HTML omitted -->transition<!-- raw HTML omitted -->.</p>
-<p>The <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> must already have a key frame at <!-- raw HTML omitted -->index_<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->index_<!-- raw HTML omitted -->
+<p>The <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> must already have a key frame at <!-- raw HTML omitted -->index_<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->index_<!-- raw HTML omitted --><br />
 must be smaller than the number of key frames inside <!-- raw HTML omitted -->transition<!-- raw HTML omitted -->.</p>
 
 
@@ -806,8 +812,8 @@ must be smaller than the number of key frames inside <!-- raw HTML omitted -->tr
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the keys for each key frame inside <!-- raw HTML omitted -->transition<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> does not hold any key frame, <!-- raw HTML omitted -->n_key_frames<!-- raw HTML omitted --> key frames
-will be created; if <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> already has key frames, <!-- raw HTML omitted -->key_frames<!-- raw HTML omitted --> must
+<p>If <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> does not hold any key frame, <!-- raw HTML omitted -->n_key_frames<!-- raw HTML omitted --> key frames<br />
+will be created; if <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> already has key frames, <!-- raw HTML omitted -->key_frames<!-- raw HTML omitted --> must<br />
 have at least as many elements as the number of key frames.</p>
 
 
@@ -842,7 +848,7 @@ have at least as many elements as the number of key frames.</p>
       
       
         &mdash;
-        <div class='inline'><p>an array of keys between 0.0
+        <div class='inline'><p>an array of keys between 0.0<br />
 and 1.0, one for each key frame</p>
 </div>
       
@@ -879,8 +885,8 @@ and 1.0, one for each key frame</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the easing modes for each key frame inside <!-- raw HTML omitted -->transition<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> does not hold any key frame, <!-- raw HTML omitted -->n_modes<!-- raw HTML omitted --> key frames will
-be created; if <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> already has key frames, <!-- raw HTML omitted -->modes<!-- raw HTML omitted --> must have
+<p>If <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> does not hold any key frame, <!-- raw HTML omitted -->n_modes<!-- raw HTML omitted --> key frames will<br />
+be created; if <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> already has key frames, <!-- raw HTML omitted -->modes<!-- raw HTML omitted --> must have<br />
 at least as many elements as the number of key frames.</p>
 
 
@@ -915,7 +921,7 @@ at least as many elements as the number of key frames.</p>
       
       
         &mdash;
-        <div class='inline'><p>an array of easing modes, one for
+        <div class='inline'><p>an array of easing modes, one for<br />
 each key frame</p>
 </div>
       
@@ -952,8 +958,8 @@ each key frame</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the values for each key frame inside <!-- raw HTML omitted -->transition<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> does not hold any key frame, <!-- raw HTML omitted -->n_values<!-- raw HTML omitted --> key frames will
-be created; if <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> already has key frames, <!-- raw HTML omitted -->values<!-- raw HTML omitted --> must have
+<p>If <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> does not hold any key frame, <!-- raw HTML omitted -->n_values<!-- raw HTML omitted --> key frames will<br />
+be created; if <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> already has key frames, <!-- raw HTML omitted -->values<!-- raw HTML omitted --> must have<br />
 at least as many elements as the number of key frames.</p>
 
 
@@ -988,7 +994,7 @@ at least as many elements as the number of key frames.</p>
       
       
         &mdash;
-        <div class='inline'><p>an array of values, one for each
+        <div class='inline'><p>an array of values, one for each<br />
 key frame</p>
 </div>
       
@@ -1020,7 +1026,7 @@ key frame</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

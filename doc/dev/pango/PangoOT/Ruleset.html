@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "PangoOT::Ruleset";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,21 +95,22 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The <code>PangoOTRuleset</code> structure holds a set of features selected
+    <p>The <code>PangoOTRuleset</code> structure holds a set of features selected<br />
 from the tables in an OpenType font.</p>
-<p>A feature is an operation such as adjusting glyph positioning
-that should be applied to a text feature such as a certain
+<p>A feature is an operation such as adjusting glyph positioning<br />
+that should be applied to a text feature such as a certain<br />
 type of accent.</p>
-<p>A <code>PangoOTRuleset</code> is created with [ctor<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.new],
-features are added to it with [method<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.add_feature],
-then it is applied to a <code>PangoGlyphString</code> with
+<p>A <code>PangoOTRuleset</code> is created with [ctor<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.new],<br />
+features are added to it with [method<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.add_feature],<br />
+then it is applied to a <code>PangoGlyphString</code> with<br />
 [method<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.position].</p>
 
 
@@ -156,6 +158,7 @@ then it is applied to a <code>PangoGlyphString</code> with
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -328,6 +331,7 @@ then it is applied to a <code>PangoGlyphString</code> with
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -344,12 +348,12 @@ then it is applied to a <code>PangoGlyphString</code> with
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>PangoOTRuleset</code> for the given OpenType info and
+    <p>Creates a new <code>PangoOTRuleset</code> for the given OpenType info and<br />
 matching the given ruleset description.</p>
-<p>This is a convenience function that calls [ctor<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.new_for]
-and adds the static GSUB/GPOS features to the resulting ruleset,
+<p>This is a convenience function that calls [ctor<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.new_for]<br />
+and adds the static GSUB/GPOS features to the resulting ruleset,<br />
 followed by adding other features to both GSUB and GPOS.</p>
-<p>The static feature map members of <!-- raw HTML omitted -->desc<!-- raw HTML omitted --> should be alive as
+<p>The static feature map members of <!-- raw HTML omitted -->desc<!-- raw HTML omitted --> should be alive as<br />
 long as <!-- raw HTML omitted -->info<!-- raw HTML omitted --> is.</p>
 
 
@@ -413,12 +417,12 @@ long as <!-- raw HTML omitted -->info<!-- raw HTML omitted --> is.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a ruleset for the given OpenType info and ruleset
+    <p>Returns a ruleset for the given OpenType info and ruleset<br />
 description.</p>
-<p>Rulesets are created on demand using
-[ctor<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.new_from_description].
+<p>Rulesets are created on demand using<br />
+[ctor<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.new_from_description].<br />
 The returned ruleset should not be modified or destroyed.</p>
-<p>The static feature map members of <!-- raw HTML omitted -->desc<!-- raw HTML omitted --> should be alive as
+<p>The static feature map members of <!-- raw HTML omitted -->desc<!-- raw HTML omitted --> should be alive as<br />
 long as <!-- raw HTML omitted -->info<!-- raw HTML omitted --> is.</p>
 
 
@@ -471,7 +475,7 @@ long as <!-- raw HTML omitted -->info<!-- raw HTML omitted --> is.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>PangoOTRuleset</code> for <!-- raw HTML omitted -->desc<!-- raw HTML omitted -->. This object will have
+        <div class='inline'><p>the <code>PangoOTRuleset</code> for <!-- raw HTML omitted -->desc<!-- raw HTML omitted -->. This object will have<br />
 the same lifetime as <!-- raw HTML omitted -->info<!-- raw HTML omitted -->.</p>
 </div>
       
@@ -548,8 +552,8 @@ the same lifetime as <!-- raw HTML omitted -->info<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>the property bit to use for this feature. Used to
-identify the glyphs that this feature should be applied to, or
+        <div class='inline'><p>the property bit to use for this feature. Used to<br />
+identify the glyphs that this feature should be applied to, or<br />
 %PANGO_OT_ALL_GLYPHS if it should be applied to all glyphs.</p>
 </div>
       
@@ -658,11 +662,11 @@ identify the glyphs that this feature should be applied to, or
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is a convenience function that first tries to find the feature
-using [method<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Info.find_feature] and the ruleset script and
-language passed to [ctor<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.new_for] and if the feature
+    <p>This is a convenience function that first tries to find the feature<br />
+using [method<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Info.find_feature] and the ruleset script and<br />
+language passed to [ctor<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.new_for] and if the feature<br />
 is found, adds it to the ruleset.</p>
-<p>If <!-- raw HTML omitted -->ruleset<!-- raw HTML omitted --> was not created using [ctor<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.new_for],
+<p>If <!-- raw HTML omitted -->ruleset<!-- raw HTML omitted --> was not created using [ctor<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.new_for],<br />
 this function does nothing.</p>
 
 
@@ -712,8 +716,8 @@ this function does nothing.</p>
       
       
         &mdash;
-        <div class='inline'><p>the property bit to use for this feature. Used to
-identify the glyphs that this feature should be applied to, or
+        <div class='inline'><p>the property bit to use for this feature. Used to<br />
+identify the glyphs that this feature should be applied to, or<br />
 %PANGO_OT_ALL_GLYPHS if it should be applied to all glyphs.</p>
 </div>
       
@@ -732,7 +736,7 @@ identify the glyphs that this feature should be applied to, or
       
       
         &mdash;
-        <div class='inline'><p>true if the feature was found and added to ruleset,
+        <div class='inline'><p>true if the feature was found and added to ruleset,<br />
 false otherwise</p>
 </div>
       
@@ -754,9 +758,9 @@ false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is a convenience function that for each feature in the feature map
-array <!-- raw HTML omitted -->features<!-- raw HTML omitted --> converts the feature name to a <code>PangoOTTag</code> feature tag
-using PANGO_OT_TAG_MAKE() and calls [method<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.maybe_add_feature]
+    <p>This is a convenience function that for each feature in the feature map<br />
+array <!-- raw HTML omitted -->features<!-- raw HTML omitted --> converts the feature name to a <code>PangoOTTag</code> feature tag<br />
+using PANGO_OT_TAG_MAKE() and calls [method<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.maybe_add_feature]<br />
 on it.</p>
 
 
@@ -824,7 +828,7 @@ on it.</p>
       
       
         &mdash;
-        <div class='inline'><p>The number of features in <!-- raw HTML omitted -->features<!-- raw HTML omitted --> that were found
+        <div class='inline'><p>The number of features in <!-- raw HTML omitted -->features<!-- raw HTML omitted --> that were found<br />
 and added to <!-- raw HTML omitted -->ruleset<!-- raw HTML omitted --></p>
 </div>
       
@@ -846,7 +850,7 @@ and added to <!-- raw HTML omitted -->ruleset<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Performs the OpenType GPOS positioning on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> using
+    <p>Performs the OpenType GPOS positioning on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> using<br />
 the features in <!-- raw HTML omitted -->ruleset<!-- raw HTML omitted -->.</p>
 
 
@@ -901,7 +905,7 @@ the features in <!-- raw HTML omitted -->ruleset<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Performs the OpenType GSUB substitution on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> using
+    <p>Performs the OpenType GSUB substitution on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> using<br />
 the features in <!-- raw HTML omitted -->ruleset<!-- raw HTML omitted -->.</p>
 
 
@@ -952,7 +956,7 @@ the features in <!-- raw HTML omitted -->ruleset<!-- raw HTML omitted -->.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

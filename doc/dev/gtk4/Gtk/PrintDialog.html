@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::PrintDialog";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -531,6 +533,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -576,7 +579,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A label that may be shown on the accept button of a print dialog
+    <p>A label that may be shown on the accept button of a print dialog<br />
 that is presented by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.setup].</p>
 
 
@@ -616,7 +619,7 @@ that is presented by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted --
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A label that may be shown on the accept button of a print dialog
+    <p>A label that may be shown on the accept button of a print dialog<br />
 that is presented by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.setup].</p>
 
 
@@ -684,8 +687,8 @@ that is presented by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted --
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the print dialog blocks
-interaction with the parent window while
+    <p>Returns whether the print dialog blocks<br />
+interaction with the parent window while<br />
 it is presented.</p>
 
 
@@ -938,9 +941,9 @@ it is presented.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>This function prints content from a stream.</p>
-<p>If you pass <code>NULL</code> as <!-- raw HTML omitted -->setup<!-- raw HTML omitted -->, then this method will present a print dialog.
+<p>If you pass <code>NULL</code> as <!-- raw HTML omitted -->setup<!-- raw HTML omitted -->, then this method will present a print dialog.<br />
 Otherwise, it will attempt to print directly, without user interaction.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the printing is done. It should call
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the printing is done. It should call<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.print_finish] to obtain the results.</p>
 
 
@@ -1056,9 +1059,9 @@ Otherwise, it will attempt to print directly, without user interaction.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>This function prints a file.</p>
-<p>If you pass <code>NULL</code> as <!-- raw HTML omitted -->setup<!-- raw HTML omitted -->, then this method will present a print dialog.
+<p>If you pass <code>NULL</code> as <!-- raw HTML omitted -->setup<!-- raw HTML omitted -->, then this method will present a print dialog.<br />
 Otherwise, it will attempt to print directly, without user interaction.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the printing is done. It should call
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the printing is done. It should call<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.print_file_finish] to obtain the results.</p>
 
 
@@ -1188,7 +1191,7 @@ Otherwise, it will attempt to print directly, without user interaction.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.print_file] call and
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.print_file] call and<br />
 returns the results.</p>
 
 
@@ -1247,15 +1250,15 @@ returns the results.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.print] call and
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.print] call and<br />
 returns the results.</p>
-<p>If the call was successful, the content to be printed should be
+<p>If the call was successful, the content to be printed should be<br />
 written to the returned output stream. Otherwise, <code>NULL</code> is returned.</p>
-<p>The overall results of the print operation will be returned in the
-[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.OutputStream.close] call, so if you are interested in the
-results, you need to explicitly close the output stream (it will be
-closed automatically if you just unref it). Be aware that the close
-call may not be instant as it operation will for the printer to finish
+<p>The overall results of the print operation will be returned in the<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.OutputStream.close] call, so if you are interested in the<br />
+results, you need to explicitly close the output stream (it will be<br />
+closed automatically if you just unref it). Be aware that the close<br />
+call may not be instant as it operation will for the printer to finish<br />
 printing.</p>
 
 
@@ -1420,16 +1423,16 @@ printing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function presents a print dialog to let the user select a printer,
+    <p>This function presents a print dialog to let the user select a printer,<br />
 and set up print settings and page setup.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.setup_finish]
-to obtain the results in the form of a [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintSetup],
-that can then be passed to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.print]
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
+It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.setup_finish]<br />
+to obtain the results in the form of a [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintSetup],<br />
+that can then be passed to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.print]<br />
 or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.print_file].</p>
-<p>One possible use for this method is to have the user select a printer,
-then show a page setup UI in the application (e.g. to arrange images
-on a page), then call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.print] on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->
+<p>One possible use for this method is to have the user select a printer,<br />
+then show a page setup UI in the application (e.g. to arrange images<br />
+on a page), then call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.print] on <!-- raw HTML omitted -->self<!-- raw HTML omitted --><br />
 to do the printing without further user interaction.</p>
 
 
@@ -1530,8 +1533,8 @@ to do the printing without further user interaction.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.setup] call.</p>
-<p>If the call was successful, it returns a [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintSetup]
-which contains the print settings and page setup information that
+<p>If the call was successful, it returns a [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintSetup]<br />
+which contains the print settings and page setup information that<br />
 will be used to print.</p>
 
 
@@ -1569,7 +1572,7 @@ will be used to print.</p>
       
       
         &mdash;
-        <div class='inline'><p>The <code>GtkPrintSetup</code> object that resulted from the call,
+        <div class='inline'><p>The <code>GtkPrintSetup</code> object that resulted from the call,<br />
 or <code>NULL</code> if the call was not successful</p>
 </div>
       
@@ -1591,7 +1594,7 @@ or <code>NULL</code> if the call was not successful</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A title that may be shown on the print dialog that is
+    <p>A title that may be shown on the print dialog that is<br />
 presented by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.setup].</p>
 
 
@@ -1631,7 +1634,7 @@ presented by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintD
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A title that may be shown on the print dialog that is
+    <p>A title that may be shown on the print dialog that is<br />
 presented by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintDialog.setup].</p>
 
 
@@ -1695,7 +1698,7 @@ presented by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintD
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

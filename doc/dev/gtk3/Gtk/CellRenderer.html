@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::CellRenderer";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -101,7 +102,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk3/deprecated.rb</dd>
+    <dd>lib/gtk3/deprecated.rb
+</dd>
   </dl>
   
 </div>
@@ -1309,6 +1311,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1330,8 +1333,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Passes an activate event to the cell renderer for possible processing.
-Some cell renderers may use events; for example, <code>GtkCellRendererToggle</code>
+    <p>Passes an activate event to the cell renderer for possible processing.<br />
+Some cell renderers may use events; for example, <code>GtkCellRendererToggle</code><br />
 toggles when it gets a mouse click.</p>
 
 
@@ -1381,7 +1384,7 @@ toggles when it gets a mouse click.</p>
       
       
         &mdash;
-        <div class='inline'><p>widget-dependent string representation of the event location;
+        <div class='inline'><p>widget-dependent string representation of the event location;<br />
 e.g. for <code>GtkTreeView</code>, a string representation of <code>GtkTreePath</code></p>
 </div>
       
@@ -1836,7 +1839,7 @@ e.g. for <code>GtkTreeView</code>, a string representation of <code>GtkTreePath<
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the aligned area used by <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> inside <!-- raw HTML omitted -->cell_area<!-- raw HTML omitted -->. Used for finding
+    <p>Gets the aligned area used by <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> inside <!-- raw HTML omitted -->cell_area<!-- raw HTML omitted -->. Used for finding<br />
 the appropriate edit and focus rectangle.</p>
 
 
@@ -1901,7 +1904,7 @@ the appropriate edit and focus rectangle.</p>
       
       
         &mdash;
-        <div class='inline'><p>the return location for the space inside <!-- raw HTML omitted -->cell_area<!-- raw HTML omitted -->
+        <div class='inline'><p>the return location for the space inside <!-- raw HTML omitted -->cell_area<!-- raw HTML omitted --><br />
 that would actually be used to render.</p>
 </div>
       
@@ -2228,7 +2231,7 @@ that would actually be used to render.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a cell renderers’s minimum and natural height if it were rendered to
+    <p>Retrieves a cell renderers’s minimum and natural height if it were rendered to<br />
 <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> with the specified <!-- raw HTML omitted -->width<!-- raw HTML omitted -->.</p>
 
 
@@ -2328,7 +2331,7 @@ that would actually be used to render.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the minimum and natural size of a cell taking
+    <p>Retrieves the minimum and natural size of a cell taking<br />
 into account the widget’s preference for height-for-width management.</p>
 
 
@@ -2497,7 +2500,7 @@ into account the widget’s preference for height-for-width management.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a cell renderers’s minimum and natural width if it were rendered to
+    <p>Retrieves a cell renderers’s minimum and natural width if it were rendered to<br />
 <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> with the specified <!-- raw HTML omitted -->height<!-- raw HTML omitted -->.</p>
 
 
@@ -2597,8 +2600,8 @@ into account the widget’s preference for height-for-width management.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Translates the cell renderer state to <code>GtkStateFlags</code>,
-based on the cell renderer and widget sensitivity, and
+    <p>Translates the cell renderer state to <code>GtkStateFlags</code>,<br />
+based on the cell renderer and widget sensitivity, and<br />
 the given <code>GtkCellRenderer</code>State.</p>
 
 
@@ -3209,7 +3212,7 @@ the given <code>GtkCellRenderer</code>State.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether the cell renderer prefers a height-for-width layout
+    <p>Gets whether the cell renderer prefers a height-for-width layout<br />
 or a width-for-height layout.</p>
 
 
@@ -3600,12 +3603,12 @@ or a width-for-height layout.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Invokes the virtual render function of the <code>GtkCellRenderer</code>. The three
-passed-in rectangles are areas in <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->. Most renderers will draw within
-<!-- raw HTML omitted -->cell_area<!-- raw HTML omitted -->; the xalign, yalign, xpad, and ypad fields of the <code>GtkCellRenderer</code>
-should be honored with respect to <!-- raw HTML omitted -->cell_area<!-- raw HTML omitted -->. <!-- raw HTML omitted -->background_area<!-- raw HTML omitted --> includes the
-blank space around the cell, and also the area containing the tree expander;
-so the <!-- raw HTML omitted -->background_area<!-- raw HTML omitted --> rectangles for all cells tile to cover the entire
+    <p>Invokes the virtual render function of the <code>GtkCellRenderer</code>. The three<br />
+passed-in rectangles are areas in <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->. Most renderers will draw within<br />
+<!-- raw HTML omitted -->cell_area<!-- raw HTML omitted -->; the xalign, yalign, xpad, and ypad fields of the <code>GtkCellRenderer</code><br />
+should be honored with respect to <!-- raw HTML omitted -->cell_area<!-- raw HTML omitted -->. <!-- raw HTML omitted -->background_area<!-- raw HTML omitted --> includes the<br />
+blank space around the cell, and also the area containing the tree expander;<br />
+so the <!-- raw HTML omitted -->background_area<!-- raw HTML omitted --> rectangles for all cells tile to cover the entire<br />
 <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
 
 
@@ -3655,7 +3658,7 @@ so the <!-- raw HTML omitted -->background_area<!-- raw HTML omitted --> rectang
       
       
         &mdash;
-        <div class='inline'><p>entire cell area (including tree expanders and maybe
+        <div class='inline'><p>entire cell area (including tree expanders and maybe<br />
 padding on the sides)</p>
 </div>
       
@@ -3721,7 +3724,7 @@ padding on the sides)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Starts editing the contents of this <!-- raw HTML omitted -->cell<!-- raw HTML omitted -->, through a new <code>GtkCellEditable</code>
+    <p>Starts editing the contents of this <!-- raw HTML omitted -->cell<!-- raw HTML omitted -->, through a new <code>GtkCellEditable</code><br />
 widget created by the <code>GtkCellRenderer</code>Class.start_editing virtual function.</p>
 
 
@@ -3771,7 +3774,7 @@ widget created by the <code>GtkCellRenderer</code>Class.start_editing virtual fu
       
       
         &mdash;
-        <div class='inline'><p>widget-dependent string representation of the event location;
+        <div class='inline'><p>widget-dependent string representation of the event location;<br />
 e.g. for <code>GtkTreeView</code>, a string representation of <code>GtkTreePath</code></p>
 </div>
       
@@ -3835,7 +3838,7 @@ e.g. for <code>GtkTreeView</code>, a string representation of <code>GtkTreePath<
       
       
         &mdash;
-        <div class='inline'><p>A new <code>GtkCellEditable</code> for editing this
+        <div class='inline'><p>A new <code>GtkCellEditable</code> for editing this<br />
 <!-- raw HTML omitted -->cell<!-- raw HTML omitted -->, or nil if editing is not possible</p>
 </div>
       
@@ -3857,11 +3860,11 @@ e.g. for <code>GtkTreeView</code>, a string representation of <code>GtkTreePath<
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Informs the cell renderer that the editing is stopped.
-If <!-- raw HTML omitted -->canceled<!-- raw HTML omitted --> is true, the cell renderer will emit the
+    <p>Informs the cell renderer that the editing is stopped.<br />
+If <!-- raw HTML omitted -->canceled<!-- raw HTML omitted --> is true, the cell renderer will emit the<br />
 <code>GtkCellRenderer</code>::editing-canceled signal.</p>
-<p>This function should be called by cell renderer implementations
-in response to the <code>GtkCellEditable::editing-done</code> signal of
+<p>This function should be called by cell renderer implementations<br />
+in response to the <code>GtkCellEditable::editing-done</code> signal of<br />
 <code>GtkCellEditable</code>.</p>
 
 
@@ -4581,7 +4584,7 @@ in response to the <code>GtkCellEditable::editing-done</code> signal of
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

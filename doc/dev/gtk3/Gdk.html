@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk3/gdk-screen.rb<span class="defines">,<br />
-  lib/gtk3/deprecated.rb,<br /> lib/gtk3/gdk-drag-context.rb</span>
+    <dd>lib/gtk3/gdk-screen.rb<span class="defines">,<br>
+  lib/gtk3/deprecated.rb,<br> lib/gtk3/gdk-drag-context.rb</span>
+
 </dd>
   </dl>
   
@@ -88,16 +90,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2015  Ruby-GNOME2 Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -131,7 +133,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
           <div class="docstring">
   <div class="discussion">
     <p>Defines all possible DND actions.</p>
-<p>This can be used in [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drop.status] messages when any drop
+<p>This can be used in [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drop.status] messages when any drop<br />
 can be accepted or a more specific drop method is not yet known.</p>
 
 
@@ -162,7 +164,7 @@ can be accepted or a more specific drop method is not yet known.</p>
         <dt id="BUTTON_PRIMARY-constant" class="">BUTTON_PRIMARY =
           <div class="docstring">
   <div class="discussion">
-    <p>The primary button. This is typically the left mouse button, or the
+    <p>The primary button. This is typically the left mouse button, or the<br />
 right button in a left-handed setup.</p>
 
 
@@ -178,7 +180,7 @@ right button in a left-handed setup.</p>
         <dt id="BUTTON_SECONDARY-constant" class="">BUTTON_SECONDARY =
           <div class="docstring">
   <div class="discussion">
-    <p>The secondary button. This is typically the right mouse button, or the
+    <p>The secondary button. This is typically the right mouse button, or the<br />
 left button in a left-handed setup.</p>
 
 
@@ -209,7 +211,7 @@ left button in a left-handed setup.</p>
         <dt id="EVENT_PROPAGATE-constant" class="">EVENT_PROPAGATE =
           <div class="docstring">
   <div class="discussion">
-    <p>Use this macro as the return value for continuing the propagation of
+    <p>Use this macro as the return value for continuing the propagation of<br />
 an event handler.</p>
 
 
@@ -225,7 +227,7 @@ an event handler.</p>
         <dt id="EVENT_STOP-constant" class="">EVENT_STOP =
           <div class="docstring">
   <div class="discussion">
-    <p>Use this macro as the return value for stopping the propagation of
+    <p>Use this macro as the return value for stopping the propagation of<br />
 an event handler.</p>
 
 
@@ -11646,7 +11648,7 @@ an event handler.</p>
         <dt id="PRIORITY_REDRAW-constant" class="">PRIORITY_REDRAW =
           <div class="docstring">
   <div class="discussion">
-    <p>This is the priority that the idle handler processing surface updates
+    <p>This is the priority that the idle handler processing surface updates<br />
 is given in the main loop.</p>
 
 
@@ -12568,6 +12570,7 @@ is given in the main loop.</p>
 
       
     </ul>
+    
   
 
 
@@ -12588,16 +12591,16 @@ is given in the main loop.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets a list of backends that GDK should try to use.</p>
-<p>This can be useful if your application does not
+<p>This can be useful if your application does not<br />
 work with certain GDK backends.</p>
 <p>By default, GDK tries all included backends.</p>
 <p>For example:</p>
 <pre class="code c"><code class="c">gdk_set_allowed_backends (&quot;wayland,macos,*&quot;);
 </code></pre>
-<p>instructs GDK to try the Wayland backend first, followed by the
+<p>instructs GDK to try the Wayland backend first, followed by the<br />
 MacOs backend, and then all others.</p>
-<p>If the <code>GDK_BACKEND</code> environment variable is set, it determines
-what backends are tried in what order, while still respecting the
+<p>If the <code>GDK_BACKEND</code> environment variable is set, it determines<br />
+what backends are tried in what order, while still respecting the<br />
 set of allowed backends that are specified by this function.</p>
 <p>The possible backend names are:</p>
 <ul>
@@ -12608,8 +12611,8 @@ set of allowed backends that are specified by this function.</p>
 <li><code>x11</code></li>
 </ul>
 <p>You can also include a <code>*</code> in the list to try all remaining backends.</p>
-<p>This call must happen prior to functions that open a display, such
-as [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.open], <code>gtk_init()</code>, or <code>gtk_init_check()</code>
+<p>This call must happen prior to functions that open a display, such<br />
+as [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.open], <code>gtk_init()</code>, or <code>gtk_init_check()</code><br />
 in order to take effect.</p>
 
 
@@ -12665,17 +12668,17 @@ in order to take effect.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The main way to not draw GL content in GTK.</p>
-<p>It takes a render buffer ID (<!-- raw HTML omitted -->source_type<!-- raw HTML omitted --> == GL_RENDERBUFFER) or a texture
-id (<!-- raw HTML omitted -->source_type<!-- raw HTML omitted --> == GL_TEXTURE) and draws it onto <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> with an OVER operation,
-respecting the current clip. The top left corner of the rectangle specified
-by <!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted -->, <!-- raw HTML omitted -->width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted --> will be drawn at the current (0,0) position of
+<p>It takes a render buffer ID (<!-- raw HTML omitted -->source_type<!-- raw HTML omitted --> == GL_RENDERBUFFER) or a texture<br />
+id (<!-- raw HTML omitted -->source_type<!-- raw HTML omitted --> == GL_TEXTURE) and draws it onto <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> with an OVER operation,<br />
+respecting the current clip. The top left corner of the rectangle specified<br />
+by <!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted -->, <!-- raw HTML omitted -->width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted --> will be drawn at the current (0,0) position of<br />
 the <code>cairo_t</code>.</p>
-<p>This will work for <em>all</em> <code>cairo_t</code>, as long as <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> is realized, but the
-fallback implementation that reads back the pixels from the buffer may be
-used in the general case. In the case of direct drawing to a surface with
-no special effects applied to <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> it will however use a more efficient
+<p>This will work for <em>all</em> <code>cairo_t</code>, as long as <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> is realized, but the<br />
+fallback implementation that reads back the pixels from the buffer may be<br />
+used in the general case. In the case of direct drawing to a surface with<br />
+no special effects applied to <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> it will however use a more efficient<br />
 approach.</p>
-<p>For GL_RENDERBUFFER the code will always fall back to software for buffers
+<p>For GL_RENDERBUFFER the code will always fall back to software for buffers<br />
 with alpha components, so make sure you use GL_TEXTURE if using alpha.</p>
 <p>Calling this may change the current GL context.</p>
 
@@ -12989,9 +12992,9 @@ with alpha components, so make sure you use GL_TEXTURE if using alpha.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates region that covers the area where the given
+    <p>Creates region that covers the area where the given<br />
 <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> is more than 50% opaque.</p>
-<p>This function takes into account device offsets that might be
+<p>This function takes into account device offsets that might be<br />
 set with cairo_surface_set_device_offset().</p>
 
 
@@ -13051,7 +13054,7 @@ set with cairo_surface_set_device_offset().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the given pixbuf as the source pattern for <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->.</p>
-<p>The pattern has an extend mode of %CAIRO_EXTEND_NONE and is aligned
+<p>The pattern has an extend mode of %CAIRO_EXTEND_NONE and is aligned<br />
 so that the origin of <!-- raw HTML omitted -->pixbuf<!-- raw HTML omitted --> is <!-- raw HTML omitted -->pixbuf_x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->pixbuf_y<!-- raw HTML omitted -->.</p>
 
 
@@ -13221,9 +13224,9 @@ so that the origin of <!-- raw HTML omitted -->pixbuf<!-- raw HTML omitted --> i
 </h3><div class="docstring">
   <div class="discussion">
     <p>Read content from the given input stream and deserialize it, asynchronously.</p>
-<p>The default I/O priority is %G_PRIORITY_DEFAULT (i.e. 0), and lower numbers
+<p>The default I/O priority is %G_PRIORITY_DEFAULT (i.e. 0), and lower numbers<br />
 indicate a higher priority.</p>
-<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then
+<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then<br />
 call [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.content_deserialize_finish] to get the result of the operation.</p>
 
 
@@ -13420,8 +13423,8 @@ call [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.content_deserial
       
       
         &mdash;
-        <div class='inline'><p>true if the operation was successful. In this case,
-<!-- raw HTML omitted -->value<!-- raw HTML omitted --> is set. false if an error occurred. In this case,
+        <div class='inline'><p>true if the operation was successful. In this case,<br />
+<!-- raw HTML omitted -->value<!-- raw HTML omitted --> is set. false if an error occurred. In this case,<br />
 <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
 </div>
       
@@ -13443,11 +13446,11 @@ call [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.content_deserial
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Parses the given <!-- raw HTML omitted -->string<!-- raw HTML omitted --> into <code>GdkContentFormats</code> and
+    <p>Parses the given <!-- raw HTML omitted -->string<!-- raw HTML omitted --> into <code>GdkContentFormats</code> and<br />
 returns the formats.</p>
-<p>Strings printed via [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentFormats.to_string]
+<p>Strings printed via [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentFormats.to_string]<br />
 can be read in again successfully using this function.</p>
-<p>If <!-- raw HTML omitted -->string<!-- raw HTML omitted --> does not describe valid content formats, nil
+<p>If <!-- raw HTML omitted -->string<!-- raw HTML omitted --> does not describe valid content formats, nil<br />
 is returned.</p>
 
 
@@ -13735,9 +13738,9 @@ is returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Serialize content and write it to the given output stream, asynchronously.</p>
-<p>The default I/O priority is %G_PRIORITY_DEFAULT (i.e. 0), and lower numbers
+<p>The default I/O priority is %G_PRIORITY_DEFAULT (i.e. 0), and lower numbers<br />
 indicate a higher priority.</p>
-<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then
+<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then<br />
 call [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.content_serialize_finish] to get the result of the operation.</p>
 
 
@@ -13919,7 +13922,7 @@ call [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.content_serializ
       
       
         &mdash;
-        <div class='inline'><p>true if the operation was successful, false if an
+        <div class='inline'><p>true if the operation was successful, false if an<br />
 error occurred. In this case, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
 </div>
       
@@ -13975,9 +13978,9 @@ error occurred. In this case, <!-- raw HTML omitted -->error<!-- raw HTML omitte
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if <!-- raw HTML omitted -->action<!-- raw HTML omitted --> represents a single action or includes
+    <p>Checks if <!-- raw HTML omitted -->action<!-- raw HTML omitted --> represents a single action or includes<br />
 multiple actions.</p>
-<p>When <!-- raw HTML omitted -->action<!-- raw HTML omitted --> is 0 - ie no action was given, true
+<p>When <!-- raw HTML omitted -->action<!-- raw HTML omitted --> is 0 - ie no action was given, true<br />
 is returned.</p>
 
 
@@ -14071,10 +14074,10 @@ is returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the relative angle from <!-- raw HTML omitted -->event1<!-- raw HTML omitted --> to <!-- raw HTML omitted -->event2<!-- raw HTML omitted -->.</p>
-<p>The relative angle is the angle between the X axis and the line
-through both events' positions. The rotation direction for positive
+<p>The relative angle is the angle between the X axis and the line<br />
+through both events' positions. The rotation direction for positive<br />
 angles is from the positive X axis towards the positive Y axis.</p>
-<p>This assumes that both events have X/Y information.
+<p>This assumes that both events have X/Y information.<br />
 If not, this function returns false.</p>
 
 
@@ -14164,7 +14167,7 @@ If not, this function returns false.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the point halfway between the events' positions.</p>
-<p>This assumes that both events have X/Y information.
+<p>This assumes that both events have X/Y information.<br />
 If not, this function returns false.</p>
 
 
@@ -14269,7 +14272,7 @@ If not, this function returns false.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the distance between the event locations.</p>
-<p>This assumes that both events have X/Y information.
+<p>This assumes that both events have X/Y information.<br />
 If not, this function returns false.</p>
 
 
@@ -14393,7 +14396,7 @@ If not, this function returns false.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Canonicalizes the given mime type and interns the result.</p>
-<p>If <!-- raw HTML omitted -->string<!-- raw HTML omitted --> is not a valid mime type, nil is returned instead.
+<p>If <!-- raw HTML omitted -->string<!-- raw HTML omitted --> is not a valid mime type, nil is returned instead.<br />
 See RFC 2048 for the syntax if mime types.</p>
 
 
@@ -14431,7 +14434,7 @@ See RFC 2048 for the syntax if mime types.</p>
       
       
         &mdash;
-        <div class='inline'><p>An interned string for the canonicalized
+        <div class='inline'><p>An interned string for the canonicalized<br />
 mime type or nil if the string wasn't a valid mime type</p>
 </div>
       
@@ -14539,8 +14542,8 @@ mime type or nil if the string wasn't a valid mime type</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Converts a key name to a key value.</p>
-<p>The names are the same as those in the
-<code>gdk/gdkkeysyms.h</code> header file
+<p>The names are the same as those in the<br />
+<code>gdk/gdkkeysyms.h</code> header file<br />
 but without the leading “GDK_KEY_”.</p>
 
 
@@ -14578,7 +14581,7 @@ but without the leading “GDK_KEY_”.</p>
       
       
         &mdash;
-        <div class='inline'><p>the corresponding key value, or %GDK_KEY_VoidSymbol
+        <div class='inline'><p>the corresponding key value, or %GDK_KEY_VoidSymbol<br />
 if the key name is not a valid key</p>
 </div>
       
@@ -14637,7 +14640,7 @@ if the key name is not a valid key</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->keyval<!-- raw HTML omitted --> is in lower case, or if <!-- raw HTML omitted -->keyval<!-- raw HTML omitted --> is not
+        <div class='inline'><p>true if <!-- raw HTML omitted -->keyval<!-- raw HTML omitted --> is in lower case, or if <!-- raw HTML omitted -->keyval<!-- raw HTML omitted --> is not<br />
 subject to case conversion.</p>
 </div>
       
@@ -14696,7 +14699,7 @@ subject to case conversion.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->keyval<!-- raw HTML omitted --> is in upper case, or if <!-- raw HTML omitted -->keyval<!-- raw HTML omitted --> is not subject to
+        <div class='inline'><p>true if <!-- raw HTML omitted -->keyval<!-- raw HTML omitted --> is in upper case, or if <!-- raw HTML omitted -->keyval<!-- raw HTML omitted --> is not subject to<br />
 case conversion.</p>
 </div>
       
@@ -14719,8 +14722,8 @@ case conversion.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Converts a key value into a symbolic name.</p>
-<p>The names are the same as those in the
-<code>gdk/gdkkeysyms.h</code> header file
+<p>The names are the same as those in the<br />
+<code>gdk/gdkkeysyms.h</code> header file<br />
 but without the leading “GDK_KEY_”.</p>
 
 
@@ -14758,7 +14761,7 @@ but without the leading “GDK_KEY_”.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string containing the name
+        <div class='inline'><p>a string containing the name<br />
 of the key</p>
 </div>
       
@@ -14817,7 +14820,7 @@ of the key</p>
       
       
         &mdash;
-        <div class='inline'><p>the lower case form of <!-- raw HTML omitted -->keyval<!-- raw HTML omitted -->, or <!-- raw HTML omitted -->keyval<!-- raw HTML omitted --> itself if it is already
+        <div class='inline'><p>the lower case form of <!-- raw HTML omitted -->keyval<!-- raw HTML omitted -->, or <!-- raw HTML omitted -->keyval<!-- raw HTML omitted --> itself if it is already<br />
 in lower case or it is not subject to case conversion.</p>
 </div>
       
@@ -14839,10 +14842,10 @@ in lower case or it is not subject to case conversion.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convert from a GDK key symbol to the corresponding Unicode
+    <p>Convert from a GDK key symbol to the corresponding Unicode<br />
 character.</p>
-<p>Note that the conversion does not take the current locale
-into consideration, which might be expected for particular
+<p>Note that the conversion does not take the current locale<br />
+into consideration, which might be expected for particular<br />
 keyvals, such as %GDK_KEY_KP_Decimal.</p>
 
 
@@ -14880,7 +14883,7 @@ keyvals, such as %GDK_KEY_KP_Decimal.</p>
       
       
         &mdash;
-        <div class='inline'><p>the corresponding unicode character, or 0 if there
+        <div class='inline'><p>the corresponding unicode character, or 0 if there<br />
 is no corresponding character.</p>
 </div>
       
@@ -14939,7 +14942,7 @@ is no corresponding character.</p>
       
       
         &mdash;
-        <div class='inline'><p>the upper case form of <!-- raw HTML omitted -->keyval<!-- raw HTML omitted -->, or <!-- raw HTML omitted -->keyval<!-- raw HTML omitted --> itself if it is already
+        <div class='inline'><p>the upper case form of <!-- raw HTML omitted -->keyval<!-- raw HTML omitted -->, or <!-- raw HTML omitted -->keyval<!-- raw HTML omitted --> itself if it is already<br />
 in upper case or it is not subject to case conversion.</p>
 </div>
       
@@ -14962,10 +14965,10 @@ in upper case or it is not subject to case conversion.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns a paintable that has the given intrinsic size and draws nothing.</p>
-<p>This is often useful for implementing the
-[vfunc<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.get_current_image] virtual function
-when the paintable is in an incomplete state (like a
-<a href="../gtk4/class.MediaStream.html">GtkMediaStream</a> before receiving
+<p>This is often useful for implementing the<br />
+[vfunc<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.get_current_image] virtual function<br />
+when the paintable is in an incomplete state (like a<br />
+<a href="../gtk4/class.MediaStream.html">GtkMediaStream</a> before receiving<br />
 the first frame).</p>
 
 
@@ -15039,13 +15042,13 @@ the first frame).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains a clip region which contains the areas where the given ranges
+    <p>Obtains a clip region which contains the areas where the given ranges<br />
 of text would be drawn.</p>
-<p><!-- raw HTML omitted -->x_origin<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y_origin<!-- raw HTML omitted --> are the top left point to center the layout.
+<p><!-- raw HTML omitted -->x_origin<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y_origin<!-- raw HTML omitted --> are the top left point to center the layout.<br />
 <!-- raw HTML omitted -->index_ranges<!-- raw HTML omitted --> should contain ranges of bytes in the layout’s text.</p>
-<p>Note that the regions returned correspond to logical extents of the text
-ranges, not ink extents. So the drawn layout may in fact touch areas out of
-the clip region.  The clip region is mainly useful for highlightling parts
+<p>Note that the regions returned correspond to logical extents of the text<br />
+ranges, not ink extents. So the drawn layout may in fact touch areas out of<br />
+the clip region.  The clip region is mainly useful for highlightling parts<br />
 of text, such as when text is selected.</p>
 
 
@@ -15164,18 +15167,18 @@ of text, such as when text is selected.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains a clip region which contains the areas where the given
+    <p>Obtains a clip region which contains the areas where the given<br />
 ranges of text would be drawn.</p>
-<p><!-- raw HTML omitted -->x_origin<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y_origin<!-- raw HTML omitted --> are the top left position of the layout.
-<!-- raw HTML omitted -->index_ranges<!-- raw HTML omitted --> should contain ranges of bytes in the layout’s text.
-The clip region will include space to the left or right of the line
-(to the layout bounding box) if you have indexes above or below the
-indexes contained inside the line. This is to draw the selection all
-the way to the side of the layout. However, the clip region is in line
+<p><!-- raw HTML omitted -->x_origin<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y_origin<!-- raw HTML omitted --> are the top left position of the layout.<br />
+<!-- raw HTML omitted -->index_ranges<!-- raw HTML omitted --> should contain ranges of bytes in the layout’s text.<br />
+The clip region will include space to the left or right of the line<br />
+(to the layout bounding box) if you have indexes above or below the<br />
+indexes contained inside the line. This is to draw the selection all<br />
+the way to the side of the layout. However, the clip region is in line<br />
 coordinates, not layout coordinates.</p>
-<p>Note that the regions returned correspond to logical extents of the text
-ranges, not ink extents. So the drawn line may in fact touch areas out of
-the clip region.  The clip region is mainly useful for highlightling parts
+<p>Note that the regions returned correspond to logical extents of the text<br />
+ranges, not ink extents. So the drawn line may in fact touch areas out of<br />
+the clip region.  The clip region is mainly useful for highlightling parts<br />
 of text, such as when text is selected.</p>
 
 
@@ -15240,7 +15243,7 @@ of text, such as when text is selected.</p>
       
       
         &mdash;
-        <div class='inline'><p>array of byte indexes into the layout, where even
+        <div class='inline'><p>array of byte indexes into the layout, where even<br />
 members of array are start indexes and odd elements are end indexes</p>
 </div>
       
@@ -15295,10 +15298,10 @@ members of array are start indexes and odd elements are end indexes</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Transfers image data from a <code>cairo_surface_t</code> and converts it
+    <p>Transfers image data from a <code>cairo_surface_t</code> and converts it<br />
 to a <code>GdkPixbuf</code>.</p>
 <p>This allows you to efficiently read individual pixels from cairo surfaces.</p>
-<p>This function will create an RGB pixbuf with 8 bits per channel.
+<p>This function will create an RGB pixbuf with 8 bits per channel.<br />
 The pixbuf will contain an alpha channel if the <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> contains one.</p>
 
 
@@ -15396,7 +15399,7 @@ The pixbuf will contain an alpha channel if the <!-- raw HTML omitted -->surface
       
       
         &mdash;
-        <div class='inline'><p>A newly-created pixbuf with a
+        <div class='inline'><p>A newly-created pixbuf with a<br />
 reference count of 1</p>
 </div>
       
@@ -15419,8 +15422,8 @@ reference count of 1</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new pixbuf from <!-- raw HTML omitted -->texture<!-- raw HTML omitted -->.</p>
-<p>This should generally not be used in newly written code as later
-stages will almost certainly convert the pixbuf back into a texture
+<p>This should generally not be used in newly written code as later<br />
+stages will almost certainly convert the pixbuf back into a texture<br />
 to draw it on screen.</p>
 
 
@@ -15584,7 +15587,7 @@ to draw it on screen.</p>
       
       
         &mdash;
-        <div class='inline'><p>the corresponding GDK key symbol, if one exists.
+        <div class='inline'><p>the corresponding GDK key symbol, if one exists.<br />
 or, if there is no corresponding symbol, wc | 0x01000000</p>
 </div>
       
@@ -15636,7 +15639,7 @@ or, if there is no corresponding symbol, wc | 0x01000000</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

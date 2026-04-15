@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::MenuItem";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,14 +95,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gio2/menu-item.rb</dd>
+    <dd>lib/gio2/menu-item.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>GMenu::Item is an opaque structure type.  You must access it using the
+    <p>GMenu::Item is an opaque structure type.  You must access it using the<br />
 functions below.</p>
 
 
@@ -477,6 +479,7 @@ functions below.</p>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -494,7 +497,7 @@ functions below.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new GMenu::Item representing a submenu.</p>
-<p>This is a convenience API around g_menu_item_new() and
+<p>This is a convenience API around g_menu_item_new() and<br />
 g_menu_item_set_submenu().</p>
 
 
@@ -559,12 +562,12 @@ g_menu_item_set_submenu().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the &quot;action&quot; and possibly the &quot;target&quot; attribute of <!-- raw HTML omitted -->menu_item<!-- raw HTML omitted -->.</p>
-<p>The format of <!-- raw HTML omitted -->detailed_action<!-- raw HTML omitted --> is the same format parsed by
+<p>The format of <!-- raw HTML omitted -->detailed_action<!-- raw HTML omitted --> is the same format parsed by<br />
 g_action_parse_detailed_name().</p>
-<p>See g_menu_item_set_action_and_target() or
-g_menu_item_set_action_and_target_value() for more flexible (but
+<p>See g_menu_item_set_action_and_target() or<br />
+g_menu_item_set_action_and_target_value() for more flexible (but<br />
 slightly less convenient) alternatives.</p>
-<p>See also g_menu_item_set_action_and_target_value() for a description of
+<p>See also g_menu_item_set_action_and_target_value() for a description of<br />
 the semantics of the action and target attributes.</p>
 
 
@@ -620,11 +623,11 @@ the semantics of the action and target attributes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queries the named <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> on <!-- raw HTML omitted -->menu_item<!-- raw HTML omitted -->.</p>
-<p>If the attribute exists and matches the GVariant::Type corresponding
-to <!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> then <!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> is used to deconstruct the
+<p>If the attribute exists and matches the GVariant::Type corresponding<br />
+to <!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> then <!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> is used to deconstruct the<br />
 value into the positional parameters and true is returned.</p>
-<p>If the attribute does not exist, or it does exist but has the wrong
-type, then the positional parameters are ignored and false is
+<p>If the attribute does not exist, or it does exist but has the wrong<br />
+type, then the positional parameters are ignored and false is<br />
 returned.</p>
 
 
@@ -692,7 +695,7 @@ returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the named attribute was found with the expected
+        <div class='inline'><p>true if the named attribute was found with the expected<br />
 type</p>
 </div>
       
@@ -719,8 +722,8 @@ type</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queries the named <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> on <!-- raw HTML omitted -->menu_item<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->expected_type<!-- raw HTML omitted --> is specified and the attribute does not have this
-type, nil is returned.  nil is also returned if the attribute
+<p>If <!-- raw HTML omitted -->expected_type<!-- raw HTML omitted --> is specified and the attribute does not have this<br />
+type, nil is returned.  nil is also returned if the attribute<br />
 simply does not exist.</p>
 
 
@@ -853,12 +856,12 @@ simply does not exist.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets (or unsets) the icon on <!-- raw HTML omitted -->menu_item<!-- raw HTML omitted -->.</p>
-<p>This call is the same as calling g_icon_serialize() and using the
-result as the value to g_menu_item_set_attribute_value() for
+<p>This call is the same as calling g_icon_serialize() and using the<br />
+result as the value to g_menu_item_set_attribute_value() for<br />
 %G_MENU_ATTRIBUTE_ICON.</p>
-<p>This API is only intended for use with &quot;noun&quot; menu items; things like
-bookmarks or applications in an &quot;Open With&quot; menu.  Don't use it on
-menu items corresponding to verbs (eg: stock icons for 'Save' or
+<p>This API is only intended for use with &quot;noun&quot; menu items; things like<br />
+bookmarks or applications in an &quot;Open With&quot; menu.  Don't use it on<br />
+menu items corresponding to verbs (eg: stock icons for 'Save' or<br />
 'Quit').</p>
 <p>If <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> is nil then the icon is unset.</p>
 
@@ -915,7 +918,7 @@ menu items corresponding to verbs (eg: stock icons for 'Save' or
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets or unsets the &quot;label&quot; attribute of <!-- raw HTML omitted -->menu_item<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->label<!-- raw HTML omitted --> is non-nil it is used as the label for the menu item.  If
+<p>If <!-- raw HTML omitted -->label<!-- raw HTML omitted --> is non-nil it is used as the label for the menu item.  If<br />
 it is nil then the label attribute is unset.</p>
 
 
@@ -971,10 +974,10 @@ it is nil then the label attribute is unset.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets or unsets the &quot;section&quot; link of <!-- raw HTML omitted -->menu_item<!-- raw HTML omitted --> to <!-- raw HTML omitted -->section<!-- raw HTML omitted -->.</p>
-<p>The effect of having one menu appear as a section of another is
-exactly as it sounds: the items from <!-- raw HTML omitted -->section<!-- raw HTML omitted --> become a direct part of
-the menu that <!-- raw HTML omitted -->menu_item<!-- raw HTML omitted --> is added to.  See g_menu_item_new_section()
-for more information about what it means for a menu item to be a
+<p>The effect of having one menu appear as a section of another is<br />
+exactly as it sounds: the items from <!-- raw HTML omitted -->section<!-- raw HTML omitted --> become a direct part of<br />
+the menu that <!-- raw HTML omitted -->menu_item<!-- raw HTML omitted --> is added to.  See g_menu_item_new_section()<br />
+for more information about what it means for a menu item to be a<br />
 section.</p>
 
 
@@ -1030,19 +1033,19 @@ section.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets or unsets the &quot;action&quot; and &quot;target&quot; attributes of <!-- raw HTML omitted -->menu_item<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->action<!-- raw HTML omitted --> is nil then both the &quot;action&quot; and &quot;target&quot; attributes
-are unset (and <!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> is ignored along with the positional
+<p>If <!-- raw HTML omitted -->action<!-- raw HTML omitted --> is nil then both the &quot;action&quot; and &quot;target&quot; attributes<br />
+are unset (and <!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> is ignored along with the positional<br />
 parameters).</p>
-<p>If <!-- raw HTML omitted -->action<!-- raw HTML omitted --> is non-nil then the &quot;action&quot; attribute is set.
-<!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> is then inspected.  If it is non-nil then the proper
-position parameters are collected to create a #GVariant instance to
-use as the target value.  If it is nil then the positional
+<p>If <!-- raw HTML omitted -->action<!-- raw HTML omitted --> is non-nil then the &quot;action&quot; attribute is set.<br />
+<!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> is then inspected.  If it is non-nil then the proper<br />
+position parameters are collected to create a #GVariant instance to<br />
+use as the target value.  If it is nil then the positional<br />
 parameters are ignored and the &quot;target&quot; attribute is unset.</p>
-<p>See also g_menu_item_set_action_and_target_value() for an equivalent
-call that directly accepts a #GVariant.  See
-g_menu_item_set_detailed_action() for a more convenient version that
+<p>See also g_menu_item_set_action_and_target_value() for an equivalent<br />
+call that directly accepts a #GVariant.  See<br />
+g_menu_item_set_detailed_action() for a more convenient version that<br />
 works with string-typed targets.</p>
-<p>See also g_menu_item_set_action_and_target_value() for a
+<p>See also g_menu_item_set_action_and_target_value() for a<br />
 description of the semantics of the action and target attributes.</p>
 
 
@@ -1128,32 +1131,32 @@ description of the semantics of the action and target attributes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets or unsets the &quot;action&quot; and &quot;target&quot; attributes of <!-- raw HTML omitted -->menu_item<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->action<!-- raw HTML omitted --> is nil then both the &quot;action&quot; and &quot;target&quot; attributes
+<p>If <!-- raw HTML omitted -->action<!-- raw HTML omitted --> is nil then both the &quot;action&quot; and &quot;target&quot; attributes<br />
 are unset (and <!-- raw HTML omitted -->target_value<!-- raw HTML omitted --> is ignored).</p>
-<p>If <!-- raw HTML omitted -->action<!-- raw HTML omitted --> is non-nil then the &quot;action&quot; attribute is set.  The
-&quot;target&quot; attribute is then set to the value of <!-- raw HTML omitted -->target_value<!-- raw HTML omitted --> if it is
+<p>If <!-- raw HTML omitted -->action<!-- raw HTML omitted --> is non-nil then the &quot;action&quot; attribute is set.  The<br />
+&quot;target&quot; attribute is then set to the value of <!-- raw HTML omitted -->target_value<!-- raw HTML omitted --> if it is<br />
 non-nil or unset otherwise.</p>
-<p>Normal menu items (ie: not submenu, section or other custom item
-types) are expected to have the &quot;action&quot; attribute set to identify
-the action that they are associated with.  The state type of the
-action help to determine the disposition of the menu item.  See
+<p>Normal menu items (ie: not submenu, section or other custom item<br />
+types) are expected to have the &quot;action&quot; attribute set to identify<br />
+the action that they are associated with.  The state type of the<br />
+action help to determine the disposition of the menu item.  See<br />
 #GAction and GAction::Group for an overview of actions.</p>
-<p>In general, clicking on the menu item will result in activation of
-the named action with the &quot;target&quot; attribute given as the parameter
-to the action invocation.  If the &quot;target&quot; attribute is not set then
+<p>In general, clicking on the menu item will result in activation of<br />
+the named action with the &quot;target&quot; attribute given as the parameter<br />
+to the action invocation.  If the &quot;target&quot; attribute is not set then<br />
 the action is invoked with no parameter.</p>
-<p>If the action has no state then the menu item is usually drawn as a
+<p>If the action has no state then the menu item is usually drawn as a<br />
 plain menu item (ie: with no additional decoration).</p>
-<p>If the action has a boolean state then the menu item is usually drawn
-as a toggle menu item (ie: with a checkmark or equivalent
-indication).  The item should be marked as 'toggled' or 'checked'
+<p>If the action has a boolean state then the menu item is usually drawn<br />
+as a toggle menu item (ie: with a checkmark or equivalent<br />
+indication).  The item should be marked as 'toggled' or 'checked'<br />
 when the boolean state is true.</p>
-<p>If the action has a string state then the menu item is usually drawn
-as a radio menu item (ie: with a radio bullet or equivalent
-indication).  The item should be marked as 'selected' when the string
+<p>If the action has a string state then the menu item is usually drawn<br />
+as a radio menu item (ie: with a radio bullet or equivalent<br />
+indication).  The item should be marked as 'selected' when the string<br />
 state is equal to the value of the <!-- raw HTML omitted -->target<!-- raw HTML omitted --> property.</p>
-<p>See g_menu_item_set_action_and_target() or
-g_menu_item_set_detailed_action() for two equivalent calls that are
+<p>See g_menu_item_set_action_and_target() or<br />
+g_menu_item_set_detailed_action() for two equivalent calls that are<br />
 probably more convenient for most uses.</p>
 
 
@@ -1224,18 +1227,18 @@ probably more convenient for most uses.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets or unsets an attribute on <!-- raw HTML omitted -->menu_item<!-- raw HTML omitted -->.</p>
-<p>The attribute to set or unset is specified by <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->. This
-can be one of the standard attribute names %G_MENU_ATTRIBUTE_LABEL,
-%G_MENU_ATTRIBUTE_ACTION, %G_MENU_ATTRIBUTE_TARGET, or a custom
-attribute name.
-Attribute names are restricted to lowercase characters, numbers
-and '-'. Furthermore, the names must begin with a lowercase character,
+<p>The attribute to set or unset is specified by <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->. This<br />
+can be one of the standard attribute names %G_MENU_ATTRIBUTE_LABEL,<br />
+%G_MENU_ATTRIBUTE_ACTION, %G_MENU_ATTRIBUTE_TARGET, or a custom<br />
+attribute name.<br />
+Attribute names are restricted to lowercase characters, numbers<br />
+and '-'. Furthermore, the names must begin with a lowercase character,<br />
 must not end with a '-', and must not contain consecutive dashes.</p>
-<p>If <!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> is non-nil then the proper position parameters
-are collected to create a #GVariant instance to use as the attribute
-value.  If it is nil then the positional parameterrs are ignored
+<p>If <!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> is non-nil then the proper position parameters<br />
+are collected to create a #GVariant instance to use as the attribute<br />
+value.  If it is nil then the positional parameterrs are ignored<br />
 and the named attribute is unset.</p>
-<p>See also g_menu_item_set_attribute_value() for an equivalent call
+<p>See also g_menu_item_set_attribute_value() for an equivalent call<br />
 that directly accepts a #GVariant.</p>
 
 
@@ -1325,19 +1328,19 @@ that directly accepts a #GVariant.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets or unsets an attribute on <!-- raw HTML omitted -->menu_item<!-- raw HTML omitted -->.</p>
-<p>The attribute to set or unset is specified by <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->. This
-can be one of the standard attribute names %G_MENU_ATTRIBUTE_LABEL,
-%G_MENU_ATTRIBUTE_ACTION, %G_MENU_ATTRIBUTE_TARGET, or a custom
-attribute name.
-Attribute names are restricted to lowercase characters, numbers
-and '-'. Furthermore, the names must begin with a lowercase character,
+<p>The attribute to set or unset is specified by <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->. This<br />
+can be one of the standard attribute names %G_MENU_ATTRIBUTE_LABEL,<br />
+%G_MENU_ATTRIBUTE_ACTION, %G_MENU_ATTRIBUTE_TARGET, or a custom<br />
+attribute name.<br />
+Attribute names are restricted to lowercase characters, numbers<br />
+and '-'. Furthermore, the names must begin with a lowercase character,<br />
 must not end with a '-', and must not contain consecutive dashes.</p>
-<p>must consist only of lowercase
+<p>must consist only of lowercase<br />
 ASCII characters, digits and '-'.</p>
-<p>If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is non-nil then it is used as the new value for the
-attribute.  If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is nil then the attribute is unset. If
+<p>If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is non-nil then it is used as the new value for the<br />
+attribute.  If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is nil then the attribute is unset. If<br />
 the <!-- raw HTML omitted -->value<!-- raw HTML omitted --> #GVariant is floating, it is consumed.</p>
-<p>See also g_menu_item_set_attribute() for a more convenient way to do
+<p>See also g_menu_item_set_attribute() for a more convenient way to do<br />
 the same.</p>
 
 
@@ -1432,19 +1435,19 @@ the same.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets or unsets an attribute on <!-- raw HTML omitted -->menu_item<!-- raw HTML omitted -->.</p>
-<p>The attribute to set or unset is specified by <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->. This
-can be one of the standard attribute names %G_MENU_ATTRIBUTE_LABEL,
-%G_MENU_ATTRIBUTE_ACTION, %G_MENU_ATTRIBUTE_TARGET, or a custom
-attribute name.
-Attribute names are restricted to lowercase characters, numbers
-and '-'. Furthermore, the names must begin with a lowercase character,
+<p>The attribute to set or unset is specified by <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->. This<br />
+can be one of the standard attribute names %G_MENU_ATTRIBUTE_LABEL,<br />
+%G_MENU_ATTRIBUTE_ACTION, %G_MENU_ATTRIBUTE_TARGET, or a custom<br />
+attribute name.<br />
+Attribute names are restricted to lowercase characters, numbers<br />
+and '-'. Furthermore, the names must begin with a lowercase character,<br />
 must not end with a '-', and must not contain consecutive dashes.</p>
-<p>must consist only of lowercase
+<p>must consist only of lowercase<br />
 ASCII characters, digits and '-'.</p>
-<p>If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is non-nil then it is used as the new value for the
-attribute.  If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is nil then the attribute is unset. If
+<p>If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is non-nil then it is used as the new value for the<br />
+attribute.  If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is nil then the attribute is unset. If<br />
 the <!-- raw HTML omitted -->value<!-- raw HTML omitted --> #GVariant is floating, it is consumed.</p>
-<p>See also g_menu_item_set_attribute() for a more convenient way to do
+<p>See also g_menu_item_set_attribute() for a more convenient way to do<br />
 the same.</p>
 
 
@@ -1529,13 +1532,13 @@ the same.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a link from <!-- raw HTML omitted -->menu_item<!-- raw HTML omitted --> to <!-- raw HTML omitted -->model<!-- raw HTML omitted --> if non-nil, or unsets it.</p>
-<p>Links are used to establish a relationship between a particular menu
-item and another menu.  For example, %G_MENU_LINK_SUBMENU is used to
-associate a submenu with a particular menu item, and %G_MENU_LINK_SECTION
-is used to create a section. Other types of link can be used, but there
-is no guarantee that clients will be able to make sense of them.
-Link types are restricted to lowercase characters, numbers
-and '-'. Furthermore, the names must begin with a lowercase character,
+<p>Links are used to establish a relationship between a particular menu<br />
+item and another menu.  For example, %G_MENU_LINK_SUBMENU is used to<br />
+associate a submenu with a particular menu item, and %G_MENU_LINK_SECTION<br />
+is used to create a section. Other types of link can be used, but there<br />
+is no guarantee that clients will be able to make sense of them.<br />
+Link types are restricted to lowercase characters, numbers<br />
+and '-'. Furthermore, the names must begin with a lowercase character,<br />
 must not end with a '-', and must not contain consecutive dashes.</p>
 
 
@@ -1606,9 +1609,9 @@ must not end with a '-', and must not contain consecutive dashes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets or unsets the &quot;submenu&quot; link of <!-- raw HTML omitted -->menu_item<!-- raw HTML omitted --> to <!-- raw HTML omitted -->submenu<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->submenu<!-- raw HTML omitted --> is non-nil, it is linked to.  If it is nil then the
+<p>If <!-- raw HTML omitted -->submenu<!-- raw HTML omitted --> is non-nil, it is linked to.  If it is nil then the<br />
 link is unset.</p>
-<p>The effect of having one menu appear as a submenu of another is
+<p>The effect of having one menu appear as a submenu of another is<br />
 exactly as it sounds.</p>
 
 
@@ -1659,7 +1662,7 @@ exactly as it sounds.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

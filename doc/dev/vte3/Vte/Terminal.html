@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Vte::Terminal";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -101,8 +102,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/vte3/terminal.rb<span class="defines">,<br />
+    <dd>lib/vte3/terminal.rb<span class="defines">,<br>
   lib/vte3/deprecated.rb</span>
+
 </dd>
   </dl>
   
@@ -3907,6 +3909,7 @@
 
       
     </ul>
+    
   
 
 
@@ -3954,7 +3957,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether or not the terminal will attempt to draw bold text,
+    <p>Checks whether or not the terminal will attempt to draw bold text,<br />
 by using a bold font variant.</p>
 
 
@@ -3994,7 +3997,7 @@ by using a bold font variant.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether or not the terminal will attempt to draw bold text,
+    <p>Controls whether or not the terminal will attempt to draw bold text,<br />
 by using a bold font variant.</p>
 
 
@@ -4062,7 +4065,7 @@ by using a bold font variant.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether or not the terminal will attempt to draw bold text,
+    <p>Controls whether or not the terminal will attempt to draw bold text,<br />
 by using a bold font variant.</p>
 
 
@@ -4247,7 +4250,7 @@ by using a bold font variant.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether or not the terminal will beep when the child outputs the
+    <p>Checks whether or not the terminal will beep when the child outputs the<br />
 &quot;bl&quot; sequence.</p>
 
 
@@ -4287,7 +4290,7 @@ by using a bold font variant.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether or not the terminal will beep when the child outputs the
+    <p>Controls whether or not the terminal will beep when the child outputs the<br />
 &quot;bl&quot; sequence.</p>
 
 
@@ -4355,7 +4358,7 @@ by using a bold font variant.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether or not the terminal will beep when the child outputs the
+    <p>Controls whether or not the terminal will beep when the child outputs the<br />
 &quot;bl&quot; sequence.</p>
 
 
@@ -4395,7 +4398,7 @@ by using a bold font variant.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls what string or control sequence the terminal sends to its child
+    <p>Controls what string or control sequence the terminal sends to its child<br />
 when the user presses the backspace key.</p>
 
 
@@ -4435,7 +4438,7 @@ when the user presses the backspace key.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls what string or control sequence the terminal sends to its child
+    <p>Controls what string or control sequence the terminal sends to its child<br />
 when the user presses the backspace key.</p>
 
 
@@ -4503,8 +4506,8 @@ when the user presses the backspace key.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether the SGR 1 attribute also switches to the bright counterpart
-of the first 8 palette colors, in addition to making them bold (legacy behavior)
+    <p>Checks whether the SGR 1 attribute also switches to the bright counterpart<br />
+of the first 8 palette colors, in addition to making them bold (legacy behavior)<br />
 or if SGR 1 only enables bold and leaves the color intact.</p>
 
 
@@ -4544,8 +4547,8 @@ or if SGR 1 only enables bold and leaves the color intact.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the SGR 1 attribute also switches to the bright counterpart
-of the first 8 palette colors, in addition to making them bold (legacy behavior)
+    <p>Whether the SGR 1 attribute also switches to the bright counterpart<br />
+of the first 8 palette colors, in addition to making them bold (legacy behavior)<br />
 or if SGR 1 only enables bold and leaves the color intact.</p>
 
 
@@ -4613,8 +4616,8 @@ or if SGR 1 only enables bold and leaves the color intact.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the SGR 1 attribute also switches to the bright counterpart
-of the first 8 palette colors, in addition to making them bold (legacy behavior)
+    <p>Whether the SGR 1 attribute also switches to the bright counterpart<br />
+of the first 8 palette colors, in addition to making them bold (legacy behavior)<br />
 or if SGR 1 only enables bold and leaves the color intact.</p>
 
 
@@ -4866,7 +4869,7 @@ or if SGR 1 only enables bold and leaves the color intact.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Note that this method should rather be called vte_terminal_get_cell_height,
+    <p>Note that this method should rather be called vte_terminal_get_cell_height,<br />
 because the return value takes cell-height-scale into account.</p>
 
 
@@ -4906,7 +4909,7 @@ because the return value takes cell-height-scale into account.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Note that this method should rather be called vte_terminal_get_cell_width,
+    <p>Note that this method should rather be called vte_terminal_get_cell_width,<br />
 because the return value takes cell-width-scale into account.</p>
 
 
@@ -4946,10 +4949,10 @@ because the return value takes cell-width-scale into account.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a nonempty string: the target of the explicit hyperlink (printed using the OSC 8
+    <p>Returns a nonempty string: the target of the explicit hyperlink (printed using the OSC 8<br />
 escape sequence) at the position (x, y), or nil.</p>
-<p>Proper use of the escape sequence should result in URI-encoded URIs with a proper scheme
-like &quot;http://&quot;, &quot;https://&quot;, &quot;file://&quot;, &quot;mailto:&quot; etc. This is, however, not enforced by VTE.
+<p>Proper use of the escape sequence should result in URI-encoded URIs with a proper scheme<br />
+like &quot;http://&quot;, &quot;https://&quot;, &quot;file://&quot;, &quot;mailto:&quot; etc. This is, however, not enforced by VTE.<br />
 The caller must tolerate the returned string potentially not being a valid URI.</p>
 
 
@@ -4994,7 +4997,7 @@ The caller must tolerate the returned string potentially not being a valid URI.<
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string containing the target of the hyperlink,
+        <div class='inline'><p>a newly allocated string containing the target of the hyperlink,<br />
 or nil</p>
 </div>
       
@@ -5016,12 +5019,12 @@ or nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if the text in and around the position (x, y) matches any of the
-regular expressions previously set using vte_terminal_match_add().  If a
-match exists, the text string is returned and if <!-- raw HTML omitted -->tag<!-- raw HTML omitted --> is not nil, the number
+    <p>Checks if the text in and around the position (x, y) matches any of the<br />
+regular expressions previously set using vte_terminal_match_add().  If a<br />
+match exists, the text string is returned and if <!-- raw HTML omitted -->tag<!-- raw HTML omitted --> is not nil, the number<br />
 associated with the matched regular expression will be stored in <!-- raw HTML omitted -->tag<!-- raw HTML omitted -->.</p>
-<p>If more than one regular expression has been set with
-vte_terminal_match_add(), then expressions are checked in the order in
+<p>If more than one regular expression has been set with<br />
+vte_terminal_match_add(), then expressions are checked in the order in<br />
 which they were added.</p>
 
 
@@ -5081,7 +5084,7 @@ which they were added.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string which matches one of the previously
+        <div class='inline'><p>a newly allocated string which matches one of the previously<br />
 set regular expressions, or nil if there is no match</p>
 </div>
       
@@ -5103,10 +5106,10 @@ set regular expressions, or nil if there is no match</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like vte_terminal_check_regex_simple_at(), but returns an array of strings,
-containing the matching text (or nil if no match) corresponding to each of the
+    <p>Like vte_terminal_check_regex_simple_at(), but returns an array of strings,<br />
+containing the matching text (or nil if no match) corresponding to each of the<br />
 regexes in <!-- raw HTML omitted -->regexes<!-- raw HTML omitted -->.</p>
-<p>You must free each string and the array; but note that this is <em>not</em> a nil-terminated
+<p>You must free each string and the array; but note that this is <em>not</em> a nil-terminated<br />
 string array, and so you must <em>not</em> use g_strfreev() on it.</p>
 
 
@@ -5211,7 +5214,7 @@ string array, and so you must <em>not</em> use g_strfreev() on it.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated array of strings,
+        <div class='inline'><p>a newly allocated array of strings,<br />
 or nil if none of the regexes matched</p>
 </div>
       
@@ -5233,10 +5236,10 @@ or nil if none of the regexes matched</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks each regex in <!-- raw HTML omitted -->regexes<!-- raw HTML omitted --> if the text in and around the position (x, y)
-matches the regular expressions.  If a match exists, the matched
-text is stored in <!-- raw HTML omitted -->matches<!-- raw HTML omitted --> at the position of the regex in <!-- raw HTML omitted -->regexes<!-- raw HTML omitted -->; otherwise
-nil is stored there.  Each non-nil element of <!-- raw HTML omitted -->matches<!-- raw HTML omitted --> should be freed with
+    <p>Checks each regex in <!-- raw HTML omitted -->regexes<!-- raw HTML omitted --> if the text in and around the position (x, y)<br />
+matches the regular expressions.  If a match exists, the matched<br />
+text is stored in <!-- raw HTML omitted -->matches<!-- raw HTML omitted --> at the position of the regex in <!-- raw HTML omitted -->regexes<!-- raw HTML omitted -->; otherwise<br />
+nil is stored there.  Each non-nil element of <!-- raw HTML omitted -->matches<!-- raw HTML omitted --> should be freed with<br />
 g_free().</p>
 <p>Note that the regexes in <!-- raw HTML omitted -->regexes<!-- raw HTML omitted --> should have been created using the %PCRE2_MULTILINE flag.</p>
 
@@ -5363,11 +5366,11 @@ g_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This setting controls whether ambiguous-width characters are narrow or wide.
-(Note that when using a non-UTF-8 encoding set via vte_terminal_set_encoding(),
-the width of ambiguous-width characters is fixed and determined by the encoding
+    <p>This setting controls whether ambiguous-width characters are narrow or wide.<br />
+(Note that when using a non-UTF-8 encoding set via vte_terminal_set_encoding(),<br />
+the width of ambiguous-width characters is fixed and determined by the encoding<br />
 itself.)</p>
-<p>This setting only takes effect the next time the terminal is reset, either
+<p>This setting only takes effect the next time the terminal is reset, either<br />
 via escape sequence or with vte_terminal_reset().</p>
 
 
@@ -5407,11 +5410,11 @@ via escape sequence or with vte_terminal_reset().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This setting controls whether ambiguous-width characters are narrow or wide.
-(Note that when using a non-UTF-8 encoding set via vte_terminal_set_encoding(),
-the width of ambiguous-width characters is fixed and determined by the encoding
+    <p>This setting controls whether ambiguous-width characters are narrow or wide.<br />
+(Note that when using a non-UTF-8 encoding set via vte_terminal_set_encoding(),<br />
+the width of ambiguous-width characters is fixed and determined by the encoding<br />
 itself.)</p>
-<p>This setting only takes effect the next time the terminal is reset, either
+<p>This setting only takes effect the next time the terminal is reset, either<br />
 via escape sequence or with vte_terminal_reset().</p>
 
 
@@ -5479,9 +5482,9 @@ via escape sequence or with vte_terminal_reset().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether to paint the background with the background colour.
+    <p>Sets whether to paint the background with the background colour.<br />
 The default is true.</p>
-<p>This function is rarely useful. One use for it is to add a background
+<p>This function is rarely useful. One use for it is to add a background<br />
 image to the terminal.</p>
 
 
@@ -5536,8 +5539,8 @@ image to the terminal.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the background color for text which does not have a specific background
-color assigned.  Only has effect when no background image is set and when
+    <p>Sets the background color for text which does not have a specific background<br />
+color assigned.  Only has effect when no background image is set and when<br />
 the terminal is not transparent.</p>
 
 
@@ -5592,7 +5595,7 @@ the terminal is not transparent.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the color used to draw bold text in the default foreground color.
+    <p>Sets the color used to draw bold text in the default foreground color.<br />
 If <!-- raw HTML omitted -->bold<!-- raw HTML omitted --> is nil then the default color is used.</p>
 
 
@@ -5647,8 +5650,8 @@ If <!-- raw HTML omitted -->bold<!-- raw HTML omitted --> is nil then the defaul
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the background color for text which is under the cursor.  If nil, text
-under the cursor will be drawn with foreground and background colors
+    <p>Sets the background color for text which is under the cursor.  If nil, text<br />
+under the cursor will be drawn with foreground and background colors<br />
 reversed.</p>
 
 
@@ -5703,8 +5706,8 @@ reversed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the foreground color for text which is under the cursor.  If nil, text
-under the cursor will be drawn with foreground and background colors
+    <p>Sets the foreground color for text which is under the cursor.  If nil, text<br />
+under the cursor will be drawn with foreground and background colors<br />
 reversed.</p>
 
 
@@ -5813,9 +5816,9 @@ reversed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the background color for text which is highlighted.  If nil,
-it is unset.  If neither highlight background nor highlight foreground are set,
-highlighted text (which is usually highlighted because it is selected) will
+    <p>Sets the background color for text which is highlighted.  If nil,<br />
+it is unset.  If neither highlight background nor highlight foreground are set,<br />
+highlighted text (which is usually highlighted because it is selected) will<br />
 be drawn with foreground and background colors reversed.</p>
 
 
@@ -5870,9 +5873,9 @@ be drawn with foreground and background colors reversed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the foreground color for text which is highlighted.  If nil,
-it is unset.  If neither highlight background nor highlight foreground are set,
-highlighted text (which is usually highlighted because it is selected) will
+    <p>Sets the foreground color for text which is highlighted.  If nil,<br />
+it is unset.  If neither highlight background nor highlight foreground are set,<br />
+highlighted text (which is usually highlighted because it is selected) will<br />
 be drawn with foreground and background colors reversed.</p>
 
 
@@ -5966,8 +5969,8 @@ be drawn with foreground and background colors reversed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The menu used for context menus. Note that context menu model set with the
-Vte::Terminal::context-menu-model property or vte_terminal_set_context_menu_model()
+    <p>The menu used for context menus. Note that context menu model set with the<br />
+Vte::Terminal::context-menu-model property or vte_terminal_set_context_menu_model()<br />
 takes precedence over this.</p>
 
 
@@ -6007,8 +6010,8 @@ takes precedence over this.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The menu used for context menus. Note that context menu model set with the
-Vte::Terminal::context-menu-model property or vte_terminal_set_context_menu_model()
+    <p>The menu used for context menus. Note that context menu model set with the<br />
+Vte::Terminal::context-menu-model property or vte_terminal_set_context_menu_model()<br />
 takes precedence over this.</p>
 
 
@@ -6076,8 +6079,8 @@ takes precedence over this.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The menu model used for context menus. If non-nil, the context menu is
-generated from this model, and overrides a context menu set with the
+    <p>The menu model used for context menus. If non-nil, the context menu is<br />
+generated from this model, and overrides a context menu set with the<br />
 Vte::Terminal::context-menu property or vte_terminal_set_context_menu().</p>
 
 
@@ -6117,8 +6120,8 @@ Vte::Terminal::context-menu property or vte_terminal_set_context_menu().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The menu model used for context menus. If non-nil, the context menu is
-generated from this model, and overrides a context menu set with the
+    <p>The menu model used for context menus. If non-nil, the context menu is<br />
+generated from this model, and overrides a context menu set with the<br />
 Vte::Terminal::context-menu property or vte_terminal_set_context_menu().</p>
 
 
@@ -6186,7 +6189,7 @@ Vte::Terminal::context-menu property or vte_terminal_set_context_menu().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Places the selected text in the terminal in the #GDK_SELECTION_CLIPBOARD
+    <p>Places the selected text in the terminal in the #GDK_SELECTION_CLIPBOARD<br />
 selection.</p>
 
 
@@ -6222,13 +6225,13 @@ selection.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Places the selected text in the terminal in the #GDK_SELECTION_CLIPBOARD
+    <p>Places the selected text in the terminal in the #GDK_SELECTION_CLIPBOARD<br />
 selection in the form specified by <!-- raw HTML omitted -->format<!-- raw HTML omitted -->.</p>
-<p>For all formats, the selection data (see Gtk::SelectionData) will include the
-text targets (see gtk_target_list_add_text_targets() and
-gtk_selection_data_targets_includes_text()). For %VTE_FORMAT_HTML,
-the selection will also include the &quot;text/html&quot; target, which when requested,
-returns the HTML data in UTF-16 with a U+FEFF BYTE ORDER MARK character at
+<p>For all formats, the selection data (see Gtk::SelectionData) will include the<br />
+text targets (see gtk_target_list_add_text_targets() and<br />
+gtk_selection_data_targets_includes_text()). For %VTE_FORMAT_HTML,<br />
+the selection will also include the &quot;text/html&quot; target, which when requested,<br />
+returns the HTML data in UTF-16 with a U+FEFF BYTE ORDER MARK character at<br />
 the start.</p>
 
 
@@ -6283,7 +6286,7 @@ the start.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Places the selected text in the terminal in the #GDK_SELECTION_PRIMARY
+    <p>Places the selected text in the terminal in the #GDK_SELECTION_PRIMARY<br />
 selection.</p>
 
 
@@ -6531,7 +6534,7 @@ selection.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether or not the cursor will blink. Using %VTE_CURSOR_BLINK_SYSTEM
+    <p>Sets whether or not the cursor will blink. Using %VTE_CURSOR_BLINK_SYSTEM<br />
 will use the Gtk::Settings:gtk-cursor-blink setting.</p>
 
 
@@ -6571,7 +6574,7 @@ will use the Gtk::Settings:gtk-cursor-blink setting.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether or not the cursor will blink. Using %VTE_CURSOR_BLINK_SYSTEM
+    <p>Sets whether or not the cursor will blink. Using %VTE_CURSOR_BLINK_SYSTEM<br />
 will use the Gtk::Settings:gtk-cursor-blink setting.</p>
 
 
@@ -6745,7 +6748,7 @@ will use the Gtk::Settings:gtk-cursor-blink setting.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls what string or control sequence the terminal sends to its child
+    <p>Controls what string or control sequence the terminal sends to its child<br />
 when the user presses the delete key.</p>
 
 
@@ -6785,7 +6788,7 @@ when the user presses the delete key.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls what string or control sequence the terminal sends to its child
+    <p>Controls what string or control sequence the terminal sends to its child<br />
 when the user presses the delete key.</p>
 
 
@@ -7432,9 +7435,9 @@ when the user presses the delete key.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls the encoding the terminal will expect data from the child to
-be encoded with.  For certain terminal types, applications executing in the
-terminal can change the encoding.  The default is defined by the
+    <p>Controls the encoding the terminal will expect data from the child to<br />
+be encoded with.  For certain terminal types, applications executing in the<br />
+terminal can change the encoding.  The default is defined by the<br />
 application's locale settings.</p>
 
 
@@ -7474,9 +7477,9 @@ application's locale settings.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls the encoding the terminal will expect data from the child to
-be encoded with.  For certain terminal types, applications executing in the
-terminal can change the encoding.  The default is defined by the
+    <p>Controls the encoding the terminal will expect data from the child to<br />
+be encoded with.  For certain terminal types, applications executing in the<br />
+terminal can change the encoding.  The default is defined by the<br />
 application's locale settings.</p>
 
 
@@ -7613,7 +7616,7 @@ application's locale settings.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sends a block of UTF-8 text to the child as if it were entered by the user
+    <p>Sends a block of UTF-8 text to the child as if it were entered by the user<br />
 at the keyboard.</p>
 
 
@@ -7752,10 +7755,10 @@ at the keyboard.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries the terminal for information about the fonts which will be
-used to draw text in the terminal.  The actual font takes the font scale
-into account, this is not reflected in the return value, the unscaled
-font is returned.
+    <p>Queries the terminal for information about the fonts which will be<br />
+used to draw text in the terminal.  The actual font takes the font scale<br />
+into account, this is not reflected in the return value, the unscaled<br />
+font is returned.<br />
 terminal uses to render text at the default font scale of 1.0.</p>
 
 
@@ -7795,10 +7798,10 @@ terminal uses to render text at the default font scale of 1.0.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the font used for rendering all text displayed by the terminal,
-overriding any fonts set using gtk_widget_modify_font().  The terminal
-will immediately attempt to load the desired font, retrieve its
-metrics, and attempt to resize itself to keep the same number of rows
+    <p>Sets the font used for rendering all text displayed by the terminal,<br />
+overriding any fonts set using gtk_widget_modify_font().  The terminal<br />
+will immediately attempt to load the desired font, retrieve its<br />
+metrics, and attempt to resize itself to keep the same number of rows<br />
 and columns.  The font scale is applied to the specified font.</p>
 
 
@@ -7853,10 +7856,10 @@ and columns.  The font scale is applied to the specified font.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Specifies the font used for rendering all text displayed by the terminal,
-overriding any fonts set using gtk_widget_modify_font().  The terminal
-will immediately attempt to load the desired font, retrieve its
-metrics, and attempt to resize itself to keep the same number of rows
+    <p>Specifies the font used for rendering all text displayed by the terminal,<br />
+overriding any fonts set using gtk_widget_modify_font().  The terminal<br />
+will immediately attempt to load the desired font, retrieve its<br />
+metrics, and attempt to resize itself to keep the same number of rows<br />
 and columns.</p>
 
 
@@ -7896,10 +7899,10 @@ and columns.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Specifies the font used for rendering all text displayed by the terminal,
-overriding any fonts set using gtk_widget_modify_font().  The terminal
-will immediately attempt to load the desired font, retrieve its
-metrics, and attempt to resize itself to keep the same number of rows
+    <p>Specifies the font used for rendering all text displayed by the terminal,<br />
+overriding any fonts set using gtk_widget_modify_font().  The terminal<br />
+will immediately attempt to load the desired font, retrieve its<br />
+metrics, and attempt to resize itself to keep the same number of rows<br />
 and columns.</p>
 
 
@@ -7968,9 +7971,9 @@ and columns.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The terminal's font options, or nil to use the default font options.</p>
-<p>Note that on GTK4, the terminal by default uses font options
-with %CAIRO_HINT_METRICS_ON set; to override that, use this
-function to set a #cairo_font_options_t that has
+<p>Note that on GTK4, the terminal by default uses font options<br />
+with %CAIRO_HINT_METRICS_ON set; to override that, use this<br />
+function to set a #cairo_font_options_t that has<br />
 %CAIRO_HINT_METRICS_OFF set.</p>
 
 
@@ -8011,9 +8014,9 @@ function to set a #cairo_font_options_t that has
 </h3><div class="docstring">
   <div class="discussion">
     <p>The terminal's font options, or nil to use the default font options.</p>
-<p>Note that on GTK4, the terminal by default uses font options
-with %CAIRO_HINT_METRICS_ON set; to override that, use this
-function to set a #cairo_font_options_t that has
+<p>Note that on GTK4, the terminal by default uses font options<br />
+with %CAIRO_HINT_METRICS_ON set; to override that, use this<br />
+function to set a #cairo_font_options_t that has<br />
 %CAIRO_HINT_METRICS_OFF set.</p>
 
 
@@ -8253,13 +8256,13 @@ function to set a #cairo_font_options_t that has
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the background colour, as used by <!-- raw HTML omitted -->terminal<!-- raw HTML omitted --> when
-drawing the background, which may be different from
+    <p>Returns the background colour, as used by <!-- raw HTML omitted -->terminal<!-- raw HTML omitted --> when<br />
+drawing the background, which may be different from<br />
 the color set by vte_terminal_set_color_background().</p>
-<p>Note: you must only call this function while handling the
+<p>Note: you must only call this function while handling the<br />
 GtkWidget::draw signal.</p>
-<p>This function is rarely useful. One use for it is if you disable
-drawing the background (see vte_terminal_set_clear_background())
+<p>This function is rarely useful. One use for it is if you disable<br />
+drawing the background (see vte_terminal_set_clear_background())<br />
 and then need to draw the background yourself.</p>
 
 
@@ -8314,7 +8317,7 @@ and then need to draw the background yourself.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reads the location of the insertion cursor and returns it.  The row
+    <p>Reads the location of the insertion cursor and returns it.  The row<br />
 coordinate is absolute.</p>
 <p>This method is unaware of BiDi. The returned column is logical column.</p>
 
@@ -8386,10 +8389,10 @@ coordinate is absolute.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Extracts a view of the visible part of the terminal.</p>
-<p>This method is unaware of BiDi. The columns returned in <!-- raw HTML omitted -->attributes<!-- raw HTML omitted --> are
+<p>This method is unaware of BiDi. The columns returned in <!-- raw HTML omitted -->attributes<!-- raw HTML omitted --> are<br />
 logical columns.</p>
-<p>Note: since 0.68, passing a non-nil <!-- raw HTML omitted -->attributes<!-- raw HTML omitted --> parameter is deprecated. Starting with
-0.72, passing a non-nil <!-- raw HTML omitted -->attributes<!-- raw HTML omitted --> parameter will make this function itself return nil.
+<p>Note: since 0.68, passing a non-nil <!-- raw HTML omitted -->attributes<!-- raw HTML omitted --> parameter is deprecated. Starting with<br />
+0.72, passing a non-nil <!-- raw HTML omitted -->attributes<!-- raw HTML omitted --> parameter will make this function itself return nil.<br />
 Since 0.72, passing a non-nil <!-- raw HTML omitted -->is_selected<!-- raw HTML omitted --> parameter will make this function itself return nil.</p>
 
 
@@ -8479,7 +8482,7 @@ Since 0.72, passing a non-nil <!-- raw HTML omitted -->is_selected<!-- raw HTML 
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns text from the visible part of the terminal in the specified format.</p>
-<p>This method is unaware of BiDi. The columns returned in <!-- raw HTML omitted -->attributes<!-- raw HTML omitted --> are
+<p>This method is unaware of BiDi. The columns returned in <!-- raw HTML omitted -->attributes<!-- raw HTML omitted --> are<br />
 logical columns.</p>
 
 
@@ -8539,10 +8542,10 @@ logical columns.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Extracts a view of the visible part of the terminal.</p>
-<p>This method is unaware of BiDi. The columns returned in <!-- raw HTML omitted -->attributes<!-- raw HTML omitted --> are
+<p>This method is unaware of BiDi. The columns returned in <!-- raw HTML omitted -->attributes<!-- raw HTML omitted --> are<br />
 logical columns.</p>
-<p>Note: since 0.68, passing a non-nil <!-- raw HTML omitted -->array<!-- raw HTML omitted --> parameter is deprecated. Starting with
-0.72, passing a non-nil <!-- raw HTML omitted -->array<!-- raw HTML omitted --> parameter will make this function itself return nil.
+<p>Note: since 0.68, passing a non-nil <!-- raw HTML omitted -->array<!-- raw HTML omitted --> parameter is deprecated. Starting with<br />
+0.72, passing a non-nil <!-- raw HTML omitted -->array<!-- raw HTML omitted --> parameter will make this function itself return nil.<br />
 Since 0.72, passing a non-nil <!-- raw HTML omitted -->is_selected<!-- raw HTML omitted --> parameter will make this function itself return nil.</p>
 
 
@@ -8631,15 +8634,15 @@ Since 0.72, passing a non-nil <!-- raw HTML omitted -->is_selected<!-- raw HTML 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Extracts a view of the visible part of the terminal. The
-entire scrollback buffer is scanned, so it is possible to read the entire
+    <p>Extracts a view of the visible part of the terminal. The<br />
+entire scrollback buffer is scanned, so it is possible to read the entire<br />
 contents of the buffer using this function.</p>
-<p>This method is unaware of BiDi. The columns passed in <!-- raw HTML omitted -->start_col<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_row<!-- raw HTML omitted -->,
+<p>This method is unaware of BiDi. The columns passed in <!-- raw HTML omitted -->start_col<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_row<!-- raw HTML omitted -->,<br />
 and returned in <!-- raw HTML omitted -->attributes<!-- raw HTML omitted --> are logical columns.</p>
-<p>Since 0.68, passing a non-nil <!-- raw HTML omitted -->array<!-- raw HTML omitted --> parameter is deprecated.
-Since 0.72, passing a non-nil <!-- raw HTML omitted -->array<!-- raw HTML omitted --> parameter will make this function
-itself return nil.
-Since 0.72, passing a non-nil <!-- raw HTML omitted -->is_selected<!-- raw HTML omitted --> function will make this function
+<p>Since 0.68, passing a non-nil <!-- raw HTML omitted -->array<!-- raw HTML omitted --> parameter is deprecated.<br />
+Since 0.72, passing a non-nil <!-- raw HTML omitted -->array<!-- raw HTML omitted --> parameter will make this function<br />
+itself return nil.<br />
+Since 0.72, passing a non-nil <!-- raw HTML omitted -->is_selected<!-- raw HTML omitted --> function will make this function<br />
 itself return nil.</p>
 
 
@@ -8921,7 +8924,7 @@ itself return nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the currently selected text in the format specified by <!-- raw HTML omitted -->format<!-- raw HTML omitted -->.
+    <p>Gets the currently selected text in the format specified by <!-- raw HTML omitted -->format<!-- raw HTML omitted -->.<br />
 Since 0.72, this function also supports %VTE_FORMAT_HTML format.</p>
 
 
@@ -9053,8 +9056,8 @@ Since 0.72, this function also supports %VTE_FORMAT_HTML format.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if the terminal currently contains selected text.  Note that this
-is different from determining if the terminal is the owner of any
+    <p>Checks if the terminal currently contains selected text.  Note that this<br />
+is different from determining if the terminal is the owner of any<br />
 Gtk::Clipboard items.</p>
 
 
@@ -9340,8 +9343,8 @@ Gtk::Clipboard items.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether the terminal allows user input. When user input is disabled,
-key press and mouse button press and motion events are not sent to the
+    <p>Controls whether the terminal allows user input. When user input is disabled,<br />
+key press and mouse button press and motion events are not sent to the<br />
 terminal's child.</p>
 
 
@@ -9409,8 +9412,8 @@ terminal's child.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether the terminal allows user input. When user input is disabled,
-key press and mouse button press and motion events are not sent to the
+    <p>Controls whether the terminal allows user input. When user input is disabled,<br />
+key press and mouse button press and motion events are not sent to the<br />
 terminal's child.</p>
 
 
@@ -9450,10 +9453,10 @@ terminal's child.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds the regular expression <!-- raw HTML omitted -->regex<!-- raw HTML omitted --> to the list of matching expressions.  When the
-user moves the mouse cursor over a section of displayed text which matches
+    <p>Adds the regular expression <!-- raw HTML omitted -->regex<!-- raw HTML omitted --> to the list of matching expressions.  When the<br />
+user moves the mouse cursor over a section of displayed text which matches<br />
 this expression, the text will be highlighted.</p>
-<p>Note that <!-- raw HTML omitted -->regex<!-- raw HTML omitted --> should have been created using the <!-- raw HTML omitted -->PCRE2_MULTILINE<!-- raw HTML omitted -->
+<p>Note that <!-- raw HTML omitted -->regex<!-- raw HTML omitted --> should have been created using the <!-- raw HTML omitted -->PCRE2_MULTILINE<!-- raw HTML omitted --><br />
 flag.</p>
 
 
@@ -9527,12 +9530,12 @@ flag.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if the text in and around the specified position matches any of the
-regular expressions previously set using vte_terminal_match_add().  If a
-match exists, the text string is returned and if <!-- raw HTML omitted -->tag<!-- raw HTML omitted --> is not nil, the number
+    <p>Checks if the text in and around the specified position matches any of the<br />
+regular expressions previously set using vte_terminal_match_add().  If a<br />
+match exists, the text string is returned and if <!-- raw HTML omitted -->tag<!-- raw HTML omitted --> is not nil, the number<br />
 associated with the matched regular expression will be stored in <!-- raw HTML omitted -->tag<!-- raw HTML omitted -->.</p>
-<p>If more than one regular expression has been set with
-vte_terminal_match_add(), then expressions are checked in the order in
+<p>If more than one regular expression has been set with<br />
+vte_terminal_match_add(), then expressions are checked in the order in<br />
 which they were added.</p>
 
 
@@ -9600,7 +9603,7 @@ which they were added.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string which matches one of the previously
+        <div class='inline'><p>a newly allocated string which matches one of the previously<br />
 set regular expressions</p>
 </div>
       
@@ -9622,8 +9625,8 @@ set regular expressions</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes the regular expression which is associated with the given <!-- raw HTML omitted -->tag<!-- raw HTML omitted --> from
-the list of expressions which the terminal will highlight when the user
+    <p>Removes the regular expression which is associated with the given <!-- raw HTML omitted -->tag<!-- raw HTML omitted --> from<br />
+the list of expressions which the terminal will highlight when the user<br />
 moves the mouse cursor over matching text.</p>
 
 
@@ -9678,7 +9681,7 @@ moves the mouse cursor over matching text.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Clears the list of regular expressions the terminal uses to highlight text
+    <p>Clears the list of regular expressions the terminal uses to highlight text<br />
 when the user moves the mouse cursor.</p>
 
 
@@ -9714,7 +9717,7 @@ when the user moves the mouse cursor.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets which cursor the terminal will use if the pointer is over the pattern
+    <p>Sets which cursor the terminal will use if the pointer is over the pattern<br />
 specified by <!-- raw HTML omitted -->tag<!-- raw HTML omitted -->.  The terminal keeps a reference to <!-- raw HTML omitted -->cursor<!-- raw HTML omitted -->.</p>
 
 
@@ -9749,7 +9752,7 @@ specified by <!-- raw HTML omitted -->tag<!-- raw HTML omitted -->.  The termina
       
       
         &mdash;
-        <div class='inline'><p>the Gdk::Cursor which the terminal should use when the pattern is
+        <div class='inline'><p>the Gdk::Cursor which the terminal should use when the pattern is<br />
 highlighted, or nil to use the standard cursor</p>
 </div>
       
@@ -9785,7 +9788,7 @@ highlighted, or nil to use the standard cursor</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets which cursor the terminal will use if the pointer is over the pattern
+    <p>Sets which cursor the terminal will use if the pointer is over the pattern<br />
 specified by <!-- raw HTML omitted -->tag<!-- raw HTML omitted -->.</p>
 
 
@@ -9855,9 +9858,9 @@ specified by <!-- raw HTML omitted -->tag<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines the value of the terminal's mouse autohide setting.  When
-autohiding is enabled, the mouse cursor will be hidden when the user presses
-a key and shown when the user moves the mouse.  This setting can be changed
+    <p>Determines the value of the terminal's mouse autohide setting.  When<br />
+autohiding is enabled, the mouse cursor will be hidden when the user presses<br />
+a key and shown when the user moves the mouse.  This setting can be changed<br />
 using vte_terminal_set_mouse_autohide().</p>
 
 
@@ -9897,9 +9900,9 @@ using vte_terminal_set_mouse_autohide().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Changes the value of the terminal's mouse autohide setting.  When autohiding
-is enabled, the mouse cursor will be hidden when the user presses a key and
-shown when the user moves the mouse.  This setting can be read using
+    <p>Changes the value of the terminal's mouse autohide setting.  When autohiding<br />
+is enabled, the mouse cursor will be hidden when the user presses a key and<br />
+shown when the user moves the mouse.  This setting can be read using<br />
 vte_terminal_get_mouse_autohide().</p>
 
 
@@ -9954,8 +9957,8 @@ vte_terminal_get_mouse_autohide().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sends the contents of the #GDK_SELECTION_CLIPBOARD selection to the
-terminal's child. It's called on paste menu item, or when
+    <p>Sends the contents of the #GDK_SELECTION_CLIPBOARD selection to the<br />
+terminal's child. It's called on paste menu item, or when<br />
 user presses Shift+Insert.</p>
 
 
@@ -9991,9 +9994,9 @@ user presses Shift+Insert.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sends the contents of the #GDK_SELECTION_PRIMARY selection to the terminal's
-child. The terminal will call also paste the
-#GDK_SELECTION_PRIMARY selection when the user clicks with the the second
+    <p>Sends the contents of the #GDK_SELECTION_PRIMARY selection to the terminal's<br />
+child. The terminal will call also paste the<br />
+#GDK_SELECTION_PRIMARY selection when the user clicks with the the second<br />
 mouse button.</p>
 
 
@@ -10029,8 +10032,8 @@ mouse button.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sends <!-- raw HTML omitted -->text<!-- raw HTML omitted --> to the terminal's child as if retrived from the clipboard,
-this differs from vte_terminal_feed_child() in that it may process
+    <p>Sends <!-- raw HTML omitted -->text<!-- raw HTML omitted --> to the terminal's child as if retrived from the clipboard,<br />
+this differs from vte_terminal_feed_child() in that it may process<br />
 <!-- raw HTML omitted -->text<!-- raw HTML omitted --> before passing it to the child (e.g. apply bracketed mode)</p>
 
 
@@ -10085,8 +10088,8 @@ this differs from vte_terminal_feed_child() in that it may process
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls the value of the terminal's mouse autohide setting.  When autohiding
-is enabled, the mouse cursor will be hidden when the user presses a key and
+    <p>Controls the value of the terminal's mouse autohide setting.  When autohiding<br />
+is enabled, the mouse cursor will be hidden when the user presses a key and<br />
 shown when the user moves the mouse.</p>
 
 
@@ -10154,8 +10157,8 @@ shown when the user moves the mouse.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls the value of the terminal's mouse autohide setting.  When autohiding
-is enabled, the mouse cursor will be hidden when the user presses a key and
+    <p>Controls the value of the terminal's mouse autohide setting.  When autohiding<br />
+is enabled, the mouse cursor will be hidden when the user presses a key and<br />
 shown when the user moves the mouse.</p>
 
 
@@ -10319,8 +10322,8 @@ shown when the user moves the mouse.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Vte::Pty, sets the emulation property
-from Vte::Terminal:emulation, and sets the size using
+    <p>Creates a new Vte::Pty, sets the emulation property<br />
+from Vte::Terminal:emulation, and sets the size using<br />
 <!-- raw HTML omitted -->terminal<!-- raw HTML omitted -->'s size.</p>
 <p>See vte_pty_new() for more information.</p>
 
@@ -10448,9 +10451,9 @@ from Vte::Terminal:emulation, and sets the size using
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Resets as much of the terminal's internal state as possible, discarding any
-unprocessed input data, resetting character attributes, cursor state,
-national character set state, status line, terminal modes (insert/delete),
+    <p>Resets as much of the terminal's internal state as possible, discarding any<br />
+unprocessed input data, resetting character attributes, cursor state,<br />
+national character set state, status line, terminal modes (insert/delete),<br />
 selection state, and encoding.</p>
 
 
@@ -10559,7 +10562,7 @@ selection state, and encoding.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether or not the terminal will rewrap its contents, including
+    <p>Controls whether or not the terminal will rewrap its contents, including<br />
 the scrollback buffer, whenever the terminal's width changes.</p>
 
 
@@ -10627,7 +10630,7 @@ the scrollback buffer, whenever the terminal's width changes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether or not the terminal will rewrap its contents, including
+    <p>Controls whether or not the terminal will rewrap its contents, including<br />
 the scrollback buffer, whenever the terminal's width changes.</p>
 
 
@@ -10745,7 +10748,7 @@ the scrollback buffer, whenever the terminal's width changes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether or not the terminal will forcibly scroll to the bottom of
+    <p>Controls whether or not the terminal will forcibly scroll to the bottom of<br />
 the viewable history when the text is inserted (e.g. by a paste).</p>
 
 
@@ -10813,7 +10816,7 @@ the viewable history when the text is inserted (e.g. by a paste).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether or not the terminal will forcibly scroll to the bottom of
+    <p>Controls whether or not the terminal will forcibly scroll to the bottom of<br />
 the viewable history when the text is inserted (e.g. by a paste).</p>
 
 
@@ -10853,7 +10856,7 @@ the viewable history when the text is inserted (e.g. by a paste).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the viewable history when the user presses a key.  Modifier keys do not
+    <p>the viewable history when the user presses a key.  Modifier keys do not<br />
 trigger this behavior.</p>
 
 
@@ -10893,8 +10896,8 @@ trigger this behavior.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether or not the terminal will forcibly scroll to the bottom of
-the viewable history when the user presses a key.  Modifier keys do not
+    <p>Controls whether or not the terminal will forcibly scroll to the bottom of<br />
+the viewable history when the user presses a key.  Modifier keys do not<br />
 trigger this behavior.</p>
 
 
@@ -10962,8 +10965,8 @@ trigger this behavior.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether or not the terminal will forcibly scroll to the bottom of
-the viewable history when the user presses a key.  Modifier keys do not
+    <p>Controls whether or not the terminal will forcibly scroll to the bottom of<br />
+the viewable history when the user presses a key.  Modifier keys do not<br />
 trigger this behavior.</p>
 
 
@@ -11042,7 +11045,7 @@ trigger this behavior.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether or not the terminal will forcibly scroll to the bottom of
+    <p>Controls whether or not the terminal will forcibly scroll to the bottom of<br />
 the viewable history when the new data is received from the child.</p>
 
 
@@ -11110,7 +11113,7 @@ the viewable history when the new data is received from the child.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether or not the terminal will forcibly scroll to the bottom of
+    <p>Controls whether or not the terminal will forcibly scroll to the bottom of<br />
 the viewable history when the new data is received from the child.</p>
 
 
@@ -11189,8 +11192,8 @@ the viewable history when the new data is received from the child.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether the terminal's GtkAdjustment values unit is lines
-or pixels. This can be enabled when the terminal is the child of a
+    <p>Controls whether the terminal's GtkAdjustment values unit is lines<br />
+or pixels. This can be enabled when the terminal is the child of a<br />
 GtkScrolledWindow to fix some bugs with its kinetic scrolling.</p>
 
 
@@ -11258,8 +11261,8 @@ GtkScrolledWindow to fix some bugs with its kinetic scrolling.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether the terminal's GtkAdjustment values unit is lines
-or pixels. This can be enabled when the terminal is the child of a
+    <p>Controls whether the terminal's GtkAdjustment values unit is lines<br />
+or pixels. This can be enabled when the terminal is the child of a<br />
 GtkScrolledWindow to fix some bugs with its kinetic scrolling.</p>
 
 
@@ -11299,11 +11302,11 @@ GtkScrolledWindow to fix some bugs with its kinetic scrolling.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The length of the scrollback buffer used by the terminal.  The size of
-the scrollback buffer will be set to the larger of this value and the number
-of visible rows the widget can display, so 0 can safely be used to disable
-scrollback.  Note that this setting only affects the normal screen buffer.
-For terminal types which have an alternate screen buffer, no scrollback is
+    <p>The length of the scrollback buffer used by the terminal.  The size of<br />
+the scrollback buffer will be set to the larger of this value and the number<br />
+of visible rows the widget can display, so 0 can safely be used to disable<br />
+scrollback.  Note that this setting only affects the normal screen buffer.<br />
+For terminal types which have an alternate screen buffer, no scrollback is<br />
 allowed on the alternate screen buffer.</p>
 
 
@@ -11343,11 +11346,11 @@ allowed on the alternate screen buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The length of the scrollback buffer used by the terminal.  The size of
-the scrollback buffer will be set to the larger of this value and the number
-of visible rows the widget can display, so 0 can safely be used to disable
-scrollback.  Note that this setting only affects the normal screen buffer.
-For terminal types which have an alternate screen buffer, no scrollback is
+    <p>The length of the scrollback buffer used by the terminal.  The size of<br />
+the scrollback buffer will be set to the larger of this value and the number<br />
+of visible rows the widget can display, so 0 can safely be used to disable<br />
+scrollback.  Note that this setting only affects the normal screen buffer.<br />
+For terminal types which have an alternate screen buffer, no scrollback is<br />
 allowed on the alternate screen buffer.</p>
 
 
@@ -11415,7 +11418,7 @@ allowed on the alternate screen buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Searches the next string matching the search regex set with
+    <p>Searches the next string matching the search regex set with<br />
 vte_terminal_search_set_regex().</p>
 
 
@@ -11455,7 +11458,7 @@ vte_terminal_search_set_regex().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Searches the previous string matching the search regex set with
+    <p>Searches the previous string matching the search regex set with<br />
 vte_terminal_search_set_regex().</p>
 
 
@@ -11574,7 +11577,7 @@ vte_terminal_search_set_regex().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the regex to search for. Unsets the search regex when passed nil.</p>
-<p>Note that <!-- raw HTML omitted -->regex<!-- raw HTML omitted --> should have been created using the
+<p>Note that <!-- raw HTML omitted -->regex<!-- raw HTML omitted --> should have been created using the<br />
 <!-- raw HTML omitted -->PCRE2_MULTILINE<!-- raw HTML omitted --> flag.</p>
 
 
@@ -11644,7 +11647,7 @@ vte_terminal_search_set_regex().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether search should wrap around to the beginning of the
+    <p>Sets whether search should wrap around to the beginning of the<br />
 terminal content when reaching its end.</p>
 
 
@@ -11734,12 +11737,12 @@ terminal content when reaching its end.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p><!-- raw HTML omitted -->palette<!-- raw HTML omitted --> specifies the new values for the 256 palette colors: 8 standard colors,
-their 8 bright counterparts, 6x6x6 color cube, and 24 grayscale colors.
+    <p><!-- raw HTML omitted -->palette<!-- raw HTML omitted --> specifies the new values for the 256 palette colors: 8 standard colors,<br />
+their 8 bright counterparts, 6x6x6 color cube, and 24 grayscale colors.<br />
 Omitted entries will default to a hardcoded value.</p>
 <p><!-- raw HTML omitted -->palette_size<!-- raw HTML omitted --> must be 0, 8, 16, 232 or 256.</p>
-<p>If <!-- raw HTML omitted -->foreground<!-- raw HTML omitted --> is nil and <!-- raw HTML omitted -->palette_size<!-- raw HTML omitted --> is greater than 0, the new foreground
-color is taken from <!-- raw HTML omitted -->palette<!-- raw HTML omitted -->[7].  If <!-- raw HTML omitted -->background<!-- raw HTML omitted --> is nil and <!-- raw HTML omitted -->palette_size<!-- raw HTML omitted --> is
+<p>If <!-- raw HTML omitted -->foreground<!-- raw HTML omitted --> is nil and <!-- raw HTML omitted -->palette_size<!-- raw HTML omitted --> is greater than 0, the new foreground<br />
+color is taken from <!-- raw HTML omitted -->palette<!-- raw HTML omitted -->[7].  If <!-- raw HTML omitted -->background<!-- raw HTML omitted --> is nil and <!-- raw HTML omitted -->palette_size<!-- raw HTML omitted --> is<br />
 greater than 0, the new background color is taken from <!-- raw HTML omitted -->palette<!-- raw HTML omitted -->[0].</p>
 
 
@@ -11874,7 +11877,7 @@ greater than 0, the new background color is taken from <!-- raw HTML omitted -->
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Attempts to change the terminal's size in terms of rows and columns.  If
+    <p>Attempts to change the terminal's size in terms of rows and columns.  If<br />
 the attempt succeeds, the widget will resize itself to the proper size.</p>
 
 
@@ -11944,10 +11947,10 @@ the attempt succeeds, the widget will resize itself to the proper size.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A convenience function that wraps creating the Vte::Pty and spawning
-the child process on it. Like vte_terminal_spawn_with_fds_async(),
-except that this function does not allow passing file descriptors to
-the child process. See vte_terminal_spawn_with_fds_async() for more
+    <p>A convenience function that wraps creating the Vte::Pty and spawning<br />
+the child process on it. Like vte_terminal_spawn_with_fds_async(),<br />
+except that this function does not allow passing file descriptors to<br />
+the child process. See vte_terminal_spawn_with_fds_async() for more<br />
 information.</p>
 
 
@@ -11982,7 +11985,7 @@ information.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of a directory the command should start
+        <div class='inline'><p>the name of a directory the command should start<br />
 in, or nil to use the current working directory</p>
 </div>
       
@@ -12013,7 +12016,7 @@ in, or nil to use the current working directory</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of environment
+        <div class='inline'><p>a list of environment<br />
 variables to be added to the environment before starting the process, or nil</p>
 </div>
       
@@ -12169,23 +12172,23 @@ variables to be added to the environment before starting the process, or nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Starts the specified command under a newly-allocated controlling
-pseudo-terminal.  The <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> and <!-- raw HTML omitted -->envv<!-- raw HTML omitted --> lists should be nil-terminated.
-The &quot;TERM&quot; environment variable is automatically set to a default value,
-but can be overridden from <!-- raw HTML omitted -->envv<!-- raw HTML omitted -->.
+    <p>Starts the specified command under a newly-allocated controlling<br />
+pseudo-terminal.  The <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> and <!-- raw HTML omitted -->envv<!-- raw HTML omitted --> lists should be nil-terminated.<br />
+The &quot;TERM&quot; environment variable is automatically set to a default value,<br />
+but can be overridden from <!-- raw HTML omitted -->envv<!-- raw HTML omitted -->.<br />
 <!-- raw HTML omitted -->pty_flags<!-- raw HTML omitted --> controls logging the session to the specified system log files.</p>
 <p>Note that %G_SPAWN_DO_NOT_REAP_CHILD will always be added to <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->.</p>
-<p>Note also that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,
-and %G_SPAWN_CHILD_INHERITS_STDIN are not supported in <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->, since
-stdin, stdout and stderr of the child process will always be connected to
+<p>Note also that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,<br />
+and %G_SPAWN_CHILD_INHERITS_STDIN are not supported in <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->, since<br />
+stdin, stdout and stderr of the child process will always be connected to<br />
 the PTY.</p>
-<p>Note that all open file descriptors will be closed in the child. If you want
-to keep some file descriptor open for use in the child process, you need to
-use a child setup function that unsets the FD_CLOEXEC flag on that file
+<p>Note that all open file descriptors will be closed in the child. If you want<br />
+to keep some file descriptor open for use in the child process, you need to<br />
+use a child setup function that unsets the FD_CLOEXEC flag on that file<br />
 descriptor.</p>
 <p>See vte_pty_new(), g_spawn_async() and vte_terminal_watch_child() for more information.</p>
-<p>Beginning with 0.52, sets PWD to <!-- raw HTML omitted -->working_directory<!-- raw HTML omitted --> in order to preserve symlink components.
-The caller should also make sure that symlinks were preserved while constructing the value of <!-- raw HTML omitted -->working_directory<!-- raw HTML omitted -->,
+<p>Beginning with 0.52, sets PWD to <!-- raw HTML omitted -->working_directory<!-- raw HTML omitted --> in order to preserve symlink components.<br />
+The caller should also make sure that symlinks were preserved while constructing the value of <!-- raw HTML omitted -->working_directory<!-- raw HTML omitted -->,<br />
 e.g. by using vte_terminal_get_current_directory_uri(), g_get_current_dir() or get_current_dir_name().</p>
 
 
@@ -12220,7 +12223,7 @@ e.g. by using vte_terminal_get_current_directory_uri(), g_get_current_dir() or g
       
       
         &mdash;
-        <div class='inline'><p>the name of a directory the command should start
+        <div class='inline'><p>the name of a directory the command should start<br />
 in, or nil to use the current working directory</p>
 </div>
       
@@ -12251,7 +12254,7 @@ in, or nil to use the current working directory</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of environment
+        <div class='inline'><p>a list of environment<br />
 variables to be added to the environment before starting the process, or nil</p>
 </div>
       
@@ -12366,41 +12369,41 @@ variables to be added to the environment before starting the process, or nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A convenience function that wraps creating the Vte::Pty and spawning
-the child process on it. See vte_pty_new_sync(), vte_pty_spawn_with_fds_async(),
+    <p>A convenience function that wraps creating the Vte::Pty and spawning<br />
+the child process on it. See vte_pty_new_sync(), vte_pty_spawn_with_fds_async(),<br />
 and vte_pty_spawn_finish() for more information.</p>
-<p>When the operation is finished successfully, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called
-with the child #GPid, and a nil #GError. The child PID will already be
+<p>When the operation is finished successfully, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called<br />
+with the child #GPid, and a nil #GError. The child PID will already be<br />
 watched via vte_terminal_watch_child().</p>
-<p>When the operation fails, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called with a -1 #GPid,
+<p>When the operation fails, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called with a -1 #GPid,<br />
 and a non-nil #GError containing the error information.</p>
-<p>Note that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,
-and %G_SPAWN_CHILD_INHERITS_STDIN are not supported in <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->, since
-stdin, stdout and stderr of the child process will always be connected to
+<p>Note that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,<br />
+and %G_SPAWN_CHILD_INHERITS_STDIN are not supported in <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->, since<br />
+stdin, stdout and stderr of the child process will always be connected to<br />
 the PTY.</p>
-<p>If <!-- raw HTML omitted -->fds<!-- raw HTML omitted --> is not nil, the child process will map the file descriptors from
-<!-- raw HTML omitted -->fds<!-- raw HTML omitted --> according to <!-- raw HTML omitted -->map_fds<!-- raw HTML omitted -->; <!-- raw HTML omitted -->n_map_fds<!-- raw HTML omitted --> must be less or equal to <!-- raw HTML omitted -->n_fds<!-- raw HTML omitted -->.
-This function will take ownership of the file descriptors in <!-- raw HTML omitted -->fds<!-- raw HTML omitted -->;
+<p>If <!-- raw HTML omitted -->fds<!-- raw HTML omitted --> is not nil, the child process will map the file descriptors from<br />
+<!-- raw HTML omitted -->fds<!-- raw HTML omitted --> according to <!-- raw HTML omitted -->map_fds<!-- raw HTML omitted -->; <!-- raw HTML omitted -->n_map_fds<!-- raw HTML omitted --> must be less or equal to <!-- raw HTML omitted -->n_fds<!-- raw HTML omitted -->.<br />
+This function will take ownership of the file descriptors in <!-- raw HTML omitted -->fds<!-- raw HTML omitted -->;<br />
 you must not use or close them after this call.</p>
-<p>Note that all  open file descriptors apart from those mapped as above
-will be closed in the child. (If you want to keep some other file descriptor
-open for use in the child process, you need to use a child setup function
+<p>Note that all  open file descriptors apart from those mapped as above<br />
+will be closed in the child. (If you want to keep some other file descriptor<br />
+open for use in the child process, you need to use a child setup function<br />
 that unsets the FD_CLOEXEC flag on that file descriptor manually.)</p>
-<p>Beginning with 0.60, and on linux only, and unless %VTE_SPAWN_NO_SYSTEMD_SCOPE is
-passed in <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->, the newly created child process will be moved to its own
-systemd user scope; and if %VTE_SPAWN_REQUIRE_SYSTEMD_SCOPE is passed, and creation
-of the systemd user scope fails, the whole spawn will fail.
-You can override the options used for the systemd user scope by
-providing a systemd override file for 'vte-spawn-.scope' unit. See man:systemd.unit(5)
+<p>Beginning with 0.60, and on linux only, and unless %VTE_SPAWN_NO_SYSTEMD_SCOPE is<br />
+passed in <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->, the newly created child process will be moved to its own<br />
+systemd user scope; and if %VTE_SPAWN_REQUIRE_SYSTEMD_SCOPE is passed, and creation<br />
+of the systemd user scope fails, the whole spawn will fail.<br />
+You can override the options used for the systemd user scope by<br />
+providing a systemd override file for 'vte-spawn-.scope' unit. See man:systemd.unit(5)<br />
 for further information.</p>
-<p>Note that if <!-- raw HTML omitted -->terminal<!-- raw HTML omitted --> has been destroyed before the operation is called,
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called with a nil <!-- raw HTML omitted -->terminal<!-- raw HTML omitted -->; you must not do anything
-in the callback besides freeing any resources associated with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->,
-but taking care not to access the now-destroyed Vte::Terminal. Note that
-in this case, if spawning was successful, the child process will be aborted
+<p>Note that if <!-- raw HTML omitted -->terminal<!-- raw HTML omitted --> has been destroyed before the operation is called,<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called with a nil <!-- raw HTML omitted -->terminal<!-- raw HTML omitted -->; you must not do anything<br />
+in the callback besides freeing any resources associated with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->,<br />
+but taking care not to access the now-destroyed Vte::Terminal. Note that<br />
+in this case, if spawning was successful, the child process will be aborted<br />
 automatically.</p>
-<p>Beginning with 0.52, sets PWD to <!-- raw HTML omitted -->working_directory<!-- raw HTML omitted --> in order to preserve symlink components.
-The caller should also make sure that symlinks were preserved while constructing the value of <!-- raw HTML omitted -->working_directory<!-- raw HTML omitted -->,
+<p>Beginning with 0.52, sets PWD to <!-- raw HTML omitted -->working_directory<!-- raw HTML omitted --> in order to preserve symlink components.<br />
+The caller should also make sure that symlinks were preserved while constructing the value of <!-- raw HTML omitted -->working_directory<!-- raw HTML omitted -->,<br />
 e.g. by using vte_terminal_get_current_directory_uri(), g_get_current_dir() or get_current_dir_name().</p>
 
 
@@ -12435,7 +12438,7 @@ e.g. by using vte_terminal_get_current_directory_uri(), g_get_current_dir() or g
       
       
         &mdash;
-        <div class='inline'><p>the name of a directory the command should start
+        <div class='inline'><p>the name of a directory the command should start<br />
 in, or nil to use the current working directory</p>
 </div>
       
@@ -12466,7 +12469,7 @@ in, or nil to use the current working directory</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of environment
+        <div class='inline'><p>a list of environment<br />
 variables to be added to the environment before starting the process, or nil</p>
 </div>
       
@@ -12823,15 +12826,15 @@ variables to be added to the environment before starting the process, or nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Watches <!-- raw HTML omitted -->child_pid<!-- raw HTML omitted -->. When the process exists, the Vte::Terminal::child-exited
+    <p>Watches <!-- raw HTML omitted -->child_pid<!-- raw HTML omitted -->. When the process exists, the Vte::Terminal::child-exited<br />
 signal will be called with the child's exit status.</p>
-<p>Prior to calling this function, a Vte::Pty must have been set in <!-- raw HTML omitted -->terminal<!-- raw HTML omitted -->
-using vte_terminal_set_pty().
+<p>Prior to calling this function, a Vte::Pty must have been set in <!-- raw HTML omitted -->terminal<!-- raw HTML omitted --><br />
+using vte_terminal_set_pty().<br />
 When the child exits, the terminal's Vte::Pty will be set to nil.</p>
-<p>Note: g_child_watch_add() or g_child_watch_add_full() must not have
-been called for <!-- raw HTML omitted -->child_pid<!-- raw HTML omitted -->, nor a #GSource for it been created with
+<p>Note: g_child_watch_add() or g_child_watch_add_full() must not have<br />
+been called for <!-- raw HTML omitted -->child_pid<!-- raw HTML omitted -->, nor a #GSource for it been created with<br />
 g_child_watch_source_new().</p>
-<p>Note: when using the g_spawn_async() family of functions,
+<p>Note: when using the g_spawn_async() family of functions,<br />
 the %G_SPAWN_DO_NOT_REAP_CHILD flag MUST have been passed.</p>
 
 
@@ -12992,8 +12995,8 @@ the %G_SPAWN_DO_NOT_REAP_CHILD flag MUST have been passed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The set of characters which will be considered parts of a word
-when doing word-wise selection, in addition to the default which only
+    <p>The set of characters which will be considered parts of a word<br />
+when doing word-wise selection, in addition to the default which only<br />
 considers alphanumeric characters part of a word.</p>
 <p>If nil, a built-in set is used.</p>
 
@@ -13034,8 +13037,8 @@ considers alphanumeric characters part of a word.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The set of characters which will be considered parts of a word
-when doing word-wise selection, in addition to the default which only
+    <p>The set of characters which will be considered parts of a word<br />
+when doing word-wise selection, in addition to the default which only<br />
 considers alphanumeric characters part of a word.</p>
 <p>If nil, a built-in set is used.</p>
 
@@ -13104,13 +13107,13 @@ considers alphanumeric characters part of a word.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Write contents of the current contents of <!-- raw HTML omitted -->terminal<!-- raw HTML omitted --> (including any
+    <p>Write contents of the current contents of <!-- raw HTML omitted -->terminal<!-- raw HTML omitted --> (including any<br />
 scrollback history) to <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> according to <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by triggering
-the cancellable object from another thread. If the operation was cancelled,
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by triggering<br />
+the cancellable object from another thread. If the operation was cancelled,<br />
 the error %G_IO_ERROR_CANCELLED will be returned in <!-- raw HTML omitted -->error<!-- raw HTML omitted -->.</p>
-<p>This is a synchronous operation and will make the widget (and input
-processing) during the write operation, which may take a long time
+<p>This is a synchronous operation and will make the widget (and input<br />
+processing) during the write operation, which may take a long time<br />
 depending on scrollback history and <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> availability for writing.</p>
 
 
@@ -13595,9 +13598,9 @@ depending on scrollback history and <!-- raw HTML omitted -->stream<!-- raw HTML
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The vertical fillment of <!-- raw HTML omitted -->terminal<!-- raw HTML omitted --> within its allocation.
-Note that Vte::Terminal:yfill=true is only supported with
-Vte::Terminal:yalign=%VTE_ALIGN_START, and is ignored for
+    <p>The vertical fillment of <!-- raw HTML omitted -->terminal<!-- raw HTML omitted --> within its allocation.<br />
+Note that Vte::Terminal:yfill=true is only supported with<br />
+Vte::Terminal:yalign=%VTE_ALIGN_START, and is ignored for<br />
 all other yalign values.</p>
 
 
@@ -13665,9 +13668,9 @@ all other yalign values.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The vertical fillment of <!-- raw HTML omitted -->terminal<!-- raw HTML omitted --> within its allocation.
-Note that Vte::Terminal:yfill=true is only supported with
-Vte::Terminal:yalign=%VTE_ALIGN_START, and is ignored for
+    <p>The vertical fillment of <!-- raw HTML omitted -->terminal<!-- raw HTML omitted --> within its allocation.<br />
+Note that Vte::Terminal:yfill=true is only supported with<br />
+Vte::Terminal:yalign=%VTE_ALIGN_START, and is ignored for<br />
 all other yalign values.</p>
 
 
@@ -13703,7 +13706,7 @@ all other yalign values.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

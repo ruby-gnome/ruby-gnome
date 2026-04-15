@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::SimpleAsyncResult";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -138,6 +140,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -563,6 +566,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -579,7 +583,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a GSimple::AsyncResult from an error condition, and takes over the
+    <p>Creates a GSimple::AsyncResult from an error condition, and takes over the<br />
 caller's ownership of <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, so the caller does not need to free it anymore.</p>
 
 
@@ -673,16 +677,16 @@ caller's ownership of <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, s
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Ensures that the data passed to the _finish function of an async
+    <p>Ensures that the data passed to the _finish function of an async<br />
 operation is consistent.  Three checks are performed.</p>
-<p>First, <!-- raw HTML omitted -->result<!-- raw HTML omitted --> is checked to ensure that it is really a
-GSimple::AsyncResult.  Second, <!-- raw HTML omitted -->source<!-- raw HTML omitted --> is checked to ensure that it
-matches the source object of <!-- raw HTML omitted -->result<!-- raw HTML omitted -->.  Third, <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted --> is
-checked to ensure that it is equal to the <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted --> argument given
-to g_simple_async_result_new() (which, by convention, is a pointer
-to the _async function corresponding to the _finish function from
-which this function is called).  (Alternatively, if either
-<!-- raw HTML omitted -->source_tag<!-- raw HTML omitted --> or <!-- raw HTML omitted -->result<!-- raw HTML omitted -->'s source tag is nil, then the source tag
+<p>First, <!-- raw HTML omitted -->result<!-- raw HTML omitted --> is checked to ensure that it is really a<br />
+GSimple::AsyncResult.  Second, <!-- raw HTML omitted -->source<!-- raw HTML omitted --> is checked to ensure that it<br />
+matches the source object of <!-- raw HTML omitted -->result<!-- raw HTML omitted -->.  Third, <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted --> is<br />
+checked to ensure that it is equal to the <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted --> argument given<br />
+to g_simple_async_result_new() (which, by convention, is a pointer<br />
+to the _async function corresponding to the _finish function from<br />
+which this function is called).  (Alternatively, if either<br />
+<!-- raw HTML omitted -->source_tag<!-- raw HTML omitted --> or <!-- raw HTML omitted -->result<!-- raw HTML omitted -->'s source tag is nil, then the source tag<br />
 check is skipped.)</p>
 
 
@@ -778,16 +782,16 @@ check is skipped.)</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets a #GCancellable to check before dispatching results.</p>
-<p>This function has one very specific purpose: the provided cancellable
-is checked at the time of g_simple_async_result_propagate_error() If
-it is cancelled, these functions will return an &quot;Operation was
+<p>This function has one very specific purpose: the provided cancellable<br />
+is checked at the time of g_simple_async_result_propagate_error() If<br />
+it is cancelled, these functions will return an &quot;Operation was<br />
 cancelled&quot; error (%G_IO_ERROR_CANCELLED).</p>
-<p>Implementors of cancellable asynchronous functions should use this in
-order to provide a guarantee to their callers that cancelling an
-async operation will reliably result in an error being returned for
-that operation (even if a positive result for the operation has
+<p>Implementors of cancellable asynchronous functions should use this in<br />
+order to provide a guarantee to their callers that cancelling an<br />
+async operation will reliably result in an error being returned for<br />
+that operation (even if a positive result for the operation has<br />
 already been sent as an idle to the main context to be dispatched).</p>
-<p>The checking described above is done regardless of any call to the
+<p>The checking described above is done regardless of any call to the<br />
 unrelated g_simple_async_result_set_handle_cancellation() function.</p>
 
 
@@ -842,11 +846,11 @@ unrelated g_simple_async_result_set_handle_cancellation() function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Completes an asynchronous I/O job immediately. Must be called in
-the thread where the asynchronous result was to be delivered, as it
-invokes the callback directly. If you are in a different thread use
+    <p>Completes an asynchronous I/O job immediately. Must be called in<br />
+the thread where the asynchronous result was to be delivered, as it<br />
+invokes the callback directly. If you are in a different thread use<br />
 g_simple_async_result_complete_in_idle().</p>
-<p>Calling this function takes a reference to <!-- raw HTML omitted -->simple<!-- raw HTML omitted --> for as long as
+<p>Calling this function takes a reference to <!-- raw HTML omitted -->simple<!-- raw HTML omitted --> for as long as<br />
 is needed to complete the call.</p>
 
 
@@ -882,11 +886,11 @@ is needed to complete the call.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Completes an asynchronous function in an idle handler in the
-[thread-default main context][g-main-context-push-thread-default]
-of the thread that <!-- raw HTML omitted -->simple<!-- raw HTML omitted --> was initially created in
+    <p>Completes an asynchronous function in an idle handler in the<br />
+[thread-default main context][g-main-context-push-thread-default]<br />
+of the thread that <!-- raw HTML omitted -->simple<!-- raw HTML omitted --> was initially created in<br />
 (and re-pushes that context around the invocation of the callback).</p>
-<p>Calling this function takes a reference to <!-- raw HTML omitted -->simple<!-- raw HTML omitted --> for as long as
+<p>Calling this function takes a reference to <!-- raw HTML omitted -->simple<!-- raw HTML omitted --> for as long as<br />
 is needed to complete the call.</p>
 
 
@@ -977,8 +981,8 @@ is needed to complete the call.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets whether to handle cancellation within the asynchronous operation.</p>
-<p>This function has nothing to do with
-g_simple_async_result_set_check_cancellable().  It only refers to the
+<p>This function has nothing to do with<br />
+g_simple_async_result_set_check_cancellable().  It only refers to the<br />
 #GCancellable passed to g_simple_async_result_run_in_thread().</p>
 
 
@@ -1051,7 +1055,7 @@ g_simple_async_result_set_check_cancellable().  It only refers to the
       
       
         &mdash;
-        <div class='inline'><p>true if the operation's result was true, false
+        <div class='inline'><p>true if the operation's result was true, false<br />
 if the operation's result was false.</p>
 </div>
       
@@ -1205,7 +1209,7 @@ if the operation's result was false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the operation result within the asynchronous result to
+    <p>Sets the operation result within the asynchronous result to<br />
 the given <!-- raw HTML omitted -->op_res<!-- raw HTML omitted -->.</p>
 
 
@@ -1260,10 +1264,10 @@ the given <!-- raw HTML omitted -->op_res<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Propagates an error from within the simple asynchronous result to
+    <p>Propagates an error from within the simple asynchronous result to<br />
 a given destination.</p>
-<p>If the #GCancellable given to a prior call to
-g_simple_async_result_set_check_cancellable() is cancelled then this
+<p>If the #GCancellable given to a prior call to<br />
+g_simple_async_result_set_check_cancellable() is cancelled then this<br />
 function will return true with <!-- raw HTML omitted -->dest<!-- raw HTML omitted --> set appropriately.</p>
 
 
@@ -1303,10 +1307,10 @@ function will return true with <!-- raw HTML omitted -->dest<!-- raw HTML omitte
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Runs the asynchronous job in a separate thread and then calls
-g_simple_async_result_complete_in_idle() on <!-- raw HTML omitted -->simple<!-- raw HTML omitted --> to return
+    <p>Runs the asynchronous job in a separate thread and then calls<br />
+g_simple_async_result_complete_in_idle() on <!-- raw HTML omitted -->simple<!-- raw HTML omitted --> to return<br />
 the result to the appropriate main loop.</p>
-<p>Calling this function takes a reference to <!-- raw HTML omitted -->simple<!-- raw HTML omitted --> for as long as
+<p>Calling this function takes a reference to <!-- raw HTML omitted -->simple<!-- raw HTML omitted --> for as long as<br />
 is needed to run the job and report its completion.</p>
 
 
@@ -1490,7 +1494,7 @@ is needed to run the job and report its completion.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets an error within the asynchronous result without a #GError.
+    <p>Sets an error within the asynchronous result without a #GError.<br />
 Unless writing a binding, see g_simple_async_result_set_error().</p>
 
 
@@ -1698,7 +1702,7 @@ Unless writing a binding, see g_simple_async_result_set_error().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the result from <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, and takes over the caller's ownership
+    <p>Sets the result from <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, and takes over the caller's ownership<br />
 of <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, so the caller does not need to free it any more.</p>
 
 
@@ -1749,7 +1753,7 @@ of <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, so the caller does n
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

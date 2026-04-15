@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GstAudio::AudioSink";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -104,7 +105,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -117,6 +119,7 @@
 
 
 
+  
   
   
   
@@ -136,9 +139,11 @@
   
   
   
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../GstBase/BaseSink.html" title="GstBase::BaseSink (class)">GstBase::BaseSink</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../GstBase/BaseSink.html#async=-instance_method" title="GstBase::BaseSink#async= (method)">#async=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#async%3F-instance_method" title="GstBase::BaseSink#async? (method)">#async?</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#async_enabled=-instance_method" title="GstBase::BaseSink#async_enabled= (method)">#async_enabled=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#blocksize-instance_method" title="GstBase::BaseSink#blocksize (method)">#blocksize</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#blocksize=-instance_method" title="GstBase::BaseSink#blocksize= (method)">#blocksize=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#do_preroll-instance_method" title="GstBase::BaseSink#do_preroll (method)">#do_preroll</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#drop_out_of_segment-instance_method" title="GstBase::BaseSink#drop_out_of_segment (method)">#drop_out_of_segment</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#drop_out_of_segment=-instance_method" title="GstBase::BaseSink#drop_out_of_segment= (method)">#drop_out_of_segment=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#enable_last_sample=-instance_method" title="GstBase::BaseSink#enable_last_sample= (method)">#enable_last_sample=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#enable_last_sample%3F-instance_method" title="GstBase::BaseSink#enable_last_sample? (method)">#enable_last_sample?</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#is_async_enabled-instance_method" title="GstBase::BaseSink#is_async_enabled (method)">#is_async_enabled</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#is_last_sample_enabled-instance_method" title="GstBase::BaseSink#is_last_sample_enabled (method)">#is_last_sample_enabled</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#is_qos_enabled-instance_method" title="GstBase::BaseSink#is_qos_enabled (method)">#is_qos_enabled</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#last_sample-instance_method" title="GstBase::BaseSink#last_sample (method)">#last_sample</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#last_sample=-instance_method" title="GstBase::BaseSink#last_sample= (method)">#last_sample=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#last_sample_enabled=-instance_method" title="GstBase::BaseSink#last_sample_enabled= (method)">#last_sample_enabled=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#latency-instance_method" title="GstBase::BaseSink#latency (method)">#latency</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#max_bitrate-instance_method" title="GstBase::BaseSink#max_bitrate (method)">#max_bitrate</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#max_bitrate=-instance_method" title="GstBase::BaseSink#max_bitrate= (method)">#max_bitrate=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#max_lateness-instance_method" title="GstBase::BaseSink#max_lateness (method)">#max_lateness</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#max_lateness=-instance_method" title="GstBase::BaseSink#max_lateness= (method)">#max_lateness=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#processing_deadline-instance_method" title="GstBase::BaseSink#processing_deadline (method)">#processing_deadline</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#processing_deadline=-instance_method" title="GstBase::BaseSink#processing_deadline= (method)">#processing_deadline=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#qos=-instance_method" title="GstBase::BaseSink#qos= (method)">#qos=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#qos%3F-instance_method" title="GstBase::BaseSink#qos? (method)">#qos?</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#qos_enabled=-instance_method" title="GstBase::BaseSink#qos_enabled= (method)">#qos_enabled=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#query_latency-instance_method" title="GstBase::BaseSink#query_latency (method)">#query_latency</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#render_delay-instance_method" title="GstBase::BaseSink#render_delay (method)">#render_delay</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#render_delay=-instance_method" title="GstBase::BaseSink#render_delay= (method)">#render_delay=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#stats-instance_method" title="GstBase::BaseSink#stats (method)">#stats</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#stats=-instance_method" title="GstBase::BaseSink#stats= (method)">#stats=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#sync-instance_method" title="GstBase::BaseSink#sync (method)">#sync</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#sync=-instance_method" title="GstBase::BaseSink#sync= (method)">#sync=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#sync%3F-instance_method" title="GstBase::BaseSink#sync? (method)">#sync?</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#throttle_time-instance_method" title="GstBase::BaseSink#throttle_time (method)">#throttle_time</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#throttle_time=-instance_method" title="GstBase::BaseSink#throttle_time= (method)">#throttle_time=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#ts_offset-instance_method" title="GstBase::BaseSink#ts_offset (method)">#ts_offset</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#ts_offset=-instance_method" title="GstBase::BaseSink#ts_offset= (method)">#ts_offset=</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#wait-instance_method" title="GstBase::BaseSink#wait (method)">#wait</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#wait_clock-instance_method" title="GstBase::BaseSink#wait_clock (method)">#wait_clock</a></span>, <span class='object_link'><a href="../GstBase/BaseSink.html#wait_preroll-instance_method" title="GstBase::BaseSink#wait_preroll (method)">#wait_preroll</a></span></p>
 
+  
   
   
   
@@ -158,6 +163,7 @@
   
   
   
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../Gst/Object.html#add_control_binding-instance_method" title="Gst::Object#add_control_binding (method)">#add_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#check_uniqueness-class_method" title="Gst::Object.check_uniqueness (method)">check_uniqueness</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_bindings_disabled=-instance_method" title="Gst::Object#control_bindings_disabled= (method)">#control_bindings_disabled=</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate-instance_method" title="Gst::Object#control_rate (method)">#control_rate</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate=-instance_method" title="Gst::Object#control_rate= (method)">#control_rate=</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_deep_notify-class_method" title="Gst::Object.default_deep_notify (method)">default_deep_notify</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_error-instance_method" title="Gst::Object#default_error (method)">#default_error</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_control_binding-instance_method" title="Gst::Object#get_control_binding (method)">#get_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_g_value_array-instance_method" title="Gst::Object#get_g_value_array (method)">#get_g_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value-instance_method" title="Gst::Object#get_value (method)">#get_value</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value_array-instance_method" title="Gst::Object#get_value_array (method)">#get_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_active_control_bindings-instance_method" title="Gst::Object#has_active_control_bindings (method)">#has_active_control_bindings</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_ancestor-instance_method" title="Gst::Object#has_ancestor (method)">#has_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_ancestor-instance_method" title="Gst::Object#has_as_ancestor (method)">#has_as_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_parent-instance_method" title="Gst::Object#has_as_parent (method)">#has_as_parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#name-instance_method" title="Gst::Object#name (method)">#name</a></span>, <span class='object_link'><a href="../Gst/Object.html#name=-instance_method" title="Gst::Object#name= (method)">#name=</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent-instance_method" title="Gst::Object#parent (method)">#parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent=-instance_method" title="Gst::Object#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="../Gst/Object.html#path_string-instance_method" title="Gst::Object#path_string (method)">#path_string</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref-instance_method" title="Gst::Object#ref (method)">#ref</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref_sink-class_method" title="Gst::Object.ref_sink (method)">ref_sink</a></span>, <span class='object_link'><a href="../Gst/Object.html#remove_control_binding-instance_method" title="Gst::Object#remove_control_binding (method)">#remove_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#replace-class_method" title="Gst::Object.replace (method)">replace</a></span>, <span class='object_link'><a href="../Gst/Object.html#set_control_binding_disabled-instance_method" title="Gst::Object#set_control_binding_disabled (method)">#set_control_binding_disabled</a></span>, <span class='object_link'><a href="../Gst/Object.html#suggest_next_sync-instance_method" title="Gst::Object#suggest_next_sync (method)">#suggest_next_sync</a></span>, <span class='object_link'><a href="../Gst/Object.html#sync_values-instance_method" title="Gst::Object#sync_values (method)">#sync_values</a></span>, <span class='object_link'><a href="../Gst/Object.html#unparent-instance_method" title="Gst::Object#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="../Gst/Object.html#unref-instance_method" title="Gst::Object#unref (method)">#unref</a></span></p>
 
@@ -168,7 +174,7 @@
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::BoxLayout";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,14 +99,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::BoxLayoutClass structure contains only private
+    <p>The Clutter::BoxLayoutClass structure contains only private<br />
 data and should be accessed using the provided API</p>
 
 
@@ -776,9 +778,11 @@ data and should be accessed using the provided API</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -833,7 +837,7 @@ data and should be accessed using the provided API</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The duration of the animations, in case Clutter::BoxLayout:use-animations
+    <p>The duration of the animations, in case Clutter::BoxLayout:use-animations<br />
 is set to true.</p>
 <p>The duration is expressed in milliseconds.</p>
 
@@ -874,7 +878,7 @@ is set to true.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The duration of the animations, in case Clutter::BoxLayout:use-animations
+    <p>The duration of the animations, in case Clutter::BoxLayout:use-animations<br />
 is set to true.</p>
 <p>The duration is expressed in milliseconds.</p>
 
@@ -943,11 +947,11 @@ is set to true.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The easing mode for the animations, in case
+    <p>The easing mode for the animations, in case<br />
 Clutter::BoxLayout:use-animations is set to true.</p>
-<p>The easing mode has the same semantics of Clutter::Animation:mode: it can
-either be a value from the Clutter::AnimationMode enumeration, like
-%CLUTTER_EASE_OUT_CUBIC, or a logical id as returned by
+<p>The easing mode has the same semantics of Clutter::Animation:mode: it can<br />
+either be a value from the Clutter::AnimationMode enumeration, like<br />
+%CLUTTER_EASE_OUT_CUBIC, or a logical id as returned by<br />
 clutter_alpha_register_func().</p>
 <p>The default value is %CLUTTER_EASE_OUT_CUBIC.</p>
 
@@ -988,11 +992,11 @@ clutter_alpha_register_func().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The easing mode for the animations, in case
+    <p>The easing mode for the animations, in case<br />
 Clutter::BoxLayout:use-animations is set to true.</p>
-<p>The easing mode has the same semantics of Clutter::Animation:mode: it can
-either be a value from the Clutter::AnimationMode enumeration, like
-%CLUTTER_EASE_OUT_CUBIC, or a logical id as returned by
+<p>The easing mode has the same semantics of Clutter::Animation:mode: it can<br />
+either be a value from the Clutter::AnimationMode enumeration, like<br />
+%CLUTTER_EASE_OUT_CUBIC, or a logical id as returned by<br />
 clutter_alpha_register_func().</p>
 <p>The default value is %CLUTTER_EASE_OUT_CUBIC.</p>
 
@@ -1061,7 +1065,7 @@ clutter_alpha_register_func().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the horizontal and vertical alignment policies for <!-- raw HTML omitted -->actor<!-- raw HTML omitted -->
+    <p>Retrieves the horizontal and vertical alignment policies for <!-- raw HTML omitted -->actor<!-- raw HTML omitted --><br />
 as set using clutter_box_layout_pack() or clutter_box_layout_set_alignment()</p>
 
 
@@ -1204,7 +1208,7 @@ as set using clutter_box_layout_pack() or clutter_box_layout_set_alignment()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the horizontal and vertical fill policies for <!-- raw HTML omitted -->actor<!-- raw HTML omitted -->
+    <p>Retrieves the horizontal and vertical fill policies for <!-- raw HTML omitted -->actor<!-- raw HTML omitted --><br />
 as set using clutter_box_layout_pack() or clutter_box_layout_set_fill()</p>
 
 
@@ -1307,7 +1311,7 @@ as set using clutter_box_layout_pack() or clutter_box_layout_set_fill()</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the Clutter::BoxLayout is arranging its children
+        <div class='inline'><p>true if the Clutter::BoxLayout is arranging its children<br />
 homogeneously, and false otherwise</p>
 </div>
       
@@ -1329,7 +1333,7 @@ homogeneously, and false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::BoxLayout should arrange its children
+    <p>Whether the Clutter::BoxLayout should arrange its children<br />
 homogeneously, i.e. all children get the same size</p>
 
 
@@ -1397,7 +1401,7 @@ homogeneously, i.e. all children get the same size</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::BoxLayout should arrange its children
+    <p>Whether the Clutter::BoxLayout should arrange its children<br />
 homogeneously, i.e. all children get the same size</p>
 
 
@@ -1437,7 +1441,7 @@ homogeneously, i.e. all children get the same size</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The orientation of the Clutter::BoxLayout, either horizontal
+    <p>The orientation of the Clutter::BoxLayout, either horizontal<br />
 or vertical</p>
 
 
@@ -1477,7 +1481,7 @@ or vertical</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The orientation of the Clutter::BoxLayout, either horizontal
+    <p>The orientation of the Clutter::BoxLayout, either horizontal<br />
 or vertical</p>
 
 
@@ -1545,7 +1549,7 @@ or vertical</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Packs <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> inside the Clutter::Container associated to <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->
+    <p>Packs <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> inside the Clutter::Container associated to <!-- raw HTML omitted -->layout<!-- raw HTML omitted --><br />
 and sets the layout properties</p>
 
 
@@ -1693,7 +1697,7 @@ and sets the layout properties</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the Clutter::BoxLayout should pack children
+        <div class='inline'><p>true if the Clutter::BoxLayout should pack children<br />
 at the beginning of the layout, and false otherwise</p>
 </div>
       
@@ -1715,7 +1719,7 @@ at the beginning of the layout, and false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::BoxLayout should pack items at the start
+    <p>Whether the Clutter::BoxLayout should pack items at the start<br />
 or append them at the end</p>
 
 
@@ -1783,7 +1787,7 @@ or append them at the end</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::BoxLayout should pack items at the start
+    <p>Whether the Clutter::BoxLayout should pack items at the start<br />
 or append them at the end</p>
 
 
@@ -1823,7 +1827,7 @@ or append them at the end</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the horizontal and vertical alignment policies for <!-- raw HTML omitted -->actor<!-- raw HTML omitted -->
+    <p>Sets the horizontal and vertical alignment policies for <!-- raw HTML omitted -->actor<!-- raw HTML omitted --><br />
 inside <!-- raw HTML omitted -->layout<!-- raw HTML omitted --></p>
 
 
@@ -1977,7 +1981,7 @@ inside <!-- raw HTML omitted -->layout<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the horizontal and vertical fill policies for <!-- raw HTML omitted -->actor<!-- raw HTML omitted -->
+    <p>Sets the horizontal and vertical fill policies for <!-- raw HTML omitted -->actor<!-- raw HTML omitted --><br />
 inside <!-- raw HTML omitted -->layout<!-- raw HTML omitted --></p>
 
 
@@ -2207,7 +2211,7 @@ inside <!-- raw HTML omitted -->layout<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::BoxLayout should animate changes in the
+    <p>Whether the Clutter::BoxLayout should animate changes in the<br />
 layout, overriding the easing state of the children.</p>
 
 
@@ -2275,7 +2279,7 @@ layout, overriding the easing state of the children.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::BoxLayout should animate changes in the
+    <p>Whether the Clutter::BoxLayout should animate changes in the<br />
 layout, overriding the easing state of the children.</p>
 
 
@@ -2315,7 +2319,7 @@ layout, overriding the easing state of the children.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the orientation of the <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> as set using the
+    <p>Retrieves the orientation of the <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> as set using the<br />
 clutter_box_layout_set_vertical() function</p>
 
 
@@ -2334,7 +2338,7 @@ clutter_box_layout_set_vertical() function</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the Clutter::BoxLayout is arranging its children
+        <div class='inline'><p>true if the Clutter::BoxLayout is arranging its children<br />
 vertically, and false otherwise</p>
 </div>
       
@@ -2356,7 +2360,7 @@ vertically, and false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::BoxLayout should arrange its children
+    <p>Whether the Clutter::BoxLayout should arrange its children<br />
 alongside the Y axis, instead of alongside the X axis</p>
 
 
@@ -2424,7 +2428,7 @@ alongside the Y axis, instead of alongside the X axis</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::BoxLayout should arrange its children
+    <p>Whether the Clutter::BoxLayout should arrange its children<br />
 alongside the Y axis, instead of alongside the X axis</p>
 
 
@@ -2460,7 +2464,7 @@ alongside the Y axis, instead of alongside the X axis</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

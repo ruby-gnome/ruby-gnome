@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::BrightnessContrastEffect";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -102,7 +103,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/clutter/brightness-contrast-effect.rb</dd>
+    <dd>lib/clutter/brightness-contrast-effect.rb
+</dd>
   </dl>
   
 </div>
@@ -420,9 +422,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -442,9 +446,11 @@
   
   
   
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Effect.html" title="Clutter::Effect (class)">Effect</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Effect.html#queue_repaint-instance_method" title="Clutter::Effect#queue_repaint (method)">#queue_repaint</a></span></p>
 
+  
   
   
   
@@ -470,7 +476,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Clutter::BrightnessContrastEffect to be used with
+    <p>Creates a new Clutter::BrightnessContrastEffect to be used with<br />
 clutter_actor_add_effect()</p>
 
 
@@ -501,10 +507,10 @@ clutter_actor_add_effect()</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The brightness change to apply to the effect.</p>
-<p>This property uses a Clutter::Color to represent the changes to each
-color channel. The range is [ 0, 255 ], with 127 as the value used
-to indicate no change; values smaller than 127 indicate a decrease
-in brightness, and values larger than 127 indicate an increase in
+<p>This property uses a Clutter::Color to represent the changes to each<br />
+color channel. The range is [ 0, 255 ], with 127 as the value used<br />
+to indicate no change; values smaller than 127 indicate a decrease<br />
+in brightness, and values larger than 127 indicate an increase in<br />
 brightness.</p>
 
 
@@ -545,10 +551,10 @@ brightness.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The brightness change to apply to the effect.</p>
-<p>This property uses a Clutter::Color to represent the changes to each
-color channel. The range is [ 0, 255 ], with 127 as the value used
-to indicate no change; values smaller than 127 indicate a decrease
-in brightness, and values larger than 127 indicate an increase in
+<p>This property uses a Clutter::Color to represent the changes to each<br />
+color channel. The range is [ 0, 255 ], with 127 as the value used<br />
+to indicate no change; values smaller than 127 indicate a decrease<br />
+in brightness, and values larger than 127 indicate an increase in<br />
 brightness.</p>
 
 
@@ -617,10 +623,10 @@ brightness.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The contrast change to apply to the effect.</p>
-<p>This property uses a Clutter::Color to represent the changes to each
-color channel. The range is [ 0, 255 ], with 127 as the value used
-to indicate no change; values smaller than 127 indicate a decrease
-in contrast, and values larger than 127 indicate an increase in
+<p>This property uses a Clutter::Color to represent the changes to each<br />
+color channel. The range is [ 0, 255 ], with 127 as the value used<br />
+to indicate no change; values smaller than 127 indicate a decrease<br />
+in contrast, and values larger than 127 indicate an increase in<br />
 contrast.</p>
 
 
@@ -661,10 +667,10 @@ contrast.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The contrast change to apply to the effect.</p>
-<p>This property uses a Clutter::Color to represent the changes to each
-color channel. The range is [ 0, 255 ], with 127 as the value used
-to indicate no change; values smaller than 127 indicate a decrease
-in contrast, and values larger than 127 indicate an increase in
+<p>This property uses a Clutter::Color to represent the changes to each<br />
+color channel. The range is [ 0, 255 ], with 127 as the value used<br />
+to indicate no change; values smaller than 127 indicate a decrease<br />
+in contrast, and values larger than 127 indicate an increase in<br />
 contrast.</p>
 
 
@@ -751,7 +757,7 @@ contrast.</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for red component of the
+        <div class='inline'><p>return location for red component of the<br />
 change in brightness</p>
 </div>
       
@@ -767,7 +773,7 @@ change in brightness</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for green component of the
+        <div class='inline'><p>return location for green component of the<br />
 change in brightness</p>
 </div>
       
@@ -783,7 +789,7 @@ change in brightness</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for blue component of the
+        <div class='inline'><p>return location for blue component of the<br />
 change in brightness</p>
 </div>
       
@@ -838,7 +844,7 @@ change in brightness</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for red component of the
+        <div class='inline'><p>return location for red component of the<br />
 change in contrast</p>
 </div>
       
@@ -854,7 +860,7 @@ change in contrast</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for green component of the
+        <div class='inline'><p>return location for green component of the<br />
 change in contrast</p>
 </div>
       
@@ -870,7 +876,7 @@ change in contrast</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for blue component of the
+        <div class='inline'><p>return location for blue component of the<br />
 change in contrast</p>
 </div>
       
@@ -952,8 +958,8 @@ change in contrast</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The range for each component is [-1.0, 1.0] where 0.0 designates no change,
-values below 0.0 mean a decrease in brightness, and values above indicate
+    <p>The range for each component is [-1.0, 1.0] where 0.0 designates no change,<br />
+values below 0.0 mean a decrease in brightness, and values above indicate<br />
 an increase.</p>
 
 
@@ -1108,8 +1114,8 @@ an increase.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The range for each component is [-1.0, 1.0] where 0.0 designates no change,
-values below 0.0 mean a decrease in contrast, and values above indicate
+    <p>The range for each component is [-1.0, 1.0] where 0.0 designates no change,<br />
+values below 0.0 mean a decrease in contrast, and values above indicate<br />
 an increase.</p>
 
 
@@ -1216,7 +1222,7 @@ an increase.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

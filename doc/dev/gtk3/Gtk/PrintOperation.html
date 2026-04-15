@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::PrintOperation";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -99,7 +100,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk3/deprecated.rb</dd>
+    <dd>lib/gtk3/deprecated.rb
+</dd>
   </dl>
   
 </div>
@@ -1180,6 +1182,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1227,12 +1230,12 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Determines whether the print operation may run asynchronously or not.</p>
-<p>Some systems don't support asynchronous printing, but those that do
-will return %GTK_PRINT_OPERATION_RESULT_IN_PROGRESS as the status, and
-emit the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::done] signal when the operation
+<p>Some systems don't support asynchronous printing, but those that do<br />
+will return %GTK_PRINT_OPERATION_RESULT_IN_PROGRESS as the status, and<br />
+emit the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::done] signal when the operation<br />
 is actually done.</p>
-<p>The Windows port does not support asynchronous operation at all (this
-is unlikely to change). On other platforms, all actions except for
+<p>The Windows port does not support asynchronous operation at all (this<br />
+is unlikely to change). On other platforms, all actions except for<br />
 %GTK_PRINT_OPERATION_ACTION_EXPORT support asynchronous operation.</p>
 
 
@@ -1301,12 +1304,12 @@ is unlikely to change). On other platforms, all actions except for
 </h3><div class="docstring">
   <div class="discussion">
     <p>Determines whether the print operation may run asynchronously or not.</p>
-<p>Some systems don't support asynchronous printing, but those that do
-will return %GTK_PRINT_OPERATION_RESULT_IN_PROGRESS as the status, and
-emit the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::done] signal when the operation
+<p>Some systems don't support asynchronous printing, but those that do<br />
+will return %GTK_PRINT_OPERATION_RESULT_IN_PROGRESS as the status, and<br />
+emit the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::done] signal when the operation<br />
 is actually done.</p>
-<p>The Windows port does not support asynchronous operation at all (this
-is unlikely to change). On other platforms, all actions except for
+<p>The Windows port does not support asynchronous operation at all (this<br />
+is unlikely to change). On other platforms, all actions except for<br />
 %GTK_PRINT_OPERATION_ACTION_EXPORT support asynchronous operation.</p>
 
 
@@ -1347,8 +1350,8 @@ is unlikely to change). On other platforms, all actions except for
 </h3><div class="docstring">
   <div class="discussion">
     <p>Cancels a running print operation.</p>
-<p>This function may be called from a [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::begin-print],
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::paginate] or [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::draw-page]
+<p>This function may be called from a [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::begin-print],<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::paginate] or [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::draw-page]<br />
 signal handler to stop the currently running print operation.</p>
 
 
@@ -1385,7 +1388,7 @@ signal handler to stop the currently running print operation.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The current page in the document.</p>
-<p>If this is set before [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.run],
+<p>If this is set before [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.run],<br />
 the user will be able to select to print only the current page.</p>
 <p>Note that this only makes sense for pre-paginated documents.</p>
 
@@ -1427,7 +1430,7 @@ the user will be able to select to print only the current page.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The current page in the document.</p>
-<p>If this is set before [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.run],
+<p>If this is set before [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.run],<br />
 the user will be able to select to print only the current page.</p>
 <p>Note that this only makes sense for pre-paginated documents.</p>
 
@@ -1607,8 +1610,8 @@ the user will be able to select to print only the current page.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkPageSetup</code> used by default.</p>
-<p>This page setup will be used by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.run],
-but it can be overridden on a per-page basis by connecting
+<p>This page setup will be used by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.run],<br />
+but it can be overridden on a per-page basis by connecting<br />
 to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::request-page-setup] signal.</p>
 
 
@@ -1649,8 +1652,8 @@ to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperati
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkPageSetup</code> used by default.</p>
-<p>This page setup will be used by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.run],
-but it can be overridden on a per-page basis by connecting
+<p>This page setup will be used by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.run],<br />
+but it can be overridden on a per-page basis by connecting<br />
 to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::request-page-setup] signal.</p>
 
 
@@ -1719,9 +1722,9 @@ to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperati
 </h3><div class="docstring">
   <div class="discussion">
     <p>Signal that drawing of particular page is complete.</p>
-<p>It is called after completion of page drawing (e.g. drawing
-in another thread). If [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.set_defer_drawing]
-was called before, then this function has to be called by application.
+<p>It is called after completion of page drawing (e.g. drawing<br />
+in another thread). If [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.set_defer_drawing]<br />
+was called before, then this function has to be called by application.<br />
 Otherwise it is called by GTK itself.</p>
 
 
@@ -1796,7 +1799,7 @@ Otherwise it is called by GTK itself.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If true, page size combo box and orientation combo box
+    <p>If true, page size combo box and orientation combo box<br />
 are embedded into page setup page.</p>
 
 
@@ -1864,7 +1867,7 @@ are embedded into page setup page.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If true, page size combo box and orientation combo box
+    <p>If true, page size combo box and orientation combo box<br />
 are embedded into page setup page.</p>
 
 
@@ -1904,10 +1907,10 @@ are embedded into page setup page.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Call this when the result of a print operation is
+    <p>Call this when the result of a print operation is<br />
 %GTK_PRINT_OPERATION_RESULT_ERROR.</p>
-<p>It can be called either after [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.run]
-returns, or in the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::done] signal
+<p>It can be called either after [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.run]<br />
+returns, or in the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::done] signal<br />
 handler.</p>
 <p>The returned <code>GError</code> will contain more details on what went wrong.</p>
 
@@ -1946,10 +1949,10 @@ handler.</p>
   <div class="discussion">
     <p>The name of a file to generate instead of showing the print dialog.</p>
 <p>Currently, PDF is the only supported format.</p>
-<p>The intended use of this property is for implementing
+<p>The intended use of this property is for implementing<br />
 “Export to PDF” actions.</p>
-<p>“Print to PDF” support is independent of this and is done
-by letting the user pick the “Print to PDF” item from the
+<p>“Print to PDF” support is independent of this and is done<br />
+by letting the user pick the “Print to PDF” item from the<br />
 list of printers in the print dialog.</p>
 
 
@@ -1991,10 +1994,10 @@ list of printers in the print dialog.</p>
   <div class="discussion">
     <p>The name of a file to generate instead of showing the print dialog.</p>
 <p>Currently, PDF is the only supported format.</p>
-<p>The intended use of this property is for implementing
+<p>The intended use of this property is for implementing<br />
 “Export to PDF” actions.</p>
-<p>“Print to PDF” support is independent of this and is done
-by letting the user pick the “Print to PDF” item from the
+<p>“Print to PDF” support is independent of this and is done<br />
+by letting the user pick the “Print to PDF” item from the<br />
 list of printers in the print dialog.</p>
 
 
@@ -2102,7 +2105,7 @@ list of printers in the print dialog.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Determines whether there is a selection in your application.</p>
-<p>This can allow your application to print the selection.
+<p>This can allow your application to print the selection.<br />
 This is typically used to make a &quot;Selection&quot; button sensitive.</p>
 
 
@@ -2171,7 +2174,7 @@ This is typically used to make a &quot;Selection&quot; button sensitive.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Determines whether there is a selection in your application.</p>
-<p>This can allow your application to print the selection.
+<p>This can allow your application to print the selection.<br />
 This is typically used to make a &quot;Selection&quot; button sensitive.</p>
 
 
@@ -2211,12 +2214,12 @@ This is typically used to make a &quot;Selection&quot; button sensitive.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A convenience function to find out if the print operation
+    <p>A convenience function to find out if the print operation<br />
 is finished.</p>
-<p>a print operation is finished if its status is either
+<p>a print operation is finished if its status is either<br />
 %GTK_PRINT_STATUS_FINISHED or %GTK_PRINT_STATUS_FINISHED_ABORTED.</p>
-<p>Note: when you enable print status tracking the print operation
-can be in a non-finished state even after done has been called, as
+<p>Note: when you enable print status tracking the print operation<br />
+can be in a non-finished state even after done has been called, as<br />
 the operation status then tracks the print job status on the printer.</p>
 
 
@@ -2256,9 +2259,9 @@ the operation status then tracks the print job status on the printer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A string used to identify the job (e.g. in monitoring
+    <p>A string used to identify the job (e.g. in monitoring<br />
 applications like eggcups).</p>
-<p>If you don't set a job name, GTK picks a default one
+<p>If you don't set a job name, GTK picks a default one<br />
 by numbering successive print jobs.</p>
 
 
@@ -2298,9 +2301,9 @@ by numbering successive print jobs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A string used to identify the job (e.g. in monitoring
+    <p>A string used to identify the job (e.g. in monitoring<br />
 applications like eggcups).</p>
-<p>If you don't set a job name, GTK picks a default one
+<p>If you don't set a job name, GTK picks a default one<br />
 by numbering successive print jobs.</p>
 
 
@@ -2369,13 +2372,13 @@ by numbering successive print jobs.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The number of pages in the document.</p>
-<p>This must be set to a positive number before the rendering
-starts. It may be set in a [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::begin-print]
+<p>This must be set to a positive number before the rendering<br />
+starts. It may be set in a [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::begin-print]<br />
 signal handler.</p>
-<p>Note that the page numbers passed to the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::request-page-setup] and
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::draw-page] signals are 0-based, i.e.
-if the user chooses to print all pages, the last ::draw-page signal
+<p>Note that the page numbers passed to the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::request-page-setup] and<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::draw-page] signals are 0-based, i.e.<br />
+if the user chooses to print all pages, the last ::draw-page signal<br />
 will be for page <!-- raw HTML omitted -->n_pages<!-- raw HTML omitted --> - 1.</p>
 
 
@@ -2416,13 +2419,13 @@ will be for page <!-- raw HTML omitted -->n_pages<!-- raw HTML omitted --> - 1.<
 </h3><div class="docstring">
   <div class="discussion">
     <p>The number of pages in the document.</p>
-<p>This must be set to a positive number before the rendering
-starts. It may be set in a [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::begin-print]
+<p>This must be set to a positive number before the rendering<br />
+starts. It may be set in a [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::begin-print]<br />
 signal handler.</p>
-<p>Note that the page numbers passed to the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::request-page-setup] and
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::draw-page] signals are 0-based, i.e.
-if the user chooses to print all pages, the last ::draw-page signal
+<p>Note that the page numbers passed to the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::request-page-setup] and<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::draw-page] signals are 0-based, i.e.<br />
+if the user chooses to print all pages, the last ::draw-page signal<br />
 will be for page <!-- raw HTML omitted -->n_pages<!-- raw HTML omitted --> - 1.</p>
 
 
@@ -2491,11 +2494,11 @@ will be for page <!-- raw HTML omitted -->n_pages<!-- raw HTML omitted --> - 1.<
 </h3><div class="docstring">
   <div class="discussion">
     <p>The number of pages that will be printed.</p>
-<p>Note that this value is set during print preparation phase
-(%GTK_PRINT_STATUS_PREPARING), so this value should never be
-get before the data generation phase (%GTK_PRINT_STATUS_GENERATING_DATA).
-You can connect to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::status-changed] signal
-and call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.get_n_pages_to_print] when
+<p>Note that this value is set during print preparation phase<br />
+(%GTK_PRINT_STATUS_PREPARING), so this value should never be<br />
+get before the data generation phase (%GTK_PRINT_STATUS_GENERATING_DATA).<br />
+You can connect to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::status-changed] signal<br />
+and call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.get_n_pages_to_print] when<br />
 print status is %GTK_PRINT_STATUS_GENERATING_DATA.</p>
 <p>This is typically used to track the progress of print operation.</p>
 
@@ -2537,11 +2540,11 @@ print status is %GTK_PRINT_STATUS_GENERATING_DATA.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The number of pages that will be printed.</p>
-<p>Note that this value is set during print preparation phase
-(%GTK_PRINT_STATUS_PREPARING), so this value should never be
-get before the data generation phase (%GTK_PRINT_STATUS_GENERATING_DATA).
-You can connect to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::status-changed] signal
-and call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.get_n_pages_to_print] when
+<p>Note that this value is set during print preparation phase<br />
+(%GTK_PRINT_STATUS_PREPARING), so this value should never be<br />
+get before the data generation phase (%GTK_PRINT_STATUS_GENERATING_DATA).<br />
+You can connect to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::status-changed] signal<br />
+and call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.get_n_pages_to_print] when<br />
 print status is %GTK_PRINT_STATUS_GENERATING_DATA.</p>
 <p>This is typically used to track the progress of print operation.</p>
 
@@ -2611,8 +2614,8 @@ print status is %GTK_PRINT_STATUS_GENERATING_DATA.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkPrintSettings</code> used for initializing the dialog.</p>
-<p>Setting this property is typically used to re-establish
-print settings from a previous print operation, see
+<p>Setting this property is typically used to re-establish<br />
+print settings from a previous print operation, see<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.run].</p>
 
 
@@ -2653,8 +2656,8 @@ print settings from a previous print operation, see
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkPrintSettings</code> used for initializing the dialog.</p>
-<p>Setting this property is typically used to re-establish
-print settings from a previous print operation, see
+<p>Setting this property is typically used to re-establish<br />
+print settings from a previous print operation, see<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.run].</p>
 
 
@@ -2723,15 +2726,15 @@ print settings from a previous print operation, see
 </h3><div class="docstring">
   <div class="discussion">
     <p>Runs the print operation.</p>
-<p>Normally that this function does not return until the rendering
-of all pages is complete. You can connect to the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::status-changed] signal on <!-- raw HTML omitted -->op<!-- raw HTML omitted --> to obtain
+<p>Normally that this function does not return until the rendering<br />
+of all pages is complete. You can connect to the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::status-changed] signal on <!-- raw HTML omitted -->op<!-- raw HTML omitted --> to obtain<br />
 some information about the progress of the print operation.</p>
 <p>Furthermore, it may use a recursive mainloop to show the print dialog.</p>
-<p>If you set the [Gtk.PrintOperation:allow-async] property, the operation
-will run asynchronously if this is supported on the platform. The
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::done] signal will be emitted with the result
-of the operation when the it is done (i.e. when the dialog is canceled,
+<p>If you set the [Gtk.PrintOperation:allow-async] property, the operation<br />
+will run asynchronously if this is supported on the platform. The<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::done] signal will be emitted with the result<br />
+of the operation when the it is done (i.e. when the dialog is canceled,<br />
 or when the print succeeds or fails).</p>
 <pre class="code c"><code class="c">if (settings != NULL)
   gtk_print_operation_set_print_settings (print, settings);
@@ -2769,7 +2772,7 @@ g_object_unref (settings);
    settings = g_object_ref (gtk_print_operation_get_print_settings (print));
  }
 </code></pre>
-<p>Note that gtk_print_operation_run() can only be called once on a
+<p>Note that gtk_print_operation_run() can only be called once on a<br />
 given <code>GtkPrintOperation</code>.</p>
 
 
@@ -2822,14 +2825,14 @@ given <code>GtkPrintOperation</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>the result of the print operation. A return value of
-%GTK_PRINT_OPERATION_RESULT_APPLY indicates that the printing was
-completed successfully. In this case, it is a good idea to obtain
-the used print settings with
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.get_print_settings]
-and store them for reuse with the next print operation. A value of
-%GTK_PRINT_OPERATION_RESULT_IN_PROGRESS means the operation is running
-asynchronously, and will emit the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::done]
+        <div class='inline'><p>the result of the print operation. A return value of<br />
+%GTK_PRINT_OPERATION_RESULT_APPLY indicates that the printing was<br />
+completed successfully. In this case, it is a good idea to obtain<br />
+the used print settings with<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.get_print_settings]<br />
+and store them for reuse with the next print operation. A value of<br />
+%GTK_PRINT_OPERATION_RESULT_IN_PROGRESS means the operation is running<br />
+asynchronously, and will emit the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::done]<br />
 signal when done.</p>
 </div>
       
@@ -2851,10 +2854,10 @@ signal when done.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets up the <code>GtkPrintOperation</code> to wait for calling of
+    <p>Sets up the <code>GtkPrintOperation</code> to wait for calling of<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation.draw_page_finish from application.</p>
 <p>This can be used for drawing page in another thread.</p>
-<p>This function must be called in the callback of the
+<p>This function must be called in the callback of the<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::draw-page] signal.</p>
 
 
@@ -2890,7 +2893,7 @@ signal when done.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether to show a progress dialog during the
+    <p>Determines whether to show a progress dialog during the<br />
 print operation.</p>
 
 
@@ -2958,7 +2961,7 @@ print operation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether to show a progress dialog during the
+    <p>Determines whether to show a progress dialog during the<br />
 print operation.</p>
 
 
@@ -3105,9 +3108,9 @@ print operation.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>A string representation of the status of the print operation.</p>
-<p>The string is translated and suitable for displaying the print
+<p>The string is translated and suitable for displaying the print<br />
 status e.g. in a <code>GtkStatusbar</code>.</p>
-<p>See the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation:status] property for a status
+<p>See the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation:status] property for a status<br />
 value that is suitable for programmatic use.</p>
 
 
@@ -3148,9 +3151,9 @@ value that is suitable for programmatic use.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>A string representation of the status of the print operation.</p>
-<p>The string is translated and suitable for displaying the print
+<p>The string is translated and suitable for displaying the print<br />
 status e.g. in a <code>GtkStatusbar</code>.</p>
-<p>See the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation:status] property for a status
+<p>See the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation:status] property for a status<br />
 value that is suitable for programmatic use.</p>
 
 
@@ -3365,11 +3368,11 @@ value that is suitable for programmatic use.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If true, the print operation will try to continue report on
+    <p>If true, the print operation will try to continue report on<br />
 the status of the print job in the printer queues and printer.</p>
-<p>This can allow your application to show things like “out of paper”
-issues, and when the print job actually reaches the printer.
-However, this is often implemented using polling, and should
+<p>This can allow your application to show things like “out of paper”<br />
+issues, and when the print job actually reaches the printer.<br />
+However, this is often implemented using polling, and should<br />
 not be enabled unless needed.</p>
 
 
@@ -3437,11 +3440,11 @@ not be enabled unless needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If true, the print operation will try to continue report on
+    <p>If true, the print operation will try to continue report on<br />
 the status of the print job in the printer queues and printer.</p>
-<p>This can allow your application to show things like “out of paper”
-issues, and when the print job actually reaches the printer.
-However, this is often implemented using polling, and should
+<p>This can allow your application to show things like “out of paper”<br />
+issues, and when the print job actually reaches the printer.<br />
+However, this is often implemented using polling, and should<br />
 not be enabled unless needed.</p>
 
 
@@ -3481,8 +3484,8 @@ not be enabled unless needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The transformation for the cairo context obtained from
-<code>GtkPrintContext</code> is set up in such a way that distances
+    <p>The transformation for the cairo context obtained from<br />
+<code>GtkPrintContext</code> is set up in such a way that distances<br />
 are measured in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
 
 
@@ -3522,8 +3525,8 @@ are measured in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The transformation for the cairo context obtained from
-<code>GtkPrintContext</code> is set up in such a way that distances
+    <p>The transformation for the cairo context obtained from<br />
+<code>GtkPrintContext</code> is set up in such a way that distances<br />
 are measured in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
 
 
@@ -3591,12 +3594,12 @@ are measured in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If true, the transformation for the cairo context obtained
-from <code>GtkPrintContext</code> puts the origin at the top left corner
+    <p>If true, the transformation for the cairo context obtained<br />
+from <code>GtkPrintContext</code> puts the origin at the top left corner<br />
 of the page.</p>
-<p>This may not be the top left corner of the sheet, depending on
-page orientation and the number of pages per sheet. Otherwise,
-the origin is at the top left corner of the imageable area (i.e.
+<p>This may not be the top left corner of the sheet, depending on<br />
+page orientation and the number of pages per sheet. Otherwise,<br />
+the origin is at the top left corner of the imageable area (i.e.<br />
 inside the margins).</p>
 
 
@@ -3664,12 +3667,12 @@ inside the margins).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If true, the transformation for the cairo context obtained
-from <code>GtkPrintContext</code> puts the origin at the top left corner
+    <p>If true, the transformation for the cairo context obtained<br />
+from <code>GtkPrintContext</code> puts the origin at the top left corner<br />
 of the page.</p>
-<p>This may not be the top left corner of the sheet, depending on
-page orientation and the number of pages per sheet. Otherwise,
-the origin is at the top left corner of the imageable area (i.e.
+<p>This may not be the top left corner of the sheet, depending on<br />
+page orientation and the number of pages per sheet. Otherwise,<br />
+the origin is at the top left corner of the imageable area (i.e.<br />
 inside the margins).</p>
 
 
@@ -3705,7 +3708,7 @@ inside the margins).</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

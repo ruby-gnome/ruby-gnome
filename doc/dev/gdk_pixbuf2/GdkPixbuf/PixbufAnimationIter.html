@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GdkPixbuf::PixbufAnimationIter";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,15 +95,16 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Modules supporting animations must derive a type from
-Gdk::PixbufAnimationIter, providing suitable implementations of the
+    <p>Modules supporting animations must derive a type from<br />
+Gdk::PixbufAnimationIter, providing suitable implementations of the<br />
 virtual functions.</p>
 
 
@@ -223,6 +225,7 @@ virtual functions.</p>
 
       
     </ul>
+    
   
 
 
@@ -243,21 +246,21 @@ virtual functions.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Possibly advances an animation to a new frame.</p>
-<p>Chooses the frame based on the start time passed to
+<p>Chooses the frame based on the start time passed to<br />
 gdk_pixbuf_animation_get_iter().</p>
-<p><!-- raw HTML omitted -->current_time<!-- raw HTML omitted --> would normally come from g_get_current_time(), and
-must be greater than or equal to the time passed to
-gdk_pixbuf_animation_get_iter(), and must increase or remain
-unchanged each time gdk_pixbuf_animation_iter_get_pixbuf() is
-called. That is, you can't go backward in time; animations only
+<p><!-- raw HTML omitted -->current_time<!-- raw HTML omitted --> would normally come from g_get_current_time(), and<br />
+must be greater than or equal to the time passed to<br />
+gdk_pixbuf_animation_get_iter(), and must increase or remain<br />
+unchanged each time gdk_pixbuf_animation_iter_get_pixbuf() is<br />
+called. That is, you can't go backward in time; animations only<br />
 play forward.</p>
-<p>As a shortcut, pass <code>NULL</code> for the current time and g_get_current_time()
-will be invoked on your behalf. So you only need to explicitly pass
-<!-- raw HTML omitted -->current_time<!-- raw HTML omitted --> if you're doing something odd like playing the animation
+<p>As a shortcut, pass <code>NULL</code> for the current time and g_get_current_time()<br />
+will be invoked on your behalf. So you only need to explicitly pass<br />
+<!-- raw HTML omitted -->current_time<!-- raw HTML omitted --> if you're doing something odd like playing the animation<br />
 at double speed.</p>
-<p>If this function returns <code>FALSE</code>, there's no need to update the animation
-display, assuming the display had been rendered prior to advancing;
-if <code>TRUE</code>, you need to call gdk_pixbuf_animation_iter_get_pixbuf()
+<p>If this function returns <code>FALSE</code>, there's no need to update the animation<br />
+display, assuming the display had been rendered prior to advancing;<br />
+if <code>TRUE</code>, you need to call gdk_pixbuf_animation_iter_get_pixbuf()<br />
 and update the display with the new pixbuf.</p>
 
 
@@ -316,12 +319,12 @@ and update the display with the new pixbuf.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the number of milliseconds the current pixbuf should be displayed,
+    <p>Gets the number of milliseconds the current pixbuf should be displayed,<br />
 or -1 if the current pixbuf should be displayed forever.</p>
-<p>The <code>g_timeout_add()</code> function conveniently takes a timeout in milliseconds,
+<p>The <code>g_timeout_add()</code> function conveniently takes a timeout in milliseconds,<br />
 so you can use a timeout to schedule the next update.</p>
-<p>Note that some formats, like GIF, might clamp the timeout values in the
-image file to avoid updates that are just too quick. The minimum timeout
+<p>Note that some formats, like GIF, might clamp the timeout values in the<br />
+image file to avoid updates that are just too quick. The minimum timeout<br />
 for GIF images is currently 20 milliseconds.</p>
 
 
@@ -361,10 +364,10 @@ for GIF images is currently 20 milliseconds.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Used to determine how to respond to the area_updated signal on
+    <p>Used to determine how to respond to the area_updated signal on<br />
 Gdk::PixbufLoader when loading an animation.</p>
-<p>The <code>::area_updated</code> signal is emitted for an area of the frame currently
-streaming in to the loader. So if you're on the currently loading frame,
+<p>The <code>::area_updated</code> signal is emitted for an area of the frame currently<br />
+streaming in to the loader. So if you're on the currently loading frame,<br />
 you will need to redraw the screen for the updated area.</p>
 
 
@@ -405,15 +408,15 @@ you will need to redraw the screen for the updated area.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the current pixbuf which should be displayed.</p>
-<p>The pixbuf might not be the same size as the animation itself
+<p>The pixbuf might not be the same size as the animation itself<br />
 (gdk_pixbuf_animation_get_width(), gdk_pixbuf_animation_get_height()).</p>
-<p>This pixbuf should be displayed for gdk_pixbuf_animation_iter_get_delay_time()
+<p>This pixbuf should be displayed for gdk_pixbuf_animation_iter_get_delay_time()<br />
 milliseconds.</p>
-<p>The caller of this function does not own a reference to the returned
-pixbuf; the returned pixbuf will become invalid when the iterator
-advances to the next frame, which may happen anytime you call
+<p>The caller of this function does not own a reference to the returned<br />
+pixbuf; the returned pixbuf will become invalid when the iterator<br />
+advances to the next frame, which may happen anytime you call<br />
 gdk_pixbuf_animation_iter_advance().</p>
-<p>Copy the pixbuf to keep it (don't just add a reference), as it may get
+<p>Copy the pixbuf to keep it (don't just add a reference), as it may get<br />
 recycled as you advance the iterator.</p>
 
 
@@ -449,7 +452,7 @@ recycled as you advance the iterator.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

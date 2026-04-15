@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::ShortcutTrigger";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -328,6 +330,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -345,18 +348,18 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Tries to parse the given string into a trigger.</p>
-<p>On success, the parsed trigger is returned.
+<p>On success, the parsed trigger is returned.<br />
 When parsing failed, nil is returned.</p>
 <p>The accepted strings are:</p>
 <ul>
 <li><code>never</code>, for <code>GtkNeverTrigger</code></li>
 <li>a string parsed by gtk_accelerator_parse(), for a <code>GtkKeyvalTrigger</code>, e.g. <code>&lt;Control&gt;C</code></li>
 <li>underscore, followed by a single character, for <code>GtkMnemonicTrigger</code>, e.g. <code>_l</code></li>
-<li>two valid trigger strings, separated by a <code>|</code> character, for a
+<li>two valid trigger strings, separated by a <code>|</code> character, for a<br />
 <code>GtkAlternativeTrigger</code>: <code>&lt;Control&gt;q|&lt;Control&gt;w</code></li>
 </ul>
-<p>Note that you will have to escape the <code>&lt;</code> and <code>&gt;</code> characters when specifying
-triggers in XML files, such as GtkBuilder ui files. Use <code>&amp;lt;</code> instead of
+<p>Note that you will have to escape the <code>&lt;</code> and <code>&gt;</code> characters when specifying<br />
+triggers in XML files, such as GtkBuilder ui files. Use <code>&amp;lt;</code> instead of<br />
 <code>&lt;</code> and <code>&amp;gt;</code> instead of <code>&gt;</code>.</p>
 
 
@@ -405,7 +408,7 @@ triggers in XML files, such as GtkBuilder ui files. Use <code>&amp;lt;</code> in
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The types of <!-- raw HTML omitted -->trigger1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->trigger2<!-- raw HTML omitted --> are <code>gconstpointer</code> only to allow
+    <p>The types of <!-- raw HTML omitted -->trigger1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->trigger2<!-- raw HTML omitted --> are <code>gconstpointer</code> only to allow<br />
 use of this function as a <code>GCompareFunc</code>.</p>
 <p>They must each be a <code>GtkShortcutTrigger</code>.</p>
 
@@ -444,8 +447,8 @@ use of this function as a <code>GCompareFunc</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>An integer less than, equal to, or greater than zero if
-<!-- raw HTML omitted -->trigger1<!-- raw HTML omitted --> is found, respectively, to be less than, to match,
+        <div class='inline'><p>An integer less than, equal to, or greater than zero if<br />
+<!-- raw HTML omitted -->trigger1<!-- raw HTML omitted --> is found, respectively, to be less than, to match,<br />
 or be greater than <!-- raw HTML omitted -->trigger2<!-- raw HTML omitted -->.</p>
 </div>
       
@@ -468,7 +471,7 @@ or be greater than <!-- raw HTML omitted -->trigger2<!-- raw HTML omitted -->.</
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if <!-- raw HTML omitted -->trigger1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->trigger2<!-- raw HTML omitted --> trigger under the same conditions.</p>
-<p>The types of <!-- raw HTML omitted -->one<!-- raw HTML omitted --> and <!-- raw HTML omitted -->two<!-- raw HTML omitted --> are <code>gconstpointer</code> only to allow use of this
+<p>The types of <!-- raw HTML omitted -->one<!-- raw HTML omitted --> and <!-- raw HTML omitted -->two<!-- raw HTML omitted --> are <code>gconstpointer</code> only to allow use of this<br />
 function with <code>GHashTable</code>. They must each be a <code>GtkShortcutTrigger</code>.</p>
 
 
@@ -528,11 +531,11 @@ function with <code>GHashTable</code>. They must each be a <code>GtkShortcutTrig
 </h3><div class="docstring">
   <div class="discussion">
     <p>Generates a hash value for a <code>GtkShortcutTrigger</code>.</p>
-<p>The output of this function is guaranteed to be the same for a given
-value only per-process. It may change between different processor
-architectures or even different versions of GTK. Do not use this
+<p>The output of this function is guaranteed to be the same for a given<br />
+value only per-process. It may change between different processor<br />
+architectures or even different versions of GTK. Do not use this<br />
 function as a basis for building protocols or file formats.</p>
-<p>The types of <!-- raw HTML omitted -->trigger<!-- raw HTML omitted --> is <code>gconstpointer</code> only to allow use of this
+<p>The types of <!-- raw HTML omitted -->trigger<!-- raw HTML omitted --> is <code>gconstpointer</code> only to allow use of this<br />
 function with <code>GHashTable</code>. They must each be a <code>GtkShortcutTrigger</code>.</p>
 
 
@@ -572,9 +575,9 @@ function with <code>GHashTable</code>. They must each be a <code>GtkShortcutTrig
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Prints the given trigger into a string for the developer.
+    <p>Prints the given trigger into a string for the developer.<br />
 This is meant for debugging and logging.</p>
-<p>The form of the representation may change at any time
+<p>The form of the representation may change at any time<br />
 and is not guaranteed to stay identical.</p>
 
 
@@ -630,12 +633,12 @@ and is not guaranteed to stay identical.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Prints the given trigger into a string.</p>
-<p>This function is returning a translated string for presentation
+<p>This function is returning a translated string for presentation<br />
 to end users for example in menu items or in help texts.</p>
-<p>The <!-- raw HTML omitted -->display<!-- raw HTML omitted --> in use may influence the resulting string in
-various forms, such as resolving hardware keycodes or by
+<p>The <!-- raw HTML omitted -->display<!-- raw HTML omitted --> in use may influence the resulting string in<br />
+various forms, such as resolving hardware keycodes or by<br />
 causing display-specific modifier names.</p>
-<p>The form of the representation may change at any time and is
+<p>The form of the representation may change at any time and is<br />
 not guaranteed to stay identical.</p>
 
 
@@ -688,8 +691,8 @@ not guaranteed to stay identical.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if something was printed or false if the
-trigger did not have a textual representation suitable
+        <div class='inline'><p>true if something was printed or false if the<br />
+trigger did not have a textual representation suitable<br />
 for end users.</p>
 </div>
       
@@ -712,13 +715,13 @@ for end users.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets textual representation for the given trigger.</p>
-<p>This function is returning a translated string for
-presentation to end users for example in menu items
+<p>This function is returning a translated string for<br />
+presentation to end users for example in menu items<br />
 or in help texts.</p>
-<p>The <!-- raw HTML omitted -->display<!-- raw HTML omitted --> in use may influence the resulting string in
-various forms, such as resolving hardware keycodes or by
+<p>The <!-- raw HTML omitted -->display<!-- raw HTML omitted --> in use may influence the resulting string in<br />
+various forms, such as resolving hardware keycodes or by<br />
 causing display-specific modifier names.</p>
-<p>The form of the representation may change at any time and is
+<p>The form of the representation may change at any time and is<br />
 not guaranteed to stay identical.</p>
 
 
@@ -778,7 +781,7 @@ not guaranteed to stay identical.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Prints the given trigger into a human-readable string.</p>
-<p>This is a small wrapper around [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutTrigger.print]
+<p>This is a small wrapper around [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutTrigger.print]<br />
 to help when debugging.</p>
 
 
@@ -852,8 +855,8 @@ to help when debugging.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if mnemonics should trigger. Usually the
-value of this property is determined by checking that the passed
+        <div class='inline'><p>true if mnemonics should trigger. Usually the<br />
+value of this property is determined by checking that the passed<br />
 in <!-- raw HTML omitted -->event<!-- raw HTML omitted --> is a Key event and has the right modifiers set.</p>
 </div>
       
@@ -889,7 +892,7 @@ in <!-- raw HTML omitted -->event<!-- raw HTML omitted --> is a Key event and ha
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "PangoFT2::FontMap";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -152,6 +154,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -278,9 +281,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -292,6 +297,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../PangoFc/FontMap.html" title="PangoFc::FontMap (class)">PangoFc::FontMap</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../PangoFc/FontMap.html#add_decoder_find_func-instance_method" title="PangoFc::FontMap#add_decoder_find_func (method)">#add_decoder_find_func</a></span>, <span class='object_link'><a href="../PangoFc/FontMap.html#cache_clear-instance_method" title="PangoFc::FontMap#cache_clear (method)">#cache_clear</a></span>, <span class='object_link'><a href="../PangoFc/FontMap.html#config-instance_method" title="PangoFc::FontMap#config (method)">#config</a></span>, <span class='object_link'><a href="../PangoFc/FontMap.html#config=-instance_method" title="PangoFc::FontMap#config= (method)">#config=</a></span>, <span class='object_link'><a href="../PangoFc/FontMap.html#config_changed-instance_method" title="PangoFc::FontMap#config_changed (method)">#config_changed</a></span>, <span class='object_link'><a href="../PangoFc/FontMap.html#find_decoder-instance_method" title="PangoFc::FontMap#find_decoder (method)">#find_decoder</a></span>, <span class='object_link'><a href="../PangoFc/FontMap.html#get_hb_face-instance_method" title="PangoFc::FontMap#get_hb_face (method)">#get_hb_face</a></span>, <span class='object_link'><a href="../PangoFc/FontMap.html#shutdown-instance_method" title="PangoFc::FontMap#shutdown (method)">#shutdown</a></span></p>
 
+  
   
   
   
@@ -317,10 +323,10 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Create a new <code>PangoFT2FontMap</code> object.</p>
-<p>A fontmap is used to cache information about available fonts,
-and holds certain global parameters such as the resolution and
-the default substitute function (see
-[method<!-- raw HTML omitted -->PangoFT2<!-- raw HTML omitted -->.FontMap.set_default_substitute]).
+<p>A fontmap is used to cache information about available fonts,<br />
+and holds certain global parameters such as the resolution and<br />
+the default substitute function (see<br />
+[method<!-- raw HTML omitted -->PangoFT2<!-- raw HTML omitted -->.FontMap.set_default_substitute]).<br />
 with g_object_unref() when you are finished with it.</p>
 
 
@@ -351,10 +357,10 @@ with g_object_unref() when you are finished with it.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns a <code>PangoFT2FontMap</code>.</p>
-<p>This font map is cached and should
-not be freed. If the font map is no longer needed, it can
-be released with pango_ft2_shutdown_display(). Use of the
-global PangoFT2 fontmap is deprecated; use pango_ft2_font_map_new()
+<p>This font map is cached and should<br />
+not be freed. If the font map is no longer needed, it can<br />
+be released with pango_ft2_shutdown_display(). Use of the<br />
+global PangoFT2 fontmap is deprecated; use pango_ft2_font_map_new()<br />
 instead.</p>
 
 
@@ -418,7 +424,7 @@ instead.</p>
       
       
         &mdash;
-        <div class='inline'><p>the newly created context; free with
+        <div class='inline'><p>the newly created context; free with<br />
 g_object_unref().</p>
 </div>
       
@@ -440,10 +446,10 @@ g_object_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a function that will be called to do final configuration
-substitution on a <code>FcPattern</code> before it is used to load
+    <p>Sets a function that will be called to do final configuration<br />
+substitution on a <code>FcPattern</code> before it is used to load<br />
 the font.</p>
-<p>This function can be used to do things like set
+<p>This function can be used to do things like set<br />
 hinting and antialiasing options.</p>
 
 
@@ -463,7 +469,7 @@ hinting and antialiasing options.</p>
       
       
         &mdash;
-        <div class='inline'><p>function to call to to do final config tweaking
+        <div class='inline'><p>function to call to to do final config tweaking<br />
 on Fc::Pattern objects.</p>
 </div>
       
@@ -598,10 +604,10 @@ on Fc::Pattern objects.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Call this function any time the results of the
-default substitution function set with
+    <p>Call this function any time the results of the<br />
+default substitution function set with<br />
 pango_ft2_font_map_set_default_substitute() change.</p>
-<p>That is, if your substitution function will return different
+<p>That is, if your substitution function will return different<br />
 results for the same input pattern, you must call this function.</p>
 
 
@@ -633,7 +639,7 @@ results for the same input pattern, you must call this function.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

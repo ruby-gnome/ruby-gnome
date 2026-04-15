@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::AnimationMode";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -140,7 +142,7 @@
         <dt id="EASE_OUT_QUAD-constant" class="">EASE_OUT_QUAD =
           <div class="docstring">
   <div class="discussion">
-    <p>quadratic tweening, inverse of
+    <p>quadratic tweening, inverse of<br />
 %CLUTTER_EASE_IN_QUAD</p>
 
 
@@ -156,7 +158,7 @@
         <dt id="EASE_IN_OUT_QUAD-constant" class="">EASE_IN_OUT_QUAD =
           <div class="docstring">
   <div class="discussion">
-    <p>quadratic tweening, combininig
+    <p>quadratic tweening, combininig<br />
 %CLUTTER_EASE_IN_QUAD and %CLUTTER_EASE_OUT_QUAD</p>
 
 
@@ -187,7 +189,7 @@
         <dt id="EASE_OUT_CUBIC-constant" class="">EASE_OUT_CUBIC =
           <div class="docstring">
   <div class="discussion">
-    <p>cubic tweening, invers of
+    <p>cubic tweening, invers of<br />
 %CLUTTER_EASE_IN_CUBIC</p>
 
 
@@ -203,7 +205,7 @@
         <dt id="EASE_IN_OUT_CUBIC-constant" class="">EASE_IN_OUT_CUBIC =
           <div class="docstring">
   <div class="discussion">
-    <p>cubic tweening, combining
+    <p>cubic tweening, combining<br />
 %CLUTTER_EASE_IN_CUBIC and %CLUTTER_EASE_OUT_CUBIC</p>
 
 
@@ -234,7 +236,7 @@
         <dt id="EASE_OUT_QUART-constant" class="">EASE_OUT_QUART =
           <div class="docstring">
   <div class="discussion">
-    <p>quartic tweening, inverse of
+    <p>quartic tweening, inverse of<br />
 %CLUTTER_EASE_IN_QUART</p>
 
 
@@ -250,7 +252,7 @@
         <dt id="EASE_IN_OUT_QUART-constant" class="">EASE_IN_OUT_QUART =
           <div class="docstring">
   <div class="discussion">
-    <p>quartic tweening, combining
+    <p>quartic tweening, combining<br />
 %CLUTTER_EASE_IN_QUART and %CLUTTER_EASE_OUT_QUART</p>
 
 
@@ -281,7 +283,7 @@
         <dt id="EASE_OUT_QUINT-constant" class="">EASE_OUT_QUINT =
           <div class="docstring">
   <div class="discussion">
-    <p>quintic tweening, inverse of
+    <p>quintic tweening, inverse of<br />
 %CLUTTER_EASE_IN_QUINT</p>
 
 
@@ -297,7 +299,7 @@
         <dt id="EASE_IN_OUT_QUINT-constant" class="">EASE_IN_OUT_QUINT =
           <div class="docstring">
   <div class="discussion">
-    <p>fifth power tweening, combining
+    <p>fifth power tweening, combining<br />
 %CLUTTER_EASE_IN_QUINT and %CLUTTER_EASE_OUT_QUINT</p>
 
 
@@ -328,7 +330,7 @@
         <dt id="EASE_OUT_SINE-constant" class="">EASE_OUT_SINE =
           <div class="docstring">
   <div class="discussion">
-    <p>sinusoidal tweening, inverse of
+    <p>sinusoidal tweening, inverse of<br />
 %CLUTTER_EASE_IN_SINE</p>
 
 
@@ -344,7 +346,7 @@
         <dt id="EASE_IN_OUT_SINE-constant" class="">EASE_IN_OUT_SINE =
           <div class="docstring">
   <div class="discussion">
-    <p>sine wave tweening, combining
+    <p>sine wave tweening, combining<br />
 %CLUTTER_EASE_IN_SINE and %CLUTTER_EASE_OUT_SINE</p>
 
 
@@ -375,7 +377,7 @@
         <dt id="EASE_OUT_EXPO-constant" class="">EASE_OUT_EXPO =
           <div class="docstring">
   <div class="discussion">
-    <p>exponential tweening, inverse of
+    <p>exponential tweening, inverse of<br />
 %CLUTTER_EASE_IN_EXPO</p>
 
 
@@ -391,7 +393,7 @@
         <dt id="EASE_IN_OUT_EXPO-constant" class="">EASE_IN_OUT_EXPO =
           <div class="docstring">
   <div class="discussion">
-    <p>exponential tweening, combining
+    <p>exponential tweening, combining<br />
 %CLUTTER_EASE_IN_EXPO and %CLUTTER_EASE_OUT_EXPO</p>
 
 
@@ -422,7 +424,7 @@
         <dt id="EASE_OUT_CIRC-constant" class="">EASE_OUT_CIRC =
           <div class="docstring">
   <div class="discussion">
-    <p>circular tweening, inverse of
+    <p>circular tweening, inverse of<br />
 %CLUTTER_EASE_IN_CIRC</p>
 
 
@@ -438,7 +440,7 @@
         <dt id="EASE_IN_OUT_CIRC-constant" class="">EASE_IN_OUT_CIRC =
           <div class="docstring">
   <div class="discussion">
-    <p>circular tweening, combining
+    <p>circular tweening, combining<br />
 %CLUTTER_EASE_IN_CIRC and %CLUTTER_EASE_OUT_CIRC</p>
 
 
@@ -499,7 +501,7 @@
         <dt id="EASE_IN_BACK-constant" class="">EASE_IN_BACK =
           <div class="docstring">
   <div class="discussion">
-    <p>overshooting cubic tweening, with
+    <p>overshooting cubic tweening, with<br />
 backtracking on start</p>
 
 
@@ -515,7 +517,7 @@ backtracking on start</p>
         <dt id="EASE_OUT_BACK-constant" class="">EASE_OUT_BACK =
           <div class="docstring">
   <div class="discussion">
-    <p>overshooting cubic tweening, with
+    <p>overshooting cubic tweening, with<br />
 backtracking on end</p>
 
 
@@ -531,7 +533,7 @@ backtracking on end</p>
         <dt id="EASE_IN_OUT_BACK-constant" class="">EASE_IN_OUT_BACK =
           <div class="docstring">
   <div class="discussion">
-    <p>overshooting cubic tweening, with
+    <p>overshooting cubic tweening, with<br />
 backtracking on both ends</p>
 
 
@@ -547,7 +549,7 @@ backtracking on both ends</p>
         <dt id="EASE_IN_BOUNCE-constant" class="">EASE_IN_BOUNCE =
           <div class="docstring">
   <div class="discussion">
-    <p>exponentially decaying parabolic (bounce)
+    <p>exponentially decaying parabolic (bounce)<br />
 tweening, with bounce on start</p>
 
 
@@ -563,7 +565,7 @@ tweening, with bounce on start</p>
         <dt id="EASE_OUT_BOUNCE-constant" class="">EASE_OUT_BOUNCE =
           <div class="docstring">
   <div class="discussion">
-    <p>exponentially decaying parabolic (bounce)
+    <p>exponentially decaying parabolic (bounce)<br />
 tweening, with bounce on end</p>
 
 
@@ -579,7 +581,7 @@ tweening, with bounce on end</p>
         <dt id="EASE_IN_OUT_BOUNCE-constant" class="">EASE_IN_OUT_BOUNCE =
           <div class="docstring">
   <div class="discussion">
-    <p>exponentially decaying parabolic (bounce)
+    <p>exponentially decaying parabolic (bounce)<br />
 tweening, with bounce on both ends</p>
 
 
@@ -595,7 +597,7 @@ tweening, with bounce on both ends</p>
         <dt id="STEPS-constant" class="">STEPS =
           <div class="docstring">
   <div class="discussion">
-    <p>parametrized step function; see clutter_timeline_set_step_progress()
+    <p>parametrized step function; see clutter_timeline_set_step_progress()<br />
 for further details. (Since 1.12)</p>
 
 
@@ -611,7 +613,7 @@ for further details. (Since 1.12)</p>
         <dt id="STEP_START-constant" class="">STEP_START =
           <div class="docstring">
   <div class="discussion">
-    <p>equivalent to %CLUTTER_STEPS with a number of steps
+    <p>equivalent to %CLUTTER_STEPS with a number of steps<br />
 equal to 1, and a step mode of %CLUTTER_STEP_MODE_START. (Since 1.12)</p>
 
 
@@ -627,7 +629,7 @@ equal to 1, and a step mode of %CLUTTER_STEP_MODE_START. (Since 1.12)</p>
         <dt id="STEP_END-constant" class="">STEP_END =
           <div class="docstring">
   <div class="discussion">
-    <p>equivalent to %CLUTTER_STEPS with a number of steps
+    <p>equivalent to %CLUTTER_STEPS with a number of steps<br />
 equal to 1, and a step mode of %CLUTTER_STEP_MODE_END. (Since 1.12)</p>
 
 
@@ -643,7 +645,7 @@ equal to 1, and a step mode of %CLUTTER_STEP_MODE_END. (Since 1.12)</p>
         <dt id="CUBIC_BEZIER-constant" class="">CUBIC_BEZIER =
           <div class="docstring">
   <div class="discussion">
-    <p>cubic bezier between (0, 0) and (1, 1) with two
+    <p>cubic bezier between (0, 0) and (1, 1) with two<br />
 control points; see clutter_timeline_set_cubic_bezier_progress(). (Since 1.12)</p>
 
 
@@ -659,7 +661,7 @@ control points; see clutter_timeline_set_cubic_bezier_progress(). (Since 1.12)</
         <dt id="EASE-constant" class="">EASE =
           <div class="docstring">
   <div class="discussion">
-    <p>equivalent to %CLUTTER_CUBIC_BEZIER with control points
+    <p>equivalent to %CLUTTER_CUBIC_BEZIER with control points<br />
 in (0.25, 0.1) and (0.25, 1.0). (Since 1.12)</p>
 
 
@@ -675,7 +677,7 @@ in (0.25, 0.1) and (0.25, 1.0). (Since 1.12)</p>
         <dt id="EASE_IN-constant" class="">EASE_IN =
           <div class="docstring">
   <div class="discussion">
-    <p>equivalent to %CLUTTER_CUBIC_BEZIER with control points
+    <p>equivalent to %CLUTTER_CUBIC_BEZIER with control points<br />
 in (0.42, 0) and (1.0, 1.0). (Since 1.12)</p>
 
 
@@ -691,7 +693,7 @@ in (0.42, 0) and (1.0, 1.0). (Since 1.12)</p>
         <dt id="EASE_OUT-constant" class="">EASE_OUT =
           <div class="docstring">
   <div class="discussion">
-    <p>equivalent to %CLUTTER_CUBIC_BEZIER with control points
+    <p>equivalent to %CLUTTER_CUBIC_BEZIER with control points<br />
 in (0, 0) and (0.58, 1.0). (Since 1.12)</p>
 
 
@@ -707,7 +709,7 @@ in (0, 0) and (0.58, 1.0). (Since 1.12)</p>
         <dt id="EASE_IN_OUT-constant" class="">EASE_IN_OUT =
           <div class="docstring">
   <div class="discussion">
-    <p>equivalent to %CLUTTER_CUBIC_BEZIER with control points
+    <p>equivalent to %CLUTTER_CUBIC_BEZIER with control points<br />
 in (0.42, 0) and (0.58, 1.0). (Since 1.12)</p>
 
 
@@ -723,7 +725,7 @@ in (0.42, 0) and (0.58, 1.0). (Since 1.12)</p>
         <dt id="ANIMATION_LAST-constant" class="">ANIMATION_LAST =
           <div class="docstring">
   <div class="discussion">
-    <p>last animation mode, used as a guard for
+    <p>last animation mode, used as a guard for<br />
 registered global alpha functions</p>
 
 
@@ -752,7 +754,7 @@ registered global alpha functions</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

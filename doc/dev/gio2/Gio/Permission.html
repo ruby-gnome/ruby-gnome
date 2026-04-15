@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::Permission";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -487,6 +489,7 @@
 
       
     </ul>
+    
   
 
 
@@ -507,15 +510,15 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Attempts to acquire the permission represented by <!-- raw HTML omitted -->permission<!-- raw HTML omitted -->.</p>
-<p>The precise method by which this happens depends on the permission
-and the underlying authentication mechanism.  A simple example is
+<p>The precise method by which this happens depends on the permission<br />
+and the underlying authentication mechanism.  A simple example is<br />
 that a dialog may appear asking the user to enter their password.</p>
-<p>You should check with g_permission_get_can_acquire() before calling
+<p>You should check with g_permission_get_can_acquire() before calling<br />
 this function.</p>
-<p>If the permission is acquired then true is returned.  Otherwise,
+<p>If the permission is acquired then true is returned.  Otherwise,<br />
 false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set appropriately.</p>
-<p>This call is blocking, likely for a very long time (in the case that
-user interaction is required).  See g_permission_acquire_async() for
+<p>This call is blocking, likely for a very long time (in the case that<br />
+user interaction is required).  See g_permission_acquire_async() for<br />
 the non-blocking version.</p>
 
 
@@ -575,7 +578,7 @@ the non-blocking version.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Attempts to acquire the permission represented by <!-- raw HTML omitted -->permission<!-- raw HTML omitted -->.</p>
-<p>This is the first half of the asynchronous version of
+<p>This is the first half of the asynchronous version of<br />
 g_permission_acquire().</p>
 
 
@@ -660,9 +663,9 @@ g_permission_acquire().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Collects the result of attempting to acquire the permission
+    <p>Collects the result of attempting to acquire the permission<br />
 represented by <!-- raw HTML omitted -->permission<!-- raw HTML omitted -->.</p>
-<p>This is the second half of the asynchronous version of
+<p>This is the second half of the asynchronous version of<br />
 g_permission_acquire().</p>
 
 
@@ -721,8 +724,8 @@ g_permission_acquire().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of the 'allowed' property.  This property is true if
-the caller currently has permission to perform the action that
+    <p>Gets the value of the 'allowed' property.  This property is true if<br />
+the caller currently has permission to perform the action that<br />
 <!-- raw HTML omitted -->permission<!-- raw HTML omitted --> represents the permission to perform.</p>
 
 
@@ -762,7 +765,7 @@ the caller currently has permission to perform the action that
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>true if the caller currently has permission to perform the action that
+    <p>true if the caller currently has permission to perform the action that<br />
 <!-- raw HTML omitted -->permission<!-- raw HTML omitted --> represents the permission to perform.</p>
 
 
@@ -830,7 +833,7 @@ the caller currently has permission to perform the action that
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>true if the caller currently has permission to perform the action that
+    <p>true if the caller currently has permission to perform the action that<br />
 <!-- raw HTML omitted -->permission<!-- raw HTML omitted --> represents the permission to perform.</p>
 
 
@@ -870,8 +873,8 @@ the caller currently has permission to perform the action that
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of the 'can-acquire' property.  This property is true
-if it is generally possible to acquire the permission by calling
+    <p>Gets the value of the 'can-acquire' property.  This property is true<br />
+if it is generally possible to acquire the permission by calling<br />
 g_permission_acquire().</p>
 
 
@@ -911,7 +914,7 @@ g_permission_acquire().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>true if it is generally possible to acquire the permission by calling
+    <p>true if it is generally possible to acquire the permission by calling<br />
 g_permission_acquire().</p>
 
 
@@ -979,7 +982,7 @@ g_permission_acquire().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>true if it is generally possible to acquire the permission by calling
+    <p>true if it is generally possible to acquire the permission by calling<br />
 g_permission_acquire().</p>
 
 
@@ -1019,8 +1022,8 @@ g_permission_acquire().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of the 'can-release' property.  This property is true
-if it is generally possible to release the permission by calling
+    <p>Gets the value of the 'can-release' property.  This property is true<br />
+if it is generally possible to release the permission by calling<br />
 g_permission_release().</p>
 
 
@@ -1060,7 +1063,7 @@ g_permission_release().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>true if it is generally possible to release the permission by calling
+    <p>true if it is generally possible to release the permission by calling<br />
 g_permission_release().</p>
 
 
@@ -1128,7 +1131,7 @@ g_permission_release().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>true if it is generally possible to release the permission by calling
+    <p>true if it is generally possible to release the permission by calling<br />
 g_permission_release().</p>
 
 
@@ -1168,8 +1171,8 @@ g_permission_release().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function is called by the #GPermission implementation to update
-the properties of the permission.  You should never call this
+    <p>This function is called by the #GPermission implementation to update<br />
+the properties of the permission.  You should never call this<br />
 function except from a #GPermission implementation.</p>
 <p>GObject notify signals are generated, as appropriate.</p>
 
@@ -1256,15 +1259,15 @@ function except from a #GPermission implementation.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Attempts to release the permission represented by <!-- raw HTML omitted -->permission<!-- raw HTML omitted -->.</p>
-<p>The precise method by which this happens depends on the permission
-and the underlying authentication mechanism.  In most cases the
+<p>The precise method by which this happens depends on the permission<br />
+and the underlying authentication mechanism.  In most cases the<br />
 permission will be dropped immediately without further action.</p>
-<p>You should check with g_permission_get_can_release() before calling
+<p>You should check with g_permission_get_can_release() before calling<br />
 this function.</p>
-<p>If the permission is released then true is returned.  Otherwise,
+<p>If the permission is released then true is returned.  Otherwise,<br />
 false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set appropriately.</p>
-<p>This call is blocking, likely for a very long time (in the case that
-user interaction is required).  See g_permission_release_async() for
+<p>This call is blocking, likely for a very long time (in the case that<br />
+user interaction is required).  See g_permission_release_async() for<br />
 the non-blocking version.</p>
 
 
@@ -1324,7 +1327,7 @@ the non-blocking version.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Attempts to release the permission represented by <!-- raw HTML omitted -->permission<!-- raw HTML omitted -->.</p>
-<p>This is the first half of the asynchronous version of
+<p>This is the first half of the asynchronous version of<br />
 g_permission_release().</p>
 
 
@@ -1409,9 +1412,9 @@ g_permission_release().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Collects the result of attempting to release the permission
+    <p>Collects the result of attempting to release the permission<br />
 represented by <!-- raw HTML omitted -->permission<!-- raw HTML omitted -->.</p>
-<p>This is the second half of the asynchronous version of
+<p>This is the second half of the asynchronous version of<br />
 g_permission_release().</p>
 
 
@@ -1466,7 +1469,7 @@ g_permission_release().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

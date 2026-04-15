@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::Element";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,14 +99,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gst/element.rb</dd>
+    <dd>lib/gst/element.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>GStreamer element class. Override the vmethods to implement the element
+    <p>GStreamer element class. Override the vmethods to implement the element<br />
 functionality.</p>
 
 
@@ -271,6 +273,7 @@ functionality.</p>
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1923,7 +1926,7 @@ functionality.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Retrieves a pad from the element by name (e.g. &quot;src_%d&quot;).</p>
+    <span class="summary_desc"><div class='inline'><p>Retrieves a pad from the element by name (e.g. &quot;src_<span data-escaped-char>%</span>d&quot;).</p>
 </div></span>
   
 </li>
@@ -2228,9 +2231,11 @@ functionality.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -2289,7 +2294,7 @@ functionality.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates an element for handling the given URI.
+    <p>Creates an element for handling the given URI.<br />
 could be created</p>
 
 
@@ -2378,7 +2383,7 @@ could be created</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new elementfactory capable of instantiating objects of the
+    <p>Create a new elementfactory capable of instantiating objects of the<br />
 <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and add the factory to <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->.</p>
 
 
@@ -2398,7 +2403,7 @@ could be created</p>
       
       
         &mdash;
-        <div class='inline'><p>Gst::Plugin to register the element with, or nil for
+        <div class='inline'><p>Gst::Plugin to register the element with, or nil for<br />
 a static element.</p>
 </div>
       
@@ -2520,7 +2525,7 @@ a static element.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string with the name of the state
+        <div class='inline'><p>a string with the name of the state<br />
 result.</p>
 </div>
       
@@ -2600,8 +2605,8 @@ result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Marks <!-- raw HTML omitted -->type<!-- raw HTML omitted --> as &quot;documentation should be skipped&quot;.
-Can be useful for dynamically registered element to be excluded from
+    <p>Marks <!-- raw HTML omitted -->type<!-- raw HTML omitted --> as &quot;documentation should be skipped&quot;.<br />
+Can be useful for dynamically registered element to be excluded from<br />
 plugin documentation system.</p>
 <p>Example:</p>
 <pre class="code c"><code class="c">GType my_type;
@@ -2706,8 +2711,8 @@ gst_element_register (plugin, &quot;my-plugin-feature-name&quot;, rank, my_type)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Abort the state change of the element. This function is used
-by elements that do asynchronous state changes and find out
+    <p>Abort the state change of the element. This function is used<br />
+by elements that do asynchronous state changes and find out<br />
 something is wrong.</p>
 <p>This function should be called with the STATE_LOCK held.</p>
 <p>MT safe.</p>
@@ -2814,13 +2819,13 @@ something is wrong.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a pad (link point) to <!-- raw HTML omitted -->element<!-- raw HTML omitted -->. <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->'s parent will be set to <!-- raw HTML omitted -->element<!-- raw HTML omitted -->;
+    <p>Adds a pad (link point) to <!-- raw HTML omitted -->element<!-- raw HTML omitted -->. <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->'s parent will be set to <!-- raw HTML omitted -->element<!-- raw HTML omitted -->;<br />
 see gst_object_set_parent() for refcounting information.</p>
-<p>Pads are automatically activated when added in the PAUSED or PLAYING
+<p>Pads are automatically activated when added in the PAUSED or PLAYING<br />
 state.</p>
 <p>The pad and the element should be unlocked when calling this function.</p>
-<p>This function will emit the Gst::Element::pad-added signal on the element.
-a pad with the same name already existed or the pad already had another
+<p>This function will emit the Gst::Element::pad-added signal on the element.<br />
+a pad with the same name already existed or the pad already had another<br />
 parent.</p>
 <p>MT safe.</p>
 
@@ -2880,10 +2885,10 @@ parent.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a padtemplate to an element class. This is mainly used in the _class_init
-functions of classes. If a pad template with the same name as an already
+    <p>Adds a padtemplate to an element class. This is mainly used in the _class_init<br />
+functions of classes. If a pad template with the same name as an already<br />
 existing one is added the old one is replaced by the new one.</p>
-<p><!-- raw HTML omitted -->templ<!-- raw HTML omitted -->'s reference count will be incremented, and any floating
+<p><!-- raw HTML omitted -->templ<!-- raw HTML omitted -->'s reference count will be incremented, and any floating<br />
 reference will be removed (see gst_object_ref_sink())</p>
 
 
@@ -2938,7 +2943,7 @@ reference will be removed (see gst_object_ref_sink())</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a watch id, which can be used in connection with
+    <p>Returns a watch id, which can be used in connection with<br />
 gst_element_remove_property_notify_watch() to remove the watch again.</p>
 
 
@@ -2958,7 +2963,7 @@ gst_element_remove_property_notify_watch() to remove the watch again.</p>
       
       
         &mdash;
-        <div class='inline'><p>name of property to watch for changes, or
+        <div class='inline'><p>name of property to watch for changes, or<br />
 NULL to watch all properties</p>
 </div>
       
@@ -2992,7 +2997,7 @@ NULL to watch all properties</p>
       
       
         &mdash;
-        <div class='inline'><p>a watch id, which can be used in connection with
+        <div class='inline'><p>a watch id, which can be used in connection with<br />
 gst_element_remove_property_notify_watch() to remove the watch again.</p>
 </div>
       
@@ -3014,7 +3019,7 @@ gst_element_remove_property_notify_watch() to remove the watch again.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a watch id, which can be used in connection with
+    <p>Returns a watch id, which can be used in connection with<br />
 gst_element_remove_property_notify_watch() to remove the watch again.</p>
 
 
@@ -3034,7 +3039,7 @@ gst_element_remove_property_notify_watch() to remove the watch again.</p>
       
       
         &mdash;
-        <div class='inline'><p>name of property to watch for changes, or
+        <div class='inline'><p>name of property to watch for changes, or<br />
 NULL to watch all properties</p>
 </div>
       
@@ -3068,7 +3073,7 @@ NULL to watch all properties</p>
       
       
         &mdash;
-        <div class='inline'><p>a watch id, which can be used in connection with
+        <div class='inline'><p>a watch id, which can be used in connection with<br />
 gst_element_remove_property_notify_watch() to remove the watch again.</p>
 </div>
       
@@ -3091,9 +3096,9 @@ gst_element_remove_property_notify_watch() to remove the watch again.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Set <!-- raw HTML omitted -->key<!-- raw HTML omitted --> with <!-- raw HTML omitted -->value<!-- raw HTML omitted --> as metadata in <!-- raw HTML omitted -->klass<!-- raw HTML omitted -->.</p>
-<p>Same as gst_element_class_add_metadata(), but <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be a static string
-or an inlined string, as it will not be copied. (GStreamer plugins will
-be made resident once loaded, so this function can be used even from
+<p>Same as gst_element_class_add_metadata(), but <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be a static string<br />
+or an inlined string, as it will not be copied. (GStreamer plugins will<br />
+be made resident once loaded, so this function can be used even from<br />
 dynamically loaded plugins.)</p>
 
 
@@ -3163,9 +3168,9 @@ dynamically loaded plugins.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a pad template to an element class based on the static pad template
-<!-- raw HTML omitted -->templ<!-- raw HTML omitted -->. This is mainly used in the _class_init functions of element
-implementations. If a pad template with the same name already exists,
+    <p>Adds a pad template to an element class based on the static pad template<br />
+<!-- raw HTML omitted -->templ<!-- raw HTML omitted -->. This is mainly used in the _class_init functions of element<br />
+implementations. If a pad template with the same name already exists,<br />
 the old one is replaced by the new one.</p>
 
 
@@ -3220,9 +3225,9 @@ the old one is replaced by the new one.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a pad template to an element class based on the static pad template
-<!-- raw HTML omitted -->templ<!-- raw HTML omitted -->. This is mainly used in the _class_init functions of element
-implementations. If a pad template with the same name already exists,
+    <p>Adds a pad template to an element class based on the static pad template<br />
+<!-- raw HTML omitted -->templ<!-- raw HTML omitted -->. This is mainly used in the _class_init functions of element<br />
+implementations. If a pad template with the same name already exists,<br />
 the old one is replaced by the new one.</p>
 
 
@@ -3292,10 +3297,10 @@ the old one is replaced by the new one.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the base time of the element. The base time is the
-absolute time of the clock when this element was last put to
-PLAYING. Subtracting the base time from the clock time gives
-the running time of the element.
+    <p>Returns the base time of the element. The base time is the<br />
+absolute time of the clock when this element was last put to<br />
+PLAYING. Subtracting the base time from the clock time gives<br />
+the running time of the element.<br />
 MT safe.</p>
 
 
@@ -3390,8 +3395,8 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the bus of the element. Note that only a Gst::Pipeline will provide a
-bus for the application.
+    <p>Returns the bus of the element. Note that only a Gst::Pipeline will provide a<br />
+bus for the application.<br />
 usage.</p>
 <p>MT safe.</p>
 
@@ -3432,7 +3437,7 @@ usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the bus of the element. Increases the refcount on the bus.
+    <p>Sets the bus of the element. Increases the refcount on the bus.<br />
 For internal use only, unless you're testing elements.</p>
 <p>MT safe.</p>
 
@@ -3488,12 +3493,12 @@ For internal use only, unless you're testing elements.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calls <!-- raw HTML omitted -->func<!-- raw HTML omitted --> from another thread and passes <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> to it. This is to be
-used for cases when a state change has to be performed from a streaming
-thread, directly via gst_element_set_state() or indirectly e.g. via SEEK
+    <p>Calls <!-- raw HTML omitted -->func<!-- raw HTML omitted --> from another thread and passes <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> to it. This is to be<br />
+used for cases when a state change has to be performed from a streaming<br />
+thread, directly via gst_element_set_state() or indirectly e.g. via SEEK<br />
 events.</p>
-<p>Calling those functions directly from the streaming thread will cause
-deadlocks in many situations, as they might involve waiting for the
+<p>Calling those functions directly from the streaming thread will cause<br />
+deadlocks in many situations, as they might involve waiting for the<br />
 streaming thread to shut down from this very streaming thread.</p>
 <p>MT safe.</p>
 
@@ -3580,7 +3585,7 @@ streaming thread to shut down from this very streaming thread.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Perform <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> on <!-- raw HTML omitted -->element<!-- raw HTML omitted -->.</p>
-<p>This function must be called with STATE_LOCK held and is mainly used
+<p>This function must be called with STATE_LOCK held and is mainly used<br />
 internally.</p>
 
 
@@ -3639,10 +3644,10 @@ internally.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the currently configured clock of the element. This is the clock as was
+    <p>Gets the currently configured clock of the element. This is the clock as was<br />
 last set with gst_element_set_clock().</p>
-<p>Elements in a pipeline will only have their clock set when the
-pipeline is in the PLAYING state.
+<p>Elements in a pipeline will only have their clock set when the<br />
+pipeline is in the PLAYING state.<br />
 MT safe.</p>
 
 
@@ -3682,10 +3687,10 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the clock for the element. This function increases the
-refcount on the clock. Any previously set clock on the object
-is unreffed.
-clock when it, for example, is not able to slave its internal clock to the
+    <p>Sets the clock for the element. This function increases the<br />
+refcount on the clock. Any previously set clock on the object<br />
+is unreffed.<br />
+clock when it, for example, is not able to slave its internal clock to the<br />
 <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> or when it requires a specific clock to operate.</p>
 <p>MT safe.</p>
 
@@ -3840,16 +3845,16 @@ clock when it, for example, is not able to slave its internal clock to the
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Commit the state change of the element and proceed to the next
-pending state if any. This function is used
-by elements that do asynchronous state changes.
-The core will normally call this method automatically when an
+    <p>Commit the state change of the element and proceed to the next<br />
+pending state if any. This function is used<br />
+by elements that do asynchronous state changes.<br />
+The core will normally call this method automatically when an<br />
 element returned %GST_STATE_CHANGE_SUCCESS from the state change function.</p>
-<p>If after calling this method the element still has not reached
+<p>If after calling this method the element still has not reached<br />
 the pending state, the next state change is performed.</p>
-<p>This method is used internally and should normally not be called by plugins
+<p>This method is used internally and should normally not be called by plugins<br />
 or applications.</p>
-<p>This function must be called with STATE_LOCK held.
+<p>This function must be called with STATE_LOCK held.<br />
 MT safe.</p>
 
 
@@ -3908,8 +3913,8 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a pad for each pad template that is always available.
-This function is only useful during object initialization of
+    <p>Creates a pad for each pad template that is always available.<br />
+This function is only useful during object initialization of<br />
 subclasses of Gst::Element.</p>
 
 
@@ -3945,8 +3950,8 @@ subclasses of Gst::Element.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the current clock time of the element, as in, the time of the
-element's clock, or GST_CLOCK_TIME_NONE if there is no clock.
+    <p>Returns the current clock time of the element, as in, the time of the<br />
+element's clock, or GST_CLOCK_TIME_NONE if there is no clock.<br />
 no clock.</p>
 
 
@@ -3986,9 +3991,9 @@ no clock.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the running time of the element. The running time is the
-element's clock time minus its base time. Will return GST_CLOCK_TIME_NONE
-if the element has no clock, or if its base time has not been set.
+    <p>Returns the running time of the element. The running time is the<br />
+element's clock time minus its base time. Will return GST_CLOCK_TIME_NONE<br />
+if the element has no clock, or if its base time has not been set.<br />
 element has no clock or its base time has not been set.</p>
 
 
@@ -4028,17 +4033,17 @@ element has no clock or its base time has not been set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a stream-id for <!-- raw HTML omitted -->element<!-- raw HTML omitted --> by combining the upstream information with
+    <p>Creates a stream-id for <!-- raw HTML omitted -->element<!-- raw HTML omitted --> by combining the upstream information with<br />
 the <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted -->.</p>
-<p>This function generates an unique stream-id by getting the upstream
-stream-start event stream ID and appending <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> to it. If the element
-has no sinkpad it will generate an upstream stream-id by doing an URI query
-on the element and in the worst case just uses a random number. Source
-elements that don't implement the URI handler interface should ideally
+<p>This function generates an unique stream-id by getting the upstream<br />
+stream-start event stream ID and appending <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> to it. If the element<br />
+has no sinkpad it will generate an upstream stream-id by doing an URI query<br />
+on the element and in the worst case just uses a random number. Source<br />
+elements that don't implement the URI handler interface should ideally<br />
 generate a unique, deterministic stream-id manually instead.</p>
-<p>Since stream IDs are sorted alphabetically, any numbers in the stream ID
-should be printed with a fixed number of characters, preceded by 0's, such as
-by using the format %03u instead of %u.</p>
+<p>Since stream IDs are sorted alphabetically, any numbers in the stream ID<br />
+should be printed with a fixed number of characters, preceded by 0's, such as<br />
+by using the format <span data-escaped-char>%</span>03u instead of <span data-escaped-char>%</span>u.</p>
 
 
   </div>
@@ -4096,17 +4101,17 @@ by using the format %03u instead of %u.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a stream-id for <!-- raw HTML omitted -->element<!-- raw HTML omitted --> by combining the upstream information with
+    <p>Creates a stream-id for <!-- raw HTML omitted -->element<!-- raw HTML omitted --> by combining the upstream information with<br />
 the <!-- raw HTML omitted -->format<!-- raw HTML omitted -->.</p>
-<p>This function generates an unique stream-id by getting the upstream
-stream-start event stream ID and appending the stream-id to it. If the element
-has no sinkpad it will generate an upstream stream-id by doing an URI query
-on the element and in the worst case just uses a random number. Source
-elements that don't implement the URI handler interface should ideally
+<p>This function generates an unique stream-id by getting the upstream<br />
+stream-start event stream ID and appending the stream-id to it. If the element<br />
+has no sinkpad it will generate an upstream stream-id by doing an URI query<br />
+on the element and in the worst case just uses a random number. Source<br />
+elements that don't implement the URI handler interface should ideally<br />
 generate a unique, deterministic stream-id manually instead.</p>
-<p>Since stream IDs are sorted alphabetically, any numbers in the stream ID
-should be printed with a fixed number of characters, preceded by 0's, such as
-by using the format %03u instead of %u.</p>
+<p>Since stream IDs are sorted alphabetically, any numbers in the stream ID<br />
+should be printed with a fixed number of characters, preceded by 0's, such as<br />
+by using the format <span data-escaped-char>%</span>03u instead of <span data-escaped-char>%</span>u.</p>
 
 
   </div>
@@ -4175,17 +4180,17 @@ by using the format %03u instead of %u.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a stream-id for <!-- raw HTML omitted -->element<!-- raw HTML omitted --> by combining the upstream information with
+    <p>Creates a stream-id for <!-- raw HTML omitted -->element<!-- raw HTML omitted --> by combining the upstream information with<br />
 the <!-- raw HTML omitted -->format<!-- raw HTML omitted -->.</p>
-<p>This function generates an unique stream-id by getting the upstream
-stream-start event stream ID and appending <!-- raw HTML omitted -->format<!-- raw HTML omitted --> to it. If the element
-has no sinkpad it will generate an upstream stream-id by doing an URI query
-on the element and in the worst case just uses a random number. Source
-elements that don't implement the URI handler interface should ideally
+<p>This function generates an unique stream-id by getting the upstream<br />
+stream-start event stream ID and appending <!-- raw HTML omitted -->format<!-- raw HTML omitted --> to it. If the element<br />
+has no sinkpad it will generate an upstream stream-id by doing an URI query<br />
+on the element and in the worst case just uses a random number. Source<br />
+elements that don't implement the URI handler interface should ideally<br />
 generate a unique, deterministic stream-id manually instead.</p>
-<p>Since stream IDs are sorted alphabetically, any numbers in the stream ID
-should be printed with a fixed number of characters, preceded by 0's, such as
-by using the format %03u instead of %u.</p>
+<p>Since stream IDs are sorted alphabetically, any numbers in the stream ID<br />
+should be printed with a fixed number of characters, preceded by 0's, such as<br />
+by using the format <span data-escaped-char>%</span>03u instead of <span data-escaped-char>%</span>u.</p>
 
 
   </div>
@@ -4276,7 +4281,7 @@ by using the format %03u instead of %u.</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::ElementFactory used for creating this
+        <div class='inline'><p>the Gst::ElementFactory used for creating this<br />
 element or nil if element has not been registered (static element). no refcounting is needed.</p>
 </div>
       
@@ -4354,11 +4359,11 @@ element or nil if element has not been registered (static element). no refcounti
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Call <!-- raw HTML omitted -->func<!-- raw HTML omitted --> with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> for each of <!-- raw HTML omitted -->element<!-- raw HTML omitted -->'s pads. <!-- raw HTML omitted -->func<!-- raw HTML omitted --> will be called
-exactly once for each pad that exists at the time of this call, unless
-one of the calls to <!-- raw HTML omitted -->func<!-- raw HTML omitted --> returns false in which case we will stop
-iterating pads and return early. If new pads are added or pads are removed
-while pads are being iterated, this will not be taken into account until
+    <p>Call <!-- raw HTML omitted -->func<!-- raw HTML omitted --> with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> for each of <!-- raw HTML omitted -->element<!-- raw HTML omitted -->'s pads. <!-- raw HTML omitted -->func<!-- raw HTML omitted --> will be called<br />
+exactly once for each pad that exists at the time of this call, unless<br />
+one of the calls to <!-- raw HTML omitted -->func<!-- raw HTML omitted --> returns false in which case we will stop<br />
+iterating pads and return early. If new pads are added or pads are removed<br />
+while pads are being iterated, this will not be taken into account until<br />
 next time this function is used.</p>
 
 
@@ -4411,7 +4416,7 @@ next time this function is used.</p>
       
       
         &mdash;
-        <div class='inline'><p>false if <!-- raw HTML omitted -->element<!-- raw HTML omitted --> had no pads or if one of the calls to <!-- raw HTML omitted -->func<!-- raw HTML omitted -->
+        <div class='inline'><p>false if <!-- raw HTML omitted -->element<!-- raw HTML omitted --> had no pads or if one of the calls to <!-- raw HTML omitted -->func<!-- raw HTML omitted --><br />
 returned false.</p>
 </div>
       
@@ -4433,11 +4438,11 @@ returned false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Call <!-- raw HTML omitted -->func<!-- raw HTML omitted --> with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> for each of <!-- raw HTML omitted -->element<!-- raw HTML omitted -->'s sink pads. <!-- raw HTML omitted -->func<!-- raw HTML omitted --> will be
-called exactly once for each sink pad that exists at the time of this call,
-unless one of the calls to <!-- raw HTML omitted -->func<!-- raw HTML omitted --> returns false in which case we will stop
-iterating pads and return early. If new sink pads are added or sink pads
-are removed while the sink pads are being iterated, this will not be taken
+    <p>Call <!-- raw HTML omitted -->func<!-- raw HTML omitted --> with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> for each of <!-- raw HTML omitted -->element<!-- raw HTML omitted -->'s sink pads. <!-- raw HTML omitted -->func<!-- raw HTML omitted --> will be<br />
+called exactly once for each sink pad that exists at the time of this call,<br />
+unless one of the calls to <!-- raw HTML omitted -->func<!-- raw HTML omitted --> returns false in which case we will stop<br />
+iterating pads and return early. If new sink pads are added or sink pads<br />
+are removed while the sink pads are being iterated, this will not be taken<br />
 into account until next time this function is used.</p>
 
 
@@ -4490,7 +4495,7 @@ into account until next time this function is used.</p>
       
       
         &mdash;
-        <div class='inline'><p>false if <!-- raw HTML omitted -->element<!-- raw HTML omitted --> had no sink pads or if one of the calls to <!-- raw HTML omitted -->func<!-- raw HTML omitted -->
+        <div class='inline'><p>false if <!-- raw HTML omitted -->element<!-- raw HTML omitted --> had no sink pads or if one of the calls to <!-- raw HTML omitted -->func<!-- raw HTML omitted --><br />
 returned false.</p>
 </div>
       
@@ -4512,11 +4517,11 @@ returned false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Call <!-- raw HTML omitted -->func<!-- raw HTML omitted --> with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> for each of <!-- raw HTML omitted -->element<!-- raw HTML omitted -->'s source pads. <!-- raw HTML omitted -->func<!-- raw HTML omitted --> will be
-called exactly once for each source pad that exists at the time of this call,
-unless one of the calls to <!-- raw HTML omitted -->func<!-- raw HTML omitted --> returns false in which case we will stop
-iterating pads and return early. If new source pads are added or source pads
-are removed while the source pads are being iterated, this will not be taken
+    <p>Call <!-- raw HTML omitted -->func<!-- raw HTML omitted --> with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> for each of <!-- raw HTML omitted -->element<!-- raw HTML omitted -->'s source pads. <!-- raw HTML omitted -->func<!-- raw HTML omitted --> will be<br />
+called exactly once for each source pad that exists at the time of this call,<br />
+unless one of the calls to <!-- raw HTML omitted -->func<!-- raw HTML omitted --> returns false in which case we will stop<br />
+iterating pads and return early. If new source pads are added or source pads<br />
+are removed while the source pads are being iterated, this will not be taken<br />
 into account until next time this function is used.</p>
 
 
@@ -4569,7 +4574,7 @@ into account until next time this function is used.</p>
       
       
         &mdash;
-        <div class='inline'><p>false if <!-- raw HTML omitted -->element<!-- raw HTML omitted --> had no source pads or if one of the calls
+        <div class='inline'><p>false if <!-- raw HTML omitted -->element<!-- raw HTML omitted --> had no source pads or if one of the calls<br />
 to <!-- raw HTML omitted -->func<!-- raw HTML omitted --> returned false.</p>
 </div>
       
@@ -4591,11 +4596,11 @@ to <!-- raw HTML omitted -->func<!-- raw HTML omitted --> returned false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks for an unlinked pad to which the given pad can link. It is not
-guaranteed that linking the pads will work, though it should work in most
+    <p>Looks for an unlinked pad to which the given pad can link. It is not<br />
+guaranteed that linking the pads will work, though it should work in most<br />
 cases.</p>
-<p>This function will first attempt to find a compatible unlinked ALWAYS pad,
-and if none can be found, it will request a compatible REQUEST pad by looking
+<p>This function will first attempt to find a compatible unlinked ALWAYS pad,<br />
+and if none can be found, it will request a compatible REQUEST pad by looking<br />
 at the templates of <!-- raw HTML omitted -->element<!-- raw HTML omitted -->.</p>
 
 
@@ -4648,8 +4653,8 @@ at the templates of <!-- raw HTML omitted -->element<!-- raw HTML omitted -->.</
       
       
         &mdash;
-        <div class='inline'><p>the Gst::Pad to which a link
-can be made, or nil if one cannot be found. gst_object_unref()
+        <div class='inline'><p>the Gst::Pad to which a link<br />
+can be made, or nil if one cannot be found. gst_object_unref()<br />
 after usage.</p>
 </div>
       
@@ -4671,7 +4676,7 @@ after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a pad template from <!-- raw HTML omitted -->element<!-- raw HTML omitted --> that is compatible with <!-- raw HTML omitted -->compattempl<!-- raw HTML omitted -->.
+    <p>Retrieves a pad template from <!-- raw HTML omitted -->element<!-- raw HTML omitted --> that is compatible with <!-- raw HTML omitted -->compattempl<!-- raw HTML omitted -->.<br />
 Pads from compatible templates can be linked together.</p>
 
 
@@ -4691,7 +4696,7 @@ Pads from compatible templates can be linked together.</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::PadTemplate to find a compatible
+        <div class='inline'><p>the Gst::PadTemplate to find a compatible<br />
 template for</p>
 </div>
       
@@ -4710,7 +4715,7 @@ template for</p>
       
       
         &mdash;
-        <div class='inline'><p>a compatible Gst::PadTemplate,
+        <div class='inline'><p>a compatible Gst::PadTemplate,<br />
 or nil if none was found. No unreferencing is necessary.</p>
 </div>
       
@@ -4909,8 +4914,8 @@ or nil if none was found. No unreferencing is necessary.</p>
   <div class="discussion">
     <p>Retrieves a padtemplate from <!-- raw HTML omitted -->element_class<!-- raw HTML omitted --> with the given name.</p>
 <blockquote>
-<p>If you use this function in the GInstanceInitFunc of an object class
-that has subclasses, make sure to pass the g_class parameter of the
+<p>If you use this function in the GInstanceInitFunc of an object class<br />
+that has subclasses, make sure to pass the g_class parameter of the<br />
 GInstanceInitFunc here.</p>
 </blockquote>
 
@@ -4949,8 +4954,8 @@ GInstanceInitFunc here.</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::PadTemplate with the
-given name, or nil if none was found. No unreferencing is
+        <div class='inline'><p>the Gst::PadTemplate with the<br />
+given name, or nil if none was found. No unreferencing is<br />
 necessary.</p>
 </div>
       
@@ -4972,8 +4977,8 @@ necessary.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The name of this function is confusing to people learning GStreamer.
-gst_element_request_pad_simple() aims at making it more explicit it is
+    <p>The name of this function is confusing to people learning GStreamer.<br />
+gst_element_request_pad_simple() aims at making it more explicit it is<br />
 a simplified gst_element_request_pad().</p>
 
 
@@ -5011,7 +5016,7 @@ a simplified gst_element_request_pad().</p>
       
       
         &mdash;
-        <div class='inline'><p>requested Gst::Pad if found,
+        <div class='inline'><p>requested Gst::Pad if found,<br />
 otherwise nil.  Release after usage.</p>
 </div>
       
@@ -5034,22 +5039,22 @@ otherwise nil.  Release after usage.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the state of the element.</p>
-<p>For elements that performed an ASYNC state change, as reported by
-gst_element_set_state(), this function will block up to the
-specified timeout value for the state change to complete.
-If the element completes the state change or goes into
-an error, this function returns immediately with a return value of
+<p>For elements that performed an ASYNC state change, as reported by<br />
+gst_element_set_state(), this function will block up to the<br />
+specified timeout value for the state change to complete.<br />
+If the element completes the state change or goes into<br />
+an error, this function returns immediately with a return value of<br />
 %GST_STATE_CHANGE_SUCCESS or %GST_STATE_CHANGE_FAILURE respectively.</p>
-<p>For elements that did not return %GST_STATE_CHANGE_ASYNC, this function
+<p>For elements that did not return %GST_STATE_CHANGE_ASYNC, this function<br />
 returns the current and pending state immediately.</p>
-<p>This function returns %GST_STATE_CHANGE_NO_PREROLL if the element
-successfully changed its state but is not able to provide data yet.
-This mostly happens for live sources that only produce data in
-%GST_STATE_PLAYING. While the state change return is equivalent to
-%GST_STATE_CHANGE_SUCCESS, it is returned to the application to signal that
-some sink elements might not be able to complete their state change because
-an element is not producing data to complete the preroll. When setting the
-element to playing, the preroll will complete and playback will start.
+<p>This function returns %GST_STATE_CHANGE_NO_PREROLL if the element<br />
+successfully changed its state but is not able to provide data yet.<br />
+This mostly happens for live sources that only produce data in<br />
+%GST_STATE_PLAYING. While the state change return is equivalent to<br />
+%GST_STATE_CHANGE_SUCCESS, it is returned to the application to signal that<br />
+some sink elements might not be able to complete their state change because<br />
+an element is not producing data to complete the preroll. When setting the<br />
+element to playing, the preroll will complete and playback will start.<br />
 MT safe.</p>
 
 
@@ -5069,7 +5074,7 @@ MT safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to Gst::State to hold the state.
+        <div class='inline'><p>a pointer to Gst::State to hold the state.<br />
 Can be nil.</p>
 </div>
       
@@ -5085,7 +5090,7 @@ Can be nil.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to Gst::State to hold the pending
+        <div class='inline'><p>a pointer to Gst::State to hold the pending<br />
 state. Can be nil.</p>
 </div>
       
@@ -5101,7 +5106,7 @@ state. Can be nil.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Gst::ClockTime to specify the timeout for an async
+        <div class='inline'><p>a Gst::ClockTime to specify the timeout for an async<br />
 state change or %GST_CLOCK_TIME_NONE for infinite timeout.</p>
 </div>
       
@@ -5120,9 +5125,9 @@ state change or %GST_CLOCK_TIME_NONE for infinite timeout.</p>
       
       
         &mdash;
-        <div class='inline'><p>%GST_STATE_CHANGE_SUCCESS if the element has no more pending state
-and the last state change succeeded, %GST_STATE_CHANGE_ASYNC if the
-element is still performing a state change or
+        <div class='inline'><p>%GST_STATE_CHANGE_SUCCESS if the element has no more pending state<br />
+and the last state change succeeded, %GST_STATE_CHANGE_ASYNC if the<br />
+element is still performing a state change or<br />
 %GST_STATE_CHANGE_FAILURE if the last state change failed.</p>
 </div>
       
@@ -5144,8 +5149,8 @@ element is still performing a state change or
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a pad from <!-- raw HTML omitted -->element<!-- raw HTML omitted --> by name. This version only retrieves
-already-existing (i.e. 'static') pads.
+    <p>Retrieves a pad from <!-- raw HTML omitted -->element<!-- raw HTML omitted --> by name. This version only retrieves<br />
+already-existing (i.e. 'static') pads.<br />
 MT safe.</p>
 
 
@@ -5183,7 +5188,7 @@ MT safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>the requested Gst::Pad if
+        <div class='inline'><p>the requested Gst::Pad if<br />
 found, otherwise nil.  unref after usage.</p>
 </div>
       
@@ -5205,10 +5210,10 @@ found, otherwise nil.  unref after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if the state of an element is locked.
-If the state of an element is locked, state changes of the parent don't
-affect the element.
-This way you can leave currently unused elements inside bins. Just lock their
+    <p>Checks if the state of an element is locked.<br />
+If the state of an element is locked, state changes of the parent don't<br />
+affect the element.<br />
+This way you can leave currently unused elements inside bins. Just lock their<br />
 state before changing the state from #GST_STATE_NULL.</p>
 <p>MT safe.</p>
 
@@ -5249,11 +5254,11 @@ state before changing the state from #GST_STATE_NULL.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves an iterator of <!-- raw HTML omitted -->element<!-- raw HTML omitted -->'s pads. The iterator should
-be freed after usage. Also more specialized iterators exists such as
+    <p>Retrieves an iterator of <!-- raw HTML omitted -->element<!-- raw HTML omitted -->'s pads. The iterator should<br />
+be freed after usage. Also more specialized iterators exists such as<br />
 gst_element_iterate_src_pads() or gst_element_iterate_sink_pads().</p>
-<p>The order of pads returned by the iterator will be the order in which
-the pads were added to the element.
+<p>The order of pads returned by the iterator will be the order in which<br />
+the pads were added to the element.<br />
 MT safe.</p>
 
 
@@ -5294,8 +5299,8 @@ MT safe.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves an iterator of <!-- raw HTML omitted -->element<!-- raw HTML omitted -->'s sink pads.</p>
-<p>The order of pads returned by the iterator will be the order in which
-the pads were added to the element.
+<p>The order of pads returned by the iterator will be the order in which<br />
+the pads were added to the element.<br />
 MT safe.</p>
 
 
@@ -5336,8 +5341,8 @@ MT safe.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves an iterator of <!-- raw HTML omitted -->element<!-- raw HTML omitted -->'s source pads.</p>
-<p>The order of pads returned by the iterator will be the order in which
-the pads were added to the element.
+<p>The order of pads returned by the iterator will be the order in which<br />
+the pads were added to the element.<br />
 MT safe.</p>
 
 
@@ -5415,12 +5420,12 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Links <!-- raw HTML omitted -->src<!-- raw HTML omitted --> to <!-- raw HTML omitted -->dest<!-- raw HTML omitted --> using the given caps as filtercaps.
-The link must be from source to
-destination; the other direction will not be tried. The function looks for
-existing pads that aren't linked yet. It will request new pads if necessary.
+    <p>Links <!-- raw HTML omitted -->src<!-- raw HTML omitted --> to <!-- raw HTML omitted -->dest<!-- raw HTML omitted --> using the given caps as filtercaps.<br />
+The link must be from source to<br />
+destination; the other direction will not be tried. The function looks for<br />
+existing pads that aren't linked yet. It will request new pads if necessary.<br />
 If multiple links are possible, only one is established.</p>
-<p>Make sure you have added your elements to a bin or pipeline with
+<p>Make sure you have added your elements to a bin or pipeline with<br />
 gst_bin_add() before trying to link them.</p>
 
 
@@ -5455,7 +5460,7 @@ gst_bin_add() before trying to link them.</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::Caps to filter the link,
+        <div class='inline'><p>the Gst::Caps to filter the link,<br />
 or nil for no filter.</p>
 </div>
       
@@ -5495,8 +5500,8 @@ or nil for no filter.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Chain together a series of elements. Uses gst_element_link().
-Make sure you have added your elements to a bin or pipeline with
+    <p>Chain together a series of elements. Uses gst_element_link().<br />
+Make sure you have added your elements to a bin or pipeline with<br />
 gst_bin_add() before trying to link them.</p>
 
 
@@ -5570,10 +5575,10 @@ gst_bin_add() before trying to link them.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Links the two named pads of the source and destination elements.
-Side effect is that if one of the pads has no parent, it becomes a
-child of the parent of the other element.  If they have different
-parents, the link fails.
+    <p>Links the two named pads of the source and destination elements.<br />
+Side effect is that if one of the pads has no parent, it becomes a<br />
+child of the parent of the other element.  If they have different<br />
+parents, the link fails.<br />
 or nil for any pad.</p>
 
 
@@ -5593,7 +5598,7 @@ or nil for any pad.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of the Gst::Pad in source element
+        <div class='inline'><p>the name of the Gst::Pad in source element<br />
 or nil for any pad.</p>
 </div>
       
@@ -5663,9 +5668,9 @@ or nil for any pad.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Links the two named pads of the source and destination elements. Side effect
-is that if one of the pads has no parent, it becomes a child of the parent of
-the other element. If they have different parents, the link fails. If <!-- raw HTML omitted -->caps<!-- raw HTML omitted -->
+    <p>Links the two named pads of the source and destination elements. Side effect<br />
+is that if one of the pads has no parent, it becomes a child of the parent of<br />
+the other element. If they have different parents, the link fails. If <!-- raw HTML omitted -->caps<!-- raw HTML omitted --><br />
 is not nil, makes sure that the caps of the link is a subset of <!-- raw HTML omitted -->caps<!-- raw HTML omitted -->.</p>
 
 
@@ -5685,7 +5690,7 @@ is not nil, makes sure that the caps of the link is a subset of <!-- raw HTML om
       
       
         &mdash;
-        <div class='inline'><p>the name of the Gst::Pad in source element
+        <div class='inline'><p>the name of the Gst::Pad in source element<br />
 or nil for any pad.</p>
 </div>
       
@@ -5716,7 +5721,7 @@ or nil for any pad.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of the Gst::Pad in destination element
+        <div class='inline'><p>the name of the Gst::Pad in destination element<br />
 or nil for any pad.</p>
 </div>
       
@@ -5732,7 +5737,7 @@ or nil for any pad.</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::Caps to filter the link,
+        <div class='inline'><p>the Gst::Caps to filter the link,<br />
 or nil for no filter.</p>
 </div>
       
@@ -5772,14 +5777,14 @@ or nil for no filter.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Links the two named pads of the source and destination elements.
-Side effect is that if one of the pads has no parent, it becomes a
-child of the parent of the other element.  If they have different
+    <p>Links the two named pads of the source and destination elements.<br />
+Side effect is that if one of the pads has no parent, it becomes a<br />
+child of the parent of the other element.  If they have different<br />
 parents, the link fails.</p>
-<p>Calling gst_element_link_pads_full() with <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> == %GST_PAD_LINK_CHECK_DEFAULT
-is the same as calling gst_element_link_pads() and the recommended way of
+<p>Calling gst_element_link_pads_full() with <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> == %GST_PAD_LINK_CHECK_DEFAULT<br />
+is the same as calling gst_element_link_pads() and the recommended way of<br />
 linking pads with safety checks applied.</p>
-<p>This is a convenience function for gst_pad_link_full().
+<p>This is a convenience function for gst_pad_link_full().<br />
 or nil for any pad.</p>
 
 
@@ -5799,7 +5804,7 @@ or nil for any pad.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of the Gst::Pad in source element
+        <div class='inline'><p>the name of the Gst::Pad in source element<br />
 or nil for any pad.</p>
 </div>
       
@@ -5884,12 +5889,12 @@ or nil for any pad.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Locks the state of an element, so state changes of the parent don't affect
+    <p>Locks the state of an element, so state changes of the parent don't affect<br />
 this element anymore.</p>
-<p>Note that this is racy if the state lock of the parent bin is not taken.
-The parent bin might've just checked the flag in another thread and as the
+<p>Note that this is racy if the state lock of the parent bin is not taken.<br />
+The parent bin might've just checked the flag in another thread and as the<br />
 next step proceed to change the child element's state.</p>
-<p>MT safe.
+<p>MT safe.<br />
 or the elements state-locking needed no change.</p>
 
 
@@ -5948,18 +5953,18 @@ or the elements state-locking needed no change.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Brings the element to the lost state. The current state of the
-element is copied to the pending state so that any call to
+    <p>Brings the element to the lost state. The current state of the<br />
+element is copied to the pending state so that any call to<br />
 gst_element_get_state() will return %GST_STATE_CHANGE_ASYNC.</p>
-<p>An ASYNC_START message is posted. If the element was PLAYING, it will
-go to PAUSED. The element will be restored to its PLAYING state by
+<p>An ASYNC_START message is posted. If the element was PLAYING, it will<br />
+go to PAUSED. The element will be restored to its PLAYING state by<br />
 the parent pipeline when it prerolls again.</p>
-<p>This is mostly used for elements that lost their preroll buffer
-in the %GST_STATE_PAUSED or %GST_STATE_PLAYING state after a flush,
-they will go to their pending state again when a new preroll buffer is
-queued. This function can only be called when the element is currently
+<p>This is mostly used for elements that lost their preroll buffer<br />
+in the %GST_STATE_PAUSED or %GST_STATE_PLAYING state after a flush,<br />
+they will go to their pending state again when a new preroll buffer is<br />
+queued. This function can only be called when the element is currently<br />
 not in error or an async state change.</p>
-<p>This function is used internally and should normally not be called from
+<p>This function is used internally and should normally not be called from<br />
 plugins or applications.</p>
 
 
@@ -5996,7 +6001,7 @@ plugins or applications.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Post an error, warning or info message on the bus from inside an element.</p>
-<p><!-- raw HTML omitted -->type<!-- raw HTML omitted --> must be of #GST_MESSAGE_ERROR, #GST_MESSAGE_WARNING or
+<p><!-- raw HTML omitted -->type<!-- raw HTML omitted --> must be of #GST_MESSAGE_ERROR, #GST_MESSAGE_WARNING or<br />
 #GST_MESSAGE_INFO.</p>
 <p>MT safe.</p>
 
@@ -6062,8 +6067,8 @@ plugins or applications.</p>
       
       
         &mdash;
-        <div class='inline'><p>an allocated text string to be used
-as a replacement for the default message connected to code,
+        <div class='inline'><p>an allocated text string to be used<br />
+as a replacement for the default message connected to code,<br />
 or nil</p>
 </div>
       
@@ -6079,8 +6084,8 @@ or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>an allocated debug message to be
-used as a replacement for the default debugging information,
+        <div class='inline'><p>an allocated debug message to be<br />
+used as a replacement for the default debugging information,<br />
 or nil</p>
 </div>
       
@@ -6162,7 +6167,7 @@ or nil</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Post an error, warning or info message on the bus from inside an element.</p>
-<p><!-- raw HTML omitted -->type<!-- raw HTML omitted --> must be of #GST_MESSAGE_ERROR, #GST_MESSAGE_WARNING or
+<p><!-- raw HTML omitted -->type<!-- raw HTML omitted --> must be of #GST_MESSAGE_ERROR, #GST_MESSAGE_WARNING or<br />
 #GST_MESSAGE_INFO.</p>
 
 
@@ -6227,8 +6232,8 @@ or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>an allocated text string to be used
-as a replacement for the default message connected to code,
+        <div class='inline'><p>an allocated text string to be used<br />
+as a replacement for the default message connected to code,<br />
 or nil</p>
 </div>
       
@@ -6244,8 +6249,8 @@ or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>an allocated debug message to be
-used as a replacement for the default debugging information,
+        <div class='inline'><p>an allocated debug message to be<br />
+used as a replacement for the default debugging information,<br />
 or nil</p>
 </div>
       
@@ -6341,10 +6346,10 @@ or nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Use this function to signal that the element does not expect any more pads
-to show up in the current pipeline. This function should be called whenever
-pads have been added by the element itself. Elements with #GST_PAD_SOMETIMES
-pad templates use this in combination with autopluggers to figure out that
+    <p>Use this function to signal that the element does not expect any more pads<br />
+to show up in the current pipeline. This function should be called whenever<br />
+pads have been added by the element itself. Elements with #GST_PAD_SOMETIMES<br />
+pad templates use this in combination with autopluggers to figure out that<br />
 the element is done initializing its pads.</p>
 <p>This function emits the Gst::Element::no-more-pads signal.</p>
 <p>MT safe.</p>
@@ -6382,11 +6387,11 @@ the element is done initializing its pads.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a list of the pad templates associated with <!-- raw HTML omitted -->element_class<!-- raw HTML omitted -->. The
+    <p>Retrieves a list of the pad templates associated with <!-- raw HTML omitted -->element_class<!-- raw HTML omitted -->. The<br />
 list must not be modified by the calling code.</p>
 <blockquote>
-<p>If you use this function in the GInstanceInitFunc of an object class
-that has subclasses, make sure to pass the g_class parameter of the
+<p>If you use this function in the GInstanceInitFunc of an object class<br />
+that has subclasses, make sure to pass the g_class parameter of the<br />
 GInstanceInitFunc here.</p>
 </blockquote>
 
@@ -6406,7 +6411,7 @@ GInstanceInitFunc here.</p>
       
       
         &mdash;
-        <div class='inline'><p>the #GList of
+        <div class='inline'><p>the #GList of<br />
 pad templates.</p>
 </div>
       
@@ -6488,9 +6493,9 @@ pad templates.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Post a message on the element's Gst::Bus. This function takes ownership of the
-message; if you want to access the message after this call, you should add an
-additional reference before calling.
+    <p>Post a message on the element's Gst::Bus. This function takes ownership of the<br />
+message; if you want to access the message after this call, you should add an<br />
+additional reference before calling.<br />
 false if the element did not have a bus.</p>
 <p>MT safe.</p>
 
@@ -6552,8 +6557,8 @@ false if the element did not have a bus.</p>
   <div class="discussion">
     <p>Get the clock provided by the given element.</p>
 <blockquote>
-<p>An element is only required to provide a clock in the PAUSED
-state. Some elements can provide a clock in other states.
+<p>An element is only required to provide a clock in the PAUSED<br />
+state. Some elements can provide a clock in other states.<br />
 element or nil if no clock could be provided.  Unref after usage.</p>
 </blockquote>
 <p>MT safe.</p>
@@ -6596,10 +6601,10 @@ element or nil if no clock could be provided.  Unref after usage.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Performs a query on the given element.</p>
-<p>For elements that don't implement a query handler, this function
-forwards the query to a random srcpad or to the peer of a
+<p>For elements that don't implement a query handler, this function<br />
+forwards the query to a random srcpad or to the peer of a<br />
 random linked sinkpad of this element.</p>
-<p>Please note that some queries might need a running pipeline to work.
+<p>Please note that some queries might need a running pipeline to work.<br />
 MT safe.</p>
 
 
@@ -6761,12 +6766,12 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries an element (usually top-level pipeline or playbin element) for the
-total stream duration in nanoseconds. This query will only work once the
-pipeline is prerolled (i.e. reached PAUSED or PLAYING state). The application
+    <p>Queries an element (usually top-level pipeline or playbin element) for the<br />
+total stream duration in nanoseconds. This query will only work once the<br />
+pipeline is prerolled (i.e. reached PAUSED or PLAYING state). The application<br />
 will receive an ASYNC_DONE message on the pipeline bus when that is the case.</p>
-<p>If the duration changes for some reason, you will get a DURATION_CHANGED
-message on the pipeline bus, in which case you should re-query the duration
+<p>If the duration changes for some reason, you will get a DURATION_CHANGED<br />
+message on the pipeline bus, in which case you should re-query the duration<br />
 using this function.</p>
 
 
@@ -6840,13 +6845,13 @@ using this function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries an element (usually top-level pipeline or playbin element) for the
-stream position in nanoseconds. This will be a value between 0 and the
-stream duration (if the stream duration is known). This query will usually
-only work once the pipeline is prerolled (i.e. reached PAUSED or PLAYING
-state). The application will receive an ASYNC_DONE message on the pipeline
+    <p>Queries an element (usually top-level pipeline or playbin element) for the<br />
+stream position in nanoseconds. This will be a value between 0 and the<br />
+stream duration (if the stream duration is known). This query will usually<br />
+only work once the pipeline is prerolled (i.e. reached PAUSED or PLAYING<br />
+state). The application will receive an ASYNC_DONE message on the pipeline<br />
 bus when that is the case.</p>
-<p>If one repeatedly calls this function one can also create a query and reuse
+<p>If one repeatedly calls this function one can also create a query and reuse<br />
 it in gst_element_query().</p>
 
 
@@ -6881,7 +6886,7 @@ it in gst_element_query().</p>
       
       
         &mdash;
-        <div class='inline'><p>a location in which to store the current
+        <div class='inline'><p>a location in which to store the current<br />
 position, or nil.</p>
 </div>
       
@@ -6951,10 +6956,10 @@ position, or nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Makes the element free the previously requested pad as obtained
+    <p>Makes the element free the previously requested pad as obtained<br />
 with gst_element_request_pad().</p>
-<p>This does not unref the pad. If the pad was created by using
-gst_element_request_pad(), gst_element_release_request_pad() needs to be
+<p>This does not unref the pad. If the pad was created by using<br />
+gst_element_request_pad(), gst_element_release_request_pad() needs to be<br />
 followed by gst_object_unref() to free the <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
 <p>MT safe.</p>
 
@@ -7010,18 +7015,18 @@ followed by gst_object_unref() to free the <!-- raw HTML omitted -->pad<!-- raw 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> from <!-- raw HTML omitted -->element<!-- raw HTML omitted -->. <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> will be destroyed if it has not been
+    <p>Removes <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> from <!-- raw HTML omitted -->element<!-- raw HTML omitted -->. <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> will be destroyed if it has not been<br />
 referenced elsewhere using gst_object_unparent().</p>
-<p>This function is used by plugin developers and should not be used
-by applications. Pads that were dynamically requested from elements
-with gst_element_request_pad() should be released with the
+<p>This function is used by plugin developers and should not be used<br />
+by applications. Pads that were dynamically requested from elements<br />
+with gst_element_request_pad() should be released with the<br />
 gst_element_release_request_pad() function instead.</p>
-<p>Pads are not automatically deactivated so elements should perform the needed
-steps to deactivate the pad in case this pad is removed in the PAUSED or
-PLAYING state. See gst_pad_set_active() for more information about
+<p>Pads are not automatically deactivated so elements should perform the needed<br />
+steps to deactivate the pad in case this pad is removed in the PAUSED or<br />
+PLAYING state. See gst_pad_set_active() for more information about<br />
 deactivating pads.</p>
 <p>The pad and the element should be unlocked when calling this function.</p>
-<p>This function will emit the Gst::Element::pad-removed signal on the element.
+<p>This function will emit the Gst::Element::pad-removed signal on the element.<br />
 pad does not belong to the provided element.</p>
 <p>MT safe.</p>
 
@@ -7134,11 +7139,11 @@ pad does not belong to the provided element.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a request pad from the element according to the provided template.
-Pad templates can be looked up using
+    <p>Retrieves a request pad from the element according to the provided template.<br />
+Pad templates can be looked up using<br />
 gst_element_factory_get_static_pad_templates().</p>
-<p>The pad should be released with gst_element_release_request_pad().
-to retrieve. Can be nil.
+<p>The pad should be released with gst_element_release_request_pad().<br />
+to retrieve. Can be nil.<br />
 request. Can be nil.</p>
 
 
@@ -7206,7 +7211,7 @@ request. Can be nil.</p>
       
       
         &mdash;
-        <div class='inline'><p>requested Gst::Pad if found,
+        <div class='inline'><p>requested Gst::Pad if found,<br />
 otherwise nil.  Release after usage.</p>
 </div>
       
@@ -7228,15 +7233,15 @@ otherwise nil.  Release after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a pad from the element by name (e.g. &quot;src_%d&quot;). This version only
-retrieves request pads. The pad should be released with
+    <p>Retrieves a pad from the element by name (e.g. &quot;src_<span data-escaped-char>%</span>d&quot;). This version only<br />
+retrieves request pads. The pad should be released with<br />
 gst_element_release_request_pad().</p>
-<p>This method is slower than manually getting the pad template and calling
-gst_element_request_pad() if the pads should have a specific name (e.g.
-<!-- raw HTML omitted -->name<!-- raw HTML omitted --> is &quot;src_1&quot; instead of &quot;src_%u&quot;).</p>
-<p>Note that this function was introduced in GStreamer 1.20 in order to provide
-a better name to gst_element_get_request_pad(). Prior to 1.20, users
-should use gst_element_get_request_pad() which provides the same
+<p>This method is slower than manually getting the pad template and calling<br />
+gst_element_request_pad() if the pads should have a specific name (e.g.<br />
+<!-- raw HTML omitted -->name<!-- raw HTML omitted --> is &quot;src_1&quot; instead of &quot;src_<span data-escaped-char>%</span>u&quot;).</p>
+<p>Note that this function was introduced in GStreamer 1.20 in order to provide<br />
+a better name to gst_element_get_request_pad(). Prior to 1.20, users<br />
+should use gst_element_get_request_pad() which provides the same<br />
 functionality.</p>
 
 
@@ -7274,7 +7279,7 @@ functionality.</p>
       
       
         &mdash;
-        <div class='inline'><p>requested Gst::Pad if found,
+        <div class='inline'><p>requested Gst::Pad if found,<br />
 otherwise nil.  Release after usage.</p>
 </div>
       
@@ -7296,10 +7301,10 @@ otherwise nil.  Release after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sends a seek event to an element. See gst_event_new_seek() for the details of
-the parameters. The seek event is sent to the element using
+    <p>Sends a seek event to an element. See gst_event_new_seek() for the details of<br />
+the parameters. The seek event is sent to the element using<br />
 gst_element_send_event().</p>
-<p>MT safe.
+<p>MT safe.<br />
 preroll, which will emit %GST_MESSAGE_ASYNC_DONE.</p>
 
 
@@ -7448,18 +7453,18 @@ preroll, which will emit %GST_MESSAGE_ASYNC_DONE.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Simple API to perform a seek on the given element, meaning it just seeks
-to the given position relative to the start of the stream. For more complex
-operations like segment seeks (e.g. for looping) or changing the playback
-rate or seeking relative to the last configured playback segment you should
+    <p>Simple API to perform a seek on the given element, meaning it just seeks<br />
+to the given position relative to the start of the stream. For more complex<br />
+operations like segment seeks (e.g. for looping) or changing the playback<br />
+rate or seeking relative to the last configured playback segment you should<br />
 use gst_element_seek().</p>
-<p>In a completely prerolled PAUSED or PLAYING pipeline, seeking is always
-guaranteed to return true on a seekable media type or false when the media
+<p>In a completely prerolled PAUSED or PLAYING pipeline, seeking is always<br />
+guaranteed to return true on a seekable media type or false when the media<br />
 type is certainly not seekable (such as a live stream).</p>
-<p>Some elements allow for seeking in the READY state, in this
-case they will store the seek event and execute it when they are put to
-PAUSED. If the element supports seek in READY, it will always return true when
-it receives the event in the READY state.
+<p>Some elements allow for seeking in the READY state, in this<br />
+case they will store the seek event and execute it when they are put to<br />
+PAUSED. If the element supports seek in READY, it will always return true when<br />
+it receives the event in the READY state.<br />
 preroll, which will emit %GST_MESSAGE_ASYNC_DONE.</p>
 
 
@@ -7494,7 +7499,7 @@ preroll, which will emit %GST_MESSAGE_ASYNC_DONE.</p>
       
       
         &mdash;
-        <div class='inline'><p>seek options; playback applications will usually want to use
+        <div class='inline'><p>seek options; playback applications will usually want to use<br />
 GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_KEY_UNIT here</p>
 </div>
       
@@ -7510,9 +7515,9 @@ GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_KEY_UNIT here</p>
       
       
         &mdash;
-        <div class='inline'><p>position to seek to (relative to the start); if you are doing
-a seek in #GST_FORMAT_TIME this value is in nanoseconds -
-multiply with #GST_SECOND to convert seconds to nanoseconds or
+        <div class='inline'><p>position to seek to (relative to the start); if you are doing<br />
+a seek in #GST_FORMAT_TIME this value is in nanoseconds -<br />
+multiply with #GST_SECOND to convert seconds to nanoseconds or<br />
 with #GST_MSECOND to convert milliseconds to nanoseconds.</p>
 </div>
       
@@ -7552,12 +7557,12 @@ with #GST_MSECOND to convert milliseconds to nanoseconds.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sends an event to an element. If the element doesn't implement an
-event handler, the event will be pushed on a random linked sink pad for
+    <p>Sends an event to an element. If the element doesn't implement an<br />
+event handler, the event will be pushed on a random linked sink pad for<br />
 downstream events or a random linked source pad for upstream events.</p>
-<p>This function takes ownership of the provided event so you should
+<p>This function takes ownership of the provided event so you should<br />
 gst_event_ref() it if you want to reuse the event after this call.</p>
-<p>MT safe.
+<p>MT safe.<br />
 as flushing seeks and steps) will emit %GST_MESSAGE_ASYNC_DONE.</p>
 
 
@@ -7618,10 +7623,10 @@ as flushing seeks and steps) will emit %GST_MESSAGE_ASYNC_DONE.</p>
   <div class="discussion">
     <p>Sets the detailed information for a Gst::ElementClass.</p>
 <blockquote>
-<p>This function is for use in _class_init functions only.
-separated with slashes ('/'). See draft-klass.txt of the design docs
-for more details and common types. E.g: &quot;Sink/File&quot;
-E.g: &quot;Write stream to a file&quot;
+<p>This function is for use in _class_init functions only.<br />
+separated with slashes ('/'). See draft-klass.txt of the design docs<br />
+for more details and common types. E.g: &quot;Sink/File&quot;<br />
+E.g: &quot;Write stream to a file&quot;<br />
 multiple author metadata. E.g: &quot;Joe Bloggs &lt;joe.blogs at foo.com&gt;&quot;</p>
 </blockquote>
 
@@ -7726,13 +7731,13 @@ multiple author metadata. E.g: &quot;Joe Bloggs &lt;joe.blogs at foo.com&gt;&quo
 <blockquote>
 <p>This function is for use in _class_init functions only.</p>
 </blockquote>
-<p>Same as gst_element_class_set_metadata(), but <!-- raw HTML omitted -->longname<!-- raw HTML omitted -->, <!-- raw HTML omitted -->classification<!-- raw HTML omitted -->,
-<!-- raw HTML omitted -->description<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->author<!-- raw HTML omitted --> must be static strings or inlined strings, as
-they will not be copied. (GStreamer plugins will be made resident once
-loaded, so this function can be used even from dynamically loaded plugins.)
-separated with slashes ('/'). See draft-klass.txt of the design docs
-for more details and common types. E.g: &quot;Sink/File&quot;
-E.g: &quot;Write stream to a file&quot;
+<p>Same as gst_element_class_set_metadata(), but <!-- raw HTML omitted -->longname<!-- raw HTML omitted -->, <!-- raw HTML omitted -->classification<!-- raw HTML omitted -->,<br />
+<!-- raw HTML omitted -->description<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->author<!-- raw HTML omitted --> must be static strings or inlined strings, as<br />
+they will not be copied. (GStreamer plugins will be made resident once<br />
+loaded, so this function can be used even from dynamically loaded plugins.)<br />
+separated with slashes ('/'). See draft-klass.txt of the design docs<br />
+for more details and common types. E.g: &quot;Sink/File&quot;<br />
+E.g: &quot;Write stream to a file&quot;<br />
 multiple author metadata. E.g: &quot;Joe Bloggs &lt;joe.blogs at foo.com&gt;&quot;</p>
 
 
@@ -7832,9 +7837,9 @@ multiple author metadata. E.g: &quot;Joe Bloggs &lt;joe.blogs at foo.com&gt;&quo
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the start time of the element. The start time is the
+    <p>Returns the start time of the element. The start time is the<br />
 running time of the clock when this element was last put to PAUSED.</p>
-<p>Usually the start_time is managed by a toplevel element such as
+<p>Usually the start_time is managed by a toplevel element such as<br />
 Gst::Pipeline.</p>
 <p>MT safe.</p>
 
@@ -7875,14 +7880,14 @@ Gst::Pipeline.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the start time of an element. The start time of the element is the
-running time of the element when it last went to the PAUSED state. In READY
+    <p>Set the start time of an element. The start time of the element is the<br />
+running time of the element when it last went to the PAUSED state. In READY<br />
 or after a flushing seek, it is set to 0.</p>
-<p>Toplevel elements like Gst::Pipeline will manage the start_time and
-base_time on its children. Setting the start_time to #GST_CLOCK_TIME_NONE
-on such a toplevel element will disable the distribution of the base_time to
-the children and can be useful if the application manages the base_time
-itself, for example if you want to synchronize capture from multiple
+<p>Toplevel elements like Gst::Pipeline will manage the start_time and<br />
+base_time on its children. Setting the start_time to #GST_CLOCK_TIME_NONE<br />
+on such a toplevel element will disable the distribution of the base_time to<br />
+the children and can be useful if the application manages the base_time<br />
+itself, for example if you want to synchronize capture from multiple<br />
 pipelines, and you can also ensure that the pipelines have the same clock.</p>
 <p>MT safe.</p>
 
@@ -7938,17 +7943,17 @@ pipelines, and you can also ensure that the pipelines have the same clock.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the state of the element. This function will try to set the
-requested state by going through all the intermediary states and calling
+    <p>Sets the state of the element. This function will try to set the<br />
+requested state by going through all the intermediary states and calling<br />
 the class's state change function for each.</p>
-<p>This function can return #GST_STATE_CHANGE_ASYNC, in which case the
-element will perform the remainder of the state change asynchronously in
-another thread.
-An application can use gst_element_get_state() to wait for the completion
-of the state change or it can wait for a %GST_MESSAGE_ASYNC_DONE or
+<p>This function can return #GST_STATE_CHANGE_ASYNC, in which case the<br />
+element will perform the remainder of the state change asynchronously in<br />
+another thread.<br />
+An application can use gst_element_get_state() to wait for the completion<br />
+of the state change or it can wait for a %GST_MESSAGE_ASYNC_DONE or<br />
 %GST_MESSAGE_STATE_CHANGED on the bus.</p>
-<p>State changes to %GST_STATE_READY or %GST_STATE_NULL never return
-#GST_STATE_CHANGE_ASYNC.
+<p>State changes to %GST_STATE_READY or %GST_STATE_NULL never return<br />
+#GST_STATE_CHANGE_ASYNC.<br />
 MT safe.</p>
 
 
@@ -8037,8 +8042,8 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to change the state of the element to the same as its parent.
-If this function returns false, the state of element is undefined.
+    <p>Tries to change the state of the element to the same as its parent.<br />
+If this function returns false, the state of element is undefined.<br />
 MT safe.</p>
 
 
@@ -8078,9 +8083,9 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unlinks all source pads of the source element with all sink pads
+    <p>Unlinks all source pads of the source element with all sink pads<br />
 of the sink element to which they are linked.</p>
-<p>If the link has been made using gst_element_link(), it could have created an
+<p>If the link has been made using gst_element_link(), it could have created an<br />
 requestpad, which has to be released using gst_element_release_request_pad().</p>
 
 
@@ -8285,7 +8290,7 @@ requestpad, which has to be released using gst_element_release_request_pad().</p
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

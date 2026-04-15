@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::DeviceMonitor";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -406,9 +408,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -463,12 +467,12 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a filter for which Gst::Device will be monitored, any device that matches
+    <p>Adds a filter for which Gst::Device will be monitored, any device that matches<br />
 all these classes and the Gst::Caps will be returned.</p>
-<p>If this function is called multiple times to add more filters, each will be
-matched independently. That is, adding more filters will not further restrict
+<p>If this function is called multiple times to add more filters, each will be<br />
+matched independently. That is, adding more filters will not further restrict<br />
 what devices are matched.</p>
-<p>The Gst::Caps supported by the device as returned by gst_device_get_caps() are
+<p>The Gst::Caps supported by the device as returned by gst_device_get_caps() are<br />
 not intersected with caps filters added using this function.</p>
 <p>Filters must be added before the Gst::DeviceMonitor is started.</p>
 
@@ -522,7 +526,7 @@ not intersected with caps filters added using this function.</p>
       
       
         &mdash;
-        <div class='inline'><p>The id of the new filter or 0 if no provider matched the filter's
+        <div class='inline'><p>The id of the new filter or 0 if no provider matched the filter's<br />
 classes.</p>
 </div>
       
@@ -583,7 +587,7 @@ classes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a list of devices from all of the relevant monitors. This may actually
+    <p>Gets a list of devices from all of the relevant monitors. This may actually<br />
 probe the hardware if the monitor is not currently started.</p>
 
 
@@ -602,7 +606,7 @@ probe the hardware if the monitor is not currently started.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GList of
+        <div class='inline'><p>a #GList of<br />
 Gst::Device</p>
 </div>
       
@@ -643,7 +647,7 @@ Gst::Device</p>
       
       
         &mdash;
-        <div class='inline'><p>A list of device provider factory names that are currently being
+        <div class='inline'><p>A list of device provider factory names that are currently being<br />
 monitored by <!-- raw HTML omitted -->monitor<!-- raw HTML omitted --> or nil when nothing is being monitored.</p>
 </div>
       
@@ -665,7 +669,7 @@ monitored by <!-- raw HTML omitted -->monitor<!-- raw HTML omitted --> or nil wh
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes a filter from the Gst::DeviceMonitor using the id that was returned
+    <p>Removes a filter from the Gst::DeviceMonitor using the id that was returned<br />
 by gst_device_monitor_add_filter().</p>
 
 
@@ -829,7 +833,7 @@ by gst_device_monitor_add_filter().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get if <!-- raw HTML omitted -->monitor<!-- raw HTML omitted --> is currently showing all devices, even those from hidden
+    <p>Get if <!-- raw HTML omitted -->monitor<!-- raw HTML omitted --> is currently showing all devices, even those from hidden<br />
 providers.</p>
 
 
@@ -869,7 +873,7 @@ providers.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set if all devices should be visible, even those devices from hidden
+    <p>Set if all devices should be visible, even those devices from hidden<br />
 providers. Setting <!-- raw HTML omitted -->show_all<!-- raw HTML omitted --> to true might show some devices multiple times.</p>
 
 
@@ -924,8 +928,8 @@ providers. Setting <!-- raw HTML omitted -->show_all<!-- raw HTML omitted --> to
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Starts monitoring the devices, one this has succeeded, the
-%GST_MESSAGE_DEVICE_ADDED and %GST_MESSAGE_DEVICE_REMOVED messages
+    <p>Starts monitoring the devices, one this has succeeded, the<br />
+%GST_MESSAGE_DEVICE_ADDED and %GST_MESSAGE_DEVICE_REMOVED messages<br />
 will be emitted on the bus when the list of devices changes.</p>
 
 
@@ -944,7 +948,7 @@ will be emitted on the bus when the list of devices changes.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the device monitoring could be started, i.e. at least a
+        <div class='inline'><p>true if the device monitoring could be started, i.e. at least a<br />
 single device provider was started successfully.</p>
 </div>
       
@@ -997,7 +1001,7 @@ single device provider was started successfully.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

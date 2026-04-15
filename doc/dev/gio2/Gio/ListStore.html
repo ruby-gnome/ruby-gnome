@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::ListStore";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -462,6 +464,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -478,7 +481,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new GList::Store with items of type <!-- raw HTML omitted -->item_type<!-- raw HTML omitted -->. <!-- raw HTML omitted -->item_type<!-- raw HTML omitted -->
+    <p>Creates a new GList::Store with items of type <!-- raw HTML omitted -->item_type<!-- raw HTML omitted -->. <!-- raw HTML omitted -->item_type<!-- raw HTML omitted --><br />
 must be a subclass of #GObject.</p>
 
 
@@ -529,7 +532,7 @@ must be a subclass of #GObject.</p>
   <div class="discussion">
     <p>Appends <!-- raw HTML omitted -->item<!-- raw HTML omitted --> to <!-- raw HTML omitted -->store<!-- raw HTML omitted -->. <!-- raw HTML omitted -->item<!-- raw HTML omitted --> must be of type GList::Store:item-type.</p>
 <p>This function takes a ref on <!-- raw HTML omitted -->item<!-- raw HTML omitted -->.</p>
-<p>Use g_list_store_splice() to append multiple items at the same time
+<p>Use g_list_store_splice() to append multiple items at the same time<br />
 efficiently.</p>
 
 
@@ -584,11 +587,11 @@ efficiently.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks up the given <!-- raw HTML omitted -->item<!-- raw HTML omitted --> in the list store by looping over the items until
-the first occurrence of <!-- raw HTML omitted -->item<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->item<!-- raw HTML omitted --> was not found, then <!-- raw HTML omitted -->position<!-- raw HTML omitted --> will
+    <p>Looks up the given <!-- raw HTML omitted -->item<!-- raw HTML omitted --> in the list store by looping over the items until<br />
+the first occurrence of <!-- raw HTML omitted -->item<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->item<!-- raw HTML omitted --> was not found, then <!-- raw HTML omitted -->position<!-- raw HTML omitted --> will<br />
 not be set, and this method will return false.</p>
-<p>If you need to compare the two items with a custom comparison function, use
-g_list_store_find_with_equal_func() with a custom GEqual::Func instead.
+<p>If you need to compare the two items with a custom comparison function, use<br />
+g_list_store_find_with_equal_func() with a custom GEqual::Func instead.<br />
 set to the position where <!-- raw HTML omitted -->item<!-- raw HTML omitted --> occurred for the first time.</p>
 
 
@@ -662,12 +665,12 @@ set to the position where <!-- raw HTML omitted -->item<!-- raw HTML omitted -->
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks up the given <!-- raw HTML omitted -->item<!-- raw HTML omitted --> in the list store by looping over the items and
-comparing them with <!-- raw HTML omitted -->equal_func<!-- raw HTML omitted --> until the first occurrence of <!-- raw HTML omitted -->item<!-- raw HTML omitted --> which
-matches. If <!-- raw HTML omitted -->item<!-- raw HTML omitted --> was not found, then <!-- raw HTML omitted -->position<!-- raw HTML omitted --> will not be set, and this
+    <p>Looks up the given <!-- raw HTML omitted -->item<!-- raw HTML omitted --> in the list store by looping over the items and<br />
+comparing them with <!-- raw HTML omitted -->equal_func<!-- raw HTML omitted --> until the first occurrence of <!-- raw HTML omitted -->item<!-- raw HTML omitted --> which<br />
+matches. If <!-- raw HTML omitted -->item<!-- raw HTML omitted --> was not found, then <!-- raw HTML omitted -->position<!-- raw HTML omitted --> will not be set, and this<br />
 method will return false.</p>
 <p><!-- raw HTML omitted -->item<!-- raw HTML omitted --> is always passed as second parameter to <!-- raw HTML omitted -->equal_func<!-- raw HTML omitted -->.</p>
-<p>Since GLib 2.76 it is possible to pass <code>NULL</code> for <!-- raw HTML omitted -->item<!-- raw HTML omitted -->.
+<p>Since GLib 2.76 it is possible to pass <code>NULL</code> for <!-- raw HTML omitted -->item<!-- raw HTML omitted -->.<br />
 set to the position where <!-- raw HTML omitted -->item<!-- raw HTML omitted --> occurred for the first time.</p>
 
 
@@ -756,10 +759,10 @@ set to the position where <!-- raw HTML omitted -->item<!-- raw HTML omitted -->
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like g_list_store_find_with_equal_func() but with an additional <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->
+    <p>Like g_list_store_find_with_equal_func() but with an additional <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --><br />
 that is passed to <!-- raw HTML omitted -->equal_func<!-- raw HTML omitted -->.</p>
 <p><!-- raw HTML omitted -->item<!-- raw HTML omitted --> is always passed as second parameter to <!-- raw HTML omitted -->equal_func<!-- raw HTML omitted -->.</p>
-<p>Since GLib 2.76 it is possible to pass <code>NULL</code> for <!-- raw HTML omitted -->item<!-- raw HTML omitted -->.
+<p>Since GLib 2.76 it is possible to pass <code>NULL</code> for <!-- raw HTML omitted -->item<!-- raw HTML omitted -->.<br />
 set to the position where <!-- raw HTML omitted -->item<!-- raw HTML omitted --> occurred for the first time.</p>
 
 
@@ -863,11 +866,11 @@ set to the position where <!-- raw HTML omitted -->item<!-- raw HTML omitted -->
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts <!-- raw HTML omitted -->item<!-- raw HTML omitted --> into <!-- raw HTML omitted -->store<!-- raw HTML omitted --> at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->. <!-- raw HTML omitted -->item<!-- raw HTML omitted --> must be of type
-GList::Store:item-type or derived from it. <!-- raw HTML omitted -->position<!-- raw HTML omitted --> must be smaller
+    <p>Inserts <!-- raw HTML omitted -->item<!-- raw HTML omitted --> into <!-- raw HTML omitted -->store<!-- raw HTML omitted --> at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->. <!-- raw HTML omitted -->item<!-- raw HTML omitted --> must be of type<br />
+GList::Store:item-type or derived from it. <!-- raw HTML omitted -->position<!-- raw HTML omitted --> must be smaller<br />
 than the length of the list, or equal to it to append.</p>
 <p>This function takes a ref on <!-- raw HTML omitted -->item<!-- raw HTML omitted -->.</p>
-<p>Use g_list_store_splice() to insert multiple items at the same time
+<p>Use g_list_store_splice() to insert multiple items at the same time<br />
 efficiently.</p>
 
 
@@ -937,10 +940,10 @@ efficiently.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts <!-- raw HTML omitted -->item<!-- raw HTML omitted --> into <!-- raw HTML omitted -->store<!-- raw HTML omitted --> at a position to be determined by the
+    <p>Inserts <!-- raw HTML omitted -->item<!-- raw HTML omitted --> into <!-- raw HTML omitted -->store<!-- raw HTML omitted --> at a position to be determined by the<br />
 <!-- raw HTML omitted -->compare_func<!-- raw HTML omitted -->.</p>
-<p>The list must already be sorted before calling this function or the
-result is undefined.  Usually you would approach this by only ever
+<p>The list must already be sorted before calling this function or the<br />
+result is undefined.  Usually you would approach this by only ever<br />
 inserting items by way of this function.</p>
 <p>This function takes a ref on <!-- raw HTML omitted -->item<!-- raw HTML omitted -->.</p>
 
@@ -1030,7 +1033,7 @@ inserting items by way of this function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The type of items contained in this list store. Items must be
+    <p>The type of items contained in this list store. Items must be<br />
 subclasses of #GObject.</p>
 
 
@@ -1070,7 +1073,7 @@ subclasses of #GObject.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The type of items contained in this list store. Items must be
+    <p>The type of items contained in this list store. Items must be<br />
 subclasses of #GObject.</p>
 
 
@@ -1244,9 +1247,9 @@ subclasses of #GObject.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes the item from <!-- raw HTML omitted -->store<!-- raw HTML omitted --> that is at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->. <!-- raw HTML omitted -->position<!-- raw HTML omitted --> must be
+    <p>Removes the item from <!-- raw HTML omitted -->store<!-- raw HTML omitted --> that is at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->. <!-- raw HTML omitted -->position<!-- raw HTML omitted --> must be<br />
 smaller than the current length of the list.</p>
-<p>Use g_list_store_splice() to remove multiple items at the same time
+<p>Use g_list_store_splice() to remove multiple items at the same time<br />
 efficiently.</p>
 
 
@@ -1405,15 +1408,15 @@ efficiently.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Changes <!-- raw HTML omitted -->store<!-- raw HTML omitted --> by removing <!-- raw HTML omitted -->n_removals<!-- raw HTML omitted --> items and adding <!-- raw HTML omitted -->n_additions<!-- raw HTML omitted -->
-items to it. <!-- raw HTML omitted -->additions<!-- raw HTML omitted --> must contain <!-- raw HTML omitted -->n_additions<!-- raw HTML omitted --> items of type
+    <p>Changes <!-- raw HTML omitted -->store<!-- raw HTML omitted --> by removing <!-- raw HTML omitted -->n_removals<!-- raw HTML omitted --> items and adding <!-- raw HTML omitted -->n_additions<!-- raw HTML omitted --><br />
+items to it. <!-- raw HTML omitted -->additions<!-- raw HTML omitted --> must contain <!-- raw HTML omitted -->n_additions<!-- raw HTML omitted --> items of type<br />
 GList::Store:item-type.  nil is not permitted.</p>
-<p>This function is more efficient than g_list_store_insert() and
-g_list_store_remove(), because it only emits
+<p>This function is more efficient than g_list_store_insert() and<br />
+g_list_store_remove(), because it only emits<br />
 GList::Model::items-changed once for the change.</p>
 <p>This function takes a ref on each item in <!-- raw HTML omitted -->additions<!-- raw HTML omitted -->.</p>
-<p>The parameters <!-- raw HTML omitted -->position<!-- raw HTML omitted --> and <!-- raw HTML omitted -->n_removals<!-- raw HTML omitted --> must be correct (ie:
-<!-- raw HTML omitted -->position<!-- raw HTML omitted --> + <!-- raw HTML omitted -->n_removals<!-- raw HTML omitted --> must be less than or equal to the length of
+<p>The parameters <!-- raw HTML omitted -->position<!-- raw HTML omitted --> and <!-- raw HTML omitted -->n_removals<!-- raw HTML omitted --> must be correct (ie:<br />
+<!-- raw HTML omitted -->position<!-- raw HTML omitted --> + <!-- raw HTML omitted -->n_removals<!-- raw HTML omitted --> must be less than or equal to the length of<br />
 the list at the time this function is called).</p>
 
 
@@ -1509,7 +1512,7 @@ the list at the time this function is called).</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::DBusMessage";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,14 +95,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A type for representing D-Bus messages that can be sent or received
+    <p>A type for representing D-Bus messages that can be sent or received<br />
 on a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection].</p>
 
 
@@ -149,6 +151,7 @@ on a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection]
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1263,6 +1266,7 @@ on a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection]
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1357,9 +1361,9 @@ on a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection]
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Utility function to calculate how many bytes are needed to
-completely deserialize the D-Bus message stored at <!-- raw HTML omitted -->blob<!-- raw HTML omitted -->.
-<!-- raw HTML omitted -->blob<!-- raw HTML omitted --> contains invalid data or not enough data is available to
+    <p>Utility function to calculate how many bytes are needed to<br />
+completely deserialize the D-Bus message stored at <!-- raw HTML omitted -->blob<!-- raw HTML omitted -->.<br />
+<!-- raw HTML omitted -->blob<!-- raw HTML omitted --> contains invalid data or not enough data is available to<br />
 determine the size).</p>
 
 
@@ -1440,8 +1444,8 @@ determine the size).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Convenience to get the first item in the body of <!-- raw HTML omitted -->message<!-- raw HTML omitted -->.</p>
-<p>See [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusMessage.get_arg0_path] for returning object-path-typed
-arg0 values.
+<p>See [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusMessage.get_arg0_path] for returning object-path-typed<br />
+arg0 values.<br />
 <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not a string.</p>
 
 
@@ -1500,7 +1504,7 @@ arg0 values.
       
       
         &mdash;
-        <div class='inline'><p>The object path item or <code>NULL</code> if the first item in the
+        <div class='inline'><p>The object path item or <code>NULL</code> if the first item in the<br />
 body of <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not an object path.</p>
 </div>
       
@@ -1522,7 +1526,7 @@ body of <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not an obje
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the body of a message.
+    <p>Gets the body of a message.<br />
 empty. Do not free, it is owned by <!-- raw HTML omitted -->message<!-- raw HTML omitted -->.</p>
 
 
@@ -1562,8 +1566,8 @@ empty. Do not free, it is owned by <!-- raw HTML omitted -->message<!-- raw HTML
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the body <!-- raw HTML omitted -->message<!-- raw HTML omitted -->. As a side-effect the
-%G_DBUS_MESSAGE_HEADER_FIELD_SIGNATURE header field is set to the
+    <p>Sets the body <!-- raw HTML omitted -->message<!-- raw HTML omitted -->. As a side-effect the<br />
+%G_DBUS_MESSAGE_HEADER_FIELD_SIGNATURE header field is set to the<br />
 type string of <!-- raw HTML omitted -->body<!-- raw HTML omitted --> (or cleared if <!-- raw HTML omitted -->body<!-- raw HTML omitted --> is nil).</p>
 <p>If <!-- raw HTML omitted -->body<!-- raw HTML omitted --> is floating, <!-- raw HTML omitted -->message<!-- raw HTML omitted --> assumes ownership of <!-- raw HTML omitted -->body<!-- raw HTML omitted -->.</p>
 
@@ -1712,10 +1716,10 @@ type string of <!-- raw HTML omitted -->body<!-- raw HTML omitted --> (or cleare
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Copies <!-- raw HTML omitted -->message<!-- raw HTML omitted -->. The copy is a deep copy and the returned
-GDBus::Message is completely identical except that it is guaranteed
+    <p>Copies <!-- raw HTML omitted -->message<!-- raw HTML omitted -->. The copy is a deep copy and the returned<br />
+GDBus::Message is completely identical except that it is guaranteed<br />
 to not be locked.</p>
-<p>This operation can fail if e.g. <!-- raw HTML omitted -->message<!-- raw HTML omitted --> contains file descriptors
+<p>This operation can fail if e.g. <!-- raw HTML omitted -->message<!-- raw HTML omitted --> contains file descriptors<br />
 and the per-process or system-wide open files limit is reached.</p>
 
 
@@ -1734,7 +1738,7 @@ and the per-process or system-wide open files limit is reached.</p>
       
       
         &mdash;
-        <div class='inline'><p>A new GDBus::Message or nil if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set.
+        <div class='inline'><p>A new GDBus::Message or nil if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set.<br />
 Free with g_object_unref().</p>
 </div>
       
@@ -1981,7 +1985,7 @@ Free with g_object_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the flags to set on <!-- raw HTML omitted -->message<!-- raw HTML omitted -->.
+    <p>Sets the flags to set on <!-- raw HTML omitted -->message<!-- raw HTML omitted -->.<br />
 enumeration bitwise ORed together).</p>
 
 
@@ -2037,8 +2041,8 @@ enumeration bitwise ORed together).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets a header field on <!-- raw HTML omitted -->message<!-- raw HTML omitted -->.</p>
-<p>The caller is responsible for checking the type of the returned #GVariant
-matches what is expected.
+<p>The caller is responsible for checking the type of the returned #GVariant<br />
+matches what is expected.<br />
 otherwise. Do not free, it is owned by <!-- raw HTML omitted -->message<!-- raw HTML omitted -->.</p>
 
 
@@ -2097,8 +2101,8 @@ otherwise. Do not free, it is owned by <!-- raw HTML omitted -->message<!-- raw 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets an array of all header fields on <!-- raw HTML omitted -->message<!-- raw HTML omitted --> that are set.
-terminated by %G_DBUS_MESSAGE_HEADER_FIELD_INVALID.  Each element
+    <p>Gets an array of all header fields on <!-- raw HTML omitted -->message<!-- raw HTML omitted --> that are set.<br />
+terminated by %G_DBUS_MESSAGE_HEADER_FIELD_INVALID.  Each element<br />
 is a #guchar. Free with g_free().</p>
 
 
@@ -2266,8 +2270,8 @@ is a #guchar. Free with g_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is locked. To monitor changes to this
-value, conncet to the #GObject::notify signal to listen for changes
+    <p>Checks whether <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is locked. To monitor changes to this<br />
+value, conncet to the #GObject::notify signal to listen for changes<br />
 on the GDBus::Message:locked property.</p>
 
 
@@ -3073,8 +3077,8 @@ on the GDBus::Message:locked property.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Produces a human-readable multi-line description of <!-- raw HTML omitted -->message<!-- raw HTML omitted -->.</p>
-<p>The contents of the description has no ABI guarantees, the contents
-and formatting is subject to change at any time. Typical output
+<p>The contents of the description has no ABI guarantees, the contents<br />
+and formatting is subject to change at any time. Typical output<br />
 looks something like this:</p>
 <pre class="code ruby"><code class="ruby">Flags:   none
 Version: 0
@@ -3601,9 +3605,9 @@ UNIX File Descriptors:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Serializes <!-- raw HTML omitted -->message<!-- raw HTML omitted --> to a blob. The byte order returned by
-g_dbus_message_get_byte_order() will be used.
-valid binary D-Bus message of <!-- raw HTML omitted -->out_size<!-- raw HTML omitted --> bytes generated by <!-- raw HTML omitted -->message<!-- raw HTML omitted -->
+    <p>Serializes <!-- raw HTML omitted -->message<!-- raw HTML omitted --> to a blob. The byte order returned by<br />
+g_dbus_message_get_byte_order() will be used.<br />
+valid binary D-Bus message of <!-- raw HTML omitted -->out_size<!-- raw HTML omitted --> bytes generated by <!-- raw HTML omitted -->message<!-- raw HTML omitted --><br />
 or nil if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set. Free with g_free().</p>
 
 
@@ -3677,11 +3681,11 @@ or nil if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set. Free w
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not of type %G_DBUS_MESSAGE_TYPE_ERROR does
+    <p>If <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not of type %G_DBUS_MESSAGE_TYPE_ERROR does<br />
 nothing and returns false.</p>
-<p>Otherwise this method encodes the error in <!-- raw HTML omitted -->message<!-- raw HTML omitted --> as a #GError
-using g_dbus_error_set_dbus_error() using the information in the
-%G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field of <!-- raw HTML omitted -->message<!-- raw HTML omitted --> as
+<p>Otherwise this method encodes the error in <!-- raw HTML omitted -->message<!-- raw HTML omitted --> as a #GError<br />
+using g_dbus_error_set_dbus_error() using the information in the<br />
+%G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field of <!-- raw HTML omitted -->message<!-- raw HTML omitted --> as<br />
 well as the first string item in <!-- raw HTML omitted -->message<!-- raw HTML omitted -->'s body.</p>
 
 
@@ -3723,11 +3727,11 @@ well as the first string item in <!-- raw HTML omitted -->message<!-- raw HTML o
   <div class="discussion">
     <p>Gets the UNIX file descriptors associated with <!-- raw HTML omitted -->message<!-- raw HTML omitted -->, if any.</p>
 <p>This method is only available on UNIX.</p>
-<p>The file descriptors normally correspond to %G_VARIANT_TYPE_HANDLE
-values in the body of the message. For example,
-if g_variant_get_handle() returns 5, that is intended to be a reference
-to the file descriptor that can be accessed by
-<code>g_unix_fd_list_get (list, 5, ...)</code>.
+<p>The file descriptors normally correspond to %G_VARIANT_TYPE_HANDLE<br />
+values in the body of the message. For example,<br />
+if g_variant_get_handle() returns 5, that is intended to be a reference<br />
+to the file descriptor that can be accessed by<br />
+<code>g_unix_fd_list_get (list, 5, ...)</code>.<br />
 associated. Do not free, this object is owned by <!-- raw HTML omitted -->message<!-- raw HTML omitted -->.</p>
 
 
@@ -3767,14 +3771,14 @@ associated. Do not free, this object is owned by <!-- raw HTML omitted -->messag
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the UNIX file descriptors associated with <!-- raw HTML omitted -->message<!-- raw HTML omitted -->. As a
-side-effect the %G_DBUS_MESSAGE_HEADER_FIELD_NUM_UNIX_FDS header
-field is set to the number of fds in <!-- raw HTML omitted -->fd_list<!-- raw HTML omitted --> (or cleared if
+    <p>Sets the UNIX file descriptors associated with <!-- raw HTML omitted -->message<!-- raw HTML omitted -->. As a<br />
+side-effect the %G_DBUS_MESSAGE_HEADER_FIELD_NUM_UNIX_FDS header<br />
+field is set to the number of fds in <!-- raw HTML omitted -->fd_list<!-- raw HTML omitted --> (or cleared if<br />
 <!-- raw HTML omitted -->fd_list<!-- raw HTML omitted --> is nil).</p>
 <p>This method is only available on UNIX.</p>
-<p>When designing D-Bus APIs that are intended to be interoperable,
-please note that non-GDBus implementations of D-Bus can usually only
-access file descriptors if they are referenced by a value of type
+<p>When designing D-Bus APIs that are intended to be interoperable,<br />
+please note that non-GDBus implementations of D-Bus can usually only<br />
+access file descriptors if they are referenced by a value of type<br />
 %G_VARIANT_TYPE_HANDLE in the body of the message.</p>
 
 
@@ -3825,7 +3829,7 @@ access file descriptors if they are referenced by a value of type
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

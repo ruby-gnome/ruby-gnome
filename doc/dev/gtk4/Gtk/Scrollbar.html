@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Scrollbar";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -107,34 +109,34 @@
   <div class="discussion">
     <p>The <code>GtkScrollbar</code> widget is a horizontal or vertical scrollbar.</p>
 <p><img src="scrollbar.png" alt="An example GtkScrollbar" /></p>
-<p>Its position and movement are controlled by the adjustment that is passed to
-or created by [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scrollbar.new]. See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment] for more
-details. The [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:value] field sets the position of the
-thumb and must be between [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:lower] and
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:upper] - [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:page-size].
-The [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:page-size] represents the size of the visible
+<p>Its position and movement are controlled by the adjustment that is passed to<br />
+or created by [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scrollbar.new]. See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment] for more<br />
+details. The [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:value] field sets the position of the<br />
+thumb and must be between [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:lower] and<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:upper] - [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:page-size].<br />
+The [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:page-size] represents the size of the visible<br />
 scrollable area.</p>
-<p>The fields [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:step-increment] and
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:page-increment] fields are added to or subtracted
-from the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:value] when the user asks to move by a step
-(using e.g. the cursor arrow keys) or by a page (using e.g. the Page Down/Up
+<p>The fields [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:step-increment] and<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:page-increment] fields are added to or subtracted<br />
+from the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment:value] when the user asks to move by a step<br />
+(using e.g. the cursor arrow keys) or by a page (using e.g. the Page Down/Up<br />
 keys).</p>
-<h1>CSS nodes</h1>
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
 <pre class="code ruby"><code class="ruby">scrollbar
 ╰── range[.fine-tune]
     ╰── trough
         ╰── slider
 </code></pre>
-<p><code>GtkScrollbar</code> has a main CSS node with name scrollbar and a subnode for its
-contents. The main node gets the .horizontal or .vertical style classes applied,
+<p><code>GtkScrollbar</code> has a main CSS node with name scrollbar and a subnode for its<br />
+contents. The main node gets the .horizontal or .vertical style classes applied,<br />
 depending on the scrollbar's orientation.</p>
-<p>The range node gets the style class .fine-tune added when the scrollbar is
+<p>The range node gets the style class .fine-tune added when the scrollbar is<br />
 in 'fine-tuning' mode.</p>
-<p>Other style classes that may be added to scrollbars inside
-[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow] include the positional classes (.left, .right,
-.top, .bottom) and style classes related to overlay scrolling (.overlay-indicator,
+<p>Other style classes that may be added to scrollbars inside<br />
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow] include the positional classes (.left, .right,<br />
+.top, .bottom) and style classes related to overlay scrolling (.overlay-indicator,<br />
 .dragging, .hovering).</p>
-<h1>Accessibility</h1>
+<h1><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h1>
 <p><code>GtkScrollbar</code> uses the %GTK_ACCESSIBLE_ROLE_SCROLLBAR role.</p>
 
 
@@ -230,9 +232,11 @@ in 'fine-tuning' mode.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -293,7 +297,7 @@ in 'fine-tuning' mode.</p>
       
       
         &mdash;
-        <div class='inline'><p>the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment] to use, or nil
+        <div class='inline'><p>the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment] to use, or nil<br />
 to create a new adjustment.</p>
 </div>
       
@@ -425,7 +429,7 @@ to create a new adjustment.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

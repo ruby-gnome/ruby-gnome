@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::AccessibleText";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -86,10 +88,10 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>An interface for accessible objects containing formatted text.</p>
-<p>The <code>GtkAccessibleText</code> interfaces is meant to be implemented by accessible
+<p>The <code>GtkAccessibleText</code> interfaces is meant to be implemented by accessible<br />
 objects that have text formatted with attributes, or non-trivial text contents.</p>
-<p>You should use the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleProperty.LABEL] or the
-[enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleProperty.DESCRIPTION] properties for accessible
+<p>You should use the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleProperty.LABEL] or the<br />
+[enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleProperty.DESCRIPTION] properties for accessible<br />
 objects containing simple, unformatted text.</p>
 
 
@@ -321,6 +323,7 @@ objects containing simple, unformatted text.</p>
 
       
     </ul>
+    
   
 
 
@@ -386,12 +389,12 @@ objects containing simple, unformatted text.</p>
 <li>a name</li>
 <li>a value</li>
 </ul>
-<p>It is left to the implementation to determine the serialization format
+<p>It is left to the implementation to determine the serialization format<br />
 of the value to a string.</p>
-<p>GTK provides support for various text attribute names and values, but
+<p>GTK provides support for various text attribute names and values, but<br />
 implementations of this interface are free to add their own attributes.</p>
-<p>If this function returns true, <code>n_ranges</code> will be set to a value
-greater than or equal to one, <!-- raw HTML omitted -->ranges<!-- raw HTML omitted --> will be set to a newly
+<p>If this function returns true, <code>n_ranges</code> will be set to a value<br />
+greater than or equal to one, <!-- raw HTML omitted -->ranges<!-- raw HTML omitted --> will be set to a newly<br />
 allocated array of [struct#Gtk.AccessibleTextRange].</p>
 
 
@@ -441,7 +444,7 @@ allocated array of [struct#Gtk.AccessibleTextRange].</p>
       
       
         &mdash;
-        <div class='inline'><p>the ranges of the attributes
+        <div class='inline'><p>the ranges of the attributes<br />
 inside the accessible object</p>
 </div>
       
@@ -457,7 +460,7 @@ inside the accessible object</p>
       
       
         &mdash;
-        <div class='inline'><p>the
+        <div class='inline'><p>the<br />
 names of the attributes inside the accessible object</p>
 </div>
       
@@ -473,7 +476,7 @@ names of the attributes inside the accessible object</p>
       
       
         &mdash;
-        <div class='inline'><p>the
+        <div class='inline'><p>the<br />
 values of the attributes inside the accessible object</p>
 </div>
       
@@ -492,7 +495,7 @@ values of the attributes inside the accessible object</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the accessible object has at least an attribute,
+        <div class='inline'><p>true if the accessible object has at least an attribute,<br />
 and false otherwise</p>
 </div>
       
@@ -514,9 +517,9 @@ and false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieve the current contents of the accessible object within
+    <p>Retrieve the current contents of the accessible object within<br />
 the given range.</p>
-<p>If <!-- raw HTML omitted -->end<!-- raw HTML omitted --> is <code>G_MAXUINT</code>, the end of the range is the full content
+<p>If <!-- raw HTML omitted -->end<!-- raw HTML omitted --> is <code>G_MAXUINT</code>, the end of the range is the full content<br />
 of the accessible object.</p>
 
 
@@ -569,8 +572,8 @@ of the accessible object.</p>
       
       
         &mdash;
-        <div class='inline'><p>the requested slice of the contents of the
-accessible object, as UTF-8. Note that the slice does not have to
+        <div class='inline'><p>the requested slice of the contents of the<br />
+accessible object, as UTF-8. Note that the slice does not have to<br />
 be NUL-terminated</p>
 </div>
       
@@ -592,7 +595,7 @@ be NUL-terminated</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieve the current contents of the accessible object starting
+    <p>Retrieve the current contents of the accessible object starting<br />
 from the given offset, and using the given granularity.</p>
 <p>The <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> values contain the boundaries of the text.</p>
 
@@ -676,8 +679,8 @@ from the given offset, and using the given granularity.</p>
       
       
         &mdash;
-        <div class='inline'><p>the requested slice of the contents of the
-accessible object, as UTF-8. Note that the slice does not have to
+        <div class='inline'><p>the requested slice of the contents of the<br />
+accessible object, as UTF-8. Note that the slice does not have to<br />
 be NUL-terminated</p>
 </div>
       
@@ -705,9 +708,9 @@ be NUL-terminated</p>
 <li>a name</li>
 <li>a value</li>
 </ul>
-<p>It is left to the implementation to determine the serialization format
+<p>It is left to the implementation to determine the serialization format<br />
 of the value to a string.</p>
-<p>GTK provides support for various text attribute names and values, but
+<p>GTK provides support for various text attribute names and values, but<br />
 implementations of this interface are free to add their own attributes.</p>
 
 
@@ -727,7 +730,7 @@ implementations of this interface are free to add their own attributes.</p>
       
       
         &mdash;
-        <div class='inline'><p>the
+        <div class='inline'><p>the<br />
 names of the default attributes inside the accessible object</p>
 </div>
       
@@ -743,7 +746,7 @@ names of the default attributes inside the accessible object</p>
       
       
         &mdash;
-        <div class='inline'><p>the
+        <div class='inline'><p>the<br />
 values of the default attributes inside the accessible object</p>
 </div>
       
@@ -780,8 +783,8 @@ values of the default attributes inside the accessible object</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the selection ranges in the accessible object.</p>
-<p>If this function returns true, <code>n_ranges</code> will be set to a value
-greater than or equal to one, and <!-- raw HTML omitted -->ranges<!-- raw HTML omitted --> will be set to a newly
+<p>If this function returns true, <code>n_ranges</code> will be set to a value<br />
+greater than or equal to one, and <!-- raw HTML omitted -->ranges<!-- raw HTML omitted --> will be set to a newly<br />
 allocated array of [struct#Gtk.AccessibleTextRange].</p>
 
 
@@ -834,7 +837,7 @@ allocated array of [struct#Gtk.AccessibleTextRange].</p>
       
       
         &mdash;
-        <div class='inline'><p>true if there is at least a selection inside the
+        <div class='inline'><p>true if there is at least a selection inside the<br />
 accessible object, and false otherwise</p>
 </div>
       
@@ -857,8 +860,8 @@ accessible object, and false otherwise</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Updates the position of the caret.</p>
-<p>Implementations of the <code>GtkAccessibleText</code> interface should call this
-function every time the caret has moved, in order to notify assistive
+<p>Implementations of the <code>GtkAccessibleText</code> interface should call this<br />
+function every time the caret has moved, in order to notify assistive<br />
 technologies.</p>
 
 
@@ -895,11 +898,11 @@ technologies.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Notifies assistive technologies of a change in contents.</p>
-<p>Implementations of the <code>GtkAccessibleText</code> interface should call this
-function every time their contents change as the result of an operation,
+<p>Implementations of the <code>GtkAccessibleText</code> interface should call this<br />
+function every time their contents change as the result of an operation,<br />
 like an insertion or a removal.</p>
-<p>Note: If the change is a deletion, this function must be called <em>before</em>
-removing the contents, if it is an insertion, it must be called <em>after</em>
+<p>Note: If the change is a deletion, this function must be called <em>before</em><br />
+removing the contents, if it is an insertion, it must be called <em>after</em><br />
 inserting the new contents.</p>
 
 
@@ -985,8 +988,8 @@ inserting the new contents.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Updates the boundary of the selection.</p>
-<p>Implementations of the <code>GtkAccessibleText</code> interface should call this
-function every time the selection has moved, in order to notify assistive
+<p>Implementations of the <code>GtkAccessibleText</code> interface should call this<br />
+function every time the selection has moved, in order to notify assistive<br />
 technologies.</p>
 
 
@@ -1018,7 +1021,7 @@ technologies.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

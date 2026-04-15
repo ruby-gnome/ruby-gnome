@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Poppler::FormField";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -964,6 +966,7 @@
 
       
     </ul>
+    
   
 
 
@@ -983,7 +986,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the action (Poppler::Action) that shall be
+    <p>Retrieves the action (Poppler::Action) that shall be<br />
 performed when <!-- raw HTML omitted -->field<!-- raw HTML omitted --> is activated, or nil</p>
 
 
@@ -1002,7 +1005,7 @@ performed when <!-- raw HTML omitted -->field<!-- raw HTML omitted --> is activa
       
       
         &mdash;
-        <div class='inline'><p>the action to perform. The returned
+        <div class='inline'><p>the action to perform. The returned<br />
 object is owned by <!-- raw HTML omitted -->field<!-- raw HTML omitted --> and should not be freed</p>
 </div>
       
@@ -1024,8 +1027,8 @@ object is owned by <!-- raw HTML omitted -->field<!-- raw HTML omitted --> and s
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the alternate ui name of <!-- raw HTML omitted -->field<!-- raw HTML omitted -->. This name is also commonly
-used by pdf producers/readers to show it as a tooltip when <!-- raw HTML omitted -->field<!-- raw HTML omitted --> area
+    <p>Gets the alternate ui name of <!-- raw HTML omitted -->field<!-- raw HTML omitted -->. This name is also commonly<br />
+used by pdf producers/readers to show it as a tooltip when <!-- raw HTML omitted -->field<!-- raw HTML omitted --> area<br />
 is hovered by a pointing device (eg. mouse).</p>
 
 
@@ -1104,7 +1107,7 @@ is hovered by a pointing device (eg. mouse).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries a Poppler::FormField and returns its current state. Returns true if
+    <p>Queries a Poppler::FormField and returns its current state. Returns true if<br />
 <!-- raw HTML omitted -->field<!-- raw HTML omitted --> is pressed in and false if it is raised.</p>
 
 
@@ -1144,7 +1147,7 @@ is hovered by a pointing device (eg. mouse).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the status of <!-- raw HTML omitted -->field<!-- raw HTML omitted -->. Set to true if you want the Poppler::FormField
+    <p>Sets the status of <!-- raw HTML omitted -->field<!-- raw HTML omitted -->. Set to true if you want the Poppler::FormField<br />
 to be 'pressed in', and false to raise it.</p>
 
 
@@ -1820,7 +1823,7 @@ to be 'pressed in', and false to raise it.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the font size of <!-- raw HTML omitted -->field<!-- raw HTML omitted --></p>
-<p>WARNING: This function always returns 0. Contact the poppler
+<p>WARNING: This function always returns 0. Contact the poppler<br />
 mailing list if you're interested in implementing it properly</p>
 
 
@@ -1860,7 +1863,7 @@ mailing list if you're interested in implementing it properly</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the action (Poppler::Action) that shall be performed when
+    <p>Retrieves the action (Poppler::Action) that shall be performed when<br />
 an additional action is triggered on <!-- raw HTML omitted -->field<!-- raw HTML omitted -->, or nil.</p>
 
 
@@ -1898,7 +1901,7 @@ an additional action is triggered on <!-- raw HTML omitted -->field<!-- raw HTML
       
       
         &mdash;
-        <div class='inline'><p>the action to perform. The returned
+        <div class='inline'><p>the action to perform. The returned<br />
 object is owned by <!-- raw HTML omitted -->field<!-- raw HTML omitted --> and should not be freed.</p>
 </div>
       
@@ -1998,7 +2001,7 @@ object is owned by <!-- raw HTML omitted -->field<!-- raw HTML omitted --> and s
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the mapping name of <!-- raw HTML omitted -->field<!-- raw HTML omitted --> that is used when
+    <p>Gets the mapping name of <!-- raw HTML omitted -->field<!-- raw HTML omitted --> that is used when<br />
 exporting interactive form field data from the document</p>
 
 
@@ -2038,7 +2041,7 @@ exporting interactive form field data from the document</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the fully qualified name of <!-- raw HTML omitted -->field<!-- raw HTML omitted -->. It's constructed by concatenating
+    <p>Gets the fully qualified name of <!-- raw HTML omitted -->field<!-- raw HTML omitted -->. It's constructed by concatenating<br />
 the partial field names of the field and all of its ancestors.</p>
 
 
@@ -2216,7 +2219,7 @@ the partial field names of the field and all of its ancestors.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes validation of the cryptographic signature contained in <!-- raw HTML omitted -->signature_field<!-- raw HTML omitted -->.
+    <p>Finishes validation of the cryptographic signature contained in <!-- raw HTML omitted -->signature_field<!-- raw HTML omitted -->.<br />
 See poppler_form_field_signature_validate_async().</p>
 
 
@@ -2254,7 +2257,7 @@ See poppler_form_field_signature_validate_async().</p>
       
       
         &mdash;
-        <div class='inline'><p>a Poppler::SignatureInfo structure containing signature metadata and validation status
+        <div class='inline'><p>a Poppler::SignatureInfo structure containing signature metadata and validation status<br />
 Free the returned structure with poppler_signature_info_free().</p>
 </div>
       
@@ -2328,7 +2331,7 @@ Free the returned structure with poppler_signature_info_free().</p>
       
       
         &mdash;
-        <div class='inline'><p>a Poppler::SignatureInfo structure containing signature metadata and validation status
+        <div class='inline'><p>a Poppler::SignatureInfo structure containing signature metadata and validation status<br />
 Free the returned structure with poppler_signature_info_free().</p>
 </div>
       
@@ -2668,7 +2671,7 @@ Free the returned structure with poppler_signature_info_free().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

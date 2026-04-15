@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::Preset";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,33 +79,34 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>This interface offers methods to query and manipulate parameter preset sets.
-A preset is a bunch of property settings, together with meta data and a name.
-The name of a preset serves as key for subsequent method calls to manipulate
-single presets.
-All instances of one type will share the list of presets. The list is created
+    <p>This interface offers methods to query and manipulate parameter preset sets.<br />
+A preset is a bunch of property settings, together with meta data and a name.<br />
+The name of a preset serves as key for subsequent method calls to manipulate<br />
+single presets.<br />
+All instances of one type will share the list of presets. The list is created<br />
 on demand, if presets are not used, the list is not created.</p>
-<p>The interface comes with a default implementation that serves most plugins.
-Wrapper plugins will override most methods to implement support for the
-native preset format of those wrapped plugins.
-One method that is useful to be overridden is gst_preset_get_property_names().
-With that one can control which properties are saved and in which order.
-When implementing support for read-only presets, one should set the vmethods
-for gst_preset_save_preset() and gst_preset_delete_preset() to nil.
+<p>The interface comes with a default implementation that serves most plugins.<br />
+Wrapper plugins will override most methods to implement support for the<br />
+native preset format of those wrapped plugins.<br />
+One method that is useful to be overridden is gst_preset_get_property_names().<br />
+With that one can control which properties are saved and in which order.<br />
+When implementing support for read-only presets, one should set the vmethods<br />
+for gst_preset_save_preset() and gst_preset_delete_preset() to nil.<br />
 Applications can use gst_preset_is_editable() to check for that.</p>
-<p>The default implementation supports presets located in a system directory,
-application specific directory and in the users home directory. When getting
-a list of presets individual presets are read and overlaid in 1) system,
-2) application and 3) user order. Whenever an earlier entry is newer, the
-later entries will be updated. Since 1.8 you can also provide extra paths
-where to find presets through the GST_PRESET_PATH environment variable.
+<p>The default implementation supports presets located in a system directory,<br />
+application specific directory and in the users home directory. When getting<br />
+a list of presets individual presets are read and overlaid in 1) system,<br />
+2) application and 3) user order. Whenever an earlier entry is newer, the<br />
+later entries will be updated. Since 1.8 you can also provide extra paths<br />
+where to find presets through the GST_PRESET_PATH environment variable.<br />
 Presets found in those paths will be considered as &quot;app presets&quot;.</p>
 
 
@@ -336,6 +338,7 @@ Presets found in those paths will be considered as &quot;app presets&quot;.</p>
 
       
     </ul>
+    
   
 
 
@@ -413,8 +416,8 @@ Presets found in those paths will be considered as &quot;app presets&quot;.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the <!-- raw HTML omitted -->value<!-- raw HTML omitted --> for an existing meta data <!-- raw HTML omitted -->tag<!-- raw HTML omitted -->. Meta data <!-- raw HTML omitted -->tag<!-- raw HTML omitted --> names can be
-something like e.g. &quot;comment&quot;. Returned values need to be released when done.
+    <p>Gets the <!-- raw HTML omitted -->value<!-- raw HTML omitted --> for an existing meta data <!-- raw HTML omitted -->tag<!-- raw HTML omitted -->. Meta data <!-- raw HTML omitted -->tag<!-- raw HTML omitted --> names can be<br />
+something like e.g. &quot;comment&quot;. Returned values need to be released when done.<br />
 or no value for the given <!-- raw HTML omitted -->tag<!-- raw HTML omitted --></p>
 
 
@@ -657,7 +660,7 @@ or no value for the given <!-- raw HTML omitted -->tag<!-- raw HTML omitted --><
       
       
         &mdash;
-        <div class='inline'><p>an
+        <div class='inline'><p>an<br />
 array of property names which should be freed with g_strfreev() after use.</p>
 </div>
       
@@ -679,7 +682,7 @@ array of property names which should be freed with g_strfreev() after use.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Renames a preset. If there is already a preset by the <!-- raw HTML omitted -->new_name<!-- raw HTML omitted --> it will be
+    <p>Renames a preset. If there is already a preset by the <!-- raw HTML omitted -->new_name<!-- raw HTML omitted --> it will be<br />
 overwritten.</p>
 
 
@@ -753,7 +756,7 @@ overwritten.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Save the current object settings as a preset under the given name. If there
+    <p>Save the current object settings as a preset under the given name. If there<br />
 is already a preset by this <!-- raw HTML omitted -->name<!-- raw HTML omitted --> it will be overwritten.</p>
 
 
@@ -812,8 +815,8 @@ is already a preset by this <!-- raw HTML omitted -->name<!-- raw HTML omitted -
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a new <!-- raw HTML omitted -->value<!-- raw HTML omitted --> for an existing meta data item or adds a new item. Meta
-data <!-- raw HTML omitted -->tag<!-- raw HTML omitted --> names can be something like e.g. &quot;comment&quot;. Supplying nil for the
+    <p>Sets a new <!-- raw HTML omitted -->value<!-- raw HTML omitted --> for an existing meta data item or adds a new item. Meta<br />
+data <!-- raw HTML omitted -->tag<!-- raw HTML omitted --> names can be something like e.g. &quot;comment&quot;. Supplying nil for the<br />
 <!-- raw HTML omitted -->value<!-- raw HTML omitted --> will unset an existing value.</p>
 
 
@@ -898,7 +901,7 @@ data <!-- raw HTML omitted -->tag<!-- raw HTML omitted --> names can be somethin
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

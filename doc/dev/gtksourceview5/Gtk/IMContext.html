@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::IMContext";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -556,6 +558,7 @@
 
       
     </ul>
+    
   
 
 
@@ -576,8 +579,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Requests the platform to show an on-screen keyboard for user input.</p>
-<p>This method will return true if this request was actually performed
-to the platform, other environmental factors may result in an on-screen
+<p>This method will return true if this request was actually performed<br />
+to the platform, other environmental factors may result in an on-screen<br />
 keyboard effectively not showing up.</p>
 
 
@@ -637,8 +640,8 @@ keyboard effectively not showing up.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Set the client widget for the input context.</p>
-<p>This is the <code>GtkWidget</code> holding the input focus. This widget is
-used in order to correctly position status windows, and may
+<p>This is the <code>GtkWidget</code> holding the input focus. This widget is<br />
+used in order to correctly position status windows, and may<br />
 also be used for purposes internal to the input method.</p>
 
 
@@ -658,7 +661,7 @@ also be used for purposes internal to the input method.</p>
       
       
         &mdash;
-        <div class='inline'><p>the client widget. This may be nil to indicate
+        <div class='inline'><p>the client widget. This may be nil to indicate<br />
 that the previous client widget no longer exists.</p>
 </div>
       
@@ -694,7 +697,7 @@ that the previous client widget no longer exists.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Notify the input method that a change in cursor
+    <p>Notify the input method that a change in cursor<br />
 position has been made.</p>
 <p>The location is relative to the client widget.</p>
 
@@ -750,19 +753,19 @@ position has been made.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks the widget that the input context is attached to delete
-characters around the cursor position by emitting the
+    <p>Asks the widget that the input context is attached to delete<br />
+characters around the cursor position by emitting the<br />
 <code>::delete_surrounding</code> signal.</p>
-<p>Note that <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> and <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> are in characters not in bytes
+<p>Note that <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> and <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> are in characters not in bytes<br />
 which differs from the usage other places in <code>GtkIMContext</code>.</p>
-<p>In order to use this function, you should first call
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext.get_surrounding] to get the current context,
-and call this function immediately afterwards to make sure that you
-know what you are deleting. You should also account for the fact
-that even if the signal was handled, the input context might not
+<p>In order to use this function, you should first call<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext.get_surrounding] to get the current context,<br />
+and call this function immediately afterwards to make sure that you<br />
+know what you are deleting. You should also account for the fact<br />
+that even if the signal was handled, the input context might not<br />
 have deleted all the characters that were requested to be deleted.</p>
-<p>This function is used by an input method that wants to make
-substitutions in the existing text in response to new input.
+<p>This function is used by an input method that wants to make<br />
+substitutions in the existing text in response to new input.<br />
 It is not useful for applications.</p>
 
 
@@ -782,7 +785,7 @@ It is not useful for applications.</p>
       
       
         &mdash;
-        <div class='inline'><p>offset from cursor position in chars;
+        <div class='inline'><p>offset from cursor position in chars;<br />
 a negative value means start before the cursor.</p>
 </div>
       
@@ -837,8 +840,8 @@ a negative value means start before the cursor.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Allow an input method to forward key press and release events
-to another input method without necessarily having a <code>GdkEvent</code>
+    <p>Allow an input method to forward key press and release events<br />
+to another input method without necessarily having a <code>GdkEvent</code><br />
 available.</p>
 
 
@@ -987,9 +990,9 @@ available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Allow an input method to internally handle key press and release
+    <p>Allow an input method to internally handle key press and release<br />
 events.</p>
-<p>If this function returns true, then no further processing
+<p>If this function returns true, then no further processing<br />
 should be done for this key event.</p>
 
 
@@ -1048,9 +1051,9 @@ should be done for this key event.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Notify the input method that the widget to which this
+    <p>Notify the input method that the widget to which this<br />
 input context corresponds has gained focus.</p>
-<p>The input method may, for example, change the displayed
+<p>The input method may, for example, change the displayed<br />
 feedback to reflect this change.</p>
 
 
@@ -1086,9 +1089,9 @@ feedback to reflect this change.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Notify the input method that the widget to which this
+    <p>Notify the input method that the widget to which this<br />
 input context corresponds has lost focus.</p>
-<p>The input method may, for example, change the displayed
+<p>The input method may, for example, change the displayed<br />
 feedback or reset the contexts state to reflect this change.</p>
 
 
@@ -1124,7 +1127,7 @@ feedback or reset the contexts state to reflect this change.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieve the current preedit string for the input context,
+    <p>Retrieve the current preedit string for the input context,<br />
 and a list of attributes to apply to the string.</p>
 <p>This string should be displayed inserted at the insertion point.</p>
 
@@ -1145,7 +1148,7 @@ and a list of attributes to apply to the string.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the retrieved
+        <div class='inline'><p>location to store the retrieved<br />
 string. The string retrieved must be freed with g_free().</p>
 </div>
       
@@ -1161,8 +1164,8 @@ string. The string retrieved must be freed with g_free().</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the retrieved
-attribute list. When you are done with this list, you
+        <div class='inline'><p>location to store the retrieved<br />
+attribute list. When you are done with this list, you<br />
 must unreference it with [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.AttrList.unref].</p>
 </div>
       
@@ -1178,7 +1181,7 @@ must unreference it with [method<!-- raw HTML omitted -->Pango<!-- raw HTML omit
       
       
         &mdash;
-        <div class='inline'><p>location to store position of cursor
+        <div class='inline'><p>location to store position of cursor<br />
 (in characters) within the preedit string.</p>
 </div>
       
@@ -1215,16 +1218,16 @@ must unreference it with [method<!-- raw HTML omitted -->Pango<!-- raw HTML omit
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves context around the insertion point.</p>
-<p>Input methods typically want context in order to constrain input text
-based on existing text; this is important for languages such as Thai
+<p>Input methods typically want context in order to constrain input text<br />
+based on existing text; this is important for languages such as Thai<br />
 where only some sequences of characters are allowed.</p>
-<p>This function is implemented by emitting the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext::retrieve-surrounding] signal on the input method;
-in response to this signal, a widget should provide as much context as
-is available, up to an entire paragraph, by calling
+<p>This function is implemented by emitting the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext::retrieve-surrounding] signal on the input method;<br />
+in response to this signal, a widget should provide as much context as<br />
+is available, up to an entire paragraph, by calling<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext.set_surrounding].</p>
-<p>Note that there is no obligation for a widget to respond to the
-<code>::retrieve-surrounding</code> signal, so input methods must be prepared to
+<p>Note that there is no obligation for a widget to respond to the<br />
+<code>::retrieve-surrounding</code> signal, so input methods must be prepared to<br />
 function without context.</p>
 
 
@@ -1244,9 +1247,9 @@ function without context.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store a UTF-8 encoded
-string of text holding context around the insertion point.
-If the function returns true, then you must free the result
+        <div class='inline'><p>location to store a UTF-8 encoded<br />
+string of text holding context around the insertion point.<br />
+If the function returns true, then you must free the result<br />
 stored in this location with g_free().</p>
 </div>
       
@@ -1262,7 +1265,7 @@ stored in this location with g_free().</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store byte index of the insertion
+        <div class='inline'><p>location to store byte index of the insertion<br />
 cursor within <!-- raw HTML omitted -->text<!-- raw HTML omitted -->.</p>
 </div>
       
@@ -1281,7 +1284,7 @@ cursor within <!-- raw HTML omitted -->text<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if surrounding text was provided; in this case
+        <div class='inline'><p><code>TRUE</code> if surrounding text was provided; in this case<br />
 you must free the result stored in <code>text</code>.</p>
 </div>
       
@@ -1304,16 +1307,16 @@ you must free the result stored in <code>text</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves context around the insertion point.</p>
-<p>Input methods typically want context in order to constrain input
-text based on existing text; this is important for languages such
+<p>Input methods typically want context in order to constrain input<br />
+text based on existing text; this is important for languages such<br />
 as Thai where only some sequences of characters are allowed.</p>
-<p>This function is implemented by emitting the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext::retrieve-surrounding] signal on the input method;
-in response to this signal, a widget should provide as much context as
-is available, up to an entire paragraph, by calling
+<p>This function is implemented by emitting the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext::retrieve-surrounding] signal on the input method;<br />
+in response to this signal, a widget should provide as much context as<br />
+is available, up to an entire paragraph, by calling<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext.set_surrounding_with_selection].</p>
-<p>Note that there is no obligation for a widget to respond to the
-<code>::retrieve-surrounding</code> signal, so input methods must be prepared to
+<p>Note that there is no obligation for a widget to respond to the<br />
+<code>::retrieve-surrounding</code> signal, so input methods must be prepared to<br />
 function without context.</p>
 
 
@@ -1333,9 +1336,9 @@ function without context.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store a UTF-8 encoded
-string of text holding context around the insertion point.
-If the function returns true, then you must free the result
+        <div class='inline'><p>location to store a UTF-8 encoded<br />
+string of text holding context around the insertion point.<br />
+If the function returns true, then you must free the result<br />
 stored in this location with g_free().</p>
 </div>
       
@@ -1351,7 +1354,7 @@ stored in this location with g_free().</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store byte index of the insertion
+        <div class='inline'><p>location to store byte index of the insertion<br />
 cursor within <!-- raw HTML omitted -->text<!-- raw HTML omitted -->.</p>
 </div>
       
@@ -1367,7 +1370,7 @@ cursor within <!-- raw HTML omitted -->text<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store byte index of the selection
+        <div class='inline'><p>location to store byte index of the selection<br />
 bound within <!-- raw HTML omitted -->text<!-- raw HTML omitted --></p>
 </div>
       
@@ -1386,7 +1389,7 @@ bound within <!-- raw HTML omitted -->text<!-- raw HTML omitted --></p>
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if surrounding text was provided; in this case
+        <div class='inline'><p><code>TRUE</code> if surrounding text was provided; in this case<br />
 you must free the result stored in <code>text</code>.</p>
 </div>
       
@@ -1408,7 +1411,7 @@ you must free the result stored in <code>text</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Additional hints that allow input methods to fine-tune
+    <p>Additional hints that allow input methods to fine-tune<br />
 their behaviour.</p>
 
 
@@ -1448,7 +1451,7 @@ their behaviour.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Additional hints that allow input methods to fine-tune
+    <p>Additional hints that allow input methods to fine-tune<br />
 their behaviour.</p>
 
 
@@ -1517,7 +1520,7 @@ their behaviour.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The purpose of the text field that the `GtkIMContext is connected to.</p>
-<p>This property can be used by on-screen keyboards and other input
+<p>This property can be used by on-screen keyboards and other input<br />
 methods to adjust their behaviour.</p>
 
 
@@ -1558,7 +1561,7 @@ methods to adjust their behaviour.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The purpose of the text field that the `GtkIMContext is connected to.</p>
-<p>This property can be used by on-screen keyboards and other input
+<p>This property can be used by on-screen keyboards and other input<br />
 methods to adjust their behaviour.</p>
 
 
@@ -1626,7 +1629,7 @@ methods to adjust their behaviour.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Notify the input method that a change such as a change in cursor
+    <p>Notify the input method that a change such as a change in cursor<br />
 position has been made.</p>
 <p>This will typically cause the input method to clear the preedit state.</p>
 
@@ -1663,10 +1666,10 @@ position has been made.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets surrounding context around the insertion point and preedit
+    <p>Sets surrounding context around the insertion point and preedit<br />
 string.</p>
-<p>This function is expected to be called in response to the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext::retrieve-surrounding] signal, and will
+<p>This function is expected to be called in response to the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext::retrieve-surrounding] signal, and will<br />
 likely have no effect if called at other times.</p>
 
 
@@ -1686,7 +1689,7 @@ likely have no effect if called at other times.</p>
       
       
         &mdash;
-        <div class='inline'><p>text surrounding the insertion point, as UTF-8.
+        <div class='inline'><p>text surrounding the insertion point, as UTF-8.<br />
 the preedit string should not be included within <!-- raw HTML omitted -->text<!-- raw HTML omitted --></p>
 </div>
       
@@ -1752,9 +1755,9 @@ the preedit string should not be included within <!-- raw HTML omitted -->text<!
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets surrounding context around the insertion point and preedit
-string. This function is expected to be called in response to the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext::retrieve_surrounding] signal, and will likely
+    <p>Sets surrounding context around the insertion point and preedit<br />
+string. This function is expected to be called in response to the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext::retrieve_surrounding] signal, and will likely<br />
 have no effect if called at other times.</p>
 
 
@@ -1774,7 +1777,7 @@ have no effect if called at other times.</p>
       
       
         &mdash;
-        <div class='inline'><p>text surrounding the insertion point, as UTF-8.
+        <div class='inline'><p>text surrounding the insertion point, as UTF-8.<br />
 the preedit string should not be included within <!-- raw HTML omitted -->text<!-- raw HTML omitted --></p>
 </div>
       
@@ -1855,10 +1858,10 @@ the preedit string should not be included within <!-- raw HTML omitted -->text<!
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether the IM context should use the preedit string
+    <p>Sets whether the IM context should use the preedit string<br />
 to display feedback.</p>
-<p>If <!-- raw HTML omitted -->use_preedit<!-- raw HTML omitted --> is false (default is true), then the IM context
-may use some other method to display feedback, such as displaying
+<p>If <!-- raw HTML omitted -->use_preedit<!-- raw HTML omitted --> is false (default is true), then the IM context<br />
+may use some other method to display feedback, such as displaying<br />
 it in a child of the root window.</p>
 
 
@@ -1909,7 +1912,7 @@ it in a child of the root window.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::NetworkAddress";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -161,6 +163,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -333,6 +336,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -349,15 +353,15 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new GSocket::Connectable for connecting to the local host
-over a loopback connection to the given <!-- raw HTML omitted -->port<!-- raw HTML omitted -->. This is intended for
-use in connecting to local services which may be running on IPv4 or
+    <p>Creates a new GSocket::Connectable for connecting to the local host<br />
+over a loopback connection to the given <!-- raw HTML omitted -->port<!-- raw HTML omitted -->. This is intended for<br />
+use in connecting to local services which may be running on IPv4 or<br />
 IPv6.</p>
-<p>The connectable will return IPv4 and IPv6 loopback addresses,
-regardless of how the host resolves <code>localhost</code>. By contrast,
-g_network_address_new() will often only return an IPv4 address when
+<p>The connectable will return IPv4 and IPv6 loopback addresses,<br />
+regardless of how the host resolves <code>localhost</code>. By contrast,<br />
+g_network_address_new() will often only return an IPv4 address when<br />
 resolving <code>localhost</code>, and an IPv6 address for <code>localhost6</code>.</p>
-<p>g_network_address_get_hostname() will always return <code>localhost</code> for
+<p>g_network_address_get_hostname() will always return <code>localhost</code> for<br />
 a GNetwork::Address created with this constructor.</p>
 
 
@@ -406,22 +410,22 @@ a GNetwork::Address created with this constructor.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new GSocket::Connectable for connecting to the given
-<!-- raw HTML omitted -->hostname<!-- raw HTML omitted --> and <!-- raw HTML omitted -->port<!-- raw HTML omitted -->. May fail and return nil in case
+    <p>Creates a new GSocket::Connectable for connecting to the given<br />
+<!-- raw HTML omitted -->hostname<!-- raw HTML omitted --> and <!-- raw HTML omitted -->port<!-- raw HTML omitted -->. May fail and return nil in case<br />
 parsing <!-- raw HTML omitted -->host_and_port<!-- raw HTML omitted --> fails.</p>
-<p><!-- raw HTML omitted -->host_and_port<!-- raw HTML omitted --> may be in any of a number of recognised formats; an IPv6
-address, an IPv4 address, or a domain name (in which case a DNS
-lookup is performed). Quoting with [] is supported for all address
-types. A port override may be specified in the usual way with a
+<p><!-- raw HTML omitted -->host_and_port<!-- raw HTML omitted --> may be in any of a number of recognised formats; an IPv6<br />
+address, an IPv4 address, or a domain name (in which case a DNS<br />
+lookup is performed). Quoting with [] is supported for all address<br />
+types. A port override may be specified in the usual way with a<br />
 colon.</p>
-<p>If no port is specified in <!-- raw HTML omitted -->host_and_port<!-- raw HTML omitted --> then <!-- raw HTML omitted -->default_port<!-- raw HTML omitted --> will be
+<p>If no port is specified in <!-- raw HTML omitted -->host_and_port<!-- raw HTML omitted --> then <!-- raw HTML omitted -->default_port<!-- raw HTML omitted --> will be<br />
 used as the port number to connect to.</p>
-<p>In general, <!-- raw HTML omitted -->host_and_port<!-- raw HTML omitted --> is expected to be provided by the user
-(allowing them to give the hostname, and a port override if necessary)
+<p>In general, <!-- raw HTML omitted -->host_and_port<!-- raw HTML omitted --> is expected to be provided by the user<br />
+(allowing them to give the hostname, and a port override if necessary)<br />
 and <!-- raw HTML omitted -->default_port<!-- raw HTML omitted --> is expected to be provided by the application.</p>
-<p>(The port component of <!-- raw HTML omitted -->host_and_port<!-- raw HTML omitted --> can also be specified as a
-service name rather than as a numeric port, but this functionality
-is deprecated, because it depends on the contents of /etc/services,
+<p>(The port component of <!-- raw HTML omitted -->host_and_port<!-- raw HTML omitted --> can also be specified as a<br />
+service name rather than as a numeric port, but this functionality<br />
+is deprecated, because it depends on the contents of /etc/services,<br />
 which is generally quite sparse on platforms other than Linux.)</p>
 
 
@@ -474,7 +478,7 @@ which is generally quite sparse on platforms other than Linux.)</p>
       
       
         &mdash;
-        <div class='inline'><p>the new
+        <div class='inline'><p>the new<br />
 GNetwork::Address, or nil on error</p>
 </div>
       
@@ -496,10 +500,10 @@ GNetwork::Address, or nil on error</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new GSocket::Connectable for connecting to the given
+    <p>Creates a new GSocket::Connectable for connecting to the given<br />
 <!-- raw HTML omitted -->uri<!-- raw HTML omitted -->. May fail and return nil in case parsing <!-- raw HTML omitted -->uri<!-- raw HTML omitted --> fails.</p>
-<p>Using this rather than g_network_address_new() or
-g_network_address_parse() allows GSocket::Client to determine
+<p>Using this rather than g_network_address_new() or<br />
+g_network_address_parse() allows GSocket::Client to determine<br />
 when to use application-specific proxy protocols.</p>
 
 
@@ -552,7 +556,7 @@ when to use application-specific proxy protocols.</p>
       
       
         &mdash;
-        <div class='inline'><p>the new
+        <div class='inline'><p>the new<br />
 GNetwork::Address, or nil on error</p>
 </div>
       
@@ -894,7 +898,7 @@ GNetwork::Address, or nil on error</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

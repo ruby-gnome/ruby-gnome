@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::BufferedInputStream";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -355,9 +357,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -369,6 +373,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="FilterInputStream.html" title="Gio::FilterInputStream (class)">FilterInputStream</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="FilterInputStream.html#base_stream-instance_method" title="Gio::FilterInputStream#base_stream (method)">#base_stream</a></span>, <span class='object_link'><a href="FilterInputStream.html#base_stream=-instance_method" title="Gio::FilterInputStream#base_stream= (method)">#base_stream=</a></span>, <span class='object_link'><a href="FilterInputStream.html#close_base_stream-instance_method" title="Gio::FilterInputStream#close_base_stream (method)">#close_base_stream</a></span>, <span class='object_link'><a href="FilterInputStream.html#close_base_stream=-instance_method" title="Gio::FilterInputStream#close_base_stream= (method)">#close_base_stream=</a></span>, <span class='object_link'><a href="FilterInputStream.html#close_base_stream%3F-instance_method" title="Gio::FilterInputStream#close_base_stream? (method)">#close_base_stream?</a></span></p>
 
+  
   
   
   
@@ -393,7 +398,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new GBuffered::InputStream from the given <!-- raw HTML omitted -->base_stream<!-- raw HTML omitted -->,
+    <p>Creates a new GBuffered::InputStream from the given <!-- raw HTML omitted -->base_stream<!-- raw HTML omitted -->,<br />
 with a buffer set to <!-- raw HTML omitted -->size<!-- raw HTML omitted -->.</p>
 
 
@@ -602,23 +607,23 @@ with a buffer set to <!-- raw HTML omitted -->size<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to read <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the buffer.
+    <p>Tries to read <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the buffer.<br />
 Will block during this read.</p>
-<p>If <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is zero, returns zero and does nothing. A value of <!-- raw HTML omitted -->count<!-- raw HTML omitted -->
+<p>If <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is zero, returns zero and does nothing. A value of <!-- raw HTML omitted -->count<!-- raw HTML omitted --><br />
 larger than %G_MAXSSIZE will cause a %G_IO_ERROR_INVALID_ARGUMENT error.</p>
-<p>On success, the number of bytes read into the buffer is returned.
-It is not an error if this is not the same as the requested size, as it
-can happen e.g. near the end of a file. Zero is returned on end of file
+<p>On success, the number of bytes read into the buffer is returned.<br />
+It is not an error if this is not the same as the requested size, as it<br />
+can happen e.g. near the end of a file. Zero is returned on end of file<br />
 (or if <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is zero),  but never otherwise.</p>
-<p>If <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is -1 then the attempted read size is equal to the number of
+<p>If <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is -1 then the attempted read size is equal to the number of<br />
 bytes that are required to fill the buffer.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an
-operation was partially finished when the operation was cancelled the
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an<br />
+operation was partially finished when the operation was cancelled the<br />
 partial result will be returned, without an error.</p>
 <p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.</p>
-<p>For the asynchronous, non-blocking, version of this function, see
+<p>For the asynchronous, non-blocking, version of this function, see<br />
 g_buffered_input_stream_fill_async().</p>
 
 
@@ -671,7 +676,7 @@ g_buffered_input_stream_fill_async().</p>
       
       
         &mdash;
-        <div class='inline'><p>the number of bytes read into <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->'s buffer, up to <!-- raw HTML omitted -->count<!-- raw HTML omitted -->,
+        <div class='inline'><p>the number of bytes read into <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->'s buffer, up to <!-- raw HTML omitted -->count<!-- raw HTML omitted -->,<br />
 or -1 on error.</p>
 </div>
       
@@ -693,10 +698,10 @@ or -1 on error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reads data into <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->'s buffer asynchronously, up to <!-- raw HTML omitted -->count<!-- raw HTML omitted --> size.
-<!-- raw HTML omitted -->io_priority<!-- raw HTML omitted --> can be used to prioritize reads. For the synchronous
+    <p>Reads data into <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->'s buffer asynchronously, up to <!-- raw HTML omitted -->count<!-- raw HTML omitted --> size.<br />
+<!-- raw HTML omitted -->io_priority<!-- raw HTML omitted --> can be used to prioritize reads. For the synchronous<br />
 version of this function, see g_buffered_input_stream_fill().</p>
-<p>If <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is -1 then the attempted read size is equal to the number
+<p>If <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is -1 then the attempted read size is equal to the number<br />
 of bytes that are required to fill the buffer.</p>
 
 
@@ -869,7 +874,7 @@ of bytes that are required to fill the buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Peeks in the buffer, copying data of size <!-- raw HTML omitted -->count<!-- raw HTML omitted --> into <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->,
+    <p>Peeks in the buffer, copying data of size <!-- raw HTML omitted -->count<!-- raw HTML omitted --> into <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->,<br />
 offset <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bytes.</p>
 
 
@@ -889,7 +894,7 @@ offset <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bytes.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to
+        <div class='inline'><p>a pointer to<br />
 an allocated chunk of memory</p>
 </div>
       
@@ -959,8 +964,8 @@ an allocated chunk of memory</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the buffer with the currently available bytes. The returned
-buffer must not be modified and will become invalid when reading from
+    <p>Returns the buffer with the currently available bytes. The returned<br />
+buffer must not be modified and will become invalid when reading from<br />
 the stream or filling the buffer.</p>
 
 
@@ -1019,14 +1024,14 @@ the stream or filling the buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to read a single byte from the stream or the buffer. Will block
+    <p>Tries to read a single byte from the stream or the buffer. Will block<br />
 during this read.</p>
-<p>On success, the byte read from the stream is returned. On end of stream
+<p>On success, the byte read from the stream is returned. On end of stream<br />
 -1 is returned but it's not an exceptional error and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is not set.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an
-operation was partially finished when the operation was cancelled the
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an<br />
+operation was partially finished when the operation was cancelled the<br />
 partial result will be returned, without an error.</p>
 <p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.</p>
 
@@ -1082,7 +1087,7 @@ partial result will be returned, without an error.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

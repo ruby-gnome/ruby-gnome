@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Settings";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,34 +95,35 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkSettings</code> provides a mechanism to share global settings between
+    <p><code>GtkSettings</code> provides a mechanism to share global settings between<br />
 applications.</p>
-<p>On the X window system, this sharing is realized by an
-<a href="http://www.freedesktop.org/wiki/Specifications/xsettings-spec">XSettings</a>
-manager that is usually part of the desktop environment, along with
+<p>On the X window system, this sharing is realized by an<br />
+<a href="http://www.freedesktop.org/wiki/Specifications/xsettings-spec">XSettings</a><br />
+manager that is usually part of the desktop environment, along with<br />
 utilities that let the user change these settings.</p>
-<p>On Wayland, the settings are obtained either via a settings portal,
+<p>On Wayland, the settings are obtained either via a settings portal,<br />
 or by reading desktop settings from [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings].</p>
 <p>On macOS, the settings are obtained from <code>NSUserDefaults</code>.</p>
-<p>In the absence of these sharing mechanisms, GTK reads default values for
-settings from <code>settings.ini</code> files in <code>/etc/gtk-4.0</code>, <code>$XDG_CONFIG_DIRS/gtk-4.0</code>
-and <code>$XDG_CONFIG_HOME/gtk-4.0</code>. These files must be valid key files (see
-<code>GKeyFile</code>), and have a section called Settings. Themes can also provide
-default values for settings by installing a <code>settings.ini</code> file
+<p>In the absence of these sharing mechanisms, GTK reads default values for<br />
+settings from <code>settings.ini</code> files in <code>/etc/gtk-4.0</code>, <code>$XDG_CONFIG_DIRS/gtk-4.0</code><br />
+and <code>$XDG_CONFIG_HOME/gtk-4.0</code>. These files must be valid key files (see<br />
+<code>GKeyFile</code>), and have a section called Settings. Themes can also provide<br />
+default values for settings by installing a <code>settings.ini</code> file<br />
 next to their <code>gtk.css</code> file.</p>
-<p>Applications can override system-wide settings by setting the property
-of the <code>GtkSettings</code> object with g_object_set(). This should be restricted
-to special cases though; <code>GtkSettings</code> are not meant as an application
+<p>Applications can override system-wide settings by setting the property<br />
+of the <code>GtkSettings</code> object with g_object_set(). This should be restricted<br />
+to special cases though; <code>GtkSettings</code> are not meant as an application<br />
 configuration facility.</p>
-<p>There is one <code>GtkSettings</code> instance per display. It can be obtained with
-[func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings.get_for_display], but in many cases, it is more
+<p>There is one <code>GtkSettings</code> instance per display. It can be obtained with<br />
+[func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings.get_for_display], but in many cases, it is more<br />
 convenient to use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.get_settings].</p>
 
 
@@ -192,6 +194,7 @@ convenient to use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.W
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -2570,6 +2573,7 @@ convenient to use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.W
 
       
     </ul>
+    
   
 
 
@@ -2589,7 +2593,7 @@ convenient to use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.W
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the <code>GtkSettings</code> object for the default display, creating
+    <p>Gets the <code>GtkSettings</code> object for the default display, creating<br />
 it if necessary.</p>
 <p>See [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings.get_for_display].</p>
 
@@ -2609,7 +2613,7 @@ it if necessary.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GtkSettings</code> object. If there is
+        <div class='inline'><p>a <code>GtkSettings</code> object. If there is<br />
 no default display, then returns nil.</p>
 </div>
       
@@ -2801,9 +2805,9 @@ no default display, then returns nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls the direction of the sort indicators in sorted list and tree
+    <p>Controls the direction of the sort indicators in sorted list and tree<br />
 views.</p>
-<p>By default an arrow pointing down means the column is sorted
+<p>By default an arrow pointing down means the column is sorted<br />
 in ascending order. When set to true, this order will be inverted.</p>
 
 
@@ -2871,9 +2875,9 @@ in ascending order. When set to true, this order will be inverted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls the direction of the sort indicators in sorted list and tree
+    <p>Controls the direction of the sort indicators in sorted list and tree<br />
 views.</p>
-<p>By default an arrow pointing down means the column is sorted
+<p>By default an arrow pointing down means the column is sorted<br />
 in ascending order. When set to true, this order will be inverted.</p>
 
 
@@ -2914,15 +2918,15 @@ in ascending order. When set to true, this order will be inverted.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the application prefers to use a dark theme.</p>
-<p>If a GTK theme includes a dark variant, it will be used
+<p>If a GTK theme includes a dark variant, it will be used<br />
 instead of the configured theme.</p>
-<p>Some applications benefit from minimizing the amount of light
-pollution that interferes with the content. Good candidates for
-dark themes are photo and video editors that make the actual
-content get all the attention and minimize the distraction of
+<p>Some applications benefit from minimizing the amount of light<br />
+pollution that interferes with the content. Good candidates for<br />
+dark themes are photo and video editors that make the actual<br />
+content get all the attention and minimize the distraction of<br />
 the chrome.</p>
-<p>Dark themes should not be used for documents, where large spaces
-are white/light and the dark chrome creates too much contrast
+<p>Dark themes should not be used for documents, where large spaces<br />
+are white/light and the dark chrome creates too much contrast<br />
 (web browser, text editor...).</p>
 
 
@@ -2991,15 +2995,15 @@ are white/light and the dark chrome creates too much contrast
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the application prefers to use a dark theme.</p>
-<p>If a GTK theme includes a dark variant, it will be used
+<p>If a GTK theme includes a dark variant, it will be used<br />
 instead of the configured theme.</p>
-<p>Some applications benefit from minimizing the amount of light
-pollution that interferes with the content. Good candidates for
-dark themes are photo and video editors that make the actual
-content get all the attention and minimize the distraction of
+<p>Some applications benefit from minimizing the amount of light<br />
+pollution that interferes with the content. Good candidates for<br />
+dark themes are photo and video editors that make the actual<br />
+content get all the attention and minimize the distraction of<br />
 the chrome.</p>
-<p>Dark themes should not be used for documents, where large spaces
-are white/light and the dark chrome creates too much contrast
+<p>Dark themes should not be used for documents, where large spaces<br />
+are white/light and the dark chrome creates too much contrast<br />
 (web browser, text editor...).</p>
 
 
@@ -3146,7 +3150,7 @@ are white/light and the dark chrome creates too much contrast
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the cursor should blink.</p>
-<p>Also see the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-cursor-blink-timeout] setting,
+<p>Also see the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-cursor-blink-timeout] setting,<br />
 which allows more flexible control over cursor blinking.</p>
 
 
@@ -3215,7 +3219,7 @@ which allows more flexible control over cursor blinking.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the cursor should blink.</p>
-<p>Also see the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-cursor-blink-timeout] setting,
+<p>Also see the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-cursor-blink-timeout] setting,<br />
 which allows more flexible control over cursor blinking.</p>
 
 
@@ -3363,7 +3367,7 @@ which allows more flexible control over cursor blinking.</p>
   <div class="discussion">
     <p>Time after which the cursor stops blinking, in seconds.</p>
 <p>The timer is reset after each user interaction.</p>
-<p>Setting this to zero has the same effect as setting
+<p>Setting this to zero has the same effect as setting<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-cursor-blink] to false.</p>
 
 
@@ -3405,7 +3409,7 @@ which allows more flexible control over cursor blinking.</p>
   <div class="discussion">
     <p>Time after which the cursor stops blinking, in seconds.</p>
 <p>The timer is reset after each user interaction.</p>
-<p>Setting this to zero has the same effect as setting
+<p>Setting this to zero has the same effect as setting<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-cursor-blink] to false.</p>
 
 
@@ -3689,21 +3693,21 @@ which allows more flexible control over cursor blinking.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines which buttons should be put in the
-titlebar of client-side decorated windows, and whether they
+    <p>Determines which buttons should be put in the<br />
+titlebar of client-side decorated windows, and whether they<br />
 should be placed on the left or right.</p>
-<p>The format of the string is button names, separated by commas.
-A colon separates the buttons that should appear on the left
-from those on the right. Recognized button names are minimize,
-maximize, close, icon (the window icon) and menu (a menu button
+<p>The format of the string is button names, separated by commas.<br />
+A colon separates the buttons that should appear on the left<br />
+from those on the right. Recognized button names are minimize,<br />
+maximize, close, icon (the window icon) and menu (a menu button<br />
 for the fallback app menu).</p>
-<p>For example, &quot;menu:minimize,maximize,close&quot; specifies a menu
+<p>For example, &quot;menu:minimize,maximize,close&quot; specifies a menu<br />
 on the left, and minimize, maximize and close buttons on the right.</p>
-<p>Note that buttons will only be shown when they are meaningful.
-E.g. a menu button only appears when the desktop shell does not
-show the app menu, and a close button only appears on a window
+<p>Note that buttons will only be shown when they are meaningful.<br />
+E.g. a menu button only appears when the desktop shell does not<br />
+show the app menu, and a close button only appears on a window<br />
 that can be closed.</p>
-<p>Also note that the setting can be overridden with the
+<p>Also note that the setting can be overridden with the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.HeaderBar:decoration-layout] property.</p>
 
 
@@ -3743,21 +3747,21 @@ that can be closed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines which buttons should be put in the
-titlebar of client-side decorated windows, and whether they
+    <p>Determines which buttons should be put in the<br />
+titlebar of client-side decorated windows, and whether they<br />
 should be placed on the left or right.</p>
-<p>The format of the string is button names, separated by commas.
-A colon separates the buttons that should appear on the left
-from those on the right. Recognized button names are minimize,
-maximize, close, icon (the window icon) and menu (a menu button
+<p>The format of the string is button names, separated by commas.<br />
+A colon separates the buttons that should appear on the left<br />
+from those on the right. Recognized button names are minimize,<br />
+maximize, close, icon (the window icon) and menu (a menu button<br />
 for the fallback app menu).</p>
-<p>For example, &quot;menu:minimize,maximize,close&quot; specifies a menu
+<p>For example, &quot;menu:minimize,maximize,close&quot; specifies a menu<br />
 on the left, and minimize, maximize and close buttons on the right.</p>
-<p>Note that buttons will only be shown when they are meaningful.
-E.g. a menu button only appears when the desktop shell does not
-show the app menu, and a close button only appears on a window
+<p>Note that buttons will only be shown when they are meaningful.<br />
+E.g. a menu button only appears when the desktop shell does not<br />
+show the app menu, and a close button only appears on a window<br />
 that can be closed.</p>
-<p>Also note that the setting can be overridden with the
+<p>Also note that the setting can be overridden with the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.HeaderBar:decoration-layout] property.</p>
 
 
@@ -3825,10 +3829,10 @@ that can be closed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether builtin GTK dialogs such as the file chooser, the
-color chooser or the font chooser will use a header bar at
+    <p>Whether builtin GTK dialogs such as the file chooser, the<br />
+color chooser or the font chooser will use a header bar at<br />
 the top to show action widgets, or an action area at the bottom.</p>
-<p>This setting does not affect custom dialogs using <code>GtkDialog</code>
+<p>This setting does not affect custom dialogs using <code>GtkDialog</code><br />
 directly, or message dialogs.</p>
 
 
@@ -3896,10 +3900,10 @@ directly, or message dialogs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether builtin GTK dialogs such as the file chooser, the
-color chooser or the font chooser will use a header bar at
+    <p>Whether builtin GTK dialogs such as the file chooser, the<br />
+color chooser or the font chooser will use a header bar at<br />
 the top to show action widgets, or an action area at the bottom.</p>
-<p>This setting does not affect custom dialogs using <code>GtkDialog</code>
+<p>This setting does not affect custom dialogs using <code>GtkDialog</code><br />
 directly, or message dialogs.</p>
 
 
@@ -4045,7 +4049,7 @@ directly, or message dialogs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The maximum distance allowed between two clicks for them to be considered
+    <p>The maximum distance allowed between two clicks for them to be considered<br />
 a double click, in pixels.</p>
 
 
@@ -4085,7 +4089,7 @@ a double click, in pixels.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The maximum distance allowed between two clicks for them to be considered
+    <p>The maximum distance allowed between two clicks for them to be considered<br />
 a double click, in pixels.</p>
 
 
@@ -4153,7 +4157,7 @@ a double click, in pixels.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The maximum time to allow between two clicks for them to be considered
+    <p>The maximum time to allow between two clicks for them to be considered<br />
 a double click, in milliseconds.</p>
 
 
@@ -4193,7 +4197,7 @@ a double click, in milliseconds.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The maximum time to allow between two clicks for them to be considered
+    <p>The maximum time to allow between two clicks for them to be considered<br />
 a double click, in milliseconds.</p>
 
 
@@ -4261,7 +4265,7 @@ a double click, in milliseconds.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether menu items should have visible accelerators which can be
+    <p>Whether menu items should have visible accelerators which can be<br />
 activated.</p>
 
 
@@ -4329,7 +4333,7 @@ activated.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether menu items should have visible accelerators which can be
+    <p>Whether menu items should have visible accelerators which can be<br />
 activated.</p>
 
 
@@ -4476,9 +4480,9 @@ activated.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to play any event sounds at all.</p>
-<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a>
+<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a><br />
 for more information on event sounds and sound themes.</p>
-<p>GTK itself does not support event sounds, you have to use a loadable
+<p>GTK itself does not support event sounds, you have to use a loadable<br />
 module like the one that comes with libcanberra.</p>
 
 
@@ -4547,9 +4551,9 @@ module like the one that comes with libcanberra.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to play any event sounds at all.</p>
-<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a>
+<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a><br />
 for more information on event sounds and sound themes.</p>
-<p>GTK itself does not support event sounds, you have to use a loadable
+<p>GTK itself does not support event sounds, you have to use a loadable<br />
 module like the one that comes with libcanberra.</p>
 
 
@@ -4590,9 +4594,9 @@ module like the one that comes with libcanberra.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to play event sounds as feedback to user input.</p>
-<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a>
+<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a><br />
 for more information on event sounds and sound themes.</p>
-<p>GTK itself does not support event sounds, you have to use a loadable
+<p>GTK itself does not support event sounds, you have to use a loadable<br />
 module like the one that comes with libcanberra.</p>
 
 
@@ -4661,9 +4665,9 @@ module like the one that comes with libcanberra.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to play event sounds as feedback to user input.</p>
-<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a>
+<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a><br />
 for more information on event sounds and sound themes.</p>
-<p>GTK itself does not support event sounds, you have to use a loadable
+<p>GTK itself does not support event sounds, you have to use a loadable<br />
 module like the one that comes with libcanberra.</p>
 
 
@@ -4703,7 +4707,7 @@ module like the one that comes with libcanberra.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether a middle click on a mouse should paste the
+    <p>Whether a middle click on a mouse should paste the<br />
 'PRIMARY' clipboard content at the cursor location.</p>
 
 
@@ -4771,7 +4775,7 @@ module like the one that comes with libcanberra.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether a middle click on a mouse should paste the
+    <p>Whether a middle click on a mouse should paste the<br />
 'PRIMARY' clipboard content at the cursor location.</p>
 
 
@@ -4811,9 +4815,9 @@ module like the one that comes with libcanberra.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>How long to show the last input character in hidden
+    <p>How long to show the last input character in hidden<br />
 entries.</p>
-<p>This value is in milliseconds. 0 disables showing the
+<p>This value is in milliseconds. 0 disables showing the<br />
 last char. 600 is a good value for enabling it.</p>
 
 
@@ -4853,9 +4857,9 @@ last char. 600 is a good value for enabling it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>How long to show the last input character in hidden
+    <p>How long to show the last input character in hidden<br />
 entries.</p>
-<p>This value is in milliseconds. 0 disables showing the
+<p>This value is in milliseconds. 0 disables showing the<br />
 last char. 600 is a good value for enabling it.</p>
 
 
@@ -5029,10 +5033,10 @@ last char. 600 is a good value for enabling it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>When true, keyboard navigation and other input-related errors
+    <p>When true, keyboard navigation and other input-related errors<br />
 will cause a beep.</p>
-<p>Since the error bell is implemented using gdk_surface_beep(), the
-windowing system may offer ways to configure the error bell in many
+<p>Since the error bell is implemented using gdk_surface_beep(), the<br />
+windowing system may offer ways to configure the error bell in many<br />
 ways, such as flashing the window or similar visual effects.</p>
 
 
@@ -5100,10 +5104,10 @@ ways, such as flashing the window or similar visual effects.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>When true, keyboard navigation and other input-related errors
+    <p>When true, keyboard navigation and other input-related errors<br />
 will cause a beep.</p>
-<p>Since the error bell is implemented using gdk_surface_beep(), the
-windowing system may offer ways to configure the error bell in many
+<p>Since the error bell is implemented using gdk_surface_beep(), the<br />
+windowing system may offer ways to configure the error bell in many<br />
 ways, such as flashing the window or similar visual effects.</p>
 
 
@@ -5358,7 +5362,7 @@ ways, such as flashing the window or similar visual effects.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether hinting should be applied to font metrics.</p>
-<p>Note that this also turns off subpixel positioning of glyphs,
+<p>Note that this also turns off subpixel positioning of glyphs,<br />
 since it conflicts with metrics hinting.</p>
 
 
@@ -5427,7 +5431,7 @@ since it conflicts with metrics hinting.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether hinting should be applied to font metrics.</p>
-<p>Note that this also turns off subpixel positioning of glyphs,
+<p>Note that this also turns off subpixel positioning of glyphs,<br />
 since it conflicts with metrics hinting.</p>
 
 
@@ -5468,7 +5472,7 @@ since it conflicts with metrics hinting.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Name of the icon theme to use.</p>
-<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconTheme] for details about how
+<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconTheme] for details about how<br />
 GTK handles icon themes.</p>
 
 
@@ -5509,7 +5513,7 @@ GTK handles icon themes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Name of the icon theme to use.</p>
-<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconTheme] for details about how
+<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconTheme] for details about how<br />
 GTK handles icon themes.</p>
 
 
@@ -5578,9 +5582,9 @@ GTK handles icon themes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Which IM (input method) module should be used by default.</p>
-<p>This is the input method that will be used if the user has not
-explicitly chosen another input method from the IM context menu.
-This also can be a colon-separated list of input methods, which GTK
+<p>This is the input method that will be used if the user has not<br />
+explicitly chosen another input method from the IM context menu.<br />
+This also can be a colon-separated list of input methods, which GTK<br />
 will try in turn until it finds one available on the system.</p>
 <p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext].</p>
 
@@ -5622,9 +5626,9 @@ will try in turn until it finds one available on the system.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Which IM (input method) module should be used by default.</p>
-<p>This is the input method that will be used if the user has not
-explicitly chosen another input method from the IM context menu.
-This also can be a colon-separated list of input methods, which GTK
+<p>This is the input method that will be used if the user has not<br />
+explicitly chosen another input method from the IM context menu.<br />
+This also can be a colon-separated list of input methods, which GTK<br />
 will try in turn until it finds one available on the system.</p>
 <p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext].</p>
 
@@ -5693,7 +5697,7 @@ will try in turn until it finds one available on the system.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether GTK should make sure that text can be navigated with
+    <p>Whether GTK should make sure that text can be navigated with<br />
 a caret, even if it is not editable.</p>
 <p>This is useful when using a screen reader.</p>
 
@@ -5762,7 +5766,7 @@ a caret, even if it is not editable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether GTK should make sure that text can be navigated with
+    <p>Whether GTK should make sure that text can be navigated with<br />
 a caret, even if it is not editable.</p>
 <p>This is useful when using a screen reader.</p>
 
@@ -5803,7 +5807,7 @@ a caret, even if it is not editable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether to select the contents of a selectable
+    <p>Whether to select the contents of a selectable<br />
 label when it is focused.</p>
 
 
@@ -5871,7 +5875,7 @@ label when it is focused.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether to select the contents of a selectable
+    <p>Whether to select the contents of a selectable<br />
 label when it is focused.</p>
 
 
@@ -6020,7 +6024,7 @@ label when it is focused.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether scrolled windows may use overlaid scrolling indicators.</p>
-<p>If this is set to false, scrolled windows will have permanent
+<p>If this is set to false, scrolled windows will have permanent<br />
 scrollbars.</p>
 
 
@@ -6089,7 +6093,7 @@ scrollbars.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether scrolled windows may use overlaid scrolling indicators.</p>
-<p>If this is set to false, scrolled windows will have permanent
+<p>If this is set to false, scrolled windows will have permanent<br />
 scrollbars.</p>
 
 
@@ -6129,13 +6133,13 @@ scrollbars.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If the value of this setting is true, clicking the primary button in a
-<code>GtkRange</code> trough will move the slider, and hence set the range’s value, to
+    <p>If the value of this setting is true, clicking the primary button in a<br />
+<code>GtkRange</code> trough will move the slider, and hence set the range’s value, to<br />
 the point that you clicked.</p>
-<p>If it is false, a primary click will cause the slider/value to move
+<p>If it is false, a primary click will cause the slider/value to move<br />
 by the range’s page-size towards the point clicked.</p>
-<p>Whichever action you choose for the primary button, the other action will
-be available by holding Shift and primary-clicking, or clicking the middle
+<p>Whichever action you choose for the primary button, the other action will<br />
+be available by holding Shift and primary-clicking, or clicking the middle<br />
 mouse button.</p>
 
 
@@ -6203,13 +6207,13 @@ mouse button.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If the value of this setting is true, clicking the primary button in a
-<code>GtkRange</code> trough will move the slider, and hence set the range’s value, to
+    <p>If the value of this setting is true, clicking the primary button in a<br />
+<code>GtkRange</code> trough will move the slider, and hence set the range’s value, to<br />
 the point that you clicked.</p>
-<p>If it is false, a primary click will cause the slider/value to move
+<p>If it is false, a primary click will cause the slider/value to move<br />
 by the range’s page-size towards the point clicked.</p>
-<p>Whichever action you choose for the primary button, the other action will
-be available by holding Shift and primary-clicking, or clicking the middle
+<p>Whichever action you choose for the primary button, the other action will<br />
+be available by holding Shift and primary-clicking, or clicking the middle<br />
 mouse button.</p>
 
 
@@ -6249,9 +6253,9 @@ mouse button.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A comma-separated list of print backends to use in the print
+    <p>A comma-separated list of print backends to use in the print<br />
 dialog.</p>
-<p>Available print backends depend on the GTK installation,
+<p>Available print backends depend on the GTK installation,<br />
 and may include &quot;file&quot;, &quot;cups&quot;, &quot;lpr&quot; or &quot;papi&quot;.</p>
 
 
@@ -6291,9 +6295,9 @@ and may include &quot;file&quot;, &quot;cups&quot;, &quot;lpr&quot; or &quot;pap
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A comma-separated list of print backends to use in the print
+    <p>A comma-separated list of print backends to use in the print<br />
 dialog.</p>
-<p>Available print backends depend on the GTK installation,
+<p>Available print backends depend on the GTK installation,<br />
 and may include &quot;file&quot;, &quot;cups&quot;, &quot;lpr&quot; or &quot;papi&quot;.</p>
 
 
@@ -6362,12 +6366,12 @@ and may include &quot;file&quot;, &quot;cups&quot;, &quot;lpr&quot; or &quot;pap
 </h3><div class="docstring">
   <div class="discussion">
     <p>A command to run for displaying the print preview.</p>
-<p>The command should contain a <code>%f</code> placeholder, which will get
-replaced by the path to the pdf file. The command may also
-contain a <code>%s</code> placeholder, which will get replaced by the
-path to a file containing the print settings in the format
+<p>The command should contain a <code>%f</code> placeholder, which will get<br />
+replaced by the path to the pdf file. The command may also<br />
+contain a <code>%s</code> placeholder, which will get replaced by the<br />
+path to a file containing the print settings in the format<br />
 produced by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintSettings.to_file].</p>
-<p>The preview application is responsible for removing the pdf
+<p>The preview application is responsible for removing the pdf<br />
 file and the print settings file when it is done.</p>
 
 
@@ -6408,12 +6412,12 @@ file and the print settings file when it is done.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>A command to run for displaying the print preview.</p>
-<p>The command should contain a <code>%f</code> placeholder, which will get
-replaced by the path to the pdf file. The command may also
-contain a <code>%s</code> placeholder, which will get replaced by the
-path to a file containing the print settings in the format
+<p>The command should contain a <code>%f</code> placeholder, which will get<br />
+replaced by the path to the pdf file. The command may also<br />
+contain a <code>%s</code> placeholder, which will get replaced by the<br />
+path to a file containing the print settings in the format<br />
 produced by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintSettings.to_file].</p>
-<p>The preview application is responsible for removing the pdf
+<p>The preview application is responsible for removing the pdf<br />
 file and the print settings file when it is done.</p>
 
 
@@ -6481,7 +6485,7 @@ file and the print settings file when it is done.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether GTK should keep track of items inside the recently used
+    <p>Whether GTK should keep track of items inside the recently used<br />
 resources list.</p>
 <p>If set to false, the list will always be empty.</p>
 
@@ -6550,7 +6554,7 @@ resources list.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether GTK should keep track of items inside the recently used
+    <p>Whether GTK should keep track of items inside the recently used<br />
 resources list.</p>
 <p>If set to false, the list will always be empty.</p>
 
@@ -6591,10 +6595,10 @@ resources list.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The maximum age, in days, of the items inside the recently used
+    <p>The maximum age, in days, of the items inside the recently used<br />
 resources list.</p>
-<p>Items older than this setting will be excised from the list.
-If set to 0, the list will always be empty; if set to -1, no
+<p>Items older than this setting will be excised from the list.<br />
+If set to 0, the list will always be empty; if set to -1, no<br />
 item will be removed.</p>
 
 
@@ -6634,10 +6638,10 @@ item will be removed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The maximum age, in days, of the items inside the recently used
+    <p>The maximum age, in days, of the items inside the recently used<br />
 resources list.</p>
-<p>Items older than this setting will be excised from the list.
-If set to 0, the list will always be empty; if set to -1, no
+<p>Items older than this setting will be excised from the list.<br />
+If set to 0, the list will always be empty; if set to -1, no<br />
 item will be removed.</p>
 
 
@@ -6705,7 +6709,7 @@ item will be removed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set to true if the desktop environment is displaying
+    <p>Set to true if the desktop environment is displaying<br />
 the app menu, false if the app should display it itself.</p>
 
 
@@ -6773,7 +6777,7 @@ the app menu, false if the app should display it itself.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set to true if the desktop environment is displaying
+    <p>Set to true if the desktop environment is displaying<br />
 the app menu, false if the app should display it itself.</p>
 
 
@@ -6813,7 +6817,7 @@ the app menu, false if the app should display it itself.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set to true if the desktop environment is displaying
+    <p>Set to true if the desktop environment is displaying<br />
 the desktop folder, false if not.</p>
 
 
@@ -6881,7 +6885,7 @@ the desktop folder, false if not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set to true if the desktop environment is displaying
+    <p>Set to true if the desktop environment is displaying<br />
 the desktop folder, false if not.</p>
 
 
@@ -6921,7 +6925,7 @@ the desktop folder, false if not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set to true if the desktop environment is displaying
+    <p>Set to true if the desktop environment is displaying<br />
 the menubar, false if the app should display it itself.</p>
 
 
@@ -6989,7 +6993,7 @@ the menubar, false if the app should display it itself.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set to true if the desktop environment is displaying
+    <p>Set to true if the desktop environment is displaying<br />
 the menubar, false if the app should display it itself.</p>
 
 
@@ -7136,9 +7140,9 @@ the menubar, false if the app should display it itself.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The XDG sound theme to use for event sounds.</p>
-<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a>
+<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a><br />
 for more information on event sounds and sound themes.</p>
-<p>GTK itself does not support event sounds, you have to use
+<p>GTK itself does not support event sounds, you have to use<br />
 a loadable module like the one that comes with libcanberra.</p>
 
 
@@ -7179,9 +7183,9 @@ a loadable module like the one that comes with libcanberra.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The XDG sound theme to use for event sounds.</p>
-<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a>
+<p>See the <a href="http://www.freedesktop.org/wiki/Specifications/sound-theme-spec">Sound Theme Specifications</a><br />
 for more information on event sounds and sound themes.</p>
-<p>GTK itself does not support event sounds, you have to use
+<p>GTK itself does not support event sounds, you have to use<br />
 a loadable module like the one that comes with libcanberra.</p>
 
 
@@ -7249,7 +7253,7 @@ a loadable module like the one that comes with libcanberra.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether two cursors should be displayed for mixed left-to-right and
+    <p>Whether two cursors should be displayed for mixed left-to-right and<br />
 right-to-left text.</p>
 
 
@@ -7317,7 +7321,7 @@ right-to-left text.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether two cursors should be displayed for mixed left-to-right and
+    <p>Whether two cursors should be displayed for mixed left-to-right and<br />
 right-to-left text.</p>
 
 
@@ -7358,7 +7362,7 @@ right-to-left text.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Name of the theme to load.</p>
-<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CssProvider] for details about how
+<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CssProvider] for details about how<br />
 GTK finds the CSS stylesheet for a theme.</p>
 
 
@@ -7399,7 +7403,7 @@ GTK finds the CSS stylesheet for a theme.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Name of the theme to load.</p>
-<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CssProvider] for details about how
+<p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CssProvider] for details about how<br />
 GTK finds the CSS stylesheet for a theme.</p>
 
 
@@ -7467,9 +7471,9 @@ GTK finds the CSS stylesheet for a theme.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines the action to take when a double-click
+    <p>Determines the action to take when a double-click<br />
 occurs on the titlebar of client-side decorated windows.</p>
-<p>Recognized actions are minimize, toggle-maximize, menu, lower
+<p>Recognized actions are minimize, toggle-maximize, menu, lower<br />
 or none.</p>
 
 
@@ -7509,9 +7513,9 @@ or none.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines the action to take when a double-click
+    <p>Determines the action to take when a double-click<br />
 occurs on the titlebar of client-side decorated windows.</p>
-<p>Recognized actions are minimize, toggle-maximize, menu, lower
+<p>Recognized actions are minimize, toggle-maximize, menu, lower<br />
 or none.</p>
 
 
@@ -7579,9 +7583,9 @@ or none.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines the action to take when a middle-click
+    <p>Determines the action to take when a middle-click<br />
 occurs on the titlebar of client-side decorated windows.</p>
-<p>Recognized actions are minimize, toggle-maximize, menu, lower
+<p>Recognized actions are minimize, toggle-maximize, menu, lower<br />
 or none.</p>
 
 
@@ -7621,9 +7625,9 @@ or none.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines the action to take when a middle-click
+    <p>Determines the action to take when a middle-click<br />
 occurs on the titlebar of client-side decorated windows.</p>
-<p>Recognized actions are minimize, toggle-maximize, menu, lower
+<p>Recognized actions are minimize, toggle-maximize, menu, lower<br />
 or none.</p>
 
 
@@ -7691,9 +7695,9 @@ or none.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines the action to take when a right-click
+    <p>Determines the action to take when a right-click<br />
 occurs on the titlebar of client-side decorated windows.</p>
-<p>Recognized actions are minimize, toggle-maximize, menu, lower
+<p>Recognized actions are minimize, toggle-maximize, menu, lower<br />
 or none.</p>
 
 
@@ -7733,9 +7737,9 @@ or none.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines the action to take when a right-click
+    <p>Determines the action to take when a right-click<br />
 occurs on the titlebar of client-side decorated windows.</p>
-<p>Recognized actions are minimize, toggle-maximize, menu, lower
+<p>Recognized actions are minimize, toggle-maximize, menu, lower<br />
 or none.</p>
 
 
@@ -8128,7 +8132,7 @@ or none.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>What degree of font hinting to use.</p>
-<p>The possible vaues are hintnone, hintslight,
+<p>The possible vaues are hintnone, hintslight,<br />
 hintmedium, hintfull.</p>
 
 
@@ -8169,7 +8173,7 @@ hintmedium, hintfull.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>What degree of font hinting to use.</p>
-<p>The possible vaues are hintnone, hintslight,
+<p>The possible vaues are hintnone, hintslight,<br />
 hintmedium, hintfull.</p>
 
 
@@ -8239,7 +8243,7 @@ hintmedium, hintfull.</p>
   <div class="discussion">
     <p>The type of subpixel antialiasing to use.</p>
 <p>The possible values are none, rgb, bgr, vrgb, vbgr.</p>
-<p>Note that GSK does not support subpixel antialiasing, and this
+<p>Note that GSK does not support subpixel antialiasing, and this<br />
 setting has no effect on font rendering in GTK.</p>
 
 
@@ -8281,7 +8285,7 @@ setting has no effect on font rendering in GTK.</p>
   <div class="discussion">
     <p>The type of subpixel antialiasing to use.</p>
 <p>The possible values are none, rgb, bgr, vrgb, vbgr.</p>
-<p>Note that GSK does not support subpixel antialiasing, and this
+<p>Note that GSK does not support subpixel antialiasing, and this<br />
 setting has no effect on font rendering in GTK.</p>
 
 
@@ -8349,9 +8353,9 @@ setting has no effect on font rendering in GTK.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Undoes the effect of calling g_object_set() to install an
+    <p>Undoes the effect of calling g_object_set() to install an<br />
 application-specific value for a setting.</p>
-<p>After this call, the setting will again follow the session-wide
+<p>After this call, the setting will again follow the session-wide<br />
 value for this setting.</p>
 
 
@@ -8402,7 +8406,7 @@ value for this setting.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

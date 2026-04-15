@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::SubprocessLauncher";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,19 +95,20 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>This class contains a set of options for launching child processes,
-such as where its standard input and output will be directed, the
+    <p>This class contains a set of options for launching child processes,<br />
+such as where its standard input and output will be directed, the<br />
 argument list, the environment, and more.</p>
-<p>While the [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess] class has high level functions covering
-popular cases, use of this class allows access to more advanced
-options.  It can also be used to launch multiple subprocesses with
+<p>While the [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess] class has high level functions covering<br />
+popular cases, use of this class allows access to more advanced<br />
+options.  It can also be used to launch multiple subprocesses with<br />
 a similar configuration.</p>
 
 
@@ -547,6 +549,7 @@ a similar configuration.</p>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -564,8 +567,8 @@ a similar configuration.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new GSubprocess::Launcher.</p>
-<p>The launcher is created with the default options.  A copy of the
-environment of the calling process is made at the time of this call
+<p>The launcher is created with the default options.  A copy of the<br />
+environment of the calling process is made at the time of this call<br />
 and will be used as the environment that the process is launched in.</p>
 
 
@@ -614,13 +617,13 @@ and will be used as the environment that the process is launched in.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Closes all the file descriptors previously passed to the object with
+    <p>Closes all the file descriptors previously passed to the object with<br />
 g_subprocess_launcher_take_fd(), g_subprocess_launcher_take_stderr_fd(), etc.</p>
-<p>After calling this method, any subsequent calls to g_subprocess_launcher_spawn() or g_subprocess_launcher_spawnv() will
-return %G_IO_ERROR_CLOSED. This method is idempotent if
+<p>After calling this method, any subsequent calls to g_subprocess_launcher_spawn() or g_subprocess_launcher_spawnv() will<br />
+return %G_IO_ERROR_CLOSED. This method is idempotent if<br />
 called more than once.</p>
-<p>This function is called automatically when the GSubprocess::Launcher
-is disposed, but is provided separately so that garbage collected
+<p>This function is called automatically when the GSubprocess::Launcher<br />
+is disposed, but is provided separately so that garbage collected<br />
 language bindings can call it earlier to guarantee when FDs are closed.</p>
 
 
@@ -656,9 +659,9 @@ language bindings can call it earlier to guarantee when FDs are closed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the current working directory that processes will be launched
+    <p>Sets the current working directory that processes will be launched<br />
 with.</p>
-<p>By default processes are launched with the current working directory
+<p>By default processes are launched with the current working directory<br />
 of the launching process at the time of launch.</p>
 
 
@@ -713,20 +716,20 @@ of the launching process at the time of launch.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Replace the entire environment of processes launched from this
+    <p>Replace the entire environment of processes launched from this<br />
 launcher with the given 'environ' variable.</p>
-<p>Typically you will build this variable by using g_listenv() to copy
-the process 'environ' and using the functions g_environ_setenv(),
+<p>Typically you will build this variable by using g_listenv() to copy<br />
+the process 'environ' and using the functions g_environ_setenv(),<br />
 g_environ_unsetenv(), etc.</p>
-<p>As an alternative, you can use g_subprocess_launcher_setenv(),
+<p>As an alternative, you can use g_subprocess_launcher_setenv(),<br />
 g_subprocess_launcher_unsetenv(), etc.</p>
-<p>Pass an empty array to set an empty environment. Pass nil to inherit the
-parent process’ environment. As of GLib 2.54, the parent process’ environment
-will be copied when g_subprocess_launcher_set_environ() is called.
-Previously, it was copied when the subprocess was executed. This means the
-copied environment may now be modified (using g_subprocess_launcher_setenv(),
+<p>Pass an empty array to set an empty environment. Pass nil to inherit the<br />
+parent process’ environment. As of GLib 2.54, the parent process’ environment<br />
+will be copied when g_subprocess_launcher_set_environ() is called.<br />
+Previously, it was copied when the subprocess was executed. This means the<br />
+copied environment may now be modified (using g_subprocess_launcher_setenv(),<br />
 etc.) before launching the subprocess.</p>
-<p>On UNIX, all strings in this array can be arbitrary byte strings.
+<p>On UNIX, all strings in this array can be arbitrary byte strings.<br />
 On Windows, they should be in UTF-8.</p>
 
 
@@ -835,9 +838,9 @@ On Windows, they should be in UTF-8.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the value of the environment variable <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> in the
+    <p>Returns the value of the environment variable <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> in the<br />
 environment of processes launched from this launcher.</p>
-<p>On UNIX, the returned string can be an arbitrary byte string.
+<p>On UNIX, the returned string can be an arbitrary byte string.<br />
 On Windows, it will be UTF-8.</p>
 
 
@@ -875,7 +878,7 @@ On Windows, it will be UTF-8.</p>
       
       
         &mdash;
-        <div class='inline'><p>the value of the environment variable,
+        <div class='inline'><p>the value of the environment variable,<br />
 nil if unset</p>
 </div>
       
@@ -898,11 +901,11 @@ nil if unset</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets up a child setup function.</p>
-<p>The child setup function will be called after fork() but before
+<p>The child setup function will be called after fork() but before<br />
 exec() on the child's side.</p>
-<p><!-- raw HTML omitted -->destroy_notify<!-- raw HTML omitted --> will not be automatically called on the child's side
-of the fork().  It will only be called when the last reference on the
-GSubprocess::Launcher is dropped or when a new child setup function is
+<p><!-- raw HTML omitted -->destroy_notify<!-- raw HTML omitted --> will not be automatically called on the child's side<br />
+of the fork().  It will only be called when the last reference on the<br />
+GSubprocess::Launcher is dropped or when a new child setup function is<br />
 given.</p>
 <p>nil can be given as <!-- raw HTML omitted -->child_setup<!-- raw HTML omitted --> to disable the functionality.</p>
 <p>Child setup functions are only available on UNIX.</p>
@@ -989,10 +992,10 @@ given.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the environment variable <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> in the environment of
+    <p>Sets the environment variable <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> in the environment of<br />
 processes launched from this launcher.</p>
-<p>On UNIX, both the variable's name and value can be arbitrary byte
-strings, except that the variable's name cannot contain '='.
+<p>On UNIX, both the variable's name and value can be arbitrary byte<br />
+strings, except that the variable's name cannot contain '='.<br />
 On Windows, they should be in UTF-8.</p>
 
 
@@ -1012,7 +1015,7 @@ On Windows, they should be in UTF-8.</p>
       
       
         &mdash;
-        <div class='inline'><p>the environment variable to set,
+        <div class='inline'><p>the environment variable to set,<br />
 must not contain '='</p>
 </div>
       
@@ -1226,11 +1229,11 @@ must not contain '='</p>
   <div class="discussion">
     <p>Sets the file path to use as the stderr for spawned processes.</p>
 <p>If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is nil then any previously given path is unset.</p>
-<p>The file will be created or truncated when the process is spawned, as
+<p>The file will be created or truncated when the process is spawned, as<br />
 would be the case if using '2&gt;' at the shell.</p>
-<p>If you want to send both stdout and stderr to the same file then use
+<p>If you want to send both stdout and stderr to the same file then use<br />
 %G_SUBPROCESS_FLAGS_STDERR_MERGE.</p>
-<p>You may not set a stderr file path if a stderr fd is already set or
+<p>You may not set a stderr file path if a stderr fd is already set or<br />
 if the launcher flags contain any flags directing stderr elsewhere.</p>
 <p>This feature is only available on UNIX.</p>
 
@@ -1289,7 +1292,7 @@ if the launcher flags contain any flags directing stderr elsewhere.</p>
     <p>Sets the file path to use as the stdin for spawned processes.</p>
 <p>If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is nil then any previously given path is unset.</p>
 <p>The file must exist or spawning the process will fail.</p>
-<p>You may not set a stdin file path if a stdin fd is already set or if
+<p>You may not set a stdin file path if a stdin fd is already set or if<br />
 the launcher flags contain any flags directing stdin elsewhere.</p>
 <p>This feature is only available on UNIX.</p>
 
@@ -1347,9 +1350,9 @@ the launcher flags contain any flags directing stdin elsewhere.</p>
   <div class="discussion">
     <p>Sets the file path to use as the stdout for spawned processes.</p>
 <p>If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is nil then any previously given path is unset.</p>
-<p>The file will be created or truncated when the process is spawned, as
+<p>The file will be created or truncated when the process is spawned, as<br />
 would be the case if using '&gt;' at the shell.</p>
-<p>You may not set a stdout file path if a stdout fd is already set or
+<p>You may not set a stdout file path if a stdout fd is already set or<br />
 if the launcher flags contain any flags directing stdout elsewhere.</p>
 <p>This feature is only available on UNIX.</p>
 
@@ -1405,15 +1408,15 @@ if the launcher flags contain any flags directing stdout elsewhere.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Transfer an arbitrary file descriptor from parent process to the
-child.  This function takes ownership of the <!-- raw HTML omitted -->source_fd<!-- raw HTML omitted -->; it will be closed
+    <p>Transfer an arbitrary file descriptor from parent process to the<br />
+child.  This function takes ownership of the <!-- raw HTML omitted -->source_fd<!-- raw HTML omitted -->; it will be closed<br />
 in the parent when <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is freed.</p>
-<p>By default, all file descriptors from the parent will be closed.
-This function allows you to create (for example) a custom <code>pipe()</code> or
-<code>socketpair()</code> before launching the process, and choose the target
+<p>By default, all file descriptors from the parent will be closed.<br />
+This function allows you to create (for example) a custom <code>pipe()</code> or<br />
+<code>socketpair()</code> before launching the process, and choose the target<br />
 descriptor in the child.</p>
-<p>An example use case is GNUPG, which has a command line argument
-<code>--passphrase-fd</code> providing a file descriptor number where it expects
+<p>An example use case is GNUPG, which has a command line argument<br />
+<code>--passphrase-fd</code> providing a file descriptor number where it expects<br />
 the passphrase to be written.</p>
 
 
@@ -1485,13 +1488,13 @@ the passphrase to be written.</p>
   <div class="discussion">
     <p>Sets the file descriptor to use as the stderr for spawned processes.</p>
 <p>If <!-- raw HTML omitted -->fd<!-- raw HTML omitted --> is -1 then any previously given fd is unset.</p>
-<p>Note that the default behaviour is to pass stderr through to the
+<p>Note that the default behaviour is to pass stderr through to the<br />
 stderr of the parent process.</p>
-<p>The passed <!-- raw HTML omitted -->fd<!-- raw HTML omitted --> belongs to the GSubprocess::Launcher.  It will be
-automatically closed when the launcher is finalized.  The file
-descriptor will also be closed on the child side when executing the
+<p>The passed <!-- raw HTML omitted -->fd<!-- raw HTML omitted --> belongs to the GSubprocess::Launcher.  It will be<br />
+automatically closed when the launcher is finalized.  The file<br />
+descriptor will also be closed on the child side when executing the<br />
 spawned process.</p>
-<p>You may not set a stderr fd if a stderr file path is already set or
+<p>You may not set a stderr fd if a stderr file path is already set or<br />
 if the launcher flags contain any flags directing stderr elsewhere.</p>
 <p>This feature is only available on UNIX.</p>
 
@@ -1549,15 +1552,15 @@ if the launcher flags contain any flags directing stderr elsewhere.</p>
   <div class="discussion">
     <p>Sets the file descriptor to use as the stdin for spawned processes.</p>
 <p>If <!-- raw HTML omitted -->fd<!-- raw HTML omitted --> is -1 then any previously given fd is unset.</p>
-<p>Note that if your intention is to have the stdin of the calling
-process inherited by the child then %G_SUBPROCESS_FLAGS_STDIN_INHERIT
+<p>Note that if your intention is to have the stdin of the calling<br />
+process inherited by the child then %G_SUBPROCESS_FLAGS_STDIN_INHERIT<br />
 is a better way to go about doing that.</p>
-<p>The passed <!-- raw HTML omitted -->fd<!-- raw HTML omitted --> is noted but will not be touched in the current
-process.  It is therefore necessary that it be kept open by the
-caller until the subprocess is spawned.  The file descriptor will
-also not be explicitly closed on the child side, so it must be marked
+<p>The passed <!-- raw HTML omitted -->fd<!-- raw HTML omitted --> is noted but will not be touched in the current<br />
+process.  It is therefore necessary that it be kept open by the<br />
+caller until the subprocess is spawned.  The file descriptor will<br />
+also not be explicitly closed on the child side, so it must be marked<br />
 O_CLOEXEC if that's what you want.</p>
-<p>You may not set a stdin fd if a stdin file path is already set or if
+<p>You may not set a stdin fd if a stdin file path is already set or if<br />
 the launcher flags contain any flags directing stdin elsewhere.</p>
 <p>This feature is only available on UNIX.</p>
 
@@ -1615,14 +1618,14 @@ the launcher flags contain any flags directing stdin elsewhere.</p>
   <div class="discussion">
     <p>Sets the file descriptor to use as the stdout for spawned processes.</p>
 <p>If <!-- raw HTML omitted -->fd<!-- raw HTML omitted --> is -1 then any previously given fd is unset.</p>
-<p>Note that the default behaviour is to pass stdout through to the
+<p>Note that the default behaviour is to pass stdout through to the<br />
 stdout of the parent process.</p>
-<p>The passed <!-- raw HTML omitted -->fd<!-- raw HTML omitted --> is noted but will not be touched in the current
-process.  It is therefore necessary that it be kept open by the
-caller until the subprocess is spawned.  The file descriptor will
-also not be explicitly closed on the child side, so it must be marked
+<p>The passed <!-- raw HTML omitted -->fd<!-- raw HTML omitted --> is noted but will not be touched in the current<br />
+process.  It is therefore necessary that it be kept open by the<br />
+caller until the subprocess is spawned.  The file descriptor will<br />
+also not be explicitly closed on the child side, so it must be marked<br />
 O_CLOEXEC if that's what you want.</p>
-<p>You may not set a stdout fd if a stdout file path is already set or
+<p>You may not set a stdout fd if a stdout file path is already set or<br />
 if the launcher flags contain any flags directing stdout elsewhere.</p>
 <p>This feature is only available on UNIX.</p>
 
@@ -1678,9 +1681,9 @@ if the launcher flags contain any flags directing stdout elsewhere.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes the environment variable <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> from the environment of
+    <p>Removes the environment variable <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> from the environment of<br />
 processes launched from this launcher.</p>
-<p>On UNIX, the variable's name can be an arbitrary byte string not
+<p>On UNIX, the variable's name can be an arbitrary byte string not<br />
 containing '='. On Windows, it should be in UTF-8.</p>
 
 
@@ -1700,7 +1703,7 @@ containing '='. On Windows, it should be in UTF-8.</p>
       
       
         &mdash;
-        <div class='inline'><p>the environment variable to unset,
+        <div class='inline'><p>the environment variable to unset,<br />
 must not contain '='</p>
 </div>
       
@@ -1732,7 +1735,7 @@ must not contain '='</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

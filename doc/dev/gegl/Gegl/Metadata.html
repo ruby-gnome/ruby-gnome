@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gegl::Metadata";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -306,6 +308,7 @@
 
       
     </ul>
+    
   
 
 
@@ -325,9 +328,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieve resolution from the application image metadata.  Intended for use
-by the image file writer.  If resolution is not supported by the application
-or if the operation fails false is returned and the resolution values are
+    <p>Retrieve resolution from the application image metadata.  Intended for use<br />
+by the image file writer.  If resolution is not supported by the application<br />
+or if the operation fails false is returned and the resolution values are<br />
 not updated.</p>
 
 
@@ -416,8 +419,8 @@ not updated.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieve image file metadata from the application.  Intended for use by the
-image file writer. If the operation fails it returns false and <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is
+    <p>Retrieve image file metadata from the application.  Intended for use by the<br />
+image file writer. If the operation fails it returns false and <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is<br />
 not updated.</p>
 
 
@@ -545,9 +548,9 @@ not updated.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Look up the specified key and initialise an iterator to reference the
-associated metadata. The iterator is used in conjunction with
-gegl_metadata_set_value() and gegl_metadata_get_value(). Note that this
+    <p>Look up the specified key and initialise an iterator to reference the<br />
+associated metadata. The iterator is used in conjunction with<br />
+gegl_metadata_set_value() and gegl_metadata_get_value(). Note that this<br />
 iterator is not valid for gegl_metadata_iter_next().</p>
 
 
@@ -679,8 +682,8 @@ iterator is not valid for gegl_metadata_iter_next().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set application data retrieved from image file's metadata.  Intended for use
-by the image file reader.  If the operation fails it returns false and
+    <p>Set application data retrieved from image file's metadata.  Intended for use<br />
+by the image file reader.  If the operation fails it returns false and<br />
 <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is ignored.</p>
 
 
@@ -754,8 +757,8 @@ by the image file reader.  If the operation fails it returns false and
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the name of the file module and pass an array of mappings from
-file-format specific metadata names to those used by Gegl. A GValue
+    <p>Set the name of the file module and pass an array of mappings from<br />
+file-format specific metadata names to those used by Gegl. A GValue<br />
 transformation function may be supplied, e.g. to parse or format timestamps.</p>
 
 
@@ -805,7 +808,7 @@ transformation function may be supplied, e.g. to parse or format timestamps.</p>
       
       
         &mdash;
-        <div class='inline'><p>Array of mappings from file module metadata
+        <div class='inline'><p>Array of mappings from file module metadata<br />
 names to Gegl well-known names.</p>
 </div>
       
@@ -856,8 +859,8 @@ names to Gegl well-known names.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set resolution retrieved from image file's metadata.  Intended for use by
-the image file reader.  If resolution is not supported by the application or
+    <p>Set resolution retrieved from image file's metadata.  Intended for use by<br />
+the image file reader.  If resolution is not supported by the application or<br />
 if the operation fails false is returned and the values are ignored.</p>
 
 
@@ -946,8 +949,8 @@ if the operation fails false is returned and the values are ignored.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unregister the file module mappings and any further mappings added or
-modified by the application.  This should be called after the file module
+    <p>Unregister the file module mappings and any further mappings added or<br />
+modified by the application.  This should be called after the file module<br />
 completes operations.</p>
 
 
@@ -979,7 +982,7 @@ completes operations.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

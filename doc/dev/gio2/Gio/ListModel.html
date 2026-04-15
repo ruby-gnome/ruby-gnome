@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::ListModel";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -83,58 +84,59 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gio2/list-model.rb</dd>
+    <dd>lib/gio2/list-model.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GListModel</code> is an interface that represents a mutable list of
-[class<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object]. Its main intention is as a model for various widgets
-in user interfaces, such as list views, but it can also be used as a
-convenient method of returning lists of data, with support for
+    <p><code>GListModel</code> is an interface that represents a mutable list of<br />
+[class<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object]. Its main intention is as a model for various widgets<br />
+in user interfaces, such as list views, but it can also be used as a<br />
+convenient method of returning lists of data, with support for<br />
 updates.</p>
-<p>Each object in the list may also report changes in itself via some
-mechanism (normally the [signal<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object::notify] signal).  Taken
-together with the [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel::items-changed] signal, this provides
-for a list that can change its membership, and in which the members can
+<p>Each object in the list may also report changes in itself via some<br />
+mechanism (normally the [signal<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object::notify] signal).  Taken<br />
+together with the [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel::items-changed] signal, this provides<br />
+for a list that can change its membership, and in which the members can<br />
 change their individual properties.</p>
-<p>A good example would be the list of visible wireless network access
-points, where each access point can report dynamic properties such as
+<p>A good example would be the list of visible wireless network access<br />
+points, where each access point can report dynamic properties such as<br />
 signal strength.</p>
-<p>It is important to note that the <code>GListModel</code> itself does not report
-changes to the individual items.  It only reports changes to the list
-membership.  If you want to observe changes to the objects themselves
-then you need to connect signals to the objects that you are
+<p>It is important to note that the <code>GListModel</code> itself does not report<br />
+changes to the individual items.  It only reports changes to the list<br />
+membership.  If you want to observe changes to the objects themselves<br />
+then you need to connect signals to the objects that you are<br />
 interested in.</p>
-<p>All items in a <code>GListModel</code> are of (or derived from) the same type.
-[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel.get_item_type] returns that type.  The type may be an
+<p>All items in a <code>GListModel</code> are of (or derived from) the same type.<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel.get_item_type] returns that type.  The type may be an<br />
 interface, in which case all objects in the list must implement it.</p>
-<p>The semantics are close to that of an array:
-[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel.get_n_items] returns the number of items in the list
-and [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel.get_item] returns an item at a (0-based) position.
-In order to allow implementations to calculate the list length lazily,
-you can also iterate over items: starting from 0, repeatedly call
+<p>The semantics are close to that of an array:<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel.get_n_items] returns the number of items in the list<br />
+and [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel.get_item] returns an item at a (0-based) position.<br />
+In order to allow implementations to calculate the list length lazily,<br />
+you can also iterate over items: starting from 0, repeatedly call<br />
 [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel.get_item] until it returns <code>NULL</code>.</p>
-<p>An implementation may create objects lazily, but must take care to
-return the same object for a given position until all references to
+<p>An implementation may create objects lazily, but must take care to<br />
+return the same object for a given position until all references to<br />
 it are gone.</p>
-<p>On the other side, a consumer is expected only to hold references on
-objects that are currently ‘user visible’, in order to facilitate the
-maximum level of laziness in the implementation of the list and to
+<p>On the other side, a consumer is expected only to hold references on<br />
+objects that are currently ‘user visible’, in order to facilitate the<br />
+maximum level of laziness in the implementation of the list and to<br />
 reduce the required number of signal connections at a given time.</p>
-<p>This interface is intended only to be used from a single thread.  The
-thread in which it is appropriate to use it depends on the particular
-implementation, but typically it will be from the thread that owns
-the thread-default main context (see
-[method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default]) in effect at the time that the
+<p>This interface is intended only to be used from a single thread.  The<br />
+thread in which it is appropriate to use it depends on the particular<br />
+implementation, but typically it will be from the thread that owns<br />
+the thread-default main context (see<br />
+[method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default]) in effect at the time that the<br />
 model was created.</p>
-<p>Over time, it has established itself as good practice for list model
-implementations to provide properties <code>item-type</code> and <code>n-items</code> to
-ease working with them. While it is not required, it is recommended
-that implementations provide these two properties. They should return
-the values of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel.get_item_type] and
+<p>Over time, it has established itself as good practice for list model<br />
+implementations to provide properties <code>item-type</code> and <code>n-items</code> to<br />
+ease working with them. While it is not required, it is recommended<br />
+that implementations provide these two properties. They should return<br />
+the values of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel.get_item_type] and<br />
 [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel.get_n_items] respectively and be defined as such:</p>
 <pre class="code c"><code class="c">properties[PROP_ITEM_TYPE] =
   g_param_spec_gtype (&quot;item-type&quot;, NULL, NULL, G_TYPE_OBJECT,
@@ -325,6 +327,7 @@ properties[PROP_N_ITEMS] =
 
       
     </ul>
+    
   
 
 
@@ -412,9 +415,9 @@ properties[PROP_N_ITEMS] =
 </h3><div class="docstring">
   <div class="discussion">
     <p>Get the item at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is greater than the number of items in <!-- raw HTML omitted -->list<!-- raw HTML omitted -->, nil is
+<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is greater than the number of items in <!-- raw HTML omitted -->list<!-- raw HTML omitted -->, nil is<br />
 returned.</p>
-<p>nil is never returned for an index that is smaller than the length
+<p>nil is never returned for an index that is smaller than the length<br />
 of the list.</p>
 <p>See also: g_list_model_get_n_items()</p>
 
@@ -475,11 +478,11 @@ of the list.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Get the item at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is greater than the number of items in <!-- raw HTML omitted -->list<!-- raw HTML omitted -->, nil is
+<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is greater than the number of items in <!-- raw HTML omitted -->list<!-- raw HTML omitted -->, nil is<br />
 returned.</p>
-<p>nil is never returned for an index that is smaller than the length
+<p>nil is never returned for an index that is smaller than the length<br />
 of the list.</p>
-<p>This function is meant to be used by language bindings in place
+<p>This function is meant to be used by language bindings in place<br />
 of g_list_model_get_item().</p>
 <p>See also: g_list_model_get_n_items()</p>
 
@@ -540,10 +543,10 @@ of g_list_model_get_item().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the type of the items in <!-- raw HTML omitted -->list<!-- raw HTML omitted -->.</p>
-<p>All items returned from g_list_model_get_item() are of the type
-returned by this function, or a subtype, or if the type is an
+<p>All items returned from g_list_model_get_item() are of the type<br />
+returned by this function, or a subtype, or if the type is an<br />
 interface, they are an implementation of that interface.</p>
-<p>The item type of a GList::Model can not change during the life of the
+<p>The item type of a GList::Model can not change during the life of the<br />
 model.</p>
 
 
@@ -584,21 +587,21 @@ model.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Emits the GList::Model::items-changed signal on <!-- raw HTML omitted -->list<!-- raw HTML omitted -->.</p>
-<p>This function should only be called by classes implementing
-GList::Model. It has to be called after the internal representation
-of <!-- raw HTML omitted -->list<!-- raw HTML omitted --> has been updated, because handlers connected to this signal
+<p>This function should only be called by classes implementing<br />
+GList::Model. It has to be called after the internal representation<br />
+of <!-- raw HTML omitted -->list<!-- raw HTML omitted --> has been updated, because handlers connected to this signal<br />
 might query the new state of the list.</p>
-<p>Implementations must only make changes to the model (as visible to
-its consumer) in places that will not cause problems for that
-consumer.  For models that are driven directly by a write API (such
-as GList::Store), changes can be reported in response to uses of that
-API.  For models that represent remote data, changes should only be
-made from a fresh mainloop dispatch.  It is particularly not
-permitted to make changes in response to a call to the GList::Model
+<p>Implementations must only make changes to the model (as visible to<br />
+its consumer) in places that will not cause problems for that<br />
+consumer.  For models that are driven directly by a write API (such<br />
+as GList::Store), changes can be reported in response to uses of that<br />
+API.  For models that represent remote data, changes should only be<br />
+made from a fresh mainloop dispatch.  It is particularly not<br />
+permitted to make changes in response to a call to the GList::Model<br />
 consumer API.</p>
-<p>Stated another way: in general, it is assumed that code making a
-series of accesses to the model via the API, without returning to the
-mainloop, and without calling other code, will continue to view the
+<p>Stated another way: in general, it is assumed that code making a<br />
+series of accesses to the model via the API, without returning to the<br />
+mainloop, and without calling other code, will continue to view the<br />
 same contents of the model.</p>
 
 
@@ -684,8 +687,8 @@ same contents of the model.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the number of items in <!-- raw HTML omitted -->list<!-- raw HTML omitted -->.</p>
-<p>Depending on the model implementation, calling this function may be
-less efficient than iterating the list with increasing values for
+<p>Depending on the model implementation, calling this function may be<br />
+less efficient than iterating the list with increasing values for<br />
 <!-- raw HTML omitted -->position<!-- raw HTML omitted --> until g_list_model_get_item() returns nil.</p>
 
 
@@ -721,7 +724,7 @@ less efficient than iterating the list with increasing values for
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

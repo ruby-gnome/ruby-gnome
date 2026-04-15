@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::ElementFactory";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,7 +101,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gst/element-factory.rb</dd>
+    <dd>lib/gst/element-factory.rb
+</dd>
   </dl>
   
 </div>
@@ -282,6 +284,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -793,9 +796,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -807,6 +812,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="PluginFeature.html" title="Gst::PluginFeature (class)">PluginFeature</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="PluginFeature.html#check_version-instance_method" title="Gst::PluginFeature#check_version (method)">#check_version</a></span>, <span class='object_link'><a href="PluginFeature.html#list_copy-class_method" title="Gst::PluginFeature.list_copy (method)">list_copy</a></span>, <span class='object_link'><a href="PluginFeature.html#list_debug-class_method" title="Gst::PluginFeature.list_debug (method)">list_debug</a></span>, <span class='object_link'><a href="PluginFeature.html#list_free-class_method" title="Gst::PluginFeature.list_free (method)">list_free</a></span>, <span class='object_link'><a href="PluginFeature.html#load-instance_method" title="Gst::PluginFeature#load (method)">#load</a></span>, <span class='object_link'><a href="PluginFeature.html#plugin-instance_method" title="Gst::PluginFeature#plugin (method)">#plugin</a></span>, <span class='object_link'><a href="PluginFeature.html#plugin_name-instance_method" title="Gst::PluginFeature#plugin_name (method)">#plugin_name</a></span>, <span class='object_link'><a href="PluginFeature.html#rank-instance_method" title="Gst::PluginFeature#rank (method)">#rank</a></span>, <span class='object_link'><a href="PluginFeature.html#rank=-instance_method" title="Gst::PluginFeature#rank= (method)">#rank=</a></span>, <span class='object_link'><a href="PluginFeature.html#rank_compare_func-class_method" title="Gst::PluginFeature.rank_compare_func (method)">rank_compare_func</a></span>, <span class='object_link'><a href="PluginFeature.html#rank_raw-instance_method" title="Gst::PluginFeature#rank_raw (method)">#rank_raw</a></span></p>
 
+  
   
   
   
@@ -835,8 +841,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Search for an element factory of the given name. Refs the returned
-element factory; caller is responsible for unreffing.
+    <p>Search for an element factory of the given name. Refs the returned<br />
+element factory; caller is responsible for unreffing.<br />
 nil otherwise</p>
 
 
@@ -895,10 +901,10 @@ nil otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Filter out all the elementfactories in <!-- raw HTML omitted -->list<!-- raw HTML omitted --> that can handle <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> in
+    <p>Filter out all the elementfactories in <!-- raw HTML omitted -->list<!-- raw HTML omitted --> that can handle <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> in<br />
 the given direction.</p>
-<p>If <!-- raw HTML omitted -->subsetonly<!-- raw HTML omitted --> is true, then only the elements whose pads templates
-are a complete superset of <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> will be returned. Else any element
+<p>If <!-- raw HTML omitted -->subsetonly<!-- raw HTML omitted --> is true, then only the elements whose pads templates<br />
+are a complete superset of <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> will be returned. Else any element<br />
 whose pad templates caps can intersect with <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> will be returned.</p>
 
 
@@ -918,7 +924,7 @@ whose pad templates caps can intersect with <!-- raw HTML omitted -->caps<!-- ra
       
       
         &mdash;
-        <div class='inline'><p>a #GList of
+        <div class='inline'><p>a #GList of<br />
 Gst::ElementFactory to filter</p>
 </div>
       
@@ -982,8 +988,8 @@ Gst::ElementFactory to filter</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GList of
-Gst::ElementFactory elements that match the given requisites.
+        <div class='inline'><p>a #GList of<br />
+Gst::ElementFactory elements that match the given requisites.<br />
 Use #gst_plugin_feature_list_free after usage.</p>
 </div>
       
@@ -1005,8 +1011,8 @@ Use #gst_plugin_feature_list_free after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get a list of factories that match the given <!-- raw HTML omitted -->type<!-- raw HTML omitted -->. Only elements
-with a rank greater or equal to <!-- raw HTML omitted -->minrank<!-- raw HTML omitted --> will be returned.
+    <p>Get a list of factories that match the given <!-- raw HTML omitted -->type<!-- raw HTML omitted -->. Only elements<br />
+with a rank greater or equal to <!-- raw HTML omitted -->minrank<!-- raw HTML omitted --> will be returned.<br />
 The list of factories is returned by decreasing rank.</p>
 
 
@@ -1059,8 +1065,8 @@ The list of factories is returned by decreasing rank.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GList of
-Gst::ElementFactory elements. Use gst_plugin_feature_list_free() after
+        <div class='inline'><p>a #GList of<br />
+Gst::ElementFactory elements. Use gst_plugin_feature_list_free() after<br />
 usage.</p>
 </div>
       
@@ -1082,10 +1088,10 @@ usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new element of the type defined by the given element factory.
-If name is nil, then the element will receive a guaranteed unique name,
-consisting of the element factory name and a number.
-If name is given, it will be given the name supplied.
+    <p>Create a new element of the type defined by the given element factory.<br />
+If name is nil, then the element will receive a guaranteed unique name,<br />
+consisting of the element factory name and a number.<br />
+If name is given, it will be given the name supplied.<br />
 if unable to create element</p>
 
 
@@ -1120,7 +1126,7 @@ if unable to create element</p>
       
       
         &mdash;
-        <div class='inline'><p>name of new element, or nil to automatically create
+        <div class='inline'><p>name of new element, or nil to automatically create<br />
 a unique name</p>
 </div>
       
@@ -1160,8 +1166,8 @@ a unique name</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new element of the type defined by the given element factory.
-The supplied list of properties, will be passed at object construction.
+    <p>Create a new element of the type defined by the given element factory.<br />
+The supplied list of properties, will be passed at object construction.<br />
 if unable to create element</p>
 
 
@@ -1250,8 +1256,8 @@ if unable to create element</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new element of the type defined by the given element factory.
-The supplied list of properties, will be passed at object construction.
+    <p>Create a new element of the type defined by the given element factory.<br />
+The supplied list of properties, will be passed at object construction.<br />
 if unable to create element</p>
 
 
@@ -1340,7 +1346,7 @@ if unable to create element</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new element of the type defined by the given elementfactory.
+    <p>Create a new element of the type defined by the given elementfactory.<br />
 The supplied list of properties, will be passed at object construction.</p>
 
 
@@ -1423,7 +1429,7 @@ The supplied list of properties, will be passed at object construction.</p>
       
       
         &mdash;
-        <div class='inline'><p>new Gst::Element or nil
+        <div class='inline'><p>new Gst::Element or nil<br />
 if the element couldn't be created</p>
 </div>
       
@@ -1713,8 +1719,8 @@ if the element couldn't be created</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new element of the type defined by the given elementfactory.
-It will be given the name supplied, since all elements require a name as
+    <p>Create a new element of the type defined by the given elementfactory.<br />
+It will be given the name supplied, since all elements require a name as<br />
 their first argument.</p>
 
 
@@ -1734,7 +1740,7 @@ their first argument.</p>
       
       
         &mdash;
-        <div class='inline'><p>name of new element, or nil to automatically create
+        <div class='inline'><p>name of new element, or nil to automatically create<br />
 a unique name</p>
 </div>
       
@@ -1753,7 +1759,7 @@ a unique name</p>
       
       
         &mdash;
-        <div class='inline'><p>new Gst::Element or nil
+        <div class='inline'><p>new Gst::Element or nil<br />
 if the element couldn't be created</p>
 </div>
       
@@ -1775,7 +1781,7 @@ if the element couldn't be created</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new element of the type defined by the given elementfactory.
+    <p>Create a new element of the type defined by the given elementfactory.<br />
 The supplied list of properties, will be passed at object construction.</p>
 
 
@@ -1828,7 +1834,7 @@ The supplied list of properties, will be passed at object construction.</p>
       
       
         &mdash;
-        <div class='inline'><p>new Gst::Element or nil
+        <div class='inline'><p>new Gst::Element or nil<br />
 if the element couldn't be created</p>
 </div>
       
@@ -1850,7 +1856,7 @@ if the element couldn't be created</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new element of the type defined by the given elementfactory.
+    <p>Create a new element of the type defined by the given elementfactory.<br />
 The supplied list of properties, will be passed at object construction.</p>
 
 
@@ -1903,7 +1909,7 @@ The supplied list of properties, will be passed at object construction.</p>
       
       
         &mdash;
-        <div class='inline'><p>new Gst::Element or nil
+        <div class='inline'><p>new Gst::Element or nil<br />
 if the element couldn't be created</p>
 </div>
       
@@ -1925,7 +1931,7 @@ if the element couldn't be created</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new element of the type defined by the given elementfactory.
+    <p>Create a new element of the type defined by the given elementfactory.<br />
 The supplied list of properties, will be passed at object construction.</p>
 
 
@@ -1993,7 +1999,7 @@ The supplied list of properties, will be passed at object construction.</p>
       
       
         &mdash;
-        <div class='inline'><p>new Gst::Element or nil
+        <div class='inline'><p>new Gst::Element or nil<br />
 if the element couldn't be created</p>
 </div>
       
@@ -2045,9 +2051,9 @@ if the element couldn't be created</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the #GType for elements managed by this factory. The type can
-only be retrieved if the element factory is loaded, which can be
-assured with gst_plugin_feature_load().
+    <p>Get the #GType for elements managed by this factory. The type can<br />
+only be retrieved if the element factory is loaded, which can be<br />
+assured with gst_plugin_feature_load().<br />
 the factory is not loaded.</p>
 
 
@@ -2087,7 +2093,7 @@ the factory is not loaded.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the metadata on <!-- raw HTML omitted -->factory<!-- raw HTML omitted --> with <!-- raw HTML omitted -->key<!-- raw HTML omitted -->.
+    <p>Get the metadata on <!-- raw HTML omitted -->factory<!-- raw HTML omitted --> with <!-- raw HTML omitted -->key<!-- raw HTML omitted -->.<br />
 when there was no metadata with the given <!-- raw HTML omitted -->key<!-- raw HTML omitted -->.</p>
 
 
@@ -2322,8 +2328,8 @@ when there was no metadata with the given <!-- raw HTML omitted -->key<!-- raw H
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the available keys for the metadata on <!-- raw HTML omitted -->factory<!-- raw HTML omitted -->.
-an array of key strings, or nil when there is no
+    <p>Get the available keys for the metadata on <!-- raw HTML omitted -->factory<!-- raw HTML omitted -->.<br />
+an array of key strings, or nil when there is no<br />
 metadata. Free with g_strfreev() when no longer needed.</p>
 
 
@@ -2398,7 +2404,7 @@ metadata. Free with g_strfreev() when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries whether registered element managed by <!-- raw HTML omitted -->factory<!-- raw HTML omitted --> needs to
+    <p>Queries whether registered element managed by <!-- raw HTML omitted -->factory<!-- raw HTML omitted --> needs to<br />
 be excluded from documentation system or not.</p>
 
 
@@ -2456,7 +2462,7 @@ be excluded from documentation system or not.</p>
       
       
         &mdash;
-        <div class='inline'><p>the
+        <div class='inline'><p>the<br />
 static pad templates</p>
 </div>
       
@@ -2478,9 +2484,9 @@ static pad templates</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets an array of protocols this element supports or nil if
-no protocols are supported. You may not change the contents of the returned
-array, as it is still owned by the element factory. Use g_strdupv() to
+    <p>Gets an array of protocols this element supports or nil if<br />
+no protocols are supported. You may not change the contents of the returned<br />
+array, as it is still owned by the element factory. Use g_strdupv() to<br />
 make a copy of the protocol string array if you need to.</p>
 
 
@@ -2499,7 +2505,7 @@ make a copy of the protocol string array if you need to.</p>
       
       
         &mdash;
-        <div class='inline'><p>the supported protocols
+        <div class='inline'><p>the supported protocols<br />
 or nil</p>
 </div>
       
@@ -2556,7 +2562,7 @@ or nil</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

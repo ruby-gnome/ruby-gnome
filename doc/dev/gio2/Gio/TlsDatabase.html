@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::TlsDatabase";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,15 +95,16 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The class for GTls::Database. Derived classes should implement the various
-virtual methods. _async and _finish methods have a default
+    <p>The class for GTls::Database. Derived classes should implement the various<br />
+virtual methods. _async and _finish methods have a default<br />
 implementation that runs the corresponding sync method in a thread.</p>
 
 
@@ -426,6 +428,7 @@ implementation that runs the corresponding sync method in a thread.</p>
 
       
     </ul>
+    
   
 
 
@@ -445,13 +448,13 @@ implementation that runs the corresponding sync method in a thread.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a handle string for the certificate. The database will only be able
-to create a handle for certificates that originate from the database. In
-cases where the database cannot create a handle for a certificate, nil
+    <p>Create a handle string for the certificate. The database will only be able<br />
+to create a handle for certificates that originate from the database. In<br />
+cases where the database cannot create a handle for a certificate, nil<br />
 will be returned.</p>
-<p>This handle should be stable across various instances of the application,
-and between applications. If a certificate is modified in the database,
-then it is not guaranteed that this handle will continue to point to it.
+<p>This handle should be stable across various instances of the application,<br />
+and between applications. If a certificate is modified in the database,<br />
+then it is not guaranteed that this handle will continue to point to it.<br />
 handle.</p>
 
 
@@ -511,14 +514,14 @@ handle.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Look up a certificate by its handle.</p>
-<p>The handle should have been created by calling
-g_tls_database_create_certificate_handle() on a GTls::Database object of
-the same TLS backend. The handle is designed to remain valid across
+<p>The handle should have been created by calling<br />
+g_tls_database_create_certificate_handle() on a GTls::Database object of<br />
+the same TLS backend. The handle is designed to remain valid across<br />
 instantiations of the database.</p>
-<p>If the handle is no longer valid, or does not point to a certificate in
+<p>If the handle is no longer valid, or does not point to a certificate in<br />
 this database, then nil will be returned.</p>
-<p>This function can block, use g_tls_database_lookup_certificate_for_handle_async() to perform
-the lookup operation asynchronously.
+<p>This function can block, use g_tls_database_lookup_certificate_for_handle_async() to perform<br />
+the lookup operation asynchronously.<br />
 GTls::Certificate, or nil. Use g_object_unref() to release the certificate.</p>
 
 
@@ -622,7 +625,7 @@ GTls::Certificate, or nil. Use g_object_unref() to release the certificate.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously look up a certificate by its handle in the database. See
+    <p>Asynchronously look up a certificate by its handle in the database. See<br />
 g_tls_database_lookup_certificate_for_handle() for more information.</p>
 
 
@@ -752,10 +755,10 @@ g_tls_database_lookup_certificate_for_handle() for more information.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finish an asynchronous lookup of a certificate by its handle. See
+    <p>Finish an asynchronous lookup of a certificate by its handle. See<br />
 g_tls_database_lookup_certificate_for_handle() for more information.</p>
-<p>If the handle is no longer valid, or does not point to a certificate in
-this database, then nil will be returned.
+<p>If the handle is no longer valid, or does not point to a certificate in<br />
+this database, then nil will be returned.<br />
 Use g_object_unref() to release the certificate.</p>
 
 
@@ -814,24 +817,24 @@ Use g_object_unref() to release the certificate.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Look up the issuer of <!-- raw HTML omitted -->certificate<!-- raw HTML omitted --> in the database. The
-GTls::Certificate:issuer property of <!-- raw HTML omitted -->certificate<!-- raw HTML omitted --> is not modified, and
+    <p>Look up the issuer of <!-- raw HTML omitted -->certificate<!-- raw HTML omitted --> in the database. The<br />
+GTls::Certificate:issuer property of <!-- raw HTML omitted -->certificate<!-- raw HTML omitted --> is not modified, and<br />
 the two certificates are not hooked into a chain.</p>
-<p>This function can block. Use g_tls_database_lookup_certificate_issuer_async()
+<p>This function can block. Use g_tls_database_lookup_certificate_issuer_async()<br />
 to perform the lookup operation asynchronously.</p>
-<p>Beware this function cannot be used to build certification paths. The
-issuer certificate returned by this function may not be the same as
-the certificate that would actually be used to construct a valid
-certification path during certificate verification.
-<a href="https://datatracker.ietf.org/doc/html/rfc4158">RFC 4158</a> explains
-why an issuer certificate cannot be naively assumed to be part of the
-the certification path (though GLib's TLS backends may not follow the
-path building strategies outlined in this RFC). Due to the complexity
-of certification path building, GLib does not provide any way to know
-which certification path will actually be used when verifying a TLS
-certificate. Accordingly, this function cannot be used to make
-security-related decisions. Only GLib itself should make security
-decisions about TLS certificates.
+<p>Beware this function cannot be used to build certification paths. The<br />
+issuer certificate returned by this function may not be the same as<br />
+the certificate that would actually be used to construct a valid<br />
+certification path during certificate verification.<br />
+<a href="https://datatracker.ietf.org/doc/html/rfc4158">RFC 4158</a> explains<br />
+why an issuer certificate cannot be naively assumed to be part of the<br />
+the certification path (though GLib's TLS backends may not follow the<br />
+path building strategies outlined in this RFC). Due to the complexity<br />
+of certification path building, GLib does not provide any way to know<br />
+which certification path will actually be used when verifying a TLS<br />
+certificate. Accordingly, this function cannot be used to make<br />
+security-related decisions. Only GLib itself should make security<br />
+decisions about TLS certificates.<br />
 or nil. Use g_object_unref() to release the certificate.</p>
 
 
@@ -935,7 +938,7 @@ or nil. Use g_object_unref() to release the certificate.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously look up the issuer of <!-- raw HTML omitted -->certificate<!-- raw HTML omitted --> in the database. See
+    <p>Asynchronously look up the issuer of <!-- raw HTML omitted -->certificate<!-- raw HTML omitted --> in the database. See<br />
 g_tls_database_lookup_certificate_issuer() for more information.</p>
 
 
@@ -1065,8 +1068,8 @@ g_tls_database_lookup_certificate_issuer() for more information.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finish an asynchronous lookup issuer operation. See
-g_tls_database_lookup_certificate_issuer() for more information.
+    <p>Finish an asynchronous lookup issuer operation. See<br />
+g_tls_database_lookup_certificate_issuer() for more information.<br />
 or nil. Use g_object_unref() to release the certificate.</p>
 
 
@@ -1126,8 +1129,8 @@ or nil. Use g_object_unref() to release the certificate.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Look up certificates issued by this issuer in the database.</p>
-<p>This function can block, use g_tls_database_lookup_certificates_issued_by_async() to perform
-the lookup operation asynchronously.
+<p>This function can block, use g_tls_database_lookup_certificates_issued_by_async() to perform<br />
+the lookup operation asynchronously.<br />
 objects. Use g_object_unref() on each certificate, and g_list_free() on the release the list.</p>
 
 
@@ -1231,10 +1234,10 @@ objects. Use g_object_unref() on each certificate, and g_list_free() on the rele
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously look up certificates issued by this issuer in the database. See
+    <p>Asynchronously look up certificates issued by this issuer in the database. See<br />
 g_tls_database_lookup_certificates_issued_by() for more information.</p>
-<p>The database may choose to hold a reference to the issuer byte array for the duration
-of this asynchronous operation. The byte array should not be modified during
+<p>The database may choose to hold a reference to the issuer byte array for the duration<br />
+of this asynchronous operation. The byte array should not be modified during<br />
 this time.</p>
 
 
@@ -1364,8 +1367,8 @@ this time.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finish an asynchronous lookup of certificates. See
-g_tls_database_lookup_certificates_issued_by() for more information.
+    <p>Finish an asynchronous lookup of certificates. See<br />
+g_tls_database_lookup_certificates_issued_by() for more information.<br />
 objects. Use g_object_unref() on each certificate, and g_list_free() on the release the list.</p>
 
 
@@ -1424,56 +1427,56 @@ objects. Use g_object_unref() on each certificate, and g_list_free() on the rele
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines the validity of a certificate chain, outside the context
+    <p>Determines the validity of a certificate chain, outside the context<br />
 of a TLS session.</p>
-<p><!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is a chain of GTls::Certificate objects each pointing to the next
+<p><!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is a chain of GTls::Certificate objects each pointing to the next<br />
 certificate in the chain by its GTls::Certificate:issuer property.</p>
-<p><!-- raw HTML omitted -->purpose<!-- raw HTML omitted --> describes the purpose (or usage) for which the certificate
-is being used. Typically <!-- raw HTML omitted -->purpose<!-- raw HTML omitted --> will be set to %G_TLS_DATABASE_PURPOSE_AUTHENTICATE_SERVER
-which means that the certificate is being used to authenticate a server
+<p><!-- raw HTML omitted -->purpose<!-- raw HTML omitted --> describes the purpose (or usage) for which the certificate<br />
+is being used. Typically <!-- raw HTML omitted -->purpose<!-- raw HTML omitted --> will be set to %G_TLS_DATABASE_PURPOSE_AUTHENTICATE_SERVER<br />
+which means that the certificate is being used to authenticate a server<br />
 (and we are acting as the client).</p>
-<p>The <!-- raw HTML omitted -->identity<!-- raw HTML omitted --> is used to ensure the server certificate is valid for
-the expected peer identity. If the identity does not match the
-certificate, %G_TLS_CERTIFICATE_BAD_IDENTITY will be set in the
-return value. If <!-- raw HTML omitted -->identity<!-- raw HTML omitted --> is nil, that bit will never be set in
-the return value. The peer identity may also be used to check for
-pinned certificates (trust exceptions) in the database. These may
+<p>The <!-- raw HTML omitted -->identity<!-- raw HTML omitted --> is used to ensure the server certificate is valid for<br />
+the expected peer identity. If the identity does not match the<br />
+certificate, %G_TLS_CERTIFICATE_BAD_IDENTITY will be set in the<br />
+return value. If <!-- raw HTML omitted -->identity<!-- raw HTML omitted --> is nil, that bit will never be set in<br />
+the return value. The peer identity may also be used to check for<br />
+pinned certificates (trust exceptions) in the database. These may<br />
 override the normal verification process on a host-by-host basis.</p>
-<p>Currently there are no <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->, and %G_TLS_DATABASE_VERIFY_NONE should be
+<p>Currently there are no <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->, and %G_TLS_DATABASE_VERIFY_NONE should be<br />
 used.</p>
-<p>If <!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is found to be valid, then the return value will be 0. If
-<!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is found to be invalid, then the return value will indicate at
-least one problem found. If the function is unable to determine
-whether <!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is valid (for example, because <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is
-triggered before it completes) then the return value will be
-%G_TLS_CERTIFICATE_GENERIC_ERROR and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set accordingly.
-<!-- raw HTML omitted -->error<!-- raw HTML omitted --> is not set when <!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is successfully analyzed but found to
+<p>If <!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is found to be valid, then the return value will be 0. If<br />
+<!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is found to be invalid, then the return value will indicate at<br />
+least one problem found. If the function is unable to determine<br />
+whether <!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is valid (for example, because <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is<br />
+triggered before it completes) then the return value will be<br />
+%G_TLS_CERTIFICATE_GENERIC_ERROR and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set accordingly.<br />
+<!-- raw HTML omitted -->error<!-- raw HTML omitted --> is not set when <!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is successfully analyzed but found to<br />
 be invalid.</p>
-<p>GLib guarantees that if certificate verification fails, at least one
-error will be set in the return value, but it does not guarantee
-that all possible errors will be set. Accordingly, you may not safely
-decide to ignore any particular type of error. For example, it would
-be incorrect to mask %G_TLS_CERTIFICATE_EXPIRED if you want to allow
-expired certificates, because this could potentially be the only
+<p>GLib guarantees that if certificate verification fails, at least one<br />
+error will be set in the return value, but it does not guarantee<br />
+that all possible errors will be set. Accordingly, you may not safely<br />
+decide to ignore any particular type of error. For example, it would<br />
+be incorrect to mask %G_TLS_CERTIFICATE_EXPIRED if you want to allow<br />
+expired certificates, because this could potentially be the only<br />
 error flag set even if other problems exist with the certificate.</p>
-<p>Prior to GLib 2.48, GLib's default TLS backend modified <!-- raw HTML omitted -->chain<!-- raw HTML omitted --> to
-represent the certification path built by GTls::Database during
-certificate verification by adjusting the GTls::Certificate:issuer
-property of each certificate in <!-- raw HTML omitted -->chain<!-- raw HTML omitted -->. Since GLib 2.48, this no
-longer occurs, so you cannot rely on GTls::Certificate:issuer to
-represent the actual certification path used during certificate
+<p>Prior to GLib 2.48, GLib's default TLS backend modified <!-- raw HTML omitted -->chain<!-- raw HTML omitted --> to<br />
+represent the certification path built by GTls::Database during<br />
+certificate verification by adjusting the GTls::Certificate:issuer<br />
+property of each certificate in <!-- raw HTML omitted -->chain<!-- raw HTML omitted -->. Since GLib 2.48, this no<br />
+longer occurs, so you cannot rely on GTls::Certificate:issuer to<br />
+represent the actual certification path used during certificate<br />
 verification.</p>
-<p>Because TLS session context is not used, GTls::Database may not
-perform as many checks on the certificates as GTls::Connection would.
-For example, certificate constraints may not be honored, and
-revocation checks may not be performed. The best way to verify TLS
-certificates used by a TLS connection is to let GTls::Connection
+<p>Because TLS session context is not used, GTls::Database may not<br />
+perform as many checks on the certificates as GTls::Connection would.<br />
+For example, certificate constraints may not be honored, and<br />
+revocation checks may not be performed. The best way to verify TLS<br />
+certificates used by a TLS connection is to let GTls::Connection<br />
 handle the verification.</p>
-<p>The TLS backend may attempt to look up and add missing certificates
-to the chain. This may involve HTTP requests to download missing
+<p>The TLS backend may attempt to look up and add missing certificates<br />
+to the chain. This may involve HTTP requests to download missing<br />
 certificates.</p>
-<p>This function can block. Use g_tls_database_verify_chain_async() to
-perform the verification operation asynchronously.
+<p>This function can block. Use g_tls_database_verify_chain_async() to<br />
+perform the verification operation asynchronously.<br />
 result of verification.</p>
 
 
@@ -1607,8 +1610,8 @@ result of verification.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously determines the validity of a certificate chain after
-looking up and adding any missing certificates to the chain. See
+    <p>Asynchronously determines the validity of a certificate chain after<br />
+looking up and adding any missing certificates to the chain. See<br />
 g_tls_database_verify_chain() for more information.</p>
 
 
@@ -1768,16 +1771,16 @@ g_tls_database_verify_chain() for more information.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finish an asynchronous verify chain operation. See
+    <p>Finish an asynchronous verify chain operation. See<br />
 g_tls_database_verify_chain() for more information.</p>
-<p>If <!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is found to be valid, then the return value will be 0. If
-<!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is found to be invalid, then the return value will indicate
-the problems found. If the function is unable to determine whether
-<!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is valid or not (eg, because <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is triggered
-before it completes) then the return value will be
-%G_TLS_CERTIFICATE_GENERIC_ERROR and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set
-accordingly. <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is not set when <!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is successfully analyzed
-but found to be invalid.
+<p>If <!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is found to be valid, then the return value will be 0. If<br />
+<!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is found to be invalid, then the return value will indicate<br />
+the problems found. If the function is unable to determine whether<br />
+<!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is valid or not (eg, because <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is triggered<br />
+before it completes) then the return value will be<br />
+%G_TLS_CERTIFICATE_GENERIC_ERROR and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set<br />
+accordingly. <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is not set when <!-- raw HTML omitted -->chain<!-- raw HTML omitted --> is successfully analyzed<br />
+but found to be invalid.<br />
 result of verification.</p>
 
 
@@ -1832,7 +1835,7 @@ result of verification.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

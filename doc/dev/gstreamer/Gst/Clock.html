@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::Clock";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,14 +99,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>GStreamer clock class. Override the vmethods to implement the clock
+    <p>GStreamer clock class. Override the vmethods to implement the clock<br />
 functionality.</p>
 
 
@@ -341,6 +343,7 @@ functionality.</p>
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -968,9 +971,11 @@ functionality.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -999,7 +1004,7 @@ functionality.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Compares the two Gst::ClockID instances. This function can be used
+    <p>Compares the two Gst::ClockID instances. This function can be used<br />
 as a GCompareFunc when sorting ids.</p>
 
 
@@ -1110,7 +1115,7 @@ as a GCompareFunc when sorting ids.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Gst::Clock or nil when the
+        <div class='inline'><p>a Gst::Clock or nil when the<br />
 underlying clock has been freed.</p>
 </div>
       
@@ -1248,7 +1253,7 @@ underlying clock has been freed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unrefs given <!-- raw HTML omitted -->id<!-- raw HTML omitted -->. When the refcount reaches 0 the
+    <p>Unrefs given <!-- raw HTML omitted -->id<!-- raw HTML omitted -->. When the refcount reaches 0 the<br />
 Gst::ClockID will be freed.</p>
 
 
@@ -1303,9 +1308,9 @@ Gst::ClockID will be freed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Cancels an outstanding request with <!-- raw HTML omitted -->id<!-- raw HTML omitted -->. This can either
-be an outstanding async notification or a pending sync notification.
-After this call, <!-- raw HTML omitted -->id<!-- raw HTML omitted --> cannot be used anymore to receive sync or
+    <p>Cancels an outstanding request with <!-- raw HTML omitted -->id<!-- raw HTML omitted -->. This can either<br />
+be an outstanding async notification or a pending sync notification.<br />
+After this call, <!-- raw HTML omitted -->id<!-- raw HTML omitted --> cannot be used anymore to receive sync or<br />
 async notifications, you need to create a new Gst::ClockID.</p>
 
 
@@ -1360,9 +1365,9 @@ async notifications, you need to create a new Gst::ClockID.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function returns whether <!-- raw HTML omitted -->id<!-- raw HTML omitted --> uses <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> as the underlying clock.
-<!-- raw HTML omitted -->clock<!-- raw HTML omitted --> can be NULL, in which case the return value indicates whether
-the underlying clock has been freed.  If this is the case, the <!-- raw HTML omitted -->id<!-- raw HTML omitted --> is
+    <p>This function returns whether <!-- raw HTML omitted -->id<!-- raw HTML omitted --> uses <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> as the underlying clock.<br />
+<!-- raw HTML omitted -->clock<!-- raw HTML omitted --> can be NULL, in which case the return value indicates whether<br />
+the underlying clock has been freed.  If this is the case, the <!-- raw HTML omitted -->id<!-- raw HTML omitted --> is<br />
 no longer usable and should be freed.</p>
 
 
@@ -1436,20 +1441,20 @@ no longer usable and should be freed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Performs a blocking wait on <!-- raw HTML omitted -->id<!-- raw HTML omitted -->.
-<!-- raw HTML omitted -->id<!-- raw HTML omitted --> should have been created with gst_clock_new_single_shot_id()
-or gst_clock_new_periodic_id() and should not have been unscheduled
+    <p>Performs a blocking wait on <!-- raw HTML omitted -->id<!-- raw HTML omitted -->.<br />
+<!-- raw HTML omitted -->id<!-- raw HTML omitted --> should have been created with gst_clock_new_single_shot_id()<br />
+or gst_clock_new_periodic_id() and should not have been unscheduled<br />
 with a call to gst_clock_id_unschedule().</p>
-<p>If the <!-- raw HTML omitted -->jitter<!-- raw HTML omitted --> argument is not nil and this function returns #GST_CLOCK_OK
-or #GST_CLOCK_EARLY, it will contain the difference
-against the clock and the time of <!-- raw HTML omitted -->id<!-- raw HTML omitted --> when this method was
-called.
-Positive values indicate how late <!-- raw HTML omitted -->id<!-- raw HTML omitted --> was relative to the clock
-(in which case this function will return #GST_CLOCK_EARLY).
-Negative values indicate how much time was spent waiting on the clock
-before this function returned.
-if the current clock time is past the time of <!-- raw HTML omitted -->id<!-- raw HTML omitted -->, #GST_CLOCK_OK if
-<!-- raw HTML omitted -->id<!-- raw HTML omitted --> was scheduled in time. #GST_CLOCK_UNSCHEDULED if <!-- raw HTML omitted -->id<!-- raw HTML omitted --> was
+<p>If the <!-- raw HTML omitted -->jitter<!-- raw HTML omitted --> argument is not nil and this function returns #GST_CLOCK_OK<br />
+or #GST_CLOCK_EARLY, it will contain the difference<br />
+against the clock and the time of <!-- raw HTML omitted -->id<!-- raw HTML omitted --> when this method was<br />
+called.<br />
+Positive values indicate how late <!-- raw HTML omitted -->id<!-- raw HTML omitted --> was relative to the clock<br />
+(in which case this function will return #GST_CLOCK_EARLY).<br />
+Negative values indicate how much time was spent waiting on the clock<br />
+before this function returned.<br />
+if the current clock time is past the time of <!-- raw HTML omitted -->id<!-- raw HTML omitted -->, #GST_CLOCK_OK if<br />
+<!-- raw HTML omitted -->id<!-- raw HTML omitted --> was scheduled in time. #GST_CLOCK_UNSCHEDULED if <!-- raw HTML omitted -->id<!-- raw HTML omitted --> was<br />
 unscheduled with gst_clock_id_unschedule().</p>
 
 
@@ -1484,7 +1489,7 @@ unscheduled with gst_clock_id_unschedule().</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer that will contain the jitter,
+        <div class='inline'><p>a pointer that will contain the jitter,<br />
 can be nil.</p>
 </div>
       
@@ -1524,12 +1529,12 @@ can be nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers a callback on the given Gst::ClockID <!-- raw HTML omitted -->id<!-- raw HTML omitted --> with the given
-function and user_data. When passing a Gst::ClockID with an invalid
-time to this function, the callback will be called immediately
-with  a time set to %GST_CLOCK_TIME_NONE. The callback will
+    <p>Registers a callback on the given Gst::ClockID <!-- raw HTML omitted -->id<!-- raw HTML omitted --> with the given<br />
+function and user_data. When passing a Gst::ClockID with an invalid<br />
+time to this function, the callback will be called immediately<br />
+with  a time set to %GST_CLOCK_TIME_NONE. The callback will<br />
 be called when the time of <!-- raw HTML omitted -->id<!-- raw HTML omitted --> has been reached.</p>
-<p>The callback <!-- raw HTML omitted -->func<!-- raw HTML omitted --> can be invoked from any thread, either provided by the
+<p>The callback <!-- raw HTML omitted -->func<!-- raw HTML omitted --> can be invoked from any thread, either provided by the<br />
 core or from a streaming thread. The application should be prepared for this.</p>
 
 
@@ -1639,15 +1644,15 @@ core or from a streaming thread. The application should be prepared for this.</p
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The time <!-- raw HTML omitted -->master<!-- raw HTML omitted --> of the master clock and the time <!-- raw HTML omitted -->slave<!-- raw HTML omitted --> of the slave
-clock are added to the list of observations. If enough observations
-are available, a linear regression algorithm is run on the
+    <p>The time <!-- raw HTML omitted -->master<!-- raw HTML omitted --> of the master clock and the time <!-- raw HTML omitted -->slave<!-- raw HTML omitted --> of the slave<br />
+clock are added to the list of observations. If enough observations<br />
+are available, a linear regression algorithm is run on the<br />
 observations and <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> is recalibrated.</p>
-<p>If this functions returns true, <!-- raw HTML omitted -->r_squared<!-- raw HTML omitted --> will contain the
-correlation coefficient of the interpolation. A value of 1.0
-means a perfect regression was performed. This value can
-be used to control the sampling frequency of the master and slave
-clocks.
+<p>If this functions returns true, <!-- raw HTML omitted -->r_squared<!-- raw HTML omitted --> will contain the<br />
+correlation coefficient of the interpolation. A value of 1.0<br />
+means a perfect regression was performed. This value can<br />
+be used to control the sampling frequency of the master and slave<br />
+clocks.<br />
 regression algorithm.</p>
 
 
@@ -1736,11 +1741,11 @@ regression algorithm.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Add a clock observation to the internal slaving algorithm the same as
-gst_clock_add_observation(), and return the result of the master clock
+    <p>Add a clock observation to the internal slaving algorithm the same as<br />
+gst_clock_add_observation(), and return the result of the master clock<br />
 estimation, without updating the internal calibration.</p>
-<p>The caller can then take the results and call gst_clock_set_calibration()
-with the values, or some modified version of them.
+<p>The caller can then take the results and call gst_clock_set_calibration()<br />
+with the values, or some modified version of them.<br />
 regression algorithm.</p>
 
 
@@ -1889,9 +1894,9 @@ regression algorithm.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts the given <!-- raw HTML omitted -->internal<!-- raw HTML omitted --> clock time to the external time, adjusting for the
-rate and reference time set with gst_clock_set_calibration() and making sure
-that the returned time is increasing. This function should be called with the
+    <p>Converts the given <!-- raw HTML omitted -->internal<!-- raw HTML omitted --> clock time to the external time, adjusting for the<br />
+rate and reference time set with gst_clock_set_calibration() and making sure<br />
+that the returned time is increasing. This function should be called with the<br />
 clock's OBJECT_LOCK held and is mainly used by clock subclasses.</p>
 <p>This function is the reverse of gst_clock_unadjust_unlocked().</p>
 
@@ -1951,10 +1956,10 @@ clock's OBJECT_LOCK held and is mainly used by clock subclasses.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts the given <!-- raw HTML omitted -->internal_target<!-- raw HTML omitted --> clock time to the external time,
-using the passed calibration parameters. This function performs the
-same calculation as gst_clock_adjust_unlocked() when called using the
-current calibration parameters, but doesn't ensure a monotonically
+    <p>Converts the given <!-- raw HTML omitted -->internal_target<!-- raw HTML omitted --> clock time to the external time,<br />
+using the passed calibration parameters. This function performs the<br />
+same calculation as gst_clock_adjust_unlocked() when called using the<br />
+current calibration parameters, but doesn't ensure a monotonically<br />
 increasing result as gst_clock_adjust_unlocked() does.</p>
 <p>Note: The <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> parameter is unused and can be NULL</p>
 
@@ -2020,7 +2025,7 @@ increasing result as gst_clock_adjust_unlocked() does.</p>
       
       
         &mdash;
-        <div class='inline'><p>the numerator of the rate of the clock relative to its
+        <div class='inline'><p>the numerator of the rate of the clock relative to its<br />
 internal time</p>
 </div>
       
@@ -2075,9 +2080,9 @@ internal time</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the internal rate and reference time of <!-- raw HTML omitted -->clock<!-- raw HTML omitted -->. See
+    <p>Gets the internal rate and reference time of <!-- raw HTML omitted -->clock<!-- raw HTML omitted -->. See<br />
 gst_clock_set_calibration() for more information.</p>
-<p><!-- raw HTML omitted -->internal<!-- raw HTML omitted -->, <!-- raw HTML omitted -->external<!-- raw HTML omitted -->, <!-- raw HTML omitted -->rate_num<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->rate_denom<!-- raw HTML omitted --> can be left nil if the
+<p><!-- raw HTML omitted -->internal<!-- raw HTML omitted -->, <!-- raw HTML omitted -->external<!-- raw HTML omitted -->, <!-- raw HTML omitted -->rate_num<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->rate_denom<!-- raw HTML omitted --> can be left nil if the<br />
 caller is not interested in the values.</p>
 
 
@@ -2177,8 +2182,8 @@ caller is not interested in the values.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the current internal time of the given clock. The time is returned
-unadjusted for the offset and the rate.
+    <p>Gets the current internal time of the given clock. The time is returned<br />
+unadjusted for the offset and the rate.<br />
 given invalid input.</p>
 
 
@@ -2218,7 +2223,7 @@ given invalid input.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if the clock is currently synced, by looking at whether
+    <p>Checks if the clock is currently synced, by looking at whether<br />
 %GST_CLOCK_FLAG_NEEDS_STARTUP_SYNC is set.</p>
 
 
@@ -2258,7 +2263,7 @@ given invalid input.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the master clock that <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> is slaved to or nil when the clock is
+    <p>Gets the master clock that <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> is slaved to or nil when the clock is<br />
 not slaved to any master clock.</p>
 
 
@@ -2277,7 +2282,7 @@ not slaved to any master clock.</p>
       
       
         &mdash;
-        <div class='inline'><p>a master Gst::Clock or nil
+        <div class='inline'><p>a master Gst::Clock or nil<br />
 when this clock is not slaved to a master clock.</p>
 </div>
       
@@ -2299,15 +2304,15 @@ when this clock is not slaved to a master clock.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->master<!-- raw HTML omitted --> as the master clock for <!-- raw HTML omitted -->clock<!-- raw HTML omitted -->. <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> will be automatically
-calibrated so that gst_clock_get_time() reports the same time as the
+    <p>Sets <!-- raw HTML omitted -->master<!-- raw HTML omitted --> as the master clock for <!-- raw HTML omitted -->clock<!-- raw HTML omitted -->. <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> will be automatically<br />
+calibrated so that gst_clock_get_time() reports the same time as the<br />
 master clock.</p>
-<p>A clock provider that slaves its clock to a master can get the current
+<p>A clock provider that slaves its clock to a master can get the current<br />
 calibration values with gst_clock_get_calibration().</p>
-<p><!-- raw HTML omitted -->master<!-- raw HTML omitted --> can be nil in which case <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> will not be slaved anymore. It will
-however keep reporting its time adjusted with the last configured rate
-and time offsets.
-Trying to set a master on a clock without the
+<p><!-- raw HTML omitted -->master<!-- raw HTML omitted --> can be nil in which case <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> will not be slaved anymore. It will<br />
+however keep reporting its time adjusted with the last configured rate<br />
+and time offsets.<br />
+Trying to set a master on a clock without the<br />
 #GST_CLOCK_FLAG_CAN_SET_MASTER flag will make this function return false.</p>
 
 
@@ -2366,8 +2371,8 @@ Trying to set a master on a clock without the
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets an ID from <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> to trigger a periodic notification.
-The periodic notifications will start at time <!-- raw HTML omitted -->start_time<!-- raw HTML omitted --> and
+    <p>Gets an ID from <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> to trigger a periodic notification.<br />
+The periodic notifications will start at time <!-- raw HTML omitted -->start_time<!-- raw HTML omitted --> and<br />
 will then be fired with the given <!-- raw HTML omitted -->interval<!-- raw HTML omitted -->.</p>
 
 
@@ -2420,7 +2425,7 @@ will then be fired with the given <!-- raw HTML omitted -->interval<!-- raw HTML
       
       
         &mdash;
-        <div class='inline'><p>a Gst::ClockID that can be used to request the
+        <div class='inline'><p>a Gst::ClockID that can be used to request the<br />
 time notification.</p>
 </div>
       
@@ -2442,7 +2447,7 @@ time notification.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a Gst::ClockID from <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> to trigger a single shot
+    <p>Gets a Gst::ClockID from <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> to trigger a single shot<br />
 notification at the requested time.</p>
 
 
@@ -2480,7 +2485,7 @@ notification at the requested time.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Gst::ClockID that can be used to request the
+        <div class='inline'><p>a Gst::ClockID that can be used to request the<br />
 time notification.</p>
 </div>
       
@@ -2502,8 +2507,8 @@ time notification.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reinitializes the provided periodic <!-- raw HTML omitted -->id<!-- raw HTML omitted --> to the provided start time and
-interval. Does not modify the reference count.
+    <p>Reinitializes the provided periodic <!-- raw HTML omitted -->id<!-- raw HTML omitted --> to the provided start time and<br />
+interval. Does not modify the reference count.<br />
 <!-- raw HTML omitted -->time<!-- raw HTML omitted -->, else false.</p>
 
 
@@ -2592,7 +2597,7 @@ interval. Does not modify the reference count.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the accuracy of the clock. The accuracy of the clock is the granularity
+    <p>Gets the accuracy of the clock. The accuracy of the clock is the granularity<br />
 of the values returned by gst_clock_get_time().</p>
 
 
@@ -2632,10 +2637,10 @@ of the values returned by gst_clock_get_time().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the accuracy of the clock. Some clocks have the possibility to operate
-with different accuracy at the expense of more resource usage. There is
-normally no need to change the default resolution of a clock. The resolution
-of a clock can only be changed if the clock has the
+    <p>Sets the accuracy of the clock. Some clocks have the possibility to operate<br />
+with different accuracy at the expense of more resource usage. There is<br />
+normally no need to change the default resolution of a clock. The resolution<br />
+of a clock can only be changed if the clock has the<br />
 #GST_CLOCK_FLAG_CAN_SET_RESOLUTION flag set.</p>
 
 
@@ -2694,20 +2699,20 @@ of a clock can only be changed if the clock has the
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adjusts the rate and time of <!-- raw HTML omitted -->clock<!-- raw HTML omitted -->. A rate of 1/1 is the normal speed of
+    <p>Adjusts the rate and time of <!-- raw HTML omitted -->clock<!-- raw HTML omitted -->. A rate of 1/1 is the normal speed of<br />
 the clock. Values bigger than 1/1 make the clock go faster.</p>
-<p><!-- raw HTML omitted -->internal<!-- raw HTML omitted --> and <!-- raw HTML omitted -->external<!-- raw HTML omitted --> are calibration parameters that arrange that
-gst_clock_get_time() should have been <!-- raw HTML omitted -->external<!-- raw HTML omitted --> at internal time <!-- raw HTML omitted -->internal<!-- raw HTML omitted -->.
-This internal time should not be in the future; that is, it should be less
+<p><!-- raw HTML omitted -->internal<!-- raw HTML omitted --> and <!-- raw HTML omitted -->external<!-- raw HTML omitted --> are calibration parameters that arrange that<br />
+gst_clock_get_time() should have been <!-- raw HTML omitted -->external<!-- raw HTML omitted --> at internal time <!-- raw HTML omitted -->internal<!-- raw HTML omitted -->.<br />
+This internal time should not be in the future; that is, it should be less<br />
 than the value of gst_clock_get_internal_time() when this function is called.</p>
-<p>Subsequent calls to gst_clock_get_time() will return clock times computed as
+<p>Subsequent calls to gst_clock_get_time() will return clock times computed as<br />
 follows:</p>
 <pre class="code C"><code class="C">  time = (internal_time - internal) * rate_num / rate_denom + external
 </code></pre>
-<p>This formula is implemented in gst_clock_adjust_unlocked(). Of course, it
+<p>This formula is implemented in gst_clock_adjust_unlocked(). Of course, it<br />
 tries to do the integer arithmetic as precisely as possible.</p>
-<p>Note that gst_clock_get_time() always returns increasing values so when you
-move the clock backwards, gst_clock_get_time() will report the previous value
+<p>Note that gst_clock_get_time() always returns increasing values so when you<br />
+move the clock backwards, gst_clock_get_time() will report the previous value<br />
 until the clock catches up.</p>
 
 
@@ -2757,7 +2762,7 @@ until the clock catches up.</p>
       
       
         &mdash;
-        <div class='inline'><p>the numerator of the rate of the clock relative to its
+        <div class='inline'><p>the numerator of the rate of the clock relative to its<br />
 internal time</p>
 </div>
       
@@ -2808,8 +2813,8 @@ internal time</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reinitializes the provided single shot <!-- raw HTML omitted -->id<!-- raw HTML omitted --> to the provided time. Does not
-modify the reference count.
+    <p>Reinitializes the provided single shot <!-- raw HTML omitted -->id<!-- raw HTML omitted --> to the provided time. Does not<br />
+modify the reference count.<br />
 <!-- raw HTML omitted -->time<!-- raw HTML omitted -->, else false.</p>
 
 
@@ -2883,9 +2888,9 @@ modify the reference count.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> to synced and emits the Gst::Clock::synced signal, and wakes up any
+    <p>Sets <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> to synced and emits the Gst::Clock::synced signal, and wakes up any<br />
 thread waiting in gst_clock_wait_for_sync().</p>
-<p>This function must only be called if %GST_CLOCK_FLAG_NEEDS_STARTUP_SYNC
+<p>This function must only be called if %GST_CLOCK_FLAG_NEEDS_STARTUP_SYNC<br />
 is set on the clock, and is intended to be called by subclasses only.</p>
 
 
@@ -2940,9 +2945,9 @@ is set on the clock, and is intended to be called by subclasses only.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the current time of the given clock. The time is always
-monotonically increasing and adjusted according to the current
-offset and rate.
+    <p>Gets the current time of the given clock. The time is always<br />
+monotonically increasing and adjusted according to the current<br />
+offset and rate.<br />
 given invalid input.</p>
 
 
@@ -3087,9 +3092,9 @@ given invalid input.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts the given <!-- raw HTML omitted -->external<!-- raw HTML omitted --> clock time to the internal time of <!-- raw HTML omitted -->clock<!-- raw HTML omitted -->,
-using the rate and reference time set with gst_clock_set_calibration().
-This function should be called with the clock's OBJECT_LOCK held and
+    <p>Converts the given <!-- raw HTML omitted -->external<!-- raw HTML omitted --> clock time to the internal time of <!-- raw HTML omitted -->clock<!-- raw HTML omitted -->,<br />
+using the rate and reference time set with gst_clock_set_calibration().<br />
+This function should be called with the clock's OBJECT_LOCK held and<br />
 is mainly used by clock subclasses.</p>
 <p>This function is the reverse of gst_clock_adjust_unlocked().</p>
 
@@ -3149,9 +3154,9 @@ is mainly used by clock subclasses.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts the given <!-- raw HTML omitted -->external_target<!-- raw HTML omitted --> clock time to the internal time,
-using the passed calibration parameters. This function performs the
-same calculation as gst_clock_unadjust_unlocked() when called using the
+    <p>Converts the given <!-- raw HTML omitted -->external_target<!-- raw HTML omitted --> clock time to the internal time,<br />
+using the passed calibration parameters. This function performs the<br />
+same calculation as gst_clock_unadjust_unlocked() when called using the<br />
 current calibration parameters.</p>
 <p>Note: The <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> parameter is unused and can be NULL</p>
 
@@ -3217,7 +3222,7 @@ current calibration parameters.</p>
       
       
         &mdash;
-        <div class='inline'><p>the numerator of the rate of the clock relative to its
+        <div class='inline'><p>the numerator of the rate of the clock relative to its<br />
 internal time</p>
 </div>
       
@@ -3272,11 +3277,11 @@ internal time</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Waits until <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> is synced for reporting the current time. If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted -->
-is %GST_CLOCK_TIME_NONE it will wait forever, otherwise it will time out
+    <p>Waits until <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> is synced for reporting the current time. If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --><br />
+is %GST_CLOCK_TIME_NONE it will wait forever, otherwise it will time out<br />
 after <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> nanoseconds.</p>
 <p>For asynchronous waiting, the Gst::Clock::synced signal can be used.</p>
-<p>This returns immediately with true if %GST_CLOCK_FLAG_NEEDS_STARTUP_SYNC
+<p>This returns immediately with true if %GST_CLOCK_FLAG_NEEDS_STARTUP_SYNC<br />
 is not set on the clock, or if the clock is already synced.</p>
 
 
@@ -3541,7 +3546,7 @@ is not set on the clock, or if the clock is already synced.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Poppler";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -83,8 +84,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/poppler/page.rb<span class="defines">,<br />
-  lib/poppler.rb,<br /> lib/poppler/color.rb,<br /> lib/poppler/loader.rb,<br /> lib/poppler/version.rb,<br /> lib/poppler/document.rb,<br /> lib/poppler/rectangle.rb,<br /> lib/poppler/deprecated.rb,<br /> lib/poppler/index-iter.rb,<br /> lib/poppler/image-mapping.rb,<br /> lib/poppler/annot-callout-line.rb</span>
+    <dd>lib/poppler/page.rb<span class="defines">,<br>
+  lib/poppler.rb,<br> lib/poppler/color.rb,<br> lib/poppler/loader.rb,<br> lib/poppler/version.rb,<br> lib/poppler/document.rb,<br> lib/poppler/rectangle.rb,<br> lib/poppler/deprecated.rb,<br> lib/poppler/index-iter.rb,<br> lib/poppler/image-mapping.rb,<br> lib/poppler/annot-callout-line.rb</span>
+
 </dd>
   </dl>
   
@@ -93,16 +95,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2017  Ruby-GNOME2 Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -195,7 +197,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
         <dt id="MAJOR_VERSION-constant" class="">MAJOR_VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>The major version number of the poppler header files (e.g. in poppler version
+    <p>The major version number of the poppler header files (e.g. in poppler version<br />
 0.1.2 this is 0.)</p>
 
 
@@ -211,7 +213,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
         <dt id="MICRO_VERSION-constant" class="">MICRO_VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>The micro version number of the poppler header files (e.g. in poppler version
+    <p>The micro version number of the poppler header files (e.g. in poppler version<br />
 0.1.2 this is 2.)</p>
 
 
@@ -227,7 +229,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
         <dt id="MINOR_VERSION-constant" class="">MINOR_VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>The major version number of the poppler header files (e.g. in poppler version
+    <p>The major version number of the poppler header files (e.g. in poppler version<br />
 0.1.2 this is 1.)</p>
 
 
@@ -515,6 +517,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 
       
     </ul>
+    
   
 
 
@@ -613,7 +616,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Parses a PDF format date string and converts it to a #time_t. Returns #FALSE
+    <p>Parses a PDF format date string and converts it to a #time_t. Returns #FALSE<br />
 if the parsing fails or the input string is not a valid PDF format date string</p>
 
 
@@ -775,9 +778,9 @@ if the parsing fails or the input string is not a valid PDF format date string</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts a bytestring into a zero-terminated string suitable to
+    <p>Converts a bytestring into a zero-terminated string suitable to<br />
 pass to poppler_document_find_dest().</p>
-<p>Note that the returned string has no defined encoding and is not
+<p>Note that the returned string has no defined encoding and is not<br />
 suitable for display to the user.</p>
 <p>The returned data must be freed using g_free().</p>
 
@@ -852,10 +855,10 @@ suitable for display to the user.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts a named dest string (e.g. from Poppler::Dest.named_dest) into a
-bytestring, inverting the transformation of
+    <p>Converts a named dest string (e.g. from Poppler::Dest.named_dest) into a<br />
+bytestring, inverting the transformation of<br />
 poppler_named_dest_from_bytestring().</p>
-<p>Note that the returned data is not zero terminated and may also
+<p>Note that the returned data is not zero terminated and may also<br />
 contains embedded NUL bytes.</p>
 <p>If <!-- raw HTML omitted -->name<!-- raw HTML omitted --> is not a valid named dest string, returns nil.</p>
 <p>The returned data must be freed using g_free().</p>
@@ -910,7 +913,7 @@ contains embedded NUL bytes.</p>
       
       
         &mdash;
-        <div class='inline'><p>a new bytestring,
+        <div class='inline'><p>a new bytestring,<br />
 or nil</p>
 </div>
       
@@ -1110,7 +1113,7 @@ or nil</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

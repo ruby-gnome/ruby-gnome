@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::LockButton";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,38 +101,39 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkLockButton</code> is a widget to obtain and revoke authorizations
+    <p><code>GtkLockButton</code> is a widget to obtain and revoke authorizations<br />
 needed to operate the controls.</p>
 <p><img src="lock-button.png" alt="An example GtkLockButton" /></p>
 <p>It is typically used in preference dialogs or control panels.</p>
-<p>The required authorization is represented by a <code>GPermission</code> object.
-Concrete implementations of <code>GPermission</code> may use PolicyKit or some
-other authorization framework. To obtain a PolicyKit-based
+<p>The required authorization is represented by a <code>GPermission</code> object.<br />
+Concrete implementations of <code>GPermission</code> may use PolicyKit or some<br />
+other authorization framework. To obtain a PolicyKit-based<br />
 <code>GPermission</code>, use <code>polkit_permission_new()</code>.</p>
-<p>If the user is not currently allowed to perform the action, but can
+<p>If the user is not currently allowed to perform the action, but can<br />
 obtain the permission, the widget looks like this:</p>
 <p><img src="lockbutton-locked.png" alt="" /></p>
-<p>and the user can click the button to request the permission. Depending
-on the platform, this may pop up an authentication dialog or ask the user
-to authenticate in some other way. Once the user has obtained the permission,
+<p>and the user can click the button to request the permission. Depending<br />
+on the platform, this may pop up an authentication dialog or ask the user<br />
+to authenticate in some other way. Once the user has obtained the permission,<br />
 the widget changes to this:</p>
 <p><img src="lockbutton-unlocked.png" alt="" /></p>
-<p>and the permission can be dropped again by clicking the button. If the user
+<p>and the permission can be dropped again by clicking the button. If the user<br />
 is not able to obtain the permission at all, the widget looks like this:</p>
 <p><img src="lockbutton-sorry.png" alt="" /></p>
 <p>If the user has the permission and cannot drop it, the button is hidden.</p>
-<p>The text (and tooltips) that are shown in the various cases can be adjusted
-with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LockButton:text-lock],
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LockButton:text-unlock],
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LockButton:tooltip-lock],
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LockButton:tooltip-unlock] and
+<p>The text (and tooltips) that are shown in the various cases can be adjusted<br />
+with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LockButton:text-lock],<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LockButton:text-unlock],<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LockButton:tooltip-lock],<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LockButton:tooltip-unlock] and<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LockButton:tooltip-not-authorized] properties.</p>
 
 
@@ -457,9 +459,11 @@ with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LockButt
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -471,6 +475,7 @@ with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LockButt
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Button.html" title="Gtk::Button (class)">Button</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Button.html#can_shrink-instance_method" title="Gtk::Button#can_shrink (method)">#can_shrink</a></span>, <span class='object_link'><a href="Button.html#can_shrink=-instance_method" title="Gtk::Button#can_shrink= (method)">#can_shrink=</a></span>, <span class='object_link'><a href="Button.html#can_shrink%3F-instance_method" title="Gtk::Button#can_shrink? (method)">#can_shrink?</a></span>, <span class='object_link'><a href="Button.html#child-instance_method" title="Gtk::Button#child (method)">#child</a></span>, <span class='object_link'><a href="Button.html#child=-instance_method" title="Gtk::Button#child= (method)">#child=</a></span>, <span class='object_link'><a href="Button.html#has_frame-instance_method" title="Gtk::Button#has_frame (method)">#has_frame</a></span>, <span class='object_link'><a href="Button.html#has_frame=-instance_method" title="Gtk::Button#has_frame= (method)">#has_frame=</a></span>, <span class='object_link'><a href="Button.html#has_frame%3F-instance_method" title="Gtk::Button#has_frame? (method)">#has_frame?</a></span>, <span class='object_link'><a href="Button.html#icon_name-instance_method" title="Gtk::Button#icon_name (method)">#icon_name</a></span>, <span class='object_link'><a href="Button.html#icon_name=-instance_method" title="Gtk::Button#icon_name= (method)">#icon_name=</a></span>, <span class='object_link'><a href="Button.html#initialize_raw-instance_method" title="Gtk::Button#initialize_raw (method)">#initialize_raw</a></span>, <span class='object_link'><a href="Button.html#label-instance_method" title="Gtk::Button#label (method)">#label</a></span>, <span class='object_link'><a href="Button.html#label=-instance_method" title="Gtk::Button#label= (method)">#label=</a></span>, <span class='object_link'><a href="Button.html#use_underline-instance_method" title="Gtk::Button#use_underline (method)">#use_underline</a></span>, <span class='object_link'><a href="Button.html#use_underline=-instance_method" title="Gtk::Button#use_underline= (method)">#use_underline=</a></span>, <span class='object_link'><a href="Button.html#use_underline%3F-instance_method" title="Gtk::Button#use_underline? (method)">#use_underline?</a></span></p>
 
+  
   
   
   
@@ -1178,7 +1183,7 @@ with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LockButt
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

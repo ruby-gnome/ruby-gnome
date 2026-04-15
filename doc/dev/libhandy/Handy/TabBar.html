@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Handy::TabBar";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -671,6 +673,7 @@
 
       
     </ul>
+    
   
 
 
@@ -757,8 +760,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether tabs automatically hide.</p>
-<p>If set to <code>TRUE</code>, the tab bar disappears when the associated
-[class<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->] has 0 or 1 tab, no pinned tabs, and no tab is being
+<p>If set to <code>TRUE</code>, the tab bar disappears when the associated<br />
+[class<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->] has 0 or 1 tab, no pinned tabs, and no tab is being<br />
 transferred.</p>
 <p>See [property<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->:tabs-revealed].</p>
 
@@ -828,8 +831,8 @@ transferred.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether tabs automatically hide.</p>
-<p>If set to <code>TRUE</code>, the tab bar disappears when the associated
-[class<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->] has 0 or 1 tab, no pinned tabs, and no tab is being
+<p>If set to <code>TRUE</code>, the tab bar disappears when the associated<br />
+[class<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->] has 0 or 1 tab, no pinned tabs, and no tab is being<br />
 transferred.</p>
 <p>See [property<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->:tabs-revealed].</p>
 
@@ -1016,7 +1019,7 @@ transferred.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether tabs should expand.</p>
-<p>If set to <code>TRUE</code>, the tabs will always vary width filling the whole width
+<p>If set to <code>TRUE</code>, the tabs will always vary width filling the whole width<br />
 when possible, otherwise tabs will always have the minimum possible size.</p>
 
 
@@ -1085,7 +1088,7 @@ when possible, otherwise tabs will always have the minimum possible size.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether tabs should expand.</p>
-<p>If set to <code>TRUE</code>, the tabs will always vary width filling the whole width
+<p>If set to <code>TRUE</code>, the tabs will always vary width filling the whole width<br />
 when possible, otherwise tabs will always have the minimum possible size.</p>
 
 
@@ -1126,11 +1129,11 @@ when possible, otherwise tabs will always have the minimum possible size.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Extra drag destination targets.</p>
-<p>Allows to drag arbitrary content onto tabs, for example URLs in a web
+<p>Allows to drag arbitrary content onto tabs, for example URLs in a web<br />
 browser.</p>
-<p>If a tab is hovered for a certain period of time while dragging the
+<p>If a tab is hovered for a certain period of time while dragging the<br />
 content, it will be automatically selected.</p>
-<p>After content is dropped, the [signal<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->::extra-drag-data-received]
+<p>After content is dropped, the [signal<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->::extra-drag-data-received]<br />
 signal can be used to retrieve and process the drag data.</p>
 
 
@@ -1171,11 +1174,11 @@ signal can be used to retrieve and process the drag data.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Extra drag destination targets.</p>
-<p>Allows to drag arbitrary content onto tabs, for example URLs in a web
+<p>Allows to drag arbitrary content onto tabs, for example URLs in a web<br />
 browser.</p>
-<p>If a tab is hovered for a certain period of time while dragging the
+<p>If a tab is hovered for a certain period of time while dragging the<br />
 content, it will be automatically selected.</p>
-<p>After content is dropped, the [signal<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->::extra-drag-data-received]
+<p>After content is dropped, the [signal<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->::extra-drag-data-received]<br />
 signal can be used to retrieve and process the drag data.</p>
 
 
@@ -1283,7 +1286,7 @@ signal can be used to retrieve and process the drag data.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether tabs use inverted layout.</p>
-<p>If set to <code>TRUE</code>, non-pinned tabs will have the close button at the
+<p>If set to <code>TRUE</code>, non-pinned tabs will have the close button at the<br />
 beginning and the indicator at the end rather than the opposite.</p>
 
 
@@ -1352,7 +1355,7 @@ beginning and the indicator at the end rather than the opposite.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether tabs use inverted layout.</p>
-<p>If set to <code>TRUE</code>, non-pinned tabs will have the close button at the
+<p>If set to <code>TRUE</code>, non-pinned tabs will have the close button at the<br />
 beginning and the indicator at the end rather than the opposite.</p>
 
 
@@ -1432,7 +1435,7 @@ beginning and the indicator at the end rather than the opposite.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the tab bar is overflowing.</p>
-<p>If set to <code>TRUE</code>, all tabs cannot be displayed at once and require
+<p>If set to <code>TRUE</code>, all tabs cannot be displayed at once and require<br />
 scrolling.</p>
 
 
@@ -1501,7 +1504,7 @@ scrolling.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the tab bar is overflowing.</p>
-<p>If set to <code>TRUE</code>, all tabs cannot be displayed at once and require
+<p>If set to <code>TRUE</code>, all tabs cannot be displayed at once and require<br />
 scrolling.</p>
 
 
@@ -1896,7 +1899,7 @@ scrolling.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

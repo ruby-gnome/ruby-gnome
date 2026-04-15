@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::SocketClient";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -945,6 +947,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -990,22 +993,22 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Enable proxy protocols to be handled by the application. When the
-indicated proxy protocol is returned by the GProxy::Resolver,
-GSocket::Client will consider this protocol as supported but will
-not try to find a #GProxy instance to handle handshaking. The
-application must check for this case by calling
-g_socket_connection_get_remote_address() on the returned
-GSocket::Connection, and seeing if it's a #GProxyAddress of the
-appropriate type, to determine whether or not it needs to handle
+    <p>Enable proxy protocols to be handled by the application. When the<br />
+indicated proxy protocol is returned by the GProxy::Resolver,<br />
+GSocket::Client will consider this protocol as supported but will<br />
+not try to find a #GProxy instance to handle handshaking. The<br />
+application must check for this case by calling<br />
+g_socket_connection_get_remote_address() on the returned<br />
+GSocket::Connection, and seeing if it's a #GProxyAddress of the<br />
+appropriate type, to determine whether or not it needs to handle<br />
 the proxy handshaking itself.</p>
-<p>This should be used for proxy protocols that are dialects of
-another protocol such as HTTP proxy. It also allows cohabitation of
-proxy protocols that are reused between protocols. A good example
-is HTTP. It can be used to proxy HTTP, FTP and Gopher and can also
+<p>This should be used for proxy protocols that are dialects of<br />
+another protocol such as HTTP proxy. It also allows cohabitation of<br />
+proxy protocols that are reused between protocols. A good example<br />
+is HTTP. It can be used to proxy HTTP, FTP and Gopher and can also<br />
 be use as generic socket proxy through the HTTP CONNECT method.</p>
-<p>When the proxy is detected as being an application proxy, TLS handshake
-will be skipped. This is required to let the application do the proxy
+<p>When the proxy is detected as being an application proxy, TLS handshake<br />
+will be skipped. This is required to let the application do the proxy<br />
 specific handshake.</p>
 
 
@@ -1061,18 +1064,18 @@ specific handshake.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Tries to resolve the <!-- raw HTML omitted -->connectable<!-- raw HTML omitted --> and make a network connection to it.</p>
-<p>Upon a successful connection, a new GSocket::Connection is constructed
-and returned.  The caller owns this new object and must drop their
+<p>Upon a successful connection, a new GSocket::Connection is constructed<br />
+and returned.  The caller owns this new object and must drop their<br />
 reference to it when finished with it.</p>
-<p>The type of the GSocket::Connection object returned depends on the type of
-the underlying socket that is used. For instance, for a TCP/IP connection
+<p>The type of the GSocket::Connection object returned depends on the type of<br />
+the underlying socket that is used. For instance, for a TCP/IP connection<br />
 it will be a GTcp::Connection.</p>
-<p>The socket created will be the same family as the address that the
-<!-- raw HTML omitted -->connectable<!-- raw HTML omitted --> resolves to, unless family is set with g_socket_client_set_family()
-or indirectly via g_socket_client_set_local_address(). The socket type
-defaults to %G_SOCKET_TYPE_STREAM but can be set with
+<p>The socket created will be the same family as the address that the<br />
+<!-- raw HTML omitted -->connectable<!-- raw HTML omitted --> resolves to, unless family is set with g_socket_client_set_family()<br />
+or indirectly via g_socket_client_set_local_address(). The socket type<br />
+defaults to %G_SOCKET_TYPE_STREAM but can be set with<br />
 g_socket_client_set_socket_type().</p>
-<p>If a local address is specified with g_socket_client_set_local_address() the
+<p>If a local address is specified with g_socket_client_set_local_address() the<br />
 socket will be bound to this address before connecting.</p>
 
 
@@ -1147,16 +1150,16 @@ socket will be bound to this address before connecting.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>This is the asynchronous version of g_socket_client_connect().</p>
-<p>You may wish to prefer the asynchronous version even in synchronous
-command line programs because, since 2.60, it implements
-<a href="https://tools.ietf.org/html/rfc8305">RFC 8305</a> &quot;Happy Eyeballs&quot;
-recommendations to work around long connection timeouts in networks
-where IPv6 is broken by performing an IPv4 connection simultaneously
-without waiting for IPv6 to time out, which is not supported by the
-synchronous call. (This is not an API guarantee, and may change in
+<p>You may wish to prefer the asynchronous version even in synchronous<br />
+command line programs because, since 2.60, it implements<br />
+<a href="https://tools.ietf.org/html/rfc8305">RFC 8305</a> &quot;Happy Eyeballs&quot;<br />
+recommendations to work around long connection timeouts in networks<br />
+where IPv6 is broken by performing an IPv4 connection simultaneously<br />
+without waiting for IPv6 to time out, which is not supported by the<br />
+synchronous call. (This is not an API guarantee, and may change in<br />
 the future.)</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be
-called. You can then call g_socket_client_connect_finish() to get
+<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be<br />
+called. You can then call g_socket_client_connect_finish() to get<br />
 the result of the operation.</p>
 
 
@@ -1316,26 +1319,26 @@ the result of the operation.</p>
   <div class="discussion">
     <p>This is a helper function for g_socket_client_connect().</p>
 <p>Attempts to create a TCP connection to the named host.</p>
-<p><!-- raw HTML omitted -->host_and_port<!-- raw HTML omitted --> may be in any of a number of recognized formats; an IPv6
-address, an IPv4 address, or a domain name (in which case a DNS
-lookup is performed).  Quoting with [] is supported for all address
-types.  A port override may be specified in the usual way with a
-colon.  Ports may be given as decimal numbers or symbolic names (in
+<p><!-- raw HTML omitted -->host_and_port<!-- raw HTML omitted --> may be in any of a number of recognized formats; an IPv6<br />
+address, an IPv4 address, or a domain name (in which case a DNS<br />
+lookup is performed).  Quoting with [] is supported for all address<br />
+types.  A port override may be specified in the usual way with a<br />
+colon.  Ports may be given as decimal numbers or symbolic names (in<br />
 which case an /etc/services lookup is performed).</p>
-<p>If no port override is given in <!-- raw HTML omitted -->host_and_port<!-- raw HTML omitted --> then <!-- raw HTML omitted -->default_port<!-- raw HTML omitted --> will be
+<p>If no port override is given in <!-- raw HTML omitted -->host_and_port<!-- raw HTML omitted --> then <!-- raw HTML omitted -->default_port<!-- raw HTML omitted --> will be<br />
 used as the port number to connect to.</p>
-<p>In general, <!-- raw HTML omitted -->host_and_port<!-- raw HTML omitted --> is expected to be provided by the user (allowing
-them to give the hostname, and a port override if necessary) and
+<p>In general, <!-- raw HTML omitted -->host_and_port<!-- raw HTML omitted --> is expected to be provided by the user (allowing<br />
+them to give the hostname, and a port override if necessary) and<br />
 <!-- raw HTML omitted -->default_port<!-- raw HTML omitted --> is expected to be provided by the application.</p>
-<p>In the case that an IP address is given, a single connection
-attempt is made.  In the case that a name is given, multiple
-connection attempts may be made, in turn and according to the
+<p>In the case that an IP address is given, a single connection<br />
+attempt is made.  In the case that a name is given, multiple<br />
+connection attempts may be made, in turn and according to the<br />
 number of address records in DNS, until a connection succeeds.</p>
-<p>Upon a successful connection, a new GSocket::Connection is constructed
-and returned.  The caller owns this new object and must drop their
+<p>Upon a successful connection, a new GSocket::Connection is constructed<br />
+and returned.  The caller owns this new object and must drop their<br />
 reference to it when finished with it.</p>
-<p>In the event of any failure (DNS error, service not found, no hosts
-connectable) nil is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) is set
+<p>In the event of any failure (DNS error, service not found, no hosts<br />
+connectable) nil is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) is set<br />
 accordingly.</p>
 
 
@@ -1425,8 +1428,8 @@ accordingly.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>This is the asynchronous version of g_socket_client_connect_to_host().</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be
-called. You can then call g_socket_client_connect_to_host_finish() to get
+<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be<br />
+called. You can then call g_socket_client_connect_to_host_finish() to get<br />
 the result of the operation.</p>
 
 
@@ -1600,15 +1603,15 @@ the result of the operation.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Attempts to create a TCP connection to a service.</p>
-<p>This call looks up the SRV record for <!-- raw HTML omitted -->service<!-- raw HTML omitted --> at <!-- raw HTML omitted -->domain<!-- raw HTML omitted --> for the
-&quot;tcp&quot; protocol.  It then attempts to connect, in turn, to each of
-the hosts providing the service until either a connection succeeds
+<p>This call looks up the SRV record for <!-- raw HTML omitted -->service<!-- raw HTML omitted --> at <!-- raw HTML omitted -->domain<!-- raw HTML omitted --> for the<br />
+&quot;tcp&quot; protocol.  It then attempts to connect, in turn, to each of<br />
+the hosts providing the service until either a connection succeeds<br />
 or there are no hosts remaining.</p>
-<p>Upon a successful connection, a new GSocket::Connection is constructed
-and returned.  The caller owns this new object and must drop their
+<p>Upon a successful connection, a new GSocket::Connection is constructed<br />
+and returned.  The caller owns this new object and must drop their<br />
 reference to it when finished with it.</p>
-<p>In the event of any failure (DNS error, service not found, no hosts
-connectable) nil is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) is set
+<p>In the event of any failure (DNS error, service not found, no hosts<br />
+connectable) nil is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) is set<br />
 accordingly.</p>
 
 
@@ -1697,7 +1700,7 @@ accordingly.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is the asynchronous version of
+    <p>This is the asynchronous version of<br />
 g_socket_client_connect_to_service().</p>
 
 
@@ -1872,19 +1875,19 @@ g_socket_client_connect_to_service().</p>
   <div class="discussion">
     <p>This is a helper function for g_socket_client_connect().</p>
 <p>Attempts to create a TCP connection with a network URI.</p>
-<p><!-- raw HTML omitted -->uri<!-- raw HTML omitted --> may be any valid URI containing an &quot;authority&quot; (hostname/port)
-component. If a port is not specified in the URI, <!-- raw HTML omitted -->default_port<!-- raw HTML omitted -->
-will be used. TLS will be negotiated if GSocket::Client:tls is true.
-(GSocket::Client does not know to automatically assume TLS for
+<p><!-- raw HTML omitted -->uri<!-- raw HTML omitted --> may be any valid URI containing an &quot;authority&quot; (hostname/port)<br />
+component. If a port is not specified in the URI, <!-- raw HTML omitted -->default_port<!-- raw HTML omitted --><br />
+will be used. TLS will be negotiated if GSocket::Client:tls is true.<br />
+(GSocket::Client does not know to automatically assume TLS for<br />
 certain URI schemes.)</p>
-<p>Using this rather than g_socket_client_connect() or
-g_socket_client_connect_to_host() allows GSocket::Client to
+<p>Using this rather than g_socket_client_connect() or<br />
+g_socket_client_connect_to_host() allows GSocket::Client to<br />
 determine when to use application-specific proxy protocols.</p>
-<p>Upon a successful connection, a new GSocket::Connection is constructed
-and returned.  The caller owns this new object and must drop their
+<p>Upon a successful connection, a new GSocket::Connection is constructed<br />
+and returned.  The caller owns this new object and must drop their<br />
 reference to it when finished with it.</p>
-<p>In the event of any failure (DNS error, service not found, no hosts
-connectable) nil is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) is set
+<p>In the event of any failure (DNS error, service not found, no hosts<br />
+connectable) nil is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (if non-nil) is set<br />
 accordingly.</p>
 
 
@@ -1974,8 +1977,8 @@ accordingly.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>This is the asynchronous version of g_socket_client_connect_to_uri().</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be
-called. You can then call g_socket_client_connect_to_uri_finish() to get
+<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be<br />
+called. You can then call g_socket_client_connect_to_uri_finish() to get<br />
 the result of the operation.</p>
 
 
@@ -2757,10 +2760,10 @@ the result of the operation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the socket type of the socket client.
-The sockets created by this object will be of the specified
+    <p>Sets the socket type of the socket client.<br />
+The sockets created by this object will be of the specified<br />
 type.</p>
-<p>It doesn't make sense to specify a type of %G_SOCKET_TYPE_DATAGRAM,
+<p>It doesn't make sense to specify a type of %G_SOCKET_TYPE_DATAGRAM,<br />
 as GSocketClient is used for connection oriented services.</p>
 
 
@@ -2921,7 +2924,7 @@ as GSocketClient is used for connection oriented services.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->client<!-- raw HTML omitted --> creates TLS connections. See
+    <p>Gets whether <!-- raw HTML omitted -->client<!-- raw HTML omitted --> creates TLS connections. See<br />
 g_socket_client_set_tls() for details.</p>
 
 
@@ -3067,20 +3070,20 @@ g_socket_client_set_tls() for details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The TLS validation flags used when creating TLS connections. The
+    <p>The TLS validation flags used when creating TLS connections. The<br />
 default value is %G_TLS_CERTIFICATE_VALIDATE_ALL.</p>
-<p>GLib guarantees that if certificate verification fails, at least one
-flag will be set, but it does not guarantee that all possible flags
-will be set. Accordingly, you may not safely decide to ignore any
-particular type of error. For example, it would be incorrect to mask
-%G_TLS_CERTIFICATE_EXPIRED if you want to allow expired certificates,
-because this could potentially be the only error flag set even if
-other problems exist with the certificate. Therefore, there is no
-safe way to use this property. This is not a horrible problem,
-though, because you should not be attempting to ignore validation
-errors anyway. If you really must ignore TLS certificate errors,
-connect to the GSocket::Client::event signal, wait for it to be
-emitted with %G_SOCKET_CLIENT_TLS_HANDSHAKING, and use that to
+<p>GLib guarantees that if certificate verification fails, at least one<br />
+flag will be set, but it does not guarantee that all possible flags<br />
+will be set. Accordingly, you may not safely decide to ignore any<br />
+particular type of error. For example, it would be incorrect to mask<br />
+%G_TLS_CERTIFICATE_EXPIRED if you want to allow expired certificates,<br />
+because this could potentially be the only error flag set even if<br />
+other problems exist with the certificate. Therefore, there is no<br />
+safe way to use this property. This is not a horrible problem,<br />
+though, because you should not be attempting to ignore validation<br />
+errors anyway. If you really must ignore TLS certificate errors,<br />
+connect to the GSocket::Client::event signal, wait for it to be<br />
+emitted with %G_SOCKET_CLIENT_TLS_HANDSHAKING, and use that to<br />
 connect to GTls::Connection::accept-certificate.</p>
 
 
@@ -3120,20 +3123,20 @@ connect to GTls::Connection::accept-certificate.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The TLS validation flags used when creating TLS connections. The
+    <p>The TLS validation flags used when creating TLS connections. The<br />
 default value is %G_TLS_CERTIFICATE_VALIDATE_ALL.</p>
-<p>GLib guarantees that if certificate verification fails, at least one
-flag will be set, but it does not guarantee that all possible flags
-will be set. Accordingly, you may not safely decide to ignore any
-particular type of error. For example, it would be incorrect to mask
-%G_TLS_CERTIFICATE_EXPIRED if you want to allow expired certificates,
-because this could potentially be the only error flag set even if
-other problems exist with the certificate. Therefore, there is no
-safe way to use this property. This is not a horrible problem,
-though, because you should not be attempting to ignore validation
-errors anyway. If you really must ignore TLS certificate errors,
-connect to the GSocket::Client::event signal, wait for it to be
-emitted with %G_SOCKET_CLIENT_TLS_HANDSHAKING, and use that to
+<p>GLib guarantees that if certificate verification fails, at least one<br />
+flag will be set, but it does not guarantee that all possible flags<br />
+will be set. Accordingly, you may not safely decide to ignore any<br />
+particular type of error. For example, it would be incorrect to mask<br />
+%G_TLS_CERTIFICATE_EXPIRED if you want to allow expired certificates,<br />
+because this could potentially be the only error flag set even if<br />
+other problems exist with the certificate. Therefore, there is no<br />
+safe way to use this property. This is not a horrible problem,<br />
+though, because you should not be attempting to ignore validation<br />
+errors anyway. If you really must ignore TLS certificate errors,<br />
+connect to the GSocket::Client::event signal, wait for it to be<br />
+emitted with %G_SOCKET_CLIENT_TLS_HANDSHAKING, and use that to<br />
 connect to GTls::Connection::accept-certificate.</p>
 
 
@@ -3303,7 +3306,7 @@ connect to GTls::Connection::accept-certificate.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

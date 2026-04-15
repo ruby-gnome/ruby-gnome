@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Score";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -472,6 +474,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -488,7 +491,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Clutter::Score. A #ClutterScore is an object that can
+    <p>Creates a new Clutter::Score. A #ClutterScore is an object that can<br />
 hold multiple Clutter::Timeline<!-- raw HTML omitted -->s in a sequential order.</p>
 
 
@@ -518,9 +521,9 @@ hold multiple Clutter::Timeline<!-- raw HTML omitted -->s in a sequential order.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Appends a timeline to another one existing in the score; the newly
+    <p>Appends a timeline to another one existing in the score; the newly<br />
 appended timeline will be started when <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is complete.</p>
-<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is nil, the new Clutter::Timeline will be started when
+<p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is nil, the new Clutter::Timeline will be started when<br />
 clutter_score_start() is called.</p>
 <p>Clutter::Score will take a reference on <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->.</p>
 
@@ -574,8 +577,8 @@ clutter_score_start() is called.</p>
       
       
         &mdash;
-        <div class='inline'><p>the id of the Clutter::Timeline inside the score, or
-0 on failure. The returned id can be used with clutter_score_remove()
+        <div class='inline'><p>the id of the Clutter::Timeline inside the score, or<br />
+0 on failure. The returned id can be used with clutter_score_remove()<br />
 or clutter_score_get_timeline().</p>
 </div>
       
@@ -597,9 +600,9 @@ or clutter_score_get_timeline().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Appends <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> at the given <!-- raw HTML omitted -->marker_name<!-- raw HTML omitted --> on the <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->
+    <p>Appends <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> at the given <!-- raw HTML omitted -->marker_name<!-- raw HTML omitted --> on the <!-- raw HTML omitted -->parent<!-- raw HTML omitted --><br />
 Clutter::Timeline.</p>
-<p>If you want to append <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> at the end of <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->, use
+<p>If you want to append <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> at the end of <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->, use<br />
 clutter_score_append().</p>
 <p>The Clutter::Score will take a reference on <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->.</p>
 
@@ -668,8 +671,8 @@ clutter_score_append().</p>
       
       
         &mdash;
-        <div class='inline'><p>the id of the Clutter::Timeline inside the score, or
-0 on failure. The returned id can be used with clutter_score_remove()
+        <div class='inline'><p>the id of the Clutter::Timeline inside the score, or<br />
+0 on failure. The returned id can be used with clutter_score_remove()<br />
 or clutter_score_get_timeline().</p>
 </div>
       
@@ -728,8 +731,8 @@ or clutter_score_get_timeline().</p>
       
       
         &mdash;
-        <div class='inline'><p>the requested timeline, or nil. This
-function does not increase the reference count on the returned
+        <div class='inline'><p>the requested timeline, or nil. This<br />
+function does not increase the reference count on the returned<br />
 Clutter::Timeline</p>
 </div>
       
@@ -808,9 +811,9 @@ Clutter::Timeline</p>
       
       
         &mdash;
-        <div class='inline'><p>a
-#GSList containing all the timelines in the score. This function does
-not increase the reference count of the returned timelines. Use
+        <div class='inline'><p>a<br />
+#GSList containing all the timelines in the score. This function does<br />
+not increase the reference count of the returned timelines. Use<br />
 g_slist_free() on the returned list to deallocate its resources.</p>
 </div>
       
@@ -1012,8 +1015,8 @@ g_slist_free() on the returned list to deallocate its resources.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes the Clutter::Timeline with the given id inside <!-- raw HTML omitted -->score<!-- raw HTML omitted -->. If
-the timeline has other timelines attached to it, those are removed
+    <p>Removes the Clutter::Timeline with the given id inside <!-- raw HTML omitted -->score<!-- raw HTML omitted -->. If<br />
+the timeline has other timelines attached to it, those are removed<br />
 as well.</p>
 
 
@@ -1204,7 +1207,7 @@ as well.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

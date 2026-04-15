@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::MenuButton";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -107,23 +109,23 @@
   <div class="discussion">
     <p>The <code>GtkMenuButton</code> widget is used to display a popup when clicked.</p>
 <p><img src="menu-button.png" alt="An example GtkMenuButton" /></p>
-<p>This popup can be provided either as a <code>GtkPopover</code> or as an abstract
+<p>This popup can be provided either as a <code>GtkPopover</code> or as an abstract<br />
 <code>GMenuModel</code>.</p>
-<p>The <code>GtkMenuButton</code> widget can show either an icon (set with the
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButton:icon-name] property) or a label (set with the
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButton:label] property). If neither is explicitly set,
-a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image] is automatically created, using an arrow image oriented
-according to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButton:direction] or the generic
+<p>The <code>GtkMenuButton</code> widget can show either an icon (set with the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButton:icon-name] property) or a label (set with the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButton:label] property). If neither is explicitly set,<br />
+a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image] is automatically created, using an arrow image oriented<br />
+according to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButton:direction] or the generic<br />
 “open-menu-symbolic” icon if the direction is not set.</p>
-<p>The positioning of the popup is determined by the
+<p>The positioning of the popup is determined by the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButton:direction] property of the menu button.</p>
-<p>For menus, the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:valign]
-properties of the menu are also taken into account. For example, when the
-direction is %GTK_ARROW_DOWN and the horizontal alignment is %GTK_ALIGN_START,
-the menu will be positioned below the button, with the starting edge
-(depending on the text direction) of the menu aligned with the starting
-edge of the button. If there is not enough space below the button, the
-menu is popped up above the button instead. If the alignment would move
+<p>For menus, the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:valign]<br />
+properties of the menu are also taken into account. For example, when the<br />
+direction is %GTK_ARROW_DOWN and the horizontal alignment is %GTK_ALIGN_START,<br />
+the menu will be positioned below the button, with the starting edge<br />
+(depending on the text direction) of the menu aligned with the starting<br />
+edge of the button. If there is not enough space below the button, the<br />
+menu is popped up above the button instead. If the alignment would move<br />
 part of the menu offscreen, it is “pushed in”.</p>
 <table>
 <thead>
@@ -161,26 +163,26 @@ part of the menu offscreen, it is “pushed in”.</p>
 </tr>
 </tbody>
 </table>
-<h1>CSS nodes</h1>
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
 <pre class="code ruby"><code class="ruby">menubutton
 ╰── button.toggle
     ╰── &lt;content&gt;
          ╰── [arrow]
 </code></pre>
-<p><code>GtkMenuButton</code> has a single CSS node with name <code>menubutton</code>
+<p><code>GtkMenuButton</code> has a single CSS node with name <code>menubutton</code><br />
 which contains a <code>button</code> node with a <code>.toggle</code> style class.</p>
-<p>If the button contains an icon, it will have the <code>.image-button</code> style class,
-if it contains text, it will have <code>.text-button</code> style class. If an arrow is
-visible in addition to an icon, text or a custom child, it will also have
+<p>If the button contains an icon, it will have the <code>.image-button</code> style class,<br />
+if it contains text, it will have <code>.text-button</code> style class. If an arrow is<br />
+visible in addition to an icon, text or a custom child, it will also have<br />
 <code>.arrow-button</code> style class.</p>
-<p>Inside the toggle button content, there is an <code>arrow</code> node for
-the indicator, which will carry one of the <code>.none</code>, <code>.up</code>, <code>.down</code>,
-<code>.left</code> or <code>.right</code> style classes to indicate the direction that
-the menu will appear in. The CSS is expected to provide a suitable
+<p>Inside the toggle button content, there is an <code>arrow</code> node for<br />
+the indicator, which will carry one of the <code>.none</code>, <code>.up</code>, <code>.down</code>,<br />
+<code>.left</code> or <code>.right</code> style classes to indicate the direction that<br />
+the menu will appear in. The CSS is expected to provide a suitable<br />
 image for each of these cases using the <code>-gtk-icon-source</code> property.</p>
-<p>Optionally, the <code>menubutton</code> node can carry the <code>.circular</code> style class
+<p>Optionally, the <code>menubutton</code> node can carry the <code>.circular</code> style class<br />
 to request a round appearance.</p>
-<h1>Accessibility</h1>
+<h1><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h1>
 <p><code>GtkMenuButton</code> uses the %GTK_ACCESSIBLE_ROLE_BUTTON role.</p>
 
 
@@ -989,9 +991,11 @@ to request a round appearance.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -1017,9 +1021,9 @@ to request a round appearance.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>GtkMenuButton</code> widget with downwards-pointing
+    <p>Creates a new <code>GtkMenuButton</code> widget with downwards-pointing<br />
 arrow as the only child.</p>
-<p>You can replace the child widget with another <code>GtkWidget</code>
+<p>You can replace the child widget with another <code>GtkWidget</code><br />
 should you wish to.</p>
 
 
@@ -1194,8 +1198,8 @@ should you wish to.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether to show a dropdown arrow even when using an icon or a custom
-child.
+    <p>Gets whether to show a dropdown arrow even when using an icon or a custom<br />
+child.<br />
 child.</p>
 
 
@@ -1341,7 +1345,7 @@ child.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves whether the button can be smaller than the natural
+    <p>Retrieves whether the button can be smaller than the natural<br />
 size of its contents.</p>
 
 
@@ -1381,7 +1385,7 @@ size of its contents.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the size of the button can be made smaller than the natural
+    <p>Whether the size of the button can be made smaller than the natural<br />
 size of its contents.</p>
 
 
@@ -1449,7 +1453,7 @@ size of its contents.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the size of the button can be made smaller than the natural
+    <p>Whether the size of the button can be made smaller than the natural<br />
 size of its contents.</p>
 
 
@@ -1595,7 +1599,7 @@ size of its contents.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The <code>GtkArrowType</code> representing the direction in which the
+    <p>The <code>GtkArrowType</code> representing the direction in which the<br />
 menu or popover will be popped out.</p>
 
 
@@ -1635,7 +1639,7 @@ menu or popover will be popped out.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The <code>GtkArrowType</code> representing the direction in which the
+    <p>The <code>GtkArrowType</code> representing the direction in which the<br />
 menu or popover will be popped out.</p>
 
 
@@ -2061,7 +2065,7 @@ menu or popover will be popped out.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GMenuModel</code> from which the popup will be created.</p>
-<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButton.set_menu_model] for the interaction
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButton.set_menu_model] for the interaction<br />
 with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButton:popover] property.</p>
 
 
@@ -2102,7 +2106,7 @@ with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButt
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GMenuModel</code> from which the popup will be created.</p>
-<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButton.set_menu_model] for the interaction
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButton.set_menu_model] for the interaction<br />
 with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButton:popover] property.</p>
 
 
@@ -2499,9 +2503,9 @@ with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButt
 <li>[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButton.set_popover]</li>
 <li>[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MenuButton.set_menu_model]</li>
 </ul>
-<p>to set a popup for <!-- raw HTML omitted -->menu_button<!-- raw HTML omitted -->.
+<p>to set a popup for <!-- raw HTML omitted -->menu_button<!-- raw HTML omitted -->.<br />
 If <!-- raw HTML omitted -->func<!-- raw HTML omitted --> is non-nil, <!-- raw HTML omitted -->menu_button<!-- raw HTML omitted --> will always be sensitive.</p>
-<p>Using this function will not reset the menu widget attached to
+<p>Using this function will not reset the menu widget attached to<br />
 <!-- raw HTML omitted -->menu_button<!-- raw HTML omitted -->. Instead, this can be done manually in <!-- raw HTML omitted -->func<!-- raw HTML omitted -->.</p>
 
 
@@ -2521,8 +2525,8 @@ If <!-- raw HTML omitted -->func<!-- raw HTML omitted --> is non-nil, <!-- raw H
       
       
         &mdash;
-        <div class='inline'><p>function to call when a popup is about to
-be shown, but none has been provided via other means, or nil
+        <div class='inline'><p>function to call when a popup is about to<br />
+be shown, but none has been provided via other means, or nil<br />
 to reset to default behavior.</p>
 </div>
       
@@ -2588,7 +2592,7 @@ to reset to default behavior.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether an embedded underline in the text indicates a
+    <p>Returns whether an embedded underline in the text indicates a<br />
 mnemonic.</p>
 
 
@@ -2607,7 +2611,7 @@ mnemonic.</p>
       
       
         &mdash;
-        <div class='inline'><p>true whether an embedded underline in the text indicates
+        <div class='inline'><p>true whether an embedded underline in the text indicates<br />
 the mnemonic accelerator keys.</p>
 </div>
       
@@ -2731,7 +2735,7 @@ the mnemonic accelerator keys.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

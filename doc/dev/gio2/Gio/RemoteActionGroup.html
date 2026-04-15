@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::RemoteActionGroup";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,30 +79,31 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The <code>GRemoteActionGroup</code> interface is implemented by [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup]
-instances that either transmit action invocations to other processes
-or receive action invocations in the local process from other
+    <p>The <code>GRemoteActionGroup</code> interface is implemented by [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup]<br />
+instances that either transmit action invocations to other processes<br />
+or receive action invocations in the local process from other<br />
 processes.</p>
-<p>The interface has <code>_full</code> variants of the two
-methods on [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup] used to activate actions:
-[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.activate_action] and
-[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.change_action_state]. These variants allow a
-‘platform data’ [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] to be specified: a dictionary providing
-context for the action invocation (for example: timestamps, startup
+<p>The interface has <code>_full</code> variants of the two<br />
+methods on [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup] used to activate actions:<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.activate_action] and<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.change_action_state]. These variants allow a<br />
+‘platform data’ [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] to be specified: a dictionary providing<br />
+context for the action invocation (for example: timestamps, startup<br />
 notification IDs, etc).</p>
-<p>[class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusActionGroup] implements <code>GRemoteActionGroup</code>.  This provides a
+<p>[class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusActionGroup] implements <code>GRemoteActionGroup</code>.  This provides a<br />
 mechanism to send platform data for action invocations over D-Bus.</p>
-<p>Additionally, [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection.export_action_group] will check if
-the exported [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup] implements <code>GRemoteActionGroup</code> and use
-the <code>_full</code> variants of the calls if available.  This
-provides a mechanism by which to receive platform data for action
+<p>Additionally, [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection.export_action_group] will check if<br />
+the exported [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup] implements <code>GRemoteActionGroup</code> and use<br />
+the <code>_full</code> variants of the calls if available.  This<br />
+provides a mechanism by which to receive platform data for action<br />
 invocations that arrive by way of D-Bus.</p>
 
 
@@ -172,6 +174,7 @@ invocations that arrive by way of D-Bus.</p>
 
       
     </ul>
+    
   
 
 
@@ -192,11 +195,11 @@ invocations that arrive by way of D-Bus.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Activates the remote action.</p>
-<p>This is the same as g_action_group_activate_action() except that it
-allows for provision of &quot;platform data&quot; to be sent along with the
-activation request.  This typically contains details such as the user
+<p>This is the same as g_action_group_activate_action() except that it<br />
+allows for provision of &quot;platform data&quot; to be sent along with the<br />
+activation request.  This typically contains details such as the user<br />
 interaction timestamp or startup notification information.</p>
-<p><!-- raw HTML omitted -->platform_data<!-- raw HTML omitted --> must be non-nil and must have the type
+<p><!-- raw HTML omitted -->platform_data<!-- raw HTML omitted --> must be non-nil and must have the type<br />
 %G_VARIANT_TYPE_VARDICT.  If it is floating, it will be consumed.</p>
 
 
@@ -282,11 +285,11 @@ interaction timestamp or startup notification information.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Changes the state of a remote action.</p>
-<p>This is the same as g_action_group_change_action_state() except that
-it allows for provision of &quot;platform data&quot; to be sent along with the
-state change request.  This typically contains details such as the
+<p>This is the same as g_action_group_change_action_state() except that<br />
+it allows for provision of &quot;platform data&quot; to be sent along with the<br />
+state change request.  This typically contains details such as the<br />
 user interaction timestamp or startup notification information.</p>
-<p><!-- raw HTML omitted -->platform_data<!-- raw HTML omitted --> must be non-nil and must have the type
+<p><!-- raw HTML omitted -->platform_data<!-- raw HTML omitted --> must be non-nil and must have the type<br />
 %G_VARIANT_TYPE_VARDICT.  If it is floating, it will be consumed.</p>
 
 
@@ -367,7 +370,7 @@ user interaction timestamp or startup notification information.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

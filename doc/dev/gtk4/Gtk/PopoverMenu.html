@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::PopoverMenu";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,32 +101,33 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkPopoverMenu</code> is a subclass of <code>GtkPopover</code> that implements menu
+    <p><code>GtkPopoverMenu</code> is a subclass of <code>GtkPopover</code> that implements menu<br />
 behavior.</p>
 <p><img src="menu.png" alt="An example GtkPopoverMenu" /></p>
-<p><code>GtkPopoverMenu</code> treats its children like menus and allows switching
-between them. It can open submenus as traditional, nested submenus,
-or in a more touch-friendly sliding fashion.
+<p><code>GtkPopoverMenu</code> treats its children like menus and allows switching<br />
+between them. It can open submenus as traditional, nested submenus,<br />
+or in a more touch-friendly sliding fashion.<br />
 The property [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PopoverMenu:flags] controls this appearance.</p>
-<p><code>GtkPopoverMenu</code> is meant to be used primarily with menu models,
-using [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PopoverMenu.new_from_model]. If you need to put
-other widgets such as a <code>GtkSpinButton</code> or a <code>GtkSwitch</code> into a popover,
+<p><code>GtkPopoverMenu</code> is meant to be used primarily with menu models,<br />
+using [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PopoverMenu.new_from_model]. If you need to put<br />
+other widgets such as a <code>GtkSpinButton</code> or a <code>GtkSwitch</code> into a popover,<br />
 you can use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PopoverMenu.add_child].</p>
 <p>For more dialog-like behavior, use a plain <code>GtkPopover</code>.</p>
-<h2>Menu models</h2>
-<p>The XML format understood by <code>GtkBuilder</code> for <code>GMenuModel</code> consists
-of a toplevel <code>&lt;menu&gt;</code> element, which contains one or more <code>&lt;item&gt;</code>
-elements. Each <code>&lt;item&gt;</code> element contains <code>&lt;attribute&gt;</code> and <code>&lt;link&gt;</code>
-elements with a mandatory name attribute. <code>&lt;link&gt;</code> elements have the
-same content model as <code>&lt;menu&gt;</code>. Instead of <code>&lt;link name=&quot;submenu&quot;&gt;</code>
-or <code>&lt;link name=&quot;section&quot;&gt;</code>, you can use <code>&lt;submenu&gt;</code> or <code>&lt;section&gt;</code>
+<h2><a href="#menu-models" aria-hidden="true" class="anchor" id="menu-models"></a>Menu models</h2>
+<p>The XML format understood by <code>GtkBuilder</code> for <code>GMenuModel</code> consists<br />
+of a toplevel <code>&lt;menu&gt;</code> element, which contains one or more <code>&lt;item&gt;</code><br />
+elements. Each <code>&lt;item&gt;</code> element contains <code>&lt;attribute&gt;</code> and <code>&lt;link&gt;</code><br />
+elements with a mandatory name attribute. <code>&lt;link&gt;</code> elements have the<br />
+same content model as <code>&lt;menu&gt;</code>. Instead of <code>&lt;link name=&quot;submenu&quot;&gt;</code><br />
+or <code>&lt;link name=&quot;section&quot;&gt;</code>, you can use <code>&lt;submenu&gt;</code> or <code>&lt;section&gt;</code><br />
 elements.</p>
 <pre class="code xml"><code class="xml">&lt;menu id=&#39;app-menu&#39;&gt;
   &lt;section&gt;
@@ -144,11 +146,11 @@ elements.</p>
   &lt;/section&gt;
 &lt;/menu&gt;
 </code></pre>
-<p>Attribute values can be translated using gettext, like other <code>GtkBuilder</code>
-content. <code>&lt;attribute&gt;</code> elements can be marked for translation with a
-<code>translatable=&quot;yes&quot;</code> attribute. It is also possible to specify message
-context and translator comments, using the context and comments attributes.
-To make use of this, the <code>GtkBuilder</code> must have been given the gettext
+<p>Attribute values can be translated using gettext, like other <code>GtkBuilder</code><br />
+content. <code>&lt;attribute&gt;</code> elements can be marked for translation with a<br />
+<code>translatable=&quot;yes&quot;</code> attribute. It is also possible to specify message<br />
+context and translator comments, using the context and comments attributes.<br />
+To make use of this, the <code>GtkBuilder</code> must have been given the gettext<br />
 domain to use.</p>
 <p>The following attributes are used when constructing menu items:</p>
 <ul>
@@ -157,24 +159,24 @@ domain to use.</p>
 <li>&quot;action&quot;: the prefixed name of the action to trigger</li>
 <li>&quot;target&quot;: the parameter to use when activating the action</li>
 <li>&quot;icon&quot; and &quot;verb-icon&quot;: names of icons that may be displayed</li>
-<li>&quot;submenu-action&quot;: name of an action that may be used to track
+<li>&quot;submenu-action&quot;: name of an action that may be used to track<br />
 whether a submenu is open</li>
-<li>&quot;hidden-when&quot;: a string used to determine when the item will be hidden.
-Possible values include &quot;action-disabled&quot;, &quot;action-missing&quot;, &quot;macos-menubar&quot;.
+<li>&quot;hidden-when&quot;: a string used to determine when the item will be hidden.<br />
+Possible values include &quot;action-disabled&quot;, &quot;action-missing&quot;, &quot;macos-menubar&quot;.<br />
 This is mainly useful for exported menus, see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Application.set_menubar].</li>
-<li>&quot;custom&quot;: a string used to match against the ID of a custom child added with
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PopoverMenu.add_child], [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PopoverMenuBar.add_child],
+<li>&quot;custom&quot;: a string used to match against the ID of a custom child added with<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PopoverMenu.add_child], [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PopoverMenuBar.add_child],<br />
 or in the ui file with <code>&lt;child type=&quot;ID&quot;&gt;</code>.</li>
 </ul>
 <p>The following attributes are used when constructing sections:</p>
 <ul>
 <li>&quot;label&quot;: a user-visible string to use as section heading</li>
-<li>&quot;display-hint&quot;: a string used to determine special formatting for the section.
-Possible values include &quot;horizontal-buttons&quot;, &quot;circular-buttons&quot; and
-&quot;inline-buttons&quot;. They all indicate that section should be
+<li>&quot;display-hint&quot;: a string used to determine special formatting for the section.<br />
+Possible values include &quot;horizontal-buttons&quot;, &quot;circular-buttons&quot; and<br />
+&quot;inline-buttons&quot;. They all indicate that section should be<br />
 displayed as a horizontal row of buttons.</li>
-<li>&quot;text-direction&quot;: a string used to determine the <code>GtkTextDirection</code> to use
-when &quot;display-hint&quot; is set to &quot;horizontal-buttons&quot;. Possible values
+<li>&quot;text-direction&quot;: a string used to determine the <code>GtkTextDirection</code> to use<br />
+when &quot;display-hint&quot; is set to &quot;horizontal-buttons&quot;. Possible values<br />
 include &quot;rtl&quot;, &quot;ltr&quot;, and &quot;none&quot;.</li>
 </ul>
 <p>The following attributes are used when constructing submenus:</p>
@@ -182,25 +184,25 @@ include &quot;rtl&quot;, &quot;ltr&quot;, and &quot;none&quot;.</li>
 <li>&quot;label&quot;: a user-visible string to display</li>
 <li>&quot;icon&quot;: icon name to display</li>
 </ul>
-<p>Menu items will also show accelerators, which are usually associated
-with actions via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Application.set_accels_for_action],
-[method<!-- raw HTML omitted -->WidgetClass<!-- raw HTML omitted -->.add_binding_action] or
+<p>Menu items will also show accelerators, which are usually associated<br />
+with actions via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Application.set_accels_for_action],<br />
+[method<!-- raw HTML omitted -->WidgetClass<!-- raw HTML omitted -->.add_binding_action] or<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutController.add_shortcut].</p>
-<h1>CSS Nodes</h1>
-<p><code>GtkPopoverMenu</code> is just a subclass of <code>GtkPopover</code> that adds custom content
-to it, therefore it has the same CSS nodes. It is one of the cases that add
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS Nodes</h1>
+<p><code>GtkPopoverMenu</code> is just a subclass of <code>GtkPopover</code> that adds custom content<br />
+to it, therefore it has the same CSS nodes. It is one of the cases that add<br />
 a <code>.menu</code> style class to the main <code>popover</code> node.</p>
-<p>Menu items have nodes with name <code>button</code> and class <code>.model</code>. If a section
-display-hint is set, the section gets a node <code>box</code> with class <code>horizontal</code>
-plus a class with the same text as the display hint. Note that said box may
-not be the direct ancestor of the item <code>button</code>s. Thus, for example, to style
-items in an <code>inline-buttons</code> section, select <code>.inline-buttons button.model</code>.
+<p>Menu items have nodes with name <code>button</code> and class <code>.model</code>. If a section<br />
+display-hint is set, the section gets a node <code>box</code> with class <code>horizontal</code><br />
+plus a class with the same text as the display hint. Note that said box may<br />
+not be the direct ancestor of the item <code>button</code>s. Thus, for example, to style<br />
+items in an <code>inline-buttons</code> section, select <code>.inline-buttons button.model</code>.<br />
 Other things that may be of interest to style in menus include <code>label</code> nodes.</p>
-<h1>Accessibility</h1>
-<p><code>GtkPopoverMenu</code> uses the %GTK_ACCESSIBLE_ROLE_MENU role, and its
-items use the %GTK_ACCESSIBLE_ROLE_MENU_ITEM,
-%GTK_ACCESSIBLE_ROLE_MENU_ITEM_CHECKBOX or
-%GTK_ACCESSIBLE_ROLE_MENU_ITEM_RADIO roles, depending on the
+<h1><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h1>
+<p><code>GtkPopoverMenu</code> uses the %GTK_ACCESSIBLE_ROLE_MENU role, and its<br />
+items use the %GTK_ACCESSIBLE_ROLE_MENU_ITEM,<br />
+%GTK_ACCESSIBLE_ROLE_MENU_ITEM_CHECKBOX or<br />
+%GTK_ACCESSIBLE_ROLE_MENU_ITEM_RADIO roles, depending on the<br />
 action they are connected to.</p>
 
 
@@ -434,9 +436,11 @@ action they are connected to.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -448,6 +452,7 @@ action they are connected to.</p>
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Popover.html" title="Gtk::Popover (class)">Popover</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Popover.html#autohide-instance_method" title="Gtk::Popover#autohide (method)">#autohide</a></span>, <span class='object_link'><a href="Popover.html#autohide=-instance_method" title="Gtk::Popover#autohide= (method)">#autohide=</a></span>, <span class='object_link'><a href="Popover.html#autohide%3F-instance_method" title="Gtk::Popover#autohide? (method)">#autohide?</a></span>, <span class='object_link'><a href="Popover.html#cascade_popdown-instance_method" title="Gtk::Popover#cascade_popdown (method)">#cascade_popdown</a></span>, <span class='object_link'><a href="Popover.html#cascade_popdown=-instance_method" title="Gtk::Popover#cascade_popdown= (method)">#cascade_popdown=</a></span>, <span class='object_link'><a href="Popover.html#cascade_popdown%3F-instance_method" title="Gtk::Popover#cascade_popdown? (method)">#cascade_popdown?</a></span>, <span class='object_link'><a href="Popover.html#child-instance_method" title="Gtk::Popover#child (method)">#child</a></span>, <span class='object_link'><a href="Popover.html#child=-instance_method" title="Gtk::Popover#child= (method)">#child=</a></span>, <span class='object_link'><a href="Popover.html#default_widget-instance_method" title="Gtk::Popover#default_widget (method)">#default_widget</a></span>, <span class='object_link'><a href="Popover.html#default_widget=-instance_method" title="Gtk::Popover#default_widget= (method)">#default_widget=</a></span>, <span class='object_link'><a href="Popover.html#get_offset-instance_method" title="Gtk::Popover#get_offset (method)">#get_offset</a></span>, <span class='object_link'><a href="Popover.html#get_pointing_to-instance_method" title="Gtk::Popover#get_pointing_to (method)">#get_pointing_to</a></span>, <span class='object_link'><a href="Popover.html#has_arrow-instance_method" title="Gtk::Popover#has_arrow (method)">#has_arrow</a></span>, <span class='object_link'><a href="Popover.html#has_arrow=-instance_method" title="Gtk::Popover#has_arrow= (method)">#has_arrow=</a></span>, <span class='object_link'><a href="Popover.html#has_arrow%3F-instance_method" title="Gtk::Popover#has_arrow? (method)">#has_arrow?</a></span>, <span class='object_link'><a href="Popover.html#mnemonics_visible-instance_method" title="Gtk::Popover#mnemonics_visible (method)">#mnemonics_visible</a></span>, <span class='object_link'><a href="Popover.html#mnemonics_visible=-instance_method" title="Gtk::Popover#mnemonics_visible= (method)">#mnemonics_visible=</a></span>, <span class='object_link'><a href="Popover.html#mnemonics_visible%3F-instance_method" title="Gtk::Popover#mnemonics_visible? (method)">#mnemonics_visible?</a></span>, <span class='object_link'><a href="Popover.html#pointing_to-instance_method" title="Gtk::Popover#pointing_to (method)">#pointing_to</a></span>, <span class='object_link'><a href="Popover.html#pointing_to=-instance_method" title="Gtk::Popover#pointing_to= (method)">#pointing_to=</a></span>, <span class='object_link'><a href="Popover.html#pointing_to_raw-instance_method" title="Gtk::Popover#pointing_to_raw (method)">#pointing_to_raw</a></span>, <span class='object_link'><a href="Popover.html#popdown-instance_method" title="Gtk::Popover#popdown (method)">#popdown</a></span>, <span class='object_link'><a href="Popover.html#popup-instance_method" title="Gtk::Popover#popup (method)">#popup</a></span>, <span class='object_link'><a href="Popover.html#position-instance_method" title="Gtk::Popover#position (method)">#position</a></span>, <span class='object_link'><a href="Popover.html#position=-instance_method" title="Gtk::Popover#position= (method)">#position=</a></span>, <span class='object_link'><a href="Popover.html#present-instance_method" title="Gtk::Popover#present (method)">#present</a></span>, <span class='object_link'><a href="Popover.html#set_offset-instance_method" title="Gtk::Popover#set_offset (method)">#set_offset</a></span></p>
 
+  
   
   
   
@@ -475,10 +480,10 @@ action they are connected to.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a <code>GtkPopoverMenu</code> and populates it according to <!-- raw HTML omitted -->model<!-- raw HTML omitted -->.</p>
-<p>The created buttons are connected to actions found in the
-action groups that are accessible from the parent widget.
-This includes the <code>GtkApplicationWindow</code> to which the popover
-belongs. Actions can also be added using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.insert_action_group]
+<p>The created buttons are connected to actions found in the<br />
+action groups that are accessible from the parent widget.<br />
+This includes the <code>GtkApplicationWindow</code> to which the popover<br />
+belongs. Actions can also be added using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.insert_action_group]<br />
 on the parent widget or on any of its parent widgets.</p>
 
 
@@ -543,7 +548,7 @@ on the parent widget or on any of its parent widgets.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a custom widget to a generated menu.</p>
-<p>For this to work, the menu model of <!-- raw HTML omitted -->popover<!-- raw HTML omitted --> must have
+<p>For this to work, the menu model of <!-- raw HTML omitted -->popover<!-- raw HTML omitted --> must have<br />
 an item with a <code>custom</code> attribute that matches <!-- raw HTML omitted -->id<!-- raw HTML omitted -->.</p>
 
 
@@ -618,7 +623,7 @@ an item with a <code>custom</code> attribute that matches <!-- raw HTML omitted 
 </h3><div class="docstring">
   <div class="discussion">
     <p>The flags that <!-- raw HTML omitted -->popover<!-- raw HTML omitted --> uses to create/display a menu from its model.</p>
-<p>If a model is set and the flags change, contents are rebuilt, so if setting
+<p>If a model is set and the flags change, contents are rebuilt, so if setting<br />
 properties individually, set flags before model to avoid a redundant rebuild.</p>
 
 
@@ -659,7 +664,7 @@ properties individually, set flags before model to avoid a redundant rebuild.</p
 </h3><div class="docstring">
   <div class="discussion">
     <p>The flags that <!-- raw HTML omitted -->popover<!-- raw HTML omitted --> uses to create/display a menu from its model.</p>
-<p>If a model is set and the flags change, contents are rebuilt, so if setting
+<p>If a model is set and the flags change, contents are rebuilt, so if setting<br />
 properties individually, set flags before model to avoid a redundant rebuild.</p>
 
 
@@ -833,7 +838,7 @@ properties individually, set flags before model to avoid a redundant rebuild.</p
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes a widget that has previously been added with
+    <p>Removes a widget that has previously been added with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PopoverMenu.add_child()]</p>
 
 
@@ -994,7 +999,7 @@ properties individually, set flags before model to avoid a redundant rebuild.</p
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

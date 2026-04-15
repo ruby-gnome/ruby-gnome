@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::TextTag";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -99,8 +100,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/text-tag.rb<span class="defines">,<br />
+    <dd>lib/gtk4/text-tag.rb<span class="defines">,<br>
   lib/gtk4/deprecated.rb</span>
+
 </dd>
   </dl>
   
@@ -4249,6 +4251,7 @@
 
       
     </ul>
+    
   
 
 
@@ -4315,8 +4318,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the margins accumulate or override each other.</p>
-<p>When set to true the margins of this tag are added to the margins
-of any other non-accumulative margins present. When set to false
+<p>When set to true the margins of this tag are added to the margins<br />
+of any other non-accumulative margins present. When set to false<br />
 the margins override one another (the default).</p>
 
 
@@ -4385,8 +4388,8 @@ the margins override one another (the default).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the margins accumulate or override each other.</p>
-<p>When set to true the margins of this tag are added to the margins
-of any other non-accumulative margins present. When set to false
+<p>When set to true the margins of this tag are added to the margins<br />
+of any other non-accumulative margins present. When set to false<br />
 the margins override one another (the default).</p>
 
 
@@ -4691,7 +4694,7 @@ the margins override one another (the default).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the background color fills the entire line height
+    <p>Whether the background color fills the entire line height<br />
 or only the height of the tagged characters.</p>
 
 
@@ -4759,7 +4762,7 @@ or only the height of the tagged characters.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the background color fills the entire line height
+    <p>Whether the background color fills the entire line height<br />
 or only the height of the tagged characters.</p>
 
 
@@ -5115,9 +5118,9 @@ or only the height of the tagged characters.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTagTable::tag-changed] signal on the
+    <p>Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTagTable::tag-changed] signal on the<br />
 <code>GtkTextTagTable</code> where the tag is included.</p>
-<p>The signal is already emitted when setting a <code>GtkTextTag</code> property.
+<p>The signal is already emitted when setting a <code>GtkTextTag</code> property.<br />
 This function is useful for a <code>GtkTextTag</code> subclass.</p>
 
 
@@ -5490,7 +5493,7 @@ This function is useful for a <code>GtkTextTag</code> subclass.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether font fallback is enabled.</p>
-<p>When set to true, other fonts will be substituted
+<p>When set to true, other fonts will be substituted<br />
 where the current font is missing glyphs.</p>
 
 
@@ -5559,7 +5562,7 @@ where the current font is missing glyphs.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether font fallback is enabled.</p>
-<p>When set to true, other fonts will be substituted
+<p>When set to true, other fonts will be substituted<br />
 where the current font is missing glyphs.</p>
 
 
@@ -5915,8 +5918,8 @@ where the current font is missing glyphs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Font description as string, e.g. &quot;Sans Italic 12&quot;.</p>
-<p>Note that the initial value of this property depends on
+    <p>Font description as string, e.g. <span data-escaped-char>&quot;</span>Sans Italic 12<span data-escaped-char>&quot;</span>.</p>
+<p>Note that the initial value of this property depends on<br />
 the internals of <code>PangoFontDescription</code>.</p>
 
 
@@ -5956,8 +5959,8 @@ the internals of <code>PangoFontDescription</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Font description as string, e.g. &quot;Sans Italic 12&quot;.</p>
-<p>Note that the initial value of this property depends on
+    <p>Font description as string, e.g. <span data-escaped-char>&quot;</span>Sans Italic 12<span data-escaped-char>&quot;</span>.</p>
+<p>Note that the initial value of this property depends on<br />
 the internals of <code>PangoFontDescription</code>.</p>
 
 
@@ -6608,8 +6611,8 @@ the internals of <code>PangoFontDescription</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Amount to indent the paragraph, in pixels.</p>
-<p>A negative value of indent will produce a hanging indentation.
-That is, the first line will have the full width, and subsequent
+<p>A negative value of indent will produce a hanging indentation.<br />
+That is, the first line will have the full width, and subsequent<br />
 lines will be indented by the absolute value of indent.</p>
 
 
@@ -6650,8 +6653,8 @@ lines will be indented by the absolute value of indent.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Amount to indent the paragraph, in pixels.</p>
-<p>A negative value of indent will produce a hanging indentation.
-That is, the first line will have the full width, and subsequent
+<p>A negative value of indent will produce a hanging indentation.<br />
+That is, the first line will have the full width, and subsequent<br />
 lines will be indented by the absolute value of indent.</p>
 
 
@@ -7036,8 +7039,8 @@ lines will be indented by the absolute value of indent.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether this text is hidden.</p>
-<p>Note that there may still be problems with the support for invisible
-text, in particular when navigating programmatically inside a buffer
+<p>Note that there may still be problems with the support for invisible<br />
+text, in particular when navigating programmatically inside a buffer<br />
 containing invisible segments.</p>
 
 
@@ -7106,8 +7109,8 @@ containing invisible segments.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether this text is hidden.</p>
-<p>Note that there may still be problems with the support for invisible
-text, in particular when navigating programmatically inside a buffer
+<p>Note that there may still be problems with the support for invisible<br />
+text, in particular when navigating programmatically inside a buffer<br />
 containing invisible segments.</p>
 
 
@@ -7464,9 +7467,9 @@ containing invisible segments.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The language this text is in, as an ISO code.</p>
-<p>Pango can use this as a hint when rendering the text.
+<p>Pango can use this as a hint when rendering the text.<br />
 If not set, an appropriate default will be used.</p>
-<p>Note that the initial value of this property depends
+<p>Note that the initial value of this property depends<br />
 on the current locale, see also [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.get_default_language].</p>
 
 
@@ -7507,9 +7510,9 @@ on the current locale, see also [func<!-- raw HTML omitted -->Gtk<!-- raw HTML o
 </h3><div class="docstring">
   <div class="discussion">
     <p>The language this text is in, as an ISO code.</p>
-<p>Pango can use this as a hint when rendering the text.
+<p>Pango can use this as a hint when rendering the text.<br />
 If not set, an appropriate default will be used.</p>
-<p>Note that the initial value of this property depends
+<p>Note that the initial value of this property depends<br />
 on the current locale, see also [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.get_default_language].</p>
 
 
@@ -9785,16 +9788,16 @@ on the current locale, see also [func<!-- raw HTML omitted -->Gtk<!-- raw HTML o
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the priority of a <code>GtkTextTag</code>.</p>
-<p>Valid priorities start at 0 and go to one less than
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTagTable.get_size]. Each tag in a table
-has a unique priority; setting the priority of one tag shifts
-the priorities of all the other tags in the table to maintain
+<p>Valid priorities start at 0 and go to one less than<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTagTable.get_size]. Each tag in a table<br />
+has a unique priority; setting the priority of one tag shifts<br />
+the priorities of all the other tags in the table to maintain<br />
 a unique priority for each tag.</p>
-<p>Higher priority tags “win” if two tags both set the same text
-attribute. When adding a tag to a tag table, it will be assigned
-the highest priority in the table by default; so normally the
-precedence of a set of tags is the order in which they were added
-to the table, or created with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.create_tag],
+<p>Higher priority tags “win” if two tags both set the same text<br />
+attribute. When adding a tag to a tag table, it will be assigned<br />
+the highest priority in the table by default; so normally the<br />
+precedence of a set of tags is the order in which they were added<br />
+to the table, or created with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.create_tag],<br />
 which adds the tag to the buffer’s table automatically.</p>
 
 
@@ -10274,7 +10277,7 @@ which adds the tag to the buffer’s table automatically.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Font size as a scale factor relative to the default font size.</p>
-<p>This properly adapts to theme changes, etc. so is recommended.
+<p>This properly adapts to theme changes, etc. so is recommended.<br />
 Pango predefines some scales such as %PANGO_SCALE_X_LARGE.</p>
 
 
@@ -12673,8 +12676,8 @@ Pango predefines some scales such as %PANGO_SCALE_X_LARGE.</p>
   <div class="discussion">
     <p>This property modifies the color of underlines.</p>
 <p>If not set, underlines will use the foreground color.</p>
-<p>If [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTag:underline] is set to %PANGO_UNDERLINE_ERROR,
-an alternate color may be applied instead of the foreground. Setting
+<p>If [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTag:underline] is set to %PANGO_UNDERLINE_ERROR,<br />
+an alternate color may be applied instead of the foreground. Setting<br />
 this property will always override those defaults.</p>
 
 
@@ -12716,8 +12719,8 @@ this property will always override those defaults.</p>
   <div class="discussion">
     <p>This property modifies the color of underlines.</p>
 <p>If not set, underlines will use the foreground color.</p>
-<p>If [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTag:underline] is set to %PANGO_UNDERLINE_ERROR,
-an alternate color may be applied instead of the foreground. Setting
+<p>If [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTag:underline] is set to %PANGO_UNDERLINE_ERROR,<br />
+an alternate color may be applied instead of the foreground. Setting<br />
 this property will always override those defaults.</p>
 
 
@@ -13564,7 +13567,7 @@ this property will always override those defaults.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether to wrap lines never, at word boundaries, or
+    <p>Whether to wrap lines never, at word boundaries, or<br />
 at character boundaries.</p>
 
 
@@ -13604,7 +13607,7 @@ at character boundaries.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether to wrap lines never, at word boundaries, or
+    <p>Whether to wrap lines never, at word boundaries, or<br />
 at character boundaries.</p>
 
 
@@ -13773,7 +13776,7 @@ at character boundaries.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

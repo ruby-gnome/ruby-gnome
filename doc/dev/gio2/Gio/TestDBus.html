@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::TestDBus";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,69 +95,70 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A helper class for testing code which uses D-Bus without touching the user’s
+    <p>A helper class for testing code which uses D-Bus without touching the user’s<br />
 session bus.</p>
-<p>Note that <code>GTestDBus</code> modifies the user’s environment, calling
-<a href="man:setenv(3)"><code>setenv()</code></a>. This is not thread-safe, so all <code>GTestDBus</code>
-calls should be completed before threads are spawned, or should have
-appropriate locking to ensure no access conflicts to environment variables
+<p>Note that <code>GTestDBus</code> modifies the user’s environment, calling<br />
+<a href="man:setenv(3)"><code>setenv()</code></a>. This is not thread-safe, so all <code>GTestDBus</code><br />
+calls should be completed before threads are spawned, or should have<br />
+appropriate locking to ensure no access conflicts to environment variables<br />
 shared between <code>GTestDBus</code> and other threads.</p>
-<h2>Creating unit tests using <code>GTestDBus</code></h2>
-<p>Testing of D-Bus services can be tricky because normally we only ever run
-D-Bus services over an existing instance of the D-Bus daemon thus we
-usually don’t activate D-Bus services that are not yet installed into the
-target system. The <code>GTestDBus</code> object makes this easier for us by taking care
-of the lower level tasks such as running a private D-Bus daemon and looking
-up uninstalled services in customizable locations, typically in your source
+<h2><a href="#creating-unit-tests-using-gtestdbus" aria-hidden="true" class="anchor" id="creating-unit-tests-using-gtestdbus"></a>Creating unit tests using <code>GTestDBus</code></h2>
+<p>Testing of D-Bus services can be tricky because normally we only ever run<br />
+D-Bus services over an existing instance of the D-Bus daemon thus we<br />
+usually don’t activate D-Bus services that are not yet installed into the<br />
+target system. The <code>GTestDBus</code> object makes this easier for us by taking care<br />
+of the lower level tasks such as running a private D-Bus daemon and looking<br />
+up uninstalled services in customizable locations, typically in your source<br />
 code tree.</p>
-<p>The first thing you will need is a separate service description file for the
-D-Bus daemon. Typically a <code>services</code> subdirectory of your <code>tests</code> directory
+<p>The first thing you will need is a separate service description file for the<br />
+D-Bus daemon. Typically a <code>services</code> subdirectory of your <code>tests</code> directory<br />
 is a good place to put this file.</p>
-<p>The service file should list your service along with an absolute path to the
-uninstalled service executable in your source tree. Using autotools we would
-achieve this by adding a file such as <code>my-server.service.in</code> in the services
+<p>The service file should list your service along with an absolute path to the<br />
+uninstalled service executable in your source tree. Using autotools we would<br />
+achieve this by adding a file such as <code>my-server.service.in</code> in the services<br />
 directory and have it processed by configure.</p>
 <pre class="code ruby"><code class="ruby">[D-BUS Service]
 Name=org.gtk.GDBus.Examples.ObjectManager
 Exec=&lt;b&gt;abs_top_builddir&lt;/b&gt;@/gio/tests/gdbus-example-objectmanager-server
 </code></pre>
-<p>You will also need to indicate this service directory in your test
-fixtures, so you will need to pass the path while compiling your
-test cases. Typically this is done with autotools with an added
+<p>You will also need to indicate this service directory in your test<br />
+fixtures, so you will need to pass the path while compiling your<br />
+test cases. Typically this is done with autotools with an added<br />
 preprocessor flag specified to compile your tests such as:</p>
 <pre class="code ruby"><code class="ruby">-DTEST_SERVICES=\&quot;&quot;$(abs_top_builddir)/tests/services&quot;\&quot;
 </code></pre>
-<p>Once you have a service definition file which is local to your source tree,
+<p>Once you have a service definition file which is local to your source tree,<br />
 you can proceed to set up a GTest fixture using the <code>GTestDBus</code> scaffolding.</p>
-<p>An example of a test fixture for D-Bus services can be found
-here:
+<p>An example of a test fixture for D-Bus services can be found<br />
+here:<br />
 <a href="https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-test-fixture.c">gdbus-test-fixture.c</a></p>
-<p>Note that these examples only deal with isolating the D-Bus aspect of your
-service. To successfully run isolated unit tests on your service you may need
-some additional modifications to your test case fixture. For example; if your
-service uses [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings] and installs a schema then it is important
-that your test service not load the schema in the ordinary installed location
-(chances are that your service and schema files are not yet installed, or
-worse; there is an older version of the schema file sitting in the install
+<p>Note that these examples only deal with isolating the D-Bus aspect of your<br />
+service. To successfully run isolated unit tests on your service you may need<br />
+some additional modifications to your test case fixture. For example; if your<br />
+service uses [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings] and installs a schema then it is important<br />
+that your test service not load the schema in the ordinary installed location<br />
+(chances are that your service and schema files are not yet installed, or<br />
+worse; there is an older version of the schema file sitting in the install<br />
 location).</p>
-<p>Most of the time we can work around these obstacles using the
-environment. Since the environment is inherited by the D-Bus daemon
-created by <code>GTestDBus</code> and then in turn inherited by any services the
-D-Bus daemon activates, using the setup routine for your fixture is
-a practical place to help sandbox your runtime environment. For the
-rather typical GSettings case we can work around this by setting
-<code>GSETTINGS_SCHEMA_DIR</code> to the in tree directory holding your schemas
+<p>Most of the time we can work around these obstacles using the<br />
+environment. Since the environment is inherited by the D-Bus daemon<br />
+created by <code>GTestDBus</code> and then in turn inherited by any services the<br />
+D-Bus daemon activates, using the setup routine for your fixture is<br />
+a practical place to help sandbox your runtime environment. For the<br />
+rather typical GSettings case we can work around this by setting<br />
+<code>GSETTINGS_SCHEMA_DIR</code> to the in tree directory holding your schemas<br />
 in the above <code>fixture_setup()</code> routine.</p>
-<p>The GSettings schemas need to be locally pre-compiled for this to work. This
-can be achieved by compiling the schemas locally as a step before running
-test cases, an autotools setup might do the following in the directory
+<p>The GSettings schemas need to be locally pre-compiled for this to work. This<br />
+can be achieved by compiling the schemas locally as a step before running<br />
+test cases, an autotools setup might do the following in the directory<br />
 holding schemas:</p>
 <pre class="code ruby"><code class="ruby">    all-am:
             $(GLIB_COMPILE_SCHEMAS) .
@@ -209,6 +211,7 @@ holding schemas:</p>
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -404,6 +407,7 @@ holding schemas:</p>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -468,10 +472,10 @@ holding schemas:</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unset DISPLAY and DBUS_SESSION_BUS_ADDRESS env variables to ensure the test
+    <p>Unset DISPLAY and DBUS_SESSION_BUS_ADDRESS env variables to ensure the test<br />
 won't use user's session bus.</p>
-<p>This is useful for unit tests that want to verify behaviour when no session
-bus is running. It is not necessary to call this if unit test already calls
+<p>This is useful for unit tests that want to verify behaviour when no session<br />
+bus is running. It is not necessary to call this if unit test already calls<br />
 g_test_dbus_up() before acquiring the session bus.</p>
 
 
@@ -513,7 +517,7 @@ g_test_dbus_up() before acquiring the session bus.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Add a path where dbus-daemon will look up .service files. This can't be
+    <p>Add a path where dbus-daemon will look up .service files. This can't be<br />
 called after g_test_dbus_up().</p>
 
 
@@ -568,8 +572,8 @@ called after g_test_dbus_up().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the address on which dbus-daemon is running. If g_test_dbus_up() has not
-been called yet, nil is returned. This can be used with
+    <p>Get the address on which dbus-daemon is running. If g_test_dbus_up() has not<br />
+been called yet, nil is returned. This can be used with<br />
 g_dbus_connection_new_for_address().</p>
 
 
@@ -610,8 +614,8 @@ g_dbus_connection_new_for_address().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Stop the session bus started by g_test_dbus_up().</p>
-<p>This will wait for the singleton returned by g_bus_get() or g_bus_get_sync()
-to be destroyed. This is done to ensure that the next unit test won't get a
+<p>This will wait for the singleton returned by g_bus_get() or g_bus_get_sync()<br />
+to be destroyed. This is done to ensure that the next unit test won't get a<br />
 leaked singleton from this test.</p>
 
 
@@ -754,9 +758,9 @@ leaked singleton from this test.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Stop the session bus started by g_test_dbus_up().</p>
-<p>Unlike g_test_dbus_down(), this won't verify the GDBus::Connection
-singleton returned by g_bus_get() or g_bus_get_sync() is destroyed. Unit
-tests wanting to verify behaviour after the session bus has been stopped
+<p>Unlike g_test_dbus_down(), this won't verify the GDBus::Connection<br />
+singleton returned by g_bus_get() or g_bus_get_sync() is destroyed. Unit<br />
+tests wanting to verify behaviour after the session bus has been stopped<br />
 can use this function but should still call g_test_dbus_down() when done.</p>
 
 
@@ -792,11 +796,11 @@ can use this function but should still call g_test_dbus_down() when done.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Start a dbus-daemon instance and set DBUS_SESSION_BUS_ADDRESS. After this
+    <p>Start a dbus-daemon instance and set DBUS_SESSION_BUS_ADDRESS. After this<br />
 call, it is safe for unit tests to start sending messages on the session bus.</p>
-<p>If this function is called from setup callback of g_test_add(),
+<p>If this function is called from setup callback of g_test_add(),<br />
 g_test_dbus_down() must be called in its teardown callback.</p>
-<p>If this function is called from unit test's main(), then g_test_dbus_down()
+<p>If this function is called from unit test's main(), then g_test_dbus_down()<br />
 must be called after g_test_run().</p>
 
 
@@ -828,7 +832,7 @@ must be called after g_test_run().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

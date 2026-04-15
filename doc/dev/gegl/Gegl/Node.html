@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gegl::Node";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gegl/node.rb</dd>
+    <dd>lib/gegl/node.rb
+</dd>
   </dl>
   
 </div>
@@ -1460,6 +1462,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1476,9 +1479,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The Gegl::Node returned contains the graph described by the tree of stacks
-in the XML document. The tree is connected to the &quot;output&quot; pad of the
-returned node and thus can be used directly for processing.
+    <p>The Gegl::Node returned contains the graph described by the tree of stacks<br />
+in the XML document. The tree is connected to the &quot;output&quot; pad of the<br />
+returned node and thus can be used directly for processing.<br />
 resolved in relation to.</p>
 
 
@@ -1634,7 +1637,7 @@ resolved in relation to.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Make the GeglNode <!-- raw HTML omitted -->graph<!-- raw HTML omitted -->, take a reference on child. This reference
+    <p>Make the GeglNode <!-- raw HTML omitted -->graph<!-- raw HTML omitted -->, take a reference on child. This reference<br />
 will be dropped when the reference count on the graph reaches zero.</p>
 
 
@@ -1693,14 +1696,14 @@ will be dropped when the reference count on the graph reaches zero.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Render a rectangular region from a node.
-width/height of the sampled region.
-coordinates after scale has been applied.
-left as NULL when forcing a rendering of a region.
-rowstride based on the width and bytes per pixel for the specified format.
-GEGL_BLIT_DIRTY. if cache is enabled, a cache will be set up for subsequent
-requests of image data from this node. By passing in GEGL_BLIT_DIRTY the
-function will return with the latest rendered results in the cache without
+    <p>Render a rectangular region from a node.<br />
+width/height of the sampled region.<br />
+coordinates after scale has been applied.<br />
+left as NULL when forcing a rendering of a region.<br />
+rowstride based on the width and bytes per pixel for the specified format.<br />
+GEGL_BLIT_DIRTY. if cache is enabled, a cache will be set up for subsequent<br />
+requests of image data from this node. By passing in GEGL_BLIT_DIRTY the<br />
+function will return with the latest rendered results in the cache without<br />
 regard to wheter the regions has been rendered or not.</p>
 
 
@@ -1925,7 +1928,7 @@ regard to wheter the regions has been rendered or not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the position and dimensions of a rectangle spanning the area
+    <p>Returns the position and dimensions of a rectangle spanning the area<br />
 defined by a node.</p>
 
 
@@ -2066,7 +2069,7 @@ defined by a node.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>of the nodes contained within a GeglNode that is a subgraph.
+    <p>of the nodes contained within a GeglNode that is a subgraph.<br />
 Use g_list_free () on the list when done.</p>
 
 
@@ -2106,7 +2109,7 @@ Use g_list_free () on the list when done.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Makes a connection between the pads of two nodes, one pad should
+    <p>Makes a connection between the pads of two nodes, one pad should<br />
 be a source pad the other a sink pad, order does not matter.</p>
 <p>Returns TRUE if the connection was successfully made.</p>
 
@@ -2362,14 +2365,14 @@ be a source pad the other a sink pad, order does not matter.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new processing node that performs the specified operation.
-All properties of the operation will have their default values. This
-is included as an addition to #gegl_node_new_child in the public API to have
-a non varargs entry point for bindings as well as sometimes simpler more
-readable code.
-Calling g_object_unref on a node will cause the node to be dropped by the
-parent. (You may also add additional references using
-g_object_ref/g_object_unref, but in general relying on the parents reference
+    <p>Creates a new processing node that performs the specified operation.<br />
+All properties of the operation will have their default values. This<br />
+is included as an addition to #gegl_node_new_child in the public API to have<br />
+a non varargs entry point for bindings as well as sometimes simpler more<br />
+readable code.<br />
+Calling g_object_unref on a node will cause the node to be dropped by the<br />
+parent. (You may also add additional references using<br />
+g_object_ref/g_object_unref, but in general relying on the parents reference<br />
 counting is easiest.)</p>
 
 
@@ -2428,9 +2431,9 @@ counting is easiest.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Performs hit detection by returning the node providing data at a given
-coordinate pair. Currently operates only on bounding boxes and not
-pixel data.
+    <p>Performs hit detection by returning the node providing data at a given<br />
+coordinate pair. Currently operates only on bounding boxes and not<br />
+pixel data.<br />
 data ending up at <!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y<!-- raw HTML omitted --> in the output of <!-- raw HTML omitted -->node<!-- raw HTML omitted -->.</p>
 
 
@@ -2827,11 +2830,11 @@ data ending up at <!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw H
   
 </h3><div class="docstring">
   <div class="discussion">
-    <h2>Gets properties of a Gegl::Node.</h2>
-<p>double level;
+    <h2><a href="#gets-properties-of-a-geglnode" aria-hidden="true" class="anchor" id="gets-properties-of-a-geglnode"></a>Gets properties of a Gegl::Node.</h2>
+<p>double level;<br />
 char  *path;</p>
-<p>gegl_node_get (png_save, &quot;path&quot;, &amp;path, NULL);
-gegl_node_get (threshold, &quot;level&quot;, &amp;level, NULL);
+<p>gegl_node_get (png_save, &quot;path&quot;, &amp;path, NULL);<br />
+gegl_node_get (threshold, &quot;level&quot;, &amp;level, NULL);<br />
 name/value pairs, followed by NULL.</p>
 
 
@@ -2901,9 +2904,9 @@ name/value pairs, followed by NULL.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieve which pads on which nodes are connected to a named output_pad,
-and the number of connections. Both the location for the generated
-nodes array and pads array can be left as NULL. If they are non NULL
+    <p>Retrieve which pads on which nodes are connected to a named output_pad,<br />
+and the number of connections. Both the location for the generated<br />
+nodes array and pads array can be left as NULL. If they are non NULL<br />
 both should be freed with g_free. The arrays are NULL terminated.</p>
 <p>Returns the number of consumers connected to this output_pad.</p>
 
@@ -2989,8 +2992,8 @@ both should be freed with g_free. The arrays are NULL terminated.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Proxies are used to route between nodes of a subgraph contained within
-a node.
+    <p>Proxies are used to route between nodes of a subgraph contained within<br />
+a node.<br />
 If no input proxy exists with this name a new one will be created.</p>
 
 
@@ -3049,8 +3052,8 @@ If no input proxy exists with this name a new one will be created.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Proxies are used to route between nodes of a subgraph contained within
-a node.
+    <p>Proxies are used to route between nodes of a subgraph contained within<br />
+a node.<br />
 If no output proxy exists with this name a new one will be created.</p>
 
 
@@ -3143,7 +3146,7 @@ If no output proxy exists with this name a new one will be created.</p>
       
       
         &mdash;
-        <div class='inline'><p>optional pointer to a location where we can store a
+        <div class='inline'><p>optional pointer to a location where we can store a<br />
 freshly allocated string with the name of the output pad.</p>
 </div>
       
@@ -3183,7 +3186,7 @@ freshly allocated string with the name of the output pad.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is mainly included for language bindings. Using #gegl_node_get is
+    <p>This is mainly included for language bindings. Using #gegl_node_get is<br />
 more convenient when programming in C.</p>
 
 
@@ -3253,7 +3256,7 @@ more convenient when programming in C.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>valist version of #gegl_node_get
+    <p>valist version of #gegl_node_get<br />
 name/value pairs, followed by NULL.</p>
 
 
@@ -3377,7 +3380,7 @@ name/value pairs, followed by NULL.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the position and dimensions of a rectangle spanning the area
+    <p>Returns the position and dimensions of a rectangle spanning the area<br />
 defined by a node.</p>
 
 
@@ -3563,7 +3566,7 @@ defined by a node.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Synthetic sugar for linking a chain of nodes with &quot;output&quot;-&gt;&quot;input&quot;. The
+    <p>Synthetic sugar for linking a chain of nodes with &quot;output&quot;-&gt;&quot;input&quot;. The<br />
 list is NULL terminated.</p>
 
 
@@ -3633,8 +3636,8 @@ list is NULL terminated.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If the node has any input pads this function returns a null terminated
-array of pad names, otherwise it returns NULL. The return value can be
+    <p>If the node has any input pads this function returns a null terminated<br />
+array of pad names, otherwise it returns NULL. The return value can be<br />
 freed with g_strfreev().</p>
 
 
@@ -3670,8 +3673,8 @@ freed with g_strfreev().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If the node has any output pads this function returns a null terminated
-array of pad names, otherwise it returns NULL. The return value can be
+    <p>If the node has any output pads this function returns a null terminated<br />
+array of pad names, otherwise it returns NULL. The return value can be<br />
 freed with g_strfreev().</p>
 
 
@@ -3812,17 +3815,17 @@ freed with g_strfreev().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new processing node that performs the specified operation with
-a NULL terminated list of key/value pairs for initial parameter values
-configuring the operation. Usually the first pair should be &quot;operation&quot;
-and the type of operation to be associated. If no operation is provided
-the node doesn't have an initial operation and can be used to construct
-a subgraph with special middle-man routing nodes created with
-#gegl_node_get_output_proxy and #gegl_node_get_input_proxy.
-terminated with NULL.
-Calling g_object_unref on a node will cause the node to be dropped by the
-parent. (You may also add additional references using
-g_object_ref/g_object_unref, but in general relying on the parents reference
+    <p>Creates a new processing node that performs the specified operation with<br />
+a NULL terminated list of key/value pairs for initial parameter values<br />
+configuring the operation. Usually the first pair should be &quot;operation&quot;<br />
+and the type of operation to be associated. If no operation is provided<br />
+the node doesn't have an initial operation and can be used to construct<br />
+a subgraph with special middle-man routing nodes created with<br />
+#gegl_node_get_output_proxy and #gegl_node_get_input_proxy.<br />
+terminated with NULL.<br />
+Calling g_object_unref on a node will cause the node to be dropped by the<br />
+parent. (You may also add additional references using<br />
+g_object_ref/g_object_unref, but in general relying on the parents reference<br />
 counting is easiest.)</p>
 
 
@@ -4237,33 +4240,33 @@ counting is easiest.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Render a composition. This can be used for instance on a node with a &quot;png-save&quot;
-operation to render all necessary data, and make it be written to file. This
-function wraps the usage of a GeglProcessor in a single blocking function
-call. If you need a non-blocking operation, then make a direct use of
+    <p>Render a composition. This can be used for instance on a node with a &quot;png-save&quot;<br />
+operation to render all necessary data, and make it be written to file. This<br />
+function wraps the usage of a GeglProcessor in a single blocking function<br />
+call. If you need a non-blocking operation, then make a direct use of<br />
 #gegl_processor_work. See Gegl::Processor.</p>
 <hr />
-<p>GeglNode      *gegl;
-GeglRectangle  roi;
-GeglNode      *png_save;
+<p>GeglNode      *gegl;<br />
+GeglRectangle  roi;<br />
+GeglNode      *png_save;<br />
 unsigned char *buffer;</p>
-<p>gegl = gegl_parse_xml (xml_data);
+<p>gegl = gegl_parse_xml (xml_data);<br />
 roi      = gegl_node_get_bounding_box (gegl);</p>
-<h1>create png_save from the graph, the parent/child relationship</h1>
-<h1>only mean anything when it comes to memory management.</h1>
-<p>png_save = gegl_node_new_child (gegl,
-&quot;operation&quot;, &quot;gegl:png-save&quot;,
-&quot;path&quot;,      &quot;output.png&quot;,
+<h1><a href="#create-png_save-from-the-graph-the-parentchild-relationship" aria-hidden="true" class="anchor" id="create-png_save-from-the-graph-the-parentchild-relationship"></a>create png_save from the graph, the parent/child relationship</h1>
+<h1><a href="#only-mean-anything-when-it-comes-to-memory-management" aria-hidden="true" class="anchor" id="only-mean-anything-when-it-comes-to-memory-management"></a>only mean anything when it comes to memory management.</h1>
+<p>png_save = gegl_node_new_child (gegl,<br />
+&quot;operation&quot;, &quot;gegl:png-save&quot;,<br />
+&quot;path&quot;,      &quot;output.png&quot;,<br />
 NULL);</p>
-<p>gegl_node_link (gegl, png_save);
+<p>gegl_node_link (gegl, png_save);<br />
 gegl_node_process (png_save);</p>
-<p>buffer = malloc (roi.w<em>roi.h</em>4);
-gegl_node_blit (gegl,
-1.0,
-&amp;roi,
-babl_format(&quot;R'G'B'A u8&quot;),
-buffer,
-GEGL_AUTO_ROWSTRIDE,
+<p>buffer = malloc (roi.w<em>roi.h</em>4);<br />
+gegl_node_blit (gegl,<br />
+1.0,<br />
+&amp;roi,<br />
+babl_format(&quot;R'G'B'A u8&quot;),<br />
+buffer,<br />
+GEGL_AUTO_ROWSTRIDE,<br />
 GEGL_BLIT_DEFAULT);</p>
 
 
@@ -4359,8 +4362,8 @@ GEGL_BLIT_DEFAULT);</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes a child from a GeglNode. The reference previously held will be
-dropped so increase the reference count before removing when reparenting
+    <p>Removes a child from a GeglNode. The reference previously held will be<br />
+dropped so increase the reference count before removing when reparenting<br />
 a child between two graphs.</p>
 
 
@@ -4419,14 +4422,14 @@ a child between two graphs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <h2>Set properties on a node, possible properties to be set are the properties
-of the currently set operations as well as <!-- raw HTML omitted -->&quot;name&quot;<!-- raw HTML omitted --> and
-<!-- raw HTML omitted -->&quot;operation&quot;<!-- raw HTML omitted -->. <!-- raw HTML omitted -->&quot;operation&quot;<!-- raw HTML omitted --> changes the current operations
-set for the node, <!-- raw HTML omitted -->&quot;name&quot;<!-- raw HTML omitted --> doesn't have any role internally in
+    <h2><a href="#set-properties-on-a-node-possible-properties-to-be-set-are-the-properties-of-the-currently-set-operations-as-well-as-name-and-operation-operation-changes-the-current-operations-set-for-the-node-name-doesnt-have-any-role-internally-in-gegl" aria-hidden="true" class="anchor" id="set-properties-on-a-node-possible-properties-to-be-set-are-the-properties-of-the-currently-set-operations-as-well-as-name-and-operation-operation-changes-the-current-operations-set-for-the-node-name-doesnt-have-any-role-internally-in-gegl"></a>Set properties on a node, possible properties to be set are the properties<br />
+of the currently set operations as well as <!-- raw HTML omitted -->&quot;name&quot;<!-- raw HTML omitted --> and<br />
+<!-- raw HTML omitted -->&quot;operation&quot;<!-- raw HTML omitted -->. <!-- raw HTML omitted -->&quot;operation&quot;<!-- raw HTML omitted --> changes the current operations<br />
+set for the node, <!-- raw HTML omitted -->&quot;name&quot;<!-- raw HTML omitted --> doesn't have any role internally in<br />
 GEGL.</h2>
-<p>gegl_node_set (node, &quot;brightness&quot;, -0.2,
-&quot;contrast&quot;,   2.0,
-NULL);
+<p>gegl_node_set (node, &quot;brightness&quot;, -0.2,<br />
+&quot;contrast&quot;,   2.0,<br />
+NULL);<br />
 pairs, followed by NULL.</p>
 
 
@@ -4556,7 +4559,7 @@ pairs, followed by NULL.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is mainly included for language bindings. Using #gegl_node_set is
+    <p>This is mainly included for language bindings. Using #gegl_node_set is<br />
 more convenient when programming in C.</p>
 
 
@@ -4626,7 +4629,7 @@ more convenient when programming in C.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>valist version of #gegl_node_set
+    <p>valist version of #gegl_node_set<br />
 pairs, followed by NULL.</p>
 
 
@@ -4696,7 +4699,7 @@ pairs, followed by NULL.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the right value in animated properties of this node and all its
+    <p>Sets the right value in animated properties of this node and all its<br />
 dependendcies to be the specified time position.</p>
 
 
@@ -4751,11 +4754,11 @@ dependendcies to be the specified time position.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a freshly allocated \0 terminated string containing a XML
-serialization of the composition produced by a node (and thus also
-the nodes contributing data to the specified node). To export a
-gegl graph, connect the internal output node to an output proxy (see
-#gegl_node_get_output_proxy.) and use the proxy node as the basis
+    <p>Returns a freshly allocated \0 terminated string containing a XML<br />
+serialization of the composition produced by a node (and thus also<br />
+the nodes contributing data to the specified node). To export a<br />
+gegl graph, connect the internal output node to an output proxy (see<br />
+#gegl_node_get_output_proxy.) and use the proxy node as the basis<br />
 for the serialization.</p>
 
 
@@ -4810,8 +4813,8 @@ for the serialization.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a freshly allocated \0 terminated string containing a XML
-serialization of a segment of a graph from <!-- raw HTML omitted -->head<!-- raw HTML omitted --> to <!-- raw HTML omitted -->tail<!-- raw HTML omitted --> nodes.
+    <p>Returns a freshly allocated \0 terminated string containing a XML<br />
+serialization of a segment of a graph from <!-- raw HTML omitted -->head<!-- raw HTML omitted --> to <!-- raw HTML omitted -->tail<!-- raw HTML omitted --> nodes.<br />
 If <!-- raw HTML omitted -->tail<!-- raw HTML omitted --> is nil then this behaves just like #gegl_node_to_xml.</p>
 
 
@@ -4986,7 +4989,7 @@ If <!-- raw HTML omitted -->tail<!-- raw HTML omitted --> is nil then this behav
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

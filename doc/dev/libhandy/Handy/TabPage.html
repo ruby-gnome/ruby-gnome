@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Handy::TabPage";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -736,6 +738,7 @@
 
       
     </ul>
+    
   
 
 
@@ -863,7 +866,7 @@
   <div class="discussion">
     <p>The icon of the page.</p>
 <p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] displays the icon next to the title.</p>
-<p>It will not show the icon if [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:loading] is set to <code>TRUE</code>,
+<p>It will not show the icon if [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:loading] is set to <code>TRUE</code>,<br />
 or if the page is pinned and [propertyTabPage:indicator-icon] is set.</p>
 
 
@@ -905,7 +908,7 @@ or if the page is pinned and [propertyTabPage:indicator-icon] is set.</p>
   <div class="discussion">
     <p>The icon of the page.</p>
 <p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] displays the icon next to the title.</p>
-<p>It will not show the icon if [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:loading] is set to <code>TRUE</code>,
+<p>It will not show the icon if [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:loading] is set to <code>TRUE</code>,<br />
 or if the page is pinned and [propertyTabPage:indicator-icon] is set.</p>
 
 
@@ -1013,7 +1016,7 @@ or if the page is pinned and [propertyTabPage:indicator-icon] is set.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the indicator icon is activatable.</p>
-<p>If set to <code>TRUE</code>, [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::indicator-activated] will be emitted
+<p>If set to <code>TRUE</code>, [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::indicator-activated] will be emitted<br />
 when the indicator icon is clicked.</p>
 <p>If [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:indicator-icon] is not set, does nothing.</p>
 
@@ -1083,7 +1086,7 @@ when the indicator icon is clicked.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the indicator icon is activatable.</p>
-<p>If set to <code>TRUE</code>, [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::indicator-activated] will be emitted
+<p>If set to <code>TRUE</code>, [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::indicator-activated] will be emitted<br />
 when the indicator icon is clicked.</p>
 <p>If [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:indicator-icon] is not set, does nothing.</p>
 
@@ -1126,11 +1129,11 @@ when the indicator icon is clicked.</p>
   <div class="discussion">
     <p>An indicator icon for the page.</p>
 <p>A common use case is an audio or camera indicator in a web browser.</p>
-<p>[class<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->] will show it at the beginning of the tab, alongside icon
+<p>[class<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->] will show it at the beginning of the tab, alongside icon<br />
 representing [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:icon] or loading spinner.</p>
-<p>If the page is pinned, the indicator will be shown instead of icon or
+<p>If the page is pinned, the indicator will be shown instead of icon or<br />
 spinner.</p>
-<p>If [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:indicator-activatable] is set to <code>TRUE</code>, the indicator
+<p>If [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:indicator-activatable] is set to <code>TRUE</code>, the indicator<br />
 icon can act as a button.</p>
 
 
@@ -1172,11 +1175,11 @@ icon can act as a button.</p>
   <div class="discussion">
     <p>An indicator icon for the page.</p>
 <p>A common use case is an audio or camera indicator in a web browser.</p>
-<p>[class<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->] will show it at the beginning of the tab, alongside icon
+<p>[class<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->] will show it at the beginning of the tab, alongside icon<br />
 representing [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:icon] or loading spinner.</p>
-<p>If the page is pinned, the indicator will be shown instead of icon or
+<p>If the page is pinned, the indicator will be shown instead of icon or<br />
 spinner.</p>
-<p>If [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:indicator-activatable] is set to <code>TRUE</code>, the indicator
+<p>If [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:indicator-activatable] is set to <code>TRUE</code>, the indicator<br />
 icon can act as a button.</p>
 
 
@@ -1285,7 +1288,7 @@ icon can act as a button.</p>
   <div class="discussion">
     <p>Whether the page is loading.</p>
 <p>If set to <code>TRUE</code>, [class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will display a spinner in place of icon.</p>
-<p>If the page is pinned and [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:indicator-icon] is set, the
+<p>If the page is pinned and [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:indicator-icon] is set, the<br />
 loading status will not be visible.</p>
 
 
@@ -1355,7 +1358,7 @@ loading status will not be visible.</p>
   <div class="discussion">
     <p>Whether the page is loading.</p>
 <p>If set to <code>TRUE</code>, [class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will display a spinner in place of icon.</p>
-<p>If the page is pinned and [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:indicator-icon] is set, the
+<p>If the page is pinned and [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:indicator-icon] is set, the<br />
 loading status will not be visible.</p>
 
 
@@ -1435,8 +1438,8 @@ loading status will not be visible.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the page needs attention.</p>
-<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will display a glow under the tab representing the page if
-set to <code>TRUE</code>. If the tab is not visible, the corresponding edge of the tab
+<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will display a glow under the tab representing the page if<br />
+set to <code>TRUE</code>. If the tab is not visible, the corresponding edge of the tab<br />
 bar will be highlighted.</p>
 
 
@@ -1505,8 +1508,8 @@ bar will be highlighted.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the page needs attention.</p>
-<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will display a glow under the tab representing the page if
-set to <code>TRUE</code>. If the tab is not visible, the corresponding edge of the tab
+<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will display a glow under the tab representing the page if<br />
+set to <code>TRUE</code>. If the tab is not visible, the corresponding edge of the tab<br />
 bar will be highlighted.</p>
 
 
@@ -1947,7 +1950,7 @@ bar will be highlighted.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The title of the page.</p>
-<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will display it in the center of the tab unless it's pinned,
+<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will display it in the center of the tab unless it's pinned,<br />
 and will use it as a tooltip unless [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:tooltip] is set.</p>
 
 
@@ -1988,7 +1991,7 @@ and will use it as a tooltip unless [property<!-- raw HTML omitted -->TabPage<!-
 </h3><div class="docstring">
   <div class="discussion">
     <p>The title of the page.</p>
-<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will display it in the center of the tab unless it's pinned,
+<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will display it in the center of the tab unless it's pinned,<br />
 and will use it as a tooltip unless [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:tooltip] is set.</p>
 
 
@@ -2058,7 +2061,7 @@ and will use it as a tooltip unless [property<!-- raw HTML omitted -->TabPage<!-
   <div class="discussion">
     <p>The tooltip of the page.</p>
 <p>The tooltip can be marked up with the Pango text markup language.</p>
-<p>If not set, [class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will use [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:title] as a tooltip
+<p>If not set, [class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will use [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:title] as a tooltip<br />
 instead.</p>
 
 
@@ -2100,7 +2103,7 @@ instead.</p>
   <div class="discussion">
     <p>The tooltip of the page.</p>
 <p>The tooltip can be marked up with the Pango text markup language.</p>
-<p>If not set, [class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will use [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:title] as a tooltip
+<p>If not set, [class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will use [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:title] as a tooltip<br />
 instead.</p>
 
 
@@ -2164,7 +2167,7 @@ instead.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::ComboBoxText";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,34 +101,35 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk3/combo-box-text.rb</dd>
+    <dd>lib/gtk3/combo-box-text.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A <code>GtkComboBoxText</code> is a simple variant of <code>GtkComboBox</code> for text-only
+    <p>A <code>GtkComboBoxText</code> is a simple variant of <code>GtkComboBox</code> for text-only<br />
 use cases.</p>
 <p><img src="combo-box-text.png" alt="An example GtkComboBoxText" /></p>
 <p><code>GtkComboBoxText</code> hides the model-view complexity of <code>GtkComboBox</code>.</p>
-<p>To create a <code>GtkComboBoxText</code>, use [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.new] or
+<p>To create a <code>GtkComboBoxText</code>, use [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.new] or<br />
 [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.new_with_entry].</p>
-<p>You can add items to a <code>GtkComboBoxText</code> with
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.append_text],
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.insert_text] or
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.prepend_text] and remove options with
+<p>You can add items to a <code>GtkComboBoxText</code> with<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.append_text],<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.insert_text] or<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.prepend_text] and remove options with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.remove].</p>
-<p>If the <code>GtkComboBoxText</code> contains an entry (via the
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBox:has-entry] property), its contents can be retrieved
+<p>If the <code>GtkComboBoxText</code> contains an entry (via the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBox:has-entry] property), its contents can be retrieved<br />
 using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.get_active_text].</p>
-<p>You should not call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBox.set_model] or attempt to pack more
+<p>You should not call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBox.set_model] or attempt to pack more<br />
 cells into this combo box via its [iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CellLayout] interface.</p>
-<h2>GtkComboBoxText as GtkBuildable</h2>
-<p>The <code>GtkComboBoxText</code> implementation of the <code>GtkBuildable</code> interface supports
-adding items directly using the <code>&lt;items&gt;</code> element and specifying <code>&lt;item&gt;</code>
-elements for each item. Each <code>&lt;item&gt;</code> element can specify the “id”
-corresponding to the appended text and also supports the regular
+<h2><a href="#gtkcomboboxtext-as-gtkbuildable" aria-hidden="true" class="anchor" id="gtkcomboboxtext-as-gtkbuildable"></a>GtkComboBoxText as GtkBuildable</h2>
+<p>The <code>GtkComboBoxText</code> implementation of the <code>GtkBuildable</code> interface supports<br />
+adding items directly using the <code>&lt;items&gt;</code> element and specifying <code>&lt;item&gt;</code><br />
+elements for each item. Each <code>&lt;item&gt;</code> element can specify the “id”<br />
+corresponding to the appended text and also supports the regular<br />
 translation attributes “translatable”, “context” and “comments”.</p>
 <p>Here is a UI definition fragment specifying <code>GtkComboBoxText</code> items:</p>
 <pre class="code xml"><code class="xml">&lt;object class=&quot;GtkComboBoxText&quot;&gt;
@@ -138,15 +140,15 @@ translation attributes “translatable”, “context” and “comments”.</p>
   &lt;/items&gt;
 &lt;/object&gt;
 </code></pre>
-<h2>CSS nodes</h2>
+<h2><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h2>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_combobox'>combobox</span>
 <span class='id identifier rubyid_╰──'>╰──</span> <span class='id identifier rubyid_box'>box</span><span class='period'>.</span><span class='id identifier rubyid_linked'>linked</span>
     <span class='id identifier rubyid_├──'>├──</span> <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_combo'>combo</span>
     <span class='id identifier rubyid_├──'>├──</span> <span class='id identifier rubyid_button'>button</span><span class='period'>.</span><span class='id identifier rubyid_combo'>combo</span>
     <span class='id identifier rubyid_╰──'>╰──</span> <span class='id identifier rubyid_window'>window</span><span class='period'>.</span><span class='id identifier rubyid_popup'>popup</span>
 </code></pre>
-<p><code>GtkComboBoxText</code> has a single CSS node with name combobox. It adds
-the style class .combo to the main CSS nodes of its entry and button
+<p><code>GtkComboBoxText</code> has a single CSS node with name combobox. It adds<br />
+the style class .combo to the main CSS nodes of its entry and button<br />
 children, and the .linked class to the node of its internal box.</p>
 
 
@@ -426,9 +428,11 @@ children, and the .linked class to the node of its internal box.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -440,6 +444,7 @@ children, and the .linked class to the node of its internal box.</p>
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ComboBox.html" title="Gtk::ComboBox (class)">ComboBox</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="ComboBox.html#active-instance_method" title="Gtk::ComboBox#active (method)">#active</a></span>, <span class='object_link'><a href="ComboBox.html#active=-instance_method" title="Gtk::ComboBox#active= (method)">#active=</a></span>, <span class='object_link'><a href="ComboBox.html#active_id-instance_method" title="Gtk::ComboBox#active_id (method)">#active_id</a></span>, <span class='object_link'><a href="ComboBox.html#active_id=-instance_method" title="Gtk::ComboBox#active_id= (method)">#active_id=</a></span>, <span class='object_link'><a href="ComboBox.html#active_iter-instance_method" title="Gtk::ComboBox#active_iter (method)">#active_iter</a></span>, <span class='object_link'><a href="ComboBox.html#active_iter=-instance_method" title="Gtk::ComboBox#active_iter= (method)">#active_iter=</a></span>, <span class='object_link'><a href="ComboBox.html#active_iter_raw-instance_method" title="Gtk::ComboBox#active_iter_raw (method)">#active_iter_raw</a></span>, <span class='object_link'><a href="ComboBox.html#button_sensitivity-instance_method" title="Gtk::ComboBox#button_sensitivity (method)">#button_sensitivity</a></span>, <span class='object_link'><a href="ComboBox.html#button_sensitivity=-instance_method" title="Gtk::ComboBox#button_sensitivity= (method)">#button_sensitivity=</a></span>, <span class='object_link'><a href="ComboBox.html#child-instance_method" title="Gtk::ComboBox#child (method)">#child</a></span>, <span class='object_link'><a href="ComboBox.html#child=-instance_method" title="Gtk::ComboBox#child= (method)">#child=</a></span>, <span class='object_link'><a href="ComboBox.html#entry_text_column-instance_method" title="Gtk::ComboBox#entry_text_column (method)">#entry_text_column</a></span>, <span class='object_link'><a href="ComboBox.html#entry_text_column=-instance_method" title="Gtk::ComboBox#entry_text_column= (method)">#entry_text_column=</a></span>, <span class='object_link'><a href="ComboBox.html#get_active_iter-instance_method" title="Gtk::ComboBox#get_active_iter (method)">#get_active_iter</a></span>, <span class='object_link'><a href="ComboBox.html#has_entry-instance_method" title="Gtk::ComboBox#has_entry (method)">#has_entry</a></span>, <span class='object_link'><a href="ComboBox.html#has_entry=-instance_method" title="Gtk::ComboBox#has_entry= (method)">#has_entry=</a></span>, <span class='object_link'><a href="ComboBox.html#has_entry%3F-instance_method" title="Gtk::ComboBox#has_entry? (method)">#has_entry?</a></span>, <span class='object_link'><a href="ComboBox.html#has_frame=-instance_method" title="Gtk::ComboBox#has_frame= (method)">#has_frame=</a></span>, <span class='object_link'><a href="ComboBox.html#has_frame%3F-instance_method" title="Gtk::ComboBox#has_frame? (method)">#has_frame?</a></span>, <span class='object_link'><a href="ComboBox.html#id_column-instance_method" title="Gtk::ComboBox#id_column (method)">#id_column</a></span>, <span class='object_link'><a href="ComboBox.html#id_column=-instance_method" title="Gtk::ComboBox#id_column= (method)">#id_column=</a></span>, <span class='object_link'><a href="ComboBox.html#model-instance_method" title="Gtk::ComboBox#model (method)">#model</a></span>, <span class='object_link'><a href="ComboBox.html#model=-instance_method" title="Gtk::ComboBox#model= (method)">#model=</a></span>, <span class='object_link'><a href="ComboBox.html#popdown-instance_method" title="Gtk::ComboBox#popdown (method)">#popdown</a></span>, <span class='object_link'><a href="ComboBox.html#popup-instance_method" title="Gtk::ComboBox#popup (method)">#popup</a></span>, <span class='object_link'><a href="ComboBox.html#popup_fixed_width-instance_method" title="Gtk::ComboBox#popup_fixed_width (method)">#popup_fixed_width</a></span>, <span class='object_link'><a href="ComboBox.html#popup_fixed_width=-instance_method" title="Gtk::ComboBox#popup_fixed_width= (method)">#popup_fixed_width=</a></span>, <span class='object_link'><a href="ComboBox.html#popup_fixed_width%3F-instance_method" title="Gtk::ComboBox#popup_fixed_width? (method)">#popup_fixed_width?</a></span>, <span class='object_link'><a href="ComboBox.html#popup_for_device-instance_method" title="Gtk::ComboBox#popup_for_device (method)">#popup_for_device</a></span>, <span class='object_link'><a href="ComboBox.html#popup_shown=-instance_method" title="Gtk::ComboBox#popup_shown= (method)">#popup_shown=</a></span>, <span class='object_link'><a href="ComboBox.html#popup_shown%3F-instance_method" title="Gtk::ComboBox#popup_shown? (method)">#popup_shown?</a></span>, <span class='object_link'><a href="ComboBox.html#row_separator_func-instance_method" title="Gtk::ComboBox#row_separator_func (method)">#row_separator_func</a></span>, <span class='object_link'><a href="ComboBox.html#set_row_separator_func-instance_method" title="Gtk::ComboBox#set_row_separator_func (method)">#set_row_separator_func</a></span></p>
 
+  
   
   
   
@@ -527,9 +532,9 @@ children, and the .linked class to the node of its internal box.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the currently active string in <!-- raw HTML omitted -->combo_box<!-- raw HTML omitted -->.</p>
-<p>If no row is currently selected, nil is returned.
-If <!-- raw HTML omitted -->combo_box<!-- raw HTML omitted --> contains an entry, this function will
-return its contents (which will not necessarily
+<p>If no row is currently selected, nil is returned.<br />
+If <!-- raw HTML omitted -->combo_box<!-- raw HTML omitted --> contains an entry, this function will<br />
+return its contents (which will not necessarily<br />
 be an item from the list).</p>
 
 
@@ -548,8 +553,8 @@ be an item from the list).</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated
-string containing the currently active text.
+        <div class='inline'><p>a newly allocated<br />
+string containing the currently active text.<br />
 Must be freed with g_free().</p>
 </div>
       
@@ -573,7 +578,7 @@ Must be freed with g_free().</p>
   <div class="discussion">
     <p>Appends <!-- raw HTML omitted -->text<!-- raw HTML omitted --> to the list of strings stored in <!-- raw HTML omitted -->combo_box<!-- raw HTML omitted -->.</p>
 <p>If <!-- raw HTML omitted -->id<!-- raw HTML omitted --> is non-nil then it is used as the ID of the row.</p>
-<p>This is the same as calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.insert]
+<p>This is the same as calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.insert]<br />
 with a position of -1.</p>
 
 
@@ -644,7 +649,7 @@ with a position of -1.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Appends <!-- raw HTML omitted -->text<!-- raw HTML omitted --> to the list of strings stored in <!-- raw HTML omitted -->combo_box<!-- raw HTML omitted -->.</p>
-<p>This is the same as calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.insert_text]
+<p>This is the same as calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.insert_text]<br />
 with a position of -1.</p>
 
 
@@ -753,7 +758,7 @@ with a position of -1.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts <!-- raw HTML omitted -->text<!-- raw HTML omitted --> at <!-- raw HTML omitted -->position<!-- raw HTML omitted --> in the list of strings stored in <!-- raw HTML omitted -->combo_box<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->id<!-- raw HTML omitted --> is non-nil then it is used as the ID of the row.
+<p>If <!-- raw HTML omitted -->id<!-- raw HTML omitted --> is non-nil then it is used as the ID of the row.<br />
 See [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBox:id-column].</p>
 <p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is negative then <!-- raw HTML omitted -->text<!-- raw HTML omitted --> is appended.</p>
 
@@ -841,7 +846,7 @@ See [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBox:id-c
   <div class="discussion">
     <p>Inserts <!-- raw HTML omitted -->text<!-- raw HTML omitted --> at <!-- raw HTML omitted -->position<!-- raw HTML omitted --> in the list of strings stored in <!-- raw HTML omitted -->combo_box<!-- raw HTML omitted -->.</p>
 <p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is negative then <!-- raw HTML omitted -->text<!-- raw HTML omitted --> is appended.</p>
-<p>This is the same as calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.insert]
+<p>This is the same as calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.insert]<br />
 with a nil ID string.</p>
 
 
@@ -913,7 +918,7 @@ with a nil ID string.</p>
   <div class="discussion">
     <p>Prepends <!-- raw HTML omitted -->text<!-- raw HTML omitted --> to the list of strings stored in <!-- raw HTML omitted -->combo_box<!-- raw HTML omitted -->.</p>
 <p>If <!-- raw HTML omitted -->id<!-- raw HTML omitted --> is non-nil then it is used as the ID of the row.</p>
-<p>This is the same as calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.insert]
+<p>This is the same as calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.insert]<br />
 with a position of 0.</p>
 
 
@@ -984,7 +989,7 @@ with a position of 0.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Prepends <!-- raw HTML omitted -->text<!-- raw HTML omitted --> to the list of strings stored in <!-- raw HTML omitted -->combo_box<!-- raw HTML omitted -->.</p>
-<p>This is the same as calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.insert_text]
+<p>This is the same as calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBoxText.insert_text]<br />
 with a position of 0.</p>
 
 
@@ -1124,7 +1129,7 @@ with a position of 0.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

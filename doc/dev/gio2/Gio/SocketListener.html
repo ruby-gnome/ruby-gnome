@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::SocketListener";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -476,6 +478,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -492,8 +495,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new GSocket::Listener with no sockets to listen for.
-New listeners can be added with e.g. g_socket_listener_add_address()
+    <p>Creates a new GSocket::Listener with no sockets to listen for.<br />
+New listeners can be added with e.g. g_socket_listener_add_address()<br />
 or g_socket_listener_add_inet_port().</p>
 
 
@@ -523,14 +526,14 @@ or g_socket_listener_add_inet_port().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Blocks waiting for a client to connect to any of the sockets added
-to the listener. Returns a GSocket::Connection for the socket that was
+    <p>Blocks waiting for a client to connect to any of the sockets added<br />
+to the listener. Returns a GSocket::Connection for the socket that was<br />
 accepted.</p>
-<p>If <!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> is not nil it will be filled out with the source
-object specified when the corresponding socket or address was added
+<p>If <!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> is not nil it will be filled out with the source<br />
+object specified when the corresponding socket or address was added<br />
 to the listener.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
 was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.</p>
 
 
@@ -605,8 +608,8 @@ was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>This is the asynchronous version of g_socket_listener_accept().</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be
-called. You can then call g_socket_listener_accept_finish()
+<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be<br />
+called. You can then call g_socket_listener_accept_finish()<br />
 to get the result of the operation.</p>
 
 
@@ -764,16 +767,16 @@ to get the result of the operation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Blocks waiting for a client to connect to any of the sockets added
+    <p>Blocks waiting for a client to connect to any of the sockets added<br />
 to the listener. Returns the #GSocket that was accepted.</p>
-<p>If you want to accept the high-level GSocket::Connection, not a #GSocket,
-which is often the case, then you should use g_socket_listener_accept()
+<p>If you want to accept the high-level GSocket::Connection, not a #GSocket,<br />
+which is often the case, then you should use g_socket_listener_accept()<br />
 instead.</p>
-<p>If <!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> is not nil it will be filled out with the source
-object specified when the corresponding socket or address was added
+<p>If <!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> is not nil it will be filled out with the source<br />
+object specified when the corresponding socket or address was added<br />
 to the listener.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
 was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.</p>
 
 
@@ -848,8 +851,8 @@ was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>This is the asynchronous version of g_socket_listener_accept_socket().</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be
-called. You can then call g_socket_listener_accept_socket_finish()
+<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be<br />
+called. You can then call g_socket_listener_accept_socket_finish()<br />
 to get the result of the operation.</p>
 
 
@@ -1007,24 +1010,24 @@ to get the result of the operation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a socket of type <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and protocol <!-- raw HTML omitted -->protocol<!-- raw HTML omitted -->, binds
-it to <!-- raw HTML omitted -->address<!-- raw HTML omitted --> and adds it to the set of sockets we're accepting
+    <p>Creates a socket of type <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and protocol <!-- raw HTML omitted -->protocol<!-- raw HTML omitted -->, binds<br />
+it to <!-- raw HTML omitted -->address<!-- raw HTML omitted --> and adds it to the set of sockets we're accepting<br />
 sockets from.</p>
-<p>Note that adding an IPv6 address, depending on the platform,
-may or may not result in a listener that also accepts IPv4
-connections.  For more deterministic behavior, see
+<p>Note that adding an IPv6 address, depending on the platform,<br />
+may or may not result in a listener that also accepts IPv4<br />
+connections.  For more deterministic behavior, see<br />
 g_socket_listener_add_inet_port().</p>
-<p><!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> will be passed out in the various calls
-to accept to identify this particular source, which is
-useful if you're listening on multiple addresses and do
+<p><!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> will be passed out in the various calls<br />
+to accept to identify this particular source, which is<br />
+useful if you're listening on multiple addresses and do<br />
 different things depending on what address is connected to.</p>
-<p>If successful and <!-- raw HTML omitted -->effective_address<!-- raw HTML omitted --> is non-nil then it will
-be set to the address that the binding actually occurred at.  This
-is helpful for determining the port number that was used for when
-requesting a binding to port 0 (ie: &quot;any port&quot;).  This address, if
+<p>If successful and <!-- raw HTML omitted -->effective_address<!-- raw HTML omitted --> is non-nil then it will<br />
+be set to the address that the binding actually occurred at.  This<br />
+is helpful for determining the port number that was used for when<br />
+requesting a binding to port 0 (ie: &quot;any port&quot;).  This address, if<br />
 requested, belongs to the caller and must be freed.</p>
-<p>Call g_socket_listener_close() to stop listening on <!-- raw HTML omitted -->address<!-- raw HTML omitted -->; this will not
-be done automatically when you drop your final reference to <!-- raw HTML omitted -->listener<!-- raw HTML omitted -->, as
+<p>Call g_socket_listener_close() to stop listening on <!-- raw HTML omitted -->address<!-- raw HTML omitted -->; this will not<br />
+be done automatically when you drop your final reference to <!-- raw HTML omitted -->listener<!-- raw HTML omitted -->, as<br />
 references may be held internally.</p>
 
 
@@ -1143,13 +1146,13 @@ references may be held internally.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Listens for TCP connections on any available port number for both
+    <p>Listens for TCP connections on any available port number for both<br />
 IPv6 and IPv4 (if each is available).</p>
-<p>This is useful if you need to have a socket for incoming connections
+<p>This is useful if you need to have a socket for incoming connections<br />
 but don't care about the specific port number.</p>
-<p><!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> will be passed out in the various calls
-to accept to identify this particular source, which is
-useful if you're listening on multiple addresses and do
+<p><!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> will be passed out in the various calls<br />
+to accept to identify this particular source, which is<br />
+useful if you're listening on multiple addresses and do<br />
 different things depending on what address is connected to.</p>
 
 
@@ -1208,15 +1211,15 @@ different things depending on what address is connected to.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Helper function for g_socket_listener_add_address() that
-creates a TCP/IP socket listening on IPv4 and IPv6 (if
+    <p>Helper function for g_socket_listener_add_address() that<br />
+creates a TCP/IP socket listening on IPv4 and IPv6 (if<br />
 supported) on the specified port on all interfaces.</p>
-<p><!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> will be passed out in the various calls
-to accept to identify this particular source, which is
-useful if you're listening on multiple addresses and do
+<p><!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> will be passed out in the various calls<br />
+to accept to identify this particular source, which is<br />
+useful if you're listening on multiple addresses and do<br />
 different things depending on what address is connected to.</p>
-<p>Call g_socket_listener_close() to stop listening on <!-- raw HTML omitted -->port<!-- raw HTML omitted -->; this will not
-be done automatically when you drop your final reference to <!-- raw HTML omitted -->listener<!-- raw HTML omitted -->, as
+<p>Call g_socket_listener_close() to stop listening on <!-- raw HTML omitted -->port<!-- raw HTML omitted -->; this will not<br />
+be done automatically when you drop your final reference to <!-- raw HTML omitted -->listener<!-- raw HTML omitted -->, as<br />
 references may be held internally.</p>
 
 
@@ -1290,16 +1293,16 @@ references may be held internally.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> to the set of sockets that we try to accept
-new clients from. The socket must be bound to a local
+    <p>Adds <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> to the set of sockets that we try to accept<br />
+new clients from. The socket must be bound to a local<br />
 address and listened to.</p>
-<p><!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> will be passed out in the various calls
-to accept to identify this particular source, which is
-useful if you're listening on multiple addresses and do
+<p><!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> will be passed out in the various calls<br />
+to accept to identify this particular source, which is<br />
+useful if you're listening on multiple addresses and do<br />
 different things depending on what address is connected to.</p>
-<p>The <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> will not be automatically closed when the <!-- raw HTML omitted -->listener<!-- raw HTML omitted --> is finalized
-unless the listener held the final reference to the socket. Before GLib 2.42,
-the <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> was automatically closed on finalization of the <!-- raw HTML omitted -->listener<!-- raw HTML omitted -->, even
+<p>The <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> will not be automatically closed when the <!-- raw HTML omitted -->listener<!-- raw HTML omitted --> is finalized<br />
+unless the listener held the final reference to the socket. Before GLib 2.42,<br />
+the <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> was automatically closed on finalization of the <!-- raw HTML omitted -->listener<!-- raw HTML omitted -->, even<br />
 if references to it were held elsewhere.</p>
 
 
@@ -1373,8 +1376,8 @@ if references to it were held elsewhere.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the listen backlog on the sockets in the listener. This must be called
-before adding any sockets, addresses or ports to the GSocket::Listener (for
+    <p>Sets the listen backlog on the sockets in the listener. This must be called<br />
+before adding any sockets, addresses or ports to the GSocket::Listener (for<br />
 example, by calling g_socket_listener_add_inet_port()) to be effective.</p>
 <p>See g_socket_set_listen_backlog() for details</p>
 
@@ -1567,7 +1570,7 @@ example, by calling g_socket_listener_add_inet_port()) to be effective.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

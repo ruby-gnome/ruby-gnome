@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Interval";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -150,6 +152,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -621,6 +624,7 @@
 
       
     </ul>
+    
   
 
 
@@ -638,7 +642,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Clutter::Interval of type <!-- raw HTML omitted -->gtype<!-- raw HTML omitted -->, between <!-- raw HTML omitted -->initial<!-- raw HTML omitted -->
+    <p>Creates a new Clutter::Interval of type <!-- raw HTML omitted -->gtype<!-- raw HTML omitted -->, between <!-- raw HTML omitted -->initial<!-- raw HTML omitted --><br />
 and <!-- raw HTML omitted -->final<!-- raw HTML omitted -->.</p>
 <p>This function is useful for language bindings.</p>
 
@@ -719,33 +723,33 @@ and <!-- raw HTML omitted -->final<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the progress function for a given <!-- raw HTML omitted -->value_type<!-- raw HTML omitted -->, like:</p>
-<p>|[
-clutter_interval_register_progress_func (MY_TYPE_FOO,
-my_foo_progress);
+<p>|[<br />
+clutter_interval_register_progress_func (MY_TYPE_FOO,<br />
+my_foo_progress);<br />
 ]|</p>
-<p>Whenever a Clutter::Interval instance using the default
-Clutter::Interval::compute_value implementation is set as an
-interval between two #GValue of type <!-- raw HTML omitted -->value_type<!-- raw HTML omitted -->, it will call
-<!-- raw HTML omitted -->func<!-- raw HTML omitted --> to establish the value depending on the given progress,
+<p>Whenever a Clutter::Interval instance using the default<br />
+Clutter::Interval::compute_value implementation is set as an<br />
+interval between two #GValue of type <!-- raw HTML omitted -->value_type<!-- raw HTML omitted -->, it will call<br />
+<!-- raw HTML omitted -->func<!-- raw HTML omitted --> to establish the value depending on the given progress,<br />
 for instance:</p>
-<p>|[
-static gboolean
-my_int_progress (const GValue *a,
-const GValue *b,
-gdouble       progress,
-GValue       *retval)
-{
-gint ia = g_value_get_int (a);
-gint ib = g_value_get_int (b);
+<p>|[<br />
+static gboolean<br />
+my_int_progress (const GValue *a,<br />
+const GValue *b,<br />
+gdouble       progress,<br />
+GValue       *retval)<br />
+/>
+gint ia = g_value_get_int (a);<br />
+gint ib = g_value_get_int (b);<br />
 gint res = factor * (ib - ia) + ia;</p>
 <pre class="code ruby"><code class="ruby">g_value_set_int (retval, res);
 
 return TRUE;
 </code></pre>
-<p>}</p>
-<p>clutter_interval_register_progress_func (G_TYPE_INT, my_int_progress);
+<p></p>
+<p>clutter_interval_register_progress_func (G_TYPE_INT, my_int_progress);<br />
 ]|</p>
-<p>To unset a previously set progress function of a #GType, pass nil
+<p>To unset a previously set progress function of a #GType, pass nil<br />
 for <!-- raw HTML omitted -->func<!-- raw HTML omitted -->.</p>
 
 
@@ -780,7 +784,7 @@ for <!-- raw HTML omitted -->func<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Clutter::ProgressFunc, or nil to unset a previously
+        <div class='inline'><p>a Clutter::ProgressFunc, or nil to unset a previously<br />
 set progress function</p>
 </div>
       
@@ -861,12 +865,12 @@ set progress function</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Computes the value between the <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> boundaries given the
+    <p>Computes the value between the <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> boundaries given the<br />
 progress <!-- raw HTML omitted -->factor<!-- raw HTML omitted --></p>
-<p>Unlike clutter_interval_compute_value(), this function will
+<p>Unlike clutter_interval_compute_value(), this function will<br />
 return a const pointer to the computed value</p>
-<p>You should use this function if you immediately pass the computed
-value to another function that makes a copy of it, like
+<p>You should use this function if you immediately pass the computed<br />
+value to another function that makes a copy of it, like<br />
 g_object_set_property()</p>
 
 
@@ -904,7 +908,7 @@ g_object_set_property()</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the computed value,
+        <div class='inline'><p>a pointer to the computed value,<br />
 or nil if the computation was not successfull</p>
 </div>
       
@@ -926,7 +930,7 @@ or nil if the computation was not successfull</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Computes the value between the <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> boundaries given the
+    <p>Computes the value between the <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> boundaries given the<br />
 progress <!-- raw HTML omitted -->factor<!-- raw HTML omitted --> and copies it into <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
 
 
@@ -1106,7 +1110,7 @@ progress <!-- raw HTML omitted -->factor<!-- raw HTML omitted --> and copies it 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the final value of <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->. The value is
+    <p>Sets the final value of <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->. The value is<br />
 copied inside the Clutter::Interval.</p>
 
 
@@ -1161,9 +1165,9 @@ copied inside the Clutter::Interval.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the final value of <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> and copies
+    <p>Retrieves the final value of <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> and copies<br />
 it into <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
-<p>The passed #GValue must be initialized to the value held by
+<p>The passed #GValue must be initialized to the value held by<br />
 the Clutter::Interval.</p>
 
 
@@ -1218,9 +1222,9 @@ the Clutter::Interval.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the initial value of <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> and copies
+    <p>Retrieves the initial value of <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> and copies<br />
 it into <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
-<p>The passed #GValue must be initialized to the value held by
+<p>The passed #GValue must be initialized to the value held by<br />
 the Clutter::Interval.</p>
 
 
@@ -1275,14 +1279,14 @@ the Clutter::Interval.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Variable arguments wrapper for clutter_interval_get_initial_value()
-and clutter_interval_get_final_value() that avoids using the
+    <p>Variable arguments wrapper for clutter_interval_get_initial_value()<br />
+and clutter_interval_get_final_value() that avoids using the<br />
 #GValue arguments:</p>
-<p>|[
-gint a = 0, b = 0;
-clutter_interval_get_interval (interval, &amp;a, &amp;b);
+<p>|[<br />
+gint a = 0, b = 0;<br />
+clutter_interval_get_interval (interval, &amp;a, &amp;b);<br />
 ]|</p>
-<p>This function is meant for the convenience of the C API; bindings
+<p>This function is meant for the convenience of the C API; bindings<br />
 should reimplement this function using the #GValue-based API.</p>
 
 
@@ -1302,7 +1306,7 @@ should reimplement this function using the #GValue-based API.</p>
       
       
         &mdash;
-        <div class='inline'><p>return locations for the initial and final values of
+        <div class='inline'><p>return locations for the initial and final values of<br />
 the interval</p>
 </div>
       
@@ -1444,7 +1448,7 @@ the interval</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the initial value of <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->. The value is copied
+    <p>Sets the initial value of <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->. The value is copied<br />
 inside the Clutter::Interval.</p>
 
 
@@ -1499,15 +1503,15 @@ inside the Clutter::Interval.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Variable arguments wrapper for clutter_interval_set_initial_value()
-and clutter_interval_set_final_value() that avoids using the
+    <p>Variable arguments wrapper for clutter_interval_set_initial_value()<br />
+and clutter_interval_set_final_value() that avoids using the<br />
 #GValue arguments:</p>
-<p>|[
-clutter_interval_set_interval (interval, 0, 50);
-clutter_interval_set_interval (interval, 1.0, 0.0);
-clutter_interval_set_interval (interval, FALSE, TRUE);
+<p>|[<br />
+clutter_interval_set_interval (interval, 0, 50);<br />
+clutter_interval_set_interval (interval, 1.0, 0.0);<br />
+clutter_interval_set_interval (interval, FALSE, TRUE);<br />
 ]|</p>
-<p>This function is meant for the convenience of the C API; bindings
+<p>This function is meant for the convenience of the C API; bindings<br />
 should reimplement this function using the #GValue-based API.</p>
 
 
@@ -1580,7 +1584,7 @@ should reimplement this function using the #GValue-based API.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the Clutter::Interval has an initial and
+        <div class='inline'><p>true if the Clutter::Interval has an initial and<br />
 final values, and false otherwise</p>
 </div>
       
@@ -1620,8 +1624,8 @@ final values, and false otherwise</p>
       
       
         &mdash;
-        <div class='inline'><p>the final value of the interval.
-The value is owned by the Clutter::Interval and it should not be
+        <div class='inline'><p>the final value of the interval.<br />
+The value is owned by the Clutter::Interval and it should not be<br />
 modified or freed</p>
 </div>
       
@@ -1661,8 +1665,8 @@ modified or freed</p>
       
       
         &mdash;
-        <div class='inline'><p>the initial value of the interval.
-The value is owned by the Clutter::Interval and it should not be
+        <div class='inline'><p>the initial value of the interval.<br />
+The value is owned by the Clutter::Interval and it should not be<br />
 modified or freed</p>
 </div>
       
@@ -1684,7 +1688,7 @@ modified or freed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Validates the initial and final values of <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> against
+    <p>Validates the initial and final values of <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> against<br />
 a GParam::Spec.</p>
 
 
@@ -1845,7 +1849,7 @@ a GParam::Spec.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

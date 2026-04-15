@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Scale";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,7 +101,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -491,9 +493,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -505,6 +509,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Range.html" title="Gtk::Range (class)">Range</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Range.html#adjustment-instance_method" title="Gtk::Range#adjustment (method)">#adjustment</a></span>, <span class='object_link'><a href="Range.html#adjustment=-instance_method" title="Gtk::Range#adjustment= (method)">#adjustment=</a></span>, <span class='object_link'><a href="Range.html#fill_level-instance_method" title="Gtk::Range#fill_level (method)">#fill_level</a></span>, <span class='object_link'><a href="Range.html#fill_level=-instance_method" title="Gtk::Range#fill_level= (method)">#fill_level=</a></span>, <span class='object_link'><a href="Range.html#flippable-instance_method" title="Gtk::Range#flippable (method)">#flippable</a></span>, <span class='object_link'><a href="Range.html#flippable=-instance_method" title="Gtk::Range#flippable= (method)">#flippable=</a></span>, <span class='object_link'><a href="Range.html#get_range_rect-instance_method" title="Gtk::Range#get_range_rect (method)">#get_range_rect</a></span>, <span class='object_link'><a href="Range.html#get_slider_range-instance_method" title="Gtk::Range#get_slider_range (method)">#get_slider_range</a></span>, <span class='object_link'><a href="Range.html#inverted-instance_method" title="Gtk::Range#inverted (method)">#inverted</a></span>, <span class='object_link'><a href="Range.html#inverted=-instance_method" title="Gtk::Range#inverted= (method)">#inverted=</a></span>, <span class='object_link'><a href="Range.html#inverted%3F-instance_method" title="Gtk::Range#inverted? (method)">#inverted?</a></span>, <span class='object_link'><a href="Range.html#restrict_to_fill_level-instance_method" title="Gtk::Range#restrict_to_fill_level (method)">#restrict_to_fill_level</a></span>, <span class='object_link'><a href="Range.html#restrict_to_fill_level=-instance_method" title="Gtk::Range#restrict_to_fill_level= (method)">#restrict_to_fill_level=</a></span>, <span class='object_link'><a href="Range.html#restrict_to_fill_level%3F-instance_method" title="Gtk::Range#restrict_to_fill_level? (method)">#restrict_to_fill_level?</a></span>, <span class='object_link'><a href="Range.html#round_digits-instance_method" title="Gtk::Range#round_digits (method)">#round_digits</a></span>, <span class='object_link'><a href="Range.html#round_digits=-instance_method" title="Gtk::Range#round_digits= (method)">#round_digits=</a></span>, <span class='object_link'><a href="Range.html#set_increments-instance_method" title="Gtk::Range#set_increments (method)">#set_increments</a></span>, <span class='object_link'><a href="Range.html#set_range-instance_method" title="Gtk::Range#set_range (method)">#set_range</a></span>, <span class='object_link'><a href="Range.html#show_fill_level-instance_method" title="Gtk::Range#show_fill_level (method)">#show_fill_level</a></span>, <span class='object_link'><a href="Range.html#show_fill_level=-instance_method" title="Gtk::Range#show_fill_level= (method)">#show_fill_level=</a></span>, <span class='object_link'><a href="Range.html#show_fill_level%3F-instance_method" title="Gtk::Range#show_fill_level? (method)">#show_fill_level?</a></span>, <span class='object_link'><a href="Range.html#slider_size_fixed-instance_method" title="Gtk::Range#slider_size_fixed (method)">#slider_size_fixed</a></span>, <span class='object_link'><a href="Range.html#slider_size_fixed=-instance_method" title="Gtk::Range#slider_size_fixed= (method)">#slider_size_fixed=</a></span>, <span class='object_link'><a href="Range.html#value-instance_method" title="Gtk::Range#value (method)">#value</a></span>, <span class='object_link'><a href="Range.html#value=-instance_method" title="Gtk::Range#value= (method)">#value=</a></span></p>
 
+  
   
   
   
@@ -531,13 +536,13 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new scale widget with a range from <!-- raw HTML omitted -->min<!-- raw HTML omitted --> to <!-- raw HTML omitted -->max<!-- raw HTML omitted -->.</p>
-<p>The returns scale will have the given orientation and will let the
-user input a number between <!-- raw HTML omitted -->min<!-- raw HTML omitted --> and <!-- raw HTML omitted -->max<!-- raw HTML omitted --> (including <!-- raw HTML omitted -->min<!-- raw HTML omitted --> and <!-- raw HTML omitted -->max<!-- raw HTML omitted -->)
-with the increment <!-- raw HTML omitted -->step<!-- raw HTML omitted -->. <!-- raw HTML omitted -->step<!-- raw HTML omitted --> must be nonzero; it’s the distance
-the slider moves when using the arrow keys to adjust the scale
+<p>The returns scale will have the given orientation and will let the<br />
+user input a number between <!-- raw HTML omitted -->min<!-- raw HTML omitted --> and <!-- raw HTML omitted -->max<!-- raw HTML omitted --> (including <!-- raw HTML omitted -->min<!-- raw HTML omitted --> and <!-- raw HTML omitted -->max<!-- raw HTML omitted -->)<br />
+with the increment <!-- raw HTML omitted -->step<!-- raw HTML omitted -->. <!-- raw HTML omitted -->step<!-- raw HTML omitted --> must be nonzero; it’s the distance<br />
+the slider moves when using the arrow keys to adjust the scale<br />
 value.</p>
-<p>Note that the way in which the precision is derived works best if
-<!-- raw HTML omitted -->step<!-- raw HTML omitted --> is a power of ten. If the resulting precision is not suitable
+<p>Note that the way in which the precision is derived works best if<br />
+<!-- raw HTML omitted -->step<!-- raw HTML omitted --> is a power of ten. If the resulting precision is not suitable<br />
 for your needs, use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scale.set_digits] to correct it.</p>
 
 
@@ -632,8 +637,8 @@ for your needs, use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a mark at <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
-<p>A mark is indicated visually by drawing a tick mark next to the scale,
-and GTK makes it easy for the user to position the scale exactly at the
+<p>A mark is indicated visually by drawing a tick mark next to the scale,<br />
+and GTK makes it easy for the user to position the scale exactly at the<br />
 marks value.</p>
 <p>If <!-- raw HTML omitted -->markup<!-- raw HTML omitted --> is not nil, text is shown next to the tick mark.</p>
 <p>To remove marks from a scale, use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scale.clear_marks].</p>
@@ -655,7 +660,7 @@ marks value.</p>
       
       
         &mdash;
-        <div class='inline'><p>the value at which the mark is placed, must be between
+        <div class='inline'><p>the value at which the mark is placed, must be between<br />
 the lower and upper limits of the scales’ adjustment</p>
 </div>
       
@@ -671,9 +676,9 @@ the lower and upper limits of the scales’ adjustment</p>
       
       
         &mdash;
-        <div class='inline'><p>where to draw the mark. For a horizontal scale, %GTK_POS_TOP
-and %GTK_POS_LEFT are drawn above the scale, anything else below.
-For a vertical scale, %GTK_POS_LEFT and %GTK_POS_TOP are drawn to
+        <div class='inline'><p>where to draw the mark. For a horizontal scale, %GTK_POS_TOP<br />
+and %GTK_POS_LEFT are drawn above the scale, anything else below.<br />
+For a vertical scale, %GTK_POS_LEFT and %GTK_POS_TOP are drawn to<br />
 the left of the scale, anything else to the right.</p>
 </div>
       
@@ -865,7 +870,7 @@ the left of the scale, anything else to the right.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the current value is displayed as a string
+    <p>Returns whether the current value is displayed as a string<br />
 next to the slider.</p>
 
 
@@ -1011,11 +1016,11 @@ next to the slider.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the coordinates where the scale will draw the
+    <p>Obtains the coordinates where the scale will draw the<br />
 <code>PangoLayout</code> representing the text in the scale.</p>
-<p>Remember when using the <code>PangoLayout</code> function you need to
+<p>Remember when using the <code>PangoLayout</code> function you need to<br />
 convert to and from pixels using <code>PANGO_PIXELS()</code> or <code>PANGO_SCALE</code>.</p>
-<p>If the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scale:draw-value] property is false, the return
+<p>If the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scale:draw-value] property is false, the return<br />
 values are undefined.</p>
 
 
@@ -1231,7 +1236,7 @@ values are undefined.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the <code>PangoLayout</code> used to display the scale.</p>
-<p>The returned object is owned by the scale so does not need
+<p>The returned object is owned by the scale so does not need<br />
 to be freed by the caller.</p>
 
 
@@ -1250,8 +1255,8 @@ to be freed by the caller.</p>
       
       
         &mdash;
-        <div class='inline'><p>the [class<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout]
-for this scale, or nil if the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scale:draw-value]
+        <div class='inline'><p>the [class<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout]<br />
+for this scale, or nil if the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scale:draw-value]<br />
 property is false.</p>
 </div>
       
@@ -1274,10 +1279,10 @@ property is false.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p><!-- raw HTML omitted -->func<!-- raw HTML omitted --> allows you to change how the scale value is displayed.</p>
-<p>The given function will return an allocated string representing
+<p>The given function will return an allocated string representing<br />
 <!-- raw HTML omitted -->value<!-- raw HTML omitted -->. That string will then be used to display the scale's value.</p>
-<p>If #NULL is passed as <!-- raw HTML omitted -->func<!-- raw HTML omitted -->, the value will be displayed on
-its own, rounded according to the value of the
+<p>If #NULL is passed as <!-- raw HTML omitted -->func<!-- raw HTML omitted -->, the value will be displayed on<br />
+its own, rounded according to the value of the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scale:digits] property.</p>
 
 
@@ -1464,7 +1469,7 @@ its own, rounded according to the value of the
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

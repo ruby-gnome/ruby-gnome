@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GOffice::FileOpener";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -138,6 +140,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -491,6 +494,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -507,9 +511,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates new GOFile::Opener object. Optional <!-- raw HTML omitted -->id<!-- raw HTML omitted --> will be used
-after registering it with go_file_opener_register function.
-associate with the opener
+    <p>Creates new GOFile::Opener object. Optional <!-- raw HTML omitted -->id<!-- raw HTML omitted --> will be used<br />
+after registering it with go_file_opener_register function.<br />
+associate with the opener<br />
 associate with the opener</p>
 
 
@@ -633,7 +637,7 @@ associate with the opener</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Searches for file opener with given <!-- raw HTML omitted -->id<!-- raw HTML omitted -->, registered using
+    <p>Searches for file opener with given <!-- raw HTML omitted -->id<!-- raw HTML omitted -->, registered using<br />
 go_file_opener_register</p>
 
 
@@ -1149,10 +1153,10 @@ go_file_opener_register</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reads content of <!-- raw HTML omitted -->file_name<!-- raw HTML omitted --> file into workbook <!-- raw HTML omitted -->wbv<!-- raw HTML omitted --> is attached to.
-Results are reported using <!-- raw HTML omitted -->io_context<!-- raw HTML omitted --> object, use
-go_io_error_occurred to find out if operation was successful.
-The state of <!-- raw HTML omitted -->wbv<!-- raw HTML omitted --> and its workbook is undefined if operation fails, you
+    <p>Reads content of <!-- raw HTML omitted -->file_name<!-- raw HTML omitted --> file into workbook <!-- raw HTML omitted -->wbv<!-- raw HTML omitted --> is attached to.<br />
+Results are reported using <!-- raw HTML omitted -->io_context<!-- raw HTML omitted --> object, use<br />
+go_io_error_occurred to find out if operation was successful.<br />
+The state of <!-- raw HTML omitted -->wbv<!-- raw HTML omitted --> and its workbook is undefined if operation fails, you<br />
 should destroy them in that case.</p>
 
 
@@ -1325,15 +1329,15 @@ should destroy them in that case.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->fo<!-- raw HTML omitted --> opener to the list of available file openers, making it
-available for Gnumeric i/o routines. The opener is registered with given
-<!-- raw HTML omitted -->priority<!-- raw HTML omitted -->. The priority is used to determine the order in which openers
-will be tried when reading a file. The higher the priority, the sooner it
-will be tried. Default XML-based Gnumeric file opener is registered at
-priority 50. Recommended range for <!-- raw HTML omitted -->priority<!-- raw HTML omitted --> is [0, 100].
-Reference count for the opener is incremented inside the function, but
-you don't have to (and shouldn't) call g_object_unref on it if it's
-floating object (for example, when you pass object newly created with
+    <p>Adds <!-- raw HTML omitted -->fo<!-- raw HTML omitted --> opener to the list of available file openers, making it<br />
+available for Gnumeric i/o routines. The opener is registered with given<br />
+<!-- raw HTML omitted -->priority<!-- raw HTML omitted -->. The priority is used to determine the order in which openers<br />
+will be tried when reading a file. The higher the priority, the sooner it<br />
+will be tried. Default XML-based Gnumeric file opener is registered at<br />
+priority 50. Recommended range for <!-- raw HTML omitted -->priority<!-- raw HTML omitted --> is [0, 100].<br />
+Reference count for the opener is incremented inside the function, but<br />
+you don't have to (and shouldn't) call g_object_unref on it if it's<br />
+floating object (for example, when you pass object newly created with<br />
 go_file_opener_new and not referenced anywhere).</p>
 
 
@@ -1427,7 +1431,7 @@ go_file_opener_new and not referenced anywhere).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes <!-- raw HTML omitted -->fo<!-- raw HTML omitted --> opener from list of available file openers. Reference count
+    <p>Removes <!-- raw HTML omitted -->fo<!-- raw HTML omitted --> opener from list of available file openers. Reference count<br />
 for the opener is decremented inside the function.</p>
 
 
@@ -1459,7 +1463,7 @@ for the opener is decremented inside the function.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

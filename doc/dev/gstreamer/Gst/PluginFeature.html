@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::PluginFeature";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gst/plugin-feature.rb</dd>
+    <dd>lib/gst/plugin-feature.rb
+</dd>
   </dl>
   
 </div>
@@ -215,6 +217,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -385,9 +388,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -416,7 +421,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Copies the list of features. Caller should call <!-- raw HTML omitted -->gst_plugin_feature_list_free<!-- raw HTML omitted -->
+    <p>Copies the list of features. Caller should call <!-- raw HTML omitted -->gst_plugin_feature_list_free<!-- raw HTML omitted --><br />
 when done with the list.</p>
 
 
@@ -436,7 +441,7 @@ when done with the list.</p>
       
       
         &mdash;
-        <div class='inline'><p>list
+        <div class='inline'><p>list<br />
 of Gst::PluginFeature</p>
 </div>
       
@@ -455,7 +460,7 @@ of Gst::PluginFeature</p>
       
       
         &mdash;
-        <div class='inline'><p>a copy of <!-- raw HTML omitted -->list<!-- raw HTML omitted -->,
+        <div class='inline'><p>a copy of <!-- raw HTML omitted -->list<!-- raw HTML omitted -->,<br />
 with each feature's reference count incremented.</p>
 </div>
       
@@ -496,7 +501,7 @@ with each feature's reference count incremented.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GList of
+        <div class='inline'><p>a #GList of<br />
 plugin features</p>
 </div>
       
@@ -551,7 +556,7 @@ plugin features</p>
       
       
         &mdash;
-        <div class='inline'><p>list
+        <div class='inline'><p>list<br />
 of Gst::PluginFeature</p>
 </div>
       
@@ -587,10 +592,10 @@ of Gst::PluginFeature</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Compares the two given Gst::PluginFeature instances. This function can be
-used as a GCompare::Func when sorting by rank and then by name.
-equal but the name of p1 comes before the name of p2; zero if the rank
-and names are equal; positive value if the rank of p1 &lt; the rank of p2 or the
+    <p>Compares the two given Gst::PluginFeature instances. This function can be<br />
+used as a GCompare::Func when sorting by rank and then by name.<br />
+equal but the name of p1 comes before the name of p2; zero if the rank<br />
+and names are equal; positive value if the rank of p1 &lt; the rank of p2 or the<br />
 ranks are equal but the name of p2 comes before the name of p1</p>
 
 
@@ -671,10 +676,10 @@ ranks are equal but the name of p2 comes before the name of p1</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks whether the given plugin feature is at least the required version.</p>
-<p>Note: Since version 1.24 this function no longer returns true if the
-version is a git development version (e.g. 1.23.0.1) and the check is
-for the &quot;next&quot; micro version, that is it will no longer return true for
-e.g. 1.23.0.1 if the check is for 1.23.1. It is still possible to parse
+<p>Note: Since version 1.24 this function no longer returns true if the<br />
+version is a git development version (e.g. 1.23.0.1) and the check is<br />
+for the &quot;next&quot; micro version, that is it will no longer return true for<br />
+e.g. 1.23.0.1 if the check is for 1.23.1. It is still possible to parse<br />
 the nano version from the string and do this check that way if needed.</p>
 
 
@@ -742,7 +747,7 @@ the nano version from the string and do this check that way if needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the plugin feature has at least
+        <div class='inline'><p>true if the plugin feature has at least<br />
 the required version, otherwise false.</p>
 </div>
       
@@ -764,7 +769,7 @@ the required version, otherwise false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads the plugin containing <!-- raw HTML omitted -->feature<!-- raw HTML omitted --> if it's not already loaded. <!-- raw HTML omitted -->feature<!-- raw HTML omitted --> is
+    <p>Loads the plugin containing <!-- raw HTML omitted -->feature<!-- raw HTML omitted --> if it's not already loaded. <!-- raw HTML omitted -->feature<!-- raw HTML omitted --> is<br />
 unaffected; use the return value instead.</p>
 <p>Normally this function is used like this:</p>
 <pre class="code ruby"><code class="ruby">GstPluginFeature *loaded_feature;
@@ -831,8 +836,8 @@ feature = loaded_feature;
       
       
         &mdash;
-        <div class='inline'><p>the plugin that provides this
-feature, or nil.  Unref with gst_object_unref() when no
+        <div class='inline'><p>the plugin that provides this<br />
+feature, or nil.  Unref with gst_object_unref() when no<br />
 longer needed.</p>
 </div>
       
@@ -872,8 +877,8 @@ longer needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of the plugin that provides this
-feature, or nil if the feature is not associated with a
+        <div class='inline'><p>the name of the plugin that provides this<br />
+feature, or nil if the feature is not associated with a<br />
 plugin.</p>
 </div>
       
@@ -952,7 +957,7 @@ plugin.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Specifies a rank for a plugin feature, so that autoplugging uses
+    <p>Specifies a rank for a plugin feature, so that autoplugging uses<br />
 the most appropriate feature.</p>
 
 
@@ -1056,7 +1061,7 @@ the most appropriate feature.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

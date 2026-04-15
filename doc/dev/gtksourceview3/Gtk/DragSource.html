@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::DragSource";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,7 +101,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -307,9 +309,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -329,9 +333,11 @@
   
   
   
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Gesture.html" title="Gtk::Gesture (class)">Gesture</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Gesture.html#device-instance_method" title="Gtk::Gesture#device (method)">#device</a></span>, <span class='object_link'><a href="Gesture.html#get_bounding_box-instance_method" title="Gtk::Gesture#get_bounding_box (method)">#get_bounding_box</a></span>, <span class='object_link'><a href="Gesture.html#get_bounding_box_center-instance_method" title="Gtk::Gesture#get_bounding_box_center (method)">#get_bounding_box_center</a></span>, <span class='object_link'><a href="Gesture.html#get_last_event-instance_method" title="Gtk::Gesture#get_last_event (method)">#get_last_event</a></span>, <span class='object_link'><a href="Gesture.html#get_point-instance_method" title="Gtk::Gesture#get_point (method)">#get_point</a></span>, <span class='object_link'><a href="Gesture.html#get_sequence_state-instance_method" title="Gtk::Gesture#get_sequence_state (method)">#get_sequence_state</a></span>, <span class='object_link'><a href="Gesture.html#group-instance_method" title="Gtk::Gesture#group (method)">#group</a></span>, <span class='object_link'><a href="Gesture.html#handles_sequence-instance_method" title="Gtk::Gesture#handles_sequence (method)">#handles_sequence</a></span>, <span class='object_link'><a href="Gesture.html#is_active-instance_method" title="Gtk::Gesture#is_active (method)">#is_active</a></span>, <span class='object_link'><a href="Gesture.html#is_grouped_with-instance_method" title="Gtk::Gesture#is_grouped_with (method)">#is_grouped_with</a></span>, <span class='object_link'><a href="Gesture.html#is_recognized-instance_method" title="Gtk::Gesture#is_recognized (method)">#is_recognized</a></span>, <span class='object_link'><a href="Gesture.html#last_updated_sequence-instance_method" title="Gtk::Gesture#last_updated_sequence (method)">#last_updated_sequence</a></span>, <span class='object_link'><a href="Gesture.html#n_points-instance_method" title="Gtk::Gesture#n_points (method)">#n_points</a></span>, <span class='object_link'><a href="Gesture.html#n_points=-instance_method" title="Gtk::Gesture#n_points= (method)">#n_points=</a></span>, <span class='object_link'><a href="Gesture.html#sequences-instance_method" title="Gtk::Gesture#sequences (method)">#sequences</a></span>, <span class='object_link'><a href="Gesture.html#set_sequence_state-instance_method" title="Gtk::Gesture#set_sequence_state (method)">#set_sequence_state</a></span>, <span class='object_link'><a href="Gesture.html#state=-instance_method" title="Gtk::Gesture#state= (method)">#state=</a></span>, <span class='object_link'><a href="Gesture.html#ungroup-instance_method" title="Gtk::Gesture#ungroup (method)">#ungroup</a></span></p>
 
+  
   
   
   
@@ -386,7 +392,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>The actions that are supported by drag operations from the source.</p>
-<p>Note that you must handle the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DragSource::drag-end] signal
+<p>Note that you must handle the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DragSource::drag-end] signal<br />
 if the actions include %GDK_ACTION_MOVE.</p>
 
 
@@ -427,7 +433,7 @@ if the actions include %GDK_ACTION_MOVE.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The actions that are supported by drag operations from the source.</p>
-<p>Note that you must handle the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DragSource::drag-end] signal
+<p>Note that you must handle the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DragSource::drag-end] signal<br />
 if the actions include %GDK_ACTION_MOVE.</p>
 
 
@@ -619,7 +625,7 @@ if the actions include %GDK_ACTION_MOVE.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GdkDrag</code> of the current
+        <div class='inline'><p>the <code>GdkDrag</code> of the current<br />
 drag operation</p>
 </div>
       
@@ -677,11 +683,11 @@ drag operation</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets a paintable to use as icon during DND operations.</p>
-<p>The hotspot coordinates determine the point on the icon
+<p>The hotspot coordinates determine the point on the icon<br />
 that gets aligned with the hotspot of the cursor.</p>
 <p>If <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> is nil, a default icon is used.</p>
-<p>This function can be called before a drag is started, or in
-a [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DragSource::prepare] or
+<p>This function can be called before a drag is started, or in<br />
+a [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DragSource::prepare] or<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DragSource::drag-begin] signal handler.</p>
 
 
@@ -762,7 +768,7 @@ a [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DragSource::prepa
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

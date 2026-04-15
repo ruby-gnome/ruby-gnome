@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::ApplicationCommandLine";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,14 +95,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gio2/application-command-line.rb</dd>
+    <dd>lib/gio2/application-command-line.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The GApplication::CommandLineClass-struct
+    <p>The GApplication::CommandLineClass-struct<br />
 contains private data only.</p>
 
 
@@ -634,6 +636,7 @@ contains private data only.</p>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -713,7 +716,7 @@ contains private data only.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The commandline that caused this [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Application::command-line]
+    <p>The commandline that caused this [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Application::command-line]<br />
 signal emission.</p>
 
 
@@ -768,10 +771,10 @@ signal emission.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a #GFile corresponding to a filename that was given as part
+    <p>Creates a #GFile corresponding to a filename that was given as part<br />
 of the invocation of <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted -->.</p>
-<p>This differs from g_file_new_for_commandline_arg() in that it
-resolves relative pathnames using the current working directory of
+<p>This differs from g_file_new_for_commandline_arg() in that it<br />
+resolves relative pathnames using the current working directory of<br />
 the invoking process rather than the local process.</p>
 
 
@@ -830,11 +833,11 @@ the invoking process rather than the local process.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the working directory of the command line invocation.
+    <p>Gets the working directory of the command line invocation.<br />
 The string may contain non-utf8 data.</p>
-<p>It is possible that the remote application did not send a working
+<p>It is possible that the remote application did not send a working<br />
 directory, so this may be nil.</p>
-<p>The return value should not be modified or freed and is valid for as
+<p>The return value should not be modified or freed and is valid for as<br />
 long as <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted --> exists.</p>
 
 
@@ -877,12 +880,12 @@ long as <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted --> exists.</p>
     <p>Signals that command line processing is completed.</p>
 <p>For remote invocation, it causes the invoking process to terminate.</p>
 <p>For local invocation, it does nothing.</p>
-<p>This method should be called in the [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Application::command-line]
+<p>This method should be called in the [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Application::command-line]<br />
 handler, after the exit status is set and all messages are printed.</p>
-<p>After this call, g_application_command_line_set_exit_status() has no effect.
+<p>After this call, g_application_command_line_set_exit_status() has no effect.<br />
 Subsequent calls to this method are no-ops.</p>
-<p>This method is automatically called when the GApplication::CommandLine
-object is disposed — so you can omit the call in non-garbage collected
+<p>This method is automatically called when the GApplication::CommandLine<br />
+object is disposed — so you can omit the call in non-garbage collected<br />
 languages.</p>
 
 
@@ -918,17 +921,17 @@ languages.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the contents of the 'environ' variable of the command line
-invocation, as would be returned by g_get_environ(), ie as a
-nil-terminated list of strings in the form 'NAME=VALUE'.
+    <p>Gets the contents of the 'environ' variable of the command line<br />
+invocation, as would be returned by g_get_environ(), ie as a<br />
+nil-terminated list of strings in the form 'NAME=VALUE'.<br />
 The strings may contain non-utf8 data.</p>
-<p>The remote application usually does not send an environment.  Use
-%G_APPLICATION_SEND_ENVIRONMENT to affect that.  Even with this flag
-set it is possible that the environment is still not available (due
+<p>The remote application usually does not send an environment.  Use<br />
+%G_APPLICATION_SEND_ENVIRONMENT to affect that.  Even with this flag<br />
+set it is possible that the environment is still not available (due<br />
 to invocation messages from other applications).</p>
-<p>The return value should not be modified or freed and is valid for as
+<p>The return value should not be modified or freed and is valid for as<br />
 long as <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted --> exists.</p>
-<p>See g_application_command_line_getenv() if you are only interested
+<p>See g_application_command_line_getenv() if you are only interested<br />
 in the value of a single environment variable.</p>
 
 
@@ -968,7 +971,7 @@ in the value of a single environment variable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the exit status of <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted -->.  See
+    <p>Gets the exit status of <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted -->.  See<br />
 g_application_command_line_set_exit_status() for more information.</p>
 
 
@@ -1008,25 +1011,25 @@ g_application_command_line_set_exit_status() for more information.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the exit status that will be used when the invoking process
+    <p>Sets the exit status that will be used when the invoking process<br />
 exits.</p>
-<p>The return value of the #GApplication::command-line signal is
-passed to this function when the handler returns.  This is the usual
+<p>The return value of the #GApplication::command-line signal is<br />
+passed to this function when the handler returns.  This is the usual<br />
 way of setting the exit status.</p>
-<p>In the event that you want the remote invocation to continue running
-and want to decide on the exit status in the future, you can use this
-call.  For the case of a remote invocation, the remote process will
-typically exit when the last reference is dropped on <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted -->.  The
-exit status of the remote process will be equal to the last value
+<p>In the event that you want the remote invocation to continue running<br />
+and want to decide on the exit status in the future, you can use this<br />
+call.  For the case of a remote invocation, the remote process will<br />
+typically exit when the last reference is dropped on <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted -->.  The<br />
+exit status of the remote process will be equal to the last value<br />
 that was set with this function.</p>
-<p>In the case that the commandline invocation is local, the situation
-is slightly more complicated.  If the commandline invocation results
-in the mainloop running (ie: because the use-count of the application
-increased to a non-zero value) then the application is considered to
-have been 'successful' in a certain sense, and the exit status is
-always zero.  If the application use count is zero, though, the exit
+<p>In the case that the commandline invocation is local, the situation<br />
+is slightly more complicated.  If the commandline invocation results<br />
+in the mainloop running (ie: because the use-count of the application<br />
+increased to a non-zero value) then the application is considered to<br />
+have been 'successful' in a certain sense, and the exit status is<br />
+always zero.  If the application use count is zero, though, the exit<br />
 status of the local GApplication::CommandLine is used.</p>
-<p>This method is a no-op if g_application_command_line_done() has
+<p>This method is a no-op if g_application_command_line_done() has<br />
 been called.</p>
 
 
@@ -1082,12 +1085,12 @@ been called.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the list of arguments that was passed on the command line.</p>
-<p>The strings in the array may contain non-UTF-8 data on UNIX (such as
-filenames or arguments given in the system locale) but are always in
+<p>The strings in the array may contain non-UTF-8 data on UNIX (such as<br />
+filenames or arguments given in the system locale) but are always in<br />
 UTF-8 on Windows.</p>
-<p>If you wish to use the return value with GOption::Context, you must
+<p>If you wish to use the return value with GOption::Context, you must<br />
 use g_option_context_parse_strv().</p>
-<p>The return value is nil-terminated and should be freed using
+<p>The return value is nil-terminated and should be freed using<br />
 g_strfreev().</p>
 
 
@@ -1146,14 +1149,14 @@ g_strfreev().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of a particular environment variable of the command
-line invocation, as would be returned by g_getenv().  The strings may
+    <p>Gets the value of a particular environment variable of the command<br />
+line invocation, as would be returned by g_getenv().  The strings may<br />
 contain non-utf8 data.</p>
-<p>The remote application usually does not send an environment.  Use
-%G_APPLICATION_SEND_ENVIRONMENT to affect that.  Even with this flag
-set it is possible that the environment is still not available (due
+<p>The remote application usually does not send an environment.  Use<br />
+%G_APPLICATION_SEND_ENVIRONMENT to affect that.  Even with this flag<br />
+set it is possible that the environment is still not available (due<br />
 to invocation messages from other applications).</p>
-<p>The return value should not be modified or freed and is valid for as
+<p>The return value should not be modified or freed and is valid for as<br />
 long as <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted --> exists.</p>
 
 
@@ -1412,13 +1415,13 @@ long as <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted --> exists.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the options that were passed to g_application_command_line().</p>
-<p>If you did not override local_command_line() then these are the same
-options that were parsed according to the GOption::Entrys added to the
-application with g_application_add_main_option_entries() and possibly
+<p>If you did not override local_command_line() then these are the same<br />
+options that were parsed according to the GOption::Entrys added to the<br />
+application with g_application_add_main_option_entries() and possibly<br />
 modified from your GApplication::handle-local-options handler.</p>
-<p>If no options were sent then an empty dictionary is returned so that
+<p>If no options were sent then an empty dictionary is returned so that<br />
 you don't need to check for nil.</p>
-<p>The data has been passed via an untrusted external process, so the types of
+<p>The data has been passed via an untrusted external process, so the types of<br />
 all values must be checked before being used.</p>
 
 
@@ -1459,11 +1462,11 @@ all values must be checked before being used.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the platform data associated with the invocation of <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted -->.</p>
-<p>This is a #GVariant dictionary containing information about the
-context in which the invocation occurred.  It typically contains
-information like the current working directory and the startup
+<p>This is a #GVariant dictionary containing information about the<br />
+context in which the invocation occurred.  It typically contains<br />
+information like the current working directory and the startup<br />
 notification ID.</p>
-<p>It comes from an untrusted external process and hence the types of all
+<p>It comes from an untrusted external process and hence the types of all<br />
 values must be validated before being used.</p>
 <p>For local invocation, it will be nil.</p>
 
@@ -1558,10 +1561,10 @@ values must be validated before being used.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Formats a message and prints it using the stdout print handler in the
+    <p>Formats a message and prints it using the stdout print handler in the<br />
 invoking process.</p>
-<p>If <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted --> is a local invocation then this is exactly equivalent to
-g_print().  If <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted --> is remote then this is equivalent to calling
+<p>If <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted --> is a local invocation then this is exactly equivalent to<br />
+g_print().  If <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted --> is remote then this is equivalent to calling<br />
 g_print() in the invoking process.</p>
 
 
@@ -1632,8 +1635,8 @@ g_print() in the invoking process.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Prints a message using the stdout print handler in the invoking process.</p>
-<p>Unlike g_application_command_line_print(), <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not a <code>printf()</code>-style
-format string. Use this function if <!-- raw HTML omitted -->message<!-- raw HTML omitted --> contains text you don't have
+<p>Unlike g_application_command_line_print(), <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not a <code>printf()</code>-style<br />
+format string. Use this function if <!-- raw HTML omitted -->message<!-- raw HTML omitted --> contains text you don't have<br />
 control over, that could include <code>printf()</code> escape sequences.</p>
 
 
@@ -1688,10 +1691,10 @@ control over, that could include <code>printf()</code> escape sequences.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Formats a message and prints it using the stderr print handler in the
+    <p>Formats a message and prints it using the stderr print handler in the<br />
 invoking process.</p>
-<p>If <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted --> is a local invocation then this is exactly equivalent to
-g_printerr().  If <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted --> is remote then this is equivalent to
+<p>If <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted --> is a local invocation then this is exactly equivalent to<br />
+g_printerr().  If <!-- raw HTML omitted -->cmdline<!-- raw HTML omitted --> is remote then this is equivalent to<br />
 calling g_printerr() in the invoking process.</p>
 
 
@@ -1762,8 +1765,8 @@ calling g_printerr() in the invoking process.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Prints a message using the stderr print handler in the invoking process.</p>
-<p>Unlike g_application_command_line_printerr(), <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not
-a <code>printf()</code>-style format string. Use this function if <!-- raw HTML omitted -->message<!-- raw HTML omitted --> contains text
+<p>Unlike g_application_command_line_printerr(), <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not<br />
+a <code>printf()</code>-style format string. Use this function if <!-- raw HTML omitted -->message<!-- raw HTML omitted --> contains text<br />
 you don't have control over, that could include <code>printf()</code> escape sequences.</p>
 
 
@@ -1819,11 +1822,11 @@ you don't have control over, that could include <code>printf()</code> escape seq
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the stdin of the invoking process.</p>
-<p>The GInput::Stream can be used to read data passed to the standard
-input of the invoking process.
-This doesn't work on all platforms.  Presently, it is only available
-on UNIX when using a D-Bus daemon capable of passing file descriptors.
-If stdin is not available then nil will be returned.  In the
+<p>The GInput::Stream can be used to read data passed to the standard<br />
+input of the invoking process.<br />
+This doesn't work on all platforms.  Presently, it is only available<br />
+on UNIX when using a D-Bus daemon capable of passing file descriptors.<br />
+If stdin is not available then nil will be returned.  In the<br />
 future, support may be expanded to other platforms.</p>
 <p>You must only call this function once per commandline invocation.</p>
 
@@ -1860,7 +1863,7 @@ future, support may be expanded to other platforms.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

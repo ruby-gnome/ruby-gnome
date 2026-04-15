@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "PangoFc::FontMap";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -374,9 +376,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -404,11 +408,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function saves a callback method in the <code>PangoFcFontMap</code> that
+    <p>This function saves a callback method in the <code>PangoFcFontMap</code> that<br />
 will be called whenever new fonts are created.</p>
-<p>If the function returns a <code>PangoFcDecoder</code>, that decoder will be used
-to determine both coverage via a <code>FcCharSet</code> and a one-to-one mapping
-of characters to glyphs. This will allow applications to have
+<p>If the function returns a <code>PangoFcDecoder</code>, that decoder will be used<br />
+to determine both coverage via a <code>FcCharSet</code> and a one-to-one mapping<br />
+of characters to glyphs. This will allow applications to have<br />
 application-specific encodings for various fonts.</p>
 
 
@@ -458,7 +462,7 @@ application-specific encodings for various fonts.</p>
       
       
         &mdash;
-        <div class='inline'><p>A <code>GDestroyNotify</code> callback that will be called when the
+        <div class='inline'><p>A <code>GDestroyNotify</code> callback that will be called when the<br />
 fontmap is finalized and the decoder is released.</p>
 </div>
       
@@ -495,9 +499,9 @@ fontmap is finalized and the decoder is released.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Clear all cached information and fontsets for this font map.</p>
-<p>This should be called whenever there is a change in the
-output of the default_substitute() virtual function of the
-font map, or if fontconfig has been reinitialized to new
+<p>This should be called whenever there is a change in the<br />
+output of the default_substitute() virtual function of the<br />
+font map, or if fontconfig has been reinitialized to new<br />
 configuration.</p>
 
 
@@ -552,8 +556,8 @@ configuration.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>FcConfig</code> object attached to
-<!-- raw HTML omitted -->fcfontmap<!-- raw HTML omitted -->, which might be nil. The return value is
+        <div class='inline'><p>the <code>FcConfig</code> object attached to<br />
+<!-- raw HTML omitted -->fcfontmap<!-- raw HTML omitted -->, which might be nil. The return value is<br />
 owned by Pango and should not be freed.</p>
 </div>
       
@@ -576,16 +580,16 @@ owned by Pango and should not be freed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Set the <code>FcConfig</code> for this font map to use.</p>
-<p>The default value
-is nil, which causes Fontconfig to use its global &quot;current config&quot;.
-You can create a new <code>FcConfig</code> object and use this API to attach it
+<p>The default value<br />
+is nil, which causes Fontconfig to use its global &quot;current config&quot;.<br />
+You can create a new <code>FcConfig</code> object and use this API to attach it<br />
 to a font map.</p>
-<p>This is particularly useful for example, if you want to use application
-fonts with Pango. For that, you would create a fresh <code>FcConfig</code>, add your
+<p>This is particularly useful for example, if you want to use application<br />
+fonts with Pango. For that, you would create a fresh <code>FcConfig</code>, add your<br />
 app fonts to it, and attach it to a new Pango font map.</p>
-<p>If <!-- raw HTML omitted -->fcconfig<!-- raw HTML omitted --> is different from the previous config attached to the font map,
+<p>If <!-- raw HTML omitted -->fcconfig<!-- raw HTML omitted --> is different from the previous config attached to the font map,<br />
 [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.FontMap.config_changed] is called.</p>
-<p>This function acquires a reference to the <code>FcConfig</code> object; the caller
+<p>This function acquires a reference to the <code>FcConfig</code> object; the caller<br />
 does <strong>not</strong> need to retain a reference.</p>
 
 
@@ -640,10 +644,10 @@ does <strong>not</strong> need to retain a reference.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Informs font map that the fontconfig configuration (i.e., FcConfig
+    <p>Informs font map that the fontconfig configuration (i.e., FcConfig<br />
 object) used by this font map has changed.</p>
-<p>This currently calls [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.FontMap.cache_clear] which
-ensures that list of fonts, etc will be regenerated using the
+<p>This currently calls [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.FontMap.cache_clear] which<br />
+ensures that list of fonts, etc will be regenerated using the<br />
 updated configuration.</p>
 
 
@@ -680,9 +684,9 @@ updated configuration.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new context for this fontmap.</p>
-<p>This function is intended only for backend implementations deriving
-from <code>PangoFcFontMap</code>; it is possible that a backend will store
-additional information needed for correct operation on the <code>PangoContext</code>
+<p>This function is intended only for backend implementations deriving<br />
+from <code>PangoFcFontMap</code>; it is possible that a backend will store<br />
+additional information needed for correct operation on the <code>PangoContext</code><br />
 after calling this function.</p>
 
 
@@ -723,7 +727,7 @@ after calling this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finds the decoder to use for <!-- raw HTML omitted -->pattern<!-- raw HTML omitted -->.</p>
-<p>Decoders can be added to a font map using
+<p>Decoders can be added to a font map using<br />
 [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.FontMap.add_decoder_find_func].</p>
 
 
@@ -761,7 +765,7 @@ after calling this function.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly created <code>PangoFcDecoder</code>
+        <div class='inline'><p>a newly created <code>PangoFcDecoder</code><br />
 object or nil if no decoder is set for <!-- raw HTML omitted -->pattern<!-- raw HTML omitted -->.</p>
 </div>
       
@@ -820,7 +824,7 @@ object or nil if no decoder is set for <!-- raw HTML omitted -->pattern<!-- raw 
       
       
         &mdash;
-        <div class='inline'><p>the <code>hb_face_t</code>
+        <div class='inline'><p>the <code>hb_face_t</code><br />
 for the given font</p>
 </div>
       
@@ -842,10 +846,10 @@ for the given font</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a function that will be called to do final configuration
-substitution on a <code>FcPattern</code> before it is used to load
+    <p>Sets a function that will be called to do final configuration<br />
+substitution on a <code>FcPattern</code> before it is used to load<br />
 the font.</p>
-<p>This function can be used to do things like set
+<p>This function can be used to do things like set<br />
 hinting and antialiasing options.</p>
 
 
@@ -930,12 +934,12 @@ hinting and antialiasing options.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Clears all cached information for the fontmap and marks
+    <p>Clears all cached information for the fontmap and marks<br />
 all fonts open for the fontmap as dead.</p>
 <p>See the shutdown() virtual function of <code>PangoFcFont</code>.</p>
-<p>This function might be used by a backend when the underlying
-windowing system for the font map exits. This function is only
-intended to be called only for backend implementations deriving
+<p>This function might be used by a backend when the underlying<br />
+windowing system for the font map exits. This function is only<br />
+intended to be called only for backend implementations deriving<br />
 from <code>PangoFcFontMap</code>.</p>
 
 
@@ -971,10 +975,10 @@ from <code>PangoFcFontMap</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Call this function any time the results of the default
-substitution function set with
+    <p>Call this function any time the results of the default<br />
+substitution function set with<br />
 [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.FontMap.set_default_substitute] change.</p>
-<p>That is, if your substitution function will return different
+<p>That is, if your substitution function will return different<br />
 results for the same input pattern, you must call this function.</p>
 
 
@@ -1006,7 +1010,7 @@ results for the same input pattern, you must call this function.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

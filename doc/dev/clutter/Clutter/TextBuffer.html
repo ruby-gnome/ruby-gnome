@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::TextBuffer";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,14 +95,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/clutter/text-buffer.rb</dd>
+    <dd>lib/clutter/text-buffer.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::TextBufferClass structure contains
+    <p>The Clutter::TextBufferClass structure contains<br />
 only private data.</p>
 
 
@@ -475,6 +477,7 @@ only private data.</p>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -554,7 +557,7 @@ only private data.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the length in bytes of the buffer.
+    <p>Retrieves the length in bytes of the buffer.<br />
 See clutter_text_buffer_get_length().</p>
 
 
@@ -594,10 +597,10 @@ See clutter_text_buffer_get_length().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Deletes a sequence of characters from the buffer. <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> characters are
-deleted starting at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> is negative, then all characters
+    <p>Deletes a sequence of characters from the buffer. <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> characters are<br />
+deleted starting at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> is negative, then all characters<br />
 until the end of the text are deleted.</p>
-<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> or <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> are out of bounds, then they are coerced to sane
+<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> or <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> are out of bounds, then they are coerced to sane<br />
 values.</p>
 <p>Note that the positions are specified in characters, not bytes.</p>
 
@@ -944,11 +947,11 @@ values.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> characters of <!-- raw HTML omitted -->chars<!-- raw HTML omitted --> into the contents of the
+    <p>Inserts <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> characters of <!-- raw HTML omitted -->chars<!-- raw HTML omitted --> into the contents of the<br />
 buffer, at position <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> is negative, then characters from chars will be inserted
-until a null-terminator is found. If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> or <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> are out of
-bounds, or the maximum buffer text length is exceeded, then they are
+<p>If <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> is negative, then characters from chars will be inserted<br />
+until a null-terminator is found. If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> or <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> are out of<br />
+bounds, or the maximum buffer text length is exceeded, then they are<br />
 coerced to sane values.</p>
 <p>Note that the position and length are in characters, not in bytes.</p>
 
@@ -1056,11 +1059,11 @@ coerced to sane values.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> characters of <!-- raw HTML omitted -->chars<!-- raw HTML omitted --> into the contents of the
+    <p>Inserts <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> characters of <!-- raw HTML omitted -->chars<!-- raw HTML omitted --> into the contents of the<br />
 buffer, at position <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> is negative, then characters from chars will be inserted
-until a null-terminator is found. If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> or <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> are out of
-bounds, or the maximum buffer text length is exceeded, then they are
+<p>If <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> is negative, then characters from chars will be inserted<br />
+until a null-terminator is found. If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> or <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> are out of<br />
+bounds, or the maximum buffer text length is exceeded, then they are<br />
 coerced to sane values.</p>
 <p>Note that the position and length are in characters, not in bytes.</p>
 
@@ -1381,7 +1384,7 @@ coerced to sane values.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the text in the buffer.</p>
-<p>This is roughly equivalent to calling clutter_text_buffer_delete_text()
+<p>This is roughly equivalent to calling clutter_text_buffer_delete_text()<br />
 and clutter_text_buffer_insert_text().</p>
 <p>Note that <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> is in characters, not in bytes.</p>
 
@@ -1471,7 +1474,7 @@ and clutter_text_buffer_insert_text().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the text in the buffer.</p>
-<p>This is roughly equivalent to calling clutter_text_buffer_delete_text()
+<p>This is roughly equivalent to calling clutter_text_buffer_delete_text()<br />
 and clutter_text_buffer_insert_text().</p>
 <p>Note that <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> is in characters, not in bytes.</p>
 
@@ -1591,7 +1594,7 @@ and clutter_text_buffer_insert_text().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Expander";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,28 +99,29 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkExpander</code> allows the user to reveal its child by clicking
+    <p><code>GtkExpander</code> allows the user to reveal its child by clicking<br />
 on an expander triangle.</p>
 <p><img src="expander.png" alt="An example GtkExpander" /></p>
 <p>This is similar to the triangles used in a <code>GtkTreeView</code>.</p>
-<p>Normally you use an expander as you would use a frame; you create
-the child widget and use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Expander.set_child] to add it
-to the expander. When the expander is toggled, it will take care of
+<p>Normally you use an expander as you would use a frame; you create<br />
+the child widget and use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Expander.set_child] to add it<br />
+to the expander. When the expander is toggled, it will take care of<br />
 showing and hiding the child automatically.</p>
-<h1>Special Usage</h1>
-<p>There are situations in which you may prefer to show and hide the
-expanded widget yourself, such as when you want to actually create
-the widget at expansion time. In this case, create a <code>GtkExpander</code>
-but do not add a child to it. The expander widget has an
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Expander:expanded] property which can be used to
-monitor its expansion state. You should watch this property with
+<h1><a href="#special-usage" aria-hidden="true" class="anchor" id="special-usage"></a>Special Usage</h1>
+<p>There are situations in which you may prefer to show and hide the<br />
+expanded widget yourself, such as when you want to actually create<br />
+the widget at expansion time. In this case, create a <code>GtkExpander</code><br />
+but do not add a child to it. The expander widget has an<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Expander:expanded] property which can be used to<br />
+monitor its expansion state. You should watch this property with<br />
 a signal connection as follows:</p>
 <pre class="code c"><code class="c">static void
 expander_callback (GObject    *object,
@@ -150,10 +152,10 @@ create_expander (void)
   // ...
 }
 </code></pre>
-<h1>GtkExpander as GtkBuildable</h1>
-<p>The <code>GtkExpander</code> implementation of the <code>GtkBuildable</code> interface supports
-placing a child in the label position by specifying “label” as the
-“type” attribute of a <code>&lt;child&gt;</code> element. A normal content child can be
+<h1><a href="#gtkexpander-as-gtkbuildable" aria-hidden="true" class="anchor" id="gtkexpander-as-gtkbuildable"></a>GtkExpander as GtkBuildable</h1>
+<p>The <code>GtkExpander</code> implementation of the <code>GtkBuildable</code> interface supports<br />
+placing a child in the label position by specifying “label” as the<br />
+“type” attribute of a <code>&lt;child&gt;</code> element. A normal content child can be<br />
 specified without specifying a <code>&lt;child&gt;</code> type attribute.</p>
 <p>An example of a UI definition fragment with GtkExpander:</p>
 <pre class="code xml"><code class="xml">&lt;object class=&quot;GtkExpander&quot;&gt;
@@ -165,7 +167,7 @@ specified without specifying a <code>&lt;child&gt;</code> type attribute.</p>
   &lt;/child&gt;
 &lt;/object&gt;
 </code></pre>
-<h1>CSS nodes</h1>
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
 <pre class="code ruby"><code class="ruby">expander-widget
 ╰── box
     ├── title
@@ -173,11 +175,11 @@ specified without specifying a <code>&lt;child&gt;</code> type attribute.</p>
     │   ╰── &lt;label widget&gt;
     ╰── &lt;child&gt;
 </code></pre>
-<p><code>GtkExpander</code> has a main node <code>expander-widget</code>, and subnode <code>box</code> containing
-the title and child widget. The box subnode <code>title</code> contains node <code>expander</code>,
-i.e. the expand/collapse arrow; then the label widget if any. The arrow of an
+<p><code>GtkExpander</code> has a main node <code>expander-widget</code>, and subnode <code>box</code> containing<br />
+the title and child widget. The box subnode <code>title</code> contains node <code>expander</code>,<br />
+i.e. the expand/collapse arrow; then the label widget if any. The arrow of an<br />
 expander that is showing its child gets the <code>:checked</code> pseudoclass set on it.</p>
-<h1>Accessibility</h1>
+<h1><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h1>
 <p><code>GtkExpander</code> uses the %GTK_ACCESSIBLE_ROLE_BUTTON role.</p>
 
 
@@ -641,9 +643,11 @@ expander that is showing its child gets the <code>:checked</code> pseudoclass se
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -671,9 +675,9 @@ expander that is showing its child gets the <code>:checked</code> pseudoclass se
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new expander using <!-- raw HTML omitted -->label<!-- raw HTML omitted --> as the text of the label.</p>
-<p>If characters in <!-- raw HTML omitted -->label<!-- raw HTML omitted --> are preceded by an underscore, they are
-underlined. If you need a literal underscore character in a label,
-use “__” (two underscores). The first underlined character represents
+<p>If characters in <!-- raw HTML omitted -->label<!-- raw HTML omitted --> are preceded by an underscore, they are<br />
+underlined. If you need a literal underscore character in a label,<br />
+use “__” (two underscores). The first underlined character represents<br />
 a keyboard accelerator called a mnemonic.</p>
 <p>Pressing Alt and that key activates the button.</p>
 
@@ -694,7 +698,7 @@ a keyboard accelerator called a mnemonic.</p>
       
       
         &mdash;
-        <div class='inline'><p>the text of the label with an underscore
+        <div class='inline'><p>the text of the label with an underscore<br />
 in front of the mnemonic character</p>
 </div>
       
@@ -1188,7 +1192,7 @@ in front of the mnemonic character</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the expander will resize the toplevel widget
+    <p>Returns whether the expander will resize the toplevel widget<br />
 containing the expander upon resizing and collapsing.</p>
 
 
@@ -1228,7 +1232,7 @@ containing the expander upon resizing and collapsing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>When this property is true, the expander will resize the toplevel
+    <p>When this property is true, the expander will resize the toplevel<br />
 widget containing the expander upon expanding and collapsing.</p>
 
 
@@ -1296,7 +1300,7 @@ widget containing the expander upon expanding and collapsing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>When this property is true, the expander will resize the toplevel
+    <p>When this property is true, the expander will resize the toplevel<br />
 widget containing the expander upon expanding and collapsing.</p>
 
 
@@ -1499,7 +1503,7 @@ widget containing the expander upon expanding and collapsing.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if an embedded underline in the expander
+        <div class='inline'><p>true if an embedded underline in the expander<br />
 label indicates the mnemonic accelerator keys</p>
 </div>
       
@@ -1623,7 +1627,7 @@ label indicates the mnemonic accelerator keys</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

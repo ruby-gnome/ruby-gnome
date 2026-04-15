@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Printer";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -102,11 +104,11 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>A <code>GtkPrinter</code> object represents a printer.</p>
-<p>You only need to deal directly with printers if you use the
+<p>You only need to deal directly with printers if you use the<br />
 non-portable [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintUnixDialog] API.</p>
-<p>A <code>GtkPrinter</code> allows to get status information about the printer,
-such as its description, its location, the number of queued jobs,
-etc. Most importantly, a <code>GtkPrinter</code> object can be used to create
+<p>A <code>GtkPrinter</code> allows to get status information about the printer,<br />
+such as its description, its location, the number of queued jobs,<br />
+etc. Most importantly, a <code>GtkPrinter</code> object can be used to create<br />
 a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob] object, which lets you print to the printer.</p>
 
 
@@ -1030,6 +1032,7 @@ a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob] object, 
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1230,7 +1233,7 @@ a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob] object, 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the printer accepts input in
+    <p>Returns whether the printer accepts input in<br />
 PDF format.</p>
 
 
@@ -1376,7 +1379,7 @@ PDF format.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the printer accepts input in
+    <p>Returns whether the printer accepts input in<br />
 PostScript format.</p>
 
 
@@ -1629,11 +1632,11 @@ PostScript format.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the printer’s capabilities.</p>
-<p>This is useful when you’re using <code>GtkPrintUnixDialog</code>’s
-manual-capabilities setting and need to know which settings
+<p>This is useful when you’re using <code>GtkPrintUnixDialog</code>’s<br />
+manual-capabilities setting and need to know which settings<br />
 the printer can handle and which you must handle yourself.</p>
-<p>This will return 0 unless the printer’s details are
-available, see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.has_details] and
+<p>This will return 0 unless the printer’s details are<br />
+available, see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.has_details] and<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.request_details].</p>
 
 
@@ -1710,7 +1713,7 @@ available, see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Prin
       
       
         &mdash;
-        <div class='inline'><p>0 if the printer match, a negative value if <!-- raw HTML omitted -->a<!-- raw HTML omitted --> &lt; <!-- raw HTML omitted -->b<!-- raw HTML omitted -->,
+        <div class='inline'><p>0 if the printer match, a negative value if <!-- raw HTML omitted -->a<!-- raw HTML omitted --> &lt; <!-- raw HTML omitted -->b<!-- raw HTML omitted -->,<br />
 or a positive value if <!-- raw HTML omitted -->a<!-- raw HTML omitted --> &gt; <!-- raw HTML omitted -->b<!-- raw HTML omitted --></p>
 </div>
       
@@ -1750,7 +1753,7 @@ or a positive value if <!-- raw HTML omitted -->a<!-- raw HTML omitted --> &gt; 
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated <code>GtkPageSetup</code> with default page size
+        <div class='inline'><p>a newly allocated <code>GtkPageSetup</code> with default page size<br />
 of the printer.</p>
 </div>
       
@@ -1812,10 +1815,10 @@ of the printer.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieve the hard margins of <!-- raw HTML omitted -->printer<!-- raw HTML omitted -->.</p>
-<p>These are the margins that define the area at the borders
+<p>These are the margins that define the area at the borders<br />
 of the paper that the printer cannot print to.</p>
-<p>Note: This will not succeed unless the printer’s details are
-available, see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.has_details] and
+<p>Note: This will not succeed unless the printer’s details are<br />
+available, see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.has_details] and<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.request_details].</p>
 
 
@@ -1920,10 +1923,10 @@ available, see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Prin
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieve the hard margins of <!-- raw HTML omitted -->printer<!-- raw HTML omitted --> for <!-- raw HTML omitted -->paper_size<!-- raw HTML omitted -->.</p>
-<p>These are the margins that define the area at the borders
+<p>These are the margins that define the area at the borders<br />
 of the paper that the printer cannot print to.</p>
-<p>Note: This will not succeed unless the printer’s details are
-available, see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.has_details] and
+<p>Note: This will not succeed unless the printer’s details are<br />
+available, see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.has_details] and<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.request_details].</p>
 
 
@@ -2226,7 +2229,7 @@ available, see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Prin
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the printer is currently active (i.e.
+    <p>Returns whether the printer is currently active (i.e.<br />
 accepts new jobs).</p>
 
 
@@ -2306,7 +2309,7 @@ accepts new jobs).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns whether the printer is currently paused.</p>
-<p>A paused printer still accepts jobs, but it is not
+<p>A paused printer still accepts jobs, but it is not<br />
 printing them.</p>
 
 
@@ -2346,8 +2349,8 @@ printing them.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the printer is virtual (i.e. does not
-represent actual printer hardware, but something like
+    <p>Returns whether the printer is virtual (i.e. does not<br />
+represent actual printer hardware, but something like<br />
 a CUPS class).</p>
 
 
@@ -2600,8 +2603,8 @@ a CUPS class).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Lists all the paper sizes <!-- raw HTML omitted -->printer<!-- raw HTML omitted --> supports.</p>
-<p>This will return and empty list unless the printer’s details
-are available, see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.has_details] and
+<p>This will return and empty list unless the printer’s details<br />
+are available, see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.has_details] and<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.request_details].</p>
 
 
@@ -2620,7 +2623,7 @@ are available, see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.
       
       
         &mdash;
-        <div class='inline'><p>a newly
+        <div class='inline'><p>a newly<br />
 allocated list of newly allocated <code>GtkPageSetup</code>s.</p>
 </div>
       
@@ -2855,7 +2858,7 @@ allocated list of newly allocated <code>GtkPageSetup</code>s.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>true if this printer is paused.</p>
-<p>A paused printer still accepts jobs, but it does
+<p>A paused printer still accepts jobs, but it does<br />
 not print them.</p>
 
 
@@ -2924,7 +2927,7 @@ not print them.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>true if this printer is paused.</p>
-<p>A paused printer still accepts jobs, but it does
+<p>A paused printer still accepts jobs, but it does<br />
 not print them.</p>
 
 
@@ -2965,8 +2968,8 @@ not print them.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Requests the printer details.</p>
-<p>When the details are available, the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer::details-acquired] signal
+<p>When the details are available, the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer::details-acquired] signal<br />
 will be emitted on <!-- raw HTML omitted -->printer<!-- raw HTML omitted -->.</p>
 
 
@@ -3104,7 +3107,7 @@ will be emitted on <!-- raw HTML omitted -->printer<!-- raw HTML omitted -->.</p
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

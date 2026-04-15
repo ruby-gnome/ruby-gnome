@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Accessible";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,38 +79,39 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkAccessible</code> is an interface for describing UI elements for
+    <p><code>GtkAccessible</code> is an interface for describing UI elements for<br />
 Assistive Technologies.</p>
 <p>Every accessible implementation has:</p>
 <ul>
 <li>a “role”, represented by a value of the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleRole] enumeration</li>
-<li>an “attribute”, represented by a set of [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleState],
+<li>an “attribute”, represented by a set of [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleState],<br />
 [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleProperty] and [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleRelation] values</li>
 </ul>
-<p>The role cannot be changed after instantiating a <code>GtkAccessible</code>
+<p>The role cannot be changed after instantiating a <code>GtkAccessible</code><br />
 implementation.</p>
-<p>The attributes are updated every time a UI element's state changes in
-a way that should be reflected by assistive technologies. For instance,
-if a <code>GtkWidget</code> visibility changes, the %GTK_ACCESSIBLE_STATE_HIDDEN
+<p>The attributes are updated every time a UI element's state changes in<br />
+a way that should be reflected by assistive technologies. For instance,<br />
+if a <code>GtkWidget</code> visibility changes, the %GTK_ACCESSIBLE_STATE_HIDDEN<br />
 state will also change to reflect the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:visible] property.</p>
-<p>Every accessible implementation is part of a tree of accessible objects.
-Normally, this tree corresponds to the widget tree, but can be customized
-by reimplementing the [vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.get_accessible_parent],
-[vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.get_first_accessible_child] and
-[vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.get_next_accessible_sibling] virtual functions.
-Note that you can not create a top-level accessible object as of now,
-which means that you must always have a parent accessible object.
-Also note that when an accessible object does not correspond to a widget,
-and it has children, whose implementation you don't control,
-it is necessary to ensure the correct shape of the a11y tree
-by calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.set_accessible_parent] and
+<p>Every accessible implementation is part of a tree of accessible objects.<br />
+Normally, this tree corresponds to the widget tree, but can be customized<br />
+by reimplementing the [vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.get_accessible_parent],<br />
+[vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.get_first_accessible_child] and<br />
+[vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.get_next_accessible_sibling] virtual functions.<br />
+Note that you can not create a top-level accessible object as of now,<br />
+which means that you must always have a parent accessible object.<br />
+Also note that when an accessible object does not correspond to a widget,<br />
+and it has children, whose implementation you don't control,<br />
+it is necessary to ensure the correct shape of the a11y tree<br />
+by calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.set_accessible_parent] and<br />
 updating the sibling by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.update_next_accessible_sibling].</p>
 
 
@@ -571,6 +573,7 @@ updating the sibling by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted
 
       
     </ul>
+    
   
 
 
@@ -670,11 +673,11 @@ updating the sibling by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted
 </h3><div class="docstring">
   <div class="discussion">
     <p>Requests the user's screen reader to announce the given message.</p>
-<p>This kind of notification is useful for messages that
-either have only a visual representation or that are not
-exposed visually at all, e.g. a notification about a
+<p>This kind of notification is useful for messages that<br />
+either have only a visual representation or that are not<br />
+exposed visually at all, e.g. a notification about a<br />
 successful operation.</p>
-<p>Also, by using this API, you can ensure that the message
+<p>Also, by using this API, you can ensure that the message<br />
 does not interrupts the user's current screen reader output.</p>
 
 
@@ -823,8 +826,8 @@ does not interrupts the user's current screen reader output.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queries the coordinates and dimensions of this accessible</p>
-<p>This functionality can be overridden by <code>GtkAccessible</code>
-implementations, e.g. to get the bounds from an ignored
+<p>This functionality can be overridden by <code>GtkAccessible</code><br />
+implementations, e.g. to get the bounds from an ignored<br />
 child widget.</p>
 
 
@@ -930,8 +933,8 @@ child widget.</p>
   <div class="discussion">
     <p>Query a platform state, such as focus.</p>
 <p>See gtk_accessible_platform_changed().</p>
-<p>This functionality can be overridden by <code>GtkAccessible</code>
-implementations, e.g. to get platform state from an ignored
+<p>This functionality can be overridden by <code>GtkAccessible</code><br />
+implementations, e.g. to get platform state from an ignored<br />
 child widget, as is the case for <code>GtkText</code> wrappers.</p>
 
 
@@ -1192,12 +1195,12 @@ child widget, as is the case for <code>GtkText</code> wrappers.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the parent and sibling of an accessible object.</p>
-<p>This function is meant to be used by accessible implementations that are
-not part of the widget hierarchy, and but act as a logical bridge between
-widgets. For instance, if a widget creates an object that holds metadata
-for each child, and you want that object to implement the <code>GtkAccessible</code>
-interface, you will use this function to ensure that the parent of each
-child widget is the metadata object, and the parent of each metadata
+<p>This function is meant to be used by accessible implementations that are<br />
+not part of the widget hierarchy, and but act as a logical bridge between<br />
+widgets. For instance, if a widget creates an object that holds metadata<br />
+for each child, and you want that object to implement the <code>GtkAccessible</code><br />
+interface, you will use this function to ensure that the parent of each<br />
+child widget is the metadata object, and the parent of each metadata<br />
 object is the container widget.</p>
 
 
@@ -1268,7 +1271,7 @@ object is the container widget.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Updates the next accessible sibling of <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
-<p>That might be useful when a new child of a custom <code>GtkAccessible</code>
+<p>That might be useful when a new child of a custom <code>GtkAccessible</code><br />
 is created, and it needs to be linked to a previous child.</p>
 
 
@@ -1324,10 +1327,10 @@ is created, and it needs to be linked to a previous child.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Updates a list of accessible properties.</p>
-<p>See the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleProperty] documentation for the
+<p>See the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleProperty] documentation for the<br />
 value types of accessible properties.</p>
-<p>This function should be called by <code>GtkWidget</code> types whenever
-an accessible property change must be communicated to assistive
+<p>This function should be called by <code>GtkWidget</code> types whenever<br />
+an accessible property change must be communicated to assistive<br />
 technologies.</p>
 <p>Example:</p>
 <pre class="code c"><code class="c">value = gtk_adjustment_get_value (adjustment);
@@ -1404,7 +1407,7 @@ gtk_accessible_update_property (GTK_ACCESSIBLE (spin_button),
 </h3><div class="docstring">
   <div class="discussion">
     <p>Updates an array of accessible properties.</p>
-<p>This function should be called by <code>GtkWidget</code> types whenever an accessible
+<p>This function should be called by <code>GtkWidget</code> types whenever an accessible<br />
 property change must be communicated to assistive technologies.</p>
 <p>This function is meant to be used by language bindings.</p>
 
@@ -1491,9 +1494,9 @@ property change must be communicated to assistive technologies.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Updates a list of accessible relations.</p>
-<p>This function should be called by <code>GtkWidget</code> types whenever an accessible
+<p>This function should be called by <code>GtkWidget</code> types whenever an accessible<br />
 relation change must be communicated to assistive technologies.</p>
-<p>If the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleRelation] requires a list of references,
+<p>If the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleRelation] requires a list of references,<br />
 you should pass each reference individually, followed by nil, e.g.</p>
 <pre class="code c"><code class="c">gtk_accessible_update_relation (accessible,
                                 GTK_ACCESSIBLE_RELATION_CONTROLS,
@@ -1571,7 +1574,7 @@ you should pass each reference individually, followed by nil, e.g.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Updates an array of accessible relations.</p>
-<p>This function should be called by <code>GtkWidget</code> types whenever an accessible
+<p>This function should be called by <code>GtkWidget</code> types whenever an accessible<br />
 relation change must be communicated to assistive technologies.</p>
 <p>This function is meant to be used by language bindings.</p>
 
@@ -1657,9 +1660,9 @@ relation change must be communicated to assistive technologies.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Updates a list of accessible states. See the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleState]
+    <p>Updates a list of accessible states. See the [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleState]<br />
 documentation for the value types of accessible states.</p>
-<p>This function should be called by <code>GtkWidget</code> types whenever an accessible
+<p>This function should be called by <code>GtkWidget</code> types whenever an accessible<br />
 state change must be communicated to assistive technologies.</p>
 <p>Example:</p>
 <pre class="code c"><code class="c">value = GTK_ACCESSIBLE_TRISTATE_MIXED;
@@ -1736,7 +1739,7 @@ gtk_accessible_update_state (GTK_ACCESSIBLE (check_button),
 </h3><div class="docstring">
   <div class="discussion">
     <p>Updates an array of accessible states.</p>
-<p>This function should be called by <code>GtkWidget</code> types whenever an accessible
+<p>This function should be called by <code>GtkWidget</code> types whenever an accessible<br />
 state change must be communicated to assistive technologies.</p>
 <p>This function is meant to be used by language bindings.</p>
 
@@ -1818,7 +1821,7 @@ state change must be communicated to assistive technologies.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

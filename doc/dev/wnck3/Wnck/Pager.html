@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Wnck::Pager";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -371,6 +373,7 @@
 
       
     </ul>
+    
   
 
 
@@ -388,7 +391,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Wnck::Pager. The #WnckPager will show the #WnckWorkspace of the
+    <p>Creates a new Wnck::Pager. The #WnckPager will show the #WnckWorkspace of the<br />
 Wnck::Screen it is on.</p>
 
 
@@ -596,13 +599,13 @@ Wnck::Screen it is on.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to change the number of rows in the layout of Wnck::Workspace on the
-Wnck::Screen <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> is watching. Since no more than one application should
-set this property of a Wnck::Screen at a time, setting the layout is not
+    <p>Tries to change the number of rows in the layout of Wnck::Workspace on the<br />
+Wnck::Screen <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> is watching. Since no more than one application should<br />
+set this property of a Wnck::Screen at a time, setting the layout is not<br />
 guaranteed to work.</p>
-<p>If <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> has not been added to a widget hierarchy, the call will fail
-because <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> can't know the screen on which to modify the layout.
-Wnck::Screen <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> is watching.
+<p>If <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> has not been added to a widget hierarchy, the call will fail<br />
+because <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> can't know the screen on which to modify the layout.<br />
+Wnck::Screen <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> is watching.<br />
 changed or did not need to be changed, false otherwise.</p>
 
 
@@ -661,24 +664,24 @@ changed or did not need to be changed, false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to change the orientation of the layout of Wnck::Workspace on the
-Wnck::Screen <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> is watching. Since no more than one application should
-set this property of a Wnck::Screen at a time, setting the layout is not
+    <p>Tries to change the orientation of the layout of Wnck::Workspace on the<br />
+Wnck::Screen <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> is watching. Since no more than one application should<br />
+set this property of a Wnck::Screen at a time, setting the layout is not<br />
 guaranteed to work.</p>
-<p>If <!-- raw HTML omitted -->orientation<!-- raw HTML omitted --> is %GTK_ORIENTATION_HORIZONTAL, the Wnck::Workspace will be
+<p>If <!-- raw HTML omitted -->orientation<!-- raw HTML omitted --> is %GTK_ORIENTATION_HORIZONTAL, the Wnck::Workspace will be<br />
 laid out in rows, with the first Wnck::Workspace in the top left corner.</p>
-<p>If <!-- raw HTML omitted -->orientation<!-- raw HTML omitted --> is %GTK_ORIENTATION_VERTICAL, the Wnck::Workspace will be
+<p>If <!-- raw HTML omitted -->orientation<!-- raw HTML omitted --> is %GTK_ORIENTATION_VERTICAL, the Wnck::Workspace will be<br />
 laid out in columns, with the first Wnck::Workspace in the top left corner.</p>
-<p>For example, if the layout contains one row, but the orientation of the
+<p>For example, if the layout contains one row, but the orientation of the<br />
 layout is vertical, the Wnck::Pager will display a column of #WnckWorkspace.</p>
-<p>Note that setting the orientation will have an effect on the geometry
-management: if <!-- raw HTML omitted -->orientation<!-- raw HTML omitted --> is %GTK_ORIENTATION_HORIZONTAL,
-%GTK_SIZE_REQUEST_WIDTH_FOR_HEIGHT will be used as request mode; if
-<!-- raw HTML omitted -->orientation<!-- raw HTML omitted --> is %GTK_ORIENTATION_VERTICAL, GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH
+<p>Note that setting the orientation will have an effect on the geometry<br />
+management: if <!-- raw HTML omitted -->orientation<!-- raw HTML omitted --> is %GTK_ORIENTATION_HORIZONTAL,<br />
+%GTK_SIZE_REQUEST_WIDTH_FOR_HEIGHT will be used as request mode; if<br />
+<!-- raw HTML omitted -->orientation<!-- raw HTML omitted --> is %GTK_ORIENTATION_VERTICAL, GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH<br />
 will be used instead.</p>
-<p>If <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> has not been added to a widget hierarchy, the call will fail
-because <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> can't know the screen on which to modify the orientation.
-Wnck::Screen <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> is watching.
+<p>If <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> has not been added to a widget hierarchy, the call will fail<br />
+because <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> can't know the screen on which to modify the orientation.<br />
+Wnck::Screen <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> is watching.<br />
 changed or did not need to be changed, false otherwise.</p>
 
 
@@ -737,7 +740,7 @@ changed or did not need to be changed, false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> to react to input device scrolling in one of the
+    <p>Sets <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> to react to input device scrolling in one of the<br />
 available scroll modes.</p>
 
 
@@ -792,8 +795,8 @@ available scroll modes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the shadow type for <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> to <!-- raw HTML omitted -->shadow_type<!-- raw HTML omitted -->. The main use of this
-function is proper integration of Wnck::Pager in panels with non-system
+    <p>Sets the shadow type for <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> to <!-- raw HTML omitted -->shadow_type<!-- raw HTML omitted -->. The main use of this<br />
+function is proper integration of Wnck::Pager in panels with non-system<br />
 backgrounds.</p>
 
 
@@ -848,7 +851,7 @@ backgrounds.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> to display all Wnck::Workspace or not, according to
+    <p>Sets <!-- raw HTML omitted -->pager<!-- raw HTML omitted --> to display all Wnck::Workspace or not, according to<br />
 <!-- raw HTML omitted -->show_all_workspaces<!-- raw HTML omitted -->.</p>
 
 
@@ -942,8 +945,8 @@ backgrounds.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the wrapping behavior of the <!-- raw HTML omitted -->pager<!-- raw HTML omitted -->. Setting it to true will
-wrap arround to the start when scrolling over the end and vice
+    <p>Sets the wrapping behavior of the <!-- raw HTML omitted -->pager<!-- raw HTML omitted -->. Setting it to true will<br />
+wrap arround to the start when scrolling over the end and vice<br />
 versa. By default it is set to false.</p>
 
 
@@ -994,7 +997,7 @@ versa. By default it is set to false.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

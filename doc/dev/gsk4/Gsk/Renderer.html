@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gsk::Renderer";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -374,6 +376,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -391,8 +394,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates an appropriate <code>GskRenderer</code> instance for the given <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->.</p>
-<p>If the <code>GSK_RENDERER</code> environment variable is set, GSK will
-try that renderer first, before trying the backend-specific
+<p>If the <code>GSK_RENDERER</code> environment variable is set, GSK will<br />
+try that renderer first, before trying the backend-specific<br />
 default. The ultimate fallback is the cairo renderer.</p>
 <p>The renderer will be realized before it is returned.</p>
 
@@ -481,13 +484,13 @@ default. The ultimate fallback is the cairo renderer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates the resources needed by the <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> to render the scene
+    <p>Creates the resources needed by the <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> to render the scene<br />
 graph.</p>
-<p>Since GTK 4.6, the surface may be <code>NULL</code>, which allows using
-renderers without having to create a surface.
-Since GTK 4.14, it is recommended to use [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer.realize_for_display]
+<p>Since GTK 4.6, the surface may be <code>NULL</code>, which allows using<br />
+renderers without having to create a surface.<br />
+Since GTK 4.14, it is recommended to use [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer.realize_for_display]<br />
 instead.</p>
-<p>Note that it is mandatory to call [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer.unrealize] before
+<p>Note that it is mandatory to call [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer.unrealize] before<br />
 destroying the renderer.</p>
 
 
@@ -546,9 +549,9 @@ destroying the renderer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates the resources needed by the <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> to render the scene
+    <p>Creates the resources needed by the <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> to render the scene<br />
 graph.</p>
-<p>Note that it is mandatory to call [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer.unrealize] before
+<p>Note that it is mandatory to call [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer.unrealize] before<br />
 destroying the renderer.</p>
 
 
@@ -713,14 +716,14 @@ destroying the renderer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Renders the scene graph, described by a tree of <code>GskRenderNode</code> instances
+    <p>Renders the scene graph, described by a tree of <code>GskRenderNode</code> instances<br />
 to the renderer's surface,  ensuring that the given <!-- raw HTML omitted -->region<!-- raw HTML omitted --> gets redrawn.</p>
 <p>If the renderer has no associated surface, this function does nothing.</p>
-<p>Renderers must ensure that changes of the contents given by the <!-- raw HTML omitted -->root<!-- raw HTML omitted -->
-node as well as the area given by <!-- raw HTML omitted -->region<!-- raw HTML omitted --> are redrawn. They are however
-free to not redraw any pixel outside of <!-- raw HTML omitted -->region<!-- raw HTML omitted --> if they can guarantee that
+<p>Renderers must ensure that changes of the contents given by the <!-- raw HTML omitted -->root<!-- raw HTML omitted --><br />
+node as well as the area given by <!-- raw HTML omitted -->region<!-- raw HTML omitted --> are redrawn. They are however<br />
+free to not redraw any pixel outside of <!-- raw HTML omitted -->region<!-- raw HTML omitted --> if they can guarantee that<br />
 it didn't change.</p>
-<p>The <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> will acquire a reference on the <code>GskRenderNode</code> tree while
+<p>The <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> will acquire a reference on the <code>GskRenderNode</code> tree while<br />
 the rendering is in progress.</p>
 
 
@@ -755,7 +758,7 @@ the rendering is in progress.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>cairo_region_t</code> that must be redrawn or nil
+        <div class='inline'><p>the <code>cairo_region_t</code> that must be redrawn or nil<br />
 for the whole window</p>
 </div>
       
@@ -791,11 +794,11 @@ for the whole window</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Renders the scene graph, described by a tree of <code>GskRenderNode</code> instances,
+    <p>Renders the scene graph, described by a tree of <code>GskRenderNode</code> instances,<br />
 to a <code>GdkTexture</code>.</p>
-<p>The <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> will acquire a reference on the <code>GskRenderNode</code> tree while
+<p>The <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> will acquire a reference on the <code>GskRenderNode</code> tree while<br />
 the rendering is in progress.</p>
-<p>If you want to apply any transformations to <!-- raw HTML omitted -->root<!-- raw HTML omitted -->, you should put it into a
+<p>If you want to apply any transformations to <!-- raw HTML omitted -->root<!-- raw HTML omitted -->, you should put it into a<br />
 transform node and pass that node instead.</p>
 
 
@@ -1006,7 +1009,7 @@ transform node and pass that node instead.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

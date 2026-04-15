@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Transition";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,14 +97,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::TransitionClass structure contains
+    <p>The Clutter::TransitionClass structure contains<br />
 private data.</p>
 
 
@@ -385,9 +387,11 @@ private data.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -528,13 +532,13 @@ private data.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the initial value of the transition.</p>
-<p>This is a convenience function that will either create the
-Clutter::Interval used by <!-- raw HTML omitted -->transition<!-- raw HTML omitted -->, or will update it if
+<p>This is a convenience function that will either create the<br />
+Clutter::Interval used by <!-- raw HTML omitted -->transition<!-- raw HTML omitted -->, or will update it if<br />
 the Clutter::Transition:interval is already set.</p>
-<p>This function will copy the contents of <!-- raw HTML omitted -->value<!-- raw HTML omitted -->, so it is
+<p>This function will copy the contents of <!-- raw HTML omitted -->value<!-- raw HTML omitted -->, so it is<br />
 safe to call g_value_unset() after it returns.</p>
-<p>If <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> already has a Clutter::Transition:interval set,
-then <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must hold the same type, or a transformable type,
+<p>If <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> already has a Clutter::Transition:interval set,<br />
+then <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must hold the same type, or a transformable type,<br />
 as the interval's Clutter::Interval:value-type property.</p>
 <p>This function is meant to be used by language bindings.</p>
 
@@ -590,7 +594,7 @@ as the interval's Clutter::Interval:value-type property.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::Interval used to describe the initial and final states
+    <p>The Clutter::Interval used to describe the initial and final states<br />
 of the transition.</p>
 
 
@@ -630,7 +634,7 @@ of the transition.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::Interval used to describe the initial and final states
+    <p>The Clutter::Interval used to describe the initial and final states<br />
 of the transition.</p>
 
 
@@ -716,7 +720,7 @@ of the transition.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> should be detached when complete,
+        <div class='inline'><p>true if the <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> should be detached when complete,<br />
 and false otherwise</p>
 </div>
       
@@ -738,12 +742,12 @@ and false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::Transition should be automatically detached
-from the Clutter::Transition:animatable instance whenever the
+    <p>Whether the Clutter::Transition should be automatically detached<br />
+from the Clutter::Transition:animatable instance whenever the<br />
 Clutter::Timeline::stopped signal is emitted.</p>
-<p>The Clutter::Transition:remove-on-complete property takes into
-account the value of the Clutter::Timeline:repeat-count property,
-and it only detaches the transition if the transition is not
+<p>The Clutter::Transition:remove-on-complete property takes into<br />
+account the value of the Clutter::Timeline:repeat-count property,<br />
+and it only detaches the transition if the transition is not<br />
 repeating.</p>
 
 
@@ -811,12 +815,12 @@ repeating.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::Transition should be automatically detached
-from the Clutter::Transition:animatable instance whenever the
+    <p>Whether the Clutter::Transition should be automatically detached<br />
+from the Clutter::Transition:animatable instance whenever the<br />
 Clutter::Timeline::stopped signal is emitted.</p>
-<p>The Clutter::Transition:remove-on-complete property takes into
-account the value of the Clutter::Timeline:repeat-count property,
-and it only detaches the transition if the transition is not
+<p>The Clutter::Transition:remove-on-complete property takes into<br />
+account the value of the Clutter::Timeline:repeat-count property,<br />
+and it only detaches the transition if the transition is not<br />
 repeating.</p>
 
 
@@ -857,13 +861,13 @@ repeating.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the initial value of the transition.</p>
-<p>This is a convenience function that will either create the
-Clutter::Interval used by <!-- raw HTML omitted -->transition<!-- raw HTML omitted -->, or will update it if
+<p>This is a convenience function that will either create the<br />
+Clutter::Interval used by <!-- raw HTML omitted -->transition<!-- raw HTML omitted -->, or will update it if<br />
 the Clutter::Transition:interval is already set.</p>
-<p>If <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> already has a Clutter::Transition:interval set,
-then <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must hold the same type, or a transformable type,
+<p>If <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> already has a Clutter::Transition:interval set,<br />
+then <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must hold the same type, or a transformable type,<br />
 as the interval's Clutter::Interval:value-type property.</p>
-<p>This is a convenience function for the C API; language bindings
+<p>This is a convenience function for the C API; language bindings<br />
 should use clutter_transition_set_from_value() instead.</p>
 
 
@@ -934,13 +938,13 @@ should use clutter_transition_set_from_value() instead.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the final value of the transition.</p>
-<p>This is a convenience function that will either create the
-Clutter::Interval used by <!-- raw HTML omitted -->transition<!-- raw HTML omitted -->, or will update it if
+<p>This is a convenience function that will either create the<br />
+Clutter::Interval used by <!-- raw HTML omitted -->transition<!-- raw HTML omitted -->, or will update it if<br />
 the Clutter::Transition:interval is already set.</p>
-<p>If <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> already has a Clutter::Transition:interval set,
-then <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must hold the same type, or a transformable type,
+<p>If <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> already has a Clutter::Transition:interval set,<br />
+then <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must hold the same type, or a transformable type,<br />
 as the interval's Clutter::Interval:value-type property.</p>
-<p>This is a convenience function for the C API; language bindings
+<p>This is a convenience function for the C API; language bindings<br />
 should use clutter_transition_set_to_value() instead.</p>
 
 
@@ -1011,13 +1015,13 @@ should use clutter_transition_set_to_value() instead.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the final value of the transition.</p>
-<p>This is a convenience function that will either create the
-Clutter::Interval used by <!-- raw HTML omitted -->transition<!-- raw HTML omitted -->, or will update it if
+<p>This is a convenience function that will either create the<br />
+Clutter::Interval used by <!-- raw HTML omitted -->transition<!-- raw HTML omitted -->, or will update it if<br />
 the Clutter::Transition:interval is already set.</p>
-<p>This function will copy the contents of <!-- raw HTML omitted -->value<!-- raw HTML omitted -->, so it is
+<p>This function will copy the contents of <!-- raw HTML omitted -->value<!-- raw HTML omitted -->, so it is<br />
 safe to call g_value_unset() after it returns.</p>
-<p>If <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> already has a Clutter::Transition:interval set,
-then <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must hold the same type, or a transformable type,
+<p>If <!-- raw HTML omitted -->transition<!-- raw HTML omitted --> already has a Clutter::Transition:interval set,<br />
+then <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must hold the same type, or a transformable type,<br />
 as the interval's Clutter::Interval:value-type property.</p>
 <p>This function is meant to be used by language bindings.</p>
 
@@ -1069,7 +1073,7 @@ as the interval's Clutter::Interval:value-type property.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

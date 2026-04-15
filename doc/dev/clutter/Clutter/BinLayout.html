@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::BinLayout";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,14 +99,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::BinLayoutClass structure contains only private
+    <p>The Clutter::BinLayoutClass structure contains only private<br />
 data and should be accessed using the provided API</p>
 
 
@@ -316,9 +318,11 @@ data and should be accessed using the provided API</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -363,7 +367,7 @@ data and should be accessed using the provided API</p>
       
       
         &mdash;
-        <div class='inline'><p>the default alignment policy to be used on the
+        <div class='inline'><p>the default alignment policy to be used on the<br />
 horizontal axis</p>
 </div>
       
@@ -379,7 +383,7 @@ horizontal axis</p>
       
       
         &mdash;
-        <div class='inline'><p>the default alignment policy to be used on the
+        <div class='inline'><p>the default alignment policy to be used on the<br />
 vertical axis</p>
 </div>
       
@@ -409,11 +413,11 @@ vertical axis</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a Clutter::Actor to the container using <!-- raw HTML omitted -->self<!-- raw HTML omitted --> and
+    <p>Adds a Clutter::Actor to the container using <!-- raw HTML omitted -->self<!-- raw HTML omitted --> and<br />
 sets the alignment policies for it</p>
-<p>This function is equivalent to clutter_container_add_actor()
-and clutter_layout_manager_child_set_property() but it does not
-require a pointer to the Clutter::Container associated to the
+<p>This function is equivalent to clutter_container_add_actor()<br />
+and clutter_layout_manager_child_set_property() but it does not<br />
+require a pointer to the Clutter::Container associated to the<br />
 Clutter::BinLayout</p>
 
 
@@ -498,9 +502,9 @@ Clutter::BinLayout</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the horizontal and vertical alignment policies for
+    <p>Retrieves the horizontal and vertical alignment policies for<br />
 a child of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
-<p>If <!-- raw HTML omitted -->child<!-- raw HTML omitted --> is nil the default alignment policies will be returned
+<p>If <!-- raw HTML omitted -->child<!-- raw HTML omitted --> is nil the default alignment policies will be returned<br />
 instead</p>
 
 
@@ -535,7 +539,7 @@ instead</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the horizontal
+        <div class='inline'><p>return location for the horizontal<br />
 alignment policy</p>
 </div>
       
@@ -551,7 +555,7 @@ alignment policy</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the vertical
+        <div class='inline'><p>return location for the vertical<br />
 alignment policy</p>
 </div>
       
@@ -587,9 +591,9 @@ alignment policy</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the horizontal and vertical alignment policies to be applied
+    <p>Sets the horizontal and vertical alignment policies to be applied<br />
 to a <!-- raw HTML omitted -->child<!-- raw HTML omitted --> of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
-<p>If <!-- raw HTML omitted -->child<!-- raw HTML omitted --> is nil then the <!-- raw HTML omitted -->x_align<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y_align<!-- raw HTML omitted --> values will
+<p>If <!-- raw HTML omitted -->child<!-- raw HTML omitted --> is nil then the <!-- raw HTML omitted -->x_align<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y_align<!-- raw HTML omitted --> values will<br />
 be set as the default alignment policies</p>
 
 
@@ -624,7 +628,7 @@ be set as the default alignment policies</p>
       
       
         &mdash;
-        <div class='inline'><p>the horizontal alignment policy to be used for the <!-- raw HTML omitted -->child<!-- raw HTML omitted -->
+        <div class='inline'><p>the horizontal alignment policy to be used for the <!-- raw HTML omitted -->child<!-- raw HTML omitted --><br />
 inside <!-- raw HTML omitted -->container<!-- raw HTML omitted --></p>
 </div>
       
@@ -640,7 +644,7 @@ inside <!-- raw HTML omitted -->container<!-- raw HTML omitted --></p>
       
       
         &mdash;
-        <div class='inline'><p>the vertical aligment policy to be used on the <!-- raw HTML omitted -->child<!-- raw HTML omitted -->
+        <div class='inline'><p>the vertical aligment policy to be used on the <!-- raw HTML omitted -->child<!-- raw HTML omitted --><br />
 inside <!-- raw HTML omitted -->container<!-- raw HTML omitted --></p>
 </div>
       
@@ -676,7 +680,7 @@ inside <!-- raw HTML omitted -->container<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The default horizontal alignment policy for actors managed
+    <p>The default horizontal alignment policy for actors managed<br />
 by the Clutter::BinLayout</p>
 
 
@@ -716,7 +720,7 @@ by the Clutter::BinLayout</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The default horizontal alignment policy for actors managed
+    <p>The default horizontal alignment policy for actors managed<br />
 by the Clutter::BinLayout</p>
 
 
@@ -784,7 +788,7 @@ by the Clutter::BinLayout</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The default vertical alignment policy for actors managed
+    <p>The default vertical alignment policy for actors managed<br />
 by the Clutter::BinLayout</p>
 
 
@@ -824,7 +828,7 @@ by the Clutter::BinLayout</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The default vertical alignment policy for actors managed
+    <p>The default vertical alignment policy for actors managed<br />
 by the Clutter::BinLayout</p>
 
 
@@ -888,7 +892,7 @@ by the Clutter::BinLayout</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::EventType";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -110,7 +112,7 @@
         <dt id="FLUSH_START-constant" class="">FLUSH_START =
           <div class="docstring">
   <div class="discussion">
-    <p>Start a flush operation. This event clears all data
+    <p>Start a flush operation. This event clears all data<br />
 from the pipeline and unblock all streaming threads.</p>
 
 
@@ -126,7 +128,7 @@ from the pipeline and unblock all streaming threads.</p>
         <dt id="FLUSH_STOP-constant" class="">FLUSH_STOP =
           <div class="docstring">
   <div class="discussion">
-    <p>Stop a flush operation. This event resets the
+    <p>Stop a flush operation. This event resets the<br />
 running-time of the pipeline.</p>
 
 
@@ -142,8 +144,8 @@ running-time of the pipeline.</p>
         <dt id="STREAM_START-constant" class="">STREAM_START =
           <div class="docstring">
   <div class="discussion">
-    <p>Event to mark the start of a new stream. Sent before any
-other serialized event and only sent at the start of a new stream,
+    <p>Event to mark the start of a new stream. Sent before any<br />
+other serialized event and only sent at the start of a new stream,<br />
 not after flushing seeks.</p>
 
 
@@ -174,9 +176,9 @@ not after flushing seeks.</p>
         <dt id="SEGMENT-constant" class="">SEGMENT =
           <div class="docstring">
   <div class="discussion">
-    <p>A new media segment follows in the dataflow. The
-segment events contains information for clipping buffers and
-converting buffer timestamps to running-time and
+    <p>A new media segment follows in the dataflow. The<br />
+segment events contains information for clipping buffers and<br />
+converting buffer timestamps to running-time and<br />
 stream-time.</p>
 
 
@@ -222,7 +224,7 @@ stream-time.</p>
         <dt id="BUFFERSIZE-constant" class="">BUFFERSIZE =
           <div class="docstring">
   <div class="discussion">
-    <p>Notification of buffering requirements. Currently not
+    <p>Notification of buffering requirements. Currently not<br />
 used yet.</p>
 
 
@@ -238,8 +240,8 @@ used yet.</p>
         <dt id="SINK_MESSAGE-constant" class="">SINK_MESSAGE =
           <div class="docstring">
   <div class="discussion">
-    <p>An event that sinks turn into a message. Used to
-send messages that should be emitted in sync with
+    <p>An event that sinks turn into a message. Used to<br />
+send messages that should be emitted in sync with<br />
 rendering.</p>
 
 
@@ -255,8 +257,8 @@ rendering.</p>
         <dt id="STREAM_GROUP_DONE-constant" class="">STREAM_GROUP_DONE =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that there is no more data for
-the stream group ID in the message. Sent before EOS
+    <p>Indicates that there is no more data for<br />
+the stream group ID in the message. Sent before EOS<br />
 in some instances and should be handled mostly the same. (Since: 1.10)</p>
 
 
@@ -272,8 +274,8 @@ in some instances and should be handled mostly the same. (Since: 1.10)</p>
         <dt id="EOS-constant" class="">EOS =
           <div class="docstring">
   <div class="discussion">
-    <p>End-Of-Stream. No more data is to be expected to follow
-without either a STREAM_START event, or a FLUSH_STOP and a SEGMENT
+    <p>End-Of-Stream. No more data is to be expected to follow<br />
+without either a STREAM_START event, or a FLUSH_STOP and a SEGMENT<br />
 event.</p>
 
 
@@ -289,7 +291,7 @@ event.</p>
         <dt id="TOC-constant" class="">TOC =
           <div class="docstring">
   <div class="discussion">
-    <p>An event which indicates that a new table of contents (TOC)
+    <p>An event which indicates that a new table of contents (TOC)<br />
 was found or updated.</p>
 
 
@@ -305,7 +307,7 @@ was found or updated.</p>
         <dt id="PROTECTION-constant" class="">PROTECTION =
           <div class="docstring">
   <div class="discussion">
-    <p>An event which indicates that new or updated
+    <p>An event which indicates that new or updated<br />
 encryption information has been found in the stream.</p>
 
 
@@ -351,7 +353,7 @@ encryption information has been found in the stream.</p>
         <dt id="INSTANT_RATE_CHANGE-constant" class="">INSTANT_RATE_CHANGE =
           <div class="docstring">
   <div class="discussion">
-    <p>Notify downstream that a playback rate override
+    <p>Notify downstream that a playback rate override<br />
 should be applied as soon as possible. (Since: 1.18)</p>
 
 
@@ -367,8 +369,8 @@ should be applied as soon as possible. (Since: 1.18)</p>
         <dt id="QOS-constant" class="">QOS =
           <div class="docstring">
   <div class="discussion">
-    <p>A quality message. Used to indicate to upstream elements
-that the downstream elements should adjust their processing
+    <p>A quality message. Used to indicate to upstream elements<br />
+that the downstream elements should adjust their processing<br />
 rate.</p>
 
 
@@ -399,8 +401,8 @@ rate.</p>
         <dt id="NAVIGATION-constant" class="">NAVIGATION =
           <div class="docstring">
   <div class="discussion">
-    <p>Navigation events are usually used for communicating
-user requests, such as mouse or keyboard movements,
+    <p>Navigation events are usually used for communicating<br />
+user requests, such as mouse or keyboard movements,<br />
 to upstream elements.</p>
 
 
@@ -416,7 +418,7 @@ to upstream elements.</p>
         <dt id="LATENCY-constant" class="">LATENCY =
           <div class="docstring">
   <div class="discussion">
-    <p>Notification of new latency adjustment. Sinks will use
+    <p>Notification of new latency adjustment. Sinks will use<br />
 the latency information to adjust their synchronisation.</p>
 
 
@@ -432,7 +434,7 @@ the latency information to adjust their synchronisation.</p>
         <dt id="STEP-constant" class="">STEP =
           <div class="docstring">
   <div class="discussion">
-    <p>A request for stepping through the media. Sinks will usually
+    <p>A request for stepping through the media. Sinks will usually<br />
 execute the step operation.</p>
 
 
@@ -463,7 +465,7 @@ execute the step operation.</p>
         <dt id="TOC_SELECT-constant" class="">TOC_SELECT =
           <div class="docstring">
   <div class="discussion">
-    <p>A request for a new playback position based on TOC
+    <p>A request for a new playback position based on TOC<br />
 entry's UID.</p>
 
 
@@ -494,8 +496,8 @@ entry's UID.</p>
         <dt id="INSTANT_RATE_SYNC_TIME-constant" class="">INSTANT_RATE_SYNC_TIME =
           <div class="docstring">
   <div class="discussion">
-    <p>Sent by the pipeline to notify elements that handle the
-instant-rate-change event about the running-time when
+    <p>Sent by the pipeline to notify elements that handle the<br />
+instant-rate-change event about the running-time when<br />
 the rate multiplier should be applied (or was applied). (Since: 1.18)</p>
 
 
@@ -526,7 +528,7 @@ the rate multiplier should be applied (or was applied). (Since: 1.18)</p>
         <dt id="CUSTOM_DOWNSTREAM-constant" class="">CUSTOM_DOWNSTREAM =
           <div class="docstring">
   <div class="discussion">
-    <p>Downstream custom event that travels in the
+    <p>Downstream custom event that travels in the<br />
 data flow.</p>
 
 
@@ -572,7 +574,7 @@ data flow.</p>
         <dt id="CUSTOM_BOTH-constant" class="">CUSTOM_BOTH =
           <div class="docstring">
   <div class="discussion">
-    <p>Custom upstream or downstream event.
+    <p>Custom upstream or downstream event.<br />
 In-band when travelling downstream.</p>
 
 
@@ -616,7 +618,7 @@ In-band when travelling downstream.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

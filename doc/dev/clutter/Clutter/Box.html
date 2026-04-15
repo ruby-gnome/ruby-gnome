@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Box";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -430,9 +432,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -458,7 +462,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Clutter::Box. The children of the box will be layed
+    <p>Creates a new Clutter::Box. The children of the box will be layed<br />
 out by the passed <!-- raw HTML omitted -->manager<!-- raw HTML omitted --></p>
 
 
@@ -507,10 +511,10 @@ out by the passed <!-- raw HTML omitted -->manager<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The color to be used to paint the background of the
-Clutter::Box. Setting this property will set the
+    <p>The color to be used to paint the background of the<br />
+Clutter::Box. Setting this property will set the<br />
 Clutter::Box:color-set property as a side effect</p>
-<p>This property sets the Clutter::Actor:background-color property
+<p>This property sets the Clutter::Actor:background-color property<br />
 internally.</p>
 
 
@@ -550,10 +554,10 @@ internally.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The color to be used to paint the background of the
-Clutter::Box. Setting this property will set the
+    <p>The color to be used to paint the background of the<br />
+Clutter::Box. Setting this property will set the<br />
 Clutter::Box:color-set property as a side effect</p>
-<p>This property sets the Clutter::Actor:background-color property
+<p>This property sets the Clutter::Actor:background-color property<br />
 internally.</p>
 
 
@@ -622,7 +626,7 @@ internally.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the Clutter::Box:color property has been set.</p>
-<p>This property reads the Clutter::Actor:background-color-set property
+<p>This property reads the Clutter::Actor:background-color-set property<br />
 internally.</p>
 
 
@@ -691,7 +695,7 @@ internally.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the Clutter::Box:color property has been set.</p>
-<p>This property reads the Clutter::Actor:background-color-set property
+<p>This property reads the Clutter::Actor:background-color-set property<br />
 internally.</p>
 
 
@@ -732,7 +736,7 @@ internally.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the background color of <!-- raw HTML omitted -->box<!-- raw HTML omitted --></p>
-<p>If the Clutter::Box:color-set property is set to false the
+<p>If the Clutter::Box:color-set property is set to false the<br />
 returned Clutter::Color is undefined</p>
 
 
@@ -805,8 +809,8 @@ returned Clutter::Color is undefined</p>
       
       
         &mdash;
-        <div class='inline'><p>a Clutter::LayoutManager. The returned
-Clutter::LayoutManager is owned by the #ClutterBox and it should not
+        <div class='inline'><p>a Clutter::LayoutManager. The returned<br />
+Clutter::LayoutManager is owned by the #ClutterBox and it should not<br />
 be unreferenced</p>
 </div>
       
@@ -829,7 +833,7 @@ be unreferenced</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the Clutter::LayoutManager for <!-- raw HTML omitted -->box<!-- raw HTML omitted --></p>
-<p>A Clutter::LayoutManager is a delegate object that controls the
+<p>A Clutter::LayoutManager is a delegate object that controls the<br />
 layout of the children of <!-- raw HTML omitted -->box<!-- raw HTML omitted --></p>
 
 
@@ -884,11 +888,11 @@ layout of the children of <!-- raw HTML omitted -->box<!-- raw HTML omitted --><
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> to <!-- raw HTML omitted -->box<!-- raw HTML omitted --> and sets layout properties at the same time,
+    <p>Adds <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> to <!-- raw HTML omitted -->box<!-- raw HTML omitted --> and sets layout properties at the same time,<br />
 if the Clutter::LayoutManager used by <!-- raw HTML omitted -->box<!-- raw HTML omitted --> has them</p>
-<p>This function is a wrapper around clutter_container_add_actor()
+<p>This function is a wrapper around clutter_container_add_actor()<br />
 and clutter_layout_manager_child_set()</p>
-<p>Language bindings should use the vector-based clutter_box_packv()
+<p>Language bindings should use the vector-based clutter_box_packv()<br />
 variant instead</p>
 
 
@@ -973,12 +977,12 @@ variant instead</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> to <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, placing it after <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->, and sets layout
-properties at the same time, if the Clutter::LayoutManager used by
+    <p>Adds <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> to <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, placing it after <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->, and sets layout<br />
+properties at the same time, if the Clutter::LayoutManager used by<br />
 <!-- raw HTML omitted -->box<!-- raw HTML omitted --> supports them</p>
-<p>If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil then <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> is placed at the end of the
+<p>If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil then <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> is placed at the end of the<br />
 list of children, to be allocated and painted after every other child</p>
-<p>This function is a wrapper around clutter_container_add_actor(),
+<p>This function is a wrapper around clutter_container_add_actor(),<br />
 clutter_container_raise_child() and clutter_layout_manager_child_set()</p>
 
 
@@ -1078,11 +1082,11 @@ clutter_container_raise_child() and clutter_layout_manager_child_set()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> to <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, placing it at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->, and sets layout
-properties at the same time, if the Clutter::LayoutManager used by
+    <p>Adds <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> to <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, placing it at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->, and sets layout<br />
+properties at the same time, if the Clutter::LayoutManager used by<br />
 <!-- raw HTML omitted -->box<!-- raw HTML omitted --> supports them</p>
-<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is a negative number, or is larger than the number of
-children of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, the new child is added at the end of the list of
+<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is a negative number, or is larger than the number of<br />
+children of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, the new child is added at the end of the list of<br />
 children</p>
 
 
@@ -1182,12 +1186,12 @@ children</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> to <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, placing it before <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->, and sets layout
-properties at the same time, if the Clutter::LayoutManager used by
+    <p>Adds <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> to <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, placing it before <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->, and sets layout<br />
+properties at the same time, if the Clutter::LayoutManager used by<br />
 <!-- raw HTML omitted -->box<!-- raw HTML omitted --> supports them</p>
-<p>If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil then <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> is placed at the beginning of the
+<p>If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil then <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> is placed at the beginning of the<br />
 list of children, to be allocated and painted below every other child</p>
-<p>This function is a wrapper around clutter_container_add_actor(),
+<p>This function is a wrapper around clutter_container_add_actor(),<br />
 clutter_container_lower_child() and clutter_layout_manager_child_set()</p>
 
 
@@ -1287,7 +1291,7 @@ clutter_container_lower_child() and clutter_layout_manager_child_set()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Vector-based variant of clutter_box_pack(), intended for language
+    <p>Vector-based variant of clutter_box_pack(), intended for language<br />
 bindings to use</p>
 
 
@@ -1337,7 +1341,7 @@ bindings to use</p>
       
       
         &mdash;
-        <div class='inline'><p>a vector
+        <div class='inline'><p>a vector<br />
 containing the property names to set</p>
 </div>
       
@@ -1353,7 +1357,7 @@ containing the property names to set</p>
       
       
         &mdash;
-        <div class='inline'><p>a vector containing the property
+        <div class='inline'><p>a vector containing the property<br />
 values to set</p>
 </div>
       
@@ -1385,7 +1389,7 @@ values to set</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

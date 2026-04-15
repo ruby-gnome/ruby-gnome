@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::State";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,14 +95,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::StateClass structure contains
+    <p>The Clutter::StateClass structure contains<br />
 only private data</p>
 
 
@@ -496,6 +498,7 @@ only private data</p>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -541,7 +544,7 @@ only private data</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Default duration used if an duration has not been specified for a specific
+    <p>Default duration used if an duration has not been specified for a specific<br />
 source/target state pair. The values is in milliseconds.</p>
 
 
@@ -581,7 +584,7 @@ source/target state pair. The values is in milliseconds.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Default duration used if an duration has not been specified for a specific
+    <p>Default duration used if an duration has not been specified for a specific<br />
 source/target state pair. The values is in milliseconds.</p>
 
 
@@ -649,7 +652,7 @@ source/target state pair. The values is in milliseconds.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the Clutter::Animator that is being used for transitioning
+    <p>Retrieves the Clutter::Animator that is being used for transitioning<br />
 between the two states, if any has been set</p>
 
 
@@ -723,9 +726,9 @@ between the two states, if any has been set</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries the duration used for transitions between a source and
+    <p>Queries the duration used for transitions between a source and<br />
 target state pair</p>
-<p>The semantics for the query are the same as the semantics used for
+<p>The semantics for the query are the same as the semantics used for<br />
 setting the duration with clutter_state_set_duration()</p>
 
 
@@ -745,7 +748,7 @@ setting the duration with clutter_state_set_duration()</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of the source state to
+        <div class='inline'><p>the name of the source state to<br />
 get the duration of, or nil</p>
 </div>
       
@@ -761,7 +764,7 @@ get the duration of, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of the source state to
+        <div class='inline'><p>the name of the source state to<br />
 get the duration of, or nil</p>
 </div>
       
@@ -801,7 +804,7 @@ get the duration of, or nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a list of pointers to opaque structures with accessor functions
+    <p>Returns a list of pointers to opaque structures with accessor functions<br />
 that describe the keys added to an animator.</p>
 
 
@@ -821,7 +824,7 @@ that describe the keys added to an animator.</p>
       
       
         &mdash;
-        <div class='inline'><p>the source transition name to query,
+        <div class='inline'><p>the source transition name to query,<br />
 or nil for all source states</p>
 </div>
       
@@ -837,7 +840,7 @@ or nil for all source states</p>
       
       
         &mdash;
-        <div class='inline'><p>the target transition name to query,
+        <div class='inline'><p>the target transition name to query,<br />
 or nil for all target states</p>
 </div>
       
@@ -853,7 +856,7 @@ or nil for all target states</p>
       
       
         &mdash;
-        <div class='inline'><p>the specific object instance to list keys for,
+        <div class='inline'><p>the specific object instance to list keys for,<br />
 or nil for all managed objects</p>
 </div>
       
@@ -869,7 +872,7 @@ or nil for all managed objects</p>
       
       
         &mdash;
-        <div class='inline'><p>the property name to search for, or nil
+        <div class='inline'><p>the property name to search for, or nil<br />
 for all properties.</p>
 </div>
       
@@ -888,10 +891,10 @@ for all properties.</p>
       
       
         &mdash;
-        <div class='inline'><p>a
-newly allocated #GList of Clutter::StateKey<!-- raw HTML omitted -->s. The contents of
-the returned list are owned by the Clutter::State and should not be
-modified or freed. Use g_list_free() to free the resources allocated
+        <div class='inline'><p>a<br />
+newly allocated #GList of Clutter::StateKey<!-- raw HTML omitted -->s. The contents of<br />
+the returned list are owned by the Clutter::State and should not be<br />
+modified or freed. Use g_list_free() to free the resources allocated<br />
 by the returned list when done using it</p>
 </div>
       
@@ -932,7 +935,7 @@ by the returned list when done using it</p>
       
       
         &mdash;
-        <div class='inline'><p>the source state name to query,
+        <div class='inline'><p>the source state name to query,<br />
 or nil for all source states</p>
 </div>
       
@@ -948,7 +951,7 @@ or nil for all source states</p>
       
       
         &mdash;
-        <div class='inline'><p>the target state name to query,
+        <div class='inline'><p>the target state name to query,<br />
 or nil for all target states</p>
 </div>
       
@@ -964,7 +967,7 @@ or nil for all target states</p>
       
       
         &mdash;
-        <div class='inline'><p>the specific object instance to list keys for,
+        <div class='inline'><p>the specific object instance to list keys for,<br />
 or nil for all managed objects</p>
 </div>
       
@@ -980,7 +983,7 @@ or nil for all managed objects</p>
       
       
         &mdash;
-        <div class='inline'><p>the property name to search for,
+        <div class='inline'><p>the property name to search for,<br />
 or nil for all properties.</p>
 </div>
       
@@ -1016,44 +1019,44 @@ or nil for all properties.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds multiple keys to a named state of a Clutter::State instance, specifying
-the easing mode and value a given property of an object should have at a
+    <p>Adds multiple keys to a named state of a Clutter::State instance, specifying<br />
+the easing mode and value a given property of an object should have at a<br />
 given progress of the animation.</p>
-<p>The mode specified is the easing mode used when going to from the previous
+<p>The mode specified is the easing mode used when going to from the previous<br />
 key to the specified key.</p>
 <p>For instance, the code below:</p>
-<p>|[
-clutter_state_set (state, NULL, &quot;hover&quot;,
-button, &quot;opacity&quot;, CLUTTER_LINEAR, 255,
-button, &quot;scale-x&quot;, CLUTTER_EASE_OUT_CUBIC, 1.2,
-button, &quot;scale-y&quot;, CLUTTER_EASE_OUT_CUBIC, 1.2,
-NULL);
+<p>|[<br />
+clutter_state_set (state, NULL, &quot;hover&quot;,<br />
+button, &quot;opacity&quot;, CLUTTER_LINEAR, 255,<br />
+button, &quot;scale-x&quot;, CLUTTER_EASE_OUT_CUBIC, 1.2,<br />
+button, &quot;scale-y&quot;, CLUTTER_EASE_OUT_CUBIC, 1.2,<br />
+NULL);<br />
 ]|</p>
-<p>will create a transition from any state (a <!-- raw HTML omitted -->source_state_name<!-- raw HTML omitted --> or NULL is
-treated as a wildcard) and a state named &quot;hover&quot;; the
-button object will have the Clutter::Actor:opacity
-property animated to a value of 255 using %CLUTTER_LINEAR as the animation
-mode, and the Clutter::Actor:scale-x and #ClutterActor:scale-y properties
-animated to a value of 1.2 using %CLUTTER_EASE_OUT_CUBIC as the animation
-mode. To change the state (and start the transition) you can use the
+<p>will create a transition from any state (a <!-- raw HTML omitted -->source_state_name<!-- raw HTML omitted --> or NULL is<br />
+treated as a wildcard) and a state named &quot;hover&quot;; the<br />
+button object will have the Clutter::Actor:opacity<br />
+property animated to a value of 255 using %CLUTTER_LINEAR as the animation<br />
+mode, and the Clutter::Actor:scale-x and #ClutterActor:scale-y properties<br />
+animated to a value of 1.2 using %CLUTTER_EASE_OUT_CUBIC as the animation<br />
+mode. To change the state (and start the transition) you can use the<br />
 clutter_state_set_state() function:</p>
-<p>|[
-clutter_state_set_state (state, &quot;hover&quot;);
+<p>|[<br />
+clutter_state_set_state (state, &quot;hover&quot;);<br />
 ]|</p>
-<p>If a given object, state_name, property tuple already exist in the
-Clutter::State instance, then the mode and value will be replaced with
+<p>If a given object, state_name, property tuple already exist in the<br />
+Clutter::State instance, then the mode and value will be replaced with<br />
 the new specified values.</p>
-<p>If a property name is prefixed with &quot;delayed::&quot; two additional
-arguments per key are expected: a value relative to the full state time
-to pause before transitioning and a similar value to pause after
+<p>If a property name is prefixed with &quot;delayed::&quot; two additional<br />
+arguments per key are expected: a value relative to the full state time<br />
+to pause before transitioning and a similar value to pause after<br />
 transitioning, e.g.:</p>
-<p>|[
-clutter_state_set (state, &quot;hover&quot;, &quot;toggled&quot;,
-button, &quot;delayed::scale-x&quot;, CLUTTER_LINEAR, 1.0, 0.2, 0.2,
-button, &quot;delayed::scale-y&quot;, CLUTTER_LINEAR, 1.0, 0.2, 0.2,
-NULL);
+<p>|[<br />
+clutter_state_set (state, &quot;hover&quot;, &quot;toggled&quot;,<br />
+button, &quot;delayed::scale-x&quot;, CLUTTER_LINEAR, 1.0, 0.2, 0.2,<br />
+button, &quot;delayed::scale-y&quot;, CLUTTER_LINEAR, 1.0, 0.2, 0.2,<br />
+NULL);<br />
 ]|</p>
-<p>will pause for 20% of the duration of the transition before animating,
+<p>will pause for 20% of the duration of the transition before animating,<br />
 and 20% of the duration after animating.</p>
 
 
@@ -1148,8 +1151,8 @@ and 20% of the duration after animating.</p>
       
       
         &mdash;
-        <div class='inline'><p>the value <!-- raw HTML omitted -->first_property_name<!-- raw HTML omitted --> should have in <!-- raw HTML omitted -->target_state_name<!-- raw HTML omitted -->,
-followed by object, property name, mode, value tuples, terminated
+        <div class='inline'><p>the value <!-- raw HTML omitted -->first_property_name<!-- raw HTML omitted --> should have in <!-- raw HTML omitted -->target_state_name<!-- raw HTML omitted -->,<br />
+followed by object, property name, mode, value tuples, terminated<br />
 by nil</p>
 </div>
       
@@ -1185,10 +1188,10 @@ by nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Specifies a Clutter::Animator to be used when transitioning between
+    <p>Specifies a Clutter::Animator to be used when transitioning between<br />
 the two named states.</p>
-<p>The <!-- raw HTML omitted -->animator<!-- raw HTML omitted --> allows specifying a transition between the state that is
-more elaborate than the basic transitions allowed by the tweening of
+<p>The <!-- raw HTML omitted -->animator<!-- raw HTML omitted --> allows specifying a transition between the state that is<br />
+more elaborate than the basic transitions allowed by the tweening of<br />
 properties defined in the Clutter::State keys.</p>
 <p>If <!-- raw HTML omitted -->animator<!-- raw HTML omitted --> is nil it will unset an existing animator.</p>
 <p>Clutter::State will take a reference on the passed <!-- raw HTML omitted -->animator<!-- raw HTML omitted -->, if any</p>
@@ -1240,7 +1243,7 @@ properties defined in the Clutter::State keys.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Clutter::Animator instance, or nil to
+        <div class='inline'><p>a Clutter::Animator instance, or nil to<br />
 unset an existing Clutter::Animator</p>
 </div>
       
@@ -1278,9 +1281,9 @@ unset an existing Clutter::Animator</p>
   <div class="discussion">
     <p>Sets the duration of a transition.</p>
 <p>If both state names are nil the default duration for <!-- raw HTML omitted -->state<!-- raw HTML omitted --> is set.</p>
-<p>If only <!-- raw HTML omitted -->target_state_name<!-- raw HTML omitted --> is specified, the passed <!-- raw HTML omitted -->duration<!-- raw HTML omitted --> becomes
+<p>If only <!-- raw HTML omitted -->target_state_name<!-- raw HTML omitted --> is specified, the passed <!-- raw HTML omitted -->duration<!-- raw HTML omitted --> becomes<br />
 the default duration for transitions to the target state.</p>
-<p>If both states names are specified, the passed <!-- raw HTML omitted -->duration<!-- raw HTML omitted --> only applies
+<p>If both states names are specified, the passed <!-- raw HTML omitted -->duration<!-- raw HTML omitted --> only applies<br />
 to the specified transition.</p>
 
 
@@ -1365,7 +1368,7 @@ to the specified transition.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets one specific end key for a state name, <!-- raw HTML omitted -->object<!-- raw HTML omitted -->, <!-- raw HTML omitted -->property_name<!-- raw HTML omitted -->
+    <p>Sets one specific end key for a state name, <!-- raw HTML omitted -->object<!-- raw HTML omitted -->, <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --><br />
 combination.</p>
 
 
@@ -1385,8 +1388,8 @@ combination.</p>
       
       
         &mdash;
-        <div class='inline'><p>the source transition to specify
-transition for, or nil to specify the default fallback when a
+        <div class='inline'><p>the source transition to specify<br />
+transition for, or nil to specify the default fallback when a<br />
 more specific source state doesn't exist.</p>
 </div>
       
@@ -1477,7 +1480,7 @@ more specific source state doesn't exist.</p>
       
       
         &mdash;
-        <div class='inline'><p>relative time of the transition to be idle in the beginning
+        <div class='inline'><p>relative time of the transition to be idle in the beginning<br />
 of the transition</p>
 </div>
       
@@ -1493,7 +1496,7 @@ of the transition</p>
       
       
         &mdash;
-        <div class='inline'><p>relative time of the transition to be idle in the end of
+        <div class='inline'><p>relative time of the transition to be idle in the end of<br />
 the transition</p>
 </div>
       
@@ -1512,7 +1515,7 @@ the transition</p>
       
       
         &mdash;
-        <div class='inline'><p>the Clutter::State instance, allowing
+        <div class='inline'><p>the Clutter::State instance, allowing<br />
 chaining of multiple calls</p>
 </div>
       
@@ -1534,9 +1537,9 @@ chaining of multiple calls</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The currently set target state, setting it causes the
-state machine to transition to the new state, use
-clutter_state_warp_to_state() to change state without
+    <p>The currently set target state, setting it causes the<br />
+state machine to transition to the new state, use<br />
+clutter_state_warp_to_state() to change state without<br />
 a transition.</p>
 
 
@@ -1576,9 +1579,9 @@ a transition.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The currently set target state, setting it causes the
-state machine to transition to the new state, use
-clutter_state_warp_to_state() to change state without
+    <p>The currently set target state, setting it causes the<br />
+state machine to transition to the new state, use<br />
+clutter_state_warp_to_state() to change state without<br />
 a transition.</p>
 
 
@@ -1664,10 +1667,10 @@ a transition.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated
-#GList of state names. The contents of the returned #GList are owned
-by the Clutter::State and should not be modified or freed. Use
-g_list_free() to free the resources allocated by the returned list when
+        <div class='inline'><p>a newly allocated<br />
+#GList of state names. The contents of the returned #GList are owned<br />
+by the Clutter::State and should not be modified or freed. Use<br />
+g_list_free() to free the resources allocated by the returned list when<br />
 done using it</p>
 </div>
       
@@ -1707,8 +1710,8 @@ done using it</p>
       
       
         &mdash;
-        <div class='inline'><p>the Clutter::Timeline that drives
-the state change animations. The returned timeline is owned
+        <div class='inline'><p>the Clutter::Timeline that drives<br />
+the state change animations. The returned timeline is owned<br />
 by the Clutter::State and it should not be unreferenced directly</p>
 </div>
       
@@ -1768,8 +1771,8 @@ by the Clutter::State and it should not be unreferenced directly</p>
       
       
         &mdash;
-        <div class='inline'><p>the Clutter::Timeline that drives the
-state transition. The returned timeline is owned by the Clutter::State
+        <div class='inline'><p>the Clutter::Timeline that drives the<br />
+state transition. The returned timeline is owned by the Clutter::State<br />
 and it should not be unreferenced</p>
 </div>
       
@@ -1787,7 +1790,7 @@ and it should not be unreferenced</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

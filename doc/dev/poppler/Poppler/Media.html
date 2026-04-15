@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Poppler::Media";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -322,6 +324,7 @@
 
       
     </ul>
+    
   
 
 
@@ -380,7 +383,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the media clip filename, in case of non-embedded media. filename might be
+    <p>Returns the media clip filename, in case of non-embedded media. filename might be<br />
 a local relative or absolute path or a URI</p>
 
 
@@ -420,9 +423,9 @@ a local relative or absolute path or a URI</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the media clip is embedded in the PDF. If the result is true, the embedded stream
-can be saved with poppler_media_save() or poppler_media_save_to_callback() function.
-If the result is false, the media clip filename can be retrieved with
+    <p>Whether the media clip is embedded in the PDF. If the result is true, the embedded stream<br />
+can be saved with poppler_media_save() or poppler_media_save_to_callback() function.<br />
+If the result is false, the media clip filename can be retrieved with<br />
 poppler_media_get_filename() function.</p>
 
 
@@ -540,9 +543,9 @@ poppler_media_get_filename() function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Saves embedded stream of <!-- raw HTML omitted -->poppler_media<!-- raw HTML omitted --> to a file indicated by <!-- raw HTML omitted -->filename<!-- raw HTML omitted -->.
-If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be returned.
-Possible errors include those in the #G_FILE_ERROR domain
+    <p>Saves embedded stream of <!-- raw HTML omitted -->poppler_media<!-- raw HTML omitted --> to a file indicated by <!-- raw HTML omitted -->filename<!-- raw HTML omitted -->.<br />
+If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be returned.<br />
+Possible errors include those in the #G_FILE_ERROR domain<br />
 and whatever the save function generates.</p>
 
 
@@ -601,10 +604,10 @@ and whatever the save function generates.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Saves embedded stream of <!-- raw HTML omitted -->poppler_media<!-- raw HTML omitted --> by feeding the produced data to <!-- raw HTML omitted -->save_func<!-- raw HTML omitted -->. Can be used
-when you want to store the media clip stream to something other than a file, such as
-an in-memory buffer or a socket. If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be
-returned. Possible errors include those in the #G_FILE_ERROR domain and
+    <p>Saves embedded stream of <!-- raw HTML omitted -->poppler_media<!-- raw HTML omitted --> by feeding the produced data to <!-- raw HTML omitted -->save_func<!-- raw HTML omitted -->. Can be used<br />
+when you want to store the media clip stream to something other than a file, such as<br />
+an in-memory buffer or a socket. If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be<br />
+returned. Possible errors include those in the #G_FILE_ERROR domain and<br />
 whatever the save function generates.</p>
 
 
@@ -678,11 +681,11 @@ whatever the save function generates.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Saves embedded stream of <!-- raw HTML omitted -->poppler_media<!-- raw HTML omitted --> to a file referred to by <!-- raw HTML omitted -->fd<!-- raw HTML omitted -->.
-If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be returned.
-Possible errors include those in the #G_FILE_ERROR domain
-and whatever the save function generates.
-Note that this function takes ownership of <!-- raw HTML omitted -->fd<!-- raw HTML omitted -->; you must not operate on it
+    <p>Saves embedded stream of <!-- raw HTML omitted -->poppler_media<!-- raw HTML omitted --> to a file referred to by <!-- raw HTML omitted -->fd<!-- raw HTML omitted -->.<br />
+If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be returned.<br />
+Possible errors include those in the #G_FILE_ERROR domain<br />
+and whatever the save function generates.<br />
+Note that this function takes ownership of <!-- raw HTML omitted -->fd<!-- raw HTML omitted -->; you must not operate on it<br />
 again, nor close it.</p>
 
 
@@ -776,7 +779,7 @@ again, nor close it.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

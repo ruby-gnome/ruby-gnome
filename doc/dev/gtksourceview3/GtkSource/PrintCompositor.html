@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::PrintCompositor";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -1083,6 +1085,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1099,12 +1102,12 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new print compositor that can be used to print the buffer
+    <p>Creates a new print compositor that can be used to print the buffer<br />
 associated with <!-- raw HTML omitted -->view<!-- raw HTML omitted -->.</p>
-<p>This constructor sets some configuration properties to make the
-printed output match <!-- raw HTML omitted -->view<!-- raw HTML omitted --> as much as possible.  The properties set are
-[property<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->:tab-width], [property<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->:highlight-syntax],
-[property<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->:wrap-mode], [property<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->:body-font-name] and
+<p>This constructor sets some configuration properties to make the<br />
+printed output match <!-- raw HTML omitted -->view<!-- raw HTML omitted --> as much as possible.  The properties set are<br />
+[property<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->:tab-width], [property<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->:highlight-syntax],<br />
+[property<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->:wrap-mode], [property<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->:body-font-name] and<br />
 [property<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->:print-line-numbers].</p>
 
 
@@ -1154,10 +1157,10 @@ printed output match <!-- raw HTML omitted -->view<!-- raw HTML omitted --> as m
 </h3><div class="docstring">
   <div class="discussion">
     <p>Name of the font used for the text body.</p>
-<p>Accepted values are strings representing a font description Pango can understand.
-(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+<p>Accepted values are strings representing a font description Pango can understand.<br />
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]<br />
 for a description of the format of the string representation.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -1198,10 +1201,10 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
 </h3><div class="docstring">
   <div class="discussion">
     <p>Name of the font used for the text body.</p>
-<p>Accepted values are strings representing a font description Pango can understand.
-(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+<p>Accepted values are strings representing a font description Pango can understand.<br />
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]<br />
 for a description of the format of the string representation.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -1376,7 +1379,7 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
 </h3><div class="docstring">
   <div class="discussion">
     <p>Draw page <!-- raw HTML omitted -->page_nr<!-- raw HTML omitted --> for printing on the the Cairo context encapsuled in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->.</p>
-<p>This method has been designed to be called in the handler of the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::draw_page] signal
+<p>This method has been designed to be called in the handler of the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::draw_page] signal<br />
 as shown in the following example:</p>
 <pre class="code c"><code class="c">// Signal handler for the GtkPrintOperation::draw_page signal
 
@@ -1413,7 +1416,7 @@ draw_page (GtkPrintOperation *operation,
       
       
         &mdash;
-        <div class='inline'><p>the Gtk::PrintContext encapsulating the context information that is required when
+        <div class='inline'><p>the Gtk::PrintContext encapsulating the context information that is required when<br />
 drawing the page for printing.</p>
 </div>
       
@@ -1464,12 +1467,12 @@ drawing the page for printing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Name of the font used to print page footer.
+    <p>Name of the font used to print page footer.<br />
 If this property is unspecified, the text body font is used.</p>
-<p>Accepted values are strings representing a font description Pango can understand.
-(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+<p>Accepted values are strings representing a font description Pango can understand.<br />
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]<br />
 for a description of the format of the string representation.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -1509,12 +1512,12 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Name of the font used to print page footer.
+    <p>Name of the font used to print page footer.<br />
 If this property is unspecified, the text body font is used.</p>
-<p>Accepted values are strings representing a font description Pango can understand.
-(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+<p>Accepted values are strings representing a font description Pango can understand.<br />
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]<br />
 for a description of the format of the string representation.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -1814,12 +1817,12 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Name of the font used to print page header.
+    <p>Name of the font used to print page header.<br />
 If this property is unspecified, the text body font is used.</p>
-<p>Accepted values are strings representing a font description Pango can understand.
-(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+<p>Accepted values are strings representing a font description Pango can understand.<br />
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]<br />
 for a description of the format of the string representation.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -1859,12 +1862,12 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Name of the font used to print page header.
+    <p>Name of the font used to print page header.<br />
 If this property is unspecified, the text body font is used.</p>
-<p>Accepted values are strings representing a font description Pango can understand.
-(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+<p>Accepted values are strings representing a font description Pango can understand.<br />
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]<br />
 for a description of the format of the string representation.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -1932,7 +1935,7 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the printed text will be highlighted according to the
+    <p>Determines whether the printed text will be highlighted according to the<br />
 buffer rules.</p>
 <p>Note that highlighting will happen only if the buffer to print has highlighting activated.</p>
 
@@ -1974,7 +1977,7 @@ buffer rules.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to print the document with highlighted syntax.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -2043,7 +2046,7 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to print the document with highlighted syntax.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -2083,7 +2086,7 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Specifies a tag whose style should be ignored when compositing the
+    <p>Specifies a tag whose style should be ignored when compositing the<br />
 document to the printable page.</p>
 
 
@@ -2138,12 +2141,12 @@ document to the printable page.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Name of the font used to print line numbers on the left margin.
+    <p>Name of the font used to print line numbers on the left margin.<br />
 If this property is unspecified, the text body font is used.</p>
-<p>Accepted values are strings representing a font description Pango can understand.
-(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+<p>Accepted values are strings representing a font description Pango can understand.<br />
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]<br />
 for a description of the format of the string representation.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -2183,12 +2186,12 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Name of the font used to print line numbers on the left margin.
+    <p>Name of the font used to print line numbers on the left margin.<br />
 If this property is unspecified, the text body font is used.</p>
-<p>Accepted values are strings representing a font description Pango can understand.
-(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]
+<p>Accepted values are strings representing a font description Pango can understand.<br />
+(e.g. &quot;Monospace 10&quot;). See [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.from_string]<br />
 for a description of the format of the string representation.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -2256,7 +2259,7 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The number of pages in the document or <!-- raw HTML omitted -->-1<!-- raw HTML omitted --> if the
+    <p>The number of pages in the document or <!-- raw HTML omitted -->-1<!-- raw HTML omitted --> if the<br />
 document has not been completely paginated.</p>
 
 
@@ -2296,7 +2299,7 @@ document has not been completely paginated.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The number of pages in the document or <!-- raw HTML omitted -->-1<!-- raw HTML omitted --> if the
+    <p>The number of pages in the document or <!-- raw HTML omitted -->-1<!-- raw HTML omitted --> if the<br />
 document has not been completely paginated.</p>
 
 
@@ -2365,12 +2368,12 @@ document has not been completely paginated.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Paginate the document associated with the <!-- raw HTML omitted -->compositor<!-- raw HTML omitted -->.</p>
-<p>In order to support non-blocking pagination, document is paginated in small chunks.
-Each time [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] is invoked, a chunk of the document
-is paginated. To paginate the entire document, [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate]
-must be invoked multiple times.
+<p>In order to support non-blocking pagination, document is paginated in small chunks.<br />
+Each time [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] is invoked, a chunk of the document<br />
+is paginated. To paginate the entire document, [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate]<br />
+must be invoked multiple times.<br />
 It returns true if the document has been completely paginated, otherwise it returns false.</p>
-<p>This method has been designed to be invoked in the handler of the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::paginate] signal,
+<p>This method has been designed to be invoked in the handler of the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::paginate] signal,<br />
 as shown in the following example:</p>
 <pre class="code c"><code class="c">// Signal handler for the GtkPrintOperation::paginate signal
 
@@ -2396,8 +2399,8 @@ paginate (GtkPrintOperation *operation,
     return FALSE;
 }
 </code></pre>
-<p>If you don't need to do pagination in chunks, you can simply do it all in the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::begin-print] handler, and set the number of pages from there, like
+<p>If you don't need to do pagination in chunks, you can simply do it all in the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::begin-print] handler, and set the number of pages from there, like<br />
 in the following example:</p>
 <pre class="code c"><code class="c">// Signal handler for the GtkPrintOperation::begin-print signal
 
@@ -2515,8 +2518,8 @@ begin_print (GtkPrintOperation *operation,
 </h3><div class="docstring">
   <div class="discussion">
     <p>Determines if a footer is set to be printed for each page.</p>
-<p>A footer will be printed if this function returns true
-<strong>and</strong> some format strings have been specified
+<p>A footer will be printed if this function returns true<br />
+<strong>and</strong> some format strings have been specified<br />
 with [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.set_footer_format].</p>
 
 
@@ -2557,10 +2560,10 @@ with [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.se
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to print a footer in each page.</p>
-<p>Note that by default the footer format is unspecified, and if it is
-unspecified the footer will not be printed, regardless of the value of
+<p>Note that by default the footer format is unspecified, and if it is<br />
+unspecified the footer will not be printed, regardless of the value of<br />
 this property.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -2629,10 +2632,10 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to print a footer in each page.</p>
-<p>Note that by default the footer format is unspecified, and if it is
-unspecified the footer will not be printed, regardless of the value of
+<p>Note that by default the footer format is unspecified, and if it is<br />
+unspecified the footer will not be printed, regardless of the value of<br />
 this property.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -2673,8 +2676,8 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
 </h3><div class="docstring">
   <div class="discussion">
     <p>Determines if a header is set to be printed for each page.</p>
-<p>A header will be printed if this function returns true
-<strong>and</strong> some format strings have been specified
+<p>A header will be printed if this function returns true<br />
+<strong>and</strong> some format strings have been specified<br />
 with [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.set_header_format].</p>
 
 
@@ -2715,10 +2718,10 @@ with [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.se
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to print a header in each page.</p>
-<p>Note that by default the header format is unspecified, and if it is
-unspecified the header will not be printed, regardless of the value of
+<p>Note that by default the header format is unspecified, and if it is<br />
+unspecified the header will not be printed, regardless of the value of<br />
 this property.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -2787,10 +2790,10 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to print a header in each page.</p>
-<p>Note that by default the header format is unspecified, and if it is
-unspecified the header will not be printed, regardless of the value of
+<p>Note that by default the header format is unspecified, and if it is<br />
+unspecified the header will not be printed, regardless of the value of<br />
 this property.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -2831,10 +2834,10 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
 </h3><div class="docstring">
   <div class="discussion">
     <p>Interval of printed line numbers.</p>
-<p>If this property is set to 0 no numbers will be printed.
-If greater than 0, a number will be printed every &quot;print-line-numbers&quot;
+<p>If this property is set to 0 no numbers will be printed.<br />
+If greater than 0, a number will be printed every &quot;print-line-numbers&quot;<br />
 lines (i.e. 1 will print all line numbers).</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -2875,10 +2878,10 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
 </h3><div class="docstring">
   <div class="discussion">
     <p>Interval of printed line numbers.</p>
-<p>If this property is set to 0 no numbers will be printed.
-If greater than 0, a number will be printed every &quot;print-line-numbers&quot;
+<p>If this property is set to 0 no numbers will be printed.<br />
+If greater than 0, a number will be printed every &quot;print-line-numbers&quot;<br />
 lines (i.e. 1 will print all line numbers).</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -3015,7 +3018,7 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>See [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.set_header_format] for more information
+    <p>See [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.set_header_format] for more information<br />
 about the parameters.</p>
 
 
@@ -3115,24 +3118,24 @@ about the parameters.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets strftime like header format strings, to be printed on the
+    <p>Sets strftime like header format strings, to be printed on the<br />
 left, center and right of the top of each page.</p>
-<p>The strings may include strftime(3) codes which will be expanded at print time.
-A subset of strftime() codes are accepted, see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.DateTime.format]
-for more details on the accepted format specifiers.
+<p>The strings may include strftime(3) codes which will be expanded at print time.<br />
+A subset of strftime() codes are accepted, see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.DateTime.format]<br />
+for more details on the accepted format specifiers.<br />
 Additionally the following format specifiers are accepted:</p>
 <ul>
 <li>#N: the page number</li>
 <li>#Q: the page count.</li>
 </ul>
-<p><!-- raw HTML omitted -->separator<!-- raw HTML omitted --> specifies if a solid line should be drawn to separate
+<p><!-- raw HTML omitted -->separator<!-- raw HTML omitted --> specifies if a solid line should be drawn to separate<br />
 the header from the document text.</p>
-<p>If nil is given for any of the three arguments, that particular
+<p>If nil is given for any of the three arguments, that particular<br />
 string will not be printed.</p>
-<p>For the header to be printed, in
-addition to specifying format strings, you need to enable header
+<p>For the header to be printed, in<br />
+addition to specifying format strings, you need to enable header<br />
 printing with [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.set_print_header].</p>
-<p>This function cannot be called anymore after the first call to the
+<p>This function cannot be called anymore after the first call to the<br />
 [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -3440,7 +3443,7 @@ printing with [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitt
 </h3><div class="docstring">
   <div class="discussion">
     <p>Width of a tab character expressed in spaces.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -3481,7 +3484,7 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
 </h3><div class="docstring">
   <div class="discussion">
     <p>Width of a tab character expressed in spaces.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -3550,7 +3553,7 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to wrap lines never, at word boundaries, or at character boundaries.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -3591,7 +3594,7 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to wrap lines never, at word boundaries, or at character boundaries.</p>
-<p>The value of this property cannot be changed anymore after the first
+<p>The value of this property cannot be changed anymore after the first<br />
 call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted -->.paginate] function.</p>
 
 
@@ -3655,7 +3658,7 @@ call to the [method<!-- raw HTML omitted -->PrintCompositor<!-- raw HTML omitted
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

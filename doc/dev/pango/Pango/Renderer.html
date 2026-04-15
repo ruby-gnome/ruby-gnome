@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Pango::Renderer";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -99,7 +100,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/pango/deprecated.rb</dd>
+    <dd>lib/pango/deprecated.rb
+</dd>
   </dl>
   
 </div>
@@ -107,7 +109,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Class structure for <code>PangoRenderer</code>.</p>
-<p>The following vfuncs take user space coordinates in Pango units
+<p>The following vfuncs take user space coordinates in Pango units<br />
 and have default implementations:</p>
 <ul>
 <li>draw_glyphs</li>
@@ -117,7 +119,7 @@ and have default implementations:</p>
 <li>draw_glyph_item</li>
 </ul>
 <p>The default draw_shape implementation draws nothing.</p>
-<p>The following vfuncs take device space coordinates as doubles
+<p>The following vfuncs take device space coordinates as doubles<br />
 and must be implemented:</p>
 <ul>
 <li>draw_trapezoid</li>
@@ -583,6 +585,7 @@ and must be implemented:</p>
 
       
     </ul>
+    
   
 
 
@@ -604,11 +607,11 @@ and must be implemented:</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Does initial setup before rendering operations on <!-- raw HTML omitted -->renderer<!-- raw HTML omitted -->.</p>
-<p>[method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.deactivate] should be called when done drawing.
-Calls such as [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.draw_layout] automatically
+<p>[method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.deactivate] should be called when done drawing.<br />
+Calls such as [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.draw_layout] automatically<br />
 activate the layout before drawing on it.</p>
-<p>Calls to [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.activate] and
-[method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.deactivate] can be nested and the
+<p>Calls to [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.activate] and<br />
+[method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.deactivate] can be nested and the<br />
 renderer will only be initialized and deinitialized once.</p>
 
 
@@ -680,12 +683,12 @@ renderer will only be initialized and deinitialized once.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Draw a squiggly line that approximately covers the given rectangle
+    <p>Draw a squiggly line that approximately covers the given rectangle<br />
 in the style of an underline used to indicate a spelling error.</p>
-<p>The width of the underline is rounded to an integer number
-of up/down segments and the resulting rectangle is centered
+<p>The width of the underline is rounded to an integer number<br />
+of up/down segments and the resulting rectangle is centered<br />
 in the original rectangle.</p>
-<p>This should be called while <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> is already active.
+<p>This should be called while <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> is already active.<br />
 Use [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.activate] to activate a renderer.</p>
 
 
@@ -884,18 +887,18 @@ Use [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.acti
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Draws the glyphs in <!-- raw HTML omitted -->glyph_item<!-- raw HTML omitted --> with the specified <code>PangoRenderer</code>,
-embedding the text associated with the glyphs in the output if the
+    <p>Draws the glyphs in <!-- raw HTML omitted -->glyph_item<!-- raw HTML omitted --> with the specified <code>PangoRenderer</code>,<br />
+embedding the text associated with the glyphs in the output if the<br />
 output format supports it.</p>
 <p>This is useful for rendering text in PDF.</p>
-<p>Note that this method does not handle attributes in <!-- raw HTML omitted -->glyph_item<!-- raw HTML omitted -->.
-If you want colors, shapes and lines handled automatically according
-to those attributes, you need to use pango_renderer_draw_layout_line()
+<p>Note that this method does not handle attributes in <!-- raw HTML omitted -->glyph_item<!-- raw HTML omitted -->.<br />
+If you want colors, shapes and lines handled automatically according<br />
+to those attributes, you need to use pango_renderer_draw_layout_line()<br />
 or pango_renderer_draw_layout().</p>
-<p>Note that <!-- raw HTML omitted -->text<!-- raw HTML omitted --> is the start of the text for layout, which is then
+<p>Note that <!-- raw HTML omitted -->text<!-- raw HTML omitted --> is the start of the text for layout, which is then<br />
 indexed by <code>glyph_item-&gt;item-&gt;offset</code>.</p>
 <p>If <!-- raw HTML omitted -->text<!-- raw HTML omitted --> is nil, this simply calls [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.draw_glyphs].</p>
-<p>The default implementation of this method simply falls back to
+<p>The default implementation of this method simply falls back to<br />
 [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.draw_glyphs].</p>
 
 
@@ -945,7 +948,7 @@ indexed by <code>glyph_item-&gt;item-&gt;offset</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>X position of left edge of baseline, in user space coordinates
+        <div class='inline'><p>X position of left edge of baseline, in user space coordinates<br />
 in Pango units</p>
 </div>
       
@@ -961,7 +964,7 @@ in Pango units</p>
       
       
         &mdash;
-        <div class='inline'><p>Y position of left edge of baseline, in user space coordinates
+        <div class='inline'><p>Y position of left edge of baseline, in user space coordinates<br />
 in Pango units</p>
 </div>
       
@@ -1046,7 +1049,7 @@ in Pango units</p>
       
       
         &mdash;
-        <div class='inline'><p>X position of left edge of baseline, in user space coordinates
+        <div class='inline'><p>X position of left edge of baseline, in user space coordinates<br />
 in Pango units.</p>
 </div>
       
@@ -1062,7 +1065,7 @@ in Pango units.</p>
       
       
         &mdash;
-        <div class='inline'><p>Y position of left edge of baseline, in user space coordinates
+        <div class='inline'><p>Y position of left edge of baseline, in user space coordinates<br />
 in Pango units.</p>
 </div>
       
@@ -1099,7 +1102,7 @@ in Pango units.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Draws <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> with the specified <code>PangoRenderer</code>.</p>
-<p>This is equivalent to drawing the lines of the layout, at their
+<p>This is equivalent to drawing the lines of the layout, at their<br />
 respective positions relative to <!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted -->.</p>
 
 
@@ -1134,7 +1137,7 @@ respective positions relative to <!-- raw HTML omitted -->x<!-- raw HTML omitted
       
       
         &mdash;
-        <div class='inline'><p>X position of left edge of baseline, in user space coordinates
+        <div class='inline'><p>X position of left edge of baseline, in user space coordinates<br />
 in Pango units.</p>
 </div>
       
@@ -1150,7 +1153,7 @@ in Pango units.</p>
       
       
         &mdash;
-        <div class='inline'><p>Y position of left edge of baseline, in user space coordinates
+        <div class='inline'><p>Y position of left edge of baseline, in user space coordinates<br />
 in Pango units.</p>
 </div>
       
@@ -1187,8 +1190,8 @@ in Pango units.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Draws <!-- raw HTML omitted -->line<!-- raw HTML omitted --> with the specified <code>PangoRenderer</code>.</p>
-<p>This draws the glyph items that make up the line, as well as
-shapes, backgrounds and lines that are specified by the attributes
+<p>This draws the glyph items that make up the line, as well as<br />
+shapes, backgrounds and lines that are specified by the attributes<br />
 of those items.</p>
 
 
@@ -1223,7 +1226,7 @@ of those items.</p>
       
       
         &mdash;
-        <div class='inline'><p>X position of left edge of baseline, in user space coordinates
+        <div class='inline'><p>X position of left edge of baseline, in user space coordinates<br />
 in Pango units.</p>
 </div>
       
@@ -1239,7 +1242,7 @@ in Pango units.</p>
       
       
         &mdash;
-        <div class='inline'><p>Y position of left edge of baseline, in user space coordinates
+        <div class='inline'><p>Y position of left edge of baseline, in user space coordinates<br />
 in Pango units.</p>
 </div>
       
@@ -1275,9 +1278,9 @@ in Pango units.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Draws an axis-aligned rectangle in user space coordinates with the
+    <p>Draws an axis-aligned rectangle in user space coordinates with the<br />
 specified <code>PangoRenderer</code>.</p>
-<p>This should be called while <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> is already active.
+<p>This should be called while <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> is already active.<br />
 Use [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.activate] to activate a renderer.</p>
 
 
@@ -1312,7 +1315,7 @@ Use [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.acti
       
       
         &mdash;
-        <div class='inline'><p>X position at which to draw rectangle, in user space coordinates
+        <div class='inline'><p>X position at which to draw rectangle, in user space coordinates<br />
 in Pango units</p>
 </div>
       
@@ -1328,7 +1331,7 @@ in Pango units</p>
       
       
         &mdash;
-        <div class='inline'><p>Y position at which to draw rectangle, in user space coordinates
+        <div class='inline'><p>Y position at which to draw rectangle, in user space coordinates<br />
 in Pango units</p>
 </div>
       
@@ -1394,7 +1397,7 @@ in Pango units</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Draws a trapezoid with the parallel sides aligned with the X axis
+    <p>Draws a trapezoid with the parallel sides aligned with the X axis<br />
 using the given <code>PangoRenderer</code>; coordinates are in device space.</p>
 
 
@@ -1576,8 +1579,8 @@ using the given <code>PangoRenderer</code>; coordinates are in device space.</p>
       
       
         &mdash;
-        <div class='inline'><p>the alpha for the specified part,
-or 0 if it hasn't been set and should be
+        <div class='inline'><p>the alpha for the specified part,<br />
+or 0 if it hasn't been set and should be<br />
 inherited from the environment.</p>
 </div>
       
@@ -1636,8 +1639,8 @@ inherited from the environment.</p>
       
       
         &mdash;
-        <div class='inline'><p>the color for the
-specified part, or nil if it hasn't been set and should be
+        <div class='inline'><p>the color for the<br />
+specified part, or nil if it hasn't been set and should be<br />
 inherited from the environment.</p>
 </div>
       
@@ -1660,9 +1663,9 @@ inherited from the environment.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the layout currently being rendered using <!-- raw HTML omitted -->renderer<!-- raw HTML omitted -->.</p>
-<p>Calling this function only makes sense from inside a subclass's
+<p>Calling this function only makes sense from inside a subclass's<br />
 methods, like in its draw_shape vfunc, for example.</p>
-<p>The returned layout should not be modified while still being
+<p>The returned layout should not be modified while still being<br />
 rendered.</p>
 
 
@@ -1681,7 +1684,7 @@ rendered.</p>
       
       
         &mdash;
-        <div class='inline'><p>the layout, or nil if
+        <div class='inline'><p>the layout, or nil if<br />
 no layout is being rendered using <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> at this time.</p>
 </div>
       
@@ -1704,9 +1707,9 @@ no layout is being rendered using <!-- raw HTML omitted -->renderer<!-- raw HTML
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the layout line currently being rendered using <!-- raw HTML omitted -->renderer<!-- raw HTML omitted -->.</p>
-<p>Calling this function only makes sense from inside a subclass's
+<p>Calling this function only makes sense from inside a subclass's<br />
 methods, like in its draw_shape vfunc, for example.</p>
-<p>The returned layout line should not be modified while still being
+<p>The returned layout line should not be modified while still being<br />
 rendered.</p>
 
 
@@ -1725,7 +1728,7 @@ rendered.</p>
       
       
         &mdash;
-        <div class='inline'><p>the layout line, or nil
+        <div class='inline'><p>the layout line, or nil<br />
 if no layout line is being rendered using <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> at this time.</p>
 </div>
       
@@ -1747,7 +1750,7 @@ if no layout line is being rendered using <!-- raw HTML omitted -->renderer<!-- 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the transformation matrix that will be applied when
+    <p>Gets the transformation matrix that will be applied when<br />
 rendering.</p>
 <p>See [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.set_matrix].</p>
 
@@ -1767,8 +1770,8 @@ rendering.</p>
       
       
         &mdash;
-        <div class='inline'><p>the matrix, or nil if no matrix has
-been set (which is the same as the identity matrix). The returned
+        <div class='inline'><p>the matrix, or nil if no matrix has<br />
+been set (which is the same as the identity matrix). The returned<br />
 matrix is owned by Pango and must not be modified or freed.</p>
 </div>
       
@@ -1809,7 +1812,7 @@ matrix is owned by Pango and must not be modified or freed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>PangoMatrix</code>, or nil to unset any existing matrix
+        <div class='inline'><p>a <code>PangoMatrix</code>, or nil to unset any existing matrix<br />
 (No matrix set is the same as setting the identity matrix.)</p>
 </div>
       
@@ -1845,16 +1848,16 @@ matrix is owned by Pango and must not be modified or freed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Informs Pango that the way that the rendering is done
+    <p>Informs Pango that the way that the rendering is done<br />
 for <!-- raw HTML omitted -->part<!-- raw HTML omitted --> has changed.</p>
-<p>This should be called if the rendering changes in a way that would
-prevent multiple pieces being joined together into one drawing call.
-For instance, if a subclass of <code>PangoRenderer</code> was to add a stipple
+<p>This should be called if the rendering changes in a way that would<br />
+prevent multiple pieces being joined together into one drawing call.<br />
+For instance, if a subclass of <code>PangoRenderer</code> was to add a stipple<br />
 option for drawing underlines, it needs to call</p>
 <pre class="code ruby"><code class="ruby">pango_renderer_part_changed (render, PANGO_RENDER_PART_UNDERLINE);
 </code></pre>
-<p>When the stipple changes or underlines with different stipples
-might be joined together. Pango automatically calls this for
+<p>When the stipple changes or underlines with different stipples<br />
+might be joined together. Pango automatically calls this for<br />
 changes to colors. (See [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Renderer.set_color])</p>
 
 
@@ -1910,7 +1913,7 @@ changes to colors. (See [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitt
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the alpha for part of the rendering.</p>
-<p>Note that the alpha may only be used if a color is
+<p>Note that the alpha may only be used if a color is<br />
 specified for <!-- raw HTML omitted -->part<!-- raw HTML omitted --> as well.</p>
 
 
@@ -2046,7 +2049,7 @@ specified for <!-- raw HTML omitted -->part<!-- raw HTML omitted --> as well.</p
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

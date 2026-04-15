@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::TypeFindFactory";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,7 +101,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gst/type-find-factory.rb</dd>
+    <dd>lib/gst/type-find-factory.rb
+</dd>
   </dl>
   
 </div>
@@ -144,6 +146,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -268,9 +271,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -282,6 +287,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="PluginFeature.html" title="Gst::PluginFeature (class)">PluginFeature</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="PluginFeature.html#check_version-instance_method" title="Gst::PluginFeature#check_version (method)">#check_version</a></span>, <span class='object_link'><a href="PluginFeature.html#list_copy-class_method" title="Gst::PluginFeature.list_copy (method)">list_copy</a></span>, <span class='object_link'><a href="PluginFeature.html#list_debug-class_method" title="Gst::PluginFeature.list_debug (method)">list_debug</a></span>, <span class='object_link'><a href="PluginFeature.html#list_free-class_method" title="Gst::PluginFeature.list_free (method)">list_free</a></span>, <span class='object_link'><a href="PluginFeature.html#load-instance_method" title="Gst::PluginFeature#load (method)">#load</a></span>, <span class='object_link'><a href="PluginFeature.html#plugin-instance_method" title="Gst::PluginFeature#plugin (method)">#plugin</a></span>, <span class='object_link'><a href="PluginFeature.html#plugin_name-instance_method" title="Gst::PluginFeature#plugin_name (method)">#plugin_name</a></span>, <span class='object_link'><a href="PluginFeature.html#rank-instance_method" title="Gst::PluginFeature#rank (method)">#rank</a></span>, <span class='object_link'><a href="PluginFeature.html#rank=-instance_method" title="Gst::PluginFeature#rank= (method)">#rank=</a></span>, <span class='object_link'><a href="PluginFeature.html#rank_compare_func-class_method" title="Gst::PluginFeature.rank_compare_func (method)">rank_compare_func</a></span>, <span class='object_link'><a href="PluginFeature.html#rank_raw-instance_method" title="Gst::PluginFeature#rank_raw (method)">#rank_raw</a></span></p>
 
+  
   
   
   
@@ -310,9 +316,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the list of all registered typefind factories. You must free the
+    <p>Gets the list of all registered typefind factories. You must free the<br />
 list using gst_plugin_feature_list_free().</p>
-<p>The returned factories are sorted by highest rank first, and then by
+<p>The returned factories are sorted by highest rank first, and then by<br />
 factory name.</p>
 <p>Free-function: gst_plugin_feature_list_free</p>
 
@@ -332,7 +338,7 @@ factory name.</p>
       
       
         &mdash;
-        <div class='inline'><p>the list of all
+        <div class='inline'><p>the list of all<br />
 registered Gst::TypeFindFactory.</p>
 </div>
       
@@ -379,7 +385,7 @@ registered Gst::TypeFindFactory.</p>
       
       
         &mdash;
-        <div class='inline'><p>a properly setup Gst::TypeFind entry. The get_data
+        <div class='inline'><p>a properly setup Gst::TypeFind entry. The get_data<br />
 and suggest_type members must be set.</p>
 </div>
       
@@ -454,9 +460,9 @@ and suggest_type members must be set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the extensions associated with a Gst::TypeFindFactory. The returned
-array should not be changed. If you need to change stuff in it, you should
-copy it using g_strdupv().  This function may return nil to indicate
+    <p>Gets the extensions associated with a Gst::TypeFindFactory. The returned<br />
+array should not be changed. If you need to change stuff in it, you should<br />
+copy it using g_strdupv().  This function may return nil to indicate<br />
 a 0-length list.</p>
 
 
@@ -514,9 +520,9 @@ a 0-length list.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the extensions associated with a Gst::TypeFindFactory. The returned
-array should not be changed. If you need to change stuff in it, you should
-copy it using g_strdupv().  This function may return nil to indicate
+    <p>Gets the extensions associated with a Gst::TypeFindFactory. The returned<br />
+array should not be changed. If you need to change stuff in it, you should<br />
+copy it using g_strdupv().  This function may return nil to indicate<br />
 a 0-length list.</p>
 
 
@@ -570,8 +576,8 @@ a 0-length list.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Check whether the factory has a typefind function. Typefind factories
-without typefind functions are a last-effort fallback mechanism to
+    <p>Check whether the factory has a typefind function. Typefind factories<br />
+without typefind functions are a last-effort fallback mechanism to<br />
 e.g. assume a certain media type based on the file extension.</p>
 
 
@@ -607,7 +613,7 @@ e.g. assume a certain media type based on the file extension.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::Subprocess";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,60 +95,61 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GSubprocess</code> allows the creation of and interaction with child
+    <p><code>GSubprocess</code> allows the creation of and interaction with child<br />
 processes.</p>
-<p>Processes can be communicated with using standard GIO-style APIs (ie:
-[class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.InputStream], [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.OutputStream]). There are GIO-style APIs
-to wait for process termination (ie: cancellable and with an asynchronous
+<p>Processes can be communicated with using standard GIO-style APIs (ie:<br />
+[class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.InputStream], [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.OutputStream]). There are GIO-style APIs<br />
+to wait for process termination (ie: cancellable and with an asynchronous<br />
 variant).</p>
-<p>There is an API to force a process to terminate, as well as a
+<p>There is an API to force a process to terminate, as well as a<br />
 race-free API for sending UNIX signals to a subprocess.</p>
-<p>One major advantage that GIO brings over the core GLib library is
-comprehensive API for asynchronous I/O, such
-[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.OutputStream.splice_async].  This makes <code>GSubprocess</code>
-significantly more powerful and flexible than equivalent APIs in
-some other languages such as the <code>subprocess.py</code>
-included with Python.  For example, using <code>GSubprocess</code> one could
-create two child processes, reading standard output from the first,
-processing it, and writing to the input stream of the second, all
+<p>One major advantage that GIO brings over the core GLib library is<br />
+comprehensive API for asynchronous I/O, such<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.OutputStream.splice_async].  This makes <code>GSubprocess</code><br />
+significantly more powerful and flexible than equivalent APIs in<br />
+some other languages such as the <code>subprocess.py</code><br />
+included with Python.  For example, using <code>GSubprocess</code> one could<br />
+create two child processes, reading standard output from the first,<br />
+processing it, and writing to the input stream of the second, all<br />
 without blocking the main loop.</p>
-<p>A powerful [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.communicate] API is provided similar to the
-<code>communicate()</code> method of <code>subprocess.py</code>. This enables very easy
+<p>A powerful [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.communicate] API is provided similar to the<br />
+<code>communicate()</code> method of <code>subprocess.py</code>. This enables very easy<br />
 interaction with a subprocess that has been opened with pipes.</p>
-<p><code>GSubprocess</code> defaults to tight control over the file descriptors open
-in the child process, avoiding dangling-FD issues that are caused by
-a simple <code>fork()</code>/<code>exec()</code>.  The only open file descriptors in the
-spawned process are ones that were explicitly specified by the
-<code>GSubprocess</code> API (unless <code>G_SUBPROCESS_FLAGS_INHERIT_FDS</code> was
+<p><code>GSubprocess</code> defaults to tight control over the file descriptors open<br />
+in the child process, avoiding dangling-FD issues that are caused by<br />
+a simple <code>fork()</code>/<code>exec()</code>.  The only open file descriptors in the<br />
+spawned process are ones that were explicitly specified by the<br />
+<code>GSubprocess</code> API (unless <code>G_SUBPROCESS_FLAGS_INHERIT_FDS</code> was<br />
 specified).</p>
-<p><code>GSubprocess</code> will quickly reap all child processes as they exit,
-avoiding ‘zombie processes’ remaining around for long periods of
-time.  [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.wait] can be used to wait for this to happen,
+<p><code>GSubprocess</code> will quickly reap all child processes as they exit,<br />
+avoiding ‘zombie processes’ remaining around for long periods of<br />
+time.  [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.wait] can be used to wait for this to happen,<br />
 but it will happen even without the call being explicitly made.</p>
-<p>As a matter of principle, <code>GSubprocess</code> has no API that accepts
-shell-style space-separated strings.  It will, however, match the
-typical shell behaviour of searching the <code>PATH</code> for executables that do
-not contain a directory separator in their name. By default, the <code>PATH</code>
-of the current process is used.  You can specify
-<code>G_SUBPROCESS_FLAGS_SEARCH_PATH_FROM_ENVP</code> to use the <code>PATH</code> of the
+<p>As a matter of principle, <code>GSubprocess</code> has no API that accepts<br />
+shell-style space-separated strings.  It will, however, match the<br />
+typical shell behaviour of searching the <code>PATH</code> for executables that do<br />
+not contain a directory separator in their name. By default, the <code>PATH</code><br />
+of the current process is used.  You can specify<br />
+<code>G_SUBPROCESS_FLAGS_SEARCH_PATH_FROM_ENVP</code> to use the <code>PATH</code> of the<br />
 launcher environment instead.</p>
-<p><code>GSubprocess</code> attempts to have a very simple API for most uses (ie:
-spawning a subprocess with arguments and support for most typical
-kinds of input and output redirection).  See [ctor<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.new]. The
-[class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SubprocessLauncher] API is provided for more complicated cases
-(advanced types of redirection, environment variable manipulation,
+<p><code>GSubprocess</code> attempts to have a very simple API for most uses (ie:<br />
+spawning a subprocess with arguments and support for most typical<br />
+kinds of input and output redirection).  See [ctor<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.new]. The<br />
+[class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SubprocessLauncher] API is provided for more complicated cases<br />
+(advanced types of redirection, environment variable manipulation,<br />
 change of working directory, child setup functions, etc).</p>
-<p>A typical use of <code>GSubprocess</code> will involve calling
-[ctor<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.new], followed by [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.wait_async] or
-[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.wait].  After the process exits, the status can be
-checked using functions such as [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.get_if_exited] (which
+<p>A typical use of <code>GSubprocess</code> will involve calling<br />
+[ctor<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.new], followed by [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.wait_async] or<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.wait].  After the process exits, the status can be<br />
+checked using functions such as [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.get_if_exited] (which<br />
 are similar to the familiar <code>WIFEXITED</code>-style POSIX macros).</p>
 
 
@@ -795,6 +797,7 @@ are similar to the familiar <code>WIFEXITED</code>-style POSIX macros).</p>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -929,38 +932,38 @@ are similar to the familiar <code>WIFEXITED</code>-style POSIX macros).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Communicate with the subprocess until it terminates, and all input
+    <p>Communicate with the subprocess until it terminates, and all input<br />
 and output has been completed.</p>
-<p>If <!-- raw HTML omitted -->stdin_buf<!-- raw HTML omitted --> is given, the subprocess must have been created with
-%G_SUBPROCESS_FLAGS_STDIN_PIPE.  The given data is fed to the
+<p>If <!-- raw HTML omitted -->stdin_buf<!-- raw HTML omitted --> is given, the subprocess must have been created with<br />
+%G_SUBPROCESS_FLAGS_STDIN_PIPE.  The given data is fed to the<br />
 stdin of the subprocess and the pipe is closed (ie: EOF).</p>
-<p>At the same time (as not to cause blocking when dealing with large
-amounts of data), if %G_SUBPROCESS_FLAGS_STDOUT_PIPE or
-%G_SUBPROCESS_FLAGS_STDERR_PIPE were used, reads from those
-streams.  The data that was read is returned in <!-- raw HTML omitted -->stdout<!-- raw HTML omitted --> and/or
+<p>At the same time (as not to cause blocking when dealing with large<br />
+amounts of data), if %G_SUBPROCESS_FLAGS_STDOUT_PIPE or<br />
+%G_SUBPROCESS_FLAGS_STDERR_PIPE were used, reads from those<br />
+streams.  The data that was read is returned in <!-- raw HTML omitted -->stdout<!-- raw HTML omitted --> and/or<br />
 the <!-- raw HTML omitted -->stderr<!-- raw HTML omitted -->.</p>
-<p>If the subprocess was created with %G_SUBPROCESS_FLAGS_STDOUT_PIPE,
-<!-- raw HTML omitted -->stdout_buf<!-- raw HTML omitted --> will contain the data read from stdout.  Otherwise, for
-subprocesses not created with %G_SUBPROCESS_FLAGS_STDOUT_PIPE,
-<!-- raw HTML omitted -->stdout_buf<!-- raw HTML omitted --> will be set to nil.  Similar provisions apply to
+<p>If the subprocess was created with %G_SUBPROCESS_FLAGS_STDOUT_PIPE,<br />
+<!-- raw HTML omitted -->stdout_buf<!-- raw HTML omitted --> will contain the data read from stdout.  Otherwise, for<br />
+subprocesses not created with %G_SUBPROCESS_FLAGS_STDOUT_PIPE,<br />
+<!-- raw HTML omitted -->stdout_buf<!-- raw HTML omitted --> will be set to nil.  Similar provisions apply to<br />
 <!-- raw HTML omitted -->stderr_buf<!-- raw HTML omitted --> and %G_SUBPROCESS_FLAGS_STDERR_PIPE.</p>
 <p>As usual, any output variable may be given as nil to ignore it.</p>
-<p>If you desire the stdout and stderr data to be interleaved, create
-the subprocess with %G_SUBPROCESS_FLAGS_STDOUT_PIPE and
-%G_SUBPROCESS_FLAGS_STDERR_MERGE.  The merged result will be returned
+<p>If you desire the stdout and stderr data to be interleaved, create<br />
+the subprocess with %G_SUBPROCESS_FLAGS_STDOUT_PIPE and<br />
+%G_SUBPROCESS_FLAGS_STDERR_MERGE.  The merged result will be returned<br />
 in <!-- raw HTML omitted -->stdout_buf<!-- raw HTML omitted --> and <!-- raw HTML omitted -->stderr_buf<!-- raw HTML omitted --> will be set to nil.</p>
-<p>In case of any error (including cancellation), false will be
-returned with <!-- raw HTML omitted -->error<!-- raw HTML omitted --> set.  Some or all of the stdin data may have
-been written.  Any stdout or stderr data that has been read will be
-discarded. None of the out variables (aside from <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) will have
+<p>In case of any error (including cancellation), false will be<br />
+returned with <!-- raw HTML omitted -->error<!-- raw HTML omitted --> set.  Some or all of the stdin data may have<br />
+been written.  Any stdout or stderr data that has been read will be<br />
+discarded. None of the out variables (aside from <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) will have<br />
 been set to anything in particular and should not be inspected.</p>
-<p>In the case that true is returned, the subprocess has exited and the
-exit status inspection APIs (eg: g_subprocess_get_if_exited(),
+<p>In the case that true is returned, the subprocess has exited and the<br />
+exit status inspection APIs (eg: g_subprocess_get_if_exited(),<br />
 g_subprocess_get_exit_status()) may be used.</p>
-<p>You should not attempt to use any of the subprocess pipes after
-starting this function, since they may be left in strange states,
-even if the operation was cancelled.  You should especially not
-attempt to interact with the pipes while the operation is in progress
+<p>You should not attempt to use any of the subprocess pipes after<br />
+starting this function, since they may be left in strange states,<br />
+even if the operation was cancelled.  You should especially not<br />
+attempt to interact with the pipes while the operation is in progress<br />
 (either from another thread or if using the asynchronous version).</p>
 
 
@@ -1064,7 +1067,7 @@ attempt to interact with the pipes while the operation is in progress
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronous version of g_subprocess_communicate().  Complete
+    <p>Asynchronous version of g_subprocess_communicate().  Complete<br />
 invocation with g_subprocess_communicate_finish().</p>
 
 
@@ -1248,9 +1251,9 @@ invocation with g_subprocess_communicate_finish().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like g_subprocess_communicate(), but validates the output of the
+    <p>Like g_subprocess_communicate(), but validates the output of the<br />
 process as UTF-8, and returns it as a regular NUL terminated string.</p>
-<p>On error, <!-- raw HTML omitted -->stdout_buf<!-- raw HTML omitted --> and <!-- raw HTML omitted -->stderr_buf<!-- raw HTML omitted --> will be set to undefined values and
+<p>On error, <!-- raw HTML omitted -->stdout_buf<!-- raw HTML omitted --> and <!-- raw HTML omitted -->stderr_buf<!-- raw HTML omitted --> will be set to undefined values and<br />
 should not be used.</p>
 
 
@@ -1350,7 +1353,7 @@ should not be used.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronous version of g_subprocess_communicate_utf8().  Complete
+    <p>Asynchronous version of g_subprocess_communicate_utf8().  Complete<br />
 invocation with g_subprocess_communicate_utf8_finish().</p>
 
 
@@ -1534,11 +1537,11 @@ invocation with g_subprocess_communicate_utf8_finish().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Check the exit status of the subprocess, given that it exited
-normally.  This is the value passed to the exit() system call or the
+    <p>Check the exit status of the subprocess, given that it exited<br />
+normally.  This is the value passed to the exit() system call or the<br />
 return value from main.</p>
 <p>This is equivalent to the system WEXITSTATUS macro.</p>
-<p>It is an error to call this function before g_subprocess_wait() and
+<p>It is an error to call this function before g_subprocess_wait() and<br />
 unless g_subprocess_get_if_exited() returned true.</p>
 
 
@@ -1632,10 +1635,10 @@ unless g_subprocess_get_if_exited() returned true.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Use an operating-system specific method to attempt an immediate,
-forceful termination of the process.  There is no mechanism to
-determine whether or not the request itself was successful;
-however, you can use g_subprocess_wait() to monitor the status of
+    <p>Use an operating-system specific method to attempt an immediate,<br />
+forceful termination of the process.  There is no mechanism to<br />
+determine whether or not the request itself was successful;<br />
+however, you can use g_subprocess_wait() to monitor the status of<br />
 the process after calling this function.</p>
 <p>On Unix, this function sends %SIGKILL.</p>
 
@@ -1672,8 +1675,8 @@ the process after calling this function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>On UNIX, returns the process ID as a decimal string.
-On Windows, returns the result of GetProcessId() also as a string.
+    <p>On UNIX, returns the process ID as a decimal string.<br />
+On Windows, returns the result of GetProcessId() also as a string.<br />
 If the subprocess has terminated, this will return nil.</p>
 
 
@@ -1692,7 +1695,7 @@ If the subprocess has terminated, this will return nil.</p>
       
       
         &mdash;
-        <div class='inline'><p>the subprocess identifier, or nil if the subprocess
+        <div class='inline'><p>the subprocess identifier, or nil if the subprocess<br />
 has terminated</p>
 </div>
       
@@ -1714,10 +1717,10 @@ has terminated</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Check if the given subprocess exited normally (ie: by way of exit()
+    <p>Check if the given subprocess exited normally (ie: by way of exit()<br />
 or return from main()).</p>
 <p>This is equivalent to the system WIFEXITED macro.</p>
-<p>It is an error to call this function before g_subprocess_wait() has
+<p>It is an error to call this function before g_subprocess_wait() has<br />
 returned.</p>
 
 
@@ -1759,7 +1762,7 @@ returned.</p>
   <div class="discussion">
     <p>Check if the given subprocess terminated in response to a signal.</p>
 <p>This is equivalent to the system WIFSIGNALED macro.</p>
-<p>It is an error to call this function before g_subprocess_wait() has
+<p>It is an error to call this function before g_subprocess_wait() has<br />
 returned.</p>
 
 
@@ -1799,9 +1802,9 @@ returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sends the UNIX signal <!-- raw HTML omitted -->signal_num<!-- raw HTML omitted --> to the subprocess, if it is still
+    <p>Sends the UNIX signal <!-- raw HTML omitted -->signal_num<!-- raw HTML omitted --> to the subprocess, if it is still<br />
 running.</p>
-<p>This API is race-free.  If the subprocess has terminated, it will not
+<p>This API is race-free.  If the subprocess has terminated, it will not<br />
 be signalled.</p>
 <p>This API is not available on Windows.</p>
 
@@ -1858,12 +1861,12 @@ be signalled.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the raw status code of the process, as from waitpid().</p>
-<p>This value has no particular meaning, but it can be used with the
-macros defined by the system headers such as WIFEXITED.  It can also
+<p>This value has no particular meaning, but it can be used with the<br />
+macros defined by the system headers such as WIFEXITED.  It can also<br />
 be used with g_spawn_check_wait_status().</p>
-<p>It is more likely that you want to use g_subprocess_get_if_exited()
+<p>It is more likely that you want to use g_subprocess_get_if_exited()<br />
 followed by g_subprocess_get_exit_status().</p>
-<p>It is an error to call this function before g_subprocess_wait() has
+<p>It is an error to call this function before g_subprocess_wait() has<br />
 returned.</p>
 
 
@@ -1903,9 +1906,9 @@ returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the GInput::Stream from which to read the stderr output of
+    <p>Gets the GInput::Stream from which to read the stderr output of<br />
 <!-- raw HTML omitted -->subprocess<!-- raw HTML omitted -->.</p>
-<p>The process must have been created with %G_SUBPROCESS_FLAGS_STDERR_PIPE,
+<p>The process must have been created with %G_SUBPROCESS_FLAGS_STDERR_PIPE,<br />
 otherwise nil will be returned.</p>
 
 
@@ -1945,9 +1948,9 @@ otherwise nil will be returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the GOutput::Stream that you can write to in order to give data
+    <p>Gets the GOutput::Stream that you can write to in order to give data<br />
 to the stdin of <!-- raw HTML omitted -->subprocess<!-- raw HTML omitted -->.</p>
-<p>The process must have been created with %G_SUBPROCESS_FLAGS_STDIN_PIPE and
+<p>The process must have been created with %G_SUBPROCESS_FLAGS_STDIN_PIPE and<br />
 not %G_SUBPROCESS_FLAGS_STDIN_INHERIT, otherwise nil will be returned.</p>
 
 
@@ -1987,9 +1990,9 @@ not %G_SUBPROCESS_FLAGS_STDIN_INHERIT, otherwise nil will be returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the GInput::Stream from which to read the stdout output of
+    <p>Gets the GInput::Stream from which to read the stdout output of<br />
 <!-- raw HTML omitted -->subprocess<!-- raw HTML omitted -->.</p>
-<p>The process must have been created with %G_SUBPROCESS_FLAGS_STDOUT_PIPE,
+<p>The process must have been created with %G_SUBPROCESS_FLAGS_STDOUT_PIPE,<br />
 otherwise nil will be returned.</p>
 
 
@@ -2029,10 +2032,10 @@ otherwise nil will be returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if the process was &quot;successful&quot;.  A process is considered
-successful if it exited cleanly with an exit status of 0, either by
+    <p>Checks if the process was &quot;successful&quot;.  A process is considered<br />
+successful if it exited cleanly with an exit status of 0, either by<br />
 way of the exit() system call or return from main().</p>
-<p>It is an error to call this function before g_subprocess_wait() has
+<p>It is an error to call this function before g_subprocess_wait() has<br />
 returned.</p>
 
 
@@ -2072,10 +2075,10 @@ returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the signal number that caused the subprocess to terminate, given
+    <p>Get the signal number that caused the subprocess to terminate, given<br />
 that it terminated due to a signal.</p>
 <p>This is equivalent to the system WTERMSIG macro.</p>
-<p>It is an error to call this function before g_subprocess_wait() and
+<p>It is an error to call this function before g_subprocess_wait() and<br />
 unless g_subprocess_get_if_signaled() returned true.</p>
 
 
@@ -2116,12 +2119,12 @@ unless g_subprocess_get_if_signaled() returned true.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Synchronously wait for the subprocess to terminate.</p>
-<p>After the process terminates you can query its exit status with
-functions such as g_subprocess_get_if_exited() and
+<p>After the process terminates you can query its exit status with<br />
+functions such as g_subprocess_get_if_exited() and<br />
 g_subprocess_get_exit_status().</p>
-<p>This function does not fail in the case of the subprocess having
+<p>This function does not fail in the case of the subprocess having<br />
 abnormal termination.  See g_subprocess_wait_check() for that.</p>
-<p>Cancelling <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> doesn't kill the subprocess.  Call
+<p>Cancelling <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> doesn't kill the subprocess.  Call<br />
 g_subprocess_force_exit() if it is desirable.</p>
 
 
@@ -2265,7 +2268,7 @@ g_subprocess_force_exit() if it is desirable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Combines g_subprocess_wait() with g_spawn_check_wait_status().
+    <p>Combines g_subprocess_wait() with g_spawn_check_wait_status().<br />
 <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> was cancelled</p>
 
 
@@ -2409,7 +2412,7 @@ g_subprocess_force_exit() if it is desirable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Collects the result of a previous call to
+    <p>Collects the result of a previous call to<br />
 g_subprocess_wait_check_async().</p>
 
 
@@ -2468,7 +2471,7 @@ g_subprocess_wait_check_async().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Collects the result of a previous call to
+    <p>Collects the result of a previous call to<br />
 g_subprocess_wait_async().</p>
 
 
@@ -2523,7 +2526,7 @@ g_subprocess_wait_async().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

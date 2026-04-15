@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::AppInfoMonitor";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -102,14 +104,14 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p><code>GAppInfoMonitor</code> monitors application information for changes.</p>
-<p><code>GAppInfoMonitor</code> is a very simple object used for monitoring the app
+<p><code>GAppInfoMonitor</code> is a very simple object used for monitoring the app<br />
 info database for changes (newly installed or removed applications).</p>
-<p>Call [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AppInfoMonitor.get] to get a <code>GAppInfoMonitor</code> and connect
-to the [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AppInfoMonitor::changed] signal. The signal will be emitted once when
-the app info database changes, and will not be emitted again until after the
-next call to [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AppInfo.get_all] or another <code>g_app_info_*()</code> function.
+<p>Call [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AppInfoMonitor.get] to get a <code>GAppInfoMonitor</code> and connect<br />
+to the [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AppInfoMonitor::changed] signal. The signal will be emitted once when<br />
+the app info database changes, and will not be emitted again until after the<br />
+next call to [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AppInfo.get_all] or another <code>g_app_info_*()</code> function.<br />
 This is because monitoring the app info database for changes is expensive.</p>
-<p>The following functions will re-arm the [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AppInfoMonitor::changed]
+<p>The following functions will re-arm the [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AppInfoMonitor::changed]<br />
 signal so it can be emitted again:</p>
 <ul>
 <li>[func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AppInfo.get_all]</li>
@@ -123,18 +125,18 @@ signal so it can be emitted again:</p>
 <li><a href="../gio-unix/ctor.DesktopAppInfo.new_from_keyfile.html"><code>g_desktop_app_info_new_from_keyfile()</code></a></li>
 <li><a href="../gio-unix/type_func.DesktopAppInfo.search.html"><code>g_desktop_app_info_search()</code></a></li>
 </ul>
-<p>The latter functions are available if using
-<a href="../gio-unix/class.DesktopAppInfo.html"><code>GDesktopAppInfo</code></a> from
+<p>The latter functions are available if using<br />
+<a href="../gio-unix/class.DesktopAppInfo.html"><code>GDesktopAppInfo</code></a> from<br />
 <code>gio-unix-2.0.pc</code> (GIR namespace <code>GioUnix-2.0</code>).</p>
-<p>In the usual case, applications should try to make note of the change
-(doing things like invalidating caches) but not act on it. In
-particular, applications should avoid making calls to <code>GAppInfo</code> APIs
-in response to the change signal, deferring these until the time that
-the updated data is actually required. The exception to this case is when
-application information is actually being displayed on the screen
-(for example, during a search or when the list of all applications is shown).
-The reason for this is that changes to the list of installed applications
-often come in groups (like during system updates) and rescanning the list
+<p>In the usual case, applications should try to make note of the change<br />
+(doing things like invalidating caches) but not act on it. In<br />
+particular, applications should avoid making calls to <code>GAppInfo</code> APIs<br />
+in response to the change signal, deferring these until the time that<br />
+the updated data is actually required. The exception to this case is when<br />
+application information is actually being displayed on the screen<br />
+(for example, during a search or when the list of all applications is shown).<br />
+The reason for this is that changes to the list of installed applications<br />
+often come in groups (like during system updates) and rescanning the list<br />
 on every change is pointless and expensive.</p>
 
 
@@ -182,6 +184,7 @@ on every change is pointless and expensive.</p>
 
       
     </ul>
+    
   
 
 
@@ -201,15 +204,15 @@ on every change is pointless and expensive.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the GApp::InfoMonitor for the current thread-default main
+    <p>Gets the GApp::InfoMonitor for the current thread-default main<br />
 context.</p>
-<p>The GApp::InfoMonitor will emit a &quot;changed&quot; signal in the
-thread-default main context whenever the list of installed
+<p>The GApp::InfoMonitor will emit a &quot;changed&quot; signal in the<br />
+thread-default main context whenever the list of installed<br />
 applications (as reported by g_app_info_get_all()) may have changed.</p>
-<p>The GApp::InfoMonitor::changed signal will only be emitted once until
-g_app_info_get_all() (or another <code>g_app_info_*()</code> function) is called. Doing
+<p>The GApp::InfoMonitor::changed signal will only be emitted once until<br />
+g_app_info_get_all() (or another <code>g_app_info_*()</code> function) is called. Doing<br />
 so will re-arm the signal ready to notify about the next change.</p>
-<p>You must only call g_object_unref() on the return value from under
+<p>You must only call g_object_unref() on the return value from under<br />
 the same main context as you created it.</p>
 
 
@@ -245,7 +248,7 @@ the same main context as you created it.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

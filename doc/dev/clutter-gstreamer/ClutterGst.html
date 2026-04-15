@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "ClutterGst";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/clutter-gst/version.rb<span class="defines">,<br />
+    <dd>lib/clutter-gst/version.rb<span class="defines">,<br>
   lib/clutter-gst.rb</span>
+
 </dd>
   </dl>
   
@@ -88,16 +90,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2015  Ruby-GNOME2 Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -315,6 +317,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -393,6 +396,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 
       
     </ul>
+    
   
 
 
@@ -593,8 +597,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 </h3><div class="docstring">
   <div class="discussion">
     <p>Utility function to initialize both Clutter and GStreamer.</p>
-<p>This function should be called before calling any other GLib functions. If
-this is not an option, your program must initialise the GLib thread system
+<p>This function should be called before calling any other GLib functions. If<br />
+this is not an option, your program must initialise the GLib thread system<br />
 using g_thread_init() before any other GLib functions are called.</p>
 
 
@@ -668,11 +672,11 @@ using g_thread_init() before any other GLib functions are called.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function does the same work as clutter_gst_init(). Additionally, it
-allows you to add your own command line options, and it automatically
-generates nicely formatted --help output. Clutter's and GStreamer's
+    <p>This function does the same work as clutter_gst_init(). Additionally, it<br />
+allows you to add your own command line options, and it automatically<br />
+generates nicely formatted --help output. Clutter's and GStreamer's<br />
 GOption::Group<!-- raw HTML omitted -->s are added to the set of available options.</p>
-<p>Your program must initialise the GLib thread system using g_thread_init()
+<p>Your program must initialise the GLib thread system using g_thread_init()<br />
 before any other GLib functions are called.</p>
 
 
@@ -722,8 +726,8 @@ before any other GLib functions are called.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string which is displayed in
-the first line of <!-- raw HTML omitted -->--help<!-- raw HTML omitted --> output, after
+        <div class='inline'><p>a string which is displayed in<br />
+the first line of <!-- raw HTML omitted -->--help<!-- raw HTML omitted --> output, after<br />
 <!-- raw HTML omitted --><!-- raw HTML omitted -->programname<!-- raw HTML omitted --> [OPTION...]<!-- raw HTML omitted --></p>
 </div>
       
@@ -739,7 +743,7 @@ the first line of <!-- raw HTML omitted -->--help<!-- raw HTML omitted --> outpu
       
       
         &mdash;
-        <div class='inline'><p>an array of GOption::Entry<!-- raw HTML omitted -->s
+        <div class='inline'><p>an array of GOption::Entry<!-- raw HTML omitted -->s<br />
 describing the options of your program</p>
 </div>
       
@@ -755,8 +759,8 @@ describing the options of your program</p>
       
       
         &mdash;
-        <div class='inline'><p>a translation domain to use for translating
-the <!-- raw HTML omitted -->--help<!-- raw HTML omitted --> output for the options in <!-- raw HTML omitted -->entries<!-- raw HTML omitted -->
+        <div class='inline'><p>a translation domain to use for translating<br />
+the <!-- raw HTML omitted -->--help<!-- raw HTML omitted --> output for the options in <!-- raw HTML omitted -->entries<!-- raw HTML omitted --><br />
 with gettext(), or nil</p>
 </div>
       
@@ -775,7 +779,7 @@ with gettext(), or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>%CLUTTER_INIT_SUCCESS on success, a negative integer
+        <div class='inline'><p>%CLUTTER_INIT_SUCCESS on success, a negative integer<br />
 on failure.</p>
 </div>
       
@@ -793,7 +797,7 @@ on failure.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

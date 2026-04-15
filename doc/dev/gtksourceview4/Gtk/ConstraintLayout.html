@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::ConstraintLayout";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -349,9 +351,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -406,16 +410,16 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a constraint to the layout manager.</p>
-<p>The [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Constraint:source] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Constraint:target]
+<p>The [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Constraint:source] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Constraint:target]<br />
 properties of <code>constraint</code> can be:</p>
 <ul>
-<li>set to <code>NULL</code> to indicate that the constraint refers to the
+<li>set to <code>NULL</code> to indicate that the constraint refers to the<br />
 widget using <code>layout</code></li>
 <li>set to the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget] using <code>layout</code></li>
 <li>set to a child of the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget] using <code>layout</code></li>
 <li>set to a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ConstraintGuide] that is part of <code>layout</code></li>
 </ul>
-<p>The <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> acquires the ownership of <!-- raw HTML omitted -->constraint<!-- raw HTML omitted --> after calling
+<p>The <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> acquires the ownership of <!-- raw HTML omitted -->constraint<!-- raw HTML omitted --> after calling<br />
 this function.</p>
 
 
@@ -471,8 +475,8 @@ this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a list of constraints from a VFL description.</p>
-<p>This function is a convenience wrapper around
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ConstraintLayout.add_constraints_from_descriptionv], using
+<p>This function is a convenience wrapper around<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ConstraintLayout.add_constraints_from_descriptionv], using<br />
 variadic arguments to populate the view/target map.</p>
 
 
@@ -492,7 +496,7 @@ variadic arguments to populate the view/target map.</p>
       
       
         &mdash;
-        <div class='inline'><p>an array of Visual Format Language lines
+        <div class='inline'><p>an array of Visual Format Language lines<br />
 defining a set of constraints</p>
 </div>
       
@@ -568,7 +572,7 @@ defining a set of constraints</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of a view in the VFL description, followed by the
+        <div class='inline'><p>the name of a view in the VFL description, followed by the<br />
 [iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ConstraintTarget] to which it maps</p>
 </div>
       
@@ -602,7 +606,7 @@ defining a set of constraints</p>
       
       
         &mdash;
-        <div class='inline'><p>the list of
+        <div class='inline'><p>the list of<br />
 [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Constraint]s that were added to the layout</p>
 </div>
       
@@ -626,7 +630,7 @@ defining a set of constraints</p>
   <div class="discussion">
     <p>Creates a list of constraints from a VFL description.</p>
 <p>The Visual Format Language, VFL, is based on Apple's AutoLayout <a href="https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html">VFL</a>.</p>
-<p>The <code>views</code> dictionary is used to match [iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ConstraintTarget]
+<p>The <code>views</code> dictionary is used to match [iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ConstraintTarget]<br />
 instances to the symbolic view name inside the VFL.</p>
 <p>The VFL grammar is:</p>
 <pre class="code ruby"><code class="ruby">       &lt;visualFormatString&gt; = (&lt;orientation&gt;)?
@@ -654,9 +658,9 @@ instances to the symbolic view name inside the VFL.</p>
            &lt;positiveNumber&gt; // A positive real number parseable by g_ascii_strtod()
                    &lt;number&gt; // A real number parseable by g_ascii_strtod()
 </code></pre>
-<p><strong>Note</strong>: The VFL grammar used by GTK is slightly different than the one
-defined by Apple, as it can use symbolic values for the constraint's
-strength instead of numeric values; additionally, GTK allows adding
+<p><strong>Note</strong>: The VFL grammar used by GTK is slightly different than the one<br />
+defined by Apple, as it can use symbolic values for the constraint's<br />
+strength instead of numeric values; additionally, GTK allows adding<br />
 simple arithmetic operations inside predicates.</p>
 <p>Examples of VFL descriptions are:</p>
 <pre class="code ruby"><code class="ruby">  // Default spacing
@@ -710,7 +714,7 @@ simple arithmetic operations inside predicates.</p>
       
       
         &mdash;
-        <div class='inline'><p>an array of Visual Format Language lines
+        <div class='inline'><p>an array of Visual Format Language lines<br />
 defining a set of constraints</p>
 </div>
       
@@ -771,9 +775,9 @@ defining a set of constraints</p>
       
       
         &mdash;
-        <div class='inline'><p>a dictionary of <code>[ name, target ]</code>
-pairs; the <code>name</code> keys map to the view names in the VFL lines, while
-the <code>target</code> values map to children of the widget using a <code>GtkConstraintLayout</code>,
+        <div class='inline'><p>a dictionary of <code>[ name, target ]</code><br />
+pairs; the <code>name</code> keys map to the view names in the VFL lines, while<br />
+the <code>target</code> values map to children of the widget using a <code>GtkConstraintLayout</code>,<br />
 or guides</p>
 </div>
       
@@ -792,7 +796,7 @@ or guides</p>
       
       
         &mdash;
-        <div class='inline'><p>the list of
+        <div class='inline'><p>the list of<br />
 [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Constraint] instances that were added to the layout</p>
 </div>
       
@@ -815,9 +819,9 @@ or guides</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a guide to <code>layout</code>.</p>
-<p>A guide can be used as the source or target of constraints,
+<p>A guide can be used as the source or target of constraints,<br />
 like a widget, but it is not visible.</p>
-<p>The <code>layout</code> acquires the ownership of <code>guide</code> after calling
+<p>The <code>layout</code> acquires the ownership of <code>guide</code> after calling<br />
 this function.</p>
 
 
@@ -872,12 +876,12 @@ this function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a <code>GListModel</code> to track the constraints that are
+    <p>Returns a <code>GListModel</code> to track the constraints that are<br />
 part of the layout.</p>
-<p>Calling this function will enable extra internal bookkeeping
-to track constraints and emit signals on the returned listmodel.
+<p>Calling this function will enable extra internal bookkeeping<br />
+to track constraints and emit signals on the returned listmodel.<br />
 It may slow down operations a lot.</p>
-<p>Applications should try hard to avoid calling this function
+<p>Applications should try hard to avoid calling this function<br />
 because of the slowdowns.</p>
 
 
@@ -896,7 +900,7 @@ because of the slowdowns.</p>
       
       
         &mdash;
-        <div class='inline'><p>a
+        <div class='inline'><p>a<br />
 <code>GListModel</code> tracking the layout's constraints</p>
 </div>
       
@@ -918,12 +922,12 @@ because of the slowdowns.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a <code>GListModel</code> to track the guides that are
+    <p>Returns a <code>GListModel</code> to track the guides that are<br />
 part of the layout.</p>
-<p>Calling this function will enable extra internal bookkeeping
-to track guides and emit signals on the returned listmodel.
+<p>Calling this function will enable extra internal bookkeeping<br />
+to track guides and emit signals on the returned listmodel.<br />
 It may slow down operations a lot.</p>
-<p>Applications should try hard to avoid calling this function
+<p>Applications should try hard to avoid calling this function<br />
 because of the slowdowns.</p>
 
 
@@ -942,7 +946,7 @@ because of the slowdowns.</p>
       
       
         &mdash;
-        <div class='inline'><p>a
+        <div class='inline'><p>a<br />
 <code>GListModel</code> tracking the layout's guides</p>
 </div>
       
@@ -999,7 +1003,7 @@ because of the slowdowns.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes <code>constraint</code> from the layout manager,
+    <p>Removes <code>constraint</code> from the layout manager,<br />
 so that it no longer influences the layout.</p>
 
 
@@ -1054,7 +1058,7 @@ so that it no longer influences the layout.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes <code>guide</code> from the layout manager,
+    <p>Removes <code>guide</code> from the layout manager,<br />
 so that it no longer influences the layout.</p>
 
 
@@ -1105,7 +1109,7 @@ so that it no longer influences the layout.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::FileSaver";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -508,6 +510,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -525,10 +528,10 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new Gtk::SourceFileSaver object with a target location.</p>
-<p>When the file saving is finished successfully, <!-- raw HTML omitted -->target_location<!-- raw HTML omitted --> is set to the <!-- raw HTML omitted -->file<!-- raw HTML omitted -->'s
-[property<!-- raw HTML omitted -->File<!-- raw HTML omitted -->:location] property. If an error occurs, the previous valid
+<p>When the file saving is finished successfully, <!-- raw HTML omitted -->target_location<!-- raw HTML omitted --> is set to the <!-- raw HTML omitted -->file<!-- raw HTML omitted -->'s<br />
+[property<!-- raw HTML omitted -->File<!-- raw HTML omitted -->:location] property. If an error occurs, the previous valid<br />
 location is still available in [class<!-- raw HTML omitted -->File<!-- raw HTML omitted -->].</p>
-<p>This constructor is suitable for a &quot;save as&quot; operation, or for saving a new
+<p>This constructor is suitable for a &quot;save as&quot; operation, or for saving a new<br />
 buffer for the first time.</p>
 
 
@@ -607,7 +610,7 @@ buffer for the first time.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The Gtk::SourceBuffer to save. The #GtkSourceFileSaver object has a
+    <p>The Gtk::SourceBuffer to save. The #GtkSourceFileSaver object has a<br />
 weak reference to the buffer.</p>
 
 
@@ -647,7 +650,7 @@ weak reference to the buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The Gtk::SourceBuffer to save. The #GtkSourceFileSaver object has a
+    <p>The Gtk::SourceBuffer to save. The #GtkSourceFileSaver object has a<br />
 weak reference to the buffer.</p>
 
 
@@ -927,7 +930,7 @@ weak reference to the buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The Gtk::SourceFile. The #GtkSourceFileSaver object has a weak
+    <p>The Gtk::SourceFile. The #GtkSourceFileSaver object has a weak<br />
 reference to the file.</p>
 
 
@@ -967,7 +970,7 @@ reference to the file.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The Gtk::SourceFile. The #GtkSourceFileSaver object has a weak
+    <p>The Gtk::SourceFile. The #GtkSourceFileSaver object has a weak<br />
 reference to the file.</p>
 
 
@@ -1141,7 +1144,7 @@ reference to the file.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The #GFile where to save the buffer. By default the location is taken
+    <p>The #GFile where to save the buffer. By default the location is taken<br />
 from the Gtk::SourceFile at construction time.</p>
 
 
@@ -1181,7 +1184,7 @@ from the Gtk::SourceFile at construction time.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The #GFile where to save the buffer. By default the location is taken
+    <p>The #GFile where to save the buffer. By default the location is taken<br />
 from the Gtk::SourceFile at construction time.</p>
 
 
@@ -1375,7 +1378,7 @@ from the Gtk::SourceFile at construction time.</p>
       
       
         &mdash;
-        <div class='inline'><p>the I/O priority of the request. E.g. %G_PRIORITY_LOW,
+        <div class='inline'><p>the I/O priority of the request. E.g. %G_PRIORITY_LOW,<br />
 %G_PRIORITY_DEFAULT or %G_PRIORITY_HIGH.</p>
 </div>
       
@@ -1406,7 +1409,7 @@ from the Gtk::SourceFile at construction time.</p>
       
       
         &mdash;
-        <div class='inline'><p>function to call back with
+        <div class='inline'><p>function to call back with<br />
 progress information, or nil if progress information is not needed.</p>
 </div>
       
@@ -1437,8 +1440,8 @@ progress information, or nil if progress information is not needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>function to call on
-<!-- raw HTML omitted -->progress_callback_data<!-- raw HTML omitted --> when the <!-- raw HTML omitted -->progress_callback<!-- raw HTML omitted --> is no longer needed, or
+        <div class='inline'><p>function to call on<br />
+<!-- raw HTML omitted -->progress_callback_data<!-- raw HTML omitted --> when the <!-- raw HTML omitted -->progress_callback<!-- raw HTML omitted --> is no longer needed, or<br />
 nil.</p>
 </div>
       
@@ -1454,7 +1457,7 @@ nil.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback to call when the request is
+        <div class='inline'><p>a GAsync::ReadyCallback to call when the request is<br />
 satisfied.</p>
 </div>
       
@@ -1506,10 +1509,10 @@ satisfied.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finishes a file saving started with [method<!-- raw HTML omitted -->FileSaver<!-- raw HTML omitted -->.save_async].</p>
-<p>If the file has been saved successfully, the following [class<!-- raw HTML omitted -->File<!-- raw HTML omitted -->]
-properties will be updated: the location, the encoding, the newline type and
+<p>If the file has been saved successfully, the following [class<!-- raw HTML omitted -->File<!-- raw HTML omitted -->]<br />
+properties will be updated: the location, the encoding, the newline type and<br />
 the compression type.</p>
-<p>Since the 3.20 version, [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.set_modified] is called with false
+<p>Since the 3.20 version, [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.set_modified] is called with false<br />
 if the file has been saved successfully.</p>
 
 
@@ -1564,7 +1567,7 @@ if the file has been saved successfully.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

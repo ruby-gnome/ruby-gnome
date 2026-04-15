@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::Notification";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,24 +95,25 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GNotification</code> is a mechanism for creating a notification to be shown
-to the user — typically as a pop-up notification presented by the
+    <p><code>GNotification</code> is a mechanism for creating a notification to be shown<br />
+to the user — typically as a pop-up notification presented by the<br />
 desktop environment shell.</p>
-<p>The key difference between <code>GNotification</code> and other similar APIs is
-that, if supported by the desktop environment, notifications sent
-with <code>GNotification</code> will persist after the application has exited,
+<p>The key difference between <code>GNotification</code> and other similar APIs is<br />
+that, if supported by the desktop environment, notifications sent<br />
+with <code>GNotification</code> will persist after the application has exited,<br />
 and even across system reboots.</p>
-<p>Since the user may click on a notification while the application is
-not running, applications using <code>GNotification</code> should be able to be
+<p>Since the user may click on a notification while the application is<br />
+not running, applications using <code>GNotification</code> should be able to be<br />
 started as a D-Bus service, using [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Application].</p>
-<p>In order for <code>GNotification</code> to work, the application must have installed
+<p>In order for <code>GNotification</code> to work, the application must have installed<br />
 a <code>.desktop</code> file. For example:</p>
 <pre class="code ruby"><code class="ruby">[Desktop Entry]
 Name=Test Application
@@ -125,17 +127,17 @@ StartupNotify=true
 DBusActivatable=true
 X-GNOME-UsesNotifications=true
 </code></pre>
-<p>The <code>X-GNOME-UsesNotifications</code> key indicates to GNOME Control Center
-that this application uses notifications, so it can be listed in the
+<p>The <code>X-GNOME-UsesNotifications</code> key indicates to GNOME Control Center<br />
+that this application uses notifications, so it can be listed in the<br />
 Control Center’s ‘Notifications’ panel.</p>
-<p>The <code>.desktop</code> file must be named as <code>org.gnome.TestApplication.desktop</code>,
-where <code>org.gnome.TestApplication</code> is the ID passed to
+<p>The <code>.desktop</code> file must be named as <code>org.gnome.TestApplication.desktop</code>,<br />
+where <code>org.gnome.TestApplication</code> is the ID passed to<br />
 [ctor<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Application.new].</p>
-<p>User interaction with a notification (either the default action, or
-buttons) must be associated with actions on the application (ie:
-<code>app.</code> actions).  It is not possible to route user interaction
-through the notification itself, because the object will not exist if
-the application is autostarted as a result of a notification being
+<p>User interaction with a notification (either the default action, or<br />
+buttons) must be associated with actions on the application (ie:<br />
+<code>app.</code> actions).  It is not possible to route user interaction<br />
+through the notification itself, because the object will not exist if<br />
+the application is autostarted as a result of a notification being<br />
 clicked.</p>
 <p>A notification can be sent with [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Application.send_notification].</p>
 
@@ -462,6 +464,7 @@ clicked.</p>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -479,9 +482,9 @@ clicked.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new #GNotification with <!-- raw HTML omitted -->title<!-- raw HTML omitted --> as its title.</p>
-<p>After populating <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> with more details, it can be sent to
-the desktop shell with g_application_send_notification(). Changing
-any properties after this call will not have any effect until
+<p>After populating <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> with more details, it can be sent to<br />
+the desktop shell with g_application_send_notification(). Changing<br />
+any properties after this call will not have any effect until<br />
 resending <!-- raw HTML omitted -->notification<!-- raw HTML omitted -->.</p>
 
 
@@ -530,12 +533,12 @@ resending <!-- raw HTML omitted -->notification<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a button to <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> that activates the action in
-<!-- raw HTML omitted -->detailed_action<!-- raw HTML omitted --> when clicked. That action must be an
-application-wide action (starting with &quot;app.&quot;). If <!-- raw HTML omitted -->detailed_action<!-- raw HTML omitted -->
-contains a target, the action will be activated with that target as
+    <p>Adds a button to <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> that activates the action in<br />
+<!-- raw HTML omitted -->detailed_action<!-- raw HTML omitted --> when clicked. That action must be an<br />
+application-wide action (starting with &quot;app.&quot;). If <!-- raw HTML omitted -->detailed_action<!-- raw HTML omitted --><br />
+contains a target, the action will be activated with that target as<br />
 its parameter.</p>
-<p>See g_action_parse_detailed_name() for a description of the format
+<p>See g_action_parse_detailed_name() for a description of the format<br />
 for <!-- raw HTML omitted -->detailed_action<!-- raw HTML omitted -->.</p>
 
 
@@ -605,11 +608,11 @@ for <!-- raw HTML omitted -->detailed_action<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a button to <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> that activates <!-- raw HTML omitted -->action<!-- raw HTML omitted --> when clicked.
+    <p>Adds a button to <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> that activates <!-- raw HTML omitted -->action<!-- raw HTML omitted --> when clicked.<br />
 <!-- raw HTML omitted -->action<!-- raw HTML omitted --> must be an application-wide action (it must start with &quot;app.&quot;).</p>
-<p>If <!-- raw HTML omitted -->target_format<!-- raw HTML omitted --> is given, it is used to collect remaining
-positional parameters into a #GVariant instance, similar to
-g_variant_new(). <!-- raw HTML omitted -->action<!-- raw HTML omitted --> will be activated with that #GVariant as its
+<p>If <!-- raw HTML omitted -->target_format<!-- raw HTML omitted --> is given, it is used to collect remaining<br />
+positional parameters into a #GVariant instance, similar to<br />
+g_variant_new(). <!-- raw HTML omitted -->action<!-- raw HTML omitted --> will be activated with that #GVariant as its<br />
 parameter.</p>
 
 
@@ -709,9 +712,9 @@ parameter.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a button to <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> that activates <!-- raw HTML omitted -->action<!-- raw HTML omitted --> when clicked.
+    <p>Adds a button to <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> that activates <!-- raw HTML omitted -->action<!-- raw HTML omitted --> when clicked.<br />
 <!-- raw HTML omitted -->action<!-- raw HTML omitted --> must be an application-wide action (it must start with &quot;app.&quot;).</p>
-<p>If <!-- raw HTML omitted -->target<!-- raw HTML omitted --> is non-nil, <!-- raw HTML omitted -->action<!-- raw HTML omitted --> will be activated with <!-- raw HTML omitted -->target<!-- raw HTML omitted --> as
+<p>If <!-- raw HTML omitted -->target<!-- raw HTML omitted --> is non-nil, <!-- raw HTML omitted -->action<!-- raw HTML omitted --> will be activated with <!-- raw HTML omitted -->target<!-- raw HTML omitted --> as<br />
 its parameter.</p>
 
 
@@ -850,9 +853,9 @@ its parameter.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the type of <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> to <!-- raw HTML omitted -->category<!-- raw HTML omitted -->. Categories have a main
-type like <code>email</code>, <code>im</code> or <code>device</code> and can have a detail separated
-by a <code>.</code>, e.g. <code>im.received</code> or <code>email.arrived</code>. Setting the category
+    <p>Sets the type of <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> to <!-- raw HTML omitted -->category<!-- raw HTML omitted -->. Categories have a main<br />
+type like <code>email</code>, <code>im</code> or <code>device</code> and can have a detail separated<br />
+by a <code>.</code>, e.g. <code>im.received</code> or <code>email.arrived</code>. Setting the category<br />
 helps the notification server to select proper feedback to the user.</p>
 <p>Standard categories are <a href="https://specifications.freedesktop.org/notification-spec/latest/ar01s06.html">listed in the specification</a>.</p>
 
@@ -908,14 +911,14 @@ helps the notification server to select proper feedback to the user.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the default action of <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> to <!-- raw HTML omitted -->detailed_action<!-- raw HTML omitted -->. This
+    <p>Sets the default action of <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> to <!-- raw HTML omitted -->detailed_action<!-- raw HTML omitted -->. This<br />
 action is activated when the notification is clicked on.</p>
-<p>The action in <!-- raw HTML omitted -->detailed_action<!-- raw HTML omitted --> must be an application-wide action (it
-must start with &quot;app.&quot;). If <!-- raw HTML omitted -->detailed_action<!-- raw HTML omitted --> contains a target, the
-given action will be activated with that target as its parameter.
-See g_action_parse_detailed_name() for a description of the format
+<p>The action in <!-- raw HTML omitted -->detailed_action<!-- raw HTML omitted --> must be an application-wide action (it<br />
+must start with &quot;app.&quot;). If <!-- raw HTML omitted -->detailed_action<!-- raw HTML omitted --> contains a target, the<br />
+given action will be activated with that target as its parameter.<br />
+See g_action_parse_detailed_name() for a description of the format<br />
 for <!-- raw HTML omitted -->detailed_action<!-- raw HTML omitted -->.</p>
-<p>When no default action is set, the application that the notification
+<p>When no default action is set, the application that the notification<br />
 was sent on is activated.</p>
 
 
@@ -1024,7 +1027,7 @@ was sent on is activated.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the priority of <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> to <!-- raw HTML omitted -->priority<!-- raw HTML omitted -->. See
+    <p>Sets the priority of <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> to <!-- raw HTML omitted -->priority<!-- raw HTML omitted -->. See<br />
 GNotification::Priority for possible values.</p>
 
 
@@ -1079,14 +1082,14 @@ GNotification::Priority for possible values.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the default action of <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> to <!-- raw HTML omitted -->action<!-- raw HTML omitted -->. This action is
-activated when the notification is clicked on. It must be an
+    <p>Sets the default action of <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> to <!-- raw HTML omitted -->action<!-- raw HTML omitted -->. This action is<br />
+activated when the notification is clicked on. It must be an<br />
 application-wide action (it must start with &quot;app.&quot;).</p>
-<p>If <!-- raw HTML omitted -->target_format<!-- raw HTML omitted --> is given, it is used to collect remaining
-positional parameters into a #GVariant instance, similar to
-g_variant_new(). <!-- raw HTML omitted -->action<!-- raw HTML omitted --> will be activated with that #GVariant as its
+<p>If <!-- raw HTML omitted -->target_format<!-- raw HTML omitted --> is given, it is used to collect remaining<br />
+positional parameters into a #GVariant instance, similar to<br />
+g_variant_new(). <!-- raw HTML omitted -->action<!-- raw HTML omitted --> will be activated with that #GVariant as its<br />
 parameter.</p>
-<p>When no default action is set, the application that the notification
+<p>When no default action is set, the application that the notification<br />
 was sent on is activated.</p>
 
 
@@ -1171,12 +1174,12 @@ was sent on is activated.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the default action of <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> to <!-- raw HTML omitted -->action<!-- raw HTML omitted -->. This action is
-activated when the notification is clicked on. It must be an
+    <p>Sets the default action of <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> to <!-- raw HTML omitted -->action<!-- raw HTML omitted -->. This action is<br />
+activated when the notification is clicked on. It must be an<br />
 application-wide action (start with &quot;app.&quot;).</p>
-<p>If <!-- raw HTML omitted -->target<!-- raw HTML omitted --> is non-nil, <!-- raw HTML omitted -->action<!-- raw HTML omitted --> will be activated with <!-- raw HTML omitted -->target<!-- raw HTML omitted --> as
+<p>If <!-- raw HTML omitted -->target<!-- raw HTML omitted --> is non-nil, <!-- raw HTML omitted -->action<!-- raw HTML omitted --> will be activated with <!-- raw HTML omitted -->target<!-- raw HTML omitted --> as<br />
 its parameter. If <!-- raw HTML omitted -->target<!-- raw HTML omitted --> is floating, it will be consumed.</p>
-<p>When no default action is set, the application that the notification
+<p>When no default action is set, the application that the notification<br />
 was sent on is activated.</p>
 
 
@@ -1350,7 +1353,7 @@ was sent on is activated.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

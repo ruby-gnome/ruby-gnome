@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::TextBuffer";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -99,8 +100,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/deprecated.rb<span class="defines">,<br />
+    <dd>lib/gtk4/deprecated.rb<span class="defines">,<br>
   lib/gtk4/text-buffer.rb</span>
+
 </dd>
   </dl>
   
@@ -2242,6 +2244,7 @@
 
       
     </ul>
+    
   
 
 
@@ -2308,10 +2311,10 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds the mark at position <!-- raw HTML omitted -->where<!-- raw HTML omitted -->.</p>
-<p>The mark must not be added to another buffer, and if its name
-is not nil then there must not be another mark in the buffer
+<p>The mark must not be added to another buffer, and if its name<br />
+is not nil then there must not be another mark in the buffer<br />
 with the same name.</p>
-<p>Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::mark-set] signal as notification
+<p>Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::mark-set] signal as notification<br />
 of the mark's initial placement.</p>
 
 
@@ -2406,10 +2409,10 @@ of the mark's initial placement.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds the mark at position <!-- raw HTML omitted -->where<!-- raw HTML omitted -->.</p>
-<p>The mark must not be added to another buffer, and if its name
-is not nil then there must not be another mark in the buffer
+<p>The mark must not be added to another buffer, and if its name<br />
+is not nil then there must not be another mark in the buffer<br />
 with the same name.</p>
-<p>Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::mark-set] signal as notification
+<p>Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::mark-set] signal as notification<br />
 of the mark's initial placement.</p>
 
 
@@ -2493,9 +2496,9 @@ of the mark's initial placement.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted --> to the list of clipboards in which the selection
+    <p>Adds <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted --> to the list of clipboards in which the selection<br />
 contents of <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> are available.</p>
-<p>In most cases, <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted --> will be the <code>GdkClipboard</code> returned by
+<p>In most cases, <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted --> will be the <code>GdkClipboard</code> returned by<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.get_primary_clipboard] for a view of <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
 
 
@@ -2551,8 +2554,8 @@ contents of <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> are availab
 </h3><div class="docstring">
   <div class="discussion">
     <p>Emits the “apply-tag” signal on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>The default handler for the signal applies
-<!-- raw HTML omitted -->tag<!-- raw HTML omitted --> to the given range. <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> do
+<p>The default handler for the signal applies<br />
+<!-- raw HTML omitted -->tag<!-- raw HTML omitted --> to the given range. <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> do<br />
 not have to be in order.</p>
 
 
@@ -2664,8 +2667,8 @@ not have to be in order.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Emits the “apply-tag” signal on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>Calls [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTagTable.lookup] on the buffer’s
-tag table to get a <code>GtkTextTag</code>, then calls
+<p>Calls [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTagTable.lookup] on the buffer’s<br />
+tag table to get a <code>GtkTextTag</code>, then calls<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.apply_tag].</p>
 
 
@@ -2751,8 +2754,8 @@ tag table to get a <code>GtkTextTag</code>, then calls
 </h3><div class="docstring">
   <div class="discussion">
     <p>Emits the “apply-tag” signal on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>The default handler for the signal applies
-<!-- raw HTML omitted -->tag<!-- raw HTML omitted --> to the given range. <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> do
+<p>The default handler for the signal applies<br />
+<!-- raw HTML omitted -->tag<!-- raw HTML omitted --> to the given range. <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> do<br />
 not have to be in order.</p>
 
 
@@ -2851,14 +2854,14 @@ not have to be in order.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Performs the appropriate action as if the user hit the delete
+    <p>Performs the appropriate action as if the user hit the delete<br />
 key with the cursor at the position specified by <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
-<p>In the normal case a single character will be deleted, but when
-combining accents are involved, more than one character can
-be deleted, and when precomposed character and accent combinations
+<p>In the normal case a single character will be deleted, but when<br />
+combining accents are involved, more than one character can<br />
+be deleted, and when precomposed character and accent combinations<br />
 are involved, less than one character will be deleted.</p>
-<p>Because the buffer is modified, all outstanding iterators become
-invalid after calling this function; however, the <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be
+<p>Because the buffer is modified, all outstanding iterators become<br />
+invalid after calling this function; however, the <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be<br />
 re-initialized to point to the location where text was deleted.</p>
 
 
@@ -2948,12 +2951,12 @@ re-initialized to point to the location where text was deleted.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Denotes the beginning of an action that may not be undone.</p>
-<p>This will cause any previous operations in the undo/redo queue
+<p>This will cause any previous operations in the undo/redo queue<br />
 to be cleared.</p>
-<p>This should be paired with a call to
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.end_irreversible_action] after the irreversible
+<p>This should be paired with a call to<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.end_irreversible_action] after the irreversible<br />
 action has completed.</p>
-<p>You may nest calls to gtk_text_buffer_begin_irreversible_action()
+<p>You may nest calls to gtk_text_buffer_begin_irreversible_action()<br />
 and gtk_text_buffer_end_irreversible_action() pairs.</p>
 
 
@@ -3020,12 +3023,12 @@ and gtk_text_buffer_end_irreversible_action() pairs.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Denotes the beginning of an action that may not be undone.</p>
-<p>This will cause any previous operations in the undo/redo queue
+<p>This will cause any previous operations in the undo/redo queue<br />
 to be cleared.</p>
-<p>This should be paired with a call to
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.end_irreversible_action] after the irreversible
+<p>This should be paired with a call to<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.end_irreversible_action] after the irreversible<br />
 action has completed.</p>
-<p>You may nest calls to gtk_text_buffer_begin_irreversible_action()
+<p>You may nest calls to gtk_text_buffer_begin_irreversible_action()<br />
 and gtk_text_buffer_end_irreversible_action() pairs.</p>
 
 
@@ -3075,21 +3078,21 @@ and gtk_text_buffer_end_irreversible_action() pairs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Called to indicate that the buffer operations between here and a
-call to gtk_text_buffer_end_user_action() are part of a single
+    <p>Called to indicate that the buffer operations between here and a<br />
+call to gtk_text_buffer_end_user_action() are part of a single<br />
 user-visible operation.</p>
-<p>The operations between gtk_text_buffer_begin_user_action() and
-gtk_text_buffer_end_user_action() can then be grouped when creating
-an undo stack. <code>GtkTextBuffer</code> maintains a count of calls to
-gtk_text_buffer_begin_user_action() that have not been closed with
-a call to gtk_text_buffer_end_user_action(), and emits the
-“begin-user-action” and “end-user-action” signals only for the
-outermost pair of calls. This allows you to build user actions
+<p>The operations between gtk_text_buffer_begin_user_action() and<br />
+gtk_text_buffer_end_user_action() can then be grouped when creating<br />
+an undo stack. <code>GtkTextBuffer</code> maintains a count of calls to<br />
+gtk_text_buffer_begin_user_action() that have not been closed with<br />
+a call to gtk_text_buffer_end_user_action(), and emits the<br />
+“begin-user-action” and “end-user-action” signals only for the<br />
+outermost pair of calls. This allows you to build user actions<br />
 from other user actions.</p>
-<p>The “interactive” buffer mutation functions, such as
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.insert_interactive], automatically call
-begin/end user action around the buffer operations they perform,
-so there's no need to add extra calls if you user action consists
+<p>The “interactive” buffer mutation functions, such as<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.insert_interactive], automatically call<br />
+begin/end user action around the buffer operations they perform,<br />
+so there's no need to add extra calls if you user action consists<br />
 solely of a single call to one of those functions.</p>
 
 
@@ -3416,8 +3419,8 @@ solely of a single call to one of those functions.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the number of characters in the buffer.</p>
-<p>Note that characters and bytes are not the same, you can’t e.g.
-expect the contents of the buffer in string form to be this
+<p>Note that characters and bytes are not the same, you can’t e.g.<br />
+expect the contents of the buffer in string form to be this<br />
 many bytes long.</p>
 <p>The character count is cached, so this function is very fast.</p>
 
@@ -3513,10 +3516,10 @@ many bytes long.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates and inserts a child anchor.</p>
-<p>This is a convenience function which simply creates a child anchor
-with [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextChildAnchor.new] and inserts it into the buffer
+<p>This is a convenience function which simply creates a child anchor<br />
+with [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextChildAnchor.new] and inserts it into the buffer<br />
 with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.insert_child_anchor].</p>
-<p>The new anchor is owned by the buffer; no reference count is
+<p>The new anchor is owned by the buffer; no reference count is<br />
 returned to the caller of this function.</p>
 
 
@@ -3576,20 +3579,20 @@ returned to the caller of this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a mark at position <!-- raw HTML omitted -->where<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->mark_name<!-- raw HTML omitted --> is nil, the mark is anonymous; otherwise, the mark
-can be retrieved by name using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_mark].
-If a mark has left gravity, and text is inserted at the mark’s
-current location, the mark will be moved to the left of the
-newly-inserted text. If the mark has right gravity
-(<!-- raw HTML omitted -->left_gravity<!-- raw HTML omitted --> = false), the mark will end up on the right of
-newly-inserted text. The standard left-to-right cursor is a mark
-with right gravity (when you type, the cursor stays on the right
+<p>If <!-- raw HTML omitted -->mark_name<!-- raw HTML omitted --> is nil, the mark is anonymous; otherwise, the mark<br />
+can be retrieved by name using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_mark].<br />
+If a mark has left gravity, and text is inserted at the mark’s<br />
+current location, the mark will be moved to the left of the<br />
+newly-inserted text. If the mark has right gravity<br />
+(<!-- raw HTML omitted -->left_gravity<!-- raw HTML omitted --> = false), the mark will end up on the right of<br />
+newly-inserted text. The standard left-to-right cursor is a mark<br />
+with right gravity (when you type, the cursor stays on the right<br />
 side of the text you’re typing).</p>
-<p>The caller of this function does not own a
-reference to the returned <code>GtkTextMark</code>, so you can ignore the
-return value if you like. Marks are owned by the buffer and go
+<p>The caller of this function does not own a<br />
+reference to the returned <code>GtkTextMark</code>, so you can ignore the<br />
+return value if you like. Marks are owned by the buffer and go<br />
 away when the buffer does.</p>
-<p>Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::mark-set] signal as notification
+<p>Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::mark-set] signal as notification<br />
 of the mark's initial placement.</p>
 
 
@@ -3717,20 +3720,20 @@ of the mark's initial placement.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a mark at position <!-- raw HTML omitted -->where<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->mark_name<!-- raw HTML omitted --> is nil, the mark is anonymous; otherwise, the mark
-can be retrieved by name using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_mark].
-If a mark has left gravity, and text is inserted at the mark’s
-current location, the mark will be moved to the left of the
-newly-inserted text. If the mark has right gravity
-(<!-- raw HTML omitted -->left_gravity<!-- raw HTML omitted --> = false), the mark will end up on the right of
-newly-inserted text. The standard left-to-right cursor is a mark
-with right gravity (when you type, the cursor stays on the right
+<p>If <!-- raw HTML omitted -->mark_name<!-- raw HTML omitted --> is nil, the mark is anonymous; otherwise, the mark<br />
+can be retrieved by name using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_mark].<br />
+If a mark has left gravity, and text is inserted at the mark’s<br />
+current location, the mark will be moved to the left of the<br />
+newly-inserted text. If the mark has right gravity<br />
+(<!-- raw HTML omitted -->left_gravity<!-- raw HTML omitted --> = false), the mark will end up on the right of<br />
+newly-inserted text. The standard left-to-right cursor is a mark<br />
+with right gravity (when you type, the cursor stays on the right<br />
 side of the text you’re typing).</p>
-<p>The caller of this function does not own a
-reference to the returned <code>GtkTextMark</code>, so you can ignore the
-return value if you like. Marks are owned by the buffer and go
+<p>The caller of this function does not own a<br />
+reference to the returned <code>GtkTextMark</code>, so you can ignore the<br />
+return value if you like. Marks are owned by the buffer and go<br />
 away when the buffer does.</p>
-<p>Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::mark-set] signal as notification
+<p>Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::mark-set] signal as notification<br />
 of the mark's initial placement.</p>
 
 
@@ -3834,13 +3837,13 @@ of the mark's initial placement.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a tag and adds it to the tag table for <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>Equivalent to calling [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTag.new] and then adding the
-tag to the buffer’s tag table. The returned tag is owned by
+<p>Equivalent to calling [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTag.new] and then adding the<br />
+tag to the buffer’s tag table. The returned tag is owned by<br />
 the buffer’s tag table, so the ref count will be equal to one.</p>
 <p>If <!-- raw HTML omitted -->tag_name<!-- raw HTML omitted --> is nil, the tag is anonymous.</p>
-<p>If <!-- raw HTML omitted -->tag_name<!-- raw HTML omitted --> is non-nil, a tag called <!-- raw HTML omitted -->tag_name<!-- raw HTML omitted --> must not already
+<p>If <!-- raw HTML omitted -->tag_name<!-- raw HTML omitted --> is non-nil, a tag called <!-- raw HTML omitted -->tag_name<!-- raw HTML omitted --> must not already<br />
 exist in the tag table for this buffer.</p>
-<p>The <!-- raw HTML omitted -->first_property_name<!-- raw HTML omitted --> argument and subsequent arguments are a list
+<p>The <!-- raw HTML omitted -->first_property_name<!-- raw HTML omitted --> argument and subsequent arguments are a list<br />
 of properties to set on the tag, as with g_object_set().</p>
 
 
@@ -3968,7 +3971,7 @@ of properties to set on the tag, as with g_object_set().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The position of the insert mark.</p>
-<p>This is an offset from the beginning of the buffer.
+<p>This is an offset from the beginning of the buffer.<br />
 It is useful for getting notified when the cursor moves.</p>
 
 
@@ -4009,7 +4012,7 @@ It is useful for getting notified when the cursor moves.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The position of the insert mark.</p>
-<p>This is an offset from the beginning of the buffer.
+<p>This is an offset from the beginning of the buffer.<br />
 It is useful for getting notified when the cursor moves.</p>
 
 
@@ -4077,7 +4080,7 @@ It is useful for getting notified when the cursor moves.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Copies the currently-selected text to a clipboard,
+    <p>Copies the currently-selected text to a clipboard,<br />
 then deletes said text if it’s editable.</p>
 
 
@@ -4148,12 +4151,12 @@ then deletes said text if it’s editable.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Deletes text between <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted -->.</p>
-<p>The order of <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> is not actually relevant;
+<p>The order of <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> is not actually relevant;<br />
 gtk_text_buffer_delete() will reorder them.</p>
-<p>This function actually emits the “delete-range” signal, and
-the default handler of that signal deletes the text. Because the
-buffer is modified, all outstanding iterators become invalid after
-calling this function; however, the <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> will be
+<p>This function actually emits the “delete-range” signal, and<br />
+the default handler of that signal deletes the text. Because the<br />
+buffer is modified, all outstanding iterators become invalid after<br />
+calling this function; however, the <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> will be<br />
 re-initialized to point to the location where text was deleted.</p>
 
 
@@ -4224,9 +4227,9 @@ re-initialized to point to the location where text was deleted.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Deletes all editable text in the given range.</p>
-<p>Calls [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.delete] for each editable
-sub-range of [<!-- raw HTML omitted -->start<!-- raw HTML omitted -->,<!-- raw HTML omitted -->end<!-- raw HTML omitted -->). <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> are revalidated
-to point to the location of the last deleted range, or left
+<p>Calls [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.delete] for each editable<br />
+sub-range of [<!-- raw HTML omitted -->start<!-- raw HTML omitted -->,<!-- raw HTML omitted -->end<!-- raw HTML omitted -->). <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> are revalidated<br />
+to point to the location of the last deleted range, or left<br />
 untouched if no text was deleted.</p>
 
 
@@ -4315,15 +4318,15 @@ untouched if no text was deleted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Deletes <!-- raw HTML omitted -->mark<!-- raw HTML omitted -->, so that it’s no longer located anywhere in the
+    <p>Deletes <!-- raw HTML omitted -->mark<!-- raw HTML omitted -->, so that it’s no longer located anywhere in the<br />
 buffer.</p>
-<p>Removes the reference the buffer holds to the mark, so if
-you haven’t called g_object_ref() on the mark, it will be freed.
-Even if the mark isn’t freed, most operations on <!-- raw HTML omitted -->mark<!-- raw HTML omitted --> become
-invalid, until it gets added to a buffer again with
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.add_mark]. Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextMark.get_deleted]
+<p>Removes the reference the buffer holds to the mark, so if<br />
+you haven’t called g_object_ref() on the mark, it will be freed.<br />
+Even if the mark isn’t freed, most operations on <!-- raw HTML omitted -->mark<!-- raw HTML omitted --> become<br />
+invalid, until it gets added to a buffer again with<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.add_mark]. Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextMark.get_deleted]<br />
 to find out if a mark has been removed from its buffer.</p>
-<p>The [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::mark-deleted] signal will be emitted as
+<p>The [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::mark-deleted] signal will be emitted as<br />
 notification after the mark is deleted.</p>
 
 
@@ -4457,15 +4460,15 @@ notification after the mark is deleted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Deletes <!-- raw HTML omitted -->mark<!-- raw HTML omitted -->, so that it’s no longer located anywhere in the
+    <p>Deletes <!-- raw HTML omitted -->mark<!-- raw HTML omitted -->, so that it’s no longer located anywhere in the<br />
 buffer.</p>
-<p>Removes the reference the buffer holds to the mark, so if
-you haven’t called g_object_ref() on the mark, it will be freed.
-Even if the mark isn’t freed, most operations on <!-- raw HTML omitted -->mark<!-- raw HTML omitted --> become
-invalid, until it gets added to a buffer again with
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.add_mark]. Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextMark.get_deleted]
+<p>Removes the reference the buffer holds to the mark, so if<br />
+you haven’t called g_object_ref() on the mark, it will be freed.<br />
+Even if the mark isn’t freed, most operations on <!-- raw HTML omitted -->mark<!-- raw HTML omitted --> become<br />
+invalid, until it gets added to a buffer again with<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.add_mark]. Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextMark.get_deleted]<br />
 to find out if a mark has been removed from its buffer.</p>
-<p>The [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::mark-deleted] signal will be emitted as
+<p>The [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::mark-deleted] signal will be emitted as<br />
 notification after the mark is deleted.</p>
 
 
@@ -4534,9 +4537,9 @@ notification after the mark is deleted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Deletes the range between the “insert” and “selection_bound” marks,
+    <p>Deletes the range between the “insert” and “selection_bound” marks,<br />
 that is, the currently-selected text.</p>
-<p>If <!-- raw HTML omitted -->interactive<!-- raw HTML omitted --> is true, the editability of the selection will be
+<p>If <!-- raw HTML omitted -->interactive<!-- raw HTML omitted --> is true, the editability of the selection will be<br />
 considered (users can’t delete uneditable text).</p>
 
 
@@ -4610,10 +4613,10 @@ considered (users can’t delete uneditable text).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether the buffer is saving modifications to the buffer
+    <p>Gets whether the buffer is saving modifications to the buffer<br />
 to allow for undo and redo actions.</p>
-<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.begin_irreversible_action] and
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.end_irreversible_action] to create
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.begin_irreversible_action] and<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.end_irreversible_action] to create<br />
 changes to the buffer that cannot be undone.</p>
 
 
@@ -4760,12 +4763,12 @@ changes to the buffer that cannot be undone.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Denotes the end of an action that may not be undone.</p>
-<p>This will cause any previous operations in the undo/redo
+<p>This will cause any previous operations in the undo/redo<br />
 queue to be cleared.</p>
-<p>This should be called after completing modifications to the
-text buffer after [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.begin_irreversible_action]
+<p>This should be called after completing modifications to the<br />
+text buffer after [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.begin_irreversible_action]<br />
 was called.</p>
-<p>You may nest calls to gtk_text_buffer_begin_irreversible_action()
+<p>You may nest calls to gtk_text_buffer_begin_irreversible_action()<br />
 and gtk_text_buffer_end_irreversible_action() pairs.</p>
 
 
@@ -4802,8 +4805,8 @@ and gtk_text_buffer_end_irreversible_action() pairs.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Ends a user-visible operation.</p>
-<p>Should be paired with a call to
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.begin_user_action].
+<p>Should be paired with a call to<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.begin_user_action].<br />
 See that function for a full explanation.</p>
 
 
@@ -4839,7 +4842,7 @@ See that function for a full explanation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the first and last iterators in the buffer, i.e. the
+    <p>Retrieves the first and last iterators in the buffer, i.e. the<br />
 entire buffer lies within the range [<!-- raw HTML omitted -->start<!-- raw HTML omitted -->,<!-- raw HTML omitted -->end<!-- raw HTML omitted -->).</p>
 
 
@@ -4909,12 +4912,12 @@ entire buffer lies within the range [<!-- raw HTML omitted -->start<!-- raw HTML
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Initializes <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> with the “end iterator,” one past the last valid
+    <p>Initializes <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> with the “end iterator,” one past the last valid<br />
 character in the text buffer.</p>
-<p>If dereferenced with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextIter.get_char], the end
-iterator has a character value of 0.
-The entire buffer lies in the range from the first position in
-the buffer (call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_start_iter] to get
+<p>If dereferenced with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextIter.get_char], the end<br />
+iterator has a character value of 0.<br />
+The entire buffer lies in the range from the first position in<br />
+the buffer (call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_start_iter] to get<br />
 character position 0) to the end iterator.</p>
 
 
@@ -5123,7 +5126,7 @@ character position 0) to the end iterator.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Initializes <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to the start of the given line.</p>
-<p>If <!-- raw HTML omitted -->line_number<!-- raw HTML omitted --> is greater than or equal to the number of lines
+<p>If <!-- raw HTML omitted -->line_number<!-- raw HTML omitted --> is greater than or equal to the number of lines<br />
 in the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, the end iterator is returned.</p>
 
 
@@ -5202,10 +5205,10 @@ in the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, the end iterato
 </h3><div class="docstring">
   <div class="discussion">
     <p>Obtains an iterator pointing to <!-- raw HTML omitted -->byte_index<!-- raw HTML omitted --> within the given line.</p>
-<p><!-- raw HTML omitted -->byte_index<!-- raw HTML omitted --> must be the start of a UTF-8 character. Note bytes, not
+<p><!-- raw HTML omitted -->byte_index<!-- raw HTML omitted --> must be the start of a UTF-8 character. Note bytes, not<br />
 characters; UTF-8 may encode one character as multiple bytes.</p>
-<p>If <!-- raw HTML omitted -->line_number<!-- raw HTML omitted --> is greater than or equal to the number of lines in the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->,
-the end iterator is returned. And if <!-- raw HTML omitted -->byte_index<!-- raw HTML omitted --> is off the
+<p>If <!-- raw HTML omitted -->line_number<!-- raw HTML omitted --> is greater than or equal to the number of lines in the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->,<br />
+the end iterator is returned. And if <!-- raw HTML omitted -->byte_index<!-- raw HTML omitted --> is off the<br />
 end of the line, the iterator at the end of the line is returned.</p>
 
 
@@ -5299,10 +5302,10 @@ end of the line, the iterator at the end of the line is returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Obtains an iterator pointing to <!-- raw HTML omitted -->char_offset<!-- raw HTML omitted --> within the given line.</p>
-<p>Note characters, not bytes; UTF-8 may encode one character as multiple
+<p>Note characters, not bytes; UTF-8 may encode one character as multiple<br />
 bytes.</p>
-<p>If <!-- raw HTML omitted -->line_number<!-- raw HTML omitted --> is greater than or equal to the number of lines in the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->,
-the end iterator is returned. And if <!-- raw HTML omitted -->char_offset<!-- raw HTML omitted --> is off the
+<p>If <!-- raw HTML omitted -->line_number<!-- raw HTML omitted --> is greater than or equal to the number of lines in the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->,<br />
+the end iterator is returned. And if <!-- raw HTML omitted -->char_offset<!-- raw HTML omitted --> is off the<br />
 end of the line, the iterator at the end of the line is returned.</p>
 
 
@@ -5468,10 +5471,10 @@ end of the line, the iterator at the end of the line is returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Initializes <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to a position <!-- raw HTML omitted -->char_offset<!-- raw HTML omitted --> chars from the start
+    <p>Initializes <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to a position <!-- raw HTML omitted -->char_offset<!-- raw HTML omitted --> chars from the start<br />
 of the entire buffer.</p>
-<p>If <!-- raw HTML omitted -->char_offset<!-- raw HTML omitted --> is -1 or greater than the number
-of characters in the buffer, <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is initialized to the end iterator,
+<p>If <!-- raw HTML omitted -->char_offset<!-- raw HTML omitted --> is -1 or greater than the number<br />
+of characters in the buffer, <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is initialized to the end iterator,<br />
 the iterator one past the last valid character in the buffer.</p>
 
 
@@ -5541,7 +5544,7 @@ the iterator one past the last valid character in the buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the mark named <!-- raw HTML omitted -->name<!-- raw HTML omitted --> in buffer <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, or nil if no such
+    <p>Returns the mark named <!-- raw HTML omitted -->name<!-- raw HTML omitted --> in buffer <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, or nil if no such<br />
 mark exists in the buffer.</p>
 
 
@@ -5600,11 +5603,11 @@ mark exists in the buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if some text is selected; places the bounds
+    <p>Returns true if some text is selected; places the bounds<br />
 of the selection in <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted -->.</p>
-<p>If the selection has length 0, then <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> are filled
-in with the same value. <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> will be in ascending order.
-If <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> are nil, then they are not filled in, but the
+<p>If the selection has length 0, then <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> are filled<br />
+in with the same value. <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> will be in ascending order.<br />
+If <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> are nil, then they are not filled in, but the<br />
 return value still indicates whether text is selected.</p>
 
 
@@ -5679,13 +5682,13 @@ return value still indicates whether text is selected.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the text in the range [<!-- raw HTML omitted -->start<!-- raw HTML omitted -->,<!-- raw HTML omitted -->end<!-- raw HTML omitted -->).</p>
-<p>Excludes undisplayed text (text marked with tags that set the
-invisibility attribute) if <!-- raw HTML omitted -->include_hidden_chars<!-- raw HTML omitted --> is false.
-The returned string includes a 0xFFFC character whenever the
-buffer contains embedded images, so byte and character indexes
-into the returned string do correspond to byte and character
-indexes into the buffer. Contrast with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_text].
-Note that 0xFFFC can occur in normal text as well, so it is not a
+<p>Excludes undisplayed text (text marked with tags that set the<br />
+invisibility attribute) if <!-- raw HTML omitted -->include_hidden_chars<!-- raw HTML omitted --> is false.<br />
+The returned string includes a 0xFFFC character whenever the<br />
+buffer contains embedded images, so byte and character indexes<br />
+into the returned string do correspond to byte and character<br />
+indexes into the buffer. Contrast with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_text].<br />
+Note that 0xFFFC can occur in normal text as well, so it is not a<br />
 reliable indicator that a paintable or widget is in the buffer.</p>
 
 
@@ -5775,7 +5778,7 @@ reliable indicator that a paintable or widget is in the buffer.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Initialized <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> with the first position in the text buffer.</p>
-<p>This is the same as using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_iter_at_offset]
+<p>This is the same as using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_iter_at_offset]<br />
 to get the iter at character offset 0.</p>
 
 
@@ -5831,11 +5834,11 @@ to get the iter at character offset 0.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the text in the range [<!-- raw HTML omitted -->start<!-- raw HTML omitted -->,<!-- raw HTML omitted -->end<!-- raw HTML omitted -->).</p>
-<p>Excludes undisplayed text (text marked with tags that set the
-invisibility attribute) if <!-- raw HTML omitted -->include_hidden_chars<!-- raw HTML omitted --> is false.
-Does not include characters representing embedded images, so
-byte and character indexes into the returned string do not
-correspond to byte and character indexes into the buffer.
+<p>Excludes undisplayed text (text marked with tags that set the<br />
+invisibility attribute) if <!-- raw HTML omitted -->include_hidden_chars<!-- raw HTML omitted --> is false.<br />
+Does not include characters representing embedded images, so<br />
+byte and character indexes into the returned string do not<br />
+correspond to byte and character indexes into the buffer.<br />
 Contrast with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_slice].</p>
 
 
@@ -6070,11 +6073,11 @@ Contrast with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextB
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts <!-- raw HTML omitted -->len<!-- raw HTML omitted --> bytes of <!-- raw HTML omitted -->text<!-- raw HTML omitted --> at position <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->len<!-- raw HTML omitted --> is -1, <!-- raw HTML omitted -->text<!-- raw HTML omitted --> must be nul-terminated and will be inserted in its
-entirety. Emits the “insert-text” signal; insertion actually occurs
-in the default handler for the signal. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is invalidated when
-insertion occurs (because the buffer contents change), but the
-default signal handler revalidates it to point to the end of the
+<p>If <!-- raw HTML omitted -->len<!-- raw HTML omitted --> is -1, <!-- raw HTML omitted -->text<!-- raw HTML omitted --> must be nul-terminated and will be inserted in its<br />
+entirety. Emits the “insert-text” signal; insertion actually occurs<br />
+in the default handler for the signal. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is invalidated when<br />
+insertion occurs (because the buffer contents change), but the<br />
+default signal handler revalidates it to point to the end of the<br />
 inserted text.</p>
 
 
@@ -6296,7 +6299,7 @@ inserted text.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts <!-- raw HTML omitted -->text<!-- raw HTML omitted --> in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>Simply calls [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.insert],
+<p>Simply calls [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.insert],<br />
 using the current cursor position as the insertion point.</p>
 
 
@@ -6401,7 +6404,7 @@ using the current cursor position as the insertion point.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts <!-- raw HTML omitted -->text<!-- raw HTML omitted --> in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>Simply calls [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.insert],
+<p>Simply calls [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.insert],<br />
 using the current cursor position as the insertion point.</p>
 
 
@@ -6490,15 +6493,15 @@ using the current cursor position as the insertion point.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts a child widget anchor into the text buffer at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
-<p>The anchor will be counted as one character in character counts, and
-when obtaining the buffer contents as a string, will be represented
-by the Unicode “object replacement character” 0xFFFC. Note that the
-“slice” variants for obtaining portions of the buffer as a string
-include this character for child anchors, but the “text” variants do
-not. E.g. see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_slice] and
+<p>The anchor will be counted as one character in character counts, and<br />
+when obtaining the buffer contents as a string, will be represented<br />
+by the Unicode “object replacement character” 0xFFFC. Note that the<br />
+“slice” variants for obtaining portions of the buffer as a string<br />
+include this character for child anchors, but the “text” variants do<br />
+not. E.g. see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_slice] and<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_text].</p>
-<p>Consider [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.create_child_anchor] as a more
-convenient alternative to this function. The buffer will add a
+<p>Consider [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.create_child_anchor] as a more<br />
+convenient alternative to this function. The buffer will add a<br />
 reference to the anchor, so you can unref it after insertion.</p>
 
 
@@ -6569,9 +6572,9 @@ reference to the anchor, so you can unref it after insertion.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts the text in <!-- raw HTML omitted -->markup<!-- raw HTML omitted --> at position <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
-<p><!-- raw HTML omitted -->markup<!-- raw HTML omitted --> will be inserted in its entirety and must be nul-terminated
-and valid UTF-8. Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::insert-text] signal,
-possibly multiple times; insertion actually occurs in the default handler
+<p><!-- raw HTML omitted -->markup<!-- raw HTML omitted --> will be inserted in its entirety and must be nul-terminated<br />
+and valid UTF-8. Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::insert-text] signal,<br />
+possibly multiple times; insertion actually occurs in the default handler<br />
 for the signal. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will point to the end of the inserted text on return.</p>
 
 
@@ -6687,9 +6690,9 @@ for the signal. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will poin
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts the text in <!-- raw HTML omitted -->markup<!-- raw HTML omitted --> at position <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
-<p><!-- raw HTML omitted -->markup<!-- raw HTML omitted --> will be inserted in its entirety and must be nul-terminated
-and valid UTF-8. Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::insert-text] signal,
-possibly multiple times; insertion actually occurs in the default handler
+<p><!-- raw HTML omitted -->markup<!-- raw HTML omitted --> will be inserted in its entirety and must be nul-terminated<br />
+and valid UTF-8. Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::insert-text] signal,<br />
+possibly multiple times; insertion actually occurs in the default handler<br />
 for the signal. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will point to the end of the inserted text on return.</p>
 
 
@@ -6793,12 +6796,12 @@ for the signal. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will poin
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts an image into the text buffer at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
-<p>The image will be counted as one character in character counts,
-and when obtaining the buffer contents as a string, will be
-represented by the Unicode “object replacement character” 0xFFFC.
-Note that the “slice” variants for obtaining portions of the buffer
-as a string include this character for paintable, but the “text”
-variants do not. e.g. see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_slice] and
+<p>The image will be counted as one character in character counts,<br />
+and when obtaining the buffer contents as a string, will be<br />
+represented by the Unicode “object replacement character” 0xFFFC.<br />
+Note that the “slice” variants for obtaining portions of the buffer<br />
+as a string include this character for paintable, but the “text”<br />
+variants do not. e.g. see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_slice] and<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_text].</p>
 
 
@@ -6868,13 +6871,13 @@ variants do not. e.g. see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitt
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Copies text, tags, and paintables between <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted -->
+    <p>Copies text, tags, and paintables between <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --><br />
 and inserts the copy at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
 <p>The order of <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> doesn’t matter.</p>
-<p>Used instead of simply getting/inserting text because it preserves
-images and tags. If <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> are in a different buffer from
+<p>Used instead of simply getting/inserting text because it preserves<br />
+images and tags. If <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> are in a different buffer from<br />
 <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, the two buffers must share the same tag table.</p>
-<p>Implemented via emissions of the ::insert-text and ::apply-tag signals,
+<p>Implemented via emissions of the ::insert-text and ::apply-tag signals,<br />
 so expect those.</p>
 
 
@@ -6959,12 +6962,12 @@ so expect those.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Copies text, tags, and paintables between <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted -->
+    <p>Copies text, tags, and paintables between <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --><br />
 and inserts the copy at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
-<p>Same as [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.insert_range], but does nothing
-if the insertion point isn’t editable. The <!-- raw HTML omitted -->default_editable<!-- raw HTML omitted -->
-parameter indicates whether the text is editable at <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> if
-no tags enclosing <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> affect editability. Typically the result
+<p>Same as [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.insert_range], but does nothing<br />
+if the insertion point isn’t editable. The <!-- raw HTML omitted -->default_editable<!-- raw HTML omitted --><br />
+parameter indicates whether the text is editable at <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> if<br />
+no tags enclosing <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> affect editability. Typically the result<br />
 of [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.get_editable] is appropriate here.</p>
 
 
@@ -7069,11 +7072,11 @@ of [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.get_edi
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts <!-- raw HTML omitted -->len<!-- raw HTML omitted --> bytes of <!-- raw HTML omitted -->text<!-- raw HTML omitted --> at position <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->len<!-- raw HTML omitted --> is -1, <!-- raw HTML omitted -->text<!-- raw HTML omitted --> must be nul-terminated and will be inserted in its
-entirety. Emits the “insert-text” signal; insertion actually occurs
-in the default handler for the signal. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is invalidated when
-insertion occurs (because the buffer contents change), but the
-default signal handler revalidates it to point to the end of the
+<p>If <!-- raw HTML omitted -->len<!-- raw HTML omitted --> is -1, <!-- raw HTML omitted -->text<!-- raw HTML omitted --> must be nul-terminated and will be inserted in its<br />
+entirety. Emits the “insert-text” signal; insertion actually occurs<br />
+in the default handler for the signal. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is invalidated when<br />
+insertion occurs (because the buffer contents change), but the<br />
+default signal handler revalidates it to point to the end of the<br />
 inserted text.</p>
 
 
@@ -7172,11 +7175,11 @@ inserted text.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts <!-- raw HTML omitted -->text<!-- raw HTML omitted --> into <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->, applying the list of tags to
+    <p>Inserts <!-- raw HTML omitted -->text<!-- raw HTML omitted --> into <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->, applying the list of tags to<br />
 the newly-inserted text.</p>
-<p>The last tag specified must be nil to terminate the list.
-Equivalent to calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.insert],
-then [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.apply_tag] on the inserted text;
+<p>The last tag specified must be nil to terminate the list.<br />
+Equivalent to calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.insert],<br />
+then [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.apply_tag] on the inserted text;<br />
 this is just a convenience function.</p>
 
 
@@ -7291,9 +7294,9 @@ this is just a convenience function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts <!-- raw HTML omitted -->text<!-- raw HTML omitted --> into <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->, applying the list of tags to
+    <p>Inserts <!-- raw HTML omitted -->text<!-- raw HTML omitted --> into <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->, applying the list of tags to<br />
 the newly-inserted text.</p>
-<p>Same as [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.insert_with_tags], but allows you
+<p>Same as [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.insert_with_tags], but allows you<br />
 to pass in tag names instead of tag objects.</p>
 
 
@@ -7449,8 +7452,8 @@ to pass in tag names instead of tag objects.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the maximum number of undo levels to perform.</p>
-<p>If 0, unlimited undo actions may be performed. Note that this may
-have a memory usage impact as it requires storing an additional
+<p>If 0, unlimited undo actions may be performed. Note that this may<br />
+have a memory usage impact as it requires storing an additional<br />
 copy of the inserted or removed text within the text buffer.</p>
 
 
@@ -7491,8 +7494,8 @@ copy of the inserted or removed text within the text buffer.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the maximum number of undo levels to perform.</p>
-<p>If 0, unlimited undo actions may be performed. Note that this may
-have a memory usage impact as it requires storing an additional
+<p>If 0, unlimited undo actions may be performed. Note that this may<br />
+have a memory usage impact as it requires storing an additional<br />
 copy of the inserted or removed text within the text buffer.</p>
 
 
@@ -7547,8 +7550,8 @@ copy of the inserted or removed text within the text buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Indicates whether the buffer has been modified since the last call
-to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.set_modified] set the modification flag to
+    <p>Indicates whether the buffer has been modified since the last call<br />
+to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.set_modified] set the modification flag to<br />
 false.</p>
 <p>Used for example to enable a “save” function in a text editor.</p>
 
@@ -7589,13 +7592,13 @@ false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Used to keep track of whether the buffer has been
+    <p>Used to keep track of whether the buffer has been<br />
 modified since the last time it was saved.</p>
-<p>Whenever the buffer is saved to disk, call
-<code>gtk_text_buffer_set_modified (&lt;b&gt;buffer&lt;/b&gt;, FALSE)</code>.
-When the buffer is modified, it will automatically
-toggle on the modified bit again. When the modified
-bit flips, the buffer emits the
+<p>Whenever the buffer is saved to disk, call<br />
+<code>gtk_text_buffer_set_modified (&lt;b&gt;buffer&lt;/b&gt;, FALSE)</code>.<br />
+When the buffer is modified, it will automatically<br />
+toggle on the modified bit again. When the modified<br />
+bit flips, the buffer emits the<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::modified-changed] signal.</p>
 
 
@@ -7651,7 +7654,7 @@ bit flips, the buffer emits the
 </h3><div class="docstring">
   <div class="discussion">
     <p>Moves <!-- raw HTML omitted -->mark<!-- raw HTML omitted --> to the new location <!-- raw HTML omitted -->where<!-- raw HTML omitted -->.</p>
-<p>Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::mark-set] signal
+<p>Emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::mark-set] signal<br />
 as notification of the move.</p>
 
 
@@ -7792,11 +7795,11 @@ as notification of the move.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Pastes the contents of a clipboard.</p>
-<p>If <!-- raw HTML omitted -->override_location<!-- raw HTML omitted --> is nil, the pasted text will be inserted
-at the cursor position, or the buffer selection will be replaced
+<p>If <!-- raw HTML omitted -->override_location<!-- raw HTML omitted --> is nil, the pasted text will be inserted<br />
+at the cursor position, or the buffer selection will be replaced<br />
 if the selection is non-empty.</p>
-<p>Note: pasting is asynchronous, that is, we’ll ask for the paste data
-and return, and at some point later after the main loop runs, the paste
+<p>Note: pasting is asynchronous, that is, we’ll ask for the paste data<br />
+and return, and at some point later after the main loop runs, the paste<br />
 data will be inserted.</p>
 
 
@@ -7881,13 +7884,13 @@ data will be inserted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function moves the “insert” and “selection_bound” marks
+    <p>This function moves the “insert” and “selection_bound” marks<br />
 simultaneously.</p>
-<p>If you move them to the same place in two steps with
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.move_mark], you will temporarily select a
-region in between their old and new locations, which can be pretty
-inefficient since the temporarily-selected region will force stuff
-to be recalculated. This function moves them as a unit, which can
+<p>If you move them to the same place in two steps with<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.move_mark], you will temporarily select a<br />
+region in between their old and new locations, which can be pretty<br />
+inefficient since the temporarily-selected region will force stuff<br />
+to be recalculated. This function moves them as a unit, which can<br />
 be optimized.</p>
 
 
@@ -7978,9 +7981,9 @@ be optimized.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Removes all tags in the range between <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted -->.</p>
-<p>Be careful with this function; it could remove tags added in code
-unrelated to the code you’re currently writing. That is, using this
-function is probably a bad idea if you have two or more unrelated
+<p>Be careful with this function; it could remove tags added in code<br />
+unrelated to the code you’re currently writing. That is, using this<br />
+function is probably a bad idea if you have two or more unrelated<br />
 code sections that add tags.</p>
 
 
@@ -8050,7 +8053,7 @@ code sections that add tags.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes a <code>GdkClipboard</code> added with
+    <p>Removes a <code>GdkClipboard</code> added with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.add_selection_clipboard]</p>
 
 
@@ -8070,7 +8073,7 @@ code sections that add tags.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GdkClipboard</code> added to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> by
+        <div class='inline'><p>a <code>GdkClipboard</code> added to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> by<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.add_selection_clipboard]</p>
 </div>
       
@@ -8107,8 +8110,8 @@ code sections that add tags.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Emits the “remove-tag” signal.</p>
-<p>The default handler for the signal removes all occurrences
-of <!-- raw HTML omitted -->tag<!-- raw HTML omitted --> from the given range. <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> don’t have
+<p>The default handler for the signal removes all occurrences<br />
+of <!-- raw HTML omitted -->tag<!-- raw HTML omitted --> from the given range. <!-- raw HTML omitted -->start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end<!-- raw HTML omitted --> don’t have<br />
 to be in order.</p>
 
 
@@ -8194,8 +8197,8 @@ to be in order.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Emits the “remove-tag” signal.</p>
-<p>Calls [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTagTable.lookup] on the buffer’s
-tag table to get a <code>GtkTextTag</code>, then calls
+<p>Calls [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTagTable.lookup] on the buffer’s<br />
+tag table to get a <code>GtkTextTag</code>, then calls<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.remove_tag].</p>
 
 
@@ -8280,13 +8283,13 @@ tag table to get a <code>GtkTextTag</code>, then calls
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function moves the “insert” and “selection_bound” marks
+    <p>This function moves the “insert” and “selection_bound” marks<br />
 simultaneously.</p>
-<p>If you move them in two steps with
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.move_mark], you will temporarily select a
-region in between their old and new locations, which can be pretty
-inefficient since the temporarily-selected region will force stuff
-to be recalculated. This function moves them as a unit, which can
+<p>If you move them in two steps with<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.move_mark], you will temporarily select a<br />
+region in between their old and new locations, which can be pretty<br />
+inefficient since the temporarily-selected region will force stuff<br />
+to be recalculated. This function moves them as a unit, which can<br />
 be optimized.</p>
 
 
@@ -8357,14 +8360,14 @@ be optimized.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the mark that represents the selection bound.</p>
-<p>Equivalent to calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_mark]
-to get the mark named “selection_bound”, but very slightly
+<p>Equivalent to calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_mark]<br />
+to get the mark named “selection_bound”, but very slightly<br />
 more efficient, and involves less typing.</p>
-<p>The currently-selected text in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is the region between the
-“selection_bound” and “insert” marks. If “selection_bound” and
-“insert” are in the same place, then there is no current selection.
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_selection_bounds] is another convenient
-function for handling the selection, if you just want to know whether
+<p>The currently-selected text in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is the region between the<br />
+“selection_bound” and “insert” marks. If “selection_bound” and<br />
+“insert” are in the same place, then there is no current selection.<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_selection_bounds] is another convenient<br />
+function for handling the selection, if you just want to know whether<br />
 there’s a selection and what its bounds are.</p>
 
 
@@ -8471,7 +8474,7 @@ there’s a selection and what its bounds are.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Get a content provider for this buffer.</p>
-<p>It can be used to make the content of <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> available
+<p>It can be used to make the content of <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> available<br />
 in a <code>GdkClipboard</code>, see [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.set_content].</p>
 
 
@@ -8515,11 +8518,11 @@ in a <code>GdkClipboard</code>, see [method<!-- raw HTML omitted -->Gdk<!-- raw 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Deletes current contents of <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, and inserts <!-- raw HTML omitted -->text<!-- raw HTML omitted --> instead. This is
-automatically marked as an irreversible action in the undo stack. If you
-wish to mark this action as part of a larger undo operation, call
+    <p>Deletes current contents of <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, and inserts <!-- raw HTML omitted -->text<!-- raw HTML omitted --> instead. This is<br />
+automatically marked as an irreversible action in the undo stack. If you<br />
+wish to mark this action as part of a larger undo operation, call<br />
 [method<!-- raw HTML omitted -->TextBuffer<!-- raw HTML omitted -->.delete] and [method<!-- raw HTML omitted -->TextBuffer<!-- raw HTML omitted -->.insert] directly instead.</p>
-<p>If <!-- raw HTML omitted -->len<!-- raw HTML omitted --> is -1, <!-- raw HTML omitted -->text<!-- raw HTML omitted --> must be nul-terminated.
+<p>If <!-- raw HTML omitted -->len<!-- raw HTML omitted --> is -1, <!-- raw HTML omitted -->text<!-- raw HTML omitted --> must be nul-terminated.<br />
 <!-- raw HTML omitted -->text<!-- raw HTML omitted --> must be valid UTF-8.</p>
 
 
@@ -8617,11 +8620,11 @@ wish to mark this action as part of a larger undo operation, call
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Deletes current contents of <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, and inserts <!-- raw HTML omitted -->text<!-- raw HTML omitted --> instead. This is
-automatically marked as an irreversible action in the undo stack. If you
-wish to mark this action as part of a larger undo operation, call
+    <p>Deletes current contents of <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, and inserts <!-- raw HTML omitted -->text<!-- raw HTML omitted --> instead. This is<br />
+automatically marked as an irreversible action in the undo stack. If you<br />
+wish to mark this action as part of a larger undo operation, call<br />
 [method<!-- raw HTML omitted -->TextBuffer<!-- raw HTML omitted -->.delete] and [method<!-- raw HTML omitted -->TextBuffer<!-- raw HTML omitted -->.insert] directly instead.</p>
-<p>If <!-- raw HTML omitted -->len<!-- raw HTML omitted --> is -1, <!-- raw HTML omitted -->text<!-- raw HTML omitted --> must be nul-terminated.
+<p>If <!-- raw HTML omitted -->len<!-- raw HTML omitted --> is -1, <!-- raw HTML omitted -->text<!-- raw HTML omitted --> must be nul-terminated.<br />
 <!-- raw HTML omitted -->text<!-- raw HTML omitted --> must be valid UTF-8.</p>
 
 
@@ -8812,7 +8815,7 @@ wish to mark this action as part of a larger undo operation, call
 </h3><div class="docstring">
   <div class="discussion">
     <p>The text content of the buffer.</p>
-<p>Without child widgets and images,
+<p>Without child widgets and images,<br />
 see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_text] for more information.</p>
 
 
@@ -8883,7 +8886,7 @@ see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.get_
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

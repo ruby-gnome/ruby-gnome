@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::TreeModelFilter";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk3/tree-model-filter.rb</dd>
+    <dd>lib/gtk3/tree-model-filter.rb
+</dd>
   </dl>
   
 </div>
@@ -529,6 +531,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -697,11 +700,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function should almost never be called. It clears the <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->
-of any cached iterators that haven’t been reffed with
-gtk_tree_model_ref_node(). This might be useful if the child model
-being filtered is static (and doesn’t change often) and there has been
-a lot of unreffed access to nodes. As a side effect of this function,
+    <p>This function should almost never be called. It clears the <!-- raw HTML omitted -->filter<!-- raw HTML omitted --><br />
+of any cached iterators that haven’t been reffed with<br />
+gtk_tree_model_ref_node(). This might be useful if the child model<br />
+being filtered is static (and doesn’t change often) and there has been<br />
+a lot of unreffed access to nodes. As a side effect of this function,<br />
 all unreffed iters will be invalid.</p>
 
 
@@ -737,9 +740,9 @@ all unreffed iters will be invalid.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->filter_iter<!-- raw HTML omitted --> to point to the row in <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> that corresponds to the
-row pointed at by <!-- raw HTML omitted -->child_iter<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->filter_iter<!-- raw HTML omitted --> was not set, false is
-returned.
+    <p>Sets <!-- raw HTML omitted -->filter_iter<!-- raw HTML omitted --> to point to the row in <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> that corresponds to the<br />
+row pointed at by <!-- raw HTML omitted -->child_iter<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->filter_iter<!-- raw HTML omitted --> was not set, false is<br />
+returned.<br />
 valid iterator pointing to a visible row in child model.</p>
 
 
@@ -839,9 +842,9 @@ valid iterator pointing to a visible row in child model.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->filter_iter<!-- raw HTML omitted --> to point to the row in <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> that corresponds to the
-row pointed at by <!-- raw HTML omitted -->child_iter<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->filter_iter<!-- raw HTML omitted --> was not set, false is
-returned.
+    <p>Sets <!-- raw HTML omitted -->filter_iter<!-- raw HTML omitted --> to point to the row in <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> that corresponds to the<br />
+row pointed at by <!-- raw HTML omitted -->child_iter<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->filter_iter<!-- raw HTML omitted --> was not set, false is<br />
+returned.<br />
 valid iterator pointing to a visible row in child model.</p>
 
 
@@ -929,10 +932,10 @@ valid iterator pointing to a visible row in child model.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts <!-- raw HTML omitted -->child_path<!-- raw HTML omitted --> to a path relative to <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->. That is, <!-- raw HTML omitted -->child_path<!-- raw HTML omitted -->
-points to a path in the child model. The rerturned path will point to the
-same row in the filtered model. If <!-- raw HTML omitted -->child_path<!-- raw HTML omitted --> isn’t a valid path on the
-child model or points to a row which is not visible in <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->, then nil
+    <p>Converts <!-- raw HTML omitted -->child_path<!-- raw HTML omitted --> to a path relative to <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->. That is, <!-- raw HTML omitted -->child_path<!-- raw HTML omitted --><br />
+points to a path in the child model. The rerturned path will point to the<br />
+same row in the filtered model. If <!-- raw HTML omitted -->child_path<!-- raw HTML omitted --> isn’t a valid path on the<br />
+child model or points to a row which is not visible in <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->, then nil<br />
 is returned.</p>
 
 
@@ -1165,9 +1168,9 @@ is returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts <!-- raw HTML omitted -->filter_path<!-- raw HTML omitted --> to a path on the child model of <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->. That is,
-<!-- raw HTML omitted -->filter_path<!-- raw HTML omitted --> points to a location in <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->. The returned path will
-point to the same location in the model not being filtered. If <!-- raw HTML omitted -->filter_path<!-- raw HTML omitted -->
+    <p>Converts <!-- raw HTML omitted -->filter_path<!-- raw HTML omitted --> to a path on the child model of <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->. That is,<br />
+<!-- raw HTML omitted -->filter_path<!-- raw HTML omitted --> points to a location in <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->. The returned path will<br />
+point to the same location in the model not being filtered. If <!-- raw HTML omitted -->filter_path<!-- raw HTML omitted --><br />
 does not point to a location in the child model, nil is returned.</p>
 
 
@@ -1265,7 +1268,7 @@ does not point to a location in the child model, nil is returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Emits ::row_changed for each row in the child model, which causes
+    <p>Emits ::row_changed for each row in the child model, which causes<br />
 the filter to re-evaluate whether a row is visible or not.</p>
 
 
@@ -1301,14 +1304,14 @@ the filter to re-evaluate whether a row is visible or not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>With the <!-- raw HTML omitted -->n_columns<!-- raw HTML omitted --> and <!-- raw HTML omitted -->types<!-- raw HTML omitted --> parameters, you give an array of column
-types for this model (which will be exposed to the parent model/view).
-The <!-- raw HTML omitted -->func<!-- raw HTML omitted -->, <!-- raw HTML omitted -->data<!-- raw HTML omitted --> and <!-- raw HTML omitted -->destroy<!-- raw HTML omitted --> parameters are for specifying the modify
-function. The modify function will get called for each
-data access, the goal of the modify function is to return the data which
-should be displayed at the location specified using the parameters of the
+    <p>With the <!-- raw HTML omitted -->n_columns<!-- raw HTML omitted --> and <!-- raw HTML omitted -->types<!-- raw HTML omitted --> parameters, you give an array of column<br />
+types for this model (which will be exposed to the parent model/view).<br />
+The <!-- raw HTML omitted -->func<!-- raw HTML omitted -->, <!-- raw HTML omitted -->data<!-- raw HTML omitted --> and <!-- raw HTML omitted -->destroy<!-- raw HTML omitted --> parameters are for specifying the modify<br />
+function. The modify function will get called for each<br />
+data access, the goal of the modify function is to return the data which<br />
+should be displayed at the location specified using the parameters of the<br />
 modify function.</p>
-<p>Note that gtk_tree_model_filter_set_modify_func()
+<p>Note that gtk_tree_model_filter_set_modify_func()<br />
 can only be called once for a given filter model.</p>
 
 
@@ -1456,14 +1459,14 @@ can only be called once for a given filter model.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>With the <!-- raw HTML omitted -->n_columns<!-- raw HTML omitted --> and <!-- raw HTML omitted -->types<!-- raw HTML omitted --> parameters, you give an array of column
-types for this model (which will be exposed to the parent model/view).
-The <!-- raw HTML omitted -->func<!-- raw HTML omitted -->, <!-- raw HTML omitted -->data<!-- raw HTML omitted --> and <!-- raw HTML omitted -->destroy<!-- raw HTML omitted --> parameters are for specifying the modify
-function. The modify function will get called for each
-data access, the goal of the modify function is to return the data which
-should be displayed at the location specified using the parameters of the
+    <p>With the <!-- raw HTML omitted -->n_columns<!-- raw HTML omitted --> and <!-- raw HTML omitted -->types<!-- raw HTML omitted --> parameters, you give an array of column<br />
+types for this model (which will be exposed to the parent model/view).<br />
+The <!-- raw HTML omitted -->func<!-- raw HTML omitted -->, <!-- raw HTML omitted -->data<!-- raw HTML omitted --> and <!-- raw HTML omitted -->destroy<!-- raw HTML omitted --> parameters are for specifying the modify<br />
+function. The modify function will get called for each<br />
+data access, the goal of the modify function is to return the data which<br />
+should be displayed at the location specified using the parameters of the<br />
 modify function.</p>
-<p>Note that gtk_tree_model_filter_set_modify_func()
+<p>Note that gtk_tree_model_filter_set_modify_func()<br />
 can only be called once for a given filter model.</p>
 
 
@@ -1592,15 +1595,15 @@ can only be called once for a given filter model.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the visible function used when filtering the <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> to be <!-- raw HTML omitted -->func<!-- raw HTML omitted -->.
-The function should return true if the given row should be visible and
+    <p>Sets the visible function used when filtering the <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> to be <!-- raw HTML omitted -->func<!-- raw HTML omitted -->.<br />
+The function should return true if the given row should be visible and<br />
 false otherwise.</p>
-<p>If the condition calculated by the function changes over time (e.g.
-because it depends on some global parameters), you must call
-gtk_tree_model_filter_refilter() to keep the visibility information
+<p>If the condition calculated by the function changes over time (e.g.<br />
+because it depends on some global parameters), you must call<br />
+gtk_tree_model_filter_refilter() to keep the visibility information<br />
 of the model up-to-date.</p>
-<p>Note that <!-- raw HTML omitted -->func<!-- raw HTML omitted --> is called whenever a row is inserted, when it may still
-be empty. The visible function should therefore take special care of empty
+<p>Note that <!-- raw HTML omitted -->func<!-- raw HTML omitted --> is called whenever a row is inserted, when it may still<br />
+be empty. The visible function should therefore take special care of empty<br />
 rows, like in the example below.</p>
 <pre class="code ruby"><code class="ruby">static gboolean
 visible_func (GtkTreeModel *model,
@@ -1619,8 +1622,8 @@ visible_func (GtkTreeModel *model,
   return visible;
 }
 </code></pre>
-<p>Note that gtk_tree_model_filter_set_visible_func() or
-gtk_tree_model_filter_set_visible_column() can only be called
+<p>Note that gtk_tree_model_filter_set_visible_func() or<br />
+gtk_tree_model_filter_set_visible_column() can only be called<br />
 once for a given filter model.</p>
 
 
@@ -1810,12 +1813,12 @@ once for a given filter model.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->column<!-- raw HTML omitted --> of the child_model to be the column where <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> should
-look for visibility information. <!-- raw HTML omitted -->columns<!-- raw HTML omitted --> should be a column of type
-%G_TYPE_BOOLEAN, where true means that a row is visible, and false
+    <p>Sets <!-- raw HTML omitted -->column<!-- raw HTML omitted --> of the child_model to be the column where <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> should<br />
+look for visibility information. <!-- raw HTML omitted -->columns<!-- raw HTML omitted --> should be a column of type<br />
+%G_TYPE_BOOLEAN, where true means that a row is visible, and false<br />
 if not.</p>
-<p>Note that gtk_tree_model_filter_set_visible_func() or
-gtk_tree_model_filter_set_visible_column() can only be called
+<p>Note that gtk_tree_model_filter_set_visible_func() or<br />
+gtk_tree_model_filter_set_visible_column() can only be called<br />
 once for a given filter model.</p>
 
 
@@ -1866,7 +1869,7 @@ once for a given filter model.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

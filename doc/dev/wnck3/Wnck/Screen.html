@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Wnck::Screen";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -207,6 +209,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -745,6 +748,7 @@
 
       
     </ul>
+    
   
 
 
@@ -764,8 +768,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the default Wnck::Screen on the default display.
-Wnck::Screen is owned by libwnck and must not be referenced or unreferenced. This
+    <p>Gets the default Wnck::Screen on the default display.<br />
+Wnck::Screen is owned by libwnck and must not be referenced or unreferenced. This<br />
 can return nil if not on X11.</p>
 
 
@@ -805,7 +809,7 @@ can return nil if not on X11.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Frees the content of <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->. This does not free <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> itself, so you
+    <p>Frees the content of <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->. This does not free <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> itself, so you<br />
 might want to free <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> yourself after calling this.</p>
 
 
@@ -860,8 +864,8 @@ might want to free <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> your
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Wnck::Screen for a given screen on the default display.
-if no such screen exists. The returned Wnck::Screen is owned by libwnck and
+    <p>Gets the Wnck::Screen for a given screen on the default display.<br />
+if no such screen exists. The returned Wnck::Screen is owned by libwnck and<br />
 must not be referenced or unreferenced.</p>
 
 
@@ -920,11 +924,11 @@ must not be referenced or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Wnck::Screen for the root window at <!-- raw HTML omitted -->root_window_id<!-- raw HTML omitted -->, or
+    <p>Gets the Wnck::Screen for the root window at <!-- raw HTML omitted -->root_window_id<!-- raw HTML omitted -->, or<br />
 nil if no Wnck::Screen exists for this root window.</p>
-<p>This function does not work if wnck_screen_get() was not called for the
-sought Wnck::Screen before, and returns nil.
-<!-- raw HTML omitted -->root_window_id<!-- raw HTML omitted -->, or nil. The returned Wnck::Screen is owned by libwnck and
+<p>This function does not work if wnck_screen_get() was not called for the<br />
+sought Wnck::Screen before, and returns nil.<br />
+<!-- raw HTML omitted -->root_window_id<!-- raw HTML omitted -->, or nil. The returned Wnck::Screen is owned by libwnck and<br />
 must not be referenced or unreferenced.</p>
 
 
@@ -989,9 +993,9 @@ must not be referenced or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the active Wnck::Window on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. May return nil sometimes, since
-not all window managers guarantee that a window is always active.
-The returned Wnck::Window is owned by libwnck and must not be referenced or
+    <p>Gets the active Wnck::Window on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. May return nil sometimes, since<br />
+not all window managers guarantee that a window is always active.<br />
+The returned Wnck::Window is owned by libwnck and must not be referenced or<br />
 unreferenced.</p>
 
 
@@ -1031,10 +1035,10 @@ unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the active Wnck::Workspace on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. May return nil sometimes,
-if libwnck is in a weird state due to the asynchronous nature of the
-interaction with the window manager.
-nil. The returned Wnck::Workspace is owned by libwnck and must not be
+    <p>Gets the active Wnck::Workspace on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. May return nil sometimes,<br />
+if libwnck is in a weird state due to the asynchronous nature of the<br />
+interaction with the window manager.<br />
+nil. The returned Wnck::Workspace is owned by libwnck and must not be<br />
 referenced or unreferenced.</p>
 
 
@@ -1113,9 +1117,9 @@ referenced or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calculates the layout of Wnck::Workspace, with additional information like
-the row and column of the Wnck::Workspace with index <!-- raw HTML omitted -->space_index<!-- raw HTML omitted -->.
-wnck_screen_calc_workspace_layout() find this number.
+    <p>Calculates the layout of Wnck::Workspace, with additional information like<br />
+the row and column of the Wnck::Workspace with index <!-- raw HTML omitted -->space_index<!-- raw HTML omitted -->.<br />
+wnck_screen_calc_workspace_layout() find this number.<br />
 information.</p>
 
 
@@ -1254,12 +1258,12 @@ information.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Synchronously and immediately updates the list of Wnck::Window on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->.
-This bypasses the standard update mechanism, where the list of Wnck::Window
+    <p>Synchronously and immediately updates the list of Wnck::Window on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->.<br />
+This bypasses the standard update mechanism, where the list of Wnck::Window<br />
 is updated in the idle loop.</p>
-<p>This is usually a bad idea for both performance and correctness reasons (to
-get things right, you need to write model-view code that tracks changes, not
-get a static list of open windows). However, this function can be useful for
+<p>This is usually a bad idea for both performance and correctness reasons (to<br />
+get things right, you need to write model-view code that tracks changes, not<br />
+get a static list of open windows). However, this function can be useful for<br />
 small applications that just do something and then exit.</p>
 
 
@@ -1295,8 +1299,8 @@ small applications that just do something and then exit.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Wnck::Workspace numbered <!-- raw HTML omitted -->workspace<!-- raw HTML omitted --> on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->.
-<!-- raw HTML omitted -->screen<!-- raw HTML omitted -->, or nil if no such workspace exists. The returned Wnck::Workspace
+    <p>Gets the Wnck::Workspace numbered <!-- raw HTML omitted -->workspace<!-- raw HTML omitted --> on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->.<br />
+<!-- raw HTML omitted -->screen<!-- raw HTML omitted -->, or nil if no such workspace exists. The returned Wnck::Workspace<br />
 is owned by libwnck and must not be referenced or unreferenced.</p>
 
 
@@ -1433,7 +1437,7 @@ is owned by libwnck and must not be referenced or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks the window manager to move the viewport of the current Wnck::Workspace
+    <p>Asks the window manager to move the viewport of the current Wnck::Workspace<br />
 on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->.</p>
 
 
@@ -1503,16 +1507,16 @@ on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether the window manager for <!-- raw HTML omitted -->screen<!-- raw HTML omitted --> supports a certain hint from
-the <!-- raw HTML omitted -->Extended
+    <p>Gets whether the window manager for <!-- raw HTML omitted -->screen<!-- raw HTML omitted --> supports a certain hint from<br />
+the <!-- raw HTML omitted -->Extended<br />
 Window Manager Hints specification<!-- raw HTML omitted --> (EWMH).</p>
-<p>When using this function, keep in mind that the window manager can change
-over time; so you should not use this function in a way that impacts
-persistent application state. A common bug is that your application can
-start up before the window manager does when the user logs in, and before
-the window manager starts wnck_screen_net_wm_supports() will return false
+<p>When using this function, keep in mind that the window manager can change<br />
+over time; so you should not use this function in a way that impacts<br />
+persistent application state. A common bug is that your application can<br />
+start up before the window manager does when the user logs in, and before<br />
+the window manager starts wnck_screen_net_wm_supports() will return false<br />
 for every property.</p>
-<p>See also gdk_x11_screen_supports_net_wm_hint() in GDK.
+<p>See also gdk_x11_screen_supports_net_wm_hint() in GDK.<br />
 hint, false otherwise.</p>
 
 
@@ -1571,7 +1575,7 @@ hint, false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the index of <!-- raw HTML omitted -->screen<!-- raw HTML omitted --> on the display to which it belongs. The first
+    <p>Gets the index of <!-- raw HTML omitted -->screen<!-- raw HTML omitted --> on the display to which it belongs. The first<br />
 Wnck::Screen has an index of 0.</p>
 
 
@@ -1611,10 +1615,10 @@ Wnck::Screen has an index of 0.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the previously active Wnck::Window on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. May return nil
-sometimes, since not all window managers guarantee that a window is always
-active.
-or nil. The returned Wnck::Window is owned by libwnck and must not be
+    <p>Gets the previously active Wnck::Window on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. May return nil<br />
+sometimes, since not all window managers guarantee that a window is always<br />
+active.<br />
+or nil. The returned Wnck::Window is owned by libwnck and must not be<br />
 referenced or unreferenced.</p>
 
 
@@ -1654,9 +1658,9 @@ referenced or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Releases the ownership of the layout of Wnck::Workspace on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->.
-<!-- raw HTML omitted -->current_token<!-- raw HTML omitted --> is used to verify that the caller is the owner of the layout.
-If the verification fails, nothing happens.
+    <p>Releases the ownership of the layout of Wnck::Workspace on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->.<br />
+<!-- raw HTML omitted -->current_token<!-- raw HTML omitted --> is used to verify that the caller is the owner of the layout.<br />
+If the verification fails, nothing happens.<br />
 wnck_screen_try_set_workspace_layout().</p>
 
 
@@ -1711,7 +1715,7 @@ wnck_screen_try_set_workspace_layout().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->screen<!-- raw HTML omitted --> is in the &quot;showing the desktop&quot; mode. This mode is
+    <p>Gets whether <!-- raw HTML omitted -->screen<!-- raw HTML omitted --> is in the &quot;showing the desktop&quot; mode. This mode is<br />
 changed when a Wnck::Screen::showing-desktop-changed signal gets emitted.</p>
 
 
@@ -1751,7 +1755,7 @@ changed when a Wnck::Screen::showing-desktop-changed signal gets emitted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks the window manager to set the &quot;showing the desktop&quot; mode on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->
+    <p>Asks the window manager to set the &quot;showing the desktop&quot; mode on <!-- raw HTML omitted -->screen<!-- raw HTML omitted --><br />
 according to <!-- raw HTML omitted -->show<!-- raw HTML omitted -->.</p>
 
 
@@ -1806,21 +1810,21 @@ according to <!-- raw HTML omitted -->show<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to modify the layout of Wnck::Workspace on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. To do this, tries
-to acquire ownership of the layout. If the current process is the owner of
-the layout, <!-- raw HTML omitted -->current_token<!-- raw HTML omitted --> is used to determine if the caller is the owner
-(there might be more than one part of the same process trying to set the
-layout). Since no more than one application should set this property of
+    <p>Tries to modify the layout of Wnck::Workspace on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. To do this, tries<br />
+to acquire ownership of the layout. If the current process is the owner of<br />
+the layout, <!-- raw HTML omitted -->current_token<!-- raw HTML omitted --> is used to determine if the caller is the owner<br />
+(there might be more than one part of the same process trying to set the<br />
+layout). Since no more than one application should set this property of<br />
 <!-- raw HTML omitted -->screen<!-- raw HTML omitted --> at a time, setting the layout is not guaranteed to work.</p>
-<p>If <!-- raw HTML omitted -->rows<!-- raw HTML omitted --> is 0, the actual number of rows will be determined based on
-<!-- raw HTML omitted -->columns<!-- raw HTML omitted --> and the number of Wnck::Workspace. If <!-- raw HTML omitted -->columns<!-- raw HTML omitted --> is 0, the actual
-number of columns will be determined based on <!-- raw HTML omitted -->rows<!-- raw HTML omitted --> and the number of
+<p>If <!-- raw HTML omitted -->rows<!-- raw HTML omitted --> is 0, the actual number of rows will be determined based on<br />
+<!-- raw HTML omitted -->columns<!-- raw HTML omitted --> and the number of Wnck::Workspace. If <!-- raw HTML omitted -->columns<!-- raw HTML omitted --> is 0, the actual<br />
+number of columns will be determined based on <!-- raw HTML omitted -->rows<!-- raw HTML omitted --> and the number of<br />
 Wnck::Workspace. <!-- raw HTML omitted -->rows<!-- raw HTML omitted --> and <!-- raw HTML omitted -->columns<!-- raw HTML omitted --> must not be 0 at the same time.</p>
-<p>You have to release the ownership of the layout with
-wnck_screen_release_workspace_layout() when you do not need it anymore.
-wnck_screen_try_set_workspace_layout() before, or if you did not keep the
-old token.
-wnck_screen_try_set_workspace_layout() and to
+<p>You have to release the ownership of the layout with<br />
+wnck_screen_release_workspace_layout() when you do not need it anymore.<br />
+wnck_screen_try_set_workspace_layout() before, or if you did not keep the<br />
+old token.<br />
+wnck_screen_try_set_workspace_layout() and to<br />
 wnck_screen_release_workspace_layout(), or 0 if the layout could not be set.</p>
 
 
@@ -1948,8 +1952,8 @@ wnck_screen_release_workspace_layout(), or 0 if the layout could not be set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the name of the window manager.
-does not comply with the <!-- raw HTML omitted -->EWMH<!-- raw HTML omitted -->
+    <p>Gets the name of the window manager.<br />
+does not comply with the <!-- raw HTML omitted -->EWMH<!-- raw HTML omitted --><br />
 specification.</p>
 
 
@@ -1989,11 +1993,11 @@ specification.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the list of Wnck::Window on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. The list is not in a defined
-order, but should be &quot;stable&quot; (windows should not be reordered in it).
-However, the stability of the list is established by the window manager, so
-don't blame libwnck if it breaks down.
-Wnck::Window on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->, or nil if there is no window on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. The list
+    <p>Gets the list of Wnck::Window on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. The list is not in a defined<br />
+order, but should be &quot;stable&quot; (windows should not be reordered in it).<br />
+However, the stability of the list is established by the window manager, so<br />
+don't blame libwnck if it breaks down.<br />
+Wnck::Window on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->, or nil if there is no window on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. The list<br />
 should not be modified nor freed, as it is owned by <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->.</p>
 
 
@@ -2033,9 +2037,9 @@ should not be modified nor freed, as it is owned by <!-- raw HTML omitted -->scr
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the list of Wnck::Window on <!-- raw HTML omitted -->screen<!-- raw HTML omitted --> in bottom-to-top order.
-Wnck::Window in stacking order on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->, or nil if there is no window on
-<!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. The list should not be modified nor freed, as it is owned by
+    <p>Gets the list of Wnck::Window on <!-- raw HTML omitted -->screen<!-- raw HTML omitted --> in bottom-to-top order.<br />
+Wnck::Window in stacking order on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->, or nil if there is no window on<br />
+<!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. The list should not be modified nor freed, as it is owned by<br />
 <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->.</p>
 
 
@@ -2114,9 +2118,9 @@ Wnck::Window in stacking order on <!-- raw HTML omitted -->screen<!-- raw HTML o
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the list of Wnck::Workspace on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. The list is ordered: the
-first element in the list is the first Wnck::Workspace, etc..
-Wnck::Workspace on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. The list should not be modified nor freed, as it
+    <p>Gets the list of Wnck::Workspace on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. The list is ordered: the<br />
+first element in the list is the first Wnck::Workspace, etc..<br />
+Wnck::Workspace on <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->. The list should not be modified nor freed, as it<br />
 is owned by <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->.</p>
 
 
@@ -2152,7 +2156,7 @@ is owned by <!-- raw HTML omitted -->screen<!-- raw HTML omitted -->.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

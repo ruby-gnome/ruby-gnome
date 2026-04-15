@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GdkPixbuf::PixbufLoader";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gdk_pixbuf2/pixbuf-loader.rb</dd>
+    <dd>lib/gdk_pixbuf2/pixbuf-loader.rb
+</dd>
   </dl>
   
 </div>
@@ -323,6 +325,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -339,17 +342,17 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new pixbuf loader object that always attempts to parse
-image data as if it were an image of type <!-- raw HTML omitted -->image_type<!-- raw HTML omitted -->, instead of
+    <p>Creates a new pixbuf loader object that always attempts to parse<br />
+image data as if it were an image of type <!-- raw HTML omitted -->image_type<!-- raw HTML omitted -->, instead of<br />
 identifying the type automatically.</p>
-<p>This function is useful if you want an error if the image isn't the
-expected type; for loading image formats that can't be reliably
-identified by looking at the data; or if the user manually forces
+<p>This function is useful if you want an error if the image isn't the<br />
+expected type; for loading image formats that can't be reliably<br />
+identified by looking at the data; or if the user manually forces<br />
 a specific type.</p>
-<p>The list of supported image formats depends on what image loaders
-are installed, but typically &quot;png&quot;, &quot;jpeg&quot;, &quot;gif&quot;, &quot;tiff&quot; and
-&quot;xpm&quot; are among the supported formats. To obtain the full list of
-supported image formats, call gdk_pixbuf_format_get_name() on each
+<p>The list of supported image formats depends on what image loaders<br />
+are installed, but typically &quot;png&quot;, &quot;jpeg&quot;, &quot;gif&quot;, &quot;tiff&quot; and<br />
+&quot;xpm&quot; are among the supported formats. To obtain the full list of<br />
+supported image formats, call gdk_pixbuf_format_get_name() on each<br />
 of the Gdk::PixbufFormat structs returned by gdk_pixbuf_get_formats().</p>
 
 
@@ -399,10 +402,10 @@ of the Gdk::PixbufFormat structs returned by gdk_pixbuf_get_formats().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queries the Gdk::PixbufAnimation that a pixbuf loader is currently creating.</p>
-<p>In general it only makes sense to call this function after the
-[signal<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.PixbufLoader::area-prepared] signal has been emitted by
+<p>In general it only makes sense to call this function after the<br />
+[signal<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.PixbufLoader::area-prepared] signal has been emitted by<br />
 the loader.</p>
-<p>If the loader doesn't have enough bytes yet, and hasn't emitted the <code>area-prepared</code>
+<p>If the loader doesn't have enough bytes yet, and hasn't emitted the <code>area-prepared</code><br />
 signal, this function will return <code>NULL</code>.</p>
 
 
@@ -421,7 +424,7 @@ signal, this function will return <code>NULL</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>The animation that the loader is
+        <div class='inline'><p>The animation that the loader is<br />
 currently loading</p>
 </div>
       
@@ -443,16 +446,16 @@ currently loading</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Informs a pixbuf loader that no further writes with
-gdk_pixbuf_loader_write() will occur, so that it can free its
+    <p>Informs a pixbuf loader that no further writes with<br />
+gdk_pixbuf_loader_write() will occur, so that it can free its<br />
 internal loading structures.</p>
-<p>This function also tries to parse any data that hasn't yet been parsed;
+<p>This function also tries to parse any data that hasn't yet been parsed;<br />
 if the remaining data is partial or corrupt, an error will be returned.</p>
-<p>If <code>FALSE</code> is returned, <code>error</code> will be set to an error from the
+<p>If <code>FALSE</code> is returned, <code>error</code> will be set to an error from the<br />
 <code>GDK_PIXBUF_ERROR</code> or <code>G_FILE_ERROR</code> domains.</p>
-<p>If you're just cancelling a load rather than expecting it to be finished,
+<p>If you're just cancelling a load rather than expecting it to be finished,<br />
 passing <code>NULL</code> for <code>error</code> to ignore it is reasonable.</p>
-<p>Remember that this function does not release a reference on the loader, so
+<p>Remember that this function does not release a reference on the loader, so<br />
 you will need to explicitly release any reference you hold.</p>
 
 
@@ -471,7 +474,7 @@ you will need to explicitly release any reference you hold.</p>
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if all image data written so far was successfully
+        <div class='inline'><p><code>TRUE</code> if all image data written so far was successfully<br />
 passed out via the update_area signal</p>
 </div>
       
@@ -493,7 +496,7 @@ passed out via the update_area signal</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the available information about the format of the
+    <p>Obtains the available information about the format of the<br />
 currently loading image file.</p>
 
 
@@ -566,15 +569,15 @@ currently loading image file.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queries the Gdk::Pixbuf that a pixbuf loader is currently creating.</p>
-<p>In general it only makes sense to call this function after the
-[signal<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.PixbufLoader::area-prepared] signal has been
-emitted by the loader; this means that enough data has been read
+<p>In general it only makes sense to call this function after the<br />
+[signal<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.PixbufLoader::area-prepared] signal has been<br />
+emitted by the loader; this means that enough data has been read<br />
 to know the size of the image that will be allocated.</p>
-<p>If the loader has not received enough data via gdk_pixbuf_loader_write(),
+<p>If the loader has not received enough data via gdk_pixbuf_loader_write(),<br />
 then this function returns <code>NULL</code>.</p>
-<p>The returned pixbuf will be the same in all future calls to the loader,
+<p>The returned pixbuf will be the same in all future calls to the loader,<br />
 so if you want to keep using it, you should acquire a reference to it.</p>
-<p>Additionally, if the loader is an animation, it will return the &quot;static
+<p>Additionally, if the loader is an animation, it will return the &quot;static<br />
 image&quot; of the animation (see gdk_pixbuf_animation_get_static_image()).</p>
 
 
@@ -593,7 +596,7 @@ image&quot; of the animation (see gdk_pixbuf_animation_get_static_image()).</p>
       
       
         &mdash;
-        <div class='inline'><p>The pixbuf that the loader is
+        <div class='inline'><p>The pixbuf that the loader is<br />
 creating</p>
 </div>
       
@@ -616,10 +619,10 @@ creating</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Causes the image to be scaled while it is loaded.</p>
-<p>The desired image size can be determined relative to the original
-size of the image by calling gdk_pixbuf_loader_set_size() from a
+<p>The desired image size can be determined relative to the original<br />
+size of the image by calling gdk_pixbuf_loader_set_size() from a<br />
 signal handler for the ::size-prepared signal.</p>
-<p>Attempts to set the desired image size  are ignored after the
+<p>Attempts to set the desired image size  are ignored after the<br />
 emission of the ::size-prepared signal.</p>
 
 
@@ -741,7 +744,7 @@ emission of the ::size-prepared signal.</p>
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if the write was successful, or
+        <div class='inline'><p><code>TRUE</code> if the write was successful, or<br />
 <code>FALSE</code> if the loader cannot parse the buffer</p>
 </div>
       
@@ -800,7 +803,7 @@ emission of the ::size-prepared signal.</p>
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if the write was successful, or <code>FALSE</code> if
+        <div class='inline'><p><code>TRUE</code> if the write was successful, or <code>FALSE</code> if<br />
 the loader cannot parse the buffer</p>
 </div>
       
@@ -818,7 +821,7 @@ the loader cannot parse the buffer</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

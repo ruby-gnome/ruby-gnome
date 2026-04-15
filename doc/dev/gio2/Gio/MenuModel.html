@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::MenuModel";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -303,6 +305,7 @@
 
       
     </ul>
+    
   
 
 
@@ -322,18 +325,18 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries item at position <!-- raw HTML omitted -->item_index<!-- raw HTML omitted --> in <!-- raw HTML omitted -->model<!-- raw HTML omitted --> for the attribute
+    <p>Queries item at position <!-- raw HTML omitted -->item_index<!-- raw HTML omitted --> in <!-- raw HTML omitted -->model<!-- raw HTML omitted --> for the attribute<br />
 specified by <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->.</p>
-<p>If the attribute exists and matches the GVariant::Type corresponding
-to <!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> then <!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> is used to deconstruct the
+<p>If the attribute exists and matches the GVariant::Type corresponding<br />
+to <!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> then <!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> is used to deconstruct the<br />
 value into the positional parameters and true is returned.</p>
-<p>If the attribute does not exist, or it does exist but has the wrong
-type, then the positional parameters are ignored and false is
+<p>If the attribute does not exist, or it does exist but has the wrong<br />
+type, then the positional parameters are ignored and false is<br />
 returned.</p>
-<p>This function is a mix of g_menu_model_get_item_attribute_value() and
-g_variant_get(), followed by a g_variant_unref().  As such,
-<!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> must make a complete copy of the data (since the
-#GVariant may go away after the call to g_variant_unref()).  In
+<p>This function is a mix of g_menu_model_get_item_attribute_value() and<br />
+g_variant_get(), followed by a g_variant_unref().  As such,<br />
+<!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> must make a complete copy of the data (since the<br />
+#GVariant may go away after the call to g_variant_unref()).  In<br />
 particular, no '&amp;' characters are allowed in <!-- raw HTML omitted -->format_string<!-- raw HTML omitted -->.</p>
 
 
@@ -416,7 +419,7 @@ particular, no '&amp;' characters are allowed in <!-- raw HTML omitted -->format
       
       
         &mdash;
-        <div class='inline'><p>true if the named attribute was found with the expected
+        <div class='inline'><p>true if the named attribute was found with the expected<br />
 type</p>
 </div>
       
@@ -438,13 +441,13 @@ type</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries the item at position <!-- raw HTML omitted -->item_index<!-- raw HTML omitted --> in <!-- raw HTML omitted -->model<!-- raw HTML omitted --> for the attribute
+    <p>Queries the item at position <!-- raw HTML omitted -->item_index<!-- raw HTML omitted --> in <!-- raw HTML omitted -->model<!-- raw HTML omitted --> for the attribute<br />
 specified by <!-- raw HTML omitted -->attribute<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->expected_type<!-- raw HTML omitted --> is non-nil then it specifies the expected type of
+<p>If <!-- raw HTML omitted -->expected_type<!-- raw HTML omitted --> is non-nil then it specifies the expected type of<br />
 the attribute.  If it is nil then any type will be accepted.</p>
-<p>If the attribute exists and matches <!-- raw HTML omitted -->expected_type<!-- raw HTML omitted --> (or if the
+<p>If the attribute exists and matches <!-- raw HTML omitted -->expected_type<!-- raw HTML omitted --> (or if the<br />
 expected type is unspecified) then the value is returned.</p>
-<p>If the attribute does not exist, or does not match the expected type
+<p>If the attribute does not exist, or does not match the expected type<br />
 then nil is returned.</p>
 
 
@@ -494,7 +497,7 @@ then nil is returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>the expected type of the attribute, or
+        <div class='inline'><p>the expected type of the attribute, or<br />
 nil</p>
 </div>
       
@@ -534,9 +537,9 @@ nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries the item at position <!-- raw HTML omitted -->item_index<!-- raw HTML omitted --> in <!-- raw HTML omitted -->model<!-- raw HTML omitted --> for the link
+    <p>Queries the item at position <!-- raw HTML omitted -->item_index<!-- raw HTML omitted --> in <!-- raw HTML omitted -->model<!-- raw HTML omitted --> for the link<br />
 specified by <!-- raw HTML omitted -->link<!-- raw HTML omitted -->.</p>
-<p>If the link exists, the linked GMenu::Model is returned.  If the link
+<p>If the link exists, the linked GMenu::Model is returned.  If the link<br />
 does not exist, nil is returned.</p>
 
 
@@ -611,7 +614,7 @@ does not exist, nil is returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queries if <!-- raw HTML omitted -->model<!-- raw HTML omitted --> is mutable.</p>
-<p>An immutable GMenu::Model will never emit the #GMenuModel::items-changed
+<p>An immutable GMenu::Model will never emit the #GMenuModel::items-changed<br />
 signal. Consumers of the model may make optimisations accordingly.</p>
 
 
@@ -630,7 +633,7 @@ signal. Consumers of the model may make optimisations accordingly.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the model is mutable (ie: &quot;items-changed&quot; may be
+        <div class='inline'><p>true if the model is mutable (ie: &quot;items-changed&quot; may be<br />
 emitted).</p>
 </div>
       
@@ -653,16 +656,16 @@ emitted).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Requests emission of the GMenu::Model::items-changed signal on <!-- raw HTML omitted -->model<!-- raw HTML omitted -->.</p>
-<p>This function should never be called except by GMenu::Model
-subclasses.  Any other calls to this function will very likely lead
+<p>This function should never be called except by GMenu::Model<br />
+subclasses.  Any other calls to this function will very likely lead<br />
 to a violation of the interface of the model.</p>
-<p>The implementation should update its internal representation of the
-menu before emitting the signal.  The implementation should further
-expect to receive queries about the new state of the menu (and
+<p>The implementation should update its internal representation of the<br />
+menu before emitting the signal.  The implementation should further<br />
+expect to receive queries about the new state of the menu (and<br />
 particularly added menu items) while signal handlers are running.</p>
-<p>The implementation must dispatch this call directly from a mainloop
-entry and not in response to calls -- particularly those from the
-GMenu::Model API.  Said another way: the menu must not change while
+<p>The implementation must dispatch this call directly from a mainloop<br />
+entry and not in response to calls -- particularly those from the<br />
+GMenu::Model API.  Said another way: the menu must not change while<br />
 user code is running without returning to the mainloop.</p>
 
 
@@ -747,7 +750,7 @@ user code is running without returning to the mainloop.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a GMenu::AttributeIter to iterate over the attributes of
+    <p>Creates a GMenu::AttributeIter to iterate over the attributes of<br />
 the item at position <!-- raw HTML omitted -->item_index<!-- raw HTML omitted --> in <!-- raw HTML omitted -->model<!-- raw HTML omitted -->.</p>
 <p>You must free the iterator with g_object_unref() when you are done.</p>
 
@@ -807,7 +810,7 @@ the item at position <!-- raw HTML omitted -->item_index<!-- raw HTML omitted --
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a GMenu::LinkIter to iterate over the links of the item at
+    <p>Creates a GMenu::LinkIter to iterate over the links of the item at<br />
 position <!-- raw HTML omitted -->item_index<!-- raw HTML omitted --> in <!-- raw HTML omitted -->model<!-- raw HTML omitted -->.</p>
 <p>You must free the iterator with g_object_unref() when you are done.</p>
 
@@ -902,7 +905,7 @@ position <!-- raw HTML omitted -->item_index<!-- raw HTML omitted --> in <!-- ra
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

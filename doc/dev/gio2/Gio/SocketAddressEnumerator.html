@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::SocketAddressEnumerator";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -198,6 +200,7 @@
 
       
     </ul>
+    
   
 
 
@@ -217,17 +220,17 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the next GSocket::Address from <!-- raw HTML omitted -->enumerator<!-- raw HTML omitted -->. Note that this
-may block for some amount of time. (Eg, a GNetwork::Address may need
-to do a DNS lookup before it can return an address.) Use
-g_socket_address_enumerator_next_async() if you need to avoid
+    <p>Retrieves the next GSocket::Address from <!-- raw HTML omitted -->enumerator<!-- raw HTML omitted -->. Note that this<br />
+may block for some amount of time. (Eg, a GNetwork::Address may need<br />
+to do a DNS lookup before it can return an address.) Use<br />
+g_socket_address_enumerator_next_async() if you need to avoid<br />
 blocking.</p>
-<p>If <!-- raw HTML omitted -->enumerator<!-- raw HTML omitted --> is expected to yield addresses, but for some reason
-is unable to (eg, because of a DNS error), then the first call to
-g_socket_address_enumerator_next() will return an appropriate error
-in *<!-- raw HTML omitted -->error<!-- raw HTML omitted -->. However, if the first call to
-g_socket_address_enumerator_next() succeeds, then any further
-internal errors (other than <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> being triggered) will be
+<p>If <!-- raw HTML omitted -->enumerator<!-- raw HTML omitted --> is expected to yield addresses, but for some reason<br />
+is unable to (eg, because of a DNS error), then the first call to<br />
+g_socket_address_enumerator_next() will return an appropriate error<br />
+in *<!-- raw HTML omitted -->error<!-- raw HTML omitted -->. However, if the first call to<br />
+g_socket_address_enumerator_next() succeeds, then any further<br />
+internal errors (other than <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> being triggered) will be<br />
 ignored.</p>
 
 
@@ -265,8 +268,8 @@ ignored.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GSocket::Address (owned by the caller), or nil on
-error (in which case *<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set) or if there are no
+        <div class='inline'><p>a GSocket::Address (owned by the caller), or nil on<br />
+error (in which case *<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set) or if there are no<br />
 more addresses.</p>
 </div>
       
@@ -288,8 +291,8 @@ more addresses.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously retrieves the next GSocket::Address from <!-- raw HTML omitted -->enumerator<!-- raw HTML omitted -->
-and then calls <!-- raw HTML omitted -->callback<!-- raw HTML omitted -->, which must call
+    <p>Asynchronously retrieves the next GSocket::Address from <!-- raw HTML omitted -->enumerator<!-- raw HTML omitted --><br />
+and then calls <!-- raw HTML omitted -->callback<!-- raw HTML omitted -->, which must call<br />
 g_socket_address_enumerator_next_finish() to get the result.</p>
 <p>It is an error to call this multiple times before the previous callback has finished.</p>
 
@@ -325,7 +328,7 @@ g_socket_address_enumerator_next_finish() to get the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback to call
+        <div class='inline'><p>a GAsync::ReadyCallback to call<br />
 when the request is satisfied</p>
 </div>
       
@@ -376,9 +379,9 @@ when the request is satisfied</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the result of a completed call to
-g_socket_address_enumerator_next_async(). See
-g_socket_address_enumerator_next() for more information about
+    <p>Retrieves the result of a completed call to<br />
+g_socket_address_enumerator_next_async(). See<br />
+g_socket_address_enumerator_next() for more information about<br />
 error handling.</p>
 
 
@@ -416,8 +419,8 @@ error handling.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GSocket::Address (owned by the caller), or nil on
-error (in which case *<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set) or if there are no
+        <div class='inline'><p>a GSocket::Address (owned by the caller), or nil on<br />
+error (in which case *<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set) or if there are no<br />
 more addresses.</p>
 </div>
       
@@ -435,7 +438,7 @@ more addresses.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::CellRendererProgress";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -106,7 +108,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Renders numbers as progress bars</p>
-<p><code>GtkCellRendererProgress</code> renders a numeric value as a progress par in a cell.
+<p><code>GtkCellRendererProgress</code> renders a numeric value as a progress par in a cell.<br />
 Additionally, it can display a text on top of the progress bar.</p>
 
 
@@ -431,9 +433,11 @@ Additionally, it can display a text on top of the progress bar.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -593,13 +597,13 @@ Additionally, it can display a text on top of the progress bar.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Setting this to a non-negative value causes the cell renderer to
-enter &quot;activity mode&quot;, where a block bounces back and forth to
-indicate that some progress is made, without specifying exactly how
+    <p>Setting this to a non-negative value causes the cell renderer to<br />
+enter &quot;activity mode&quot;, where a block bounces back and forth to<br />
+indicate that some progress is made, without specifying exactly how<br />
 much.</p>
-<p>Each increment of the property causes the block to move by a little
+<p>Each increment of the property causes the block to move by a little<br />
 bit.</p>
-<p>To indicate that the activity has not started yet, set the property
+<p>To indicate that the activity has not started yet, set the property<br />
 to zero. To indicate completion, set the property to %G_MAXINT.</p>
 
 
@@ -639,13 +643,13 @@ to zero. To indicate completion, set the property to %G_MAXINT.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Setting this to a non-negative value causes the cell renderer to
-enter &quot;activity mode&quot;, where a block bounces back and forth to
-indicate that some progress is made, without specifying exactly how
+    <p>Setting this to a non-negative value causes the cell renderer to<br />
+enter &quot;activity mode&quot;, where a block bounces back and forth to<br />
+indicate that some progress is made, without specifying exactly how<br />
 much.</p>
-<p>Each increment of the property causes the block to move by a little
+<p>Each increment of the property causes the block to move by a little<br />
 bit.</p>
-<p>To indicate that the activity has not started yet, set the property
+<p>To indicate that the activity has not started yet, set the property<br />
 to zero. To indicate completion, set the property to %G_MAXINT.</p>
 
 
@@ -713,9 +717,9 @@ to zero. To indicate completion, set the property to %G_MAXINT.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;text&quot; property determines the label which will be drawn
-over the progress bar. Setting this property to nil causes the default
-label to be displayed. Setting this property to an empty string causes
+    <p>The &quot;text&quot; property determines the label which will be drawn<br />
+over the progress bar. Setting this property to nil causes the default<br />
+label to be displayed. Setting this property to an empty string causes<br />
 no label to be displayed.</p>
 
 
@@ -755,9 +759,9 @@ no label to be displayed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;text&quot; property determines the label which will be drawn
-over the progress bar. Setting this property to nil causes the default
-label to be displayed. Setting this property to an empty string causes
+    <p>The &quot;text&quot; property determines the label which will be drawn<br />
+over the progress bar. Setting this property to nil causes the default<br />
+label to be displayed. Setting this property to an empty string causes<br />
 no label to be displayed.</p>
 
 
@@ -825,8 +829,8 @@ no label to be displayed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;text-xalign&quot; property controls the horizontal alignment of the
-text in the progress bar.  Valid values range from 0 (left) to 1
+    <p>The &quot;text-xalign&quot; property controls the horizontal alignment of the<br />
+text in the progress bar.  Valid values range from 0 (left) to 1<br />
 (right).  Reserved for RTL layouts.</p>
 
 
@@ -866,8 +870,8 @@ text in the progress bar.  Valid values range from 0 (left) to 1
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;text-xalign&quot; property controls the horizontal alignment of the
-text in the progress bar.  Valid values range from 0 (left) to 1
+    <p>The &quot;text-xalign&quot; property controls the horizontal alignment of the<br />
+text in the progress bar.  Valid values range from 0 (left) to 1<br />
 (right).  Reserved for RTL layouts.</p>
 
 
@@ -935,8 +939,8 @@ text in the progress bar.  Valid values range from 0 (left) to 1
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;text-yalign&quot; property controls the vertical alignment of the
-text in the progress bar.  Valid values range from 0 (top) to 1
+    <p>The &quot;text-yalign&quot; property controls the vertical alignment of the<br />
+text in the progress bar.  Valid values range from 0 (top) to 1<br />
 (bottom).</p>
 
 
@@ -976,8 +980,8 @@ text in the progress bar.  Valid values range from 0 (top) to 1
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;text-yalign&quot; property controls the vertical alignment of the
-text in the progress bar.  Valid values range from 0 (top) to 1
+    <p>The &quot;text-yalign&quot; property controls the vertical alignment of the<br />
+text in the progress bar.  Valid values range from 0 (top) to 1<br />
 (bottom).</p>
 
 
@@ -1045,7 +1049,7 @@ text in the progress bar.  Valid values range from 0 (top) to 1
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;value&quot; property determines the percentage to which the
+    <p>The &quot;value&quot; property determines the percentage to which the<br />
 progress bar will be &quot;filled in&quot;.</p>
 
 
@@ -1085,7 +1089,7 @@ progress bar will be &quot;filled in&quot;.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;value&quot; property determines the percentage to which the
+    <p>The &quot;value&quot; property determines the percentage to which the<br />
 progress bar will be &quot;filled in&quot;.</p>
 
 
@@ -1149,7 +1153,7 @@ progress bar will be &quot;filled in&quot;.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::AsyncResult";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -86,30 +88,30 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p><code>GAsyncResult</code> provides a base class for implementing asynchronous function results.</p>
-<p>Asynchronous operations are broken up into two separate operations
-which are chained together by a <code>GAsyncReadyCallback</code>. To begin
-an asynchronous operation, provide a <code>GAsyncReadyCallback</code> to the
-asynchronous function. This callback will be triggered when the
-operation has completed, and must be run in a later iteration of
-the thread-default main context (see
-[method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default]) from where the operation was
-initiated. It will be passed a <code>GAsyncResult</code> instance filled with the
-details of the operation's success or failure, the object the asynchronous
-function was started for and any error codes returned. The asynchronous
-callback function is then expected to call the corresponding <code>_finish()</code>
-function, passing the object the function was called for, the
-<code>GAsyncResult</code> instance, and (optionally) an <!-- raw HTML omitted -->error<!-- raw HTML omitted --> to grab any
+<p>Asynchronous operations are broken up into two separate operations<br />
+which are chained together by a <code>GAsyncReadyCallback</code>. To begin<br />
+an asynchronous operation, provide a <code>GAsyncReadyCallback</code> to the<br />
+asynchronous function. This callback will be triggered when the<br />
+operation has completed, and must be run in a later iteration of<br />
+the thread-default main context (see<br />
+[method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default]) from where the operation was<br />
+initiated. It will be passed a <code>GAsyncResult</code> instance filled with the<br />
+details of the operation's success or failure, the object the asynchronous<br />
+function was started for and any error codes returned. The asynchronous<br />
+callback function is then expected to call the corresponding <code>_finish()</code><br />
+function, passing the object the function was called for, the<br />
+<code>GAsyncResult</code> instance, and (optionally) an <!-- raw HTML omitted -->error<!-- raw HTML omitted --> to grab any<br />
 error conditions that may have occurred.</p>
-<p>The <code>_finish()</code> function for an operation takes the generic result
-(of type <code>GAsyncResult</code>) and returns the specific result that the
-operation in question yields (e.g. a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileEnumerator] for a
-&quot;enumerate children&quot; operation). If the result or error status of the
-operation is not needed, there is no need to call the <code>_finish()</code>
-function; GIO will take care of cleaning up the result and error
-information after the <code>GAsyncReadyCallback</code> returns. You can pass
-<code>NULL</code> for the <code>GAsyncReadyCallback</code> if you don't need to take any
-action at all after the operation completes. Applications may also
-take a reference to the <code>GAsyncResult</code> and call <code>_finish()</code> later;
+<p>The <code>_finish()</code> function for an operation takes the generic result<br />
+(of type <code>GAsyncResult</code>) and returns the specific result that the<br />
+operation in question yields (e.g. a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileEnumerator] for a<br />
+&quot;enumerate children&quot; operation). If the result or error status of the<br />
+operation is not needed, there is no need to call the <code>_finish()</code><br />
+function; GIO will take care of cleaning up the result and error<br />
+information after the <code>GAsyncReadyCallback</code> returns. You can pass<br />
+<code>NULL</code> for the <code>GAsyncReadyCallback</code> if you don't need to take any<br />
+action at all after the operation completes. Applications may also<br />
+take a reference to the <code>GAsyncResult</code> and call <code>_finish()</code> later;<br />
 however, the <code>_finish()</code> function may be called at most once.</p>
 <p>Example of a typical asynchronous operation flow:</p>
 <pre class="code c"><code class="c">void _theoretical_frobnitz_async (Theoretical         *t,
@@ -151,16 +153,16 @@ int main (int argc, void *argv[])
    ...
 }
 </code></pre>
-<p>The callback for an asynchronous operation is called only once, and is
-always called, even in the case of a cancelled operation. On cancellation
+<p>The callback for an asynchronous operation is called only once, and is<br />
+always called, even in the case of a cancelled operation. On cancellation<br />
 the result is a <code>G_IO_ERROR_CANCELLED</code> error.</p>
-<h2>I/O Priority</h2>
-<p>Many I/O-related asynchronous operations have a priority parameter,
-which is used in certain cases to determine the order in which
-operations are executed. They are not used to determine system-wide
-I/O scheduling. Priorities are integers, with lower numbers indicating
-higher priority. It is recommended to choose priorities between
-<code>G_PRIORITY_LOW</code> and <code>G_PRIORITY_HIGH</code>, with <code>G_PRIORITY_DEFAULT</code>
+<h2><a href="#io-priority" aria-hidden="true" class="anchor" id="io-priority"></a>I/O Priority</h2>
+<p>Many I/O-related asynchronous operations have a priority parameter,<br />
+which is used in certain cases to determine the order in which<br />
+operations are executed. They are not used to determine system-wide<br />
+I/O scheduling. Priorities are integers, with lower numbers indicating<br />
+higher priority. It is recommended to choose priorities between<br />
+<code>G_PRIORITY_LOW</code> and <code>G_PRIORITY_HIGH</code>, with <code>G_PRIORITY_DEFAULT</code><br />
 as a default.</p>
 
 
@@ -323,6 +325,7 @@ as a default.</p>
 
       
     </ul>
+    
   
 
 
@@ -342,7 +345,7 @@ as a default.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a new reference to the source
+    <p>Returns a new reference to the source<br />
 object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or nil if there is none.</p>
 
 
@@ -380,7 +383,7 @@ object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or nil if 
       
       
         &mdash;
-        <div class='inline'><p>a new reference to the source
+        <div class='inline'><p>a new reference to the source<br />
 object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or nil if there is none.</p>
 </div>
       
@@ -460,7 +463,7 @@ object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or nil if 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if <!-- raw HTML omitted -->res<!-- raw HTML omitted --> has the indicated <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted -->, false if
+    <p>Returns true if <!-- raw HTML omitted -->res<!-- raw HTML omitted --> has the indicated <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted -->, false if<br />
 not.</p>
 
 
@@ -513,7 +516,7 @@ not.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->res<!-- raw HTML omitted --> has the indicated <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted -->, false if
+        <div class='inline'><p>true if <!-- raw HTML omitted -->res<!-- raw HTML omitted --> has the indicated <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted -->, false if<br />
 not.</p>
 </div>
       
@@ -535,14 +538,14 @@ not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If <!-- raw HTML omitted -->res<!-- raw HTML omitted --> is a GSimple::AsyncResult, this is equivalent to
-g_simple_async_result_propagate_error(). Otherwise it returns
+    <p>If <!-- raw HTML omitted -->res<!-- raw HTML omitted --> is a GSimple::AsyncResult, this is equivalent to<br />
+g_simple_async_result_propagate_error(). Otherwise it returns<br />
 false.</p>
-<p>This can be used for legacy error handling in async *_finish()
-wrapper functions that traditionally handled GSimple::AsyncResult
-error returns themselves rather than calling into the virtual method.
-This should not be used in new code; GAsync::Result errors that are
-set by virtual methods should also be extracted by virtual methods,
+<p>This can be used for legacy error handling in async *_finish()<br />
+wrapper functions that traditionally handled GSimple::AsyncResult<br />
+error returns themselves rather than calling into the virtual method.<br />
+This should not be used in new code; GAsync::Result errors that are<br />
+set by virtual methods should also be extracted by virtual methods,<br />
 to enable subclasses to chain up correctly.</p>
 
 
@@ -561,7 +564,7 @@ to enable subclasses to chain up correctly.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is has been filled in with an error from
+        <div class='inline'><p>true if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is has been filled in with an error from<br />
 <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, false if not.</p>
 </div>
       
@@ -601,7 +604,7 @@ to enable subclasses to chain up correctly.</p>
       
       
         &mdash;
-        <div class='inline'><p>a new reference to the source
+        <div class='inline'><p>a new reference to the source<br />
 object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or nil if there is none.</p>
 </div>
       
@@ -658,7 +661,7 @@ object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or nil if 
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

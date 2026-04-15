@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Pango::Layout";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -99,8 +100,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/pango/layout.rb<span class="defines">,<br />
+    <dd>lib/pango/layout.rb<span class="defines">,<br>
   lib/pango/deprecated.rb</span>
+
 </dd>
   </dl>
   
@@ -145,6 +147,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1724,6 +1727,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1741,7 +1745,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new <code>PangoLayout</code> object with attributes initialized to
+    <p>Create a new <code>PangoLayout</code> object with attributes initialized to<br />
 default values for a particular <code>PangoContext</code>.</p>
 
 
@@ -1792,8 +1796,8 @@ default values for a particular <code>PangoContext</code>.</p>
   <div class="discussion">
     <p>Loads data previously created via [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.serialize].</p>
 <p>For a discussion of the supported format, see that function.</p>
-<p>Note: to verify that the returned layout is identical to
-the one that was serialized, you can compare <!-- raw HTML omitted -->bytes<!-- raw HTML omitted --> to the
+<p>Note: to verify that the returned layout is identical to<br />
+the one that was serialized, you can compare <!-- raw HTML omitted -->bytes<!-- raw HTML omitted --> to the<br />
 result of serializing the layout again.</p>
 
 
@@ -1888,7 +1892,7 @@ result of serializing the layout again.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the alignment for the layout: how partial lines are
+    <p>Gets the alignment for the layout: how partial lines are<br />
 positioned within the horizontal space available.</p>
 
 
@@ -1928,7 +1932,7 @@ positioned within the horizontal space available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the alignment for the layout: how partial lines are
+    <p>Sets the alignment for the layout: how partial lines are<br />
 positioned within the horizontal space available.</p>
 <p>The default alignment is %PANGO_ALIGN_LEFT.</p>
 
@@ -2078,7 +2082,7 @@ positioned within the horizontal space available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether to calculate the base direction for the layout
+    <p>Gets whether to calculate the base direction for the layout<br />
 according to its contents.</p>
 <p>See [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_auto_dir].</p>
 
@@ -2098,7 +2102,7 @@ according to its contents.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the bidirectional base direction
+        <div class='inline'><p>true if the bidirectional base direction<br />
 is computed from the layout's contents, false otherwise</p>
 </div>
       
@@ -2120,18 +2124,18 @@ is computed from the layout's contents, false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether to calculate the base direction
+    <p>Sets whether to calculate the base direction<br />
 for the layout according to its contents.</p>
-<p>When this flag is on (the default), then paragraphs in <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> that
-begin with strong right-to-left characters (Arabic and Hebrew principally),
-will have right-to-left layout, paragraphs with letters from other scripts
-will have left-to-right layout. Paragraphs with only neutral characters
+<p>When this flag is on (the default), then paragraphs in <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> that<br />
+begin with strong right-to-left characters (Arabic and Hebrew principally),<br />
+will have right-to-left layout, paragraphs with letters from other scripts<br />
+will have left-to-right layout. Paragraphs with only neutral characters<br />
 get their direction from the surrounding paragraphs.</p>
-<p>When false, the choice between left-to-right and right-to-left
-layout is done according to the base direction of the layout's
+<p>When false, the choice between left-to-right and right-to-left<br />
+layout is done according to the base direction of the layout's<br />
 <code>PangoContext</code>. (See [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Context.set_base_dir]).</p>
-<p>When the auto-computed direction of a paragraph differs from the
-base direction of the context, the interpretation of
+<p>When the auto-computed direction of a paragraph differs from the<br />
+base direction of the context, the interpretation of<br />
 %PANGO_ALIGN_LEFT and %PANGO_ALIGN_RIGHT are swapped.</p>
 
 
@@ -2151,7 +2155,7 @@ base direction of the context, the interpretation of
       
       
         &mdash;
-        <div class='inline'><p>if true, compute the bidirectional base direction
+        <div class='inline'><p>if true, compute the bidirectional base direction<br />
 from the layout's contents</p>
 </div>
       
@@ -2226,7 +2230,7 @@ from the layout's contents</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the number of Unicode characters in the
+    <p>Returns the number of Unicode characters in the<br />
 the text of <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
 
 
@@ -2245,7 +2249,7 @@ the text of <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>the number of Unicode characters
+        <div class='inline'><p>the number of Unicode characters<br />
 in the text of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --></p>
 </div>
       
@@ -2306,9 +2310,9 @@ in the text of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Forces recomputation of any state in the <code>PangoLayout</code> that
+    <p>Forces recomputation of any state in the <code>PangoLayout</code> that<br />
 might depend on the layout's context.</p>
-<p>This function should be called if you make changes to the context
+<p>This function should be called if you make changes to the context<br />
 subsequent to creating the layout.</p>
 
 
@@ -2345,7 +2349,7 @@ subsequent to creating the layout.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a deep copy-by-value of the layout.</p>
-<p>The attribute list, tab array, and text from the original layout
+<p>The attribute list, tab array, and text from the original layout<br />
 are all copied by value.</p>
 
 
@@ -2387,7 +2391,7 @@ are all copied by value.</p>
   <div class="discussion">
     <p>Gets the type of ellipsization being performed for <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
 <p>See [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_ellipsize].</p>
-<p>Use [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.is_ellipsized] to query whether any
+<p>Use [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.is_ellipsized] to query whether any<br />
 paragraphs were actually ellipsized.</p>
 
 
@@ -2428,13 +2432,13 @@ paragraphs were actually ellipsized.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the type of ellipsization being performed for <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
-<p>Depending on the ellipsization mode <!-- raw HTML omitted -->ellipsize<!-- raw HTML omitted --> text is
-removed from the start, middle, or end of text so they
-fit within the width and height of layout set with
+<p>Depending on the ellipsization mode <!-- raw HTML omitted -->ellipsize<!-- raw HTML omitted --> text is<br />
+removed from the start, middle, or end of text so they<br />
+fit within the width and height of layout set with<br />
 [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_width] and [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_height].</p>
-<p>If the layout contains characters such as newlines that
-force it to be layed out in multiple paragraphs, then whether
-each paragraph is ellipsized separately or the entire layout
+<p>If the layout contains characters such as newlines that<br />
+force it to be layed out in multiple paragraphs, then whether<br />
+each paragraph is ellipsized separately or the entire layout<br />
 is ellipsized as a whole depends on the set height of the layout.</p>
 <p>The default value is %PANGO_ELLIPSIZE_NONE.</p>
 <p>See [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_height] for details.</p>
@@ -2509,8 +2513,8 @@ is ellipsized as a whole depends on the set height of the layout.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the
-layout's font description, or nil if the font description
+        <div class='inline'><p>a pointer to the<br />
+layout's font description, or nil if the font description<br />
 from the layout's context is inherited.</p>
 </div>
       
@@ -2532,10 +2536,10 @@ from the layout's context is inherited.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Given an index within a layout, determines the positions that of the
+    <p>Given an index within a layout, determines the positions that of the<br />
 strong and weak cursors if the insertion point is at that index.</p>
-<p>This is a variant of [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_cursor_pos] that applies
-font metric information about caret slope and offset to the positions
+<p>This is a variant of [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_cursor_pos] that applies<br />
+font metric information about caret slope and offset to the positions<br />
 it returns.</p>
 <!-- raw HTML omitted -->
 
@@ -2621,20 +2625,20 @@ it returns.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Given an index within a layout, determines the positions that of the
+    <p>Given an index within a layout, determines the positions that of the<br />
 strong and weak cursors if the insertion point is at that index.</p>
-<p>The position of each cursor is stored as a zero-width rectangle
+<p>The position of each cursor is stored as a zero-width rectangle<br />
 with the height of the run extents.</p>
 <!-- raw HTML omitted -->
-<p>The strong cursor location is the location where characters of the
-directionality equal to the base direction of the layout are inserted.
-The weak cursor location is the location where characters of the
+<p>The strong cursor location is the location where characters of the<br />
+directionality equal to the base direction of the layout are inserted.<br />
+The weak cursor location is the location where characters of the<br />
 directionality opposite to the base direction of the layout are inserted.</p>
 <p>The following example shows text with both a strong and a weak cursor.</p>
 <!-- raw HTML omitted -->
-<p>The strong cursor has a little arrow pointing to the right, the weak
-cursor to the left. Typing a 'c' in this situation will insert the
-character after the 'b', and typing another Hebrew character, like 'ג',
+<p>The strong cursor has a little arrow pointing to the right, the weak<br />
+cursor to the left. Typing a 'c' in this situation will insert the<br />
+character after the 'b', and typing another Hebrew character, like 'ג',<br />
 will insert it at the end.</p>
 
 
@@ -2778,12 +2782,12 @@ will insert it at the end.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Computes the logical and ink extents of <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
-<p>Logical extents are usually what you want for positioning things. Note
-that both extents may have non-zero x and y. You may want to use those
-to offset where you render the layout. Not doing that is a very typical
-bug that shows up as right-to-left layouts not being correctly positioned
+<p>Logical extents are usually what you want for positioning things. Note<br />
+that both extents may have non-zero x and y. You may want to use those<br />
+to offset where you render the layout. Not doing that is a very typical<br />
+bug that shows up as right-to-left layouts not being correctly positioned<br />
 in a layout with a set width.</p>
-<p>The extents are given in layout coordinates and in Pango units; layout
+<p>The extents are given in layout coordinates and in Pango units; layout<br />
 coordinates begin at the top left corner of the layout.</p>
 
 
@@ -2803,7 +2807,7 @@ coordinates begin at the top left corner of the layout.</p>
       
       
         &mdash;
-        <div class='inline'><p>rectangle used to store the extents of the
+        <div class='inline'><p>rectangle used to store the extents of the<br />
 layout as drawn</p>
 </div>
       
@@ -2819,7 +2823,7 @@ layout as drawn</p>
       
       
         &mdash;
-        <div class='inline'><p>rectangle used to store the logical
+        <div class='inline'><p>rectangle used to store the logical<br />
 extents of the layout</p>
 </div>
       
@@ -2856,7 +2860,7 @@ extents of the layout</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves a particular line from a <code>PangoLayout</code>.</p>
-<p>Use the faster [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_line_readonly] if you do not
+<p>Use the faster [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_line_readonly] if you do not<br />
 plan to modify the contents of the line (glyphs, glyph widths, etc.).</p>
 
 
@@ -2876,7 +2880,7 @@ plan to modify the contents of the line (glyphs, glyph widths, etc.).</p>
       
       
         &mdash;
-        <div class='inline'><p>the index of a line, which must be between 0 and
+        <div class='inline'><p>the index of a line, which must be between 0 and<br />
 <code>pango_layout_get_line_count(layout) - 1</code>, inclusive.</p>
 </div>
       
@@ -2895,9 +2899,9 @@ plan to modify the contents of the line (glyphs, glyph widths, etc.).</p>
       
       
         &mdash;
-        <div class='inline'><p>the requested <code>PangoLayoutLine</code>,
-or nil if the index is out of range. This layout line can be ref'ed
-and retained, but will become invalid if changes are made to the
+        <div class='inline'><p>the requested <code>PangoLayoutLine</code>,<br />
+or nil if the index is out of range. This layout line can be ref'ed<br />
+and retained, but will become invalid if changes are made to the<br />
 <code>PangoLayout</code>.</p>
 </div>
       
@@ -2920,8 +2924,8 @@ and retained, but will become invalid if changes are made to the
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves a particular line from a <code>PangoLayout</code>.</p>
-<p>This is a faster alternative to [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_line],
-but the user is not expected to modify the contents of the line
+<p>This is a faster alternative to [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_line],<br />
+but the user is not expected to modify the contents of the line<br />
 (glyphs, glyph widths, etc.).</p>
 
 
@@ -2941,7 +2945,7 @@ but the user is not expected to modify the contents of the line
       
       
         &mdash;
-        <div class='inline'><p>the index of a line, which must be between 0 and
+        <div class='inline'><p>the index of a line, which must be between 0 and<br />
 <code>pango_layout_get_line_count(layout) - 1</code>, inclusive.</p>
 </div>
       
@@ -2960,9 +2964,9 @@ but the user is not expected to modify the contents of the line
       
       
         &mdash;
-        <div class='inline'><p>the requested <code>PangoLayoutLine</code>,
-or nil if the index is out of range. This layout line can be ref'ed
-and retained, but will become invalid if changes are made to the
+        <div class='inline'><p>the requested <code>PangoLayoutLine</code>,<br />
+or nil if the index is out of range. This layout line can be ref'ed<br />
+and retained, but will become invalid if changes are made to the<br />
 <code>PangoLayout</code>. No changes should be made to the line.</p>
 </div>
       
@@ -2984,7 +2988,7 @@ and retained, but will become invalid if changes are made to the
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves an array of logical attributes for each character in
+    <p>Retrieves an array of logical attributes for each character in<br />
 the <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
 
 
@@ -3004,7 +3008,7 @@ the <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store a pointer to an array of logical attributes.
+        <div class='inline'><p>location to store a pointer to an array of logical attributes.<br />
 This value must be freed with g_free().</p>
 </div>
       
@@ -3020,10 +3024,10 @@ This value must be freed with g_free().</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the number of the attributes in the
-array. (The stored value will be one more than the total number
-of characters in the layout, since there need to be attributes
-corresponding to both the position before the first character
+        <div class='inline'><p>location to store the number of the attributes in the<br />
+array. (The stored value will be one more than the total number<br />
+of characters in the layout, since there need to be attributes<br />
+corresponding to both the position before the first character<br />
 and the position after the last character.)</p>
 </div>
       
@@ -3059,14 +3063,14 @@ and the position after the last character.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves an array of logical attributes for each character in
+    <p>Retrieves an array of logical attributes for each character in<br />
 the <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
-<p>This is a faster alternative to [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_log_attrs].
-The returned array is part of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> and must not be modified.
+<p>This is a faster alternative to [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_log_attrs].<br />
+The returned array is part of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> and must not be modified.<br />
 Modifying the layout will invalidate the returned array.</p>
-<p>The number of attributes returned in <!-- raw HTML omitted -->n_attrs<!-- raw HTML omitted --> will be one more
-than the total number of characters in the layout, since there
-need to be attributes corresponding to both the position before
+<p>The number of attributes returned in <!-- raw HTML omitted -->n_attrs<!-- raw HTML omitted --> will be one more<br />
+than the total number of characters in the layout, since there<br />
+need to be attributes corresponding to both the position before<br />
 the first character and the position after the last character.</p>
 
 
@@ -3086,7 +3090,7 @@ the first character and the position after the last character.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the number of the attributes in
+        <div class='inline'><p>location to store the number of the attributes in<br />
 the array</p>
 </div>
       
@@ -3127,9 +3131,9 @@ the array</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Computes the logical and ink extents of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> in device units.</p>
-<p>This function just calls [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_extents] followed by
-two [func<!-- raw HTML omitted -->extents_to_pixels<!-- raw HTML omitted -->] calls, rounding <!-- raw HTML omitted -->ink_rect<!-- raw HTML omitted --> and <!-- raw HTML omitted -->logical_rect<!-- raw HTML omitted -->
-such that the rounded rectangles fully contain the unrounded one (that is,
+<p>This function just calls [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_extents] followed by<br />
+two [func<!-- raw HTML omitted -->extents_to_pixels<!-- raw HTML omitted -->] calls, rounding <!-- raw HTML omitted -->ink_rect<!-- raw HTML omitted --> and <!-- raw HTML omitted -->logical_rect<!-- raw HTML omitted --><br />
+such that the rounded rectangles fully contain the unrounded one (that is,<br />
 passes them as first argument to [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.extents_to_pixels]).</p>
 
 
@@ -3149,7 +3153,7 @@ passes them as first argument to [func<!-- raw HTML omitted -->Pango<!-- raw HTM
       
       
         &mdash;
-        <div class='inline'><p>rectangle used to store the extents of the
+        <div class='inline'><p>rectangle used to store the extents of the<br />
 layout as drawn</p>
 </div>
       
@@ -3165,7 +3169,7 @@ layout as drawn</p>
       
       
         &mdash;
-        <div class='inline'><p>rectangle used to store the logical
+        <div class='inline'><p>rectangle used to store the logical<br />
 extents of the layout</p>
 </div>
       
@@ -3201,10 +3205,10 @@ extents of the layout</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines the logical width and height of a <code>PangoLayout</code> in device
+    <p>Determines the logical width and height of a <code>PangoLayout</code> in device<br />
 units.</p>
-<p>[method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_size] returns the width and height
-scaled by %PANGO_SCALE. This is simply a convenience function
+<p>[method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_size] returns the width and height<br />
+scaled by %PANGO_SCALE. This is simply a convenience function<br />
 around [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_pixel_extents].</p>
 
 
@@ -3274,7 +3278,7 @@ around [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines the logical width and height of a <code>PangoLayout</code> in Pango
+    <p>Determines the logical width and height of a <code>PangoLayout</code> in Pango<br />
 units.</p>
 <p>This is simply a convenience function around [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_extents].</p>
 
@@ -3364,7 +3368,7 @@ units.</p>
       
       
         &mdash;
-        <div class='inline'><p>the height, in Pango units if positive,
+        <div class='inline'><p>the height, in Pango units if positive,<br />
 or number of lines if negative.</p>
 </div>
       
@@ -3387,25 +3391,25 @@ or number of lines if negative.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the height to which the <code>PangoLayout</code> should be ellipsized at.</p>
-<p>There are two different behaviors, based on whether <!-- raw HTML omitted -->height<!-- raw HTML omitted --> is positive
+<p>There are two different behaviors, based on whether <!-- raw HTML omitted -->height<!-- raw HTML omitted --> is positive<br />
 or negative.</p>
-<p>If <!-- raw HTML omitted -->height<!-- raw HTML omitted --> is positive, it will be the maximum height of the layout. Only
-lines would be shown that would fit, and if there is any text omitted,
-an ellipsis added. At least one line is included in each paragraph regardless
-of how small the height value is. A value of zero will render exactly one
+<p>If <!-- raw HTML omitted -->height<!-- raw HTML omitted --> is positive, it will be the maximum height of the layout. Only<br />
+lines would be shown that would fit, and if there is any text omitted,<br />
+an ellipsis added. At least one line is included in each paragraph regardless<br />
+of how small the height value is. A value of zero will render exactly one<br />
 line for the entire layout.</p>
-<p>If <!-- raw HTML omitted -->height<!-- raw HTML omitted --> is negative, it will be the (negative of) maximum number of lines
-per paragraph. That is, the total number of lines shown may well be more than
-this value if the layout contains multiple paragraphs of text.
-The default value of -1 means that the first line of each paragraph is ellipsized.
-This behavior may be changed in the future to act per layout instead of per
-paragraph. File a bug against pango at
-<a href="https://gitlab.gnome.org/gnome/pango">https://gitlab.gnome.org/gnome/pango</a>
+<p>If <!-- raw HTML omitted -->height<!-- raw HTML omitted --> is negative, it will be the (negative of) maximum number of lines<br />
+per paragraph. That is, the total number of lines shown may well be more than<br />
+this value if the layout contains multiple paragraphs of text.<br />
+The default value of -1 means that the first line of each paragraph is ellipsized.<br />
+This behavior may be changed in the future to act per layout instead of per<br />
+paragraph. File a bug against pango at<br />
+<a href="https://gitlab.gnome.org/gnome/pango">https://gitlab.gnome.org/gnome/pango</a><br />
 if your code relies on this behavior.</p>
-<p>Height setting only has effect if a positive width is set on
-<!-- raw HTML omitted -->layout<!-- raw HTML omitted --> and ellipsization mode of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> is not %PANGO_ELLIPSIZE_NONE.
-The behavior is undefined if a height other than -1 is set and
-ellipsization mode is set to %PANGO_ELLIPSIZE_NONE, and may change in the
+<p>Height setting only has effect if a positive width is set on<br />
+<!-- raw HTML omitted -->layout<!-- raw HTML omitted --> and ellipsization mode of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> is not %PANGO_ELLIPSIZE_NONE.<br />
+The behavior is undefined if a height other than -1 is set and<br />
+ellipsization mode is set to %PANGO_ELLIPSIZE_NONE, and may change in the<br />
 future.</p>
 
 
@@ -3425,7 +3429,7 @@ future.</p>
       
       
         &mdash;
-        <div class='inline'><p>the desired height of the layout in Pango units if positive,
+        <div class='inline'><p>the desired height of the layout in Pango units if positive,<br />
 or desired number of lines if negative.</p>
 </div>
       
@@ -3502,10 +3506,10 @@ or desired number of lines if negative.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the width in Pango units to indent each paragraph.</p>
-<p>A negative value of <!-- raw HTML omitted -->indent<!-- raw HTML omitted --> will produce a hanging indentation.
-That is, the first line will have the full width, and subsequent
+<p>A negative value of <!-- raw HTML omitted -->indent<!-- raw HTML omitted --> will produce a hanging indentation.<br />
+That is, the first line will have the full width, and subsequent<br />
 lines will be indented by the absolute value of <!-- raw HTML omitted -->indent<!-- raw HTML omitted -->.</p>
-<p>The indent setting is ignored if layout alignment is set to
+<p>The indent setting is ignored if layout alignment is set to<br />
 %PANGO_ALIGN_CENTER.</p>
 <p>The default value is 0.</p>
 
@@ -3596,8 +3600,8 @@ lines will be indented by the absolute value of <!-- raw HTML omitted -->indent<
       
       
         &mdash;
-        <div class='inline'><p>an integer indicating the edge of the grapheme to retrieve the
-position of. If &gt; 0, the trailing edge of the grapheme, if 0,
+        <div class='inline'><p>an integer indicating the edge of the grapheme to retrieve the<br />
+position of. If &gt; 0, the trailing edge of the grapheme, if 0,<br />
 the leading of the grapheme</p>
 </div>
       
@@ -3613,7 +3617,7 @@ the leading of the grapheme</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store resulting line index. (which will
+        <div class='inline'><p>location to store resulting line index. (which will<br />
 between 0 and pango_layout_get_line_count(layout) - 1)</p>
 </div>
       
@@ -3629,7 +3633,7 @@ between 0 and pango_layout_get_line_count(layout) - 1)</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store resulting position within line
+        <div class='inline'><p>location to store resulting position within line<br />
 (%PANGO_SCALE units per device unit)</p>
 </div>
       
@@ -3665,11 +3669,11 @@ between 0 and pango_layout_get_line_count(layout) - 1)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts from an index within a <code>PangoLayout</code> to the onscreen position
+    <p>Converts from an index within a <code>PangoLayout</code> to the onscreen position<br />
 corresponding to the grapheme at that index.</p>
-<p>The returns is represented as rectangle. Note that <code>pos-&gt;x</code> is
-always the leading edge of the grapheme and <code>pos-&gt;x + pos-&gt;width</code> the
-trailing edge of the grapheme. If the directionality of the grapheme
+<p>The returns is represented as rectangle. Note that <code>pos-&gt;x</code> is<br />
+always the leading edge of the grapheme and <code>pos-&gt;x + pos-&gt;width</code> the<br />
+trailing edge of the grapheme. If the directionality of the grapheme<br />
 is right-to-left, then <code>pos-&gt;width</code> will be negative.</p>
 
 
@@ -3740,9 +3744,9 @@ is right-to-left, then <code>pos-&gt;width</code> will be negative.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queries whether the layout had to ellipsize any paragraphs.</p>
-<p>This returns true if the ellipsization mode for <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->
-is not %PANGO_ELLIPSIZE_NONE, a positive width is set on <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->,
-and there are paragraphs exceeding that width that have to be
+<p>This returns true if the ellipsization mode for <!-- raw HTML omitted -->layout<!-- raw HTML omitted --><br />
+is not %PANGO_ELLIPSIZE_NONE, a positive width is set on <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->,<br />
+and there are paragraphs exceeding that width that have to be<br />
 ellipsized.</p>
 
 
@@ -3761,7 +3765,7 @@ ellipsized.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if any paragraphs had to be ellipsized,
+        <div class='inline'><p>true if any paragraphs had to be ellipsized,<br />
 false otherwise</p>
 </div>
       
@@ -3784,9 +3788,9 @@ false otherwise</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queries whether the layout had to wrap any paragraphs.</p>
-<p>This returns true if a positive width is set on <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->,
-ellipsization mode of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> is set to %PANGO_ELLIPSIZE_NONE,
-and there are paragraphs exceeding the layout width that have
+<p>This returns true if a positive width is set on <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->,<br />
+ellipsization mode of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> is set to %PANGO_ELLIPSIZE_NONE,<br />
+and there are paragraphs exceeding the layout width that have<br />
 to be wrapped.</p>
 
 
@@ -3805,7 +3809,7 @@ to be wrapped.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if any paragraphs had to be wrapped, false
+        <div class='inline'><p>true if any paragraphs had to be wrapped, false<br />
 otherwise</p>
 </div>
       
@@ -3866,7 +3870,7 @@ otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether each complete line should be stretched to fill the entire
+    <p>Gets whether each complete line should be stretched to fill the entire<br />
 width of the layout.</p>
 
 
@@ -3906,15 +3910,15 @@ width of the layout.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether each complete line should be stretched to fill the
+    <p>Sets whether each complete line should be stretched to fill the<br />
 entire width of the layout.</p>
-<p>Stretching is typically done by adding whitespace, but for some scripts
-(such as Arabic), the justification may be done in more complex ways,
+<p>Stretching is typically done by adding whitespace, but for some scripts<br />
+(such as Arabic), the justification may be done in more complex ways,<br />
 like extending the characters.</p>
-<p>Note that this setting is not implemented and so is ignored in
+<p>Note that this setting is not implemented and so is ignored in<br />
 Pango older than 1.18.</p>
-<p>Note that tabs and justification conflict with each other:
-Justification will move content away from its tab-aligned
+<p>Note that tabs and justification conflict with each other:<br />
+Justification will move content away from its tab-aligned<br />
 positions.</p>
 <p>The default value is false.</p>
 <p>Also see [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_justify_last_line].</p>
@@ -3971,7 +3975,7 @@ positions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether the last line should be stretched
+    <p>Gets whether the last line should be stretched<br />
 to fill the entire width of the layout.</p>
 
 
@@ -4011,9 +4015,9 @@ to fill the entire width of the layout.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether the last line should be stretched to fill the
+    <p>Sets whether the last line should be stretched to fill the<br />
 entire width of the layout.</p>
-<p>This only has an effect if [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_justify] has
+<p>This only has an effect if [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_justify] has<br />
 been called as well.</p>
 <p>The default value is false.</p>
 
@@ -4149,11 +4153,11 @@ been called as well.</p>
 <p>If <!-- raw HTML omitted -->factor<!-- raw HTML omitted --> is non-zero, lines are placed so that</p>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_baseline2'>baseline2</span> <span class='op'>=</span> <span class='id identifier rubyid_baseline1'>baseline1</span> <span class='op'>+</span> <span class='id identifier rubyid_factor'>factor</span> <span class='op'>*</span> <span class='id identifier rubyid_height2'>height2</span>
 </code></pre>
-<p>where height2 is the line height of the second line
-(as determined by the font(s)). In this case, the spacing
+<p>where height2 is the line height of the second line<br />
+(as determined by the font(s)). In this case, the spacing<br />
 set with [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_spacing] is ignored.</p>
 <p>If <!-- raw HTML omitted -->factor<!-- raw HTML omitted --> is zero (the default), spacing is applied as before.</p>
-<p>Note: for semantics that are closer to the CSS line-height
+<p>Note: for semantics that are closer to the CSS line-height<br />
 property, see [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.attr_line_height_new].</p>
 
 
@@ -4209,7 +4213,7 @@ property, see [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.attr_
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the lines of the <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> as a list.</p>
-<p>Use the faster [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_lines_readonly] if you do not
+<p>Use the faster [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_lines_readonly] if you do not<br />
 plan to modify the contents of the lines (glyphs, glyph widths, etc.).</p>
 
 
@@ -4228,9 +4232,9 @@ plan to modify the contents of the lines (glyphs, glyph widths, etc.).</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GSList</code>
-containing the lines in the layout. This points to internal data of the
-<code>PangoLayout</code> and must be used with care. It will become invalid on any
+        <div class='inline'><p>a <code>GSList</code><br />
+containing the lines in the layout. This points to internal data of the<br />
+<code>PangoLayout</code> and must be used with care. It will become invalid on any<br />
 change to the layout's text or properties.</p>
 </div>
       
@@ -4253,8 +4257,8 @@ change to the layout's text or properties.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the lines of the <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> as a list.</p>
-<p>This is a faster alternative to [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_lines],
-but the user is not expected to modify the contents of the lines
+<p>This is a faster alternative to [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_lines],<br />
+but the user is not expected to modify the contents of the lines<br />
 (glyphs, glyph widths, etc.).</p>
 
 
@@ -4273,10 +4277,10 @@ but the user is not expected to modify the contents of the lines
       
       
         &mdash;
-        <div class='inline'><p>a <code>GSList</code>
-containing the lines in the layout. This points to internal data of the
-<code>PangoLayout</code> and must be used with care. It will become invalid on any
-change to the layout's text or properties. No changes should be made to
+        <div class='inline'><p>a <code>GSList</code><br />
+containing the lines in the layout. This points to internal data of the<br />
+<code>PangoLayout</code> and must be used with care. It will become invalid on any<br />
+change to the layout's text or properties. No changes should be made to<br />
 the lines.</p>
 </div>
       
@@ -4299,16 +4303,16 @@ the lines.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Computes a new cursor position from an old position and a direction.</p>
-<p>If <!-- raw HTML omitted -->direction<!-- raw HTML omitted --> is positive, then the new position will cause the strong
-or weak cursor to be displayed one position to right of where it was
-with the old cursor position. If <!-- raw HTML omitted -->direction<!-- raw HTML omitted --> is negative, it will be
+<p>If <!-- raw HTML omitted -->direction<!-- raw HTML omitted --> is positive, then the new position will cause the strong<br />
+or weak cursor to be displayed one position to right of where it was<br />
+with the old cursor position. If <!-- raw HTML omitted -->direction<!-- raw HTML omitted --> is negative, it will be<br />
 moved to the left.</p>
-<p>In the presence of bidirectional text, the correspondence between
-logical and visual order will depend on the direction of the current
-run, and there may be jumps when the cursor is moved off of the end
+<p>In the presence of bidirectional text, the correspondence between<br />
+logical and visual order will depend on the direction of the current<br />
+run, and there may be jumps when the cursor is moved off of the end<br />
 of a run.</p>
-<p>Motion here is in cursor positions, not in characters, so a single
-call to this function may move the cursor over multiple characters
+<p>Motion here is in cursor positions, not in characters, so a single<br />
+call to this function may move the cursor over multiple characters<br />
 when multiple characters combine to form a single grapheme.</p>
 
 
@@ -4328,8 +4332,8 @@ when multiple characters combine to form a single grapheme.</p>
       
       
         &mdash;
-        <div class='inline'><p>whether the moving cursor is the strong cursor or the
-weak cursor. The strong cursor is the cursor corresponding
+        <div class='inline'><p>whether the moving cursor is the strong cursor or the<br />
+weak cursor. The strong cursor is the cursor corresponding<br />
 to text insertion in the base direction for the layout.</p>
 </div>
       
@@ -4360,8 +4364,8 @@ to text insertion in the base direction for the layout.</p>
       
       
         &mdash;
-        <div class='inline'><p>if 0, the cursor was at the leading edge of the
-grapheme indicated by <!-- raw HTML omitted -->old_index<!-- raw HTML omitted -->, if &gt; 0, the cursor
+        <div class='inline'><p>if 0, the cursor was at the leading edge of the<br />
+grapheme indicated by <!-- raw HTML omitted -->old_index<!-- raw HTML omitted -->, if &gt; 0, the cursor<br />
 was at the trailing edge.</p>
 </div>
       
@@ -4377,7 +4381,7 @@ was at the trailing edge.</p>
       
       
         &mdash;
-        <div class='inline'><p>direction to move cursor. A negative
+        <div class='inline'><p>direction to move cursor. A negative<br />
 value indicates motion to the left</p>
 </div>
       
@@ -4393,9 +4397,9 @@ value indicates motion to the left</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the new cursor byte index.
-A value of -1 indicates that the cursor has been moved off the
-beginning of the layout. A value of %G_MAXINT indicates that
+        <div class='inline'><p>location to store the new cursor byte index.<br />
+A value of -1 indicates that the cursor has been moved off the<br />
+beginning of the layout. A value of %G_MAXINT indicates that<br />
 the cursor has been moved off the end of the layout.</p>
 </div>
       
@@ -4411,11 +4415,11 @@ the cursor has been moved off the end of the layout.</p>
       
       
         &mdash;
-        <div class='inline'><p>number of characters to move forward from
-the location returned for <!-- raw HTML omitted -->new_index<!-- raw HTML omitted --> to get the position where
-the cursor should be displayed. This allows distinguishing the
-position at the beginning of one line from the position at the
-end of the preceding line. <!-- raw HTML omitted -->new_index<!-- raw HTML omitted --> is always on the line where
+        <div class='inline'><p>number of characters to move forward from<br />
+the location returned for <!-- raw HTML omitted -->new_index<!-- raw HTML omitted --> to get the position where<br />
+the cursor should be displayed. This allows distinguishing the<br />
+position at the beginning of one line from the position at the<br />
+end of the preceding line. <!-- raw HTML omitted -->new_index<!-- raw HTML omitted --> is always on the line where<br />
 the cursor should be displayed.</p>
 </div>
       
@@ -4452,14 +4456,14 @@ the cursor should be displayed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the current serial number of <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
-<p>The serial number is initialized to an small number larger than zero
-when a new layout is created and is increased whenever the layout is
-changed using any of the setter functions, or the <code>PangoContext</code> it
-uses has changed. The serial may wrap, but will never have the value 0.
+<p>The serial number is initialized to an small number larger than zero<br />
+when a new layout is created and is increased whenever the layout is<br />
+changed using any of the setter functions, or the <code>PangoContext</code> it<br />
+uses has changed. The serial may wrap, but will never have the value 0.<br />
 Since it can wrap, never compare it with &quot;less than&quot;, always use &quot;not equals&quot;.</p>
-<p>This can be used to automatically detect changes to a <code>PangoLayout</code>,
-and is useful for example to decide whether a layout needs redrawing.
-To force the serial to be increased, use
+<p>This can be used to automatically detect changes to a <code>PangoLayout</code>,<br />
+and is useful for example to decide whether a layout needs redrawing.<br />
+To force the serial to be increased, use<br />
 [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.context_changed].</p>
 
 
@@ -4500,10 +4504,10 @@ To force the serial to be increased, use
 </h3><div class="docstring">
   <div class="discussion">
     <p>Serializes the <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> for later deserialization via [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.deserialize].</p>
-<p>There are no guarantees about the format of the output across different
-versions of Pango and [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.deserialize] will reject data
+<p>There are no guarantees about the format of the output across different<br />
+versions of Pango and [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.deserialize] will reject data<br />
 that it cannot parse.</p>
-<p>The intended use of this function is testing, benchmarking and debugging.
+<p>The intended use of this function is testing, benchmarking and debugging.<br />
 The format is not meant as a permanent storage format.</p>
 
 
@@ -4635,7 +4639,7 @@ The format is not meant as a permanent storage format.</p>
     <p>Sets the layout text and attribute list from marked-up text.</p>
 <p>See <a href="pango_markup.html">Pango Markup</a>).</p>
 <p>Replaces the current text and attribute list.</p>
-<p>This is the same as [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_markup_with_accel],
+<p>This is the same as [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_markup_with_accel],<br />
 but the markup text isn't scanned for accelerators.</p>
 
 
@@ -4670,7 +4674,7 @@ but the markup text isn't scanned for accelerators.</p>
       
       
         &mdash;
-        <div class='inline'><p>length of marked-up text in bytes, or -1 if <!-- raw HTML omitted -->markup<!-- raw HTML omitted --> is
+        <div class='inline'><p>length of marked-up text in bytes, or -1 if <!-- raw HTML omitted -->markup<!-- raw HTML omitted --> is<br />
 <code>NUL</code>-terminated</p>
 </div>
       
@@ -4727,7 +4731,7 @@ but the markup text isn't scanned for accelerators.</p>
     <p>Sets the layout text and attribute list from marked-up text.</p>
 <p>See <a href="pango_markup.html">Pango Markup</a>).</p>
 <p>Replaces the current text and attribute list.</p>
-<p>This is the same as [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_markup_with_accel],
+<p>This is the same as [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_markup_with_accel],<br />
 but the markup text isn't scanned for accelerators.</p>
 
 
@@ -4762,7 +4766,7 @@ but the markup text isn't scanned for accelerators.</p>
       
       
         &mdash;
-        <div class='inline'><p>length of marked-up text in bytes, or -1 if <!-- raw HTML omitted -->markup<!-- raw HTML omitted --> is
+        <div class='inline'><p>length of marked-up text in bytes, or -1 if <!-- raw HTML omitted -->markup<!-- raw HTML omitted --> is<br />
 <code>NUL</code>-terminated</p>
 </div>
       
@@ -4815,12 +4819,12 @@ but the markup text isn't scanned for accelerators.</p>
     <p>Sets the layout text and attribute list from marked-up text.</p>
 <p>See <a href="pango_markup.html">Pango Markup</a>).</p>
 <p>Replaces the current text and attribute list.</p>
-<p>If <!-- raw HTML omitted -->accel_marker<!-- raw HTML omitted --> is nonzero, the given character will mark the
-character following it as an accelerator. For example, <!-- raw HTML omitted -->accel_marker<!-- raw HTML omitted -->
-might be an ampersand or underscore. All characters marked
-as an accelerator will receive a %PANGO_UNDERLINE_LOW attribute,
-and the first character so marked will be returned in <!-- raw HTML omitted -->accel_char<!-- raw HTML omitted -->.
-Two <!-- raw HTML omitted -->accel_marker<!-- raw HTML omitted --> characters following each other produce a single
+<p>If <!-- raw HTML omitted -->accel_marker<!-- raw HTML omitted --> is nonzero, the given character will mark the<br />
+character following it as an accelerator. For example, <!-- raw HTML omitted -->accel_marker<!-- raw HTML omitted --><br />
+might be an ampersand or underscore. All characters marked<br />
+as an accelerator will receive a %PANGO_UNDERLINE_LOW attribute,<br />
+and the first character so marked will be returned in <!-- raw HTML omitted -->accel_char<!-- raw HTML omitted -->.<br />
+Two <!-- raw HTML omitted -->accel_marker<!-- raw HTML omitted --> characters following each other produce a single<br />
 literal <!-- raw HTML omitted -->accel_marker<!-- raw HTML omitted --> character.</p>
 
 
@@ -4855,7 +4859,7 @@ literal <!-- raw HTML omitted -->accel_marker<!-- raw HTML omitted --> character
       
       
         &mdash;
-        <div class='inline'><p>length of marked-up text in bytes, or -1 if <!-- raw HTML omitted -->markup<!-- raw HTML omitted --> is
+        <div class='inline'><p>length of marked-up text in bytes, or -1 if <!-- raw HTML omitted -->markup<!-- raw HTML omitted --> is<br />
 <code>NUL</code>-terminated</p>
 </div>
       
@@ -4886,7 +4890,7 @@ literal <!-- raw HTML omitted -->accel_marker<!-- raw HTML omitted --> character
       
       
         &mdash;
-        <div class='inline'><p>return location
+        <div class='inline'><p>return location<br />
 for first located accelerator</p>
 </div>
       
@@ -4927,12 +4931,12 @@ for first located accelerator</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the text of the layout.</p>
-<p>This function validates <!-- raw HTML omitted -->text<!-- raw HTML omitted --> and renders invalid UTF-8
+<p>This function validates <!-- raw HTML omitted -->text<!-- raw HTML omitted --> and renders invalid UTF-8<br />
 with a placeholder glyph.</p>
-<p>Note that if you have used [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_markup] or
-[method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_markup_with_accel] on <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> before, you
-may want to call [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_attributes] to clear the
-attributes set on the layout from the markup as this function does
+<p>Note that if you have used [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_markup] or<br />
+[method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_markup_with_accel] on <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> before, you<br />
+may want to call [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_attributes] to clear the<br />
+attributes set on the layout from the markup as this function does<br />
 not clear attributes.</p>
 
 
@@ -4967,9 +4971,9 @@ not clear attributes.</p>
       
       
         &mdash;
-        <div class='inline'><p>maximum length of <!-- raw HTML omitted -->text<!-- raw HTML omitted -->, in bytes. -1 indicates that
-the string is nul-terminated and the length should be calculated.
-The text will also be truncated on encountering a nul-termination
+        <div class='inline'><p>maximum length of <!-- raw HTML omitted -->text<!-- raw HTML omitted -->, in bytes. -1 indicates that<br />
+the string is nul-terminated and the length should be calculated.<br />
+The text will also be truncated on encountering a nul-termination<br />
 even when <!-- raw HTML omitted -->length<!-- raw HTML omitted --> is positive.</p>
 </div>
       
@@ -5024,12 +5028,12 @@ even when <!-- raw HTML omitted -->length<!-- raw HTML omitted --> is positive.<
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the text of the layout.</p>
-<p>This function validates <!-- raw HTML omitted -->text<!-- raw HTML omitted --> and renders invalid UTF-8
+<p>This function validates <!-- raw HTML omitted -->text<!-- raw HTML omitted --> and renders invalid UTF-8<br />
 with a placeholder glyph.</p>
-<p>Note that if you have used [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_markup] or
-[method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_markup_with_accel] on <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> before, you
-may want to call [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_attributes] to clear the
-attributes set on the layout from the markup as this function does
+<p>Note that if you have used [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_markup] or<br />
+[method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_markup_with_accel] on <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> before, you<br />
+may want to call [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_attributes] to clear the<br />
+attributes set on the layout from the markup as this function does<br />
 not clear attributes.</p>
 
 
@@ -5064,9 +5068,9 @@ not clear attributes.</p>
       
       
         &mdash;
-        <div class='inline'><p>maximum length of <!-- raw HTML omitted -->text<!-- raw HTML omitted -->, in bytes. -1 indicates that
-the string is nul-terminated and the length should be calculated.
-The text will also be truncated on encountering a nul-termination
+        <div class='inline'><p>maximum length of <!-- raw HTML omitted -->text<!-- raw HTML omitted -->, in bytes. -1 indicates that<br />
+the string is nul-terminated and the length should be calculated.<br />
+The text will also be truncated on encountering a nul-termination<br />
 even when <!-- raw HTML omitted -->length<!-- raw HTML omitted --> is positive.</p>
 </div>
       
@@ -5135,7 +5139,7 @@ even when <!-- raw HTML omitted -->length<!-- raw HTML omitted --> is positive.<
       
       
         &mdash;
-        <div class='inline'><p>true if the layout does not break paragraphs
+        <div class='inline'><p>true if the layout does not break paragraphs<br />
 at paragraph separator characters, false otherwise</p>
 </div>
       
@@ -5158,9 +5162,9 @@ at paragraph separator characters, false otherwise</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the single paragraph mode of <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->setting<!-- raw HTML omitted --> is true, do not treat newlines and similar characters
-as paragraph separators; instead, keep all text in a single paragraph,
-and display a glyph for paragraph separator characters. Used when
+<p>If <!-- raw HTML omitted -->setting<!-- raw HTML omitted --> is true, do not treat newlines and similar characters<br />
+as paragraph separators; instead, keep all text in a single paragraph,<br />
+and display a glyph for paragraph separator characters. Used when<br />
 you want to allow editing of newlines on a single text line.</p>
 <p>The default value is false.</p>
 
@@ -5255,17 +5259,17 @@ you want to allow editing of newlines on a single text line.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the amount of spacing in Pango units between
+    <p>Sets the amount of spacing in Pango units between<br />
 the lines of the layout.</p>
 <p>When placing lines with spacing, Pango arranges things so that</p>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_line2'>line2</span><span class='period'>.</span><span class='id identifier rubyid_top'>top</span> <span class='op'>=</span> <span class='id identifier rubyid_line1'>line1</span><span class='period'>.</span><span class='id identifier rubyid_bottom'>bottom</span> <span class='op'>+</span> <span class='id identifier rubyid_spacing'>spacing</span>
 </code></pre>
 <p>The default value is 0.</p>
-<p>Note: Since 1.44, Pango is using the line height (as determined
-by the font) for placing lines when the line spacing factor is set
-to a non-zero value with [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_line_spacing].
+<p>Note: Since 1.44, Pango is using the line height (as determined<br />
+by the font) for placing lines when the line spacing factor is set<br />
+to a non-zero value with [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_line_spacing].<br />
 In that case, the <!-- raw HTML omitted -->spacing<!-- raw HTML omitted --> set with this function is ignored.</p>
-<p>Note: for semantics that are closer to the CSS line-height
+<p>Note: for semantics that are closer to the CSS line-height<br />
 property, see [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.attr_line_height_new].</p>
 
 
@@ -5321,7 +5325,7 @@ property, see [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.attr_
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the current <code>PangoTabArray</code> used by this layout.</p>
-<p>If no <code>PangoTabArray</code> has been set, then the default tabs are
+<p>If no <code>PangoTabArray</code> has been set, then the default tabs are<br />
 in use and nil is returned. Default tabs are every 8 spaces.</p>
 <p>The return value should be freed with [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.TabArray.free].</p>
 
@@ -5363,14 +5367,14 @@ in use and nil is returned. Default tabs are every 8 spaces.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the tabs to use for <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->, overriding the default tabs.</p>
-<p><code>PangoLayout</code> will place content at the next tab position
+<p><code>PangoLayout</code> will place content at the next tab position<br />
 whenever it meets a Tab character (U+0009).</p>
-<p>By default, tabs are every 8 spaces. If <!-- raw HTML omitted -->tabs<!-- raw HTML omitted --> is nil, the
-default tabs are reinstated. <!-- raw HTML omitted -->tabs<!-- raw HTML omitted --> is copied into the layout;
+<p>By default, tabs are every 8 spaces. If <!-- raw HTML omitted -->tabs<!-- raw HTML omitted --> is nil, the<br />
+default tabs are reinstated. <!-- raw HTML omitted -->tabs<!-- raw HTML omitted --> is copied into the layout;<br />
 you must free your copy of <!-- raw HTML omitted -->tabs<!-- raw HTML omitted --> yourself.</p>
-<p>Note that tabs and justification conflict with each other:
-Justification will move content away from its tab-aligned
-positions. The same is true for alignments other than
+<p>Note that tabs and justification conflict with each other:<br />
+Justification will move content away from its tab-aligned<br />
+positions. The same is true for alignments other than<br />
 %PANGO_ALIGN_LEFT.</p>
 
 
@@ -5466,9 +5470,9 @@ positions. The same is true for alignments other than
 </h3><div class="docstring">
   <div class="discussion">
     <p>Counts the number of unknown glyphs in <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
-<p>This function can be used to determine if there are any fonts
-available to render all characters in a certain string, or when
-used in combination with %PANGO_ATTR_FALLBACK, to check if a
+<p>This function can be used to determine if there are any fonts<br />
+available to render all characters in a certain string, or when<br />
+used in combination with %PANGO_ATTR_FALLBACK, to check if a<br />
 certain font supports all the characters in the string.</p>
 
 
@@ -5547,7 +5551,7 @@ certain font supports all the characters in the string.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the width to which the lines of the <code>PangoLayout</code> should wrap or
+    <p>Sets the width to which the lines of the <code>PangoLayout</code> should wrap or<br />
 ellipsized.</p>
 <p>The default value is -1: no width set.</p>
 
@@ -5568,7 +5572,7 @@ ellipsized.</p>
       
       
         &mdash;
-        <div class='inline'><p>the desired width in Pango units, or -1 to indicate that no
+        <div class='inline'><p>the desired width in Pango units, or -1 to indicate that no<br />
 wrapping or ellipsization should be performed.</p>
 </div>
       
@@ -5605,7 +5609,7 @@ wrapping or ellipsization should be performed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the wrap mode for the layout.</p>
-<p>Use [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.is_wrapped] to query whether
+<p>Use [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.is_wrapped] to query whether<br />
 any paragraphs were actually wrapped.</p>
 
 
@@ -5646,8 +5650,8 @@ any paragraphs were actually wrapped.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the wrap mode.</p>
-<p>The wrap mode only has effect if a width is set on the layout
-with [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_width]. To turn off wrapping,
+<p>The wrap mode only has effect if a width is set on the layout<br />
+with [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.set_width]. To turn off wrapping,<br />
 set the width to -1.</p>
 <p>The default value is %PANGO_WRAP_WORD.</p>
 
@@ -5704,10 +5708,10 @@ set the width to -1.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>A convenience method to serialize a layout to a file.</p>
-<p>It is equivalent to calling [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.serialize]
+<p>It is equivalent to calling [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.serialize]<br />
 followed by [func<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.file_set_contents].</p>
 <p>See those two functions for details on the arguments.</p>
-<p>It is mostly intended for use inside a debugger to quickly dump
+<p>It is mostly intended for use inside a debugger to quickly dump<br />
 a layout to a file for later inspection.</p>
 
 
@@ -5781,13 +5785,13 @@ a layout to a file for later inspection.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts from X and Y position within a layout to the byte index to the
+    <p>Converts from X and Y position within a layout to the byte index to the<br />
 character at that logical position.</p>
-<p>If the Y position is not inside the layout, the closest position is
-chosen (the position will be clamped inside the layout). If the X position
-is not within the layout, then the start or the end of the line is
-chosen as described for [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.LayoutLine.x_to_index]. If either
-the X or Y positions were not inside the layout, then the function returns
+<p>If the Y position is not inside the layout, the closest position is<br />
+chosen (the position will be clamped inside the layout). If the X position<br />
+is not within the layout, then the start or the end of the line is<br />
+chosen as described for [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.LayoutLine.x_to_index]. If either<br />
+the X or Y positions were not inside the layout, then the function returns<br />
 false; on an exact hit, it returns true.</p>
 
 
@@ -5852,9 +5856,9 @@ false; on an exact hit, it returns true.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store a integer indicating where
-in the grapheme the user clicked. It will either be zero, or the
-number of characters in the grapheme. 0 represents the leading edge
+        <div class='inline'><p>location to store a integer indicating where<br />
+in the grapheme the user clicked. It will either be zero, or the<br />
+number of characters in the grapheme. 0 represents the leading edge<br />
 of the grapheme.</p>
 </div>
       
@@ -5890,7 +5894,7 @@ of the grapheme.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

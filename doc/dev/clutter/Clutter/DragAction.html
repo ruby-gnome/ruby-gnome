@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::DragAction";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,14 +101,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::DragActionClass structure contains
+    <p>The Clutter::DragActionClass structure contains<br />
 only private data</p>
 
 
@@ -548,9 +550,12 @@ only private data</p>
 
       
     </ul>
+    
   
 
 
+  
+  
   
   
   
@@ -611,8 +616,8 @@ only private data</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Constains the dragging action (or in particular, the resulting
-actor position) to the specified Clutter::Rect, in parent's
+    <p>Constains the dragging action (or in particular, the resulting<br />
+actor position) to the specified Clutter::Rect, in parent's<br />
 coordinates.</p>
 
 
@@ -652,8 +657,8 @@ coordinates.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Constains the dragging action (or in particular, the resulting
-actor position) to the specified Clutter::Rect, in parent's
+    <p>Constains the dragging action (or in particular, the resulting<br />
+actor position) to the specified Clutter::Rect, in parent's<br />
 coordinates.</p>
 
 
@@ -934,10 +939,10 @@ coordinates.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The Clutter::Actor that is effectively being dragged</p>
-<p>A Clutter::DragAction will, be default, use the #ClutterActor that
-has been attached to the action; it is possible to create a
+<p>A Clutter::DragAction will, be default, use the #ClutterActor that<br />
+has been attached to the action; it is possible to create a<br />
 separate Clutter::Actor and use it instead.</p>
-<p>Setting this property has no effect on the Clutter::Actor argument
+<p>Setting this property has no effect on the Clutter::Actor argument<br />
 passed to the Clutter::DragAction signals</p>
 
 
@@ -978,10 +983,10 @@ passed to the Clutter::DragAction signals</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The Clutter::Actor that is effectively being dragged</p>
-<p>A Clutter::DragAction will, be default, use the #ClutterActor that
-has been attached to the action; it is possible to create a
+<p>A Clutter::DragAction will, be default, use the #ClutterActor that<br />
+has been attached to the action; it is possible to create a<br />
 separate Clutter::Actor and use it instead.</p>
-<p>Setting this property has no effect on the Clutter::Actor argument
+<p>Setting this property has no effect on the Clutter::Actor argument<br />
 passed to the Clutter::DragAction signals</p>
 
 
@@ -1049,8 +1054,8 @@ passed to the Clutter::DragAction signals</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the &quot;drag area&quot; associated with <!-- raw HTML omitted -->action<!-- raw HTML omitted -->, that
-is a Clutter::Rect that constrains the actor movements,
+    <p>Retrieves the &quot;drag area&quot; associated with <!-- raw HTML omitted -->action<!-- raw HTML omitted -->, that<br />
+is a Clutter::Rect that constrains the actor movements,<br />
 in parents coordinates.</p>
 
 
@@ -1088,7 +1093,7 @@ in parents coordinates.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the actor is actually constrained (and thus
+        <div class='inline'><p>true if the actor is actually constrained (and thus<br />
 <!-- raw HTML omitted -->drag_area<!-- raw HTML omitted --> is valid), false otherwise</p>
 </div>
       
@@ -1111,9 +1116,9 @@ in parents coordinates.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the values set by clutter_drag_action_set_drag_threshold().</p>
-<p>If the Clutter::DragAction:x-drag-threshold property or the
-Clutter::DragAction:y-drag-threshold property have been set to -1 then
-this function will return the default drag threshold value as stored
+<p>If the Clutter::DragAction:x-drag-threshold property or the<br />
+Clutter::DragAction:y-drag-threshold property have been set to -1 then<br />
+this function will return the default drag threshold value as stored<br />
 by the Clutter::Settings:dnd-drag-threshold property of #ClutterSettings.</p>
 
 
@@ -1133,7 +1138,7 @@ by the Clutter::Settings:dnd-drag-threshold property of #ClutterSettings.</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the horizontal drag
+        <div class='inline'><p>return location for the horizontal drag<br />
 threshold value, in pixels</p>
 </div>
       
@@ -1149,7 +1154,7 @@ threshold value, in pixels</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the vertical drag
+        <div class='inline'><p>return location for the vertical drag<br />
 threshold value, in pixels</p>
 </div>
       
@@ -1185,7 +1190,7 @@ threshold value, in pixels</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the coordinates, in stage space, of the latest motion
+    <p>Retrieves the coordinates, in stage space, of the latest motion<br />
 event during the dragging</p>
 
 
@@ -1205,7 +1210,7 @@ event during the dragging</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the latest motion
+        <div class='inline'><p>return location for the latest motion<br />
 event's X coordinate</p>
 </div>
       
@@ -1221,7 +1226,7 @@ event's X coordinate</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the latest motion
+        <div class='inline'><p>return location for the latest motion<br />
 event's Y coordinate</p>
 </div>
       
@@ -1257,7 +1262,7 @@ event's Y coordinate</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the coordinates, in stage space, of the press event
+    <p>Retrieves the coordinates, in stage space, of the press event<br />
 that started the dragging</p>
 
 
@@ -1327,10 +1332,10 @@ that started the dragging</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the horizontal and vertical drag thresholds that must be
+    <p>Sets the horizontal and vertical drag thresholds that must be<br />
 cleared by the pointer before <!-- raw HTML omitted -->action<!-- raw HTML omitted --> can begin the dragging.</p>
-<p>If <!-- raw HTML omitted -->x_threshold<!-- raw HTML omitted --> or <!-- raw HTML omitted -->y_threshold<!-- raw HTML omitted --> are set to -1 then the default
-drag threshold stored in the Clutter::Settings:dnd-drag-threshold
+<p>If <!-- raw HTML omitted -->x_threshold<!-- raw HTML omitted --> or <!-- raw HTML omitted -->y_threshold<!-- raw HTML omitted --> are set to -1 then the default<br />
+drag threshold stored in the Clutter::Settings:dnd-drag-threshold<br />
 property of Clutter::Settings will be used.</p>
 
 
@@ -1350,7 +1355,7 @@ property of Clutter::Settings will be used.</p>
       
       
         &mdash;
-        <div class='inline'><p>a distance on the horizontal axis, in pixels, or
+        <div class='inline'><p>a distance on the horizontal axis, in pixels, or<br />
 -1 to use the default drag threshold from Clutter::Settings</p>
 </div>
       
@@ -1366,7 +1371,7 @@ property of Clutter::Settings will be used.</p>
       
       
         &mdash;
-        <div class='inline'><p>a distance on the vertical axis, in pixels, or
+        <div class='inline'><p>a distance on the vertical axis, in pixels, or<br />
 -1 to use the default drag threshold from Clutter::Settings</p>
 </div>
       
@@ -1402,16 +1407,16 @@ property of Clutter::Settings will be used.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The horizontal threshold, in pixels, that the cursor must travel
+    <p>The horizontal threshold, in pixels, that the cursor must travel<br />
 in order to begin a drag action.</p>
-<p>When set to a positive value, Clutter::DragAction will only emit
-Clutter::DragAction::drag-begin if the pointer has moved
-horizontally at least of the given amount of pixels since
+<p>When set to a positive value, Clutter::DragAction will only emit<br />
+Clutter::DragAction::drag-begin if the pointer has moved<br />
+horizontally at least of the given amount of pixels since<br />
 the button press event.</p>
-<p>When set to -1, Clutter::DragAction will use the default threshold
-stored in the Clutter::Settings:dnd-drag-threshold property of
+<p>When set to -1, Clutter::DragAction will use the default threshold<br />
+stored in the Clutter::Settings:dnd-drag-threshold property of<br />
 Clutter::Settings.</p>
-<p>When read, this property will always return a valid drag
+<p>When read, this property will always return a valid drag<br />
 threshold, either as set or the default one.</p>
 
 
@@ -1451,16 +1456,16 @@ threshold, either as set or the default one.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The horizontal threshold, in pixels, that the cursor must travel
+    <p>The horizontal threshold, in pixels, that the cursor must travel<br />
 in order to begin a drag action.</p>
-<p>When set to a positive value, Clutter::DragAction will only emit
-Clutter::DragAction::drag-begin if the pointer has moved
-horizontally at least of the given amount of pixels since
+<p>When set to a positive value, Clutter::DragAction will only emit<br />
+Clutter::DragAction::drag-begin if the pointer has moved<br />
+horizontally at least of the given amount of pixels since<br />
 the button press event.</p>
-<p>When set to -1, Clutter::DragAction will use the default threshold
-stored in the Clutter::Settings:dnd-drag-threshold property of
+<p>When set to -1, Clutter::DragAction will use the default threshold<br />
+stored in the Clutter::Settings:dnd-drag-threshold property of<br />
 Clutter::Settings.</p>
-<p>When read, this property will always return a valid drag
+<p>When read, this property will always return a valid drag<br />
 threshold, either as set or the default one.</p>
 
 
@@ -1528,16 +1533,16 @@ threshold, either as set or the default one.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The vertical threshold, in pixels, that the cursor must travel
+    <p>The vertical threshold, in pixels, that the cursor must travel<br />
 in order to begin a drag action.</p>
-<p>When set to a positive value, Clutter::DragAction will only emit
-Clutter::DragAction::drag-begin if the pointer has moved
-vertically at least of the given amount of pixels since
+<p>When set to a positive value, Clutter::DragAction will only emit<br />
+Clutter::DragAction::drag-begin if the pointer has moved<br />
+vertically at least of the given amount of pixels since<br />
 the button press event.</p>
-<p>When set to -1, Clutter::DragAction will use the value stored
-in the Clutter::Settings:dnd-drag-threshold property of
+<p>When set to -1, Clutter::DragAction will use the value stored<br />
+in the Clutter::Settings:dnd-drag-threshold property of<br />
 Clutter::Settings.</p>
-<p>When read, this property will always return a valid drag
+<p>When read, this property will always return a valid drag<br />
 threshold, either as set or the default one.</p>
 
 
@@ -1577,16 +1582,16 @@ threshold, either as set or the default one.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The vertical threshold, in pixels, that the cursor must travel
+    <p>The vertical threshold, in pixels, that the cursor must travel<br />
 in order to begin a drag action.</p>
-<p>When set to a positive value, Clutter::DragAction will only emit
-Clutter::DragAction::drag-begin if the pointer has moved
-vertically at least of the given amount of pixels since
+<p>When set to a positive value, Clutter::DragAction will only emit<br />
+Clutter::DragAction::drag-begin if the pointer has moved<br />
+vertically at least of the given amount of pixels since<br />
 the button press event.</p>
-<p>When set to -1, Clutter::DragAction will use the value stored
-in the Clutter::Settings:dnd-drag-threshold property of
+<p>When set to -1, Clutter::DragAction will use the value stored<br />
+in the Clutter::Settings:dnd-drag-threshold property of<br />
 Clutter::Settings.</p>
-<p>When read, this property will always return a valid drag
+<p>When read, this property will always return a valid drag<br />
 threshold, either as set or the default one.</p>
 
 
@@ -1650,7 +1655,7 @@ threshold, either as set or the default one.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

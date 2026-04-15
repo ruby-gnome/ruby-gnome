@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Handy::TabView";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -1062,6 +1064,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1109,8 +1112,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds <!-- raw HTML omitted -->child<!-- raw HTML omitted --> to <!-- raw HTML omitted -->self<!-- raw HTML omitted --> with <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> as the parent.</p>
-<p>This function can be used to automatically position new pages, and to select
-the correct page when this page is closed while being selected (see
+<p>This function can be used to automatically position new pages, and to select<br />
+the correct page when this page is closed while being selected (see<br />
 [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.close_page].</p>
 <p>If <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is <code>NULL</code>, this function is equivalent to [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.append].</p>
 
@@ -1356,20 +1359,20 @@ the correct page when this page is closed while being selected (see
 </h3><div class="docstring">
   <div class="discussion">
     <p>Requests to close <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
-<p>Calling this function will result in [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::close-page] signal
-being emitted for <!-- raw HTML omitted -->page<!-- raw HTML omitted -->. Closing the page can then be confirmed or denied via
+<p>Calling this function will result in [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::close-page] signal<br />
+being emitted for <!-- raw HTML omitted -->page<!-- raw HTML omitted -->. Closing the page can then be confirmed or denied via<br />
 [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.close_page_finish].</p>
-<p>If the page is waiting for a [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.close_page_finish] call, this
+<p>If the page is waiting for a [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.close_page_finish] call, this<br />
 function will do nothing.</p>
-<p>The default handler for [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::close-page] will immediately confirm
-closing the page if it's non-pinned, or reject it if it's pinned. This
+<p>The default handler for [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::close-page] will immediately confirm<br />
+closing the page if it's non-pinned, or reject it if it's pinned. This<br />
 behavior can be changed by registering your own handler for that signal.</p>
 <p>If <!-- raw HTML omitted -->page<!-- raw HTML omitted --> was selected, another page will be selected instead:</p>
-<p>If the [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:parent] value is <code>NULL</code>, the next page will be
-selected when possible, or if the page was already last, the previous page
+<p>If the [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:parent] value is <code>NULL</code>, the next page will be<br />
+selected when possible, or if the page was already last, the previous page<br />
 will be selected instead.</p>
-<p>If it's not <code>NULL</code>, the previous page will be selected if it's a descendant
-(possibly indirect) of the parent. If both the previous page and the parent
+<p>If it's not <code>NULL</code>, the previous page will be selected if it's a descendant<br />
+(possibly indirect) of the parent. If both the previous page and the parent<br />
 are pinned, the parent will be selected instead.</p>
 
 
@@ -1425,10 +1428,10 @@ are pinned, the parent will be selected instead.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Completes a [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.close_page] call for <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->confirm<!-- raw HTML omitted --> is <code>TRUE</code>, <!-- raw HTML omitted -->page<!-- raw HTML omitted --> will be closed. If it's <code>FALSE</code>, ite will be
-reverted to its previous state and [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.close_page] can be called
+<p>If <!-- raw HTML omitted -->confirm<!-- raw HTML omitted --> is <code>TRUE</code>, <!-- raw HTML omitted -->page<!-- raw HTML omitted --> will be closed. If it's <code>FALSE</code>, ite will be<br />
+reverted to its previous state and [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.close_page] can be called<br />
 for it again.</p>
-<p>This function should not be called unless a custom handler for
+<p>This function should not be called unless a custom handler for<br />
 [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::close-page] is used.</p>
 
 
@@ -1607,10 +1610,10 @@ for it again.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Default page icon.</p>
-<p>If a page doesn't provide its own icon via [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:icon], default
+<p>If a page doesn't provide its own icon via [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:icon], default<br />
 icon may be used instead for contexts where having an icon is necessary.</p>
-<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will use default icon for pinned tabs in case the page is
-not loading, doesn't have an icon and an indicator. Default icon is never
+<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will use default icon for pinned tabs in case the page is<br />
+not loading, doesn't have an icon and an indicator. Default icon is never<br />
 used for tabs that aren't pinned.</p>
 
 
@@ -1651,10 +1654,10 @@ used for tabs that aren't pinned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Default page icon.</p>
-<p>If a page doesn't provide its own icon via [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:icon], default
+<p>If a page doesn't provide its own icon via [property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:icon], default<br />
 icon may be used instead for contexts where having an icon is necessary.</p>
-<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will use default icon for pinned tabs in case the page is
-not loading, doesn't have an icon and an indicator. Default icon is never
+<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will use default icon for pinned tabs in case the page is<br />
+not loading, doesn't have an icon and an indicator. Default icon is never<br />
 used for tabs that aren't pinned.</p>
 
 
@@ -1897,7 +1900,7 @@ used for tabs that aren't pinned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts a non-pinned page at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
-<p>It's an error to try to insert a page before a pinned page, in that case
+<p>It's an error to try to insert a page before a pinned page, in that case<br />
 [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.insert_pinned] should be used instead.</p>
 
 
@@ -1972,7 +1975,7 @@ used for tabs that aren't pinned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts a pinned page at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
-<p>It's an error to try to insert a pinned page after a non-pinned page, in that
+<p>It's an error to try to insert a pinned page after a non-pinned page, in that<br />
 case [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.insert] should be used instead.</p>
 
 
@@ -2087,9 +2090,9 @@ case [method<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->.insert] sh
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether a page is being transferred.</p>
-<p>This property will be set to <code>TRUE</code> when a drag-n-drop tab transfer starts
+<p>This property will be set to <code>TRUE</code> when a drag-n-drop tab transfer starts<br />
 on any [class<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->], and to <code>FALSE</code> after it ends.</p>
-<p>During the transfer, children cannot receive pointer input and a tab can be
+<p>During the transfer, children cannot receive pointer input and a tab can be<br />
 safely dropped on the tab view.</p>
 
 
@@ -2158,9 +2161,9 @@ safely dropped on the tab view.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether a page is being transferred.</p>
-<p>This property will be set to <code>TRUE</code> when a drag-n-drop tab transfer starts
+<p>This property will be set to <code>TRUE</code> when a drag-n-drop tab transfer starts<br />
 on any [class<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->], and to <code>FALSE</code> after it ends.</p>
-<p>During the transfer, children cannot receive pointer input and a tab can be
+<p>During the transfer, children cannot receive pointer input and a tab can be<br />
 safely dropped on the tab view.</p>
 
 
@@ -2201,8 +2204,8 @@ safely dropped on the tab view.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Tab context menu model.</p>
-<p>When a context menu is shown for a tab, it will be constructed from the
-provided menu model. Use [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::setup-menu] signal to set up the
+<p>When a context menu is shown for a tab, it will be constructed from the<br />
+provided menu model. Use [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::setup-menu] signal to set up the<br />
 menu actions for the particular tab.</p>
 
 
@@ -2243,8 +2246,8 @@ menu actions for the particular tab.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Tab context menu model.</p>
-<p>When a context menu is shown for a tab, it will be constructed from the
-provided menu model. Use [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::setup-menu] signal to set up the
+<p>When a context menu is shown for a tab, it will be constructed from the<br />
+provided menu model. Use [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::setup-menu] signal to set up the<br />
 menu actions for the particular tab.</p>
 
 
@@ -2915,7 +2918,7 @@ menu actions for the particular tab.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Reorders <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
-<p>It's a programmer error to try to reorder a pinned page after a non-pinned
+<p>It's a programmer error to try to reorder a pinned page after a non-pinned<br />
 one, or a non-pinned page before a pinned one.</p>
 
 
@@ -3176,15 +3179,15 @@ one, or a non-pinned page before a pinned one.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Pins or unpins <!-- raw HTML omitted -->page<!-- raw HTML omitted -->.</p>
-<p>Pinned pages are guaranteed to be placed before all non-pinned pages; at any
-given moment the first [property<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->:n-pinned-pages] pages in <!-- raw HTML omitted -->self<!-- raw HTML omitted --> are
+<p>Pinned pages are guaranteed to be placed before all non-pinned pages; at any<br />
+given moment the first [property<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->:n-pinned-pages] pages in <!-- raw HTML omitted -->self<!-- raw HTML omitted --> are<br />
 guaranteed to be pinned.</p>
-<p>When a page is pinned or unpinned, it's automatically reordered: pinning a
-page moves it after other pinned pages; unpinning a page moves it before
+<p>When a page is pinned or unpinned, it's automatically reordered: pinning a<br />
+page moves it after other pinned pages; unpinning a page moves it before<br />
 other non-pinned pages.</p>
 <p>Pinned pages can still be reordered between each other.</p>
-<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will display pinned pages in a compact form, never showing the
-title or close button, and only showing a single icon, selected in the
+<p>[class<!-- raw HTML omitted -->TabBar<!-- raw HTML omitted -->] will display pinned pages in a compact form, never showing the<br />
+title or close button, and only showing a single icon, selected in the<br />
 following order:</p>
 <ol>
 <li>[property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:indicator-icon]</li>
@@ -3192,7 +3195,7 @@ following order:</p>
 <li>[property<!-- raw HTML omitted -->TabPage<!-- raw HTML omitted -->:icon]</li>
 <li>[property<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->:default-icon]</li>
 </ol>
-<p>Pinned pages cannot be closed by default, see [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::close-page]
+<p>Pinned pages cannot be closed by default, see [signal<!-- raw HTML omitted -->TabView<!-- raw HTML omitted -->::close-page]<br />
 for how to override that behavior.</p>
 
 
@@ -3269,21 +3272,21 @@ for how to override that behavior.</p>
 <li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Down<!-- raw HTML omitted --> - switch to the next page</li>
 <li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Home<!-- raw HTML omitted --> - switch to the first page</li>
 <li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->End<!-- raw HTML omitted --> - switch to the last page</li>
-<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Up<!-- raw HTML omitted --> - move the current page
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Up<!-- raw HTML omitted --> - move the current page<br />
 backward</li>
-<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Down<!-- raw HTML omitted --> - move the current
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Down<!-- raw HTML omitted --> - move the current<br />
 page forward</li>
-<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Home<!-- raw HTML omitted --> - move the current page at
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Home<!-- raw HTML omitted --> - move the current page at<br />
 the start</li>
-<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->End<!-- raw HTML omitted --> - move the current page at
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->End<!-- raw HTML omitted --> - move the current page at<br />
 the end</li>
 <li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Tab<!-- raw HTML omitted --> - switch to the next page, with looping</li>
-<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Tab<!-- raw HTML omitted --> - switch to the previous
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Tab<!-- raw HTML omitted --> - switch to the previous<br />
 page, with looping</li>
 <li><!-- raw HTML omitted -->Alt<!-- raw HTML omitted -->+<!-- raw HTML omitted -->1<!-- raw HTML omitted -->⋯<!-- raw HTML omitted -->9<!-- raw HTML omitted --> - switch to pages 1-9</li>
 <li><!-- raw HTML omitted -->Alt<!-- raw HTML omitted -->+<!-- raw HTML omitted -->0<!-- raw HTML omitted --> - switch to page 10</li>
 </ul>
-<p>These shortcuts are always available on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->, this property is useful if
+<p>These shortcuts are always available on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->, this property is useful if<br />
 they should be available globally.</p>
 
 
@@ -3330,21 +3333,21 @@ they should be available globally.</p>
 <li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Down<!-- raw HTML omitted --> - switch to the next page</li>
 <li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Home<!-- raw HTML omitted --> - switch to the first page</li>
 <li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->End<!-- raw HTML omitted --> - switch to the last page</li>
-<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Up<!-- raw HTML omitted --> - move the current page
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Up<!-- raw HTML omitted --> - move the current page<br />
 backward</li>
-<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Down<!-- raw HTML omitted --> - move the current
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Page Down<!-- raw HTML omitted --> - move the current<br />
 page forward</li>
-<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Home<!-- raw HTML omitted --> - move the current page at
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Home<!-- raw HTML omitted --> - move the current page at<br />
 the start</li>
-<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->End<!-- raw HTML omitted --> - move the current page at
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->End<!-- raw HTML omitted --> - move the current page at<br />
 the end</li>
 <li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Tab<!-- raw HTML omitted --> - switch to the next page, with looping</li>
-<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Tab<!-- raw HTML omitted --> - switch to the previous
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Tab<!-- raw HTML omitted --> - switch to the previous<br />
 page, with looping</li>
 <li><!-- raw HTML omitted -->Alt<!-- raw HTML omitted -->+<!-- raw HTML omitted -->1<!-- raw HTML omitted -->⋯<!-- raw HTML omitted -->9<!-- raw HTML omitted --> - switch to pages 1-9</li>
 <li><!-- raw HTML omitted -->Alt<!-- raw HTML omitted -->+<!-- raw HTML omitted -->0<!-- raw HTML omitted --> - switch to page 10</li>
 </ul>
-<p>These shortcuts are always available on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->, this property is useful if
+<p>These shortcuts are always available on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->, this property is useful if<br />
 they should be available globally.</p>
 
 
@@ -3414,7 +3417,7 @@ they should be available globally.</p>
   <div class="discussion">
     <p>Transfers <!-- raw HTML omitted -->page<!-- raw HTML omitted --> from <!-- raw HTML omitted -->self<!-- raw HTML omitted --> to <!-- raw HTML omitted -->other_view<!-- raw HTML omitted -->.</p>
 <p>The <!-- raw HTML omitted -->page<!-- raw HTML omitted --> object will be reused.</p>
-<p>It's a programmer error to try to insert a pinned page after a non-pinned
+<p>It's a programmer error to try to insert a pinned page after a non-pinned<br />
 one, or a non-pinned page before a pinned one.</p>
 
 
@@ -3495,7 +3498,7 @@ one, or a non-pinned page before a pinned one.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

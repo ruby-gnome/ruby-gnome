@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::DBusMethodInvocation";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,19 +95,20 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Instances of the <code>GDBusMethodInvocation</code> class are used when
-handling D-Bus method calls. It provides a way to asynchronously
+    <p>Instances of the <code>GDBusMethodInvocation</code> class are used when<br />
+handling D-Bus method calls. It provides a way to asynchronously<br />
 return results and errors.</p>
-<p>The normal way to obtain a <code>GDBusMethodInvocation</code> object is to receive
-it as an argument to the <code>handle_method_call()</code> function in a
-[type<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusInterfaceVTable] that was passed to
+<p>The normal way to obtain a <code>GDBusMethodInvocation</code> object is to receive<br />
+it as an argument to the <code>handle_method_call()</code> function in a<br />
+[type<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusInterfaceVTable] that was passed to<br />
 [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection.register_object].</p>
 
 
@@ -545,6 +547,7 @@ it as an argument to the <code>handle_method_call()</code> function in a
 
       
     </ul>
+    
   
 
 
@@ -604,9 +607,9 @@ it as an argument to the <code>handle_method_call()</code> function in a
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the name of the D-Bus interface the method was invoked on.</p>
-<p>If this method call is a property Get, Set or GetAll call that has
-been redirected to the method call handler then
-&quot;org.freedesktop.DBus.Properties&quot; will be returned.  See
+<p>If this method call is a property Get, Set or GetAll call that has<br />
+been redirected to the method call handler then<br />
+&quot;org.freedesktop.DBus.Properties&quot; will be returned.  See<br />
 GDBus::InterfaceVTable for more information.</p>
 
 
@@ -646,12 +649,12 @@ GDBus::InterfaceVTable for more information.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the GDBus::Message for the method invocation. This is useful if
-you need to use low-level protocol features, such as UNIX file
-descriptor passing, that cannot be properly expressed in the
+    <p>Gets the GDBus::Message for the method invocation. This is useful if<br />
+you need to use low-level protocol features, such as UNIX file<br />
+descriptor passing, that cannot be properly expressed in the<br />
 #GVariant API.</p>
-<p>See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
-for an example of how to use this low-level API to send and receive
+<p>See this [server][gdbus-server] and [client][gdbus-unix-fd-client]<br />
+for an example of how to use this low-level API to send and receive<br />
 UNIX file descriptors.</p>
 
 
@@ -692,9 +695,9 @@ UNIX file descriptors.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets information about the method call, if any.</p>
-<p>If this method invocation is a property Get, Set or GetAll call that
-has been redirected to the method call handler then nil will be
-returned.  See g_dbus_method_invocation_get_property_info() and
+<p>If this method invocation is a property Get, Set or GetAll call that<br />
+has been redirected to the method call handler then nil will be<br />
+returned.  See g_dbus_method_invocation_get_property_info() and<br />
 GDBus::InterfaceVTable for more information.</p>
 
 
@@ -812,7 +815,7 @@ GDBus::InterfaceVTable for more information.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the parameters of the method invocation. If there are no input
+    <p>Gets the parameters of the method invocation. If there are no input<br />
 parameters then this will return a GVariant with 0 children rather than NULL.</p>
 
 
@@ -852,11 +855,11 @@ parameters then this will return a GVariant with 0 children rather than NULL.</p
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets information about the property that this method call is for, if
+    <p>Gets information about the property that this method call is for, if<br />
 any.</p>
-<p>This will only be set in the case of an invocation in response to a
-property Get or Set call that has been directed to the method call
-handler for an object on account of its property_get() or
+<p>This will only be set in the case of an invocation in response to a<br />
+property Get or Set call that has been directed to the method call<br />
+handler for an object on account of its property_get() or<br />
 property_set() vtable pointers being unset.</p>
 <p>See GDBus::InterfaceVTable for more information.</p>
 <p>If the call was GetAll, nil will be returned.</p>
@@ -899,8 +902,8 @@ property_set() vtable pointers being unset.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finishes handling a D-Bus method call by returning an error.</p>
-<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See
-GDBus::InterfaceVTable for more information about the ownership of
+<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See<br />
+GDBus::InterfaceVTable for more information about the ownership of<br />
 <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->.</p>
 
 
@@ -971,20 +974,20 @@ GDBus::InterfaceVTable for more information about the ownership of
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finishes handling a D-Bus method call by returning an error.</p>
-<p>See g_dbus_error_encode_gerror() for details about what error name
-will be returned on the wire. In a nutshell, if the given error is
-registered using g_dbus_error_register_error() the name given
-during registration is used. Otherwise, a name of the form
-<code>org.gtk.GDBus.UnmappedGError.Quark...</code> is used. This provides
+<p>See g_dbus_error_encode_gerror() for details about what error name<br />
+will be returned on the wire. In a nutshell, if the given error is<br />
+registered using g_dbus_error_register_error() the name given<br />
+during registration is used. Otherwise, a name of the form<br />
+<code>org.gtk.GDBus.UnmappedGError.Quark...</code> is used. This provides<br />
 transparent mapping of #GError between applications using GDBus.</p>
-<p>If you are writing an application intended to be portable,
-always register errors with g_dbus_error_register_error()
+<p>If you are writing an application intended to be portable,<br />
+always register errors with g_dbus_error_register_error()<br />
 or use g_dbus_method_invocation_return_dbus_error().</p>
-<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See
-GDBus::InterfaceVTable for more information about the ownership of
+<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See<br />
+GDBus::InterfaceVTable for more information about the ownership of<br />
 <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->.</p>
-<p>Since 2.48, if the method call requested for a reply not to be sent
-then this call will free <!-- raw HTML omitted -->invocation<!-- raw HTML omitted --> but otherwise do nothing (as per
+<p>Since 2.48, if the method call requested for a reply not to be sent<br />
+then this call will free <!-- raw HTML omitted -->invocation<!-- raw HTML omitted --> but otherwise do nothing (as per<br />
 the recommendations of the D-Bus specification).</p>
 
 
@@ -1085,8 +1088,8 @@ the recommendations of the D-Bus specification).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Like g_dbus_method_invocation_return_error() but without printf()-style formatting.</p>
-<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See
-GDBus::InterfaceVTable for more information about the ownership of
+<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See<br />
+GDBus::InterfaceVTable for more information about the ownership of<br />
 <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->.</p>
 
 
@@ -1171,10 +1174,10 @@ GDBus::InterfaceVTable for more information about the ownership of
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like g_dbus_method_invocation_return_error() but intended for
+    <p>Like g_dbus_method_invocation_return_error() but intended for<br />
 language bindings.</p>
-<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See
-GDBus::InterfaceVTable for more information about the ownership of
+<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See<br />
+GDBus::InterfaceVTable for more information about the ownership of<br />
 <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->.</p>
 
 
@@ -1274,10 +1277,10 @@ GDBus::InterfaceVTable for more information about the ownership of
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like g_dbus_method_invocation_return_error() but takes a #GError
+    <p>Like g_dbus_method_invocation_return_error() but takes a #GError<br />
 instead of the error domain, error code and message.</p>
-<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See
-GDBus::InterfaceVTable for more information about the ownership of
+<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See<br />
+GDBus::InterfaceVTable for more information about the ownership of<br />
 <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->.</p>
 
 
@@ -1332,11 +1335,11 @@ GDBus::InterfaceVTable for more information about the ownership of
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes handling a D-Bus method call by returning <!-- raw HTML omitted -->parameters<!-- raw HTML omitted -->.
+    <p>Finishes handling a D-Bus method call by returning <!-- raw HTML omitted -->parameters<!-- raw HTML omitted -->.<br />
 If the <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> GVariant is floating, it is consumed.</p>
-<p>It is an error if <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> is not of the right format: it must be a tuple
-containing the out-parameters of the D-Bus method. Even if the method has a
-single out-parameter, it must be contained in a tuple. If the method has no
+<p>It is an error if <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> is not of the right format: it must be a tuple<br />
+containing the out-parameters of the D-Bus method. Even if the method has a<br />
+single out-parameter, it must be contained in a tuple. If the method has no<br />
 out-parameters, <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> may be nil or an empty tuple.</p>
 <pre class="code ruby"><code class="ruby">GDBusMethodInvocation *invocation = some_invocation;
 g_autofree gchar *result_string = NULL;
@@ -1352,12 +1355,12 @@ else
 
 // Do not free &lt;b&gt;invocation&lt;/b&gt; here; returning a value does that
 </code></pre>
-<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See
-GDBus::InterfaceVTable for more information about the ownership of
+<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See<br />
+GDBus::InterfaceVTable for more information about the ownership of<br />
 <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->.</p>
-<p>Since 2.48, if the method call requested for a reply not to be sent
-then this call will sink <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> and free <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->, but
-otherwise do nothing (as per the recommendations of the D-Bus
+<p>Since 2.48, if the method call requested for a reply not to be sent<br />
+then this call will sink <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> and free <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->, but<br />
+otherwise do nothing (as per the recommendations of the D-Bus<br />
 specification).</p>
 
 
@@ -1414,8 +1417,8 @@ specification).</p>
   <div class="discussion">
     <p>Like g_dbus_method_invocation_return_value() but also takes a GUnix::FDList.</p>
 <p>This method is only available on UNIX.</p>
-<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See
-GDBus::InterfaceVTable for more information about the ownership of
+<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See<br />
+GDBus::InterfaceVTable for more information about the ownership of<br />
 <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->.</p>
 
 
@@ -1524,10 +1527,10 @@ GDBus::InterfaceVTable for more information about the ownership of
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like g_dbus_method_invocation_return_gerror() but takes ownership
+    <p>Like g_dbus_method_invocation_return_gerror() but takes ownership<br />
 of <!-- raw HTML omitted -->error<!-- raw HTML omitted --> so the caller does not need to free it.</p>
-<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See
-GDBus::InterfaceVTable for more information about the ownership of
+<p>This method will take ownership of <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->. See<br />
+GDBus::InterfaceVTable for more information about the ownership of<br />
 <!-- raw HTML omitted -->invocation<!-- raw HTML omitted -->.</p>
 
 
@@ -1617,7 +1620,7 @@ GDBus::InterfaceVTable for more information about the ownership of
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

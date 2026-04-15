@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Inscription";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -627,9 +629,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -809,11 +813,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Utility property that sets both the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Inscription:text] and
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Inscription:attributes] properties, mainly intended for use in
+    <p>Utility property that sets both the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Inscription:text] and<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Inscription:attributes] properties, mainly intended for use in<br />
 GtkBuilder ui files to ease translation support and bindings.</p>
-<p>This function uses [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.parse_markup] to parse the markup into text and
-attributes. The markup must be valid. If you cannot ensure that, consider using
+<p>This function uses [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.parse_markup] to parse the markup into text and<br />
+attributes. The markup must be valid. If you cannot ensure that, consider using<br />
 [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.parse_markup] and setting the two properties yourself.</p>
 
 
@@ -869,12 +873,12 @@ attributes. The markup must be valid. If you cannot ensure that, consider using
 </h3><div class="docstring">
   <div class="discussion">
     <p>The number of characters that should fit into the inscription at minimum.</p>
-<p>This influences the requested width, not the width actually given to the widget,
+<p>This influences the requested width, not the width actually given to the widget,<br />
 which might turn out to be larger.</p>
-<p>Note that this is an approximate character width, so some characters might be
-wider and some might be thinner, so do not expect the number of characters to
+<p>Note that this is an approximate character width, so some characters might be<br />
+wider and some might be thinner, so do not expect the number of characters to<br />
 exactly match.</p>
-<p>If you set this property to 0, the inscription will not request any width at all
+<p>If you set this property to 0, the inscription will not request any width at all<br />
 and its width will be determined entirely by its surroundings.</p>
 
 
@@ -915,12 +919,12 @@ and its width will be determined entirely by its surroundings.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The number of characters that should fit into the inscription at minimum.</p>
-<p>This influences the requested width, not the width actually given to the widget,
+<p>This influences the requested width, not the width actually given to the widget,<br />
 which might turn out to be larger.</p>
-<p>Note that this is an approximate character width, so some characters might be
-wider and some might be thinner, so do not expect the number of characters to
+<p>Note that this is an approximate character width, so some characters might be<br />
+wider and some might be thinner, so do not expect the number of characters to<br />
 exactly match.</p>
-<p>If you set this property to 0, the inscription will not request any width at all
+<p>If you set this property to 0, the inscription will not request any width at all<br />
 and its width will be determined entirely by its surroundings.</p>
 
 
@@ -989,11 +993,11 @@ and its width will be determined entirely by its surroundings.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The number of lines that should fit into the inscription at minimum.</p>
-<p>This influences the requested height, not the height actually given to the widget,
+<p>This influences the requested height, not the height actually given to the widget,<br />
 which might turn out to be larger.</p>
-<p>Note that this is an approximate line height, so if the text uses things like fancy
+<p>Note that this is an approximate line height, so if the text uses things like fancy<br />
 Unicode or attribute that influence the height, the text might not fit.</p>
-<p>If you set this property to 0, the inscription will not request any height at all
+<p>If you set this property to 0, the inscription will not request any height at all<br />
 and its height will be determined entirely by its surroundings.</p>
 
 
@@ -1034,11 +1038,11 @@ and its height will be determined entirely by its surroundings.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The number of lines that should fit into the inscription at minimum.</p>
-<p>This influences the requested height, not the height actually given to the widget,
+<p>This influences the requested height, not the height actually given to the widget,<br />
 which might turn out to be larger.</p>
-<p>Note that this is an approximate line height, so if the text uses things like fancy
+<p>Note that this is an approximate line height, so if the text uses things like fancy<br />
 Unicode or attribute that influence the height, the text might not fit.</p>
-<p>If you set this property to 0, the inscription will not request any height at all
+<p>If you set this property to 0, the inscription will not request any height at all<br />
 and its height will be determined entirely by its surroundings.</p>
 
 
@@ -1107,10 +1111,10 @@ and its height will be determined entirely by its surroundings.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The number of characters that should ideally fit into the inscription.</p>
-<p>This influences the requested width, not the width actually given to the widget.
+<p>This influences the requested width, not the width actually given to the widget.<br />
 The widget might turn out larger as well as smaller.</p>
-<p>If this property is set to a value smaller than [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Inscription:min-chars],
-that value will be used. In particular, for the default value of 0, this will always
+<p>If this property is set to a value smaller than [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Inscription:min-chars],<br />
+that value will be used. In particular, for the default value of 0, this will always<br />
 be the case.</p>
 
 
@@ -1151,10 +1155,10 @@ be the case.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The number of characters that should ideally fit into the inscription.</p>
-<p>This influences the requested width, not the width actually given to the widget.
+<p>This influences the requested width, not the width actually given to the widget.<br />
 The widget might turn out larger as well as smaller.</p>
-<p>If this property is set to a value smaller than [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Inscription:min-chars],
-that value will be used. In particular, for the default value of 0, this will always
+<p>If this property is set to a value smaller than [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Inscription:min-chars],<br />
+that value will be used. In particular, for the default value of 0, this will always<br />
 be the case.</p>
 
 
@@ -1223,10 +1227,10 @@ be the case.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The number of lines that should ideally fit into the inscription.</p>
-<p>This influences the requested height, not the height actually given to the widget.
+<p>This influences the requested height, not the height actually given to the widget.<br />
 The widget might turn out larger as well as smaller.</p>
-<p>If this property is set to a value smaller than [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Inscription:min-lines],
-that value will be used. In particular, for the default value of 0, this will always
+<p>If this property is set to a value smaller than [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Inscription:min-lines],<br />
+that value will be used. In particular, for the default value of 0, this will always<br />
 be the case.</p>
 
 
@@ -1267,10 +1271,10 @@ be the case.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The number of lines that should ideally fit into the inscription.</p>
-<p>This influences the requested height, not the height actually given to the widget.
+<p>This influences the requested height, not the height actually given to the widget.<br />
 The widget might turn out larger as well as smaller.</p>
-<p>If this property is set to a value smaller than [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Inscription:min-lines],
-that value will be used. In particular, for the default value of 0, this will always
+<p>If this property is set to a value smaller than [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Inscription:min-lines],<br />
+that value will be used. In particular, for the default value of 0, this will always<br />
 be the case.</p>
 
 
@@ -1659,7 +1663,7 @@ be the case.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The horizontal alignment of the text inside the allocated size.</p>
-<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign], which determines how the
+<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign], which determines how the<br />
 inscription's size allocation is positioned in the available space.</p>
 
 
@@ -1700,7 +1704,7 @@ inscription's size allocation is positioned in the available space.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The horizontal alignment of the text inside the allocated size.</p>
-<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign], which determines how the
+<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign], which determines how the<br />
 inscription's size allocation is positioned in the available space.</p>
 
 
@@ -1769,7 +1773,7 @@ inscription's size allocation is positioned in the available space.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The vertical alignment of the text inside the allocated size.</p>
-<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:valign], which determines how the
+<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:valign], which determines how the<br />
 inscription's size allocation is positioned in the available space.</p>
 
 
@@ -1810,7 +1814,7 @@ inscription's size allocation is positioned in the available space.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The vertical alignment of the text inside the allocated size.</p>
-<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:valign], which determines how the
+<p>Compare this to [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:valign], which determines how the<br />
 inscription's size allocation is positioned in the available space.</p>
 
 
@@ -1874,7 +1878,7 @@ inscription's size allocation is positioned in the available space.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

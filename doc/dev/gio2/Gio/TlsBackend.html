@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::TlsBackend";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,15 +79,16 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>TLS (Transport Layer Security, aka SSL) and DTLS backend. This is an
-internal type used to coordinate the different classes implemented
+    <p>TLS (Transport Layer Security, aka SSL) and DTLS backend. This is an<br />
+internal type used to coordinate the different classes implemented<br />
 by a TLS backend.</p>
 
 
@@ -341,6 +343,7 @@ by a TLS backend.</p>
 
       
     </ul>
+    
   
 
 
@@ -378,7 +381,7 @@ by a TLS backend.</p>
       
       
         &mdash;
-        <div class='inline'><p>the #GType of <!-- raw HTML omitted -->backend<!-- raw HTML omitted -->'s GTls::Certificate
+        <div class='inline'><p>the #GType of <!-- raw HTML omitted -->backend<!-- raw HTML omitted -->'s GTls::Certificate<br />
 implementation.</p>
 </div>
       
@@ -418,7 +421,7 @@ implementation.</p>
       
       
         &mdash;
-        <div class='inline'><p>the #GType of <!-- raw HTML omitted -->backend<!-- raw HTML omitted -->'s GTls::ClientConnection
+        <div class='inline'><p>the #GType of <!-- raw HTML omitted -->backend<!-- raw HTML omitted -->'s GTls::ClientConnection<br />
 implementation.</p>
 </div>
       
@@ -458,7 +461,7 @@ implementation.</p>
       
       
         &mdash;
-        <div class='inline'><p>the default database, which should be
+        <div class='inline'><p>the default database, which should be<br />
 unreffed when done.</p>
 </div>
       
@@ -481,10 +484,10 @@ unreffed when done.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Set the default GTls::Database used to verify TLS connections</p>
-<p>Any subsequent call to g_tls_backend_get_default_database() will return
-the database set in this call.  Existing databases and connections are not
+<p>Any subsequent call to g_tls_backend_get_default_database() will return<br />
+the database set in this call.  Existing databases and connections are not<br />
 modified.</p>
-<p>Setting a nil default database will reset to using the system default
+<p>Setting a nil default database will reset to using the system default<br />
 database as if g_tls_backend_set_default_database() had never been called.</p>
 
 
@@ -557,7 +560,7 @@ database as if g_tls_backend_set_default_database() had never been called.</p>
       
       
         &mdash;
-        <div class='inline'><p>the #GType of <!-- raw HTML omitted -->backend<!-- raw HTML omitted -->’s GDtls::ClientConnection
+        <div class='inline'><p>the #GType of <!-- raw HTML omitted -->backend<!-- raw HTML omitted -->’s GDtls::ClientConnection<br />
 implementation, or %G_TYPE_INVALID if this backend doesn’t support DTLS.</p>
 </div>
       
@@ -597,7 +600,7 @@ implementation, or %G_TYPE_INVALID if this backend doesn’t support DTLS.</p>
       
       
         &mdash;
-        <div class='inline'><p>the #GType of <!-- raw HTML omitted -->backend<!-- raw HTML omitted -->’s GDtls::ServerConnection
+        <div class='inline'><p>the #GType of <!-- raw HTML omitted -->backend<!-- raw HTML omitted -->’s GDtls::ServerConnection<br />
 implementation, or %G_TYPE_INVALID if this backend doesn’t support DTLS.</p>
 </div>
       
@@ -676,7 +679,7 @@ implementation, or %G_TYPE_INVALID if this backend doesn’t support DTLS.</p>
       
       
         &mdash;
-        <div class='inline'><p>the #GType of <!-- raw HTML omitted -->backend<!-- raw HTML omitted -->'s GTls::ServerConnection
+        <div class='inline'><p>the #GType of <!-- raw HTML omitted -->backend<!-- raw HTML omitted -->'s GTls::ServerConnection<br />
 implementation.</p>
 </div>
       
@@ -698,7 +701,7 @@ implementation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if DTLS is supported. DTLS support may not be available even if TLS
+    <p>Checks if DTLS is supported. DTLS support may not be available even if TLS<br />
 support is available, and vice-versa.</p>
 
 
@@ -738,7 +741,7 @@ support is available, and vice-versa.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if TLS is supported; if this returns false for the default
+    <p>Checks if TLS is supported; if this returns false for the default<br />
 GTls::Backend, it means no &quot;real&quot; TLS backend is available.</p>
 
 
@@ -774,7 +777,7 @@ GTls::Backend, it means no &quot;real&quot; TLS backend is available.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::Display";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -107,11 +109,11 @@
 <li>To manage and provide information about input devices (pointers, keyboards, etc)</li>
 <li>To manage and provide information about output devices (monitors, projectors, etc)</li>
 </ul>
-<p>Most of the input device handling has been factored out into separate
-[class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Seat] objects. Every display has a one or more seats, which
-can be accessed with [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.get_default_seat] and
+<p>Most of the input device handling has been factored out into separate<br />
+[class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Seat] objects. Every display has a one or more seats, which<br />
+can be accessed with [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.get_default_seat] and<br />
 [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.list_seats].</p>
-<p>Output devices are represented by [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Monitor] objects, which can
+<p>Output devices are represented by [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Monitor] objects, which can<br />
 be accessed with [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.get_monitor_at_surface] and similar APIs.</p>
 
 
@@ -182,6 +184,7 @@ be accessed with [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Di
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1042,6 +1045,7 @@ be accessed with [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Di
 
       
     </ul>
+    
   
 
 
@@ -1082,7 +1086,7 @@ be accessed with [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Di
       
       
         &mdash;
-        <div class='inline'><p>a <code>GdkDisplay</code>, or nil if
+        <div class='inline'><p>a <code>GdkDisplay</code>, or nil if<br />
 there is no default display</p>
 </div>
       
@@ -1169,7 +1173,7 @@ there is no default display</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a <code>GdkAppLaunchContext</code> suitable for launching
+    <p>Returns a <code>GdkAppLaunchContext</code> suitable for launching<br />
 applications on the given display.</p>
 
 
@@ -1426,11 +1430,11 @@ applications on the given display.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GdkGLContext</code> for the <code>GdkDisplay</code>.</p>
-<p>The context is disconnected from any particular surface or surface
-and cannot be used to draw to any surface. It can only be used to
+<p>The context is disconnected from any particular surface or surface<br />
+and cannot be used to draw to any surface. It can only be used to<br />
 draw to non-surface framebuffers like textures.</p>
-<p>If the creation of the <code>GdkGLContext</code> failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set.
-Before using the returned <code>GdkGLContext</code>, you will need to
+<p>If the creation of the <code>GdkGLContext</code> failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set.<br />
+Before using the returned <code>GdkGLContext</code>, you will need to<br />
 call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.make_current] or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.realize].</p>
 
 
@@ -1471,7 +1475,7 @@ call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.make
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the default <code>GdkSeat</code> for this display.</p>
-<p>Note that a display may not have a seat. In this case,
+<p>Note that a display may not have a seat. In this case,<br />
 this function will return nil.</p>
 
 
@@ -1676,12 +1680,12 @@ this function will return nil.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Flushes any requests queued for the windowing system.</p>
-<p>This happens automatically when the main loop blocks waiting for new events,
-but if your application is drawing without returning control to the main loop,
-you may need to call this function explicitly. A common case where this function
-needs to be called is when an application is executing drawing commands
+<p>This happens automatically when the main loop blocks waiting for new events,<br />
+but if your application is drawing without returning control to the main loop,<br />
+you may need to call this function explicitly. A common case where this function<br />
+needs to be called is when an application is executing drawing commands<br />
 from a thread other than the thread where the main loop is running.</p>
-<p>This is most useful for X11. On windowing systems where requests are
+<p>This is most useful for X11. On windowing systems where requests are<br />
 handled synchronously, this function will do nothing.</p>
 
 
@@ -1717,7 +1721,7 @@ handled synchronously, this function will do nothing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the monitor in which the largest area of <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->
+    <p>Gets the monitor in which the largest area of <!-- raw HTML omitted -->surface<!-- raw HTML omitted --><br />
 resides.</p>
 
 
@@ -1755,7 +1759,7 @@ resides.</p>
       
       
         &mdash;
-        <div class='inline'><p>the monitor with the largest
+        <div class='inline'><p>the monitor with the largest<br />
 overlap with <!-- raw HTML omitted -->surface<!-- raw HTML omitted --></p>
 </div>
       
@@ -1777,7 +1781,7 @@ overlap with <!-- raw HTML omitted -->surface<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a desktop-wide setting such as double-click time
+    <p>Retrieves a desktop-wide setting such as double-click time<br />
 for the <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
 
 
@@ -1830,7 +1834,7 @@ for the <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the setting existed and a value was stored
+        <div class='inline'><p>true if the setting existed and a value was stored<br />
 in <!-- raw HTML omitted -->value<!-- raw HTML omitted -->, false otherwise</p>
 </div>
       
@@ -1997,11 +2001,11 @@ in <!-- raw HTML omitted -->value<!-- raw HTML omitted -->, false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether surfaces can reasonably be expected to have
+    <p>Returns whether surfaces can reasonably be expected to have<br />
 their alpha channel drawn correctly on the screen.</p>
-<p>Check [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.is_rgba] for whether the display
+<p>Check [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.is_rgba] for whether the display<br />
 supports an alpha channel.</p>
-<p>On X11 this function returns whether a compositing manager is
+<p>On X11 this function returns whether a compositing manager is<br />
 compositing on <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
 <p>On modern displays, this value is always true.</p>
 
@@ -2021,8 +2025,8 @@ compositing on <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>Whether surfaces with RGBA visuals can reasonably
-be expected to have their alpha channels drawn correctly
+        <div class='inline'><p>Whether surfaces with RGBA visuals can reasonably<br />
+be expected to have their alpha channels drawn correctly<br />
 on the screen.</p>
 </div>
       
@@ -2044,13 +2048,13 @@ on the screen.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether surfaces on this <!-- raw HTML omitted -->display<!-- raw HTML omitted --> are created with an
+    <p>Returns whether surfaces on this <!-- raw HTML omitted -->display<!-- raw HTML omitted --> are created with an<br />
 alpha channel.</p>
-<p>Even if a true is returned, it is possible that the
-surface’s alpha channel won’t be honored when displaying the
-surface on the screen: in particular, for X an appropriate
-windowing manager and compositing manager must be running to
-provide appropriate display. Use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.is_composited]
+<p>Even if a true is returned, it is possible that the<br />
+surface’s alpha channel won’t be honored when displaying the<br />
+surface on the screen: in particular, for X an appropriate<br />
+windowing manager and compositing manager must be running to<br />
+provide appropriate display. Use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.is_composited]<br />
 to check if that is the case.</p>
 <p>On modern displays, this value is always true.</p>
 
@@ -2070,7 +2074,7 @@ to check if that is the case.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if surfaces are created with an alpha channel or
+        <div class='inline'><p>true if surfaces are created with an alpha channel or<br />
 false if the display does not support this functionality.</p>
 </div>
       
@@ -2110,7 +2114,7 @@ false if the display does not support this functionality.</p>
       
       
         &mdash;
-        <div class='inline'><p>the
+        <div class='inline'><p>the<br />
 list of seats known to the <code>GdkDisplay</code></p>
 </div>
       
@@ -2134,8 +2138,8 @@ list of seats known to the <code>GdkDisplay</code></p>
   <div class="discussion">
     <p>Returns the keyvals bound to <!-- raw HTML omitted -->keycode<!-- raw HTML omitted -->.</p>
 <p>The Nth <code>GdkKeymapKey</code> in <!-- raw HTML omitted -->keys<!-- raw HTML omitted --> is bound to the Nth keyval in <!-- raw HTML omitted -->keyvals<!-- raw HTML omitted -->.</p>
-<p>When a keycode is pressed by the user, the keyval from
-this list of entries is selected by considering the effective
+<p>When a keycode is pressed by the user, the keyval from<br />
+this list of entries is selected by considering the effective<br />
 keyboard group and level.</p>
 <p>Free the returned arrays with g_free().</p>
 
@@ -2171,7 +2175,7 @@ keyboard group and level.</p>
       
       
         &mdash;
-        <div class='inline'><p>return
+        <div class='inline'><p>return<br />
 location for array of <code>GdkKeymapKey</code></p>
 </div>
       
@@ -2187,7 +2191,7 @@ location for array of <code>GdkKeymapKey</code></p>
       
       
         &mdash;
-        <div class='inline'><p>return
+        <div class='inline'><p>return<br />
 location for array of keyvals</p>
 </div>
       
@@ -2242,15 +2246,15 @@ location for array of keyvals</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains a list of keycode/group/level combinations that will
+    <p>Obtains a list of keycode/group/level combinations that will<br />
 generate <!-- raw HTML omitted -->keyval<!-- raw HTML omitted -->.</p>
-<p>Groups and levels are two kinds of keyboard mode; in general, the level
-determines whether the top or bottom symbol on a key is used, and the
+<p>Groups and levels are two kinds of keyboard mode; in general, the level<br />
+determines whether the top or bottom symbol on a key is used, and the<br />
 group determines whether the left or right symbol is used.</p>
-<p>On US keyboards, the shift key changes the keyboard level, and there
-are no groups. A group switch key might convert a keyboard between
+<p>On US keyboards, the shift key changes the keyboard level, and there<br />
+are no groups. A group switch key might convert a keyboard between<br />
 Hebrew to English modes, for example.</p>
-<p><code>GdkEventKey</code> contains a %group field that indicates the active
+<p><code>GdkEventKey</code> contains a %group field that indicates the active<br />
 keyboard group. The level is computed from the modifier mask.</p>
 <p>The returned array should be freed with g_free().</p>
 
@@ -2286,7 +2290,7 @@ keyboard group. The level is computed from the modifier mask.</p>
       
       
         &mdash;
-        <div class='inline'><p>return location
+        <div class='inline'><p>return location<br />
 for an array of <code>GdkKeymapKey</code></p>
 </div>
       
@@ -2342,9 +2346,9 @@ for an array of <code>GdkKeymapKey</code></p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the list of monitors associated with this display.</p>
-<p>Subsequent calls to this function will always return the
+<p>Subsequent calls to this function will always return the<br />
 same list for the same display.</p>
-<p>You can listen to the GListModel::items-changed signal on
+<p>You can listen to the GListModel::items-changed signal on<br />
 this list to monitor changes to the monitor of this display.</p>
 
 
@@ -2402,7 +2406,7 @@ this list to monitor changes to the monitor of this display.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string representing the display name. This string is owned
+        <div class='inline'><p>a string representing the display name. This string is owned<br />
 by GDK and should not be modified or freed.</p>
 </div>
       
@@ -2424,11 +2428,11 @@ by GDK and should not be modified or freed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Indicates to the GUI environment that the application has
+    <p>Indicates to the GUI environment that the application has<br />
 finished loading, using a given identifier.</p>
-<p>GTK will call this function automatically for <a href="../gtk4/class.Window.html">GtkWindow</a>
-with custom startup-notification identifier unless
-<a href="../gtk4/method.Window.set_auto_startup_notification.html">gtk_window_set_auto_startup_notification()</a>
+<p>GTK will call this function automatically for <a href="../gtk4/class.Window.html">GtkWindow</a><br />
+with custom startup-notification identifier unless<br />
+<a href="../gtk4/method.Window.set_auto_startup_notification.html">gtk_window_set_auto_startup_notification()</a><br />
 is called to disable that feature.</p>
 
 
@@ -2448,7 +2452,7 @@ is called to disable that feature.</p>
       
       
         &mdash;
-        <div class='inline'><p>a startup-notification identifier, for which
+        <div class='inline'><p>a startup-notification identifier, for which<br />
 notification process should be completed</p>
 </div>
       
@@ -2484,16 +2488,16 @@ notification process should be completed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks that OpenGL is available for <!-- raw HTML omitted -->self<!-- raw HTML omitted --> and ensures that it is
-properly initialized.
-When this fails, an <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set describing the error and this
+    <p>Checks that OpenGL is available for <!-- raw HTML omitted -->self<!-- raw HTML omitted --> and ensures that it is<br />
+properly initialized.<br />
+When this fails, an <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set describing the error and this<br />
 function returns false.</p>
-<p>Note that even if this function succeeds, creating a <code>GdkGLContext</code>
+<p>Note that even if this function succeeds, creating a <code>GdkGLContext</code><br />
 may still fail.</p>
-<p>This function is idempotent. Calling it multiple times will just
+<p>This function is idempotent. Calling it multiple times will just<br />
 return the same value or error.</p>
-<p>You never need to call this function, GDK will call it automatically
-as needed. But you can use it as a check when setting up code that
+<p>You never need to call this function, GDK will call it automatically<br />
+as needed. But you can use it as a check when setting up code that<br />
 might make use of OpenGL.</p>
 
 
@@ -2534,7 +2538,7 @@ might make use of OpenGL.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the clipboard used for the primary selection.</p>
-<p>On backends where the primary clipboard is not supported natively,
+<p>On backends where the primary clipboard is not supported natively,<br />
 GDK emulates this clipboard locally.</p>
 
 
@@ -2840,7 +2844,7 @@ GDK emulates this clipboard locally.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the startup notification ID for a Wayland display, or nil
+    <p>Gets the startup notification ID for a Wayland display, or nil<br />
 if no ID has been defined.</p>
 
 
@@ -2881,7 +2885,7 @@ if no ID has been defined.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns true if the display supports input shapes.</p>
-<p>This means that [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface.set_input_region] can
+<p>This means that [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface.set_input_region] can<br />
 be used to modify the input shape of surfaces on <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
 <p>On modern displays, this value is always true.</p>
 
@@ -2923,7 +2927,7 @@ be used to modify the input shape of surfaces on <!-- raw HTML omitted -->displa
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns whether it's possible for a surface to draw outside of the window area.</p>
-<p>If true is returned the application decides if it wants to draw shadows.
+<p>If true is returned the application decides if it wants to draw shadows.<br />
 If false is returned, the compositor decides if it wants to draw shadows.</p>
 
 
@@ -2942,7 +2946,7 @@ If false is returned, the compositor decides if it wants to draw shadows.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if surfaces can draw shadows or
+        <div class='inline'><p>true if surfaces can draw shadows or<br />
 false if the display does not support this functionality.</p>
 </div>
       
@@ -2964,13 +2968,13 @@ false if the display does not support this functionality.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Flushes any requests queued for the windowing system and waits until all
+    <p>Flushes any requests queued for the windowing system and waits until all<br />
 requests have been handled.</p>
-<p>This is often used for making sure that the display is synchronized
-with the current state of the program. Calling [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.sync]
-before [method<!-- raw HTML omitted -->GdkX11<!-- raw HTML omitted -->.Display.error_trap_pop] makes sure that any errors
+<p>This is often used for making sure that the display is synchronized<br />
+with the current state of the program. Calling [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.sync]<br />
+before [method<!-- raw HTML omitted -->GdkX11<!-- raw HTML omitted -->.Display.error_trap_pop] makes sure that any errors<br />
 generated from earlier requests are handled before the error trap is removed.</p>
-<p>This is most useful for X11. On windowing systems where requests are
+<p>This is most useful for X11. On windowing systems where requests are<br />
 handled synchronously, this function will do nothing.</p>
 
 
@@ -3006,20 +3010,20 @@ handled synchronously, this function will do nothing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Translates the contents of a <code>GdkEventKey</code> into a keyval, effective group,
+    <p>Translates the contents of a <code>GdkEventKey</code> into a keyval, effective group,<br />
 and level.</p>
-<p>Modifiers that affected the translation and are thus unavailable for
+<p>Modifiers that affected the translation and are thus unavailable for<br />
 application use are returned in <!-- raw HTML omitted -->consumed_modifiers<!-- raw HTML omitted -->.</p>
-<p>The <!-- raw HTML omitted -->effective_group<!-- raw HTML omitted --> is the group that was actually used for the
-translation; some keys such as Enter are not affected by the active
+<p>The <!-- raw HTML omitted -->effective_group<!-- raw HTML omitted --> is the group that was actually used for the<br />
+translation; some keys such as Enter are not affected by the active<br />
 keyboard group. The <!-- raw HTML omitted -->level<!-- raw HTML omitted --> is derived from <!-- raw HTML omitted -->state<!-- raw HTML omitted -->.</p>
-<p><!-- raw HTML omitted -->consumed_modifiers<!-- raw HTML omitted --> gives modifiers that should be masked out
-from <!-- raw HTML omitted -->state<!-- raw HTML omitted --> when comparing this key press to a keyboard shortcut.
-For instance, on a US keyboard, the <code>plus</code> symbol is shifted, so
-when comparing a key press to a <code>&lt;Control&gt;plus</code> accelerator <code>&lt;Shift&gt;</code>
+<p><!-- raw HTML omitted -->consumed_modifiers<!-- raw HTML omitted --> gives modifiers that should be masked out<br />
+from <!-- raw HTML omitted -->state<!-- raw HTML omitted --> when comparing this key press to a keyboard shortcut.<br />
+For instance, on a US keyboard, the <code>plus</code> symbol is shifted, so<br />
+when comparing a key press to a <code>&lt;Control&gt;plus</code> accelerator <code>&lt;Shift&gt;</code><br />
 should be masked out.</p>
-<p>This function should rarely be needed, since <code>GdkEventKey</code> already
-contains the translated keyval. It is exported for the benefit of
+<p>This function should rarely be needed, since <code>GdkEventKey</code> already<br />
+contains the translated keyval. It is exported for the benefit of<br />
 virtualized test environments.</p>
 
 
@@ -3129,7 +3133,7 @@ virtualized test environments.</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for modifiers that were used
+        <div class='inline'><p>return location for modifiers that were used<br />
 to determine the group or level</p>
 </div>
       
@@ -3165,7 +3169,7 @@ to determine the group or level</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

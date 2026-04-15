@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GstAudio::AudioClock";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -102,7 +103,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -240,9 +242,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -262,9 +266,11 @@
   
   
   
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gst/Clock.html" title="Gst::Clock (class)">Gst::Clock</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../Gst/Clock.html#add_observation-instance_method" title="Gst::Clock#add_observation (method)">#add_observation</a></span>, <span class='object_link'><a href="../Gst/Clock.html#add_observation_unapplied-instance_method" title="Gst::Clock#add_observation_unapplied (method)">#add_observation_unapplied</a></span>, <span class='object_link'><a href="../Gst/Clock.html#adjust_unlocked-instance_method" title="Gst::Clock#adjust_unlocked (method)">#adjust_unlocked</a></span>, <span class='object_link'><a href="../Gst/Clock.html#adjust_with_calibration-instance_method" title="Gst::Clock#adjust_with_calibration (method)">#adjust_with_calibration</a></span>, <span class='object_link'><a href="../Gst/Clock.html#get_calibration-instance_method" title="Gst::Clock#get_calibration (method)">#get_calibration</a></span>, <span class='object_link'><a href="../Gst/Clock.html#id_compare_func-class_method" title="Gst::Clock.id_compare_func (method)">id_compare_func</a></span>, <span class='object_link'><a href="../Gst/Clock.html#id_get_clock-class_method" title="Gst::Clock.id_get_clock (method)">id_get_clock</a></span>, <span class='object_link'><a href="../Gst/Clock.html#id_get_time-class_method" title="Gst::Clock.id_get_time (method)">id_get_time</a></span>, <span class='object_link'><a href="../Gst/Clock.html#id_ref-class_method" title="Gst::Clock.id_ref (method)">id_ref</a></span>, <span class='object_link'><a href="../Gst/Clock.html#id_unref-class_method" title="Gst::Clock.id_unref (method)">id_unref</a></span>, <span class='object_link'><a href="../Gst/Clock.html#id_unschedule-class_method" title="Gst::Clock.id_unschedule (method)">id_unschedule</a></span>, <span class='object_link'><a href="../Gst/Clock.html#id_uses_clock-class_method" title="Gst::Clock.id_uses_clock (method)">id_uses_clock</a></span>, <span class='object_link'><a href="../Gst/Clock.html#id_wait-class_method" title="Gst::Clock.id_wait (method)">id_wait</a></span>, <span class='object_link'><a href="../Gst/Clock.html#id_wait_async-class_method" title="Gst::Clock.id_wait_async (method)">id_wait_async</a></span>, <span class='object_link'><a href="../Gst/Clock.html#internal_time-instance_method" title="Gst::Clock#internal_time (method)">#internal_time</a></span>, <span class='object_link'><a href="../Gst/Clock.html#is_synced-instance_method" title="Gst::Clock#is_synced (method)">#is_synced</a></span>, <span class='object_link'><a href="../Gst/Clock.html#master-instance_method" title="Gst::Clock#master (method)">#master</a></span>, <span class='object_link'><a href="../Gst/Clock.html#master=-instance_method" title="Gst::Clock#master= (method)">#master=</a></span>, <span class='object_link'><a href="../Gst/Clock.html#new_periodic_id-instance_method" title="Gst::Clock#new_periodic_id (method)">#new_periodic_id</a></span>, <span class='object_link'><a href="../Gst/Clock.html#new_single_shot_id-instance_method" title="Gst::Clock#new_single_shot_id (method)">#new_single_shot_id</a></span>, <span class='object_link'><a href="../Gst/Clock.html#periodic_id_reinit-instance_method" title="Gst::Clock#periodic_id_reinit (method)">#periodic_id_reinit</a></span>, <span class='object_link'><a href="../Gst/Clock.html#resolution-instance_method" title="Gst::Clock#resolution (method)">#resolution</a></span>, <span class='object_link'><a href="../Gst/Clock.html#resolution=-instance_method" title="Gst::Clock#resolution= (method)">#resolution=</a></span>, <span class='object_link'><a href="../Gst/Clock.html#set_calibration-instance_method" title="Gst::Clock#set_calibration (method)">#set_calibration</a></span>, <span class='object_link'><a href="../Gst/Clock.html#single_shot_id_reinit-instance_method" title="Gst::Clock#single_shot_id_reinit (method)">#single_shot_id_reinit</a></span>, <span class='object_link'><a href="../Gst/Clock.html#synced=-instance_method" title="Gst::Clock#synced= (method)">#synced=</a></span>, <span class='object_link'><a href="../Gst/Clock.html#timeout-instance_method" title="Gst::Clock#timeout (method)">#timeout</a></span>, <span class='object_link'><a href="../Gst/Clock.html#timeout=-instance_method" title="Gst::Clock#timeout= (method)">#timeout=</a></span>, <span class='object_link'><a href="../Gst/Clock.html#unadjust_unlocked-instance_method" title="Gst::Clock#unadjust_unlocked (method)">#unadjust_unlocked</a></span>, <span class='object_link'><a href="../Gst/Clock.html#unadjust_with_calibration-instance_method" title="Gst::Clock#unadjust_with_calibration (method)">#unadjust_with_calibration</a></span>, <span class='object_link'><a href="../Gst/Clock.html#wait_for_sync-instance_method" title="Gst::Clock#wait_for_sync (method)">#wait_for_sync</a></span>, <span class='object_link'><a href="../Gst/Clock.html#window_size-instance_method" title="Gst::Clock#window_size (method)">#window_size</a></span>, <span class='object_link'><a href="../Gst/Clock.html#window_size=-instance_method" title="Gst::Clock#window_size= (method)">#window_size=</a></span>, <span class='object_link'><a href="../Gst/Clock.html#window_threshold-instance_method" title="Gst::Clock#window_threshold (method)">#window_threshold</a></span>, <span class='object_link'><a href="../Gst/Clock.html#window_threshold=-instance_method" title="Gst::Clock#window_threshold= (method)">#window_threshold=</a></span></p>
 
+  
   
   
   
@@ -290,8 +296,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new Gst::AudioClock instance. Whenever the clock time should be
-calculated it will call <!-- raw HTML omitted -->func<!-- raw HTML omitted --> with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->. When <!-- raw HTML omitted -->func<!-- raw HTML omitted --> returns
+    <p>Create a new Gst::AudioClock instance. Whenever the clock time should be<br />
+calculated it will call <!-- raw HTML omitted -->func<!-- raw HTML omitted --> with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->. When <!-- raw HTML omitted -->func<!-- raw HTML omitted --> returns<br />
 #GST_CLOCK_TIME_NONE, the clock will return the last reported time.</p>
 
 
@@ -443,10 +449,10 @@ calculated it will call <!-- raw HTML omitted -->func<!-- raw HTML omitted --> w
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Invalidate the clock function. Call this function when the provided
-Gst::AudioClockGetTimeFunc cannot be called anymore, for example, when the
+    <p>Invalidate the clock function. Call this function when the provided<br />
+Gst::AudioClockGetTimeFunc cannot be called anymore, for example, when the<br />
 user_data becomes invalid.</p>
-<p>After calling this function, <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> will return the last returned time for
+<p>After calling this function, <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> will return the last returned time for<br />
 the rest of its lifetime.</p>
 
 
@@ -482,9 +488,9 @@ the rest of its lifetime.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inform <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> that future calls to Gst::AudioClockGetTimeFunc will return values
-starting from <!-- raw HTML omitted -->time<!-- raw HTML omitted -->. The clock will update an internal offset to make sure that
-future calls to internal_time will return an increasing result as required by
+    <p>Inform <!-- raw HTML omitted -->clock<!-- raw HTML omitted --> that future calls to Gst::AudioClockGetTimeFunc will return values<br />
+starting from <!-- raw HTML omitted -->time<!-- raw HTML omitted -->. The clock will update an internal offset to make sure that<br />
+future calls to internal_time will return an increasing result as required by<br />
 the Gst::Clock object.</p>
 
 
@@ -539,7 +545,7 @@ the Gst::Clock object.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Report the time as returned by the Gst::AudioClockGetTimeFunc without applying
+    <p>Report the time as returned by the Gst::AudioClockGetTimeFunc without applying<br />
 any offsets.</p>
 
 
@@ -575,7 +581,7 @@ any offsets.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

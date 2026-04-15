@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GstAudio";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gst/audio-loader.rb</dd>
+    <dd>lib/gst/audio-loader.rb
+</dd>
   </dl>
   
 </div>
@@ -86,16 +88,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2024  Ruby-GNOME Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -143,8 +145,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
         <dt id="AUDIO_CONVERTER_OPT_DITHER_METHOD-constant" class="">AUDIO_CONVERTER_OPT_DITHER_METHOD =
           <div class="docstring">
   <div class="discussion">
-    <p>Gst::AudioDitherMethod, The dither method to use when
-changing bit depth.
+    <p>Gst::AudioDitherMethod, The dither method to use when<br />
+changing bit depth.<br />
 Default is #GST_AUDIO_DITHER_NONE.</p>
 
 
@@ -177,27 +179,27 @@ Default is #GST_AUDIO_DITHER_NONE.</p>
           <div class="docstring">
   <div class="discussion">
     <p>#GST_TYPE_LIST, The channel mapping matrix.</p>
-<p>The matrix coefficients must be between -1 and 1: the number of rows is equal
-to the number of output channels and the number of columns is equal to the
+<p>The matrix coefficients must be between -1 and 1: the number of rows is equal<br />
+to the number of output channels and the number of columns is equal to the<br />
 number of input channels.</p>
-<h2>Example matrix generation code</h2>
+<h2><a href="#example-matrix-generation-code" aria-hidden="true" class="anchor" id="example-matrix-generation-code"></a>Example matrix generation code</h2>
 <p>To generate the matrix using code:</p>
-<p>|[
-GValue v = G_VALUE_INIT;
-GValue v2 = G_VALUE_INIT;
+<p>|[<br />
+GValue v = G_VALUE_INIT;<br />
+GValue v2 = G_VALUE_INIT;<br />
 GValue v3 = G_VALUE_INIT;</p>
-<p>g_value_init (&amp;v2, GST_TYPE_ARRAY);
-g_value_init (&amp;v3, G_TYPE_DOUBLE);
-g_value_set_double (&amp;v3, 1);
-gst_value_array_append_value (&amp;v2, &amp;v3);
-g_value_unset (&amp;v3);
-[ Repeat for as many double as your input channels - unset and reinit v3 ]
-g_value_init (&amp;v, GST_TYPE_ARRAY);
-gst_value_array_append_value (&amp;v, &amp;v2);
-g_value_unset (&amp;v2);
-[ Repeat for as many v2's as your output channels - unset and reinit v2]
-g_object_set_property (G_OBJECT (audiomixmatrix), &quot;matrix&quot;, &amp;v);
-g_value_unset (&amp;v);
+<p>g_value_init (&amp;v2, GST_TYPE_ARRAY);<br />
+g_value_init (&amp;v3, G_TYPE_DOUBLE);<br />
+g_value_set_double (&amp;v3, 1);<br />
+gst_value_array_append_value (&amp;v2, &amp;v3);<br />
+g_value_unset (&amp;v3);<br />
+[ Repeat for as many double as your input channels - unset and reinit v3 ]<br />
+g_value_init (&amp;v, GST_TYPE_ARRAY);<br />
+gst_value_array_append_value (&amp;v, &amp;v2);<br />
+g_value_unset (&amp;v2);<br />
+[ Repeat for as many v2's as your output channels - unset and reinit v2]<br />
+g_object_set_property (G_OBJECT (audiomixmatrix), &quot;matrix&quot;, &amp;v);<br />
+g_value_unset (&amp;v);<br />
 ]|</p>
 
 
@@ -213,8 +215,8 @@ g_value_unset (&amp;v);
         <dt id="AUDIO_CONVERTER_OPT_NOISE_SHAPING_METHOD-constant" class="">AUDIO_CONVERTER_OPT_NOISE_SHAPING_METHOD =
           <div class="docstring">
   <div class="discussion">
-    <p>Gst::AudioNoiseShapingMethod, The noise shaping method to use
-to mask noise from quantization errors.
+    <p>Gst::AudioNoiseShapingMethod, The noise shaping method to use<br />
+to mask noise from quantization errors.<br />
 Default is #GST_AUDIO_NOISE_SHAPING_NONE.</p>
 
 
@@ -230,8 +232,8 @@ Default is #GST_AUDIO_NOISE_SHAPING_NONE.</p>
         <dt id="AUDIO_CONVERTER_OPT_QUANTIZATION-constant" class="">AUDIO_CONVERTER_OPT_QUANTIZATION =
           <div class="docstring">
   <div class="discussion">
-    <p>#G_TYPE_UINT, The quantization amount. Components will be
-quantized to multiples of this value.
+    <p>#G_TYPE_UINT, The quantization amount. Components will be<br />
+quantized to multiples of this value.<br />
 Default is 1</p>
 
 
@@ -247,8 +249,8 @@ Default is 1</p>
         <dt id="AUDIO_CONVERTER_OPT_RESAMPLER_METHOD-constant" class="">AUDIO_CONVERTER_OPT_RESAMPLER_METHOD =
           <div class="docstring">
   <div class="discussion">
-    <p>Gst::AudioResamplerMethod, The resampler method to use when
-changing sample rates.
+    <p>Gst::AudioResamplerMethod, The resampler method to use when<br />
+changing sample rates.<br />
 Default is #GST_AUDIO_RESAMPLER_METHOD_BLACKMAN_NUTTALL.</p>
 
 
@@ -421,12 +423,12 @@ Default is #GST_AUDIO_RESAMPLER_METHOD_BLACKMAN_NUTTALL.</p>
         <dt id="AUDIO_RESAMPLER_OPT_CUBIC_B-constant" class="">AUDIO_RESAMPLER_OPT_CUBIC_B =
           <div class="docstring">
   <div class="discussion">
-    <p>G_TYPE_DOUBLE, B parameter of the cubic filter.
+    <p>G_TYPE_DOUBLE, B parameter of the cubic filter.<br />
 Values between 0.0 and 2.0 are accepted. 1.0 is the default.</p>
-<p>Below are some values of popular filters:
-B       C
-Hermite           0.0     0.0
-Spline            1.0     0.0
+<p>Below are some values of popular filters:<br />
+B       C<br />
+Hermite           0.0     0.0<br />
+Spline            1.0     0.0<br />
 Catmull-Rom       0.0     1/2</p>
 
 
@@ -442,7 +444,7 @@ Catmull-Rom       0.0     1/2</p>
         <dt id="AUDIO_RESAMPLER_OPT_CUBIC_C-constant" class="">AUDIO_RESAMPLER_OPT_CUBIC_C =
           <div class="docstring">
   <div class="discussion">
-    <p>G_TYPE_DOUBLE, C parameter of the cubic filter.
+    <p>G_TYPE_DOUBLE, C parameter of the cubic filter.<br />
 Values between 0.0 and 2.0 are accepted. 0.0 is the default.</p>
 <p>See #GST_AUDIO_RESAMPLER_OPT_CUBIC_B for some more common values</p>
 
@@ -474,8 +476,8 @@ Values between 0.0 and 2.0 are accepted. 0.0 is the default.</p>
         <dt id="AUDIO_RESAMPLER_OPT_FILTER_INTERPOLATION-constant" class="">AUDIO_RESAMPLER_OPT_FILTER_INTERPOLATION =
           <div class="docstring">
   <div class="discussion">
-    <p>GST_TYPE_AUDIO_RESAMPLER_INTERPOLATION: how the filter coefficients should be
-interpolated.
+    <p>GST_TYPE_AUDIO_RESAMPLER_INTERPOLATION: how the filter coefficients should be<br />
+interpolated.<br />
 GST_AUDIO_RESAMPLER_FILTER_INTERPOLATION_CUBIC is default.</p>
 
 
@@ -491,8 +493,8 @@ GST_AUDIO_RESAMPLER_FILTER_INTERPOLATION_CUBIC is default.</p>
         <dt id="AUDIO_RESAMPLER_OPT_FILTER_MODE-constant" class="">AUDIO_RESAMPLER_OPT_FILTER_MODE =
           <div class="docstring">
   <div class="discussion">
-    <p>GST_TYPE_AUDIO_RESAMPLER_FILTER_MODE: how the filter tables should be
-constructed.
+    <p>GST_TYPE_AUDIO_RESAMPLER_FILTER_MODE: how the filter tables should be<br />
+constructed.<br />
 GST_AUDIO_RESAMPLER_FILTER_MODE_AUTO is the default.</p>
 
 
@@ -508,8 +510,8 @@ GST_AUDIO_RESAMPLER_FILTER_MODE_AUTO is the default.</p>
         <dt id="AUDIO_RESAMPLER_OPT_FILTER_MODE_THRESHOLD-constant" class="">AUDIO_RESAMPLER_OPT_FILTER_MODE_THRESHOLD =
           <div class="docstring">
   <div class="discussion">
-    <p>G_TYPE_UINT: the amount of memory to use for full filter tables before
-switching to interpolated filter tables.
+    <p>G_TYPE_UINT: the amount of memory to use for full filter tables before<br />
+switching to interpolated filter tables.<br />
 1048576 is the default.</p>
 
 
@@ -525,7 +527,7 @@ switching to interpolated filter tables.
         <dt id="AUDIO_RESAMPLER_OPT_FILTER_OVERSAMPLE-constant" class="">AUDIO_RESAMPLER_OPT_FILTER_OVERSAMPLE =
           <div class="docstring">
   <div class="discussion">
-    <p>G_TYPE_UINT, oversampling to use when interpolating filters
+    <p>G_TYPE_UINT, oversampling to use when interpolating filters<br />
 8 is the default.</p>
 
 
@@ -541,8 +543,8 @@ switching to interpolated filter tables.
         <dt id="AUDIO_RESAMPLER_OPT_MAX_PHASE_ERROR-constant" class="">AUDIO_RESAMPLER_OPT_MAX_PHASE_ERROR =
           <div class="docstring">
   <div class="discussion">
-    <p>G_TYPE_DOUBLE: The maximum allowed phase error when switching sample
-rates.
+    <p>G_TYPE_DOUBLE: The maximum allowed phase error when switching sample<br />
+rates.<br />
 0.1 is the default.</p>
 
 
@@ -558,7 +560,7 @@ rates.
         <dt id="AUDIO_RESAMPLER_OPT_N_TAPS-constant" class="">AUDIO_RESAMPLER_OPT_N_TAPS =
           <div class="docstring">
   <div class="discussion">
-    <p>G_TYPE_INT: the number of taps to use for the filter.
+    <p>G_TYPE_INT: the number of taps to use for the filter.<br />
 0 is the default and selects the taps automatically.</p>
 
 
@@ -574,7 +576,7 @@ rates.
         <dt id="AUDIO_RESAMPLER_OPT_STOP_ATTENUATION-constant" class="">AUDIO_RESAMPLER_OPT_STOP_ATTENUATION =
           <div class="docstring">
   <div class="discussion">
-    <p>G_TYPE_DOUBLE, stopband attenuation in decibels. The attenuation
+    <p>G_TYPE_DOUBLE, stopband attenuation in decibels. The attenuation<br />
 after the stopband for the kaiser window. 85 dB is the default.</p>
 
 
@@ -590,7 +592,7 @@ after the stopband for the kaiser window. 85 dB is the default.</p>
         <dt id="AUDIO_RESAMPLER_OPT_TRANSITION_BANDWIDTH-constant" class="">AUDIO_RESAMPLER_OPT_TRANSITION_BANDWIDTH =
           <div class="docstring">
   <div class="discussion">
-    <p>G_TYPE_DOUBLE, transition bandwidth. The width of the
+    <p>G_TYPE_DOUBLE, transition bandwidth. The width of the<br />
 transition band for the kaiser window. 0.087 is the default.</p>
 
 
@@ -622,7 +624,7 @@ transition band for the kaiser window. 0.087 is the default.</p>
           <div class="docstring">
   <div class="discussion">
     <p>List of all DSD formats, for use in template caps strings.</p>
-<p>Big endian formats are preferred, since little-endian ones flip around
+<p>Big endian formats are preferred, since little-endian ones flip around<br />
 the DSD bytes, and most DSD hardware uses big endian formats.</p>
 
 
@@ -654,9 +656,9 @@ the DSD bytes, and most DSD hardware uses big endian formats.</p>
           <div class="docstring">
   <div class="discussion">
     <p>Silence pattern for DSD data.</p>
-<p>In DSD, a nullbyte does not correspond to silence. To fill memory regions
-with &quot;DSD silence&quot;, these regions must be filled with byte 0x69 instead
-(this is the DSD silence pattern). This constant provides that pattern
+<p>In DSD, a nullbyte does not correspond to silence. To fill memory regions<br />
+with &quot;DSD silence&quot;, these regions must be filled with byte 0x69 instead<br />
+(this is the DSD silence pattern). This constant provides that pattern<br />
 in a more readable fashion.</p>
 
 
@@ -1956,6 +1958,7 @@ in a more readable fashion.</p>
 
       
     </ul>
+    
   
 
 
@@ -1976,11 +1979,11 @@ in a more readable fashion.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Clip the buffer to the given %GstSegment.</p>
-<p>After calling this function the caller does not own a reference to
-<!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> anymore.
-number of channels.
+<p>After calling this function the caller does not own a reference to<br />
+<!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> anymore.<br />
+number of channels.<br />
 otherwise the clipped buffer is returned.</p>
-<p>If the buffer has no timestamp, it is assumed to be inside the segment and
+<p>If the buffer has no timestamp, it is assumed to be inside the segment and<br />
 is not clipped</p>
 
 
@@ -2015,7 +2018,7 @@ is not clipped</p>
       
       
         &mdash;
-        <div class='inline'><p>Segment in %GST_FORMAT_TIME or %GST_FORMAT_DEFAULT to which
+        <div class='inline'><p>Segment in %GST_FORMAT_TIME or %GST_FORMAT_DEFAULT to which<br />
 the buffer should be clipped.</p>
 </div>
       
@@ -2085,25 +2088,25 @@ the buffer should be clipped.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Maps an audio <!-- raw HTML omitted -->gstbuffer<!-- raw HTML omitted --> so that it can be read or written and stores the
+    <p>Maps an audio <!-- raw HTML omitted -->gstbuffer<!-- raw HTML omitted --> so that it can be read or written and stores the<br />
 result of the map operation in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>This is especially useful when the <!-- raw HTML omitted -->gstbuffer<!-- raw HTML omitted --> is in non-interleaved (planar)
-layout, in which case this function will use the information in the
-<!-- raw HTML omitted -->gstbuffer<!-- raw HTML omitted -->'s attached Gst::AudioMeta in order to map each channel in a
-separate &quot;plane&quot; in Gst::AudioBuffer. If a #GstAudioMeta is not attached
+<p>This is especially useful when the <!-- raw HTML omitted -->gstbuffer<!-- raw HTML omitted --> is in non-interleaved (planar)<br />
+layout, in which case this function will use the information in the<br />
+<!-- raw HTML omitted -->gstbuffer<!-- raw HTML omitted -->'s attached Gst::AudioMeta in order to map each channel in a<br />
+separate &quot;plane&quot; in Gst::AudioBuffer. If a #GstAudioMeta is not attached<br />
 on the <!-- raw HTML omitted -->gstbuffer<!-- raw HTML omitted -->, then it must be in interleaved layout.</p>
-<p>If a Gst::AudioMeta is attached, then the #GstAudioInfo on the meta is checked
-against <!-- raw HTML omitted -->info<!-- raw HTML omitted -->. Normally, they should be equal, but in case they are not,
-a g_critical will be printed and the Gst::AudioInfo from the meta will be
+<p>If a Gst::AudioMeta is attached, then the #GstAudioInfo on the meta is checked<br />
+against <!-- raw HTML omitted -->info<!-- raw HTML omitted -->. Normally, they should be equal, but in case they are not,<br />
+a g_critical will be printed and the Gst::AudioInfo from the meta will be<br />
 used.</p>
-<p>In non-interleaved buffers, it is possible to have each channel on a separate
-Gst::Memory. In this case, each memory will be mapped separately to avoid
-copying their contents in a larger memory area. Do note though that it is
-not supported to have a single channel spanning over two or more different
-Gst::Memory objects. Although the map operation will likely succeed in this
-case, it will be highly sub-optimal and it is recommended to merge all the
+<p>In non-interleaved buffers, it is possible to have each channel on a separate<br />
+Gst::Memory. In this case, each memory will be mapped separately to avoid<br />
+copying their contents in a larger memory area. Do note though that it is<br />
+not supported to have a single channel spanning over two or more different<br />
+Gst::Memory objects. Although the map operation will likely succeed in this<br />
+case, it will be highly sub-optimal and it is recommended to merge all the<br />
 memories in the buffer before calling this function.</p>
-<p>Note: The actual Gst::Buffer is not ref'ed, but it is required to stay valid
+<p>Note: The actual Gst::Buffer is not ref'ed, but it is required to stay valid<br />
 as long as it's mapped.</p>
 
 
@@ -2207,9 +2210,9 @@ as long as it's mapped.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reorders <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> from the channel positions <!-- raw HTML omitted -->from<!-- raw HTML omitted --> to the channel
-positions <!-- raw HTML omitted -->to<!-- raw HTML omitted -->. <!-- raw HTML omitted -->from<!-- raw HTML omitted --> and <!-- raw HTML omitted -->to<!-- raw HTML omitted --> must contain the same number of
-positions and the same positions, only in a different order.
+    <p>Reorders <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> from the channel positions <!-- raw HTML omitted -->from<!-- raw HTML omitted --> to the channel<br />
+positions <!-- raw HTML omitted -->to<!-- raw HTML omitted -->. <!-- raw HTML omitted -->from<!-- raw HTML omitted --> and <!-- raw HTML omitted -->to<!-- raw HTML omitted --> must contain the same number of<br />
+positions and the same positions, only in a different order.<br />
 <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> must be writable.</p>
 
 
@@ -2328,18 +2331,18 @@ positions and the same positions, only in a different order.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Truncate the buffer to finally have <!-- raw HTML omitted -->samples<!-- raw HTML omitted --> number of samples, removing
-the necessary amount of samples from the end and <!-- raw HTML omitted -->trim<!-- raw HTML omitted --> number of samples
+    <p>Truncate the buffer to finally have <!-- raw HTML omitted -->samples<!-- raw HTML omitted --> number of samples, removing<br />
+the necessary amount of samples from the end and <!-- raw HTML omitted -->trim<!-- raw HTML omitted --> number of samples<br />
 from the beginning.</p>
-<p>This function does not know the audio rate, therefore the caller is
-responsible for re-setting the correct timestamp and duration to the
-buffer. However, timestamp will be preserved if trim == 0, and duration
-will also be preserved if there is no trimming to be done. Offset and
+<p>This function does not know the audio rate, therefore the caller is<br />
+responsible for re-setting the correct timestamp and duration to the<br />
+buffer. However, timestamp will be preserved if trim == 0, and duration<br />
+will also be preserved if there is no trimming to be done. Offset and<br />
 offset end will be preserved / updated.</p>
-<p>After calling this function the caller does not own a reference to
-<!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> anymore.
-number of channels.
-to use all the remaining samples if you are only removing samples from the
+<p>After calling this function the caller does not own a reference to<br />
+<!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> anymore.<br />
+number of channels.<br />
+to use all the remaining samples if you are only removing samples from the<br />
 beginning.</p>
 
 
@@ -2444,8 +2447,8 @@ beginning.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Get the fallback channel-mask for the given number of channels.</p>
-<p>This function returns a reasonable fallback channel-mask and should be
-called as a last resort when the specific channel map is unknown.
+<p>This function returns a reasonable fallback channel-mask and should be<br />
+called as a last resort when the specific channel map is unknown.<br />
 mask and mono.</p>
 
 
@@ -2612,7 +2615,7 @@ mask and mono.</p>
       
       
         &mdash;
-        <div class='inline'><p>a new Gst::AudioChannelMixer object.
+        <div class='inline'><p>a new Gst::AudioChannelMixer object.<br />
 Free with gst_audio_channel_mixer_free() after usage.</p>
 </div>
       
@@ -2709,8 +2712,8 @@ Free with gst_audio_channel_mixer_free() after usage.</p>
       
       
         &mdash;
-        <div class='inline'><p>channel conversion matrix, m[<!-- raw HTML omitted -->in_channels<!-- raw HTML omitted -->][<!-- raw HTML omitted -->out_channels<!-- raw HTML omitted -->].
-If identity matrix, passthrough applies. If nil, a (potentially truncated)
+        <div class='inline'><p>channel conversion matrix, m[<!-- raw HTML omitted -->in_channels<!-- raw HTML omitted -->][<!-- raw HTML omitted -->out_channels<!-- raw HTML omitted -->].<br />
+If identity matrix, passthrough applies. If nil, a (potentially truncated)<br />
 identity matrix is generated.</p>
 </div>
       
@@ -2729,7 +2732,7 @@ identity matrix is generated.</p>
       
       
         &mdash;
-        <div class='inline'><p>a new Gst::AudioChannelMixer object.
+        <div class='inline'><p>a new Gst::AudioChannelMixer object.<br />
 Free with gst_audio_channel_mixer_free() after usage.</p>
 </div>
       
@@ -2751,11 +2754,11 @@ Free with gst_audio_channel_mixer_free() after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convert the <!-- raw HTML omitted -->channels<!-- raw HTML omitted --> present in <!-- raw HTML omitted -->channel_mask<!-- raw HTML omitted --> to a <!-- raw HTML omitted -->position<!-- raw HTML omitted --> array
-(which should have at least <!-- raw HTML omitted -->channels<!-- raw HTML omitted --> entries ensured by caller).
-If <!-- raw HTML omitted -->channel_mask<!-- raw HTML omitted --> is set to 0, it is considered as 'not present' for purpose
-of conversion.
-A partially valid <!-- raw HTML omitted -->channel_mask<!-- raw HTML omitted --> with less bits set than the number
+    <p>Convert the <!-- raw HTML omitted -->channels<!-- raw HTML omitted --> present in <!-- raw HTML omitted -->channel_mask<!-- raw HTML omitted --> to a <!-- raw HTML omitted -->position<!-- raw HTML omitted --> array<br />
+(which should have at least <!-- raw HTML omitted -->channels<!-- raw HTML omitted --> entries ensured by caller).<br />
+If <!-- raw HTML omitted -->channel_mask<!-- raw HTML omitted --> is set to 0, it is considered as 'not present' for purpose<br />
+of conversion.<br />
+A partially valid <!-- raw HTML omitted -->channel_mask<!-- raw HTML omitted --> with less bits set than the number<br />
 of channels is considered valid.</p>
 
 
@@ -2805,7 +2808,7 @@ of channels is considered valid.</p>
       
       
         &mdash;
-        <div class='inline'><p>The
+        <div class='inline'><p>The<br />
 %GstAudioChannelPosition<!-- raw HTML omitted -->s</p>
 </div>
       
@@ -2846,7 +2849,7 @@ of channels is considered valid.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Convert the <!-- raw HTML omitted -->position<!-- raw HTML omitted --> array of <!-- raw HTML omitted -->channels<!-- raw HTML omitted --> channels to a bitmask.</p>
-<p>If <!-- raw HTML omitted -->force_order<!-- raw HTML omitted --> is true it additionally checks if the channels are
+<p>If <!-- raw HTML omitted -->force_order<!-- raw HTML omitted --> is true it additionally checks if the channels are<br />
 in the order required by GStreamer.</p>
 
 
@@ -2950,8 +2953,8 @@ in the order required by GStreamer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts <!-- raw HTML omitted -->position<!-- raw HTML omitted --> to a human-readable string representation for
-debugging purposes.
+    <p>Converts <!-- raw HTML omitted -->position<!-- raw HTML omitted --> to a human-readable string representation for<br />
+debugging purposes.<br />
 <!-- raw HTML omitted -->position<!-- raw HTML omitted --></p>
 
 
@@ -2971,7 +2974,7 @@ debugging purposes.
       
       
         &mdash;
-        <div class='inline'><p>The %GstAudioChannelPositions
+        <div class='inline'><p>The %GstAudioChannelPositions<br />
 to convert.</p>
 </div>
       
@@ -3026,8 +3029,8 @@ to convert.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reorders the channel positions in <!-- raw HTML omitted -->position<!-- raw HTML omitted --> from any order to
-the GStreamer channel order.
+    <p>Reorders the channel positions in <!-- raw HTML omitted -->position<!-- raw HTML omitted --> from any order to<br />
+the GStreamer channel order.<br />
 was successful.</p>
 
 
@@ -3047,7 +3050,7 @@ was successful.</p>
       
       
         &mdash;
-        <div class='inline'><p>The channel positions to
+        <div class='inline'><p>The channel positions to<br />
 reorder to.</p>
 </div>
       
@@ -3102,8 +3105,8 @@ reorder to.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if <!-- raw HTML omitted -->position<!-- raw HTML omitted --> contains valid channel positions for
-<!-- raw HTML omitted -->channels<!-- raw HTML omitted --> channels. If <!-- raw HTML omitted -->force_order<!-- raw HTML omitted --> is true it additionally
+    <p>Checks if <!-- raw HTML omitted -->position<!-- raw HTML omitted --> contains valid channel positions for<br />
+<!-- raw HTML omitted -->channels<!-- raw HTML omitted --> channels. If <!-- raw HTML omitted -->force_order<!-- raw HTML omitted --> is true it additionally<br />
 checks if the channels are in the order required by GStreamer.</p>
 
 
@@ -3123,7 +3126,7 @@ checks if the channels are in the order required by GStreamer.</p>
       
       
         &mdash;
-        <div class='inline'><p>The %GstAudioChannelPositions
+        <div class='inline'><p>The %GstAudioChannelPositions<br />
 to check.</p>
 </div>
       
@@ -3329,7 +3332,7 @@ to check.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Construct a Gst::AudioFormat with given parameters.
+    <p>Construct a Gst::AudioFormat with given parameters.<br />
 exists with the given parameters.</p>
 
 
@@ -3467,7 +3470,7 @@ exists with the given parameters.</p>
       
       
         &mdash;
-        <div class='inline'><p>a destination
+        <div class='inline'><p>a destination<br />
 to fill</p>
 </div>
       
@@ -3518,7 +3521,7 @@ to fill</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convert the <!-- raw HTML omitted -->format<!-- raw HTML omitted --> string to its Gst::AudioFormat.
+    <p>Convert the <!-- raw HTML omitted -->format<!-- raw HTML omitted --> string to its Gst::AudioFormat.<br />
 string is not a known format.</p>
 
 
@@ -3776,13 +3779,13 @@ string is not a known format.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a reorder map for <!-- raw HTML omitted -->from<!-- raw HTML omitted --> to <!-- raw HTML omitted -->to<!-- raw HTML omitted --> that can be used in
-custom channel reordering code, e.g. to convert from or to the
-GStreamer channel order. <!-- raw HTML omitted -->from<!-- raw HTML omitted --> and <!-- raw HTML omitted -->to<!-- raw HTML omitted --> must contain the same
-number of positions and the same positions, only in a
+    <p>Returns a reorder map for <!-- raw HTML omitted -->from<!-- raw HTML omitted --> to <!-- raw HTML omitted -->to<!-- raw HTML omitted --> that can be used in<br />
+custom channel reordering code, e.g. to convert from or to the<br />
+GStreamer channel order. <!-- raw HTML omitted -->from<!-- raw HTML omitted --> and <!-- raw HTML omitted -->to<!-- raw HTML omitted --> must contain the same<br />
+number of positions and the same positions, only in a<br />
 different order.</p>
-<p>The resulting <!-- raw HTML omitted -->reorder_map<!-- raw HTML omitted --> can be used for reordering by assigning
-channel i of the input to channel reorder_map[i] of the output.
+<p>The resulting <!-- raw HTML omitted -->reorder_map<!-- raw HTML omitted --> can be used for reordering by assigning<br />
+channel i of the input to channel reorder_map[i] of the output.<br />
 is possible.</p>
 
 
@@ -3886,8 +3889,8 @@ is possible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calculated the size of the buffer expected by gst_audio_iec61937_payload() for
-payloading type from <!-- raw HTML omitted -->spec<!-- raw HTML omitted -->.
+    <p>Calculated the size of the buffer expected by gst_audio_iec61937_payload() for<br />
+payloading type from <!-- raw HTML omitted -->spec<!-- raw HTML omitted -->.<br />
 payloaded.</p>
 
 
@@ -3946,9 +3949,9 @@ payloaded.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Payloads <!-- raw HTML omitted -->src<!-- raw HTML omitted --> in the form specified by IEC 61937 for the type from <!-- raw HTML omitted -->spec<!-- raw HTML omitted --> and
-stores the result in <!-- raw HTML omitted -->dst<!-- raw HTML omitted -->. <!-- raw HTML omitted -->src<!-- raw HTML omitted --> must contain exactly one frame of data and
-the frame is not checked for errors.
+    <p>Payloads <!-- raw HTML omitted -->src<!-- raw HTML omitted --> in the form specified by IEC 61937 for the type from <!-- raw HTML omitted -->spec<!-- raw HTML omitted --> and<br />
+stores the result in <!-- raw HTML omitted -->dst<!-- raw HTML omitted -->. <!-- raw HTML omitted -->src<!-- raw HTML omitted --> must contain exactly one frame of data and<br />
+the frame is not checked for errors.<br />
 otherwise.</p>
 
 
@@ -3998,7 +4001,7 @@ otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>the destination buffer to store the
+        <div class='inline'><p>the destination buffer to store the<br />
 payloaded contents in. Should not overlap with <!-- raw HTML omitted -->src<!-- raw HTML omitted --></p>
 </div>
       
@@ -4288,8 +4291,8 @@ payloaded contents in. Should not overlap with <!-- raw HTML omitted -->src<!-- 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return a generic raw audio caps for formats defined in <!-- raw HTML omitted -->formats<!-- raw HTML omitted -->.
-If <!-- raw HTML omitted -->formats<!-- raw HTML omitted --> is nil returns a caps for all the supported raw audio formats,
+    <p>Return a generic raw audio caps for formats defined in <!-- raw HTML omitted -->formats<!-- raw HTML omitted -->.<br />
+If <!-- raw HTML omitted -->formats<!-- raw HTML omitted --> is nil returns a caps for all the supported raw audio formats,<br />
 see gst_audio_formats_raw().</p>
 
 
@@ -4447,9 +4450,9 @@ see gst_audio_formats_raw().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Create a new quantizer object with the given parameters.</p>
-<p>Output samples will be quantized to a multiple of <!-- raw HTML omitted -->quantizer<!-- raw HTML omitted -->. Better
+<p>Output samples will be quantized to a multiple of <!-- raw HTML omitted -->quantizer<!-- raw HTML omitted -->. Better<br />
 performance is achieved when <!-- raw HTML omitted -->quantizer<!-- raw HTML omitted --> is a power of 2.</p>
-<p>Dithering and noise-shaping can be performed during quantization with
+<p>Dithering and noise-shaping can be performed during quantization with<br />
 the <!-- raw HTML omitted -->dither<!-- raw HTML omitted --> and <!-- raw HTML omitted -->ns<!-- raw HTML omitted --> parameters.</p>
 
 
@@ -4583,8 +4586,8 @@ the <!-- raw HTML omitted -->dither<!-- raw HTML omitted --> and <!-- raw HTML o
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reorders <!-- raw HTML omitted -->data<!-- raw HTML omitted --> from the channel positions <!-- raw HTML omitted -->from<!-- raw HTML omitted --> to the channel
-positions <!-- raw HTML omitted -->to<!-- raw HTML omitted -->. <!-- raw HTML omitted -->from<!-- raw HTML omitted --> and <!-- raw HTML omitted -->to<!-- raw HTML omitted --> must contain the same number of
+    <p>Reorders <!-- raw HTML omitted -->data<!-- raw HTML omitted --> from the channel positions <!-- raw HTML omitted -->from<!-- raw HTML omitted --> to the channel<br />
+positions <!-- raw HTML omitted -->to<!-- raw HTML omitted -->. <!-- raw HTML omitted -->from<!-- raw HTML omitted --> and <!-- raw HTML omitted -->to<!-- raw HTML omitted --> must contain the same number of<br />
 positions and the same positions, only in a different order.</p>
 <p>Note: this function assumes the audio data is in interleaved layout</p>
 
@@ -4605,7 +4608,7 @@ positions and the same positions, only in a different order.</p>
       
       
         &mdash;
-        <div class='inline'><p>The pointer to
+        <div class='inline'><p>The pointer to<br />
 the memory.</p>
 </div>
       
@@ -4868,7 +4871,7 @@ the memory.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the parameters for resampling from <!-- raw HTML omitted -->in_rate<!-- raw HTML omitted --> to <!-- raw HTML omitted -->out_rate<!-- raw HTML omitted --> using <!-- raw HTML omitted -->method<!-- raw HTML omitted -->
+    <p>Set the parameters for resampling from <!-- raw HTML omitted -->in_rate<!-- raw HTML omitted --> to <!-- raw HTML omitted -->out_rate<!-- raw HTML omitted --> using <!-- raw HTML omitted -->method<!-- raw HTML omitted --><br />
 for <!-- raw HTML omitted -->quality<!-- raw HTML omitted --> in <!-- raw HTML omitted -->options<!-- raw HTML omitted -->.</p>
 
 
@@ -5087,9 +5090,9 @@ for <!-- raw HTML omitted -->quality<!-- raw HTML omitted --> in <!-- raw HTML o
 </h3><div class="docstring">
   <div class="discussion">
     <p>Attaches Gst::AudioDownmixMeta metadata to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> with the given parameters.</p>
-<p><!-- raw HTML omitted -->matrix<!-- raw HTML omitted --> is an two-dimensional array of <!-- raw HTML omitted -->to_channels<!-- raw HTML omitted --> times <!-- raw HTML omitted -->from_channels<!-- raw HTML omitted -->
-coefficients, i.e. the i-th output channels is constructed by multiplicating
-the input channels with the coefficients in <!-- raw HTML omitted -->matrix<!-- raw HTML omitted -->[i] and taking the sum
+<p><!-- raw HTML omitted -->matrix<!-- raw HTML omitted --> is an two-dimensional array of <!-- raw HTML omitted -->to_channels<!-- raw HTML omitted --> times <!-- raw HTML omitted -->from_channels<!-- raw HTML omitted --><br />
+coefficients, i.e. the i-th output channels is constructed by multiplicating<br />
+the input channels with the coefficients in <!-- raw HTML omitted -->matrix<!-- raw HTML omitted -->[i] and taking the sum<br />
 of the results.</p>
 
 
@@ -5124,7 +5127,7 @@ of the results.</p>
       
       
         &mdash;
-        <div class='inline'><p>the channel positions
+        <div class='inline'><p>the channel positions<br />
 of the source</p>
 </div>
       
@@ -5155,7 +5158,7 @@ of the source</p>
       
       
         &mdash;
-        <div class='inline'><p>the channel positions of
+        <div class='inline'><p>the channel positions of<br />
 the destination</p>
 </div>
       
@@ -5313,20 +5316,20 @@ the destination</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Allocates and attaches a Gst::AudioMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, which must be writable
-for that purpose. The fields of the Gst::AudioMeta are directly populated
+    <p>Allocates and attaches a Gst::AudioMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, which must be writable<br />
+for that purpose. The fields of the Gst::AudioMeta are directly populated<br />
 from the arguments of this function.</p>
-<p>When <!-- raw HTML omitted -->info<!-- raw HTML omitted -->-&gt;layout is %GST_AUDIO_LAYOUT_NON_INTERLEAVED and <!-- raw HTML omitted -->offsets<!-- raw HTML omitted --> is
-nil, the offsets are calculated with a formula that assumes the planes are
-tightly packed and in sequence:
+<p>When <!-- raw HTML omitted -->info<!-- raw HTML omitted -->-&gt;layout is %GST_AUDIO_LAYOUT_NON_INTERLEAVED and <!-- raw HTML omitted -->offsets<!-- raw HTML omitted --> is<br />
+nil, the offsets are calculated with a formula that assumes the planes are<br />
+tightly packed and in sequence:<br />
 offsets[channel] = channel * <!-- raw HTML omitted -->samples<!-- raw HTML omitted --> * sample_stride</p>
-<p>It is not allowed for channels to overlap in memory,
-i.e. for each i in [0, channels), the range
-[<!-- raw HTML omitted -->offsets<!-- raw HTML omitted -->[i], <!-- raw HTML omitted -->offsets<!-- raw HTML omitted -->[i] + <!-- raw HTML omitted -->samples<!-- raw HTML omitted --> * sample_stride) must not overlap
-with any other such range. This function will assert if the parameters
+<p>It is not allowed for channels to overlap in memory,<br />
+i.e. for each i in [0, channels), the range<br />
+[<!-- raw HTML omitted -->offsets<!-- raw HTML omitted -->[i], <!-- raw HTML omitted -->offsets<!-- raw HTML omitted -->[i] + <!-- raw HTML omitted -->samples<!-- raw HTML omitted --> * sample_stride) must not overlap<br />
+with any other such range. This function will assert if the parameters<br />
 specified cause this restriction to be violated.</p>
-<p>It is, obviously, also not allowed to specify parameters that would cause
-out-of-bounds memory access on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->. This is also checked, which means
+<p>It is, obviously, also not allowed to specify parameters that would cause<br />
+out-of-bounds memory access on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->. This is also checked, which means<br />
 that you must add enough memory on the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> before adding this meta.</p>
 
 
@@ -5391,8 +5394,8 @@ that you must add enough memory on the <!-- raw HTML omitted -->buffer<!-- raw H
       
       
         &mdash;
-        <div class='inline'><p>the offsets (in bytes) where each channel plane starts
-in the buffer or nil to calculate it (see below); must be nil also
+        <div class='inline'><p>the offsets (in bytes) where each channel plane starts<br />
+in the buffer or nil to calculate it (see below); must be nil also<br />
 when <!-- raw HTML omitted -->info<!-- raw HTML omitted -->-&gt;layout is %GST_AUDIO_LAYOUT_INTERLEAVED</p>
 </div>
       
@@ -5432,21 +5435,21 @@ when <!-- raw HTML omitted -->info<!-- raw HTML omitted -->-&gt;layout is %GST_A
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Allocates and attaches a Gst::DsdPlaneOffsetMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, which must be
-writable for that purpose. The fields of the Gst::DsdPlaneOffsetMeta are
+    <p>Allocates and attaches a Gst::DsdPlaneOffsetMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, which must be<br />
+writable for that purpose. The fields of the Gst::DsdPlaneOffsetMeta are<br />
 directly populated from the arguments of this function.</p>
-<p>If <!-- raw HTML omitted -->offsets<!-- raw HTML omitted --> is NULL, then the meta's offsets field is left uninitialized.
-This is useful if for example offset values are to be calculated in the
-meta's offsets field in-place. Similarly, <!-- raw HTML omitted -->num_bytes_per_channel<!-- raw HTML omitted --> can be
-set to 0, but only if <!-- raw HTML omitted -->offsets<!-- raw HTML omitted --> is NULL. This is useful if the number of
+<p>If <!-- raw HTML omitted -->offsets<!-- raw HTML omitted --> is NULL, then the meta's offsets field is left uninitialized.<br />
+This is useful if for example offset values are to be calculated in the<br />
+meta's offsets field in-place. Similarly, <!-- raw HTML omitted -->num_bytes_per_channel<!-- raw HTML omitted --> can be<br />
+set to 0, but only if <!-- raw HTML omitted -->offsets<!-- raw HTML omitted --> is NULL. This is useful if the number of<br />
 bytes per channel is known only later.</p>
-<p>It is not allowed for channels to overlap in memory,
-i.e. for each i in [0, channels), the range
-[<!-- raw HTML omitted -->offsets<!-- raw HTML omitted -->[i], <!-- raw HTML omitted -->offsets<!-- raw HTML omitted -->[i] + <!-- raw HTML omitted -->num_bytes_per_channel<!-- raw HTML omitted -->) must not overlap
-with any other such range. This function will assert if the parameters
+<p>It is not allowed for channels to overlap in memory,<br />
+i.e. for each i in [0, channels), the range<br />
+[<!-- raw HTML omitted -->offsets<!-- raw HTML omitted -->[i], <!-- raw HTML omitted -->offsets<!-- raw HTML omitted -->[i] + <!-- raw HTML omitted -->num_bytes_per_channel<!-- raw HTML omitted -->) must not overlap<br />
+with any other such range. This function will assert if the parameters<br />
 specified cause this restriction to be violated.</p>
-<p>It is, obviously, also not allowed to specify parameters that would cause
-out-of-bounds memory access on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->. This is also checked, which means
+<p>It is, obviously, also not allowed to specify parameters that would cause<br />
+out-of-bounds memory access on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->. This is also checked, which means<br />
 that you must add enough memory on the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> before adding this meta.</p>
 <p>This meta is only needed for non-interleaved (= planar) DSD data.</p>
 
@@ -5512,7 +5515,7 @@ that you must add enough memory on the <!-- raw HTML omitted -->buffer<!-- raw H
       
       
         &mdash;
-        <div class='inline'><p>the offsets (in bytes) where each channel plane starts
+        <div class='inline'><p>the offsets (in bytes) where each channel plane starts<br />
 in the buffer</p>
 </div>
       
@@ -5531,7 +5534,7 @@ in the buffer</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::DsdPlaneOffsetMeta that was attached
+        <div class='inline'><p>the Gst::DsdPlaneOffsetMeta that was attached<br />
 on the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --></p>
 </div>
       
@@ -5553,7 +5556,7 @@ on the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Find the Gst::AudioDownmixMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> for the given destination
+    <p>Find the Gst::AudioDownmixMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> for the given destination<br />
 channel positions.</p>
 
 
@@ -5588,7 +5591,7 @@ channel positions.</p>
       
       
         &mdash;
-        <div class='inline'><p>the channel positions of
+        <div class='inline'><p>the channel positions of<br />
 the destination</p>
 </div>
       
@@ -5643,7 +5646,7 @@ the destination</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Find the Gst::AudioLevelMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.
+    <p>Find the Gst::AudioLevelMeta on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.<br />
 there is no such metadata on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
 
 
@@ -5702,20 +5705,20 @@ there is no such metadata on <!-- raw HTML omitted -->buffer<!-- raw HTML omitte
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts DSD data from one layout and grouping format to another.
-<!-- raw HTML omitted -->num_bytes<!-- raw HTML omitted --> must be an integer multiple of the width of both input
-and output format. For example, if the input format is GST_DSD_FORMAT_U32LE,
-and the output format is GST_DSD_FORMAT_U16BE, then <!-- raw HTML omitted -->num_bytes<!-- raw HTML omitted --> must
+    <p>Converts DSD data from one layout and grouping format to another.<br />
+<!-- raw HTML omitted -->num_bytes<!-- raw HTML omitted --> must be an integer multiple of the width of both input<br />
+and output format. For example, if the input format is GST_DSD_FORMAT_U32LE,<br />
+and the output format is GST_DSD_FORMAT_U16BE, then <!-- raw HTML omitted -->num_bytes<!-- raw HTML omitted --> must<br />
 be an integer multiple of both 4 (U32LE width) and 2 (U16BE width).</p>
-<p><!-- raw HTML omitted -->reverse_byte_bits<!-- raw HTML omitted --> is necessary if the bit order within the DSD bytes
-needs to be reversed. This is rarely necessary, and is not to be
-confused with the endianness of formats (which determines the ordering
+<p><!-- raw HTML omitted -->reverse_byte_bits<!-- raw HTML omitted --> is necessary if the bit order within the DSD bytes<br />
+needs to be reversed. This is rarely necessary, and is not to be<br />
+confused with the endianness of formats (which determines the ordering<br />
 of <em>bytes</em>).</p>
-<p><!-- raw HTML omitted -->input_plane_offsets<!-- raw HTML omitted --> must not be NULL if <!-- raw HTML omitted -->input_layout<!-- raw HTML omitted --> is set to
-#GST_AUDIO_LAYOUT_NON_INTERLEAVED. The same applies to <!-- raw HTML omitted -->output_plane_offsets<!-- raw HTML omitted -->.
-These plane offsets define the starting offset of the planes (there is
-exactly one plane per channel) within <!-- raw HTML omitted -->input_data<!-- raw HTML omitted --> and <!-- raw HTML omitted -->output_data<!-- raw HTML omitted -->
-respectively. If GST_AUDIO_LAYOUT_INTERLEAVED is used, the plane offsets
+<p><!-- raw HTML omitted -->input_plane_offsets<!-- raw HTML omitted --> must not be NULL if <!-- raw HTML omitted -->input_layout<!-- raw HTML omitted --> is set to<br />
+#GST_AUDIO_LAYOUT_NON_INTERLEAVED. The same applies to <!-- raw HTML omitted -->output_plane_offsets<!-- raw HTML omitted -->.<br />
+These plane offsets define the starting offset of the planes (there is<br />
+exactly one plane per channel) within <!-- raw HTML omitted -->input_data<!-- raw HTML omitted --> and <!-- raw HTML omitted -->output_data<!-- raw HTML omitted --><br />
+respectively. If GST_AUDIO_LAYOUT_INTERLEAVED is used, the plane offsets<br />
 are ignored.</p>
 
 
@@ -5920,7 +5923,7 @@ are ignored.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convert the DSD format string <!-- raw HTML omitted -->str<!-- raw HTML omitted --> to its Gst::DsdFormat.
+    <p>Convert the DSD format string <!-- raw HTML omitted -->str<!-- raw HTML omitted --> to its Gst::DsdFormat.<br />
 string is not a known format.</p>
 
 
@@ -6037,7 +6040,7 @@ string is not a known format.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a string containing a descriptive name for
+    <p>Returns a string containing a descriptive name for<br />
 the Gst::DsdFormat if there is one, or NULL otherwise.</p>
 
 
@@ -6375,7 +6378,7 @@ the Gst::DsdFormat if there is one, or NULL otherwise.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

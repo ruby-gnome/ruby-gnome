@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::DebugLevel";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -95,7 +97,7 @@
         <dt id="NONE-constant" class="">NONE =
           <div class="docstring">
   <div class="discussion">
-    <p>No debugging level specified or desired. Used to deactivate
+    <p>No debugging level specified or desired. Used to deactivate<br />
 debugging output.</p>
 
 
@@ -111,9 +113,9 @@ debugging output.</p>
         <dt id="ERROR-constant" class="">ERROR =
           <div class="docstring">
   <div class="discussion">
-    <p>Error messages are to be used only when an error occurred
-that stops the application from keeping working correctly.
-An examples is gst_element_error, which outputs a message with this priority.
+    <p>Error messages are to be used only when an error occurred<br />
+that stops the application from keeping working correctly.<br />
+An examples is gst_element_error, which outputs a message with this priority.<br />
 It does not mean that the application is terminating as with g_error.</p>
 
 
@@ -129,9 +131,9 @@ It does not mean that the application is terminating as with g_error.</p>
         <dt id="WARNING-constant" class="">WARNING =
           <div class="docstring">
   <div class="discussion">
-    <p>Warning messages are to inform about abnormal behaviour
-that could lead to problems or weird behaviour later on. An example of this
-would be clocking issues (&quot;your computer is pretty slow&quot;) or broken input
+    <p>Warning messages are to inform about abnormal behaviour<br />
+that could lead to problems or weird behaviour later on. An example of this<br />
+would be clocking issues (&quot;your computer is pretty slow&quot;) or broken input<br />
 data (&quot;Can't synchronize to stream.&quot;)</p>
 
 
@@ -147,10 +149,10 @@ data (&quot;Can't synchronize to stream.&quot;)</p>
         <dt id="FIXME-constant" class="">FIXME =
           <div class="docstring">
   <div class="discussion">
-    <p>Fixme messages are messages that indicate that something
-in the executed code path is not fully implemented or handled yet. Note
-that this does not replace proper error handling in any way, the purpose
-of this message is to make it easier to spot incomplete/unfinished pieces
+    <p>Fixme messages are messages that indicate that something<br />
+in the executed code path is not fully implemented or handled yet. Note<br />
+that this does not replace proper error handling in any way, the purpose<br />
+of this message is to make it easier to spot incomplete/unfinished pieces<br />
 of code when reading the debug log.</p>
 
 
@@ -166,10 +168,10 @@ of code when reading the debug log.</p>
         <dt id="INFO-constant" class="">INFO =
           <div class="docstring">
   <div class="discussion">
-    <p>Informational messages should be used to keep the developer
-updated about what is happening.
-Examples where this should be used are when a typefind function has
-successfully determined the type of the stream or when an mp3 plugin detects
+    <p>Informational messages should be used to keep the developer<br />
+updated about what is happening.<br />
+Examples where this should be used are when a typefind function has<br />
+successfully determined the type of the stream or when an mp3 plugin detects<br />
 the format to be used. (&quot;This file has mono sound.&quot;)</p>
 
 
@@ -185,11 +187,11 @@ the format to be used. (&quot;This file has mono sound.&quot;)</p>
         <dt id="DEBUG-constant" class="">DEBUG =
           <div class="docstring">
   <div class="discussion">
-    <p>Debugging messages should be used when something common
-happens that is not the expected default behavior, or something that's
-useful to know but doesn't happen all the time (ie. per loop iteration or
-buffer processed or event handled).
-An example would be notifications about state changes or receiving/sending
+    <p>Debugging messages should be used when something common<br />
+happens that is not the expected default behavior, or something that's<br />
+useful to know but doesn't happen all the time (ie. per loop iteration or<br />
+buffer processed or event handled).<br />
+An example would be notifications about state changes or receiving/sending<br />
 of events.</p>
 
 
@@ -205,10 +207,10 @@ of events.</p>
         <dt id="LOG-constant" class="">LOG =
           <div class="docstring">
   <div class="discussion">
-    <p>Log messages are messages that are very common but might be
-useful to know. As a rule of thumb a pipeline that is running as expected
-should never output anything else but LOG messages whilst processing data.
-Use this log level to log recurring information in chain functions and
+    <p>Log messages are messages that are very common but might be<br />
+useful to know. As a rule of thumb a pipeline that is running as expected<br />
+should never output anything else but LOG messages whilst processing data.<br />
+Use this log level to log recurring information in chain functions and<br />
 loop functions, for example.</p>
 
 
@@ -224,7 +226,7 @@ loop functions, for example.</p>
         <dt id="TRACE-constant" class="">TRACE =
           <div class="docstring">
   <div class="discussion">
-    <p>Tracing-related messages.
+    <p>Tracing-related messages.<br />
 Examples for this are referencing/dereferencing of objects.</p>
 
 
@@ -240,8 +242,8 @@ Examples for this are referencing/dereferencing of objects.</p>
         <dt id="MEMDUMP-constant" class="">MEMDUMP =
           <div class="docstring">
   <div class="discussion">
-    <p>memory dump messages are used to log (small) chunks of
-data as memory dumps in the log. They will be displayed as hexdump with
+    <p>memory dump messages are used to log (small) chunks of<br />
+data as memory dumps in the log. They will be displayed as hexdump with<br />
 ASCII characters.</p>
 
 
@@ -285,7 +287,7 @@ ASCII characters.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

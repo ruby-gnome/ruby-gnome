@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::MessageType";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -110,9 +112,9 @@
         <dt id="EOS-constant" class="">EOS =
           <div class="docstring">
   <div class="discussion">
-    <p>end-of-stream reached in a pipeline. The application will
-only receive this message in the PLAYING state and every time it sets a
-pipeline to PLAYING that is in the EOS state. The application can perform a
+    <p>end-of-stream reached in a pipeline. The application will<br />
+only receive this message in the PLAYING state and every time it sets a<br />
+pipeline to PLAYING that is in the EOS state. The application can perform a<br />
 flushing seek in the pipeline, which will undo the EOS state again.</p>
 
 
@@ -128,10 +130,10 @@ flushing seek in the pipeline, which will undo the EOS state again.</p>
         <dt id="ERROR-constant" class="">ERROR =
           <div class="docstring">
   <div class="discussion">
-    <p>an error occurred. When the application receives an error
-message it should stop playback of the pipeline and not assume that more
-data will be played. It is possible to specify a redirection url to the error
-messages by setting a <code>redirect-location</code> field into the error message, application
+    <p>an error occurred. When the application receives an error<br />
+message it should stop playback of the pipeline and not assume that more<br />
+data will be played. It is possible to specify a redirection url to the error<br />
+messages by setting a <code>redirect-location</code> field into the error message, application<br />
 or high level bins might use the information as required.</p>
 
 
@@ -192,11 +194,11 @@ or high level bins might use the information as required.</p>
         <dt id="BUFFERING-constant" class="">BUFFERING =
           <div class="docstring">
   <div class="discussion">
-    <p>the pipeline is buffering. When the application
-receives a buffering message in the PLAYING state for a non-live pipeline it
-must PAUSE the pipeline until the buffering completes, when the percentage
-field in the message is 100%. For live pipelines, no action must be
-performed and the buffering percentage can be used to inform the user about
+    <p>the pipeline is buffering. When the application<br />
+receives a buffering message in the PLAYING state for a non-live pipeline it<br />
+must PAUSE the pipeline until the buffering completes, when the percentage<br />
+field in the message is 100%. For live pipelines, no action must be<br />
+performed and the buffering percentage can be used to inform the user about<br />
 the progress.</p>
 
 
@@ -227,7 +229,7 @@ the progress.</p>
         <dt id="STATE_DIRTY-constant" class="">STATE_DIRTY =
           <div class="docstring">
   <div class="discussion">
-    <p>an element changed state in a streaming thread.
+    <p>an element changed state in a streaming thread.<br />
 This message is deprecated.</p>
 
 
@@ -258,8 +260,8 @@ This message is deprecated.</p>
         <dt id="CLOCK_PROVIDE-constant" class="">CLOCK_PROVIDE =
           <div class="docstring">
   <div class="discussion">
-    <p>an element notifies its capability of providing
-a clock. This message is used internally and
+    <p>an element notifies its capability of providing<br />
+a clock. This message is used internally and<br />
 never forwarded to the application.</p>
 
 
@@ -275,10 +277,10 @@ never forwarded to the application.</p>
         <dt id="CLOCK_LOST-constant" class="">CLOCK_LOST =
           <div class="docstring">
   <div class="discussion">
-    <p>The current clock as selected by the pipeline became
-unusable. The pipeline will select a new clock on
-the next PLAYING state change. The application
-should set the pipeline to PAUSED and back to
+    <p>The current clock as selected by the pipeline became<br />
+unusable. The pipeline will select a new clock on<br />
+the next PLAYING state change. The application<br />
+should set the pipeline to PAUSED and back to<br />
 PLAYING when this message is received.</p>
 
 
@@ -309,7 +311,7 @@ PLAYING when this message is received.</p>
         <dt id="STRUCTURE_CHANGE-constant" class="">STRUCTURE_CHANGE =
           <div class="docstring">
   <div class="discussion">
-    <p>the structure of the pipeline changed. This
+    <p>the structure of the pipeline changed. This<br />
 message is used internally and never forwarded to the application.</p>
 
 
@@ -325,7 +327,7 @@ message is used internally and never forwarded to the application.</p>
         <dt id="STREAM_STATUS-constant" class="">STREAM_STATUS =
           <div class="docstring">
   <div class="discussion">
-    <p>status about a stream, emitted when it starts,
+    <p>status about a stream, emitted when it starts,<br />
 stops, errors, etc..</p>
 
 
@@ -341,7 +343,7 @@ stops, errors, etc..</p>
         <dt id="APPLICATION-constant" class="">APPLICATION =
           <div class="docstring">
   <div class="discussion">
-    <p>message posted by the application, possibly
+    <p>message posted by the application, possibly<br />
 via an application-specific element.</p>
 
 
@@ -357,7 +359,7 @@ via an application-specific element.</p>
         <dt id="ELEMENT-constant" class="">ELEMENT =
           <div class="docstring">
   <div class="discussion">
-    <p>element-specific message, see the specific element's
+    <p>element-specific message, see the specific element's<br />
 documentation</p>
 
 
@@ -373,7 +375,7 @@ documentation</p>
         <dt id="SEGMENT_START-constant" class="">SEGMENT_START =
           <div class="docstring">
   <div class="discussion">
-    <p>pipeline started playback of a segment. This
+    <p>pipeline started playback of a segment. This<br />
 message is used internally and never forwarded to the application.</p>
 
 
@@ -389,8 +391,8 @@ message is used internally and never forwarded to the application.</p>
         <dt id="SEGMENT_DONE-constant" class="">SEGMENT_DONE =
           <div class="docstring">
   <div class="discussion">
-    <p>pipeline completed playback of a segment. This
-message is forwarded to the application after all elements that posted
+    <p>pipeline completed playback of a segment. This<br />
+message is forwarded to the application after all elements that posted<br />
 <!-- raw HTML omitted -->GST_MESSAGE_SEGMENT_START<!-- raw HTML omitted --> posted a GST_MESSAGE_SEGMENT_DONE message.</p>
 
 
@@ -406,7 +408,7 @@ message is forwarded to the application after all elements that posted
         <dt id="DURATION_CHANGED-constant" class="">DURATION_CHANGED =
           <div class="docstring">
   <div class="discussion">
-    <p>The duration of a pipeline changed. The
+    <p>The duration of a pipeline changed. The<br />
 application can get the new duration with a duration query.</p>
 
 
@@ -422,7 +424,7 @@ application can get the new duration with a duration query.</p>
         <dt id="LATENCY-constant" class="">LATENCY =
           <div class="docstring">
   <div class="discussion">
-    <p>Posted by elements when their latency changes. The
+    <p>Posted by elements when their latency changes. The<br />
 application should recalculate and distribute a new latency.</p>
 
 
@@ -438,8 +440,8 @@ application should recalculate and distribute a new latency.</p>
         <dt id="ASYNC_START-constant" class="">ASYNC_START =
           <div class="docstring">
   <div class="discussion">
-    <p>Posted by elements when they start an ASYNC
-Gst::StateChange. This message is not forwarded to the application but is used
+    <p>Posted by elements when they start an ASYNC<br />
+Gst::StateChange. This message is not forwarded to the application but is used<br />
 internally.</p>
 
 
@@ -455,8 +457,8 @@ internally.</p>
         <dt id="ASYNC_DONE-constant" class="">ASYNC_DONE =
           <div class="docstring">
   <div class="discussion">
-    <p>Posted by elements when they complete an ASYNC
-Gst::StateChange. The application will only receive this message from the toplevel
+    <p>Posted by elements when they complete an ASYNC<br />
+Gst::StateChange. The application will only receive this message from the toplevel<br />
 pipeline.</p>
 
 
@@ -472,8 +474,8 @@ pipeline.</p>
         <dt id="REQUEST_STATE-constant" class="">REQUEST_STATE =
           <div class="docstring">
   <div class="discussion">
-    <p>Posted by elements when they want the pipeline to
-change state. This message is a suggestion to the application which can
+    <p>Posted by elements when they want the pipeline to<br />
+change state. This message is a suggestion to the application which can<br />
 decide to perform the state change on (part of) the pipeline.</p>
 
 
@@ -504,7 +506,7 @@ decide to perform the state change on (part of) the pipeline.</p>
         <dt id="QOS-constant" class="">QOS =
           <div class="docstring">
   <div class="discussion">
-    <p>A buffer was dropped or an element changed its processing
+    <p>A buffer was dropped or an element changed its processing<br />
 strategy for Quality of Service reasons.</p>
 
 
@@ -535,7 +537,7 @@ strategy for Quality of Service reasons.</p>
         <dt id="TOC-constant" class="">TOC =
           <div class="docstring">
   <div class="discussion">
-    <p>A new table of contents (TOC) was found or previously found TOC
+    <p>A new table of contents (TOC) was found or previously found TOC<br />
 was updated.</p>
 
 
@@ -551,8 +553,8 @@ was updated.</p>
         <dt id="RESET_TIME-constant" class="">RESET_TIME =
           <div class="docstring">
   <div class="discussion">
-    <p>Message to request resetting the pipeline's
-running time from the pipeline. This is an internal message which
+    <p>Message to request resetting the pipeline's<br />
+running time from the pipeline. This is an internal message which<br />
 applications will likely never receive.</p>
 
 
@@ -568,9 +570,9 @@ applications will likely never receive.</p>
         <dt id="STREAM_START-constant" class="">STREAM_START =
           <div class="docstring">
   <div class="discussion">
-    <p>Message indicating start of a new stream. Useful
-e.g. when using playbin in gapless playback mode, to get notified when
-the next title actually starts playing (which will be some time after
+    <p>Message indicating start of a new stream. Useful<br />
+e.g. when using playbin in gapless playback mode, to get notified when<br />
+the next title actually starts playing (which will be some time after<br />
 the URI for the next title has been set).</p>
 
 
@@ -616,10 +618,10 @@ the URI for the next title has been set).</p>
         <dt id="EXTENDED-constant" class="">EXTENDED =
           <div class="docstring">
   <div class="discussion">
-    <p>Message is an extended message type (see below).
-These extended message IDs can't be used directly with mask-based API
-like gst_bus_poll() or gst_bus_timed_pop_filtered(), but you can still
-filter for GST_MESSAGE_EXTENDED and then check the result for the
+    <p>Message is an extended message type (see below).<br />
+These extended message IDs can't be used directly with mask-based API<br />
+like gst_bus_poll() or gst_bus_timed_pop_filtered(), but you can still<br />
+filter for GST_MESSAGE_EXTENDED and then check the result for the<br />
 specific type. (Since: 1.4)</p>
 
 
@@ -635,7 +637,7 @@ specific type. (Since: 1.4)</p>
         <dt id="DEVICE_ADDED-constant" class="">DEVICE_ADDED =
           <div class="docstring">
   <div class="discussion">
-    <p>Message indicating a Gst::Device was added to
+    <p>Message indicating a Gst::Device was added to<br />
 a Gst::DeviceProvider (Since: 1.4)</p>
 
 
@@ -651,7 +653,7 @@ a Gst::DeviceProvider (Since: 1.4)</p>
         <dt id="DEVICE_REMOVED-constant" class="">DEVICE_REMOVED =
           <div class="docstring">
   <div class="discussion">
-    <p>Message indicating a Gst::Device was removed
+    <p>Message indicating a Gst::Device was removed<br />
 from a Gst::DeviceProvider (Since: 1.4)</p>
 
 
@@ -667,7 +669,7 @@ from a Gst::DeviceProvider (Since: 1.4)</p>
         <dt id="PROPERTY_NOTIFY-constant" class="">PROPERTY_NOTIFY =
           <div class="docstring">
   <div class="discussion">
-    <p>Message indicating a #GObject property has
+    <p>Message indicating a #GObject property has<br />
 changed (Since: 1.10)</p>
 
 
@@ -683,7 +685,7 @@ changed (Since: 1.10)</p>
         <dt id="STREAM_COLLECTION-constant" class="">STREAM_COLLECTION =
           <div class="docstring">
   <div class="discussion">
-    <p>Message indicating a new Gst::StreamCollection
+    <p>Message indicating a new Gst::StreamCollection<br />
 is available (Since: 1.10)</p>
 
 
@@ -699,7 +701,7 @@ is available (Since: 1.10)</p>
         <dt id="STREAMS_SELECTED-constant" class="">STREAMS_SELECTED =
           <div class="docstring">
   <div class="discussion">
-    <p>Message indicating the active selection of
+    <p>Message indicating the active selection of<br />
 Gst::Streams has changed (Since: 1.10)</p>
 
 
@@ -715,8 +717,8 @@ Gst::Streams has changed (Since: 1.10)</p>
         <dt id="REDIRECT-constant" class="">REDIRECT =
           <div class="docstring">
   <div class="discussion">
-    <p>Message indicating to request the application to
-try to play the given URL(s). Useful if for example a HTTP 302/303
+    <p>Message indicating to request the application to<br />
+try to play the given URL(s). Useful if for example a HTTP 302/303<br />
 response is received with a non-HTTP URL inside. (Since: 1.10)</p>
 
 
@@ -732,7 +734,7 @@ response is received with a non-HTTP URL inside. (Since: 1.10)</p>
         <dt id="DEVICE_CHANGED-constant" class="">DEVICE_CHANGED =
           <div class="docstring">
   <div class="discussion">
-    <p>Message indicating a Gst::Device was changed
+    <p>Message indicating a Gst::Device was changed<br />
 a Gst::DeviceProvider (Since: 1.16)</p>
 
 
@@ -748,8 +750,8 @@ a Gst::DeviceProvider (Since: 1.16)</p>
         <dt id="INSTANT_RATE_REQUEST-constant" class="">INSTANT_RATE_REQUEST =
           <div class="docstring">
   <div class="discussion">
-    <p>Message sent by elements to request the
-running time from the pipeline when an instant rate change should
+    <p>Message sent by elements to request the<br />
+running time from the pipeline when an instant rate change should<br />
 be applied (which may be in the past when the answer arrives). (Since: 1.18)</p>
 
 
@@ -793,7 +795,7 @@ be applied (which may be in the past when the answer arrives). (Since: 1.18)</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

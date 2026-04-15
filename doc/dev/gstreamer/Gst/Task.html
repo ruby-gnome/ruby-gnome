@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::Task";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -142,6 +144,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -452,9 +455,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -480,16 +485,16 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new Task that will repeatedly call the provided <!-- raw HTML omitted -->func<!-- raw HTML omitted -->
-with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> as a parameter. Typically the task will run in
+    <p>Create a new Task that will repeatedly call the provided <!-- raw HTML omitted -->func<!-- raw HTML omitted --><br />
+with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> as a parameter. Typically the task will run in<br />
 a new thread.</p>
-<p>The function cannot be changed after the task has been created. You
+<p>The function cannot be changed after the task has been created. You<br />
 must create a new Gst::Task to change the function.</p>
-<p>This function will not yet create and start a thread. Use gst_task_start() or
+<p>This function will not yet create and start a thread. Use gst_task_start() or<br />
 gst_task_pause() to create and start the GThread.</p>
-<p>Before the task can be used, a GRec::Mutex must be configured using the
-gst_task_set_lock() function. This lock will always be acquired while
-<!-- raw HTML omitted -->func<!-- raw HTML omitted --> is called.
+<p>Before the task can be used, a GRec::Mutex must be configured using the<br />
+gst_task_set_lock() function. This lock will always be acquired while<br />
+<!-- raw HTML omitted -->func<!-- raw HTML omitted --> is called.<br />
 MT safe.</p>
 
 
@@ -568,7 +573,7 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Wait for all tasks to be stopped. This is mainly used internally
+    <p>Wait for all tasks to be stopped. This is mainly used internally<br />
 to ensure proper cleanup of internal data structures in test suites.</p>
 <p>MT safe.</p>
 
@@ -611,12 +616,12 @@ to ensure proper cleanup of internal data structures in test suites.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Joins <!-- raw HTML omitted -->task<!-- raw HTML omitted -->. After this call, it is safe to unref the task
+    <p>Joins <!-- raw HTML omitted -->task<!-- raw HTML omitted -->. After this call, it is safe to unref the task<br />
 and clean up the lock set with gst_task_set_lock().</p>
 <p>The task will automatically be stopped with this call.</p>
-<p>This function cannot be called from within a task function as this
-would cause a deadlock. The function will detect this and print a
-g_warning.
+<p>This function cannot be called from within a task function as this<br />
+would cause a deadlock. The function will detect this and print a<br />
+g_warning.<br />
 MT safe.</p>
 
 
@@ -656,9 +661,9 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the mutex used by the task. The mutex will be acquired before
+    <p>Set the mutex used by the task. The mutex will be acquired before<br />
 calling the Gst::TaskFunction.</p>
-<p>This function has to be called before calling gst_task_pause() or
+<p>This function has to be called before calling gst_task_pause() or<br />
 gst_task_start().</p>
 <p>MT safe.</p>
 
@@ -714,10 +719,10 @@ gst_task_start().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Pauses <!-- raw HTML omitted -->task<!-- raw HTML omitted -->. This method can also be called on a task in the
-stopped state, in which case a thread will be started and will remain
-in the paused state. This function does not wait for the task to complete
-the paused state.
+    <p>Pauses <!-- raw HTML omitted -->task<!-- raw HTML omitted -->. This method can also be called on a task in the<br />
+stopped state, in which case a thread will be started and will remain<br />
+in the paused state. This function does not wait for the task to complete<br />
+the paused state.<br />
 MT safe.</p>
 
 
@@ -757,9 +762,9 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the Gst::TaskPool that this task will use for its streaming
+    <p>Get the Gst::TaskPool that this task will use for its streaming<br />
 threads.</p>
-<p>MT safe.
+<p>MT safe.<br />
 after usage.</p>
 
 
@@ -799,7 +804,7 @@ after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set <!-- raw HTML omitted -->pool<!-- raw HTML omitted --> as the new GstTaskPool for <!-- raw HTML omitted -->task<!-- raw HTML omitted -->. Any new streaming threads that
+    <p>Set <!-- raw HTML omitted -->pool<!-- raw HTML omitted --> as the new GstTaskPool for <!-- raw HTML omitted -->task<!-- raw HTML omitted -->. Any new streaming threads that<br />
 will be created by <!-- raw HTML omitted -->task<!-- raw HTML omitted --> will now use <!-- raw HTML omitted -->pool<!-- raw HTML omitted -->.</p>
 <p>MT safe.</p>
 
@@ -855,8 +860,8 @@ will be created by <!-- raw HTML omitted -->task<!-- raw HTML omitted --> will n
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Resume <!-- raw HTML omitted -->task<!-- raw HTML omitted --> in case it was paused. If the task was stopped, it will
-remain in that state and this function will return false.
+    <p>Resume <!-- raw HTML omitted -->task<!-- raw HTML omitted --> in case it was paused. If the task was stopped, it will<br />
+remain in that state and this function will return false.<br />
 MT safe.</p>
 
 
@@ -896,8 +901,8 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Call <!-- raw HTML omitted -->enter_func<!-- raw HTML omitted --> when the task function of <!-- raw HTML omitted -->task<!-- raw HTML omitted --> is entered. <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> will
-be passed to <!-- raw HTML omitted -->enter_func<!-- raw HTML omitted --> and <!-- raw HTML omitted -->notify<!-- raw HTML omitted --> will be called when <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> is no
+    <p>Call <!-- raw HTML omitted -->enter_func<!-- raw HTML omitted --> when the task function of <!-- raw HTML omitted -->task<!-- raw HTML omitted --> is entered. <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> will<br />
+be passed to <!-- raw HTML omitted -->enter_func<!-- raw HTML omitted --> and <!-- raw HTML omitted -->notify<!-- raw HTML omitted --> will be called when <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> is no<br />
 longer referenced.</p>
 
 
@@ -982,8 +987,8 @@ longer referenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Call <!-- raw HTML omitted -->leave_func<!-- raw HTML omitted --> when the task function of <!-- raw HTML omitted -->task<!-- raw HTML omitted --> is left. <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> will
-be passed to <!-- raw HTML omitted -->leave_func<!-- raw HTML omitted --> and <!-- raw HTML omitted -->notify<!-- raw HTML omitted --> will be called when <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> is no
+    <p>Call <!-- raw HTML omitted -->leave_func<!-- raw HTML omitted --> when the task function of <!-- raw HTML omitted -->task<!-- raw HTML omitted --> is left. <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> will<br />
+be passed to <!-- raw HTML omitted -->leave_func<!-- raw HTML omitted --> and <!-- raw HTML omitted -->notify<!-- raw HTML omitted --> will be called when <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> is no<br />
 longer referenced.</p>
 
 
@@ -1068,8 +1073,8 @@ longer referenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Starts <!-- raw HTML omitted -->task<!-- raw HTML omitted -->. The <!-- raw HTML omitted -->task<!-- raw HTML omitted --> must have a lock associated with it using
-gst_task_set_lock() or this function will return false.
+    <p>Starts <!-- raw HTML omitted -->task<!-- raw HTML omitted -->. The <!-- raw HTML omitted -->task<!-- raw HTML omitted --> must have a lock associated with it using<br />
+gst_task_set_lock() or this function will return false.<br />
 MT safe.</p>
 
 
@@ -1109,7 +1114,7 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the current state of the task.
+    <p>Get the current state of the task.<br />
 MT safe.</p>
 
 
@@ -1150,8 +1155,8 @@ MT safe.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the state of <!-- raw HTML omitted -->task<!-- raw HTML omitted --> to <!-- raw HTML omitted -->state<!-- raw HTML omitted -->.</p>
-<p>The <!-- raw HTML omitted -->task<!-- raw HTML omitted --> must have a lock associated with it using
-gst_task_set_lock() when going to GST_TASK_STARTED or GST_TASK_PAUSED or
+<p>The <!-- raw HTML omitted -->task<!-- raw HTML omitted --> must have a lock associated with it using<br />
+gst_task_set_lock() when going to GST_TASK_STARTED or GST_TASK_PAUSED or<br />
 this function will return false.</p>
 <p>MT safe.</p>
 
@@ -1211,9 +1216,9 @@ this function will return false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Stops <!-- raw HTML omitted -->task<!-- raw HTML omitted -->. This method merely schedules the task to stop and
-will not wait for the task to have completely stopped. Use
-gst_task_join() to stop and wait for completion.
+    <p>Stops <!-- raw HTML omitted -->task<!-- raw HTML omitted -->. This method merely schedules the task to stop and<br />
+will not wait for the task to have completely stopped. Use<br />
+gst_task_join() to stop and wait for completion.<br />
 MT safe.</p>
 
 
@@ -1249,7 +1254,7 @@ MT safe.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

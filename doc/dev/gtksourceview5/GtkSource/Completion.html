@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::Completion";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -161,6 +163,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -582,6 +585,7 @@
 
       
     </ul>
+    
   
 
 
@@ -601,7 +605,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This will add <code>&lt;b&gt;</code> tags around matched characters in <!-- raw HTML omitted -->haystack<!-- raw HTML omitted -->
+    <p>This will add <code>&lt;b&gt;</code> tags around matched characters in <!-- raw HTML omitted -->haystack<!-- raw HTML omitted --><br />
 based on <!-- raw HTML omitted -->casefold_query<!-- raw HTML omitted -->.</p>
 
 
@@ -675,11 +679,11 @@ based on <!-- raw HTML omitted -->casefold_query<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This helper function can do a fuzzy match for you giving a haystack and
+    <p>This helper function can do a fuzzy match for you giving a haystack and<br />
 casefolded needle.</p>
-<p>Casefold your needle using [func<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.utf8_casefold] before
+<p>Casefold your needle using [func<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.utf8_casefold] before<br />
 running the query.</p>
-<p>Score will be set with the score of the match upon success. Otherwise,
+<p>Score will be set with the score of the match upon success. Otherwise,<br />
 it will be set to zero.</p>
 
 
@@ -774,7 +778,7 @@ it will be set to zero.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a [iface<!-- raw HTML omitted -->CompletionProvider<!-- raw HTML omitted -->] to the list of providers to be queried
+    <p>Adds a [iface<!-- raw HTML omitted -->CompletionProvider<!-- raw HTML omitted -->] to the list of providers to be queried<br />
 for completion results.</p>
 
 
@@ -863,7 +867,7 @@ for completion results.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The Gtk::TextBuffer for the #GtkSourceCompletion:view.
+    <p>The Gtk::TextBuffer for the #GtkSourceCompletion:view.<br />
 This is a convenience property for providers.</p>
 
 
@@ -903,7 +907,7 @@ This is a convenience property for providers.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The Gtk::TextBuffer for the #GtkSourceCompletion:view.
+    <p>The Gtk::TextBuffer for the #GtkSourceCompletion:view.<br />
 This is a convenience property for providers.</p>
 
 
@@ -972,7 +976,7 @@ This is a convenience property for providers.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Emits the &quot;hide&quot; signal.</p>
-<p>When the &quot;hide&quot; signal is emitted, the completion window will be
+<p>When the &quot;hide&quot; signal is emitted, the completion window will be<br />
 dismissed.</p>
 
 
@@ -1114,7 +1118,7 @@ dismissed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the visibility of the info window should be saved when the
+    <p>Determines whether the visibility of the info window should be saved when the<br />
 completion is hidden, and restored when the completion is shown again.</p>
 
 
@@ -1182,7 +1186,7 @@ completion is hidden, and restored when the completion is shown again.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the visibility of the info window should be saved when the
+    <p>Determines whether the visibility of the info window should be saved when the<br />
 completion is hidden, and restored when the completion is shown again.</p>
 
 
@@ -1222,7 +1226,7 @@ completion is hidden, and restored when the completion is shown again.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes a [iface<!-- raw HTML omitted -->CompletionProvider<!-- raw HTML omitted -->] previously added with
+    <p>Removes a [iface<!-- raw HTML omitted -->CompletionProvider<!-- raw HTML omitted -->] previously added with<br />
 [method<!-- raw HTML omitted -->Completion<!-- raw HTML omitted -->.add_provider].</p>
 
 
@@ -1277,7 +1281,7 @@ completion is hidden, and restored when the completion is shown again.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the first proposal should be selected when the completion
+    <p>Determines whether the first proposal should be selected when the completion<br />
 is first shown.</p>
 
 
@@ -1345,7 +1349,7 @@ is first shown.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the first proposal should be selected when the completion
+    <p>Determines whether the first proposal should be selected when the completion<br />
 is first shown.</p>
 
 
@@ -1386,7 +1390,7 @@ is first shown.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Emits the &quot;show&quot; signal.</p>
-<p>When the &quot;show&quot; signal is emitted, the completion window will be
+<p>When the &quot;show&quot; signal is emitted, the completion window will be<br />
 displayed if there are any results available.</p>
 
 
@@ -1422,7 +1426,7 @@ displayed if there are any results available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;show-icons&quot; property denotes if icons should be displayed within
+    <p>The &quot;show-icons&quot; property denotes if icons should be displayed within<br />
 the list of completions presented to the user.</p>
 
 
@@ -1490,7 +1494,7 @@ the list of completions presented to the user.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;show-icons&quot; property denotes if icons should be displayed within
+    <p>The &quot;show-icons&quot; property denotes if icons should be displayed within<br />
 the list of completions presented to the user.</p>
 
 
@@ -1564,7 +1568,7 @@ the list of completions presented to the user.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;view&quot; property is the Gtk::TextView for which this #GtkSourceCompletion
+    <p>The &quot;view&quot; property is the Gtk::TextView for which this #GtkSourceCompletion<br />
 is providing completion features.</p>
 
 
@@ -1604,7 +1608,7 @@ is providing completion features.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;view&quot; property is the Gtk::TextView for which this #GtkSourceCompletion
+    <p>The &quot;view&quot; property is the Gtk::TextView for which this #GtkSourceCompletion<br />
 is providing completion features.</p>
 
 
@@ -1668,7 +1672,7 @@ is providing completion features.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

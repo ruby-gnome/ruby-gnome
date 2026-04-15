@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gnm::SheetObject";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -210,6 +212,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1123,6 +1126,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1736,7 +1740,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes <!-- raw HTML omitted -->so<!-- raw HTML omitted --> from its container, unrealizes all views, disconnects the
+    <p>Removes <!-- raw HTML omitted -->so<!-- raw HTML omitted --> from its container, unrealizes all views, disconnects the<br />
 associated data and unrefs the object</p>
 
 
@@ -1929,8 +1933,8 @@ associated data and unrefs the object</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the object direction from the given the new coordinates
-The original coordinates are assumed to be normalized (so that top
+    <p>Sets the object direction from the given the new coordinates<br />
+The original coordinates are assumed to be normalized (so that top<br />
 is above bottom and right is at the right of left)</p>
 
 
@@ -1986,9 +1990,9 @@ is above bottom and right is at the right of left)</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Draw a sheet object using cairo.</p>
-<p>We are assuming that the cairo context is set up so that the top
-left of the bounds is (0,0). Note that this
-is the real top left cell, not necessarily the cell with to which we are
+<p>We are assuming that the cairo context is set up so that the top<br />
+left of the bounds is (0,0). Note that this<br />
+is the real top left cell, not necessarily the cell with to which we are<br />
 anchored.</p>
 
 
@@ -2444,8 +2448,8 @@ anchored.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If <!-- raw HTML omitted -->graph<!-- raw HTML omitted --> is non-nil add a reference to it, otherwise create a new graph.
-Assign the graph to its SheetObjectGraph wrapper and initialize the
+    <p>If <!-- raw HTML omitted -->graph<!-- raw HTML omitted --> is non-nil add a reference to it, otherwise create a new graph.<br />
+Assign the graph to its SheetObjectGraph wrapper and initialize the<br />
 handlers, disconnecting any existing connection for the preceding graph.</p>
 
 
@@ -2762,7 +2766,7 @@ handlers, disconnecting any existing connection for the preceding graph.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calculate the position of the object <!-- raw HTML omitted -->so<!-- raw HTML omitted --> in pts from the logical position in
+    <p>Calculate the position of the object <!-- raw HTML omitted -->so<!-- raw HTML omitted --> in pts from the logical position in<br />
 the object.</p>
 
 
@@ -2978,7 +2982,7 @@ the object.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Saves a sheet object as an image to <!-- raw HTML omitted -->url<!-- raw HTML omitted -->.  If an error occurs, <!-- raw HTML omitted -->err<!-- raw HTML omitted -->
+    <p>Saves a sheet object as an image to <!-- raw HTML omitted -->url<!-- raw HTML omitted -->.  If an error occurs, <!-- raw HTML omitted -->err<!-- raw HTML omitted --><br />
 will be set.</p>
 
 
@@ -3225,8 +3229,8 @@ will be set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>update the bounds of an object that intersects the region whose top left
-is <!-- raw HTML omitted -->p<!-- raw HTML omitted -->.  This is used when an objects position is anchored to cols/rows
+    <p>update the bounds of an object that intersects the region whose top left<br />
+is <!-- raw HTML omitted -->p<!-- raw HTML omitted -->.  This is used when an objects position is anchored to cols/rows<br />
 and they change position.</p>
 
 
@@ -3246,7 +3250,7 @@ and they change position.</p>
       
       
         &mdash;
-        <div class='inline'><p>A position marking the top left of the region
+        <div class='inline'><p>A position marking the top left of the region<br />
 needing relocation (default == A1)</p>
 </div>
       
@@ -3282,7 +3286,7 @@ needing relocation (default == A1)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Saves a sheet object as an image to <!-- raw HTML omitted -->output<!-- raw HTML omitted -->.  If an error occurs, <!-- raw HTML omitted -->err<!-- raw HTML omitted --> will
+    <p>Saves a sheet object as an image to <!-- raw HTML omitted -->output<!-- raw HTML omitted -->.  If an error occurs, <!-- raw HTML omitted -->err<!-- raw HTML omitted --> will<br />
 be set.</p>
 
 
@@ -3445,7 +3449,7 @@ be set.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::Indenter";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -86,25 +88,25 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Auto-indentation interface.</p>
-<p>By default, [class<!-- raw HTML omitted -->View<!-- raw HTML omitted -->] can auto-indent as you type when
-[property<!-- raw HTML omitted -->View<!-- raw HTML omitted -->:auto-indent] is enabled. The indentation simply copies the
+<p>By default, [class<!-- raw HTML omitted -->View<!-- raw HTML omitted -->] can auto-indent as you type when<br />
+[property<!-- raw HTML omitted -->View<!-- raw HTML omitted -->:auto-indent] is enabled. The indentation simply copies the<br />
 previous lines indentation.</p>
-<p>This can be changed by implementing <code>GtkSourceIndenter</code> and setting the
+<p>This can be changed by implementing <code>GtkSourceIndenter</code> and setting the<br />
 [property<!-- raw HTML omitted -->View<!-- raw HTML omitted -->:indenter] property.</p>
-<p>Implementors of this interface should implement both
+<p>Implementors of this interface should implement both<br />
 [vfunc<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.is_trigger] and [vfunc<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.indent].</p>
-<p>[vfunc<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.is_trigger] is called upon key-press to
-determine of the key press should trigger an indentation.  The default
-implementation of the interface checks to see if the key was
+<p>[vfunc<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.is_trigger] is called upon key-press to<br />
+determine of the key press should trigger an indentation.  The default<br />
+implementation of the interface checks to see if the key was<br />
 [const<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.KEY_Return] or [const<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.KEY_KP_Enter] without %GDK_SHIFT_MASK set.</p>
-<p>[vfunc<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.indent] is called after text has been
-inserted into [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->] when
-[vfunc<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.is_trigger] returned true. The [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextIter]
+<p>[vfunc<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.indent] is called after text has been<br />
+inserted into [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->] when<br />
+[vfunc<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.is_trigger] returned true. The [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextIter]<br />
 is placed directly after the inserted character or characters.</p>
-<p>It may be beneficial to move the insertion mark using
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.select_range] depending on how the indenter changes
+<p>It may be beneficial to move the insertion mark using<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.select_range] depending on how the indenter changes<br />
 the indentation.</p>
-<p>All changes are encapsulated within a single user action so that the
+<p>All changes are encapsulated within a single user action so that the<br />
 user may undo them using standard undo/redo accelerators.</p>
 
 
@@ -175,6 +177,7 @@ user may undo them using standard undo/redo accelerators.</p>
 
       
     </ul>
+    
   
 
 
@@ -194,18 +197,18 @@ user may undo them using standard undo/redo accelerators.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function should be implemented to alter the indentation of text
+    <p>This function should be implemented to alter the indentation of text<br />
 within the view.</p>
 <p><!-- raw HTML omitted -->view<!-- raw HTML omitted --> is provided so that the indenter may retrieve settings such as indentation and tab widths.</p>
-<p><!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is the location where the indentation was requested. This typically
-is after having just inserted a newline (\n) character but can be other
+<p><!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is the location where the indentation was requested. This typically<br />
+is after having just inserted a newline (\n) character but can be other<br />
 situations such as a manually requested indentation or reformatting.</p>
-<p>See [iface<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.is_trigger] for how to trigger indentation on
+<p>See [iface<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.is_trigger] for how to trigger indentation on<br />
 various characters inserted into the buffer.</p>
-<p>The implementor of this function is expected to keep <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> valid across
-calls to the function and should contain the location of the insert mark
+<p>The implementor of this function is expected to keep <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> valid across<br />
+calls to the function and should contain the location of the insert mark<br />
 after calling this function.</p>
-<p>The default implementation for this virtual function will copy the
+<p>The default implementation for this virtual function will copy the<br />
 indentation of the previous line.</p>
 
 
@@ -275,12 +278,12 @@ indentation of the previous line.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function is used to determine if a key pressed should cause the
+    <p>This function is used to determine if a key pressed should cause the<br />
 indenter to automatically indent.</p>
-<p>The default implementation of this virtual method will check to see
-if <!-- raw HTML omitted -->keyval<!-- raw HTML omitted --> is [const<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.KEY_Return] or [const<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.KEY_KP_Enter] and <!-- raw HTML omitted -->state<!-- raw HTML omitted --> does
-not have %GDK_SHIFT_MASK set. This is to allow the user to avoid
-indentation when Shift+Return is pressed. Other indenters may want
+<p>The default implementation of this virtual method will check to see<br />
+if <!-- raw HTML omitted -->keyval<!-- raw HTML omitted --> is [const<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.KEY_Return] or [const<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.KEY_KP_Enter] and <!-- raw HTML omitted -->state<!-- raw HTML omitted --> does<br />
+not have %GDK_SHIFT_MASK set. This is to allow the user to avoid<br />
+indentation when Shift+Return is pressed. Other indenters may want<br />
 to copy this behavior to provide a consistent experience to users.</p>
 
 
@@ -363,7 +366,7 @@ to copy this behavior to provide a consistent experience to users.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if indentation should be automatically triggered;
+        <div class='inline'><p>true if indentation should be automatically triggered;<br />
 otherwise false and no indentation will be performed.</p>
 </div>
       
@@ -381,7 +384,7 @@ otherwise false and no indentation will be performed.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

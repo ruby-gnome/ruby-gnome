@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::Menu";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,19 +97,20 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GMenu</code> is a simple implementation of [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.MenuModel].
+    <p><code>GMenu</code> is a simple implementation of [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.MenuModel].<br />
 You populate a <code>GMenu</code> by adding [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.MenuItem] instances to it.</p>
-<p>There are some convenience functions to allow you to directly
-add items (avoiding [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.MenuItem]) for the common cases. To add
-a regular item, use [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Menu.insert]. To add a section, use
-[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Menu.insert_section]. To add a submenu, use
+<p>There are some convenience functions to allow you to directly<br />
+add items (avoiding [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.MenuItem]) for the common cases. To add<br />
+a regular item, use [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Menu.insert]. To add a section, use<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Menu.insert_section]. To add a submenu, use<br />
 [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Menu.insert_submenu].</p>
 
 
@@ -503,9 +505,11 @@ a regular item, use [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -560,8 +564,8 @@ a regular item, use [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convenience function for appending a normal menu item to the end of
-<!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.  Combine g_menu_item_new() and g_menu_insert_item() for a more
+    <p>Convenience function for appending a normal menu item to the end of<br />
+<!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.  Combine g_menu_item_new() and g_menu_insert_item() for a more<br />
 flexible alternative.</p>
 
 
@@ -686,8 +690,8 @@ flexible alternative.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convenience function for appending a section menu item to the end of
-<!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.  Combine g_menu_item_new_section() and g_menu_insert_item() for a
+    <p>Convenience function for appending a section menu item to the end of<br />
+<!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.  Combine g_menu_item_new_section() and g_menu_insert_item() for a<br />
 more flexible alternative.</p>
 
 
@@ -757,8 +761,8 @@ more flexible alternative.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convenience function for appending a submenu menu item to the end of
-<!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.  Combine g_menu_item_new_submenu() and g_menu_insert_item() for a
+    <p>Convenience function for appending a submenu menu item to the end of<br />
+<!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.  Combine g_menu_item_new_submenu() and g_menu_insert_item() for a<br />
 more flexible alternative.</p>
 
 
@@ -829,10 +833,10 @@ more flexible alternative.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Marks <!-- raw HTML omitted -->menu<!-- raw HTML omitted --> as frozen.</p>
-<p>After the menu is frozen, it is an error to attempt to make any
-changes to it.  In effect this means that the #GMenu API must no
+<p>After the menu is frozen, it is an error to attempt to make any<br />
+changes to it.  In effect this means that the #GMenu API must no<br />
 longer be used.</p>
-<p>This function causes g_menu_model_is_mutable() to begin returning
+<p>This function causes g_menu_model_is_mutable() to begin returning<br />
 false, which has some positive performance implications.</p>
 
 
@@ -868,8 +872,8 @@ false, which has some positive performance implications.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convenience function for inserting a normal menu item into <!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.
-Combine g_menu_item_new() and g_menu_insert_item() for a more flexible
+    <p>Convenience function for inserting a normal menu item into <!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.<br />
+Combine g_menu_item_new() and g_menu_insert_item() for a more flexible<br />
 alternative.</p>
 
 
@@ -955,17 +959,17 @@ alternative.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts <!-- raw HTML omitted -->item<!-- raw HTML omitted --> into <!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.</p>
-<p>The &quot;insertion&quot; is actually done by copying all of the attribute and
-link values of <!-- raw HTML omitted -->item<!-- raw HTML omitted --> and using them to form a new item within <!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.
-As such, <!-- raw HTML omitted -->item<!-- raw HTML omitted --> itself is not really inserted, but rather, a menu item
+<p>The &quot;insertion&quot; is actually done by copying all of the attribute and<br />
+link values of <!-- raw HTML omitted -->item<!-- raw HTML omitted --> and using them to form a new item within <!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.<br />
+As such, <!-- raw HTML omitted -->item<!-- raw HTML omitted --> itself is not really inserted, but rather, a menu item<br />
 that is exactly the same as the one presently described by <!-- raw HTML omitted -->item<!-- raw HTML omitted -->.</p>
-<p>This means that <!-- raw HTML omitted -->item<!-- raw HTML omitted --> is essentially useless after the insertion
-occurs.  Any changes you make to it are ignored unless it is inserted
+<p>This means that <!-- raw HTML omitted -->item<!-- raw HTML omitted --> is essentially useless after the insertion<br />
+occurs.  Any changes you make to it are ignored unless it is inserted<br />
 again (at which point its updated values will be copied).</p>
 <p>You should probably just free <!-- raw HTML omitted -->item<!-- raw HTML omitted --> once you're done.</p>
-<p>There are many convenience functions to take care of common cases.
-See g_menu_insert(), g_menu_insert_section() and
-g_menu_insert_submenu() as well as &quot;prepend&quot; and &quot;append&quot; variants of
+<p>There are many convenience functions to take care of common cases.<br />
+See g_menu_insert(), g_menu_insert_section() and<br />
+g_menu_insert_submenu() as well as &quot;prepend&quot; and &quot;append&quot; variants of<br />
 each of these functions.</p>
 
 
@@ -1035,8 +1039,8 @@ each of these functions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convenience function for inserting a section menu item into <!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.
-Combine g_menu_item_new_section() and g_menu_insert_item() for a more
+    <p>Convenience function for inserting a section menu item into <!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.<br />
+Combine g_menu_item_new_section() and g_menu_insert_item() for a more<br />
 flexible alternative.</p>
 
 
@@ -1121,8 +1125,8 @@ flexible alternative.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convenience function for inserting a submenu menu item into <!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.
-Combine g_menu_item_new_submenu() and g_menu_insert_item() for a more
+    <p>Convenience function for inserting a submenu menu item into <!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.<br />
+Combine g_menu_item_new_submenu() and g_menu_insert_item() for a more<br />
 flexible alternative.</p>
 
 
@@ -1207,8 +1211,8 @@ flexible alternative.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convenience function for prepending a normal menu item to the start
-of <!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.  Combine g_menu_item_new() and g_menu_insert_item() for a more
+    <p>Convenience function for prepending a normal menu item to the start<br />
+of <!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.  Combine g_menu_item_new() and g_menu_insert_item() for a more<br />
 flexible alternative.</p>
 
 
@@ -1333,8 +1337,8 @@ flexible alternative.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convenience function for prepending a section menu item to the start
-of <!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.  Combine g_menu_item_new_section() and g_menu_insert_item() for
+    <p>Convenience function for prepending a section menu item to the start<br />
+of <!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.  Combine g_menu_item_new_section() and g_menu_insert_item() for<br />
 a more flexible alternative.</p>
 
 
@@ -1404,8 +1408,8 @@ a more flexible alternative.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convenience function for prepending a submenu menu item to the start
-of <!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.  Combine g_menu_item_new_submenu() and g_menu_insert_item() for
+    <p>Convenience function for prepending a submenu menu item to the start<br />
+of <!-- raw HTML omitted -->menu<!-- raw HTML omitted -->.  Combine g_menu_item_new_submenu() and g_menu_insert_item() for<br />
 a more flexible alternative.</p>
 
 
@@ -1477,10 +1481,10 @@ a more flexible alternative.</p>
   <div class="discussion">
     <p>Removes an item from the menu.</p>
 <p><!-- raw HTML omitted -->position<!-- raw HTML omitted --> gives the index of the item to remove.</p>
-<p>It is an error if position is not in range the range from 0 to one
+<p>It is an error if position is not in range the range from 0 to one<br />
 less than the number of items in the menu.</p>
-<p>It is not possible to remove items by identity since items are added
-to the menu simply by copying their links and attributes (ie:
+<p>It is not possible to remove items by identity since items are added<br />
+to the menu simply by copying their links and attributes (ie:<br />
 identity of the item itself is not preserved).</p>
 
 
@@ -1566,7 +1570,7 @@ identity of the item itself is not preserved).</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

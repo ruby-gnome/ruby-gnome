@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::InputStream";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gio2/input-stream.rb</dd>
+    <dd>lib/gio2/input-stream.rb
+</dd>
   </dl>
   
 </div>
@@ -141,6 +143,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -633,6 +636,7 @@
 
       
     </ul>
+    
   
 
 
@@ -738,22 +742,22 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Closes the stream, releasing resources related to it.</p>
-<p>Once the stream is closed, all other operations will return %G_IO_ERROR_CLOSED.
+<p>Once the stream is closed, all other operations will return %G_IO_ERROR_CLOSED.<br />
 Closing a stream multiple times will not return an error.</p>
-<p>Streams will be automatically closed when the last reference
-is dropped, but you might want to call this function to make sure
+<p>Streams will be automatically closed when the last reference<br />
+is dropped, but you might want to call this function to make sure<br />
 resources are released as early as possible.</p>
-<p>Some streams might keep the backing store of the stream (e.g. a file descriptor)
-open after the stream is closed. See the documentation for the individual
+<p>Some streams might keep the backing store of the stream (e.g. a file descriptor)<br />
+open after the stream is closed. See the documentation for the individual<br />
 stream for details.</p>
-<p>On failure the first error that happened will be reported, but the close
-operation will finish as much as possible. A stream that failed to
-close will still return %G_IO_ERROR_CLOSED for all operations. Still, it
+<p>On failure the first error that happened will be reported, but the close<br />
+operation will finish as much as possible. A stream that failed to<br />
+close will still return %G_IO_ERROR_CLOSED for all operations. Still, it<br />
 is important to check and report the error to the user.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
-Cancelling a close will still leave the stream closed, but some streams
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.<br />
+Cancelling a close will still leave the stream closed, but some streams<br />
 can use a faster close that doesn't block to e.g. check errors.</p>
 
 
@@ -812,13 +816,13 @@ can use a faster close that doesn't block to e.g. check errors.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Requests an asynchronous closes of the stream, releasing resources related to it.
-When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.
-You can then call g_input_stream_close_finish() to get the result of the
+    <p>Requests an asynchronous closes of the stream, releasing resources related to it.<br />
+When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.<br />
+You can then call g_input_stream_close_finish() to get the result of the<br />
 operation.</p>
 <p>For behaviour details see g_input_stream_close().</p>
-<p>The asynchronous methods have a default fallback that uses threads to implement
-asynchronicity, so they are optional for inheriting classes. However, if you
+<p>The asynchronous methods have a default fallback that uses threads to implement<br />
+asynchronicity, so they are optional for inheriting classes. However, if you<br />
 override one you must override all.</p>
 
 
@@ -868,7 +872,7 @@ override one you must override all.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -1055,20 +1059,20 @@ to call when the request is satisfied</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to read <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the buffer starting at
+    <p>Tries to read <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the buffer starting at<br />
 <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->. Will block during this read.</p>
-<p>If count is zero returns zero and does nothing. A value of <!-- raw HTML omitted -->count<!-- raw HTML omitted -->
+<p>If count is zero returns zero and does nothing. A value of <!-- raw HTML omitted -->count<!-- raw HTML omitted --><br />
 larger than %G_MAXSSIZE will cause a %G_IO_ERROR_INVALID_ARGUMENT error.</p>
-<p>On success, the number of bytes read into the buffer is returned.
-It is not an error if this is not the same as the requested size, as it
-can happen e.g. near the end of a file. Zero is returned on end of file
+<p>On success, the number of bytes read into the buffer is returned.<br />
+It is not an error if this is not the same as the requested size, as it<br />
+can happen e.g. near the end of a file. Zero is returned on end of file<br />
 (or if <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is zero),  but never otherwise.</p>
-<p>The returned <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is not a nul-terminated string, it can contain nul bytes
+<p>The returned <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is not a nul-terminated string, it can contain nul bytes<br />
 at any position, and this function doesn't nul-terminate the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an
-operation was partially finished when the operation was cancelled the
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an<br />
+operation was partially finished when the operation was cancelled the<br />
 partial result will be returned, without an error.</p>
 <p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.</p>
 
@@ -1206,20 +1210,20 @@ partial result will be returned, without an error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to read <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the buffer starting at
+    <p>Tries to read <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the buffer starting at<br />
 <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->. Will block during this read.</p>
-<p>This function is similar to g_input_stream_read(), except it tries to
+<p>This function is similar to g_input_stream_read(), except it tries to<br />
 read as many bytes as requested, only stopping on an error or end of stream.</p>
-<p>On a successful read of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes, or if we reached the end of the
-stream,  true is returned, and <!-- raw HTML omitted -->bytes_read<!-- raw HTML omitted --> is set to the number of bytes
+<p>On a successful read of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes, or if we reached the end of the<br />
+stream,  true is returned, and <!-- raw HTML omitted -->bytes_read<!-- raw HTML omitted --> is set to the number of bytes<br />
 read into <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>If there is an error during the operation false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
+<p>If there is an error during the operation false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --><br />
 is set to indicate the error status.</p>
-<p>As a special exception to the normal conventions for functions that
-use #GError, if this function returns false (and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) then
-<!-- raw HTML omitted -->bytes_read<!-- raw HTML omitted --> will be set to the number of bytes that were successfully
-read before the error was encountered.  This functionality is only
-available from C.  If you need it from another language then you must
+<p>As a special exception to the normal conventions for functions that<br />
+use #GError, if this function returns false (and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) then<br />
+<!-- raw HTML omitted -->bytes_read<!-- raw HTML omitted --> will be set to the number of bytes that were successfully<br />
+read before the error was encountered.  This functionality is only<br />
+available from C.  If you need it from another language then you must<br />
 write your own loop around g_input_stream_read().</p>
 
 
@@ -1347,12 +1351,12 @@ write your own loop around g_input_stream_read().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Request an asynchronous read of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the
+    <p>Request an asynchronous read of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the<br />
 buffer starting at <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
 <p>This is the asynchronous equivalent of g_input_stream_read_all().</p>
 <p>Call g_input_stream_read_all_finish() to collect the result.</p>
-<p>Any outstanding I/O request with higher priority (lower numerical
-value) will be executed before an outstanding request with lower
+<p>Any outstanding I/O request with higher priority (lower numerical<br />
+value) will be executed before an outstanding request with lower<br />
 priority. Default priority is %G_PRIORITY_DEFAULT.</p>
 
 
@@ -1432,7 +1436,7 @@ priority. Default priority is %G_PRIORITY_DEFAULT.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -1483,13 +1487,13 @@ to call when the request is satisfied</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes an asynchronous stream read operation started with
+    <p>Finishes an asynchronous stream read operation started with<br />
 g_input_stream_read_all_async().</p>
-<p>As a special exception to the normal conventions for functions that
-use #GError, if this function returns false (and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) then
-<!-- raw HTML omitted -->bytes_read<!-- raw HTML omitted --> will be set to the number of bytes that were successfully
-read before the error was encountered.  This functionality is only
-available from C.  If you need it from another language then you must
+<p>As a special exception to the normal conventions for functions that<br />
+use #GError, if this function returns false (and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) then<br />
+<!-- raw HTML omitted -->bytes_read<!-- raw HTML omitted --> will be set to the number of bytes that were successfully<br />
+read before the error was encountered.  This functionality is only<br />
+available from C.  If you need it from another language then you must<br />
 write your own loop around g_input_stream_read_async().</p>
 
 
@@ -1563,20 +1567,20 @@ write your own loop around g_input_stream_read_async().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to read <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the buffer starting at
+    <p>Tries to read <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the buffer starting at<br />
 <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->. Will block during this read.</p>
-<p>This function is similar to g_input_stream_read(), except it tries to
+<p>This function is similar to g_input_stream_read(), except it tries to<br />
 read as many bytes as requested, only stopping on an error or end of stream.</p>
-<p>On a successful read of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes, or if we reached the end of the
-stream,  true is returned, and <!-- raw HTML omitted -->bytes_read<!-- raw HTML omitted --> is set to the number of bytes
+<p>On a successful read of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes, or if we reached the end of the<br />
+stream,  true is returned, and <!-- raw HTML omitted -->bytes_read<!-- raw HTML omitted --> is set to the number of bytes<br />
 read into <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>If there is an error during the operation false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
+<p>If there is an error during the operation false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --><br />
 is set to indicate the error status.</p>
-<p>As a special exception to the normal conventions for functions that
-use #GError, if this function returns false (and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) then
-<!-- raw HTML omitted -->bytes_read<!-- raw HTML omitted --> will be set to the number of bytes that were successfully
-read before the error was encountered.  This functionality is only
-available from C.  If you need it from another language then you must
+<p>As a special exception to the normal conventions for functions that<br />
+use #GError, if this function returns false (and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) then<br />
+<!-- raw HTML omitted -->bytes_read<!-- raw HTML omitted --> will be set to the number of bytes that were successfully<br />
+read before the error was encountered.  This functionality is only<br />
+available from C.  If you need it from another language then you must<br />
 write your own loop around g_input_stream_read().</p>
 
 
@@ -1694,24 +1698,24 @@ write your own loop around g_input_stream_read().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Request an asynchronous read of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the buffer
-starting at <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.
-You can then call g_input_stream_read_finish() to get the result of the
+    <p>Request an asynchronous read of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the buffer<br />
+starting at <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.<br />
+You can then call g_input_stream_read_finish() to get the result of the<br />
 operation.</p>
-<p>During an async request no other sync and async calls are allowed on <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->, and will
+<p>During an async request no other sync and async calls are allowed on <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->, and will<br />
 result in %G_IO_ERROR_PENDING errors.</p>
 <p>A value of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> larger than %G_MAXSSIZE will cause a %G_IO_ERROR_INVALID_ARGUMENT error.</p>
-<p>On success, the number of bytes read into the buffer will be passed to the
-callback. It is not an error if this is not the same as the requested size, as it
-can happen e.g. near the end of a file, but generally we try to read
-as many bytes as requested. Zero is returned on end of file
+<p>On success, the number of bytes read into the buffer will be passed to the<br />
+callback. It is not an error if this is not the same as the requested size, as it<br />
+can happen e.g. near the end of a file, but generally we try to read<br />
+as many bytes as requested. Zero is returned on end of file<br />
 (or if <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is zero),  but never otherwise.</p>
-<p>Any outstanding i/o request with higher priority (lower numerical value) will
-be executed before an outstanding request with lower priority. Default
+<p>Any outstanding i/o request with higher priority (lower numerical value) will<br />
+be executed before an outstanding request with lower priority. Default<br />
 priority is %G_PRIORITY_DEFAULT.</p>
-<p>The asynchronous methods have a default fallback that uses threads to implement
-asynchronicity, so they are optional for inheriting classes. However, if you
-override one you must override all.
+<p>The asynchronous methods have a default fallback that uses threads to implement<br />
+asynchronicity, so they are optional for inheriting classes. However, if you<br />
+override one you must override all.<br />
 of the request.</p>
 
 
@@ -1791,7 +1795,7 @@ of the request.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -1842,25 +1846,25 @@ to call when the request is satisfied</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like g_input_stream_read(), this tries to read <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from
-the stream in a blocking fashion. However, rather than reading into
-a user-supplied buffer, this will create a new #GBytes containing
-the data that was read. This may be easier to use from language
+    <p>Like g_input_stream_read(), this tries to read <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from<br />
+the stream in a blocking fashion. However, rather than reading into<br />
+a user-supplied buffer, this will create a new #GBytes containing<br />
+the data that was read. This may be easier to use from language<br />
 bindings.</p>
-<p>If count is zero, returns a zero-length #GBytes and does nothing. A
-value of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> larger than %G_MAXSSIZE will cause a
+<p>If count is zero, returns a zero-length #GBytes and does nothing. A<br />
+value of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> larger than %G_MAXSSIZE will cause a<br />
 %G_IO_ERROR_INVALID_ARGUMENT error.</p>
-<p>On success, a new #GBytes is returned. It is not an error if the
-size of this object is not the same as the requested size, as it
-can happen e.g. near the end of a file. A zero-length #GBytes is
-returned on end of file (or if <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is zero), but never
+<p>On success, a new #GBytes is returned. It is not an error if the<br />
+size of this object is not the same as the requested size, as it<br />
+can happen e.g. near the end of a file. A zero-length #GBytes is<br />
+returned on end of file (or if <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is zero), but never<br />
 otherwise.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an
-operation was partially finished when the operation was cancelled the
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an<br />
+operation was partially finished when the operation was cancelled the<br />
 partial result will be returned, without an error.</p>
-<p>On error nil is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.
+<p>On error nil is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.<br />
 values include 4096 and 8192.</p>
 
 
@@ -1934,21 +1938,21 @@ values include 4096 and 8192.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Request an asynchronous read of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into a
-new #GBytes. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be
-called. You can then call g_input_stream_read_bytes_finish() to get the
+    <p>Request an asynchronous read of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into a<br />
+new #GBytes. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be<br />
+called. You can then call g_input_stream_read_bytes_finish() to get the<br />
 result of the operation.</p>
-<p>During an async request no other sync and async calls are allowed
+<p>During an async request no other sync and async calls are allowed<br />
 on <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->, and will result in %G_IO_ERROR_PENDING errors.</p>
-<p>A value of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> larger than %G_MAXSSIZE will cause a
+<p>A value of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> larger than %G_MAXSSIZE will cause a<br />
 %G_IO_ERROR_INVALID_ARGUMENT error.</p>
-<p>On success, the new #GBytes will be passed to the callback. It is
-not an error if this is smaller than the requested size, as it can
-happen e.g. near the end of a file, but generally we try to read as
-many bytes as requested. Zero is returned on end of file (or if
+<p>On success, the new #GBytes will be passed to the callback. It is<br />
+not an error if this is smaller than the requested size, as it can<br />
+happen e.g. near the end of a file, but generally we try to read as<br />
+many bytes as requested. Zero is returned on end of file (or if<br />
 <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is zero), but never otherwise.</p>
-<p>Any outstanding I/O request with higher priority (lower numerical
-value) will be executed before an outstanding request with lower
+<p>Any outstanding I/O request with higher priority (lower numerical<br />
+value) will be executed before an outstanding request with lower<br />
 priority. Default priority is %G_PRIORITY_DEFAULT.</p>
 
 
@@ -2013,7 +2017,7 @@ priority. Default priority is %G_PRIORITY_DEFAULT.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -2180,20 +2184,20 @@ to call when the request is satisfied</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to read <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the buffer starting at
+    <p>Tries to read <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the buffer starting at<br />
 <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->. Will block during this read.</p>
-<p>If count is zero returns zero and does nothing. A value of <!-- raw HTML omitted -->count<!-- raw HTML omitted -->
+<p>If count is zero returns zero and does nothing. A value of <!-- raw HTML omitted -->count<!-- raw HTML omitted --><br />
 larger than %G_MAXSSIZE will cause a %G_IO_ERROR_INVALID_ARGUMENT error.</p>
-<p>On success, the number of bytes read into the buffer is returned.
-It is not an error if this is not the same as the requested size, as it
-can happen e.g. near the end of a file. Zero is returned on end of file
+<p>On success, the number of bytes read into the buffer is returned.<br />
+It is not an error if this is not the same as the requested size, as it<br />
+can happen e.g. near the end of a file. Zero is returned on end of file<br />
 (or if <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is zero),  but never otherwise.</p>
-<p>The returned <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is not a nul-terminated string, it can contain nul bytes
+<p>The returned <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is not a nul-terminated string, it can contain nul bytes<br />
 at any position, and this function doesn't nul-terminate the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an
-operation was partially finished when the operation was cancelled the
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an<br />
+operation was partially finished when the operation was cancelled the<br />
 partial result will be returned, without an error.</p>
 <p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.</p>
 
@@ -2297,8 +2301,8 @@ partial result will be returned, without an error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> to have actions pending. If the pending flag is
-already set or <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is closed, it will return false and set
+    <p>Sets <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> to have actions pending. If the pending flag is<br />
+already set or <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is closed, it will return false and set<br />
 <!-- raw HTML omitted -->error<!-- raw HTML omitted -->.</p>
 
 
@@ -2339,15 +2343,15 @@ already set or <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is close
 </h3><div class="docstring">
   <div class="discussion">
     <p>Tries to skip <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream. Will block during the operation.</p>
-<p>This is identical to g_input_stream_read(), from a behaviour standpoint,
-but the bytes that are skipped are not returned to the user. Some
+<p>This is identical to g_input_stream_read(), from a behaviour standpoint,<br />
+but the bytes that are skipped are not returned to the user. Some<br />
 streams have an implementation that is more efficient than reading the data.</p>
-<p>This function is optional for inherited classes, as the default implementation
+<p>This function is optional for inherited classes, as the default implementation<br />
 emulates it using read.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an
-operation was partially finished when the operation was cancelled the
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an<br />
+operation was partially finished when the operation was cancelled the<br />
 partial result will be returned, without an error.</p>
 
 
@@ -2421,23 +2425,23 @@ partial result will be returned, without an error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Request an asynchronous skip of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream.
-When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.
-You can then call g_input_stream_skip_finish() to get the result
+    <p>Request an asynchronous skip of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream.<br />
+When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.<br />
+You can then call g_input_stream_skip_finish() to get the result<br />
 of the operation.</p>
-<p>During an async request no other sync and async calls are allowed,
+<p>During an async request no other sync and async calls are allowed,<br />
 and will result in %G_IO_ERROR_PENDING errors.</p>
 <p>A value of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> larger than %G_MAXSSIZE will cause a %G_IO_ERROR_INVALID_ARGUMENT error.</p>
-<p>On success, the number of bytes skipped will be passed to the callback.
-It is not an error if this is not the same as the requested size, as it
-can happen e.g. near the end of a file, but generally we try to skip
-as many bytes as requested. Zero is returned on end of file
+<p>On success, the number of bytes skipped will be passed to the callback.<br />
+It is not an error if this is not the same as the requested size, as it<br />
+can happen e.g. near the end of a file, but generally we try to skip<br />
+as many bytes as requested. Zero is returned on end of file<br />
 (or if <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is zero), but never otherwise.</p>
-<p>Any outstanding i/o request with higher priority (lower numerical value)
-will be executed before an outstanding request with lower priority.
+<p>Any outstanding i/o request with higher priority (lower numerical value)<br />
+will be executed before an outstanding request with lower priority.<br />
 Default priority is %G_PRIORITY_DEFAULT.</p>
-<p>The asynchronous methods have a default fallback that uses threads to
-implement asynchronicity, so they are optional for inheriting classes.
+<p>The asynchronous methods have a default fallback that uses threads to<br />
+implement asynchronicity, so they are optional for inheriting classes.<br />
 However, if you override one, you must override all.</p>
 
 
@@ -2502,7 +2506,7 @@ However, if you override one, you must override all.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -2607,7 +2611,7 @@ to call when the request is satisfied</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

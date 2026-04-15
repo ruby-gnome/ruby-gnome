@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "PangoCairo";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/pango/cairo-loader.rb<span class="defines">,<br />
+    <dd>lib/pango/cairo-loader.rb<span class="defines">,<br>
   lib/pango.rb</span>
+
 </dd>
   </dl>
   
@@ -88,16 +90,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2017-2021  Ruby-GNOME Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -640,6 +642,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 
       
     </ul>
+    
   
 
 
@@ -659,9 +662,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves any font rendering options previously set with
+    <p>Retrieves any font rendering options previously set with<br />
 [func<!-- raw HTML omitted -->PangoCairo<!-- raw HTML omitted -->.context_set_font_options].</p>
-<p>This function does not report options that are derived from
+<p>This function does not report options that are derived from<br />
 the target surface by [func<!-- raw HTML omitted -->update_context<!-- raw HTML omitted -->].</p>
 
 
@@ -699,8 +702,8 @@ the target surface by [func<!-- raw HTML omitted -->update_context<!-- raw HTML 
       
       
         &mdash;
-        <div class='inline'><p>the font options previously set on the
-context, or nil if no options have been set. This value is
+        <div class='inline'><p>the font options previously set on the<br />
+context, or nil if no options have been set. This value is<br />
 owned by the context and must not be modified or freed.</p>
 </div>
       
@@ -760,7 +763,7 @@ owned by the context and must not be modified or freed.</p>
       
       
         &mdash;
-        <div class='inline'><p>the resolution in &quot;dots per inch&quot;. A negative value will
+        <div class='inline'><p>the resolution in &quot;dots per inch&quot;. A negative value will<br />
 be returned if no resolution has previously been set.</p>
 </div>
       
@@ -782,11 +785,11 @@ be returned if no resolution has previously been set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets callback function for context to use for rendering attributes
+    <p>Sets callback function for context to use for rendering attributes<br />
 of type %PANGO_ATTR_SHAPE.</p>
 <p>See <code>PangoCairoShapeRendererFunc</code> for details.</p>
-<p>Retrieves callback function and associated user data for rendering
-attributes of type %PANGO_ATTR_SHAPE as set by
+<p>Retrieves callback function and associated user data for rendering<br />
+attributes of type %PANGO_ATTR_SHAPE as set by<br />
 [func<!-- raw HTML omitted -->PangoCairo<!-- raw HTML omitted -->.context_set_shape_renderer], if any.</p>
 
 
@@ -839,8 +842,8 @@ attributes of type %PANGO_ATTR_SHAPE as set by
       
       
         &mdash;
-        <div class='inline'><p>the shape rendering callback
-previously set on the context, or nil if no shape rendering callback
+        <div class='inline'><p>the shape rendering callback<br />
+previously set on the context, or nil if no shape rendering callback<br />
 have been set.</p>
 </div>
       
@@ -863,7 +866,7 @@ have been set.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the font options used when rendering text with this context.</p>
-<p>These options override any options that [func<!-- raw HTML omitted -->update_context<!-- raw HTML omitted -->]
+<p>These options override any options that [func<!-- raw HTML omitted -->update_context<!-- raw HTML omitted -->]<br />
 derives from the target surface.</p>
 
 
@@ -898,7 +901,7 @@ derives from the target surface.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>cairo_font_options_t</code>, or nil to unset
+        <div class='inline'><p>a <code>cairo_font_options_t</code>, or nil to unset<br />
 any previously set options. A copy is made.</p>
 </div>
       
@@ -935,8 +938,8 @@ any previously set options. A copy is made.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the resolution for the context.</p>
-<p>This is a scale factor between points specified in a <code>PangoFontDescription</code>
-and Cairo units. The default value is 96, meaning that a 10 point font will
+<p>This is a scale factor between points specified in a <code>PangoFontDescription</code><br />
+and Cairo units. The default value is 96, meaning that a 10 point font will<br />
 be 13 units high. (10 * 96. / 72. = 13.3).</p>
 
 
@@ -971,8 +974,8 @@ be 13 units high. (10 * 96. / 72. = 13.3).</p>
       
       
         &mdash;
-        <div class='inline'><p>the resolution in &quot;dots per inch&quot;. (Physical inches aren't actually
-involved; the terminology is conventional.) A 0 or negative value
+        <div class='inline'><p>the resolution in &quot;dots per inch&quot;. (Physical inches aren't actually<br />
+involved; the terminology is conventional.) A 0 or negative value<br />
 means to use the resolution from the font map.</p>
 </div>
       
@@ -1008,7 +1011,7 @@ means to use the resolution from the font map.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets callback function for context to use for rendering attributes
+    <p>Sets callback function for context to use for rendering attributes<br />
 of type %PANGO_ATTR_SHAPE.</p>
 <p>See <code>PangoCairoShapeRendererFunc</code> for details.</p>
 
@@ -1044,7 +1047,7 @@ of type %PANGO_ATTR_SHAPE.</p>
       
       
         &mdash;
-        <div class='inline'><p>Callback function for rendering attributes of
+        <div class='inline'><p>Callback function for rendering attributes of<br />
 type %PANGO_ATTR_SHAPE, or nil to disable shape rendering.</p>
 </div>
       
@@ -1075,7 +1078,7 @@ type %PANGO_ATTR_SHAPE, or nil to disable shape rendering.</p>
       
       
         &mdash;
-        <div class='inline'><p>Callback that will be called when the
+        <div class='inline'><p>Callback that will be called when the<br />
 context is freed to release <!-- raw HTML omitted -->data<!-- raw HTML omitted --></p>
 </div>
       
@@ -1111,13 +1114,13 @@ context is freed to release <!-- raw HTML omitted -->data<!-- raw HTML omitted -
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a context object set up to match the current transformation
+    <p>Creates a context object set up to match the current transformation<br />
 and target surface of the Cairo context.</p>
-<p>This context can then be
+<p>This context can then be<br />
 used to create a layout using [ctor<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.new].</p>
-<p>This function is a convenience function that creates a context using
-the default font map, then updates it to <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->. If you just need to
-create a layout for use with <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> and do not need to access <code>PangoContext</code>
+<p>This function is a convenience function that creates a context using<br />
+the default font map, then updates it to <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->. If you just need to<br />
+create a layout for use with <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> and do not need to access <code>PangoContext</code><br />
 directly, you can use [func<!-- raw HTML omitted -->create_layout<!-- raw HTML omitted -->] instead.</p>
 
 
@@ -1176,15 +1179,15 @@ directly, you can use [func<!-- raw HTML omitted -->create_layout<!-- raw HTML o
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a layout object set up to match the current transformation
+    <p>Creates a layout object set up to match the current transformation<br />
 and target surface of the Cairo context.</p>
-<p>This layout can then be used for text measurement with functions
-like [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_size] or drawing with functions like
-[func<!-- raw HTML omitted -->show_layout<!-- raw HTML omitted -->]. If you change the transformation or target
+<p>This layout can then be used for text measurement with functions<br />
+like [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.get_size] or drawing with functions like<br />
+[func<!-- raw HTML omitted -->show_layout<!-- raw HTML omitted -->]. If you change the transformation or target<br />
 surface for <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->, you need to call [func<!-- raw HTML omitted -->update_layout<!-- raw HTML omitted -->].</p>
-<p>This function is the most convenient way to use Cairo with Pango,
-however it is slightly inefficient since it creates a separate
-<code>PangoContext</code> object for each layout. This might matter in an
+<p>This function is the most convenient way to use Cairo with Pango,<br />
+however it is slightly inefficient since it creates a separate<br />
+<code>PangoContext</code> object for each layout. This might matter in an<br />
 application that was laying out large amounts of text.</p>
 
 
@@ -1243,10 +1246,10 @@ application that was laying out large amounts of text.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Add a squiggly line to the current path in the specified cairo context that
-approximately covers the given rectangle in the style of an underline used
+    <p>Add a squiggly line to the current path in the specified cairo context that<br />
+approximately covers the given rectangle in the style of an underline used<br />
 to indicate a spelling error.</p>
-<p>The width of the underline is rounded to an integer number of up/down
+<p>The width of the underline is rounded to an integer number of up/down<br />
 segments and the resulting rectangle is centered in the original rectangle.</p>
 
 
@@ -1362,16 +1365,16 @@ segments and the resulting rectangle is centered in the original rectangle.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets a default <code>PangoCairoFontMap</code> to use with Cairo.</p>
-<p>Note that the type of the returned object will depend on the
-particular font backend Cairo was compiled to use; you generally
-should only use the <code>PangoFontMap</code> and <code>PangoCairoFontMap</code>
+<p>Note that the type of the returned object will depend on the<br />
+particular font backend Cairo was compiled to use; you generally<br />
+should only use the <code>PangoFontMap</code> and <code>PangoCairoFontMap</code><br />
 interfaces on the returned object.</p>
-<p>The default Cairo fontmap can be changed by using
-[method<!-- raw HTML omitted -->PangoCairo<!-- raw HTML omitted -->.FontMap.set_default]. This can be used to
-change the Cairo font backend that the default fontmap uses
+<p>The default Cairo fontmap can be changed by using<br />
+[method<!-- raw HTML omitted -->PangoCairo<!-- raw HTML omitted -->.FontMap.set_default]. This can be used to<br />
+change the Cairo font backend that the default fontmap uses<br />
 for example.</p>
-<p>Note that since Pango 1.32.6, the default fontmap is per-thread.
-Each thread gets its own default fontmap. In this way, PangoCairo
+<p>Note that since Pango 1.32.6, the default fontmap is per-thread.<br />
+Each thread gets its own default fontmap. In this way, PangoCairo<br />
 can be used safely from multiple threads.</p>
 
 
@@ -1390,8 +1393,8 @@ can be used safely from multiple threads.</p>
       
       
         &mdash;
-        <div class='inline'><p>the default PangoCairo fontmap
-for the current thread. This object is owned by Pango and must
+        <div class='inline'><p>the default PangoCairo fontmap<br />
+for the current thread. This object is owned by Pango and must<br />
 not be freed.</p>
 </div>
       
@@ -1414,19 +1417,19 @@ not be freed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>PangoCairoFontMap</code> object.</p>
-<p>A fontmap is used to cache information about available fonts,
-and holds certain global parameters such as the resolution.
-In most cases, you can use `func<!-- raw HTML omitted -->PangoCairo<!-- raw HTML omitted -->.font_map_get_default]
+<p>A fontmap is used to cache information about available fonts,<br />
+and holds certain global parameters such as the resolution.<br />
+In most cases, you can use `func<!-- raw HTML omitted -->PangoCairo<!-- raw HTML omitted -->.font_map_get_default]<br />
 instead.</p>
-<p>Note that the type of the returned object will depend
-on the particular font backend Cairo was compiled to use;
-You generally should only use the <code>PangoFontMap</code> and
+<p>Note that the type of the returned object will depend<br />
+on the particular font backend Cairo was compiled to use;<br />
+You generally should only use the <code>PangoFontMap</code> and<br />
 <code>PangoCairoFontMap</code> interfaces on the returned object.</p>
-<p>You can override the type of backend returned by using an
-environment variable %PANGOCAIRO_BACKEND. Supported types,
-based on your build, are fc (fontconfig), win32, and coretext.
-If requested type is not available, NULL is returned. Ie.
-this is only useful for testing, when at least two backends
+<p>You can override the type of backend returned by using an<br />
+environment variable %PANGOCAIRO_BACKEND. Supported types,<br />
+based on your build, are fc (fontconfig), win32, and coretext.<br />
+If requested type is not available, NULL is returned. Ie.<br />
+this is only useful for testing, when at least two backends<br />
 are compiled in.</p>
 
 
@@ -1445,7 +1448,7 @@ are compiled in.</p>
       
       
         &mdash;
-        <div class='inline'><p>the newly allocated <code>PangoFontMap</code>,
+        <div class='inline'><p>the newly allocated <code>PangoFontMap</code>,<br />
 which should be freed with g_object_unref().</p>
 </div>
       
@@ -1467,9 +1470,9 @@ which should be freed with g_object_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>PangoCairoFontMap</code> object of the type suitable
+    <p>Creates a new <code>PangoCairoFontMap</code> object of the type suitable<br />
 to be used with cairo font backend of type <!-- raw HTML omitted -->fonttype<!-- raw HTML omitted -->.</p>
-<p>In most cases one should simply use [func<!-- raw HTML omitted -->PangoCairo<!-- raw HTML omitted -->.FontMap.new], or
+<p>In most cases one should simply use [func<!-- raw HTML omitted -->PangoCairo<!-- raw HTML omitted -->.FontMap.new], or<br />
 in fact in most of those cases, just use [func<!-- raw HTML omitted -->PangoCairo<!-- raw HTML omitted -->.FontMap.get_default].</p>
 
 
@@ -1507,9 +1510,9 @@ in fact in most of those cases, just use [func<!-- raw HTML omitted -->PangoCair
       
       
         &mdash;
-        <div class='inline'><p>the newly allocated
-<code>PangoFontMap</code> of suitable type which should be freed with
-g_object_unref(), or nil if the requested cairo font backend
+        <div class='inline'><p>the newly allocated<br />
+<code>PangoFontMap</code> of suitable type which should be freed with<br />
+g_object_unref(), or nil if the requested cairo font backend<br />
 is not supported / compiled in.</p>
 </div>
       
@@ -1531,9 +1534,9 @@ is not supported / compiled in.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds the glyphs in <!-- raw HTML omitted -->glyphs<!-- raw HTML omitted --> to the current path in the specified
+    <p>Adds the glyphs in <!-- raw HTML omitted -->glyphs<!-- raw HTML omitted --> to the current path in the specified<br />
 cairo context.</p>
-<p>The origin of the glyphs (the left edge of the baseline)
+<p>The origin of the glyphs (the left edge of the baseline)<br />
 will be at the current point of the cairo context.</p>
 
 
@@ -1618,9 +1621,9 @@ will be at the current point of the cairo context.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds the text in <code>PangoLayoutLine</code> to the current path in the
+    <p>Adds the text in <code>PangoLayoutLine</code> to the current path in the<br />
 specified cairo context.</p>
-<p>The origin of the glyphs (the left edge of the line) will be
+<p>The origin of the glyphs (the left edge of the line) will be<br />
 at the current point of the cairo context.</p>
 
 
@@ -1690,9 +1693,9 @@ at the current point of the cairo context.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds the text in a <code>PangoLayout</code> to the current path in the
+    <p>Adds the text in a <code>PangoLayout</code> to the current path in the<br />
 specified cairo context.</p>
-<p>The top-left corner of the <code>PangoLayout</code> will be at the
+<p>The top-left corner of the <code>PangoLayout</code> will be at the<br />
 current point of the cairo context.</p>
 
 
@@ -1762,11 +1765,11 @@ current point of the cairo context.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Draw a squiggly line in the specified cairo context that approximately
-covers the given rectangle in the style of an underline used to indicate a
+    <p>Draw a squiggly line in the specified cairo context that approximately<br />
+covers the given rectangle in the style of an underline used to indicate a<br />
 spelling error.</p>
-<p>The width of the underline is rounded to an integer
-number of up/down segments and the resulting rectangle is centered in the
+<p>The width of the underline is rounded to an integer<br />
+number of up/down segments and the resulting rectangle is centered in the<br />
 original rectangle.</p>
 
 
@@ -1882,12 +1885,12 @@ original rectangle.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Draws the glyphs in <!-- raw HTML omitted -->glyph_item<!-- raw HTML omitted --> in the specified cairo context,</p>
-<p>embedding the text associated with the glyphs in the output if the
-output format supports it (PDF for example), otherwise it acts
+<p>embedding the text associated with the glyphs in the output if the<br />
+output format supports it (PDF for example), otherwise it acts<br />
 similar to [func<!-- raw HTML omitted -->show_glyph_string<!-- raw HTML omitted -->].</p>
-<p>The origin of the glyphs (the left edge of the baseline) will
+<p>The origin of the glyphs (the left edge of the baseline) will<br />
 be drawn at the current point of the cairo context.</p>
-<p>Note that <!-- raw HTML omitted -->text<!-- raw HTML omitted --> is the start of the text for layout, which is then
+<p>Note that <!-- raw HTML omitted -->text<!-- raw HTML omitted --> is the start of the text for layout, which is then<br />
 indexed by <code>glyph_item-&gt;item-&gt;offset</code>.</p>
 
 
@@ -1973,7 +1976,7 @@ indexed by <code>glyph_item-&gt;item-&gt;offset</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Draws the glyphs in <!-- raw HTML omitted -->glyphs<!-- raw HTML omitted --> in the specified cairo context.</p>
-<p>The origin of the glyphs (the left edge of the baseline) will
+<p>The origin of the glyphs (the left edge of the baseline) will<br />
 be drawn at the current point of the cairo context.</p>
 
 
@@ -2059,7 +2062,7 @@ be drawn at the current point of the cairo context.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Draws a <code>PangoLayout</code> in the specified cairo context.</p>
-<p>The top-left corner of the <code>PangoLayout</code> will be drawn
+<p>The top-left corner of the <code>PangoLayout</code> will be drawn<br />
 at the current point of the cairo context.</p>
 
 
@@ -2130,7 +2133,7 @@ at the current point of the cairo context.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Draws a <code>PangoLayoutLine</code> in the specified cairo context.</p>
-<p>The origin of the glyphs (the left edge of the line) will
+<p>The origin of the glyphs (the left edge of the line) will<br />
 be drawn at the current point of the cairo context.</p>
 
 
@@ -2200,10 +2203,10 @@ be drawn at the current point of the cairo context.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Updates a <code>PangoContext</code> previously created for use with Cairo to
-match the current transformation and target surface of a Cairo
+    <p>Updates a <code>PangoContext</code> previously created for use with Cairo to<br />
+match the current transformation and target surface of a Cairo<br />
 context.</p>
-<p>If any layouts have been created for the context, it's necessary
+<p>If any layouts have been created for the context, it's necessary<br />
 to call [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.context_changed] on those layouts.</p>
 
 
@@ -2273,8 +2276,8 @@ to call [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout.co
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Updates the private <code>PangoContext</code> of a <code>PangoLayout</code> created with
-[func<!-- raw HTML omitted -->create_layout<!-- raw HTML omitted -->] to match the current transformation and target
+    <p>Updates the private <code>PangoContext</code> of a <code>PangoLayout</code> created with<br />
+[func<!-- raw HTML omitted -->create_layout<!-- raw HTML omitted -->] to match the current transformation and target<br />
 surface of a Cairo context.</p>
 
 
@@ -2340,7 +2343,7 @@ surface of a Cairo context.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

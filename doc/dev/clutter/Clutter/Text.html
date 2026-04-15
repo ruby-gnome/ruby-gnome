@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Text";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/clutter/text.rb</dd>
+    <dd>lib/clutter/text.rb
+</dd>
   </dl>
   
 </div>
@@ -2132,9 +2134,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -2160,9 +2164,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Clutter::Text actor, using <!-- raw HTML omitted -->font_name<!-- raw HTML omitted --> as the font
+    <p>Creates a new Clutter::Text actor, using <!-- raw HTML omitted -->font_name<!-- raw HTML omitted --> as the font<br />
 description; <!-- raw HTML omitted -->text<!-- raw HTML omitted --> will be used to set the contents of the actor.</p>
-<p>This function is equivalent to calling clutter_text_new(),
+<p>This function is equivalent to calling clutter_text_new(),<br />
 clutter_text_set_font_name(), and clutter_text_set_text().</p>
 
 
@@ -2371,11 +2375,11 @@ clutter_text_set_font_name(), and clutter_text_set_text().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Emits the Clutter::Text::activate signal, if <!-- raw HTML omitted -->self<!-- raw HTML omitted --> has been set
+    <p>Emits the Clutter::Text::activate signal, if <!-- raw HTML omitted -->self<!-- raw HTML omitted --> has been set<br />
 as activatable using clutter_text_set_activatable().</p>
-<p>This function can be used to emit the ::activate signal inside
-a Clutter::Actor::captured-event or #ClutterActor::key-press-event
-signal handlers before the default signal handler for the
+<p>This function can be used to emit the ::activate signal inside<br />
+a Clutter::Actor::captured-event or #ClutterActor::key-press-event<br />
+signal handlers before the default signal handler for the<br />
 Clutter::Text is invoked.</p>
 
 
@@ -2394,7 +2398,7 @@ Clutter::Text is invoked.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the ::activate signal has been emitted,
+        <div class='inline'><p>true if the ::activate signal has been emitted,<br />
 and false otherwise</p>
 </div>
       
@@ -2416,7 +2420,7 @@ and false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A list of Pango::StyleAttribute<!-- raw HTML omitted -->s to be applied to the
+    <p>A list of Pango::StyleAttribute<!-- raw HTML omitted -->s to be applied to the<br />
 contents of the Clutter::Text actor.</p>
 
 
@@ -2456,7 +2460,7 @@ contents of the Clutter::Text actor.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A list of Pango::StyleAttribute<!-- raw HTML omitted -->s to be applied to the
+    <p>A list of Pango::StyleAttribute<!-- raw HTML omitted -->s to be applied to the<br />
 contents of the Clutter::Text actor.</p>
 
 
@@ -3129,7 +3133,7 @@ contents of the Clutter::Text actor.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The size of the cursor, in pixels. If set to -1 the size used will
+    <p>The size of the cursor, in pixels. If set to -1 the size used will<br />
 be the default cursor size of 2 pixels.</p>
 
 
@@ -3169,7 +3173,7 @@ be the default cursor size of 2 pixels.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The size of the cursor, in pixels. If set to -1 the size used will
+    <p>The size of the cursor, in pixels. If set to -1 the size used will<br />
 be the default cursor size of 2 pixels.</p>
 
 
@@ -3277,8 +3281,8 @@ be the default cursor size of 2 pixels.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the input cursor is visible or not.</p>
-<p>The cursor will only be visible if this property and either
-the Clutter::Text:editable or the #ClutterText:selectable properties
+<p>The cursor will only be visible if this property and either<br />
+the Clutter::Text:editable or the #ClutterText:selectable properties<br />
 are set to true.</p>
 
 
@@ -3347,8 +3351,8 @@ are set to true.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the input cursor is visible or not.</p>
-<p>The cursor will only be visible if this property and either
-the Clutter::Text:editable or the #ClutterText:selectable properties
+<p>The cursor will only be visible if this property and either<br />
+the Clutter::Text:editable or the #ClutterText:selectable properties<br />
 are set to true.</p>
 
 
@@ -3388,9 +3392,9 @@ are set to true.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Deletes <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> inside a Clutter::Text actor, starting from the
+    <p>Deletes <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> inside a Clutter::Text actor, starting from the<br />
 current cursor position.</p>
-<p>Somewhat awkwardly, the cursor position is decremented by the same
+<p>Somewhat awkwardly, the cursor position is decremented by the same<br />
 number of characters you've deleted.</p>
 
 
@@ -3464,7 +3468,7 @@ number of characters you've deleted.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if text was deleted or if the text actor
+        <div class='inline'><p>true if text was deleted or if the text actor<br />
 is empty, and false otherwise</p>
 </div>
       
@@ -3486,9 +3490,9 @@ is empty, and false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Deletes the text inside a Clutter::Text actor between <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted -->
+    <p>Deletes the text inside a Clutter::Text actor between <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --><br />
 and <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->.</p>
-<p>The starting and ending positions are expressed in characters,
+<p>The starting and ending positions are expressed in characters,<br />
 not in bytes.</p>
 
 
@@ -3810,7 +3814,7 @@ not in bytes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The Pango::FontDescription that should be used by the #ClutterText</p>
-<p>If you have a string describing the font then you should look at
+<p>If you have a string describing the font then you should look at<br />
 Clutter::Text:font-name instead</p>
 
 
@@ -3851,7 +3855,7 @@ Clutter::Text:font-name instead</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The Pango::FontDescription that should be used by the #ClutterText</p>
-<p>If you have a string describing the font then you should look at
+<p>If you have a string describing the font then you should look at<br />
 Clutter::Text:font-name instead</p>
 
 
@@ -3919,7 +3923,7 @@ Clutter::Text:font-name instead</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The font to be used by the Clutter::Text, as a string
+    <p>The font to be used by the Clutter::Text, as a string<br />
 that can be parsed by pango_font_description_from_string().</p>
 <p>If set to nil, the default system font will be used instead.</p>
 
@@ -3960,7 +3964,7 @@ that can be parsed by pango_font_description_from_string().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The font to be used by the Clutter::Text, as a string
+    <p>The font to be used by the Clutter::Text, as a string<br />
 that can be parsed by pango_font_description_from_string().</p>
 <p>If set to nil, the default system font will be used instead.</p>
 
@@ -4029,7 +4033,7 @@ that can be parsed by pango_font_description_from_string().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the contents of the Clutter::Text actor between
+    <p>Retrieves the contents of the Clutter::Text actor between<br />
 <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->.</p>
 <p>The positions are specified in characters, not in bytes.</p>
 
@@ -4083,8 +4087,8 @@ that can be parsed by pango_font_description_from_string().</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string with the contents of
-the text actor between the specified positions. Use g_free()
+        <div class='inline'><p>a newly allocated string with the contents of<br />
+the text actor between the specified positions. Use g_free()<br />
 to free the resources when done</p>
 </div>
       
@@ -4215,7 +4219,7 @@ to free the resources when done</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the rectangle that contains the cursor.</p>
-<p>The coordinates of the rectangle's origin are in actor-relative
+<p>The coordinates of the rectangle's origin are in actor-relative<br />
 coordinates.</p>
 
 
@@ -4270,7 +4274,7 @@ coordinates.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the coordinates where the Clutter::Text will draw the #PangoLayout
+    <p>Obtains the coordinates where the Clutter::Text will draw the #PangoLayout<br />
 representing the text.</p>
 
 
@@ -4449,7 +4453,7 @@ representing the text.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts <!-- raw HTML omitted -->text<!-- raw HTML omitted --> into a Clutter::Actor at the given position.</p>
-<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is a negative number, the text will be appended
+<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is a negative number, the text will be appended<br />
 at the end of the current contents of the Clutter::Text.</p>
 <p>The position is expressed in characters, not in bytes.</p>
 
@@ -4520,7 +4524,7 @@ at the end of the current contents of the Clutter::Text.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts <!-- raw HTML omitted -->wc<!-- raw HTML omitted --> at the current cursor position of a
+    <p>Inserts <!-- raw HTML omitted -->wc<!-- raw HTML omitted --> at the current cursor position of a<br />
 Clutter::Text actor.</p>
 
 
@@ -4575,7 +4579,7 @@ Clutter::Text actor.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves whether the Clutter::Text actor should justify its contents
+    <p>Retrieves whether the Clutter::Text actor should justify its contents<br />
 on both margins.</p>
 
 
@@ -4615,7 +4619,7 @@ on both margins.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the contents of the Clutter::Text should be justified
+    <p>Whether the contents of the Clutter::Text should be justified<br />
 on both margins.</p>
 
 
@@ -4683,7 +4687,7 @@ on both margins.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the contents of the Clutter::Text should be justified
+    <p>Whether the contents of the Clutter::Text should be justified<br />
 on both margins.</p>
 
 
@@ -4741,7 +4745,7 @@ on both margins.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Pango::Layout. The returned object is owned by
+        <div class='inline'><p>a Pango::Layout. The returned object is owned by<br />
 the Clutter::Text actor and should not be modified or freed</p>
 </div>
       
@@ -4763,7 +4767,7 @@ the Clutter::Text actor and should not be modified or freed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The preferred alignment for the text. This property controls
+    <p>The preferred alignment for the text. This property controls<br />
 the alignment of multi-line paragraphs.</p>
 
 
@@ -4803,7 +4807,7 @@ the alignment of multi-line paragraphs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The preferred alignment for the text. This property controls
+    <p>The preferred alignment for the text. This property controls<br />
 the alignment of multi-line paragraphs.</p>
 
 
@@ -4889,7 +4893,7 @@ the alignment of multi-line paragraphs.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the Clutter::Text actor should wrap
+        <div class='inline'><p>true if the Clutter::Text actor should wrap<br />
 its contents</p>
 </div>
       
@@ -4911,8 +4915,8 @@ its contents</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether to wrap the lines of Clutter::Text:text if the contents
-exceed the available allocation. The wrapping strategy is
+    <p>Whether to wrap the lines of Clutter::Text:text if the contents<br />
+exceed the available allocation. The wrapping strategy is<br />
 controlled by the Clutter::Text:line-wrap-mode property.</p>
 
 
@@ -4980,8 +4984,8 @@ controlled by the Clutter::Text:line-wrap-mode property.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether to wrap the lines of Clutter::Text:text if the contents
-exceed the available allocation. The wrapping strategy is
+    <p>Whether to wrap the lines of Clutter::Text:text if the contents<br />
+exceed the available allocation. The wrapping strategy is<br />
 controlled by the Clutter::Text:line-wrap-mode property.</p>
 
 
@@ -5021,7 +5025,7 @@ controlled by the Clutter::Text:line-wrap-mode property.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If Clutter::Text:line-wrap is set to true, this property will
+    <p>If Clutter::Text:line-wrap is set to true, this property will<br />
 control how the text is wrapped.</p>
 
 
@@ -5061,7 +5065,7 @@ control how the text is wrapped.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If Clutter::Text:line-wrap is set to true, this property will
+    <p>If Clutter::Text:line-wrap is set to true, this property will<br />
 control how the text is wrapped.</p>
 
 
@@ -5130,12 +5134,12 @@ control how the text is wrapped.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->markup<!-- raw HTML omitted --> as the contents of a Clutter::Text.</p>
-<p>This is a convenience function for setting a string containing
+<p>This is a convenience function for setting a string containing<br />
 Pango markup, and it is logically equivalent to:</p>
-<p>|[
-/* the order is important */
-clutter_text_set_text (CLUTTER_TEXT (actor), markup);
-clutter_text_set_use_markup (CLUTTER_TEXT (actor), TRUE);
+<p>|[<br />
+/* the order is important */<br />
+clutter_text_set_text (CLUTTER_TEXT (actor), markup);<br />
+clutter_text_set_use_markup (CLUTTER_TEXT (actor), TRUE);<br />
 ]|</p>
 
 
@@ -5155,7 +5159,7 @@ clutter_text_set_use_markup (CLUTTER_TEXT (actor), TRUE);
       
       
         &mdash;
-        <div class='inline'><p>a string containing Pango markup.
+        <div class='inline'><p>a string containing Pango markup.<br />
 Passing nil is the same as passing &quot;&quot; (the empty string)</p>
 </div>
       
@@ -5297,7 +5301,7 @@ Passing nil is the same as passing &quot;&quot; (the empty string)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If non-zero, the character that should be used in place of
+    <p>If non-zero, the character that should be used in place of<br />
 the actual text in a password text actor.</p>
 
 
@@ -5337,7 +5341,7 @@ the actual text in a password text actor.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If non-zero, the character that should be used in place of
+    <p>If non-zero, the character that should be used in place of<br />
 the actual text in a password text actor.</p>
 
 
@@ -5653,9 +5657,9 @@ the actual text in a password text actor.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether it is possible to select text, either using the pointer
+    <p>Whether it is possible to select text, either using the pointer<br />
 or the keyboard.</p>
-<p>This property depends on the Clutter::Actor:reactive property being
+<p>This property depends on the Clutter::Actor:reactive property being<br />
 set to true.</p>
 
 
@@ -5723,9 +5727,9 @@ set to true.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether it is possible to select text, either using the pointer
+    <p>Whether it is possible to select text, either using the pointer<br />
 or the keyboard.</p>
-<p>This property depends on the Clutter::Actor:reactive property being
+<p>This property depends on the Clutter::Actor:reactive property being<br />
 set to true.</p>
 
 
@@ -5995,8 +5999,8 @@ set to true.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string containing the currently
-selected text, or nil. Use g_free() to free the returned
+        <div class='inline'><p>a newly allocated string containing the currently<br />
+selected text, or nil. Use g_free() to free the returned<br />
 string.</p>
 </div>
       
@@ -6336,11 +6340,11 @@ string.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets, or unsets, the pre-edit string. This function is useful
-for input methods to display a string (with eventual specific
-Pango attributes) before it is entered inside the Clutter::Text
+    <p>Sets, or unsets, the pre-edit string. This function is useful<br />
+for input methods to display a string (with eventual specific<br />
+Pango attributes) before it is entered inside the Clutter::Text<br />
 buffer.</p>
-<p>The preedit string and attributes are ignored if the Clutter::Text
+<p>The preedit string and attributes are ignored if the Clutter::Text<br />
 actor is not editable.</p>
 <p>This function should not be used by applications</p>
 
@@ -6427,7 +6431,7 @@ actor is not editable.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Selects the region of text between <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->.</p>
-<p>This function changes the position of the cursor to match
+<p>This function changes the position of the cursor to match<br />
 <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> and the selection bound to match <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->.</p>
 
 
@@ -6536,13 +6540,13 @@ actor is not editable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::Text actor should be in single line mode
-or not. A single line Clutter::Text actor will only contain a
-single line of text, scrolling it in case its length is bigger
+    <p>Whether the Clutter::Text actor should be in single line mode<br />
+or not. A single line Clutter::Text actor will only contain a<br />
+single line of text, scrolling it in case its length is bigger<br />
 than the allocated size.</p>
-<p>Setting this property will also set the Clutter::Text:activatable
+<p>Setting this property will also set the Clutter::Text:activatable<br />
 property as a side-effect.</p>
-<p>The Clutter::Text:single-line-mode property is used only if the
+<p>The Clutter::Text:single-line-mode property is used only if the<br />
 Clutter::Text:editable property is set to true.</p>
 
 
@@ -6610,13 +6614,13 @@ Clutter::Text:editable property is set to true.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::Text actor should be in single line mode
-or not. A single line Clutter::Text actor will only contain a
-single line of text, scrolling it in case its length is bigger
+    <p>Whether the Clutter::Text actor should be in single line mode<br />
+or not. A single line Clutter::Text actor will only contain a<br />
+single line of text, scrolling it in case its length is bigger<br />
 than the allocated size.</p>
-<p>Setting this property will also set the Clutter::Text:activatable
+<p>Setting this property will also set the Clutter::Text:activatable<br />
 property as a side-effect.</p>
-<p>The Clutter::Text:single-line-mode property is used only if the
+<p>The Clutter::Text:single-line-mode property is used only if the<br />
 Clutter::Text:editable property is set to true.</p>
 
 
@@ -6762,7 +6766,7 @@ Clutter::Text:editable property is set to true.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves whether the contents of the Clutter::Text actor should be
+    <p>Retrieves whether the contents of the Clutter::Text actor should be<br />
 parsed for the Pango text markup.</p>
 
 
@@ -6803,11 +6807,11 @@ parsed for the Pango text markup.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the text includes Pango markup.</p>
-<p>For more informations about the Pango markup format, see
+<p>For more informations about the Pango markup format, see<br />
 pango_layout_set_markup() in the Pango documentation.</p>
-<p>It is not possible to round-trip this property between
-true and false. Once a string with markup has been set on
-a Clutter::Text actor with :use-markup set to true, the markup
+<p>It is not possible to round-trip this property between<br />
+true and false. Once a string with markup has been set on<br />
+a Clutter::Text actor with :use-markup set to true, the markup<br />
 is stripped from the string.</p>
 
 
@@ -6876,11 +6880,11 @@ is stripped from the string.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the text includes Pango markup.</p>
-<p>For more informations about the Pango markup format, see
+<p>For more informations about the Pango markup format, see<br />
 pango_layout_set_markup() in the Pango documentation.</p>
-<p>It is not possible to round-trip this property between
-true and false. Once a string with markup has been set on
-a Clutter::Text actor with :use-markup set to true, the markup
+<p>It is not possible to round-trip this property between<br />
+true and false. Once a string with markup has been set on<br />
+a Clutter::Text actor with :use-markup set to true, the markup<br />
 is stripped from the string.</p>
 
 
@@ -6916,7 +6920,7 @@ is stripped from the string.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

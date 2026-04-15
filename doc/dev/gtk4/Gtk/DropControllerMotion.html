@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::DropControllerMotion";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -326,9 +328,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -353,7 +357,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new event controller that will handle pointer motion
+    <p>Creates a new event controller that will handle pointer motion<br />
 events during drag and drop.</p>
 
 
@@ -383,7 +387,7 @@ events during drag and drop.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns if a Drag-and-Drop operation is within the widget
+    <p>Returns if a Drag-and-Drop operation is within the widget<br />
 <!-- raw HTML omitted -->self<!-- raw HTML omitted --> or one of its children.</p>
 
 
@@ -423,11 +427,11 @@ events during drag and drop.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the pointer of a Drag-and-Drop operation is in
+    <p>Whether the pointer of a Drag-and-Drop operation is in<br />
 the controller's widget or a descendant.</p>
 <p>See also [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion:is-pointer].</p>
-<p>When handling crossing events, this property is updated
-before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::enter], but after
+<p>When handling crossing events, this property is updated<br />
+before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::enter], but after<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::leave] is emitted.</p>
 
 
@@ -495,11 +499,11 @@ before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControll
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the pointer of a Drag-and-Drop operation is in
+    <p>Whether the pointer of a Drag-and-Drop operation is in<br />
 the controller's widget or a descendant.</p>
 <p>See also [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion:is-pointer].</p>
-<p>When handling crossing events, this property is updated
-before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::enter], but after
+<p>When handling crossing events, this property is updated<br />
+before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::enter], but after<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::leave] is emitted.</p>
 
 
@@ -539,13 +543,13 @@ before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControll
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The ongoing drop operation over the controller's widget or
+    <p>The ongoing drop operation over the controller's widget or<br />
 its descendant.</p>
 <p>If no drop operation is going on, this property returns nil.</p>
-<p>The event controller should not modify the <!-- raw HTML omitted -->drop<!-- raw HTML omitted -->, but it might
+<p>The event controller should not modify the <!-- raw HTML omitted -->drop<!-- raw HTML omitted -->, but it might<br />
 want to query its properties.</p>
-<p>When handling crossing events, this property is updated
-before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::enter], but after
+<p>When handling crossing events, this property is updated<br />
+before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::enter], but after<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::leave] is emitted.</p>
 
 
@@ -585,13 +589,13 @@ before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControll
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The ongoing drop operation over the controller's widget or
+    <p>The ongoing drop operation over the controller's widget or<br />
 its descendant.</p>
 <p>If no drop operation is going on, this property returns nil.</p>
-<p>The event controller should not modify the <!-- raw HTML omitted -->drop<!-- raw HTML omitted -->, but it might
+<p>The event controller should not modify the <!-- raw HTML omitted -->drop<!-- raw HTML omitted -->, but it might<br />
 want to query its properties.</p>
-<p>When handling crossing events, this property is updated
-before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::enter], but after
+<p>When handling crossing events, this property is updated<br />
+before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::enter], but after<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::leave] is emitted.</p>
 
 
@@ -659,7 +663,7 @@ before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControll
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns if a Drag-and-Drop operation is within the widget
+    <p>Returns if a Drag-and-Drop operation is within the widget<br />
 <!-- raw HTML omitted -->self<!-- raw HTML omitted -->, not one of its children.</p>
 
 
@@ -678,7 +682,7 @@ before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControll
       
       
         &mdash;
-        <div class='inline'><p>true if a dragging pointer is within <!-- raw HTML omitted -->self<!-- raw HTML omitted --> but
+        <div class='inline'><p>true if a dragging pointer is within <!-- raw HTML omitted -->self<!-- raw HTML omitted --> but<br />
 not one of its children</p>
 </div>
       
@@ -700,11 +704,11 @@ not one of its children</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the pointer is in the controllers widget itself,
+    <p>Whether the pointer is in the controllers widget itself,<br />
 as opposed to in a descendent widget.</p>
 <p>See also [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion:contains-pointer].</p>
-<p>When handling crossing events, this property is updated
-before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::enter], but after
+<p>When handling crossing events, this property is updated<br />
+before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::enter], but after<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::leave] is emitted.</p>
 
 
@@ -772,11 +776,11 @@ before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControll
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the pointer is in the controllers widget itself,
+    <p>Whether the pointer is in the controllers widget itself,<br />
 as opposed to in a descendent widget.</p>
 <p>See also [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion:contains-pointer].</p>
-<p>When handling crossing events, this property is updated
-before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::enter], but after
+<p>When handling crossing events, this property is updated<br />
+before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::enter], but after<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControllerMotion::leave] is emitted.</p>
 
 
@@ -812,7 +816,7 @@ before [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropControll
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

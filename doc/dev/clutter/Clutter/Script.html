@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Script";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -633,6 +635,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -649,10 +652,10 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Clutter::Script instance. #ClutterScript can be used
-to load objects definitions for scenegraph elements, like actors,
-or behavioural elements, like behaviours and timelines. The
-definitions must be encoded using the JavaScript Object Notation (JSON)
+    <p>Creates a new Clutter::Script instance. #ClutterScript can be used<br />
+to load objects definitions for scenegraph elements, like actors,<br />
+or behavioural elements, like behaviours and timelines. The<br />
+definitions must be encoded using the JavaScript Object Notation (JSON)<br />
 language.</p>
 
 
@@ -683,8 +686,8 @@ language.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds <!-- raw HTML omitted -->paths<!-- raw HTML omitted --> to the list of search paths held by <!-- raw HTML omitted -->script<!-- raw HTML omitted -->.</p>
-<p>The search paths are used by clutter_script_lookup_filename(), which
-can be used to define search paths for the textures source file name
+<p>The search paths are used by clutter_script_lookup_filename(), which<br />
+can be used to define search paths for the textures source file name<br />
 or other custom, file-based properties.</p>
 
 
@@ -704,7 +707,7 @@ or other custom, file-based properties.</p>
       
       
         &mdash;
-        <div class='inline'><p>an array of strings containing
+        <div class='inline'><p>an array of strings containing<br />
 different search paths</p>
 </div>
       
@@ -755,11 +758,11 @@ different search paths</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Associates a Clutter::State to the #ClutterScript instance using the given
+    <p>Associates a Clutter::State to the #ClutterScript instance using the given<br />
 name.</p>
-<p>The Clutter::Script instance will use <!-- raw HTML omitted -->state<!-- raw HTML omitted --> to resolve target states when
+<p>The Clutter::Script instance will use <!-- raw HTML omitted -->state<!-- raw HTML omitted --> to resolve target states when<br />
 connecting signal handlers.</p>
-<p>The Clutter::Script instance will take a reference on the #ClutterState
+<p>The Clutter::Script instance will take a reference on the #ClutterState<br />
 passed to this function.</p>
 
 
@@ -779,7 +782,7 @@ passed to this function.</p>
       
       
         &mdash;
-        <div class='inline'><p>a name for the <!-- raw HTML omitted -->state<!-- raw HTML omitted -->, or nil to
+        <div class='inline'><p>a name for the <!-- raw HTML omitted -->state<!-- raw HTML omitted -->, or nil to<br />
 set the default Clutter::State</p>
 </div>
       
@@ -830,12 +833,12 @@ set the default Clutter::State</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Connects all the signals defined into a UI definition file to their
+    <p>Connects all the signals defined into a UI definition file to their<br />
 handlers.</p>
-<p>This method invokes clutter_script_connect_signals_full() internally
-and uses  #GModule's introspective features (by opening the current
+<p>This method invokes clutter_script_connect_signals_full() internally<br />
+and uses  #GModule's introspective features (by opening the current<br />
 module's scope) to look at the application's symbol table.</p>
-<p>Note that this function will not work if #GModule is not supported by
+<p>Note that this function will not work if #GModule is not supported by<br />
 the platform Clutter is running on.</p>
 
 
@@ -890,12 +893,12 @@ the platform Clutter is running on.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Connects all the signals defined into a UI definition file to their
+    <p>Connects all the signals defined into a UI definition file to their<br />
 handlers.</p>
-<p>This function allows to control how the signal handlers are
-going to be connected to their respective signals. It is meant
-primarily for language bindings to allow resolving the function
-names using the native API, but it can also be used on platforms
+<p>This function allows to control how the signal handlers are<br />
+going to be connected to their respective signals. It is meant<br />
+primarily for language bindings to allow resolving the function<br />
+names using the native API, but it can also be used on platforms<br />
 that do not support GModule.</p>
 <p>Applications should use clutter_script_connect_signals().</p>
 
@@ -966,7 +969,7 @@ that do not support GModule.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Ensure that every object defined inside <!-- raw HTML omitted -->script<!-- raw HTML omitted --> is correctly
+    <p>Ensure that every object defined inside <!-- raw HTML omitted -->script<!-- raw HTML omitted --> is correctly<br />
 constructed. You should rarely need to use this function.</p>
 
 
@@ -1002,7 +1005,7 @@ constructed. You should rarely need to use this function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The path of the currently parsed file. If Clutter::Script:filename-set
+    <p>The path of the currently parsed file. If Clutter::Script:filename-set<br />
 is false then the value of this property is undefined.</p>
 
 
@@ -1042,7 +1045,7 @@ is false then the value of this property is undefined.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The path of the currently parsed file. If Clutter::Script:filename-set
+    <p>The path of the currently parsed file. If Clutter::Script:filename-set<br />
 is false then the value of this property is undefined.</p>
 
 
@@ -1110,8 +1113,8 @@ is false then the value of this property is undefined.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::Script:filename property is set. If this property
-is true then the currently parsed data comes from a file, and the
+    <p>Whether the Clutter::Script:filename property is set. If this property<br />
+is true then the currently parsed data comes from a file, and the<br />
 file name is stored inside the Clutter::Script:filename property.</p>
 
 
@@ -1179,8 +1182,8 @@ file name is stored inside the Clutter::Script:filename property.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::Script:filename property is set. If this property
-is true then the currently parsed data comes from a file, and the
+    <p>Whether the Clutter::Script:filename property is set. If this property<br />
+is true then the currently parsed data comes from a file, and the<br />
 file name is stored inside the Clutter::Script:filename property.</p>
 
 
@@ -1220,7 +1223,7 @@ file name is stored inside the Clutter::Script:filename property.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the object bound to <!-- raw HTML omitted -->name<!-- raw HTML omitted -->. This function does not increment
+    <p>Retrieves the object bound to <!-- raw HTML omitted -->name<!-- raw HTML omitted -->. This function does not increment<br />
 the reference count of the returned object.</p>
 
 
@@ -1258,7 +1261,7 @@ the reference count of the returned object.</p>
       
       
         &mdash;
-        <div class='inline'><p>the named object, or nil if no object
+        <div class='inline'><p>the named object, or nil if no object<br />
 with the given name was available</p>
 </div>
       
@@ -1280,18 +1283,18 @@ with the given name was available</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a list of objects for the given names. After <!-- raw HTML omitted -->script<!-- raw HTML omitted -->, object
-names/return location pairs should be listed, with a nil pointer
+    <p>Retrieves a list of objects for the given names. After <!-- raw HTML omitted -->script<!-- raw HTML omitted -->, object<br />
+names/return location pairs should be listed, with a nil pointer<br />
 ending the list, like:</p>
-<p>|[
+<p>|[<br />
 GObject *my_label, *a_button, *main_timeline;</p>
-<p>clutter_script_get_objects (script,
-&quot;my-label&quot;, &amp;my_label,
-&quot;a-button&quot;, &amp;a_button,
-&quot;main-timeline&quot;, &amp;main_timeline,
-NULL);
+<p>clutter_script_get_objects (script,<br />
+&quot;my-label&quot;, &amp;my_label,<br />
+&quot;a-button&quot;, &amp;a_button,<br />
+&quot;main-timeline&quot;, &amp;main_timeline,<br />
+NULL);<br />
 ]|</p>
-<p>Note: This function does not increment the reference count of the
+<p>Note: This function does not increment the reference count of the<br />
 returned objects.</p>
 
 
@@ -1326,7 +1329,7 @@ returned objects.</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for a #GObject, then additional names, ending
+        <div class='inline'><p>return location for a #GObject, then additional names, ending<br />
 with nil</p>
 </div>
       
@@ -1367,7 +1370,7 @@ with nil</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the Clutter::State for the given <!-- raw HTML omitted -->state_name<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->name<!-- raw HTML omitted --> is nil, this function will return the default
+<p>If <!-- raw HTML omitted -->name<!-- raw HTML omitted --> is nil, this function will return the default<br />
 Clutter::State instance.</p>
 
 
@@ -1405,8 +1408,8 @@ Clutter::State instance.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the Clutter::State for the
-given name. The Clutter::State is owned by the #ClutterScript instance
+        <div class='inline'><p>a pointer to the Clutter::State for the<br />
+given name. The Clutter::State is owned by the #ClutterScript instance<br />
 and it should not be unreferenced</p>
 </div>
       
@@ -1428,8 +1431,8 @@ and it should not be unreferenced</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks up a type by name, using the virtual function that
-Clutter::Script has for that purpose. This function should
+    <p>Looks up a type by name, using the virtual function that<br />
+Clutter::Script has for that purpose. This function should<br />
 rarely be used.</p>
 
 
@@ -1467,7 +1470,7 @@ rarely be used.</p>
       
       
         &mdash;
-        <div class='inline'><p>the type for the requested type name, or
+        <div class='inline'><p>the type for the requested type name, or<br />
 %G_TYPE_INVALID if not corresponding type was found.</p>
 </div>
       
@@ -1490,7 +1493,7 @@ rarely be used.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves all the objects created by <!-- raw HTML omitted -->script<!-- raw HTML omitted -->.</p>
-<p>Note: this function does not increment the reference count of the
+<p>Note: this function does not increment the reference count of the<br />
 objects it returns.</p>
 
 
@@ -1509,9 +1512,9 @@ objects it returns.</p>
       
       
         &mdash;
-        <div class='inline'><p>a list
-of #GObject<!-- raw HTML omitted -->s, or nil. The objects are owned by the
-Clutter::Script instance. Use g_list_free() on the returned list when
+        <div class='inline'><p>a list<br />
+of #GObject<!-- raw HTML omitted -->s, or nil. The objects are owned by the<br />
+Clutter::Script instance. Use g_list_free() on the returned list when<br />
 done.</p>
 </div>
       
@@ -1533,7 +1536,7 @@ done.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads the definitions from <!-- raw HTML omitted -->data<!-- raw HTML omitted --> into <!-- raw HTML omitted -->script<!-- raw HTML omitted --> and merges with
+    <p>Loads the definitions from <!-- raw HTML omitted -->data<!-- raw HTML omitted --> into <!-- raw HTML omitted -->script<!-- raw HTML omitted --> and merges with<br />
 the currently loaded ones, if any.</p>
 
 
@@ -1568,7 +1571,7 @@ the currently loaded ones, if any.</p>
       
       
         &mdash;
-        <div class='inline'><p>the length of the buffer, or -1 if <!-- raw HTML omitted -->data<!-- raw HTML omitted --> is a NUL-terminated
+        <div class='inline'><p>the length of the buffer, or -1 if <!-- raw HTML omitted -->data<!-- raw HTML omitted --> is a NUL-terminated<br />
 buffer</p>
 </div>
       
@@ -1587,8 +1590,8 @@ buffer</p>
       
       
         &mdash;
-        <div class='inline'><p>on error, zero is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set
-accordingly. On success, the merge id for the UI definitions is
+        <div class='inline'><p>on error, zero is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set<br />
+accordingly. On success, the merge id for the UI definitions is<br />
 returned. You can use the merge id with clutter_script_unmerge_objects().</p>
 </div>
       
@@ -1610,7 +1613,7 @@ returned. You can use the merge id with clutter_script_unmerge_objects().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads the definitions from <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> into <!-- raw HTML omitted -->script<!-- raw HTML omitted --> and merges with
+    <p>Loads the definitions from <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> into <!-- raw HTML omitted -->script<!-- raw HTML omitted --> and merges with<br />
 the currently loaded ones, if any.</p>
 
 
@@ -1648,8 +1651,8 @@ the currently loaded ones, if any.</p>
       
       
         &mdash;
-        <div class='inline'><p>on error, zero is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set
-accordingly. On success, the merge id for the UI definitions is
+        <div class='inline'><p>on error, zero is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set<br />
+accordingly. On success, the merge id for the UI definitions is<br />
 returned. You can use the merge id with clutter_script_unmerge_objects().</p>
 </div>
       
@@ -1671,7 +1674,7 @@ returned. You can use the merge id with clutter_script_unmerge_objects().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads the definitions from a resource file into <!-- raw HTML omitted -->script<!-- raw HTML omitted --> and merges with
+    <p>Loads the definitions from a resource file into <!-- raw HTML omitted -->script<!-- raw HTML omitted --> and merges with<br />
 the currently loaded ones, if any.</p>
 
 
@@ -1709,8 +1712,8 @@ the currently loaded ones, if any.</p>
       
       
         &mdash;
-        <div class='inline'><p>on error, zero is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set
-accordingly. On success, the merge id for the UI definitions is
+        <div class='inline'><p>on error, zero is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set<br />
+accordingly. On success, the merge id for the UI definitions is<br />
 returned. You can use the merge id with clutter_script_unmerge_objects().</p>
 </div>
       
@@ -1732,7 +1735,7 @@ returned. You can use the merge id with clutter_script_unmerge_objects().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks up <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> inside the search paths of <!-- raw HTML omitted -->script<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->filename<!-- raw HTML omitted -->
+    <p>Looks up <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> inside the search paths of <!-- raw HTML omitted -->script<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->filename<!-- raw HTML omitted --><br />
 is found, its full path will be returned .</p>
 
 
@@ -1770,7 +1773,7 @@ is found, its full path will be returned .</p>
       
       
         &mdash;
-        <div class='inline'><p>the full path of <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> or nil if no path was
+        <div class='inline'><p>the full path of <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> or nil if no path was<br />
 found.</p>
 </div>
       
@@ -1792,9 +1795,9 @@ found.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The translation domain, used to localize strings marked as translatable
+    <p>The translation domain, used to localize strings marked as translatable<br />
 inside a UI definition.</p>
-<p>If Clutter::Script:translation-domain is set to nil, #ClutterScript
+<p>If Clutter::Script:translation-domain is set to nil, #ClutterScript<br />
 will use gettext(), otherwise g_dgettext() will be used.</p>
 
 
@@ -1834,9 +1837,9 @@ will use gettext(), otherwise g_dgettext() will be used.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The translation domain, used to localize strings marked as translatable
+    <p>The translation domain, used to localize strings marked as translatable<br />
 inside a UI definition.</p>
-<p>If Clutter::Script:translation-domain is set to nil, #ClutterScript
+<p>If Clutter::Script:translation-domain is set to nil, #ClutterScript<br />
 will use gettext(), otherwise g_dgettext() will be used.</p>
 
 
@@ -1954,7 +1957,7 @@ will use gettext(), otherwise g_dgettext() will be used.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

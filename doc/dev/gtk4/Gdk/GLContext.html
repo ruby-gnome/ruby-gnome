@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::GLContext";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,48 +97,49 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GdkGLContext</code> is an object representing a platform-specific
+    <p><code>GdkGLContext</code> is an object representing a platform-specific<br />
 OpenGL draw context.</p>
-<p><code>GdkGLContext</code>s are created for a surface using
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface.create_gl_context], and the context will match
+<p><code>GdkGLContext</code>s are created for a surface using<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface.create_gl_context], and the context will match<br />
 the characteristics of the surface.</p>
-<p>A <code>GdkGLContext</code> is not tied to any particular normal framebuffer.
-For instance, it cannot draw to the surface back buffer. The GDK
-repaint system is in full control of the painting to that. Instead,
-you can create render buffers or textures and use [func<!-- raw HTML omitted -->cairo_draw_from_gl<!-- raw HTML omitted -->]
-in the draw function of your widget to draw them. Then GDK will handle
+<p>A <code>GdkGLContext</code> is not tied to any particular normal framebuffer.<br />
+For instance, it cannot draw to the surface back buffer. The GDK<br />
+repaint system is in full control of the painting to that. Instead,<br />
+you can create render buffers or textures and use [func<!-- raw HTML omitted -->cairo_draw_from_gl<!-- raw HTML omitted -->]<br />
+in the draw function of your widget to draw them. Then GDK will handle<br />
 the integration of your rendering with that of other widgets.</p>
-<p>Support for <code>GdkGLContext</code> is platform-specific and context creation
+<p>Support for <code>GdkGLContext</code> is platform-specific and context creation<br />
 can fail, returning nil context.</p>
-<p>A <code>GdkGLContext</code> has to be made &quot;current&quot; in order to start using
+<p>A <code>GdkGLContext</code> has to be made &quot;current&quot; in order to start using<br />
 it, otherwise any OpenGL call will be ignored.</p>
-<h2>Creating a new OpenGL context</h2>
-<p>In order to create a new <code>GdkGLContext</code> instance you need a <code>GdkSurface</code>,
+<h2><a href="#creating-a-new-opengl-context" aria-hidden="true" class="anchor" id="creating-a-new-opengl-context"></a>Creating a new OpenGL context</h2>
+<p>In order to create a new <code>GdkGLContext</code> instance you need a <code>GdkSurface</code>,<br />
 which you typically get during the realize call of a widget.</p>
-<p>A <code>GdkGLContext</code> is not realized until either [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.make_current]
-or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.realize] is called. It is possible to specify
-details of the GL context like the OpenGL version to be used, or whether
-the GL context should have extra state validation enabled after calling
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface.create_gl_context] by calling [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.realize].
-If the realization fails you have the option to change the settings of
+<p>A <code>GdkGLContext</code> is not realized until either [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.make_current]<br />
+or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.realize] is called. It is possible to specify<br />
+details of the GL context like the OpenGL version to be used, or whether<br />
+the GL context should have extra state validation enabled after calling<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface.create_gl_context] by calling [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.realize].<br />
+If the realization fails you have the option to change the settings of<br />
 the <code>GdkGLContext</code> and try again.</p>
-<h2>Using a GdkGLContext</h2>
-<p>You will need to make the <code>GdkGLContext</code> the current context before issuing
-OpenGL calls; the system sends OpenGL commands to whichever context is current.
-It is possible to have multiple contexts, so you always need to ensure that
+<h2><a href="#using-a-gdkglcontext" aria-hidden="true" class="anchor" id="using-a-gdkglcontext"></a>Using a GdkGLContext</h2>
+<p>You will need to make the <code>GdkGLContext</code> the current context before issuing<br />
+OpenGL calls; the system sends OpenGL commands to whichever context is current.<br />
+It is possible to have multiple contexts, so you always need to ensure that<br />
 the one which you want to draw with is the current one before issuing commands:</p>
 <pre class="code c"><code class="c">gdk_gl_context_make_current (context);
 </code></pre>
 <p>You can now perform your drawing using OpenGL commands.</p>
-<p>You can check which <code>GdkGLContext</code> is the current one by using
-[func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.get_current]; you can also unset any <code>GdkGLContext</code>
+<p>You can check which <code>GdkGLContext</code> is the current one by using<br />
+[func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.get_current]; you can also unset any <code>GdkGLContext</code><br />
 that is currently set by calling [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.clear_current].</p>
 
 
@@ -208,6 +210,7 @@ that is currently set by calling [func<!-- raw HTML omitted -->Gdk<!-- raw HTML 
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -700,9 +703,11 @@ that is currently set by calling [func<!-- raw HTML omitted -->Gdk<!-- raw HTML 
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -731,7 +736,7 @@ that is currently set by calling [func<!-- raw HTML omitted -->Gdk<!-- raw HTML 
 </h3><div class="docstring">
   <div class="discussion">
     <p>Clears the current <code>GdkGLContext</code>.</p>
-<p>Any OpenGL call after this function returns will be ignored
+<p>Any OpenGL call after this function returns will be ignored<br />
 until [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.make_current] is called.</p>
 
 
@@ -1064,10 +1069,10 @@ until [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.mak
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether the <code>GdkGLContext</code> should perform extra validations and
+    <p>Sets whether the <code>GdkGLContext</code> should perform extra validations and<br />
 runtime checking.</p>
 <p>This is useful during development, but has additional overhead.</p>
-<p>The <code>GdkGLContext</code> must not be realized or made current prior to
+<p>The <code>GdkGLContext</code> must not be realized or made current prior to<br />
 calling this function.</p>
 
 
@@ -1202,11 +1207,11 @@ calling this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets whether the <code>GdkGLContext</code> should be forward-compatible.</p>
-<p>Forward-compatible contexts must not support OpenGL functionality that
-has been marked as deprecated in the requested version; non-forward
-compatible contexts, on the other hand, must support both deprecated and
+<p>Forward-compatible contexts must not support OpenGL functionality that<br />
+has been marked as deprecated in the requested version; non-forward<br />
+compatible contexts, on the other hand, must support both deprecated and<br />
 non deprecated functionality.</p>
-<p>The <code>GdkGLContext</code> must not be realized or made current prior to calling
+<p>The <code>GdkGLContext</code> must not be realized or made current prior to calling<br />
 this function.</p>
 
 
@@ -1261,9 +1266,9 @@ this function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves required OpenGL version set as a requirement for the <!-- raw HTML omitted -->context<!-- raw HTML omitted -->
-realization. It will not change even if a greater OpenGL version is supported
-and used after the <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is realized. See
+    <p>Retrieves required OpenGL version set as a requirement for the <!-- raw HTML omitted -->context<!-- raw HTML omitted --><br />
+realization. It will not change even if a greater OpenGL version is supported<br />
+and used after the <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is realized. See<br />
 [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.get_version] for the real version in use.</p>
 <p>See [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.set_required_version].</p>
 
@@ -1406,15 +1411,15 @@ and used after the <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is 
   <div class="discussion">
     <p>Whether the <code>GdkGLContext</code> is in legacy mode or not.</p>
 <p>The <code>GdkGLContext</code> must be realized before calling this function.</p>
-<p>When realizing a GL context, GDK will try to use the OpenGL 3.2 core
-profile; this profile removes all the OpenGL API that was deprecated
-prior to the 3.2 version of the specification. If the realization is
+<p>When realizing a GL context, GDK will try to use the OpenGL 3.2 core<br />
+profile; this profile removes all the OpenGL API that was deprecated<br />
+prior to the 3.2 version of the specification. If the realization is<br />
 successful, this function will return false.</p>
-<p>If the underlying OpenGL implementation does not support core profiles,
-GDK will fall back to a pre-3.2 compatibility profile, and this function
+<p>If the underlying OpenGL implementation does not support core profiles,<br />
+GDK will fall back to a pre-3.2 compatibility profile, and this function<br />
 will return true.</p>
-<p>You can use the value returned by this function to decide which kind
-of OpenGL API to use, or whether to do extension discovery, or what
+<p>You can use the value returned by this function to decide which kind<br />
+of OpenGL API to use, or whether to do extension discovery, or what<br />
 kind of shader programs to load.</p>
 
 
@@ -1455,13 +1460,13 @@ kind of shader programs to load.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if the two GL contexts can share resources.</p>
-<p>When they can, the texture IDs from <!-- raw HTML omitted -->other<!-- raw HTML omitted --> can be used in <!-- raw HTML omitted -->self<!-- raw HTML omitted -->. This
-is particularly useful when passing <code>GdkGLTexture</code> objects between
+<p>When they can, the texture IDs from <!-- raw HTML omitted -->other<!-- raw HTML omitted --> can be used in <!-- raw HTML omitted -->self<!-- raw HTML omitted -->. This<br />
+is particularly useful when passing <code>GdkGLTexture</code> objects between<br />
 different contexts.</p>
-<p>Contexts created for the same display with the same properties will
-always be compatible, even if they are created for different surfaces.
+<p>Contexts created for the same display with the same properties will<br />
+always be compatible, even if they are created for different surfaces.<br />
 For other contexts it depends on the GL backend.</p>
-<p>Both contexts must be realized for this check to succeed. If either one
+<p>Both contexts must be realized for this check to succeed. If either one<br />
 is not, this function will return false.</p>
 
 
@@ -1597,9 +1602,9 @@ is not, this function will return false.</p>
   <div class="discussion">
     <p>Sets the major and minor version of OpenGL to request.</p>
 <p>Setting <!-- raw HTML omitted -->major<!-- raw HTML omitted --> and <!-- raw HTML omitted -->minor<!-- raw HTML omitted --> to zero will use the default values.</p>
-<p>Setting <!-- raw HTML omitted -->major<!-- raw HTML omitted --> and <!-- raw HTML omitted -->minor<!-- raw HTML omitted --> lower than the minimum versions required
+<p>Setting <!-- raw HTML omitted -->major<!-- raw HTML omitted --> and <!-- raw HTML omitted -->minor<!-- raw HTML omitted --> lower than the minimum versions required<br />
 by GTK will result in the context choosing the minimum version.</p>
-<p>The <!-- raw HTML omitted -->context<!-- raw HTML omitted --> must not be realized or made current prior to calling
+<p>The <!-- raw HTML omitted -->context<!-- raw HTML omitted --> must not be realized or made current prior to calling<br />
 this function.</p>
 
 
@@ -1670,7 +1675,7 @@ this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Always nil</p>
-<p>As many contexts can share data now and no single shared context exists
+<p>As many contexts can share data now and no single shared context exists<br />
 anymore, this function has been deprecated and now always returns nil.</p>
 
 
@@ -1711,7 +1716,7 @@ anymore, this function has been deprecated and now always returns nil.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Always nil</p>
-<p>As many contexts can share data now and no single shared context exists
+<p>As many contexts can share data now and no single shared context exists<br />
 anymore, this function has been deprecated and now always returns nil.</p>
 
 
@@ -1818,8 +1823,8 @@ anymore, this function has been deprecated and now always returns nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether the <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is using an OpenGL or OpenGL ES profile.
-false if other profile is in use of if the <!-- raw HTML omitted -->context<!-- raw HTML omitted --> has not yet
+    <p>Checks whether the <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is using an OpenGL or OpenGL ES profile.<br />
+false if other profile is in use of if the <!-- raw HTML omitted -->context<!-- raw HTML omitted --> has not yet<br />
 been realized.</p>
 
 
@@ -1862,11 +1867,11 @@ been realized.</p>
     <p>Requests that GDK create an OpenGL ES context instead of an OpenGL one.</p>
 <p>Not all platforms support OpenGL ES.</p>
 <p>The <!-- raw HTML omitted -->context<!-- raw HTML omitted --> must not have been realized.</p>
-<p>By default, GDK will attempt to automatically detect whether the
-underlying GL implementation is OpenGL or OpenGL ES once the <!-- raw HTML omitted -->context<!-- raw HTML omitted -->
+<p>By default, GDK will attempt to automatically detect whether the<br />
+underlying GL implementation is OpenGL or OpenGL ES once the <!-- raw HTML omitted -->context<!-- raw HTML omitted --><br />
 is realized.</p>
-<p>You should check the return value of [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.get_use_es]
-after calling [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.realize] to decide whether to use
+<p>You should check the return value of [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.get_use_es]<br />
+after calling [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.realize] to decide whether to use<br />
 the OpenGL or OpenGL ES API, extensions, or shaders.</p>
 
 
@@ -1886,7 +1891,7 @@ the OpenGL or OpenGL ES API, extensions, or shaders.</p>
       
       
         &mdash;
-        <div class='inline'><p>whether the context should use OpenGL ES instead of OpenGL,
+        <div class='inline'><p>whether the context should use OpenGL ES instead of OpenGL,<br />
 or -1 to allow auto-detection</p>
 </div>
       
@@ -1918,7 +1923,7 @@ or -1 to allow auto-detection</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

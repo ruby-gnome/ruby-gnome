@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::LayoutManager";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,14 +97,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::LayoutManagerClass structure contains only private
+    <p>The Clutter::LayoutManagerClass structure contains only private<br />
 data and should be accessed using the provided API</p>
 
 
@@ -477,6 +479,7 @@ data and should be accessed using the provided API</p>
 
       
     </ul>
+    
   
 
 
@@ -532,7 +535,7 @@ data and should be accessed using the provided API</p>
       
       
         &mdash;
-        <div class='inline'><p>the Clutter::ActorBox containing the allocated area
+        <div class='inline'><p>the Clutter::ActorBox containing the allocated area<br />
 of <!-- raw HTML omitted -->container<!-- raw HTML omitted --></p>
 </div>
       
@@ -583,9 +586,9 @@ of <!-- raw HTML omitted -->container<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the progress of the animation, if one has been started by
+    <p>Retrieves the progress of the animation, if one has been started by<br />
 clutter_layout_manager_begin_animation()</p>
-<p>The returned value has the same semantics of the Clutter::Alpha:alpha
+<p>The returned value has the same semantics of the Clutter::Alpha:alpha<br />
 value</p>
 
 
@@ -625,9 +628,9 @@ value</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Begins an animation of <!-- raw HTML omitted -->duration<!-- raw HTML omitted --> milliseconds, using the provided
+    <p>Begins an animation of <!-- raw HTML omitted -->duration<!-- raw HTML omitted --> milliseconds, using the provided<br />
 easing <!-- raw HTML omitted -->mode<!-- raw HTML omitted --></p>
-<p>The easing mode can be specified either as a Clutter::AnimationMode
+<p>The easing mode can be specified either as a Clutter::AnimationMode<br />
 or as a logical id returned by clutter_alpha_register_func()</p>
 <p>The result of this function depends on the <!-- raw HTML omitted -->manager<!-- raw HTML omitted --> implementation</p>
 
@@ -681,8 +684,8 @@ or as a logical id returned by clutter_alpha_register_func()</p>
       
       
         &mdash;
-        <div class='inline'><p>The Clutter::Alpha created by the
-layout manager; the returned instance is owned by the layout
+        <div class='inline'><p>The Clutter::Alpha created by the<br />
+layout manager; the returned instance is owned by the layout<br />
 manager and should not be unreferenced</p>
 </div>
       
@@ -704,8 +707,8 @@ manager and should not be unreferenced</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the values for a list of properties out of the
-Clutter::LayoutMeta created by <!-- raw HTML omitted -->manager<!-- raw HTML omitted --> and attached to the
+    <p>Retrieves the values for a list of properties out of the<br />
+Clutter::LayoutMeta created by <!-- raw HTML omitted -->manager<!-- raw HTML omitted --> and attached to the<br />
 child of a <!-- raw HTML omitted -->container<!-- raw HTML omitted --></p>
 
 
@@ -805,10 +808,10 @@ child of a <!-- raw HTML omitted -->container<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a property on the Clutter::LayoutMeta created by <!-- raw HTML omitted -->manager<!-- raw HTML omitted --> and
+    <p>Gets a property on the Clutter::LayoutMeta created by <!-- raw HTML omitted -->manager<!-- raw HTML omitted --> and<br />
 attached to a child of <!-- raw HTML omitted -->container<!-- raw HTML omitted --></p>
-<p>The #GValue must already be initialized to the type of the property
-and has to be unset with g_value_unset() after extracting the real
+<p>The #GValue must already be initialized to the type of the property<br />
+and has to be unset with g_value_unset() after extracting the real<br />
 value out of it</p>
 
 
@@ -908,9 +911,9 @@ value out of it</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a list of properties and their values on the Clutter::LayoutMeta
+    <p>Sets a list of properties and their values on the Clutter::LayoutMeta<br />
 associated by <!-- raw HTML omitted -->manager<!-- raw HTML omitted --> to a child of <!-- raw HTML omitted -->container<!-- raw HTML omitted --></p>
-<p>Languages bindings should use clutter_layout_manager_child_set_property()
+<p>Languages bindings should use clutter_layout_manager_child_set_property()<br />
 instead</p>
 
 
@@ -1010,7 +1013,7 @@ instead</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a property on the Clutter::LayoutMeta created by <!-- raw HTML omitted -->manager<!-- raw HTML omitted --> and
+    <p>Sets a property on the Clutter::LayoutMeta created by <!-- raw HTML omitted -->manager<!-- raw HTML omitted --> and<br />
 attached to a child of <!-- raw HTML omitted -->container<!-- raw HTML omitted --></p>
 
 
@@ -1110,10 +1113,10 @@ attached to a child of <!-- raw HTML omitted -->container<!-- raw HTML omitted -
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If the Clutter::LayoutManager sub-class allows it, allow
-adding a weak reference of the <!-- raw HTML omitted -->container<!-- raw HTML omitted --> using <!-- raw HTML omitted -->manager<!-- raw HTML omitted -->
+    <p>If the Clutter::LayoutManager sub-class allows it, allow<br />
+adding a weak reference of the <!-- raw HTML omitted -->container<!-- raw HTML omitted --> using <!-- raw HTML omitted -->manager<!-- raw HTML omitted --><br />
 from within the layout manager</p>
-<p>The layout manager should not increase the reference
+<p>The layout manager should not increase the reference<br />
 count of the <!-- raw HTML omitted -->container<!-- raw HTML omitted --></p>
 
 
@@ -1204,7 +1207,7 @@ count of the <!-- raw HTML omitted -->container<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the GParam::Spec for the layout property <!-- raw HTML omitted -->name<!-- raw HTML omitted --> inside
+    <p>Retrieves the GParam::Spec for the layout property <!-- raw HTML omitted -->name<!-- raw HTML omitted --> inside<br />
 the Clutter::LayoutMeta sub-class used by <!-- raw HTML omitted -->manager<!-- raw HTML omitted --></p>
 
 
@@ -1242,9 +1245,9 @@ the Clutter::LayoutMeta sub-class used by <!-- raw HTML omitted -->manager<!-- r
       
       
         &mdash;
-        <div class='inline'><p>a GParam::Spec describing the property,
-or nil if no property with that name exists. The returned
-GParam::Spec is owned by the layout manager and should not be
+        <div class='inline'><p>a GParam::Spec describing the property,<br />
+or nil if no property with that name exists. The returned<br />
+GParam::Spec is owned by the layout manager and should not be<br />
 modified or freed</p>
 </div>
       
@@ -1266,8 +1269,8 @@ modified or freed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the Clutter::LayoutMeta that the layout <!-- raw HTML omitted -->manager<!-- raw HTML omitted --> associated
-to the <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> child of <!-- raw HTML omitted -->container<!-- raw HTML omitted -->, eventually by creating one if the
+    <p>Retrieves the Clutter::LayoutMeta that the layout <!-- raw HTML omitted -->manager<!-- raw HTML omitted --> associated<br />
+to the <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> child of <!-- raw HTML omitted -->container<!-- raw HTML omitted -->, eventually by creating one if the<br />
 Clutter::LayoutManager supports layout properties</p>
 
 
@@ -1320,9 +1323,9 @@ Clutter::LayoutManager supports layout properties</p>
       
       
         &mdash;
-        <div class='inline'><p>a Clutter::LayoutMeta, or nil if the
-Clutter::LayoutManager does not have layout properties. The returned
-layout meta instance is owned by the Clutter::LayoutManager and it
+        <div class='inline'><p>a Clutter::LayoutMeta, or nil if the<br />
+Clutter::LayoutManager does not have layout properties. The returned<br />
+layout meta instance is owned by the Clutter::LayoutManager and it<br />
 should not be unreferenced</p>
 </div>
       
@@ -1344,7 +1347,7 @@ should not be unreferenced</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Computes the minimum and natural heights of the <!-- raw HTML omitted -->container<!-- raw HTML omitted --> according
+    <p>Computes the minimum and natural heights of the <!-- raw HTML omitted -->container<!-- raw HTML omitted --> according<br />
 to <!-- raw HTML omitted -->manager<!-- raw HTML omitted -->.</p>
 <p>See also clutter_actor_get_preferred_height()</p>
 
@@ -1395,7 +1398,7 @@ to <!-- raw HTML omitted -->manager<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the minimum height
+        <div class='inline'><p>return location for the minimum height<br />
 of the layout, or nil</p>
 </div>
       
@@ -1411,7 +1414,7 @@ of the layout, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the natural height
+        <div class='inline'><p>return location for the natural height<br />
 of the layout, or nil</p>
 </div>
       
@@ -1447,7 +1450,7 @@ of the layout, or nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Computes the minimum and natural widths of the <!-- raw HTML omitted -->container<!-- raw HTML omitted --> according
+    <p>Computes the minimum and natural widths of the <!-- raw HTML omitted -->container<!-- raw HTML omitted --> according<br />
 to <!-- raw HTML omitted -->manager<!-- raw HTML omitted -->.</p>
 <p>See also clutter_actor_get_preferred_width()</p>
 
@@ -1498,7 +1501,7 @@ to <!-- raw HTML omitted -->manager<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the minimum width
+        <div class='inline'><p>return location for the minimum width<br />
 of the layout, or nil</p>
 </div>
       
@@ -1514,7 +1517,7 @@ of the layout, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the natural width
+        <div class='inline'><p>return location for the natural width<br />
 of the layout, or nil</p>
 </div>
       
@@ -1551,7 +1554,7 @@ of the layout, or nil</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Emits the Clutter::LayoutManager::layout-changed signal on <!-- raw HTML omitted -->manager<!-- raw HTML omitted --></p>
-<p>This function should only be called by implementations of the
+<p>This function should only be called by implementations of the<br />
 Clutter::LayoutManager class</p>
 
 
@@ -1587,7 +1590,7 @@ Clutter::LayoutManager class</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves all the GParam::Spec<!-- raw HTML omitted -->s for the layout properties
+    <p>Retrieves all the GParam::Spec<!-- raw HTML omitted -->s for the layout properties<br />
 stored inside the Clutter::LayoutMeta sub-class used by <!-- raw HTML omitted -->manager<!-- raw HTML omitted --></p>
 
 
@@ -1607,7 +1610,7 @@ stored inside the Clutter::LayoutMeta sub-class used by <!-- raw HTML omitted --
       
       
         &mdash;
-        <div class='inline'><p>return location for the number of returned
+        <div class='inline'><p>return location for the number of returned<br />
 GParam::Spec<!-- raw HTML omitted -->s</p>
 </div>
       
@@ -1626,8 +1629,8 @@ GParam::Spec<!-- raw HTML omitted -->s</p>
       
       
         &mdash;
-        <div class='inline'><p>the newly-allocated,
-nil-terminated array of GParam::Spec<!-- raw HTML omitted -->s. Use g_free() to free the
+        <div class='inline'><p>the newly-allocated,<br />
+nil-terminated array of GParam::Spec<!-- raw HTML omitted -->s. Use g_free() to free the<br />
 resources allocated for the array</p>
 </div>
       
@@ -1645,7 +1648,7 @@ resources allocated for the array</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::CellRendererSpin";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,7 +101,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -108,15 +110,15 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Renders a spin button in a cell</p>
-<p><code>GtkCellRendererSpin</code> renders text in a cell like <code>GtkCellRendererText</code> from
-which it is derived. But while <code>GtkCellRendererText</code> offers a simple entry to
-edit the text, <code>GtkCellRendererSpin</code> offers a <code>GtkSpinButton</code> widget. Of course,
+<p><code>GtkCellRendererSpin</code> renders text in a cell like <code>GtkCellRendererText</code> from<br />
+which it is derived. But while <code>GtkCellRendererText</code> offers a simple entry to<br />
+edit the text, <code>GtkCellRendererSpin</code> offers a <code>GtkSpinButton</code> widget. Of course,<br />
 that means that the text has to be parseable as a floating point number.</p>
-<p>The range of the spinbutton is taken from the adjustment property of the
-cell renderer, which can be set explicitly or mapped to a column in the
-tree model, like all properties of cell renders. <code>GtkCellRendererSpin</code>
-also has properties for the <code>GtkCellRendererSpin:climb-rate</code> and the number
-of <code>GtkCellRendererSpin:digits</code> to display. Other <code>GtkSpinButton</code> properties
+<p>The range of the spinbutton is taken from the adjustment property of the<br />
+cell renderer, which can be set explicitly or mapped to a column in the<br />
+tree model, like all properties of cell renders. <code>GtkCellRendererSpin</code><br />
+also has properties for the <code>GtkCellRendererSpin:climb-rate</code> and the number<br />
+of <code>GtkCellRendererSpin:digits</code> to display. Other <code>GtkSpinButton</code> properties<br />
 can be set in a handler for the <code>GtkCellRenderer::editing-started</code> signal.</p>
 
 
@@ -304,9 +306,11 @@ can be set in a handler for the <code>GtkCellRenderer::editing-started</code> si
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -318,6 +322,7 @@ can be set in a handler for the <code>GtkCellRenderer::editing-started</code> si
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="CellRendererText.html" title="Gtk::CellRendererText (class)">CellRendererText</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="CellRendererText.html#align_set=-instance_method" title="Gtk::CellRendererText#align_set= (method)">#align_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#align_set%3F-instance_method" title="Gtk::CellRendererText#align_set? (method)">#align_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#alignment-instance_method" title="Gtk::CellRendererText#alignment (method)">#alignment</a></span>, <span class='object_link'><a href="CellRendererText.html#alignment=-instance_method" title="Gtk::CellRendererText#alignment= (method)">#alignment=</a></span>, <span class='object_link'><a href="CellRendererText.html#attributes-instance_method" title="Gtk::CellRendererText#attributes (method)">#attributes</a></span>, <span class='object_link'><a href="CellRendererText.html#attributes=-instance_method" title="Gtk::CellRendererText#attributes= (method)">#attributes=</a></span>, <span class='object_link'><a href="CellRendererText.html#background=-instance_method" title="Gtk::CellRendererText#background= (method)">#background=</a></span>, <span class='object_link'><a href="CellRendererText.html#background_rgba-instance_method" title="Gtk::CellRendererText#background_rgba (method)">#background_rgba</a></span>, <span class='object_link'><a href="CellRendererText.html#background_rgba=-instance_method" title="Gtk::CellRendererText#background_rgba= (method)">#background_rgba=</a></span>, <span class='object_link'><a href="CellRendererText.html#background_set=-instance_method" title="Gtk::CellRendererText#background_set= (method)">#background_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#background_set%3F-instance_method" title="Gtk::CellRendererText#background_set? (method)">#background_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#editable=-instance_method" title="Gtk::CellRendererText#editable= (method)">#editable=</a></span>, <span class='object_link'><a href="CellRendererText.html#editable%3F-instance_method" title="Gtk::CellRendererText#editable? (method)">#editable?</a></span>, <span class='object_link'><a href="CellRendererText.html#editable_set=-instance_method" title="Gtk::CellRendererText#editable_set= (method)">#editable_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#editable_set%3F-instance_method" title="Gtk::CellRendererText#editable_set? (method)">#editable_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#ellipsize-instance_method" title="Gtk::CellRendererText#ellipsize (method)">#ellipsize</a></span>, <span class='object_link'><a href="CellRendererText.html#ellipsize=-instance_method" title="Gtk::CellRendererText#ellipsize= (method)">#ellipsize=</a></span>, <span class='object_link'><a href="CellRendererText.html#ellipsize_set=-instance_method" title="Gtk::CellRendererText#ellipsize_set= (method)">#ellipsize_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#ellipsize_set%3F-instance_method" title="Gtk::CellRendererText#ellipsize_set? (method)">#ellipsize_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#family-instance_method" title="Gtk::CellRendererText#family (method)">#family</a></span>, <span class='object_link'><a href="CellRendererText.html#family=-instance_method" title="Gtk::CellRendererText#family= (method)">#family=</a></span>, <span class='object_link'><a href="CellRendererText.html#family_set=-instance_method" title="Gtk::CellRendererText#family_set= (method)">#family_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#family_set%3F-instance_method" title="Gtk::CellRendererText#family_set? (method)">#family_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#fixed_height_from_font=-instance_method" title="Gtk::CellRendererText#fixed_height_from_font= (method)">#fixed_height_from_font=</a></span>, <span class='object_link'><a href="CellRendererText.html#font-instance_method" title="Gtk::CellRendererText#font (method)">#font</a></span>, <span class='object_link'><a href="CellRendererText.html#font=-instance_method" title="Gtk::CellRendererText#font= (method)">#font=</a></span>, <span class='object_link'><a href="CellRendererText.html#font_desc-instance_method" title="Gtk::CellRendererText#font_desc (method)">#font_desc</a></span>, <span class='object_link'><a href="CellRendererText.html#font_desc=-instance_method" title="Gtk::CellRendererText#font_desc= (method)">#font_desc=</a></span>, <span class='object_link'><a href="CellRendererText.html#foreground=-instance_method" title="Gtk::CellRendererText#foreground= (method)">#foreground=</a></span>, <span class='object_link'><a href="CellRendererText.html#foreground_rgba-instance_method" title="Gtk::CellRendererText#foreground_rgba (method)">#foreground_rgba</a></span>, <span class='object_link'><a href="CellRendererText.html#foreground_rgba=-instance_method" title="Gtk::CellRendererText#foreground_rgba= (method)">#foreground_rgba=</a></span>, <span class='object_link'><a href="CellRendererText.html#foreground_set=-instance_method" title="Gtk::CellRendererText#foreground_set= (method)">#foreground_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#foreground_set%3F-instance_method" title="Gtk::CellRendererText#foreground_set? (method)">#foreground_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#language-instance_method" title="Gtk::CellRendererText#language (method)">#language</a></span>, <span class='object_link'><a href="CellRendererText.html#language=-instance_method" title="Gtk::CellRendererText#language= (method)">#language=</a></span>, <span class='object_link'><a href="CellRendererText.html#language_set=-instance_method" title="Gtk::CellRendererText#language_set= (method)">#language_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#language_set%3F-instance_method" title="Gtk::CellRendererText#language_set? (method)">#language_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#markup=-instance_method" title="Gtk::CellRendererText#markup= (method)">#markup=</a></span>, <span class='object_link'><a href="CellRendererText.html#max_width_chars-instance_method" title="Gtk::CellRendererText#max_width_chars (method)">#max_width_chars</a></span>, <span class='object_link'><a href="CellRendererText.html#max_width_chars=-instance_method" title="Gtk::CellRendererText#max_width_chars= (method)">#max_width_chars=</a></span>, <span class='object_link'><a href="CellRendererText.html#placeholder_text-instance_method" title="Gtk::CellRendererText#placeholder_text (method)">#placeholder_text</a></span>, <span class='object_link'><a href="CellRendererText.html#placeholder_text=-instance_method" title="Gtk::CellRendererText#placeholder_text= (method)">#placeholder_text=</a></span>, <span class='object_link'><a href="CellRendererText.html#rise-instance_method" title="Gtk::CellRendererText#rise (method)">#rise</a></span>, <span class='object_link'><a href="CellRendererText.html#rise=-instance_method" title="Gtk::CellRendererText#rise= (method)">#rise=</a></span>, <span class='object_link'><a href="CellRendererText.html#rise_set=-instance_method" title="Gtk::CellRendererText#rise_set= (method)">#rise_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#rise_set%3F-instance_method" title="Gtk::CellRendererText#rise_set? (method)">#rise_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#scale-instance_method" title="Gtk::CellRendererText#scale (method)">#scale</a></span>, <span class='object_link'><a href="CellRendererText.html#scale=-instance_method" title="Gtk::CellRendererText#scale= (method)">#scale=</a></span>, <span class='object_link'><a href="CellRendererText.html#scale_set=-instance_method" title="Gtk::CellRendererText#scale_set= (method)">#scale_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#scale_set%3F-instance_method" title="Gtk::CellRendererText#scale_set? (method)">#scale_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#single_paragraph_mode=-instance_method" title="Gtk::CellRendererText#single_paragraph_mode= (method)">#single_paragraph_mode=</a></span>, <span class='object_link'><a href="CellRendererText.html#single_paragraph_mode%3F-instance_method" title="Gtk::CellRendererText#single_paragraph_mode? (method)">#single_paragraph_mode?</a></span>, <span class='object_link'><a href="CellRendererText.html#size-instance_method" title="Gtk::CellRendererText#size (method)">#size</a></span>, <span class='object_link'><a href="CellRendererText.html#size=-instance_method" title="Gtk::CellRendererText#size= (method)">#size=</a></span>, <span class='object_link'><a href="CellRendererText.html#size_points-instance_method" title="Gtk::CellRendererText#size_points (method)">#size_points</a></span>, <span class='object_link'><a href="CellRendererText.html#size_points=-instance_method" title="Gtk::CellRendererText#size_points= (method)">#size_points=</a></span>, <span class='object_link'><a href="CellRendererText.html#size_set=-instance_method" title="Gtk::CellRendererText#size_set= (method)">#size_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#size_set%3F-instance_method" title="Gtk::CellRendererText#size_set? (method)">#size_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#stretch-instance_method" title="Gtk::CellRendererText#stretch (method)">#stretch</a></span>, <span class='object_link'><a href="CellRendererText.html#stretch=-instance_method" title="Gtk::CellRendererText#stretch= (method)">#stretch=</a></span>, <span class='object_link'><a href="CellRendererText.html#stretch_set=-instance_method" title="Gtk::CellRendererText#stretch_set= (method)">#stretch_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#stretch_set%3F-instance_method" title="Gtk::CellRendererText#stretch_set? (method)">#stretch_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#strikethrough=-instance_method" title="Gtk::CellRendererText#strikethrough= (method)">#strikethrough=</a></span>, <span class='object_link'><a href="CellRendererText.html#strikethrough%3F-instance_method" title="Gtk::CellRendererText#strikethrough? (method)">#strikethrough?</a></span>, <span class='object_link'><a href="CellRendererText.html#strikethrough_set=-instance_method" title="Gtk::CellRendererText#strikethrough_set= (method)">#strikethrough_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#strikethrough_set%3F-instance_method" title="Gtk::CellRendererText#strikethrough_set? (method)">#strikethrough_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#style-instance_method" title="Gtk::CellRendererText#style (method)">#style</a></span>, <span class='object_link'><a href="CellRendererText.html#style=-instance_method" title="Gtk::CellRendererText#style= (method)">#style=</a></span>, <span class='object_link'><a href="CellRendererText.html#style_set=-instance_method" title="Gtk::CellRendererText#style_set= (method)">#style_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#style_set%3F-instance_method" title="Gtk::CellRendererText#style_set? (method)">#style_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#text-instance_method" title="Gtk::CellRendererText#text (method)">#text</a></span>, <span class='object_link'><a href="CellRendererText.html#text=-instance_method" title="Gtk::CellRendererText#text= (method)">#text=</a></span>, <span class='object_link'><a href="CellRendererText.html#underline-instance_method" title="Gtk::CellRendererText#underline (method)">#underline</a></span>, <span class='object_link'><a href="CellRendererText.html#underline=-instance_method" title="Gtk::CellRendererText#underline= (method)">#underline=</a></span>, <span class='object_link'><a href="CellRendererText.html#underline_set=-instance_method" title="Gtk::CellRendererText#underline_set= (method)">#underline_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#underline_set%3F-instance_method" title="Gtk::CellRendererText#underline_set? (method)">#underline_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#variant-instance_method" title="Gtk::CellRendererText#variant (method)">#variant</a></span>, <span class='object_link'><a href="CellRendererText.html#variant=-instance_method" title="Gtk::CellRendererText#variant= (method)">#variant=</a></span>, <span class='object_link'><a href="CellRendererText.html#variant_set=-instance_method" title="Gtk::CellRendererText#variant_set= (method)">#variant_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#variant_set%3F-instance_method" title="Gtk::CellRendererText#variant_set? (method)">#variant_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#weight-instance_method" title="Gtk::CellRendererText#weight (method)">#weight</a></span>, <span class='object_link'><a href="CellRendererText.html#weight=-instance_method" title="Gtk::CellRendererText#weight= (method)">#weight=</a></span>, <span class='object_link'><a href="CellRendererText.html#weight_set=-instance_method" title="Gtk::CellRendererText#weight_set= (method)">#weight_set=</a></span>, <span class='object_link'><a href="CellRendererText.html#weight_set%3F-instance_method" title="Gtk::CellRendererText#weight_set? (method)">#weight_set?</a></span>, <span class='object_link'><a href="CellRendererText.html#width_chars-instance_method" title="Gtk::CellRendererText#width_chars (method)">#width_chars</a></span>, <span class='object_link'><a href="CellRendererText.html#width_chars=-instance_method" title="Gtk::CellRendererText#width_chars= (method)">#width_chars=</a></span>, <span class='object_link'><a href="CellRendererText.html#wrap_mode-instance_method" title="Gtk::CellRendererText#wrap_mode (method)">#wrap_mode</a></span>, <span class='object_link'><a href="CellRendererText.html#wrap_mode=-instance_method" title="Gtk::CellRendererText#wrap_mode= (method)">#wrap_mode=</a></span>, <span class='object_link'><a href="CellRendererText.html#wrap_width-instance_method" title="Gtk::CellRendererText#wrap_width (method)">#wrap_width</a></span>, <span class='object_link'><a href="CellRendererText.html#wrap_width=-instance_method" title="Gtk::CellRendererText#wrap_width= (method)">#wrap_width=</a></span></p>
 
+  
   
   
   
@@ -373,7 +378,7 @@ can be set in a handler for the <code>GtkCellRenderer::editing-started</code> si
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The adjustment that holds the value of the spinbutton.
+    <p>The adjustment that holds the value of the spinbutton.<br />
 This must be non-nil for the cell renderer to be editable.</p>
 
 
@@ -413,7 +418,7 @@ This must be non-nil for the cell renderer to be editable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The adjustment that holds the value of the spinbutton.
+    <p>The adjustment that holds the value of the spinbutton.<br />
 This must be non-nil for the cell renderer to be editable.</p>
 
 
@@ -689,7 +694,7 @@ This must be non-nil for the cell renderer to be editable.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

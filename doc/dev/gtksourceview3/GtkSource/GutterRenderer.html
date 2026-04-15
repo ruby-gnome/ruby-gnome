@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::GutterRenderer";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -537,9 +539,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -568,7 +572,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Emits the [signal<!-- raw HTML omitted -->GutterRenderer<!-- raw HTML omitted -->::activate] signal of the renderer. This is
+    <p>Emits the [signal<!-- raw HTML omitted -->GutterRenderer<!-- raw HTML omitted -->::activate] signal of the renderer. This is<br />
 called from [class<!-- raw HTML omitted -->Gutter<!-- raw HTML omitted -->] and should never have to be called manually.</p>
 
 
@@ -683,11 +687,11 @@ called from [class<!-- raw HTML omitted -->Gutter<!-- raw HTML omitted -->] and 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Locates where to render content that is <!-- raw HTML omitted -->width<!-- raw HTML omitted --> x <!-- raw HTML omitted -->height<!-- raw HTML omitted --> based on
+    <p>Locates where to render content that is <!-- raw HTML omitted -->width<!-- raw HTML omitted --> x <!-- raw HTML omitted -->height<!-- raw HTML omitted --> based on<br />
 the renderers alignment and padding.</p>
-<p>The location will be placed into <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> and is relative to the
+<p>The location will be placed into <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> and is relative to the<br />
 renderer's coordinates.</p>
-<p>It is encouraged that renderers use this function when snappshotting
+<p>It is encouraged that renderers use this function when snappshotting<br />
 to ensure consistent placement of their contents.</p>
 
 
@@ -803,7 +807,7 @@ to ensure consistent placement of their contents.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The alignment mode of the renderer.</p>
-<p>This can be used to indicate that in the case a cell spans multiple lines (due to text wrapping)
+<p>This can be used to indicate that in the case a cell spans multiple lines (due to text wrapping)<br />
 the alignment should work on either the full cell, the first line or the last line.</p>
 
 
@@ -844,7 +848,7 @@ the alignment should work on either the full cell, the first line or the last li
 </h3><div class="docstring">
   <div class="discussion">
     <p>The alignment mode of the renderer.</p>
-<p>This can be used to indicate that in the case a cell spans multiple lines (due to text wrapping)
+<p>This can be used to indicate that in the case a cell spans multiple lines (due to text wrapping)<br />
 the alignment should work on either the full cell, the first line or the last line.</p>
 
 
@@ -1059,8 +1063,8 @@ the alignment should work on either the full cell, the first line or the last li
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get whether the renderer is activatable at the location provided. This is
-called from [class<!-- raw HTML omitted -->Gutter<!-- raw HTML omitted -->] to determine whether a renderer is activatable
+    <p>Get whether the renderer is activatable at the location provided. This is<br />
+called from [class<!-- raw HTML omitted -->Gutter<!-- raw HTML omitted -->] to determine whether a renderer is activatable<br />
 using the mouse pointer.</p>
 
 
@@ -1241,7 +1245,7 @@ using the mouse pointer.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The horizontal alignment of the renderer.</p>
-<p>Set to 0 for a left alignment. 1 for a right alignment. And 0.5 for centering the cells.
+<p>Set to 0 for a left alignment. 1 for a right alignment. And 0.5 for centering the cells.<br />
 A value lower than 0 doesn't modify the alignment.</p>
 
 
@@ -1282,7 +1286,7 @@ A value lower than 0 doesn't modify the alignment.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The horizontal alignment of the renderer.</p>
-<p>Set to 0 for a left alignment. 1 for a right alignment. And 0.5 for centering the cells.
+<p>Set to 0 for a left alignment. 1 for a right alignment. And 0.5 for centering the cells.<br />
 A value lower than 0 doesn't modify the alignment.</p>
 
 
@@ -1457,7 +1461,7 @@ A value lower than 0 doesn't modify the alignment.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The vertical alignment of the renderer.</p>
-<p>Set to 0 for a top alignment. 1 for a bottom alignment. And 0.5 for centering the cells.
+<p>Set to 0 for a top alignment. 1 for a bottom alignment. And 0.5 for centering the cells.<br />
 A value lower than 0 doesn't modify the alignment.</p>
 
 
@@ -1498,7 +1502,7 @@ A value lower than 0 doesn't modify the alignment.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The vertical alignment of the renderer.</p>
-<p>Set to 0 for a top alignment. 1 for a bottom alignment. And 0.5 for centering the cells.
+<p>Set to 0 for a top alignment. 1 for a bottom alignment. And 0.5 for centering the cells.<br />
 A value lower than 0 doesn't modify the alignment.</p>
 
 
@@ -1668,7 +1672,7 @@ A value lower than 0 doesn't modify the alignment.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

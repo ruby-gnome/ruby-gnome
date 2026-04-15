@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Handy::ComboRow";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,7 +101,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -376,9 +378,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -390,6 +394,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ActionRow.html" title="Handy::ActionRow (class)">ActionRow</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="ActionRow.html#activatable_widget-instance_method" title="Handy::ActionRow#activatable_widget (method)">#activatable_widget</a></span>, <span class='object_link'><a href="ActionRow.html#activatable_widget=-instance_method" title="Handy::ActionRow#activatable_widget= (method)">#activatable_widget=</a></span>, <span class='object_link'><a href="ActionRow.html#activate-instance_method" title="Handy::ActionRow#activate (method)">#activate</a></span>, <span class='object_link'><a href="ActionRow.html#add_prefix-instance_method" title="Handy::ActionRow#add_prefix (method)">#add_prefix</a></span>, <span class='object_link'><a href="ActionRow.html#icon_name-instance_method" title="Handy::ActionRow#icon_name (method)">#icon_name</a></span>, <span class='object_link'><a href="ActionRow.html#icon_name=-instance_method" title="Handy::ActionRow#icon_name= (method)">#icon_name=</a></span>, <span class='object_link'><a href="ActionRow.html#subtitle-instance_method" title="Handy::ActionRow#subtitle (method)">#subtitle</a></span>, <span class='object_link'><a href="ActionRow.html#subtitle=-instance_method" title="Handy::ActionRow#subtitle= (method)">#subtitle=</a></span>, <span class='object_link'><a href="ActionRow.html#subtitle_lines-instance_method" title="Handy::ActionRow#subtitle_lines (method)">#subtitle_lines</a></span>, <span class='object_link'><a href="ActionRow.html#subtitle_lines=-instance_method" title="Handy::ActionRow#subtitle_lines= (method)">#subtitle_lines=</a></span>, <span class='object_link'><a href="ActionRow.html#title_lines-instance_method" title="Handy::ActionRow#title_lines (method)">#title_lines</a></span>, <span class='object_link'><a href="ActionRow.html#title_lines=-instance_method" title="Handy::ActionRow#title_lines= (method)">#title_lines=</a></span>, <span class='object_link'><a href="ActionRow.html#use_underline-instance_method" title="Handy::ActionRow#use_underline (method)">#use_underline</a></span>, <span class='object_link'><a href="ActionRow.html#use_underline=-instance_method" title="Handy::ActionRow#use_underline= (method)">#use_underline=</a></span>, <span class='object_link'><a href="ActionRow.html#use_underline%3F-instance_method" title="Handy::ActionRow#use_underline? (method)">#use_underline?</a></span></p>
 
+  
   
   
   
@@ -446,8 +451,8 @@
   <div class="discussion">
     <p>Binds <!-- raw HTML omitted -->model<!-- raw HTML omitted --> to <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
 <p>If <!-- raw HTML omitted -->self<!-- raw HTML omitted --> was already bound to a model, that previous binding is destroyed.</p>
-<p>The contents of <!-- raw HTML omitted -->self<!-- raw HTML omitted --> are cleared and then filled with widgets that represent
-items from <!-- raw HTML omitted -->model<!-- raw HTML omitted -->. <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is updated whenever <!-- raw HTML omitted -->model<!-- raw HTML omitted --> changes. If <!-- raw HTML omitted -->model<!-- raw HTML omitted --> is
+<p>The contents of <!-- raw HTML omitted -->self<!-- raw HTML omitted --> are cleared and then filled with widgets that represent<br />
+items from <!-- raw HTML omitted -->model<!-- raw HTML omitted -->. <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is updated whenever <!-- raw HTML omitted -->model<!-- raw HTML omitted --> changes. If <!-- raw HTML omitted -->model<!-- raw HTML omitted --> is<br />
 <code>NULL</code>, <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is left empty.</p>
 
 
@@ -482,8 +487,8 @@ items from <!-- raw HTML omitted -->model<!-- raw HTML omitted -->. <!-- raw HTM
       
       
         &mdash;
-        <div class='inline'><p>a function that creates
-widgets for items to display in the list, or <code>NULL</code> in case you also passed
+        <div class='inline'><p>a function that creates<br />
+widgets for items to display in the list, or <code>NULL</code> in case you also passed<br />
 <code>NULL</code> as <!-- raw HTML omitted -->model<!-- raw HTML omitted --></p>
 </div>
       
@@ -499,8 +504,8 @@ widgets for items to display in the list, or <code>NULL</code> in case you also 
       
       
         &mdash;
-        <div class='inline'><p>a function that creates
-widgets for items to display as the selected item, or <code>NULL</code> in case you
+        <div class='inline'><p>a function that creates<br />
+widgets for items to display as the selected item, or <code>NULL</code> in case you<br />
 also passed <code>NULL</code> as <!-- raw HTML omitted -->model<!-- raw HTML omitted --></p>
 </div>
       
@@ -516,7 +521,7 @@ also passed <code>NULL</code> as <!-- raw HTML omitted -->model<!-- raw HTML omi
       
       
         &mdash;
-        <div class='inline'><p>user data passed to <!-- raw HTML omitted -->create_list_widget_func<!-- raw HTML omitted --> and
+        <div class='inline'><p>user data passed to <!-- raw HTML omitted -->create_list_widget_func<!-- raw HTML omitted --> and<br />
 <!-- raw HTML omitted -->create_current_widget_func<!-- raw HTML omitted --></p>
 </div>
       
@@ -569,10 +574,10 @@ also passed <code>NULL</code> as <!-- raw HTML omitted -->model<!-- raw HTML omi
   <div class="discussion">
     <p>Binds <!-- raw HTML omitted -->model<!-- raw HTML omitted --> to <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
 <p>If <!-- raw HTML omitted -->self<!-- raw HTML omitted --> was already bound to a model, that previous binding is destroyed.</p>
-<p>The contents of <!-- raw HTML omitted -->self<!-- raw HTML omitted --> are cleared and then filled with widgets that represent
-items from <!-- raw HTML omitted -->model<!-- raw HTML omitted -->. <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is updated whenever <!-- raw HTML omitted -->model<!-- raw HTML omitted --> changes. If <!-- raw HTML omitted -->model<!-- raw HTML omitted --> is
+<p>The contents of <!-- raw HTML omitted -->self<!-- raw HTML omitted --> are cleared and then filled with widgets that represent<br />
+items from <!-- raw HTML omitted -->model<!-- raw HTML omitted -->. <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is updated whenever <!-- raw HTML omitted -->model<!-- raw HTML omitted --> changes. If <!-- raw HTML omitted -->model<!-- raw HTML omitted --> is<br />
 <code>NULL</code>, <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is left empty.</p>
-<p>This is more convenient to use than [method<!-- raw HTML omitted -->ComboRow<!-- raw HTML omitted -->.bind_model] if you want
+<p>This is more convenient to use than [method<!-- raw HTML omitted -->ComboRow<!-- raw HTML omitted -->.bind_model] if you want<br />
 to represent items of the model with names.</p>
 
 
@@ -607,7 +612,7 @@ to represent items of the model with names.</p>
       
       
         &mdash;
-        <div class='inline'><p>a function that creates names for items, or
+        <div class='inline'><p>a function that creates names for items, or<br />
 <code>NULL</code> in case you also passed <code>NULL</code> as <!-- raw HTML omitted -->model<!-- raw HTML omitted --></p>
 </div>
       
@@ -821,10 +826,10 @@ to represent items of the model with names.</p>
     <p>Creates a model for <!-- raw HTML omitted -->enum_type<!-- raw HTML omitted --> and binds it to <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
 <p>The items of the model will be [class<!-- raw HTML omitted -->EnumValueObject<!-- raw HTML omitted -->] objects.</p>
 <p>If <!-- raw HTML omitted -->self<!-- raw HTML omitted --> was already bound to a model, that previous binding is destroyed.</p>
-<p>The contents of <!-- raw HTML omitted -->self<!-- raw HTML omitted --> are cleared and then filled with widgets that represent
-items from <!-- raw HTML omitted -->model<!-- raw HTML omitted -->. <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is updated whenever <!-- raw HTML omitted -->model<!-- raw HTML omitted --> changes. If <!-- raw HTML omitted -->model<!-- raw HTML omitted --> is
+<p>The contents of <!-- raw HTML omitted -->self<!-- raw HTML omitted --> are cleared and then filled with widgets that represent<br />
+items from <!-- raw HTML omitted -->model<!-- raw HTML omitted -->. <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is updated whenever <!-- raw HTML omitted -->model<!-- raw HTML omitted --> changes. If <!-- raw HTML omitted -->model<!-- raw HTML omitted --> is<br />
 <code>NULL</code>, <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is left empty.</p>
-<p>This is more convenient to use than [method<!-- raw HTML omitted -->ComboRow<!-- raw HTML omitted -->.bind_name_model] if you
+<p>This is more convenient to use than [method<!-- raw HTML omitted -->ComboRow<!-- raw HTML omitted -->.bind_name_model] if you<br />
 want to represent values of an enumeration with names.</p>
 <p>See [func<!-- raw HTML omitted -->enum_value_row_name<!-- raw HTML omitted -->].</p>
 
@@ -860,7 +865,7 @@ want to represent values of an enumeration with names.</p>
       
       
         &mdash;
-        <div class='inline'><p>a function that creates names for items, or
+        <div class='inline'><p>a function that creates names for items, or<br />
 <code>NULL</code> in case you also passed <code>NULL</code> as <!-- raw HTML omitted -->model<!-- raw HTML omitted --></p>
 </div>
       
@@ -946,7 +951,7 @@ want to represent values of an enumeration with names.</p>
       
       
         &mdash;
-        <div class='inline'><p>a function that creates names for items, or
+        <div class='inline'><p>a function that creates names for items, or<br />
 <code>NULL</code> in case you also passed <code>NULL</code> as <!-- raw HTML omitted -->model<!-- raw HTML omitted --></p>
 </div>
       
@@ -1030,7 +1035,7 @@ want to represent values of an enumeration with names.</p>
       
       
         &mdash;
-        <div class='inline'><p>whether the current value of <!-- raw HTML omitted -->self<!-- raw HTML omitted --> should be displayed as its
+        <div class='inline'><p>whether the current value of <!-- raw HTML omitted -->self<!-- raw HTML omitted --> should be displayed as its<br />
 subtitle</p>
 </div>
       
@@ -1053,7 +1058,7 @@ subtitle</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to use the current value as the subtitle.</p>
-<p>If you use a custom widget creation function, you will need to give the row
+<p>If you use a custom widget creation function, you will need to give the row<br />
 a name conversion closure with [method<!-- raw HTML omitted -->ComboRow<!-- raw HTML omitted -->.set_get_name_func].</p>
 <p>If <code>TRUE</code>, you should not access [property<!-- raw HTML omitted -->ActionRow<!-- raw HTML omitted -->:subtitle].</p>
 
@@ -1123,7 +1128,7 @@ a name conversion closure with [method<!-- raw HTML omitted -->ComboRow<!-- raw 
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to use the current value as the subtitle.</p>
-<p>If you use a custom widget creation function, you will need to give the row
+<p>If you use a custom widget creation function, you will need to give the row<br />
 a name conversion closure with [method<!-- raw HTML omitted -->ComboRow<!-- raw HTML omitted -->.set_get_name_func].</p>
 <p>If <code>TRUE</code>, you should not access [property<!-- raw HTML omitted -->ActionRow<!-- raw HTML omitted -->:subtitle].</p>
 
@@ -1160,7 +1165,7 @@ a name conversion closure with [method<!-- raw HTML omitted -->ComboRow<!-- raw 
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

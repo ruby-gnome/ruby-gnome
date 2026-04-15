@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Pango::FontFamily";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -437,6 +439,7 @@
 
       
     </ul>
+    
   
 
 
@@ -475,8 +478,8 @@
       
       
         &mdash;
-        <div class='inline'><p>the name of a face. If the name is nil,
-the family's default face (fontconfig calls it &quot;Regular&quot;)
+        <div class='inline'><p>the name of a face. If the name is nil,<br />
+the family's default face (fontconfig calls it &quot;Regular&quot;)<br />
 will be returned.</p>
 </div>
       
@@ -495,7 +498,7 @@ will be returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>PangoFontFace</code>,
+        <div class='inline'><p>the <code>PangoFontFace</code>,<br />
 or nil if no face with the given name exists.</p>
 </div>
       
@@ -517,17 +520,17 @@ or nil if no face with the given name exists.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A monospace font is a font designed for text display where the the
+    <p>A monospace font is a font designed for text display where the the<br />
 characters form a regular grid.</p>
-<p>For Western languages this would
-mean that the advance width of all characters are the same, but
-this categorization also includes Asian fonts which include
-double-width characters: characters that occupy two grid cells.
-g_unichar_iswide() returns a result that indicates whether a
+<p>For Western languages this would<br />
+mean that the advance width of all characters are the same, but<br />
+this categorization also includes Asian fonts which include<br />
+double-width characters: characters that occupy two grid cells.<br />
+g_unichar_iswide() returns a result that indicates whether a<br />
 character is typically double-width in a monospace font.</p>
-<p>The best way to find out the grid-cell size is to call
-[method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontMetrics.get_approximate_digit_width], since the
-results of [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontMetrics.get_approximate_char_width] may
+<p>The best way to find out the grid-cell size is to call<br />
+[method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontMetrics.get_approximate_digit_width], since the<br />
+results of [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontMetrics.get_approximate_char_width] may<br />
 be affected by double-width characters.</p>
 
 
@@ -673,9 +676,9 @@ be affected by double-width characters.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A variable font is a font which has axes that can be modified to
+    <p>A variable font is a font which has axes that can be modified to<br />
 produce different faces.</p>
-<p>Such axes are also known as <em>variations</em>; see
+<p>Such axes are also known as <em>variations</em>; see<br />
 [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.set_variations] for more information.</p>
 
 
@@ -928,11 +931,11 @@ produce different faces.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Lists the different font faces that make up <!-- raw HTML omitted -->family<!-- raw HTML omitted -->.</p>
-<p>The faces in a family share a common design, but differ in slant, weight,
+<p>The faces in a family share a common design, but differ in slant, weight,<br />
 width and other aspects.</p>
-<p>Note that the returned faces are not in any particular order, and
+<p>Note that the returned faces are not in any particular order, and<br />
 multiple faces may have the same name or characteristics.</p>
-<p><code>PangoFontFamily</code> also implemented the [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel] interface
+<p><code>PangoFontFamily</code> also implemented the [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel] interface<br />
 for enumerating faces.</p>
 
 
@@ -952,8 +955,8 @@ for enumerating faces.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store an array of pointers to <code>PangoFontFace</code> objects,
-or nil. This array should be freed with g_free() when it is no
+        <div class='inline'><p>location to store an array of pointers to <code>PangoFontFace</code> objects,<br />
+or nil. This array should be freed with g_free() when it is no<br />
 longer needed.</p>
 </div>
       
@@ -1212,7 +1215,7 @@ longer needed.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

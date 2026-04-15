@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::AppChooserButton";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -107,23 +109,23 @@
   <div class="discussion">
     <p>The <code>GtkAppChooserButton</code> lets the user select an application.</p>
 <p><img src="appchooserbutton.png" alt="An example GtkAppChooserButton" /></p>
-<p>Initially, a <code>GtkAppChooserButton</code> selects the first application
-in its list, which will either be the most-recently used application
-or, if [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserButton:show-default-item] is true, the
+<p>Initially, a <code>GtkAppChooserButton</code> selects the first application<br />
+in its list, which will either be the most-recently used application<br />
+or, if [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserButton:show-default-item] is true, the<br />
 default application.</p>
-<p>The list of applications shown in a <code>GtkAppChooserButton</code> includes
-the recommended applications for the given content type. When
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserButton:show-default-item] is set, the default
-application is also included. To let the user chooser other applications,
-you can set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserButton:show-dialog-item] property,
+<p>The list of applications shown in a <code>GtkAppChooserButton</code> includes<br />
+the recommended applications for the given content type. When<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserButton:show-default-item] is set, the default<br />
+application is also included. To let the user chooser other applications,<br />
+you can set the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserButton:show-dialog-item] property,<br />
 which allows to open a full [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserDialog].</p>
-<p>It is possible to add custom items to the list, using
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserButton.append_custom_item]. These items cause
-the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserButton::custom-item-activated] signal to be
+<p>It is possible to add custom items to the list, using<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserButton.append_custom_item]. These items cause<br />
+the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserButton::custom-item-activated] signal to be<br />
 emitted when they are selected.</p>
-<p>To track changes in the selected application, use the
+<p>To track changes in the selected application, use the<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserButton::changed] signal.</p>
-<h2>CSS nodes</h2>
+<h2><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h2>
 <p><code>GtkAppChooserButton</code> has a single CSS node with the name “appchooserbutton”.</p>
 
 
@@ -495,9 +497,11 @@ emitted when they are selected.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -524,7 +528,7 @@ emitted when they are selected.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>GtkAppChooserButton</code> for applications
+    <p>Creates a new <code>GtkAppChooserButton</code> for applications<br />
 that can handle content of the given type.</p>
 
 
@@ -575,7 +579,7 @@ that can handle content of the given type.</p>
   <div class="discussion">
     <p>Selects a custom item.</p>
 <p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserButton.append_custom_item].</p>
-<p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooser.refresh] to bring the selection
+<p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooser.refresh] to bring the selection<br />
 to its initial state.</p>
 
 
@@ -630,11 +634,11 @@ to its initial state.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Appends a custom item to the list of applications that is shown
+    <p>Appends a custom item to the list of applications that is shown<br />
 in the popup.</p>
-<p>The item name must be unique per-widget. Clients can use the
-provided name as a detail for the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserButton::custom-item-activated] signal, to add a
+<p>The item name must be unique per-widget. Clients can use the<br />
+provided name as a detail for the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserButton::custom-item-activated] signal, to add a<br />
 callback for the activation of a particular custom item in the list.</p>
 <p>See also [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserButton.append_separator].</p>
 
@@ -720,7 +724,7 @@ callback for the activation of a particular custom item in the list.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Appends a separator to the list of applications that is shown
+    <p>Appends a separator to the list of applications that is shown<br />
 in the popup.</p>
 
 
@@ -756,7 +760,7 @@ in the popup.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The text to show at the top of the dialog that can be
+    <p>The text to show at the top of the dialog that can be<br />
 opened from the button.</p>
 <p>The string may contain Pango markup.</p>
 
@@ -797,7 +801,7 @@ opened from the button.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The text to show at the top of the dialog that can be
+    <p>The text to show at the top of the dialog that can be<br />
 opened from the button.</p>
 <p>The string may contain Pango markup.</p>
 
@@ -1011,7 +1015,7 @@ opened from the button.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the dropdown menu should show the default
+    <p>Returns whether the dropdown menu should show the default<br />
 application at the top.</p>
 
 
@@ -1051,7 +1055,7 @@ application at the top.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the dropdown menu shows the default application
+    <p>Determines whether the dropdown menu shows the default application<br />
 on top for the provided content type.</p>
 
 
@@ -1119,7 +1123,7 @@ on top for the provided content type.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the dropdown menu shows the default application
+    <p>Determines whether the dropdown menu shows the default application<br />
 on top for the provided content type.</p>
 
 
@@ -1159,7 +1163,7 @@ on top for the provided content type.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the dropdown menu shows an item
+    <p>Returns whether the dropdown menu shows an item<br />
 for a <code>GtkAppChooserDialog</code>.</p>
 
 
@@ -1199,7 +1203,7 @@ for a <code>GtkAppChooserDialog</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the dropdown menu shows an item to open
+    <p>Determines whether the dropdown menu shows an item to open<br />
 a <code>GtkAppChooserDialog</code>.</p>
 
 
@@ -1267,7 +1271,7 @@ a <code>GtkAppChooserDialog</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the dropdown menu shows an item to open
+    <p>Determines whether the dropdown menu shows an item to open<br />
 a <code>GtkAppChooserDialog</code>.</p>
 
 
@@ -1303,7 +1307,7 @@ a <code>GtkAppChooserDialog</code>.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

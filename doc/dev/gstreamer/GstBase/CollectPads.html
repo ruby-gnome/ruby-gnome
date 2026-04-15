@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GstBase::CollectPads";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -673,9 +675,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -731,24 +735,24 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Add a pad to the collection of collect pads. The pad has to be
-a sinkpad. The refcount of the pad is incremented. Use
-gst_collect_pads_remove_pad() to remove the pad from the collection
+    <p>Add a pad to the collection of collect pads. The pad has to be<br />
+a sinkpad. The refcount of the pad is incremented. Use<br />
+gst_collect_pads_remove_pad() to remove the pad from the collection<br />
 again.</p>
-<p>You specify a size for the returned Gst::CollectData structure
+<p>You specify a size for the returned Gst::CollectData structure<br />
 so that you can use it to store additional information.</p>
-<p>You can also specify a Gst::CollectDataDestroyNotify that will be called
-just before the Gst::CollectData structure is freed. It is passed the
-pointer to the structure and should free any custom memory and resources
+<p>You can also specify a Gst::CollectDataDestroyNotify that will be called<br />
+just before the Gst::CollectData structure is freed. It is passed the<br />
+pointer to the structure and should free any custom memory and resources<br />
 allocated for it.</p>
-<p>Keeping a pad locked in waiting state is only relevant when using
-the default collection algorithm (providing the oldest buffer).
-It ensures a buffer must be available on this pad for a collection
-to take place.  This is of typical use to a muxer element where
-non-subtitle streams should always be in waiting state,
-e.g. to assure that caps information is available on all these streams
+<p>Keeping a pad locked in waiting state is only relevant when using<br />
+the default collection algorithm (providing the oldest buffer).<br />
+It ensures a buffer must be available on this pad for a collection<br />
+to take place.  This is of typical use to a muxer element where<br />
+non-subtitle streams should always be in waiting state,<br />
+e.g. to assure that caps information is available on all these streams<br />
 when initial headers have to be written.</p>
-<p>The pad will be automatically activated in push mode when <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> is
+<p>The pad will be automatically activated in push mode when <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> is<br />
 started.</p>
 <p>MT safe.</p>
 
@@ -799,7 +803,7 @@ started.</p>
       
       
         &mdash;
-        <div class='inline'><p>function to be called before the returned
+        <div class='inline'><p>function to be called before the returned<br />
 Gst::CollectData structure is freed</p>
 </div>
       
@@ -833,7 +837,7 @@ Gst::CollectData structure is freed</p>
       
       
         &mdash;
-        <div class='inline'><p>a new Gst::CollectData to identify the
+        <div class='inline'><p>a new Gst::CollectData to identify the<br />
 new pad. Or nil if wrong parameters are supplied.</p>
 </div>
       
@@ -855,12 +859,12 @@ new pad. Or nil if wrong parameters are supplied.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Query how much bytes can be read from each queued buffer. This means
-that the result of this call is the maximum number of bytes that can
+    <p>Query how much bytes can be read from each queued buffer. This means<br />
+that the result of this call is the maximum number of bytes that can<br />
 be read from each of the pads.</p>
-<p>This function should be called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as
+<p>This function should be called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as<br />
 in the callback.</p>
-<p>MT safe.
+<p>MT safe.<br />
 returns 0 if a pad has no queued buffer.</p>
 
 
@@ -900,10 +904,10 @@ returns 0 if a pad has no queued buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convenience clipping function that converts incoming buffer's timestamp
+    <p>Convenience clipping function that converts incoming buffer's timestamp<br />
 to running time, or clips the buffer if outside configured segment.</p>
-<p>Since 1.6, this clipping function also sets the DTS parameter of the
-GstCollectData structure. This version of the running time DTS can be
+<p>Since 1.6, this clipping function also sets the DTS parameter of the<br />
+GstCollectData structure. This version of the running time DTS can be<br />
 negative. G_MININT64 is used to indicate invalid value.</p>
 
 
@@ -1003,8 +1007,8 @@ negative. G_MININT64 is used to indicate invalid value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Default Gst::CollectPads event handling that elements should always
-chain up to to ensure proper operation.  Element might however indicate
+    <p>Default Gst::CollectPads event handling that elements should always<br />
+chain up to to ensure proper operation.  Element might however indicate<br />
 event should not be forwarded downstream.</p>
 
 
@@ -1090,9 +1094,9 @@ event should not be forwarded downstream.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Flush <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from the pad <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
-<p>This function should be called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as
+<p>This function should be called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as<br />
 in the callback.</p>
-<p>MT safe.
+<p>MT safe.<br />
 is 0 if the pad was end-of-stream.</p>
 
 
@@ -1166,10 +1170,10 @@ is 0 if the pad was end-of-stream.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Change the flushing state of all the pads in the collection. No pad
-is able to accept anymore data when <!-- raw HTML omitted -->flushing<!-- raw HTML omitted --> is true. Calling this
-function with <!-- raw HTML omitted -->flushing<!-- raw HTML omitted --> false makes <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> accept data again.
-Caller must ensure that downstream streaming (thread) is not blocked,
+    <p>Change the flushing state of all the pads in the collection. No pad<br />
+is able to accept anymore data when <!-- raw HTML omitted -->flushing<!-- raw HTML omitted --> is true. Calling this<br />
+function with <!-- raw HTML omitted -->flushing<!-- raw HTML omitted --> false makes <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> accept data again.<br />
+Caller must ensure that downstream streaming (thread) is not blocked,<br />
 e.g. by sending a FLUSH_START downstream.</p>
 <p>MT safe.</p>
 
@@ -1225,10 +1229,10 @@ e.g. by sending a FLUSH_START downstream.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Peek at the buffer currently queued in <!-- raw HTML omitted -->data<!-- raw HTML omitted -->. This function
-should be called with the <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as in the callback
+    <p>Peek at the buffer currently queued in <!-- raw HTML omitted -->data<!-- raw HTML omitted -->. This function<br />
+should be called with the <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as in the callback<br />
 handler.</p>
-<p>MT safe.
+<p>MT safe.<br />
 buffer is queued. should unref the buffer after usage.</p>
 
 
@@ -1287,10 +1291,10 @@ buffer is queued. should unref the buffer after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Pop the buffer currently queued in <!-- raw HTML omitted -->data<!-- raw HTML omitted -->. This function
-should be called with the <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as in the callback
+    <p>Pop the buffer currently queued in <!-- raw HTML omitted -->data<!-- raw HTML omitted -->. This function<br />
+should be called with the <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as in the callback<br />
 handler.</p>
-<p>MT safe.
+<p>MT safe.<br />
 buffer was queued. You should unref the buffer after usage.</p>
 
 
@@ -1349,8 +1353,8 @@ buffer was queued. You should unref the buffer after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Default Gst::CollectPads query handling that elements should always
-chain up to to ensure proper operation.  Element might however indicate
+    <p>Default Gst::CollectPads query handling that elements should always<br />
+chain up to to ensure proper operation.  Element might however indicate<br />
 query should not be forwarded downstream.</p>
 
 
@@ -1436,10 +1440,10 @@ query should not be forwarded downstream.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Get a subbuffer of <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from the given pad <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
-<p>This function should be called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as in the
+<p>This function should be called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as in the<br />
 callback.</p>
-<p>MT safe.
-be less that requested. A return of nil signals that the pad is
+<p>MT safe.<br />
+be less that requested. A return of nil signals that the pad is<br />
 end-of-stream. Unref the buffer after use.</p>
 
 
@@ -1513,8 +1517,8 @@ end-of-stream. Unref the buffer after use.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Remove a pad from the collection of collect pads. This function will also
-free the Gst::CollectData and all the resources that were allocated with
+    <p>Remove a pad from the collection of collect pads. This function will also<br />
+free the Gst::CollectData and all the resources that were allocated with<br />
 gst_collect_pads_add_pad().</p>
 <p>The pad will be deactivated automatically when <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> is stopped.</p>
 <p>MT safe.</p>
@@ -1575,9 +1579,9 @@ gst_collect_pads_add_pad().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the callback function and user data that will be called with
-the oldest buffer when all pads have been collected, or nil on EOS.
-If a buffer is passed, the callback owns a reference and must unref
+    <p>Set the callback function and user data that will be called with<br />
+the oldest buffer when all pads have been collected, or nil on EOS.<br />
+If a buffer is passed, the callback owns a reference and must unref<br />
 it.</p>
 <p>MT safe.</p>
 
@@ -1648,7 +1652,7 @@ it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Install a clipping function that is called right after a buffer is received
+    <p>Install a clipping function that is called right after a buffer is received<br />
 on a pad managed by <!-- raw HTML omitted -->pads<!-- raw HTML omitted -->. See Gst::CollectPadsClipFunction for more info.</p>
 
 
@@ -1788,11 +1792,11 @@ on a pad managed by <!-- raw HTML omitted -->pads<!-- raw HTML omitted -->. See 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the event callback function and user data that will be called when
-collectpads has received an event originating from one of the collected
-pads.  If the event being processed is a serialized one, this callback is
-called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, otherwise not.  As this lock should be
-held when calling a number of CollectPads functions, it should be acquired
+    <p>Set the event callback function and user data that will be called when<br />
+collectpads has received an event originating from one of the collected<br />
+pads.  If the event being processed is a serialized one, this callback is<br />
+called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, otherwise not.  As this lock should be<br />
+held when calling a number of CollectPads functions, it should be acquired<br />
 if so (unusually) needed.</p>
 <p>MT safe.</p>
 
@@ -1863,8 +1867,8 @@ if so (unusually) needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Install a flush function that is called when the internal
-state of all pads should be flushed as part of flushing seek
+    <p>Install a flush function that is called when the internal<br />
+state of all pads should be flushed as part of flushing seek<br />
 handling. See Gst::CollectPadsFlushFunction for more info.</p>
 
 
@@ -1934,14 +1938,14 @@ handling. See Gst::CollectPadsFlushFunction for more info.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>CollectPads provides a default collection algorithm that will determine
-the oldest buffer available on all of its pads, and then delegate
-to a configured callback.
-However, if circumstances are more complicated and/or more control
-is desired, this sets a callback that will be invoked instead when
-all the pads added to the collection have buffers queued.
-Evidently, this callback is not compatible with
-gst_collect_pads_set_buffer_function() callback.
+    <p>CollectPads provides a default collection algorithm that will determine<br />
+the oldest buffer available on all of its pads, and then delegate<br />
+to a configured callback.<br />
+However, if circumstances are more complicated and/or more control<br />
+is desired, this sets a callback that will be invoked instead when<br />
+all the pads added to the collection have buffers queued.<br />
+Evidently, this callback is not compatible with<br />
+gst_collect_pads_set_buffer_function() callback.<br />
 If this callback is set, the former will be unset.</p>
 <p>MT safe.</p>
 
@@ -2012,11 +2016,11 @@ If this callback is set, the former will be unset.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the query callback function and user data that will be called after
-collectpads has received a query originating from one of the collected
-pads.  If the query being processed is a serialized one, this callback is
-called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, otherwise not.  As this lock should be
-held when calling a number of CollectPads functions, it should be acquired
+    <p>Set the query callback function and user data that will be called after<br />
+collectpads has received a query originating from one of the collected<br />
+pads.  If the query being processed is a serialized one, this callback is<br />
+called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, otherwise not.  As this lock should be<br />
+held when calling a number of CollectPads functions, it should be acquired<br />
 if so (unusually) needed.</p>
 <p>MT safe.</p>
 
@@ -2087,10 +2091,10 @@ if so (unusually) needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a pad to waiting or non-waiting mode, if at least this pad
-has not been created with locked waiting state,
+    <p>Sets a pad to waiting or non-waiting mode, if at least this pad<br />
+has not been created with locked waiting state,<br />
 in which case nothing happens.</p>
-<p>This function should be called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as
+<p>This function should be called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as<br />
 in the callback.</p>
 <p>MT safe.</p>
 
@@ -2126,7 +2130,7 @@ in the callback.</p>
       
       
         &mdash;
-        <div class='inline'><p>boolean indicating whether this pad should operate
+        <div class='inline'><p>boolean indicating whether this pad should operate<br />
 in waiting or non-waiting mode</p>
 </div>
       
@@ -2162,8 +2166,8 @@ in waiting or non-waiting mode</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Default Gst::CollectPads event handling for the src pad of elements.
-Elements can chain up to this to let flushing seek event handling
+    <p>Default Gst::CollectPads event handling for the src pad of elements.<br />
+Elements can chain up to this to let flushing seek event handling<br />
 be done by Gst::CollectPads.</p>
 
 
@@ -2269,7 +2273,7 @@ be done by Gst::CollectPads.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Stops the processing of data in the collect_pads. this function
+    <p>Stops the processing of data in the collect_pads. this function<br />
 will also unblock any blocking operations.</p>
 <p>MT safe.</p>
 
@@ -2306,12 +2310,12 @@ will also unblock any blocking operations.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get a subbuffer of <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from the given pad <!-- raw HTML omitted -->data<!-- raw HTML omitted -->. Flushes the amount
+    <p>Get a subbuffer of <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from the given pad <!-- raw HTML omitted -->data<!-- raw HTML omitted -->. Flushes the amount<br />
 of read bytes.</p>
-<p>This function should be called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as in the
+<p>This function should be called with <!-- raw HTML omitted -->pads<!-- raw HTML omitted --> STREAM_LOCK held, such as in the<br />
 callback.</p>
-<p>MT safe.
-be less that requested. A return of nil signals that the pad is
+<p>MT safe.<br />
+be less that requested. A return of nil signals that the pad is<br />
 end-of-stream. Unref the buffer after use.</p>
 
 
@@ -2381,7 +2385,7 @@ end-of-stream. Unref the buffer after use.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

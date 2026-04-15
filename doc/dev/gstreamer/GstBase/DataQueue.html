@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GstBase::DataQueue";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -528,6 +530,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -544,10 +547,10 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Gst::DataQueue. If <!-- raw HTML omitted -->fullcallback<!-- raw HTML omitted --> or <!-- raw HTML omitted -->emptycallback<!-- raw HTML omitted --> are supplied, then
-the Gst::DataQueue will call the respective callback to signal full or empty condition.
-If the callbacks are NULL the Gst::DataQueue will instead emit 'full' and 'empty'
-signals.
+    <p>Creates a new Gst::DataQueue. If <!-- raw HTML omitted -->fullcallback<!-- raw HTML omitted --> or <!-- raw HTML omitted -->emptycallback<!-- raw HTML omitted --> are supplied, then<br />
+the Gst::DataQueue will call the respective callback to signal full or empty condition.<br />
+If the callbacks are NULL the Gst::DataQueue will instead emit 'full' and 'empty'<br />
+signals.<br />
 or not.</p>
 
 
@@ -612,7 +615,7 @@ or not.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #gpointer that will be passed to the <!-- raw HTML omitted -->checkfull<!-- raw HTML omitted -->, <!-- raw HTML omitted -->fullcallback<!-- raw HTML omitted -->,
+        <div class='inline'><p>a #gpointer that will be passed to the <!-- raw HTML omitted -->checkfull<!-- raw HTML omitted -->, <!-- raw HTML omitted -->fullcallback<!-- raw HTML omitted -->,<br />
 and <!-- raw HTML omitted -->emptycallback<!-- raw HTML omitted --> callbacks.</p>
 </div>
       
@@ -1015,8 +1018,8 @@ and <!-- raw HTML omitted -->emptycallback<!-- raw HTML omitted --> callbacks.</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Flushes all the contents of the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->. Any call to #gst_data_queue_push and
-#gst_data_queue_pop will be released.
+    <p>Flushes all the contents of the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->. Any call to #gst_data_queue_push and<br />
+#gst_data_queue_pop will be released.<br />
 MT safe.</p>
 
 
@@ -1052,10 +1055,10 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the queue to flushing state if <!-- raw HTML omitted -->flushing<!-- raw HTML omitted --> is true. If set to flushing
-state, any incoming data on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> will be discarded. Any call currently
-blocking on #gst_data_queue_push or #gst_data_queue_pop will return straight
-away with a return value of false. While the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is in flushing state,
+    <p>Sets the queue to flushing state if <!-- raw HTML omitted -->flushing<!-- raw HTML omitted --> is true. If set to flushing<br />
+state, any incoming data on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> will be discarded. Any call currently<br />
+blocking on #gst_data_queue_push or #gst_data_queue_pop will return straight<br />
+away with a return value of false. While the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is in flushing state,<br />
 all calls to those two functions will return false.</p>
 <p>MT Safe.</p>
 
@@ -1165,7 +1168,7 @@ all calls to those two functions will return false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries if there are any items in the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->.
+    <p>Queries if there are any items in the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->.<br />
 MT safe.</p>
 
 
@@ -1205,8 +1208,8 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries if <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is full. This check will be done using the
-Gst::DataQueueCheckFullFunction registered with <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->.
+    <p>Queries if <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is full. This check will be done using the<br />
+Gst::DataQueueCheckFullFunction registered with <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->.<br />
 MT safe.</p>
 
 
@@ -1246,7 +1249,7 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inform the queue that the limits for the fullness check have changed and that
+    <p>Inform the queue that the limits for the fullness check have changed and that<br />
 any blocking gst_data_queue_push() should be unblocked to recheck the limits.</p>
 
 
@@ -1282,9 +1285,9 @@ any blocking gst_data_queue_push() should be unblocked to recheck the limits.</p
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the first <!-- raw HTML omitted -->item<!-- raw HTML omitted --> available on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> without removing it.
-If the queue is currently empty, the call will block until at least
-one item is available, OR the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is set to the flushing state.
+    <p>Retrieves the first <!-- raw HTML omitted -->item<!-- raw HTML omitted --> available on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> without removing it.<br />
+If the queue is currently empty, the call will block until at least<br />
+one item is available, OR the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is set to the flushing state.<br />
 MT safe.</p>
 
 
@@ -1343,9 +1346,9 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the first <!-- raw HTML omitted -->item<!-- raw HTML omitted --> available on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->. If the queue is currently
-empty, the call will block until at least one item is available, OR the
-<!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is set to the flushing state.
+    <p>Retrieves the first <!-- raw HTML omitted -->item<!-- raw HTML omitted --> available on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->. If the queue is currently<br />
+empty, the call will block until at least one item is available, OR the<br />
+<!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is set to the flushing state.<br />
 MT safe.</p>
 
 
@@ -1404,13 +1407,13 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Pushes a Gst::DataQueueItem (or a structure that begins with the same fields)
-on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->. If the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is full, the call will block until space is
-available, OR the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is set to flushing state.
+    <p>Pushes a Gst::DataQueueItem (or a structure that begins with the same fields)<br />
+on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->. If the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is full, the call will block until space is<br />
+available, OR the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is set to flushing state.<br />
 MT safe.</p>
-<p>Note that this function has slightly different semantics than gst_pad_push()
-and gst_pad_push_event(): this function only takes ownership of <!-- raw HTML omitted -->item<!-- raw HTML omitted --> and
-the Gst::MiniObject contained in <!-- raw HTML omitted -->item<!-- raw HTML omitted --> if the push was successful. If false
+<p>Note that this function has slightly different semantics than gst_pad_push()<br />
+and gst_pad_push_event(): this function only takes ownership of <!-- raw HTML omitted -->item<!-- raw HTML omitted --> and<br />
+the Gst::MiniObject contained in <!-- raw HTML omitted -->item<!-- raw HTML omitted --> if the push was successful. If false<br />
 is returned, the caller is responsible for freeing <!-- raw HTML omitted -->item<!-- raw HTML omitted --> and its contents.</p>
 
 
@@ -1469,13 +1472,13 @@ is returned, the caller is responsible for freeing <!-- raw HTML omitted -->item
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Pushes a Gst::DataQueueItem (or a structure that begins with the same fields)
-on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->. It ignores if the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is full or not and forces the <!-- raw HTML omitted -->item<!-- raw HTML omitted -->
-to be pushed anyway.
+    <p>Pushes a Gst::DataQueueItem (or a structure that begins with the same fields)<br />
+on the <!-- raw HTML omitted -->queue<!-- raw HTML omitted -->. It ignores if the <!-- raw HTML omitted -->queue<!-- raw HTML omitted --> is full or not and forces the <!-- raw HTML omitted -->item<!-- raw HTML omitted --><br />
+to be pushed anyway.<br />
 MT safe.</p>
-<p>Note that this function has slightly different semantics than gst_pad_push()
-and gst_pad_push_event(): this function only takes ownership of <!-- raw HTML omitted -->item<!-- raw HTML omitted --> and
-the Gst::MiniObject contained in <!-- raw HTML omitted -->item<!-- raw HTML omitted --> if the push was successful. If false
+<p>Note that this function has slightly different semantics than gst_pad_push()<br />
+and gst_pad_push_event(): this function only takes ownership of <!-- raw HTML omitted -->item<!-- raw HTML omitted --> and<br />
+the Gst::MiniObject contained in <!-- raw HTML omitted -->item<!-- raw HTML omitted --> if the push was successful. If false<br />
 is returned, the caller is responsible for freeing <!-- raw HTML omitted -->item<!-- raw HTML omitted --> and its contents.</p>
 
 
@@ -1530,7 +1533,7 @@ is returned, the caller is responsible for freeing <!-- raw HTML omitted -->item
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

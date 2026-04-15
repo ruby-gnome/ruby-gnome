@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gsk::GLShader";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -622,6 +624,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -657,7 +660,7 @@
       
       
         &mdash;
-        <div class='inline'><p>path to a resource that contains the GLSL sourcecode for
+        <div class='inline'><p>path to a resource that contains the GLSL sourcecode for<br />
 the shader</p>
 </div>
       
@@ -727,14 +730,14 @@ the shader</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Tries to compile the <!-- raw HTML omitted -->shader<!-- raw HTML omitted --> for the given <!-- raw HTML omitted -->renderer<!-- raw HTML omitted -->.</p>
-<p>If there is a problem, this function returns false and reports
-an error. You should use this function before relying on the shader
-for rendering and use a fallback with a simpler shader or without
+<p>If there is a problem, this function returns false and reports<br />
+an error. You should use this function before relying on the shader<br />
+for rendering and use a fallback with a simpler shader or without<br />
 shaders if it fails.</p>
-<p>Note that this will modify the rendering state (for example
-change the current GL context) and requires the renderer to be
-set up. This means that the widget has to be realized. Commonly you
-want to call this from the realize signal of a widget, or during
+<p>Note that this will modify the rendering state (for example<br />
+change the current GL context) and requires the renderer to be<br />
+set up. This means that the widget has to be realized. Commonly you<br />
+want to call this from the realize signal of a widget, or during<br />
 widget snapshot.</p>
 
 
@@ -793,7 +796,7 @@ widget snapshot.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks for a uniform by the name <!-- raw HTML omitted -->name<!-- raw HTML omitted -->, and returns the index
+    <p>Looks for a uniform by the name <!-- raw HTML omitted -->name<!-- raw HTML omitted -->, and returns the index<br />
 of the uniform, or -1 if it was not found.</p>
 
 
@@ -852,12 +855,12 @@ of the uniform, or -1 if it was not found.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Formats the uniform data as needed for feeding the named uniforms
+    <p>Formats the uniform data as needed for feeding the named uniforms<br />
 values into the shader.</p>
-<p>The argument list is a list of pairs of names, and values for the types
-that match the declared uniforms (i.e. double/int/guint/gboolean for
+<p>The argument list is a list of pairs of names, and values for the types<br />
+that match the declared uniforms (i.e. double/int/guint/gboolean for<br />
 primitive values and <code>graphene_vecN_t *</code> for vecN uniforms).</p>
-<p>Any uniforms of the shader that are not included in the argument list
+<p>Any uniforms of the shader that are not included in the argument list<br />
 are zero-initialized.</p>
 
 
@@ -877,7 +880,7 @@ are zero-initialized.</p>
       
       
         &mdash;
-        <div class='inline'><p>name-Value pairs for the uniforms of <!-- raw HTML omitted -->shader<!-- raw HTML omitted -->, ending with
+        <div class='inline'><p>name-Value pairs for the uniforms of <!-- raw HTML omitted -->shader<!-- raw HTML omitted -->, ending with<br />
 a nil name</p>
 </div>
       
@@ -896,7 +899,7 @@ a nil name</p>
       
       
         &mdash;
-        <div class='inline'><p>A newly allocated block of data which can be
+        <div class='inline'><p>A newly allocated block of data which can be<br />
 passed to [ctor<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShaderNode.new].</p>
 </div>
       
@@ -918,13 +921,13 @@ passed to [ctor<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShaderNod
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Formats the uniform data as needed for feeding the named uniforms
+    <p>Formats the uniform data as needed for feeding the named uniforms<br />
 values into the shader.</p>
-<p>The argument list is a list of pairs of names, and values for the
-types that match the declared uniforms (i.e. double/int/guint/gboolean
+<p>The argument list is a list of pairs of names, and values for the<br />
+types that match the declared uniforms (i.e. double/int/guint/gboolean<br />
 for primitive values and <code>graphene_vecN_t *</code> for vecN uniforms).</p>
 <p>It is an error to pass a uniform name that is not declared by the shader.</p>
-<p>Any uniforms of the shader that are not included in the argument list
+<p>Any uniforms of the shader that are not included in the argument list<br />
 are zero-initialized.</p>
 
 
@@ -944,7 +947,7 @@ are zero-initialized.</p>
       
       
         &mdash;
-        <div class='inline'><p>name-Value pairs for the uniforms of <!-- raw HTML omitted -->shader<!-- raw HTML omitted -->, ending
+        <div class='inline'><p>name-Value pairs for the uniforms of <!-- raw HTML omitted -->shader<!-- raw HTML omitted -->, ending<br />
 with a nil name</p>
 </div>
       
@@ -963,7 +966,7 @@ with a nil name</p>
       
       
         &mdash;
-        <div class='inline'><p>A newly allocated block of data which can be
+        <div class='inline'><p>A newly allocated block of data which can be<br />
 passed to [ctor<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShaderNode.new].</p>
 </div>
       
@@ -1711,8 +1714,8 @@ passed to [ctor<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShaderNod
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the number of textures that the shader requires.</p>
-<p>This can be used to check that the a passed shader works
-in your usecase. It is determined by looking at the highest
+<p>This can be used to check that the a passed shader works<br />
+in your usecase. It is determined by looking at the highest<br />
 u_textureN value that the shader defines.</p>
 
 
@@ -1792,7 +1795,7 @@ u_textureN value that the shader defines.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Resource containing the source code for the shader.</p>
-<p>If the shader source is not coming from a resource, this
+<p>If the shader source is not coming from a resource, this<br />
 will be nil.</p>
 
 
@@ -1833,7 +1836,7 @@ will be nil.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Resource containing the source code for the shader.</p>
-<p>If the shader source is not coming from a resource, this
+<p>If the shader source is not coming from a resource, this<br />
 will be nil.</p>
 
 
@@ -2002,7 +2005,7 @@ will be nil.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

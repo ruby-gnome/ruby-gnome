@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::Drive";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,34 +79,35 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GDrive</code> represents a piece of hardware connected to the machine.
-It’s generally only created for removable hardware or hardware with
+    <p><code>GDrive</code> represents a piece of hardware connected to the machine.<br />
+It’s generally only created for removable hardware or hardware with<br />
 removable media.</p>
-<p><code>GDrive</code> is a container class for [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Volume] objects that stem from
-the same piece of media. As such, <code>GDrive</code> abstracts a drive with
-(or without) removable media and provides operations for querying
-whether media is available, determining whether media change is
+<p><code>GDrive</code> is a container class for [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Volume] objects that stem from<br />
+the same piece of media. As such, <code>GDrive</code> abstracts a drive with<br />
+(or without) removable media and provides operations for querying<br />
+whether media is available, determining whether media change is<br />
 automatically detected and ejecting the media.</p>
-<p>If the <code>GDrive</code> reports that media isn’t automatically detected, one
-can poll for media; typically one should not do this periodically
-as a poll for media operation is potentially expensive and may
+<p>If the <code>GDrive</code> reports that media isn’t automatically detected, one<br />
+can poll for media; typically one should not do this periodically<br />
+as a poll for media operation is potentially expensive and may<br />
 spin up the drive creating noise.</p>
-<p><code>GDrive</code> supports starting and stopping drives with authentication
-support for the former. This can be used to support a diverse set
-of use cases including connecting/disconnecting iSCSI devices,
-powering down external disk enclosures and starting/stopping
-multi-disk devices such as RAID devices. Note that the actual
-semantics and side-effects of starting/stopping a <code>GDrive</code> may vary
-according to implementation. To choose the correct verbs in e.g. a
+<p><code>GDrive</code> supports starting and stopping drives with authentication<br />
+support for the former. This can be used to support a diverse set<br />
+of use cases including connecting/disconnecting iSCSI devices,<br />
+powering down external disk enclosures and starting/stopping<br />
+multi-disk devices such as RAID devices. Note that the actual<br />
+semantics and side-effects of starting/stopping a <code>GDrive</code> may vary<br />
+according to implementation. To choose the correct verbs in e.g. a<br />
 file manager, use [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Drive.get_start_stop_type].</p>
-<p>For <a href="migrating-gnome-vfs.html">porting from GnomeVFS</a> note that there is no
+<p>For <a href="migrating-gnome-vfs.html">porting from GnomeVFS</a> note that there is no<br />
 equivalent of <code>GDrive</code> in that API.</p>
 
 
@@ -995,6 +997,7 @@ equivalent of <code>GDrive</code> in that API.</p>
 
       
     </ul>
+    
   
 
 
@@ -1072,7 +1075,7 @@ equivalent of <code>GDrive</code> in that API.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if the <!-- raw HTML omitted -->drive<!-- raw HTML omitted --> can be polled for media changes,
+    <p>Returns true if the <!-- raw HTML omitted -->drive<!-- raw HTML omitted --> can be polled for media changes,<br />
 false otherwise.</p>
 
 
@@ -1110,7 +1113,7 @@ false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the <!-- raw HTML omitted -->drive<!-- raw HTML omitted --> can be polled for media changes,
+        <div class='inline'><p>true if the <!-- raw HTML omitted -->drive<!-- raw HTML omitted --> can be polled for media changes,<br />
 false otherwise.</p>
 </div>
       
@@ -1566,7 +1569,7 @@ false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if the drive has been ejected successfully,
+    <p>Returns true if the drive has been ejected successfully,<br />
 false otherwise.</p>
 
 
@@ -1619,7 +1622,7 @@ false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the drive has been ejected successfully,
+        <div class='inline'><p>true if the drive has been ejected successfully,<br />
 false otherwise.</p>
 </div>
       
@@ -1689,7 +1692,7 @@ false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GMount::Operation or nil to avoid
+        <div class='inline'><p>a GMount::Operation or nil to avoid<br />
 user interaction.</p>
 </div>
       
@@ -1843,8 +1846,8 @@ user interaction.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a nil-terminated
-array of strings containing kinds of identifiers. Use g_strfreev()
+    <p>Returns a nil-terminated<br />
+array of strings containing kinds of identifiers. Use g_strfreev()<br />
 to free.</p>
 
 
@@ -1882,8 +1885,8 @@ to free.</p>
       
       
         &mdash;
-        <div class='inline'><p>a nil-terminated
-array of strings containing kinds of identifiers. Use g_strfreev()
+        <div class='inline'><p>a nil-terminated<br />
+array of strings containing kinds of identifiers. Use g_strfreev()<br />
 to free.</p>
 </div>
       
@@ -1905,7 +1908,7 @@ to free.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns #GIcon for the <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->.
+    <p>Returns #GIcon for the <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->.<br />
 Free the returned object with g_object_unref().</p>
 
 
@@ -1943,7 +1946,7 @@ Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>#GIcon for the <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->.
+        <div class='inline'><p>#GIcon for the <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->.<br />
 Free the returned object with g_object_unref().</p>
 </div>
       
@@ -1965,8 +1968,8 @@ Free the returned object with g_object_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a newly allocated string containing the
-requested identifier, or nil if the #GDrive
+    <p>Returns a newly allocated string containing the<br />
+requested identifier, or nil if the #GDrive<br />
 doesn't have this kind of identifier.</p>
 
 
@@ -2019,8 +2022,8 @@ doesn't have this kind of identifier.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string containing the
-requested identifier, or nil if the #GDrive
+        <div class='inline'><p>a newly allocated string containing the<br />
+requested identifier, or nil if the #GDrive<br />
 doesn't have this kind of identifier.</p>
 </div>
       
@@ -2042,7 +2045,7 @@ doesn't have this kind of identifier.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a string containing <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->'s name. The returned
+    <p>Returns a string containing <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->'s name. The returned<br />
 string should be freed when no longer needed.</p>
 
 
@@ -2080,7 +2083,7 @@ string should be freed when no longer needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string containing <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->'s name. The returned
+        <div class='inline'><p>a string containing <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->'s name. The returned<br />
 string should be freed when no longer needed.</p>
 </div>
       
@@ -2218,7 +2221,7 @@ string should be freed when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns symbolic #GIcon for the <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->.
+    <p>Returns symbolic #GIcon for the <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->.<br />
 Free the returned object with g_object_unref().</p>
 
 
@@ -2256,7 +2259,7 @@ Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>symbolic #GIcon for the <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->.
+        <div class='inline'><p>symbolic #GIcon for the <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->.<br />
 Free the returned object with g_object_unref().</p>
 </div>
       
@@ -2470,7 +2473,7 @@ Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>#GIcon for the <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->.
+        <div class='inline'><p>#GIcon for the <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->.<br />
 Free the returned object with g_object_unref().</p>
 </div>
       
@@ -2492,7 +2495,7 @@ Free the returned object with g_object_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if the <!-- raw HTML omitted -->drive<!-- raw HTML omitted --> is capable of automatically detecting
+    <p>Returns true if the <!-- raw HTML omitted -->drive<!-- raw HTML omitted --> is capable of automatically detecting<br />
 media changes, false otherwise.</p>
 
 
@@ -2530,7 +2533,7 @@ media changes, false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the <!-- raw HTML omitted -->drive<!-- raw HTML omitted --> is capable of automatically detecting
+        <div class='inline'><p>true if the <!-- raw HTML omitted -->drive<!-- raw HTML omitted --> is capable of automatically detecting<br />
 media changes, false otherwise.</p>
 </div>
       
@@ -2686,7 +2689,7 @@ media changes, false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string containing <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->'s name. The returned
+        <div class='inline'><p>a string containing <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->'s name. The returned<br />
 string should be freed when no longer needed.</p>
 </div>
       
@@ -2806,7 +2809,7 @@ string should be freed when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if the drive has been poll_for_mediaed successfully,
+    <p>Returns true if the drive has been poll_for_mediaed successfully,<br />
 false otherwise.</p>
 
 
@@ -2859,7 +2862,7 @@ false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the drive has been poll_for_mediaed successfully,
+        <div class='inline'><p>true if the drive has been poll_for_mediaed successfully,<br />
 false otherwise.</p>
 </div>
       
@@ -2968,7 +2971,7 @@ false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GMount::Operation or nil to avoid
+        <div class='inline'><p>a GMount::Operation or nil to avoid<br />
 user interaction.</p>
 </div>
       
@@ -3049,7 +3052,7 @@ user interaction.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if the drive has been started successfully,
+    <p>Returns true if the drive has been started successfully,<br />
 false otherwise.</p>
 
 
@@ -3102,7 +3105,7 @@ false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the drive has been started successfully,
+        <div class='inline'><p>true if the drive has been started successfully,<br />
 false otherwise.</p>
 </div>
       
@@ -3211,7 +3214,7 @@ false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GMount::Operation or nil to avoid
+        <div class='inline'><p>a GMount::Operation or nil to avoid<br />
 user interaction.</p>
 </div>
       
@@ -3341,7 +3344,7 @@ user interaction.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if the drive has been stopped successfully,
+    <p>Returns true if the drive has been stopped successfully,<br />
 false otherwise.</p>
 
 
@@ -3394,7 +3397,7 @@ false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the drive has been stopped successfully,
+        <div class='inline'><p>true if the drive has been stopped successfully,<br />
 false otherwise.</p>
 </div>
       
@@ -3434,7 +3437,7 @@ false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>symbolic #GIcon for the <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->.
+        <div class='inline'><p>symbolic #GIcon for the <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->.<br />
 Free the returned object with g_object_unref().</p>
 </div>
       
@@ -3457,7 +3460,7 @@ Free the returned object with g_object_unref().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Get a list of mountable volumes for <!-- raw HTML omitted -->drive<!-- raw HTML omitted -->.</p>
-<p>The returned list should be freed with g_list_free(), after
+<p>The returned list should be freed with g_list_free(), after<br />
 its elements have been unreffed with g_object_unref().</p>
 
 
@@ -3493,7 +3496,7 @@ its elements have been unreffed with g_object_unref().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

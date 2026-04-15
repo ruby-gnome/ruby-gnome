@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::PrintJob";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -102,12 +104,12 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>A <code>GtkPrintJob</code> object represents a job that is sent to a printer.</p>
-<p>You only need to deal directly with print jobs if you use the
+<p>You only need to deal directly with print jobs if you use the<br />
 non-portable [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintUnixDialog] API.</p>
-<p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob.get_surface] to obtain the cairo surface
-onto which the pages must be drawn. Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob.send]
-to send the finished job to the printer. If you don’t use cairo
-<code>GtkPrintJob</code> also supports printing of manually generated PostScript,
+<p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob.get_surface] to obtain the cairo surface<br />
+onto which the pages must be drawn. Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob.send]<br />
+to send the finished job to the printer. If you don’t use cairo<br />
+<code>GtkPrintJob</code> also supports printing of manually generated PostScript,<br />
 via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob.set_source_file].</p>
 
 
@@ -985,6 +987,7 @@ via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob.set_so
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1224,7 +1227,7 @@ via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob.set_so
       
       
         &mdash;
-        <div class='inline'><p>a pointer to an
+        <div class='inline'><p>a pointer to an<br />
 array of <code>GtkPageRange</code> structs</p>
 </div>
       
@@ -2306,7 +2309,7 @@ array of <code>GtkPageRange</code> structs</p>
       
       
         &mdash;
-        <div class='inline'><p>pointer to an array of
+        <div class='inline'><p>pointer to an array of<br />
 <code>GtkPageRange</code> structs</p>
 </div>
       
@@ -2463,14 +2466,14 @@ array of <code>GtkPageRange</code> structs</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Make the <code>GtkPrintJob</code> send an existing document to the
+    <p>Make the <code>GtkPrintJob</code> send an existing document to the<br />
 printing system.</p>
-<p>The file can be in any format understood by the platforms
-printing system (typically PostScript, but on many platforms
-PDF may work too). See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.accepts_pdf] and
+<p>The file can be in any format understood by the platforms<br />
+printing system (typically PostScript, but on many platforms<br />
+PDF may work too). See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.accepts_pdf] and<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.accepts_ps].</p>
-<p>This is similar to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob.set_source_file],
-but takes expects an open file descriptor for the file,
+<p>This is similar to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob.set_source_file],<br />
+but takes expects an open file descriptor for the file,<br />
 instead of a filename.</p>
 
 
@@ -2529,11 +2532,11 @@ instead of a filename.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Make the <code>GtkPrintJob</code> send an existing document to the
+    <p>Make the <code>GtkPrintJob</code> send an existing document to the<br />
 printing system.</p>
-<p>The file can be in any format understood by the platforms
-printing system (typically PostScript, but on many platforms
-PDF may work too). See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.accepts_pdf] and
+<p>The file can be in any format understood by the platforms<br />
+printing system (typically PostScript, but on many platforms<br />
+PDF may work too). See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.accepts_pdf] and<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer.accepts_ps].</p>
 
 
@@ -2631,7 +2634,7 @@ PDF may work too). See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a cairo surface onto which the pages of
+    <p>Gets a cairo surface onto which the pages of<br />
 the print job should be rendered.</p>
 
 
@@ -2817,7 +2820,7 @@ the print job should be rendered.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>true if the print job will continue to emit status-changed
+    <p>true if the print job will continue to emit status-changed<br />
 signals after the print data has been setn to the printer.</p>
 
 
@@ -2885,7 +2888,7 @@ signals after the print data has been setn to the printer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>true if the print job will continue to emit status-changed
+    <p>true if the print job will continue to emit status-changed<br />
 signals after the print data has been setn to the printer.</p>
 
 
@@ -2921,7 +2924,7 @@ signals after the print data has been setn to the printer.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

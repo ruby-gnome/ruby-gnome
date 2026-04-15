@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::FileChooser";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -83,50 +84,51 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/deprecated.rb</dd>
+    <dd>lib/gtk4/deprecated.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkFileChooser</code> is an interface that can be implemented by file
+    <p><code>GtkFileChooser</code> is an interface that can be implemented by file<br />
 selection widgets.</p>
-<p>In GTK, the main objects that implement this interface are
+<p>In GTK, the main objects that implement this interface are<br />
 [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooserWidget] and [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooserDialog].</p>
-<p>You do not need to write an object that implements the <code>GtkFileChooser</code>
-interface unless you are trying to adapt an existing file selector to
+<p>You do not need to write an object that implements the <code>GtkFileChooser</code><br />
+interface unless you are trying to adapt an existing file selector to<br />
 expose a standard programming interface.</p>
-<p><code>GtkFileChooser</code> allows for shortcuts to various places in the filesystem.
-In the default implementation these are displayed in the left pane. It
-may be a bit confusing at first that these shortcuts come from various
+<p><code>GtkFileChooser</code> allows for shortcuts to various places in the filesystem.<br />
+In the default implementation these are displayed in the left pane. It<br />
+may be a bit confusing at first that these shortcuts come from various<br />
 sources and in various flavours, so lets explain the terminology here:</p>
 <ul>
 <li>
-<p>Bookmarks: are created by the user, by dragging folders from the
-right pane to the left pane, or by using the “Add”. Bookmarks
+<p>Bookmarks: are created by the user, by dragging folders from the<br />
+right pane to the left pane, or by using the “Add”. Bookmarks<br />
 can be renamed and deleted by the user.</p>
 </li>
 <li>
-<p>Shortcuts: can be provided by the application. For example, a Paint
-program may want to add a shortcut for a Clipart folder. Shortcuts
+<p>Shortcuts: can be provided by the application. For example, a Paint<br />
+program may want to add a shortcut for a Clipart folder. Shortcuts<br />
 cannot be modified by the user.</p>
 </li>
 <li>
-<p>Volumes: are provided by the underlying filesystem abstraction. They are
+<p>Volumes: are provided by the underlying filesystem abstraction. They are<br />
 the “roots” of the filesystem.</p>
 </li>
 </ul>
-<h1>File Names and Encodings</h1>
-<p>When the user is finished selecting files in a <code>GtkFileChooser</code>, your
+<h1><a href="#file-names-and-encodings" aria-hidden="true" class="anchor" id="file-names-and-encodings"></a>File Names and Encodings</h1>
+<p>When the user is finished selecting files in a <code>GtkFileChooser</code>, your<br />
 program can get the selected filenames as <code>GFile</code>s.</p>
-<h1>Adding options</h1>
-<p>You can add extra widgets to a file chooser to provide options
-that are not present in the default design, by using
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooser.add_choice]. Each choice has an identifier and
-a user visible label; additionally, each choice can have multiple
-options. If a choice has no option, it will be rendered as a
-check button with the given label; if a choice has options, it will
+<h1><a href="#adding-options" aria-hidden="true" class="anchor" id="adding-options"></a>Adding options</h1>
+<p>You can add extra widgets to a file chooser to provide options<br />
+that are not present in the default design, by using<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooser.add_choice]. Each choice has an identifier and<br />
+a user visible label; additionally, each choice can have multiple<br />
+options. If a choice has no option, it will be rendered as a<br />
+check button with the given label; if a choice has options, it will<br />
 be rendered as a combo box.</p>
 
 
@@ -726,6 +728,7 @@ be rendered as a combo box.</p>
 
       
     </ul>
+    
   
 
 
@@ -787,8 +790,8 @@ be rendered as a combo box.</p>
   <div class="discussion">
     <p>Sets the type of operation that the chooser is performing.</p>
 <p>The user interface is adapted to suit the selected action.</p>
-<p>For example, an option to create a new folder might be shown
-if the action is %GTK_FILE_CHOOSER_ACTION_SAVE but not if the
+<p>For example, an option to create a new folder might be shown<br />
+if the action is %GTK_FILE_CHOOSER_ACTION_SAVE but not if the<br />
 action is %GTK_FILE_CHOOSER_ACTION_OPEN.</p>
 
 
@@ -844,11 +847,11 @@ action is %GTK_FILE_CHOOSER_ACTION_OPEN.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a 'choice' to the file chooser.</p>
-<p>This is typically implemented as a combobox or, for boolean choices,
-as a checkbutton. You can select a value using
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooser.set_choice] before the dialog is shown,
-and you can obtain the user-selected value in the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog::response] signal handler using
+<p>This is typically implemented as a combobox or, for boolean choices,<br />
+as a checkbutton. You can select a value using<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooser.set_choice] before the dialog is shown,<br />
+and you can obtain the user-selected value in the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog::response] signal handler using<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooser.get_choice].</p>
 
 
@@ -949,9 +952,9 @@ and you can obtain the user-selected value in the
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> to the list of filters that the user can select between.</p>
-<p>When a filter is selected, only files that are passed by that
+<p>When a filter is selected, only files that are passed by that<br />
 filter are displayed.</p>
-<p>Note that the <!-- raw HTML omitted -->chooser<!-- raw HTML omitted --> takes ownership of the filter if it is floating,
+<p>Note that the <!-- raw HTML omitted -->chooser<!-- raw HTML omitted --> takes ownership of the filter if it is floating,<br />
 so you have to ref and sink it if you want to keep a reference.</p>
 
 
@@ -1006,7 +1009,7 @@ so you have to ref and sink it if you want to keep a reference.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a folder to be displayed with the shortcut folders
+    <p>Adds a folder to be displayed with the shortcut folders<br />
 in a file chooser.</p>
 
 
@@ -1044,7 +1047,7 @@ in a file chooser.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the folder could be added successfully,
+        <div class='inline'><p>true if the folder could be added successfully,<br />
 false otherwise.</p>
 </div>
       
@@ -1106,7 +1109,7 @@ false otherwise.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets whether file chooser will offer to create new folders.</p>
-<p>This is only relevant if the action is not set to be
+<p>This is only relevant if the action is not set to be<br />
 %GTK_FILE_CHOOSER_ACTION_OPEN.</p>
 
 
@@ -1237,7 +1240,7 @@ false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the folder could be changed successfully, false
+        <div class='inline'><p>true if the folder could be changed successfully, false<br />
 otherwise.</p>
 </div>
       
@@ -1260,7 +1263,7 @@ otherwise.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the current name in the file selector, as entered by the user.</p>
-<p>This is meant to be used in save dialogs, to get the currently typed
+<p>This is meant to be used in save dialogs, to get the currently typed<br />
 filename when the file itself does not exist yet.</p>
 
 
@@ -1279,10 +1282,10 @@ filename when the file itself does not exist yet.</p>
       
       
         &mdash;
-        <div class='inline'><p>The raw text from the file chooser’s “Name” entry. Free with
-g_free(). Note that this string is not a full pathname or URI; it is
-whatever the contents of the entry are. Note also that this string is
-in UTF-8 encoding, which is not necessarily the system’s encoding for
+        <div class='inline'><p>The raw text from the file chooser’s “Name” entry. Free with<br />
+g_free(). Note that this string is not a full pathname or URI; it is<br />
+whatever the contents of the entry are. Note also that this string is<br />
+in UTF-8 encoding, which is not necessarily the system’s encoding for<br />
 filenames.</p>
 </div>
       
@@ -1304,15 +1307,15 @@ filenames.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the current name in the file selector, as if entered
+    <p>Sets the current name in the file selector, as if entered<br />
 by the user.</p>
-<p>Note that the name passed in here is a UTF-8 string rather
-than a filename. This function is meant for such uses as a
-suggested name in a “Save As...” dialog.  You can pass
+<p>Note that the name passed in here is a UTF-8 string rather<br />
+than a filename. This function is meant for such uses as a<br />
+suggested name in a “Save As...” dialog.  You can pass<br />
 “Untitled.doc” or a similarly suitable suggestion for the <!-- raw HTML omitted -->name<!-- raw HTML omitted -->.</p>
-<p>If you want to preselect a particular existing file, you should
+<p>If you want to preselect a particular existing file, you should<br />
 use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooser.set_file] instead.</p>
-<p>Please see the documentation for those functions for an example
+<p>Please see the documentation for those functions for an example<br />
 of using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooser.set_current_name] as well.</p>
 
 
@@ -1367,11 +1370,11 @@ of using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChoose
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the <code>GFile</code> for the currently selected file in
+    <p>Gets the <code>GFile</code> for the currently selected file in<br />
 the file selector.</p>
-<p>If multiple files are selected, one of the files will be
+<p>If multiple files are selected, one of the files will be<br />
 returned at random.</p>
-<p>If the file chooser is in folder mode, this function returns
+<p>If the file chooser is in folder mode, this function returns<br />
 the selected folder.</p>
 
 
@@ -1390,7 +1393,7 @@ the selected folder.</p>
       
       
         &mdash;
-        <div class='inline'><p>a selected <code>GFile</code>. You own the
+        <div class='inline'><p>a selected <code>GFile</code>. You own the<br />
 returned file; use g_object_unref() to release it.</p>
 </div>
       
@@ -1413,17 +1416,17 @@ returned file; use g_object_unref() to release it.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->file<!-- raw HTML omitted --> as the current filename for the file chooser.</p>
-<p>This includes changing to the file’s parent folder and actually selecting
-the file in list. If the <!-- raw HTML omitted -->chooser<!-- raw HTML omitted --> is in %GTK_FILE_CHOOSER_ACTION_SAVE mode,
+<p>This includes changing to the file’s parent folder and actually selecting<br />
+the file in list. If the <!-- raw HTML omitted -->chooser<!-- raw HTML omitted --> is in %GTK_FILE_CHOOSER_ACTION_SAVE mode,<br />
 the file’s base name will also appear in the dialog’s file name entry.</p>
-<p>If the file name isn’t in the current folder of <!-- raw HTML omitted -->chooser<!-- raw HTML omitted -->, then the current
+<p>If the file name isn’t in the current folder of <!-- raw HTML omitted -->chooser<!-- raw HTML omitted -->, then the current<br />
 folder of <!-- raw HTML omitted -->chooser<!-- raw HTML omitted --> will be changed to the folder containing <!-- raw HTML omitted -->file<!-- raw HTML omitted -->.</p>
-<p>Note that the file must exist, or nothing will be done except
+<p>Note that the file must exist, or nothing will be done except<br />
 for the directory change.</p>
-<p>If you are implementing a save dialog, you should use this function if
-you already have a file name to which the user may save; for example,
-when the user opens an existing file and then does “Save As…”. If you
-don’t have a file name already — for example, if the user just created
+<p>If you are implementing a save dialog, you should use this function if<br />
+you already have a file name to which the user may save; for example,<br />
+when the user opens an existing file and then does “Save As…”. If you<br />
+don’t have a file name already — for example, if the user just created<br />
 a new file and is saving it for the first time, do not call this function.</p>
 <p>Instead, use something similar to this:</p>
 <pre class="code c"><code class="c">static void
@@ -1504,7 +1507,7 @@ prepare_file_chooser (GtkFileChooser *chooser,
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Lists all the selected files and subfolders in the current folder
+    <p>Lists all the selected files and subfolders in the current folder<br />
 of <!-- raw HTML omitted -->chooser<!-- raw HTML omitted --> as <code>GFile</code>.</p>
 
 
@@ -1523,8 +1526,8 @@ of <!-- raw HTML omitted -->chooser<!-- raw HTML omitted --> as <code>GFile</cod
       
       
         &mdash;
-        <div class='inline'><p>a list model containing a <code>GFile</code> for each
-selected file and subfolder in the current folder. Free the returned
+        <div class='inline'><p>a list model containing a <code>GFile</code> for each<br />
+selected file and subfolder in the current folder. Free the returned<br />
 list with g_object_unref().</p>
 </div>
       
@@ -1586,11 +1589,11 @@ list with g_object_unref().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the current filter.</p>
-<p>Only the files that pass the filter will be displayed.
-If the user-selectable list of filters is non-empty, then
+<p>Only the files that pass the filter will be displayed.<br />
+If the user-selectable list of filters is non-empty, then<br />
 the filter should be one of the filters in that list.</p>
-<p>Setting the current filter when the list of filters is
-empty is useful if you want to restrict the displayed
+<p>Setting the current filter when the list of filters is<br />
+empty is useful if you want to restrict the displayed<br />
 set of files without letting the user change it.</p>
 
 
@@ -1646,9 +1649,9 @@ set of files without letting the user change it.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the current set of user-selectable filters, as a list model.</p>
-<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooser.add_filter] and
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooser.add_filter] and<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooser.remove_filter] for changing individual filters.</p>
-<p>You should not modify the returned list model. Future changes to
+<p>You should not modify the returned list model. Future changes to<br />
 <!-- raw HTML omitted -->chooser<!-- raw HTML omitted --> may or may not affect the returned model.</p>
 
 
@@ -1667,7 +1670,7 @@ set of files without letting the user change it.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GListModel</code> containing the current set
+        <div class='inline'><p>a <code>GListModel</code> containing the current set<br />
 of user-selectable filters.</p>
 </div>
       
@@ -1892,7 +1895,7 @@ of user-selectable filters.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the folder could be removed successfully,
+        <div class='inline'><p>true if the folder could be removed successfully,<br />
 false otherwise.</p>
 </div>
       
@@ -1914,7 +1917,7 @@ false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether multiple files can be selected in the file
+    <p>Gets whether multiple files can be selected in the file<br />
 chooser.</p>
 
 
@@ -1955,8 +1958,8 @@ chooser.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets whether multiple files can be selected in the file chooser.</p>
-<p>This is only relevant if the action is set to be
-%GTK_FILE_CHOOSER_ACTION_OPEN or
+<p>This is only relevant if the action is set to be<br />
+%GTK_FILE_CHOOSER_ACTION_OPEN or<br />
 %GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER.</p>
 
 
@@ -2011,7 +2014,7 @@ chooser.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Selects an option in a 'choice' that has been added with
+    <p>Selects an option in a 'choice' that has been added with<br />
 gtk_file_chooser_add_choice().</p>
 <p>For a boolean choice, the possible options are &quot;true&quot; and &quot;false&quot;.</p>
 
@@ -2083,7 +2086,7 @@ gtk_file_chooser_add_choice().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queries the list of shortcut folders in the file chooser.</p>
-<p>You should not modify the returned list model. Future changes to
+<p>You should not modify the returned list model. Future changes to<br />
 <!-- raw HTML omitted -->chooser<!-- raw HTML omitted --> may or may not affect the returned model.</p>
 
 
@@ -2119,7 +2122,7 @@ gtk_file_chooser_add_choice().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

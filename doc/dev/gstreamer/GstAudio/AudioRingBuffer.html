@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GstAudio::AudioRingBuffer";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -198,6 +200,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -873,9 +876,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -1091,9 +1096,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Allocate the resources for the ringbuffer. This function fills
-in the data pointer of the ring buffer with a valid Gst::Buffer
-to which samples can be written.
+    <p>Allocate the resources for the ringbuffer. This function fills<br />
+in the data pointer of the ring buffer with a valid Gst::Buffer<br />
+to which samples can be written.<br />
 MT safe.</p>
 
 
@@ -1153,7 +1158,7 @@ MT safe.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Activate <!-- raw HTML omitted -->buf<!-- raw HTML omitted --> to start or stop pulling data.</p>
-<p>MT safe.
+<p>MT safe.<br />
 FALSE on error.</p>
 
 
@@ -1212,7 +1217,7 @@ FALSE on error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Subclasses should call this function to notify the fact that
+    <p>Subclasses should call this function to notify the fact that<br />
 <!-- raw HTML omitted -->advance<!-- raw HTML omitted --> segments are now processed by the device.</p>
 <p>MT safe.</p>
 
@@ -1268,7 +1273,7 @@ FALSE on error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tell the ringbuffer about the device's channel positions. This must
+    <p>Tell the ringbuffer about the device's channel positions. This must<br />
 be called in when the ringbuffer is acquired.</p>
 
 
@@ -1323,7 +1328,7 @@ be called in when the ringbuffer is acquired.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Clear the given segment of the buffer with silence samples.
+    <p>Clear the given segment of the buffer with silence samples.<br />
 This function is used by subclasses.</p>
 <p>MT safe.</p>
 
@@ -1415,8 +1420,8 @@ This function is used by subclasses.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Close the audio device associated with the ring buffer. The ring buffer
-should already have been released via gst_audio_ring_buffer_release().
+    <p>Close the audio device associated with the ring buffer. The ring buffer<br />
+should already have been released via gst_audio_ring_buffer_release().<br />
 MT safe.</p>
 
 
@@ -1457,20 +1462,20 @@ MT safe.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Commit <!-- raw HTML omitted -->in_samples<!-- raw HTML omitted --> samples pointed to by <!-- raw HTML omitted -->data<!-- raw HTML omitted --> to the ringbuffer <!-- raw HTML omitted -->buf<!-- raw HTML omitted -->.</p>
-<p><!-- raw HTML omitted -->in_samples<!-- raw HTML omitted --> and <!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> define the rate conversion to perform on the
-samples in <!-- raw HTML omitted -->data<!-- raw HTML omitted -->. For negative rates, <!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> must be negative and
+<p><!-- raw HTML omitted -->in_samples<!-- raw HTML omitted --> and <!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> define the rate conversion to perform on the<br />
+samples in <!-- raw HTML omitted -->data<!-- raw HTML omitted -->. For negative rates, <!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> must be negative and<br />
 <!-- raw HTML omitted -->in_samples<!-- raw HTML omitted --> positive.</p>
-<p>When <!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> is positive, the first sample will be written at position <!-- raw HTML omitted -->sample<!-- raw HTML omitted -->
-in the ringbuffer. When <!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> is negative, the last sample will be written to
+<p>When <!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> is positive, the first sample will be written at position <!-- raw HTML omitted -->sample<!-- raw HTML omitted --><br />
+in the ringbuffer. When <!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> is negative, the last sample will be written to<br />
 <!-- raw HTML omitted -->sample<!-- raw HTML omitted --> in reverse order.</p>
-<p><!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> does not need to be a multiple of the segment size of the ringbuffer
+<p><!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> does not need to be a multiple of the segment size of the ringbuffer<br />
 although it is recommended for optimal performance.</p>
-<p><!-- raw HTML omitted -->accum<!-- raw HTML omitted --> will hold a temporary accumulator used in rate conversion and should be
-set to 0 when this function is first called. In case the commit operation is
-interrupted, one can resume the processing by passing the previously returned
+<p><!-- raw HTML omitted -->accum<!-- raw HTML omitted --> will hold a temporary accumulator used in rate conversion and should be<br />
+set to 0 when this function is first called. In case the commit operation is<br />
+interrupted, one can resume the processing by passing the previously returned<br />
 <!-- raw HTML omitted -->accum<!-- raw HTML omitted --> value back to this function.</p>
-<p>MT safe.
-number of samples written can be less than <!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> when <!-- raw HTML omitted -->buf<!-- raw HTML omitted --> was interrupted
+<p>MT safe.<br />
+number of samples written can be less than <!-- raw HTML omitted -->out_samples<!-- raw HTML omitted --> when <!-- raw HTML omitted -->buf<!-- raw HTML omitted --> was interrupted<br />
 with a flush or stop.</p>
 
 
@@ -1589,7 +1594,7 @@ with a flush or stop.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convert <!-- raw HTML omitted -->src_val<!-- raw HTML omitted --> in <!-- raw HTML omitted -->src_fmt<!-- raw HTML omitted --> to the equivalent value in <!-- raw HTML omitted -->dest_fmt<!-- raw HTML omitted -->. The result
+    <p>Convert <!-- raw HTML omitted -->src_val<!-- raw HTML omitted --> in <!-- raw HTML omitted -->src_fmt<!-- raw HTML omitted --> to the equivalent value in <!-- raw HTML omitted -->dest_fmt<!-- raw HTML omitted -->. The result<br />
 will be put in <!-- raw HTML omitted -->dest_val<!-- raw HTML omitted -->.</p>
 
 
@@ -1693,14 +1698,14 @@ will be put in <!-- raw HTML omitted -->dest_val<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the number of samples queued in the audio device. This is
-usually less than the segment size but can be bigger when the
-implementation uses another internal buffer between the audio
+    <p>Get the number of samples queued in the audio device. This is<br />
+usually less than the segment size but can be bigger when the<br />
+implementation uses another internal buffer between the audio<br />
 device.</p>
-<p>For playback ringbuffers this is the amount of samples transferred from the
+<p>For playback ringbuffers this is the amount of samples transferred from the<br />
 ringbuffer to the device but still not played.</p>
-<p>For capture ringbuffers this is the amount of samples in the device that are
-not yet transferred to the ringbuffer.
+<p>For capture ringbuffers this is the amount of samples in the device that are<br />
+not yet transferred to the ringbuffer.<br />
 MT safe.</p>
 
 
@@ -1740,7 +1745,7 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks the status of the device associated with the ring buffer.
+    <p>Checks the status of the device associated with the ring buffer.<br />
 MT safe.</p>
 
 
@@ -1835,7 +1840,7 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Check if the ringbuffer is acquired and ready to use.
+    <p>Check if the ringbuffer is acquired and ready to use.<br />
 MT safe.</p>
 
 
@@ -1955,7 +1960,7 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tell the ringbuffer that it is allowed to start playback when
+    <p>Tell the ringbuffer that it is allowed to start playback when<br />
 the ringbuffer is filled with samples.</p>
 <p>MT safe.</p>
 
@@ -2011,9 +2016,9 @@ the ringbuffer is filled with samples.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Open the audio device associated with the ring buffer. Does not perform any
-setup on the device. You must open the device before acquiring the ring
-buffer.
+    <p>Open the audio device associated with the ring buffer. Does not perform any<br />
+setup on the device. You must open the device before acquiring the ring<br />
+buffer.<br />
 MT safe.</p>
 
 
@@ -2053,7 +2058,7 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Pause processing samples from the ringbuffer.
+    <p>Pause processing samples from the ringbuffer.<br />
 MT safe.</p>
 
 
@@ -2093,8 +2098,8 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a pointer to memory where the data from segment <!-- raw HTML omitted -->segment<!-- raw HTML omitted -->
-can be found. This function is mostly used by subclasses.
+    <p>Returns a pointer to memory where the data from segment <!-- raw HTML omitted -->segment<!-- raw HTML omitted --><br />
+can be found. This function is mostly used by subclasses.<br />
 MT safe.</p>
 
 
@@ -2183,13 +2188,13 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Read <!-- raw HTML omitted -->len<!-- raw HTML omitted --> samples from the ringbuffer into the memory pointed
-to by <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.
-The first sample should be read from position <!-- raw HTML omitted -->sample<!-- raw HTML omitted --> in
+    <p>Read <!-- raw HTML omitted -->len<!-- raw HTML omitted --> samples from the ringbuffer into the memory pointed<br />
+to by <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.<br />
+The first sample should be read from position <!-- raw HTML omitted -->sample<!-- raw HTML omitted --> in<br />
 the ringbuffer.</p>
-<p><!-- raw HTML omitted -->len<!-- raw HTML omitted --> should not be a multiple of the segment size of the ringbuffer
+<p><!-- raw HTML omitted -->len<!-- raw HTML omitted --> should not be a multiple of the segment size of the ringbuffer<br />
 although it is recommended.</p>
-<p><!-- raw HTML omitted -->timestamp<!-- raw HTML omitted --> will return the timestamp associated with the data returned.
+<p><!-- raw HTML omitted -->timestamp<!-- raw HTML omitted --> will return the timestamp associated with the data returned.<br />
 error.</p>
 <p>MT safe.</p>
 
@@ -2294,7 +2299,7 @@ error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Free the resources of the ringbuffer.
+    <p>Free the resources of the ringbuffer.<br />
 MT safe.</p>
 
 
@@ -2334,9 +2339,9 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Make sure that the next sample written to the device is
-accounted for as being the <!-- raw HTML omitted -->sample<!-- raw HTML omitted --> sample written to the
-device. This value will be used in reporting the current
+    <p>Make sure that the next sample written to the device is<br />
+accounted for as being the <!-- raw HTML omitted -->sample<!-- raw HTML omitted --> sample written to the<br />
+device. This value will be used in reporting the current<br />
 sample position of the ringbuffer.</p>
 <p>This function will also clear the buffer with silence.</p>
 <p>MT safe.</p>
@@ -2393,9 +2398,9 @@ sample position of the ringbuffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the number of samples that were processed by the ringbuffer
-since it was last started. This does not include the number of samples not
-yet processed (see gst_audio_ring_buffer_delay()).
+    <p>Get the number of samples that were processed by the ringbuffer<br />
+since it was last started. This does not include the number of samples not<br />
+yet processed (see gst_audio_ring_buffer_delay()).<br />
 MT safe.</p>
 
 
@@ -2435,7 +2440,7 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the given callback function on the buffer. This function
+    <p>Sets the given callback function on the buffer. This function<br />
 will be called every time a segment has been written to a device.</p>
 <p>MT safe.</p>
 
@@ -2506,7 +2511,7 @@ will be called every time a segment has been written to a device.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the given callback function on the buffer. This function
+    <p>Sets the given callback function on the buffer. This function<br />
 will be called every time a segment has been written to a device.</p>
 <p>MT safe.</p>
 
@@ -2688,7 +2693,7 @@ will be called every time a segment has been written to a device.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Start processing samples from the ringbuffer.
+    <p>Start processing samples from the ringbuffer.<br />
 MT safe.</p>
 
 
@@ -2728,7 +2733,7 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Stop processing samples from the ringbuffer.
+    <p>Stop processing samples from the ringbuffer.<br />
 MT safe.</p>
 
 
@@ -2764,7 +2769,7 @@ MT safe.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

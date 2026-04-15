@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::LanguageManager";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -138,6 +140,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -354,6 +357,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -371,7 +375,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new language manager.</p>
-<p>If you do not need more than one language manager or a private language manager
+<p>If you do not need more than one language manager or a private language manager<br />
 instance then use [func<!-- raw HTML omitted -->LanguageManager<!-- raw HTML omitted -->.get_default] instead.</p>
 
 
@@ -401,7 +405,7 @@ instance then use [func<!-- raw HTML omitted -->LanguageManager<!-- raw HTML omi
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the default Gtk::SourceLanguageManager instance.
+    <p>Returns the default Gtk::SourceLanguageManager instance.<br />
 Return value is owned by GtkSourceView library and must not be unref'ed.</p>
 
 
@@ -447,7 +451,7 @@ Return value is owned by GtkSourceView library and must not be unref'ed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Appends <!-- raw HTML omitted -->path<!-- raw HTML omitted --> to the list of directories where the <!-- raw HTML omitted -->manager<!-- raw HTML omitted --> looks for
+    <p>Appends <!-- raw HTML omitted -->path<!-- raw HTML omitted --> to the list of directories where the <!-- raw HTML omitted -->manager<!-- raw HTML omitted --> looks for<br />
 language files.</p>
 <p>See [method<!-- raw HTML omitted -->LanguageManager<!-- raw HTML omitted -->.set_search_path] for details.</p>
 
@@ -503,9 +507,9 @@ language files.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the [class<!-- raw HTML omitted -->Language<!-- raw HTML omitted -->] identified by the given <!-- raw HTML omitted -->id<!-- raw HTML omitted --> in the language
-manager.
-if there is no language identified by the given <!-- raw HTML omitted -->id<!-- raw HTML omitted -->. Return value is
+    <p>Gets the [class<!-- raw HTML omitted -->Language<!-- raw HTML omitted -->] identified by the given <!-- raw HTML omitted -->id<!-- raw HTML omitted --> in the language<br />
+manager.<br />
+if there is no language identified by the given <!-- raw HTML omitted -->id<!-- raw HTML omitted -->. Return value is<br />
 owned by <!-- raw HTML omitted -->lm<!-- raw HTML omitted --> and should not be freed.</p>
 
 
@@ -564,7 +568,7 @@ owned by <!-- raw HTML omitted -->lm<!-- raw HTML omitted --> and should not be 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Picks a [class<!-- raw HTML omitted -->Language<!-- raw HTML omitted -->] for given file name and content type,
+    <p>Picks a [class<!-- raw HTML omitted -->Language<!-- raw HTML omitted -->] for given file name and content type,<br />
 according to the information in lang files.</p>
 <p>Either <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> or <!-- raw HTML omitted -->content_type<!-- raw HTML omitted --> may be nil. This function can be used as follows:</p>
 <pre class="code c"><code class="c">GtkSourceLanguage *lang;
@@ -592,9 +596,9 @@ gtk_source_buffer_set_language (buffer, lang);
 
 g_free (content_type);
 </code></pre>
-<p>etc. Use [method<!-- raw HTML omitted -->Language<!-- raw HTML omitted -->.get_mime_types] and [method<!-- raw HTML omitted -->Language<!-- raw HTML omitted -->.get_globs]
-if you need full control over file -&gt; language mapping.
-is no suitable language for given <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> and/or <!-- raw HTML omitted -->content_type<!-- raw HTML omitted -->. Return
+<p>etc. Use [method<!-- raw HTML omitted -->Language<!-- raw HTML omitted -->.get_mime_types] and [method<!-- raw HTML omitted -->Language<!-- raw HTML omitted -->.get_globs]<br />
+if you need full control over file -&gt; language mapping.<br />
+is no suitable language for given <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> and/or <!-- raw HTML omitted -->content_type<!-- raw HTML omitted -->. Return<br />
 value is owned by <!-- raw HTML omitted -->lm<!-- raw HTML omitted --> and should not be freed.</p>
 
 
@@ -773,7 +777,7 @@ value is owned by <!-- raw HTML omitted -->lm<!-- raw HTML omitted --> and shoul
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Prepends <!-- raw HTML omitted -->path<!-- raw HTML omitted --> to the list of directories where the <!-- raw HTML omitted -->manager<!-- raw HTML omitted --> looks
+    <p>Prepends <!-- raw HTML omitted -->path<!-- raw HTML omitted --> to the list of directories where the <!-- raw HTML omitted -->manager<!-- raw HTML omitted --> looks<br />
 for language files.</p>
 <p>See [method<!-- raw HTML omitted -->LanguageManager<!-- raw HTML omitted -->.set_search_path] for details.</p>
 
@@ -930,7 +934,7 @@ for language files.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

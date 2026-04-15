@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::CellView";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -103,7 +104,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk3/deprecated.rb</dd>
+    <dd>lib/gtk3/deprecated.rb
+</dd>
   </dl>
   
 </div>
@@ -111,19 +113,19 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>A widget displaying a single row of a GtkTreeModel</p>
-<p>A <code>GtkCellView</code> displays a single row of a <code>GtkTreeModel</code> using a <code>GtkCellArea</code>
-and <code>GtkCellAreaContext</code>. A <code>GtkCellAreaContext</code> can be provided to the
-<code>GtkCellView</code> at construction time in order to keep the cellview in context
-of a group of cell views, this ensures that the renderers displayed will
-be properly aligned with each other (like the aligned cells in the menus
+<p>A <code>GtkCellView</code> displays a single row of a <code>GtkTreeModel</code> using a <code>GtkCellArea</code><br />
+and <code>GtkCellAreaContext</code>. A <code>GtkCellAreaContext</code> can be provided to the<br />
+<code>GtkCellView</code> at construction time in order to keep the cellview in context<br />
+of a group of cell views, this ensures that the renderers displayed will<br />
+be properly aligned with each other (like the aligned cells in the menus<br />
 of <code>GtkComboBox</code>).</p>
-<p><code>GtkCellView</code> is <code>GtkOrientable</code> in order to decide in which orientation
-the underlying <code>GtkCellAreaContext</code> should be allocated. Taking the <code>GtkComboBox</code>
-menu as an example, cellviews should be oriented horizontally if the menus are
-listed top-to-bottom and thus all share the same width but may have separate
-individual heights (left-to-right menus should be allocated vertically since
+<p><code>GtkCellView</code> is <code>GtkOrientable</code> in order to decide in which orientation<br />
+the underlying <code>GtkCellAreaContext</code> should be allocated. Taking the <code>GtkComboBox</code><br />
+menu as an example, cellviews should be oriented horizontally if the menus are<br />
+listed top-to-bottom and thus all share the same width but may have separate<br />
+individual heights (left-to-right menus should be allocated vertically since<br />
 they all share the same height but may have variable widths).</p>
-<h2>CSS nodes</h2>
+<h2><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h2>
 <p>GtkCellView has a single CSS node with name cellview.</p>
 
 
@@ -495,9 +497,11 @@ they all share the same height but may have variable widths).</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -525,7 +529,7 @@ they all share the same height but may have variable widths).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>GtkCellView</code> widget, adds a <code>GtkCellRendererPixbuf</code>
+    <p>Creates a new <code>GtkCellView</code> widget, adds a <code>GtkCellRendererPixbuf</code><br />
 to it, and makes it show <!-- raw HTML omitted -->texture<!-- raw HTML omitted -->.</p>
 
 
@@ -575,7 +579,7 @@ to it, and makes it show <!-- raw HTML omitted -->texture<!-- raw HTML omitted -
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkCellArea</code> rendering cells</p>
-<p>If no area is specified when creating the cell view with gtk_cell_view_new_with_context()
+<p>If no area is specified when creating the cell view with gtk_cell_view_new_with_context()<br />
 a horizontally oriented <code>GtkCellArea</code>Box will be used.</p>
 <p>since 3.0</p>
 
@@ -617,7 +621,7 @@ a horizontally oriented <code>GtkCellArea</code>Box will be used.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkCellArea</code> rendering cells</p>
-<p>If no area is specified when creating the cell view with gtk_cell_view_new_with_context()
+<p>If no area is specified when creating the cell view with gtk_cell_view_new_with_context()<br />
 a horizontally oriented <code>GtkCellArea</code>Box will be used.</p>
 <p>since 3.0</p>
 
@@ -687,12 +691,12 @@ a horizontally oriented <code>GtkCellArea</code>Box will be used.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkCellAreaContext</code> used to compute the geometry of the cell view.</p>
-<p>A group of cell views can be assigned the same context in order to
-ensure the sizes and cell alignments match across all the views with
+<p>A group of cell views can be assigned the same context in order to<br />
+ensure the sizes and cell alignments match across all the views with<br />
 the same context.</p>
-<p><code>GtkComboBox</code> menus uses this to assign the same context to all cell views
-in the menu items for a single menu (each submenu creates its own
-context since the size of each submenu does not depend on parent
+<p><code>GtkComboBox</code> menus uses this to assign the same context to all cell views<br />
+in the menu items for a single menu (each submenu creates its own<br />
+context since the size of each submenu does not depend on parent<br />
 or sibling menus).</p>
 <p>since 3.0</p>
 
@@ -734,12 +738,12 @@ or sibling menus).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkCellAreaContext</code> used to compute the geometry of the cell view.</p>
-<p>A group of cell views can be assigned the same context in order to
-ensure the sizes and cell alignments match across all the views with
+<p>A group of cell views can be assigned the same context in order to<br />
+ensure the sizes and cell alignments match across all the views with<br />
 the same context.</p>
-<p><code>GtkComboBox</code> menus uses this to assign the same context to all cell views
-in the menu items for a single menu (each submenu creates its own
-context since the size of each submenu does not depend on parent
+<p><code>GtkComboBox</code> menus uses this to assign the same context to all cell views<br />
+in the menu items for a single menu (each submenu creates its own<br />
+context since the size of each submenu does not depend on parent<br />
 or sibling menus).</p>
 <p>since 3.0</p>
 
@@ -808,8 +812,8 @@ or sibling menus).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a <code>GtkTreePath</code> referring to the currently
-displayed row. If no row is currently displayed,
+    <p>Returns a <code>GtkTreePath</code> referring to the currently<br />
+displayed row. If no row is currently displayed,<br />
 nil is returned.</p>
 
 
@@ -849,11 +853,11 @@ nil is returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the row of the model that is currently displayed
-by the <code>GtkCellView</code>. If the path is unset, then the
-contents of the cellview “stick” at their last value;
-this is not normally a desired result, but may be
-a needed intermediate state if say, the model for
+    <p>Sets the row of the model that is currently displayed<br />
+by the <code>GtkCellView</code>. If the path is unset, then the<br />
+contents of the cellview “stick” at their last value;<br />
+this is not normally a desired result, but may be<br />
+a needed intermediate state if say, the model for<br />
 the <code>GtkCellView</code> becomes temporarily empty.</p>
 
 
@@ -908,8 +912,8 @@ the <code>GtkCellView</code> becomes temporarily empty.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->cell_view<!-- raw HTML omitted --> is configured to draw all of its
-cells in a sensitive state.
+    <p>Gets whether <!-- raw HTML omitted -->cell_view<!-- raw HTML omitted --> is configured to draw all of its<br />
+cells in a sensitive state.<br />
 cells in a sensitive state</p>
 
 
@@ -949,8 +953,8 @@ cells in a sensitive state</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether all cells should be draw as sensitive for this view regardless
-of the actual cell properties (used to make menus with submenus appear
+    <p>Whether all cells should be draw as sensitive for this view regardless<br />
+of the actual cell properties (used to make menus with submenus appear<br />
 sensitive when the items in submenus might be insensitive).</p>
 <p>since 3.0</p>
 
@@ -1019,8 +1023,8 @@ sensitive when the items in submenus might be insensitive).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether all cells should be draw as sensitive for this view regardless
-of the actual cell properties (used to make menus with submenus appear
+    <p>Whether all cells should be draw as sensitive for this view regardless<br />
+of the actual cell properties (used to make menus with submenus appear<br />
 sensitive when the items in submenus might be insensitive).</p>
 <p>since 3.0</p>
 
@@ -1061,8 +1065,8 @@ sensitive when the items in submenus might be insensitive).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->cell_view<!-- raw HTML omitted --> is configured to request space
-to fit the entire <code>GtkTreeModel</code>.
+    <p>Gets whether <!-- raw HTML omitted -->cell_view<!-- raw HTML omitted --> is configured to request space<br />
+to fit the entire <code>GtkTreeModel</code>.<br />
 the entire <code>GtkTreeModel</code>.</p>
 
 
@@ -1102,9 +1106,9 @@ the entire <code>GtkTreeModel</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the view should request enough space to always fit
-the size of every row in the model (used by the combo box to
-ensure the combo box size doesn't change when different items
+    <p>Whether the view should request enough space to always fit<br />
+the size of every row in the model (used by the combo box to<br />
+ensure the combo box size doesn't change when different items<br />
 are selected).</p>
 <p>since 3.0</p>
 
@@ -1173,9 +1177,9 @@ are selected).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the view should request enough space to always fit
-the size of every row in the model (used by the combo box to
-ensure the combo box size doesn't change when different items
+    <p>Whether the view should request enough space to always fit<br />
+the size of every row in the model (used by the combo box to<br />
+ensure the combo box size doesn't change when different items<br />
 are selected).</p>
 <p>since 3.0</p>
 
@@ -1320,7 +1324,7 @@ are selected).</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

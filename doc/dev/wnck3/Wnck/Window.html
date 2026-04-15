@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Wnck::Window";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -138,6 +140,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1918,6 +1921,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1937,9 +1941,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a preexisting Wnck::Window for the X window <!-- raw HTML omitted -->xwindow<!-- raw HTML omitted -->. This will not
-create a Wnck::Window if none exists. The function is robust against bogus
-window IDs.
+    <p>Gets a preexisting Wnck::Window for the X window <!-- raw HTML omitted -->xwindow<!-- raw HTML omitted -->. This will not<br />
+create a Wnck::Window if none exists. The function is robust against bogus<br />
+window IDs.<br />
 Wnck::Window is owned by libwnck and must not be referenced or unreferenced.</p>
 
 
@@ -2043,12 +2047,12 @@ Wnck::Window is owned by libwnck and must not be referenced or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks the window manager to make <!-- raw HTML omitted -->window<!-- raw HTML omitted --> the active window. The
-window manager may choose to raise <!-- raw HTML omitted -->window<!-- raw HTML omitted --> along with focusing it, and may
-decide to refuse the request (to not steal the focus if there is a more
+    <p>Asks the window manager to make <!-- raw HTML omitted -->window<!-- raw HTML omitted --> the active window. The<br />
+window manager may choose to raise <!-- raw HTML omitted -->window<!-- raw HTML omitted --> along with focusing it, and may<br />
+decide to refuse the request (to not steal the focus if there is a more<br />
 recent user activity, for example).</p>
-<p>This function existed before 2.10, but the <!-- raw HTML omitted -->timestamp<!-- raw HTML omitted --> argument was missing
-in earlier versions.
+<p>This function existed before 2.10, but the <!-- raw HTML omitted -->timestamp<!-- raw HTML omitted --> argument was missing<br />
+in earlier versions.<br />
 this call to occur.</p>
 
 
@@ -2103,13 +2107,13 @@ this call to occur.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has transients, activates the most likely transient
+    <p>If <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has transients, activates the most likely transient<br />
 instead of the window itself. Otherwise activates <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
-<p>FIXME the ideal behavior of this function is probably to activate
-the most recently active window among <!-- raw HTML omitted -->window<!-- raw HTML omitted --> and its transients.
+<p>FIXME the ideal behavior of this function is probably to activate<br />
+the most recently active window among <!-- raw HTML omitted -->window<!-- raw HTML omitted --> and its transients.<br />
 This is probably best implemented on the window manager side.</p>
-<p>This function existed before 2.10, but the <!-- raw HTML omitted -->timestamp<!-- raw HTML omitted --> argument was missing
-in earlier versions.
+<p>This function existed before 2.10, but the <!-- raw HTML omitted -->timestamp<!-- raw HTML omitted --> argument was missing<br />
+in earlier versions.<br />
 this call to occur.</p>
 
 
@@ -2164,8 +2168,8 @@ this call to occur.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Wnck::Application to which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.
-The returned Wnck::Application is owned by libwnck and must not be referenced
+    <p>Gets the Wnck::Application to which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.<br />
+The returned Wnck::Application is owned by libwnck and must not be referenced<br />
 or unreferenced.</p>
 
 
@@ -2205,8 +2209,8 @@ or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Wnck::ClassGroup to which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.
-The returned Wnck::ClassGroup is owned by libwnck and must not be referenced
+    <p>Gets the Wnck::ClassGroup to which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.<br />
+The returned Wnck::ClassGroup is owned by libwnck and must not be referenced<br />
 or unreferenced.</p>
 
 
@@ -2246,10 +2250,10 @@ or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the class group name from the <!-- raw HTML omitted -->WM_CLASS Property<!-- raw HTML omitted -->
+    <p>Gets the class group name from the <!-- raw HTML omitted -->WM_CLASS Property<!-- raw HTML omitted --><br />
 for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
-<p>The class group name is also the identifier name of the Wnck::ClassGroup to
-which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.
+<p>The class group name is also the identifier name of the Wnck::ClassGroup to<br />
+which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.<br />
 to no class group.</p>
 
 
@@ -2289,10 +2293,10 @@ to no class group.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the class instance name from the <!-- raw HTML omitted -->WM_CLASS Property<!-- raw HTML omitted -->
+    <p>Gets the class instance name from the <!-- raw HTML omitted -->WM_CLASS Property<!-- raw HTML omitted --><br />
 for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
-<p>The class instance name allows to differentiate windows belonging to the
-same class group, so that they can use different resources.
+<p>The class instance name allows to differentiate windows belonging to the<br />
+same class group, so that they can use different resources.<br />
 no class instance.</p>
 
 
@@ -2333,8 +2337,8 @@ no class instance.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Closes <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
-<p>This function existed before 2.6, but the <!-- raw HTML omitted -->timestamp<!-- raw HTML omitted --> argument was missing
-in earlier versions.
+<p>This function existed before 2.6, but the <!-- raw HTML omitted -->timestamp<!-- raw HTML omitted --> argument was missing<br />
+in earlier versions.<br />
 this call to occur.</p>
 
 
@@ -2389,7 +2393,7 @@ this call to occur.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks the window manager to set the fullscreen state of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> according to
+    <p>Asks the window manager to set the fullscreen state of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> according to<br />
 <!-- raw HTML omitted -->fullscreen<!-- raw HTML omitted -->.</p>
 
 
@@ -2444,12 +2448,12 @@ this call to occur.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the size and position of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, as last received
-in a ConfigureNotify event (i.e. this call does not round-trip
-to the server, just gets the last size we were notified of).
+    <p>Gets the size and position of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, as last received<br />
+in a ConfigureNotify event (i.e. this call does not round-trip<br />
+to the server, just gets the last size we were notified of).<br />
 The X and Y coordinates are relative to the root window.</p>
-<p>The window manager usually adds a frame around windows. If
-you need to know the size of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> with the frame, use
+<p>The window manager usually adds a frame around windows. If<br />
+you need to know the size of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> with the frame, use<br />
 wnck_window_get_geometry().</p>
 
 
@@ -2549,13 +2553,13 @@ wnck_window_get_geometry().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the size and position of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, including decorations. This
-function uses the information last received in a ConfigureNotify
-event and adjusts it according to the size of the frame that is
-added by the window manager (this call does not round-trip to the
-server, it just gets the last sizes that were notified). The
+    <p>Gets the size and position of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, including decorations. This<br />
+function uses the information last received in a ConfigureNotify<br />
+event and adjusts it according to the size of the frame that is<br />
+added by the window manager (this call does not round-trip to the<br />
+server, it just gets the last sizes that were notified). The<br />
 X and Y coordinates are relative to the root window.</p>
-<p>If you need to know the actual size of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> ignoring the frame
+<p>If you need to know the actual size of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> ignoring the frame<br />
 added by the window manager, use wnck_window_get_client_window_geometry().</p>
 
 
@@ -2655,8 +2659,8 @@ added by the window manager, use wnck_window_get_client_window_geometry().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the group leader of the group of windows to which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.
-belongs, or the X window ID of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> does not belong to any
+    <p>Gets the group leader of the group of windows to which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> belongs.<br />
+belongs, or the X window ID of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> does not belong to any<br />
 group.</p>
 
 
@@ -2696,15 +2700,15 @@ group.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether or not <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has an icon name.
-wnck_window_get_icon_name() will always return some value, even if
-<!-- raw HTML omitted -->window<!-- raw HTML omitted --> has no icon name set; wnck_window_has_icon_name() can
+    <p>Checks whether or not <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has an icon name.<br />
+wnck_window_get_icon_name() will always return some value, even if<br />
+<!-- raw HTML omitted -->window<!-- raw HTML omitted --> has no icon name set; wnck_window_has_icon_name() can<br />
 be used to tell if that icon name is real or not.</p>
-<p>(Note that if wnck_window_has_icon_name() returns false, but
-wnck_window_has_name() returns true, then the name returned by
-wnck_window_get_icon_name() is <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s name. Only when both
-methods return false does wnck_window_get_icon_name() return a
-generic fallback name.)
+<p>(Note that if wnck_window_has_icon_name() returns false, but<br />
+wnck_window_has_name() returns true, then the name returned by<br />
+wnck_window_get_icon_name() is <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s name. Only when both<br />
+methods return false does wnck_window_get_icon_name() return a<br />
+generic fallback name.)<br />
 <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s icon name, false if it returns a fallback name.</p>
 
 
@@ -2744,11 +2748,11 @@ generic fallback name.)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether or not <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has a name. wnck_window_get_name()
-will always return some value, even if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has no name set;
-wnck_window_has_name() can be used to tell if that name is
+    <p>Checks whether or not <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has a name. wnck_window_get_name()<br />
+will always return some value, even if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has no name set;<br />
+wnck_window_has_name() can be used to tell if that name is<br />
 real or not.</p>
-<p>For icons titles, use wnck_window_has_icon_name() instead.
+<p>For icons titles, use wnck_window_has_icon_name() instead.<br />
 name, false if it returns a fallback name.</p>
 
 
@@ -2788,10 +2792,10 @@ name, false if it returns a fallback name.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the icon to be used for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. If no icon was found, a fallback
-icon is used. wnck_window_get_icon_is_fallback() can be used to tell if the
-icon is the fallback icon.
-reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs to keep
+    <p>Gets the icon to be used for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. If no icon was found, a fallback<br />
+icon is used. wnck_window_get_icon_is_fallback() can be used to tell if the<br />
+icon is the fallback icon.<br />
+reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs to keep<br />
 the icon around.</p>
 
 
@@ -2831,7 +2835,7 @@ the icon around.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether a default fallback icon is used for <!-- raw HTML omitted -->window<!-- raw HTML omitted --> (because none
+    <p>Gets whether a default fallback icon is used for <!-- raw HTML omitted -->window<!-- raw HTML omitted --> (because none<br />
 was set on <!-- raw HTML omitted -->window<!-- raw HTML omitted -->).</p>
 
 
@@ -2871,12 +2875,12 @@ was set on <!-- raw HTML omitted -->window<!-- raw HTML omitted -->).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the icon name of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, as it should be displayed for an icon
-(minimized state). Always returns some value, even if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has no icon
-name set; use wnck_window_has_icon_name() if you need to know whether the
+    <p>Gets the icon name of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, as it should be displayed for an icon<br />
+(minimized state). Always returns some value, even if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has no icon<br />
+name set; use wnck_window_has_icon_name() if you need to know whether the<br />
 returned icon name is &quot;real&quot; or not.</p>
-<p>Contrast with wnck_window_get_name(), which returns <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s
-title, not its icon title.
+<p>Contrast with wnck_window_get_name(), which returns <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s<br />
+title, not its icon title.<br />
 name is available.</p>
 
 
@@ -2916,7 +2920,7 @@ name is available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is above other windows. This state may change
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is above other windows. This state may change<br />
 anytime a Wnck::Window::state-changed signal gets emitted.</p>
 <p>See wnck_window_make_above() for more details on this state.</p>
 
@@ -2957,7 +2961,7 @@ anytime a Wnck::Window::state-changed signal gets emitted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is the active window on its Wnck::Screen.
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is the active window on its Wnck::Screen.<br />
 false otherwise.</p>
 
 
@@ -2997,7 +3001,7 @@ false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is below other windows. This state may change
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is below other windows. This state may change<br />
 anytime a Wnck::Window::state-changed signal gets emitted.</p>
 <p>See wnck_window_make_below() for more details on this state.</p>
 
@@ -3038,7 +3042,7 @@ anytime a Wnck::Window::state-changed signal gets emitted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is fullscreen. Fullscreen state may change
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is fullscreen. Fullscreen state may change<br />
 anytime a Wnck::Window::state-changed signal gets emitted.</p>
 
 
@@ -3078,7 +3082,7 @@ anytime a Wnck::Window::state-changed signal gets emitted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> appears in the current viewport of <!-- raw HTML omitted -->workspace<!-- raw HTML omitted -->.
+    <p>Gets true if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> appears in the current viewport of <!-- raw HTML omitted -->workspace<!-- raw HTML omitted -->.<br />
 false otherwise.</p>
 
 
@@ -3137,11 +3141,11 @@ false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is maximized. Maximization state may change
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is maximized. Maximization state may change<br />
 anytime a Wnck::Window::state-changed signal gets emitted.</p>
-<p>As for GDK, &quot;maximized&quot; means both vertically and horizontally. If <!-- raw HTML omitted -->window<!-- raw HTML omitted -->
-is maximized in only one direction, then <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is not considered
-maximized.
+<p>As for GDK, &quot;maximized&quot; means both vertically and horizontally. If <!-- raw HTML omitted -->window<!-- raw HTML omitted --><br />
+is maximized in only one direction, then <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is not considered<br />
+maximized.<br />
 otherwise.</p>
 
 
@@ -3181,7 +3185,7 @@ otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is maximized horizontally. Horizontal maximization
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is maximized horizontally. Horizontal maximization<br />
 state may change anytime a Wnck::Window::state-changed signal gets emitted.</p>
 
 
@@ -3221,7 +3225,7 @@ state may change anytime a Wnck::Window::state-changed signal gets emitted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is maximized vertically. vertiVal maximization
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is maximized vertically. vertiVal maximization<br />
 state may change anytime a Wnck::Window::state-changed signal gets emitted.</p>
 
 
@@ -3261,7 +3265,7 @@ state may change anytime a Wnck::Window::state-changed signal gets emitted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is minimized. Minimization state may change anytime
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is minimized. Minimization state may change anytime<br />
 a Wnck::Window::state-changed signal gets emitted.</p>
 
 
@@ -3301,12 +3305,12 @@ a Wnck::Window::state-changed signal gets emitted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is the most recently activated window on its
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is the most recently activated window on its<br />
 Wnck::Screen.</p>
-<p>The most recently activated window is identical to the active
-window for click and sloppy focus methods (since a window is always
-active in those cases) but differs slightly for mouse focus since
-there often is no active window.
+<p>The most recently activated window is identical to the active<br />
+window for click and sloppy focus methods (since a window is always<br />
+active in those cases) but differs slightly for mouse focus since<br />
+there often is no active window.<br />
 Wnck::Screen, false otherwise.</p>
 
 
@@ -3404,8 +3408,8 @@ Wnck::Screen, false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is on all workspace. Pinned state may change
-anytime a Wnck::Window::workspace-changed signal gets emitted, but not when
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is on all workspace. Pinned state may change<br />
+anytime a Wnck::Window::workspace-changed signal gets emitted, but not when<br />
 a Wnck::Window::state-changed gets emitted.</p>
 
 
@@ -3445,7 +3449,7 @@ a Wnck::Window::state-changed gets emitted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is shaded. Shade state may change anytime
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is shaded. Shade state may change anytime<br />
 a Wnck::Window::state-changed signal gets emitted.</p>
 
 
@@ -3485,7 +3489,7 @@ a Wnck::Window::state-changed signal gets emitted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is included on pagers. This state may change
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is included on pagers. This state may change<br />
 anytime a Wnck::Window::state-changed signal gets emitted.</p>
 
 
@@ -3525,7 +3529,7 @@ anytime a Wnck::Window::state-changed signal gets emitted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is included on tasklists. This state may change
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is included on tasklists. This state may change<br />
 anytime a Wnck::Window::state-changed signal gets emitted.</p>
 
 
@@ -3565,11 +3569,11 @@ anytime a Wnck::Window::state-changed signal gets emitted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is sticky. Sticky state may change
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is sticky. Sticky state may change<br />
 anytime a Wnck::Window::state-changed signal gets emitted.</p>
-<p>Sticky here means &quot;stuck to the glass&quot;, i.e. does not scroll with the
-viewport. In GDK/GTK+ (e.g. gdk_window_stick()/gtk_window_stick()), sticky
-means &quot;stuck to the glass&quot; and <!-- raw HTML omitted -->also<!-- raw HTML omitted --> that the window is
+<p>Sticky here means &quot;stuck to the glass&quot;, i.e. does not scroll with the<br />
+viewport. In GDK/GTK+ (e.g. gdk_window_stick()/gtk_window_stick()), sticky<br />
+means &quot;stuck to the glass&quot; and <!-- raw HTML omitted -->also<!-- raw HTML omitted --> that the window is<br />
 on all workspaces. But here it only means the viewport aspect of it.</p>
 
 
@@ -3609,8 +3613,8 @@ on all workspaces. But here it only means the viewport aspect of it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like wnck_window_is_on_workspace(), but also checks that
-the window is in a visible state (i.e. not minimized or shaded).
+    <p>Like wnck_window_is_on_workspace(), but also checks that<br />
+the window is in a visible state (i.e. not minimized or shaded).<br />
 otherwise.</p>
 
 
@@ -3739,8 +3743,8 @@ otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks the window manager to put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> on top of most windows (<!-- raw HTML omitted -->window<!-- raw HTML omitted --> will
-not be on top of focused fullscreen windows, of other windows with this
+    <p>Asks the window manager to put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> on top of most windows (<!-- raw HTML omitted -->window<!-- raw HTML omitted --> will<br />
+not be on top of focused fullscreen windows, of other windows with this<br />
 setting and of dock windows).</p>
 
 
@@ -3916,10 +3920,10 @@ setting and of dock windows).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the mini-icon to be used for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. If no mini-icon was found, a
-fallback mini-icon is used. wnck_window_get_icon_is_fallback() can be used
-to tell if the mini-icon is the fallback mini-icon.
-reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs to keep
+    <p>Gets the mini-icon to be used for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. If no mini-icon was found, a<br />
+fallback mini-icon is used. wnck_window_get_icon_is_fallback() can be used<br />
+to tell if the mini-icon is the fallback mini-icon.<br />
+reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs to keep<br />
 the icon around.</p>
 
 
@@ -3994,7 +3998,7 @@ the icon around.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks the window manager to move <!-- raw HTML omitted -->window<!-- raw HTML omitted --> to <!-- raw HTML omitted -->space<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->window<!-- raw HTML omitted --> was pinned, it
+    <p>Asks the window manager to move <!-- raw HTML omitted -->window<!-- raw HTML omitted --> to <!-- raw HTML omitted -->space<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->window<!-- raw HTML omitted --> was pinned, it<br />
 will also result in <!-- raw HTML omitted -->window<!-- raw HTML omitted --> being visible only on <!-- raw HTML omitted -->space<!-- raw HTML omitted -->.</p>
 
 
@@ -4049,11 +4053,11 @@ will also result in <!-- raw HTML omitted -->window<!-- raw HTML omitted --> bei
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the name of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, as it should be displayed in a pager
-or tasklist. Always returns some value, even if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has no name
-set; use wnck_window_has_name() if you need to know whether the returned
+    <p>Gets the name of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, as it should be displayed in a pager<br />
+or tasklist. Always returns some value, even if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> has no name<br />
+set; use wnck_window_has_name() if you need to know whether the returned<br />
 name is &quot;real&quot; or not.</p>
-<p>For icons titles, use wnck_window_get_icon_name() instead.
+<p>For icons titles, use wnck_window_get_icon_name() instead.<br />
 available.</p>
 
 
@@ -4093,9 +4097,9 @@ available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> needs attention. This state may change anytime
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> needs attention. This state may change anytime<br />
 a Wnck::Window::state-changed signal gets emitted.</p>
-<p>This state depends on flags such as the demands_attention and is_urgent
+<p>This state depends on flags such as the demands_attention and is_urgent<br />
 hints.</p>
 
 
@@ -4135,8 +4139,8 @@ hints.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> or one of its transients needs attention. This state
-may change anytime a Wnck::Window::state-changed signal gets emitted.
+    <p>Gets whether <!-- raw HTML omitted -->window<!-- raw HTML omitted --> or one of its transients needs attention. This state<br />
+may change anytime a Wnck::Window::state-changed signal gets emitted.<br />
 false otherwise.</p>
 
 
@@ -4250,8 +4254,8 @@ false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the role for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.
-The role uniquely identifies a window among all windows that have the same
+    <p>Gets the role for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.<br />
+The role uniquely identifies a window among all windows that have the same<br />
 client leader window.</p>
 
 
@@ -4291,7 +4295,7 @@ client leader window.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Wnck::Screen <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is on.
+    <p>Gets the Wnck::Screen <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is on.<br />
 Wnck::Screen is owned by libwnck and must not be referenced or unreferenced.</p>
 
 
@@ -4331,10 +4335,10 @@ Wnck::Screen is owned by libwnck and must not be referenced or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the session ID for <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in Latin-1 encoding.
-NOTE: this is invalid UTF-8. You can't display this
-string in a GTK+ widget without converting to UTF-8.
-See wnck_window_get_session_id_utf8().
+    <p>Gets the session ID for <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in Latin-1 encoding.<br />
+NOTE: this is invalid UTF-8. You can't display this<br />
+string in a GTK+ widget without converting to UTF-8.<br />
+See wnck_window_get_session_id_utf8().<br />
 no session ID.</p>
 
 
@@ -4374,10 +4378,10 @@ no session ID.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the session ID for <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in UTF-8 encoding.
-The session ID should be in Latin-1 encoding, so the conversion should work,
-but a broken client could set a session ID that might not be convertable to
-UTF-8.
+    <p>Gets the session ID for <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in UTF-8 encoding.<br />
+The session ID should be in Latin-1 encoding, so the conversion should work,<br />
+but a broken client could set a session ID that might not be convertable to<br />
+UTF-8.<br />
 no session ID.</p>
 
 
@@ -4417,13 +4421,13 @@ no session ID.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the size and position of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. The X and Y coordinates should be
+    <p>Sets the size and position of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. The X and Y coordinates should be<br />
 relative to the root window.</p>
-<p>Note that the new size and position apply to <!-- raw HTML omitted -->window<!-- raw HTML omitted --> with its frame added
-by the window manager. Therefore, using wnck_window_set_geometry() with
-the values returned by wnck_window_get_geometry() should be a no-op, while
-using wnck_window_set_geometry() with the values returned by
-wnck_window_get_client_window_geometry() should reduce the size of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->
+<p>Note that the new size and position apply to <!-- raw HTML omitted -->window<!-- raw HTML omitted --> with its frame added<br />
+by the window manager. Therefore, using wnck_window_set_geometry() with<br />
+the values returned by wnck_window_get_geometry() should be a no-op, while<br />
+using wnck_window_set_geometry() with the values returned by<br />
+wnck_window_get_client_window_geometry() should reduce the size of <!-- raw HTML omitted -->window<!-- raw HTML omitted --><br />
 and move it.</p>
 
 
@@ -4553,7 +4557,7 @@ and move it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the icon geometry for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. A typical use case for this is the
+    <p>Sets the icon geometry for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. A typical use case for this is the<br />
 destination of the minimization animation of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
 
 
@@ -4742,7 +4746,7 @@ destination of the minimization animation of <!-- raw HTML omitted -->window<!--
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks the window manager to make <!-- raw HTML omitted -->window<!-- raw HTML omitted --> included or not included on
+    <p>Asks the window manager to make <!-- raw HTML omitted -->window<!-- raw HTML omitted --> included or not included on<br />
 tasklists.</p>
 
 
@@ -4797,8 +4801,8 @@ tasklists.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the sort order of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, used for ordering of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in
-Wnck::Selector and #WnckTasklist. The sort order is an internal state in
+    <p>Gets the sort order of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, used for ordering of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in<br />
+Wnck::Selector and #WnckTasklist. The sort order is an internal state in<br />
 libwnck. The initial value is defined when the window is created.</p>
 
 
@@ -4838,7 +4842,7 @@ libwnck. The initial value is defined when the window is created.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the sort order of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. The sort order is used for ordering of
+    <p>Sets the sort order of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->. The sort order is used for ordering of<br />
 <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in Wnck::Selector and #WnckTasklist.</p>
 
 
@@ -4932,7 +4936,7 @@ libwnck. The initial value is defined when the window is created.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks the window manager to keep the <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s position fixed on the
+    <p>Asks the window manager to keep the <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s position fixed on the<br />
 screen, even when the workspace or viewport scrolls.</p>
 
 
@@ -4968,9 +4972,9 @@ screen, even when the workspace or viewport scrolls.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Wnck::Window for which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is transient.
-transient, or nil if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is not transient for any Wnck::Window.
-The returned Wnck::Window is owned by libwnck and must not be referenced or
+    <p>Gets the Wnck::Window for which <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is transient.<br />
+transient, or nil if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is not transient for any Wnck::Window.<br />
+The returned Wnck::Window is owned by libwnck and must not be referenced or<br />
 unreferenced.</p>
 
 
@@ -5010,16 +5014,16 @@ unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether one of the transients of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is the most
-recently activated window. See
-wnck_window_is_most_recently_activated() for a more complete
-description of what is meant by most recently activated.  This
-function is needed because clicking on a Wnck::Tasklist once will
-activate a transient instead of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> itself
-(wnck_window_activate_transient), and clicking again should
-minimize <!-- raw HTML omitted -->window<!-- raw HTML omitted --> and its transients.  (Not doing this can be
-especially annoying in the case of modal dialogs that don't appear
-in the Wnck::Tasklist).
+    <p>Gets whether one of the transients of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is the most<br />
+recently activated window. See<br />
+wnck_window_is_most_recently_activated() for a more complete<br />
+description of what is meant by most recently activated.  This<br />
+function is needed because clicking on a Wnck::Tasklist once will<br />
+activate a transient instead of <!-- raw HTML omitted -->window<!-- raw HTML omitted --> itself<br />
+(wnck_window_activate_transient), and clicking again should<br />
+minimize <!-- raw HTML omitted -->window<!-- raw HTML omitted --> and its transients.  (Not doing this can be<br />
+especially annoying in the case of modal dialogs that don't appear<br />
+in the Wnck::Tasklist).<br />
 activated window, false otherwise.</p>
 
 
@@ -5059,7 +5063,7 @@ activated window, false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks the window manager to not put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> on top of most windows, and to
+    <p>Asks the window manager to not put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> on top of most windows, and to<br />
 put it again in the stack with other windows.</p>
 
 
@@ -5095,7 +5099,7 @@ put it again in the stack with other windows.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks the window manager to not put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> below most windows, and to
+    <p>Asks the window manager to not put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> below most windows, and to<br />
 put it again in the stack with other windows.</p>
 
 
@@ -5236,8 +5240,8 @@ put it again in the stack with other windows.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unminimizes <!-- raw HTML omitted -->window<!-- raw HTML omitted --> by activating it or one of its transients. See
-wnck_window_activate_transient() for details on how the activation is done.
+    <p>Unminimizes <!-- raw HTML omitted -->window<!-- raw HTML omitted --> by activating it or one of its transients. See<br />
+wnck_window_activate_transient() for details on how the activation is done.<br />
 this call to occur.</p>
 
 
@@ -5292,10 +5296,10 @@ this call to occur.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks the window manager to put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> only in the currently active
-workspace, if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> was previously pinned. If <!-- raw HTML omitted -->window<!-- raw HTML omitted --> was not pinned,
-does not change <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s workspace. If the active workspace
-is not known for some reason (it should not happen much), sets
+    <p>Asks the window manager to put <!-- raw HTML omitted -->window<!-- raw HTML omitted --> only in the currently active<br />
+workspace, if <!-- raw HTML omitted -->window<!-- raw HTML omitted --> was previously pinned. If <!-- raw HTML omitted -->window<!-- raw HTML omitted --> was not pinned,<br />
+does not change <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s workspace. If the active workspace<br />
+is not known for some reason (it should not happen much), sets<br />
 <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s workspace to the first workspace.</p>
 
 
@@ -5366,7 +5370,7 @@ is not known for some reason (it should not happen much), sets
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks the window manager to not have <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s position fixed on the
+    <p>Asks the window manager to not have <!-- raw HTML omitted -->window<!-- raw HTML omitted --><!-- raw HTML omitted -->'s position fixed on the<br />
 screen when the workspace or viewport scrolls.</p>
 
 
@@ -5495,9 +5499,9 @@ screen when the workspace or viewport scrolls.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the current workspace <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is on. If the window is pinned (on all
-workspaces), or not on any workspaces, nil may be returned.
-nil. The returned Wnck::Workspace is owned by libwnck and must not be
+    <p>Gets the current workspace <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is on. If the window is pinned (on all<br />
+workspaces), or not on any workspaces, nil may be returned.<br />
+nil. The returned Wnck::Workspace is owned by libwnck and must not be<br />
 referenced or unreferenced.</p>
 
 
@@ -5572,7 +5576,7 @@ referenced or unreferenced.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

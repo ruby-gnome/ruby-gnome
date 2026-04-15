@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Range";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -698,9 +700,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -982,7 +986,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets whether the <code>GtkRange</code> respects text direction.</p>
-<p>If a range is flippable, it will switch its direction
+<p>If a range is flippable, it will switch its direction<br />
 if it is horizontal and its direction is %GTK_TEXT_DIR_RTL.</p>
 <p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.get_direction].</p>
 
@@ -1038,7 +1042,7 @@ if it is horizontal and its direction is %GTK_TEXT_DIR_RTL.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function returns the area that contains the range’s trough,
+    <p>This function returns the area that contains the range’s trough,<br />
 in coordinates relative to <!-- raw HTML omitted -->range<!-- raw HTML omitted -->'s origin.</p>
 <p>This function is useful mainly for <code>GtkRange</code> subclasses.</p>
 
@@ -1094,7 +1098,7 @@ in coordinates relative to <!-- raw HTML omitted -->range<!-- raw HTML omitted -
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function returns sliders range along the long dimension,
+    <p>This function returns sliders range along the long dimension,<br />
 in widget-&gt;window coordinates.</p>
 <p>This function is useful mainly for <code>GtkRange</code> subclasses.</p>
 
@@ -1350,7 +1354,7 @@ in widget-&gt;window coordinates.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether slider movement is restricted to an
+    <p>Controls whether slider movement is restricted to an<br />
 upper boundary set by the fill level.</p>
 
 
@@ -1418,7 +1422,7 @@ upper boundary set by the fill level.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether slider movement is restricted to an
+    <p>Controls whether slider movement is restricted to an<br />
 upper boundary set by the fill level.</p>
 
 
@@ -1458,7 +1462,7 @@ upper boundary set by the fill level.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The number of digits to round the value to when
+    <p>The number of digits to round the value to when<br />
 it changes.</p>
 <p>See [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Range::change-value].</p>
 
@@ -1499,7 +1503,7 @@ it changes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The number of digits to round the value to when
+    <p>The number of digits to round the value to when<br />
 it changes.</p>
 <p>See [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Range::change-value].</p>
 
@@ -1569,8 +1573,8 @@ it changes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the step and page sizes for the range.</p>
-<p>The step size is used when the user clicks the <code>GtkScrollbar</code>
-arrows or moves a <code>GtkScale</code> via arrow keys. The page size
+<p>The step size is used when the user clicks the <code>GtkScrollbar</code><br />
+arrows or moves a <code>GtkScale</code> via arrow keys. The page size<br />
 is used for example when moving via Page Up or Page Down keys.</p>
 
 
@@ -1641,8 +1645,8 @@ is used for example when moving via Page Up or Page Down keys.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the allowable values in the <code>GtkRange</code>.</p>
-<p>The range value is clamped to be between <!-- raw HTML omitted -->min<!-- raw HTML omitted --> and <!-- raw HTML omitted -->max<!-- raw HTML omitted -->.
-(If the range has a non-zero page size, it is clamped
+<p>The range value is clamped to be between <!-- raw HTML omitted -->min<!-- raw HTML omitted --> and <!-- raw HTML omitted -->max<!-- raw HTML omitted -->.<br />
+(If the range has a non-zero page size, it is clamped<br />
 between <!-- raw HTML omitted -->min<!-- raw HTML omitted --> and <!-- raw HTML omitted -->max<!-- raw HTML omitted --> - page-size.)</p>
 
 
@@ -1751,7 +1755,7 @@ between <!-- raw HTML omitted -->min<!-- raw HTML omitted --> and <!-- raw HTML 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether fill level indicator graphics are displayed
+    <p>Controls whether fill level indicator graphics are displayed<br />
 on the trough.</p>
 
 
@@ -1819,7 +1823,7 @@ on the trough.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls whether fill level indicator graphics are displayed
+    <p>Controls whether fill level indicator graphics are displayed<br />
 on the trough.</p>
 
 
@@ -1899,7 +1903,7 @@ on the trough.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether the range’s slider has a fixed size, or a size that
+    <p>Sets whether the range’s slider has a fixed size, or a size that<br />
 depends on its adjustment’s page size.</p>
 <p>This function is useful mainly for <code>GtkRange</code> subclasses.</p>
 
@@ -1995,8 +1999,8 @@ depends on its adjustment’s page size.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the current value of the range.</p>
-<p>If the value is outside the minimum or maximum range values,
-it will be clamped to fit inside them. The range emits the
+<p>If the value is outside the minimum or maximum range values,<br />
+it will be clamped to fit inside them. The range emits the<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Range::value-changed] signal if the value changes.</p>
 
 
@@ -2047,7 +2051,7 @@ it will be clamped to fit inside them. The range emits the
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

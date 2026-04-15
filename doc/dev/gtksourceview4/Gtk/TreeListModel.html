@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::TreeListModel";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -462,6 +464,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -478,7 +481,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new empty <code>GtkTreeListModel</code> displaying <!-- raw HTML omitted -->root<!-- raw HTML omitted -->
+    <p>Creates a new empty <code>GtkTreeListModel</code> displaying <!-- raw HTML omitted -->root<!-- raw HTML omitted --><br />
 with all rows collapsed.</p>
 
 
@@ -543,7 +546,7 @@ with all rows collapsed.</p>
       
       
         &mdash;
-        <div class='inline'><p>Function to call to create the <code>GListModel</code> for the children
+        <div class='inline'><p>Function to call to create the <code>GListModel</code> for the children<br />
 of an item</p>
 </div>
       
@@ -603,9 +606,9 @@ of an item</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether the model is set to automatically expand new rows
+    <p>Gets whether the model is set to automatically expand new rows<br />
 that get added.</p>
-<p>This can be either rows added by changes to the underlying
+<p>This can be either rows added by changes to the underlying<br />
 models or via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeListRow.set_expanded].</p>
 
 
@@ -751,9 +754,9 @@ models or via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeL
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the row item corresponding to the child at index <!-- raw HTML omitted -->position<!-- raw HTML omitted --> for
+    <p>Gets the row item corresponding to the child at index <!-- raw HTML omitted -->position<!-- raw HTML omitted --> for<br />
 <!-- raw HTML omitted -->self<!-- raw HTML omitted -->'s root model.</p>
-<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is greater than the number of children in the root model,
+<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is greater than the number of children in the root model,<br />
 nil is returned.</p>
 <p>Do not confuse this function with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeListModel.get_row].</p>
 
@@ -814,15 +817,15 @@ nil is returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the row object for the given row.</p>
-<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is greater than the number of items in <!-- raw HTML omitted -->self<!-- raw HTML omitted -->,
+<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is greater than the number of items in <!-- raw HTML omitted -->self<!-- raw HTML omitted -->,<br />
 nil is returned.</p>
-<p>The row object can be used to expand and collapse rows as
-well as to inspect its position in the tree. See its
+<p>The row object can be used to expand and collapse rows as<br />
+well as to inspect its position in the tree. See its<br />
 documentation for details.</p>
-<p>This row object is persistent and will refer to the current
-item as long as the row is present in <!-- raw HTML omitted -->self<!-- raw HTML omitted -->, independent of
+<p>This row object is persistent and will refer to the current<br />
+item as long as the row is present in <!-- raw HTML omitted -->self<!-- raw HTML omitted -->, independent of<br />
 other rows being added or removed.</p>
-<p>If <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is set to not be passthrough, this function is
+<p>If <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is set to not be passthrough, this function is<br />
 equivalent to calling g_list_model_get_item().</p>
 <p>Do not confuse this function with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeListModel.get_child_row].</p>
 
@@ -1201,12 +1204,12 @@ equivalent to calling g_list_model_get_item().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets whether the model is passing through original row items.</p>
-<p>If this function returns false, the <code>GListModel</code> functions for <!-- raw HTML omitted -->self<!-- raw HTML omitted -->
-return custom <code>GtkTreeListRow</code> objects. You need to call
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeListRow.get_item] on these objects to get the original
+<p>If this function returns false, the <code>GListModel</code> functions for <!-- raw HTML omitted -->self<!-- raw HTML omitted --><br />
+return custom <code>GtkTreeListRow</code> objects. You need to call<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeListRow.get_item] on these objects to get the original<br />
 item.</p>
-<p>If true, the values of the child models are passed through in their
-original state. You then need to call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeListModel.get_row]
+<p>If true, the values of the child models are passed through in their<br />
+original state. You then need to call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeListModel.get_row]<br />
 to get the custom <code>GtkTreeListRow</code>s.</p>
 
 
@@ -1247,8 +1250,8 @@ to get the custom <code>GtkTreeListRow</code>s.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets whether the model is in passthrough mode.</p>
-<p>If false, the <code>GListModel</code> functions for this object return custom
-[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeListRow] objects. If true, the values of the child
+<p>If false, the <code>GListModel</code> functions for this object return custom<br />
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeListRow] objects. If true, the values of the child<br />
 models are pass through unmodified.</p>
 
 
@@ -1317,8 +1320,8 @@ models are pass through unmodified.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets whether the model is in passthrough mode.</p>
-<p>If false, the <code>GListModel</code> functions for this object return custom
-[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeListRow] objects. If true, the values of the child
+<p>If false, the <code>GListModel</code> functions for this object return custom<br />
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeListRow] objects. If true, the values of the child<br />
 models are pass through unmodified.</p>
 
 
@@ -1354,7 +1357,7 @@ models are pass through unmodified.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

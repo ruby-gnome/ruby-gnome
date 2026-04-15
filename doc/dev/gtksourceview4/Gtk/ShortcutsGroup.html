@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::ShortcutsGroup";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,7 +101,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -328,9 +330,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -342,6 +346,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Box.html" title="Gtk::Box (class)">Box</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Box.html#append-instance_method" title="Gtk::Box#append (method)">#append</a></span>, <span class='object_link'><a href="Box.html#baseline_child-instance_method" title="Gtk::Box#baseline_child (method)">#baseline_child</a></span>, <span class='object_link'><a href="Box.html#baseline_child=-instance_method" title="Gtk::Box#baseline_child= (method)">#baseline_child=</a></span>, <span class='object_link'><a href="Box.html#baseline_position-instance_method" title="Gtk::Box#baseline_position (method)">#baseline_position</a></span>, <span class='object_link'><a href="Box.html#baseline_position=-instance_method" title="Gtk::Box#baseline_position= (method)">#baseline_position=</a></span>, <span class='object_link'><a href="Box.html#homogeneous-instance_method" title="Gtk::Box#homogeneous (method)">#homogeneous</a></span>, <span class='object_link'><a href="Box.html#homogeneous=-instance_method" title="Gtk::Box#homogeneous= (method)">#homogeneous=</a></span>, <span class='object_link'><a href="Box.html#homogeneous%3F-instance_method" title="Gtk::Box#homogeneous? (method)">#homogeneous?</a></span>, <span class='object_link'><a href="Box.html#initialize-instance_method" title="Gtk::Box#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="Box.html#insert_child_after-instance_method" title="Gtk::Box#insert_child_after (method)">#insert_child_after</a></span>, <span class='object_link'><a href="Box.html#prepend-instance_method" title="Gtk::Box#prepend (method)">#prepend</a></span>, <span class='object_link'><a href="Box.html#remove-instance_method" title="Gtk::Box#remove (method)">#remove</a></span>, <span class='object_link'><a href="Box.html#reorder_child_after-instance_method" title="Gtk::Box#reorder_child_after (method)">#reorder_child_after</a></span>, <span class='object_link'><a href="Box.html#spacing-instance_method" title="Gtk::Box#spacing (method)">#spacing</a></span>, <span class='object_link'><a href="Box.html#spacing=-instance_method" title="Gtk::Box#spacing= (method)">#spacing=</a></span></p>
 
+  
   
   
   
@@ -432,8 +437,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a shortcut to the shortcuts group.</p>
-<p>This is the programmatic equivalent to using [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Builder] and a
-<code>&lt;child&gt;</code> tag to add the child. Adding children with other API is not
+<p>This is the programmatic equivalent to using [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Builder] and a<br />
+<code>&lt;child&gt;</code> tag to add the child. Adding children with other API is not<br />
 appropriate as <code>GtkShortcutsGroup</code> manages its children internally.</p>
 
 
@@ -758,7 +763,7 @@ appropriate as <code>GtkShortcutsGroup</code> manages its children internally.</
 </h3><div class="docstring">
   <div class="discussion">
     <p>An optional view that the shortcuts in this group are relevant for.</p>
-<p>The group will be hidden if the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsWindow:view-name]
+<p>The group will be hidden if the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsWindow:view-name]<br />
 property does not match the view of this group.</p>
 <p>Set this to nil to make the group always visible.</p>
 
@@ -800,7 +805,7 @@ property does not match the view of this group.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>An optional view that the shortcuts in this group are relevant for.</p>
-<p>The group will be hidden if the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsWindow:view-name]
+<p>The group will be hidden if the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsWindow:view-name]<br />
 property does not match the view of this group.</p>
 <p>Set this to nil to make the group always visible.</p>
 
@@ -865,7 +870,7 @@ property does not match the view of this group.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

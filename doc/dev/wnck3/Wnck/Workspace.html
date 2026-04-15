@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Wnck::Workspace";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -414,6 +416,7 @@
 
       
     </ul>
+    
   
 
 
@@ -433,11 +436,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks the window manager to make <!-- raw HTML omitted -->space<!-- raw HTML omitted --> the active workspace. The window
-manager may decide to refuse the request (to not steal the focus if there is
+    <p>Asks the window manager to make <!-- raw HTML omitted -->space<!-- raw HTML omitted --> the active workspace. The window<br />
+manager may decide to refuse the request (to not steal the focus if there is<br />
 a more recent user activity, for example).</p>
-<p>This function existed before 2.10, but the <!-- raw HTML omitted -->timestamp<!-- raw HTML omitted --> argument was missing
-in earlier versions.
+<p>This function existed before 2.10, but the <!-- raw HTML omitted -->timestamp<!-- raw HTML omitted --> argument was missing<br />
+in earlier versions.<br />
 this call to occur.</p>
 
 
@@ -546,9 +549,9 @@ this call to occur.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the neighbor Wnck::Workspace of <!-- raw HTML omitted -->space<!-- raw HTML omitted --> in the <!-- raw HTML omitted -->direction<!-- raw HTML omitted --> direction.
-<!-- raw HTML omitted -->direction<!-- raw HTML omitted --> direction, or nil if no such neighbor Wnck::Workspace exists.
-The returned Wnck::Workspace is owned by libwnck and must not be referenced
+    <p>Gets the neighbor Wnck::Workspace of <!-- raw HTML omitted -->space<!-- raw HTML omitted --> in the <!-- raw HTML omitted -->direction<!-- raw HTML omitted --> direction.<br />
+<!-- raw HTML omitted -->direction<!-- raw HTML omitted --> direction, or nil if no such neighbor Wnck::Workspace exists.<br />
+The returned Wnck::Workspace is owned by libwnck and must not be referenced<br />
 or unreferenced.</p>
 
 
@@ -685,10 +688,10 @@ or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the column of <!-- raw HTML omitted -->space<!-- raw HTML omitted --> in the Wnck::Workspace layout. The first column
-has an index of 0 and is always the left column, regardless of the starting
-corner set for the layout and regardless of the default direction of the
-environment (i.e., in both Left-To-Right and Right-To-Left environments).
+    <p>Gets the column of <!-- raw HTML omitted -->space<!-- raw HTML omitted --> in the Wnck::Workspace layout. The first column<br />
+has an index of 0 and is always the left column, regardless of the starting<br />
+corner set for the layout and regardless of the default direction of the<br />
+environment (i.e., in both Left-To-Right and Right-To-Left environments).<br />
 errors.</p>
 
 
@@ -728,9 +731,9 @@ errors.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the row of <!-- raw HTML omitted -->space<!-- raw HTML omitted --> in the Wnck::Workspace layout. The first row has an
-index of 0 and is always the top row, regardless of the starting corner set
-for the layout.
+    <p>Gets the row of <!-- raw HTML omitted -->space<!-- raw HTML omitted --> in the Wnck::Workspace layout. The first row has an<br />
+index of 0 and is always the top row, regardless of the starting corner set<br />
+for the layout.<br />
 errors.</p>
 
 
@@ -770,8 +773,8 @@ errors.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the human-readable name that should be used to refer to <!-- raw HTML omitted -->space<!-- raw HTML omitted -->. If
-the user has not set a special name, a fallback like &quot;Workspace 3&quot; will be
+    <p>Gets the human-readable name that should be used to refer to <!-- raw HTML omitted -->space<!-- raw HTML omitted -->. If<br />
+the user has not set a special name, a fallback like &quot;Workspace 3&quot; will be<br />
 used.</p>
 
 
@@ -811,7 +814,7 @@ used.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the index of <!-- raw HTML omitted -->space<!-- raw HTML omitted --> on the Wnck::Screen to which it belongs. The
+    <p>Gets the index of <!-- raw HTML omitted -->space<!-- raw HTML omitted --> on the Wnck::Screen to which it belongs. The<br />
 first workspace has an index of 0.</p>
 
 
@@ -851,7 +854,7 @@ first workspace has an index of 0.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Wnck::Screen <!-- raw HTML omitted -->space<!-- raw HTML omitted --> is on.
+    <p>Gets the Wnck::Screen <!-- raw HTML omitted -->space<!-- raw HTML omitted --> is on.<br />
 Wnck::Screen is owned by libwnck and must not be referenced or unreferenced.</p>
 
 
@@ -891,7 +894,7 @@ Wnck::Screen is owned by libwnck and must not be referenced or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the X coordinate of the viewport in <!-- raw HTML omitted -->space<!-- raw HTML omitted -->.
+    <p>Gets the X coordinate of the viewport in <!-- raw HTML omitted -->space<!-- raw HTML omitted -->.<br />
 contain a viewport.</p>
 
 
@@ -931,7 +934,7 @@ contain a viewport.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Y coordinate of the viewport in <!-- raw HTML omitted -->space<!-- raw HTML omitted -->.
+    <p>Gets the Y coordinate of the viewport in <!-- raw HTML omitted -->space<!-- raw HTML omitted -->.<br />
 contain a viewport.</p>
 
 
@@ -1006,7 +1009,7 @@ contain a viewport.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::AboutDialog";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -105,8 +106,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/deprecated.rb<span class="defines">,<br />
+    <dd>lib/gtk4/deprecated.rb<span class="defines">,<br>
   lib/gtk4/about-dialog.rb</span>
+
 </dd>
   </dl>
   
@@ -114,28 +116,28 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The <code>GtkAboutDialog</code> offers a simple way to display information about
+    <p>The <code>GtkAboutDialog</code> offers a simple way to display information about<br />
 a program.</p>
-<p>The shown information includes the programs' logo, name, copyright,
-website and license. It is also possible to give credits to the authors,
+<p>The shown information includes the programs' logo, name, copyright,<br />
+website and license. It is also possible to give credits to the authors,<br />
 documenters, translators and artists who have worked on the program.</p>
-<p>An about dialog is typically opened when the user selects the <code>About</code>
+<p>An about dialog is typically opened when the user selects the <code>About</code><br />
 option from the <code>Help</code> menu. All parts of the dialog are optional.</p>
 <p><img src="aboutdialog.png" alt="An example GtkAboutDialog" /></p>
-<p>About dialogs often contain links and email addresses. <code>GtkAboutDialog</code>
-displays these as clickable links. By default, it calls [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileLauncher.launch]
-when a user clicks one. The behaviour can be overridden with the
+<p>About dialogs often contain links and email addresses. <code>GtkAboutDialog</code><br />
+displays these as clickable links. By default, it calls [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileLauncher.launch]<br />
+when a user clicks one. The behaviour can be overridden with the<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AboutDialog::activate-link] signal.</p>
-<p>To specify a person with an email address, use a string like
-<code>Edgar Allan Poe &lt;edgar&lt;b&gt;poe&lt;/b&gt;.com&gt;</code>. To specify a website with a title,
+<p>To specify a person with an email address, use a string like<br />
+<code>Edgar Allan Poe &lt;edgar&lt;b&gt;poe&lt;/b&gt;.com&gt;</code>. To specify a website with a title,<br />
 use a string like <code>GTK team https://www.gtk.org</code>.</p>
-<p>To make constructing a <code>GtkAboutDialog</code> as convenient as possible, you can
-use the function [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.show_about_dialog] which constructs and shows
+<p>To make constructing a <code>GtkAboutDialog</code> as convenient as possible, you can<br />
+use the function [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.show_about_dialog] which constructs and shows<br />
 a dialog and keeps it around so that it can be shown again.</p>
-<p>Note that GTK sets a default title of <code>_(&quot;About %s&quot;)</code> on the dialog
-window (where <code>%s</code> is replaced by the name of the application, but in
-order to ensure proper translation of the title, applications should
-set the title property explicitly when constructing a <code>GtkAboutDialog</code>,
+<p>Note that GTK sets a default title of <code>_(&quot;About %s&quot;)</code> on the dialog<br />
+window (where <code>%s</code> is replaced by the name of the application, but in<br />
+order to ensure proper translation of the title, applications should<br />
+set the title property explicitly when constructing a <code>GtkAboutDialog</code>,<br />
 as shown in the following example:</p>
 <pre class="code c"><code class="c">GFile *logo_file = g_file_new_for_path (&quot;./logo.png&quot;);
 GdkTexture *example_logo = gdk_texture_new_from_file (logo_file, NULL);
@@ -147,8 +149,8 @@ gtk_show_about_dialog (NULL,
                        &quot;title&quot;, _(&quot;About ExampleCode&quot;),
                        NULL);
 </code></pre>
-<h2>CSS nodes</h2>
-<p><code>GtkAboutDialog</code> has a single CSS node with the name <code>window</code> and style
+<h2><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h2>
+<p><code>GtkAboutDialog</code> has a single CSS node with the name <code>window</code> and style<br />
 class <code>.aboutdialog</code>.</p>
 
 
@@ -195,6 +197,7 @@ class <code>.aboutdialog</code>.</p>
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1011,9 +1014,11 @@ class <code>.aboutdialog</code>.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -1026,6 +1031,7 @@ class <code>.aboutdialog</code>.</p>
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Window.html" title="Gtk::Window (class)">Window</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Window.html#application-instance_method" title="Gtk::Window#application (method)">#application</a></span>, <span class='object_link'><a href="Window.html#application=-instance_method" title="Gtk::Window#application= (method)">#application=</a></span>, <span class='object_link'><a href="Window.html#auto_startup_notification=-class_method" title="Gtk::Window.auto_startup_notification= (method)">auto_startup_notification=</a></span>, <span class='object_link'><a href="Window.html#child-instance_method" title="Gtk::Window#child (method)">#child</a></span>, <span class='object_link'><a href="Window.html#child=-instance_method" title="Gtk::Window#child= (method)">#child=</a></span>, <span class='object_link'><a href="Window.html#close-instance_method" title="Gtk::Window#close (method)">#close</a></span>, <span class='object_link'><a href="Window.html#decorated-instance_method" title="Gtk::Window#decorated (method)">#decorated</a></span>, <span class='object_link'><a href="Window.html#decorated=-instance_method" title="Gtk::Window#decorated= (method)">#decorated=</a></span>, <span class='object_link'><a href="Window.html#decorated%3F-instance_method" title="Gtk::Window#decorated? (method)">#decorated?</a></span>, <span class='object_link'><a href="Window.html#default_height-instance_method" title="Gtk::Window#default_height (method)">#default_height</a></span>, <span class='object_link'><a href="Window.html#default_height=-instance_method" title="Gtk::Window#default_height= (method)">#default_height=</a></span>, <span class='object_link'><a href="Window.html#default_icon_name-class_method" title="Gtk::Window.default_icon_name (method)">default_icon_name</a></span>, <span class='object_link'><a href="Window.html#default_icon_name=-class_method" title="Gtk::Window.default_icon_name= (method)">default_icon_name=</a></span>, <span class='object_link'><a href="Window.html#default_widget-instance_method" title="Gtk::Window#default_widget (method)">#default_widget</a></span>, <span class='object_link'><a href="Window.html#default_widget=-instance_method" title="Gtk::Window#default_widget= (method)">#default_widget=</a></span>, <span class='object_link'><a href="Window.html#default_width-instance_method" title="Gtk::Window#default_width (method)">#default_width</a></span>, <span class='object_link'><a href="Window.html#default_width=-instance_method" title="Gtk::Window#default_width= (method)">#default_width=</a></span>, <span class='object_link'><a href="Window.html#deletable-instance_method" title="Gtk::Window#deletable (method)">#deletable</a></span>, <span class='object_link'><a href="Window.html#deletable=-instance_method" title="Gtk::Window#deletable= (method)">#deletable=</a></span>, <span class='object_link'><a href="Window.html#deletable%3F-instance_method" title="Gtk::Window#deletable? (method)">#deletable?</a></span>, <span class='object_link'><a href="Window.html#destroy-instance_method" title="Gtk::Window#destroy (method)">#destroy</a></span>, <span class='object_link'><a href="Window.html#destroy_with_parent-instance_method" title="Gtk::Window#destroy_with_parent (method)">#destroy_with_parent</a></span>, <span class='object_link'><a href="Window.html#destroy_with_parent=-instance_method" title="Gtk::Window#destroy_with_parent= (method)">#destroy_with_parent=</a></span>, <span class='object_link'><a href="Window.html#destroy_with_parent%3F-instance_method" title="Gtk::Window#destroy_with_parent? (method)">#destroy_with_parent?</a></span>, <span class='object_link'><a href="Window.html#display-instance_method" title="Gtk::Window#display (method)">#display</a></span>, <span class='object_link'><a href="Window.html#display=-instance_method" title="Gtk::Window#display= (method)">#display=</a></span>, <span class='object_link'><a href="Window.html#focus-instance_method" title="Gtk::Window#focus (method)">#focus</a></span>, <span class='object_link'><a href="Window.html#focus=-instance_method" title="Gtk::Window#focus= (method)">#focus=</a></span>, <span class='object_link'><a href="Window.html#focus_visible-instance_method" title="Gtk::Window#focus_visible (method)">#focus_visible</a></span>, <span class='object_link'><a href="Window.html#focus_visible=-instance_method" title="Gtk::Window#focus_visible= (method)">#focus_visible=</a></span>, <span class='object_link'><a href="Window.html#focus_visible%3F-instance_method" title="Gtk::Window#focus_visible? (method)">#focus_visible?</a></span>, <span class='object_link'><a href="Window.html#focus_widget-instance_method" title="Gtk::Window#focus_widget (method)">#focus_widget</a></span>, <span class='object_link'><a href="Window.html#focus_widget=-instance_method" title="Gtk::Window#focus_widget= (method)">#focus_widget=</a></span>, <span class='object_link'><a href="Window.html#fullscreen-instance_method" title="Gtk::Window#fullscreen (method)">#fullscreen</a></span>, <span class='object_link'><a href="Window.html#fullscreen_on_monitor-instance_method" title="Gtk::Window#fullscreen_on_monitor (method)">#fullscreen_on_monitor</a></span>, <span class='object_link'><a href="Window.html#fullscreened=-instance_method" title="Gtk::Window#fullscreened= (method)">#fullscreened=</a></span>, <span class='object_link'><a href="Window.html#fullscreened%3F-instance_method" title="Gtk::Window#fullscreened? (method)">#fullscreened?</a></span>, <span class='object_link'><a href="Window.html#get_default_size-instance_method" title="Gtk::Window#get_default_size (method)">#get_default_size</a></span>, <span class='object_link'><a href="Window.html#group-instance_method" title="Gtk::Window#group (method)">#group</a></span>, <span class='object_link'><a href="Window.html#handle_menubar_accel-instance_method" title="Gtk::Window#handle_menubar_accel (method)">#handle_menubar_accel</a></span>, <span class='object_link'><a href="Window.html#handle_menubar_accel=-instance_method" title="Gtk::Window#handle_menubar_accel= (method)">#handle_menubar_accel=</a></span>, <span class='object_link'><a href="Window.html#handle_menubar_accel%3F-instance_method" title="Gtk::Window#handle_menubar_accel? (method)">#handle_menubar_accel?</a></span>, <span class='object_link'><a href="Window.html#has_group-instance_method" title="Gtk::Window#has_group (method)">#has_group</a></span>, <span class='object_link'><a href="Window.html#hide_on_close-instance_method" title="Gtk::Window#hide_on_close (method)">#hide_on_close</a></span>, <span class='object_link'><a href="Window.html#hide_on_close=-instance_method" title="Gtk::Window#hide_on_close= (method)">#hide_on_close=</a></span>, <span class='object_link'><a href="Window.html#hide_on_close%3F-instance_method" title="Gtk::Window#hide_on_close? (method)">#hide_on_close?</a></span>, <span class='object_link'><a href="Window.html#icon_name-instance_method" title="Gtk::Window#icon_name (method)">#icon_name</a></span>, <span class='object_link'><a href="Window.html#icon_name=-instance_method" title="Gtk::Window#icon_name= (method)">#icon_name=</a></span>, <span class='object_link'><a href="Window.html#interactive_debugging=-class_method" title="Gtk::Window.interactive_debugging= (method)">interactive_debugging=</a></span>, <span class='object_link'><a href="Window.html#is_active-instance_method" title="Gtk::Window#is_active (method)">#is_active</a></span>, <span class='object_link'><a href="Window.html#is_active=-instance_method" title="Gtk::Window#is_active= (method)">#is_active=</a></span>, <span class='object_link'><a href="Window.html#is_active%3F-instance_method" title="Gtk::Window#is_active? (method)">#is_active?</a></span>, <span class='object_link'><a href="Window.html#is_fullscreen-instance_method" title="Gtk::Window#is_fullscreen (method)">#is_fullscreen</a></span>, <span class='object_link'><a href="Window.html#is_maximized-instance_method" title="Gtk::Window#is_maximized (method)">#is_maximized</a></span>, <span class='object_link'><a href="Window.html#is_suspended-instance_method" title="Gtk::Window#is_suspended (method)">#is_suspended</a></span>, <span class='object_link'><a href="Window.html#list_toplevels-class_method" title="Gtk::Window.list_toplevels (method)">list_toplevels</a></span>, <span class='object_link'><a href="Window.html#maximize-instance_method" title="Gtk::Window#maximize (method)">#maximize</a></span>, <span class='object_link'><a href="Window.html#maximized=-instance_method" title="Gtk::Window#maximized= (method)">#maximized=</a></span>, <span class='object_link'><a href="Window.html#maximized%3F-instance_method" title="Gtk::Window#maximized? (method)">#maximized?</a></span>, <span class='object_link'><a href="Window.html#minimize-instance_method" title="Gtk::Window#minimize (method)">#minimize</a></span>, <span class='object_link'><a href="Window.html#mnemonics_visible-instance_method" title="Gtk::Window#mnemonics_visible (method)">#mnemonics_visible</a></span>, <span class='object_link'><a href="Window.html#mnemonics_visible=-instance_method" title="Gtk::Window#mnemonics_visible= (method)">#mnemonics_visible=</a></span>, <span class='object_link'><a href="Window.html#mnemonics_visible%3F-instance_method" title="Gtk::Window#mnemonics_visible? (method)">#mnemonics_visible?</a></span>, <span class='object_link'><a href="Window.html#modal-instance_method" title="Gtk::Window#modal (method)">#modal</a></span>, <span class='object_link'><a href="Window.html#modal=-instance_method" title="Gtk::Window#modal= (method)">#modal=</a></span>, <span class='object_link'><a href="Window.html#modal%3F-instance_method" title="Gtk::Window#modal? (method)">#modal?</a></span>, <span class='object_link'><a href="Window.html#present-instance_method" title="Gtk::Window#present (method)">#present</a></span>, <span class='object_link'><a href="Window.html#present_with_time-instance_method" title="Gtk::Window#present_with_time (method)">#present_with_time</a></span>, <span class='object_link'><a href="Window.html#resizable-instance_method" title="Gtk::Window#resizable (method)">#resizable</a></span>, <span class='object_link'><a href="Window.html#resizable=-instance_method" title="Gtk::Window#resizable= (method)">#resizable=</a></span>, <span class='object_link'><a href="Window.html#resizable%3F-instance_method" title="Gtk::Window#resizable? (method)">#resizable?</a></span>, <span class='object_link'><a href="Window.html#set_default_size-instance_method" title="Gtk::Window#set_default_size (method)">#set_default_size</a></span>, <span class='object_link'><a href="Window.html#startup_id=-instance_method" title="Gtk::Window#startup_id= (method)">#startup_id=</a></span>, <span class='object_link'><a href="Window.html#suspended=-instance_method" title="Gtk::Window#suspended= (method)">#suspended=</a></span>, <span class='object_link'><a href="Window.html#suspended%3F-instance_method" title="Gtk::Window#suspended? (method)">#suspended?</a></span>, <span class='object_link'><a href="Window.html#title-instance_method" title="Gtk::Window#title (method)">#title</a></span>, <span class='object_link'><a href="Window.html#title=-instance_method" title="Gtk::Window#title= (method)">#title=</a></span>, <span class='object_link'><a href="Window.html#titlebar-instance_method" title="Gtk::Window#titlebar (method)">#titlebar</a></span>, <span class='object_link'><a href="Window.html#titlebar=-instance_method" title="Gtk::Window#titlebar= (method)">#titlebar=</a></span>, <span class='object_link'><a href="Window.html#toplevels-class_method" title="Gtk::Window.toplevels (method)">toplevels</a></span>, <span class='object_link'><a href="Window.html#transient_for-instance_method" title="Gtk::Window#transient_for (method)">#transient_for</a></span>, <span class='object_link'><a href="Window.html#transient_for=-instance_method" title="Gtk::Window#transient_for= (method)">#transient_for=</a></span>, <span class='object_link'><a href="Window.html#unfullscreen-instance_method" title="Gtk::Window#unfullscreen (method)">#unfullscreen</a></span>, <span class='object_link'><a href="Window.html#unmaximize-instance_method" title="Gtk::Window#unmaximize (method)">#unmaximize</a></span>, <span class='object_link'><a href="Window.html#unminimize-instance_method" title="Gtk::Window#unminimize (method)">#unminimize</a></span></p>
 
+  
   
   
   
@@ -1205,9 +1211,9 @@ class <code>.aboutdialog</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The people who contributed artwork to the program, as a <code>NULL</code>-terminated
+    <p>The people who contributed artwork to the program, as a <code>NULL</code>-terminated<br />
 array of strings.</p>
-<p>Each string may contain email addresses and URLs, which will be displayed
+<p>Each string may contain email addresses and URLs, which will be displayed<br />
 as links.</p>
 
 
@@ -1247,9 +1253,9 @@ as links.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The people who contributed artwork to the program, as a <code>NULL</code>-terminated
+    <p>The people who contributed artwork to the program, as a <code>NULL</code>-terminated<br />
 array of strings.</p>
-<p>Each string may contain email addresses and URLs, which will be displayed
+<p>Each string may contain email addresses and URLs, which will be displayed<br />
 as links.</p>
 
 
@@ -1318,7 +1324,7 @@ as links.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The authors of the program, as a <code>NULL</code>-terminated array of strings.</p>
-<p>Each string may contain email addresses and URLs, which will be displayed
+<p>Each string may contain email addresses and URLs, which will be displayed<br />
 as links, see the introduction for more details.</p>
 
 
@@ -1359,7 +1365,7 @@ as links, see the introduction for more details.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The authors of the program, as a <code>NULL</code>-terminated array of strings.</p>
-<p>Each string may contain email addresses and URLs, which will be displayed
+<p>Each string may contain email addresses and URLs, which will be displayed<br />
 as links, see the introduction for more details.</p>
 
 
@@ -1428,8 +1434,8 @@ as links, see the introduction for more details.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Comments about the program.</p>
-<p>This string is displayed in a label in the main dialog, thus it
-should be a short explanation of the main purpose of the program,
+<p>This string is displayed in a label in the main dialog, thus it<br />
+should be a short explanation of the main purpose of the program,<br />
 not a detailed list of features.</p>
 
 
@@ -1470,8 +1476,8 @@ not a detailed list of features.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Comments about the program.</p>
-<p>This string is displayed in a label in the main dialog, thus it
-should be a short explanation of the main purpose of the program,
+<p>This string is displayed in a label in the main dialog, thus it<br />
+should be a short explanation of the main purpose of the program,<br />
 not a detailed list of features.</p>
 
 
@@ -1646,7 +1652,7 @@ not a detailed list of features.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The people documenting the program, as a <code>NULL</code>-terminated array of strings.</p>
-<p>Each string may contain email addresses and URLs, which will be displayed
+<p>Each string may contain email addresses and URLs, which will be displayed<br />
 as links, see the introduction for more details.</p>
 
 
@@ -1687,7 +1693,7 @@ as links, see the introduction for more details.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The people documenting the program, as a <code>NULL</code>-terminated array of strings.</p>
-<p>Each string may contain email addresses and URLs, which will be displayed
+<p>Each string may contain email addresses and URLs, which will be displayed<br />
 as links, see the introduction for more details.</p>
 
 
@@ -1756,15 +1762,15 @@ as links, see the introduction for more details.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The license of the program, as free-form text.</p>
-<p>This string is displayed in a text view in a secondary dialog, therefore
-it is fine to use a long multi-paragraph text. Note that the text is only
-wrapped in the text view if the &quot;wrap-license&quot; property is set to <code>TRUE</code>;
+<p>This string is displayed in a text view in a secondary dialog, therefore<br />
+it is fine to use a long multi-paragraph text. Note that the text is only<br />
+wrapped in the text view if the &quot;wrap-license&quot; property is set to <code>TRUE</code>;<br />
 otherwise the text itself must contain the intended linebreaks.</p>
-<p>When setting this property to a non-<code>NULL</code> value, the
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AboutDialog:license-type] property is set to
+<p>When setting this property to a non-<code>NULL</code> value, the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AboutDialog:license-type] property is set to<br />
 <code>GTK_LICENSE_CUSTOM</code> as a side effect.</p>
-<p>The text may contain links in this format <code>&lt;http://www.some.place/&gt;</code>
-and email references in the form <code>&lt;mail-to&lt;b&gt;some&lt;/b&gt;.body&gt;</code>, and these will
+<p>The text may contain links in this format <code>&lt;http://www.some.place/&gt;</code><br />
+and email references in the form <code>&lt;mail-to&lt;b&gt;some&lt;/b&gt;.body&gt;</code>, and these will<br />
 be converted into clickable links.</p>
 
 
@@ -1805,15 +1811,15 @@ be converted into clickable links.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The license of the program, as free-form text.</p>
-<p>This string is displayed in a text view in a secondary dialog, therefore
-it is fine to use a long multi-paragraph text. Note that the text is only
-wrapped in the text view if the &quot;wrap-license&quot; property is set to <code>TRUE</code>;
+<p>This string is displayed in a text view in a secondary dialog, therefore<br />
+it is fine to use a long multi-paragraph text. Note that the text is only<br />
+wrapped in the text view if the &quot;wrap-license&quot; property is set to <code>TRUE</code>;<br />
 otherwise the text itself must contain the intended linebreaks.</p>
-<p>When setting this property to a non-<code>NULL</code> value, the
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AboutDialog:license-type] property is set to
+<p>When setting this property to a non-<code>NULL</code> value, the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AboutDialog:license-type] property is set to<br />
 <code>GTK_LICENSE_CUSTOM</code> as a side effect.</p>
-<p>The text may contain links in this format <code>&lt;http://www.some.place/&gt;</code>
-and email references in the form <code>&lt;mail-to&lt;b&gt;some&lt;/b&gt;.body&gt;</code>, and these will
+<p>The text may contain links in this format <code>&lt;http://www.some.place/&gt;</code><br />
+and email references in the form <code>&lt;mail-to&lt;b&gt;some&lt;/b&gt;.body&gt;</code>, and these will<br />
 be converted into clickable links.</p>
 
 
@@ -1882,15 +1888,15 @@ be converted into clickable links.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The license of the program.</p>
-<p>The <code>GtkAboutDialog</code> will automatically fill out a standard disclaimer
-and link the user to the appropriate online resource for the license
+<p>The <code>GtkAboutDialog</code> will automatically fill out a standard disclaimer<br />
+and link the user to the appropriate online resource for the license<br />
 text.</p>
-<p>If <code>GTK_LICENSE_UNKNOWN</code> is used, the link used will be the same
+<p>If <code>GTK_LICENSE_UNKNOWN</code> is used, the link used will be the same<br />
 specified in the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AboutDialog:website] property.</p>
-<p>If <code>GTK_LICENSE_CUSTOM</code> is used, the current contents of the
+<p>If <code>GTK_LICENSE_CUSTOM</code> is used, the current contents of the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AboutDialog:license] property are used.</p>
-<p>For any other [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.License] value, the contents of the
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AboutDialog:license] property are also set by this property as
+<p>For any other [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.License] value, the contents of the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AboutDialog:license] property are also set by this property as<br />
 a side effect.</p>
 
 
@@ -1931,15 +1937,15 @@ a side effect.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The license of the program.</p>
-<p>The <code>GtkAboutDialog</code> will automatically fill out a standard disclaimer
-and link the user to the appropriate online resource for the license
+<p>The <code>GtkAboutDialog</code> will automatically fill out a standard disclaimer<br />
+and link the user to the appropriate online resource for the license<br />
 text.</p>
-<p>If <code>GTK_LICENSE_UNKNOWN</code> is used, the link used will be the same
+<p>If <code>GTK_LICENSE_UNKNOWN</code> is used, the link used will be the same<br />
 specified in the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AboutDialog:website] property.</p>
-<p>If <code>GTK_LICENSE_CUSTOM</code> is used, the current contents of the
+<p>If <code>GTK_LICENSE_CUSTOM</code> is used, the current contents of the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AboutDialog:license] property are used.</p>
-<p>For any other [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.License] value, the contents of the
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AboutDialog:license] property are also set by this property as
+<p>For any other [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.License] value, the contents of the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AboutDialog:license] property are also set by this property as<br />
 a side effect.</p>
 
 
@@ -2008,7 +2014,7 @@ a side effect.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>A logo for the about box.</p>
-<p>If it is <code>NULL</code>, the default window icon set with
+<p>If it is <code>NULL</code>, the default window icon set with<br />
 [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.set_default_icon_name] will be used.</p>
 
 
@@ -2049,7 +2055,7 @@ a side effect.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>A logo for the about box.</p>
-<p>If it is <code>NULL</code>, the default window icon set with
+<p>If it is <code>NULL</code>, the default window icon set with<br />
 [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.set_default_icon_name] will be used.</p>
 
 
@@ -2226,7 +2232,7 @@ a side effect.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The name of the program.</p>
-<p>If this is not set, it defaults to the value returned by
+<p>If this is not set, it defaults to the value returned by<br />
 <code>g_get_application_name()</code>.</p>
 
 
@@ -2267,7 +2273,7 @@ a side effect.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The name of the program.</p>
-<p>If this is not set, it defaults to the value returned by
+<p>If this is not set, it defaults to the value returned by<br />
 <code>g_get_application_name()</code>.</p>
 
 
@@ -2336,11 +2342,11 @@ a side effect.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Information about the system on which the program is running.</p>
-<p>This information is displayed in a separate page, therefore it is fine
-to use a long multi-paragraph text. Note that the text should contain
+<p>This information is displayed in a separate page, therefore it is fine<br />
+to use a long multi-paragraph text. Note that the text should contain<br />
 the intended linebreaks.</p>
-<p>The text may contain links in this format <code>&lt;http://www.some.place/&gt;</code>
-and email references in the form <code>&lt;mail-to&lt;b&gt;some&lt;/b&gt;.body&gt;</code>, and these will
+<p>The text may contain links in this format <code>&lt;http://www.some.place/&gt;</code><br />
+and email references in the form <code>&lt;mail-to&lt;b&gt;some&lt;/b&gt;.body&gt;</code>, and these will<br />
 be converted into clickable links.</p>
 
 
@@ -2381,11 +2387,11 @@ be converted into clickable links.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Information about the system on which the program is running.</p>
-<p>This information is displayed in a separate page, therefore it is fine
-to use a long multi-paragraph text. Note that the text should contain
+<p>This information is displayed in a separate page, therefore it is fine<br />
+to use a long multi-paragraph text. Note that the text should contain<br />
 the intended linebreaks.</p>
-<p>The text may contain links in this format <code>&lt;http://www.some.place/&gt;</code>
-and email references in the form <code>&lt;mail-to&lt;b&gt;some&lt;/b&gt;.body&gt;</code>, and these will
+<p>The text may contain links in this format <code>&lt;http://www.some.place/&gt;</code><br />
+and email references in the form <code>&lt;mail-to&lt;b&gt;some&lt;/b&gt;.body&gt;</code>, and these will<br />
 be converted into clickable links.</p>
 
 
@@ -2455,7 +2461,7 @@ be converted into clickable links.</p>
   <div class="discussion">
     <p>Credits to the translators.</p>
 <p>This string should be marked as translatable.</p>
-<p>The string may contain email addresses and URLs, which will be displayed
+<p>The string may contain email addresses and URLs, which will be displayed<br />
 as links, see the introduction for more details.</p>
 
 
@@ -2497,7 +2503,7 @@ as links, see the introduction for more details.</p>
   <div class="discussion">
     <p>Credits to the translators.</p>
 <p>This string should be marked as translatable.</p>
-<p>The string may contain email addresses and URLs, which will be displayed
+<p>The string may contain email addresses and URLs, which will be displayed<br />
 as links, see the introduction for more details.</p>
 
 
@@ -2885,7 +2891,7 @@ as links, see the introduction for more details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the license text in the about dialog is
+    <p>Returns whether the license text in the about dialog is<br />
 automatically wrapped.</p>
 
 
@@ -3027,7 +3033,7 @@ automatically wrapped.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GLib::UriFlags";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -110,10 +112,10 @@
         <dt id="PARSE_RELAXED-constant" class="">PARSE_RELAXED =
           <div class="docstring">
   <div class="discussion">
-    <p>Parse the URI more relaxedly than the
-<a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a> grammar specifies,
-fixing up or ignoring common mistakes in URIs coming from external
-sources. This is also needed for some obscure URI schemes where <code>;</code>
+    <p>Parse the URI more relaxedly than the<br />
+<a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a> grammar specifies,<br />
+fixing up or ignoring common mistakes in URIs coming from external<br />
+sources. This is also needed for some obscure URI schemes where <code>;</code><br />
 separates the host from the path. Don’t use this flag unless you need to.</p>
 
 
@@ -129,7 +131,7 @@ separates the host from the path. Don’t use this flag unless you need to.</p>
         <dt id="HAS_PASSWORD-constant" class="">HAS_PASSWORD =
           <div class="docstring">
   <div class="discussion">
-    <p>The userinfo field may contain a password,
+    <p>The userinfo field may contain a password,<br />
 which will be separated from the username by <code>:</code>.</p>
 
 
@@ -145,8 +147,8 @@ which will be separated from the username by <code>:</code>.</p>
         <dt id="HAS_AUTH_PARAMS-constant" class="">HAS_AUTH_PARAMS =
           <div class="docstring">
   <div class="discussion">
-    <p>The userinfo may contain additional
-authentication-related parameters, which will be separated from
+    <p>The userinfo may contain additional<br />
+authentication-related parameters, which will be separated from<br />
 the username and/or password by <code>;</code>.</p>
 
 
@@ -162,11 +164,11 @@ the username and/or password by <code>;</code>.</p>
         <dt id="ENCODED-constant" class="">ENCODED =
           <div class="docstring">
   <div class="discussion">
-    <p>When parsing a URI, this indicates that <code>%</code>-encoded
-characters in the userinfo, path, query, and fragment fields
-should not be decoded. (And likewise the host field if
-%G_URI_FLAGS_NON_DNS is also set.) When building a URI, it indicates
-that you have already <code>%</code>-encoded the components, and so #GUri
+    <p>When parsing a URI, this indicates that <code>%</code>-encoded<br />
+characters in the userinfo, path, query, and fragment fields<br />
+should not be decoded. (And likewise the host field if<br />
+%G_URI_FLAGS_NON_DNS is also set.) When building a URI, it indicates<br />
+that you have already <code>%</code>-encoded the components, and so #GUri<br />
 should not do any encoding itself.</p>
 
 
@@ -182,8 +184,8 @@ should not do any encoding itself.</p>
         <dt id="NON_DNS-constant" class="">NON_DNS =
           <div class="docstring">
   <div class="discussion">
-    <p>The host component should not be assumed to be a
-DNS hostname or IP address (for example, for <code>smb</code> URIs with NetBIOS
+    <p>The host component should not be assumed to be a<br />
+DNS hostname or IP address (for example, for <code>smb</code> URIs with NetBIOS<br />
 hostnames).</p>
 
 
@@ -199,7 +201,7 @@ hostnames).</p>
         <dt id="ENCODED_QUERY-constant" class="">ENCODED_QUERY =
           <div class="docstring">
   <div class="discussion">
-    <p>Same as %G_URI_FLAGS_ENCODED, for the query
+    <p>Same as %G_URI_FLAGS_ENCODED, for the query<br />
 field only.</p>
 
 
@@ -230,7 +232,7 @@ field only.</p>
         <dt id="ENCODED_FRAGMENT-constant" class="">ENCODED_FRAGMENT =
           <div class="docstring">
   <div class="discussion">
-    <p>Same as %G_URI_FLAGS_ENCODED, for the
+    <p>Same as %G_URI_FLAGS_ENCODED, for the<br />
 fragment only.</p>
 
 
@@ -246,9 +248,9 @@ fragment only.</p>
         <dt id="SCHEME_NORMALIZE-constant" class="">SCHEME_NORMALIZE =
           <div class="docstring">
   <div class="discussion">
-    <p>A scheme-based normalization will be applied.
-For example, when parsing an HTTP URI changing omitted path to <code>/</code> and
-omitted port to <code>80</code>; and when building a URI, changing empty path to <code>/</code>
+    <p>A scheme-based normalization will be applied.<br />
+For example, when parsing an HTTP URI changing omitted path to <code>/</code> and<br />
+omitted port to <code>80</code>; and when building a URI, changing empty path to <code>/</code><br />
 and default port <code>80</code>). This only supports a subset of known schemes. (Since: 2.68)</p>
 
 
@@ -277,7 +279,7 @@ and default port <code>80</code>). This only supports a subset of known schemes.
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

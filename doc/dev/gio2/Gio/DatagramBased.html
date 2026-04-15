@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::DatagramBased";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -86,46 +88,46 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Interface for socket-like objects with datagram semantics.</p>
-<p>A <code>GDatagramBased</code> is a networking interface for representing datagram-based
-communications. It is a more or less direct mapping of the core parts of the
-BSD socket API in a portable GObject interface. It is implemented by
+<p>A <code>GDatagramBased</code> is a networking interface for representing datagram-based<br />
+communications. It is a more or less direct mapping of the core parts of the<br />
+BSD socket API in a portable GObject interface. It is implemented by<br />
 [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket], which wraps the UNIX socket API on UNIX and winsock2 on Windows.</p>
-<p><code>GDatagramBased</code> is entirely platform independent, and is intended to be used
+<p><code>GDatagramBased</code> is entirely platform independent, and is intended to be used<br />
 alongside higher-level networking APIs such as [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.IOStream].</p>
-<p>It uses vectored scatter/gather I/O by default, allowing for many messages
-to be sent or received in a single call. Where possible, implementations of
-the interface should take advantage of vectored I/O to minimise processing
-or system calls. For example, <code>GSocket</code> uses <code>recvmmsg()</code> and <code>sendmmsg()</code>
-where possible. Callers should take advantage of scatter/gather I/O (the use of
-multiple buffers per message) to avoid unnecessary copying of data to
+<p>It uses vectored scatter/gather I/O by default, allowing for many messages<br />
+to be sent or received in a single call. Where possible, implementations of<br />
+the interface should take advantage of vectored I/O to minimise processing<br />
+or system calls. For example, <code>GSocket</code> uses <code>recvmmsg()</code> and <code>sendmmsg()</code><br />
+where possible. Callers should take advantage of scatter/gather I/O (the use of<br />
+multiple buffers per message) to avoid unnecessary copying of data to<br />
 assemble or disassemble a message.</p>
-<p>Each <code>GDatagramBased</code> operation has a timeout parameter which may be negative
-for blocking behaviour, zero for non-blocking behaviour, or positive for
-timeout behaviour. A blocking operation blocks until finished or there is an
-error. A non-blocking operation will return immediately with a
-<code>G_IO_ERROR_WOULD_BLOCK</code> error if it cannot make progress. A timeout operation
-will block until the operation is complete or the timeout expires; if the
-timeout expires it will return what progress it made, or
-<code>G_IO_ERROR_TIMED_OUT</code> if no progress was made. To know when a call would
-successfully run you can call [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DatagramBased.condition_check] or
-[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DatagramBased.condition_wait]. You can also use
-[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DatagramBased.create_source] and attach it to a [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext]
+<p>Each <code>GDatagramBased</code> operation has a timeout parameter which may be negative<br />
+for blocking behaviour, zero for non-blocking behaviour, or positive for<br />
+timeout behaviour. A blocking operation blocks until finished or there is an<br />
+error. A non-blocking operation will return immediately with a<br />
+<code>G_IO_ERROR_WOULD_BLOCK</code> error if it cannot make progress. A timeout operation<br />
+will block until the operation is complete or the timeout expires; if the<br />
+timeout expires it will return what progress it made, or<br />
+<code>G_IO_ERROR_TIMED_OUT</code> if no progress was made. To know when a call would<br />
+successfully run you can call [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DatagramBased.condition_check] or<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DatagramBased.condition_wait]. You can also use<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DatagramBased.create_source] and attach it to a [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext]<br />
 to get callbacks when I/O is possible.</p>
-<p>When running a non-blocking operation applications should always be able to
-handle getting a <code>G_IO_ERROR_WOULD_BLOCK</code> error even when some other function
-said that I/O was possible. This can easily happen in case of a race
-condition in the application, but it can also happen for other reasons. For
-instance, on Windows a socket is always seen as writable until a write
+<p>When running a non-blocking operation applications should always be able to<br />
+handle getting a <code>G_IO_ERROR_WOULD_BLOCK</code> error even when some other function<br />
+said that I/O was possible. This can easily happen in case of a race<br />
+condition in the application, but it can also happen for other reasons. For<br />
+instance, on Windows a socket is always seen as writable until a write<br />
 returns <code>G_IO_ERROR_WOULD_BLOCK</code>.</p>
-<p>As with <code>GSocket</code>, <code>GDatagramBased</code>s can be either connection oriented (for
-example, SCTP) or connectionless (for example, UDP). <code>GDatagramBased</code>s must be
-datagram-based, not stream-based. The interface does not cover connection
-establishment — use methods on the underlying type to establish a connection
-before sending and receiving data through the <code>GDatagramBased</code> API. For
-connectionless socket types the target/source address is specified or
+<p>As with <code>GSocket</code>, <code>GDatagramBased</code>s can be either connection oriented (for<br />
+example, SCTP) or connectionless (for example, UDP). <code>GDatagramBased</code>s must be<br />
+datagram-based, not stream-based. The interface does not cover connection<br />
+establishment — use methods on the underlying type to establish a connection<br />
+before sending and receiving data through the <code>GDatagramBased</code> API. For<br />
+connectionless socket types the target/source address is specified or<br />
 received in each I/O operation.</p>
-<p>Like most other APIs in GLib, <code>GDatagramBased</code> is not inherently thread safe.
-To use a <code>GDatagramBased</code> concurrently from multiple threads, you must
+<p>Like most other APIs in GLib, <code>GDatagramBased</code> is not inherently thread safe.<br />
+To use a <code>GDatagramBased</code> concurrently from multiple threads, you must<br />
 implement your own locking.</p>
 
 
@@ -265,6 +267,7 @@ implement your own locking.</p>
 
       
     </ul>
+    
   
 
 
@@ -284,32 +287,32 @@ implement your own locking.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks on the readiness of <!-- raw HTML omitted -->datagram_based<!-- raw HTML omitted --> to perform operations. The
-operations specified in <!-- raw HTML omitted -->condition<!-- raw HTML omitted --> are checked for and masked against the
+    <p>Checks on the readiness of <!-- raw HTML omitted -->datagram_based<!-- raw HTML omitted --> to perform operations. The<br />
+operations specified in <!-- raw HTML omitted -->condition<!-- raw HTML omitted --> are checked for and masked against the<br />
 currently-satisfied conditions on <!-- raw HTML omitted -->datagram_based<!-- raw HTML omitted -->. The result is returned.</p>
-<p>%G_IO_IN will be set in the return value if data is available to read with
-g_datagram_based_receive_messages(), or if the connection is closed remotely
-(EOS); and if the datagram_based has not been closed locally using some
-implementation-specific method (such as g_socket_close() or
+<p>%G_IO_IN will be set in the return value if data is available to read with<br />
+g_datagram_based_receive_messages(), or if the connection is closed remotely<br />
+(EOS); and if the datagram_based has not been closed locally using some<br />
+implementation-specific method (such as g_socket_close() or<br />
 g_socket_shutdown() with <!-- raw HTML omitted -->shutdown_read<!-- raw HTML omitted --> set, if it’s a #GSocket).</p>
-<p>If the connection is shut down or closed (by calling g_socket_close() or
-g_socket_shutdown() with <!-- raw HTML omitted -->shutdown_read<!-- raw HTML omitted --> set, if it’s a #GSocket, for
+<p>If the connection is shut down or closed (by calling g_socket_close() or<br />
+g_socket_shutdown() with <!-- raw HTML omitted -->shutdown_read<!-- raw HTML omitted --> set, if it’s a #GSocket, for<br />
 example), all calls to this function will return %G_IO_ERROR_CLOSED.</p>
-<p>%G_IO_OUT will be set if it is expected that at least one byte can be sent
-using g_datagram_based_send_messages() without blocking. It will not be set
+<p>%G_IO_OUT will be set if it is expected that at least one byte can be sent<br />
+using g_datagram_based_send_messages() without blocking. It will not be set<br />
 if the datagram_based has been closed locally.</p>
 <p>%G_IO_HUP will be set if the connection has been closed locally.</p>
-<p>%G_IO_ERR will be set if there was an asynchronous error in transmitting data
+<p>%G_IO_ERR will be set if there was an asynchronous error in transmitting data<br />
 previously enqueued using g_datagram_based_send_messages().</p>
-<p>Note that on Windows, it is possible for an operation to return
-%G_IO_ERROR_WOULD_BLOCK even immediately after
-g_datagram_based_condition_check() has claimed that the GDatagram::Based is
-ready for writing. Rather than calling g_datagram_based_condition_check() and
-then writing to the GDatagram::Based if it succeeds, it is generally better to
-simply try writing right away, and try again later if the initial attempt
+<p>Note that on Windows, it is possible for an operation to return<br />
+%G_IO_ERROR_WOULD_BLOCK even immediately after<br />
+g_datagram_based_condition_check() has claimed that the GDatagram::Based is<br />
+ready for writing. Rather than calling g_datagram_based_condition_check() and<br />
+then writing to the GDatagram::Based if it succeeds, it is generally better to<br />
+simply try writing right away, and try again later if the initial attempt<br />
 returns %G_IO_ERROR_WOULD_BLOCK.</p>
-<p>It is meaningless to specify %G_IO_ERR or %G_IO_HUP in <!-- raw HTML omitted -->condition<!-- raw HTML omitted -->; these
-conditions will always be set in the output if they are true. Apart from
+<p>It is meaningless to specify %G_IO_ERR or %G_IO_HUP in <!-- raw HTML omitted -->condition<!-- raw HTML omitted -->; these<br />
+conditions will always be set in the output if they are true. Apart from<br />
 these flags, the output is guaranteed to be masked by <!-- raw HTML omitted -->condition<!-- raw HTML omitted -->.</p>
 <p>This call never blocks.</p>
 
@@ -369,10 +372,10 @@ these flags, the output is guaranteed to be masked by <!-- raw HTML omitted -->c
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Waits for up to <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> microseconds for condition to become true on
+    <p>Waits for up to <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> microseconds for condition to become true on<br />
 <!-- raw HTML omitted -->datagram_based<!-- raw HTML omitted -->. If the condition is met, true is returned.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled before the condition is met, or if <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is
-reached before the condition is met, then false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled before the condition is met, or if <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is<br />
+reached before the condition is met, then false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is<br />
 set appropriately (%G_IO_ERROR_CANCELLED or %G_IO_ERROR_TIMED_OUT).</p>
 
 
@@ -407,7 +410,7 @@ set appropriately (%G_IO_ERROR_CANCELLED or %G_IO_ERROR_TIMED_OUT).</p>
       
       
         &mdash;
-        <div class='inline'><p>the maximum time (in microseconds) to wait, 0 to not block, or -1
+        <div class='inline'><p>the maximum time (in microseconds) to wait, 0 to not block, or -1<br />
 to block indefinitely</p>
 </div>
       
@@ -462,16 +465,16 @@ to block indefinitely</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a #GSource that can be attached to a GMain::Context to monitor for
-the availability of the specified <!-- raw HTML omitted -->condition<!-- raw HTML omitted --> on the GDatagram::Based. The
+    <p>Creates a #GSource that can be attached to a GMain::Context to monitor for<br />
+the availability of the specified <!-- raw HTML omitted -->condition<!-- raw HTML omitted --> on the GDatagram::Based. The<br />
 #GSource keeps a reference to the <!-- raw HTML omitted -->datagram_based<!-- raw HTML omitted -->.</p>
 <p>The callback on the source is of the GDatagram::BasedSourceFunc type.</p>
-<p>It is meaningless to specify %G_IO_ERR or %G_IO_HUP in <!-- raw HTML omitted -->condition<!-- raw HTML omitted -->; these
+<p>It is meaningless to specify %G_IO_ERR or %G_IO_HUP in <!-- raw HTML omitted -->condition<!-- raw HTML omitted -->; these<br />
 conditions will always be reported in the callback if they are true.</p>
-<p>If non-nil, <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> can be used to cancel the source, which will
-cause the source to trigger, reporting the current condition (which is
-likely 0 unless cancellation happened at the same time as a condition
-change). You can check for this in the callback using
+<p>If non-nil, <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> can be used to cancel the source, which will<br />
+cause the source to trigger, reporting the current condition (which is<br />
+likely 0 unless cancellation happened at the same time as a condition<br />
+change). You can check for this in the callback using<br />
 g_cancellable_is_cancelled().</p>
 
 
@@ -546,44 +549,44 @@ g_cancellable_is_cancelled().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Receive one or more data messages from <!-- raw HTML omitted -->datagram_based<!-- raw HTML omitted --> in one go.</p>
-<p><!-- raw HTML omitted -->messages<!-- raw HTML omitted --> must point to an array of GInput::Message structs and
-<!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> must be the length of this array. Each GInput::Message
-contains a pointer to an array of GInput::Vector structs describing the
+<p><!-- raw HTML omitted -->messages<!-- raw HTML omitted --> must point to an array of GInput::Message structs and<br />
+<!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> must be the length of this array. Each GInput::Message<br />
+contains a pointer to an array of GInput::Vector structs describing the<br />
 buffers that the data received in each message will be written to.</p>
-<p><!-- raw HTML omitted -->flags<!-- raw HTML omitted --> modify how all messages are received. The commonly available
-arguments for this are available in the GSocket::MsgFlags enum, but the
-values there are the same as the system values, and the flags
-are passed in as-is, so you can pass in system-specific flags too. These
-flags affect the overall receive operation. Flags affecting individual
+<p><!-- raw HTML omitted -->flags<!-- raw HTML omitted --> modify how all messages are received. The commonly available<br />
+arguments for this are available in the GSocket::MsgFlags enum, but the<br />
+values there are the same as the system values, and the flags<br />
+are passed in as-is, so you can pass in system-specific flags too. These<br />
+flags affect the overall receive operation. Flags affecting individual<br />
 messages are returned in GInput::Message.flags.</p>
-<p>The other members of GInput::Message are treated as described in its
+<p>The other members of GInput::Message are treated as described in its<br />
 documentation.</p>
-<p>If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is negative the call will block until <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> have been
-received, the connection is closed remotely (EOS), <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled,
+<p>If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is negative the call will block until <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> have been<br />
+received, the connection is closed remotely (EOS), <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled,<br />
 or an error occurs.</p>
-<p>If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is 0 the call will return up to <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> without blocking,
-or %G_IO_ERROR_WOULD_BLOCK if no messages are queued in the operating system
+<p>If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is 0 the call will return up to <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> without blocking,<br />
+or %G_IO_ERROR_WOULD_BLOCK if no messages are queued in the operating system<br />
 to be received.</p>
-<p>If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is positive the call will block on the same conditions as if
-<!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> were negative. If the timeout is reached
-before any messages are received, %G_IO_ERROR_TIMED_OUT is returned,
-otherwise it will return the number of messages received before timing out.
-(Note: This is effectively the behaviour of <code>MSG_WAITFORONE</code> with
+<p>If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is positive the call will block on the same conditions as if<br />
+<!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> were negative. If the timeout is reached<br />
+before any messages are received, %G_IO_ERROR_TIMED_OUT is returned,<br />
+otherwise it will return the number of messages received before timing out.<br />
+(Note: This is effectively the behaviour of <code>MSG_WAITFORONE</code> with<br />
 recvmmsg().)</p>
-<p>To be notified when messages are available, wait for the %G_IO_IN condition.
-Note though that you may still receive %G_IO_ERROR_WOULD_BLOCK from
-g_datagram_based_receive_messages() even if you were previously notified of a
+<p>To be notified when messages are available, wait for the %G_IO_IN condition.<br />
+Note though that you may still receive %G_IO_ERROR_WOULD_BLOCK from<br />
+g_datagram_based_receive_messages() even if you were previously notified of a<br />
 %G_IO_IN condition.</p>
-<p>If the remote peer closes the connection, any messages queued in the
-underlying receive buffer will be returned, and subsequent calls to
+<p>If the remote peer closes the connection, any messages queued in the<br />
+underlying receive buffer will be returned, and subsequent calls to<br />
 g_datagram_based_receive_messages() will return 0 (with no error set).</p>
-<p>If the connection is shut down or closed (by calling g_socket_close() or
-g_socket_shutdown() with <!-- raw HTML omitted -->shutdown_read<!-- raw HTML omitted --> set, if it’s a #GSocket, for
+<p>If the connection is shut down or closed (by calling g_socket_close() or<br />
+g_socket_shutdown() with <!-- raw HTML omitted -->shutdown_read<!-- raw HTML omitted --> set, if it’s a #GSocket, for<br />
 example), all calls to this function will return %G_IO_ERROR_CLOSED.</p>
-<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly. An error will only
-be returned if zero messages could be received; otherwise the number of
-messages successfully received before the error will be returned. If
-<!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled, %G_IO_ERROR_CANCELLED is returned as with any
+<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly. An error will only<br />
+be returned if zero messages could be received; otherwise the number of<br />
+messages successfully received before the error will be returned. If<br />
+<!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled, %G_IO_ERROR_CANCELLED is returned as with any<br />
 other error.</p>
 
 
@@ -648,7 +651,7 @@ other error.</p>
       
       
         &mdash;
-        <div class='inline'><p>the maximum time (in microseconds) to wait, 0 to not block, or -1
+        <div class='inline'><p>the maximum time (in microseconds) to wait, 0 to not block, or -1<br />
 to block indefinitely</p>
 </div>
       
@@ -682,10 +685,10 @@ to block indefinitely</p>
       
       
         &mdash;
-        <div class='inline'><p>number of messages received, or -1 on error. Note that the number
-of messages received may be smaller than <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> if <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is
-zero or positive, if the peer closed the connection, or if <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted -->
-was larger than <code>UIO_MAXIOV</code> (1024), in which case the caller may re-try
+        <div class='inline'><p>number of messages received, or -1 on error. Note that the number<br />
+of messages received may be smaller than <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> if <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is<br />
+zero or positive, if the peer closed the connection, or if <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --><br />
+was larger than <code>UIO_MAXIOV</code> (1024), in which case the caller may re-try<br />
 to receive the remaining messages.</p>
 </div>
       
@@ -708,36 +711,36 @@ to receive the remaining messages.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Send one or more data messages from <!-- raw HTML omitted -->datagram_based<!-- raw HTML omitted --> in one go.</p>
-<p><!-- raw HTML omitted -->messages<!-- raw HTML omitted --> must point to an array of GOutput::Message structs and
-<!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> must be the length of this array. Each GOutput::Message
-contains an address to send the data to, and a pointer to an array of
-GOutput::Vector structs to describe the buffers that the data to be sent
+<p><!-- raw HTML omitted -->messages<!-- raw HTML omitted --> must point to an array of GOutput::Message structs and<br />
+<!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> must be the length of this array. Each GOutput::Message<br />
+contains an address to send the data to, and a pointer to an array of<br />
+GOutput::Vector structs to describe the buffers that the data to be sent<br />
 for each message will be gathered from.</p>
-<p><!-- raw HTML omitted -->flags<!-- raw HTML omitted --> modify how the message is sent. The commonly available arguments
-for this are available in the GSocket::MsgFlags enum, but the
-values there are the same as the system values, and the flags
+<p><!-- raw HTML omitted -->flags<!-- raw HTML omitted --> modify how the message is sent. The commonly available arguments<br />
+for this are available in the GSocket::MsgFlags enum, but the<br />
+values there are the same as the system values, and the flags<br />
 are passed in as-is, so you can pass in system-specific flags too.</p>
-<p>The other members of GOutput::Message are treated as described in its
+<p>The other members of GOutput::Message are treated as described in its<br />
 documentation.</p>
-<p>If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is negative the call will block until <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> have been
+<p>If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is negative the call will block until <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> have been<br />
 sent, <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled, or an error occurs.</p>
-<p>If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is 0 the call will send up to <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> without blocking,
+<p>If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is 0 the call will send up to <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> without blocking,<br />
 or will return %G_IO_ERROR_WOULD_BLOCK if there is no space to send messages.</p>
-<p>If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is positive the call will block on the same conditions as if
-<!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> were negative. If the timeout is reached before any messages are
-sent, %G_IO_ERROR_TIMED_OUT is returned, otherwise it will return the number
+<p>If <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is positive the call will block on the same conditions as if<br />
+<!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> were negative. If the timeout is reached before any messages are<br />
+sent, %G_IO_ERROR_TIMED_OUT is returned, otherwise it will return the number<br />
 of messages sent before timing out.</p>
-<p>To be notified when messages can be sent, wait for the %G_IO_OUT condition.
-Note though that you may still receive %G_IO_ERROR_WOULD_BLOCK from
-g_datagram_based_send_messages() even if you were previously notified of a
-%G_IO_OUT condition. (On Windows in particular, this is very common due to
+<p>To be notified when messages can be sent, wait for the %G_IO_OUT condition.<br />
+Note though that you may still receive %G_IO_ERROR_WOULD_BLOCK from<br />
+g_datagram_based_send_messages() even if you were previously notified of a<br />
+%G_IO_OUT condition. (On Windows in particular, this is very common due to<br />
 the way the underlying APIs work.)</p>
-<p>If the connection is shut down or closed (by calling g_socket_close() or
-g_socket_shutdown() with <!-- raw HTML omitted -->shutdown_write<!-- raw HTML omitted --> set, if it’s a #GSocket, for
+<p>If the connection is shut down or closed (by calling g_socket_close() or<br />
+g_socket_shutdown() with <!-- raw HTML omitted -->shutdown_write<!-- raw HTML omitted --> set, if it’s a #GSocket, for<br />
 example), all calls to this function will return %G_IO_ERROR_CLOSED.</p>
-<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly. An error will only
-be returned if zero messages could be sent; otherwise the number of messages
-successfully sent before the error will be returned. If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is
+<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly. An error will only<br />
+be returned if zero messages could be sent; otherwise the number of messages<br />
+successfully sent before the error will be returned. If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is<br />
 cancelled, %G_IO_ERROR_CANCELLED is returned as with any other error.</p>
 
 
@@ -802,7 +805,7 @@ cancelled, %G_IO_ERROR_CANCELLED is returned as with any other error.</p>
       
       
         &mdash;
-        <div class='inline'><p>the maximum time (in microseconds) to wait, 0 to not block, or -1
+        <div class='inline'><p>the maximum time (in microseconds) to wait, 0 to not block, or -1<br />
 to block indefinitely</p>
 </div>
       
@@ -836,9 +839,9 @@ to block indefinitely</p>
       
       
         &mdash;
-        <div class='inline'><p>number of messages sent, or -1 on error. Note that the number of
-messages sent may be smaller than <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> if <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is zero
-or positive, or if <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> was larger than <code>UIO_MAXIOV</code> (1024), in
+        <div class='inline'><p>number of messages sent, or -1 on error. Note that the number of<br />
+messages sent may be smaller than <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> if <!-- raw HTML omitted -->timeout<!-- raw HTML omitted --> is zero<br />
+or positive, or if <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> was larger than <code>UIO_MAXIOV</code> (1024), in<br />
 which case the caller may re-try to send the remaining messages.</p>
 </div>
       
@@ -856,7 +859,7 @@ which case the caller may re-try to send the remaining messages.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

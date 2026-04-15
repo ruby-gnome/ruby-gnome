@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Shader";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -587,6 +589,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -650,8 +653,8 @@
       
       
         &mdash;
-        <div class='inline'><p>A Cogl::Handle for the fragment
-shader, or nil. The handle is owned by the Clutter::Shader
+        <div class='inline'><p>A Cogl::Handle for the fragment<br />
+shader, or nil. The handle is owned by the Clutter::Shader<br />
 and it should not be unreferenced</p>
 </div>
       
@@ -691,8 +694,8 @@ and it should not be unreferenced</p>
       
       
         &mdash;
-        <div class='inline'><p>A Cogl::Handle for the shader program,
-or nil. The handle is owned by the Clutter::Shader and it should
+        <div class='inline'><p>A Cogl::Handle for the shader program,<br />
+or nil. The handle is owned by the Clutter::Shader and it should<br />
 not be unreferenced</p>
 </div>
       
@@ -732,8 +735,8 @@ not be unreferenced</p>
       
       
         &mdash;
-        <div class='inline'><p>A Cogl::Handle for the vertex
-shader, or nil. The handle is owned by the Clutter::Shader
+        <div class='inline'><p>A Cogl::Handle for the vertex<br />
+shader, or nil. The handle is owned by the Clutter::Shader<br />
 and it should not be unreferenced</p>
 </div>
       
@@ -755,8 +758,8 @@ and it should not be unreferenced</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Compiles and links GLSL sources set for vertex and fragment shaders for
-a Clutter::Shader. If the compilation fails and a #GError return location is
+    <p>Compiles and links GLSL sources set for vertex and fragment shaders for<br />
+a Clutter::Shader. If the compilation fails and a #GError return location is<br />
 provided the error will contain the errors from the compiler, if any.</p>
 
 
@@ -796,7 +799,7 @@ provided the error will contain the errors from the compiler, if any.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the shader is compiled and linked, ready for use
+    <p>Whether the shader is compiled and linked, ready for use<br />
 in the GL context.</p>
 
 
@@ -864,7 +867,7 @@ in the GL context.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the shader is compiled and linked, ready for use
+    <p>Whether the shader is compiled and linked, ready for use<br />
 in the GL context.</p>
 
 
@@ -1116,7 +1119,7 @@ in the GL context.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether <!-- raw HTML omitted -->shader<!-- raw HTML omitted --> is is currently compiled, linked and bound
+    <p>Checks whether <!-- raw HTML omitted -->shader<!-- raw HTML omitted --> is is currently compiled, linked and bound<br />
 to the GL context.</p>
 
 
@@ -1195,9 +1198,9 @@ to the GL context.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Enables a shader. This function will attempt to compile and link
+    <p>Enables a shader. This function will attempt to compile and link<br />
 the shader, if it isn't already.</p>
-<p>When <!-- raw HTML omitted -->enabled<!-- raw HTML omitted --> is false the default state of the GL pipeline will be
+<p>When <!-- raw HTML omitted -->enabled<!-- raw HTML omitted --> is false the default state of the GL pipeline will be<br />
 used instead.</p>
 
 
@@ -1287,7 +1290,7 @@ used instead.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the GLSL source code to be used by a Clutter::Shader for the fragment
+    <p>Sets the GLSL source code to be used by a Clutter::Shader for the fragment<br />
 program.</p>
 
 
@@ -1357,7 +1360,7 @@ program.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a user configurable variable in the GLSL shader programs attached to
+    <p>Sets a user configurable variable in the GLSL shader programs attached to<br />
 a Clutter::Shader.</p>
 
 
@@ -1392,7 +1395,7 @@ a Clutter::Shader.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Clutter::ShaderFloat, #ClutterShaderInt or #ClutterShaderMatrix
+        <div class='inline'><p>a Clutter::ShaderFloat, #ClutterShaderInt or #ClutterShaderMatrix<br />
 #GValue.</p>
 </div>
       
@@ -1428,7 +1431,7 @@ a Clutter::Shader.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the GLSL source code to be used by a Clutter::Shader for the vertex
+    <p>Sets the GLSL source code to be used by a Clutter::Shader for the vertex<br />
 program.</p>
 
 
@@ -1498,7 +1501,7 @@ program.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>GLSL source code for the vertex shader part of the shader
+    <p>GLSL source code for the vertex shader part of the shader<br />
 program, if any</p>
 
 
@@ -1538,7 +1541,7 @@ program, if any</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>GLSL source code for the vertex shader part of the shader
+    <p>GLSL source code for the vertex shader part of the shader<br />
 program, if any</p>
 
 
@@ -1602,7 +1605,7 @@ program, if any</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

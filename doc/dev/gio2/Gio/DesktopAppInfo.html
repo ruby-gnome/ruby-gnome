@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::DesktopAppInfo";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -161,6 +163,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -632,6 +635,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -696,10 +700,10 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the name of the desktop that the application is running in.
-This is used by g_app_info_should_show() and
-g_desktop_app_info_get_show_in() to evaluate the
-<code>OnlyShowIn</code> and <code>NotShowIn</code>
+    <p>Sets the name of the desktop that the application is running in.<br />
+This is used by g_app_info_should_show() and<br />
+g_desktop_app_info_get_show_in() to evaluate the<br />
+<code>OnlyShowIn</code> and <code>NotShowIn</code><br />
 desktop entry fields.</p>
 <p>Should be called only once; subsequent calls are ignored.</p>
 
@@ -756,8 +760,8 @@ desktop entry fields.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets all applications that implement <!-- raw HTML omitted -->interface<!-- raw HTML omitted -->.</p>
-<p>An application implements an interface if that interface is listed in
-the Implements= line of the desktop file of the application.
+<p>An application implements an interface if that interface is listed in<br />
+the Implements= line of the desktop file of the application.<br />
 objects.</p>
 
 
@@ -840,7 +844,7 @@ objects.</p>
       
       
         &mdash;
-        <div class='inline'><p>The unparsed Categories key from the desktop file;
+        <div class='inline'><p>The unparsed Categories key from the desktop file;<br />
 i.e. no attempt is made to split it by ';' or validate it.</p>
 </div>
       
@@ -1007,9 +1011,9 @@ i.e. no attempt is made to split it by ';' or validate it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the user-visible display name of the &quot;additional application
+    <p>Gets the user-visible display name of the &quot;additional application<br />
 action&quot; specified by <!-- raw HTML omitted -->action_name<!-- raw HTML omitted -->.</p>
-<p>This corresponds to the &quot;Name&quot; key within the keyfile group for the
+<p>This corresponds to the &quot;Name&quot; key within the keyfile group for the<br />
 action.</p>
 
 
@@ -1029,7 +1033,7 @@ action.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of the action as from
+        <div class='inline'><p>the name of the action as from<br />
 g_desktop_app_info_list_actions()</p>
 </div>
       
@@ -1107,7 +1111,7 @@ g_desktop_app_info_list_actions()</p>
       
       
         &mdash;
-        <div class='inline'><p>the boolean value, or false if the key
+        <div class='inline'><p>the boolean value, or false if the key<br />
 is not found</p>
 </div>
       
@@ -1129,7 +1133,7 @@ is not found</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks up a localized string value in the keyfile backing <!-- raw HTML omitted -->info<!-- raw HTML omitted -->
+    <p>Looks up a localized string value in the keyfile backing <!-- raw HTML omitted -->info<!-- raw HTML omitted --><br />
 translated to the current locale.</p>
 <p>The <!-- raw HTML omitted -->key<!-- raw HTML omitted --> is looked up in the &quot;Desktop Entry&quot; group.</p>
 
@@ -1168,7 +1172,7 @@ translated to the current locale.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string, or nil if the key
+        <div class='inline'><p>a newly allocated string, or nil if the key<br />
 is not found</p>
 </div>
       
@@ -1190,16 +1194,16 @@ is not found</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if the application info should be shown in menus that list available
-applications for a specific name of the desktop, based on the
+    <p>Checks if the application info should be shown in menus that list available<br />
+applications for a specific name of the desktop, based on the<br />
 <code>OnlyShowIn</code> and <code>NotShowIn</code> keys.</p>
-<p><!-- raw HTML omitted -->desktop_env<!-- raw HTML omitted --> should typically be given as nil, in which case the
-<code>XDG_CURRENT_DESKTOP</code> environment variable is consulted.  If you want
-to override the default mechanism then you may specify <!-- raw HTML omitted -->desktop_env<!-- raw HTML omitted -->,
+<p><!-- raw HTML omitted -->desktop_env<!-- raw HTML omitted --> should typically be given as nil, in which case the<br />
+<code>XDG_CURRENT_DESKTOP</code> environment variable is consulted.  If you want<br />
+to override the default mechanism then you may specify <!-- raw HTML omitted -->desktop_env<!-- raw HTML omitted -->,<br />
 but this is not recommended.</p>
-<p>Note that g_app_info_should_show() for <!-- raw HTML omitted -->info<!-- raw HTML omitted --> will include this check (with
-nil for <!-- raw HTML omitted -->desktop_env<!-- raw HTML omitted -->) as well as additional checks.
-<code>OnlyShowIn</code> and <code>NotShowIn</code> keys, false
+<p>Note that g_app_info_should_show() for <!-- raw HTML omitted -->info<!-- raw HTML omitted --> will include this check (with<br />
+nil for <!-- raw HTML omitted -->desktop_env<!-- raw HTML omitted -->) as well as additional checks.<br />
+<code>OnlyShowIn</code> and <code>NotShowIn</code> keys, false<br />
 otherwise.</p>
 
 
@@ -1296,7 +1300,7 @@ otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string, or nil if the key
+        <div class='inline'><p>a newly allocated string, or nil if the key<br />
 is not found</p>
 </div>
       
@@ -1371,7 +1375,7 @@ is not found</p>
       
       
         &mdash;
-        <div class='inline'><p>a nil-terminated string array or nil if the specified
+        <div class='inline'><p>a nil-terminated string array or nil if the specified<br />
 key cannot be found. The array should be freed with g_strfreev().</p>
 </div>
       
@@ -1393,7 +1397,7 @@ key cannot be found. The array should be freed with g_strfreev().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether <!-- raw HTML omitted -->key<!-- raw HTML omitted --> exists in the &quot;Desktop Entry&quot; group
+    <p>Returns whether <!-- raw HTML omitted -->key<!-- raw HTML omitted --> exists in the &quot;Desktop Entry&quot; group<br />
 of the keyfile backing <!-- raw HTML omitted -->info<!-- raw HTML omitted -->.</p>
 
 
@@ -1452,7 +1456,7 @@ of the keyfile backing <!-- raw HTML omitted -->info<!-- raw HTML omitted -->.</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A desktop file is hidden if the Hidden key in it is
+    <p>A desktop file is hidden if the Hidden key in it is<br />
 set to True.</p>
 
 
@@ -1532,16 +1536,16 @@ set to True.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Activates the named application action.</p>
-<p>You may only call this function on action names that were
+<p>You may only call this function on action names that were<br />
 returned from g_desktop_app_info_list_actions().</p>
-<p>Note that if the main entry of the desktop file indicates that the
-application supports startup notification, and <!-- raw HTML omitted -->launch_context<!-- raw HTML omitted --> is
-non-nil, then startup notification will be used when activating the
-action (and as such, invocation of the action on the receiving side
-must signal the end of startup notification when it is completed).
-This is the expected behaviour of applications declaring additional
+<p>Note that if the main entry of the desktop file indicates that the<br />
+application supports startup notification, and <!-- raw HTML omitted -->launch_context<!-- raw HTML omitted --> is<br />
+non-nil, then startup notification will be used when activating the<br />
+action (and as such, invocation of the action on the receiving side<br />
+must signal the end of startup notification when it is completed).<br />
+This is the expected behaviour of applications declaring additional<br />
 actions, as per the desktop file specification.</p>
-<p>As with g_app_info_launch() there is no way to detect failures that
+<p>As with g_app_info_launch() there is no way to detect failures that<br />
 occur while using this function.</p>
 
 
@@ -1561,7 +1565,7 @@ occur while using this function.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of the action as from
+        <div class='inline'><p>the name of the action as from<br />
 g_desktop_app_info_list_actions()</p>
 </div>
       
@@ -1612,18 +1616,18 @@ g_desktop_app_info_list_actions()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function performs the equivalent of g_app_info_launch_uris(),
-but is intended primarily for operating system components that
-launch applications.  Ordinary applications should use
+    <p>This function performs the equivalent of g_app_info_launch_uris(),<br />
+but is intended primarily for operating system components that<br />
+launch applications.  Ordinary applications should use<br />
 g_app_info_launch_uris().</p>
-<p>If the application is launched via GSpawn, then <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->, <!-- raw HTML omitted -->user_setup<!-- raw HTML omitted -->
-and <!-- raw HTML omitted -->user_setup_data<!-- raw HTML omitted --> are used for the call to g_spawn_async().
-Additionally, <!-- raw HTML omitted -->pid_callback<!-- raw HTML omitted --> (with <!-- raw HTML omitted -->pid_callback_data<!-- raw HTML omitted -->) will be called to
-inform about the PID of the created process. See g_spawn_async_with_pipes()
-for information on certain parameter conditions that can enable an
+<p>If the application is launched via GSpawn, then <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->, <!-- raw HTML omitted -->user_setup<!-- raw HTML omitted --><br />
+and <!-- raw HTML omitted -->user_setup_data<!-- raw HTML omitted --> are used for the call to g_spawn_async().<br />
+Additionally, <!-- raw HTML omitted -->pid_callback<!-- raw HTML omitted --> (with <!-- raw HTML omitted -->pid_callback_data<!-- raw HTML omitted -->) will be called to<br />
+inform about the PID of the created process. See g_spawn_async_with_pipes()<br />
+for information on certain parameter conditions that can enable an<br />
 optimized posix_spawn() codepath to be used.</p>
-<p>If application launching occurs via some other mechanism (eg: D-Bus
-activation) then <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->, <!-- raw HTML omitted -->user_setup<!-- raw HTML omitted -->, <!-- raw HTML omitted -->user_setup_data<!-- raw HTML omitted -->,
+<p>If application launching occurs via some other mechanism (eg: D-Bus<br />
+activation) then <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->, <!-- raw HTML omitted -->user_setup<!-- raw HTML omitted -->, <!-- raw HTML omitted -->user_setup_data<!-- raw HTML omitted -->,<br />
 <!-- raw HTML omitted -->pid_callback<!-- raw HTML omitted --> and <!-- raw HTML omitted -->pid_callback_data<!-- raw HTML omitted --> are ignored.</p>
 
 
@@ -1688,7 +1692,7 @@ activation) then <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->, 
       
       
         &mdash;
-        <div class='inline'><p>a GSpawn::ChildSetupFunc, used once
+        <div class='inline'><p>a GSpawn::ChildSetupFunc, used once<br />
 for each process.</p>
 </div>
       
@@ -1773,10 +1777,10 @@ for each process.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Equivalent to g_desktop_app_info_launch_uris_as_manager() but allows
-you to pass in file descriptors for the stdin, stdout and stderr streams
+    <p>Equivalent to g_desktop_app_info_launch_uris_as_manager() but allows<br />
+you to pass in file descriptors for the stdin, stdout and stderr streams<br />
 of the launched process.</p>
-<p>If application launching occurs via some non-spawn mechanism (e.g. D-Bus
+<p>If application launching occurs via some non-spawn mechanism (e.g. D-Bus<br />
 activation) then <!-- raw HTML omitted -->stdin_fd<!-- raw HTML omitted -->, <!-- raw HTML omitted -->stdout_fd<!-- raw HTML omitted --> and <!-- raw HTML omitted -->stderr_fd<!-- raw HTML omitted --> are ignored.</p>
 
 
@@ -1841,7 +1845,7 @@ activation) then <!-- raw HTML omitted -->stdin_fd<!-- raw HTML omitted -->, <!-
       
       
         &mdash;
-        <div class='inline'><p>a GSpawn::ChildSetupFunc, used once
+        <div class='inline'><p>a GSpawn::ChildSetupFunc, used once<br />
 for each process.</p>
 </div>
       
@@ -1971,9 +1975,9 @@ for each process.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the list of &quot;additional application actions&quot; supported on the
+    <p>Returns the list of &quot;additional application actions&quot; supported on the<br />
 desktop file, as per the desktop file specification.</p>
-<p>As per the specification, this is the list of actions that are
+<p>As per the specification, this is the list of actions that are<br />
 explicitly listed in the &quot;Actions&quot; key of the [Desktop Entry] group.</p>
 
 
@@ -2013,8 +2017,8 @@ explicitly listed in the &quot;Actions&quot; key of the [Desktop Entry] group.</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of the NoDisplay key, which helps determine if the
-application info should be shown in menus. See
+    <p>Gets the value of the NoDisplay key, which helps determine if the<br />
+application info should be shown in menus. See<br />
 %G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY and g_app_info_should_show().</p>
 
 
@@ -2054,9 +2058,9 @@ application info should be shown in menus. See
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the StartupWMClass field from <!-- raw HTML omitted -->info<!-- raw HTML omitted -->. This represents the
-WM_CLASS property of the main window of the application, if launched
-through <!-- raw HTML omitted -->info<!-- raw HTML omitted -->.
+    <p>Retrieves the StartupWMClass field from <!-- raw HTML omitted -->info<!-- raw HTML omitted -->. This represents the<br />
+WM_CLASS property of the main window of the application, if launched<br />
+through <!-- raw HTML omitted -->info<!-- raw HTML omitted -->.<br />
 in the desktop file.</p>
 
 
@@ -2092,7 +2096,7 @@ in the desktop file.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

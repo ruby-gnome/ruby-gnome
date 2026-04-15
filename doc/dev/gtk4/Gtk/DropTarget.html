@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::DropTarget";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/drop-target.rb</dd>
+    <dd>lib/gtk4/drop-target.rb
+</dd>
   </dl>
   
 </div>
@@ -533,9 +535,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -561,8 +565,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkDropTarget</code> object.</p>
-<p>If the drop target should support more than 1 type, pass
-%G_TYPE_INVALID for <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and then call
+<p>If the drop target should support more than 1 type, pass<br />
+%G_TYPE_INVALID for <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and then call<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropTarget.set_gtypes].</p>
 
 
@@ -1098,7 +1102,7 @@
       
       
         &mdash;
-        <div class='inline'><p>the number of <code>GType</code>s contained in the
+        <div class='inline'><p>the number of <code>GType</code>s contained in the<br />
 return value</p>
 </div>
       
@@ -1117,7 +1121,7 @@ return value</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>G_TYPE_INVALID</code>-terminated array of types included in
+        <div class='inline'><p>the <code>G_TYPE_INVALID</code>-terminated array of types included in<br />
 formats</p>
 </div>
       
@@ -1140,8 +1144,8 @@ formats</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkDropTarget</code> object.</p>
-<p>If the drop target should support more than 1 type, pass
-%G_TYPE_INVALID for <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and then call
+<p>If the drop target should support more than 1 type, pass<br />
+%G_TYPE_INVALID for <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and then call<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropTarget.set_gtypes].</p>
 
 
@@ -1268,19 +1272,19 @@ formats</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the drop data should be preloaded when the pointer is only
+    <p>Whether the drop data should be preloaded when the pointer is only<br />
 hovering over the widget but has not been released.</p>
-<p>Setting this property allows finer grained reaction to an ongoing
+<p>Setting this property allows finer grained reaction to an ongoing<br />
 drop at the cost of loading more data.</p>
-<p>The default value for this property is false to avoid downloading
+<p>The default value for this property is false to avoid downloading<br />
 huge amounts of data by accident.</p>
-<p>For example, if somebody drags a full document of gigabytes of text
-from a text editor across a widget with a preloading drop target,
-this data will be downloaded, even if the data is ultimately dropped
+<p>For example, if somebody drags a full document of gigabytes of text<br />
+from a text editor across a widget with a preloading drop target,<br />
+this data will be downloaded, even if the data is ultimately dropped<br />
 elsewhere.</p>
-<p>For a lot of data formats, the amount of data is very small (like
-%GDK_TYPE_RGBA), so enabling this property does not hurt at all.
-And for local-only Drag-and-Drop operations, no data transfer is done,
+<p>For a lot of data formats, the amount of data is very small (like<br />
+%GDK_TYPE_RGBA), so enabling this property does not hurt at all.<br />
+And for local-only Drag-and-Drop operations, no data transfer is done,<br />
 so enabling it there is free.</p>
 
 
@@ -1348,19 +1352,19 @@ so enabling it there is free.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the drop data should be preloaded when the pointer is only
+    <p>Whether the drop data should be preloaded when the pointer is only<br />
 hovering over the widget but has not been released.</p>
-<p>Setting this property allows finer grained reaction to an ongoing
+<p>Setting this property allows finer grained reaction to an ongoing<br />
 drop at the cost of loading more data.</p>
-<p>The default value for this property is false to avoid downloading
+<p>The default value for this property is false to avoid downloading<br />
 huge amounts of data by accident.</p>
-<p>For example, if somebody drags a full document of gigabytes of text
-from a text editor across a widget with a preloading drop target,
-this data will be downloaded, even if the data is ultimately dropped
+<p>For example, if somebody drags a full document of gigabytes of text<br />
+from a text editor across a widget with a preloading drop target,<br />
+this data will be downloaded, even if the data is ultimately dropped<br />
 elsewhere.</p>
-<p>For a lot of data formats, the amount of data is very small (like
-%GDK_TYPE_RGBA), so enabling this property does not hurt at all.
-And for local-only Drag-and-Drop operations, no data transfer is done,
+<p>For a lot of data formats, the amount of data is very small (like<br />
+%GDK_TYPE_RGBA), so enabling this property does not hurt at all.<br />
+And for local-only Drag-and-Drop operations, no data transfer is done,<br />
 so enabling it there is free.</p>
 
 
@@ -1401,10 +1405,10 @@ so enabling it there is free.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Rejects the ongoing drop operation.</p>
-<p>If no drop operation is ongoing, i.e when [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropTarget:current-drop]
+<p>If no drop operation is ongoing, i.e when [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropTarget:current-drop]<br />
 is nil, this function does nothing.</p>
-<p>This function should be used when delaying the decision
-on whether to accept a drag or not until after reading
+<p>This function should be used when delaying the decision<br />
+on whether to accept a drag or not until after reading<br />
 the data.</p>
 
 
@@ -1459,7 +1463,7 @@ the data.</p>
       
       
         &mdash;
-        <div class='inline'><p>all supported <code>GType</code>s
+        <div class='inline'><p>all supported <code>GType</code>s<br />
 that can be dropped on the target</p>
 </div>
       
@@ -1511,11 +1515,11 @@ that can be dropped on the target</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The value for this drop operation.</p>
-<p>This is nil if the data has not been loaded yet or no drop
+<p>This is nil if the data has not been loaded yet or no drop<br />
 operation is going on.</p>
-<p>Data may be available before the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropTarget::drop]
-signal gets emitted - for example when the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropTarget:preload]
-property is set. You can use the ::notify signal to be notified
+<p>Data may be available before the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropTarget::drop]<br />
+signal gets emitted - for example when the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropTarget:preload]<br />
+property is set. You can use the ::notify signal to be notified<br />
 of available data.</p>
 
 
@@ -1556,11 +1560,11 @@ of available data.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The value for this drop operation.</p>
-<p>This is nil if the data has not been loaded yet or no drop
+<p>This is nil if the data has not been loaded yet or no drop<br />
 operation is going on.</p>
-<p>Data may be available before the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropTarget::drop]
-signal gets emitted - for example when the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropTarget:preload]
-property is set. You can use the ::notify signal to be notified
+<p>Data may be available before the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropTarget::drop]<br />
+signal gets emitted - for example when the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropTarget:preload]<br />
+property is set. You can use the ::notify signal to be notified<br />
 of available data.</p>
 
 
@@ -1624,7 +1628,7 @@ of available data.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GstBase";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gst/base-loader.rb</dd>
+    <dd>lib/gst/base-loader.rb
+</dd>
   </dl>
   
 </div>
@@ -86,16 +88,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2013-2021  Ruby-GNOME Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -689,6 +691,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 
       
     </ul>
+    
   
 
 
@@ -728,7 +731,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
       
       
         &mdash;
-        <div class='inline'><p>Data from which the Gst::BitReader
+        <div class='inline'><p>Data from which the Gst::BitReader<br />
 should read</p>
 </div>
       
@@ -823,8 +826,8 @@ should read</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Gst::BitWriter instance with the given memory area. If
-<!-- raw HTML omitted -->initialized<!-- raw HTML omitted --> is true it is possible to read <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bits from the
+    <p>Creates a new Gst::BitWriter instance with the given memory area. If<br />
+<!-- raw HTML omitted -->initialized<!-- raw HTML omitted --> is true it is possible to read <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bits from the<br />
 Gst::BitWriter from the beginning.</p>
 <p>Free-function: gst_bit_writer_free</p>
 
@@ -1008,7 +1011,7 @@ Gst::BitWriter from the beginning.</p>
       
       
         &mdash;
-        <div class='inline'><p>data from which the
+        <div class='inline'><p>data from which the<br />
 Gst::ByteReader should read</p>
 </div>
       
@@ -1103,8 +1106,8 @@ Gst::ByteReader should read</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Gst::ByteWriter instance with the given
-memory area. If <!-- raw HTML omitted -->initialized<!-- raw HTML omitted --> is true it is possible to
+    <p>Creates a new Gst::ByteWriter instance with the given<br />
+memory area. If <!-- raw HTML omitted -->initialized<!-- raw HTML omitted --> is true it is possible to<br />
 read <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from the Gst::ByteWriter from the beginning.</p>
 <p>Free-function: gst_byte_writer_free</p>
 
@@ -1194,7 +1197,7 @@ read <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from the Gst::
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Gst::ByteWriter instance with the given
+    <p>Creates a new Gst::ByteWriter instance with the given<br />
 initial data size.</p>
 <p>Free-function: gst_byte_writer_free</p>
 
@@ -1269,7 +1272,7 @@ initial data size.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Allocates a new Gst::QueueArray object with an initial
+    <p>Allocates a new Gst::QueueArray object with an initial<br />
 queue size of <!-- raw HTML omitted -->initial_size<!-- raw HTML omitted -->.</p>
 
 
@@ -1328,7 +1331,7 @@ queue size of <!-- raw HTML omitted -->initial_size<!-- raw HTML omitted -->.</p
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Allocates a new Gst::QueueArray object for elements (e.g. structures)
+    <p>Allocates a new Gst::QueueArray object for elements (e.g. structures)<br />
 of size <!-- raw HTML omitted -->struct_size<!-- raw HTML omitted -->, with an initial queue size of <!-- raw HTML omitted -->initial_size<!-- raw HTML omitted -->.</p>
 
 
@@ -1469,7 +1472,7 @@ of size <!-- raw HTML omitted -->struct_size<!-- raw HTML omitted -->, with an i
       
       
         &mdash;
-        <div class='inline'><p>the Gst::TypeFindData. The caller should free
+        <div class='inline'><p>the Gst::TypeFindData. The caller should free<br />
 the returned Gst::TypeFindData with gst_type_find_data_free().</p>
 </div>
       
@@ -1544,7 +1547,7 @@ the returned Gst::TypeFindData with gst_type_find_data_free().</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::Caps corresponding to the data
+        <div class='inline'><p>the Gst::Caps corresponding to the data<br />
 stream.  Returns nil if no Gst::Caps matches the data stream.</p>
 </div>
       
@@ -1566,14 +1569,14 @@ stream.  Returns nil if no Gst::Caps matches the data stream.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to find what type of data is contained in the given Gst::Buffer, the
-assumption being that the buffer represents the beginning of the stream or
+    <p>Tries to find what type of data is contained in the given Gst::Buffer, the<br />
+assumption being that the buffer represents the beginning of the stream or<br />
 file.</p>
-<p>All available typefinders will be called on the data in order of rank. If
-a typefinding function returns a probability of %GST_TYPE_FIND_MAXIMUM,
-typefinding is stopped immediately and the found caps will be returned
-right away. Otherwise, all available typefind functions will the tried,
-and the caps with the highest probability will be returned, or nil if
+<p>All available typefinders will be called on the data in order of rank. If<br />
+a typefinding function returns a probability of %GST_TYPE_FIND_MAXIMUM,<br />
+typefinding is stopped immediately and the found caps will be returned<br />
+right away. Otherwise, all available typefind functions will the tried,<br />
+and the caps with the highest probability will be returned, or nil if<br />
 the content of the buffer could not be identified.</p>
 <p>Free-function: gst_caps_unref</p>
 
@@ -1624,7 +1627,7 @@ the content of the buffer could not be identified.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the probability of the found
+        <div class='inline'><p>location to store the probability of the found<br />
 caps, or nil</p>
 </div>
       
@@ -1643,8 +1646,8 @@ caps, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::Caps corresponding to the data,
-or nil if no type could be found. The caller should free the caps
+        <div class='inline'><p>the Gst::Caps corresponding to the data,<br />
+or nil if no type could be found. The caller should free the caps<br />
 returned with gst_caps_unref().</p>
 </div>
       
@@ -1666,14 +1669,14 @@ returned with gst_caps_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to find if type of media contained in the given Gst::Buffer, matches
-<!-- raw HTML omitted -->caps<!-- raw HTML omitted --> specified, assumption being that the buffer represents the beginning
+    <p>Tries to find if type of media contained in the given Gst::Buffer, matches<br />
+<!-- raw HTML omitted -->caps<!-- raw HTML omitted --> specified, assumption being that the buffer represents the beginning<br />
 of the stream or file.</p>
-<p>Tries to find what type of data is contained in the given <!-- raw HTML omitted -->data<!-- raw HTML omitted -->, the
-assumption being that the data represents the beginning of the stream or
+<p>Tries to find what type of data is contained in the given <!-- raw HTML omitted -->data<!-- raw HTML omitted -->, the<br />
+assumption being that the data represents the beginning of the stream or<br />
 file.</p>
-<p>Only the typefinder matching the given caps will be called, if found. The
-caps with the highest probability will be returned, or nil if the content
+<p>Only the typefinder matching the given caps will be called, if found. The<br />
+caps with the highest probability will be returned, or nil if the content<br />
 of the <!-- raw HTML omitted -->data<!-- raw HTML omitted --> could not be identified.</p>
 <p>Free-function: gst_caps_unref</p>
 
@@ -1739,7 +1742,7 @@ of the <!-- raw HTML omitted -->data<!-- raw HTML omitted --> could not be ident
       
       
         &mdash;
-        <div class='inline'><p>location to store the probability of the found
+        <div class='inline'><p>location to store the probability of the found<br />
 caps, or nil</p>
 </div>
       
@@ -1758,8 +1761,8 @@ caps, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::Caps corresponding to the data,
-or nil if no type could be found. The caller should free the caps
+        <div class='inline'><p>the Gst::Caps corresponding to the data,<br />
+or nil if no type could be found. The caller should free the caps<br />
 returned with gst_caps_unref().</p>
 </div>
       
@@ -1781,17 +1784,17 @@ returned with gst_caps_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to find what type of data is contained in the given Gst::Buffer, the
-assumption being that the buffer represents the beginning of the stream or
+    <p>Tries to find what type of data is contained in the given Gst::Buffer, the<br />
+assumption being that the buffer represents the beginning of the stream or<br />
 file.</p>
-<p>All available typefinders will be called on the data in order of rank. If
-a typefinding function returns a probability of %GST_TYPE_FIND_MAXIMUM,
-typefinding is stopped immediately and the found caps will be returned
-right away. Otherwise, all available typefind functions will the tried,
-and the caps with the highest probability will be returned, or nil if
+<p>All available typefinders will be called on the data in order of rank. If<br />
+a typefinding function returns a probability of %GST_TYPE_FIND_MAXIMUM,<br />
+typefinding is stopped immediately and the found caps will be returned<br />
+right away. Otherwise, all available typefind functions will the tried,<br />
+and the caps with the highest probability will be returned, or nil if<br />
 the content of the buffer could not be identified.</p>
-<p>When <!-- raw HTML omitted -->extension<!-- raw HTML omitted --> is not nil, this function will first try the typefind
-functions for the given extension, which might speed up the typefinding
+<p>When <!-- raw HTML omitted -->extension<!-- raw HTML omitted --> is not nil, this function will first try the typefind<br />
+functions for the given extension, which might speed up the typefinding<br />
 in many cases.</p>
 <p>Free-function: gst_caps_unref</p>
 
@@ -1857,7 +1860,7 @@ in many cases.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the probability of the found
+        <div class='inline'><p>location to store the probability of the found<br />
 caps, or nil</p>
 </div>
       
@@ -1876,8 +1879,8 @@ caps, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::Caps corresponding to the data,
-or nil if no type could be found. The caller should free the caps
+        <div class='inline'><p>the Gst::Caps corresponding to the data,<br />
+or nil if no type could be found. The caller should free the caps<br />
 returned with gst_caps_unref().</p>
 </div>
       
@@ -1899,14 +1902,14 @@ returned with gst_caps_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to find what type of data is contained in the given <!-- raw HTML omitted -->data<!-- raw HTML omitted -->, the
-assumption being that the data represents the beginning of the stream or
+    <p>Tries to find what type of data is contained in the given <!-- raw HTML omitted -->data<!-- raw HTML omitted -->, the<br />
+assumption being that the data represents the beginning of the stream or<br />
 file.</p>
-<p>All available typefinders will be called on the data in order of rank. If
-a typefinding function returns a probability of %GST_TYPE_FIND_MAXIMUM,
-typefinding is stopped immediately and the found caps will be returned
-right away. Otherwise, all available typefind functions will the tried,
-and the caps with the highest probability will be returned, or nil if
+<p>All available typefinders will be called on the data in order of rank. If<br />
+a typefinding function returns a probability of %GST_TYPE_FIND_MAXIMUM,<br />
+typefinding is stopped immediately and the found caps will be returned<br />
+right away. Otherwise, all available typefind functions will the tried,<br />
+and the caps with the highest probability will be returned, or nil if<br />
 the content of <!-- raw HTML omitted -->data<!-- raw HTML omitted --> could not be identified.</p>
 <p>Free-function: gst_caps_unref</p>
 
@@ -1974,7 +1977,7 @@ the content of <!-- raw HTML omitted -->data<!-- raw HTML omitted --> could not 
       
       
         &mdash;
-        <div class='inline'><p>location to store the probability of the found
+        <div class='inline'><p>location to store the probability of the found<br />
 caps, or nil</p>
 </div>
       
@@ -1993,8 +1996,8 @@ caps, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::Caps corresponding to the data,
-or nil if no type could be found. The caller should free the caps
+        <div class='inline'><p>the Gst::Caps corresponding to the data,<br />
+or nil if no type could be found. The caller should free the caps<br />
 returned with gst_caps_unref().</p>
 </div>
       
@@ -2016,11 +2019,11 @@ returned with gst_caps_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to find if type of media contained in the given <!-- raw HTML omitted -->data<!-- raw HTML omitted -->, matches the
-<!-- raw HTML omitted -->caps<!-- raw HTML omitted --> specified, assumption being that the data represents the beginning
+    <p>Tries to find if type of media contained in the given <!-- raw HTML omitted -->data<!-- raw HTML omitted -->, matches the<br />
+<!-- raw HTML omitted -->caps<!-- raw HTML omitted --> specified, assumption being that the data represents the beginning<br />
 of the stream or file.</p>
-<p>Only the typefinder matching the given caps will be called, if found. The
-caps with the highest probability will be returned, or nil if the content
+<p>Only the typefinder matching the given caps will be called, if found. The<br />
+caps with the highest probability will be returned, or nil if the content<br />
 of the <!-- raw HTML omitted -->data<!-- raw HTML omitted --> could not be identified.</p>
 <p>Free-function: gst_caps_unref</p>
 
@@ -2101,7 +2104,7 @@ of the <!-- raw HTML omitted -->data<!-- raw HTML omitted --> could not be ident
       
       
         &mdash;
-        <div class='inline'><p>location to store the probability of the found
+        <div class='inline'><p>location to store the probability of the found<br />
 caps, or nil</p>
 </div>
       
@@ -2120,8 +2123,8 @@ caps, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::Caps corresponding to the data,
-or nil if no type could be found. The caller should free the caps
+        <div class='inline'><p>the Gst::Caps corresponding to the data,<br />
+or nil if no type could be found. The caller should free the caps<br />
 returned with gst_caps_unref().</p>
 </div>
       
@@ -2143,17 +2146,17 @@ returned with gst_caps_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to find what type of data is contained in the given <!-- raw HTML omitted -->data<!-- raw HTML omitted -->, the
-assumption being that the data represents the beginning of the stream or
+    <p>Tries to find what type of data is contained in the given <!-- raw HTML omitted -->data<!-- raw HTML omitted -->, the<br />
+assumption being that the data represents the beginning of the stream or<br />
 file.</p>
-<p>All available typefinders will be called on the data in order of rank. If
-a typefinding function returns a probability of %GST_TYPE_FIND_MAXIMUM,
-typefinding is stopped immediately and the found caps will be returned
-right away. Otherwise, all available typefind functions will the tried,
-and the caps with the highest probability will be returned, or nil if
+<p>All available typefinders will be called on the data in order of rank. If<br />
+a typefinding function returns a probability of %GST_TYPE_FIND_MAXIMUM,<br />
+typefinding is stopped immediately and the found caps will be returned<br />
+right away. Otherwise, all available typefind functions will the tried,<br />
+and the caps with the highest probability will be returned, or nil if<br />
 the content of <!-- raw HTML omitted -->data<!-- raw HTML omitted --> could not be identified.</p>
-<p>When <!-- raw HTML omitted -->extension<!-- raw HTML omitted --> is not nil, this function will first try the typefind
-functions for the given extension, which might speed up the typefinding
+<p>When <!-- raw HTML omitted -->extension<!-- raw HTML omitted --> is not nil, this function will first try the typefind<br />
+functions for the given extension, which might speed up the typefinding<br />
 in many cases.</p>
 <p>Free-function: gst_caps_unref</p>
 
@@ -2236,7 +2239,7 @@ in many cases.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the probability of the found
+        <div class='inline'><p>location to store the probability of the found<br />
 caps, or nil</p>
 </div>
       
@@ -2255,8 +2258,8 @@ caps, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::Caps corresponding to the data,
-or nil if no type could be found. The caller should free the caps
+        <div class='inline'><p>the Gst::Caps corresponding to the data,<br />
+or nil if no type could be found. The caller should free the caps<br />
 returned with gst_caps_unref().</p>
 </div>
       
@@ -2279,8 +2282,8 @@ returned with gst_caps_unref().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Tries to find the best Gst::Caps associated with <!-- raw HTML omitted -->extension<!-- raw HTML omitted -->.</p>
-<p>All available typefinders will be checked against the extension in order
-of rank. The caps of the first typefinder that can handle <!-- raw HTML omitted -->extension<!-- raw HTML omitted --> will be
+<p>All available typefinders will be checked against the extension in order<br />
+of rank. The caps of the first typefinder that can handle <!-- raw HTML omitted -->extension<!-- raw HTML omitted --> will be<br />
 returned.</p>
 <p>Free-function: gst_caps_unref</p>
 
@@ -2334,8 +2337,8 @@ returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::Caps corresponding to
-<!-- raw HTML omitted -->extension<!-- raw HTML omitted -->, or nil if no type could be found. The caller should free
+        <div class='inline'><p>the Gst::Caps corresponding to<br />
+<!-- raw HTML omitted -->extension<!-- raw HTML omitted -->, or nil if no type could be found. The caller should free<br />
 the caps returned with gst_caps_unref().</p>
 </div>
       
@@ -2357,16 +2360,16 @@ the caps returned with gst_caps_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Utility function to do pull-based typefinding. Unlike gst_type_find_helper()
-however, this function will use the specified function <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to obtain the
-data needed by the typefind functions, rather than operating on a given
-source pad. This is useful mostly for elements like tag demuxers which
-strip off data at the beginning and/or end of a file and want to typefind
-the stripped data stream before adding their own source pad (the specified
-callback can then call the upstream peer pad with offsets adjusted for the
+    <p>Utility function to do pull-based typefinding. Unlike gst_type_find_helper()<br />
+however, this function will use the specified function <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to obtain the<br />
+data needed by the typefind functions, rather than operating on a given<br />
+source pad. This is useful mostly for elements like tag demuxers which<br />
+strip off data at the beginning and/or end of a file and want to typefind<br />
+the stripped data stream before adding their own source pad (the specified<br />
+callback can then call the upstream peer pad with offsets adjusted for the<br />
 tag size, for example).</p>
-<p>When <!-- raw HTML omitted -->extension<!-- raw HTML omitted --> is not nil, this function will first try the typefind
-functions for the given extension, which might speed up the typefinding
+<p>When <!-- raw HTML omitted -->extension<!-- raw HTML omitted --> is not nil, this function will first try the typefind<br />
+functions for the given extension, which might speed up the typefinding<br />
 in many cases.</p>
 <p>Free-function: gst_caps_unref</p>
 
@@ -2417,7 +2420,7 @@ in many cases.</p>
       
       
         &mdash;
-        <div class='inline'><p>A generic Gst::TypeFindHelperGetRangeFunction that will
+        <div class='inline'><p>A generic Gst::TypeFindHelperGetRangeFunction that will<br />
 be used to access data at random offsets when doing the typefinding</p>
 </div>
       
@@ -2463,7 +2466,7 @@ be used to access data at random offsets when doing the typefinding</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the probability of the found
+        <div class='inline'><p>location to store the probability of the found<br />
 caps, or nil</p>
 </div>
       
@@ -2482,7 +2485,7 @@ caps, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::Caps corresponding to the data
+        <div class='inline'><p>the Gst::Caps corresponding to the data<br />
 stream.  Returns nil if no Gst::Caps matches the data stream.</p>
 </div>
       
@@ -2504,16 +2507,16 @@ stream.  Returns nil if no Gst::Caps matches the data stream.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Utility function to do pull-based typefinding. Unlike gst_type_find_helper()
-however, this function will use the specified function <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to obtain the
-data needed by the typefind functions, rather than operating on a given
-source pad. This is useful mostly for elements like tag demuxers which
-strip off data at the beginning and/or end of a file and want to typefind
-the stripped data stream before adding their own source pad (the specified
-callback can then call the upstream peer pad with offsets adjusted for the
+    <p>Utility function to do pull-based typefinding. Unlike gst_type_find_helper()<br />
+however, this function will use the specified function <!-- raw HTML omitted -->func<!-- raw HTML omitted --> to obtain the<br />
+data needed by the typefind functions, rather than operating on a given<br />
+source pad. This is useful mostly for elements like tag demuxers which<br />
+strip off data at the beginning and/or end of a file and want to typefind<br />
+the stripped data stream before adding their own source pad (the specified<br />
+callback can then call the upstream peer pad with offsets adjusted for the<br />
 tag size, for example).</p>
-<p>When <!-- raw HTML omitted -->extension<!-- raw HTML omitted --> is not nil, this function will first try the typefind
-functions for the given extension, which might speed up the typefinding
+<p>When <!-- raw HTML omitted -->extension<!-- raw HTML omitted --> is not nil, this function will first try the typefind<br />
+functions for the given extension, which might speed up the typefinding<br />
 in many cases.</p>
 
 
@@ -2563,7 +2566,7 @@ in many cases.</p>
       
       
         &mdash;
-        <div class='inline'><p>A generic Gst::TypeFindHelperGetRangeFunction that will
+        <div class='inline'><p>A generic Gst::TypeFindHelperGetRangeFunction that will<br />
 be used to access data at random offsets when doing the typefinding</p>
 </div>
       
@@ -2624,7 +2627,7 @@ be used to access data at random offsets when doing the typefinding</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the probability of the found
+        <div class='inline'><p>location to store the probability of the found<br />
 caps, or nil</p>
 </div>
       
@@ -2643,7 +2646,7 @@ caps, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>the last %GstFlowReturn from pulling a buffer or %GST_FLOW_OK if
+        <div class='inline'><p>the last %GstFlowReturn from pulling a buffer or %GST_FLOW_OK if<br />
 typefinding was successful.</p>
 </div>
       
@@ -2719,9 +2722,9 @@ typefinding was successful.</p>
       
       
         &mdash;
-        <div class='inline'><p>the list of Gst::TypeFindFactory
-corresponding to <!-- raw HTML omitted -->caps<!-- raw HTML omitted -->, or nil if no typefinder could be
-found. Caller should free the returned list with g_list_free()
+        <div class='inline'><p>the list of Gst::TypeFindFactory<br />
+corresponding to <!-- raw HTML omitted -->caps<!-- raw HTML omitted -->, or nil if no typefinder could be<br />
+found. Caller should free the returned list with g_list_free()<br />
 and list elements with gst_object_unref().</p>
 </div>
       
@@ -2739,7 +2742,7 @@ and list elements with gst_object_unref().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::RecentManager";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -99,7 +100,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk3/deprecated.rb</dd>
+    <dd>lib/gtk3/deprecated.rb
+</dd>
   </dl>
   
 </div>
@@ -153,6 +155,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -463,6 +466,7 @@
 
       
     </ul>
+    
   
 
 
@@ -481,12 +485,12 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new recent manager object.</p>
-<p>Recent manager objects are used to handle the list of recently used
-resources. A <code>GtkRecentManager</code> object monitors the recently used
-resources list, and emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.RecentManager::changed]
+<p>Recent manager objects are used to handle the list of recently used<br />
+resources. A <code>GtkRecentManager</code> object monitors the recently used<br />
+resources list, and emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.RecentManager::changed]<br />
 signal each time something inside the list changes.</p>
-<p><code>GtkRecentManager</code> objects are expensive: be sure to create them
-only when needed. You should use [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.RecentManager.get_default]
+<p><code>GtkRecentManager</code> objects are expensive: be sure to create them<br />
+only when needed. You should use [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.RecentManager.get_default]<br />
 instead.</p>
 
 
@@ -516,7 +520,7 @@ instead.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a unique instance of <code>GtkRecentManager</code> that you can share
+    <p>Gets a unique instance of <code>GtkRecentManager</code> that you can share<br />
 in your application without caring about memory management.</p>
 
 
@@ -535,7 +539,7 @@ in your application without caring about memory management.</p>
       
       
         &mdash;
-        <div class='inline'><p>A unique <code>GtkRecentManager</code>. Do not ref or
+        <div class='inline'><p>A unique <code>GtkRecentManager</code>. Do not ref or<br />
 unref it.</p>
 </div>
       
@@ -563,21 +567,21 @@ unref it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a new resource, pointed by <!-- raw HTML omitted -->uri<!-- raw HTML omitted -->, into the recently used
-resources list, using the metadata specified inside the
+    <p>Adds a new resource, pointed by <!-- raw HTML omitted -->uri<!-- raw HTML omitted -->, into the recently used<br />
+resources list, using the metadata specified inside the<br />
 <code>GtkRecentData</code> passed in <!-- raw HTML omitted -->recent_data<!-- raw HTML omitted -->.</p>
-<p>The passed URI will be used to identify this resource inside the
+<p>The passed URI will be used to identify this resource inside the<br />
 list.</p>
-<p>In order to register the new recently used resource, metadata about
-the resource must be passed as well as the URI; the metadata is
-stored in a <code>GtkRecentData</code>, which must contain the MIME
-type of the resource pointed by the URI; the name of the application
-that is registering the item, and a command line to be used when
+<p>In order to register the new recently used resource, metadata about<br />
+the resource must be passed as well as the URI; the metadata is<br />
+stored in a <code>GtkRecentData</code>, which must contain the MIME<br />
+type of the resource pointed by the URI; the name of the application<br />
+that is registering the item, and a command line to be used when<br />
 launching the item.</p>
-<p>Optionally, a <code>GtkRecentData</code> might contain a UTF-8 string
-to be used when viewing the item instead of the last component of
-the URI; a short description of the item; whether the item should
-be considered private - that is, should be displayed only by the
+<p>Optionally, a <code>GtkRecentData</code> might contain a UTF-8 string<br />
+to be used when viewing the item instead of the last component of<br />
+the URI; a short description of the item; whether the item should<br />
+be considered private - that is, should be displayed only by the<br />
 applications that have registered it.</p>
 
 
@@ -630,7 +634,7 @@ applications that have registered it.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the new item was successfully added to the
+        <div class='inline'><p>true if the new item was successfully added to the<br />
 recently used resources list, false otherwise</p>
 </div>
       
@@ -652,12 +656,12 @@ recently used resources list, false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a new resource, pointed by <!-- raw HTML omitted -->uri<!-- raw HTML omitted -->, into the recently used
+    <p>Adds a new resource, pointed by <!-- raw HTML omitted -->uri<!-- raw HTML omitted -->, into the recently used<br />
 resources list.</p>
-<p>This function automatically retrieves some of the needed
-metadata and setting other metadata to common default values;
+<p>This function automatically retrieves some of the needed<br />
+metadata and setting other metadata to common default values;<br />
 it then feeds the data to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.RecentManager.add_full].</p>
-<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.RecentManager.add_full] if you want to explicitly
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.RecentManager.add_full] if you want to explicitly<br />
 define the metadata for the resource pointed by <!-- raw HTML omitted -->uri<!-- raw HTML omitted -->.</p>
 
 
@@ -695,7 +699,7 @@ define the metadata for the resource pointed by <!-- raw HTML omitted -->uri<!--
       
       
         &mdash;
-        <div class='inline'><p>true if the new item was successfully added
+        <div class='inline'><p>true if the new item was successfully added<br />
 to the recently used resources list</p>
 </div>
       
@@ -717,7 +721,7 @@ to the recently used resources list</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The full path to the file to be used to store and read the
+    <p>The full path to the file to be used to store and read the<br />
 recently used resources list</p>
 
 
@@ -757,7 +761,7 @@ recently used resources list</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The full path to the file to be used to store and read the
+    <p>The full path to the file to be used to store and read the<br />
 recently used resources list</p>
 
 
@@ -825,7 +829,7 @@ recently used resources list</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether there is a recently used resource registered
+    <p>Checks whether there is a recently used resource registered<br />
 with <!-- raw HTML omitted -->uri<!-- raw HTML omitted --> inside the recent manager.</p>
 
 
@@ -902,9 +906,9 @@ with <!-- raw HTML omitted -->uri<!-- raw HTML omitted --> inside the recent man
       
       
         &mdash;
-        <div class='inline'><p>a list of
-newly allocated <code>GtkRecentInfo objects</code>. Use
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.RecentInfo.unref] on each item inside the list, and then
+        <div class='inline'><p>a list of<br />
+newly allocated <code>GtkRecentInfo objects</code>. Use<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.RecentInfo.unref] on each item inside the list, and then<br />
 free the list itself using g_list_free().</p>
 </div>
       
@@ -926,8 +930,8 @@ free the list itself using g_list_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Searches for a URI inside the recently used resources list, and
-returns a <code>GtkRecentInfo</code> containing information about the resource
+    <p>Searches for a URI inside the recently used resources list, and<br />
+returns a <code>GtkRecentInfo</code> containing information about the resource<br />
 like its MIME type, or its display name.</p>
 
 
@@ -965,9 +969,9 @@ like its MIME type, or its display name.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GtkRecentInfo</code> containing information
-about the resource pointed by <!-- raw HTML omitted -->uri<!-- raw HTML omitted -->, or nil if the URI was
-not registered in the recently used resources list. Free with
+        <div class='inline'><p>a <code>GtkRecentInfo</code> containing information<br />
+about the resource pointed by <!-- raw HTML omitted -->uri<!-- raw HTML omitted -->, or nil if the URI was<br />
+not registered in the recently used resources list. Free with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.RecentInfo.unref].</p>
 </div>
       
@@ -990,7 +994,7 @@ not registered in the recently used resources list. Free with
 </h3><div class="docstring">
   <div class="discussion">
     <p>Changes the location of a recently used resource from <!-- raw HTML omitted -->uri<!-- raw HTML omitted --> to <!-- raw HTML omitted -->new_uri<!-- raw HTML omitted -->.</p>
-<p>Please note that this function will not affect the resource pointed
+<p>Please note that this function will not affect the resource pointed<br />
 by the URIs, but only the URI used in the recently used resources list.</p>
 
 
@@ -1025,7 +1029,7 @@ by the URIs, but only the URI used in the recently used resources list.</p>
       
       
         &mdash;
-        <div class='inline'><p>the new URI of the recently used resource, or
+        <div class='inline'><p>the new URI of the recently used resource, or<br />
 nil to remove the item pointed by <!-- raw HTML omitted -->uri<!-- raw HTML omitted --> in the list</p>
 </div>
       
@@ -1083,7 +1087,7 @@ nil to remove the item pointed by <!-- raw HTML omitted -->uri<!-- raw HTML omit
       
       
         &mdash;
-        <div class='inline'><p>the number of items that have been removed from the
+        <div class='inline'><p>the number of items that have been removed from the<br />
 recently used resources list</p>
 </div>
       
@@ -1105,7 +1109,7 @@ recently used resources list</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes a resource pointed by <!-- raw HTML omitted -->uri<!-- raw HTML omitted --> from the recently used resources
+    <p>Removes a resource pointed by <!-- raw HTML omitted -->uri<!-- raw HTML omitted --> from the recently used resources<br />
 list handled by a recent manager.</p>
 
 
@@ -1143,7 +1147,7 @@ list handled by a recent manager.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the item pointed by <!-- raw HTML omitted -->uri<!-- raw HTML omitted --> has been successfully
+        <div class='inline'><p>true if the item pointed by <!-- raw HTML omitted -->uri<!-- raw HTML omitted --> has been successfully<br />
 removed by the recently used resources list, and false otherwise</p>
 </div>
       
@@ -1267,7 +1271,7 @@ removed by the recently used resources list, and false otherwise</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

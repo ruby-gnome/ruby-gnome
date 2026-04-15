@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::Icon";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,36 +79,37 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gio2/icon.rb</dd>
+    <dd>lib/gio2/icon.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GIcon</code> is a very minimal interface for icons. It provides functions
-for checking the equality of two icons, hashing of icons and
+    <p><code>GIcon</code> is a very minimal interface for icons. It provides functions<br />
+for checking the equality of two icons, hashing of icons and<br />
 serializing an icon to and from strings.</p>
-<p><code>GIcon</code> does not provide the actual pixmap for the icon as this is out
-of GIO's scope, however implementations of <code>GIcon</code> may contain the name
-of an icon (see [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ThemedIcon]), or the path to an icon
+<p><code>GIcon</code> does not provide the actual pixmap for the icon as this is out<br />
+of GIO's scope, however implementations of <code>GIcon</code> may contain the name<br />
+of an icon (see [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ThemedIcon]), or the path to an icon<br />
 (see [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.LoadableIcon]).</p>
 <p>To obtain a hash of a <code>GIcon</code>, see [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Icon.hash].</p>
 <p>To check if two <code>GIcon</code>s are equal, see [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Icon.equal].</p>
-<p>For serializing a <code>GIcon</code>, use [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Icon.serialize] and
+<p>For serializing a <code>GIcon</code>, use [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Icon.serialize] and<br />
 [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Icon.deserialize].</p>
-<p>If you want to consume <code>GIcon</code> (for example, in a toolkit) you must
-be prepared to handle at least the three following cases:
-[iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.LoadableIcon], [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ThemedIcon] and [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.EmblemedIcon].
-It may also make sense to have fast-paths for other cases (like handling
-<a href="https://docs.gtk.org/gdk-pixbuf/class.Pixbuf.html"><code>GdkPixbuf</code></a> directly,
-for example) but all compliant <code>GIcon</code> implementations outside of GIO must
+<p>If you want to consume <code>GIcon</code> (for example, in a toolkit) you must<br />
+be prepared to handle at least the three following cases:<br />
+[iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.LoadableIcon], [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ThemedIcon] and [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.EmblemedIcon].<br />
+It may also make sense to have fast-paths for other cases (like handling<br />
+<a href="https://docs.gtk.org/gdk-pixbuf/class.Pixbuf.html"><code>GdkPixbuf</code></a> directly,<br />
+for example) but all compliant <code>GIcon</code> implementations outside of GIO must<br />
 implement [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.LoadableIcon].</p>
-<p>If your application or library provides one or more <code>GIcon</code>
-implementations you need to ensure that your new implementation also
-implements [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.LoadableIcon].  Additionally, you must provide an
-implementation of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Icon.serialize] that gives a result that is
-understood by [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Icon.deserialize], yielding one of the built-in
+<p>If your application or library provides one or more <code>GIcon</code><br />
+implementations you need to ensure that your new implementation also<br />
+implements [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.LoadableIcon].  Additionally, you must provide an<br />
+implementation of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Icon.serialize] that gives a result that is<br />
+understood by [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Icon.deserialize], yielding one of the built-in<br />
 icon types.</p>
 
 
@@ -291,6 +293,7 @@ icon types.</p>
 
       
     </ul>
+    
   
 
 
@@ -508,7 +511,7 @@ icon types.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a #guint containing a hash for the <!-- raw HTML omitted -->icon<!-- raw HTML omitted -->, suitable for
+    <p>Returns a #guint containing a hash for the <!-- raw HTML omitted -->icon<!-- raw HTML omitted -->, suitable for<br />
 use in a GHash::Table or similar data structure.</p>
 
 
@@ -546,7 +549,7 @@ use in a GHash::Table or similar data structure.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #guint containing a hash for the <!-- raw HTML omitted -->icon<!-- raw HTML omitted -->, suitable for
+        <div class='inline'><p>a #guint containing a hash for the <!-- raw HTML omitted -->icon<!-- raw HTML omitted -->, suitable for<br />
 use in a GHash::Table or similar data structure.</p>
 </div>
       
@@ -626,23 +629,23 @@ use in a GHash::Table or similar data structure.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Generates a textual representation of <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> that can be used for
-serialization such as when passing <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> to a different process or
-saving it to persistent storage. Use g_icon_new_for_string() to
+    <p>Generates a textual representation of <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> that can be used for<br />
+serialization such as when passing <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> to a different process or<br />
+saving it to persistent storage. Use g_icon_new_for_string() to<br />
 get <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> back from the returned string.</p>
-<p>The encoding of the returned string is proprietary to #GIcon except
+<p>The encoding of the returned string is proprietary to #GIcon except<br />
 in the following two cases</p>
 <ul>
 <li>
-<p>If <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> is a GFile::Icon, the returned string is a native path
-(such as <code>/path/to/my icon.png</code>) without escaping
-if the #GFile for <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> is a native file.  If the file is not
-native, the returned string is the result of g_file_get_uri()
+<p>If <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> is a GFile::Icon, the returned string is a native path<br />
+(such as <code>/path/to/my icon.png</code>) without escaping<br />
+if the #GFile for <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> is a native file.  If the file is not<br />
+native, the returned string is the result of g_file_get_uri()<br />
 (such as <code>sftp://path/to/my%20icon.png</code>).</p>
 </li>
 <li>
-<p>If <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> is a GThemed::Icon with exactly one name and no fallbacks,
-the encoding is simply the name (such as <code>network-server</code>).
+<p>If <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> is a GThemed::Icon with exactly one name and no fallbacks,<br />
+the encoding is simply the name (such as <code>network-server</code>).<br />
 nil if <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> can't be serialized. Use g_free() to free.</p>
 </li>
 </ul>
@@ -768,7 +771,7 @@ nil if <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> can't be serialize
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

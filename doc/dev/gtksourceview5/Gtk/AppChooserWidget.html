@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::AppChooserWidget";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -106,22 +108,22 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p><code>GtkAppChooserWidget</code> is a widget for selecting applications.</p>
-<p>It is the main building block for [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserDialog].
-Most applications only need to use the latter; but you can use
+<p>It is the main building block for [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserDialog].<br />
+Most applications only need to use the latter; but you can use<br />
 this widget as part of a larger widget if you have special needs.</p>
-<p><code>GtkAppChooserWidget</code> offers detailed control over what applications
-are shown, using the
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserWidget:show-default],
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserWidget:show-recommended],
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserWidget:show-fallback],
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserWidget:show-other] and
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserWidget:show-all] properties. See the
-[iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooser] documentation for more information about these
+<p><code>GtkAppChooserWidget</code> offers detailed control over what applications<br />
+are shown, using the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserWidget:show-default],<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserWidget:show-recommended],<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserWidget:show-fallback],<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserWidget:show-other] and<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserWidget:show-all] properties. See the<br />
+[iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooser] documentation for more information about these<br />
 groups of applications.</p>
-<p>To keep track of the selected application, use the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserWidget::application-selected] and
+<p>To keep track of the selected application, use the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserWidget::application-selected] and<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AppChooserWidget::application-activated] signals.</p>
-<h2>CSS nodes</h2>
+<h2><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h2>
 <p><code>GtkAppChooserWidget</code> has a single CSS node with name appchooser.</p>
 
 
@@ -562,9 +564,11 @@ groups of applications.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -590,7 +594,7 @@ groups of applications.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>GtkAppChooserWidget</code> for applications
+    <p>Creates a new <code>GtkAppChooserWidget</code> for applications<br />
 that can handle content of the given type.</p>
 
 
@@ -639,7 +643,7 @@ that can handle content of the given type.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The text that appears in the widget when there are no applications
+    <p>The text that appears in the widget when there are no applications<br />
 for the given content type.</p>
 
 
@@ -679,7 +683,7 @@ for the given content type.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The text that appears in the widget when there are no applications
+    <p>The text that appears in the widget when there are no applications<br />
 for the given content type.</p>
 
 
@@ -747,7 +751,7 @@ for the given content type.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether the app chooser should show all applications
+    <p>Gets whether the app chooser should show all applications<br />
 in a flat list.</p>
 
 
@@ -787,8 +791,8 @@ in a flat list.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If true, the app chooser presents all applications
-in a single list, without subsections for default,
+    <p>If true, the app chooser presents all applications<br />
+in a single list, without subsections for default,<br />
 recommended or related applications.</p>
 
 
@@ -856,8 +860,8 @@ recommended or related applications.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If true, the app chooser presents all applications
-in a single list, without subsections for default,
+    <p>If true, the app chooser presents all applications<br />
+in a single list, without subsections for default,<br />
 recommended or related applications.</p>
 
 
@@ -897,7 +901,7 @@ recommended or related applications.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether the app chooser should show the default handler
+    <p>Gets whether the app chooser should show the default handler<br />
 for the content type in a separate section.</p>
 
 
@@ -937,9 +941,9 @@ for the content type in a separate section.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the app chooser should show the default
+    <p>Determines whether the app chooser should show the default<br />
 handler for the content type in a separate section.</p>
-<p>If false, the default handler is listed among the recommended
+<p>If false, the default handler is listed among the recommended<br />
 applications.</p>
 
 
@@ -1007,9 +1011,9 @@ applications.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the app chooser should show the default
+    <p>Determines whether the app chooser should show the default<br />
 handler for the content type in a separate section.</p>
-<p>If false, the default handler is listed among the recommended
+<p>If false, the default handler is listed among the recommended<br />
 applications.</p>
 
 
@@ -1049,7 +1053,7 @@ applications.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether the app chooser should show related applications
+    <p>Gets whether the app chooser should show related applications<br />
 for the content type in a separate section.</p>
 
 
@@ -1089,9 +1093,9 @@ for the content type in a separate section.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the app chooser should show a section
+    <p>Determines whether the app chooser should show a section<br />
 for fallback applications.</p>
-<p>If false, the fallback applications are listed among the
+<p>If false, the fallback applications are listed among the<br />
 other applications.</p>
 
 
@@ -1159,9 +1163,9 @@ other applications.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the app chooser should show a section
+    <p>Determines whether the app chooser should show a section<br />
 for fallback applications.</p>
-<p>If false, the fallback applications are listed among the
+<p>If false, the fallback applications are listed among the<br />
 other applications.</p>
 
 
@@ -1201,7 +1205,7 @@ other applications.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether the app chooser should show applications
+    <p>Gets whether the app chooser should show applications<br />
 which are unrelated to the content type.</p>
 
 
@@ -1241,7 +1245,7 @@ which are unrelated to the content type.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the app chooser should show a section
+    <p>Determines whether the app chooser should show a section<br />
 for other applications.</p>
 
 
@@ -1309,7 +1313,7 @@ for other applications.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the app chooser should show a section
+    <p>Determines whether the app chooser should show a section<br />
 for other applications.</p>
 
 
@@ -1349,7 +1353,7 @@ for other applications.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether the app chooser should show recommended applications
+    <p>Gets whether the app chooser should show recommended applications<br />
 for the content type in a separate section.</p>
 
 
@@ -1389,9 +1393,9 @@ for the content type in a separate section.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the app chooser should show a section
+    <p>Determines whether the app chooser should show a section<br />
 for recommended applications.</p>
-<p>If false, the recommended applications are listed
+<p>If false, the recommended applications are listed<br />
 among the other applications.</p>
 
 
@@ -1459,9 +1463,9 @@ among the other applications.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the app chooser should show a section
+    <p>Determines whether the app chooser should show a section<br />
 for recommended applications.</p>
-<p>If false, the recommended applications are listed
+<p>If false, the recommended applications are listed<br />
 among the other applications.</p>
 
 
@@ -1497,7 +1501,7 @@ among the other applications.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

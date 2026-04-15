@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::File";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -508,6 +510,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -553,12 +556,12 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks synchronously the file on disk, to know whether the file is externally
+    <p>Checks synchronously the file on disk, to know whether the file is externally<br />
 modified, or has been deleted, and whether the file is read-only.</p>
-<p>Gtk::SourceFile doesn't create a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileMonitor] to track those properties, so
-this function needs to be called instead. Creating lots of [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileMonitor]'s
+<p>Gtk::SourceFile doesn't create a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileMonitor] to track those properties, so<br />
+this function needs to be called instead. Creating lots of [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileMonitor]'s<br />
 would take lots of resources.</p>
-<p>Since this function is synchronous, it is advised to call it only on local
+<p>Since this function is synchronous, it is advised to call it only on local<br />
 files. See [method<!-- raw HTML omitted -->File<!-- raw HTML omitted -->.is_local].</p>
 
 
@@ -700,7 +703,7 @@ files. See [method<!-- raw HTML omitted -->File<!-- raw HTML omitted -->.is_loca
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The character encoding, initially nil. After a successful file
+    <p>The character encoding, initially nil. After a successful file<br />
 loading or saving operation, the encoding is non-nil.</p>
 
 
@@ -740,7 +743,7 @@ loading or saving operation, the encoding is non-nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The character encoding, initially nil. After a successful file
+    <p>The character encoding, initially nil. After a successful file<br />
 loading or saving operation, the encoding is non-nil.</p>
 
 
@@ -808,9 +811,9 @@ loading or saving operation, the encoding is non-nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the file has been deleted. If the
+    <p>Returns whether the file has been deleted. If the<br />
 [property<!-- raw HTML omitted -->File<!-- raw HTML omitted -->:location] is nil, returns false.</p>
-<p>To have an up-to-date value, you must first call
+<p>To have an up-to-date value, you must first call<br />
 [method<!-- raw HTML omitted -->File<!-- raw HTML omitted -->.check_file_on_disk].</p>
 
 
@@ -850,9 +853,9 @@ loading or saving operation, the encoding is non-nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the file is externally modified. If the
+    <p>Returns whether the file is externally modified. If the<br />
 [property<!-- raw HTML omitted -->File<!-- raw HTML omitted -->:location] is nil, returns false.</p>
-<p>To have an up-to-date value, you must first call
+<p>To have an up-to-date value, you must first call<br />
 [method<!-- raw HTML omitted -->File<!-- raw HTML omitted -->.check_file_on_disk].</p>
 
 
@@ -892,7 +895,7 @@ loading or saving operation, the encoding is non-nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the file is local. If the [property<!-- raw HTML omitted -->File<!-- raw HTML omitted -->:location] is nil,
+    <p>Returns whether the file is local. If the [property<!-- raw HTML omitted -->File<!-- raw HTML omitted -->:location] is nil,<br />
 returns false.</p>
 
 
@@ -932,9 +935,9 @@ returns false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the file is read-only. If the
+    <p>Returns whether the file is read-only. If the<br />
 [property<!-- raw HTML omitted -->File<!-- raw HTML omitted -->:location] is nil, returns false.</p>
-<p>To have an up-to-date value, you must first call
+<p>To have an up-to-date value, you must first call<br />
 [method<!-- raw HTML omitted -->File<!-- raw HTML omitted -->.check_file_on_disk].</p>
 
 
@@ -1186,7 +1189,7 @@ returns false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the file is read-only or not. The value of this property is
+    <p>Whether the file is read-only or not. The value of this property is<br />
 not updated automatically (there is no file monitors).</p>
 
 
@@ -1254,7 +1257,7 @@ not updated automatically (there is no file monitors).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the file is read-only or not. The value of this property is
+    <p>Whether the file is read-only or not. The value of this property is<br />
 not updated automatically (there is no file monitors).</p>
 
 
@@ -1294,10 +1297,10 @@ not updated automatically (there is no file monitors).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a [callback<!-- raw HTML omitted -->MountOperationFactory<!-- raw HTML omitted -->] function that will be called when a
+    <p>Sets a [callback<!-- raw HTML omitted -->MountOperationFactory<!-- raw HTML omitted -->] function that will be called when a<br />
 [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.MountOperation] must be created.</p>
 <p>This is useful for creating a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MountOperation] with the parent [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window].</p>
-<p>If a mount operation factory isn't set, [ctor<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.MountOperation.new] will be
+<p>If a mount operation factory isn't set, [ctor<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.MountOperation.new] will be<br />
 called.</p>
 
 
@@ -1317,7 +1320,7 @@ called.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Gtk::SourceMountOperationFactory to call when a
+        <div class='inline'><p>a Gtk::SourceMountOperationFactory to call when a<br />
 GMount::Operation is needed.</p>
 </div>
       
@@ -1348,7 +1351,7 @@ GMount::Operation is needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>function to call on <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> when the <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is no
+        <div class='inline'><p>function to call on <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> when the <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is no<br />
 longer needed, or nil.</p>
 </div>
       
@@ -1380,7 +1383,7 @@ longer needed, or nil.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::Buffer";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -101,7 +102,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtksourceview3/deprecated.rb</dd>
+    <dd>lib/gtksourceview3/deprecated.rb
+</dd>
   </dl>
   
 </div>
@@ -858,9 +860,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -887,8 +891,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new source buffer using the highlighting patterns in <code>language</code>.</p>
-<p>This is equivalent to creating a new source buffer with
-a new tag table and then calling [method<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->.set_language].
+<p>This is equivalent to creating a new source buffer with<br />
+a new tag table and then calling [method<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->.set_language].<br />
 according to the highlighting patterns in <code>language</code>.</p>
 
 
@@ -937,9 +941,9 @@ according to the highlighting patterns in <code>language</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Moves <code>iter</code> to the position of the previous [class<!-- raw HTML omitted -->Mark<!-- raw HTML omitted -->] of the given
+    <p>Moves <code>iter</code> to the position of the previous [class<!-- raw HTML omitted -->Mark<!-- raw HTML omitted -->] of the given<br />
 category.</p>
-<p>Returns true if <code>iter</code> was moved. If <code>category</code> is NULL, the
+<p>Returns true if <code>iter</code> was moved. If <code>category</code> is NULL, the<br />
 previous source mark can be of any category.</p>
 
 
@@ -1014,7 +1018,7 @@ previous source mark can be of any category.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Changes the case of the text between the specified iterators.</p>
-<p>Since 5.4, this function will update the position of <code>start</code> and
+<p>Since 5.4, this function will update the position of <code>start</code> and<br />
 <code>end</code> to surround the modified text.</p>
 
 
@@ -1100,15 +1104,15 @@ previous source mark can be of any category.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a source mark in the <code>buffer</code> of category <code>category</code>.</p>
-<p>A source mark is a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextMark] but organized into categories.
-Depending on the category a pixbuf can be specified that will be displayed
+<p>A source mark is a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextMark] but organized into categories.<br />
+Depending on the category a pixbuf can be specified that will be displayed<br />
 along the line of the mark.</p>
-<p>Like a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextMark], a [class<!-- raw HTML omitted -->Mark<!-- raw HTML omitted -->] can be anonymous if the
-passed <code>name</code> is nil.  Also, the buffer owns the marks so you
+<p>Like a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextMark], a [class<!-- raw HTML omitted -->Mark<!-- raw HTML omitted -->] can be anonymous if the<br />
+passed <code>name</code> is nil.  Also, the buffer owns the marks so you<br />
 shouldn't unreference it.</p>
-<p>Marks always have left gravity and are moved to the beginning of
+<p>Marks always have left gravity and are moved to the beginning of<br />
 the line when the user deletes the line they were in.</p>
-<p>Typical uses for a source mark are bookmarks, breakpoints, current
+<p>Typical uses for a source mark are bookmarks, breakpoints, current<br />
 executing instruction indication in a source file, etc..</p>
 
 
@@ -1197,16 +1201,16 @@ executing instruction indication in a source file, etc..</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>In short, this is the same function as [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.create_tag] but
+    <p>In short, this is the same function as [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.create_tag] but<br />
 instead of creating a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTag], this function creates a [class<!-- raw HTML omitted -->Tag<!-- raw HTML omitted -->].</p>
-<p>This function creates a [class<!-- raw HTML omitted -->Tag<!-- raw HTML omitted -->] and adds it to the tag table for
-<code>buffer</code>.  Equivalent to calling [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTag.new] and then adding the tag to
-the buffer’s tag table. The returned tag is owned by the buffer’s tag table,
+<p>This function creates a [class<!-- raw HTML omitted -->Tag<!-- raw HTML omitted -->] and adds it to the tag table for<br />
+<code>buffer</code>.  Equivalent to calling [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextTag.new] and then adding the tag to<br />
+the buffer’s tag table. The returned tag is owned by the buffer’s tag table,<br />
 so the ref count will be equal to one.</p>
 <p>If <code>tag_name</code> is nil, the tag is anonymous.</p>
-<p>If <code>tag_name</code> is non-nil, a tag called <code>tag_name</code> must not already
+<p>If <code>tag_name</code> is non-nil, a tag called <code>tag_name</code> must not already<br />
 exist in the tag table for this buffer.</p>
-<p>The <code>first_property_name</code> argument and subsequent arguments are a list
+<p>The <code>first_property_name</code> argument and subsequent arguments are a list<br />
 of properties to set on the tag, as with [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.set].</p>
 
 
@@ -1297,8 +1301,8 @@ of properties to set on the tag, as with [method<!-- raw HTML omitted -->GObject
   <div class="discussion">
     <p>Forces buffer to analyze and highlight the given area synchronously.</p>
 <p><strong>Note</strong>:</p>
-<p>This is a potentially slow operation and should be used only
-when you need to make sure that some text not currently
+<p>This is a potentially slow operation and should be used only<br />
+when you need to make sure that some text not currently<br />
 visible is highlighted, for instance before printing.</p>
 
 
@@ -1368,9 +1372,9 @@ visible is highlighted, for instance before printing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Moves <code>iter</code> to the position of the next [class<!-- raw HTML omitted -->Mark<!-- raw HTML omitted -->] of the given
+    <p>Moves <code>iter</code> to the position of the next [class<!-- raw HTML omitted -->Mark<!-- raw HTML omitted -->] of the given<br />
 <code>category</code>.</p>
-<p>Returns true if <code>iter</code> was moved. If <code>category</code> is NULL, the
+<p>Returns true if <code>iter</code> was moved. If <code>category</code> is NULL, the<br />
 next source mark can be of any category.</p>
 
 
@@ -1445,8 +1449,8 @@ next source mark can be of any category.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Get all defined context classes at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
-<p>See the [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->] description for the list of default context classes.
-terminated array of context class names.
+<p>See the [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->] description for the list of default context classes.<br />
+terminated array of context class names.<br />
 Use g_strfreev() to free the array if it is no longer needed.</p>
 
 
@@ -1506,7 +1510,7 @@ Use g_strfreev() to free the array if it is no longer needed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the list of marks of the given category at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->category<!-- raw HTML omitted --> is nil it returns all marks at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.
+<p>If <!-- raw HTML omitted -->category<!-- raw HTML omitted --> is nil it returns all marks at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.<br />
 a newly allocated #GSList.</p>
 
 
@@ -1577,7 +1581,7 @@ a newly allocated #GSList.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the list of marks of the given category at <!-- raw HTML omitted -->line<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->category<!-- raw HTML omitted --> is nil, all marks at <!-- raw HTML omitted -->line<!-- raw HTML omitted --> are returned.
+<p>If <!-- raw HTML omitted -->category<!-- raw HTML omitted --> is nil, all marks at <!-- raw HTML omitted -->line<!-- raw HTML omitted --> are returned.<br />
 a newly allocated #GSList.</p>
 
 
@@ -1647,8 +1651,8 @@ a newly allocated #GSList.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether bracket match highlighting is activated for the
-source buffer.
+    <p>Determines whether bracket match highlighting is activated for the<br />
+source buffer.<br />
 brackets.</p>
 
 
@@ -1794,7 +1798,7 @@ brackets.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether syntax highlighting is activated in the source
+    <p>Determines whether syntax highlighting is activated in the source<br />
 buffer.</p>
 
 
@@ -1979,7 +1983,7 @@ buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the buffer has an implicit trailing newline. See
+    <p>Whether the buffer has an implicit trailing newline. See<br />
 [method<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->.set_implicit_trailing_newline].</p>
 
 
@@ -2047,7 +2051,7 @@ buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the buffer has an implicit trailing newline. See
+    <p>Whether the buffer has an implicit trailing newline. See<br />
 [method<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->.set_implicit_trailing_newline].</p>
 
 
@@ -2088,9 +2092,9 @@ buffer.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Moves backward to the next toggle (on or off) of the context class.</p>
-<p>If no matching context class toggles are found, returns false, otherwise true.
-Does not return toggles located at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->, only toggles after <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->. Sets
-<!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to the location of the toggle, or to the end of the buffer if no
+<p>If no matching context class toggles are found, returns false, otherwise true.<br />
+Does not return toggles located at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->, only toggles after <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->. Sets<br />
+<!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to the location of the toggle, or to the end of the buffer if no<br />
 toggle is found.</p>
 <p>See the [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->] description for the list of default context classes.</p>
 
@@ -2166,9 +2170,9 @@ toggle is found.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Moves forward to the next toggle (on or off) of the context class.</p>
-<p>If no matching context class toggles are found, returns false, otherwise true.
-Does not return toggles located at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->, only toggles after <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->. Sets
-<!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to the location of the toggle, or to the end of the buffer if no
+<p>If no matching context class toggles are found, returns false, otherwise true.<br />
+Does not return toggles located at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->, only toggles after <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->. Sets<br />
+<!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to the location of the toggle, or to the end of the buffer if no<br />
 toggle is found.</p>
 <p>See the [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->] description for the list of default context classes.</p>
 
@@ -2525,9 +2529,9 @@ toggle is found.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;loading&quot; property denotes that a <code>GtkSourceFileLoader</code> is
+    <p>The &quot;loading&quot; property denotes that a <code>GtkSourceFileLoader</code> is<br />
 currently loading the buffer.</p>
-<p>Applications may want to use this setting to avoid doing work
+<p>Applications may want to use this setting to avoid doing work<br />
 while the buffer is loading such as spellchecking.</p>
 
 
@@ -2595,9 +2599,9 @@ while the buffer is loading such as spellchecking.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;loading&quot; property denotes that a <code>GtkSourceFileLoader</code> is
+    <p>The &quot;loading&quot; property denotes that a <code>GtkSourceFileLoader</code> is<br />
 currently loading the buffer.</p>
-<p>Applications may want to use this setting to avoid doing work
+<p>Applications may want to use this setting to avoid doing work<br />
 while the buffer is loading such as spellchecking.</p>
 
 
@@ -2821,8 +2825,8 @@ while the buffer is loading such as spellchecking.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Style scheme. It contains styles for syntax highlighting, optionally
-foreground, background, cursor color, current line color, and matching
+    <p>Style scheme. It contains styles for syntax highlighting, optionally<br />
+foreground, background, cursor color, current line color, and matching<br />
 brackets style.</p>
 
 
@@ -2862,8 +2866,8 @@ brackets style.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Style scheme. It contains styles for syntax highlighting, optionally
-foreground, background, cursor color, current line color, and matching
+    <p>Style scheme. It contains styles for syntax highlighting, optionally<br />
+foreground, background, cursor color, current line color, and matching<br />
 brackets style.</p>
 
 
@@ -2927,7 +2931,7 @@ brackets style.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

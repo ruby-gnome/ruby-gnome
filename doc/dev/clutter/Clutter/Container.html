@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Container";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,14 +79,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Clutter::Container is an opaque structure whose members cannot be directly
+    <p>Clutter::Container is an opaque structure whose members cannot be directly<br />
 accessed</p>
 
 
@@ -673,6 +675,7 @@ accessed</p>
 
       
     </ul>
+    
   
 
 
@@ -880,12 +883,12 @@ accessed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a Clutter::Actor to <!-- raw HTML omitted -->container<!-- raw HTML omitted -->. This function will emit the
-&quot;actor-added&quot; signal. The actor should be parented to
-<!-- raw HTML omitted -->container<!-- raw HTML omitted -->. You cannot add a Clutter::Actor to more than one
+    <p>Adds a Clutter::Actor to <!-- raw HTML omitted -->container<!-- raw HTML omitted -->. This function will emit the<br />
+&quot;actor-added&quot; signal. The actor should be parented to<br />
+<!-- raw HTML omitted -->container<!-- raw HTML omitted -->. You cannot add a Clutter::Actor to more than one<br />
 Clutter::Container.</p>
-<p>This function will call Clutter::ContainerIface.add(), which is a
-deprecated virtual function. The default implementation will
+<p>This function will call Clutter::ContainerIface.add(), which is a<br />
+deprecated virtual function. The default implementation will<br />
 call clutter_actor_add_child().</p>
 
 
@@ -941,8 +944,8 @@ call clutter_actor_add_child().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Alternative va_list version of clutter_container_add().</p>
-<p>This function will call Clutter::ContainerIface.add(), which is a
-deprecated virtual function. The default implementation will
+<p>This function will call Clutter::ContainerIface.add(), which is a<br />
+deprecated virtual function. The default implementation will<br />
 call clutter_actor_add_child().</p>
 
 
@@ -1013,9 +1016,9 @@ call clutter_actor_add_child().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets <!-- raw HTML omitted -->container<!-- raw HTML omitted --> specific properties of an actor.</p>
-<p>In general, a copy is made of the property contents and the caller is
-responsible for freeing the memory in the appropriate manner for the type, for
-instance by calling g_free() or g_object_unref().
+<p>In general, a copy is made of the property contents and the caller is<br />
+responsible for freeing the memory in the appropriate manner for the type, for<br />
+instance by calling g_free() or g_object_unref().<br />
 pairs terminated with NULL.</p>
 
 
@@ -1100,11 +1103,11 @@ pairs terminated with NULL.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a container specific property of a child of <!-- raw HTML omitted -->container<!-- raw HTML omitted -->, In general,
-a copy is made of the property contents and the caller is responsible for
+    <p>Gets a container specific property of a child of <!-- raw HTML omitted -->container<!-- raw HTML omitted -->, In general,<br />
+a copy is made of the property contents and the caller is responsible for<br />
 freeing the memory by calling g_value_unset().</p>
-<p>Note that clutter_container_child_set_property() is really intended for
-language bindings, clutter_container_child_set() is much more convenient
+<p>Note that clutter_container_child_set_property() is really intended for<br />
+language bindings, clutter_container_child_set() is much more convenient<br />
 for C programming.</p>
 
 
@@ -1272,7 +1275,7 @@ for C programming.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets container specific properties on the child of a container.
+    <p>Sets container specific properties on the child of a container.<br />
 pairs terminated with NULL.</p>
 
 
@@ -1459,8 +1462,8 @@ pairs terminated with NULL.</p>
       
       
         &mdash;
-        <div class='inline'><p>a list
-of Clutter::Actor<!-- raw HTML omitted -->s. Use g_list_free() on the returned
+        <div class='inline'><p>a list<br />
+of Clutter::Actor<!-- raw HTML omitted -->s. Use g_list_free() on the returned<br />
 list when done.</p>
 </div>
       
@@ -1618,7 +1621,7 @@ list when done.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finds a child actor of a container by its name. Search recurses
+    <p>Finds a child actor of a container by its name. Search recurses<br />
 into any child container.</p>
 
 
@@ -1656,7 +1659,7 @@ into any child container.</p>
       
       
         &mdash;
-        <div class='inline'><p>The child actor with the requested name,
+        <div class='inline'><p>The child actor with the requested name,<br />
 or nil if no actor with that name was found.</p>
 </div>
       
@@ -1844,8 +1847,8 @@ or nil if no actor with that name was found.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the Clutter::ChildMeta for the <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> child
-of <!-- raw HTML omitted -->container<!-- raw HTML omitted --> or nil if the specifiec actor does not exist or the
+    <p>Returns the Clutter::ChildMeta for the <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> child<br />
+of <!-- raw HTML omitted -->container<!-- raw HTML omitted --> or nil if the specifiec actor does not exist or the<br />
 container is not configured to provide Clutter::ChildMeta<!-- raw HTML omitted -->s.</p>
 
 
@@ -1898,8 +1901,8 @@ container is not configured to provide Clutter::ChildMeta<!-- raw HTML omitted -
       
       
         &mdash;
-        <div class='inline'><p>the Clutter::ChildMeta for the <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> child
-of <!-- raw HTML omitted -->container<!-- raw HTML omitted --> or nil if the specifiec actor does not exist or the
+        <div class='inline'><p>the Clutter::ChildMeta for the <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> child<br />
+of <!-- raw HTML omitted -->container<!-- raw HTML omitted --> or nil if the specifiec actor does not exist or the<br />
 container is not configured to provide Clutter::ChildMeta<!-- raw HTML omitted -->s</p>
 </div>
       
@@ -1969,7 +1972,7 @@ container is not configured to provide Clutter::ChildMeta<!-- raw HTML omitted -
       
       
         &mdash;
-        <div class='inline'><p>the sibling to lower to, or nil to lower
+        <div class='inline'><p>the sibling to lower to, or nil to lower<br />
 to the bottom</p>
 </div>
       
@@ -2006,8 +2009,8 @@ to the bottom</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Lowers <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> to <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> level, in the depth ordering.</p>
-<p>This function calls the Clutter::ContainerIface.lower() virtual function,
-which has been deprecated. The default implementation will call
+<p>This function calls the Clutter::ContainerIface.lower() virtual function,<br />
+which has been deprecated. The default implementation will call<br />
 clutter_actor_set_child_below_sibling().</p>
 
 
@@ -2042,7 +2045,7 @@ clutter_actor_set_child_below_sibling().</p>
       
       
         &mdash;
-        <div class='inline'><p>the sibling to lower to, or nil to lower
+        <div class='inline'><p>the sibling to lower to, or nil to lower<br />
 to the bottom</p>
 </div>
       
@@ -2126,7 +2129,7 @@ to the bottom</p>
       
       
         &mdash;
-        <div class='inline'><p>the sibling to raise to, or nil to raise
+        <div class='inline'><p>the sibling to raise to, or nil to raise<br />
 to the top</p>
 </div>
       
@@ -2163,8 +2166,8 @@ to the top</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Raises <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> to <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> level, in the depth ordering.</p>
-<p>This function calls the Clutter::ContainerIface.raise() virtual function,
-which has been deprecated. The default implementation will call
+<p>This function calls the Clutter::ContainerIface.raise() virtual function,<br />
+which has been deprecated. The default implementation will call<br />
 clutter_actor_set_child_above_sibling().</p>
 
 
@@ -2199,7 +2202,7 @@ clutter_actor_set_child_above_sibling().</p>
       
       
         &mdash;
-        <div class='inline'><p>the sibling to raise to, or nil to raise
+        <div class='inline'><p>the sibling to raise to, or nil to raise<br />
 to the top</p>
 </div>
       
@@ -2303,12 +2306,12 @@ to the top</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> from <!-- raw HTML omitted -->container<!-- raw HTML omitted -->. The actor should be unparented, so
-if you want to keep it around you must hold a reference to it
-yourself, using g_object_ref(). When the actor has been removed,
+    <p>Removes <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> from <!-- raw HTML omitted -->container<!-- raw HTML omitted -->. The actor should be unparented, so<br />
+if you want to keep it around you must hold a reference to it<br />
+yourself, using g_object_ref(). When the actor has been removed,<br />
 the &quot;actor-removed&quot; signal is emitted by <!-- raw HTML omitted -->container<!-- raw HTML omitted -->.</p>
-<p>This function will call Clutter::ContainerIface.remove(), which is a
-deprecated virtual function. The default implementation will call
+<p>This function will call Clutter::ContainerIface.remove(), which is a<br />
+deprecated virtual function. The default implementation will call<br />
 clutter_actor_remove_child().</p>
 
 
@@ -2364,8 +2367,8 @@ clutter_actor_remove_child().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Alternative va_list version of clutter_container_remove().</p>
-<p>This function will call Clutter::ContainerIface.remove(), which is a
-deprecated virtual function. The default implementation will call
+<p>This function will call Clutter::ContainerIface.remove(), which is a<br />
+deprecated virtual function. The default implementation will call<br />
 clutter_actor_remove_child().</p>
 
 
@@ -2484,7 +2487,7 @@ clutter_actor_remove_child().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

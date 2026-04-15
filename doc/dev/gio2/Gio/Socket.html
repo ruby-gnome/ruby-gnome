@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::Socket";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -1727,6 +1729,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1743,15 +1746,15 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new #GSocket from a native file descriptor
+    <p>Creates a new #GSocket from a native file descriptor<br />
 or winsock SOCKET handle.</p>
-<p>This reads all the settings from the file descriptor so that
-all properties should work. Note that the file descriptor
-will be set to non-blocking mode, independent on the blocking
+<p>This reads all the settings from the file descriptor so that<br />
+all properties should work. Note that the file descriptor<br />
+will be set to non-blocking mode, independent on the blocking<br />
 mode of the #GSocket.</p>
-<p>On success, the returned #GSocket takes ownership of <!-- raw HTML omitted -->fd<!-- raw HTML omitted -->. On failure, the
+<p>On success, the returned #GSocket takes ownership of <!-- raw HTML omitted -->fd<!-- raw HTML omitted -->. On failure, the<br />
 caller must close <!-- raw HTML omitted -->fd<!-- raw HTML omitted --> themselves.</p>
-<p>Since GLib 2.46, it is no longer a fatal error to call this on a non-socket
+<p>Since GLib 2.46, it is no longer a fatal error to call this on a non-socket<br />
 descriptor.  Instead, a GError will be set with code %G_IO_ERROR_FAILED</p>
 
 
@@ -1800,13 +1803,13 @@ descriptor.  Instead, a GError will be set with code %G_IO_ERROR_FAILED</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Accept incoming connections on a connection-based socket. This removes
-the first outstanding connection request from the listening socket and
+    <p>Accept incoming connections on a connection-based socket. This removes<br />
+the first outstanding connection request from the listening socket and<br />
 creates a #GSocket object for it.</p>
-<p>The <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> must be bound to a local address with g_socket_bind() and
+<p>The <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> must be bound to a local address with g_socket_bind() and<br />
 must be listening for incoming connections (g_socket_listen()).</p>
-<p>If there are no outstanding connections then the operation will block
-or return %G_IO_ERROR_WOULD_BLOCK if non-blocking I/O is enabled.
+<p>If there are no outstanding connections then the operation will block<br />
+or return %G_IO_ERROR_WOULD_BLOCK if non-blocking I/O is enabled.<br />
 To be notified of an incoming connection, wait for the %G_IO_IN condition.</p>
 
 
@@ -1844,7 +1847,7 @@ To be notified of an incoming connection, wait for the %G_IO_IN condition.</p>
       
       
         &mdash;
-        <div class='inline'><p>a new #GSocket, or nil on error.
+        <div class='inline'><p>a new #GSocket, or nil on error.<br />
 Free the returned object with g_object_unref().</p>
 </div>
       
@@ -1867,15 +1870,15 @@ Free the returned object with g_object_unref().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Get the amount of data pending in the OS input buffer, without blocking.</p>
-<p>If <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> is a UDP or SCTP socket, this will return the size of
-just the next packet, even if additional packets are buffered after
+<p>If <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> is a UDP or SCTP socket, this will return the size of<br />
+just the next packet, even if additional packets are buffered after<br />
 that one.</p>
-<p>Note that on Windows, this function is rather inefficient in the
-UDP case, and so if you know any plausible upper bound on the size
-of the incoming packet, it is better to just do a
-g_socket_receive() with a buffer of that size, rather than calling
-g_socket_get_available_bytes() first and then doing a receive of
-exactly the right size.
+<p>Note that on Windows, this function is rather inefficient in the<br />
+UDP case, and so if you know any plausible upper bound on the size<br />
+of the incoming packet, it is better to just do a<br />
+g_socket_receive() with a buffer of that size, rather than calling<br />
+g_socket_get_available_bytes() first and then doing a receive of<br />
+exactly the right size.<br />
 without blocking or truncating, or -1 on error.</p>
 
 
@@ -1915,25 +1918,25 @@ without blocking or truncating, or -1 on error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>When a socket is created it is attached to an address family, but it
-doesn't have an address in this family. g_socket_bind() assigns the
+    <p>When a socket is created it is attached to an address family, but it<br />
+doesn't have an address in this family. g_socket_bind() assigns the<br />
 address (sometimes called name) of the socket.</p>
-<p>It is generally required to bind to a local address before you can
-receive connections. (See g_socket_listen() and g_socket_accept() ).
-In certain situations, you may also want to bind a socket that will be
+<p>It is generally required to bind to a local address before you can<br />
+receive connections. (See g_socket_listen() and g_socket_accept() ).<br />
+In certain situations, you may also want to bind a socket that will be<br />
 used to initiate connections, though this is not normally required.</p>
-<p>If <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> is a TCP socket, then <!-- raw HTML omitted -->allow_reuse<!-- raw HTML omitted --> controls the setting
-of the <code>SO_REUSEADDR</code> socket option; normally it should be true for
-server sockets (sockets that you will eventually call
-g_socket_accept() on), and false for client sockets. (Failing to
-set this flag on a server socket may cause g_socket_bind() to return
-%G_IO_ERROR_ADDRESS_IN_USE if the server program is stopped and then
+<p>If <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> is a TCP socket, then <!-- raw HTML omitted -->allow_reuse<!-- raw HTML omitted --> controls the setting<br />
+of the <code>SO_REUSEADDR</code> socket option; normally it should be true for<br />
+server sockets (sockets that you will eventually call<br />
+g_socket_accept() on), and false for client sockets. (Failing to<br />
+set this flag on a server socket may cause g_socket_bind() to return<br />
+%G_IO_ERROR_ADDRESS_IN_USE if the server program is stopped and then<br />
 immediately restarted.)</p>
-<p>If <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> is a UDP socket, then <!-- raw HTML omitted -->allow_reuse<!-- raw HTML omitted --> determines whether or
-not other UDP sockets can be bound to the same address at the same
-time. In particular, you can have several UDP sockets bound to the
-same address, and they will all receive all of the multicast and
-broadcast packets sent to that address. (The behavior of unicast
+<p>If <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> is a UDP socket, then <!-- raw HTML omitted -->allow_reuse<!-- raw HTML omitted --> determines whether or<br />
+not other UDP sockets can be bound to the same address at the same<br />
+time. In particular, you can have several UDP sockets bound to the<br />
+same address, and they will all receive all of the multicast and<br />
+broadcast packets sent to that address. (The behavior of unicast<br />
 UDP packets to an address with multiple listeners is not defined.)</p>
 
 
@@ -2007,7 +2010,7 @@ UDP packets to an address with multiple listeners is not defined.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the blocking mode of the socket. For details on blocking I/O,
+    <p>Gets the blocking mode of the socket. For details on blocking I/O,<br />
 see g_socket_set_blocking().</p>
 
 
@@ -2153,8 +2156,8 @@ see g_socket_set_blocking().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the broadcast setting on <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->; if true,
-it is possible to send packets to broadcast
+    <p>Gets the broadcast setting on <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->; if true,<br />
+it is possible to send packets to broadcast<br />
 addresses.</p>
 
 
@@ -2300,8 +2303,8 @@ addresses.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks and resets the pending connect error for the socket.
-This is used to check for errors when g_socket_connect() is
+    <p>Checks and resets the pending connect error for the socket.<br />
+This is used to check for errors when g_socket_connect() is<br />
 used in non-blocking mode.</p>
 
 
@@ -2342,29 +2345,29 @@ used in non-blocking mode.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Closes the socket, shutting down any active connection.</p>
-<p>Closing a socket does not wait for all outstanding I/O operations
-to finish, so the caller should not rely on them to be guaranteed
+<p>Closing a socket does not wait for all outstanding I/O operations<br />
+to finish, so the caller should not rely on them to be guaranteed<br />
 to complete even if the close returns with no error.</p>
-<p>Once the socket is closed, all other operations will return
-%G_IO_ERROR_CLOSED. Closing a socket multiple times will not
+<p>Once the socket is closed, all other operations will return<br />
+%G_IO_ERROR_CLOSED. Closing a socket multiple times will not<br />
 return an error.</p>
-<p>Sockets will be automatically closed when the last reference
-is dropped, but you might want to call this function to make sure
+<p>Sockets will be automatically closed when the last reference<br />
+is dropped, but you might want to call this function to make sure<br />
 resources are released as early as possible.</p>
-<p>Beware that due to the way that TCP works, it is possible for
-recently-sent data to be lost if either you close a socket while the
-%G_IO_IN condition is set, or else if the remote connection tries to
-send something to you after you close the socket but before it has
-finished reading all of the data you sent. There is no easy generic
-way to avoid this problem; the easiest fix is to design the network
-protocol such that the client will never send data &quot;out of turn&quot;.
-Another solution is for the server to half-close the connection by
-calling g_socket_shutdown() with only the <!-- raw HTML omitted -->shutdown_write<!-- raw HTML omitted --> flag set,
-and then wait for the client to notice this and close its side of the
-connection, after which the server can safely call g_socket_close().
-(This is what GTcp::Connection does if you call
-g_tcp_connection_set_graceful_disconnect(). But of course, this
-only works if the client will close its connection after the server
+<p>Beware that due to the way that TCP works, it is possible for<br />
+recently-sent data to be lost if either you close a socket while the<br />
+%G_IO_IN condition is set, or else if the remote connection tries to<br />
+send something to you after you close the socket but before it has<br />
+finished reading all of the data you sent. There is no easy generic<br />
+way to avoid this problem; the easiest fix is to design the network<br />
+protocol such that the client will never send data &quot;out of turn&quot;.<br />
+Another solution is for the server to half-close the connection by<br />
+calling g_socket_shutdown() with only the <!-- raw HTML omitted -->shutdown_write<!-- raw HTML omitted --> flag set,<br />
+and then wait for the client to notice this and close its side of the<br />
+connection, after which the server can safely call g_socket_close().<br />
+(This is what GTcp::Connection does if you call<br />
+g_tcp_connection_set_graceful_disconnect(). But of course, this<br />
+only works if the client will close its connection after the server<br />
 does.)</p>
 
 
@@ -2404,18 +2407,18 @@ does.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks on the readiness of <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> to perform operations.
-The operations specified in <!-- raw HTML omitted -->condition<!-- raw HTML omitted --> are checked for and masked
-against the currently-satisfied conditions on <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->. The result
+    <p>Checks on the readiness of <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> to perform operations.<br />
+The operations specified in <!-- raw HTML omitted -->condition<!-- raw HTML omitted --> are checked for and masked<br />
+against the currently-satisfied conditions on <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->. The result<br />
 is returned.</p>
-<p>Note that on Windows, it is possible for an operation to return
-%G_IO_ERROR_WOULD_BLOCK even immediately after
-g_socket_condition_check() has claimed that the socket is ready for
-writing. Rather than calling g_socket_condition_check() and then
-writing to the socket if it succeeds, it is generally better to
-simply try writing to the socket right away, and try again later if
+<p>Note that on Windows, it is possible for an operation to return<br />
+%G_IO_ERROR_WOULD_BLOCK even immediately after<br />
+g_socket_condition_check() has claimed that the socket is ready for<br />
+writing. Rather than calling g_socket_condition_check() and then<br />
+writing to the socket if it succeeds, it is generally better to<br />
+simply try writing to the socket right away, and try again later if<br />
 the initial attempt returns %G_IO_ERROR_WOULD_BLOCK.</p>
-<p>It is meaningless to specify %G_IO_ERR or %G_IO_HUP in condition;
+<p>It is meaningless to specify %G_IO_ERR or %G_IO_HUP in condition;<br />
 these conditions will always be set in the output if they are true.</p>
 <p>This call never blocks.</p>
 
@@ -2475,18 +2478,18 @@ these conditions will always be set in the output if they are true.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Waits for up to <!-- raw HTML omitted -->timeout_us<!-- raw HTML omitted --> microseconds for <!-- raw HTML omitted -->condition<!-- raw HTML omitted --> to become true
+    <p>Waits for up to <!-- raw HTML omitted -->timeout_us<!-- raw HTML omitted --> microseconds for <!-- raw HTML omitted -->condition<!-- raw HTML omitted --> to become true<br />
 on <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->. If the condition is met, true is returned.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled before the condition is met, or if
-<!-- raw HTML omitted -->timeout_us<!-- raw HTML omitted --> (or the socket's #GSocket:timeout) is reached before the
-condition is met, then false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, if non-nil,
-is set to the appropriate value (%G_IO_ERROR_CANCELLED or
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled before the condition is met, or if<br />
+<!-- raw HTML omitted -->timeout_us<!-- raw HTML omitted --> (or the socket's #GSocket:timeout) is reached before the<br />
+condition is met, then false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, if non-nil,<br />
+is set to the appropriate value (%G_IO_ERROR_CANCELLED or<br />
 %G_IO_ERROR_TIMED_OUT).</p>
-<p>If you don't want a timeout, use g_socket_condition_wait().
+<p>If you don't want a timeout, use g_socket_condition_wait().<br />
 (Alternatively, you can pass -1 for <!-- raw HTML omitted -->timeout_us<!-- raw HTML omitted -->.)</p>
-<p>Note that although <!-- raw HTML omitted -->timeout_us<!-- raw HTML omitted --> is in microseconds for consistency with
-other GLib APIs, this function actually only has millisecond
-resolution, and the behavior is undefined if <!-- raw HTML omitted -->timeout_us<!-- raw HTML omitted --> is not an
+<p>Note that although <!-- raw HTML omitted -->timeout_us<!-- raw HTML omitted --> is in microseconds for consistency with<br />
+other GLib APIs, this function actually only has millisecond<br />
+resolution, and the behavior is undefined if <!-- raw HTML omitted -->timeout_us<!-- raw HTML omitted --> is not an<br />
 exact number of milliseconds.</p>
 
 
@@ -2575,12 +2578,12 @@ exact number of milliseconds.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Waits for <!-- raw HTML omitted -->condition<!-- raw HTML omitted --> to become true on <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->. When the condition
+    <p>Waits for <!-- raw HTML omitted -->condition<!-- raw HTML omitted --> to become true on <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->. When the condition<br />
 is met, true is returned.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled before the condition is met, or if the
-socket has a timeout set and it is reached before the condition is
-met, then false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, if non-nil, is set to
-the appropriate value (%G_IO_ERROR_CANCELLED or
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled before the condition is met, or if the<br />
+socket has a timeout set and it is reached before the condition is<br />
+met, then false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, if non-nil, is set to<br />
+the appropriate value (%G_IO_ERROR_CANCELLED or<br />
 %G_IO_ERROR_TIMED_OUT).</p>
 <p>See also g_socket_condition_timed_wait().</p>
 
@@ -2656,17 +2659,17 @@ the appropriate value (%G_IO_ERROR_CANCELLED or
 </h3><div class="docstring">
   <div class="discussion">
     <p>Connect the socket to the specified remote address.</p>
-<p>For connection oriented socket this generally means we attempt to make
-a connection to the <!-- raw HTML omitted -->address<!-- raw HTML omitted -->. For a connection-less socket it sets
-the default address for g_socket_send() and discards all incoming datagrams
+<p>For connection oriented socket this generally means we attempt to make<br />
+a connection to the <!-- raw HTML omitted -->address<!-- raw HTML omitted -->. For a connection-less socket it sets<br />
+the default address for g_socket_send() and discards all incoming datagrams<br />
 from other sources.</p>
-<p>Generally connection oriented sockets can only connect once, but
-connection-less sockets can connect multiple times to change the
+<p>Generally connection oriented sockets can only connect once, but<br />
+connection-less sockets can connect multiple times to change the<br />
 default address.</p>
-<p>If the connect call needs to do network I/O it will block, unless
-non-blocking I/O is enabled. Then %G_IO_ERROR_PENDING is returned
-and the user can be notified of the connection finishing by waiting
-for the G_IO_OUT condition. The result of the connection must then be
+<p>If the connect call needs to do network I/O it will block, unless<br />
+non-blocking I/O is enabled. Then %G_IO_ERROR_PENDING is returned<br />
+and the user can be notified of the connection finishing by waiting<br />
+for the G_IO_OUT condition. The result of the connection must then be<br />
 checked with g_socket_check_connect_result().</p>
 
 
@@ -2740,7 +2743,7 @@ checked with g_socket_check_connect_result().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a GSocket::Connection subclass of the right type for
+    <p>Creates a GSocket::Connection subclass of the right type for<br />
 <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->.</p>
 
 
@@ -2780,21 +2783,21 @@ checked with g_socket_check_connect_result().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a #GSource that can be attached to a %GMainContext to monitor
-for the availability of the specified <!-- raw HTML omitted -->condition<!-- raw HTML omitted --> on the socket. The #GSource
+    <p>Creates a #GSource that can be attached to a %GMainContext to monitor<br />
+for the availability of the specified <!-- raw HTML omitted -->condition<!-- raw HTML omitted --> on the socket. The #GSource<br />
 keeps a reference to the <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->.</p>
 <p>The callback on the source is of the GSocket::SourceFunc type.</p>
-<p>It is meaningless to specify %G_IO_ERR or %G_IO_HUP in <!-- raw HTML omitted -->condition<!-- raw HTML omitted -->;
+<p>It is meaningless to specify %G_IO_ERR or %G_IO_HUP in <!-- raw HTML omitted -->condition<!-- raw HTML omitted -->;<br />
 these conditions will always be reported output if they are true.</p>
-<p><!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> if not nil can be used to cancel the source, which will
-cause the source to trigger, reporting the current condition (which
-is likely 0 unless cancellation happened at the same time as a
-condition change). You can check for this in the callback using
+<p><!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> if not nil can be used to cancel the source, which will<br />
+cause the source to trigger, reporting the current condition (which<br />
+is likely 0 unless cancellation happened at the same time as a<br />
+condition change). You can check for this in the callback using<br />
 g_cancellable_is_cancelled().</p>
-<p>If <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> has a timeout set, and it is reached before <!-- raw HTML omitted -->condition<!-- raw HTML omitted -->
-occurs, the source will then trigger anyway, reporting %G_IO_IN or
-%G_IO_OUT depending on <!-- raw HTML omitted -->condition<!-- raw HTML omitted -->. However, <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> will have been
-marked as having had a timeout, and so the next #GSocket I/O method
+<p>If <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> has a timeout set, and it is reached before <!-- raw HTML omitted -->condition<!-- raw HTML omitted --><br />
+occurs, the source will then trigger anyway, reporting %G_IO_IN or<br />
+%G_IO_OUT depending on <!-- raw HTML omitted -->condition<!-- raw HTML omitted -->. However, <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> will have been<br />
+marked as having had a timeout, and so the next #GSocket I/O method<br />
 you call will then fail with a %G_IO_ERROR_TIMED_OUT.</p>
 
 
@@ -2868,11 +2871,11 @@ you call will then fail with a %G_IO_ERROR_TIMED_OUT.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the credentials of the foreign process connected to this
-socket, if any (e.g. it is only supported for %G_SOCKET_FAMILY_UNIX
+    <p>Returns the credentials of the foreign process connected to this<br />
+socket, if any (e.g. it is only supported for %G_SOCKET_FAMILY_UNIX<br />
 sockets).</p>
-<p>If this operation isn't supported on the OS, the method fails with
-the %G_IO_ERROR_NOT_SUPPORTED error. On Linux this is implemented
+<p>If this operation isn't supported on the OS, the method fails with<br />
+the %G_IO_ERROR_NOT_SUPPORTED error. On Linux this is implemented<br />
 by reading the %SO_PEERCRED option on the underlying socket.</p>
 <p>This method can be expected to be available on the following platforms:</p>
 <ul>
@@ -2882,10 +2885,10 @@ by reading the %SO_PEERCRED option on the underlying socket.</p>
 <li>NetBSD since GLib 2.42</li>
 <li>macOS, tvOS, iOS since GLib 2.66</li>
 </ul>
-<p>Other ways to obtain credentials from a foreign peer includes the
-GUnix::CredentialsMessage type and
-g_unix_connection_send_credentials() /
-g_unix_connection_receive_credentials() functions.
+<p>Other ways to obtain credentials from a foreign peer includes the<br />
+GUnix::CredentialsMessage type and<br />
+g_unix_connection_send_credentials() /<br />
+g_unix_connection_receive_credentials() functions.<br />
 that must be freed with g_object_unref().</p>
 
 
@@ -3137,16 +3140,16 @@ that must be freed with g_object_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of an integer-valued option on <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->, as with
-getsockopt(). (If you need to fetch a  non-integer-valued option,
+    <p>Gets the value of an integer-valued option on <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->, as with<br />
+getsockopt(). (If you need to fetch a  non-integer-valued option,<br />
 you will need to call getsockopt() directly.)</p>
-<p>The [&lt;gio/gnetworking.h&gt;][gio-gnetworking.h]
-header pulls in system headers that will define most of the
-standard/portable socket options. For unusual socket protocols or
-platform-dependent options, you may need to include additional
+<p>The [&lt;gio/gnetworking.h&gt;][gio-gnetworking.h]<br />
+header pulls in system headers that will define most of the<br />
+standard/portable socket options. For unusual socket protocols or<br />
+platform-dependent options, you may need to include additional<br />
 headers.</p>
-<p>Note that even for socket options that are a single byte in size,
-<!-- raw HTML omitted -->value<!-- raw HTML omitted --> is still a pointer to a #gint variable, not a #guchar;
+<p>Note that even for socket options that are a single byte in size,<br />
+<!-- raw HTML omitted -->value<!-- raw HTML omitted --> is still a pointer to a #gint variable, not a #guchar;<br />
 g_socket_get_option() will handle the conversion internally.</p>
 
 
@@ -3214,8 +3217,8 @@ g_socket_get_option() will handle the conversion internally.</p>
       
       
         &mdash;
-        <div class='inline'><p>success or failure. On failure, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set, and
-the system error value (<code>errno</code> or WSAGetLastError()) will still
+        <div class='inline'><p>success or failure. On failure, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set, and<br />
+the system error value (<code>errno</code> or WSAGetLastError()) will still<br />
 be set to the result of the getsockopt() call.</p>
 </div>
       
@@ -3276,11 +3279,11 @@ be set to the result of the getsockopt() call.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Check whether the socket is connected. This is only useful for
+    <p>Check whether the socket is connected. This is only useful for<br />
 connection-oriented sockets.</p>
-<p>If using g_socket_shutdown(), this function will return true until the
-socket has been shut down for reading and writing. If you do a non-blocking
-connect, this function will not return true until after you call
+<p>If using g_socket_shutdown(), this function will return true until the<br />
+socket has been shut down for reading and writing. If you do a non-blocking<br />
+connect, this function will not return true until after you call<br />
 g_socket_check_connect_result().</p>
 
 
@@ -3320,16 +3323,16 @@ g_socket_check_connect_result().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> to receive multicast messages sent to <!-- raw HTML omitted -->group<!-- raw HTML omitted -->.
-<!-- raw HTML omitted -->socket<!-- raw HTML omitted --> must be a %G_SOCKET_TYPE_DATAGRAM socket, and must have
-been bound to an appropriate interface and port with
+    <p>Registers <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> to receive multicast messages sent to <!-- raw HTML omitted -->group<!-- raw HTML omitted -->.<br />
+<!-- raw HTML omitted -->socket<!-- raw HTML omitted --> must be a %G_SOCKET_TYPE_DATAGRAM socket, and must have<br />
+been bound to an appropriate interface and port with<br />
 g_socket_bind().</p>
-<p>If <!-- raw HTML omitted -->iface<!-- raw HTML omitted --> is nil, the system will automatically pick an interface
+<p>If <!-- raw HTML omitted -->iface<!-- raw HTML omitted --> is nil, the system will automatically pick an interface<br />
 to bind to based on <!-- raw HTML omitted -->group<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->source_specific<!-- raw HTML omitted --> is true, source-specific multicast as defined
-in RFC 4604 is used. Note that on older platforms this may fail
+<p>If <!-- raw HTML omitted -->source_specific<!-- raw HTML omitted --> is true, source-specific multicast as defined<br />
+in RFC 4604 is used. Note that on older platforms this may fail<br />
 with a %G_IO_ERROR_NOT_SUPPORTED error.</p>
-<p>To bind to a given source-specific multicast address, use
+<p>To bind to a given source-specific multicast address, use<br />
 g_socket_join_multicast_group_ssm() instead.</p>
 
 
@@ -3418,18 +3421,18 @@ g_socket_join_multicast_group_ssm() instead.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> to receive multicast messages sent to <!-- raw HTML omitted -->group<!-- raw HTML omitted -->.
-<!-- raw HTML omitted -->socket<!-- raw HTML omitted --> must be a %G_SOCKET_TYPE_DATAGRAM socket, and must have
-been bound to an appropriate interface and port with
+    <p>Registers <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> to receive multicast messages sent to <!-- raw HTML omitted -->group<!-- raw HTML omitted -->.<br />
+<!-- raw HTML omitted -->socket<!-- raw HTML omitted --> must be a %G_SOCKET_TYPE_DATAGRAM socket, and must have<br />
+been bound to an appropriate interface and port with<br />
 g_socket_bind().</p>
-<p>If <!-- raw HTML omitted -->iface<!-- raw HTML omitted --> is nil, the system will automatically pick an interface
+<p>If <!-- raw HTML omitted -->iface<!-- raw HTML omitted --> is nil, the system will automatically pick an interface<br />
 to bind to based on <!-- raw HTML omitted -->group<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->source_specific<!-- raw HTML omitted --> is not nil, use source-specific multicast as
-defined in RFC 4604. Note that on older platforms this may fail
+<p>If <!-- raw HTML omitted -->source_specific<!-- raw HTML omitted --> is not nil, use source-specific multicast as<br />
+defined in RFC 4604. Note that on older platforms this may fail<br />
 with a %G_IO_ERROR_NOT_SUPPORTED error.</p>
-<p>Note that this function can be called multiple times for the same
-<!-- raw HTML omitted -->group<!-- raw HTML omitted --> with different <!-- raw HTML omitted -->source_specific<!-- raw HTML omitted --> in order to receive multicast
-packets from more than one source.
+<p>Note that this function can be called multiple times for the same<br />
+<!-- raw HTML omitted -->group<!-- raw HTML omitted --> with different <!-- raw HTML omitted -->source_specific<!-- raw HTML omitted --> in order to receive multicast<br />
+packets from more than one source.<br />
 source-specific multicast address or nil to ignore.</p>
 
 
@@ -3518,7 +3521,7 @@ source-specific multicast address or nil to ignore.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the keepalive mode of the socket. For details on this,
+    <p>Gets the keepalive mode of the socket. For details on this,<br />
 see g_socket_set_keepalive().</p>
 
 
@@ -3664,12 +3667,12 @@ see g_socket_set_keepalive().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> from the multicast group defined by <!-- raw HTML omitted -->group<!-- raw HTML omitted -->, <!-- raw HTML omitted -->iface<!-- raw HTML omitted -->,
-and <!-- raw HTML omitted -->source_specific<!-- raw HTML omitted --> (which must all have the same values they had
+    <p>Removes <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> from the multicast group defined by <!-- raw HTML omitted -->group<!-- raw HTML omitted -->, <!-- raw HTML omitted -->iface<!-- raw HTML omitted -->,<br />
+and <!-- raw HTML omitted -->source_specific<!-- raw HTML omitted --> (which must all have the same values they had<br />
 when you joined the group).</p>
-<p><!-- raw HTML omitted -->socket<!-- raw HTML omitted --> remains bound to its address and port, and can still receive
+<p><!-- raw HTML omitted -->socket<!-- raw HTML omitted --> remains bound to its address and port, and can still receive<br />
 unicast messages after calling this.</p>
-<p>To unbind to a given source-specific multicast address, use
+<p>To unbind to a given source-specific multicast address, use<br />
 g_socket_leave_multicast_group_ssm() instead.</p>
 
 
@@ -3758,11 +3761,11 @@ g_socket_leave_multicast_group_ssm() instead.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> from the multicast group defined by <!-- raw HTML omitted -->group<!-- raw HTML omitted -->, <!-- raw HTML omitted -->iface<!-- raw HTML omitted -->,
-and <!-- raw HTML omitted -->source_specific<!-- raw HTML omitted --> (which must all have the same values they had
+    <p>Removes <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> from the multicast group defined by <!-- raw HTML omitted -->group<!-- raw HTML omitted -->, <!-- raw HTML omitted -->iface<!-- raw HTML omitted -->,<br />
+and <!-- raw HTML omitted -->source_specific<!-- raw HTML omitted --> (which must all have the same values they had<br />
 when you joined the group).</p>
-<p><!-- raw HTML omitted -->socket<!-- raw HTML omitted --> remains bound to its address and port, and can still receive
-unicast messages after calling this.
+<p><!-- raw HTML omitted -->socket<!-- raw HTML omitted --> remains bound to its address and port, and can still receive<br />
+unicast messages after calling this.<br />
 source-specific multicast address or nil to ignore.</p>
 
 
@@ -3851,11 +3854,11 @@ source-specific multicast address or nil to ignore.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Marks the socket as a server socket, i.e. a socket that is used
+    <p>Marks the socket as a server socket, i.e. a socket that is used<br />
 to accept incoming requests using g_socket_accept().</p>
-<p>Before calling this the socket must be bound to a local address using
+<p>Before calling this the socket must be bound to a local address using<br />
 g_socket_bind().</p>
-<p>To set the maximum amount of outstanding clients, use
+<p>To set the maximum amount of outstanding clients, use<br />
 g_socket_set_listen_backlog().</p>
 
 
@@ -4107,8 +4110,8 @@ g_socket_set_listen_backlog().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the multicast loopback setting on <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->; if true (the
-default), outgoing multicast packets will be looped back to
+    <p>Gets the multicast loopback setting on <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->; if true (the<br />
+default), outgoing multicast packets will be looped back to<br />
 multicast listeners on the same host.</p>
 
 
@@ -4466,25 +4469,25 @@ multicast listeners on the same host.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Receive data (up to <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes) from a socket. This is mainly used by
-connection-oriented sockets; it is identical to g_socket_receive_from()
+    <p>Receive data (up to <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes) from a socket. This is mainly used by<br />
+connection-oriented sockets; it is identical to g_socket_receive_from()<br />
 with <!-- raw HTML omitted -->address<!-- raw HTML omitted --> set to nil.</p>
-<p>For %G_SOCKET_TYPE_DATAGRAM and %G_SOCKET_TYPE_SEQPACKET sockets,
-g_socket_receive() will always read either 0 or 1 complete messages from
-the socket. If the received message is too large to fit in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, then
-the data beyond <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes will be discarded, without any explicit
+<p>For %G_SOCKET_TYPE_DATAGRAM and %G_SOCKET_TYPE_SEQPACKET sockets,<br />
+g_socket_receive() will always read either 0 or 1 complete messages from<br />
+the socket. If the received message is too large to fit in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, then<br />
+the data beyond <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes will be discarded, without any explicit<br />
 indication that this has occurred.</p>
-<p>For %G_SOCKET_TYPE_STREAM sockets, g_socket_receive() can return any
-number of bytes, up to <!-- raw HTML omitted -->size<!-- raw HTML omitted -->. If more than <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes have been
-received, the additional data will be returned in future calls to
+<p>For %G_SOCKET_TYPE_STREAM sockets, g_socket_receive() can return any<br />
+number of bytes, up to <!-- raw HTML omitted -->size<!-- raw HTML omitted -->. If more than <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes have been<br />
+received, the additional data will be returned in future calls to<br />
 g_socket_receive().</p>
-<p>If the socket is in blocking mode the call will block until there
-is some data to receive, the connection is closed, or there is an
-error. If there is no data available and the socket is in
-non-blocking mode, a %G_IO_ERROR_WOULD_BLOCK error will be
-returned. To be notified when data is available, wait for the
+<p>If the socket is in blocking mode the call will block until there<br />
+is some data to receive, the connection is closed, or there is an<br />
+error. If there is no data available and the socket is in<br />
+non-blocking mode, a %G_IO_ERROR_WOULD_BLOCK error will be<br />
+returned. To be notified when data is available, wait for the<br />
 %G_IO_IN condition.</p>
-<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.
+<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.<br />
 the peer, or -1 on error</p>
 
 
@@ -4574,11 +4577,11 @@ the peer, or -1 on error</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Receives data (up to <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes) from a socket.</p>
-<p>This function is a variant of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket.receive] which returns a
+<p>This function is a variant of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket.receive] which returns a<br />
 [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Bytes] rather than a plain buffer.</p>
-<p>Pass <code>-1</code> to <!-- raw HTML omitted -->timeout_us<!-- raw HTML omitted --> to block indefinitely until data is received (or
-the connection is closed, or there is an error). Pass <code>0</code> to use the default
-timeout from [property<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket:timeout], or pass a positive number to wait
+<p>Pass <code>-1</code> to <!-- raw HTML omitted -->timeout_us<!-- raw HTML omitted --> to block indefinitely until data is received (or<br />
+the connection is closed, or there is an error). Pass <code>0</code> to use the default<br />
+timeout from [property<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket:timeout], or pass a positive number to wait<br />
 for that many microseconds for data before returning <code>G_IO_ERROR_TIMED_OUT</code>.</p>
 
 
@@ -4613,7 +4616,7 @@ for that many microseconds for data before returning <code>G_IO_ERROR_TIMED_OUT<
       
       
         &mdash;
-        <div class='inline'><p>the timeout to wait for, in microseconds, or <code>-1</code> to block
+        <div class='inline'><p>the timeout to wait for, in microseconds, or <code>-1</code> to block<br />
 indefinitely</p>
 </div>
       
@@ -4647,7 +4650,7 @@ indefinitely</p>
       
       
         &mdash;
-        <div class='inline'><p>a bytes buffer containing the
+        <div class='inline'><p>a bytes buffer containing the<br />
 received bytes, or <code>NULL</code> on error</p>
 </div>
       
@@ -4670,14 +4673,14 @@ received bytes, or <code>NULL</code> on error</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Receive data (up to <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes) from a socket.</p>
-<p>This function is a variant of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket.receive_from] which returns
+<p>This function is a variant of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket.receive_from] which returns<br />
 a [struct<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Bytes] rather than a plain buffer.</p>
-<p>If <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is non-nil then <!-- raw HTML omitted -->address<!-- raw HTML omitted --> will be set equal to the
+<p>If <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is non-nil then <!-- raw HTML omitted -->address<!-- raw HTML omitted --> will be set equal to the<br />
 source address of the received packet.</p>
 <p>The <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is owned by the caller.</p>
-<p>Pass <code>-1</code> to <!-- raw HTML omitted -->timeout_us<!-- raw HTML omitted --> to block indefinitely until data is received (or
-the connection is closed, or there is an error). Pass <code>0</code> to use the default
-timeout from [property<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket:timeout], or pass a positive number to wait
+<p>Pass <code>-1</code> to <!-- raw HTML omitted -->timeout_us<!-- raw HTML omitted --> to block indefinitely until data is received (or<br />
+the connection is closed, or there is an error). Pass <code>0</code> to use the default<br />
+timeout from [property<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket:timeout], or pass a positive number to wait<br />
 for that many microseconds for data before returning <code>G_IO_ERROR_TIMED_OUT</code>.</p>
 
 
@@ -4727,7 +4730,7 @@ for that many microseconds for data before returning <code>G_IO_ERROR_TIMED_OUT<
       
       
         &mdash;
-        <div class='inline'><p>the timeout to wait for, in microseconds, or <code>-1</code> to block
+        <div class='inline'><p>the timeout to wait for, in microseconds, or <code>-1</code> to block<br />
 indefinitely</p>
 </div>
       
@@ -4761,7 +4764,7 @@ indefinitely</p>
       
       
         &mdash;
-        <div class='inline'><p>a bytes buffer containing the
+        <div class='inline'><p>a bytes buffer containing the<br />
 received bytes, or <code>NULL</code> on error</p>
 </div>
       
@@ -4784,10 +4787,10 @@ received bytes, or <code>NULL</code> on error</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Receive data (up to <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes) from a socket.</p>
-<p>If <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is non-nil then <!-- raw HTML omitted -->address<!-- raw HTML omitted --> will be set equal to the
-source address of the received packet.
+<p>If <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is non-nil then <!-- raw HTML omitted -->address<!-- raw HTML omitted --> will be set equal to the<br />
+source address of the received packet.<br />
 <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is owned by the caller.</p>
-<p>See g_socket_receive() for additional information.
+<p>See g_socket_receive() for additional information.<br />
 the peer, or -1 on error</p>
 
 
@@ -4807,7 +4810,7 @@ the peer, or -1 on error</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to a GSocket::Address
+        <div class='inline'><p>a pointer to a GSocket::Address<br />
 pointer, or nil</p>
 </div>
       
@@ -4892,55 +4895,55 @@ pointer, or nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Receive data from a socket.  For receiving multiple messages, see
-g_socket_receive_messages(); for easier use, see
+    <p>Receive data from a socket.  For receiving multiple messages, see<br />
+g_socket_receive_messages(); for easier use, see<br />
 g_socket_receive() and g_socket_receive_from().</p>
-<p>If <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is non-nil then <!-- raw HTML omitted -->address<!-- raw HTML omitted --> will be set equal to the
-source address of the received packet.
+<p>If <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is non-nil then <!-- raw HTML omitted -->address<!-- raw HTML omitted --> will be set equal to the<br />
+source address of the received packet.<br />
 <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is owned by the caller.</p>
-<p><!-- raw HTML omitted -->vector<!-- raw HTML omitted --> must point to an array of GInput::Vector structs and
-<!-- raw HTML omitted -->num_vectors<!-- raw HTML omitted --> must be the length of this array.  These structs
-describe the buffers that received data will be scattered into.
-If <!-- raw HTML omitted -->num_vectors<!-- raw HTML omitted --> is -1, then <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> is assumed to be terminated
+<p><!-- raw HTML omitted -->vector<!-- raw HTML omitted --> must point to an array of GInput::Vector structs and<br />
+<!-- raw HTML omitted -->num_vectors<!-- raw HTML omitted --> must be the length of this array.  These structs<br />
+describe the buffers that received data will be scattered into.<br />
+If <!-- raw HTML omitted -->num_vectors<!-- raw HTML omitted --> is -1, then <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> is assumed to be terminated<br />
 by a GInput::Vector with a nil buffer pointer.</p>
-<p>As a special case, if <!-- raw HTML omitted -->num_vectors<!-- raw HTML omitted --> is 0 (in which case, <!-- raw HTML omitted -->vectors<!-- raw HTML omitted -->
-may of course be nil), then a single byte is received and
-discarded. This is to facilitate the common practice of sending a
+<p>As a special case, if <!-- raw HTML omitted -->num_vectors<!-- raw HTML omitted --> is 0 (in which case, <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --><br />
+may of course be nil), then a single byte is received and<br />
+discarded. This is to facilitate the common practice of sending a<br />
 single '\0' byte for the purposes of transferring ancillary data.</p>
-<p><!-- raw HTML omitted -->messages<!-- raw HTML omitted -->, if non-nil, will be set to point to a newly-allocated
-array of GSocket::ControlMessage instances or nil if no such
-messages was received. These correspond to the control messages
-received from the kernel, one GSocket::ControlMessage per message
-from the kernel. This array is nil-terminated and must be freed
-by the caller using g_free() after calling g_object_unref() on each
-element. If <!-- raw HTML omitted -->messages<!-- raw HTML omitted --> is nil, any control messages received will
+<p><!-- raw HTML omitted -->messages<!-- raw HTML omitted -->, if non-nil, will be set to point to a newly-allocated<br />
+array of GSocket::ControlMessage instances or nil if no such<br />
+messages was received. These correspond to the control messages<br />
+received from the kernel, one GSocket::ControlMessage per message<br />
+from the kernel. This array is nil-terminated and must be freed<br />
+by the caller using g_free() after calling g_object_unref() on each<br />
+element. If <!-- raw HTML omitted -->messages<!-- raw HTML omitted --> is nil, any control messages received will<br />
 be discarded.</p>
-<p><!-- raw HTML omitted -->num_messages<!-- raw HTML omitted -->, if non-nil, will be set to the number of control
+<p><!-- raw HTML omitted -->num_messages<!-- raw HTML omitted -->, if non-nil, will be set to the number of control<br />
 messages received.</p>
-<p>If both <!-- raw HTML omitted -->messages<!-- raw HTML omitted --> and <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> are non-nil, then
-<!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> gives the number of GSocket::ControlMessage instances
+<p>If both <!-- raw HTML omitted -->messages<!-- raw HTML omitted --> and <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> are non-nil, then<br />
+<!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> gives the number of GSocket::ControlMessage instances<br />
 in <!-- raw HTML omitted -->messages<!-- raw HTML omitted --> (ie: not including the nil terminator).</p>
-<p><!-- raw HTML omitted -->flags<!-- raw HTML omitted --> is an in/out parameter. The commonly available arguments
-for this are available in the GSocket::MsgFlags enum, but the
-values there are the same as the system values, and the flags
-are passed in as-is, so you can pass in system-specific flags too
-(and g_socket_receive_message() may pass system-specific flags out).
-Flags passed in to the parameter affect the receive operation; flags returned
+<p><!-- raw HTML omitted -->flags<!-- raw HTML omitted --> is an in/out parameter. The commonly available arguments<br />
+for this are available in the GSocket::MsgFlags enum, but the<br />
+values there are the same as the system values, and the flags<br />
+are passed in as-is, so you can pass in system-specific flags too<br />
+(and g_socket_receive_message() may pass system-specific flags out).<br />
+Flags passed in to the parameter affect the receive operation; flags returned<br />
 out of it are relevant to the specific returned message.</p>
-<p>As with g_socket_receive(), data may be discarded if <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> is
-%G_SOCKET_TYPE_DATAGRAM or %G_SOCKET_TYPE_SEQPACKET and you do not
-provide enough buffer space to read a complete message. You can pass
-%G_SOCKET_MSG_PEEK in <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> to peek at the current message without
-removing it from the receive queue, but there is no portable way to find
-out the length of the message other than by reading it into a
+<p>As with g_socket_receive(), data may be discarded if <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> is<br />
+%G_SOCKET_TYPE_DATAGRAM or %G_SOCKET_TYPE_SEQPACKET and you do not<br />
+provide enough buffer space to read a complete message. You can pass<br />
+%G_SOCKET_MSG_PEEK in <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> to peek at the current message without<br />
+removing it from the receive queue, but there is no portable way to find<br />
+out the length of the message other than by reading it into a<br />
 sufficiently-large buffer.</p>
-<p>If the socket is in blocking mode the call will block until there
-is some data to receive, the connection is closed, or there is an
-error. If there is no data available and the socket is in
-non-blocking mode, a %G_IO_ERROR_WOULD_BLOCK error will be
-returned. To be notified when data is available, wait for the
+<p>If the socket is in blocking mode the call will block until there<br />
+is some data to receive, the connection is closed, or there is an<br />
+error. If there is no data available and the socket is in<br />
+non-blocking mode, a %G_IO_ERROR_WOULD_BLOCK error will be<br />
+returned. To be notified when data is available, wait for the<br />
 %G_IO_IN condition.</p>
-<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.
+<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.<br />
 the peer, or -1 on error</p>
 
 
@@ -4960,7 +4963,7 @@ the peer, or -1 on error</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to a GSocket::Address
+        <div class='inline'><p>a pointer to a GSocket::Address<br />
 pointer, or nil</p>
 </div>
       
@@ -5006,7 +5009,7 @@ pointer, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer
+        <div class='inline'><p>a pointer<br />
 which may be filled with an array of GSocket::ControlMessages, or nil</p>
 </div>
       
@@ -5022,7 +5025,7 @@ which may be filled with an array of GSocket::ControlMessages, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer which will be filled with the number of
+        <div class='inline'><p>a pointer which will be filled with the number of<br />
 elements in <!-- raw HTML omitted -->messages<!-- raw HTML omitted -->, or nil</p>
 </div>
       
@@ -5038,8 +5041,8 @@ elements in <!-- raw HTML omitted -->messages<!-- raw HTML omitted -->, or nil</
       
       
         &mdash;
-        <div class='inline'><p>a pointer to an int containing GSocket::MsgFlags flags,
-which may additionally contain
+        <div class='inline'><p>a pointer to an int containing GSocket::MsgFlags flags,<br />
+which may additionally contain<br />
 <a href="http://man7.org/linux/man-pages/man2/recv.2.html">other platform specific flags</a></p>
 </div>
       
@@ -5094,44 +5097,44 @@ which may additionally contain
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Receive multiple data messages from <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> in one go.  This is the most
-complicated and fully-featured version of this call. For easier use, see
+    <p>Receive multiple data messages from <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> in one go.  This is the most<br />
+complicated and fully-featured version of this call. For easier use, see<br />
 g_socket_receive(), g_socket_receive_from(), and g_socket_receive_message().</p>
-<p><!-- raw HTML omitted -->messages<!-- raw HTML omitted --> must point to an array of GInput::Message structs and
-<!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> must be the length of this array. Each GInput::Message
-contains a pointer to an array of GInput::Vector structs describing the
-buffers that the data received in each message will be written to. Using
-multiple GInput::Vectors is more memory-efficient than manually copying data
-out of a single buffer to multiple sources, and more system-call-efficient
-than making multiple calls to g_socket_receive(), such as in scenarios where
-a lot of data packets need to be received (e.g. high-bandwidth video
+<p><!-- raw HTML omitted -->messages<!-- raw HTML omitted --> must point to an array of GInput::Message structs and<br />
+<!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> must be the length of this array. Each GInput::Message<br />
+contains a pointer to an array of GInput::Vector structs describing the<br />
+buffers that the data received in each message will be written to. Using<br />
+multiple GInput::Vectors is more memory-efficient than manually copying data<br />
+out of a single buffer to multiple sources, and more system-call-efficient<br />
+than making multiple calls to g_socket_receive(), such as in scenarios where<br />
+a lot of data packets need to be received (e.g. high-bandwidth video<br />
 streaming over RTP/UDP).</p>
-<p><!-- raw HTML omitted -->flags<!-- raw HTML omitted --> modify how all messages are received. The commonly available
-arguments for this are available in the GSocket::MsgFlags enum, but the
-values there are the same as the system values, and the flags
-are passed in as-is, so you can pass in system-specific flags too. These
-flags affect the overall receive operation. Flags affecting individual
+<p><!-- raw HTML omitted -->flags<!-- raw HTML omitted --> modify how all messages are received. The commonly available<br />
+arguments for this are available in the GSocket::MsgFlags enum, but the<br />
+values there are the same as the system values, and the flags<br />
+are passed in as-is, so you can pass in system-specific flags too. These<br />
+flags affect the overall receive operation. Flags affecting individual<br />
 messages are returned in GInput::Message.flags.</p>
-<p>The other members of GInput::Message are treated as described in its
+<p>The other members of GInput::Message are treated as described in its<br />
 documentation.</p>
-<p>If #GSocket:blocking is true the call will block until <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> have
+<p>If #GSocket:blocking is true the call will block until <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> have<br />
 been received, or the end of the stream is reached.</p>
-<p>If #GSocket:blocking is false the call will return up to <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted -->
-without blocking, or %G_IO_ERROR_WOULD_BLOCK if no messages are queued in the
+<p>If #GSocket:blocking is false the call will return up to <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --><br />
+without blocking, or %G_IO_ERROR_WOULD_BLOCK if no messages are queued in the<br />
 operating system to be received.</p>
-<p>In blocking mode, if #GSocket:timeout is positive and is reached before any
-messages are received, %G_IO_ERROR_TIMED_OUT is returned, otherwise up to
-<!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> are returned. (Note: This is effectively the
+<p>In blocking mode, if #GSocket:timeout is positive and is reached before any<br />
+messages are received, %G_IO_ERROR_TIMED_OUT is returned, otherwise up to<br />
+<!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> are returned. (Note: This is effectively the<br />
 behaviour of <code>MSG_WAITFORONE</code> with recvmmsg().)</p>
-<p>To be notified when messages are available, wait for the
-%G_IO_IN condition. Note though that you may still receive
-%G_IO_ERROR_WOULD_BLOCK from g_socket_receive_messages() even if you were
+<p>To be notified when messages are available, wait for the<br />
+%G_IO_IN condition. Note though that you may still receive<br />
+%G_IO_ERROR_WOULD_BLOCK from g_socket_receive_messages() even if you were<br />
 previously notified of a %G_IO_IN condition.</p>
-<p>If the remote peer closes the connection, any messages queued in the
-operating system will be returned, and subsequent calls to
+<p>If the remote peer closes the connection, any messages queued in the<br />
+operating system will be returned, and subsequent calls to<br />
 g_socket_receive_messages() will return 0 (with no error set).</p>
-<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly. An error will only
-be returned if zero messages could be received; otherwise the number of
+<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly. An error will only<br />
+be returned if zero messages could be received; otherwise the number of<br />
 messages successfully received before the error will be returned.</p>
 
 
@@ -5181,8 +5184,8 @@ messages successfully received before the error will be returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>an int containing GSocket::MsgFlags flags for the overall operation,
-which may additionally contain
+        <div class='inline'><p>an int containing GSocket::MsgFlags flags for the overall operation,<br />
+which may additionally contain<br />
 <a href="http://man7.org/linux/man-pages/man2/recv.2.html">other platform specific flags</a></p>
 </div>
       
@@ -5216,10 +5219,10 @@ which may additionally contain
       
       
         &mdash;
-        <div class='inline'><p>number of messages received, or -1 on error. Note that the number
-of messages received may be smaller than <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> if in non-blocking
-mode, if the peer closed the connection, or if <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted -->
-was larger than <code>UIO_MAXIOV</code> (1024), in which case the caller may re-try
+        <div class='inline'><p>number of messages received, or -1 on error. Note that the number<br />
+of messages received may be smaller than <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> if in non-blocking<br />
+mode, if the peer closed the connection, or if <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --><br />
+was larger than <code>UIO_MAXIOV</code> (1024), in which case the caller may re-try<br />
 to receive the remaining messages.</p>
 </div>
       
@@ -5241,9 +5244,9 @@ to receive the remaining messages.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This behaves exactly the same as g_socket_receive(), except that
-the choice of blocking or non-blocking behavior is determined by
-the <!-- raw HTML omitted -->blocking<!-- raw HTML omitted --> argument rather than by <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->'s properties.
+    <p>This behaves exactly the same as g_socket_receive(), except that<br />
+the choice of blocking or non-blocking behavior is determined by<br />
+the <!-- raw HTML omitted -->blocking<!-- raw HTML omitted --> argument rather than by <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->'s properties.<br />
 the peer, or -1 on error</p>
 
 
@@ -5453,18 +5456,18 @@ the peer, or -1 on error</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to send <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> on the socket. This is
-mainly used by connection-oriented sockets; it is identical to
+    <p>Tries to send <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> on the socket. This is<br />
+mainly used by connection-oriented sockets; it is identical to<br />
 g_socket_send_to() with <!-- raw HTML omitted -->address<!-- raw HTML omitted --> set to nil.</p>
-<p>If the socket is in blocking mode the call will block until there is
-space for the data in the socket queue. If there is no space available
-and the socket is in non-blocking mode a %G_IO_ERROR_WOULD_BLOCK error
-will be returned. To be notified when space is available, wait for the
-%G_IO_OUT condition. Note though that you may still receive
-%G_IO_ERROR_WOULD_BLOCK from g_socket_send() even if you were previously
-notified of a %G_IO_OUT condition. (On Windows in particular, this is
+<p>If the socket is in blocking mode the call will block until there is<br />
+space for the data in the socket queue. If there is no space available<br />
+and the socket is in non-blocking mode a %G_IO_ERROR_WOULD_BLOCK error<br />
+will be returned. To be notified when space is available, wait for the<br />
+%G_IO_OUT condition. Note though that you may still receive<br />
+%G_IO_ERROR_WOULD_BLOCK from g_socket_send() even if you were previously<br />
+notified of a %G_IO_OUT condition. (On Windows in particular, this is<br />
 very common due to the way the underlying APIs work.)</p>
-<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.
+<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.<br />
 on error</p>
 
 
@@ -5484,7 +5487,7 @@ on error</p>
       
       
         &mdash;
-        <div class='inline'><p>the buffer
+        <div class='inline'><p>the buffer<br />
 containing the data to send.</p>
 </div>
       
@@ -5554,41 +5557,41 @@ containing the data to send.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Send data to <!-- raw HTML omitted -->address<!-- raw HTML omitted --> on <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->.  For sending multiple messages see
-g_socket_send_messages(); for easier use, see
+    <p>Send data to <!-- raw HTML omitted -->address<!-- raw HTML omitted --> on <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->.  For sending multiple messages see<br />
+g_socket_send_messages(); for easier use, see<br />
 g_socket_send() and g_socket_send_to().</p>
-<p>If <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is nil then the message is sent to the default receiver
+<p>If <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is nil then the message is sent to the default receiver<br />
 (set by g_socket_connect()).</p>
-<p><!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> must point to an array of GOutput::Vector structs and
-<!-- raw HTML omitted -->num_vectors<!-- raw HTML omitted --> must be the length of this array. (If <!-- raw HTML omitted -->num_vectors<!-- raw HTML omitted --> is -1,
-then <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> is assumed to be terminated by a GOutput::Vector with a
-nil buffer pointer.) The GOutput::Vector structs describe the buffers
-that the sent data will be gathered from. Using multiple
-GOutput::Vectors is more memory-efficient than manually copying
-data from multiple sources into a single buffer, and more
+<p><!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> must point to an array of GOutput::Vector structs and<br />
+<!-- raw HTML omitted -->num_vectors<!-- raw HTML omitted --> must be the length of this array. (If <!-- raw HTML omitted -->num_vectors<!-- raw HTML omitted --> is -1,<br />
+then <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> is assumed to be terminated by a GOutput::Vector with a<br />
+nil buffer pointer.) The GOutput::Vector structs describe the buffers<br />
+that the sent data will be gathered from. Using multiple<br />
+GOutput::Vectors is more memory-efficient than manually copying<br />
+data from multiple sources into a single buffer, and more<br />
 network-efficient than making multiple calls to g_socket_send().</p>
-<p><!-- raw HTML omitted -->messages<!-- raw HTML omitted -->, if non-nil, is taken to point to an array of <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted -->
-GSocket::ControlMessage instances. These correspond to the control
-messages to be sent on the socket.
-If <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> is -1 then <!-- raw HTML omitted -->messages<!-- raw HTML omitted --> is treated as a nil-terminated
+<p><!-- raw HTML omitted -->messages<!-- raw HTML omitted -->, if non-nil, is taken to point to an array of <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --><br />
+GSocket::ControlMessage instances. These correspond to the control<br />
+messages to be sent on the socket.<br />
+If <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> is -1 then <!-- raw HTML omitted -->messages<!-- raw HTML omitted --> is treated as a nil-terminated<br />
 array.</p>
-<p><!-- raw HTML omitted -->flags<!-- raw HTML omitted --> modify how the message is sent. The commonly available arguments
-for this are available in the GSocket::MsgFlags enum, but the
-values there are the same as the system values, and the flags
+<p><!-- raw HTML omitted -->flags<!-- raw HTML omitted --> modify how the message is sent. The commonly available arguments<br />
+for this are available in the GSocket::MsgFlags enum, but the<br />
+values there are the same as the system values, and the flags<br />
 are passed in as-is, so you can pass in system-specific flags too.</p>
-<p>If the socket is in blocking mode the call will block until there is
-space for the data in the socket queue. If there is no space available
-and the socket is in non-blocking mode a %G_IO_ERROR_WOULD_BLOCK error
-will be returned. To be notified when space is available, wait for the
-%G_IO_OUT condition. Note though that you may still receive
-%G_IO_ERROR_WOULD_BLOCK from g_socket_send() even if you were previously
-notified of a %G_IO_OUT condition. (On Windows in particular, this is
+<p>If the socket is in blocking mode the call will block until there is<br />
+space for the data in the socket queue. If there is no space available<br />
+and the socket is in non-blocking mode a %G_IO_ERROR_WOULD_BLOCK error<br />
+will be returned. To be notified when space is available, wait for the<br />
+%G_IO_OUT condition. Note though that you may still receive<br />
+%G_IO_ERROR_WOULD_BLOCK from g_socket_send() even if you were previously<br />
+notified of a %G_IO_OUT condition. (On Windows in particular, this is<br />
 very common due to the way the underlying APIs work.)</p>
-<p>The sum of the sizes of each GOutput::Vector in vectors must not be
-greater than %G_MAXSSIZE. If the message can be larger than this,
-then it is mandatory to use the g_socket_send_message_with_timeout()
+<p>The sum of the sizes of each GOutput::Vector in vectors must not be<br />
+greater than %G_MAXSSIZE. If the message can be larger than this,<br />
+then it is mandatory to use the g_socket_send_message_with_timeout()<br />
 function.</p>
-<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.
+<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.<br />
 on error</p>
 
 
@@ -5653,7 +5656,7 @@ on error</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to an
+        <div class='inline'><p>a pointer to an<br />
 array of GSocket::ControlMessages, or nil.</p>
 </div>
       
@@ -5684,7 +5687,7 @@ array of GSocket::ControlMessages, or nil.</p>
       
       
         &mdash;
-        <div class='inline'><p>an int containing GSocket::MsgFlags flags, which may additionally
+        <div class='inline'><p>an int containing GSocket::MsgFlags flags, which may additionally<br />
 contain <a href="http://man7.org/linux/man-pages/man2/recv.2.html">other platform specific flags</a></p>
 </div>
       
@@ -5739,13 +5742,13 @@ contain <a href="http://man7.org/linux/man-pages/man2/recv.2.html">other platfor
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This behaves exactly the same as g_socket_send_message(), except that
-the choice of timeout behavior is determined by the <!-- raw HTML omitted -->timeout_us<!-- raw HTML omitted --> argument
+    <p>This behaves exactly the same as g_socket_send_message(), except that<br />
+the choice of timeout behavior is determined by the <!-- raw HTML omitted -->timeout_us<!-- raw HTML omitted --> argument<br />
 rather than by <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->'s properties.</p>
-<p>On error %G_POLLABLE_RETURN_FAILED is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly, or
-if the socket is currently not writable %G_POLLABLE_RETURN_WOULD_BLOCK is
-returned. <!-- raw HTML omitted -->bytes_written<!-- raw HTML omitted --> will contain 0 in both cases.
-%G_POLLABLE_RETURN_WOULD_BLOCK if the socket is currently not writable, or
+<p>On error %G_POLLABLE_RETURN_FAILED is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly, or<br />
+if the socket is currently not writable %G_POLLABLE_RETURN_WOULD_BLOCK is<br />
+returned. <!-- raw HTML omitted -->bytes_written<!-- raw HTML omitted --> will contain 0 in both cases.<br />
+%G_POLLABLE_RETURN_WOULD_BLOCK if the socket is currently not writable, or<br />
 %G_POLLABLE_RETURN_FAILED if an error happened and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set.</p>
 
 
@@ -5810,7 +5813,7 @@ returned. <!-- raw HTML omitted -->bytes_written<!-- raw HTML omitted --> will c
       
       
         &mdash;
-        <div class='inline'><p>a pointer to an
+        <div class='inline'><p>a pointer to an<br />
 array of GSocket::ControlMessages, or nil.</p>
 </div>
       
@@ -5841,7 +5844,7 @@ array of GSocket::ControlMessages, or nil.</p>
       
       
         &mdash;
-        <div class='inline'><p>an int containing GSocket::MsgFlags flags, which may additionally
+        <div class='inline'><p>an int containing GSocket::MsgFlags flags, which may additionally<br />
 contain <a href="http://man7.org/linux/man-pages/man2/recv.2.html">other platform specific flags</a></p>
 </div>
       
@@ -5926,35 +5929,35 @@ contain <a href="http://man7.org/linux/man-pages/man2/recv.2.html">other platfor
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Send multiple data messages from <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> in one go.  This is the most
-complicated and fully-featured version of this call. For easier use, see
+    <p>Send multiple data messages from <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> in one go.  This is the most<br />
+complicated and fully-featured version of this call. For easier use, see<br />
 g_socket_send(), g_socket_send_to(), and g_socket_send_message().</p>
-<p><!-- raw HTML omitted -->messages<!-- raw HTML omitted --> must point to an array of GOutput::Message structs and
-<!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> must be the length of this array. Each GOutput::Message
-contains an address to send the data to, and a pointer to an array of
-GOutput::Vector structs to describe the buffers that the data to be sent
-for each message will be gathered from. Using multiple GOutput::Vectors is
-more memory-efficient than manually copying data from multiple sources
-into a single buffer, and more network-efficient than making multiple
-calls to g_socket_send(). Sending multiple messages in one go avoids the
-overhead of making a lot of syscalls in scenarios where a lot of data
-packets need to be sent (e.g. high-bandwidth video streaming over RTP/UDP),
+<p><!-- raw HTML omitted -->messages<!-- raw HTML omitted --> must point to an array of GOutput::Message structs and<br />
+<!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> must be the length of this array. Each GOutput::Message<br />
+contains an address to send the data to, and a pointer to an array of<br />
+GOutput::Vector structs to describe the buffers that the data to be sent<br />
+for each message will be gathered from. Using multiple GOutput::Vectors is<br />
+more memory-efficient than manually copying data from multiple sources<br />
+into a single buffer, and more network-efficient than making multiple<br />
+calls to g_socket_send(). Sending multiple messages in one go avoids the<br />
+overhead of making a lot of syscalls in scenarios where a lot of data<br />
+packets need to be sent (e.g. high-bandwidth video streaming over RTP/UDP),<br />
 or where the same data needs to be sent to multiple recipients.</p>
-<p><!-- raw HTML omitted -->flags<!-- raw HTML omitted --> modify how the message is sent. The commonly available arguments
-for this are available in the GSocket::MsgFlags enum, but the
-values there are the same as the system values, and the flags
+<p><!-- raw HTML omitted -->flags<!-- raw HTML omitted --> modify how the message is sent. The commonly available arguments<br />
+for this are available in the GSocket::MsgFlags enum, but the<br />
+values there are the same as the system values, and the flags<br />
 are passed in as-is, so you can pass in system-specific flags too.</p>
-<p>If the socket is in blocking mode the call will block until there is
-space for all the data in the socket queue. If there is no space available
-and the socket is in non-blocking mode a %G_IO_ERROR_WOULD_BLOCK error
-will be returned if no data was written at all, otherwise the number of
-messages sent will be returned. To be notified when space is available,
-wait for the %G_IO_OUT condition. Note though that you may still receive
-%G_IO_ERROR_WOULD_BLOCK from g_socket_send() even if you were previously
-notified of a %G_IO_OUT condition. (On Windows in particular, this is
+<p>If the socket is in blocking mode the call will block until there is<br />
+space for all the data in the socket queue. If there is no space available<br />
+and the socket is in non-blocking mode a %G_IO_ERROR_WOULD_BLOCK error<br />
+will be returned if no data was written at all, otherwise the number of<br />
+messages sent will be returned. To be notified when space is available,<br />
+wait for the %G_IO_OUT condition. Note though that you may still receive<br />
+%G_IO_ERROR_WOULD_BLOCK from g_socket_send() even if you were previously<br />
+notified of a %G_IO_OUT condition. (On Windows in particular, this is<br />
 very common due to the way the underlying APIs work.)</p>
-<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly. An error will only
-be returned if zero messages could be sent; otherwise the number of messages
+<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly. An error will only<br />
+be returned if zero messages could be sent; otherwise the number of messages<br />
 successfully sent before the error will be returned.</p>
 
 
@@ -6004,7 +6007,7 @@ successfully sent before the error will be returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>an int containing GSocket::MsgFlags flags, which may additionally
+        <div class='inline'><p>an int containing GSocket::MsgFlags flags, which may additionally<br />
 contain <a href="http://man7.org/linux/man-pages/man2/recv.2.html">other platform specific flags</a></p>
 </div>
       
@@ -6038,9 +6041,9 @@ contain <a href="http://man7.org/linux/man-pages/man2/recv.2.html">other platfor
       
       
         &mdash;
-        <div class='inline'><p>number of messages sent, or -1 on error. Note that the number of
-messages sent may be smaller than <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> if the socket is
-non-blocking or if <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> was larger than UIO_MAXIOV (1024),
+        <div class='inline'><p>number of messages sent, or -1 on error. Note that the number of<br />
+messages sent may be smaller than <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> if the socket is<br />
+non-blocking or if <!-- raw HTML omitted -->num_messages<!-- raw HTML omitted --> was larger than UIO_MAXIOV (1024),<br />
 in which case the caller may re-try to send the remaining messages.</p>
 </div>
       
@@ -6062,10 +6065,10 @@ in which case the caller may re-try to send the remaining messages.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to send <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> to <!-- raw HTML omitted -->address<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is
-nil then the message is sent to the default receiver (set by
+    <p>Tries to send <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes from <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> to <!-- raw HTML omitted -->address<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is<br />
+nil then the message is sent to the default receiver (set by<br />
 g_socket_connect()).</p>
-<p>See g_socket_send() for additional information.
+<p>See g_socket_send() for additional information.<br />
 on error</p>
 
 
@@ -6100,7 +6103,7 @@ on error</p>
       
       
         &mdash;
-        <div class='inline'><p>the buffer
+        <div class='inline'><p>the buffer<br />
 containing the data to send.</p>
 </div>
       
@@ -6170,9 +6173,9 @@ containing the data to send.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This behaves exactly the same as g_socket_send(), except that
-the choice of blocking or non-blocking behavior is determined by
-the <!-- raw HTML omitted -->blocking<!-- raw HTML omitted --> argument rather than by <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->'s properties.
+    <p>This behaves exactly the same as g_socket_send(), except that<br />
+the choice of blocking or non-blocking behavior is determined by<br />
+the <!-- raw HTML omitted -->blocking<!-- raw HTML omitted --> argument rather than by <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->'s properties.<br />
 on error</p>
 
 
@@ -6192,7 +6195,7 @@ on error</p>
       
       
         &mdash;
-        <div class='inline'><p>the buffer
+        <div class='inline'><p>the buffer<br />
 containing the data to send.</p>
 </div>
       
@@ -6277,13 +6280,13 @@ containing the data to send.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the value of an integer-valued option on <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->, as with
-setsockopt(). (If you need to set a non-integer-valued option,
+    <p>Sets the value of an integer-valued option on <!-- raw HTML omitted -->socket<!-- raw HTML omitted -->, as with<br />
+setsockopt(). (If you need to set a non-integer-valued option,<br />
 you will need to call setsockopt() directly.)</p>
-<p>The [&lt;gio/gnetworking.h&gt;][gio-gnetworking.h]
-header pulls in system headers that will define most of the
-standard/portable socket options. For unusual socket protocols or
-platform-dependent options, you may need to include additional
+<p>The [&lt;gio/gnetworking.h&gt;][gio-gnetworking.h]<br />
+header pulls in system headers that will define most of the<br />
+standard/portable socket options. For unusual socket protocols or<br />
+platform-dependent options, you may need to include additional<br />
 headers.</p>
 
 
@@ -6351,8 +6354,8 @@ headers.</p>
       
       
         &mdash;
-        <div class='inline'><p>success or failure. On failure, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set, and
-the system error value (<code>errno</code> or WSAGetLastError()) will still
+        <div class='inline'><p>success or failure. On failure, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set, and<br />
+the system error value (<code>errno</code> or WSAGetLastError()) will still<br />
 be set to the result of the setsockopt() call.</p>
 </div>
       
@@ -6375,14 +6378,14 @@ be set to the result of the setsockopt() call.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Shut down part or all of a full-duplex connection.</p>
-<p>If <!-- raw HTML omitted -->shutdown_read<!-- raw HTML omitted --> is true then the receiving side of the connection
+<p>If <!-- raw HTML omitted -->shutdown_read<!-- raw HTML omitted --> is true then the receiving side of the connection<br />
 is shut down, and further reading is disallowed.</p>
-<p>If <!-- raw HTML omitted -->shutdown_write<!-- raw HTML omitted --> is true then the sending side of the connection
+<p>If <!-- raw HTML omitted -->shutdown_write<!-- raw HTML omitted --> is true then the sending side of the connection<br />
 is shut down, and further writing is disallowed.</p>
 <p>It is allowed for both <!-- raw HTML omitted -->shutdown_read<!-- raw HTML omitted --> and <!-- raw HTML omitted -->shutdown_write<!-- raw HTML omitted --> to be true.</p>
-<p>One example where it is useful to shut down only one side of a connection is
-graceful disconnect for TCP connections where you close the sending side,
-then wait for the other side to close the connection, thus ensuring that the
+<p>One example where it is useful to shut down only one side of a connection is<br />
+graceful disconnect for TCP connections where you close the sending side,<br />
+then wait for the other side to close the connection, thus ensuring that the<br />
 other side saw all sent data.</p>
 
 
@@ -6496,11 +6499,11 @@ other side saw all sent data.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if a socket is capable of speaking IPv4.</p>
-<p>IPv4 sockets are capable of speaking IPv4.  On some operating systems
-and under some combinations of circumstances IPv6 sockets are also
-capable of speaking IPv4.  See RFC 3493 section 3.7 for more
+<p>IPv4 sockets are capable of speaking IPv4.  On some operating systems<br />
+and under some combinations of circumstances IPv6 sockets are also<br />
+capable of speaking IPv4.  See RFC 3493 section 3.7 for more<br />
 information.</p>
-<p>No other types of sockets are currently considered as being capable
+<p>No other types of sockets are currently considered as being capable<br />
 of speaking IPv4.</p>
 
 
@@ -6854,7 +6857,7 @@ of speaking IPv4.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Handy::Flap";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -970,6 +972,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1017,7 +1020,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>The content widget.</p>
-<p>It's always displayed when unfolded, and partially visible
+<p>It's always displayed when unfolded, and partially visible<br />
 when folded.</p>
 
 
@@ -1058,7 +1061,7 @@ when folded.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The content widget.</p>
-<p>It's always displayed when unfolded, and partially visible
+<p>It's always displayed when unfolded, and partially visible<br />
 when folded.</p>
 
 
@@ -1235,7 +1238,7 @@ when folded.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The flap position.</p>
-<p>If <code>GTK_PACK_START</code>, the flap is displayed before the content, if
+<p>If <code>GTK_PACK_START</code>, the flap is displayed before the content, if<br />
 <code>GTK_PACK_END</code>, it's displayed after the content.</p>
 
 
@@ -1276,7 +1279,7 @@ when folded.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The flap position.</p>
-<p>If <code>GTK_PACK_START</code>, the flap is displayed before the content, if
+<p>If <code>GTK_PACK_START</code>, the flap is displayed before the content, if<br />
 <code>GTK_PACK_END</code>, it's displayed after the content.</p>
 
 
@@ -1745,8 +1748,8 @@ when folded.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the flap is locked.</p>
-<p>If <code>FALSE</code>, folding when the flap is revealed automatically closes it, and
-unfolding it when the flap is not revealed opens it. If <code>TRUE</code>,
+<p>If <code>FALSE</code>, folding when the flap is revealed automatically closes it, and<br />
+unfolding it when the flap is not revealed opens it. If <code>TRUE</code>,<br />
 [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:reveal-flap] value never changes on its own.</p>
 
 
@@ -1815,8 +1818,8 @@ unfolding it when the flap is not revealed opens it. If <code>TRUE</code>,
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the flap is locked.</p>
-<p>If <code>FALSE</code>, folding when the flap is revealed automatically closes it, and
-unfolding it when the flap is not revealed opens it. If <code>TRUE</code>,
+<p>If <code>FALSE</code>, folding when the flap is revealed automatically closes it, and<br />
+unfolding it when the flap is not revealed opens it. If <code>TRUE</code>,<br />
 [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:reveal-flap] value never changes on its own.</p>
 
 
@@ -1896,8 +1899,8 @@ unfolding it when the flap is not revealed opens it. If <code>TRUE</code>,
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the flap is modal.</p>
-<p>If <code>TRUE</code>, clicking the content widget while flap is revealed, as well as
-pressing the <!-- raw HTML omitted -->Esc<!-- raw HTML omitted --> key, will close the flap. If <code>FALSE</code>, clicks
+<p>If <code>TRUE</code>, clicking the content widget while flap is revealed, as well as<br />
+pressing the <!-- raw HTML omitted -->Esc<!-- raw HTML omitted --> key, will close the flap. If <code>FALSE</code>, clicks<br />
 are passed through to the content widget.</p>
 
 
@@ -1966,8 +1969,8 @@ are passed through to the content widget.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the flap is modal.</p>
-<p>If <code>TRUE</code>, clicking the content widget while flap is revealed, as well as
-pressing the <!-- raw HTML omitted -->Esc<!-- raw HTML omitted --> key, will close the flap. If <code>FALSE</code>, clicks
+<p>If <code>TRUE</code>, clicking the content widget while flap is revealed, as well as<br />
+pressing the <!-- raw HTML omitted -->Esc<!-- raw HTML omitted --> key, will close the flap. If <code>FALSE</code>, clicks<br />
 are passed through to the content widget.</p>
 
 
@@ -2259,7 +2262,7 @@ are passed through to the content widget.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The current reveal transition progress.</p>
-<p>0 means fully hidden, 1 means fully revealed. See
+<p>0 means fully hidden, 1 means fully revealed. See<br />
 [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:reveal-flap].</p>
 
 
@@ -2300,7 +2303,7 @@ are passed through to the content widget.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The current reveal transition progress.</p>
-<p>0 means fully hidden, 1 means fully revealed. See
+<p>0 means fully hidden, 1 means fully revealed. See<br />
 [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:reveal-flap].</p>
 
 
@@ -2369,8 +2372,8 @@ are passed through to the content widget.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The separator widget.</p>
-<p>It's displayed between content and flap when there's no shadow to display.
-When exactly it's visible depends on the [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:transition-type]
+<p>It's displayed between content and flap when there's no shadow to display.<br />
+When exactly it's visible depends on the [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:transition-type]<br />
 value. If <code>NULL</code>, no separator will be used.</p>
 
 
@@ -2411,8 +2414,8 @@ value. If <code>NULL</code>, no separator will be used.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The separator widget.</p>
-<p>It's displayed between content and flap when there's no shadow to display.
-When exactly it's visible depends on the [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:transition-type]
+<p>It's displayed between content and flap when there's no shadow to display.<br />
+When exactly it's visible depends on the [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:transition-type]<br />
 value. If <code>NULL</code>, no separator will be used.</p>
 
 
@@ -2520,7 +2523,7 @@ value. If <code>NULL</code>, no separator will be used.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the flap can be closed with a swipe gesture.</p>
-<p>The area that can be swiped depends on the [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:transition-type]
+<p>The area that can be swiped depends on the [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:transition-type]<br />
 value.</p>
 
 
@@ -2589,7 +2592,7 @@ value.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the flap can be closed with a swipe gesture.</p>
-<p>The area that can be swiped depends on the [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:transition-type]
+<p>The area that can be swiped depends on the [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:transition-type]<br />
 value.</p>
 
 
@@ -2669,7 +2672,7 @@ value.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the flap can be opened with a swipe gesture.</p>
-<p>The area that can be swiped depends on the [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:transition-type]
+<p>The area that can be swiped depends on the [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:transition-type]<br />
 value.</p>
 
 
@@ -2738,7 +2741,7 @@ value.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the flap can be opened with a swipe gesture.</p>
-<p>The area that can be swiped depends on the [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:transition-type]
+<p>The area that can be swiped depends on the [property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:transition-type]<br />
 value.</p>
 
 
@@ -2779,8 +2782,8 @@ value.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>the type of animation used for reveal and fold transitions.</p>
-<p>[property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:flap] is transparent by default, which means the content
-will be seen through it with <code>HDY_FLAP_TRANSITION_TYPE_OVER</code> transitions;
+<p>[property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:flap] is transparent by default, which means the content<br />
+will be seen through it with <code>HDY_FLAP_TRANSITION_TYPE_OVER</code> transitions;<br />
 add the <code>.background</code> style class to it if this is unwanted.</p>
 
 
@@ -2821,8 +2824,8 @@ add the <code>.background</code> style class to it if this is unwanted.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>the type of animation used for reveal and fold transitions.</p>
-<p>[property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:flap] is transparent by default, which means the content
-will be seen through it with <code>HDY_FLAP_TRANSITION_TYPE_OVER</code> transitions;
+<p>[property<!-- raw HTML omitted -->Flap<!-- raw HTML omitted -->:flap] is transparent by default, which means the content<br />
+will be seen through it with <code>HDY_FLAP_TRANSITION_TYPE_OVER</code> transitions;<br />
 add the <code>.background</code> style class to it if this is unwanted.</p>
 
 
@@ -2886,7 +2889,7 @@ add the <code>.background</code> style class to it if this is unwanted.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

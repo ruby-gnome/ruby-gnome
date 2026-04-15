@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "ClutterGst::VideoSink";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -301,6 +303,7 @@
 
       
     </ul>
+    
   
 
 
@@ -347,8 +350,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a Clutter::GstFrame object suitable to render the current
-frame of the given video sink. An application is free to make a
+    <p>Returns a Clutter::GstFrame object suitable to render the current<br />
+frame of the given video sink. An application is free to make a<br />
 copy of this pipeline and modify it for custom rendering.</p>
 
 
@@ -367,7 +370,7 @@ copy of this pipeline and modify it for custom rendering.</p>
       
       
         &mdash;
-        <div class='inline'><p>A Clutter::GstFrame or NULL if there
+        <div class='inline'><p>A Clutter::GstFrame or NULL if there<br />
 isn't a frame to be displayed yet.</p>
 </div>
       
@@ -389,13 +392,13 @@ isn't a frame to be displayed yet.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the pipeline is ready and so
-clutter_gst_video_sink_get_pipeline() and
+    <p>Returns whether the pipeline is ready and so<br />
+clutter_gst_video_sink_get_pipeline() and<br />
 clutter_gst_video_sink_setup_pipeline() can be called without causing error.</p>
-<p>Note: Normally an application will wait until the
-Clutter::GstVideoSink::pipeline-ready signal is emitted instead of
-polling the ready status with this api, but sometimes when a sink
-is passed between components that didn't have an opportunity to
+<p>Note: Normally an application will wait until the<br />
+Clutter::GstVideoSink::pipeline-ready signal is emitted instead of<br />
+polling the ready status with this api, but sometimes when a sink<br />
+is passed between components that didn't have an opportunity to<br />
 connect a signal handler this can be useful.</p>
 
 
@@ -469,15 +472,15 @@ connect a signal handler this can be useful.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a pipeline suitable for rendering the current frame of the
-given video sink. The pipeline will already have the textures for
-the frame attached. For simple rendering, an application will
-typically call this function immediately before it paints the
-video. It can then just paint a rectangle using the returned
+    <p>Returns a pipeline suitable for rendering the current frame of the<br />
+given video sink. The pipeline will already have the textures for<br />
+the frame attached. For simple rendering, an application will<br />
+typically call this function immediately before it paints the<br />
+video. It can then just paint a rectangle using the returned<br />
 pipeline.</p>
-<p>An application is free to make a copy of this
+<p>An application is free to make a copy of this<br />
 pipeline and modify it for custom rendering.</p>
-<p>Note: it is considered an error to call this function before the
+<p>Note: it is considered an error to call this function before the<br />
 Clutter::GstVideoSink::pipeline-ready signal is emitted.</p>
 
 
@@ -496,7 +499,7 @@ Clutter::GstVideoSink::pipeline-ready signal is emitted.</p>
       
       
         &mdash;
-        <div class='inline'><p>the pipeline for rendering the
+        <div class='inline'><p>the pipeline for rendering the<br />
 current frame</p>
 </div>
       
@@ -518,12 +521,12 @@ current frame</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Configures the given pipeline so that will be able to render the
-video for the <!-- raw HTML omitted -->sink<!-- raw HTML omitted -->. This should only be used if the application
-wants to perform some custom rendering using its own pipeline.
-Typically an application will call this in response to the
+    <p>Configures the given pipeline so that will be able to render the<br />
+video for the <!-- raw HTML omitted -->sink<!-- raw HTML omitted -->. This should only be used if the application<br />
+wants to perform some custom rendering using its own pipeline.<br />
+Typically an application will call this in response to the<br />
 Clutter::GstVideoSink::pipeline-ready signal.</p>
-<p>Note: it is considered an error to call this function before the
+<p>Note: it is considered an error to call this function before the<br />
 Clutter::GstVideoSink::pipeline-ready signal is emitted.</p>
 
 
@@ -679,7 +682,7 @@ Clutter::GstVideoSink::pipeline-ready signal is emitted.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

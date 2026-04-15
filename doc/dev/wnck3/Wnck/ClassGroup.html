@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Wnck::ClassGroup";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -138,6 +140,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -285,6 +288,7 @@
 
       
     </ul>
+    
   
 
 
@@ -304,9 +308,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Wnck::ClassGroup corresponding to <!-- raw HTML omitted -->id<!-- raw HTML omitted -->.
-<!-- raw HTML omitted -->id<!-- raw HTML omitted -->, or nil if there is no Wnck::ClassGroup with the specified
-<!-- raw HTML omitted -->id<!-- raw HTML omitted -->. The returned Wnck::ClassGroup is owned by libwnck and must not be
+    <p>Gets the Wnck::ClassGroup corresponding to <!-- raw HTML omitted -->id<!-- raw HTML omitted -->.<br />
+<!-- raw HTML omitted -->id<!-- raw HTML omitted -->, or nil if there is no Wnck::ClassGroup with the specified<br />
+<!-- raw HTML omitted -->id<!-- raw HTML omitted -->. The returned Wnck::ClassGroup is owned by libwnck and must not be<br />
 referenced or unreferenced.</p>
 
 
@@ -371,12 +375,12 @@ referenced or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the icon to be used for <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->. Since there is no way to
-properly find the icon, a suboptimal heuristic is used to find it. The icon
-is the first icon found by looking at all the Wnck::Application for each
-Wnck::Window in <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->, then at all the #WnckWindow in <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->. If
-no icon was found, a fallback icon is used.
-reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs to keep
+    <p>Gets the icon to be used for <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->. Since there is no way to<br />
+properly find the icon, a suboptimal heuristic is used to find it. The icon<br />
+is the first icon found by looking at all the Wnck::Application for each<br />
+Wnck::Window in <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->, then at all the #WnckWindow in <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->. If<br />
+no icon was found, a fallback icon is used.<br />
+reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs to keep<br />
 the icon around.</p>
 
 
@@ -416,8 +420,8 @@ the icon around.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the identifier name for <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->. This is the resource class for
-<!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->.
+    <p>Gets the identifier name for <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->. This is the resource class for<br />
+<!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->.<br />
 empty string if the group has no identifier name.</p>
 
 
@@ -457,10 +461,10 @@ empty string if the group has no identifier name.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the mini-icon to be used for <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->. Since there is no way to
-properly find the mini-icon, the same suboptimal heuristic as the one for
-wnck_class_group_get_icon() is used to find it.
-should reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs
+    <p>Gets the mini-icon to be used for <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->. Since there is no way to<br />
+properly find the mini-icon, the same suboptimal heuristic as the one for<br />
+wnck_class_group_get_icon() is used to find it.<br />
+should reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs<br />
 to keep the mini-icon around.</p>
 
 
@@ -500,12 +504,12 @@ to keep the mini-icon around.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets an human-readable name for <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->. Since there is no way to
-properly find this name, a suboptimal heuristic is used to find it. The name
-is the name of all Wnck::Application for each #WnckWindow in <!-- raw HTML omitted -->class_group<!-- raw HTML omitted --> if
-they all have the same name. If all Wnck::Application don't have the same
-name, the name is the name of all Wnck::Window in <!-- raw HTML omitted -->class_group<!-- raw HTML omitted --> if they all
-have the same name. If all Wnck::Window don't have the same name, the
+    <p>Gets an human-readable name for <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->. Since there is no way to<br />
+properly find this name, a suboptimal heuristic is used to find it. The name<br />
+is the name of all Wnck::Application for each #WnckWindow in <!-- raw HTML omitted -->class_group<!-- raw HTML omitted --> if<br />
+they all have the same name. If all Wnck::Application don't have the same<br />
+name, the name is the name of all Wnck::Window in <!-- raw HTML omitted -->class_group<!-- raw HTML omitted --> if they all<br />
+have the same name. If all Wnck::Window don't have the same name, the<br />
 resource class name is used.</p>
 
 
@@ -545,7 +549,7 @@ resource class name is used.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the resource class name for <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->.
+    <p>Gets the resource class name for <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->.<br />
 empty string if the group has no resource class name.</p>
 
 
@@ -585,9 +589,9 @@ empty string if the group has no resource class name.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the list of Wnck::Window that are grouped in <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->.
-Wnck::Window grouped in <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->, or nil if the group contains no
-window. The list should not be modified nor freed, as it is owned by
+    <p>Gets the list of Wnck::Window that are grouped in <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->.<br />
+Wnck::Window grouped in <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->, or nil if the group contains no<br />
+window. The list should not be modified nor freed, as it is owned by<br />
 <!-- raw HTML omitted -->class_group<!-- raw HTML omitted -->.</p>
 
 
@@ -623,7 +627,7 @@ window. The list should not be modified nor freed, as it is owned by
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::InfoBar";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -107,18 +109,18 @@
   <div class="discussion">
     <p><code>GtkInfoBar</code> can be used to show messages to the user without a dialog.</p>
 <p><img src="info-bar.png" alt="An example GtkInfoBar" /></p>
-<p>It is often temporarily shown at the top or bottom of a document.
-In contrast to [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog], which has an action area at the
+<p>It is often temporarily shown at the top or bottom of a document.<br />
+In contrast to [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog], which has an action area at the<br />
 bottom, <code>GtkInfoBar</code> has an action area at the side.</p>
-<p>The API of <code>GtkInfoBar</code> is very similar to <code>GtkDialog</code>, allowing you
-to add buttons to the action area with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar.add_button]
-or [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar.new_with_buttons]. The sensitivity of action widgets
+<p>The API of <code>GtkInfoBar</code> is very similar to <code>GtkDialog</code>, allowing you<br />
+to add buttons to the action area with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar.add_button]<br />
+or [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar.new_with_buttons]. The sensitivity of action widgets<br />
 can be controlled with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar.set_response_sensitive].</p>
-<p>To add widgets to the main content area of a <code>GtkInfoBar</code>, use
+<p>To add widgets to the main content area of a <code>GtkInfoBar</code>, use<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar.add_child].</p>
-<p>Similar to [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MessageDialog], the contents of a <code>GtkInfoBar</code>
-can by classified as error message, warning, informational message, etc,
-by using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar.set_message_type]. GTK may use the message
+<p>Similar to [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MessageDialog], the contents of a <code>GtkInfoBar</code><br />
+can by classified as error message, warning, informational message, etc,<br />
+by using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar.set_message_type]. GTK may use the message<br />
 type to determine how the message is displayed.</p>
 <p>A simple example for using a <code>GtkInfoBar</code>:</p>
 <pre class="code c"><code class="c">GtkWidget *message_label;
@@ -151,20 +153,20 @@ gtk_label_set_text (GTK_LABEL (message_label), &quot;An error occurred!&quot;);
 gtk_info_bar_set_message_type (bar, GTK_MESSAGE_ERROR);
 gtk_widget_show (bar);
 </code></pre>
-<h1>GtkInfoBar as GtkBuildable</h1>
-<p><code>GtkInfoBar</code> supports a custom <code>&lt;action-widgets&gt;</code> element, which can contain
-multiple <code>&lt;action-widget&gt;</code> elements. The “response” attribute specifies a
-numeric response, and the content of the element is the id of widget
+<h1><a href="#gtkinfobar-as-gtkbuildable" aria-hidden="true" class="anchor" id="gtkinfobar-as-gtkbuildable"></a>GtkInfoBar as GtkBuildable</h1>
+<p><code>GtkInfoBar</code> supports a custom <code>&lt;action-widgets&gt;</code> element, which can contain<br />
+multiple <code>&lt;action-widget&gt;</code> elements. The “response” attribute specifies a<br />
+numeric response, and the content of the element is the id of widget<br />
 (which should be a child of the dialogs <!-- raw HTML omitted -->action_area<!-- raw HTML omitted -->).</p>
-<p><code>GtkInfoBar</code> supports adding action widgets by specifying “action” as
-the “type” attribute of a <code>&lt;child&gt;</code> element. The widget will be added
-either to the action area. The response id has to be associated
+<p><code>GtkInfoBar</code> supports adding action widgets by specifying “action” as<br />
+the “type” attribute of a <code>&lt;child&gt;</code> element. The widget will be added<br />
+either to the action area. The response id has to be associated<br />
 with the action widget using the <code>&lt;action-widgets&gt;</code> element.</p>
-<h1>CSS nodes</h1>
-<p><code>GtkInfoBar</code> has a single CSS node with name infobar. The node may get
-one of the style classes .info, .warning, .error or .question, depending
-on the message type.
-If the info bar shows a close button, that button will have the .close
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
+<p><code>GtkInfoBar</code> has a single CSS node with name infobar. The node may get<br />
+one of the style classes .info, .warning, .error or .question, depending<br />
+on the message type.<br />
+If the info bar shows a close button, that button will have the .close<br />
 style class applied.</p>
 
 
@@ -605,9 +607,11 @@ style class applied.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -634,11 +638,11 @@ style class applied.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkInfoBar</code> with buttons.</p>
-<p>Button text/response ID pairs should be listed, with a nil pointer
-ending the list. A response ID can be any positive number,
-or one of the values in the <code>GtkResponseType</code> enumeration. If the
-user clicks one of these dialog buttons, GtkInfoBar will emit
-the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar::response] signal with the corresponding
+<p>Button text/response ID pairs should be listed, with a nil pointer<br />
+ending the list. A response ID can be any positive number,<br />
+or one of the values in the <code>GtkResponseType</code> enumeration. If the<br />
+user clicks one of these dialog buttons, GtkInfoBar will emit<br />
+the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar::response] signal with the corresponding<br />
 response ID.</p>
 
 
@@ -673,7 +677,7 @@ response ID.</p>
       
       
         &mdash;
-        <div class='inline'><p>response ID for first button, then additional buttons, ending
+        <div class='inline'><p>response ID for first button, then additional buttons, ending<br />
 with nil</p>
 </div>
       
@@ -704,9 +708,9 @@ with nil</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Add an activatable widget to the action area of a <code>GtkInfoBar</code>.</p>
-<p>This also connects a signal handler that will emit the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar::response] signal on the message area
-when the widget is activated. The widget is appended to the
+<p>This also connects a signal handler that will emit the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar::response] signal on the message area<br />
+when the widget is activated. The widget is appended to the<br />
 end of the message areas action area.</p>
 
 
@@ -777,10 +781,10 @@ end of the message areas action area.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a button with the given text.</p>
-<p>Clicking the button will emit the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar::response]
-signal with the given response_id. The button is appended to the
-end of the info bar's action area. The button widget is returned,
-but usually you don't need it.
+<p>Clicking the button will emit the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar::response]<br />
+signal with the given response_id. The button is appended to the<br />
+end of the info bar's action area. The button widget is returned,<br />
+but usually you don't need it.<br />
 that was added</p>
 
 
@@ -855,9 +859,9 @@ that was added</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds multiple buttons.</p>
-<p>This is the same as calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar.add_button]
-repeatedly. The variable argument list should be nil-terminated
-as with [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar.new_with_buttons]. Each button must have both
+<p>This is the same as calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar.add_button]<br />
+repeatedly. The variable argument list should be nil-terminated<br />
+as with [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar.new_with_buttons]. Each button must have both<br />
 text and response ID.</p>
 
 
@@ -892,7 +896,7 @@ text and response ID.</p>
       
       
         &mdash;
-        <div class='inline'><p>response ID for first button, then more text-response_id pairs,
+        <div class='inline'><p>response ID for first button, then more text-response_id pairs,<br />
 ending with nil</p>
 </div>
       
@@ -982,10 +986,10 @@ ending with nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the last widget in the info bar’s action area with
+    <p>Sets the last widget in the info bar’s action area with<br />
 the given response_id as the default widget for the dialog.</p>
 <p>Pressing “Enter” normally activates the default widget.</p>
-<p>Note that this function currently requires <!-- raw HTML omitted -->info_bar<!-- raw HTML omitted --> to
+<p>Note that this function currently requires <!-- raw HTML omitted -->info_bar<!-- raw HTML omitted --> to<br />
 be added to a widget hierarchy.</p>
 
 
@@ -1149,7 +1153,7 @@ be added to a widget hierarchy.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Removes a widget from the action area of <!-- raw HTML omitted -->info_bar<!-- raw HTML omitted -->.</p>
-<p>The widget must have been put there by a call to
+<p>The widget must have been put there by a call to<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar.add_action_widget] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.InfoBar.add_button].</p>
 
 
@@ -1458,8 +1462,8 @@ be added to a widget hierarchy.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the sensitivity of action widgets for <!-- raw HTML omitted -->response_id<!-- raw HTML omitted -->.</p>
-<p>Calls <code>gtk_widget_set_sensitive (widget, setting)</code> for each
-widget in the info bars’s action area with the given <!-- raw HTML omitted -->response_id<!-- raw HTML omitted -->.
+<p>Calls <code>gtk_widget_set_sensitive (widget, setting)</code> for each<br />
+widget in the info bars’s action area with the given <!-- raw HTML omitted -->response_id<!-- raw HTML omitted -->.<br />
 A convenient way to sensitize/desensitize buttons.</p>
 
 
@@ -1670,7 +1674,7 @@ A convenient way to sensitize/desensitize buttons.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Texture";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -1044,9 +1046,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -1072,9 +1076,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new ClutterTexture actor to display the image contained a
-file. If the image failed to load then NULL is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
-is set.
+    <p>Creates a new ClutterTexture actor to display the image contained a<br />
+file. If the image failed to load then NULL is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --><br />
+is set.<br />
 error.</p>
 
 
@@ -1438,9 +1442,9 @@ error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The path of the file containing the image data to be displayed by
+    <p>The path of the file containing the image data to be displayed by<br />
 the texture.</p>
-<p>This property is unset when using the clutter_texture_set_from_*_data()
+<p>This property is unset when using the clutter_texture_set_from_*_data()<br />
 family of functions.</p>
 
 
@@ -1480,9 +1484,9 @@ family of functions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The path of the file containing the image data to be displayed by
+    <p>The path of the file containing the image data to be displayed by<br />
 the texture.</p>
-<p>This property is unset when using the clutter_texture_set_from_*_data()
+<p>This property is unset when using the clutter_texture_set_from_*_data()<br />
 family of functions.</p>
 
 
@@ -1655,13 +1659,13 @@ family of functions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the Clutter::Texture image data from an image file. In case of
+    <p>Sets the Clutter::Texture image data from an image file. In case of<br />
 failure, false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set.</p>
-<p>If Clutter::Texture:load-async is set to true, this function
-will return as soon as possible, and the actual image loading
-from disk will be performed asynchronously. Clutter::Texture::size-change
-will be emitten when the size of the texture is available and
-Clutter::Texture::load-finished will be emitted when the image has been
+<p>If Clutter::Texture:load-async is set to true, this function<br />
+will return as soon as possible, and the actual image loading<br />
+from disk will be performed asynchronously. Clutter::Texture::size-change<br />
+will be emitten when the size of the texture is available and<br />
+Clutter::Texture::load-finished will be emitted when the image has been<br />
 loaded or if an error occurred.</p>
 
 
@@ -1789,7 +1793,7 @@ loaded or if an error occurred.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the horizontal and vertical repeat values set
+    <p>Retrieves the horizontal and vertical repeat values set<br />
 using clutter_texture_set_repeat()</p>
 
 
@@ -1877,7 +1881,7 @@ using clutter_texture_set_repeat()</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the Clutter::Texture should maintain the
+        <div class='inline'><p>true if the Clutter::Texture should maintain the<br />
 aspect ratio of the underlying image</p>
 </div>
       
@@ -2022,7 +2026,7 @@ aspect ratio of the underlying image</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the Clutter::Texture should load the data from
+        <div class='inline'><p>true if the Clutter::Texture should load the data from<br />
 disk asynchronously</p>
 </div>
       
@@ -2044,16 +2048,16 @@ disk asynchronously</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tries to load a texture from a filename by using a local thread to perform
-the read operations. The initially created texture has dimensions 0x0 when
-the true size becomes available the Clutter::Texture::size-change signal is
-emitted and when the image has completed loading the
+    <p>Tries to load a texture from a filename by using a local thread to perform<br />
+the read operations. The initially created texture has dimensions 0x0 when<br />
+the true size becomes available the Clutter::Texture::size-change signal is<br />
+emitted and when the image has completed loading the<br />
 Clutter::Texture::load-finished signal is emitted.</p>
-<p>Threading is only enabled if g_thread_init() has been called prior to
-clutter_init(), otherwise Clutter::Texture will use the main loop to load
+<p>Threading is only enabled if g_thread_init() has been called prior to<br />
+clutter_init(), otherwise Clutter::Texture will use the main loop to load<br />
 the image.</p>
-<p>The upload of the texture data on the GL pipeline is not asynchronous, as
-it must be performed from within the same thread that called
+<p>The upload of the texture data on the GL pipeline is not asynchronous, as<br />
+it must be performed from within the same thread that called<br />
 clutter_main().</p>
 
 
@@ -2126,7 +2130,7 @@ clutter_main().</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the Clutter::Texture should load the image
+        <div class='inline'><p>true if the Clutter::Texture should load the image<br />
 data from a file asynchronously</p>
 </div>
       
@@ -2148,7 +2152,7 @@ data from a file asynchronously</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like Clutter::Texture:load-async but loads the width and height
+    <p>Like Clutter::Texture:load-async but loads the width and height<br />
 synchronously causing some blocking.</p>
 
 
@@ -2203,7 +2207,7 @@ synchronously causing some blocking.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the maximum waste that will be used when creating a texture or
+    <p>Gets the maximum waste that will be used when creating a texture or<br />
 -1 if slicing is disabled.</p>
 
 
@@ -2222,7 +2226,7 @@ synchronously causing some blocking.</p>
       
       
         &mdash;
-        <div class='inline'><p>The maximum waste or -1 if the texture waste is
+        <div class='inline'><p>The maximum waste or -1 if the texture waste is<br />
 unlimited.</p>
 </div>
       
@@ -2244,7 +2248,7 @@ unlimited.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the value set by clutter_texture_set_load_data_async()
+    <p>Retrieves the value set by clutter_texture_set_load_data_async()<br />
 using the alpha channel when picking.</p>
 
 
@@ -2828,7 +2832,7 @@ using the alpha channel when picking.</p>
       
       
         &mdash;
-        <div class='inline'><p>bytes per pixel (Currently only 3 and 4 supported,
+        <div class='inline'><p>bytes per pixel (Currently only 3 and 4 supported,<br />
 depending on <!-- raw HTML omitted -->has_alpha<!-- raw HTML omitted -->)</p>
 </div>
       
@@ -2977,7 +2981,7 @@ depending on <!-- raw HTML omitted -->has_alpha<!-- raw HTML omitted -->)</p>
       
       
         &mdash;
-        <div class='inline'><p>bytes per pixel (currently only 3 and 4 supported, depending
+        <div class='inline'><p>bytes per pixel (currently only 3 and 4 supported, depending<br />
 on the value of <!-- raw HTML omitted -->has_alpha<!-- raw HTML omitted -->)</p>
 </div>
       
@@ -3032,12 +3036,12 @@ on the value of <!-- raw HTML omitted -->has_alpha<!-- raw HTML omitted -->)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a Clutter::Texture from YUV image data. If an error occurred,
+    <p>Sets a Clutter::Texture from YUV image data. If an error occurred,<br />
 false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set.</p>
-<p>The YUV support depends on the driver; the format supported by the
+<p>The YUV support depends on the driver; the format supported by the<br />
 few drivers exposing this capability are not really useful.</p>
-<p>The proper way to convert image data in any YUV colorspace to any
-RGB colorspace is to use a fragment shader associated with the
+<p>The proper way to convert image data in any YUV colorspace to any<br />
+RGB colorspace is to use a fragment shader associated with the<br />
 Clutter::Texture material.</p>
 
 
@@ -3141,7 +3145,7 @@ Clutter::Texture material.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether the <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> should repeat horizontally or
+    <p>Sets whether the <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> should repeat horizontally or<br />
 vertically when the actor size is bigger than the image size</p>
 
 
@@ -3229,7 +3233,7 @@ vertically when the actor size is bigger than the image size</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the Clutter::Texture should have the same
+        <div class='inline'><p>true if the Clutter::Texture should have the same<br />
 preferred size of the underlying image data</p>
 </div>
       
@@ -3457,7 +3461,7 @@ preferred size of the underlying image data</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

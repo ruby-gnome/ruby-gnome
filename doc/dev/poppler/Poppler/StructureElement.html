@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Poppler::StructureElement";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -1380,6 +1382,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1399,8 +1402,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Acronyms and abbreviations contained in elements of type
-#POPPLER_STRUCTURE_ELEMENT_SPAN may have an associated expanded
+    <p>Acronyms and abbreviations contained in elements of type<br />
+#POPPLER_STRUCTURE_ELEMENT_SPAN may have an associated expanded<br />
 text form, which can be retrieved using this function.</p>
 
 
@@ -1419,7 +1422,7 @@ text form, which can be retrieved using this function.</p>
       
       
         &mdash;
-        <div class='inline'><p>Text of the expanded abbreviation if the
+        <div class='inline'><p>Text of the expanded abbreviation if the<br />
 element text is an abbreviation or acrony, nil if not.</p>
 </div>
       
@@ -1441,12 +1444,12 @@ element text is an abbreviation or acrony, nil if not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the actual text enclosed by the element (and its child elements).
-The actual text is mostly used for non-text elements like images and
-figures which <!-- raw HTML omitted -->do<!-- raw HTML omitted --> have the graphical appearance of text, like
-a logo. For those the actual text is the equivalent text to those
+    <p>Obtains the actual text enclosed by the element (and its child elements).<br />
+The actual text is mostly used for non-text elements like images and<br />
+figures which <!-- raw HTML omitted -->do<!-- raw HTML omitted --> have the graphical appearance of text, like<br />
+a logo. For those the actual text is the equivalent text to those<br />
 graphical elements which look like text when rendered.</p>
-<p>Note that for elements containing proper text, the function
+<p>Note that for elements containing proper text, the function<br />
 poppler_structure_element_get_text() must be used instead.</p>
 
 
@@ -1465,7 +1468,7 @@ poppler_structure_element_get_text() must be used instead.</p>
       
       
         &mdash;
-        <div class='inline'><p>The actual text for the element, or nil
+        <div class='inline'><p>The actual text for the element, or nil<br />
 if not defined.</p>
 </div>
       
@@ -1487,10 +1490,10 @@ if not defined.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the “alternate” text representation of the element (and its child
-elements). This is mostly used for non-text elements like images and
+    <p>Obtains the “alternate” text representation of the element (and its child<br />
+elements). This is mostly used for non-text elements like images and<br />
 figures, to specify a textual description of the element.</p>
-<p>Note that for elements containing proper text, the function
+<p>Note that for elements containing proper text, the function<br />
 poppler_structure_element_get_text() must be used instead.</p>
 
 
@@ -1509,7 +1512,7 @@ poppler_structure_element_get_text() must be used instead.</p>
       
       
         &mdash;
-        <div class='inline'><p>The alternate text representation for the
+        <div class='inline'><p>The alternate text representation for the<br />
 element, or nil if not defined.</p>
 </div>
       
@@ -1531,7 +1534,7 @@ element, or nil if not defined.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains how much the text contained in the inline-level structure element should be shifted,
+    <p>Obtains how much the text contained in the inline-level structure element should be shifted,<br />
 measuring from the baseline of the glyphs.</p>
 
 
@@ -1610,7 +1613,7 @@ measuring from the baseline of the glyphs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the number of columns used to lay out the content contained
+    <p>Obtains the number of columns used to lay out the content contained<br />
 in the grouping element.</p>
 
 
@@ -1689,12 +1692,12 @@ in the grouping element.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the textual description of the form element. Note that the
-description is for informative purposes, and it is not intended
-to be rendered. For example, assistive technologies may use the
-description field to provide an alternate way of presenting an
+    <p>Obtains the textual description of the form element. Note that the<br />
+description is for informative purposes, and it is not intended<br />
+to be rendered. For example, assistive technologies may use the<br />
+description field to provide an alternate way of presenting an<br />
 element to the user.</p>
-<p>The returned string is allocated by the function. When it is
+<p>The returned string is allocated by the function. When it is<br />
 not needed anymore, be sure to call g_free() on it.</p>
 
 
@@ -1713,7 +1716,7 @@ not needed anymore, be sure to call g_free() on it.</p>
       
       
         &mdash;
-        <div class='inline'><p>A string, or nil if the attribute
+        <div class='inline'><p>A string, or nil if the attribute<br />
 is not defined.</p>
 </div>
       
@@ -1735,8 +1738,8 @@ is not defined.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the role of a form structure element that is part of a form, or is
-a form field. This hints how the control for the element is intended
+    <p>Obtains the role of a form structure element that is part of a form, or is<br />
+a form field. This hints how the control for the element is intended<br />
 to be rendered.</p>
 
 
@@ -1776,7 +1779,7 @@ to be rendered.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>For a structure element that is a form field, obtains in which state
+    <p>For a structure element that is a form field, obtains in which state<br />
 the associated control is expected to be rendered.</p>
 
 
@@ -1816,7 +1819,7 @@ the associated control is expected to be rendered.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the background color of the element. If this attribute is
+    <p>Obtains the background color of the element. If this attribute is<br />
 not specified, the element shall be treated as if it were transparent.</p>
 
 
@@ -1854,7 +1857,7 @@ not specified, the element shall be treated as if it were transparent.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if a color is defined for the element,
+        <div class='inline'><p>true if a color is defined for the element,<br />
 false otherwise.</p>
 </div>
       
@@ -1876,11 +1879,11 @@ false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the color of border around the element. The result values
-are in before-after-start-end ordering (for the typical Western
-left-to-right writing, that is top-bottom-left-right).
-If this attribute is not specified, the border color for this element shall
-be the current text fill color in effect at the start of its associated
+    <p>Obtains the color of border around the element. The result values<br />
+are in before-after-start-end ordering (for the typical Western<br />
+left-to-right writing, that is top-bottom-left-right).<br />
+If this attribute is not specified, the border color for this element shall<br />
+be the current text fill color in effect at the start of its associated<br />
 content.</p>
 
 
@@ -1900,7 +1903,7 @@ content.</p>
       
       
         &mdash;
-        <div class='inline'><p>An array
+        <div class='inline'><p>An array<br />
 of four Poppler::Color.</p>
 </div>
       
@@ -1919,7 +1922,7 @@ of four Poppler::Color.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if a color is defined for the element,
+        <div class='inline'><p>true if a color is defined for the element,<br />
 false otherwise.</p>
 </div>
       
@@ -1941,8 +1944,8 @@ false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the border style of a structure element. The result values
-are in before-after-start-end ordering. For example, using Western
+    <p>Obtains the border style of a structure element. The result values<br />
+are in before-after-start-end ordering. For example, using Western<br />
 left-to-right writing, that is top-bottom-left-right.</p>
 
 
@@ -1997,9 +2000,9 @@ left-to-right writing, that is top-bottom-left-right.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the thickness of the border of an element. The result values
-are in before-after-start-end ordering (for the typical Western
-left-to-right writing, that is top-bottom-left-right).
+    <p>Obtains the thickness of the border of an element. The result values<br />
+are in before-after-start-end ordering (for the typical Western<br />
+left-to-right writing, that is top-bottom-left-right).<br />
 A value of 0 indicates that the border shall not be drawn.</p>
 
 
@@ -2037,7 +2040,7 @@ A value of 0 indicates that the border shall not be drawn.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the border thickness attribute is defined for
+        <div class='inline'><p>true if the border thickness attribute is defined for<br />
 the element, false otherwise.</p>
 </div>
       
@@ -2096,7 +2099,7 @@ the element, false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if a bounding box is defined for the element,
+        <div class='inline'><p>true if a bounding box is defined for the element,<br />
 false otherwise.</p>
 </div>
       
@@ -2118,8 +2121,8 @@ false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the color of the content contained in the element.
-If this attribute is not specified, the color for this element shall
+    <p>Obtains the color of the content contained in the element.<br />
+If this attribute is not specified, the color for this element shall<br />
 be the current text fill color in effect at the start of its associated content.</p>
 
 
@@ -2157,7 +2160,7 @@ be the current text fill color in effect at the start of its associated content.
       
       
         &mdash;
-        <div class='inline'><p>true if a color is defined for the element,
+        <div class='inline'><p>true if a color is defined for the element,<br />
 false otherwise.</p>
 </div>
       
@@ -2179,14 +2182,14 @@ false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the size of the gaps in between adjacent columns. Returns an
-array of elements: the first one is the size of the gap in between
+    <p>Obtains the size of the gaps in between adjacent columns. Returns an<br />
+array of elements: the first one is the size of the gap in between<br />
 columns 1 and 2, second is the size between columns 2 and 3, and so on.</p>
-<p>For elements which use a single column, nil is returned and <!-- raw HTML omitted -->n_values<!-- raw HTML omitted -->
+<p>For elements which use a single column, nil is returned and <!-- raw HTML omitted -->n_values<!-- raw HTML omitted --><br />
 is set to zero.</p>
-<p>If the attribute is undefined, nil is returned and <!-- raw HTML omitted -->n_values<!-- raw HTML omitted --> is set
+<p>If the attribute is undefined, nil is returned and <!-- raw HTML omitted -->n_values<!-- raw HTML omitted --> is set<br />
 to a non-zero value.</p>
-<p>The array with the results is allocated by the function. When it is
+<p>The array with the results is allocated by the function. When it is<br />
 not needed anymore, be sure to call g_free() on it.</p>
 
 
@@ -2224,7 +2227,7 @@ not needed anymore, be sure to call g_free() on it.</p>
       
       
         &mdash;
-        <div class='inline'><p>Array containing the values for the column gaps, or nil if the
+        <div class='inline'><p>Array containing the values for the column gaps, or nil if the<br />
 array is empty or the attribute is not defined.</p>
 </div>
       
@@ -2247,7 +2250,7 @@ array is empty or the attribute is not defined.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Obtains an array with the widths of the columns.</p>
-<p>The array with the results is allocated by the function. When it is
+<p>The array with the results is allocated by the function. When it is<br />
 not needed anymore, be sure to call g_free() on it.</p>
 
 
@@ -2285,7 +2288,7 @@ not needed anymore, be sure to call g_free() on it.</p>
       
       
         &mdash;
-        <div class='inline'><p>Array containing widths of the columns, or nil if the attribute
+        <div class='inline'><p>Array containing widths of the columns, or nil if the attribute<br />
 is not defined.</p>
 </div>
       
@@ -2307,8 +2310,8 @@ is not defined.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the padding of an element (space around it). The result
-values are in before-after-start-end ordering. For example using
+    <p>Obtains the padding of an element (space around it). The result<br />
+values are in before-after-start-end ordering. For example using<br />
 Western left-to-right writing, that is top-bottom-left-right.</p>
 
 
@@ -2363,8 +2366,8 @@ Western left-to-right writing, that is top-bottom-left-right.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the table cell border style of a block-level structure element. The result values
-are in before-after-start-end ordering. For example, using Western
+    <p>Obtains the table cell border style of a block-level structure element. The result values<br />
+are in before-after-start-end ordering. For example, using Western<br />
 left-to-right writing, that is top-bottom-left-right.</p>
 
 
@@ -2419,9 +2422,9 @@ left-to-right writing, that is top-bottom-left-right.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the padding between the table cell’s content rectangle and the
-surrounding border of a block-level structure element. The result
-values are in before-after-start-end ordering (for the typical
+    <p>Obtains the padding between the table cell’s content rectangle and the<br />
+surrounding border of a block-level structure element. The result<br />
+values are in before-after-start-end ordering (for the typical<br />
 Western left-to-right writing, that is top-bottom-left-right).</p>
 
 
@@ -2476,7 +2479,7 @@ Western left-to-right writing, that is top-bottom-left-right).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the text enclosed by an element, or the text enclosed by the
+    <p>Obtains the text enclosed by an element, or the text enclosed by the<br />
 elements in the subtree (including the element itself).</p>
 
 
@@ -2496,7 +2499,7 @@ elements in the subtree (including the element itself).</p>
       
       
         &mdash;
-        <div class='inline'><p>A Poppler::StructureGetTextFlags value, or
+        <div class='inline'><p>A Poppler::StructureGetTextFlags value, or<br />
 %POPPLER_STRUCTURE_GET_TEXT_NONE to disable all the flags.</p>
 </div>
       
@@ -2536,9 +2539,9 @@ elements in the subtree (including the element itself).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the color of the text decoration for the text contained
-in the inline-level structure element.
-If this attribute is not specified, the color for this element shall be the current fill
+    <p>Obtains the color of the text decoration for the text contained<br />
+in the inline-level structure element.<br />
+If this attribute is not specified, the color for this element shall be the current fill<br />
 color in effect at the start of its associated content.</p>
 
 
@@ -2576,7 +2579,7 @@ color in effect at the start of its associated content.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if a color is defined for the element,
+        <div class='inline'><p>true if a color is defined for the element,<br />
 false otherwise.</p>
 </div>
       
@@ -2598,18 +2601,18 @@ false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the text enclosed by an element, as an array of Poppler::TextSpan
-structures. Each item in the list is a piece of text which share the same
-attributes, plus its attributes. The following example shows how to
+    <p>Obtains the text enclosed by an element, as an array of Poppler::TextSpan<br />
+structures. Each item in the list is a piece of text which share the same<br />
+attributes, plus its attributes. The following example shows how to<br />
 obtain and free the text spans of an element:</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted -->
-guint i, n_spans;
-PopplerTextSpan *<em>text_spans =
-poppler_structure_element_get_text_spans (element, &amp;n_spans);
-/<!-- raw HTML omitted --></em> Use the text spans *<!-- raw HTML omitted -->/
-for (i = 0; i &lt; n_spans; i++)
-poppler_text_span_free (text_spans[i]);
-g_free (text_spans);
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><br />
+guint i, n_spans;<br />
+PopplerTextSpan *<em>text_spans =<br />
+poppler_structure_element_get_text_spans (element, &amp;n_spans);<br />
+/<!-- raw HTML omitted --></em> Use the text spans *<!-- raw HTML omitted -->/<br />
+for (i = 0; i &lt; n_spans; i++)<br />
+poppler_text_span_free (text_spans[i]);<br />
+g_free (text_spans);<br />
 <!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
 
@@ -2629,7 +2632,7 @@ g_free (text_spans);
       
       
         &mdash;
-        <div class='inline'><p>A pointer to the location where the number of elements in
+        <div class='inline'><p>A pointer to the location where the number of elements in<br />
 the returned array will be stored.</p>
 </div>
       
@@ -2669,7 +2672,7 @@ the returned array will be stored.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the glyph orientation for the text contained in a
+    <p>Obtains the glyph orientation for the text contained in a<br />
 inline-level structure element.</p>
 
 
@@ -2709,7 +2712,7 @@ inline-level structure element.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the height of the block-level structure element. Note that for elements which do
+    <p>Obtains the height of the block-level structure element. Note that for elements which do<br />
 not specify a height, it has to be calculated, and in this case -1 is returned.</p>
 
 
@@ -2728,7 +2731,7 @@ not specify a height, it has to be calculated, and in this case -1 is returned.<
       
       
         &mdash;
-        <div class='inline'><p>A positive value if a width is defined, or -1
+        <div class='inline'><p>A positive value if a width is defined, or -1<br />
 if the height is to be calculated automatically.</p>
 </div>
       
@@ -2768,7 +2771,7 @@ if the height is to be calculated automatically.</p>
       
       
         &mdash;
-        <div class='inline'><p>The identifier of the element (if
+        <div class='inline'><p>The identifier of the element (if<br />
 defined), or nil.</p>
 </div>
       
@@ -2925,7 +2928,7 @@ defined), or nil.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the element is a grouping element, false
+        <div class='inline'><p>true if the element is a grouping element, false<br />
 otherwise.</p>
 </div>
       
@@ -3025,8 +3028,8 @@ otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the language and country code for the content in an element,
-in two-letter ISO format, e.g. <!-- raw HTML omitted -->en_ES<!-- raw HTML omitted -->, or nil if not
+    <p>Obtains the language and country code for the content in an element,<br />
+in two-letter ISO format, e.g. <!-- raw HTML omitted -->en_ES<!-- raw HTML omitted -->, or nil if not<br />
 defined.</p>
 
 
@@ -3066,8 +3069,8 @@ defined.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the line height for the text contained in the inline-level structure element.
-Note that for elements which do not specify a line height, it has to be calculated,
+    <p>Obtains the line height for the text contained in the inline-level structure element.<br />
+Note that for elements which do not specify a line height, it has to be calculated,<br />
 and in this case -1 is returned.</p>
 
 
@@ -3086,7 +3089,7 @@ and in this case -1 is returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>A positive value if a line height is defined, or -1
+        <div class='inline'><p>A positive value if a line height is defined, or -1<br />
 if the height is to be calculated automatically.</p>
 </div>
       
@@ -3165,7 +3168,7 @@ if the height is to be calculated automatically.</p>
       
       
         &mdash;
-        <div class='inline'><p>Number of the page that contains the element, of
+        <div class='inline'><p>Number of the page that contains the element, of<br />
 <!-- raw HTML omitted -->-1<!-- raw HTML omitted --> if not defined.</p>
 </div>
       
@@ -3226,7 +3229,7 @@ if the height is to be calculated automatically.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the alignment for the ruby text contained in a
+    <p>Obtains the alignment for the ruby text contained in a<br />
 inline-level structure element.</p>
 
 
@@ -3266,7 +3269,7 @@ inline-level structure element.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the position for the ruby text contained in a
+    <p>Obtains the position for the ruby text contained in a<br />
 inline-level structure element.</p>
 
 
@@ -3462,10 +3465,10 @@ inline-level structure element.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains an array with the names of the table column headers. This is only
+    <p>Obtains an array with the names of the table column headers. This is only<br />
 useful for table header row elements.</p>
-<p>The array with the results is allocated by the function. The number
-of items in the returned array can be obtained with g_strv_length().
+<p>The array with the results is allocated by the function. The number<br />
+of items in the returned array can be obtained with g_strv_length().<br />
 The returned value must be freed using g_strfreev().</p>
 
 
@@ -3484,7 +3487,7 @@ The returned value must be freed using g_strfreev().</p>
       
       
         &mdash;
-        <div class='inline'><p>Zero-terminated array of strings with the table header names,
+        <div class='inline'><p>Zero-terminated array of strings with the table header names,<br />
 or nil if the attribute is not defined.</p>
 </div>
       
@@ -3584,13 +3587,13 @@ or nil if the attribute is not defined.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the textual summary of the contents of the table element. Note that
-the summary is meant for informative purposes, and it is not intended
-to be rendered. For example, assistive technologies may use the
-description field to provide an alternate way of presenting an element
-to the user, or a document indexer may want to scan it for additional
+    <p>Obtains the textual summary of the contents of the table element. Note that<br />
+the summary is meant for informative purposes, and it is not intended<br />
+to be rendered. For example, assistive technologies may use the<br />
+description field to provide an alternate way of presenting an element<br />
+to the user, or a document indexer may want to scan it for additional<br />
 keywords.</p>
-<p>The returned string is allocated by the function. When it is
+<p>The returned string is allocated by the function. When it is<br />
 not needed anymore, be sure to call g_free() on it.</p>
 
 
@@ -3609,7 +3612,7 @@ not needed anymore, be sure to call g_free() on it.</p>
       
       
         &mdash;
-        <div class='inline'><p>A string, or nil if the attribute
+        <div class='inline'><p>A string, or nil if the attribute<br />
 is not defined.</p>
 </div>
       
@@ -3631,7 +3634,7 @@ is not defined.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the text alignment mode of the text contained into a
+    <p>Obtains the text alignment mode of the text contained into a<br />
 block-level structure element.</p>
 
 
@@ -3671,9 +3674,9 @@ block-level structure element.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the thickness of the text decoration for the text contained
-in the inline-level structure element.
-If this attribute is not specified, it shall be derived from the current
+    <p>Obtains the thickness of the text decoration for the text contained<br />
+in the inline-level structure element.<br />
+If this attribute is not specified, it shall be derived from the current<br />
 stroke thickness in effect at the start of the element’s associated content.</p>
 
 
@@ -3713,7 +3716,7 @@ stroke thickness in effect at the start of the element’s associated content.</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the text decoration type of the text contained in the
+    <p>Obtains the text decoration type of the text contained in the<br />
 inline-level structure element.</p>
 
 
@@ -3831,7 +3834,7 @@ inline-level structure element.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the width of the block-level structure element. Note that for elements which do
+    <p>Obtains the width of the block-level structure element. Note that for elements which do<br />
 not specify a width, it has to be calculated, and in this case -1 is returned.</p>
 
 
@@ -3850,7 +3853,7 @@ not specify a width, it has to be calculated, and in this case -1 is returned.</
       
       
         &mdash;
-        <div class='inline'><p>A positive value if a width is defined, or -1
+        <div class='inline'><p>A positive value if a width is defined, or -1<br />
 if the width is to be calculated automatically.</p>
 </div>
       
@@ -3872,7 +3875,7 @@ if the width is to be calculated automatically.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the writing mode (writing direction) of the content associated
+    <p>Obtains the writing mode (writing direction) of the content associated<br />
 with a structure element.</p>
 
 
@@ -3908,7 +3911,7 @@ with a structure element.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

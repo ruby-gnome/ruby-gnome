@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Window";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -261,6 +263,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -2112,9 +2115,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -2141,12 +2146,12 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkWindow</code>.</p>
-<p>To get an undecorated window (no window borders), use
+<p>To get an undecorated window (no window borders), use<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.set_decorated].</p>
-<p>All top-level windows created by gtk_window_new() are stored
-in an internal top-level window list. This list can be obtained
-from [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.list_toplevels]. Due to GTK keeping a
-reference to the window internally, gtk_window_new() does not
+<p>All top-level windows created by gtk_window_new() are stored<br />
+in an internal top-level window list. This list can be obtained<br />
+from [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.list_toplevels]. Due to GTK keeping a<br />
+reference to the window internally, gtk_window_new() does not<br />
 return a reference to the caller.</p>
 <p>To delete a <code>GtkWindow</code>, call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.destroy].</p>
 
@@ -2178,14 +2183,14 @@ return a reference to the caller.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets whether the window should request startup notification.</p>
-<p>By default, after showing the first <code>GtkWindow</code>, GTK calls
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel.set_startup_id]. Call this function
-to disable the automatic startup notification. You might do this
-if your first window is a splash screen, and you want to delay
-notification until after your real main window has been shown,
+<p>By default, after showing the first <code>GtkWindow</code>, GTK calls<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel.set_startup_id]. Call this function<br />
+to disable the automatic startup notification. You might do this<br />
+if your first window is a splash screen, and you want to delay<br />
+notification until after your real main window has been shown,<br />
 for example.</p>
-<p>In that example, you would disable startup notification
-temporarily, show your splash screen, then re-enable it so that
+<p>In that example, you would disable startup notification<br />
+temporarily, show your splash screen, then re-enable it so that<br />
 showing the main window would automatically result in notification.</p>
 
 
@@ -2241,8 +2246,8 @@ showing the main window would automatically result in notification.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the fallback icon name for windows.</p>
-<p>The returned string is owned by GTK and should not
-be modified. It is only valid until the next call to
+<p>The returned string is owned by GTK and should not<br />
+be modified. It is only valid until the next call to<br />
 [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.set_default_icon_name].</p>
 
 
@@ -2283,8 +2288,8 @@ be modified. It is only valid until the next call to
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets an icon to be used as fallback.</p>
-<p>The fallback icon is used for windows that
-haven't had [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.set_icon_name]
+<p>The fallback icon is used for windows that<br />
+haven't had [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.set_icon_name]<br />
 called on them.</p>
 
 
@@ -2340,13 +2345,13 @@ called on them.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Opens or closes the <a href="running.html#interactive-debugging">interactive debugger</a>.</p>
-<p>The debugger offers access to the widget hierarchy of the application
+<p>The debugger offers access to the widget hierarchy of the application<br />
 and to useful debugging tools.</p>
-<p>This function allows applications that already use
-<!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->I<!-- raw HTML omitted -->
-(or <!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->D<!-- raw HTML omitted -->)
+<p>This function allows applications that already use<br />
+<!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->I<!-- raw HTML omitted --><br />
+(or <!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->D<!-- raw HTML omitted -->)<br />
 for their own key shortcuts to add a different shortcut to open the Inspector.</p>
-<p>If you are not overriding the default key shortcuts for the Inspector,
+<p>If you are not overriding the default key shortcuts for the Inspector,<br />
 you should not use this function.</p>
 
 
@@ -2402,10 +2407,10 @@ you should not use this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns a list of all existing toplevel windows.</p>
-<p>The widgets in the list are not individually referenced.
-If you want to iterate through the list and perform actions
-involving callbacks that might destroy the widgets, you must
-call <code>g_list_foreach (result, (GFunc)g_object_ref, NULL)</code> first,
+<p>The widgets in the list are not individually referenced.<br />
+If you want to iterate through the list and perform actions<br />
+involving callbacks that might destroy the widgets, you must<br />
+call <code>g_list_foreach (result, (GFunc)g_object_ref, NULL)</code> first,<br />
 and then unref all the widgets afterwards.</p>
 
 
@@ -2424,7 +2429,7 @@ and then unref all the widgets afterwards.</p>
       
       
         &mdash;
-        <div class='inline'><p>list of
+        <div class='inline'><p>list of<br />
 toplevel widgets</p>
 </div>
       
@@ -2447,8 +2452,8 @@ toplevel widgets</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns a list of all existing toplevel windows.</p>
-<p>If you want to iterate through the list and perform actions involving
-callbacks that might destroy the widgets or add new ones, be aware that
+<p>If you want to iterate through the list and perform actions involving<br />
+callbacks that might destroy the widgets or add new ones, be aware that<br />
 the list of toplevels will change and emit the &quot;items-changed&quot; signal.</p>
 
 
@@ -2467,7 +2472,7 @@ the list of toplevels will change and emit the &quot;items-changed&quot; signal.
       
       
         &mdash;
-        <div class='inline'><p>the list
+        <div class='inline'><p>the list<br />
 of toplevel widgets</p>
 </div>
       
@@ -2496,11 +2501,11 @@ of toplevel widgets</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkApplication</code> associated with the window.</p>
-<p>The application will be kept alive for at least as long as it
-has any windows associated with it (see g_application_hold()
+<p>The application will be kept alive for at least as long as it<br />
+has any windows associated with it (see g_application_hold()<br />
 for a way to keep it alive without windows).</p>
-<p>Normally, the connection between the application and the window
-will remain until the window is destroyed, but you can explicitly
+<p>Normally, the connection between the application and the window<br />
+will remain until the window is destroyed, but you can explicitly<br />
 remove it by setting the :application property to nil.</p>
 
 
@@ -2541,11 +2546,11 @@ remove it by setting the :application property to nil.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkApplication</code> associated with the window.</p>
-<p>The application will be kept alive for at least as long as it
-has any windows associated with it (see g_application_hold()
+<p>The application will be kept alive for at least as long as it<br />
+has any windows associated with it (see g_application_hold()<br />
 for a way to keep it alive without windows).</p>
-<p>Normally, the connection between the application and the window
-will remain until the window is destroyed, but you can explicitly
+<p>Normally, the connection between the application and the window<br />
+will remain until the window is destroyed, but you can explicitly<br />
 remove it by setting the :application property to nil.</p>
 
 
@@ -2720,9 +2725,9 @@ remove it by setting the :application property to nil.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Requests that the window is closed.</p>
-<p>This is similar to what happens when a window manager
+<p>This is similar to what happens when a window manager<br />
 close button is clicked.</p>
-<p>This function can be used with close buttons in custom
+<p>This function can be used with close buttons in custom<br />
 titlebars.</p>
 
 
@@ -3653,9 +3658,9 @@ titlebars.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the current focused widget within the window.</p>
-<p>Note that this is the widget that would have the focus
-if the toplevel window focused; if the toplevel window
-is not focused then <code>gtk_widget_has_focus (widget)</code> will
+<p>Note that this is the widget that would have the focus<br />
+if the toplevel window focused; if the toplevel window<br />
+is not focused then <code>gtk_widget_has_focus (widget)</code> will<br />
 not be true for the widget.</p>
 
 
@@ -3696,10 +3701,10 @@ not be true for the widget.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the focus widget.</p>
-<p>If <!-- raw HTML omitted -->focus<!-- raw HTML omitted --> is not the current focus widget, and is focusable,
-sets it as the focus widget for the window. If <!-- raw HTML omitted -->focus<!-- raw HTML omitted --> is nil,
-unsets the focus widget for this window. To set the focus to a
-particular widget in the toplevel, it is usually more convenient
+<p>If <!-- raw HTML omitted -->focus<!-- raw HTML omitted --> is not the current focus widget, and is focusable,<br />
+sets it as the focus widget for the window. If <!-- raw HTML omitted -->focus<!-- raw HTML omitted --> is nil,<br />
+unsets the focus widget for this window. To set the focus to a<br />
+particular widget in the toplevel, it is usually more convenient<br />
 to use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.grab_focus] instead of this function.</p>
 
 
@@ -3719,7 +3724,7 @@ to use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.grab_
       
       
         &mdash;
-        <div class='inline'><p>widget to be the new focus widget, or nil to unset
+        <div class='inline'><p>widget to be the new focus widget, or nil to unset<br />
 any focus widget for the toplevel window.</p>
 </div>
       
@@ -3773,7 +3778,7 @@ any focus widget for the toplevel window.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if “focus rectangles” are supposed to be visible
+        <div class='inline'><p>true if “focus rectangles” are supposed to be visible<br />
 in this window.</p>
 </div>
       
@@ -3796,7 +3801,7 @@ in this window.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether 'focus rectangles' are currently visible in this window.</p>
-<p>This property is maintained by GTK based on user input
+<p>This property is maintained by GTK based on user input<br />
 and should not be set by applications.</p>
 
 
@@ -3865,7 +3870,7 @@ and should not be set by applications.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether 'focus rectangles' are currently visible in this window.</p>
-<p>This property is maintained by GTK based on user input
+<p>This property is maintained by GTK based on user input<br />
 and should not be set by applications.</p>
 
 
@@ -4012,12 +4017,12 @@ and should not be set by applications.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asks to place <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in the fullscreen state.</p>
-<p>Note that you shouldn’t assume the window is definitely fullscreen
-afterward, because other entities (e.g. the user or window manager)
-unfullscreen it again, and not all window managers honor requests
+<p>Note that you shouldn’t assume the window is definitely fullscreen<br />
+afterward, because other entities (e.g. the user or window manager)<br />
+unfullscreen it again, and not all window managers honor requests<br />
 to fullscreen windows.</p>
-<p>You can track the result of this operation via the
-[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property, or by listening to
+<p>You can track the result of this operation via the<br />
+[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property, or by listening to<br />
 notifications of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window:fullscreened] property.</p>
 
 
@@ -4054,11 +4059,11 @@ notifications of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted 
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asks to place <!-- raw HTML omitted -->window<!-- raw HTML omitted --> in the fullscreen state on the given <!-- raw HTML omitted -->monitor<!-- raw HTML omitted -->.</p>
-<p>Note that you shouldn't assume the window is definitely fullscreen
-afterward, or that the windowing system allows fullscreen windows on
+<p>Note that you shouldn't assume the window is definitely fullscreen<br />
+afterward, or that the windowing system allows fullscreen windows on<br />
 any given monitor.</p>
-<p>You can track the result of this operation via the
-[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property, or by listening to
+<p>You can track the result of this operation via the<br />
+[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property, or by listening to<br />
 notifications of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window:fullscreened] property.</p>
 
 
@@ -4114,10 +4119,10 @@ notifications of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted 
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the window is fullscreen.</p>
-<p>Setting this property is the equivalent of calling
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.fullscreen] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unfullscreen];
-either operation is asynchronous, which means you will need to
-connect to the ::notify signal in order to know whether the
+<p>Setting this property is the equivalent of calling<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.fullscreen] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unfullscreen];<br />
+either operation is asynchronous, which means you will need to<br />
+connect to the ::notify signal in order to know whether the<br />
 operation was successful.</p>
 
 
@@ -4186,10 +4191,10 @@ operation was successful.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the window is fullscreen.</p>
-<p>Setting this property is the equivalent of calling
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.fullscreen] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unfullscreen];
-either operation is asynchronous, which means you will need to
-connect to the ::notify signal in order to know whether the
+<p>Setting this property is the equivalent of calling<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.fullscreen] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unfullscreen];<br />
+either operation is asynchronous, which means you will need to<br />
+connect to the ::notify signal in order to know whether the<br />
 operation was successful.</p>
 
 
@@ -4230,10 +4235,10 @@ operation was successful.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the default size of the window.</p>
-<p>A value of 0 for the width or height indicates that a default
-size has not been explicitly set for that dimension, so the
+<p>A value of 0 for the width or height indicates that a default<br />
+size has not been explicitly set for that dimension, so the<br />
 “natural” size of the window will be used.</p>
-<p>This function is the recommended way for <a href="https://developer.gnome.org/documentation/tutorials/save-state.html">saving window state
+<p>This function is the recommended way for <a href="https://developer.gnome.org/documentation/tutorials/save-state.html">saving window state<br />
 across restarts of applications</a>.</p>
 
 
@@ -4322,7 +4327,7 @@ across restarts of applications</a>.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GtkWindowGroup</code> for a window
+        <div class='inline'><p>the <code>GtkWindowGroup</code> for a window<br />
 or the default group</p>
 </div>
       
@@ -4344,7 +4349,7 @@ or the default group</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether this window reacts to F10 key presses by
+    <p>Returns whether this window reacts to F10 key presses by<br />
 activating a menubar it contains.</p>
 
 
@@ -4384,7 +4389,7 @@ activating a menubar it contains.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the window frame should handle F10 for activating
+    <p>Whether the window frame should handle F10 for activating<br />
 menubars.</p>
 
 
@@ -4452,7 +4457,7 @@ menubars.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the window frame should handle F10 for activating
+    <p>Whether the window frame should handle F10 for activating<br />
 menubars.</p>
 
 
@@ -4786,8 +4791,8 @@ menubars.</p>
   <div class="discussion">
     <p>Returns whether the window is part of the current active toplevel.</p>
 <p>The active toplevel is the window receiving keystrokes.</p>
-<p>The return value is true if the window is active toplevel itself.
-You might use this function if you wanted to draw a widget
+<p>The return value is true if the window is active toplevel itself.<br />
+You might use this function if you wanted to draw a widget<br />
 differently in an active window from a widget in an inactive window.</p>
 
 
@@ -4934,12 +4939,12 @@ differently in an active window from a widget in an inactive window.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the current fullscreen state of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
-<p>Note that since fullscreening is ultimately handled by the window
-manager and happens asynchronously to an application request, you
-shouldn’t assume the return value of this function changing
-immediately (or at all), as an effect of calling
+<p>Note that since fullscreening is ultimately handled by the window<br />
+manager and happens asynchronously to an application request, you<br />
+shouldn’t assume the return value of this function changing<br />
+immediately (or at all), as an effect of calling<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.fullscreen] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unfullscreen].</p>
-<p>If the window isn't yet mapped, the value returned will whether the
+<p>If the window isn't yet mapped, the value returned will whether the<br />
 initial requested state is fullscreen.</p>
 
 
@@ -4980,12 +4985,12 @@ initial requested state is fullscreen.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the current maximized state of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
-<p>Note that since maximization is ultimately handled by the window
-manager and happens asynchronously to an application request, you
-shouldn’t assume the return value of this function changing
-immediately (or at all), as an effect of calling
+<p>Note that since maximization is ultimately handled by the window<br />
+manager and happens asynchronously to an application request, you<br />
+shouldn’t assume the return value of this function changing<br />
+immediately (or at all), as an effect of calling<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.maximize] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unmaximize].</p>
-<p>If the window isn't yet mapped, the value returned will whether the
+<p>If the window isn't yet mapped, the value returned will whether the<br />
 initial requested state is maximized.</p>
 
 
@@ -5026,7 +5031,7 @@ initial requested state is maximized.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the current suspended state of <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
-<p>A window being suspended means it's currently not visible to the user, for
+<p>A window being suspended means it's currently not visible to the user, for<br />
 example by being on a inactive workspace, minimized, obstructed.</p>
 
 
@@ -5067,16 +5072,16 @@ example by being on a inactive workspace, minimized, obstructed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asks to maximize <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, so that it fills the screen.</p>
-<p>Note that you shouldn’t assume the window is definitely maximized
-afterward, because other entities (e.g. the user or window manager)
-could unmaximize it again, and not all window managers support
+<p>Note that you shouldn’t assume the window is definitely maximized<br />
+afterward, because other entities (e.g. the user or window manager)<br />
+could unmaximize it again, and not all window managers support<br />
 maximization.</p>
-<p>It’s permitted to call this function before showing a window,
-in which case the window will be maximized when it appears onscreen
+<p>It’s permitted to call this function before showing a window,<br />
+in which case the window will be maximized when it appears onscreen<br />
 initially.</p>
-<p>You can track the result of this operation via the
-[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property, or by listening to
-notifications on the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window:maximized]
+<p>You can track the result of this operation via the<br />
+[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property, or by listening to<br />
+notifications on the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window:maximized]<br />
 property.</p>
 
 
@@ -5113,10 +5118,10 @@ property.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the window is maximized.</p>
-<p>Setting this property is the equivalent of calling
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.maximize] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unmaximize];
-either operation is asynchronous, which means you will need to
-connect to the ::notify signal in order to know whether the
+<p>Setting this property is the equivalent of calling<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.maximize] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unmaximize];<br />
+either operation is asynchronous, which means you will need to<br />
+connect to the ::notify signal in order to know whether the<br />
 operation was successful.</p>
 
 
@@ -5185,10 +5190,10 @@ operation was successful.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the window is maximized.</p>
-<p>Setting this property is the equivalent of calling
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.maximize] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unmaximize];
-either operation is asynchronous, which means you will need to
-connect to the ::notify signal in order to know whether the
+<p>Setting this property is the equivalent of calling<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.maximize] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.unmaximize];<br />
+either operation is asynchronous, which means you will need to<br />
+connect to the ::notify signal in order to know whether the<br />
 operation was successful.</p>
 
 
@@ -5229,15 +5234,15 @@ operation was successful.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asks to minimize the specified <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
-<p>Note that you shouldn’t assume the window is definitely minimized
-afterward, because the windowing system might not support this
-functionality; other entities (e.g. the user or the window manager)
-could unminimize it again, or there may not be a window manager in
+<p>Note that you shouldn’t assume the window is definitely minimized<br />
+afterward, because the windowing system might not support this<br />
+functionality; other entities (e.g. the user or the window manager)<br />
+could unminimize it again, or there may not be a window manager in<br />
 which case minimization isn’t possible, etc.</p>
-<p>It’s permitted to call this function before showing a window,
-in which case the window will be minimized before it ever appears
+<p>It’s permitted to call this function before showing a window,<br />
+in which case the window will be minimized before it ever appears<br />
 onscreen.</p>
-<p>You can track result of this operation via the
+<p>You can track result of this operation via the<br />
 [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property.</p>
 
 
@@ -5291,7 +5296,7 @@ onscreen.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if mnemonics are supposed to be visible
+        <div class='inline'><p>true if mnemonics are supposed to be visible<br />
 in this window.</p>
 </div>
       
@@ -5314,7 +5319,7 @@ in this window.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether mnemonics are currently visible in this window.</p>
-<p>This property is maintained by GTK based on user input,
+<p>This property is maintained by GTK based on user input,<br />
 and should not be set by applications.</p>
 
 
@@ -5383,7 +5388,7 @@ and should not be set by applications.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether mnemonics are currently visible in this window.</p>
-<p>This property is maintained by GTK based on user input,
+<p>This property is maintained by GTK based on user input,<br />
 and should not be set by applications.</p>
 
 
@@ -5441,7 +5446,7 @@ and should not be set by applications.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the window is set to be modal and
+        <div class='inline'><p>true if the window is set to be modal and<br />
 establishes a grab when shown</p>
 </div>
       
@@ -5570,9 +5575,9 @@ establishes a grab when shown</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Presents a window to the user.</p>
-<p>This may mean raising the window in the stacking order,
-unminimizing it, moving it to the current desktop and/or
-giving it the keyboard focus (possibly dependent on the user’s
+<p>This may mean raising the window in the stacking order,<br />
+unminimizing it, moving it to the current desktop and/or<br />
+giving it the keyboard focus (possibly dependent on the user’s<br />
 platform, window manager and preferences).</p>
 <p>If <!-- raw HTML omitted -->window<!-- raw HTML omitted --> is hidden, this function also makes it visible.</p>
 
@@ -5611,8 +5616,8 @@ platform, window manager and preferences).</p>
   <div class="discussion">
     <p>Presents a window to the user in response to an user interaction.</p>
 <p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.present] for more details.</p>
-<p>The timestamp should be gathered when the window was requested
-to be shown (when clicking a link for example), rather than once
+<p>The timestamp should be gathered when the window was requested<br />
+to be shown (when clicking a link for example), rather than once<br />
 the window is ready to be shown.</p>
 
 
@@ -5632,7 +5637,7 @@ the window is ready to be shown.</p>
       
       
         &mdash;
-        <div class='inline'><p>the timestamp of the user interaction (typically a
+        <div class='inline'><p>the timestamp of the user interaction (typically a<br />
 button or key press event) which triggered this call</p>
 </div>
       
@@ -5815,26 +5820,26 @@ button or key press event) which triggered this call</p>
   <div class="discussion">
     <p>Sets the default size of a window.</p>
 <p>The default size of a window is the size that will be used if no other constraints apply.</p>
-<p>The default size will be updated whenever the window is resized
-to reflect the new size, unless the window is forced to a size,
+<p>The default size will be updated whenever the window is resized<br />
+to reflect the new size, unless the window is forced to a size,<br />
 like when it is maximized or fullscreened.</p>
-<p>If the window’s minimum size request is larger than
+<p>If the window’s minimum size request is larger than<br />
 the default, the default will be ignored.</p>
-<p>Setting the default size to a value &lt;= 0 will cause it to be
-ignored and the natural size request will be used instead. It
-is possible to do this while the window is showing to &quot;reset&quot;
+<p>Setting the default size to a value &lt;= 0 will cause it to be<br />
+ignored and the natural size request will be used instead. It<br />
+is possible to do this while the window is showing to &quot;reset&quot;<br />
 it to its initial size.</p>
-<p>Unlike [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_size_request], which sets a size
-request for a widget and thus would keep users from shrinking
-the window, this function only sets the initial size, just as
-if the user had resized the window themselves. Users can still
-shrink the window again as they normally would. Setting a default
-size of -1 means to use the “natural” default size (the size request
+<p>Unlike [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.set_size_request], which sets a size<br />
+request for a widget and thus would keep users from shrinking<br />
+the window, this function only sets the initial size, just as<br />
+if the user had resized the window themselves. Users can still<br />
+shrink the window again as they normally would. Setting a default<br />
+size of -1 means to use the “natural” default size (the size request<br />
 of the window).</p>
-<p>If you use this function to reestablish a previously saved window size,
-note that the appropriate size to save is the one returned by
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.get_default_size]. Using the window allocation
-directly will not work in all circumstances and can lead to growing
+<p>If you use this function to reestablish a previously saved window size,<br />
+note that the appropriate size to save is the one returned by<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.get_default_size]. Using the window allocation<br />
+directly will not work in all circumstances and can lead to growing<br />
 or shrinking windows.</p>
 
 
@@ -6384,16 +6389,16 @@ or shrinking windows.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks to remove the fullscreen state for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, and return to
+    <p>Asks to remove the fullscreen state for <!-- raw HTML omitted -->window<!-- raw HTML omitted -->, and return to<br />
 its previous state.</p>
-<p>Note that you shouldn’t assume the window is definitely not
-fullscreen afterward, because other entities (e.g. the user or
-window manager) could fullscreen it again, and not all window
-managers honor requests to unfullscreen windows; normally the
-window will end up restored to its normal state. Just don’t
+<p>Note that you shouldn’t assume the window is definitely not<br />
+fullscreen afterward, because other entities (e.g. the user or<br />
+window manager) could fullscreen it again, and not all window<br />
+managers honor requests to unfullscreen windows; normally the<br />
+window will end up restored to its normal state. Just don’t<br />
 write code that crashes if not.</p>
-<p>You can track the result of this operation via the
-[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property, or by listening to
+<p>You can track the result of this operation via the<br />
+[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property, or by listening to<br />
 notifications of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window:fullscreened] property.</p>
 
 
@@ -6430,12 +6435,12 @@ notifications of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted 
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asks to unmaximize <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
-<p>Note that you shouldn’t assume the window is definitely unmaximized
-afterward, because other entities (e.g. the user or window manager)
-maximize it again, and not all window managers honor requests to
+<p>Note that you shouldn’t assume the window is definitely unmaximized<br />
+afterward, because other entities (e.g. the user or window manager)<br />
+maximize it again, and not all window managers honor requests to<br />
 unmaximize.</p>
-<p>You can track the result of this operation via the
-[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property, or by listening to
+<p>You can track the result of this operation via the<br />
+[property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property, or by listening to<br />
 notifications on the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window:maximized] property.</p>
 
 
@@ -6472,12 +6477,12 @@ notifications on the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted 
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asks to unminimize the specified <!-- raw HTML omitted -->window<!-- raw HTML omitted -->.</p>
-<p>Note that you shouldn’t assume the window is definitely unminimized
-afterward, because the windowing system might not support this
-functionality; other entities (e.g. the user or the window manager)
-could minimize it again, or there may not be a window manager in
+<p>Note that you shouldn’t assume the window is definitely unminimized<br />
+afterward, because the windowing system might not support this<br />
+functionality; other entities (e.g. the user or the window manager)<br />
+could minimize it again, or there may not be a window manager in<br />
 which case minimization isn’t possible, etc.</p>
-<p>You can track result of this operation via the
+<p>You can track result of this operation via the<br />
 [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:state] property.</p>
 
 
@@ -6509,7 +6514,7 @@ which case minimization isn’t possible, etc.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

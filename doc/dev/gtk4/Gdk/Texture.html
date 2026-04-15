@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::Texture";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -374,6 +376,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -391,14 +394,14 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new texture by loading an image from a resource.</p>
-<p>The file format is detected automatically. The supported formats
+<p>The file format is detected automatically. The supported formats<br />
 are PNG and JPEG, though more formats might be available.</p>
-<p>It is a fatal error if <!-- raw HTML omitted -->resource_path<!-- raw HTML omitted --> does not specify a valid
-image resource and the program will abort if that happens.
-If you are unsure about the validity of a resource, use
+<p>It is a fatal error if <!-- raw HTML omitted -->resource_path<!-- raw HTML omitted --> does not specify a valid<br />
+image resource and the program will abort if that happens.<br />
+If you are unsure about the validity of a resource, use<br />
 [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.new_from_file] to load it.</p>
-<p>This function is threadsafe, so that you can e.g. use GTask
-and [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Task.run_in_thread] to avoid blocking the main thread
+<p>This function is threadsafe, so that you can e.g. use GTask<br />
+and [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Task.run_in_thread] to avoid blocking the main thread<br />
 while loading a big image.</p>
 
 
@@ -448,10 +451,10 @@ while loading a big image.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Downloads the <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> into local memory.</p>
-<p>This may be an expensive operation, as the actual texture data
+<p>This may be an expensive operation, as the actual texture data<br />
 may reside on a GPU or on a remote display server.</p>
-<p>The data format of the downloaded data is equivalent to
-%CAIRO_FORMAT_ARGB32, so every downloaded pixel requires
+<p>The data format of the downloaded data is equivalent to<br />
+%CAIRO_FORMAT_ARGB32, so every downloaded pixel requires<br />
 4 bytes of memory.</p>
 <p>Downloading a texture into a Cairo image surface:</p>
 <pre class="code c"><code class="c">surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
@@ -462,7 +465,7 @@ gdk_texture_download (texture,
                       cairo_image_surface_get_stride (surface));
 cairo_surface_mark_dirty (surface);
 </code></pre>
-<p>For more flexible download capabilities, see
+<p>For more flexible download capabilities, see<br />
 [struct<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.TextureDownloader].</p>
 
 
@@ -482,7 +485,7 @@ cairo_surface_mark_dirty (surface);
       
       
         &mdash;
-        <div class='inline'><p>pointer to enough memory to be filled with the
+        <div class='inline'><p>pointer to enough memory to be filled with the<br />
 downloaded data of <!-- raw HTML omitted -->texture<!-- raw HTML omitted --></p>
 </div>
       
@@ -533,12 +536,12 @@ downloaded data of <!-- raw HTML omitted -->texture<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the memory format most closely associated with the data of
+    <p>Gets the memory format most closely associated with the data of<br />
 the texture.</p>
-<p>Note that it may not be an exact match for texture data
+<p>Note that it may not be an exact match for texture data<br />
 stored on the GPU or with compression.</p>
-<p>The format can give an indication about the bit depth and opacity
-of the texture and is useful to determine the best format for
+<p>The format can give an indication about the bit depth and opacity<br />
+of the texture and is useful to determine the best format for<br />
 downloading the texture.</p>
 
 
@@ -685,10 +688,10 @@ downloading the texture.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Store the given <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> to the <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> as a PNG file.</p>
-<p>This is a utility function intended for debugging and testing.
-If you want more control over formats, proper error handling or
-want to store to a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File] or other location, you might want to
-use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.save_to_png_bytes] or look into the
+<p>This is a utility function intended for debugging and testing.<br />
+If you want more control over formats, proper error handling or<br />
+want to store to a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File] or other location, you might want to<br />
+use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.save_to_png_bytes] or look into the<br />
 gdk-pixbuf library.</p>
 
 
@@ -749,13 +752,13 @@ gdk-pixbuf library.</p>
   <div class="discussion">
     <p>Store the given <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> in memory as a PNG file.</p>
 <p>Use [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.new_from_bytes] to read it back.</p>
-<p>If you want to serialize a texture, this is a convenient and
+<p>If you want to serialize a texture, this is a convenient and<br />
 portable way to do that.</p>
-<p>If you need more control over the generated image, such as
-attaching metadata, you should look into an image handling
+<p>If you need more control over the generated image, such as<br />
+attaching metadata, you should look into an image handling<br />
 library such as the gdk-pixbuf library.</p>
-<p>If you are dealing with high dynamic range float data, you
-might also want to consider [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.save_to_tiff_bytes]
+<p>If you are dealing with high dynamic range float data, you<br />
+might also want to consider [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.save_to_tiff_bytes]<br />
 instead.</p>
 
 
@@ -856,12 +859,12 @@ instead.</p>
   <div class="discussion">
     <p>Store the given <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> in memory as a TIFF file.</p>
 <p>Use [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.new_from_bytes] to read it back.</p>
-<p>This function is intended to store a representation of the
-texture's data that is as accurate as possible. This is
-particularly relevant when working with high dynamic range
+<p>This function is intended to store a representation of the<br />
+texture's data that is as accurate as possible. This is<br />
+particularly relevant when working with high dynamic range<br />
 images and floating-point texture data.</p>
-<p>If that is not your concern and you are interested in a
-smaller size and a more portable format, you might want to
+<p>If that is not your concern and you are interested in a<br />
+smaller size and a more portable format, you might want to<br />
 use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.save_to_png_bytes].</p>
 
 
@@ -1003,7 +1006,7 @@ use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.save_to
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

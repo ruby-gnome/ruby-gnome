@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::DataInputStream";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,7 +101,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -652,9 +654,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -674,9 +678,11 @@
   
   
   
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="FilterInputStream.html" title="Gio::FilterInputStream (class)">FilterInputStream</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="FilterInputStream.html#base_stream-instance_method" title="Gio::FilterInputStream#base_stream (method)">#base_stream</a></span>, <span class='object_link'><a href="FilterInputStream.html#base_stream=-instance_method" title="Gio::FilterInputStream#base_stream= (method)">#base_stream=</a></span>, <span class='object_link'><a href="FilterInputStream.html#close_base_stream-instance_method" title="Gio::FilterInputStream#close_base_stream (method)">#close_base_stream</a></span>, <span class='object_link'><a href="FilterInputStream.html#close_base_stream=-instance_method" title="Gio::FilterInputStream#close_base_stream= (method)">#close_base_stream=</a></span>, <span class='object_link'><a href="FilterInputStream.html#close_base_stream%3F-instance_method" title="Gio::FilterInputStream#close_base_stream? (method)">#close_base_stream?</a></span></p>
 
+  
   
   
   
@@ -749,8 +755,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The :byte-order property determines the byte ordering that
-is used when reading multi-byte entities (such as integers)
+    <p>The :byte-order property determines the byte ordering that<br />
+is used when reading multi-byte entities (such as integers)<br />
 from the stream.</p>
 
 
@@ -790,8 +796,8 @@ from the stream.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The :byte-order property determines the byte ordering that
-is used when reading multi-byte entities (such as integers)
+    <p>The :byte-order property determines the byte ordering that<br />
+is used when reading multi-byte entities (such as integers)<br />
 from the stream.</p>
 
 
@@ -859,7 +865,7 @@ from the stream.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The :newline-type property determines what is considered
+    <p>The :newline-type property determines what is considered<br />
 as a line ending when reading complete lines from the stream.</p>
 
 
@@ -899,7 +905,7 @@ as a line ending when reading complete lines from the stream.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The :newline-type property determines what is considered
+    <p>The :newline-type property determines what is considered<br />
 as a line ending when reading complete lines from the stream.</p>
 
 
@@ -967,7 +973,7 @@ as a line ending when reading complete lines from the stream.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reads an unsigned 8-bit/1-byte value from <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.
+    <p>Reads an unsigned 8-bit/1-byte value from <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.<br />
 if an error occurred.</p>
 
 
@@ -1027,8 +1033,8 @@ if an error occurred.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Reads a 16-bit/2-byte value from <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.</p>
-<p>In order to get the correct byte order for this read operation,
-see g_data_input_stream_get_byte_order() and g_data_input_stream_set_byte_order().
+<p>In order to get the correct byte order for this read operation,<br />
+see g_data_input_stream_get_byte_order() and g_data_input_stream_set_byte_order().<br />
 an error occurred.</p>
 
 
@@ -1088,11 +1094,11 @@ an error occurred.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Reads a signed 32-bit/4-byte value from <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.</p>
-<p>In order to get the correct byte order for this read operation,
+<p>In order to get the correct byte order for this read operation,<br />
 see g_data_input_stream_get_byte_order() and g_data_input_stream_set_byte_order().</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.<br />
 an error occurred.</p>
 
 
@@ -1152,11 +1158,11 @@ an error occurred.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Reads a 64-bit/8-byte value from <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.</p>
-<p>In order to get the correct byte order for this read operation,
+<p>In order to get the correct byte order for this read operation,<br />
 see g_data_input_stream_get_byte_order() and g_data_input_stream_set_byte_order().</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.<br />
 an error occurred.</p>
 
 
@@ -1215,11 +1221,11 @@ an error occurred.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reads a line from the data input stream.  Note that no encoding
-checks or conversion is performed; the input is not guaranteed to
+    <p>Reads a line from the data input stream.  Note that no encoding<br />
+checks or conversion is performed; the input is not guaranteed to<br />
 be UTF-8, and may in fact have embedded NUL characters.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
 was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.</p>
 
 
@@ -1272,10 +1278,10 @@ was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>a NUL terminated byte array with the line that was read in
-(without the newlines).  Set <!-- raw HTML omitted -->length<!-- raw HTML omitted --> to a #gsize to get the length
-of the read line.  On an error, it will return nil and <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
-will be set. If there's no content to read, it will still return
+        <div class='inline'><p>a NUL terminated byte array with the line that was read in<br />
+(without the newlines).  Set <!-- raw HTML omitted -->length<!-- raw HTML omitted --> to a #gsize to get the length<br />
+of the read line.  On an error, it will return nil and <!-- raw HTML omitted -->error<!-- raw HTML omitted --><br />
+will be set. If there's no content to read, it will still return<br />
 nil, but <!-- raw HTML omitted -->error<!-- raw HTML omitted --> won't be set.</p>
 </div>
       
@@ -1297,10 +1303,10 @@ nil, but <!-- raw HTML omitted -->error<!-- raw HTML omitted --> won't be set.</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The asynchronous version of g_data_input_stream_read_line().  It is
+    <p>The asynchronous version of g_data_input_stream_read_line().  It is<br />
 an error to have two outstanding calls to this function.</p>
-<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You
-can then call g_data_input_stream_read_line_finish() to get
+<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You<br />
+can then call g_data_input_stream_read_line_finish() to get<br />
 the result of the operation.</p>
 
 
@@ -1400,9 +1406,9 @@ the result of the operation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finish an asynchronous call started by
-g_data_input_stream_read_line_async().  Note the warning about
-string encoding in g_data_input_stream_read_line() applies here as
+    <p>Finish an asynchronous call started by<br />
+g_data_input_stream_read_line_async().  Note the warning about<br />
+string encoding in g_data_input_stream_read_line() applies here as<br />
 well.</p>
 
 
@@ -1455,10 +1461,10 @@ well.</p>
       
       
         &mdash;
-        <div class='inline'><p>a NUL-terminated byte array with the line that was read in
-(without the newlines).  Set <!-- raw HTML omitted -->length<!-- raw HTML omitted --> to a #gsize to get the length
-of the read line.  On an error, it will return nil and <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
-will be set. If there's no content to read, it will still return
+        <div class='inline'><p>a NUL-terminated byte array with the line that was read in<br />
+(without the newlines).  Set <!-- raw HTML omitted -->length<!-- raw HTML omitted --> to a #gsize to get the length<br />
+of the read line.  On an error, it will return nil and <!-- raw HTML omitted -->error<!-- raw HTML omitted --><br />
+will be set. If there's no content to read, it will still return<br />
 nil, but <!-- raw HTML omitted -->error<!-- raw HTML omitted --> won't be set.</p>
 </div>
       
@@ -1480,7 +1486,7 @@ nil, but <!-- raw HTML omitted -->error<!-- raw HTML omitted --> won't be set.</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finish an asynchronous call started by
+    <p>Finish an asynchronous call started by<br />
 g_data_input_stream_read_line_async().</p>
 
 
@@ -1533,11 +1539,11 @@ g_data_input_stream_read_line_async().</p>
       
       
         &mdash;
-        <div class='inline'><p>a string with the line that
-was read in (without the newlines).  Set <!-- raw HTML omitted -->length<!-- raw HTML omitted --> to a #gsize to
-get the length of the read line.  On an error, it will return
-nil and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set. For UTF-8 conversion errors, the set
-error domain is %G_CONVERT_ERROR.  If there's no content to read,
+        <div class='inline'><p>a string with the line that<br />
+was read in (without the newlines).  Set <!-- raw HTML omitted -->length<!-- raw HTML omitted --> to a #gsize to<br />
+get the length of the read line.  On an error, it will return<br />
+nil and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set. For UTF-8 conversion errors, the set<br />
+error domain is %G_CONVERT_ERROR.  If there's no content to read,<br />
 it will still return nil, but <!-- raw HTML omitted -->error<!-- raw HTML omitted --> won't be set.</p>
 </div>
       
@@ -1560,8 +1566,8 @@ it will still return nil, but <!-- raw HTML omitted -->error<!-- raw HTML omitte
 </h3><div class="docstring">
   <div class="discussion">
     <p>Reads a UTF-8 encoded line from the data input stream.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
 was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.</p>
 
 
@@ -1614,12 +1620,12 @@ was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>a NUL terminated UTF-8 string
-with the line that was read in (without the newlines).  Set
-<!-- raw HTML omitted -->length<!-- raw HTML omitted --> to a #gsize to get the length of the read line.  On an
-error, it will return nil and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set.  For UTF-8
-conversion errors, the set error domain is %G_CONVERT_ERROR.  If
-there's no content to read, it will still return nil, but <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
+        <div class='inline'><p>a NUL terminated UTF-8 string<br />
+with the line that was read in (without the newlines).  Set<br />
+<!-- raw HTML omitted -->length<!-- raw HTML omitted --> to a #gsize to get the length of the read line.  On an<br />
+error, it will return nil and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set.  For UTF-8<br />
+conversion errors, the set error domain is %G_CONVERT_ERROR.  If<br />
+there's no content to read, it will still return nil, but <!-- raw HTML omitted -->error<!-- raw HTML omitted --><br />
 won't be set.</p>
 </div>
       
@@ -1642,8 +1648,8 @@ won't be set.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Reads an unsigned 16-bit/2-byte value from <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.</p>
-<p>In order to get the correct byte order for this read operation,
-see g_data_input_stream_get_byte_order() and g_data_input_stream_set_byte_order().
+<p>In order to get the correct byte order for this read operation,<br />
+see g_data_input_stream_get_byte_order() and g_data_input_stream_set_byte_order().<br />
 an error occurred.</p>
 
 
@@ -1703,11 +1709,11 @@ an error occurred.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Reads an unsigned 32-bit/4-byte value from <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.</p>
-<p>In order to get the correct byte order for this read operation,
+<p>In order to get the correct byte order for this read operation,<br />
 see g_data_input_stream_get_byte_order() and g_data_input_stream_set_byte_order().</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.<br />
 an error occurred.</p>
 
 
@@ -1767,11 +1773,11 @@ an error occurred.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Reads an unsigned 64-bit/8-byte value from <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.</p>
-<p>In order to get the correct byte order for this read operation,
+<p>In order to get the correct byte order for this read operation,<br />
 see g_data_input_stream_get_byte_order().</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.<br />
 an error occurred.</p>
 
 
@@ -1830,14 +1836,14 @@ an error occurred.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reads a string from the data input stream, up to the first
+    <p>Reads a string from the data input stream, up to the first<br />
 occurrence of any of the stop characters.</p>
-<p>Note that, in contrast to g_data_input_stream_read_until_async(),
+<p>Note that, in contrast to g_data_input_stream_read_until_async(),<br />
 this function consumes the stop character that it finds.</p>
-<p>Don't use this function in new code.  Its functionality is
-inconsistent with g_data_input_stream_read_until_async().  Both
-functions will be marked as deprecated in a future release.  Use
-g_data_input_stream_read_upto() instead, but note that that function
+<p>Don't use this function in new code.  Its functionality is<br />
+inconsistent with g_data_input_stream_read_until_async().  Both<br />
+functions will be marked as deprecated in a future release.  Use<br />
+g_data_input_stream_read_upto() instead, but note that that function<br />
 does not consume the stop character.</p>
 
 
@@ -1905,9 +1911,9 @@ does not consume the stop character.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string with the data that was read
-before encountering any of the stop characters. Set <!-- raw HTML omitted -->length<!-- raw HTML omitted --> to
-a #gsize to get the length of the string. This function will
+        <div class='inline'><p>a string with the data that was read<br />
+before encountering any of the stop characters. Set <!-- raw HTML omitted -->length<!-- raw HTML omitted --> to<br />
+a #gsize to get the length of the string. This function will<br />
 return nil on an error.</p>
 </div>
       
@@ -1929,17 +1935,17 @@ return nil on an error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The asynchronous version of g_data_input_stream_read_until().
+    <p>The asynchronous version of g_data_input_stream_read_until().<br />
 It is an error to have two outstanding calls to this function.</p>
-<p>Note that, in contrast to g_data_input_stream_read_until(),
-this function does not consume the stop character that it finds.  You
+<p>Note that, in contrast to g_data_input_stream_read_until(),<br />
+this function does not consume the stop character that it finds.  You<br />
 must read it for yourself.</p>
-<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You
-can then call g_data_input_stream_read_until_finish() to get
+<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You<br />
+can then call g_data_input_stream_read_until_finish() to get<br />
 the result of the operation.</p>
-<p>Don't use this function in new code.  Its functionality is
-inconsistent with g_data_input_stream_read_until().  Both functions
-will be marked as deprecated in a future release.  Use
+<p>Don't use this function in new code.  Its functionality is<br />
+inconsistent with g_data_input_stream_read_until().  Both functions<br />
+will be marked as deprecated in a future release.  Use<br />
 g_data_input_stream_read_upto_async() instead.</p>
 
 
@@ -2054,7 +2060,7 @@ g_data_input_stream_read_upto_async() instead.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finish an asynchronous call started by
+    <p>Finish an asynchronous call started by<br />
 g_data_input_stream_read_until_async().</p>
 
 
@@ -2107,9 +2113,9 @@ g_data_input_stream_read_until_async().</p>
       
       
         &mdash;
-        <div class='inline'><p>a string with the data that was read
-before encountering any of the stop characters. Set <!-- raw HTML omitted -->length<!-- raw HTML omitted --> to
-a #gsize to get the length of the string. This function will
+        <div class='inline'><p>a string with the data that was read<br />
+before encountering any of the stop characters. Set <!-- raw HTML omitted -->length<!-- raw HTML omitted --> to<br />
+a #gsize to get the length of the string. This function will<br />
 return nil on an error.</p>
 </div>
       
@@ -2131,13 +2137,13 @@ return nil on an error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reads a string from the data input stream, up to the first
+    <p>Reads a string from the data input stream, up to the first<br />
 occurrence of any of the stop characters.</p>
-<p>In contrast to g_data_input_stream_read_until(), this function
-does not consume the stop character. You have to use
-g_data_input_stream_read_byte() to get it before calling
+<p>In contrast to g_data_input_stream_read_until(), this function<br />
+does not consume the stop character. You have to use<br />
+g_data_input_stream_read_byte() to get it before calling<br />
 g_data_input_stream_read_upto() again.</p>
-<p>Note that <!-- raw HTML omitted -->stop_chars<!-- raw HTML omitted --> may contain '\0' if <!-- raw HTML omitted -->stop_chars_len<!-- raw HTML omitted --> is
+<p>Note that <!-- raw HTML omitted -->stop_chars<!-- raw HTML omitted --> may contain '\0' if <!-- raw HTML omitted -->stop_chars_len<!-- raw HTML omitted --> is<br />
 specified.</p>
 <p>The returned string will always be nul-terminated on success.</p>
 
@@ -2173,7 +2179,7 @@ specified.</p>
       
       
         &mdash;
-        <div class='inline'><p>length of <!-- raw HTML omitted -->stop_chars<!-- raw HTML omitted -->. May be -1 if <!-- raw HTML omitted -->stop_chars<!-- raw HTML omitted --> is
+        <div class='inline'><p>length of <!-- raw HTML omitted -->stop_chars<!-- raw HTML omitted -->. May be -1 if <!-- raw HTML omitted -->stop_chars<!-- raw HTML omitted --> is<br />
 nul-terminated</p>
 </div>
       
@@ -2222,9 +2228,9 @@ nul-terminated</p>
       
       
         &mdash;
-        <div class='inline'><p>a string with the data that was read
-before encountering any of the stop characters. Set <!-- raw HTML omitted -->length<!-- raw HTML omitted --> to
-a #gsize to get the length of the string. This function will
+        <div class='inline'><p>a string with the data that was read<br />
+before encountering any of the stop characters. Set <!-- raw HTML omitted -->length<!-- raw HTML omitted --> to<br />
+a #gsize to get the length of the string. This function will<br />
 return nil on an error</p>
 </div>
       
@@ -2246,16 +2252,16 @@ return nil on an error</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The asynchronous version of g_data_input_stream_read_upto().
+    <p>The asynchronous version of g_data_input_stream_read_upto().<br />
 It is an error to have two outstanding calls to this function.</p>
-<p>In contrast to g_data_input_stream_read_until(), this function
-does not consume the stop character. You have to use
-g_data_input_stream_read_byte() to get it before calling
+<p>In contrast to g_data_input_stream_read_until(), this function<br />
+does not consume the stop character. You have to use<br />
+g_data_input_stream_read_byte() to get it before calling<br />
 g_data_input_stream_read_upto() again.</p>
-<p>Note that <!-- raw HTML omitted -->stop_chars<!-- raw HTML omitted --> may contain '\0' if <!-- raw HTML omitted -->stop_chars_len<!-- raw HTML omitted --> is
+<p>Note that <!-- raw HTML omitted -->stop_chars<!-- raw HTML omitted --> may contain '\0' if <!-- raw HTML omitted -->stop_chars_len<!-- raw HTML omitted --> is<br />
 specified.</p>
-<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You
-can then call g_data_input_stream_read_upto_finish() to get
+<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You<br />
+can then call g_data_input_stream_read_upto_finish() to get<br />
 the result of the operation.</p>
 
 
@@ -2290,7 +2296,7 @@ the result of the operation.</p>
       
       
         &mdash;
-        <div class='inline'><p>length of <!-- raw HTML omitted -->stop_chars<!-- raw HTML omitted -->. May be -1 if <!-- raw HTML omitted -->stop_chars<!-- raw HTML omitted --> is
+        <div class='inline'><p>length of <!-- raw HTML omitted -->stop_chars<!-- raw HTML omitted -->. May be -1 if <!-- raw HTML omitted -->stop_chars<!-- raw HTML omitted --> is<br />
 nul-terminated</p>
 </div>
       
@@ -2386,10 +2392,10 @@ nul-terminated</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finish an asynchronous call started by
+    <p>Finish an asynchronous call started by<br />
 g_data_input_stream_read_upto_async().</p>
-<p>Note that this function does not consume the stop character. You
-have to use g_data_input_stream_read_byte() to get it before calling
+<p>Note that this function does not consume the stop character. You<br />
+have to use g_data_input_stream_read_byte() to get it before calling<br />
 g_data_input_stream_read_upto_async() again.</p>
 <p>The returned string will always be nul-terminated on success.</p>
 
@@ -2443,9 +2449,9 @@ g_data_input_stream_read_upto_async() again.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string with the data that was read
-before encountering any of the stop characters. Set <!-- raw HTML omitted -->length<!-- raw HTML omitted --> to
-a #gsize to get the length of the string. This function will
+        <div class='inline'><p>a string with the data that was read<br />
+before encountering any of the stop characters. Set <!-- raw HTML omitted -->length<!-- raw HTML omitted --> to<br />
+a #gsize to get the length of the string. This function will<br />
 return nil on an error.</p>
 </div>
       
@@ -2463,7 +2469,7 @@ return nil on an error.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

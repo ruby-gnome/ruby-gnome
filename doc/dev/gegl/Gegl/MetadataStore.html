@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gegl::MetadataStore";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -979,6 +981,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1582,8 +1585,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Current file loader/saver module name. Valid only while a Gegl::Metadata
-mapping is registered. This property is mainly provided for use in signal
+    <p>Current file loader/saver module name. Valid only while a Gegl::Metadata<br />
+mapping is registered. This property is mainly provided for use in signal<br />
 handlers.</p>
 
 
@@ -1623,8 +1626,8 @@ handlers.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Current file loader/saver module name. Valid only while a Gegl::Metadata
-mapping is registered. This property is mainly provided for use in signal
+    <p>Current file loader/saver module name. Valid only while a Gegl::Metadata<br />
+mapping is registered. This property is mainly provided for use in signal<br />
 handlers.</p>
 
 
@@ -1692,8 +1695,8 @@ handlers.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A slightly more efficient version of gegl_metadata_store_get_value()
-for string values avoiding a duplication. Otherwise it behaves the same
+    <p>A slightly more efficient version of gegl_metadata_store_get_value()<br />
+for string values avoiding a duplication. Otherwise it behaves the same<br />
 gegl_metadata_store_get_value().</p>
 
 
@@ -1752,8 +1755,8 @@ gegl_metadata_store_get_value().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieve the metadata value. <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be initialised with a compatible
-type. If the value is unset or has not been previously declared <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is
+    <p>Retrieve the metadata value. <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be initialised with a compatible<br />
+type. If the value is unset or has not been previously declared <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is<br />
 unchanged and an error message is logged.</p>
 
 
@@ -1881,10 +1884,10 @@ unchanged and an error message is logged.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>gegl_metadata_store_notify() is called by subclasses when the value of a
-metadata variable changes. It emits the <code>::changed</code> signal with the variable
-name as the detail parameter.  Set <!-- raw HTML omitted -->shadow<!-- raw HTML omitted --> = true if variable is shadowed
-by a property so that a notify signal is emitted with the property name as
+    <p>gegl_metadata_store_notify() is called by subclasses when the value of a<br />
+metadata variable changes. It emits the <code>::changed</code> signal with the variable<br />
+name as the detail parameter.  Set <!-- raw HTML omitted -->shadow<!-- raw HTML omitted --> = true if variable is shadowed<br />
+by a property so that a notify signal is emitted with the property name as<br />
 the detail parameter.</p>
 
 
@@ -2355,8 +2358,8 @@ the detail parameter.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A slightly more efficient version of gegl_metadata_store_set_value()
-for string values avoiding a duplication. Otherwise it behaves the same
+    <p>A slightly more efficient version of gegl_metadata_store_set_value()<br />
+for string values avoiding a duplication. Otherwise it behaves the same<br />
 gegl_metadata_store_set_value().</p>
 
 
@@ -2426,10 +2429,10 @@ gegl_metadata_store_set_value().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the specified metadata value. If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is nil the default value from
-the associated GParam::Spec is used. This operation will fail if the value
-has not been previously declared.  A <code>changed::name</code> signal is emitted when
-the value is set. If the value is shadowed by a property a <code>notify::name</code>
+    <p>Set the specified metadata value. If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is nil the default value from<br />
+the associated GParam::Spec is used. This operation will fail if the value<br />
+has not been previously declared.  A <code>changed::name</code> signal is emitted when<br />
+the value is set. If the value is shadowed by a property a <code>notify::name</code><br />
 signal is also emitted.</p>
 
 
@@ -3083,7 +3086,7 @@ signal is also emitted.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

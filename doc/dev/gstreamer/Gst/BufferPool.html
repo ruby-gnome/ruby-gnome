@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::BufferPool";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -336,6 +338,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -577,9 +580,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -634,7 +639,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Enables the option in <!-- raw HTML omitted -->config<!-- raw HTML omitted -->. This will instruct the <!-- raw HTML omitted -->bufferpool<!-- raw HTML omitted --> to enable
+    <p>Enables the option in <!-- raw HTML omitted -->config<!-- raw HTML omitted -->. This will instruct the <!-- raw HTML omitted -->bufferpool<!-- raw HTML omitted --> to enable<br />
 the specified option on the buffers that it allocates.</p>
 <p>The options supported by <!-- raw HTML omitted -->pool<!-- raw HTML omitted --> can be retrieved with gst_buffer_pool_get_options().</p>
 
@@ -793,7 +798,7 @@ the specified option on the buffers that it allocates.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Parses an available <!-- raw HTML omitted -->config<!-- raw HTML omitted --> and gets the option at <!-- raw HTML omitted -->index<!-- raw HTML omitted --> of the options API
+    <p>Parses an available <!-- raw HTML omitted -->config<!-- raw HTML omitted --> and gets the option at <!-- raw HTML omitted -->index<!-- raw HTML omitted --> of the options API<br />
 array.</p>
 
 
@@ -1058,7 +1063,7 @@ array.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the number of values currently stored in the options array of the
+    <p>Retrieves the number of values currently stored in the options array of the<br />
 <!-- raw HTML omitted -->config<!-- raw HTML omitted --> structure.</p>
 
 
@@ -1118,14 +1123,14 @@ array.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the <!-- raw HTML omitted -->allocator<!-- raw HTML omitted --> and <!-- raw HTML omitted -->params<!-- raw HTML omitted --> on <!-- raw HTML omitted -->config<!-- raw HTML omitted -->.</p>
-<p>One of <!-- raw HTML omitted -->allocator<!-- raw HTML omitted --> and <!-- raw HTML omitted -->params<!-- raw HTML omitted --> can be nil, but not both. When <!-- raw HTML omitted -->allocator<!-- raw HTML omitted -->
-is nil, the default allocator of the pool will use the values in <!-- raw HTML omitted -->param<!-- raw HTML omitted -->
-to perform its allocation. When <!-- raw HTML omitted -->param<!-- raw HTML omitted --> is nil, the pool will use the
+<p>One of <!-- raw HTML omitted -->allocator<!-- raw HTML omitted --> and <!-- raw HTML omitted -->params<!-- raw HTML omitted --> can be nil, but not both. When <!-- raw HTML omitted -->allocator<!-- raw HTML omitted --><br />
+is nil, the default allocator of the pool will use the values in <!-- raw HTML omitted -->param<!-- raw HTML omitted --><br />
+to perform its allocation. When <!-- raw HTML omitted -->param<!-- raw HTML omitted --> is nil, the pool will use the<br />
 provided <!-- raw HTML omitted -->allocator<!-- raw HTML omitted --> with its default Gst::AllocationParams.</p>
-<p>A call to gst_buffer_pool_set_config() can update the allocator and params
-with the values that it is able to do. Some pools are, for example, not able
-to operate with different allocators or cannot allocate with the values
-specified in <!-- raw HTML omitted -->params<!-- raw HTML omitted -->. Use gst_buffer_pool_get_config() to get the currently
+<p>A call to gst_buffer_pool_set_config() can update the allocator and params<br />
+with the values that it is able to do. Some pools are, for example, not able<br />
+to operate with different allocators or cannot allocate with the values<br />
+specified in <!-- raw HTML omitted -->params<!-- raw HTML omitted -->. Use gst_buffer_pool_get_config() to get the currently<br />
 used values.</p>
 
 
@@ -1324,13 +1329,13 @@ used values.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Validates that changes made to <!-- raw HTML omitted -->config<!-- raw HTML omitted --> are still valid in the context of the
-expected parameters. This function is a helper that can be used to validate
-changes made by a pool to a config when gst_buffer_pool_set_config()
-returns false. This expects that <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> haven't changed and that
-<!-- raw HTML omitted -->min_buffers<!-- raw HTML omitted --> aren't lower then what we initially expected.
-This does not check if options or allocator parameters are still valid,
-won't check if size have changed, since changing the size is valid to adapt
+    <p>Validates that changes made to <!-- raw HTML omitted -->config<!-- raw HTML omitted --> are still valid in the context of the<br />
+expected parameters. This function is a helper that can be used to validate<br />
+changes made by a pool to a config when gst_buffer_pool_set_config()<br />
+returns false. This expects that <!-- raw HTML omitted -->caps<!-- raw HTML omitted --> haven't changed and that<br />
+<!-- raw HTML omitted -->min_buffers<!-- raw HTML omitted --> aren't lower then what we initially expected.<br />
+This does not check if options or allocator parameters are still valid,<br />
+won't check if size have changed, since changing the size is valid to adapt<br />
 padding.</p>
 
 
@@ -1455,11 +1460,11 @@ padding.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Acquires a buffer from <!-- raw HTML omitted -->pool<!-- raw HTML omitted -->. <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> should point to a memory location that
-can hold a pointer to the new buffer. When the pool is empty, this function
-will by default block until a buffer is released into the pool again or when
+    <p>Acquires a buffer from <!-- raw HTML omitted -->pool<!-- raw HTML omitted -->. <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> should point to a memory location that<br />
+can hold a pointer to the new buffer. When the pool is empty, this function<br />
+will by default block until a buffer is released into the pool again or when<br />
 the pool is set to flushing or deactivated.</p>
-<p><!-- raw HTML omitted -->params<!-- raw HTML omitted --> can contain optional parameters to influence the allocation.
+<p><!-- raw HTML omitted -->params<!-- raw HTML omitted --> can contain optional parameters to influence the allocation.<br />
 inactive.</p>
 
 
@@ -1533,13 +1538,13 @@ inactive.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Controls the active state of <!-- raw HTML omitted -->pool<!-- raw HTML omitted -->. When the pool is inactive, new calls to
+    <p>Controls the active state of <!-- raw HTML omitted -->pool<!-- raw HTML omitted -->. When the pool is inactive, new calls to<br />
 gst_buffer_pool_acquire_buffer() will return with %GST_FLOW_FLUSHING.</p>
-<p>Activating the bufferpool will preallocate all resources in the pool based on
+<p>Activating the bufferpool will preallocate all resources in the pool based on<br />
 the configuration of the pool.</p>
-<p>Deactivating will free the resources again when there are no outstanding
-buffers. When there are outstanding buffers, they will be freed as soon as
-they are all returned to the pool.
+<p>Deactivating will free the resources again when there are no outstanding<br />
+buffers. When there are outstanding buffers, they will be freed as soon as<br />
+they are all returned to the pool.<br />
 buffers failed.</p>
 
 
@@ -1598,7 +1603,7 @@ buffers failed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a copy of the current configuration of the pool. This configuration
+    <p>Gets a copy of the current configuration of the pool. This configuration<br />
 can be modified and used for the gst_buffer_pool_set_config() call.</p>
 
 
@@ -1638,17 +1643,17 @@ can be modified and used for the gst_buffer_pool_set_config() call.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the configuration of the pool. If the pool is already configured, and
-the configuration hasn't changed, this function will return true. If the
-pool is active, this method will return false and active configuration
-will remain. Buffers allocated from this pool must be returned or else this
+    <p>Sets the configuration of the pool. If the pool is already configured, and<br />
+the configuration hasn't changed, this function will return true. If the<br />
+pool is active, this method will return false and active configuration<br />
+will remain. Buffers allocated from this pool must be returned or else this<br />
 function will do nothing and return false.</p>
-<p><!-- raw HTML omitted -->config<!-- raw HTML omitted --> is a Gst::Structure that contains the configuration parameters for
-the pool. A default and mandatory set of parameters can be configured with
-gst_buffer_pool_config_set_params(), gst_buffer_pool_config_set_allocator()
+<p><!-- raw HTML omitted -->config<!-- raw HTML omitted --> is a Gst::Structure that contains the configuration parameters for<br />
+the pool. A default and mandatory set of parameters can be configured with<br />
+gst_buffer_pool_config_set_params(), gst_buffer_pool_config_set_allocator()<br />
 and gst_buffer_pool_config_add_option().</p>
-<p>If the parameters in <!-- raw HTML omitted -->config<!-- raw HTML omitted --> can not be set exactly, this function returns
-false and will try to update as much state as possible. The new state can
+<p>If the parameters in <!-- raw HTML omitted -->config<!-- raw HTML omitted --> can not be set exactly, this function returns<br />
+false and will try to update as much state as possible. The new state can<br />
 then be retrieved and refined with gst_buffer_pool_get_config().</p>
 <p>This function takes ownership of <!-- raw HTML omitted -->config<!-- raw HTML omitted -->.</p>
 
@@ -1708,7 +1713,7 @@ then be retrieved and refined with gst_buffer_pool_get_config().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Enables or disables the flushing state of a <!-- raw HTML omitted -->pool<!-- raw HTML omitted --> without freeing or
+    <p>Enables or disables the flushing state of a <!-- raw HTML omitted -->pool<!-- raw HTML omitted --> without freeing or<br />
 allocating buffers.</p>
 
 
@@ -1821,7 +1826,7 @@ allocating buffers.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if <!-- raw HTML omitted -->pool<!-- raw HTML omitted --> is active. A pool can be activated with the
+    <p>Checks if <!-- raw HTML omitted -->pool<!-- raw HTML omitted --> is active. A pool can be activated with the<br />
 gst_buffer_pool_set_active() call.</p>
 
 
@@ -1861,8 +1866,8 @@ gst_buffer_pool_set_active() call.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a nil terminated array of string with supported bufferpool options for
-<!-- raw HTML omitted -->pool<!-- raw HTML omitted -->. An option would typically be enabled with
+    <p>Gets a nil terminated array of string with supported bufferpool options for<br />
+<!-- raw HTML omitted -->pool<!-- raw HTML omitted -->. An option would typically be enabled with<br />
 gst_buffer_pool_config_add_option().</p>
 
 
@@ -1881,7 +1886,7 @@ gst_buffer_pool_config_add_option().</p>
       
       
         &mdash;
-        <div class='inline'><p>a nil terminated array
+        <div class='inline'><p>a nil terminated array<br />
 of strings.</p>
 </div>
       
@@ -1903,9 +1908,9 @@ of strings.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Releases <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> to <!-- raw HTML omitted -->pool<!-- raw HTML omitted -->. <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> should have previously been allocated from
+    <p>Releases <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> to <!-- raw HTML omitted -->pool<!-- raw HTML omitted -->. <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> should have previously been allocated from<br />
 <!-- raw HTML omitted -->pool<!-- raw HTML omitted --> with gst_buffer_pool_acquire_buffer().</p>
-<p>This function is usually called automatically when the last ref on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->
+<p>This function is usually called automatically when the last ref on <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --><br />
 disappears.</p>
 
 
@@ -1956,7 +1961,7 @@ disappears.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

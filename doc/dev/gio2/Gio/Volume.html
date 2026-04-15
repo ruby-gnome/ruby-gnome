@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::Volume";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,47 +79,48 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gio2/volume.rb</dd>
+    <dd>lib/gio2/volume.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The <code>GVolume</code> interface represents user-visible objects that can be
-mounted. Note, when <a href="migrating-gnome-vfs.html">porting from GnomeVFS</a>,
+    <p>The <code>GVolume</code> interface represents user-visible objects that can be<br />
+mounted. Note, when <a href="migrating-gnome-vfs.html">porting from GnomeVFS</a>,<br />
 <code>GVolume</code> is the moral equivalent of <code>GnomeVFSDrive</code>.</p>
-<p>Mounting a <code>GVolume</code> instance is an asynchronous operation. For more
-information about asynchronous operations, see [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult] and
-[class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Task]. To mount a <code>GVolume</code>, first call [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Volume.mount]
-with (at least) the <code>GVolume</code> instance, optionally a
+<p>Mounting a <code>GVolume</code> instance is an asynchronous operation. For more<br />
+information about asynchronous operations, see [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult] and<br />
+[class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Task]. To mount a <code>GVolume</code>, first call [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Volume.mount]<br />
+with (at least) the <code>GVolume</code> instance, optionally a<br />
 [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.MountOperation] object and a [type<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncReadyCallback].</p>
-<p>Typically, one will only want to pass <code>NULL</code> for the
-[class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.MountOperation] if automounting all volumes when a desktop session
-starts since it’s not desirable to put up a lot of dialogs asking
+<p>Typically, one will only want to pass <code>NULL</code> for the<br />
+[class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.MountOperation] if automounting all volumes when a desktop session<br />
+starts since it’s not desirable to put up a lot of dialogs asking<br />
 for credentials.</p>
-<p>The callback will be fired when the operation has resolved (either
-with success or failure), and a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult] instance will be
-passed to the callback.  That callback should then call
-[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Volume.mount_finish] with the <code>GVolume</code> instance and the
-[iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult] data to see if the operation was completed
-successfully.  If a [type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Error] is present when
-[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Volume.mount_finish] is called, then it will be filled with any
+<p>The callback will be fired when the operation has resolved (either<br />
+with success or failure), and a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult] instance will be<br />
+passed to the callback.  That callback should then call<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Volume.mount_finish] with the <code>GVolume</code> instance and the<br />
+[iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult] data to see if the operation was completed<br />
+successfully.  If a [type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Error] is present when<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Volume.mount_finish] is called, then it will be filled with any<br />
 error information.</p>
-<h2>Volume Identifiers</h2>
-<p>It is sometimes necessary to directly access the underlying
-operating system object behind a volume (e.g. for passing a volume
-to an application via the command line). For this purpose, GIO
-allows to obtain an ‘identifier’ for the volume. There can be
-different kinds of identifiers, such as Hal UDIs, filesystem labels,
-traditional Unix devices (e.g. <code>/dev/sda2</code>), UUIDs. GIO uses predefined
-strings as names for the different kinds of identifiers:
-<code>G_VOLUME_IDENTIFIER_KIND_UUID</code>, <code>G_VOLUME_IDENTIFIER_KIND_LABEL</code>, etc.
+<h2><a href="#volume-identifiers" aria-hidden="true" class="anchor" id="volume-identifiers"></a>Volume Identifiers</h2>
+<p>It is sometimes necessary to directly access the underlying<br />
+operating system object behind a volume (e.g. for passing a volume<br />
+to an application via the command line). For this purpose, GIO<br />
+allows to obtain an ‘identifier’ for the volume. There can be<br />
+different kinds of identifiers, such as Hal UDIs, filesystem labels,<br />
+traditional Unix devices (e.g. <code>/dev/sda2</code>), UUIDs. GIO uses predefined<br />
+strings as names for the different kinds of identifiers:<br />
+<code>G_VOLUME_IDENTIFIER_KIND_UUID</code>, <code>G_VOLUME_IDENTIFIER_KIND_LABEL</code>, etc.<br />
 Use [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Volume.get_identifier] to obtain an identifier for a volume.</p>
-<p>Note that <code>G_VOLUME_IDENTIFIER_KIND_HAL_UDI</code> will only be available
-when the GVFS hal volume monitor is in use. Other volume monitors
-will generally be able to provide the <code>G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE</code>
-identifier, which can be used to obtain a hal device by means of
+<p>Note that <code>G_VOLUME_IDENTIFIER_KIND_HAL_UDI</code> will only be available<br />
+when the GVFS hal volume monitor is in use. Other volume monitors<br />
+will generally be able to provide the <code>G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE</code><br />
+identifier, which can be used to obtain a hal device by means of<br />
 <code>libhal_manager_find_device_string_match()</code>.</p>
 
 
@@ -828,6 +830,7 @@ identifier, which can be used to obtain a hal device by means of
 
       
     </ul>
+    
   
 
 
@@ -847,18 +850,18 @@ identifier, which can be used to obtain a hal device by means of
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the activation root for a #GVolume if it is known ahead of
-mount time. Returns nil otherwise. If not nil and if <!-- raw HTML omitted -->volume<!-- raw HTML omitted -->
-is mounted, then the result of g_mount_get_root() on the
-#GMount object obtained from g_volume_get_mount() will always
-either be equal or a prefix of what this function returns. In
+    <p>Gets the activation root for a #GVolume if it is known ahead of<br />
+mount time. Returns nil otherwise. If not nil and if <!-- raw HTML omitted -->volume<!-- raw HTML omitted --><br />
+is mounted, then the result of g_mount_get_root() on the<br />
+#GMount object obtained from g_volume_get_mount() will always<br />
+either be equal or a prefix of what this function returns. In<br />
 other words, in code</p>
 <pre class="code ruby"><code class="ruby">  (g_file_has_prefix (volume_activation_root, mount_root) ||
    g_file_equal (volume_activation_root, mount_root))
 </code></pre>
 <p>will always be true.</p>
-<p>Activation roots are typically used in GVolume::Monitor
-implementations to find the underlying mount to shadow, see
+<p>Activation roots are typically used in GVolume::Monitor<br />
+implementations to find the underlying mount to shadow, see<br />
 g_mount_is_shadowed() for more details.</p>
 
 
@@ -877,7 +880,7 @@ g_mount_is_shadowed() for more details.</p>
       
       
         &mdash;
-        <div class='inline'><p>the activation root of <!-- raw HTML omitted -->volume<!-- raw HTML omitted -->
+        <div class='inline'><p>the activation root of <!-- raw HTML omitted -->volume<!-- raw HTML omitted --><br />
 or nil. Use g_object_unref() to free.</p>
 </div>
       
@@ -1082,8 +1085,8 @@ or nil. Use g_object_unref() to free.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GDrive or nil if <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> is not
-associated with a drive. The returned object should be unreffed
+        <div class='inline'><p>a #GDrive or nil if <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> is not<br />
+associated with a drive. The returned object should be unreffed<br />
 with g_object_unref() when no longer needed.</p>
 </div>
       
@@ -1339,7 +1342,7 @@ with g_object_unref() when no longer needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GMount::Operation or nil to
+        <div class='inline'><p>a GMount::Operation or nil to<br />
 avoid user interaction</p>
 </div>
       
@@ -1493,7 +1496,7 @@ avoid user interaction</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns an array
+    <p>Returns an array<br />
 of strings containing kinds of identifiers. Use g_strfreev() to free.</p>
 
 
@@ -1531,7 +1534,7 @@ of strings containing kinds of identifiers. Use g_strfreev() to free.</p>
       
       
         &mdash;
-        <div class='inline'><p>an array
+        <div class='inline'><p>an array<br />
 of strings containing kinds of identifiers. Use g_strfreev() to free.</p>
 </div>
       
@@ -1553,7 +1556,7 @@ of strings containing kinds of identifiers. Use g_strfreev() to free.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the activation root of <!-- raw HTML omitted -->volume<!-- raw HTML omitted -->
+    <p>Returns the activation root of <!-- raw HTML omitted -->volume<!-- raw HTML omitted --><br />
 or nil. Use g_object_unref() to free.</p>
 
 
@@ -1591,7 +1594,7 @@ or nil. Use g_object_unref() to free.</p>
       
       
         &mdash;
-        <div class='inline'><p>the activation root of <!-- raw HTML omitted -->volume<!-- raw HTML omitted -->
+        <div class='inline'><p>the activation root of <!-- raw HTML omitted -->volume<!-- raw HTML omitted --><br />
 or nil. Use g_object_unref() to free.</p>
 </div>
       
@@ -1613,8 +1616,8 @@ or nil. Use g_object_unref() to free.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a #GDrive or nil if <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> is not
-associated with a drive. The returned object should be unreffed
+    <p>Returns a #GDrive or nil if <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> is not<br />
+associated with a drive. The returned object should be unreffed<br />
 with g_object_unref() when no longer needed.</p>
 
 
@@ -1652,8 +1655,8 @@ with g_object_unref() when no longer needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GDrive or nil if <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> is not
-associated with a drive. The returned object should be unreffed
+        <div class='inline'><p>a #GDrive or nil if <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> is not<br />
+associated with a drive. The returned object should be unreffed<br />
 with g_object_unref() when no longer needed.</p>
 </div>
       
@@ -1675,8 +1678,8 @@ with g_object_unref() when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a #GIcon.
-The returned object should be unreffed with g_object_unref()
+    <p>Returns a #GIcon.<br />
+The returned object should be unreffed with g_object_unref()<br />
 when no longer needed.</p>
 
 
@@ -1714,8 +1717,8 @@ when no longer needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GIcon.
-The returned object should be unreffed with g_object_unref()
+        <div class='inline'><p>a #GIcon.<br />
+The returned object should be unreffed with g_object_unref()<br />
 when no longer needed.</p>
 </div>
       
@@ -1737,8 +1740,8 @@ when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a newly allocated string containing the
-requested identifier, or nil if the #GVolume
+    <p>Returns a newly allocated string containing the<br />
+requested identifier, or nil if the #GVolume<br />
 doesn't have this kind of identifier.</p>
 
 
@@ -1791,8 +1794,8 @@ doesn't have this kind of identifier.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string containing the
-requested identifier, or nil if the #GVolume
+        <div class='inline'><p>a newly allocated string containing the<br />
+requested identifier, or nil if the #GVolume<br />
 doesn't have this kind of identifier</p>
 </div>
       
@@ -1814,8 +1817,8 @@ doesn't have this kind of identifier</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a #GMount or nil if <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> isn't mounted.
-The returned object should be unreffed with g_object_unref()
+    <p>Returns a #GMount or nil if <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> isn't mounted.<br />
+The returned object should be unreffed with g_object_unref()<br />
 when no longer needed.</p>
 
 
@@ -1853,8 +1856,8 @@ when no longer needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GMount or nil if <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> isn't mounted.
-The returned object should be unreffed with g_object_unref()
+        <div class='inline'><p>a #GMount or nil if <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> isn't mounted.<br />
+The returned object should be unreffed with g_object_unref()<br />
 when no longer needed.</p>
 </div>
       
@@ -1876,7 +1879,7 @@ when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the name for the given <!-- raw HTML omitted -->volume<!-- raw HTML omitted -->. The returned string should
+    <p>Returns the name for the given <!-- raw HTML omitted -->volume<!-- raw HTML omitted -->. The returned string should<br />
 be freed with g_free() when no longer needed.</p>
 
 
@@ -1914,7 +1917,7 @@ be freed with g_free() when no longer needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name for the given <!-- raw HTML omitted -->volume<!-- raw HTML omitted -->. The returned string should
+        <div class='inline'><p>the name for the given <!-- raw HTML omitted -->volume<!-- raw HTML omitted -->. The returned string should<br />
 be freed with g_free() when no longer needed.</p>
 </div>
       
@@ -1994,8 +1997,8 @@ be freed with g_free() when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a #GIcon.
-The returned object should be unreffed with g_object_unref()
+    <p>Returns a #GIcon.<br />
+The returned object should be unreffed with g_object_unref()<br />
 when no longer needed.</p>
 
 
@@ -2033,8 +2036,8 @@ when no longer needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GIcon.
-The returned object should be unreffed with g_object_unref()
+        <div class='inline'><p>a #GIcon.<br />
+The returned object should be unreffed with g_object_unref()<br />
 when no longer needed.</p>
 </div>
       
@@ -2056,9 +2059,9 @@ when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the UUID for <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> or nil if no UUID
-can be computed.
-The returned string should be freed with g_free()
+    <p>Returns the UUID for <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> or nil if no UUID<br />
+can be computed.<br />
+The returned string should be freed with g_free()<br />
 when no longer needed.</p>
 
 
@@ -2096,9 +2099,9 @@ when no longer needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>the UUID for <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> or nil if no UUID
-can be computed.
-The returned string should be freed with g_free()
+        <div class='inline'><p>the UUID for <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> or nil if no UUID<br />
+can be computed.<br />
+The returned string should be freed with g_free()<br />
 when no longer needed.</p>
 </div>
       
@@ -2138,8 +2141,8 @@ when no longer needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GIcon.
-The returned object should be unreffed with g_object_unref()
+        <div class='inline'><p>a #GIcon.<br />
+The returned object should be unreffed with g_object_unref()<br />
 when no longer needed.</p>
 </div>
       
@@ -2161,8 +2164,8 @@ when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Mounts a volume. This is an asynchronous operation, and is
-finished by calling g_volume_mount_finish() with the <!-- raw HTML omitted -->volume<!-- raw HTML omitted -->
+    <p>Mounts a volume. This is an asynchronous operation, and is<br />
+finished by calling g_volume_mount_finish() with the <!-- raw HTML omitted -->volume<!-- raw HTML omitted --><br />
 and GAsync::Result returned in the <!-- raw HTML omitted -->callback<!-- raw HTML omitted -->.</p>
 
 
@@ -2504,8 +2507,8 @@ and GAsync::Result returned in the <!-- raw HTML omitted -->callback<!-- raw HTM
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Mounts a volume. This is an asynchronous operation, and is
-finished by calling g_volume_mount_finish() with the <!-- raw HTML omitted -->volume<!-- raw HTML omitted -->
+    <p>Mounts a volume. This is an asynchronous operation, and is<br />
+finished by calling g_volume_mount_finish() with the <!-- raw HTML omitted -->volume<!-- raw HTML omitted --><br />
 and GAsync::Result returned in the <!-- raw HTML omitted -->callback<!-- raw HTML omitted -->.</p>
 
 
@@ -2652,7 +2655,7 @@ and GAsync::Result returned in the <!-- raw HTML omitted -->callback<!-- raw HTM
       
       
         &mdash;
-        <div class='inline'><p>the name for the given <!-- raw HTML omitted -->volume<!-- raw HTML omitted -->. The returned string should
+        <div class='inline'><p>the name for the given <!-- raw HTML omitted -->volume<!-- raw HTML omitted -->. The returned string should<br />
 be freed with g_free() when no longer needed.</p>
 </div>
       
@@ -2838,8 +2841,8 @@ be freed with g_free() when no longer needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GIcon.
-The returned object should be unreffed with g_object_unref()
+        <div class='inline'><p>a #GIcon.<br />
+The returned object should be unreffed with g_object_unref()<br />
 when no longer needed.</p>
 </div>
       
@@ -2861,9 +2864,9 @@ when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the UUID for the <!-- raw HTML omitted -->volume<!-- raw HTML omitted -->. The reference is typically based on
-the file system UUID for the volume in question and should be
-considered an opaque string. Returns nil if there is no UUID
+    <p>Gets the UUID for the <!-- raw HTML omitted -->volume<!-- raw HTML omitted -->. The reference is typically based on<br />
+the file system UUID for the volume in question and should be<br />
+considered an opaque string. Returns nil if there is no UUID<br />
 available.</p>
 
 
@@ -2882,9 +2885,9 @@ available.</p>
       
       
         &mdash;
-        <div class='inline'><p>the UUID for <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> or nil if no UUID
-can be computed.
-The returned string should be freed with g_free()
+        <div class='inline'><p>the UUID for <!-- raw HTML omitted -->volume<!-- raw HTML omitted --> or nil if no UUID<br />
+can be computed.<br />
+The returned string should be freed with g_free()<br />
 when no longer needed.</p>
 </div>
       
@@ -2902,7 +2905,7 @@ when no longer needed.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

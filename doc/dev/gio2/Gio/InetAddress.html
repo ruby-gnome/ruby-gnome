@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::InetAddress";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gio2/inet-address.rb</dd>
+    <dd>lib/gio2/inet-address.rb
+</dd>
   </dl>
   
 </div>
@@ -159,6 +161,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1067,6 +1070,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1083,8 +1087,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a GInet::Address for the loopback address for <!-- raw HTML omitted -->family<!-- raw HTML omitted -->.
-for <!-- raw HTML omitted -->family<!-- raw HTML omitted -->.
+    <p>Creates a GInet::Address for the loopback address for <!-- raw HTML omitted -->family<!-- raw HTML omitted -->.<br />
+for <!-- raw HTML omitted -->family<!-- raw HTML omitted -->.<br />
 Free the returned object with g_object_unref().</p>
 
 
@@ -1516,7 +1520,7 @@ Free the returned object with g_object_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is the &quot;any&quot; address for its family.
+    <p>Whether this is the &quot;any&quot; address for its family.<br />
 See g_inet_address_get_is_any().</p>
 
 
@@ -1584,7 +1588,7 @@ See g_inet_address_get_is_any().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is the &quot;any&quot; address for its family.
+    <p>Whether this is the &quot;any&quot; address for its family.<br />
 See g_inet_address_get_is_any().</p>
 
 
@@ -1624,8 +1628,8 @@ See g_inet_address_get_is_any().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tests whether <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is a link-local address (that is, if it
-identifies a host on a local network that is not connected to the
+    <p>Tests whether <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is a link-local address (that is, if it<br />
+identifies a host on a local network that is not connected to the<br />
 Internet).</p>
 
 
@@ -1665,7 +1669,7 @@ Internet).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is a link-local address.
+    <p>Whether this is a link-local address.<br />
 See g_inet_address_get_is_link_local().</p>
 
 
@@ -1733,7 +1737,7 @@ See g_inet_address_get_is_link_local().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is a link-local address.
+    <p>Whether this is a link-local address.<br />
 See g_inet_address_get_is_link_local().</p>
 
 
@@ -1812,7 +1816,7 @@ See g_inet_address_get_is_link_local().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is the loopback address for its family.
+    <p>Whether this is the loopback address for its family.<br />
 See g_inet_address_get_is_loopback().</p>
 
 
@@ -1880,7 +1884,7 @@ See g_inet_address_get_is_loopback().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is the loopback address for its family.
+    <p>Whether this is the loopback address for its family.<br />
 See g_inet_address_get_is_loopback().</p>
 
 
@@ -1959,7 +1963,7 @@ See g_inet_address_get_is_loopback().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is a global multicast address.
+    <p>Whether this is a global multicast address.<br />
 See g_inet_address_get_is_mc_global().</p>
 
 
@@ -2027,7 +2031,7 @@ See g_inet_address_get_is_mc_global().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is a global multicast address.
+    <p>Whether this is a global multicast address.<br />
 See g_inet_address_get_is_mc_global().</p>
 
 
@@ -2106,7 +2110,7 @@ See g_inet_address_get_is_mc_global().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is a link-local multicast address.
+    <p>Whether this is a link-local multicast address.<br />
 See g_inet_address_get_is_mc_link_local().</p>
 
 
@@ -2174,7 +2178,7 @@ See g_inet_address_get_is_mc_link_local().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is a link-local multicast address.
+    <p>Whether this is a link-local multicast address.<br />
 See g_inet_address_get_is_mc_link_local().</p>
 
 
@@ -2253,7 +2257,7 @@ See g_inet_address_get_is_mc_link_local().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is a node-local multicast address.
+    <p>Whether this is a node-local multicast address.<br />
 See g_inet_address_get_is_mc_node_local().</p>
 
 
@@ -2321,7 +2325,7 @@ See g_inet_address_get_is_mc_node_local().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is a node-local multicast address.
+    <p>Whether this is a node-local multicast address.<br />
 See g_inet_address_get_is_mc_node_local().</p>
 
 
@@ -2400,7 +2404,7 @@ See g_inet_address_get_is_mc_node_local().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is an organization-local multicast address.
+    <p>Whether this is an organization-local multicast address.<br />
 See g_inet_address_get_is_mc_org_local().</p>
 
 
@@ -2468,7 +2472,7 @@ See g_inet_address_get_is_mc_org_local().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is an organization-local multicast address.
+    <p>Whether this is an organization-local multicast address.<br />
 See g_inet_address_get_is_mc_org_local().</p>
 
 
@@ -2547,7 +2551,7 @@ See g_inet_address_get_is_mc_org_local().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is a site-local multicast address.
+    <p>Whether this is a site-local multicast address.<br />
 See g_inet_address_get_is_mc_site_local().</p>
 
 
@@ -2615,7 +2619,7 @@ See g_inet_address_get_is_mc_site_local().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is a site-local multicast address.
+    <p>Whether this is a site-local multicast address.<br />
 See g_inet_address_get_is_mc_site_local().</p>
 
 
@@ -2694,7 +2698,7 @@ See g_inet_address_get_is_mc_site_local().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is a multicast address.
+    <p>Whether this is a multicast address.<br />
 See g_inet_address_get_is_multicast().</p>
 
 
@@ -2762,7 +2766,7 @@ See g_inet_address_get_is_multicast().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is a multicast address.
+    <p>Whether this is a multicast address.<br />
 See g_inet_address_get_is_multicast().</p>
 
 
@@ -2802,9 +2806,9 @@ See g_inet_address_get_is_multicast().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tests whether <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is a site-local address such as 10.0.0.1
-(that is, the address identifies a host on a local network that can
-not be reached directly from the Internet, but which may have
+    <p>Tests whether <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is a site-local address such as 10.0.0.1<br />
+(that is, the address identifies a host on a local network that can<br />
+not be reached directly from the Internet, but which may have<br />
 outgoing Internet connectivity via a NAT or firewall).</p>
 
 
@@ -2844,7 +2848,7 @@ outgoing Internet connectivity via a NAT or firewall).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is a site-local address.
+    <p>Whether this is a site-local address.<br />
 See g_inet_address_get_is_loopback().</p>
 
 
@@ -2912,7 +2916,7 @@ See g_inet_address_get_is_loopback().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether this is a site-local address.
+    <p>Whether this is a site-local address.<br />
 See g_inet_address_get_is_loopback().</p>
 
 
@@ -2952,7 +2956,7 @@ See g_inet_address_get_is_loopback().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the size of the native raw binary address for <!-- raw HTML omitted -->address<!-- raw HTML omitted -->. This
+    <p>Gets the size of the native raw binary address for <!-- raw HTML omitted -->address<!-- raw HTML omitted -->. This<br />
 is the size of the data that you get from g_inet_address_to_bytes().</p>
 
 
@@ -2992,8 +2996,8 @@ is the size of the data that you get from g_inet_address_to_bytes().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the raw binary address data from <!-- raw HTML omitted -->address<!-- raw HTML omitted -->.
-which should not be modified, stored, or freed. The size of this
+    <p>Gets the raw binary address data from <!-- raw HTML omitted -->address<!-- raw HTML omitted -->.<br />
+which should not be modified, stored, or freed. The size of this<br />
 array can be gotten with g_inet_address_get_native_size().</p>
 
 
@@ -3033,7 +3037,7 @@ array can be gotten with g_inet_address_get_native_size().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts <!-- raw HTML omitted -->address<!-- raw HTML omitted --> to string form.
+    <p>Converts <!-- raw HTML omitted -->address<!-- raw HTML omitted --> to string form.<br />
 freed after use.</p>
 
 
@@ -3069,7 +3073,7 @@ freed after use.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

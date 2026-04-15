@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "PangoFc::Font";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -140,6 +142,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -402,9 +405,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -432,10 +437,10 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a <code>PangoFontDescription</code> that matches the specified
+    <p>Creates a <code>PangoFontDescription</code> that matches the specified<br />
 Fontconfig pattern as closely as possible.</p>
-<p>Many possible Fontconfig pattern values, such as %FC_RASTERIZER
-or %FC_DPI, don't make sense in the context of <code>PangoFontDescription</code>,
+<p>Many possible Fontconfig pattern values, such as %FC_RASTERIZER<br />
+or %FC_DPI, don't make sense in the context of <code>PangoFontDescription</code>,<br />
 so will be ignored.</p>
 
 
@@ -470,8 +475,8 @@ so will be ignored.</p>
       
       
         &mdash;
-        <div class='inline'><p>if true, the pattern will include the size from
-the <!-- raw HTML omitted -->pattern<!-- raw HTML omitted -->; otherwise the resulting pattern will be unsized.
+        <div class='inline'><p>if true, the pattern will include the size from<br />
+the <!-- raw HTML omitted -->pattern<!-- raw HTML omitted -->; otherwise the resulting pattern will be unsized.<br />
 (only %FC_SIZE is examined, not %FC_PIXEL_SIZE)</p>
 </div>
       
@@ -490,7 +495,7 @@ the <!-- raw HTML omitted -->pattern<!-- raw HTML omitted -->; otherwise the res
       
       
         &mdash;
-        <div class='inline'><p>a new <code>PangoFontDescription</code>. Free with
+        <div class='inline'><p>a new <code>PangoFontDescription</code>. Free with<br />
 pango_font_description_free().</p>
 </div>
       
@@ -624,9 +629,9 @@ pango_font_description_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the glyph index for a given Unicode character
+    <p>Gets the glyph index for a given Unicode character<br />
 for <!-- raw HTML omitted -->font<!-- raw HTML omitted -->.</p>
-<p>If you only want to determine whether the font has
+<p>If you only want to determine whether the font has<br />
 the glyph, use [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.Font.has_char].</p>
 
 
@@ -664,7 +669,7 @@ the glyph, use [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.
       
       
         &mdash;
-        <div class='inline'><p>the glyph index, or 0, if the Unicode
+        <div class='inline'><p>the glyph index, or 0, if the Unicode<br />
 character doesn't exist in the font.</p>
 </div>
       
@@ -686,7 +691,7 @@ character doesn't exist in the font.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the index of a glyph suitable for drawing <!-- raw HTML omitted -->wc<!-- raw HTML omitted -->
+    <p>Returns the index of a glyph suitable for drawing <!-- raw HTML omitted -->wc<!-- raw HTML omitted --><br />
 as an unknown character.</p>
 <p>Use PANGO_GET_UNKNOWN_GLYPH() instead.</p>
 
@@ -804,7 +809,7 @@ as an unknown character.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function used to adjust each adjacent pair of glyphs
+    <p>This function used to adjust each adjacent pair of glyphs<br />
 in <!-- raw HTML omitted -->glyphs<!-- raw HTML omitted --> according to kerning information in <!-- raw HTML omitted -->font<!-- raw HTML omitted -->.</p>
 <p>Since 1.44, it does nothing.</p>
 
@@ -862,7 +867,7 @@ in <!-- raw HTML omitted -->glyphs<!-- raw HTML omitted --> according to kerning
   <div class="discussion">
     <p>Returns the languages that are supported by <!-- raw HTML omitted -->font<!-- raw HTML omitted -->.</p>
 <p>This corresponds to the FC_LANG member of the FcPattern.</p>
-<p>The returned array is only valid as long as the font
+<p>The returned array is only valid as long as the font<br />
 and its fontmap are valid.</p>
 
 
@@ -881,7 +886,7 @@ and its fontmap are valid.</p>
       
       
         &mdash;
-        <div class='inline'><p>a
+        <div class='inline'><p>a<br />
 nil-terminated array of <code>PangoLanguage</code>*</p>
 </div>
       
@@ -904,7 +909,7 @@ nil-terminated array of <code>PangoLanguage</code>*</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the FreeType <code>FT_Face</code> associated with a font.</p>
-<p>This face will be kept around until you call
+<p>This face will be kept around until you call<br />
 [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.Font.unlock_face].</p>
 
 
@@ -1050,7 +1055,7 @@ nil-terminated array of <code>PangoLanguage</code>*</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Releases a font previously obtained with
+    <p>Releases a font previously obtained with<br />
 [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.Font.lock_face].</p>
 
 
@@ -1082,7 +1087,7 @@ nil-terminated array of <code>PangoLanguage</code>*</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

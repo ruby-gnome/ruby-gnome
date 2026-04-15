@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gsf::Input";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gsf/input.rb</dd>
+    <dd>lib/gsf/input.rb
+</dd>
   </dl>
   
 </div>
@@ -142,6 +144,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -841,6 +844,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1056,9 +1060,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Copy the contents from <!-- raw HTML omitted -->input<!-- raw HTML omitted --> to <!-- raw HTML omitted -->output<!-- raw HTML omitted --> from their respective
-current positions. So if you want to be sure to copy <em>everything</em>,
-make sure to call gsf_input_seek (input, 0, G_SEEK_SET) and
+    <p>Copy the contents from <!-- raw HTML omitted -->input<!-- raw HTML omitted --> to <!-- raw HTML omitted -->output<!-- raw HTML omitted --> from their respective<br />
+current positions. So if you want to be sure to copy <em>everything</em>,<br />
+make sure to call gsf_input_seek (input, 0, G_SEEK_SET) and<br />
 gsf_output_seek (output, 0, G_SEEK_SET) first, if applicable.</p>
 
 
@@ -1394,8 +1398,8 @@ gsf_output_seek (output, 0, G_SEEK_SET) first, if applicable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The time the input was last updated.  This represents the
-timestamp from the originating file or <!-- raw HTML omitted -->GsfInfile<!-- raw HTML omitted --> member.
+    <p>The time the input was last updated.  This represents the<br />
+timestamp from the originating file or <!-- raw HTML omitted -->GsfInfile<!-- raw HTML omitted --> member.<br />
 It is not supported by all derived classes.</p>
 
 
@@ -1435,8 +1439,8 @@ It is not supported by all derived classes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The time the input was last updated.  This represents the
-timestamp from the originating file or <!-- raw HTML omitted -->GsfInfile<!-- raw HTML omitted --> member.
+    <p>The time the input was last updated.  This represents the<br />
+timestamp from the originating file or <!-- raw HTML omitted -->GsfInfile<!-- raw HTML omitted --> member.<br />
 It is not supported by all derived classes.</p>
 
 
@@ -1822,9 +1826,9 @@ It is not supported by all derived classes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Read at least <!-- raw HTML omitted -->num_bytes<!-- raw HTML omitted -->.  Does not change the current position if there
-is an error.  Will only read if the entire amount can be read.  Invalidates
-the buffer associated with previous calls to gsf_input_read.
+    <p>Read at least <!-- raw HTML omitted -->num_bytes<!-- raw HTML omitted -->.  Does not change the current position if there<br />
+is an error.  Will only read if the entire amount can be read.  Invalidates<br />
+the buffer associated with previous calls to gsf_input_read.<br />
 an error or 0 bytes are requested.</p>
 
 
@@ -1920,8 +1924,8 @@ an error or 0 bytes are requested.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Read <!-- raw HTML omitted -->num_bytes<!-- raw HTML omitted -->.  Does not change the current position if there
-is an error.  Will only read if the entire amount can be read.
+    <p>Read <!-- raw HTML omitted -->num_bytes<!-- raw HTML omitted -->.  Does not change the current position if there<br />
+is an error.  Will only read if the entire amount can be read.<br />
 the data read.</p>
 
 
@@ -1991,9 +1995,9 @@ the data read.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Read at least <!-- raw HTML omitted -->num_bytes<!-- raw HTML omitted -->.  Does not change the current position if there
-is an error.  Will only read if the entire amount can be read.  Invalidates
-the buffer associated with previous calls to gsf_input_read.
+    <p>Read at least <!-- raw HTML omitted -->num_bytes<!-- raw HTML omitted -->.  Does not change the current position if there<br />
+is an error.  Will only read if the entire amount can be read.  Invalidates<br />
+the buffer associated with previous calls to gsf_input_read.<br />
 an error or 0 bytes are requested.</p>
 
 
@@ -2221,7 +2225,7 @@ an error or 0 bytes are requested.</p>
       
       
         &mdash;
-        <div class='inline'><p>determines whether the offset is relative to the beginning or
+        <div class='inline'><p>determines whether the offset is relative to the beginning or<br />
 the end of the stream, or to the current location.</p>
 </div>
       
@@ -2319,10 +2323,10 @@ the end of the stream, or to the current location.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>UNIMPLEMENTED BY ANY BACKEND
-and it is probably unnecessary.   gsf_input_get_container provides
+    <p>UNIMPLEMENTED BY ANY BACKEND<br />
+and it is probably unnecessary.   gsf_input_get_container provides<br />
 enough power to do what is necessary.</p>
-<p>Attempts to open a 'sibling' of <!-- raw HTML omitted -->input<!-- raw HTML omitted -->.  The caller is responsible for
+<p>Attempts to open a 'sibling' of <!-- raw HTML omitted -->input<!-- raw HTML omitted -->.  The caller is responsible for<br />
 managing the resulting object.</p>
 
 
@@ -2526,8 +2530,8 @@ managing the resulting object.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This functions takes ownership of the incoming reference and yields a
-new one as its output.
+    <p>This functions takes ownership of the incoming reference and yields a<br />
+new one as its output.<br />
 but uncompressed if the source was compressed.</p>
 
 
@@ -2563,7 +2567,7 @@ but uncompressed if the source was compressed.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

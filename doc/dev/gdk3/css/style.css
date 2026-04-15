@@ -46,6 +46,37 @@ body {
   padding-top: 0.2em;
   box-sizing: border-box;
 }
+#main_progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  overflow: hidden;
+  opacity: 0;
+  z-index: 20;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+#main_progress::before {
+  content: "";
+  display: block;
+  width: 35%;
+  height: 100%;
+  background: linear-gradient(90deg, #1b6ac9 0%, #4ea3ff 100%);
+  transform: translateX(-120%);
+}
+#main.loading #main_progress {
+  opacity: 1;
+}
+#main.loading #main_progress::before {
+  animation: yard-progress-slide 1s ease-in-out infinite;
+}
+
+@keyframes yard-progress-slide {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(320%); }
+}
 
 @media (max-width: 920px) {
   body { display: block; }

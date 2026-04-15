@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::IconTheme";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -102,18 +104,18 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p><code>GtkIconTheme</code> provides a facility for loading themed icons.</p>
-<p>The main reason for using a name rather than simply providing a filename
-is to allow different icons to be used depending on what “icon theme” is
-selected by the user. The operation of icon themes on Linux and Unix
-follows the <a href="http://www.freedesktop.org/Standards/icon-theme-spec">Icon Theme Specification</a>
-There is a fallback icon theme, named <code>hicolor</code>, where applications
-should install their icons, but additional icon themes can be installed
+<p>The main reason for using a name rather than simply providing a filename<br />
+is to allow different icons to be used depending on what “icon theme” is<br />
+selected by the user. The operation of icon themes on Linux and Unix<br />
+follows the <a href="http://www.freedesktop.org/Standards/icon-theme-spec">Icon Theme Specification</a><br />
+There is a fallback icon theme, named <code>hicolor</code>, where applications<br />
+should install their icons, but additional icon themes can be installed<br />
 as operating system vendors and users choose.</p>
-<p>In many cases, named themes are used indirectly, via [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image]
-rather than directly, but looking up icons directly is also simple. The
-<code>GtkIconTheme</code> object acts as a database of all the icons in the current
-theme. You can create new <code>GtkIconTheme</code> objects, but it’s much more
-efficient to use the standard icon theme of the <code>GtkWidget</code> so that the
+<p>In many cases, named themes are used indirectly, via [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image]<br />
+rather than directly, but looking up icons directly is also simple. The<br />
+<code>GtkIconTheme</code> object acts as a database of all the icons in the current<br />
+theme. You can create new <code>GtkIconTheme</code> objects, but it’s much more<br />
+efficient to use the standard icon theme of the <code>GtkWidget</code> so that the<br />
 icon information is shared with other people looking up icons.</p>
 <pre class="code c"><code class="c">GtkIconTheme *icon_theme;
 GtkIconPaintable *icon;
@@ -175,6 +177,7 @@ g_object_unref (icon);
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -600,6 +603,7 @@ g_object_unref (icon);
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -617,9 +621,9 @@ g_object_unref (icon);
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new icon theme object.</p>
-<p>Icon theme objects are used to lookup up an icon by name
-in a particular icon theme. Usually, you’ll want to use
-[func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconTheme.get_for_display] rather than creating
+<p>Icon theme objects are used to lookup up an icon by name<br />
+in a particular icon theme. Usually, you’ll want to use<br />
+[func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconTheme.get_for_display] rather than creating<br />
 a new icon theme object for scratch.</p>
 
 
@@ -650,11 +654,11 @@ a new icon theme object for scratch.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the icon theme object associated with <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
-<p>If this function has not previously been called for the given
-display, a new icon theme object will be created and associated
-with the display. Icon theme objects are fairly expensive to create,
-so using this function is usually a better choice than calling
-[ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconTheme.new] and setting the display yourself; by using
+<p>If this function has not previously been called for the given<br />
+display, a new icon theme object will be created and associated<br />
+with the display. Icon theme objects are fairly expensive to create,<br />
+so using this function is usually a better choice than calling<br />
+[ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconTheme.new] and setting the display yourself; by using<br />
 this function a single icon theme object will be shared between users.</p>
 
 
@@ -692,8 +696,8 @@ this function a single icon theme object will be shared between users.</p>
       
       
         &mdash;
-        <div class='inline'><p>A unique <code>GtkIconTheme</code> associated with
-the given display. This icon theme is associated with the display
+        <div class='inline'><p>A unique <code>GtkIconTheme</code> associated with<br />
+the given display. This icon theme is associated with the display<br />
 and can be used as long as the display is open. Do not ref or unref it.</p>
 </div>
       
@@ -721,10 +725,10 @@ and can be used as long as the display is open. Do not ref or unref it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a resource path that will be looked at when looking
+    <p>Adds a resource path that will be looked at when looking<br />
 for icons, similar to search paths.</p>
 <p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconTheme.set_resource_path].</p>
-<p>This function should be used to make application-specific icons
+<p>This function should be used to make application-specific icons<br />
 available as part of the icon theme.</p>
 
 
@@ -940,9 +944,9 @@ available as part of the icon theme.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns an array of integers describing the sizes at which
+    <p>Returns an array of integers describing the sizes at which<br />
 the icon is available without scaling.</p>
-<p>A size of -1 means that the icon is available in a scalable
+<p>A size of -1 means that the icon is available in a scalable<br />
 format. The array is zero-terminated.</p>
 
 
@@ -980,9 +984,9 @@ format. The array is zero-terminated.</p>
       
       
         &mdash;
-        <div class='inline'><p>A newly
-allocated array describing the sizes at which the icon is
-available. The array should be freed with g_free() when it is no
+        <div class='inline'><p>A newly<br />
+allocated array describing the sizes at which the icon is<br />
+available. The array should be freed with g_free() when it is no<br />
 longer needed.</p>
 </div>
       
@@ -1004,7 +1008,7 @@ longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether an icon theme includes an icon
+    <p>Checks whether an icon theme includes an icon<br />
 for a particular <code>GIcon</code>.</p>
 
 
@@ -1063,7 +1067,7 @@ for a particular <code>GIcon</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether an icon theme includes an icon
+    <p>Checks whether an icon theme includes an icon<br />
 for a particular name.</p>
 
 
@@ -1101,7 +1105,7 @@ for a particular name.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->self<!-- raw HTML omitted --> includes an
+        <div class='inline'><p>true if <!-- raw HTML omitted -->self<!-- raw HTML omitted --> includes an<br />
 icon for <!-- raw HTML omitted -->icon_name<!-- raw HTML omitted -->.</p>
 </div>
       
@@ -1230,7 +1234,7 @@ icon for <!-- raw HTML omitted -->icon_name<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Looks up a icon for a desired size and window scale.</p>
-<p>The icon can then be rendered by using it as a <code>GdkPaintable</code>,
+<p>The icon can then be rendered by using it as a <code>GdkPaintable</code>,<br />
 or you can get information such as the filename and size.</p>
 
 
@@ -1328,7 +1332,7 @@ or you can get information such as the filename and size.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GtkIconPaintable</code> containing
+        <div class='inline'><p>a <code>GtkIconPaintable</code> containing<br />
 information about the icon. Unref with g_object_unref()</p>
 </div>
       
@@ -1350,17 +1354,17 @@ information about the icon. Unref with g_object_unref()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks up a named icon for a desired size and window scale,
+    <p>Looks up a named icon for a desired size and window scale,<br />
 returning a <code>GtkIconPaintable</code>.</p>
-<p>The icon can then be rendered by using it as a <code>GdkPaintable</code>,
+<p>The icon can then be rendered by using it as a <code>GdkPaintable</code>,<br />
 or you can get information such as the filename and size.</p>
-<p>If the available <!-- raw HTML omitted -->icon_name<!-- raw HTML omitted --> is not available and <!-- raw HTML omitted -->fallbacks<!-- raw HTML omitted --> are
+<p>If the available <!-- raw HTML omitted -->icon_name<!-- raw HTML omitted --> is not available and <!-- raw HTML omitted -->fallbacks<!-- raw HTML omitted --> are<br />
 provided, they will be tried in order.</p>
-<p>If no matching icon is found, then a paintable that renders the
-&quot;missing icon&quot; icon is returned. If you need to do something else
+<p>If no matching icon is found, then a paintable that renders the<br />
+&quot;missing icon&quot; icon is returned. If you need to do something else<br />
 for missing icons you need to use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconTheme.has_icon].</p>
-<p>Note that you probably want to listen for icon theme changes and
-update the icon. This is usually done by overriding the
+<p>Note that you probably want to listen for icon theme changes and<br />
+update the icon. This is usually done by overriding the<br />
 GtkWidgetClass.css-changed() function.</p>
 
 
@@ -1469,7 +1473,7 @@ GtkWidgetClass.css-changed() function.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GtkIconPaintable</code> object
+        <div class='inline'><p>a <code>GtkIconPaintable</code> object<br />
 containing the icon.</p>
 </div>
       
@@ -1491,12 +1495,12 @@ containing the icon.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Resource paths that will be looked at when looking for icons,
+    <p>Resource paths that will be looked at when looking for icons,<br />
 similar to search paths.</p>
-<p>The resources are considered as part of the hicolor icon theme
-and must be located in subdirectories that are defined in the
-hicolor icon theme, such as <code>&lt;b&gt;path&lt;/b&gt;/16x16/actions/run.png</code>.
-Icons that are directly placed in the resource path instead
+<p>The resources are considered as part of the hicolor icon theme<br />
+and must be located in subdirectories that are defined in the<br />
+hicolor icon theme, such as <code>&lt;b&gt;path&lt;/b&gt;/16x16/actions/run.png</code>.<br />
+Icons that are directly placed in the resource path instead<br />
 of a subdirectory are also considered as ultimate fallback.</p>
 
 
@@ -1536,12 +1540,12 @@ of a subdirectory are also considered as ultimate fallback.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Resource paths that will be looked at when looking for icons,
+    <p>Resource paths that will be looked at when looking for icons,<br />
 similar to search paths.</p>
-<p>The resources are considered as part of the hicolor icon theme
-and must be located in subdirectories that are defined in the
-hicolor icon theme, such as <code>&lt;b&gt;path&lt;/b&gt;/16x16/actions/run.png</code>.
-Icons that are directly placed in the resource path instead
+<p>The resources are considered as part of the hicolor icon theme<br />
+and must be located in subdirectories that are defined in the<br />
+hicolor icon theme, such as <code>&lt;b&gt;path&lt;/b&gt;/16x16/actions/run.png</code>.<br />
+Icons that are directly placed in the resource path instead<br />
 of a subdirectory are also considered as ultimate fallback.</p>
 
 
@@ -1610,10 +1614,10 @@ of a subdirectory are also considered as ultimate fallback.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The search path for this icon theme.</p>
-<p>When looking for icons, GTK will search for a subdirectory of
-one or more of the directories in the search path with the same
-name as the icon theme containing an index.theme file. (Themes
-from multiple of the path elements are combined to allow themes
+<p>When looking for icons, GTK will search for a subdirectory of<br />
+one or more of the directories in the search path with the same<br />
+name as the icon theme containing an index.theme file. (Themes<br />
+from multiple of the path elements are combined to allow themes<br />
 to be extended by adding icons in the user’s home directory.)</p>
 
 
@@ -1654,10 +1658,10 @@ to be extended by adding icons in the user’s home directory.)</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The search path for this icon theme.</p>
-<p>When looking for icons, GTK will search for a subdirectory of
-one or more of the directories in the search path with the same
-name as the icon theme containing an index.theme file. (Themes
-from multiple of the path elements are combined to allow themes
+<p>When looking for icons, GTK will search for a subdirectory of<br />
+one or more of the directories in the search path with the same<br />
+name as the icon theme containing an index.theme file. (Themes<br />
+from multiple of the path elements are combined to allow themes<br />
 to be extended by adding icons in the user’s home directory.)</p>
 
 
@@ -1726,8 +1730,8 @@ to be extended by adding icons in the user’s home directory.)</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The name of the icon theme that is being used.</p>
-<p>Unless set to a different value, this will be the value of
-the <code>GtkSettings:gtk-icon-theme-name</code> property of the <code>GtkSettings</code>
+<p>Unless set to a different value, this will be the value of<br />
+the <code>GtkSettings:gtk-icon-theme-name</code> property of the <code>GtkSettings</code><br />
 object associated to the display of the icontheme object.</p>
 
 
@@ -1768,8 +1772,8 @@ object associated to the display of the icontheme object.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The name of the icon theme that is being used.</p>
-<p>Unless set to a different value, this will be the value of
-the <code>GtkSettings:gtk-icon-theme-name</code> property of the <code>GtkSettings</code>
+<p>Unless set to a different value, this will be the value of<br />
+the <code>GtkSettings:gtk-icon-theme-name</code> property of the <code>GtkSettings</code><br />
 object associated to the display of the icontheme object.</p>
 
 
@@ -1833,7 +1837,7 @@ object associated to the display of the icontheme object.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

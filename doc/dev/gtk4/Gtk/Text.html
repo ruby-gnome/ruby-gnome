@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Text";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -106,24 +108,24 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkText</code> widget is a single-line text entry widget.</p>
-<p><code>GtkText</code> is the common implementation of single-line text editing
-that is shared between [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry], [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PasswordEntry],
-[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SpinButton], and other widgets. In all of these, <code>GtkText</code> is
+<p><code>GtkText</code> is the common implementation of single-line text editing<br />
+that is shared between [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry], [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PasswordEntry],<br />
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SpinButton], and other widgets. In all of these, <code>GtkText</code> is<br />
 used as the delegate for the [iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable] implementation.</p>
-<p>A fairly large set of key bindings are supported by default. If the
-entered text is longer than the allocation of the widget, the widget
+<p>A fairly large set of key bindings are supported by default. If the<br />
+entered text is longer than the allocation of the widget, the widget<br />
 will scroll so that the cursor position is visible.</p>
-<p>When using an entry for passwords and other sensitive information,
-it can be put into “password mode” using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Text.set_visibility].
-In this mode, entered text is displayed using a “invisible” character.
-By default, GTK picks the best invisible character that is available
-in the current font, but it can be changed with
+<p>When using an entry for passwords and other sensitive information,<br />
+it can be put into “password mode” using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Text.set_visibility].<br />
+In this mode, entered text is displayed using a “invisible” character.<br />
+By default, GTK picks the best invisible character that is available<br />
+in the current font, but it can be changed with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Text.set_invisible_char].</p>
-<p>If you are looking to add icons or progress display in an entry, look
-at [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry]. There other alternatives for more specialized use
+<p>If you are looking to add icons or progress display in an entry, look<br />
+at [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry]. There other alternatives for more specialized use<br />
 cases, such as [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchEntry].</p>
 <p>If you need multi-line editable text, look at [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView].</p>
-<h1>CSS nodes</h1>
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
 <pre class="code ruby"><code class="ruby">text[.read-only]
 ├── placeholder
 ├── undershoot.left
@@ -132,24 +134,24 @@ cases, such as [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Searc
 ├── [block-cursor]
 ╰── [window.popup]
 </code></pre>
-<p><code>GtkText</code> has a main node with the name <code>text</code>. Depending on the properties
+<p><code>GtkText</code> has a main node with the name <code>text</code>. Depending on the properties<br />
 of the widget, the <code>.read-only</code> style class may appear.</p>
 <p>When the entry has a selection, it adds a subnode with the name <code>selection</code>.</p>
-<p>When the entry is in overwrite mode, it adds a subnode with the name
+<p>When the entry is in overwrite mode, it adds a subnode with the name<br />
 <code>block-cursor</code> that determines how the block cursor is drawn.</p>
 <p>The CSS node for a context menu is added as a subnode with the name <code>popup</code>.</p>
-<p>The <code>undershoot</code> nodes are used to draw the underflow indication when content
-is scrolled out of view. These nodes get the <code>.left</code> or <code>.right</code> style class
+<p>The <code>undershoot</code> nodes are used to draw the underflow indication when content<br />
+is scrolled out of view. These nodes get the <code>.left</code> or <code>.right</code> style class<br />
 added depending on where the indication is drawn.</p>
-<p>When touch is used and touch selection handles are shown, they are using
-CSS nodes with name <code>cursor-handle</code>. They get the <code>.top</code> or <code>.bottom</code> style
-class depending on where they are shown in relation to the selection. If
-there is just a single handle for the text cursor, it gets the style class
+<p>When touch is used and touch selection handles are shown, they are using<br />
+CSS nodes with name <code>cursor-handle</code>. They get the <code>.top</code> or <code>.bottom</code> style<br />
+class depending on where they are shown in relation to the selection. If<br />
+there is just a single handle for the text cursor, it gets the style class<br />
 <code>.insertion-cursor</code>.</p>
-<h1>Accessibility</h1>
-<p><code>GtkText</code> uses the %GTK_ACCESSIBLE_ROLE_NONE role, which causes it to be
-skipped for accessibility. This is because <code>GtkText</code> is expected to be used
-as a delegate for a <code>GtkEditable</code> implementation that will be represented
+<h1><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h1>
+<p><code>GtkText</code> uses the %GTK_ACCESSIBLE_ROLE_NONE role, which causes it to be<br />
+skipped for accessibility. This is because <code>GtkText</code> is expected to be used<br />
+as a delegate for a <code>GtkEditable</code> implementation that will be represented<br />
 to accessibility.</p>
 
 
@@ -1257,9 +1259,11 @@ to accessibility.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -1334,7 +1338,7 @@ to accessibility.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether pressing Enter will activate
+    <p>Returns whether pressing Enter will activate<br />
 the default widget for the window containing <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
 <p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Text.set_activates_default].</p>
 
@@ -1483,7 +1487,7 @@ the default widget for the window containing <!-- raw HTML omitted -->self<!-- r
   <div class="discussion">
     <p>A list of Pango attributes to apply to the text of the <code>GtkText</code>.</p>
 <p>This is mainly useful to change the size or weight of the text.</p>
-<p>The <code>PangoAttribute</code>'s <!-- raw HTML omitted -->start_index<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_index<!-- raw HTML omitted --> must refer to the
+<p>The <code>PangoAttribute</code>'s <!-- raw HTML omitted -->start_index<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_index<!-- raw HTML omitted --> must refer to the<br />
 <code>GtkEntryBuffer</code> text, i.e. without the preedit string.</p>
 
 
@@ -1525,7 +1529,7 @@ the default widget for the window containing <!-- raw HTML omitted -->self<!-- r
   <div class="discussion">
     <p>A list of Pango attributes to apply to the text of the <code>GtkText</code>.</p>
 <p>This is mainly useful to change the size or weight of the text.</p>
-<p>The <code>PangoAttribute</code>'s <!-- raw HTML omitted -->start_index<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_index<!-- raw HTML omitted --> must refer to the
+<p>The <code>PangoAttribute</code>'s <!-- raw HTML omitted -->start_index<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_index<!-- raw HTML omitted --> must refer to the<br />
 <code>GtkEntryBuffer</code> text, i.e. without the preedit string.</p>
 
 
@@ -1699,12 +1703,12 @@ the default widget for the window containing <!-- raw HTML omitted -->self<!-- r
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determine the positions of the strong and weak cursors if the
+    <p>Determine the positions of the strong and weak cursors if the<br />
 insertion point in the layout is at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
-<p>The position of each cursor is stored as a zero-width rectangle.
-The strong cursor location is the location where characters of
-the directionality equal to the base direction are inserted.
-The weak cursor location is the location where characters of
+<p>The position of each cursor is stored as a zero-width rectangle.<br />
+The strong cursor location is the location where characters of<br />
+the directionality equal to the base direction are inserted.<br />
+The weak cursor location is the location where characters of<br />
 the directionality opposite to the base direction are inserted.</p>
 <p>The rectangle positions are in widget coordinates.</p>
 
@@ -1790,7 +1794,7 @@ the directionality opposite to the base direction are inserted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether Emoji completion is enabled for this
+    <p>Returns whether Emoji completion is enabled for this<br />
 <code>GtkText</code> widget.</p>
 
 
@@ -1936,7 +1940,7 @@ the directionality opposite to the base direction are inserted.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A menu model whose contents will be appended to
+    <p>A menu model whose contents will be appended to<br />
 the context menu.</p>
 
 
@@ -1976,7 +1980,7 @@ the context menu.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A menu model whose contents will be appended to
+    <p>A menu model whose contents will be appended to<br />
 the context menu.</p>
 
 
@@ -2045,10 +2049,10 @@ the context menu.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Causes <!-- raw HTML omitted -->self<!-- raw HTML omitted --> to have keyboard focus.</p>
-<p>It behaves like [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.grab_focus],
-except that it doesn't select the contents of <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.
-You only want to call this on some special entries
-which the user usually doesn't want to replace all text in,
+<p>It behaves like [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.grab_focus],<br />
+except that it doesn't select the contents of <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.<br />
+You only want to call this on some special entries<br />
+which the user usually doesn't want to replace all text in,<br />
 such as search-as-you-type entries.</p>
 
 
@@ -2090,8 +2094,8 @@ such as search-as-you-type entries.</p>
   <div class="discussion">
     <p>Which IM (input method) module should be used for this self.</p>
 <p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMMulticontext].</p>
-<p>Setting this to a non-nil value overrides the system-wide
-IM module setting. See the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-im-module]
+<p>Setting this to a non-nil value overrides the system-wide<br />
+IM module setting. See the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-im-module]<br />
 property.</p>
 
 
@@ -2133,8 +2137,8 @@ property.</p>
   <div class="discussion">
     <p>Which IM (input method) module should be used for this self.</p>
 <p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMMulticontext].</p>
-<p>Setting this to a non-nil value overrides the system-wide
-IM module setting. See the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-im-module]
+<p>Setting this to a non-nil value overrides the system-wide<br />
+IM module setting. See the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-im-module]<br />
 property.</p>
 
 
@@ -2202,7 +2206,7 @@ property.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Additional hints that allow input methods to fine-tune
+    <p>Additional hints that allow input methods to fine-tune<br />
 their behaviour.</p>
 
 
@@ -2242,7 +2246,7 @@ their behaviour.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Additional hints that allow input methods to fine-tune
+    <p>Additional hints that allow input methods to fine-tune<br />
 their behaviour.</p>
 
 
@@ -2311,10 +2315,10 @@ their behaviour.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The purpose of this text field.</p>
-<p>This property can be used by on-screen keyboards and other input
+<p>This property can be used by on-screen keyboards and other input<br />
 methods to adjust their behaviour.</p>
-<p>Note that setting the purpose to %GTK_INPUT_PURPOSE_PASSWORD or
-%GTK_INPUT_PURPOSE_PIN is independent from setting
+<p>Note that setting the purpose to %GTK_INPUT_PURPOSE_PASSWORD or<br />
+%GTK_INPUT_PURPOSE_PIN is independent from setting<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Text:visibility].</p>
 
 
@@ -2355,10 +2359,10 @@ methods to adjust their behaviour.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The purpose of this text field.</p>
-<p>This property can be used by on-screen keyboards and other input
+<p>This property can be used by on-screen keyboards and other input<br />
 methods to adjust their behaviour.</p>
-<p>Note that setting the purpose to %GTK_INPUT_PURPOSE_PASSWORD or
-%GTK_INPUT_PURPOSE_PIN is independent from setting
+<p>Note that setting the purpose to %GTK_INPUT_PURPOSE_PASSWORD or<br />
+%GTK_INPUT_PURPOSE_PIN is independent from setting<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Text:visibility].</p>
 
 
@@ -2892,7 +2896,7 @@ methods to adjust their behaviour.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The text that will be displayed in the <code>GtkText</code> when it is empty
+    <p>The text that will be displayed in the <code>GtkText</code> when it is empty<br />
 and unfocused.</p>
 
 
@@ -2932,7 +2936,7 @@ and unfocused.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The text that will be displayed in the <code>GtkText</code> when it is empty
+    <p>The text that will be displayed in the <code>GtkText</code> when it is empty<br />
 and unfocused.</p>
 
 
@@ -3000,7 +3004,7 @@ and unfocused.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the <code>GtkText</code> will grow and shrink
+    <p>Returns whether the <code>GtkText</code> will grow and shrink<br />
 with the content.</p>
 
 
@@ -3359,7 +3363,7 @@ with the content.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the current length of the text in <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
-<p>This is equivalent to getting <!-- raw HTML omitted -->self<!-- raw HTML omitted -->'s <code>GtkEntryBuffer</code>
+<p>This is equivalent to getting <!-- raw HTML omitted -->self<!-- raw HTML omitted -->'s <code>GtkEntryBuffer</code><br />
 and calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryBuffer.get_length] on it.</p>
 
 
@@ -3378,7 +3382,7 @@ and calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryBu
       
       
         &mdash;
-        <div class='inline'><p>the current number of characters
+        <div class='inline'><p>the current number of characters<br />
 in <code>GtkText</code>, or 0 if there are none.</p>
 </div>
       
@@ -3400,7 +3404,7 @@ in <code>GtkText</code>, or 0 if there are none.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the <code>GtkText</code> will truncate multi-line text
+    <p>Returns whether the <code>GtkText</code> will truncate multi-line text<br />
 that is pasted into the widget</p>
 
 
@@ -3547,7 +3551,7 @@ that is pasted into the widget</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Unsets the invisible char.</p>
-<p>After calling this, the default invisible
+<p>After calling this, the default invisible<br />
 char is used again.</p>
 
 
@@ -3724,7 +3728,7 @@ char is used again.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

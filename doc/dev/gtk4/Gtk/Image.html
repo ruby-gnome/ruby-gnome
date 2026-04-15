@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Image";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -103,8 +104,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/image.rb<span class="defines">,<br />
+    <dd>lib/gtk4/image.rb<span class="defines">,<br>
   lib/gtk4/deprecated.rb</span>
+
 </dd>
   </dl>
   
@@ -114,30 +116,30 @@
   <div class="discussion">
     <p>The <code>GtkImage</code> widget displays an image.</p>
 <p><img src="image.png" alt="An example GtkImage" /></p>
-<p>Various kinds of object can be displayed as an image; most typically,
-you would load a <code>GdkTexture</code> from a file, using the convenience function
+<p>Various kinds of object can be displayed as an image; most typically,<br />
+you would load a <code>GdkTexture</code> from a file, using the convenience function<br />
 [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image.new_from_file], for instance:</p>
 <pre class="code c"><code class="c">GtkWidget *image = gtk_image_new_from_file (&quot;myfile.png&quot;);
 </code></pre>
-<p>If the file isn’t loaded successfully, the image will contain a
+<p>If the file isn’t loaded successfully, the image will contain a<br />
 “broken image” icon similar to that used in many web browsers.</p>
-<p>If you want to handle errors in loading the file yourself,
-for example by displaying an error message, then load the image with
-[ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.new_from_file], then create the <code>GtkImage</code> with
+<p>If you want to handle errors in loading the file yourself,<br />
+for example by displaying an error message, then load the image with<br />
+[ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.new_from_file], then create the <code>GtkImage</code> with<br />
 [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image.new_from_paintable].</p>
-<p>Sometimes an application will want to avoid depending on external data
-files, such as image files. See the documentation of <code>GResource</code> inside
-GIO, for details. In this case, [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image:resource],
-[ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image.new_from_resource], and [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image.set_from_resource]
+<p>Sometimes an application will want to avoid depending on external data<br />
+files, such as image files. See the documentation of <code>GResource</code> inside<br />
+GIO, for details. In this case, [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image:resource],<br />
+[ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image.new_from_resource], and [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image.set_from_resource]<br />
 should be used.</p>
-<p><code>GtkImage</code> displays its image as an icon, with a size that is determined
-by the application. See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Picture] if you want to show an image
+<p><code>GtkImage</code> displays its image as an icon, with a size that is determined<br />
+by the application. See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Picture] if you want to show an image<br />
 at is actual size.</p>
-<h2>CSS nodes</h2>
-<p><code>GtkImage</code> has a single CSS node with the name <code>image</code>. The style classes
-<code>.normal-icons</code> or <code>.large-icons</code> may appear, depending on the
+<h2><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h2>
+<p><code>GtkImage</code> has a single CSS node with the name <code>image</code>. The style classes<br />
+<code>.normal-icons</code> or <code>.large-icons</code> may appear, depending on the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image:icon-size] property.</p>
-<h2>Accessibility</h2>
+<h2><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h2>
 <p><code>GtkImage</code> uses the <code>GTK_ACCESSIBLE_ROLE_IMG</code> role.</p>
 
 
@@ -785,9 +787,11 @@ at is actual size.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -815,9 +819,9 @@ at is actual size.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a Gtk::Image. The source of the image depends on the options
+    <p>Creates a Gtk::Image. The source of the image depends on the options<br />
 given.</p>
-<p>icon = Gio::Icon.new_for_string 'path/to/the/image.png'
+<p>icon = Gio::Icon.new_for_string 'path/to/the/image.png'<br />
 image = Gtk::Image.new(icon: icon)</p>
 
 
@@ -1346,8 +1350,8 @@ image = Gtk::Image.new(icon: icon)</p>
   <div class="discussion">
     <p>Sets a <code>GtkImage</code> to show a <code>GdkPixbuf</code>.</p>
 <p>See [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image.new_from_pixbuf] for details.</p>
-<p>Note: This is a helper for [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image.set_from_paintable],
-and you can't get back the exact pixbuf once this is called,
+<p>Note: This is a helper for [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image.set_from_paintable],<br />
+and you can't get back the exact pixbuf once this is called,<br />
 only a paintable.</p>
 
 
@@ -1458,7 +1462,7 @@ only a paintable.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GIcon</code> displayed in the GtkImage.</p>
-<p>For themed icons, If the icon theme is changed, the image will be updated
+<p>For themed icons, If the icon theme is changed, the image will be updated<br />
 automatically.</p>
 
 
@@ -1499,7 +1503,7 @@ automatically.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GIcon</code> displayed in the GtkImage.</p>
-<p>For themed icons, If the icon theme is changed, the image will be updated
+<p>For themed icons, If the icon theme is changed, the image will be updated<br />
 automatically.</p>
 
 
@@ -1782,14 +1786,14 @@ automatically.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkImage</code> displaying the resource file <!-- raw HTML omitted -->resource_path<!-- raw HTML omitted -->.</p>
-<p>If the file isn’t found or can’t be loaded, the resulting <code>GtkImage</code> will
-display a “broken image” icon. This function never returns nil,
+<p>If the file isn’t found or can’t be loaded, the resulting <code>GtkImage</code> will<br />
+display a “broken image” icon. This function never returns nil,<br />
 it always returns a valid <code>GtkImage</code> widget.</p>
-<p>If you need to detect failures to load the file, use
-[ctor<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf.new_from_file] to load the file yourself,
+<p>If you need to detect failures to load the file, use<br />
+[ctor<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf.new_from_file] to load the file yourself,<br />
 then create the <code>GtkImage</code> from the pixbuf.</p>
-<p>The storage type (see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image.get_storage_type]) of
-the returned image is not defined, it will be whatever is
+<p>The storage type (see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image.get_storage_type]) of<br />
+the returned image is not defined, it will be whatever is<br />
 appropriate for displaying the file.</p>
 
 
@@ -1969,8 +1973,8 @@ appropriate for displaying the file.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The size in pixels to display icons at.</p>
-<p>If set to a value != -1, this property overrides the
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image:icon-size] property for images of type
+<p>If set to a value != -1, this property overrides the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image:icon-size] property for images of type<br />
 <code>GTK_IMAGE_ICON_NAME</code>.</p>
 
 
@@ -2011,8 +2015,8 @@ appropriate for displaying the file.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The size in pixels to display icons at.</p>
-<p>If set to a value != -1, this property overrides the
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image:icon-size] property for images of type
+<p>If set to a value != -1, this property overrides the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Image:icon-size] property for images of type<br />
 <code>GTK_IMAGE_ICON_NAME</code>.</p>
 
 
@@ -2292,9 +2296,9 @@ appropriate for displaying the file.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the icon displayed in the <code>GtkImage</code> will use
+    <p>Whether the icon displayed in the <code>GtkImage</code> will use<br />
 standard icon names fallback.</p>
-<p>The value of this property is only relevant for images of type
+<p>The value of this property is only relevant for images of type<br />
 %GTK_IMAGE_ICON_NAME and %GTK_IMAGE_GICON.</p>
 
 
@@ -2362,9 +2366,9 @@ standard icon names fallback.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the icon displayed in the <code>GtkImage</code> will use
+    <p>Whether the icon displayed in the <code>GtkImage</code> will use<br />
 standard icon names fallback.</p>
-<p>The value of this property is only relevant for images of type
+<p>The value of this property is only relevant for images of type<br />
 %GTK_IMAGE_ICON_NAME and %GTK_IMAGE_GICON.</p>
 
 
@@ -2400,7 +2404,7 @@ standard icon names fallback.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

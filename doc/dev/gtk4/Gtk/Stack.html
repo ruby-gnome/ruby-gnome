@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Stack";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -103,8 +104,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/stack.rb<span class="defines">,<br />
+    <dd>lib/gtk4/stack.rb<span class="defines">,<br>
   lib/gtk4/deprecated.rb</span>
+
 </dd>
   </dl>
   
@@ -112,23 +114,23 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkStack</code> is a container which only shows one of its children
+    <p><code>GtkStack</code> is a container which only shows one of its children<br />
 at a time.</p>
-<p>In contrast to <code>GtkNotebook</code>, <code>GtkStack</code> does not provide a means
-for users to change the visible child. Instead, a separate widget
-such as [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StackSwitcher] or [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StackSidebar] can
+<p>In contrast to <code>GtkNotebook</code>, <code>GtkStack</code> does not provide a means<br />
+for users to change the visible child. Instead, a separate widget<br />
+such as [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StackSwitcher] or [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StackSidebar] can<br />
 be used with <code>GtkStack</code> to provide this functionality.</p>
-<p>Transitions between pages can be animated as slides or fades. This
-can be controlled with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Stack.set_transition_type].
-These animations respect the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-enable-animations]
+<p>Transitions between pages can be animated as slides or fades. This<br />
+can be controlled with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Stack.set_transition_type].<br />
+These animations respect the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-enable-animations]<br />
 setting.</p>
-<p><code>GtkStack</code> maintains a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StackPage] object for each added
-child, which holds additional per-child properties. You
-obtain the <code>GtkStackPage</code> for a child with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Stack.get_page]
-and you can obtain a <code>GtkSelectionModel</code> containing all the pages
+<p><code>GtkStack</code> maintains a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StackPage] object for each added<br />
+child, which holds additional per-child properties. You<br />
+obtain the <code>GtkStackPage</code> for a child with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Stack.get_page]<br />
+and you can obtain a <code>GtkSelectionModel</code> containing all the pages<br />
 with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Stack.get_pages].</p>
-<h1>GtkStack as GtkBuildable</h1>
-<p>To set child-specific properties in a .ui file, create <code>GtkStackPage</code>
+<h1><a href="#gtkstack-as-gtkbuildable" aria-hidden="true" class="anchor" id="gtkstack-as-gtkbuildable"></a>GtkStack as GtkBuildable</h1>
+<p>To set child-specific properties in a .ui file, create <code>GtkStackPage</code><br />
 objects explicitly, and set the child widget as a property on it:</p>
 <pre class="code xml"><code class="xml">  &lt;object class=&quot;GtkStack&quot; id=&quot;stack&quot;&gt;
     &lt;child&gt;
@@ -143,10 +145,10 @@ objects explicitly, and set the child widget as a property on it:</p>
       &lt;/object&gt;
     &lt;/child&gt;
 </code></pre>
-<h1>CSS nodes</h1>
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
 <p><code>GtkStack</code> has a single CSS node named stack.</p>
-<h1>Accessibility</h1>
-<p><code>GtkStack</code> uses the %GTK_ACCESSIBLE_ROLE_TAB_PANEL for the stack
+<h1><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h1>
+<p><code>GtkStack</code> uses the %GTK_ACCESSIBLE_ROLE_TAB_PANEL for the stack<br />
 pages, which are the accessible parent objects of the child widgets.</p>
 
 
@@ -929,9 +931,11 @@ pages, which are the accessible parent objects of the child widgets.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -1165,8 +1169,8 @@ pages, which are the accessible parent objects of the child widgets.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a child to <!-- raw HTML omitted -->stack<!-- raw HTML omitted -->.</p>
-<p>The child is identified by the <!-- raw HTML omitted -->name<!-- raw HTML omitted -->. The <!-- raw HTML omitted -->title<!-- raw HTML omitted -->
-will be used by <code>GtkStackSwitcher</code> to represent
+<p>The child is identified by the <!-- raw HTML omitted -->name<!-- raw HTML omitted -->. The <!-- raw HTML omitted -->title<!-- raw HTML omitted --><br />
+will be used by <code>GtkStackSwitcher</code> to represent<br />
 <!-- raw HTML omitted -->child<!-- raw HTML omitted --> in a tab bar, so it should be short.</p>
 
 
@@ -1293,7 +1297,7 @@ will be used by <code>GtkStackSwitcher</code> to represent
       
       
         &mdash;
-        <div class='inline'><p>the requested child
+        <div class='inline'><p>the requested child<br />
 of the <code>GtkStack</code></p>
 </div>
       
@@ -1518,7 +1522,7 @@ of the <code>GtkStack</code></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the <code>GtkStack</code> is set up to interpolate between
+    <p>Returns whether the <code>GtkStack</code> is set up to interpolate between<br />
 the sizes of children on page switch.</p>
 
 
@@ -1885,8 +1889,8 @@ the sizes of children on page switch.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Makes the child with the given name visible.</p>
-<p>Note that the child widget has to be visible itself
-(see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.show]) in order to become the visible
+<p>Note that the child widget has to be visible itself<br />
+(see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.show]) in order to become the visible<br />
 child of <!-- raw HTML omitted -->stack<!-- raw HTML omitted -->.</p>
 
 
@@ -2088,7 +2092,7 @@ child of <!-- raw HTML omitted -->stack<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the <!-- raw HTML omitted -->stack<!-- raw HTML omitted --> is currently in a transition from one page to
+    <p>Returns whether the <!-- raw HTML omitted -->stack<!-- raw HTML omitted --> is currently in a transition from one page to<br />
 another.</p>
 
 
@@ -2693,7 +2697,7 @@ another.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

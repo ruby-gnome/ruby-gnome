@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Atk::Object";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -1490,6 +1492,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1506,9 +1509,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function is called when implementing subclasses of Atk::Object.
-It does initialization required for the new object. It is intended
-that this function should called only in the ..._new() functions used
+    <p>This function is called when implementing subclasses of Atk::Object.<br />
+It does initialization required for the new object. It is intended<br />
+that this function should called only in the ..._new() functions used<br />
 to create an instance of a subclass of Atk::Object</p>
 
 
@@ -3421,13 +3424,13 @@ to create an instance of a subclass of Atk::Object</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get a list of properties applied to this object as a whole, as an Atk::AttributeSet consisting of
-name-value pairs. As such these attributes may be considered weakly-typed properties or annotations,
-as distinct from strongly-typed object data available via other get/set methods.
-Not all objects have explicit &quot;name-value pair&quot; Atk::AttributeSet properties.
-explicit properties/annotations applied to the object, or an empty
-set if the object has no name-value pair attributes assigned to
-it. This #atkattributeset should be freed by a call to
+    <p>Get a list of properties applied to this object as a whole, as an Atk::AttributeSet consisting of<br />
+name-value pairs. As such these attributes may be considered weakly-typed properties or annotations,<br />
+as distinct from strongly-typed object data available via other get/set methods.<br />
+Not all objects have explicit &quot;name-value pair&quot; Atk::AttributeSet properties.<br />
+explicit properties/annotations applied to the object, or an empty<br />
+set if the object has no name-value pair attributes assigned to<br />
+it. This #atkattributeset should be freed by a call to<br />
 atk_attribute_set_free().</p>
 
 
@@ -3504,7 +3507,7 @@ atk_attribute_set_free().</p>
       
       
         &mdash;
-        <div class='inline'><p>a #guint which is the handler id used in
+        <div class='inline'><p>a #guint which is the handler id used in<br />
 atk_object_remove_property_change_handler()</p>
 </div>
       
@@ -3526,7 +3529,7 @@ atk_object_remove_property_change_handler()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the accessible description of the accessible.
+    <p>Gets the accessible description of the accessible.<br />
 of the accessible.</p>
 
 
@@ -3566,9 +3569,9 @@ of the accessible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the accessible description of the accessible. You can't set
-the description to NULL. This is reserved for the initial value. In
-this aspect NULL is similar to ATK_ROLE_UNKNOWN. If you want to set
+    <p>Sets the accessible description of the accessible. You can't set<br />
+the description to NULL. This is reserved for the initial value. In<br />
+this aspect NULL is similar to ATK_ROLE_UNKNOWN. If you want to set<br />
 the name to a empty value you can use &quot;&quot;.</p>
 
 
@@ -3623,7 +3626,7 @@ the name to a empty value you can use &quot;&quot;.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the help text associated with the accessible.
+    <p>Gets the help text associated with the accessible.<br />
 NULL if no such string was set.</p>
 
 
@@ -3663,8 +3666,8 @@ NULL if no such string was set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the help text associated with the accessible. This can be used to
-expose context-sensitive information to help a user understand how to
+    <p>Sets the help text associated with the accessible. This can be used to<br />
+expose context-sensitive information to help a user understand how to<br />
 interact with the object.</p>
 
 
@@ -3719,7 +3722,7 @@ interact with the object.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the 0-based index of this accessible in its parent; returns -1 if the
+    <p>Gets the 0-based index of this accessible in its parent; returns -1 if the<br />
 accessible does not have an accessible parent.</p>
 
 
@@ -3798,9 +3801,9 @@ accessible does not have an accessible parent.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the zorder of the accessible. The value G_MININT will be returned
-if the layer of the accessible is not ATK_LAYER_MDI.
-which the component is shown in relation to other components in the same
+    <p>Gets the zorder of the accessible. The value G_MININT will be returned<br />
+if the layer of the accessible is not ATK_LAYER_MDI.<br />
+which the component is shown in relation to other components in the same<br />
 container.</p>
 
 
@@ -3840,7 +3843,7 @@ container.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the number of accessible children of the accessible.
+    <p>Gets the number of accessible children of the accessible.<br />
 of the accessible.</p>
 
 
@@ -3919,9 +3922,9 @@ of the accessible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the accessible name of the accessible. You can't set the name
-to NULL. This is reserved for the initial value. In this aspect
-NULL is similar to ATK_ROLE_UNKNOWN. If you want to set the name to
+    <p>Sets the accessible name of the accessible. You can't set the name<br />
+to NULL. This is reserved for the initial value. In this aspect<br />
+NULL is similar to ATK_ROLE_UNKNOWN. If you want to set the name to<br />
 a empty value you can use &quot;&quot;.</p>
 
 
@@ -3977,7 +3980,7 @@ a empty value you can use &quot;&quot;.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Emits a state-change signal for the specified state.</p>
-<p>Note that as a general rule when the state of an existing object changes,
+<p>Note that as a general rule when the state of an existing object changes,<br />
 emitting a notification is expected.</p>
 
 
@@ -4047,7 +4050,7 @@ emitting a notification is expected.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale
+    <p>Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale<br />
 of <!-- raw HTML omitted -->accessible<!-- raw HTML omitted -->.</p>
 
 
@@ -4066,7 +4069,7 @@ of <!-- raw HTML omitted -->accessible<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>a UTF-8 string indicating the POSIX-style LC_MESSAGES
+        <div class='inline'><p>a UTF-8 string indicating the POSIX-style LC_MESSAGES<br />
 locale of <!-- raw HTML omitted -->accessible<!-- raw HTML omitted -->.</p>
 </div>
       
@@ -4088,13 +4091,13 @@ locale of <!-- raw HTML omitted -->accessible<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the accessible parent of the accessible. By default this is
-the one assigned with atk_object_set_parent(), but it is assumed
-that ATK implementors have ways to get the parent of the object
-without the need of assigning it manually with
+    <p>Gets the accessible parent of the accessible. By default this is<br />
+the one assigned with atk_object_set_parent(), but it is assumed<br />
+that ATK implementors have ways to get the parent of the object<br />
+without the need of assigning it manually with<br />
 atk_object_set_parent(), and will return it with this method.</p>
-<p>If you are only interested on the parent assigned with
-atk_object_set_parent(), use atk_object_peek_parent().
+<p>If you are only interested on the parent assigned with<br />
+atk_object_set_parent(), use atk_object_peek_parent().<br />
 parent of the accessible</p>
 
 
@@ -4188,12 +4191,12 @@ parent of the accessible</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the accessible parent of the accessible, if it has been
-manually assigned with atk_object_set_parent. Otherwise, this
+    <p>Gets the accessible parent of the accessible, if it has been<br />
+manually assigned with atk_object_set_parent. Otherwise, this<br />
 function returns nil.</p>
-<p>This method is intended as an utility for ATK implementors, and not
-to be exposed to accessible tools. See atk_object_get_parent() for
-further reference.
+<p>This method is intended as an utility for ATK implementors, and not<br />
+to be exposed to accessible tools. See atk_object_get_parent() for<br />
+further reference.<br />
 parent of the accessible if assigned</p>
 
 
@@ -4233,9 +4236,9 @@ parent of the accessible if assigned</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a reference to the specified accessible child of the object.
-The accessible children are 0-based so the first accessible child is
-at index 0, the second at index 1 and so on.
+    <p>Gets a reference to the specified accessible child of the object.<br />
+The accessible children are 0-based so the first accessible child is<br />
+at index 0, the second at index 1 and so on.<br />
 accessible child of the accessible.</p>
 
 
@@ -4294,7 +4297,7 @@ accessible child of the accessible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Atk::RelationSet associated with the object.
+    <p>Gets the Atk::RelationSet associated with the object.<br />
 of the object.</p>
 
 
@@ -4334,8 +4337,8 @@ of the object.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a reference to the state set of the accessible; the caller must
-unreference it when it is no longer needed.
+    <p>Gets a reference to the state set of the accessible; the caller must<br />
+unreference it when it is no longer needed.<br />
 set of the accessible</p>
 
 
@@ -4591,7 +4594,7 @@ set of the accessible</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

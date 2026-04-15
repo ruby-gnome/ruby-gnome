@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::GutterRendererText";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,7 +101,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -326,9 +328,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -340,6 +344,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="GutterRenderer.html" title="GtkSource::GutterRenderer (class)">GutterRenderer</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="GutterRenderer.html#activate-instance_method" title="GtkSource::GutterRenderer#activate (method)">#activate</a></span>, <span class='object_link'><a href="GutterRenderer.html#align_cell-instance_method" title="GtkSource::GutterRenderer#align_cell (method)">#align_cell</a></span>, <span class='object_link'><a href="GutterRenderer.html#alignment_mode-instance_method" title="GtkSource::GutterRenderer#alignment_mode (method)">#alignment_mode</a></span>, <span class='object_link'><a href="GutterRenderer.html#alignment_mode=-instance_method" title="GtkSource::GutterRenderer#alignment_mode= (method)">#alignment_mode=</a></span>, <span class='object_link'><a href="GutterRenderer.html#buffer-instance_method" title="GtkSource::GutterRenderer#buffer (method)">#buffer</a></span>, <span class='object_link'><a href="GutterRenderer.html#lines-instance_method" title="GtkSource::GutterRenderer#lines (method)">#lines</a></span>, <span class='object_link'><a href="GutterRenderer.html#lines=-instance_method" title="GtkSource::GutterRenderer#lines= (method)">#lines=</a></span>, <span class='object_link'><a href="GutterRenderer.html#query_activatable-instance_method" title="GtkSource::GutterRenderer#query_activatable (method)">#query_activatable</a></span>, <span class='object_link'><a href="GutterRenderer.html#view-instance_method" title="GtkSource::GutterRenderer#view (method)">#view</a></span>, <span class='object_link'><a href="GutterRenderer.html#view=-instance_method" title="GtkSource::GutterRenderer#view= (method)">#view=</a></span>, <span class='object_link'><a href="GutterRenderer.html#xalign-instance_method" title="GtkSource::GutterRenderer#xalign (method)">#xalign</a></span>, <span class='object_link'><a href="GutterRenderer.html#xalign=-instance_method" title="GtkSource::GutterRenderer#xalign= (method)">#xalign=</a></span>, <span class='object_link'><a href="GutterRenderer.html#xpad-instance_method" title="GtkSource::GutterRenderer#xpad (method)">#xpad</a></span>, <span class='object_link'><a href="GutterRenderer.html#xpad=-instance_method" title="GtkSource::GutterRenderer#xpad= (method)">#xpad=</a></span>, <span class='object_link'><a href="GutterRenderer.html#yalign-instance_method" title="GtkSource::GutterRenderer#yalign (method)">#yalign</a></span>, <span class='object_link'><a href="GutterRenderer.html#yalign=-instance_method" title="GtkSource::GutterRenderer#yalign= (method)">#yalign=</a></span>, <span class='object_link'><a href="GutterRenderer.html#ypad-instance_method" title="GtkSource::GutterRenderer#ypad (method)">#ypad</a></span>, <span class='object_link'><a href="GutterRenderer.html#ypad=-instance_method" title="GtkSource::GutterRenderer#ypad= (method)">#ypad=</a></span></p>
 
+  
   
   
   
@@ -499,7 +504,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Measures the text provided using the pango layout used by the
+    <p>Measures the text provided using the pango layout used by the<br />
 Gtk::SourceGutterRendererText.</p>
 
 
@@ -534,7 +539,7 @@ Gtk::SourceGutterRendererText.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the width of the text in pixels,
+        <div class='inline'><p>location to store the width of the text in pixels,<br />
 or nil.</p>
 </div>
       
@@ -550,7 +555,7 @@ or nil.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the height of the text in
+        <div class='inline'><p>location to store the height of the text in<br />
 pixels, or nil.</p>
 </div>
       
@@ -586,7 +591,7 @@ pixels, or nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Measures the pango markup provided using the pango layout used by the
+    <p>Measures the pango markup provided using the pango layout used by the<br />
 Gtk::SourceGutterRendererText.</p>
 
 
@@ -621,7 +626,7 @@ Gtk::SourceGutterRendererText.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the width of the text in pixels,
+        <div class='inline'><p>location to store the width of the text in pixels,<br />
 or nil.</p>
 </div>
       
@@ -637,7 +642,7 @@ or nil.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the height of the text in
+        <div class='inline'><p>location to store the height of the text in<br />
 pixels, or nil.</p>
 </div>
       
@@ -894,7 +899,7 @@ pixels, or nil.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::PrintSettings";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -99,22 +100,23 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/deprecated.rb</dd>
+    <dd>lib/gtk4/deprecated.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A <code>GtkPrintSettings</code> object represents the settings of a print dialog in
+    <p>A <code>GtkPrintSettings</code> object represents the settings of a print dialog in<br />
 a system-independent way.</p>
-<p>The main use for this object is that once you’ve printed you can get a
-settings object that represents the settings the user chose, and the next
-time you print you can pass that object in so that the user doesn’t have
+<p>The main use for this object is that once you’ve printed you can get a<br />
+settings object that represents the settings the user chose, and the next<br />
+time you print you can pass that object in so that the user doesn’t have<br />
 to re-set all his settings.</p>
-<p>Its also possible to enumerate the settings so that you can easily save
-the settings for the next time your app runs, or even store them in a
-document. The predefined keys try to use shared values as much as possible
+<p>Its also possible to enumerate the settings so that you can easily save<br />
+the settings for the next time your app runs, or even store them in a<br />
+document. The predefined keys try to use shared values as much as possible<br />
 so that moving such a document between systems still works.</p>
 
 
@@ -1820,6 +1822,7 @@ so that moving such a document between systems still works.</p>
 
       
     </ul>
+    
   
 
 
@@ -1838,8 +1841,8 @@ so that moving such a document between systems still works.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Reads the print settings from the group <!-- raw HTML omitted -->group_name<!-- raw HTML omitted --> in <!-- raw HTML omitted -->key_file<!-- raw HTML omitted -->.</p>
-<p>Returns a new <code>GtkPrintSettings</code> object with the restored settings,
-or nil if an error occurred. If the file could not be loaded then
+<p>Returns a new <code>GtkPrintSettings</code> object with the restored settings,<br />
+or nil if an error occurred. If the file could not be loaded then<br />
 error is set to either <code>GFileError</code> or <code>GKeyFileError</code>.</p>
 
 
@@ -1874,7 +1877,7 @@ error is set to either <code>GFileError</code> or <code>GKeyFileError</code>.</p
       
       
         &mdash;
-        <div class='inline'><p>the name of the group to use, or nil to use
+        <div class='inline'><p>the name of the group to use, or nil to use<br />
 the default “Print Settings”</p>
 </div>
       
@@ -2535,9 +2538,9 @@ the default “Print Settings”</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the boolean represented by the value
+    <p>Returns the boolean represented by the value<br />
 that is associated with <!-- raw HTML omitted -->key<!-- raw HTML omitted -->.</p>
-<p>The string “true” represents true, any other
+<p>The string “true” represents true, any other<br />
 string false.</p>
 
 
@@ -2654,8 +2657,8 @@ string false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the floating point number represented by
-the value that is associated with <!-- raw HTML omitted -->key<!-- raw HTML omitted -->, or <!-- raw HTML omitted -->default_val<!-- raw HTML omitted -->
+    <p>Returns the floating point number represented by<br />
+the value that is associated with <!-- raw HTML omitted -->key<!-- raw HTML omitted -->, or <!-- raw HTML omitted -->default_val<!-- raw HTML omitted --><br />
 if the value does not represent a floating point number.</p>
 <p>Floating point numbers are parsed with g_ascii_strtod().</p>
 
@@ -2788,7 +2791,7 @@ if the value does not represent a floating point number.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the value of <!-- raw HTML omitted -->key<!-- raw HTML omitted -->, interpreted as
+    <p>Returns the value of <!-- raw HTML omitted -->key<!-- raw HTML omitted -->, interpreted as<br />
 an integer, or the default value.</p>
 
 
@@ -2862,7 +2865,7 @@ an integer, or the default value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the value associated with <!-- raw HTML omitted -->key<!-- raw HTML omitted -->, interpreted
+    <p>Returns the value associated with <!-- raw HTML omitted -->key<!-- raw HTML omitted -->, interpreted<br />
 as a length.</p>
 <p>The returned value is converted to <!-- raw HTML omitted -->units<!-- raw HTML omitted -->.</p>
 
@@ -2974,8 +2977,8 @@ as a length.</p>
       
       
         &mdash;
-        <div class='inline'><p>an array
-of <code>GtkPageRange</code>s. Use g_free() to free the array when
+        <div class='inline'><p>an array<br />
+of <code>GtkPageRange</code>s. Use g_free() to free the array when<br />
 it is no longer needed.</p>
 </div>
       
@@ -2997,7 +3000,7 @@ it is no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of %GTK_PRINT_SETTINGS_PAPER_HEIGHT,
+    <p>Gets the value of %GTK_PRINT_SETTINGS_PAPER_HEIGHT,<br />
 converted to <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
 
 
@@ -3056,7 +3059,7 @@ converted to <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of %GTK_PRINT_SETTINGS_PAPER_WIDTH,
+    <p>Gets the value of %GTK_PRINT_SETTINGS_PAPER_WIDTH,<br />
 converted to <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
 
 
@@ -3174,7 +3177,7 @@ converted to <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Reads the print settings from <!-- raw HTML omitted -->file_name<!-- raw HTML omitted -->.</p>
-<p>If the file could not be loaded then error is set to either
+<p>If the file could not be loaded then error is set to either<br />
 a <code>GFileError</code> or <code>GKeyFileError</code>.</p>
 <p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintSettings.to_file].</p>
 
@@ -3235,7 +3238,7 @@ a <code>GFileError</code> or <code>GKeyFileError</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Reads the print settings from the group <!-- raw HTML omitted -->group_name<!-- raw HTML omitted --> in <!-- raw HTML omitted -->key_file<!-- raw HTML omitted -->.</p>
-<p>If the file could not be loaded then error is set to either a
+<p>If the file could not be loaded then error is set to either a<br />
 <code>GFileError</code> or <code>GKeyFileError</code>.</p>
 
 
@@ -3270,7 +3273,7 @@ a <code>GFileError</code> or <code>GKeyFileError</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of the group to use, or nil
+        <div class='inline'><p>the name of the group to use, or nil<br />
 to use the default “Print Settings”</p>
 </div>
       
@@ -3684,7 +3687,7 @@ to use the default “Print Settings”</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the value of %GTK_PRINT_SETTINGS_ORIENTATION,
+    <p>Get the value of %GTK_PRINT_SETTINGS_ORIENTATION,<br />
 converted to a <code>GtkPageOrientation</code>.</p>
 
 
@@ -3964,7 +3967,7 @@ converted to a <code>GtkPageOrientation</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of %GTK_PRINT_SETTINGS_PAPER_FORMAT,
+    <p>Gets the value of %GTK_PRINT_SETTINGS_PAPER_FORMAT,<br />
 converted to a <code>GtkPaperSize</code>.</p>
 
 
@@ -4004,8 +4007,8 @@ converted to a <code>GtkPaperSize</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the value of %GTK_PRINT_SETTINGS_PAPER_FORMAT,
-%GTK_PRINT_SETTINGS_PAPER_WIDTH and
+    <p>Sets the value of %GTK_PRINT_SETTINGS_PAPER_FORMAT,<br />
+%GTK_PRINT_SETTINGS_PAPER_WIDTH and<br />
 %GTK_PRINT_SETTINGS_PAPER_HEIGHT.</p>
 
 
@@ -4153,7 +4156,7 @@ converted to a <code>GtkPaperSize</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convenience function to obtain the value of
+    <p>Convenience function to obtain the value of<br />
 %GTK_PRINT_SETTINGS_PRINTER.</p>
 
 
@@ -4193,7 +4196,7 @@ converted to a <code>GtkPaperSize</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convenience function to set %GTK_PRINT_SETTINGS_PRINTER
+    <p>Convenience function to set %GTK_PRINT_SETTINGS_PRINTER<br />
 to <!-- raw HTML omitted -->printer<!-- raw HTML omitted -->.</p>
 
 
@@ -4473,8 +4476,8 @@ to <!-- raw HTML omitted -->printer<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the values of %GTK_PRINT_SETTINGS_RESOLUTION,
-%GTK_PRINT_SETTINGS_RESOLUTION_X and
+    <p>Sets the values of %GTK_PRINT_SETTINGS_RESOLUTION,<br />
+%GTK_PRINT_SETTINGS_RESOLUTION_X and<br />
 %GTK_PRINT_SETTINGS_RESOLUTION_Y.</p>
 
 
@@ -5360,8 +5363,8 @@ to <!-- raw HTML omitted -->printer<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the values of %GTK_PRINT_SETTINGS_RESOLUTION,
-%GTK_PRINT_SETTINGS_RESOLUTION_X and
+    <p>Sets the values of %GTK_PRINT_SETTINGS_RESOLUTION,<br />
+%GTK_PRINT_SETTINGS_RESOLUTION_X and<br />
 %GTK_PRINT_SETTINGS_RESOLUTION_Y.</p>
 
 
@@ -5432,7 +5435,7 @@ to <!-- raw HTML omitted -->printer<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>This function saves the print settings from <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> to <!-- raw HTML omitted -->file_name<!-- raw HTML omitted -->.</p>
-<p>If the file could not be written then error is set to either a
+<p>If the file could not be written then error is set to either a<br />
 <code>GFileError</code> or <code>GKeyFileError</code>.</p>
 
 
@@ -5564,7 +5567,7 @@ to <!-- raw HTML omitted -->printer<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>the group to add the settings to in <!-- raw HTML omitted -->key_file<!-- raw HTML omitted -->, or
+        <div class='inline'><p>the group to add the settings to in <!-- raw HTML omitted -->key_file<!-- raw HTML omitted -->, or<br />
 nil to use the default “Print Settings”</p>
 </div>
       
@@ -5744,7 +5747,7 @@ nil to use the default “Print Settings”</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

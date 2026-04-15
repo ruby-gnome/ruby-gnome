@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::FlowBox";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -106,25 +108,25 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>A <code>GtkFlowBox</code> puts child widgets in reflowing grid.</p>
-<p>For instance, with the horizontal orientation, the widgets will be
-arranged from left to right, starting a new row under the previous
-row when necessary. Reducing the width in this case will require more
+<p>For instance, with the horizontal orientation, the widgets will be<br />
+arranged from left to right, starting a new row under the previous<br />
+row when necessary. Reducing the width in this case will require more<br />
 rows, so a larger height will be requested.</p>
-<p>Likewise, with the vertical orientation, the widgets will be arranged
-from top to bottom, starting a new column to the right when necessary.
-Reducing the height will require more columns, so a larger width will
+<p>Likewise, with the vertical orientation, the widgets will be arranged<br />
+from top to bottom, starting a new column to the right when necessary.<br />
+Reducing the height will require more columns, so a larger width will<br />
 be requested.</p>
-<p>The size request of a <code>GtkFlowBox</code> alone may not be what you expect;
-if you need to be able to shrink it along both axes and dynamically
-reflow its children, you may have to wrap it in a <code>GtkScrolledWindow</code>
+<p>The size request of a <code>GtkFlowBox</code> alone may not be what you expect;<br />
+if you need to be able to shrink it along both axes and dynamically<br />
+reflow its children, you may have to wrap it in a <code>GtkScrolledWindow</code><br />
 to enable that.</p>
 <p>The children of a <code>GtkFlowBox</code> can be dynamically sorted and filtered.</p>
-<p>Although a <code>GtkFlowBox</code> must have only <code>GtkFlowBoxChild</code> children, you
-can add any kind of widget to it via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBox.insert], and a
-<code>GtkFlowBoxChild</code> widget will automatically be inserted between the box
+<p>Although a <code>GtkFlowBox</code> must have only <code>GtkFlowBoxChild</code> children, you<br />
+can add any kind of widget to it via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBox.insert], and a<br />
+<code>GtkFlowBoxChild</code> widget will automatically be inserted between the box<br />
 and the widget.</p>
 <p>Also see [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ListBox].</p>
-<h1>CSS nodes</h1>
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
 <pre class="code ruby"><code class="ruby">flowbox
 ├── flowboxchild
 │   ╰── &lt;child&gt;
@@ -133,11 +135,11 @@ and the widget.</p>
 ┊
 ╰── [rubberband]
 </code></pre>
-<p><code>GtkFlowBox</code> uses a single CSS node with name flowbox. <code>GtkFlowBoxChild</code>
-uses a single CSS node with name flowboxchild. For rubberband selection,
+<p><code>GtkFlowBox</code> uses a single CSS node with name flowbox. <code>GtkFlowBoxChild</code><br />
+uses a single CSS node with name flowboxchild. For rubberband selection,<br />
 a subnode with name rubberband is used.</p>
-<h1>Accessibility</h1>
-<p><code>GtkFlowBox</code> uses the %GTK_ACCESSIBLE_ROLE_GRID role, and <code>GtkFlowBoxChild</code>
+<h1><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h1>
+<p><code>GtkFlowBox</code> uses the %GTK_ACCESSIBLE_ROLE_GRID role, and <code>GtkFlowBoxChild</code><br />
 uses the %GTK_ACCESSIBLE_ROLE_GRID_CELL role.</p>
 
 
@@ -1060,9 +1062,11 @@ uses the %GTK_ACCESSIBLE_ROLE_GRID_CELL role.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -1240,7 +1244,7 @@ uses the %GTK_ACCESSIBLE_ROLE_GRID_CELL role.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if children are activated on single click,
+        <div class='inline'><p>true if children are activated on single click,<br />
 false otherwise</p>
 </div>
       
@@ -1262,7 +1266,7 @@ false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether children can be activated with a single
+    <p>Determines whether children can be activated with a single<br />
 click, or require a double-click.</p>
 
 
@@ -1330,7 +1334,7 @@ click, or require a double-click.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether children can be activated with a single
+    <p>Determines whether children can be activated with a single<br />
 click, or require a double-click.</p>
 
 
@@ -1371,7 +1375,7 @@ click, or require a double-click.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds <!-- raw HTML omitted -->child<!-- raw HTML omitted --> to the end of <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
-<p>If a sort function is set, the widget will
+<p>If a sort function is set, the widget will<br />
 actually be inserted at the calculated position.</p>
 <p>See also: [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBox.insert].</p>
 
@@ -1428,15 +1432,15 @@ actually be inserted at the calculated position.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Binds <!-- raw HTML omitted -->model<!-- raw HTML omitted --> to <!-- raw HTML omitted -->box<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->box<!-- raw HTML omitted --> was already bound to a model, that previous binding is
+<p>If <!-- raw HTML omitted -->box<!-- raw HTML omitted --> was already bound to a model, that previous binding is<br />
 destroyed.</p>
-<p>The contents of <!-- raw HTML omitted -->box<!-- raw HTML omitted --> are cleared and then filled with widgets that
-represent items from <!-- raw HTML omitted -->model<!-- raw HTML omitted -->. <!-- raw HTML omitted -->box<!-- raw HTML omitted --> is updated whenever <!-- raw HTML omitted -->model<!-- raw HTML omitted --> changes.
+<p>The contents of <!-- raw HTML omitted -->box<!-- raw HTML omitted --> are cleared and then filled with widgets that<br />
+represent items from <!-- raw HTML omitted -->model<!-- raw HTML omitted -->. <!-- raw HTML omitted -->box<!-- raw HTML omitted --> is updated whenever <!-- raw HTML omitted -->model<!-- raw HTML omitted --> changes.<br />
 If <!-- raw HTML omitted -->model<!-- raw HTML omitted --> is nil, <!-- raw HTML omitted -->box<!-- raw HTML omitted --> is left empty.</p>
-<p>It is undefined to add or remove widgets directly (for example, with
+<p>It is undefined to add or remove widgets directly (for example, with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBox.insert]) while <!-- raw HTML omitted -->box<!-- raw HTML omitted --> is bound to a model.</p>
-<p>Note that using a model is incompatible with the filtering and sorting
-functionality in <code>GtkFlowBox</code>. When using a model, filtering and sorting
+<p>Note that using a model is incompatible with the filtering and sorting<br />
+functionality in <code>GtkFlowBox</code>. When using a model, filtering and sorting<br />
 should be implemented by the model.</p>
 
 
@@ -1679,8 +1683,8 @@ should be implemented by the model.</p>
       
       
         &mdash;
-        <div class='inline'><p>the child widget, which will
-always be a <code>GtkFlowBoxChild</code> or nil in case no child widget
+        <div class='inline'><p>the child widget, which will<br />
+always be a <code>GtkFlowBoxChild</code> or nil in case no child widget<br />
 with the given index exists.</p>
 </div>
       
@@ -1755,8 +1759,8 @@ with the given index exists.</p>
       
       
         &mdash;
-        <div class='inline'><p>the child widget, which will
-always be a <code>GtkFlowBoxChild</code> or nil in case no child widget
+        <div class='inline'><p>the child widget, which will<br />
+always be a <code>GtkFlowBoxChild</code> or nil in case no child widget<br />
 exists for the given x and y coordinates.</p>
 </div>
       
@@ -1779,13 +1783,13 @@ exists for the given x and y coordinates.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Hooks up an adjustment to focus handling in <!-- raw HTML omitted -->box<!-- raw HTML omitted -->.</p>
-<p>The adjustment is also used for autoscrolling during
-rubberband selection. See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.get_hadjustment]
-for a typical way of obtaining the adjustment, and
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBox.set_vadjustment] for setting the vertical
+<p>The adjustment is also used for autoscrolling during<br />
+rubberband selection. See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.get_hadjustment]<br />
+for a typical way of obtaining the adjustment, and<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBox.set_vadjustment] for setting the vertical<br />
 adjustment.</p>
-<p>The adjustments have to be in pixel units and in the same
-coordinate system as the allocation for immediate children
+<p>The adjustments have to be in pixel units and in the same<br />
+coordinate system as the allocation for immediate children<br />
 of the box.</p>
 
 
@@ -1805,7 +1809,7 @@ of the box.</p>
       
       
         &mdash;
-        <div class='inline'><p>an adjustment which should be adjusted
+        <div class='inline'><p>an adjustment which should be adjusted<br />
 when the focus is moved among the descendents of <!-- raw HTML omitted -->container<!-- raw HTML omitted --></p>
 </div>
       
@@ -1880,7 +1884,7 @@ when the focus is moved among the descendents of <!-- raw HTML omitted -->contai
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether all children should be allocated the
+    <p>Determines whether all children should be allocated the<br />
 same size.</p>
 
 
@@ -1948,7 +1952,7 @@ same size.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether all children should be allocated the
+    <p>Determines whether all children should be allocated the<br />
 same size.</p>
 
 
@@ -1989,9 +1993,9 @@ same size.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts the <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> into <!-- raw HTML omitted -->box<!-- raw HTML omitted --> at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
-<p>If a sort function is set, the widget will actually be inserted
+<p>If a sort function is set, the widget will actually be inserted<br />
 at the calculated position.</p>
-<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is -1, or larger than the total number of children
+<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is -1, or larger than the total number of children<br />
 in the <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, then the <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> will be appended to the end.</p>
 
 
@@ -2062,10 +2066,10 @@ in the <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, then the <!-- raw 
 </h3><div class="docstring">
   <div class="discussion">
     <p>Updates the filtering for all children.</p>
-<p>Call this function when the result of the filter
-function on the <!-- raw HTML omitted -->box<!-- raw HTML omitted --> is changed due to an external
-factor. For instance, this would be used if the
-filter function just looked for a specific search
+<p>Call this function when the result of the filter<br />
+function on the <!-- raw HTML omitted -->box<!-- raw HTML omitted --> is changed due to an external<br />
+factor. For instance, this would be used if the<br />
+filter function just looked for a specific search<br />
 term, and the entry with the string has changed.</p>
 
 
@@ -2102,7 +2106,7 @@ term, and the entry with the string has changed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Updates the sorting for all children.</p>
-<p>Call this when the result of the sort function on
+<p>Call this when the result of the sort function on<br />
 <!-- raw HTML omitted -->box<!-- raw HTML omitted --> is changed due to an external factor.</p>
 
 
@@ -2138,7 +2142,7 @@ term, and the entry with the string has changed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The maximum amount of children to request space for consecutively
+    <p>The maximum amount of children to request space for consecutively<br />
 in the given orientation.</p>
 
 
@@ -2178,7 +2182,7 @@ in the given orientation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The maximum amount of children to request space for consecutively
+    <p>The maximum amount of children to request space for consecutively<br />
 in the given orientation.</p>
 
 
@@ -2246,10 +2250,10 @@ in the given orientation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The minimum number of children to allocate consecutively
+    <p>The minimum number of children to allocate consecutively<br />
 in the given orientation.</p>
-<p>Setting the minimum children per line ensures
-that a reasonably small height will be requested
+<p>Setting the minimum children per line ensures<br />
+that a reasonably small height will be requested<br />
 for the overall minimum width of the box.</p>
 
 
@@ -2289,10 +2293,10 @@ for the overall minimum width of the box.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The minimum number of children to allocate consecutively
+    <p>The minimum number of children to allocate consecutively<br />
 in the given orientation.</p>
-<p>Setting the minimum children per line ensures
-that a reasonably small height will be requested
+<p>Setting the minimum children per line ensures<br />
+that a reasonably small height will be requested<br />
 for the overall minimum width of the box.</p>
 
 
@@ -2361,7 +2365,7 @@ for the overall minimum width of the box.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds <!-- raw HTML omitted -->child<!-- raw HTML omitted --> to the start of <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.</p>
-<p>If a sort function is set, the widget will
+<p>If a sort function is set, the widget will<br />
 actually be inserted at the calculated position.</p>
 <p>See also: [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBox.insert].</p>
 
@@ -2613,7 +2617,7 @@ actually be inserted at the calculated position.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Select all children of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, if the selection
+    <p>Select all children of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, if the selection<br />
 mode allows it.</p>
 
 
@@ -2649,7 +2653,7 @@ mode allows it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Selects a single child of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, if the selection
+    <p>Selects a single child of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, if the selection<br />
 mode allows it.</p>
 
 
@@ -2722,7 +2726,7 @@ mode allows it.</p>
       
       
         &mdash;
-        <div class='inline'><p>A <code>GList</code> containing the <code>GtkWidget</code> for each selected child.
+        <div class='inline'><p>A <code>GList</code> containing the <code>GtkWidget</code> for each selected child.<br />
 Free with g_list_free() when done.</p>
 </div>
       
@@ -2745,7 +2749,7 @@ Free with g_list_free() when done.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Calls a function for each selected child.</p>
-<p>Note that the selection cannot be modified from within
+<p>Note that the selection cannot be modified from within<br />
 this function.</p>
 
 
@@ -2921,15 +2925,15 @@ this function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>By setting a filter function on the <!-- raw HTML omitted -->box<!-- raw HTML omitted --> one can decide dynamically
+    <p>By setting a filter function on the <!-- raw HTML omitted -->box<!-- raw HTML omitted --> one can decide dynamically<br />
 which of the children to show.</p>
-<p>For instance, to implement a search function that only shows the
+<p>For instance, to implement a search function that only shows the<br />
 children matching the search terms.</p>
-<p>The <!-- raw HTML omitted -->filter_func<!-- raw HTML omitted --> will be called for each child after the call, and
-it will continue to be called each time a child changes (via
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBoxChild.changed]) or when
+<p>The <!-- raw HTML omitted -->filter_func<!-- raw HTML omitted --> will be called for each child after the call, and<br />
+it will continue to be called each time a child changes (via<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBoxChild.changed]) or when<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBox.invalidate_filter] is called.</p>
-<p>Note that using a filter function is incompatible with using a model
+<p>Note that using a filter function is incompatible with using a model<br />
 (see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBox.bind_model]).</p>
 
 
@@ -2949,7 +2953,7 @@ it will continue to be called each time a child changes (via
       
       
         &mdash;
-        <div class='inline'><p>callback that
+        <div class='inline'><p>callback that<br />
 lets you filter which children to show</p>
 </div>
       
@@ -3015,14 +3019,14 @@ lets you filter which children to show</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>By setting a sort function on the <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, one can dynamically
-reorder the children of the box, based on the contents of
+    <p>By setting a sort function on the <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, one can dynamically<br />
+reorder the children of the box, based on the contents of<br />
 the children.</p>
-<p>The <!-- raw HTML omitted -->sort_func<!-- raw HTML omitted --> will be called for each child after the call,
-and will continue to be called each time a child changes (via
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBoxChild.changed]) and when
+<p>The <!-- raw HTML omitted -->sort_func<!-- raw HTML omitted --> will be called for each child after the call,<br />
+and will continue to be called each time a child changes (via<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBoxChild.changed]) and when<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBox.invalidate_sort] is called.</p>
-<p>Note that using a sort function is incompatible with using a model
+<p>Note that using a sort function is incompatible with using a model<br />
 (see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBox.bind_model]).</p>
 
 
@@ -3107,7 +3111,7 @@ and will continue to be called each time a child changes (via
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unselect all children of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, if the selection
+    <p>Unselect all children of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, if the selection<br />
 mode allows it.</p>
 
 
@@ -3143,7 +3147,7 @@ mode allows it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unselects a single child of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, if the selection
+    <p>Unselects a single child of <!-- raw HTML omitted -->box<!-- raw HTML omitted -->, if the selection<br />
 mode allows it.</p>
 
 
@@ -3199,13 +3203,13 @@ mode allows it.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Hooks up an adjustment to focus handling in <!-- raw HTML omitted -->box<!-- raw HTML omitted -->.</p>
-<p>The adjustment is also used for autoscrolling during
-rubberband selection. See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.get_vadjustment]
-for a typical way of obtaining the adjustment, and
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBox.set_hadjustment] for setting the horizontal
+<p>The adjustment is also used for autoscrolling during<br />
+rubberband selection. See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ScrolledWindow.get_vadjustment]<br />
+for a typical way of obtaining the adjustment, and<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FlowBox.set_hadjustment] for setting the horizontal<br />
 adjustment.</p>
-<p>The adjustments have to be in pixel units and in the same
-coordinate system as the allocation for immediate children
+<p>The adjustments have to be in pixel units and in the same<br />
+coordinate system as the allocation for immediate children<br />
 of the box.</p>
 
 
@@ -3225,7 +3229,7 @@ of the box.</p>
       
       
         &mdash;
-        <div class='inline'><p>an adjustment which should be adjusted
+        <div class='inline'><p>an adjustment which should be adjusted<br />
 when the focus is moved among the descendents of <!-- raw HTML omitted -->container<!-- raw HTML omitted --></p>
 </div>
       
@@ -3257,7 +3261,7 @@ when the focus is moved among the descendents of <!-- raw HTML omitted -->contai
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

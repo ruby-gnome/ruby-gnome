@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Atk::Document";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,21 +79,22 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The ATK interface which represents the toplevel
+    <p>The ATK interface which represents the toplevel<br />
 container for document content.</p>
-<p>The AtkDocument interface should be supported by any object whose
-content is a representation or view of a document.  The AtkDocument
-interface should appear on the toplevel container for the document
-content; however AtkDocument instances may be nested (i.e. an
-AtkDocument may be a descendant of another AtkDocument) in those
-cases where one document contains &quot;embedded content&quot; which can
+<p>The AtkDocument interface should be supported by any object whose<br />
+content is a representation or view of a document.  The AtkDocument<br />
+interface should appear on the toplevel container for the document<br />
+content; however AtkDocument instances may be nested (i.e. an<br />
+AtkDocument may be a descendant of another AtkDocument) in those<br />
+cases where one document contains &quot;embedded content&quot; which can<br />
 reasonably be considered a document in its own right.</p>
 
 
@@ -623,6 +625,7 @@ reasonably be considered a document in its own right.</p>
 
       
     </ul>
+    
   
 
 
@@ -642,7 +645,7 @@ reasonably be considered a document in its own right.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets an AtkAttributeSet which describes document-wide
+    <p>Gets an AtkAttributeSet which describes document-wide<br />
 attributes as name-value pairs.</p>
 
 
@@ -661,8 +664,8 @@ attributes as name-value pairs.</p>
       
       
         &mdash;
-        <div class='inline'><p>An AtkAttributeSet containing the explicitly
-set name-value-pair attributes associated with this document
+        <div class='inline'><p>An AtkAttributeSet containing the explicitly<br />
+set name-value-pair attributes associated with this document<br />
 as a whole.</p>
 </div>
       
@@ -702,7 +705,7 @@ as a whole.</p>
       
       
         &mdash;
-        <div class='inline'><p>the current page number inside <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, or -1 if
+        <div class='inline'><p>the current page number inside <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, or -1 if<br />
 not implemented, not know by the implementor, or irrelevant.</p>
 </div>
       
@@ -724,8 +727,8 @@ not implemented, not know by the implementor, or irrelevant.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a %gpointer that points to an instance of the DOM.  It is
-up to the caller to check atk_document_get_type to determine
+    <p>Gets a %gpointer that points to an instance of the DOM.  It is<br />
+up to the caller to check atk_document_get_type to determine<br />
 how to cast this pointer.</p>
 
 
@@ -765,7 +768,7 @@ how to cast this pointer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets an AtkAttributeSet which describes document-wide
+    <p>Gets an AtkAttributeSet which describes document-wide<br />
 attributes as name-value pairs.</p>
 
 
@@ -784,8 +787,8 @@ attributes as name-value pairs.</p>
       
       
         &mdash;
-        <div class='inline'><p>An AtkAttributeSet containing the explicitly
-set name-value-pair attributes associated with this document
+        <div class='inline'><p>An AtkAttributeSet containing the explicitly<br />
+set name-value-pair attributes associated with this document<br />
 as a whole.</p>
 </div>
       
@@ -807,10 +810,10 @@ as a whole.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale
-of the content of this document instance.  Individual
-text substrings or images within this document may have
-a different locale, see atk_text_get_attributes and
+    <p>Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale<br />
+of the content of this document instance.  Individual<br />
+text substrings or images within this document may have<br />
+a different locale, see atk_text_get_attributes and<br />
 atk_image_get_image_locale.</p>
 
 
@@ -829,8 +832,8 @@ atk_image_get_image_locale.</p>
       
       
         &mdash;
-        <div class='inline'><p>a UTF-8 string indicating the POSIX-style LC_MESSAGES
-locale of the document content as a whole, or NULL if
+        <div class='inline'><p>a UTF-8 string indicating the POSIX-style LC_MESSAGES<br />
+locale of the document content as a whole, or NULL if<br />
 the document content does not specify a locale.</p>
 </div>
       
@@ -910,7 +913,7 @@ the document content does not specify a locale.</p>
       
       
         &mdash;
-        <div class='inline'><p>a character string representing the name of the attribute
+        <div class='inline'><p>a character string representing the name of the attribute<br />
 whose value is being queried.</p>
 </div>
       
@@ -929,8 +932,8 @@ whose value is being queried.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string value associated with the named
-attribute for this document, or nil if a value for
+        <div class='inline'><p>a string value associated with the named<br />
+attribute for this document, or nil if a value for<br />
 <!-- raw HTML omitted -->attribute_name<!-- raw HTML omitted --> has not been specified for this document.</p>
 </div>
       
@@ -952,7 +955,7 @@ attribute for this document, or nil if a value for
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the current page number inside <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, or -1 if
+    <p>Returns the current page number inside <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, or -1 if<br />
 not implemented, not know by the implementor, or irrelevant.</p>
 
 
@@ -990,7 +993,7 @@ not implemented, not know by the implementor, or irrelevant.</p>
       
       
         &mdash;
-        <div class='inline'><p>the current page number inside <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, or -1 if
+        <div class='inline'><p>the current page number inside <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, or -1 if<br />
 not implemented, not know by the implementor, or irrelevant.</p>
 </div>
       
@@ -1070,8 +1073,8 @@ not implemented, not know by the implementor, or irrelevant.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a string value associated with the named
-attribute for this document, or nil if a value for
+    <p>Returns a string value associated with the named<br />
+attribute for this document, or nil if a value for<br />
 <!-- raw HTML omitted -->attribute_name<!-- raw HTML omitted --> has not been specified for this document.</p>
 
 
@@ -1106,7 +1109,7 @@ attribute for this document, or nil if a value for
       
       
         &mdash;
-        <div class='inline'><p>a character string representing the name of the attribute
+        <div class='inline'><p>a character string representing the name of the attribute<br />
 whose value is being queried.</p>
 </div>
       
@@ -1125,8 +1128,8 @@ whose value is being queried.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string value associated with the named
-attribute for this document, or nil if a value for
+        <div class='inline'><p>a string value associated with the named<br />
+attribute for this document, or nil if a value for<br />
 <!-- raw HTML omitted -->attribute_name<!-- raw HTML omitted --> has not been specified for this document.</p>
 </div>
       
@@ -1148,8 +1151,8 @@ attribute for this document, or nil if a value for
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns An AtkAttributeSet containing the explicitly
-set name-value-pair attributes associated with this document
+    <p>Returns An AtkAttributeSet containing the explicitly<br />
+set name-value-pair attributes associated with this document<br />
 as a whole.</p>
 
 
@@ -1187,8 +1190,8 @@ as a whole.</p>
       
       
         &mdash;
-        <div class='inline'><p>An AtkAttributeSet containing the explicitly
-set name-value-pair attributes associated with this document
+        <div class='inline'><p>An AtkAttributeSet containing the explicitly<br />
+set name-value-pair attributes associated with this document<br />
 as a whole.</p>
 </div>
       
@@ -1210,8 +1213,8 @@ as a whole.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a UTF-8 string indicating the POSIX-style LC_MESSAGES
-locale of the document content as a whole, or NULL if
+    <p>Returns a UTF-8 string indicating the POSIX-style LC_MESSAGES<br />
+locale of the document content as a whole, or NULL if<br />
 the document content does not specify a locale.</p>
 
 
@@ -1249,8 +1252,8 @@ the document content does not specify a locale.</p>
       
       
         &mdash;
-        <div class='inline'><p>a UTF-8 string indicating the POSIX-style LC_MESSAGES
-locale of the document content as a whole, or NULL if
+        <div class='inline'><p>a UTF-8 string indicating the POSIX-style LC_MESSAGES<br />
+locale of the document content as a whole, or NULL if<br />
 the document content does not specify a locale.</p>
 </div>
       
@@ -1330,7 +1333,7 @@ the document content does not specify a locale.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns total page count of <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, or -1 if not implemented,
+    <p>Returns total page count of <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, or -1 if not implemented,<br />
 not know by the implementor or irrelevant.</p>
 
 
@@ -1368,7 +1371,7 @@ not know by the implementor or irrelevant.</p>
       
       
         &mdash;
-        <div class='inline'><p>total page count of <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, or -1 if not implemented,
+        <div class='inline'><p>total page count of <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, or -1 if not implemented,<br />
 not know by the implementor or irrelevant.</p>
 </div>
       
@@ -1448,10 +1451,10 @@ not know by the implementor or irrelevant.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale
-of the content of this document instance.  Individual
-text substrings or images within this document may have
-a different locale, see atk_text_get_attributes and
+    <p>Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale<br />
+of the content of this document instance.  Individual<br />
+text substrings or images within this document may have<br />
+a different locale, see atk_text_get_attributes and<br />
 atk_image_get_image_locale.</p>
 
 
@@ -1470,8 +1473,8 @@ atk_image_get_image_locale.</p>
       
       
         &mdash;
-        <div class='inline'><p>a UTF-8 string indicating the POSIX-style LC_MESSAGES
-locale of the document content as a whole, or NULL if
+        <div class='inline'><p>a UTF-8 string indicating the POSIX-style LC_MESSAGES<br />
+locale of the document content as a whole, or NULL if<br />
 the document content does not specify a locale.</p>
 </div>
       
@@ -1511,7 +1514,7 @@ the document content does not specify a locale.</p>
       
       
         &mdash;
-        <div class='inline'><p>total page count of <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, or -1 if not implemented,
+        <div class='inline'><p>total page count of <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, or -1 if not implemented,<br />
 not know by the implementor or irrelevant.</p>
 </div>
       
@@ -1552,7 +1555,7 @@ not know by the implementor or irrelevant.</p>
       
       
         &mdash;
-        <div class='inline'><p>a character string representing the name of the attribute
+        <div class='inline'><p>a character string representing the name of the attribute<br />
 whose value is being set.</p>
 </div>
       
@@ -1586,8 +1589,8 @@ whose value is being set.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->attribute_value<!-- raw HTML omitted --> is successfully associated
-with <!-- raw HTML omitted -->attribute_name<!-- raw HTML omitted --> for this <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, and false if if the
+        <div class='inline'><p>true if <!-- raw HTML omitted -->attribute_value<!-- raw HTML omitted --> is successfully associated<br />
+with <!-- raw HTML omitted -->attribute_name<!-- raw HTML omitted --> for this <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, and false if if the<br />
 document does not allow the attribute to be modified</p>
 </div>
       
@@ -1609,8 +1612,8 @@ document does not allow the attribute to be modified</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if <!-- raw HTML omitted -->attribute_value<!-- raw HTML omitted --> is successfully associated
-with <!-- raw HTML omitted -->attribute_name<!-- raw HTML omitted --> for this <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, and false if if the
+    <p>Returns true if <!-- raw HTML omitted -->attribute_value<!-- raw HTML omitted --> is successfully associated<br />
+with <!-- raw HTML omitted -->attribute_name<!-- raw HTML omitted --> for this <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, and false if if the<br />
 document does not allow the attribute to be modified.</p>
 
 
@@ -1645,7 +1648,7 @@ document does not allow the attribute to be modified.</p>
       
       
         &mdash;
-        <div class='inline'><p>a character string representing the name of the attribute
+        <div class='inline'><p>a character string representing the name of the attribute<br />
 whose value is being set.</p>
 </div>
       
@@ -1679,8 +1682,8 @@ whose value is being set.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->attribute_value<!-- raw HTML omitted --> is successfully associated
-with <!-- raw HTML omitted -->attribute_name<!-- raw HTML omitted --> for this <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, and false if if the
+        <div class='inline'><p>true if <!-- raw HTML omitted -->attribute_value<!-- raw HTML omitted --> is successfully associated<br />
+with <!-- raw HTML omitted -->attribute_name<!-- raw HTML omitted --> for this <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, and false if if the<br />
 document does not allow the attribute to be modified</p>
 </div>
       
@@ -1736,7 +1739,7 @@ document does not allow the attribute to be modified</p>
       
       
         &mdash;
-        <div class='inline'><p>a GArray of AtkTextSelections
+        <div class='inline'><p>a GArray of AtkTextSelections<br />
 to be selected.</p>
 </div>
       
@@ -1776,7 +1779,7 @@ to be selected.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns an array of AtkTextSelections within this document.
+    <p>Returns an array of AtkTextSelections within this document.<br />
 AtkTextSelection structures representing the selection.</p>
 
 
@@ -1816,10 +1819,10 @@ AtkTextSelection structures representing the selection.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Makes 1 or more selections within this document denoted by the given
-array of AtkTextSelections. Any existing physical selection (inside or
-outside this document) is replaced by the new selections. All objects within
-the given selection ranges must be descendants of this document. Otherwise
+    <p>Makes 1 or more selections within this document denoted by the given<br />
+array of AtkTextSelections. Any existing physical selection (inside or<br />
+outside this document) is replaced by the new selections. All objects within<br />
+the given selection ranges must be descendants of this document. Otherwise<br />
 FALSE will be returned.</p>
 
 
@@ -1839,7 +1842,7 @@ FALSE will be returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GArray of AtkTextSelections
+        <div class='inline'><p>a GArray of AtkTextSelections<br />
 to be selected.</p>
 </div>
       
@@ -1875,7 +1878,7 @@ to be selected.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

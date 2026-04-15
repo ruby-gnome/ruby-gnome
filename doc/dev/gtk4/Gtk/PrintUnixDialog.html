@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::PrintUnixDialog";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -102,22 +103,23 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkPrintUnixDialog</code> implements a print dialog for platforms
+    <p><code>GtkPrintUnixDialog</code> implements a print dialog for platforms<br />
 which don’t provide a native print dialog, like Unix.</p>
 <p><img src="printdialog.png" alt="An example GtkPrintUnixDialog" /></p>
-<p>It can be used very much like any other GTK dialog, at the cost of
-the portability offered by the high-level printing API with
+<p>It can be used very much like any other GTK dialog, at the cost of<br />
+the portability offered by the high-level printing API with<br />
 [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation].</p>
-<p>In order to print something with <code>GtkPrintUnixDialog</code>, you need to
-use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintUnixDialog.get_selected_printer] to obtain a
-[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer] object and use it to construct a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob]
+<p>In order to print something with <code>GtkPrintUnixDialog</code>, you need to<br />
+use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintUnixDialog.get_selected_printer] to obtain a<br />
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Printer] object and use it to construct a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob]<br />
 using [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob.new].</p>
 <p><code>GtkPrintUnixDialog</code> uses the following response values:</p>
 <ul>
@@ -125,8 +127,8 @@ using [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintJob.new].<
 <li>%GTK_RESPONSE_APPLY: for the “Preview” button</li>
 <li>%GTK_RESPONSE_CANCEL: for the “Cancel” button</li>
 </ul>
-<h1>GtkPrintUnixDialog as GtkBuildable</h1>
-<p>The <code>GtkPrintUnixDialog</code> implementation of the <code>GtkBuildable</code> interface
+<h1><a href="#gtkprintunixdialog-as-gtkbuildable" aria-hidden="true" class="anchor" id="gtkprintunixdialog-as-gtkbuildable"></a>GtkPrintUnixDialog as GtkBuildable</h1>
+<p>The <code>GtkPrintUnixDialog</code> implementation of the <code>GtkBuildable</code> interface<br />
 exposes its <!-- raw HTML omitted -->notebook<!-- raw HTML omitted --> internal children with the name “notebook”.</p>
 <p>An example of a <code>GtkPrintUnixDialog</code> UI definition fragment:</p>
 <pre class="code xml"><code class="xml">&lt;object class=&quot;GtkPrintUnixDialog&quot; id=&quot;dialog1&quot;&gt;
@@ -152,8 +154,8 @@ exposes its <!-- raw HTML omitted -->notebook<!-- raw HTML omitted --> internal 
   &lt;/child&gt;
 &lt;/object&gt;
 </code></pre>
-<h1>CSS nodes</h1>
-<p><code>GtkPrintUnixDialog</code> has a single CSS node with name window. The style classes
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
+<p><code>GtkPrintUnixDialog</code> has a single CSS node with name window. The style classes<br />
 dialog and print are added.</p>
 
 
@@ -732,9 +734,11 @@ dialog and print are added.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -755,9 +759,11 @@ dialog and print are added.</p>
   
   
   
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Window.html" title="Gtk::Window (class)">Window</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Window.html#application-instance_method" title="Gtk::Window#application (method)">#application</a></span>, <span class='object_link'><a href="Window.html#application=-instance_method" title="Gtk::Window#application= (method)">#application=</a></span>, <span class='object_link'><a href="Window.html#auto_startup_notification=-class_method" title="Gtk::Window.auto_startup_notification= (method)">auto_startup_notification=</a></span>, <span class='object_link'><a href="Window.html#child-instance_method" title="Gtk::Window#child (method)">#child</a></span>, <span class='object_link'><a href="Window.html#child=-instance_method" title="Gtk::Window#child= (method)">#child=</a></span>, <span class='object_link'><a href="Window.html#close-instance_method" title="Gtk::Window#close (method)">#close</a></span>, <span class='object_link'><a href="Window.html#decorated-instance_method" title="Gtk::Window#decorated (method)">#decorated</a></span>, <span class='object_link'><a href="Window.html#decorated=-instance_method" title="Gtk::Window#decorated= (method)">#decorated=</a></span>, <span class='object_link'><a href="Window.html#decorated%3F-instance_method" title="Gtk::Window#decorated? (method)">#decorated?</a></span>, <span class='object_link'><a href="Window.html#default_height-instance_method" title="Gtk::Window#default_height (method)">#default_height</a></span>, <span class='object_link'><a href="Window.html#default_height=-instance_method" title="Gtk::Window#default_height= (method)">#default_height=</a></span>, <span class='object_link'><a href="Window.html#default_icon_name-class_method" title="Gtk::Window.default_icon_name (method)">default_icon_name</a></span>, <span class='object_link'><a href="Window.html#default_icon_name=-class_method" title="Gtk::Window.default_icon_name= (method)">default_icon_name=</a></span>, <span class='object_link'><a href="Window.html#default_widget-instance_method" title="Gtk::Window#default_widget (method)">#default_widget</a></span>, <span class='object_link'><a href="Window.html#default_widget=-instance_method" title="Gtk::Window#default_widget= (method)">#default_widget=</a></span>, <span class='object_link'><a href="Window.html#default_width-instance_method" title="Gtk::Window#default_width (method)">#default_width</a></span>, <span class='object_link'><a href="Window.html#default_width=-instance_method" title="Gtk::Window#default_width= (method)">#default_width=</a></span>, <span class='object_link'><a href="Window.html#deletable-instance_method" title="Gtk::Window#deletable (method)">#deletable</a></span>, <span class='object_link'><a href="Window.html#deletable=-instance_method" title="Gtk::Window#deletable= (method)">#deletable=</a></span>, <span class='object_link'><a href="Window.html#deletable%3F-instance_method" title="Gtk::Window#deletable? (method)">#deletable?</a></span>, <span class='object_link'><a href="Window.html#destroy-instance_method" title="Gtk::Window#destroy (method)">#destroy</a></span>, <span class='object_link'><a href="Window.html#destroy_with_parent-instance_method" title="Gtk::Window#destroy_with_parent (method)">#destroy_with_parent</a></span>, <span class='object_link'><a href="Window.html#destroy_with_parent=-instance_method" title="Gtk::Window#destroy_with_parent= (method)">#destroy_with_parent=</a></span>, <span class='object_link'><a href="Window.html#destroy_with_parent%3F-instance_method" title="Gtk::Window#destroy_with_parent? (method)">#destroy_with_parent?</a></span>, <span class='object_link'><a href="Window.html#display-instance_method" title="Gtk::Window#display (method)">#display</a></span>, <span class='object_link'><a href="Window.html#display=-instance_method" title="Gtk::Window#display= (method)">#display=</a></span>, <span class='object_link'><a href="Window.html#focus-instance_method" title="Gtk::Window#focus (method)">#focus</a></span>, <span class='object_link'><a href="Window.html#focus=-instance_method" title="Gtk::Window#focus= (method)">#focus=</a></span>, <span class='object_link'><a href="Window.html#focus_visible-instance_method" title="Gtk::Window#focus_visible (method)">#focus_visible</a></span>, <span class='object_link'><a href="Window.html#focus_visible=-instance_method" title="Gtk::Window#focus_visible= (method)">#focus_visible=</a></span>, <span class='object_link'><a href="Window.html#focus_visible%3F-instance_method" title="Gtk::Window#focus_visible? (method)">#focus_visible?</a></span>, <span class='object_link'><a href="Window.html#focus_widget-instance_method" title="Gtk::Window#focus_widget (method)">#focus_widget</a></span>, <span class='object_link'><a href="Window.html#focus_widget=-instance_method" title="Gtk::Window#focus_widget= (method)">#focus_widget=</a></span>, <span class='object_link'><a href="Window.html#fullscreen-instance_method" title="Gtk::Window#fullscreen (method)">#fullscreen</a></span>, <span class='object_link'><a href="Window.html#fullscreen_on_monitor-instance_method" title="Gtk::Window#fullscreen_on_monitor (method)">#fullscreen_on_monitor</a></span>, <span class='object_link'><a href="Window.html#fullscreened=-instance_method" title="Gtk::Window#fullscreened= (method)">#fullscreened=</a></span>, <span class='object_link'><a href="Window.html#fullscreened%3F-instance_method" title="Gtk::Window#fullscreened? (method)">#fullscreened?</a></span>, <span class='object_link'><a href="Window.html#get_default_size-instance_method" title="Gtk::Window#get_default_size (method)">#get_default_size</a></span>, <span class='object_link'><a href="Window.html#group-instance_method" title="Gtk::Window#group (method)">#group</a></span>, <span class='object_link'><a href="Window.html#handle_menubar_accel-instance_method" title="Gtk::Window#handle_menubar_accel (method)">#handle_menubar_accel</a></span>, <span class='object_link'><a href="Window.html#handle_menubar_accel=-instance_method" title="Gtk::Window#handle_menubar_accel= (method)">#handle_menubar_accel=</a></span>, <span class='object_link'><a href="Window.html#handle_menubar_accel%3F-instance_method" title="Gtk::Window#handle_menubar_accel? (method)">#handle_menubar_accel?</a></span>, <span class='object_link'><a href="Window.html#has_group-instance_method" title="Gtk::Window#has_group (method)">#has_group</a></span>, <span class='object_link'><a href="Window.html#hide_on_close-instance_method" title="Gtk::Window#hide_on_close (method)">#hide_on_close</a></span>, <span class='object_link'><a href="Window.html#hide_on_close=-instance_method" title="Gtk::Window#hide_on_close= (method)">#hide_on_close=</a></span>, <span class='object_link'><a href="Window.html#hide_on_close%3F-instance_method" title="Gtk::Window#hide_on_close? (method)">#hide_on_close?</a></span>, <span class='object_link'><a href="Window.html#icon_name-instance_method" title="Gtk::Window#icon_name (method)">#icon_name</a></span>, <span class='object_link'><a href="Window.html#icon_name=-instance_method" title="Gtk::Window#icon_name= (method)">#icon_name=</a></span>, <span class='object_link'><a href="Window.html#interactive_debugging=-class_method" title="Gtk::Window.interactive_debugging= (method)">interactive_debugging=</a></span>, <span class='object_link'><a href="Window.html#is_active-instance_method" title="Gtk::Window#is_active (method)">#is_active</a></span>, <span class='object_link'><a href="Window.html#is_active=-instance_method" title="Gtk::Window#is_active= (method)">#is_active=</a></span>, <span class='object_link'><a href="Window.html#is_active%3F-instance_method" title="Gtk::Window#is_active? (method)">#is_active?</a></span>, <span class='object_link'><a href="Window.html#is_fullscreen-instance_method" title="Gtk::Window#is_fullscreen (method)">#is_fullscreen</a></span>, <span class='object_link'><a href="Window.html#is_maximized-instance_method" title="Gtk::Window#is_maximized (method)">#is_maximized</a></span>, <span class='object_link'><a href="Window.html#is_suspended-instance_method" title="Gtk::Window#is_suspended (method)">#is_suspended</a></span>, <span class='object_link'><a href="Window.html#list_toplevels-class_method" title="Gtk::Window.list_toplevels (method)">list_toplevels</a></span>, <span class='object_link'><a href="Window.html#maximize-instance_method" title="Gtk::Window#maximize (method)">#maximize</a></span>, <span class='object_link'><a href="Window.html#maximized=-instance_method" title="Gtk::Window#maximized= (method)">#maximized=</a></span>, <span class='object_link'><a href="Window.html#maximized%3F-instance_method" title="Gtk::Window#maximized? (method)">#maximized?</a></span>, <span class='object_link'><a href="Window.html#minimize-instance_method" title="Gtk::Window#minimize (method)">#minimize</a></span>, <span class='object_link'><a href="Window.html#mnemonics_visible-instance_method" title="Gtk::Window#mnemonics_visible (method)">#mnemonics_visible</a></span>, <span class='object_link'><a href="Window.html#mnemonics_visible=-instance_method" title="Gtk::Window#mnemonics_visible= (method)">#mnemonics_visible=</a></span>, <span class='object_link'><a href="Window.html#mnemonics_visible%3F-instance_method" title="Gtk::Window#mnemonics_visible? (method)">#mnemonics_visible?</a></span>, <span class='object_link'><a href="Window.html#modal-instance_method" title="Gtk::Window#modal (method)">#modal</a></span>, <span class='object_link'><a href="Window.html#modal=-instance_method" title="Gtk::Window#modal= (method)">#modal=</a></span>, <span class='object_link'><a href="Window.html#modal%3F-instance_method" title="Gtk::Window#modal? (method)">#modal?</a></span>, <span class='object_link'><a href="Window.html#present-instance_method" title="Gtk::Window#present (method)">#present</a></span>, <span class='object_link'><a href="Window.html#present_with_time-instance_method" title="Gtk::Window#present_with_time (method)">#present_with_time</a></span>, <span class='object_link'><a href="Window.html#resizable-instance_method" title="Gtk::Window#resizable (method)">#resizable</a></span>, <span class='object_link'><a href="Window.html#resizable=-instance_method" title="Gtk::Window#resizable= (method)">#resizable=</a></span>, <span class='object_link'><a href="Window.html#resizable%3F-instance_method" title="Gtk::Window#resizable? (method)">#resizable?</a></span>, <span class='object_link'><a href="Window.html#set_default_size-instance_method" title="Gtk::Window#set_default_size (method)">#set_default_size</a></span>, <span class='object_link'><a href="Window.html#startup_id=-instance_method" title="Gtk::Window#startup_id= (method)">#startup_id=</a></span>, <span class='object_link'><a href="Window.html#suspended=-instance_method" title="Gtk::Window#suspended= (method)">#suspended=</a></span>, <span class='object_link'><a href="Window.html#suspended%3F-instance_method" title="Gtk::Window#suspended? (method)">#suspended?</a></span>, <span class='object_link'><a href="Window.html#title-instance_method" title="Gtk::Window#title (method)">#title</a></span>, <span class='object_link'><a href="Window.html#title=-instance_method" title="Gtk::Window#title= (method)">#title=</a></span>, <span class='object_link'><a href="Window.html#titlebar-instance_method" title="Gtk::Window#titlebar (method)">#titlebar</a></span>, <span class='object_link'><a href="Window.html#titlebar=-instance_method" title="Gtk::Window#titlebar= (method)">#titlebar=</a></span>, <span class='object_link'><a href="Window.html#toplevels-class_method" title="Gtk::Window.toplevels (method)">toplevels</a></span>, <span class='object_link'><a href="Window.html#transient_for-instance_method" title="Gtk::Window#transient_for (method)">#transient_for</a></span>, <span class='object_link'><a href="Window.html#transient_for=-instance_method" title="Gtk::Window#transient_for= (method)">#transient_for=</a></span>, <span class='object_link'><a href="Window.html#unfullscreen-instance_method" title="Gtk::Window#unfullscreen (method)">#unfullscreen</a></span>, <span class='object_link'><a href="Window.html#unmaximize-instance_method" title="Gtk::Window#unmaximize (method)">#unmaximize</a></span>, <span class='object_link'><a href="Window.html#unminimize-instance_method" title="Gtk::Window#unminimize (method)">#unminimize</a></span></p>
 
+  
   
   
   
@@ -1776,9 +1782,9 @@ dialog and print are added.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a new <code>GtkPrintSettings</code> object that represents the
+    <p>Gets a new <code>GtkPrintSettings</code> object that represents the<br />
 current values in the print dialog.</p>
-<p>Note that this creates a new object, and you need to unref
+<p>Note that this creates a new object, and you need to unref<br />
 it if don’t want to keep it.</p>
 
 
@@ -1819,8 +1825,8 @@ it if don’t want to keep it.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the <code>GtkPrintSettings</code> for the <code>GtkPrintUnixDialog</code>.</p>
-<p>Typically, this is used to restore saved print settings
-from a previous print operation before the print dialog
+<p>Typically, this is used to restore saved print settings<br />
+from a previous print operation before the print dialog<br />
 is shown.</p>
 
 
@@ -2016,7 +2022,7 @@ is shown.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

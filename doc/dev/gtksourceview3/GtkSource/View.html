@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::View";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -105,7 +106,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtksourceview3/deprecated.rb</dd>
+    <dd>lib/gtksourceview3/deprecated.rb
+</dd>
   </dl>
   
 </div>
@@ -1324,9 +1326,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -1339,6 +1343,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gtk/TextView.html" title="Gtk::TextView (class)">Gtk::TextView</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../Gtk/TextView.html#accepts_tab-instance_method" title="Gtk::TextView#accepts_tab (method)">#accepts_tab</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#accepts_tab=-instance_method" title="Gtk::TextView#accepts_tab= (method)">#accepts_tab=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#accepts_tab%3F-instance_method" title="Gtk::TextView#accepts_tab? (method)">#accepts_tab?</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#add_child_at_anchor-instance_method" title="Gtk::TextView#add_child_at_anchor (method)">#add_child_at_anchor</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#add_overlay-instance_method" title="Gtk::TextView#add_overlay (method)">#add_overlay</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#backward_display_line-instance_method" title="Gtk::TextView#backward_display_line (method)">#backward_display_line</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#backward_display_line_start-instance_method" title="Gtk::TextView#backward_display_line_start (method)">#backward_display_line_start</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#bottom_margin-instance_method" title="Gtk::TextView#bottom_margin (method)">#bottom_margin</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#bottom_margin=-instance_method" title="Gtk::TextView#bottom_margin= (method)">#bottom_margin=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#buffer-instance_method" title="Gtk::TextView#buffer (method)">#buffer</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#buffer=-instance_method" title="Gtk::TextView#buffer= (method)">#buffer=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#buffer_to_window_coords-instance_method" title="Gtk::TextView#buffer_to_window_coords (method)">#buffer_to_window_coords</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#cursor_visible-instance_method" title="Gtk::TextView#cursor_visible (method)">#cursor_visible</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#cursor_visible=-instance_method" title="Gtk::TextView#cursor_visible= (method)">#cursor_visible=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#cursor_visible%3F-instance_method" title="Gtk::TextView#cursor_visible? (method)">#cursor_visible?</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#editable-instance_method" title="Gtk::TextView#editable (method)">#editable</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#editable=-instance_method" title="Gtk::TextView#editable= (method)">#editable=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#editable%3F-instance_method" title="Gtk::TextView#editable? (method)">#editable?</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#extra_menu-instance_method" title="Gtk::TextView#extra_menu (method)">#extra_menu</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#extra_menu=-instance_method" title="Gtk::TextView#extra_menu= (method)">#extra_menu=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#forward_display_line-instance_method" title="Gtk::TextView#forward_display_line (method)">#forward_display_line</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#forward_display_line_end-instance_method" title="Gtk::TextView#forward_display_line_end (method)">#forward_display_line_end</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#get_cursor_locations-instance_method" title="Gtk::TextView#get_cursor_locations (method)">#get_cursor_locations</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#get_iter_at_location-instance_method" title="Gtk::TextView#get_iter_at_location (method)">#get_iter_at_location</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#get_iter_at_position-instance_method" title="Gtk::TextView#get_iter_at_position (method)">#get_iter_at_position</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#get_iter_location-instance_method" title="Gtk::TextView#get_iter_location (method)">#get_iter_location</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#get_line_at_y-instance_method" title="Gtk::TextView#get_line_at_y (method)">#get_line_at_y</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#get_line_yrange-instance_method" title="Gtk::TextView#get_line_yrange (method)">#get_line_yrange</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#get_visible_rect-instance_method" title="Gtk::TextView#get_visible_rect (method)">#get_visible_rect</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#im_context_filter_keypress-instance_method" title="Gtk::TextView#im_context_filter_keypress (method)">#im_context_filter_keypress</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#im_module-instance_method" title="Gtk::TextView#im_module (method)">#im_module</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#im_module=-instance_method" title="Gtk::TextView#im_module= (method)">#im_module=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#indent-instance_method" title="Gtk::TextView#indent (method)">#indent</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#indent=-instance_method" title="Gtk::TextView#indent= (method)">#indent=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#input_hints-instance_method" title="Gtk::TextView#input_hints (method)">#input_hints</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#input_hints=-instance_method" title="Gtk::TextView#input_hints= (method)">#input_hints=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#input_purpose-instance_method" title="Gtk::TextView#input_purpose (method)">#input_purpose</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#input_purpose=-instance_method" title="Gtk::TextView#input_purpose= (method)">#input_purpose=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#justification-instance_method" title="Gtk::TextView#justification (method)">#justification</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#justification=-instance_method" title="Gtk::TextView#justification= (method)">#justification=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#left_margin-instance_method" title="Gtk::TextView#left_margin (method)">#left_margin</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#left_margin=-instance_method" title="Gtk::TextView#left_margin= (method)">#left_margin=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#ltr_context-instance_method" title="Gtk::TextView#ltr_context (method)">#ltr_context</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#monospace-instance_method" title="Gtk::TextView#monospace (method)">#monospace</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#monospace=-instance_method" title="Gtk::TextView#monospace= (method)">#monospace=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#monospace%3F-instance_method" title="Gtk::TextView#monospace? (method)">#monospace?</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#move_mark_onscreen-instance_method" title="Gtk::TextView#move_mark_onscreen (method)">#move_mark_onscreen</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#move_overlay-instance_method" title="Gtk::TextView#move_overlay (method)">#move_overlay</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#move_visually-instance_method" title="Gtk::TextView#move_visually (method)">#move_visually</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#overwrite-instance_method" title="Gtk::TextView#overwrite (method)">#overwrite</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#overwrite=-instance_method" title="Gtk::TextView#overwrite= (method)">#overwrite=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#overwrite%3F-instance_method" title="Gtk::TextView#overwrite? (method)">#overwrite?</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#pixels_above_lines-instance_method" title="Gtk::TextView#pixels_above_lines (method)">#pixels_above_lines</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#pixels_above_lines=-instance_method" title="Gtk::TextView#pixels_above_lines= (method)">#pixels_above_lines=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#pixels_below_lines-instance_method" title="Gtk::TextView#pixels_below_lines (method)">#pixels_below_lines</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#pixels_below_lines=-instance_method" title="Gtk::TextView#pixels_below_lines= (method)">#pixels_below_lines=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#pixels_inside_wrap-instance_method" title="Gtk::TextView#pixels_inside_wrap (method)">#pixels_inside_wrap</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#pixels_inside_wrap=-instance_method" title="Gtk::TextView#pixels_inside_wrap= (method)">#pixels_inside_wrap=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#place_cursor_onscreen-instance_method" title="Gtk::TextView#place_cursor_onscreen (method)">#place_cursor_onscreen</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#remove-instance_method" title="Gtk::TextView#remove (method)">#remove</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#reset_cursor_blink-instance_method" title="Gtk::TextView#reset_cursor_blink (method)">#reset_cursor_blink</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#reset_im_context-instance_method" title="Gtk::TextView#reset_im_context (method)">#reset_im_context</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#right_margin-instance_method" title="Gtk::TextView#right_margin (method)">#right_margin</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#right_margin=-instance_method" title="Gtk::TextView#right_margin= (method)">#right_margin=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#rtl_context-instance_method" title="Gtk::TextView#rtl_context (method)">#rtl_context</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#scroll_mark_onscreen-instance_method" title="Gtk::TextView#scroll_mark_onscreen (method)">#scroll_mark_onscreen</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#scroll_to_iter-instance_method" title="Gtk::TextView#scroll_to_iter (method)">#scroll_to_iter</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#scroll_to_mark-instance_method" title="Gtk::TextView#scroll_to_mark (method)">#scroll_to_mark</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#set_gutter-instance_method" title="Gtk::TextView#set_gutter (method)">#set_gutter</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#starts_display_line-instance_method" title="Gtk::TextView#starts_display_line (method)">#starts_display_line</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#tabs-instance_method" title="Gtk::TextView#tabs (method)">#tabs</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#tabs=-instance_method" title="Gtk::TextView#tabs= (method)">#tabs=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#top_margin-instance_method" title="Gtk::TextView#top_margin (method)">#top_margin</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#top_margin=-instance_method" title="Gtk::TextView#top_margin= (method)">#top_margin=</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#window_to_buffer_coords-instance_method" title="Gtk::TextView#window_to_buffer_coords (method)">#window_to_buffer_coords</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#wrap_mode-instance_method" title="Gtk::TextView#wrap_mode (method)">#wrap_mode</a></span>, <span class='object_link'><a href="../Gtk/TextView.html#wrap_mode=-instance_method" title="Gtk::TextView#wrap_mode= (method)">#wrap_mode=</a></span></p>
 
+  
   
   
   
@@ -1770,7 +1775,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the [property<!-- raw HTML omitted -->View<!-- raw HTML omitted -->:enable-snippets] property.</p>
-<p>If true, matching snippets found in the [class<!-- raw HTML omitted -->SnippetManager<!-- raw HTML omitted -->]
+<p>If true, matching snippets found in the [class<!-- raw HTML omitted -->SnippetManager<!-- raw HTML omitted -->]<br />
 may be expanded when the user presses Tab after a word in the [class<!-- raw HTML omitted -->View<!-- raw HTML omitted -->].</p>
 
 
@@ -1810,11 +1815,11 @@ may be expanded when the user presses Tab after a word in the [class<!-- raw HTM
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The property denotes if snippets should be
-expanded when the user presses Tab after having typed a word
+    <p>The property denotes if snippets should be<br />
+expanded when the user presses Tab after having typed a word<br />
 matching the snippets found in [class<!-- raw HTML omitted -->SnippetManager<!-- raw HTML omitted -->].</p>
-<p>The user may tab through focus-positions of the snippet if any
-are available by pressing Tab repeatedly until the desired focus
+<p>The user may tab through focus-positions of the snippet if any<br />
+are available by pressing Tab repeatedly until the desired focus<br />
 position is selected.</p>
 
 
@@ -1882,11 +1887,11 @@ position is selected.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The property denotes if snippets should be
-expanded when the user presses Tab after having typed a word
+    <p>The property denotes if snippets should be<br />
+expanded when the user presses Tab after having typed a word<br />
 matching the snippets found in [class<!-- raw HTML omitted -->SnippetManager<!-- raw HTML omitted -->].</p>
-<p>The user may tab through focus-positions of the snippet if any
-are available by pressing Tab repeatedly until the desired focus
+<p>The user may tab through focus-positions of the snippet if any<br />
+are available by pressing Tab repeatedly until the desired focus<br />
 position is selected.</p>
 
 
@@ -1927,8 +1932,8 @@ position is selected.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the [class<!-- raw HTML omitted -->Gutter<!-- raw HTML omitted -->] object associated with <!-- raw HTML omitted -->window_type<!-- raw HTML omitted --> for <!-- raw HTML omitted -->view<!-- raw HTML omitted -->.</p>
-<p>Only %GTK_TEXT_WINDOW_LEFT and %GTK_TEXT_WINDOW_RIGHT are supported,
-respectively corresponding to the left and right gutter. The line numbers
+<p>Only %GTK_TEXT_WINDOW_LEFT and %GTK_TEXT_WINDOW_RIGHT are supported,<br />
+respectively corresponding to the left and right gutter. The line numbers<br />
 and mark category icons are rendered in the left gutter.</p>
 
 
@@ -1987,7 +1992,7 @@ and mark category icons are rendered in the left gutter.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets attributes and priority for the <!-- raw HTML omitted -->category<!-- raw HTML omitted -->.
+    <p>Gets attributes and priority for the <!-- raw HTML omitted -->category<!-- raw HTML omitted -->.<br />
 The object belongs to <!-- raw HTML omitted -->view<!-- raw HTML omitted -->, so it must not be unreffed.</p>
 
 
@@ -2061,7 +2066,7 @@ The object belongs to <!-- raw HTML omitted -->view<!-- raw HTML omitted -->, so
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines the visual column at <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> taking into consideration the
+    <p>Determines the visual column at <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> taking into consideration the<br />
 [property<!-- raw HTML omitted -->View<!-- raw HTML omitted -->:tab-width] of <!-- raw HTML omitted -->view<!-- raw HTML omitted -->.</p>
 
 
@@ -2265,7 +2270,7 @@ The object belongs to <!-- raw HTML omitted -->view<!-- raw HTML omitted -->, so
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the [class<!-- raw HTML omitted -->Hover<!-- raw HTML omitted -->] associated with <!-- raw HTML omitted -->view<!-- raw HTML omitted -->.</p>
-<p>The returned object is guaranteed to be the same for the lifetime of <!-- raw HTML omitted -->view<!-- raw HTML omitted -->.
+<p>The returned object is guaranteed to be the same for the lifetime of <!-- raw HTML omitted -->view<!-- raw HTML omitted -->.<br />
 Each [class<!-- raw HTML omitted -->View<!-- raw HTML omitted -->] object has a different [class<!-- raw HTML omitted -->Hover<!-- raw HTML omitted -->].</p>
 
 
@@ -2305,7 +2310,7 @@ Each [class<!-- raw HTML omitted -->View<!-- raw HTML omitted -->] object has a 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts one indentation level at the beginning of the specified lines. The
+    <p>Inserts one indentation level at the beginning of the specified lines. The<br />
 empty lines are not indented.</p>
 
 
@@ -2375,7 +2380,7 @@ empty lines are not indented.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether when the tab key is pressed the current selection
+    <p>Returns whether when the tab key is pressed the current selection<br />
 should get indented instead of replaced with the <code>\t</code> character.</p>
 
 
@@ -2626,7 +2631,7 @@ should get indented instead of replaced with the <code>\t</code> character.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The property is a [iface<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->] to use to indent
+    <p>The property is a [iface<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->] to use to indent<br />
 as the user types into the [class<!-- raw HTML omitted -->View<!-- raw HTML omitted -->].</p>
 
 
@@ -2666,7 +2671,7 @@ as the user types into the [class<!-- raw HTML omitted -->View<!-- raw HTML omit
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The property is a [iface<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->] to use to indent
+    <p>The property is a [iface<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->] to use to indent<br />
 as the user types into the [class<!-- raw HTML omitted -->View<!-- raw HTML omitted -->].</p>
 
 
@@ -2734,7 +2739,7 @@ as the user types into the [class<!-- raw HTML omitted -->View<!-- raw HTML omit
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether when inserting a tabulator character it should
+    <p>Returns whether when inserting a tabulator character it should<br />
 be replaced by a group of space characters.</p>
 
 
@@ -2880,8 +2885,8 @@ be replaced by a group of space characters.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts a new snippet at <!-- raw HTML omitted -->location<!-- raw HTML omitted --></p>
-<p>If another snippet was already active, it will be paused and the new
-snippet will become active. Once the focus positions of <!-- raw HTML omitted -->snippet<!-- raw HTML omitted --> have
+<p>If another snippet was already active, it will be paused and the new<br />
+snippet will become active. Once the focus positions of <!-- raw HTML omitted -->snippet<!-- raw HTML omitted --> have<br />
 been exhausted, editing will return to the previous snippet.</p>
 
 
@@ -3576,7 +3581,7 @@ been exhausted, editing will return to the previous snippet.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if pressing the Backspace key will try to delete spaces
+    <p>Returns true if pressing the Backspace key will try to delete spaces<br />
 up to the previous tab stop.</p>
 
 
@@ -4040,7 +4045,7 @@ up to the previous tab stop.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes one indentation level at the beginning of the
+    <p>Removes one indentation level at the beginning of the<br />
 specified lines.</p>
 
 
@@ -4106,7 +4111,7 @@ specified lines.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

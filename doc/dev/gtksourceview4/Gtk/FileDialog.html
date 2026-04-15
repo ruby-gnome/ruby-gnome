@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::FileDialog";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -761,6 +763,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -912,12 +915,12 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The default filter, that is, the filter that is initially
+    <p>The default filter, that is, the filter that is initially<br />
 active in the file chooser dialog.</p>
-<p>If the default filter is nil, the first filter of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters]
-is used as the default filter. If that property contains no filter, the dialog will
+<p>If the default filter is nil, the first filter of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters]<br />
+is used as the default filter. If that property contains no filter, the dialog will<br />
 be unfiltered.</p>
-<p>If [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters] is not nil, the default filter should be part
+<p>If [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters] is not nil, the default filter should be part<br />
 of the list. If it is not, the dialog may choose to not make it available.</p>
 
 
@@ -957,12 +960,12 @@ of the list. If it is not, the dialog may choose to not make it available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The default filter, that is, the filter that is initially
+    <p>The default filter, that is, the filter that is initially<br />
 active in the file chooser dialog.</p>
-<p>If the default filter is nil, the first filter of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters]
-is used as the default filter. If that property contains no filter, the dialog will
+<p>If the default filter is nil, the first filter of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters]<br />
+is used as the default filter. If that property contains no filter, the dialog will<br />
 be unfiltered.</p>
-<p>If [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters] is not nil, the default filter should be part
+<p>If [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters] is not nil, the default filter should be part<br />
 of the list. If it is not, the dialog may choose to not make it available.</p>
 
 
@@ -1138,9 +1141,9 @@ of the list. If it is not, the dialog may choose to not make it available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The initial file, that is, the file that is initially selected
+    <p>The initial file, that is, the file that is initially selected<br />
 in the file chooser dialog</p>
-<p>This is a utility property that sets both [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder] and
+<p>This is a utility property that sets both [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder] and<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-name].</p>
 
 
@@ -1180,9 +1183,9 @@ in the file chooser dialog</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The initial file, that is, the file that is initially selected
+    <p>The initial file, that is, the file that is initially selected<br />
 in the file chooser dialog</p>
-<p>This is a utility property that sets both [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder] and
+<p>This is a utility property that sets both [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder] and<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-name].</p>
 
 
@@ -1250,7 +1253,7 @@ in the file chooser dialog</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The initial folder, that is, the directory that is initially
+    <p>The initial folder, that is, the directory that is initially<br />
 opened in the file chooser dialog</p>
 
 
@@ -1290,7 +1293,7 @@ opened in the file chooser dialog</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The initial folder, that is, the directory that is initially
+    <p>The initial folder, that is, the directory that is initially<br />
 opened in the file chooser dialog</p>
 
 
@@ -1358,7 +1361,7 @@ opened in the file chooser dialog</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The initial name, that is, the filename that is initially
+    <p>The initial name, that is, the filename that is initially<br />
 selected in the file chooser dialog.</p>
 
 
@@ -1398,7 +1401,7 @@ selected in the file chooser dialog.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The initial name, that is, the filename that is initially
+    <p>The initial name, that is, the filename that is initially<br />
 selected in the file chooser dialog.</p>
 
 
@@ -1466,8 +1469,8 @@ selected in the file chooser dialog.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the file chooser dialog
-blocks interaction with the parent window
+    <p>Returns whether the file chooser dialog<br />
+blocks interaction with the parent window<br />
 while it is presented.</p>
 
 
@@ -1613,10 +1616,10 @@ while it is presented.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a file selection operation by
+    <p>This function initiates a file selection operation by<br />
 presenting a file chooser dialog to the user.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open_finish]
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
+It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open_finish]<br />
 to obtain the result.</p>
 
 
@@ -1716,7 +1719,7 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open] call and
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open] call and<br />
 returns the resulting file.</p>
 
 
@@ -1754,7 +1757,7 @@ returns the resulting file.</p>
       
       
         &mdash;
-        <div class='inline'><p>the file that was selected.
+        <div class='inline'><p>the file that was selected.<br />
 Otherwise, <code>NULL</code> is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
 </div>
       
@@ -1776,12 +1779,12 @@ Otherwise, <code>NULL</code> is returned and <!-- raw HTML omitted -->error<!-- 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a multi-file selection operation by
+    <p>This function initiates a multi-file selection operation by<br />
 presenting a file chooser dialog to the user.</p>
-<p>The file chooser will initially be opened in the directory
+<p>The file chooser will initially be opened in the directory<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder].</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open_multiple_finish]
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
+It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open_multiple_finish]<br />
 to obtain the result.</p>
 
 
@@ -1881,7 +1884,7 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open] call and
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open] call and<br />
 returns the resulting files in a <code>GListModel</code>.</p>
 
 
@@ -1919,8 +1922,8 @@ returns the resulting files in a <code>GListModel</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>the file that was selected,
-as a <code>GListModel</code> of <code>GFiles</code>. Otherwise, <code>NULL</code> is returned
+        <div class='inline'><p>the file that was selected,<br />
+as a <code>GListModel</code> of <code>GFiles</code>. Otherwise, <code>NULL</code> is returned<br />
 and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
 </div>
       
@@ -1942,10 +1945,10 @@ and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a file save operation by
+    <p>This function initiates a file save operation by<br />
 presenting a file chooser dialog to the user.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.save_finish]
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
+It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.save_finish]<br />
 to obtain the result.</p>
 
 
@@ -2045,7 +2048,7 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.save] call and
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.save] call and<br />
 returns the resulting file.</p>
 
 
@@ -2083,7 +2086,7 @@ returns the resulting file.</p>
       
       
         &mdash;
-        <div class='inline'><p>the file that was selected.
+        <div class='inline'><p>the file that was selected.<br />
 Otherwise, <code>NULL</code> is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
 </div>
       
@@ -2105,13 +2108,13 @@ Otherwise, <code>NULL</code> is returned and <!-- raw HTML omitted -->error<!-- 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a directory selection operation by
+    <p>This function initiates a directory selection operation by<br />
 presenting a file chooser dialog to the user.</p>
-<p>If you pass <!-- raw HTML omitted -->initial_folder<!-- raw HTML omitted -->, the file chooser will initially be
-opened in the parent directory of that folder, otherwise, it
+<p>If you pass <!-- raw HTML omitted -->initial_folder<!-- raw HTML omitted -->, the file chooser will initially be<br />
+opened in the parent directory of that folder, otherwise, it<br />
 will be in the directory [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder].</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_folder_finish]
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
+It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_folder_finish]<br />
 to obtain the result.</p>
 
 
@@ -2211,7 +2214,7 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_folder] call and
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_folder] call and<br />
 returns the resulting file.</p>
 
 
@@ -2249,7 +2252,7 @@ returns the resulting file.</p>
       
       
         &mdash;
-        <div class='inline'><p>the file that was selected.
+        <div class='inline'><p>the file that was selected.<br />
 Otherwise, <code>NULL</code> is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
 </div>
       
@@ -2271,12 +2274,12 @@ Otherwise, <code>NULL</code> is returned and <!-- raw HTML omitted -->error<!-- 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a multi-directory selection operation by
+    <p>This function initiates a multi-directory selection operation by<br />
 presenting a file chooser dialog to the user.</p>
-<p>The file chooser will initially be opened in the directory
+<p>The file chooser will initially be opened in the directory<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder].</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_multiple_folders_finish]
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
+It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_multiple_folders_finish]<br />
 to obtain the result.</p>
 
 
@@ -2376,7 +2379,7 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_multiple_folders]
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_multiple_folders]<br />
 call and returns the resulting files in a <code>GListModel</code>.</p>
 
 
@@ -2414,8 +2417,8 @@ call and returns the resulting files in a <code>GListModel</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>the file that was selected,
-as a <code>GListModel</code> of <code>GFiles</code>. Otherwise, <code>NULL</code> is returned
+        <div class='inline'><p>the file that was selected,<br />
+as a <code>GListModel</code> of <code>GFiles</code>. Otherwise, <code>NULL</code> is returned<br />
 and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
 </div>
       
@@ -2539,7 +2542,7 @@ and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

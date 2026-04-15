@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::GridLayout";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,14 +99,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::GridLayoutClass structure contains only private
+    <p>The Clutter::GridLayoutClass structure contains only private<br />
 data and should be accessed using the provided API</p>
 
 
@@ -569,9 +571,11 @@ data and should be accessed using the provided API</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -627,8 +631,8 @@ data and should be accessed using the provided API</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a widget to the grid.</p>
-<p>The position of <!-- raw HTML omitted -->child<!-- raw HTML omitted --> is determined by <!-- raw HTML omitted -->left<!-- raw HTML omitted --> and <!-- raw HTML omitted -->top<!-- raw HTML omitted -->. The
-number of 'cells' that <!-- raw HTML omitted -->child<!-- raw HTML omitted --> will occupy is determined by
+<p>The position of <!-- raw HTML omitted -->child<!-- raw HTML omitted --> is determined by <!-- raw HTML omitted -->left<!-- raw HTML omitted --> and <!-- raw HTML omitted -->top<!-- raw HTML omitted -->. The<br />
+number of 'cells' that <!-- raw HTML omitted -->child<!-- raw HTML omitted --> will occupy is determined by<br />
 <!-- raw HTML omitted -->width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted -->.</p>
 
 
@@ -744,11 +748,11 @@ number of 'cells' that <!-- raw HTML omitted -->child<!-- raw HTML omitted --> w
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a actor to the grid.</p>
-<p>The actor is placed next to <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->, on the side determined by
-<!-- raw HTML omitted -->side<!-- raw HTML omitted -->. When <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil, the actor is placed in row (for
-left or right placement) or column 0 (for top or bottom placement),
+<p>The actor is placed next to <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->, on the side determined by<br />
+<!-- raw HTML omitted -->side<!-- raw HTML omitted -->. When <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil, the actor is placed in row (for<br />
+left or right placement) or column 0 (for top or bottom placement),<br />
 at the end indicated by <!-- raw HTML omitted -->side<!-- raw HTML omitted -->.</p>
-<p>Attaching widgets labeled [1], [2], [3] with <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> == nil and
+<p>Attaching widgets labeled [1], [2], [3] with <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> == nil and<br />
 <!-- raw HTML omitted -->side<!-- raw HTML omitted --> == %CLUTTER_GRID_POSITION_LEFT yields a layout of [3][2][1].</p>
 
 
@@ -783,7 +787,7 @@ at the end indicated by <!-- raw HTML omitted -->side<!-- raw HTML omitted -->.<
       
       
         &mdash;
-        <div class='inline'><p>the child of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> that <!-- raw HTML omitted -->child<!-- raw HTML omitted --> will be placed
+        <div class='inline'><p>the child of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> that <!-- raw HTML omitted -->child<!-- raw HTML omitted --> will be placed<br />
 next to, or nil to place <!-- raw HTML omitted -->child<!-- raw HTML omitted --> at the beginning or end</p>
 </div>
       
@@ -1115,7 +1119,7 @@ next to, or nil to place <!-- raw HTML omitted -->child<!-- raw HTML omitted -->
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the child of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> whose area covers the grid
+    <p>Gets the child of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> whose area covers the grid<br />
 cell whose upper left corner is at <!-- raw HTML omitted -->left<!-- raw HTML omitted -->, <!-- raw HTML omitted -->top<!-- raw HTML omitted -->.</p>
 
 
@@ -1190,8 +1194,8 @@ cell whose upper left corner is at <!-- raw HTML omitted -->left<!-- raw HTML om
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts a column at the specified position.</p>
-<p>Children which are attached at or to the right of this position
-are moved one column to the right. Children which span across this
+<p>Children which are attached at or to the right of this position<br />
+are moved one column to the right. Children which span across this<br />
 position are grown to span the new column.</p>
 
 
@@ -1247,10 +1251,10 @@ position are grown to span the new column.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts a row or column at the specified position.</p>
-<p>The new row or column is placed next to <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->, on the side
-determined by <!-- raw HTML omitted -->side<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->side<!-- raw HTML omitted --> is %CLUTTER_GRID_POSITION_LEFT or
-%CLUTTER_GRID_POSITION_BOTTOM, a row is inserted. If <!-- raw HTML omitted -->side<!-- raw HTML omitted --> is
-%CLUTTER_GRID_POSITION_LEFT of %CLUTTER_GRID_POSITION_RIGHT,
+<p>The new row or column is placed next to <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->, on the side<br />
+determined by <!-- raw HTML omitted -->side<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->side<!-- raw HTML omitted --> is %CLUTTER_GRID_POSITION_LEFT or<br />
+%CLUTTER_GRID_POSITION_BOTTOM, a row is inserted. If <!-- raw HTML omitted -->side<!-- raw HTML omitted --> is<br />
+%CLUTTER_GRID_POSITION_LEFT of %CLUTTER_GRID_POSITION_RIGHT,<br />
 a column is inserted.</p>
 
 
@@ -1270,7 +1274,7 @@ a column is inserted.</p>
       
       
         &mdash;
-        <div class='inline'><p>the child of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> that the new row or column will be
+        <div class='inline'><p>the child of <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> that the new row or column will be<br />
 placed next to</p>
 </div>
       
@@ -1322,8 +1326,8 @@ placed next to</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts a row at the specified position.</p>
-<p>Children which are attached at or below this position
-are moved one row down. Children which span across this
+<p>Children which are attached at or below this position<br />
+are moved one row down. Children which span across this<br />
 position are grown to span the new row.</p>
 
 
@@ -1731,7 +1735,7 @@ position are grown to span the new row.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

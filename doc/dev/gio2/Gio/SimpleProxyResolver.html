@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::SimpleProxyResolver";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -138,6 +140,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -262,6 +265,7 @@
 
       
     </ul>
+    
   
 
 
@@ -281,9 +285,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new GSimple::ProxyResolver. See
-GSimple::ProxyResolver:default-proxy and
-GSimple::ProxyResolver:ignore-hosts for more details on how the
+    <p>Creates a new GSimple::ProxyResolver. See<br />
+GSimple::ProxyResolver:default-proxy and<br />
+GSimple::ProxyResolver:ignore-hosts for more details on how the<br />
 arguments are interpreted.</p>
 
 
@@ -303,7 +307,7 @@ arguments are interpreted.</p>
       
       
         &mdash;
-        <div class='inline'><p>the default proxy to use, eg
+        <div class='inline'><p>the default proxy to use, eg<br />
 &quot;socks://192.168.1.1&quot;</p>
 </div>
       
@@ -319,7 +323,7 @@ arguments are interpreted.</p>
       
       
         &mdash;
-        <div class='inline'><p>an optional list of hosts/IP addresses
+        <div class='inline'><p>an optional list of hosts/IP addresses<br />
 to not use a proxy for.</p>
 </div>
       
@@ -365,11 +369,11 @@ to not use a proxy for.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The default proxy URI that will be used for any URI that doesn't
-match GSimple::ProxyResolver:ignore-hosts, and doesn't match any
+    <p>The default proxy URI that will be used for any URI that doesn't<br />
+match GSimple::ProxyResolver:ignore-hosts, and doesn't match any<br />
 of the schemes set with g_simple_proxy_resolver_set_uri_proxy().</p>
-<p>Note that as a special case, if this URI starts with
-&quot;socks://&quot;, GSimple::ProxyResolver will treat it as referring
+<p>Note that as a special case, if this URI starts with<br />
+&quot;socks://&quot;, GSimple::ProxyResolver will treat it as referring<br />
 to all three of the socks5, socks4a, and socks4 proxy types.</p>
 
 
@@ -409,11 +413,11 @@ to all three of the socks5, socks4a, and socks4 proxy types.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The default proxy URI that will be used for any URI that doesn't
-match GSimple::ProxyResolver:ignore-hosts, and doesn't match any
+    <p>The default proxy URI that will be used for any URI that doesn't<br />
+match GSimple::ProxyResolver:ignore-hosts, and doesn't match any<br />
 of the schemes set with g_simple_proxy_resolver_set_uri_proxy().</p>
-<p>Note that as a special case, if this URI starts with
-&quot;socks://&quot;, GSimple::ProxyResolver will treat it as referring
+<p>Note that as a special case, if this URI starts with<br />
+&quot;socks://&quot;, GSimple::ProxyResolver will treat it as referring<br />
 to all three of the socks5, socks4a, and socks4 proxy types.</p>
 
 
@@ -481,41 +485,41 @@ to all three of the socks5, socks4a, and socks4 proxy types.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A list of hostnames and IP addresses that the resolver should
+    <p>A list of hostnames and IP addresses that the resolver should<br />
 allow direct connections to.</p>
 <p>Entries can be in one of 4 formats:</p>
 <ul>
 <li>
-<p>A hostname, such as &quot;example.com&quot;, &quot;.example.com&quot;, or
-&quot;*.example.com&quot;, any of which match &quot;example.com&quot; or
+<p>A hostname, such as &quot;example.com&quot;, &quot;.example.com&quot;, or<br />
+&quot;*.example.com&quot;, any of which match &quot;example.com&quot; or<br />
 any subdomain of it.</p>
 </li>
 <li>
-<p>An IPv4 or IPv6 address, such as &quot;192.168.1.1&quot;,
+<p>An IPv4 or IPv6 address, such as &quot;192.168.1.1&quot;,<br />
 which matches only that address.</p>
 </li>
 <li>
-<p>A hostname or IP address followed by a port, such as
-&quot;example.com:80&quot;, which matches whatever the hostname or IP
-address would match, but only for URLs with the (explicitly)
-indicated port. In the case of an IPv6 address, the address
+<p>A hostname or IP address followed by a port, such as<br />
+&quot;example.com:80&quot;, which matches whatever the hostname or IP<br />
+address would match, but only for URLs with the (explicitly)<br />
+indicated port. In the case of an IPv6 address, the address<br />
 part must appear in brackets: &quot;[::1]:443&quot;</p>
 </li>
 <li>
-<p>An IP address range, given by a base address and prefix length,
+<p>An IP address range, given by a base address and prefix length,<br />
 such as &quot;fe80::/10&quot;, which matches any address in that range.</p>
 </li>
 </ul>
-<p>Note that when dealing with Unicode hostnames, the matching is
+<p>Note that when dealing with Unicode hostnames, the matching is<br />
 done against the ASCII form of the name.</p>
-<p>Also note that hostname exclusions apply only to connections made
-to hosts identified by name, and IP address exclusions apply only
-to connections made to hosts identified by address. That is, if
-example.com has an address of 192.168.1.1, and the :ignore-hosts list
-contains only &quot;192.168.1.1&quot;, then a connection to &quot;example.com&quot;
-(eg, via a GNetwork::Address) will use the proxy, and a connection to
+<p>Also note that hostname exclusions apply only to connections made<br />
+to hosts identified by name, and IP address exclusions apply only<br />
+to connections made to hosts identified by address. That is, if<br />
+example.com has an address of 192.168.1.1, and the :ignore-hosts list<br />
+contains only &quot;192.168.1.1&quot;, then a connection to &quot;example.com&quot;<br />
+(eg, via a GNetwork::Address) will use the proxy, and a connection to<br />
 &quot;192.168.1.1&quot; (eg, via a GInet::SocketAddress) will not.</p>
-<p>These rules match the &quot;ignore-hosts&quot;/&quot;noproxy&quot; rules most
+<p>These rules match the &quot;ignore-hosts&quot;/&quot;noproxy&quot; rules most<br />
 commonly used by other applications.</p>
 
 
@@ -555,41 +559,41 @@ commonly used by other applications.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A list of hostnames and IP addresses that the resolver should
+    <p>A list of hostnames and IP addresses that the resolver should<br />
 allow direct connections to.</p>
 <p>Entries can be in one of 4 formats:</p>
 <ul>
 <li>
-<p>A hostname, such as &quot;example.com&quot;, &quot;.example.com&quot;, or
-&quot;*.example.com&quot;, any of which match &quot;example.com&quot; or
+<p>A hostname, such as &quot;example.com&quot;, &quot;.example.com&quot;, or<br />
+&quot;*.example.com&quot;, any of which match &quot;example.com&quot; or<br />
 any subdomain of it.</p>
 </li>
 <li>
-<p>An IPv4 or IPv6 address, such as &quot;192.168.1.1&quot;,
+<p>An IPv4 or IPv6 address, such as &quot;192.168.1.1&quot;,<br />
 which matches only that address.</p>
 </li>
 <li>
-<p>A hostname or IP address followed by a port, such as
-&quot;example.com:80&quot;, which matches whatever the hostname or IP
-address would match, but only for URLs with the (explicitly)
-indicated port. In the case of an IPv6 address, the address
+<p>A hostname or IP address followed by a port, such as<br />
+&quot;example.com:80&quot;, which matches whatever the hostname or IP<br />
+address would match, but only for URLs with the (explicitly)<br />
+indicated port. In the case of an IPv6 address, the address<br />
 part must appear in brackets: &quot;[::1]:443&quot;</p>
 </li>
 <li>
-<p>An IP address range, given by a base address and prefix length,
+<p>An IP address range, given by a base address and prefix length,<br />
 such as &quot;fe80::/10&quot;, which matches any address in that range.</p>
 </li>
 </ul>
-<p>Note that when dealing with Unicode hostnames, the matching is
+<p>Note that when dealing with Unicode hostnames, the matching is<br />
 done against the ASCII form of the name.</p>
-<p>Also note that hostname exclusions apply only to connections made
-to hosts identified by name, and IP address exclusions apply only
-to connections made to hosts identified by address. That is, if
-example.com has an address of 192.168.1.1, and the :ignore-hosts list
-contains only &quot;192.168.1.1&quot;, then a connection to &quot;example.com&quot;
-(eg, via a GNetwork::Address) will use the proxy, and a connection to
+<p>Also note that hostname exclusions apply only to connections made<br />
+to hosts identified by name, and IP address exclusions apply only<br />
+to connections made to hosts identified by address. That is, if<br />
+example.com has an address of 192.168.1.1, and the :ignore-hosts list<br />
+contains only &quot;192.168.1.1&quot;, then a connection to &quot;example.com&quot;<br />
+(eg, via a GNetwork::Address) will use the proxy, and a connection to<br />
 &quot;192.168.1.1&quot; (eg, via a GInet::SocketAddress) will not.</p>
-<p>These rules match the &quot;ignore-hosts&quot;/&quot;noproxy&quot; rules most
+<p>These rules match the &quot;ignore-hosts&quot;/&quot;noproxy&quot; rules most<br />
 commonly used by other applications.</p>
 
 
@@ -657,12 +661,12 @@ commonly used by other applications.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a URI-scheme-specific proxy to <!-- raw HTML omitted -->resolver<!-- raw HTML omitted -->; URIs whose scheme
-matches <!-- raw HTML omitted -->uri_scheme<!-- raw HTML omitted --> (and which don't match
+    <p>Adds a URI-scheme-specific proxy to <!-- raw HTML omitted -->resolver<!-- raw HTML omitted -->; URIs whose scheme<br />
+matches <!-- raw HTML omitted -->uri_scheme<!-- raw HTML omitted --> (and which don't match<br />
 GSimple::ProxyResolver:ignore-hosts) will be proxied via <!-- raw HTML omitted -->proxy<!-- raw HTML omitted -->.</p>
-<p>As with GSimple::ProxyResolver:default-proxy, if <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> starts with
-&quot;socks://&quot;, GSimple::ProxyResolver will treat it
-as referring to all three of the socks5, socks4a, and socks4 proxy
+<p>As with GSimple::ProxyResolver:default-proxy, if <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> starts with<br />
+&quot;socks://&quot;, GSimple::ProxyResolver will treat it<br />
+as referring to all three of the socks5, socks4a, and socks4 proxy<br />
 types.</p>
 
 
@@ -728,7 +732,7 @@ types.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::GhostPad";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -102,7 +103,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -169,6 +171,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -272,9 +275,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -294,9 +299,11 @@
   
   
   
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Pad.html" title="Gst::Pad (class)">Pad</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Pad.html#activate_mode-instance_method" title="Gst::Pad#activate_mode (method)">#activate_mode</a></span>, <span class='object_link'><a href="Pad.html#active=-instance_method" title="Gst::Pad#active= (method)">#active=</a></span>, <span class='object_link'><a href="Pad.html#add_probe-instance_method" title="Gst::Pad#add_probe (method)">#add_probe</a></span>, <span class='object_link'><a href="Pad.html#allowed_caps-instance_method" title="Gst::Pad#allowed_caps (method)">#allowed_caps</a></span>, <span class='object_link'><a href="Pad.html#can_link-instance_method" title="Gst::Pad#can_link (method)">#can_link</a></span>, <span class='object_link'><a href="Pad.html#caps-instance_method" title="Gst::Pad#caps (method)">#caps</a></span>, <span class='object_link'><a href="Pad.html#caps=-instance_method" title="Gst::Pad#caps= (method)">#caps=</a></span>, <span class='object_link'><a href="Pad.html#chain-instance_method" title="Gst::Pad#chain (method)">#chain</a></span>, <span class='object_link'><a href="Pad.html#chain_list-instance_method" title="Gst::Pad#chain_list (method)">#chain_list</a></span>, <span class='object_link'><a href="Pad.html#check_reconfigure-instance_method" title="Gst::Pad#check_reconfigure (method)">#check_reconfigure</a></span>, <span class='object_link'><a href="Pad.html#create_stream_id-instance_method" title="Gst::Pad#create_stream_id (method)">#create_stream_id</a></span>, <span class='object_link'><a href="Pad.html#create_stream_id_printf-instance_method" title="Gst::Pad#create_stream_id_printf (method)">#create_stream_id_printf</a></span>, <span class='object_link'><a href="Pad.html#create_stream_id_printf_valist-instance_method" title="Gst::Pad#create_stream_id_printf_valist (method)">#create_stream_id_printf_valist</a></span>, <span class='object_link'><a href="Pad.html#current_caps-instance_method" title="Gst::Pad#current_caps (method)">#current_caps</a></span>, <span class='object_link'><a href="Pad.html#direction-instance_method" title="Gst::Pad#direction (method)">#direction</a></span>, <span class='object_link'><a href="Pad.html#direction=-instance_method" title="Gst::Pad#direction= (method)">#direction=</a></span>, <span class='object_link'><a href="Pad.html#element_private-instance_method" title="Gst::Pad#element_private (method)">#element_private</a></span>, <span class='object_link'><a href="Pad.html#element_private=-instance_method" title="Gst::Pad#element_private= (method)">#element_private=</a></span>, <span class='object_link'><a href="Pad.html#event_default-instance_method" title="Gst::Pad#event_default (method)">#event_default</a></span>, <span class='object_link'><a href="Pad.html#forward-instance_method" title="Gst::Pad#forward (method)">#forward</a></span>, <span class='object_link'><a href="Pad.html#get_range-instance_method" title="Gst::Pad#get_range (method)">#get_range</a></span>, <span class='object_link'><a href="Pad.html#get_sticky_event-instance_method" title="Gst::Pad#get_sticky_event (method)">#get_sticky_event</a></span>, <span class='object_link'><a href="Pad.html#has_current_caps-instance_method" title="Gst::Pad#has_current_caps (method)">#has_current_caps</a></span>, <span class='object_link'><a href="Pad.html#is_active-instance_method" title="Gst::Pad#is_active (method)">#is_active</a></span>, <span class='object_link'><a href="Pad.html#is_blocked-instance_method" title="Gst::Pad#is_blocked (method)">#is_blocked</a></span>, <span class='object_link'><a href="Pad.html#is_blocking-instance_method" title="Gst::Pad#is_blocking (method)">#is_blocking</a></span>, <span class='object_link'><a href="Pad.html#is_linked-instance_method" title="Gst::Pad#is_linked (method)">#is_linked</a></span>, <span class='object_link'><a href="Pad.html#iterate_internal_links-instance_method" title="Gst::Pad#iterate_internal_links (method)">#iterate_internal_links</a></span>, <span class='object_link'><a href="Pad.html#iterate_internal_links_default-instance_method" title="Gst::Pad#iterate_internal_links_default (method)">#iterate_internal_links_default</a></span>, <span class='object_link'><a href="Pad.html#last_flow_return-instance_method" title="Gst::Pad#last_flow_return (method)">#last_flow_return</a></span>, <span class='object_link'><a href="Pad.html#link-instance_method" title="Gst::Pad#link (method)">#link</a></span>, <span class='object_link'><a href="Pad.html#link_full-instance_method" title="Gst::Pad#link_full (method)">#link_full</a></span>, <span class='object_link'><a href="Pad.html#link_get_name-class_method" title="Gst::Pad.link_get_name (method)">link_get_name</a></span>, <span class='object_link'><a href="Pad.html#link_maybe_ghosting-instance_method" title="Gst::Pad#link_maybe_ghosting (method)">#link_maybe_ghosting</a></span>, <span class='object_link'><a href="Pad.html#link_maybe_ghosting_full-instance_method" title="Gst::Pad#link_maybe_ghosting_full (method)">#link_maybe_ghosting_full</a></span>, <span class='object_link'><a href="Pad.html#mark_reconfigure-instance_method" title="Gst::Pad#mark_reconfigure (method)">#mark_reconfigure</a></span>, <span class='object_link'><a href="Pad.html#needs_reconfigure-instance_method" title="Gst::Pad#needs_reconfigure (method)">#needs_reconfigure</a></span>, <span class='object_link'><a href="Pad.html#offset-instance_method" title="Gst::Pad#offset (method)">#offset</a></span>, <span class='object_link'><a href="Pad.html#offset=-instance_method" title="Gst::Pad#offset= (method)">#offset=</a></span>, <span class='object_link'><a href="Pad.html#pad_template-instance_method" title="Gst::Pad#pad_template (method)">#pad_template</a></span>, <span class='object_link'><a href="Pad.html#pad_template_caps-instance_method" title="Gst::Pad#pad_template_caps (method)">#pad_template_caps</a></span>, <span class='object_link'><a href="Pad.html#parent_element-instance_method" title="Gst::Pad#parent_element (method)">#parent_element</a></span>, <span class='object_link'><a href="Pad.html#pause_task-instance_method" title="Gst::Pad#pause_task (method)">#pause_task</a></span>, <span class='object_link'><a href="Pad.html#peer-instance_method" title="Gst::Pad#peer (method)">#peer</a></span>, <span class='object_link'><a href="Pad.html#peer_query-instance_method" title="Gst::Pad#peer_query (method)">#peer_query</a></span>, <span class='object_link'><a href="Pad.html#peer_query_accept_caps-instance_method" title="Gst::Pad#peer_query_accept_caps (method)">#peer_query_accept_caps</a></span>, <span class='object_link'><a href="Pad.html#peer_query_caps-instance_method" title="Gst::Pad#peer_query_caps (method)">#peer_query_caps</a></span>, <span class='object_link'><a href="Pad.html#peer_query_convert-instance_method" title="Gst::Pad#peer_query_convert (method)">#peer_query_convert</a></span>, <span class='object_link'><a href="Pad.html#peer_query_duration-instance_method" title="Gst::Pad#peer_query_duration (method)">#peer_query_duration</a></span>, <span class='object_link'><a href="Pad.html#peer_query_position-instance_method" title="Gst::Pad#peer_query_position (method)">#peer_query_position</a></span>, <span class='object_link'><a href="Pad.html#proxy_query_accept_caps-instance_method" title="Gst::Pad#proxy_query_accept_caps (method)">#proxy_query_accept_caps</a></span>, <span class='object_link'><a href="Pad.html#proxy_query_caps-instance_method" title="Gst::Pad#proxy_query_caps (method)">#proxy_query_caps</a></span>, <span class='object_link'><a href="Pad.html#pull_range-instance_method" title="Gst::Pad#pull_range (method)">#pull_range</a></span>, <span class='object_link'><a href="Pad.html#push-instance_method" title="Gst::Pad#push (method)">#push</a></span>, <span class='object_link'><a href="Pad.html#push_event-instance_method" title="Gst::Pad#push_event (method)">#push_event</a></span>, <span class='object_link'><a href="Pad.html#push_list-instance_method" title="Gst::Pad#push_list (method)">#push_list</a></span>, <span class='object_link'><a href="Pad.html#query-instance_method" title="Gst::Pad#query (method)">#query</a></span>, <span class='object_link'><a href="Pad.html#query_accept_caps-instance_method" title="Gst::Pad#query_accept_caps (method)">#query_accept_caps</a></span>, <span class='object_link'><a href="Pad.html#query_caps-instance_method" title="Gst::Pad#query_caps (method)">#query_caps</a></span>, <span class='object_link'><a href="Pad.html#query_convert-instance_method" title="Gst::Pad#query_convert (method)">#query_convert</a></span>, <span class='object_link'><a href="Pad.html#query_default-instance_method" title="Gst::Pad#query_default (method)">#query_default</a></span>, <span class='object_link'><a href="Pad.html#query_duration-instance_method" title="Gst::Pad#query_duration (method)">#query_duration</a></span>, <span class='object_link'><a href="Pad.html#query_position-instance_method" title="Gst::Pad#query_position (method)">#query_position</a></span>, <span class='object_link'><a href="Pad.html#remove_probe-instance_method" title="Gst::Pad#remove_probe (method)">#remove_probe</a></span>, <span class='object_link'><a href="Pad.html#send_event-instance_method" title="Gst::Pad#send_event (method)">#send_event</a></span>, <span class='object_link'><a href="Pad.html#set_activate_function_full-instance_method" title="Gst::Pad#set_activate_function_full (method)">#set_activate_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_activatemode_function_full-instance_method" title="Gst::Pad#set_activatemode_function_full (method)">#set_activatemode_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_chain_function_full-instance_method" title="Gst::Pad#set_chain_function_full (method)">#set_chain_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_chain_list_function_full-instance_method" title="Gst::Pad#set_chain_list_function_full (method)">#set_chain_list_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_event_full_function_full-instance_method" title="Gst::Pad#set_event_full_function_full (method)">#set_event_full_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_event_function_full-instance_method" title="Gst::Pad#set_event_function_full (method)">#set_event_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_getrange_function_full-instance_method" title="Gst::Pad#set_getrange_function_full (method)">#set_getrange_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_iterate_internal_links_function_full-instance_method" title="Gst::Pad#set_iterate_internal_links_function_full (method)">#set_iterate_internal_links_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_link_function_full-instance_method" title="Gst::Pad#set_link_function_full (method)">#set_link_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_query_function_full-instance_method" title="Gst::Pad#set_query_function_full (method)">#set_query_function_full</a></span>, <span class='object_link'><a href="Pad.html#set_unlink_function_full-instance_method" title="Gst::Pad#set_unlink_function_full (method)">#set_unlink_function_full</a></span>, <span class='object_link'><a href="Pad.html#single_internal_link-instance_method" title="Gst::Pad#single_internal_link (method)">#single_internal_link</a></span>, <span class='object_link'><a href="Pad.html#start_task-instance_method" title="Gst::Pad#start_task (method)">#start_task</a></span>, <span class='object_link'><a href="Pad.html#sticky_events_foreach-instance_method" title="Gst::Pad#sticky_events_foreach (method)">#sticky_events_foreach</a></span>, <span class='object_link'><a href="Pad.html#stop_task-instance_method" title="Gst::Pad#stop_task (method)">#stop_task</a></span>, <span class='object_link'><a href="Pad.html#store_sticky_event-instance_method" title="Gst::Pad#store_sticky_event (method)">#store_sticky_event</a></span>, <span class='object_link'><a href="Pad.html#stream-instance_method" title="Gst::Pad#stream (method)">#stream</a></span>, <span class='object_link'><a href="Pad.html#stream_id-instance_method" title="Gst::Pad#stream_id (method)">#stream_id</a></span>, <span class='object_link'><a href="Pad.html#task_state-instance_method" title="Gst::Pad#task_state (method)">#task_state</a></span>, <span class='object_link'><a href="Pad.html#template-instance_method" title="Gst::Pad#template (method)">#template</a></span>, <span class='object_link'><a href="Pad.html#template=-instance_method" title="Gst::Pad#template= (method)">#template=</a></span>, <span class='object_link'><a href="Pad.html#unlink-instance_method" title="Gst::Pad#unlink (method)">#unlink</a></span>, <span class='object_link'><a href="Pad.html#use_fixed_caps-instance_method" title="Gst::Pad#use_fixed_caps (method)">#use_fixed_caps</a></span></p>
 
+  
   
   
   
@@ -322,8 +329,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new ghostpad based on <!-- raw HTML omitted -->templ<!-- raw HTML omitted -->, without setting a target. The
-direction will be taken from the <!-- raw HTML omitted -->templ<!-- raw HTML omitted -->.
+    <p>Create a new ghostpad based on <!-- raw HTML omitted -->templ<!-- raw HTML omitted -->, without setting a target. The<br />
+direction will be taken from the <!-- raw HTML omitted -->templ<!-- raw HTML omitted -->.<br />
 case of an error.</p>
 
 
@@ -490,7 +497,7 @@ case of an error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Invoke the default activate mode function of a proxy pad that is
+    <p>Invoke the default activate mode function of a proxy pad that is<br />
 owned by a ghost pad.</p>
 
 
@@ -601,9 +608,9 @@ owned by a ghost pad.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finish initialization of a newly allocated ghost pad.</p>
-<p>This function is most useful in language bindings and when subclassing
-Gst::GhostPad; plugin and application developers normally will not call this
-function. Call this function directly after a call to g_object_new
+<p>This function is most useful in language bindings and when subclassing<br />
+Gst::GhostPad; plugin and application developers normally will not call this<br />
+function. Call this function directly after a call to g_object_new<br />
 (GST_TYPE_GHOST_PAD, &quot;direction&quot;, <!-- raw HTML omitted -->dir<!-- raw HTML omitted -->, ..., NULL).</p>
 
 
@@ -643,8 +650,8 @@ function. Call this function directly after a call to g_object_new
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the target pad of <!-- raw HTML omitted -->gpad<!-- raw HTML omitted -->. Unref target pad after usage.
-nil if the ghostpad has no target set. Unref target pad after
+    <p>Get the target pad of <!-- raw HTML omitted -->gpad<!-- raw HTML omitted -->. Unref target pad after usage.<br />
+nil if the ghostpad has no target set. Unref target pad after<br />
 usage.</p>
 
 
@@ -684,8 +691,8 @@ usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the new target of the ghostpad <!-- raw HTML omitted -->gpad<!-- raw HTML omitted -->. Any existing target
-is unlinked and links to the new target are established. if <!-- raw HTML omitted -->newtarget<!-- raw HTML omitted --> is
+    <p>Set the new target of the ghostpad <!-- raw HTML omitted -->gpad<!-- raw HTML omitted -->. Any existing target<br />
+is unlinked and links to the new target are established. if <!-- raw HTML omitted -->newtarget<!-- raw HTML omitted --> is<br />
 nil the target will be cleared.</p>
 
 
@@ -723,7 +730,7 @@ nil the target will be cleared.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the new target could be set. This function
+        <div class='inline'><p>true if the new target could be set. This function<br />
 can return false when the internal pads could not be linked.</p>
 </div>
       
@@ -741,7 +748,7 @@ can return false when the internal pads could not be linked.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Application";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -579,6 +581,7 @@
 
       
     </ul>
+    
   
 
 
@@ -597,17 +600,17 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkApplication</code> instance.</p>
-<p>When using <code>GtkApplication</code>, it is not necessary to call [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.init]
-manually. It is called as soon as the application gets registered as
+<p>When using <code>GtkApplication</code>, it is not necessary to call [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.init]<br />
+manually. It is called as soon as the application gets registered as<br />
 the primary instance.</p>
-<p>Concretely, [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.init] is called in the default handler for the
-<code>GApplication::startup</code> signal. Therefore, <code>GtkApplication</code> subclasses should
-always chain up in their <code>GApplication::startup</code> handler before using any GTK
+<p>Concretely, [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.init] is called in the default handler for the<br />
+<code>GApplication::startup</code> signal. Therefore, <code>GtkApplication</code> subclasses should<br />
+always chain up in their <code>GApplication::startup</code> handler before using any GTK<br />
 API.</p>
 <p>Note that commandline arguments are not passed to [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.init].</p>
-<p>If <code>application_id</code> is not nil, then it must be valid. See
+<p>If <code>application_id</code> is not nil, then it must be valid. See<br />
 <code>g_application_id_is_valid()</code>.</p>
-<p>If no application ID is given then some features (most notably application
+<p>If no application ID is given then some features (most notably application<br />
 uniqueness) will be disabled.</p>
 
 
@@ -778,15 +781,15 @@ uniqueness) will be disabled.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a window to <code>application</code>.</p>
-<p>This call can only happen after the <code>application</code> has started;
-typically, you should add new application windows in response
+<p>This call can only happen after the <code>application</code> has started;<br />
+typically, you should add new application windows in response<br />
 to the emission of the <code>GApplication::activate</code> signal.</p>
-<p>This call is equivalent to setting the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window:application]
+<p>This call is equivalent to setting the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window:application]<br />
 property of <code>window</code> to <code>application</code>.</p>
-<p>Normally, the connection between the application and the window
-will remain until the window is destroyed, but you can explicitly
+<p>Normally, the connection between the application and the window<br />
+will remain until the window is destroyed, but you can explicitly<br />
 remove it with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Application.remove_window].</p>
-<p>GTK will keep the <code>application</code> running as long as it has
+<p>GTK will keep the <code>application</code> running as long as it has<br />
 any windows.</p>
 
 
@@ -841,7 +844,7 @@ any windows.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the accelerators that are currently associated with
+    <p>Gets the accelerators that are currently associated with<br />
 the given action.</p>
 
 
@@ -861,7 +864,7 @@ the given action.</p>
       
       
         &mdash;
-        <div class='inline'><p>a detailed action name, specifying an action
+        <div class='inline'><p>a detailed action name, specifying an action<br />
 and target to obtain accelerators for</p>
 </div>
       
@@ -903,13 +906,13 @@ and target to obtain accelerators for</p>
   <div class="discussion">
     <p>Returns the list of actions (possibly empty) that <code>accel</code> maps to.</p>
 <p>Each item in the list is a detailed action name in the usual form.</p>
-<p>This might be useful to discover if an accel already exists in
-order to prevent installation of a conflicting accelerator (from
-an accelerator editor or a plugin system, for example). Note that
-having more than one action per accelerator may not be a bad thing
-and might make sense in cases where the actions never appear in the
+<p>This might be useful to discover if an accel already exists in<br />
+order to prevent installation of a conflicting accelerator (from<br />
+an accelerator editor or a plugin system, for example). Note that<br />
+having more than one action per accelerator may not be a bad thing<br />
+and might make sense in cases where the actions never appear in the<br />
 same context.</p>
-<p>In case there are no actions for a given accelerator, an empty array
+<p>In case there are no actions for a given accelerator, an empty array<br />
 is returned. <code>NULL</code> is never returned.</p>
 <p>It is a programmer error to pass an invalid accelerator string.</p>
 <p>If you are unsure, check it with [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.accelerator_parse] first.</p>
@@ -971,7 +974,7 @@ is returned. <code>NULL</code> is never returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets a menu from automatically loaded resources.</p>
-<p>See <a href="class.Application.html#automatic-resources">the section on Automatic resources</a>
+<p>See <a href="class.Application.html#automatic-resources">the section on Automatic resources</a><br />
 for more information.</p>
 
 
@@ -1009,7 +1012,7 @@ for more information.</p>
       
       
         &mdash;
-        <div class='inline'><p>Gets the menu with the
+        <div class='inline'><p>Gets the menu with the<br />
 given id from the automatically loaded resources</p>
 </div>
       
@@ -1032,7 +1035,7 @@ given id from the automatically loaded resources</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ApplicationWindow] with the given ID.</p>
-<p>The ID of a <code>GtkApplicationWindow</code> can be retrieved with
+<p>The ID of a <code>GtkApplicationWindow</code> can be retrieved with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ApplicationWindow.get_id].</p>
 
 
@@ -1091,23 +1094,23 @@ given id from the automatically loaded resources</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inform the session manager that certain types of actions should be
+    <p>Inform the session manager that certain types of actions should be<br />
 inhibited.</p>
-<p>This is not guaranteed to work on all platforms and for all types of
+<p>This is not guaranteed to work on all platforms and for all types of<br />
 actions.</p>
-<p>Applications should invoke this method when they begin an operation
-that should not be interrupted, such as creating a CD or DVD. The
-types of actions that may be blocked are specified by the <code>flags</code>
-parameter. When the application completes the operation it should
-call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Application.uninhibit] to remove the inhibitor. Note
-that an application can have multiple inhibitors, and all of them must
-be individually removed. Inhibitors are also cleared when the
+<p>Applications should invoke this method when they begin an operation<br />
+that should not be interrupted, such as creating a CD or DVD. The<br />
+types of actions that may be blocked are specified by the <code>flags</code><br />
+parameter. When the application completes the operation it should<br />
+call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Application.uninhibit] to remove the inhibitor. Note<br />
+that an application can have multiple inhibitors, and all of them must<br />
+be individually removed. Inhibitors are also cleared when the<br />
 application exits.</p>
-<p>Applications should not expect that they will always be able to block
-the action. In most cases, users will be given the option to force
+<p>Applications should not expect that they will always be able to block<br />
+the action. In most cases, users will be given the option to force<br />
 the action to take place.</p>
 <p>The <code>reason</code> message should be short and to the point.</p>
-<p>If <code>window</code> is given, the session manager may point the user to
+<p>If <code>window</code> is given, the session manager may point the user to<br />
 this window to find out more about why the action is inhibited.</p>
 
 
@@ -1157,7 +1160,7 @@ this window to find out more about why the action is inhibited.</p>
       
       
         &mdash;
-        <div class='inline'><p>a short, human-readable string that explains
+        <div class='inline'><p>a short, human-readable string that explains<br />
 why these operations are inhibited</p>
 </div>
       
@@ -1176,9 +1179,9 @@ why these operations are inhibited</p>
       
       
         &mdash;
-        <div class='inline'><p>A non-zero cookie that is used to uniquely identify this
-request. It should be used as an argument to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Application.uninhibit]
-in order to remove the request. If the platform does not support
+        <div class='inline'><p>A non-zero cookie that is used to uniquely identify this<br />
+request. It should be used as an argument to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Application.uninhibit]<br />
+in order to remove the request. If the platform does not support<br />
 inhibiting or the request failed for some reason, 0 is returned.</p>
 </div>
       
@@ -1347,7 +1350,7 @@ inhibiting or the request failed for some reason, 0 is returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Set this property to <code>TRUE</code> to register with the session manager.</p>
-<p>This will make GTK track the session state (such as the
+<p>This will make GTK track the session state (such as the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Application:screensaver-active] property).</p>
 
 
@@ -1416,7 +1419,7 @@ inhibiting or the request failed for some reason, 0 is returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Set this property to <code>TRUE</code> to register with the session manager.</p>
-<p>This will make GTK track the session state (such as the
+<p>This will make GTK track the session state (such as the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Application:screensaver-active] property).</p>
 
 
@@ -1457,10 +1460,10 @@ inhibiting or the request failed for some reason, 0 is returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Remove a window from <code>application</code>.</p>
-<p>If <code>window</code> belongs to <code>application</code> then this call is equivalent to
-setting the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window:application] property of <code>window</code> to
+<p>If <code>window</code> belongs to <code>application</code> then this call is equivalent to<br />
+setting the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window:application] property of <code>window</code> to<br />
 <code>NULL</code>.</p>
-<p>The application may stop running as a result of a call to this
+<p>The application may stop running as a result of a call to this<br />
 function, if <code>window</code> was the last window of the <code>application</code>.</p>
 
 
@@ -1515,11 +1518,11 @@ function, if <code>window</code> was the last window of the <code>application</c
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This property is <code>TRUE</code> if GTK believes that the screensaver is
+    <p>This property is <code>TRUE</code> if GTK believes that the screensaver is<br />
 currently active.</p>
-<p>GTK only tracks session state (including this) when
+<p>GTK only tracks session state (including this) when<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Application:register-session] is set to true.</p>
-<p>Tracking the screensaver state is currently only supported on
+<p>Tracking the screensaver state is currently only supported on<br />
 Linux.</p>
 
 
@@ -1587,11 +1590,11 @@ Linux.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This property is <code>TRUE</code> if GTK believes that the screensaver is
+    <p>This property is <code>TRUE</code> if GTK believes that the screensaver is<br />
 currently active.</p>
-<p>GTK only tracks session state (including this) when
+<p>GTK only tracks session state (including this) when<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Application:register-session] is set to true.</p>
-<p>Tracking the screensaver state is currently only supported on
+<p>Tracking the screensaver state is currently only supported on<br />
 Linux.</p>
 
 
@@ -1631,13 +1634,13 @@ Linux.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets zero or more keyboard accelerators that will trigger the
+    <p>Sets zero or more keyboard accelerators that will trigger the<br />
 given action.</p>
-<p>The first item in <code>accels</code> will be the primary accelerator, which may be
+<p>The first item in <code>accels</code> will be the primary accelerator, which may be<br />
 displayed in the UI.</p>
-<p>To remove all accelerators for an action, use an empty, zero-terminated
+<p>To remove all accelerators for an action, use an empty, zero-terminated<br />
 array for <code>accels</code>.</p>
-<p>For the <code>detailed_action_name</code>, see <code>g_action_parse_detailed_name()</code> and
+<p>For the <code>detailed_action_name</code>, see <code>g_action_parse_detailed_name()</code> and<br />
 <code>g_action_print_detailed_name()</code>.</p>
 
 
@@ -1657,7 +1660,7 @@ array for <code>accels</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>a detailed action name, specifying an action
+        <div class='inline'><p>a detailed action name, specifying an action<br />
 and target to associate accelerators with</p>
 </div>
       
@@ -1673,7 +1676,7 @@ and target to associate accelerators with</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of accelerators in the format
+        <div class='inline'><p>a list of accelerators in the format<br />
 understood by [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.accelerator_parse]</p>
 </div>
       
@@ -1766,11 +1769,11 @@ understood by [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.acceler
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets a list of the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window] instances associated with <code>application</code>.</p>
-<p>The list is sorted by most recently focused window, such that the first
-element is the currently focused window. (Useful for choosing a parent
+<p>The list is sorted by most recently focused window, such that the first<br />
+element is the currently focused window. (Useful for choosing a parent<br />
 for a transient window.)</p>
-<p>The list that is returned should not be modified in any way. It will
-only remain valid until the next focus change or window creation or
+<p>The list that is returned should not be modified in any way. It will<br />
+only remain valid until the next focus change or window creation or<br />
 deletion.</p>
 
 
@@ -1789,7 +1792,7 @@ deletion.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GList</code> of <code>GtkWindow</code>
+        <div class='inline'><p>a <code>GList</code> of <code>GtkWindow</code><br />
 instances</p>
 </div>
       
@@ -1807,7 +1810,7 @@ instances</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

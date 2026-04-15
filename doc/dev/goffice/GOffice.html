@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GOffice";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/goffice/loader.rb<span class="defines">,<br />
-  lib/goffice.rb,<br /> lib/goffice/version.rb</span>
+    <dd>lib/goffice/loader.rb<span class="defines">,<br>
+  lib/goffice.rb,<br> lib/goffice/version.rb</span>
+
 </dd>
   </dl>
   
@@ -88,16 +90,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2016  Ruby-GNOME2 Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -329,6 +331,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -13239,6 +13242,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 
       
     </ul>
+    
   
 
 
@@ -13923,7 +13927,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the next-smaller representable value, except that zero and
+    <p>Returns the next-smaller representable value, except that zero and<br />
 infinites are returned unchanged.</p>
 
 
@@ -13978,7 +13982,7 @@ infinites are returned unchanged.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the next-larger representable value, except that zero and
+    <p>Returns the next-larger representable value, except that zero and<br />
 infinites are returned unchanged.</p>
 
 
@@ -14578,7 +14582,7 @@ infinites are returned unchanged.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A convenience routine to setup label-for/labeled-by relationship between a
+    <p>A convenience routine to setup label-for/labeled-by relationship between a<br />
 pair of widgets</p>
 
 
@@ -14648,7 +14652,7 @@ pair of widgets</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Decode the final path component.  Returns as UTF-8 encoded suitable
+    <p>Decode the final path component.  Returns as UTF-8 encoded suitable<br />
 for display.</p>
 
 
@@ -14707,10 +14711,10 @@ for display.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p><!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> values must be valid and finite. The returned structure
-contains the x and y coordinates of all control points, including the
-incoming data. the n and closed fields are just copies of the corresponding
-arguments.
+    <p><!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> values must be valid and finite. The returned structure<br />
+contains the x and y coordinates of all control points, including the<br />
+incoming data. the n and closed fields are just copies of the corresponding<br />
+arguments.<br />
 destroyed by a call to go_bezier_spline_destroy.</p>
 
 
@@ -14814,8 +14818,8 @@ destroyed by a call to go_bezier_spline_destroy.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts the pixel data stored in <!-- raw HTML omitted -->src<!-- raw HTML omitted --> in GDK_COLORSPACE_RGB pixbuf
-format to CAIRO_FORMAT_ARGB32 cairo format and move them
+    <p>Converts the pixel data stored in <!-- raw HTML omitted -->src<!-- raw HTML omitted --> in GDK_COLORSPACE_RGB pixbuf<br />
+format to CAIRO_FORMAT_ARGB32 cairo format and move them<br />
 to <!-- raw HTML omitted -->dst<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->src<!-- raw HTML omitted --> == <!-- raw HTML omitted -->dst<!-- raw HTML omitted -->, pixel are converted in place.</p>
 
 
@@ -14930,8 +14934,8 @@ to <!-- raw HTML omitted -->dst<!-- raw HTML omitted -->. If <!-- raw HTML omitt
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts the pixel data stored in <!-- raw HTML omitted -->src<!-- raw HTML omitted --> in CAIRO_FORMAT_ARGB32 cairo format
-to GDK_COLORSPACE_RGB pixbuf format and move them
+    <p>Converts the pixel data stored in <!-- raw HTML omitted -->src<!-- raw HTML omitted --> in CAIRO_FORMAT_ARGB32 cairo format<br />
+to GDK_COLORSPACE_RGB pixbuf format and move them<br />
 to <!-- raw HTML omitted -->dst<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->src<!-- raw HTML omitted --> == <!-- raw HTML omitted -->dst<!-- raw HTML omitted -->, pixel are converted in place.</p>
 
 
@@ -15046,7 +15050,7 @@ to <!-- raw HTML omitted -->dst<!-- raw HTML omitted -->. If <!-- raw HTML omitt
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Emits a path described as a SVG path string (d property of path elements) to
+    <p>Emits a path described as a SVG path string (d property of path elements) to<br />
 a cairo context.</p>
 
 
@@ -15287,7 +15291,7 @@ a cairo context.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if <!-- raw HTML omitted -->str<!-- raw HTML omitted --> can be parsed as a color of the form R:G:B:A and the
+    <p>Returns true if <!-- raw HTML omitted -->str<!-- raw HTML omitted --> can be parsed as a color of the form R:G:B:A and the<br />
 result is stored in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
 
 
@@ -15340,7 +15344,7 @@ result is stored in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->str<!-- raw HTML omitted --> can be parsed as a color of the form R:G:B:A and the
+        <div class='inline'><p>true if <!-- raw HTML omitted -->str<!-- raw HTML omitted --> can be parsed as a color of the form R:G:B:A and the<br />
 result is stored in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
 </div>
       
@@ -19302,7 +19306,7 @@ result is stored in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the number of days from the beginning of the coupon period to the
+    <p>Returns the number of days from the beginning of the coupon period to the<br />
 settlement date.</p>
 
 
@@ -19370,7 +19374,7 @@ settlement date.</p>
       
       
         &mdash;
-        <div class='inline'><p>the number of days from the beginning of the coupon period to the
+        <div class='inline'><p>the number of days from the beginning of the coupon period to the<br />
 settlement date.</p>
 </div>
       
@@ -19658,15 +19662,15 @@ settlement date.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a spline structure, and computes the coefficients associated with the
-polynoms. The ith polynome (between x[i-1] and x[i] is:
-y(x) = y[i-1] + (c[i-1] + (b[i-1] + a[i] * (x - x[i-1])) * (x - x[i-1])) * (x - x[i-1])
-where a[i-1], b[i-1], c[i-1], x[i-1] and y[i-1] are the corresponding
-members of the new structure.
-GO_CSPLINE_NATURAL: first and least second derivatives are 0.
-GO_CSPLINE_PARABOLIC: the curve will be a parabole arc outside of the limits.
-GO_CSPLINE_CUBIC: the curve will be cubic outside of the limits.
-GO_CSPLINE_CLAMPED: the first and last derivatives are imposed.
+    <p>Creates a spline structure, and computes the coefficients associated with the<br />
+polynoms. The ith polynome (between x[i-1] and x[i] is:<br />
+y(x) = y[i-1] + (c[i-1] + (b[i-1] + a[i] * (x - x[i-1])) * (x - x[i-1])) * (x - x[i-1])<br />
+where a[i-1], b[i-1], c[i-1], x[i-1] and y[i-1] are the corresponding<br />
+members of the new structure.<br />
+GO_CSPLINE_NATURAL: first and least second derivatives are 0.<br />
+GO_CSPLINE_PARABOLIC: the curve will be a parabole arc outside of the limits.<br />
+GO_CSPLINE_CUBIC: the curve will be cubic outside of the limits.<br />
+GO_CSPLINE_CLAMPED: the first and last derivatives are imposed.<br />
 destroyed by a call to go_cspline_destroy.</p>
 
 
@@ -19746,7 +19750,7 @@ destroyed by a call to go_cspline_destroy.</p>
       
       
         &mdash;
-        <div class='inline'><p>the first derivative when using clamped splines, not used in the
+        <div class='inline'><p>the first derivative when using clamped splines, not used in the<br />
 other limit types.</p>
 </div>
       
@@ -19762,7 +19766,7 @@ other limit types.</p>
       
       
         &mdash;
-        <div class='inline'><p>the first derivative when using clamped splines, not used in the
+        <div class='inline'><p>the first derivative when using clamped splines, not used in the<br />
 other limit types.</p>
 </div>
       
@@ -20800,8 +20804,8 @@ other limit types.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>1:   Week starts on Sunday.  January 1 is in week 1.
-2:   Week starts on Monday.  January 1 is in week 1.
+    <p>1:   Week starts on Sunday.  January 1 is in week 1.<br />
+2:   Week starts on Monday.  January 1 is in week 1.<br />
 150: ISO 8601 week number.</p>
 
 
@@ -21148,7 +21152,7 @@ other limit types.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Overwrite a string holding a password.  This is a separate routine to
+    <p>Overwrite a string holding a password.  This is a separate routine to<br />
 ensure that the compiler does not try to outsmart us.</p>
 <p>Note: this does not free the memory.</p>
 
@@ -21204,7 +21208,7 @@ ensure that the compiler does not try to outsmart us.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function inspects the buttons in the dialog and comes up
+    <p>This function inspects the buttons in the dialog and comes up<br />
 with a reasonable alternative dialog order.</p>
 
 
@@ -21424,7 +21428,7 @@ with a reasonable alternative dialog order.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Decode the all but the final path component.  Returns as UTF-8 encoded
+    <p>Decode the all but the final path component.  Returns as UTF-8 encoded<br />
 suitable for display.</p>
 
 
@@ -22197,8 +22201,8 @@ suitable for display.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Performs one-dimensional linear regressions on the input points.
-Fits to &quot;y = b * m1^x1 * ... * md^xd &quot; or equivalently to
+    <p>Performs one-dimensional linear regressions on the input points.<br />
+Fits to &quot;y = b * m1^x1 * ... * md^xd &quot; or equivalently to<br />
 &quot;log y = log b + x1 * log m1 + ... + xd * log md&quot;.</p>
 
 
@@ -22347,10 +22351,10 @@ Fits to &quot;y = b * m1^x1 * ... * md^xd &quot; or equivalently to
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Performs one-dimensional linear regressions on the input points as
-go_exponential_regression, but returns the logarithm of the coefficients instead
-or the coefficients themselves.
-Fits to &quot;y = b * exp (m1<em>x1) * ... * exp (md</em>xd) &quot; or equivalently to
+    <p>Performs one-dimensional linear regressions on the input points as<br />
+go_exponential_regression, but returns the logarithm of the coefficients instead<br />
+or the coefficients themselves.<br />
+Fits to &quot;y = b * exp (m1<em>x1) * ... * exp (md</em>xd) &quot; or equivalently to<br />
 &quot;ln y = ln b + x1 * m1 + ... + xd * md&quot;.</p>
 
 
@@ -23181,7 +23185,7 @@ Fits to &quot;y = b * exp (m1<em>x1) * ... * exp (md</em>xd) &quot; or equivalen
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a file or return an error. If the file already exists, it is
+    <p>Creates a file or return an error. If the file already exists, it is<br />
 replaced.</p>
 
 
@@ -23436,7 +23440,7 @@ replaced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determine the last modification time of <!-- raw HTML omitted -->uri<!-- raw HTML omitted -->.
+    <p>Determine the last modification time of <!-- raw HTML omitted -->uri<!-- raw HTML omitted -->.<br />
 file.</p>
 
 
@@ -24683,7 +24687,7 @@ file.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Generates a format string for a number format with the given
+    <p>Generates a format string for a number format with the given<br />
 parameters and appends it to <!-- raw HTML omitted -->dst<!-- raw HTML omitted -->.</p>
 
 
@@ -25371,7 +25375,7 @@ parameters and appends it to <!-- raw HTML omitted -->dst<!-- raw HTML omitted -
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>De-localizes the given format string, i.e., changes locale's decimal
+    <p>De-localizes the given format string, i.e., changes locale's decimal<br />
 separators to dots and performs other such transformations.</p>
 
 
@@ -25430,7 +25434,7 @@ separators to dots and performs other such transformations.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Localizes the given format string, i.e., changes decimal dots to the
+    <p>Localizes the given format string, i.e., changes decimal dots to the<br />
 locale's notion of that and performs other such transformations.</p>
 
 
@@ -25489,8 +25493,8 @@ locale's notion of that and performs other such transformations.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Render a floating-point value into <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> in such a way that the
-layouting width does not needlessly exceed <!-- raw HTML omitted -->col_width<!-- raw HTML omitted -->.  Optionally
+    <p>Render a floating-point value into <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> in such a way that the<br />
+layouting width does not needlessly exceed <!-- raw HTML omitted -->col_width<!-- raw HTML omitted -->.  Optionally<br />
 use unicode minus instead of hyphen.</p>
 
 
@@ -25645,7 +25649,7 @@ use unicode minus instead of hyphen.</p>
       
       
         &mdash;
-        <div class='inline'><p>intended max width of layout in pango units.  -1 means
+        <div class='inline'><p>intended max width of layout in pango units.  -1 means<br />
 no restriction.</p>
 </div>
       
@@ -25901,7 +25905,7 @@ no restriction.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a pixbuf from the image cache, loading it from the file
+    <p>Retrieves a pixbuf from the image cache, loading it from the file<br />
 <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> located in goffice_icon_dir if not cached yet.</p>
 
 
@@ -25960,8 +25964,8 @@ no restriction.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Utility routine to create pixbufs from file <!-- raw HTML omitted -->name<!-- raw HTML omitted --> in the goffice_icon_dir.
-As a special case, <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> may have the form &quot;res:<!-- raw HTML omitted -->&quot; in
+    <p>Utility routine to create pixbufs from file <!-- raw HTML omitted -->name<!-- raw HTML omitted --> in the goffice_icon_dir.<br />
+As a special case, <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> may have the form &quot;res:<!-- raw HTML omitted -->&quot; in<br />
 which case the resource manager is queried instead of loading a file.</p>
 
 
@@ -26020,7 +26024,7 @@ which case the resource manager is queried instead of loading a file.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Computes the Axis Aligned Bounding Rectangle of aabr0 and aabr1,
+    <p>Computes the Axis Aligned Bounding Rectangle of aabr0 and aabr1,<br />
 and stores result in aabr0.</p>
 
 
@@ -26893,7 +26897,7 @@ and stores result in aabr0.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to plot coordinates. A value in [0,1.0] range means a data
+    <p>Converts <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to plot coordinates. A value in [0,1.0] range means a data<br />
 within axis bounds.</p>
 
 
@@ -26967,8 +26971,8 @@ within axis bounds.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>CHANGED 0.5.3
-: drop the <!-- raw HTML omitted -->toplevel<!-- raw HTML omitted --> window argument and have the callers handle
+    <p>CHANGED 0.5.3<br />
+: drop the <!-- raw HTML omitted -->toplevel<!-- raw HTML omitted --> window argument and have the callers handle<br />
 widget_show and set_transient</p>
 
 
@@ -27132,8 +27136,8 @@ widget_show and set_transient</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Quick utility to allow application specific help.  Required until we clean
-up the relationship between goffice and gnumeric to decide which parts of
+    <p>Quick utility to allow application specific help.  Required until we clean<br />
+up the relationship between goffice and gnumeric to decide which parts of<br />
 the help live where.</p>
 
 
@@ -27458,7 +27462,7 @@ the help live where.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>searches the Gtk::ComboBox in <!-- raw HTML omitted -->gui<!-- raw HTML omitted --> and ensures it has a model and a
+    <p>searches the Gtk::ComboBox in <!-- raw HTML omitted -->gui<!-- raw HTML omitted --> and ensures it has a model and a<br />
 renderer appropriate for using with #gtk_combo_box_append_text and friends.</p>
 
 
@@ -27532,7 +27536,7 @@ renderer appropriate for using with #gtk_combo_box_append_text and friends.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Simple wrapper to #gtk_builder_get_object which returns the object
+    <p>Simple wrapper to #gtk_builder_get_object which returns the object<br />
 as a GtkWidget.</p>
 
 
@@ -27667,10 +27671,10 @@ as a GtkWidget.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Simple utility to open ui files</p>
-<p>Since 0.9.6
+<p>Since 0.9.6<br />
 <!-- raw HTML omitted -->uifile<!-- raw HTML omitted --> should be one of these:</p>
-<p>res:NAME  -- data from resource manager
-data:DATA -- data right here
+<p>res:NAME  -- data from resource manager<br />
+data:DATA -- data right here<br />
 filename  -- data from local file</p>
 <p>Data may be compressed, regardless of source.</p>
 
@@ -27760,12 +27764,12 @@ filename  -- data from local file</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Simple utility to open ui files
-Variant of go_gtk_builder_new that searchs goffice directories
-for files.
+    <p>Simple utility to open ui files<br />
+Variant of go_gtk_builder_new that searchs goffice directories<br />
+for files.<br />
 <!-- raw HTML omitted -->uifile<!-- raw HTML omitted --> should be one of these:</p>
-<p>res:NAME  -- data from resource manager
-data:DATA -- data right here
+<p>res:NAME  -- data from resource manager<br />
+data:DATA -- data right here<br />
 filename  -- data from local file</p>
 <p>Data may be compressed, regardless of source.</p>
 
@@ -28091,7 +28095,7 @@ filename  -- data from local file</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>FROM : gedit
+    <p>FROM : gedit<br />
 Creates a new GtkButton with custom label and stock image.</p>
 
 
@@ -28285,7 +28289,7 @@ Creates a new GtkButton with custom label and stock image.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>FROM : gedit
+    <p>FROM : gedit<br />
 Creates and adds a button with stock image to the action area of an existing dialog.</p>
 
 
@@ -28462,10 +28466,10 @@ Creates and adds a button with stock image to the action area of an existing dia
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Normally if there's an editable widget (such as Gtk::Entry) in your
-dialog, pressing Enter will activate the editable rather than the
-default dialog button. However, in most cases, the user expects to
-type something in and then press enter to close the dialog. This
+    <p>Normally if there's an editable widget (such as Gtk::Entry) in your<br />
+dialog, pressing Enter will activate the editable rather than the<br />
+default dialog button. However, in most cases, the user expects to<br />
+type something in and then press enter to close the dialog. This<br />
 function enables that behavior.</p>
 
 
@@ -28750,7 +28754,7 @@ function enables that behavior.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Utility to set <!-- raw HTML omitted -->dialog<!-- raw HTML omitted --> as a transient of <!-- raw HTML omitted -->toplevel<!-- raw HTML omitted -->
+    <p>Utility to set <!-- raw HTML omitted -->dialog<!-- raw HTML omitted --> as a transient of <!-- raw HTML omitted -->toplevel<!-- raw HTML omitted --><br />
 and to set up a handler for &quot;Escape&quot;</p>
 
 
@@ -29208,11 +29212,11 @@ and to set up a handler for &quot;Escape&quot;</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Check if it makes sense to try saving.
-If it's an existing file and writable for us, ask if we want to overwrite.
-We check for other problems, but if we miss any, the saver will report.
+    <p>Check if it makes sense to try saving.<br />
+If it's an existing file and writable for us, ask if we want to overwrite.<br />
+We check for other problems, but if we miss any, the saver will report.<br />
 So it doesn't have to be bulletproof.</p>
-<p>FIXME: The message boxes should really be children of the file selector,
+<p>FIXME: The message boxes should really be children of the file selector,<br />
 not the workbook.</p>
 
 
@@ -29301,7 +29305,7 @@ not the workbook.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function is a simple convenience wrapper for #gtk_show_uri.
+    <p>This function is a simple convenience wrapper for #gtk_show_uri.<br />
 went wrong.</p>
 
 
@@ -29429,7 +29433,7 @@ went wrong.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function works as gtk_widget_render_icon_pixbuf except that it takes
+    <p>This function works as gtk_widget_render_icon_pixbuf except that it takes<br />
 an icon name, not a stock id.</p>
 
 
@@ -29578,9 +29582,9 @@ an icon name, not a stock id.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Make the window a child of the workbook in the command context, if there is
-one.  The function duplicates the positioning functionality in
-gnome_dialog_set_parent, but does not require the transient window to be
+    <p>Make the window a child of the workbook in the command context, if there is<br />
+one.  The function duplicates the positioning functionality in<br />
+gnome_dialog_set_parent, but does not require the transient window to be<br />
 a GnomeDialog.</p>
 
 
@@ -29743,7 +29747,7 @@ a GnomeDialog.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Opens a file chooser and lets user choose file URI and format in a list of
+    <p>Opens a file chooser and lets user choose file URI and format in a list of<br />
 supported ones.</p>
 
 
@@ -29826,7 +29830,7 @@ supported ones.</p>
       
       
         &mdash;
-        <div class='inline'><p>file URI string, file GOImage::Format stored in <!-- raw HTML omitted -->ret_format<!-- raw HTML omitted -->, and
+        <div class='inline'><p>file URI string, file GOImage::Format stored in <!-- raw HTML omitted -->ret_format<!-- raw HTML omitted -->, and<br />
 export resolution in <!-- raw HTML omitted -->resolution<!-- raw HTML omitted -->.</p>
 </div>
       
@@ -29848,7 +29852,7 @@ export resolution in <!-- raw HTML omitted -->resolution<!-- raw HTML omitted --
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Collects an unordered list of the keys in <!-- raw HTML omitted -->hash<!-- raw HTML omitted -->.
+    <p>Collects an unordered list of the keys in <!-- raw HTML omitted -->hash<!-- raw HTML omitted -->.<br />
 caller needs to free. The content has not additional references added</p>
 <p>Note: consider using g_hash_table_get_keys instead.</p>
 
@@ -29909,8 +29913,8 @@ caller needs to free. The content has not additional references added</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Initialize GOffice.</p>
-<p>This function can be called several times; each call will
-increment a reference counter. Code that calls this function should call
+<p>This function can be called several times; each call will<br />
+increment a reference counter. Code that calls this function should call<br />
 libgoffice_shutdown() when done to decrement the counter.</p>
 
 
@@ -31244,8 +31248,8 @@ libgoffice_shutdown() when done to decrement the counter.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a pointer to the user readable name of the dash type,
-or the name of %GO_LINE_NONE if type is invalid. The returned
+    <p>Returns a pointer to the user readable name of the dash type,<br />
+or the name of %GO_LINE_NONE if type is invalid. The returned<br />
 string should not be freed.</p>
 
 
@@ -31283,8 +31287,8 @@ string should not be freed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the user readable name of the dash type,
-or the name of %GO_LINE_NONE if type is invalid. The returned
+        <div class='inline'><p>a pointer to the user readable name of the dash type,<br />
+or the name of %GO_LINE_NONE if type is invalid. The returned<br />
 string should not be freed.</p>
 </div>
       
@@ -31306,7 +31310,7 @@ string should not be freed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a pointer to the nickname of the dash type, or &quot;none&quot; if
+    <p>Returns a pointer to the nickname of the dash type, or &quot;none&quot; if<br />
 type is invalid. The returning string should not be freed.</p>
 
 
@@ -31344,7 +31348,7 @@ type is invalid. The returning string should not be freed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the nickname of the dash type, or &quot;none&quot; if
+        <div class='inline'><p>a pointer to the nickname of the dash type, or &quot;none&quot; if<br />
 type is invalid. The returning string should not be freed.</p>
 </div>
       
@@ -31366,7 +31370,7 @@ type is invalid. The returning string should not be freed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a GOLine::DashType corresponding to name, or %GO_LINE_NONE
+    <p>Returns a GOLine::DashType corresponding to name, or %GO_LINE_NONE<br />
 if not found.</p>
 
 
@@ -31404,7 +31408,7 @@ if not found.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GOLine::DashType corresponding to name, or %GO_LINE_NONE
+        <div class='inline'><p>a GOLine::DashType corresponding to name, or %GO_LINE_NONE<br />
 if not found.</p>
 </div>
       
@@ -31484,8 +31488,8 @@ if not found.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a struct containing the dash sequence corresponding to <!-- raw HTML omitted -->type<!-- raw HTML omitted -->,
-or nil if type is invalid or equal to %GO_LINE_NONE.
+    <p>Returns a struct containing the dash sequence corresponding to <!-- raw HTML omitted -->type<!-- raw HTML omitted -->,<br />
+or nil if type is invalid or equal to %GO_LINE_NONE.<br />
 The lengths are scaled according to <!-- raw HTML omitted -->scale<!-- raw HTML omitted -->.</p>
 
 
@@ -31538,8 +31542,8 @@ The lengths are scaled according to <!-- raw HTML omitted -->scale<!-- raw HTML 
       
       
         &mdash;
-        <div class='inline'><p>a struct containing the dash sequence corresponding to <!-- raw HTML omitted -->type<!-- raw HTML omitted -->,
-or nil if type is invalid or equal to %GO_LINE_NONE.
+        <div class='inline'><p>a struct containing the dash sequence corresponding to <!-- raw HTML omitted -->type<!-- raw HTML omitted -->,<br />
+or nil if type is invalid or equal to %GO_LINE_NONE.<br />
 The lengths are scaled according to <!-- raw HTML omitted -->scale<!-- raw HTML omitted -->.</p>
 </div>
       
@@ -31561,7 +31565,7 @@ The lengths are scaled according to <!-- raw HTML omitted -->scale<!-- raw HTML 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>%GO_LINE_INTERPOLATION_LINEAR if type is invalid.
+    <p>%GO_LINE_INTERPOLATION_LINEAR if type is invalid.<br />
 The returned string should not be freed.</p>
 
 
@@ -31620,7 +31624,7 @@ The returned string should not be freed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a pointer to the nickname of <!-- raw HTML omitted -->type<!-- raw HTML omitted -->, or &quot;linear&quot; if type
+    <p>Returns a pointer to the nickname of <!-- raw HTML omitted -->type<!-- raw HTML omitted -->, or &quot;linear&quot; if type<br />
 is invalid. The returned string should not be freed.</p>
 
 
@@ -31658,7 +31662,7 @@ is invalid. The returned string should not be freed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the nickname of <!-- raw HTML omitted -->type<!-- raw HTML omitted -->, or &quot;linear&quot; if type
+        <div class='inline'><p>a pointer to the nickname of <!-- raw HTML omitted -->type<!-- raw HTML omitted -->, or &quot;linear&quot; if type<br />
 is invalid. The returned string should not be freed.</p>
 </div>
       
@@ -31738,7 +31742,7 @@ is invalid. The returned string should not be freed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a GOLine::Interpolation corresponding to <!-- raw HTML omitted -->name<!-- raw HTML omitted -->, or
+    <p>Returns a GOLine::Interpolation corresponding to <!-- raw HTML omitted -->name<!-- raw HTML omitted -->, or<br />
 %GO_LINE_INTERPOLATION_LINEAR if not found.</p>
 
 
@@ -31776,7 +31780,7 @@ is invalid. The returned string should not be freed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GOLine::Interpolation corresponding to <!-- raw HTML omitted -->name<!-- raw HTML omitted -->, or
+        <div class='inline'><p>a GOLine::Interpolation corresponding to <!-- raw HTML omitted -->name<!-- raw HTML omitted -->, or<br />
 %GO_LINE_INTERPOLATION_LINEAR if not found.</p>
 </div>
       
@@ -31856,7 +31860,7 @@ is invalid. The returned string should not be freed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Performs multi-dimensional linear regressions on the input points.
+    <p>Performs multi-dimensional linear regressions on the input points.<br />
 Fits to &quot;y = b + a1 * x1 + ... ad * xd&quot;.</p>
 
 
@@ -32612,7 +32616,7 @@ Fits to &quot;y = b + a1 * x1 + ... ad * xd&quot;.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Searched for <!-- raw HTML omitted -->data<!-- raw HTML omitted --> in <!-- raw HTML omitted -->list<!-- raw HTML omitted --> and return the corresponding index or -1 if not
+    <p>Searched for <!-- raw HTML omitted -->data<!-- raw HTML omitted --> in <!-- raw HTML omitted -->list<!-- raw HTML omitted --> and return the corresponding index or -1 if not<br />
 found.</p>
 
 
@@ -32937,7 +32941,7 @@ found.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Play with the default logic so that things come out nicely for the default
+    <p>Play with the default logic so that things come out nicely for the default<br />
 case.</p>
 
 
@@ -32957,7 +32961,7 @@ case.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to a boolean which is set to TRUE if the currency
+        <div class='inline'><p>a pointer to a boolean which is set to TRUE if the currency<br />
 should precede</p>
 </div>
       
@@ -32973,7 +32977,7 @@ should precede</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to a boolean which is set to TRUE if the currency
+        <div class='inline'><p>a pointer to a boolean which is set to TRUE if the currency<br />
 should have a space separating it from the value</p>
 </div>
       
@@ -33237,7 +33241,7 @@ should have a space separating it from the value</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Short circuit the current locale so that we can import files
+    <p>Short circuit the current locale so that we can import files<br />
 and still produce error messages in the current LC_MESSAGE</p>
 
 
@@ -33322,19 +33326,19 @@ and still produce error messages in the current LC_MESSAGE</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Performs a two-dimensional non-linear fitting on the input points.
-Fits to &quot;y = a + b * ln (sign * (x - c))&quot;, with sign in +1.
-The graph is a logarithmic curve moved horizontally by c and possibly
+    <p>Performs a two-dimensional non-linear fitting on the input points.<br />
+Fits to &quot;y = a + b * ln (sign * (x - c))&quot;, with sign in +1.<br />
+The graph is a logarithmic curve moved horizontally by c and possibly<br />
 mirrored across the y-axis (if sign = -1).</p>
-<p>Fits c (and sign) by iterative trials, but seems to be fast enough even
+<p>Fits c (and sign) by iterative trials, but seems to be fast enough even<br />
 for automatic recomputation.</p>
-<p>Adapts c until a local minimum of squared residuals is reached. For each
-new c tried out the corresponding a and b are calculated by linear
-regression. If no local minimum is found, an error is returned. If there
-is more than one local minimum, the one found is not necessarily the
-smallest (i.e., there might be cases in which the returned fit is not the
-best possible). If the shape of the point cloud is to different from
-``logarithmic'', either sign can not be determined (error returned) or no
+<p>Adapts c until a local minimum of squared residuals is reached. For each<br />
+new c tried out the corresponding a and b are calculated by linear<br />
+regression. If no local minimum is found, an error is returned. If there<br />
+is more than one local minimum, the one found is not necessarily the<br />
+smallest (i.e., there might be cases in which the returned fit is not the<br />
+best possible). If the shape of the point cloud is to different from<br />
+``logarithmic'', either sign can not be determined (error returned) or no<br />
 local minimum will be found.</p>
 <p>(Requires: at least 3 different x values, at least 3 different y values.)</p>
 
@@ -33521,10 +33525,10 @@ local minimum will be found.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is almost a copy of linear_regression and produces multi-dimensional
-linear regressions on the input points after transforming xss to ln(xss).
-Fits to &quot;y = b + a1 * z1 + ... ad * zd&quot; with &quot;zi = ln (xi)&quot;.
-Problems with arrays in the calling function: see comment to
+    <p>This is almost a copy of linear_regression and produces multi-dimensional<br />
+linear regressions on the input points after transforming xss to ln(xss).<br />
+Fits to &quot;y = b + a1 * z1 + ... ad * zd&quot; with &quot;zi = ln (xi)&quot;.<br />
+Problems with arrays in the calling function: see comment to<br />
 gnumeric_linest, which is also valid for gnumeric_logreg.</p>
 <p>(Errors: less than two points, all points on a vertical line, non-positive x data.)</p>
 
@@ -34308,7 +34312,7 @@ gnumeric_linest, which is also valid for gnumeric_logreg.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like g_memdup or g_memdup2.  This function is meant to ease transition
+    <p>Like g_memdup or g_memdup2.  This function is meant to ease transition<br />
 to g_memdup2 without having to require very new glib.</p>
 
 
@@ -34378,7 +34382,7 @@ to g_memdup2 without having to require very new glib.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like go_memdup (<!-- raw HTML omitted -->mem<!-- raw HTML omitted -->, <!-- raw HTML omitted -->n_blocks<!-- raw HTML omitted --> * <!-- raw HTML omitted -->block_size<!-- raw HTML omitted -->), but with overflow check.
+    <p>Like go_memdup (<!-- raw HTML omitted -->mem<!-- raw HTML omitted -->, <!-- raw HTML omitted -->n_blocks<!-- raw HTML omitted --> * <!-- raw HTML omitted -->block_size<!-- raw HTML omitted -->), but with overflow check.<br />
 Like a potential future g_memdup_n.</p>
 
 
@@ -34463,7 +34467,7 @@ Like a potential future g_memdup_n.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Implementation of a GtkMenuPositionFunc that positions
+    <p>Implementation of a GtkMenuPositionFunc that positions<br />
 the child window under the parent one, for use with gtk_menu_popup.</p>
 
 
@@ -34636,7 +34640,7 @@ the child window under the parent one, for use with gtk_menu_popup.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Needs to be freed with g_free(). If the description is not found, the
+    <p>Needs to be freed with g_free(). If the description is not found, the<br />
 mime type itself will be returned.</p>
 
 
@@ -34695,13 +34699,13 @@ mime type itself will be returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>SYNOPSIS:
-result = non_linear_regression (f, xvals, par, yvals, sigmas,
-x_dim, p_dim, &amp;chi, errors)
-Non linear regression.
-meaningful without the sigmas.
-deviation for each parameter.
-values.
+    <p>SYNOPSIS:<br />
+result = non_linear_regression (f, xvals, par, yvals, sigmas,<br />
+x_dim, p_dim, &amp;chi, errors)<br />
+Non linear regression.<br />
+meaningful without the sigmas.<br />
+deviation for each parameter.<br />
+values.<br />
 The resulting parameters are placed back into <!-- raw HTML omitted -->par<!-- raw HTML omitted -->.</p>
 
 
@@ -34880,13 +34884,13 @@ The resulting parameters are placed back into <!-- raw HTML omitted -->par<!-- r
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>SYNOPSIS:
-result = non_linear_regression (f, xvals, par, yvals, sigmas,
-x_dim, p_dim, &amp;chi, errors)
-Non linear regression.
-meaningful without the sigmas.
-deviation for each parameter.
-values.
+    <p>SYNOPSIS:<br />
+result = non_linear_regression (f, xvals, par, yvals, sigmas,<br />
+x_dim, p_dim, &amp;chi, errors)<br />
+Non linear regression.<br />
+meaningful without the sigmas.<br />
+deviation for each parameter.<br />
+values.<br />
 The resulting parameters are placed back into <!-- raw HTML omitted -->par<!-- raw HTML omitted -->.</p>
 
 
@@ -35065,9 +35069,9 @@ The resulting parameters are placed back into <!-- raw HTML omitted -->par<!-- r
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a list of properties for <!-- raw HTML omitted -->obj<!-- raw HTML omitted -->. The list needs to be a list of
-alternating GParam::Spec and #GValue.
-apply
+    <p>Sets a list of properties for <!-- raw HTML omitted -->obj<!-- raw HTML omitted -->. The list needs to be a list of<br />
+alternating GParam::Spec and #GValue.<br />
+apply<br />
 properties with changed values.</p>
 
 
@@ -35152,7 +35156,7 @@ properties with changed values.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Collect all rw properties and their values.
+    <p>Collect all rw properties and their values.<br />
 properties as GParam::Spec and values as #GValue.</p>
 
 
@@ -35211,8 +35215,8 @@ properties as GParam::Spec and values as #GValue.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unsezts the values in the list which needs to be a list of alternating
-GParam::Spec and #GValue.
+    <p>Unsezts the values in the list which needs to be a list of alternating<br />
+GParam::Spec and #GValue.<br />
 unset</p>
 
 
@@ -35440,7 +35444,7 @@ unset</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function erases a segment of attributes.  This is what to call
+    <p>This function erases a segment of attributes.  This is what to call<br />
 after deleting a segment from the text described by the attributes.</p>
 
 
@@ -35574,7 +35578,7 @@ after deleting a segment from the text described by the attributes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function opens up a blank segment of attributes.  This is what to
+    <p>This function opens up a blank segment of attributes.  This is what to<br />
 call after inserting a segment into the text described by the attributes.</p>
 
 
@@ -36952,7 +36956,7 @@ call after inserting a segment into the text described by the attributes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>plugins. The returned value must not be freed and stays valid until calling
+    <p>plugins. The returned value must not be freed and stays valid until calling<br />
 plugins_rescan or plugins_shutdown.</p>
 
 
@@ -36992,9 +36996,9 @@ plugins_rescan or plugins_shutdown.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns GOPlugin object for plugin with ID equal to <!-- raw HTML omitted -->plugin_id<!-- raw HTML omitted --> or nil
-if there's no plugin available with given id.  Function returns
-&quot;borrowed&quot; reference, use g_object_ref if you want to be sure that
+    <p>Returns GOPlugin object for plugin with ID equal to <!-- raw HTML omitted -->plugin_id<!-- raw HTML omitted --> or nil<br />
+if there's no plugin available with given id.  Function returns<br />
+&quot;borrowed&quot; reference, use g_object_ref if you want to be sure that<br />
 plugin won't disappear.</p>
 
 
@@ -37032,9 +37036,9 @@ plugin won't disappear.</p>
       
       
         &mdash;
-        <div class='inline'><p>GOPlugin object for plugin with ID equal to <!-- raw HTML omitted -->plugin_id<!-- raw HTML omitted --> or nil
-if there's no plugin available with given id.  Function returns
-&quot;borrowed&quot; reference, use g_object_ref if you want to be sure that
+        <div class='inline'><p>GOPlugin object for plugin with ID equal to <!-- raw HTML omitted -->plugin_id<!-- raw HTML omitted --> or nil<br />
+if there's no plugin available with given id.  Function returns<br />
+&quot;borrowed&quot; reference, use g_object_ref if you want to be sure that<br />
 plugin won't disappear.</p>
 </div>
       
@@ -37090,7 +37094,7 @@ plugin won't disappear.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Initializes the plugin subsystem. Might be called several times to add
+    <p>Initializes the plugin subsystem. Might be called several times to add<br />
 new plugins.</p>
 
 
@@ -37220,9 +37224,9 @@ new plugins.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers new type of plugin loader identified by <!-- raw HTML omitted -->loader_id<!-- raw HTML omitted --> (identifier
-consists of loader's plugin ID and service ID concatenated using colon).
-All requests to create new loader object of this type will be passed to
+    <p>Registers new type of plugin loader identified by <!-- raw HTML omitted -->loader_id<!-- raw HTML omitted --> (identifier<br />
+consists of loader's plugin ID and service ID concatenated using colon).<br />
+All requests to create new loader object of this type will be passed to<br />
 <!-- raw HTML omitted -->service<!-- raw HTML omitted -->.</p>
 <p>This function is intended for use by GOPluginService objects.</p>
 
@@ -37362,9 +37366,9 @@ All requests to create new loader object of this type will be passed to
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Shuts down the plugin subsystem. Call this function only once before
-exiting the application. Some plugins may be left active or in broken
-state, so calling plugins_init again will NOT work properly.
+    <p>Shuts down the plugin subsystem. Call this function only once before<br />
+exiting the application. Some plugins may be left active or in broken<br />
+state, so calling plugins_init again will NOT work properly.<br />
 use.</p>
 
 
@@ -37404,8 +37408,8 @@ use.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unregisters a type of plugin loader identified by <!-- raw HTML omitted -->loader_id<!-- raw HTML omitted -->. After
-callingthis function Gnumeric will be unable to load plugins supported
+    <p>Unregisters a type of plugin loader identified by <!-- raw HTML omitted -->loader_id<!-- raw HTML omitted -->. After<br />
+callingthis function Gnumeric will be unable to load plugins supported<br />
 by the specified loader.</p>
 <p>This function is intended for use by GOPluginService objects.</p>
 
@@ -38089,8 +38093,8 @@ by the specified loader.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Performs one-dimensional linear regressions on the input points.
-Fits to &quot;y = b * x1^m1 * ... * xd^md &quot; or equivalently to
+    <p>Performs one-dimensional linear regressions on the input points.<br />
+Fits to &quot;y = b * x1^m1 * ... * xd^md &quot; or equivalently to<br />
 &quot;log y = log b + m1 * log x1 + ... + md * log xd&quot;.</p>
 
 
@@ -39602,7 +39606,7 @@ Fits to &quot;y = b * x1^m1 * ... * xd^md &quot; or equivalently to
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes polar angle coordinate of the point (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y<!-- raw HTML omitted -->), storing
+    <p>This function computes polar angle coordinate of the point (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y<!-- raw HTML omitted -->), storing<br />
 the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
 
 
@@ -39687,7 +39691,7 @@ the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes polar angle coordinate of the point (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y<!-- raw HTML omitted -->), storing
+    <p>This function computes polar angle coordinate of the point (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y<!-- raw HTML omitted -->), storing<br />
 the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
 
 
@@ -39772,7 +39776,7 @@ the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes polar angle coordinate of the point (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y<!-- raw HTML omitted -->) divided
+    <p>This function computes polar angle coordinate of the point (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y<!-- raw HTML omitted -->) divided<br />
 by pi, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
 
 
@@ -39857,7 +39861,7 @@ by pi, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes polar angle coordinate of the point (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y<!-- raw HTML omitted -->) divided
+    <p>This function computes polar angle coordinate of the point (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y<!-- raw HTML omitted -->) divided<br />
 by pi, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
 
 
@@ -39942,7 +39946,7 @@ by pi, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function interprets a vector of digits in a given base as a
+    <p>This function interprets a vector of digits in a given base as a<br />
 quad-precision value.  It is mostly meant for internal use.</p>
 
 
@@ -40195,7 +40199,7 @@ quad-precision value.  It is mostly meant for internal use.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes the cosine of <!-- raw HTML omitted -->a<!-- raw HTML omitted --> times pi, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.
+    <p>This function computes the cosine of <!-- raw HTML omitted -->a<!-- raw HTML omitted --> times pi, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.<br />
 This is more accurate than actually doing the multiplication.</p>
 
 
@@ -40265,7 +40269,7 @@ This is more accurate than actually doing the multiplication.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes the cosine of <!-- raw HTML omitted -->a<!-- raw HTML omitted --> times pi, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.
+    <p>This function computes the cosine of <!-- raw HTML omitted -->a<!-- raw HTML omitted --> times pi, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.<br />
 This is more accurate than actually doing the multiplication.</p>
 
 
@@ -40807,9 +40811,9 @@ This is more accurate than actually doing the multiplication.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes the exponential function at <!-- raw HTML omitted -->a<!-- raw HTML omitted -->, storing the result
-in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.  If the optional <!-- raw HTML omitted -->exp2<!-- raw HTML omitted --> is supplied, it is used to return a
-power of 2 by which the result should be scaled.  This is useful to
+    <p>This function computes the exponential function at <!-- raw HTML omitted -->a<!-- raw HTML omitted -->, storing the result<br />
+in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.  If the optional <!-- raw HTML omitted -->exp2<!-- raw HTML omitted --> is supplied, it is used to return a<br />
+power of 2 by which the result should be scaled.  This is useful to<br />
 represent results much, much bigger than double precision can handle.</p>
 
 
@@ -40894,7 +40898,7 @@ represent results much, much bigger than double precision can handle.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes the exponential function at <!-- raw HTML omitted -->a<!-- raw HTML omitted --> with 1 subtracted,
+    <p>This function computes the exponential function at <!-- raw HTML omitted -->a<!-- raw HTML omitted --> with 1 subtracted,<br />
 storing the difference in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
 
 
@@ -40964,7 +40968,7 @@ storing the difference in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes the exponential function at <!-- raw HTML omitted -->a<!-- raw HTML omitted --> with 1 subtracted,
+    <p>This function computes the exponential function at <!-- raw HTML omitted -->a<!-- raw HTML omitted --> with 1 subtracted,<br />
 storing the difference in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
 
 
@@ -41240,7 +41244,7 @@ storing the difference in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes the square root of <!-- raw HTML omitted -->a<!-- raw HTML omitted -->^2 plugs <!-- raw HTML omitted -->b<!-- raw HTML omitted -->^2, storing the
+    <p>This function computes the square root of <!-- raw HTML omitted -->a<!-- raw HTML omitted -->^2 plugs <!-- raw HTML omitted -->b<!-- raw HTML omitted -->^2, storing the<br />
 result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
 
 
@@ -41325,7 +41329,7 @@ result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes the square root of <!-- raw HTML omitted -->a<!-- raw HTML omitted -->^2 plugs <!-- raw HTML omitted -->b<!-- raw HTML omitted -->^2, storing the
+    <p>This function computes the square root of <!-- raw HTML omitted -->a<!-- raw HTML omitted -->^2 plugs <!-- raw HTML omitted -->b<!-- raw HTML omitted -->^2, storing the<br />
 result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
 
 
@@ -41410,7 +41414,7 @@ result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This stores the value <!-- raw HTML omitted -->h<!-- raw HTML omitted --> in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.  As an exception, this may be called
+    <p>This stores the value <!-- raw HTML omitted -->h<!-- raw HTML omitted --> in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.  As an exception, this may be called<br />
 outside go_quad_start and go_quad_end sections.</p>
 
 
@@ -41480,7 +41484,7 @@ outside go_quad_start and go_quad_end sections.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes the natural logarithm at <!-- raw HTML omitted -->a<!-- raw HTML omitted -->, storing the result
+    <p>This function computes the natural logarithm at <!-- raw HTML omitted -->a<!-- raw HTML omitted -->, storing the result<br />
 in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
 
 
@@ -41550,7 +41554,7 @@ in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes the natural logarithm at <!-- raw HTML omitted -->a<!-- raw HTML omitted -->, storing the result
+    <p>This function computes the natural logarithm at <!-- raw HTML omitted -->a<!-- raw HTML omitted -->, storing the result<br />
 in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
 
 
@@ -41620,8 +41624,8 @@ in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>than being given a zero result.  A degenerate dimension is one whose
-diagonal entry is zero.
+    <p>than being given a zero result.  A degenerate dimension is one whose<br />
+diagonal entry is zero.<br />
 This function solves the triangular system R*x=b.</p>
 
 
@@ -42090,8 +42094,8 @@ This function solves the triangular system R*x=b.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>than being given a zero result.  A degenerate dimension is one whose
-diagonal entry is zero.
+    <p>than being given a zero result.  A degenerate dimension is one whose<br />
+diagonal entry is zero.<br />
 This function solves the triangular system RT*x=b.</p>
 
 
@@ -42195,8 +42199,8 @@ This function solves the triangular system RT*x=b.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>eigenvalue is less than or equal to the given threshold, nil is returned
-indicating a matrix that cannot be inverted.  (Note: this doesn't actually
+    <p>eigenvalue is less than or equal to the given threshold, nil is returned<br />
+indicating a matrix that cannot be inverted.  (Note: this doesn't actually<br />
 use the eigenvalues of A, but of A after an orthogonal transformation.)</p>
 
 
@@ -42879,7 +42883,7 @@ use the eigenvalues of A, but of A after an orthogonal transformation.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function multiplies <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted -->, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted --> with full
+    <p>This function multiplies <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted -->, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted --> with full<br />
 quad precision.</p>
 
 
@@ -43048,9 +43052,9 @@ quad precision.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes <!-- raw HTML omitted -->x<!-- raw HTML omitted --> to the power of <!-- raw HTML omitted -->y<!-- raw HTML omitted -->, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.
-If the optional <!-- raw HTML omitted -->exp2<!-- raw HTML omitted --> is supplied, it is used to return a power of 2 by
-which the result should be scaled.  This is useful to represent results
+    <p>This function computes <!-- raw HTML omitted -->x<!-- raw HTML omitted --> to the power of <!-- raw HTML omitted -->y<!-- raw HTML omitted -->, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.<br />
+If the optional <!-- raw HTML omitted -->exp2<!-- raw HTML omitted --> is supplied, it is used to return a power of 2 by<br />
+which the result should be scaled.  This is useful to represent results<br />
 much, much bigger than double precision can handle.</p>
 
 
@@ -43259,7 +43263,7 @@ much, much bigger than double precision can handle.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Marks dimension i of the qr decomposition as degenerate.  In practice
+    <p>Marks dimension i of the qr decomposition as degenerate.  In practice<br />
 this means setting the i-th eigenvalue of R to zero.</p>
 
 
@@ -43399,13 +43403,13 @@ this means setting the i-th eigenvalue of R to zero.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>QR decomposition of a matrix using Householder matrices.</p>
-<p>A (input) is an m-times-n matrix.  A[0...m-1][0..n-1]
+<p>A (input) is an m-times-n matrix.  A[0...m-1][0..n-1]<br />
 If qAT is TRUE, this parameter is transposed.</p>
-<p>V is a pre-allocated output m-times-n matrix.  V will contrain
-n vectors of different lengths: n, n-1, ..., 1.  These are the
-Householder vectors (or null for the degenerate case).  The
+<p>V is a pre-allocated output m-times-n matrix.  V will contrain<br />
+n vectors of different lengths: n, n-1, ..., 1.  These are the<br />
+Householder vectors (or null for the degenerate case).  The<br />
 matrix Q of size m-times-m is implied from V.</p>
-<p>R is a matrix of size n-times-n.  (To get the m-times-n version
+<p>R is a matrix of size n-times-n.  (To get the m-times-n version<br />
 of R, simply add m-n null rows.)</p>
 
 
@@ -43718,7 +43722,7 @@ of R, simply add m-n null rows.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes the sine of <!-- raw HTML omitted -->a<!-- raw HTML omitted --> times pi, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.
+    <p>This function computes the sine of <!-- raw HTML omitted -->a<!-- raw HTML omitted --> times pi, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.<br />
 This is more accurate than actually doing the multiplication.</p>
 
 
@@ -43788,7 +43792,7 @@ This is more accurate than actually doing the multiplication.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function computes the sine of <!-- raw HTML omitted -->a<!-- raw HTML omitted --> times pi, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.
+    <p>This function computes the sine of <!-- raw HTML omitted -->a<!-- raw HTML omitted --> times pi, storing the result in <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.<br />
 This is more accurate than actually doing the multiplication.</p>
 
 
@@ -43996,7 +44000,7 @@ This is more accurate than actually doing the multiplication.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Initializes #GOQuad arithmetic. Any use of #GOQuad must occur between calls
+    <p>Initializes #GOQuad arithmetic. Any use of #GOQuad must occur between calls<br />
 to go_quad_start() and go_quad_end().</p>
 
 
@@ -44036,7 +44040,7 @@ to go_quad_start() and go_quad_end().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Initializes #GOQuadl arithmetic. Any use of #GOQuadl must occur between calls
+    <p>Initializes #GOQuadl arithmetic. Any use of #GOQuadl must occur between calls<br />
 to go_quad_startl() and go_quad_endl().</p>
 
 
@@ -47726,9 +47730,9 @@ to go_quad_startl() and go_quad_endl().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Render a floating-point value into <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> in such a way that the
-layouting width does not needlessly exceed <!-- raw HTML omitted -->col_width<!-- raw HTML omitted -->.  Optionally
-use unicode minus instead of hyphen.
+    <p>Render a floating-point value into <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> in such a way that the<br />
+layouting width does not needlessly exceed <!-- raw HTML omitted -->col_width<!-- raw HTML omitted -->.  Optionally<br />
+use unicode minus instead of hyphen.<br />
 A width of -1 means no restriction.</p>
 
 
@@ -47903,9 +47907,9 @@ A width of -1 means no restriction.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Render a floating-point value into <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> in such a way that the
-layouting width does not needlessly exceed <!-- raw HTML omitted -->col_width<!-- raw HTML omitted -->.  Optionally
-use unicode minus instead of hyphen.
+    <p>Render a floating-point value into <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> in such a way that the<br />
+layouting width does not needlessly exceed <!-- raw HTML omitted -->col_width<!-- raw HTML omitted -->.  Optionally<br />
+use unicode minus instead of hyphen.<br />
 A width of -1 means no restriction.</p>
 
 
@@ -48658,7 +48662,7 @@ A width of -1 means no restriction.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Decrements the counter for data initialized by libgoffice_init().
+    <p>Decrements the counter for data initialized by libgoffice_init().<br />
 When the counter reaches 0, the data is freed/cleaned up as appropriate.</p>
 
 
@@ -48810,7 +48814,7 @@ When the counter reaches 0, the data is freed/cleaned up as appropriate.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a GList from NULL-terminated list of arguments.
+    <p>Creates a GList from NULL-terminated list of arguments.<br />
 As the arguments are just copied to the list, the caller owns them.</p>
 
 
@@ -49538,7 +49542,7 @@ As the arguments are just copied to the list, the caller owns them.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A convenience for g_return_val to share one error string without adding a
+    <p>A convenience for g_return_val to share one error string without adding a<br />
 reference to functions that do not add references to the result</p>
 
 
@@ -49789,8 +49793,8 @@ reference to functions that do not add references to the result</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Splits up string into tokens at delim and returns a string list.
-free after use using function g_slist_free_full(), using g_free as second
+    <p>Splits up string into tokens at delim and returns a string list.<br />
+free after use using function g_slist_free_full(), using g_free as second<br />
 argument.</p>
 
 
@@ -50044,7 +50048,7 @@ argument.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the next-smaller representable value, except that zero and
+    <p>Returns the next-smaller representable value, except that zero and<br />
 infinites are returned unchanged.</p>
 
 
@@ -50099,7 +50103,7 @@ infinites are returned unchanged.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the next-smaller representable value, except that zero and
+    <p>Returns the next-smaller representable value, except that zero and<br />
 infinites are returned unchanged.</p>
 
 
@@ -50553,7 +50557,7 @@ infinites are returned unchanged.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>already exists, the existing is returned.  Otherwise a new one is
+    <p>already exists, the existing is returned.  Otherwise a new one is<br />
 created.</p>
 
 
@@ -50749,10 +50753,10 @@ created.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Modifies given <!-- raw HTML omitted -->uri<!-- raw HTML omitted --> by adding the extension <!-- raw HTML omitted -->std_ext<!-- raw HTML omitted --> if needed.
-If no <!-- raw HTML omitted -->std_ext<!-- raw HTML omitted --> is given or <!-- raw HTML omitted -->uri<!-- raw HTML omitted --> already has some extension,
+    <p>Modifies given <!-- raw HTML omitted -->uri<!-- raw HTML omitted --> by adding the extension <!-- raw HTML omitted -->std_ext<!-- raw HTML omitted --> if needed.<br />
+If no <!-- raw HTML omitted -->std_ext<!-- raw HTML omitted --> is given or <!-- raw HTML omitted -->uri<!-- raw HTML omitted --> already has some extension,<br />
 it just copies <!-- raw HTML omitted -->uri<!-- raw HTML omitted -->.</p>
-<p>Value in new_uri:  newly allocated string which you should free after
+<p>Value in new_uri:  newly allocated string which you should free after<br />
 use, containing (optionally) modified uri.</p>
 
 
@@ -51143,7 +51147,7 @@ use, containing (optionally) modified uri.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Similar to g_utf8_strup and g_utf8_strup, except that this function
+    <p>Similar to g_utf8_strup and g_utf8_strup, except that this function<br />
 creates a string &quot;Very Much Like: This, One&quot;.</p>
 
 
@@ -51217,7 +51221,7 @@ creates a string &quot;Very Much Like: This, One&quot;.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>RFC4122 version 4 compliant random UUIDs generator.
+    <p>RFC4122 version 4 compliant random UUIDs generator.<br />
 must be freed with _free().</p>
 
 
@@ -51596,7 +51600,7 @@ must be freed with _free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get an xmlChar * value for a node carried as an attibute
+    <p>Get an xmlChar * value for a node carried as an attibute<br />
 result must be xmlFree</p>
 
 
@@ -52484,7 +52488,7 @@ result must be xmlFree</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Output a representation of <!-- raw HTML omitted -->d<!-- raw HTML omitted --> that will be read back without loss of
+    <p>Output a representation of <!-- raw HTML omitted -->d<!-- raw HTML omitted --> that will be read back without loss of<br />
 precision.</p>
 
 
@@ -52569,7 +52573,7 @@ precision.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Output a representation of <!-- raw HTML omitted -->ld<!-- raw HTML omitted --> that will be read back without loss of
+    <p>Output a representation of <!-- raw HTML omitted -->ld<!-- raw HTML omitted --> that will be read back without loss of<br />
 precision.</p>
 
 
@@ -52654,9 +52658,9 @@ precision.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like xmlParseFile, but faster.  Does not accept compressed files.
+    <p>Like xmlParseFile, but faster.  Does not accept compressed files.<br />
 See <a href="http://bugzilla.gnome.org/show_bug.cgi?id=168414">http://bugzilla.gnome.org/show_bug.cgi?id=168414</a></p>
-<p>Note: this reads the entire file into memory and should therefore
+<p>Note: this reads the entire file into memory and should therefore<br />
 not be used for user-supplied files.</p>
 
 
@@ -52711,7 +52715,7 @@ not be used for user-supplied files.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

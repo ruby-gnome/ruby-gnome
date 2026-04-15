@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::PropertyAction";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,52 +95,53 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A <code>GPropertyAction</code> is a way to get a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action] with a state value
+    <p>A <code>GPropertyAction</code> is a way to get a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action] with a state value<br />
 reflecting and controlling the value of a [class<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object] property.</p>
-<p>The state of the action will correspond to the value of the property.
-Changing it will change the property (assuming the requested value
+<p>The state of the action will correspond to the value of the property.<br />
+Changing it will change the property (assuming the requested value<br />
 matches the requirements as specified in the [type<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.ParamSpec]).</p>
-<p>Only the most common types are presently supported.  Booleans are
-mapped to booleans, strings to strings, signed/unsigned integers to
+<p>Only the most common types are presently supported.  Booleans are<br />
+mapped to booleans, strings to strings, signed/unsigned integers to<br />
 int32/uint32 and floats and doubles to doubles.</p>
-<p>If the property is an enum then the state will be string-typed and
-conversion will automatically be performed between the enum value and
+<p>If the property is an enum then the state will be string-typed and<br />
+conversion will automatically be performed between the enum value and<br />
 ‘nick’ string as per the [type<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.EnumValue] table.</p>
 <p>Flags types are not currently supported.</p>
-<p>Properties of object types, boxed types and pointer types are not
+<p>Properties of object types, boxed types and pointer types are not<br />
 supported and probably never will be.</p>
 <p>Properties of [type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] types are not currently supported.</p>
-<p>If the property is boolean-valued then the action will have a <code>NULL</code>
-parameter type, and activating the action (with no parameter) will
+<p>If the property is boolean-valued then the action will have a <code>NULL</code><br />
+parameter type, and activating the action (with no parameter) will<br />
 toggle the value of the property.</p>
-<p>In all other cases, the parameter type will correspond to the type of
+<p>In all other cases, the parameter type will correspond to the type of<br />
 the property.</p>
-<p>The general idea here is to reduce the number of locations where a
-particular piece of state is kept (and therefore has to be synchronised
-between). <code>GPropertyAction</code> does not have a separate state that is kept
+<p>The general idea here is to reduce the number of locations where a<br />
+particular piece of state is kept (and therefore has to be synchronised<br />
+between). <code>GPropertyAction</code> does not have a separate state that is kept<br />
 in sync with the property value — its state is the property value.</p>
-<p>For example, it might be useful to create a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action] corresponding
-to the <code>visible-child-name</code> property of a <a href="https://docs.gtk.org/gtk4/class.Stack.html"><code>GtkStack</code></a>
-so that the current page can be switched from a menu.  The active radio
-indication in the menu is then directly determined from the active page of
+<p>For example, it might be useful to create a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action] corresponding<br />
+to the <code>visible-child-name</code> property of a <a href="https://docs.gtk.org/gtk4/class.Stack.html"><code>GtkStack</code></a><br />
+so that the current page can be switched from a menu.  The active radio<br />
+indication in the menu is then directly determined from the active page of<br />
 the <code>GtkStack</code>.</p>
-<p>An anti-example would be binding the <code>active-id</code> property on a
-<a href="https://docs.gtk.org/gtk4/class.ComboBox.html"><code>GtkComboBox</code></a>. This is
-because the state of the combo box itself is probably uninteresting and is
+<p>An anti-example would be binding the <code>active-id</code> property on a<br />
+<a href="https://docs.gtk.org/gtk4/class.ComboBox.html"><code>GtkComboBox</code></a>. This is<br />
+because the state of the combo box itself is probably uninteresting and is<br />
 actually being used to control something else.</p>
-<p>Another anti-example would be to bind to the <code>visible-child-name</code>
-property of a <a href="https://docs.gtk.org/gtk4/class.Stack.html"><code>GtkStack</code></a> if
-this value is actually stored in [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings].  In that case, the
-real source of the value is* [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings].  If you want
-a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action] to control a setting stored in [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings],
-see [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings.create_action] instead, and possibly combine its
+<p>Another anti-example would be to bind to the <code>visible-child-name</code><br />
+property of a <a href="https://docs.gtk.org/gtk4/class.Stack.html"><code>GtkStack</code></a> if<br />
+this value is actually stored in [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings].  In that case, the<br />
+real source of the value is* [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings].  If you want<br />
+a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action] to control a setting stored in [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings],<br />
+see [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings.create_action] instead, and possibly combine its<br />
 use with [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings.bind].</p>
 
 
@@ -511,6 +513,7 @@ use with [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings.b
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -527,11 +530,11 @@ use with [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings.b
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a #GAction corresponding to the value of property
+    <p>Creates a #GAction corresponding to the value of property<br />
 <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --> on <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.</p>
-<p>The property must be existent and readable and writable (and not
+<p>The property must be existent and readable and writable (and not<br />
 construct-only).</p>
-<p>This function takes a reference on <!-- raw HTML omitted -->object<!-- raw HTML omitted --> and doesn't release it
+<p>This function takes a reference on <!-- raw HTML omitted -->object<!-- raw HTML omitted --> and doesn't release it<br />
 until the action is destroyed.</p>
 
 
@@ -566,7 +569,7 @@ until the action is destroyed.</p>
       
       
         &mdash;
-        <div class='inline'><p>the object that has the property
+        <div class='inline'><p>the object that has the property<br />
 to wrap</p>
 </div>
       
@@ -612,7 +615,7 @@ to wrap</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>If <!-- raw HTML omitted -->action<!-- raw HTML omitted --> is currently enabled.</p>
-<p>If the action is disabled then calls to g_action_activate() and
+<p>If the action is disabled then calls to g_action_activate() and<br />
 g_action_change_state() have no effect.</p>
 
 
@@ -681,7 +684,7 @@ g_action_change_state() have no effect.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>If <!-- raw HTML omitted -->action<!-- raw HTML omitted --> is currently enabled.</p>
-<p>If the action is disabled then calls to g_action_activate() and
+<p>If the action is disabled then calls to g_action_activate() and<br />
 g_action_change_state() have no effect.</p>
 
 
@@ -721,7 +724,7 @@ g_action_change_state() have no effect.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If true, the state of the action will be the negation of the
+    <p>If true, the state of the action will be the negation of the<br />
 property value, provided the property is boolean.</p>
 
 
@@ -789,7 +792,7 @@ property value, provided the property is boolean.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If true, the state of the action will be the negation of the
+    <p>If true, the state of the action will be the negation of the<br />
 property value, provided the property is boolean.</p>
 
 
@@ -829,7 +832,7 @@ property value, provided the property is boolean.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The name of the action.  This is mostly meaningful for identifying
+    <p>The name of the action.  This is mostly meaningful for identifying<br />
 the action once it has been added to a GAction::Map.</p>
 
 
@@ -869,7 +872,7 @@ the action once it has been added to a GAction::Map.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The name of the action.  This is mostly meaningful for identifying
+    <p>The name of the action.  This is mostly meaningful for identifying<br />
 the action once it has been added to a GAction::Map.</p>
 
 
@@ -992,7 +995,7 @@ the action once it has been added to a GAction::Map.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The type of the parameter that must be given when activating the
+    <p>The type of the parameter that must be given when activating the<br />
 action.</p>
 
 
@@ -1032,7 +1035,7 @@ action.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The type of the parameter that must be given when activating the
+    <p>The type of the parameter that must be given when activating the<br />
 action.</p>
 
 
@@ -1101,7 +1104,7 @@ action.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The name of the property to wrap on the object.</p>
-<p>The property must exist on the passed-in object and it must be
+<p>The property must exist on the passed-in object and it must be<br />
 readable and writable (and not construct-only).</p>
 
 
@@ -1262,7 +1265,7 @@ readable and writable (and not construct-only).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The GVariant::Type of the state that the action has, or nil if the
+    <p>The GVariant::Type of the state that the action has, or nil if the<br />
 action is stateless.</p>
 
 
@@ -1302,7 +1305,7 @@ action is stateless.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The GVariant::Type of the state that the action has, or nil if the
+    <p>The GVariant::Type of the state that the action has, or nil if the<br />
 action is stateless.</p>
 
 
@@ -1366,7 +1369,7 @@ action is stateless.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

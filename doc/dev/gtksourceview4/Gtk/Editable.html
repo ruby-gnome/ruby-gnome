@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Editable";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -86,15 +88,15 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p><code>GtkEditable</code> is an interface for text editing widgets.</p>
-<p>Typical examples of editable widgets are [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry] and
-[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SpinButton]. It contains functions for generically manipulating
-an editable widget, a large number of action signals used for key bindings,
-and several signals that an application can connect to modify the behavior
+<p>Typical examples of editable widgets are [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry] and<br />
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SpinButton]. It contains functions for generically manipulating<br />
+an editable widget, a large number of action signals used for key bindings,<br />
+and several signals that an application can connect to modify the behavior<br />
 of a widget.</p>
-<p>As an example of the latter usage, by connecting the following handler to
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::insert-text], an application can convert all entry
+<p>As an example of the latter usage, by connecting the following handler to<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::insert-text], an application can convert all entry<br />
 into a widget into uppercase.</p>
-<h2>Forcing entry to uppercase.</h2>
+<h2><a href="#forcing-entry-to-uppercase" aria-hidden="true" class="anchor" id="forcing-entry-to-uppercase"></a>Forcing entry to uppercase.</h2>
 <pre class="code c"><code class="c">#include &lt;ctype.h&gt;
 
 void
@@ -117,12 +119,12 @@ insert_text_handler (GtkEditable *editable,
   g_free (result);
 }
 </code></pre>
-<h2>Implementing GtkEditable</h2>
-<p>The most likely scenario for implementing <code>GtkEditable</code> on your own widget
-is that you will embed a <code>GtkText</code> inside a complex widget, and want to
-delegate the editable functionality to that text widget. <code>GtkEditable</code>
+<h2><a href="#implementing-gtkeditable" aria-hidden="true" class="anchor" id="implementing-gtkeditable"></a>Implementing GtkEditable</h2>
+<p>The most likely scenario for implementing <code>GtkEditable</code> on your own widget<br />
+is that you will embed a <code>GtkText</code> inside a complex widget, and want to<br />
+delegate the editable functionality to that text widget. <code>GtkEditable</code><br />
 provides some utility functions to make this easy.</p>
-<p>In your class_init function, call [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.install_properties],
+<p>In your class_init function, call [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.install_properties],<br />
 passing the first available property ID:</p>
 <pre class="code c"><code class="c">static void
 my_class_init (MyClass *class)
@@ -133,7 +135,7 @@ my_class_init (MyClass *class)
   ...
 }
 </code></pre>
-<p>In your interface_init function for the <code>GtkEditable</code> interface, provide
+<p>In your interface_init function for the <code>GtkEditable</code> interface, provide<br />
 an implementation for the get_delegate vfunc that returns your text widget:</p>
 <pre class="code c"><code class="c">GtkEditable *
 get_editable_delegate (GtkEditable *editable)
@@ -147,10 +149,10 @@ my_editable_init (GtkEditableInterface *iface)
   iface-&gt;get_delegate = get_editable_delegate;
 }
 </code></pre>
-<p>You don't need to provide any other vfuncs. The default implementations
-work by forwarding to the delegate that the GtkEditableInterface.get_delegate()
+<p>You don't need to provide any other vfuncs. The default implementations<br />
+work by forwarding to the delegate that the GtkEditableInterface.get_delegate()<br />
 vfunc returns.</p>
-<p>In your instance_init function, create your text widget, and then call
+<p>In your instance_init function, create your text widget, and then call<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.init_delegate]:</p>
 <pre class="code c"><code class="c">static void
 my_widget_init (MyWidget *self)
@@ -161,7 +163,7 @@ my_widget_init (MyWidget *self)
   ...
 }
 </code></pre>
-<p>In your dispose function, call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.finish_delegate] before
+<p>In your dispose function, call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.finish_delegate] before<br />
 destroying your text widget:</p>
 <pre class="code c"><code class="c">static void
 my_widget_dispose (GObject *object)
@@ -172,7 +174,7 @@ my_widget_dispose (GObject *object)
   ...
 }
 </code></pre>
-<p>Finally, use [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.delegate_set_property] in your <code>set_property</code>
+<p>Finally, use [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.delegate_set_property] in your <code>set_property</code><br />
 function (and similar for <code>get_property</code>), to set the editable properties:</p>
 <pre class="code c"><code class="c">  ...
   if (gtk_editable_delegate_set_property (object, prop_id, value, pspec))
@@ -181,13 +183,13 @@ function (and similar for <code>get_property</code>), to set the editable proper
   switch (prop_id)
   ...
 </code></pre>
-<p>It is important to note that if you create a <code>GtkEditable</code> that uses
-a delegate, the low level [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::insert-text] and
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::delete-text] signals will be propagated from the
-&quot;wrapper&quot; editable to the delegate, but they will not be propagated from
-the delegate to the &quot;wrapper&quot; editable, as they would cause an infinite
-recursion. If you wish to connect to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::insert-text]
-and [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::delete-text] signals, you will need to connect
+<p>It is important to note that if you create a <code>GtkEditable</code> that uses<br />
+a delegate, the low level [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::insert-text] and<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::delete-text] signals will be propagated from the<br />
+&quot;wrapper&quot; editable to the delegate, but they will not be propagated from<br />
+the delegate to the &quot;wrapper&quot; editable, as they would cause an infinite<br />
+recursion. If you wish to connect to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::insert-text]<br />
+and [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable::delete-text] signals, you will need to connect<br />
 to them on the delegate obtained via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.get_delegate].</p>
 
 
@@ -855,6 +857,7 @@ to them on the delegate obtained via [method<!-- raw HTML omitted -->Gtk<!-- raw
 
       
     </ul>
+    
   
 
 
@@ -914,7 +917,7 @@ to them on the delegate obtained via [method<!-- raw HTML omitted -->Gtk<!-- raw
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the alignment for the contents of the editable.</p>
-<p>This controls the horizontal positioning of the contents when
+<p>This controls the horizontal positioning of the contents when<br />
 the displayed text is shorter than the width of the editable.</p>
 
 
@@ -934,7 +937,7 @@ the displayed text is shorter than the width of the editable.</p>
       
       
         &mdash;
-        <div class='inline'><p>The horizontal alignment, from 0 (left) to 1 (right).
+        <div class='inline'><p>The horizontal alignment, from 0 (left) to 1 (right).<br />
 Reversed for RTL layouts</p>
 </div>
       
@@ -1004,7 +1007,7 @@ Reversed for RTL layouts</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the <code>GtkEditable</code> that <!-- raw HTML omitted -->editable<!-- raw HTML omitted --> is delegating its
+    <p>Gets the <code>GtkEditable</code> that <!-- raw HTML omitted -->editable<!-- raw HTML omitted --> is delegating its<br />
 implementation to.</p>
 <p>Typically, the delegate is a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Text] widget.</p>
 
@@ -1046,10 +1049,10 @@ implementation to.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the accessible platform state from the editable delegate.</p>
-<p>This is an helper function to retrieve the accessible state for
+<p>This is an helper function to retrieve the accessible state for<br />
 <code>GtkEditable</code> interface implementations using a delegate pattern.</p>
-<p>You should call this function in your editable widget implementation
-of the [vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.get_platform_state] virtual function, for
+<p>You should call this function in your editable widget implementation<br />
+of the [vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.get_platform_state] virtual function, for<br />
 instance:</p>
 <pre class="code c"><code class="c">static void
 accessible_interface_init (GtkAccessibleInterface *iface)
@@ -1154,9 +1157,9 @@ your_editable_get_accessible_platform_state (GtkAccessible *accessible,
 </h3><div class="docstring">
   <div class="discussion">
     <p>Deletes a sequence of characters.</p>
-<p>The characters that are deleted are those characters at positions
-from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> up to, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> is
-negative, then the characters deleted are those from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> to
+<p>The characters that are deleted are those characters at positions<br />
+from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> up to, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> is<br />
+negative, then the characters deleted are those from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> to<br />
 the end of the text.</p>
 <p>Note that the positions are specified in characters, not bytes.</p>
 
@@ -1228,9 +1231,9 @@ the end of the text.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Deletes a sequence of characters.</p>
-<p>The characters that are deleted are those characters at positions
-from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> up to, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> is
-negative, then the characters deleted are those from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> to
+<p>The characters that are deleted are those characters at positions<br />
+from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> up to, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> is<br />
+negative, then the characters deleted are those from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> to<br />
 the end of the text.</p>
 <p>Note that the positions are specified in characters, not bytes.</p>
 
@@ -1301,10 +1304,10 @@ the end of the text.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts <!-- raw HTML omitted -->length<!-- raw HTML omitted --> bytes of <!-- raw HTML omitted -->text<!-- raw HTML omitted --> into the contents of the
+    <p>Inserts <!-- raw HTML omitted -->length<!-- raw HTML omitted --> bytes of <!-- raw HTML omitted -->text<!-- raw HTML omitted --> into the contents of the<br />
 widget, at position <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
-<p>Note that the position is in characters, not in bytes.
-The function updates <!-- raw HTML omitted -->position<!-- raw HTML omitted --> to point after the newly
+<p>Note that the position is in characters, not in bytes.<br />
+The function updates <!-- raw HTML omitted -->position<!-- raw HTML omitted --> to point after the newly<br />
 inserted text.</p>
 
 
@@ -1447,7 +1450,7 @@ inserted text.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the user is allowed to edit the text
+        <div class='inline'><p>true if the user is allowed to edit the text<br />
 in the widget</p>
 </div>
       
@@ -1522,10 +1525,10 @@ in the widget</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If enabled, changes to <!-- raw HTML omitted -->editable<!-- raw HTML omitted --> will be saved for undo/redo
+    <p>If enabled, changes to <!-- raw HTML omitted -->editable<!-- raw HTML omitted --> will be saved for undo/redo<br />
 actions.</p>
-<p>This results in an additional copy of text changes and are not
-stored in secure memory. As such, undo is forcefully disabled
+<p>This results in an additional copy of text changes and are not<br />
+stored in secure memory. As such, undo is forcefully disabled<br />
 when [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Text:visibility] is set to false.</p>
 
 
@@ -1581,7 +1584,7 @@ when [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Text:visibil
 </h3><div class="docstring">
   <div class="discussion">
     <p>Undoes the setup done by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable.init_delegate].</p>
-<p>This is a helper function that should be called from dispose,
+<p>This is a helper function that should be called from dispose,<br />
 before removing the delegate object.</p>
 
 
@@ -1618,9 +1621,9 @@ before removing the delegate object.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves a sequence of characters.</p>
-<p>The characters that are retrieved are those characters at positions
-from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> up to, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> is negative,
-then the characters retrieved are those characters from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> to
+<p>The characters that are retrieved are those characters at positions<br />
+from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> up to, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> is negative,<br />
+then the characters retrieved are those characters from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> to<br />
 the end of the text.</p>
 <p>Note that positions are specified in characters, not bytes.</p>
 
@@ -1674,8 +1677,8 @@ the end of the text.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the contents of the widget as a
-string. This string is allocated by the <code>GtkEditable</code> implementation
+        <div class='inline'><p>a pointer to the contents of the widget as a<br />
+string. This string is allocated by the <code>GtkEditable</code> implementation<br />
 and should be freed by the caller.</p>
 </div>
       
@@ -1698,8 +1701,8 @@ and should be freed by the caller.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the selection bound of the editable.</p>
-<p><!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> will be filled with the start of the selection and
-<!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> with end. If no text was selected both will be identical
+<p><!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> will be filled with the start of the selection and<br />
+<!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> with end. If no text was selected both will be identical<br />
 and false will be returned.</p>
 <p>Note that positions are specified in characters, not bytes.</p>
 
@@ -1775,9 +1778,9 @@ and false will be returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets up a delegate for <code>GtkEditable</code>.</p>
-<p>This is assuming that the get_delegate vfunc in the <code>GtkEditable</code>
+<p>This is assuming that the get_delegate vfunc in the <code>GtkEditable</code><br />
 interface has been set up for the <!-- raw HTML omitted -->editable<!-- raw HTML omitted -->'s type.</p>
-<p>This is a helper function that should be called in instance init,
+<p>This is a helper function that should be called in instance init,<br />
 after creating the delegate object.</p>
 
 
@@ -1813,10 +1816,10 @@ after creating the delegate object.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts <!-- raw HTML omitted -->length<!-- raw HTML omitted --> bytes of <!-- raw HTML omitted -->text<!-- raw HTML omitted --> into the contents of the
+    <p>Inserts <!-- raw HTML omitted -->length<!-- raw HTML omitted --> bytes of <!-- raw HTML omitted -->text<!-- raw HTML omitted --> into the contents of the<br />
 widget, at position <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
-<p>Note that the position is in characters, not in bytes.
-The function updates <!-- raw HTML omitted -->position<!-- raw HTML omitted --> to point after the newly
+<p>Note that the position is in characters, not in bytes.<br />
+The function updates <!-- raw HTML omitted -->position<!-- raw HTML omitted --> to point after the newly<br />
 inserted text.</p>
 
 
@@ -1994,7 +1997,7 @@ inserted text.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the current position of the cursor relative
+    <p>Retrieves the current position of the cursor relative<br />
 to the start of the content of the editable.</p>
 <p>Note that this position is in characters, not in bytes.</p>
 
@@ -2036,10 +2039,10 @@ to the start of the content of the editable.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the cursor position in the editable to the given value.</p>
-<p>The cursor is displayed before the character with the given (base 0)
-index in the contents of the editable. The value must be less than
-or equal to the number of characters in the editable. A value of -1
-indicates that the position should be set after the last character
+<p>The cursor is displayed before the character with the given (base 0)<br />
+index in the contents of the editable. The value must be less than<br />
+or equal to the number of characters in the editable. A value of -1<br />
+indicates that the position should be set after the last character<br />
 of the editable. Note that <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is in characters, not in bytes.</p>
 
 
@@ -2095,9 +2098,9 @@ of the editable. Note that <!-- raw HTML omitted -->position<!-- raw HTML omitte
 </h3><div class="docstring">
   <div class="discussion">
     <p>Selects a region of text.</p>
-<p>The characters that are selected are those characters at positions
-from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> up to, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> is
-negative, then the characters selected are those characters from
+<p>The characters that are selected are those characters at positions<br />
+from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> up to, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> is<br />
+negative, then the characters selected are those characters from<br />
 <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> to  the end of the text.</p>
 <p>Note that positions are specified in characters, not bytes.</p>
 
@@ -2169,9 +2172,9 @@ negative, then the characters selected are those characters from
 </h3><div class="docstring">
   <div class="discussion">
     <p>Selects a region of text.</p>
-<p>The characters that are selected are those characters at positions
-from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> up to, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> is
-negative, then the characters selected are those characters from
+<p>The characters that are selected are those characters at positions<br />
+from <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> up to, but not including <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->end_pos<!-- raw HTML omitted --> is<br />
+negative, then the characters selected are those characters from<br />
 <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> to  the end of the text.</p>
 <p>Note that positions are specified in characters, not bytes.</p>
 
@@ -2337,7 +2340,7 @@ negative, then the characters selected are those characters from
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the number of characters of space reserved
+    <p>Gets the number of characters of space reserved<br />
 for the contents of the editable.</p>
 
 
@@ -2377,10 +2380,10 @@ for the contents of the editable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Changes the size request of the editable to be about the
+    <p>Changes the size request of the editable to be about the<br />
 right size for <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> characters.</p>
-<p>Note that it changes the size request, the size can still
-be affected by how you pack the widget into containers.
+<p>Note that it changes the size request, the size can still<br />
+be affected by how you pack the widget into containers.<br />
 If <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> is -1, the size reverts to the default size.</p>
 
 
@@ -2431,7 +2434,7 @@ If <!-- raw HTML omitted -->n_chars<!-- raw HTML omitted --> is -1, the size rev
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

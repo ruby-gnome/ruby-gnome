@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Rsvg::Handle";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/rsvg2/handle.rb</dd>
+    <dd>lib/rsvg2/handle.rb
+</dd>
   </dl>
   
 </div>
@@ -171,6 +173,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1309,6 +1312,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1325,8 +1329,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle] with flags <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->.  After calling this function,
-you can feed the resulting handle with SVG data by using
+    <p>Creates a new [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle] with flags <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->.  After calling this function,<br />
+you can feed the resulting handle with SVG data by using<br />
 [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.read_stream_sync].</p>
 
 
@@ -1512,7 +1516,7 @@ you can feed the resulting handle with SVG data by using
 </h3><div class="docstring">
   <div class="discussion">
     <p>Set the base URI for <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> from <!-- raw HTML omitted -->file<!-- raw HTML omitted -->.</p>
-<p>Note: This function may only be called before [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.write] or
+<p>Note: This function may only be called before [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.write] or<br />
 [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.read_stream_sync] have been called.</p>
 
 
@@ -1567,7 +1571,7 @@ you can feed the resulting handle with SVG data by using
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Base URI, to be used to resolve relative references for resources.  See the section
+    <p>Base URI, to be used to resolve relative references for resources.  See the section<br />
 &quot;Security and locations of referenced files&quot; for details.</p>
 
 
@@ -1607,7 +1611,7 @@ you can feed the resulting handle with SVG data by using
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Base URI, to be used to resolve relative references for resources.  See the section
+    <p>Base URI, to be used to resolve relative references for resources.  See the section<br />
 &quot;Security and locations of referenced files&quot; for details.</p>
 
 
@@ -1675,13 +1679,13 @@ you can feed the resulting handle with SVG data by using
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is used after calling [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.write] to indicate that there is no more data
-to consume, and to start the actual parsing of the SVG document.  The only reason to
-call this function is if you use use [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.write] to feed data into the <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->;
-if you use the other methods like [ctor<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.new_from_file] or
+    <p>This is used after calling [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.write] to indicate that there is no more data<br />
+to consume, and to start the actual parsing of the SVG document.  The only reason to<br />
+call this function is if you use use [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.write] to feed data into the <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->;<br />
+if you use the other methods like [ctor<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.new_from_file] or<br />
 [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.read_stream_sync], then you do not need to call this function.</p>
-<p>This will return <code>TRUE</code> if the loader closed successfully and the
-SVG data was parsed correctly.  Note that <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> isn't freed until
+<p>This will return <code>TRUE</code> if the loader closed successfully and the<br />
+SVG data was parsed correctly.  Note that <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> isn't freed until<br />
 [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.unref] is called.</p>
 
 
@@ -1827,10 +1831,10 @@ SVG data was parsed correctly.  Note that <!-- raw HTML omitted -->handle<!-- ra
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the DPI at which the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> will be rendered. Common values are
+    <p>Sets the DPI at which the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> will be rendered. Common values are<br />
 75, 90, and 300 DPI.</p>
-<p>Passing a number &lt;= 0 to <!-- raw HTML omitted -->dpi<!-- raw HTML omitted --> will reset the DPI to whatever the default
-value happens to be, but since [id<!-- raw HTML omitted -->rsvg_set_default_dpi<!-- raw HTML omitted -->] is deprecated, please
+<p>Passing a number &lt;= 0 to <!-- raw HTML omitted -->dpi<!-- raw HTML omitted --> will reset the DPI to whatever the default<br />
+value happens to be, but since [id<!-- raw HTML omitted -->rsvg_set_default_dpi<!-- raw HTML omitted -->] is deprecated, please<br />
 do not pass values &lt;= 0 to this function.</p>
 
 
@@ -2097,7 +2101,7 @@ do not pass values &lt;= 0 to this function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Exact width, in pixels, of the rendered SVG before calling the size callback
+    <p>Exact width, in pixels, of the rendered SVG before calling the size callback<br />
 as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
 
 
@@ -2137,7 +2141,7 @@ as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Ha
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Exact width, in pixels, of the rendered SVG before calling the size callback
+    <p>Exact width, in pixels, of the rendered SVG before calling the size callback<br />
 as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
 
 
@@ -2205,7 +2209,7 @@ as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Ha
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Exact height, in pixels, of the rendered SVG before calling the size callback
+    <p>Exact height, in pixels, of the rendered SVG before calling the size callback<br />
 as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
 
 
@@ -2245,7 +2249,7 @@ as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Ha
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Exact height, in pixels, of the rendered SVG before calling the size callback
+    <p>Exact height, in pixels, of the rendered SVG before calling the size callback<br />
 as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
 
 
@@ -2454,9 +2458,9 @@ as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Ha
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the SVG's size. Do not call from within the size_func callback, because
+    <p>Get the SVG's size. Do not call from within the size_func callback, because<br />
 an infinite loop will occur.</p>
-<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s DPI to compute dimensions in
+<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s DPI to compute dimensions in<br />
 pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi] beforehand.</p>
 
 
@@ -2511,14 +2515,14 @@ pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omi
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the size of a subelement of the SVG file. Do not call from within the
+    <p>Get the size of a subelement of the SVG file. Do not call from within the<br />
 size_func callback, because an infinite loop will occur.</p>
-<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s DPI to compute dimensions in
+<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s DPI to compute dimensions in<br />
 pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi] beforehand.</p>
-<p>Element IDs should look like an URL fragment identifier; for example, pass
-<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
-has an <code>id=&quot;foo&quot;</code> attribute.
-hash character), for example, <code>#layer1</code>.  This notation corresponds to a
+<p>Element IDs should look like an URL fragment identifier; for example, pass<br />
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that<br />
+has an <code>id=&quot;foo&quot;</code> attribute.<br />
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a<br />
 URL's fragment ID.  Alternatively, pass <code>NULL</code> to use the whole SVG.</p>
 
 
@@ -2593,30 +2597,30 @@ URL's fragment ID.  Alternatively, pass <code>NULL</code> to use the whole SVG.<
 </h3><div class="docstring">
   <div class="discussion">
     <p>Computes the ink rectangle and logical rectangle of a single SVG element.</p>
-<p>While <code>rsvg_handle_get_geometry_for_layer</code> computes the geometry of an SVG element subtree with
-its transformation matrix, this other function will compute the element's geometry
-as if it were being rendered under an identity transformation by itself.  That is,
+<p>While <code>rsvg_handle_get_geometry_for_layer</code> computes the geometry of an SVG element subtree with<br />
+its transformation matrix, this other function will compute the element's geometry<br />
+as if it were being rendered under an identity transformation by itself.  That is,<br />
 the resulting geometry is as if the element got extracted by itself from the SVG.</p>
 <p>This function is the counterpart to <code>rsvg_handle_render_element</code>.</p>
-<p>Element IDs should look like an URL fragment identifier; for example, pass
-<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
+<p>Element IDs should look like an URL fragment identifier; for example, pass<br />
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that<br />
 has an <code>id=&quot;foo&quot;</code> attribute.</p>
-<p>The &quot;ink rectangle&quot; is the bounding box that would be painted
+<p>The &quot;ink rectangle&quot; is the bounding box that would be painted<br />
 for fully- stroked and filled elements.</p>
-<p>The &quot;logical rectangle&quot; just takes into account the unstroked
+<p>The &quot;logical rectangle&quot; just takes into account the unstroked<br />
 paths and text outlines.</p>
-<p>Note that these bounds are not minimum bounds; for example,
+<p>Note that these bounds are not minimum bounds; for example,<br />
 clipping paths are not taken into account.</p>
-<p>You can pass <code>NULL</code> for the <!-- raw HTML omitted -->id<!-- raw HTML omitted --> if you want to measure all
-the elements in the SVG, i.e. to measure everything from the
+<p>You can pass <code>NULL</code> for the <!-- raw HTML omitted -->id<!-- raw HTML omitted --> if you want to measure all<br />
+the elements in the SVG, i.e. to measure everything from the<br />
 root element.</p>
-<p>This operation is not constant-time, as it involves going through all
-the child elements.
-hash character), for example, <code>#layer1</code>.  This notation corresponds to a
-URL's fragment ID.  Alternatively, pass <code>NULL</code> to compute the geometry for the
-whole SVG.
+<p>This operation is not constant-time, as it involves going through all<br />
+the child elements.<br />
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a<br />
+URL's fragment ID.  Alternatively, pass <code>NULL</code> to compute the geometry for the<br />
+whole SVG.<br />
 are returned in the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> argument.</p>
-<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See<br />
 the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.</p>
 <p>Panics: this function will panic if the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> is not fully-loaded.</p>
 
@@ -2706,27 +2710,27 @@ the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Computes the ink rectangle and logical rectangle of an SVG element, or the
+    <p>Computes the ink rectangle and logical rectangle of an SVG element, or the<br />
 whole SVG, as if the whole SVG were rendered to a specific viewport.</p>
-<p>Element IDs should look like an URL fragment identifier; for example, pass
-<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
+<p>Element IDs should look like an URL fragment identifier; for example, pass<br />
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that<br />
 has an <code>id=&quot;foo&quot;</code> attribute.</p>
-<p>The &quot;ink rectangle&quot; is the bounding box that would be painted
+<p>The &quot;ink rectangle&quot; is the bounding box that would be painted<br />
 for fully-stroked and filled elements.</p>
-<p>The &quot;logical rectangle&quot; just takes into account the unstroked
+<p>The &quot;logical rectangle&quot; just takes into account the unstroked<br />
 paths and text outlines.</p>
-<p>Note that these bounds are not minimum bounds; for example,
+<p>Note that these bounds are not minimum bounds; for example,<br />
 clipping paths are not taken into account.</p>
-<p>You can pass <code>NULL</code> for the <!-- raw HTML omitted -->id<!-- raw HTML omitted --> if you want to measure all
-the elements in the SVG, i.e. to measure everything from the
+<p>You can pass <code>NULL</code> for the <!-- raw HTML omitted -->id<!-- raw HTML omitted --> if you want to measure all<br />
+the elements in the SVG, i.e. to measure everything from the<br />
 root element.</p>
-<p>This operation is not constant-time, as it involves going through all
-the child elements.
-hash character), for example, <code>#layer1</code>.  This notation corresponds to a
-URL's fragment ID.  Alternatively, pass <code>NULL</code> to compute the geometry for the
-whole SVG.
+<p>This operation is not constant-time, as it involves going through all<br />
+the child elements.<br />
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a<br />
+URL's fragment ID.  Alternatively, pass <code>NULL</code> to compute the geometry for the<br />
+whole SVG.<br />
 are returned in the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> argument.</p>
-<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See<br />
 the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.</p>
 <p>Panics: this function will panic if the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> is not fully-loaded.</p>
 
@@ -2832,34 +2836,34 @@ the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot
 </h3><div class="docstring">
   <div class="discussion">
     <p>In simple terms, queries the <code>width</code>, <code>height</code>, and <code>viewBox</code> attributes in an SVG document.</p>
-<p>If you are calling this function to compute a scaling factor to render the SVG,
-consider simply using [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_document] instead; it will do the
+<p>If you are calling this function to compute a scaling factor to render the SVG,<br />
+consider simply using [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_document] instead; it will do the<br />
 scaling computations automatically.</p>
-<p>Before librsvg 2.54.0, the <code>out_has_width</code> and <code>out_has_height</code> arguments would be set to true or false
+<p>Before librsvg 2.54.0, the <code>out_has_width</code> and <code>out_has_height</code> arguments would be set to true or false<br />
 depending on whether the SVG document actually had <code>width</code> and <code>height</code> attributes, respectively.</p>
-<p>However, since librsvg 2.54.0, <code>width</code> and <code>height</code> are now <a href="https://www.w3.org/TR/SVG2/geometry.html">geometry
-properties</a> per the SVG2 specification; they
-are not plain attributes.  SVG2 made it so that the initial value of those properties
-is <code>auto</code>, which is equivalent to specifing a value of <code>100%</code>.  In this sense, even SVG
-documents which lack <code>width</code> or <code>height</code> attributes semantically have to make them
-default to <code>100%</code>.  This is why since librsvg 2.54.0, <code>out_has_width</code> and
-<code>out_has_heigth</code> are always returned as <code>TRUE</code>, since with SVG2 all documents <em>have</em> a
+<p>However, since librsvg 2.54.0, <code>width</code> and <code>height</code> are now <a href="https://www.w3.org/TR/SVG2/geometry.html">geometry<br />
+properties</a> per the SVG2 specification; they<br />
+are not plain attributes.  SVG2 made it so that the initial value of those properties<br />
+is <code>auto</code>, which is equivalent to specifing a value of <code>100%</code>.  In this sense, even SVG<br />
+documents which lack <code>width</code> or <code>height</code> attributes semantically have to make them<br />
+default to <code>100%</code>.  This is why since librsvg 2.54.0, <code>out_has_width</code> and<br />
+<code>out_has_heigth</code> are always returned as <code>TRUE</code>, since with SVG2 all documents <em>have</em> a<br />
 default width and height of <code>100%</code>.</p>
-<p>As an example, the following SVG element has a <code>width</code> of 100 pixels and a <code>height</code> of 400 pixels, but no <code>viewBox</code>.  This
+<p>As an example, the following SVG element has a <code>width</code> of 100 pixels and a <code>height</code> of 400 pixels, but no <code>viewBox</code>.  This<br />
 function will return those sizes in <code>out_width</code> and <code>out_height</code>, and set <code>out_has_viewbox</code> to <code>FALSE</code>.</p>
 <pre class="code ruby"><code class="ruby">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;100&quot; height=&quot;400&quot;&gt;
 </code></pre>
-<p>Conversely, the following element has a <code>viewBox</code>, but no <code>width</code> or <code>height</code>.  This function will
-set <code>out_has_viewbox</code> to <code>TRUE</code>, and it will also set <code>out_has_width</code> and <code>out_has_height</code> to <code>TRUE</code> but
+<p>Conversely, the following element has a <code>viewBox</code>, but no <code>width</code> or <code>height</code>.  This function will<br />
+set <code>out_has_viewbox</code> to <code>TRUE</code>, and it will also set <code>out_has_width</code> and <code>out_has_height</code> to <code>TRUE</code> but<br />
 return both length values as <code>100%</code>.</p>
 <pre class="code ruby"><code class="ruby">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 400&quot;&gt;
 </code></pre>
-<p>Note that the <code>RsvgLength</code> return values have <code>RsvgUnits</code> in them; you should
-not assume that they are always in pixels.  For example, the following SVG element
+<p>Note that the <code>RsvgLength</code> return values have <code>RsvgUnits</code> in them; you should<br />
+not assume that they are always in pixels.  For example, the following SVG element<br />
 will return width and height values whose <code>units</code> fields are <code>RSVG_UNIT_MM</code>.</p>
 <pre class="code ruby"><code class="ruby">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;210mm&quot; height=&quot;297mm&quot;&gt;
 </code></pre>
-<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See<br />
 the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.</p>
 <p>Panics: this function will panic if the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> is not fully-loaded.</p>
 
@@ -2991,27 +2995,27 @@ the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot
 </h3><div class="docstring">
   <div class="discussion">
     <p>Converts an SVG document's intrinsic dimensions to pixels, and returns the result.</p>
-<p>This function is able to extract the size in pixels from an SVG document if the
-document has both <code>width</code> and <code>height</code> attributes
-with physical units (px, in, cm, mm, pt, pc) or font-based units (em, ex).  For
-physical units, the dimensions are normalized to pixels using the dots-per-inch (DPI)
-value set previously with [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi].  For font-based units, this function
-uses the computed value of the <code>font-size</code> property for the toplevel
+<p>This function is able to extract the size in pixels from an SVG document if the<br />
+document has both <code>width</code> and <code>height</code> attributes<br />
+with physical units (px, in, cm, mm, pt, pc) or font-based units (em, ex).  For<br />
+physical units, the dimensions are normalized to pixels using the dots-per-inch (DPI)<br />
+value set previously with [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi].  For font-based units, this function<br />
+uses the computed value of the <code>font-size</code> property for the toplevel<br />
 <code>&lt;svg&gt;</code> element.  In those cases, this function returns <code>TRUE</code>.</p>
-<p>This function is not able to extract the size in pixels directly from the intrinsic
-dimensions of the SVG document if the <code>width</code> or
-<code>height</code> are in percentage units (or if they do not exist, in which
-case the SVG spec mandates that they default to 100%), as these require a
-<!-- raw HTML omitted -->viewport<!-- raw HTML omitted --> to be resolved to a final size.  In this case, the
+<p>This function is not able to extract the size in pixels directly from the intrinsic<br />
+dimensions of the SVG document if the <code>width</code> or<br />
+<code>height</code> are in percentage units (or if they do not exist, in which<br />
+case the SVG spec mandates that they default to 100%), as these require a<br />
+<!-- raw HTML omitted -->viewport<!-- raw HTML omitted --> to be resolved to a final size.  In this case, the<br />
 function returns <code>FALSE</code>.</p>
-<p>For example, the following document fragment has intrinsic dimensions that will resolve
+<p>For example, the following document fragment has intrinsic dimensions that will resolve<br />
 to 20x30 pixels.</p>
 <pre class="code ruby"><code class="ruby">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;20&quot; height=&quot;30&quot;/&gt;
 </code></pre>
 <p>Similarly, if the DPI is set to 96, this document will resolve to 192×288 pixels (i.e. 96×2 × 96×3).</p>
 <pre class="code ruby"><code class="ruby">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;2in&quot; height=&quot;3in&quot;/&gt;
 </code></pre>
-<p>The dimensions of the following documents cannot be resolved to pixels directly, and
+<p>The dimensions of the following documents cannot be resolved to pixels directly, and<br />
 this function would return <code>FALSE</code> for them:</p>
 <pre class="code ruby"><code class="ruby">&lt;!-- Needs a viewport against which to compute the percentages. --&gt;
 &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;100%&quot; height=&quot;100%&quot;/&gt;
@@ -3020,14 +3024,14 @@ this function would return <code>FALSE</code> for them:</p>
      needs to be fitted within a viewport. --&gt;
 &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 200&quot;/&gt;
 </code></pre>
-<p>Instead of querying an SVG document's size, applications are encouraged to render SVG
-documents to a size chosen by the application, by passing a suitably-sized viewport to
-[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_document].
-<!-- raw HTML omitted -->out_width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->out_height<!-- raw HTML omitted --> will be set accordingly.  Note that the dimensions are
-floating-point numbers, so your application can know the exact size of an SVG document.
-To get integer dimensions, you should use <code>ceil()</code> to round up to the nearest integer
-(just using <code>round()</code>, may may chop off pixels with fractional coverage).  If the
-dimensions cannot be converted to pixels, returns <code>FALSE</code> and puts 0.0 in both
+<p>Instead of querying an SVG document's size, applications are encouraged to render SVG<br />
+documents to a size chosen by the application, by passing a suitably-sized viewport to<br />
+[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_document].<br />
+<!-- raw HTML omitted -->out_width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->out_height<!-- raw HTML omitted --> will be set accordingly.  Note that the dimensions are<br />
+floating-point numbers, so your application can know the exact size of an SVG document.<br />
+To get integer dimensions, you should use <code>ceil()</code> to round up to the nearest integer<br />
+(just using <code>round()</code>, may may chop off pixels with fractional coverage).  If the<br />
+dimensions cannot be converted to pixels, returns <code>FALSE</code> and puts 0.0 in both<br />
 <!-- raw HTML omitted -->out_width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->out_height<!-- raw HTML omitted -->.</p>
 
 
@@ -3101,22 +3105,22 @@ dimensions cannot be converted to pixels, returns <code>FALSE</code> and puts 0.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a <code>GdkPixbuf</code> the same size as the entire SVG loaded into <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->, but
-only renders the sub-element that has the specified <!-- raw HTML omitted -->id<!-- raw HTML omitted --> (and all its
-sub-sub-elements recursively).  If <!-- raw HTML omitted -->id<!-- raw HTML omitted --> is <code>NULL</code>, this function renders the
+    <p>Creates a <code>GdkPixbuf</code> the same size as the entire SVG loaded into <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->, but<br />
+only renders the sub-element that has the specified <!-- raw HTML omitted -->id<!-- raw HTML omitted --> (and all its<br />
+sub-sub-elements recursively).  If <!-- raw HTML omitted -->id<!-- raw HTML omitted --> is <code>NULL</code>, this function renders the<br />
 whole SVG.</p>
-<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s dots-per-inch value (DPI) to compute the
-&quot;natural size&quot; of the document in pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi]
+<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s dots-per-inch value (DPI) to compute the<br />
+&quot;natural size&quot; of the document in pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi]<br />
 beforehand.</p>
-<p>If you need to render an image which is only big enough to fit a particular
+<p>If you need to render an image which is only big enough to fit a particular<br />
 sub-element of the SVG, consider using [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_element].</p>
-<p>Element IDs should look like an URL fragment identifier; for example, pass
-<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
+<p>Element IDs should look like an URL fragment identifier; for example, pass<br />
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that<br />
 has an <code>id=&quot;foo&quot;</code> attribute.</p>
-<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
-the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.
-hash character), for example, <code>#layer1</code>.  This notation corresponds to a
-URL's fragment ID.  Alternatively, pass <code>NULL</code> to use the whole SVG.
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See<br />
+the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.<br />
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a<br />
+URL's fragment ID.  Alternatively, pass <code>NULL</code> to use the whole SVG.<br />
 during rendering.</p>
 
 
@@ -3175,14 +3179,14 @@ during rendering.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the position of a subelement of the SVG file. Do not call from within
+    <p>Get the position of a subelement of the SVG file. Do not call from within<br />
 the size_func callback, because an infinite loop will occur.</p>
-<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s DPI to compute dimensions in
+<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s DPI to compute dimensions in<br />
 pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi] beforehand.</p>
-<p>Element IDs should look like an URL fragment identifier; for example, pass
-<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
-has an <code>id=&quot;foo&quot;</code> attribute.
-hash character), for example, <code>#layer1</code>.  This notation corresponds to a
+<p>Element IDs should look like an URL fragment identifier; for example, pass<br />
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that<br />
+has an <code>id=&quot;foo&quot;</code> attribute.<br />
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a<br />
 URL's fragment ID.  Alternatively, pass nil to use the whole SVG.</p>
 
 
@@ -3257,10 +3261,10 @@ URL's fragment ID.  Alternatively, pass nil to use the whole SVG.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks whether the element <!-- raw HTML omitted -->id<!-- raw HTML omitted --> exists in the SVG document.</p>
-<p>Element IDs should look like an URL fragment identifier; for example, pass
-<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
-has an <code>id=&quot;foo&quot;</code> attribute.
-character), for example, <code>#layer1</code>.  This notation corresponds to a URL's
+<p>Element IDs should look like an URL fragment identifier; for example, pass<br />
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that<br />
+has an <code>id=&quot;foo&quot;</code> attribute.<br />
+character), for example, <code>#layer1</code>.  This notation corresponds to a URL's<br />
 fragment ID.</p>
 
 
@@ -3319,7 +3323,7 @@ fragment ID.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Height, in pixels, of the rendered SVG after calling the size callback
+    <p>Height, in pixels, of the rendered SVG after calling the size callback<br />
 as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
 
 
@@ -3359,7 +3363,7 @@ as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Ha
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Height, in pixels, of the rendered SVG after calling the size callback
+    <p>Height, in pixels, of the rendered SVG after calling the size callback<br />
 as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
 
 
@@ -3427,8 +3431,8 @@ as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Ha
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle] with flags <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->.  After calling this function,
-you can feed the resulting handle with SVG data by using
+    <p>Creates a new [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle] with flags <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->.  After calling this function,<br />
+you can feed the resulting handle with SVG data by using<br />
 [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.read_stream_sync].</p>
 
 
@@ -3501,7 +3505,7 @@ you can feed the resulting handle with SVG data by using
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Do not call this function.  This is intended for librsvg's internal
+    <p>Do not call this function.  This is intended for librsvg's internal<br />
 test suite only.</p>
 
 
@@ -3662,13 +3666,13 @@ test suite only.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the pixbuf loaded by <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  The pixbuf returned will be reffed, so
+    <p>Returns the pixbuf loaded by <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  The pixbuf returned will be reffed, so<br />
 the caller of this function must assume that ref.</p>
-<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See<br />
 the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.</p>
-<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s dots-per-inch value (DPI) to compute the
-&quot;natural size&quot; of the document in pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi]
-beforehand.
+<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s dots-per-inch value (DPI) to compute the<br />
+&quot;natural size&quot; of the document in pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi]<br />
+beforehand.<br />
 during rendering.</p>
 
 
@@ -3709,14 +3713,14 @@ during rendering.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Reads <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> and writes the data from it to <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.</p>
-<p>Before calling this function, you may need to call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_base_uri]
-or [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_base_gfile] to set the &quot;base file&quot; for resolving
-references to external resources.  SVG elements like
-<code>&lt;image&gt;</code> which reference external resources will be
+<p>Before calling this function, you may need to call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_base_uri]<br />
+or [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_base_gfile] to set the &quot;base file&quot; for resolving<br />
+references to external resources.  SVG elements like<br />
+<code>&lt;image&gt;</code> which reference external resources will be<br />
 resolved relative to the location you specify with those functions.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not <code>NULL</code>, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the
-operation was cancelled, the error <code>G_IO_ERROR_CANCELLED</code> will be
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not <code>NULL</code>, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the<br />
+operation was cancelled, the error <code>G_IO_ERROR_CANCELLED</code> will be<br />
 returned.</p>
 
 
@@ -3769,7 +3773,7 @@ returned.</p>
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if reading <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> succeeded, or <code>FALSE</code> otherwise
+        <div class='inline'><p><code>TRUE</code> if reading <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> succeeded, or <code>FALSE</code> otherwise<br />
 with <!-- raw HTML omitted -->error<!-- raw HTML omitted --> filled in</p>
 </div>
       
@@ -3791,47 +3795,47 @@ with <!-- raw HTML omitted -->error<!-- raw HTML omitted --> filled in</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Draws a loaded SVG handle to a Cairo context.  Please try to use
-[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_document] instead, which allows you to pick the size
+    <p>Draws a loaded SVG handle to a Cairo context.  Please try to use<br />
+[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_document] instead, which allows you to pick the size<br />
 at which the document will be rendered.</p>
 <p>Historically this function has picked a size by itself, based on the following rules:</p>
 <ul>
 <li>
-<p>If the SVG document has both <code>width</code> and <code>height</code>
-attributes with physical units (px, in, cm, mm, pt, pc) or font-based units (em,
-ex), the function computes the size directly based on the dots-per-inch (DPI) you
-have configured with [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi].  This is the same approach as
+<p>If the SVG document has both <code>width</code> and <code>height</code><br />
+attributes with physical units (px, in, cm, mm, pt, pc) or font-based units (em,<br />
+ex), the function computes the size directly based on the dots-per-inch (DPI) you<br />
+have configured with [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi].  This is the same approach as<br />
 [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.get_intrinsic_size_in_pixels].</p>
 </li>
 <li>
-<p>Otherwise, if there is a <code>viewBox</code> attribute and both
-<code>width</code> and <code>height</code> are set to
-<code>100%</code> (or if they don't exist at all and thus default to 100%),
-the function uses the width and height of the <code>viewBox</code> as a pixel size.  This
+<p>Otherwise, if there is a <code>viewBox</code> attribute and both<br />
+<code>width</code> and <code>height</code> are set to<br />
+<code>100%</code> (or if they don't exist at all and thus default to 100%),<br />
+the function uses the width and height of the <code>viewBox</code> as a pixel size.  This<br />
 produces a rendered document with the correct aspect ratio.</p>
 </li>
 <li>
-<p>Otherwise, this function computes the extents of every graphical object in the SVG
-document to find the total extents.  This is moderately expensive, but no more expensive
+<p>Otherwise, this function computes the extents of every graphical object in the SVG<br />
+document to find the total extents.  This is moderately expensive, but no more expensive<br />
 than rendering the whole document, for example.</p>
 </li>
 <li>
-<p>This function cannot deal with percentage-based units for <code>width</code>
-and <code>height</code> because there is no viewport against which they could
-be resolved; that is why it will compute the extents of objects in that case.  This
-is why we recommend that you use [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_document] instead, which takes
+<p>This function cannot deal with percentage-based units for <code>width</code><br />
+and <code>height</code> because there is no viewport against which they could<br />
+be resolved; that is why it will compute the extents of objects in that case.  This<br />
+is why we recommend that you use [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_document] instead, which takes<br />
 in a viewport and follows the sizing policy from the web platform.</p>
 </li>
 </ul>
-<p>Drawing will occur with respect to the <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->'s current transformation: for example, if
-the <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> has a rotated current transformation matrix, the whole SVG will be rotated in
+<p>Drawing will occur with respect to the <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->'s current transformation: for example, if<br />
+the <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> has a rotated current transformation matrix, the whole SVG will be rotated in<br />
 the rendered version.</p>
-<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s DPI to compute dimensions in
+<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s DPI to compute dimensions in<br />
 pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi] beforehand.</p>
-<p>Note that <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> must be a Cairo context that is not in an error state, that is,
-<code>cairo_status()</code> must return <code>CAIRO_STATUS_SUCCESS</code> for it.  Cairo can set a
-context to be in an error state in various situations, for example, if it was
-passed an invalid matrix or if it was created for an invalid surface.
+<p>Note that <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> must be a Cairo context that is not in an error state, that is,<br />
+<code>cairo_status()</code> must return <code>CAIRO_STATUS_SUCCESS</code> for it.  Cairo can set a<br />
+context to be in an error state in various situations, for example, if it was<br />
+passed an invalid matrix or if it was created for an invalid surface.<br />
 if a rendering error occurs.</p>
 
 
@@ -3890,55 +3894,55 @@ if a rendering error occurs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Renders a single SVG element in the same place as for a whole SVG document (a &quot;subset&quot;
-of the document).  Please try to use [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_layer] instead, which allows
+    <p>Renders a single SVG element in the same place as for a whole SVG document (a &quot;subset&quot;<br />
+of the document).  Please try to use [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_layer] instead, which allows<br />
 you to pick the size at which the document with the layer will be rendered.</p>
-<p>This is equivalent to [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_cairo], but it renders only a single
+<p>This is equivalent to [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_cairo], but it renders only a single<br />
 element and its children, as if they composed an individual layer in the SVG.</p>
-<p>Historically this function has picked a size for the whole document by itself, based
+<p>Historically this function has picked a size for the whole document by itself, based<br />
 on the following rules:</p>
 <ul>
 <li>
-<p>If the SVG document has both <code>width</code> and <code>height</code>
-attributes with physical units (px, in, cm, mm, pt, pc) or font-based units (em,
-ex), the function computes the size directly based on the dots-per-inch (DPI) you
-have configured with [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi].  This is the same approach as
+<p>If the SVG document has both <code>width</code> and <code>height</code><br />
+attributes with physical units (px, in, cm, mm, pt, pc) or font-based units (em,<br />
+ex), the function computes the size directly based on the dots-per-inch (DPI) you<br />
+have configured with [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi].  This is the same approach as<br />
 [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.get_intrinsic_size_in_pixels].</p>
 </li>
 <li>
-<p>Otherwise, if there is a <code>viewBox</code> attribute and both
-<code>width</code> and <code>height</code> are set to
-<code>100%</code> (or if they don't exist at all and thus default to 100%),
-the function uses the width and height of the <code>viewBox</code> as a pixel size.  This
+<p>Otherwise, if there is a <code>viewBox</code> attribute and both<br />
+<code>width</code> and <code>height</code> are set to<br />
+<code>100%</code> (or if they don't exist at all and thus default to 100%),<br />
+the function uses the width and height of the <code>viewBox</code> as a pixel size.  This<br />
 produces a rendered document with the correct aspect ratio.</p>
 </li>
 <li>
-<p>Otherwise, this function computes the extents of every graphical object in the SVG
-document to find the total extents.  This is moderately expensive, but no more expensive
+<p>Otherwise, this function computes the extents of every graphical object in the SVG<br />
+document to find the total extents.  This is moderately expensive, but no more expensive<br />
 than rendering the whole document, for example.</p>
 </li>
 <li>
-<p>This function cannot deal with percentage-based units for <code>width</code>
-and <code>height</code> because there is no viewport against which they could
-be resolved; that is why it will compute the extents of objects in that case.  This
-is why we recommend that you use [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_layer] instead, which takes
+<p>This function cannot deal with percentage-based units for <code>width</code><br />
+and <code>height</code> because there is no viewport against which they could<br />
+be resolved; that is why it will compute the extents of objects in that case.  This<br />
+is why we recommend that you use [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_layer] instead, which takes<br />
 in a viewport and follows the sizing policy from the web platform.</p>
 </li>
 </ul>
-<p>Drawing will occur with respect to the <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->'s current transformation: for example, if
-the <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> has a rotated current transformation matrix, the whole SVG will be rotated in
+<p>Drawing will occur with respect to the <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->'s current transformation: for example, if<br />
+the <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> has a rotated current transformation matrix, the whole SVG will be rotated in<br />
 the rendered version.</p>
-<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s DPI to compute dimensions in
+<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s DPI to compute dimensions in<br />
 pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi] beforehand.</p>
-<p>Note that <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> must be a Cairo context that is not in an error state, that is,
-<code>cairo_status()</code> must return <code>CAIRO_STATUS_SUCCESS</code> for it.  Cairo can set a
-context to be in an error state in various situations, for example, if it was
+<p>Note that <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> must be a Cairo context that is not in an error state, that is,<br />
+<code>cairo_status()</code> must return <code>CAIRO_STATUS_SUCCESS</code> for it.  Cairo can set a<br />
+context to be in an error state in various situations, for example, if it was<br />
 passed an invalid matrix or if it was created for an invalid surface.</p>
-<p>Element IDs should look like an URL fragment identifier; for example, pass
-<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
-has an <code>id=&quot;foo&quot;</code> attribute.
-hash character), for example, <code>#layer1</code>.  This notation corresponds to a
-URL's fragment ID.  Alternatively, pass <code>NULL</code> to render the whole SVG.
+<p>Element IDs should look like an URL fragment identifier; for example, pass<br />
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that<br />
+has an <code>id=&quot;foo&quot;</code> attribute.<br />
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a<br />
+URL's fragment ID.  Alternatively, pass <code>NULL</code> to render the whole SVG.<br />
 if a rendering error occurs.</p>
 
 
@@ -4013,12 +4017,12 @@ if a rendering error occurs.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Renders the whole SVG document fitted to a viewport.</p>
-<p>The <!-- raw HTML omitted -->viewport<!-- raw HTML omitted --> gives the position and size at which the whole SVG document will be
+<p>The <!-- raw HTML omitted -->viewport<!-- raw HTML omitted --> gives the position and size at which the whole SVG document will be<br />
 rendered.  The document is scaled proportionally to fit into this viewport.</p>
-<p>The <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> must be in a <code>CAIRO_STATUS_SUCCESS</code> state, or this function will not
-render anything, and instead will return an error.
+<p>The <!-- raw HTML omitted -->cr<!-- raw HTML omitted --> must be in a <code>CAIRO_STATUS_SUCCESS</code> state, or this function will not<br />
+render anything, and instead will return an error.<br />
 in the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> argument.</p>
-<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See<br />
 the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.</p>
 <p>Panics: this function will panic if the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> is not fully-loaded.</p>
 
@@ -4094,22 +4098,22 @@ the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot
 </h3><div class="docstring">
   <div class="discussion">
     <p>Renders a single SVG element to a given viewport.</p>
-<p>This function can be used to extract individual element subtrees and render them,
-scaled to a given <!-- raw HTML omitted -->element_viewport<!-- raw HTML omitted -->.  This is useful for applications which have
-reusable objects in an SVG and want to render them individually; for example, an
+<p>This function can be used to extract individual element subtrees and render them,<br />
+scaled to a given <!-- raw HTML omitted -->element_viewport<!-- raw HTML omitted -->.  This is useful for applications which have<br />
+reusable objects in an SVG and want to render them individually; for example, an<br />
 SVG full of icons that are meant to be be rendered independently of each other.</p>
-<p>Element IDs should look like an URL fragment identifier; for example, pass
-<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
+<p>Element IDs should look like an URL fragment identifier; for example, pass<br />
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that<br />
 has an <code>id=&quot;foo&quot;</code> attribute.</p>
-<p>You can pass <code>NULL</code> for the <!-- raw HTML omitted -->id<!-- raw HTML omitted --> if you want to render all
-the elements in the SVG, i.e. to render everything from the
+<p>You can pass <code>NULL</code> for the <!-- raw HTML omitted -->id<!-- raw HTML omitted --> if you want to render all<br />
+the elements in the SVG, i.e. to render everything from the<br />
 root element.</p>
-<p>The <code>element_viewport</code> gives the position and size at which the named element will
-be rendered.  FIXME: mention proportional scaling.
-hash character), for example, <code>#layer1</code>.  This notation corresponds to a
-URL's fragment ID.  Alternatively, pass <code>NULL</code> to render the whole SVG document tree.
+<p>The <code>element_viewport</code> gives the position and size at which the named element will<br />
+be rendered.  FIXME: mention proportional scaling.<br />
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a<br />
+URL's fragment ID.  Alternatively, pass <code>NULL</code> to render the whole SVG document tree.<br />
 in the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> argument.</p>
-<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See<br />
 the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.</p>
 <p>Panics: this function will panic if the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> is not fully-loaded.</p>
 
@@ -4200,25 +4204,25 @@ the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot
 </h3><div class="docstring">
   <div class="discussion">
     <p>Renders a single SVG element in the same place as for a whole SVG document.</p>
-<p>The <!-- raw HTML omitted -->viewport<!-- raw HTML omitted --> gives the position and size at which the whole SVG document would be
-rendered.  The document is scaled proportionally to fit into this viewport; hence the
+<p>The <!-- raw HTML omitted -->viewport<!-- raw HTML omitted --> gives the position and size at which the whole SVG document would be<br />
+rendered.  The document is scaled proportionally to fit into this viewport; hence the<br />
 individual layer may be smaller than this.</p>
-<p>This is equivalent to [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_document], but it renders only a
-single element and its children, as if they composed an individual layer in
-the SVG.  The element is rendered with the same transformation matrix as it
-has within the whole SVG document.  Applications can use this to re-render a
-single element and repaint it on top of a previously-rendered document, for
+<p>This is equivalent to [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_document], but it renders only a<br />
+single element and its children, as if they composed an individual layer in<br />
+the SVG.  The element is rendered with the same transformation matrix as it<br />
+has within the whole SVG document.  Applications can use this to re-render a<br />
+single element and repaint it on top of a previously-rendered document, for<br />
 example.</p>
-<p>Element IDs should look like an URL fragment identifier; for example, pass
-<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that
+<p>Element IDs should look like an URL fragment identifier; for example, pass<br />
+<code>#foo</code> (hash <code>foo</code>) to get the geometry of the element that<br />
 has an <code>id=&quot;foo&quot;</code> attribute.</p>
-<p>You can pass <code>NULL</code> for the <!-- raw HTML omitted -->id<!-- raw HTML omitted --> if you want to render all
-the elements in the SVG, i.e. to render everything from the
-root element.
-hash character), for example, <code>#layer1</code>.  This notation corresponds to a
-URL's fragment ID.  Alternatively, pass <code>NULL</code> to render the whole SVG document tree.
+<p>You can pass <code>NULL</code> for the <!-- raw HTML omitted -->id<!-- raw HTML omitted --> if you want to render all<br />
+the elements in the SVG, i.e. to render everything from the<br />
+root element.<br />
+hash character), for example, <code>#layer1</code>.  This notation corresponds to a<br />
+URL's fragment ID.  Alternatively, pass <code>NULL</code> to render the whole SVG document tree.<br />
 in the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> argument.</p>
-<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See<br />
 the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.</p>
 <p>Panics: this function will panic if the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> is not fully-loaded.</p>
 
@@ -4308,10 +4312,10 @@ the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the DPI at which the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> will be rendered. Common values are
+    <p>Sets the DPI at which the <!-- raw HTML omitted -->handle<!-- raw HTML omitted --> will be rendered. Common values are<br />
 75, 90, and 300 DPI.</p>
-<p>Passing a number &lt;= 0 to <!-- raw HTML omitted -->dpi<!-- raw HTML omitted --> will reset the DPI to whatever the default
-value happens to be, but since [id<!-- raw HTML omitted -->rsvg_set_default_dpi_x_y<!-- raw HTML omitted -->] is deprecated,
+<p>Passing a number &lt;= 0 to <!-- raw HTML omitted -->dpi<!-- raw HTML omitted --> will reset the DPI to whatever the default<br />
+value happens to be, but since [id<!-- raw HTML omitted -->rsvg_set_default_dpi_x_y<!-- raw HTML omitted -->] is deprecated,<br />
 please do not pass values &lt;= 0 to this function.</p>
 
 
@@ -4381,8 +4385,8 @@ please do not pass values &lt;= 0 to this function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the sizing function for the <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->, which can be used to override the
-size that librsvg computes for SVG images.  The <!-- raw HTML omitted -->size_func<!-- raw HTML omitted --> is called from the
+    <p>Sets the sizing function for the <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->, which can be used to override the<br />
+size that librsvg computes for SVG images.  The <!-- raw HTML omitted -->size_func<!-- raw HTML omitted --> is called from the<br />
 following functions:</p>
 <ul>
 <li>[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.get_dimensions]</li>
@@ -4391,8 +4395,8 @@ following functions:</p>
 <li>[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_cairo]</li>
 <li>[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.render_cairo_sub]</li>
 </ul>
-<p>Librsvg computes the size of the SVG being rendered, and passes it to the
-<!-- raw HTML omitted -->size_func<!-- raw HTML omitted -->, which may then modify these values to set the final size of the
+<p>Librsvg computes the size of the SVG being rendered, and passes it to the<br />
+<!-- raw HTML omitted -->size_func<!-- raw HTML omitted -->, which may then modify these values to set the final size of the<br />
 generated image.</p>
 
 
@@ -4442,7 +4446,7 @@ generated image.</p>
       
       
         &mdash;
-        <div class='inline'><p>Function to be called to destroy the data passed in <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->,
+        <div class='inline'><p>Function to be called to destroy the data passed in <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->,<br />
 or <code>NULL</code>.</p>
 </div>
       
@@ -4479,12 +4483,12 @@ or <code>NULL</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets a CSS stylesheet to use for an SVG document.</p>
-<p>The <!-- raw HTML omitted -->css_len<!-- raw HTML omitted --> argument is mandatory; this function will not compute the length
-of the <!-- raw HTML omitted -->css<!-- raw HTML omitted --> string.  This is because a provided stylesheet, which the calling
+<p>The <!-- raw HTML omitted -->css_len<!-- raw HTML omitted --> argument is mandatory; this function will not compute the length<br />
+of the <!-- raw HTML omitted -->css<!-- raw HTML omitted --> string.  This is because a provided stylesheet, which the calling<br />
 program could read from a file, can have nul characters in it.</p>
-<p>During the CSS cascade, the specified stylesheet will be used with a &quot;User&quot;
+<p>During the CSS cascade, the specified stylesheet will be used with a &quot;User&quot;<br />
 <a href="https://drafts.csswg.org/css-cascade-3/#cascading-origins">origin</a>.</p>
-<p>Note that <code>&lt;b&gt;import&lt;/b&gt;</code> rules will not be resolved, except for <code>data:</code> URLs.
+<p>Note that <code>&lt;b&gt;import&lt;/b&gt;</code> rules will not be resolved, except for <code>data:</code> URLs.<br />
 in the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> argument.</p>
 
 
@@ -4664,7 +4668,7 @@ in the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> argument.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Width, in pixels, of the rendered SVG after calling the size callback
+    <p>Width, in pixels, of the rendered SVG after calling the size callback<br />
 as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
 
 
@@ -4704,7 +4708,7 @@ as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Ha
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Width, in pixels, of the rendered SVG after calling the size callback
+    <p>Width, in pixels, of the rendered SVG after calling the size callback<br />
 as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_size_callback].</p>
 
 
@@ -4772,13 +4776,13 @@ as specified by [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Ha
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads the next <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes of the image.  You can call this function multiple
-times until the whole document is consumed; then you must call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.close]
+    <p>Loads the next <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes of the image.  You can call this function multiple<br />
+times until the whole document is consumed; then you must call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.close]<br />
 to actually parse the document.</p>
-<p>Before calling this function for the first time, you may need to call
-[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_base_uri] or [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_base_gfile] to set the &quot;base
-file&quot; for resolving references to external resources.  SVG elements like
-<code>&lt;image&gt;</code> which reference external resources will be
+<p>Before calling this function for the first time, you may need to call<br />
+[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_base_uri] or [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_base_gfile] to set the &quot;base<br />
+file&quot; for resolving references to external resources.  SVG elements like<br />
+<code>&lt;image&gt;</code> which reference external resources will be<br />
 resolved relative to the location you specify with those functions.</p>
 
 
@@ -4848,7 +4852,7 @@ resolved relative to the location you specify with those functions.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

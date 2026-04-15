@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::IOModule";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -140,6 +142,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -220,6 +223,7 @@
 
       
     </ul>
+    
   
 
 
@@ -237,8 +241,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new GIOModule that will load the specific
-shared library when in use.
+    <p>Creates a new GIOModule that will load the specific<br />
+shared library when in use.<br />
 or nil on error.</p>
 
 
@@ -288,29 +292,29 @@ or nil on error.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Optional API for GIO modules to implement.</p>
-<p>Should return a list of all the extension points that may be
+<p>Should return a list of all the extension points that may be<br />
 implemented in this module.</p>
-<p>This method will not be called in normal use, however it may be
-called when probing existing modules and recording which extension
-points that this model is used for. This means we won't have to
+<p>This method will not be called in normal use, however it may be<br />
+called when probing existing modules and recording which extension<br />
+points that this model is used for. This means we won't have to<br />
 load and initialize this module unless its needed.</p>
-<p>If this function is not implemented by the module the module will
-always be loaded, initialized and then unloaded on application
+<p>If this function is not implemented by the module the module will<br />
+always be loaded, initialized and then unloaded on application<br />
 startup so that it can register its extension points during init.</p>
-<p>Note that a module need not actually implement all the extension
-points that g_io_module_query() returns, since the exact list of
-extension may depend on runtime issues. However all extension
-points actually implemented must be returned by g_io_module_query()
+<p>Note that a module need not actually implement all the extension<br />
+points that g_io_module_query() returns, since the exact list of<br />
+extension may depend on runtime issues. However all extension<br />
+points actually implemented must be returned by g_io_module_query()<br />
 (if defined).</p>
-<p>When installing a module that implements g_io_module_query() you must
-run gio-querymodules in order to build the cache files required for
+<p>When installing a module that implements g_io_module_query() you must<br />
+run gio-querymodules in order to build the cache files required for<br />
 lazy loading.</p>
-<p>Since 2.56, this function should be named <code>g_io_&lt;modulename&gt;_query</code>, where
-<code>modulename</code> is the plugin’s filename with the <code>lib</code> or <code>libgio</code> prefix and
-everything after the first dot removed, and with <code>-</code> replaced with <code>_</code>
-throughout. For example, <code>libgiognutls-helper.so</code> becomes <code>gnutls_helper</code>.
-Using the new symbol names avoids name clashes when building modules
-statically. The old symbol names continue to be supported, but cannot be used
+<p>Since 2.56, this function should be named <code>g_io_&lt;modulename&gt;_query</code>, where<br />
+<code>modulename</code> is the plugin’s filename with the <code>lib</code> or <code>libgio</code> prefix and<br />
+everything after the first dot removed, and with <code>-</code> replaced with <code>_</code><br />
+throughout. For example, <code>libgiognutls-helper.so</code> becomes <code>gnutls_helper</code>.<br />
+Using the new symbol names avoids name clashes when building modules<br />
+statically. The old symbol names continue to be supported, but cannot be used<br />
 for static builds.</p>
 
 
@@ -329,8 +333,8 @@ for static builds.</p>
       
       
         &mdash;
-        <div class='inline'><p>A nil-terminated array of strings,
-listing the supported extension points of the module. The array
+        <div class='inline'><p>A nil-terminated array of strings,<br />
+listing the supported extension points of the module. The array<br />
 must be suitable for freeing with g_strfreev().</p>
 </div>
       
@@ -359,15 +363,15 @@ must be suitable for freeing with g_strfreev().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Required API for GIO modules to implement.</p>
-<p>This function is run after the module has been loaded into GIO,
-to initialize the module. Typically, this function will call
+<p>This function is run after the module has been loaded into GIO,<br />
+to initialize the module. Typically, this function will call<br />
 g_io_extension_point_implement().</p>
-<p>Since 2.56, this function should be named <code>g_io_&lt;modulename&gt;_load</code>, where
-<code>modulename</code> is the plugin’s filename with the <code>lib</code> or <code>libgio</code> prefix and
-everything after the first dot removed, and with <code>-</code> replaced with <code>_</code>
-throughout. For example, <code>libgiognutls-helper.so</code> becomes <code>gnutls_helper</code>.
-Using the new symbol names avoids name clashes when building modules
-statically. The old symbol names continue to be supported, but cannot be used
+<p>Since 2.56, this function should be named <code>g_io_&lt;modulename&gt;_load</code>, where<br />
+<code>modulename</code> is the plugin’s filename with the <code>lib</code> or <code>libgio</code> prefix and<br />
+everything after the first dot removed, and with <code>-</code> replaced with <code>_</code><br />
+throughout. For example, <code>libgiognutls-helper.so</code> becomes <code>gnutls_helper</code>.<br />
+Using the new symbol names avoids name clashes when building modules<br />
+statically. The old symbol names continue to be supported, but cannot be used<br />
 for static builds.</p>
 
 
@@ -404,14 +408,14 @@ for static builds.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Required API for GIO modules to implement.</p>
-<p>This function is run when the module is being unloaded from GIO,
+<p>This function is run when the module is being unloaded from GIO,<br />
 to finalize the module.</p>
-<p>Since 2.56, this function should be named <code>g_io_&lt;modulename&gt;_unload</code>, where
-<code>modulename</code> is the plugin’s filename with the <code>lib</code> or <code>libgio</code> prefix and
-everything after the first dot removed, and with <code>-</code> replaced with <code>_</code>
-throughout. For example, <code>libgiognutls-helper.so</code> becomes <code>gnutls_helper</code>.
-Using the new symbol names avoids name clashes when building modules
-statically. The old symbol names continue to be supported, but cannot be used
+<p>Since 2.56, this function should be named <code>g_io_&lt;modulename&gt;_unload</code>, where<br />
+<code>modulename</code> is the plugin’s filename with the <code>lib</code> or <code>libgio</code> prefix and<br />
+everything after the first dot removed, and with <code>-</code> replaced with <code>_</code><br />
+throughout. For example, <code>libgiognutls-helper.so</code> becomes <code>gnutls_helper</code>.<br />
+Using the new symbol names avoids name clashes when building modules<br />
+statically. The old symbol names continue to be supported, but cannot be used<br />
 for static builds.</p>
 
 
@@ -443,7 +447,7 @@ for static builds.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

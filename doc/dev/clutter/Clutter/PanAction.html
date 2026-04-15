@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::PanAction";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -102,14 +103,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::PanActionClass structure contains
+    <p>The Clutter::PanActionClass structure contains<br />
 only private data.</p>
 
 
@@ -481,9 +483,11 @@ only private data.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -495,6 +499,8 @@ only private data.</p>
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="GestureAction.html" title="Clutter::GestureAction (class)">GestureAction</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="GestureAction.html#cancel-instance_method" title="Clutter::GestureAction#cancel (method)">#cancel</a></span>, <span class='object_link'><a href="GestureAction.html#get_device-instance_method" title="Clutter::GestureAction#get_device (method)">#get_device</a></span>, <span class='object_link'><a href="GestureAction.html#get_last_event-instance_method" title="Clutter::GestureAction#get_last_event (method)">#get_last_event</a></span>, <span class='object_link'><a href="GestureAction.html#get_press_coords-instance_method" title="Clutter::GestureAction#get_press_coords (method)">#get_press_coords</a></span>, <span class='object_link'><a href="GestureAction.html#get_release_coords-instance_method" title="Clutter::GestureAction#get_release_coords (method)">#get_release_coords</a></span>, <span class='object_link'><a href="GestureAction.html#get_sequence-instance_method" title="Clutter::GestureAction#get_sequence (method)">#get_sequence</a></span>, <span class='object_link'><a href="GestureAction.html#get_threshold_trigger_distance-instance_method" title="Clutter::GestureAction#get_threshold_trigger_distance (method)">#get_threshold_trigger_distance</a></span>, <span class='object_link'><a href="GestureAction.html#get_velocity-instance_method" title="Clutter::GestureAction#get_velocity (method)">#get_velocity</a></span>, <span class='object_link'><a href="GestureAction.html#n_current_points-instance_method" title="Clutter::GestureAction#n_current_points (method)">#n_current_points</a></span>, <span class='object_link'><a href="GestureAction.html#n_touch_points-instance_method" title="Clutter::GestureAction#n_touch_points (method)">#n_touch_points</a></span>, <span class='object_link'><a href="GestureAction.html#n_touch_points=-instance_method" title="Clutter::GestureAction#n_touch_points= (method)">#n_touch_points=</a></span>, <span class='object_link'><a href="GestureAction.html#set_threshold_trigger_distance-instance_method" title="Clutter::GestureAction#set_threshold_trigger_distance (method)">#set_threshold_trigger_distance</a></span>, <span class='object_link'><a href="GestureAction.html#threshold_trigger_distance_x-instance_method" title="Clutter::GestureAction#threshold_trigger_distance_x (method)">#threshold_trigger_distance_x</a></span>, <span class='object_link'><a href="GestureAction.html#threshold_trigger_distance_x=-instance_method" title="Clutter::GestureAction#threshold_trigger_distance_x= (method)">#threshold_trigger_distance_x=</a></span>, <span class='object_link'><a href="GestureAction.html#threshold_trigger_distance_y-instance_method" title="Clutter::GestureAction#threshold_trigger_distance_y (method)">#threshold_trigger_distance_y</a></span>, <span class='object_link'><a href="GestureAction.html#threshold_trigger_distance_y=-instance_method" title="Clutter::GestureAction#threshold_trigger_distance_y= (method)">#threshold_trigger_distance_y=</a></span>, <span class='object_link'><a href="GestureAction.html#threshold_trigger_edge-instance_method" title="Clutter::GestureAction#threshold_trigger_edge (method)">#threshold_trigger_edge</a></span>, <span class='object_link'><a href="GestureAction.html#threshold_trigger_edge=-instance_method" title="Clutter::GestureAction#threshold_trigger_edge= (method)">#threshold_trigger_edge=</a></span>, <span class='object_link'><a href="GestureAction.html#threshold_trigger_egde-instance_method" title="Clutter::GestureAction#threshold_trigger_egde (method)">#threshold_trigger_egde</a></span></p>
 
+  
+  
   
   
   
@@ -556,8 +562,8 @@ only private data.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The initial acceleration factor</p>
-<p>The kinetic momentum measured at the time of releasing the pointer will
-be multiplied by the factor specified by this property before being used
+<p>The kinetic momentum measured at the time of releasing the pointer will<br />
+be multiplied by the factor specified by this property before being used<br />
 to generate interpolated ::pan events.</p>
 
 
@@ -598,8 +604,8 @@ to generate interpolated ::pan events.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The initial acceleration factor</p>
-<p>The kinetic momentum measured at the time of releasing the pointer will
-be multiplied by the factor specified by this property before being used
+<p>The kinetic momentum measured at the time of releasing the pointer will<br />
+be multiplied by the factor specified by this property before being used<br />
 to generate interpolated ::pan events.</p>
 
 
@@ -668,7 +674,7 @@ to generate interpolated ::pan events.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The rate at which the interpolated panning will decelerate in</p>
-<p>Clutter::PanAction will emit interpolated ::pan events with decreasing
+<p>Clutter::PanAction will emit interpolated ::pan events with decreasing<br />
 scroll deltas, using the rate specified by this property.</p>
 
 
@@ -709,7 +715,7 @@ scroll deltas, using the rate specified by this property.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The rate at which the interpolated panning will decelerate in</p>
-<p>Clutter::PanAction will emit interpolated ::pan events with decreasing
+<p>Clutter::PanAction will emit interpolated ::pan events with decreasing<br />
 scroll deltas, using the rate specified by this property.</p>
 
 
@@ -777,8 +783,8 @@ scroll deltas, using the rate specified by this property.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the delta, in stage space, dependent on the current state
-of the Clutter::PanAction, and respecting the constraint specified by the
+    <p>Retrieves the delta, in stage space, dependent on the current state<br />
+of the Clutter::PanAction, and respecting the constraint specified by the<br />
 Clutter::PanAction:pan-axis property.</p>
 
 
@@ -798,7 +804,7 @@ Clutter::PanAction:pan-axis property.</p>
       
       
         &mdash;
-        <div class='inline'><p>the touch point index, with 0 being the first touch
+        <div class='inline'><p>the touch point index, with 0 being the first touch<br />
 point received by the action</p>
 </div>
       
@@ -868,7 +874,7 @@ point received by the action</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the coordinates, in stage space, of the latest interpolated
+    <p>Retrieves the coordinates, in stage space, of the latest interpolated<br />
 event, analogous to clutter_gesture_action_get_motion_coords().</p>
 
 
@@ -888,7 +894,7 @@ event, analogous to clutter_gesture_action_get_motion_coords().</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the latest
+        <div class='inline'><p>return location for the latest<br />
 interpolated event's X coordinate</p>
 </div>
       
@@ -904,7 +910,7 @@ interpolated event's X coordinate</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the latest
+        <div class='inline'><p>return location for the latest<br />
 interpolated event's Y coordinate</p>
 </div>
       
@@ -940,7 +946,7 @@ interpolated event's Y coordinate</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the delta, in stage space, since the latest interpolated
+    <p>Retrieves the delta, in stage space, since the latest interpolated<br />
 event, analogous to clutter_gesture_action_get_motion_delta().</p>
 
 
@@ -960,7 +966,7 @@ event, analogous to clutter_gesture_action_get_motion_delta().</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the X delta since
+        <div class='inline'><p>return location for the X delta since<br />
 the latest interpolated event</p>
 </div>
       
@@ -976,7 +982,7 @@ the latest interpolated event</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the Y delta since
+        <div class='inline'><p>return location for the Y delta since<br />
 the latest interpolated event</p>
 </div>
       
@@ -1016,13 +1022,13 @@ the latest interpolated event</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the coordinates, in stage space, dependent on the current state
-of the Clutter::PanAction. If it is inactive, both fields will be
-set to 0. If it is panning by user action, the values will be equivalent
-to those returned by clutter_gesture_action_get_motion_coords().
-If it is interpolating with some form of kinetic scrolling, the values
-will be equivalent to those returned by
-clutter_pan_action_get_interpolated_coords(). This is a convenience
+    <p>Retrieves the coordinates, in stage space, dependent on the current state<br />
+of the Clutter::PanAction. If it is inactive, both fields will be<br />
+set to 0. If it is panning by user action, the values will be equivalent<br />
+to those returned by clutter_gesture_action_get_motion_coords().<br />
+If it is interpolating with some form of kinetic scrolling, the values<br />
+will be equivalent to those returned by<br />
+clutter_pan_action_get_interpolated_coords(). This is a convenience<br />
 method designed to be used in replacement &quot;pan&quot; signal handlers.</p>
 
 
@@ -1042,7 +1048,7 @@ method designed to be used in replacement &quot;pan&quot; signal handlers.</p>
       
       
         &mdash;
-        <div class='inline'><p>the touch point index, with 0 being the first touch
+        <div class='inline'><p>the touch point index, with 0 being the first touch<br />
 point received by the action</p>
 </div>
       
@@ -1108,13 +1114,13 @@ point received by the action</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the delta, in stage space, dependent on the current state
-of the Clutter::PanAction. If it is inactive, both fields will be
-set to 0. If it is panning by user action, the values will be equivalent
-to those returned by clutter_gesture_action_get_motion_delta().
-If it is interpolating with some form of kinetic scrolling, the values
-will be equivalent to those returned by
-clutter_pan_action_get_interpolated_delta(). This is a convenience
+    <p>Retrieves the delta, in stage space, dependent on the current state<br />
+of the Clutter::PanAction. If it is inactive, both fields will be<br />
+set to 0. If it is panning by user action, the values will be equivalent<br />
+to those returned by clutter_gesture_action_get_motion_delta().<br />
+If it is interpolating with some form of kinetic scrolling, the values<br />
+will be equivalent to those returned by<br />
+clutter_pan_action_get_interpolated_delta(). This is a convenience<br />
 method designed to be used in replacement &quot;pan&quot; signal handlers.</p>
 
 
@@ -1134,7 +1140,7 @@ method designed to be used in replacement &quot;pan&quot; signal handlers.</p>
       
       
         &mdash;
-        <div class='inline'><p>the touch point index, with 0 being the first touch
+        <div class='inline'><p>the touch point index, with 0 being the first touch<br />
 point received by the action</p>
 </div>
       
@@ -1200,8 +1206,8 @@ point received by the action</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if the action should emit ::pan events even after releasing
-the pointer during a panning gesture, to emulate some kind of
+    <p>Checks if the action should emit ::pan events even after releasing<br />
+the pointer during a panning gesture, to emulate some kind of<br />
 kinetic inertia.</p>
 
 
@@ -1449,7 +1455,7 @@ kinetic inertia.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

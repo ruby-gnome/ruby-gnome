@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::ComboBox";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -861,9 +863,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -939,9 +943,9 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>The item which is currently active.</p>
-<p>If the model is a non-flat treemodel, and the active item is not an
-immediate child of the root of the tree, this property has the value
-<code>gtk_tree_path_get_indices (path)[0]</code>, where <code>path</code> is the
+<p>If the model is a non-flat treemodel, and the active item is not an<br />
+immediate child of the root of the tree, this property has the value<br />
+<code>gtk_tree_path_get_indices (path)[0]</code>, where <code>path</code> is the<br />
 [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreePath] of the active item.</p>
 
 
@@ -982,9 +986,9 @@ immediate child of the root of the tree, this property has the value
 </h3><div class="docstring">
   <div class="discussion">
     <p>The item which is currently active.</p>
-<p>If the model is a non-flat treemodel, and the active item is not an
-immediate child of the root of the tree, this property has the value
-<code>gtk_tree_path_get_indices (path)[0]</code>, where <code>path</code> is the
+<p>If the model is a non-flat treemodel, and the active item is not an<br />
+immediate child of the root of the tree, this property has the value<br />
+<code>gtk_tree_path_get_indices (path)[0]</code>, where <code>path</code> is the<br />
 [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreePath] of the active item.</p>
 
 
@@ -1213,7 +1217,7 @@ immediate child of the root of the tree, this property has the value
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the dropdown button is sensitive when
+    <p>Whether the dropdown button is sensitive when<br />
 the model is empty.</p>
 
 
@@ -1253,7 +1257,7 @@ the model is empty.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the dropdown button is sensitive when
+    <p>Whether the dropdown button is sensitive when<br />
 the model is empty.</p>
 
 
@@ -1428,7 +1432,7 @@ the model is empty.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The model column to associate with strings from the entry.</p>
-<p>This is property only relevant if the combo was created with
+<p>This is property only relevant if the combo was created with<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBox:has-entry] is true.</p>
 
 
@@ -1469,7 +1473,7 @@ the model is empty.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The model column to associate with strings from the entry.</p>
-<p>This is property only relevant if the combo was created with
+<p>This is property only relevant if the combo was created with<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ComboBox:has-entry] is true.</p>
 
 
@@ -1847,7 +1851,7 @@ the model is empty.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The model column that provides string IDs for the values
+    <p>The model column that provides string IDs for the values<br />
 in the model, if != -1.</p>
 
 
@@ -1887,7 +1891,7 @@ in the model, if != -1.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The model column that provides string IDs for the values
+    <p>The model column that provides string IDs for the values<br />
 in the model, if != -1.</p>
 
 
@@ -2062,7 +2066,7 @@ in the model, if != -1.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Hides the menu or dropdown list of <!-- raw HTML omitted -->combo_box<!-- raw HTML omitted -->.</p>
-<p>This function is mostly intended for use by accessibility technologies;
+<p>This function is mostly intended for use by accessibility technologies;<br />
 applications should have little use for it.</p>
 
 
@@ -2099,7 +2103,7 @@ applications should have little use for it.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Pops up the menu or dropdown list of <!-- raw HTML omitted -->combo_box<!-- raw HTML omitted -->.</p>
-<p>This function is mostly intended for use by accessibility technologies;
+<p>This function is mostly intended for use by accessibility technologies;<br />
 applications should have little use for it.</p>
 <p>Before calling this, <!-- raw HTML omitted -->combo_box<!-- raw HTML omitted --> must be mapped, or nothing will happen.</p>
 
@@ -2175,7 +2179,7 @@ applications should have little use for it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the popup's width should be a fixed width matching the
+    <p>Whether the popup's width should be a fixed width matching the<br />
 allocated width of the combo box.</p>
 
 
@@ -2243,7 +2247,7 @@ allocated width of the combo box.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the popup's width should be a fixed width matching the
+    <p>Whether the popup's width should be a fixed width matching the<br />
 allocated width of the combo box.</p>
 
 
@@ -2284,9 +2288,9 @@ allocated width of the combo box.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Pops up the menu of <!-- raw HTML omitted -->combo_box<!-- raw HTML omitted -->.</p>
-<p>Note that currently this does not do anything with the device, as it was
-previously only used for list-mode combo boxes, and those were removed
-in GTK 4. However, it is retained in case similar functionality is added
+<p>Note that currently this does not do anything with the device, as it was<br />
+previously only used for list-mode combo boxes, and those were removed<br />
+in GTK 4. However, it is retained in case similar functionality is added<br />
 back later.</p>
 
 
@@ -2342,7 +2346,7 @@ back later.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the combo boxes dropdown is popped up.</p>
-<p>Note that this property is mainly useful, because
+<p>Note that this property is mainly useful, because<br />
 it allows you to connect to notify::popup-shown.</p>
 
 
@@ -2411,7 +2415,7 @@ it allows you to connect to notify::popup-shown.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the combo boxes dropdown is popped up.</p>
-<p>Note that this property is mainly useful, because
+<p>Note that this property is mainly useful, because<br />
 it allows you to connect to notify::popup-shown.</p>
 
 
@@ -2490,9 +2494,9 @@ it allows you to connect to notify::popup-shown.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the row separator function, which is used to determine
+    <p>Sets the row separator function, which is used to determine<br />
 whether a row should be drawn as a separator.</p>
-<p>If the row separator function is nil, no separators are drawn.
+<p>If the row separator function is nil, no separators are drawn.<br />
 This is the default value.</p>
 
 
@@ -2573,7 +2577,7 @@ This is the default value.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

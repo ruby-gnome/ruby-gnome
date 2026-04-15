@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::BufferFlags";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -95,7 +97,7 @@
         <dt id="LIVE-constant" class="">LIVE =
           <div class="docstring">
   <div class="discussion">
-    <p>the buffer is live data and should be discarded in
+    <p>the buffer is live data and should be discarded in<br />
 the PAUSED state.</p>
 
 
@@ -111,9 +113,9 @@ the PAUSED state.</p>
         <dt id="DECODE_ONLY-constant" class="">DECODE_ONLY =
           <div class="docstring">
   <div class="discussion">
-    <p>the buffer contains data that should be dropped
-because it will be clipped against the segment
-boundaries or because it does not contain data
+    <p>the buffer contains data that should be dropped<br />
+because it will be clipped against the segment<br />
+boundaries or because it does not contain data<br />
 that should be shown to the user.</p>
 
 
@@ -129,8 +131,8 @@ that should be shown to the user.</p>
         <dt id="DISCONT-constant" class="">DISCONT =
           <div class="docstring">
   <div class="discussion">
-    <p>the buffer marks a data discontinuity in the stream.
-This typically occurs after a seek or a dropped buffer
+    <p>the buffer marks a data discontinuity in the stream.<br />
+This typically occurs after a seek or a dropped buffer<br />
 from a live or network source.</p>
 
 
@@ -146,7 +148,7 @@ from a live or network source.</p>
         <dt id="RESYNC-constant" class="">RESYNC =
           <div class="docstring">
   <div class="discussion">
-    <p>the buffer timestamps might have a discontinuity
+    <p>the buffer timestamps might have a discontinuity<br />
 and this buffer is a good point to resynchronize.</p>
 
 
@@ -177,10 +179,10 @@ and this buffer is a good point to resynchronize.</p>
         <dt id="MARKER-constant" class="">MARKER =
           <div class="docstring">
   <div class="discussion">
-    <p>the buffer contains a media specific marker. for
-video this is the end of a frame boundary, for audio
-this is the start of a talkspurt. for RTP
-packets this matches the marker flag in the
+    <p>the buffer contains a media specific marker. for<br />
+video this is the end of a frame boundary, for audio<br />
+this is the start of a talkspurt. for RTP<br />
+packets this matches the marker flag in the<br />
 RTP packet header.</p>
 
 
@@ -196,7 +198,7 @@ RTP packet header.</p>
         <dt id="HEADER-constant" class="">HEADER =
           <div class="docstring">
   <div class="discussion">
-    <p>the buffer contains header information that is
+    <p>the buffer contains header information that is<br />
 needed to decode the following data.</p>
 
 
@@ -212,9 +214,9 @@ needed to decode the following data.</p>
         <dt id="GAP-constant" class="">GAP =
           <div class="docstring">
   <div class="discussion">
-    <p>the buffer has been created to fill a gap in the
-stream and contains media neutral data (elements can
-switch to optimized code path that ignores the buffer
+    <p>the buffer has been created to fill a gap in the<br />
+stream and contains media neutral data (elements can<br />
+switch to optimized code path that ignores the buffer<br />
 content).</p>
 
 
@@ -230,7 +232,7 @@ content).</p>
         <dt id="DROPPABLE-constant" class="">DROPPABLE =
           <div class="docstring">
   <div class="discussion">
-    <p>the buffer can be dropped without breaking the
+    <p>the buffer can be dropped without breaking the<br />
 stream, for example to reduce bandwidth.</p>
 
 
@@ -261,7 +263,7 @@ stream, for example to reduce bandwidth.</p>
         <dt id="TAG_MEMORY-constant" class="">TAG_MEMORY =
           <div class="docstring">
   <div class="discussion">
-    <p>this flag is set when memory of the buffer
+    <p>this flag is set when memory of the buffer<br />
 is added/removed</p>
 
 
@@ -277,7 +279,7 @@ is added/removed</p>
         <dt id="SYNC_AFTER-constant" class="">SYNC_AFTER =
           <div class="docstring">
   <div class="discussion">
-    <p>Elements which write to disk or permanent storage should ensure the data
+    <p>Elements which write to disk or permanent storage should ensure the data<br />
 is synced after writing the contents of this buffer.</p>
 
 
@@ -294,9 +296,9 @@ is synced after writing the contents of this buffer.</p>
           <div class="docstring">
   <div class="discussion">
     <p>This buffer is important and should not be dropped.</p>
-<p>This can be used to mark important buffers, e.g. to flag RTP packets
-carrying keyframes or codec setup data for RTP Forward Error Correction
-purposes, or to prevent still video frames from being dropped by elements
+<p>This can be used to mark important buffers, e.g. to flag RTP packets<br />
+carrying keyframes or codec setup data for RTP Forward Error Correction<br />
+purposes, or to prevent still video frames from being dropped by elements<br />
 due to QoS.</p>
 
 
@@ -312,7 +314,7 @@ due to QoS.</p>
         <dt id="LAST-constant" class="">LAST =
           <div class="docstring">
   <div class="discussion">
-    <p>additional media specific flags can be added starting from
+    <p>additional media specific flags can be added starting from<br />
 this flag.</p>
 
 
@@ -341,7 +343,7 @@ this flag.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

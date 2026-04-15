@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "PangoFT2";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/pango/ft2-loader.rb<span class="defines">,<br />
+    <dd>lib/pango/ft2-loader.rb<span class="defines">,<br>
   lib/pango.rb</span>
+
 </dd>
   </dl>
   
@@ -88,16 +90,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2021  Ruby-GNOME Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -408,6 +410,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 
       
     </ul>
+    
   
 
 
@@ -501,12 +504,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the native FreeType2 <code>FT_Face</code> structure
+    <p>Returns the native FreeType2 <code>FT_Face</code> structure<br />
 used for this <code>PangoFont</code>.</p>
-<p>This may be useful if you want to use FreeType2
+<p>This may be useful if you want to use FreeType2<br />
 functions directly.</p>
-<p>Use [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.Font.lock_face] instead; when you are
-done with a face from [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.Font.lock_face], you
+<p>Use [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.Font.lock_face] instead; when you are<br />
+done with a face from [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.Font.lock_face], you<br />
 must call [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.Font.unlock_face].</p>
 
 
@@ -544,7 +547,7 @@ must call [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.Font.
       
       
         &mdash;
-        <div class='inline'><p>a pointer to a <code>FT_Face</code> structure,
+        <div class='inline'><p>a pointer to a <code>FT_Face</code> structure,<br />
 with the size set correctly</p>
 </div>
       
@@ -634,7 +637,7 @@ with the size set correctly</p>
       
       
         &mdash;
-        <div class='inline'><p>The amount of kerning (in Pango units) to
+        <div class='inline'><p>The amount of kerning (in Pango units) to<br />
 apply for the given combination of glyphs.</p>
 </div>
       
@@ -656,8 +659,8 @@ apply for the given combination of glyphs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a <code>PangoContext</code> for the default PangoFT2 fontmap
-(see pango_ft2_font_map_for_display()) and sets the resolution
+    <p>Retrieves a <code>PangoContext</code> for the default PangoFT2 fontmap<br />
+(see pango_ft2_font_map_for_display()) and sets the resolution<br />
 for the default fontmap to <!-- raw HTML omitted -->dpi_x<!-- raw HTML omitted --> by <!-- raw HTML omitted -->dpi_y<!-- raw HTML omitted -->.</p>
 
 
@@ -731,11 +734,11 @@ for the default fontmap to <!-- raw HTML omitted -->dpi_x<!-- raw HTML omitted -
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return the index of a glyph suitable for drawing unknown
-characters with <!-- raw HTML omitted -->font<!-- raw HTML omitted -->, or %PANGO_GLYPH_EMPTY if no suitable
+    <p>Return the index of a glyph suitable for drawing unknown<br />
+characters with <!-- raw HTML omitted -->font<!-- raw HTML omitted -->, or %PANGO_GLYPH_EMPTY if no suitable<br />
 glyph found.</p>
-<p>If you want to draw an unknown-box for a character that
-is not covered by the font, use PANGO_GET_UNKNOWN_GLYPH()
+<p>If you want to draw an unknown-box for a character that<br />
+is not covered by the font, use PANGO_GET_UNKNOWN_GLYPH()<br />
 instead.</p>
 
 
@@ -1106,11 +1109,11 @@ instead.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Render a <code>PangoLayoutLine</code> onto a FreeType2 bitmap, with he
-location specified in fixed-point Pango units rather than
+    <p>Render a <code>PangoLayoutLine</code> onto a FreeType2 bitmap, with he<br />
+location specified in fixed-point Pango units rather than<br />
 pixels.</p>
-<p>(Using this will avoid extra inaccuracies from rounding
-to integer pixels multiple times, even if the final glyph
+<p>(Using this will avoid extra inaccuracies from rounding<br />
+to integer pixels multiple times, even if the final glyph<br />
 positions are integers.)</p>
 
 
@@ -1210,11 +1213,11 @@ positions are integers.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Render a <code>PangoLayout</code> onto a FreeType2 bitmap, with he
-location specified in fixed-point Pango units rather than
+    <p>Render a <code>PangoLayout</code> onto a FreeType2 bitmap, with he<br />
+location specified in fixed-point Pango units rather than<br />
 pixels.</p>
-<p>(Using this will avoid extra inaccuracies from rounding
-to integer pixels multiple times, even if the final glyph
+<p>(Using this will avoid extra inaccuracies from rounding<br />
+to integer pixels multiple times, even if the final glyph<br />
 positions are integers.)</p>
 
 
@@ -1314,12 +1317,12 @@ positions are integers.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Renders a <code>PangoGlyphString</code> onto a FreeType2 bitmap, possibly
-transforming the layed-out coordinates through a transformation
+    <p>Renders a <code>PangoGlyphString</code> onto a FreeType2 bitmap, possibly<br />
+transforming the layed-out coordinates through a transformation<br />
 matrix.</p>
-<p>Note that the transformation matrix for <!-- raw HTML omitted -->font<!-- raw HTML omitted --> is not
-changed, so to produce correct rendering results, the <!-- raw HTML omitted -->font<!-- raw HTML omitted -->
-must have been loaded using a <code>PangoContext</code> with an identical
+<p>Note that the transformation matrix for <!-- raw HTML omitted -->font<!-- raw HTML omitted --> is not<br />
+changed, so to produce correct rendering results, the <!-- raw HTML omitted -->font<!-- raw HTML omitted --><br />
+must have been loaded using a <code>PangoContext</code> with an identical<br />
 transformation matrix to that passed in to this function.</p>
 
 
@@ -1399,7 +1402,7 @@ transformation matrix to that passed in to this function.</p>
       
       
         &mdash;
-        <div class='inline'><p>the x position of the start of the string (in Pango
+        <div class='inline'><p>the x position of the start of the string (in Pango<br />
 units in user space coordinates)</p>
 </div>
       
@@ -1415,7 +1418,7 @@ units in user space coordinates)</p>
       
       
         &mdash;
-        <div class='inline'><p>the y position of the baseline (in Pango units
+        <div class='inline'><p>the y position of the baseline (in Pango units<br />
 in user space coordinates)</p>
 </div>
       
@@ -1451,7 +1454,7 @@ in user space coordinates)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Free the global fontmap. (See pango_ft2_font_map_for_display())
+    <p>Free the global fontmap. (See pango_ft2_font_map_for_display())<br />
 Use of the global PangoFT2 fontmap is deprecated.</p>
 
 
@@ -1483,7 +1486,7 @@ Use of the global PangoFT2 fontmap is deprecated.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

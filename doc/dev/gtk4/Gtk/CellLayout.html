@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::CellLayout";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/cell-layout.rb</dd>
+    <dd>lib/gtk4/cell-layout.rb
+</dd>
   </dl>
   
 </div>
@@ -86,26 +88,26 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>An interface for packing cells</p>
-<p><code>GtkCellLayout</code> is an interface to be implemented by all objects which
-want to provide a <code>GtkTreeViewColumn</code> like API for packing cells,
+<p><code>GtkCellLayout</code> is an interface to be implemented by all objects which<br />
+want to provide a <code>GtkTreeViewColumn</code> like API for packing cells,<br />
 setting attributes and data funcs.</p>
-<p>One of the notable features provided by implementations of
-<code>GtkCellLayout</code> are attributes. Attributes let you set the properties
-in flexible ways. They can just be set to constant values like regular
-properties. But they can also be mapped to a column of the underlying
-tree model with gtk_cell_layout_set_attributes(), which means that the value
-of the attribute can change from cell to cell as they are rendered by
-the cell renderer. Finally, it is possible to specify a function with
-gtk_cell_layout_set_cell_data_func() that is called to determine the
+<p>One of the notable features provided by implementations of<br />
+<code>GtkCellLayout</code> are attributes. Attributes let you set the properties<br />
+in flexible ways. They can just be set to constant values like regular<br />
+properties. But they can also be mapped to a column of the underlying<br />
+tree model with gtk_cell_layout_set_attributes(), which means that the value<br />
+of the attribute can change from cell to cell as they are rendered by<br />
+the cell renderer. Finally, it is possible to specify a function with<br />
+gtk_cell_layout_set_cell_data_func() that is called to determine the<br />
 value of the attribute for each cell that is rendered.</p>
-<h2>GtkCellLayouts as GtkBuildable</h2>
-<p>Implementations of GtkCellLayout which also implement the GtkBuildable
-interface (<code>GtkCellView</code>, <code>GtkIconView</code>, <code>GtkComboBox</code>,
-<code>GtkEntryCompletion</code>, <code>GtkTreeViewColumn</code>) accept <code>GtkCellRenderer</code> objects
-as <code>&lt;child&gt;</code> elements in UI definitions. They support a custom <code>&lt;attributes&gt;</code>
-element for their children, which can contain multiple <code>&lt;attribute&gt;</code>
-elements. Each <code>&lt;attribute&gt;</code> element has a name attribute which specifies
-a property of the cell renderer; the content of the element is the
+<h2><a href="#gtkcelllayouts-as-gtkbuildable" aria-hidden="true" class="anchor" id="gtkcelllayouts-as-gtkbuildable"></a>GtkCellLayouts as GtkBuildable</h2>
+<p>Implementations of GtkCellLayout which also implement the GtkBuildable<br />
+interface (<code>GtkCellView</code>, <code>GtkIconView</code>, <code>GtkComboBox</code>,<br />
+<code>GtkEntryCompletion</code>, <code>GtkTreeViewColumn</code>) accept <code>GtkCellRenderer</code> objects<br />
+as <code>&lt;child&gt;</code> elements in UI definitions. They support a custom <code>&lt;attributes&gt;</code><br />
+element for their children, which can contain multiple <code>&lt;attribute&gt;</code><br />
+elements. Each <code>&lt;attribute&gt;</code> element has a name attribute which specifies<br />
+a property of the cell renderer; the content of the element is the<br />
 attribute value.</p>
 <p>This is an example of a UI definition fragment specifying attributes:</p>
 <pre class="code xml"><code class="xml">&lt;object class=&quot;GtkCellView&quot;&gt;
@@ -117,10 +119,10 @@ attribute value.</p>
   &lt;/child&gt;
 &lt;/object&gt;
 </code></pre>
-<p>Furthermore for implementations of <code>GtkCellLayout</code> that use a <code>GtkCellArea</code>
-to lay out cells (all <code>GtkCellLayout</code>s in GTK use a <code>GtkCellArea</code>)
-<a href="class.CellArea.html#cell-properties">cell properties</a> can also be defined
-in the format by specifying the custom <code>&lt;cell-packing&gt;</code> attribute which can
+<p>Furthermore for implementations of <code>GtkCellLayout</code> that use a <code>GtkCellArea</code><br />
+to lay out cells (all <code>GtkCellLayout</code>s in GTK use a <code>GtkCellArea</code>)<br />
+<a href="class.CellArea.html#cell-properties">cell properties</a> can also be defined<br />
+in the format by specifying the custom <code>&lt;cell-packing&gt;</code> attribute which can<br />
 contain multiple <code>&lt;property&gt;</code> elements.</p>
 <p>Here is a UI definition fragment specifying cell properties:</p>
 <pre class="code xml"><code class="xml">&lt;object class=&quot;GtkTreeViewColumn&quot;&gt;
@@ -133,21 +135,21 @@ contain multiple <code>&lt;property&gt;</code> elements.</p>
   &lt;/child&gt;
 &lt;/object&gt;
 </code></pre>
-<h2>Subclassing GtkCellLayout implementations</h2>
-<p>When subclassing a widget that implements <code>GtkCellLayout</code> like
-<code>GtkIconView</code> or <code>GtkComboBox</code>, there are some considerations related
-to the fact that these widgets internally use a <code>GtkCellArea</code>.
-The cell area is exposed as a construct-only property by these
+<h2><a href="#subclassing-gtkcelllayout-implementations" aria-hidden="true" class="anchor" id="subclassing-gtkcelllayout-implementations"></a>Subclassing GtkCellLayout implementations</h2>
+<p>When subclassing a widget that implements <code>GtkCellLayout</code> like<br />
+<code>GtkIconView</code> or <code>GtkComboBox</code>, there are some considerations related<br />
+to the fact that these widgets internally use a <code>GtkCellArea</code>.<br />
+The cell area is exposed as a construct-only property by these<br />
 widgets. This means that it is possible to e.g. do</p>
 <pre class="code c"><code class="c">GtkWIdget *combo =
   g_object_new (GTK_TYPE_COMBO_BOX, &quot;cell-area&quot;, my_cell_area, NULL);
 </code></pre>
-<p>to use a custom cell area with a combo box. But construct properties
-are only initialized after instance <code>init()</code>
-functions have run, which means that using functions which rely on
-the existence of the cell area in your subclass <code>init()</code> function will
-cause the default cell area to be instantiated. In this case, a provided
-construct property value will be ignored (with a warning, to alert
+<p>to use a custom cell area with a combo box. But construct properties<br />
+are only initialized after instance <code>init()</code><br />
+functions have run, which means that using functions which rely on<br />
+the existence of the cell area in your subclass <code>init()</code> function will<br />
+cause the default cell area to be instantiated. In this case, a provided<br />
+construct property value will be ignored (with a warning, to alert<br />
 you to the problem).</p>
 <pre class="code c"><code class="c">static void
 my_combo_box_init (MyComboBox *b)
@@ -169,10 +171,10 @@ my_combo_box_new (GtkCellArea *area)
   return g_object_new (MY_TYPE_COMBO_BOX, &quot;cell-area&quot;, area, NULL);
 }
 </code></pre>
-<p>If supporting alternative cell areas with your derived widget is
-not important, then this does not have to concern you. If you want
-to support alternative cell areas, you can do so by moving the
-problematic calls out of <code>init()</code> and into a <code>constructor()</code>
+<p>If supporting alternative cell areas with your derived widget is<br />
+not important, then this does not have to concern you. If you want<br />
+to support alternative cell areas, you can do so by moving the<br />
+problematic calls out of <code>init()</code> and into a <code>constructor()</code><br />
 for your class.</p>
 
 
@@ -488,6 +490,7 @@ for your class.</p>
 
       
     </ul>
+    
   
 
 
@@ -737,8 +740,8 @@ for your class.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the underlying <code>GtkCellArea</code> which might be <!-- raw HTML omitted -->cell_layout<!-- raw HTML omitted -->
-if called on a <code>GtkCellArea</code> or might be nil if no <code>GtkCellArea</code>
+    <p>Returns the underlying <code>GtkCellArea</code> which might be <!-- raw HTML omitted -->cell_layout<!-- raw HTML omitted --><br />
+if called on a <code>GtkCellArea</code> or might be nil if no <code>GtkCellArea</code><br />
 is used by <!-- raw HTML omitted -->cell_layout<!-- raw HTML omitted -->.</p>
 
 
@@ -796,8 +799,8 @@ is used by <!-- raw HTML omitted -->cell_layout<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of cell renderers. The list, but not the renderers has
-been newly allocated and should be freed with g_list_free()
+        <div class='inline'><p>a list of cell renderers. The list, but not the renderers has<br />
+been newly allocated and should be freed with g_list_free()<br />
 when no longer needed.</p>
 </div>
       
@@ -998,8 +1001,8 @@ when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a list of cell renderers. The list, but not the renderers has
-been newly allocated and should be freed with g_list_free()
+    <p>Returns a list of cell renderers. The list, but not the renderers has<br />
+been newly allocated and should be freed with g_list_free()<br />
 when no longer needed.</p>
 
 
@@ -1037,8 +1040,8 @@ when no longer needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of cell renderers. The list, but not the renderers has
-been newly allocated and should be freed with g_list_free()
+        <div class='inline'><p>a list of cell renderers. The list, but not the renderers has<br />
+been newly allocated and should be freed with g_list_free()<br />
 when no longer needed.</p>
 </div>
       
@@ -1309,11 +1312,11 @@ when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the attributes in the parameter list as the attributes
+    <p>Sets the attributes in the parameter list as the attributes<br />
 of <!-- raw HTML omitted -->cell_layout<!-- raw HTML omitted -->.</p>
 <p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CellLayout.add_attribute] for more details.</p>
-<p>The attributes should be in attribute/column order, as in
-gtk_cell_layout_add_attribute(). All existing attributes are
+<p>The attributes should be in attribute/column order, as in<br />
+gtk_cell_layout_add_attribute(). All existing attributes are<br />
 removed, and replaced with the new attributes.</p>
 
 
@@ -1514,7 +1517,7 @@ removed, and replaced with the new attributes.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Atk";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/atk.rb</dd>
+    <dd>lib/atk.rb
+</dd>
   </dl>
   
 </div>
@@ -131,8 +133,8 @@
         <dt id="BINARY_AGE-constant" class="">BINARY_AGE =
           <div class="docstring">
   <div class="discussion">
-    <p>Like atk_get_binary_age(), but from the headers used at
-application compile time, rather than from the library linked
+    <p>Like atk_get_binary_age(), but from the headers used at<br />
+application compile time, rather than from the library linked<br />
 against at application run time.</p>
 
 
@@ -148,8 +150,8 @@ against at application run time.</p>
         <dt id="INTERFACE_AGE-constant" class="">INTERFACE_AGE =
           <div class="docstring">
   <div class="discussion">
-    <p>Like atk_get_interface_age(), but from the headers used at
-application compile time, rather than from the library linked
+    <p>Like atk_get_interface_age(), but from the headers used at<br />
+application compile time, rather than from the library linked<br />
 against at application run time.</p>
 
 
@@ -165,8 +167,8 @@ against at application run time.</p>
         <dt id="MAJOR_VERSION-constant" class="">MAJOR_VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>Like atk_get_major_version(), but from the headers used at
-application compile time, rather than from the library linked
+    <p>Like atk_get_major_version(), but from the headers used at<br />
+application compile time, rather than from the library linked<br />
 against at application run time.</p>
 
 
@@ -182,8 +184,8 @@ against at application run time.</p>
         <dt id="MICRO_VERSION-constant" class="">MICRO_VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>Like atk_get_micro_version(), but from the headers used at
-application compile time, rather than from the library linked
+    <p>Like atk_get_micro_version(), but from the headers used at<br />
+application compile time, rather than from the library linked<br />
 against at application run time.</p>
 
 
@@ -199,8 +201,8 @@ against at application run time.</p>
         <dt id="MINOR_VERSION-constant" class="">MINOR_VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>Like atk_get_minor_version(), but from the headers used at
-application compile time, rather than from the library linked
+    <p>Like atk_get_minor_version(), but from the headers used at<br />
+application compile time, rather than from the library linked<br />
 against at application run time.</p>
 
 
@@ -216,15 +218,15 @@ against at application run time.</p>
         <dt id="VERSION_MIN_REQUIRED-constant" class="">VERSION_MIN_REQUIRED =
           <div class="docstring">
   <div class="discussion">
-    <p>A macro that should be defined by the user prior to including
-the atk/atk.h header.
-The definition should be one of the predefined ATK version
+    <p>A macro that should be defined by the user prior to including<br />
+the atk/atk.h header.<br />
+The definition should be one of the predefined ATK version<br />
 macros: %ATK_VERSION_2_12, %ATK_VERSION_2_14,...</p>
-<p>This macro defines the earliest version of ATK that the package is
+<p>This macro defines the earliest version of ATK that the package is<br />
 required to be able to compile against.</p>
-<p>If the compiler is configured to warn about the use of deprecated
-functions, then using functions that were deprecated in version
-%ATK_VERSION_MIN_REQUIRED or earlier will cause warnings (but
+<p>If the compiler is configured to warn about the use of deprecated<br />
+functions, then using functions that were deprecated in version<br />
+%ATK_VERSION_MIN_REQUIRED or earlier will cause warnings (but<br />
 using functions deprecated in later releases will not).</p>
 
 
@@ -1111,6 +1113,7 @@ using functions deprecated in later releases will not).</p>
 
       
     </ul>
+    
   
 
 
@@ -1130,8 +1133,8 @@ using functions deprecated in later releases will not).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds the specified function to the list of functions to be called
-when an object receives focus.
+    <p>Adds the specified function to the list of functions to be called<br />
+when an object receives focus.<br />
 when an object receives focus.</p>
 
 
@@ -1190,31 +1193,31 @@ when an object receives focus.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds the specified function to the list of functions to be called
+    <p>Adds the specified function to the list of functions to be called<br />
 when an ATK event of type event_type occurs.</p>
-<p>The format of event_type is the following:
+<p>The format of event_type is the following:<br />
 &quot;ATK:&lt;atk_type&gt;:&lt;atk_event&gt;:&lt;atk_event_detail&gt;</p>
-<p>Where &quot;ATK&quot; works as the namespace, &lt;atk_interface&gt; is the name of
-the ATK type (interface or object), &lt;atk_event&gt; is the name of the
-signal defined on that interface and &lt;atk_event_detail&gt; is the
-gsignal detail of that signal. You can find more info about gsignal
-details here:
+<p>Where &quot;ATK&quot; works as the namespace, &lt;atk_interface&gt; is the name of<br />
+the ATK type (interface or object), &lt;atk_event&gt; is the name of the<br />
+signal defined on that interface and &lt;atk_event_detail&gt; is the<br />
+gsignal detail of that signal. You can find more info about gsignal<br />
+details here:<br />
 <a href="http://developer.gnome.org/gobject/stable/gobject-Signals.html">http://developer.gnome.org/gobject/stable/gobject-Signals.html</a></p>
 <p>The first three parameters are mandatory. The last one is optional.</p>
-<p>For example:
-ATK:AtkObject:state-change
-ATK:AtkText:text-selection-changed
+<p>For example:<br />
+ATK:AtkObject:state-change<br />
+ATK:AtkText:text-selection-changed<br />
 ATK:AtkText:text-insert:system</p>
-<p>Toolkit implementor note: ATK provides a default implementation for
-this virtual method. ATK implementors are discouraged from
+<p>Toolkit implementor note: ATK provides a default implementation for<br />
+this virtual method. ATK implementors are discouraged from<br />
 reimplementing this method.</p>
-<p>Toolkit implementor note: this method is not intended to be used by
+<p>Toolkit implementor note: this method is not intended to be used by<br />
 ATK implementors but by ATK consumers.</p>
-<p>ATK consumers note: as this method adds a listener for a given ATK
-type, that type should be already registered on the GType system
-before calling this method. A simple way to do that is creating an
-instance of Atk::NoOpObject. This class implements all ATK
-interfaces, so creating the instance will register all ATK types as
+<p>ATK consumers note: as this method adds a listener for a given ATK<br />
+type, that type should be already registered on the GType system<br />
+before calling this method. A simple way to do that is creating an<br />
+instance of Atk::NoOpObject. This class implements all ATK<br />
+interfaces, so creating the instance will register all ATK types as<br />
 a collateral effect.</p>
 
 
@@ -1288,8 +1291,8 @@ a collateral effect.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds the specified function to the list of functions to be called
-when a key event occurs.  The <!-- raw HTML omitted -->data<!-- raw HTML omitted --> element will be passed to the
+    <p>Adds the specified function to the list of functions to be called<br />
+when a key event occurs.  The <!-- raw HTML omitted -->data<!-- raw HTML omitted --> element will be passed to the<br />
 Atk::KeySnoopFunc (<!-- raw HTML omitted -->listener<!-- raw HTML omitted -->) as the <!-- raw HTML omitted -->func_data<!-- raw HTML omitted --> param, on notification.</p>
 
 
@@ -1324,7 +1327,7 @@ Atk::KeySnoopFunc (<!-- raw HTML omitted -->listener<!-- raw HTML omitted -->) a
       
       
         &mdash;
-        <div class='inline'><p>a #gpointer that points to a block of data that should be sent to the registered listeners,
+        <div class='inline'><p>a #gpointer that points to a block of data that should be sent to the registered listeners,<br />
 along with the event notification, when it occurs.</p>
 </div>
       
@@ -1364,7 +1367,7 @@ along with the event notification, when it occurs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Frees the memory used by an Atk::AttributeSet, including all its
+    <p>Frees the memory used by an Atk::AttributeSet, including all its<br />
 Atk::Attributes.</p>
 
 
@@ -1419,7 +1422,7 @@ Atk::Attributes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the binary age as passed to libtool when building the ATK
+    <p>Returns the binary age as passed to libtool when building the ATK<br />
 library the process is running against.</p>
 
 
@@ -1459,13 +1462,13 @@ library the process is running against.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a default implementation of the Atk::ObjectFactory/type
-registry.
-Note: For most toolkit maintainers, this will be the correct
-registry for registering new Atk::Object factories. Following
-a call to this function, maintainers may call atk_registry_set_factory_type()
-to associate an Atk::ObjectFactory subclass with the GType of objects
-for whom accessibility information will be provided.
+    <p>Gets a default implementation of the Atk::ObjectFactory/type<br />
+registry.<br />
+Note: For most toolkit maintainers, this will be the correct<br />
+registry for registering new Atk::Object factories. Following<br />
+a call to this function, maintainers may call atk_registry_set_factory_type()<br />
+to associate an Atk::ObjectFactory subclass with the GType of objects<br />
+for whom accessibility information will be provided.<br />
 Atk::ObjectFactory/type registry</p>
 
 
@@ -1505,7 +1508,7 @@ Atk::ObjectFactory/type registry</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the currently focused object.
+    <p>Gets the currently focused object.<br />
 application</p>
 
 
@@ -1545,9 +1548,9 @@ application</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Specifies the function to be called for focus tracker initialization.
-This function should be called by an implementation of the
-ATK interface if any specific work needs to be done to enable
+    <p>Specifies the function to be called for focus tracker initialization.<br />
+This function should be called by an implementation of the<br />
+ATK interface if any specific work needs to be done to enable<br />
 focus tracking.</p>
 
 
@@ -1602,7 +1605,7 @@ focus tracking.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Cause the focus tracker functions which have been specified to be
+    <p>Cause the focus tracker functions which have been specified to be<br />
 executed for the object.</p>
 
 
@@ -1657,7 +1660,7 @@ executed for the object.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the interface age as passed to libtool when building the
+    <p>Returns the interface age as passed to libtool when building the<br />
 ATK library the process is running against.</p>
 
 
@@ -1697,11 +1700,11 @@ ATK library the process is running against.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the major version number of the ATK library.  (e.g. in ATK
+    <p>Returns the major version number of the ATK library.  (e.g. in ATK<br />
 version 2.7.4 this is 2.)</p>
-<p>This function is in the library, so it represents the ATK library
-your code is running against. In contrast, the #ATK_MAJOR_VERSION
-macro represents the major version of the ATK headers you have
+<p>This function is in the library, so it represents the ATK library<br />
+your code is running against. In contrast, the #ATK_MAJOR_VERSION<br />
+macro represents the major version of the ATK headers you have<br />
 included when compiling your code.</p>
 
 
@@ -1741,11 +1744,11 @@ included when compiling your code.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the micro version number of the ATK library.  (e.g. in ATK
+    <p>Returns the micro version number of the ATK library.  (e.g. in ATK<br />
 version 2.7.4 this is 4.)</p>
-<p>This function is in the library, so it represents the ATK library
-your code is are running against. In contrast, the
-#ATK_MICRO_VERSION macro represents the micro version of the ATK
+<p>This function is in the library, so it represents the ATK library<br />
+your code is are running against. In contrast, the<br />
+#ATK_MICRO_VERSION macro represents the micro version of the ATK<br />
 headers you have included when compiling your code.</p>
 
 
@@ -1785,11 +1788,11 @@ headers you have included when compiling your code.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the minor version number of the ATK library.  (e.g. in ATK
+    <p>Returns the minor version number of the ATK library.  (e.g. in ATK<br />
 version 2.7.4 this is 7.)</p>
-<p>This function is in the library, so it represents the ATK library
-your code is are running against. In contrast, the
-#ATK_MINOR_VERSION macro represents the minor version of the ATK
+<p>This function is in the library, so it represents the ATK library<br />
+your code is are running against. In contrast, the<br />
+#ATK_MINOR_VERSION macro represents the minor version of the ATK<br />
 headers you have included when compiling your code.</p>
 
 
@@ -1866,7 +1869,7 @@ headers you have included when compiling your code.</p>
       
       
         &mdash;
-        <div class='inline'><p>the Atk::RelationType enumerated type corresponding to the specified name,
+        <div class='inline'><p>the Atk::RelationType enumerated type corresponding to the specified name,<br />
 or #ATK_RELATION_NULL if no matching relation type is found.</p>
 </div>
       
@@ -2004,7 +2007,7 @@ or #ATK_RELATION_NULL if no matching relation type is found.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes the specified focus tracker from the list of functions
+    <p>Removes the specified focus tracker from the list of functions<br />
 to be called when any object receives focus.</p>
 
 
@@ -2059,12 +2062,12 @@ to be called when any object receives focus.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p><!-- raw HTML omitted -->listener_id<!-- raw HTML omitted --> is the value returned by #atk_add_global_event_listener
+    <p><!-- raw HTML omitted -->listener_id<!-- raw HTML omitted --> is the value returned by #atk_add_global_event_listener<br />
 when you registered that event listener.</p>
-<p>Toolkit implementor note: ATK provides a default implementation for
-this virtual method. ATK implementors are discouraged from
+<p>Toolkit implementor note: ATK provides a default implementation for<br />
+this virtual method. ATK implementors are discouraged from<br />
 reimplementing this method.</p>
-<p>Toolkit implementor note: this method is not intended to be used by
+<p>Toolkit implementor note: this method is not intended to be used by<br />
 ATK implementors but by ATK consumers.</p>
 <p>Removes the specified event listener</p>
 
@@ -2120,7 +2123,7 @@ ATK implementors but by ATK consumers.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p><!-- raw HTML omitted -->listener_id<!-- raw HTML omitted --> is the value returned by #atk_add_key_event_listener
+    <p><!-- raw HTML omitted -->listener_id<!-- raw HTML omitted --> is the value returned by #atk_add_key_event_listener<br />
 when you registered that event listener.</p>
 <p>Removes the specified event listener.</p>
 
@@ -2213,7 +2216,7 @@ when you registered that event listener.</p>
       
       
         &mdash;
-        <div class='inline'><p>the Atk::Role enumerated type corresponding to the specified name,
+        <div class='inline'><p>the Atk::Role enumerated type corresponding to the specified name,<br />
 or #ATK_ROLE_INVALID if no matching role is found.</p>
 </div>
       
@@ -2351,8 +2354,8 @@ or #ATK_ROLE_INVALID if no matching role is found.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers the role specified by <!-- raw HTML omitted -->name<!-- raw HTML omitted -->. <!-- raw HTML omitted -->name<!-- raw HTML omitted --> must be a meaningful
-name. So it should not be empty, or consisting on whitespaces.
+    <p>Registers the role specified by <!-- raw HTML omitted -->name<!-- raw HTML omitted -->. <!-- raw HTML omitted -->name<!-- raw HTML omitted --> must be a meaningful<br />
+name. So it should not be empty, or consisting on whitespaces.<br />
 properly. ATK_ROLE_INVALID in case of error.</p>
 
 
@@ -2411,7 +2414,7 @@ properly. ATK_ROLE_INVALID in case of error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the root accessible container for the current application.
+    <p>Gets the root accessible container for the current application.<br />
 application</p>
 
 
@@ -2662,8 +2665,8 @@ application</p>
       
       
         &mdash;
-        <div class='inline'><p>the Atk::TextAttribute enumerated type corresponding to the specified
-name, or #ATK_TEXT_ATTRIBUTE_INVALID if no matching text attribute
+        <div class='inline'><p>the Atk::TextAttribute enumerated type corresponding to the specified<br />
+name, or #ATK_TEXT_ATTRIBUTE_INVALID if no matching text attribute<br />
 is found.</p>
 </div>
       
@@ -2743,8 +2746,8 @@ is found.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value for the index of the Atk::TextAttribute
-should not be freed; nil is returned if there are no values
+    <p>Gets the value for the index of the Atk::TextAttribute<br />
+should not be freed; nil is returned if there are no values<br />
 maintained for the attr value.</p>
 
 
@@ -2876,8 +2879,8 @@ maintained for the attr value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Frees the memory associated with an array of AtkTextRange. It is assumed
-that the array was returned by the function atk_text_get_bounded_ranges
+    <p>Frees the memory associated with an array of AtkTextRange. It is assumed<br />
+that the array was returned by the function atk_text_get_bounded_ranges<br />
 and is NULL terminated.</p>
 
 
@@ -2897,7 +2900,7 @@ and is NULL terminated.</p>
       
       
         &mdash;
-        <div class='inline'><p>A pointer to an array of Atk::TextRange which is
+        <div class='inline'><p>A pointer to an array of Atk::TextRange which is<br />
 to be freed.</p>
 </div>
       
@@ -3162,7 +3165,7 @@ to be freed.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

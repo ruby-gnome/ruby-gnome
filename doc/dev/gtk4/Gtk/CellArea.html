@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::CellArea";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -1248,6 +1250,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1268,8 +1271,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Activates <!-- raw HTML omitted -->area<!-- raw HTML omitted -->, usually by activating the currently focused
-cell, however some subclasses which embed widgets in the area
+    <p>Activates <!-- raw HTML omitted -->area<!-- raw HTML omitted -->, usually by activating the currently focused<br />
+cell, however some subclasses which embed widgets in the area<br />
 can also activate a widget if it currently has the focus.</p>
 
 
@@ -1349,7 +1352,7 @@ can also activate a widget if it currently has the focus.</p>
       
       
         &mdash;
-        <div class='inline'><p>if true then only cell renderers that are %GTK_CELL_RENDERER_MODE_EDITABLE
+        <div class='inline'><p>if true then only cell renderers that are %GTK_CELL_RENDERER_MODE_EDITABLE<br />
 will be activated.</p>
 </div>
       
@@ -1389,9 +1392,9 @@ will be activated.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is used by <code>GtkCellArea</code> subclasses when handling events
-to activate cells, the base <code>GtkCellArea</code> class activates cells
-for keyboard events for free in its own GtkCellArea-&gt;activate()
+    <p>This is used by <code>GtkCellArea</code> subclasses when handling events<br />
+to activate cells, the base <code>GtkCellArea</code> class activates cells<br />
+for keyboard events for free in its own GtkCellArea-&gt;activate()<br />
 implementation.</p>
 
 
@@ -1456,7 +1459,7 @@ implementation.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GdkRectangle</code> in <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> relative coordinates
+        <div class='inline'><p>the <code>GdkRectangle</code> in <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> relative coordinates<br />
 of <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> for the current row.</p>
 </div>
       
@@ -1565,10 +1568,10 @@ of <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> for the current ro
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> to <!-- raw HTML omitted -->renderer<!-- raw HTML omitted -->’s focusable area, focus will be drawn
-around <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> and all of its siblings if <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> can
+    <p>Adds <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> to <!-- raw HTML omitted -->renderer<!-- raw HTML omitted -->’s focusable area, focus will be drawn<br />
+around <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> and all of its siblings if <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> can<br />
 focus for a given row.</p>
-<p>Events handled by focus siblings can also activate the given
+<p>Events handled by focus siblings can also activate the given<br />
 focusable <!-- raw HTML omitted -->renderer<!-- raw HTML omitted -->.</p>
 
 
@@ -1638,7 +1641,7 @@ focusable <!-- raw HTML omitted -->renderer<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> to <!-- raw HTML omitted -->area<!-- raw HTML omitted -->, setting cell properties at the same time.
+    <p>Adds <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> to <!-- raw HTML omitted -->area<!-- raw HTML omitted -->, setting cell properties at the same time.<br />
 See gtk_cell_area_add() and gtk_cell_area_cell_set() for more details.</p>
 
 
@@ -1688,7 +1691,7 @@ See gtk_cell_area_add() and gtk_cell_area_cell_set() for more details.</p>
       
       
         &mdash;
-        <div class='inline'><p>a nil-terminated list of property names and values, starting
+        <div class='inline'><p>a nil-terminated list of property names and values, starting<br />
 with <!-- raw HTML omitted -->first_prop_name<!-- raw HTML omitted --></p>
 </div>
       
@@ -1724,7 +1727,7 @@ with <!-- raw HTML omitted -->first_prop_name<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Applies any connected attributes to the renderers in
+    <p>Applies any connected attributes to the renderers in<br />
 <!-- raw HTML omitted -->area<!-- raw HTML omitted --> by pulling the values from <!-- raw HTML omitted -->tree_model<!-- raw HTML omitted -->.</p>
 
 
@@ -1789,7 +1792,7 @@ with <!-- raw HTML omitted -->first_prop_name<!-- raw HTML omitted --></p>
       
       
         &mdash;
-        <div class='inline'><p>whether <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is expanded in the view and
+        <div class='inline'><p>whether <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is expanded in the view and<br />
 children are visible</p>
 </div>
       
@@ -1825,7 +1828,7 @@ children are visible</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Connects an <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to apply values from <!-- raw HTML omitted -->column<!-- raw HTML omitted --> for the
+    <p>Connects an <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> to apply values from <!-- raw HTML omitted -->column<!-- raw HTML omitted --> for the<br />
 <code>GtkTreeModel</code> in use.</p>
 
 
@@ -1910,8 +1913,8 @@ children are visible</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Disconnects <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> for the <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> in <!-- raw HTML omitted -->area<!-- raw HTML omitted --> so that
-attribute will no longer be updated with values from the
+    <p>Disconnects <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> for the <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> in <!-- raw HTML omitted -->area<!-- raw HTML omitted --> so that<br />
+attribute will no longer be updated with values from the<br />
 model.</p>
 
 
@@ -1981,7 +1984,7 @@ model.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the model column that an attribute has been mapped to,
+    <p>Returns the model column that an attribute has been mapped to,<br />
 or -1 if the attribute is not mapped.</p>
 
 
@@ -2104,7 +2107,7 @@ or -1 if the attribute is not mapped.</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the first cell property, followed
+        <div class='inline'><p>return location for the first cell property, followed<br />
 optionally by more name/return location pairs, followed by nil</p>
 </div>
       
@@ -2273,7 +2276,7 @@ optionally by more name/return location pairs, followed by nil</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the first property, followed
+        <div class='inline'><p>return location for the first property, followed<br />
 optionally by more name/return location pairs, followed by nil</p>
 </div>
       
@@ -2358,7 +2361,7 @@ optionally by more name/return location pairs, followed by nil</p>
       
       
         &mdash;
-        <div class='inline'><p>a nil-terminated list of property names and values, starting
+        <div class='inline'><p>a nil-terminated list of property names and values, starting<br />
 with <!-- raw HTML omitted -->first_prop_name<!-- raw HTML omitted --></p>
 </div>
       
@@ -2527,7 +2530,7 @@ with <!-- raw HTML omitted -->first_prop_name<!-- raw HTML omitted --></p>
       
       
         &mdash;
-        <div class='inline'><p>a nil-terminated list of property names and values, starting
+        <div class='inline'><p>a nil-terminated list of property names and values, starting<br />
 with <!-- raw HTML omitted -->first_prop_name<!-- raw HTML omitted --></p>
 </div>
       
@@ -2563,15 +2566,15 @@ with <!-- raw HTML omitted -->first_prop_name<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is sometimes needed for cases where rows need to share
-alignments in one orientation but may be separately grouped
+    <p>This is sometimes needed for cases where rows need to share<br />
+alignments in one orientation but may be separately grouped<br />
 in the opposing orientation.</p>
-<p>For instance, <code>GtkIconView</code> creates all icons (rows) to have
-the same width and the cells theirin to have the same
-horizontal alignments. However each row of icons may have
-a separate collective height. <code>GtkIconView</code> uses this to
-request the heights of each row based on a context which
-was already used to request all the row widths that are
+<p>For instance, <code>GtkIconView</code> creates all icons (rows) to have<br />
+the same width and the cells theirin to have the same<br />
+horizontal alignments. However each row of icons may have<br />
+a separate collective height. <code>GtkIconView</code> uses this to<br />
+request the heights of each row based on a context which<br />
+was already used to request all the row widths that are<br />
 to be displayed.</p>
 
 
@@ -2630,11 +2633,11 @@ to be displayed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a <code>GtkCellArea</code>Context to be used with <!-- raw HTML omitted -->area<!-- raw HTML omitted --> for
-all purposes. <code>GtkCellArea</code>Context stores geometry information
-for rows for which it was operated on, it is important to use
-the same context for the same row of data at all times (i.e.
-one should render and handle events with the same <code>GtkCellArea</code>Context
+    <p>Creates a <code>GtkCellArea</code>Context to be used with <!-- raw HTML omitted -->area<!-- raw HTML omitted --> for<br />
+all purposes. <code>GtkCellArea</code>Context stores geometry information<br />
+for rows for which it was operated on, it is important to use<br />
+the same context for the same row of data at all times (i.e.<br />
+one should render and handle events with the same <code>GtkCellArea</code>Context<br />
 which was used to request the size of those rows of data).</p>
 
 
@@ -2674,12 +2677,12 @@ which was used to request the size of those rows of data).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the current <code>GtkTreePath</code> string for the currently
-applied <code>GtkTreeIter</code>, this is implicitly updated when
-gtk_cell_area_apply_attributes() is called and can be
-used to interact with renderers from <code>GtkCellArea</code>
-subclasses.
-attributes applied to <!-- raw HTML omitted -->area<!-- raw HTML omitted -->. This string belongs to the area and
+    <p>Gets the current <code>GtkTreePath</code> string for the currently<br />
+applied <code>GtkTreeIter</code>, this is implicitly updated when<br />
+gtk_cell_area_apply_attributes() is called and can be<br />
+used to interact with renderers from <code>GtkCellArea</code><br />
+subclasses.<br />
+attributes applied to <!-- raw HTML omitted -->area<!-- raw HTML omitted -->. This string belongs to the area and<br />
 should not be freed.</p>
 
 
@@ -2720,7 +2723,7 @@ should not be freed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The widget currently editing the edited cell</p>
-<p>This property is read-only and only changes as
+<p>This property is read-only and only changes as<br />
 a result of a call gtk_cell_area_activate_cell().</p>
 
 
@@ -2761,7 +2764,7 @@ a result of a call gtk_cell_area_activate_cell().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The widget currently editing the edited cell</p>
-<p>This property is read-only and only changes as
+<p>This property is read-only and only changes as<br />
 a result of a call gtk_cell_area_activate_cell().</p>
 
 
@@ -2830,7 +2833,7 @@ a result of a call gtk_cell_area_activate_cell().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The cell in the area that is currently edited</p>
-<p>This property is read-only and only changes as
+<p>This property is read-only and only changes as<br />
 a result of a call gtk_cell_area_activate_cell().</p>
 
 
@@ -2871,7 +2874,7 @@ a result of a call gtk_cell_area_activate_cell().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The cell in the area that is currently edited</p>
-<p>This property is read-only and only changes as
+<p>This property is read-only and only changes as<br />
 a result of a call gtk_cell_area_activate_cell().</p>
 
 
@@ -3115,11 +3118,11 @@ a result of a call gtk_cell_area_activate_cell().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This should be called by the <!-- raw HTML omitted -->area<!-- raw HTML omitted -->’s owning layout widget
-when focus is to be passed to <!-- raw HTML omitted -->area<!-- raw HTML omitted -->, or moved within <!-- raw HTML omitted -->area<!-- raw HTML omitted -->
+    <p>This should be called by the <!-- raw HTML omitted -->area<!-- raw HTML omitted -->’s owning layout widget<br />
+when focus is to be passed to <!-- raw HTML omitted -->area<!-- raw HTML omitted -->, or moved within <!-- raw HTML omitted -->area<!-- raw HTML omitted --><br />
 for a given <!-- raw HTML omitted -->direction<!-- raw HTML omitted --> and row data.</p>
-<p>Implementing <code>GtkCellArea</code> classes should implement this
-method to receive and navigate focus in its own way particular
+<p>Implementing <code>GtkCellArea</code> classes should implement this<br />
+method to receive and navigate focus in its own way particular<br />
 to how it lays out cells.</p>
 
 
@@ -3353,7 +3356,7 @@ to how it lays out cells.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calls <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> for every <code>GtkCellRenderer</code> in <!-- raw HTML omitted -->area<!-- raw HTML omitted --> with the
+    <p>Calls <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> for every <code>GtkCellRenderer</code> in <!-- raw HTML omitted -->area<!-- raw HTML omitted --> with the<br />
 allocated rectangle inside <!-- raw HTML omitted -->cell_area<!-- raw HTML omitted -->.</p>
 
 
@@ -3483,7 +3486,7 @@ allocated rectangle inside <!-- raw HTML omitted -->cell_area<!-- raw HTML omitt
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Derives the allocation of <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> inside <!-- raw HTML omitted -->area<!-- raw HTML omitted --> if <!-- raw HTML omitted -->area<!-- raw HTML omitted -->
+    <p>Derives the allocation of <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> inside <!-- raw HTML omitted -->area<!-- raw HTML omitted --> if <!-- raw HTML omitted -->area<!-- raw HTML omitted --><br />
 were to be rendered in <!-- raw HTML omitted -->cell_area<!-- raw HTML omitted -->.</p>
 
 
@@ -3548,7 +3551,7 @@ were to be rendered in <!-- raw HTML omitted -->cell_area<!-- raw HTML omitted -
       
       
         &mdash;
-        <div class='inline'><p>the whole allocated area for <!-- raw HTML omitted -->area<!-- raw HTML omitted --> in <!-- raw HTML omitted -->widget<!-- raw HTML omitted -->
+        <div class='inline'><p>the whole allocated area for <!-- raw HTML omitted -->area<!-- raw HTML omitted --> in <!-- raw HTML omitted -->widget<!-- raw HTML omitted --><br />
 for this row</p>
 </div>
       
@@ -3599,7 +3602,7 @@ for this row</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the <code>GtkCellRenderer</code> at <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> coordinates inside <!-- raw HTML omitted -->area<!-- raw HTML omitted --> and optionally
+    <p>Gets the <code>GtkCellRenderer</code> at <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> coordinates inside <!-- raw HTML omitted -->area<!-- raw HTML omitted --> and optionally<br />
 returns the full cell allocation for it inside <!-- raw HTML omitted -->cell_area<!-- raw HTML omitted -->.</p>
 
 
@@ -3649,7 +3652,7 @@ returns the full cell allocation for it inside <!-- raw HTML omitted -->cell_are
       
       
         &mdash;
-        <div class='inline'><p>the whole allocated area for <!-- raw HTML omitted -->area<!-- raw HTML omitted --> in <!-- raw HTML omitted -->widget<!-- raw HTML omitted -->
+        <div class='inline'><p>the whole allocated area for <!-- raw HTML omitted -->area<!-- raw HTML omitted --> in <!-- raw HTML omitted -->widget<!-- raw HTML omitted --><br />
 for this row</p>
 </div>
       
@@ -3695,7 +3698,7 @@ for this row</p>
       
       
         &mdash;
-        <div class='inline'><p>where to store the inner allocated area of the
+        <div class='inline'><p>where to store the inner allocated area of the<br />
 returned cell renderer</p>
 </div>
       
@@ -3735,11 +3738,11 @@ returned cell renderer</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the <code>GtkCellRenderer</code> which is expected to be focusable
+    <p>Gets the <code>GtkCellRenderer</code> which is expected to be focusable<br />
 for which <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> is, or may be a sibling.</p>
-<p>This is handy for <code>GtkCellArea</code> subclasses when handling events,
-after determining the renderer at the event location it can
-then chose to activate the focus cell for which the event
+<p>This is handy for <code>GtkCellArea</code> subclasses when handling events,<br />
+after determining the renderer at the event location it can<br />
+then chose to activate the focus cell for which the event<br />
 cell may have been a sibling.</p>
 
 
@@ -3777,7 +3780,7 @@ cell may have been a sibling.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GtkCellRenderer</code>
+        <div class='inline'><p>the <code>GtkCellRenderer</code><br />
 for which <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> is a sibling</p>
 </div>
       
@@ -3836,7 +3839,7 @@ for which <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> is a siblin
       
       
         &mdash;
-        <div class='inline'><p>A <code>GList</code> of <code>GtkCellRenderer</code>s.
+        <div class='inline'><p>A <code>GList</code> of <code>GtkCellRenderer</code>s.<br />
 The returned list is internal and should not be freed.</p>
 </div>
       
@@ -3859,10 +3862,10 @@ The returned list is internal and should not be freed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves a cell area’s initial minimum and natural height.</p>
-<p><!-- raw HTML omitted -->area<!-- raw HTML omitted --> will store some geometrical information in <!-- raw HTML omitted -->context<!-- raw HTML omitted --> along the way;
-when requesting sizes over an arbitrary number of rows, it’s not important
-to check the <!-- raw HTML omitted -->minimum_height<!-- raw HTML omitted --> and <!-- raw HTML omitted -->natural_height<!-- raw HTML omitted --> of this call but rather to
-consult gtk_cell_area_context_get_preferred_height() after a series of
+<p><!-- raw HTML omitted -->area<!-- raw HTML omitted --> will store some geometrical information in <!-- raw HTML omitted -->context<!-- raw HTML omitted --> along the way;<br />
+when requesting sizes over an arbitrary number of rows, it’s not important<br />
+to check the <!-- raw HTML omitted -->minimum_height<!-- raw HTML omitted --> and <!-- raw HTML omitted -->natural_height<!-- raw HTML omitted --> of this call but rather to<br />
+consult gtk_cell_area_context_get_preferred_height() after a series of<br />
 requests.</p>
 
 
@@ -3962,17 +3965,17 @@ requests.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a cell area’s minimum and natural height if it would be given
+    <p>Retrieves a cell area’s minimum and natural height if it would be given<br />
 the specified <!-- raw HTML omitted -->width<!-- raw HTML omitted -->.</p>
-<p><!-- raw HTML omitted -->area<!-- raw HTML omitted --> stores some geometrical information in <!-- raw HTML omitted -->context<!-- raw HTML omitted --> along the way
-while calling gtk_cell_area_get_preferred_width(). It’s important to
-perform a series of gtk_cell_area_get_preferred_width() requests with
-<!-- raw HTML omitted -->context<!-- raw HTML omitted --> first and then call gtk_cell_area_get_preferred_height_for_width()
-on each cell area individually to get the height for width of each
+<p><!-- raw HTML omitted -->area<!-- raw HTML omitted --> stores some geometrical information in <!-- raw HTML omitted -->context<!-- raw HTML omitted --> along the way<br />
+while calling gtk_cell_area_get_preferred_width(). It’s important to<br />
+perform a series of gtk_cell_area_get_preferred_width() requests with<br />
+<!-- raw HTML omitted -->context<!-- raw HTML omitted --> first and then call gtk_cell_area_get_preferred_height_for_width()<br />
+on each cell area individually to get the height for width of each<br />
 fully requested row.</p>
-<p>If at some point, the width of a single row changes, it should be
-requested with gtk_cell_area_get_preferred_width() again and then
-the full width of the requested rows checked again with
+<p>If at some point, the width of a single row changes, it should be<br />
+requested with gtk_cell_area_get_preferred_width() again and then<br />
+the full width of the requested rows checked again with<br />
 gtk_cell_area_context_get_preferred_width().</p>
 
 
@@ -4088,10 +4091,10 @@ gtk_cell_area_context_get_preferred_width().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves a cell area’s initial minimum and natural width.</p>
-<p><!-- raw HTML omitted -->area<!-- raw HTML omitted --> will store some geometrical information in <!-- raw HTML omitted -->context<!-- raw HTML omitted --> along the way;
-when requesting sizes over an arbitrary number of rows, it’s not important
-to check the <!-- raw HTML omitted -->minimum_width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->natural_width<!-- raw HTML omitted --> of this call but rather to
-consult gtk_cell_area_context_get_preferred_width() after a series of
+<p><!-- raw HTML omitted -->area<!-- raw HTML omitted --> will store some geometrical information in <!-- raw HTML omitted -->context<!-- raw HTML omitted --> along the way;<br />
+when requesting sizes over an arbitrary number of rows, it’s not important<br />
+to check the <!-- raw HTML omitted -->minimum_width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->natural_width<!-- raw HTML omitted --> of this call but rather to<br />
+consult gtk_cell_area_context_get_preferred_width() after a series of<br />
 requests.</p>
 
 
@@ -4191,17 +4194,17 @@ requests.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a cell area’s minimum and natural width if it would be given
+    <p>Retrieves a cell area’s minimum and natural width if it would be given<br />
 the specified <!-- raw HTML omitted -->height<!-- raw HTML omitted -->.</p>
-<p><!-- raw HTML omitted -->area<!-- raw HTML omitted --> stores some geometrical information in <!-- raw HTML omitted -->context<!-- raw HTML omitted --> along the way
-while calling gtk_cell_area_get_preferred_height(). It’s important to
-perform a series of gtk_cell_area_get_preferred_height() requests with
-<!-- raw HTML omitted -->context<!-- raw HTML omitted --> first and then call gtk_cell_area_get_preferred_width_for_height()
-on each cell area individually to get the height for width of each
+<p><!-- raw HTML omitted -->area<!-- raw HTML omitted --> stores some geometrical information in <!-- raw HTML omitted -->context<!-- raw HTML omitted --> along the way<br />
+while calling gtk_cell_area_get_preferred_height(). It’s important to<br />
+perform a series of gtk_cell_area_get_preferred_height() requests with<br />
+<!-- raw HTML omitted -->context<!-- raw HTML omitted --> first and then call gtk_cell_area_get_preferred_width_for_height()<br />
+on each cell area individually to get the height for width of each<br />
 fully requested row.</p>
-<p>If at some point, the height of a single row changes, it should be
-requested with gtk_cell_area_get_preferred_height() again and then
-the full height of the requested rows checked again with
+<p>If at some point, the height of a single row changes, it should be<br />
+requested with gtk_cell_area_get_preferred_height() again and then<br />
+the full height of the requested rows checked again with<br />
 gtk_cell_area_context_get_preferred_height().</p>
 
 
@@ -4374,8 +4377,8 @@ gtk_cell_area_context_get_preferred_height().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is a convenience function for <code>GtkCellArea</code> implementations
-to get the inner area where a given <code>GtkCellRenderer</code> will be
+    <p>This is a convenience function for <code>GtkCellArea</code> implementations<br />
+to get the inner area where a given <code>GtkCellRenderer</code> will be<br />
 rendered. It removes any padding previously added by gtk_cell_area_request_renderer().</p>
 
 
@@ -4410,7 +4413,7 @@ rendered. It removes any padding previously added by gtk_cell_area_request_rende
       
       
         &mdash;
-        <div class='inline'><p>the <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> relative coordinates where one of <!-- raw HTML omitted -->area<!-- raw HTML omitted -->’s cells
+        <div class='inline'><p>the <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> relative coordinates where one of <!-- raw HTML omitted -->area<!-- raw HTML omitted -->’s cells<br />
 is to be placed</p>
 </div>
       
@@ -4530,7 +4533,7 @@ is to be placed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the area can do anything when activated,
+    <p>Returns whether the area can do anything when activated,<br />
 after applying new attributes to <!-- raw HTML omitted -->area<!-- raw HTML omitted -->.</p>
 
 
@@ -4570,7 +4573,7 @@ after applying new attributes to <!-- raw HTML omitted -->area<!-- raw HTML omit
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is one of <!-- raw HTML omitted -->renderer<!-- raw HTML omitted -->’s focus siblings
+    <p>Returns whether <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is one of <!-- raw HTML omitted -->renderer<!-- raw HTML omitted -->’s focus siblings<br />
 (see gtk_cell_area_add_focus_sibling()).</p>
 
 
@@ -4681,8 +4684,8 @@ after applying new attributes to <!-- raw HTML omitted -->area<!-- raw HTML omit
       
       
         &mdash;
-        <div class='inline'><p>a newly
-allocated nil-terminated array of <code>GParamSpec</code>*.  The array
+        <div class='inline'><p>a newly<br />
+allocated nil-terminated array of <code>GParamSpec</code>*.  The array<br />
 must be freed with g_free().</p>
 </div>
       
@@ -4758,7 +4761,7 @@ must be freed with g_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> from <!-- raw HTML omitted -->renderer<!-- raw HTML omitted -->’s focus sibling list
+    <p>Removes <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> from <!-- raw HTML omitted -->renderer<!-- raw HTML omitted -->’s focus sibling list<br />
 (see gtk_cell_area_add_focus_sibling()).</p>
 
 
@@ -4828,7 +4831,7 @@ must be freed with g_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether the area prefers a height-for-width layout
+    <p>Gets whether the area prefers a height-for-width layout<br />
 or a width-for-height layout.</p>
 
 
@@ -4868,11 +4871,11 @@ or a width-for-height layout.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is a convenience function for <code>GtkCellArea</code> implementations
-to request size for cell renderers. It’s important to use this
-function to request size and then use gtk_cell_area_inner_cell_area()
-at render and event time since this function will add padding
-around the cell for focus painting.
+    <p>This is a convenience function for <code>GtkCellArea</code> implementations<br />
+to request size for cell renderers. It’s important to use this<br />
+function to request size and then use gtk_cell_area_inner_cell_area()<br />
+at render and event time since this function will add padding<br />
+around the cell for focus painting.<br />
 the base request for the orientation is to be returned.</p>
 
 
@@ -5002,7 +5005,7 @@ the base request for the orientation is to be returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Snapshots <!-- raw HTML omitted -->area<!-- raw HTML omitted -->’s cells according to <!-- raw HTML omitted -->area<!-- raw HTML omitted -->’s layout onto at
+    <p>Snapshots <!-- raw HTML omitted -->area<!-- raw HTML omitted -->’s cells according to <!-- raw HTML omitted -->area<!-- raw HTML omitted -->’s layout onto at<br />
 the given coordinates.</p>
 
 
@@ -5148,9 +5151,9 @@ the given coordinates.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Explicitly stops the editing of the currently edited cell.</p>
-<p>If <!-- raw HTML omitted -->canceled<!-- raw HTML omitted --> is true, the currently edited cell renderer
-will emit the ::editing-canceled signal, otherwise the
-the ::editing-done signal will be emitted on the current
+<p>If <!-- raw HTML omitted -->canceled<!-- raw HTML omitted --> is true, the currently edited cell renderer<br />
+will emit the ::editing-canceled signal, otherwise the<br />
+the ::editing-done signal will be emitted on the current<br />
 edit widget.</p>
 <p>See gtk_cell_area_get_edited_cell() and gtk_cell_area_get_edit_widget().</p>
 
@@ -5202,7 +5205,7 @@ edit widget.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

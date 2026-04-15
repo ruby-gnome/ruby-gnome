@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::TreeView";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -103,8 +104,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/tree-view.rb<span class="defines">,<br />
+    <dd>lib/gtk4/tree-view.rb<span class="defines">,<br>
   lib/gtk4/deprecated.rb</span>
+
 </dd>
   </dl>
   
@@ -2601,9 +2603,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -2718,7 +2722,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The activate-on-single-click property specifies whether the &quot;row-activated&quot; signal
+    <p>The activate-on-single-click property specifies whether the &quot;row-activated&quot; signal<br />
 will be emitted after a single click.</p>
 
 
@@ -2786,7 +2790,7 @@ will be emitted after a single click.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The activate-on-single-click property specifies whether the &quot;row-activated&quot; signal
+    <p>The activate-on-single-click property specifies whether the &quot;row-activated&quot; signal<br />
 will be emitted after a single click.</p>
 
 
@@ -2826,8 +2830,8 @@ will be emitted after a single click.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Appends <!-- raw HTML omitted -->column<!-- raw HTML omitted --> to the list of columns. If <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> has “fixed_height”
-mode enabled, then <!-- raw HTML omitted -->column<!-- raw HTML omitted --> must have its “sizing” property set to be
+    <p>Appends <!-- raw HTML omitted -->column<!-- raw HTML omitted --> to the list of columns. If <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> has “fixed_height”<br />
+mode enabled, then <!-- raw HTML omitted -->column<!-- raw HTML omitted --> must have its “sizing” property set to be<br />
 GTK_TREE_VIEW_COLUMN_FIXED.</p>
 
 
@@ -2979,7 +2983,7 @@ GTK_TREE_VIEW_COLUMN_FIXED.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a <code>GList</code> of all the <code>GtkTreeViewColumn</code>s currently in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.
+    <p>Returns a <code>GList</code> of all the <code>GtkTreeViewColumn</code>s currently in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.<br />
 The returned list must be freed with g_list_free ().</p>
 
 
@@ -3019,7 +3023,7 @@ The returned list must be freed with g_list_free ().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Resizes all columns to their optimal width. Only works after the
+    <p>Resizes all columns to their optimal width. Only works after the<br />
 treeview has been realized.</p>
 
 
@@ -3055,7 +3059,7 @@ treeview has been realized.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts bin_window coordinates to coordinates for the
+    <p>Converts bin_window coordinates to coordinates for the<br />
 tree (the full scrollable area of the tree).</p>
 
 
@@ -3254,7 +3258,7 @@ tree (the full scrollable area of the tree).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts tree coordinates (coordinates in full scrollable area of the tree)
+    <p>Converts tree coordinates (coordinates in full scrollable area of the tree)<br />
 to bin_window coordinates.</p>
 
 
@@ -3354,7 +3358,7 @@ to bin_window coordinates.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts tree coordinates (coordinates in full scrollable area of the tree)
+    <p>Converts tree coordinates (coordinates in full scrollable area of the tree)<br />
 to widget coordinates.</p>
 
 
@@ -3553,7 +3557,7 @@ to widget coordinates.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts widget coordinates to coordinates for the
+    <p>Converts widget coordinates to coordinates for the<br />
 tree (the full scrollable area of the tree).</p>
 
 
@@ -3653,7 +3657,7 @@ tree (the full scrollable area of the tree).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a <code>cairo_surface_t</code> representation of the row at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->.
+    <p>Creates a <code>cairo_surface_t</code> representation of the row at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->.<br />
 This image is used for a drag icon.</p>
 
 
@@ -3817,7 +3821,7 @@ This image is used for a drag icon.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Turns <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> into a drop destination for automatic DND. Calling
+    <p>Turns <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> into a drop destination for automatic DND. Calling<br />
 this method sets <code>GtkTreeView</code>:reorderable to false.</p>
 
 
@@ -3852,7 +3856,7 @@ this method sets <code>GtkTreeView</code>:reorderable to false.</p>
       
       
         &mdash;
-        <div class='inline'><p>the bitmask of possible actions for a drag from this
+        <div class='inline'><p>the bitmask of possible actions for a drag from this<br />
 widget</p>
 </div>
       
@@ -3908,7 +3912,7 @@ widget</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Turns <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> into a drop destination for automatic DND. Calling
+    <p>Turns <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> into a drop destination for automatic DND. Calling<br />
 this method sets <code>GtkTreeView</code>:reorderable to false.</p>
 
 
@@ -3943,7 +3947,7 @@ this method sets <code>GtkTreeView</code>:reorderable to false.</p>
       
       
         &mdash;
-        <div class='inline'><p>the bitmask of possible actions for a drag from this
+        <div class='inline'><p>the bitmask of possible actions for a drag from this<br />
 widget</p>
 </div>
       
@@ -3993,7 +3997,7 @@ widget</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Turns <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> into a drag source for automatic DND. Calling this
+    <p>Turns <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> into a drag source for automatic DND. Calling this<br />
 method sets <code>GtkTreeView</code>:reorderable to false.</p>
 
 
@@ -4043,7 +4047,7 @@ method sets <code>GtkTreeView</code>:reorderable to false.</p>
       
       
         &mdash;
-        <div class='inline'><p>the bitmask of possible actions for a drag from this
+        <div class='inline'><p>the bitmask of possible actions for a drag from this<br />
 widget</p>
 </div>
       
@@ -4099,7 +4103,7 @@ widget</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Turns <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> into a drag source for automatic DND. Calling this
+    <p>Turns <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> into a drag source for automatic DND. Calling this<br />
 method sets <code>GtkTreeView</code>:reorderable to false.</p>
 
 
@@ -4149,7 +4153,7 @@ method sets <code>GtkTreeView</code>:reorderable to false.</p>
       
       
         &mdash;
-        <div class='inline'><p>the bitmask of possible actions for a drag from this
+        <div class='inline'><p>the bitmask of possible actions for a drag from this<br />
 widget</p>
 </div>
       
@@ -4199,7 +4203,7 @@ widget</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether or not the tree allows to start interactive searching
+    <p>Returns whether or not the tree allows to start interactive searching<br />
 by typing in text.</p>
 
 
@@ -4344,7 +4348,7 @@ by typing in text.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether or not tree lines are drawn in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.
+    <p>Returns whether or not tree lines are drawn in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.<br />
 otherwise.</p>
 
 
@@ -4716,7 +4720,7 @@ otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Expands the row at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->. This will also expand all parent rows of
+    <p>Expands the row at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->. This will also expand all parent rows of<br />
 <!-- raw HTML omitted -->path<!-- raw HTML omitted --> as necessary.</p>
 
 
@@ -4915,10 +4919,10 @@ otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Setting the ::fixed-height-mode property to true speeds up
-<code>GtkTreeView</code> by assuming that all rows have the same height.
-Only enable this option if all rows are the same height.
-Please see gtk_tree_view_set_fixed_height_mode() for more
+    <p>Setting the ::fixed-height-mode property to true speeds up<br />
+<code>GtkTreeView</code> by assuming that all rows have the same height.<br />
+Only enable this option if all rows are the same height.<br />
+Please see gtk_tree_view_set_fixed_height_mode() for more<br />
 information on this option.</p>
 
 
@@ -4986,10 +4990,10 @@ information on this option.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Setting the ::fixed-height-mode property to true speeds up
-<code>GtkTreeView</code> by assuming that all rows have the same height.
-Only enable this option if all rows are the same height.
-Please see gtk_tree_view_set_fixed_height_mode() for more
+    <p>Setting the ::fixed-height-mode property to true speeds up<br />
+<code>GtkTreeView</code> by assuming that all rows have the same height.<br />
+Only enable this option if all rows are the same height.<br />
+Please see gtk_tree_view_set_fixed_height_mode() for more<br />
 information on this option.</p>
 
 
@@ -5029,14 +5033,14 @@ information on this option.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Fills the bounding rectangle in bin_window coordinates for the cell at the
-row specified by <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and the column specified by <!-- raw HTML omitted -->column<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is
-nil, or points to a node not found in the tree, the <!-- raw HTML omitted -->y<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted --> fields of
-the rectangle will be filled with 0. If <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is nil, the <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->width<!-- raw HTML omitted -->
-fields will be filled with 0.  The returned rectangle is equivalent to the
-<!-- raw HTML omitted -->background_area<!-- raw HTML omitted --> passed to gtk_cell_renderer_render().  These background
-areas tile to cover the entire bin window.  Contrast with the <!-- raw HTML omitted -->cell_area<!-- raw HTML omitted -->,
-returned by gtk_tree_view_get_cell_area(), which returns only the cell
+    <p>Fills the bounding rectangle in bin_window coordinates for the cell at the<br />
+row specified by <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and the column specified by <!-- raw HTML omitted -->column<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is<br />
+nil, or points to a node not found in the tree, the <!-- raw HTML omitted -->y<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted --> fields of<br />
+the rectangle will be filled with 0. If <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is nil, the <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->width<!-- raw HTML omitted --><br />
+fields will be filled with 0.  The returned rectangle is equivalent to the<br />
+<!-- raw HTML omitted -->background_area<!-- raw HTML omitted --> passed to gtk_cell_renderer_render().  These background<br />
+areas tile to cover the entire bin window.  Contrast with the <!-- raw HTML omitted -->cell_area<!-- raw HTML omitted -->,<br />
+returned by gtk_tree_view_get_cell_area(), which returns only the cell<br />
 itself, excluding surrounding borders and the tree expander area.</p>
 
 
@@ -5121,14 +5125,14 @@ itself, excluding surrounding borders and the tree expander area.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Fills the bounding rectangle in bin_window coordinates for the cell at the
-row specified by <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and the column specified by <!-- raw HTML omitted -->column<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is
-nil, or points to a path not currently displayed, the <!-- raw HTML omitted -->y<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted --> fields
-of the rectangle will be filled with 0. If <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is nil, the <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->width<!-- raw HTML omitted -->
-fields will be filled with 0.  The sum of all cell rects does not cover the
-entire tree; there are extra pixels in between rows, for example. The
-returned rectangle is equivalent to the <!-- raw HTML omitted -->cell_area<!-- raw HTML omitted --> passed to
-gtk_cell_renderer_render().  This function is only valid if <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is
+    <p>Fills the bounding rectangle in bin_window coordinates for the cell at the<br />
+row specified by <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and the column specified by <!-- raw HTML omitted -->column<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is<br />
+nil, or points to a path not currently displayed, the <!-- raw HTML omitted -->y<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted --> fields<br />
+of the rectangle will be filled with 0. If <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is nil, the <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->width<!-- raw HTML omitted --><br />
+fields will be filled with 0.  The sum of all cell rects does not cover the<br />
+entire tree; there are extra pixels in between rows, for example. The<br />
+returned rectangle is equivalent to the <!-- raw HTML omitted -->cell_area<!-- raw HTML omitted --> passed to<br />
+gtk_cell_renderer_render().  This function is only valid if <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is<br />
 realized.</p>
 
 
@@ -5213,7 +5217,7 @@ realized.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the <code>GtkTreeViewColumn</code> at the given position in the #tree_view.
+    <p>Gets the <code>GtkTreeViewColumn</code> at the given position in the #tree_view.<br />
 position is outside the range of columns.</p>
 
 
@@ -5272,10 +5276,10 @@ position is outside the range of columns.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Fills in <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->focus_column<!-- raw HTML omitted --> with the current path and focus column.  If
-the cursor isn’t currently set, then *<!-- raw HTML omitted -->path<!-- raw HTML omitted --> will be nil.  If no column
+    <p>Fills in <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->focus_column<!-- raw HTML omitted --> with the current path and focus column.  If<br />
+the cursor isn’t currently set, then *<!-- raw HTML omitted -->path<!-- raw HTML omitted --> will be nil.  If no column<br />
 currently has focus, then *<!-- raw HTML omitted -->focus_column<!-- raw HTML omitted --> will be nil.</p>
-<p>The returned <code>GtkTreePath</code> must be freed with gtk_tree_path_free() when
+<p>The returned <code>GtkTreePath</code> must be freed with gtk_tree_path_free() when<br />
 you are done with it.</p>
 
 
@@ -5295,7 +5299,7 @@ you are done with it.</p>
       
       
         &mdash;
-        <div class='inline'><p>A pointer to be
+        <div class='inline'><p>A pointer to be<br />
 filled with the current cursor path</p>
 </div>
       
@@ -5311,7 +5315,7 @@ filled with the current cursor path</p>
       
       
         &mdash;
-        <div class='inline'><p>A
+        <div class='inline'><p>A<br />
 pointer to be filled with the current focus column</p>
 </div>
       
@@ -5347,10 +5351,10 @@ pointer to be filled with the current focus column</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines the destination row for a given position.  <!-- raw HTML omitted -->drag_x<!-- raw HTML omitted --> and
-<!-- raw HTML omitted -->drag_y<!-- raw HTML omitted --> are expected to be in widget coordinates.  This function is only
-meaningful if <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is realized.  Therefore this function will always
-return false if <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is not realized or does not have a model.
+    <p>Determines the destination row for a given position.  <!-- raw HTML omitted -->drag_x<!-- raw HTML omitted --> and<br />
+<!-- raw HTML omitted -->drag_y<!-- raw HTML omitted --> are expected to be in widget coordinates.  This function is only<br />
+meaningful if <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is realized.  Therefore this function will always<br />
+return false if <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is not realized or does not have a model.<br />
 is indeed the case.</p>
 
 
@@ -5400,7 +5404,7 @@ is indeed the case.</p>
       
       
         &mdash;
-        <div class='inline'><p>Return location for the path of
+        <div class='inline'><p>Return location for the path of<br />
 the highlighted row</p>
 </div>
       
@@ -5416,7 +5420,7 @@ the highlighted row</p>
       
       
         &mdash;
-        <div class='inline'><p>Return location for the drop position, or
+        <div class='inline'><p>Return location for the drop position, or<br />
 nil</p>
 </div>
       
@@ -5525,20 +5529,20 @@ nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finds the path at the point (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted -->), relative to bin_window coordinates.
-That is, <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> are relative to an events coordinates. Widget-relative
-coordinates must be converted using
-gtk_tree_view_convert_widget_to_bin_window_coords(). It is primarily for
-things like popup menus. If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is non-nil, then it will be filled
-with the <code>GtkTreePath</code> at that point.  This path should be freed with
-gtk_tree_path_free().  If <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is non-nil, then it will be filled
-with the column at that point.  <!-- raw HTML omitted -->cell_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->cell_y<!-- raw HTML omitted --> return the coordinates
-relative to the cell background (i.e. the <!-- raw HTML omitted -->background_area<!-- raw HTML omitted --> passed to
-gtk_cell_renderer_render()).  This function is only meaningful if
-<!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is realized.  Therefore this function will always return false
+    <p>Finds the path at the point (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted -->), relative to bin_window coordinates.<br />
+That is, <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> are relative to an events coordinates. Widget-relative<br />
+coordinates must be converted using<br />
+gtk_tree_view_convert_widget_to_bin_window_coords(). It is primarily for<br />
+things like popup menus. If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is non-nil, then it will be filled<br />
+with the <code>GtkTreePath</code> at that point.  This path should be freed with<br />
+gtk_tree_path_free().  If <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is non-nil, then it will be filled<br />
+with the column at that point.  <!-- raw HTML omitted -->cell_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->cell_y<!-- raw HTML omitted --> return the coordinates<br />
+relative to the cell background (i.e. the <!-- raw HTML omitted -->background_area<!-- raw HTML omitted --> passed to<br />
+gtk_cell_renderer_render()).  This function is only meaningful if<br />
+<!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is realized.  Therefore this function will always return false<br />
 if <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is not realized or does not have a model.</p>
-<p>For converting widget coordinates (eg. the ones you get from
-GtkWidget::query-tooltip), please see
+<p>For converting widget coordinates (eg. the ones you get from<br />
+GtkWidget::query-tooltip), please see<br />
 gtk_tree_view_convert_widget_to_bin_window_coords().</p>
 
 
@@ -5588,7 +5592,7 @@ gtk_tree_view_convert_widget_to_bin_window_coords().</p>
       
       
         &mdash;
-        <div class='inline'><p>A pointer to a <code>GtkTreePath</code>
+        <div class='inline'><p>A pointer to a <code>GtkTreePath</code><br />
 pointer to be filled in</p>
 </div>
       
@@ -5604,7 +5608,7 @@ pointer to be filled in</p>
       
       
         &mdash;
-        <div class='inline'><p>A pointer to
+        <div class='inline'><p>A pointer to<br />
 a <code>GtkTreeViewColumn</code> pointer to be filled in</p>
 </div>
       
@@ -5620,7 +5624,7 @@ a <code>GtkTreeViewColumn</code> pointer to be filled in</p>
       
       
         &mdash;
-        <div class='inline'><p>A pointer where the X coordinate
+        <div class='inline'><p>A pointer where the X coordinate<br />
 relative to the cell can be placed</p>
 </div>
       
@@ -5636,7 +5640,7 @@ relative to the cell can be placed</p>
       
       
         &mdash;
-        <div class='inline'><p>A pointer where the Y coordinate
+        <div class='inline'><p>A pointer where the Y coordinate<br />
 relative to the cell can be placed</p>
 </div>
       
@@ -5704,20 +5708,20 @@ relative to the cell can be placed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finds the path at the point (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted -->), relative to bin_window coordinates.
-That is, <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> are relative to an events coordinates. Widget-relative
-coordinates must be converted using
-gtk_tree_view_convert_widget_to_bin_window_coords(). It is primarily for
-things like popup menus. If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is non-nil, then it will be filled
-with the <code>GtkTreePath</code> at that point.  This path should be freed with
-gtk_tree_path_free().  If <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is non-nil, then it will be filled
-with the column at that point.  <!-- raw HTML omitted -->cell_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->cell_y<!-- raw HTML omitted --> return the coordinates
-relative to the cell background (i.e. the <!-- raw HTML omitted -->background_area<!-- raw HTML omitted --> passed to
-gtk_cell_renderer_render()).  This function is only meaningful if
-<!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is realized.  Therefore this function will always return false
+    <p>Finds the path at the point (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted -->), relative to bin_window coordinates.<br />
+That is, <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> are relative to an events coordinates. Widget-relative<br />
+coordinates must be converted using<br />
+gtk_tree_view_convert_widget_to_bin_window_coords(). It is primarily for<br />
+things like popup menus. If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is non-nil, then it will be filled<br />
+with the <code>GtkTreePath</code> at that point.  This path should be freed with<br />
+gtk_tree_path_free().  If <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is non-nil, then it will be filled<br />
+with the column at that point.  <!-- raw HTML omitted -->cell_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->cell_y<!-- raw HTML omitted --> return the coordinates<br />
+relative to the cell background (i.e. the <!-- raw HTML omitted -->background_area<!-- raw HTML omitted --> passed to<br />
+gtk_cell_renderer_render()).  This function is only meaningful if<br />
+<!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is realized.  Therefore this function will always return false<br />
 if <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is not realized or does not have a model.</p>
-<p>For converting widget coordinates (eg. the ones you get from
-GtkWidget::query-tooltip), please see
+<p>For converting widget coordinates (eg. the ones you get from<br />
+GtkWidget::query-tooltip), please see<br />
 gtk_tree_view_convert_widget_to_bin_window_coords().</p>
 
 
@@ -5767,7 +5771,7 @@ gtk_tree_view_convert_widget_to_bin_window_coords().</p>
       
       
         &mdash;
-        <div class='inline'><p>A pointer to a <code>GtkTreePath</code>
+        <div class='inline'><p>A pointer to a <code>GtkTreePath</code><br />
 pointer to be filled in</p>
 </div>
       
@@ -5783,7 +5787,7 @@ pointer to be filled in</p>
       
       
         &mdash;
-        <div class='inline'><p>A pointer to
+        <div class='inline'><p>A pointer to<br />
 a <code>GtkTreeViewColumn</code> pointer to be filled in</p>
 </div>
       
@@ -5799,7 +5803,7 @@ a <code>GtkTreeViewColumn</code> pointer to be filled in</p>
       
       
         &mdash;
-        <div class='inline'><p>A pointer where the X coordinate
+        <div class='inline'><p>A pointer where the X coordinate<br />
 relative to the cell can be placed</p>
 </div>
       
@@ -5815,7 +5819,7 @@ relative to the cell can be placed</p>
       
       
         &mdash;
-        <div class='inline'><p>A pointer where the Y coordinate
+        <div class='inline'><p>A pointer where the Y coordinate<br />
 relative to the cell can be placed</p>
 </div>
       
@@ -5869,15 +5873,15 @@ relative to the cell can be placed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function is supposed to be used in a ::query-tooltip
-signal handler for <code>GtkTreeView</code>. The <!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted --> and <!-- raw HTML omitted -->keyboard_tip<!-- raw HTML omitted --> values
-which are received in the signal handler, should be passed to this
+    <p>This function is supposed to be used in a ::query-tooltip<br />
+signal handler for <code>GtkTreeView</code>. The <!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted --> and <!-- raw HTML omitted -->keyboard_tip<!-- raw HTML omitted --> values<br />
+which are received in the signal handler, should be passed to this<br />
 function without modification.</p>
-<p>The return value indicates whether there is a tree view row at the given
-coordinates (true) or not (false) for mouse tooltips. For keyboard
-tooltips the row returned will be the cursor row. When true, then any of
-<!-- raw HTML omitted -->model<!-- raw HTML omitted -->, <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> which have been provided will be set to point to
-that row and the corresponding model. <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> will always be converted
+<p>The return value indicates whether there is a tree view row at the given<br />
+coordinates (true) or not (false) for mouse tooltips. For keyboard<br />
+tooltips the row returned will be the cursor row. When true, then any of<br />
+<!-- raw HTML omitted -->model<!-- raw HTML omitted -->, <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> which have been provided will be set to point to<br />
+that row and the corresponding model. <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> will always be converted<br />
 to be relative to <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->’s bin_window if <!-- raw HTML omitted -->keyboard_tooltip<!-- raw HTML omitted --> is false.</p>
 
 
@@ -5942,7 +5946,7 @@ to be relative to <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->’
       
       
         &mdash;
-        <div class='inline'><p>a pointer to
+        <div class='inline'><p>a pointer to<br />
 receive a <code>GtkTreeModel</code></p>
 </div>
       
@@ -6012,7 +6016,7 @@ receive a <code>GtkTreeModel</code></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->start_path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_path<!-- raw HTML omitted --> to be the first and last visible path.
+    <p>Sets <!-- raw HTML omitted -->start_path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_path<!-- raw HTML omitted --> to be the first and last visible path.<br />
 Note that there may be invisible paths in between.</p>
 <p>The paths should be freed with gtk_tree_path_free() after use.</p>
 
@@ -6087,10 +6091,10 @@ Note that there may be invisible paths in between.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Fills <!-- raw HTML omitted -->visible_rect<!-- raw HTML omitted --> with the currently-visible region of the
-buffer, in tree coordinates. Convert to bin_window coordinates with
-gtk_tree_view_convert_tree_to_bin_window_coords().
-Tree coordinates start at 0,0 for row 0 of the tree, and cover the entire
+    <p>Fills <!-- raw HTML omitted -->visible_rect<!-- raw HTML omitted --> with the currently-visible region of the<br />
+buffer, in tree coordinates. Convert to bin_window coordinates with<br />
+gtk_tree_view_convert_tree_to_bin_window_coords().<br />
+Tree coordinates start at 0,0 for row 0 of the tree, and cover the entire<br />
 scrollable area of the tree.</p>
 
 
@@ -6145,7 +6149,7 @@ scrollable area of the tree.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns which grid lines are enabled in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.
+    <p>Returns which grid lines are enabled in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.<br />
 are enabled.</p>
 
 
@@ -6185,7 +6189,7 @@ are enabled.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets which grid lines to draw in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.
+    <p>Sets which grid lines to draw in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.<br />
 enable.</p>
 
 
@@ -6567,10 +6571,10 @@ enable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Enables or disables the hover expansion mode of <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.
-Hover expansion makes rows expand or collapse if the pointer moves
+    <p>Enables or disables the hover expansion mode of <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.<br />
+Hover expansion makes rows expand or collapse if the pointer moves<br />
 over them.</p>
-<p>This mode is primarily intended for treeviews in popups, e.g.
+<p>This mode is primarily intended for treeviews in popups, e.g.<br />
 in <code>GtkComboBox</code> or <code>GtkEntryCompletion</code>.</p>
 
 
@@ -6638,10 +6642,10 @@ in <code>GtkComboBox</code> or <code>GtkEntryCompletion</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Enables or disables the hover expansion mode of <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.
-Hover expansion makes rows expand or collapse if the pointer moves
+    <p>Enables or disables the hover expansion mode of <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.<br />
+Hover expansion makes rows expand or collapse if the pointer moves<br />
 over them.</p>
-<p>This mode is primarily intended for treeviews in popups, e.g.
+<p>This mode is primarily intended for treeviews in popups, e.g.<br />
 in <code>GtkComboBox</code> or <code>GtkEntryCompletion</code>.</p>
 
 
@@ -6720,11 +6724,11 @@ in <code>GtkComboBox</code> or <code>GtkEntryCompletion</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Enables or disables the hover selection mode of <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.
-Hover selection makes the selected row follow the pointer.
-Currently, this works only for the selection modes
+    <p>Enables or disables the hover selection mode of <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.<br />
+Hover selection makes the selected row follow the pointer.<br />
+Currently, this works only for the selection modes<br />
 %GTK_SELECTION_SINGLE and %GTK_SELECTION_BROWSE.</p>
-<p>This mode is primarily intended for treeviews in popups, e.g.
+<p>This mode is primarily intended for treeviews in popups, e.g.<br />
 in <code>GtkComboBox</code> or <code>GtkEntryCompletion</code>.</p>
 
 
@@ -6792,11 +6796,11 @@ in <code>GtkComboBox</code> or <code>GtkEntryCompletion</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Enables or disables the hover selection mode of <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.
-Hover selection makes the selected row follow the pointer.
-Currently, this works only for the selection modes
+    <p>Enables or disables the hover selection mode of <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.<br />
+Hover selection makes the selected row follow the pointer.<br />
+Currently, this works only for the selection modes<br />
 %GTK_SELECTION_SINGLE and %GTK_SELECTION_BROWSE.</p>
-<p>This mode is primarily intended for treeviews in popups, e.g.
+<p>This mode is primarily intended for treeviews in popups, e.g.<br />
 in <code>GtkComboBox</code> or <code>GtkEntryCompletion</code>.</p>
 
 
@@ -6836,9 +6840,9 @@ in <code>GtkComboBox</code> or <code>GtkEntryCompletion</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This inserts the <!-- raw HTML omitted -->column<!-- raw HTML omitted --> into the <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is
--1, then the column is inserted at the end. If <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> has
-“fixed_height” mode enabled, then <!-- raw HTML omitted -->column<!-- raw HTML omitted --> must have its “sizing” property
+    <p>This inserts the <!-- raw HTML omitted -->column<!-- raw HTML omitted --> into the <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is<br />
+-1, then the column is inserted at the end. If <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> has<br />
+“fixed_height” mode enabled, then <!-- raw HTML omitted -->column<!-- raw HTML omitted --> must have its “sizing” property<br />
 set to be GTK_TREE_VIEW_COLUMN_FIXED.</p>
 
 
@@ -6968,9 +6972,9 @@ set to be GTK_TREE_VIEW_COLUMN_FIXED.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This inserts the <!-- raw HTML omitted -->column<!-- raw HTML omitted --> into the <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is
--1, then the column is inserted at the end. If <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> has
-“fixed_height” mode enabled, then <!-- raw HTML omitted -->column<!-- raw HTML omitted --> must have its “sizing” property
+    <p>This inserts the <!-- raw HTML omitted -->column<!-- raw HTML omitted --> into the <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is<br />
+-1, then the column is inserted at the end. If <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> has<br />
+“fixed_height” mode enabled, then <!-- raw HTML omitted -->column<!-- raw HTML omitted --> must have its “sizing” property<br />
 set to be GTK_TREE_VIEW_COLUMN_FIXED.</p>
 
 
@@ -7058,10 +7062,10 @@ set to be GTK_TREE_VIEW_COLUMN_FIXED.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>GtkTreeViewColumn</code> and inserts it into the <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> at
-<!-- raw HTML omitted -->position<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is -1, then the newly created column is inserted at
-the end.  The column is initialized with the attributes given. If <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->
-has “fixed_height” mode enabled, then the new column will have its sizing
+    <p>Creates a new <code>GtkTreeViewColumn</code> and inserts it into the <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> at<br />
+<!-- raw HTML omitted -->position<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is -1, then the newly created column is inserted at<br />
+the end.  The column is initialized with the attributes given. If <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --><br />
+has “fixed_height” mode enabled, then the new column will have its sizing<br />
 property set to be GTK_TREE_VIEW_COLUMN_FIXED.</p>
 
 
@@ -7165,11 +7169,11 @@ property set to be GTK_TREE_VIEW_COLUMN_FIXED.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Convenience function that inserts a new column into the <code>GtkTreeView</code>
-with the given cell renderer and a <code>GtkTreeCellDataFunc</code> to set cell renderer
-attributes (normally using data from the model). See also
-gtk_tree_view_column_set_cell_data_func(), gtk_tree_view_column_pack_start().
-If <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> has “fixed_height” mode enabled, then the new column will have its
+    <p>Convenience function that inserts a new column into the <code>GtkTreeView</code><br />
+with the given cell renderer and a <code>GtkTreeCellDataFunc</code> to set cell renderer<br />
+attributes (normally using data from the model). See also<br />
+gtk_tree_view_column_set_cell_data_func(), gtk_tree_view_column_pack_start().<br />
+If <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> has “fixed_height” mode enabled, then the new column will have its<br />
 “sizing” property set to be GTK_TREE_VIEW_COLUMN_FIXED.</p>
 
 
@@ -7303,20 +7307,20 @@ If <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> has “fixed_heig
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determine whether the point (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted -->) in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is blank, that is no
-cell content nor an expander arrow is drawn at the location. If so, the
-location can be considered as the background. You might wish to take
-special action on clicks on the background, such as clearing a current
+    <p>Determine whether the point (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted -->) in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is blank, that is no<br />
+cell content nor an expander arrow is drawn at the location. If so, the<br />
+location can be considered as the background. You might wish to take<br />
+special action on clicks on the background, such as clearing a current<br />
 selection, having a custom context menu or starting rubber banding.</p>
-<p>The <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> coordinate that are provided must be relative to bin_window
-coordinates.  Widget-relative coordinates must be converted using
+<p>The <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> coordinate that are provided must be relative to bin_window<br />
+coordinates.  Widget-relative coordinates must be converted using<br />
 gtk_tree_view_convert_widget_to_bin_window_coords().</p>
-<p>For converting widget coordinates (eg. the ones you get from
-GtkWidget::query-tooltip), please see
+<p>For converting widget coordinates (eg. the ones you get from<br />
+GtkWidget::query-tooltip), please see<br />
 gtk_tree_view_convert_widget_to_bin_window_coords().</p>
-<p>The <!-- raw HTML omitted -->path<!-- raw HTML omitted -->, <!-- raw HTML omitted -->column<!-- raw HTML omitted -->, <!-- raw HTML omitted -->cell_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->cell_y<!-- raw HTML omitted --> arguments will be filled in
-likewise as for gtk_tree_view_get_path_at_pos().  Please see
-gtk_tree_view_get_path_at_pos() for more information.
+<p>The <!-- raw HTML omitted -->path<!-- raw HTML omitted -->, <!-- raw HTML omitted -->column<!-- raw HTML omitted -->, <!-- raw HTML omitted -->cell_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->cell_y<!-- raw HTML omitted --> arguments will be filled in<br />
+likewise as for gtk_tree_view_get_path_at_pos().  Please see<br />
+gtk_tree_view_get_path_at_pos() for more information.<br />
 false otherwise.</p>
 
 
@@ -7366,7 +7370,7 @@ false otherwise.</p>
       
       
         &mdash;
-        <div class='inline'><p>A pointer to a <code>GtkTreePath</code> pointer to
+        <div class='inline'><p>A pointer to a <code>GtkTreePath</code> pointer to<br />
 be filled in</p>
 </div>
       
@@ -7382,7 +7386,7 @@ be filled in</p>
       
       
         &mdash;
-        <div class='inline'><p>A pointer to a
+        <div class='inline'><p>A pointer to a<br />
 <code>GtkTreeViewColumn</code> pointer to be filled in</p>
 </div>
       
@@ -7398,7 +7402,7 @@ be filled in</p>
       
       
         &mdash;
-        <div class='inline'><p>A pointer where the X coordinate relative to the
+        <div class='inline'><p>A pointer where the X coordinate relative to the<br />
 cell can be placed</p>
 </div>
       
@@ -7414,7 +7418,7 @@ cell can be placed</p>
       
       
         &mdash;
-        <div class='inline'><p>A pointer where the Y coordinate relative to the
+        <div class='inline'><p>A pointer where the Y coordinate relative to the<br />
 cell can be placed</p>
 </div>
       
@@ -7454,8 +7458,8 @@ cell can be placed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether a rubber banding operation is currently being done
-in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.
+    <p>Returns whether a rubber banding operation is currently being done<br />
+in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.<br />
 done in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.</p>
 
 
@@ -7775,7 +7779,7 @@ done in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Moves <!-- raw HTML omitted -->column<!-- raw HTML omitted --> to be after to <!-- raw HTML omitted -->base_column<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->base_column<!-- raw HTML omitted --> is nil, then
+    <p>Moves <!-- raw HTML omitted -->column<!-- raw HTML omitted --> to be after to <!-- raw HTML omitted -->base_column<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->base_column<!-- raw HTML omitted --> is nil, then<br />
 <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is placed in the first position.</p>
 
 
@@ -7942,7 +7946,7 @@ done in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves whether the user can reorder the tree via drag-and-drop. See
+    <p>Retrieves whether the user can reorder the tree via drag-and-drop. See<br />
 gtk_tree_view_set_reorderable().</p>
 
 
@@ -8253,8 +8257,8 @@ gtk_tree_view_set_reorderable().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether rubber banding is turned on for <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.  If the
-selection mode is %GTK_SELECTION_MULTIPLE, rubber banding will allow the
+    <p>Returns whether rubber banding is turned on for <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.  If the<br />
+selection mode is %GTK_SELECTION_MULTIPLE, rubber banding will allow the<br />
 user to select multiple rows by dragging the mouse.</p>
 
 
@@ -8399,19 +8403,19 @@ user to select multiple rows by dragging the mouse.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Moves the alignments of <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> to the position specified by <!-- raw HTML omitted -->column<!-- raw HTML omitted --> and
-<!-- raw HTML omitted -->path<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is nil, then no horizontal scrolling occurs.  Likewise,
-if <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is nil no vertical scrolling occurs.  At a minimum, one of <!-- raw HTML omitted -->column<!-- raw HTML omitted -->
-or <!-- raw HTML omitted -->path<!-- raw HTML omitted --> need to be non-nil.  <!-- raw HTML omitted -->row_align<!-- raw HTML omitted --> determines where the row is
-placed, and <!-- raw HTML omitted -->col_align<!-- raw HTML omitted --> determines where <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is placed.  Both are expected
-to be between 0.0 and 1.0. 0.0 means left/top alignment, 1.0 means
+    <p>Moves the alignments of <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> to the position specified by <!-- raw HTML omitted -->column<!-- raw HTML omitted --> and<br />
+<!-- raw HTML omitted -->path<!-- raw HTML omitted -->.  If <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is nil, then no horizontal scrolling occurs.  Likewise,<br />
+if <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is nil no vertical scrolling occurs.  At a minimum, one of <!-- raw HTML omitted -->column<!-- raw HTML omitted --><br />
+or <!-- raw HTML omitted -->path<!-- raw HTML omitted --> need to be non-nil.  <!-- raw HTML omitted -->row_align<!-- raw HTML omitted --> determines where the row is<br />
+placed, and <!-- raw HTML omitted -->col_align<!-- raw HTML omitted --> determines where <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is placed.  Both are expected<br />
+to be between 0.0 and 1.0. 0.0 means left/top alignment, 1.0 means<br />
 right/bottom alignment, 0.5 means center.</p>
-<p>If <!-- raw HTML omitted -->use_align<!-- raw HTML omitted --> is false, then the alignment arguments are ignored, and the
-tree does the minimum amount of work to scroll the cell onto the screen.
-This means that the cell will be scrolled to the edge closest to its current
+<p>If <!-- raw HTML omitted -->use_align<!-- raw HTML omitted --> is false, then the alignment arguments are ignored, and the<br />
+tree does the minimum amount of work to scroll the cell onto the screen.<br />
+This means that the cell will be scrolled to the edge closest to its current<br />
 position.  If the cell is currently visible on the screen, nothing is done.</p>
-<p>This function only works if the model is set, and <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is a valid row on the
-model.  If the model changes before the <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is realized, the centered
+<p>This function only works if the model is set, and <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is a valid row on the<br />
+model.  If the model changes before the <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> is realized, the centered<br />
 path will be modified to reflect this change.</p>
 
 
@@ -8526,10 +8530,10 @@ path will be modified to reflect this change.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Scrolls the tree view such that the top-left corner of the visible
-area is <!-- raw HTML omitted -->tree_x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->tree_y<!-- raw HTML omitted -->, where <!-- raw HTML omitted -->tree_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->tree_y<!-- raw HTML omitted --> are specified
-in tree coordinates.  The <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> must be realized before
-this function is called.  If it isn't, you probably want to be
+    <p>Scrolls the tree view such that the top-left corner of the visible<br />
+area is <!-- raw HTML omitted -->tree_x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->tree_y<!-- raw HTML omitted -->, where <!-- raw HTML omitted -->tree_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->tree_y<!-- raw HTML omitted --> are specified<br />
+in tree coordinates.  The <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> must be realized before<br />
+this function is called.  If it isn't, you probably want to be<br />
 using gtk_tree_view_scroll_to_cell().</p>
 <p>If either <!-- raw HTML omitted -->tree_x<!-- raw HTML omitted --> or <!-- raw HTML omitted -->tree_y<!-- raw HTML omitted --> are -1, then that direction isn’t scrolled.</p>
 
@@ -8705,8 +8709,8 @@ using gtk_tree_view_scroll_to_cell().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the <code>GtkEntry</code> which is currently in use as interactive search
-entry for <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.  In case the built-in entry is being used, nil
+    <p>Returns the <code>GtkEntry</code> which is currently in use as interactive search<br />
+entry for <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.  In case the built-in entry is being used, nil<br />
 will be returned.</p>
 
 
@@ -8746,10 +8750,10 @@ will be returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the entry which the interactive search code will use for this
-<!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.  This is useful when you want to provide a search entry
-in our interface at all time at a fixed position.  Passing nil for
-<!-- raw HTML omitted -->entry<!-- raw HTML omitted --> will make the interactive search code use the built-in popup
+    <p>Sets the entry which the interactive search code will use for this<br />
+<!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.  This is useful when you want to provide a search entry<br />
+in our interface at all time at a fixed position.  Passing nil for<br />
+<!-- raw HTML omitted -->entry<!-- raw HTML omitted --> will make the interactive search code use the built-in popup<br />
 entry again.</p>
 
 
@@ -8882,14 +8886,14 @@ entry again.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a user function for determining where a column may be dropped when
-dragged.  This function is called on every column pair in turn at the
-beginning of a column drag to determine where a drop can take place.  The
-arguments passed to <!-- raw HTML omitted -->func<!-- raw HTML omitted --> are: the <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->, the <code>GtkTreeViewColumn</code> being
-dragged, the two <code>GtkTreeViewColumn</code>s determining the drop spot, and
-<!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->.  If either of the <code>GtkTreeViewColumn</code> arguments for the drop spot
-are nil, then they indicate an edge.  If <!-- raw HTML omitted -->func<!-- raw HTML omitted --> is set to be nil, then
-<!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> reverts to the default behavior of allowing all columns to be
+    <p>Sets a user function for determining where a column may be dropped when<br />
+dragged.  This function is called on every column pair in turn at the<br />
+beginning of a column drag to determine where a drop can take place.  The<br />
+arguments passed to <!-- raw HTML omitted -->func<!-- raw HTML omitted --> are: the <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->, the <code>GtkTreeViewColumn</code> being<br />
+dragged, the two <code>GtkTreeViewColumn</code>s determining the drop spot, and<br />
+<!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->.  If either of the <code>GtkTreeViewColumn</code> arguments for the drop spot<br />
+are nil, then they indicate an edge.  If <!-- raw HTML omitted -->func<!-- raw HTML omitted --> is set to be nil, then<br />
+<!-- raw HTML omitted -->tree_view<!-- raw HTML omitted --> reverts to the default behavior of allowing all columns to be<br />
 dropped everywhere.</p>
 
 
@@ -8974,15 +8978,15 @@ dropped everywhere.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the current keyboard focus to be at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->, and selects it.  This is
-useful when you want to focus the user’s attention on a particular row.  If
-<!-- raw HTML omitted -->focus_column<!-- raw HTML omitted --> is not nil, then focus is given to the column specified by
-it. Additionally, if <!-- raw HTML omitted -->focus_column<!-- raw HTML omitted --> is specified, and <!-- raw HTML omitted -->start_editing<!-- raw HTML omitted --> is
-true, then editing should be started in the specified cell.
-This function is often followed by <!-- raw HTML omitted -->gtk_widget_grab_focus<!-- raw HTML omitted --> (<!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->)
-in order to give keyboard focus to the widget.  Please note that editing
+    <p>Sets the current keyboard focus to be at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->, and selects it.  This is<br />
+useful when you want to focus the user’s attention on a particular row.  If<br />
+<!-- raw HTML omitted -->focus_column<!-- raw HTML omitted --> is not nil, then focus is given to the column specified by<br />
+it. Additionally, if <!-- raw HTML omitted -->focus_column<!-- raw HTML omitted --> is specified, and <!-- raw HTML omitted -->start_editing<!-- raw HTML omitted --> is<br />
+true, then editing should be started in the specified cell.<br />
+This function is often followed by <!-- raw HTML omitted -->gtk_widget_grab_focus<!-- raw HTML omitted --> (<!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->)<br />
+in order to give keyboard focus to the widget.  Please note that editing<br />
 can only happen when the widget is realized.</p>
-<p>If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is invalid for <!-- raw HTML omitted -->model<!-- raw HTML omitted -->, the current cursor (if any) will be unset
+<p>If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is invalid for <!-- raw HTML omitted -->model<!-- raw HTML omitted -->, the current cursor (if any) will be unset<br />
 and the function will return without failing.</p>
 
 
@@ -9067,18 +9071,18 @@ and the function will return without failing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the current keyboard focus to be at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->, and selects it.  This is
-useful when you want to focus the user’s attention on a particular row.  If
-<!-- raw HTML omitted -->focus_column<!-- raw HTML omitted --> is not nil, then focus is given to the column specified by
-it. If <!-- raw HTML omitted -->focus_column<!-- raw HTML omitted --> and <!-- raw HTML omitted -->focus_cell<!-- raw HTML omitted --> are not nil, and <!-- raw HTML omitted -->focus_column<!-- raw HTML omitted -->
-contains 2 or more editable or activatable cells, then focus is given to
-the cell specified by <!-- raw HTML omitted -->focus_cell<!-- raw HTML omitted -->. Additionally, if <!-- raw HTML omitted -->focus_column<!-- raw HTML omitted --> is
-specified, and <!-- raw HTML omitted -->start_editing<!-- raw HTML omitted --> is true, then editing should be started in
-the specified cell.  This function is often followed by
-<!-- raw HTML omitted -->gtk_widget_grab_focus<!-- raw HTML omitted --> (<!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->) in order to give keyboard focus to the
-widget.  Please note that editing can only happen when the widget is
+    <p>Sets the current keyboard focus to be at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->, and selects it.  This is<br />
+useful when you want to focus the user’s attention on a particular row.  If<br />
+<!-- raw HTML omitted -->focus_column<!-- raw HTML omitted --> is not nil, then focus is given to the column specified by<br />
+it. If <!-- raw HTML omitted -->focus_column<!-- raw HTML omitted --> and <!-- raw HTML omitted -->focus_cell<!-- raw HTML omitted --> are not nil, and <!-- raw HTML omitted -->focus_column<!-- raw HTML omitted --><br />
+contains 2 or more editable or activatable cells, then focus is given to<br />
+the cell specified by <!-- raw HTML omitted -->focus_cell<!-- raw HTML omitted -->. Additionally, if <!-- raw HTML omitted -->focus_column<!-- raw HTML omitted --> is<br />
+specified, and <!-- raw HTML omitted -->start_editing<!-- raw HTML omitted --> is true, then editing should be started in<br />
+the specified cell.  This function is often followed by<br />
+<!-- raw HTML omitted -->gtk_widget_grab_focus<!-- raw HTML omitted --> (<!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->) in order to give keyboard focus to the<br />
+widget.  Please note that editing can only happen when the widget is<br />
 realized.</p>
-<p>If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is invalid for <!-- raw HTML omitted -->model<!-- raw HTML omitted -->, the current cursor (if any) will be unset
+<p>If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is invalid for <!-- raw HTML omitted -->model<!-- raw HTML omitted -->, the current cursor (if any) will be unset<br />
 and the function will return without failing.</p>
 
 
@@ -9178,7 +9182,7 @@ and the function will return without failing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the row that is highlighted for feedback.
+    <p>Sets the row that is highlighted for feedback.<br />
 If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is nil, an existing highlight is removed.</p>
 
 
@@ -9248,8 +9252,8 @@ If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is nil, an existing hi
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the row separator function, which is used to determine
-whether a row should be drawn as a separator. If the row separator
+    <p>Sets the row separator function, which is used to determine<br />
+whether a row should be drawn as a separator. If the row separator<br />
 function is nil, no separators are drawn. This is the default value.</p>
 
 
@@ -9334,8 +9338,8 @@ function is nil, no separators are drawn. This is the default value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the compare function for the interactive search capabilities; note
-that somewhat like strcmp() returning 0 for equality
+    <p>Sets the compare function for the interactive search capabilities; note<br />
+that somewhat like strcmp() returning 0 for equality<br />
 <code>GtkTreeView</code>SearchEqualFunc returns false on matches.</p>
 
 
@@ -9420,13 +9424,13 @@ that somewhat like strcmp() returning 0 for equality
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the tip area of <!-- raw HTML omitted -->tooltip<!-- raw HTML omitted --> to the area <!-- raw HTML omitted -->path<!-- raw HTML omitted -->, <!-- raw HTML omitted -->column<!-- raw HTML omitted --> and <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> have
-in common.  For example if <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is nil and <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is set, the tip
-area will be set to the full area covered by <!-- raw HTML omitted -->column<!-- raw HTML omitted -->.  See also
+    <p>Sets the tip area of <!-- raw HTML omitted -->tooltip<!-- raw HTML omitted --> to the area <!-- raw HTML omitted -->path<!-- raw HTML omitted -->, <!-- raw HTML omitted -->column<!-- raw HTML omitted --> and <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> have<br />
+in common.  For example if <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is nil and <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is set, the tip<br />
+area will be set to the full area covered by <!-- raw HTML omitted -->column<!-- raw HTML omitted -->.  See also<br />
 gtk_tooltip_set_tip_area().</p>
-<p>Note that if <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is not specified and <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> is set and part of a column
-containing the expander, the tooltip might not show and hide at the correct
-position.  In such cases <!-- raw HTML omitted -->path<!-- raw HTML omitted --> must be set to the current node under the
+<p>Note that if <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is not specified and <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> is set and part of a column<br />
+containing the expander, the tooltip might not show and hide at the correct<br />
+position.  In such cases <!-- raw HTML omitted -->path<!-- raw HTML omitted --> must be set to the current node under the<br />
 mouse cursor for this function to operate correctly.</p>
 <p>See also gtk_tree_view_set_tooltip_column() for a simpler alternative.</p>
 
@@ -9527,8 +9531,8 @@ mouse cursor for this function to operate correctly.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the tip area of <!-- raw HTML omitted -->tooltip<!-- raw HTML omitted --> to be the area covered by the row at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->.
-See also gtk_tree_view_set_tooltip_column() for a simpler alternative.
+    <p>Sets the tip area of <!-- raw HTML omitted -->tooltip<!-- raw HTML omitted --> to be the area covered by the row at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->.<br />
+See also gtk_tree_view_set_tooltip_column() for a simpler alternative.<br />
 See also gtk_tooltip_set_tip_area().</p>
 
 
@@ -9598,7 +9602,7 @@ See also gtk_tooltip_set_tip_area().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether or not expanders are drawn in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.
+    <p>Returns whether or not expanders are drawn in <!-- raw HTML omitted -->tree_view<!-- raw HTML omitted -->.<br />
 otherwise.</p>
 
 
@@ -9849,8 +9853,8 @@ otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Undoes the effect of
-gtk_tree_view_enable_model_drag_dest(). Calling this method sets
+    <p>Undoes the effect of<br />
+gtk_tree_view_enable_model_drag_dest(). Calling this method sets<br />
 <code>GtkTreeView</code>:reorderable to false.</p>
 
 
@@ -9886,8 +9890,8 @@ gtk_tree_view_enable_model_drag_dest(). Calling this method sets
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Undoes the effect of
-gtk_tree_view_enable_model_drag_source(). Calling this method sets
+    <p>Undoes the effect of<br />
+gtk_tree_view_enable_model_drag_source(). Calling this method sets<br />
 <code>GtkTreeView</code>:reorderable to false.</p>
 
 
@@ -9919,7 +9923,7 @@ gtk_tree_view_enable_model_drag_source(). Calling this method sets
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

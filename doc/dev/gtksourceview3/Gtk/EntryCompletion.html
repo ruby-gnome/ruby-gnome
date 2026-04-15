@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::EntryCompletion";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,45 +95,46 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkEntryCompletion</code> is an auxiliary object to provide completion functionality
+    <p><code>GtkEntryCompletion</code> is an auxiliary object to provide completion functionality<br />
 for <code>GtkEntry</code>.</p>
-<p>It implements the [iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CellLayout] interface, to allow the user
+<p>It implements the [iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CellLayout] interface, to allow the user<br />
 to add extra cells to the <code>GtkTreeView</code> with completion matches.</p>
-<p>“Completion functionality” means that when the user modifies the text
-in the entry, <code>GtkEntryCompletion</code> checks which rows in the model match
-the current content of the entry, and displays a list of matches.
-By default, the matching is done by comparing the entry text
-case-insensitively against the text column of the model (see
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion.set_text_column]), but this can be overridden
+<p>“Completion functionality” means that when the user modifies the text<br />
+in the entry, <code>GtkEntryCompletion</code> checks which rows in the model match<br />
+the current content of the entry, and displays a list of matches.<br />
+By default, the matching is done by comparing the entry text<br />
+case-insensitively against the text column of the model (see<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion.set_text_column]), but this can be overridden<br />
 with a custom match function (see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion.set_match_func]).</p>
-<p>When the user selects a completion, the content of the entry is
-updated. By default, the content of the entry is replaced by the
-text column of the model, but this can be overridden by connecting
-to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion::match-selected] signal and updating the
-entry in the signal handler. Note that you should return true from
+<p>When the user selects a completion, the content of the entry is<br />
+updated. By default, the content of the entry is replaced by the<br />
+text column of the model, but this can be overridden by connecting<br />
+to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion::match-selected] signal and updating the<br />
+entry in the signal handler. Note that you should return true from<br />
 the signal handler to suppress the default behaviour.</p>
-<p>To add completion functionality to an entry, use
+<p>To add completion functionality to an entry, use<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry.set_completion].</p>
-<p><code>GtkEntryCompletion</code> uses a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeModelFilter] model to
-represent the subset of the entire model that is currently matching.
-While the <code>GtkEntryCompletion</code> signals
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion::match-selected] and
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion::cursor-on-match] take the original model
-and an iter pointing to that model as arguments, other callbacks and
-signals (such as <code>GtkCellLayoutDataFunc</code> or
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CellArea::apply-attributes)]
-will generally take the filter model as argument. As long as you are
-only calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeModel.get], this will make no difference to
-you. If for some reason, you need the original model, use
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeModelFilter.get_model]. Don’t forget to use
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeModelFilter.convert_iter_to_child_iter] to obtain a
+<p><code>GtkEntryCompletion</code> uses a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeModelFilter] model to<br />
+represent the subset of the entire model that is currently matching.<br />
+While the <code>GtkEntryCompletion</code> signals<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion::match-selected] and<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion::cursor-on-match] take the original model<br />
+and an iter pointing to that model as arguments, other callbacks and<br />
+signals (such as <code>GtkCellLayoutDataFunc</code> or<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CellArea::apply-attributes)]<br />
+will generally take the filter model as argument. As long as you are<br />
+only calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeModel.get], this will make no difference to<br />
+you. If for some reason, you need the original model, use<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeModelFilter.get_model]. Don’t forget to use<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeModelFilter.convert_iter_to_child_iter] to obtain a<br />
 matching iter.</p>
 
 
@@ -847,6 +849,7 @@ matching iter.</p>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -863,9 +866,9 @@ matching iter.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>GtkEntryCompletion</code> object using the
+    <p>Creates a new <code>GtkEntryCompletion</code> object using the<br />
 specified <!-- raw HTML omitted -->area<!-- raw HTML omitted -->.</p>
-<p>The <code>GtkCellArea</code> is used to layout cells in the underlying
+<p>The <code>GtkCellArea</code> is used to layout cells in the underlying<br />
 <code>GtkTreeViewColumn</code> for the drop-down menu.</p>
 
 
@@ -915,8 +918,8 @@ specified <!-- raw HTML omitted -->area<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkCellArea</code> used to layout cell renderers in the treeview column.</p>
-<p>If no area is specified when creating the entry completion with
-[ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion.new_with_area], a horizontally oriented
+<p>If no area is specified when creating the entry completion with<br />
+[ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion.new_with_area], a horizontally oriented<br />
 [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CellAreaBox] will be used.</p>
 
 
@@ -957,8 +960,8 @@ specified <!-- raw HTML omitted -->area<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkCellArea</code> used to layout cell renderers in the treeview column.</p>
-<p>If no area is specified when creating the entry completion with
-[ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion.new_with_area], a horizontally oriented
+<p>If no area is specified when creating the entry completion with<br />
+[ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion.new_with_area], a horizontally oriented<br />
 [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CellAreaBox] will be used.</p>
 
 
@@ -1026,7 +1029,7 @@ specified <!-- raw HTML omitted -->area<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Requests a completion operation, or in other words a refiltering of the
+    <p>Requests a completion operation, or in other words a refiltering of the<br />
 current list with completions, using the current key.</p>
 <p>The completion list view will be updated accordingly.</p>
 
@@ -1063,7 +1066,7 @@ current list with completions, using the current key.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the original text entered by the user that triggered
+    <p>Get the original text entered by the user that triggered<br />
 the completion or nil if there’s no completion ongoing.</p>
 
 
@@ -1103,10 +1106,10 @@ the completion or nil if there’s no completion ongoing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Computes the common prefix that is shared by all rows in <!-- raw HTML omitted -->completion<!-- raw HTML omitted -->
+    <p>Computes the common prefix that is shared by all rows in <!-- raw HTML omitted -->completion<!-- raw HTML omitted --><br />
 that start with <!-- raw HTML omitted -->key<!-- raw HTML omitted -->.</p>
-<p>If no row matches <!-- raw HTML omitted -->key<!-- raw HTML omitted -->, nil will be returned.
-Note that a text column must have been set for this function to work,
+<p>If no row matches <!-- raw HTML omitted -->key<!-- raw HTML omitted -->, nil will be returned.<br />
+Note that a text column must have been set for this function to work,<br />
 see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion.set_text_column] for details.</p>
 
 
@@ -1144,7 +1147,7 @@ see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion
       
       
         &mdash;
-        <div class='inline'><p>The common prefix all rows
+        <div class='inline'><p>The common prefix all rows<br />
 starting with <!-- raw HTML omitted -->key<!-- raw HTML omitted --></p>
 </div>
       
@@ -1205,7 +1208,7 @@ starting with <!-- raw HTML omitted -->key<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the common prefix of the possible completions should
+    <p>Returns whether the common prefix of the possible completions should<br />
 be automatically inserted in the entry.</p>
 
 
@@ -1245,9 +1248,9 @@ be automatically inserted in the entry.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the common prefix of the possible completions
+    <p>Determines whether the common prefix of the possible completions<br />
 should be inserted automatically in the entry.</p>
-<p>Note that this requires text-column to be set, even if you are
+<p>Note that this requires text-column to be set, even if you are<br />
 using a custom match function.</p>
 
 
@@ -1315,9 +1318,9 @@ using a custom match function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the common prefix of the possible completions
+    <p>Determines whether the common prefix of the possible completions<br />
 should be inserted automatically in the entry.</p>
-<p>Note that this requires text-column to be set, even if you are
+<p>Note that this requires text-column to be set, even if you are<br />
 using a custom match function.</p>
 
 
@@ -1396,7 +1399,7 @@ using a custom match function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the possible completions on the popup
+    <p>Determines whether the possible completions on the popup<br />
 will appear in the entry as you navigate through them.</p>
 
 
@@ -1464,7 +1467,7 @@ will appear in the entry as you navigate through them.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the possible completions on the popup
+    <p>Determines whether the possible completions on the popup<br />
 will appear in the entry as you navigate through them.</p>
 
 
@@ -1788,7 +1791,7 @@ will appear in the entry as you navigate through them.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the possible completions should be
+    <p>Determines whether the possible completions should be<br />
 shown in a popup window.</p>
 
 
@@ -1856,7 +1859,7 @@ shown in a popup window.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the possible completions should be
+    <p>Determines whether the possible completions should be<br />
 shown in a popup window.</p>
 
 
@@ -1896,7 +1899,7 @@ shown in a popup window.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the completion popup window will be resized to the
+    <p>Returns whether the completion popup window will be resized to the<br />
 width of the entry.</p>
 
 
@@ -1915,7 +1918,7 @@ width of the entry.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the popup window will be resized to the width of
+        <div class='inline'><p>true if the popup window will be resized to the width of<br />
 the entry</p>
 </div>
       
@@ -1937,7 +1940,7 @@ the entry</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the completions popup window will be
+    <p>Determines whether the completions popup window will be<br />
 resized to the width of the entry.</p>
 
 
@@ -2005,7 +2008,7 @@ resized to the width of the entry.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the completions popup window will be
+    <p>Determines whether the completions popup window will be<br />
 resized to the width of the entry.</p>
 
 
@@ -2045,7 +2048,7 @@ resized to the width of the entry.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the completion popup window will appear even if there is
+    <p>Returns whether the completion popup window will appear even if there is<br />
 only a single match.</p>
 
 
@@ -2064,7 +2067,7 @@ only a single match.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the popup window will appear regardless of the
+        <div class='inline'><p>true if the popup window will appear regardless of the<br />
 number of matches</p>
 </div>
       
@@ -2086,9 +2089,9 @@ number of matches</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the completions popup window will shown
+    <p>Determines whether the completions popup window will shown<br />
 for a single possible completion.</p>
-<p>You probably want to set this to false if you are using
+<p>You probably want to set this to false if you are using<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion:inline-completion].</p>
 
 
@@ -2156,9 +2159,9 @@ for a single possible completion.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines whether the completions popup window will shown
+    <p>Determines whether the completions popup window will shown<br />
 for a single possible completion.</p>
-<p>You probably want to set this to false if you are using
+<p>You probably want to set this to false if you are using<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.EntryCompletion:inline-completion].</p>
 
 
@@ -2199,7 +2202,7 @@ for a single possible completion.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the match function for <!-- raw HTML omitted -->completion<!-- raw HTML omitted --> to be <!-- raw HTML omitted -->func<!-- raw HTML omitted -->.</p>
-<p>The match function is used to determine if a row should or
+<p>The match function is used to determine if a row should or<br />
 should not be in the completion list.</p>
 
 
@@ -2388,7 +2391,7 @@ should not be in the completion list.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

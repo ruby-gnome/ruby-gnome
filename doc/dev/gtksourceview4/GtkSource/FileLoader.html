@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::FileLoader";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -462,6 +464,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -556,7 +559,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The Gtk::SourceBuffer to load the contents into. The
+    <p>The Gtk::SourceBuffer to load the contents into. The<br />
 Gtk::SourceFileLoader object has a weak reference to the buffer.</p>
 
 
@@ -596,7 +599,7 @@ Gtk::SourceFileLoader object has a weak reference to the buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The Gtk::SourceBuffer to load the contents into. The
+    <p>The Gtk::SourceBuffer to load the contents into. The<br />
 Gtk::SourceFileLoader object has a weak reference to the buffer.</p>
 
 
@@ -666,7 +669,7 @@ Gtk::SourceFileLoader object has a weak reference to the buffer.</p>
   <div class="discussion">
     <p>Sets the candidate encodings for the file loading.</p>
 <p>The encodings are tried in the same order as the list.</p>
-<p>For convenience, <!-- raw HTML omitted -->candidate_encodings<!-- raw HTML omitted --> can contain duplicates. Only the first
+<p>For convenience, <!-- raw HTML omitted -->candidate_encodings<!-- raw HTML omitted --> can contain duplicates. Only the first<br />
 occurrence of a duplicated encoding is kept in the list.</p>
 <p>By default the candidate encodings are (in that order in the list):</p>
 <ol>
@@ -691,7 +694,7 @@ occurrence of a duplicated encoding is kept in the list.</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of
+        <div class='inline'><p>a list of<br />
 Gtk::SourceEncoding<!-- raw HTML omitted -->s.</p>
 </div>
       
@@ -805,7 +808,7 @@ Gtk::SourceEncoding<!-- raw HTML omitted -->s.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The Gtk::SourceFile. The #GtkSourceFileLoader object has a weak
+    <p>The Gtk::SourceFile. The #GtkSourceFileLoader object has a weak<br />
 reference to the file.</p>
 
 
@@ -845,7 +848,7 @@ reference to the file.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The Gtk::SourceFile. The #GtkSourceFileLoader object has a weak
+    <p>The Gtk::SourceFile. The #GtkSourceFileLoader object has a weak<br />
 reference to the file.</p>
 
 
@@ -913,7 +916,7 @@ reference to the file.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The GInput::Stream to load. Useful for reading stdin. If this property
+    <p>The GInput::Stream to load. Useful for reading stdin. If this property<br />
 is set, the Gtk::SourceFileLoader:location property is ignored.</p>
 
 
@@ -953,7 +956,7 @@ is set, the Gtk::SourceFileLoader:location property is ignored.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The GInput::Stream to load. Useful for reading stdin. If this property
+    <p>The GInput::Stream to load. Useful for reading stdin. If this property<br />
 is set, the Gtk::SourceFileLoader:location property is ignored.</p>
 
 
@@ -1022,7 +1025,7 @@ is set, the Gtk::SourceFileLoader:location property is ignored.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Loads asynchronously the file or input stream contents into the [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->].</p>
-<p>See the [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult] documentation to know how to use this
+<p>See the [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult] documentation to know how to use this<br />
 function.</p>
 
 
@@ -1042,7 +1045,7 @@ function.</p>
       
       
         &mdash;
-        <div class='inline'><p>the I/O priority of the request. E.g. %G_PRIORITY_LOW,
+        <div class='inline'><p>the I/O priority of the request. E.g. %G_PRIORITY_LOW,<br />
 %G_PRIORITY_DEFAULT or %G_PRIORITY_HIGH.</p>
 </div>
       
@@ -1073,7 +1076,7 @@ function.</p>
       
       
         &mdash;
-        <div class='inline'><p>function to call back with
+        <div class='inline'><p>function to call back with<br />
 progress information, or nil if progress information is not needed.</p>
 </div>
       
@@ -1104,8 +1107,8 @@ progress information, or nil if progress information is not needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>function to call on
-<!-- raw HTML omitted -->progress_callback_data<!-- raw HTML omitted --> when the <!-- raw HTML omitted -->progress_callback<!-- raw HTML omitted --> is no longer needed, or
+        <div class='inline'><p>function to call on<br />
+<!-- raw HTML omitted -->progress_callback_data<!-- raw HTML omitted --> when the <!-- raw HTML omitted -->progress_callback<!-- raw HTML omitted --> is no longer needed, or<br />
 nil.</p>
 </div>
       
@@ -1121,7 +1124,7 @@ nil.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback to call when the request is
+        <div class='inline'><p>a GAsync::ReadyCallback to call when the request is<br />
 satisfied.</p>
 </div>
       
@@ -1173,8 +1176,8 @@ satisfied.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finishes a file loading started with [method<!-- raw HTML omitted -->FileLoader<!-- raw HTML omitted -->.load_async].</p>
-<p>If the contents has been loaded, the following [class<!-- raw HTML omitted -->File<!-- raw HTML omitted -->] properties will
-be updated: the location, the encoding, the newline type and the compression
+<p>If the contents has been loaded, the following [class<!-- raw HTML omitted -->File<!-- raw HTML omitted -->] properties will<br />
+be updated: the location, the encoding, the newline type and the compression<br />
 type.</p>
 
 
@@ -1233,8 +1236,8 @@ type.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The #GFile to load. If the Gtk::SourceFileLoader:input-stream is
-nil, by default the location is taken from the Gtk::SourceFile at
+    <p>The #GFile to load. If the Gtk::SourceFileLoader:input-stream is<br />
+nil, by default the location is taken from the Gtk::SourceFile at<br />
 construction time.</p>
 
 
@@ -1274,8 +1277,8 @@ construction time.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The #GFile to load. If the Gtk::SourceFileLoader:input-stream is
-nil, by default the location is taken from the Gtk::SourceFile at
+    <p>The #GFile to load. If the Gtk::SourceFileLoader:input-stream is<br />
+nil, by default the location is taken from the Gtk::SourceFile at<br />
 construction time.</p>
 
 
@@ -1378,7 +1381,7 @@ construction time.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

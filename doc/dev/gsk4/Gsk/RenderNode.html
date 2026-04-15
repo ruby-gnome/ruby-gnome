@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gsk::RenderNode";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,22 +95,23 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GskRenderNode</code> is the basic block in a scene graph to be
+    <p><code>GskRenderNode</code> is the basic block in a scene graph to be<br />
 rendered using [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer].</p>
-<p>Each node has a parent, except the top-level node; each node may have
+<p>Each node has a parent, except the top-level node; each node may have<br />
 children nodes.</p>
-<p>Each node has an associated drawing surface, which has the size of
+<p>Each node has an associated drawing surface, which has the size of<br />
 the rectangle set when creating it.</p>
-<p>Render nodes are meant to be transient; once they have been associated
-to a [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer] it's safe to release any reference you have on
-them. All [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.RenderNode]s are immutable, you can only specify their
+<p>Render nodes are meant to be transient; once they have been associated<br />
+to a [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer] it's safe to release any reference you have on<br />
+them. All [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.RenderNode]s are immutable, you can only specify their<br />
 properties during construction.</p>
 
 
@@ -161,6 +163,7 @@ properties during construction.</p>
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -331,6 +334,7 @@ properties during construction.</p>
 
       
     </ul>
+    
   
 
 
@@ -446,10 +450,10 @@ properties during construction.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Draw the contents of <!-- raw HTML omitted -->node<!-- raw HTML omitted --> to the given cairo context.</p>
-<p>Typically, you'll use this function to implement fallback rendering
-of <code>GskRenderNode</code>s on an intermediate Cairo context, instead of using
+<p>Typically, you'll use this function to implement fallback rendering<br />
+of <code>GskRenderNode</code>s on an intermediate Cairo context, instead of using<br />
 the drawing context associated to a [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface]'s rendering buffer.</p>
-<p>For advanced nodes that cannot be supported using Cairo, in particular
+<p>For advanced nodes that cannot be supported using Cairo, in particular<br />
 for nodes doing 3D operations, this function may fail.</p>
 
 
@@ -637,13 +641,13 @@ for nodes doing 3D operations, this function may fail.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Serializes the <!-- raw HTML omitted -->node<!-- raw HTML omitted --> for later deserialization via
-gsk_render_node_deserialize(). No guarantees are made about the format
-used other than that the same version of GTK will be able to deserialize
-the result of a call to gsk_render_node_serialize() and
-gsk_render_node_deserialize() will correctly reject files it cannot open
+    <p>Serializes the <!-- raw HTML omitted -->node<!-- raw HTML omitted --> for later deserialization via<br />
+gsk_render_node_deserialize(). No guarantees are made about the format<br />
+used other than that the same version of GTK will be able to deserialize<br />
+the result of a call to gsk_render_node_serialize() and<br />
+gsk_render_node_deserialize() will correctly reject files it cannot open<br />
 that were created with previous versions of GTK.</p>
-<p>The intended use of this functions is testing, benchmarking and debugging.
+<p>The intended use of this functions is testing, benchmarking and debugging.<br />
 The format is not meant as a permanent storage format.</p>
 
 
@@ -684,7 +688,7 @@ The format is not meant as a permanent storage format.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Releases a reference on the given <code>GskRenderNode</code>.</p>
-<p>If the reference was the last, the resources associated to the <!-- raw HTML omitted -->node<!-- raw HTML omitted --> are
+<p>If the reference was the last, the resources associated to the <!-- raw HTML omitted -->node<!-- raw HTML omitted --> are<br />
 freed.</p>
 
 
@@ -720,10 +724,10 @@ freed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function is equivalent to calling [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.RenderNode.serialize]
+    <p>This function is equivalent to calling [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.RenderNode.serialize]<br />
 followed by [func<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.file_set_contents].</p>
 <p>See those two functions for details on the arguments.</p>
-<p>It is mostly intended for use inside a debugger to quickly dump a render
+<p>It is mostly intended for use inside a debugger to quickly dump a render<br />
 node to a file for later inspection.</p>
 
 
@@ -778,7 +782,7 @@ node to a file for later inspection.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

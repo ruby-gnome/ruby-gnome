@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::SocketConnection";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -167,6 +169,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -360,9 +363,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -390,7 +395,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks up the #GType to be used when creating socket connections on
+    <p>Looks up the #GType to be used when creating socket connections on<br />
 sockets with the specified <!-- raw HTML omitted -->family<!-- raw HTML omitted -->, <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and <!-- raw HTML omitted -->protocol_id<!-- raw HTML omitted -->.</p>
 <p>If no type is registered, the GSocket::Connection base type is returned.</p>
 
@@ -480,7 +485,7 @@ sockets with the specified <!-- raw HTML omitted -->family<!-- raw HTML omitted 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks up the #GType to be used when creating socket connections on
+    <p>Looks up the #GType to be used when creating socket connections on<br />
 sockets with the specified <!-- raw HTML omitted -->family<!-- raw HTML omitted -->, <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and <!-- raw HTML omitted -->protocol<!-- raw HTML omitted -->.</p>
 <p>If no type is registered, the GSocket::Connection base type is returned.</p>
 
@@ -661,10 +666,10 @@ sockets with the specified <!-- raw HTML omitted -->family<!-- raw HTML omitted 
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asynchronously connect <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> to the specified remote address.</p>
-<p>This clears the #GSocket:blocking flag on <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->'s underlying
+<p>This clears the #GSocket:blocking flag on <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->'s underlying<br />
 socket if it is currently set.</p>
-<p>If #GSocket:timeout is set, the operation will time out and return
-%G_IO_ERROR_TIMED_OUT after that period. Otherwise, it will continue
+<p>If #GSocket:timeout is set, the operation will time out and return<br />
+%G_IO_ERROR_TIMED_OUT after that period. Otherwise, it will continue<br />
 indefinitely until operating system timeouts (if any) are hit.</p>
 <p>Use g_socket_connection_connect_finish() to retrieve the result.</p>
 
@@ -823,7 +828,7 @@ indefinitely until operating system timeouts (if any) are hit.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is connected. This is equivalent to calling
+    <p>Checks if <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is connected. This is equivalent to calling<br />
 g_socket_is_connected() on <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->'s underlying #GSocket.</p>
 
 
@@ -881,7 +886,7 @@ g_socket_is_connected() on <!-- raw HTML omitted -->connection<!-- raw HTML omit
       
       
         &mdash;
-        <div class='inline'><p>a GSocket::Address or nil on error.
+        <div class='inline'><p>a GSocket::Address or nil on error.<br />
 Free the returned object with g_object_unref().</p>
 </div>
       
@@ -904,11 +909,11 @@ Free the returned object with g_object_unref().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Try to get the remote address of a socket connection.</p>
-<p>Since GLib 2.40, when used with g_socket_client_connect() or
-g_socket_client_connect_async(), during emission of
-%G_SOCKET_CLIENT_CONNECTING, this function will return the remote
-address that will be used for the connection.  This allows
-applications to print e.g. &quot;Connecting to example.com
+<p>Since GLib 2.40, when used with g_socket_client_connect() or<br />
+g_socket_client_connect_async(), during emission of<br />
+%G_SOCKET_CLIENT_CONNECTING, this function will return the remote<br />
+address that will be used for the connection.  This allows<br />
+applications to print e.g. &quot;Connecting to example.com<br />
 (10.42.77.3)...&quot;.</p>
 
 
@@ -927,7 +932,7 @@ applications to print e.g. &quot;Connecting to example.com
       
       
         &mdash;
-        <div class='inline'><p>a GSocket::Address or nil on error.
+        <div class='inline'><p>a GSocket::Address or nil on error.<br />
 Free the returned object with g_object_unref().</p>
 </div>
       
@@ -1051,7 +1056,7 @@ Free the returned object with g_object_unref().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

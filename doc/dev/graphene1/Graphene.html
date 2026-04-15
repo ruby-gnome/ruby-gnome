@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Graphene";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/graphene1/rect.rb<span class="defines">,<br />
-  lib/graphene1.rb,<br /> lib/graphene1/size.rb,<br /> lib/graphene1/vec2.rb,<br /> lib/graphene1/point.rb,<br /> lib/graphene1/loader.rb,<br /> lib/graphene1/version.rb</span>
+    <dd>lib/graphene1/rect.rb<span class="defines">,<br>
+  lib/graphene1.rb,<br> lib/graphene1/size.rb,<br> lib/graphene1/vec2.rb,<br> lib/graphene1/point.rb,<br> lib/graphene1/loader.rb,<br> lib/graphene1/version.rb</span>
+
 </dd>
   </dl>
   
@@ -88,16 +90,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2025  Ruby-GNOME Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -141,15 +143,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
           <div class="docstring">
   <div class="discussion">
     <p>Evaluates to the number of components of a #graphene_vec2_t.</p>
-<p>This symbol is useful when declaring a C array of floating
-point values to be used with graphene_vec2_init_from_float() and
+<p>This symbol is useful when declaring a C array of floating<br />
+point values to be used with graphene_vec2_init_from_float() and<br />
 graphene_vec2_to_float(), e.g.</p>
-<p>|[
+<p>|[<br />
 float v[GRAPHENE_VEC2_LEN];</p>
-<p>// vec is defined elsewhere
+<p>// vec is defined elsewhere<br />
 graphene_vec2_to_float (&amp;vec, v);</p>
-<p>for (int i = 0; i &lt; GRAPHENE_VEC2_LEN; i++)
-fprintf (stdout, &quot;component %d: %g\n&quot;, i, v[i]);
+<p>for (int i = 0; i &lt; GRAPHENE_VEC2_LEN; i++)<br />
+fprintf (stdout, &quot;component %d: %g\n&quot;, i, v[i]);<br />
 ]|</p>
 
 
@@ -166,15 +168,15 @@ fprintf (stdout, &quot;component %d: %g\n&quot;, i, v[i]);
           <div class="docstring">
   <div class="discussion">
     <p>Evaluates to the number of components of a #graphene_vec3_t.</p>
-<p>This symbol is useful when declaring a C array of floating
-point values to be used with graphene_vec3_init_from_float() and
+<p>This symbol is useful when declaring a C array of floating<br />
+point values to be used with graphene_vec3_init_from_float() and<br />
 graphene_vec3_to_float(), e.g.</p>
-<p>|[
+<p>|[<br />
 float v[GRAPHENE_VEC3_LEN];</p>
-<p>// vec is defined elsewhere
+<p>// vec is defined elsewhere<br />
 graphene_vec3_to_float (&amp;vec, v);</p>
-<p>for (int i = 0; i &lt; GRAPHENE_VEC2_LEN; i++)
-fprintf (stdout, &quot;component %d: %g\n&quot;, i, v[i]);
+<p>for (int i = 0; i &lt; GRAPHENE_VEC2_LEN; i++)<br />
+fprintf (stdout, &quot;component %d: %g\n&quot;, i, v[i]);<br />
 ]|</p>
 
 
@@ -191,15 +193,15 @@ fprintf (stdout, &quot;component %d: %g\n&quot;, i, v[i]);
           <div class="docstring">
   <div class="discussion">
     <p>Evaluates to the number of components of a #graphene_vec4_t.</p>
-<p>This symbol is useful when declaring a C array of floating
-point values to be used with graphene_vec4_init_from_float() and
+<p>This symbol is useful when declaring a C array of floating<br />
+point values to be used with graphene_vec4_init_from_float() and<br />
 graphene_vec4_to_float(), e.g.</p>
-<p>|[
+<p>|[<br />
 float v[GRAPHENE_VEC4_LEN];</p>
-<p>// vec is defined elsewhere
+<p>// vec is defined elsewhere<br />
 graphene_vec4_to_float (&amp;vec, v);</p>
-<p>for (int i = 0; i &lt; GRAPHENE_VEC4_LEN; i++)
-fprintf (stdout, &quot;component %d: %g\n&quot;, i, v[i]);
+<p>for (int i = 0; i &lt; GRAPHENE_VEC4_LEN; i++)<br />
+fprintf (stdout, &quot;component %d: %g\n&quot;, i, v[i]);<br />
 ]|</p>
 
 
@@ -833,6 +835,7 @@ fprintf (stdout, &quot;component %d: %g\n&quot;, i, v[i]);
 
       
     </ul>
+    
   
 
 
@@ -932,7 +935,7 @@ fprintf (stdout, &quot;component %d: %g\n&quot;, i, v[i]);
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A #graphene_box_t with the minimum vertex set at (-1, -1, -1) and the
+    <p>A #graphene_box_t with the minimum vertex set at (-1, -1, -1) and the<br />
 maximum vertex set at (0, 0, 0).</p>
 <p>The returned value is owned by Graphene and should not be modified or freed.</p>
 
@@ -973,7 +976,7 @@ maximum vertex set at (0, 0, 0).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A #graphene_box_t with the minimum vertex set at (0, 0, 0) and the
+    <p>A #graphene_box_t with the minimum vertex set at (0, 0, 0) and the<br />
 maximum vertex set at (1, 1, 1).</p>
 <p>The returned value is owned by Graphene and should not be modified or freed.</p>
 
@@ -1014,7 +1017,7 @@ maximum vertex set at (1, 1, 1).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A #graphene_box_t with the minimum vertex set at (-1, -1, -1) and the
+    <p>A #graphene_box_t with the minimum vertex set at (-1, -1, -1) and the<br />
 maximum vertex set at (1, 1, 1).</p>
 <p>The returned value is owned by Graphene and should not be modified or freed.</p>
 
@@ -1213,7 +1216,7 @@ maximum vertex set at (1, 1, 1).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a degenerate rectangle with origin fixed at (0, 0) and
+    <p>Returns a degenerate rectangle with origin fixed at (0, 0) and<br />
 a size of 0, 0.</p>
 
 
@@ -1253,7 +1256,7 @@ a size of 0, 0.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A constant pointer to a zero #graphene_size_t, useful for
+    <p>A constant pointer to a zero #graphene_size_t, useful for<br />
 equality checks and interpolations.</p>
 
 
@@ -1449,7 +1452,7 @@ equality checks and interpolations.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Provides a constant pointer to a vector with three components,
+    <p>Provides a constant pointer to a vector with three components,<br />
 all sets to 1.</p>
 
 
@@ -1489,7 +1492,7 @@ all sets to 1.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Provides a constant pointer to a vector with three components
+    <p>Provides a constant pointer to a vector with three components<br />
 with values set to (1, 0, 0).</p>
 
 
@@ -1529,7 +1532,7 @@ with values set to (1, 0, 0).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Provides a constant pointer to a vector with three components
+    <p>Provides a constant pointer to a vector with three components<br />
 with values set to (0, 1, 0).</p>
 
 
@@ -1569,7 +1572,7 @@ with values set to (0, 1, 0).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Provides a constant pointer to a vector with three components
+    <p>Provides a constant pointer to a vector with three components<br />
 with values set to (0, 0, 1).</p>
 
 
@@ -1609,7 +1612,7 @@ with values set to (0, 0, 1).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Provides a constant pointer to a vector with three components,
+    <p>Provides a constant pointer to a vector with three components,<br />
 all sets to 0.</p>
 
 
@@ -1649,7 +1652,7 @@ all sets to 0.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a pointer to a #graphene_vec4_t with all its
+    <p>Retrieves a pointer to a #graphene_vec4_t with all its<br />
 components set to 1.</p>
 
 
@@ -1689,7 +1692,7 @@ components set to 1.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a pointer to a #graphene_vec4_t with its
+    <p>Retrieves a pointer to a #graphene_vec4_t with its<br />
 components set to (0, 0, 0, 1).</p>
 
 
@@ -1729,7 +1732,7 @@ components set to (0, 0, 0, 1).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a pointer to a #graphene_vec4_t with its
+    <p>Retrieves a pointer to a #graphene_vec4_t with its<br />
 components set to (1, 0, 0, 0).</p>
 
 
@@ -1769,7 +1772,7 @@ components set to (1, 0, 0, 0).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a pointer to a #graphene_vec4_t with its
+    <p>Retrieves a pointer to a #graphene_vec4_t with its<br />
 components set to (0, 1, 0, 0).</p>
 
 
@@ -1809,7 +1812,7 @@ components set to (0, 1, 0, 0).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a pointer to a #graphene_vec4_t with its
+    <p>Retrieves a pointer to a #graphene_vec4_t with its<br />
 components set to (0, 0, 1, 0).</p>
 
 
@@ -1849,7 +1852,7 @@ components set to (0, 0, 1, 0).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a pointer to a #graphene_vec4_t with all its
+    <p>Retrieves a pointer to a #graphene_vec4_t with all its<br />
 components set to 0.</p>
 
 
@@ -1885,7 +1888,7 @@ components set to 0.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

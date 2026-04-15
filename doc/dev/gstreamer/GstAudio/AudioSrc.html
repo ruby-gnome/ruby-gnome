@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GstAudio::AudioSrc";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -106,14 +107,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Gst::AudioSrc class. Override the vmethod to implement
+    <p>Gst::AudioSrc class. Override the vmethod to implement<br />
 functionality.</p>
 
 
@@ -130,6 +132,7 @@ functionality.</p>
 
 
 
+  
   
   
   
@@ -155,9 +158,12 @@ functionality.</p>
   
   
   
+  
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../GstBase/BaseSrc.html" title="GstBase::BaseSrc (class)">GstBase::BaseSrc</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../GstBase/BaseSrc.html#async=-instance_method" title="GstBase::BaseSrc#async= (method)">#async=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#automatic_eos=-instance_method" title="GstBase::BaseSrc#automatic_eos= (method)">#automatic_eos=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#automatic_eos%3F-instance_method" title="GstBase::BaseSrc#automatic_eos? (method)">#automatic_eos?</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#blocksize-instance_method" title="GstBase::BaseSrc#blocksize (method)">#blocksize</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#blocksize=-instance_method" title="GstBase::BaseSrc#blocksize= (method)">#blocksize=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#buffer_pool-instance_method" title="GstBase::BaseSrc#buffer_pool (method)">#buffer_pool</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#caps=-instance_method" title="GstBase::BaseSrc#caps= (method)">#caps=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#do_timestamp-instance_method" title="GstBase::BaseSrc#do_timestamp (method)">#do_timestamp</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#do_timestamp=-instance_method" title="GstBase::BaseSrc#do_timestamp= (method)">#do_timestamp=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#do_timestamp%3F-instance_method" title="GstBase::BaseSrc#do_timestamp? (method)">#do_timestamp?</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#dynamic_size=-instance_method" title="GstBase::BaseSrc#dynamic_size= (method)">#dynamic_size=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#format=-instance_method" title="GstBase::BaseSrc#format= (method)">#format=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#get_allocator-instance_method" title="GstBase::BaseSrc#get_allocator (method)">#get_allocator</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#is_async-instance_method" title="GstBase::BaseSrc#is_async (method)">#is_async</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#is_live-instance_method" title="GstBase::BaseSrc#is_live (method)">#is_live</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#live=-instance_method" title="GstBase::BaseSrc#live= (method)">#live=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#negotiate-instance_method" title="GstBase::BaseSrc#negotiate (method)">#negotiate</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#new_seamless_segment-instance_method" title="GstBase::BaseSrc#new_seamless_segment (method)">#new_seamless_segment</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#new_segment-instance_method" title="GstBase::BaseSrc#new_segment (method)">#new_segment</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#num_buffers-instance_method" title="GstBase::BaseSrc#num_buffers (method)">#num_buffers</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#num_buffers=-instance_method" title="GstBase::BaseSrc#num_buffers= (method)">#num_buffers=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#push_segment-instance_method" title="GstBase::BaseSrc#push_segment (method)">#push_segment</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#query_latency-instance_method" title="GstBase::BaseSrc#query_latency (method)">#query_latency</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#start_complete-instance_method" title="GstBase::BaseSrc#start_complete (method)">#start_complete</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#start_wait-instance_method" title="GstBase::BaseSrc#start_wait (method)">#start_wait</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#submit_buffer_list-instance_method" title="GstBase::BaseSrc#submit_buffer_list (method)">#submit_buffer_list</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#typefind=-instance_method" title="GstBase::BaseSrc#typefind= (method)">#typefind=</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#typefind%3F-instance_method" title="GstBase::BaseSrc#typefind? (method)">#typefind?</a></span>, <span class='object_link'><a href="../GstBase/BaseSrc.html#wait_playing-instance_method" title="GstBase::BaseSrc#wait_playing (method)">#wait_playing</a></span></p>
 
+  
   
   
   
@@ -177,6 +183,7 @@ functionality.</p>
   
   
   
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../Gst/Object.html#add_control_binding-instance_method" title="Gst::Object#add_control_binding (method)">#add_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#check_uniqueness-class_method" title="Gst::Object.check_uniqueness (method)">check_uniqueness</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_bindings_disabled=-instance_method" title="Gst::Object#control_bindings_disabled= (method)">#control_bindings_disabled=</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate-instance_method" title="Gst::Object#control_rate (method)">#control_rate</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate=-instance_method" title="Gst::Object#control_rate= (method)">#control_rate=</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_deep_notify-class_method" title="Gst::Object.default_deep_notify (method)">default_deep_notify</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_error-instance_method" title="Gst::Object#default_error (method)">#default_error</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_control_binding-instance_method" title="Gst::Object#get_control_binding (method)">#get_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_g_value_array-instance_method" title="Gst::Object#get_g_value_array (method)">#get_g_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value-instance_method" title="Gst::Object#get_value (method)">#get_value</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value_array-instance_method" title="Gst::Object#get_value_array (method)">#get_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_active_control_bindings-instance_method" title="Gst::Object#has_active_control_bindings (method)">#has_active_control_bindings</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_ancestor-instance_method" title="Gst::Object#has_ancestor (method)">#has_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_ancestor-instance_method" title="Gst::Object#has_as_ancestor (method)">#has_as_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_parent-instance_method" title="Gst::Object#has_as_parent (method)">#has_as_parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#name-instance_method" title="Gst::Object#name (method)">#name</a></span>, <span class='object_link'><a href="../Gst/Object.html#name=-instance_method" title="Gst::Object#name= (method)">#name=</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent-instance_method" title="Gst::Object#parent (method)">#parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent=-instance_method" title="Gst::Object#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="../Gst/Object.html#path_string-instance_method" title="Gst::Object#path_string (method)">#path_string</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref-instance_method" title="Gst::Object#ref (method)">#ref</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref_sink-class_method" title="Gst::Object.ref_sink (method)">ref_sink</a></span>, <span class='object_link'><a href="../Gst/Object.html#remove_control_binding-instance_method" title="Gst::Object#remove_control_binding (method)">#remove_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#replace-class_method" title="Gst::Object.replace (method)">replace</a></span>, <span class='object_link'><a href="../Gst/Object.html#set_control_binding_disabled-instance_method" title="Gst::Object#set_control_binding_disabled (method)">#set_control_binding_disabled</a></span>, <span class='object_link'><a href="../Gst/Object.html#suggest_next_sync-instance_method" title="Gst::Object#suggest_next_sync (method)">#suggest_next_sync</a></span>, <span class='object_link'><a href="../Gst/Object.html#sync_values-instance_method" title="Gst::Object#sync_values (method)">#sync_values</a></span>, <span class='object_link'><a href="../Gst/Object.html#unparent-instance_method" title="Gst::Object#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="../Gst/Object.html#unref-instance_method" title="Gst::Object#unref (method)">#unref</a></span></p>
 
@@ -187,7 +194,7 @@ functionality.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

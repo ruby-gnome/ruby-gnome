@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::ActionGroup";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -86,40 +88,40 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p><code>GActionGroup</code> represents a group of actions.</p>
-<p>Actions can be used to expose functionality in a structured way, either
-from one part of a program to another, or to the outside world. Action
-groups are often used together with a <code>GMenuModel</code> that provides additional
+<p>Actions can be used to expose functionality in a structured way, either<br />
+from one part of a program to another, or to the outside world. Action<br />
+groups are often used together with a <code>GMenuModel</code> that provides additional<br />
 representation data for displaying the actions to the user, e.g. in a menu.</p>
-<p>The main way to interact with the actions in a <code>GActionGroup</code> is to
-activate them with [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.activate_action]. Activating an
-action may require a <code>GVariant</code> parameter. The required type of the
-parameter can be inquired with [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.get_action_parameter_type].
-Actions may be disabled, see [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.get_action_enabled].
+<p>The main way to interact with the actions in a <code>GActionGroup</code> is to<br />
+activate them with [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.activate_action]. Activating an<br />
+action may require a <code>GVariant</code> parameter. The required type of the<br />
+parameter can be inquired with [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.get_action_parameter_type].<br />
+Actions may be disabled, see [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.get_action_enabled].<br />
 Activating a disabled action has no effect.</p>
-<p>Actions may optionally have a state in the form of a #GVariant. The current
-state of an action can be inquired with [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.get_action_state].
-Activating a stateful action may change its state, but it is also possible to
+<p>Actions may optionally have a state in the form of a #GVariant. The current<br />
+state of an action can be inquired with [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.get_action_state].<br />
+Activating a stateful action may change its state, but it is also possible to<br />
 set the state by calling [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.change_action_state].</p>
-<p>As typical example, consider a text editing application which has an
-option to change the current font to 'bold'. A good way to represent
-this would be a stateful action, with a boolean state. Activating the
+<p>As typical example, consider a text editing application which has an<br />
+option to change the current font to 'bold'. A good way to represent<br />
+this would be a stateful action, with a boolean state. Activating the<br />
 action would toggle the state.</p>
-<p>Each action in the group has a unique name (which is a string).  All
-method calls, except [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.list_actions] take the name of
+<p>Each action in the group has a unique name (which is a string).  All<br />
+method calls, except [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.list_actions] take the name of<br />
 an action as an argument.</p>
-<p>The <code>GActionGroup</code> API is meant to be the 'public' API to the action
-group. The calls here are exactly the interaction that 'external
-forces' (eg: UI, incoming D-Bus messages, etc.) are supposed to have
-with actions. 'Internal' APIs (ie: ones meant only to be accessed by
-the action group implementation) are found on subclasses. This is
-why you will find - for example - [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.get_action_enabled]
+<p>The <code>GActionGroup</code> API is meant to be the 'public' API to the action<br />
+group. The calls here are exactly the interaction that 'external<br />
+forces' (eg: UI, incoming D-Bus messages, etc.) are supposed to have<br />
+with actions. 'Internal' APIs (ie: ones meant only to be accessed by<br />
+the action group implementation) are found on subclasses. This is<br />
+why you will find - for example - [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.get_action_enabled]<br />
 but not an equivalent set() call.</p>
-<p>Signals are emitted on the action group in response to state changes
+<p>Signals are emitted on the action group in response to state changes<br />
 on individual actions.</p>
-<p>Implementations of <code>GActionGroup</code> should provide implementations for
-the virtual functions [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.list_actions] and
-[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.query_action]. The other virtual functions should
-not be implemented - their &quot;wrappers&quot; are actually implemented with
+<p>Implementations of <code>GActionGroup</code> should provide implementations for<br />
+the virtual functions [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.list_actions] and<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.query_action]. The other virtual functions should<br />
+not be implemented - their &quot;wrappers&quot; are actually implemented with<br />
 calls to [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGroup.query_action].</p>
 
 
@@ -466,6 +468,7 @@ calls to [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGrou
 
       
     </ul>
+    
   
 
 
@@ -736,22 +739,22 @@ calls to [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionGrou
 </h3><div class="docstring">
   <div class="discussion">
     <p>Activate the named action within <!-- raw HTML omitted -->action_group<!-- raw HTML omitted -->.</p>
-<p>If the action is expecting a parameter, then the correct type of
-parameter must be given as <!-- raw HTML omitted -->parameter<!-- raw HTML omitted -->.  If the action is expecting no
-parameters then <!-- raw HTML omitted -->parameter<!-- raw HTML omitted --> must be nil.  See
+<p>If the action is expecting a parameter, then the correct type of<br />
+parameter must be given as <!-- raw HTML omitted -->parameter<!-- raw HTML omitted -->.  If the action is expecting no<br />
+parameters then <!-- raw HTML omitted -->parameter<!-- raw HTML omitted --> must be nil.  See<br />
 g_action_group_get_action_parameter_type().</p>
-<p>If the GAction::Group implementation supports asynchronous remote
-activation over D-Bus, this call may return before the relevant
-D-Bus traffic has been sent, or any replies have been received. In
-order to block on such asynchronous activation calls,
-g_dbus_connection_flush() should be called prior to the code, which
-depends on the result of the action activation. Without flushing
-the D-Bus connection, there is no guarantee that the action would
+<p>If the GAction::Group implementation supports asynchronous remote<br />
+activation over D-Bus, this call may return before the relevant<br />
+D-Bus traffic has been sent, or any replies have been received. In<br />
+order to block on such asynchronous activation calls,<br />
+g_dbus_connection_flush() should be called prior to the code, which<br />
+depends on the result of the action activation. Without flushing<br />
+the D-Bus connection, there is no guarantee that the action would<br />
 have been activated.</p>
-<p>The following code which runs in a remote app instance, shows an
-example of a &quot;quit&quot; action being activated on the primary app
-instance over D-Bus. Here g_dbus_connection_flush() is called
-before <code>exit()</code>. Without g_dbus_connection_flush(), the &quot;quit&quot; action
+<p>The following code which runs in a remote app instance, shows an<br />
+example of a &quot;quit&quot; action being activated on the primary app<br />
+instance over D-Bus. Here g_dbus_connection_flush() is called<br />
+before <code>exit()</code>. Without g_dbus_connection_flush(), the &quot;quit&quot; action<br />
 may fail to be activated on the primary instance.</p>
 <pre class="code ruby"><code class="ruby">// call &quot;quit&quot; action on primary instance
 g_action_group_activate_action (G_ACTION_GROUP (app), &quot;quit&quot;, NULL);
@@ -831,12 +834,12 @@ exit (0);
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Request for the state of the named action within <!-- raw HTML omitted -->action_group<!-- raw HTML omitted --> to be
+    <p>Request for the state of the named action within <!-- raw HTML omitted -->action_group<!-- raw HTML omitted --> to be<br />
 changed to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
-<p>The action must be stateful and <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be of the correct type.
+<p>The action must be stateful and <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be of the correct type.<br />
 See g_action_group_get_action_state_type().</p>
-<p>This call merely requests a change.  The action may refuse to change
-its state or may change its state to something other than <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.
+<p>This call merely requests a change.  The action may refuse to change<br />
+its state or may change its state to something other than <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.<br />
 See g_action_group_get_action_state_hint().</p>
 <p>If the <!-- raw HTML omitted -->value<!-- raw HTML omitted --> GVariant is floating, it is consumed.</p>
 
@@ -908,7 +911,7 @@ See g_action_group_get_action_state_hint().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if the named action within <!-- raw HTML omitted -->action_group<!-- raw HTML omitted --> is currently enabled.</p>
-<p>An action must be enabled in order to be activated or in order to
+<p>An action must be enabled in order to be activated or in order to<br />
 have its state changed from outside callers.</p>
 
 
@@ -967,15 +970,15 @@ have its state changed from outside callers.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries the type of the parameter that must be given when activating
+    <p>Queries the type of the parameter that must be given when activating<br />
 the named action within <!-- raw HTML omitted -->action_group<!-- raw HTML omitted -->.</p>
-<p>When activating the action using g_action_group_activate_action(),
-the #GVariant given to that function must be of the type returned
+<p>When activating the action using g_action_group_activate_action(),<br />
+the #GVariant given to that function must be of the type returned<br />
 by this function.</p>
-<p>In the case that this function returns nil, you must not give any
+<p>In the case that this function returns nil, you must not give any<br />
 #GVariant, but nil instead.</p>
-<p>The parameter type of a particular action will never change but it is
-possible for an action to be removed and for a new action to be added
+<p>The parameter type of a particular action will never change but it is<br />
+possible for an action to be removed and for a new action to be added<br />
 with the same name but a different parameter type.</p>
 
 
@@ -1035,10 +1038,10 @@ with the same name but a different parameter type.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queries the current state of the named action within <!-- raw HTML omitted -->action_group<!-- raw HTML omitted -->.</p>
-<p>If the action is not stateful then nil will be returned.  If the
-action is stateful then the type of the return value is the type
+<p>If the action is not stateful then nil will be returned.  If the<br />
+action is stateful then the type of the return value is the type<br />
 given by g_action_group_get_action_state_type().</p>
-<p>The return value (if non-nil) should be freed with
+<p>The return value (if non-nil) should be freed with<br />
 g_variant_unref() when it is no longer required.</p>
 
 
@@ -1097,19 +1100,19 @@ g_variant_unref() when it is no longer required.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Requests a hint about the valid range of values for the state of the
+    <p>Requests a hint about the valid range of values for the state of the<br />
 named action within <!-- raw HTML omitted -->action_group<!-- raw HTML omitted -->.</p>
-<p>If nil is returned it either means that the action is not stateful
-or that there is no hint about the valid range of values for the
+<p>If nil is returned it either means that the action is not stateful<br />
+or that there is no hint about the valid range of values for the<br />
 state of the action.</p>
-<p>If a #GVariant array is returned then each item in the array is a
-possible value for the state.  If a #GVariant pair (ie: two-tuple) is
-returned then the tuple specifies the inclusive lower and upper bound
+<p>If a #GVariant array is returned then each item in the array is a<br />
+possible value for the state.  If a #GVariant pair (ie: two-tuple) is<br />
+returned then the tuple specifies the inclusive lower and upper bound<br />
 of valid values for the state.</p>
-<p>In any case, the information is merely a hint.  It may be possible to
-have a state value outside of the hinted range and setting a value
+<p>In any case, the information is merely a hint.  It may be possible to<br />
+have a state value outside of the hinted range and setting a value<br />
 within the range may fail.</p>
-<p>The return value (if non-nil) should be freed with
+<p>The return value (if non-nil) should be freed with<br />
 g_variant_unref() when it is no longer required.</p>
 
 
@@ -1168,18 +1171,18 @@ g_variant_unref() when it is no longer required.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries the type of the state of the named action within
+    <p>Queries the type of the state of the named action within<br />
 <!-- raw HTML omitted -->action_group<!-- raw HTML omitted -->.</p>
-<p>If the action is stateful then this function returns the
-GVariant::Type of the state.  All calls to
-g_action_group_change_action_state() must give a #GVariant of this
-type and g_action_group_get_action_state() will return a #GVariant
+<p>If the action is stateful then this function returns the<br />
+GVariant::Type of the state.  All calls to<br />
+g_action_group_change_action_state() must give a #GVariant of this<br />
+type and g_action_group_get_action_state() will return a #GVariant<br />
 of the same type.</p>
-<p>If the action is not stateful then this function will return nil.
-In that case, g_action_group_get_action_state() will return nil
+<p>If the action is not stateful then this function will return nil.<br />
+In that case, g_action_group_get_action_state() will return nil<br />
 and you must not call g_action_group_change_action_state().</p>
-<p>The state type of a particular action will never change but it is
-possible for an action to be removed and for a new action to be added
+<p>The state type of a particular action will never change but it is<br />
+possible for an action to be removed and for a new action to be added<br />
 with the same name but a different state type.</p>
 
 
@@ -1297,8 +1300,8 @@ with the same name but a different state type.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Lists the actions contained within <!-- raw HTML omitted -->action_group<!-- raw HTML omitted -->.</p>
-<p>The caller is responsible for freeing the list with g_strfreev() when
-it is no longer required.
+<p>The caller is responsible for freeing the list with g_strfreev() when<br />
+it is no longer required.<br />
 actions in the group</p>
 
 
@@ -1339,26 +1342,26 @@ actions in the group</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queries all aspects of the named action within an <!-- raw HTML omitted -->action_group<!-- raw HTML omitted -->.</p>
-<p>This function acquires the information available from
-g_action_group_has_action(), g_action_group_get_action_enabled(),
-g_action_group_get_action_parameter_type(),
-g_action_group_get_action_state_type(),
-g_action_group_get_action_state_hint() and
+<p>This function acquires the information available from<br />
+g_action_group_has_action(), g_action_group_get_action_enabled(),<br />
+g_action_group_get_action_parameter_type(),<br />
+g_action_group_get_action_state_type(),<br />
+g_action_group_get_action_state_hint() and<br />
 g_action_group_get_action_state() with a single function call.</p>
 <p>This provides two main benefits.</p>
-<p>The first is the improvement in efficiency that comes with not having
-to perform repeated lookups of the action in order to discover
-different things about it.  The second is that implementing
-GAction::Group can now be done by only overriding this one virtual
+<p>The first is the improvement in efficiency that comes with not having<br />
+to perform repeated lookups of the action in order to discover<br />
+different things about it.  The second is that implementing<br />
+GAction::Group can now be done by only overriding this one virtual<br />
 function.</p>
-<p>The interface provides a default implementation of this function that
-calls the individual functions, as required, to fetch the
-information.  The interface also provides default implementations of
-those functions that call this function.  All implementations,
+<p>The interface provides a default implementation of this function that<br />
+calls the individual functions, as required, to fetch the<br />
+information.  The interface also provides default implementations of<br />
+those functions that call this function.  All implementations,<br />
 therefore, must override either this function or all of the others.</p>
-<p>If the action exists, true is returned and any of the requested
-fields (as indicated by having a non-nil reference passed in) are
-filled.  If the action doesn't exist, false is returned and the
+<p>If the action exists, true is returned and any of the requested<br />
+fields (as indicated by having a non-nil reference passed in) are<br />
+filled.  If the action doesn't exist, false is returned and the<br />
 fields may or may not have been modified.</p>
 
 
@@ -1488,7 +1491,7 @@ fields may or may not have been modified.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

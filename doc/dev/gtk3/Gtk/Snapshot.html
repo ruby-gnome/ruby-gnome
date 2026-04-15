@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Snapshot";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -1337,9 +1339,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -1423,7 +1427,7 @@
       
       
         &mdash;
-        <div class='inline'><p>the stroke width of the border on
+        <div class='inline'><p>the stroke width of the border on<br />
 the top, right, bottom and left side respectively.</p>
 </div>
       
@@ -1439,7 +1443,7 @@ the top, right, bottom and left side respectively.</p>
       
       
         &mdash;
-        <div class='inline'><p>the color used on the top, right,
+        <div class='inline'><p>the color used on the top, right,<br />
 bottom and left side.</p>
 </div>
       
@@ -1475,7 +1479,7 @@ bottom and left side.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.CairoNode] and appends it to the current
+    <p>Creates a new [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.CairoNode] and appends it to the current<br />
 render node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing the current node.</p>
 
 
@@ -1513,7 +1517,7 @@ render node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, witho
       
       
         &mdash;
-        <div class='inline'><p>a <code>cairo_t</code> suitable for drawing the contents of
+        <div class='inline'><p>a <code>cairo_t</code> suitable for drawing the contents of<br />
 the newly created render node</p>
 </div>
       
@@ -1535,10 +1539,10 @@ the newly created render node</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new render node drawing the <!-- raw HTML omitted -->color<!-- raw HTML omitted --> into the
-given <!-- raw HTML omitted -->bounds<!-- raw HTML omitted --> and appends it to the current render node
+    <p>Creates a new render node drawing the <!-- raw HTML omitted -->color<!-- raw HTML omitted --> into the<br />
+given <!-- raw HTML omitted -->bounds<!-- raw HTML omitted --> and appends it to the current render node<br />
 of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
-<p>You should try to avoid calling this function if
+<p>You should try to avoid calling this function if<br />
 <!-- raw HTML omitted -->color<!-- raw HTML omitted --> is transparent.</p>
 
 
@@ -1657,7 +1661,7 @@ of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>the clockwise rotation in degrees of the starting angle.
+        <div class='inline'><p>the clockwise rotation in degrees of the starting angle.<br />
 0 means the starting angle is the top.</p>
 </div>
       
@@ -1724,8 +1728,8 @@ of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>A convenience method to fill a path with a color.</p>
-<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.push_fill] if you need
-to fill a path with more complex content than
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.push_fill] if you need<br />
+to fill a path with more complex content than<br />
 a color.</p>
 
 
@@ -2113,9 +2117,9 @@ a color.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Appends <!-- raw HTML omitted -->node<!-- raw HTML omitted --> to the current render node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->,
+    <p>Appends <!-- raw HTML omitted -->node<!-- raw HTML omitted --> to the current render node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->,<br />
 without changing the current node.</p>
-<p>If <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> does not have a current node yet, <!-- raw HTML omitted -->node<!-- raw HTML omitted -->
+<p>If <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> does not have a current node yet, <!-- raw HTML omitted -->node<!-- raw HTML omitted --><br />
 will become the initial node.</p>
 
 
@@ -2731,11 +2735,11 @@ will become the initial node.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new render node drawing the <!-- raw HTML omitted -->texture<!-- raw HTML omitted -->
-into the given <!-- raw HTML omitted -->bounds<!-- raw HTML omitted --> and appends it to the
+    <p>Creates a new render node drawing the <!-- raw HTML omitted -->texture<!-- raw HTML omitted --><br />
+into the given <!-- raw HTML omitted -->bounds<!-- raw HTML omitted --> and appends it to the<br />
 current render node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
-<p>In contrast to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_texture],
-this function provides control about how the filter
+<p>In contrast to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_texture],<br />
+this function provides control about how the filter<br />
 that is used when scaling.</p>
 
 
@@ -2821,8 +2825,8 @@ that is used when scaling.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>A convenience method to stroke a path with a color.</p>
-<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.push_stroke] if you need
-to stroke a path with more complex content than
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.push_stroke] if you need<br />
+to stroke a path with more complex content than<br />
 a color.</p>
 
 
@@ -2907,11 +2911,11 @@ a color.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new render node drawing the <!-- raw HTML omitted -->texture<!-- raw HTML omitted -->
-into the given <!-- raw HTML omitted -->bounds<!-- raw HTML omitted --> and appends it to the
+    <p>Creates a new render node drawing the <!-- raw HTML omitted -->texture<!-- raw HTML omitted --><br />
+into the given <!-- raw HTML omitted -->bounds<!-- raw HTML omitted --> and appends it to the<br />
 current render node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
-<p>If the texture needs to be scaled to fill <!-- raw HTML omitted -->bounds<!-- raw HTML omitted -->,
-linear filtering is used. See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_scaled_texture]
+<p>If the texture needs to be scaled to fill <!-- raw HTML omitted -->bounds<!-- raw HTML omitted -->,<br />
+linear filtering is used. See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_scaled_texture]<br />
 if you need other filtering, such as nearest-neighbour.</p>
 
 
@@ -2981,7 +2985,7 @@ if you need other filtering, such as nearest-neighbour.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the node that was constructed by <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->
+    <p>Returns the node that was constructed by <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --><br />
 and frees <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
 <p>See also [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.to_node].</p>
 
@@ -3022,7 +3026,7 @@ and frees <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a paintable for the node that was
+    <p>Returns a paintable for the node that was<br />
 constructed by <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> and frees <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
 
 
@@ -3042,7 +3046,7 @@ constructed by <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> and fr
       
       
         &mdash;
-        <div class='inline'><p>The size of the resulting paintable
+        <div class='inline'><p>The size of the resulting paintable<br />
 or nil to use the bounds of the snapshot</p>
 </div>
       
@@ -3082,10 +3086,10 @@ or nil to use the bounds of the snapshot</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes the top element from the stack of render nodes and
+    <p>Removes the top element from the stack of render nodes and<br />
 adds it to the nearest [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShaderNode] below it.</p>
-<p>This must be called the same number of times as the number
-of textures is needed for the shader in
+<p>This must be called the same number of times as the number<br />
+of textures is needed for the shader in<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.push_gl_shader].</p>
 
 
@@ -3176,7 +3180,7 @@ of textures is needed for the shader in
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes the top element from the stack of render nodes,
+    <p>Removes the top element from the stack of render nodes,<br />
 and appends it to the node underneath it.</p>
 
 
@@ -3213,11 +3217,11 @@ and appends it to the node underneath it.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Blends together two images with the given blend mode.</p>
-<p>Until the first call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop], the
-bottom image for the blend operation will be recorded.
-After that call, the top image to be blended will be
+<p>Until the first call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop], the<br />
+bottom image for the blend operation will be recorded.<br />
+After that call, the top image to be blended will be<br />
 recorded until the second call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
-<p>Calling this function requires two subsequent calls
+<p>Calling this function requires two subsequent calls<br />
 to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
 
 
@@ -3382,12 +3386,12 @@ to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Modifies the colors of an image by applying an affine transformation
+    <p>Modifies the colors of an image by applying an affine transformation<br />
 in RGB space.</p>
 <p>In particular, the colors will be transformed by applying</p>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_pixel'>pixel</span> <span class='op'>=</span> <span class='id identifier rubyid_transpose'>transpose</span><span class='lparen'>(</span><span class='id identifier rubyid_color_matrix'>color_matrix</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_pixel'>pixel</span> <span class='op'>+</span> <span class='id identifier rubyid_color_offset'>color_offset</span>
 </code></pre>
-<p>for every pixel. The transformation operates on unpremultiplied
+<p>for every pixel. The transformation operates on unpremultiplied<br />
 colors, with color components ordered R, G, B, A.</p>
 <p>The image is recorded until the next call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
 
@@ -3458,12 +3462,12 @@ colors, with color components ordered R, G, B, A.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Snapshots a cross-fade operation between two images with the
+    <p>Snapshots a cross-fade operation between two images with the<br />
 given <!-- raw HTML omitted -->progress<!-- raw HTML omitted -->.</p>
-<p>Until the first call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop], the start image
-will be snapshot. After that call, the end image will be recorded
+<p>Until the first call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop], the start image<br />
+will be snapshot. After that call, the end image will be recorded<br />
 until the second call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
-<p>Calling this function requires two subsequent calls
+<p>Calling this function requires two subsequent calls<br />
 to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
 
 
@@ -3519,8 +3523,8 @@ to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</
 </h3><div class="docstring">
   <div class="discussion">
     <p>Inserts a debug node with a message.</p>
-<p>Debug nodes don't affect the rendering at all, but can be
-helpful in identifying parts of a render node tree dump,
+<p>Debug nodes don't affect the rendering at all, but can be<br />
+helpful in identifying parts of a render node tree dump,<br />
 for example in the GTK inspector.</p>
 
 
@@ -3590,10 +3594,10 @@ for example in the GTK inspector.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Fills the area given by <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->fill_rule<!-- raw HTML omitted --> with an image and discards everything
+    <p>Fills the area given by <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->fill_rule<!-- raw HTML omitted --> with an image and discards everything<br />
 outside of it.</p>
 <p>The image is recorded until the next call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
-<p>If you want to fill the path with a color, [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_fill]
+<p>If you want to fill the path with a color, [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_fill]<br />
 may be more convenient.</p>
 
 
@@ -3664,29 +3668,29 @@ may be more convenient.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Push a [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShaderNode].</p>
-<p>The node uses the given [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShader] and uniform values
-Additionally this takes a list of <!-- raw HTML omitted -->n_children<!-- raw HTML omitted --> other nodes
+<p>The node uses the given [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShader] and uniform values<br />
+Additionally this takes a list of <!-- raw HTML omitted -->n_children<!-- raw HTML omitted --> other nodes<br />
 which will be passed to the [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShaderNode].</p>
-<p>The <!-- raw HTML omitted -->take_args<!-- raw HTML omitted --> argument is a block of data to use for uniform
-arguments, as per types and offsets defined by the <!-- raw HTML omitted -->shader<!-- raw HTML omitted -->.
-Normally this is generated by [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShader.format_args]
+<p>The <!-- raw HTML omitted -->take_args<!-- raw HTML omitted --> argument is a block of data to use for uniform<br />
+arguments, as per types and offsets defined by the <!-- raw HTML omitted -->shader<!-- raw HTML omitted -->.<br />
+Normally this is generated by [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShader.format_args]<br />
 or [struct<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.ShaderArgsBuilder].</p>
-<p>The snapshotter takes ownership of <!-- raw HTML omitted -->take_args<!-- raw HTML omitted -->, so the caller should
+<p>The snapshotter takes ownership of <!-- raw HTML omitted -->take_args<!-- raw HTML omitted -->, so the caller should<br />
 not free it after this.</p>
-<p>If the renderer doesn't support GL shaders, or if there is any
-problem when compiling the shader, then the node will draw pink.
-You should use [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShader.compile] to ensure the <!-- raw HTML omitted -->shader<!-- raw HTML omitted -->
+<p>If the renderer doesn't support GL shaders, or if there is any<br />
+problem when compiling the shader, then the node will draw pink.<br />
+You should use [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShader.compile] to ensure the <!-- raw HTML omitted -->shader<!-- raw HTML omitted --><br />
 will work for the renderer before using it.</p>
-<p>If the shader requires textures (see [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShader.get_n_textures]),
-then it is expected that you call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.gl_shader_pop_texture]
-the number of times that are required. Each of these calls will generate
-a node that is added as a child to the <code>GskGLShaderNode</code>, which in turn
+<p>If the shader requires textures (see [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShader.get_n_textures]),<br />
+then it is expected that you call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.gl_shader_pop_texture]<br />
+the number of times that are required. Each of these calls will generate<br />
+a node that is added as a child to the <code>GskGLShaderNode</code>, which in turn<br />
 will render these offscreen and pass as a texture to the shader.</p>
-<p>Once all textures (if any) are pop:ed, you must call the regular
+<p>Once all textures (if any) are pop:ed, you must call the regular<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
-<p>If you want to use pre-existing textures as input to the shader rather
-than rendering new ones, use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_texture] to
-push a texture node. These will be used directly rather than being
+<p>If you want to use pre-existing textures as input to the shader rather<br />
+than rendering new ones, use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_texture] to<br />
+push a texture node. These will be used directly rather than being<br />
 re-rendered.</p>
 <p>For details on how to write shaders, see [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShader].</p>
 
@@ -3772,9 +3776,9 @@ re-rendered.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Until the first call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop], the
+    <p>Until the first call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop], the<br />
 mask image for the mask operation will be recorded.</p>
-<p>After that call, the source image will be recorded until
+<p>After that call, the source image will be recorded until<br />
 the second call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
 <p>Calling this function requires 2 subsequent calls to gtk_snapshot_pop().</p>
 
@@ -3920,7 +3924,7 @@ the second call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.
       
       
         &mdash;
-        <div class='inline'><p>the bounds of the child or nil
+        <div class='inline'><p>the bounds of the child or nil<br />
 to use the full size of the collected child node</p>
 </div>
       
@@ -4081,13 +4085,13 @@ to use the full size of the collected child node</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Strokes the given <!-- raw HTML omitted -->path<!-- raw HTML omitted --> with the attributes given by <!-- raw HTML omitted -->stroke<!-- raw HTML omitted --> and
+    <p>Strokes the given <!-- raw HTML omitted -->path<!-- raw HTML omitted --> with the attributes given by <!-- raw HTML omitted -->stroke<!-- raw HTML omitted --> and<br />
 an image.</p>
 <p>The image is recorded until the next call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
-<p>Note that the strokes are subject to the same transformation as
-everything else, so uneven scaling will cause horizontal and vertical
+<p>Note that the strokes are subject to the same transformation as<br />
+everything else, so uneven scaling will cause horizontal and vertical<br />
 strokes to have different widths.</p>
-<p>If you want to stroke the path with a color, [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_stroke]
+<p>If you want to stroke the path with a color, [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_stroke]<br />
 may be more convenient.</p>
 
 
@@ -4157,8 +4161,8 @@ may be more convenient.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a render node for the CSS background according to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->,
-and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing
+    <p>Creates a render node for the CSS background according to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->,<br />
+and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing<br />
 the current node.</p>
 
 
@@ -4273,8 +4277,8 @@ the current node.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a render node for the focus outline according to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->,
-and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing
+    <p>Creates a render node for the focus outline according to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->,<br />
+and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing<br />
 the current node.</p>
 
 
@@ -4389,8 +4393,8 @@ the current node.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a render node for the CSS border according to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->,
-and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing
+    <p>Creates a render node for the CSS border according to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->,<br />
+and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->, without changing<br />
 the current node.</p>
 
 
@@ -4634,8 +4638,8 @@ the current node.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a render node for rendering <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> according to the style
-information in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->,
+    <p>Creates a render node for rendering <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> according to the style<br />
+information in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, and appends it to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->,<br />
 without changing the current node.</p>
 
 
@@ -4735,8 +4739,8 @@ without changing the current node.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Restores <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> to the state saved by a preceding call to
-[method<!-- raw HTML omitted -->Snapshot<!-- raw HTML omitted -->.save] and removes that state from the stack of
+    <p>Restores <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> to the state saved by a preceding call to<br />
+[method<!-- raw HTML omitted -->Snapshot<!-- raw HTML omitted -->.save] and removes that state from the stack of<br />
 saved states.</p>
 
 
@@ -4772,8 +4776,8 @@ saved states.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Rotates @<!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system by <!-- raw HTML omitted -->angle<!-- raw HTML omitted --> degrees in 2D space -
-or in 3D speak, rotates around the Z axis. The rotation happens around
+    <p>Rotates @<!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system by <!-- raw HTML omitted -->angle<!-- raw HTML omitted --> degrees in 2D space -<br />
+or in 3D speak, rotates around the Z axis. The rotation happens around<br />
 the origin point of (0, 0) in the <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s current coordinate system.</p>
 <p>To rotate around axes other than the Z axis, use [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Transform.rotate_3d].</p>
 
@@ -4899,14 +4903,14 @@ the origin point of (0, 0) in the <!-- raw HTML omitted -->snapshot<!-- raw HTML
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Makes a copy of the current state of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> and saves it
+    <p>Makes a copy of the current state of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> and saves it<br />
 on an internal stack.</p>
-<p>When [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.restore] is called, <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> will
+<p>When [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.restore] is called, <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> will<br />
 be restored to the saved state.</p>
-<p>Multiple calls to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.save] and [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.restore]
-can be nested; each call to <code>gtk_snapshot_restore()</code> restores the state from
+<p>Multiple calls to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.save] and [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.restore]<br />
+can be nested; each call to <code>gtk_snapshot_restore()</code> restores the state from<br />
 the matching paired <code>gtk_snapshot_save()</code>.</p>
-<p>It is necessary to clear all saved states with corresponding
+<p>It is necessary to clear all saved states with corresponding<br />
 calls to <code>gtk_snapshot_restore()</code>.</p>
 
 
@@ -4942,7 +4946,7 @@ calls to <code>gtk_snapshot_restore()</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Scales <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system in 2-dimensional space by
+    <p>Scales <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->'s coordinate system in 2-dimensional space by<br />
 the given factors.</p>
 <p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.scale_3d] to scale in all 3 dimensions.</p>
 
@@ -5097,13 +5101,13 @@ the given factors.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the render node that was constructed
+    <p>Returns the render node that was constructed<br />
 by <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
-<p>Note that this function may return nil if nothing has been
-added to the snapshot or if its content does not produce pixels
+<p>Note that this function may return nil if nothing has been<br />
+added to the snapshot or if its content does not produce pixels<br />
 to be rendered.</p>
-<p>After calling this function, it is no longer possible to
-add more nodes to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->. The only function that should
+<p>After calling this function, it is no longer possible to<br />
+add more nodes to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->. The only function that should<br />
 be called after this is [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.unref].</p>
 
 
@@ -5122,7 +5126,7 @@ be called after this is [method<!-- raw HTML omitted -->GObject<!-- raw HTML omi
       
       
         &mdash;
-        <div class='inline'><p>the constructed <code>GskRenderNode</code> or
+        <div class='inline'><p>the constructed <code>GskRenderNode</code> or<br />
 nil if there are no nodes to render.</p>
 </div>
       
@@ -5144,10 +5148,10 @@ nil if there are no nodes to render.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a paintable encapsulating the render node
+    <p>Returns a paintable encapsulating the render node<br />
 that was constructed by <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
-<p>After calling this function, it is no longer possible to
-add more nodes to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->. The only function that should
+<p>After calling this function, it is no longer possible to<br />
+add more nodes to <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->. The only function that should<br />
 be called after this is [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.unref].</p>
 
 
@@ -5167,7 +5171,7 @@ be called after this is [method<!-- raw HTML omitted -->GObject<!-- raw HTML omi
       
       
         &mdash;
-        <div class='inline'><p>The size of the resulting paintable
+        <div class='inline'><p>The size of the resulting paintable<br />
 or nil to use the bounds of the snapshot</p>
 </div>
       
@@ -5419,7 +5423,7 @@ or nil to use the bounds of the snapshot</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

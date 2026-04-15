@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Atk::Role";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -995,12 +997,12 @@
         <dt id="TEXT-constant" class="">TEXT =
           <div class="docstring">
   <div class="discussion">
-    <p>An interactive widget that supports multiple lines of text and
-optionally accepts user input, but whose purpose is not to solicit user input.
-Thus ATK_ROLE_TEXT is appropriate for the text view in a plain text editor
-but inappropriate for an input field in a dialog box or web form. For widgets
-whose purpose is to solicit input from the user, see ATK_ROLE_ENTRY and
-ATK_ROLE_PASSWORD_TEXT. For generic objects which display a brief amount of
+    <p>An interactive widget that supports multiple lines of text and<br />
+optionally accepts user input, but whose purpose is not to solicit user input.<br />
+Thus ATK_ROLE_TEXT is appropriate for the text view in a plain text editor<br />
+but inappropriate for an input field in a dialog box or web form. For widgets<br />
+whose purpose is to solicit input from the user, see ATK_ROLE_ENTRY and<br />
+ATK_ROLE_PASSWORD_TEXT. For generic objects which display a brief amount of<br />
 textual information, see ATK_ROLE_STATIC.</p>
 
 
@@ -1376,9 +1378,9 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="FORM-constant" class="">FORM =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is a container for form controls, for instance as part of a
-web form or user-input form within a document.  This role is primarily a tag/convenience for
-clients when navigating complex documents, it is not expected that ordinary GUI containers will
+    <p>The object is a container for form controls, for instance as part of a<br />
+web form or user-input form within a document.  This role is primarily a tag/convenience for<br />
+clients when navigating complex documents, it is not expected that ordinary GUI containers will<br />
 always have ATK_ROLE_FORM. (Since: 1.12.0)</p>
 
 
@@ -1394,10 +1396,10 @@ always have ATK_ROLE_FORM. (Since: 1.12.0)</p>
         <dt id="LINK-constant" class="">LINK =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is a hypertext anchor, i.e. a &quot;link&quot; in a
-hypertext document.  Such objects are distinct from 'inline'
-content which may also use the Hypertext/Hyperlink interfaces
-to indicate the range/location within a text object where
+    <p>The object is a hypertext anchor, i.e. a &quot;link&quot; in a<br />
+hypertext document.  Such objects are distinct from 'inline'<br />
+content which may also use the Hypertext/Hyperlink interfaces<br />
+to indicate the range/location within a text object where<br />
 an inline or embedded object lies.  (Since: 1.12.1)</p>
 
 
@@ -1413,8 +1415,8 @@ an inline or embedded object lies.  (Since: 1.12.1)</p>
         <dt id="INPUT_METHOD_WINDOW-constant" class="">INPUT_METHOD_WINDOW =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is a window or similar viewport
-which is used to allow composition or input of a 'complex character',
+    <p>The object is a window or similar viewport<br />
+which is used to allow composition or input of a 'complex character',<br />
 in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
 
 
@@ -1640,7 +1642,7 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="TITLE_BAR-constant" class="">TITLE_BAR =
           <div class="docstring">
   <div class="discussion">
-    <p>A bar that serves as the title of a window or a
+    <p>A bar that serves as the title of a window or a<br />
 dialog. (Since: 2.12)</p>
 
 
@@ -1656,7 +1658,7 @@ dialog. (Since: 2.12)</p>
         <dt id="BLOCK_QUOTE-constant" class="">BLOCK_QUOTE =
           <div class="docstring">
   <div class="discussion">
-    <p>An object which contains a text section
+    <p>An object which contains a text section<br />
 that is quoted from another source. (Since: 2.12)</p>
 
 
@@ -1717,8 +1719,8 @@ that is quoted from another source. (Since: 2.12)</p>
         <dt id="ARTICLE-constant" class="">ARTICLE =
           <div class="docstring">
   <div class="discussion">
-    <p>A section of a page that consists of a
-composition that forms an independent part of a document, page, or
+    <p>A section of a page that consists of a<br />
+composition that forms an independent part of a document, page, or<br />
 site. Examples: A blog entry, a news story, a forum post. (Since: 2.12)</p>
 
 
@@ -1734,9 +1736,9 @@ site. Examples: A blog entry, a news story, a forum post. (Since: 2.12)</p>
         <dt id="LANDMARK-constant" class="">LANDMARK =
           <div class="docstring">
   <div class="discussion">
-    <p>A region of a web page intended as a
-navigational landmark. This is designed to allow Assistive
-Technologies to provide quick navigation among key regions within a
+    <p>A region of a web page intended as a<br />
+navigational landmark. This is designed to allow Assistive<br />
+Technologies to provide quick navigation among key regions within a<br />
 document. (Since: 2.12)</p>
 
 
@@ -1752,11 +1754,11 @@ document. (Since: 2.12)</p>
         <dt id="LOG-constant" class="">LOG =
           <div class="docstring">
   <div class="discussion">
-    <p>A text widget or container holding log content, such
-as chat history and error logs. In this role there is a
-relationship between the arrival of new items in the log and the
-reading order. The log contains a meaningful sequence and new
-information is added only to the end of the log, not at arbitrary
+    <p>A text widget or container holding log content, such<br />
+as chat history and error logs. In this role there is a<br />
+relationship between the arrival of new items in the log and the<br />
+reading order. The log contains a meaningful sequence and new<br />
+information is added only to the end of the log, not at arbitrary<br />
 points. (Since: 2.12)</p>
 
 
@@ -1772,10 +1774,10 @@ points. (Since: 2.12)</p>
         <dt id="MARQUEE-constant" class="">MARQUEE =
           <div class="docstring">
   <div class="discussion">
-    <p>A container where non-essential information
-changes frequently. Common usages of marquee include stock tickers
-and ad banners. The primary difference between a marquee and a log
-is that logs usually have a meaningful order or sequence of
+    <p>A container where non-essential information<br />
+changes frequently. Common usages of marquee include stock tickers<br />
+and ad banners. The primary difference between a marquee and a log<br />
+is that logs usually have a meaningful order or sequence of<br />
 important content changes. (Since: 2.12)</p>
 
 
@@ -1791,7 +1793,7 @@ important content changes. (Since: 2.12)</p>
         <dt id="MATH-constant" class="">MATH =
           <div class="docstring">
   <div class="discussion">
-    <p>A text widget or container that holds a mathematical
+    <p>A text widget or container that holds a mathematical<br />
 expression. (Since: 2.12)</p>
 
 
@@ -1807,9 +1809,9 @@ expression. (Since: 2.12)</p>
         <dt id="RATING-constant" class="">RATING =
           <div class="docstring">
   <div class="discussion">
-    <p>A widget whose purpose is to display a rating,
-such as the number of stars associated with a song in a media
-player. Objects of this role should also implement
+    <p>A widget whose purpose is to display a rating,<br />
+such as the number of stars associated with a song in a media<br />
+player. Objects of this role should also implement<br />
 AtkValue. (Since: 2.12)</p>
 
 
@@ -1825,8 +1827,8 @@ AtkValue. (Since: 2.12)</p>
         <dt id="TIMER-constant" class="">TIMER =
           <div class="docstring">
   <div class="discussion">
-    <p>An object containing a numerical counter which
-indicates an amount of elapsed time from a start point, or the time
+    <p>An object containing a numerical counter which<br />
+indicates an amount of elapsed time from a start point, or the time<br />
 remaining until an end point. (Since: 2.12)</p>
 
 
@@ -1842,11 +1844,11 @@ remaining until an end point. (Since: 2.12)</p>
         <dt id="DESCRIPTION_LIST-constant" class="">DESCRIPTION_LIST =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that represents a list of
-term-value groups. A term-value group represents a individual
-description and consist of one or more names
-(ATK_ROLE_DESCRIPTION_TERM) followed by one or more values
-(ATK_ROLE_DESCRIPTION_VALUE). For each list, there should not be
+    <p>An object that represents a list of<br />
+term-value groups. A term-value group represents a individual<br />
+description and consist of one or more names<br />
+(ATK_ROLE_DESCRIPTION_TERM) followed by one or more values<br />
+(ATK_ROLE_DESCRIPTION_VALUE). For each list, there should not be<br />
 more than one group with the same term name. (Since: 2.12)</p>
 
 
@@ -1862,7 +1864,7 @@ more than one group with the same term name. (Since: 2.12)</p>
         <dt id="DESCRIPTION_TERM-constant" class="">DESCRIPTION_TERM =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that represents a term or phrase
+    <p>An object that represents a term or phrase<br />
 with a corresponding definition. (Since: 2.12)</p>
 
 
@@ -1878,7 +1880,7 @@ with a corresponding definition. (Since: 2.12)</p>
         <dt id="DESCRIPTION_VALUE-constant" class="">DESCRIPTION_VALUE =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that represents the
+    <p>An object that represents the<br />
 description, definition or value of a term. (Since: 2.12)</p>
 
 
@@ -1894,18 +1896,18 @@ description, definition or value of a term. (Since: 2.12)</p>
         <dt id="STATIC-constant" class="">STATIC =
           <div class="docstring">
   <div class="discussion">
-    <p>A generic non-container object whose purpose is to display a
-brief amount of information to the user and whose role is known by the
-implementor but lacks semantic value for the user. Examples in which
-%ATK_ROLE_STATIC is appropriate include the message displayed in a message box
-and an image used as an alternative means to display text. %ATK_ROLE_STATIC
-should not be applied to widgets which are traditionally interactive, objects
-which display a significant amount of content, or any object which has an
-accessible relation pointing to another object. Implementors should expose the
-displayed information through the accessible name of the object. If doing so seems
-inappropriate, it may indicate that a different role should be used. For
-labels which describe another widget, see %ATK_ROLE_LABEL. For text views, see
-%ATK_ROLE_TEXT. For generic containers, see %ATK_ROLE_PANEL. For objects whose
+    <p>A generic non-container object whose purpose is to display a<br />
+brief amount of information to the user and whose role is known by the<br />
+implementor but lacks semantic value for the user. Examples in which<br />
+%ATK_ROLE_STATIC is appropriate include the message displayed in a message box<br />
+and an image used as an alternative means to display text. %ATK_ROLE_STATIC<br />
+should not be applied to widgets which are traditionally interactive, objects<br />
+which display a significant amount of content, or any object which has an<br />
+accessible relation pointing to another object. Implementors should expose the<br />
+displayed information through the accessible name of the object. If doing so seems<br />
+inappropriate, it may indicate that a different role should be used. For<br />
+labels which describe another widget, see %ATK_ROLE_LABEL. For text views, see<br />
+%ATK_ROLE_TEXT. For generic containers, see %ATK_ROLE_PANEL. For objects whose<br />
 role is not known by the implementor, see %ATK_ROLE_UNKNOWN. (Since: 2.16)</p>
 
 
@@ -1921,7 +1923,7 @@ role is not known by the implementor, see %ATK_ROLE_UNKNOWN. (Since: 2.16)</p>
         <dt id="MATH_FRACTION-constant" class="">MATH_FRACTION =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that represents a mathematical fraction.
+    <p>An object that represents a mathematical fraction.<br />
 (Since: 2.16)</p>
 
 
@@ -1937,7 +1939,7 @@ role is not known by the implementor, see %ATK_ROLE_UNKNOWN. (Since: 2.16)</p>
         <dt id="MATH_ROOT-constant" class="">MATH_ROOT =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that represents a mathematical expression
+    <p>An object that represents a mathematical expression<br />
 displayed with a radical. (Since: 2.16)</p>
 
 
@@ -1953,7 +1955,7 @@ displayed with a radical. (Since: 2.16)</p>
         <dt id="SUBSCRIPT-constant" class="">SUBSCRIPT =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that contains text that is displayed as a
+    <p>An object that contains text that is displayed as a<br />
 subscript. (Since: 2.16)</p>
 
 
@@ -1969,7 +1971,7 @@ subscript. (Since: 2.16)</p>
         <dt id="SUPERSCRIPT-constant" class="">SUPERSCRIPT =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that contains text that is displayed as a
+    <p>An object that contains text that is displayed as a<br />
 superscript. (Since: 2.16)</p>
 
 
@@ -2000,8 +2002,8 @@ superscript. (Since: 2.16)</p>
         <dt id="CONTENT_DELETION-constant" class="">CONTENT_DELETION =
           <div class="docstring">
   <div class="discussion">
-    <p>Content previously deleted or proposed to be
-deleted, e.g. in revision history or a content view providing suggestions
+    <p>Content previously deleted or proposed to be<br />
+deleted, e.g. in revision history or a content view providing suggestions<br />
 from reviewers. (Since: 2.34)</p>
 
 
@@ -2017,8 +2019,8 @@ from reviewers. (Since: 2.34)</p>
         <dt id="CONTENT_INSERTION-constant" class="">CONTENT_INSERTION =
           <div class="docstring">
   <div class="discussion">
-    <p>Content previously inserted or proposed to be
-inserted, e.g. in revision history or a content view providing suggestions
+    <p>Content previously inserted or proposed to be<br />
+inserted, e.g. in revision history or a content view providing suggestions<br />
 from reviewers. (Since: 2.34)</p>
 
 
@@ -2034,12 +2036,12 @@ from reviewers. (Since: 2.34)</p>
         <dt id="MARK-constant" class="">MARK =
           <div class="docstring">
   <div class="discussion">
-    <p>A run of content that is marked or highlighted, such as for
-reference purposes, or to call it out as having a special purpose. If the
-marked content has an associated section in the document elaborating on the
-reason for the mark, then %ATK_RELATION_DETAILS should be used on the mark
-to point to that associated section. In addition, the reciprocal relation
-%ATK_RELATION_DETAILS_FOR should be used on the associated content section
+    <p>A run of content that is marked or highlighted, such as for<br />
+reference purposes, or to call it out as having a special purpose. If the<br />
+marked content has an associated section in the document elaborating on the<br />
+reason for the mark, then %ATK_RELATION_DETAILS should be used on the mark<br />
+to point to that associated section. In addition, the reciprocal relation<br />
+%ATK_RELATION_DETAILS_FOR should be used on the associated content section<br />
 to point back to the mark. (Since: 2.36)</p>
 
 
@@ -2055,10 +2057,10 @@ to point back to the mark. (Since: 2.36)</p>
         <dt id="SUGGESTION-constant" class="">SUGGESTION =
           <div class="docstring">
   <div class="discussion">
-    <p>A container for content that is called out as a proposed
-change from the current version of the document, such as by a reviewer of the
-content. This role should include either %ATK_ROLE_CONTENT_DELETION and/or
-%ATK_ROLE_CONTENT_INSERTION children, in any order, to indicate what the
+    <p>A container for content that is called out as a proposed<br />
+change from the current version of the document, such as by a reviewer of the<br />
+content. This role should include either %ATK_ROLE_CONTENT_DELETION and/or<br />
+%ATK_ROLE_CONTENT_INSERTION children, in any order, to indicate what the<br />
 actual change is. (Since: 2.36)</p>
 
 
@@ -2074,7 +2076,7 @@ actual change is. (Since: 2.36)</p>
         <dt id="PUSH_BUTTON_MENU-constant" class="">PUSH_BUTTON_MENU =
           <div class="docstring">
   <div class="discussion">
-    <p>A specialized push button to open a menu.
+    <p>A specialized push button to open a menu.<br />
 (Since: 2.46)</p>
 
 
@@ -2118,7 +2120,7 @@ actual change is. (Since: 2.36)</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::ShaderEffect";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -102,14 +103,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::ShaderEffectClass structure contains
+    <p>The Clutter::ShaderEffectClass structure contains<br />
 only private data</p>
 
 
@@ -297,9 +299,11 @@ only private data</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -319,9 +323,11 @@ only private data</p>
   
   
   
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Effect.html" title="Clutter::Effect (class)">Effect</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Effect.html#queue_repaint-instance_method" title="Clutter::Effect#queue_repaint (method)">#queue_repaint</a></span></p>
 
+  
   
   
   
@@ -347,9 +353,9 @@ only private data</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Clutter::ShaderEffect, to be applied to an actor using
+    <p>Creates a new Clutter::ShaderEffect, to be applied to an actor using<br />
 clutter_actor_add_effect().</p>
-<p>The effect will be empty until clutter_shader_effect_set_shader_source()
+<p>The effect will be empty until clutter_shader_effect_set_shader_source()<br />
 is called.</p>
 
 
@@ -369,7 +375,7 @@ is called.</p>
       
       
         &mdash;
-        <div class='inline'><p>the type of the shader, either %CLUTTER_FRAGMENT_SHADER,
+        <div class='inline'><p>the type of the shader, either %CLUTTER_FRAGMENT_SHADER,<br />
 or %CLUTTER_VERTEX_SHADER</p>
 </div>
       
@@ -417,7 +423,7 @@ or %CLUTTER_VERTEX_SHADER</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the program's handle,
+        <div class='inline'><p>a pointer to the program's handle,<br />
 or %COGL_INVALID_HANDLE</p>
 </div>
       
@@ -439,16 +445,16 @@ or %COGL_INVALID_HANDLE</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a list of values as the payload for the uniform <!-- raw HTML omitted -->name<!-- raw HTML omitted --> inside
+    <p>Sets a list of values as the payload for the uniform <!-- raw HTML omitted -->name<!-- raw HTML omitted --> inside<br />
 the shader effect</p>
-<p>The <!-- raw HTML omitted -->gtype<!-- raw HTML omitted --> must be one of: %G_TYPE_INT, for 1 or more integer values;
-%G_TYPE_FLOAT, for 1 or more floating point values;
-%CLUTTER_TYPE_SHADER_INT, for a pointer to an array of integer values;
-%CLUTTER_TYPE_SHADER_FLOAT, for a pointer to an array of floating point
-values; and %CLUTTER_TYPE_SHADER_MATRIX, for a pointer to an array of
+<p>The <!-- raw HTML omitted -->gtype<!-- raw HTML omitted --> must be one of: %G_TYPE_INT, for 1 or more integer values;<br />
+%G_TYPE_FLOAT, for 1 or more floating point values;<br />
+%CLUTTER_TYPE_SHADER_INT, for a pointer to an array of integer values;<br />
+%CLUTTER_TYPE_SHADER_FLOAT, for a pointer to an array of floating point<br />
+values; and %CLUTTER_TYPE_SHADER_MATRIX, for a pointer to an array of<br />
 floating point values mapping a matrix</p>
-<p>The number of values interepreted is defined by the <!-- raw HTML omitted -->n_value<!-- raw HTML omitted -->
-argument, and by the <!-- raw HTML omitted -->gtype<!-- raw HTML omitted --> argument. For instance, a uniform named
+<p>The number of values interepreted is defined by the <!-- raw HTML omitted -->n_value<!-- raw HTML omitted --><br />
+argument, and by the <!-- raw HTML omitted -->gtype<!-- raw HTML omitted --> argument. For instance, a uniform named<br />
 &quot;sampler0&quot; and containing a single integer value is set using:</p>
 <pre class="code ruby"><code class="ruby">  clutter_shader_effect_set_uniform (effect, &quot;map&quot;,
                                      CLUTTER_TYPE_SHADER_MATRIX, 1,
@@ -552,14 +558,14 @@ argument, and by the <!-- raw HTML omitted -->gtype<!-- raw HTML omitted --> arg
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->value<!-- raw HTML omitted --> as the payload for the uniform <!-- raw HTML omitted -->name<!-- raw HTML omitted --> inside the shader
+    <p>Sets <!-- raw HTML omitted -->value<!-- raw HTML omitted --> as the payload for the uniform <!-- raw HTML omitted -->name<!-- raw HTML omitted --> inside the shader<br />
 effect</p>
-<p>The #GType of the <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be one of: %G_TYPE_INT, for a single
-integer value; %G_TYPE_FLOAT, for a single floating point value;
-%CLUTTER_TYPE_SHADER_INT, for an array of integer values;
-%CLUTTER_TYPE_SHADER_FLOAT, for an array of floating point values;
-and %CLUTTER_TYPE_SHADER_MATRIX, for a matrix of floating point
-values. It also accepts %G_TYPE_DOUBLE for compatibility with other
+<p>The #GType of the <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be one of: %G_TYPE_INT, for a single<br />
+integer value; %G_TYPE_FLOAT, for a single floating point value;<br />
+%CLUTTER_TYPE_SHADER_INT, for an array of integer values;<br />
+%CLUTTER_TYPE_SHADER_FLOAT, for an array of floating point values;<br />
+and %CLUTTER_TYPE_SHADER_MATRIX, for a matrix of floating point<br />
+values. It also accepts %G_TYPE_DOUBLE for compatibility with other<br />
 languages than C.</p>
 
 
@@ -647,7 +653,7 @@ languages than C.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the shader's handle,
+        <div class='inline'><p>a pointer to the shader's handle,<br />
 or %COGL_INVALID_HANDLE</p>
 </div>
       
@@ -670,9 +676,9 @@ or %COGL_INVALID_HANDLE</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the source of the GLSL shader used by <!-- raw HTML omitted -->effect<!-- raw HTML omitted --></p>
-<p>This function should only be called by implementations of
+<p>This function should only be called by implementations of<br />
 the Clutter::ShaderEffect class, and not by application code.</p>
-<p>This function can only be called once; subsequent calls will
+<p>This function can only be called once; subsequent calls will<br />
 yield no result.</p>
 
 
@@ -731,8 +737,8 @@ yield no result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The type of shader that is used by the effect. This property
-should be set by the constructor of Clutter::ShaderEffect
+    <p>The type of shader that is used by the effect. This property<br />
+should be set by the constructor of Clutter::ShaderEffect<br />
 sub-classes.</p>
 
 
@@ -783,7 +789,7 @@ sub-classes.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::AlertDialog";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -508,6 +510,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -525,7 +528,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkAlertDialog</code> object.</p>
-<p>The message will be set to the formatted string
+<p>The message will be set to the formatted string<br />
 resulting from the arguments.</p>
 
 
@@ -590,9 +593,9 @@ resulting from the arguments.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Labels for buttons to show in the alert.</p>
-<p>The labels should be translated and may contain
+<p>The labels should be translated and may contain<br />
 a _ to indicate the mnemonic character.</p>
-<p>If this property is not set, then a 'Close' button is
+<p>If this property is not set, then a 'Close' button is<br />
 automatically created.</p>
 
 
@@ -633,9 +636,9 @@ automatically created.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Labels for buttons to show in the alert.</p>
-<p>The labels should be translated and may contain
+<p>The labels should be translated and may contain<br />
 a _ to indicate the mnemonic character.</p>
-<p>If this property is not set, then a 'Close' button is
+<p>If this property is not set, then a 'Close' button is<br />
 automatically created.</p>
 
 
@@ -703,12 +706,12 @@ automatically created.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This property determines what happens when the Escape key is
+    <p>This property determines what happens when the Escape key is<br />
 pressed while the alert is shown.</p>
-<p>If this property holds the index of a button in [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog:buttons],
-then pressing Escape is treated as if that button was pressed. If it is -1
+<p>If this property holds the index of a button in [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog:buttons],<br />
+then pressing Escape is treated as if that button was pressed. If it is -1<br />
 or not a valid index for the <code>buttons</code> array, then an error is returned.</p>
-<p>If <code>buttons</code> is <code>NULL</code>, then the automatically created 'Close' button
+<p>If <code>buttons</code> is <code>NULL</code>, then the automatically created 'Close' button<br />
 is treated as both cancel and default button, so 0 is returned.</p>
 
 
@@ -748,12 +751,12 @@ is treated as both cancel and default button, so 0 is returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This property determines what happens when the Escape key is
+    <p>This property determines what happens when the Escape key is<br />
 pressed while the alert is shown.</p>
-<p>If this property holds the index of a button in [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog:buttons],
-then pressing Escape is treated as if that button was pressed. If it is -1
+<p>If this property holds the index of a button in [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog:buttons],<br />
+then pressing Escape is treated as if that button was pressed. If it is -1<br />
 or not a valid index for the <code>buttons</code> array, then an error is returned.</p>
-<p>If <code>buttons</code> is <code>NULL</code>, then the automatically created 'Close' button
+<p>If <code>buttons</code> is <code>NULL</code>, then the automatically created 'Close' button<br />
 is treated as both cancel and default button, so 0 is returned.</p>
 
 
@@ -822,11 +825,11 @@ is treated as both cancel and default button, so 0 is returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>This function shows the alert to the user.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the alert is dismissed.
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog.choose_finish]
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the alert is dismissed.<br />
+It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog.choose_finish]<br />
 to obtain the result.</p>
-<p>It is ok to pass <code>NULL</code> for the callback if the alert
-does not have more than one button. A simpler API for
+<p>It is ok to pass <code>NULL</code> for the callback if the alert<br />
+does not have more than one button. A simpler API for<br />
 this case is [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog.show].</p>
 
 
@@ -926,7 +929,7 @@ this case is [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertD
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog.choose] call
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog.choose] call<br />
 and returns the index of the button that was clicked.</p>
 
 
@@ -964,8 +967,8 @@ and returns the index of the button that was clicked.</p>
       
       
         &mdash;
-        <div class='inline'><p>the index of the button that was clicked, or -1 if
-the dialog was cancelled and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog:cancel-button]
+        <div class='inline'><p>the index of the button that was clicked, or -1 if<br />
+the dialog was cancelled and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog:cancel-button]<br />
 is not set</p>
 </div>
       
@@ -987,12 +990,12 @@ is not set</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This property determines what happens when the Return key is
+    <p>This property determines what happens when the Return key is<br />
 pressed while the alert is shown.</p>
-<p>If this property holds the index of a button in [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog:buttons],
-then pressing Return is treated as if that button was pressed. If it is -1
+<p>If this property holds the index of a button in [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog:buttons],<br />
+then pressing Return is treated as if that button was pressed. If it is -1<br />
 or not a valid index for the <code>buttons</code> array, then nothing happens.</p>
-<p>If <code>buttons</code> is <code>NULL</code>, then the automatically created 'Close' button
+<p>If <code>buttons</code> is <code>NULL</code>, then the automatically created 'Close' button<br />
 is treated as both cancel and default button, so 0 is returned.</p>
 
 
@@ -1032,12 +1035,12 @@ is treated as both cancel and default button, so 0 is returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This property determines what happens when the Return key is
+    <p>This property determines what happens when the Return key is<br />
 pressed while the alert is shown.</p>
-<p>If this property holds the index of a button in [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog:buttons],
-then pressing Return is treated as if that button was pressed. If it is -1
+<p>If this property holds the index of a button in [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog:buttons],<br />
+then pressing Return is treated as if that button was pressed. If it is -1<br />
 or not a valid index for the <code>buttons</code> array, then nothing happens.</p>
-<p>If <code>buttons</code> is <code>NULL</code>, then the automatically created 'Close' button
+<p>If <code>buttons</code> is <code>NULL</code>, then the automatically created 'Close' button<br />
 is treated as both cancel and default button, so 0 is returned.</p>
 
 
@@ -1317,7 +1320,7 @@ is treated as both cancel and default button, so 0 is returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the alert blocks interaction
+    <p>Returns whether the alert blocks interaction<br />
 with the parent window while it is presented.</p>
 
 
@@ -1464,10 +1467,10 @@ with the parent window while it is presented.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Show the alert to the user.</p>
-<p>This function is a simple version of [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog.choose]
-intended for dialogs with a single button.
-If you want to cancel the dialog or if the alert has more than one button,
-you should use that function instead and provide it with a #GCancellable or
+<p>This function is a simple version of [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AlertDialog.choose]<br />
+intended for dialogs with a single button.<br />
+If you want to cancel the dialog or if the alert has more than one button,<br />
+you should use that function instead and provide it with a #GCancellable or<br />
 callback respectively.</p>
 
 
@@ -1518,7 +1521,7 @@ callback respectively.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

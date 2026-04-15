@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gegl";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gegl/node.rb<span class="defines">,<br />
-  lib/gegl.rb,<br /> lib/gegl/loader.rb,<br /> lib/gegl/version.rb</span>
+    <dd>lib/gegl/node.rb<span class="defines">,<br>
+  lib/gegl.rb,<br> lib/gegl/loader.rb,<br> lib/gegl/version.rb</span>
+
 </dd>
   </dl>
   
@@ -88,16 +90,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2018  Ruby-GNOME2 Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -1831,6 +1833,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 
       
     </ul>
+    
   
 
 
@@ -1850,7 +1853,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Apply the operation to buffer, overwritting the contents of buffer.
+    <p>Apply the operation to buffer, overwritting the contents of buffer.<br />
 ended terminated with NULL.</p>
 
 
@@ -1935,7 +1938,7 @@ ended terminated with NULL.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Apply the operation to buffer, overwritting the contents of buffer.
+    <p>Apply the operation to buffer, overwritting the contents of buffer.<br />
 ended terminated with NULL.</p>
 
 
@@ -2238,7 +2241,7 @@ ended terminated with NULL.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Initialize and enable OpenCL, calling this function again
+    <p>Initialize and enable OpenCL, calling this function again<br />
 will re-enable OpenCL if it has been disabled.</p>
 
 
@@ -2317,7 +2320,7 @@ will re-enable OpenCL if it has been disabled.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a GeglConfig object with properties that can be manipulated to control
+    <p>Returns a GeglConfig object with properties that can be manipulated to control<br />
 GEGLs behavior.</p>
 
 
@@ -2615,8 +2618,8 @@ GEGLs behavior.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Call this function when you're done using GEGL. It will clean up
-caches and write/dump debug information if the correct debug flags
+    <p>Call this function when you're done using GEGL. It will clean up<br />
+caches and write/dump debug information if the correct debug flags<br />
 are set.</p>
 
 
@@ -2652,7 +2655,7 @@ are set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Apply the operation to source_buffer, returning the result in a new buffer.
+    <p>Apply the operation to source_buffer, returning the result in a new buffer.<br />
 ended terminated with NULL.</p>
 
 
@@ -2741,7 +2744,7 @@ ended terminated with NULL.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Apply the operation to source_buffer, returning the result in a new buffer.
+    <p>Apply the operation to source_buffer, returning the result in a new buffer.<br />
 ended terminated with NULL.</p>
 
 
@@ -2830,7 +2833,7 @@ ended terminated with NULL.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a value sutable to pass to the GeglBuffer constructor
+    <p>Returns a value sutable to pass to the GeglBuffer constructor<br />
 or any other property that expects a Babl format.</p>
 
 
@@ -3001,7 +3004,7 @@ or any other property that expects a Babl format.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function fetches the version of the GEGL library being used by
+    <p>This function fetches the version of the GEGL library being used by<br />
 the running process.</p>
 
 
@@ -3140,7 +3143,7 @@ the running process.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Dump the region that will be rendered for each node to fulfill
+    <p>Dump the region that will be rendered for each node to fulfill<br />
 the request.</p>
 
 
@@ -3268,13 +3271,13 @@ the request.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Call this function before using any other GEGL functions. It will
-initialize everything needed to operate GEGL and parses some
-standard command line options.  <!-- raw HTML omitted -->argc<!-- raw HTML omitted --> and <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> are adjusted
-accordingly so your own code will never see those standard
+    <p>Call this function before using any other GEGL functions. It will<br />
+initialize everything needed to operate GEGL and parses some<br />
+standard command line options.  <!-- raw HTML omitted -->argc<!-- raw HTML omitted --> and <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> are adjusted<br />
+accordingly so your own code will never see those standard<br />
 arguments.</p>
-<p>Note that there is an alternative way to initialize GEGL: if you
-are calling g_option_context_parse() with the option group returned
+<p>Note that there is an alternative way to initialize GEGL: if you<br />
+are calling g_option_context_parse() with the option group returned<br />
 by #gegl_get_option_group(), you don't have to call #gegl_init().</p>
 
 
@@ -3378,18 +3381,18 @@ by #gegl_get_option_group(), you don't have to call #gegl_init().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <h2>alphabetically sorted array of available operation names. This excludes any
-compat-name registered by operations. The list should be freed with g_free
+    <h2><a href="#alphabetically-sorted-array-of-available-operation-names-this-excludes-any-compat-name-registered-by-operations-the-list-should-be-freed-with-g_free-after-use" aria-hidden="true" class="anchor" id="alphabetically-sorted-array-of-available-operation-names-this-excludes-any-compat-name-registered-by-operations-the-list-should-be-freed-with-g_free-after-use"></a>alphabetically sorted array of available operation names. This excludes any<br />
+compat-name registered by operations. The list should be freed with g_free<br />
 after use.</h2>
-<p>gchar **operations;
-guint   n_operations;
+<p>gchar **operations;<br />
+guint   n_operations;<br />
 gint i;</p>
-<p>operations = gegl_list_operations (&amp;n_operations);
-g_print (&quot;Available operations:\n&quot;);
-for (i=0; i &lt; n_operations; i++)
-{
-g_print (&quot;\t%s\n&quot;, operations[i]);
-}
+<p>operations = gegl_list_operations (&amp;n_operations);<br />
+g_print (&quot;Available operations:\n&quot;);<br />
+for (i=0; i &lt; n_operations; i++)<br />
+{<br />
+g_print (&quot;\t%s\n&quot;, operations[i]);<br />
+}<br />
 g_free (operations);</p>
 
 
@@ -3748,7 +3751,7 @@ g_free (operations);</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if all the bytes of the memory block <!-- raw HTML omitted -->ptr<!-- raw HTML omitted -->, of size <!-- raw HTML omitted -->size<!-- raw HTML omitted -->,
+    <p>Checks if all the bytes of the memory block <!-- raw HTML omitted -->ptr<!-- raw HTML omitted -->, of size <!-- raw HTML omitted -->size<!-- raw HTML omitted -->,<br />
 are equal to zero.</p>
 
 
@@ -3921,9 +3924,9 @@ are equal to zero.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a GOptionGroup for the commandline arguments recognized
-by GEGL. You should add this group to your GOptionContext
-with g_option_context_add_group() if you are using
+    <p>Returns a GOptionGroup for the commandline arguments recognized<br />
+by GEGL. You should add this group to your GOptionContext<br />
+with g_option_context_add_group() if you are using<br />
 g_option_context_parse() to parse your commandline arguments.</p>
 
 
@@ -3959,7 +3962,7 @@ g_option_context_parse() to parse your commandline arguments.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Distributes the execution of a function across multiple threads,
+    <p>Distributes the execution of a function across multiple threads,<br />
 by calling it with a different index on each thread.</p>
 
 
@@ -4044,8 +4047,8 @@ by calling it with a different index on each thread.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Distributes the processing of a planar data-structure across
-multiple threads, by calling the given function with different
+    <p>Distributes the processing of a planar data-structure across<br />
+multiple threads, by calling the given function with different<br />
 sub-areas on different threads.</p>
 
 
@@ -4080,7 +4083,7 @@ sub-areas on different threads.</p>
       
       
         &mdash;
-        <div class='inline'><p>the cost of using each additional thread, relative
+        <div class='inline'><p>the cost of using each additional thread, relative<br />
 to the cost of processing a single data element</p>
 </div>
       
@@ -4161,8 +4164,8 @@ to the cost of processing a single data element</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Distributes the processing of a linear data-structure across
-multiple threads, by calling the given function with different
+    <p>Distributes the processing of a linear data-structure across<br />
+multiple threads, by calling the given function with different<br />
 sub-ranges on different threads.</p>
 
 
@@ -4197,7 +4200,7 @@ sub-ranges on different threads.</p>
       
       
         &mdash;
-        <div class='inline'><p>the cost of using each additional thread, relative
+        <div class='inline'><p>the cost of using each additional thread, relative<br />
 to the cost of processing a single data element</p>
 </div>
       
@@ -6231,7 +6234,7 @@ to the cost of processing a single data element</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Apply the operation to source_buffer, writing the results to target_buffer.
+    <p>Apply the operation to source_buffer, writing the results to target_buffer.<br />
 ended terminated with NULL.</p>
 
 
@@ -6331,7 +6334,7 @@ ended terminated with NULL.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Apply the operation to source_buffer, writing the results to target_buffer.
+    <p>Apply the operation to source_buffer, writing the results to target_buffer.<br />
 ended terminated with NULL.</p>
 
 
@@ -6431,7 +6434,7 @@ ended terminated with NULL.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Resets the cumulative data gathered by the Gegl::Stats object returned
+    <p>Resets the cumulative data gathered by the Gegl::Stats object returned<br />
 by #gegl_stats().</p>
 
 
@@ -6578,7 +6581,7 @@ by #gegl_stats().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Frees the memory pointed to by <!-- raw HTML omitted -->ptr<!-- raw HTML omitted -->.</p>
-<p>The memory must have been allocated using one of the scratch-memory
+<p>The memory must have been allocated using one of the scratch-memory<br />
 allocation functions.</p>
 
 
@@ -6732,7 +6735,7 @@ allocation functions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a GeglStats object with properties that can be read to monitor
+    <p>Returns a GeglStats object with properties that can be read to monitor<br />
 GEGL statistics.</p>
 
 
@@ -6772,7 +6775,7 @@ GEGL statistics.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Allocates <!-- raw HTML omitted -->n_bytes<!-- raw HTML omitted --> of memory. If allocation fails, or if <!-- raw HTML omitted -->n_bytes<!-- raw HTML omitted --> is 0,
+    <p>Allocates <!-- raw HTML omitted -->n_bytes<!-- raw HTML omitted --> of memory. If allocation fails, or if <!-- raw HTML omitted -->n_bytes<!-- raw HTML omitted --> is 0,<br />
 returns nil.</p>
 <p>Returns a pointer to the allocated memory, or NULL.</p>
 
@@ -6824,7 +6827,7 @@ returns nil.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

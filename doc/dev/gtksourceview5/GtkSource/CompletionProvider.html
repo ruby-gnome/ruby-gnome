@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::CompletionProvider";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -87,8 +89,8 @@
   <div class="discussion">
     <p>Completion provider interface.</p>
 <p>You must implement this interface to provide proposals to [class<!-- raw HTML omitted -->Completion<!-- raw HTML omitted -->].</p>
-<p>In most cases, implementations of this interface will want to use
-[vfunc<!-- raw HTML omitted -->CompletionProvider<!-- raw HTML omitted -->.populate_async] to asynchronously populate the results
+<p>In most cases, implementations of this interface will want to use<br />
+[vfunc<!-- raw HTML omitted -->CompletionProvider<!-- raw HTML omitted -->.populate_async] to asynchronously populate the results<br />
 to avoid blocking the main loop.</p>
 
 
@@ -365,6 +367,7 @@ to avoid blocking the main loop.</p>
 
       
     </ul>
+    
   
 
 
@@ -384,10 +387,10 @@ to avoid blocking the main loop.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function requests <!-- raw HTML omitted -->proposal<!-- raw HTML omitted --> to be activated by the
+    <p>This function requests <!-- raw HTML omitted -->proposal<!-- raw HTML omitted --> to be activated by the<br />
 Gtk::SourceCompletionProvider.</p>
-<p>What the provider does to activate the proposal is specific to that
-provider. Many providers may choose to insert a Gtk::SourceSnippet with
+<p>What the provider does to activate the proposal is specific to that<br />
+provider. Many providers may choose to insert a Gtk::SourceSnippet with<br />
 edit points the user may cycle through.</p>
 <p>See also: [class<!-- raw HTML omitted -->Snippet<!-- raw HTML omitted -->], [class<!-- raw HTML omitted -->SnippetChunk<!-- raw HTML omitted -->], [method<!-- raw HTML omitted -->View<!-- raw HTML omitted -->.push_snippet]</p>
 
@@ -458,11 +461,11 @@ edit points the user may cycle through.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function requests that the Gtk::SourceCompletionProvider prepares
+    <p>This function requests that the Gtk::SourceCompletionProvider prepares<br />
 <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> to display the contents of <!-- raw HTML omitted -->proposal<!-- raw HTML omitted -->.</p>
 <p>Based on <!-- raw HTML omitted -->cells<!-- raw HTML omitted --> column type, you may want to display different information.</p>
-<p>This allows for columns of information among completion proposals
-resulting in better alignment of similar content (icons, return types,
+<p>This allows for columns of information among completion proposals<br />
+resulting in better alignment of similar content (icons, return types,<br />
 method names, and parameter lists).</p>
 
 
@@ -548,8 +551,8 @@ method names, and parameter lists).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>This function should return the priority of <!-- raw HTML omitted -->self<!-- raw HTML omitted --> in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->.</p>
-<p>The priority is used to sort groups of completion proposals by
-provider so that higher priority providers results are shown
+<p>The priority is used to sort groups of completion proposals by<br />
+provider so that higher priority providers results are shown<br />
 above lower priority providers.</p>
 <p>Higher value indicates higher priority.</p>
 
@@ -605,12 +608,12 @@ above lower priority providers.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function is used to determine if a character inserted into the text
+    <p>This function is used to determine if a character inserted into the text<br />
 editor should cause a new completion request to be triggered.</p>
-<p>An example would be period '.' which might indicate that the user wants
+<p>An example would be period '.' which might indicate that the user wants<br />
 to complete method or field names of an object.</p>
-<p>This method will only trigger when text is inserted into the Gtk::TextBuffer
-while the completion list is visible and a proposal is selected. Incremental
+<p>This method will only trigger when text is inserted into the Gtk::TextBuffer<br />
+while the completion list is visible and a proposal is selected. Incremental<br />
 key-presses (like shift, control, or alt) are not triggerable.</p>
 
 
@@ -680,10 +683,10 @@ key-presses (like shift, control, or alt) are not triggerable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function is used to determine if a key typed by the user should
+    <p>This function is used to determine if a key typed by the user should<br />
 activate <!-- raw HTML omitted -->proposal<!-- raw HTML omitted --> (resulting in committing the text to the editor).</p>
-<p>This is useful when using languages where convention may lead to less
-typing by the user. One example may be the use of &quot;.&quot; or &quot;-&quot; to expand
+<p>This is useful when using languages where convention may lead to less<br />
+typing by the user. One example may be the use of &quot;.&quot; or &quot;-&quot; to expand<br />
 a field access in the C programming language.</p>
 
 
@@ -783,9 +786,9 @@ a field access in the C programming language.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Providers should return a list of alternates to <!-- raw HTML omitted -->proposal<!-- raw HTML omitted --> or nil if
+    <p>Providers should return a list of alternates to <!-- raw HTML omitted -->proposal<!-- raw HTML omitted --> or nil if<br />
 there are no alternates available.</p>
-<p>This can be used by the completion view to allow the user to move laterally
+<p>This can be used by the completion view to allow the user to move laterally<br />
 through similar proposals, such as overrides of methods by the same name.</p>
 
 
@@ -908,11 +911,11 @@ through similar proposals, such as overrides of methods by the same name.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously requests that the provider populates the completion
+    <p>Asynchronously requests that the provider populates the completion<br />
 results for <!-- raw HTML omitted -->context<!-- raw HTML omitted -->.</p>
-<p>For providers that would like to populate a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel] while those
-results are displayed to the user,
-[method<!-- raw HTML omitted -->CompletionContext<!-- raw HTML omitted -->.set_proposals_for_provider] may be used
+<p>For providers that would like to populate a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel] while those<br />
+results are displayed to the user,<br />
+[method<!-- raw HTML omitted -->CompletionContext<!-- raw HTML omitted -->.set_proposals_for_provider] may be used<br />
 to reduce latency until the user sees results.</p>
 
 
@@ -1070,10 +1073,10 @@ to reduce latency until the user sees results.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function can be used to filter results previously provided to
+    <p>This function can be used to filter results previously provided to<br />
 the [class<!-- raw HTML omitted -->CompletionContext<!-- raw HTML omitted -->] by the Gtk::SourceCompletionProvider.</p>
-<p>This can happen as the user types additional text onto the word so
-that previously matched items may be removed from the list instead of
+<p>This can happen as the user types additional text onto the word so<br />
+that previously matched items may be removed from the list instead of<br />
 generating new [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel] of results.</p>
 
 
@@ -1144,7 +1147,7 @@ generating new [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListM
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the title of the completion provider, if any.</p>
-<p>Currently, titles are not displayed in the completion results, but may be
+<p>Currently, titles are not displayed in the completion results, but may be<br />
 at some point in the future when non-nil.</p>
 
 
@@ -1180,7 +1183,7 @@ at some point in the future when non-nil.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

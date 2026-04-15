@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::ListStore";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/list-store.rb</dd>
+    <dd>lib/gtk4/list-store.rb
+</dd>
   </dl>
   
 </div>
@@ -738,6 +740,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -842,8 +845,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Appends a new row to <!-- raw HTML omitted -->list_store<!-- raw HTML omitted -->.  <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this new
-row.  The row will be empty after this function is called.  To fill in
+    <p>Appends a new row to <!-- raw HTML omitted -->list_store<!-- raw HTML omitted -->.  <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this new<br />
+row.  The row will be empty after this function is called.  To fill in<br />
 values, you need to call gtk_list_store_set() or gtk_list_store_set_value().</p>
 
 
@@ -920,8 +923,8 @@ values, you need to call gtk_list_store_set() or gtk_list_store_set_value().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Appends a new row to <!-- raw HTML omitted -->list_store<!-- raw HTML omitted -->.  <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this new
-row.  The row will be empty after this function is called.  To fill in
+    <p>Appends a new row to <!-- raw HTML omitted -->list_store<!-- raw HTML omitted -->.  <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this new<br />
+row.  The row will be empty after this function is called.  To fill in<br />
 values, you need to call gtk_list_store_set() or gtk_list_store_set_value().</p>
 
 
@@ -1113,10 +1116,10 @@ values, you need to call gtk_list_store_set() or gtk_list_store_set_value().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new row at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.  <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this new
-row.  If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is -1 or is larger than the number of rows on the list,
-then the new row will be appended to the list. The row will be empty after
-this function is called.  To fill in values, you need to call
+    <p>Creates a new row at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.  <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this new<br />
+row.  If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is -1 or is larger than the number of rows on the list,<br />
+then the new row will be appended to the list. The row will be empty after<br />
+this function is called.  To fill in values, you need to call<br />
 gtk_list_store_set() or gtk_list_store_set_value().</p>
 
 
@@ -1210,9 +1213,9 @@ gtk_list_store_set() or gtk_list_store_set_value().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts a new row after <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil, then the row will be
-prepended to the beginning of the list. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to
-this new row. The row will be empty after this function is called. To fill
+    <p>Inserts a new row after <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil, then the row will be<br />
+prepended to the beginning of the list. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to<br />
+this new row. The row will be empty after this function is called. To fill<br />
 in values, you need to call gtk_list_store_set() or gtk_list_store_set_value().</p>
 
 
@@ -1304,9 +1307,9 @@ in values, you need to call gtk_list_store_set() or gtk_list_store_set_value().<
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts a new row after <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil, then the row will be
-prepended to the beginning of the list. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to
-this new row. The row will be empty after this function is called. To fill
+    <p>Inserts a new row after <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil, then the row will be<br />
+prepended to the beginning of the list. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to<br />
+this new row. The row will be empty after this function is called. To fill<br />
 in values, you need to call gtk_list_store_set() or gtk_list_store_set_value().</p>
 
 
@@ -1390,9 +1393,9 @@ in values, you need to call gtk_list_store_set() or gtk_list_store_set_value().<
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts a new row before <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil, then the row will
-be appended to the end of the list. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this
-new row. The row will be empty after this function is called. To fill in
+    <p>Inserts a new row before <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil, then the row will<br />
+be appended to the end of the list. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this<br />
+new row. The row will be empty after this function is called. To fill in<br />
 values, you need to call gtk_list_store_set() or gtk_list_store_set_value().</p>
 
 
@@ -1484,9 +1487,9 @@ values, you need to call gtk_list_store_set() or gtk_list_store_set_value().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts a new row before <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil, then the row will
-be appended to the end of the list. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this
-new row. The row will be empty after this function is called. To fill in
+    <p>Inserts a new row before <!-- raw HTML omitted -->sibling<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->sibling<!-- raw HTML omitted --> is nil, then the row will<br />
+be appended to the end of the list. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this<br />
+new row. The row will be empty after this function is called. To fill in<br />
 values, you need to call gtk_list_store_set() or gtk_list_store_set_value().</p>
 
 
@@ -1570,10 +1573,10 @@ values, you need to call gtk_list_store_set() or gtk_list_store_set_value().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new row at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.  <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this new
-row.  If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is -1 or is larger than the number of rows on the list,
-then the new row will be appended to the list. The row will be empty after
-this function is called.  To fill in values, you need to call
+    <p>Creates a new row at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.  <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this new<br />
+row.  If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is -1 or is larger than the number of rows on the list,<br />
+then the new row will be appended to the list. The row will be empty after<br />
+this function is called.  To fill in values, you need to call<br />
 gtk_list_store_set() or gtk_list_store_set_value().</p>
 
 
@@ -1657,12 +1660,12 @@ gtk_list_store_set() or gtk_list_store_set_value().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new row at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this new
-row. If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is -1, or larger than the number of rows in the list, then
-the new row will be appended to the list. The row will be filled with the
+    <p>Creates a new row at <!-- raw HTML omitted -->position<!-- raw HTML omitted -->. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this new<br />
+row. If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is -1, or larger than the number of rows in the list, then<br />
+the new row will be appended to the list. The row will be filled with the<br />
 values given to this function.</p>
-<p>Calling
-<code>gtk_list_store_insert_with_values (list_store, iter, position...)</code>
+<p>Calling<br />
+<code>gtk_list_store_insert_with_values (list_store, iter, position...)</code><br />
 has the same effect as calling:</p>
 <pre class="code ruby"><code class="ruby">static void
 insert_value (GtkListStore *list_store,
@@ -1676,12 +1679,12 @@ insert_value (GtkListStore *list_store,
                       );
 }
 </code></pre>
-<p>with the difference that the former will only emit <code>GtkTreeModel</code>::row-inserted
-once, while the latter will emit <code>GtkTreeModel</code>::row-inserted,
-<code>GtkTreeModel</code>::row-changed and, if the list store is sorted,
+<p>with the difference that the former will only emit <code>GtkTreeModel</code>::row-inserted<br />
+once, while the latter will emit <code>GtkTreeModel</code>::row-inserted,<br />
+<code>GtkTreeModel</code>::row-changed and, if the list store is sorted,<br />
 <code>GtkTreeModel</code>::rows-reordered for every inserted value.</p>
-<p>Since emitting the <code>GtkTreeModel::rows-reordered</code> signal repeatedly can
-affect the performance of the program, gtk_list_store_insert_with_values()
+<p>Since emitting the <code>GtkTreeModel::rows-reordered</code> signal repeatedly can<br />
+affect the performance of the program, gtk_list_store_insert_with_values()<br />
 should generally be preferred when inserting rows in a sorted list store.</p>
 
 
@@ -1716,7 +1719,7 @@ should generally be preferred when inserting rows in a sorted list store.</p>
       
       
         &mdash;
-        <div class='inline'><p>position to insert the new row, or -1 to append after existing
+        <div class='inline'><p>position to insert the new row, or -1 to append after existing<br />
 rows</p>
 </div>
       
@@ -1767,8 +1770,8 @@ rows</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A variant of gtk_list_store_insert_with_values() which
-takes the columns and values as two arrays, instead of
+    <p>A variant of gtk_list_store_insert_with_values() which<br />
+takes the columns and values as two arrays, instead of<br />
 varargs.</p>
 <p>This function is mainly intended for language-bindings.</p>
 
@@ -1885,7 +1888,7 @@ varargs.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if the given iter is a valid iter for this <code>GtkListStore</code>.</p>
-<p>This function is slow. Only use it for debugging and/or testing
+<p>This function is slow. Only use it for debugging and/or testing<br />
 purposes.</p>
 
 
@@ -1944,8 +1947,8 @@ purposes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Moves <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> in <!-- raw HTML omitted -->store<!-- raw HTML omitted --> to the position after <!-- raw HTML omitted -->position<!-- raw HTML omitted -->. Note that this
-function only works with unsorted stores. If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is nil, <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->
+    <p>Moves <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> in <!-- raw HTML omitted -->store<!-- raw HTML omitted --> to the position after <!-- raw HTML omitted -->position<!-- raw HTML omitted -->. Note that this<br />
+function only works with unsorted stores. If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is nil, <!-- raw HTML omitted -->iter<!-- raw HTML omitted --><br />
 will be moved to the start of the list.</p>
 
 
@@ -2015,8 +2018,8 @@ will be moved to the start of the list.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Moves <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> in <!-- raw HTML omitted -->store<!-- raw HTML omitted --> to the position before <!-- raw HTML omitted -->position<!-- raw HTML omitted -->. Note that this
-function only works with unsorted stores. If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is nil, <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->
+    <p>Moves <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> in <!-- raw HTML omitted -->store<!-- raw HTML omitted --> to the position before <!-- raw HTML omitted -->position<!-- raw HTML omitted -->. Note that this<br />
+function only works with unsorted stores. If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is nil, <!-- raw HTML omitted -->iter<!-- raw HTML omitted --><br />
 will be moved to the end of the list.</p>
 
 
@@ -2086,8 +2089,8 @@ will be moved to the end of the list.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Prepends a new row to <!-- raw HTML omitted -->list_store<!-- raw HTML omitted -->. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this new
-row. The row will be empty after this function is called. To fill in
+    <p>Prepends a new row to <!-- raw HTML omitted -->list_store<!-- raw HTML omitted -->. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this new<br />
+row. The row will be empty after this function is called. To fill in<br />
 values, you need to call gtk_list_store_set() or gtk_list_store_set_value().</p>
 
 
@@ -2164,8 +2167,8 @@ values, you need to call gtk_list_store_set() or gtk_list_store_set_value().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Prepends a new row to <!-- raw HTML omitted -->list_store<!-- raw HTML omitted -->. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this new
-row. The row will be empty after this function is called. To fill in
+    <p>Prepends a new row to <!-- raw HTML omitted -->list_store<!-- raw HTML omitted -->. <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> will be changed to point to this new<br />
+row. The row will be empty after this function is called. To fill in<br />
 values, you need to call gtk_list_store_set() or gtk_list_store_set_value().</p>
 
 
@@ -2234,8 +2237,8 @@ values, you need to call gtk_list_store_set() or gtk_list_store_set_value().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes the given row from the list store.  After being removed,
-<!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is set to be the next valid row, or invalidated if it pointed
+    <p>Removes the given row from the list store.  After being removed,<br />
+<!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is set to be the next valid row, or invalidated if it pointed<br />
 to the last row in <!-- raw HTML omitted -->list_store<!-- raw HTML omitted -->.</p>
 
 
@@ -2294,7 +2297,7 @@ to the last row in <!-- raw HTML omitted -->list_store<!-- raw HTML omitted -->.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reorders <!-- raw HTML omitted -->store<!-- raw HTML omitted --> to follow the order indicated by <!-- raw HTML omitted -->new_order<!-- raw HTML omitted -->. Note that
+    <p>Reorders <!-- raw HTML omitted -->store<!-- raw HTML omitted --> to follow the order indicated by <!-- raw HTML omitted -->new_order<!-- raw HTML omitted -->. Note that<br />
 this function only works with unsorted stores.</p>
 
 
@@ -2314,9 +2317,9 @@ this function only works with unsorted stores.</p>
       
       
         &mdash;
-        <div class='inline'><p>an array of integers mapping the new
-position of each child to its old position before the re-ordering,
-i.e. <!-- raw HTML omitted -->new_order<!-- raw HTML omitted --><code>[newpos] = oldpos</code>. It must have
+        <div class='inline'><p>an array of integers mapping the new<br />
+position of each child to its old position before the re-ordering,<br />
+i.e. <!-- raw HTML omitted -->new_order<!-- raw HTML omitted --><code>[newpos] = oldpos</code>. It must have<br />
 exactly as many items as the list store’s length.</p>
 </div>
       
@@ -2352,12 +2355,12 @@ exactly as many items as the list store’s length.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the value of one or more cells in the row referenced by <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.
-The variable argument list should contain integer column numbers,
-each column number followed by the value to be set.
-The list is terminated by a -1. For example, to set column 0 with type
+    <p>Sets the value of one or more cells in the row referenced by <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.<br />
+The variable argument list should contain integer column numbers,<br />
+each column number followed by the value to be set.<br />
+The list is terminated by a -1. For example, to set column 0 with type<br />
 %G_TYPE_STRING to “Foo”, you would write <code>gtk_list_store_set (store, iter, 0, &quot;Foo&quot;, -1)</code>.</p>
-<p>The value will be referenced by the store if it is a %G_TYPE_OBJECT, and it
+<p>The value will be referenced by the store if it is a %G_TYPE_OBJECT, and it<br />
 will be copied if it is a %G_TYPE_STRING or %G_TYPE_BOXED.</p>
 
 
@@ -2428,10 +2431,10 @@ will be copied if it is a %G_TYPE_STRING or %G_TYPE_BOXED.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the types of the columns of a list store.</p>
-<p>This function is meant primarily for objects that inherit
-from <code>GtkListStore</code>, and should only be used when constructing
+<p>This function is meant primarily for objects that inherit<br />
+from <code>GtkListStore</code>, and should only be used when constructing<br />
 a new instance.</p>
-<p>This function cannot be called after a row has been added, or
+<p>This function cannot be called after a row has been added, or<br />
 a method on the <code>GtkTreeModel</code> interface is called.</p>
 
 
@@ -2526,10 +2529,10 @@ a method on the <code>GtkTreeModel</code> interface is called.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the types of the columns of a list store.</p>
-<p>This function is meant primarily for objects that inherit
-from <code>GtkListStore</code>, and should only be used when constructing
+<p>This function is meant primarily for objects that inherit<br />
+from <code>GtkListStore</code>, and should only be used when constructing<br />
 a new instance.</p>
-<p>This function cannot be called after a row has been added, or
+<p>This function cannot be called after a row has been added, or<br />
 a method on the <code>GtkTreeModel</code> interface is called.</p>
 
 
@@ -2613,7 +2616,7 @@ a method on the <code>GtkTreeModel</code> interface is called.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>See gtk_list_store_set(); this version takes a va_list for use by language
+    <p>See gtk_list_store_set(); this version takes a va_list for use by language<br />
 bindings.</p>
 
 
@@ -2683,8 +2686,8 @@ bindings.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the data in the cell specified by <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> and <!-- raw HTML omitted -->column<!-- raw HTML omitted -->.
-The type of <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be convertible to the type of the
+    <p>Sets the data in the cell specified by <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> and <!-- raw HTML omitted -->column<!-- raw HTML omitted -->.<br />
+The type of <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be convertible to the type of the<br />
 column.</p>
 
 
@@ -2769,10 +2772,10 @@ column.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A variant of gtk_list_store_set_valist() which
-takes the columns and values as two arrays, instead of
-varargs. This function is mainly intended for
-language-bindings and in case the number of columns to
+    <p>A variant of gtk_list_store_set_valist() which<br />
+takes the columns and values as two arrays, instead of<br />
+varargs. This function is mainly intended for<br />
+language-bindings and in case the number of columns to<br />
 change is not known until run-time.</p>
 
 
@@ -2872,7 +2875,7 @@ change is not known until run-time.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Swaps <!-- raw HTML omitted -->a<!-- raw HTML omitted --> and <!-- raw HTML omitted -->b<!-- raw HTML omitted --> in <!-- raw HTML omitted -->store<!-- raw HTML omitted -->. Note that this function only works with
+    <p>Swaps <!-- raw HTML omitted -->a<!-- raw HTML omitted --> and <!-- raw HTML omitted -->b<!-- raw HTML omitted --> in <!-- raw HTML omitted -->store<!-- raw HTML omitted -->. Note that this function only works with<br />
 unsorted stores.</p>
 
 
@@ -2938,7 +2941,7 @@ unsorted stores.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

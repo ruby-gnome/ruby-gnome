@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::TreeModel";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -83,8 +84,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk3/deprecated.rb<span class="defines">,<br />
+    <dd>lib/gtk3/deprecated.rb<span class="defines">,<br>
   lib/gtk3/tree-model.rb</span>
+
 </dd>
   </dl>
   
@@ -93,76 +95,76 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The tree interface used by GtkTreeView</p>
-<p>The <code>GtkTreeModel</code> interface defines a generic tree interface for
-use by the <code>GtkTreeView</code> widget. It is an abstract interface, and
-is designed to be usable with any appropriate data structure. The
-programmer just has to implement this interface on their own data
+<p>The <code>GtkTreeModel</code> interface defines a generic tree interface for<br />
+use by the <code>GtkTreeView</code> widget. It is an abstract interface, and<br />
+is designed to be usable with any appropriate data structure. The<br />
+programmer just has to implement this interface on their own data<br />
 type for it to be viewable by a <code>GtkTreeView</code> widget.</p>
-<p>The model is represented as a hierarchical tree of strongly-typed,
-columned data. In other words, the model can be seen as a tree where
-every node has different values depending on which column is being
-queried. The type of data found in a column is determined by using
-the GType system (ie. %G_TYPE_INT, %GTK_TYPE_BUTTON, %G_TYPE_POINTER,
-etc). The types are homogeneous per column across all nodes. It is
-important to note that this interface only provides a way of examining
-a model and observing changes. The implementation of each individual
+<p>The model is represented as a hierarchical tree of strongly-typed,<br />
+columned data. In other words, the model can be seen as a tree where<br />
+every node has different values depending on which column is being<br />
+queried. The type of data found in a column is determined by using<br />
+the GType system (ie. %G_TYPE_INT, %GTK_TYPE_BUTTON, %G_TYPE_POINTER,<br />
+etc). The types are homogeneous per column across all nodes. It is<br />
+important to note that this interface only provides a way of examining<br />
+a model and observing changes. The implementation of each individual<br />
 model decides how and if changes are made.</p>
-<p>In order to make life simpler for programmers who do not need to
-write their own specialized model, two generic models are provided
-— the <code>GtkTreeStore</code> and the <code>GtkListStore</code>. To use these, the
-developer simply pushes data into these models as necessary. These
-models provide the data structure as well as all appropriate tree
-interfaces. As a result, implementing drag and drop, sorting, and
-storing data is trivial. For the vast majority of trees and lists,
+<p>In order to make life simpler for programmers who do not need to<br />
+write their own specialized model, two generic models are provided<br />
+— the <code>GtkTreeStore</code> and the <code>GtkListStore</code>. To use these, the<br />
+developer simply pushes data into these models as necessary. These<br />
+models provide the data structure as well as all appropriate tree<br />
+interfaces. As a result, implementing drag and drop, sorting, and<br />
+storing data is trivial. For the vast majority of trees and lists,<br />
 these two models are sufficient.</p>
-<p>Models are accessed on a node/column level of granularity. One can
-query for the value of a model at a certain node and a certain
-column on that node. There are two structures used to reference a
-particular node in a model. They are the [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreePath] and
-the [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeIter] (“iter” is short for iterator). Most of the
+<p>Models are accessed on a node/column level of granularity. One can<br />
+query for the value of a model at a certain node and a certain<br />
+column on that node. There are two structures used to reference a<br />
+particular node in a model. They are the [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreePath] and<br />
+the [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeIter] (“iter” is short for iterator). Most of the<br />
 interface consists of operations on a [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeIter].</p>
-<p>A path is essentially a potential node. It is a location on a model
-that may or may not actually correspond to a node on a specific
-model. A [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreePath] can be converted into either an
-array of unsigned integers or a string. The string form is a list
-of numbers separated by a colon. Each number refers to the offset
-at that level. Thus, the path <code>0</code> refers to the root
-node and the path <code>2:4</code> refers to the fifth child of
+<p>A path is essentially a potential node. It is a location on a model<br />
+that may or may not actually correspond to a node on a specific<br />
+model. A [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreePath] can be converted into either an<br />
+array of unsigned integers or a string. The string form is a list<br />
+of numbers separated by a colon. Each number refers to the offset<br />
+at that level. Thus, the path <code>0</code> refers to the root<br />
+node and the path <code>2:4</code> refers to the fifth child of<br />
 the third node.</p>
-<p>By contrast, a [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeIter] is a reference to a specific node on
-a specific model. It is a generic struct with an integer and three
-generic pointers. These are filled in by the model in a model-specific
-way. One can convert a path to an iterator by calling
-gtk_tree_model_get_iter(). These iterators are the primary way
-of accessing a model and are similar to the iterators used by
-<code>GtkTextBuffer</code>. They are generally statically allocated on the
-stack and only used for a short time. The model interface defines
+<p>By contrast, a [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeIter] is a reference to a specific node on<br />
+a specific model. It is a generic struct with an integer and three<br />
+generic pointers. These are filled in by the model in a model-specific<br />
+way. One can convert a path to an iterator by calling<br />
+gtk_tree_model_get_iter(). These iterators are the primary way<br />
+of accessing a model and are similar to the iterators used by<br />
+<code>GtkTextBuffer</code>. They are generally statically allocated on the<br />
+stack and only used for a short time. The model interface defines<br />
 a set of operations using them for navigating the model.</p>
-<p>It is expected that models fill in the iterator with private data.
-For example, the <code>GtkListStore</code> model, which is internally a simple
-linked list, stores a list node in one of the pointers. The
-<code>GtkTreeModel</code>Sort stores an array and an offset in two of the
-pointers. Additionally, there is an integer field. This field is
-generally filled with a unique stamp per model. This stamp is for
+<p>It is expected that models fill in the iterator with private data.<br />
+For example, the <code>GtkListStore</code> model, which is internally a simple<br />
+linked list, stores a list node in one of the pointers. The<br />
+<code>GtkTreeModel</code>Sort stores an array and an offset in two of the<br />
+pointers. Additionally, there is an integer field. This field is<br />
+generally filled with a unique stamp per model. This stamp is for<br />
 catching errors resulting from using invalid iterators with a model.</p>
-<p>The lifecycle of an iterator can be a little confusing at first.
-Iterators are expected to always be valid for as long as the model
-is unchanged (and doesn’t emit a signal). The model is considered
-to own all outstanding iterators and nothing needs to be done to
-free them from the user’s point of view. Additionally, some models
-guarantee that an iterator is valid for as long as the node it refers
-to is valid (most notably the <code>GtkTreeStore</code> and <code>GtkListStore</code>).
-Although generally uninteresting, as one always has to allow for
-the case where iterators do not persist beyond a signal, some very
-important performance enhancements were made in the sort model.
-As a result, the %GTK_TREE_MODEL_ITERS_PERSIST flag was added to
+<p>The lifecycle of an iterator can be a little confusing at first.<br />
+Iterators are expected to always be valid for as long as the model<br />
+is unchanged (and doesn’t emit a signal). The model is considered<br />
+to own all outstanding iterators and nothing needs to be done to<br />
+free them from the user’s point of view. Additionally, some models<br />
+guarantee that an iterator is valid for as long as the node it refers<br />
+to is valid (most notably the <code>GtkTreeStore</code> and <code>GtkListStore</code>).<br />
+Although generally uninteresting, as one always has to allow for<br />
+the case where iterators do not persist beyond a signal, some very<br />
+important performance enhancements were made in the sort model.<br />
+As a result, the %GTK_TREE_MODEL_ITERS_PERSIST flag was added to<br />
 indicate this behavior.</p>
-<p>To help show some common operation of a model, some examples are
-provided. The first example shows three ways of getting the iter at
-the location <code>3:2:5</code>. While the first method shown is
-easier, the second is much more common, as you often get paths from
+<p>To help show some common operation of a model, some examples are<br />
+provided. The first example shows three ways of getting the iter at<br />
+the location <code>3:2:5</code>. While the first method shown is<br />
+easier, the second is much more common, as you often get paths from<br />
 callbacks.</p>
-<h2>Acquiring a <code>GtkTreeIter</code></h2>
+<h2><a href="#acquiring-a-gtktreeiter" aria-hidden="true" class="anchor" id="acquiring-a-gtktreeiter"></a>Acquiring a <code>GtkTreeIter</code></h2>
 <pre class="code c"><code class="c">// Three ways of getting the iter pointing to the location
 GtkTreePath *path;
 GtkTreeIter iter;
@@ -188,12 +190,12 @@ parent_iter = iter;
 gtk_tree_model_iter_nth_child (model, &amp;iter,
                                &amp;parent_iter, 5);
 </code></pre>
-<p>This second example shows a quick way of iterating through a list
-and getting a string and an integer from each row. The
-populate_model() function used below is not
-shown, as it is specific to the <code>GtkListStore</code>. For information on
+<p>This second example shows a quick way of iterating through a list<br />
+and getting a string and an integer from each row. The<br />
+populate_model() function used below is not<br />
+shown, as it is specific to the <code>GtkListStore</code>. For information on<br />
 how to write such a function, see the <code>GtkListStore</code> documentation.</p>
-<h2>Reading data from a <code>GtkTreeModel</code></h2>
+<h2><a href="#reading-data-from-a-gtktreemodel" aria-hidden="true" class="anchor" id="reading-data-from-a-gtktreemodel"></a>Reading data from a <code>GtkTreeModel</code></h2>
 <pre class="code c"><code class="c">enum
 {
   STRING_COLUMN,
@@ -242,36 +244,36 @@ while (valid)
    row_count++;
  }
 </code></pre>
-<p>The <code>GtkTreeModel</code> interface contains two methods for reference
-counting: gtk_tree_model_ref_node() and gtk_tree_model_unref_node().
-These two methods are optional to implement. The reference counting
-is meant as a way for views to let models know when nodes are being
-displayed. <code>GtkTreeView</code> will take a reference on a node when it is
-visible, which means the node is either in the toplevel or expanded.
-Being displayed does not mean that the node is currently directly
-visible to the user in the viewport. Based on this reference counting
-scheme a caching model, for example, can decide whether or not to cache
-a node based on the reference count. A file-system based model would
-not want to keep the entire file hierarchy in memory, but just the
+<p>The <code>GtkTreeModel</code> interface contains two methods for reference<br />
+counting: gtk_tree_model_ref_node() and gtk_tree_model_unref_node().<br />
+These two methods are optional to implement. The reference counting<br />
+is meant as a way for views to let models know when nodes are being<br />
+displayed. <code>GtkTreeView</code> will take a reference on a node when it is<br />
+visible, which means the node is either in the toplevel or expanded.<br />
+Being displayed does not mean that the node is currently directly<br />
+visible to the user in the viewport. Based on this reference counting<br />
+scheme a caching model, for example, can decide whether or not to cache<br />
+a node based on the reference count. A file-system based model would<br />
+not want to keep the entire file hierarchy in memory, but just the<br />
 folders that are currently expanded in every current view.</p>
-<p>When working with reference counting, the following rules must be taken
+<p>When working with reference counting, the following rules must be taken<br />
 into account:</p>
 <ul>
 <li>
-<p>Never take a reference on a node without owning a reference on its parent.
-This means that all parent nodes of a referenced node must be referenced
+<p>Never take a reference on a node without owning a reference on its parent.<br />
+This means that all parent nodes of a referenced node must be referenced<br />
 as well.</p>
 </li>
 <li>
-<p>Outstanding references on a deleted node are not released. This is not
-possible because the node has already been deleted by the time the
+<p>Outstanding references on a deleted node are not released. This is not<br />
+possible because the node has already been deleted by the time the<br />
 row-deleted signal is received.</p>
 </li>
 <li>
-<p>Models are not obligated to emit a signal on rows of which none of its
-siblings are referenced. To phrase this differently, signals are only
-required for levels in which nodes are referenced. For the root level
-however, signals must be emitted at all times (however the root level
+<p>Models are not obligated to emit a signal on rows of which none of its<br />
+siblings are referenced. To phrase this differently, signals are only<br />
+required for levels in which nodes are referenced. For the root level<br />
+however, signals must be emitted at all times (however the root level<br />
 is always referenced when any view is attached).</p>
 </li>
 </ul>
@@ -1185,6 +1187,7 @@ is always referenced when any view is attached).</p>
 
       
     </ul>
+    
   
 
 
@@ -1209,7 +1212,7 @@ is always referenced when any view is attached).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>GtkTreeModel</code>, with <!-- raw HTML omitted -->child_model<!-- raw HTML omitted --> as the child_model
+    <p>Creates a new <code>GtkTreeModel</code>, with <!-- raw HTML omitted -->child_model<!-- raw HTML omitted --> as the child_model<br />
 and <!-- raw HTML omitted -->root<!-- raw HTML omitted --> as the virtual root.</p>
 
 
@@ -1269,8 +1272,8 @@ and <!-- raw HTML omitted -->root<!-- raw HTML omitted --> as the virtual root.<
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns a set of flags supported by this interface.</p>
-<p>The flags are a bitwise combination of <code>GtkTreeModel</code>Flags.
-The flags supported should not change during the lifetime
+<p>The flags are a bitwise combination of <code>GtkTreeModel</code>Flags.<br />
+The flags supported should not change during the lifetime<br />
 of the <!-- raw HTML omitted -->tree_model<!-- raw HTML omitted -->.</p>
 
 
@@ -1311,7 +1314,7 @@ of the <!-- raw HTML omitted -->tree_model<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Calls <!-- raw HTML omitted -->func<!-- raw HTML omitted --> on each node in model in a depth-first fashion.</p>
-<p>If <!-- raw HTML omitted -->func<!-- raw HTML omitted --> returns true, then the tree ceases to be walked,
+<p>If <!-- raw HTML omitted -->func<!-- raw HTML omitted --> returns true, then the tree ceases to be walked,<br />
 and gtk_tree_model_foreach() returns.</p>
 
 
@@ -1382,15 +1385,15 @@ and gtk_tree_model_foreach() returns.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the value of one or more cells in the row referenced by <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
-<p>The variable argument list should contain integer column numbers,
-each column number followed by a place to store the value being
-retrieved.  The list is terminated by a -1. For example, to get a
-value from column 0 with type %G_TYPE_STRING, you would
-write: <code>gtk_tree_model_get (model, iter, 0, &amp;place_string_here, -1)</code>,
-where <code>place_string_here</code> is a #gchararray
+<p>The variable argument list should contain integer column numbers,<br />
+each column number followed by a place to store the value being<br />
+retrieved.  The list is terminated by a -1. For example, to get a<br />
+value from column 0 with type %G_TYPE_STRING, you would<br />
+write: <code>gtk_tree_model_get (model, iter, 0, &amp;place_string_here, -1)</code>,<br />
+where <code>place_string_here</code> is a #gchararray<br />
 to be filled with the string.</p>
-<p>Returned values with type %G_TYPE_OBJECT have to be unreferenced,
-values with type %G_TYPE_STRING or %G_TYPE_BOXED have to be freed.
+<p>Returned values with type %G_TYPE_OBJECT have to be unreferenced,<br />
+values with type %G_TYPE_STRING or %G_TYPE_BOXED have to be freed.<br />
 Other values are passed by value.</p>
 
 
@@ -1425,7 +1428,7 @@ Other values are passed by value.</p>
       
       
         &mdash;
-        <div class='inline'><p>pairs of column number and value return locations,
+        <div class='inline'><p>pairs of column number and value return locations,<br />
 terminated by -1</p>
 </div>
       
@@ -1825,7 +1828,7 @@ terminated by -1</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Initializes <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> with the first iterator in the tree
+    <p>Initializes <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> with the first iterator in the tree<br />
 (the one at the path &quot;0&quot;).</p>
 <p>Returns false if the tree is empty, true otherwise.</p>
 
@@ -1885,7 +1888,7 @@ terminated by -1</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to a valid iterator pointing to <!-- raw HTML omitted -->path_string<!-- raw HTML omitted -->, if it
+    <p>Sets <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to a valid iterator pointing to <!-- raw HTML omitted -->path_string<!-- raw HTML omitted -->, if it<br />
 exists.</p>
 <p>Otherwise, <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is left invalid and false is returned.</p>
 
@@ -2194,8 +2197,8 @@ exists.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Generates a string representation of the iter.</p>
-<p>This string is a “:” separated list of numbers.
-For example, “4:10:0:3” would be an acceptable
+<p>This string is a “:” separated list of numbers.<br />
+For example, “4:10:0:3” would be an acceptable<br />
 return value for this string.</p>
 
 
@@ -2255,7 +2258,7 @@ return value for this string.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the value of one or more cells in the row referenced by <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
-<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeModel.get], this version takes a va_list
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeModel.get], this version takes a va_list<br />
 for language bindings to use.</p>
 
 
@@ -3826,7 +3829,7 @@ for language bindings to use.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GtkTreePath</code> pointing to the previous location of
+        <div class='inline'><p>a <code>GtkTreePath</code> pointing to the previous location of<br />
 the deleted row</p>
 </div>
       
@@ -4061,7 +4064,7 @@ the deleted row</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GtkTreePath</code> pointing to the tree node whose children
+        <div class='inline'><p>a <code>GtkTreePath</code> pointing to the tree node whose children<br />
 have been reordered</p>
 </div>
       
@@ -4077,7 +4080,7 @@ have been reordered</p>
       
       
         &mdash;
-        <div class='inline'><p>a valid <code>GtkTreeIter</code> pointing to the node whose children
+        <div class='inline'><p>a valid <code>GtkTreeIter</code> pointing to the node whose children<br />
 have been reordered, or nil if the depth of <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is 0</p>
 </div>
       
@@ -4093,8 +4096,8 @@ have been reordered, or nil if the depth of <!-- raw HTML omitted -->path<!-- ra
       
       
         &mdash;
-        <div class='inline'><p>an array of integers mapping the current position of
-each child to its old position before the re-ordering,
+        <div class='inline'><p>an array of integers mapping the current position of<br />
+each child to its old position before the re-ordering,<br />
 i.e. <!-- raw HTML omitted -->new_order<!-- raw HTML omitted --><code>[newpos] = oldpos</code></p>
 </div>
       
@@ -4132,7 +4135,7 @@ i.e. <!-- raw HTML omitted -->new_order<!-- raw HTML omitted --><code>[newpos] =
   <div class="discussion">
     <p>Emits the ::rows-reordered signal on <!-- raw HTML omitted -->tree_model<!-- raw HTML omitted -->.</p>
 <p>See [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeModel::rows-reordered].</p>
-<p>This should be called by models when their rows have been
+<p>This should be called by models when their rows have been<br />
 reordered.</p>
 
 
@@ -4152,7 +4155,7 @@ reordered.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GtkTreePath</code> pointing to the tree node whose children
+        <div class='inline'><p>a <code>GtkTreePath</code> pointing to the tree node whose children<br />
 have been reordered</p>
 </div>
       
@@ -4168,8 +4171,8 @@ have been reordered</p>
       
       
         &mdash;
-        <div class='inline'><p>a valid <code>GtkTreeIter</code> pointing to the node
-whose children have been reordered, or nil if the depth
+        <div class='inline'><p>a valid <code>GtkTreeIter</code> pointing to the node<br />
+whose children have been reordered, or nil if the depth<br />
 of <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is 0</p>
 </div>
       
@@ -4185,9 +4188,9 @@ of <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is 0</p>
       
       
         &mdash;
-        <div class='inline'><p>an array of integers
-mapping the current position of each child to its old
-position before the re-ordering,
+        <div class='inline'><p>an array of integers<br />
+mapping the current position of each child to its old<br />
+position before the re-ordering,<br />
 i.e. <!-- raw HTML omitted -->new_order<!-- raw HTML omitted --><code>[newpos] = oldpos</code></p>
 </div>
       
@@ -4362,7 +4365,7 @@ i.e. <!-- raw HTML omitted -->new_order<!-- raw HTML omitted --><code>[newpos] =
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

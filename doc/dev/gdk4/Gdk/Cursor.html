@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::Cursor";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -99,8 +100,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gdk4/cursor.rb<span class="defines">,<br />
+    <dd>lib/gdk4/cursor.rb<span class="defines">,<br>
   lib/gdk4/deprecated.rb</span>
+
 </dd>
   </dl>
   
@@ -109,31 +111,31 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p><code>GdkCursor</code> is used to create and destroy cursors.</p>
-<p>Cursors are immutable objects, so once you created them, there is no way
-to modify them later. You should create a new cursor when you want to change
+<p>Cursors are immutable objects, so once you created them, there is no way<br />
+to modify them later. You should create a new cursor when you want to change<br />
 something about it.</p>
-<p>Cursors by themselves are not very interesting: they must be bound to a
-window for users to see them. This is done with [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface.set_cursor]
-or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface.set_device_cursor]. Applications will typically
-use higher-level GTK functions such as <a href="../gtk4/method.Widget.set_cursor.html">gtk_widget_set_cursor()</a>
+<p>Cursors by themselves are not very interesting: they must be bound to a<br />
+window for users to see them. This is done with [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface.set_cursor]<br />
+or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface.set_device_cursor]. Applications will typically<br />
+use higher-level GTK functions such as <a href="../gtk4/method.Widget.set_cursor.html">gtk_widget_set_cursor()</a><br />
 instead.</p>
-<p>Cursors are not bound to a given [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display], so they can be shared.
-However, the appearance of cursors may vary when used on different
+<p>Cursors are not bound to a given [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display], so they can be shared.<br />
+However, the appearance of cursors may vary when used on different<br />
 platforms.</p>
-<h2>Named and texture cursors</h2>
-<p>There are multiple ways to create cursors. The platform's own cursors
-can be created with [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Cursor.new_from_name]. That function lists
-the commonly available names that are shared with the CSS specification.
-Other names may be available, depending on the platform in use. On some
-platforms, what images are used for named cursors may be influenced by
+<h2><a href="#named-and-texture-cursors" aria-hidden="true" class="anchor" id="named-and-texture-cursors"></a>Named and texture cursors</h2>
+<p>There are multiple ways to create cursors. The platform's own cursors<br />
+can be created with [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Cursor.new_from_name]. That function lists<br />
+the commonly available names that are shared with the CSS specification.<br />
+Other names may be available, depending on the platform in use. On some<br />
+platforms, what images are used for named cursors may be influenced by<br />
 the cursor theme.</p>
-<p>Another option to create a cursor is to use [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Cursor.new_from_texture]
+<p>Another option to create a cursor is to use [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Cursor.new_from_texture]<br />
 and provide an image to use for the cursor.</p>
-<p>To ease work with unsupported cursors, a fallback cursor can be provided.
-If a [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface] cannot use a cursor because of the reasons mentioned
-above, it will try the fallback cursor. Fallback cursors can themselves have
-fallback cursors again, so it is possible to provide a chain of progressively
-easier to support cursors. If none of the provided cursors can be supported,
+<p>To ease work with unsupported cursors, a fallback cursor can be provided.<br />
+If a [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface] cannot use a cursor because of the reasons mentioned<br />
+above, it will try the fallback cursor. Fallback cursors can themselves have<br />
+fallback cursors again, so it is possible to provide a chain of progressively<br />
+easier to support cursors. If none of the provided cursors can be supported,<br />
 the default cursor will be the ultimate fallback.</p>
 
 
@@ -180,6 +182,7 @@ the default cursor will be the ultimate fallback.</p>
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -444,6 +447,7 @@ the default cursor will be the ultimate fallback.</p>
 
       
     </ul>
+    
   
 
 
@@ -525,7 +529,7 @@ the default cursor will be the ultimate fallback.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GdkCursor</code> to fall back to when
+        <div class='inline'><p>the <code>GdkCursor</code> to fall back to when<br />
 this one cannot be supported</p>
 </div>
       
@@ -1133,7 +1137,7 @@ this one cannot be supported</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

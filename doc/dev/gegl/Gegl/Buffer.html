@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gegl::Buffer";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -234,6 +236,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1836,9 +1839,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -1850,6 +1855,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="TileHandler.html" title="Gegl::TileHandler (class)">TileHandler</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="TileHandler.html#create_tile-instance_method" title="Gegl::TileHandler#create_tile (method)">#create_tile</a></span>, <span class='object_link'><a href="TileHandler.html#damage_rect-instance_method" title="Gegl::TileHandler#damage_rect (method)">#damage_rect</a></span>, <span class='object_link'><a href="TileHandler.html#damage_tile-instance_method" title="Gegl::TileHandler#damage_tile (method)">#damage_tile</a></span>, <span class='object_link'><a href="TileHandler.html#dup_tile-instance_method" title="Gegl::TileHandler#dup_tile (method)">#dup_tile</a></span>, <span class='object_link'><a href="TileHandler.html#get_source_tile-instance_method" title="Gegl::TileHandler#get_source_tile (method)">#get_source_tile</a></span>, <span class='object_link'><a href="TileHandler.html#lock-instance_method" title="Gegl::TileHandler#lock (method)">#lock</a></span>, <span class='object_link'><a href="TileHandler.html#source-instance_method" title="Gegl::TileHandler#source (method)">#source</a></span>, <span class='object_link'><a href="TileHandler.html#source=-instance_method" title="Gegl::TileHandler#source= (method)">#source=</a></span>, <span class='object_link'><a href="TileHandler.html#unlock-instance_method" title="Gegl::TileHandler#unlock (method)">#unlock</a></span></p>
 
+  
   
   
   
@@ -1869,9 +1875,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new GeglBuffer from a backend, if NULL is passed in the extent of
+    <p>Create a new GeglBuffer from a backend, if NULL is passed in the extent of<br />
 the buffer will be inherited from the extent of the backend.</p>
-<p>returns a GeglBuffer, that holds a reference to the provided backend.
+<p>returns a GeglBuffer, that holds a reference to the provided backend.<br />
 GeglRectangle.</p>
 
 
@@ -1935,8 +1941,8 @@ GeglRectangle.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads an existing GeglBuffer from disk, if it has previously been saved with
-gegl_buffer_save it should be possible to open through any GIO transport, buffers
+    <p>Loads an existing GeglBuffer from disk, if it has previously been saved with<br />
+gegl_buffer_save it should be possible to open through any GIO transport, buffers<br />
 that have been used as swap needs random access to be opened.</p>
 
 
@@ -1995,8 +2001,8 @@ that have been used as swap needs random access to be opened.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Open an existing on-disk GeglBuffer, this buffer is opened in a monitored
-state so multiple instances of gegl can share the same buffer. Sets on
+    <p>Open an existing on-disk GeglBuffer, this buffer is opened in a monitored<br />
+state so multiple instances of gegl can share the same buffer. Sets on<br />
 one buffer are reflected in the other.</p>
 
 
@@ -2055,11 +2061,11 @@ one buffer are reflected in the other.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Generates a unique filename in the GEGL swap directory, suitable for
-using as swap space.  When the file is no longer needed, it may be
-removed with gegl_buffer_swap_remove_file(); otherwise, it will be
-removed when gegl_exit() is called.
-file path, or nil is the swap is disabled.  The returned string
+    <p>Generates a unique filename in the GEGL swap directory, suitable for<br />
+using as swap space.  When the file is no longer needed, it may be<br />
+removed with gegl_buffer_swap_remove_file(); otherwise, it will be<br />
+removed when gegl_exit() is called.<br />
+file path, or nil is the swap is disabled.  The returned string<br />
 should be freed with g_free() when no longer needed.</p>
 
 
@@ -2079,7 +2085,7 @@ should be freed with g_free() when no longer needed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string to suffix the filename with, for
+        <div class='inline'><p>a string to suffix the filename with, for<br />
 identification purposes, or nil.</p>
 </div>
       
@@ -2119,8 +2125,8 @@ identification purposes, or nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tests if <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is a swap file, that is, if it has been created
-with gegl_buffer_swap_create_file(), and hasn't been removed
+    <p>Tests if <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is a swap file, that is, if it has been created<br />
+with gegl_buffer_swap_create_file(), and hasn't been removed<br />
 yet.</p>
 
 
@@ -2175,7 +2181,7 @@ yet.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes a swap file, generated using gegl_buffer_swap_create_file(),
+    <p>Removes a swap file, generated using gegl_buffer_swap_create_file(),<br />
 unlinking the file, if exists.</p>
 
 
@@ -2195,7 +2201,7 @@ unlinking the file, if exists.</p>
       
       
         &mdash;
-        <div class='inline'><p>the swap file to remove, as returned by
+        <div class='inline'><p>the swap file to remove, as returned by<br />
 gegl_buffer_swap_create_file()</p>
 </div>
       
@@ -2237,7 +2243,7 @@ gegl_buffer_swap_create_file()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return the abyss extent of a buffer, this expands out to the parents extent in
+    <p>Return the abyss extent of a buffer, this expands out to the parents extent in<br />
 subbuffers.</p>
 
 
@@ -2907,7 +2913,7 @@ subbuffers.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Clears the provided rectangular region by setting all the associated memory
+    <p>Clears the provided rectangular region by setting all the associated memory<br />
 to 0.</p>
 
 
@@ -2963,9 +2969,9 @@ to 0.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Copy a region from source buffer to destination buffer.</p>
-<p>If the babl_formats of the buffers are the same, and the tile boundaries
+<p>If the babl_formats of the buffers are the same, and the tile boundaries<br />
 align, this will create copy-on-write tiles in the destination buffer.</p>
-<p>This function never does any scaling. When src_rect and dst_rect do not have
+<p>This function never does any scaling. When src_rect and dst_rect do not have<br />
 the same width and height, the size of src_rect is used.</p>
 
 
@@ -3123,7 +3129,7 @@ the same width and height, the size of src_rect is used.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Duplicate a buffer (internally uses gegl_buffer_copy). Aligned tiles
+    <p>Duplicate a buffer (internally uses gegl_buffer_copy). Aligned tiles<br />
 will create copy-on-write clones in the new buffer.</p>
 
 
@@ -3163,8 +3169,8 @@ will create copy-on-write clones in the new buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a pointer to a GeglRectangle structure defining the geometry of a
-specific GeglBuffer, this is also the default width/height of buffers passed
+    <p>Returns a pointer to a GeglRectangle structure defining the geometry of a<br />
+specific GeglBuffer, this is also the default width/height of buffers passed<br />
 in to gegl_buffer_set and gegl_buffer_get (with a scale of 1.0 at least).</p>
 
 
@@ -3200,8 +3206,8 @@ in to gegl_buffer_set and gegl_buffer_get (with a scale of 1.0 at least).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Changes the size and position that is considered active in a buffer, this
-operation is valid on any buffer, reads on subbuffers outside the master
+    <p>Changes the size and position that is considered active in a buffer, this<br />
+operation is valid on any buffer, reads on subbuffers outside the master<br />
 buffer's extent are at the moment undefined.</p>
 <p>Returns TRUE if the change of extent was successful.</p>
 
@@ -3257,7 +3263,7 @@ buffer's extent are at the moment undefined.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Flushes all unsaved data to disk, this is not necessary for shared
+    <p>Flushes all unsaved data to disk, this is not necessary for shared<br />
 geglbuffers opened with gegl_buffer_open since they auto-sync on writes.</p>
 
 
@@ -3293,10 +3299,10 @@ geglbuffers opened with gegl_buffer_open since they auto-sync on writes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Invokes the external flush function, if any is set on the provided buffer -
-this ensures that data pending - in the current implementation only OpenCL -
-externally to be synchronized with the buffer. Multi threaded code should
-call such a synchronization before branching out to avoid each of the
+    <p>Invokes the external flush function, if any is set on the provided buffer -<br />
+this ensures that data pending - in the current implementation only OpenCL -<br />
+externally to be synchronized with the buffer. Multi threaded code should<br />
+call such a synchronization before branching out to avoid each of the<br />
 threads having an implicit synchronization of its own.</p>
 
 
@@ -3457,7 +3463,7 @@ threads having an implicit synchronization of its own.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Blocks emission of the &quot;changed&quot; signal for <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>While the signal is blocked, changes to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> are accumulated, and will
+<p>While the signal is blocked, changes to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> are accumulated, and will<br />
 be emitted once the signal is unblocked, using gegl_buffer_thaw_changed().</p>
 
 
@@ -3493,21 +3499,21 @@ be emitted once the signal is unblocked, using gegl_buffer_thaw_changed().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Fetch a rectangular linear buffer of pixel data from the GeglBuffer, the
-data is converted to the desired BablFormat, if the BablFormat stored and
-fetched is the same this amounts to a series of memcpy's aligned to demux
-the tile structure into a linear buffer.
-destination buffer, if NULL equal to the extent of the buffer. The
-coordinates and dimensions are after scale has been applied.
-depends on the requested BablFormat.
-rowstride based on the width and bytes per pixel for the specified format.
-Valid values: GEGL_ABYSS_NONE (abyss pixels are zeroed), GEGL_ABYSS_WHITE
-(abyss pixels are white), GEGL_ABYSS_BLACK (abyss pixels are black),
-GEGL_ABYSS_CLAMP (coordinates are clamped to the abyss rectangle),
-GEGL_ABYSS_LOOP (buffer contents are tiled if outside of the abyss rectangle)
-this argument also takes a GEGL_BUFFER_FILTER value or'ed into it, allowing
-to specify trade-off of performance/quality, valid values are:
-GEGL_BUFFER_FILTER_NEAREST, GEGL_BUFFER_FILTER_BILINEAR,
+    <p>Fetch a rectangular linear buffer of pixel data from the GeglBuffer, the<br />
+data is converted to the desired BablFormat, if the BablFormat stored and<br />
+fetched is the same this amounts to a series of memcpy's aligned to demux<br />
+the tile structure into a linear buffer.<br />
+destination buffer, if NULL equal to the extent of the buffer. The<br />
+coordinates and dimensions are after scale has been applied.<br />
+depends on the requested BablFormat.<br />
+rowstride based on the width and bytes per pixel for the specified format.<br />
+Valid values: GEGL_ABYSS_NONE (abyss pixels are zeroed), GEGL_ABYSS_WHITE<br />
+(abyss pixels are white), GEGL_ABYSS_BLACK (abyss pixels are black),<br />
+GEGL_ABYSS_CLAMP (coordinates are clamped to the abyss rectangle),<br />
+GEGL_ABYSS_LOOP (buffer contents are tiled if outside of the abyss rectangle)<br />
+this argument also takes a GEGL_BUFFER_FILTER value or'ed into it, allowing<br />
+to specify trade-off of performance/quality, valid values are:<br />
+GEGL_BUFFER_FILTER_NEAREST, GEGL_BUFFER_FILTER_BILINEAR,<br />
 GEGL_BUFFER_FILTER_BOX and GEGL_BUFFER_FILTER_AUTO.</p>
 
 
@@ -3918,10 +3924,10 @@ GEGL_BUFFER_FILTER_BOX and GEGL_BUFFER_FILTER_AUTO.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Fetch a rectangular linear buffer of pixel data from the GeglBuffer.
-Valid values: GEGL_ABYSS_NONE (abyss pixels are zeroed), GEGL_ABYSS_WHITE
-(abyss pixels are white), GEGL_ABYSS_BLACK (abyss pixels are black),
-GEGL_ABYSS_CLAMP (coordinates are clamped to the abyss rectangle),
+    <p>Fetch a rectangular linear buffer of pixel data from the GeglBuffer.<br />
+Valid values: GEGL_ABYSS_NONE (abyss pixels are zeroed), GEGL_ABYSS_WHITE<br />
+(abyss pixels are white), GEGL_ABYSS_BLACK (abyss pixels are black),<br />
+GEGL_ABYSS_CLAMP (coordinates are clamped to the abyss rectangle),<br />
 GEGL_ABYSS_LOOP (buffer contents are tiled if outside of the abyss rectangle).</p>
 
 
@@ -4139,11 +4145,11 @@ GEGL_ABYSS_LOOP (buffer contents are tiled if outside of the abyss rectangle).</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new buffer iterator, this buffer will be iterated through
-in linear chunks, some chunks might be full tiles the coordinates, see
-the documentation of gegl_buffer_iterator_next for how to use it and
-destroy it.
-extent at 1:1, x,y,width and height are/(2^level)
+    <p>Create a new buffer iterator, this buffer will be iterated through<br />
+in linear chunks, some chunks might be full tiles the coordinates, see<br />
+the documentation of gegl_buffer_iterator_next for how to use it and<br />
+destroy it.<br />
+extent at 1:1, x,y,width and height are/(2^level)<br />
 buffers pixels.</p>
 
 
@@ -4273,9 +4279,9 @@ buffers pixels.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function makes sure GeglBuffer and underlying code is aware of changes
-being made to the linear buffer. If the request was not a compatible one
-it is written back to the buffer. Multiple concurrent users can be handed
+    <p>This function makes sure GeglBuffer and underlying code is aware of changes<br />
+being made to the linear buffer. If the request was not a compatible one<br />
+it is written back to the buffer. Multiple concurrent users can be handed<br />
 the same buffer (both raw access and converted).</p>
 
 
@@ -4330,8 +4336,8 @@ the same buffer (both raw access and converted).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Raw direct random access to the full data of a buffer in linear memory.
-request is compatible with the underlying data storage direct access
+    <p>Raw direct random access to the full data of a buffer in linear memory.<br />
+request is compatible with the underlying data storage direct access<br />
 to the underlying data is provided. Otherwise, it returns a copy of the data.</p>
 
 
@@ -4789,18 +4795,18 @@ to the underlying data is provided. Otherwise, it returns a copy of the data.</p
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Query interpolate pixel values at a given coordinate using a specified form
+    <p>Query interpolate pixel values at a given coordinate using a specified form<br />
 of interpolation.</p>
-<p>If you intend to take multiple samples, consider using
-gegl_buffer_sampler_new() to create a sampler object instead, which is more
-efficient.
-gegl_sampler_compute_scale the same.
-to be ported from working code. Valid values: GEGL_SAMPLER_NEAREST,
-GEGL_SAMPLER_LINEAR, GEGL_SAMPLER_CUBIC, GEGL_SAMPLER_NOHALO and
-GEGL_SAMPLER_LOHALO
-Valid values: GEGL_ABYSS_NONE (abyss pixels are zeroed), GEGL_ABYSS_WHITE
-(abyss pixels are white), GEGL_ABYSS_BLACK (abyss pixels are black),
-GEGL_ABYSS_CLAMP (coordinates are clamped to the abyss rectangle),
+<p>If you intend to take multiple samples, consider using<br />
+gegl_buffer_sampler_new() to create a sampler object instead, which is more<br />
+efficient.<br />
+gegl_sampler_compute_scale the same.<br />
+to be ported from working code. Valid values: GEGL_SAMPLER_NEAREST,<br />
+GEGL_SAMPLER_LINEAR, GEGL_SAMPLER_CUBIC, GEGL_SAMPLER_NOHALO and<br />
+GEGL_SAMPLER_LOHALO<br />
+Valid values: GEGL_ABYSS_NONE (abyss pixels are zeroed), GEGL_ABYSS_WHITE<br />
+(abyss pixels are white), GEGL_ABYSS_BLACK (abyss pixels are black),<br />
+GEGL_ABYSS_CLAMP (coordinates are clamped to the abyss rectangle),<br />
 GEGL_ABYSS_LOOP (buffer contents are tiled if outside of the abyss rectangle).</p>
 
 
@@ -4945,18 +4951,18 @@ GEGL_ABYSS_LOOP (buffer contents are tiled if outside of the abyss rectangle).</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Query interpolate pixel values at a given coordinate using a specified form
+    <p>Query interpolate pixel values at a given coordinate using a specified form<br />
 of interpolation.</p>
-<p>If you intend to take multiple samples, consider using
-gegl_buffer_sampler_new_at_level() to create a sampler object instead, which
-is more efficient.
-gegl_sampler_compute_scale the same.
-to be ported from working code. Valid values: GEGL_SAMPLER_NEAREST,
-GEGL_SAMPLER_LINEAR, GEGL_SAMPLER_CUBIC, GEGL_SAMPLER_NOHALO and
-GEGL_SAMPLER_LOHALO
-Valid values: GEGL_ABYSS_NONE (abyss pixels are zeroed), GEGL_ABYSS_WHITE
-(abyss pixels are white), GEGL_ABYSS_BLACK (abyss pixels are black),
-GEGL_ABYSS_CLAMP (coordinates are clamped to the abyss rectangle),
+<p>If you intend to take multiple samples, consider using<br />
+gegl_buffer_sampler_new_at_level() to create a sampler object instead, which<br />
+is more efficient.<br />
+gegl_sampler_compute_scale the same.<br />
+to be ported from working code. Valid values: GEGL_SAMPLER_NEAREST,<br />
+GEGL_SAMPLER_LINEAR, GEGL_SAMPLER_CUBIC, GEGL_SAMPLER_NOHALO and<br />
+GEGL_SAMPLER_LOHALO<br />
+Valid values: GEGL_ABYSS_NONE (abyss pixels are zeroed), GEGL_ABYSS_WHITE<br />
+(abyss pixels are white), GEGL_ABYSS_BLACK (abyss pixels are black),<br />
+GEGL_ABYSS_CLAMP (coordinates are clamped to the abyss rectangle),<br />
 GEGL_ABYSS_LOOP (buffer contents are tiled if outside of the abyss rectangle).</p>
 
 
@@ -5151,12 +5157,12 @@ GEGL_ABYSS_LOOP (buffer contents are tiled if outside of the abyss rectangle).</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new sampler, when you are done with the sampler, g_object_unref
+    <p>Create a new sampler, when you are done with the sampler, g_object_unref<br />
 it.</p>
-<p>Samplers only hold weak references to buffers, so if its buffer is freed
-the sampler will become invalid.
-to be ported from working code. Valid values: GEGL_SAMPLER_NEAREST,
-GEGL_SAMPLER_LINEAR, GEGL_SAMPLER_CUBIC, GEGL_SAMPLER_NOHALO and
+<p>Samplers only hold weak references to buffers, so if its buffer is freed<br />
+the sampler will become invalid.<br />
+to be ported from working code. Valid values: GEGL_SAMPLER_NEAREST,<br />
+GEGL_SAMPLER_LINEAR, GEGL_SAMPLER_CUBIC, GEGL_SAMPLER_NOHALO and<br />
 GEGL_SAMPLER_LOHALO</p>
 
 
@@ -5226,12 +5232,12 @@ GEGL_SAMPLER_LOHALO</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new sampler, when you are done with the sampler, g_object_unref
+    <p>Create a new sampler, when you are done with the sampler, g_object_unref<br />
 it.</p>
-<p>Samplers only hold weak references to buffers, so if its buffer is freed
-the sampler will become invalid.
-to be ported from working code. Valid values: GEGL_SAMPLER_NEAREST,
-GEGL_SAMPLER_LINEAR, GEGL_SAMPLER_CUBIC, GEGL_SAMPLER_NOHALO and
+<p>Samplers only hold weak references to buffers, so if its buffer is freed<br />
+the sampler will become invalid.<br />
+to be ported from working code. Valid values: GEGL_SAMPLER_NEAREST,<br />
+GEGL_SAMPLER_LINEAR, GEGL_SAMPLER_CUBIC, GEGL_SAMPLER_NOHALO and<br />
 GEGL_SAMPLER_LOHALO</p>
 
 
@@ -5316,7 +5322,7 @@ GEGL_SAMPLER_LOHALO</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Write a GeglBuffer to a file.
+    <p>Write a GeglBuffer to a file.<br />
 written to disk.</p>
 
 
@@ -5386,10 +5392,10 @@ written to disk.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Store a linear raster buffer into the GeglBuffer.
-the linear buffer being set.
-the data when setting.
-1 = 1:2, 2=1:4, 3=1:8 ..
+    <p>Store a linear raster buffer into the GeglBuffer.<br />
+the linear buffer being set.<br />
+the data when setting.<br />
+1 = 1:2, 2=1:4, 3=1:8 ..<br />
 rowstride based on the width and bytes per pixel for the specified format.</p>
 
 
@@ -5657,8 +5663,8 @@ rowstride based on the width and bytes per pixel for the specified format.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Fill a region with a repeating pattern. Offsets parameters are
-relative to the origin (0, 0) and not to the rectangle. So be carefull
+    <p>Fill a region with a repeating pattern. Offsets parameters are<br />
+relative to the origin (0, 0) and not to the rectangle. So be carefull<br />
 about the origin of <!-- raw HTML omitted -->pattern<!-- raw HTML omitted --> and <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> extents.</p>
 
 
@@ -6023,10 +6029,10 @@ about the origin of <!-- raw HTML omitted -->pattern<!-- raw HTML omitted --> an
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function should be used instead of g_signal_connect when connecting to
-the GeglBuffer::changed signal handler, GeglBuffer contains additional
-machinery to avoid the overhead of changes when no signal handler have been
-connected, if regular g_signal_connect is used; then no signals will be
+    <p>This function should be used instead of g_signal_connect when connecting to<br />
+the GeglBuffer::changed signal handler, GeglBuffer contains additional<br />
+machinery to avoid the overhead of changes when no signal handler have been<br />
+connected, if regular g_signal_connect is used; then no signals will be<br />
 emitted.</p>
 
 
@@ -6116,7 +6122,7 @@ emitted.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Unblocks emission of the &quot;changed&quot; signal for <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>Once all calls to gegl_buffer_freeze_changed() are matched by corresponding
+<p>Once all calls to gegl_buffer_freeze_changed() are matched by corresponding<br />
 calls to gegl_buffer_freeze_changed(), all accumulated changes are emitted.</p>
 
 
@@ -6673,7 +6679,7 @@ calls to gegl_buffer_freeze_changed(), all accumulated changes are emitted.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

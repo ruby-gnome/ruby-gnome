@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::ScaleButton";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/scale-button.rb</dd>
+    <dd>lib/gtk4/scale-button.rb
+</dd>
   </dl>
   
 </div>
@@ -516,9 +518,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -546,7 +550,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a <code>GtkScaleButton</code>.</p>
-<p>The new scale button has a range between <!-- raw HTML omitted -->min<!-- raw HTML omitted --> and <!-- raw HTML omitted -->max<!-- raw HTML omitted -->,
+<p>The new scale button has a range between <!-- raw HTML omitted -->min<!-- raw HTML omitted --> and <!-- raw HTML omitted -->max<!-- raw HTML omitted -->,<br />
 with a stepping of <!-- raw HTML omitted -->step<!-- raw HTML omitted -->.</p>
 
 
@@ -596,7 +600,7 @@ with a stepping of <!-- raw HTML omitted -->step<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>the stepping of value when a scroll-wheel event,
+        <div class='inline'><p>the stepping of value when a scroll-wheel event,<br />
 or up/down arrow event occurs (usually 2)</p>
 </div>
       
@@ -612,8 +616,8 @@ or up/down arrow event occurs (usually 2)</p>
       
       
         &mdash;
-        <div class='inline'><p>a nil-terminated
-array of icon names, or nil if you want to set the list
+        <div class='inline'><p>a nil-terminated<br />
+array of icon names, or nil if you want to set the list<br />
 later with gtk_scale_button_set_icons()</p>
 </div>
       
@@ -670,7 +674,7 @@ later with gtk_scale_button_set_icons()</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queries a <code>GtkScaleButton</code> and returns its current state.</p>
-<p>Returns true if the scale button is pressed in and false
+<p>Returns true if the scale button is pressed in and false<br />
 if it is raised.</p>
 
 
@@ -1068,17 +1072,17 @@ if it is raised.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The names of the icons to be used by the scale button.</p>
-<p>The first item in the array will be used in the button
-when the current value is the lowest value, the second
-item for the highest value. All the subsequent icons will
-be used for all the other values, spread evenly over the
+<p>The first item in the array will be used in the button<br />
+when the current value is the lowest value, the second<br />
+item for the highest value. All the subsequent icons will<br />
+be used for all the other values, spread evenly over the<br />
 range of values.</p>
-<p>If there's only one icon name in the <!-- raw HTML omitted -->icons<!-- raw HTML omitted --> array, it will
-be used for all the values. If only two icon names are in
-the <!-- raw HTML omitted -->icons<!-- raw HTML omitted --> array, the first one will be used for the bottom
+<p>If there's only one icon name in the <!-- raw HTML omitted -->icons<!-- raw HTML omitted --> array, it will<br />
+be used for all the values. If only two icon names are in<br />
+the <!-- raw HTML omitted -->icons<!-- raw HTML omitted --> array, the first one will be used for the bottom<br />
 50% of the scale, and the second one for the top 50%.</p>
-<p>It is recommended to use at least 3 icons so that the
-<code>GtkScaleButton</code> reflects the current value of the scale
+<p>It is recommended to use at least 3 icons so that the<br />
+<code>GtkScaleButton</code> reflects the current value of the scale<br />
 better for the users.</p>
 
 
@@ -1119,17 +1123,17 @@ better for the users.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The names of the icons to be used by the scale button.</p>
-<p>The first item in the array will be used in the button
-when the current value is the lowest value, the second
-item for the highest value. All the subsequent icons will
-be used for all the other values, spread evenly over the
+<p>The first item in the array will be used in the button<br />
+when the current value is the lowest value, the second<br />
+item for the highest value. All the subsequent icons will<br />
+be used for all the other values, spread evenly over the<br />
 range of values.</p>
-<p>If there's only one icon name in the <!-- raw HTML omitted -->icons<!-- raw HTML omitted --> array, it will
-be used for all the values. If only two icon names are in
-the <!-- raw HTML omitted -->icons<!-- raw HTML omitted --> array, the first one will be used for the bottom
+<p>If there's only one icon name in the <!-- raw HTML omitted -->icons<!-- raw HTML omitted --> array, it will<br />
+be used for all the values. If only two icon names are in<br />
+the <!-- raw HTML omitted -->icons<!-- raw HTML omitted --> array, the first one will be used for the bottom<br />
 50% of the scale, and the second one for the top 50%.</p>
-<p>It is recommended to use at least 3 icons so that the
-<code>GtkScaleButton</code> reflects the current value of the scale
+<p>It is recommended to use at least 3 icons so that the<br />
+<code>GtkScaleButton</code> reflects the current value of the scale<br />
 better for the users.</p>
 
 
@@ -1198,7 +1202,7 @@ better for the users.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a <code>GtkScaleButton</code>.</p>
-<p>The new scale button has a range between <!-- raw HTML omitted -->min<!-- raw HTML omitted --> and <!-- raw HTML omitted -->max<!-- raw HTML omitted -->,
+<p>The new scale button has a range between <!-- raw HTML omitted -->min<!-- raw HTML omitted --> and <!-- raw HTML omitted -->max<!-- raw HTML omitted -->,<br />
 with a stepping of <!-- raw HTML omitted -->step<!-- raw HTML omitted -->.</p>
 
 
@@ -1248,7 +1252,7 @@ with a stepping of <!-- raw HTML omitted -->step<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>the stepping of value when a scroll-wheel event,
+        <div class='inline'><p>the stepping of value when a scroll-wheel event,<br />
 or up/down arrow event occurs (usually 2)</p>
 </div>
       
@@ -1264,8 +1268,8 @@ or up/down arrow event occurs (usually 2)</p>
       
       
         &mdash;
-        <div class='inline'><p>a nil-terminated
-array of icon names, or nil if you want to set the list
+        <div class='inline'><p>a nil-terminated<br />
+array of icon names, or nil if you want to set the list<br />
 later with gtk_scale_button_set_icons()</p>
 </div>
       
@@ -1337,7 +1341,7 @@ later with gtk_scale_button_set_icons()</p>
       
       
         &mdash;
-        <div class='inline'><p>the minus button
+        <div class='inline'><p>the minus button<br />
 of the <code>GtkScaleButton</code></p>
 </div>
       
@@ -1377,7 +1381,7 @@ of the <code>GtkScaleButton</code></p>
       
       
         &mdash;
-        <div class='inline'><p>the plus button
+        <div class='inline'><p>the plus button<br />
 of the <code>GtkScaleButton</code></p>
 </div>
       
@@ -1540,7 +1544,7 @@ of the <code>GtkScaleButton</code></p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

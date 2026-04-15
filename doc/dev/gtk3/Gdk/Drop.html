@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::Drop";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -102,15 +104,15 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The <code>GdkDrop</code> object represents the target of an ongoing DND operation.</p>
-<p>Possible drop sites get informed about the status of the ongoing drag
-operation with events of type %GDK_DRAG_ENTER, %GDK_DRAG_LEAVE,
-%GDK_DRAG_MOTION and %GDK_DROP_START. The <code>GdkDrop</code> object can be obtained
+<p>Possible drop sites get informed about the status of the ongoing drag<br />
+operation with events of type %GDK_DRAG_ENTER, %GDK_DRAG_LEAVE,<br />
+%GDK_DRAG_MOTION and %GDK_DROP_START. The <code>GdkDrop</code> object can be obtained<br />
 from these [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Event] types using [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DNDEvent.get_drop].</p>
-<p>The actual data transfer is initiated from the target side via an async
-read, using one of the <code>GdkDrop</code> methods for this purpose:
+<p>The actual data transfer is initiated from the target side via an async<br />
+read, using one of the <code>GdkDrop</code> methods for this purpose:<br />
 [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drop.read_async] or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drop.read_value_async].</p>
-<p>GTK provides a higher level abstraction based on top of these functions,
-and so they are not normally needed in GTK applications. See the
+<p>GTK provides a higher level abstraction based on top of these functions,<br />
+and so they are not normally needed in GTK applications. See the<br />
 &quot;Drag and Drop&quot; section of the GTK documentation for more information.</p>
 
 
@@ -549,6 +551,7 @@ and so they are not normally needed in GTK applications. See the
 
       
     </ul>
+    
   
 
 
@@ -993,7 +996,7 @@ and so they are not normally needed in GTK applications. See the
 </h3><div class="docstring">
   <div class="discussion">
     <p>Ends the drag operation after a drop.</p>
-<p>The <!-- raw HTML omitted -->action<!-- raw HTML omitted --> must be a single action selected from the actions
+<p>The <!-- raw HTML omitted -->action<!-- raw HTML omitted --> must be a single action selected from the actions<br />
 available via [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drop.get_actions].</p>
 
 
@@ -1154,7 +1157,7 @@ available via [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drop.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously read the dropped data from a <code>GdkDrop</code>
+    <p>Asynchronously read the dropped data from a <code>GdkDrop</code><br />
 in a format that complies with one of the mime types.</p>
 
 
@@ -1219,7 +1222,7 @@ in a format that complies with one of the mime types.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GAsyncReadyCallback</code> to call when
+        <div class='inline'><p>a <code>GAsyncReadyCallback</code> to call when<br />
 the request is satisfied</p>
 </div>
       
@@ -1271,9 +1274,9 @@ the request is satisfied</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finishes an async drop read operation.</p>
-<p>Note that you must not use blocking read calls on the returned stream
-in the GTK thread, since some platforms might require communication with
-GTK to complete the data transfer. You can use async APIs such as
+<p>Note that you must not use blocking read calls on the returned stream<br />
+in the GTK thread, since some platforms might require communication with<br />
+GTK to complete the data transfer. You can use async APIs such as<br />
 g_input_stream_read_bytes_async().</p>
 <p>See [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drop.read_async].</p>
 
@@ -1348,13 +1351,13 @@ g_input_stream_read_bytes_async().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously request the drag operation's contents converted
+    <p>Asynchronously request the drag operation's contents converted<br />
 to the given <!-- raw HTML omitted -->type<!-- raw HTML omitted -->.</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must
-then call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drop.read_value_finish] to get the resulting
+<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must<br />
+then call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drop.read_value_finish] to get the resulting<br />
 <code>GValue</code>.</p>
-<p>For local drag-and-drop operations that are available in the given
-<code>GType</code>, the value will be copied directly. Otherwise, GDK will
+<p>For local drag-and-drop operations that are available in the given<br />
+<code>GType</code>, the value will be copied directly. Otherwise, GDK will<br />
 try to use [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.content_deserialize_async] to convert the data.</p>
 
 
@@ -1529,14 +1532,14 @@ try to use [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.content_de
 </h3><div class="docstring">
   <div class="discussion">
     <p>Selects all actions that are potentially supported by the destination.</p>
-<p>When calling this function, do not restrict the passed in actions to
-the ones provided by [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drop.get_actions]. Those actions may
+<p>When calling this function, do not restrict the passed in actions to<br />
+the ones provided by [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drop.get_actions]. Those actions may<br />
 change in the future, even depending on the actions you provide here.</p>
-<p>The <!-- raw HTML omitted -->preferred<!-- raw HTML omitted --> action is a hint to the drag-and-drop mechanism about which
+<p>The <!-- raw HTML omitted -->preferred<!-- raw HTML omitted --> action is a hint to the drag-and-drop mechanism about which<br />
 action to use when multiple actions are possible.</p>
-<p>This function should be called by drag destinations in response to
-%GDK_DRAG_ENTER or %GDK_DRAG_MOTION events. If the destination does
-not yet know the exact actions it supports, it should set any possible
+<p>This function should be called by drag destinations in response to<br />
+%GDK_DRAG_ENTER or %GDK_DRAG_MOTION events. If the destination does<br />
+not yet know the exact actions it supports, it should set any possible<br />
 actions first and then later call this function again.</p>
 
 
@@ -1556,7 +1559,7 @@ actions first and then later call this function again.</p>
       
       
         &mdash;
-        <div class='inline'><p>Supported actions of the destination, or 0 to indicate
+        <div class='inline'><p>Supported actions of the destination, or 0 to indicate<br />
 that a drop will not be accepted</p>
 </div>
       
@@ -1572,7 +1575,7 @@ that a drop will not be accepted</p>
       
       
         &mdash;
-        <div class='inline'><p>A unique action that's a member of <!-- raw HTML omitted -->actions<!-- raw HTML omitted --> indicating the
+        <div class='inline'><p>A unique action that's a member of <!-- raw HTML omitted -->actions<!-- raw HTML omitted --> indicating the<br />
 preferred action</p>
 </div>
       
@@ -1710,7 +1713,7 @@ preferred action</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

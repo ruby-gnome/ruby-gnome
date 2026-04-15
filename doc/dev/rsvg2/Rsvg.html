@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Rsvg";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/rsvg2/handle.rb<span class="defines">,<br />
-  lib/rsvg2.rb,<br /> lib/rsvg2/loader.rb,<br /> lib/rsvg2/version.rb,<br /> lib/rsvg2/dimension-data.rb</span>
+    <dd>lib/rsvg2/handle.rb<span class="defines">,<br>
+  lib/rsvg2.rb,<br> lib/rsvg2/loader.rb,<br> lib/rsvg2/version.rb,<br> lib/rsvg2/dimension-data.rb</span>
+
 </dd>
   </dl>
   
@@ -88,16 +90,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2017  Ruby-GNOME2 Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -130,16 +132,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
         <dt id="MAJOR_VERSION-constant" class="">MAJOR_VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>This is a C macro that expands to a number with the major version
+    <p>This is a C macro that expands to a number with the major version<br />
 of librsvg against which your program is compiled.</p>
 <p>For example, for librsvg-2.3.4, the major version is 2.</p>
-<p>C programs can use this as a compile-time check for the required
-version, but note that generally it is a better idea to do
-compile-time checks by calling <a href="https://www.freedesktop.org/wiki/Software/pkg-config/">pkg-config</a>
+<p>C programs can use this as a compile-time check for the required<br />
+version, but note that generally it is a better idea to do<br />
+compile-time checks by calling <a href="https://www.freedesktop.org/wiki/Software/pkg-config/">pkg-config</a><br />
 in your build scripts.</p>
-<p>Note: for a run-time check on the version of librsvg that your
-program is running with (e.g. the version which the linker used for
-your program), or for programs not written in C, use
+<p>Note: for a run-time check on the version of librsvg that your<br />
+program is running with (e.g. the version which the linker used for<br />
+your program), or for programs not written in C, use<br />
 <code>rsvg_major_version</code> instead.</p>
 
 
@@ -155,16 +157,16 @@ your program), or for programs not written in C, use
         <dt id="MICRO_VERSION-constant" class="">MICRO_VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>This is a C macro that expands to a number with the micro version
+    <p>This is a C macro that expands to a number with the micro version<br />
 of librsvg against which your program is compiled.</p>
 <p>For example, for librsvg-2.3.4, the micro version is 4.</p>
-<p>C programs can use this as a compile-time check for the required
-version, but note that generally it is a better idea to do
-compile-time checks by calling <a href="https://www.freedesktop.org/wiki/Software/pkg-config/">pkg-config</a>
+<p>C programs can use this as a compile-time check for the required<br />
+version, but note that generally it is a better idea to do<br />
+compile-time checks by calling <a href="https://www.freedesktop.org/wiki/Software/pkg-config/">pkg-config</a><br />
 in your build scripts.</p>
-<p>Note: for a run-time check on the version of librsvg that your
-program is running with (e.g. the version which the linker used for
-your program), or for programs not written in C, use
+<p>Note: for a run-time check on the version of librsvg that your<br />
+program is running with (e.g. the version which the linker used for<br />
+your program), or for programs not written in C, use<br />
 <code>rsvg_micro_version</code> instead.</p>
 
 
@@ -180,16 +182,16 @@ your program), or for programs not written in C, use
         <dt id="MINOR_VERSION-constant" class="">MINOR_VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>This is a C macro that expands to a number with the minor version
+    <p>This is a C macro that expands to a number with the minor version<br />
 of librsvg against which your program is compiled.</p>
 <p>For example, for librsvg-2.3.4, the minor version is 3.</p>
-<p>C programs can use this as a compile-time check for the required
-version, but note that generally it is a better idea to do
-compile-time checks by calling <a href="https://www.freedesktop.org/wiki/Software/pkg-config/">pkg-config</a>
+<p>C programs can use this as a compile-time check for the required<br />
+version, but note that generally it is a better idea to do<br />
+compile-time checks by calling <a href="https://www.freedesktop.org/wiki/Software/pkg-config/">pkg-config</a><br />
 in your build scripts.</p>
-<p>Note: for a run-time check on the version of librsvg that your
-program is running with (e.g. the version which the linker used for
-your program), or for programs not written in C, use
+<p>Note: for a run-time check on the version of librsvg that your<br />
+program is running with (e.g. the version which the linker used for<br />
+your program), or for programs not written in C, use<br />
 <code>rsvg_minor_version</code> instead.</p>
 
 
@@ -205,17 +207,17 @@ your program), or for programs not written in C, use
         <dt id="VERSION-constant" class="">VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>This is a C macro that expands to a string with the version of
+    <p>This is a C macro that expands to a string with the version of<br />
 librsvg against which your program is compiled.</p>
-<p>For example, for librsvg-2.3.4, this macro expands to
+<p>For example, for librsvg-2.3.4, this macro expands to<br />
 <code>&quot;2.3.4&quot;</code>.</p>
-<p>C programs can use this as a compile-time check for the required
-version, but note that generally it is a better idea to do
-compile-time checks by calling <a href="https://www.freedesktop.org/wiki/Software/pkg-config/">pkg-config</a>
+<p>C programs can use this as a compile-time check for the required<br />
+version, but note that generally it is a better idea to do<br />
+compile-time checks by calling <a href="https://www.freedesktop.org/wiki/Software/pkg-config/">pkg-config</a><br />
 in your build scripts.</p>
-<p>Note: for a run-time check on the version of librsvg that your
-program is running with (e.g. the version which the linker used for
-your program), or for programs not written in C, use
+<p>Note: for a run-time check on the version of librsvg that your<br />
+program is running with (e.g. the version which the linker used for<br />
+your program), or for programs not written in C, use<br />
 <code>rsvg_version</code> instead.</p>
 
 
@@ -504,6 +506,7 @@ your program), or for programs not written in C, use
 
       
     </ul>
+    
   
 
 
@@ -558,7 +561,7 @@ your program), or for programs not written in C, use
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Do not use this function.  Create an [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle] and call
+    <p>Do not use this function.  Create an [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle] and call<br />
 [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi] on it instead.</p>
 
 
@@ -687,8 +690,8 @@ your program), or for programs not written in C, use
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads a new <code>GdkPixbuf</code> from <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> and returns it.  The caller must
-assume the reference to the reurned pixbuf. If an error occurred, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is
+    <p>Loads a new <code>GdkPixbuf</code> from <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> and returns it.  The caller must<br />
+assume the reference to the reurned pixbuf. If an error occurred, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is<br />
 set and <code>NULL</code> is returned.</p>
 
 
@@ -747,9 +750,9 @@ set and <code>NULL</code> is returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads a new <code>GdkPixbuf</code> from <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> and returns it.  This pixbuf is uniformly
-scaled so that the it fits into a rectangle of size <code>max_width * max_height</code>. The
-caller must assume the reference to the returned pixbuf. If an error occurred,
+    <p>Loads a new <code>GdkPixbuf</code> from <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> and returns it.  This pixbuf is uniformly<br />
+scaled so that the it fits into a rectangle of size <code>max_width * max_height</code>. The<br />
+caller must assume the reference to the returned pixbuf. If an error occurred,<br />
 <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set and <code>NULL</code> is returned.</p>
 
 
@@ -838,10 +841,10 @@ caller must assume the reference to the returned pixbuf. If an error occurred,
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads a new <code>GdkPixbuf</code> from <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> and returns it.  This pixbuf is scaled
-from the size indicated to the new size indicated by <!-- raw HTML omitted -->width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted -->.  If
-both of these are -1, then the default size of the image being loaded is
-used.  The caller must assume the reference to the returned pixbuf. If an
+    <p>Loads a new <code>GdkPixbuf</code> from <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> and returns it.  This pixbuf is scaled<br />
+from the size indicated to the new size indicated by <!-- raw HTML omitted -->width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted -->.  If<br />
+both of these are -1, then the default size of the image being loaded is<br />
+used.  The caller must assume the reference to the returned pixbuf. If an<br />
 error occurred, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set and <code>NULL</code> is returned.</p>
 
 
@@ -930,9 +933,9 @@ error occurred, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set a
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads a new <code>GdkPixbuf</code> from <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> and returns it.  This pixbuf is scaled
-from the size indicated by the file by a factor of <!-- raw HTML omitted -->x_zoom<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y_zoom<!-- raw HTML omitted -->.  The
-caller must assume the reference to the returned pixbuf. If an error
+    <p>Loads a new <code>GdkPixbuf</code> from <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> and returns it.  This pixbuf is scaled<br />
+from the size indicated by the file by a factor of <!-- raw HTML omitted -->x_zoom<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y_zoom<!-- raw HTML omitted -->.  The<br />
+caller must assume the reference to the returned pixbuf. If an error<br />
 occurred, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set and <code>NULL</code> is returned.</p>
 
 
@@ -1021,10 +1024,10 @@ occurred, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set and <co
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads a new <code>GdkPixbuf</code> from <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> and returns it.  This pixbuf is scaled
-from the size indicated by the file by a factor of <!-- raw HTML omitted -->x_zoom<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y_zoom<!-- raw HTML omitted -->. If the
-resulting pixbuf would be larger than max_width/max_heigh it is uniformly scaled
-down to fit in that rectangle. The caller must assume the reference to the
+    <p>Loads a new <code>GdkPixbuf</code> from <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> and returns it.  This pixbuf is scaled<br />
+from the size indicated by the file by a factor of <!-- raw HTML omitted -->x_zoom<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y_zoom<!-- raw HTML omitted -->. If the<br />
+resulting pixbuf would be larger than max_width/max_heigh it is uniformly scaled<br />
+down to fit in that rectangle. The caller must assume the reference to the<br />
 returned pixbuf. If an error occurred, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set and <code>NULL</code> is returned.</p>
 
 
@@ -1143,7 +1146,7 @@ returned pixbuf. If an error occurred, <!-- raw HTML omitted -->error<!-- raw HT
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Do not use this function.  Create an [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle] and call
+    <p>Do not use this function.  Create an [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle] and call<br />
 [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi_x_y] on it instead.</p>
 
 
@@ -1244,7 +1247,7 @@ returned pixbuf. If an error occurred, <!-- raw HTML omitted -->error<!-- raw HT
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

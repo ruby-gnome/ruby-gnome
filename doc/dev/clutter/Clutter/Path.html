@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Path";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -702,6 +704,7 @@
 
       
     </ul>
+    
   
 
 
@@ -719,10 +722,10 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Clutter::Path instance with the nodes described in
-<!-- raw HTML omitted -->desc<!-- raw HTML omitted -->. See clutter_path_add_string() for details of the format of
+    <p>Creates a new Clutter::Path instance with the nodes described in<br />
+<!-- raw HTML omitted -->desc<!-- raw HTML omitted -->. See clutter_path_add_string() for details of the format of<br />
 the string.</p>
-<p>The object has a floating reference so if you add it to a
+<p>The object has a floating reference so if you add it to a<br />
 Clutter::BehaviourPath then you do not need to unref it.</p>
 
 
@@ -825,8 +828,8 @@ Clutter::BehaviourPath then you do not need to unref it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a %CLUTTER_PATH_CLOSE type node to the path. This creates a
-straight line from the last node to the last %CLUTTER_PATH_MOVE_TO
+    <p>Adds a %CLUTTER_PATH_CLOSE type node to the path. This creates a<br />
+straight line from the last node to the last %CLUTTER_PATH_MOVE_TO<br />
 type node.</p>
 
 
@@ -862,8 +865,8 @@ type node.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a %CLUTTER_PATH_CURVE_TO type node to the path. This causes
-the actor to follow a bezier from the last node to (<!-- raw HTML omitted -->x_3<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y_3<!-- raw HTML omitted -->) using
+    <p>Adds a %CLUTTER_PATH_CURVE_TO type node to the path. This causes<br />
+the actor to follow a bezier from the last node to (<!-- raw HTML omitted -->x_3<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y_3<!-- raw HTML omitted -->) using<br />
 (<!-- raw HTML omitted -->x_1<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y_1<!-- raw HTML omitted -->) and (<!-- raw HTML omitted -->x_2<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y_2<!-- raw HTML omitted -->) as control points.</p>
 
 
@@ -993,7 +996,7 @@ the actor to follow a bezier from the last node to (<!-- raw HTML omitted -->x_3
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a %CLUTTER_PATH_LINE_TO type node to the path. This causes the
+    <p>Adds a %CLUTTER_PATH_LINE_TO type node to the path. This causes the<br />
 actor to move to the new coordinates in a straight line.</p>
 
 
@@ -1063,8 +1066,8 @@ actor to move to the new coordinates in a straight line.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a %CLUTTER_PATH_MOVE_TO type node to the path. This is usually
-used as the first node in a path. It can also be used in the middle
+    <p>Adds a %CLUTTER_PATH_MOVE_TO type node to the path. This is usually<br />
+used as the first node in a path. It can also be used in the middle<br />
 of the path to cause the actor to jump to the new coordinate.</p>
 
 
@@ -1188,7 +1191,7 @@ of the path to cause the actor to jump to the new coordinate.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Same as clutter_path_add_curve_to() except the coordinates are
+    <p>Same as clutter_path_add_curve_to() except the coordinates are<br />
 relative to the previous node.</p>
 
 
@@ -1318,7 +1321,7 @@ relative to the previous node.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Same as clutter_path_add_line_to() except the coordinates are
+    <p>Same as clutter_path_add_line_to() except the coordinates are<br />
 relative to the previous node.</p>
 
 
@@ -1388,7 +1391,7 @@ relative to the previous node.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Same as clutter_path_add_move_to() except the coordinates are
+    <p>Same as clutter_path_add_move_to() except the coordinates are<br />
 relative to the previous node.</p>
 
 
@@ -1458,10 +1461,10 @@ relative to the previous node.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds new nodes to the end of the path as described in <!-- raw HTML omitted -->str<!-- raw HTML omitted -->. The
-format is a subset of the SVG path format. Each node is represented
-by a letter and is followed by zero, one or three pairs of
-coordinates. The coordinates can be separated by spaces or a
+    <p>Adds new nodes to the end of the path as described in <!-- raw HTML omitted -->str<!-- raw HTML omitted -->. The<br />
+format is a subset of the SVG path format. Each node is represented<br />
+by a letter and is followed by zero, one or three pairs of<br />
+coordinates. The coordinates can be separated by spaces or a<br />
 comma. The types are:</p>
 <ul>
 <li><code>M</code>: Adds a %CLUTTER_PATH_MOVE_TO node. Takes one pair of coordinates.</li>
@@ -1469,15 +1472,15 @@ comma. The types are:</p>
 <li><code>C</code>: Adds a %CLUTTER_PATH_CURVE_TO node. Takes three pairs of coordinates.</li>
 <li><code>z</code>: Adds a %CLUTTER_PATH_CLOSE node. No coordinates are needed.</li>
 </ul>
-<p>The M, L and C commands can also be specified in lower case which
+<p>The M, L and C commands can also be specified in lower case which<br />
 means the coordinates are relative to the previous node.</p>
-<p>For example, to move an actor in a 100 by 100 pixel square centered
+<p>For example, to move an actor in a 100 by 100 pixel square centered<br />
 on the point 300,300 you could use the following path:</p>
-<p>|[
-M 250,350 l 0 -100 L 350,250 l 0 100 z
+<p>|[<br />
+M 250,350 l 0 -100 L 350,250 l 0 100 z<br />
 ]|</p>
-<p>If the path description isn't valid false will be returned and no
-nodes will be added.
+<p>If the path description isn't valid false will be returned and no<br />
+nodes will be added.<br />
 otherwise.</p>
 
 
@@ -1814,8 +1817,8 @@ otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The value in <!-- raw HTML omitted -->progress<!-- raw HTML omitted --> represents a position along the path where
-0.0 is the beginning and 1.0 is the end of the path. An
+    <p>The value in <!-- raw HTML omitted -->progress<!-- raw HTML omitted --> represents a position along the path where<br />
+0.0 is the beginning and 1.0 is the end of the path. An<br />
 interpolated position is then stored in <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
 
 
@@ -1889,7 +1892,7 @@ interpolated position is then stored in <!-- raw HTML omitted -->position<!-- ra
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts <!-- raw HTML omitted -->node<!-- raw HTML omitted --> into the path before the node at the given offset. If
+    <p>Inserts <!-- raw HTML omitted -->node<!-- raw HTML omitted --> into the path before the node at the given offset. If<br />
 <!-- raw HTML omitted -->index_<!-- raw HTML omitted --> is negative it will append the node to the end of the path.</p>
 
 
@@ -2103,10 +2106,10 @@ interpolated position is then stored in <!-- raw HTML omitted -->position<!-- ra
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a #GSList of Clutter::PathNode<!-- raw HTML omitted -->s. The list should be
-freed with g_slist_free(). The nodes are owned by the path and
-should not be freed. Altering the path may cause the nodes in the
-list to become invalid so you should copy them if you want to keep
+    <p>Returns a #GSList of Clutter::PathNode<!-- raw HTML omitted -->s. The list should be<br />
+freed with g_slist_free(). The nodes are owned by the path and<br />
+should not be freed. Altering the path may cause the nodes in the<br />
+list to become invalid so you should copy them if you want to keep<br />
 the list.</p>
 
 
@@ -2125,7 +2128,7 @@ the list.</p>
       
       
         &mdash;
-        <div class='inline'><p>a
+        <div class='inline'><p>a<br />
 list of nodes in the path.</p>
 </div>
       
@@ -2320,7 +2323,7 @@ list of nodes in the path.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::AppInfo";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,35 +79,36 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Information about an installed application and methods to launch
+    <p>Information about an installed application and methods to launch<br />
 it (with file arguments).</p>
-<p><code>GAppInfo</code> and <code>GAppLaunchContext</code> are used for describing and launching
+<p><code>GAppInfo</code> and <code>GAppLaunchContext</code> are used for describing and launching<br />
 applications installed on the system.</p>
-<p>As of GLib 2.20, URIs will always be converted to POSIX paths
-(using [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File.get_path]) when using [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AppInfo.launch]
-even if the application requested an URI and not a POSIX path. For example
-for a desktop-file based application with Exec key <code>totem %U</code> and a single URI, <code>sftp://foo/file.avi</code>, then
-<code>/home/user/.gvfs/sftp on foo/file.avi</code> will be passed. This will
-only work if a set of suitable GIO extensions (such as GVfs 2.26
-compiled with FUSE support), is available and operational; if this
-is not the case, the URI will be passed unmodified to the application.
-Some URIs, such as <code>mailto:</code>, of course cannot be mapped to a POSIX
-path (in GVfs there's no FUSE mount for it); such URIs will be
+<p>As of GLib 2.20, URIs will always be converted to POSIX paths<br />
+(using [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File.get_path]) when using [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AppInfo.launch]<br />
+even if the application requested an URI and not a POSIX path. For example<br />
+for a desktop-file based application with Exec key <code>totem %U</code> and a single URI, <code>sftp://foo/file.avi</code>, then<br />
+<code>/home/user/.gvfs/sftp on foo/file.avi</code> will be passed. This will<br />
+only work if a set of suitable GIO extensions (such as GVfs 2.26<br />
+compiled with FUSE support), is available and operational; if this<br />
+is not the case, the URI will be passed unmodified to the application.<br />
+Some URIs, such as <code>mailto:</code>, of course cannot be mapped to a POSIX<br />
+path (in GVfs there's no FUSE mount for it); such URIs will be<br />
 passed unmodified to the application.</p>
-<p>Specifically for GVfs 2.26 and later, the POSIX URI will be mapped
-back to the GIO URI in the [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File] constructors (since GVfs
-implements the GVfs extension point). As such, if the application
-needs to examine the URI, it needs to use [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File.get_uri]
-or similar on [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File]. In other words, an application cannot
-assume that the URI passed to e.g. [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File.new_for_commandline_arg]
-is equal to the result of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File.get_uri]. The following snippet
+<p>Specifically for GVfs 2.26 and later, the POSIX URI will be mapped<br />
+back to the GIO URI in the [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File] constructors (since GVfs<br />
+implements the GVfs extension point). As such, if the application<br />
+needs to examine the URI, it needs to use [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File.get_uri]<br />
+or similar on [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File]. In other words, an application cannot<br />
+assume that the URI passed to e.g. [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File.new_for_commandline_arg]<br />
+is equal to the result of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File.get_uri]. The following snippet<br />
 illustrates this:</p>
 <pre class="code c"><code class="c">GFile *f;
 char *uri;
@@ -123,11 +125,11 @@ if (g_file_has_uri_scheme (file, &quot;cdda&quot;))
   }
 g_object_unref (file);
 </code></pre>
-<p>This code will work when both <code>cdda://sr0/Track 1.wav</code> and
-<code>/home/user/.gvfs/cdda on sr0/Track 1.wav</code> is passed to the
-application. It should be noted that it's generally not safe
-for applications to rely on the format of a particular URIs.
-Different launcher applications (e.g. file managers) may have
+<p>This code will work when both <code>cdda://sr0/Track 1.wav</code> and<br />
+<code>/home/user/.gvfs/cdda on sr0/Track 1.wav</code> is passed to the<br />
+application. It should be noted that it's generally not safe<br />
+for applications to rely on the format of a particular URIs.<br />
+Different launcher applications (e.g. file managers) may have<br />
 different ideas of what a given URI means.</p>
 
 
@@ -1002,6 +1004,7 @@ different ideas of what a given URI means.</p>
 
       
     </ul>
+    
   
 
 
@@ -1113,7 +1116,7 @@ different ideas of what a given URI means.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string containing the file extension
+        <div class='inline'><p>a string containing the file extension<br />
 (without the dot).</p>
 </div>
       
@@ -1211,9 +1214,9 @@ different ideas of what a given URI means.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the application as the last used application for a given type.
-This will make the application appear as first in the list returned
-by g_app_info_get_recommended_for_type(), regardless of the default
+    <p>Sets the application as the last used application for a given type.<br />
+This will make the application appear as first in the list returned<br />
+by g_app_info_get_recommended_for_type(), regardless of the default<br />
 application for that content type.</p>
 
 
@@ -1330,7 +1333,7 @@ application for that content type.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if it is possible to remove supported
+    <p>Returns true if it is possible to remove supported<br />
 content types from a given <!-- raw HTML omitted -->appinfo<!-- raw HTML omitted -->, false if not.</p>
 
 
@@ -1368,7 +1371,7 @@ content types from a given <!-- raw HTML omitted -->appinfo<!-- raw HTML omitted
       
       
         &mdash;
-        <div class='inline'><p>true if it is possible to remove supported
+        <div class='inline'><p>true if it is possible to remove supported<br />
 content types from a given <!-- raw HTML omitted -->appinfo<!-- raw HTML omitted -->, false if not.</p>
 </div>
       
@@ -1390,7 +1393,7 @@ content types from a given <!-- raw HTML omitted -->appinfo<!-- raw HTML omitted
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the commandline with which the application will be
+    <p>Gets the commandline with which the application will be<br />
 started.</p>
 
 
@@ -1409,7 +1412,7 @@ started.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string containing the <!-- raw HTML omitted -->appinfo<!-- raw HTML omitted -->'s commandline,
+        <div class='inline'><p>a string containing the <!-- raw HTML omitted -->appinfo<!-- raw HTML omitted -->'s commandline,<br />
 or nil if this information is not available</p>
 </div>
       
@@ -1432,8 +1435,8 @@ or nil if this information is not available</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Tries to delete a GApp::Info.</p>
-<p>On some platforms, there may be a difference between user-defined
-GApp::Infos which can be deleted, and system-wide ones which cannot.
+<p>On some platforms, there may be a difference between user-defined<br />
+GApp::Infos which can be deleted, and system-wide ones which cannot.<br />
 See g_app_info_can_delete().</p>
 
 
@@ -1473,7 +1476,7 @@ See g_app_info_can_delete().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a human-readable description of an installed application.
+    <p>Gets a human-readable description of an installed application.<br />
 application <!-- raw HTML omitted -->appinfo<!-- raw HTML omitted -->, or nil if none.</p>
 
 
@@ -1513,8 +1516,8 @@ application <!-- raw HTML omitted -->appinfo<!-- raw HTML omitted -->, or nil if
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the display name of the application. The display name is often more
-descriptive to the user than the name itself.
+    <p>Gets the display name of the application. The display name is often more<br />
+descriptive to the user than the name itself.<br />
 no display name is available.</p>
 
 
@@ -1744,9 +1747,9 @@ no display name is available.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the executable's name for the installed application.</p>
-<p>This is intended to be used for debugging or labelling what program is going
-to be run. To launch the executable, use g_app_info_launch() and related
-functions, rather than spawning the return value from this function.
+<p>This is intended to be used for debugging or labelling what program is going<br />
+to be run. To launch the executable, use g_app_info_launch() and related<br />
+functions, rather than spawning the return value from this function.<br />
 binaries name</p>
 
 
@@ -1786,7 +1789,7 @@ binaries name</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a string containing the <!-- raw HTML omitted -->appinfo<!-- raw HTML omitted -->'s commandline,
+    <p>Returns a string containing the <!-- raw HTML omitted -->appinfo<!-- raw HTML omitted -->'s commandline,<br />
 or nil if this information is not available.</p>
 
 
@@ -1824,7 +1827,7 @@ or nil if this information is not available.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string containing the <!-- raw HTML omitted -->appinfo<!-- raw HTML omitted -->'s commandline,
+        <div class='inline'><p>a string containing the <!-- raw HTML omitted -->appinfo<!-- raw HTML omitted -->'s commandline,<br />
 or nil if this information is not available</p>
 </div>
       
@@ -2252,7 +2255,7 @@ or nil if this information is not available</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the icon for the application.
+    <p>Gets the icon for the application.<br />
 if there is no default icon.</p>
 
 
@@ -2292,11 +2295,11 @@ if there is no default icon.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the ID of an application. An id is a string that
-identifies the application. The exact format of the id is
-platform dependent. For instance, on Unix this is the
+    <p>Gets the ID of an application. An id is a string that<br />
+identifies the application. The exact format of the id is<br />
+platform dependent. For instance, on Unix this is the<br />
 desktop file id from the xdg menu specification.</p>
-<p>Note that the returned ID may be nil, depending on how
+<p>Note that the returned ID may be nil, depending on how<br />
 the <!-- raw HTML omitted -->appinfo<!-- raw HTML omitted --> has been constructed.</p>
 
 
@@ -2859,7 +2862,7 @@ the <!-- raw HTML omitted -->appinfo<!-- raw HTML omitted --> has been construct
       
       
         &mdash;
-        <div class='inline'><p>a string containing the file extension
+        <div class='inline'><p>a string containing the file extension<br />
 (without the dot).</p>
 </div>
       
@@ -3103,11 +3106,11 @@ the <!-- raw HTML omitted -->appinfo<!-- raw HTML omitted --> has been construct
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the list of content types that <!-- raw HTML omitted -->app_info<!-- raw HTML omitted --> claims to support.
-If this information is not provided by the environment, this function
-will return nil.
-This function does not take in consideration associations added with
-g_app_info_add_supports_type(), but only those exported directly by
+    <p>Retrieves the list of content types that <!-- raw HTML omitted -->app_info<!-- raw HTML omitted --> claims to support.<br />
+If this information is not provided by the environment, this function<br />
+will return nil.<br />
+This function does not take in consideration associations added with<br />
+g_app_info_add_supports_type(), but only those exported directly by<br />
 the application.</p>
 
 
@@ -3259,7 +3262,7 @@ the application.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Wnck::Tasklist";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -440,6 +442,7 @@
 
       
     </ul>
+    
   
 
 
@@ -457,7 +460,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Wnck::Tasklist. The #WnckTasklist will list #WnckWindow of the
+    <p>Creates a new Wnck::Tasklist. The #WnckTasklist will list #WnckWindow of the<br />
 Wnck::Screen it is on.</p>
 
 
@@ -506,8 +509,8 @@ Wnck::Screen it is on.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the relief type of the buttons in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to <!-- raw HTML omitted -->relief<!-- raw HTML omitted -->. The main use of
-this function is proper integration of Wnck::Tasklist in panels with
+    <p>Sets the relief type of the buttons in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to <!-- raw HTML omitted -->relief<!-- raw HTML omitted -->. The main use of<br />
+this function is proper integration of Wnck::Tasklist in panels with<br />
 non-system backgrounds.</p>
 
 
@@ -562,12 +565,12 @@ non-system backgrounds.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Since a Wnck::Tasklist does not have a fixed size (#WnckWindow can be grouped
-when needed, for example), the standard size request mechanism in GTK+ is
-not enough to announce what sizes can be used by <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->. The size hints
-mechanism is a solution for this. See panel_applet_set_size_hints() for more
-information.
-returned by this function. This number should always be pair.
+    <p>Since a Wnck::Tasklist does not have a fixed size (#WnckWindow can be grouped<br />
+when needed, for example), the standard size request mechanism in GTK+ is<br />
+not enough to announce what sizes can be used by <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->. The size hints<br />
+mechanism is a solution for this. See panel_applet_set_size_hints() for more<br />
+information.<br />
+returned by this function. This number should always be pair.<br />
 appropriate size for <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->.</p>
 
 
@@ -680,9 +683,9 @@ appropriate size for <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the maximum size of buttons in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> before <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> tries to
-group Wnck::Window in the same #WnckApplication in only one button. This
-limit is valid only when the grouping policy of <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> is
+    <p>Sets the maximum size of buttons in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> before <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> tries to<br />
+group Wnck::Window in the same #WnckApplication in only one button. This<br />
+limit is valid only when the grouping policy of <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> is<br />
 %WNCK_TASKLIST_AUTO_GROUP.</p>
 
 
@@ -842,16 +845,16 @@ limit is valid only when the grouping policy of <!-- raw HTML omitted -->tasklis
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to display Wnck::Window from all #WnckWorkspace or not,
+    <p>Sets <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to display Wnck::Window from all #WnckWorkspace or not,<br />
 according to <!-- raw HTML omitted -->include_all_workspaces<!-- raw HTML omitted -->.</p>
-<p>Note that if the active Wnck::Workspace has a viewport and if
-<!-- raw HTML omitted -->include_all_workspaces<!-- raw HTML omitted --> is false, then only the Wnck::Window visible in the
-viewport are displayed in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->. The rationale for this is that the
-viewport is generally used to implement workspace-like behavior. A
-side-effect of this is that, when using multiple Wnck::Workspace with
-viewport, it is not possible to show all Wnck::Window from a #WnckWorkspace
-(even those that are not visible in the viewport) in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> without
-showing all Wnck::Window from all #WnckWorkspace.
+<p>Note that if the active Wnck::Workspace has a viewport and if<br />
+<!-- raw HTML omitted -->include_all_workspaces<!-- raw HTML omitted --> is false, then only the Wnck::Window visible in the<br />
+viewport are displayed in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->. The rationale for this is that the<br />
+viewport is generally used to implement workspace-like behavior. A<br />
+side-effect of this is that, when using multiple Wnck::Workspace with<br />
+viewport, it is not possible to show all Wnck::Window from a #WnckWorkspace<br />
+(even those that are not visible in the viewport) in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> without<br />
+showing all Wnck::Window from all #WnckWorkspace.<br />
 Wnck::Workspace in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->.</p>
 
 
@@ -906,8 +909,8 @@ Wnck::Workspace in <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->.</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to close windows with mouse middle click on button,
-according to <!-- raw HTML omitted -->middle_click_close<!-- raw HTML omitted -->.
+    <p>Sets <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to close windows with mouse middle click on button,<br />
+according to <!-- raw HTML omitted -->middle_click_close<!-- raw HTML omitted -->.<br />
 button.</p>
 
 
@@ -962,7 +965,7 @@ button.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the orientation of the <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to match <!-- raw HTML omitted -->orient<!-- raw HTML omitted -->.
+    <p>Set the orientation of the <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to match <!-- raw HTML omitted -->orient<!-- raw HTML omitted -->.<br />
 This function can be used to integrate a Wnck::Tasklist in vertical panels.</p>
 
 
@@ -1052,7 +1055,7 @@ This function can be used to integrate a Wnck::Tasklist in vertical panels.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the scroll behavior of the <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->. When set to true, a scroll
+    <p>Sets the scroll behavior of the <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted -->. When set to true, a scroll<br />
 event over the tasklist will change the current window accordingly.</p>
 
 
@@ -1191,9 +1194,9 @@ event over the tasklist will change the current window accordingly.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to activate or not the Wnck::Workspace a #WnckWindow is on
+    <p>Sets <!-- raw HTML omitted -->tasklist<!-- raw HTML omitted --> to activate or not the Wnck::Workspace a #WnckWindow is on<br />
 when unminimizing it, according to <!-- raw HTML omitted -->switch_workspace_on_unminimize<!-- raw HTML omitted -->.</p>
-<p>FIXME: does it still work?
+<p>FIXME: does it still work?<br />
 Wnck::Window is on when unminimizing it.</p>
 
 
@@ -1244,7 +1247,7 @@ Wnck::Window is on when unminimizing it.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

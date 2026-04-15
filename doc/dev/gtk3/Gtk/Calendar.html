@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Calendar";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -103,8 +104,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk3/calendar.rb<span class="defines">,<br />
+    <dd>lib/gtk3/calendar.rb<span class="defines">,<br>
   lib/gtk3/deprecated.rb</span>
+
 </dd>
   </dl>
   
@@ -112,23 +114,23 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkCalendar</code> is a widget that displays a Gregorian calendar, one month
+    <p><code>GtkCalendar</code> is a widget that displays a Gregorian calendar, one month<br />
 at a time.</p>
 <p><img src="calendar.png" alt="An example GtkCalendar" /></p>
 <p>A <code>GtkCalendar</code> can be created with [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Calendar.new].</p>
-<p>The date that is currently displayed can be altered with
+<p>The date that is currently displayed can be altered with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Calendar.select_day].</p>
-<p>To place a visual marker on a particular day, use
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Calendar.mark_day] and to remove the marker,
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Calendar.unmark_day]. Alternative, all
+<p>To place a visual marker on a particular day, use<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Calendar.mark_day] and to remove the marker,<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Calendar.unmark_day]. Alternative, all<br />
 marks can be cleared with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Calendar.clear_marks].</p>
-<p>The selected date can be retrieved from a <code>GtkCalendar</code> using
+<p>The selected date can be retrieved from a <code>GtkCalendar</code> using<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Calendar.get_date].</p>
-<p>Users should be aware that, although the Gregorian calendar is the
-legal calendar in most countries, it was adopted progressively
-between 1582 and 1929. Display before these dates is likely to be
+<p>Users should be aware that, although the Gregorian calendar is the<br />
+legal calendar in most countries, it was adopted progressively<br />
+between 1582 and 1929. Display before these dates is likely to be<br />
 historically incorrect.</p>
-<h1>CSS nodes</h1>
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
 <pre class="code ruby"><code class="ruby">calendar.view
 ├── header
 │   ├── button
@@ -140,12 +142,12 @@ historically incorrect.</p>
 ╰── grid
     ╰── label[.day-name][.week-number][.day-number][.other-month][.today]
 </code></pre>
-<p><code>GtkCalendar</code> has a main node with name calendar. It contains a subnode
+<p><code>GtkCalendar</code> has a main node with name calendar. It contains a subnode<br />
 called header containing the widgets for switching between years and months.</p>
-<p>The grid subnode contains all day labels, including week numbers on the left
-(marked with the .week-number css class) and day names on top (marked with the
+<p>The grid subnode contains all day labels, including week numbers on the left<br />
+(marked with the .week-number css class) and day names on top (marked with the<br />
 .day-name css class).</p>
-<p>Day labels that belong to the previous or next month get the .other-month
+<p>Day labels that belong to the previous or next month get the .other-month<br />
 style class. The label of the current day get the .today style class.</p>
 <p>Marked day labels get the :selected state assigned.</p>
 
@@ -746,9 +748,11 @@ style class. The label of the current day get the .today style class.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -840,7 +844,7 @@ style class. The label of the current day get the .today style class.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a <code>GDateTime</code> representing the shown
+    <p>Returns a <code>GDateTime</code> representing the shown<br />
 year, month and the selected day.</p>
 <p>The returned date is in the local time zone.</p>
 
@@ -901,7 +905,7 @@ year, month and the selected day.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a <code>GDateTime</code> representing the shown
+    <p>Returns a <code>GDateTime</code> representing the shown<br />
 year, month and the selected day.</p>
 <p>The returned date is in the local time zone.</p>
 
@@ -1392,9 +1396,9 @@ year, month and the selected day.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is currently showing the names
+    <p>Returns whether <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is currently showing the names<br />
 of the week days.</p>
-<p>This is the value of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Calendar:show-day-names]
+<p>This is the value of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Calendar:show-day-names]<br />
 property.</p>
 
 
@@ -1541,7 +1545,7 @@ property.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns whether <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is currently showing the heading.</p>
-<p>This is the value of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Calendar:show-heading]
+<p>This is the value of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Calendar:show-heading]<br />
 property.</p>
 
 
@@ -1687,9 +1691,9 @@ property.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is showing week numbers right
+    <p>Returns whether <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is showing week numbers right<br />
 now.</p>
-<p>This is the value of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Calendar:show-week-numbers]
+<p>This is the value of the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Calendar:show-week-numbers]<br />
 property.</p>
 
 
@@ -1993,7 +1997,7 @@ property.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

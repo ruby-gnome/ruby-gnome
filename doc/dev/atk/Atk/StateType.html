@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Atk::StateType";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -185,11 +187,11 @@
         <dt id="EDITABLE-constant" class="">EDITABLE =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that this object can contain text, and that the
-user can change the textual contents of this object by editing those contents
-directly. For an object which is expected to be editable due to its type, but
-which cannot be edited due to the application or platform preventing the user
-from doing so, that object's Atk::StateSet should lack ATK_STATE_EDITABLE and
+    <p>Indicates that this object can contain text, and that the<br />
+user can change the textual contents of this object by editing those contents<br />
+directly. For an object which is expected to be editable due to its type, but<br />
+which cannot be edited due to the application or platform preventing the user<br />
+from doing so, that object's Atk::StateSet should lack ATK_STATE_EDITABLE and<br />
 should contain ATK_STATE_READ_ONLY.</p>
 
 
@@ -430,12 +432,12 @@ should contain ATK_STATE_READ_ONLY.</p>
         <dt id="SENSITIVE-constant" class="">SENSITIVE =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates this object is sensitive, e.g. to user interaction.
-STATE_SENSITIVE usually accompanies STATE_ENABLED for user-actionable controls,
-but may be found in the absence of STATE_ENABLED if the current visible state of the
-control is &quot;disconnected&quot; from the application state.  In such cases, direct user interaction
-can often result in the object gaining STATE_SENSITIVE, for instance if a user makes
-an explicit selection using an object whose current state is ambiguous or undefined.
+    <p>Indicates this object is sensitive, e.g. to user interaction.<br />
+STATE_SENSITIVE usually accompanies STATE_ENABLED for user-actionable controls,<br />
+but may be found in the absence of STATE_ENABLED if the current visible state of the<br />
+control is &quot;disconnected&quot; from the application state.  In such cases, direct user interaction<br />
+can often result in the object gaining STATE_SENSITIVE, for instance if a user makes<br />
+an explicit selection using an object whose current state is ambiguous or undefined.<br />
 <!-- raw HTML omitted -->see<!-- raw HTML omitted --> STATE_ENABLED, STATE_INDETERMINATE.</p>
 
 
@@ -451,8 +453,8 @@ an explicit selection using an object whose current state is ambiguous or undefi
         <dt id="SHOWING-constant" class="">SHOWING =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates this object, the object's parent, the object's parent's parent, and so on,
-are all 'shown' to the end-user, i.e. subject to &quot;exposure&quot; if blocking or obscuring objects do not interpose
+    <p>Indicates this object, the object's parent, the object's parent's parent, and so on,<br />
+are all 'shown' to the end-user, i.e. subject to &quot;exposure&quot; if blocking or obscuring objects do not interpose<br />
 between this object and the top of the window stack.</p>
 
 
@@ -483,10 +485,10 @@ between this object and the top of the window stack.</p>
         <dt id="STALE-constant" class="">STALE =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that the information returned for this object may no longer be
-synchronized with the application state.  This is implied if the object has STATE_TRANSIENT,
-and can also occur towards the end of the object peer's lifecycle. It can also be used to indicate that
-the index associated with this object has changed since the user accessed the object (in lieu of
+    <p>Indicates that the information returned for this object may no longer be<br />
+synchronized with the application state.  This is implied if the object has STATE_TRANSIENT,<br />
+and can also occur towards the end of the object peer's lifecycle. It can also be used to indicate that<br />
+the index associated with this object has changed since the user accessed the object (in lieu of<br />
 &quot;index-in-parent-changed&quot; events).</p>
 
 
@@ -502,8 +504,8 @@ the index associated with this object has changed since the user accessed the ob
         <dt id="TRANSIENT-constant" class="">TRANSIENT =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates this object is transient, i.e. a snapshot which may not emit events when its
-state changes.  Data from objects with ATK_STATE_TRANSIENT should not be cached, since there may be no
+    <p>Indicates this object is transient, i.e. a snapshot which may not emit events when its<br />
+state changes.  Data from objects with ATK_STATE_TRANSIENT should not be cached, since there may be no<br />
 notification given when the cached data becomes obsolete.</p>
 
 
@@ -534,16 +536,16 @@ notification given when the cached data becomes obsolete.</p>
         <dt id="VISIBLE-constant" class="">VISIBLE =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates this object is visible, e.g. has been explicitly marked for exposure to the user.
-<strong>note</strong>: %ATK_STATE_VISIBLE is no guarantee that the object is actually unobscured on the screen, only
-that it is 'potentially' visible, barring obstruction, being scrolled or clipped out of the
-field of view, or having an ancestor container that has not yet made visible.
-A widget is potentially onscreen if it has both %ATK_STATE_VISIBLE and %ATK_STATE_SHOWING.
-The absence of %ATK_STATE_VISIBLE and %ATK_STATE_SHOWING is semantically equivalent to saying
-that an object is 'hidden'.  See also %ATK_STATE_TRUNCATED, which applies if an object with
-%ATK_STATE_VISIBLE and %ATK_STATE_SHOWING set lies within a viewport which means that its
-contents are clipped, e.g. a truncated spreadsheet cell or
-an image within a scrolling viewport.  Mostly useful for screen-review and magnification
+    <p>Indicates this object is visible, e.g. has been explicitly marked for exposure to the user.<br />
+<strong>note</strong>: %ATK_STATE_VISIBLE is no guarantee that the object is actually unobscured on the screen, only<br />
+that it is 'potentially' visible, barring obstruction, being scrolled or clipped out of the<br />
+field of view, or having an ancestor container that has not yet made visible.<br />
+A widget is potentially onscreen if it has both %ATK_STATE_VISIBLE and %ATK_STATE_SHOWING.<br />
+The absence of %ATK_STATE_VISIBLE and %ATK_STATE_SHOWING is semantically equivalent to saying<br />
+that an object is 'hidden'.  See also %ATK_STATE_TRUNCATED, which applies if an object with<br />
+%ATK_STATE_VISIBLE and %ATK_STATE_SHOWING set lies within a viewport which means that its<br />
+contents are clipped, e.g. a truncated spreadsheet cell or<br />
+an image within a scrolling viewport.  Mostly useful for screen-review and magnification<br />
 algorithms.</p>
 
 
@@ -559,14 +561,14 @@ algorithms.</p>
         <dt id="MANAGES_DESCENDANTS-constant" class="">MANAGES_DESCENDANTS =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that &quot;active-descendant-changed&quot; event
-is sent when children become 'active' (i.e. are selected or navigated to onscreen).
-Used to prevent need to enumerate all children in very large containers, like tables.
-The presence of STATE_MANAGES_DESCENDANTS is an indication to the client.
-that the children should not, and need not, be enumerated by the client.
-Objects implementing this state are expected to provide relevant state
-notifications to listening clients, for instance notifications of visibility
-changes and activation of their contained child objects, without the client
+    <p>Indicates that &quot;active-descendant-changed&quot; event<br />
+is sent when children become 'active' (i.e. are selected or navigated to onscreen).<br />
+Used to prevent need to enumerate all children in very large containers, like tables.<br />
+The presence of STATE_MANAGES_DESCENDANTS is an indication to the client.<br />
+that the children should not, and need not, be enumerated by the client.<br />
+Objects implementing this state are expected to provide relevant state<br />
+notifications to listening clients, for instance notifications of visibility<br />
+changes and activation of their contained child objects, without the client<br />
 having previously requested references to those children.</p>
 
 
@@ -582,12 +584,12 @@ having previously requested references to those children.</p>
         <dt id="INDETERMINATE-constant" class="">INDETERMINATE =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that the value, or some other quantifiable
-property, of this AtkObject cannot be fully determined. In the case of a large
-data set in which the total number of items in that set is unknown (e.g. 1 of
-999+), implementors should expose the currently-known set size (999) along
-with this state. In the case of a check box, this state should be used to
-indicate that the check box is a tri-state check box which is currently
+    <p>Indicates that the value, or some other quantifiable<br />
+property, of this AtkObject cannot be fully determined. In the case of a large<br />
+data set in which the total number of items in that set is unknown (e.g. 1 of<br />
+999+), implementors should expose the currently-known set size (999) along<br />
+with this state. In the case of a check box, this state should be used to<br />
+indicate that the check box is a tri-state check box which is currently<br />
 neither checked nor unchecked.</p>
 
 
@@ -648,13 +650,13 @@ neither checked nor unchecked.</p>
         <dt id="SUPPORTS_AUTOCOMPLETION-constant" class="">SUPPORTS_AUTOCOMPLETION =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that the object in question implements some form of ¨typeahead¨ or
-pre-selection behavior whereby entering the first character of one or more sub-elements
-causes those elements to scroll into view or become selected.  Subsequent character input
-may narrow the selection further as long as one or more sub-elements match the string.
-This state is normally only useful and encountered on objects that implement Selection.
-In some cases the typeahead behavior may result in full or partial ¨completion¨ of
-the data in the input field, in which case these input events may trigger text-changed
+    <p>Indicates that the object in question implements some form of ¨typeahead¨ or<br />
+pre-selection behavior whereby entering the first character of one or more sub-elements<br />
+causes those elements to scroll into view or become selected.  Subsequent character input<br />
+may narrow the selection further as long as one or more sub-elements match the string.<br />
+This state is normally only useful and encountered on objects that implement Selection.<br />
+In some cases the typeahead behavior may result in full or partial ¨completion¨ of<br />
+the data in the input field, in which case these input events may trigger text-changed<br />
 events from the AtkText interface.  This state supplants <!-- raw HTML omitted -->ATK_ROLE_AUTOCOMPLETE<!-- raw HTML omitted -->.</p>
 
 
@@ -700,10 +702,10 @@ events from the AtkText interface.  This state supplants <!-- raw HTML omitted -
         <dt id="ANIMATED-constant" class="">ANIMATED =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that the object changes its appearance dynamically as an inherent part of its presentation.  This state may come and go if an object is only temporarily animated on the way to a 'final' onscreen presentation.
-<strong>note</strong>: some applications, notably content viewers, may not be able to detect
-all kinds of animated content.  Therefore the absence of this state should not
-be taken as definitive evidence that the object's visual representation is
+    <p>Indicates that the object changes its appearance dynamically as an inherent part of its presentation.  This state may come and go if an object is only temporarily animated on the way to a 'final' onscreen presentation.<br />
+<strong>note</strong>: some applications, notably content viewers, may not be able to detect<br />
+all kinds of animated content.  Therefore the absence of this state should not<br />
+be taken as definitive evidence that the object's visual representation is<br />
 static; this state is advisory.</p>
 
 
@@ -734,8 +736,8 @@ static; this state is advisory.</p>
         <dt id="CHECKABLE-constant" class="">CHECKABLE =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates this object has the potential to be
-checked, such as a checkbox or toggle-able table cell. <!-- raw HTML omitted -->Since<!-- raw HTML omitted -->:
+    <p>Indicates this object has the potential to be<br />
+checked, such as a checkbox or toggle-able table cell. <!-- raw HTML omitted -->Since<!-- raw HTML omitted -->:<br />
 ATK-2.12</p>
 
 
@@ -751,9 +753,9 @@ ATK-2.12</p>
         <dt id="HAS_POPUP-constant" class="">HAS_POPUP =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that the object has a popup context
-menu or sub-level menu which may or may not be showing. This means
-that activation renders conditional content.  Note that ordinary
+    <p>Indicates that the object has a popup context<br />
+menu or sub-level menu which may or may not be showing. This means<br />
+that activation renders conditional content.  Note that ordinary<br />
 tooltips are not considered popups in this context. <!-- raw HTML omitted -->Since<!-- raw HTML omitted -->: ATK-2.12</p>
 
 
@@ -784,14 +786,14 @@ tooltips are not considered popups in this context. <!-- raw HTML omitted -->Sin
         <dt id="READ_ONLY-constant" class="">READ_ONLY =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that a widget which is ENABLED and SENSITIVE
-has a value which can be read, but not modified, by the user. Note that this
-state should only be applied to widget types whose value is normally directly
-user modifiable, such as check boxes, radio buttons, spin buttons, text input
-fields, and combo boxes, as a means to convey that the expected interaction
-with that widget is not possible. When the expected interaction with a
-widget does not include modification by the user, as is the case with
-labels and containers, ATK_STATE_READ_ONLY should not be applied. See also
+    <p>Indicates that a widget which is ENABLED and SENSITIVE<br />
+has a value which can be read, but not modified, by the user. Note that this<br />
+state should only be applied to widget types whose value is normally directly<br />
+user modifiable, such as check boxes, radio buttons, spin buttons, text input<br />
+fields, and combo boxes, as a means to convey that the expected interaction<br />
+with that widget is not possible. When the expected interaction with a<br />
+widget does not include modification by the user, as is the case with<br />
+labels and containers, ATK_STATE_READ_ONLY should not be applied. See also<br />
 ATK_STATE_EDITABLE. <!-- raw HTML omitted -->Since<!-- raw HTML omitted -->: ATK-2-16</p>
 
 
@@ -850,7 +852,7 @@ ATK_STATE_EDITABLE. <!-- raw HTML omitted -->Since<!-- raw HTML omitted -->: ATK
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

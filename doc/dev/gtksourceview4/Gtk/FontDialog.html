@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::FontDialog";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -577,6 +579,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -622,11 +625,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a font selection operation by
-presenting a dialog to the user for selecting a font face
+    <p>This function initiates a font selection operation by<br />
+presenting a dialog to the user for selecting a font face<br />
 (i.e. a font family and style, but not a specific font size).</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_face_finish]
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
+It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_face_finish]<br />
 to obtain the result.</p>
 
 
@@ -741,7 +744,7 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_face] call
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_face] call<br />
 and returns the resulting font face.</p>
 
 
@@ -800,10 +803,10 @@ and returns the resulting font face.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a font selection operation by
+    <p>This function initiates a font selection operation by<br />
 presenting a dialog to the user for selecting a font family.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_family_finish]
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
+It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_family_finish]<br />
 to obtain the result.</p>
 
 
@@ -918,10 +921,10 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_family] call
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_family] call<br />
 and returns the resulting family.</p>
-<p>This function never returns an error. If the operation is
-not finished successfully, the value passed as <!-- raw HTML omitted -->initial_value<!-- raw HTML omitted -->
+<p>This function never returns an error. If the operation is<br />
+not finished successfully, the value passed as <!-- raw HTML omitted -->initial_value<!-- raw HTML omitted --><br />
 to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_family] is returned.</p>
 
 
@@ -980,12 +983,12 @@ to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choos
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a font selection operation by
+    <p>This function initiates a font selection operation by<br />
 presenting a dialog to the user for selecting a font.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font_finish]
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
+It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font_finish]<br />
 to obtain the result.</p>
-<p>If you want to let the user select font features as well,
+<p>If you want to let the user select font features as well,<br />
 use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font_and_features] instead.</p>
 
 
@@ -1100,13 +1103,13 @@ use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choo
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a font selection operation by
-presenting a dialog to the user for selecting a font and
+    <p>This function initiates a font selection operation by<br />
+presenting a dialog to the user for selecting a font and<br />
 font features.</p>
-<p>Font features affect how the font is rendered, for example
+<p>Font features affect how the font is rendered, for example<br />
 enabling glyph variants or ligatures.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font_and_features_finish]
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
+It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font_and_features_finish]<br />
 to obtain the result.</p>
 
 
@@ -1221,7 +1224,7 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font_and_features]
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font_and_features]<br />
 call and returns the resulting font description and font features.</p>
 
 
@@ -1304,7 +1307,7 @@ call and returns the resulting font description and font features.</p>
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if a font was selected. Otherwise <code>FALSE</code> is returned
+        <div class='inline'><p><code>TRUE</code> if a font was selected. Otherwise <code>FALSE</code> is returned<br />
 and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
 </div>
       
@@ -1326,7 +1329,7 @@ and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font] call
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font] call<br />
 and returns the resulting font description.</p>
 
 
@@ -1385,7 +1388,7 @@ and returns the resulting font description.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a filter to restrict what fonts are shown
+    <p>Sets a filter to restrict what fonts are shown<br />
 in the font chooser dialog.</p>
 
 
@@ -1425,7 +1428,7 @@ in the font chooser dialog.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a filter to restrict what fonts are shown
+    <p>Sets a filter to restrict what fonts are shown<br />
 in the font chooser dialog.</p>
 
 
@@ -1494,7 +1497,7 @@ in the font chooser dialog.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets a custom font map to select fonts from.</p>
-<p>A custom font map can be used to present application-specific
+<p>A custom font map can be used to present application-specific<br />
 fonts instead of or in addition to the normal system fonts.</p>
 
 
@@ -1535,7 +1538,7 @@ fonts instead of or in addition to the normal system fonts.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets a custom font map to select fonts from.</p>
-<p>A custom font map can be used to present application-specific
+<p>A custom font map can be used to present application-specific<br />
 fonts instead of or in addition to the normal system fonts.</p>
 
 
@@ -1709,8 +1712,8 @@ fonts instead of or in addition to the normal system fonts.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the font chooser dialog
-blocks interaction with the parent window
+    <p>Returns whether the font chooser dialog<br />
+blocks interaction with the parent window<br />
 while it is presented.</p>
 
 
@@ -1856,7 +1859,7 @@ while it is presented.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A title that may be shown on the font chooser
+    <p>A title that may be shown on the font chooser<br />
 dialog that is presented by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font].</p>
 
 
@@ -1896,7 +1899,7 @@ dialog that is presented by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omi
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A title that may be shown on the font chooser
+    <p>A title that may be shown on the font chooser<br />
 dialog that is presented by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font].</p>
 
 
@@ -1960,7 +1963,7 @@ dialog that is presented by [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omi
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

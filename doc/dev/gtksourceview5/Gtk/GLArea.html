@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::GLArea";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -729,9 +731,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -999,11 +1003,11 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Binds buffers to the framebuffer.</p>
-<p>Ensures that the <!-- raw HTML omitted -->area<!-- raw HTML omitted --> framebuffer object is made the current draw
-and read target, and that all the required buffers for the <!-- raw HTML omitted -->area<!-- raw HTML omitted -->
+<p>Ensures that the <!-- raw HTML omitted -->area<!-- raw HTML omitted --> framebuffer object is made the current draw<br />
+and read target, and that all the required buffers for the <!-- raw HTML omitted -->area<!-- raw HTML omitted --><br />
 are created and bound to the framebuffer.</p>
-<p>This function is automatically called before emitting the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea::render] signal, and doesn't normally need to be
+<p>This function is automatically called before emitting the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea::render] signal, and doesn't normally need to be<br />
 called by application code.</p>
 
 
@@ -1078,13 +1082,13 @@ called by application code.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If set to true the ::render signal will be emitted every time
+    <p>If set to true the ::render signal will be emitted every time<br />
 the widget draws.</p>
 <p>This is the default and is useful if drawing the widget is faster.</p>
-<p>If set to false the data from previous rendering is kept around and will
-be used for drawing the widget the next time, unless the window is resized.
-In order to force a rendering [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea.queue_render] must be called.
-This mode is useful when the scene changes seldom, but takes a long time
+<p>If set to false the data from previous rendering is kept around and will<br />
+be used for drawing the widget the next time, unless the window is resized.<br />
+In order to force a rendering [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea.queue_render] must be called.<br />
+This mode is useful when the scene changes seldom, but takes a long time<br />
 to redraw.</p>
 
 
@@ -1152,13 +1156,13 @@ to redraw.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If set to true the ::render signal will be emitted every time
+    <p>If set to true the ::render signal will be emitted every time<br />
 the widget draws.</p>
 <p>This is the default and is useful if drawing the widget is faster.</p>
-<p>If set to false the data from previous rendering is kept around and will
-be used for drawing the widget the next time, unless the window is resized.
-In order to force a rendering [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea.queue_render] must be called.
-This mode is useful when the scene changes seldom, but takes a long time
+<p>If set to false the data from previous rendering is kept around and will<br />
+be used for drawing the widget the next time, unless the window is resized.<br />
+In order to force a rendering [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea.queue_render] must be called.<br />
+This mode is useful when the scene changes seldom, but takes a long time<br />
 to redraw.</p>
 
 
@@ -1199,8 +1203,8 @@ to redraw.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GdkGLContext</code> used by the <code>GtkGLArea</code> widget.</p>
-<p>The <code>GtkGLArea</code> widget is responsible for creating the <code>GdkGLContext</code>
-instance. If you need to render with other kinds of buffers (stencil,
+<p>The <code>GtkGLArea</code> widget is responsible for creating the <code>GdkGLContext</code><br />
+instance. If you need to render with other kinds of buffers (stencil,<br />
 depth, etc), use render buffers.</p>
 
 
@@ -1241,8 +1245,8 @@ depth, etc), use render buffers.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GdkGLContext</code> used by the <code>GtkGLArea</code> widget.</p>
-<p>The <code>GtkGLArea</code> widget is responsible for creating the <code>GdkGLContext</code>
-instance. If you need to render with other kinds of buffers (stencil,
+<p>The <code>GtkGLArea</code> widget is responsible for creating the <code>GdkGLContext</code><br />
+instance. If you need to render with other kinds of buffers (stencil,<br />
 depth, etc), use render buffers.</p>
 
 
@@ -1349,9 +1353,9 @@ depth, etc), use render buffers.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets an error on the area which will be shown instead of the
+    <p>Sets an error on the area which will be shown instead of the<br />
 GL rendering.</p>
-<p>This is useful in the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea::create-context]
+<p>This is useful in the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea::create-context]<br />
 signal if GL context creation fails.</p>
 
 
@@ -1515,10 +1519,10 @@ signal if GL context creation fails.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If set to true the widget will allocate and enable a depth buffer for the
+    <p>If set to true the widget will allocate and enable a depth buffer for the<br />
 target framebuffer.</p>
-<p>Setting this property will enable GL's depth testing as a side effect. If
-you don't need depth testing, you should call <code>glDisable(GL_DEPTH_TEST)</code>
+<p>Setting this property will enable GL's depth testing as a side effect. If<br />
+you don't need depth testing, you should call <code>glDisable(GL_DEPTH_TEST)</code><br />
 in your <code>GtkGLArea::render</code> handler.</p>
 
 
@@ -1586,10 +1590,10 @@ in your <code>GtkGLArea::render</code> handler.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If set to true the widget will allocate and enable a depth buffer for the
+    <p>If set to true the widget will allocate and enable a depth buffer for the<br />
 target framebuffer.</p>
-<p>Setting this property will enable GL's depth testing as a side effect. If
-you don't need depth testing, you should call <code>glDisable(GL_DEPTH_TEST)</code>
+<p>Setting this property will enable GL's depth testing as a side effect. If<br />
+you don't need depth testing, you should call <code>glDisable(GL_DEPTH_TEST)</code><br />
 in your <code>GtkGLArea::render</code> handler.</p>
 
 
@@ -1668,7 +1672,7 @@ in your <code>GtkGLArea::render</code> handler.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If set to true the widget will allocate and enable a stencil buffer for the
+    <p>If set to true the widget will allocate and enable a stencil buffer for the<br />
 target framebuffer.</p>
 
 
@@ -1736,7 +1740,7 @@ target framebuffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If set to true the widget will allocate and enable a stencil buffer for the
+    <p>If set to true the widget will allocate and enable a stencil buffer for the<br />
 target framebuffer.</p>
 
 
@@ -1776,10 +1780,10 @@ target framebuffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Ensures that the <code>GdkGLContext</code> used by <!-- raw HTML omitted -->area<!-- raw HTML omitted --> is associated with
+    <p>Ensures that the <code>GdkGLContext</code> used by <!-- raw HTML omitted -->area<!-- raw HTML omitted --> is associated with<br />
 the <code>GtkGLArea</code>.</p>
-<p>This function is automatically called before emitting the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea::render] signal, and doesn't normally need
+<p>This function is automatically called before emitting the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea::render] signal, and doesn't normally need<br />
 to be called by application code.</p>
 
 
@@ -1815,12 +1819,12 @@ to be called by application code.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Marks the currently rendered data (if any) as invalid, and queues
+    <p>Marks the currently rendered data (if any) as invalid, and queues<br />
 a redraw of the widget.</p>
-<p>This ensures that the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea::render] signal
+<p>This ensures that the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea::render] signal<br />
 is emitted during the draw.</p>
-<p>This is only needed when [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea.set_auto_render] has
-been called with a false value. The default behaviour is to
+<p>This is only needed when [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea.set_auto_render] has<br />
+been called with a false value. The default behaviour is to<br />
 emit [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea::render] on each draw.</p>
 
 
@@ -1856,7 +1860,7 @@ emit [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GLArea::render
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the required version of OpenGL to be used when creating
+    <p>Sets the required version of OpenGL to be used when creating<br />
 the context for the widget.</p>
 <p>This function must be called before the area has been realized.</p>
 
@@ -1946,7 +1950,7 @@ the context for the widget.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the <code>GtkGLArea</code> should create an OpenGL ES context
+        <div class='inline'><p>true if the <code>GtkGLArea</code> should create an OpenGL ES context<br />
 and false otherwise</p>
 </div>
       
@@ -1968,7 +1972,7 @@ and false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If set to true the widget will try to create a <code>GdkGLContext</code> using
+    <p>If set to true the widget will try to create a <code>GdkGLContext</code> using<br />
 OpenGL ES instead of OpenGL.</p>
 
 
@@ -2036,7 +2040,7 @@ OpenGL ES instead of OpenGL.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If set to true the widget will try to create a <code>GdkGLContext</code> using
+    <p>If set to true the widget will try to create a <code>GdkGLContext</code> using<br />
 OpenGL ES instead of OpenGL.</p>
 
 
@@ -2072,7 +2076,7 @@ OpenGL ES instead of OpenGL.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

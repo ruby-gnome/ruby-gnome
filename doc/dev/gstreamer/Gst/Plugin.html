@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::Plugin";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -234,6 +236,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -723,9 +726,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -808,7 +813,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Load the named plugin. Refs the plugin.
+    <p>Load the named plugin. Refs the plugin.<br />
 nil on error.</p>
 
 
@@ -867,7 +872,7 @@ nil on error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads the given plugin and refs it.  Caller needs to unref after use.
+    <p>Loads the given plugin and refs it.  Caller needs to unref after use.<br />
 reference to the newly-loaded GstPlugin, or nil if an error occurred.</p>
 
 
@@ -926,10 +931,10 @@ reference to the newly-loaded GstPlugin, or nil if an error occurred.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers a static plugin, ie. a plugin which is private to an application
-or library and contained within the application or library (as opposed to
+    <p>Registers a static plugin, ie. a plugin which is private to an application<br />
+or library and contained within the application or library (as opposed to<br />
 being shipped as a separate module file).</p>
-<p>You must make sure that GStreamer has been initialised (with gst_init() or
+<p>You must make sure that GStreamer has been initialised (with gst_init() or<br />
 via gst_init_get_option_group()) before calling this function.</p>
 
 
@@ -949,7 +954,7 @@ via gst_init_get_option_group()) before calling this function.</p>
       
       
         &mdash;
-        <div class='inline'><p>the major version number of the GStreamer core that the
+        <div class='inline'><p>the major version number of the GStreamer core that the<br />
 plugin was compiled for, you can just use GST_VERSION_MAJOR here</p>
 </div>
       
@@ -965,7 +970,7 @@ plugin was compiled for, you can just use GST_VERSION_MAJOR here</p>
       
       
         &mdash;
-        <div class='inline'><p>the minor version number of the GStreamer core that the
+        <div class='inline'><p>the minor version number of the GStreamer core that the<br />
 plugin was compiled for, you can just use GST_VERSION_MINOR here</p>
 </div>
       
@@ -981,8 +986,8 @@ plugin was compiled for, you can just use GST_VERSION_MINOR here</p>
       
       
         &mdash;
-        <div class='inline'><p>a unique name of the plugin (ideally prefixed with an application- or
-library-specific namespace prefix in order to avoid name conflicts in
+        <div class='inline'><p>a unique name of the plugin (ideally prefixed with an application- or<br />
+library-specific namespace prefix in order to avoid name conflicts in<br />
 case a similar plugin with the same name ever gets added to GStreamer)</p>
 </div>
       
@@ -1043,7 +1048,7 @@ case a similar plugin with the same name ever gets added to GStreamer)</p>
       
       
         &mdash;
-        <div class='inline'><p>effective license of plugin. Must be one of the approved licenses
+        <div class='inline'><p>effective license of plugin. Must be one of the approved licenses<br />
 (see Gst::PluginDesc above) or the plugin will not be registered.</p>
 </div>
       
@@ -1128,12 +1133,12 @@ case a similar plugin with the same name ever gets added to GStreamer)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers a static plugin, ie. a plugin which is private to an application
-or library and contained within the application or library (as opposed to
-being shipped as a separate module file) with a Gst::PluginInitFullFunc
-which allows user data to be passed to the callback function (useful
+    <p>Registers a static plugin, ie. a plugin which is private to an application<br />
+or library and contained within the application or library (as opposed to<br />
+being shipped as a separate module file) with a Gst::PluginInitFullFunc<br />
+which allows user data to be passed to the callback function (useful<br />
 for bindings).</p>
-<p>You must make sure that GStreamer has been initialised (with gst_init() or
+<p>You must make sure that GStreamer has been initialised (with gst_init() or<br />
 via gst_init_get_option_group()) before calling this function.</p>
 
 
@@ -1153,7 +1158,7 @@ via gst_init_get_option_group()) before calling this function.</p>
       
       
         &mdash;
-        <div class='inline'><p>the major version number of the GStreamer core that the
+        <div class='inline'><p>the major version number of the GStreamer core that the<br />
 plugin was compiled for, you can just use GST_VERSION_MAJOR here</p>
 </div>
       
@@ -1169,7 +1174,7 @@ plugin was compiled for, you can just use GST_VERSION_MAJOR here</p>
       
       
         &mdash;
-        <div class='inline'><p>the minor version number of the GStreamer core that the
+        <div class='inline'><p>the minor version number of the GStreamer core that the<br />
 plugin was compiled for, you can just use GST_VERSION_MINOR here</p>
 </div>
       
@@ -1185,8 +1190,8 @@ plugin was compiled for, you can just use GST_VERSION_MINOR here</p>
       
       
         &mdash;
-        <div class='inline'><p>a unique name of the plugin (ideally prefixed with an application- or
-library-specific namespace prefix in order to avoid name conflicts in
+        <div class='inline'><p>a unique name of the plugin (ideally prefixed with an application- or<br />
+library-specific namespace prefix in order to avoid name conflicts in<br />
 case a similar plugin with the same name ever gets added to GStreamer)</p>
 </div>
       
@@ -1217,7 +1222,7 @@ case a similar plugin with the same name ever gets added to GStreamer)</p>
       
       
         &mdash;
-        <div class='inline'><p>pointer to the init function with user data
+        <div class='inline'><p>pointer to the init function with user data<br />
 of this plugin.</p>
 </div>
       
@@ -1248,7 +1253,7 @@ of this plugin.</p>
       
       
         &mdash;
-        <div class='inline'><p>effective license of plugin. Must be one of the approved licenses
+        <div class='inline'><p>effective license of plugin. Must be one of the approved licenses<br />
 (see Gst::PluginDesc above) or the plugin will not be registered.</p>
 </div>
       
@@ -1354,13 +1359,13 @@ of this plugin.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Make GStreamer aware of external dependencies which affect the feature
+    <p>Make GStreamer aware of external dependencies which affect the feature<br />
 set of this plugin (ie. the elements or typefinders associated with it).</p>
-<p>GStreamer will re-inspect plugins with external dependencies whenever any
-of the external dependencies change. This is useful for plugins which wrap
-other plugin systems, e.g. a plugin which wraps a plugin-based visualisation
-library and makes visualisations available as GStreamer elements, or a
-codec loader which exposes elements and/or caps dependent on what external
+<p>GStreamer will re-inspect plugins with external dependencies whenever any<br />
+of the external dependencies change. This is useful for plugins which wrap<br />
+other plugin systems, e.g. a plugin which wraps a plugin-based visualisation<br />
+library and makes visualisations available as GStreamer elements, or a<br />
+codec loader which exposes elements and/or caps dependent on what external<br />
 codec libraries are currently installed.</p>
 
 
@@ -1380,11 +1385,11 @@ codec libraries are currently installed.</p>
       
       
         &mdash;
-        <div class='inline'><p>nil-terminated array of environment variables affecting the
-feature set of the plugin (e.g. an environment variable containing
-paths where to look for additional modules/plugins of a library),
-or nil. Environment variable names may be followed by a path component
-which will be added to the content of the environment variable, e.g.
+        <div class='inline'><p>nil-terminated array of environment variables affecting the<br />
+feature set of the plugin (e.g. an environment variable containing<br />
+paths where to look for additional modules/plugins of a library),<br />
+or nil. Environment variable names may be followed by a path component<br />
+which will be added to the content of the environment variable, e.g.<br />
 &quot;HOME/.mystuff/plugins&quot;.</p>
 </div>
       
@@ -1400,7 +1405,7 @@ which will be added to the content of the environment variable, e.g.
       
       
         &mdash;
-        <div class='inline'><p>nil-terminated array of directories/paths where dependent files
+        <div class='inline'><p>nil-terminated array of directories/paths where dependent files<br />
 may be, or nil.</p>
 </div>
       
@@ -1416,9 +1421,9 @@ may be, or nil.</p>
       
       
         &mdash;
-        <div class='inline'><p>nil-terminated array of file names (or file name suffixes,
-depending on <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->) to be used in combination with the paths from
-<!-- raw HTML omitted -->paths<!-- raw HTML omitted --> and/or the paths extracted from the environment variables in
+        <div class='inline'><p>nil-terminated array of file names (or file name suffixes,<br />
+depending on <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->) to be used in combination with the paths from<br />
+<!-- raw HTML omitted -->paths<!-- raw HTML omitted --> and/or the paths extracted from the environment variables in<br />
 <!-- raw HTML omitted -->env_vars<!-- raw HTML omitted -->, or nil.</p>
 </div>
       
@@ -1469,16 +1474,16 @@ depending on <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->) to be used
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Make GStreamer aware of external dependencies which affect the feature
+    <p>Make GStreamer aware of external dependencies which affect the feature<br />
 set of this plugin (ie. the elements or typefinders associated with it).</p>
-<p>GStreamer will re-inspect plugins with external dependencies whenever any
-of the external dependencies change. This is useful for plugins which wrap
-other plugin systems, e.g. a plugin which wraps a plugin-based visualisation
-library and makes visualisations available as GStreamer elements, or a
-codec loader which exposes elements and/or caps dependent on what external
+<p>GStreamer will re-inspect plugins with external dependencies whenever any<br />
+of the external dependencies change. This is useful for plugins which wrap<br />
+other plugin systems, e.g. a plugin which wraps a plugin-based visualisation<br />
+library and makes visualisations available as GStreamer elements, or a<br />
+codec loader which exposes elements and/or caps dependent on what external<br />
 codec libraries are currently installed.</p>
-<p>Convenience wrapper function for gst_plugin_add_dependency() which
-takes simple strings as arguments instead of string arrays, with multiple
+<p>Convenience wrapper function for gst_plugin_add_dependency() which<br />
+takes simple strings as arguments instead of string arrays, with multiple<br />
 arguments separated by predefined delimiters (see above).</p>
 
 
@@ -1498,9 +1503,9 @@ arguments separated by predefined delimiters (see above).</p>
       
       
         &mdash;
-        <div class='inline'><p>one or more environment variables (separated by ':', ';' or ','),
-or nil. Environment variable names may be followed by a path component
-which will be added to the content of the environment variable, e.g.
+        <div class='inline'><p>one or more environment variables (separated by ':', ';' or ','),<br />
+or nil. Environment variable names may be followed by a path component<br />
+which will be added to the content of the environment variable, e.g.<br />
 &quot;HOME/.mystuff/plugins:MYSTUFF_PLUGINS_PATH&quot;</p>
 </div>
       
@@ -1516,7 +1521,7 @@ which will be added to the content of the environment variable, e.g.
       
       
         &mdash;
-        <div class='inline'><p>one ore more directory paths (separated by ':' or ';' or ','),
+        <div class='inline'><p>one ore more directory paths (separated by ':' or ';' or ','),<br />
 or nil. Example: &quot;/usr/lib/mystuff/plugins&quot;</p>
 </div>
       
@@ -1532,7 +1537,7 @@ or nil. Example: &quot;/usr/lib/mystuff/plugins&quot;</p>
       
       
         &mdash;
-        <div class='inline'><p>one or more file names or file name suffixes (separated by commas),
+        <div class='inline'><p>one or more file names or file name suffixes (separated by commas),<br />
 or nil</p>
 </div>
       
@@ -1742,8 +1747,8 @@ or nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the plugin specific data cache. If it is nil there is no cached data
-stored. This is the case when the registry is getting rebuilt.
+    <p>Gets the plugin specific data cache. If it is nil there is no cached data<br />
+stored. This is the case when the registry is getting rebuilt.<br />
 Gst::Structure or nil.</p>
 
 
@@ -1783,7 +1788,7 @@ Gst::Structure or nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds plugin specific data to cache. Passes the ownership of the structure to
+    <p>Adds plugin specific data to cache. Passes the ownership of the structure to<br />
 the <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->.</p>
 <p>The cache is flushed every time the registry is rebuilt.</p>
 
@@ -1995,15 +2000,15 @@ the <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->. Note that the <em>return value</em> is the loaded plugin; <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> is
+    <p>Loads <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->. Note that the <em>return value</em> is the loaded plugin; <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> is<br />
 untouched. The normal use pattern of this function goes like this:</p>
-<p>|[
-GstPlugin *loaded_plugin;
-loaded_plugin = gst_plugin_load (plugin);
-// presumably, we're no longer interested in the potentially-unloaded plugin
-gst_object_unref (plugin);
-plugin = loaded_plugin;
-]|
+<p>|[<br />
+GstPlugin *loaded_plugin;<br />
+loaded_plugin = gst_plugin_load (plugin);<br />
+// presumably, we're no longer interested in the potentially-unloaded plugin<br />
+gst_object_unref (plugin);<br />
+plugin = loaded_plugin;<br />
+]|<br />
 nil on error.</p>
 
 
@@ -2161,11 +2166,11 @@ nil on error.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Get the release date (and possibly time) in form of a string, if available.</p>
-<p>For normal GStreamer plugin releases this will usually just be a date in
-the form of &quot;YYYY-MM-DD&quot;, while pre-releases and builds from git may contain
-a time component after the date as well, in which case the string will be
+<p>For normal GStreamer plugin releases this will usually just be a date in<br />
+the form of &quot;YYYY-MM-DD&quot;, while pre-releases and builds from git may contain<br />
+a time component after the date as well, in which case the string will be<br />
 formatted like &quot;YYYY-MM-DDTHH:MMZ&quot; (e.g. &quot;2012-04-30T09:30Z&quot;).</p>
-<p>There may be plugins that do not have a valid release date set on them.
+<p>There may be plugins that do not have a valid release date set on them.<br />
 available.</p>
 
 
@@ -2396,7 +2401,7 @@ available.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

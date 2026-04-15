@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::ProxyResolver";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,19 +79,20 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GProxyResolver</code> provides synchronous and asynchronous network proxy
-resolution. <code>GProxyResolver</code> is used within [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SocketClient] through
+    <p><code>GProxyResolver</code> provides synchronous and asynchronous network proxy<br />
+resolution. <code>GProxyResolver</code> is used within [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SocketClient] through<br />
 the method [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SocketConnectable.proxy_enumerate].</p>
-<p>Implementations of <code>GProxyResolver</code> based on
-<a href="https://github.com/libproxy/libproxy">libproxy</a> and GNOME settings can be
-found in <a href="https://gitlab.gnome.org/GNOME/glib-networking">glib-networking</a>.
+<p>Implementations of <code>GProxyResolver</code> based on<br />
+<a href="https://github.com/libproxy/libproxy">libproxy</a> and GNOME settings can be<br />
+found in <a href="https://gitlab.gnome.org/GNOME/glib-networking">glib-networking</a>.<br />
 GIO comes with an implementation for use inside Flatpak portals.</p>
 
 
@@ -207,6 +209,7 @@ GIO comes with an implementation for use inside Flatpak portals.</p>
 
       
     </ul>
+    
   
 
 
@@ -226,8 +229,8 @@ GIO comes with an implementation for use inside Flatpak portals.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if <!-- raw HTML omitted -->resolver<!-- raw HTML omitted --> can be used on this system. (This is used
-internally; g_proxy_resolver_get_default() will only return a proxy
+    <p>Checks if <!-- raw HTML omitted -->resolver<!-- raw HTML omitted --> can be used on this system. (This is used<br />
+internally; g_proxy_resolver_get_default() will only return a proxy<br />
 resolver that returns true for this method.)</p>
 
 
@@ -267,18 +270,18 @@ resolver that returns true for this method.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks into the system proxy configuration to determine what proxy,
-if any, to use to connect to <!-- raw HTML omitted -->uri<!-- raw HTML omitted -->. The returned proxy URIs are of
-the form <code>&lt;protocol&gt;://[user[:password]@]host[:port]</code> or
-<code>direct://</code>, where <!-- raw HTML omitted --> could be http, rtsp, socks
+    <p>Looks into the system proxy configuration to determine what proxy,<br />
+if any, to use to connect to <!-- raw HTML omitted -->uri<!-- raw HTML omitted -->. The returned proxy URIs are of<br />
+the form <code>&lt;protocol&gt;://[user[:password]@]host[:port]</code> or<br />
+<code>direct://</code>, where <!-- raw HTML omitted --> could be http, rtsp, socks<br />
 or other proxying protocol.</p>
-<p>If you don't know what network protocol is being used on the
-socket, you should use <code>none</code> as the URI protocol.
-In this case, the resolver might still return a generic proxy type
-(such as SOCKS), but would not return protocol-specific proxy types
+<p>If you don't know what network protocol is being used on the<br />
+socket, you should use <code>none</code> as the URI protocol.<br />
+In this case, the resolver might still return a generic proxy type<br />
+(such as SOCKS), but would not return protocol-specific proxy types<br />
 (such as http).</p>
-<p><code>direct://</code> is used when no proxy is needed.
-Direct connection should not be attempted unless it is part of the
+<p><code>direct://</code> is used when no proxy is needed.<br />
+Direct connection should not be attempted unless it is part of the<br />
 returned array of proxies.</p>
 
 
@@ -331,8 +334,8 @@ returned array of proxies.</p>
       
       
         &mdash;
-        <div class='inline'><p>A
-NULL-terminated array of proxy URIs. Must be freed
+        <div class='inline'><p>A<br />
+NULL-terminated array of proxy URIs. Must be freed<br />
 with g_strfreev().</p>
 </div>
       
@@ -354,7 +357,7 @@ with g_strfreev().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronous lookup of proxy. See g_proxy_resolver_lookup() for more
+    <p>Asynchronous lookup of proxy. See g_proxy_resolver_lookup() for more<br />
 details.</p>
 
 
@@ -454,8 +457,8 @@ details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Call this function to obtain the array of proxy URIs when
-g_proxy_resolver_lookup_async() is complete. See
+    <p>Call this function to obtain the array of proxy URIs when<br />
+g_proxy_resolver_lookup_async() is complete. See<br />
 g_proxy_resolver_lookup() for more details.</p>
 
 
@@ -493,8 +496,8 @@ g_proxy_resolver_lookup() for more details.</p>
       
       
         &mdash;
-        <div class='inline'><p>A
-NULL-terminated array of proxy URIs. Must be freed
+        <div class='inline'><p>A<br />
+NULL-terminated array of proxy URIs. Must be freed<br />
 with g_strfreev().</p>
 </div>
       
@@ -512,7 +515,7 @@ with g_strfreev().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

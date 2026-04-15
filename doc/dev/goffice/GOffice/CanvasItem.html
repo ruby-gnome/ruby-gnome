@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GOffice::CanvasItem";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -819,6 +821,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -835,7 +838,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new item of type <!-- raw HTML omitted -->type<!-- raw HTML omitted --> in group <!-- raw HTML omitted -->group<!-- raw HTML omitted -->. Properties can be
+    <p>Creates a new item of type <!-- raw HTML omitted -->type<!-- raw HTML omitted --> in group <!-- raw HTML omitted -->group<!-- raw HTML omitted -->. Properties can be<br />
 set just the same way they are in #g_object_new.</p>
 
 
@@ -900,7 +903,7 @@ set just the same way they are in #g_object_new.</p>
       
       
         &mdash;
-        <div class='inline'><p>value for the first property, followed optionally by more
+        <div class='inline'><p>value for the first property, followed optionally by more<br />
 name/value pairs, followed by nil</p>
 </div>
       
@@ -930,7 +933,7 @@ name/value pairs, followed by nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function needs to be called each time the bounds of <!-- raw HTML omitted -->item<!-- raw HTML omitted --> change. It
+    <p>This function needs to be called each time the bounds of <!-- raw HTML omitted -->item<!-- raw HTML omitted --> change. It<br />
 is normally called from inside the implementation of items derived classes.</p>
 
 
@@ -1071,7 +1074,7 @@ is normally called from inside the implementation of items derived classes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Copies <!-- raw HTML omitted -->source<!-- raw HTML omitted --> properties to <!-- raw HTML omitted -->dest<!-- raw HTML omitted -->. The two items must be of the same type
+    <p>Copies <!-- raw HTML omitted -->source<!-- raw HTML omitted --> properties to <!-- raw HTML omitted -->dest<!-- raw HTML omitted -->. The two items must be of the same type<br />
 and their common class needs a <!-- raw HTML omitted -->copy<!-- raw HTML omitted --> member.</p>
 
 
@@ -1126,7 +1129,7 @@ and their common class needs a <!-- raw HTML omitted -->copy<!-- raw HTML omitte
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Destroys <!-- raw HTML omitted -->item<!-- raw HTML omitted -->, removes it from its parent group and updates the canvas
+    <p>Destroys <!-- raw HTML omitted -->item<!-- raw HTML omitted -->, removes it from its parent group and updates the canvas<br />
 accordingly.</p>
 
 
@@ -1162,8 +1165,8 @@ accordingly.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Evaluates the distance between the point with canvas coordinates <!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y<!-- raw HTML omitted -->
-and the nearest point of <!-- raw HTML omitted -->item<!-- raw HTML omitted -->. <!-- raw HTML omitted -->near_item<!-- raw HTML omitted --> is set with either <!-- raw HTML omitted -->item<!-- raw HTML omitted --> or
+    <p>Evaluates the distance between the point with canvas coordinates <!-- raw HTML omitted -->x<!-- raw HTML omitted -->,<!-- raw HTML omitted -->y<!-- raw HTML omitted --><br />
+and the nearest point of <!-- raw HTML omitted -->item<!-- raw HTML omitted -->. <!-- raw HTML omitted -->near_item<!-- raw HTML omitted --> is set with either <!-- raw HTML omitted -->item<!-- raw HTML omitted --> or<br />
 its appropriate child.</p>
 
 
@@ -1252,7 +1255,7 @@ its appropriate child.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Renders <!-- raw HTML omitted -->item<!-- raw HTML omitted --> using <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->. There is no need to call this function directly.
+    <p>Renders <!-- raw HTML omitted -->item<!-- raw HTML omitted --> using <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->. There is no need to call this function directly.<br />
 Invalidating the item is the way to go.</p>
 
 
@@ -1307,9 +1310,9 @@ Invalidating the item is the way to go.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Renders <!-- raw HTML omitted -->item<!-- raw HTML omitted --> using <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->, limiting all drawings to the region limited by
-<!-- raw HTML omitted -->x0<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y0<!-- raw HTML omitted -->, <!-- raw HTML omitted -->x1<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->y1<!-- raw HTML omitted -->. If this function returns false, #goc_item_draw
-should be called. There is no need to call this function directly.
+    <p>Renders <!-- raw HTML omitted -->item<!-- raw HTML omitted --> using <!-- raw HTML omitted -->cr<!-- raw HTML omitted -->, limiting all drawings to the region limited by<br />
+<!-- raw HTML omitted -->x0<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y0<!-- raw HTML omitted -->, <!-- raw HTML omitted -->x1<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->y1<!-- raw HTML omitted -->. If this function returns false, #goc_item_draw<br />
+should be called. There is no need to call this function directly.<br />
 Invalidating the item is the way to go.</p>
 
 
@@ -1428,8 +1431,8 @@ Invalidating the item is the way to go.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new GocItem identical to <!-- raw HTML omitted -->item<!-- raw HTML omitted --> inside the parent GocGroup if not
-NULL.
+    <p>Creates a new GocItem identical to <!-- raw HTML omitted -->item<!-- raw HTML omitted --> inside the parent GocGroup if not<br />
+NULL.<br />
 not possible.</p>
 
 
@@ -1731,8 +1734,8 @@ not possible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Lowers <!-- raw HTML omitted -->item<!-- raw HTML omitted --> by <!-- raw HTML omitted -->n<!-- raw HTML omitted --> steps inside its parent Goc::Group (or less if the list
-is too short) in the item list so that it is displayed more deeply in the
+    <p>Lowers <!-- raw HTML omitted -->item<!-- raw HTML omitted --> by <!-- raw HTML omitted -->n<!-- raw HTML omitted --> steps inside its parent Goc::Group (or less if the list<br />
+is too short) in the item list so that it is displayed more deeply in the<br />
 items stack.</p>
 
 
@@ -1787,7 +1790,7 @@ items stack.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Lowers <!-- raw HTML omitted -->item<!-- raw HTML omitted --> to bottom inside its parent Goc::Group so that it will be at
+    <p>Lowers <!-- raw HTML omitted -->item<!-- raw HTML omitted --> to bottom inside its parent Goc::Group so that it will be at<br />
 least partly hidden by any overlapping item.</p>
 
 
@@ -2021,8 +2024,8 @@ least partly hidden by any overlapping item.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Raises <!-- raw HTML omitted -->item<!-- raw HTML omitted --> by <!-- raw HTML omitted -->n<!-- raw HTML omitted --> steps inside its parent Goc::Group (or less if the list
-is too short) in the item list so that it is displayed nearer the top of
+    <p>Raises <!-- raw HTML omitted -->item<!-- raw HTML omitted --> by <!-- raw HTML omitted -->n<!-- raw HTML omitted --> steps inside its parent Goc::Group (or less if the list<br />
+is too short) in the item list so that it is displayed nearer the top of<br />
 the items stack.</p>
 
 
@@ -2077,7 +2080,7 @@ the items stack.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Raises <!-- raw HTML omitted -->item<!-- raw HTML omitted --> to front so that it becomes the toplevel item inside
+    <p>Raises <!-- raw HTML omitted -->item<!-- raw HTML omitted --> to front so that it becomes the toplevel item inside<br />
 its parent Goc::Group.</p>
 
 
@@ -2113,7 +2116,7 @@ its parent Goc::Group.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set properties and updates the canvas. Using #g_object_set instead would
+    <p>Set properties and updates the canvas. Using #g_object_set instead would<br />
 set the properties, but not update the canvas.</p>
 
 
@@ -2148,7 +2151,7 @@ set the properties, but not update the canvas.</p>
       
       
         &mdash;
-        <div class='inline'><p>value for the first property, followed optionally by more
+        <div class='inline'><p>value for the first property, followed optionally by more<br />
 name/value pairs, followed by nil</p>
 </div>
       
@@ -2436,7 +2439,7 @@ name/value pairs, followed by nil</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

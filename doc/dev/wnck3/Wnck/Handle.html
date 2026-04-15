@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Wnck::Handle";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -369,6 +371,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -538,7 +541,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The default main icon size is %WNCK_DEFAULT_ICON_SIZE. This function allows
+    <p>The default main icon size is %WNCK_DEFAULT_ICON_SIZE. This function allows<br />
 to change this value.</p>
 
 
@@ -593,7 +596,7 @@ to change this value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The default main icon size is %WNCK_DEFAULT_MINI_ICON_SIZE. This function
+    <p>The default main icon size is %WNCK_DEFAULT_MINI_ICON_SIZE. This function<br />
 allows to change this value.</p>
 
 
@@ -648,8 +651,8 @@ allows to change this value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the default Wnck::Screen on the default display.
-returned Wnck::Screen is owned by #WnckHandle and must not be referenced
+    <p>Gets the default Wnck::Screen on the default display.<br />
+returned Wnck::Screen is owned by #WnckHandle and must not be referenced<br />
 or unreferenced. This can return nil if not on X11.</p>
 
 
@@ -689,10 +692,10 @@ or unreferenced. This can return nil if not on X11.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Wnck::Application corresponding to the group leader with <!-- raw HTML omitted -->xwindow<!-- raw HTML omitted -->
-as X window ID.
-<!-- raw HTML omitted -->xwindow<!-- raw HTML omitted -->, or nil if there no such Wnck::Application could be found. The
-returned Wnck::Application is owned by libwnck and must not be referenced or
+    <p>Gets the Wnck::Application corresponding to the group leader with <!-- raw HTML omitted -->xwindow<!-- raw HTML omitted --><br />
+as X window ID.<br />
+<!-- raw HTML omitted -->xwindow<!-- raw HTML omitted -->, or nil if there no such Wnck::Application could be found. The<br />
+returned Wnck::Application is owned by libwnck and must not be referenced or<br />
 unreferenced.</p>
 
 
@@ -751,9 +754,9 @@ unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Wnck::ClassGroup corresponding to <!-- raw HTML omitted -->id<!-- raw HTML omitted -->.
-<!-- raw HTML omitted -->id<!-- raw HTML omitted -->, or nil if there is no Wnck::ClassGroup with the specified
-<!-- raw HTML omitted -->id<!-- raw HTML omitted -->. The returned Wnck::ClassGroup is owned by libwnck and must not be
+    <p>Gets the Wnck::ClassGroup corresponding to <!-- raw HTML omitted -->id<!-- raw HTML omitted -->.<br />
+<!-- raw HTML omitted -->id<!-- raw HTML omitted -->, or nil if there is no Wnck::ClassGroup with the specified<br />
+<!-- raw HTML omitted -->id<!-- raw HTML omitted -->. The returned Wnck::ClassGroup is owned by libwnck and must not be<br />
 referenced or unreferenced.</p>
 
 
@@ -812,8 +815,8 @@ referenced or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Wnck::Screen for a given screen on the default display.
-if no such screen exists. The returned Wnck::Screen is owned by #WnckHandle
+    <p>Gets the Wnck::Screen for a given screen on the default display.<br />
+if no such screen exists. The returned Wnck::Screen is owned by #WnckHandle<br />
 and must not be referenced or unreferenced.</p>
 
 
@@ -872,11 +875,11 @@ and must not be referenced or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Wnck::Screen for the root window at <!-- raw HTML omitted -->root_window_id<!-- raw HTML omitted -->, or
+    <p>Gets the Wnck::Screen for the root window at <!-- raw HTML omitted -->root_window_id<!-- raw HTML omitted -->, or<br />
 nil if no Wnck::Screen exists for this root window.</p>
-<p>This function does not work if wnck_handle_get_screen() was not called
-for the sought Wnck::Screen before, and returns nil.
-<!-- raw HTML omitted -->root_window_id<!-- raw HTML omitted -->, or nil. The returned Wnck::Screen is owned by
+<p>This function does not work if wnck_handle_get_screen() was not called<br />
+for the sought Wnck::Screen before, and returns nil.<br />
+<!-- raw HTML omitted -->root_window_id<!-- raw HTML omitted -->, or nil. The returned Wnck::Screen is owned by<br />
 Wnck::Handle and must not be referenced or unreferenced.</p>
 
 
@@ -935,9 +938,9 @@ Wnck::Handle and must not be referenced or unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a preexisting Wnck::Window for the X window <!-- raw HTML omitted -->xwindow<!-- raw HTML omitted -->. This will not
-create a Wnck::Window if none exists. The function is robust against bogus
-window IDs.
+    <p>Gets a preexisting Wnck::Window for the X window <!-- raw HTML omitted -->xwindow<!-- raw HTML omitted -->. This will not<br />
+create a Wnck::Window if none exists. The function is robust against bogus<br />
+window IDs.<br />
 Wnck::Window is owned by libwnck and must not be referenced or unreferenced.</p>
 
 
@@ -992,7 +995,7 @@ Wnck::Window is owned by libwnck and must not be referenced or unreferenced.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

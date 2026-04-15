@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::GesturePan";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -102,7 +103,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -194,9 +196,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -216,6 +220,7 @@
   
   
   
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="GestureSingle.html" title="Gtk::GestureSingle (class)">GestureSingle</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="GestureSingle.html#button-instance_method" title="Gtk::GestureSingle#button (method)">#button</a></span>, <span class='object_link'><a href="GestureSingle.html#button=-instance_method" title="Gtk::GestureSingle#button= (method)">#button=</a></span>, <span class='object_link'><a href="GestureSingle.html#current_button-instance_method" title="Gtk::GestureSingle#current_button (method)">#current_button</a></span>, <span class='object_link'><a href="GestureSingle.html#current_sequence-instance_method" title="Gtk::GestureSingle#current_sequence (method)">#current_sequence</a></span>, <span class='object_link'><a href="GestureSingle.html#exclusive-instance_method" title="Gtk::GestureSingle#exclusive (method)">#exclusive</a></span>, <span class='object_link'><a href="GestureSingle.html#exclusive=-instance_method" title="Gtk::GestureSingle#exclusive= (method)">#exclusive=</a></span>, <span class='object_link'><a href="GestureSingle.html#exclusive%3F-instance_method" title="Gtk::GestureSingle#exclusive? (method)">#exclusive?</a></span>, <span class='object_link'><a href="GestureSingle.html#touch_only-instance_method" title="Gtk::GestureSingle#touch_only (method)">#touch_only</a></span>, <span class='object_link'><a href="GestureSingle.html#touch_only=-instance_method" title="Gtk::GestureSingle#touch_only= (method)">#touch_only=</a></span>, <span class='object_link'><a href="GestureSingle.html#touch_only%3F-instance_method" title="Gtk::GestureSingle#touch_only? (method)">#touch_only?</a></span></p>
 
@@ -227,9 +232,11 @@
   
   
   
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Gesture.html" title="Gtk::Gesture (class)">Gesture</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Gesture.html#device-instance_method" title="Gtk::Gesture#device (method)">#device</a></span>, <span class='object_link'><a href="Gesture.html#get_bounding_box-instance_method" title="Gtk::Gesture#get_bounding_box (method)">#get_bounding_box</a></span>, <span class='object_link'><a href="Gesture.html#get_bounding_box_center-instance_method" title="Gtk::Gesture#get_bounding_box_center (method)">#get_bounding_box_center</a></span>, <span class='object_link'><a href="Gesture.html#get_last_event-instance_method" title="Gtk::Gesture#get_last_event (method)">#get_last_event</a></span>, <span class='object_link'><a href="Gesture.html#get_point-instance_method" title="Gtk::Gesture#get_point (method)">#get_point</a></span>, <span class='object_link'><a href="Gesture.html#get_sequence_state-instance_method" title="Gtk::Gesture#get_sequence_state (method)">#get_sequence_state</a></span>, <span class='object_link'><a href="Gesture.html#group-instance_method" title="Gtk::Gesture#group (method)">#group</a></span>, <span class='object_link'><a href="Gesture.html#handles_sequence-instance_method" title="Gtk::Gesture#handles_sequence (method)">#handles_sequence</a></span>, <span class='object_link'><a href="Gesture.html#is_active-instance_method" title="Gtk::Gesture#is_active (method)">#is_active</a></span>, <span class='object_link'><a href="Gesture.html#is_grouped_with-instance_method" title="Gtk::Gesture#is_grouped_with (method)">#is_grouped_with</a></span>, <span class='object_link'><a href="Gesture.html#is_recognized-instance_method" title="Gtk::Gesture#is_recognized (method)">#is_recognized</a></span>, <span class='object_link'><a href="Gesture.html#last_updated_sequence-instance_method" title="Gtk::Gesture#last_updated_sequence (method)">#last_updated_sequence</a></span>, <span class='object_link'><a href="Gesture.html#n_points-instance_method" title="Gtk::Gesture#n_points (method)">#n_points</a></span>, <span class='object_link'><a href="Gesture.html#n_points=-instance_method" title="Gtk::Gesture#n_points= (method)">#n_points=</a></span>, <span class='object_link'><a href="Gesture.html#sequences-instance_method" title="Gtk::Gesture#sequences (method)">#sequences</a></span>, <span class='object_link'><a href="Gesture.html#set_sequence_state-instance_method" title="Gtk::Gesture#set_sequence_state (method)">#set_sequence_state</a></span>, <span class='object_link'><a href="Gesture.html#state=-instance_method" title="Gtk::Gesture#state= (method)">#state=</a></span>, <span class='object_link'><a href="Gesture.html#ungroup-instance_method" title="Gtk::Gesture#ungroup (method)">#ungroup</a></span></p>
 
+  
   
   
   
@@ -404,7 +411,7 @@
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GLib::FileError";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -95,8 +97,8 @@
         <dt id="EXIST-constant" class="">EXIST =
           <div class="docstring">
   <div class="discussion">
-    <p>Operation not permitted; only the owner of
-the file (or other resource) or processes with special privileges
+    <p>Operation not permitted; only the owner of<br />
+the file (or other resource) or processes with special privileges<br />
 can perform the operation.</p>
 
 
@@ -112,7 +114,7 @@ can perform the operation.</p>
         <dt id="ISDIR-constant" class="">ISDIR =
           <div class="docstring">
   <div class="discussion">
-    <p>File is a directory; you cannot open a directory
+    <p>File is a directory; you cannot open a directory<br />
 for writing, or create or remove hard links to it.</p>
 
 
@@ -128,7 +130,7 @@ for writing, or create or remove hard links to it.</p>
         <dt id="ACCES-constant" class="">ACCES =
           <div class="docstring">
   <div class="discussion">
-    <p>Permission denied; the file permissions do not
+    <p>Permission denied; the file permissions do not<br />
 allow the attempted operation.</p>
 
 
@@ -159,8 +161,8 @@ allow the attempted operation.</p>
         <dt id="NOENT-constant" class="">NOENT =
           <div class="docstring">
   <div class="discussion">
-    <p>No such file or directory. This is a &quot;file
-doesn't exist&quot; error for ordinary files that are referenced in
+    <p>No such file or directory. This is a &quot;file<br />
+doesn't exist&quot; error for ordinary files that are referenced in<br />
 contexts where they are expected to already exist.</p>
 
 
@@ -176,7 +178,7 @@ contexts where they are expected to already exist.</p>
         <dt id="NOTDIR-constant" class="">NOTDIR =
           <div class="docstring">
   <div class="discussion">
-    <p>A file that isn't a directory was specified when
+    <p>A file that isn't a directory was specified when<br />
 a directory is required.</p>
 
 
@@ -192,10 +194,10 @@ a directory is required.</p>
         <dt id="NXIO-constant" class="">NXIO =
           <div class="docstring">
   <div class="discussion">
-    <p>No such device or address. The system tried to
-use the device represented by a file you specified, and it
-couldn't find the device. This can mean that the device file was
-installed incorrectly, or that the physical device is missing or
+    <p>No such device or address. The system tried to<br />
+use the device represented by a file you specified, and it<br />
+couldn't find the device. This can mean that the device file was<br />
+installed incorrectly, or that the physical device is missing or<br />
 not correctly attached to the computer.</p>
 
 
@@ -211,7 +213,7 @@ not correctly attached to the computer.</p>
         <dt id="NODEV-constant" class="">NODEV =
           <div class="docstring">
   <div class="discussion">
-    <p>The underlying file system of the specified file
+    <p>The underlying file system of the specified file<br />
 does not support memory mapping.</p>
 
 
@@ -227,7 +229,7 @@ does not support memory mapping.</p>
         <dt id="ROFS-constant" class="">ROFS =
           <div class="docstring">
   <div class="discussion">
-    <p>The directory containing the new link can't be
+    <p>The directory containing the new link can't be<br />
 modified because it's on a read-only file system.</p>
 
 
@@ -258,8 +260,8 @@ modified because it's on a read-only file system.</p>
         <dt id="FAULT-constant" class="">FAULT =
           <div class="docstring">
   <div class="discussion">
-    <p>You passed in a pointer to bad memory.
-(GLib won't reliably return this, don't pass in pointers to bad
+    <p>You passed in a pointer to bad memory.<br />
+(GLib won't reliably return this, don't pass in pointers to bad<br />
 memory.)</p>
 
 
@@ -275,8 +277,8 @@ memory.)</p>
         <dt id="LOOP-constant" class="">LOOP =
           <div class="docstring">
   <div class="discussion">
-    <p>Too many levels of symbolic links were encountered
-in looking up a file name. This often indicates a cycle of symbolic
+    <p>Too many levels of symbolic links were encountered<br />
+in looking up a file name. This often indicates a cycle of symbolic<br />
 links.</p>
 
 
@@ -292,7 +294,7 @@ links.</p>
         <dt id="NOSPC-constant" class="">NOSPC =
           <div class="docstring">
   <div class="discussion">
-    <p>No space left on device; write operation on a
+    <p>No space left on device; write operation on a<br />
 file failed because the disk is full.</p>
 
 
@@ -308,7 +310,7 @@ file failed because the disk is full.</p>
         <dt id="NOMEM-constant" class="">NOMEM =
           <div class="docstring">
   <div class="discussion">
-    <p>No memory available. The system cannot allocate
+    <p>No memory available. The system cannot allocate<br />
 more virtual memory because its capacity is full.</p>
 
 
@@ -324,8 +326,8 @@ more virtual memory because its capacity is full.</p>
         <dt id="MFILE-constant" class="">MFILE =
           <div class="docstring">
   <div class="discussion">
-    <p>The current process has too many files open and
-can't open any more. Duplicate descriptors do count toward this
+    <p>The current process has too many files open and<br />
+can't open any more. Duplicate descriptors do count toward this<br />
 limit.</p>
 
 
@@ -341,7 +343,7 @@ limit.</p>
         <dt id="NFILE-constant" class="">NFILE =
           <div class="docstring">
   <div class="discussion">
-    <p>There are too many distinct file openings in the
+    <p>There are too many distinct file openings in the<br />
 entire system.</p>
 
 
@@ -357,8 +359,8 @@ entire system.</p>
         <dt id="BADF-constant" class="">BADF =
           <div class="docstring">
   <div class="discussion">
-    <p>Bad file descriptor; for example, I/O on a
-descriptor that has been closed or reading from a descriptor open
+    <p>Bad file descriptor; for example, I/O on a<br />
+descriptor that has been closed or reading from a descriptor open<br />
 only for writing (or vice versa).</p>
 
 
@@ -374,8 +376,8 @@ only for writing (or vice versa).</p>
         <dt id="INVAL-constant" class="">INVAL =
           <div class="docstring">
   <div class="discussion">
-    <p>Invalid argument. This is used to indicate
-various kinds of problems with passing the wrong argument to a
+    <p>Invalid argument. This is used to indicate<br />
+various kinds of problems with passing the wrong argument to a<br />
 library function.</p>
 
 
@@ -391,11 +393,11 @@ library function.</p>
         <dt id="PIPE-constant" class="">PIPE =
           <div class="docstring">
   <div class="discussion">
-    <p>Broken pipe; there is no process reading from the
-other end of a pipe. Every library function that returns this
-error code also generates a 'SIGPIPE' signal; this signal
-terminates the program if not handled or blocked. Thus, your
-program will never actually see this code unless it has handled
+    <p>Broken pipe; there is no process reading from the<br />
+other end of a pipe. Every library function that returns this<br />
+error code also generates a 'SIGPIPE' signal; this signal<br />
+terminates the program if not handled or blocked. Thus, your<br />
+program will never actually see this code unless it has handled<br />
 or blocked 'SIGPIPE'.</p>
 
 
@@ -411,7 +413,7 @@ or blocked 'SIGPIPE'.</p>
         <dt id="AGAIN-constant" class="">AGAIN =
           <div class="docstring">
   <div class="discussion">
-    <p>Resource temporarily unavailable; the call might
+    <p>Resource temporarily unavailable; the call might<br />
 work if you try again later.</p>
 
 
@@ -427,8 +429,8 @@ work if you try again later.</p>
         <dt id="INTR-constant" class="">INTR =
           <div class="docstring">
   <div class="discussion">
-    <p>Interrupted function call; an asynchronous signal
-occurred and prevented completion of the call. When this
+    <p>Interrupted function call; an asynchronous signal<br />
+occurred and prevented completion of the call. When this<br />
 happens, you should try the call again.</p>
 
 
@@ -444,8 +446,8 @@ happens, you should try the call again.</p>
         <dt id="IO-constant" class="">IO =
           <div class="docstring">
   <div class="discussion">
-    <p>Input/output error; usually used for physical read
-or write errors. i.e. the disk or other physical device hardware
+    <p>Input/output error; usually used for physical read<br />
+or write errors. i.e. the disk or other physical device hardware<br />
 is returning errors.</p>
 
 
@@ -461,8 +463,8 @@ is returning errors.</p>
         <dt id="PERM-constant" class="">PERM =
           <div class="docstring">
   <div class="discussion">
-    <p>Operation not permitted; only the owner of the
-file (or other resource) or processes with special privileges can
+    <p>Operation not permitted; only the owner of the<br />
+file (or other resource) or processes with special privileges can<br />
 perform the operation.</p>
 
 
@@ -478,7 +480,7 @@ perform the operation.</p>
         <dt id="NOSYS-constant" class="">NOSYS =
           <div class="docstring">
   <div class="discussion">
-    <p>Function not implemented; this indicates that
+    <p>Function not implemented; this indicates that<br />
 the system is missing some functionality.</p>
 
 
@@ -494,9 +496,9 @@ the system is missing some functionality.</p>
         <dt id="FAILED-constant" class="">FAILED =
           <div class="docstring">
   <div class="discussion">
-    <p>Does not correspond to a UNIX error code; this
-is the standard &quot;failed for unspecified reason&quot; error code present
-in all #GError error code enumerations. Returned if no specific
+    <p>Does not correspond to a UNIX error code; this<br />
+is the standard &quot;failed for unspecified reason&quot; error code present<br />
+in all #GError error code enumerations. Returned if no specific<br />
 code applies.</p>
 
 
@@ -525,7 +527,7 @@ code applies.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

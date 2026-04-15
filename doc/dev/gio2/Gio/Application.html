@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::Application";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -171,6 +173,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1171,6 +1174,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1188,9 +1192,9 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new #GApplication instance.</p>
-<p>If non-nil, the application id must be valid.  See
+<p>If non-nil, the application id must be valid.  See<br />
 g_application_id_is_valid().</p>
-<p>If no application ID is given then some features of #GApplication
+<p>If no application ID is given then some features of #GApplication<br />
 (most notably application uniqueness) will be disabled.</p>
 
 
@@ -1255,8 +1259,8 @@ g_application_id_is_valid().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the default #GApplication instance for this process.</p>
-<p>Normally there is only one #GApplication per process and it becomes
-the default when it is created.  You can exercise more control over
+<p>Normally there is only one #GApplication per process and it becomes<br />
+the default when it is created.  You can exercise more control over<br />
 this by using g_application_set_default().</p>
 <p>If there is no default application then nil is returned.</p>
 
@@ -1298,24 +1302,24 @@ this by using g_application_set_default().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if <!-- raw HTML omitted -->application_id<!-- raw HTML omitted --> is a valid application identifier.</p>
-<p>A valid ID is required for calls to g_application_new() and
+<p>A valid ID is required for calls to g_application_new() and<br />
 g_application_set_application_id().</p>
-<p>Application identifiers follow the same format as
-<a href="https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-bus">D-Bus well-known bus names</a>.
-For convenience, the restrictions on application identifiers are
+<p>Application identifiers follow the same format as<br />
+<a href="https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-bus">D-Bus well-known bus names</a>.<br />
+For convenience, the restrictions on application identifiers are<br />
 reproduced here:</p>
 <ul>
 <li>
-<p>Application identifiers are composed of 1 or more elements separated by a
+<p>Application identifiers are composed of 1 or more elements separated by a<br />
 period (<code>.</code>) character. All elements must contain at least one character.</p>
 </li>
 <li>
-<p>Each element must only contain the ASCII characters <code>[A-Z][a-z][0-9]_-</code>,
-with <code>-</code> discouraged in new application identifiers. Each element must not
+<p>Each element must only contain the ASCII characters <code>[A-Z][a-z][0-9]_-</code>,<br />
+with <code>-</code> discouraged in new application identifiers. Each element must not<br />
 begin with a digit.</p>
 </li>
 <li>
-<p>Application identifiers must contain at least one <code>.</code> (period) character
+<p>Application identifiers must contain at least one <code>.</code> (period) character<br />
 (and thus at least two elements).</p>
 </li>
 <li>
@@ -1325,24 +1329,24 @@ begin with a digit.</p>
 <p>Application identifiers must not exceed 255 characters.</p>
 </li>
 </ul>
-<p>Note that the hyphen (<code>-</code>) character is allowed in application identifiers,
-but is problematic or not allowed in various specifications and APIs that
-refer to D-Bus, such as
-<a href="http://docs.flatpak.org/en/latest/introduction.html#identifiers">Flatpak application IDs</a>,
-the
-<a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html#dbus"><code>DBusActivatable</code> interface in the Desktop Entry Specification</a>,
-and the convention that an application's &quot;main&quot; interface and object path
-resemble its application identifier and bus name. To avoid situations that
-require special-case handling, it is recommended that new application
+<p>Note that the hyphen (<code>-</code>) character is allowed in application identifiers,<br />
+but is problematic or not allowed in various specifications and APIs that<br />
+refer to D-Bus, such as<br />
+<a href="http://docs.flatpak.org/en/latest/introduction.html#identifiers">Flatpak application IDs</a>,<br />
+the<br />
+<a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html#dbus"><code>DBusActivatable</code> interface in the Desktop Entry Specification</a>,<br />
+and the convention that an application's &quot;main&quot; interface and object path<br />
+resemble its application identifier and bus name. To avoid situations that<br />
+require special-case handling, it is recommended that new application<br />
 identifiers consistently replace hyphens with underscores.</p>
-<p>Like D-Bus interface names, application identifiers should start with the
-reversed DNS domain name of the author of the interface (in lower-case), and
-it is conventional for the rest of the application identifier to consist of
+<p>Like D-Bus interface names, application identifiers should start with the<br />
+reversed DNS domain name of the author of the interface (in lower-case), and<br />
+it is conventional for the rest of the application identifier to consist of<br />
 words run together, with initial capital letters.</p>
-<p>As with D-Bus interface names, if the author's DNS domain name contains
-hyphen/minus characters they should be replaced by underscores, and if it
-contains leading digits they should be escaped by prepending an underscore.
-For example, if the owner of 7-zip.org used an application identifier for an
+<p>As with D-Bus interface names, if the author's DNS domain name contains<br />
+hyphen/minus characters they should be replaced by underscores, and if it<br />
+contains leading digits they should be escaped by prepending an underscore.<br />
+For example, if the owner of 7-zip.org used an application identifier for an<br />
 archiving application, it might be named <code>org._7_zip.Archiver</code>.</p>
 
 
@@ -1462,7 +1466,7 @@ archiving application, it might be named <code>org._7_zip.Archiver</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Activates the application.</p>
-<p>In essence, this results in the #GApplication::activate signal being
+<p>In essence, this results in the #GApplication::activate signal being<br />
 emitted in the primary instance.</p>
 <p>The application must be registered before calling this function.</p>
 
@@ -1500,13 +1504,13 @@ emitted in the primary instance.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Add an option to be handled by <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
-<p>Calling this function is the equivalent of calling
-g_application_add_main_option_entries() with a single GOption::Entry
+<p>Calling this function is the equivalent of calling<br />
+g_application_add_main_option_entries() with a single GOption::Entry<br />
 that has its arg_data member set to nil.</p>
-<p>The parsed arguments will be packed into a GVariant::Dict which
-is passed to #GApplication::handle-local-options. If
-%G_APPLICATION_HANDLES_COMMAND_LINE is set, then it will also
-be sent to the primary instance. See
+<p>The parsed arguments will be packed into a GVariant::Dict which<br />
+is passed to #GApplication::handle-local-options. If<br />
+%G_APPLICATION_HANDLES_COMMAND_LINE is set, then it will also<br />
+be sent to the primary instance. See<br />
 g_application_add_main_option_entries() for more details.</p>
 <p>See GOption::Entry for more documentation of the arguments.</p>
 
@@ -1602,7 +1606,7 @@ g_application_add_main_option_entries() for more details.</p>
       
       
         &mdash;
-        <div class='inline'><p>the placeholder to use for the extra argument
+        <div class='inline'><p>the placeholder to use for the extra argument<br />
 parsed by the option in <code>--help</code> output</p>
 </div>
       
@@ -1640,44 +1644,44 @@ parsed by the option in <code>--help</code> output</p>
   <div class="discussion">
     <p>Adds main option entries to be handled by <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
 <p>This function is comparable to g_option_context_add_main_entries().</p>
-<p>After the commandline arguments are parsed, the
-#GApplication::handle-local-options signal will be emitted.  At this
-point, the application can inspect the values pointed to by <!-- raw HTML omitted -->arg_data<!-- raw HTML omitted -->
+<p>After the commandline arguments are parsed, the<br />
+#GApplication::handle-local-options signal will be emitted.  At this<br />
+point, the application can inspect the values pointed to by <!-- raw HTML omitted -->arg_data<!-- raw HTML omitted --><br />
 in the given GOption::Entrys.</p>
-<p>Unlike GOption::Context, #GApplication supports giving a nil
-<!-- raw HTML omitted -->arg_data<!-- raw HTML omitted --> for a non-callback GOption::Entry.  This results in the
-argument in question being packed into a GVariant::Dict which is also
-passed to #GApplication::handle-local-options, where it can be
-inspected and modified.  If %G_APPLICATION_HANDLES_COMMAND_LINE is
-set, then the resulting dictionary is sent to the primary instance,
-where g_application_command_line_get_options_dict() will return it.
-As it has been passed outside the process at this point, the types of all
-values in the options dict must be checked before being used.
-This &quot;packing&quot; is done according to the type of the argument --
-booleans for normal flags, strings for strings, bytestrings for
-filenames, etc.  The packing only occurs if the flag is given (ie: we
+<p>Unlike GOption::Context, #GApplication supports giving a nil<br />
+<!-- raw HTML omitted -->arg_data<!-- raw HTML omitted --> for a non-callback GOption::Entry.  This results in the<br />
+argument in question being packed into a GVariant::Dict which is also<br />
+passed to #GApplication::handle-local-options, where it can be<br />
+inspected and modified.  If %G_APPLICATION_HANDLES_COMMAND_LINE is<br />
+set, then the resulting dictionary is sent to the primary instance,<br />
+where g_application_command_line_get_options_dict() will return it.<br />
+As it has been passed outside the process at this point, the types of all<br />
+values in the options dict must be checked before being used.<br />
+This &quot;packing&quot; is done according to the type of the argument --<br />
+booleans for normal flags, strings for strings, bytestrings for<br />
+filenames, etc.  The packing only occurs if the flag is given (ie: we<br />
 do not pack a &quot;false&quot; #GVariant in the case that a flag is missing).</p>
-<p>In general, it is recommended that all commandline arguments are
-parsed locally.  The options dictionary should then be used to
-transmit the result of the parsing to the primary instance, where
-g_variant_dict_lookup() can be used.  For local options, it is
-possible to either use <!-- raw HTML omitted -->arg_data<!-- raw HTML omitted --> in the usual way, or to consult (and
+<p>In general, it is recommended that all commandline arguments are<br />
+parsed locally.  The options dictionary should then be used to<br />
+transmit the result of the parsing to the primary instance, where<br />
+g_variant_dict_lookup() can be used.  For local options, it is<br />
+possible to either use <!-- raw HTML omitted -->arg_data<!-- raw HTML omitted --> in the usual way, or to consult (and<br />
 potentially remove) the option from the options dictionary.</p>
-<p>This function is new in GLib 2.40.  Before then, the only real choice
-was to send all of the commandline arguments (options and all) to the
-primary instance for handling.  #GApplication ignored them completely
-on the local side.  Calling this function &quot;opts in&quot; to the new
-behaviour, and in particular, means that unrecognised options will be
-treated as errors.  Unrecognised options have never been ignored when
+<p>This function is new in GLib 2.40.  Before then, the only real choice<br />
+was to send all of the commandline arguments (options and all) to the<br />
+primary instance for handling.  #GApplication ignored them completely<br />
+on the local side.  Calling this function &quot;opts in&quot; to the new<br />
+behaviour, and in particular, means that unrecognised options will be<br />
+treated as errors.  Unrecognised options have never been ignored when<br />
 %G_APPLICATION_HANDLES_COMMAND_LINE is unset.</p>
-<p>If #GApplication::handle-local-options needs to see the list of
-filenames, then the use of %G_OPTION_REMAINING is recommended.  If
-<!-- raw HTML omitted -->arg_data<!-- raw HTML omitted --> is nil then %G_OPTION_REMAINING can be used as a key into
-the options dictionary.  If you do use %G_OPTION_REMAINING then you
-need to handle these arguments for yourself because once they are
-consumed, they will no longer be visible to the default handling
+<p>If #GApplication::handle-local-options needs to see the list of<br />
+filenames, then the use of %G_OPTION_REMAINING is recommended.  If<br />
+<!-- raw HTML omitted -->arg_data<!-- raw HTML omitted --> is nil then %G_OPTION_REMAINING can be used as a key into<br />
+the options dictionary.  If you do use %G_OPTION_REMAINING then you<br />
+need to handle these arguments for yourself because once they are<br />
+consumed, they will no longer be visible to the default handling<br />
 (which treats them as filenames to be opened).</p>
-<p>It is important to use the proper GVariant format when retrieving
+<p>It is important to use the proper GVariant format when retrieving<br />
 the options with g_variant_dict_lookup():</p>
 <ul>
 <li>for %G_OPTION_ARG_NONE, use <code>b</code></li>
@@ -1707,7 +1711,7 @@ the options with g_variant_dict_lookup():</p>
       
       
         &mdash;
-        <div class='inline'><p>the
+        <div class='inline'><p>the<br />
 main options for the application</p>
 </div>
       
@@ -1745,23 +1749,23 @@ main options for the application</p>
   <div class="discussion">
     <p>Adds a GOption::Group to the commandline handling of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
 <p>This function is comparable to g_option_context_add_group().</p>
-<p>Unlike g_application_add_main_option_entries(), this function does
-not deal with nil <!-- raw HTML omitted -->arg_data<!-- raw HTML omitted --> and never transmits options to the
+<p>Unlike g_application_add_main_option_entries(), this function does<br />
+not deal with nil <!-- raw HTML omitted -->arg_data<!-- raw HTML omitted --> and never transmits options to the<br />
 primary instance.</p>
-<p>The reason for that is because, by the time the options arrive at the
-primary instance, it is typically too late to do anything with them.
-Taking the GTK option group as an example: GTK will already have been
-initialised by the time the #GApplication::command-line handler runs.
-In the case that this is not the first-running instance of the
-application, the existing instance may already have been running for
+<p>The reason for that is because, by the time the options arrive at the<br />
+primary instance, it is typically too late to do anything with them.<br />
+Taking the GTK option group as an example: GTK will already have been<br />
+initialised by the time the #GApplication::command-line handler runs.<br />
+In the case that this is not the first-running instance of the<br />
+application, the existing instance may already have been running for<br />
 a very long time.</p>
-<p>This means that the options from GOption::Group are only really usable
-in the case that the instance of the application being run is the
-first instance.  Passing options like <code>--display=</code> or <code>--gdk-debug=</code>
+<p>This means that the options from GOption::Group are only really usable<br />
+in the case that the instance of the application being run is the<br />
+first instance.  Passing options like <code>--display=</code> or <code>--gdk-debug=</code><br />
 on future runs will have no effect on the existing primary instance.</p>
-<p>Calling this function will cause the options in the supplied option
-group to be parsed, but it does not cause you to be &quot;opted in&quot; to the
-new functionality whereby unrecognised options are rejected even if
+<p>Calling this function will cause the options in the supplied option<br />
+group to be parsed, but it does not cause you to be &quot;opted in&quot; to the<br />
+new functionality whereby unrecognised options are rejected even if<br />
 %G_APPLICATION_HANDLES_COMMAND_LINE was given.</p>
 
 
@@ -1922,10 +1926,10 @@ new functionality whereby unrecognised options are rejected even if
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Marks <!-- raw HTML omitted -->application<!-- raw HTML omitted --> as busy (see g_application_mark_busy()) while
+    <p>Marks <!-- raw HTML omitted -->application<!-- raw HTML omitted --> as busy (see g_application_mark_busy()) while<br />
 <!-- raw HTML omitted -->property<!-- raw HTML omitted --> on <!-- raw HTML omitted -->object<!-- raw HTML omitted --> is true.</p>
-<p>The binding holds a reference to <!-- raw HTML omitted -->application<!-- raw HTML omitted --> while it is active, but
-not to <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. Instead, the binding is destroyed when <!-- raw HTML omitted -->object<!-- raw HTML omitted --> is
+<p>The binding holds a reference to <!-- raw HTML omitted -->application<!-- raw HTML omitted --> while it is active, but<br />
+not to <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. Instead, the binding is destroyed when <!-- raw HTML omitted -->object<!-- raw HTML omitted --> is<br />
 finalized.</p>
 
 
@@ -1996,14 +2000,14 @@ finalized.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the GDBus::Connection being used by the application, or nil.</p>
-<p>If #GApplication is using its D-Bus backend then this function will
-return the GDBus::Connection being used for uniqueness and
-communication with the desktop environment and other instances of the
+<p>If #GApplication is using its D-Bus backend then this function will<br />
+return the GDBus::Connection being used for uniqueness and<br />
+communication with the desktop environment and other instances of the<br />
 application.</p>
-<p>If #GApplication is not using D-Bus then this function will return
-nil.  This includes the situation where the D-Bus backend would
+<p>If #GApplication is not using D-Bus then this function will return<br />
+nil.  This includes the situation where the D-Bus backend would<br />
 normally be in use but we were unable to connect to the bus.</p>
-<p>This function must not be called before the application has been
+<p>This function must not be called before the application has been<br />
 registered.  See g_application_get_is_registered().</p>
 
 
@@ -2044,15 +2048,15 @@ registered.  See g_application_get_is_registered().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the D-Bus object path being used by the application, or nil.</p>
-<p>If #GApplication is using its D-Bus backend then this function will
-return the D-Bus object path that #GApplication is using.  If the
-application is the primary instance then there is an object published
-at this path.  If the application is not the primary instance then
+<p>If #GApplication is using its D-Bus backend then this function will<br />
+return the D-Bus object path that #GApplication is using.  If the<br />
+application is the primary instance then there is an object published<br />
+at this path.  If the application is not the primary instance then<br />
 the result of this function is undefined.</p>
-<p>If #GApplication is not using D-Bus then this function will return
-nil.  This includes the situation where the D-Bus backend would
+<p>If #GApplication is not using D-Bus then this function will return<br />
+nil.  This includes the situation where the D-Bus backend would<br />
 normally be in use but we were unable to connect to the bus.</p>
-<p>This function must not be called before the application has been
+<p>This function must not be called before the application has been<br />
 registered.  See g_application_get_is_registered().</p>
 
 
@@ -2199,8 +2203,8 @@ registered.  See g_application_get_is_registered().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Increases the use count of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
-<p>Use this function to indicate that the application has a reason to
-continue to run.  For example, g_application_hold() is called by GTK
+<p>Use this function to indicate that the application has a reason to<br />
+continue to run.  For example, g_application_hold() is called by GTK<br />
 when a toplevel window is on the screen.</p>
 <p>To cancel the hold, call g_application_release().</p>
 
@@ -2343,7 +2347,7 @@ when a toplevel window is on the screen.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the application's current busy state, as set through
+    <p>Gets the application's current busy state, as set through<br />
 g_application_mark_busy() or g_application_bind_busy_property().</p>
 
 
@@ -2383,7 +2387,7 @@ g_application_mark_busy() or g_application_bind_busy_property().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the application is currently marked as busy through
+    <p>Whether the application is currently marked as busy through<br />
 g_application_mark_busy() or g_application_bind_busy_property().</p>
 
 
@@ -2451,7 +2455,7 @@ g_application_mark_busy() or g_application_bind_busy_property().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the application is currently marked as busy through
+    <p>Whether the application is currently marked as busy through<br />
 g_application_mark_busy() or g_application_bind_busy_property().</p>
 
 
@@ -2492,7 +2496,7 @@ g_application_mark_busy() or g_application_bind_busy_property().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is registered.</p>
-<p>An application is registered if g_application_register() has been
+<p>An application is registered if g_application_register() has been<br />
 successfully called.</p>
 
 
@@ -2639,12 +2643,12 @@ successfully called.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is remote.</p>
-<p>If <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is remote then it means that another instance of
-application already exists (the 'primary' instance).  Calls to
-perform actions on <!-- raw HTML omitted -->application<!-- raw HTML omitted --> will result in the actions being
+<p>If <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is remote then it means that another instance of<br />
+application already exists (the 'primary' instance).  Calls to<br />
+perform actions on <!-- raw HTML omitted -->application<!-- raw HTML omitted --> will result in the actions being<br />
 performed by the primary instance.</p>
-<p>The value of this property cannot be accessed before
-g_application_register() has been called.  See
+<p>The value of this property cannot be accessed before<br />
+g_application_register() has been called.  See<br />
 g_application_get_is_registered().</p>
 
 
@@ -2791,10 +2795,10 @@ g_application_get_is_registered().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Increases the busy count of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
-<p>Use this function to indicate that the application is busy, for instance
+<p>Use this function to indicate that the application is busy, for instance<br />
 while a long running operation is pending.</p>
-<p>The busy state will be exposed to other processes, so a session shell will
-use that information to indicate the state to the user (e.g. with a
+<p>The busy state will be exposed to other processes, so a session shell will<br />
+use that information to indicate the state to the user (e.g. with a<br />
 spinner).</p>
 <p>To cancel the busy indication, use g_application_unmark_busy().</p>
 <p>The application must be registered before calling this function.</p>
@@ -2833,14 +2837,14 @@ spinner).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Opens the given files.</p>
-<p>In essence, this results in the #GApplication::open signal being emitted
+<p>In essence, this results in the #GApplication::open signal being emitted<br />
 in the primary instance.</p>
 <p><!-- raw HTML omitted -->n_files<!-- raw HTML omitted --> must be greater than zero.</p>
-<p><!-- raw HTML omitted -->hint<!-- raw HTML omitted --> is simply passed through to the ::open signal.  It is
-intended to be used by applications that have multiple modes for
-opening files (eg: &quot;view&quot; vs &quot;edit&quot;, etc).  Unless you have a need
+<p><!-- raw HTML omitted -->hint<!-- raw HTML omitted --> is simply passed through to the ::open signal.  It is<br />
+intended to be used by applications that have multiple modes for<br />
+opening files (eg: &quot;view&quot; vs &quot;edit&quot;, etc).  Unless you have a need<br />
 for this functionality, you should use &quot;&quot;.</p>
-<p>The application must be registered before calling this function
+<p>The application must be registered before calling this function<br />
 and it must have the %G_APPLICATION_HANDLES_OPEN flag set.</p>
 
 
@@ -2945,7 +2949,7 @@ and it must have the %G_APPLICATION_HANDLES_OPEN flag set.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string to be shown in <code>--help</code> output
+        <div class='inline'><p>a string to be shown in <code>--help</code> output<br />
 after the list of options, or nil</p>
 </div>
       
@@ -2982,7 +2986,7 @@ after the list of options, or nil</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the parameter string to be used by the commandline handling of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
-<p>This function registers the argument to be passed to g_option_context_new()
+<p>This function registers the argument to be passed to g_option_context_new()<br />
 when the internal GOption::Context of <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is created.</p>
 <p>See g_option_context_new() for more information about <!-- raw HTML omitted -->parameter_string<!-- raw HTML omitted -->.</p>
 
@@ -3003,7 +3007,7 @@ when the internal GOption::Context of <!-- raw HTML omitted -->application<!-- r
       
       
         &mdash;
-        <div class='inline'><p>a string which is displayed
+        <div class='inline'><p>a string which is displayed<br />
 in the first line of <code>--help</code> output, after the usage summary <code>programname [OPTION...]</code>.</p>
 </div>
       
@@ -3059,7 +3063,7 @@ in the first line of <code>--help</code> output, after the usage summary <code>p
       
       
         &mdash;
-        <div class='inline'><p>a string to be shown in <code>--help</code> output
+        <div class='inline'><p>a string to be shown in <code>--help</code> output<br />
 before the list of options, or nil</p>
 </div>
       
@@ -3096,14 +3100,14 @@ before the list of options, or nil</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Immediately quits the application.</p>
-<p>Upon return to the mainloop, g_application_run() will return,
+<p>Upon return to the mainloop, g_application_run() will return,<br />
 calling only the 'shutdown' function before doing so.</p>
-<p>The hold count is ignored.
-Take care if your code has called g_application_hold() on the application and
-is therefore still expecting it to exist.
-(Note that you may have called g_application_hold() indirectly, for example
+<p>The hold count is ignored.<br />
+Take care if your code has called g_application_hold() on the application and<br />
+is therefore still expecting it to exist.<br />
+(Note that you may have called g_application_hold() indirectly, for example<br />
 through gtk_application_add_window().)</p>
-<p>The result of calling g_application_run() again after it returns is
+<p>The result of calling g_application_run() again after it returns is<br />
 unspecified.</p>
 
 
@@ -3140,27 +3144,27 @@ unspecified.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Attempts registration of the application.</p>
-<p>This is the point at which the application discovers if it is the
-primary instance or merely acting as a remote for an already-existing
-primary instance.  This is implemented by attempting to acquire the
-application identifier as a unique bus name on the session bus using
+<p>This is the point at which the application discovers if it is the<br />
+primary instance or merely acting as a remote for an already-existing<br />
+primary instance.  This is implemented by attempting to acquire the<br />
+application identifier as a unique bus name on the session bus using<br />
 GDBus.</p>
-<p>If there is no application ID or if %G_APPLICATION_NON_UNIQUE was
+<p>If there is no application ID or if %G_APPLICATION_NON_UNIQUE was<br />
 given, then this process will always become the primary instance.</p>
-<p>Due to the internal architecture of GDBus, method calls can be
-dispatched at any time (even if a main loop is not running).  For
-this reason, you must ensure that any object paths that you wish to
+<p>Due to the internal architecture of GDBus, method calls can be<br />
+dispatched at any time (even if a main loop is not running).  For<br />
+this reason, you must ensure that any object paths that you wish to<br />
 register are registered before calling this function.</p>
-<p>If the application has already been registered then true is
+<p>If the application has already been registered then true is<br />
 returned with no work performed.</p>
-<p>The #GApplication::startup signal is emitted if registration succeeds
-and <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is the primary instance (including the non-unique
+<p>The #GApplication::startup signal is emitted if registration succeeds<br />
+and <!-- raw HTML omitted -->application<!-- raw HTML omitted --> is the primary instance (including the non-unique<br />
 case).</p>
-<p>In the event of an error (such as <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> being cancelled, or a
-failure to connect to the session bus), false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted -->
+<p>In the event of an error (such as <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> being cancelled, or a<br />
+failure to connect to the session bus), false is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --><br />
 is set appropriately.</p>
-<p>Note: the return value of this function is not an indicator that this
-instance is or is not the primary instance of the application.  See
+<p>Note: the return value of this function is not an indicator that this<br />
+instance is or is not the primary instance of the application.  See<br />
 g_application_get_is_remote() for that.</p>
 
 
@@ -3221,7 +3225,7 @@ g_application_get_is_remote() for that.</p>
   <div class="discussion">
     <p>Decrease the use count of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
 <p>When the use count reaches zero, the application will stop running.</p>
-<p>Never call this function except to cancel the effect of a previous
+<p>Never call this function except to cancel the effect of a previous<br />
 call to g_application_hold().</p>
 
 
@@ -3364,69 +3368,69 @@ call to g_application_hold().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Runs the application.</p>
-<p>This function is intended to be run from main() and its return value
-is intended to be returned by main(). Although you are expected to pass
-the <!-- raw HTML omitted -->argc<!-- raw HTML omitted -->, <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> parameters from main() to this function, it is possible
-to pass nil if <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> is not available or commandline handling is not
-required.  Note that on Windows, <!-- raw HTML omitted -->argc<!-- raw HTML omitted --> and <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> are ignored, and
-g_win32_get_command_line() is called internally (for proper support
+<p>This function is intended to be run from main() and its return value<br />
+is intended to be returned by main(). Although you are expected to pass<br />
+the <!-- raw HTML omitted -->argc<!-- raw HTML omitted -->, <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> parameters from main() to this function, it is possible<br />
+to pass nil if <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> is not available or commandline handling is not<br />
+required.  Note that on Windows, <!-- raw HTML omitted -->argc<!-- raw HTML omitted --> and <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> are ignored, and<br />
+g_win32_get_command_line() is called internally (for proper support<br />
 of Unicode commandline arguments).</p>
-<p>#GApplication will attempt to parse the commandline arguments.  You
-can add commandline flags to the list of recognised options by way of
-g_application_add_main_option_entries().  After this, the
-#GApplication::handle-local-options signal is emitted, from which the
+<p>#GApplication will attempt to parse the commandline arguments.  You<br />
+can add commandline flags to the list of recognised options by way of<br />
+g_application_add_main_option_entries().  After this, the<br />
+#GApplication::handle-local-options signal is emitted, from which the<br />
 application can inspect the values of its GOption::Entrys.</p>
-<p>#GApplication::handle-local-options is a good place to handle options
-such as <code>--version</code>, where an immediate reply from the local process is
-desired (instead of communicating with an already-running instance).
-A #GApplication::handle-local-options handler can stop further processing
-by returning a non-negative value, which then becomes the exit status of
+<p>#GApplication::handle-local-options is a good place to handle options<br />
+such as <code>--version</code>, where an immediate reply from the local process is<br />
+desired (instead of communicating with an already-running instance).<br />
+A #GApplication::handle-local-options handler can stop further processing<br />
+by returning a non-negative value, which then becomes the exit status of<br />
 the process.</p>
-<p>What happens next depends on the flags: if
-%G_APPLICATION_HANDLES_COMMAND_LINE was specified then the remaining
-commandline arguments are sent to the primary instance, where a
-#GApplication::command-line signal is emitted.  Otherwise, the
-remaining commandline arguments are assumed to be a list of files.
-If there are no files listed, the application is activated via the
-#GApplication::activate signal.  If there are one or more files, and
-%G_APPLICATION_HANDLES_OPEN was specified then the files are opened
+<p>What happens next depends on the flags: if<br />
+%G_APPLICATION_HANDLES_COMMAND_LINE was specified then the remaining<br />
+commandline arguments are sent to the primary instance, where a<br />
+#GApplication::command-line signal is emitted.  Otherwise, the<br />
+remaining commandline arguments are assumed to be a list of files.<br />
+If there are no files listed, the application is activated via the<br />
+#GApplication::activate signal.  If there are one or more files, and<br />
+%G_APPLICATION_HANDLES_OPEN was specified then the files are opened<br />
 via the #GApplication::open signal.</p>
-<p>If you are interested in doing more complicated local handling of the
-commandline then you should implement your own #GApplication subclass
-and override local_command_line(). In this case, you most likely want
-to return true from your local_command_line() implementation to
-suppress the default handling. See
-[gapplication-example-cmdline2.c][https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline2.c]
+<p>If you are interested in doing more complicated local handling of the<br />
+commandline then you should implement your own #GApplication subclass<br />
+and override local_command_line(). In this case, you most likely want<br />
+to return true from your local_command_line() implementation to<br />
+suppress the default handling. See<br />
+[gapplication-example-cmdline2.c][https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline2.c]<br />
 for an example.</p>
-<p>If, after the above is done, the use count of the application is zero
-then the exit status is returned immediately.  If the use count is
-non-zero then the default main context is iterated until the use count
+<p>If, after the above is done, the use count of the application is zero<br />
+then the exit status is returned immediately.  If the use count is<br />
+non-zero then the default main context is iterated until the use count<br />
 falls to zero, at which point 0 is returned.</p>
-<p>If the %G_APPLICATION_IS_SERVICE flag is set, then the service will
-run for as much as 10 seconds with a use count of zero while waiting
-for the message that caused the activation to arrive.  After that,
-if the use count falls to zero the application will exit immediately,
-except in the case that g_application_set_inactivity_timeout() is in
+<p>If the %G_APPLICATION_IS_SERVICE flag is set, then the service will<br />
+run for as much as 10 seconds with a use count of zero while waiting<br />
+for the message that caused the activation to arrive.  After that,<br />
+if the use count falls to zero the application will exit immediately,<br />
+except in the case that g_application_set_inactivity_timeout() is in<br />
 use.</p>
-<p>This function sets the prgname (g_set_prgname()), if not already set,
+<p>This function sets the prgname (g_set_prgname()), if not already set,<br />
 to the basename of argv[0].</p>
-<p>Much like g_main_loop_run(), this function will acquire the main context
+<p>Much like g_main_loop_run(), this function will acquire the main context<br />
 for the duration that the application is running.</p>
-<p>Since 2.40, applications that are not explicitly flagged as services
-or launchers (ie: neither %G_APPLICATION_IS_SERVICE or
-%G_APPLICATION_IS_LAUNCHER are given as flags) will check (from the
-default handler for local_command_line) if &quot;--gapplication-service&quot;
-was given in the command line.  If this flag is present then normal
-commandline processing is interrupted and the
-%G_APPLICATION_IS_SERVICE flag is set.  This provides a &quot;compromise&quot;
-solution whereby running an application directly from the commandline
-will invoke it in the normal way (which can be useful for debugging)
-while still allowing applications to be D-Bus activated in service
-mode.  The D-Bus service file should invoke the executable with
-&quot;--gapplication-service&quot; as the sole commandline argument.  This
-approach is suitable for use by most graphical applications but
-should not be used from applications like editors that need precise
-control over when processes invoked via the commandline will exit and
+<p>Since 2.40, applications that are not explicitly flagged as services<br />
+or launchers (ie: neither %G_APPLICATION_IS_SERVICE or<br />
+%G_APPLICATION_IS_LAUNCHER are given as flags) will check (from the<br />
+default handler for local_command_line) if &quot;--gapplication-service&quot;<br />
+was given in the command line.  If this flag is present then normal<br />
+commandline processing is interrupted and the<br />
+%G_APPLICATION_IS_SERVICE flag is set.  This provides a &quot;compromise&quot;<br />
+solution whereby running an application directly from the commandline<br />
+will invoke it in the normal way (which can be useful for debugging)<br />
+while still allowing applications to be D-Bus activated in service<br />
+mode.  The D-Bus service file should invoke the executable with<br />
+&quot;--gapplication-service&quot; as the sole commandline argument.  This<br />
+approach is suitable for use by most graphical applications but<br />
+should not be used from applications like editors that need precise<br />
+control over when processes invoked via the commandline will exit and<br />
 what their exit status will be.</p>
 
 
@@ -3500,27 +3504,27 @@ what their exit status will be.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sends a notification on behalf of <!-- raw HTML omitted -->application<!-- raw HTML omitted --> to the desktop shell.
-There is no guarantee that the notification is displayed immediately,
+    <p>Sends a notification on behalf of <!-- raw HTML omitted -->application<!-- raw HTML omitted --> to the desktop shell.<br />
+There is no guarantee that the notification is displayed immediately,<br />
 or even at all.</p>
-<p>Notifications may persist after the application exits. It will be
-D-Bus-activated when the notification or one of its actions is
+<p>Notifications may persist after the application exits. It will be<br />
+D-Bus-activated when the notification or one of its actions is<br />
 activated.</p>
-<p>Modifying <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> after this call has no effect. However, the
+<p>Modifying <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> after this call has no effect. However, the<br />
 object can be reused for a later call to this function.</p>
-<p><!-- raw HTML omitted -->id<!-- raw HTML omitted --> may be any string that uniquely identifies the event for the
-application. It does not need to be in any special format. For
-example, &quot;new-message&quot; might be appropriate for a notification about
+<p><!-- raw HTML omitted -->id<!-- raw HTML omitted --> may be any string that uniquely identifies the event for the<br />
+application. It does not need to be in any special format. For<br />
+example, &quot;new-message&quot; might be appropriate for a notification about<br />
 new messages.</p>
-<p>If a previous notification was sent with the same <!-- raw HTML omitted -->id<!-- raw HTML omitted -->, it will be
-replaced with <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> and shown again as if it was a new
-notification. This works even for notifications sent from a previous
+<p>If a previous notification was sent with the same <!-- raw HTML omitted -->id<!-- raw HTML omitted -->, it will be<br />
+replaced with <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> and shown again as if it was a new<br />
+notification. This works even for notifications sent from a previous<br />
 execution of the application, as long as <!-- raw HTML omitted -->id<!-- raw HTML omitted --> is the same string.</p>
-<p><!-- raw HTML omitted -->id<!-- raw HTML omitted --> may be nil, but it is impossible to replace or withdraw
+<p><!-- raw HTML omitted -->id<!-- raw HTML omitted --> may be nil, but it is impossible to replace or withdraw<br />
 notifications without an id.</p>
-<p>If <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> is no longer relevant, it can be withdrawn with
+<p>If <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> is no longer relevant, it can be withdrawn with<br />
 g_application_withdraw_notification().</p>
-<p>It is an error to call this function if <!-- raw HTML omitted -->application<!-- raw HTML omitted --> has no
+<p>It is an error to call this function if <!-- raw HTML omitted -->application<!-- raw HTML omitted --> has no<br />
 application ID.</p>
 
 
@@ -3590,10 +3594,10 @@ application ID.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets or unsets the default application for the process, as returned
+    <p>Sets or unsets the default application for the process, as returned<br />
 by g_application_get_default().</p>
-<p>This function does not take its own reference on <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.  If
-<!-- raw HTML omitted -->application<!-- raw HTML omitted --> is destroyed then the default application will revert
+<p>This function does not take its own reference on <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.  If<br />
+<!-- raw HTML omitted -->application<!-- raw HTML omitted --> is destroyed then the default application will revert<br />
 back to nil.</p>
 
 
@@ -3629,8 +3633,8 @@ back to nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Destroys a binding between <!-- raw HTML omitted -->property<!-- raw HTML omitted --> and the busy state of
-<!-- raw HTML omitted -->application<!-- raw HTML omitted --> that was previously created with
+    <p>Destroys a binding between <!-- raw HTML omitted -->property<!-- raw HTML omitted --> and the busy state of<br />
+<!-- raw HTML omitted -->application<!-- raw HTML omitted --> that was previously created with<br />
 g_application_bind_busy_property().</p>
 
 
@@ -3701,9 +3705,9 @@ g_application_bind_busy_property().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Decreases the busy count of <!-- raw HTML omitted -->application<!-- raw HTML omitted -->.</p>
-<p>When the busy count reaches zero, the new state will be propagated
+<p>When the busy count reaches zero, the new state will be propagated<br />
 to other processes.</p>
-<p>This function must only be called to cancel the effect of a previous
+<p>This function must only be called to cancel the effect of a previous<br />
 call to g_application_mark_busy().</p>
 
 
@@ -3845,15 +3849,15 @@ call to g_application_mark_busy().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Withdraws a notification that was sent with
+    <p>Withdraws a notification that was sent with<br />
 g_application_send_notification().</p>
-<p>This call does nothing if a notification with <!-- raw HTML omitted -->id<!-- raw HTML omitted --> doesn't exist or
+<p>This call does nothing if a notification with <!-- raw HTML omitted -->id<!-- raw HTML omitted --> doesn't exist or<br />
 the notification was never sent.</p>
-<p>This function works even for notifications sent in previous
-executions of this application, as long <!-- raw HTML omitted -->id<!-- raw HTML omitted --> is the same as it was for
+<p>This function works even for notifications sent in previous<br />
+executions of this application, as long <!-- raw HTML omitted -->id<!-- raw HTML omitted --> is the same as it was for<br />
 the sent notification.</p>
-<p>Note that notifications are dismissed when the user clicks on one
-of the buttons in a notification or triggers its default action, so
+<p>Note that notifications are dismissed when the user clicks on one<br />
+of the buttons in a notification or triggers its default action, so<br />
 there is no need to explicitly withdraw the notification in that case.</p>
 
 
@@ -3904,7 +3908,7 @@ there is no need to explicitly withdraw the notification in that case.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

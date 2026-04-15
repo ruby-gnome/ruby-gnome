@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::TreeViewColumn";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -101,8 +102,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk3/deprecated.rb<span class="defines">,<br />
+    <dd>lib/gtk3/deprecated.rb<span class="defines">,<br>
   lib/gtk3/tree-view-column.rb</span>
+
 </dd>
   </dl>
   
@@ -111,12 +113,12 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>A visible column in a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeView] widget</p>
-<p>The <code>GtkTreeViewColumn</code> object represents a visible column in a <code>GtkTreeView</code> widget.
-It allows to set properties of the column header, and functions as a holding pen
+<p>The <code>GtkTreeViewColumn</code> object represents a visible column in a <code>GtkTreeView</code> widget.<br />
+It allows to set properties of the column header, and functions as a holding pen<br />
 for the cell renderers which determine how the data in the column is displayed.</p>
-<p>Please refer to the <a href="section-tree-widget.html">tree widget conceptual overview</a>
-for an overview of all the objects and data types related to the tree widget and
-how they work together, and to the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeView] documentation for specifics
+<p>Please refer to the <a href="section-tree-widget.html">tree widget conceptual overview</a><br />
+for an overview of all the objects and data types related to the tree widget and<br />
+how they work together, and to the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeView] documentation for specifics<br />
 about the CSS node structure for treeviews and their headers.</p>
 
 
@@ -1575,6 +1577,7 @@ about the CSS node structure for treeviews and their headers.</p>
 
       
     </ul>
+    
   
 
 
@@ -1593,9 +1596,9 @@ about the CSS node structure for treeviews and their headers.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>GtkTreeViewColumn</code> with a number of default values.
-This is equivalent to calling gtk_tree_view_column_set_title(),
-gtk_tree_view_column_pack_start(), and
+    <p>Creates a new <code>GtkTreeViewColumn</code> with a number of default values.<br />
+This is equivalent to calling gtk_tree_view_column_set_title(),<br />
+gtk_tree_view_column_pack_start(), and<br />
 gtk_tree_view_column_set_attributes() on the newly created <code>GtkTreeViewColumn</code>.</p>
 <p>Here’s a simple example:</p>
 <pre class="code ruby"><code class="ruby"> enum { TEXT_COLUMN, COLOR_COLUMN, N_COLUMNS };
@@ -1769,11 +1772,11 @@ gtk_tree_view_column_set_attributes() on the newly created <code>GtkTreeViewColu
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds an attribute mapping to the list in <!-- raw HTML omitted -->tree_column<!-- raw HTML omitted -->.</p>
-<p>The <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is the
-column of the model to get a value from, and the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> is the
-parameter on <!-- raw HTML omitted -->cell_renderer<!-- raw HTML omitted --> to be set from the value. So for example
-if column 2 of the model contains strings, you could have the
-“text” attribute of a <code>GtkCellRendererText</code> get its values from
+<p>The <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is the<br />
+column of the model to get a value from, and the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> is the<br />
+parameter on <!-- raw HTML omitted -->cell_renderer<!-- raw HTML omitted --> to be set from the value. So for example<br />
+if column 2 of the model contains strings, you could have the<br />
+“text” attribute of a <code>GtkCellRendererText</code> get its values from<br />
 column 2.</p>
 
 
@@ -1879,11 +1882,11 @@ column 2.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds an attribute mapping to the list in <!-- raw HTML omitted -->tree_column<!-- raw HTML omitted -->.</p>
-<p>The <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is the
-column of the model to get a value from, and the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> is the
-parameter on <!-- raw HTML omitted -->cell_renderer<!-- raw HTML omitted --> to be set from the value. So for example
-if column 2 of the model contains strings, you could have the
-“text” attribute of a <code>GtkCellRendererText</code> get its values from
+<p>The <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is the<br />
+column of the model to get a value from, and the <!-- raw HTML omitted -->attribute<!-- raw HTML omitted --> is the<br />
+parameter on <!-- raw HTML omitted -->cell_renderer<!-- raw HTML omitted --> to be set from the value. So for example<br />
+if column 2 of the model contains strings, you could have the<br />
+“text” attribute of a <code>GtkCellRendererText</code> get its values from<br />
 column 2.</p>
 
 
@@ -2127,7 +2130,7 @@ column 2.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkCellArea</code> used to layout cell renderers for this column.</p>
-<p>If no area is specified when creating the tree view column with gtk_tree_view_column_new_with_area()
+<p>If no area is specified when creating the tree view column with gtk_tree_view_column_new_with_area()<br />
 a horizontally oriented <code>GtkCellAreaBox</code> will be used.</p>
 
 
@@ -2168,7 +2171,7 @@ a horizontally oriented <code>GtkCellAreaBox</code> will be used.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkCellArea</code> used to layout cell renderers for this column.</p>
-<p>If no area is specified when creating the tree view column with gtk_tree_view_column_new_with_area()
+<p>If no area is specified when creating the tree view column with gtk_tree_view_column_new_with_area()<br />
 a horizontally oriented <code>GtkCellAreaBox</code> will be used.</p>
 
 
@@ -2237,7 +2240,7 @@ a horizontally oriented <code>GtkCellAreaBox</code> will be used.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Obtains the horizontal position and size of a cell in a column.</p>
-<p>If the  cell is not found in the column, <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> and <!-- raw HTML omitted -->width<!-- raw HTML omitted -->
+<p>If the  cell is not found in the column, <!-- raw HTML omitted -->start_pos<!-- raw HTML omitted --> and <!-- raw HTML omitted -->width<!-- raw HTML omitted --><br />
 are not changed and false is returned.</p>
 
 
@@ -2272,7 +2275,7 @@ are not changed and false is returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the horizontal
+        <div class='inline'><p>return location for the horizontal<br />
 position of <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> within <!-- raw HTML omitted -->tree_column<!-- raw HTML omitted --></p>
 </div>
       
@@ -2327,7 +2330,7 @@ position of <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> within <!-- r
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the width and height needed to render the column.  This is used
+    <p>Obtains the width and height needed to render the column.  This is used<br />
 primarily by the <code>GtkTreeView</code>.</p>
 
 
@@ -2427,8 +2430,8 @@ primarily by the <code>GtkTreeView</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if any of the cells packed into the <!-- raw HTML omitted -->tree_column<!-- raw HTML omitted --> are visible.
-For this to be meaningful, you must first initialize the cells with
+    <p>Returns true if any of the cells packed into the <!-- raw HTML omitted -->tree_column<!-- raw HTML omitted --> are visible.<br />
+For this to be meaningful, you must first initialize the cells with<br />
 gtk_tree_view_column_cell_set_cell_data()</p>
 
 
@@ -2468,9 +2471,9 @@ gtk_tree_view_column_cell_set_cell_data()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the cell renderer based on the <!-- raw HTML omitted -->tree_model<!-- raw HTML omitted --> and <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.  That is, for
-every attribute mapping in <!-- raw HTML omitted -->tree_column<!-- raw HTML omitted -->, it will get a value from the set
-column on the <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->, and use that value to set the attribute on the cell
+    <p>Sets the cell renderer based on the <!-- raw HTML omitted -->tree_model<!-- raw HTML omitted --> and <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.  That is, for<br />
+every attribute mapping in <!-- raw HTML omitted -->tree_column<!-- raw HTML omitted -->, it will get a value from the set<br />
+column on the <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->, and use that value to set the attribute on the cell<br />
 renderer.  This is used primarily by the <code>GtkTreeView</code>.</p>
 
 
@@ -2605,7 +2608,7 @@ renderer.  This is used primarily by the <code>GtkTreeView</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Clears all existing attributes previously set with
+    <p>Clears all existing attributes previously set with<br />
 gtk_tree_view_column_set_attributes().</p>
 
 
@@ -2804,7 +2807,7 @@ gtk_tree_view_column_set_attributes().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Emits the “clicked” signal on the column.  This function will only work if
+    <p>Emits the “clicked” signal on the column.  This function will only work if<br />
 <!-- raw HTML omitted -->tree_column<!-- raw HTML omitted --> is clickable.</p>
 
 
@@ -3089,7 +3092,7 @@ gtk_tree_view_column_set_attributes().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the current keyboard focus to be at <!-- raw HTML omitted -->cell<!-- raw HTML omitted -->, if the column contains
+    <p>Sets the current keyboard focus to be at <!-- raw HTML omitted -->cell<!-- raw HTML omitted -->, if the column contains<br />
 2 or more editable and activatable cells.</p>
 
 
@@ -3144,9 +3147,9 @@ gtk_tree_view_column_set_attributes().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>GtkTreeViewColumn</code> with a number of default values.
-This is equivalent to calling gtk_tree_view_column_set_title(),
-gtk_tree_view_column_pack_start(), and
+    <p>Creates a new <code>GtkTreeViewColumn</code> with a number of default values.<br />
+This is equivalent to calling gtk_tree_view_column_set_title(),<br />
+gtk_tree_view_column_pack_start(), and<br />
 gtk_tree_view_column_set_attributes() on the newly created <code>GtkTreeViewColumn</code>.</p>
 <p>Here’s a simple example:</p>
 <pre class="code ruby"><code class="ruby"> enum { TEXT_COLUMN, COLOR_COLUMN, N_COLUMNS };
@@ -3473,8 +3476,8 @@ gtk_tree_view_column_set_attributes() on the newly created <code>GtkTreeViewColu
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds the <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> to end of the column. If <!-- raw HTML omitted -->expand<!-- raw HTML omitted --> is false, then the <!-- raw HTML omitted -->cell<!-- raw HTML omitted -->
-is allocated no more space than it needs. Any unused space is divided
+    <p>Adds the <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> to end of the column. If <!-- raw HTML omitted -->expand<!-- raw HTML omitted --> is false, then the <!-- raw HTML omitted -->cell<!-- raw HTML omitted --><br />
+is allocated no more space than it needs. Any unused space is divided<br />
 evenly between cells for which <!-- raw HTML omitted -->expand<!-- raw HTML omitted --> is true.</p>
 
 
@@ -3544,8 +3547,8 @@ evenly between cells for which <!-- raw HTML omitted -->expand<!-- raw HTML omit
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Packs the <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> into the beginning of the column. If <!-- raw HTML omitted -->expand<!-- raw HTML omitted --> is false, then
-the <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> is allocated no more space than it needs. Any unused space is divided
+    <p>Packs the <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> into the beginning of the column. If <!-- raw HTML omitted -->expand<!-- raw HTML omitted --> is false, then<br />
+the <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> is allocated no more space than it needs. Any unused space is divided<br />
 evenly between cells for which <!-- raw HTML omitted -->expand<!-- raw HTML omitted --> is true.</p>
 
 
@@ -3615,7 +3618,7 @@ evenly between cells for which <!-- raw HTML omitted -->expand<!-- raw HTML omit
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Flags the column, and the cell renderers added to this column, to have
+    <p>Flags the column, and the cell renderers added to this column, to have<br />
 their sizes renegotiated.</p>
 
 
@@ -3940,8 +3943,8 @@ their sizes renegotiated.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the attributes in the list as the attributes of <!-- raw HTML omitted -->tree_column<!-- raw HTML omitted -->.</p>
-<p>The attributes should be in attribute/column order, as in
-gtk_tree_view_column_add_attribute(). All existing attributes
+<p>The attributes should be in attribute/column order, as in<br />
+gtk_tree_view_column_add_attribute(). All existing attributes<br />
 are removed, and replaced with the new attributes.</p>
 
 
@@ -4012,10 +4015,10 @@ are removed, and replaced with the new attributes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the <code>GtkTreeCellDataFunc</code> to use for the column.</p>
-<p>This
-function is used instead of the standard attributes mapping for
-setting the column value, and should set the value of <!-- raw HTML omitted -->tree_column<!-- raw HTML omitted -->'s
-cell renderer as appropriate.  <!-- raw HTML omitted -->func<!-- raw HTML omitted --> may be nil to remove an
+<p>This<br />
+function is used instead of the standard attributes mapping for<br />
+setting the column value, and should set the value of <!-- raw HTML omitted -->tree_column<!-- raw HTML omitted -->'s<br />
+cell renderer as appropriate.  <!-- raw HTML omitted -->func<!-- raw HTML omitted --> may be nil to remove an<br />
 older one.</p>
 
 
@@ -4220,7 +4223,7 @@ older one.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Logical sort column ID this column sorts on when selected for sorting. Setting the sort column ID makes the column header
+    <p>Logical sort column ID this column sorts on when selected for sorting. Setting the sort column ID makes the column header<br />
 clickable. Set to -1 to make the column unsortable.</p>
 
 
@@ -4260,7 +4263,7 @@ clickable. Set to -1 to make the column unsortable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Logical sort column ID this column sorts on when selected for sorting. Setting the sort column ID makes the column header
+    <p>Logical sort column ID this column sorts on when selected for sorting. Setting the sort column ID makes the column header<br />
 clickable. Set to -1 to make the column unsortable.</p>
 
 
@@ -4787,8 +4790,8 @@ clickable. Set to -1 to make the column unsortable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the <code>GtkTreeView</code> wherein <!-- raw HTML omitted -->tree_column<!-- raw HTML omitted --> has been inserted.
-If <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is currently not inserted in any tree view, nil is
+    <p>Returns the <code>GtkTreeView</code> wherein <!-- raw HTML omitted -->tree_column<!-- raw HTML omitted --> has been inserted.<br />
+If <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is currently not inserted in any tree view, nil is<br />
 returned.</p>
 
 
@@ -4807,7 +4810,7 @@ returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>The tree view wherein <!-- raw HTML omitted -->column<!-- raw HTML omitted -->
+        <div class='inline'><p>The tree view wherein <!-- raw HTML omitted -->column<!-- raw HTML omitted --><br />
 has been inserted</p>
 </div>
       
@@ -4829,7 +4832,7 @@ has been inserted</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if <!-- raw HTML omitted -->tree_column<!-- raw HTML omitted --> is visible.
+    <p>Returns true if <!-- raw HTML omitted -->tree_column<!-- raw HTML omitted --> is visible.<br />
 the tree will show the column.</p>
 
 
@@ -5285,7 +5288,7 @@ the tree will show the column.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

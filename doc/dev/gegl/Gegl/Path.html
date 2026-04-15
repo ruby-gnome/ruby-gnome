@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gegl::Path";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -161,6 +163,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -770,6 +773,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -786,8 +790,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Gegl::Path with the nodes described in the string
-<!-- raw HTML omitted -->instructions<!-- raw HTML omitted -->. See gegl_path_parse_string() for details of the
+    <p>Creates a new Gegl::Path with the nodes described in the string<br />
+<!-- raw HTML omitted -->instructions<!-- raw HTML omitted -->. See gegl_path_parse_string() for details of the<br />
 format of the string.</p>
 <p>Returns the newly created Gegl::Path</p>
 
@@ -837,9 +841,9 @@ format of the string.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Add a new flattener, the flattener should produce a type of path that
-GeglPath already understands, if the flattener is unable to flatten
-the incoming path (doesn't understand the instructions), the original
+    <p>Add a new flattener, the flattener should produce a type of path that<br />
+GeglPath already understands, if the flattener is unable to flatten<br />
+the incoming path (doesn't understand the instructions), the original<br />
 path should be returned.</p>
 
 
@@ -894,8 +898,8 @@ path should be returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a new type to the path system, FIXME this should probably
-return something on registration conflicts, for now it expects
+    <p>Adds a new type to the path system, FIXME this should probably<br />
+return something on registration conflicts, for now it expects<br />
 all registered paths to be aware of each other.</p>
 
 
@@ -986,8 +990,8 @@ all registered paths to be aware of each other.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Use as follows: gegl_path_append (path, 'M', 0.0, 0.0);
-and gegl_path_append (path, 'C', 10.0, 10.0, 50.0, 10.0, 60.0, 0.0) the
+    <p>Use as follows: gegl_path_append (path, 'M', 0.0, 0.0);<br />
+and gegl_path_append (path, 'C', 10.0, 10.0, 50.0, 10.0, 60.0, 0.0) the<br />
 number of arguments are determined from the instruction provided.</p>
 
 
@@ -1042,7 +1046,7 @@ number of arguments are determined from the instruction provided.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Compute the coordinates of the path at the <!-- raw HTML omitted -->position<!-- raw HTML omitted --> (length measured from
+    <p>Compute the coordinates of the path at the <!-- raw HTML omitted -->position<!-- raw HTML omitted --> (length measured from<br />
 start of path, not including discontinuities).</p>
 
 
@@ -1127,7 +1131,7 @@ start of path, not including discontinuities).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Compute <!-- raw HTML omitted -->num_samples<!-- raw HTML omitted --> for a path into the provided arrays <!-- raw HTML omitted -->xs<!-- raw HTML omitted --> and <!-- raw HTML omitted -->ys<!-- raw HTML omitted -->
+    <p>Compute <!-- raw HTML omitted -->num_samples<!-- raw HTML omitted --> for a path into the provided arrays <!-- raw HTML omitted -->xs<!-- raw HTML omitted --> and <!-- raw HTML omitted -->ys<!-- raw HTML omitted --><br />
 the returned values include the start and end positions of the path.</p>
 
 
@@ -1212,8 +1216,8 @@ the returned values include the start and end positions of the path.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Compute a corresponding y coordinate for a given x input coordinate,
-returns 0 if computed correctly and -1 if the path doesn't exist for the
+    <p>Compute a corresponding y coordinate for a given x input coordinate,<br />
+returns 0 if computed correctly and -1 if the path doesn't exist for the<br />
 specified x coordinate.</p>
 
 
@@ -1319,7 +1323,7 @@ specified x coordinate.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Figure out what and where on a path is closest to arbitrary coordinates.</p>
-<p>Returns the length along the path where the closest point was encountered.
+<p>Returns the length along the path where the closest point was encountered.<br />
 was deemed the closest coordinate.</p>
 
 
@@ -1434,7 +1438,7 @@ was deemed the closest coordinate.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Marks the path as dirty and issues an invalidation for the path rendering,
+    <p>Marks the path as dirty and issues an invalidation for the path rendering,<br />
 use this if modifying the values of a GeglPathPoint inline.</p>
 
 
@@ -1505,7 +1509,7 @@ use this if modifying the values of a GeglPathPoint inline.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Execute a provided function for every node in the path (useful for
+    <p>Execute a provided function for every node in the path (useful for<br />
 drawing and otherwise traversing a path.)</p>
 
 
@@ -1575,7 +1579,7 @@ drawing and otherwise traversing a path.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Execute a provided function for the segments of a poly line approximating
+    <p>Execute a provided function for the segments of a poly line approximating<br />
 the path.</p>
 
 
@@ -1645,7 +1649,7 @@ the path.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Make the <!-- raw HTML omitted -->GeglPath<!-- raw HTML omitted --> stop firing signals as it changes must be paired with a
+    <p>Make the <!-- raw HTML omitted -->GeglPath<!-- raw HTML omitted --> stop firing signals as it changes must be paired with a<br />
 gegl_path_thaw() for the signals to start again.</p>
 
 
@@ -1904,7 +1908,7 @@ gegl_path_thaw() for the signals to start again.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Insert the new node <!-- raw HTML omitted -->node<!-- raw HTML omitted --> at position <!-- raw HTML omitted -->pos<!-- raw HTML omitted --> in <!-- raw HTML omitted -->path<!-- raw HTML omitted -->.
+    <p>Insert the new node <!-- raw HTML omitted -->node<!-- raw HTML omitted --> at position <!-- raw HTML omitted -->pos<!-- raw HTML omitted --> in <!-- raw HTML omitted -->path<!-- raw HTML omitted -->.<br />
 if <!-- raw HTML omitted -->pos<!-- raw HTML omitted --> = -1, the node is added in the last position.</p>
 
 
@@ -2050,7 +2054,7 @@ if <!-- raw HTML omitted -->pos<!-- raw HTML omitted --> = -1, the node is added
 </h3><div class="docstring">
   <div class="discussion">
     <p>Set the transformation matrix of the path.</p>
-<p>The path is transformed through this matrix when being evaluated,
+<p>The path is transformed through this matrix when being evaluated,<br />
 causing the calculated positions and length to be changed by the transform.</p>
 
 
@@ -2144,7 +2148,7 @@ causing the calculated positions and length to be changed by the transform.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Parses <!-- raw HTML omitted -->instructions<!-- raw HTML omitted --> and appends corresponding nodes to path (call
+    <p>Parses <!-- raw HTML omitted -->instructions<!-- raw HTML omitted --> and appends corresponding nodes to path (call<br />
 gegl_path_clean() first if you want to replace the existing path.</p>
 
 
@@ -2392,7 +2396,7 @@ gegl_path_clean() first if you want to replace the existing path.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Serialize the paths nodes to a string.
+    <p>Serialize the paths nodes to a string.<br />
 need to free this with g_free().</p>
 
 
@@ -2428,7 +2432,7 @@ need to free this with g_free().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

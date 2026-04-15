@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::PageSetup";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -102,20 +104,20 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>A <code>GtkPageSetup</code> object stores the page size, orientation and margins.</p>
-<p>The idea is that you can get one of these from the page setup dialog
-and then pass it to the <code>GtkPrintOperation</code> when printing.
-The benefit of splitting this out of the <code>GtkPrintSettings</code> is that
-these affect the actual layout of the page, and thus need to be set
+<p>The idea is that you can get one of these from the page setup dialog<br />
+and then pass it to the <code>GtkPrintOperation</code> when printing.<br />
+The benefit of splitting this out of the <code>GtkPrintSettings</code> is that<br />
+these affect the actual layout of the page, and thus need to be set<br />
 long before user prints.</p>
-<h2>Margins</h2>
-<p>The margins specified in this object are the “print margins”, i.e. the
-parts of the page that the printer cannot print on. These are different
-from the layout margins that a word processor uses; they are typically
+<h2><a href="#margins" aria-hidden="true" class="anchor" id="margins"></a>Margins</h2>
+<p>The margins specified in this object are the “print margins”, i.e. the<br />
+parts of the page that the printer cannot print on. These are different<br />
+from the layout margins that a word processor uses; they are typically<br />
 used to determine the minimal size for the layout margins.</p>
-<p>To obtain a <code>GtkPageSetup</code> use [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PageSetup.new] to get the defaults,
-or use [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.print_run_page_setup_dialog] to show the page setup dialog
+<p>To obtain a <code>GtkPageSetup</code> use [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PageSetup.new] to get the defaults,<br />
+or use [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.print_run_page_setup_dialog] to show the page setup dialog<br />
 and receive the resulting page setup.</p>
-<h2>A page setup dialog</h2>
+<h2><a href="#a-page-setup-dialog" aria-hidden="true" class="anchor" id="a-page-setup-dialog"></a>A page setup dialog</h2>
 <pre class="code c"><code class="c">static GtkPrintSettings *settings = NULL;
 static GtkPageSetup *page_setup = NULL;
 
@@ -713,6 +715,7 @@ do_page_setup (void)
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -729,9 +732,9 @@ do_page_setup (void)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reads the page setup from the group <!-- raw HTML omitted -->group_name<!-- raw HTML omitted --> in the key file
+    <p>Reads the page setup from the group <!-- raw HTML omitted -->group_name<!-- raw HTML omitted --> in the key file<br />
 <!-- raw HTML omitted -->key_file<!-- raw HTML omitted -->.</p>
-<p>Returns a new <code>GtkPageSetup</code> object with the restored
+<p>Returns a new <code>GtkPageSetup</code> object with the restored<br />
 page setup, or nil if an error occurred.</p>
 
 
@@ -766,7 +769,7 @@ page setup, or nil if an error occurred.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of the group in the key_file to read
+        <div class='inline'><p>the name of the group in the key_file to read<br />
 to use the default name “Page Setup”</p>
 </div>
       
@@ -952,8 +955,8 @@ to use the default name “Page Setup”</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the page height in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
-<p>Note that this function takes orientation
-and margins into consideration.
+<p>Note that this function takes orientation<br />
+and margins into consideration.<br />
 See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PageSetup.get_paper_height].</p>
 
 
@@ -1013,8 +1016,8 @@ See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PageSetup.get_p
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the page width in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
-<p>Note that this function takes orientation
-and margins into consideration.
+<p>Note that this function takes orientation<br />
+and margins into consideration.<br />
 See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PageSetup.get_paper_width].</p>
 
 
@@ -1074,8 +1077,8 @@ See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PageSetup.get_p
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the paper height in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
-<p>Note that this function takes orientation,
-but not margins into consideration.
+<p>Note that this function takes orientation,<br />
+but not margins into consideration.<br />
 See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PageSetup.get_page_height].</p>
 
 
@@ -1135,8 +1138,8 @@ See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PageSetup.get_p
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the paper width in units of <!-- raw HTML omitted -->unit<!-- raw HTML omitted -->.</p>
-<p>Note that this function takes orientation,
-but not margins into consideration.
+<p>Note that this function takes orientation,<br />
+but not margins into consideration.<br />
 See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PageSetup.get_page_width].</p>
 
 
@@ -1370,7 +1373,7 @@ See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PageSetup.get_p
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reads the page setup from the group <!-- raw HTML omitted -->group_name<!-- raw HTML omitted --> in the key file
+    <p>Reads the page setup from the group <!-- raw HTML omitted -->group_name<!-- raw HTML omitted --> in the key file<br />
 <!-- raw HTML omitted -->key_file<!-- raw HTML omitted -->.</p>
 
 
@@ -1405,7 +1408,7 @@ See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PageSetup.get_p
       
       
         &mdash;
-        <div class='inline'><p>the name of the group in the key_file to read
+        <div class='inline'><p>the name of the group in the key_file to read<br />
 to use the default name “Page Setup”</p>
 </div>
       
@@ -1577,7 +1580,7 @@ to use the default name “Page Setup”</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the paper size of the <code>GtkPageSetup</code> without
+    <p>Sets the paper size of the <code>GtkPageSetup</code> without<br />
 changing the margins.</p>
 <p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PageSetup.set_paper_size_and_default_margins].</p>
 
@@ -1633,7 +1636,7 @@ changing the margins.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the paper size of the <code>GtkPageSetup</code> and modifies
+    <p>Sets the paper size of the <code>GtkPageSetup</code> and modifies<br />
 the margins according to the new paper size.</p>
 
 
@@ -2095,7 +2098,7 @@ the margins according to the new paper size.</p>
       
       
         &mdash;
-        <div class='inline'><p>the group to add the settings to in <!-- raw HTML omitted -->key_file<!-- raw HTML omitted -->,
+        <div class='inline'><p>the group to add the settings to in <!-- raw HTML omitted -->key_file<!-- raw HTML omitted -->,<br />
 or nil to use the default name “Page Setup”</p>
 </div>
       
@@ -2127,7 +2130,7 @@ or nil to use the default name “Page Setup”</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

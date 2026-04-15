@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GstBase::Aggregator";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,19 +101,20 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The aggregator base class will handle in a thread-safe way all manners of
-concurrent flushes, seeks, pad additions and removals, leaving to the
-subclass the responsibility of clipping buffers, and aggregating buffers in
+    <p>The aggregator base class will handle in a thread-safe way all manners of<br />
+concurrent flushes, seeks, pad additions and removals, leaving to the<br />
+subclass the responsibility of clipping buffers, and aggregating buffers in<br />
 the way the implementor sees fit.</p>
 <p>It will also take care of event ordering (stream-start, segment, eos).</p>
-<p>Basically, a simple implementation will override <!-- raw HTML omitted -->aggregate<!-- raw HTML omitted -->, and call
+<p>Basically, a simple implementation will override <!-- raw HTML omitted -->aggregate<!-- raw HTML omitted -->, and call<br />
 _finish_buffer from inside that function.</p>
 
 
@@ -713,9 +715,11 @@ _finish_buffer from inside that function.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -727,6 +731,7 @@ _finish_buffer from inside that function.</p>
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gst/Element.html" title="Gst::Element (class)">Gst::Element</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../Gst/Element.html#>>-instance_method" title="Gst::Element#&gt;&gt; (method)">#>></a></span>, <span class='object_link'><a href="../Gst/Element.html#[]-class_method" title="Gst::Element.[] (method)">[]</a></span>, <span class='object_link'><a href="../Gst/Element.html#abort_state-instance_method" title="Gst::Element#abort_state (method)">#abort_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_metadata-instance_method" title="Gst::Element#add_metadata (method)">#add_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_pad-instance_method" title="Gst::Element#add_pad (method)">#add_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_pad_template-instance_method" title="Gst::Element#add_pad_template (method)">#add_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_property_deep_notify_watch-instance_method" title="Gst::Element#add_property_deep_notify_watch (method)">#add_property_deep_notify_watch</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_property_notify_watch-instance_method" title="Gst::Element#add_property_notify_watch (method)">#add_property_notify_watch</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_static_metadata-instance_method" title="Gst::Element#add_static_metadata (method)">#add_static_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_static_pad_template-instance_method" title="Gst::Element#add_static_pad_template (method)">#add_static_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#add_static_pad_template_with_gtype-instance_method" title="Gst::Element#add_static_pad_template_with_gtype (method)">#add_static_pad_template_with_gtype</a></span>, <span class='object_link'><a href="../Gst/Element.html#base_time-instance_method" title="Gst::Element#base_time (method)">#base_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#base_time=-instance_method" title="Gst::Element#base_time= (method)">#base_time=</a></span>, <span class='object_link'><a href="../Gst/Element.html#bus-instance_method" title="Gst::Element#bus (method)">#bus</a></span>, <span class='object_link'><a href="../Gst/Element.html#bus=-instance_method" title="Gst::Element#bus= (method)">#bus=</a></span>, <span class='object_link'><a href="../Gst/Element.html#call_async-instance_method" title="Gst::Element#call_async (method)">#call_async</a></span>, <span class='object_link'><a href="../Gst/Element.html#change_state-instance_method" title="Gst::Element#change_state (method)">#change_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#clock-instance_method" title="Gst::Element#clock (method)">#clock</a></span>, <span class='object_link'><a href="../Gst/Element.html#clock=-instance_method" title="Gst::Element#clock= (method)">#clock=</a></span>, <span class='object_link'><a href="../Gst/Element.html#context=-instance_method" title="Gst::Element#context= (method)">#context=</a></span>, <span class='object_link'><a href="../Gst/Element.html#contexts-instance_method" title="Gst::Element#contexts (method)">#contexts</a></span>, <span class='object_link'><a href="../Gst/Element.html#continue_state-instance_method" title="Gst::Element#continue_state (method)">#continue_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#create_all_pads-instance_method" title="Gst::Element#create_all_pads (method)">#create_all_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#current_clock_time-instance_method" title="Gst::Element#current_clock_time (method)">#current_clock_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#current_running_time-instance_method" title="Gst::Element#current_running_time (method)">#current_running_time</a></span>, <span class='object_link'><a href="../Gst/Element.html#decorate_stream_id-instance_method" title="Gst::Element#decorate_stream_id (method)">#decorate_stream_id</a></span>, <span class='object_link'><a href="../Gst/Element.html#decorate_stream_id_printf-instance_method" title="Gst::Element#decorate_stream_id_printf (method)">#decorate_stream_id_printf</a></span>, <span class='object_link'><a href="../Gst/Element.html#decorate_stream_id_printf_valist-instance_method" title="Gst::Element#decorate_stream_id_printf_valist (method)">#decorate_stream_id_printf_valist</a></span>, <span class='object_link'><a href="../Gst/Element.html#factory-instance_method" title="Gst::Element#factory (method)">#factory</a></span>, <span class='object_link'><a href="../Gst/Element.html#flags-instance_method" title="Gst::Element#flags (method)">#flags</a></span>, <span class='object_link'><a href="../Gst/Element.html#flags_raw-instance_method" title="Gst::Element#flags_raw (method)">#flags_raw</a></span>, <span class='object_link'><a href="../Gst/Element.html#foreach_pad-instance_method" title="Gst::Element#foreach_pad (method)">#foreach_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#foreach_sink_pad-instance_method" title="Gst::Element#foreach_sink_pad (method)">#foreach_sink_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#foreach_src_pad-instance_method" title="Gst::Element#foreach_src_pad (method)">#foreach_src_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_compatible_pad-instance_method" title="Gst::Element#get_compatible_pad (method)">#get_compatible_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_compatible_pad_template-instance_method" title="Gst::Element#get_compatible_pad_template (method)">#get_compatible_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_context-instance_method" title="Gst::Element#get_context (method)">#get_context</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_context_unlocked-instance_method" title="Gst::Element#get_context_unlocked (method)">#get_context_unlocked</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_metadata-instance_method" title="Gst::Element#get_metadata (method)">#get_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_pad_template-instance_method" title="Gst::Element#get_pad_template (method)">#get_pad_template</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_request_pad-instance_method" title="Gst::Element#get_request_pad (method)">#get_request_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_state-instance_method" title="Gst::Element#get_state (method)">#get_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#get_static_pad-instance_method" title="Gst::Element#get_static_pad (method)">#get_static_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#is_locked_state-instance_method" title="Gst::Element#is_locked_state (method)">#is_locked_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#iterate_pads-instance_method" title="Gst::Element#iterate_pads (method)">#iterate_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#iterate_sink_pads-instance_method" title="Gst::Element#iterate_sink_pads (method)">#iterate_sink_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#iterate_src_pads-instance_method" title="Gst::Element#iterate_src_pads (method)">#iterate_src_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_elements-instance_method" title="Gst::Element#link_elements (method)">#link_elements</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_filtered-instance_method" title="Gst::Element#link_filtered (method)">#link_filtered</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_many-instance_method" title="Gst::Element#link_many (method)">#link_many</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_pads-instance_method" title="Gst::Element#link_pads (method)">#link_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_pads_filtered-instance_method" title="Gst::Element#link_pads_filtered (method)">#link_pads_filtered</a></span>, <span class='object_link'><a href="../Gst/Element.html#link_pads_full-instance_method" title="Gst::Element#link_pads_full (method)">#link_pads_full</a></span>, <span class='object_link'><a href="../Gst/Element.html#locked_state=-instance_method" title="Gst::Element#locked_state= (method)">#locked_state=</a></span>, <span class='object_link'><a href="../Gst/Element.html#lost_state-instance_method" title="Gst::Element#lost_state (method)">#lost_state</a></span>, <span class='object_link'><a href="../Gst/Element.html#make_from_uri-class_method" title="Gst::Element.make_from_uri (method)">make_from_uri</a></span>, <span class='object_link'><a href="../Gst/Element.html#message_full-instance_method" title="Gst::Element#message_full (method)">#message_full</a></span>, <span class='object_link'><a href="../Gst/Element.html#message_full_with_details-instance_method" title="Gst::Element#message_full_with_details (method)">#message_full_with_details</a></span>, <span class='object_link'><a href="../Gst/Element.html#no_more_pads-instance_method" title="Gst::Element#no_more_pads (method)">#no_more_pads</a></span>, <span class='object_link'><a href="../Gst/Element.html#pad_template_list-instance_method" title="Gst::Element#pad_template_list (method)">#pad_template_list</a></span>, <span class='object_link'><a href="../Gst/Element.html#pause-instance_method" title="Gst::Element#pause (method)">#pause</a></span>, <span class='object_link'><a href="../Gst/Element.html#play-instance_method" title="Gst::Element#play (method)">#play</a></span>, <span class='object_link'><a href="../Gst/Element.html#post_message-instance_method" title="Gst::Element#post_message (method)">#post_message</a></span>, <span class='object_link'><a href="../Gst/Element.html#provide_clock-instance_method" title="Gst::Element#provide_clock (method)">#provide_clock</a></span>, <span class='object_link'><a href="../Gst/Element.html#query-instance_method" title="Gst::Element#query (method)">#query</a></span>, <span class='object_link'><a href="../Gst/Element.html#query_convert-instance_method" title="Gst::Element#query_convert (method)">#query_convert</a></span>, <span class='object_link'><a href="../Gst/Element.html#query_duration-instance_method" title="Gst::Element#query_duration (method)">#query_duration</a></span>, <span class='object_link'><a href="../Gst/Element.html#query_position-instance_method" title="Gst::Element#query_position (method)">#query_position</a></span>, <span class='object_link'><a href="../Gst/Element.html#ready-instance_method" title="Gst::Element#ready (method)">#ready</a></span>, <span class='object_link'><a href="../Gst/Element.html#register-class_method" title="Gst::Element.register (method)">register</a></span>, <span class='object_link'><a href="../Gst/Element.html#release_request_pad-instance_method" title="Gst::Element#release_request_pad (method)">#release_request_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#remove_pad-instance_method" title="Gst::Element#remove_pad (method)">#remove_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#remove_property_notify_watch-instance_method" title="Gst::Element#remove_property_notify_watch (method)">#remove_property_notify_watch</a></span>, <span class='object_link'><a href="../Gst/Element.html#request_pad-instance_method" title="Gst::Element#request_pad (method)">#request_pad</a></span>, <span class='object_link'><a href="../Gst/Element.html#request_pad_simple-instance_method" title="Gst::Element#request_pad_simple (method)">#request_pad_simple</a></span>, <span class='object_link'><a href="../Gst/Element.html#seek-instance_method" title="Gst::Element#seek (method)">#seek</a></span>, <span class='object_link'><a href="../Gst/Element.html#seek_simple-instance_method" title="Gst::Element#seek_simple (method)">#seek_simple</a></span>, <span class='object_link'><a href="../Gst/Element.html#send_event-instance_method" title="Gst::Element#send_event (method)">#send_event</a></span>, <span class='object_link'><a href="../Gst/Element.html#set_metadata-instance_method" title="Gst::Element#set_metadata (method)">#set_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#set_static_metadata-instance_method" title="Gst::Element#set_static_metadata (method)">#set_static_metadata</a></span>, <span class='object_link'><a href="../Gst/Element.html#state=-instance_method" title="Gst::Element#state= (method)">#state=</a></span>, <span class='object_link'><a href="../Gst/Element.html#state_change_return_get_name-class_method" title="Gst::Element.state_change_return_get_name (method)">state_change_return_get_name</a></span>, <span class='object_link'><a href="../Gst/Element.html#state_get_name-class_method" title="Gst::Element.state_get_name (method)">state_get_name</a></span>, <span class='object_link'><a href="../Gst/Element.html#stop-instance_method" title="Gst::Element#stop (method)">#stop</a></span>, <span class='object_link'><a href="../Gst/Element.html#sync_state_with_parent-instance_method" title="Gst::Element#sync_state_with_parent (method)">#sync_state_with_parent</a></span>, <span class='object_link'><a href="../Gst/Element.html#type_set_skip_documentation-class_method" title="Gst::Element.type_set_skip_documentation (method)">type_set_skip_documentation</a></span>, <span class='object_link'><a href="../Gst/Element.html#unlink-instance_method" title="Gst::Element#unlink (method)">#unlink</a></span>, <span class='object_link'><a href="../Gst/Element.html#unlink_many-instance_method" title="Gst::Element#unlink_many (method)">#unlink_many</a></span>, <span class='object_link'><a href="../Gst/Element.html#unlink_pads-instance_method" title="Gst::Element#unlink_pads (method)">#unlink_pads</a></span></p>
 
+  
   
   
   
@@ -900,8 +905,8 @@ _finish_buffer from inside that function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This method will push the provided output buffer downstream. If needed,
-mandatory events such as stream-start, caps, and segment events will be
+    <p>This method will push the provided output buffer downstream. If needed,<br />
+mandatory events such as stream-start, caps, and segment events will be<br />
 sent before pushing the buffer.</p>
 
 
@@ -956,8 +961,8 @@ sent before pushing the buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This method will push the provided output buffer list downstream. If needed,
-mandatory events such as stream-start, caps, and segment events will be
+    <p>This method will push the provided output buffer list downstream. If needed,<br />
+mandatory events such as stream-start, caps, and segment events will be<br />
 sent before pushing the buffer.</p>
 
 
@@ -1012,7 +1017,7 @@ sent before pushing the buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Subclasses may use the return value to inform whether they should return
+    <p>Subclasses may use the return value to inform whether they should return<br />
 %GST_FLOW_EOS from their aggregate implementation.</p>
 
 
@@ -1052,7 +1057,7 @@ sent before pushing the buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Subclasses should call this at construction time in order for <!-- raw HTML omitted -->self<!-- raw HTML omitted --> to
+    <p>Subclasses should call this at construction time in order for <!-- raw HTML omitted -->self<!-- raw HTML omitted --> to<br />
 aggregate on a timeout even when no live source is connected.</p>
 
 
@@ -1103,10 +1108,10 @@ aggregate on a timeout even when no live source is connected.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Lets Gst::Aggregator sub-classes get the memory <!-- raw HTML omitted -->allocator<!-- raw HTML omitted -->
+    <p>Lets Gst::Aggregator sub-classes get the memory <!-- raw HTML omitted -->allocator<!-- raw HTML omitted --><br />
 acquired by the base class and its <!-- raw HTML omitted -->params<!-- raw HTML omitted -->.</p>
-<p>Unref the <!-- raw HTML omitted -->allocator<!-- raw HTML omitted --> after use it.
-used
+<p>Unref the <!-- raw HTML omitted -->allocator<!-- raw HTML omitted --> after use it.<br />
+used<br />
 Gst::AllocationParams of <!-- raw HTML omitted -->allocator<!-- raw HTML omitted --></p>
 
 
@@ -1215,10 +1220,10 @@ Gst::AllocationParams of <!-- raw HTML omitted -->allocator<!-- raw HTML omitted
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Subclasses should call this when they don't want to time out
-waiting for a pad that hasn't yet received any buffers in live
+    <p>Subclasses should call this when they don't want to time out<br />
+waiting for a pad that hasn't yet received any buffers in live<br />
 mode.</p>
-<p>Gst::Aggregator will still wait once on each newly-added pad, making
+<p>Gst::Aggregator will still wait once on each newly-added pad, making<br />
 sure upstream has had a fair chance to start up.</p>
 
 
@@ -1378,10 +1383,10 @@ sure upstream has had a fair chance to start up.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Force minimum upstream latency (in nanoseconds). When sources with a
-higher latency are expected to be plugged in dynamically after the
-aggregator has started playing, this allows overriding the minimum
-latency reported by the initial source(s). This is only taken into
+    <p>Force minimum upstream latency (in nanoseconds). When sources with a<br />
+higher latency are expected to be plugged in dynamically after the<br />
+aggregator has started playing, this allows overriding the minimum<br />
+latency reported by the initial source(s). This is only taken into<br />
 account when larger than the actually reported minimum latency.</p>
 
 
@@ -1421,10 +1426,10 @@ account when larger than the actually reported minimum latency.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Force minimum upstream latency (in nanoseconds). When sources with a
-higher latency are expected to be plugged in dynamically after the
-aggregator has started playing, this allows overriding the minimum
-latency reported by the initial source(s). This is only taken into
+    <p>Force minimum upstream latency (in nanoseconds). When sources with a<br />
+higher latency are expected to be plugged in dynamically after the<br />
+aggregator has started playing, this allows overriding the minimum<br />
+latency reported by the initial source(s). This is only taken into<br />
 account when larger than the actually reported minimum latency.</p>
 
 
@@ -1492,8 +1497,8 @@ account when larger than the actually reported minimum latency.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Negotiates src pad caps with downstream elements.
-Unmarks GST_PAD_FLAG_NEED_RECONFIGURE in any case. But marks it again
+    <p>Negotiates src pad caps with downstream elements.<br />
+Unmarks GST_PAD_FLAG_NEED_RECONFIGURE in any case. But marks it again<br />
 if Gst::AggregatorClass::negotiate fails.</p>
 
 
@@ -1533,9 +1538,9 @@ if Gst::AggregatorClass::negotiate fails.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Use this function to determine what input buffers will be aggregated
-to produce the next output buffer. This should only be called from
-a Gst::Aggregator::samples-selected handler, and can be used to precisely
+    <p>Use this function to determine what input buffers will be aggregated<br />
+to produce the next output buffer. This should only be called from<br />
+a Gst::Aggregator::samples-selected handler, and can be used to precisely<br />
 control aggregating parameters for a given set of input samples.</p>
 
 
@@ -1569,9 +1574,9 @@ control aggregating parameters for a given set of input samples.</p>
       
       
         &mdash;
-        <div class='inline'><p>The sample that is about to be aggregated. It may hold a Gst::Buffer
-or a Gst::BufferList. The contents of its info structure is subclass-dependent,
-and documented on a subclass basis. The buffers held by the sample are
+        <div class='inline'><p>The sample that is about to be aggregated. It may hold a Gst::Buffer<br />
+or a Gst::BufferList. The contents of its info structure is subclass-dependent,<br />
+and documented on a subclass basis. The buffers held by the sample are<br />
 not writable.</p>
 </div>
       
@@ -1593,14 +1598,14 @@ not writable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Subclasses should call this when they have prepared the
-buffers they will aggregate for each of their sink pads, but
-before using any of the properties of the pads that govern
-<em>how</em> aggregation should be performed, for example z-index
+    <p>Subclasses should call this when they have prepared the<br />
+buffers they will aggregate for each of their sink pads, but<br />
+before using any of the properties of the pads that govern<br />
+<em>how</em> aggregation should be performed, for example z-index<br />
 for video aggregators.</p>
-<p>If gst_aggregator_update_segment() is used by the subclass,
+<p>If gst_aggregator_update_segment() is used by the subclass,<br />
 it MUST be called before gst_aggregator_selected_samples().</p>
-<p>This function MUST only be called from the Gst::AggregatorClass::aggregate()
+<p>This function MUST only be called from the Gst::AggregatorClass::aggregate()<br />
 function.</p>
 
 
@@ -1700,8 +1705,8 @@ function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Lets Gst::Aggregator sub-classes tell the baseclass what their internal
-latency is. Will also post a LATENCY message on the bus so the pipeline
+    <p>Lets Gst::Aggregator sub-classes tell the baseclass what their internal<br />
+latency is. Will also post a LATENCY message on the bus so the pipeline<br />
 can reconfigure its global latency if the values changed.</p>
 
 
@@ -1771,10 +1776,10 @@ can reconfigure its global latency if the values changed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is a simple Gst::AggregatorClass::get_next_time implementation that
-just looks at the Gst::Segment on the srcpad of the aggregator and bases
+    <p>This is a simple Gst::AggregatorClass::get_next_time implementation that<br />
+just looks at the Gst::Segment on the srcpad of the aggregator and bases<br />
 the next time on the running time there.</p>
-<p>This is the desired behaviour in most cases where you have a live source
+<p>This is the desired behaviour in most cases where you have a live source<br />
 and you have a dead line based aggregator subclass.</p>
 
 
@@ -2078,10 +2083,10 @@ and you have a dead line based aggregator subclass.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Subclasses should use this to update the segment on their
-source pad, instead of directly pushing new segment events
+    <p>Subclasses should use this to update the segment on their<br />
+source pad, instead of directly pushing new segment events<br />
 downstream.</p>
-<p>Subclasses MUST call this before gst_aggregator_selected_samples(),
+<p>Subclasses MUST call this before gst_aggregator_selected_samples(),<br />
 if it is used at all.</p>
 
 
@@ -2128,7 +2133,7 @@ if it is used at all.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

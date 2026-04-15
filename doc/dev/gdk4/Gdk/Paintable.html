@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::Paintable";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,51 +79,52 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gdk4/paintable.rb</dd>
+    <dd>lib/gdk4/paintable.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GdkPaintable</code> is a simple interface used by GTK to represent content that
+    <p><code>GdkPaintable</code> is a simple interface used by GTK to represent content that<br />
 can be painted.</p>
-<p>The content of a <code>GdkPaintable</code> can be painted anywhere at any size
-without requiring any sort of layout. The interface is inspired by
-similar concepts elsewhere, such as
-<a href="https://developer.gnome.org/clutter/stable/ClutterContent.html">ClutterContent</a>,
-<a href="https://www.w3.org/TR/css-images-4/#paint-source">HTML/CSS Paint Sources</a>,
+<p>The content of a <code>GdkPaintable</code> can be painted anywhere at any size<br />
+without requiring any sort of layout. The interface is inspired by<br />
+similar concepts elsewhere, such as<br />
+<a href="https://developer.gnome.org/clutter/stable/ClutterContent.html">ClutterContent</a>,<br />
+<a href="https://www.w3.org/TR/css-images-4/#paint-source">HTML/CSS Paint Sources</a>,<br />
 or <a href="https://www.w3.org/TR/SVG2/pservers.html">SVG Paint Servers</a>.</p>
-<p>A <code>GdkPaintable</code> can be snapshot at any time and size using
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.snapshot]. How the paintable interprets that size and
-if it scales or centers itself into the given rectangle is implementation
-defined, though if you are implementing a <code>GdkPaintable</code> and don't know what
-to do, it is suggested that you scale your paintable ignoring any potential
+<p>A <code>GdkPaintable</code> can be snapshot at any time and size using<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.snapshot]. How the paintable interprets that size and<br />
+if it scales or centers itself into the given rectangle is implementation<br />
+defined, though if you are implementing a <code>GdkPaintable</code> and don't know what<br />
+to do, it is suggested that you scale your paintable ignoring any potential<br />
 aspect ratio.</p>
-<p>The contents that a <code>GdkPaintable</code> produces may depend on the [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Snapshot]
-passed to it. For example, paintables may decide to use more detailed images
-on higher resolution screens or when OpenGL is available. A <code>GdkPaintable</code>
+<p>The contents that a <code>GdkPaintable</code> produces may depend on the [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Snapshot]<br />
+passed to it. For example, paintables may decide to use more detailed images<br />
+on higher resolution screens or when OpenGL is available. A <code>GdkPaintable</code><br />
 will however always produce the same output for the same snapshot.</p>
-<p>A <code>GdkPaintable</code> may change its contents, meaning that it will now produce
-a different output with the same snapshot. Once that happens, it will call
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.invalidate_contents] which will emit the
-[signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable::invalidate-contents] signal. If a paintable is known
-to never change its contents, it will set the %GDK_PAINTABLE_STATIC_CONTENTS
-flag. If a consumer cannot deal with changing contents, it may call
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.get_current_image] which will return a static
+<p>A <code>GdkPaintable</code> may change its contents, meaning that it will now produce<br />
+a different output with the same snapshot. Once that happens, it will call<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.invalidate_contents] which will emit the<br />
+[signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable::invalidate-contents] signal. If a paintable is known<br />
+to never change its contents, it will set the %GDK_PAINTABLE_STATIC_CONTENTS<br />
+flag. If a consumer cannot deal with changing contents, it may call<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.get_current_image] which will return a static<br />
 paintable and use that.</p>
-<p>A paintable can report an intrinsic (or preferred) size or aspect ratio it
-wishes to be rendered at, though it doesn't have to. Consumers of the interface
-can use this information to layout thepaintable appropriately. Just like the
-contents, the size of a paintable can change. A paintable will indicate this
-by calling [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.invalidate_size] which will emit the
-[signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable::invalidate-size] signal. And just like for contents,
-if a paintable is known to never change its size, it will set the
+<p>A paintable can report an intrinsic (or preferred) size or aspect ratio it<br />
+wishes to be rendered at, though it doesn't have to. Consumers of the interface<br />
+can use this information to layout thepaintable appropriately. Just like the<br />
+contents, the size of a paintable can change. A paintable will indicate this<br />
+by calling [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.invalidate_size] which will emit the<br />
+[signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable::invalidate-size] signal. And just like for contents,<br />
+if a paintable is known to never change its size, it will set the<br />
 %GDK_PAINTABLE_STATIC_SIZE flag.</p>
-<p>Besides API for applications, there are some functions that are only
-useful for implementing subclasses and should not be used by applications:
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.invalidate_contents],
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.invalidate_size],
+<p>Besides API for applications, there are some functions that are only<br />
+useful for implementing subclasses and should not be used by applications:<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.invalidate_contents],<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.invalidate_size],<br />
 [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.new_empty].</p>
 
 
@@ -169,6 +171,7 @@ useful for implementing subclasses and should not be used by applications:
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -385,6 +388,7 @@ useful for implementing subclasses and should not be used by applications:
 
       
     </ul>
+    
   
 
 
@@ -451,12 +455,12 @@ useful for implementing subclasses and should not be used by applications:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Compute a concrete size for the <code>GdkPaintable</code>.</p>
-<p>Applies the sizing algorithm outlined in the
-<a href="https://drafts.csswg.org/css-images-3/#default-sizing">CSS Image spec</a>
+<p>Applies the sizing algorithm outlined in the<br />
+<a href="https://drafts.csswg.org/css-images-3/#default-sizing">CSS Image spec</a><br />
 to the given <!-- raw HTML omitted -->paintable<!-- raw HTML omitted -->. See that link for more details.</p>
-<p>It is not necessary to call this function when both <!-- raw HTML omitted -->specified_width<!-- raw HTML omitted -->
-and <!-- raw HTML omitted -->specified_height<!-- raw HTML omitted --> are known, but it is useful to call this
-function in GtkWidget:measure implementations to compute the
+<p>It is not necessary to call this function when both <!-- raw HTML omitted -->specified_width<!-- raw HTML omitted --><br />
+and <!-- raw HTML omitted -->specified_height<!-- raw HTML omitted --> are known, but it is useful to call this<br />
+function in GtkWidget:measure implementations to compute the<br />
 other dimension when only one dimension is given.</p>
 
 
@@ -476,7 +480,7 @@ other dimension when only one dimension is given.</p>
       
       
         &mdash;
-        <div class='inline'><p>the width <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> could be drawn into or
+        <div class='inline'><p>the width <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> could be drawn into or<br />
 0.0 if unknown</p>
 </div>
       
@@ -492,7 +496,7 @@ other dimension when only one dimension is given.</p>
       
       
         &mdash;
-        <div class='inline'><p>the height <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> could be drawn into or
+        <div class='inline'><p>the height <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> could be drawn into or<br />
 0.0 if unknown</p>
 </div>
       
@@ -508,7 +512,7 @@ other dimension when only one dimension is given.</p>
       
       
         &mdash;
-        <div class='inline'><p>the width <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> would be drawn into if
+        <div class='inline'><p>the width <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> would be drawn into if<br />
 no other constraints were given</p>
 </div>
       
@@ -524,7 +528,7 @@ no other constraints were given</p>
       
       
         &mdash;
-        <div class='inline'><p>the height <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> would be drawn into if
+        <div class='inline'><p>the height <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> would be drawn into if<br />
 no other constraints were given</p>
 </div>
       
@@ -591,7 +595,7 @@ no other constraints were given</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets an immutable paintable for the current contents displayed by <!-- raw HTML omitted -->paintable<!-- raw HTML omitted -->.</p>
-<p>This is useful when you want to retain the current state of an animation,
+<p>This is useful when you want to retain the current state of an animation,<br />
 for example to take a screenshot of a running animation.</p>
 <p>If the <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> is already immutable, it will return itself.</p>
 
@@ -611,7 +615,7 @@ for example to take a screenshot of a running animation.</p>
       
       
         &mdash;
-        <div class='inline'><p>An immutable paintable for the current
+        <div class='inline'><p>An immutable paintable for the current<br />
 contents of <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --></p>
 </div>
       
@@ -675,17 +679,17 @@ contents of <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --></p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the preferred aspect ratio the <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> would like to be displayed at.</p>
-<p>The aspect ratio is the width divided by the height, so a value of 0.5
-means that the <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> prefers to be displayed twice as high as it
-is wide. Consumers of this interface can use this to preserve aspect
+<p>The aspect ratio is the width divided by the height, so a value of 0.5<br />
+means that the <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> prefers to be displayed twice as high as it<br />
+is wide. Consumers of this interface can use this to preserve aspect<br />
 ratio when displaying the paintable.</p>
-<p>This is a purely informational value and does not in any way limit the
+<p>This is a purely informational value and does not in any way limit the<br />
 values that may be passed to [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.snapshot].</p>
-<p>Usually when a <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> returns nonzero values from
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.get_intrinsic_width] and
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.get_intrinsic_height] the aspect ratio
+<p>Usually when a <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> returns nonzero values from<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.get_intrinsic_width] and<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.get_intrinsic_height] the aspect ratio<br />
 should conform to those values, though that is not required.</p>
-<p>If the <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> does not have a preferred aspect ratio,
+<p>If the <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> does not have a preferred aspect ratio,<br />
 it returns 0. Negative values are never returned.</p>
 
 
@@ -726,11 +730,11 @@ it returns 0. Negative values are never returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the preferred height the <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> would like to be displayed at.</p>
-<p>Consumers of this interface can use this to reserve enough space to draw
+<p>Consumers of this interface can use this to reserve enough space to draw<br />
 the paintable.</p>
-<p>This is a purely informational value and does not in any way limit the
+<p>This is a purely informational value and does not in any way limit the<br />
 values that may be passed to [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.snapshot].</p>
-<p>If the <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> does not have a preferred height, it returns 0.
+<p>If the <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> does not have a preferred height, it returns 0.<br />
 Negative values are never returned.</p>
 
 
@@ -771,11 +775,11 @@ Negative values are never returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the preferred width the <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> would like to be displayed at.</p>
-<p>Consumers of this interface can use this to reserve enough space to draw
+<p>Consumers of this interface can use this to reserve enough space to draw<br />
 the paintable.</p>
-<p>This is a purely informational value and does not in any way limit the
+<p>This is a purely informational value and does not in any way limit the<br />
 values that may be passed to [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.snapshot].</p>
-<p>If the <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> does not have a preferred width, it returns 0.
+<p>If the <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> does not have a preferred width, it returns 0.<br />
 Negative values are never returned.</p>
 
 
@@ -816,11 +820,11 @@ Negative values are never returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Called by implementations of <code>GdkPaintable</code> to invalidate their contents.</p>
-<p>Unless the contents are invalidated, implementations must guarantee that
+<p>Unless the contents are invalidated, implementations must guarantee that<br />
 multiple calls of [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable.snapshot] produce the same output.</p>
-<p>This function will emit the [signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable::invalidate-contents]
+<p>This function will emit the [signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable::invalidate-contents]<br />
 signal.</p>
-<p>If a <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> reports the %GDK_PAINTABLE_STATIC_CONTENTS flag,
+<p>If a <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> reports the %GDK_PAINTABLE_STATIC_CONTENTS flag,<br />
 it must not call this function.</p>
 
 
@@ -857,11 +861,11 @@ it must not call this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Called by implementations of <code>GdkPaintable</code> to invalidate their size.</p>
-<p>As long as the size is not invalidated, <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> must return the same
+<p>As long as the size is not invalidated, <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> must return the same<br />
 values for its intrinsic width, height and aspect ratio.</p>
-<p>This function will emit the [signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable::invalidate-size]
+<p>This function will emit the [signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Paintable::invalidate-size]<br />
 signal.</p>
-<p>If a <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> reports the %GDK_PAINTABLE_STATIC_SIZE flag,
+<p>If a <!-- raw HTML omitted -->paintable<!-- raw HTML omitted --> reports the %GDK_PAINTABLE_STATIC_SIZE flag,<br />
 it must not call this function.</p>
 
 
@@ -898,8 +902,8 @@ it must not call this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Snapshots the given paintable with the given <!-- raw HTML omitted -->width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted -->.</p>
-<p>The paintable is drawn at the current (0,0) offset of the <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.
-If <!-- raw HTML omitted -->width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted --> are not larger than zero, this function will
+<p>The paintable is drawn at the current (0,0) offset of the <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.<br />
+If <!-- raw HTML omitted -->width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted --> are not larger than zero, this function will<br />
 do nothing.</p>
 
 
@@ -980,7 +984,7 @@ do nothing.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

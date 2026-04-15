@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::Settings";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gio2/settings.rb</dd>
+    <dd>lib/gio2/settings.rb
+</dd>
   </dl>
   
 </div>
@@ -207,6 +209,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1601,6 +1604,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1617,15 +1621,15 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new #GSettings object with the relocatable schema specified
+    <p>Creates a new #GSettings object with the relocatable schema specified<br />
 by <!-- raw HTML omitted -->schema_id<!-- raw HTML omitted --> and a given path.</p>
-<p>You only need to do this if you want to directly create a settings
-object with a schema that doesn't have a specified path of its own.
+<p>You only need to do this if you want to directly create a settings<br />
+object with a schema that doesn't have a specified path of its own.<br />
 That's quite rare.</p>
-<p>It is a programmer error to call this function for a schema that
+<p>It is a programmer error to call this function for a schema that<br />
 has an explicitly specified path.</p>
-<p>It is a programmer error if <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is not a valid path.  A valid path
-begins and ends with '/' and does not contain two consecutive '/'
+<p>It is a programmer error if <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is not a valid path.  A valid path<br />
+begins and ends with '/' and does not contain two consecutive '/'<br />
 characters.</p>
 
 
@@ -1783,8 +1787,8 @@ characters.</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of
-relocatable #GSettings schemas that are available, in no defined order.
+        <div class='inline'><p>a list of<br />
+relocatable #GSettings schemas that are available, in no defined order.<br />
 The list must not be modified or freed.</p>
 </div>
       
@@ -1824,8 +1828,8 @@ The list must not be modified or freed.</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of
-#GSettings schemas that are available, in no defined order.  The list
+        <div class='inline'><p>a list of<br />
+#GSettings schemas that are available, in no defined order.  The list<br />
 must not be modified or freed.</p>
 </div>
       
@@ -1848,12 +1852,12 @@ must not be modified or freed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Ensures that all pending operations are complete for the default backend.</p>
-<p>Writes made to a #GSettings are handled asynchronously.  For this
-reason, it is very unlikely that the changes have it to disk by the
+<p>Writes made to a #GSettings are handled asynchronously.  For this<br />
+reason, it is very unlikely that the changes have it to disk by the<br />
 time g_settings_set() returns.</p>
-<p>This call will block until all of the writes have made it to the
-backend.  Since the mainloop is not running, no change notifications
-will be dispatched during this call (but some may be queued by the
+<p>This call will block until all of the writes have made it to the<br />
+backend.  Since the mainloop is not running, no change notifications<br />
+will be dispatched during this call (but some may be queued by the<br />
 time the call is done).</p>
 
 
@@ -1890,8 +1894,8 @@ time the call is done).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Removes an existing binding for <!-- raw HTML omitted -->property<!-- raw HTML omitted --> on <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.</p>
-<p>Note that bindings are automatically removed when the
-object is finalized, so it is rarely necessary to call this
+<p>Note that bindings are automatically removed when the<br />
+object is finalized, so it is rarely necessary to call this<br />
 function.</p>
 
 
@@ -1967,9 +1971,9 @@ function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Applies any changes that have been made to the settings.  This
-function does nothing unless <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> is in 'delay-apply' mode;
-see g_settings_delay().  In the normal case settings are always
+    <p>Applies any changes that have been made to the settings.  This<br />
+function does nothing unless <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> is in 'delay-apply' mode;<br />
+see g_settings_delay().  In the normal case settings are always<br />
 applied immediately.</p>
 
 
@@ -2111,22 +2115,22 @@ applied immediately.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a binding between the <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in the <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> object
+    <p>Create a binding between the <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in the <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> object<br />
 and the property <!-- raw HTML omitted -->property<!-- raw HTML omitted --> of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.</p>
-<p>The binding uses the default GIO mapping functions to map
-between the settings and property values. These functions
-handle booleans, numeric types and string types in a
-straightforward way. Use g_settings_bind_with_mapping() if
-you need a custom mapping, or map between types that are not
+<p>The binding uses the default GIO mapping functions to map<br />
+between the settings and property values. These functions<br />
+handle booleans, numeric types and string types in a<br />
+straightforward way. Use g_settings_bind_with_mapping() if<br />
+you need a custom mapping, or map between types that are not<br />
 supported by the default mapping functions.</p>
-<p>Unless the <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> include %G_SETTINGS_BIND_NO_SENSITIVITY, this
-function also establishes a binding between the writability of
-<!-- raw HTML omitted -->key<!-- raw HTML omitted --> and the &quot;sensitive&quot; property of <!-- raw HTML omitted -->object<!-- raw HTML omitted --> (if <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has
-a boolean property by that name). See g_settings_bind_writable()
+<p>Unless the <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> include %G_SETTINGS_BIND_NO_SENSITIVITY, this<br />
+function also establishes a binding between the writability of<br />
+<!-- raw HTML omitted -->key<!-- raw HTML omitted --> and the &quot;sensitive&quot; property of <!-- raw HTML omitted -->object<!-- raw HTML omitted --> (if <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has<br />
+a boolean property by that name). See g_settings_bind_writable()<br />
 for more details about writable bindings.</p>
-<p>Note that the lifecycle of the binding is tied to <!-- raw HTML omitted -->object<!-- raw HTML omitted -->,
-and that you can have only one binding per object property.
-If you bind the same property twice on the same object, the second
+<p>Note that the lifecycle of the binding is tied to <!-- raw HTML omitted -->object<!-- raw HTML omitted -->,<br />
+and that you can have only one binding per object property.<br />
+If you bind the same property twice on the same object, the second<br />
 binding overrides the first one.</p>
 
 
@@ -2226,13 +2230,13 @@ binding overrides the first one.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a binding between the <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in the <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> object
+    <p>Create a binding between the <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in the <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> object<br />
 and the property <!-- raw HTML omitted -->property<!-- raw HTML omitted --> of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.</p>
-<p>The binding uses the provided mapping functions to map between
+<p>The binding uses the provided mapping functions to map between<br />
 settings and property values.</p>
-<p>Note that the lifecycle of the binding is tied to <!-- raw HTML omitted -->object<!-- raw HTML omitted -->,
-and that you can have only one binding per object property.
-If you bind the same property twice on the same object, the second
+<p>Note that the lifecycle of the binding is tied to <!-- raw HTML omitted -->object<!-- raw HTML omitted -->,<br />
+and that you can have only one binding per object property.<br />
+If you bind the same property twice on the same object, the second<br />
 binding overrides the first one.</p>
 
 
@@ -2312,7 +2316,7 @@ binding overrides the first one.</p>
       
       
         &mdash;
-        <div class='inline'><p>a function that gets called to convert values
+        <div class='inline'><p>a function that gets called to convert values<br />
 from <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> to <!-- raw HTML omitted -->object<!-- raw HTML omitted -->, or nil to use the default GIO mapping</p>
 </div>
       
@@ -2328,7 +2332,7 @@ from <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> to <!-- raw HTML
       
       
         &mdash;
-        <div class='inline'><p>a function that gets called to convert values
+        <div class='inline'><p>a function that gets called to convert values<br />
 from <!-- raw HTML omitted -->object<!-- raw HTML omitted --> to <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->, or nil to use the default GIO mapping</p>
 </div>
       
@@ -2394,19 +2398,19 @@ from <!-- raw HTML omitted -->object<!-- raw HTML omitted --> to <!-- raw HTML o
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a binding between the writability of <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in the
-<!-- raw HTML omitted -->settings<!-- raw HTML omitted --> object and the property <!-- raw HTML omitted -->property<!-- raw HTML omitted --> of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.
-The property must be boolean; &quot;sensitive&quot; or &quot;visible&quot;
+    <p>Create a binding between the writability of <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in the<br />
+<!-- raw HTML omitted -->settings<!-- raw HTML omitted --> object and the property <!-- raw HTML omitted -->property<!-- raw HTML omitted --> of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.<br />
+The property must be boolean; &quot;sensitive&quot; or &quot;visible&quot;<br />
 properties of widgets are the most likely candidates.</p>
-<p>Writable bindings are always uni-directional; changes of the
-writability of the setting will be propagated to the object
+<p>Writable bindings are always uni-directional; changes of the<br />
+writability of the setting will be propagated to the object<br />
 property, not the other way.</p>
-<p>When the <!-- raw HTML omitted -->inverted<!-- raw HTML omitted --> argument is true, the binding inverts the
-value as it passes from the setting to the object, i.e. <!-- raw HTML omitted -->property<!-- raw HTML omitted -->
+<p>When the <!-- raw HTML omitted -->inverted<!-- raw HTML omitted --> argument is true, the binding inverts the<br />
+value as it passes from the setting to the object, i.e. <!-- raw HTML omitted -->property<!-- raw HTML omitted --><br />
 will be set to true if the key is not writable.</p>
-<p>Note that the lifecycle of the binding is tied to <!-- raw HTML omitted -->object<!-- raw HTML omitted -->,
-and that you can have only one binding per object property.
-If you bind the same property twice on the same object, the second
+<p>Note that the lifecycle of the binding is tied to <!-- raw HTML omitted -->object<!-- raw HTML omitted -->,<br />
+and that you can have only one binding per object property.<br />
+If you bind the same property twice on the same object, the second<br />
 binding overrides the first one.</p>
 
 
@@ -2508,14 +2512,14 @@ binding overrides the first one.</p>
   <div class="discussion">
     <p>Creates a #GAction corresponding to a given #GSettings key.</p>
 <p>The action has the same name as the key.</p>
-<p>The value of the key becomes the state of the action and the action
-is enabled when the key is writable.  Changing the state of the
-action results in the key being written to.  Changes to the value or
-writability of the key cause appropriate change notifications to be
+<p>The value of the key becomes the state of the action and the action<br />
+is enabled when the key is writable.  Changing the state of the<br />
+action results in the key being written to.  Changes to the value or<br />
+writability of the key cause appropriate change notifications to be<br />
 emitted for the action.</p>
-<p>For boolean-valued keys, action activations take no parameter and
-result in the toggling of the value.  For all other types,
-activations take the new value for the key (which must have the
+<p>For boolean-valued keys, action activations take no parameter and<br />
+result in the toggling of the value.  For all other types,<br />
+activations take the new value for the key (which must have the<br />
 correct type).</p>
 
 
@@ -2574,8 +2578,8 @@ correct type).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Changes the #GSettings object into 'delay-apply' mode. In this
-mode, changes to <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> are not immediately propagated to the
+    <p>Changes the #GSettings object into 'delay-apply' mode. In this<br />
+mode, changes to <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> are not immediately propagated to the<br />
 backend, but kept locally until g_settings_apply() is called.</p>
 
 
@@ -2611,7 +2615,7 @@ backend, but kept locally until g_settings_apply() is called.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the #GSettings object is in 'delay-apply' mode. See
+    <p>Whether the #GSettings object is in 'delay-apply' mode. See<br />
 g_settings_delay() for details.</p>
 
 
@@ -2679,7 +2683,7 @@ g_settings_delay() for details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the #GSettings object is in 'delay-apply' mode. See
+    <p>Whether the #GSettings object is in 'delay-apply' mode. See<br />
 g_settings_delay() for details.</p>
 
 
@@ -2720,10 +2724,10 @@ g_settings_delay() for details.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the value that is stored at <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
-<p>A convenience function that combines g_settings_get_value() with
+<p>A convenience function that combines g_settings_get_value() with<br />
 g_variant_get().</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the
-schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> or for the GVariant::Type of <!-- raw HTML omitted -->format<!-- raw HTML omitted --> to mismatch
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the<br />
+schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> or for the GVariant::Type of <!-- raw HTML omitted -->format<!-- raw HTML omitted --> to mismatch<br />
 the type given in the schema.</p>
 
 
@@ -2810,7 +2814,7 @@ the type given in the schema.</p>
   <div class="discussion">
     <p>Gets the value that is stored at <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 <p>A convenience variant of g_settings_get() for booleans.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
 having a boolean type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -2869,12 +2873,12 @@ having a boolean type in the schema for <!-- raw HTML omitted -->settings<!-- ra
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a child settings object which has a base path of
-<code>base-path/&lt;b&gt;name&lt;/b&gt;</code>, where <code>base-path</code> is the base path of
+    <p>Creates a child settings object which has a base path of<br />
+<code>base-path/&lt;b&gt;name&lt;/b&gt;</code>, where <code>base-path</code> is the base path of<br />
 <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
-<p>The schema for the child settings object must have been declared
+<p>The schema for the child settings object must have been declared<br />
 in the schema of <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> using a <code>&lt;child&gt;</code> element.</p>
-<p>The created child settings object will inherit the #GSettings:delay-apply
+<p>The created child settings object will inherit the #GSettings:delay-apply<br />
 mode from <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -2934,20 +2938,20 @@ mode from <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the &quot;default value&quot; of a key.</p>
-<p>This is the value that would be read if g_settings_reset() were to be
+<p>This is the value that would be read if g_settings_reset() were to be<br />
 called on the key.</p>
-<p>Note that this may be a different value than returned by
-g_settings_schema_key_get_default_value() if the system administrator
+<p>Note that this may be a different value than returned by<br />
+g_settings_schema_key_get_default_value() if the system administrator<br />
 has provided a default value.</p>
-<p>Comparing the return values of g_settings_get_default_value() and
-g_settings_get_value() is not sufficient for determining if a value
-has been set because the user may have explicitly set the value to
-something that happens to be equal to the default.  The difference
-here is that if the default changes in the future, the user's key
+<p>Comparing the return values of g_settings_get_default_value() and<br />
+g_settings_get_value() is not sufficient for determining if a value<br />
+has been set because the user may have explicitly set the value to<br />
+something that happens to be equal to the default.  The difference<br />
+here is that if the default changes in the future, the user's key<br />
 will still be set.</p>
-<p>This function may be useful for adding an indication to a UI of what
+<p>This function may be useful for adding an indication to a UI of what<br />
 the default value was before the user set it.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the<br />
 schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -3008,7 +3012,7 @@ schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
   <div class="discussion">
     <p>Gets the value that is stored at <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 <p>A convenience variant of g_settings_get() for doubles.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
 having a 'double' type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -3067,14 +3071,14 @@ having a 'double' type in the schema for <!-- raw HTML omitted -->settings<!-- r
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value that is stored in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> for <!-- raw HTML omitted -->key<!-- raw HTML omitted --> and converts it
+    <p>Gets the value that is stored in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> for <!-- raw HTML omitted -->key<!-- raw HTML omitted --> and converts it<br />
 to the enum value that it represents.</p>
-<p>In order to use this function the type of the value must be a string
+<p>In order to use this function the type of the value must be a string<br />
 and it must be marked in the schema file as an enumerated type.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the<br />
 schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> or is not marked as an enumerated type.</p>
-<p>If the value stored in the configuration database is not a valid
-value for the enumerated type then this function will return the
+<p>If the value stored in the configuration database is not a valid<br />
+value for the enumerated type then this function will return the<br />
 default value.</p>
 
 
@@ -3133,14 +3137,14 @@ default value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value that is stored in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> for <!-- raw HTML omitted -->key<!-- raw HTML omitted --> and converts it
+    <p>Gets the value that is stored in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> for <!-- raw HTML omitted -->key<!-- raw HTML omitted --> and converts it<br />
 to the flags value that it represents.</p>
-<p>In order to use this function the type of the value must be an array
+<p>In order to use this function the type of the value must be an array<br />
 of strings and it must be marked in the schema file as a flags type.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the<br />
 schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> or is not marked as a flags type.</p>
-<p>If the value stored in the configuration database is not a valid
-value for the flags type then this function will return the default
+<p>If the value stored in the configuration database is not a valid<br />
+value for the flags type then this function will return the default<br />
 value.</p>
 
 
@@ -3201,7 +3205,7 @@ value.</p>
   <div class="discussion">
     <p>Gets the value that is stored at <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 <p>A convenience variant of g_settings_get() for 32-bit integers.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
 having a int32 type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -3262,7 +3266,7 @@ having a int32 type in the schema for <!-- raw HTML omitted -->settings<!-- raw 
   <div class="discussion">
     <p>Gets the value that is stored at <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 <p>A convenience variant of g_settings_get() for 64-bit integers.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
 having a int64 type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -3321,27 +3325,27 @@ having a int64 type in the schema for <!-- raw HTML omitted -->settings<!-- raw 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value that is stored at <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->, subject to
+    <p>Gets the value that is stored at <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->, subject to<br />
 application-level validation/mapping.</p>
-<p>You should use this function when the application needs to perform
-some processing on the value of the key (for example, parsing).  The
-<!-- raw HTML omitted -->mapping<!-- raw HTML omitted --> function performs that processing.  If the function
-indicates that the processing was unsuccessful (due to a parse error,
+<p>You should use this function when the application needs to perform<br />
+some processing on the value of the key (for example, parsing).  The<br />
+<!-- raw HTML omitted -->mapping<!-- raw HTML omitted --> function performs that processing.  If the function<br />
+indicates that the processing was unsuccessful (due to a parse error,<br />
 for example) then the mapping is tried again with another value.</p>
-<p>This allows a robust 'fall back to defaults' behaviour to be
+<p>This allows a robust 'fall back to defaults' behaviour to be<br />
 implemented somewhat automatically.</p>
-<p>The first value that is tried is the user's setting for the key.  If
-the mapping function fails to map this value, other values may be
-tried in an unspecified order (system or site defaults, translated
+<p>The first value that is tried is the user's setting for the key.  If<br />
+the mapping function fails to map this value, other values may be<br />
+tried in an unspecified order (system or site defaults, translated<br />
 schema default values, untranslated schema default values, etc).</p>
-<p>If the mapping function fails for all possible values, one additional
-attempt is made: the mapping function is called with a nil value.
-If the mapping function still indicates failure at this point then
+<p>If the mapping function fails for all possible values, one additional<br />
+attempt is made: the mapping function is called with a nil value.<br />
+If the mapping function still indicates failure at this point then<br />
 the application will be aborted.</p>
-<p>The result parameter for the <!-- raw HTML omitted -->mapping<!-- raw HTML omitted --> function is pointed to a
-#gpointer which is initially set to nil.  The same pointer is given
-to each invocation of <!-- raw HTML omitted -->mapping<!-- raw HTML omitted -->.  The final value of that #gpointer is
-what is returned by this function.  nil is valid; it is returned
+<p>The result parameter for the <!-- raw HTML omitted -->mapping<!-- raw HTML omitted --> function is pointed to a<br />
+#gpointer which is initially set to nil.  The same pointer is given<br />
+to each invocation of <!-- raw HTML omitted -->mapping<!-- raw HTML omitted -->.  The final value of that #gpointer is<br />
+what is returned by this function.  nil is valid; it is returned<br />
 just as any other value would be.</p>
 
 
@@ -3376,7 +3380,7 @@ just as any other value would be.</p>
       
       
         &mdash;
-        <div class='inline'><p>the function to map the value in the
+        <div class='inline'><p>the function to map the value in the<br />
 settings database to the value used by the application</p>
 </div>
       
@@ -3487,7 +3491,7 @@ settings database to the value used by the application</p>
   <div class="discussion">
     <p>Gets the value that is stored at <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 <p>A convenience variant of g_settings_get() for strings.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
 having a string type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -3547,9 +3551,9 @@ having a string type in the schema for <!-- raw HTML omitted -->settings<!-- raw
 </h3><div class="docstring">
   <div class="discussion">
     <p>A convenience variant of g_settings_get() for string arrays.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
-having an array of strings type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.
-newly-allocated, nil-terminated array of strings, the value that
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
+having an array of strings type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.<br />
+newly-allocated, nil-terminated array of strings, the value that<br />
 is stored at <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -3609,9 +3613,9 @@ is stored at <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw H
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the value that is stored at <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
-<p>A convenience variant of g_settings_get() for 32-bit unsigned
+<p>A convenience variant of g_settings_get() for 32-bit unsigned<br />
 integers.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
 having a uint32 type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -3671,9 +3675,9 @@ having a uint32 type in the schema for <!-- raw HTML omitted -->settings<!-- raw
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the value that is stored at <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
-<p>A convenience variant of g_settings_get() for 64-bit unsigned
+<p>A convenience variant of g_settings_get() for 64-bit unsigned<br />
 integers.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
 having a uint64 type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -3734,16 +3738,16 @@ having a uint64 type in the schema for <!-- raw HTML omitted -->settings<!-- raw
   <div class="discussion">
     <p>Checks the &quot;user value&quot; of a key, if there is one.</p>
 <p>The user value of a key is the last value that was set by the user.</p>
-<p>After calling g_settings_reset() this function should always return
-nil (assuming something is not wrong with the system
+<p>After calling g_settings_reset() this function should always return<br />
+nil (assuming something is not wrong with the system<br />
 configuration).</p>
-<p>It is possible that g_settings_get_value() will return a different
-value than this function.  This can happen in the case that the user
-set a value for a key that was subsequently locked down by the system
+<p>It is possible that g_settings_get_value() will return a different<br />
+value than this function.  This can happen in the case that the user<br />
+set a value for a key that was subsequently locked down by the system<br />
 administrator -- this function will return the user's old value.</p>
-<p>This function may be useful for adding a &quot;reset&quot; option to a UI or
+<p>This function may be useful for adding a &quot;reset&quot; option to a UI or<br />
 for providing indication that a particular value has been changed.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the<br />
 schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -3807,7 +3811,7 @@ schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the value that is stored in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> for <!-- raw HTML omitted -->key<!-- raw HTML omitted -->.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the<br />
 schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -3866,7 +3870,7 @@ schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the #GSettings object has any unapplied
+    <p>Returns whether the #GSettings object has any unapplied<br />
 changes.  This can only be the case if it is in 'delayed-apply' mode.</p>
 
 
@@ -3906,7 +3910,7 @@ changes.  This can only be the case if it is in 'delayed-apply' mode.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If this property is true, the #GSettings object has outstanding
+    <p>If this property is true, the #GSettings object has outstanding<br />
 changes that will be applied when g_settings_apply() is called.</p>
 
 
@@ -3974,7 +3978,7 @@ changes that will be applied when g_settings_apply() is called.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If this property is true, the #GSettings object has outstanding
+    <p>If this property is true, the #GSettings object has outstanding<br />
 changes that will be applied when g_settings_apply() is called.</p>
 
 
@@ -4014,15 +4018,15 @@ changes that will be applied when g_settings_apply() is called.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new #GSettings object with the relocatable schema specified
+    <p>Creates a new #GSettings object with the relocatable schema specified<br />
 by <!-- raw HTML omitted -->schema_id<!-- raw HTML omitted --> and a given path.</p>
-<p>You only need to do this if you want to directly create a settings
-object with a schema that doesn't have a specified path of its own.
+<p>You only need to do this if you want to directly create a settings<br />
+object with a schema that doesn't have a specified path of its own.<br />
 That's quite rare.</p>
-<p>It is a programmer error to call this function for a schema that
+<p>It is a programmer error to call this function for a schema that<br />
 has an explicitly specified path.</p>
-<p>It is a programmer error if <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is not a valid path.  A valid path
-begins and ends with '/' and does not contain two consecutive '/'
+<p>It is a programmer error if <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is not a valid path.  A valid path<br />
+begins and ends with '/' and does not contain two consecutive '/'<br />
 characters.</p>
 
 
@@ -4257,12 +4261,12 @@ characters.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the list of children on <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
-<p>The list is exactly the list of strings for which it is not an error
+<p>The list is exactly the list of strings for which it is not an error<br />
 to call g_settings_get_child().</p>
-<p>There is little reason to call this function from &quot;normal&quot; code, since
-you should already know what children are in your schema. This function
+<p>There is little reason to call this function from &quot;normal&quot; code, since<br />
+you should already know what children are in your schema. This function<br />
 may still be useful there for introspection reasons, however.</p>
-<p>You should free the return value with g_strfreev() when you are done
+<p>You should free the return value with g_strfreev() when you are done<br />
 with it.</p>
 
 
@@ -4281,7 +4285,7 @@ with it.</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of the children
+        <div class='inline'><p>a list of the children<br />
 on <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->, in no defined order</p>
 </div>
       
@@ -4304,10 +4308,10 @@ on <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->, in no defined ord
 </h3><div class="docstring">
   <div class="discussion">
     <p>Introspects the list of keys on <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
-<p>You should probably not be calling this function from &quot;normal&quot; code
-(since you should already know what keys are in your schema).  This
+<p>You should probably not be calling this function from &quot;normal&quot; code<br />
+(since you should already know what keys are in your schema).  This<br />
 function is intended for introspection reasons.</p>
-<p>You should free the return value with g_strfreev() when you are done
+<p>You should free the return value with g_strfreev() when you are done<br />
 with it.</p>
 
 
@@ -4326,7 +4330,7 @@ with it.</p>
       
       
         &mdash;
-        <div class='inline'><p>a list
+        <div class='inline'><p>a list<br />
 of the keys on <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->, in no defined order</p>
 </div>
       
@@ -4454,7 +4458,7 @@ of the keys on <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->, in no
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if the given <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is of the correct type and within the
+    <p>Checks if the given <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is of the correct type and within the<br />
 permitted range for <!-- raw HTML omitted -->key<!-- raw HTML omitted -->.</p>
 
 
@@ -4529,8 +4533,8 @@ permitted range for <!-- raw HTML omitted -->key<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Resets <!-- raw HTML omitted -->key<!-- raw HTML omitted --> to its default value.</p>
-<p>This call resets the key, as much as possible, to its default value.
-That might be the value specified in the schema or the one set by the
+<p>This call resets the key, as much as possible, to its default value.<br />
+That might be the value specified in the schema or the one set by the<br />
 administrator.</p>
 
 
@@ -4585,9 +4589,9 @@ administrator.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reverts all non-applied changes to the settings.  This function
-does nothing unless <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> is in 'delay-apply' mode; see
-g_settings_delay().  In the normal case settings are always applied
+    <p>Reverts all non-applied changes to the settings.  This function<br />
+does nothing unless <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> is in 'delay-apply' mode; see<br />
+g_settings_delay().  In the normal case settings are always applied<br />
 immediately.</p>
 <p>Change notifications will be emitted for affected keys.</p>
 
@@ -4624,13 +4628,13 @@ immediately.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The name of the schema that describes the types of keys
+    <p>The name of the schema that describes the types of keys<br />
 for this #GSettings object.</p>
-<p>The type of this property is <em>not</em> GSettings::Schema.
-GSettings::Schema has only existed since version 2.32 and
-unfortunately this name was used in previous versions to refer to
-the schema ID rather than the schema itself.  Take care to use the
-'settings-schema' property if you wish to pass in a
+<p>The type of this property is <em>not</em> GSettings::Schema.<br />
+GSettings::Schema has only existed since version 2.32 and<br />
+unfortunately this name was used in previous versions to refer to<br />
+the schema ID rather than the schema itself.  Take care to use the<br />
+'settings-schema' property if you wish to pass in a<br />
 GSettings::Schema.</p>
 
 
@@ -4670,13 +4674,13 @@ GSettings::Schema.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The name of the schema that describes the types of keys
+    <p>The name of the schema that describes the types of keys<br />
 for this #GSettings object.</p>
-<p>The type of this property is <em>not</em> GSettings::Schema.
-GSettings::Schema has only existed since version 2.32 and
-unfortunately this name was used in previous versions to refer to
-the schema ID rather than the schema itself.  Take care to use the
-'settings-schema' property if you wish to pass in a
+<p>The type of this property is <em>not</em> GSettings::Schema.<br />
+GSettings::Schema has only existed since version 2.32 and<br />
+unfortunately this name was used in previous versions to refer to<br />
+the schema ID rather than the schema itself.  Take care to use the<br />
+'settings-schema' property if you wish to pass in a<br />
 GSettings::Schema.</p>
 
 
@@ -4744,7 +4748,7 @@ GSettings::Schema.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The name of the schema that describes the types of keys
+    <p>The name of the schema that describes the types of keys<br />
 for this #GSettings object.</p>
 
 
@@ -4784,7 +4788,7 @@ for this #GSettings object.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The name of the schema that describes the types of keys
+    <p>The name of the schema that describes the types of keys<br />
 for this #GSettings object.</p>
 
 
@@ -4853,10 +4857,10 @@ for this #GSettings object.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
-<p>A convenience function that combines g_settings_set_value() with
+<p>A convenience function that combines g_settings_set_value() with<br />
 g_variant_new().</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the
-schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> or for the GVariant::Type of <!-- raw HTML omitted -->format<!-- raw HTML omitted --> to mismatch
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the<br />
+schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> or for the GVariant::Type of <!-- raw HTML omitted -->format<!-- raw HTML omitted --> to mismatch<br />
 the type given in the schema.</p>
 
 
@@ -4924,7 +4928,7 @@ the type given in the schema.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if setting the key succeeded,
+        <div class='inline'><p>true if setting the key succeeded,<br />
 false if the key was not writable</p>
 </div>
       
@@ -4948,7 +4952,7 @@ false if the key was not writable</p>
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
 <p>A convenience variant of g_settings_set() for booleans.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
 having a boolean type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -5001,7 +5005,7 @@ having a boolean type in the schema for <!-- raw HTML omitted -->settings<!-- ra
       
       
         &mdash;
-        <div class='inline'><p>true if setting the key succeeded,
+        <div class='inline'><p>true if setting the key succeeded,<br />
 false if the key was not writable</p>
 </div>
       
@@ -5025,7 +5029,7 @@ false if the key was not writable</p>
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
 <p>A convenience variant of g_settings_set() for doubles.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
 having a 'double' type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -5078,7 +5082,7 @@ having a 'double' type in the schema for <!-- raw HTML omitted -->settings<!-- r
       
       
         &mdash;
-        <div class='inline'><p>true if setting the key succeeded,
+        <div class='inline'><p>true if setting the key succeeded,<br />
 false if the key was not writable</p>
 </div>
       
@@ -5100,13 +5104,13 @@ false if the key was not writable</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks up the enumerated type nick for <!-- raw HTML omitted -->value<!-- raw HTML omitted --> and writes it to <!-- raw HTML omitted -->key<!-- raw HTML omitted -->,
+    <p>Looks up the enumerated type nick for <!-- raw HTML omitted -->value<!-- raw HTML omitted --> and writes it to <!-- raw HTML omitted -->key<!-- raw HTML omitted -->,<br />
 within <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the
-schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> or is not marked as an enumerated type, or for
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the<br />
+schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> or is not marked as an enumerated type, or for<br />
 <!-- raw HTML omitted -->value<!-- raw HTML omitted --> not to be a valid value for the named type.</p>
-<p>After performing the write, accessing <!-- raw HTML omitted -->key<!-- raw HTML omitted --> directly with
-g_settings_get_string() will return the 'nick' associated with
+<p>After performing the write, accessing <!-- raw HTML omitted -->key<!-- raw HTML omitted --> directly with<br />
+g_settings_get_string() will return the 'nick' associated with<br />
 <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
 
 
@@ -5180,14 +5184,14 @@ g_settings_get_string() will return the 'nick' associated with
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks up the flags type nicks for the bits specified by <!-- raw HTML omitted -->value<!-- raw HTML omitted -->, puts
-them in an array of strings and writes the array to <!-- raw HTML omitted -->key<!-- raw HTML omitted -->, within
+    <p>Looks up the flags type nicks for the bits specified by <!-- raw HTML omitted -->value<!-- raw HTML omitted -->, puts<br />
+them in an array of strings and writes the array to <!-- raw HTML omitted -->key<!-- raw HTML omitted -->, within<br />
 <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the
-schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> or is not marked as a flags type, or for <!-- raw HTML omitted -->value<!-- raw HTML omitted -->
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the<br />
+schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> or is not marked as a flags type, or for <!-- raw HTML omitted -->value<!-- raw HTML omitted --><br />
 to contain any bits that are not value for the named type.</p>
-<p>After performing the write, accessing <!-- raw HTML omitted -->key<!-- raw HTML omitted --> directly with
-g_settings_get_strv() will return an array of 'nicks'; one for each
+<p>After performing the write, accessing <!-- raw HTML omitted -->key<!-- raw HTML omitted --> directly with<br />
+g_settings_get_strv() will return an array of 'nicks'; one for each<br />
 bit in <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
 
 
@@ -5263,7 +5267,7 @@ bit in <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
 <p>A convenience variant of g_settings_set() for 32-bit integers.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
 having a int32 type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -5316,7 +5320,7 @@ having a int32 type in the schema for <!-- raw HTML omitted -->settings<!-- raw 
       
       
         &mdash;
-        <div class='inline'><p>true if setting the key succeeded,
+        <div class='inline'><p>true if setting the key succeeded,<br />
 false if the key was not writable</p>
 </div>
       
@@ -5340,7 +5344,7 @@ false if the key was not writable</p>
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
 <p>A convenience variant of g_settings_set() for 64-bit integers.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
 having a int64 type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -5393,7 +5397,7 @@ having a int64 type in the schema for <!-- raw HTML omitted -->settings<!-- raw 
       
       
         &mdash;
-        <div class='inline'><p>true if setting the key succeeded,
+        <div class='inline'><p>true if setting the key succeeded,<br />
 false if the key was not writable</p>
 </div>
       
@@ -5417,7 +5421,7 @@ false if the key was not writable</p>
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
 <p>A convenience variant of g_settings_set() for strings.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
 having a string type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -5470,7 +5474,7 @@ having a string type in the schema for <!-- raw HTML omitted -->settings<!-- raw
       
       
         &mdash;
-        <div class='inline'><p>true if setting the key succeeded,
+        <div class='inline'><p>true if setting the key succeeded,<br />
 false if the key was not writable</p>
 </div>
       
@@ -5493,9 +5497,9 @@ false if the key was not writable</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
-<p>A convenience variant of g_settings_set() for string arrays.  If
+<p>A convenience variant of g_settings_set() for string arrays.  If<br />
 <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is nil, then <!-- raw HTML omitted -->key<!-- raw HTML omitted --> is set to be the empty array.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
 having an array of strings type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -5548,7 +5552,7 @@ having an array of strings type in the schema for <!-- raw HTML omitted -->setti
       
       
         &mdash;
-        <div class='inline'><p>true if setting the key succeeded,
+        <div class='inline'><p>true if setting the key succeeded,<br />
 false if the key was not writable</p>
 </div>
       
@@ -5571,9 +5575,9 @@ false if the key was not writable</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
-<p>A convenience variant of g_settings_set() for 32-bit unsigned
+<p>A convenience variant of g_settings_set() for 32-bit unsigned<br />
 integers.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
 having a uint32 type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -5626,7 +5630,7 @@ having a uint32 type in the schema for <!-- raw HTML omitted -->settings<!-- raw
       
       
         &mdash;
-        <div class='inline'><p>true if setting the key succeeded,
+        <div class='inline'><p>true if setting the key succeeded,<br />
 false if the key was not writable</p>
 </div>
       
@@ -5649,9 +5653,9 @@ false if the key was not writable</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
-<p>A convenience variant of g_settings_set() for 64-bit unsigned
+<p>A convenience variant of g_settings_set() for 64-bit unsigned<br />
 integers.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't specified as<br />
 having a uint64 type in the schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
 
 
@@ -5704,7 +5708,7 @@ having a uint64 type in the schema for <!-- raw HTML omitted -->settings<!-- raw
       
       
         &mdash;
-        <div class='inline'><p>true if setting the key succeeded,
+        <div class='inline'><p>true if setting the key succeeded,<br />
 false if the key was not writable</p>
 </div>
       
@@ -5731,8 +5735,8 @@ false if the key was not writable</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the
-schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> or for <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to have the incorrect type, per
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the<br />
+schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> or for <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to have the incorrect type, per<br />
 the schema.</p>
 <p>If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is floating then this function consumes the reference.</p>
 
@@ -5786,7 +5790,7 @@ the schema.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if setting the key succeeded,
+        <div class='inline'><p>true if setting the key succeeded,<br />
 false if the key was not writable</p>
 </div>
       
@@ -5831,8 +5835,8 @@ false if the key was not writable</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
-<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the
-schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> or for <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to have the incorrect type, per
+<p>It is a programmer error to give a <!-- raw HTML omitted -->key<!-- raw HTML omitted --> that isn't contained in the<br />
+schema for <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> or for <!-- raw HTML omitted -->value<!-- raw HTML omitted --> to have the incorrect type, per<br />
 the schema.</p>
 <p>If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is floating then this function consumes the reference.</p>
 
@@ -5886,7 +5890,7 @@ the schema.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if setting the key succeeded,
+        <div class='inline'><p>true if setting the key succeeded,<br />
 false if the key was not writable</p>
 </div>
       
@@ -5922,11 +5926,11 @@ false if the key was not writable</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The GSettings::Schema describing the types of keys for this
+    <p>The GSettings::Schema describing the types of keys for this<br />
 #GSettings object.</p>
-<p>Ideally, this property would be called 'schema'.  GSettings::Schema
-has only existed since version 2.32, however, and before then the
-'schema' property was used to refer to the ID of the schema rather
+<p>Ideally, this property would be called 'schema'.  GSettings::Schema<br />
+has only existed since version 2.32, however, and before then the<br />
+'schema' property was used to refer to the ID of the schema rather<br />
 than the schema itself.  Take care.</p>
 
 
@@ -5966,11 +5970,11 @@ than the schema itself.  Take care.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The GSettings::Schema describing the types of keys for this
+    <p>The GSettings::Schema describing the types of keys for this<br />
 #GSettings object.</p>
-<p>Ideally, this property would be called 'schema'.  GSettings::Schema
-has only existed since version 2.32, however, and before then the
-'schema' property was used to refer to the ID of the schema rather
+<p>Ideally, this property would be called 'schema'.  GSettings::Schema<br />
+has only existed since version 2.32, however, and before then the<br />
+'schema' property was used to refer to the ID of the schema rather<br />
 than the schema itself.  Take care.</p>
 
 
@@ -6034,7 +6038,7 @@ than the schema itself.  Take care.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

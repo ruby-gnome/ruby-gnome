@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Atk::Table";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -86,30 +88,30 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The ATK interface implemented for UI components which contain tabular or row/column information.</p>
-<p>Atk::Table should be implemented by components which present
-elements ordered via rows and columns.  It may also be used to
-present tree-structured information if the nodes of the trees can
-be said to contain multiple &quot;columns&quot;.  Individual elements of an
-Atk::Table are typically referred to as &quot;cells&quot;. Those cells should
-implement the interface Atk::TableCell, but #Atk doesn't require
-them to be direct children of the current Atk::Table. They can be
-grand-children, grand-grand-children etc. Atk::Table provides the
-API needed to get a individual cell based on the row and column
+<p>Atk::Table should be implemented by components which present<br />
+elements ordered via rows and columns.  It may also be used to<br />
+present tree-structured information if the nodes of the trees can<br />
+be said to contain multiple &quot;columns&quot;.  Individual elements of an<br />
+Atk::Table are typically referred to as &quot;cells&quot;. Those cells should<br />
+implement the interface Atk::TableCell, but #Atk doesn't require<br />
+them to be direct children of the current Atk::Table. They can be<br />
+grand-children, grand-grand-children etc. Atk::Table provides the<br />
+API needed to get a individual cell based on the row and column<br />
 numbers.</p>
-<p>Children of Atk::Table are frequently &quot;lightweight&quot; objects, that
-is, they may not have backing widgets in the host UI toolkit.  They
+<p>Children of Atk::Table are frequently &quot;lightweight&quot; objects, that<br />
+is, they may not have backing widgets in the host UI toolkit.  They<br />
 are therefore often transient.</p>
-<p>Since tables are often very complex, Atk::Table includes provision
-for offering simplified summary information, as well as row and
-column headers and captions.  Headers and captions are Atk::Objects
-which may implement other interfaces (Atk::Text, #AtkImage, etc.) as
-appropriate.  Atk::Table summaries may themselves be (simplified)
+<p>Since tables are often very complex, Atk::Table includes provision<br />
+for offering simplified summary information, as well as row and<br />
+column headers and captions.  Headers and captions are Atk::Objects<br />
+which may implement other interfaces (Atk::Text, #AtkImage, etc.) as<br />
+appropriate.  Atk::Table summaries may themselves be (simplified)<br />
 Atk::Tables, etc.</p>
-<p>Note for implementors: in the past, Atk::Table required that all the
-cells should be direct children of Atk::Table, and provided some
-index based methods to request the cells. The practice showed that
-that forcing made Atk::Table implementation complex, and hard to
-expose other kind of children, like rows or captions. Right now,
+<p>Note for implementors: in the past, Atk::Table required that all the<br />
+cells should be direct children of Atk::Table, and provided some<br />
+index based methods to request the cells. The practice showed that<br />
+that forcing made Atk::Table implementation complex, and hard to<br />
+expose other kind of children, like rows or captions. Right now,<br />
 index-based methods are deprecated.</p>
 
 
@@ -1090,6 +1092,7 @@ index-based methods are deprecated.</p>
 
       
     </ul>
+    
   
 
 
@@ -1255,7 +1258,7 @@ index-based methods are deprecated.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the caption for the <!-- raw HTML omitted -->table<!-- raw HTML omitted -->.
+    <p>Gets the caption for the <!-- raw HTML omitted -->table<!-- raw HTML omitted -->.<br />
 table caption, or nil if value does not implement this interface.</p>
 
 
@@ -1832,7 +1835,7 @@ table caption, or nil if value does not implement this interface.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>specified column header, or nil if value does not implement this
+    <p>specified column header, or nil if value does not implement this<br />
 interface.</p>
 
 
@@ -1906,7 +1909,7 @@ interface.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The value -1 is returned if the object at row,column is not a child
+    <p>The value -1 is returned if the object at row,column is not a child<br />
 of table or table does not implement this interface.</p>
 
 
@@ -2345,7 +2348,7 @@ of table or table does not implement this interface.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>specified row header, or nil if value does not implement this
+    <p>specified row header, or nil if value does not implement this<br />
 interface.</p>
 
 
@@ -2906,7 +2909,7 @@ interface.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the number of columns in the table.
+    <p>Gets the number of columns in the table.<br />
 if value does not implement this interface.</p>
 
 
@@ -2946,7 +2949,7 @@ if value does not implement this interface.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the number of rows in the table.
+    <p>Gets the number of rows in the table.<br />
 if value does not implement this interface.</p>
 
 
@@ -3882,7 +3885,7 @@ if value does not implement this interface.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the summary description of the table.
+    <p>Gets the summary description of the table.<br />
 of the table, or zero if value does not implement this interface.</p>
 
 
@@ -3922,7 +3925,7 @@ of the table, or zero if value does not implement this interface.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the summary description of the table.
+    <p>Sets the summary description of the table.<br />
 to set for <!-- raw HTML omitted -->table<!-- raw HTML omitted --></p>
 
 
@@ -3973,7 +3976,7 @@ to set for <!-- raw HTML omitted -->table<!-- raw HTML omitted --></p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

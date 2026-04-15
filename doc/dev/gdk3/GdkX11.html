@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GdkX11";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gdk3/x11-loader.rb</dd>
+    <dd>lib/gdk3/x11-loader.rb
+</dd>
   </dl>
   
 </div>
@@ -86,16 +88,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2017  Ruby-GNOME2 Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -339,6 +341,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 
       
     </ul>
+    
   
 
 
@@ -468,8 +471,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
       
       
         &mdash;
-        <div class='inline'><p>The
-<code>GdkDevice</code> wrapping the device ID, or nil if the given ID
+        <div class='inline'><p>The<br />
+<code>GdkDevice</code> wrapping the device ID, or nil if the given ID<br />
 doesn’t currently represent a device.</p>
 </div>
       
@@ -510,7 +513,7 @@ doesn’t currently represent a device.</p>
       
       
         &mdash;
-        <div class='inline'><p>The pointer stored in <!-- raw HTML omitted -->ctext<!-- raw HTML omitted --> from a call to
+        <div class='inline'><p>The pointer stored in <!-- raw HTML omitted -->ctext<!-- raw HTML omitted --> from a call to<br />
 gdk_x11_display_string_to_compound_text().</p>
 </div>
       
@@ -546,7 +549,7 @@ gdk_x11_display_string_to_compound_text().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Frees the array of strings created by
+    <p>Frees the array of strings created by<br />
 gdk_x11_display_text_property_to_text_list().</p>
 
 
@@ -566,7 +569,7 @@ gdk_x11_display_text_property_to_text_list().</p>
       
       
         &mdash;
-        <div class='inline'><p>the value stored in the <!-- raw HTML omitted -->list<!-- raw HTML omitted --> parameter by
+        <div class='inline'><p>the value stored in the <!-- raw HTML omitted -->list<!-- raw HTML omitted --> parameter by<br />
 a call to gdk_x11_display_text_property_to_text_list().</p>
 </div>
       
@@ -621,8 +624,8 @@ a call to gdk_x11_display_text_property_to_text_list().</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GdkSurface</code>, used for communication
-with the server. The surface must have <code>GDK_PROPERTY_CHANGE_MASK</code> in
+        <div class='inline'><p>a <code>GdkSurface</code>, used for communication<br />
+with the server. The surface must have <code>GDK_PROPERTY_CHANGE_MASK</code> in<br />
 its events mask or a hang will result.</p>
 </div>
       
@@ -662,8 +665,8 @@ its events mask or a hang will result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the X atom for a <code>GdkDisplay</code> corresponding to <!-- raw HTML omitted -->atom_name<!-- raw HTML omitted -->.
-This function caches the result, so if called repeatedly it is much
+    <p>Returns the X atom for a <code>GdkDisplay</code> corresponding to <!-- raw HTML omitted -->atom_name<!-- raw HTML omitted -->.<br />
+This function caches the result, so if called repeatedly it is much<br />
 faster than XInternAtom(), which is a round trip to the server each time.</p>
 
 
@@ -737,9 +740,9 @@ faster than XInternAtom(), which is a round trip to the server each time.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the name of an X atom for its display. This
-function is meant mainly for debugging, so for convenience, unlike
-XAtomName() and the result doesn’t need to
+    <p>Returns the name of an X atom for its display. This<br />
+function is meant mainly for debugging, so for convenience, unlike<br />
+XAtomName() and the result doesn’t need to<br />
 be freed.</p>
 
 
@@ -792,7 +795,7 @@ be freed.</p>
       
       
         &mdash;
-        <div class='inline'><p>name of the X atom; this string is owned by GDK,
+        <div class='inline'><p>name of the X atom; this string is owned by GDK,<br />
 so it shouldn’t be modified or freed.</p>
 </div>
       
@@ -872,10 +875,10 @@ so it shouldn’t be modified or freed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the <code>SM_CLIENT_ID</code> property on the application’s leader window so that
-the window manager can save the application’s state using the X11R6 ICCCM
+    <p>Sets the <code>SM_CLIENT_ID</code> property on the application’s leader window so that<br />
+the window manager can save the application’s state using the X11R6 ICCCM<br />
 session management protocol.</p>
-<p>See the X Session Management Library documentation for more information on
+<p>See the X Session Management Library documentation for more information on<br />
 session management and the Inter-Client Communication Conventions Manual</p>
 
 
@@ -895,7 +898,7 @@ session management and the Inter-Client Communication Conventions Manual</p>
       
       
         &mdash;
-        <div class='inline'><p>the client id assigned by the session manager
+        <div class='inline'><p>the client id assigned by the session manager<br />
 when the connection was opened, or nil to remove the property.</p>
 </div>
       
@@ -927,7 +930,7 @@ when the connection was opened, or nil to remove the property.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

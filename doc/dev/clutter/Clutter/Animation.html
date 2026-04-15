@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Animation";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,14 +95,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::AnimationClass structure contains only private data and
+    <p>The Clutter::AnimationClass structure contains only private data and<br />
 should be accessed using the provided functions.</p>
 
 
@@ -634,6 +636,7 @@ should be accessed using the provided functions.</p>
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -650,16 +653,16 @@ should be accessed using the provided functions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Clutter::Animation instance. You should set the
-#GObject to be animated using clutter_animation_set_object(),
-set the duration with clutter_animation_set_duration() and the
+    <p>Creates a new Clutter::Animation instance. You should set the<br />
+#GObject to be animated using clutter_animation_set_object(),<br />
+set the duration with clutter_animation_set_duration() and the<br />
 easing mode using clutter_animation_set_mode().</p>
-<p>Use clutter_animation_bind() or clutter_animation_bind_interval()
-to define the properties to be animated. The interval and the
+<p>Use clutter_animation_bind() or clutter_animation_bind_interval()<br />
+to define the properties to be animated. The interval and the<br />
 animated properties can be updated at runtime.</p>
-<p>The clutter_actor_animate() and relative family of functions provide
-an easy way to animate a Clutter::Actor and automatically manage the
-lifetime of a Clutter::Animation instance, so you should consider using
+<p>The clutter_actor_animate() and relative family of functions provide<br />
+an easy way to animate a Clutter::Actor and automatically manage the<br />
+lifetime of a Clutter::Animation instance, so you should consider using<br />
 those functions instead of manually creating an animation.</p>
 
 
@@ -795,10 +798,10 @@ those functions instead of manually creating an animation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a single property with name <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --> to the
-animation <!-- raw HTML omitted -->animation<!-- raw HTML omitted -->.  For more information about animations,
+    <p>Adds a single property with name <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --> to the<br />
+animation <!-- raw HTML omitted -->animation<!-- raw HTML omitted -->.  For more information about animations,<br />
 see clutter_actor_animate().</p>
-<p>This method returns the animation primarily to make chained
+<p>This method returns the animation primarily to make chained<br />
 calls convenient in language bindings.</p>
 
 
@@ -872,11 +875,11 @@ calls convenient in language bindings.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Binds <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> to the <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --> of the #GObject
-attached to <!-- raw HTML omitted -->animation<!-- raw HTML omitted -->. The Clutter::Animation will take
-ownership of the passed Clutter::Interval.  For more information
+    <p>Binds <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> to the <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --> of the #GObject<br />
+attached to <!-- raw HTML omitted -->animation<!-- raw HTML omitted -->. The Clutter::Animation will take<br />
+ownership of the passed Clutter::Interval.  For more information<br />
 about animations, see clutter_actor_animate().</p>
-<p>If you need to update the interval instance use
+<p>If you need to update the interval instance use<br />
 clutter_animation_update_interval() instead.</p>
 
 
@@ -951,11 +954,11 @@ clutter_animation_update_interval() instead.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Emits the ::completed signal on <!-- raw HTML omitted -->animation<!-- raw HTML omitted --></p>
-<p>When using this function with a Clutter::Animation created
-by the clutter_actor_animate() family of functions, <!-- raw HTML omitted -->animation<!-- raw HTML omitted -->
-will be unreferenced and it will not be valid anymore,
-unless g_object_ref() was called before calling this function
-or unless a reference was taken inside a handler for the
+<p>When using this function with a Clutter::Animation created<br />
+by the clutter_actor_animate() family of functions, <!-- raw HTML omitted -->animation<!-- raw HTML omitted --><br />
+will be unreferenced and it will not be valid anymore,<br />
+unless g_object_ref() was called before calling this function<br />
+or unless a reference was taken inside a handler for the<br />
 Clutter::Animation::completed signal</p>
 
 
@@ -1097,7 +1100,7 @@ Clutter::Animation::completed signal</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the Clutter::Interval associated to <!-- raw HTML omitted -->property_name<!-- raw HTML omitted -->
+    <p>Retrieves the Clutter::Interval associated to <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --><br />
 inside <!-- raw HTML omitted -->animation<!-- raw HTML omitted -->.</p>
 
 
@@ -1135,8 +1138,8 @@ inside <!-- raw HTML omitted -->animation<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Clutter::Interval or nil if no
-property with the same name was found. The returned interval is
+        <div class='inline'><p>a Clutter::Interval or nil if no<br />
+property with the same name was found. The returned interval is<br />
 owned by the Clutter::Animation and should not be unreferenced</p>
 </div>
       
@@ -1195,7 +1198,7 @@ owned by the Clutter::Animation and should not be unreferenced</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the property is animated by the
+        <div class='inline'><p>true if the property is animated by the<br />
 Clutter::Animation, false otherwise</p>
 </div>
       
@@ -1362,8 +1365,8 @@ Clutter::Animation, false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The animation mode, either a value from Clutter::AnimationMode
-or a value returned by clutter_alpha_register_func(). The
+    <p>The animation mode, either a value from Clutter::AnimationMode<br />
+or a value returned by clutter_alpha_register_func(). The<br />
 default value is %CLUTTER_LINEAR.</p>
 
 
@@ -1403,8 +1406,8 @@ default value is %CLUTTER_LINEAR.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The animation mode, either a value from Clutter::AnimationMode
-or a value returned by clutter_alpha_register_func(). The
+    <p>The animation mode, either a value from Clutter::AnimationMode<br />
+or a value returned by clutter_alpha_register_func(). The<br />
 default value is %CLUTTER_LINEAR.</p>
 
 
@@ -1811,7 +1814,7 @@ default value is %CLUTTER_LINEAR.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Changes the <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> for <!-- raw HTML omitted -->property_name<!-- raw HTML omitted -->. The Clutter::Animation
+    <p>Changes the <!-- raw HTML omitted -->interval<!-- raw HTML omitted --> for <!-- raw HTML omitted -->property_name<!-- raw HTML omitted -->. The Clutter::Animation<br />
 will take ownership of the passed Clutter::Interval.</p>
 
 
@@ -1877,7 +1880,7 @@ will take ownership of the passed Clutter::Interval.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

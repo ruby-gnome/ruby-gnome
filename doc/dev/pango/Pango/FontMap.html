@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Pango::FontMap";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,14 +95,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The <code>PangoFontMapClass</code> structure holds the virtual functions for
+    <p>The <code>PangoFontMapClass</code> structure holds the virtual functions for<br />
 a particular <code>PangoFontMap</code> implementation.</p>
 
 
@@ -406,6 +408,7 @@ a particular <code>PangoFontMap</code> implementation.</p>
 
       
     </ul>
+    
   
 
 
@@ -425,11 +428,11 @@ a particular <code>PangoFontMap</code> implementation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Forces a change in the context, which will cause any <code>PangoContext</code>
+    <p>Forces a change in the context, which will cause any <code>PangoContext</code><br />
 using this fontmap to change.</p>
-<p>This function is only useful when implementing a new backend
-for Pango, something applications won't do. Backends should
-call this function if they have attached extra data to the
+<p>This function is only useful when implementing a new backend<br />
+for Pango, something applications won't do. Backends should<br />
+call this function if they have attached extra data to the<br />
 context and such data is changed.</p>
 
 
@@ -466,11 +469,11 @@ context and such data is changed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a <code>PangoContext</code> connected to <!-- raw HTML omitted -->fontmap<!-- raw HTML omitted -->.</p>
-<p>This is equivalent to [ctor<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Context.new] followed by
+<p>This is equivalent to [ctor<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Context.new] followed by<br />
 [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Context.set_font_map].</p>
-<p>If you are using Pango as part of a higher-level system,
-that system may have it's own way of create a <code>PangoContext</code>.
-For instance, the GTK toolkit has, among others,
+<p>If you are using Pango as part of a higher-level system,<br />
+that system may have it's own way of create a <code>PangoContext</code>.<br />
+For instance, the GTK toolkit has, among others,<br />
 gtk_widget_get_pango_context(). Use those instead.</p>
 
 
@@ -489,7 +492,7 @@ gtk_widget_get_pango_context(). Use those instead.</p>
       
       
         &mdash;
-        <div class='inline'><p>the newly allocated <code>PangoContext</code>,
+        <div class='inline'><p>the newly allocated <code>PangoContext</code>,<br />
 which should be freed with g_object_unref().</p>
 </div>
       
@@ -677,7 +680,7 @@ which should be freed with g_object_unref().</p>
   <div class="discussion">
     <p>List all families for a fontmap.</p>
 <p>Note that the returned families are not in any particular order.</p>
-<p><code>PangoFontMap</code> also implemented the [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel] interface
+<p><code>PangoFontMap</code> also implemented the [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel] interface<br />
 for enumerating families.</p>
 
 
@@ -697,8 +700,8 @@ for enumerating families.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to
-store a pointer to an array of <code>PangoFontFamily</code> *.
+        <div class='inline'><p>location to<br />
+store a pointer to an array of <code>PangoFontFamily</code> *.<br />
 This array should be freed with g_free().</p>
 </div>
       
@@ -801,7 +804,7 @@ This array should be freed with g_free().</p>
       
       
         &mdash;
-        <div class='inline'><p>the newly allocated <code>PangoFont</code>
+        <div class='inline'><p>the newly allocated <code>PangoFont</code><br />
 loaded, or nil if no font matched.</p>
 </div>
       
@@ -823,7 +826,7 @@ loaded, or nil if no font matched.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Load a set of fonts in the fontmap that can be used to render
+    <p>Load a set of fonts in the fontmap that can be used to render<br />
 a font matching <!-- raw HTML omitted -->desc<!-- raw HTML omitted -->.</p>
 
 
@@ -891,7 +894,7 @@ a font matching <!-- raw HTML omitted -->desc<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>the newly allocated
+        <div class='inline'><p>the newly allocated<br />
 <code>PangoFontset</code> loaded, or nil if no font matched.</p>
 </div>
       
@@ -1019,9 +1022,9 @@ a font matching <!-- raw HTML omitted -->desc<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a new font that is like <!-- raw HTML omitted -->font<!-- raw HTML omitted -->, except that its size
-is multiplied by <!-- raw HTML omitted -->scale<!-- raw HTML omitted -->, its backend-dependent configuration
-(e.g. cairo font options) is replaced by the one in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->,
+    <p>Returns a new font that is like <!-- raw HTML omitted -->font<!-- raw HTML omitted -->, except that its size<br />
+is multiplied by <!-- raw HTML omitted -->scale<!-- raw HTML omitted -->, its backend-dependent configuration<br />
+(e.g. cairo font options) is replaced by the one in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->,<br />
 and its variations are replaced by <!-- raw HTML omitted -->variations<!-- raw HTML omitted -->.</p>
 
 
@@ -1126,13 +1129,13 @@ and its variations are replaced by <!-- raw HTML omitted -->variations<!-- raw H
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the current serial number of <!-- raw HTML omitted -->fontmap<!-- raw HTML omitted -->.</p>
-<p>The serial number is initialized to an small number larger than zero
-when a new fontmap is created and is increased whenever the fontmap
-is changed. It may wrap, but will never have the value 0. Since it can
+<p>The serial number is initialized to an small number larger than zero<br />
+when a new fontmap is created and is increased whenever the fontmap<br />
+is changed. It may wrap, but will never have the value 0. Since it can<br />
 wrap, never compare it with &quot;less than&quot;, always use &quot;not equals&quot;.</p>
-<p>The fontmap can only be changed using backend-specific API, like changing
+<p>The fontmap can only be changed using backend-specific API, like changing<br />
 fontmap resolution.</p>
-<p>This can be used to automatically detect changes to a <code>PangoFontMap</code>,
+<p>This can be used to automatically detect changes to a <code>PangoFontMap</code>,<br />
 like in <code>PangoContext</code>.</p>
 
 
@@ -1168,7 +1171,7 @@ like in <code>PangoContext</code>.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

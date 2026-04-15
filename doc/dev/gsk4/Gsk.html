@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gsk";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gsk4/loader.rb<span class="defines">,<br />
-  lib/gsk4.rb,<br /> lib/gsk4/version.rb,<br /> lib/gsk4/rounded-rect.rb</span>
+    <dd>lib/gsk4/loader.rb<span class="defines">,<br>
+  lib/gsk4.rb,<br> lib/gsk4/version.rb,<br> lib/gsk4/rounded-rect.rb</span>
+
 </dd>
   </dl>
   
@@ -88,16 +90,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2025  Ruby-GNOME Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -333,6 +335,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 
       
     </ul>
+    
   
 
 
@@ -352,10 +355,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is a convenience function that constructs a <code>GskPath</code>
+    <p>This is a convenience function that constructs a <code>GskPath</code><br />
 from a serialized form.</p>
-<p>The string is expected to be in (a superset of)
-<a href="https://www.w3.org/TR/SVG11/paths.htmlPath::Data">SVG path syntax</a>,
+<p>The string is expected to be in (a superset of)<br />
+<a href="https://www.w3.org/TR/SVG11/paths.htmlPath::Data">SVG path syntax</a>,<br />
 as e.g. produced by [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Path.to_string].</p>
 <p>A high-level summary of the syntax:</p>
 <ul>
@@ -371,7 +374,7 @@ as e.g. produced by [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->
 <li><code>A rx ry r l s x y</code> Add an elliptical arc from the current point to <code>(x, y)</code> with radii rx and ry. See the SVG documentation for how the other parameters influence the arc.</li>
 <li><code>O x1 y1 x2 y2 w</code> Add a rational quadratic Bézier from the current point to <code>(x2, y2)</code> with control point <code>(x1, y1)</code> and weight <code>w</code>.</li>
 </ul>
-<p>All the commands have lowercase variants that interpret coordinates
+<p>All the commands have lowercase variants that interpret coordinates<br />
 relative to the current point.</p>
 <p>The <code>O</code> command is an extension that is not supported in SVG.</p>
 
@@ -538,11 +541,11 @@ relative to the current point.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Parses the given <!-- raw HTML omitted -->string<!-- raw HTML omitted --> into a transform and puts it in
+    <p>Parses the given <!-- raw HTML omitted -->string<!-- raw HTML omitted --> into a transform and puts it in<br />
 <!-- raw HTML omitted -->out_transform<!-- raw HTML omitted -->.</p>
-<p>Strings printed via [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Transform.to_string]
+<p>Strings printed via [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Transform.to_string]<br />
 can be read in again successfully using this function.</p>
-<p>If <!-- raw HTML omitted -->string<!-- raw HTML omitted --> does not describe a valid transform, false is
+<p>If <!-- raw HTML omitted -->string<!-- raw HTML omitted --> does not describe a valid transform, false is<br />
 returned and nil is put in <!-- raw HTML omitted -->out_transform<!-- raw HTML omitted -->.</p>
 
 
@@ -616,7 +619,7 @@ returned and nil is put in <!-- raw HTML omitted -->out_transform<!-- raw HTML o
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the <code>GskRenderNode</code> stored inside the given <code>value</code>, and acquires
+    <p>Retrieves the <code>GskRenderNode</code> stored inside the given <code>value</code>, and acquires<br />
 a reference to it.</p>
 
 
@@ -869,7 +872,7 @@ a reference to it.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

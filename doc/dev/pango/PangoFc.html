@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "PangoFc";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/pango/fc-loader.rb<span class="defines">,<br />
+    <dd>lib/pango/fc-loader.rb<span class="defines">,<br>
   lib/pango.rb</span>
+
 </dd>
   </dl>
   
@@ -88,16 +90,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2021  Ruby-GNOME Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -128,13 +130,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
         <dt id="FONT_FEATURES-constant" class="">FONT_FEATURES =
           <div class="docstring">
   <div class="discussion">
-    <p>Fontconfig property that Pango reads from font
-patterns to populate list of OpenType features
+    <p>Fontconfig property that Pango reads from font<br />
+patterns to populate list of OpenType features<br />
 to be enabled for the font by default.</p>
-<p>The property will have a number of string elements,
-each of which is the OpenType feature tag of one feature
+<p>The property will have a number of string elements,<br />
+each of which is the OpenType feature tag of one feature<br />
 to enable.</p>
-<p>This is equivalent to FC_FONT_FEATURES in versions of
+<p>This is equivalent to FC_FONT_FEATURES in versions of<br />
 fontconfig that have that.</p>
 
 
@@ -150,13 +152,13 @@ fontconfig that have that.</p>
         <dt id="FONT_VARIATIONS-constant" class="">FONT_VARIATIONS =
           <div class="docstring">
   <div class="discussion">
-    <p>Fontconfig property that Pango reads from font
-patterns to populate list of OpenType font variations
+    <p>Fontconfig property that Pango reads from font<br />
+patterns to populate list of OpenType font variations<br />
 to be used for a font.</p>
-<p>The property will have a string elements, each of which
-a comma-separated list of OpenType axis setting of the
+<p>The property will have a string elements, each of which<br />
+a comma-separated list of OpenType axis setting of the<br />
 form AXIS=VALUE.</p>
-<p>This is equivalent to FC_FONT_VARIATIONS in versions of
+<p>This is equivalent to FC_FONT_VARIATIONS in versions of<br />
 fontconfig that have that.</p>
 
 
@@ -172,13 +174,13 @@ fontconfig that have that.</p>
         <dt id="GRAVITY-constant" class="">GRAVITY =
           <div class="docstring">
   <div class="discussion">
-    <p>Fontconfig property that Pango sets on any
-fontconfig pattern it passes to fontconfig
-if a <code>PangoGravity</code> other than %PANGO_GRAVITY_SOUTH
+    <p>Fontconfig property that Pango sets on any<br />
+fontconfig pattern it passes to fontconfig<br />
+if a <code>PangoGravity</code> other than %PANGO_GRAVITY_SOUTH<br />
 is desired.</p>
-<p>The property will have a <code>PangoGravity</code> value as a string,
-like &quot;east&quot;. This can be used to write fontconfig configuration
-rules to choose different fonts for horizontal and vertical
+<p>The property will have a <code>PangoGravity</code> value as a string,<br />
+like &quot;east&quot;. This can be used to write fontconfig configuration<br />
+rules to choose different fonts for horizontal and vertical<br />
 writing directions.</p>
 
 
@@ -194,13 +196,13 @@ writing directions.</p>
         <dt id="PRGNAME-constant" class="">PRGNAME =
           <div class="docstring">
   <div class="discussion">
-    <p>Fontconfig property that Pango sets on any
+    <p>Fontconfig property that Pango sets on any<br />
 fontconfig pattern it passes to fontconfig.</p>
-<p>The property will have a string equal to what
-g_get_prgname() returns. This can be used to write
-fontconfig configuration rules that only affect
+<p>The property will have a string equal to what<br />
+g_get_prgname() returns. This can be used to write<br />
+fontconfig configuration rules that only affect<br />
 certain applications.</p>
-<p>This is equivalent to FC_PRGNAME in versions of
+<p>This is equivalent to FC_PRGNAME in versions of<br />
 fontconfig that have that.</p>
 
 
@@ -216,12 +218,12 @@ fontconfig that have that.</p>
         <dt id="VERSION-constant" class="">VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>Fontconfig property that Pango sets on any
+    <p>Fontconfig property that Pango sets on any<br />
 fontconfig pattern it passes to fontconfig.</p>
-<p>The property will have an integer value equal to what
-[func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.version] returns. This can be used to write
-fontconfig configuration rules that only affect certain
-pango versions (or only pango-using applications, or only
+<p>The property will have an integer value equal to what<br />
+[func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.version] returns. This can be used to write<br />
+fontconfig configuration rules that only affect certain<br />
+pango versions (or only pango-using applications, or only<br />
 non-pango-using applications).</p>
 
 
@@ -250,7 +252,7 @@ non-pango-using applications).</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::MediaStream";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -1269,6 +1271,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1539,7 +1542,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>nil for a properly working stream or the <code>GError</code>
+    <p>nil for a properly working stream or the <code>GError</code><br />
 that the stream is in.</p>
 
 
@@ -1579,7 +1582,7 @@ that the stream is in.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>nil for a properly working stream or the <code>GError</code>
+    <p>nil for a properly working stream or the <code>GError</code><br />
 that the stream is in.</p>
 
 
@@ -1648,7 +1651,7 @@ that the stream is in.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->self<!-- raw HTML omitted --> into an error state using a printf()-style format string.</p>
-<p>This is a utility function that calls [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.gerror].
+<p>This is a utility function that calls [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.gerror].<br />
 See that function for details.</p>
 
 
@@ -1749,13 +1752,13 @@ See that function for details.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->self<!-- raw HTML omitted --> into an error state.</p>
-<p>This will pause the stream (you can check for an error
-via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.get_error] in your
-GtkMediaStream.pause() implementation), abort pending
+<p>This will pause the stream (you can check for an error<br />
+via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.get_error] in your<br />
+GtkMediaStream.pause() implementation), abort pending<br />
 seeks and mark the stream as prepared.</p>
-<p>if the stream is already in an error state, this call
+<p>if the stream is already in an error state, this call<br />
 will be ignored and the existing error will be retained.</p>
-<p>To unset an error, the stream must be reset via a call to
+<p>To unset an error, the stream must be reset via a call to<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.unprepared].</p>
 
 
@@ -2141,11 +2144,11 @@ will be ignored and the existing error will be retained.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if a stream may be seekable.</p>
-<p>This is meant to be a hint. Streams may not allow seeking even if
-this function returns true. However, if this function returns
-false, streams are guaranteed to not be seekable and user interfaces
+<p>This is meant to be a hint. Streams may not allow seeking even if<br />
+this function returns true. However, if this function returns<br />
+false, streams are guaranteed to not be seekable and user interfaces<br />
 may hide controls that allow seeking.</p>
-<p>It is allowed to call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.seek] on a non-seekable
+<p>It is allowed to call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.seek] on a non-seekable<br />
 stream, though it will not do anything.</p>
 
 
@@ -2832,7 +2835,7 @@ stream, though it will not do anything.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the stream has finished initializing and existence of
+    <p>Whether the stream has finished initializing and existence of<br />
 audio and video is known.</p>
 
 
@@ -2900,7 +2903,7 @@ audio and video is known.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the stream has finished initializing and existence of
+    <p>Whether the stream has finished initializing and existence of<br />
 audio and video is known.</p>
 
 
@@ -2941,15 +2944,15 @@ audio and video is known.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Called by users to attach the media stream to a <code>GdkSurface</code> they manage.</p>
-<p>The stream can then access the resources of <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> for its
-rendering purposes. In particular, media streams might want to
+<p>The stream can then access the resources of <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> for its<br />
+rendering purposes. In particular, media streams might want to<br />
 create a <code>GdkGLContext</code> or sync to the <code>GdkFrameClock</code>.</p>
-<p>Whoever calls this function is responsible for calling
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.unrealize] before either the stream
+<p>Whoever calls this function is responsible for calling<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.unrealize] before either the stream<br />
 or <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> get destroyed.</p>
-<p>Multiple calls to this function may happen from different
-users of the video, even with the same <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->. Each of these
-calls must be followed by its own call to
+<p>Multiple calls to this function may happen from different<br />
+users of the video, even with the same <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->. Each of these<br />
+calls must be followed by its own call to<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.unrealize].</p>
 <p>It is not required to call this function to make a media stream work.</p>
 
@@ -3007,11 +3010,11 @@ calls must be followed by its own call to
   <div class="discussion">
     <p>Start a seek operation on <!-- raw HTML omitted -->self<!-- raw HTML omitted --> to <!-- raw HTML omitted -->timestamp<!-- raw HTML omitted -->.</p>
 <p>If <!-- raw HTML omitted -->timestamp<!-- raw HTML omitted --> is out of range, it will be clamped.</p>
-<p>Seek operations may not finish instantly. While a
-seek operation is in process, the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream:seeking]
+<p>Seek operations may not finish instantly. While a<br />
+seek operation is in process, the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream:seeking]<br />
 property will be set.</p>
-<p>When calling gtk_media_stream_seek() during an
-ongoing seek operation, the new seek will override
+<p>When calling gtk_media_stream_seek() during an<br />
+ongoing seek operation, the new seek will override<br />
 any pending seek.</p>
 
 
@@ -3067,9 +3070,9 @@ any pending seek.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Ends a seek operation started via GtkMediaStream.seek() as a failure.</p>
-<p>This will not cause an error on the stream and will assume that
+<p>This will not cause an error on the stream and will assume that<br />
 playback continues as if no seek had happened.</p>
-<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.seek_success] for the other way of
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.seek_success] for the other way of<br />
 ending a seek.</p>
 
 
@@ -3106,9 +3109,9 @@ ending a seek.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Ends a seek operation started via GtkMediaStream.seek() successfully.</p>
-<p>This function will unset the GtkMediaStream:ended property
+<p>This function will unset the GtkMediaStream:ended property<br />
 if it was set.</p>
-<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.seek_failed] for the other way of
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.seek_failed] for the other way of<br />
 ending a seek.</p>
 
 
@@ -3357,7 +3360,7 @@ ending a seek.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Pauses the media stream and marks it as ended.</p>
-<p>This is a hint only, calls to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.play]
+<p>This is a hint only, calls to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.play]<br />
 may still happen.</p>
 <p>The media stream must be prepared when this function is called.</p>
 
@@ -3394,13 +3397,13 @@ may still happen.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Called by <code>GtkMediaStream</code> implementations to advertise the stream
+    <p>Called by <code>GtkMediaStream</code> implementations to advertise the stream<br />
 being ready to play and providing details about the stream.</p>
-<p>Note that the arguments are hints. If the stream implementation
-cannot determine the correct values, it is better to err on the
-side of caution and return true. User interfaces will use those
+<p>Note that the arguments are hints. If the stream implementation<br />
+cannot determine the correct values, it is better to err on the<br />
+side of caution and return true. User interfaces will use those<br />
 values to determine what controls to show.</p>
-<p>This function may not be called again until the stream has been
+<p>This function may not be called again until the stream has been<br />
 reset via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStream.stream_unprepared].</p>
 
 
@@ -3679,7 +3682,7 @@ reset via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.MediaStre
 </h3><div class="docstring">
   <div class="discussion">
     <p>Undoes a previous call to gtk_media_stream_realize().</p>
-<p>This causes the stream to release all resources it had
+<p>This causes the stream to release all resources it had<br />
 allocated from <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->.</p>
 
 
@@ -3734,9 +3737,9 @@ allocated from <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Media stream implementations should regularly call this
+    <p>Media stream implementations should regularly call this<br />
 function to update the timestamp reported by the stream.</p>
-<p>It is up to implementations to call this at the frequency
+<p>It is up to implementations to call this at the frequency<br />
 they deem appropriate.</p>
 <p>The media stream must be prepared when this function is called.</p>
 
@@ -3894,7 +3897,7 @@ they deem appropriate.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::DisplayManager";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,31 +95,32 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A singleton object that offers notification when displays appear or
+    <p>A singleton object that offers notification when displays appear or<br />
 disappear.</p>
-<p>You can use [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DisplayManager.get] to obtain the <code>GdkDisplayManager</code>
-singleton, but that should be rarely necessary. Typically, initializing
-GTK opens a display that you can work with without ever accessing the
+<p>You can use [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DisplayManager.get] to obtain the <code>GdkDisplayManager</code><br />
+singleton, but that should be rarely necessary. Typically, initializing<br />
+GTK opens a display that you can work with without ever accessing the<br />
 <code>GdkDisplayManager</code>.</p>
-<p>The GDK library can be built with support for multiple backends.
-The <code>GdkDisplayManager</code> object determines which backend is used
+<p>The GDK library can be built with support for multiple backends.<br />
+The <code>GdkDisplayManager</code> object determines which backend is used<br />
 at runtime.</p>
-<p>In the rare case that you need to influence which of the backends
-is being used, you can use [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.set_allowed_backends]. Note
+<p>In the rare case that you need to influence which of the backends<br />
+is being used, you can use [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.set_allowed_backends]. Note<br />
 that you need to call this function before initializing GTK.</p>
-<h2>Backend-specific code</h2>
-<p>When writing backend-specific code that is supposed to work with
-multiple GDK backends, you have to consider both compile time and
-runtime. At compile time, use the <code>GDK_WINDOWING_X11</code>, <code>GDK_WINDOWING_WIN32</code>
-macros, etc. to find out which backends are present in the GDK library
-you are building your application against. At runtime, use type-check
+<h2><a href="#backend-specific-code" aria-hidden="true" class="anchor" id="backend-specific-code"></a>Backend-specific code</h2>
+<p>When writing backend-specific code that is supposed to work with<br />
+multiple GDK backends, you have to consider both compile time and<br />
+runtime. At compile time, use the <code>GDK_WINDOWING_X11</code>, <code>GDK_WINDOWING_WIN32</code><br />
+macros, etc. to find out which backends are present in the GDK library<br />
+you are building your application against. At runtime, use type-check<br />
 macros like GDK_IS_X11_DISPLAY() to find out which backend is in use:</p>
 <pre class="code c"><code class="c">#ifdef GDK_WINDOWING_X11
   if (GDK_IS_X11_DISPLAY (display))
@@ -182,6 +184,7 @@ macros like GDK_IS_X11_DISPLAY() to find out which backend is in use:</p>
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -283,6 +286,7 @@ macros like GDK_IS_X11_DISPLAY() to find out which backend is in use:</p>
 
       
     </ul>
+    
   
 
 
@@ -303,11 +307,11 @@ macros like GDK_IS_X11_DISPLAY() to find out which backend is in use:</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the singleton <code>GdkDisplayManager</code> object.</p>
-<p>When called for the first time, this function consults the
-<code>GDK_BACKEND</code> environment variable to find out which of the
-supported GDK backends to use (in case GDK has been compiled
+<p>When called for the first time, this function consults the<br />
+<code>GDK_BACKEND</code> environment variable to find out which of the<br />
+supported GDK backends to use (in case GDK has been compiled<br />
 with multiple backends).</p>
-<p>Applications can use [func<!-- raw HTML omitted -->set_allowed_backends<!-- raw HTML omitted -->] to limit what
+<p>Applications can use [func<!-- raw HTML omitted -->set_allowed_backends<!-- raw HTML omitted -->] to limit what<br />
 backends will be used.</p>
 
 
@@ -477,7 +481,7 @@ backends will be used.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly
+        <div class='inline'><p>a newly<br />
 allocated <code>GSList</code> of <code>GdkDisplay</code> objects</p>
 </div>
       
@@ -536,7 +540,7 @@ allocated <code>GSList</code> of <code>GdkDisplay</code> objects</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GdkDisplay</code>, or nil
+        <div class='inline'><p>a <code>GdkDisplay</code>, or nil<br />
 if the display could not be opened</p>
 </div>
       
@@ -554,7 +558,7 @@ if the display could not be opened</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

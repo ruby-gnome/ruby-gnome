@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::TextView";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -103,8 +104,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/text-view.rb<span class="defines">,<br />
+    <dd>lib/gtk4/text-view.rb<span class="defines">,<br>
   lib/gtk4/deprecated.rb</span>
+
 </dd>
   </dl>
   
@@ -2006,9 +2008,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -2037,9 +2041,9 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkTextView</code> widget displaying the buffer <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>One buffer can be shared among many widgets. <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> may be nil
-to create a default buffer, in which case this function is equivalent
-to [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.new]. The text view adds its own reference count
+<p>One buffer can be shared among many widgets. <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> may be nil<br />
+to create a default buffer, in which case this function is equivalent<br />
+to [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.new]. The text view adds its own reference count<br />
 to the buffer; it does not take over an existing reference.</p>
 
 
@@ -2107,7 +2111,7 @@ to the buffer; it does not take over an existing reference.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if pressing the Tab key inserts a tab character,
+        <div class='inline'><p>true if pressing the Tab key inserts a tab character,<br />
 false if pressing the Tab key moves the keyboard focus.</p>
 </div>
       
@@ -2305,11 +2309,11 @@ false if pressing the Tab key moves the keyboard focus.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds <!-- raw HTML omitted -->child<!-- raw HTML omitted --> at a fixed coordinate in the <code>GtkTextView</code>'s text window.</p>
-<p>The <!-- raw HTML omitted -->xpos<!-- raw HTML omitted --> and <!-- raw HTML omitted -->ypos<!-- raw HTML omitted --> must be in buffer coordinates (see
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.get_iter_location] to convert to
+<p>The <!-- raw HTML omitted -->xpos<!-- raw HTML omitted --> and <!-- raw HTML omitted -->ypos<!-- raw HTML omitted --> must be in buffer coordinates (see<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.get_iter_location] to convert to<br />
 buffer coordinates).</p>
 <p><!-- raw HTML omitted -->child<!-- raw HTML omitted --> will scroll with the text view.</p>
-<p>If instead you want a widget that will not move with the
+<p>If instead you want a widget that will not move with the<br />
 <code>GtkTextView</code> contents see <code>GtkOverlay</code>.</p>
 
 
@@ -2395,12 +2399,12 @@ buffer coordinates).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Moves the given <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> backward by one display (wrapped) line.</p>
-<p>A display line is different from a paragraph. Paragraphs are
-separated by newlines or other paragraph separator characters.
-Display lines are created by line-wrapping a paragraph. If
-wrapping is turned off, display lines and paragraphs will be the
-same. Display lines are divided differently for each view, since
-they depend on the view’s width; paragraphs are the same in all
+<p>A display line is different from a paragraph. Paragraphs are<br />
+separated by newlines or other paragraph separator characters.<br />
+Display lines are created by line-wrapping a paragraph. If<br />
+wrapping is turned off, display lines and paragraphs will be the<br />
+same. Display lines are divided differently for each view, since<br />
+they depend on the view’s width; paragraphs are the same in all<br />
 views, since they depend on the contents of the <code>GtkTextBuffer</code>.</p>
 
 
@@ -2460,12 +2464,12 @@ views, since they depend on the contents of the <code>GtkTextBuffer</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Moves the given <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> backward to the next display line start.</p>
-<p>A display line is different from a paragraph. Paragraphs are
-separated by newlines or other paragraph separator characters.
-Display lines are created by line-wrapping a paragraph. If
-wrapping is turned off, display lines and paragraphs will be the
-same. Display lines are divided differently for each view, since
-they depend on the view’s width; paragraphs are the same in all
+<p>A display line is different from a paragraph. Paragraphs are<br />
+separated by newlines or other paragraph separator characters.<br />
+Display lines are created by line-wrapping a paragraph. If<br />
+wrapping is turned off, display lines and paragraphs will be the<br />
+same. Display lines are divided differently for each view, since<br />
+they depend on the view’s width; paragraphs are the same in all<br />
 views, since they depend on the contents of the <code>GtkTextBuffer</code>.</p>
 
 
@@ -2525,8 +2529,8 @@ views, since they depend on the contents of the <code>GtkTextBuffer</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The bottom margin for text in the text view.</p>
-<p>Note that this property is confusingly named. In CSS terms,
-the value set here is padding, and it is applied in addition
+<p>Note that this property is confusingly named. In CSS terms,<br />
+the value set here is padding, and it is applied in addition<br />
 to the padding from the theme.</p>
 <p>Don't confuse this property with [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:margin-bottom].</p>
 
@@ -2568,8 +2572,8 @@ to the padding from the theme.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The bottom margin for text in the text view.</p>
-<p>Note that this property is confusingly named. In CSS terms,
-the value set here is padding, and it is applied in addition
+<p>Note that this property is confusingly named. In CSS terms,<br />
+the value set here is padding, and it is applied in addition<br />
 to the padding from the theme.</p>
 <p>Don't confuse this property with [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:margin-bottom].</p>
 
@@ -3255,12 +3259,12 @@ to the padding from the theme.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Moves the given <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> forward by one display (wrapped) line.</p>
-<p>A display line is different from a paragraph. Paragraphs are
-separated by newlines or other paragraph separator characters.
-Display lines are created by line-wrapping a paragraph. If
-wrapping is turned off, display lines and paragraphs will be the
-same. Display lines are divided differently for each view, since
-they depend on the view’s width; paragraphs are the same in all
+<p>A display line is different from a paragraph. Paragraphs are<br />
+separated by newlines or other paragraph separator characters.<br />
+Display lines are created by line-wrapping a paragraph. If<br />
+wrapping is turned off, display lines and paragraphs will be the<br />
+same. Display lines are divided differently for each view, since<br />
+they depend on the view’s width; paragraphs are the same in all<br />
 views, since they depend on the contents of the <code>GtkTextBuffer</code>.</p>
 
 
@@ -3320,12 +3324,12 @@ views, since they depend on the contents of the <code>GtkTextBuffer</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Moves the given <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> forward to the next display line end.</p>
-<p>A display line is different from a paragraph. Paragraphs are
-separated by newlines or other paragraph separator characters.
-Display lines are created by line-wrapping a paragraph. If
-wrapping is turned off, display lines and paragraphs will be the
-same. Display lines are divided differently for each view, since
-they depend on the view’s width; paragraphs are the same in all
+<p>A display line is different from a paragraph. Paragraphs are<br />
+separated by newlines or other paragraph separator characters.<br />
+Display lines are created by line-wrapping a paragraph. If<br />
+wrapping is turned off, display lines and paragraphs will be the<br />
+same. Display lines are divided differently for each view, since<br />
+they depend on the view’s width; paragraphs are the same in all<br />
 views, since they depend on the contents of the <code>GtkTextBuffer</code>.</p>
 
 
@@ -3384,21 +3388,21 @@ views, since they depend on the contents of the <code>GtkTextBuffer</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determine the positions of the strong and weak cursors if the
+    <p>Determine the positions of the strong and weak cursors if the<br />
 insertion point is at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
-<p>The position of each cursor is stored as a zero-width rectangle.
-The strong cursor location is the location where characters of
-the directionality equal to the base direction of the paragraph
-are inserted. The weak cursor location is the location where
-characters of the directionality opposite to the base direction
+<p>The position of each cursor is stored as a zero-width rectangle.<br />
+The strong cursor location is the location where characters of<br />
+the directionality equal to the base direction of the paragraph<br />
+are inserted. The weak cursor location is the location where<br />
+characters of the directionality opposite to the base direction<br />
 of the paragraph are inserted.</p>
 <p>If <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is nil, the actual cursor position is used.</p>
-<p>Note that if <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> happens to be the actual cursor position, and
-there is currently an IM preedit sequence being entered, the
-returned locations will be adjusted to account for the preedit
+<p>Note that if <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> happens to be the actual cursor position, and<br />
+there is currently an IM preedit sequence being entered, the<br />
+returned locations will be adjusted to account for the preedit<br />
 cursor’s offset within the preedit sequence.</p>
-<p>The rectangle position is in buffer coordinates; use
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.buffer_to_window_coords] to convert these
+<p>The rectangle position is in buffer coordinates; use<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.buffer_to_window_coords] to convert these<br />
 coordinates to coordinates for one of the windows in the text view.</p>
 
 
@@ -3485,7 +3489,7 @@ coordinates to coordinates for one of the windows in the text view.</p>
   <div class="discussion">
     <p>Gets a <code>GtkWidget</code> that has previously been set as gutter.</p>
 <p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.set_gutter].</p>
-<p><!-- raw HTML omitted -->win<!-- raw HTML omitted --> must be one of %GTK_TEXT_WINDOW_LEFT, %GTK_TEXT_WINDOW_RIGHT,
+<p><!-- raw HTML omitted -->win<!-- raw HTML omitted --> must be one of %GTK_TEXT_WINDOW_LEFT, %GTK_TEXT_WINDOW_RIGHT,<br />
 %GTK_TEXT_WINDOW_TOP, or %GTK_TEXT_WINDOW_BOTTOM.</p>
 
 
@@ -3595,9 +3599,9 @@ coordinates to coordinates for one of the windows in the text view.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the iterator at buffer coordinates <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted -->.</p>
-<p>Buffer coordinates are coordinates for the entire buffer, not just
-the currently-displayed portion. If you have coordinates from an
-event, you have to convert those to buffer coordinates with
+<p>Buffer coordinates are coordinates for the entire buffer, not just<br />
+the currently-displayed portion. If you have coordinates from an<br />
+event, you have to convert those to buffer coordinates with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.window_to_buffer_coords].</p>
 
 
@@ -3727,9 +3731,9 @@ event, you have to convert those to buffer coordinates with
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the iterator at buffer coordinates <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted -->.</p>
-<p>Buffer coordinates are coordinates for the entire buffer, not just
-the currently-displayed portion. If you have coordinates from an
-event, you have to convert those to buffer coordinates with
+<p>Buffer coordinates are coordinates for the entire buffer, not just<br />
+the currently-displayed portion. If you have coordinates from an<br />
+event, you have to convert those to buffer coordinates with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.window_to_buffer_coords].</p>
 
 
@@ -3832,13 +3836,13 @@ event, you have to convert those to buffer coordinates with
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the iterator pointing to the character at buffer
+    <p>Retrieves the iterator pointing to the character at buffer<br />
 coordinates <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted -->.</p>
-<p>Buffer coordinates are coordinates for the entire buffer, not just
-the currently-displayed portion. If you have coordinates from an event,
-you have to convert those to buffer coordinates with
+<p>Buffer coordinates are coordinates for the entire buffer, not just<br />
+the currently-displayed portion. If you have coordinates from an event,<br />
+you have to convert those to buffer coordinates with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.window_to_buffer_coords].</p>
-<p>Note that this is different from [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.get_iter_at_location],
+<p>Note that this is different from [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.get_iter_at_location],<br />
 which returns cursor locations, i.e. positions between characters.</p>
 
 
@@ -3873,9 +3877,9 @@ which returns cursor locations, i.e. positions between characters.</p>
       
       
         &mdash;
-        <div class='inline'><p>if non-nil, location to store
-an integer indicating where in the grapheme the user clicked.
-It will either be zero, or the number of characters in the grapheme.
+        <div class='inline'><p>if non-nil, location to store<br />
+an integer indicating where in the grapheme the user clicked.<br />
+It will either be zero, or the number of characters in the grapheme.<br />
 0 represents the trailing edge of the grapheme.</p>
 </div>
       
@@ -3983,13 +3987,13 @@ It will either be zero, or the number of characters in the grapheme.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the iterator pointing to the character at buffer
+    <p>Retrieves the iterator pointing to the character at buffer<br />
 coordinates <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted -->.</p>
-<p>Buffer coordinates are coordinates for the entire buffer, not just
-the currently-displayed portion. If you have coordinates from an event,
-you have to convert those to buffer coordinates with
+<p>Buffer coordinates are coordinates for the entire buffer, not just<br />
+the currently-displayed portion. If you have coordinates from an event,<br />
+you have to convert those to buffer coordinates with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.window_to_buffer_coords].</p>
-<p>Note that this is different from [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.get_iter_at_location],
+<p>Note that this is different from [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.get_iter_at_location],<br />
 which returns cursor locations, i.e. positions between characters.</p>
 
 
@@ -4024,9 +4028,9 @@ which returns cursor locations, i.e. positions between characters.</p>
       
       
         &mdash;
-        <div class='inline'><p>if non-nil, location to store
-an integer indicating where in the grapheme the user clicked.
-It will either be zero, or the number of characters in the grapheme.
+        <div class='inline'><p>if non-nil, location to store<br />
+an integer indicating where in the grapheme the user clicked.<br />
+It will either be zero, or the number of characters in the grapheme.<br />
 0 represents the trailing edge of the grapheme.</p>
 </div>
       
@@ -4111,8 +4115,8 @@ It will either be zero, or the number of characters in the grapheme.
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets a rectangle which roughly contains the character at <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->.</p>
-<p>The rectangle position is in buffer coordinates; use
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.buffer_to_window_coords] to convert these
+<p>The rectangle position is in buffer coordinates; use<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.buffer_to_window_coords] to convert these<br />
 coordinates to coordinates for one of the windows in the text view.</p>
 
 
@@ -4182,11 +4186,11 @@ coordinates to coordinates for one of the windows in the text view.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the <code>GtkTextIter</code> at the start of the line containing
+    <p>Gets the <code>GtkTextIter</code> at the start of the line containing<br />
 the coordinate <!-- raw HTML omitted -->y<!-- raw HTML omitted -->.</p>
-<p><!-- raw HTML omitted -->y<!-- raw HTML omitted --> is in buffer coordinates, convert from window coordinates with
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.window_to_buffer_coords]. If non-nil,
-<!-- raw HTML omitted -->line_top<!-- raw HTML omitted --> will be filled with the coordinate of the top edge
+<p><!-- raw HTML omitted -->y<!-- raw HTML omitted --> is in buffer coordinates, convert from window coordinates with<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.window_to_buffer_coords]. If non-nil,<br />
+<!-- raw HTML omitted -->line_top<!-- raw HTML omitted --> will be filled with the coordinate of the top edge<br />
 of the line.</p>
 
 
@@ -4271,9 +4275,9 @@ of the line.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the y coordinate of the top of the line containing <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->,
+    <p>Gets the y coordinate of the top of the line containing <!-- raw HTML omitted -->iter<!-- raw HTML omitted -->,<br />
 and the height of the line.</p>
-<p>The coordinate is a buffer coordinate; convert to window
+<p>The coordinate is a buffer coordinate; convert to window<br />
 coordinates with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.buffer_to_window_coords].</p>
 
 
@@ -4358,9 +4362,9 @@ coordinates with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Te
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Fills <!-- raw HTML omitted -->visible_rect<!-- raw HTML omitted --> with the currently-visible
+    <p>Fills <!-- raw HTML omitted -->visible_rect<!-- raw HTML omitted --> with the currently-visible<br />
 region of the buffer, in buffer coordinates.</p>
-<p>Convert to window coordinates with
+<p>Convert to window coordinates with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.buffer_to_window_coords].</p>
 
 
@@ -4415,13 +4419,13 @@ region of the buffer, in buffer coordinates.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Allow the <code>GtkTextView</code> input method to internally handle key press
+    <p>Allow the <code>GtkTextView</code> input method to internally handle key press<br />
 and release events.</p>
-<p>If this function returns true, then no further processing should be
+<p>If this function returns true, then no further processing should be<br />
 done for this key event. See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMContext.filter_keypress].</p>
-<p>Note that you are expected to call this function from your handler
-when overriding key event handling. This is needed in the case when
-you need to insert your own key handling between the input method
+<p>Note that you are expected to call this function from your handler<br />
+when overriding key event handling. This is needed in the case when<br />
+you need to insert your own key handling between the input method<br />
 and the default key event handling of the <code>GtkTextView</code>.</p>
 <pre class="code c"><code class="c">static gboolean
 gtk_foo_bar_key_press_event (GtkWidget *widget,
@@ -4501,7 +4505,7 @@ gtk_foo_bar_key_press_event (GtkWidget *widget,
   <div class="discussion">
     <p>Which IM (input method) module should be used for this text_view.</p>
 <p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMMulticontext].</p>
-<p>Setting this to a non-nil value overrides the system-wide IM module
+<p>Setting this to a non-nil value overrides the system-wide IM module<br />
 setting. See the GtkSettings [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-im-module] property.</p>
 
 
@@ -4543,7 +4547,7 @@ setting. See the GtkSettings [property<!-- raw HTML omitted -->Gtk<!-- raw HTML 
   <div class="discussion">
     <p>Which IM (input method) module should be used for this text_view.</p>
 <p>See [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IMMulticontext].</p>
-<p>Setting this to a non-nil value overrides the system-wide IM module
+<p>Setting this to a non-nil value overrides the system-wide IM module<br />
 setting. See the GtkSettings [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-im-module] property.</p>
 
 
@@ -4612,8 +4616,8 @@ setting. See the GtkSettings [property<!-- raw HTML omitted -->Gtk<!-- raw HTML 
 </h3><div class="docstring">
   <div class="discussion">
     <p>Amount to indent the paragraph, in pixels.</p>
-<p>A negative value of indent will produce a hanging indentation.
-That is, the first line will have the full width, and subsequent
+<p>A negative value of indent will produce a hanging indentation.<br />
+That is, the first line will have the full width, and subsequent<br />
 lines will be indented by the absolute value of indent.</p>
 
 
@@ -4654,8 +4658,8 @@ lines will be indented by the absolute value of indent.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Amount to indent the paragraph, in pixels.</p>
-<p>A negative value of indent will produce a hanging indentation.
-That is, the first line will have the full width, and subsequent
+<p>A negative value of indent will produce a hanging indentation.<br />
+That is, the first line will have the full width, and subsequent<br />
 lines will be indented by the absolute value of indent.</p>
 
 
@@ -4723,7 +4727,7 @@ lines will be indented by the absolute value of indent.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Additional hints (beyond [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView:input-purpose])
+    <p>Additional hints (beyond [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView:input-purpose])<br />
 that allow input methods to fine-tune their behaviour.</p>
 
 
@@ -4763,7 +4767,7 @@ that allow input methods to fine-tune their behaviour.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Additional hints (beyond [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView:input-purpose])
+    <p>Additional hints (beyond [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView:input-purpose])<br />
 that allow input methods to fine-tune their behaviour.</p>
 
 
@@ -4832,7 +4836,7 @@ that allow input methods to fine-tune their behaviour.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The purpose of this text field.</p>
-<p>This property can be used by on-screen keyboards and other input
+<p>This property can be used by on-screen keyboards and other input<br />
 methods to adjust their behaviour.</p>
 
 
@@ -4873,7 +4877,7 @@ methods to adjust their behaviour.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The purpose of this text field.</p>
-<p>This property can be used by on-screen keyboards and other input
+<p>This property can be used by on-screen keyboards and other input<br />
 methods to adjust their behaviour.</p>
 
 
@@ -5048,8 +5052,8 @@ methods to adjust their behaviour.</p>
   <div class="discussion">
     <p>The default left margin for text in the text view.</p>
 <p>Tags in the buffer may override the default.</p>
-<p>Note that this property is confusingly named. In CSS terms,
-the value set here is padding, and it is applied in addition
+<p>Note that this property is confusingly named. In CSS terms,<br />
+the value set here is padding, and it is applied in addition<br />
 to the padding from the theme.</p>
 
 
@@ -5091,8 +5095,8 @@ to the padding from the theme.</p>
   <div class="discussion">
     <p>The default left margin for text in the text view.</p>
 <p>Tags in the buffer may override the default.</p>
-<p>Note that this property is confusingly named. In CSS terms,
-the value set here is padding, and it is applied in addition
+<p>Note that this property is confusingly named. In CSS terms,<br />
+the value set here is padding, and it is applied in addition<br />
 to the padding from the theme.</p>
 
 
@@ -5160,7 +5164,7 @@ to the padding from the theme.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the <code>PangoContext</code> that is used for rendering LTR directed
+    <p>Gets the <code>PangoContext</code> that is used for rendering LTR directed<br />
 text layouts.</p>
 <p>The context may be replaced when CSS changes occur.</p>
 
@@ -5241,7 +5245,7 @@ text layouts.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether text should be displayed in a monospace font.</p>
-<p>If true, set the .monospace style class on the
+<p>If true, set the .monospace style class on the<br />
 text view to indicate that a monospace font is desired.</p>
 
 
@@ -5310,7 +5314,7 @@ text view to indicate that a monospace font is desired.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether text should be displayed in a monospace font.</p>
-<p>If true, set the .monospace style class on the
+<p>If true, set the .monospace style class on the<br />
 text view to indicate that a monospace font is desired.</p>
 
 
@@ -5350,7 +5354,7 @@ text view to indicate that a monospace font is desired.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Moves a mark within the buffer so that it's
+    <p>Moves a mark within the buffer so that it's<br />
 located within the currently-visible text area.</p>
 
 
@@ -5494,15 +5498,15 @@ located within the currently-visible text area.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Move the iterator a given number of characters visually, treating
+    <p>Move the iterator a given number of characters visually, treating<br />
 it as the strong cursor position.</p>
-<p>If <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is positive, then the new strong cursor position will
-be <!-- raw HTML omitted -->count<!-- raw HTML omitted --> positions to the right of the old cursor position.
-If <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is negative then the new strong cursor position will
+<p>If <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is positive, then the new strong cursor position will<br />
+be <!-- raw HTML omitted -->count<!-- raw HTML omitted --> positions to the right of the old cursor position.<br />
+If <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is negative then the new strong cursor position will<br />
 be <!-- raw HTML omitted -->count<!-- raw HTML omitted --> positions to the left of the old cursor position.</p>
-<p>In the presence of bi-directional text, the correspondence
-between logical and visual order will depend on the direction
-of the current run, and there may be jumps when the cursor
+<p>In the presence of bi-directional text, the correspondence<br />
+between logical and visual order will depend on the direction<br />
+of the current run, and there may be jumps when the cursor<br />
 is moved off of the end of a run.</p>
 
 
@@ -5537,7 +5541,7 @@ is moved off of the end of a run.</p>
       
       
         &mdash;
-        <div class='inline'><p>number of characters to move (negative moves left,
+        <div class='inline'><p>number of characters to move (negative moves left,<br />
 positive moves right)</p>
 </div>
       
@@ -6037,7 +6041,7 @@ positive moves right)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Moves the cursor to the currently visible region of the
+    <p>Moves the cursor to the currently visible region of the<br />
 buffer.</p>
 
 
@@ -6132,10 +6136,10 @@ buffer.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Ensures that the cursor is shown.</p>
-<p>This also resets the time that it will stay blinking (or
+<p>This also resets the time that it will stay blinking (or<br />
 visible, in case blinking is disabled).</p>
-<p>This function should be called in response to user input
-(e.g. from derived classes that override the textview's
+<p>This function should be called in response to user input<br />
+(e.g. from derived classes that override the textview's<br />
 event handlers).</p>
 
 
@@ -6172,7 +6176,7 @@ event handlers).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Reset the input method context of the text view if needed.</p>
-<p>This can be necessary in the case where modifying the buffer
+<p>This can be necessary in the case where modifying the buffer<br />
 would confuse on-going input method behavior.</p>
 
 
@@ -6210,8 +6214,8 @@ would confuse on-going input method behavior.</p>
   <div class="discussion">
     <p>The default right margin for text in the text view.</p>
 <p>Tags in the buffer may override the default.</p>
-<p>Note that this property is confusingly named. In CSS terms,
-the value set here is padding, and it is applied in addition
+<p>Note that this property is confusingly named. In CSS terms,<br />
+the value set here is padding, and it is applied in addition<br />
 to the padding from the theme.</p>
 
 
@@ -6253,8 +6257,8 @@ to the padding from the theme.</p>
   <div class="discussion">
     <p>The default right margin for text in the text view.</p>
 <p>Tags in the buffer may override the default.</p>
-<p>Note that this property is confusingly named. In CSS terms,
-the value set here is padding, and it is applied in addition
+<p>Note that this property is confusingly named. In CSS terms,<br />
+the value set here is padding, and it is applied in addition<br />
 to the padding from the theme.</p>
 
 
@@ -6322,7 +6326,7 @@ to the padding from the theme.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the <code>PangoContext</code> that is used for rendering RTL directed
+    <p>Gets the <code>PangoContext</code> that is used for rendering RTL directed<br />
 text layouts.</p>
 <p>The context may be replaced when CSS changes occur.</p>
 
@@ -6363,7 +6367,7 @@ text layouts.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Scrolls <!-- raw HTML omitted -->text_view<!-- raw HTML omitted --> the minimum distance such that <!-- raw HTML omitted -->mark<!-- raw HTML omitted --> is contained
+    <p>Scrolls <!-- raw HTML omitted -->text_view<!-- raw HTML omitted --> the minimum distance such that <!-- raw HTML omitted -->mark<!-- raw HTML omitted --> is contained<br />
 within the visible area of the widget.</p>
 
 
@@ -6418,18 +6422,18 @@ within the visible area of the widget.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Scrolls <!-- raw HTML omitted -->text_view<!-- raw HTML omitted --> so that <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is on the screen in the position
+    <p>Scrolls <!-- raw HTML omitted -->text_view<!-- raw HTML omitted --> so that <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is on the screen in the position<br />
 indicated by <!-- raw HTML omitted -->xalign<!-- raw HTML omitted --> and <!-- raw HTML omitted -->yalign<!-- raw HTML omitted -->.</p>
-<p>An alignment of 0.0 indicates left or top, 1.0 indicates right or
-bottom, 0.5 means center. If <!-- raw HTML omitted -->use_align<!-- raw HTML omitted --> is false, the text scrolls
-the minimal distance to get the mark onscreen, possibly not scrolling
-at all. The effective screen for purposes of this function is reduced
+<p>An alignment of 0.0 indicates left or top, 1.0 indicates right or<br />
+bottom, 0.5 means center. If <!-- raw HTML omitted -->use_align<!-- raw HTML omitted --> is false, the text scrolls<br />
+the minimal distance to get the mark onscreen, possibly not scrolling<br />
+at all. The effective screen for purposes of this function is reduced<br />
 by a margin of size <!-- raw HTML omitted -->within_margin<!-- raw HTML omitted -->.</p>
-<p>Note that this function uses the currently-computed height of the
-lines in the text buffer. Line heights are computed in an idle
-handler; so this function may not have the desired effect if it’s
-called before the height computations. To avoid oddness, consider
-using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.scroll_to_mark] which saves a point to be
+<p>Note that this function uses the currently-computed height of the<br />
+lines in the text buffer. Line heights are computed in an idle<br />
+handler; so this function may not have the desired effect if it’s<br />
+called before the height computations. To avoid oddness, consider<br />
+using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.scroll_to_mark] which saves a point to be<br />
 scrolled to after line validation.</p>
 
 
@@ -6479,7 +6483,7 @@ scrolled to after line validation.</p>
       
       
         &mdash;
-        <div class='inline'><p>whether to use alignment arguments (if false,
+        <div class='inline'><p>whether to use alignment arguments (if false,<br />
 just get the mark onscreen)</p>
 </div>
       
@@ -6549,12 +6553,12 @@ just get the mark onscreen)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Scrolls <!-- raw HTML omitted -->text_view<!-- raw HTML omitted --> so that <!-- raw HTML omitted -->mark<!-- raw HTML omitted --> is on the screen in the position
+    <p>Scrolls <!-- raw HTML omitted -->text_view<!-- raw HTML omitted --> so that <!-- raw HTML omitted -->mark<!-- raw HTML omitted --> is on the screen in the position<br />
 indicated by <!-- raw HTML omitted -->xalign<!-- raw HTML omitted --> and <!-- raw HTML omitted -->yalign<!-- raw HTML omitted -->.</p>
-<p>An alignment of 0.0 indicates left or top, 1.0 indicates right or
-bottom, 0.5 means center. If <!-- raw HTML omitted -->use_align<!-- raw HTML omitted --> is false, the text scrolls
-the minimal distance to get the mark onscreen, possibly not scrolling
-at all. The effective screen for purposes of this function is reduced
+<p>An alignment of 0.0 indicates left or top, 1.0 indicates right or<br />
+bottom, 0.5 means center. If <!-- raw HTML omitted -->use_align<!-- raw HTML omitted --> is false, the text scrolls<br />
+the minimal distance to get the mark onscreen, possibly not scrolling<br />
+at all. The effective screen for purposes of this function is reduced<br />
 by a margin of size <!-- raw HTML omitted -->within_margin<!-- raw HTML omitted -->.</p>
 
 
@@ -6604,7 +6608,7 @@ by a margin of size <!-- raw HTML omitted -->within_margin<!-- raw HTML omitted 
       
       
         &mdash;
-        <div class='inline'><p>whether to use alignment arguments (if false, just
+        <div class='inline'><p>whether to use alignment arguments (if false, just<br />
 get the mark onscreen)</p>
 </div>
       
@@ -6671,7 +6675,7 @@ get the mark onscreen)</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Places <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> into the gutter specified by <!-- raw HTML omitted -->win<!-- raw HTML omitted -->.</p>
-<p><!-- raw HTML omitted -->win<!-- raw HTML omitted --> must be one of %GTK_TEXT_WINDOW_LEFT, %GTK_TEXT_WINDOW_RIGHT,
+<p><!-- raw HTML omitted -->win<!-- raw HTML omitted --> must be one of %GTK_TEXT_WINDOW_LEFT, %GTK_TEXT_WINDOW_RIGHT,<br />
 %GTK_TEXT_WINDOW_TOP, or %GTK_TEXT_WINDOW_BOTTOM.</p>
 
 
@@ -6742,7 +6746,7 @@ get the mark onscreen)</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Determines whether <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is at the start of a display line.</p>
-<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.forward_display_line] for an
+<p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextView.forward_display_line] for an<br />
 explanation of display lines vs. paragraphs.</p>
 
 
@@ -6907,8 +6911,8 @@ explanation of display lines vs. paragraphs.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The top margin for text in the text view.</p>
-<p>Note that this property is confusingly named. In CSS terms,
-the value set here is padding, and it is applied in addition
+<p>Note that this property is confusingly named. In CSS terms,<br />
+the value set here is padding, and it is applied in addition<br />
 to the padding from the theme.</p>
 <p>Don't confuse this property with [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:margin-top].</p>
 
@@ -6950,8 +6954,8 @@ to the padding from the theme.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The top margin for text in the text view.</p>
-<p>Note that this property is confusingly named. In CSS terms,
-the value set here is padding, and it is applied in addition
+<p>Note that this property is confusingly named. In CSS terms,<br />
+the value set here is padding, and it is applied in addition<br />
 to the padding from the theme.</p>
 <p>Don't confuse this property with [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:margin-top].</p>
 
@@ -7020,7 +7024,7 @@ to the padding from the theme.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Converts coordinates on the window identified by <!-- raw HTML omitted -->win<!-- raw HTML omitted --> to buffer
+    <p>Converts coordinates on the window identified by <!-- raw HTML omitted -->win<!-- raw HTML omitted --> to buffer<br />
 coordinates.</p>
 
 
@@ -7236,7 +7240,7 @@ coordinates.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

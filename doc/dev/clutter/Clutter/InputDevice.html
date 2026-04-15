@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::InputDevice";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -1172,6 +1174,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1191,10 +1194,10 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a pointer to the Clutter::InputDevice that has been
+    <p>Retrieves a pointer to the Clutter::InputDevice that has been<br />
 associated to <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
-<p>If the Clutter::InputDevice:device-mode property of <!-- raw HTML omitted -->device<!-- raw HTML omitted --> is
-set to %CLUTTER_INPUT_MODE_MASTER, this function will return
+<p>If the Clutter::InputDevice:device-mode property of <!-- raw HTML omitted -->device<!-- raw HTML omitted --> is<br />
+set to %CLUTTER_INPUT_MODE_MASTER, this function will return<br />
 nil.</p>
 
 
@@ -1608,8 +1611,8 @@ nil.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of the device, or nil. The returned string
-is owned by the Clutter::InputDevice and should never be modified
+        <div class='inline'><p>the name of the device, or nil. The returned string<br />
+is owned by the Clutter::InputDevice and should never be modified<br />
 or freed</p>
 </div>
       
@@ -1777,7 +1780,7 @@ or freed</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the device is enabled.</p>
-<p>A device with the Clutter::InputDevice:device-mode property set
+<p>A device with the Clutter::InputDevice:device-mode property set<br />
 to %CLUTTER_INPUT_MODE_MASTER cannot be disabled.</p>
 <p>A device must be enabled in order to receive events from it.</p>
 
@@ -1847,7 +1850,7 @@ to %CLUTTER_INPUT_MODE_MASTER cannot be disabled.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the device is enabled.</p>
-<p>A device with the Clutter::InputDevice:device-mode property set
+<p>A device with the Clutter::InputDevice:device-mode property set<br />
 to %CLUTTER_INPUT_MODE_MASTER cannot be disabled.</p>
 <p>A device must be enabled in order to receive events from it.</p>
 
@@ -1946,16 +1949,16 @@ to %CLUTTER_INPUT_MODE_MASTER cannot be disabled.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Extracts the value of the given <!-- raw HTML omitted -->axis<!-- raw HTML omitted --> of a Clutter::InputDevice from
+    <p>Extracts the value of the given <!-- raw HTML omitted -->axis<!-- raw HTML omitted --> of a Clutter::InputDevice from<br />
 an array of axis values.</p>
 <p>An example of typical usage for this function is:</p>
-<p>|[
-ClutterInputDevice *device = clutter_event_get_device (event);
-gdouble *axes = clutter_event_get_axes (event, NULL);
+<p>|[<br />
+ClutterInputDevice *device = clutter_event_get_device (event);<br />
+gdouble *axes = clutter_event_get_axes (event, NULL);<br />
 gdouble pressure_value = 0;</p>
-<p>clutter_input_device_get_axis_value (device, axes,
-CLUTTER_INPUT_AXIS_PRESSURE,
-&amp;pressure_value);
+<p>clutter_input_device_get_axis_value (device, axes,<br />
+CLUTTER_INPUT_AXIS_PRESSURE,<br />
+&amp;pressure_value);<br />
 ]|</p>
 
 
@@ -1975,7 +1978,7 @@ CLUTTER_INPUT_AXIS_PRESSURE,
       
       
         &mdash;
-        <div class='inline'><p>an array of axes values, typically
+        <div class='inline'><p>an array of axes values, typically<br />
 coming from clutter_event_get_axes()</p>
 </div>
       
@@ -2045,7 +2048,7 @@ coming from clutter_event_get_axes()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the latest coordinates of a pointer or touch point of
+    <p>Retrieves the latest coordinates of a pointer or touch point of<br />
 <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
 
 
@@ -2065,7 +2068,7 @@ coming from clutter_event_get_axes()</p>
       
       
         &mdash;
-        <div class='inline'><p>a Clutter::EventSequence, or nil if
+        <div class='inline'><p>a Clutter::EventSequence, or nil if<br />
 the device is not touch-based</p>
 </div>
       
@@ -2081,7 +2084,7 @@ the device is not touch-based</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the pointer
+        <div class='inline'><p>return location for the pointer<br />
 or touch point</p>
 </div>
       
@@ -2100,7 +2103,7 @@ or touch point</p>
       
       
         &mdash;
-        <div class='inline'><p>false if the device's sequence hasn't been found,
+        <div class='inline'><p>false if the device's sequence hasn't been found,<br />
 and true otherwise.</p>
 </div>
       
@@ -2280,12 +2283,12 @@ and true otherwise.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Acquires a grab on <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> for the given <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
-<p>Any event coming from <!-- raw HTML omitted -->device<!-- raw HTML omitted --> will be delivered to <!-- raw HTML omitted -->actor<!-- raw HTML omitted -->, bypassing
-the usual event delivery mechanism, until the grab is released by
+<p>Any event coming from <!-- raw HTML omitted -->device<!-- raw HTML omitted --> will be delivered to <!-- raw HTML omitted -->actor<!-- raw HTML omitted -->, bypassing<br />
+the usual event delivery mechanism, until the grab is released by<br />
 calling clutter_input_device_ungrab().</p>
-<p>The grab is client-side: even if the windowing system used by the Clutter
+<p>The grab is client-side: even if the windowing system used by the Clutter<br />
 backend has the concept of &quot;device grabs&quot;, Clutter will not use them.</p>
-<p>Only Clutter::InputDevice of types %CLUTTER_POINTER_DEVICE and
+<p>Only Clutter::InputDevice of types %CLUTTER_POINTER_DEVICE and<br />
 %CLUTTER_KEYBOARD_DEVICE can hold a grab.</p>
 
 
@@ -2340,7 +2343,7 @@ backend has the concept of &quot;device grabs&quot;, Clutter will not use them.<
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a pointer to the Clutter::Actor currently grabbing all
+    <p>Retrieves a pointer to the Clutter::Actor currently grabbing all<br />
 the events coming from <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
 
 
@@ -2380,7 +2383,7 @@ the events coming from <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves whether <!-- raw HTML omitted -->device<!-- raw HTML omitted --> has a pointer that follows the
+    <p>Retrieves whether <!-- raw HTML omitted -->device<!-- raw HTML omitted --> has a pointer that follows the<br />
 device motion.</p>
 
 
@@ -2632,10 +2635,10 @@ device motion.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Translates a hardware keycode from a Clutter::KeyEvent to the
-equivalent evdev keycode. Note that depending on the input backend
-used by Clutter this function can fail if there is no obvious
-mapping between the key codes. The hardware keycode can be taken
+    <p>Translates a hardware keycode from a Clutter::KeyEvent to the<br />
+equivalent evdev keycode. Note that depending on the input backend<br />
+used by Clutter this function can fail if there is no obvious<br />
+mapping between the key codes. The hardware keycode can be taken<br />
 from the Clutter::KeyEvent.hardware_keycode member of #ClutterKeyEvent.</p>
 
 
@@ -2709,7 +2712,7 @@ from the Clutter::KeyEvent.hardware_keycode member of #ClutterKeyEvent.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the current modifiers state of the device, as seen
+    <p>Retrieves the current modifiers state of the device, as seen<br />
 by the last event Clutter processed.</p>
 
 
@@ -3184,7 +3187,7 @@ by the last event Clutter processed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a pointer to the Clutter::Actor currently grabbing the
+    <p>Retrieves a pointer to the Clutter::Actor currently grabbing the<br />
 touch events coming from <!-- raw HTML omitted -->device<!-- raw HTML omitted --> given the <!-- raw HTML omitted -->sequence<!-- raw HTML omitted -->.</p>
 
 
@@ -3243,13 +3246,13 @@ touch events coming from <!-- raw HTML omitted -->device<!-- raw HTML omitted --
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Acquires a grab on <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> for the given <!-- raw HTML omitted -->device<!-- raw HTML omitted --> and the given touch
+    <p>Acquires a grab on <!-- raw HTML omitted -->actor<!-- raw HTML omitted --> for the given <!-- raw HTML omitted -->device<!-- raw HTML omitted --> and the given touch<br />
 <!-- raw HTML omitted -->sequence<!-- raw HTML omitted -->.</p>
-<p>Any touch event coming from <!-- raw HTML omitted -->device<!-- raw HTML omitted --> and from <!-- raw HTML omitted -->sequence<!-- raw HTML omitted --> will be
-delivered to <!-- raw HTML omitted -->actor<!-- raw HTML omitted -->, bypassing the usual event delivery mechanism,
-until the grab is released by calling
+<p>Any touch event coming from <!-- raw HTML omitted -->device<!-- raw HTML omitted --> and from <!-- raw HTML omitted -->sequence<!-- raw HTML omitted --> will be<br />
+delivered to <!-- raw HTML omitted -->actor<!-- raw HTML omitted -->, bypassing the usual event delivery mechanism,<br />
+until the grab is released by calling<br />
 clutter_input_device_sequence_ungrab().</p>
-<p>The grab is client-side: even if the windowing system used by the Clutter
+<p>The grab is client-side: even if the windowing system used by the Clutter<br />
 backend has the concept of &quot;device grabs&quot;, Clutter will not use them.</p>
 
 
@@ -3319,7 +3322,7 @@ backend has the concept of &quot;device grabs&quot;, Clutter will not use them.<
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Releases the grab on the <!-- raw HTML omitted -->device<!-- raw HTML omitted --> for the given <!-- raw HTML omitted -->sequence<!-- raw HTML omitted -->, if one is
+    <p>Releases the grab on the <!-- raw HTML omitted -->device<!-- raw HTML omitted --> for the given <!-- raw HTML omitted -->sequence<!-- raw HTML omitted -->, if one is<br />
 in place.</p>
 
 
@@ -3375,7 +3378,7 @@ in place.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the keyval and modifiers at the given <!-- raw HTML omitted -->index_<!-- raw HTML omitted --> for <!-- raw HTML omitted -->device<!-- raw HTML omitted -->.</p>
-<p>Clutter will use the keyval and modifiers set when filling out
+<p>Clutter will use the keyval and modifiers set when filling out<br />
 an event coming from the same input device.</p>
 
 
@@ -3478,8 +3481,8 @@ an event coming from the same input device.</p>
       
       
         &mdash;
-        <div class='inline'><p>a
-list of Clutter::InputDevice, or nil. The contents of the list are
+        <div class='inline'><p>a<br />
+list of Clutter::InputDevice, or nil. The contents of the list are<br />
 owned by the device. Use g_list_free() when done</p>
 </div>
       
@@ -3537,41 +3540,41 @@ owned by the device. Use g_list_free() when done</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Forcibly updates the state of the <!-- raw HTML omitted -->device<!-- raw HTML omitted --> using a Clutter::Event</p>
-<p>This function should never be used by applications: it is meant
+<p>This function should never be used by applications: it is meant<br />
 for integration with embedding toolkits, like clutter-gtk</p>
-<p>Embedding toolkits that disable the event collection inside Clutter
-need to use this function to update the state of input devices depending
-on a Clutter::Event that they are going to submit to the event handling code
-in Clutter though clutter_do_event(). Since the input devices hold the state
-that is going to be used to fill in fields like the Clutter::ButtonEvent
-click count, or to emit synthesized events like %CLUTTER_ENTER and
-%CLUTTER_LEAVE, it is necessary for embedding toolkits to also be
+<p>Embedding toolkits that disable the event collection inside Clutter<br />
+need to use this function to update the state of input devices depending<br />
+on a Clutter::Event that they are going to submit to the event handling code<br />
+in Clutter though clutter_do_event(). Since the input devices hold the state<br />
+that is going to be used to fill in fields like the Clutter::ButtonEvent<br />
+click count, or to emit synthesized events like %CLUTTER_ENTER and<br />
+%CLUTTER_LEAVE, it is necessary for embedding toolkits to also be<br />
 responsible of updating the input device state.</p>
-<p>For instance, this might be the code to translate an embedding toolkit
-native motion notification into a Clutter Clutter::MotionEvent and ask
+<p>For instance, this might be the code to translate an embedding toolkit<br />
+native motion notification into a Clutter Clutter::MotionEvent and ask<br />
 Clutter to process it:</p>
-<p>|[
+<p>|[<br />
 ClutterEvent c_event;</p>
 <p>translate_native_event_to_clutter (native_event, &amp;c_event);</p>
-<p>clutter_do_event (&amp;c_event);
+<p>clutter_do_event (&amp;c_event);<br />
 ]|</p>
-<p>Before letting clutter_do_event() process the event, it is necessary to call
+<p>Before letting clutter_do_event() process the event, it is necessary to call<br />
 clutter_input_device_update_from_event():</p>
-<p>|[
-ClutterEvent c_event;
-ClutterDeviceManager *manager;
+<p>|[<br />
+ClutterEvent c_event;<br />
+ClutterDeviceManager *manager;<br />
 ClutterInputDevice *device;</p>
 <p>translate_native_event_to_clutter (native_event, &amp;c_event);</p>
-<p>// get the device manager
+<p>// get the device manager<br />
 manager = clutter_device_manager_get_default ();</p>
-<p>// use the default Core Pointer that Clutter backends register by default
+<p>// use the default Core Pointer that Clutter backends register by default<br />
 device = clutter_device_manager_get_core_device (manager, %CLUTTER_POINTER_DEVICE);</p>
-<p>// update the state of the input device
+<p>// update the state of the input device<br />
 clutter_input_device_update_from_event (device, &amp;c_event, FALSE);</p>
-<p>clutter_do_event (&amp;c_event);
+<p>clutter_do_event (&amp;c_event);<br />
 ]|</p>
-<p>The <!-- raw HTML omitted -->update_stage<!-- raw HTML omitted --> boolean argument should be used when the input device
-enters and leaves a Clutter::Stage; it will use the #ClutterStage field
+<p>The <!-- raw HTML omitted -->update_stage<!-- raw HTML omitted --> boolean argument should be used when the input device<br />
+enters and leaves a Clutter::Stage; it will use the #ClutterStage field<br />
 of the passed <!-- raw HTML omitted -->event<!-- raw HTML omitted --> to update the stage associated to the input device.</p>
 
 
@@ -3606,7 +3609,7 @@ of the passed <!-- raw HTML omitted -->event<!-- raw HTML omitted --> to update 
       
       
         &mdash;
-        <div class='inline'><p>whether to update the Clutter::Stage of the <!-- raw HTML omitted -->device<!-- raw HTML omitted -->
+        <div class='inline'><p>whether to update the Clutter::Stage of the <!-- raw HTML omitted -->device<!-- raw HTML omitted --><br />
 using the stage of the event</p>
 </div>
       
@@ -3744,7 +3747,7 @@ using the stage of the event</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

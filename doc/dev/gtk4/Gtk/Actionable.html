@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Actionable";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,23 +79,24 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The <code>GtkActionable</code> interface provides a convenient way of associating
+    <p>The <code>GtkActionable</code> interface provides a convenient way of associating<br />
 widgets with actions.</p>
-<p>It primarily consists of two properties: [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Actionable:action-name]
-and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Actionable:action-target]. There are also some convenience
+<p>It primarily consists of two properties: [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Actionable:action-name]<br />
+and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Actionable:action-target]. There are also some convenience<br />
 APIs for setting these properties.</p>
-<p>The action will be looked up in action groups that are found among
-the widgets ancestors. Most commonly, these will be the actions with
-the “win.” or “app.” prefix that are associated with the
-<code>GtkApplicationWindow</code> or <code>GtkApplication</code>, but other action groups that
-are added with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.insert_action_group] will be consulted
+<p>The action will be looked up in action groups that are found among<br />
+the widgets ancestors. Most commonly, these will be the actions with<br />
+the “win.” or “app.” prefix that are associated with the<br />
+<code>GtkApplicationWindow</code> or <code>GtkApplication</code>, but other action groups that<br />
+are added with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.insert_action_group] will be consulted<br />
 as well.</p>
 
 
@@ -257,6 +259,7 @@ as well.</p>
 
       
     </ul>
+    
   
 
 
@@ -315,15 +318,15 @@ as well.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Specifies the name of the action with which this widget should be
+    <p>Specifies the name of the action with which this widget should be<br />
 associated.</p>
-<p>If <!-- raw HTML omitted -->action_name<!-- raw HTML omitted --> is nil then the widget will be unassociated from
+<p>If <!-- raw HTML omitted -->action_name<!-- raw HTML omitted --> is nil then the widget will be unassociated from<br />
 any previous action.</p>
-<p>Usually this function is used when the widget is located (or will be
+<p>Usually this function is used when the widget is located (or will be<br />
 located) within the hierarchy of a <code>GtkApplicationWindow</code>.</p>
-<p>Names are of the form “win.save” or “app.quit” for actions on the
-containing [class<!-- raw HTML omitted -->ApplicationWindow<!-- raw HTML omitted -->] or its associated [class<!-- raw HTML omitted -->Application<!-- raw HTML omitted -->],
-respectively. This is the same form used for actions in the [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Menu]
+<p>Names are of the form “win.save” or “app.quit” for actions on the<br />
+containing [class<!-- raw HTML omitted -->ApplicationWindow<!-- raw HTML omitted -->] or its associated [class<!-- raw HTML omitted -->Application<!-- raw HTML omitted -->],<br />
+respectively. This is the same form used for actions in the [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Menu]<br />
 associated with the window.</p>
 
 
@@ -419,18 +422,18 @@ associated with the window.</p>
   <div class="discussion">
     <p>Sets the target value of an actionable widget.</p>
 <p>If <!-- raw HTML omitted -->target_value<!-- raw HTML omitted --> is nil then the target value is unset.</p>
-<p>The target value has two purposes. First, it is used as the parameter
-to activation of the action associated with the <code>GtkActionable</code> widget.
-Second, it is used to determine if the widget should be rendered as
+<p>The target value has two purposes. First, it is used as the parameter<br />
+to activation of the action associated with the <code>GtkActionable</code> widget.<br />
+Second, it is used to determine if the widget should be rendered as<br />
 “active” — the widget is active if the state is equal to the given target.</p>
-<p>Consider the example of associating a set of buttons with a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action]
-with string state in a typical “radio button” situation. Each button
-will be associated with the same action, but with a different target
-value for that action. Clicking on a particular button will activate
-the action with the target of that button, which will typically cause
-the action’s state to change to that value. Since the action’s state
-is now equal to the target value of the button, the button will now
-be rendered as active (and the other buttons, with different targets,
+<p>Consider the example of associating a set of buttons with a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action]<br />
+with string state in a typical “radio button” situation. Each button<br />
+will be associated with the same action, but with a different target<br />
+value for that action. Clicking on a particular button will activate<br />
+the action with the target of that button, which will typically cause<br />
+the action’s state to change to that value. Since the action’s state<br />
+is now equal to the target value of the button, the button will now<br />
+be rendered as active (and the other buttons, with different targets,<br />
 rendered inactive).</p>
 
 
@@ -485,9 +488,9 @@ rendered inactive).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the action-name and associated string target value of an
+    <p>Sets the action-name and associated string target value of an<br />
 actionable widget.</p>
-<p><!-- raw HTML omitted -->detailed_action_name<!-- raw HTML omitted --> is a string in the format accepted by
+<p><!-- raw HTML omitted -->detailed_action_name<!-- raw HTML omitted --> is a string in the format accepted by<br />
 [func<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action.parse_detailed_name].</p>
 
 
@@ -543,11 +546,11 @@ actionable widget.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the target of an actionable widget.</p>
-<p>This is a convenience function that calls [ctor<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant.new] for
-<!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> and uses the result to call
+<p>This is a convenience function that calls [ctor<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant.new] for<br />
+<!-- raw HTML omitted -->format_string<!-- raw HTML omitted --> and uses the result to call<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Actionable.set_action_target_value].</p>
-<p>If you are setting a string-valued target and want to set
-the action name at the same time, you can use
+<p>If you are setting a string-valued target and want to set<br />
+the action name at the same time, you can use<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Actionable.set_detailed_action_name].</p>
 
 
@@ -613,7 +616,7 @@ the action name at the same time, you can use
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

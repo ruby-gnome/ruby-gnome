@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Expression";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -102,23 +104,23 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p><code>GtkExpression</code> provides a way to describe references to values.</p>
-<p>An important aspect of expressions is that the value can be obtained
-from a source that is several steps away. For example, an expression
-may describe ‘the value of property A of <code>object1</code>, which is itself the
-value of a property of <code>object2</code>’. And <code>object1</code> may not even exist yet
-at the time that the expression is created. This is contrast to <code>GObject</code>
-property bindings, which can only create direct connections between
-the properties of two objects that must both exist for the duration
+<p>An important aspect of expressions is that the value can be obtained<br />
+from a source that is several steps away. For example, an expression<br />
+may describe ‘the value of property A of <code>object1</code>, which is itself the<br />
+value of a property of <code>object2</code>’. And <code>object1</code> may not even exist yet<br />
+at the time that the expression is created. This is contrast to <code>GObject</code><br />
+property bindings, which can only create direct connections between<br />
+the properties of two objects that must both exist for the duration<br />
 of the binding.</p>
-<p>An expression needs to be &quot;evaluated&quot; to obtain the value that it currently
-refers to. An evaluation always happens in the context of a current object
-called <code>this</code> (it mirrors the behavior of object-oriented languages),
-which may or may not influence the result of the evaluation. Use
+<p>An expression needs to be &quot;evaluated&quot; to obtain the value that it currently<br />
+refers to. An evaluation always happens in the context of a current object<br />
+called <code>this</code> (it mirrors the behavior of object-oriented languages),<br />
+which may or may not influence the result of the evaluation. Use<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Expression.evaluate] for evaluating an expression.</p>
-<p>Various methods for defining expressions exist, from simple constants via
-[ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ConstantExpression.new] to looking up properties in a <code>GObject</code>
-(even recursively) via [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PropertyExpression.new] or providing
-custom functions to transform and combine expressions via
+<p>Various methods for defining expressions exist, from simple constants via<br />
+[ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ConstantExpression.new] to looking up properties in a <code>GObject</code><br />
+(even recursively) via [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PropertyExpression.new] or providing<br />
+custom functions to transform and combine expressions via<br />
 [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ClosureExpression.new].</p>
 <p>Here is an example of a complex expression:</p>
 <pre class="code c"><code class="c">  color_expr = gtk_property_expression_new (GTK_TYPE_LIST_ITEM,
@@ -126,28 +128,28 @@ custom functions to transform and combine expressions via
   expression = gtk_property_expression_new (GTK_TYPE_COLOR,
                                             color_expr, &quot;name&quot;);
 </code></pre>
-<p>when evaluated with <code>this</code> being a <code>GtkListItem</code>, it will obtain the
-&quot;item&quot; property from the <code>GtkListItem</code>, and then obtain the &quot;name&quot; property
+<p>when evaluated with <code>this</code> being a <code>GtkListItem</code>, it will obtain the<br />
+&quot;item&quot; property from the <code>GtkListItem</code>, and then obtain the &quot;name&quot; property<br />
 from the resulting object (which is assumed to be of type <code>GTK_TYPE_COLOR</code>).</p>
 <p>A more concise way to describe this would be</p>
 <pre class="code ruby"><code class="ruby">  this-&gt;item-&gt;name
 </code></pre>
-<p>The most likely place where you will encounter expressions is in the context
-of list models and list widgets using them. For example, <code>GtkDropDown</code> is
-evaluating a <code>GtkExpression</code> to obtain strings from the items in its model
-that it can then use to match against the contents of its search entry.
+<p>The most likely place where you will encounter expressions is in the context<br />
+of list models and list widgets using them. For example, <code>GtkDropDown</code> is<br />
+evaluating a <code>GtkExpression</code> to obtain strings from the items in its model<br />
+that it can then use to match against the contents of its search entry.<br />
 <code>GtkStringFilter</code> is using a <code>GtkExpression</code> for similar reasons.</p>
-<p>By default, expressions are not paying attention to changes and evaluation is
-just a snapshot of the current state at a given time. To get informed about
-changes, an expression needs to be &quot;watched&quot; via a [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ExpressionWatch],
-which will cause a callback to be called whenever the value of the expression may
-have changed; [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Expression.watch] starts watching an expression, and
+<p>By default, expressions are not paying attention to changes and evaluation is<br />
+just a snapshot of the current state at a given time. To get informed about<br />
+changes, an expression needs to be &quot;watched&quot; via a [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ExpressionWatch],<br />
+which will cause a callback to be called whenever the value of the expression may<br />
+have changed; [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Expression.watch] starts watching an expression, and<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ExpressionWatch.unwatch] stops.</p>
-<p>Watches can be created for automatically updating the property of an object,
+<p>Watches can be created for automatically updating the property of an object,<br />
 similar to GObject's <code>GBinding</code> mechanism, by using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Expression.bind].</p>
-<h2>GtkExpression in GObject properties</h2>
-<p>In order to use a <code>GtkExpression</code> as a <code>GObject</code> property, you must use the
-[func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.param_spec_expression] when creating a <code>GParamSpec</code> to install in the
+<h2><a href="#gtkexpression-in-gobject-properties" aria-hidden="true" class="anchor" id="gtkexpression-in-gobject-properties"></a>GtkExpression in GObject properties</h2>
+<p>In order to use a <code>GtkExpression</code> as a <code>GObject</code> property, you must use the<br />
+[func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.param_spec_expression] when creating a <code>GParamSpec</code> to install in the<br />
 <code>GObject</code> class being defined; for instance:</p>
 <pre class="code c"><code class="c">obj_props[PROP_EXPRESSION] =
   gtk_param_spec_expression (&quot;expression&quot;,
@@ -157,9 +159,9 @@ similar to GObject's <code>GBinding</code> mechanism, by using [method<!-- raw H
                              G_PARAM_STATIC_STRINGS |
                              G_PARAM_EXPLICIT_NOTIFY);
 </code></pre>
-<p>When implementing the <code>GObjectClass.set_property</code> and <code>GObjectClass.get_property</code>
-virtual functions, you must use [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.value_get_expression], to retrieve the
-stored <code>GtkExpression</code> from the <code>GValue</code> container, and [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.value_set_expression],
+<p>When implementing the <code>GObjectClass.set_property</code> and <code>GObjectClass.get_property</code><br />
+virtual functions, you must use [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.value_get_expression], to retrieve the<br />
+stored <code>GtkExpression</code> from the <code>GValue</code> container, and [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.value_set_expression],<br />
 to store the <code>GtkExpression</code> into the <code>GValue</code>; for instance:</p>
 <pre class="code c"><code class="c">  // in set_property()...
   case PROP_EXPRESSION:
@@ -171,42 +173,42 @@ to store the <code>GtkExpression</code> into the <code>GValue</code>; for instan
     gtk_value_set_expression (value, foo-&gt;expression);
     break;
 </code></pre>
-<h2>GtkExpression in .ui files</h2>
-<p><code>GtkBuilder</code> has support for creating expressions. The syntax here can be used where
-a <code>GtkExpression</code> object is needed like in a <code>&lt;property&gt;</code> tag for an expression
+<h2><a href="#gtkexpression-in-ui-files" aria-hidden="true" class="anchor" id="gtkexpression-in-ui-files"></a>GtkExpression in .ui files</h2>
+<p><code>GtkBuilder</code> has support for creating expressions. The syntax here can be used where<br />
+a <code>GtkExpression</code> object is needed like in a <code>&lt;property&gt;</code> tag for an expression<br />
 property, or in a <code>&lt;binding name=&quot;property&quot;&gt;</code> tag to bind a property to an expression.</p>
-<p>To create a property expression, use the <code>&lt;lookup&gt;</code> element. It can have a <code>type</code>
-attribute to specify the object type, and a <code>name</code> attribute to specify the property
-to look up. The content of <code>&lt;lookup&gt;</code> can either be an element specifying the expression
+<p>To create a property expression, use the <code>&lt;lookup&gt;</code> element. It can have a <code>type</code><br />
+attribute to specify the object type, and a <code>name</code> attribute to specify the property<br />
+to look up. The content of <code>&lt;lookup&gt;</code> can either be an element specifying the expression<br />
 to use the object, or a string that specifies the name of the object to use.</p>
 <p>Example:</p>
 <pre class="code xml"><code class="xml">  &lt;lookup name=&#39;search&#39;&gt;string_filter&lt;/lookup&gt;
 </code></pre>
-<p>Since the <code>&lt;lookup&gt;</code> element creates an expression and its element content can
-itself be an expression, this means that <code>&lt;lookup&gt;</code> tags can also be nested.
-This is a common idiom when dealing with <code>GtkListItem</code>s. See
+<p>Since the <code>&lt;lookup&gt;</code> element creates an expression and its element content can<br />
+itself be an expression, this means that <code>&lt;lookup&gt;</code> tags can also be nested.<br />
+This is a common idiom when dealing with <code>GtkListItem</code>s. See<br />
 [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.BuilderListItemFactory] for an example of this technique.</p>
-<p>To create a constant expression, use the <code>&lt;constant&gt;</code> element. If the type attribute
-is specified, the element content is interpreted as a value of that type. Otherwise,
+<p>To create a constant expression, use the <code>&lt;constant&gt;</code> element. If the type attribute<br />
+is specified, the element content is interpreted as a value of that type. Otherwise,<br />
 it is assumed to be an object. For instance:</p>
 <pre class="code xml"><code class="xml">  &lt;constant&gt;string_filter&lt;/constant&gt;
   &lt;constant type=&#39;gchararray&#39;&gt;Hello, world&lt;/constant&gt;
 </code></pre>
-<p>To create a closure expression, use the <code>&lt;closure&gt;</code> element. The <code>function</code>
-attribute specifies what function to use for the closure, and the <code>type</code>
-attribute specifies its return type. The content of the element contains the
+<p>To create a closure expression, use the <code>&lt;closure&gt;</code> element. The <code>function</code><br />
+attribute specifies what function to use for the closure, and the <code>type</code><br />
+attribute specifies its return type. The content of the element contains the<br />
 expressions for the parameters. For instance:</p>
 <pre class="code xml"><code class="xml">  &lt;closure type=&#39;gchararray&#39; function=&#39;combine_args_somehow&#39;&gt;
     &lt;constant type=&#39;gchararray&#39;&gt;File size:&lt;/constant&gt;
     &lt;lookup type=&#39;GFile&#39; name=&#39;size&#39;&gt;myfile&lt;/lookup&gt;
   &lt;/closure&gt;
 </code></pre>
-<p>To create a property binding, use the <code>&lt;binding&gt;</code> element in place of where a
-<code>&lt;property&gt;</code> tag would ordinarily be used. The <code>name</code> and <code>object</code> attributes are
-supported. The <code>name</code> attribute is required, and pertains to the applicable property
-name. The <code>object</code> attribute is optional. If provided, it will use the specified object
-as the <code>this</code> object when the expression is evaluated. Here is an example in which the
-<code>label</code> property of a <code>GtkLabel</code> is bound to the <code>string</code> property of another arbitrary
+<p>To create a property binding, use the <code>&lt;binding&gt;</code> element in place of where a<br />
+<code>&lt;property&gt;</code> tag would ordinarily be used. The <code>name</code> and <code>object</code> attributes are<br />
+supported. The <code>name</code> attribute is required, and pertains to the applicable property<br />
+name. The <code>object</code> attribute is optional. If provided, it will use the specified object<br />
+as the <code>this</code> object when the expression is evaluated. Here is an example in which the<br />
+<code>label</code> property of a <code>GtkLabel</code> is bound to the <code>string</code> property of another arbitrary<br />
 object:</p>
 <pre class="code xml"><code class="xml">  &lt;object class=&#39;GtkLabel&#39;&gt;
     &lt;binding name=&#39;label&#39;&gt;
@@ -402,6 +404,7 @@ object:</p>
 
       
     </ul>
+    
   
 
 
@@ -422,13 +425,13 @@ object:</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Bind <code>target</code>'s property named <code>property</code> to <code>self</code>.</p>
-<p>The value that <code>self</code> evaluates to is set via <code>g_object_set()</code> on
-<code>target</code>. This is repeated whenever <code>self</code> changes to ensure that
+<p>The value that <code>self</code> evaluates to is set via <code>g_object_set()</code> on<br />
+<code>target</code>. This is repeated whenever <code>self</code> changes to ensure that<br />
 the object's property stays synchronized with <code>self</code>.</p>
-<p>If <code>self</code>'s evaluation fails, <code>target</code>'s <code>property</code> is not updated.
-You can ensure that this doesn't happen by using a fallback
+<p>If <code>self</code>'s evaluation fails, <code>target</code>'s <code>property</code> is not updated.<br />
+You can ensure that this doesn't happen by using a fallback<br />
 expression.</p>
-<p>Note that this function takes ownership of <code>self</code>. If you want
+<p>Note that this function takes ownership of <code>self</code>. If you want<br />
 to keep it around, you should [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Expression.ref] it beforehand.</p>
 
 
@@ -478,7 +481,7 @@ to keep it around, you should [method<!-- raw HTML omitted -->Gtk<!-- raw HTML o
       
       
         &mdash;
-        <div class='inline'><p>the this argument for
+        <div class='inline'><p>the this argument for<br />
 the evaluation of <code>self</code></p>
 </div>
       
@@ -518,13 +521,13 @@ the evaluation of <code>self</code></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Evaluates the given expression and on success stores the result
+    <p>Evaluates the given expression and on success stores the result<br />
 in <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
-<p>The <code>GType</code> of <code>value</code> will be the type given by
+<p>The <code>GType</code> of <code>value</code> will be the type given by<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Expression.get_value_type].</p>
-<p>It is possible that expressions cannot be evaluated - for example
-when the expression references objects that have been destroyed or
-set to <code>NULL</code>. In that case <code>value</code> will remain empty and <code>FALSE</code>
+<p>It is possible that expressions cannot be evaluated - for example<br />
+when the expression references objects that have been destroyed or<br />
+set to <code>NULL</code>. In that case <code>value</code> will remain empty and <code>FALSE</code><br />
 will be returned.</p>
 
 
@@ -599,9 +602,9 @@ will be returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if the expression is static.</p>
-<p>A static expression will never change its result when
+<p>A static expression will never change its result when<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Expression.evaluate] is called on it with the same arguments.</p>
-<p>That means a call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Expression.watch] is not necessary because
+<p>That means a call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Expression.watch] is not necessary because<br />
 it will never trigger a notify.</p>
 
 
@@ -681,7 +684,7 @@ it will never trigger a notify.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Releases a reference on the given <code>GtkExpression</code>.</p>
-<p>If the reference was the last, the resources associated to the <code>self</code> are
+<p>If the reference was the last, the resources associated to the <code>self</code> are<br />
 freed.</p>
 
 
@@ -718,7 +721,7 @@ freed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the <code>GType</code> that this expression evaluates to.</p>
-<p>This type is constant and will not change over the lifetime
+<p>This type is constant and will not change over the lifetime<br />
 of this expression.</p>
 
 
@@ -759,10 +762,10 @@ of this expression.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Watch the given <code>expression</code> for changes.</p>
-<p>The <!-- raw HTML omitted -->notify<!-- raw HTML omitted --> function will be called whenever the evaluation of <code>self</code>
+<p>The <!-- raw HTML omitted -->notify<!-- raw HTML omitted --> function will be called whenever the evaluation of <code>self</code><br />
 may have changed.</p>
-<p>GTK cannot guarantee that the evaluation did indeed change when the <!-- raw HTML omitted -->notify<!-- raw HTML omitted -->
-gets invoked, but it guarantees the opposite: When it did in fact change,
+<p>GTK cannot guarantee that the evaluation did indeed change when the <!-- raw HTML omitted -->notify<!-- raw HTML omitted --><br />
+gets invoked, but it guarantees the opposite: When it did in fact change,<br />
 the <!-- raw HTML omitted -->notify<!-- raw HTML omitted --> will be invoked.</p>
 
 
@@ -782,7 +785,7 @@ the <!-- raw HTML omitted -->notify<!-- raw HTML omitted --> will be invoked.</p
       
       
         &mdash;
-        <div class='inline'><p>the <code>this</code> argument to
+        <div class='inline'><p>the <code>this</code> argument to<br />
 watch</p>
 </div>
       
@@ -846,10 +849,10 @@ watch</p>
       
       
         &mdash;
-        <div class='inline'><p>The newly installed watch. Note that the only
-reference held to the watch will be released when the watch is unwatched
-which can happen automatically, and not just via
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ExpressionWatch.unwatch]. You should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ExpressionWatch.ref]
+        <div class='inline'><p>The newly installed watch. Note that the only<br />
+reference held to the watch will be released when the watch is unwatched<br />
+which can happen automatically, and not just via<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ExpressionWatch.unwatch]. You should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ExpressionWatch.ref]<br />
 if you want to keep the watch around.</p>
 </div>
       
@@ -867,7 +870,7 @@ if you want to keep the watch around.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

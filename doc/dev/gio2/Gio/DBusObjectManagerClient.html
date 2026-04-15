@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::DBusObjectManagerClient";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -171,6 +173,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -596,6 +599,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -613,8 +617,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new GDBus::ObjectManagerClient object.</p>
-<p>This is a synchronous failable constructor - the calling thread is
-blocked until a reply is received. See g_dbus_object_manager_client_new()
+<p>This is a synchronous failable constructor - the calling thread is<br />
+blocked until a reply is received. See g_dbus_object_manager_client_new()<br />
 for the asynchronous version.</p>
 
 
@@ -769,11 +773,11 @@ for the asynchronous version.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asynchronously creates a new GDBus::ObjectManagerClient object.</p>
-<p>This is an asynchronous failable constructor. When the result is
-ready, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the
-[thread-default main context][g-main-context-push-thread-default]
-of the thread you are calling this method from. You can
-then call g_dbus_object_manager_client_new_finish() to get the result. See
+<p>This is an asynchronous failable constructor. When the result is<br />
+ready, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the<br />
+[thread-default main context][g-main-context-push-thread-default]<br />
+of the thread you are calling this method from. You can<br />
+then call g_dbus_object_manager_client_new_finish() to get the result. See<br />
 g_dbus_object_manager_client_new_sync() for the synchronous version.</p>
 
 
@@ -963,13 +967,13 @@ g_dbus_object_manager_client_new_sync() for the synchronous version.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like g_dbus_object_manager_client_new() but takes a GBus::Type instead of a
+    <p>Like g_dbus_object_manager_client_new() but takes a GBus::Type instead of a<br />
 GDBus::Connection.</p>
-<p>This is an asynchronous failable constructor. When the result is
-ready, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the
-[thread-default main loop][g-main-context-push-thread-default]
-of the thread you are calling this method from. You can
-then call g_dbus_object_manager_client_new_for_bus_finish() to get the result. See
+<p>This is an asynchronous failable constructor. When the result is<br />
+ready, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the<br />
+[thread-default main loop][g-main-context-push-thread-default]<br />
+of the thread you are calling this method from. You can<br />
+then call g_dbus_object_manager_client_new_for_bus_finish() to get the result. See<br />
 g_dbus_object_manager_client_new_for_bus_sync() for the synchronous version.</p>
 
 
@@ -1165,9 +1169,9 @@ g_dbus_object_manager_client_new_for_bus_sync() for the synchronous version.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If this property is not %G_BUS_TYPE_NONE, then
-GDBus::ObjectManagerClient:connection must be nil and will be set to the
-GDBus::Connection obtained by calling g_bus_get() with the value
+    <p>If this property is not %G_BUS_TYPE_NONE, then<br />
+GDBus::ObjectManagerClient:connection must be nil and will be set to the<br />
+GDBus::Connection obtained by calling g_bus_get() with the value<br />
 of this property.</p>
 
 
@@ -1540,7 +1544,7 @@ of this property.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The GDBus::ProxyTypeFunc to use when determining what #GType to
+    <p>The GDBus::ProxyTypeFunc to use when determining what #GType to<br />
 use for interface proxies or nil.</p>
 
 
@@ -1580,7 +1584,7 @@ use for interface proxies or nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The GDBus::ProxyTypeFunc to use when determining what #GType to
+    <p>The GDBus::ProxyTypeFunc to use when determining what #GType to<br />
 use for interface proxies or nil.</p>
 
 
@@ -1860,8 +1864,8 @@ use for interface proxies or nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The unique name that owns GDBus::ObjectManagerClient:name or nil if
-no-one is currently owning the name. Connect to the
+    <p>The unique name that owns GDBus::ObjectManagerClient:name or nil if<br />
+no-one is currently owning the name. Connect to the<br />
 #GObject::notify signal to track changes to this property.</p>
 
 
@@ -1901,8 +1905,8 @@ no-one is currently owning the name. Connect to the
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The unique name that owns GDBus::ObjectManagerClient:name or nil if
-no-one is currently owning the name. Connect to the
+    <p>The unique name that owns GDBus::ObjectManagerClient:name or nil if<br />
+no-one is currently owning the name. Connect to the<br />
 #GObject::notify signal to track changes to this property.</p>
 
 
@@ -2072,7 +2076,7 @@ no-one is currently owning the name. Connect to the
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Vte::Pty";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/vte4/pty.rb</dd>
+    <dd>lib/vte4/pty.rb
+</dd>
   </dl>
   
 </div>
@@ -482,6 +484,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -499,24 +502,24 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Allocates a new pseudo-terminal.</p>
-<p>You can later use fork() or the g_spawn_async() family of functions
+<p>You can later use fork() or the g_spawn_async() family of functions<br />
 to start a process on the PTY.</p>
 <p>If using fork(), you MUST call vte_pty_child_setup() in the child.</p>
-<p>If using g_spawn_async() and friends, you MUST either use
-vte_pty_child_setup() directly as the child setup function, or call
+<p>If using g_spawn_async() and friends, you MUST either use<br />
+vte_pty_child_setup() directly as the child setup function, or call<br />
 vte_pty_child_setup() from your own child setup function supplied.</p>
-<p>When using vte_terminal_spawn_sync() with a custom child setup
-function, vte_pty_child_setup() will be called before the supplied
+<p>When using vte_terminal_spawn_sync() with a custom child setup<br />
+function, vte_pty_child_setup() will be called before the supplied<br />
 function; you must not call it again.</p>
 <p>Also, you MUST pass the %G_SPAWN_DO_NOT_REAP_CHILD flag.</p>
-<p>Note also that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,
-and %G_SPAWN_CHILD_INHERITS_STDIN are not supported, since stdin, stdout
+<p>Note also that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,<br />
+and %G_SPAWN_CHILD_INHERITS_STDIN are not supported, since stdin, stdout<br />
 and stderr of the child process will always be connected to the PTY.</p>
-<p>Note that you should set the PTY's size using vte_pty_set_size() before
-spawning the child process, so that the child process has the correct
-size from the start instead of starting with a default size and then
-shortly afterwards receiving a <!-- raw HTML omitted -->SIGWINCH<!-- raw HTML omitted --> signal. You
-should prefer using vte_terminal_pty_new_sync() which does this
+<p>Note that you should set the PTY's size using vte_pty_set_size() before<br />
+spawning the child process, so that the child process has the correct<br />
+size from the start instead of starting with a default size and then<br />
+shortly afterwards receiving a <!-- raw HTML omitted -->SIGWINCH<!-- raw HTML omitted --> signal. You<br />
+should prefer using vte_terminal_pty_new_sync() which does this<br />
 automatically.</p>
 
 
@@ -964,24 +967,24 @@ automatically.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Allocates a new pseudo-terminal.</p>
-<p>You can later use fork() or the g_spawn_async() family of functions
+<p>You can later use fork() or the g_spawn_async() family of functions<br />
 to start a process on the PTY.</p>
 <p>If using fork(), you MUST call vte_pty_child_setup() in the child.</p>
-<p>If using g_spawn_async() and friends, you MUST either use
-vte_pty_child_setup() directly as the child setup function, or call
+<p>If using g_spawn_async() and friends, you MUST either use<br />
+vte_pty_child_setup() directly as the child setup function, or call<br />
 vte_pty_child_setup() from your own child setup function supplied.</p>
-<p>When using vte_terminal_spawn_sync() with a custom child setup
-function, vte_pty_child_setup() will be called before the supplied
+<p>When using vte_terminal_spawn_sync() with a custom child setup<br />
+function, vte_pty_child_setup() will be called before the supplied<br />
 function; you must not call it again.</p>
 <p>Also, you MUST pass the %G_SPAWN_DO_NOT_REAP_CHILD flag.</p>
-<p>Note also that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,
-and %G_SPAWN_CHILD_INHERITS_STDIN are not supported, since stdin, stdout
+<p>Note also that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,<br />
+and %G_SPAWN_CHILD_INHERITS_STDIN are not supported, since stdin, stdout<br />
 and stderr of the child process will always be connected to the PTY.</p>
-<p>Note that you should set the PTY's size using vte_pty_set_size() before
-spawning the child process, so that the child process has the correct
-size from the start instead of starting with a default size and then
-shortly afterwards receiving a <!-- raw HTML omitted -->SIGWINCH<!-- raw HTML omitted --> signal. You
-should prefer using vte_terminal_pty_new_sync() which does this
+<p>Note that you should set the PTY's size using vte_pty_set_size() before<br />
+spawning the child process, so that the child process has the correct<br />
+size from the start instead of starting with a default size and then<br />
+shortly afterwards receiving a <!-- raw HTML omitted -->SIGWINCH<!-- raw HTML omitted --> signal. You<br />
+should prefer using vte_terminal_pty_new_sync() which does this<br />
 automatically.</p>
 
 
@@ -1069,7 +1072,7 @@ automatically.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Attempts to resize the pseudo terminal's window size.  If successful, the
+    <p>Attempts to resize the pseudo terminal's window size.  If successful, the<br />
 OS kernel will send <!-- raw HTML omitted -->SIGWINCH<!-- raw HTML omitted --> to the child process group.</p>
 <p>If setting the window size failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set to a #GIOError.</p>
 
@@ -1210,8 +1213,8 @@ OS kernel will send <!-- raw HTML omitted -->SIGWINCH<!-- raw HTML omitted --> t
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Like vte_pty_spawn_with_fds_async(), except that this function does not
-allow passing file descriptors to the child process. See vte_pty_spawn_with_fds_async()
+    <p>Like vte_pty_spawn_with_fds_async(), except that this function does not<br />
+allow passing file descriptors to the child process. See vte_pty_spawn_with_fds_async()<br />
 for more information.</p>
 
 
@@ -1231,7 +1234,7 @@ for more information.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of a directory the command should start
+        <div class='inline'><p>the name of a directory the command should start<br />
 in, or nil to use the current working directory</p>
 </div>
       
@@ -1262,7 +1265,7 @@ in, or nil to use the current working directory</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of environment
+        <div class='inline'><p>a list of environment<br />
 variables to be added to the environment before starting the process, or nil</p>
 </div>
       
@@ -1491,31 +1494,31 @@ variables to be added to the environment before starting the process, or nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Starts the specified command under the pseudo-terminal <!-- raw HTML omitted -->pty<!-- raw HTML omitted -->.
-The <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> and <!-- raw HTML omitted -->envv<!-- raw HTML omitted --> lists should be nil-terminated.
-The &quot;TERM&quot; environment variable is automatically set to a default value,
-but can be overridden from <!-- raw HTML omitted -->envv<!-- raw HTML omitted -->.
+    <p>Starts the specified command under the pseudo-terminal <!-- raw HTML omitted -->pty<!-- raw HTML omitted -->.<br />
+The <!-- raw HTML omitted -->argv<!-- raw HTML omitted --> and <!-- raw HTML omitted -->envv<!-- raw HTML omitted --> lists should be nil-terminated.<br />
+The &quot;TERM&quot; environment variable is automatically set to a default value,<br />
+but can be overridden from <!-- raw HTML omitted -->envv<!-- raw HTML omitted -->.<br />
 <!-- raw HTML omitted -->pty_flags<!-- raw HTML omitted --> controls logging the session to the specified system log files.</p>
-<p>Note also that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,
-and %G_SPAWN_CHILD_INHERITS_STDIN are not supported in <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->, since
-stdin, stdout and stderr of the child process will always be connected to
-the PTY. Also %G_SPAWN_LEAVE_DESCRIPTORS_OPEN is not supported; and
+<p>Note also that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,<br />
+and %G_SPAWN_CHILD_INHERITS_STDIN are not supported in <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->, since<br />
+stdin, stdout and stderr of the child process will always be connected to<br />
+the PTY. Also %G_SPAWN_LEAVE_DESCRIPTORS_OPEN is not supported; and<br />
 %G_SPAWN_DO_NOT_REAP_CHILD will always be added to <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->fds<!-- raw HTML omitted --> is not nil, the child process will map the file descriptors from
-<!-- raw HTML omitted -->fds<!-- raw HTML omitted --> according to <!-- raw HTML omitted -->map_fds<!-- raw HTML omitted -->; <!-- raw HTML omitted -->n_map_fds<!-- raw HTML omitted --> must be less or equal to <!-- raw HTML omitted -->n_fds<!-- raw HTML omitted -->.
-This function will take ownership of the file descriptors in <!-- raw HTML omitted -->fds<!-- raw HTML omitted -->;
-you must not use or close them after this call. All file descriptors in <!-- raw HTML omitted -->fds<!-- raw HTML omitted -->
-must have the FD_CLOEXEC flag set on them; it will be unset in the child process
-before calling man:execve(2). Note also that no file descriptor may be mapped
-to stdin, stdout, or stderr (file descriptors 0, 1, or 2), since these will be
-assigned to the PTY. All open file descriptors apart from those mapped as above
+<p>If <!-- raw HTML omitted -->fds<!-- raw HTML omitted --> is not nil, the child process will map the file descriptors from<br />
+<!-- raw HTML omitted -->fds<!-- raw HTML omitted --> according to <!-- raw HTML omitted -->map_fds<!-- raw HTML omitted -->; <!-- raw HTML omitted -->n_map_fds<!-- raw HTML omitted --> must be less or equal to <!-- raw HTML omitted -->n_fds<!-- raw HTML omitted -->.<br />
+This function will take ownership of the file descriptors in <!-- raw HTML omitted -->fds<!-- raw HTML omitted -->;<br />
+you must not use or close them after this call. All file descriptors in <!-- raw HTML omitted -->fds<!-- raw HTML omitted --><br />
+must have the FD_CLOEXEC flag set on them; it will be unset in the child process<br />
+before calling man:execve(2). Note also that no file descriptor may be mapped<br />
+to stdin, stdout, or stderr (file descriptors 0, 1, or 2), since these will be<br />
+assigned to the PTY. All open file descriptors apart from those mapped as above<br />
 will be closed when execve() is called.</p>
-<p>Beginning with 0.60, and on linux only, and unless %VTE_SPAWN_NO_SYSTEMD_SCOPE is
-passed in <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->, the newly created child process will be moved to its own
-systemd user scope; and if %VTE_SPAWN_REQUIRE_SYSTEMD_SCOPE is passed, and creation
-of the systemd user scope fails, the whole spawn will fail.
-You can override the options used for the systemd user scope by
-providing a systemd override file for 'vte-spawn-.scope' unit. See man:systemd.unit(5)
+<p>Beginning with 0.60, and on linux only, and unless %VTE_SPAWN_NO_SYSTEMD_SCOPE is<br />
+passed in <!-- raw HTML omitted -->spawn_flags<!-- raw HTML omitted -->, the newly created child process will be moved to its own<br />
+systemd user scope; and if %VTE_SPAWN_REQUIRE_SYSTEMD_SCOPE is passed, and creation<br />
+of the systemd user scope fails, the whole spawn will fail.<br />
+You can override the options used for the systemd user scope by<br />
+providing a systemd override file for 'vte-spawn-.scope' unit. See man:systemd.unit(5)<br />
 for further information.</p>
 <p>See vte_pty_new(), and vte_terminal_watch_child() for more information.</p>
 
@@ -1536,7 +1539,7 @@ for further information.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of a directory the command should start
+        <div class='inline'><p>the name of a directory the command should start<br />
 in, or nil to use the current working directory</p>
 </div>
       
@@ -1567,7 +1570,7 @@ in, or nil to use the current working directory</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of environment
+        <div class='inline'><p>a list of environment<br />
 variables to be added to the environment before starting the process, or nil</p>
 </div>
       
@@ -1783,8 +1786,8 @@ variables to be added to the environment before starting the process, or nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tells the kernel whether the terminal is UTF-8 or not, in case it can make
-use of the info.  Linux 2.6.5 or so defines IUTF8 to make the line
+    <p>Tells the kernel whether the terminal is UTF-8 or not, in case it can make<br />
+use of the info.  Linux 2.6.5 or so defines IUTF8 to make the line<br />
 discipline do multibyte backspace correctly.</p>
 
 
@@ -1839,7 +1842,7 @@ discipline do multibyte backspace correctly.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

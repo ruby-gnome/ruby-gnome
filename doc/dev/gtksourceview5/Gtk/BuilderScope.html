@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::BuilderScope";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,25 +79,26 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkBuilderScope</code> is an interface to provide language binding support
+    <p><code>GtkBuilderScope</code> is an interface to provide language binding support<br />
 to <code>GtkBuilder</code>.</p>
-<p>The goal of <code>GtkBuilderScope</code> is to look up programming-language-specific
+<p>The goal of <code>GtkBuilderScope</code> is to look up programming-language-specific<br />
 values for strings that are given in a <code>GtkBuilder</code> UI file.</p>
-<p>The primary intended audience is bindings that want to provide deeper
+<p>The primary intended audience is bindings that want to provide deeper<br />
 integration of <code>GtkBuilder</code> into the language.</p>
-<p>A <code>GtkBuilderScope</code> instance may be used with multiple <code>GtkBuilder</code> objects,
+<p>A <code>GtkBuilderScope</code> instance may be used with multiple <code>GtkBuilder</code> objects,<br />
 even at once.</p>
-<p>By default, GTK will use its own implementation of <code>GtkBuilderScope</code>
+<p>By default, GTK will use its own implementation of <code>GtkBuilderScope</code><br />
 for the C language which can be created via [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.BuilderCScope.new].</p>
-<p>If you implement <code>GtkBuilderScope</code> for a language binding, you
-may want to (partially) derive from or fall back to a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.BuilderCScope],
+<p>If you implement <code>GtkBuilderScope</code> for a language binding, you<br />
+may want to (partially) derive from or fall back to a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.BuilderCScope],<br />
 as that class implements support for automatic lookups from C symbols.</p>
 
 
@@ -190,6 +192,7 @@ as that class implements support for automatic lookups from C symbols.</p>
 
       
     </ul>
+    
   
 
 
@@ -209,10 +212,10 @@ as that class implements support for automatic lookups from C symbols.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a closure with the given arguments. See gtk_builder_create_closure()
-for more details on those.
-The C implementation will try to use dlsym() to locate the function name and then
-g_cclosure_new() to create a closure for the symbol.
+    <p>Create a closure with the given arguments. See gtk_builder_create_closure()<br />
+for more details on those.<br />
+The C implementation will try to use dlsym() to locate the function name and then<br />
+g_cclosure_new() to create a closure for the symbol.<br />
 The default implementation just fails and returns nil.</p>
 
 
@@ -296,10 +299,10 @@ The default implementation just fails and returns nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Try to lookup a <code>GType</code> via the given function name, specified
-explicitly in a GtkBuilder file, like via the &quot;type-func&quot; attribute in the <code>&lt;object&gt;</code> tag.
-This function is very rarely used.
-The C implementation will use dlsym() and call the resulting function as a <code>GTypeFunc</code>.
+    <p>Try to lookup a <code>GType</code> via the given function name, specified<br />
+explicitly in a GtkBuilder file, like via the &quot;type-func&quot; attribute in the <code>&lt;object&gt;</code> tag.<br />
+This function is very rarely used.<br />
+The C implementation will use dlsym() and call the resulting function as a <code>GTypeFunc</code>.<br />
 The default implementation will fail and just return %G_TYPE_INVALID.</p>
 
 
@@ -361,10 +364,10 @@ The default implementation will fail and just return %G_TYPE_INVALID.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Try to lookup a <code>GType</code> via the its name. See
-gtk_builder_get_type_from_name() for more details.
-The C implementation will use g_type_from_name() and if that fails try to guess the
-correct function name for registering the type and then use dlsym() to load it.
+    <p>Try to lookup a <code>GType</code> via the its name. See<br />
+gtk_builder_get_type_from_name() for more details.<br />
+The C implementation will use g_type_from_name() and if that fails try to guess the<br />
+correct function name for registering the type and then use dlsym() to load it.<br />
 The default implementation just tries g_type_from_name() and otherwise fails.</p>
 
 
@@ -422,7 +425,7 @@ The default implementation just tries g_type_from_name() and otherwise fails.</p
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

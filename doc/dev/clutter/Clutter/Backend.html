@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Backend";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -345,6 +347,7 @@
 
       
     </ul>
+    
   
 
 
@@ -457,7 +460,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the maximum time between two button press events, as set
+    <p>Gets the maximum time between two button press events, as set<br />
 by clutter_backend_set_double_click_time().</p>
 
 
@@ -497,7 +500,7 @@ by clutter_backend_set_double_click_time().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the maximum time between two button press events, used to
+    <p>Sets the maximum time between two button press events, used to<br />
 verify whether it's a double click event or not.</p>
 
 
@@ -552,7 +555,7 @@ verify whether it's a double click event or not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the default font name as set by
+    <p>Retrieves the default font name as set by<br />
 clutter_backend_set_font_name().</p>
 
 
@@ -571,7 +574,7 @@ clutter_backend_set_font_name().</p>
       
       
         &mdash;
-        <div class='inline'><p>the font name for the backend. The returned string is
+        <div class='inline'><p>the font name for the backend. The returned string is<br />
 owned by the Clutter::Backend and should never be modified or freed</p>
 </div>
       
@@ -593,9 +596,9 @@ owned by the Clutter::Backend and should never be modified or freed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the default font to be used by Clutter. The <!-- raw HTML omitted -->font_name<!-- raw HTML omitted --> string
-must either be nil, which means that the font name from the
-default Clutter::Backend will be used; or be something that can
+    <p>Sets the default font to be used by Clutter. The <!-- raw HTML omitted -->font_name<!-- raw HTML omitted --> string<br />
+must either be nil, which means that the font name from the<br />
+default Clutter::Backend will be used; or be something that can<br />
 be parsed by the pango_font_description_from_string() function.</p>
 
 
@@ -668,8 +671,8 @@ be parsed by the pango_font_description_from_string() function.</p>
       
       
         &mdash;
-        <div class='inline'><p>the font options of the Clutter::Backend.
-The returned #cairo_font_options_t is owned by the backend and should
+        <div class='inline'><p>the font options of the Clutter::Backend.<br />
+The returned #cairo_font_options_t is owned by the backend and should<br />
 not be modified or freed</p>
 </div>
       
@@ -691,12 +694,12 @@ not be modified or freed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the new font options for <!-- raw HTML omitted -->backend<!-- raw HTML omitted -->. The Clutter::Backend will
+    <p>Sets the new font options for <!-- raw HTML omitted -->backend<!-- raw HTML omitted -->. The Clutter::Backend will<br />
 copy the #cairo_font_options_t.</p>
-<p>If <!-- raw HTML omitted -->options<!-- raw HTML omitted --> is nil, the first following call to
-clutter_backend_get_font_options() will return the default font
+<p>If <!-- raw HTML omitted -->options<!-- raw HTML omitted --> is nil, the first following call to<br />
+clutter_backend_get_font_options() will return the default font<br />
 options for <!-- raw HTML omitted -->backend<!-- raw HTML omitted -->.</p>
-<p>This function is intended for actors creating a Pango layout
+<p>This function is intended for actors creating a Pango layout<br />
 using the PangoCairo API.</p>
 
 
@@ -752,12 +755,12 @@ using the PangoCairo API.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the resolution for font handling on the screen.</p>
-<p>The resolution is a scale factor between points specified in a
-Pango::FontDescription and cairo units. The default value is 96.0,
-meaning that a 10 point font will be 13 units
+<p>The resolution is a scale factor between points specified in a<br />
+Pango::FontDescription and cairo units. The default value is 96.0,<br />
+meaning that a 10 point font will be 13 units<br />
 high (10 * 96. / 72. = 13.3).</p>
-<p>Clutter will set the resolution using the current backend when
-initializing; the resolution is also stored in the
+<p>Clutter will set the resolution using the current backend when<br />
+initializing; the resolution is also stored in the<br />
 Clutter::Settings:font-dpi property.</p>
 
 
@@ -776,7 +779,7 @@ Clutter::Settings:font-dpi property.</p>
       
       
         &mdash;
-        <div class='inline'><p>the current resolution, or -1 if no resolution
+        <div class='inline'><p>the current resolution, or -1 if no resolution<br />
 has been set.</p>
 </div>
       
@@ -798,9 +801,9 @@ has been set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the resolution for font handling on the screen. This is a
-scale factor between points specified in a Pango::FontDescription
-and cairo units. The default value is 96, meaning that a 10 point
+    <p>Sets the resolution for font handling on the screen. This is a<br />
+scale factor between points specified in a Pango::FontDescription<br />
+and cairo units. The default value is 96, meaning that a 10 point<br />
 font will be 13 units high. (10 * 96. / 72. = 13.3).</p>
 <p>Applications should never need to call this function.</p>
 
@@ -821,7 +824,7 @@ font will be 13 units high. (10 * 96. / 72. = 13.3).</p>
       
       
         &mdash;
-        <div class='inline'><p>the resolution in &quot;dots per inch&quot; (Physical inches aren't
+        <div class='inline'><p>the resolution in &quot;dots per inch&quot; (Physical inches aren't<br />
 actually involved; the terminology is conventional).</p>
 </div>
       
@@ -853,7 +856,7 @@ actually involved; the terminology is conventional).</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

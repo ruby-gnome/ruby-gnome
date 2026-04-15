@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::BindingPool";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -161,6 +163,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -448,6 +451,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -464,9 +468,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Clutter::BindingPool that can be used to store
-key bindings for an actor. The <!-- raw HTML omitted -->name<!-- raw HTML omitted --> must be a unique identifier
-for the binding pool, so that clutter_binding_pool_find() will
+    <p>Creates a new Clutter::BindingPool that can be used to store<br />
+key bindings for an actor. The <!-- raw HTML omitted -->name<!-- raw HTML omitted --> must be a unique identifier<br />
+for the binding pool, so that clutter_binding_pool_find() will<br />
 be able to return the correct binding pool.</p>
 
 
@@ -573,16 +577,16 @@ be able to return the correct binding pool.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the Clutter::BindingPool for the given #GObject class
-and, eventually, creates it. This function is a wrapper around
-clutter_binding_pool_new() and uses the class type name as the
+    <p>Retrieves the Clutter::BindingPool for the given #GObject class<br />
+and, eventually, creates it. This function is a wrapper around<br />
+clutter_binding_pool_new() and uses the class type name as the<br />
 unique name for the binding pool.</p>
-<p>Calling this function multiple times will return the same
+<p>Calling this function multiple times will return the same<br />
 Clutter::BindingPool.</p>
-<p>A binding pool for a class can also be retrieved using
+<p>A binding pool for a class can also be retrieved using<br />
 clutter_binding_pool_find() with the class type name:</p>
-<p>|[
-pool = clutter_binding_pool_find (G_OBJECT_TYPE_NAME (instance));
+<p>|[<br />
+pool = clutter_binding_pool_find (G_OBJECT_TYPE_NAME (instance));<br />
 ]|</p>
 
 
@@ -620,8 +624,8 @@ pool = clutter_binding_pool_find (G_OBJECT_TYPE_NAME (instance));
       
       
         &mdash;
-        <div class='inline'><p>the binding pool for the given class.
-The returned Clutter::BindingPool is owned by Clutter and should not
+        <div class='inline'><p>the binding pool for the given class.<br />
+The returned Clutter::BindingPool is owned by Clutter and should not<br />
 be freed directly</p>
 </div>
       
@@ -649,21 +653,21 @@ be freed directly</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Activates the callback associated to the action that is
+    <p>Activates the callback associated to the action that is<br />
 bound to the <!-- raw HTML omitted -->key_val<!-- raw HTML omitted --> and <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> pair.</p>
 <p>The callback has the following signature:</p>
-<p>|[
-void (* callback) (GObject             *gobject,
-const gchar         *action_name,
-guint                key_val,
-ClutterModifierType  modifiers,
-gpointer             user_data);
+<p>|[<br />
+void (* callback) (GObject             *gobject,<br />
+const gchar         *action_name,<br />
+guint                key_val,<br />
+ClutterModifierType  modifiers,<br />
+gpointer             user_data);<br />
 ]|</p>
-<p>Where the #GObject instance is <!-- raw HTML omitted -->gobject<!-- raw HTML omitted --> and the user data
-is the one passed when installing the action with
+<p>Where the #GObject instance is <!-- raw HTML omitted -->gobject<!-- raw HTML omitted --> and the user data<br />
+is the one passed when installing the action with<br />
 clutter_binding_pool_install_action().</p>
-<p>If the action bound to the <!-- raw HTML omitted -->key_val<!-- raw HTML omitted -->, <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> pair has been
-blocked using clutter_binding_pool_block_action(), the callback
+<p>If the action bound to the <!-- raw HTML omitted -->key_val<!-- raw HTML omitted -->, <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> pair has been<br />
+blocked using clutter_binding_pool_block_action(), the callback<br />
 will not be invoked, and this function will return false.</p>
 
 
@@ -806,7 +810,7 @@ will not be invoked, and this function will return false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the name of the action matching the given key symbol
+    <p>Retrieves the name of the action matching the given key symbol<br />
 and modifiers bitmask.</p>
 
 
@@ -859,8 +863,8 @@ and modifiers bitmask.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of the action, if found, or nil. The
-returned string is owned by the binding pool and should never
+        <div class='inline'><p>the name of the action, if found, or nil. The<br />
+returned string is owned by the binding pool and should never<br />
 be modified or freed</p>
 </div>
       
@@ -882,13 +886,13 @@ be modified or freed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Installs a new action inside a Clutter::BindingPool. The action
+    <p>Installs a new action inside a Clutter::BindingPool. The action<br />
 is bound to <!-- raw HTML omitted -->key_val<!-- raw HTML omitted --> and <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted -->.</p>
-<p>The same action name can be used for multiple <!-- raw HTML omitted -->key_val<!-- raw HTML omitted -->, <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted -->
+<p>The same action name can be used for multiple <!-- raw HTML omitted -->key_val<!-- raw HTML omitted -->, <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --><br />
 pairs.</p>
-<p>When an action has been activated using clutter_binding_pool_activate()
+<p>When an action has been activated using clutter_binding_pool_activate()<br />
 the passed <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked (with <!-- raw HTML omitted -->data<!-- raw HTML omitted -->).</p>
-<p>Actions can be blocked with clutter_binding_pool_block_action()
+<p>Actions can be blocked with clutter_binding_pool_block_action()<br />
 and then unblocked using clutter_binding_pool_unblock_action().</p>
 
 
@@ -953,7 +957,7 @@ and then unblocked using clutter_binding_pool_unblock_action().</p>
       
       
         &mdash;
-        <div class='inline'><p>function to be called
+        <div class='inline'><p>function to be called<br />
 when the action is activated</p>
 </div>
       
@@ -984,7 +988,7 @@ when the action is activated</p>
       
       
         &mdash;
-        <div class='inline'><p>function to be called when the action is removed
+        <div class='inline'><p>function to be called when the action is removed<br />
 from the pool</p>
 </div>
       
@@ -1021,13 +1025,13 @@ from the pool</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>A #GClosure variant of clutter_binding_pool_install_action().</p>
-<p>Installs a new action inside a Clutter::BindingPool. The action
+<p>Installs a new action inside a Clutter::BindingPool. The action<br />
 is bound to <!-- raw HTML omitted -->key_val<!-- raw HTML omitted --> and <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted -->.</p>
-<p>The same action name can be used for multiple <!-- raw HTML omitted -->key_val<!-- raw HTML omitted -->, <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted -->
+<p>The same action name can be used for multiple <!-- raw HTML omitted -->key_val<!-- raw HTML omitted -->, <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --><br />
 pairs.</p>
-<p>When an action has been activated using clutter_binding_pool_activate()
+<p>When an action has been activated using clutter_binding_pool_activate()<br />
 the passed <!-- raw HTML omitted -->closure<!-- raw HTML omitted --> will be invoked.</p>
-<p>Actions can be blocked with clutter_binding_pool_block_action()
+<p>Actions can be blocked with clutter_binding_pool_block_action()<br />
 and then unblocked using clutter_binding_pool_unblock_action().</p>
 
 
@@ -1233,11 +1237,11 @@ and then unblocked using clutter_binding_pool_unblock_action().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Allows overriding the action for <!-- raw HTML omitted -->key_val<!-- raw HTML omitted --> and <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> inside a
+    <p>Allows overriding the action for <!-- raw HTML omitted -->key_val<!-- raw HTML omitted --> and <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> inside a<br />
 Clutter::BindingPool. See clutter_binding_pool_install_action().</p>
-<p>When an action has been activated using clutter_binding_pool_activate()
+<p>When an action has been activated using clutter_binding_pool_activate()<br />
 the passed <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked (with <!-- raw HTML omitted -->data<!-- raw HTML omitted -->).</p>
-<p>Actions can be blocked with clutter_binding_pool_block_action()
+<p>Actions can be blocked with clutter_binding_pool_block_action()<br />
 and then unblocked using clutter_binding_pool_unblock_action().</p>
 
 
@@ -1317,7 +1321,7 @@ and then unblocked using clutter_binding_pool_unblock_action().</p>
       
       
         &mdash;
-        <div class='inline'><p>function to be called when the action is removed
+        <div class='inline'><p>function to be called when the action is removed<br />
 from the pool</p>
 </div>
       
@@ -1354,11 +1358,11 @@ from the pool</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>A #GClosure variant of clutter_binding_pool_override_action().</p>
-<p>Allows overriding the action for <!-- raw HTML omitted -->key_val<!-- raw HTML omitted --> and <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> inside a
+<p>Allows overriding the action for <!-- raw HTML omitted -->key_val<!-- raw HTML omitted --> and <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> inside a<br />
 Clutter::BindingPool. See clutter_binding_pool_install_closure().</p>
-<p>When an action has been activated using clutter_binding_pool_activate()
+<p>When an action has been activated using clutter_binding_pool_activate()<br />
 the passed <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked (with <!-- raw HTML omitted -->data<!-- raw HTML omitted -->).</p>
-<p>Actions can be blocked with clutter_binding_pool_block_action()
+<p>Actions can be blocked with clutter_binding_pool_block_action()<br />
 and then unblocked using clutter_binding_pool_unblock_action().</p>
 
 
@@ -1443,7 +1447,7 @@ and then unblocked using clutter_binding_pool_unblock_action().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes the action matching the given <!-- raw HTML omitted -->key_val<!-- raw HTML omitted -->, <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> pair,
+    <p>Removes the action matching the given <!-- raw HTML omitted -->key_val<!-- raw HTML omitted -->, <!-- raw HTML omitted -->modifiers<!-- raw HTML omitted --> pair,<br />
 if any exists.</p>
 
 
@@ -1514,8 +1518,8 @@ if any exists.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Unblockes all the actions with name <!-- raw HTML omitted -->action_name<!-- raw HTML omitted --> inside <!-- raw HTML omitted -->pool<!-- raw HTML omitted -->.</p>
-<p>Unblocking an action does not cause the callback bound to it to
-be invoked in case clutter_binding_pool_activate() was called on
+<p>Unblocking an action does not cause the callback bound to it to<br />
+be invoked in case clutter_binding_pool_activate() was called on<br />
 an action previously blocked with clutter_binding_pool_block_action().</p>
 
 
@@ -1566,7 +1570,7 @@ an action previously blocked with clutter_binding_pool_block_action().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

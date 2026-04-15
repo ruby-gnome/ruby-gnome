@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::TlsInteraction";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,23 +95,24 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The class for GTls::Interaction. Derived classes implement the various
+    <p>The class for GTls::Interaction. Derived classes implement the various<br />
 virtual interaction methods to handle TLS interactions.</p>
-<p>Derived classes can choose to implement whichever interactions methods they'd
-like to support by overriding those virtual methods in their class
-initialization function. If a derived class implements an async method,
+<p>Derived classes can choose to implement whichever interactions methods they'd<br />
+like to support by overriding those virtual methods in their class<br />
+initialization function. If a derived class implements an async method,<br />
 it must also implement the corresponding finish method.</p>
-<p>The synchronous interaction methods should implement to display modal dialogs,
+<p>The synchronous interaction methods should implement to display modal dialogs,<br />
 and the asynchronous methods to display modeless dialogs.</p>
-<p>If the user cancels an interaction, then the result should be
-%G_TLS_INTERACTION_FAILED and the error should be set with a domain of
+<p>If the user cancels an interaction, then the result should be<br />
+%G_TLS_INTERACTION_FAILED and the error should be set with a domain of<br />
 %G_IO_ERROR and code of %G_IO_ERROR_CANCELLED.</p>
 
 
@@ -319,6 +321,7 @@ and the asynchronous methods to display modeless dialogs.</p>
 
       
     </ul>
+    
   
 
 
@@ -338,16 +341,16 @@ and the asynchronous methods to display modeless dialogs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Run synchronous interaction to ask the user for a password. In general,
-g_tls_interaction_invoke_ask_password() should be used instead of this
+    <p>Run synchronous interaction to ask the user for a password. In general,<br />
+g_tls_interaction_invoke_ask_password() should be used instead of this<br />
 function.</p>
-<p>Derived subclasses usually implement a password prompt, although they may
-also choose to provide a password from elsewhere. The <!-- raw HTML omitted -->password<!-- raw HTML omitted --> value will
-be filled in and then <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. Alternatively the user may
+<p>Derived subclasses usually implement a password prompt, although they may<br />
+also choose to provide a password from elsewhere. The <!-- raw HTML omitted -->password<!-- raw HTML omitted --> value will<br />
+be filled in and then <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. Alternatively the user may<br />
 abort this password request, which will usually abort the TLS connection.</p>
-<p>If the interaction is cancelled by the cancellation object, or by the
-user then %G_TLS_INTERACTION_FAILED will be returned with an error that
-contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
+<p>If the interaction is cancelled by the cancellation object, or by the<br />
+user then %G_TLS_INTERACTION_FAILED will be returned with an error that<br />
+contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may<br />
 not support immediate cancellation.</p>
 
 
@@ -421,16 +424,16 @@ not support immediate cancellation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Run asynchronous interaction to ask the user for a password. In general,
-g_tls_interaction_invoke_ask_password() should be used instead of this
+    <p>Run asynchronous interaction to ask the user for a password. In general,<br />
+g_tls_interaction_invoke_ask_password() should be used instead of this<br />
 function.</p>
-<p>Derived subclasses usually implement a password prompt, although they may
-also choose to provide a password from elsewhere. The <!-- raw HTML omitted -->password<!-- raw HTML omitted --> value will
-be filled in and then <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. Alternatively the user may
+<p>Derived subclasses usually implement a password prompt, although they may<br />
+also choose to provide a password from elsewhere. The <!-- raw HTML omitted -->password<!-- raw HTML omitted --> value will<br />
+be filled in and then <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. Alternatively the user may<br />
 abort this password request, which will usually abort the TLS connection.</p>
-<p>If the interaction is cancelled by the cancellation object, or by the
-user then %G_TLS_INTERACTION_FAILED will be returned with an error that
-contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
+<p>If the interaction is cancelled by the cancellation object, or by the<br />
+user then %G_TLS_INTERACTION_FAILED will be returned with an error that<br />
+contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may<br />
 not support immediate cancellation.</p>
 <p>Certain implementations may not support immediate cancellation.</p>
 
@@ -531,12 +534,12 @@ not support immediate cancellation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Complete an ask password user interaction request. This should be once
+    <p>Complete an ask password user interaction request. This should be once<br />
 the g_tls_interaction_ask_password_async() completion callback is called.</p>
-<p>If %G_TLS_INTERACTION_HANDLED is returned, then the GTls::Password passed
+<p>If %G_TLS_INTERACTION_HANDLED is returned, then the GTls::Password passed<br />
 to g_tls_interaction_ask_password() will have its password filled in.</p>
-<p>If the interaction is cancelled by the cancellation object, or by the
-user then %G_TLS_INTERACTION_FAILED will be returned with an error that
+<p>If the interaction is cancelled by the cancellation object, or by the<br />
+user then %G_TLS_INTERACTION_FAILED will be returned with an error that<br />
 contains a %G_IO_ERROR_CANCELLED error code.</p>
 
 
@@ -595,21 +598,21 @@ contains a %G_IO_ERROR_CANCELLED error code.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Invoke the interaction to ask the user for a password. It invokes this
-interaction in the main loop, specifically the GMain::Context returned by
-g_main_context_get_thread_default() when the interaction is created. This
-is called by called by GTls::Connection or #GTlsDatabase to ask the user
+    <p>Invoke the interaction to ask the user for a password. It invokes this<br />
+interaction in the main loop, specifically the GMain::Context returned by<br />
+g_main_context_get_thread_default() when the interaction is created. This<br />
+is called by called by GTls::Connection or #GTlsDatabase to ask the user<br />
 for a password.</p>
-<p>Derived subclasses usually implement a password prompt, although they may
-also choose to provide a password from elsewhere. The <!-- raw HTML omitted -->password<!-- raw HTML omitted --> value will
-be filled in and then <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. Alternatively the user may
+<p>Derived subclasses usually implement a password prompt, although they may<br />
+also choose to provide a password from elsewhere. The <!-- raw HTML omitted -->password<!-- raw HTML omitted --> value will<br />
+be filled in and then <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. Alternatively the user may<br />
 abort this password request, which will usually abort the TLS connection.</p>
-<p>The implementation can either be a synchronous (eg: modal dialog) or an
-asynchronous one (eg: modeless dialog). This function will take care of
+<p>The implementation can either be a synchronous (eg: modal dialog) or an<br />
+asynchronous one (eg: modeless dialog). This function will take care of<br />
 calling which ever one correctly.</p>
-<p>If the interaction is cancelled by the cancellation object, or by the
-user then %G_TLS_INTERACTION_FAILED will be returned with an error that
-contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
+<p>If the interaction is cancelled by the cancellation object, or by the<br />
+user then %G_TLS_INTERACTION_FAILED will be returned with an error that<br />
+contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may<br />
 not support immediate cancellation.</p>
 
 
@@ -683,22 +686,22 @@ not support immediate cancellation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Invoke the interaction to ask the user to choose a certificate to
-use with the connection. It invokes this interaction in the main
-loop, specifically the GMain::Context returned by
-g_main_context_get_thread_default() when the interaction is
-created. This is called by called by GTls::Connection when the peer
+    <p>Invoke the interaction to ask the user to choose a certificate to<br />
+use with the connection. It invokes this interaction in the main<br />
+loop, specifically the GMain::Context returned by<br />
+g_main_context_get_thread_default() when the interaction is<br />
+created. This is called by called by GTls::Connection when the peer<br />
 requests a certificate during the handshake.</p>
-<p>Derived subclasses usually implement a certificate selector,
-although they may also choose to provide a certificate from
-elsewhere. Alternatively the user may abort this certificate
+<p>Derived subclasses usually implement a certificate selector,<br />
+although they may also choose to provide a certificate from<br />
+elsewhere. Alternatively the user may abort this certificate<br />
 request, which may or may not abort the TLS connection.</p>
-<p>The implementation can either be a synchronous (eg: modal dialog) or an
-asynchronous one (eg: modeless dialog). This function will take care of
+<p>The implementation can either be a synchronous (eg: modal dialog) or an<br />
+asynchronous one (eg: modeless dialog). This function will take care of<br />
 calling which ever one correctly.</p>
-<p>If the interaction is cancelled by the cancellation object, or by the
-user then %G_TLS_INTERACTION_FAILED will be returned with an error that
-contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
+<p>If the interaction is cancelled by the cancellation object, or by the<br />
+user then %G_TLS_INTERACTION_FAILED will be returned with an error that<br />
+contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may<br />
 not support immediate cancellation.</p>
 
 
@@ -787,18 +790,18 @@ not support immediate cancellation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Run synchronous interaction to ask the user to choose a certificate to use
-with the connection. In general, g_tls_interaction_invoke_request_certificate()
+    <p>Run synchronous interaction to ask the user to choose a certificate to use<br />
+with the connection. In general, g_tls_interaction_invoke_request_certificate()<br />
 should be used instead of this function.</p>
-<p>Derived subclasses usually implement a certificate selector, although they may
-also choose to provide a certificate from elsewhere. Alternatively the user may
+<p>Derived subclasses usually implement a certificate selector, although they may<br />
+also choose to provide a certificate from elsewhere. Alternatively the user may<br />
 abort this certificate request, which will usually abort the TLS connection.</p>
-<p>If %G_TLS_INTERACTION_HANDLED is returned, then the GTls::Connection
-passed to g_tls_interaction_request_certificate() will have had its
+<p>If %G_TLS_INTERACTION_HANDLED is returned, then the GTls::Connection<br />
+passed to g_tls_interaction_request_certificate() will have had its<br />
 GTls::Connection:certificate filled in.</p>
-<p>If the interaction is cancelled by the cancellation object, or by the
-user then %G_TLS_INTERACTION_FAILED will be returned with an error that
-contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
+<p>If the interaction is cancelled by the cancellation object, or by the<br />
+user then %G_TLS_INTERACTION_FAILED will be returned with an error that<br />
+contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may<br />
 not support immediate cancellation.</p>
 
 
@@ -887,12 +890,12 @@ not support immediate cancellation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Run asynchronous interaction to ask the user for a certificate to use with
-the connection. In general, g_tls_interaction_invoke_request_certificate() should
+    <p>Run asynchronous interaction to ask the user for a certificate to use with<br />
+the connection. In general, g_tls_interaction_invoke_request_certificate() should<br />
 be used instead of this function.</p>
-<p>Derived subclasses usually implement a certificate selector, although they may
-also choose to provide a certificate from elsewhere. <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called
-when the operation completes. Alternatively the user may abort this certificate
+<p>Derived subclasses usually implement a certificate selector, although they may<br />
+also choose to provide a certificate from elsewhere. <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called<br />
+when the operation completes. Alternatively the user may abort this certificate<br />
 request, which will usually abort the TLS connection.</p>
 
 
@@ -1007,13 +1010,13 @@ request, which will usually abort the TLS connection.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Complete a request certificate user interaction request. This should be once
+    <p>Complete a request certificate user interaction request. This should be once<br />
 the g_tls_interaction_request_certificate_async() completion callback is called.</p>
-<p>If %G_TLS_INTERACTION_HANDLED is returned, then the GTls::Connection
-passed to g_tls_interaction_request_certificate_async() will have had its
+<p>If %G_TLS_INTERACTION_HANDLED is returned, then the GTls::Connection<br />
+passed to g_tls_interaction_request_certificate_async() will have had its<br />
 GTls::Connection:certificate filled in.</p>
-<p>If the interaction is cancelled by the cancellation object, or by the
-user then %G_TLS_INTERACTION_FAILED will be returned with an error that
+<p>If the interaction is cancelled by the cancellation object, or by the<br />
+user then %G_TLS_INTERACTION_FAILED will be returned with an error that<br />
 contains a %G_IO_ERROR_CANCELLED error code.</p>
 
 
@@ -1068,7 +1071,7 @@ contains a %G_IO_ERROR_CANCELLED error code.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

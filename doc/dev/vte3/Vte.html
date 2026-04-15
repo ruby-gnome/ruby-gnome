@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Vte";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -83,8 +84,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/vte3/pty.rb<span class="defines">,<br />
-  lib/vte3.rb,<br /> lib/vte3/regex.rb,<br /> lib/vte3/loader.rb,<br /> lib/vte3/version.rb,<br /> lib/vte3/terminal.rb,<br /> lib/vte3/deprecated.rb</span>
+    <dd>lib/vte3/pty.rb<span class="defines">,<br>
+  lib/vte3.rb,<br> lib/vte3/regex.rb,<br> lib/vte3/loader.rb,<br> lib/vte3/version.rb,<br> lib/vte3/terminal.rb,<br> lib/vte3/deprecated.rb</span>
+
 </dd>
   </dl>
   
@@ -93,16 +95,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2014-2015  Ruby-GNOME2 Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -135,7 +137,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
         <dt id="MAJOR_VERSION-constant" class="">MAJOR_VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>The major version number of the VTE library
+    <p>The major version number of the VTE library<br />
 (e.g. in version 3.1.4 this is 3).</p>
 
 
@@ -151,7 +153,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
         <dt id="MICRO_VERSION-constant" class="">MICRO_VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>The micro version number of the VTE library
+    <p>The micro version number of the VTE library<br />
 (e.g. in version 3.1.4 this is 4).</p>
 
 
@@ -167,7 +169,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
         <dt id="MINOR_VERSION-constant" class="">MINOR_VERSION =
           <div class="docstring">
   <div class="discussion">
-    <p>The minor version number of the VTE library
+    <p>The minor version number of the VTE library<br />
 (e.g. in version 3.1.4 this is 1).</p>
 
 
@@ -188,10 +190,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
         <dt id="SPAWN_NO_PARENT_ENVV-constant" class="">SPAWN_NO_PARENT_ENVV =
           <div class="docstring">
   <div class="discussion">
-    <p>Use this as a spawn flag (together with flags from GSpawn::Flags) in
+    <p>Use this as a spawn flag (together with flags from GSpawn::Flags) in<br />
 vte_pty_spawn_async().</p>
-<p>Normally, the spawned process inherits the environment from the parent
-process; when this flag is used, only the environment variables passed
+<p>Normally, the spawned process inherits the environment from the parent<br />
+process; when this flag is used, only the environment variables passed<br />
 to vte_pty_spawn_async() etc. are passed to the child process.</p>
 
 
@@ -207,9 +209,9 @@ to vte_pty_spawn_async() etc. are passed to the child process.</p>
         <dt id="SPAWN_NO_SYSTEMD_SCOPE-constant" class="">SPAWN_NO_SYSTEMD_SCOPE =
           <div class="docstring">
   <div class="discussion">
-    <p>Use this as a spawn flag (together with flags from GSpawn::Flags) in
+    <p>Use this as a spawn flag (together with flags from GSpawn::Flags) in<br />
 vte_pty_spawn_async().</p>
-<p>Prevents vte_pty_spawn_async() etc. from moving the newly created child
+<p>Prevents vte_pty_spawn_async() etc. from moving the newly created child<br />
 process to a systemd user scope.</p>
 
 
@@ -225,9 +227,9 @@ process to a systemd user scope.</p>
         <dt id="SPAWN_REQUIRE_SYSTEMD_SCOPE-constant" class="">SPAWN_REQUIRE_SYSTEMD_SCOPE =
           <div class="docstring">
   <div class="discussion">
-    <p>Use this as a spawn flag (together with flags from GSpawn::Flags) in
+    <p>Use this as a spawn flag (together with flags from GSpawn::Flags) in<br />
 vte_pty_spawn_async().</p>
-<p>Requires vte_pty_spawn_async() etc. to move the newly created child
+<p>Requires vte_pty_spawn_async() etc. to move the newly created child<br />
 process to a systemd user scope; if that fails, the whole spawn fails.</p>
 <p>This is supported on Linux only.</p>
 
@@ -548,6 +550,7 @@ process to a systemd user scope; if that fails, the whole spawn fails.</p>
 
       
     </ul>
+    
   
 
 
@@ -682,7 +685,7 @@ process to a systemd user scope; if that fails, the whole spawn fails.</p>
   <div class="discussion">
     <p>Queries whether the legacy encoding <!-- raw HTML omitted -->encoding<!-- raw HTML omitted --> is supported.</p>
 <p>If ICU support is not available, this function always returns false.</p>
-<p>Note that UTF-8 is always supported; you can select it by
+<p>Note that UTF-8 is always supported; you can select it by<br />
 passing nil to vte_terminal_set_encoding().</p>
 
 
@@ -742,8 +745,8 @@ passing nil to vte_terminal_set_encoding().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the list of supported legacy encodings.</p>
-<p>If ICU support is not available, this returns an empty vector.
-Note that UTF-8 is always supported; you can select it by
+<p>If ICU support is not available, this returns an empty vector.<br />
+Note that UTF-8 is always supported; you can select it by<br />
 passing nil to vte_terminal_set_encoding().</p>
 
 
@@ -781,7 +784,7 @@ passing nil to vte_terminal_set_encoding().</p>
       
       
         &mdash;
-        <div class='inline'><p>the list of supported encodings; free with
+        <div class='inline'><p>the list of supported encodings; free with<br />
 g_strfreev()</p>
 </div>
       
@@ -803,9 +806,9 @@ g_strfreev()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the major version of the VTE library at runtime.
-Contrast this with %VTE_MAJOR_VERSION which represents
-the version of the VTE library that the code was compiled
+    <p>Returns the major version of the VTE library at runtime.<br />
+Contrast this with %VTE_MAJOR_VERSION which represents<br />
+the version of the VTE library that the code was compiled<br />
 with.</p>
 
 
@@ -845,9 +848,9 @@ with.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the micro version of the VTE library at runtime.
-Contrast this with %VTE_MICRO_VERSION which represents
-the version of the VTE library that the code was compiled
+    <p>Returns the micro version of the VTE library at runtime.<br />
+Contrast this with %VTE_MICRO_VERSION which represents<br />
+the version of the VTE library that the code was compiled<br />
 with.</p>
 
 
@@ -887,9 +890,9 @@ with.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the minor version of the VTE library at runtime.
-Contrast this with %VTE_MINOR_VERSION which represents
-the version of the VTE library that the code was compiled
+    <p>Returns the minor version of the VTE library at runtime.<br />
+Contrast this with %VTE_MINOR_VERSION which represents<br />
+the version of the VTE library that the code was compiled<br />
 with.</p>
 
 
@@ -929,7 +932,7 @@ with.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Error domain for VTE PTY errors. Errors in this domain will be from the Vte::PtyError
+    <p>Error domain for VTE PTY errors. Errors in this domain will be from the Vte::PtyError<br />
 enumeration. See #GError for more information on error domains.</p>
 
 
@@ -1003,7 +1006,7 @@ enumeration. See #GError for more information on error domains.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets test flags. This function is only useful for implementing
+    <p>Sets test flags. This function is only useful for implementing<br />
 unit tests for vte itself; it is a no-op in non-debug builds.</p>
 
 
@@ -1058,7 +1061,7 @@ unit tests for vte itself; it is a no-op in non-debug builds.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the user's shell, or nil. In the latter case, the
+    <p>Gets the user's shell, or nil. In the latter case, the<br />
 system default (usually &quot;/bin/sh&quot;) should be used.</p>
 
 
@@ -1077,7 +1080,7 @@ system default (usually &quot;/bin/sh&quot;) should be used.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string with the
+        <div class='inline'><p>a newly allocated string with the<br />
 user's shell, or nil</p>
 </div>
       
@@ -1095,7 +1098,7 @@ user's shell, or nil</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

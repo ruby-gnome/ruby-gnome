@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Atk::RelationType";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -200,7 +202,7 @@
         <dt id="FLOWS_TO-constant" class="">FLOWS_TO =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that the object has content that flows logically to another
+    <p>Indicates that the object has content that flows logically to another<br />
 AtkObject in a sequential way, (for instance text-flow).</p>
 
 
@@ -216,7 +218,7 @@ AtkObject in a sequential way, (for instance text-flow).</p>
         <dt id="FLOWS_FROM-constant" class="">FLOWS_FROM =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that the object has content that flows logically from
+    <p>Indicates that the object has content that flows logically from<br />
 another AtkObject in a sequential way, (for instance text-flow).</p>
 
 
@@ -247,8 +249,8 @@ another AtkObject in a sequential way, (for instance text-flow).</p>
         <dt id="EMBEDS-constant" class="">EMBEDS =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates that the object visually embeds
-another object's content, i.e. this object's content flows around
+    <p>Indicates that the object visually embeds<br />
+another object's content, i.e. this object's content flows around<br />
 another's content.</p>
 
 
@@ -264,7 +266,7 @@ another's content.</p>
         <dt id="EMBEDDED_BY-constant" class="">EMBEDDED_BY =
           <div class="docstring">
   <div class="discussion">
-    <p>Reciprocal of %ATK_RELATION_EMBEDS, indicates that
+    <p>Reciprocal of %ATK_RELATION_EMBEDS, indicates that<br />
 this object's content is visualy embedded in another object.</p>
 
 
@@ -310,15 +312,15 @@ this object's content is visualy embedded in another object.</p>
         <dt id="DESCRIBED_BY-constant" class="">DESCRIBED_BY =
           <div class="docstring">
   <div class="discussion">
-    <p>Reciprocal of %ATK_RELATION_DESCRIPTION_FOR. Indicates that one
-or more target objects provide descriptive information about this object. This relation
-type is most appropriate for information that is not essential as its presentation may
-be user-configurable and/or limited to an on-demand mechanism such as an assistive
-technology command. For brief, essential information such as can be found in a widget's
-on-screen label, use %ATK_RELATION_LABELLED_BY. For an on-screen error message, use
-%ATK_RELATION_ERROR_MESSAGE. For lengthy extended descriptive information contained in
-an on-screen object, consider using %ATK_RELATION_DETAILS as assistive technologies may
-provide a means for the user to navigate to objects containing detailed descriptions so
+    <p>Reciprocal of %ATK_RELATION_DESCRIPTION_FOR. Indicates that one<br />
+or more target objects provide descriptive information about this object. This relation<br />
+type is most appropriate for information that is not essential as its presentation may<br />
+be user-configurable and/or limited to an on-demand mechanism such as an assistive<br />
+technology command. For brief, essential information such as can be found in a widget's<br />
+on-screen label, use %ATK_RELATION_LABELLED_BY. For an on-screen error message, use<br />
+%ATK_RELATION_ERROR_MESSAGE. For lengthy extended descriptive information contained in<br />
+an on-screen object, consider using %ATK_RELATION_DETAILS as assistive technologies may<br />
+provide a means for the user to navigate to objects containing detailed descriptions so<br />
 that their content can be more closely reviewed.</p>
 
 
@@ -334,8 +336,8 @@ that their content can be more closely reviewed.</p>
         <dt id="DESCRIPTION_FOR-constant" class="">DESCRIPTION_FOR =
           <div class="docstring">
   <div class="discussion">
-    <p>Reciprocal of %ATK_RELATION_DESCRIBED_BY. Indicates that this
-object provides descriptive information about the target object(s). See also
+    <p>Reciprocal of %ATK_RELATION_DESCRIBED_BY. Indicates that this<br />
+object provides descriptive information about the target object(s). See also<br />
 %ATK_RELATION_DETAILS_FOR and %ATK_RELATION_ERROR_FOR.</p>
 
 
@@ -366,12 +368,12 @@ object provides descriptive information about the target object(s). See also
         <dt id="DETAILS-constant" class="">DETAILS =
           <div class="docstring">
   <div class="discussion">
-    <p>Reciprocal of %ATK_RELATION_DETAILS_FOR. Indicates that this object
-has a detailed or extended description, the contents of which can be found in the target
-object(s). This relation type is most appropriate for information that is sufficiently
-lengthy as to make navigation to the container of that information desirable. For less
-verbose information suitable for announcement only, see %ATK_RELATION_DESCRIBED_BY. If
-the detailed information describes an error condition, %ATK_RELATION_ERROR_FOR should be
+    <p>Reciprocal of %ATK_RELATION_DETAILS_FOR. Indicates that this object<br />
+has a detailed or extended description, the contents of which can be found in the target<br />
+object(s). This relation type is most appropriate for information that is sufficiently<br />
+lengthy as to make navigation to the container of that information desirable. For less<br />
+verbose information suitable for announcement only, see %ATK_RELATION_DESCRIBED_BY. If<br />
+the detailed information describes an error condition, %ATK_RELATION_ERROR_FOR should be<br />
 used instead. <!-- raw HTML omitted -->Since<!-- raw HTML omitted -->: ATK-2.26.</p>
 
 
@@ -387,8 +389,8 @@ used instead. <!-- raw HTML omitted -->Since<!-- raw HTML omitted -->: ATK-2.26.
         <dt id="DETAILS_FOR-constant" class="">DETAILS_FOR =
           <div class="docstring">
   <div class="discussion">
-    <p>Reciprocal of %ATK_RELATION_DETAILS. Indicates that this object
-provides a detailed or extended description about the target object(s). See also
+    <p>Reciprocal of %ATK_RELATION_DETAILS. Indicates that this object<br />
+provides a detailed or extended description about the target object(s). See also<br />
 %ATK_RELATION_DESCRIPTION_FOR and %ATK_RELATION_ERROR_FOR. <!-- raw HTML omitted -->Since<!-- raw HTML omitted -->: ATK-2.26.</p>
 
 
@@ -404,9 +406,9 @@ provides a detailed or extended description about the target object(s). See also
         <dt id="ERROR_MESSAGE-constant" class="">ERROR_MESSAGE =
           <div class="docstring">
   <div class="discussion">
-    <p>Reciprocal of %ATK_RELATION_ERROR_FOR. Indicates that this object
-has one or more errors, the nature of which is described in the contents of the target
-object(s). Objects that have this relation type should also contain %ATK_STATE_INVALID_ENTRY
+    <p>Reciprocal of %ATK_RELATION_ERROR_FOR. Indicates that this object<br />
+has one or more errors, the nature of which is described in the contents of the target<br />
+object(s). Objects that have this relation type should also contain %ATK_STATE_INVALID_ENTRY<br />
 in their Atk::StateSet. <!-- raw HTML omitted -->Since<!-- raw HTML omitted -->: ATK-2.26.</p>
 
 
@@ -422,8 +424,8 @@ in their Atk::StateSet. <!-- raw HTML omitted -->Since<!-- raw HTML omitted -->:
         <dt id="ERROR_FOR-constant" class="">ERROR_FOR =
           <div class="docstring">
   <div class="discussion">
-    <p>Reciprocal of %ATK_RELATION_ERROR_MESSAGE. Indicates that this object
-contains an error message describing an invalid condition in the target object(s). <!-- raw HTML omitted -->Since<!-- raw HTML omitted -->:
+    <p>Reciprocal of %ATK_RELATION_ERROR_MESSAGE. Indicates that this object<br />
+contains an error message describing an invalid condition in the target object(s). <!-- raw HTML omitted -->Since<!-- raw HTML omitted -->:<br />
 ATK_2.26.</p>
 
 
@@ -467,7 +469,7 @@ ATK_2.26.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

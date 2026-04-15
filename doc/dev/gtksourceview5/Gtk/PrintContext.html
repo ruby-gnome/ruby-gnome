@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::PrintContext";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,25 +95,26 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A <code>GtkPrintContext</code> encapsulates context information that is required when
+    <p>A <code>GtkPrintContext</code> encapsulates context information that is required when<br />
 drawing pages for printing.</p>
-<p>This includes the cairo context and important parameters like page size
-and resolution. It also lets you easily create [class<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout] and
+<p>This includes the cairo context and important parameters like page size<br />
+and resolution. It also lets you easily create [class<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Layout] and<br />
 [class<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Context] objects that match the font metrics of the cairo surface.</p>
-<p><code>GtkPrintContext</code> objects get passed to the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::begin-print],
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::end-print],
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::request-page-setup] and
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::draw-page] signals on the
+<p><code>GtkPrintContext</code> objects get passed to the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::begin-print],<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::end-print],<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::request-page-setup] and<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::draw-page] signals on the<br />
 [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation] object.</p>
-<h2>Using GtkPrintContext in a ::draw-page callback</h2>
+<h2><a href="#using-gtkprintcontext-in-a-draw-page-callback" aria-hidden="true" class="anchor" id="using-gtkprintcontext-in-a-draw-page-callback"></a>Using GtkPrintContext in a ::draw-page callback</h2>
 <pre class="code c"><code class="c">static void
 draw_page (GtkPrintOperation *operation,
            GtkPrintContext   *context,
@@ -441,6 +443,7 @@ draw_page (GtkPrintOperation *operation,
 
       
     </ul>
+    
   
 
 
@@ -460,7 +463,7 @@ draw_page (GtkPrintOperation *operation,
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the cairo context that is associated with the
+    <p>Obtains the cairo context that is associated with the<br />
 <code>GtkPrintContext</code>.</p>
 
 
@@ -500,7 +503,7 @@ draw_page (GtkPrintOperation *operation,
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>PangoContext</code> that can be used with the
+    <p>Creates a new <code>PangoContext</code> that can be used with the<br />
 <code>GtkPrintContext</code>.</p>
 
 
@@ -540,7 +543,7 @@ draw_page (GtkPrintOperation *operation,
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>PangoLayout</code> that is suitable for use
+    <p>Creates a new <code>PangoLayout</code> that is suitable for use<br />
 with the <code>GtkPrintContext</code>.</p>
 
 
@@ -580,7 +583,7 @@ with the <code>GtkPrintContext</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the horizontal resolution of the <code>GtkPrintContext</code>,
+    <p>Obtains the horizontal resolution of the <code>GtkPrintContext</code>,<br />
 in dots per inch.</p>
 
 
@@ -620,7 +623,7 @@ in dots per inch.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the vertical resolution of the <code>GtkPrintContext</code>,
+    <p>Obtains the vertical resolution of the <code>GtkPrintContext</code>,<br />
 in dots per inch.</p>
 
 
@@ -660,7 +663,7 @@ in dots per inch.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the hardware printer margins of the <code>GtkPrintContext</code>,
+    <p>Obtains the hardware printer margins of the <code>GtkPrintContext</code>,<br />
 in units.</p>
 
 
@@ -803,7 +806,7 @@ in units.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the <code>GtkPageSetup</code> that determines the page
+    <p>Obtains the <code>GtkPageSetup</code> that determines the page<br />
 dimensions of the <code>GtkPrintContext</code>.</p>
 
 
@@ -843,7 +846,7 @@ dimensions of the <code>GtkPrintContext</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a <code>PangoFontMap</code> that is suitable for use
+    <p>Returns a <code>PangoFontMap</code> that is suitable for use<br />
 with the <code>GtkPrintContext</code>.</p>
 
 
@@ -884,9 +887,9 @@ with the <code>GtkPrintContext</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets a new cairo context on a print context.</p>
-<p>This function is intended to be used when implementing
-an internal print preview, it is not needed for printing,
-since GTK itself creates a suitable cairo context in that
+<p>This function is intended to be used when implementing<br />
+an internal print preview, it is not needed for printing,<br />
+since GTK itself creates a suitable cairo context in that<br />
 case.</p>
 
 
@@ -1006,7 +1009,7 @@ case.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

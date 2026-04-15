@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::GestureAction";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,14 +101,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::GestureClass structure contains only
+    <p>The Clutter::GestureClass structure contains only<br />
 private data.</p>
 
 
@@ -644,9 +646,12 @@ private data.</p>
 
       
     </ul>
+    
   
 
 
+  
+  
   
   
   
@@ -761,7 +766,7 @@ private data.</p>
       
       
         &mdash;
-        <div class='inline'><p>the touch point index, with 0 being the first touch
+        <div class='inline'><p>the touch point index, with 0 being the first touch<br />
 point received by the action</p>
 </div>
       
@@ -801,7 +806,7 @@ point received by the action</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a reference to the last Clutter::Event for a touch point. Call
+    <p>Retrieves a reference to the last Clutter::Event for a touch point. Call<br />
 clutter_event_copy() if you need to store the reference somewhere.</p>
 
 
@@ -860,7 +865,7 @@ clutter_event_copy() if you need to store the reference somewhere.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the coordinates, in stage space, of the latest motion
+    <p>Retrieves the coordinates, in stage space, of the latest motion<br />
 event during the dragging.</p>
 
 
@@ -880,7 +885,7 @@ event during the dragging.</p>
       
       
         &mdash;
-        <div class='inline'><p>the touch point index, with 0 being the first touch
+        <div class='inline'><p>the touch point index, with 0 being the first touch<br />
 point received by the action</p>
 </div>
       
@@ -896,7 +901,7 @@ point received by the action</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the latest motion
+        <div class='inline'><p>return location for the latest motion<br />
 event's X coordinate</p>
 </div>
       
@@ -912,7 +917,7 @@ event's X coordinate</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the latest motion
+        <div class='inline'><p>return location for the latest motion<br />
 event's Y coordinate</p>
 </div>
       
@@ -948,7 +953,7 @@ event's Y coordinate</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the incremental delta since the last motion event
+    <p>Retrieves the incremental delta since the last motion event<br />
 during the dragging.</p>
 
 
@@ -968,7 +973,7 @@ during the dragging.</p>
       
       
         &mdash;
-        <div class='inline'><p>the touch point index, with 0 being the first touch
+        <div class='inline'><p>the touch point index, with 0 being the first touch<br />
 point received by the action</p>
 </div>
       
@@ -984,7 +989,7 @@ point received by the action</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the X axis
+        <div class='inline'><p>return location for the X axis<br />
 component of the incremental motion delta</p>
 </div>
       
@@ -1000,7 +1005,7 @@ component of the incremental motion delta</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the Y axis
+        <div class='inline'><p>return location for the Y axis<br />
 component of the incremental motion delta</p>
 </div>
       
@@ -1040,7 +1045,7 @@ component of the incremental motion delta</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the coordinates, in stage space, of the press event
+    <p>Retrieves the coordinates, in stage space, of the press event<br />
 that started the dragging for a specific touch point.</p>
 
 
@@ -1060,7 +1065,7 @@ that started the dragging for a specific touch point.</p>
       
       
         &mdash;
-        <div class='inline'><p>the touch point index, with 0 being the first touch
+        <div class='inline'><p>the touch point index, with 0 being the first touch<br />
 point received by the action</p>
 </div>
       
@@ -1076,7 +1081,7 @@ point received by the action</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the press
+        <div class='inline'><p>return location for the press<br />
 event's X coordinate</p>
 </div>
       
@@ -1092,7 +1097,7 @@ event's X coordinate</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the press
+        <div class='inline'><p>return location for the press<br />
 event's Y coordinate</p>
 </div>
       
@@ -1128,7 +1133,7 @@ event's Y coordinate</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the coordinates, in stage space, where the touch point was
+    <p>Retrieves the coordinates, in stage space, where the touch point was<br />
 last released.</p>
 
 
@@ -1148,7 +1153,7 @@ last released.</p>
       
       
         &mdash;
-        <div class='inline'><p>the touch point index, with 0 being the first touch
+        <div class='inline'><p>the touch point index, with 0 being the first touch<br />
 point received by the action</p>
 </div>
       
@@ -1164,7 +1169,7 @@ point received by the action</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the X coordinate of
+        <div class='inline'><p>return location for the X coordinate of<br />
 the last release</p>
 </div>
       
@@ -1180,7 +1185,7 @@ the last release</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the Y coordinate of
+        <div class='inline'><p>return location for the Y coordinate of<br />
 the last release</p>
 </div>
       
@@ -1274,7 +1279,7 @@ the last release</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the threshold trigger distance of the gesture <!-- raw HTML omitted -->action<!-- raw HTML omitted -->,
+    <p>Retrieves the threshold trigger distance of the gesture <!-- raw HTML omitted -->action<!-- raw HTML omitted -->,<br />
 as set using clutter_gesture_action_set_threshold_trigger_distance().</p>
 
 
@@ -1344,7 +1349,7 @@ as set using clutter_gesture_action_set_threshold_trigger_distance().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the velocity, in stage pixels per millisecond, of the
+    <p>Retrieves the velocity, in stage pixels per millisecond, of the<br />
 latest motion event during the dragging.</p>
 
 
@@ -1364,7 +1369,7 @@ latest motion event during the dragging.</p>
       
       
         &mdash;
-        <div class='inline'><p>the touch point index, with 0 being the first touch
+        <div class='inline'><p>the touch point index, with 0 being the first touch<br />
 point received by the action</p>
 </div>
       
@@ -1380,7 +1385,7 @@ point received by the action</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the latest motion
+        <div class='inline'><p>return location for the latest motion<br />
 event's X velocity</p>
 </div>
       
@@ -1396,7 +1401,7 @@ event's X velocity</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the latest motion
+        <div class='inline'><p>return location for the latest motion<br />
 event's Y velocity</p>
 </div>
       
@@ -1578,7 +1583,7 @@ event's Y velocity</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the threshold trigger distance for the gesture drag threshold, if any.</p>
-<p>This function should only be called by sub-classes of
+<p>This function should only be called by sub-classes of<br />
 Clutter::GestureAction during their construction phase.</p>
 
 
@@ -1648,8 +1653,8 @@ Clutter::GestureAction during their construction phase.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The horizontal trigger distance to be used by the action to either
-emit the Clutter::GestureAction::gesture-begin signal or to emit
+    <p>The horizontal trigger distance to be used by the action to either<br />
+emit the Clutter::GestureAction::gesture-begin signal or to emit<br />
 the Clutter::GestureAction::gesture-cancel signal.</p>
 <p>A negative value will be interpreted as the default drag threshold.</p>
 
@@ -1690,8 +1695,8 @@ the Clutter::GestureAction::gesture-cancel signal.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The horizontal trigger distance to be used by the action to either
-emit the Clutter::GestureAction::gesture-begin signal or to emit
+    <p>The horizontal trigger distance to be used by the action to either<br />
+emit the Clutter::GestureAction::gesture-begin signal or to emit<br />
 the Clutter::GestureAction::gesture-cancel signal.</p>
 <p>A negative value will be interpreted as the default drag threshold.</p>
 
@@ -1760,8 +1765,8 @@ the Clutter::GestureAction::gesture-cancel signal.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The vertical trigger distance to be used by the action to either
-emit the Clutter::GestureAction::gesture-begin signal or to emit
+    <p>The vertical trigger distance to be used by the action to either<br />
+emit the Clutter::GestureAction::gesture-begin signal or to emit<br />
 the Clutter::GestureAction::gesture-cancel signal.</p>
 <p>A negative value will be interpreted as the default drag threshold.</p>
 
@@ -1802,8 +1807,8 @@ the Clutter::GestureAction::gesture-cancel signal.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The vertical trigger distance to be used by the action to either
-emit the Clutter::GestureAction::gesture-begin signal or to emit
+    <p>The vertical trigger distance to be used by the action to either<br />
+emit the Clutter::GestureAction::gesture-begin signal or to emit<br />
 the Clutter::GestureAction::gesture-cancel signal.</p>
 <p>A negative value will be interpreted as the default drag threshold.</p>
 
@@ -1872,8 +1877,8 @@ the Clutter::GestureAction::gesture-cancel signal.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The trigger edge to be used by the action to either emit the
-Clutter::GestureAction::gesture-begin signal or to emit the
+    <p>The trigger edge to be used by the action to either emit the<br />
+Clutter::GestureAction::gesture-begin signal or to emit the<br />
 Clutter::GestureAction::gesture-cancel signal.</p>
 
 
@@ -1913,8 +1918,8 @@ Clutter::GestureAction::gesture-cancel signal.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The trigger edge to be used by the action to either emit the
-Clutter::GestureAction::gesture-begin signal or to emit the
+    <p>The trigger edge to be used by the action to either emit the<br />
+Clutter::GestureAction::gesture-begin signal or to emit the<br />
 Clutter::GestureAction::gesture-cancel signal.</p>
 
 
@@ -1982,7 +1987,7 @@ Clutter::GestureAction::gesture-cancel signal.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the edge trigger of the gesture <!-- raw HTML omitted -->action<!-- raw HTML omitted -->, as set using
+    <p>Retrieves the edge trigger of the gesture <!-- raw HTML omitted -->action<!-- raw HTML omitted -->, as set using<br />
 clutter_gesture_action_set_threshold_trigger_edge().</p>
 
 
@@ -2018,7 +2023,7 @@ clutter_gesture_action_set_threshold_trigger_edge().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

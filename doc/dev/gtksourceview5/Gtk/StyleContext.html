@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::StyleContext";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -161,6 +163,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -606,6 +609,7 @@
 
       
     </ul>
+    
   
 
 
@@ -625,12 +629,12 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a global style provider to <!-- raw HTML omitted -->display<!-- raw HTML omitted -->, which will be used
+    <p>Adds a global style provider to <!-- raw HTML omitted -->display<!-- raw HTML omitted -->, which will be used<br />
 in style construction for all <code>GtkStyleContexts</code> under <!-- raw HTML omitted -->display<!-- raw HTML omitted -->.</p>
-<p>GTK uses this to make styling information from <code>GtkSettings</code>
+<p>GTK uses this to make styling information from <code>GtkSettings</code><br />
 available.</p>
-<p>Note: If both priorities are the same, A <code>GtkStyleProvider</code>
-added through [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.add_provider] takes
+<p>Note: If both priorities are the same, A <code>GtkStyleProvider</code><br />
+added through [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.add_provider] takes<br />
 precedence over another added through this function.</p>
 
 
@@ -680,10 +684,10 @@ precedence over another added through this function.</p>
       
       
         &mdash;
-        <div class='inline'><p>the priority of the style provider. The lower
-it is, the earlier it will be used in the style construction.
-Typically this will be in the range between
-%GTK_STYLE_PROVIDER_PRIORITY_FALLBACK and
+        <div class='inline'><p>the priority of the style provider. The lower<br />
+it is, the earlier it will be used in the style construction.<br />
+Typically this will be in the range between<br />
+%GTK_STYLE_PROVIDER_PRIORITY_FALLBACK and<br />
 %GTK_STYLE_PROVIDER_PRIORITY_USER</p>
 </div>
       
@@ -794,13 +798,13 @@ Typically this will be in the range between
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a style class to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, so later uses of the
+    <p>Adds a style class to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, so later uses of the<br />
 style context will make use of this new class for styling.</p>
-<p>In the CSS file format, a <code>GtkEntry</code> defining a “search”
+<p>In the CSS file format, a <code>GtkEntry</code> defining a “search”<br />
 class, would be matched by:</p>
 <pre class="code css"><code class="css">entry.search { ... }
 </code></pre>
-<p>While any widget defining a “search” class would be
+<p>While any widget defining a “search” class would be<br />
 matched by:</p>
 <pre class="code css"><code class="css">.search { ... }
 </code></pre>
@@ -858,12 +862,12 @@ matched by:</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a style provider to <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, to be used in style construction.</p>
-<p>Note that a style provider added by this function only affects
-the style of the widget to which <!-- raw HTML omitted -->context<!-- raw HTML omitted --> belongs. If you want
-to affect the style of all widgets, use
+<p>Note that a style provider added by this function only affects<br />
+the style of the widget to which <!-- raw HTML omitted -->context<!-- raw HTML omitted --> belongs. If you want<br />
+to affect the style of all widgets, use<br />
 [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.add_provider_for_display].</p>
-<p>Note: If both priorities are the same, a <code>GtkStyleProvider</code>
-added through this function takes precedence over another added
+<p>Note: If both priorities are the same, a <code>GtkStyleProvider</code><br />
+added through this function takes precedence over another added<br />
 through [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.add_provider_for_display].</p>
 
 
@@ -898,10 +902,10 @@ through [func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.
       
       
         &mdash;
-        <div class='inline'><p>the priority of the style provider. The lower
-it is, the earlier it will be used in the style construction.
-Typically this will be in the range between
-%GTK_STYLE_PROVIDER_PRIORITY_FALLBACK and
+        <div class='inline'><p>the priority of the style provider. The lower<br />
+it is, the earlier it will be used in the style construction.<br />
+Typically this will be in the range between<br />
+%GTK_STYLE_PROVIDER_PRIORITY_FALLBACK and<br />
 %GTK_STYLE_PROVIDER_PRIORITY_USER</p>
 </div>
       
@@ -1258,7 +1262,7 @@ Typically this will be in the range between
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if <!-- raw HTML omitted -->context<!-- raw HTML omitted --> currently has defined the
+    <p>Returns true if <!-- raw HTML omitted -->context<!-- raw HTML omitted --> currently has defined the<br />
 given class name.</p>
 
 
@@ -1535,12 +1539,12 @@ given class name.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Saves the <!-- raw HTML omitted -->context<!-- raw HTML omitted --> state.</p>
-<p>This allows temporary modifications done through
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.add_class],
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.remove_class],
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.set_state] to be quickly
+<p>This allows temporary modifications done through<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.add_class],<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.remove_class],<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.set_state] to be quickly<br />
 reverted in one go through [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.restore].</p>
-<p>The matching call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.restore]
+<p>The matching call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.restore]<br />
 must be done before GTK returns to the main loop.</p>
 
 
@@ -1670,10 +1674,10 @@ must be done before GTK returns to the main loop.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the state used for style matching.</p>
-<p>This method should only be used to retrieve the <code>GtkStateFlags</code>
-to pass to <code>GtkStyleContext</code> methods, like
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.get_padding].
-If you need to retrieve the current state of a <code>GtkWidget</code>, use
+<p>This method should only be used to retrieve the <code>GtkStateFlags</code><br />
+to pass to <code>GtkStyleContext</code> methods, like<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.StyleContext.get_padding].<br />
+If you need to retrieve the current state of a <code>GtkWidget</code>, use<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.get_state_flags].</p>
 
 
@@ -1768,12 +1772,12 @@ If you need to retrieve the current state of a <code>GtkWidget</code>, use
 </h3><div class="docstring">
   <div class="discussion">
     <p>Converts the style context into a string representation.</p>
-<p>The string representation always includes information about
-the name, state, id, visibility and style classes of the CSS
-node that is backing <!-- raw HTML omitted -->context<!-- raw HTML omitted -->. Depending on the flags, more
+<p>The string representation always includes information about<br />
+the name, state, id, visibility and style classes of the CSS<br />
+node that is backing <!-- raw HTML omitted -->context<!-- raw HTML omitted -->. Depending on the flags, more<br />
 information may be included.</p>
-<p>This function is intended for testing and debugging of the
-CSS implementation in GTK. There are no guarantees about
+<p>This function is intended for testing and debugging of the<br />
+CSS implementation in GTK. There are no guarantees about<br />
 the format of the returned string, it may change.</p>
 
 
@@ -1828,7 +1832,7 @@ the format of the returned string, it may change.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

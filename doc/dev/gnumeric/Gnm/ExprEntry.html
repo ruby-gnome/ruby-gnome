@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gnm::ExprEntry";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -998,6 +1000,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1015,9 +1018,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Gnm::ExprEntry, which is an entry widget with support
-for range selections.
-The entry is created with default flag settings which are suitable for use
+    <p>Creates a new Gnm::ExprEntry, which is an entry widget with support<br />
+for range selections.<br />
+The entry is created with default flag settings which are suitable for use<br />
 in many dialogs, but see #gnm_expr_entry_set_flags.</p>
 
 
@@ -1400,7 +1403,7 @@ in many dialogs, but see #gnm_expr_entry_set_flags.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Look at the current selection to see how much of it needs to be changed when
+    <p>Look at the current selection to see how much of it needs to be changed when<br />
 selecting a range.</p>
 
 
@@ -1575,8 +1578,8 @@ selecting a range.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the range selection. GnmRange is copied, Sheet is not. If sheet
-argument is NULL, the corresponding value is not returned.
+    <p>Get the range selection. GnmRange is copied, Sheet is not. If sheet<br />
+argument is NULL, the corresponding value is not returned.<br />
 The resulting range is normalized.</p>
 
 
@@ -1842,7 +1845,7 @@ The resulting range is normalized.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the text of the entry, and removes saved information about earlier
+    <p>Sets the text of the entry, and removes saved information about earlier<br />
 range selections.</p>
 
 
@@ -1897,7 +1900,7 @@ range selections.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the text of the entry, and removes saved information about earlier
+    <p>Sets the text of the entry, and removes saved information about earlier<br />
 range selections.</p>
 
 
@@ -1968,8 +1971,8 @@ range selections.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>otherwise.</p>
-<p>Sets the range selection and displays it in the entry text. If the widget
-already contains a range selection, the new text replaces the
+<p>Sets the range selection and displays it in the entry text. If the widget<br />
+already contains a range selection, the new text replaces the<br />
 old. Otherwise, it is inserted at <!-- raw HTML omitted -->pos<!-- raw HTML omitted -->.</p>
 
 
@@ -2092,7 +2095,7 @@ old. Otherwise, it is inserted at <!-- raw HTML omitted -->pos<!-- raw HTML omit
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Attempts to parse the content of the entry line honouring
+    <p>Attempts to parse the content of the entry line honouring<br />
 the flags.</p>
 
 
@@ -2203,7 +2206,7 @@ the flags.</p>
       
       
         &mdash;
-        <div class='inline'><p>the sheet where the cell range is evaluated. This really only needed if
+        <div class='inline'><p>the sheet where the cell range is evaluated. This really only needed if<br />
 the range given does not include a sheet specification.</p>
 </div>
       
@@ -2243,7 +2246,7 @@ the range given does not include a sheet specification.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a (GnmValue *) of type VALUE_CELLRANGE if the <!-- raw HTML omitted -->range<!-- raw HTML omitted --> was
+    <p>Returns a (GnmValue *) of type VALUE_CELLRANGE if the <!-- raw HTML omitted -->range<!-- raw HTML omitted --> was<br />
 successfully parsed or nil on failure.</p>
 
 
@@ -2458,12 +2461,12 @@ successfully parsed or nil on failure.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Changes the flags specified in <!-- raw HTML omitted -->mask<!-- raw HTML omitted --> to values given in <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->.</p>
-<p>Flags (false by default):
-%GNM_EE_SINGLE_RANGE      Entry will only hold a single range.
-%GNM_EE_ABS_COL           Column reference must be absolute.
-%GNM_EE_ABS_ROW           Row reference must be absolute.
-%GNM_EE_FULL_COL          GnmRange consists of full columns.
-%GNM_EE_FULL_ROW          GnmRange consists of full rows.
+<p>Flags (false by default):<br />
+%GNM_EE_SINGLE_RANGE      Entry will only hold a single range.<br />
+%GNM_EE_ABS_COL           Column reference must be absolute.<br />
+%GNM_EE_ABS_ROW           Row reference must be absolute.<br />
+%GNM_EE_FULL_COL          GnmRange consists of full columns.<br />
+%GNM_EE_FULL_ROW          GnmRange consists of full rows.<br />
 %GNM_EE_SHEET_OPTIONAL    Current sheet name not auto-added.</p>
 
 
@@ -2533,8 +2536,8 @@ successfully parsed or nil on failure.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Higher level operations know when they are logically complete and can notify
-GnmExprEntry clients.  For example, button-up after a drag selection
+    <p>Higher level operations know when they are logically complete and can notify<br />
+GnmExprEntry clients.  For example, button-up after a drag selection<br />
 indicates a logical end to the change and offers a good time to update.</p>
 
 
@@ -3039,7 +3042,7 @@ indicates a logical end to the change and offers a good time to update.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

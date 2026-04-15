@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::Clipboard";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,26 +95,27 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The <code>GdkClipboard</code> object represents data shared between applications or
+    <p>The <code>GdkClipboard</code> object represents data shared between applications or<br />
 inside an application.</p>
-<p>To get a <code>GdkClipboard</code> object, use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.get_clipboard] or
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.get_primary_clipboard]. You can find out about the data
-that is currently available in a clipboard using
+<p>To get a <code>GdkClipboard</code> object, use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.get_clipboard] or<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.get_primary_clipboard]. You can find out about the data<br />
+that is currently available in a clipboard using<br />
 [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.get_formats].</p>
-<p>To make text or image data available in a clipboard, use
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.set_text] or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.set_texture].
-For other data, you can use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.set_content], which
+<p>To make text or image data available in a clipboard, use<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.set_text] or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.set_texture].<br />
+For other data, you can use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.set_content], which<br />
 takes a [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvider] object.</p>
-<p>To read textual or image data from a clipboard, use
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_text_async] or
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_texture_async]. For other data, use
+<p>To read textual or image data from a clipboard, use<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_text_async] or<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_texture_async]. For other data, use<br />
 [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_async], which provides a <code>GInputStream</code> object.</p>
 
 
@@ -690,6 +692,7 @@ takes a [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvi
 
       
     </ul>
+    
   
 
 
@@ -709,7 +712,7 @@ takes a [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvi
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The <code>GdkContentProvider</code> or nil if the clipboard is empty or contents are
+    <p>The <code>GdkContentProvider</code> or nil if the clipboard is empty or contents are<br />
 provided otherwise.</p>
 
 
@@ -749,7 +752,7 @@ provided otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The <code>GdkContentProvider</code> or nil if the clipboard is empty or contents are
+    <p>The <code>GdkContentProvider</code> or nil if the clipboard is empty or contents are<br />
 provided otherwise.</p>
 
 
@@ -1030,9 +1033,9 @@ provided otherwise.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns if the clipboard is local.</p>
-<p>A clipboard is considered local if it was last claimed
+<p>A clipboard is considered local if it was last claimed<br />
 by the running application.</p>
-<p>Note that [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.get_content] may return nil
+<p>Note that [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.get_content] may return nil<br />
 even on a local clipboard. In this case the clipboard is empty.</p>
 
 
@@ -1178,11 +1181,11 @@ even on a local clipboard. In this case the clipboard is empty.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously requests an input stream to read the <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted -->'s
+    <p>Asynchronously requests an input stream to read the <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted -->'s<br />
 contents from.</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then
+<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then<br />
 call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_finish] to get the result of the operation.</p>
-<p>The clipboard will choose the most suitable mime type from the given list
+<p>The clipboard will choose the most suitable mime type from the given list<br />
 to fulfill the request, preferring the ones listed first.</p>
 
 
@@ -1332,7 +1335,7 @@ to fulfill the request, preferring the ones listed first.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store
+        <div class='inline'><p>location to store<br />
 the chosen mime type</p>
 </div>
       
@@ -1373,10 +1376,10 @@ the chosen mime type</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asynchronously request the <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted --> contents converted to a string.</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then
+<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then<br />
 call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_text_finish] to get the result.</p>
-<p>This is a simple wrapper around [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_value_async].
-Use that function or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_async] directly if you
+<p>This is a simple wrapper around [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_value_async].<br />
+Use that function or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_async] directly if you<br />
 need more control over the operation.</p>
 
 
@@ -1521,10 +1524,10 @@ need more control over the operation.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asynchronously request the <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted --> contents converted to a <code>GdkPixbuf</code>.</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then
+<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then<br />
 call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_texture_finish] to get the result.</p>
-<p>This is a simple wrapper around [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_value_async].
-Use that function or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_async] directly if you
+<p>This is a simple wrapper around [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_value_async].<br />
+Use that function or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_async] directly if you<br />
 need more control over the operation.</p>
 
 
@@ -1668,12 +1671,12 @@ need more control over the operation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously request the <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted --> contents converted to the given
+    <p>Asynchronously request the <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted --> contents converted to the given<br />
 <!-- raw HTML omitted -->type<!-- raw HTML omitted -->.</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then call
+<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then call<br />
 [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_value_finish] to get the resulting <code>GValue</code>.</p>
-<p>For local clipboard contents that are available in the given <code>GType</code>,
-the value will be copied directly. Otherwise, GDK will try to use
+<p>For local clipboard contents that are available in the given <code>GType</code>,<br />
+the value will be copied directly. Otherwise, GDK will try to use<br />
 [func<!-- raw HTML omitted -->content_deserialize_async<!-- raw HTML omitted -->] to convert the clipboard's data.</p>
 
 
@@ -1848,8 +1851,8 @@ the value will be copied directly. Otherwise, GDK will try to use
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the clipboard to contain the value collected from the given varargs.</p>
-<p>Values should be passed the same way they are passed to other value
-collecting APIs, such as [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.set] or
+<p>Values should be passed the same way they are passed to other value<br />
+collecting APIs, such as [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.set] or<br />
 [func<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.signal_emit].</p>
 <pre class="code c"><code class="c">gdk_clipboard_set (clipboard, GTK_TYPE_STRING, &quot;Hello World&quot;);
 
@@ -1995,12 +1998,12 @@ gdk_clipboard_set (clipboard, GDK_TYPE_TEXTURE, some_texture);
     <p>Asynchronously instructs the <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted --> to store its contents remotely.</p>
 <p>If the clipboard is not local, this function does nothing but report success.</p>
 <p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> must call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.store_finish].</p>
-<p>The purpose of this call is to preserve clipboard contents beyond the
-lifetime of an application, so this function is typically called on
-exit. Depending on the platform, the functionality may not be available
+<p>The purpose of this call is to preserve clipboard contents beyond the<br />
+lifetime of an application, so this function is typically called on<br />
+exit. Depending on the platform, the functionality may not be available<br />
 unless a &quot;clipboard manager&quot; is running.</p>
-<p>This function is called automatically when a
-<a href="../gtk4/class.Application.html">GtkApplication</a>
+<p>This function is called automatically when a<br />
+<a href="../gtk4/class.Application.html">GtkApplication</a><br />
 is shut down, so you likely don't need to call it.</p>
 
 
@@ -2317,7 +2320,7 @@ is shut down, so you likely don't need to call it.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

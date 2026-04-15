@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::AppLaunchContext";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -278,6 +280,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -294,7 +297,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new application launch context. This is not normally used,
+    <p>Creates a new application launch context. This is not normally used,<br />
 instead you instantiate a subclass of this, such as Gdk::AppLaunchContext.</p>
 
 
@@ -324,9 +327,9 @@ instead you instantiate a subclass of this, such as Gdk::AppLaunchContext.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the complete environment variable list to be passed to
-the child process when <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is used to launch an application.
-This is an array of strings, where each string has
+    <p>Gets the complete environment variable list to be passed to<br />
+the child process when <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is used to launch an application.<br />
+This is an array of strings, where each string has<br />
 the form <code>KEY=VALUE</code>.</p>
 
 
@@ -366,8 +369,8 @@ the form <code>KEY=VALUE</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the display string for the <!-- raw HTML omitted -->context<!-- raw HTML omitted -->. This is used to ensure new
-applications are started on the same display as the launching
+    <p>Gets the display string for the <!-- raw HTML omitted -->context<!-- raw HTML omitted -->. This is used to ensure new<br />
+applications are started on the same display as the launching<br />
 application, by setting the <code>DISPLAY</code> environment variable.</p>
 
 
@@ -441,14 +444,14 @@ application, by setting the <code>DISPLAY</code> environment variable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Initiates startup notification for the application and returns the
-<code>XDG_ACTIVATION_TOKEN</code> or <code>DESKTOP_STARTUP_ID</code> for the launched operation,
+    <p>Initiates startup notification for the application and returns the<br />
+<code>XDG_ACTIVATION_TOKEN</code> or <code>DESKTOP_STARTUP_ID</code> for the launched operation,<br />
 if supported.</p>
-<p>The returned token may be referred to equivalently as an ‘activation token’
-(using Wayland terminology) or a ‘startup sequence ID’ (using X11 terminology).
+<p>The returned token may be referred to equivalently as an ‘activation token’<br />
+(using Wayland terminology) or a ‘startup sequence ID’ (using X11 terminology).<br />
 The two <a href="https://gitlab.freedesktop.org/wayland/wayland-protocols/-/blob/main/staging/xdg-activation/x11-interoperation.rst">are interoperable</a>.</p>
-<p>Activation tokens are defined in the <a href="https://wayland.app/protocols/xdg-activation-v1">XDG Activation Protocol</a>,
-and startup notification IDs are defined in the
+<p>Activation tokens are defined in the <a href="https://wayland.app/protocols/xdg-activation-v1">XDG Activation Protocol</a>,<br />
+and startup notification IDs are defined in the<br />
 <a href="http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt">freedesktop.org Startup Notification Protocol</a>.</p>
 <p>Support for the XDG Activation Protocol was added in GLib 2.76.</p>
 
@@ -502,7 +505,7 @@ and startup notification IDs are defined in the
       
       
         &mdash;
-        <div class='inline'><p>a startup notification ID for the application, or nil if
+        <div class='inline'><p>a startup notification ID for the application, or nil if<br />
 not supported.</p>
 </div>
       
@@ -524,7 +527,7 @@ not supported.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Called when an application has failed to launch, so that it can cancel
+    <p>Called when an application has failed to launch, so that it can cancel<br />
 the application startup notification started in g_app_launch_context_get_startup_notify_id().</p>
 
 
@@ -579,7 +582,7 @@ the application startup notification started in g_app_launch_context_get_startup
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Arranges for <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> to be set to <!-- raw HTML omitted -->value<!-- raw HTML omitted --> in the child's
+    <p>Arranges for <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> to be set to <!-- raw HTML omitted -->value<!-- raw HTML omitted --> in the child's<br />
 environment when <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is used to launch an application.</p>
 
 
@@ -649,7 +652,7 @@ environment when <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is us
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Arranges for <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> to be unset in the child's environment
+    <p>Arranges for <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> to be unset in the child's environment<br />
 when <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is used to launch an application.</p>
 
 
@@ -700,7 +703,7 @@ when <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is used to launch
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

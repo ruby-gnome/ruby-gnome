@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::HeaderBar";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -107,24 +109,24 @@
   <div class="discussion">
     <p><code>GtkHeaderBar</code> is a widget for creating custom title bars for windows.</p>
 <p><img src="headerbar.png" alt="An example GtkHeaderBar" /></p>
-<p><code>GtkHeaderBar</code> is similar to a horizontal <code>GtkCenterBox</code>. It allows
-children to be placed at the start or the end. In addition, it allows
-the window title to be displayed. The title will be centered with respect
-to the width of the box, even if the children at either side take up
+<p><code>GtkHeaderBar</code> is similar to a horizontal <code>GtkCenterBox</code>. It allows<br />
+children to be placed at the start or the end. In addition, it allows<br />
+the window title to be displayed. The title will be centered with respect<br />
+to the width of the box, even if the children at either side take up<br />
 different amounts of space.</p>
-<p><code>GtkHeaderBar</code> can add typical window frame controls, such as minimize,
+<p><code>GtkHeaderBar</code> can add typical window frame controls, such as minimize,<br />
 maximize and close buttons, or the window icon.</p>
-<p>For these reasons, <code>GtkHeaderBar</code> is the natural choice for use as the
-custom titlebar widget of a <code>GtkWindow</code> (see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.set_titlebar]),
-as it gives features typical of titlebars while allowing the addition of
+<p>For these reasons, <code>GtkHeaderBar</code> is the natural choice for use as the<br />
+custom titlebar widget of a <code>GtkWindow</code> (see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window.set_titlebar]),<br />
+as it gives features typical of titlebars while allowing the addition of<br />
 child widgets.</p>
-<h2>GtkHeaderBar as GtkBuildable</h2>
-<p>The <code>GtkHeaderBar</code> implementation of the <code>GtkBuildable</code> interface supports
-adding children at the start or end sides by specifying “start” or “end” as
-the “type” attribute of a <code>&lt;child&gt;</code> element, or setting the title widget by
+<h2><a href="#gtkheaderbar-as-gtkbuildable" aria-hidden="true" class="anchor" id="gtkheaderbar-as-gtkbuildable"></a>GtkHeaderBar as GtkBuildable</h2>
+<p>The <code>GtkHeaderBar</code> implementation of the <code>GtkBuildable</code> interface supports<br />
+adding children at the start or end sides by specifying “start” or “end” as<br />
+the “type” attribute of a <code>&lt;child&gt;</code> element, or setting the title widget by<br />
 specifying “title” value.</p>
-<p>By default the <code>GtkHeaderBar</code> uses a <code>GtkLabel</code> displaying the title of the
-window it is contained in as the title widget, equivalent to the following
+<p>By default the <code>GtkHeaderBar</code> uses a <code>GtkLabel</code> displaying the title of the<br />
+window it is contained in as the title widget, equivalent to the following<br />
 UI definition:</p>
 <pre class="code xml"><code class="xml">&lt;object class=&quot;GtkHeaderBar&quot;&gt;
   &lt;property name=&quot;title-widget&quot;&gt;
@@ -140,7 +142,7 @@ UI definition:</p>
   &lt;/property&gt;
 &lt;/object&gt;
 </code></pre>
-<h1>CSS nodes</h1>
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
 <pre class="code ruby"><code class="ruby">headerbar
 ╰── windowhandle
     ╰── box
@@ -152,13 +154,13 @@ UI definition:</p>
             ├── [other children]
             ╰── windowcontrols.end
 </code></pre>
-<p>A <code>GtkHeaderBar</code>'s CSS node is called <code>headerbar</code>. It contains a <code>windowhandle</code>
-subnode, which contains a <code>box</code> subnode, which contains two <code>box</code> subnodes at
-the start and end of the header bar, as well as a center node that represents
+<p>A <code>GtkHeaderBar</code>'s CSS node is called <code>headerbar</code>. It contains a <code>windowhandle</code><br />
+subnode, which contains a <code>box</code> subnode, which contains two <code>box</code> subnodes at<br />
+the start and end of the header bar, as well as a center node that represents<br />
 the title.</p>
-<p>Each of the boxes contains a <code>windowcontrols</code> subnode, see
+<p>Each of the boxes contains a <code>windowcontrols</code> subnode, see<br />
 [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.WindowControls] for details, as well as other children.</p>
-<h1>Accessibility</h1>
+<h1><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h1>
 <p><code>GtkHeaderBar</code> uses the %GTK_ACCESSIBLE_ROLE_GROUP role.</p>
 
 
@@ -437,9 +439,11 @@ the title.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -495,7 +499,7 @@ the title.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The decoration layout for buttons.</p>
-<p>If this property is not set, the
+<p>If this property is not set, the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-decoration-layout] setting is used.</p>
 
 
@@ -536,7 +540,7 @@ the title.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The decoration layout for buttons.</p>
-<p>If this property is not set, the
+<p>If this property is not set, the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-decoration-layout] setting is used.</p>
 
 
@@ -604,7 +608,7 @@ the title.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->child<!-- raw HTML omitted --> to <!-- raw HTML omitted -->bar<!-- raw HTML omitted -->, packed with reference to the
+    <p>Adds <!-- raw HTML omitted -->child<!-- raw HTML omitted --> to <!-- raw HTML omitted -->bar<!-- raw HTML omitted -->, packed with reference to the<br />
 end of the <!-- raw HTML omitted -->bar<!-- raw HTML omitted -->.</p>
 
 
@@ -659,7 +663,7 @@ end of the <!-- raw HTML omitted -->bar<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->child<!-- raw HTML omitted --> to <!-- raw HTML omitted -->bar<!-- raw HTML omitted -->, packed with reference to the
+    <p>Adds <!-- raw HTML omitted -->child<!-- raw HTML omitted --> to <!-- raw HTML omitted -->bar<!-- raw HTML omitted -->, packed with reference to the<br />
 start of the <!-- raw HTML omitted -->bar<!-- raw HTML omitted -->.</p>
 
 
@@ -715,9 +719,9 @@ start of the <!-- raw HTML omitted -->bar<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Removes a child from the <code>GtkHeaderBar</code>.</p>
-<p>The child must have been added with
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.HeaderBar.pack_start],
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.HeaderBar.pack_end] or
+<p>The child must have been added with<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.HeaderBar.pack_start],<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.HeaderBar.pack_end] or<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.HeaderBar.set_title_widget].</p>
 
 
@@ -772,7 +776,7 @@ start of the <!-- raw HTML omitted -->bar<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether this header bar shows the standard window
+    <p>Returns whether this header bar shows the standard window<br />
 title buttons.</p>
 
 
@@ -813,9 +817,9 @@ title buttons.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to show title buttons like close, minimize, maximize.</p>
-<p>Which buttons are actually shown and where is determined
-by the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.HeaderBar:decoration-layout] property,
-and by the state of the window (e.g. a close button will not
+<p>Which buttons are actually shown and where is determined<br />
+by the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.HeaderBar:decoration-layout] property,<br />
+and by the state of the window (e.g. a close button will not<br />
 be shown if the window can't be closed).</p>
 
 
@@ -884,9 +888,9 @@ be shown if the window can't be closed).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether to show title buttons like close, minimize, maximize.</p>
-<p>Which buttons are actually shown and where is determined
-by the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.HeaderBar:decoration-layout] property,
-and by the state of the window (e.g. a close button will not
+<p>Which buttons are actually shown and where is determined<br />
+by the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.HeaderBar:decoration-layout] property,<br />
+and by the state of the window (e.g. a close button will not<br />
 be shown if the window can't be closed).</p>
 
 
@@ -1027,7 +1031,7 @@ be shown if the window can't be closed).</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

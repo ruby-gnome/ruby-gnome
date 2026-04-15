@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "ClutterGst::Camera";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -942,6 +944,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -959,9 +962,9 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Create a camera actor.</p>
-<p><!-- raw HTML omitted -->This function has to be called from Clutter's main thread. While
-GStreamer will spawn threads to do its work, we want all the GL calls to
-happen in the same thread. Clutter-gst knows which thread it is by
+<p><!-- raw HTML omitted -->This function has to be called from Clutter's main thread. While<br />
+GStreamer will spawn threads to do its work, we want all the GL calls to<br />
+happen in the same thread. Clutter-gst knows which thread it is by<br />
 assuming this constructor is called from the Clutter thread.<!-- raw HTML omitted --></p>
 
 
@@ -1330,7 +1333,7 @@ assuming this constructor is called from the Clutter thread.<!-- raw HTML omitte
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the filter element to be used.
+    <p>Set the filter element to be used.<br />
 Filters can be used for effects, image processing, etc.</p>
 
 
@@ -1389,11 +1392,11 @@ Filters can be used for effects, image processing, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the gamma value.
-Allowed values can be retrieved with
+    <p>Set the gamma value.<br />
+Allowed values can be retrieved with<br />
 clutter_gst_camera_get_gamma_range().</p>
-<p>This method will return FALSE if gamma correction is not
-supported on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.
+<p>This method will return FALSE if gamma correction is not<br />
+supported on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.<br />
 See clutter_gst_camera_supports_gamma_correction().</p>
 
 
@@ -1573,8 +1576,8 @@ See clutter_gst_camera_supports_gamma_correction().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieve the current value for the color balance property <!-- raw HTML omitted -->property<!-- raw HTML omitted -->,</p>
-<p>This method will return FALSE if <!-- raw HTML omitted -->property<!-- raw HTML omitted --> does not exist or color balance is not
-supported on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.
+<p>This method will return FALSE if <!-- raw HTML omitted -->property<!-- raw HTML omitted --> does not exist or color balance is not<br />
+supported on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.<br />
 See clutter_gst_camera_supports_color_balance().</p>
 
 
@@ -1649,8 +1652,8 @@ See clutter_gst_camera_supports_color_balance().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieve the minimum, maximum and default values for the color balance property <!-- raw HTML omitted -->property<!-- raw HTML omitted -->,</p>
-<p>This method will return FALSE if <!-- raw HTML omitted -->property<!-- raw HTML omitted --> does not exist or color balance is not
-supported on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.
+<p>This method will return FALSE if <!-- raw HTML omitted -->property<!-- raw HTML omitted --> does not exist or color balance is not<br />
+supported on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.<br />
 See clutter_gst_camera_supports_color_balance().</p>
 
 
@@ -1875,8 +1878,8 @@ See clutter_gst_camera_supports_color_balance().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieve the current gamma value.</p>
-<p>This method will return FALSE if gamma correction is not
-supported on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.
+<p>This method will return FALSE if gamma correction is not<br />
+supported on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.<br />
 See clutter_gst_camera_supports_gamma_correction().</p>
 
 
@@ -1936,8 +1939,8 @@ See clutter_gst_camera_supports_gamma_correction().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieve the minimum, maximum and default gamma values.</p>
-<p>This method will return FALSE if gamma correction is not
-supported on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.
+<p>This method will return FALSE if gamma correction is not<br />
+supported on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.<br />
 See clutter_gst_camera_supports_gamma_correction().</p>
 
 
@@ -2393,7 +2396,7 @@ See clutter_gst_camera_supports_gamma_correction().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the encoding profile to be used for photo captures.
+    <p>Set the encoding profile to be used for photo captures.<br />
 The default profile saves photos as JPEG images.</p>
 
 
@@ -2536,11 +2539,11 @@ The default profile saves photos as JPEG images.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the value for the color balance property <!-- raw HTML omitted -->property<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.
-Allowed values can be retrieved with
+    <p>Set the value for the color balance property <!-- raw HTML omitted -->property<!-- raw HTML omitted --> to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.<br />
+Allowed values can be retrieved with<br />
 clutter_gst_camera_get_color_balance_property_range().</p>
-<p>This method will return FALSE if <!-- raw HTML omitted -->property<!-- raw HTML omitted --> does not exist or color balance is not
-supported on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.
+<p>This method will return FALSE if <!-- raw HTML omitted -->property<!-- raw HTML omitted --> does not exist or color balance is not<br />
+supported on <!-- raw HTML omitted -->self<!-- raw HTML omitted -->.<br />
 See clutter_gst_camera_supports_color_balance().</p>
 
 
@@ -2614,9 +2617,9 @@ See clutter_gst_camera_supports_color_balance().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Start a video recording with the <!-- raw HTML omitted -->self<!-- raw HTML omitted --> and save it to <!-- raw HTML omitted -->filename<!-- raw HTML omitted -->.
+    <p>Start a video recording with the <!-- raw HTML omitted -->self<!-- raw HTML omitted --> and save it to <!-- raw HTML omitted -->filename<!-- raw HTML omitted -->.<br />
 This method requires that <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is playing and ready for capture.</p>
-<p>The ::video-saved signal will be emitted when the video is saved.
+<p>The ::video-saved signal will be emitted when the video is saved.<br />
 recording will be saved</p>
 
 
@@ -2788,9 +2791,9 @@ recording will be saved</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Take a photo with the <!-- raw HTML omitted -->self<!-- raw HTML omitted --> and save it to <!-- raw HTML omitted -->filename<!-- raw HTML omitted -->.
+    <p>Take a photo with the <!-- raw HTML omitted -->self<!-- raw HTML omitted --> and save it to <!-- raw HTML omitted -->filename<!-- raw HTML omitted -->.<br />
 This method requires that <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is playing and ready for capture.</p>
-<p>The ::photo-saved signal will be emitted when the video is saved.
+<p>The ::photo-saved signal will be emitted when the video is saved.<br />
 photo will be saved</p>
 
 
@@ -2849,8 +2852,8 @@ photo will be saved</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Take a photo with the <!-- raw HTML omitted -->self<!-- raw HTML omitted --> and emit it in the ::photo-taken signal as a
-Gdk::Pixbuf.
+    <p>Take a photo with the <!-- raw HTML omitted -->self<!-- raw HTML omitted --> and emit it in the ::photo-taken signal as a<br />
+Gdk::Pixbuf.<br />
 This method requires that <!-- raw HTML omitted -->self<!-- raw HTML omitted --> is playing and ready for capture.</p>
 
 
@@ -2890,7 +2893,7 @@ This method requires that <!-- raw HTML omitted -->self<!-- raw HTML omitted -->
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the encoding profile to be used for video recording.
+    <p>Set the encoding profile to be used for video recording.<br />
 The default profile saves videos as Ogg/Theora videos.</p>
 
 
@@ -2941,7 +2944,7 @@ The default profile saves videos as Ogg/Theora videos.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

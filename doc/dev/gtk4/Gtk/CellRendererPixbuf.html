@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::CellRendererPixbuf";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -106,16 +108,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Renders a pixbuf in a cell</p>
-<p>A <code>GtkCellRendererPixbuf</code> can be used to render an image in a cell. It allows
-to render either a given <code>GdkPixbuf</code> (set via the
-<code>GtkCellRendererPixbuf:pixbuf</code> property) or a named icon (set via the
+<p>A <code>GtkCellRendererPixbuf</code> can be used to render an image in a cell. It allows<br />
+to render either a given <code>GdkPixbuf</code> (set via the<br />
+<code>GtkCellRendererPixbuf:pixbuf</code> property) or a named icon (set via the<br />
 <code>GtkCellRendererPixbuf:icon-name</code> property).</p>
-<p>To support the tree view, <code>GtkCellRendererPixbuf</code> also supports rendering two
-alternative pixbufs, when the <code>GtkCellRenderer:is-expander</code> property is true.
-If the <code>GtkCellRenderer:is-expanded property</code> is true and the
-<code>GtkCellRendererPixbuf:pixbuf-expander-open</code> property is set to a pixbuf, it
-renders that pixbuf, if the <code>GtkCellRenderer:is-expanded</code> property is false
-and the <code>GtkCellRendererPixbuf:pixbuf-expander-closed</code> property is set to a
+<p>To support the tree view, <code>GtkCellRendererPixbuf</code> also supports rendering two<br />
+alternative pixbufs, when the <code>GtkCellRenderer:is-expander</code> property is true.<br />
+If the <code>GtkCellRenderer:is-expanded property</code> is true and the<br />
+<code>GtkCellRendererPixbuf:pixbuf-expander-open</code> property is set to a pixbuf, it<br />
+renders that pixbuf, if the <code>GtkCellRenderer:is-expanded</code> property is false<br />
+and the <code>GtkCellRendererPixbuf:pixbuf-expander-closed</code> property is set to a<br />
 pixbuf, it renders that one.</p>
 
 
@@ -461,9 +463,11 @@ pixbuf, it renders that one.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -490,12 +494,12 @@ pixbuf, it renders that one.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>GtkCellRendererPixbuf</code>. Adjust rendering
-parameters using object properties. Object properties can be set
-globally (with g_object_set()). Also, with <code>GtkTreeViewColumn</code>, you
-can bind a property to a value in a <code>GtkTreeModel</code>. For example, you
-can bind the “pixbuf” property on the cell renderer to a pixbuf value
-in the model, thus rendering a different image in each row of the
+    <p>Creates a new <code>GtkCellRendererPixbuf</code>. Adjust rendering<br />
+parameters using object properties. Object properties can be set<br />
+globally (with g_object_set()). Also, with <code>GtkTreeViewColumn</code>, you<br />
+can bind a property to a value in a <code>GtkTreeModel</code>. For example, you<br />
+can bind the “pixbuf” property on the cell renderer to a pixbuf value<br />
+in the model, thus rendering a different image in each row of the<br />
 <code>GtkTreeView</code>.</p>
 
 
@@ -525,8 +529,8 @@ in the model, thus rendering a different image in each row of the
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The GIcon representing the icon to display.
-If the icon theme is changed, the image will be updated
+    <p>The GIcon representing the icon to display.<br />
+If the icon theme is changed, the image will be updated<br />
 automatically.</p>
 
 
@@ -566,8 +570,8 @@ automatically.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The GIcon representing the icon to display.
-If the icon theme is changed, the image will be updated
+    <p>The GIcon representing the icon to display.<br />
+If the icon theme is changed, the image will be updated<br />
 automatically.</p>
 
 
@@ -635,7 +639,7 @@ automatically.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The name of the themed icon to display.
+    <p>The name of the themed icon to display.<br />
 This property only has an effect if not overridden by the &quot;pixbuf&quot; property.</p>
 
 
@@ -675,7 +679,7 @@ This property only has an effect if not overridden by the &quot;pixbuf&quot; pro
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The name of the themed icon to display.
+    <p>The name of the themed icon to display.<br />
 This property only has an effect if not overridden by the &quot;pixbuf&quot; property.</p>
 
 
@@ -1214,7 +1218,7 @@ This property only has an effect if not overridden by the &quot;pixbuf&quot; pro
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

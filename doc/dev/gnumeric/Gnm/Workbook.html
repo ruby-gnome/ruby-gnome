@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gnm::Workbook";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -340,6 +342,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1388,6 +1391,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1862,11 +1866,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The supplied value must be a cellrange.
-The range bounds are calculated relative to the eval position
-and normalized.
-For each existing cell in the range specified, invoke the
-callback routine.  If the only_existing flag is true, then
+    <p>The supplied value must be a cellrange.<br />
+The range bounds are calculated relative to the eval position<br />
+and normalized.<br />
+For each existing cell in the range specified, invoke the<br />
+callback routine.  If the only_existing flag is true, then<br />
 callbacks are only invoked for existing cells.</p>
 <p>Note: this function does not honour the CELL_ITER_IGNORE_SUBTOTAL flag.</p>
 
@@ -1965,7 +1969,7 @@ callbacks are only invoked for existing cells.</p>
       
       
         &mdash;
-        <div class='inline'><p>non-nil on error, or VALUE_TERMINATE if some the handler requested
+        <div class='inline'><p>non-nil on error, or VALUE_TERMINATE if some the handler requested<br />
 to stop (by returning non-nil).</p>
 </div>
       
@@ -1987,8 +1991,8 @@ to stop (by returning non-nil).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function detaches the given sheet from its parent workbook and
-invalidates all references to the deleted sheet from other sheets and
+    <p>This function detaches the given sheet from its parent workbook and<br />
+invalidates all references to the deleted sheet from other sheets and<br />
 clears all references in the clipboard to this sheet.</p>
 
 
@@ -2043,8 +2047,8 @@ clears all references in the clipboard to this sheet.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Moves the sheet up or down <!-- raw HTML omitted -->direction<!-- raw HTML omitted --> spots in the sheet list
-If <!-- raw HTML omitted -->direction<!-- raw HTML omitted --> is negative, move left. If positive, move right.
+    <p>Moves the sheet up or down <!-- raw HTML omitted -->direction<!-- raw HTML omitted --> spots in the sheet list<br />
+If <!-- raw HTML omitted -->direction<!-- raw HTML omitted --> is negative, move left. If positive, move right.<br />
 for left.</p>
 
 
@@ -2274,7 +2278,7 @@ for left.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Collects a GPtrArray of GnmEvalPos pointers for all cells in a workbook.
+    <p>Collects a GPtrArray of GnmEvalPos pointers for all cells in a workbook.<br />
 No particular order should be assumed.</p>
 
 
@@ -2387,9 +2391,9 @@ No particular order should be assumed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the date convention <!-- raw HTML omitted -->date_conv<!-- raw HTML omitted -->.
-NOTE : THIS IS NOT A SMART ROUTINE.  If you want to actually change this
-We'll need to recalc and rerender everything.  That will need to be done
+    <p>Sets the date convention <!-- raw HTML omitted -->date_conv<!-- raw HTML omitted -->.<br />
+NOTE : THIS IS NOT A SMART ROUTINE.  If you want to actually change this<br />
+We'll need to recalc and rerender everything.  That will need to be done<br />
 externally.</p>
 
 
@@ -3147,7 +3151,7 @@ externally.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Computes all dependents in <!-- raw HTML omitted -->wb<!-- raw HTML omitted --> that have been flaged as requiring
+    <p>Computes all dependents in <!-- raw HTML omitted -->wb<!-- raw HTML omitted --> that have been flaged as requiring<br />
 recomputation.</p>
 <p>NOTE! This does not recalc dependents in other workbooks.</p>
 
@@ -3407,7 +3411,7 @@ recomputation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If level is sufficiently advanced, assign the info.
+    <p>If level is sufficiently advanced, assign the info.<br />
 FIXME : Add a check to ensure the name is unique.</p>
 
 
@@ -3530,7 +3534,7 @@ FIXME : Add a check to ensure the name is unique.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create and name a new sheet, putting it at position <!-- raw HTML omitted -->pos<!-- raw HTML omitted -->.  The sheet
+    <p>Create and name a new sheet, putting it at position <!-- raw HTML omitted -->pos<!-- raw HTML omitted -->.  The sheet<br />
 returned is not ref'd.  (The ref belongs to the workbook.)</p>
 
 
@@ -3619,7 +3623,7 @@ returned is not ref'd.  (The ref belongs to the workbook.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create and name a new sheet, putting it at position <!-- raw HTML omitted -->pos<!-- raw HTML omitted -->.  The sheet
+    <p>Create and name a new sheet, putting it at position <!-- raw HTML omitted -->pos<!-- raw HTML omitted -->.  The sheet<br />
 returned is not ref'd.  (The ref belongs to the workbook.)</p>
 
 
@@ -3723,7 +3727,7 @@ returned is not ref'd.  (The ref belongs to the workbook.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Add <!-- raw HTML omitted -->new_sheet<!-- raw HTML omitted --> to <!-- raw HTML omitted -->wb<!-- raw HTML omitted -->, placing it at the end.  SURPRISE: This assumes
+    <p>Add <!-- raw HTML omitted -->new_sheet<!-- raw HTML omitted --> to <!-- raw HTML omitted -->wb<!-- raw HTML omitted -->, placing it at the end.  SURPRISE: This assumes<br />
 a ref to the sheet.</p>
 
 
@@ -3997,7 +4001,7 @@ a ref to the sheet.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a new unquoted name for a sheets such that it does not exist on the
+    <p>Gets a new unquoted name for a sheets such that it does not exist on the<br />
 workbook.</p>
 
 
@@ -4086,7 +4090,7 @@ workbook.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adjusts the names of the sheets. We assume that everything is
+    <p>Adjusts the names of the sheets. We assume that everything is<br />
 valid. If in doubt call workbook_sheet_reorder_check first.</p>
 
 
@@ -4226,8 +4230,8 @@ valid. If in doubt call workbook_sheet_reorder_check first.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>not of uniform size, this will be some size that is big enough in both
-directions for all sheets.  That size isn't necessarily one that could
+    <p>not of uniform size, this will be some size that is big enough in both<br />
+directions for all sheets.  That size isn't necessarily one that could<br />
 be used to create a new sheet.</p>
 
 
@@ -4473,7 +4477,7 @@ be used to create a new sheet.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

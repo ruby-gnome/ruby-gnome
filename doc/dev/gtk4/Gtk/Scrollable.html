@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Scrollable";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -86,33 +88,33 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p><code>GtkScrollable</code> is an interface for widgets with native scrolling ability.</p>
-<p>To implement this interface you should override the
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scrollable:hadjustment] and
+<p>To implement this interface you should override the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scrollable:hadjustment] and<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Scrollable:vadjustment] properties.</p>
-<h2>Creating a scrollable widget</h2>
+<h2><a href="#creating-a-scrollable-widget" aria-hidden="true" class="anchor" id="creating-a-scrollable-widget"></a>Creating a scrollable widget</h2>
 <p>All scrollable widgets should do the following.</p>
 <ul>
 <li>
-<p>When a parent widget sets the scrollable child widget’s adjustments,
-the widget should connect to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment::value-changed]
-signal. The child widget should then populate the adjustments’ properties
-as soon as possible, which usually means queueing an allocation right away
-and populating the properties in the [vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.size_allocate]
+<p>When a parent widget sets the scrollable child widget’s adjustments,<br />
+the widget should connect to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment::value-changed]<br />
+signal. The child widget should then populate the adjustments’ properties<br />
+as soon as possible, which usually means queueing an allocation right away<br />
+and populating the properties in the [vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.size_allocate]<br />
 implementation.</p>
 </li>
 <li>
-<p>Because its preferred size is the size for a fully expanded widget,
-the scrollable widget must be able to cope with underallocations.
-This means that it must accept any value passed to its
+<p>Because its preferred size is the size for a fully expanded widget,<br />
+the scrollable widget must be able to cope with underallocations.<br />
+This means that it must accept any value passed to its<br />
 [vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.size_allocate] implementation.</p>
 </li>
 <li>
-<p>When the parent allocates space to the scrollable child widget,
-the widget must ensure the adjustments’ property values are correct and up
+<p>When the parent allocates space to the scrollable child widget,<br />
+the widget must ensure the adjustments’ property values are correct and up<br />
 to date, for example using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment.configure].</p>
 </li>
 <li>
-<p>When any of the adjustments emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment::value-changed]
+<p>When any of the adjustments emits the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment::value-changed]<br />
 signal, the scrollable widget should scroll its contents.</p>
 </li>
 </ul>
@@ -346,6 +348,7 @@ signal, the scrollable widget should scroll its contents.</p>
 
       
     </ul>
+    
   
 
 
@@ -365,10 +368,10 @@ signal, the scrollable widget should scroll its contents.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the size of a non-scrolling border around the
+    <p>Returns the size of a non-scrolling border around the<br />
 outside of the scrollable.</p>
-<p>An example for this would be treeview headers. GTK can use
-this information to display overlaid graphics, like the
+<p>An example for this would be treeview headers. GTK can use<br />
+this information to display overlaid graphics, like the<br />
 overshoot indication, at the right position.</p>
 
 
@@ -560,7 +563,7 @@ overshoot indication, at the right position.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the <code>GtkScrollablePolicy</code>.</p>
-<p>The policy determines whether horizontal scrolling should start
+<p>The policy determines whether horizontal scrolling should start<br />
 below the minimum width or below the natural width.</p>
 
 
@@ -748,7 +751,7 @@ below the minimum width or below the natural width.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the <code>GtkScrollablePolicy</code>.</p>
-<p>The policy determines whether vertical scrolling should start
+<p>The policy determines whether vertical scrolling should start<br />
 below the minimum height or below the natural height.</p>
 
 
@@ -799,7 +802,7 @@ below the minimum height or below the natural height.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

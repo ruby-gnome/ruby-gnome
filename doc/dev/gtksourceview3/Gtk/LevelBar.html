@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::LevelBar";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -106,19 +108,19 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p><code>GtkLevelBar</code> is a widget that can be used as a level indicator.</p>
-<p>Typical use cases are displaying the strength of a password, or
+<p>Typical use cases are displaying the strength of a password, or<br />
 showing the charge level of a battery.</p>
 <p><img src="levelbar.png" alt="An example GtkLevelBar" /></p>
-<p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar.set_value] to set the current value, and
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar.add_offset_value] to set the value offsets at which
-the bar will be considered in a different state. GTK will add a few
-offsets by default on the level bar: %GTK_LEVEL_BAR_OFFSET_LOW,
-%GTK_LEVEL_BAR_OFFSET_HIGH and %GTK_LEVEL_BAR_OFFSET_FULL, with
+<p>Use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar.set_value] to set the current value, and<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar.add_offset_value] to set the value offsets at which<br />
+the bar will be considered in a different state. GTK will add a few<br />
+offsets by default on the level bar: %GTK_LEVEL_BAR_OFFSET_LOW,<br />
+%GTK_LEVEL_BAR_OFFSET_HIGH and %GTK_LEVEL_BAR_OFFSET_FULL, with<br />
 values 0.25, 0.75 and 1.0 respectively.</p>
-<p>Note that it is your responsibility to update preexisting offsets
-when changing the minimum or maximum value. GTK will simply clamp
+<p>Note that it is your responsibility to update preexisting offsets<br />
+when changing the minimum or maximum value. GTK will simply clamp<br />
 them to the new range.</p>
-<h2>Adding a custom offset on the bar</h2>
+<h2><a href="#adding-a-custom-offset-on-the-bar" aria-hidden="true" class="anchor" id="adding-a-custom-offset-on-the-bar"></a>Adding a custom offset on the bar</h2>
 <pre class="code c"><code class="c">static GtkWidget *
 create_level_bar (void)
 {
@@ -149,23 +151,23 @@ create_level_bar (void)
   return widget;
 }
 </code></pre>
-<p>The default interval of values is between zero and one, but it’s possible
-to modify the interval using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar.set_min_value] and
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar.set_max_value]. The value will be always drawn in
-proportion to the admissible interval, i.e. a value of 15 with a specified
-interval between 10 and 20 is equivalent to a value of 0.5 with an interval
-between 0 and 1. When %GTK_LEVEL_BAR_MODE_DISCRETE is used, the bar level
-is rendered as a finite number of separated blocks instead of a single one.
-The number of blocks that will be rendered is equal to the number of units
+<p>The default interval of values is between zero and one, but it’s possible<br />
+to modify the interval using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar.set_min_value] and<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar.set_max_value]. The value will be always drawn in<br />
+proportion to the admissible interval, i.e. a value of 15 with a specified<br />
+interval between 10 and 20 is equivalent to a value of 0.5 with an interval<br />
+between 0 and 1. When %GTK_LEVEL_BAR_MODE_DISCRETE is used, the bar level<br />
+is rendered as a finite number of separated blocks instead of a single one.<br />
+The number of blocks that will be rendered is equal to the number of units<br />
 specified by the admissible interval.</p>
-<p>For instance, to build a bar rendered with five blocks, it’s sufficient to
-set the minimum value to 0 and the maximum value to 5 after changing the
+<p>For instance, to build a bar rendered with five blocks, it’s sufficient to<br />
+set the minimum value to 0 and the maximum value to 5 after changing the<br />
 indicator mode to discrete.</p>
-<h1>GtkLevelBar as GtkBuildable</h1>
-<p>The <code>GtkLevelBar</code> implementation of the <code>GtkBuildable</code> interface supports a
-custom <code>&lt;offsets&gt;</code> element, which can contain any number of <code>&lt;offset&gt;</code> elements,
+<h1><a href="#gtklevelbar-as-gtkbuildable" aria-hidden="true" class="anchor" id="gtklevelbar-as-gtkbuildable"></a>GtkLevelBar as GtkBuildable</h1>
+<p>The <code>GtkLevelBar</code> implementation of the <code>GtkBuildable</code> interface supports a<br />
+custom <code>&lt;offsets&gt;</code> element, which can contain any number of <code>&lt;offset&gt;</code> elements,<br />
 each of which must have &quot;name&quot; and &quot;value&quot; attributes.</p>
-<h1>CSS nodes</h1>
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
 <pre class="code ruby"><code class="ruby">levelbar[.discrete]
 ╰── trough
     ├── block.filled.level-name
@@ -173,16 +175,16 @@ each of which must have &quot;name&quot; and &quot;value&quot; attributes.</p>
     ├── block.empty
     ┊
 </code></pre>
-<p><code>GtkLevelBar</code> has a main CSS node with name levelbar and one of the style
-classes .discrete or .continuous and a subnode with name trough. Below the
-trough node are a number of nodes with name block and style class .filled
-or .empty. In continuous mode, there is exactly one node of each, in discrete
-mode, the number of filled and unfilled nodes corresponds to blocks that are
-drawn. The block.filled nodes also get a style class .level-name corresponding
+<p><code>GtkLevelBar</code> has a main CSS node with name levelbar and one of the style<br />
+classes .discrete or .continuous and a subnode with name trough. Below the<br />
+trough node are a number of nodes with name block and style class .filled<br />
+or .empty. In continuous mode, there is exactly one node of each, in discrete<br />
+mode, the number of filled and unfilled nodes corresponds to blocks that are<br />
+drawn. The block.filled nodes also get a style class .level-name corresponding<br />
 to the level for the current value.</p>
-<p>In horizontal orientation, the nodes are always arranged from left to right,
+<p>In horizontal orientation, the nodes are always arranged from left to right,<br />
 regardless of text direction.</p>
-<h1>Accessibility</h1>
+<h1><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h1>
 <p><code>GtkLevelBar</code> uses the %GTK_ACCESSIBLE_ROLE_METER role.</p>
 
 
@@ -554,9 +556,11 @@ regardless of text direction.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -646,11 +650,11 @@ regardless of text direction.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a new offset marker on <!-- raw HTML omitted -->self<!-- raw HTML omitted --> at the position specified by <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
-<p>When the bar value is in the interval topped by <!-- raw HTML omitted -->value<!-- raw HTML omitted --> (or between <!-- raw HTML omitted -->value<!-- raw HTML omitted -->
-and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar:max-value] in case the offset is the last one
-on the bar) a style class named <code>level-</code><!-- raw HTML omitted -->name<!-- raw HTML omitted --> will be applied
+<p>When the bar value is in the interval topped by <!-- raw HTML omitted -->value<!-- raw HTML omitted --> (or between <!-- raw HTML omitted -->value<!-- raw HTML omitted --><br />
+and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar:max-value] in case the offset is the last one<br />
+on the bar) a style class named <code>level-</code><!-- raw HTML omitted -->name<!-- raw HTML omitted --> will be applied<br />
 when rendering the level bar fill.</p>
-<p>If another offset marker named <!-- raw HTML omitted -->name<!-- raw HTML omitted --> exists, its value will be
+<p>If another offset marker named <!-- raw HTML omitted -->name<!-- raw HTML omitted --> exists, its value will be<br />
 replaced by <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
 
 
@@ -833,7 +837,7 @@ replaced by <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the <code>GtkLeveBar</code> is inverted.</p>
-<p>Level bars normally grow from top to bottom or left to right.
+<p>Level bars normally grow from top to bottom or left to right.<br />
 Inverted level bars grow in the opposite direction.</p>
 
 
@@ -902,7 +906,7 @@ Inverted level bars grow in the opposite direction.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the <code>GtkLeveBar</code> is inverted.</p>
-<p>Level bars normally grow from top to bottom or left to right.
+<p>Level bars normally grow from top to bottom or left to right.<br />
 Inverted level bars grow in the opposite direction.</p>
 
 
@@ -1154,14 +1158,14 @@ Inverted level bars grow in the opposite direction.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines the way <code>GtkLevelBar</code> interprets the value properties to draw the
+    <p>Determines the way <code>GtkLevelBar</code> interprets the value properties to draw the<br />
 level fill area.</p>
-<p>Specifically, when the value is %GTK_LEVEL_BAR_MODE_CONTINUOUS,
-<code>GtkLevelBar</code> will draw a single block representing the current value in
-that area; when the value is %GTK_LEVEL_BAR_MODE_DISCRETE,
-the widget will draw a succession of separate blocks filling the
-draw area, with the number of blocks being equal to the units separating
-the integral roundings of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar:min-value] and
+<p>Specifically, when the value is %GTK_LEVEL_BAR_MODE_CONTINUOUS,<br />
+<code>GtkLevelBar</code> will draw a single block representing the current value in<br />
+that area; when the value is %GTK_LEVEL_BAR_MODE_DISCRETE,<br />
+the widget will draw a succession of separate blocks filling the<br />
+draw area, with the number of blocks being equal to the units separating<br />
+the integral roundings of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar:min-value] and<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar:max-value].</p>
 
 
@@ -1201,14 +1205,14 @@ the integral roundings of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omi
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines the way <code>GtkLevelBar</code> interprets the value properties to draw the
+    <p>Determines the way <code>GtkLevelBar</code> interprets the value properties to draw the<br />
 level fill area.</p>
-<p>Specifically, when the value is %GTK_LEVEL_BAR_MODE_CONTINUOUS,
-<code>GtkLevelBar</code> will draw a single block representing the current value in
-that area; when the value is %GTK_LEVEL_BAR_MODE_DISCRETE,
-the widget will draw a succession of separate blocks filling the
-draw area, with the number of blocks being equal to the units separating
-the integral roundings of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar:min-value] and
+<p>Specifically, when the value is %GTK_LEVEL_BAR_MODE_CONTINUOUS,<br />
+<code>GtkLevelBar</code> will draw a single block representing the current value in<br />
+that area; when the value is %GTK_LEVEL_BAR_MODE_DISCRETE,<br />
+the widget will draw a succession of separate blocks filling the<br />
+draw area, with the number of blocks being equal to the units separating<br />
+the integral roundings of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar:min-value] and<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar:max-value].</p>
 
 
@@ -1277,7 +1281,7 @@ the integral roundings of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omi
 </h3><div class="docstring">
   <div class="discussion">
     <p>Removes an offset marker from a <code>GtkLevelBar</code>.</p>
-<p>The marker must have been previously added with
+<p>The marker must have been previously added with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.LevelBar.add_offset_value].</p>
 
 
@@ -1434,7 +1438,7 @@ the integral roundings of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omi
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

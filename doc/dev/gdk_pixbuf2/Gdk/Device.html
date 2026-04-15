@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::Device";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,16 +95,17 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The <code>GdkDevice</code> object represents an input device, such
+    <p>The <code>GdkDevice</code> object represents an input device, such<br />
 as a keyboard, a mouse, or a touchpad.</p>
-<p>See the [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Seat] documentation for more information
+<p>See the [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Seat] documentation for more information<br />
 about the various kinds of devices, and their relationships.</p>
 
 
@@ -1048,6 +1050,7 @@ about the various kinds of devices, and their relationships.</p>
 
       
     </ul>
+    
   
 
 
@@ -1468,9 +1471,9 @@ about the various kinds of devices, and their relationships.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the surface underneath <!-- raw HTML omitted -->device<!-- raw HTML omitted -->, returning the location of the
+    <p>Obtains the surface underneath <!-- raw HTML omitted -->device<!-- raw HTML omitted -->, returning the location of the<br />
 device in <!-- raw HTML omitted -->win_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->win_y<!-- raw HTML omitted -->.</p>
-<p>Returns nil if the surface tree under <!-- raw HTML omitted -->device<!-- raw HTML omitted --> is not known to GDK
+<p>Returns nil if the surface tree under <!-- raw HTML omitted -->device<!-- raw HTML omitted --> is not known to GDK<br />
 (for example, belongs to another application).</p>
 
 
@@ -1490,7 +1493,7 @@ device in <!-- raw HTML omitted -->win_x<!-- raw HTML omitted --> and <!-- raw H
       
       
         &mdash;
-        <div class='inline'><p>return location for the X coordinate
+        <div class='inline'><p>return location for the X coordinate<br />
 of the device location relative to the surface origin</p>
 </div>
       
@@ -1506,7 +1509,7 @@ of the device location relative to the surface origin</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the Y coordinate
+        <div class='inline'><p>return location for the Y coordinate<br />
 of the device location relative to the surface origin</p>
 </div>
       
@@ -1525,7 +1528,7 @@ of the device location relative to the surface origin</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GdkSurface</code> under the
+        <div class='inline'><p>the <code>GdkSurface</code> under the<br />
 device position</p>
 </div>
       
@@ -1547,7 +1550,7 @@ device position</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines if layouts for both right-to-left and
+    <p>Determines if layouts for both right-to-left and<br />
 left-to-right languages are in use on the keyboard.</p>
 <p>This is only relevant for keyboard devices.</p>
 
@@ -1697,7 +1700,7 @@ left-to-right languages are in use on the keyboard.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Determines whether the pointer follows device motion.</p>
-<p>This is not meaningful for keyboard devices, which
+<p>This is not meaningful for keyboard devices, which<br />
 don't have a pointer.</p>
 
 
@@ -2312,7 +2315,7 @@ don't have a pointer.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The maximal number of concurrent touches on a touch device.</p>
-<p>Will be 0 if the device is not a touch device or if the number
+<p>Will be 0 if the device is not a touch device or if the number<br />
 of touches is unknown.</p>
 
 
@@ -2353,7 +2356,7 @@ of touches is unknown.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The maximal number of concurrent touches on a touch device.</p>
-<p>Will be 0 if the device is not a touch device or if the number
+<p>Will be 0 if the device is not a touch device or if the number<br />
 of touches is unknown.</p>
 
 
@@ -2890,9 +2893,9 @@ of touches is unknown.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the timestamp of the last activity for this device.</p>
-<p>In practice, this means the timestamp of the last event that was
-received from the OS for this device. (GTK may occasionally produce
-events for a device that are not received from the OS, and will not
+<p>In practice, this means the timestamp of the last event that was<br />
+received from the OS for this device. (GTK may occasionally produce<br />
+events for a device that are not received from the OS, and will not<br />
 update the timestamp).</p>
 
 
@@ -3142,7 +3145,7 @@ update the timestamp).</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

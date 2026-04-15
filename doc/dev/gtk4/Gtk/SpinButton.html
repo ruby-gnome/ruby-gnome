@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::SpinButton";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -103,8 +104,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/deprecated.rb<span class="defines">,<br />
+    <dd>lib/gtk4/deprecated.rb<span class="defines">,<br>
   lib/gtk4/spin-button.rb</span>
+
 </dd>
   </dl>
   
@@ -112,22 +114,22 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A <code>GtkSpinButton</code> is an ideal way to allow the user to set the
+    <p>A <code>GtkSpinButton</code> is an ideal way to allow the user to set the<br />
 value of some attribute.</p>
 <p><img src="spinbutton.png" alt="An example GtkSpinButton" /></p>
-<p>Rather than having to directly type a number into a <code>GtkEntry</code>,
-<code>GtkSpinButton</code> allows the user to click on one of two arrows
-to increment or decrement the displayed value. A value can still be
-typed in, with the bonus that it can be checked to ensure it is in a
+<p>Rather than having to directly type a number into a <code>GtkEntry</code>,<br />
+<code>GtkSpinButton</code> allows the user to click on one of two arrows<br />
+to increment or decrement the displayed value. A value can still be<br />
+typed in, with the bonus that it can be checked to ensure it is in a<br />
 given range.</p>
-<p>The main properties of a <code>GtkSpinButton</code> are through an adjustment.
-See the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment] documentation for more details about
+<p>The main properties of a <code>GtkSpinButton</code> are through an adjustment.<br />
+See the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Adjustment] documentation for more details about<br />
 an adjustment's properties.</p>
-<p>Note that <code>GtkSpinButton</code> will by default make its entry large enough
-to accommodate the lower and upper bounds of the adjustment. If this
-is not desired, the automatic sizing can be turned off by explicitly
+<p>Note that <code>GtkSpinButton</code> will by default make its entry large enough<br />
+to accommodate the lower and upper bounds of the adjustment. If this<br />
+is not desired, the automatic sizing can be turned off by explicitly<br />
 setting [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Editable:width-chars] to a value != -1.</p>
-<h2>Using a GtkSpinButton to get an integer</h2>
+<h2><a href="#using-a-gtkspinbutton-to-get-an-integer" aria-hidden="true" class="anchor" id="using-a-gtkspinbutton-to-get-an-integer"></a>Using a GtkSpinButton to get an integer</h2>
 <pre class="code c"><code class="c">// Provides a function to retrieve an integer value from a GtkSpinButton
 // and creates a spin button to model percentage values.
 
@@ -156,7 +158,7 @@ create_integer_spin_button (void)
   gtk_window_present (GTK_WINDOW (window));
 }
 </code></pre>
-<h2>Using a GtkSpinButton to get a floating point value</h2>
+<h2><a href="#using-a-gtkspinbutton-to-get-a-floating-point-value" aria-hidden="true" class="anchor" id="using-a-gtkspinbutton-to-get-a-floating-point-value"></a>Using a GtkSpinButton to get a floating point value</h2>
 <pre class="code c"><code class="c">// Provides a function to retrieve a floating point value from a
 // GtkSpinButton, and creates a high precision spin button.
 
@@ -184,7 +186,7 @@ create_floating_spin_button (void)
   gtk_window_present (GTK_WINDOW (window));
 }
 </code></pre>
-<h1>CSS nodes</h1>
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_spinbutton'>spinbutton</span><span class='period'>.</span><span class='id identifier rubyid_horizontal'>horizontal</span>
 <span class='id identifier rubyid_├──'>├──</span> <span class='id identifier rubyid_text'>text</span>
 <span class='id identifier rubyid_│'>│</span>    <span class='id identifier rubyid_├──'>├──</span> <span class='id identifier rubyid_undershoot'>undershoot</span><span class='period'>.</span><span class='id identifier rubyid_left'>left</span>
@@ -199,12 +201,12 @@ create_floating_spin_button (void)
 <span class='id identifier rubyid_│'>│</span>    <span class='id identifier rubyid_╰──'>╰──</span> <span class='id identifier rubyid_undershoot'>undershoot</span><span class='period'>.</span><span class='id identifier rubyid_right'>right</span>
 <span class='id identifier rubyid_╰──'>╰──</span> <span class='id identifier rubyid_button'>button</span><span class='period'>.</span><span class='id identifier rubyid_down'>down</span>
 </code></pre>
-<p><code>GtkSpinButton</code>s main CSS node has the name spinbutton. It creates subnodes
-for the entry and the two buttons, with these names. The button nodes have
-the style classes .up and .down. The <code>GtkText</code> subnodes (if present) are put
-below the text node. The orientation of the spin button is reflected in
+<p><code>GtkSpinButton</code>s main CSS node has the name spinbutton. It creates subnodes<br />
+for the entry and the two buttons, with these names. The button nodes have<br />
+the style classes .up and .down. The <code>GtkText</code> subnodes (if present) are put<br />
+below the text node. The orientation of the spin button is reflected in<br />
 the .vertical or .horizontal style class on the main node.</p>
-<h1>Accessibility</h1>
+<h1><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h1>
 <p><code>GtkSpinButton</code> uses the %GTK_ACCESSIBLE_ROLE_SPIN_BUTTON role.</p>
 
 
@@ -967,9 +969,11 @@ the .vertical or .horizontal style class on the main node.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -998,15 +1002,15 @@ the .vertical or .horizontal style class on the main node.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkSpinButton</code> with the given properties.</p>
-<p>This is a convenience constructor that allows creation
-of a numeric <code>GtkSpinButton</code> without manually creating
-an adjustment. The value is initially set to the minimum
-value and a page increment of 10 * <!-- raw HTML omitted -->step<!-- raw HTML omitted --> is the default.
-The precision of the spin button is equivalent to the
+<p>This is a convenience constructor that allows creation<br />
+of a numeric <code>GtkSpinButton</code> without manually creating<br />
+an adjustment. The value is initially set to the minimum<br />
+value and a page increment of 10 * <!-- raw HTML omitted -->step<!-- raw HTML omitted --> is the default.<br />
+The precision of the spin button is equivalent to the<br />
 precision of <!-- raw HTML omitted -->step<!-- raw HTML omitted -->.</p>
-<p>Note that the way in which the precision is derived works
-best if <!-- raw HTML omitted -->step<!-- raw HTML omitted --> is a power of ten. If the resulting precision
-is not suitable for your needs, use
+<p>Note that the way in which the precision is derived works<br />
+best if <!-- raw HTML omitted -->step<!-- raw HTML omitted --> is a power of ten. If the resulting precision<br />
+is not suitable for your needs, use<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SpinButton.set_digits] to correct it.</p>
 
 
@@ -1483,7 +1487,7 @@ is not suitable for your needs, use
 </h3><div class="docstring">
   <div class="discussion">
     <p>Changes the properties of an existing spin button.</p>
-<p>The adjustment, climb rate, and number of decimal places
+<p>The adjustment, climb rate, and number of decimal places<br />
 are updated accordingly.</p>
 
 
@@ -1503,7 +1507,7 @@ are updated accordingly.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GtkAdjustment</code> to replace the spin button’s
+        <div class='inline'><p>a <code>GtkAdjustment</code> to replace the spin button’s<br />
 existing adjustment, or nil to leave its current adjustment unchanged</p>
 </div>
       
@@ -1675,7 +1679,7 @@ existing adjustment, or nil to leave its current adjustment unchanged</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the current step and page the increments
+    <p>Gets the current step and page the increments<br />
 used by <!-- raw HTML omitted -->spin_button<!-- raw HTML omitted -->.</p>
 <p>See [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SpinButton.set_increments].</p>
 
@@ -1817,15 +1821,15 @@ used by <!-- raw HTML omitted -->spin_button<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkSpinButton</code> with the given properties.</p>
-<p>This is a convenience constructor that allows creation
-of a numeric <code>GtkSpinButton</code> without manually creating
-an adjustment. The value is initially set to the minimum
-value and a page increment of 10 * <!-- raw HTML omitted -->step<!-- raw HTML omitted --> is the default.
-The precision of the spin button is equivalent to the
+<p>This is a convenience constructor that allows creation<br />
+of a numeric <code>GtkSpinButton</code> without manually creating<br />
+an adjustment. The value is initially set to the minimum<br />
+value and a page increment of 10 * <!-- raw HTML omitted -->step<!-- raw HTML omitted --> is the default.<br />
+The precision of the spin button is equivalent to the<br />
 precision of <!-- raw HTML omitted -->step<!-- raw HTML omitted -->.</p>
-<p>Note that the way in which the precision is derived works
-best if <!-- raw HTML omitted -->step<!-- raw HTML omitted --> is a power of ten. If the resulting precision
-is not suitable for your needs, use
+<p>Note that the way in which the precision is derived works<br />
+best if <!-- raw HTML omitted -->step<!-- raw HTML omitted --> is a power of ten. If the resulting precision<br />
+is not suitable for your needs, use<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SpinButton.set_digits] to correct it.</p>
 
 
@@ -2074,7 +2078,7 @@ is not suitable for your needs, use
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the step and page increments for spin_button.</p>
-<p>This affects how quickly the value changes when
+<p>This affects how quickly the value changes when<br />
 the spin button’s arrows are activated.</p>
 
 
@@ -2145,7 +2149,7 @@ the spin button’s arrows are activated.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the minimum and maximum allowable values for <!-- raw HTML omitted -->spin_button<!-- raw HTML omitted -->.</p>
-<p>If the current value is outside this range, it will be adjusted
+<p>If the current value is outside this range, it will be adjusted<br />
 to fit within the range, otherwise it will remain unchanged.</p>
 
 
@@ -2254,7 +2258,7 @@ to fit within the range, otherwise it will remain unchanged.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether erroneous values are automatically changed to the spin buttons
+    <p>Whether erroneous values are automatically changed to the spin buttons<br />
 nearest step increment.</p>
 
 
@@ -2322,7 +2326,7 @@ nearest step increment.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether erroneous values are automatically changed to the spin buttons
+    <p>Whether erroneous values are automatically changed to the spin buttons<br />
 nearest step increment.</p>
 
 
@@ -2362,7 +2366,7 @@ nearest step increment.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Increment or decrement a spin button’s value in a specified
+    <p>Increment or decrement a spin button’s value in a specified<br />
 direction by a specified amount.</p>
 
 
@@ -2467,7 +2471,7 @@ direction by a specified amount.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the spin button should update always, or only when the value
+    <p>Whether the spin button should update always, or only when the value<br />
 is acceptable.</p>
 
 
@@ -2507,7 +2511,7 @@ is acceptable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the spin button should update always, or only when the value
+    <p>Whether the spin button should update always, or only when the value<br />
 is acceptable.</p>
 
 
@@ -2720,8 +2724,8 @@ is acceptable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the spin button’s value wraps around to the
-opposite limit when the upper or lower limit of the range is
+    <p>Returns whether the spin button’s value wraps around to the<br />
+opposite limit when the upper or lower limit of the range is<br />
 exceeded.</p>
 
 
@@ -2863,7 +2867,7 @@ exceeded.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

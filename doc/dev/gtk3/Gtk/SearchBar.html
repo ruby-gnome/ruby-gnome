@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::SearchBar";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk3/search-bar.rb</dd>
+    <dd>lib/gtk3/search-bar.rb
+</dd>
   </dl>
   
 </div>
@@ -107,34 +109,34 @@
   <div class="discussion">
     <p><code>GtkSearchBar</code> is a container made to have a search entry.</p>
 <p><img src="search-bar.png" alt="An example GtkSearchBar" /></p>
-<p>It can also contain additional widgets, such as drop-down menus,
-or buttons.  The search bar would appear when a search is started
-through typing on the keyboard, or the application’s search mode
+<p>It can also contain additional widgets, such as drop-down menus,<br />
+or buttons.  The search bar would appear when a search is started<br />
+through typing on the keyboard, or the application’s search mode<br />
 is toggled on.</p>
-<p>For keyboard presses to start a search, the search bar must be told
-of a widget to capture key events from through
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchBar.set_key_capture_widget]. This widget will
-typically be the top-level window, or a parent container of the
-search bar. Common shortcuts such as Ctrl+F should be handled as an
+<p>For keyboard presses to start a search, the search bar must be told<br />
+of a widget to capture key events from through<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchBar.set_key_capture_widget]. This widget will<br />
+typically be the top-level window, or a parent container of the<br />
+search bar. Common shortcuts such as Ctrl+F should be handled as an<br />
 application action, or through the menu items.</p>
-<p>You will also need to tell the search bar about which entry you
+<p>You will also need to tell the search bar about which entry you<br />
 are using as your search entry using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchBar.connect_entry].</p>
-<h2>Creating a search bar</h2>
-<p>The following example shows you how to create a more complex search
+<h2><a href="#creating-a-search-bar" aria-hidden="true" class="anchor" id="creating-a-search-bar"></a>Creating a search bar</h2>
+<p>The following example shows you how to create a more complex search<br />
 entry.</p>
 <p><a href="https://gitlab.gnome.org/GNOME/gtk/tree/main/examples/search-bar.c">A simple example</a></p>
-<h1>CSS nodes</h1>
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_searchbar'>searchbar</span>
 <span class='id identifier rubyid_╰──'>╰──</span> <span class='id identifier rubyid_revealer'>revealer</span>
     <span class='id identifier rubyid_╰──'>╰──</span> <span class='id identifier rubyid_box'>box</span>
          <span class='id identifier rubyid_├──'>├──</span> <span class='lbracket'>[</span><span class='id identifier rubyid_child'>child</span><span class='rbracket'>]</span>
          <span class='id identifier rubyid_╰──'>╰──</span> <span class='lbracket'>[</span><span class='id identifier rubyid_button'>button</span><span class='period'>.</span><span class='id identifier rubyid_close'>close</span><span class='rbracket'>]</span>
 </code></pre>
-<p><code>GtkSearchBar</code> has a main CSS node with name searchbar. It has a child
-node with name revealer that contains a node with name box. The box node
-contains both the CSS node of the child widget as well as an optional button
+<p><code>GtkSearchBar</code> has a main CSS node with name searchbar. It has a child<br />
+node with name revealer that contains a node with name box. The box node<br />
+contains both the CSS node of the child widget as well as an optional button<br />
 node which gets the .close style class applied.</p>
-<h1>Accessibility</h1>
+<h1><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h1>
 <p><code>GtkSearchBar</code> uses the %GTK_ACCESSIBLE_ROLE_SEARCH role.</p>
 
 
@@ -483,9 +485,11 @@ node which gets the .close style class applied.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -513,7 +517,7 @@ node which gets the .close style class applied.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a <code>GtkSearchBar</code>.</p>
-<p>You will need to tell it about which widget is going to be your text
+<p>You will need to tell it about which widget is going to be your text<br />
 entry using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchBar.connect_entry].</p>
 
 
@@ -649,10 +653,10 @@ entry using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SearchB
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Connects the <code>GtkEditable</code> widget passed as the one to be used in
+    <p>Connects the <code>GtkEditable</code> widget passed as the one to be used in<br />
 this search bar.</p>
-<p>The entry should be a descendant of the search bar. Calling this
-function manually is only required if the entry isn’t the direct
+<p>The entry should be a descendant of the search bar. Calling this<br />
+function manually is only required if the entry isn’t the direct<br />
 child of the search bar (as in our main example).</p>
 
 
@@ -727,10 +731,10 @@ child of the search bar (as in our main example).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Connects the <code>GtkEditable</code> widget passed as the one to be used in
+    <p>Connects the <code>GtkEditable</code> widget passed as the one to be used in<br />
 this search bar.</p>
-<p>The entry should be a descendant of the search bar. Calling this
-function manually is only required if the entry isn’t the direct
+<p>The entry should be a descendant of the search bar. Calling this<br />
+function manually is only required if the entry isn’t the direct<br />
 child of the search bar (as in our main example).</p>
 
 
@@ -1245,7 +1249,7 @@ child of the search bar (as in our main example).</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

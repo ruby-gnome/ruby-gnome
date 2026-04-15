@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Alpha";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -173,6 +175,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -391,6 +394,7 @@
 
       
     </ul>
+    
   
 
 
@@ -408,7 +412,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Clutter::Alpha instances and sets the timeline
+    <p>Creates a new Clutter::Alpha instances and sets the timeline<br />
 and the alpha function.</p>
 <p>This function will not register <!-- raw HTML omitted -->func<!-- raw HTML omitted --> as a global alpha function.</p>
 <p>See also clutter_alpha_set_timeline() and clutter_alpha_set_func().</p>
@@ -505,7 +509,7 @@ and the alpha function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>#GClosure variant of clutter_alpha_register_func().</p>
-<p>Registers a global alpha function and returns its logical id
+<p>Registers a global alpha function and returns its logical id<br />
 to be used by clutter_alpha_set_mode() or by Clutter::Animation.</p>
 <p>The logical id is always greater than %CLUTTER_ANIMATION_LAST.</p>
 
@@ -565,7 +569,7 @@ to be used by clutter_alpha_set_mode() or by Clutter::Animation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Registers a global alpha function and returns its logical id
+    <p>Registers a global alpha function and returns its logical id<br />
 to be used by clutter_alpha_set_mode() or by Clutter::Animation.</p>
 <p>The logical id is always greater than %CLUTTER_ANIMATION_LAST.</p>
 
@@ -646,8 +650,8 @@ to be used by clutter_alpha_set_mode() or by Clutter::Animation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The alpha value as computed by the alpha function. The linear
-interval is 0.0 to 1.0, but the Alpha allows overshooting by
+    <p>The alpha value as computed by the alpha function. The linear<br />
+interval is 0.0 to 1.0, but the Alpha allows overshooting by<br />
 one unit in each direction, so the valid interval is -1.0 to 2.0.</p>
 
 
@@ -687,8 +691,8 @@ one unit in each direction, so the valid interval is -1.0 to 2.0.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The alpha value as computed by the alpha function. The linear
-interval is 0.0 to 1.0, but the Alpha allows overshooting by
+    <p>The alpha value as computed by the alpha function. The linear<br />
+interval is 0.0 to 1.0, but the Alpha allows overshooting by<br />
 one unit in each direction, so the valid interval is -1.0 to 2.0.</p>
 
 
@@ -756,7 +760,7 @@ one unit in each direction, so the valid interval is -1.0 to 2.0.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the #GClosure used to compute the alpha value at each
+    <p>Sets the #GClosure used to compute the alpha value at each<br />
 frame of the Clutter::Timeline bound to <!-- raw HTML omitted -->alpha<!-- raw HTML omitted -->.</p>
 
 
@@ -811,11 +815,11 @@ frame of the Clutter::Timeline bound to <!-- raw HTML omitted -->alpha<!-- raw H
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The progress function logical id - either a value from the
-Clutter::AnimationMode enumeration or a value returned by
+    <p>The progress function logical id - either a value from the<br />
+Clutter::AnimationMode enumeration or a value returned by<br />
 clutter_alpha_register_func().</p>
-<p>If %CLUTTER_CUSTOM_MODE is used then the function set using
-clutter_alpha_set_closure() or clutter_alpha_set_func()
+<p>If %CLUTTER_CUSTOM_MODE is used then the function set using<br />
+clutter_alpha_set_closure() or clutter_alpha_set_func()<br />
 will be used.</p>
 
 
@@ -855,11 +859,11 @@ will be used.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The progress function logical id - either a value from the
-Clutter::AnimationMode enumeration or a value returned by
+    <p>The progress function logical id - either a value from the<br />
+Clutter::AnimationMode enumeration or a value returned by<br />
 clutter_alpha_register_func().</p>
-<p>If %CLUTTER_CUSTOM_MODE is used then the function set using
-clutter_alpha_set_closure() or clutter_alpha_set_func()
+<p>If %CLUTTER_CUSTOM_MODE is used then the function set using<br />
+clutter_alpha_set_closure() or clutter_alpha_set_func()<br />
 will be used.</p>
 
 
@@ -927,8 +931,8 @@ will be used.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the Clutter::AlphaFunc function used to compute
-the alpha value at each frame of the Clutter::Timeline
+    <p>Sets the Clutter::AlphaFunc function used to compute<br />
+the alpha value at each frame of the Clutter::Timeline<br />
 bound to <!-- raw HTML omitted -->alpha<!-- raw HTML omitted -->.</p>
 <p>This function will not register <!-- raw HTML omitted -->func<!-- raw HTML omitted --> as a global alpha function.</p>
 
@@ -1116,7 +1120,7 @@ bound to <!-- raw HTML omitted -->alpha<!-- raw HTML omitted -->.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

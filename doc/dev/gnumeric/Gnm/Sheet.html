@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gnm::Sheet";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -569,6 +571,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -6081,6 +6084,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -6097,7 +6101,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new Sheet of type <!-- raw HTML omitted -->type<!-- raw HTML omitted -->, and associate it with <!-- raw HTML omitted -->wb<!-- raw HTML omitted -->.
+    <p>Create a new Sheet of type <!-- raw HTML omitted -->type<!-- raw HTML omitted -->, and associate it with <!-- raw HTML omitted -->wb<!-- raw HTML omitted -->.<br />
 The type cannot be changed later.</p>
 
 
@@ -6362,9 +6366,9 @@ The type cannot be changed later.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Marks the sheet as dirty
-Clears old spans.
-Flags status updates
+    <p>Marks the sheet as dirty<br />
+Clears old spans.<br />
+Flags status updates<br />
 Queues recalcs</p>
 
 
@@ -6434,9 +6438,9 @@ Queues recalcs</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Marks the sheet as dirty
-Clears old spans.
-Flags status updates
+    <p>Marks the sheet as dirty<br />
+Clears old spans.<br />
+Flags status updates<br />
 Queues recalcs</p>
 
 
@@ -6521,9 +6525,9 @@ Queues recalcs</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Stores, without copying, the supplied value.  It marks the
+    <p>Stores, without copying, the supplied value.  It marks the<br />
 sheet as dirty.</p>
-<p>The value is rendered and spans are calculated.  It queues a redraw
+<p>The value is rendered and spans are calculated.  It queues a redraw<br />
 and checks to see if the edit region or selection content changed.</p>
 <p>NOTE : This DOES check for array partitioning.</p>
 
@@ -6755,7 +6759,7 @@ and checks to see if the edit region or selection content changed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This notifies the sheet conditions manager that one use of the shared
+    <p>This notifies the sheet conditions manager that one use of the shared<br />
 conditions has gone away.</p>
 
 
@@ -6806,10 +6810,10 @@ conditions has gone away.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>flag the sheet as requiring an update to the status display
-if the supplied cell location is the edit cursor, or part of the
+    <p>flag the sheet as requiring an update to the status display<br />
+if the supplied cell location is the edit cursor, or part of the<br />
 selected region.</p>
-<p>Will cause the format toolbar, the edit area, and the auto expressions to be
+<p>Will cause the format toolbar, the edit area, and the auto expressions to be<br />
 updated if appropriate.</p>
 
 
@@ -6933,9 +6937,9 @@ updated if appropriate.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Move a range as specified in <!-- raw HTML omitted -->rinfo<!-- raw HTML omitted --> report warnings to <!-- raw HTML omitted -->cc<!-- raw HTML omitted -->.
-if <!-- raw HTML omitted -->pundo<!-- raw HTML omitted --> is non-nil, invalidate references to the
-target region that are being cleared, and store the undo information
+    <p>Move a range as specified in <!-- raw HTML omitted -->rinfo<!-- raw HTML omitted --> report warnings to <!-- raw HTML omitted -->cc<!-- raw HTML omitted -->.<br />
+if <!-- raw HTML omitted -->pundo<!-- raw HTML omitted --> is non-nil, invalidate references to the<br />
+target region that are being cleared, and store the undo information<br />
 in <!-- raw HTML omitted -->pundo<!-- raw HTML omitted -->.  If it is nil do NOT INVALIDATE.</p>
 
 
@@ -7050,7 +7054,7 @@ in <!-- raw HTML omitted -->pundo<!-- raw HTML omitted -->.  If it is nil do NOT
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Uses the relocation info and the anchors to decide whether or not, and how
+    <p>Uses the relocation info and the anchors to decide whether or not, and how<br />
 to relocate objects when the grid moves (eg ins/del col/row).</p>
 
 
@@ -7085,7 +7089,7 @@ to relocate objects when the grid moves (eg ins/del col/row).</p>
       
       
         &mdash;
-        <div class='inline'><p>Should we do the bound_update now, or leave it for later.
+        <div class='inline'><p>Should we do the bound_update now, or leave it for later.<br />
 if FALSE honour the move_with_cells flag.</p>
 </div>
       
@@ -7171,7 +7175,7 @@ if FALSE honour the move_with_cells flag.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Insert of delete style columns/rows.</p>
-<p>For the insert case, we stretch the preceding column/row into there space
+<p>For the insert case, we stretch the preceding column/row into there space<br />
 we open.</p>
 
 
@@ -7272,9 +7276,9 @@ we open.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function produces a valid sheet size that is reasonable for data
-of <!-- raw HTML omitted -->cols<!-- raw HTML omitted --> columns by <!-- raw HTML omitted -->rows<!-- raw HTML omitted --> rows.  If possible, this will be a size bigger
-in both dimensions.  However, that is not always possible and when it is
+    <p>This function produces a valid sheet size that is reasonable for data<br />
+of <!-- raw HTML omitted -->cols<!-- raw HTML omitted --> columns by <!-- raw HTML omitted -->rows<!-- raw HTML omitted --> rows.  If possible, this will be a size bigger<br />
+in both dimensions.  However, that is not always possible and when it is<br />
 not, the suggested will be smaller in one or both directions.</p>
 
 
@@ -7538,7 +7542,7 @@ not, the suggested will be smaller in one or both directions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A mid level routine that applies the supplied partial style <!-- raw HTML omitted -->style<!-- raw HTML omitted --> to the
+    <p>A mid level routine that applies the supplied partial style <!-- raw HTML omitted -->style<!-- raw HTML omitted --> to the<br />
 target <!-- raw HTML omitted -->range<!-- raw HTML omitted --> and performs the necessary respanning and redrawing.</p>
 
 
@@ -7608,7 +7612,7 @@ target <!-- raw HTML omitted -->range<!-- raw HTML omitted --> and performs the 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A mid level routine that applies the supplied partial style <!-- raw HTML omitted -->style<!-- raw HTML omitted --> to the
+    <p>A mid level routine that applies the supplied partial style <!-- raw HTML omitted -->style<!-- raw HTML omitted --> to the<br />
 target <!-- raw HTML omitted -->range<!-- raw HTML omitted --> and performs the necessary respanning and redrawing.</p>
 
 
@@ -8019,7 +8023,7 @@ target <!-- raw HTML omitted -->range<!-- raw HTML omitted --> and performs the 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Collects a GPtrArray of GnmEvalPos pointers for all cells in a sheet.
+    <p>Collects a GPtrArray of GnmEvalPos pointers for all cells in a sheet.<br />
 No particular order should be assumed.</p>
 
 
@@ -8078,8 +8082,8 @@ No particular order should be assumed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Remove the cell from the web of dependencies of a
-sheet.  Do NOT free the cell, optionally redraw it, optionally
+    <p>Remove the cell from the web of dependencies of a<br />
+sheet.  Do NOT free the cell, optionally redraw it, optionally<br />
 queue it for recalc.</p>
 
 
@@ -8237,7 +8241,7 @@ queue it for recalc.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Set the value of the cell at (<!-- raw HTML omitted -->col<!-- raw HTML omitted -->,<!-- raw HTML omitted -->row<!-- raw HTML omitted -->) to <!-- raw HTML omitted -->v<!-- raw HTML omitted -->.</p>
-<p>The value is rendered and spans are calculated.  It queues a redraw
+<p>The value is rendered and spans are calculated.  It queues a redraw<br />
 and checks to see if the edit region or selection content changed.</p>
 
 
@@ -8454,7 +8458,7 @@ and checks to see if the edit region or selection content changed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Clears a region of cells, formats, object, etc. as indicated by
+    <p>Clears a region of cells, formats, object, etc. as indicated by<br />
 <!-- raw HTML omitted -->clear_flags<!-- raw HTML omitted -->.</p>
 
 
@@ -9195,8 +9199,8 @@ and checks to see if the edit region or selection content changed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets width of a col in pts, INCLUDING left and right margins, and the far
-grid line.  This is a low level internal routine.  It does NOT redraw,
+    <p>Sets width of a col in pts, INCLUDING left and right margins, and the far<br />
+grid line.  This is a low level internal routine.  It does NOT redraw,<br />
 or reposition objects.</p>
 
 
@@ -9246,7 +9250,7 @@ or reposition objects.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if this was done by a user (ie, user manually
+        <div class='inline'><p>true if this was done by a user (ie, user manually<br />
 set the width)</p>
 </div>
       
@@ -9282,9 +9286,9 @@ set the width)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This routine computes the ideal size for the column to make the contents all
-cells in the column visible.
-flags doubles as an indicator that numeric cells should only cause a
+    <p>This routine computes the ideal size for the column to make the contents all<br />
+cells in the column visible.<br />
+flags doubles as an indicator that numeric cells should only cause a<br />
 widening when they would otherwise cause &quot;####&quot; to be displayed.</p>
 
 
@@ -9367,7 +9371,7 @@ widening when they would otherwise cause &quot;####&quot; to be displayed.</p>
       
       
         &mdash;
-        <div class='inline'><p>Maximum size in pixels INCLUDING margins and grid lines
+        <div class='inline'><p>Maximum size in pixels INCLUDING margins and grid lines<br />
 or 0 if there are no cells.</p>
 </div>
       
@@ -9389,7 +9393,7 @@ or 0 if there are no cells.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>false otherwise. You can invert the result if you need to find out if a
+    <p>false otherwise. You can invert the result if you need to find out if a<br />
 group can be ungrouped.</p>
 
 
@@ -9594,7 +9598,7 @@ group can be ungrouped.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Iterates through the existing rows or columns within the range supplied.
+    <p>Iterates through the existing rows or columns within the range supplied.<br />
 If a callback returns true, iteration stops.</p>
 
 
@@ -9659,7 +9663,7 @@ If a callback returns true, iteration stops.</p>
       
       
         &mdash;
-        <div class='inline'><p>A callback function which should return true
+        <div class='inline'><p>A callback function which should return true<br />
 to stop the iteration.</p>
 </div>
       
@@ -10672,8 +10676,8 @@ to stop the iteration.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is purely a convenience function to access the conventions used
-for the workbook.  All sheets in a workbook share the same date
+    <p>This is purely a convenience function to access the conventions used<br />
+for the workbook.  All sheets in a workbook share the same date<br />
 conventions.</p>
 
 
@@ -12132,13 +12136,13 @@ conventions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calculate the column index for the column which is <!-- raw HTML omitted -->count<!-- raw HTML omitted --> units
-from <!-- raw HTML omitted -->start_col<!-- raw HTML omitted --> doing bounds checking.  If <!-- raw HTML omitted -->jump_to_boundaries<!-- raw HTML omitted --> is
+    <p>Calculate the column index for the column which is <!-- raw HTML omitted -->count<!-- raw HTML omitted --> units<br />
+from <!-- raw HTML omitted -->start_col<!-- raw HTML omitted --> doing bounds checking.  If <!-- raw HTML omitted -->jump_to_boundaries<!-- raw HTML omitted --> is<br />
 true then <!-- raw HTML omitted -->count<!-- raw HTML omitted --> must be 1 and the jump is to the edge of the logical range.</p>
-<p>This routine implements the logic necessary for ctrl-arrow style
-movement.  That is more complicated than simply finding the last in a list
-of cells with content.  If you are at the end of a range it will find the
-start of the next.  Make sure that is the sort of behavior you want before
+<p>This routine implements the logic necessary for ctrl-arrow style<br />
+movement.  That is more complicated than simply finding the last in a list<br />
+of cells with content.  If you are at the end of a range it will find the<br />
+start of the next.  Make sure that is the sort of behavior you want before<br />
 calling this.</p>
 
 
@@ -12257,13 +12261,13 @@ calling this.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calculate the row index for the row which is <!-- raw HTML omitted -->count<!-- raw HTML omitted --> units
-from <!-- raw HTML omitted -->start_row<!-- raw HTML omitted --> doing bounds checking.  If <!-- raw HTML omitted -->jump_to_boundaries<!-- raw HTML omitted --> is
+    <p>Calculate the row index for the row which is <!-- raw HTML omitted -->count<!-- raw HTML omitted --> units<br />
+from <!-- raw HTML omitted -->start_row<!-- raw HTML omitted --> doing bounds checking.  If <!-- raw HTML omitted -->jump_to_boundaries<!-- raw HTML omitted --> is<br />
 true then <!-- raw HTML omitted -->count<!-- raw HTML omitted --> must be 1 and the jump is to the edge of the logical range.</p>
-<p>This routine implements the logic necessary for ctrl-arrow style
-movement.  That is more complicated than simply finding the last in a list
-of cells with content.  If you are at the end of a range it will find the
-start of the next.  Make sure that is the sort of behavior you want before
+<p>This routine implements the logic necessary for ctrl-arrow style<br />
+movement.  That is more complicated than simply finding the last in a list<br />
+of cells with content.  If you are at the end of a range it will find the<br />
+start of the next.  Make sure that is the sort of behavior you want before<br />
 calling this.</p>
 
 
@@ -12436,7 +12440,7 @@ calling this.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Flag the sheet as requiring a full span recomputation the next time
+    <p>Flag the sheet as requiring a full span recomputation the next time<br />
 sheet_update is called.</p>
 
 
@@ -12472,10 +12476,10 @@ sheet_update is called.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>flag the sheet as requiring an update to the status display
-if the supplied cell location contains the edit cursor, or intersects of
+    <p>flag the sheet as requiring an update to the status display<br />
+if the supplied cell location contains the edit cursor, or intersects of<br />
 the selected region.</p>
-<p>Will cause the format toolbar, the edit area, and the auto expressions to be
+<p>Will cause the format toolbar, the edit area, and the auto expressions to be<br />
 updated if appropriate.</p>
 
 
@@ -12584,17 +12588,17 @@ updated if appropriate.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>For each existing cell in the range specified, invoke the
-callback routine.  If the only_existing flag is passed, then
+    <p>For each existing cell in the range specified, invoke the<br />
+callback routine.  If the only_existing flag is passed, then<br />
 callbacks are only invoked for existing cells.</p>
-<p>Note: this function does not honour the CELL_ITER_IGNORE_SUBTOTAL flag.
+<p>Note: this function does not honour the CELL_ITER_IGNORE_SUBTOTAL flag.<br />
 NOTE: between 0.56 and 0.57, the traversal order changed.  The order is now</p>
 <pre class="code ruby"><code class="ruby">   1    2    3
    4    5    6
    7    8    9
 </code></pre>
-<p>(This appears to be the order in which XL looks at the values of ranges.)
-If your code depends on any particular ordering, please add a very visible
+<p>(This appears to be the order in which XL looks at the values of ranges.)<br />
+If your code depends on any particular ordering, please add a very visible<br />
 comment near the call.</p>
 
 
@@ -12673,8 +12677,8 @@ comment near the call.</p>
       
       
         &mdash;
-        <div class='inline'><p>the value returned by the callback, which can be:
-non-nil on error, or VALUE_TERMINATE if some invoked routine requested
+        <div class='inline'><p>the value returned by the callback, which can be:<br />
+non-nil on error, or VALUE_TERMINATE if some invoked routine requested<br />
 to stop (by returning non-nil).</p>
 </div>
       
@@ -12696,17 +12700,17 @@ to stop (by returning non-nil).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>For each existing cell in the range specified, invoke the
-callback routine.  If the only_existing flag is passed, then
+    <p>For each existing cell in the range specified, invoke the<br />
+callback routine.  If the only_existing flag is passed, then<br />
 callbacks are only invoked for existing cells.</p>
-<p>Note: this function does not honour the CELL_ITER_IGNORE_SUBTOTAL flag.
+<p>Note: this function does not honour the CELL_ITER_IGNORE_SUBTOTAL flag.<br />
 NOTE: between 0.56 and 0.57, the traversal order changed.  The order is now</p>
 <pre class="code ruby"><code class="ruby">   1    2    3
    4    5    6
    7    8    9
 </code></pre>
-<p>(This appears to be the order in which XL looks at the values of ranges.)
-If your code depends on any particular ordering, please add a very visible
+<p>(This appears to be the order in which XL looks at the values of ranges.)<br />
+If your code depends on any particular ordering, please add a very visible<br />
 comment near the call.</p>
 
 
@@ -12830,8 +12834,8 @@ comment near the call.</p>
       
       
         &mdash;
-        <div class='inline'><p>the value returned by the callback, which can be:
-non-nil on error, or VALUE_TERMINATE if some invoked routine requested
+        <div class='inline'><p>the value returned by the callback, which can be:<br />
+non-nil on error, or VALUE_TERMINATE if some invoked routine requested<br />
 to stop (by returning non-nil).</p>
 </div>
       
@@ -13031,9 +13035,9 @@ to stop (by returning non-nil).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>calculates the area occupied by cell data.</p>
-<p>NOTE: When spans_and_merges_extend is true, this function will calculate
+<p>NOTE: When spans_and_merges_extend is true, this function will calculate<br />
 all spans.  That might be expensive.</p>
-<p>NOTE: This refers to <em>visible</em> contents.  Cells with empty values, including
+<p>NOTE: This refers to <em>visible</em> contents.  Cells with empty values, including<br />
 formulas with such values, are *ignored.</p>
 
 
@@ -13167,7 +13171,7 @@ formulas with such values, are *ignored.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Determines the sheet size, either of <!-- raw HTML omitted -->sheet<!-- raw HTML omitted --> if that is non-nil or
+    <p>Determines the sheet size, either of <!-- raw HTML omitted -->sheet<!-- raw HTML omitted --> if that is non-nil or<br />
 of <!-- raw HTML omitted -->wb<!-- raw HTML omitted -->'s default sheet.  One of <!-- raw HTML omitted -->sheet<!-- raw HTML omitted --> and <!-- raw HTML omitted -->wb<!-- raw HTML omitted --> must be non-nil.</p>
 
 
@@ -13280,7 +13284,7 @@ of <!-- raw HTML omitted -->wb<!-- raw HTML omitted -->'s default sheet.  One of
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Makes a guess at the logical range containing <!-- raw HTML omitted -->region<!-- raw HTML omitted --> and returns the possibly
+    <p>Makes a guess at the logical range containing <!-- raw HTML omitted -->region<!-- raw HTML omitted --> and returns the possibly<br />
 expanded result in <!-- raw HTML omitted -->region<!-- raw HTML omitted -->. The range is also expanded upwards.</p>
 
 
@@ -13335,7 +13339,7 @@ expanded result in <!-- raw HTML omitted -->region<!-- raw HTML omitted -->. The
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Makes a guess at the logical containing <!-- raw HTML omitted -->region<!-- raw HTML omitted --> and returns the possibly
+    <p>Makes a guess at the logical containing <!-- raw HTML omitted -->region<!-- raw HTML omitted --> and returns the possibly<br />
 expanded result in <!-- raw HTML omitted -->region<!-- raw HTML omitted -->.</p>
 
 
@@ -13796,8 +13800,8 @@ expanded result in <!-- raw HTML omitted -->region<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Add a range to the list of merge targets.  Checks for array splitting returns
-true if there was an error.  Queues a respan.  Only queues a redraw if <!-- raw HTML omitted -->clear<!-- raw HTML omitted -->
+    <p>Add a range to the list of merge targets.  Checks for array splitting returns<br />
+true if there was an error.  Queues a respan.  Only queues a redraw if <!-- raw HTML omitted -->clear<!-- raw HTML omitted --><br />
 is true.</p>
 
 
@@ -13832,7 +13836,7 @@ is true.</p>
       
       
         &mdash;
-        <div class='inline'><p>should the non-corner content of the region be cleared and the
+        <div class='inline'><p>should the non-corner content of the region be cleared and the<br />
 style from the corner applied.</p>
 </div>
       
@@ -14079,7 +14083,7 @@ style from the corner applied.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>regions that overlap the target region.
+    <p>regions that overlap the target region.<br />
 The list is ordered from top to bottom and RIGHT TO LEFT (by start coord).</p>
 
 
@@ -14192,7 +14196,7 @@ The list is ordered from top to bottom and RIGHT TO LEFT (by start coord).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Remove a merged range.
+    <p>Remove a merged range.<br />
 Queues a redraw.</p>
 
 
@@ -14449,7 +14453,7 @@ Queues a redraw.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes the objects in the region.
+    <p>Removes the objects in the region.<br />
 <!-- raw HTML omitted -->t<!-- raw HTML omitted --> #GType</p>
 
 
@@ -14595,7 +14599,7 @@ Queues a redraw.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>containing all objects of exactly the specified type (inheritance does
+    <p>containing all objects of exactly the specified type (inheritance does<br />
 not count) that are completely contained in <!-- raw HTML omitted -->r<!-- raw HTML omitted -->.</p>
 
 
@@ -14669,7 +14673,7 @@ not count) that are completely contained in <!-- raw HTML omitted -->r<!-- raw H
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>When changing the placement of outline collapse markers the flags
+    <p>When changing the placement of outline collapse markers the flags<br />
 need to be recomputed.</p>
 
 
@@ -16404,7 +16408,7 @@ need to be recomputed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This queues a redraw for the indicated range.  The redraw will happen
+    <p>This queues a redraw for the indicated range.  The redraw will happen<br />
 when Gnumeric returns to the gui main loop.</p>
 
 
@@ -16459,7 +16463,7 @@ when Gnumeric returns to the gui main loop.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>queues a span generation for the selected rows.
+    <p>queues a span generation for the selected rows.<br />
 the caller is responsible for queuing a redraw</p>
 
 
@@ -16570,8 +16574,8 @@ the caller is responsible for queuing a redraw</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This is used to re-calculate cell dimensions and re-render
-a cell's text. eg. if a format has changed we need to re-render
+    <p>This is used to re-calculate cell dimensions and re-render<br />
+a cell's text. eg. if a format has changed we need to re-render<br />
 the cached version of the rendered text in the cell.</p>
 
 
@@ -16637,8 +16641,8 @@ the cached version of the rendered text in the cell.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Check to see if the target region <!-- raw HTML omitted -->sheet<!-- raw HTML omitted -->!<!-- raw HTML omitted -->r<!-- raw HTML omitted --> contains any merged regions or
-arrays.  Report an error to the <!-- raw HTML omitted -->cc<!-- raw HTML omitted --> if it is supplied.
+    <p>Check to see if the target region <!-- raw HTML omitted -->sheet<!-- raw HTML omitted -->!<!-- raw HTML omitted -->r<!-- raw HTML omitted --> contains any merged regions or<br />
+arrays.  Report an error to the <!-- raw HTML omitted -->cc<!-- raw HTML omitted --> if it is supplied.<br />
 arrays.</p>
 
 
@@ -16753,8 +16757,8 @@ arrays.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks for a header row in <!-- raw HTML omitted -->sheet<!-- raw HTML omitted -->!<!-- raw HTML omitted -->src<!-- raw HTML omitted -->.  If top is true it looks for a
-header row from the top and if false it looks for a header col from the
+    <p>Checks for a header row in <!-- raw HTML omitted -->sheet<!-- raw HTML omitted -->!<!-- raw HTML omitted -->src<!-- raw HTML omitted -->.  If top is true it looks for a<br />
+header row from the top and if false it looks for a header col from the<br />
 left</p>
 
 
@@ -16839,8 +16843,8 @@ left</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Check the outer edges of range <!-- raw HTML omitted -->sheet<!-- raw HTML omitted -->!<!-- raw HTML omitted -->r<!-- raw HTML omitted --> to ensure that if an array is
-within it then the entire array is within the range.  <!-- raw HTML omitted -->ignore<!-- raw HTML omitted --> is useful when
+    <p>Check the outer edges of range <!-- raw HTML omitted -->sheet<!-- raw HTML omitted -->!<!-- raw HTML omitted -->r<!-- raw HTML omitted --> to ensure that if an array is<br />
+within it then the entire array is within the range.  <!-- raw HTML omitted -->ignore<!-- raw HTML omitted --> is useful when<br />
 src and dest ranges may overlap.</p>
 
 
@@ -16944,7 +16948,7 @@ src and dest ranges may overlap.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A utility to see whether moving the range <!-- raw HTML omitted -->r<!-- raw HTML omitted --> will split any arrays
+    <p>A utility to see whether moving the range <!-- raw HTML omitted -->r<!-- raw HTML omitted --> will split any arrays<br />
 or merged regions.</p>
 
 
@@ -17048,8 +17052,8 @@ or merged regions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This removes empty rows/cols from the
-right hand or bottom edges of the range
+    <p>This removes empty rows/cols from the<br />
+right hand or bottom edges of the range<br />
 depending on the value of <!-- raw HTML omitted -->cols<!-- raw HTML omitted --> or <!-- raw HTML omitted -->rows<!-- raw HTML omitted -->.</p>
 
 
@@ -17138,7 +17142,7 @@ depending on the value of <!-- raw HTML omitted -->cols<!-- raw HTML omitted -->
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unrenders all cells in the given range.  If <!-- raw HTML omitted -->r<!-- raw HTML omitted --> is nil, the all cells
+    <p>Unrenders all cells in the given range.  If <!-- raw HTML omitted -->r<!-- raw HTML omitted --> is nil, the all cells<br />
 in the sheet are unrendered.</p>
 
 
@@ -17193,7 +17197,7 @@ in the sheet are unrendered.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A utility to see whether moving any of the ranges <!-- raw HTML omitted -->ranges<!-- raw HTML omitted --> will split any
+    <p>A utility to see whether moving any of the ranges <!-- raw HTML omitted -->ranges<!-- raw HTML omitted --> will split any<br />
 arrays or merged regions.</p>
 
 
@@ -17282,7 +17286,7 @@ arrays or merged regions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This routine recomputes the column span for the cells that touches
+    <p>This routine recomputes the column span for the cells that touches<br />
 the column.</p>
 
 
@@ -18220,7 +18224,7 @@ the column.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets height of a row in pixels, INCLUDING top and bottom margins, and the lower
+    <p>Sets height of a row in pixels, INCLUDING top and bottom margins, and the lower<br />
 grid line.</p>
 
 
@@ -18270,7 +18274,7 @@ grid line.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if this was done by a user (ie, user manually
+        <div class='inline'><p>true if this was done by a user (ie, user manually<br />
 set the width)</p>
 </div>
       
@@ -18306,8 +18310,8 @@ set the width)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets height of a row in pts, INCLUDING top and bottom margins, and the lower
-grid line.  This is a low level internal routine.  It does NOT redraw,
+    <p>Sets height of a row in pts, INCLUDING top and bottom margins, and the lower<br />
+grid line.  This is a low level internal routine.  It does NOT redraw,<br />
 or reposition objects.</p>
 
 
@@ -18357,7 +18361,7 @@ or reposition objects.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if this was done by a user (ie, user manually
+        <div class='inline'><p>true if this was done by a user (ie, user manually<br />
 set the height)</p>
 </div>
       
@@ -18393,7 +18397,7 @@ set the height)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This routine computes the ideal size for the row to make all data fit
+    <p>This routine computes the ideal size for the row to make all data fit<br />
 properly.</p>
 
 
@@ -18476,7 +18480,7 @@ properly.</p>
       
       
         &mdash;
-        <div class='inline'><p>Maximum size in pixels INCLUDING margins and grid lines
+        <div class='inline'><p>Maximum size in pixels INCLUDING margins and grid lines<br />
 or 0 if there are no cells.</p>
 </div>
       
@@ -19194,10 +19198,10 @@ or 0 if there are no cells.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>When a user applies a border to a region we attempt to remove the border
-from the opposing side to avoid overlapping border specifications.
-eg
-if we apply a top border to a range, we would clear the bottom border
+    <p>When a user applies a border to a region we attempt to remove the border<br />
+from the opposing side to avoid overlapping border specifications.<br />
+eg<br />
+if we apply a top border to a range, we would clear the bottom border<br />
 of the range offset upwards.</p>
 
 
@@ -19267,7 +19271,7 @@ of the range offset upwards.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>NOTE: This is a simple wrapper for now.  When we support col/row styles it
+    <p>NOTE: This is a simple wrapper for now.  When we support col/row styles it<br />
 will make life easier.</p>
 <p>Apply a partial style to a full col.</p>
 
@@ -19552,7 +19556,7 @@ will make life easier.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>NOTE: This is a simple wrapper for now.  When we support col/row styles it
+    <p>NOTE: This is a simple wrapper for now.  When we support col/row styles it<br />
 will make life easier.</p>
 <p>Apply a partial style to a full col.</p>
 
@@ -20143,7 +20147,7 @@ will make life easier.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A simple implementation that finds the smallest range containing all visible styles
+    <p>A simple implementation that finds the smallest range containing all visible styles<br />
 and containing <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
 
 
@@ -20318,8 +20322,8 @@ and containing <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get a list of rectangles and their associated styles.
-Caller is responsible for freeing.  Note that when a range is given,
+    <p>Get a list of rectangles and their associated styles.<br />
+Caller is responsible for freeing.  Note that when a range is given,<br />
 the resulting ranges are relative to the input range.</p>
 
 
@@ -20374,7 +20378,7 @@ the resulting ranges are relative to the input range.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A utility routine which efficiently retrieves a range of styles within a row.
+    <p>A utility routine which efficiently retrieves a range of styles within a row.<br />
 It also merges adjacent borders as necessary.</p>
 
 
@@ -20747,7 +20751,7 @@ It also merges adjacent borders as necessary.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Utility routine that checks to see if a region contains at least 1 hyper link
+    <p>Utility routine that checks to see if a region contains at least 1 hyper link<br />
 and returns the 1st one it finds.</p>
 
 
@@ -20916,7 +20920,7 @@ and returns the 1st one it finds.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Overwrites the styles of the ranges given by <!-- raw HTML omitted -->corner<!-- raw HTML omitted --> with the content of
+    <p>Overwrites the styles of the ranges given by <!-- raw HTML omitted -->corner<!-- raw HTML omitted --> with the content of<br />
 <!-- raw HTML omitted -->list<!-- raw HTML omitted -->. Optionally transposing the ranges</p>
 
 
@@ -21236,13 +21240,13 @@ and returns the 1st one it finds.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function updates the color of gnm_style_border_none when the sheet to be
-rendered is known. gnm_style_border_none tells how to render the
-grid. Because the grid color may be different for different sheets, the
-functions which render the grid call this function first.  The rule for
-selecting the grid color, which is the same as in Excel, is: - if the
-auto pattern color is default (which is black), the grid color is gray,
-as returned by style_color_grid ().  - otherwise, the auto pattern color
+    <p>This function updates the color of gnm_style_border_none when the sheet to be<br />
+rendered is known. gnm_style_border_none tells how to render the<br />
+grid. Because the grid color may be different for different sheets, the<br />
+functions which render the grid call this function first.  The rule for<br />
+selecting the grid color, which is the same as in Excel, is: - if the<br />
+auto pattern color is default (which is black), the grid color is gray,<br />
+as returned by style_color_grid ().  - otherwise, the auto pattern color<br />
 is used for the grid.</p>
 
 
@@ -21608,7 +21612,7 @@ is used for the grid.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Should be called after a logical command has finished processing to request
+    <p>Should be called after a logical command has finished processing to request<br />
 redraws for any pending events, and to update the various status regions</p>
 
 
@@ -21644,7 +21648,7 @@ redraws for any pending events, and to update the various status regions</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Should be called after a logical command has finished processing
+    <p>Should be called after a logical command has finished processing<br />
 to request redraws for any pending events</p>
 
 
@@ -22096,7 +22100,7 @@ to request redraws for any pending events</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

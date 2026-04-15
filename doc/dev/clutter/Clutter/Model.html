@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Model";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -773,6 +775,7 @@
 
       
     </ul>
+    
   
 
 
@@ -792,15 +795,15 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates and appends a new row to the Clutter::Model, setting the
-row values upon creation. For example, to append a new row where
+    <p>Creates and appends a new row to the Clutter::Model, setting the<br />
+row values upon creation. For example, to append a new row where<br />
 column 0 is type %G_TYPE_INT and column 1 is of type %G_TYPE_STRING:</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted -->
-ClutterModel *model;
-model = clutter_model_default_new (2,
-G_TYPE_INT,    &quot;Score&quot;,
-G_TYPE_STRING, &quot;Team&quot;);
-clutter_model_append (model, 0, 42, 1, &quot;Team #1&quot;, -1);
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><br />
+ClutterModel *model;<br />
+model = clutter_model_default_new (2,<br />
+G_TYPE_INT,    &quot;Score&quot;,<br />
+G_TYPE_STRING, &quot;Team&quot;);<br />
+clutter_model_append (model, 0, 42, 1, &quot;Team #1&quot;, -1);<br />
 <!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
 
@@ -855,7 +858,7 @@ clutter_model_append (model, 0, 42, 1, &quot;Team #1&quot;, -1);
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates and appends a new row to the Clutter::Model, setting the row
+    <p>Creates and appends a new row to the Clutter::Model, setting the row<br />
 values for the given <!-- raw HTML omitted -->columns<!-- raw HTML omitted --> upon creation.</p>
 
 
@@ -940,7 +943,7 @@ values for the given <!-- raw HTML omitted -->columns<!-- raw HTML omitted --> u
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether the row pointer by <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> should be filtered or not using
+    <p>Checks whether the row pointer by <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> should be filtered or not using<br />
 the filtering function set on <!-- raw HTML omitted -->model<!-- raw HTML omitted -->.</p>
 <p>This function should be used only by subclasses of Clutter::Model.</p>
 
@@ -979,7 +982,7 @@ the filtering function set on <!-- raw HTML omitted -->model<!-- raw HTML omitte
       
       
         &mdash;
-        <div class='inline'><p>true if the row should be displayed,
+        <div class='inline'><p>true if the row should be displayed,<br />
 false otherwise</p>
 </div>
       
@@ -1001,7 +1004,7 @@ false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether <!-- raw HTML omitted -->row<!-- raw HTML omitted --> should be filtered or not using the
+    <p>Checks whether <!-- raw HTML omitted -->row<!-- raw HTML omitted --> should be filtered or not using the<br />
 filtering function set on <!-- raw HTML omitted -->model<!-- raw HTML omitted -->.</p>
 <p>This function should be used only by subclasses of Clutter::Model.</p>
 
@@ -1040,7 +1043,7 @@ filtering function set on <!-- raw HTML omitted -->model<!-- raw HTML omitted --
       
       
         &mdash;
-        <div class='inline'><p>true if the row should be displayed,
+        <div class='inline'><p>true if the row should be displayed,<br />
 false otherwise</p>
 </div>
       
@@ -1062,7 +1065,7 @@ false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the <!-- raw HTML omitted -->model<!-- raw HTML omitted --> has a filter in place, set
+    <p>Returns whether the <!-- raw HTML omitted -->model<!-- raw HTML omitted --> has a filter in place, set<br />
 using clutter_model_set_filter()</p>
 
 
@@ -1103,7 +1106,7 @@ using clutter_model_set_filter()</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the Clutter::Model has a filter set</p>
-<p>This property is set to true if a filter function has been
+<p>This property is set to true if a filter function has been<br />
 set using clutter_model_set_filter()</p>
 
 
@@ -1172,7 +1175,7 @@ set using clutter_model_set_filter()</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the Clutter::Model has a filter set</p>
-<p>This property is set to true if a filter function has been
+<p>This property is set to true if a filter function has been<br />
 set using clutter_model_set_filter()</p>
 
 
@@ -1212,7 +1215,7 @@ set using clutter_model_set_filter()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a Clutter::ModelIter representing the first non-filtered
+    <p>Retrieves a Clutter::ModelIter representing the first non-filtered<br />
 row in <!-- raw HTML omitted -->model<!-- raw HTML omitted -->.</p>
 
 
@@ -1231,7 +1234,7 @@ row in <!-- raw HTML omitted -->model<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>A new Clutter::ModelIter.
+        <div class='inline'><p>A new Clutter::ModelIter.<br />
 Call g_object_unref() when done using it</p>
 </div>
       
@@ -1359,7 +1362,7 @@ Call g_object_unref() when done using it</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of the column. The model holds the returned
+        <div class='inline'><p>the name of the column. The model holds the returned<br />
 string, and it should not be modified or freed</p>
 </div>
       
@@ -1440,8 +1443,8 @@ string, and it should not be modified or freed</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves a Clutter::ModelIter representing the row at the given index.</p>
-<p>If a filter function has been set using clutter_model_set_filter()
-then the <!-- raw HTML omitted -->model<!-- raw HTML omitted --> implementation will return the first non filtered
+<p>If a filter function has been set using clutter_model_set_filter()<br />
+then the <!-- raw HTML omitted -->model<!-- raw HTML omitted --> implementation will return the first non filtered<br />
 row.</p>
 
 
@@ -1479,8 +1482,8 @@ row.</p>
       
       
         &mdash;
-        <div class='inline'><p>A new Clutter::ModelIter, or nil if <!-- raw HTML omitted -->row<!-- raw HTML omitted --> was
-out of bounds. When done using the iterator object, call g_object_unref()
+        <div class='inline'><p>A new Clutter::ModelIter, or nil if <!-- raw HTML omitted -->row<!-- raw HTML omitted --> was<br />
+out of bounds. When done using the iterator object, call g_object_unref()<br />
 to deallocate its resources</p>
 </div>
       
@@ -1502,16 +1505,16 @@ to deallocate its resources</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts a new row to the Clutter::Model at <!-- raw HTML omitted -->row<!-- raw HTML omitted -->, setting the row
-values upon creation. For example, to insert a new row at index 100,
-where column 0 is type %G_TYPE_INT and column 1 is of type
+    <p>Inserts a new row to the Clutter::Model at <!-- raw HTML omitted -->row<!-- raw HTML omitted -->, setting the row<br />
+values upon creation. For example, to insert a new row at index 100,<br />
+where column 0 is type %G_TYPE_INT and column 1 is of type<br />
 %G_TYPE_STRING:</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted -->
-ClutterModel *model;
-model = clutter_model_default_new (2,
-G_TYPE_INT,    &quot;Score&quot;,
-G_TYPE_STRING, &quot;Team&quot;);
-clutter_model_insert (model, 3, 0, 42, 1, &quot;Team #1&quot;, -1);
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><br />
+ClutterModel *model;<br />
+model = clutter_model_default_new (2,<br />
+G_TYPE_INT,    &quot;Score&quot;,<br />
+G_TYPE_STRING, &quot;Team&quot;);<br />
+clutter_model_insert (model, 3, 0, 42, 1, &quot;Team #1&quot;, -1);<br />
 <!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
 
@@ -1581,8 +1584,8 @@ clutter_model_insert (model, 3, 0, 42, 1, &quot;Team #1&quot;, -1);
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the data in the cell specified by <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> and <!-- raw HTML omitted -->column<!-- raw HTML omitted -->. The type of
-<!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be convertable to the type of the column. If the row does
+    <p>Sets the data in the cell specified by <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> and <!-- raw HTML omitted -->column<!-- raw HTML omitted -->. The type of<br />
+<!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be convertable to the type of the column. If the row does<br />
 not exist then it is created.</p>
 
 
@@ -1667,7 +1670,7 @@ not exist then it is created.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Inserts data at <!-- raw HTML omitted -->row<!-- raw HTML omitted --> into the Clutter::Model, setting the row
+    <p>Inserts data at <!-- raw HTML omitted -->row<!-- raw HTML omitted --> into the Clutter::Model, setting the row<br />
 values for the given <!-- raw HTML omitted -->columns<!-- raw HTML omitted --> upon creation.</p>
 
 
@@ -1767,7 +1770,7 @@ values for the given <!-- raw HTML omitted -->columns<!-- raw HTML omitted --> u
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a Clutter::ModelIter representing the last non-filtered
+    <p>Retrieves a Clutter::ModelIter representing the last non-filtered<br />
 row in <!-- raw HTML omitted -->model<!-- raw HTML omitted -->.</p>
 
 
@@ -1786,7 +1789,7 @@ row in <!-- raw HTML omitted -->model<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>A new Clutter::ModelIter.
+        <div class='inline'><p>A new Clutter::ModelIter.<br />
 Call g_object_unref() when done using it</p>
 </div>
       
@@ -1847,7 +1850,7 @@ Call g_object_unref() when done using it</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the number of rows inside <!-- raw HTML omitted -->model<!-- raw HTML omitted -->, eventually taking
+    <p>Retrieves the number of rows inside <!-- raw HTML omitted -->model<!-- raw HTML omitted -->, eventually taking<br />
 into account any filtering function set using clutter_model_set_filter().</p>
 
 
@@ -1866,7 +1869,7 @@ into account any filtering function set using clutter_model_set_filter().</p>
       
       
         &mdash;
-        <div class='inline'><p>The length of the <!-- raw HTML omitted -->model<!-- raw HTML omitted -->. If there is a filter set, then
+        <div class='inline'><p>The length of the <!-- raw HTML omitted -->model<!-- raw HTML omitted -->. If there is a filter set, then<br />
 the length of the filtered <!-- raw HTML omitted -->model<!-- raw HTML omitted --> is returned.</p>
 </div>
       
@@ -1888,15 +1891,15 @@ the length of the filtered <!-- raw HTML omitted -->model<!-- raw HTML omitted -
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates and prepends a new row to the Clutter::Model, setting the row
-values upon creation. For example, to prepend a new row where column 0
+    <p>Creates and prepends a new row to the Clutter::Model, setting the row<br />
+values upon creation. For example, to prepend a new row where column 0<br />
 is type %G_TYPE_INT and column 1 is of type %G_TYPE_STRING:</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted -->
-ClutterModel *model;
-model = clutter_model_default_new (2,
-G_TYPE_INT,    &quot;Score&quot;,
-G_TYPE_STRING, &quot;Team&quot;);
-clutter_model_prepend (model, 0, 42, 1, &quot;Team #1&quot;, -1);
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><br />
+ClutterModel *model;<br />
+model = clutter_model_default_new (2,<br />
+G_TYPE_INT,    &quot;Score&quot;,<br />
+G_TYPE_STRING, &quot;Team&quot;);<br />
+clutter_model_prepend (model, 0, 42, 1, &quot;Team #1&quot;, -1);<br />
 <!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
 
@@ -1951,7 +1954,7 @@ clutter_model_prepend (model, 0, 42, 1, &quot;Team #1&quot;, -1);
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates and prepends a new row to the Clutter::Model, setting the row
+    <p>Creates and prepends a new row to the Clutter::Model, setting the row<br />
 values for the given <!-- raw HTML omitted -->columns<!-- raw HTML omitted --> upon creation.</p>
 
 
@@ -2090,7 +2093,7 @@ values for the given <!-- raw HTML omitted -->columns<!-- raw HTML omitted --> u
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Force a resort on the <!-- raw HTML omitted -->model<!-- raw HTML omitted -->. This function should only be
+    <p>Force a resort on the <!-- raw HTML omitted -->model<!-- raw HTML omitted -->. This function should only be<br />
 used by subclasses of Clutter::Model.</p>
 
 
@@ -2211,8 +2214,8 @@ used by subclasses of Clutter::Model.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Assigns a name to the columns of a Clutter::Model.</p>
-<p>This function is meant primarily for #GObjects that inherit from
-Clutter::Model, and should only be used when contructing a #ClutterModel.
+<p>This function is meant primarily for #GObjects that inherit from<br />
+Clutter::Model, and should only be used when contructing a #ClutterModel.<br />
 It will not work after the initial creation of the Clutter::Model.</p>
 
 
@@ -2382,8 +2385,8 @@ It will not work after the initial creation of the Clutter::Model.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the types of the columns inside a Clutter::Model.</p>
-<p>This function is meant primarily for #GObjects that inherit from
-Clutter::Model, and should only be used when contructing a #ClutterModel.
+<p>This function is meant primarily for #GObjects that inherit from<br />
+Clutter::Model, and should only be used when contructing a #ClutterModel.<br />
 It will not work after the initial creation of the Clutter::Model.</p>
 
 
@@ -2492,7 +2495,7 @@ It will not work after the initial creation of the Clutter::Model.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the model to sort by <!-- raw HTML omitted -->column<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is a negative value
+    <p>Sets the model to sort by <!-- raw HTML omitted -->column<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is a negative value<br />
 the sorting column will be unset.</p>
 
 
@@ -2543,7 +2546,7 @@ the sorting column will be unset.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

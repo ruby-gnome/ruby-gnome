@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::FrameClock";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -345,6 +347,7 @@
 
       
     </ul>
+    
   
 
 
@@ -365,10 +368,10 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Starts updates for an animation.</p>
-<p>Until a matching call to [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.FrameClock.end_updating] is made,
-the frame clock will continually request a new frame with the
-%GDK_FRAME_CLOCK_PHASE_UPDATE phase. This function may be called multiple
-times and frames will be requested until gdk_frame_clock_end_updating()
+<p>Until a matching call to [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.FrameClock.end_updating] is made,<br />
+the frame clock will continually request a new frame with the<br />
+%GDK_FRAME_CLOCK_PHASE_UPDATE phase. This function may be called multiple<br />
+times and frames will be requested until gdk_frame_clock_end_updating()<br />
 is called the same number of times.</p>
 
 
@@ -422,9 +425,9 @@ is called the same number of times.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GdkFrameTimings</code> for the
-frame currently being processed, or even no frame is being
-processed, for the previous frame. Before any frames have been
+        <div class='inline'><p>the <code>GdkFrameTimings</code> for the<br />
+frame currently being processed, or even no frame is being<br />
+processed, for the previous frame. Before any frames have been<br />
 processed, returns nil.</p>
 </div>
       
@@ -482,7 +485,7 @@ processed, returns nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calculates the current frames-per-second, based on the
+    <p>Calculates the current frames-per-second, based on the<br />
 frame timings of <!-- raw HTML omitted -->frame_clock<!-- raw HTML omitted -->.</p>
 
 
@@ -522,7 +525,7 @@ frame timings of <!-- raw HTML omitted -->frame_clock<!-- raw HTML omitted -->.<
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p><code>GdkFrameClock</code> maintains a 64-bit counter that increments for
+    <p><code>GdkFrameClock</code> maintains a 64-bit counter that increments for<br />
 each frame drawn.</p>
 
 
@@ -541,8 +544,8 @@ each frame drawn.</p>
       
       
         &mdash;
-        <div class='inline'><p>inside frame processing, the value of the frame counter
-for the current frame. Outside of frame processing, the frame
+        <div class='inline'><p>inside frame processing, the value of the frame counter<br />
+for the current frame. Outside of frame processing, the frame<br />
 counter for the last frame.</p>
 </div>
       
@@ -565,10 +568,10 @@ counter for the last frame.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the time that should currently be used for animations.</p>
-<p>Inside the processing of a frame, it’s the time used to compute the
-animation position of everything in a frame. Outside of a frame, it's
-the time of the conceptual “previous frame,” which may be either
-the actual previous frame time, or if that’s too old, an updated
+<p>Inside the processing of a frame, it’s the time used to compute the<br />
+animation position of everything in a frame. Outside of a frame, it's<br />
+the time of the conceptual “previous frame,” which may be either<br />
+the actual previous frame time, or if that’s too old, an updated<br />
 time.</p>
 
 
@@ -587,7 +590,7 @@ time.</p>
       
       
         &mdash;
-        <div class='inline'><p>a timestamp in microseconds, in the timescale of
+        <div class='inline'><p>a timestamp in microseconds, in the timescale of<br />
 of g_get_monotonic_time().</p>
 </div>
       
@@ -610,10 +613,10 @@ of g_get_monotonic_time().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Predicts a presentation time, based on history.</p>
-<p>Using the frame history stored in the frame clock, finds the last
-known presentation time and refresh interval, and assuming that
-presentation times are separated by the refresh interval,
-predicts a presentation time that is a multiple of the refresh
+<p>Using the frame history stored in the frame clock, finds the last<br />
+known presentation time and refresh interval, and assuming that<br />
+presentation times are separated by the refresh interval,<br />
+predicts a presentation time that is a multiple of the refresh<br />
 interval after the last presentation time, and later than <!-- raw HTML omitted -->base_time<!-- raw HTML omitted -->.</p>
 
 
@@ -648,8 +651,8 @@ interval after the last presentation time, and later than <!-- raw HTML omitted 
       
       
         &mdash;
-        <div class='inline'><p>a location to store the
-determined refresh interval, or nil. A default refresh interval of
+        <div class='inline'><p>a location to store the<br />
+determined refresh interval, or nil. A default refresh interval of<br />
 1/60th of a second will be stored if no history is present.</p>
 </div>
       
@@ -665,8 +668,8 @@ determined refresh interval, or nil. A default refresh interval of
       
       
         &mdash;
-        <div class='inline'><p>a location to store the next
-candidate presentation time after the given base time.
+        <div class='inline'><p>a location to store the next<br />
+candidate presentation time after the given base time.<br />
 0 will be will be stored if no history is present.</p>
 </div>
       
@@ -702,10 +705,10 @@ candidate presentation time after the given base time.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a <code>GdkFrameTimings</code> object holding timing information
+    <p>Retrieves a <code>GdkFrameTimings</code> object holding timing information<br />
 for the current frame or a recent frame.</p>
-<p>The <code>GdkFrameTimings</code> object may not yet be complete: see
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.FrameTimings.get_complete] and
+<p>The <code>GdkFrameTimings</code> object may not yet be complete: see<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.FrameTimings.get_complete] and<br />
 [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.FrameClock.get_history_start].</p>
 
 
@@ -725,7 +728,7 @@ for the current frame or a recent frame.</p>
       
       
         &mdash;
-        <div class='inline'><p>the frame counter value identifying the frame to
+        <div class='inline'><p>the frame counter value identifying the frame to<br />
 be received</p>
 </div>
       
@@ -744,7 +747,7 @@ be received</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GdkFrameTimings</code> object
+        <div class='inline'><p>the <code>GdkFrameTimings</code> object<br />
 for the specified frame, or nil if it is not available</p>
 </div>
       
@@ -767,11 +770,11 @@ for the specified frame, or nil if it is not available</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the frame counter for the oldest frame available in history.</p>
-<p><code>GdkFrameClock</code> internally keeps a history of <code>GdkFrameTimings</code>
-objects for recent frames that can be retrieved with
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.FrameClock.get_timings]. The set of stored frames
-is the set from the counter values given by
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.FrameClock.get_history_start] and
+<p><code>GdkFrameClock</code> internally keeps a history of <code>GdkFrameTimings</code><br />
+objects for recent frames that can be retrieved with<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.FrameClock.get_timings]. The set of stored frames<br />
+is the set from the counter values given by<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.FrameClock.get_history_start] and<br />
 [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.FrameClock.get_frame_counter], inclusive.</p>
 
 
@@ -790,8 +793,8 @@ is the set from the counter values given by
       
       
         &mdash;
-        <div class='inline'><p>the frame counter value for the oldest frame
-that is available in the internal frame history of the
+        <div class='inline'><p>the frame counter value for the oldest frame<br />
+that is available in the internal frame history of the<br />
 <code>GdkFrameClock</code></p>
 </div>
       
@@ -814,14 +817,14 @@ that is available in the internal frame history of the
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asks the frame clock to run a particular phase.</p>
-<p>The signal corresponding the requested phase will be emitted the next
-time the frame clock processes. Multiple calls to
-gdk_frame_clock_request_phase() will be combined together
-and only one frame processed. If you are displaying animated
-content and want to continually request the
-%GDK_FRAME_CLOCK_PHASE_UPDATE phase for a period of time,
-you should use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.FrameClock.begin_updating] instead,
-since this allows GTK to adjust system parameters to get maximally
+<p>The signal corresponding the requested phase will be emitted the next<br />
+time the frame clock processes. Multiple calls to<br />
+gdk_frame_clock_request_phase() will be combined together<br />
+and only one frame processed. If you are displaying animated<br />
+content and want to continually request the<br />
+%GDK_FRAME_CLOCK_PHASE_UPDATE phase for a period of time,<br />
+you should use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.FrameClock.begin_updating] instead,<br />
+since this allows GTK to adjust system parameters to get maximally<br />
 smooth animations.</p>
 
 
@@ -872,7 +875,7 @@ smooth animations.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::SelectionModel";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -86,34 +88,34 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p><code>GtkSelectionModel</code> is an interface that add support for selection to list models.</p>
-<p>This support is then used by widgets using list models to add the ability
+<p>This support is then used by widgets using list models to add the ability<br />
 to select and unselect various items.</p>
-<p>GTK provides default implementations of the most common selection modes such
-as [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SingleSelection], so you will only need to implement this
+<p>GTK provides default implementations of the most common selection modes such<br />
+as [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SingleSelection], so you will only need to implement this<br />
 interface if you want detailed control about how selections should be handled.</p>
-<p>A <code>GtkSelectionModel</code> supports a single boolean per item indicating if an item is
-selected or not. This can be queried via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel.is_selected].
-When the selected state of one or more items changes, the model will emit the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel::selection-changed] signal by calling the
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel.selection_changed] function. The positions given
-in that signal may have their selection state changed, though that is not a
-requirement. If new items added to the model via the
-[signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel::items-changed] signal are selected or not is up to the
+<p>A <code>GtkSelectionModel</code> supports a single boolean per item indicating if an item is<br />
+selected or not. This can be queried via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel.is_selected].<br />
+When the selected state of one or more items changes, the model will emit the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel::selection-changed] signal by calling the<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel.selection_changed] function. The positions given<br />
+in that signal may have their selection state changed, though that is not a<br />
+requirement. If new items added to the model via the<br />
+[signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel::items-changed] signal are selected or not is up to the<br />
 implementation.</p>
-<p>Note that items added via [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel::items-changed] may already
-be selected and no [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel::selection-changed] will be
-emitted for them. So to track which items are selected, it is necessary to
+<p>Note that items added via [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ListModel::items-changed] may already<br />
+be selected and no [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel::selection-changed] will be<br />
+emitted for them. So to track which items are selected, it is necessary to<br />
 listen to both signals.</p>
-<p>Additionally, the interface can expose functionality to select and unselect
-items. If these functions are implemented, GTK's list widgets will allow users
-to select and unselect items. However, <code>GtkSelectionModel</code>s are free to only
-implement them partially or not at all. In that case the widgets will not
+<p>Additionally, the interface can expose functionality to select and unselect<br />
+items. If these functions are implemented, GTK's list widgets will allow users<br />
+to select and unselect items. However, <code>GtkSelectionModel</code>s are free to only<br />
+implement them partially or not at all. In that case the widgets will not<br />
 support the unimplemented operations.</p>
-<p>When selecting or unselecting is supported by a model, the return values of
-the selection functions do <em>not</em> indicate if selection or unselection happened.
-They are only meant to indicate complete failure, like when this mode of
+<p>When selecting or unselecting is supported by a model, the return values of<br />
+the selection functions do <em>not</em> indicate if selection or unselection happened.<br />
+They are only meant to indicate complete failure, like when this mode of<br />
 selecting is not supported by the model.</p>
-<p>Selections may happen asynchronously, so the only reliable way to find out
+<p>Selections may happen asynchronously, so the only reliable way to find out<br />
 when an item was selected is to listen to the signals that indicate selection.</p>
 
 
@@ -391,6 +393,7 @@ when an item was selected is to listen to the signals that indicate selection.</
 
       
     </ul>
+    
   
 
 
@@ -411,10 +414,10 @@ when an item was selected is to listen to the signals that indicate selection.</
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the set of selected items in a range.</p>
-<p>This function is an optimization for
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel.get_selection] when you are only
-interested in part of the model's selected state. A common use
-case is in response to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel::selection-changed]
+<p>This function is an optimization for<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel.get_selection] when you are only<br />
+interested in part of the model's selected state. A common use<br />
+case is in response to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel::selection-changed]<br />
 signal.</p>
 
 
@@ -467,8 +470,8 @@ signal.</p>
       
       
         &mdash;
-        <div class='inline'><p>A <code>GtkBitset</code> that matches the selection state
-for the given range with all other values being undefined.
+        <div class='inline'><p>A <code>GtkBitset</code> that matches the selection state<br />
+for the given range with all other values being undefined.<br />
 The bitset must not be modified.</p>
 </div>
       
@@ -566,7 +569,7 @@ The bitset must not be modified.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if this action was supported and no fallback should be
+        <div class='inline'><p>true if this action was supported and no fallback should be<br />
 tried. This does not mean that all items are now selected.</p>
 </div>
       
@@ -640,7 +643,7 @@ tried. This does not mean that all items are now selected.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if this action was supported and no fallback should be
+        <div class='inline'><p>true if this action was supported and no fallback should be<br />
 tried. This does not mean the item was selected.</p>
 </div>
       
@@ -729,7 +732,7 @@ tried. This does not mean the item was selected.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if this action was supported and no fallback should be
+        <div class='inline'><p>true if this action was supported and no fallback should be<br />
 tried. This does not mean the range was selected.</p>
 </div>
       
@@ -752,8 +755,8 @@ tried. This does not mean the range was selected.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the set containing all currently selected items in the model.</p>
-<p>This function may be slow, so if you are only interested in single item,
-consider using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel.is_selected] or if you are only
+<p>This function may be slow, so if you are only interested in single item,<br />
+consider using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel.is_selected] or if you are only<br />
 interested in a few, consider [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel.get_selection_in_range].</p>
 
 
@@ -772,8 +775,8 @@ interested in a few, consider [method<!-- raw HTML omitted -->Gtk<!-- raw HTML o
       
       
         &mdash;
-        <div class='inline'><p>a <code>GtkBitset</code> containing all the values currently
-selected in <!-- raw HTML omitted -->model<!-- raw HTML omitted -->. If no items are selected, the bitset is empty.
+        <div class='inline'><p>a <code>GtkBitset</code> containing all the values currently<br />
+selected in <!-- raw HTML omitted -->model<!-- raw HTML omitted -->. If no items are selected, the bitset is empty.<br />
 The bitset must not be modified.</p>
 </div>
       
@@ -796,7 +799,7 @@ The bitset must not be modified.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Helper function for implementations of <code>GtkSelectionModel</code>.</p>
-<p>Call this when the selection changes to emit the
+<p>Call this when the selection changes to emit the<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SelectionModel::selection-changed] signal.</p>
 
 
@@ -867,11 +870,11 @@ The bitset must not be modified.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Make selection changes.</p>
-<p>This is the most advanced selection updating method that allows
-the most fine-grained control over selection changes. If you can,
-you should try the simpler versions, as implementations are more
+<p>This is the most advanced selection updating method that allows<br />
+the most fine-grained control over selection changes. If you can,<br />
+you should try the simpler versions, as implementations are more<br />
 likely to implement support for those.</p>
-<p>Requests that the selection state of all positions set in <!-- raw HTML omitted -->mask<!-- raw HTML omitted -->
+<p>Requests that the selection state of all positions set in <!-- raw HTML omitted -->mask<!-- raw HTML omitted --><br />
 be updated to the respective value in the <!-- raw HTML omitted -->selected<!-- raw HTML omitted --> bitmask.</p>
 <p>In pseudocode, it would look something like this:</p>
 <pre class="code c"><code class="c">for (i = 0; i &lt; n_items; i++)
@@ -890,8 +893,8 @@ gtk_selection_model_selection_changed (model,
                                        first_changed_item,
                                        n_changed_items);
 </code></pre>
-<p><!-- raw HTML omitted -->mask<!-- raw HTML omitted --> and <!-- raw HTML omitted -->selected<!-- raw HTML omitted --> must not be modified. They may refer to the
-same bitset, which would mean that every item in the set should
+<p><!-- raw HTML omitted -->mask<!-- raw HTML omitted --> and <!-- raw HTML omitted -->selected<!-- raw HTML omitted --> must not be modified. They may refer to the<br />
+same bitset, which would mean that every item in the set should<br />
 be selected.</p>
 
 
@@ -944,8 +947,8 @@ be selected.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if this action was supported and no fallback should be
-tried. This does not mean that all items were updated according
+        <div class='inline'><p>true if this action was supported and no fallback should be<br />
+tried. This does not mean that all items were updated according<br />
 to the inputs.</p>
 </div>
       
@@ -985,7 +988,7 @@ to the inputs.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if this action was supported and no fallback should be
+        <div class='inline'><p>true if this action was supported and no fallback should be<br />
 tried. This does not mean that all items are now unselected.</p>
 </div>
       
@@ -1044,7 +1047,7 @@ tried. This does not mean that all items are now unselected.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if this action was supported and no fallback should be
+        <div class='inline'><p>true if this action was supported and no fallback should be<br />
 tried. This does not mean the item was unselected.</p>
 </div>
       
@@ -1118,7 +1121,7 @@ tried. This does not mean the item was unselected.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if this action was supported and no fallback should be
+        <div class='inline'><p>true if this action was supported and no fallback should be<br />
 tried. This does not mean the range was unselected.</p>
 </div>
       
@@ -1136,7 +1139,7 @@ tried. This does not mean the range was unselected.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

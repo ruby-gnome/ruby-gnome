@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::IconView";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -103,8 +104,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk3/icon-view.rb<span class="defines">,<br />
+    <dd>lib/gtk3/icon-view.rb<span class="defines">,<br>
   lib/gtk3/deprecated.rb</span>
+
 </dd>
   </dl>
   
@@ -113,21 +115,21 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p><code>GtkIconView</code> is a widget which displays data in a grid of icons.</p>
-<p><code>GtkIconView</code> provides an alternative view on a <code>GtkTreeModel</code>.
-It displays the model as a grid of icons with labels. Like
-[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeView], it allows to select one or multiple items
-(depending on the selection mode, see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconView.set_selection_mode]).
-In addition to selection with the arrow keys, <code>GtkIconView</code> supports
+<p><code>GtkIconView</code> provides an alternative view on a <code>GtkTreeModel</code>.<br />
+It displays the model as a grid of icons with labels. Like<br />
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TreeView], it allows to select one or multiple items<br />
+(depending on the selection mode, see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.IconView.set_selection_mode]).<br />
+In addition to selection with the arrow keys, <code>GtkIconView</code> supports<br />
 rubberband selection, which is controlled by dragging the pointer.</p>
-<p>Note that if the tree model is backed by an actual tree store (as
-opposed to a flat list where the mapping to icons is obvious),
-<code>GtkIconView</code> will only display the first level of the tree and
+<p>Note that if the tree model is backed by an actual tree store (as<br />
+opposed to a flat list where the mapping to icons is obvious),<br />
+<code>GtkIconView</code> will only display the first level of the tree and<br />
 ignore the tree’s branches.</p>
-<h2>CSS nodes</h2>
+<h2><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h2>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_iconview'>iconview</span><span class='period'>.</span><span class='id identifier rubyid_view'>view</span>
 <span class='id identifier rubyid_╰──'>╰──</span> <span class='lbracket'>[</span><span class='id identifier rubyid_rubberband'>rubberband</span><span class='rbracket'>]</span>
 </code></pre>
-<p><code>GtkIconView</code> has a single CSS node with name iconview and style class .view.
+<p><code>GtkIconView</code> has a single CSS node with name iconview and style class .view.<br />
 For rubberband selection, a subnode with name rubberband is used.</p>
 
 
@@ -1693,9 +1695,11 @@ For rubberband selection, a subnode with name rubberband is used.</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -1846,7 +1850,7 @@ For rubberband selection, a subnode with name rubberband is used.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The activate-on-single-click property specifies whether the &quot;item-activated&quot; signal
+    <p>The activate-on-single-click property specifies whether the &quot;item-activated&quot; signal<br />
 will be emitted after a single click.</p>
 
 
@@ -1914,7 +1918,7 @@ will be emitted after a single click.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The activate-on-single-click property specifies whether the &quot;item-activated&quot; signal
+    <p>The activate-on-single-click property specifies whether the &quot;item-activated&quot; signal<br />
 will be emitted after a single click.</p>
 
 
@@ -1955,7 +1959,7 @@ will be emitted after a single click.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkCellArea</code> used to layout cell renderers for this view.</p>
-<p>If no area is specified when creating the icon view with gtk_icon_view_new_with_area()
+<p>If no area is specified when creating the icon view with gtk_icon_view_new_with_area()<br />
 a <code>GtkCellAreaBox</code> will be used.</p>
 
 
@@ -1996,7 +2000,7 @@ a <code>GtkCellAreaBox</code> will be used.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>GtkCellArea</code> used to layout cell renderers for this view.</p>
-<p>If no area is specified when creating the icon view with gtk_icon_view_new_with_area()
+<p>If no area is specified when creating the icon view with gtk_icon_view_new_with_area()<br />
 a <code>GtkCellAreaBox</code> will be used.</p>
 
 
@@ -2064,7 +2068,7 @@ a <code>GtkCellAreaBox</code> will be used.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The column-spacing property specifies the space which is inserted between
+    <p>The column-spacing property specifies the space which is inserted between<br />
 the columns of the icon view.</p>
 
 
@@ -2104,7 +2108,7 @@ the columns of the icon view.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The column-spacing property specifies the space which is inserted between
+    <p>The column-spacing property specifies the space which is inserted between<br />
 the columns of the icon view.</p>
 
 
@@ -2172,8 +2176,8 @@ the columns of the icon view.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The columns property contains the number of the columns in which the
-items should be displayed. If it is -1, the number of columns will
+    <p>The columns property contains the number of the columns in which the<br />
+items should be displayed. If it is -1, the number of columns will<br />
 be chosen automatically to fill the available area.</p>
 
 
@@ -2213,8 +2217,8 @@ be chosen automatically to fill the available area.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The columns property contains the number of the columns in which the
-items should be displayed. If it is -1, the number of columns will
+    <p>The columns property contains the number of the columns in which the<br />
+items should be displayed. If it is -1, the number of columns will<br />
 be chosen automatically to fill the available area.</p>
 
 
@@ -2282,7 +2286,7 @@ be chosen automatically to fill the available area.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a <code>GdkPaintable</code> representation of the item at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->.
+    <p>Creates a <code>GdkPaintable</code> representation of the item at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->.<br />
 This image is used for a drag icon.</p>
 
 
@@ -2341,7 +2345,7 @@ This image is used for a drag icon.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Turns <!-- raw HTML omitted -->icon_view<!-- raw HTML omitted --> into a drop destination for automatic DND. Calling this
+    <p>Turns <!-- raw HTML omitted -->icon_view<!-- raw HTML omitted --> into a drop destination for automatic DND. Calling this<br />
 method sets <code>GtkIconView</code>:reorderable to false.</p>
 
 
@@ -2376,7 +2380,7 @@ method sets <code>GtkIconView</code>:reorderable to false.</p>
       
       
         &mdash;
-        <div class='inline'><p>the bitmask of possible actions for a drag to this
+        <div class='inline'><p>the bitmask of possible actions for a drag to this<br />
 widget</p>
 </div>
       
@@ -2412,7 +2416,7 @@ widget</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Turns <!-- raw HTML omitted -->icon_view<!-- raw HTML omitted --> into a drag source for automatic DND. Calling this
+    <p>Turns <!-- raw HTML omitted -->icon_view<!-- raw HTML omitted --> into a drag source for automatic DND. Calling this<br />
 method sets <code>GtkIconView</code>:reorderable to false.</p>
 
 
@@ -2462,7 +2466,7 @@ method sets <code>GtkIconView</code>:reorderable to false.</p>
       
       
         &mdash;
-        <div class='inline'><p>the bitmask of possible actions for a drag from this
+        <div class='inline'><p>the bitmask of possible actions for a drag from this<br />
 widget</p>
 </div>
       
@@ -2498,7 +2502,7 @@ widget</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Fills the bounding rectangle in widget coordinates for the cell specified by
+    <p>Fills the bounding rectangle in widget coordinates for the cell specified by<br />
 <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->cell<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> is nil the main cell area is used.</p>
 <p>This function is only valid if <!-- raw HTML omitted -->icon_view<!-- raw HTML omitted --> is realized.</p>
 
@@ -2618,7 +2622,7 @@ widget</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Fills the bounding rectangle in widget coordinates for the cell specified by
+    <p>Fills the bounding rectangle in widget coordinates for the cell specified by<br />
 <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->cell<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> is nil the main cell area is used.</p>
 <p>This function is only valid if <!-- raw HTML omitted -->icon_view<!-- raw HTML omitted --> is realized.</p>
 
@@ -2722,8 +2726,8 @@ widget</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Fills in <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> with the current cursor path and cell.
-If the cursor isn’t currently set, then *<!-- raw HTML omitted -->path<!-- raw HTML omitted --> will be nil.
+    <p>Fills in <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> with the current cursor path and cell.<br />
+If the cursor isn’t currently set, then *<!-- raw HTML omitted -->path<!-- raw HTML omitted --> will be nil.<br />
 If no cell currently has focus, then *<!-- raw HTML omitted -->cell<!-- raw HTML omitted --> will be nil.</p>
 <p>The returned <code>GtkTreePath</code> must be freed with gtk_tree_path_free().</p>
 
@@ -2744,7 +2748,7 @@ If no cell currently has focus, then *<!-- raw HTML omitted -->cell<!-- raw HTML
       
       
         &mdash;
-        <div class='inline'><p>Return location for the current
+        <div class='inline'><p>Return location for the current<br />
 cursor path</p>
 </div>
       
@@ -2760,7 +2764,7 @@ cursor path</p>
       
       
         &mdash;
-        <div class='inline'><p>Return location the current
+        <div class='inline'><p>Return location the current<br />
 focus cell</p>
 </div>
       
@@ -2922,7 +2926,7 @@ focus cell</p>
       
       
         &mdash;
-        <div class='inline'><p>Return location for the path of
+        <div class='inline'><p>Return location for the path of<br />
 the highlighted item</p>
 </div>
       
@@ -3037,7 +3041,7 @@ the highlighted item</p>
       
       
         &mdash;
-        <div class='inline'><p>Return location for the renderer
+        <div class='inline'><p>Return location for the renderer<br />
 responsible for the cell at (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted -->)</p>
 </div>
       
@@ -3077,7 +3081,7 @@ responsible for the cell at (<!-- raw HTML omitted -->x<!-- raw HTML omitted -->
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the column in which the item <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is currently
+    <p>Gets the column in which the item <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is currently<br />
 displayed. Column numbers start at 0.</p>
 
 
@@ -3136,7 +3140,7 @@ displayed. Column numbers start at 0.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the row in which the item <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is currently
+    <p>Gets the row in which the item <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is currently<br />
 displayed. Row numbers start at 0.</p>
 
 
@@ -3195,7 +3199,7 @@ displayed. Row numbers start at 0.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the path for the icon at the given position.
+    <p>Gets the path for the icon at the given position.<br />
 to the icon or nil if no icon exists at that position.</p>
 
 
@@ -3269,14 +3273,14 @@ to the icon or nil if no icon exists at that position.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function is supposed to be used in a <code>GtkWidget::query-tooltip</code>
-signal handler for <code>GtkIconView</code>. The <!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted --> and <!-- raw HTML omitted -->keyboard_tip<!-- raw HTML omitted --> values
-which are received in the signal handler, should be passed to this
+    <p>This function is supposed to be used in a <code>GtkWidget::query-tooltip</code><br />
+signal handler for <code>GtkIconView</code>. The <!-- raw HTML omitted -->x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->y<!-- raw HTML omitted --> and <!-- raw HTML omitted -->keyboard_tip<!-- raw HTML omitted --> values<br />
+which are received in the signal handler, should be passed to this<br />
 function without modification.</p>
-<p>The return value indicates whether there is an icon view item at the given
-coordinates (true) or not (false) for mouse tooltips. For keyboard
-tooltips the item returned will be the cursor item. When true, then any of
-<!-- raw HTML omitted -->model<!-- raw HTML omitted -->, <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> which have been provided will be set to point to
+<p>The return value indicates whether there is an icon view item at the given<br />
+coordinates (true) or not (false) for mouse tooltips. For keyboard<br />
+tooltips the item returned will be the cursor item. When true, then any of<br />
+<!-- raw HTML omitted -->model<!-- raw HTML omitted -->, <!-- raw HTML omitted -->path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> which have been provided will be set to point to<br />
 that row and the corresponding model.</p>
 
 
@@ -3410,7 +3414,7 @@ that row and the corresponding model.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->start_path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_path<!-- raw HTML omitted --> to be the first and last visible path.
+    <p>Sets <!-- raw HTML omitted -->start_path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_path<!-- raw HTML omitted --> to be the first and last visible path.<br />
 Note that there may be invisible paths in between.</p>
 <p>Both paths should be freed with gtk_tree_path_free() after use.</p>
 
@@ -3611,7 +3615,7 @@ Note that there may be invisible paths in between.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The item-orientation property specifies how the cells (i.e. the icon and
+    <p>The item-orientation property specifies how the cells (i.e. the icon and<br />
 the text) of the item are positioned relative to each other.</p>
 
 
@@ -3651,7 +3655,7 @@ the text) of the item are positioned relative to each other.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The item-orientation property specifies how the cells (i.e. the icon and
+    <p>The item-orientation property specifies how the cells (i.e. the icon and<br />
 the text) of the item are positioned relative to each other.</p>
 
 
@@ -3719,7 +3723,7 @@ the text) of the item are positioned relative to each other.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The item-padding property specifies the padding around each
+    <p>The item-padding property specifies the padding around each<br />
 of the icon view's item.</p>
 
 
@@ -3759,7 +3763,7 @@ of the icon view's item.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The item-padding property specifies the padding around each
+    <p>The item-padding property specifies the padding around each<br />
 of the icon view's item.</p>
 
 
@@ -3827,8 +3831,8 @@ of the icon view's item.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The item-width property specifies the width to use for each item.
-If it is set to -1, the icon view will automatically determine a
+    <p>The item-width property specifies the width to use for each item.<br />
+If it is set to -1, the icon view will automatically determine a<br />
 suitable item size.</p>
 
 
@@ -3868,8 +3872,8 @@ suitable item size.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The item-width property specifies the width to use for each item.
-If it is set to -1, the icon view will automatically determine a
+    <p>The item-width property specifies the width to use for each item.<br />
+If it is set to -1, the icon view will automatically determine a<br />
 suitable item size.</p>
 
 
@@ -3937,7 +3941,7 @@ suitable item size.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The margin property specifies the space which is inserted
+    <p>The margin property specifies the space which is inserted<br />
 at the edges of the icon view.</p>
 
 
@@ -3977,7 +3981,7 @@ at the edges of the icon view.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The margin property specifies the space which is inserted
+    <p>The margin property specifies the space which is inserted<br />
 at the edges of the icon view.</p>
 
 
@@ -4045,10 +4049,10 @@ at the edges of the icon view.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The ::markup-column property contains the number of the model column
-containing markup information to be displayed. The markup column must be
-of type <code>G_TYPE_STRING</code>. If this property and the :text-column property
-are both set to column numbers, it overrides the text column.
+    <p>The ::markup-column property contains the number of the model column<br />
+containing markup information to be displayed. The markup column must be<br />
+of type <code>G_TYPE_STRING</code>. If this property and the :text-column property<br />
+are both set to column numbers, it overrides the text column.<br />
 If both are set to -1, no texts are displayed.</p>
 
 
@@ -4088,10 +4092,10 @@ If both are set to -1, no texts are displayed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The ::markup-column property contains the number of the model column
-containing markup information to be displayed. The markup column must be
-of type <code>G_TYPE_STRING</code>. If this property and the :text-column property
-are both set to column numbers, it overrides the text column.
+    <p>The ::markup-column property contains the number of the model column<br />
+containing markup information to be displayed. The markup column must be<br />
+of type <code>G_TYPE_STRING</code>. If this property and the :text-column property<br />
+are both set to column numbers, it overrides the text column.<br />
 If both are set to -1, no texts are displayed.</p>
 
 
@@ -4264,7 +4268,7 @@ If both are set to -1, no texts are displayed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if the icon pointed to by <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is currently
+    <p>Returns true if the icon pointed to by <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is currently<br />
 selected. If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> does not point to a valid location, false is returned.</p>
 
 
@@ -4323,9 +4327,9 @@ selected. If <!-- raw HTML omitted -->path<!-- raw HTML omitted --> does not poi
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The ::pixbuf-column property contains the number of the model column
-containing the pixbufs which are displayed. The pixbuf column must be
-of type <code>GDK_TYPE_PIXBUF</code>. Setting this property to -1 turns off the
+    <p>The ::pixbuf-column property contains the number of the model column<br />
+containing the pixbufs which are displayed. The pixbuf column must be<br />
+of type <code>GDK_TYPE_PIXBUF</code>. Setting this property to -1 turns off the<br />
 display of pixbufs.</p>
 
 
@@ -4365,9 +4369,9 @@ display of pixbufs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The ::pixbuf-column property contains the number of the model column
-containing the pixbufs which are displayed. The pixbuf column must be
-of type <code>GDK_TYPE_PIXBUF</code>. Setting this property to -1 turns off the
+    <p>The ::pixbuf-column property contains the number of the model column<br />
+containing the pixbufs which are displayed. The pixbuf column must be<br />
+of type <code>GDK_TYPE_PIXBUF</code>. Setting this property to -1 turns off the<br />
 display of pixbufs.</p>
 
 
@@ -4435,7 +4439,7 @@ display of pixbufs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves whether the user can reorder the list via drag-and-drop.
+    <p>Retrieves whether the user can reorder the list via drag-and-drop.<br />
 See gtk_icon_view_set_reorderable().</p>
 
 
@@ -4475,7 +4479,7 @@ See gtk_icon_view_set_reorderable().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The reorderable property specifies if the items can be reordered
+    <p>The reorderable property specifies if the items can be reordered<br />
 by DND.</p>
 
 
@@ -4543,7 +4547,7 @@ by DND.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The reorderable property specifies if the items can be reordered
+    <p>The reorderable property specifies if the items can be reordered<br />
 by DND.</p>
 
 
@@ -4583,7 +4587,7 @@ by DND.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The row-spacing property specifies the space which is inserted between
+    <p>The row-spacing property specifies the space which is inserted between<br />
 the rows of the icon view.</p>
 
 
@@ -4623,7 +4627,7 @@ the rows of the icon view.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The row-spacing property specifies the space which is inserted between
+    <p>The row-spacing property specifies the space which is inserted between<br />
 the rows of the icon view.</p>
 
 
@@ -4691,17 +4695,17 @@ the rows of the icon view.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Moves the alignments of <!-- raw HTML omitted -->icon_view<!-- raw HTML omitted --> to the position specified by <!-- raw HTML omitted -->path<!-- raw HTML omitted -->.
-<!-- raw HTML omitted -->row_align<!-- raw HTML omitted --> determines where the row is placed, and <!-- raw HTML omitted -->col_align<!-- raw HTML omitted --> determines
-where <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is placed.  Both are expected to be between 0.0 and 1.0.
-0.0 means left/top alignment, 1.0 means right/bottom alignment, 0.5 means
+    <p>Moves the alignments of <!-- raw HTML omitted -->icon_view<!-- raw HTML omitted --> to the position specified by <!-- raw HTML omitted -->path<!-- raw HTML omitted -->.<br />
+<!-- raw HTML omitted -->row_align<!-- raw HTML omitted --> determines where the row is placed, and <!-- raw HTML omitted -->col_align<!-- raw HTML omitted --> determines<br />
+where <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is placed.  Both are expected to be between 0.0 and 1.0.<br />
+0.0 means left/top alignment, 1.0 means right/bottom alignment, 0.5 means<br />
 center.</p>
-<p>If <!-- raw HTML omitted -->use_align<!-- raw HTML omitted --> is false, then the alignment arguments are ignored, and the
-tree does the minimum amount of work to scroll the item onto the screen.
-This means that the item will be scrolled to the edge closest to its current
+<p>If <!-- raw HTML omitted -->use_align<!-- raw HTML omitted --> is false, then the alignment arguments are ignored, and the<br />
+tree does the minimum amount of work to scroll the item onto the screen.<br />
+This means that the item will be scrolled to the edge closest to its current<br />
 position.  If the item is currently visible on the screen, nothing is done.</p>
-<p>This function only works if the model is set, and <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is a valid row on
-the model. If the model changes before the <!-- raw HTML omitted -->icon_view<!-- raw HTML omitted --> is realized, the
+<p>This function only works if the model is set, and <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is a valid row on<br />
+the model. If the model changes before the <!-- raw HTML omitted -->icon_view<!-- raw HTML omitted --> is realized, the<br />
 centered path will be modified to reflect this change.</p>
 
 
@@ -4801,7 +4805,7 @@ centered path will be modified to reflect this change.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Selects all the icons. <!-- raw HTML omitted -->icon_view<!-- raw HTML omitted --> must has its selection mode set
+    <p>Selects all the icons. <!-- raw HTML omitted -->icon_view<!-- raw HTML omitted --> must has its selection mode set<br />
 to %GTK_SELECTION_MULTIPLE.</p>
 
 
@@ -4891,7 +4895,7 @@ to %GTK_SELECTION_MULTIPLE.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calls a function for each selected icon. Note that the model or
+    <p>Calls a function for each selected icon. Note that the model or<br />
 selection cannot be modified from within this function.</p>
 
 
@@ -4961,9 +4965,9 @@ selection cannot be modified from within this function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a list of paths of all selected items. Additionally, if you are
-planning on modifying the model after calling this function, you may
-want to convert the returned list into a list of <code>GtkTreeRowReferences</code>.
+    <p>Creates a list of paths of all selected items. Additionally, if you are<br />
+planning on modifying the model after calling this function, you may<br />
+want to convert the returned list into a list of <code>GtkTreeRowReferences</code>.<br />
 To do this, you can use gtk_tree_row_reference_new().</p>
 <p>To free the return value, use <code>g_list_free_full</code>:</p>
 <pre class="code ruby"><code class="ruby">GtkWidget *icon_view = gtk_icon_view_new ();
@@ -5013,8 +5017,8 @@ g_list_free_full (list, (GDestroyNotify) gtk_tree_path_free);
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The ::selection-mode property specifies the selection mode of
-icon view. If the mode is %GTK_SELECTION_MULTIPLE, rubberband selection
+    <p>The ::selection-mode property specifies the selection mode of<br />
+icon view. If the mode is %GTK_SELECTION_MULTIPLE, rubberband selection<br />
 is enabled, for the other modes, only keyboard selection is possible.</p>
 
 
@@ -5054,8 +5058,8 @@ is enabled, for the other modes, only keyboard selection is possible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The ::selection-mode property specifies the selection mode of
-icon view. If the mode is %GTK_SELECTION_MULTIPLE, rubberband selection
+    <p>The ::selection-mode property specifies the selection mode of<br />
+icon view. If the mode is %GTK_SELECTION_MULTIPLE, rubberband selection<br />
 is enabled, for the other modes, only keyboard selection is possible.</p>
 
 
@@ -5123,12 +5127,12 @@ is enabled, for the other modes, only keyboard selection is possible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the current keyboard focus to be at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->, and selects it.  This is
-useful when you want to focus the user’s attention on a particular item.
-If <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> is not nil, then focus is given to the cell specified by
-it. Additionally, if <!-- raw HTML omitted -->start_editing<!-- raw HTML omitted --> is true, then editing should be
+    <p>Sets the current keyboard focus to be at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->, and selects it.  This is<br />
+useful when you want to focus the user’s attention on a particular item.<br />
+If <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> is not nil, then focus is given to the cell specified by<br />
+it. Additionally, if <!-- raw HTML omitted -->start_editing<!-- raw HTML omitted --> is true, then editing should be<br />
 started in the specified cell.</p>
-<p>This function is often followed by <code>gtk_widget_grab_focus (icon_view)</code> in order to give keyboard focus to the widget.
+<p>This function is often followed by <code>gtk_widget_grab_focus (icon_view)</code> in order to give keyboard focus to the widget.<br />
 Please note that editing can only happen when the widget is realized.</p>
 
 
@@ -5282,7 +5286,7 @@ Please note that editing can only happen when the widget is realized.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the tip area of <!-- raw HTML omitted -->tooltip<!-- raw HTML omitted --> to the area which <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> occupies in
+    <p>Sets the tip area of <!-- raw HTML omitted -->tooltip<!-- raw HTML omitted --> to the area which <!-- raw HTML omitted -->cell<!-- raw HTML omitted --> occupies in<br />
 the item pointed to by <!-- raw HTML omitted -->path<!-- raw HTML omitted -->. See also gtk_tooltip_set_tip_area().</p>
 <p>See also gtk_icon_view_set_tooltip_column() for a simpler alternative.</p>
 
@@ -5368,8 +5372,8 @@ the item pointed to by <!-- raw HTML omitted -->path<!-- raw HTML omitted -->. S
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the tip area of <!-- raw HTML omitted -->tooltip<!-- raw HTML omitted --> to be the area covered by the item at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->.
-See also gtk_icon_view_set_tooltip_column() for a simpler alternative.
+    <p>Sets the tip area of <!-- raw HTML omitted -->tooltip<!-- raw HTML omitted --> to be the area covered by the item at <!-- raw HTML omitted -->path<!-- raw HTML omitted -->.<br />
+See also gtk_icon_view_set_tooltip_column() for a simpler alternative.<br />
 See also gtk_tooltip_set_tip_area().</p>
 
 
@@ -5439,7 +5443,7 @@ See also gtk_tooltip_set_tip_area().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The spacing property specifies the space which is inserted between
+    <p>The spacing property specifies the space which is inserted between<br />
 the cells (i.e. the icon and the text) of an item.</p>
 
 
@@ -5479,7 +5483,7 @@ the cells (i.e. the icon and the text) of an item.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The spacing property specifies the space which is inserted between
+    <p>The spacing property specifies the space which is inserted between<br />
 the cells (i.e. the icon and the text) of an item.</p>
 
 
@@ -5547,9 +5551,9 @@ the cells (i.e. the icon and the text) of an item.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The ::text-column property contains the number of the model column
-containing the texts which are displayed. The text column must be
-of type <code>G_TYPE_STRING</code>. If this property and the :markup-column
+    <p>The ::text-column property contains the number of the model column<br />
+containing the texts which are displayed. The text column must be<br />
+of type <code>G_TYPE_STRING</code>. If this property and the :markup-column<br />
 property are both set to -1, no texts are displayed.</p>
 
 
@@ -5589,9 +5593,9 @@ property are both set to -1, no texts are displayed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The ::text-column property contains the number of the model column
-containing the texts which are displayed. The text column must be
-of type <code>G_TYPE_STRING</code>. If this property and the :markup-column
+    <p>The ::text-column property contains the number of the model column<br />
+containing the texts which are displayed. The text column must be<br />
+of type <code>G_TYPE_STRING</code>. If this property and the :markup-column<br />
 property are both set to -1, no texts are displayed.</p>
 
 
@@ -5853,7 +5857,7 @@ property are both set to -1, no texts are displayed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Undoes the effect of gtk_icon_view_enable_model_drag_dest(). Calling this
+    <p>Undoes the effect of gtk_icon_view_enable_model_drag_dest(). Calling this<br />
 method sets <code>GtkIconView</code>:reorderable to false.</p>
 
 
@@ -5889,7 +5893,7 @@ method sets <code>GtkIconView</code>:reorderable to false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Undoes the effect of gtk_icon_view_enable_model_drag_source(). Calling this
+    <p>Undoes the effect of gtk_icon_view_enable_model_drag_source(). Calling this<br />
 method sets <code>GtkIconView</code>:reorderable to false.</p>
 
 
@@ -5921,7 +5925,7 @@ method sets <code>GtkIconView</code>:reorderable to false.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

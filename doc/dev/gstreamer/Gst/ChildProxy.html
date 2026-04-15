@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::ChildProxy";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,23 +79,24 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>This interface abstracts handling of property sets for elements with
-children. Imagine elements such as mixers or polyphonic generators. They all
-have multiple Gst::Pad or some kind of voice objects. Another use case are
-container elements like Gst::Bin.
-The element implementing the interface acts as a parent for those child
+    <p>This interface abstracts handling of property sets for elements with<br />
+children. Imagine elements such as mixers or polyphonic generators. They all<br />
+have multiple Gst::Pad or some kind of voice objects. Another use case are<br />
+container elements like Gst::Bin.<br />
+The element implementing the interface acts as a parent for those child<br />
 objects.</p>
-<p>By implementing this interface the child properties can be accessed from the
+<p>By implementing this interface the child properties can be accessed from the<br />
 parent element by using gst_child_proxy_get() and gst_child_proxy_set().</p>
-<p>Property names are written as <code>child-name::property-name</code>. The whole naming
-scheme is recursive. Thus <code>child1::child2::property</code> is valid too, if
+<p>Property names are written as <code>child-name::property-name</code>. The whole naming<br />
+scheme is recursive. Thus <code>child1::child2::property</code> is valid too, if<br />
 <code>child1</code> and <code>child2</code> implement the Gst::ChildProxy interface.</p>
 
 
@@ -418,6 +420,7 @@ scheme is recursive. Thus <code>child1::child2::property</code> is valid too, if
 
       
     </ul>
+    
   
 
 
@@ -720,7 +723,7 @@ scheme is recursive. Thus <code>child1::child2::property</code> is valid too, if
       
       
         &mdash;
-        <div class='inline'><p>the child object or nil if
+        <div class='inline'><p>the child object or nil if<br />
 not found (index too high).</p>
 </div>
       
@@ -743,8 +746,8 @@ not found (index too high).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Looks up a child element by the given name.</p>
-<p>This virtual method has a default implementation that uses Gst::Object
-together with gst_object_get_name(). If the interface is to be used with
+<p>This virtual method has a default implementation that uses Gst::Object<br />
+together with gst_object_get_name(). If the interface is to be used with<br />
 #GObjects, this methods needs to be overridden.</p>
 
 
@@ -782,7 +785,7 @@ together with gst_object_get_name(). If the interface is to be used with
       
       
         &mdash;
-        <div class='inline'><p>the child object or nil if
+        <div class='inline'><p>the child object or nil if<br />
 not found.</p>
 </div>
       
@@ -805,11 +808,11 @@ not found.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Looks up a child element by the given full-path name.</p>
-<p>Similar to gst_child_proxy_get_child_by_name(), this method
-searches and returns a child given a name. The difference is that
-this method allows a hierarchical path in the form of
-child1::child2::child3. In the later example this method would
-return a reference to child3, if found. The name should be made of
+<p>Similar to gst_child_proxy_get_child_by_name(), this method<br />
+searches and returns a child given a name. The difference is that<br />
+this method allows a hierarchical path in the form of<br />
+child1::child2::child3. In the later example this method would<br />
+return a reference to child3, if found. The name should be made of<br />
 element names only and should not contain any property names.</p>
 
 
@@ -847,7 +850,7 @@ element names only and should not contain any property names.</p>
       
       
         &mdash;
-        <div class='inline'><p>the child object or nil if
+        <div class='inline'><p>the child object or nil if<br />
 not found.</p>
 </div>
       
@@ -869,7 +872,7 @@ not found.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a single property using the GstChildProxy mechanism.
+    <p>Gets a single property using the GstChildProxy mechanism.<br />
 You are responsible for freeing it by calling g_value_unset()</p>
 
 
@@ -1008,8 +1011,8 @@ You are responsible for freeing it by calling g_value_unset()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks up which object and GParam::Spec would be effected by the given <!-- raw HTML omitted -->name<!-- raw HTML omitted -->.
-case the values for <!-- raw HTML omitted -->pspec<!-- raw HTML omitted --> and <!-- raw HTML omitted -->target<!-- raw HTML omitted --> are not modified. Unref <!-- raw HTML omitted -->target<!-- raw HTML omitted --> after
+    <p>Looks up which object and GParam::Spec would be effected by the given <!-- raw HTML omitted -->name<!-- raw HTML omitted -->.<br />
+case the values for <!-- raw HTML omitted -->pspec<!-- raw HTML omitted --> and <!-- raw HTML omitted -->target<!-- raw HTML omitted --> are not modified. Unref <!-- raw HTML omitted -->target<!-- raw HTML omitted --> after<br />
 usage. For plain #GObject <!-- raw HTML omitted -->target<!-- raw HTML omitted --> is the same as <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.</p>
 
 
@@ -1044,7 +1047,7 @@ usage. For plain #GObject <!-- raw HTML omitted -->target<!-- raw HTML omitted -
       
       
         &mdash;
-        <div class='inline'><p>pointer to a #GObject that
+        <div class='inline'><p>pointer to a #GObject that<br />
 takes the real object to set property on</p>
 </div>
       
@@ -1060,7 +1063,7 @@ takes the real object to set property on</p>
       
       
         &mdash;
-        <div class='inline'><p>pointer to take the GParam::Spec
+        <div class='inline'><p>pointer to take the GParam::Spec<br />
 describing the property</p>
 </div>
       
@@ -1303,7 +1306,7 @@ describing the property</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

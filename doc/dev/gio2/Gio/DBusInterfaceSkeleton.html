@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::DBusInterfaceSkeleton";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -470,6 +472,7 @@
 
       
     </ul>
+    
   
 
 
@@ -489,7 +492,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the first connection that <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --> is exported on, if any.
+    <p>Gets the first connection that <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --> is exported on, if any.<br />
 not exported anywhere. Do not free, the object belongs to <!-- raw HTML omitted -->interface_<!-- raw HTML omitted -->.</p>
 
 
@@ -547,9 +550,9 @@ not exported anywhere. Do not free, the object belongs to <!-- raw HTML omitted 
       
       
         &mdash;
-        <div class='inline'><p>A list of
-all the connections that <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --> is exported on. The returned
-list should be freed with g_list_free() after each element has
+        <div class='inline'><p>A list of<br />
+all the connections that <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --> is exported on. The returned<br />
+list should be freed with g_list_free() after each element has<br />
 been freed with g_object_unref().</p>
 </div>
       
@@ -572,10 +575,10 @@ been freed with g_object_unref().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Exports <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --> at <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> on <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->.</p>
-<p>This can be called multiple times to export the same <!-- raw HTML omitted -->interface_<!-- raw HTML omitted -->
-onto multiple connections however the <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> provided must be
+<p>This can be called multiple times to export the same <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --><br />
+onto multiple connections however the <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> provided must be<br />
 the same for all connections.</p>
-<p>Use g_dbus_interface_skeleton_unexport() to unexport the object.
+<p>Use g_dbus_interface_skeleton_unexport() to unexport the object.<br />
 <!-- raw HTML omitted -->error<!-- raw HTML omitted --> set.</p>
 
 
@@ -649,7 +652,7 @@ the same for all connections.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the GDBus::InterfaceSkeletonFlags that describes what the behavior
+    <p>Gets the GDBus::InterfaceSkeletonFlags that describes what the behavior<br />
 of <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --></p>
 
 
@@ -743,12 +746,12 @@ of <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --> has outstanding changes, request for these changes to be
+    <p>If <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --> has outstanding changes, request for these changes to be<br />
 emitted immediately.</p>
-<p>For example, an exported D-Bus interface may queue up property
-changes and emit the
-<code>org.freedesktop.DBus.Properties.PropertiesChanged</code>
-signal later (e.g. in an idle handler). This technique is useful
+<p>For example, an exported D-Bus interface may queue up property<br />
+changes and emit the<br />
+<code>org.freedesktop.DBus.Properties.PropertiesChanged</code><br />
+signal later (e.g. in an idle handler). This technique is useful<br />
 for collapsing multiple property changes into one.</p>
 
 
@@ -948,7 +951,7 @@ for collapsing multiple property changes into one.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets D-Bus introspection information for the D-Bus interface
+    <p>Gets D-Bus introspection information for the D-Bus interface<br />
 implemented by <!-- raw HTML omitted -->interface_<!-- raw HTML omitted -->.</p>
 
 
@@ -988,7 +991,7 @@ implemented by <!-- raw HTML omitted -->interface_<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the object path that <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --> is exported on, if any.
+    <p>Gets the object path that <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --> is exported on, if any.<br />
 anywhere. Do not free, the string belongs to <!-- raw HTML omitted -->interface_<!-- raw HTML omitted -->.</p>
 
 
@@ -1028,8 +1031,8 @@ anywhere. Do not free, the string belongs to <!-- raw HTML omitted -->interface_
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets all D-Bus properties for <!-- raw HTML omitted -->interface_<!-- raw HTML omitted -->.
-['asv'][G-VARIANT-TYPE-VARDICT:CAPS].
+    <p>Gets all D-Bus properties for <!-- raw HTML omitted -->interface_<!-- raw HTML omitted -->.<br />
+['asv'][G-VARIANT-TYPE-VARDICT:CAPS].<br />
 Free with g_variant_unref().</p>
 
 
@@ -1070,7 +1073,7 @@ Free with g_variant_unref().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Stops exporting <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --> on all connections it is exported on.</p>
-<p>To unexport <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --> from only a single connection, use
+<p>To unexport <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --> from only a single connection, use<br />
 g_dbus_interface_skeleton_unexport_from_connection()</p>
 
 
@@ -1107,7 +1110,7 @@ g_dbus_interface_skeleton_unexport_from_connection()</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Stops exporting <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --> on <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->.</p>
-<p>To stop exporting on all connections the interface is exported on,
+<p>To stop exporting on all connections the interface is exported on,<br />
 use g_dbus_interface_skeleton_unexport().</p>
 
 
@@ -1162,8 +1165,8 @@ use g_dbus_interface_skeleton_unexport().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the interface vtable for the D-Bus interface implemented by
-<!-- raw HTML omitted -->interface_<!-- raw HTML omitted -->. The returned function pointers should expect <!-- raw HTML omitted -->interface_<!-- raw HTML omitted -->
+    <p>Gets the interface vtable for the D-Bus interface implemented by<br />
+<!-- raw HTML omitted -->interface_<!-- raw HTML omitted -->. The returned function pointers should expect <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --><br />
 itself to be passed as <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->.</p>
 
 
@@ -1199,7 +1202,7 @@ itself to be passed as <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

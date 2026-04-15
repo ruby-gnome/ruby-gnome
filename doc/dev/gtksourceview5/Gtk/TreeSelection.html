@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::TreeSelection";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -102,26 +104,26 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The selection object for GtkTreeView</p>
-<p>The <code>GtkTreeSelection</code> object is a helper object to manage the selection
-for a <code>GtkTreeView</code> widget.  The <code>GtkTreeSelection</code> object is
-automatically created when a new <code>GtkTreeView</code> widget is created, and
-cannot exist independently of this widget.  The primary reason the
-<code>GtkTreeSelection</code> objects exists is for cleanliness of code and API.
-That is, there is no conceptual reason all these functions could not be
+<p>The <code>GtkTreeSelection</code> object is a helper object to manage the selection<br />
+for a <code>GtkTreeView</code> widget.  The <code>GtkTreeSelection</code> object is<br />
+automatically created when a new <code>GtkTreeView</code> widget is created, and<br />
+cannot exist independently of this widget.  The primary reason the<br />
+<code>GtkTreeSelection</code> objects exists is for cleanliness of code and API.<br />
+That is, there is no conceptual reason all these functions could not be<br />
 methods on the <code>GtkTreeView</code> widget instead of a separate function.</p>
-<p>The <code>GtkTreeSelection</code> object is gotten from a <code>GtkTreeView</code> by calling
-gtk_tree_view_get_selection().  It can be manipulated to check the
-selection status of the tree, as well as select and deselect individual
-rows.  Selection is done completely view side.  As a result, multiple
-views of the same model can have completely different selections.
-Additionally, you cannot change the selection of a row on the model that
-is not currently displayed by the view without expanding its parents
+<p>The <code>GtkTreeSelection</code> object is gotten from a <code>GtkTreeView</code> by calling<br />
+gtk_tree_view_get_selection().  It can be manipulated to check the<br />
+selection status of the tree, as well as select and deselect individual<br />
+rows.  Selection is done completely view side.  As a result, multiple<br />
+views of the same model can have completely different selections.<br />
+Additionally, you cannot change the selection of a row on the model that<br />
+is not currently displayed by the view without expanding its parents<br />
 first.</p>
-<p>One of the important things to remember when monitoring the selection of
-a view is that the <code>GtkTreeSelection</code>::changed signal is mostly a hint.
-That is, it may only emit one signal when a range of rows is selected.
-Additionally, it may on occasion emit a <code>GtkTreeSelection</code>::changed signal
-when nothing has happened (mostly as a result of programmers calling
+<p>One of the important things to remember when monitoring the selection of<br />
+a view is that the <code>GtkTreeSelection</code>::changed signal is mostly a hint.<br />
+That is, it may only emit one signal when a range of rows is selected.<br />
+Additionally, it may on occasion emit a <code>GtkTreeSelection</code>::changed signal<br />
+when nothing has happened (mostly as a result of programmers calling<br />
 select_row on an already selected row).</p>
 
 
@@ -606,6 +608,7 @@ select_row on an already selected row).</p>
 
       
     </ul>
+    
   
 
 
@@ -664,10 +667,10 @@ select_row on an already selected row).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to the currently selected node if <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> is set to
-%GTK_SELECTION_SINGLE or %GTK_SELECTION_BROWSE.  <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> may be NULL if you
-just want to test if <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> has any selected nodes.  <!-- raw HTML omitted -->model<!-- raw HTML omitted --> is filled
-with the current model as a convenience.  This function will not work if you
+    <p>Sets <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> to the currently selected node if <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> is set to<br />
+%GTK_SELECTION_SINGLE or %GTK_SELECTION_BROWSE.  <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> may be NULL if you<br />
+just want to test if <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> has any selected nodes.  <!-- raw HTML omitted -->model<!-- raw HTML omitted --> is filled<br />
+with the current model as a convenience.  This function will not work if you<br />
 use <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> is %GTK_SELECTION_MULTIPLE.</p>
 
 
@@ -741,9 +744,9 @@ use <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> is %GTK_SELECTIO
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a list of path of all selected rows. Additionally, if you are
-planning on modifying the model after calling this function, you may
-want to convert the returned list into a list of <code>GtkTreeRowReference</code>s.
+    <p>Creates a list of path of all selected rows. Additionally, if you are<br />
+planning on modifying the model after calling this function, you may<br />
+want to convert the returned list into a list of <code>GtkTreeRowReference</code>s.<br />
 To do this, you can use gtk_tree_row_reference_new().</p>
 <p>To free the return value, use:</p>
 <pre class="code ruby"><code class="ruby">g_list_free_full (list, (GDestroyNotify) gtk_tree_path_free);
@@ -863,7 +866,7 @@ To do this, you can use gtk_tree_row_reference_new().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Selection mode.
+    <p>Selection mode.<br />
 See gtk_tree_selection_set_mode() for more information on this property.</p>
 
 
@@ -903,7 +906,7 @@ See gtk_tree_selection_set_mode() for more information on this property.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Selection mode.
+    <p>Selection mode.<br />
 See gtk_tree_selection_set_mode() for more information on this property.</p>
 
 
@@ -971,7 +974,7 @@ See gtk_tree_selection_set_mode() for more information on this property.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if the row pointed to by <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is currently selected.  If <!-- raw HTML omitted -->path<!-- raw HTML omitted -->
+    <p>Returns true if the row pointed to by <!-- raw HTML omitted -->path<!-- raw HTML omitted --> is currently selected.  If <!-- raw HTML omitted -->path<!-- raw HTML omitted --><br />
 does not point to a valid location, false is returned</p>
 
 
@@ -1030,7 +1033,7 @@ does not point to a valid location, false is returned</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Selects all the nodes. <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> must be set to %GTK_SELECTION_MULTIPLE
+    <p>Selects all the nodes. <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> must be set to %GTK_SELECTION_MULTIPLE<br />
 mode.</p>
 
 
@@ -1213,7 +1216,7 @@ mode.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Selects a range of nodes, determined by <!-- raw HTML omitted -->start_path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_path<!-- raw HTML omitted --> inclusive.
+    <p>Selects a range of nodes, determined by <!-- raw HTML omitted -->start_path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_path<!-- raw HTML omitted --> inclusive.<br />
 <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> must be set to %GTK_SELECTION_MULTIPLE mode.</p>
 
 
@@ -1283,8 +1286,8 @@ mode.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calls a function for each selected node. Note that you cannot modify
-the tree or selection from within this function. As a result,
+    <p>Calls a function for each selected node. Note that you cannot modify<br />
+the tree or selection from within this function. As a result,<br />
 gtk_tree_selection_get_selected_rows() might be more useful.</p>
 
 
@@ -1355,9 +1358,9 @@ gtk_tree_selection_get_selected_rows() might be more useful.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the selection function.</p>
-<p>If set, this function is called before any node is selected or unselected,
-giving some control over which nodes are selected. The select function
-should return true if the state of the node may be toggled, and false
+<p>If set, this function is called before any node is selected or unselected,<br />
+giving some control over which nodes are selected. The select function<br />
+should return true if the state of the node may be toggled, and false<br />
 if the state of the node should be left unchanged.</p>
 
 
@@ -1624,7 +1627,7 @@ if the state of the node should be left unchanged.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unselects a range of nodes, determined by <!-- raw HTML omitted -->start_path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_path<!-- raw HTML omitted -->
+    <p>Unselects a range of nodes, determined by <!-- raw HTML omitted -->start_path<!-- raw HTML omitted --> and <!-- raw HTML omitted -->end_path<!-- raw HTML omitted --><br />
 inclusive.</p>
 
 
@@ -1729,7 +1732,7 @@ inclusive.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

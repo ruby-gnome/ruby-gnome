@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GdkPixbuf::Pixbuf";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -99,8 +100,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gdk_pixbuf2/pixbuf.rb<span class="defines">,<br />
+    <dd>lib/gdk_pixbuf2/pixbuf.rb<span class="defines">,<br>
   lib/gdk_pixbuf2/deprecated.rb</span>
+
 </dd>
   </dl>
   
@@ -109,63 +111,63 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>A pixel buffer.</p>
-<p><code>GdkPixbuf</code> contains information about an image's pixel data,
-its color space, bits per sample, width and height, and the
-rowstride (the number of bytes between the start of one row
+<p><code>GdkPixbuf</code> contains information about an image's pixel data,<br />
+its color space, bits per sample, width and height, and the<br />
+rowstride (the number of bytes between the start of one row<br />
 and the start of the next).</p>
-<h2>Creating new <code>GdkPixbuf</code></h2>
-<p>The most basic way to create a pixbuf is to wrap an existing pixel
-buffer with a [class<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf] instance. You can use the
+<h2><a href="#creating-new-gdkpixbuf" aria-hidden="true" class="anchor" id="creating-new-gdkpixbuf"></a>Creating new <code>GdkPixbuf</code></h2>
+<p>The most basic way to create a pixbuf is to wrap an existing pixel<br />
+buffer with a [class<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf] instance. You can use the<br />
 [<code>ctor&lt;b&gt;GdkPixbuf&lt;/b&gt;.Pixbuf.new_from_data</code>] function to do this.</p>
-<p>Every time you create a new <code>GdkPixbuf</code> instance for some data, you
-will need to specify the destroy notification function that will be
-called when the data buffer needs to be freed; this will happen when
-a <code>GdkPixbuf</code> is finalized by the reference counting functions. If
-you have a chunk of static data compiled into your application, you
-can pass in <code>NULL</code> as the destroy notification function so that the
+<p>Every time you create a new <code>GdkPixbuf</code> instance for some data, you<br />
+will need to specify the destroy notification function that will be<br />
+called when the data buffer needs to be freed; this will happen when<br />
+a <code>GdkPixbuf</code> is finalized by the reference counting functions. If<br />
+you have a chunk of static data compiled into your application, you<br />
+can pass in <code>NULL</code> as the destroy notification function so that the<br />
 data will not be freed.</p>
-<p>The [<code>ctor&lt;b&gt;GdkPixbuf&lt;/b&gt;.Pixbuf.new</code>] constructor function can be used
-as a convenience to create a pixbuf with an empty buffer; this is
-equivalent to allocating a data buffer using <code>malloc()</code> and then
-wrapping it with <code>gdk_pixbuf_new_from_data()</code>. The <code>gdk_pixbuf_new()</code>
-function will compute an optimal rowstride so that rendering can be
+<p>The [<code>ctor&lt;b&gt;GdkPixbuf&lt;/b&gt;.Pixbuf.new</code>] constructor function can be used<br />
+as a convenience to create a pixbuf with an empty buffer; this is<br />
+equivalent to allocating a data buffer using <code>malloc()</code> and then<br />
+wrapping it with <code>gdk_pixbuf_new_from_data()</code>. The <code>gdk_pixbuf_new()</code><br />
+function will compute an optimal rowstride so that rendering can be<br />
 performed with an efficient algorithm.</p>
-<p>As a special case, you can use the [<code>ctor&lt;b&gt;GdkPixbuf&lt;/b&gt;.Pixbuf.new_from_xpm_data</code>]
+<p>As a special case, you can use the [<code>ctor&lt;b&gt;GdkPixbuf&lt;/b&gt;.Pixbuf.new_from_xpm_data</code>]<br />
 function to create a pixbuf from inline XPM image data.</p>
-<p>You can also copy an existing pixbuf with the [method<!-- raw HTML omitted -->Pixbuf<!-- raw HTML omitted -->.copy]
-function. This is not the same as just acquiring a reference to
-the old pixbuf instance: the copy function will actually duplicate
-the pixel data in memory and create a new [class<!-- raw HTML omitted -->Pixbuf<!-- raw HTML omitted -->] instance
+<p>You can also copy an existing pixbuf with the [method<!-- raw HTML omitted -->Pixbuf<!-- raw HTML omitted -->.copy]<br />
+function. This is not the same as just acquiring a reference to<br />
+the old pixbuf instance: the copy function will actually duplicate<br />
+the pixel data in memory and create a new [class<!-- raw HTML omitted -->Pixbuf<!-- raw HTML omitted -->] instance<br />
 for it.</p>
-<h2>Reference counting</h2>
-<p><code>GdkPixbuf</code> structures are reference counted. This means that an
-application can share a single pixbuf among many parts of the
-code. When a piece of the program needs to use a pixbuf, it should
-acquire a reference to it by calling <code>g_object_ref()</code>; when it no
-longer needs the pixbuf, it should release the reference it acquired
-by calling <code>g_object_unref()</code>. The resources associated with a
-<code>GdkPixbuf</code> will be freed when its reference count drops to zero.
-Newly-created <code>GdkPixbuf</code> instances start with a reference count
+<h2><a href="#reference-counting" aria-hidden="true" class="anchor" id="reference-counting"></a>Reference counting</h2>
+<p><code>GdkPixbuf</code> structures are reference counted. This means that an<br />
+application can share a single pixbuf among many parts of the<br />
+code. When a piece of the program needs to use a pixbuf, it should<br />
+acquire a reference to it by calling <code>g_object_ref()</code>; when it no<br />
+longer needs the pixbuf, it should release the reference it acquired<br />
+by calling <code>g_object_unref()</code>. The resources associated with a<br />
+<code>GdkPixbuf</code> will be freed when its reference count drops to zero.<br />
+Newly-created <code>GdkPixbuf</code> instances start with a reference count<br />
 of one.</p>
-<h2>Image Data</h2>
-<p>Image data in a pixbuf is stored in memory in an uncompressed,
-packed format. Rows in the image are stored top to bottom, and
+<h2><a href="#image-data" aria-hidden="true" class="anchor" id="image-data"></a>Image Data</h2>
+<p>Image data in a pixbuf is stored in memory in an uncompressed,<br />
+packed format. Rows in the image are stored top to bottom, and<br />
 in each row pixels are stored from left to right.</p>
 <p>There may be padding at the end of a row.</p>
-<p>The &quot;rowstride&quot; value of a pixbuf, as returned by [<code>method&lt;b&gt;GdkPixbuf&lt;/b&gt;.Pixbuf.get_rowstride</code>],
+<p>The &quot;rowstride&quot; value of a pixbuf, as returned by [<code>method&lt;b&gt;GdkPixbuf&lt;/b&gt;.Pixbuf.get_rowstride</code>],<br />
 indicates the number of bytes between rows.</p>
-<p><strong>NOTE</strong>: If you are copying raw pixbuf data with <code>memcpy()</code> note that the
-last row in the pixbuf may not be as wide as the full rowstride, but rather
-just as wide as the pixel data needs to be; that is: it is unsafe to do
-<code>memcpy (dest, pixels, rowstride * height)</code> to copy a whole pixbuf. Use
-[method<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf.copy] instead, or compute the width in bytes of the
+<p><strong>NOTE</strong>: If you are copying raw pixbuf data with <code>memcpy()</code> note that the<br />
+last row in the pixbuf may not be as wide as the full rowstride, but rather<br />
+just as wide as the pixel data needs to be; that is: it is unsafe to do<br />
+<code>memcpy (dest, pixels, rowstride * height)</code> to copy a whole pixbuf. Use<br />
+[method<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf.copy] instead, or compute the width in bytes of the<br />
 last row as:</p>
 <pre class="code c"><code class="c">last_row = width * ((n_channels * bits_per_sample + 7) / 8);
 </code></pre>
-<p>The same rule applies when iterating over each row of a <code>GdkPixbuf</code> pixels
+<p>The same rule applies when iterating over each row of a <code>GdkPixbuf</code> pixels<br />
 array.</p>
-<p>The following code illustrates a simple <code>put_pixel()</code>
-function for RGB pixbufs with 8 bits per channel with an alpha
+<p>The following code illustrates a simple <code>put_pixel()</code><br />
+function for RGB pixbufs with 8 bits per channel with an alpha<br />
 channel.</p>
 <pre class="code c"><code class="c">static void
 put_pixel (GdkPixbuf *pixbuf,
@@ -204,18 +206,18 @@ put_pixel (GdkPixbuf *pixbuf,
   p[3] = alpha;
 }
 </code></pre>
-<h2>Loading images</h2>
-<p>The <code>GdkPixBuf</code> class provides a simple mechanism for loading
+<h2><a href="#loading-images" aria-hidden="true" class="anchor" id="loading-images"></a>Loading images</h2>
+<p>The <code>GdkPixBuf</code> class provides a simple mechanism for loading<br />
 an image from a file in synchronous and asynchronous fashion.</p>
-<p>For GUI applications, it is recommended to use the asynchronous
+<p>For GUI applications, it is recommended to use the asynchronous<br />
 stream API to avoid blocking the control flow of the application.</p>
-<p>Additionally, <code>GdkPixbuf</code> provides the [class<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.PixbufLoader`]
+<p>Additionally, <code>GdkPixbuf</code> provides the [class<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.PixbufLoader`]<br />
 API for progressive image loading.</p>
-<h2>Saving images</h2>
-<p>The <code>GdkPixbuf</code> class provides methods for saving image data in
-a number of file formats. The formatted data can be written to a
-file or to a memory buffer. <code>GdkPixbuf</code> can also call a user-defined
-callback on the data, which allows to e.g. write the image
+<h2><a href="#saving-images" aria-hidden="true" class="anchor" id="saving-images"></a>Saving images</h2>
+<p>The <code>GdkPixbuf</code> class provides methods for saving image data in<br />
+a number of file formats. The formatted data can be written to a<br />
+file or to a memory buffer. <code>GdkPixbuf</code> can also call a user-defined<br />
+callback on the data, which allows to e.g. write the image<br />
 to a socket or store it in a database.</p>
 
 
@@ -469,6 +471,7 @@ to a socket or store it in a database.</p>
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1925,6 +1928,7 @@ to a socket or store it in a database.</p>
 
       
     </ul>
+    
   
 
 
@@ -1943,7 +1947,7 @@ to a socket or store it in a database.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new pixbuf by parsing XPM data in memory.</p>
-<p>This data is commonly the result of including an XPM file into a
+<p>This data is commonly the result of including an XPM file into a<br />
 program's C source.</p>
 
 
@@ -2140,9 +2144,9 @@ program's C source.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calculates the rowstride that an image created with those values would
+    <p>Calculates the rowstride that an image created with those values would<br />
 have.</p>
-<p>This function is useful for front-ends and backends that want to check
+<p>This function is useful for front-ends and backends that want to check<br />
 image values without needing to create a <code>GdkPixbuf</code>.</p>
 
 
@@ -2261,7 +2265,7 @@ image values without needing to create a <code>GdkPixbuf</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the available information about the image formats supported
+    <p>Obtains the available information about the image formats supported<br />
 by GdkPixbuf.</p>
 
 
@@ -2280,7 +2284,7 @@ by GdkPixbuf.</p>
       
       
         &mdash;
-        <div class='inline'><p>A list of
+        <div class='inline'><p>A list of<br />
 support image formats.</p>
 </div>
       
@@ -2369,7 +2373,7 @@ support image formats.</p>
       
       
         &mdash;
-        <div class='inline'><p>A <code>GdkPixbufFormat</code> describing
+        <div class='inline'><p>A <code>GdkPixbufFormat</code> describing<br />
 the image format of the file</p>
 </div>
       
@@ -2391,12 +2395,12 @@ the image format of the file</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously parses an image file far enough to determine its
+    <p>Asynchronously parses an image file far enough to determine its<br />
 format and size.</p>
-<p>For more details see gdk_pixbuf_get_file_info(), which is the synchronous
+<p>For more details see gdk_pixbuf_get_file_info(), which is the synchronous<br />
 version of this function.</p>
-<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called in the
-main thread. You can then call gdk_pixbuf_get_file_info_finish() to
+<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called in the<br />
+main thread. You can then call gdk_pixbuf_get_file_info_finish() to<br />
 get the result of the operation.</p>
 
 
@@ -2496,7 +2500,7 @@ get the result of the operation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes an asynchronous pixbuf parsing operation started with
+    <p>Finishes an asynchronous pixbuf parsing operation started with<br />
 gdk_pixbuf_get_file_info_async().</p>
 
 
@@ -2564,7 +2568,7 @@ gdk_pixbuf_get_file_info_async().</p>
       
       
         &mdash;
-        <div class='inline'><p>A <code>GdkPixbufFormat</code> describing the
+        <div class='inline'><p>A <code>GdkPixbufFormat</code> describing the<br />
 image format of the file</p>
 </div>
       
@@ -2586,16 +2590,16 @@ image format of the file</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Initalizes the gdk-pixbuf loader modules referenced by the <code>loaders.cache</code>
+    <p>Initalizes the gdk-pixbuf loader modules referenced by the <code>loaders.cache</code><br />
 file present inside that directory.</p>
-<p>This is to be used by applications that want to ship certain loaders
+<p>This is to be used by applications that want to ship certain loaders<br />
 in a different location from the system ones.</p>
-<p>This is needed when the OS or runtime ships a minimal number of loaders
-so as to reduce the potential attack surface of carefully crafted image
-files, especially for uncommon file types. Applications that require
-broader image file types coverage, such as image viewers, would be
-expected to ship the gdk-pixbuf modules in a separate location, bundled
-with the application in a separate directory from the OS or runtime-
+<p>This is needed when the OS or runtime ships a minimal number of loaders<br />
+so as to reduce the potential attack surface of carefully crafted image<br />
+files, especially for uncommon file types. Applications that require<br />
+broader image file types coverage, such as image viewers, would be<br />
+expected to ship the gdk-pixbuf modules in a separate location, bundled<br />
+with the application in a separate directory from the OS or runtime-<br />
 provided modules.</p>
 
 
@@ -2725,10 +2729,10 @@ provided modules.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new pixbuf by asynchronously loading an image from an input stream.</p>
-<p>For more details see gdk_pixbuf_new_from_stream(), which is the synchronous
+<p>For more details see gdk_pixbuf_new_from_stream(), which is the synchronous<br />
 version of this function.</p>
-<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called in the main thread.
-You can then call gdk_pixbuf_new_from_stream_finish() to get the result of
+<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called in the main thread.<br />
+You can then call gdk_pixbuf_new_from_stream_finish() to get the result of<br />
 the operation.</p>
 
 
@@ -2829,9 +2833,9 @@ the operation.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new pixbuf by asynchronously loading an image from an input stream.</p>
-<p>For more details see gdk_pixbuf_new_from_stream_at_scale(), which is the synchronous
+<p>For more details see gdk_pixbuf_new_from_stream_at_scale(), which is the synchronous<br />
 version of this function.</p>
-<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called in the main thread.
+<p>When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called in the main thread.<br />
 You can then call gdk_pixbuf_new_from_stream_finish() to get the result of the operation.</p>
 
 
@@ -2976,7 +2980,7 @@ You can then call gdk_pixbuf_new_from_stream_finish() to get the result of the o
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes an asynchronous pixbuf save operation started with
+    <p>Finishes an asynchronous pixbuf save operation started with<br />
 gdk_pixbuf_save_to_stream_async().</p>
 
 
@@ -3042,14 +3046,14 @@ gdk_pixbuf_save_to_stream_async().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Takes an existing pixbuf and adds an alpha channel to it.</p>
-<p>If the existing pixbuf already had an alpha channel, the channel
-values are copied from the original; otherwise, the alpha channel
+<p>If the existing pixbuf already had an alpha channel, the channel<br />
+values are copied from the original; otherwise, the alpha channel<br />
 is initialized to 255 (full opacity).</p>
-<p>If <code>substitute_color</code> is <code>TRUE</code>, then the color specified by the
-(<code>r</code>, <code>g</code>, <code>b</code>) arguments will be assigned zero opacity. That is,
-if you pass <code>(255, 255, 255)</code> for the substitute color, all white
+<p>If <code>substitute_color</code> is <code>TRUE</code>, then the color specified by the<br />
+(<code>r</code>, <code>g</code>, <code>b</code>) arguments will be assigned zero opacity. That is,<br />
+if you pass <code>(255, 255, 255)</code> for the substitute color, all white<br />
 pixels will become fully transparent.</p>
-<p>If <code>substitute_color</code> is <code>FALSE</code>, then the (<code>r</code>, <code>g</code>, <code>b</code>) arguments
+<p>If <code>substitute_color</code> is <code>FALSE</code>, then the (<code>r</code>, <code>g</code>, <code>b</code>) arguments<br />
 will be ignored.</p>
 
 
@@ -3153,13 +3157,13 @@ will be ignored.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Takes an existing pixbuf and checks for the presence of an
+    <p>Takes an existing pixbuf and checks for the presence of an<br />
 associated &quot;orientation&quot; option.</p>
-<p>The orientation option may be provided by the JPEG loader (which
-reads the exif orientation tag) or the TIFF loader (which reads
-the TIFF orientation tag, and compensates it for the partial
+<p>The orientation option may be provided by the JPEG loader (which<br />
+reads the exif orientation tag) or the TIFF loader (which reads<br />
+the TIFF orientation tag, and compensates it for the partial<br />
 transforms performed by libtiff).</p>
-<p>If an orientation option/tag is present, the appropriate transform
+<p>If an orientation option/tag is present, the appropriate transform<br />
 will be performed so that the pixbuf is oriented correctly.</p>
 
 
@@ -3454,14 +3458,14 @@ will be performed so that the pixbuf is oriented correctly.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a transformation of the source image <!-- raw HTML omitted -->src<!-- raw HTML omitted --> by scaling by
+    <p>Creates a transformation of the source image <!-- raw HTML omitted -->src<!-- raw HTML omitted --> by scaling by<br />
 <!-- raw HTML omitted -->scale_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->scale_y<!-- raw HTML omitted --> then translating by <!-- raw HTML omitted -->offset_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->offset_y<!-- raw HTML omitted -->.</p>
-<p>This gives an image in the coordinates of the destination pixbuf.
-The rectangle (<!-- raw HTML omitted -->dest_x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_y<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_width<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_height<!-- raw HTML omitted -->)
-is then alpha blended onto the corresponding rectangle of the
+<p>This gives an image in the coordinates of the destination pixbuf.<br />
+The rectangle (<!-- raw HTML omitted -->dest_x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_y<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_width<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_height<!-- raw HTML omitted -->)<br />
+is then alpha blended onto the corresponding rectangle of the<br />
 original destination image.</p>
-<p>When the destination rectangle contains parts not in the source
-image, the data at the edges of the source image is replicated
+<p>When the destination rectangle contains parts not in the source<br />
+image, the data at the edges of the source image is replicated<br />
 to infinity.</p>
 <p><img src="composite.png" alt="" /></p>
 
@@ -3833,15 +3837,15 @@ to infinity.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a transformation of the source image <!-- raw HTML omitted -->src<!-- raw HTML omitted --> by scaling by
-<!-- raw HTML omitted -->scale_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->scale_y<!-- raw HTML omitted --> then translating by <!-- raw HTML omitted -->offset_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->offset_y<!-- raw HTML omitted -->,
-then alpha blends the rectangle (<!-- raw HTML omitted -->dest_x<!-- raw HTML omitted --> ,<!-- raw HTML omitted -->dest_y<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_width<!-- raw HTML omitted -->,
-<!-- raw HTML omitted -->dest_height<!-- raw HTML omitted -->) of the resulting image with a checkboard of the
-colors <!-- raw HTML omitted -->color1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->color2<!-- raw HTML omitted --> and renders it onto the destination
+    <p>Creates a transformation of the source image <!-- raw HTML omitted -->src<!-- raw HTML omitted --> by scaling by<br />
+<!-- raw HTML omitted -->scale_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->scale_y<!-- raw HTML omitted --> then translating by <!-- raw HTML omitted -->offset_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->offset_y<!-- raw HTML omitted -->,<br />
+then alpha blends the rectangle (<!-- raw HTML omitted -->dest_x<!-- raw HTML omitted --> ,<!-- raw HTML omitted -->dest_y<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_width<!-- raw HTML omitted -->,<br />
+<!-- raw HTML omitted -->dest_height<!-- raw HTML omitted -->) of the resulting image with a checkboard of the<br />
+colors <!-- raw HTML omitted -->color1<!-- raw HTML omitted --> and <!-- raw HTML omitted -->color2<!-- raw HTML omitted --> and renders it onto the destination<br />
 image.</p>
-<p>If the source image has no alpha channel, and <!-- raw HTML omitted -->overall_alpha<!-- raw HTML omitted --> is 255, a fast
+<p>If the source image has no alpha channel, and <!-- raw HTML omitted -->overall_alpha<!-- raw HTML omitted --> is 255, a fast<br />
 path is used which omits the alpha blending and just performs the scaling.</p>
-<p>See gdk_pixbuf_composite_color_simple() for a simpler variant of this
+<p>See gdk_pixbuf_composite_color_simple() for a simpler variant of this<br />
 function suitable for many tasks.</p>
 
 
@@ -4121,8 +4125,8 @@ function suitable for many tasks.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new pixbuf by scaling <code>src</code> to <code>dest_width</code> x <code>dest_height</code>
-and alpha blending the result with a checkboard of colors <code>color1</code>
+    <p>Creates a new pixbuf by scaling <code>src</code> to <code>dest_width</code> x <code>dest_height</code><br />
+and alpha blending the result with a checkboard of colors <code>color1</code><br />
 and <code>color2</code>.</p>
 
 
@@ -4271,14 +4275,14 @@ and <code>color2</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a transformation of the source image <!-- raw HTML omitted -->src<!-- raw HTML omitted --> by scaling by
+    <p>Creates a transformation of the source image <!-- raw HTML omitted -->src<!-- raw HTML omitted --> by scaling by<br />
 <!-- raw HTML omitted -->scale_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->scale_y<!-- raw HTML omitted --> then translating by <!-- raw HTML omitted -->offset_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->offset_y<!-- raw HTML omitted -->.</p>
-<p>This gives an image in the coordinates of the destination pixbuf.
-The rectangle (<!-- raw HTML omitted -->dest_x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_y<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_width<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_height<!-- raw HTML omitted -->)
-is then alpha blended onto the corresponding rectangle of the
+<p>This gives an image in the coordinates of the destination pixbuf.<br />
+The rectangle (<!-- raw HTML omitted -->dest_x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_y<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_width<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_height<!-- raw HTML omitted -->)<br />
+is then alpha blended onto the corresponding rectangle of the<br />
 original destination image.</p>
-<p>When the destination rectangle contains parts not in the source
-image, the data at the edges of the source image is replicated
+<p>When the destination rectangle contains parts not in the source<br />
+image, the data at the edges of the source image is replicated<br />
 to infinity.</p>
 <p><img src="composite.png" alt="" /></p>
 
@@ -4498,9 +4502,9 @@ to infinity.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new <code>GdkPixbuf</code> with a copy of the information in the specified
+    <p>Creates a new <code>GdkPixbuf</code> with a copy of the information in the specified<br />
 <code>pixbuf</code>.</p>
-<p>Note that this does not copy the options set on the original <code>GdkPixbuf</code>,
+<p>Note that this does not copy the options set on the original <code>GdkPixbuf</code>,<br />
 use gdk_pixbuf_copy_options() for this.</p>
 
 
@@ -4542,8 +4546,8 @@ use gdk_pixbuf_copy_options() for this.</p>
   <div class="discussion">
     <p>Copies a rectangular area from <code>src_pixbuf</code> to <code>dest_pixbuf</code>.</p>
 <p>Conversion of pixbuf formats is done automatically.</p>
-<p>If the source rectangle overlaps the destination rectangle on the
-same pixbuf, it will be overwritten during the copy operation.
+<p>If the source rectangle overlaps the destination rectangle on the<br />
+same pixbuf, it will be overwritten during the copy operation.<br />
 Therefore, you can not use this function to scroll a pixbuf.</p>
 
 
@@ -4688,10 +4692,10 @@ Therefore, you can not use this function to scroll a pixbuf.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Copies the key/value pair options attached to a <code>GdkPixbuf</code> to another
+    <p>Copies the key/value pair options attached to a <code>GdkPixbuf</code> to another<br />
 <code>GdkPixbuf</code>.</p>
-<p>This is useful to keep original metadata after having manipulated
-a file. However be careful to remove metadata which you've already
+<p>This is useful to keep original metadata after having manipulated<br />
+a file. However be careful to remove metadata which you've already<br />
 applied, such as the &quot;orientation&quot; option after rotating the image.</p>
 
 
@@ -4780,9 +4784,9 @@ applied, such as the &quot;orientation&quot; option after rotating the image.</p
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Clears a pixbuf to the given RGBA value, converting the RGBA value into
+    <p>Clears a pixbuf to the given RGBA value, converting the RGBA value into<br />
 the pixbuf's pixel format.</p>
-<p>The alpha component will be ignored if the pixbuf doesn't have an alpha
+<p>The alpha component will be ignored if the pixbuf doesn't have an alpha<br />
 channel.</p>
 
 
@@ -4802,7 +4806,7 @@ channel.</p>
       
       
         &mdash;
-        <div class='inline'><p>RGBA pixel to used to clear (<code>0xffffffff</code> is opaque white,
+        <div class='inline'><p>RGBA pixel to used to clear (<code>0xffffffff</code> is opaque white,<br />
 <code>0x00000000</code> transparent black)</p>
 </div>
       
@@ -4868,7 +4872,7 @@ channel.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Flips a pixbuf horizontally or vertically and returns the
+    <p>Flips a pixbuf horizontally or vertically and returns the<br />
 result in a new pixbuf.</p>
 
 
@@ -4927,19 +4931,19 @@ result in a new pixbuf.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks up <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in the list of options that may have been attached to the
-<!-- raw HTML omitted -->pixbuf<!-- raw HTML omitted --> when it was loaded, or that may have been attached by another
+    <p>Looks up <!-- raw HTML omitted -->key<!-- raw HTML omitted --> in the list of options that may have been attached to the<br />
+<!-- raw HTML omitted -->pixbuf<!-- raw HTML omitted --> when it was loaded, or that may have been attached by another<br />
 function using gdk_pixbuf_set_option().</p>
-<p>For instance, the ANI loader provides &quot;Title&quot; and &quot;Artist&quot; options.
-The ICO, XBM, and XPM loaders provide &quot;x_hot&quot; and &quot;y_hot&quot; hot-spot
-options for cursor definitions. The PNG loader provides the tEXt ancillary
-chunk key/value pairs as options. Since 2.12, the TIFF and JPEG loaders
-return an &quot;orientation&quot; option string that corresponds to the embedded
-TIFF/Exif orientation tag (if present). Since 2.32, the TIFF loader sets
-the &quot;multipage&quot; option string to &quot;yes&quot; when a multi-page TIFF is loaded.
-Since 2.32 the JPEG and PNG loaders set &quot;x-dpi&quot; and &quot;y-dpi&quot; if the file
-contains image density information in dots per inch.
-Since 2.36.6, the JPEG loader sets the &quot;comment&quot; option with the comment
+<p>For instance, the ANI loader provides &quot;Title&quot; and &quot;Artist&quot; options.<br />
+The ICO, XBM, and XPM loaders provide &quot;x_hot&quot; and &quot;y_hot&quot; hot-spot<br />
+options for cursor definitions. The PNG loader provides the tEXt ancillary<br />
+chunk key/value pairs as options. Since 2.12, the TIFF and JPEG loaders<br />
+return an &quot;orientation&quot; option string that corresponds to the embedded<br />
+TIFF/Exif orientation tag (if present). Since 2.32, the TIFF loader sets<br />
+the &quot;multipage&quot; option string to &quot;yes&quot; when a multi-page TIFF is loaded.<br />
+Since 2.32 the JPEG and PNG loaders set &quot;x-dpi&quot; and &quot;y-dpi&quot; if the file<br />
+contains image density information in dots per inch.<br />
+Since 2.36.6, the JPEG loader sets the &quot;comment&quot; option with the comment<br />
 EXIF tag.</p>
 
 
@@ -4999,10 +5003,10 @@ EXIF tag.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queries a pointer to the pixel data of a pixbuf.</p>
-<p>This function will cause an implicit copy of the pixbuf data if the
+<p>This function will cause an implicit copy of the pixbuf data if the<br />
 pixbuf was created from read-only data.</p>
-<p>Please see the section on <a href="class.Pixbuf.html#image-data">image data</a> for information
-about how the pixel data is stored in memory.
+<p>Please see the section on <a href="class.Pixbuf.html#image-data">image data</a> for information<br />
+about how the pixel data is stored in memory.<br />
 pixel data.</p>
 
 
@@ -5313,7 +5317,7 @@ pixel data.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new pixbuf by parsing XPM data in memory.</p>
-<p>This data is commonly the result of including an XPM file into a
+<p>This data is commonly the result of including an XPM file into a<br />
 program's C source.</p>
 
 
@@ -5495,11 +5499,11 @@ program's C source.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new pixbuf which represents a sub-region of <code>src_pixbuf</code>.</p>
-<p>The new pixbuf shares its pixels with the original pixbuf, so
-writing to one affects both.  The new pixbuf holds a reference to
-<code>src_pixbuf</code>, so <code>src_pixbuf</code> will not be finalized until the new
+<p>The new pixbuf shares its pixels with the original pixbuf, so<br />
+writing to one affects both.  The new pixbuf holds a reference to<br />
+<code>src_pixbuf</code>, so <code>src_pixbuf</code> will not be finalized until the new<br />
 pixbuf is finalized.</p>
-<p>Note that if <code>src_pixbuf</code> is read-only, this function will force it
+<p>Note that if <code>src_pixbuf</code> is read-only, this function will force it<br />
 to be mutable.</p>
 
 
@@ -5603,8 +5607,8 @@ to be mutable.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a <code>GHashTable</code> with a list of all the options that may have been
-attached to the <code>pixbuf</code> when it was loaded, or that may have been
+    <p>Returns a <code>GHashTable</code> with a list of all the options that may have been<br />
+attached to the <code>pixbuf</code> when it was loaded, or that may have been<br />
 attached by another function using [method<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf.set_option].</p>
 
 
@@ -5623,7 +5627,7 @@ attached by another function using [method<!-- raw HTML omitted -->GdkPixbuf<!--
       
       
         &mdash;
-        <div class='inline'><p>a GHash::Table
+        <div class='inline'><p>a GHash::Table<br />
 of key/values pairs</p>
 </div>
       
@@ -5817,9 +5821,9 @@ of key/values pairs</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Provides a #GBytes buffer containing the raw pixel data; the data
+    <p>Provides a #GBytes buffer containing the raw pixel data; the data<br />
 must not be modified.</p>
-<p>This function allows skipping the implicit copy that must be made
+<p>This function allows skipping the implicit copy that must be made<br />
 if gdk_pixbuf_get_pixels() is called on a read-only pixbuf.</p>
 
 
@@ -5838,9 +5842,9 @@ if gdk_pixbuf_get_pixels() is called on a read-only pixbuf.</p>
       
       
         &mdash;
-        <div class='inline'><p>A new reference to a read-only copy of
-the pixel data.  Note that for mutable pixbufs, this function will
-incur a one-time copy of the pixel data for conversion into the
+        <div class='inline'><p>A new reference to a read-only copy of<br />
+the pixel data.  Note that for mutable pixbufs, this function will<br />
+incur a one-time copy of the pixel data for conversion into the<br />
 returned #GBytes.</p>
 </div>
       
@@ -5863,7 +5867,7 @@ returned #GBytes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Provides a read-only pointer to the raw pixel data.</p>
-<p>This function allows skipping the implicit copy that must be made
+<p>This function allows skipping the implicit copy that must be made<br />
 if gdk_pixbuf_get_pixels() is called on a read-only pixbuf.</p>
 
 
@@ -6030,7 +6034,7 @@ if gdk_pixbuf_get_pixels() is called on a read-only pixbuf.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Rotates a pixbuf by a multiple of 90 degrees, and returns the
+    <p>Rotates a pixbuf by a multiple of 90 degrees, and returns the<br />
 result in a new pixbuf.</p>
 <p>If <code>angle</code> is 0, this function will return a copy of <code>src</code>.</p>
 
@@ -6094,9 +6098,9 @@ result in a new pixbuf.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The number of bytes between the start of a row and
+    <p>The number of bytes between the start of a row and<br />
 the start of the next row.</p>
-<p>This number must (obviously) be at least as large as the
+<p>This number must (obviously) be at least as large as the<br />
 width of the pixbuf.</p>
 
 
@@ -6136,9 +6140,9 @@ width of the pixbuf.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The number of bytes between the start of a row and
+    <p>The number of bytes between the start of a row and<br />
 the start of the next row.</p>
-<p>This number must (obviously) be at least as large as the
+<p>This number must (obviously) be at least as large as the<br />
 width of the pixbuf.</p>
 
 
@@ -6206,15 +6210,15 @@ width of the pixbuf.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Modifies saturation and optionally pixelates <code>src</code>, placing the result in
+    <p>Modifies saturation and optionally pixelates <code>src</code>, placing the result in<br />
 <code>dest</code>.</p>
-<p>The <code>src</code> and <code>dest</code> pixbufs must have the same image format, size, and
+<p>The <code>src</code> and <code>dest</code> pixbufs must have the same image format, size, and<br />
 rowstride.</p>
 <p>The <code>src</code> and <code>dest</code> arguments may be the same pixbuf with no ill effects.</p>
-<p>If <code>saturation</code> is 1.0 then saturation is not changed. If it's less than 1.0,
-saturation is reduced (the image turns toward grayscale); if greater than
+<p>If <code>saturation</code> is 1.0 then saturation is not changed. If it's less than 1.0,<br />
+saturation is reduced (the image turns toward grayscale); if greater than<br />
 1.0, saturation is increased (the image gets more vivid colors).</p>
-<p>If <code>pixelate</code> is <code>TRUE</code>, then pixels are faded in a checkerboard pattern to
+<p>If <code>pixelate</code> is <code>TRUE</code>, then pixels are faded in a checkerboard pattern to<br />
 create a pixelated image.</p>
 
 
@@ -6321,15 +6325,15 @@ create a pixelated image.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Modifies saturation and optionally pixelates <code>src</code>, placing the result in
+    <p>Modifies saturation and optionally pixelates <code>src</code>, placing the result in<br />
 <code>dest</code>.</p>
-<p>The <code>src</code> and <code>dest</code> pixbufs must have the same image format, size, and
+<p>The <code>src</code> and <code>dest</code> pixbufs must have the same image format, size, and<br />
 rowstride.</p>
 <p>The <code>src</code> and <code>dest</code> arguments may be the same pixbuf with no ill effects.</p>
-<p>If <code>saturation</code> is 1.0 then saturation is not changed. If it's less than 1.0,
-saturation is reduced (the image turns toward grayscale); if greater than
+<p>If <code>saturation</code> is 1.0 then saturation is not changed. If it's less than 1.0,<br />
+saturation is reduced (the image turns toward grayscale); if greater than<br />
 1.0, saturation is increased (the image gets more vivid colors).</p>
-<p>If <code>pixelate</code> is <code>TRUE</code>, then pixels are faded in a checkerboard pattern to
+<p>If <code>pixelate</code> is <code>TRUE</code>, then pixels are faded in a checkerboard pattern to<br />
 create a pixelated image.</p>
 
 
@@ -6465,7 +6469,7 @@ create a pixelated image.</p>
       
       
         &mdash;
-        <div class='inline'><p>The format to be saved. <code>&quot;jpeg&quot;</code>,
+        <div class='inline'><p>The format to be saved. <code>&quot;jpeg&quot;</code>,<br />
 <code>&quot;png&quot;</code>, <code>&quot;ico&quot;</code> and <code>&quot;bmp&quot;</code> are available by default.</p>
 </div>
       
@@ -6483,10 +6487,10 @@ create a pixelated image.</p>
       
       
         &mdash;
-        <div class='inline'><p>The options for
-saving. Key-value pairs except <code>:filename</code> key are passed to
-save logic. Available keys are depended on format. For
-example, <code>:quality =&gt; &quot;100&quot;</code> is available in <code>&quot;jpeg&quot;</code>
+        <div class='inline'><p>The options for<br />
+saving. Key-value pairs except <code>:filename</code> key are passed to<br />
+save logic. Available keys are depended on format. For<br />
+example, <code>:quality =&gt; &quot;100&quot;</code> is available in <code>&quot;jpeg&quot;</code><br />
 format.</p>
 </div>
       
@@ -6528,7 +6532,7 @@ format.</p>
       
       
         &mdash;
-        <div class='inline'><p>The saved data. If you specify
+        <div class='inline'><p>The saved data. If you specify<br />
 <code>:filename</code> option, it returns nothing.</p>
 </div>
       
@@ -6694,14 +6698,14 @@ format.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Saves pixbuf to a new buffer in format <code>type</code>, which is currently &quot;jpeg&quot;,
+    <p>Saves pixbuf to a new buffer in format <code>type</code>, which is currently &quot;jpeg&quot;,<br />
 &quot;png&quot;, &quot;tiff&quot;, &quot;ico&quot; or &quot;bmp&quot;.</p>
-<p>This is a convenience function that uses <code>gdk_pixbuf_save_to_callback()</code>
+<p>This is a convenience function that uses <code>gdk_pixbuf_save_to_callback()</code><br />
 to do the real work.</p>
-<p>Note that the buffer is not <code>NUL</code>-terminated and may contain embedded <code>NUL</code>
+<p>Note that the buffer is not <code>NUL</code>-terminated and may contain embedded <code>NUL</code><br />
 characters.</p>
-<p>If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, <code>FALSE</code> will be returned and <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> will be set to
-<code>NULL</code>. Possible errors include those in the <code>GDK_PIXBUF_ERROR</code>
+<p>If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, <code>FALSE</code> will be returned and <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> will be set to<br />
+<code>NULL</code>. Possible errors include those in the <code>GDK_PIXBUF_ERROR</code><br />
 domain.</p>
 <p>See <code>gdk_pixbuf_save()</code> for more details.</p>
 
@@ -6722,7 +6726,7 @@ domain.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to receive a pointer
+        <div class='inline'><p>location to receive a pointer<br />
 to the new buffer.</p>
 </div>
       
@@ -6823,7 +6827,7 @@ to the new buffer.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Vector version of <code>gdk_pixbuf_save_to_buffer()</code>.</p>
-<p>Saves pixbuf to a new buffer in format <!-- raw HTML omitted -->type<!-- raw HTML omitted -->, which is currently &quot;jpeg&quot;,
+<p>Saves pixbuf to a new buffer in format <!-- raw HTML omitted -->type<!-- raw HTML omitted -->, which is currently &quot;jpeg&quot;,<br />
 &quot;tiff&quot;, &quot;png&quot;, &quot;ico&quot; or &quot;bmp&quot;.</p>
 <p>See [method<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf.save_to_buffer] for more details.</p>
 
@@ -6943,12 +6947,12 @@ to the new buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Saves pixbuf in format <code>type</code> by feeding the produced data to a
+    <p>Saves pixbuf in format <code>type</code> by feeding the produced data to a<br />
 callback.</p>
-<p>This function can be used when you want to store the image to something
+<p>This function can be used when you want to store the image to something<br />
 other than a file, such as an in-memory buffer or a socket.</p>
-<p>If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, <code>FALSE</code> will be returned. Possible errors
-include those in the <code>GDK_PIXBUF_ERROR</code> domain and whatever the save
+<p>If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, <code>FALSE</code> will be returned. Possible errors<br />
+include those in the <code>GDK_PIXBUF_ERROR</code> domain and whatever the save<br />
 function generates.</p>
 <p>See [method<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf.save] for more details.</p>
 
@@ -6969,7 +6973,7 @@ function generates.</p>
       
       
         &mdash;
-        <div class='inline'><p>a function that is called to save each block of data that
+        <div class='inline'><p>a function that is called to save each block of data that<br />
 the save routine generates.</p>
 </div>
       
@@ -7070,7 +7074,7 @@ the save routine generates.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Vector version of <code>gdk_pixbuf_save_to_callback()</code>.</p>
-<p>Saves pixbuf to a callback in format <!-- raw HTML omitted -->type<!-- raw HTML omitted -->, which is currently &quot;jpeg&quot;,
+<p>Saves pixbuf to a callback in format <!-- raw HTML omitted -->type<!-- raw HTML omitted -->, which is currently &quot;jpeg&quot;,<br />
 &quot;png&quot;, &quot;tiff&quot;, &quot;ico&quot; or &quot;bmp&quot;.</p>
 <p>If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, <code>FALSE</code> will be returned.</p>
 <p>See [method<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf.save_to_callback] for more details.</p>
@@ -7092,7 +7096,7 @@ the save routine generates.</p>
       
       
         &mdash;
-        <div class='inline'><p>a function that is called to save each block of data that
+        <div class='inline'><p>a function that is called to save each block of data that<br />
 the save routine generates.</p>
 </div>
       
@@ -7193,11 +7197,11 @@ the save routine generates.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Saves <code>pixbuf</code> to an output stream.</p>
-<p>Supported file formats are currently &quot;jpeg&quot;, &quot;tiff&quot;, &quot;png&quot;, &quot;ico&quot; or
+<p>Supported file formats are currently &quot;jpeg&quot;, &quot;tiff&quot;, &quot;png&quot;, &quot;ico&quot; or<br />
 &quot;bmp&quot;. See <code>gdk_pixbuf_save_to_buffer()</code> for more details.</p>
-<p>The <code>cancellable</code> can be used to abort the operation from another
-thread. If the operation was cancelled, the error <code>G_IO_ERROR_CANCELLED</code>
-will be returned. Other possible errors are in the <code>GDK_PIXBUF_ERROR</code>
+<p>The <code>cancellable</code> can be used to abort the operation from another<br />
+thread. If the operation was cancelled, the error <code>G_IO_ERROR_CANCELLED</code><br />
+will be returned. Other possible errors are in the <code>GDK_PIXBUF_ERROR</code><br />
 and <code>G_IO_ERROR</code> domains.</p>
 <p>The stream is not closed at the end of this call.</p>
 
@@ -7296,7 +7300,7 @@ and <code>G_IO_ERROR</code> domains.</p>
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if the pixbuf was saved successfully, <code>FALSE</code> if an
+        <div class='inline'><p><code>TRUE</code> if the pixbuf was saved successfully, <code>FALSE</code> if an<br />
 error was set.</p>
 </div>
       
@@ -7319,10 +7323,10 @@ error was set.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Saves <code>pixbuf</code> to an output stream asynchronously.</p>
-<p>For more details see gdk_pixbuf_save_to_stream(), which is the synchronous
+<p>For more details see gdk_pixbuf_save_to_stream(), which is the synchronous<br />
 version of this function.</p>
 <p>When the operation is finished, <code>callback</code> will be called in the main thread.</p>
-<p>You can then call gdk_pixbuf_save_to_stream_finish() to get the result of
+<p>You can then call gdk_pixbuf_save_to_stream_finish() to get the result of<br />
 the operation.</p>
 
 
@@ -7453,7 +7457,7 @@ the operation.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Saves <code>pixbuf</code> to an output stream.</p>
-<p>Supported file formats are currently &quot;jpeg&quot;, &quot;tiff&quot;, &quot;png&quot;, &quot;ico&quot; or
+<p>Supported file formats are currently &quot;jpeg&quot;, &quot;tiff&quot;, &quot;png&quot;, &quot;ico&quot; or<br />
 &quot;bmp&quot;.</p>
 <p>See [method<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf.save_to_stream] for more details.</p>
 
@@ -7552,7 +7556,7 @@ the operation.</p>
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if the pixbuf was saved successfully, <code>FALSE</code> if an
+        <div class='inline'><p><code>TRUE</code> if the pixbuf was saved successfully, <code>FALSE</code> if an<br />
 error was set.</p>
 </div>
       
@@ -7575,10 +7579,10 @@ error was set.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Saves <code>pixbuf</code> to an output stream asynchronously.</p>
-<p>For more details see gdk_pixbuf_save_to_streamv(), which is the synchronous
+<p>For more details see gdk_pixbuf_save_to_streamv(), which is the synchronous<br />
 version of this function.</p>
 <p>When the operation is finished, <code>callback</code> will be called in the main thread.</p>
-<p>You can then call gdk_pixbuf_save_to_stream_finish() to get the result of
+<p>You can then call gdk_pixbuf_save_to_stream_finish() to get the result of<br />
 the operation.</p>
 
 
@@ -7829,7 +7833,7 @@ the operation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>TODO: test
+    <p>TODO: test<br />
 TODO: Improve API by Hash</p>
 
 
@@ -7884,7 +7888,7 @@ TODO: Improve API by Hash</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>TODO: test
+    <p>TODO: test<br />
 TODO: Improve API by Hash</p>
 
 
@@ -7931,16 +7935,16 @@ TODO: Improve API by Hash</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a transformation of the source image <!-- raw HTML omitted -->src<!-- raw HTML omitted --> by scaling by
-<!-- raw HTML omitted -->scale_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->scale_y<!-- raw HTML omitted --> then translating by <!-- raw HTML omitted -->offset_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->offset_y<!-- raw HTML omitted -->,
-then renders the rectangle (<!-- raw HTML omitted -->dest_x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_y<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_width<!-- raw HTML omitted -->,
-<!-- raw HTML omitted -->dest_height<!-- raw HTML omitted -->) of the resulting image onto the destination image
+    <p>Creates a transformation of the source image <!-- raw HTML omitted -->src<!-- raw HTML omitted --> by scaling by<br />
+<!-- raw HTML omitted -->scale_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->scale_y<!-- raw HTML omitted --> then translating by <!-- raw HTML omitted -->offset_x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->offset_y<!-- raw HTML omitted -->,<br />
+then renders the rectangle (<!-- raw HTML omitted -->dest_x<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_y<!-- raw HTML omitted -->, <!-- raw HTML omitted -->dest_width<!-- raw HTML omitted -->,<br />
+<!-- raw HTML omitted -->dest_height<!-- raw HTML omitted -->) of the resulting image onto the destination image<br />
 replacing the previous contents.</p>
-<p>Try to use gdk_pixbuf_scale_simple() first; this function is
-the industrial-strength power tool you can fall back to, if
+<p>Try to use gdk_pixbuf_scale_simple() first; this function is<br />
+the industrial-strength power tool you can fall back to, if<br />
 gdk_pixbuf_scale_simple() isn't powerful enough.</p>
-<p>If the source rectangle overlaps the destination rectangle on the
-same pixbuf, it will be overwritten during the scaling which
+<p>If the source rectangle overlaps the destination rectangle on the<br />
+same pixbuf, it will be overwritten during the scaling which<br />
 results in rendering artifacts.</p>
 
 
@@ -8144,18 +8148,18 @@ results in rendering artifacts.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new pixbuf containing a copy of <code>src</code> scaled to
+    <p>Create a new pixbuf containing a copy of <code>src</code> scaled to<br />
 <code>dest_width</code> x <code>dest_height</code>.</p>
 <p>This function leaves <code>src</code> unaffected.</p>
-<p>The <code>interp_type</code> should be <code>GDK_INTERP_NEAREST</code> if you want maximum
-speed (but when scaling down <code>GDK_INTERP_NEAREST</code> is usually unusably
-ugly). The default <code>interp_type</code> should be <code>GDK_INTERP_BILINEAR</code> which
+<p>The <code>interp_type</code> should be <code>GDK_INTERP_NEAREST</code> if you want maximum<br />
+speed (but when scaling down <code>GDK_INTERP_NEAREST</code> is usually unusably<br />
+ugly). The default <code>interp_type</code> should be <code>GDK_INTERP_BILINEAR</code> which<br />
 offers reasonable quality and speed.</p>
-<p>You can scale a sub-portion of <code>src</code> by creating a sub-pixbuf
+<p>You can scale a sub-portion of <code>src</code> by creating a sub-pixbuf<br />
 pointing into <code>src</code>; see [method<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf.new_subpixbuf].</p>
-<p>If <code>dest_width</code> and <code>dest_height</code> are equal to the width and height of
+<p>If <code>dest_width</code> and <code>dest_height</code> are equal to the width and height of<br />
 <code>src</code>, this function will return an unscaled copy of <code>src</code>.</p>
-<p>For more complicated scaling/alpha blending see [method<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf.scale]
+<p>For more complicated scaling/alpha blending see [method<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf.scale]<br />
 and [method<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf.composite].</p>
 
 
@@ -8245,7 +8249,7 @@ and [method<!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted -->.Pixbuf.co
 </h3><div class="docstring">
   <div class="discussion">
     <p>Attaches a key/value pair as an option to a <code>GdkPixbuf</code>.</p>
-<p>If <code>key</code> already exists in the list of options attached to the <code>pixbuf</code>,
+<p>If <code>key</code> already exists in the list of options attached to the <code>pixbuf</code>,<br />
 the new value is ignored and <code>FALSE</code> is returned.</p>
 
 
@@ -8456,7 +8460,7 @@ the new value is ignored and <code>FALSE</code> is returned.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

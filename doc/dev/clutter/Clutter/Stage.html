@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Stage";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,7 +101,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -154,6 +156,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1406,9 +1409,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -1420,6 +1425,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Group.html" title="Clutter::Group (class)">Group</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Group.html#get_nth_child-instance_method" title="Clutter::Group#get_nth_child (method)">#get_nth_child</a></span>, <span class='object_link'><a href="Group.html#n_children-instance_method" title="Clutter::Group#n_children (method)">#n_children</a></span>, <span class='object_link'><a href="Group.html#remove_all-instance_method" title="Clutter::Group#remove_all (method)">#remove_all</a></span></p>
 
+  
   
   
   
@@ -1445,14 +1451,14 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new, non-default stage. A non-default stage is a new
-top-level actor which can be used as another container. It works
-exactly like the default stage, but while clutter_stage_get_default()
-will always return the same instance, you will have to keep a pointer
+    <p>Creates a new, non-default stage. A non-default stage is a new<br />
+top-level actor which can be used as another container. It works<br />
+exactly like the default stage, but while clutter_stage_get_default()<br />
+will always return the same instance, you will have to keep a pointer<br />
 to any Clutter::Stage returned by clutter_stage_new().</p>
-<p>The ability to support multiple stages depends on the current
-backend. Use clutter_feature_available() and
-%CLUTTER_FEATURE_STAGE_MULTIPLE to check at runtime whether a
+<p>The ability to support multiple stages depends on the current<br />
+backend. Use clutter_feature_available() and<br />
+%CLUTTER_FEATURE_STAGE_MULTIPLE to check at runtime whether a<br />
 backend supports multiple stages.</p>
 
 
@@ -1483,18 +1489,18 @@ backend supports multiple stages.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves a Clutter::Stage singleton.</p>
-<p>This function is not as useful as it sounds, and will most likely
-by deprecated in the future. Application code should only create
-a Clutter::Stage instance using clutter_stage_new(), and manage the
+<p>This function is not as useful as it sounds, and will most likely<br />
+by deprecated in the future. Application code should only create<br />
+a Clutter::Stage instance using clutter_stage_new(), and manage the<br />
 lifetime of the stage manually.</p>
-<p>The default stage singleton has a platform-specific behaviour: on
-platforms without the %CLUTTER_FEATURE_STAGE_MULTIPLE feature flag
-set, the first Clutter::Stage instance will also be set to be the
-default stage instance, and this function will always return a
+<p>The default stage singleton has a platform-specific behaviour: on<br />
+platforms without the %CLUTTER_FEATURE_STAGE_MULTIPLE feature flag<br />
+set, the first Clutter::Stage instance will also be set to be the<br />
+default stage instance, and this function will always return a<br />
 pointer to it.</p>
-<p>On platforms with the %CLUTTER_FEATURE_STAGE_MULTIPLE feature flag
-set, the default stage will be created by the first call to this
-function, and every following call will return the same pointer to
+<p>On platforms with the %CLUTTER_FEATURE_STAGE_MULTIPLE feature flag<br />
+set, the default stage will be created by the first call to this<br />
+function, and every following call will return the same pointer to<br />
 it.</p>
 
 
@@ -1513,8 +1519,8 @@ it.</p>
       
       
         &mdash;
-        <div class='inline'><p>the main
-Clutter::Stage. You should never destroy or unref the returned
+        <div class='inline'><p>the main<br />
+Clutter::Stage. You should never destroy or unref the returned<br />
 actor.</p>
 </div>
       
@@ -1560,7 +1566,7 @@ actor.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the Clutter::Stage should accept focus, and false
+        <div class='inline'><p>true if the Clutter::Stage should accept focus, and false<br />
 otherwise</p>
 </div>
       
@@ -1900,8 +1906,8 @@ otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function essentially makes sure the right GL context is
-current for the passed stage. It is not intended to
+    <p>This function essentially makes sure the right GL context is<br />
+current for the passed stage. It is not intended to<br />
 be used by applications.</p>
 
 
@@ -1938,8 +1944,8 @@ be used by applications.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Ensures that <!-- raw HTML omitted -->stage<!-- raw HTML omitted --> is redrawn</p>
-<p>This function should not be called by applications: it is
-used when embedding a Clutter::Stage into a toolkit with
+<p>This function should not be called by applications: it is<br />
+used when embedding a Clutter::Stage into a toolkit with<br />
 another windowing system, like GTK+.</p>
 
 
@@ -1975,11 +1981,11 @@ another windowing system, like GTK+.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Ensures that the GL viewport is updated with the current
+    <p>Ensures that the GL viewport is updated with the current<br />
 stage window size.</p>
 <p>This function will queue a redraw of <!-- raw HTML omitted -->stage<!-- raw HTML omitted -->.</p>
-<p>This function should not be called by applications; it is used
-when embedding a Clutter::Stage into a toolkit with another
+<p>This function should not be called by applications; it is used<br />
+when embedding a Clutter::Stage into a toolkit with another<br />
 windowing system, like GTK+.</p>
 
 
@@ -2016,7 +2022,7 @@ windowing system, like GTK+.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>This function is used to emit an event on the main stage.</p>
-<p>You should rarely need to use this function, except for
+<p>You should rarely need to use this function, except for<br />
 synthetised events.</p>
 
 
@@ -2075,7 +2081,7 @@ synthetised events.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The settings for the GL &quot;fog&quot;, used only if Clutter::Stage:use-fog
+    <p>The settings for the GL &quot;fog&quot;, used only if Clutter::Stage:use-fog<br />
 is set to true</p>
 
 
@@ -2115,7 +2121,7 @@ is set to true</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The settings for the GL &quot;fog&quot;, used only if Clutter::Stage:use-fog
+    <p>The settings for the GL &quot;fog&quot;, used only if Clutter::Stage:use-fog<br />
 is set to true</p>
 
 
@@ -2222,15 +2228,15 @@ is set to true</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asks to place the stage window in the fullscreen or unfullscreen
+    <p>Asks to place the stage window in the fullscreen or unfullscreen<br />
 states.</p>
-<p>( Note that you shouldn't assume the window is definitely full screen
-afterward, because other entities (e.g. the user or window manager)
-could unfullscreen it again, and not all window managers honor
+<p>( Note that you shouldn't assume the window is definitely full screen<br />
+afterward, because other entities (e.g. the user or window manager)<br />
+could unfullscreen it again, and not all window managers honor<br />
 requests to fullscreen windows.</p>
-<p>If you want to receive notification of the fullscreen state you
-should either use the Clutter::Stage::fullscreen and
-Clutter::Stage::unfullscreen signals, or use the notify signal
+<p>If you want to receive notification of the fullscreen state you<br />
+should either use the Clutter::Stage::fullscreen and<br />
+Clutter::Stage::unfullscreen signals, or use the notify signal<br />
 for the Clutter::Stage:fullscreen-set property</p>
 
 
@@ -2390,9 +2396,9 @@ for the Clutter::Stage:fullscreen-set property</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks the scene at the coordinates <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> and returns a pointer
+    <p>Checks the scene at the coordinates <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> and returns a pointer<br />
 to the Clutter::Actor at those coordinates.</p>
-<p>By using <!-- raw HTML omitted -->pick_mode<!-- raw HTML omitted --> it is possible to control which actors will be
+<p>By using <!-- raw HTML omitted -->pick_mode<!-- raw HTML omitted --> it is possible to control which actors will be<br />
 painted and thus available.</p>
 
 
@@ -2460,7 +2466,7 @@ painted and thus available.</p>
       
       
         &mdash;
-        <div class='inline'><p>the actor at the specified coordinates,
+        <div class='inline'><p>the actor at the specified coordinates,<br />
 if any</p>
 </div>
       
@@ -2590,10 +2596,10 @@ if any</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the minimum size for a stage window as set using
+    <p>Retrieves the minimum size for a stage window as set using<br />
 clutter_stage_set_minimum_size().</p>
-<p>The returned size may not correspond to the actual minimum size and
-it is specific to the Clutter::Stage implementation inside the
+<p>The returned size may not correspond to the actual minimum size and<br />
+it is specific to the Clutter::Stage implementation inside the<br />
 Clutter backend</p>
 
 
@@ -2613,7 +2619,7 @@ Clutter backend</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the minimum width, in pixels,
+        <div class='inline'><p>return location for the minimum width, in pixels,<br />
 or nil</p>
 </div>
       
@@ -2629,7 +2635,7 @@ or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the minimum height, in pixels,
+        <div class='inline'><p>return location for the minimum height, in pixels,<br />
 or nil</p>
 </div>
       
@@ -2684,7 +2690,7 @@ or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for a
+        <div class='inline'><p>return location for a<br />
 Clutter::Perspective</p>
 </div>
       
@@ -2720,14 +2726,14 @@ Clutter::Perspective</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the bounds of the current redraw for <!-- raw HTML omitted -->stage<!-- raw HTML omitted --> in stage pixel
-coordinates. E.g., if only a single actor has queued a redraw then
-Clutter may redraw the stage with a clip so that it doesn't have to
-paint every pixel in the stage. This function would then return the
-bounds of that clip. An application can use this information to
-avoid some extra work if it knows that some regions of the stage
-aren't going to be painted. This should only be called while the
-stage is being painted. If there is no current redraw clip then
+    <p>Gets the bounds of the current redraw for <!-- raw HTML omitted -->stage<!-- raw HTML omitted --> in stage pixel<br />
+coordinates. E.g., if only a single actor has queued a redraw then<br />
+Clutter may redraw the stage with a clip so that it doesn't have to<br />
+paint every pixel in the stage. This function would then return the<br />
+bounds of that clip. An application can use this information to<br />
+avoid some extra work if it knows that some regions of the stage<br />
+aren't going to be painted. This should only be called while the<br />
+stage is being painted. If there is no current redraw clip then<br />
 this function will set <!-- raw HTML omitted -->clip<!-- raw HTML omitted --> to the full extents of the stage.</p>
 
 
@@ -2817,7 +2823,7 @@ this function will set <!-- raw HTML omitted -->clip<!-- raw HTML omitted --> to
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if <!-- raw HTML omitted -->stage<!-- raw HTML omitted --> is the default stage, or an instance created using
+    <p>Checks if <!-- raw HTML omitted -->stage<!-- raw HTML omitted --> is the default stage, or an instance created using<br />
 clutter_stage_new() but internally using the same implementation.</p>
 
 
@@ -2857,7 +2863,7 @@ clutter_stage_new() but internally using the same implementation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::Actor that will receive key events from the underlying
+    <p>The Clutter::Actor that will receive key events from the underlying<br />
 windowing system.</p>
 <p>If nil, the Clutter::Stage will receive the events.</p>
 
@@ -2898,7 +2904,7 @@ windowing system.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::Actor that will receive key events from the underlying
+    <p>The Clutter::Actor that will receive key events from the underlying<br />
 windowing system.</p>
 <p>If nil, the Clutter::Stage will receive the events.</p>
 
@@ -2985,7 +2991,7 @@ windowing system.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the per-actor motion event delivery is enabled
+        <div class='inline'><p>true if the per-actor motion event delivery is enabled<br />
 and false otherwise</p>
 </div>
       
@@ -3007,10 +3013,10 @@ and false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether per-actor motion events (and relative crossing
+    <p>Sets whether per-actor motion events (and relative crossing<br />
 events) should be disabled or not.</p>
 <p>The default is true.</p>
-<p>If <!-- raw HTML omitted -->enable<!-- raw HTML omitted --> is false the following signals will not be emitted
+<p>If <!-- raw HTML omitted -->enable<!-- raw HTML omitted --> is false the following signals will not be emitted<br />
 by the actors children of <!-- raw HTML omitted -->stage<!-- raw HTML omitted -->:</p>
 <ul>
 <li>Clutter::Actor::motion-event</li>
@@ -3018,11 +3024,11 @@ by the actors children of <!-- raw HTML omitted -->stage<!-- raw HTML omitted --
 <li>Clutter::Actor::leave-event</li>
 </ul>
 <p>The events will still be delivered to the Clutter::Stage.</p>
-<p>The main side effect of this function is that disabling the motion
-events will disable picking to detect the Clutter::Actor underneath
-the pointer for each motion event. This is useful, for instance,
-when dragging a Clutter::Actor across the <!-- raw HTML omitted -->stage<!-- raw HTML omitted -->: the actor underneath
-the pointer is not going to change, so it's meaningless to perform
+<p>The main side effect of this function is that disabling the motion<br />
+events will disable picking to detect the Clutter::Actor underneath<br />
+the pointer for each motion event. This is useful, for instance,<br />
+when dragging a Clutter::Actor across the <!-- raw HTML omitted -->stage<!-- raw HTML omitted -->: the actor underneath<br />
+the pointer is not going to change, so it's meaningless to perform<br />
 a pick.</p>
 
 
@@ -3042,7 +3048,7 @@ a pick.</p>
       
       
         &mdash;
-        <div class='inline'><p>true to enable the motion events delivery, and false
+        <div class='inline'><p>true to enable the motion events delivery, and false<br />
 otherwise</p>
 </div>
       
@@ -3096,7 +3102,7 @@ otherwise</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the stage should not clear itself on every paint
+        <div class='inline'><p>true if the stage should not clear itself on every paint<br />
 cycle, and false otherwise</p>
 </div>
       
@@ -3118,7 +3124,7 @@ cycle, and false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether or not the Clutter::Stage should clear its contents
+    <p>Whether or not the Clutter::Stage should clear its contents<br />
 before each paint cycle.</p>
 <p>See clutter_stage_set_no_clear_hint() for further information.</p>
 
@@ -3187,7 +3193,7 @@ before each paint cycle.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether or not the Clutter::Stage should clear its contents
+    <p>Whether or not the Clutter::Stage should clear its contents<br />
 before each paint cycle.</p>
 <p>See clutter_stage_set_no_clear_hint() for further information.</p>
 
@@ -3334,7 +3340,7 @@ before each paint cycle.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The parameters used for the perspective projection from 3D
+    <p>The parameters used for the perspective projection from 3D<br />
 coordinates to 2D</p>
 
 
@@ -3374,7 +3380,7 @@ coordinates to 2D</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The parameters used for the perspective projection from 3D
+    <p>The parameters used for the perspective projection from 3D<br />
 coordinates to 2D</p>
 
 
@@ -3443,7 +3449,7 @@ coordinates to 2D</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queues a redraw for the passed stage.</p>
-<p>Applications should call clutter_actor_queue_redraw() and not
+<p>Applications should call clutter_actor_queue_redraw() and not<br />
 this function.</p>
 
 
@@ -3479,9 +3485,9 @@ this function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Makes a screenshot of the stage in RGBA 8bit data, returns a
+    <p>Makes a screenshot of the stage in RGBA 8bit data, returns a<br />
 linear buffer with <!-- raw HTML omitted -->width<!-- raw HTML omitted --> * 4 as rowstride.</p>
-<p>The alpha data contained in the returned buffer is driver-dependent,
+<p>The alpha data contained in the returned buffer is driver-dependent,<br />
 and not guaranteed to hold any sensible value.</p>
 
 
@@ -3531,7 +3537,7 @@ and not guaranteed to hold any sensible value.</p>
       
       
         &mdash;
-        <div class='inline'><p>Width dimention of pixels to be read, or -1 for the
+        <div class='inline'><p>Width dimention of pixels to be read, or -1 for the<br />
 entire stage width</p>
 </div>
       
@@ -3547,7 +3553,7 @@ entire stage width</p>
       
       
         &mdash;
-        <div class='inline'><p>Height dimention of pixels to be read, or -1 for the
+        <div class='inline'><p>Height dimention of pixels to be read, or -1 for the<br />
 entire stage height</p>
 </div>
       
@@ -3566,8 +3572,8 @@ entire stage height</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to newly allocated memory with the buffer
-or nil if the read failed. Use g_free() on the returned data
+        <div class='inline'><p>a pointer to newly allocated memory with the buffer<br />
+or nil if the read failed. Use g_free() on the returned data<br />
 to release the resources it has allocated.</p>
 </div>
       
@@ -3589,11 +3595,11 @@ to release the resources it has allocated.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the minimum size for a stage window, if the default backend
+    <p>Sets the minimum size for a stage window, if the default backend<br />
 uses Clutter::Stage inside a window</p>
-<p>This is a convenience function, and it is equivalent to setting the
+<p>This is a convenience function, and it is equivalent to setting the<br />
 Clutter::Actor:min-width and #ClutterActor:min-height on <!-- raw HTML omitted -->stage<!-- raw HTML omitted --></p>
-<p>If the current size of <!-- raw HTML omitted -->stage<!-- raw HTML omitted --> is smaller than the minimum size, the
+<p>If the current size of <!-- raw HTML omitted -->stage<!-- raw HTML omitted --> is smaller than the minimum size, the<br />
 <!-- raw HTML omitted -->stage<!-- raw HTML omitted --> will be resized to the new <!-- raw HTML omitted -->width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted --></p>
 <p>This function has no effect if <!-- raw HTML omitted -->stage<!-- raw HTML omitted --> is fullscreen</p>
 
@@ -3717,7 +3723,7 @@ Clutter::Actor:min-width and #ClutterActor:min-height on <!-- raw HTML omitted -
       
       
         &mdash;
-        <div class='inline'><p>true if the motion events are being throttled,
+        <div class='inline'><p>true if the motion events are being throttled,<br />
 and false otherwise</p>
 </div>
       
@@ -3739,12 +3745,12 @@ and false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether motion events received between redraws should
-be throttled or not. If motion events are throttled, those
-events received by the windowing system between redraws will
-be compressed so that only the last event will be propagated
+    <p>Sets whether motion events received between redraws should<br />
+be throttled or not. If motion events are throttled, those<br />
+events received by the windowing system between redraws will<br />
+be compressed so that only the last event will be propagated<br />
 to the <!-- raw HTML omitted -->stage<!-- raw HTML omitted --> and its actors.</p>
-<p>This function should only be used if you want to have all
+<p>This function should only be used if you want to have all<br />
 the motion events delivered to your application code.</p>
 
 
@@ -3923,7 +3929,7 @@ the motion events delivered to your application code.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the stage should honour the opacity and the
+        <div class='inline'><p>true if the stage should honour the opacity and the<br />
 alpha channel of the stage color</p>
 </div>
       
@@ -3945,9 +3951,9 @@ alpha channel of the stage color</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::Stage should honour the alpha component of the
-Clutter::Stage:color property when painting. If Clutter is run under
-a compositing manager this will result in the stage being blended
+    <p>Whether the Clutter::Stage should honour the alpha component of the<br />
+Clutter::Stage:color property when painting. If Clutter is run under<br />
+a compositing manager this will result in the stage being blended<br />
 with the underlying window(s)</p>
 
 
@@ -4015,9 +4021,9 @@ with the underlying window(s)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the Clutter::Stage should honour the alpha component of the
-Clutter::Stage:color property when painting. If Clutter is run under
-a compositing manager this will result in the stage being blended
+    <p>Whether the Clutter::Stage should honour the alpha component of the<br />
+Clutter::Stage:color property when painting. If Clutter is run under<br />
+a compositing manager this will result in the stage being blended<br />
 with the underlying window(s)</p>
 
 
@@ -4096,8 +4102,8 @@ with the underlying window(s)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the stage should use a linear GL &quot;fog&quot; in creating the
-depth-cueing effect, to enhance the perception of depth by fading
+    <p>Whether the stage should use a linear GL &quot;fog&quot; in creating the<br />
+depth-cueing effect, to enhance the perception of depth by fading<br />
 actors farther from the viewpoint.</p>
 
 
@@ -4165,8 +4171,8 @@ actors farther from the viewpoint.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the stage should use a linear GL &quot;fog&quot; in creating the
-depth-cueing effect, to enhance the perception of depth by fading
+    <p>Whether the stage should use a linear GL &quot;fog&quot; in creating the<br />
+depth-cueing effect, to enhance the perception of depth by fading<br />
 actors farther from the viewpoint.</p>
 
 
@@ -4347,7 +4353,7 @@ actors farther from the viewpoint.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

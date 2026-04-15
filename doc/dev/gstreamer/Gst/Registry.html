@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::Registry";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gst/registry.rb</dd>
+    <dd>lib/gst/registry.rb
+</dd>
   </dl>
   
 </div>
@@ -188,6 +190,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -589,9 +592,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -620,11 +625,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>By default GStreamer will perform scanning and rebuilding of the
+    <p>By default GStreamer will perform scanning and rebuilding of the<br />
 registry file using a helper child process.</p>
-<p>Applications might want to disable this behaviour with the
-gst_registry_fork_set_enabled() function, in which case new plugins
-are scanned (and loaded) into the application process.
+<p>Applications might want to disable this behaviour with the<br />
+gst_registry_fork_set_enabled() function, in which case new plugins<br />
+are scanned (and loaded) into the application process.<br />
 rebuilding the registry.</p>
 
 
@@ -664,8 +669,8 @@ rebuilding the registry.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Applications might want to disable/enable spawning of a child helper process
-when rebuilding the registry. See gst_registry_fork_is_enabled() for more
+    <p>Applications might want to disable/enable spawning of a child helper process<br />
+when rebuilding the registry. See gst_registry_fork_is_enabled() for more<br />
 information.</p>
 
 
@@ -720,8 +725,8 @@ information.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the singleton plugin registry. The caller does not own a
-reference on the registry, as it is alive as long as GStreamer is
+    <p>Retrieves the singleton plugin registry. The caller does not own a<br />
+reference on the registry, as it is alive as long as GStreamer is<br />
 initialized.</p>
 
 
@@ -768,8 +773,8 @@ initialized.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Add the feature to the registry. The feature-added signal will be emitted.</p>
-<p><!-- raw HTML omitted -->feature<!-- raw HTML omitted -->'s reference count will be incremented, and any floating
-reference will be removed (see gst_object_ref_sink())
+<p><!-- raw HTML omitted -->feature<!-- raw HTML omitted -->'s reference count will be incremented, and any floating<br />
+reference will be removed (see gst_object_ref_sink())<br />
 MT safe.</p>
 
 
@@ -829,8 +834,8 @@ MT safe.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Add the plugin to the registry. The plugin-added signal will be emitted.</p>
-<p><!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->'s reference count will be incremented, and any floating
-reference will be removed (see gst_object_ref_sink())
+<p><!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->'s reference count will be incremented, and any floating<br />
+reference will be removed (see gst_object_ref_sink())<br />
 MT safe.</p>
 
 
@@ -889,9 +894,9 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether a plugin feature by the given name exists in
-<!-- raw HTML omitted -->registry<!-- raw HTML omitted --> and whether its version is at least the
-version required.
+    <p>Checks whether a plugin feature by the given name exists in<br />
+<!-- raw HTML omitted -->registry<!-- raw HTML omitted --> and whether its version is at least the<br />
+version required.<br />
 the same as the required version or newer, and false otherwise.</p>
 
 
@@ -995,10 +1000,10 @@ the same as the required version or newer, and false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Runs a filter against all features of the plugins in the registry
-and returns a GList with the results.
-If the first flag is set, only the first match is
-returned (as a list with a single object).
+    <p>Runs a filter against all features of the plugins in the registry<br />
+and returns a GList with the results.<br />
+If the first flag is set, only the first match is<br />
+returned (as a list with a single object).<br />
 MT safe.</p>
 
 
@@ -1066,7 +1071,7 @@ MT safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GList of
+        <div class='inline'><p>a #GList of<br />
 Gst::PluginFeature. Use gst_plugin_feature_list_free() after usage.</p>
 </div>
       
@@ -1088,7 +1093,7 @@ Gst::PluginFeature. Use gst_plugin_feature_list_free() after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the registry's feature list cookie. This changes
+    <p>Returns the registry's feature list cookie. This changes<br />
 every time a feature is added or removed from the registry.</p>
 
 
@@ -1128,7 +1133,7 @@ every time a feature is added or removed from the registry.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Find the pluginfeature with the given name and type in the registry.
+    <p>Find the pluginfeature with the given name and type in the registry.<br />
 MT safe.</p>
 
 
@@ -1181,8 +1186,8 @@ MT safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>the pluginfeature with the
-given name and type or nil if the plugin was not
+        <div class='inline'><p>the pluginfeature with the<br />
+given name and type or nil if the plugin was not<br />
 found. gst_object_unref() after usage.</p>
 </div>
       
@@ -1204,8 +1209,8 @@ found. gst_object_unref() after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Find the plugin with the given name in the registry.
-The plugin will be reffed; caller is responsible for unreffing.
+    <p>Find the plugin with the given name in the registry.<br />
+The plugin will be reffed; caller is responsible for unreffing.<br />
 MT safe.</p>
 
 
@@ -1243,8 +1248,8 @@ MT safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>the plugin with the given name
-or nil if the plugin was not found. gst_object_unref() after
+        <div class='inline'><p>the plugin with the given name<br />
+or nil if the plugin was not found. gst_object_unref() after<br />
 usage.</p>
 </div>
       
@@ -1266,7 +1271,7 @@ usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a #GList of Gst::PluginFeature of <!-- raw HTML omitted -->type<!-- raw HTML omitted -->.
+    <p>Retrieves a #GList of Gst::PluginFeature of <!-- raw HTML omitted -->type<!-- raw HTML omitted -->.<br />
 MT safe.</p>
 
 
@@ -1304,7 +1309,7 @@ MT safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GList of
+        <div class='inline'><p>a #GList of<br />
 Gst::PluginFeature of <!-- raw HTML omitted -->type<!-- raw HTML omitted -->. Use gst_plugin_feature_list_free() after use</p>
 </div>
       
@@ -1363,7 +1368,7 @@ Gst::PluginFeature of <!-- raw HTML omitted -->type<!-- raw HTML omitted -->. Us
       
       
         &mdash;
-        <div class='inline'><p>a #GList of
+        <div class='inline'><p>a #GList of<br />
 Gst::PluginFeature. Use gst_plugin_feature_list_free() after usage.</p>
 </div>
       
@@ -1427,7 +1432,7 @@ Gst::PluginFeature. Use gst_plugin_feature_list_free() after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Look up a plugin in the given registry with the given filename.
+    <p>Look up a plugin in the given registry with the given filename.<br />
 If found, plugin is reffed.</p>
 
 
@@ -1465,7 +1470,7 @@ If found, plugin is reffed.</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::Plugin if found, or
+        <div class='inline'><p>the Gst::Plugin if found, or<br />
 nil if not.  gst_object_unref() after usage.</p>
 </div>
       
@@ -1487,7 +1492,7 @@ nil if not.  gst_object_unref() after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Find a Gst::PluginFeature with <!-- raw HTML omitted -->name<!-- raw HTML omitted --> in <!-- raw HTML omitted -->registry<!-- raw HTML omitted -->.
+    <p>Find a Gst::PluginFeature with <!-- raw HTML omitted -->name<!-- raw HTML omitted --> in <!-- raw HTML omitted -->registry<!-- raw HTML omitted -->.<br />
 MT safe.</p>
 
 
@@ -1525,7 +1530,7 @@ MT safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>a Gst::PluginFeature with its refcount incremented,
+        <div class='inline'><p>a Gst::PluginFeature with its refcount incremented,<br />
 use gst_object_unref() after usage.</p>
 </div>
       
@@ -1547,11 +1552,11 @@ use gst_object_unref() after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Runs a filter against all plugins in the registry and returns a #GList with
-the results. If the first flag is set, only the first match is
-returned (as a list with a single object).
-Every plugin is reffed; use gst_plugin_list_free() after use, which
-will unref again.
+    <p>Runs a filter against all plugins in the registry and returns a #GList with<br />
+the results. If the first flag is set, only the first match is<br />
+returned (as a list with a single object).<br />
+Every plugin is reffed; use gst_plugin_list_free() after use, which<br />
+will unref again.<br />
 MT safe.</p>
 
 
@@ -1619,7 +1624,7 @@ MT safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GList of Gst::Plugin.
+        <div class='inline'><p>a #GList of Gst::Plugin.<br />
 Use gst_plugin_list_free() after usage.</p>
 </div>
       
@@ -1645,8 +1650,8 @@ Use gst_plugin_list_free() after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get a copy of all plugins registered in the given registry. The refcount
-of each element in the list in incremented.
+    <p>Get a copy of all plugins registered in the given registry. The refcount<br />
+of each element in the list in incremented.<br />
 MT safe.</p>
 
 
@@ -1665,7 +1670,7 @@ MT safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GList of Gst::Plugin.
+        <div class='inline'><p>a #GList of Gst::Plugin.<br />
 Use gst_plugin_list_free() after usage.</p>
 </div>
       
@@ -1797,7 +1802,7 @@ Use gst_plugin_list_free() after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Scan the given path for plugins to add to the registry. The syntax of the
+    <p>Scan the given path for plugins to add to the registry. The syntax of the<br />
 path is specific to the registry.</p>
 
 
@@ -1852,7 +1857,7 @@ path is specific to the registry.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

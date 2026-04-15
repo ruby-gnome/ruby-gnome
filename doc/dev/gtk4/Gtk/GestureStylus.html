@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::GestureStylus";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,7 +101,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/gesture-stylus.rb</dd>
+    <dd>lib/gtk4/gesture-stylus.rb
+</dd>
   </dl>
   
 </div>
@@ -351,9 +353,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -373,9 +377,11 @@
   
   
   
+  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Gesture.html" title="Gtk::Gesture (class)">Gesture</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Gesture.html#device-instance_method" title="Gtk::Gesture#device (method)">#device</a></span>, <span class='object_link'><a href="Gesture.html#get_bounding_box-instance_method" title="Gtk::Gesture#get_bounding_box (method)">#get_bounding_box</a></span>, <span class='object_link'><a href="Gesture.html#get_bounding_box_center-instance_method" title="Gtk::Gesture#get_bounding_box_center (method)">#get_bounding_box_center</a></span>, <span class='object_link'><a href="Gesture.html#get_last_event-instance_method" title="Gtk::Gesture#get_last_event (method)">#get_last_event</a></span>, <span class='object_link'><a href="Gesture.html#get_point-instance_method" title="Gtk::Gesture#get_point (method)">#get_point</a></span>, <span class='object_link'><a href="Gesture.html#get_sequence_state-instance_method" title="Gtk::Gesture#get_sequence_state (method)">#get_sequence_state</a></span>, <span class='object_link'><a href="Gesture.html#group-instance_method" title="Gtk::Gesture#group (method)">#group</a></span>, <span class='object_link'><a href="Gesture.html#handles_sequence-instance_method" title="Gtk::Gesture#handles_sequence (method)">#handles_sequence</a></span>, <span class='object_link'><a href="Gesture.html#is_active-instance_method" title="Gtk::Gesture#is_active (method)">#is_active</a></span>, <span class='object_link'><a href="Gesture.html#is_grouped_with-instance_method" title="Gtk::Gesture#is_grouped_with (method)">#is_grouped_with</a></span>, <span class='object_link'><a href="Gesture.html#is_recognized-instance_method" title="Gtk::Gesture#is_recognized (method)">#is_recognized</a></span>, <span class='object_link'><a href="Gesture.html#last_updated_sequence-instance_method" title="Gtk::Gesture#last_updated_sequence (method)">#last_updated_sequence</a></span>, <span class='object_link'><a href="Gesture.html#n_points-instance_method" title="Gtk::Gesture#n_points (method)">#n_points</a></span>, <span class='object_link'><a href="Gesture.html#n_points=-instance_method" title="Gtk::Gesture#n_points= (method)">#n_points=</a></span>, <span class='object_link'><a href="Gesture.html#sequences-instance_method" title="Gtk::Gesture#sequences (method)">#sequences</a></span>, <span class='object_link'><a href="Gesture.html#set_sequence_state-instance_method" title="Gtk::Gesture#set_sequence_state (method)">#set_sequence_state</a></span>, <span class='object_link'><a href="Gesture.html#state=-instance_method" title="Gtk::Gesture#state= (method)">#state=</a></span>, <span class='object_link'><a href="Gesture.html#ungroup-instance_method" title="Gtk::Gesture#ungroup (method)">#ungroup</a></span></p>
 
+  
   
   
   
@@ -496,9 +502,9 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the <code>GdkDeviceTool</code> currently driving input through this gesture.</p>
-<p>This function must be called from the handler of one of the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::down], [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::motion],
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::up] or [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::proximity]
+<p>This function must be called from the handler of one of the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::down], [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::motion],<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::up] or [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::proximity]<br />
 signals.</p>
 
 
@@ -539,9 +545,9 @@ signals.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the current values for the requested <!-- raw HTML omitted -->axes<!-- raw HTML omitted -->.</p>
-<p>This function must be called from the handler of one of the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::down], [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::motion],
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::up] or [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::proximity]
+<p>This function must be called from the handler of one of the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::down], [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::motion],<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::up] or [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::proximity]<br />
 signals.</p>
 
 
@@ -616,9 +622,9 @@ signals.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the current value for the requested <!-- raw HTML omitted -->axis<!-- raw HTML omitted -->.</p>
-<p>This function must be called from the handler of one of the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::down], [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::motion],
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::up] or [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::proximity]
+<p>This function must be called from the handler of one of the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::down], [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::motion],<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::up] or [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::proximity]<br />
 signals.</p>
 
 
@@ -693,13 +699,13 @@ signals.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the accumulated backlog of tracking information.</p>
-<p>By default, GTK will limit rate of input events. On stylus input
-where accuracy of strokes is paramount, this function returns the
-accumulated coordinate/timing state before the emission of the
+<p>By default, GTK will limit rate of input events. On stylus input<br />
+where accuracy of strokes is paramount, this function returns the<br />
+accumulated coordinate/timing state before the emission of the<br />
 current [Gtk.GestureStylus::motion] signal.</p>
-<p>This function may only be called within a [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::motion]
-signal handler, the state given in this signal and obtainable through
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus.get_axis] express the latest (most up-to-date)
+<p>This function may only be called within a [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus::motion]<br />
+signal handler, the state given in this signal and obtainable through<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.GestureStylus.get_axis] express the latest (most up-to-date)<br />
 state in motion history.</p>
 <p>The <!-- raw HTML omitted -->backlog<!-- raw HTML omitted --> is provided in chronological order.</p>
 
@@ -775,7 +781,7 @@ state in motion history.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks whether the gesture is for styluses only.</p>
-<p>Stylus-only gestures will signal events exclusively from stylus
+<p>Stylus-only gestures will signal events exclusively from stylus<br />
 input devices.</p>
 
 
@@ -917,7 +923,7 @@ input devices.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

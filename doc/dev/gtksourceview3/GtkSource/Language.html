@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::Language";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -456,6 +458,7 @@
 
       
     </ul>
+    
   
 
 
@@ -475,9 +478,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the metadata of <!-- raw HTML omitted -->language<!-- raw HTML omitted --> or nil if language does not contain the
-specified metadata property.
-The returned string is owned by <!-- raw HTML omitted -->language<!-- raw HTML omitted --> and should not be freed
+    <p>the metadata of <!-- raw HTML omitted -->language<!-- raw HTML omitted --> or nil if language does not contain the<br />
+specified metadata property.<br />
+The returned string is owned by <!-- raw HTML omitted -->language<!-- raw HTML omitted --> and should not be freed<br />
 or modified.</p>
 
 
@@ -536,10 +539,10 @@ or modified.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the ID of the style to use if the specified <!-- raw HTML omitted -->style_id<!-- raw HTML omitted -->
-is not present in the current style scheme.
-specified <!-- raw HTML omitted -->style_id<!-- raw HTML omitted --> is not present in the current style scheme or nil
-if the style has no fallback defined.
+    <p>Returns the ID of the style to use if the specified <!-- raw HTML omitted -->style_id<!-- raw HTML omitted --><br />
+is not present in the current style scheme.<br />
+specified <!-- raw HTML omitted -->style_id<!-- raw HTML omitted --> is not present in the current style scheme or nil<br />
+if the style has no fallback defined.<br />
 The returned string is owned by the <!-- raw HTML omitted -->language<!-- raw HTML omitted --> and must not be modified.</p>
 
 
@@ -598,9 +601,9 @@ The returned string is owned by the <!-- raw HTML omitted -->language<!-- raw HT
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the name of the style with ID <!-- raw HTML omitted -->style_id<!-- raw HTML omitted --> defined by this <!-- raw HTML omitted -->language<!-- raw HTML omitted -->.
-defined by this <!-- raw HTML omitted -->language<!-- raw HTML omitted --> or nil if the style has no name or there is no
-style with ID <!-- raw HTML omitted -->style_id<!-- raw HTML omitted --> defined by this <!-- raw HTML omitted -->language<!-- raw HTML omitted -->.
+    <p>Returns the name of the style with ID <!-- raw HTML omitted -->style_id<!-- raw HTML omitted --> defined by this <!-- raw HTML omitted -->language<!-- raw HTML omitted -->.<br />
+defined by this <!-- raw HTML omitted -->language<!-- raw HTML omitted --> or nil if the style has no name or there is no<br />
+style with ID <!-- raw HTML omitted -->style_id<!-- raw HTML omitted --> defined by this <!-- raw HTML omitted -->language<!-- raw HTML omitted -->.<br />
 The returned string is owned by the <!-- raw HTML omitted -->language<!-- raw HTML omitted --> and must not be modified.</p>
 
 
@@ -660,10 +663,10 @@ The returned string is owned by the <!-- raw HTML omitted -->language<!-- raw HT
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the globs associated to this language.</p>
-<p>This is just an utility wrapper around [method<!-- raw HTML omitted -->Language<!-- raw HTML omitted -->.get_metadata] to
-retrieve the &quot;globs&quot; metadata property and split it into an array.
-a newly-allocated nil terminated array containing the globs or nil
-if no globs are found.
+<p>This is just an utility wrapper around [method<!-- raw HTML omitted -->Language<!-- raw HTML omitted -->.get_metadata] to<br />
+retrieve the &quot;globs&quot; metadata property and split it into an array.<br />
+a newly-allocated nil terminated array containing the globs or nil<br />
+if no globs are found.<br />
 The returned array must be freed with g_strfreev().</p>
 
 
@@ -949,11 +952,11 @@ The returned array must be freed with g_strfreev().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the mime types associated to this language.</p>
-<p>This is just an utility wrapper around [method<!-- raw HTML omitted -->Language<!-- raw HTML omitted -->.get_metadata] to
-retrieve the &quot;mimetypes&quot; metadata property and split it into an
-array.
-a newly-allocated nil terminated array containing the mime types
-or nil if no mime types are found.
+<p>This is just an utility wrapper around [method<!-- raw HTML omitted -->Language<!-- raw HTML omitted -->.get_metadata] to<br />
+retrieve the &quot;mimetypes&quot; metadata property and split it into an<br />
+array.<br />
+a newly-allocated nil terminated array containing the mime types<br />
+or nil if no mime types are found.<br />
 The returned array must be freed with g_strfreev().</p>
 
 
@@ -1199,9 +1202,9 @@ The returned array must be freed with g_strfreev().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the ids of the styles defined by this <!-- raw HTML omitted -->language<!-- raw HTML omitted -->.
-a newly-allocated nil terminated array containing ids of the
-styles defined by this <!-- raw HTML omitted -->language<!-- raw HTML omitted --> or nil if no style is defined.
+    <p>Returns the ids of the styles defined by this <!-- raw HTML omitted -->language<!-- raw HTML omitted -->.<br />
+a newly-allocated nil terminated array containing ids of the<br />
+styles defined by this <!-- raw HTML omitted -->language<!-- raw HTML omitted --> or nil if no style is defined.<br />
 The returned array must be freed with g_strfreev().</p>
 
 
@@ -1233,7 +1236,7 @@ The returned array must be freed with g_strfreev().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

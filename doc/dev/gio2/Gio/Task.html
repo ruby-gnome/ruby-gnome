@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::Task";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -184,6 +186,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1046,6 +1049,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1062,19 +1066,19 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a #GTask acting on <!-- raw HTML omitted -->source_object<!-- raw HTML omitted -->, which will eventually be
-used to invoke <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> in the current
+    <p>Creates a #GTask acting on <!-- raw HTML omitted -->source_object<!-- raw HTML omitted -->, which will eventually be<br />
+used to invoke <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> in the current<br />
 [thread-default main context][g-main-context-push-thread-default].</p>
-<p>Call this in the &quot;start&quot; method of your asynchronous method, and
-pass the #GTask around throughout the asynchronous operation. You
-can use g_task_set_task_data() to attach task-specific data to the
+<p>Call this in the &quot;start&quot; method of your asynchronous method, and<br />
+pass the #GTask around throughout the asynchronous operation. You<br />
+can use g_task_set_task_data() to attach task-specific data to the<br />
 object, which you can retrieve later via g_task_get_task_data().</p>
-<p>By default, if <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled, then the return value of
-the task will always be %G_IO_ERROR_CANCELLED, even if the task had
-already completed before the cancellation. This allows for
-simplified handling in cases where cancellation may imply that
-other objects that the task depends on have been destroyed. If you
-do not want this behavior, you can use
+<p>By default, if <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled, then the return value of<br />
+the task will always be %G_IO_ERROR_CANCELLED, even if the task had<br />
+already completed before the cancellation. This allows for<br />
+simplified handling in cases where cancellation may imply that<br />
+other objects that the task depends on have been destroyed. If you<br />
+do not want this behavior, you can use<br />
 g_task_set_check_cancellable() to change it.</p>
 
 
@@ -1094,7 +1098,7 @@ g_task_set_check_cancellable() to change it.</p>
       
       
         &mdash;
-        <div class='inline'><p>the #GObject that owns
+        <div class='inline'><p>the #GObject that owns<br />
 this task, or nil.</p>
 </div>
       
@@ -1169,9 +1173,9 @@ this task, or nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks that <!-- raw HTML omitted -->result<!-- raw HTML omitted --> is a #GTask, and that <!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> is its
-source object (or that <!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> is nil and <!-- raw HTML omitted -->result<!-- raw HTML omitted --> has no
-source object). This can be used in g_return_if_fail() checks.
+    <p>Checks that <!-- raw HTML omitted -->result<!-- raw HTML omitted --> is a #GTask, and that <!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> is its<br />
+source object (or that <!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> is nil and <!-- raw HTML omitted -->result<!-- raw HTML omitted --> has no<br />
+source object). This can be used in g_return_if_fail() checks.<br />
 if not</p>
 
 
@@ -1206,7 +1210,7 @@ if not</p>
       
       
         &mdash;
-        <div class='inline'><p>the source object
+        <div class='inline'><p>the source object<br />
 expected to be associated with the task</p>
 </div>
       
@@ -1246,11 +1250,11 @@ expected to be associated with the task</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a #GTask and then immediately calls g_task_return_error()
-on it. Use this in the wrapper function of an asynchronous method
-when you want to avoid even calling the virtual method. You can
-then use g_async_result_is_tagged() in the finish method wrapper to
-check if the result there is tagged as having been created by the
+    <p>Creates a #GTask and then immediately calls g_task_return_error()<br />
+on it. Use this in the wrapper function of an asynchronous method<br />
+when you want to avoid even calling the virtual method. You can<br />
+then use g_async_result_is_tagged() in the finish method wrapper to<br />
+check if the result there is tagged as having been created by the<br />
 wrapper method, and deal with it appropriately if so.</p>
 <p>See also g_task_report_new_error().</p>
 
@@ -1271,7 +1275,7 @@ wrapper method, and deal with it appropriately if so.</p>
       
       
         &mdash;
-        <div class='inline'><p>the #GObject that owns
+        <div class='inline'><p>the #GObject that owns<br />
 this task, or nil.</p>
 </div>
       
@@ -1367,12 +1371,12 @@ this task, or nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a #GTask and then immediately calls
-g_task_return_new_error() on it. Use this in the wrapper function
-of an asynchronous method when you want to avoid even calling the
-virtual method. You can then use g_async_result_is_tagged() in the
-finish method wrapper to check if the result there is tagged as
-having been created by the wrapper method, and deal with it
+    <p>Creates a #GTask and then immediately calls<br />
+g_task_return_new_error() on it. Use this in the wrapper function<br />
+of an asynchronous method when you want to avoid even calling the<br />
+virtual method. You can then use g_async_result_is_tagged() in the<br />
+finish method wrapper to check if the result there is tagged as<br />
+having been created by the wrapper method, and deal with it<br />
 appropriately if so.</p>
 <p>See also g_task_report_error().</p>
 
@@ -1393,7 +1397,7 @@ appropriately if so.</p>
       
       
         &mdash;
-        <div class='inline'><p>the #GObject that owns
+        <div class='inline'><p>the #GObject that owns<br />
 this task, or nil.</p>
 </div>
       
@@ -1540,13 +1544,13 @@ this task, or nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A utility function for dealing with async operations where you need
-to wait for a #GSource to trigger. Attaches <!-- raw HTML omitted -->source<!-- raw HTML omitted --> to <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s
-GMain::Context with <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s <a href="iface.AsyncResult.html#io-priority">priority</a>,
-and sets <!-- raw HTML omitted -->source<!-- raw HTML omitted -->'s callback to <!-- raw HTML omitted -->callback<!-- raw HTML omitted -->, with <!-- raw HTML omitted -->task<!-- raw HTML omitted --> as the callback's
+    <p>A utility function for dealing with async operations where you need<br />
+to wait for a #GSource to trigger. Attaches <!-- raw HTML omitted -->source<!-- raw HTML omitted --> to <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s<br />
+GMain::Context with <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s <a href="iface.AsyncResult.html#io-priority">priority</a>,<br />
+and sets <!-- raw HTML omitted -->source<!-- raw HTML omitted -->'s callback to <!-- raw HTML omitted -->callback<!-- raw HTML omitted -->, with <!-- raw HTML omitted -->task<!-- raw HTML omitted --> as the callback's<br />
 <code>user_data</code>.</p>
-<p>It will set the <!-- raw HTML omitted -->source<!-- raw HTML omitted -->’s name to the task’s name (as set with
-g_task_set_name()), if one has been set on the task and the source doesn’t
+<p>It will set the <!-- raw HTML omitted -->source<!-- raw HTML omitted -->’s name to the task’s name (as set with<br />
+g_task_set_name()), if one has been set on the task and the source doesn’t<br />
 yet have a name.</p>
 <p>This takes a reference on <!-- raw HTML omitted -->task<!-- raw HTML omitted --> until <!-- raw HTML omitted -->source<!-- raw HTML omitted --> is destroyed.</p>
 
@@ -1656,7 +1660,7 @@ yet have a name.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s check-cancellable flag. See
+    <p>Gets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s check-cancellable flag. See<br />
 g_task_set_check_cancellable() for more details.</p>
 
 
@@ -1692,17 +1696,17 @@ g_task_set_check_cancellable() for more details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets or clears <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s check-cancellable flag. If this is true
-(the default), then g_task_propagate_pointer(), etc, and
-g_task_had_error() will check the task's #GCancellable first, and
-if it has been cancelled, then they will consider the task to have
-returned an &quot;Operation was cancelled&quot; error
-(%G_IO_ERROR_CANCELLED), regardless of any other error or return
+    <p>Sets or clears <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s check-cancellable flag. If this is true<br />
+(the default), then g_task_propagate_pointer(), etc, and<br />
+g_task_had_error() will check the task's #GCancellable first, and<br />
+if it has been cancelled, then they will consider the task to have<br />
+returned an &quot;Operation was cancelled&quot; error<br />
+(%G_IO_ERROR_CANCELLED), regardless of any other error or return<br />
 value the task may have had.</p>
-<p>If <!-- raw HTML omitted -->check_cancellable<!-- raw HTML omitted --> is false, then the #GTask will not check the
-cancellable itself, and it is up to <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s owner to do this (eg,
+<p>If <!-- raw HTML omitted -->check_cancellable<!-- raw HTML omitted --> is false, then the #GTask will not check the<br />
+cancellable itself, and it is up to <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s owner to do this (eg,<br />
 via g_task_return_error_if_cancelled()).</p>
-<p>If you are using g_task_set_return_on_cancel() as well, then
+<p>If you are using g_task_set_return_on_cancel() as well, then<br />
 you must leave check-cancellable set true.</p>
 
 
@@ -1722,7 +1726,7 @@ you must leave check-cancellable set true.</p>
       
       
         &mdash;
-        <div class='inline'><p>whether #GTask will check the state of
+        <div class='inline'><p>whether #GTask will check the state of<br />
 its #GCancellable for you.</p>
 </div>
       
@@ -1758,8 +1762,8 @@ its #GCancellable for you.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of #GTask:completed. This changes from false to true after
-the task’s callback is invoked, and will return false if called from inside
+    <p>Gets the value of #GTask:completed. This changes from false to true after<br />
+the task’s callback is invoked, and will return false if called from inside<br />
 the callback.</p>
 
 
@@ -1799,19 +1803,19 @@ the callback.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the task has completed, meaning its callback (if set) has been
+    <p>Whether the task has completed, meaning its callback (if set) has been<br />
 invoked.</p>
-<p>This can only happen after g_task_return_pointer(),
-g_task_return_error() or one of the other return functions have been called
-on the task. However, it is not guaranteed to happen immediately after
-those functions are called, as the task’s callback may need to be scheduled
+<p>This can only happen after g_task_return_pointer(),<br />
+g_task_return_error() or one of the other return functions have been called<br />
+on the task. However, it is not guaranteed to happen immediately after<br />
+those functions are called, as the task’s callback may need to be scheduled<br />
 to run in a different thread.</p>
-<p>That means it is <strong>not safe</strong> to use this property to track whether a
-return function has been called on the #GTask. Callers must do that
-tracking themselves, typically by linking the lifetime of the #GTask to the
+<p>That means it is <strong>not safe</strong> to use this property to track whether a<br />
+return function has been called on the #GTask. Callers must do that<br />
+tracking themselves, typically by linking the lifetime of the #GTask to the<br />
 control flow of their code.</p>
 <p>This property is guaranteed to change from false to true exactly once.</p>
-<p>The #GObject::notify signal for this change is emitted in the same main
+<p>The #GObject::notify signal for this change is emitted in the same main<br />
 context as the task’s callback, immediately after that callback is invoked.</p>
 
 
@@ -1879,19 +1883,19 @@ context as the task’s callback, immediately after that callback is invoked.</p
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the task has completed, meaning its callback (if set) has been
+    <p>Whether the task has completed, meaning its callback (if set) has been<br />
 invoked.</p>
-<p>This can only happen after g_task_return_pointer(),
-g_task_return_error() or one of the other return functions have been called
-on the task. However, it is not guaranteed to happen immediately after
-those functions are called, as the task’s callback may need to be scheduled
+<p>This can only happen after g_task_return_pointer(),<br />
+g_task_return_error() or one of the other return functions have been called<br />
+on the task. However, it is not guaranteed to happen immediately after<br />
+those functions are called, as the task’s callback may need to be scheduled<br />
 to run in a different thread.</p>
-<p>That means it is <strong>not safe</strong> to use this property to track whether a
-return function has been called on the #GTask. Callers must do that
-tracking themselves, typically by linking the lifetime of the #GTask to the
+<p>That means it is <strong>not safe</strong> to use this property to track whether a<br />
+return function has been called on the #GTask. Callers must do that<br />
+tracking themselves, typically by linking the lifetime of the #GTask to the<br />
 control flow of their code.</p>
 <p>This property is guaranteed to change from false to true exactly once.</p>
-<p>The #GObject::notify signal for this change is emitted in the same main
+<p>The #GObject::notify signal for this change is emitted in the same main<br />
 context as the task’s callback, immediately after that callback is invoked.</p>
 
 
@@ -1931,11 +1935,11 @@ context as the task’s callback, immediately after that callback is invoked.</p
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the GMain::Context that <!-- raw HTML omitted -->task<!-- raw HTML omitted --> will return its result in (that
-is, the context that was the
-[thread-default main context][g-main-context-push-thread-default]
+    <p>Gets the GMain::Context that <!-- raw HTML omitted -->task<!-- raw HTML omitted --> will return its result in (that<br />
+is, the context that was the<br />
+[thread-default main context][g-main-context-push-thread-default]<br />
 at the point when <!-- raw HTML omitted -->task<!-- raw HTML omitted --> was created).</p>
-<p>This will always return a non-nil value, even if the task's
+<p>This will always return a non-nil value, even if the task's<br />
 context is the default GMain::Context.</p>
 
 
@@ -2053,13 +2057,13 @@ context is the default GMain::Context.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->’s name, used in debugging and profiling. The name defaults to
+    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->’s name, used in debugging and profiling. The name defaults to<br />
 nil.</p>
-<p>The task name should describe in a human readable way what the task does.
-For example, ‘Open file’ or ‘Connect to network host’. It is used to set the
+<p>The task name should describe in a human readable way what the task does.<br />
+For example, ‘Open file’ or ‘Connect to network host’. It is used to set the<br />
 name of the #GSource used for idle completion of the task.</p>
-<p>This function may only be called before the <!-- raw HTML omitted -->task<!-- raw HTML omitted --> is first used in a thread
-other than the one it was constructed in. It is called automatically by
+<p>This function may only be called before the <!-- raw HTML omitted -->task<!-- raw HTML omitted --> is first used in a thread<br />
+other than the one it was constructed in. It is called automatically by<br />
 g_task_set_source_tag() if not called already.</p>
 
 
@@ -2153,11 +2157,11 @@ g_task_set_source_tag() if not called already.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s priority. If you do not call this, it will default to
+    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s priority. If you do not call this, it will default to<br />
 %G_PRIORITY_DEFAULT.</p>
-<p>This will affect the priority of #GSources created with
-g_task_attach_source() and the scheduling of tasks run in threads,
-and can also be explicitly retrieved later via
+<p>This will affect the priority of #GSources created with<br />
+g_task_attach_source() and the scheduling of tasks run in threads,<br />
+and can also be explicitly retrieved later via<br />
 g_task_get_priority().</p>
 
 
@@ -2213,9 +2217,9 @@ g_task_get_priority().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the result of <!-- raw HTML omitted -->task<!-- raw HTML omitted --> as a #gboolean.</p>
-<p>If the task resulted in an error, or was cancelled, then this will
+<p>If the task resulted in an error, or was cancelled, then this will<br />
 instead return false and set <!-- raw HTML omitted -->error<!-- raw HTML omitted -->.</p>
-<p>Since this method transfers ownership of the return value (or
+<p>Since this method transfers ownership of the return value (or<br />
 error) to the caller, you may only call it once.</p>
 
 
@@ -2256,9 +2260,9 @@ error) to the caller, you may only call it once.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the result of <!-- raw HTML omitted -->task<!-- raw HTML omitted --> as an integer (#gssize).</p>
-<p>If the task resulted in an error, or was cancelled, then this will
+<p>If the task resulted in an error, or was cancelled, then this will<br />
 instead return -1 and set <!-- raw HTML omitted -->error<!-- raw HTML omitted -->.</p>
-<p>Since this method transfers ownership of the return value (or
+<p>Since this method transfers ownership of the return value (or<br />
 error) to the caller, you may only call it once.</p>
 
 
@@ -2298,11 +2302,11 @@ error) to the caller, you may only call it once.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the result of <!-- raw HTML omitted -->task<!-- raw HTML omitted --> as a pointer, and transfers ownership
+    <p>Gets the result of <!-- raw HTML omitted -->task<!-- raw HTML omitted --> as a pointer, and transfers ownership<br />
 of that value to the caller.</p>
-<p>If the task resulted in an error, or was cancelled, then this will
+<p>If the task resulted in an error, or was cancelled, then this will<br />
 instead return nil and set <!-- raw HTML omitted -->error<!-- raw HTML omitted -->.</p>
-<p>Since this method transfers ownership of the return value (or
+<p>Since this method transfers ownership of the return value (or<br />
 error) to the caller, you may only call it once.</p>
 
 
@@ -2342,13 +2346,13 @@ error) to the caller, you may only call it once.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the result of <!-- raw HTML omitted -->task<!-- raw HTML omitted --> as a #GValue, and transfers ownership of
-that value to the caller. As with g_task_return_value(), this is
-a generic low-level method; g_task_propagate_pointer() and the like
+    <p>Gets the result of <!-- raw HTML omitted -->task<!-- raw HTML omitted --> as a #GValue, and transfers ownership of<br />
+that value to the caller. As with g_task_return_value(), this is<br />
+a generic low-level method; g_task_propagate_pointer() and the like<br />
 will usually be more useful for C code.</p>
-<p>If the task resulted in an error, or was cancelled, then this will
+<p>If the task resulted in an error, or was cancelled, then this will<br />
 instead set <!-- raw HTML omitted -->error<!-- raw HTML omitted --> and return false.</p>
-<p>Since this method transfers ownership of the return value (or
+<p>Since this method transfers ownership of the return value (or<br />
 error) to the caller, you may only call it once.</p>
 
 
@@ -2407,8 +2411,8 @@ error) to the caller, you may only call it once.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s result to <!-- raw HTML omitted -->result<!-- raw HTML omitted --> and completes the task (see
-g_task_return_pointer() for more discussion of exactly what this
+    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s result to <!-- raw HTML omitted -->result<!-- raw HTML omitted --> and completes the task (see<br />
+g_task_return_pointer() for more discussion of exactly what this<br />
 means).</p>
 
 
@@ -2463,15 +2467,15 @@ means).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s result to <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (which <!-- raw HTML omitted -->task<!-- raw HTML omitted --> assumes ownership of)
-and completes the task (see g_task_return_pointer() for more
+    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s result to <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (which <!-- raw HTML omitted -->task<!-- raw HTML omitted --> assumes ownership of)<br />
+and completes the task (see g_task_return_pointer() for more<br />
 discussion of exactly what this means).</p>
-<p>Note that since the task takes ownership of <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, and since the
-task may be completed before returning from g_task_return_error(),
-you cannot assume that <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is still valid after calling this.
-Call g_error_copy() on the error if you need to keep a local copy
+<p>Note that since the task takes ownership of <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, and since the<br />
+task may be completed before returning from g_task_return_error(),<br />
+you cannot assume that <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is still valid after calling this.<br />
+Call g_error_copy() on the error if you need to keep a local copy<br />
 as well.</p>
-<p>See also [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Task.return_new_error],
+<p>See also [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Task.return_new_error],<br />
 [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Task.return_new_error_literal].</p>
 
 
@@ -2526,9 +2530,9 @@ as well.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s #GCancellable has been cancelled, and if so, sets
-<!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s error accordingly and completes the task (see
-g_task_return_pointer() for more discussion of exactly what this
+    <p>Checks if <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s #GCancellable has been cancelled, and if so, sets<br />
+<!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s error accordingly and completes the task (see<br />
+g_task_return_pointer() for more discussion of exactly what this<br />
 means).</p>
 
 
@@ -2568,8 +2572,8 @@ means).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s result to <!-- raw HTML omitted -->result<!-- raw HTML omitted --> and completes the task (see
-g_task_return_pointer() for more discussion of exactly what this
+    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s result to <!-- raw HTML omitted -->result<!-- raw HTML omitted --> and completes the task (see<br />
+g_task_return_pointer() for more discussion of exactly what this<br />
 means).</p>
 
 
@@ -2624,9 +2628,9 @@ means).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s result to a new #GError created from <!-- raw HTML omitted -->domain<!-- raw HTML omitted -->, <!-- raw HTML omitted -->code<!-- raw HTML omitted -->,
-<!-- raw HTML omitted -->format<!-- raw HTML omitted -->, and the remaining arguments, and completes the task (see
-g_task_return_pointer() for more discussion of exactly what this
+    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s result to a new #GError created from <!-- raw HTML omitted -->domain<!-- raw HTML omitted -->, <!-- raw HTML omitted -->code<!-- raw HTML omitted -->,<br />
+<!-- raw HTML omitted -->format<!-- raw HTML omitted -->, and the remaining arguments, and completes the task (see<br />
+g_task_return_pointer() for more discussion of exactly what this<br />
 means).</p>
 <p>See also g_task_return_error().</p>
 
@@ -2727,9 +2731,9 @@ means).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->’s result to a new [type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Error] created from <!-- raw HTML omitted -->domain<!-- raw HTML omitted -->, <!-- raw HTML omitted -->code<!-- raw HTML omitted -->,
+    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->’s result to a new [type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Error] created from <!-- raw HTML omitted -->domain<!-- raw HTML omitted -->, <!-- raw HTML omitted -->code<!-- raw HTML omitted -->,<br />
 <!-- raw HTML omitted -->message<!-- raw HTML omitted --> and completes the task.</p>
-<p>See [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Task.return_pointer] for more discussion of exactly what
+<p>See [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Task.return_pointer] for more discussion of exactly what<br />
 ‘completing the task’ means.</p>
 <p>See also [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Task.return_new_error].</p>
 
@@ -2815,7 +2819,7 @@ means).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s return-on-cancel flag. See
+    <p>Gets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s return-on-cancel flag. See<br />
 g_task_set_return_on_cancel() for more details.</p>
 
 
@@ -2851,29 +2855,29 @@ g_task_set_return_on_cancel() for more details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets or clears <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s return-on-cancel flag. This is only
-meaningful for tasks run via g_task_run_in_thread() or
+    <p>Sets or clears <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s return-on-cancel flag. This is only<br />
+meaningful for tasks run via g_task_run_in_thread() or<br />
 g_task_run_in_thread_sync().</p>
-<p>If <!-- raw HTML omitted -->return_on_cancel<!-- raw HTML omitted --> is true, then cancelling <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s
-#GCancellable will immediately cause it to return, as though the
-task's GTask::ThreadFunc had called
+<p>If <!-- raw HTML omitted -->return_on_cancel<!-- raw HTML omitted --> is true, then cancelling <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s<br />
+#GCancellable will immediately cause it to return, as though the<br />
+task's GTask::ThreadFunc had called<br />
 g_task_return_error_if_cancelled() and then returned.</p>
-<p>This allows you to create a cancellable wrapper around an
-uninterruptible function. The GTask::ThreadFunc just needs to be
-careful that it does not modify any externally-visible state after
-it has been cancelled. To do that, the thread should call
-g_task_set_return_on_cancel() again to (atomically) set
-return-on-cancel false before making externally-visible changes;
-if the task gets cancelled before the return-on-cancel flag could
-be changed, g_task_set_return_on_cancel() will indicate this by
+<p>This allows you to create a cancellable wrapper around an<br />
+uninterruptible function. The GTask::ThreadFunc just needs to be<br />
+careful that it does not modify any externally-visible state after<br />
+it has been cancelled. To do that, the thread should call<br />
+g_task_set_return_on_cancel() again to (atomically) set<br />
+return-on-cancel false before making externally-visible changes;<br />
+if the task gets cancelled before the return-on-cancel flag could<br />
+be changed, g_task_set_return_on_cancel() will indicate this by<br />
 returning false.</p>
-<p>You can disable and re-enable this flag multiple times if you wish.
-If the task's #GCancellable is cancelled while return-on-cancel is
-false, then calling g_task_set_return_on_cancel() to set it true
+<p>You can disable and re-enable this flag multiple times if you wish.<br />
+If the task's #GCancellable is cancelled while return-on-cancel is<br />
+false, then calling g_task_set_return_on_cancel() to set it true<br />
 again will cause the task to be cancelled at that point.</p>
-<p>If the task's #GCancellable is already cancelled before you call
-g_task_run_in_thread()/g_task_run_in_thread_sync(), then the
-GTask::ThreadFunc will still be run (for consistency), but the task
+<p>If the task's #GCancellable is already cancelled before you call<br />
+g_task_run_in_thread()/g_task_run_in_thread_sync(), then the<br />
+GTask::ThreadFunc will still be run (for consistency), but the task<br />
 will also be completed right away.</p>
 
 
@@ -2893,7 +2897,7 @@ will also be completed right away.</p>
       
       
         &mdash;
-        <div class='inline'><p>whether the task returns automatically when
+        <div class='inline'><p>whether the task returns automatically when<br />
 it is cancelled.</p>
 </div>
       
@@ -2912,8 +2916,8 @@ it is cancelled.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s return-on-cancel flag was changed to
-match <!-- raw HTML omitted -->return_on_cancel<!-- raw HTML omitted -->. false if <!-- raw HTML omitted -->task<!-- raw HTML omitted --> has already been
+        <div class='inline'><p>true if <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s return-on-cancel flag was changed to<br />
+match <!-- raw HTML omitted -->return_on_cancel<!-- raw HTML omitted -->. false if <!-- raw HTML omitted -->task<!-- raw HTML omitted --> has already been<br />
 cancelled.</p>
 </div>
       
@@ -2935,21 +2939,21 @@ cancelled.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s result to <!-- raw HTML omitted -->result<!-- raw HTML omitted --> and completes the task. If <!-- raw HTML omitted -->result<!-- raw HTML omitted -->
-is not nil, then <!-- raw HTML omitted -->result_destroy<!-- raw HTML omitted --> will be used to free <!-- raw HTML omitted -->result<!-- raw HTML omitted --> if
-the caller does not take ownership of it with
+    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s result to <!-- raw HTML omitted -->result<!-- raw HTML omitted --> and completes the task. If <!-- raw HTML omitted -->result<!-- raw HTML omitted --><br />
+is not nil, then <!-- raw HTML omitted -->result_destroy<!-- raw HTML omitted --> will be used to free <!-- raw HTML omitted -->result<!-- raw HTML omitted --> if<br />
+the caller does not take ownership of it with<br />
 g_task_propagate_pointer().</p>
-<p>&quot;Completes the task&quot; means that for an ordinary asynchronous task
-it will either invoke the task's callback, or else queue that
-callback to be invoked in the proper GMain::Context, or in the next
-iteration of the current GMain::Context. For a task run via
-g_task_run_in_thread() or g_task_run_in_thread_sync(), calling this
-method will save <!-- raw HTML omitted -->result<!-- raw HTML omitted --> to be returned to the caller later, but
-the task will not actually be completed until the GTask::ThreadFunc
+<p>&quot;Completes the task&quot; means that for an ordinary asynchronous task<br />
+it will either invoke the task's callback, or else queue that<br />
+callback to be invoked in the proper GMain::Context, or in the next<br />
+iteration of the current GMain::Context. For a task run via<br />
+g_task_run_in_thread() or g_task_run_in_thread_sync(), calling this<br />
+method will save <!-- raw HTML omitted -->result<!-- raw HTML omitted --> to be returned to the caller later, but<br />
+the task will not actually be completed until the GTask::ThreadFunc<br />
 exits.</p>
-<p>Note that since the task may be completed before returning from
-g_task_return_pointer(), you cannot assume that <!-- raw HTML omitted -->result<!-- raw HTML omitted --> is still
-valid after calling this, unless you are still holding another
+<p>Note that since the task may be completed before returning from<br />
+g_task_return_pointer(), you cannot assume that <!-- raw HTML omitted -->result<!-- raw HTML omitted --> is still<br />
+valid after calling this, unless you are still holding another<br />
 reference on it.</p>
 
 
@@ -2969,7 +2973,7 @@ reference on it.</p>
       
       
         &mdash;
-        <div class='inline'><p>the pointer result of a task
+        <div class='inline'><p>the pointer result of a task<br />
 function</p>
 </div>
       
@@ -3020,14 +3024,14 @@ function</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s result to <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (which <!-- raw HTML omitted -->task<!-- raw HTML omitted --> assumes ownership of), with
-the message prefixed according to <!-- raw HTML omitted -->format<!-- raw HTML omitted -->, and completes the task
-(see g_task_return_pointer() for more discussion of exactly what this
+    <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s result to <!-- raw HTML omitted -->error<!-- raw HTML omitted --> (which <!-- raw HTML omitted -->task<!-- raw HTML omitted --> assumes ownership of), with<br />
+the message prefixed according to <!-- raw HTML omitted -->format<!-- raw HTML omitted -->, and completes the task<br />
+(see g_task_return_pointer() for more discussion of exactly what this<br />
 means).</p>
-<p>Note that since the task takes ownership of <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, and since the
-task may be completed before returning from g_task_return_prefixed_error(),
-you cannot assume that <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is still valid after calling this.
-Call g_error_copy() on the error if you need to keep a local copy
+<p>Note that since the task takes ownership of <!-- raw HTML omitted -->error<!-- raw HTML omitted -->, and since the<br />
+task may be completed before returning from g_task_return_prefixed_error(),<br />
+you cannot assume that <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is still valid after calling this.<br />
+Call g_error_copy() on the error if you need to keep a local copy<br />
 as well.</p>
 <p>See also g_task_return_error(), g_prefix_error().</p>
 
@@ -3114,10 +3118,10 @@ as well.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s result to <!-- raw HTML omitted -->result<!-- raw HTML omitted --> (by copying it) and completes the task.</p>
-<p>If <!-- raw HTML omitted -->result<!-- raw HTML omitted --> is nil then a #GValue of type %G_TYPE_POINTER
+<p>If <!-- raw HTML omitted -->result<!-- raw HTML omitted --> is nil then a #GValue of type %G_TYPE_POINTER<br />
 with a value of nil will be used for the result.</p>
-<p>This is a very generic low-level method intended primarily for use
-by language bindings; for C code, g_task_return_pointer() and the
+<p>This is a very generic low-level method intended primarily for use<br />
+by language bindings; for C code, g_task_return_pointer() and the<br />
 like will normally be much easier to use.</p>
 
 
@@ -3137,7 +3141,7 @@ like will normally be much easier to use.</p>
       
       
         &mdash;
-        <div class='inline'><p>the #GValue result of
+        <div class='inline'><p>the #GValue result of<br />
 a task function</p>
 </div>
       
@@ -3173,20 +3177,20 @@ a task function</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Runs <!-- raw HTML omitted -->task_func<!-- raw HTML omitted --> in another thread. When <!-- raw HTML omitted -->task_func<!-- raw HTML omitted --> returns, <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s
+    <p>Runs <!-- raw HTML omitted -->task_func<!-- raw HTML omitted --> in another thread. When <!-- raw HTML omitted -->task_func<!-- raw HTML omitted --> returns, <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s<br />
 GAsync::ReadyCallback will be invoked in <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s #GMainContext.</p>
 <p>This takes a ref on <!-- raw HTML omitted -->task<!-- raw HTML omitted --> until the task completes.</p>
 <p>See GTask::ThreadFunc for more details about how <!-- raw HTML omitted -->task_func<!-- raw HTML omitted --> is handled.</p>
-<p>Although GLib currently rate-limits the tasks queued via
-g_task_run_in_thread(), you should not assume that it will always
-do this. If you have a very large number of tasks to run (several tens of
-tasks), but don't want them to all run at once, you should only queue a
+<p>Although GLib currently rate-limits the tasks queued via<br />
+g_task_run_in_thread(), you should not assume that it will always<br />
+do this. If you have a very large number of tasks to run (several tens of<br />
+tasks), but don't want them to all run at once, you should only queue a<br />
 limited number of them (around ten) at a time.</p>
-<p>Be aware that if your task depends on other tasks to complete, use of this
-function could lead to a livelock if the other tasks also use this function
-and enough of them (around 10) execute in a dependency chain, as that will
-exhaust the thread pool. If this situation is possible, consider using a
-separate worker thread or thread pool explicitly, rather than using
+<p>Be aware that if your task depends on other tasks to complete, use of this<br />
+function could lead to a livelock if the other tasks also use this function<br />
+and enough of them (around 10) execute in a dependency chain, as that will<br />
+exhaust the thread pool. If this situation is possible, consider using a<br />
+separate worker thread or thread pool explicitly, rather than using<br />
 g_task_run_in_thread().</p>
 
 
@@ -3241,18 +3245,18 @@ g_task_run_in_thread().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Runs <!-- raw HTML omitted -->task_func<!-- raw HTML omitted --> in another thread, and waits for it to return or be
-cancelled. You can use g_task_propagate_pointer(), etc, afterward
+    <p>Runs <!-- raw HTML omitted -->task_func<!-- raw HTML omitted --> in another thread, and waits for it to return or be<br />
+cancelled. You can use g_task_propagate_pointer(), etc, afterward<br />
 to get the result of <!-- raw HTML omitted -->task_func<!-- raw HTML omitted -->.</p>
 <p>See GTask::ThreadFunc for more details about how <!-- raw HTML omitted -->task_func<!-- raw HTML omitted --> is handled.</p>
-<p>Normally this is used with tasks created with a nil
-<code>callback</code>, but note that even if the task does
-have a callback, it will not be invoked when <!-- raw HTML omitted -->task_func<!-- raw HTML omitted --> returns.
+<p>Normally this is used with tasks created with a nil<br />
+<code>callback</code>, but note that even if the task does<br />
+have a callback, it will not be invoked when <!-- raw HTML omitted -->task_func<!-- raw HTML omitted --> returns.<br />
 #GTask:completed will be set to true just before this function returns.</p>
-<p>Although GLib currently rate-limits the tasks queued via
-g_task_run_in_thread_sync(), you should not assume that it will
-always do this. If you have a very large number of tasks to run,
-but don't want them to all run at once, you should only queue a
+<p>Although GLib currently rate-limits the tasks queued via<br />
+g_task_run_in_thread_sync(), you should not assume that it will<br />
+always do this. If you have a very large number of tasks to run,<br />
+but don't want them to all run at once, you should only queue a<br />
 limited number of them at a time.</p>
 
 
@@ -3376,7 +3380,7 @@ limited number of them at a time.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the source object from <!-- raw HTML omitted -->task<!-- raw HTML omitted -->. Like
+    <p>Gets the source object from <!-- raw HTML omitted -->task<!-- raw HTML omitted -->. Like<br />
 g_async_result_get_source_object(), but does not ref the object.</p>
 
 
@@ -3456,14 +3460,14 @@ g_async_result_get_source_object(), but does not ref the object.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->'s source tag.</p>
-<p>You can use this to tag a task return
-value with a particular pointer (usually a pointer to the function
-doing the tagging) and then later check it using
-g_task_get_source_tag() (or g_async_result_is_tagged()) in the
-task's &quot;finish&quot; function, to figure out if the response came from a
+<p>You can use this to tag a task return<br />
+value with a particular pointer (usually a pointer to the function<br />
+doing the tagging) and then later check it using<br />
+g_task_get_source_tag() (or g_async_result_is_tagged()) in the<br />
+task's &quot;finish&quot; function, to figure out if the response came from a<br />
 particular place.</p>
-<p>A macro wrapper around this function will automatically set the
-task’s name to the string form of <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted --> if it’s not already
+<p>A macro wrapper around this function will automatically set the<br />
+task’s name to the string form of <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted --> if it’s not already<br />
 set, for convenience.</p>
 
 
@@ -3608,7 +3612,7 @@ set, for convenience.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

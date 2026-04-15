@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GOffice::FileSaver";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -217,6 +219,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -838,6 +841,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -854,8 +858,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates new GOFile::Saver object. Optional <!-- raw HTML omitted -->id<!-- raw HTML omitted --> will be used
-after registering it with go_file_saver_register or
+    <p>Creates new GOFile::Saver object. Optional <!-- raw HTML omitted -->id<!-- raw HTML omitted --> will be used<br />
+after registering it with go_file_saver_register or<br />
 go_file_saver_register_as_default function.</p>
 
 
@@ -964,8 +968,8 @@ go_file_saver_register_as_default function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finds file saver registered as default saver with the highest priority.
-Reference count for the saver is NOT incremented.
+    <p>Finds file saver registered as default saver with the highest priority.<br />
+Reference count for the saver is NOT incremented.<br />
 default saver.</p>
 
 
@@ -1005,7 +1009,7 @@ default saver.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Searches for file saver matching the given <!-- raw HTML omitted -->file_name<!-- raw HTML omitted -->, registered using
+    <p>Searches for file saver matching the given <!-- raw HTML omitted -->file_name<!-- raw HTML omitted -->, registered using<br />
 go_file_saver_register.</p>
 
 
@@ -1064,7 +1068,7 @@ go_file_saver_register.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Searches for file saver with given <!-- raw HTML omitted -->id<!-- raw HTML omitted -->, registered using
+    <p>Searches for file saver with given <!-- raw HTML omitted -->id<!-- raw HTML omitted -->, registered using<br />
 go_file_saver_register or register_file_opener_as_default.</p>
 
 
@@ -1922,8 +1926,8 @@ go_file_saver_register or register_file_opener_as_default.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Changes behaviour of the saver when saving a file. If <!-- raw HTML omitted -->overwrite<!-- raw HTML omitted --> is set
-to TRUE, existing file will be overwritten. Otherwise, the saver will
+    <p>Changes behaviour of the saver when saving a file. If <!-- raw HTML omitted -->overwrite<!-- raw HTML omitted --> is set<br />
+to TRUE, existing file will be overwritten. Otherwise, the saver will<br />
 report an error without saving anything.</p>
 
 
@@ -1943,7 +1947,7 @@ report an error without saving anything.</p>
       
       
         &mdash;
-        <div class='inline'><p>A boolean value saying whether the saver should overwrite
+        <div class='inline'><p>A boolean value saying whether the saver should overwrite<br />
 existing files.</p>
 </div>
       
@@ -1979,7 +1983,7 @@ existing files.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->fs<!-- raw HTML omitted --> saver to the list of available file savers, making it
+    <p>Adds <!-- raw HTML omitted -->fs<!-- raw HTML omitted --> saver to the list of available file savers, making it<br />
 available for the user when selecting file format for save.</p>
 
 
@@ -2015,10 +2019,10 @@ available for the user when selecting file format for save.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds <!-- raw HTML omitted -->fs<!-- raw HTML omitted --> saver to the list of available file savers, making it
-available for the user when selecting file format for save.
-The saver is also marked as default saver with given priority.
-When Gnumeric needs default file saver, it chooses the one with the
+    <p>Adds <!-- raw HTML omitted -->fs<!-- raw HTML omitted --> saver to the list of available file savers, making it<br />
+available for the user when selecting file format for save.<br />
+The saver is also marked as default saver with given priority.<br />
+When Gnumeric needs default file saver, it chooses the one with the<br />
 highest priority. Recommended range for <!-- raw HTML omitted -->priority<!-- raw HTML omitted --> is [0, 100].</p>
 
 
@@ -2073,10 +2077,10 @@ highest priority. Recommended range for <!-- raw HTML omitted -->priority<!-- ra
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Saves <!-- raw HTML omitted -->wbv<!-- raw HTML omitted --> and the workbook it is attached to into <!-- raw HTML omitted -->output<!-- raw HTML omitted --> stream.
-Results are reported using <!-- raw HTML omitted -->io_context<!-- raw HTML omitted --> object, use
-go_io_error_occurred to find out if operation was successful.
-It's possible that <!-- raw HTML omitted -->file_name<!-- raw HTML omitted --> is created and contain some data if
+    <p>Saves <!-- raw HTML omitted -->wbv<!-- raw HTML omitted --> and the workbook it is attached to into <!-- raw HTML omitted -->output<!-- raw HTML omitted --> stream.<br />
+Results are reported using <!-- raw HTML omitted -->io_context<!-- raw HTML omitted --> object, use<br />
+go_io_error_occurred to find out if operation was successful.<br />
+It's possible that <!-- raw HTML omitted -->file_name<!-- raw HTML omitted --> is created and contain some data if<br />
 operation fails, you should remove the file in that case.</p>
 
 
@@ -2519,7 +2523,7 @@ operation fails, you should remove the file in that case.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes <!-- raw HTML omitted -->fs<!-- raw HTML omitted --> saver from list of available file savers. Reference count
+    <p>Removes <!-- raw HTML omitted -->fs<!-- raw HTML omitted --> saver from list of available file savers. Reference count<br />
 for the saver is decremented inside the function.</p>
 
 
@@ -2551,7 +2555,7 @@ for the saver is decremented inside the function.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

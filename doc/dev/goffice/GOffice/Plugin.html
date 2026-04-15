@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GOffice::Plugin";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -183,6 +185,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -692,6 +695,7 @@
 
       
     </ul>
+    
   
 
 
@@ -711,8 +715,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Activates all plugins in the list. If some of the plugins cannot be
-activated, the function reports this via <!-- raw HTML omitted -->ret_error<!-- raw HTML omitted --> (errors don't
+    <p>Activates all plugins in the list. If some of the plugins cannot be<br />
+activated, the function reports this via <!-- raw HTML omitted -->ret_error<!-- raw HTML omitted --> (errors don't<br />
 affect plugins activated successfully).</p>
 
 
@@ -782,8 +786,8 @@ affect plugins activated successfully).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Deactivates all plugins in the list. If some of the plugins cannot be
-deactivated, the function reports this via <!-- raw HTML omitted -->ret_error<!-- raw HTML omitted --> (errors don't
+    <p>Deactivates all plugins in the list. If some of the plugins cannot be<br />
+deactivated, the function reports this via <!-- raw HTML omitted -->ret_error<!-- raw HTML omitted --> (errors don't<br />
 affect plugins deactivated successfully).</p>
 
 
@@ -893,8 +897,8 @@ affect plugins deactivated successfully).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Activates <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> together with all its dependencies.
-In case of error the plugin won't be activated and detailed error
+    <p>Activates <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> together with all its dependencies.<br />
+In case of error the plugin won't be activated and detailed error<br />
 information will be returned using <!-- raw HTML omitted -->ret_error<!-- raw HTML omitted -->.</p>
 
 
@@ -1071,9 +1075,9 @@ information will be returned using <!-- raw HTML omitted -->ret_error<!-- raw HT
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Dectivates <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->. Its dependencies will NOT be automatically
-deactivated.
-In case of error the plugin won't be deactivated and detailed error
+    <p>Dectivates <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->. Its dependencies will NOT be automatically<br />
+deactivated.<br />
+In case of error the plugin won't be deactivated and detailed error<br />
 information will be returned using <!-- raw HTML omitted -->ret_error<!-- raw HTML omitted -->.</p>
 
 
@@ -1128,8 +1132,8 @@ information will be returned using <!-- raw HTML omitted -->ret_error<!-- raw HT
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>plugins that <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> depends on.
-All these plugins will be automatically activated before activating the
+    <p>plugins that <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> depends on.<br />
+All these plugins will be automatically activated before activating the<br />
 <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> itself.</p>
 
 
@@ -1169,7 +1173,7 @@ All these plugins will be automatically activated before activating the
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns textual description of <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> or nil if description is not
+    <p>Returns textual description of <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> or nil if description is not<br />
 available.  Returned string stays valid during <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->'s lifetime.</p>
 
 
@@ -1188,7 +1192,7 @@ available.  Returned string stays valid during <!-- raw HTML omitted -->plugin<!
       
       
         &mdash;
-        <div class='inline'><p>textual description of <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> or nil if description is not
+        <div class='inline'><p>textual description of <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> or nil if description is not<br />
 available.  Returned string stays valid during <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->'s lifetime.</p>
 </div>
       
@@ -1210,7 +1214,7 @@ available.  Returned string stays valid during <!-- raw HTML omitted -->plugin<!
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The name of the directory in which <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> is located.
+    <p>The name of the directory in which <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> is located.<br />
 Returned string is != NULL and stays valid during <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->'s lifetime.</p>
 
 
@@ -1229,7 +1233,7 @@ Returned string is != NULL and stays valid during <!-- raw HTML omitted -->plugi
       
       
         &mdash;
-        <div class='inline'><p>the name of the directory in which <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> is located.
+        <div class='inline'><p>the name of the directory in which <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> is located.<br />
 Returned string is != NULL and stays valid during <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->'s lifetime.</p>
 </div>
       
@@ -1251,8 +1255,8 @@ Returned string is != NULL and stays valid during <!-- raw HTML omitted -->plugi
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the ID of <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> (unique string used for idenfification of
-plugin).  Returned string is != NULL and stays valid during <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->'s
+    <p>Returns the ID of <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> (unique string used for idenfification of<br />
+plugin).  Returned string is != NULL and stays valid during <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->'s<br />
 lifetime.</p>
 
 
@@ -1271,8 +1275,8 @@ lifetime.</p>
       
       
         &mdash;
-        <div class='inline'><p>the ID of <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> (unique string used for idenfification of
-plugin).  Returned string is != NULL and stays valid during <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->'s
+        <div class='inline'><p>the ID of <!-- raw HTML omitted -->plugin<!-- raw HTML omitted --> (unique string used for idenfification of<br />
+plugin).  Returned string is != NULL and stays valid during <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->'s<br />
 lifetime.</p>
 </div>
       
@@ -1421,8 +1425,8 @@ lifetime.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Loads base part of the plugin if it is not loaded and then loads given
-plugin service (prepares necessary part of the plugin for direct use).
+    <p>Loads base part of the plugin if it is not loaded and then loads given<br />
+plugin service (prepares necessary part of the plugin for direct use).<br />
 This function is intended for use by GOPluginService objects.</p>
 
 
@@ -1531,8 +1535,8 @@ This function is intended for use by GOPluginService objects.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Textual name of <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->. If the real name is not available
-for some reason, automatically generated string will be returned.
+    <p>Textual name of <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->. If the real name is not available<br />
+for some reason, automatically generated string will be returned.<br />
 Returned string is != NULL and stays valid during <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->'s lifetime.</p>
 
 
@@ -1551,8 +1555,8 @@ Returned string is != NULL and stays valid during <!-- raw HTML omitted -->plugi
       
       
         &mdash;
-        <div class='inline'><p>textual name of <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->. If the real name is not available
-for some reason, automatically generated string will be returned.
+        <div class='inline'><p>textual name of <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->. If the real name is not available<br />
+for some reason, automatically generated string will be returned.<br />
 Returned string is != NULL and stays valid during <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->'s lifetime.</p>
 </div>
       
@@ -1662,7 +1666,7 @@ Returned string is != NULL and stays valid during <!-- raw HTML omitted -->plugi
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns plugin's textdomain for use with textdomain(3) and d*gettext(3)
+    <p>Returns plugin's textdomain for use with textdomain(3) and d*gettext(3)<br />
 functions.</p>
 
 
@@ -1681,7 +1685,7 @@ functions.</p>
       
       
         &mdash;
-        <div class='inline'><p>plugin's textdomain for use with textdomain(3) and d*gettext(3)
+        <div class='inline'><p>plugin's textdomain for use with textdomain(3) and d*gettext(3)<br />
 functions.</p>
 </div>
       
@@ -1742,7 +1746,7 @@ functions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>...
+    <p>...<br />
 This function is intended for use by GOPluginService objects.</p>
 
 
@@ -1876,7 +1880,7 @@ This function is intended for use by GOPluginService objects.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

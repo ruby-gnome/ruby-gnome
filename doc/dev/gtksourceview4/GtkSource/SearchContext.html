@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::SearchContext";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -646,6 +648,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -662,9 +665,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new search context, associated with <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, and customized with
+    <p>Creates a new search context, associated with <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, and customized with<br />
 <!-- raw HTML omitted -->settings<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> is nil, a new [class<!-- raw HTML omitted -->SearchSettings<!-- raw HTML omitted -->] object will
+<p>If <!-- raw HTML omitted -->settings<!-- raw HTML omitted --> is nil, a new [class<!-- raw HTML omitted -->SearchSettings<!-- raw HTML omitted -->] object will<br />
 be created, that you can retrieve with [method<!-- raw HTML omitted -->SearchContext<!-- raw HTML omitted -->.get_settings].</p>
 
 
@@ -729,12 +732,12 @@ be created, that you can retrieve with [method<!-- raw HTML omitted -->SearchCon
 </h3><div class="docstring">
   <div class="discussion">
     <p>Synchronous backward search.</p>
-<p>It is recommended to use the asynchronous functions instead, to not block the user interface.
+<p>It is recommended to use the asynchronous functions instead, to not block the user interface.<br />
 However, if you are sure that the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is small, this function is more convenient to use.</p>
-<p>If the [property<!-- raw HTML omitted -->SearchSettings<!-- raw HTML omitted -->:wrap-around] property is false, this function
+<p>If the [property<!-- raw HTML omitted -->SearchSettings<!-- raw HTML omitted -->:wrap-around] property is false, this function<br />
 doesn't try to wrap around.</p>
-<p>The <!-- raw HTML omitted -->has_wrapped_around<!-- raw HTML omitted --> out parameter is set independently of whether a match
-is found. So if this function returns false, <!-- raw HTML omitted -->has_wrapped_around<!-- raw HTML omitted --> will have
+<p>The <!-- raw HTML omitted -->has_wrapped_around<!-- raw HTML omitted --> out parameter is set independently of whether a match<br />
+is found. So if this function returns false, <!-- raw HTML omitted -->has_wrapped_around<!-- raw HTML omitted --> will have<br />
 the same value as the [property<!-- raw HTML omitted -->SearchSettings<!-- raw HTML omitted -->:wrap-around] property.</p>
 
 
@@ -799,7 +802,7 @@ the same value as the [property<!-- raw HTML omitted -->SearchSettings<!-- raw H
       
       
         &mdash;
-        <div class='inline'><p>return location to know whether the
+        <div class='inline'><p>return location to know whether the<br />
 search has wrapped around, or nil.</p>
 </div>
       
@@ -841,8 +844,8 @@ search has wrapped around, or nil.</p>
   <div class="discussion">
     <p>The asynchronous version of [method<!-- raw HTML omitted -->SearchContext<!-- raw HTML omitted -->.backward].</p>
 <p>See the [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult] documentation to know how to use this function.</p>
-<p>If the operation is cancelled, the <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will only be called if
-<!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> was not nil. The method takes
+<p>If the operation is cancelled, the <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will only be called if<br />
+<!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> was not nil. The method takes<br />
 ownership of <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted -->, so you can unref it after calling this function.</p>
 
 
@@ -942,9 +945,9 @@ ownership of <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted -->, so y
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes a backward search started with
+    <p>Finishes a backward search started with<br />
 [method<!-- raw HTML omitted -->SearchContext<!-- raw HTML omitted -->.backward_async].</p>
-<p>See the documentation of [method<!-- raw HTML omitted -->SearchContext<!-- raw HTML omitted -->.backward] for more
+<p>See the documentation of [method<!-- raw HTML omitted -->SearchContext<!-- raw HTML omitted -->.backward] for more<br />
 details.</p>
 
 
@@ -1009,7 +1012,7 @@ details.</p>
       
       
         &mdash;
-        <div class='inline'><p>return location to know whether the
+        <div class='inline'><p>return location to know whether the<br />
 search has wrapped around, or nil.</p>
 </div>
       
@@ -1156,12 +1159,12 @@ search has wrapped around, or nil.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Synchronous forward search.</p>
-<p>It is recommended to use the asynchronous functions instead, to not block the user interface.
+<p>It is recommended to use the asynchronous functions instead, to not block the user interface.<br />
 However, if you are sure that the <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is small, this function is more convenient to use.</p>
-<p>If the [property<!-- raw HTML omitted -->SearchSettings<!-- raw HTML omitted -->:wrap-around] property is false, this function
+<p>If the [property<!-- raw HTML omitted -->SearchSettings<!-- raw HTML omitted -->:wrap-around] property is false, this function<br />
 doesn't try to wrap around.</p>
-<p>The <!-- raw HTML omitted -->has_wrapped_around<!-- raw HTML omitted --> out parameter is set independently of whether a match
-is found. So if this function returns false, <!-- raw HTML omitted -->has_wrapped_around<!-- raw HTML omitted --> will have
+<p>The <!-- raw HTML omitted -->has_wrapped_around<!-- raw HTML omitted --> out parameter is set independently of whether a match<br />
+is found. So if this function returns false, <!-- raw HTML omitted -->has_wrapped_around<!-- raw HTML omitted --> will have<br />
 the same value as the  [property<!-- raw HTML omitted -->SearchSettings<!-- raw HTML omitted -->:wrap-around] property.</p>
 
 
@@ -1226,7 +1229,7 @@ the same value as the  [property<!-- raw HTML omitted -->SearchSettings<!-- raw 
       
       
         &mdash;
-        <div class='inline'><p>return location to know whether the
+        <div class='inline'><p>return location to know whether the<br />
 search has wrapped around, or nil.</p>
 </div>
       
@@ -1268,8 +1271,8 @@ search has wrapped around, or nil.</p>
   <div class="discussion">
     <p>The asynchronous version of [method<!-- raw HTML omitted -->SearchContext<!-- raw HTML omitted -->.forward].</p>
 <p>See the [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult] documentation to know how to use this function.</p>
-<p>If the operation is cancelled, the <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will only be called if
-<!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> was not nil. The method takes
+<p>If the operation is cancelled, the <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will only be called if<br />
+<!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> was not nil. The method takes<br />
 ownership of <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted -->, so you can unref it after calling this function.</p>
 
 
@@ -1370,7 +1373,7 @@ ownership of <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted -->, so y
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finishes a forward search started with [method<!-- raw HTML omitted -->SearchContext<!-- raw HTML omitted -->.forward_async].</p>
-<p>See the documentation of [method<!-- raw HTML omitted -->SearchContext<!-- raw HTML omitted -->.forward] for more
+<p>See the documentation of [method<!-- raw HTML omitted -->SearchContext<!-- raw HTML omitted -->.forward] for more<br />
 details.</p>
 
 
@@ -1435,7 +1438,7 @@ details.</p>
       
       
         &mdash;
-        <div class='inline'><p>return location to know whether the
+        <div class='inline'><p>return location to know whether the<br />
 search has wrapped around, or nil.</p>
 </div>
       
@@ -1476,10 +1479,10 @@ search has wrapped around, or nil.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the position of a search occurrence.</p>
-<p>If the buffer is not already fully scanned, the position may be unknown,
-and -1 is returned. If 0 is returned, it means that this part of the buffer
-has already been scanned, and that <!-- raw HTML omitted -->match_start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->match_end<!-- raw HTML omitted --> don't delimit an occurrence.
-position 1 (not 0). Returns 0 if <!-- raw HTML omitted -->match_start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->match_end<!-- raw HTML omitted --> don't delimit
+<p>If the buffer is not already fully scanned, the position may be unknown,<br />
+and -1 is returned. If 0 is returned, it means that this part of the buffer<br />
+has already been scanned, and that <!-- raw HTML omitted -->match_start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->match_end<!-- raw HTML omitted --> don't delimit an occurrence.<br />
+position 1 (not 0). Returns 0 if <!-- raw HTML omitted -->match_start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->match_end<!-- raw HTML omitted --> don't delimit<br />
 an occurrence. Returns -1 if the position is not yet known.</p>
 
 
@@ -1804,8 +1807,8 @@ an occurrence. Returns -1 if the position is not yet known.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The total number of search occurrences. If the search is disabled,
-the value is 0. If the buffer is not already fully scanned, the value
+    <p>The total number of search occurrences. If the search is disabled,<br />
+the value is 0. If the buffer is not already fully scanned, the value<br />
 is -1.</p>
 
 
@@ -1845,8 +1848,8 @@ is -1.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The total number of search occurrences. If the search is disabled,
-the value is 0. If the buffer is not already fully scanned, the value
+    <p>The total number of search occurrences. If the search is disabled,<br />
+the value is 0. If the buffer is not already fully scanned, the value<br />
 is -1.</p>
 
 
@@ -1914,8 +1917,8 @@ is -1.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If the regex search pattern doesn't follow all the rules, this
-#GError property will be set. If the pattern is valid, the value is
+    <p>If the regex search pattern doesn't follow all the rules, this<br />
+#GError property will be set. If the pattern is valid, the value is<br />
 nil.</p>
 <p>Free with [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Error.free].</p>
 
@@ -1956,8 +1959,8 @@ nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If the regex search pattern doesn't follow all the rules, this
-#GError property will be set. If the pattern is valid, the value is
+    <p>If the regex search pattern doesn't follow all the rules, this<br />
+#GError property will be set. If the pattern is valid, the value is<br />
 nil.</p>
 <p>Free with [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Error.free].</p>
 
@@ -2026,12 +2029,12 @@ nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Replaces a search match by another text. If <!-- raw HTML omitted -->match_start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->match_end<!-- raw HTML omitted -->
+    <p>Replaces a search match by another text. If <!-- raw HTML omitted -->match_start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->match_end<!-- raw HTML omitted --><br />
 doesn't correspond to a search match, false is returned.</p>
-<p><!-- raw HTML omitted -->match_start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->match_end<!-- raw HTML omitted --> iters are revalidated to point to the replacement
+<p><!-- raw HTML omitted -->match_start<!-- raw HTML omitted --> and <!-- raw HTML omitted -->match_end<!-- raw HTML omitted --> iters are revalidated to point to the replacement<br />
 text boundaries.</p>
-<p>For a regular expression replacement, you can check if <!-- raw HTML omitted -->replace<!-- raw HTML omitted --> is valid by
-calling [func<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Regex.check_replacement]. The <!-- raw HTML omitted -->replace<!-- raw HTML omitted --> text can contain
+<p>For a regular expression replacement, you can check if <!-- raw HTML omitted -->replace<!-- raw HTML omitted --> is valid by<br />
+calling [func<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Regex.check_replacement]. The <!-- raw HTML omitted -->replace<!-- raw HTML omitted --> text can contain<br />
 backreferences.</p>
 
 
@@ -2137,8 +2140,8 @@ backreferences.</p>
   <div class="discussion">
     <p>Replaces all search matches by another text.</p>
 <p>It is a synchronous function, so it can block the user interface.</p>
-<p>For a regular expression replacement, you can check if <!-- raw HTML omitted -->replace<!-- raw HTML omitted --> is valid by
-calling [func<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Regex.check_replacement]. The <!-- raw HTML omitted -->replace<!-- raw HTML omitted --> text can contain
+<p>For a regular expression replacement, you can check if <!-- raw HTML omitted -->replace<!-- raw HTML omitted --> is valid by<br />
+calling [func<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Regex.check_replacement]. The <!-- raw HTML omitted -->replace<!-- raw HTML omitted --> text can contain<br />
 backreferences.</p>
 
 
@@ -2316,7 +2319,7 @@ backreferences.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

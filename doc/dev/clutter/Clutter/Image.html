@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Image";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,14 +95,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::ImageClass structure contains
+    <p>The Clutter::ImageClass structure contains<br />
 private data.</p>
 
 
@@ -149,6 +151,7 @@ private data.</p>
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -227,6 +230,7 @@ private data.</p>
 
       
     </ul>
+    
   
 
 
@@ -264,7 +268,7 @@ private data.</p>
       
       
         &mdash;
-        <div class='inline'><p>the newly created Clutter::Image instance.
+        <div class='inline'><p>the newly created Clutter::Image instance.<br />
 Use g_object_unref() when done.</p>
 </div>
       
@@ -292,14 +296,14 @@ Use g_object_unref() when done.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the image data to be display by <!-- raw HTML omitted -->image<!-- raw HTML omitted -->, using <!-- raw HTML omitted -->rect<!-- raw HTML omitted --> to indicate
+    <p>Sets the image data to be display by <!-- raw HTML omitted -->image<!-- raw HTML omitted -->, using <!-- raw HTML omitted -->rect<!-- raw HTML omitted --> to indicate<br />
 the position and size of the image data to be set.</p>
-<p>If the <!-- raw HTML omitted -->image<!-- raw HTML omitted --> does not have any image data set when this function is
-called, a new texture will be created with the size of the width and
-height of the rectangle, i.e. calling this function on a newly created
+<p>If the <!-- raw HTML omitted -->image<!-- raw HTML omitted --> does not have any image data set when this function is<br />
+called, a new texture will be created with the size of the width and<br />
+height of the rectangle, i.e. calling this function on a newly created<br />
 Clutter::Image will be the equivalent of calling clutter_image_set_data().</p>
 <p>If the image data was successfully loaded, the <!-- raw HTML omitted -->image<!-- raw HTML omitted --> will be invalidated.</p>
-<p>In case of error, the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> value will be set, and this function will
+<p>In case of error, the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> value will be set, and this function will<br />
 return false.</p>
 <p>The image data is copied in texture memory.</p>
 
@@ -383,7 +387,7 @@ return false.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the image data was successfully loaded,
+        <div class='inline'><p>true if the image data was successfully loaded,<br />
 and false otherwise.</p>
 </div>
       
@@ -407,9 +411,9 @@ and false otherwise.</p>
   <div class="discussion">
     <p>Sets the image data stored inside a #GBytes to be displayed by <!-- raw HTML omitted -->image<!-- raw HTML omitted -->.</p>
 <p>If the image data was successfully loaded, the <!-- raw HTML omitted -->image<!-- raw HTML omitted --> will be invalidated.</p>
-<p>In case of error, the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> value will be set, and this function will
+<p>In case of error, the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> value will be set, and this function will<br />
 return false.</p>
-<p>The image data contained inside the #GBytes is copied in texture memory,
+<p>The image data contained inside the #GBytes is copied in texture memory,<br />
 and no additional reference is acquired on the <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.</p>
 
 
@@ -507,7 +511,7 @@ and no additional reference is acquired on the <!-- raw HTML omitted -->data<!--
       
       
         &mdash;
-        <div class='inline'><p>true if the image data was successfully loaded,
+        <div class='inline'><p>true if the image data was successfully loaded,<br />
 and false otherwise.</p>
 </div>
       
@@ -531,11 +535,11 @@ and false otherwise.</p>
   <div class="discussion">
     <p>Sets the image data to be displayed by <!-- raw HTML omitted -->image<!-- raw HTML omitted -->.</p>
 <p>If the image data was successfully loaded, the <!-- raw HTML omitted -->image<!-- raw HTML omitted --> will be invalidated.</p>
-<p>In case of error, the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> value will be set, and this function will
+<p>In case of error, the <!-- raw HTML omitted -->error<!-- raw HTML omitted --> value will be set, and this function will<br />
 return false.</p>
 <p>The image data is copied in texture memory.</p>
-<p>The image data is expected to be a linear array of RGBA or RGB pixel data;
-how to retrieve that data is left to platform specific image loaders. For
+<p>The image data is expected to be a linear array of RGBA or RGB pixel data;<br />
+how to retrieve that data is left to platform specific image loaders. For<br />
 instance, if you use the GdkPixbuf library:</p>
 <pre class="code ruby"><code class="ruby">  ClutterContent *image = clutter_image_new ();
 
@@ -649,7 +653,7 @@ instance, if you use the GdkPixbuf library:</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the image data was successfully loaded,
+        <div class='inline'><p>true if the image data was successfully loaded,<br />
 and false otherwise.</p>
 </div>
       
@@ -667,7 +671,7 @@ and false otherwise.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

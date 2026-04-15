@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::FontChooser";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,17 +79,18 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkFontChooser</code> is an interface that can be implemented by widgets
+    <p><code>GtkFontChooser</code> is an interface that can be implemented by widgets<br />
 for choosing fonts.</p>
-<p>In GTK, the main objects that implement this interface are
-[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontChooserWidget], [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontChooserDialog] and
+<p>In GTK, the main objects that implement this interface are<br />
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontChooserWidget], [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontChooserDialog] and<br />
 [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontButton].</p>
 
 
@@ -685,6 +687,7 @@ for choosing fonts.</p>
 
       
     </ul>
+    
   
 
 
@@ -705,12 +708,12 @@ for choosing fonts.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the currently-selected font name.</p>
-<p>Note that this can be a different string than what you set with
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontChooser.set_font], as the font chooser widget may
-normalize font names and thus return a string with a different
-structure. For example, “Helvetica Italic Bold 12” could be
+<p>Note that this can be a different string than what you set with<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontChooser.set_font], as the font chooser widget may<br />
+normalize font names and thus return a string with a different<br />
+structure. For example, “Helvetica Italic Bold 12” could be<br />
 normalized to “Helvetica Bold Italic 12”.</p>
-<p>Use [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.equal] if you want to compare two
+<p>Use [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.equal] if you want to compare two<br />
 font descriptions.</p>
 
 
@@ -729,7 +732,7 @@ font descriptions.</p>
       
       
         &mdash;
-        <div class='inline'><p>A string with the name
+        <div class='inline'><p>A string with the name<br />
 of the current font</p>
 </div>
       
@@ -866,12 +869,12 @@ of the current font</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the currently-selected font.</p>
-<p>Note that this can be a different string than what you set with
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontChooser.set_font], as the font chooser widget may
-normalize font names and thus return a string with a different
-structure. For example, “Helvetica Italic Bold 12” could be
+<p>Note that this can be a different string than what you set with<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontChooser.set_font], as the font chooser widget may<br />
+normalize font names and thus return a string with a different<br />
+structure. For example, “Helvetica Italic Bold 12” could be<br />
 normalized to “Helvetica Bold Italic 12”.</p>
-<p>Use [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.equal] if you want to compare two
+<p>Use [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription.equal] if you want to compare two<br />
 font descriptions.</p>
 
 
@@ -890,7 +893,7 @@ font descriptions.</p>
       
       
         &mdash;
-        <div class='inline'><p>A <code>PangoFontDescription</code> for the
+        <div class='inline'><p>A <code>PangoFontDescription</code> for the<br />
 current font</p>
 </div>
       
@@ -966,7 +969,7 @@ current font</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the <code>PangoFontFace</code> representing the selected font group
+    <p>Gets the <code>PangoFontFace</code> representing the selected font group<br />
 details (i.e. family, slant, weight, width, etc).</p>
 <p>If the selected font is not installed, returns nil.</p>
 
@@ -986,7 +989,7 @@ details (i.e. family, slant, weight, width, etc).</p>
       
       
         &mdash;
-        <div class='inline'><p>A <code>PangoFontFace</code> representing the
+        <div class='inline'><p>A <code>PangoFontFace</code> representing the<br />
 selected font group details</p>
 </div>
       
@@ -1028,7 +1031,7 @@ selected font group details</p>
       
       
         &mdash;
-        <div class='inline'><p>A <code>PangoFontFamily</code> representing the
+        <div class='inline'><p>A <code>PangoFontFamily</code> representing the<br />
 selected font family</p>
 </div>
       
@@ -1051,8 +1054,8 @@ selected font family</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the currently-selected font features.</p>
-<p>The format of the returned string is compatible with the
-<a href="https://www.w3.org/TR/css-fonts-4/#font-rend-desc">CSS font-feature-settings property</a>.
+<p>The format of the returned string is compatible with the<br />
+<a href="https://www.w3.org/TR/css-fonts-4/#font-rend-desc">CSS font-feature-settings property</a>.<br />
 It can be passed to [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.AttrFontFeatures.new].</p>
 
 
@@ -1092,7 +1095,7 @@ It can be passed to [func<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the custom font map of this font chooser widget,
+    <p>Gets the custom font map of this font chooser widget,<br />
 or nil if it does not have one.</p>
 
 
@@ -1133,7 +1136,7 @@ or nil if it does not have one.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets a custom font map to use for this font chooser widget.</p>
-<p>A custom font map can be used to present application-specific
+<p>A custom font map can be used to present application-specific<br />
 fonts instead of or in addition to the normal system fonts.</p>
 <pre class="code c"><code class="c">FcConfig *config;
 PangoFontMap *fontmap;
@@ -1146,7 +1149,7 @@ pango_fc_font_map_set_config (PANGO_FC_FONT_MAP (fontmap), config);
 
 gtk_font_chooser_set_font_map (font_chooser, fontmap);
 </code></pre>
-<p>Note that other GTK widgets will only be able to use the
+<p>Note that other GTK widgets will only be able to use the<br />
 application-specific font if it is present in the font map they use:</p>
 <pre class="code c"><code class="c">context = gtk_widget_get_pango_context (label);
 pango_context_set_font_map (context, fontmap);
@@ -1222,7 +1225,7 @@ pango_context_set_font_map (context, fontmap);
       
       
         &mdash;
-        <div class='inline'><p>A n integer representing the selected font size,
+        <div class='inline'><p>A n integer representing the selected font size,<br />
 or -1 if no font size is selected.</p>
 </div>
       
@@ -1244,7 +1247,7 @@ or -1 if no font size is selected.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns A <code>PangoFontFace</code> representing the
+    <p>Returns A <code>PangoFontFace</code> representing the<br />
 selected font group details.</p>
 
 
@@ -1282,7 +1285,7 @@ selected font group details.</p>
       
       
         &mdash;
-        <div class='inline'><p>A <code>PangoFontFace</code> representing the
+        <div class='inline'><p>A <code>PangoFontFace</code> representing the<br />
 selected font group details</p>
 </div>
       
@@ -1304,7 +1307,7 @@ selected font group details</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns A <code>PangoFontFamily</code> representing the
+    <p>Returns A <code>PangoFontFamily</code> representing the<br />
 selected font family.</p>
 
 
@@ -1342,7 +1345,7 @@ selected font family.</p>
       
       
         &mdash;
-        <div class='inline'><p>A <code>PangoFontFamily</code> representing the
+        <div class='inline'><p>A <code>PangoFontFamily</code> representing the<br />
 selected font family</p>
 </div>
       
@@ -1422,7 +1425,7 @@ selected font family</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns A n integer representing the selected font size,
+    <p>Returns A n integer representing the selected font size,<br />
 or -1 if no font size is selected.</p>
 
 
@@ -1460,7 +1463,7 @@ or -1 if no font size is selected.</p>
       
       
         &mdash;
-        <div class='inline'><p>A n integer representing the selected font size,
+        <div class='inline'><p>A n integer representing the selected font size,<br />
 or -1 if no font size is selected.</p>
 </div>
       
@@ -2017,7 +2020,7 @@ or -1 if no font size is selected.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

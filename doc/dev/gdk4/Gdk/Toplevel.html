@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::Toplevel";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -86,8 +88,8 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>A <code>GdkToplevel</code> is a freestanding toplevel surface.</p>
-<p>The <code>GdkToplevel</code> interface provides useful APIs for interacting with
-the windowing system, such as controlling maximization and size of the
+<p>The <code>GdkToplevel</code> interface provides useful APIs for interacting with<br />
+the windowing system, such as controlling maximization and size of the<br />
 surface, setting icons and transient parents for dialogs.</p>
 
 
@@ -548,6 +550,7 @@ surface, setting icons and transient parents for dialogs.</p>
 
       
     </ul>
+    
   
 
 
@@ -647,7 +650,7 @@ surface, setting icons and transient parents for dialogs.</p>
       
       
         &mdash;
-        <div class='inline'><p>timestamp of mouse click that began the drag (use
+        <div class='inline'><p>timestamp of mouse click that began the drag (use<br />
 [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Event.get_time])</p>
 </div>
       
@@ -778,7 +781,7 @@ surface, setting icons and transient parents for dialogs.</p>
       
       
         &mdash;
-        <div class='inline'><p>timestamp of mouse click that began the drag (use
+        <div class='inline'><p>timestamp of mouse click that began the drag (use<br />
 [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Event.get_time])</p>
 </div>
       
@@ -815,8 +818,8 @@ surface, setting icons and transient parents for dialogs.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the toplevel to be decorated.</p>
-<p>Setting <!-- raw HTML omitted -->decorated<!-- raw HTML omitted --> to false hints the desktop environment
-that the surface has its own, client-side decorations and
+<p>Setting <!-- raw HTML omitted -->decorated<!-- raw HTML omitted --> to false hints the desktop environment<br />
+that the surface has its own, client-side decorations and<br />
 does not need to have window decorations added.</p>
 
 
@@ -872,7 +875,7 @@ does not need to have window decorations added.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the toplevel to be deletable.</p>
-<p>Setting <!-- raw HTML omitted -->deletable<!-- raw HTML omitted --> to true hints the desktop environment
+<p>Setting <!-- raw HTML omitted -->deletable<!-- raw HTML omitted --> to true hints the desktop environment<br />
 that it should offer the user a way to close the surface.</p>
 
 
@@ -928,8 +931,8 @@ that it should offer the user a way to close the surface.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets keyboard focus to <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->.</p>
-<p>In most cases, <a href="../gtk4/method.Window.present_with_time.html">gtk_window_present_with_time()</a>
-should be used on a <a href="../gtk4/class.Window.html">GtkWindow</a>, rather than
+<p>In most cases, <a href="../gtk4/method.Window.present_with_time.html">gtk_window_present_with_time()</a><br />
+should be used on a <a href="../gtk4/class.Window.html">GtkWindow</a>, rather than<br />
 calling this function.</p>
 
 
@@ -985,10 +988,10 @@ calling this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets a list of icons for the surface.</p>
-<p>One of these will be used to represent the surface in iconic form.
-The icon may be shown in window lists or task bars. Which icon
-size is shown depends on the window manager. The window manager
-can scale the icon but setting several size icons can give better
+<p>One of these will be used to represent the surface in iconic form.<br />
+The icon may be shown in window lists or task bars. Which icon<br />
+size is shown depends on the window manager. The window manager<br />
+can scale the icon but setting several size icons can give better<br />
 image quality.</p>
 <p>Note that some platforms don't support surface icons.</p>
 
@@ -1045,20 +1048,20 @@ image quality.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Requests that the <!-- raw HTML omitted -->toplevel<!-- raw HTML omitted --> inhibit the system shortcuts.</p>
-<p>This is asking the desktop environment/windowing system to let all
-keyboard events reach the surface, as long as it is focused, instead
+<p>This is asking the desktop environment/windowing system to let all<br />
+keyboard events reach the surface, as long as it is focused, instead<br />
 of triggering system actions.</p>
-<p>If granted, the rerouting remains active until the default shortcuts
-processing is restored with [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel.restore_system_shortcuts],
-or the request is revoked by the desktop environment, windowing system
+<p>If granted, the rerouting remains active until the default shortcuts<br />
+processing is restored with [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel.restore_system_shortcuts],<br />
+or the request is revoked by the desktop environment, windowing system<br />
 or the user.</p>
-<p>A typical use case for this API is remote desktop or virtual machine
-viewers which need to inhibit the default system keyboard shortcuts
-so that the remote session or virtual host gets those instead of the
+<p>A typical use case for this API is remote desktop or virtual machine<br />
+viewers which need to inhibit the default system keyboard shortcuts<br />
+so that the remote session or virtual host gets those instead of the<br />
 local environment.</p>
-<p>The windowing system or desktop environment may ask the user to grant
+<p>The windowing system or desktop environment may ask the user to grant<br />
 or deny the request or even choose to ignore the request entirely.</p>
-<p>The caller can be notified whenever the request is granted or revoked
+<p>The caller can be notified whenever the request is granted or revoked<br />
 by listening to the [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel:shortcuts-inhibited] property.</p>
 
 
@@ -1078,7 +1081,7 @@ by listening to the [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -
       
       
         &mdash;
-        <div class='inline'><p>the <code>GdkEvent</code> that is triggering the inhibit
+        <div class='inline'><p>the <code>GdkEvent</code> that is triggering the inhibit<br />
 request, or nil if none is available</p>
 </div>
       
@@ -1195,11 +1198,11 @@ request, or nil if none is available</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the toplevel to be modal.</p>
-<p>The application can use this hint to tell the
-window manager that a certain surface has modal
-behaviour. The window manager can use this information
+<p>The application can use this hint to tell the<br />
+window manager that a certain surface has modal<br />
+behaviour. The window manager can use this information<br />
 to handle modal surfaces in a special way.</p>
-<p>You should only use this on surfaces for which you have
+<p>You should only use this on surfaces for which you have<br />
 previously called [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel.set_transient_for].</p>
 
 
@@ -1255,12 +1258,12 @@ previously called [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.T
 </h3><div class="docstring">
   <div class="discussion">
     <p>Present <!-- raw HTML omitted -->toplevel<!-- raw HTML omitted --> after having processed the <code>GdkToplevelLayout</code> rules.</p>
-<p>If the toplevel was previously not showing, it will be showed,
+<p>If the toplevel was previously not showing, it will be showed,<br />
 otherwise it will change layout according to <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
-<p>GDK may emit the [signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel::compute-size] signal to let
-the user of this toplevel compute the preferred size of the toplevel
+<p>GDK may emit the [signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel::compute-size] signal to let<br />
+the user of this toplevel compute the preferred size of the toplevel<br />
 surface.</p>
-<p>Presenting is asynchronous and the specified layout parameters are not
+<p>Presenting is asynchronous and the specified layout parameters are not<br />
 guaranteed to be respected.</p>
 
 
@@ -1315,7 +1318,7 @@ guaranteed to be respected.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Restore default system keyboard shortcuts which were previously
+    <p>Restore default system keyboard shortcuts which were previously<br />
 inhibited.</p>
 <p>This undoes the effect of [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel.inhibit_system_shortcuts].</p>
 
@@ -1353,9 +1356,9 @@ inhibited.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asks the windowing system to show the window menu.</p>
-<p>The window menu is the menu shown when right-clicking the titlebar
-on traditional windows managed by the window manager. This is useful
-for windows using client-side decorations, activating it with a
+<p>The window menu is the menu shown when right-clicking the titlebar<br />
+on traditional windows managed by the window manager. This is useful<br />
+for windows using client-side decorations, activating it with a<br />
 right-click on the window decorations.</p>
 
 
@@ -1415,8 +1418,8 @@ right-click on the window decorations.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the startup notification ID.</p>
-<p>When using GTK, typically you should use
-<a href="../gtk4/method.Window.set_startup_id.html">gtk_window_set_startup_id()</a>
+<p>When using GTK, typically you should use<br />
+<a href="../gtk4/method.Window.set_startup_id.html">gtk_window_set_startup_id()</a><br />
 instead of this low-level function.</p>
 
 
@@ -1471,7 +1474,7 @@ instead of this low-level function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the bitwise or of the currently active surface state flags,
+    <p>Gets the bitwise or of the currently active surface state flags,<br />
 from the <code>GdkToplevelState</code> enumeration.</p>
 
 
@@ -1511,7 +1514,7 @@ from the <code>GdkToplevelState</code> enumeration.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the desktop environment supports
+    <p>Returns whether the desktop environment supports<br />
 tiled window states.</p>
 
 
@@ -1552,7 +1555,7 @@ tiled window states.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the title of a toplevel surface.</p>
-<p>The title maybe be displayed in the titlebar,
+<p>The title maybe be displayed in the titlebar,<br />
 in lists of windows, etc.</p>
 
 
@@ -1661,11 +1664,11 @@ in lists of windows, etc.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets a transient-for parent.</p>
-<p>Indicates to the window manager that <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> is a transient
-dialog associated with the application surface <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->. This
-allows the window manager to do things like center <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->
+<p>Indicates to the window manager that <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> is a transient<br />
+dialog associated with the application surface <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->. This<br />
+allows the window manager to do things like center <!-- raw HTML omitted -->surface<!-- raw HTML omitted --><br />
 on <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> and keep <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> above <!-- raw HTML omitted -->parent<!-- raw HTML omitted -->.</p>
-<p>See <a href="../gtk4/method.Window.set_transient_for.html">gtk_window_set_transient_for()</a>
+<p>See <a href="../gtk4/method.Window.set_transient_for.html">gtk_window_set_transient_for()</a><br />
 if you’re using <a href="../gtk4/class.Window.html">GtkWindow</a>.</p>
 
 
@@ -1716,7 +1719,7 @@ if you’re using <a href="../gtk4/class.Window.html">GtkWindow</a>.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

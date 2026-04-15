@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::DBusProxy";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -171,6 +173,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1033,6 +1036,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1049,21 +1053,21 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a proxy for accessing <!-- raw HTML omitted -->interface_name<!-- raw HTML omitted --> on the remote object
-at <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> owned by <!-- raw HTML omitted -->name<!-- raw HTML omitted --> at <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> and synchronously
-loads D-Bus properties unless the
+    <p>Creates a proxy for accessing <!-- raw HTML omitted -->interface_name<!-- raw HTML omitted --> on the remote object<br />
+at <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> owned by <!-- raw HTML omitted -->name<!-- raw HTML omitted --> at <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> and synchronously<br />
+loads D-Bus properties unless the<br />
 %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES flag is used.</p>
-<p>If the %G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS flag is not set, also sets up
-match rules for signals. Connect to the GDBus::Proxy::g-signal signal
+<p>If the %G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS flag is not set, also sets up<br />
+match rules for signals. Connect to the GDBus::Proxy::g-signal signal<br />
 to handle signals from the remote object.</p>
-<p>If both %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES and
-%G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS are set, this constructor is
+<p>If both %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES and<br />
+%G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS are set, this constructor is<br />
 guaranteed to return immediately without blocking.</p>
-<p>If <!-- raw HTML omitted -->name<!-- raw HTML omitted --> is a well-known name and the
-%G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START and %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION
-flags aren't set and no name owner currently exists, the message bus
+<p>If <!-- raw HTML omitted -->name<!-- raw HTML omitted --> is a well-known name and the<br />
+%G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START and %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION<br />
+flags aren't set and no name owner currently exists, the message bus<br />
 will be requested to launch a name owner for the name.</p>
-<p>This is a synchronous failable constructor. See g_dbus_proxy_new()
+<p>This is a synchronous failable constructor. See g_dbus_proxy_new()<br />
 and g_dbus_proxy_new_finish() for the asynchronous version.</p>
 <p>GDBus::Proxy is used in this [example][gdbus-wellknown-proxy].</p>
 
@@ -1203,24 +1207,24 @@ and g_dbus_proxy_new_finish() for the asynchronous version.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a proxy for accessing <!-- raw HTML omitted -->interface_name<!-- raw HTML omitted --> on the remote object
-at <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> owned by <!-- raw HTML omitted -->name<!-- raw HTML omitted --> at <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> and asynchronously
-loads D-Bus properties unless the
-%G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES flag is used. Connect to
-the GDBus::Proxy::g-properties-changed signal to get notified about
+    <p>Creates a proxy for accessing <!-- raw HTML omitted -->interface_name<!-- raw HTML omitted --> on the remote object<br />
+at <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> owned by <!-- raw HTML omitted -->name<!-- raw HTML omitted --> at <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> and asynchronously<br />
+loads D-Bus properties unless the<br />
+%G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES flag is used. Connect to<br />
+the GDBus::Proxy::g-properties-changed signal to get notified about<br />
 property changes.</p>
-<p>If the %G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS flag is not set, also sets up
-match rules for signals. Connect to the GDBus::Proxy::g-signal signal
+<p>If the %G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS flag is not set, also sets up<br />
+match rules for signals. Connect to the GDBus::Proxy::g-signal signal<br />
 to handle signals from the remote object.</p>
-<p>If both %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES and
-%G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS are set, this constructor is
+<p>If both %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES and<br />
+%G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS are set, this constructor is<br />
 guaranteed to complete immediately without blocking.</p>
-<p>If <!-- raw HTML omitted -->name<!-- raw HTML omitted --> is a well-known name and the
-%G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START and %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION
-flags aren't set and no name owner currently exists, the message bus
+<p>If <!-- raw HTML omitted -->name<!-- raw HTML omitted --> is a well-known name and the<br />
+%G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START and %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION<br />
+flags aren't set and no name owner currently exists, the message bus<br />
 will be requested to launch a name owner for the name.</p>
-<p>This is a failable asynchronous constructor - when the proxy is
-ready, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked and you can use
+<p>This is a failable asynchronous constructor - when the proxy is<br />
+ready, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked and you can use<br />
 g_dbus_proxy_new_finish() to get the result.</p>
 <p>See g_dbus_proxy_new_sync() and for a synchronous version of this constructor.</p>
 <p>GDBus::Proxy is used in this [example][gdbus-wellknown-proxy].</p>
@@ -1596,9 +1600,9 @@ g_dbus_proxy_new_finish() to get the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>A
-nil-terminated array of strings or nil if
-<!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> has no cached properties. Free the returned array with
+        <div class='inline'><p>A<br />
+nil-terminated array of strings or nil if<br />
+<!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> has no cached properties. Free the returned array with<br />
 g_strfreev().</p>
 </div>
       
@@ -1621,16 +1625,16 @@ g_strfreev().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asynchronously invokes the <!-- raw HTML omitted -->method_name<!-- raw HTML omitted --> method on <!-- raw HTML omitted -->proxy<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->method_name<!-- raw HTML omitted --> contains any dots, then <!-- raw HTML omitted -->name<!-- raw HTML omitted --> is split into interface and
-method name parts. This allows using <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> for invoking methods on
+<p>If <!-- raw HTML omitted -->method_name<!-- raw HTML omitted --> contains any dots, then <!-- raw HTML omitted -->name<!-- raw HTML omitted --> is split into interface and<br />
+method name parts. This allows using <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> for invoking methods on<br />
 other interfaces.</p>
-<p>If the GDBus::Connection associated with <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> is closed then
-the operation will fail with %G_IO_ERROR_CLOSED. If
-<!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is canceled, the operation will fail with
-%G_IO_ERROR_CANCELLED. If <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> contains a value not
-compatible with the D-Bus protocol, the operation fails with
+<p>If the GDBus::Connection associated with <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> is closed then<br />
+the operation will fail with %G_IO_ERROR_CLOSED. If<br />
+<!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is canceled, the operation will fail with<br />
+%G_IO_ERROR_CANCELLED. If <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> contains a value not<br />
+compatible with the D-Bus protocol, the operation fails with<br />
 %G_IO_ERROR_INVALID_ARGUMENT.</p>
-<p>If the <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> #GVariant is floating, it is consumed. This allows
+<p>If the <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> #GVariant is floating, it is consumed. This allows<br />
 convenient 'inline' use of g_variant_new(), e.g.:</p>
 <pre class="code ruby"><code class="ruby"> g_dbus_proxy_call (proxy,
                     &quot;TwoStrings&quot;,
@@ -1643,18 +1647,18 @@ convenient 'inline' use of g_variant_new(), e.g.:</p>
                     (GAsyncReadyCallback) two_strings_done,
                     &amp;data);
 </code></pre>
-<p>If <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> has an expected interface (see
-GDBus::Proxy:g-interface-info) and <!-- raw HTML omitted -->method_name<!-- raw HTML omitted --> is referenced by it,
+<p>If <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> has an expected interface (see<br />
+GDBus::Proxy:g-interface-info) and <!-- raw HTML omitted -->method_name<!-- raw HTML omitted --> is referenced by it,<br />
 then the return value is checked against the return type.</p>
-<p>This is an asynchronous method. When the operation is finished,
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the
-[thread-default main context][g-main-context-push-thread-default]
-of the thread you are calling this method from.
-You can then call g_dbus_proxy_call_finish() to get the result of
-the operation. See g_dbus_proxy_call_sync() for the synchronous
+<p>This is an asynchronous method. When the operation is finished,<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the<br />
+[thread-default main context][g-main-context-push-thread-default]<br />
+of the thread you are calling this method from.<br />
+You can then call g_dbus_proxy_call_finish() to get the result of<br />
+the operation. See g_dbus_proxy_call_sync() for the synchronous<br />
 version of this method.</p>
-<p>If <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is nil then the D-Bus method call message will be sent with
-the %G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED flag set.
+<p>If <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is nil then the D-Bus method call message will be sent with<br />
+the %G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED flag set.<br />
 care about the result of the method invocation.</p>
 
 
@@ -1719,7 +1723,7 @@ care about the result of the method invocation.</p>
       
       
         &mdash;
-        <div class='inline'><p>The timeout in milliseconds (with %G_MAXINT meaning
+        <div class='inline'><p>The timeout in milliseconds (with %G_MAXINT meaning<br />
 &quot;infinite&quot;) or -1 to use the proxy default timeout.</p>
 </div>
       
@@ -1800,7 +1804,7 @@ care about the result of the method invocation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes an operation started with g_dbus_proxy_call().
+    <p>Finishes an operation started with g_dbus_proxy_call().<br />
 return values. Free with g_variant_unref().</p>
 
 
@@ -1860,16 +1864,16 @@ return values. Free with g_variant_unref().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Synchronously invokes the <!-- raw HTML omitted -->method_name<!-- raw HTML omitted --> method on <!-- raw HTML omitted -->proxy<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->method_name<!-- raw HTML omitted --> contains any dots, then <!-- raw HTML omitted -->name<!-- raw HTML omitted --> is split into interface and
-method name parts. This allows using <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> for invoking methods on
+<p>If <!-- raw HTML omitted -->method_name<!-- raw HTML omitted --> contains any dots, then <!-- raw HTML omitted -->name<!-- raw HTML omitted --> is split into interface and<br />
+method name parts. This allows using <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> for invoking methods on<br />
 other interfaces.</p>
-<p>If the GDBus::Connection associated with <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> is disconnected then
-the operation will fail with %G_IO_ERROR_CLOSED. If
-<!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is canceled, the operation will fail with
-%G_IO_ERROR_CANCELLED. If <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> contains a value not
-compatible with the D-Bus protocol, the operation fails with
+<p>If the GDBus::Connection associated with <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> is disconnected then<br />
+the operation will fail with %G_IO_ERROR_CLOSED. If<br />
+<!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is canceled, the operation will fail with<br />
+%G_IO_ERROR_CANCELLED. If <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> contains a value not<br />
+compatible with the D-Bus protocol, the operation fails with<br />
 %G_IO_ERROR_INVALID_ARGUMENT.</p>
-<p>If the <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> #GVariant is floating, it is consumed. This allows
+<p>If the <!-- raw HTML omitted -->parameters<!-- raw HTML omitted --> #GVariant is floating, it is consumed. This allows<br />
 convenient 'inline' use of g_variant_new(), e.g.:</p>
 <pre class="code ruby"><code class="ruby"> g_dbus_proxy_call_sync (proxy,
                          &quot;TwoStrings&quot;,
@@ -1881,12 +1885,12 @@ convenient 'inline' use of g_variant_new(), e.g.:</p>
                          NULL,
                          &amp;error);
 </code></pre>
-<p>The calling thread is blocked until a reply is received. See
-g_dbus_proxy_call() for the asynchronous version of this
+<p>The calling thread is blocked until a reply is received. See<br />
+g_dbus_proxy_call() for the asynchronous version of this<br />
 method.</p>
-<p>If <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> has an expected interface (see
-GDBus::Proxy:g-interface-info) and <!-- raw HTML omitted -->method_name<!-- raw HTML omitted --> is referenced by it,
-then the return value is checked against the return type.
+<p>If <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> has an expected interface (see<br />
+GDBus::Proxy:g-interface-info) and <!-- raw HTML omitted -->method_name<!-- raw HTML omitted --> is referenced by it,<br />
+then the return value is checked against the return type.<br />
 return values. Free with g_variant_unref().</p>
 
 
@@ -1921,7 +1925,7 @@ return values. Free with g_variant_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>A #GVariant tuple with parameters for the signal
+        <div class='inline'><p>A #GVariant tuple with parameters for the signal<br />
 or nil if not passing parameters.</p>
 </div>
       
@@ -1952,7 +1956,7 @@ or nil if not passing parameters.</p>
       
       
         &mdash;
-        <div class='inline'><p>The timeout in milliseconds (with %G_MAXINT meaning
+        <div class='inline'><p>The timeout in milliseconds (with %G_MAXINT meaning<br />
 &quot;infinite&quot;) or -1 to use the proxy default timeout.</p>
 </div>
       
@@ -2008,7 +2012,7 @@ or nil if not passing parameters.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Like g_dbus_proxy_call() but also takes a GUnix::FDList object.</p>
-<p>This method is only available on UNIX.
+<p>This method is only available on UNIX.<br />
 care about the result of the method invocation.</p>
 
 
@@ -2073,7 +2077,7 @@ care about the result of the method invocation.</p>
       
       
         &mdash;
-        <div class='inline'><p>The timeout in milliseconds (with %G_MAXINT meaning
+        <div class='inline'><p>The timeout in milliseconds (with %G_MAXINT meaning<br />
 &quot;infinite&quot;) or -1 to use the proxy default timeout.</p>
 </div>
       
@@ -2169,7 +2173,7 @@ care about the result of the method invocation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes an operation started with g_dbus_proxy_call_with_unix_fd_list().
+    <p>Finishes an operation started with g_dbus_proxy_call_with_unix_fd_list().<br />
 return values. Free with g_variant_unref().</p>
 
 
@@ -2244,7 +2248,7 @@ return values. Free with g_variant_unref().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Like g_dbus_proxy_call_sync() but also takes and returns GUnix::FDList objects.</p>
-<p>This method is only available on UNIX.
+<p>This method is only available on UNIX.<br />
 return values. Free with g_variant_unref().</p>
 
 
@@ -2279,7 +2283,7 @@ return values. Free with g_variant_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>A #GVariant tuple with parameters for the signal
+        <div class='inline'><p>A #GVariant tuple with parameters for the signal<br />
 or nil if not passing parameters.</p>
 </div>
       
@@ -2310,7 +2314,7 @@ or nil if not passing parameters.</p>
       
       
         &mdash;
-        <div class='inline'><p>The timeout in milliseconds (with %G_MAXINT meaning
+        <div class='inline'><p>The timeout in milliseconds (with %G_MAXINT meaning<br />
 &quot;infinite&quot;) or -1 to use the proxy default timeout.</p>
 </div>
       
@@ -2434,8 +2438,8 @@ or nil if not passing parameters.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the timeout to use if -1 (specifying default timeout) is
-passed as <!-- raw HTML omitted -->timeout_msec<!-- raw HTML omitted --> in the g_dbus_proxy_call() and
+    <p>Gets the timeout to use if -1 (specifying default timeout) is<br />
+passed as <!-- raw HTML omitted -->timeout_msec<!-- raw HTML omitted --> in the g_dbus_proxy_call() and<br />
 g_dbus_proxy_call_sync() functions.</p>
 <p>See the GDBus::Proxy:g-default-timeout property for more details.</p>
 
@@ -2476,8 +2480,8 @@ g_dbus_proxy_call_sync() functions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the timeout to use if -1 (specifying default timeout) is
-passed as <!-- raw HTML omitted -->timeout_msec<!-- raw HTML omitted --> in the g_dbus_proxy_call() and
+    <p>Sets the timeout to use if -1 (specifying default timeout) is<br />
+passed as <!-- raw HTML omitted -->timeout_msec<!-- raw HTML omitted --> in the g_dbus_proxy_call() and<br />
 g_dbus_proxy_call_sync() functions.</p>
 <p>See the GDBus::Proxy:g-default-timeout property for more details.</p>
 
@@ -2572,9 +2576,9 @@ g_dbus_proxy_call_sync() functions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If this property is not %G_BUS_TYPE_NONE, then
-GDBus::Proxy:g-connection must be nil and will be set to the
-GDBus::Connection obtained by calling g_bus_get() with the value
+    <p>If this property is not %G_BUS_TYPE_NONE, then<br />
+GDBus::Proxy:g-connection must be nil and will be set to the<br />
+GDBus::Connection obtained by calling g_bus_get() with the value<br />
 of this property.</p>
 
 
@@ -2735,12 +2739,12 @@ of this property.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The timeout to use if -1 (specifying default timeout) is passed
-as <!-- raw HTML omitted -->timeout_msec<!-- raw HTML omitted --> in the g_dbus_proxy_call() and
+    <p>The timeout to use if -1 (specifying default timeout) is passed<br />
+as <!-- raw HTML omitted -->timeout_msec<!-- raw HTML omitted --> in the g_dbus_proxy_call() and<br />
 g_dbus_proxy_call_sync() functions.</p>
-<p>This allows applications to set a proxy-wide timeout for all
-remote method invocations on the proxy. If this property is -1,
-the default timeout (typically 25 seconds) is used. If set to
+<p>This allows applications to set a proxy-wide timeout for all<br />
+remote method invocations on the proxy. If this property is -1,<br />
+the default timeout (typically 25 seconds) is used. If set to<br />
 %G_MAXINT, then no timeout is used.</p>
 
 
@@ -2780,12 +2784,12 @@ the default timeout (typically 25 seconds) is used. If set to
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The timeout to use if -1 (specifying default timeout) is passed
-as <!-- raw HTML omitted -->timeout_msec<!-- raw HTML omitted --> in the g_dbus_proxy_call() and
+    <p>The timeout to use if -1 (specifying default timeout) is passed<br />
+as <!-- raw HTML omitted -->timeout_msec<!-- raw HTML omitted --> in the g_dbus_proxy_call() and<br />
 g_dbus_proxy_call_sync() functions.</p>
-<p>This allows applications to set a proxy-wide timeout for all
-remote method invocations on the proxy. If this property is -1,
-the default timeout (typically 25 seconds) is used. If set to
+<p>This allows applications to set a proxy-wide timeout for all<br />
+remote method invocations on the proxy. If this property is -1,<br />
+the default timeout (typically 25 seconds) is used. If set to<br />
 %G_MAXINT, then no timeout is used.</p>
 
 
@@ -2959,33 +2963,33 @@ the default timeout (typically 25 seconds) is used. If set to
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Ensure that interactions with this proxy conform to the given
-interface. This is mainly to ensure that malformed data received
-from the other peer is ignored. The given GDBus::InterfaceInfo is
+    <p>Ensure that interactions with this proxy conform to the given<br />
+interface. This is mainly to ensure that malformed data received<br />
+from the other peer is ignored. The given GDBus::InterfaceInfo is<br />
 said to be the &quot;expected interface&quot;.</p>
 <p>The checks performed are:</p>
 <ul>
 <li>
-<p>When completing a method call, if the type signature of
-the reply message isn't what's expected, the reply is
+<p>When completing a method call, if the type signature of<br />
+the reply message isn't what's expected, the reply is<br />
 discarded and the #GError is set to %G_IO_ERROR_INVALID_ARGUMENT.</p>
 </li>
 <li>
-<p>Received signals that have a type signature mismatch are dropped and
+<p>Received signals that have a type signature mismatch are dropped and<br />
 a warning is logged via g_warning().</p>
 </li>
 <li>
-<p>Properties received via the initial <code>GetAll()</code> call or via the
-<code>::PropertiesChanged</code> signal (on the
-<a href="http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties">org.freedesktop.DBus.Properties</a>
-interface) or set using g_dbus_proxy_set_cached_property()
-with a type signature mismatch are ignored and a warning is
+<p>Properties received via the initial <code>GetAll()</code> call or via the<br />
+<code>::PropertiesChanged</code> signal (on the<br />
+<a href="http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties">org.freedesktop.DBus.Properties</a><br />
+interface) or set using g_dbus_proxy_set_cached_property()<br />
+with a type signature mismatch are ignored and a warning is<br />
 logged via g_warning().</p>
 </li>
 </ul>
-<p>Note that these checks are never done on methods, signals and
-properties that are not referenced in the given
-GDBus::InterfaceInfo, since extending a D-Bus interface on the
+<p>Note that these checks are never done on methods, signals and<br />
+properties that are not referenced in the given<br />
+GDBus::InterfaceInfo, since extending a D-Bus interface on the<br />
 service-side is not considered an ABI break.</p>
 
 
@@ -3025,33 +3029,33 @@ service-side is not considered an ABI break.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Ensure that interactions with this proxy conform to the given
-interface. This is mainly to ensure that malformed data received
-from the other peer is ignored. The given GDBus::InterfaceInfo is
+    <p>Ensure that interactions with this proxy conform to the given<br />
+interface. This is mainly to ensure that malformed data received<br />
+from the other peer is ignored. The given GDBus::InterfaceInfo is<br />
 said to be the &quot;expected interface&quot;.</p>
 <p>The checks performed are:</p>
 <ul>
 <li>
-<p>When completing a method call, if the type signature of
-the reply message isn't what's expected, the reply is
+<p>When completing a method call, if the type signature of<br />
+the reply message isn't what's expected, the reply is<br />
 discarded and the #GError is set to %G_IO_ERROR_INVALID_ARGUMENT.</p>
 </li>
 <li>
-<p>Received signals that have a type signature mismatch are dropped and
+<p>Received signals that have a type signature mismatch are dropped and<br />
 a warning is logged via g_warning().</p>
 </li>
 <li>
-<p>Properties received via the initial <code>GetAll()</code> call or via the
-<code>::PropertiesChanged</code> signal (on the
-<a href="http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties">org.freedesktop.DBus.Properties</a>
-interface) or set using g_dbus_proxy_set_cached_property()
-with a type signature mismatch are ignored and a warning is
+<p>Properties received via the initial <code>GetAll()</code> call or via the<br />
+<code>::PropertiesChanged</code> signal (on the<br />
+<a href="http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties">org.freedesktop.DBus.Properties</a><br />
+interface) or set using g_dbus_proxy_set_cached_property()<br />
+with a type signature mismatch are ignored and a warning is<br />
 logged via g_warning().</p>
 </li>
 </ul>
-<p>Note that these checks are never done on methods, signals and
-properties that are not referenced in the given
-GDBus::InterfaceInfo, since extending a D-Bus interface on the
+<p>Note that these checks are never done on methods, signals and<br />
+properties that are not referenced in the given<br />
+GDBus::InterfaceInfo, since extending a D-Bus interface on the<br />
 service-side is not considered an ABI break.</p>
 
 
@@ -3331,8 +3335,8 @@ service-side is not considered an ABI break.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The unique name that owns GDBus::Proxy:g-name or nil if no-one
-currently owns that name. You may connect to #GObject::notify signal to
+    <p>The unique name that owns GDBus::Proxy:g-name or nil if no-one<br />
+currently owns that name. You may connect to #GObject::notify signal to<br />
 track changes to this property.</p>
 
 
@@ -3372,8 +3376,8 @@ track changes to this property.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The unique name that owns GDBus::Proxy:g-name or nil if no-one
-currently owns that name. You may connect to #GObject::notify signal to
+    <p>The unique name that owns GDBus::Proxy:g-name or nil if no-one<br />
+currently owns that name. You may connect to #GObject::notify signal to<br />
 track changes to this property.</p>
 
 
@@ -3547,10 +3551,10 @@ track changes to this property.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks up the value for a property from the cache. This call does no
+    <p>Looks up the value for a property from the cache. This call does no<br />
 blocking IO.</p>
-<p>If <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> has an expected interface (see
-GDBus::Proxy:g-interface-info) and <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --> is referenced by
+<p>If <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> has an expected interface (see<br />
+GDBus::Proxy:g-interface-info) and <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --> is referenced by<br />
 it, then <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is checked against the type of the property.</p>
 
 
@@ -3588,8 +3592,8 @@ it, then <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is checked agai
       
       
         &mdash;
-        <div class='inline'><p>A reference to the #GVariant instance
-that holds the value for <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --> or nil if the value is not in
+        <div class='inline'><p>A reference to the #GVariant instance<br />
+that holds the value for <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --> or nil if the value is not in<br />
 the cache. The returned reference must be freed with g_variant_unref().</p>
 </div>
       
@@ -3611,8 +3615,8 @@ the cache. The returned reference must be freed with g_variant_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the GDBus::InterfaceInfo, if any, specifying the interface
-that <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> conforms to. See the GDBus::Proxy:g-interface-info
+    <p>Returns the GDBus::InterfaceInfo, if any, specifying the interface<br />
+that <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> conforms to. See the GDBus::Proxy:g-interface-info<br />
 property for more details.</p>
 
 
@@ -3631,7 +3635,7 @@ property for more details.</p>
       
       
         &mdash;
-        <div class='inline'><p>A GDBus::InterfaceInfo or nil.
+        <div class='inline'><p>A GDBus::InterfaceInfo or nil.<br />
 Do not unref the returned object, it is owned by <!-- raw HTML omitted -->proxy<!-- raw HTML omitted -->.</p>
 </div>
       
@@ -3653,8 +3657,8 @@ Do not unref the returned object, it is owned by <!-- raw HTML omitted -->proxy<
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Ensure that interactions with <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> conform to the given
-interface. See the GDBus::Proxy:g-interface-info property for more
+    <p>Ensure that interactions with <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> conform to the given<br />
+interface. See the GDBus::Proxy:g-interface-info property for more<br />
 details.</p>
 
 
@@ -3674,7 +3678,7 @@ details.</p>
       
       
         &mdash;
-        <div class='inline'><p>Minimum interface this proxy conforms to
+        <div class='inline'><p>Minimum interface this proxy conforms to<br />
 or nil to unset.</p>
 </div>
       
@@ -3750,8 +3754,8 @@ or nil to unset.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the name that <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> was constructed for.</p>
-<p>When connected to a message bus, this will usually be non-nil.
-However, it may be nil for a proxy that communicates using a peer-to-peer
+<p>When connected to a message bus, this will usually be non-nil.<br />
+However, it may be nil for a proxy that communicates using a peer-to-peer<br />
 pattern.</p>
 
 
@@ -3791,9 +3795,9 @@ pattern.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The unique name that owns the name that <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> is for or nil if
-no-one currently owns that name. You may connect to the
-#GObject::notify signal to track changes to the
+    <p>The unique name that owns the name that <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> is for or nil if<br />
+no-one currently owns that name. You may connect to the<br />
+#GObject::notify signal to track changes to the<br />
 GDBus::Proxy:g-name-owner property.</p>
 
 
@@ -3812,7 +3816,7 @@ GDBus::Proxy:g-name-owner property.</p>
       
       
         &mdash;
-        <div class='inline'><p>The name owner or nil if no name
+        <div class='inline'><p>The name owner or nil if no name<br />
 owner exists. Free with g_free().</p>
 </div>
       
@@ -3873,14 +3877,14 @@ owner exists. Free with g_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is not nil, sets the cached value for the property with
+    <p>If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is not nil, sets the cached value for the property with<br />
 name <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --> to the value in <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is nil, then the cached value is removed from the
+<p>If <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is nil, then the cached value is removed from the<br />
 property cache.</p>
-<p>If <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> has an expected interface (see
-GDBus::Proxy:g-interface-info) and <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --> is referenced by
+<p>If <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --> has an expected interface (see<br />
+GDBus::Proxy:g-interface-info) and <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --> is referenced by<br />
 it, then <!-- raw HTML omitted -->value<!-- raw HTML omitted --> is checked against the type of the property.</p>
-<p>If the <!-- raw HTML omitted -->value<!-- raw HTML omitted --> #GVariant is floating, it is consumed. This allows
+<p>If the <!-- raw HTML omitted -->value<!-- raw HTML omitted --> #GVariant is floating, it is consumed. This allows<br />
 convenient 'inline' use of g_variant_new(), e.g.</p>
 <pre class="code ruby"><code class="ruby"> g_dbus_proxy_set_cached_property (proxy,
                                    &quot;SomeProperty&quot;,
@@ -3888,17 +3892,17 @@ convenient 'inline' use of g_variant_new(), e.g.</p>
                                                  &quot;A String&quot;,
                                                  42));
 </code></pre>
-<p>Normally you will not need to use this method since <!-- raw HTML omitted -->proxy<!-- raw HTML omitted -->
-is tracking changes using the
-<code>org.freedesktop.DBus.Properties.PropertiesChanged</code>
-D-Bus signal. However, for performance reasons an object may
-decide to not use this signal for some properties and instead
+<p>Normally you will not need to use this method since <!-- raw HTML omitted -->proxy<!-- raw HTML omitted --><br />
+is tracking changes using the<br />
+<code>org.freedesktop.DBus.Properties.PropertiesChanged</code><br />
+D-Bus signal. However, for performance reasons an object may<br />
+decide to not use this signal for some properties and instead<br />
 use a proprietary out-of-band mechanism to transmit changes.</p>
-<p>As a concrete example, consider an object with a property
-<code>ChatroomParticipants</code> which is an array of strings. Instead of
-transmitting the same (long) array every time the property changes,
-it is more efficient to only transmit the delta using e.g. signals
-<code>ChatroomParticipantJoined(String name)</code> and
+<p>As a concrete example, consider an object with a property<br />
+<code>ChatroomParticipants</code> which is an array of strings. Instead of<br />
+transmitting the same (long) array every time the property changes,<br />
+it is more efficient to only transmit the delta using e.g. signals<br />
+<code>ChatroomParticipantJoined(String name)</code> and<br />
 <code>ChatroomParticipantParted(String name)</code>.</p>
 
 
@@ -3964,7 +3968,7 @@ it is more efficient to only transmit the delta using e.g. signals
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

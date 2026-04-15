@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Atk::Text";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -86,23 +88,23 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The ATK interface implemented by components with text content.</p>
-<p>Atk::Text should be implemented by #AtkObjects on behalf of widgets
-that have text content which is either attributed or otherwise
-non-trivial.  Atk::Objects whose text content is simple,
-unattributed, and very brief may expose that content via
-#atk_object_get_name instead; however if the text is editable,
-multi-line, typically longer than three or four words, attributed,
-selectable, or if the object already uses the 'name' ATK property
-for other information, the Atk::Text interface should be used to
-expose the text content.  In the case of editable text content,
-Atk::EditableText (a subtype of the #AtkText interface) should be
+<p>Atk::Text should be implemented by #AtkObjects on behalf of widgets<br />
+that have text content which is either attributed or otherwise<br />
+non-trivial.  Atk::Objects whose text content is simple,<br />
+unattributed, and very brief may expose that content via<br />
+#atk_object_get_name instead; however if the text is editable,<br />
+multi-line, typically longer than three or four words, attributed,<br />
+selectable, or if the object already uses the 'name' ATK property<br />
+for other information, the Atk::Text interface should be used to<br />
+expose the text content.  In the case of editable text content,<br />
+Atk::EditableText (a subtype of the #AtkText interface) should be<br />
 implemented instead.</p>
-<p>Atk::Text provides not only traversal facilities and change
-notification for text content, but also caret tracking and glyph
-bounding box calculations.  Note that the text strings are exposed
-as UTF-8, and are therefore potentially multi-byte, and
-caret-to-byte offset mapping makes no assumptions about the
-character length; also bounding box glyph-to-offset mapping may be
+<p>Atk::Text provides not only traversal facilities and change<br />
+notification for text content, but also caret tracking and glyph<br />
+bounding box calculations.  Note that the text strings are exposed<br />
+as UTF-8, and are therefore potentially multi-byte, and<br />
+caret-to-byte offset mapping makes no assumptions about the<br />
+character length; also bounding box glyph-to-offset mapping may be<br />
 complex for languages which use ligatures.</p>
 
 
@@ -834,6 +836,7 @@ complex for languages which use ligatures.</p>
 
       
     </ul>
+    
   
 
 
@@ -959,8 +962,8 @@ complex for languages which use ligatures.</p>
       
       
         &mdash;
-        <div class='inline'><p>the character offset of the position of the caret or -1 if
-the caret is not located inside the element or in the case of
+        <div class='inline'><p>the character offset of the position of the caret or -1 if<br />
+the caret is not located inside the element or in the case of<br />
 any other failure.</p>
 </div>
       
@@ -983,19 +986,19 @@ any other failure.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the caret (cursor) position to the specified <!-- raw HTML omitted -->offset<!-- raw HTML omitted -->.</p>
-<p>In the case of rich-text content, this method should either grab focus
-or move the sequential focus navigation starting point (if the application
-supports this concept) as if the user had clicked on the new caret position.
-Typically, this means that the target of this operation is the node containing
-the new caret position or one of its ancestors. In other words, after this
-method is called, if the user advances focus, it should move to the first
+<p>In the case of rich-text content, this method should either grab focus<br />
+or move the sequential focus navigation starting point (if the application<br />
+supports this concept) as if the user had clicked on the new caret position.<br />
+Typically, this means that the target of this operation is the node containing<br />
+the new caret position or one of its ancestors. In other words, after this<br />
+method is called, if the user advances focus, it should move to the first<br />
 focusable node following the new caret position.</p>
-<p>Calling this method should also scroll the application viewport in a way
-that matches the behavior of the application's typical caret motion or tab
-navigation as closely as possible. This also means that if the application's
-caret motion or focus navigation does not trigger a scroll operation, this
-method should not trigger one either. If the application does not have a caret
-motion or focus navigation operation, this method should try to scroll the new
+<p>Calling this method should also scroll the application viewport in a way<br />
+that matches the behavior of the application's typical caret motion or tab<br />
+navigation as closely as possible. This also means that if the application's<br />
+caret motion or focus navigation does not trigger a scroll operation, this<br />
+method should not trigger one either. If the application does not have a caret<br />
+motion or focus navigation operation, this method should try to scroll the new<br />
 caret position into view while minimizing unnecessary scroll motion.</p>
 
 
@@ -1093,9 +1096,9 @@ caret position into view while minimizing unnecessary scroll motion.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates an Atk::AttributeSet which consists of the default values of
-attributes for the text. See the enum AtkTextAttribute for types of text
-attributes that can be returned. Note that other attributes may also be
+    <p>Creates an Atk::AttributeSet which consists of the default values of<br />
+attributes for the text. See the enum AtkTextAttribute for types of text<br />
+attributes that can be returned. Note that other attributes may also be<br />
 returned.</p>
 
 
@@ -1114,8 +1117,8 @@ returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>an Atk::AttributeSet which contains the default text
-attributes for this Atk::Text. This #AtkAttributeSet should be freed by
+        <div class='inline'><p>an Atk::AttributeSet which contains the default text<br />
+attributes for this Atk::Text. This #AtkAttributeSet should be freed by<br />
 a call to atk_attribute_set_free().</p>
 </div>
       
@@ -1137,7 +1140,7 @@ a call to atk_attribute_set_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Array of AtkTextRange. The last
+    <p>Returns Array of AtkTextRange. The last<br />
 element of the array returned by this function will be NULL.</p>
 
 
@@ -1235,7 +1238,7 @@ element of the array returned by this function will be NULL.</p>
       
       
         &mdash;
-        <div class='inline'><p>Array of AtkTextRange. The last
+        <div class='inline'><p>Array of AtkTextRange. The last<br />
 element of the array returned by this function will be NULL.</p>
 </div>
       
@@ -1257,8 +1260,8 @@ element of the array returned by this function will be NULL.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the character offset of the position of the caret or -1 if
-the caret is not located inside the element or in the case of
+    <p>Returns the character offset of the position of the caret or -1 if<br />
+the caret is not located inside the element or in the case of<br />
 any other failure.</p>
 
 
@@ -1296,8 +1299,8 @@ any other failure.</p>
       
       
         &mdash;
-        <div class='inline'><p>the character offset of the position of the caret or -1 if
-the caret is not located inside the element or in the case of
+        <div class='inline'><p>the character offset of the position of the caret or -1 if<br />
+the caret is not located inside the element or in the case of<br />
 any other failure.</p>
 </div>
       
@@ -1593,8 +1596,8 @@ any other failure.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns an Atk::AttributeSet which contains the default text
-attributes for this Atk::Text. This #AtkAttributeSet should be freed by
+    <p>Returns an Atk::AttributeSet which contains the default text<br />
+attributes for this Atk::Text. This #AtkAttributeSet should be freed by<br />
 a call to atk_attribute_set_free().</p>
 
 
@@ -1632,8 +1635,8 @@ a call to atk_attribute_set_free().</p>
       
       
         &mdash;
-        <div class='inline'><p>an Atk::AttributeSet which contains the default text
-attributes for this Atk::Text. This #AtkAttributeSet should be freed by
+        <div class='inline'><p>an Atk::AttributeSet which contains the default text<br />
+attributes for this Atk::Text. This #AtkAttributeSet should be freed by<br />
 a call to atk_attribute_set_free().</p>
 </div>
       
@@ -1795,7 +1798,7 @@ a call to atk_attribute_set_free().</p>
       
       
         &mdash;
-        <div class='inline'><p>the offset to the character which is located at  the specified
+        <div class='inline'><p>the offset to the character which is located at  the specified<br />
 <!-- raw HTML omitted -->x<!-- raw HTML omitted --> and <!-- raw HTML omitted -->y<!-- raw HTML omitted --> coordinates of -1 in case of failure.</p>
 </div>
       
@@ -1850,7 +1853,7 @@ a call to atk_attribute_set_free().</p>
       
       
         &mdash;
-        <div class='inline'><p>The offset of the first text character for which boundary
+        <div class='inline'><p>The offset of the first text character for which boundary<br />
 information is required.</p>
 </div>
       
@@ -1866,7 +1869,7 @@ information is required.</p>
       
       
         &mdash;
-        <div class='inline'><p>The offset of the text character after the last character
+        <div class='inline'><p>The offset of the text character after the last character<br />
 for which boundary information is required.</p>
 </div>
       
@@ -2014,8 +2017,8 @@ for which boundary information is required.</p>
       
       
         &mdash;
-        <div class='inline'><p>an Atk::AttributeSet which contains the attributes
-explicitly set at <!-- raw HTML omitted -->offset<!-- raw HTML omitted -->. This Atk::AttributeSet should be freed by
+        <div class='inline'><p>an Atk::AttributeSet which contains the attributes<br />
+explicitly set at <!-- raw HTML omitted -->offset<!-- raw HTML omitted -->. This Atk::AttributeSet should be freed by<br />
 a call to atk_attribute_set_free().</p>
 </div>
       
@@ -2037,10 +2040,10 @@ a call to atk_attribute_set_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>assigned numbers that correspond to how far the region is from the
-start of the text.  The selected region closest to the beginning
-of the text region is assigned the number 0, etc.  Note that adding,
-moving or deleting a selected region can change the numbering.
+    <p>assigned numbers that correspond to how far the region is from the<br />
+start of the text.  The selected region closest to the beginning<br />
+of the text region is assigned the number 0, etc.  Note that adding,<br />
+moving or deleting a selected region can change the numbering.<br />
 of the selected region</p>
 
 
@@ -2123,7 +2126,7 @@ of the selected region</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string containing the selected text. Use g_free()
+        <div class='inline'><p>a newly allocated string containing the selected text. Use g_free()<br />
 to free the returned string.</p>
 </div>
       
@@ -2145,9 +2148,9 @@ to free the returned string.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a newly allocated string containing the text at
-the <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded by the specified <!-- raw HTML omitted -->granularity<!-- raw HTML omitted -->. Use g_free()
-to free the returned string.  Returns nil if the offset is invalid
+    <p>Returns a newly allocated string containing the text at<br />
+the <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded by the specified <!-- raw HTML omitted -->granularity<!-- raw HTML omitted -->. Use g_free()<br />
+to free the returned string.  Returns nil if the offset is invalid<br />
 or no implementation is available.</p>
 
 
@@ -2212,7 +2215,7 @@ or no implementation is available.</p>
       
       
         &mdash;
-        <div class='inline'><p>the starting character offset of the returned string, or -1
+        <div class='inline'><p>the starting character offset of the returned string, or -1<br />
 in the case of error (e.g. invalid offset, not implemented)</p>
 </div>
       
@@ -2228,7 +2231,7 @@ in the case of error (e.g. invalid offset, not implemented)</p>
       
       
         &mdash;
-        <div class='inline'><p>the offset of the first character after the returned string,
+        <div class='inline'><p>the offset of the first character after the returned string,<br />
 or -1 in the case of error (e.g. invalid offset, not implemented)</p>
 </div>
       
@@ -2247,9 +2250,9 @@ or -1 in the case of error (e.g. invalid offset, not implemented)</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string containing the text at
-the <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded by the specified <!-- raw HTML omitted -->granularity<!-- raw HTML omitted -->. Use g_free()
-to free the returned string.  Returns nil if the offset is invalid
+        <div class='inline'><p>a newly allocated string containing the text at<br />
+the <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded by the specified <!-- raw HTML omitted -->granularity<!-- raw HTML omitted -->. Use g_free()<br />
+to free the returned string.  Returns nil if the offset is invalid<br />
 or no implementation is available.</p>
 </div>
       
@@ -2271,8 +2274,8 @@ or no implementation is available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a newly allocated string containing the text from <!-- raw HTML omitted -->start_offset<!-- raw HTML omitted --> up
-to, but not including <!-- raw HTML omitted -->end_offset<!-- raw HTML omitted -->. Use g_free() to free the returned
+    <p>Returns a newly allocated string containing the text from <!-- raw HTML omitted -->start_offset<!-- raw HTML omitted --> up<br />
+to, but not including <!-- raw HTML omitted -->end_offset<!-- raw HTML omitted -->. Use g_free() to free the returned<br />
 string.</p>
 
 
@@ -2340,8 +2343,8 @@ string.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string containing the text from <!-- raw HTML omitted -->start_offset<!-- raw HTML omitted --> up
-to, but not including <!-- raw HTML omitted -->end_offset<!-- raw HTML omitted -->. Use g_free() to free the returned
+        <div class='inline'><p>a newly allocated string containing the text from <!-- raw HTML omitted -->start_offset<!-- raw HTML omitted --> up<br />
+to, but not including <!-- raw HTML omitted -->end_offset<!-- raw HTML omitted -->. Use g_free() to free the returned<br />
 string.</p>
 </div>
       
@@ -2363,8 +2366,8 @@ string.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a newly allocated string containing the text after <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded
-by the specified <!-- raw HTML omitted -->boundary_type<!-- raw HTML omitted -->. Use g_free() to free the returned
+    <p>Returns a newly allocated string containing the text after <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded<br />
+by the specified <!-- raw HTML omitted -->boundary_type<!-- raw HTML omitted -->. Use g_free() to free the returned<br />
 string.</p>
 
 
@@ -2444,7 +2447,7 @@ string.</p>
       
       
         &mdash;
-        <div class='inline'><p>the offset of the first character after the
+        <div class='inline'><p>the offset of the first character after the<br />
 returned substring</p>
 </div>
       
@@ -2463,8 +2466,8 @@ returned substring</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string containing the text after <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded
-by the specified <!-- raw HTML omitted -->boundary_type<!-- raw HTML omitted -->. Use g_free() to free the returned
+        <div class='inline'><p>a newly allocated string containing the text after <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded<br />
+by the specified <!-- raw HTML omitted -->boundary_type<!-- raw HTML omitted -->. Use g_free() to free the returned<br />
 string.</p>
 </div>
       
@@ -2486,8 +2489,8 @@ string.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a newly allocated string containing the text at <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded
-by the specified <!-- raw HTML omitted -->boundary_type<!-- raw HTML omitted -->. Use g_free() to free the returned
+    <p>Returns a newly allocated string containing the text at <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded<br />
+by the specified <!-- raw HTML omitted -->boundary_type<!-- raw HTML omitted -->. Use g_free() to free the returned<br />
 string.</p>
 
 
@@ -2567,7 +2570,7 @@ string.</p>
       
       
         &mdash;
-        <div class='inline'><p>the offset of the first character after the
+        <div class='inline'><p>the offset of the first character after the<br />
 returned substring</p>
 </div>
       
@@ -2586,8 +2589,8 @@ returned substring</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string containing the text at <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded
-by the specified <!-- raw HTML omitted -->boundary_type<!-- raw HTML omitted -->. Use g_free() to free the returned
+        <div class='inline'><p>a newly allocated string containing the text at <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded<br />
+by the specified <!-- raw HTML omitted -->boundary_type<!-- raw HTML omitted -->. Use g_free() to free the returned<br />
 string.</p>
 </div>
       
@@ -2609,8 +2612,8 @@ string.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a newly allocated string containing the text before <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded
-by the specified <!-- raw HTML omitted -->boundary_type<!-- raw HTML omitted -->. Use g_free() to free the returned
+    <p>Returns a newly allocated string containing the text before <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded<br />
+by the specified <!-- raw HTML omitted -->boundary_type<!-- raw HTML omitted -->. Use g_free() to free the returned<br />
 string.</p>
 
 
@@ -2690,7 +2693,7 @@ string.</p>
       
       
         &mdash;
-        <div class='inline'><p>the offset of the first character after the
+        <div class='inline'><p>the offset of the first character after the<br />
 returned substring</p>
 </div>
       
@@ -2709,8 +2712,8 @@ returned substring</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated string containing the text before <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded
-by the specified <!-- raw HTML omitted -->boundary_type<!-- raw HTML omitted -->. Use g_free() to free the returned
+        <div class='inline'><p>a newly allocated string containing the text before <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bounded<br />
+by the specified <!-- raw HTML omitted -->boundary_type<!-- raw HTML omitted -->. Use g_free() to free the returned<br />
 string.</p>
 </div>
       
@@ -2771,9 +2774,9 @@ string.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>assigned numbers that correspond to how far the region is from the
-start of the text.  The selected region closest to the beginning
-of the text region is assigned the number 0, etc.  Note that adding,
+    <p>assigned numbers that correspond to how far the region is from the<br />
+start of the text.  The selected region closest to the beginning<br />
+of the text region is assigned the number 0, etc.  Note that adding,<br />
 moving or deleting a selected region can change the numbering.</p>
 
 
@@ -3156,10 +3159,10 @@ moving or deleting a selected region can change the numbering.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>assigned numbers that correspond to how far the region is from the
-start of the text.  The selected region closest to the beginning
-of the text region is assigned the number 0, etc.  Note that adding,
-moving or deleting a selected region can change the numbering.
+    <p>assigned numbers that correspond to how far the region is from the<br />
+start of the text.  The selected region closest to the beginning<br />
+of the text region is assigned the number 0, etc.  Note that adding,<br />
+moving or deleting a selected region can change the numbering.<br />
 the selection</p>
 
 
@@ -3488,7 +3491,7 @@ the selection</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Wnck";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,8 +79,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/wnck3/version.rb<span class="defines">,<br />
-  lib/wnck3.rb,<br /> lib/wnck3/loader.rb</span>
+    <dd>lib/wnck3/version.rb<span class="defines">,<br>
+  lib/wnck3.rb,<br> lib/wnck3/loader.rb</span>
+
 </dd>
   </dl>
   
@@ -88,16 +90,16 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Copyright (C) 2019  Ruby-GNOME2 Project Team</p>
-<p>This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
+<p>This library is free software; you can redistribute it and/or<br />
+modify it under the terms of the GNU Lesser General Public<br />
+License as published by the Free Software Foundation; either<br />
 version 2.1 of the License, or (at your option) any later version.</p>
-<p>This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<p>This library is distributed in the hope that it will be useful,<br />
+but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU<br />
 Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
+<p>You should have received a copy of the GNU Lesser General Public<br />
+License along with this library; if not, write to the Free Software<br />
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 
@@ -313,6 +315,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 
       
     </ul>
+    
   
 
 
@@ -333,13 +336,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the role of the libwnck user.</p>
-<p>The default role is %WNCK_CLIENT_TYPE_APPLICATION. Therefore, for
-applications providing some window management features, like pagers or
-tasklists, it is important to set the role to %WNCK_CLIENT_TYPE_PAGER for
+<p>The default role is %WNCK_CLIENT_TYPE_APPLICATION. Therefore, for<br />
+applications providing some window management features, like pagers or<br />
+tasklists, it is important to set the role to %WNCK_CLIENT_TYPE_PAGER for<br />
 libwnck to properly work.</p>
-<p>This function should only be called once per program. Additional calls
-with the same client type will be silently ignored. An attempt to change
-the client type to a differnet value after it has already been set will
+<p>This function should only be called once per program. Additional calls<br />
+with the same client type will be silently ignored. An attempt to change<br />
+the client type to a differnet value after it has already been set will<br />
 be ignored and a critical warning will be logged.</p>
 
 
@@ -394,7 +397,7 @@ be ignored and a critical warning will be logged.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The default main icon size is %WNCK_DEFAULT_ICON_SIZE. This function allows
+    <p>The default main icon size is %WNCK_DEFAULT_ICON_SIZE. This function allows<br />
 to change this value.</p>
 
 
@@ -449,7 +452,7 @@ to change this value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The default main icon size is %WNCK_DEFAULT_MINI_ICON_SIZE. This function
+    <p>The default main icon size is %WNCK_DEFAULT_MINI_ICON_SIZE. This function<br />
 allows to change this value.</p>
 
 
@@ -504,18 +507,18 @@ allows to change this value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks for the X resource usage of the application with process ID <!-- raw HTML omitted -->pid<!-- raw HTML omitted --> on
-display <!-- raw HTML omitted -->gdisplay<!-- raw HTML omitted -->. If no resource usage can be found, then all fields of
+    <p>Looks for the X resource usage of the application with process ID <!-- raw HTML omitted -->pid<!-- raw HTML omitted --> on<br />
+display <!-- raw HTML omitted -->gdisplay<!-- raw HTML omitted -->. If no resource usage can be found, then all fields of<br />
 <!-- raw HTML omitted -->usage<!-- raw HTML omitted --> are set to 0.</p>
-<p>In order to find the resource usage of an application that does not have an
-X window visible to libwnck (panel applets do not have any toplevel windows,
-for example), wnck_pid_read_resource_usage() walks through the whole tree of
-X windows. Since this walk is expensive in CPU, a cache is created. This
-cache is updated in the background. This means there is a non-null
-probability that no resource usage will be found for an application, even if
-it is an X client. If this happens, calling wnck_pid_read_resource_usage()
+<p>In order to find the resource usage of an application that does not have an<br />
+X window visible to libwnck (panel applets do not have any toplevel windows,<br />
+for example), wnck_pid_read_resource_usage() walks through the whole tree of<br />
+X windows. Since this walk is expensive in CPU, a cache is created. This<br />
+cache is updated in the background. This means there is a non-null<br />
+probability that no resource usage will be found for an application, even if<br />
+it is an X client. If this happens, calling wnck_pid_read_resource_usage()<br />
 again after a few seconds should work.</p>
-<p>To properly work, this function requires the XRes extension on the X server.
+<p>To properly work, this function requires the XRes extension on the X server.<br />
 process ID <!-- raw HTML omitted -->pid<!-- raw HTML omitted -->.</p>
 
 
@@ -600,14 +603,14 @@ process ID <!-- raw HTML omitted -->pid<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Makes libwnck stop listening to events and tear down all resources from
-libwnck. This should be done if you are not going to need the state change
-notifications for an extended period of time, to avoid wakeups with every
+    <p>Makes libwnck stop listening to events and tear down all resources from<br />
+libwnck. This should be done if you are not going to need the state change<br />
+notifications for an extended period of time, to avoid wakeups with every<br />
 key and focus event.</p>
 <p>After this, all pointers to Wnck object you might still hold are invalid.</p>
-<p>Due to the fact that <!-- raw HTML omitted -->Wnck objects are all
-owned by libwnck<!-- raw HTML omitted -->, users of this API through introspection should be
-extremely careful: they must explicitly clear variables referencing objects
+<p>Due to the fact that <!-- raw HTML omitted -->Wnck objects are all<br />
+owned by libwnck<!-- raw HTML omitted -->, users of this API through introspection should be<br />
+extremely careful: they must explicitly clear variables referencing objects<br />
 before this call. Failure to do so might result in crashes.</p>
 
 
@@ -643,10 +646,10 @@ before this call. Failure to do so might result in crashes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Looks for the X resource usage of the application owning the X window ID
-<!-- raw HTML omitted -->xid<!-- raw HTML omitted --> on display <!-- raw HTML omitted -->gdisplay<!-- raw HTML omitted -->. If no resource usage can be found, then all
+    <p>Looks for the X resource usage of the application owning the X window ID<br />
+<!-- raw HTML omitted -->xid<!-- raw HTML omitted --> on display <!-- raw HTML omitted -->gdisplay<!-- raw HTML omitted -->. If no resource usage can be found, then all<br />
 fields of <!-- raw HTML omitted -->usage<!-- raw HTML omitted --> are set to 0.</p>
-<p>To properly work, this function requires the XRes extension on the X server.
+<p>To properly work, this function requires the XRes extension on the X server.<br />
 the X window ID <!-- raw HTML omitted -->xid<!-- raw HTML omitted -->.</p>
 
 
@@ -727,7 +730,7 @@ the X window ID <!-- raw HTML omitted -->xid<!-- raw HTML omitted -->.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

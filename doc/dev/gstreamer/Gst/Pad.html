@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::Pad";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -146,6 +148,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -2178,9 +2181,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -2206,9 +2211,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new pad with the given name from the given template.
-If name is nil, a guaranteed unique name (across all pads)
-will be assigned.
+    <p>Creates a new pad with the given name from the given template.<br />
+If name is nil, a guaranteed unique name (across all pads)<br />
+will be assigned.<br />
 This function makes a copy of the name so you can safely free the name.</p>
 
 
@@ -2336,9 +2341,9 @@ This function makes a copy of the name so you can safely free the name.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Activates or deactivates the given pad in <!-- raw HTML omitted -->mode<!-- raw HTML omitted --> via dispatching to the
+    <p>Activates or deactivates the given pad in <!-- raw HTML omitted -->mode<!-- raw HTML omitted --> via dispatching to the<br />
 pad's activatemodefunc. For use from within pad activation functions only.</p>
-<p>If you don't know what this is, you probably don't want to call it.
+<p>If you don't know what this is, you probably don't want to call it.<br />
 MT safe.</p>
 
 
@@ -2412,13 +2417,13 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Activates or deactivates the given pad.
+    <p>Activates or deactivates the given pad.<br />
 Normally called from within core state change functions.</p>
-<p>If <!-- raw HTML omitted -->active<!-- raw HTML omitted -->, makes sure the pad is active. If it is already active, either in
-push or pull mode, just return. Otherwise dispatches to the pad's activate
+<p>If <!-- raw HTML omitted -->active<!-- raw HTML omitted -->, makes sure the pad is active. If it is already active, either in<br />
+push or pull mode, just return. Otherwise dispatches to the pad's activate<br />
 function to perform the actual activation.</p>
-<p>If not <!-- raw HTML omitted -->active<!-- raw HTML omitted -->, calls gst_pad_activate_mode() with the pad's current mode
-and a false argument.
+<p>If not <!-- raw HTML omitted -->active<!-- raw HTML omitted -->, calls gst_pad_activate_mode() with the pad's current mode<br />
+and a false argument.<br />
 MT safe.</p>
 
 
@@ -2477,16 +2482,16 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Be notified of different states of pads. The provided callback is called for
+    <p>Be notified of different states of pads. The provided callback is called for<br />
 every state that matches <!-- raw HTML omitted -->mask<!-- raw HTML omitted -->.</p>
-<p>Probes are called in groups: First GST_PAD_PROBE_TYPE_BLOCK probes are
-called, then others, then finally GST_PAD_PROBE_TYPE_IDLE. The only
-exception here are GST_PAD_PROBE_TYPE_IDLE probes that are called
-immediately if the pad is already idle while calling gst_pad_add_probe().
-In each of the groups, probes are called in the order in which they were
-added.
-probe with gst_pad_remove_probe(). When using GST_PAD_PROBE_TYPE_IDLE it can
-happen that the probe can be run immediately and if the probe returns
+<p>Probes are called in groups: First GST_PAD_PROBE_TYPE_BLOCK probes are<br />
+called, then others, then finally GST_PAD_PROBE_TYPE_IDLE. The only<br />
+exception here are GST_PAD_PROBE_TYPE_IDLE probes that are called<br />
+immediately if the pad is already idle while calling gst_pad_add_probe().<br />
+In each of the groups, probes are called in the order in which they were<br />
+added.<br />
+probe with gst_pad_remove_probe(). When using GST_PAD_PROBE_TYPE_IDLE it can<br />
+happen that the probe can be run immediately and if the probe returns<br />
 GST_PAD_PROBE_REMOVE this functions returns 0.</p>
 <p>MT safe.</p>
 
@@ -2522,7 +2527,7 @@ GST_PAD_PROBE_REMOVE this functions returns 0.</p>
       
       
         &mdash;
-        <div class='inline'><p>Gst::PadProbeCallback that will be called with notifications of
+        <div class='inline'><p>Gst::PadProbeCallback that will be called with notifications of<br />
 the pad state</p>
 </div>
       
@@ -2592,11 +2597,11 @@ the pad state</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the capabilities of the allowed media types that can flow through
+    <p>Gets the capabilities of the allowed media types that can flow through<br />
 <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and its peer.</p>
-<p>The allowed capabilities is calculated as the intersection of the results of
-calling gst_pad_query_caps() on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and its peer. The caller owns a reference
-on the resulting caps.
+<p>The allowed capabilities is calculated as the intersection of the results of<br />
+calling gst_pad_query_caps() on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and its peer. The caller owns a reference<br />
+on the resulting caps.<br />
 MT safe.</p>
 
 
@@ -2615,8 +2620,8 @@ MT safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>the allowed Gst::Caps of the
-pad link. Unref the caps when you no longer need it. This
+        <div class='inline'><p>the allowed Gst::Caps of the<br />
+pad link. Unref the caps when you no longer need it. This<br />
 function returns nil when <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no peer.</p>
 </div>
       
@@ -2638,7 +2643,7 @@ function returns nil when <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if the source pad and the sink pad are compatible so they can be
+    <p>Checks if the source pad and the sink pad are compatible so they can be<br />
 linked.</p>
 
 
@@ -2804,15 +2809,15 @@ linked.</p>
   <div class="discussion">
     <p>Chain a buffer to <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
 <p>The function returns #GST_FLOW_FLUSHING if the pad was flushing.</p>
-<p>If the buffer type is not acceptable for <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> (as negotiated with a
-preceding GST_EVENT_CAPS event), this function returns
+<p>If the buffer type is not acceptable for <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> (as negotiated with a<br />
+preceding GST_EVENT_CAPS event), this function returns<br />
 #GST_FLOW_NOT_NEGOTIATED.</p>
-<p>The function proceeds calling the chain function installed on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> (see
-gst_pad_set_chain_function()) and the return value of that function is
-returned to the caller. #GST_FLOW_NOT_SUPPORTED is returned if <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no
+<p>The function proceeds calling the chain function installed on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> (see<br />
+gst_pad_set_chain_function()) and the return value of that function is<br />
+returned to the caller. #GST_FLOW_NOT_SUPPORTED is returned if <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no<br />
 chain function.</p>
-<p>In all cases, success or failure, the caller loses its reference to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->
-after calling this function.
+<p>In all cases, success or failure, the caller loses its reference to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --><br />
+after calling this function.<br />
 MT safe.</p>
 
 
@@ -2832,7 +2837,7 @@ MT safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::Buffer to send, return GST_FLOW_ERROR
+        <div class='inline'><p>the Gst::Buffer to send, return GST_FLOW_ERROR<br />
 if not.</p>
 </div>
       
@@ -2874,13 +2879,13 @@ if not.</p>
   <div class="discussion">
     <p>Chain a bufferlist to <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
 <p>The function returns #GST_FLOW_FLUSHING if the pad was flushing.</p>
-<p>If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> was not negotiated properly with a CAPS event, this function
+<p>If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> was not negotiated properly with a CAPS event, this function<br />
 returns #GST_FLOW_NOT_NEGOTIATED.</p>
-<p>The function proceeds calling the chainlist function installed on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> (see
-gst_pad_set_chain_list_function()) and the return value of that function is
-returned to the caller. #GST_FLOW_NOT_SUPPORTED is returned if <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no
+<p>The function proceeds calling the chainlist function installed on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> (see<br />
+gst_pad_set_chain_list_function()) and the return value of that function is<br />
+returned to the caller. #GST_FLOW_NOT_SUPPORTED is returned if <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no<br />
 chainlist function.</p>
-<p>In all cases, success or failure, the caller loses its reference to <!-- raw HTML omitted -->list<!-- raw HTML omitted -->
+<p>In all cases, success or failure, the caller loses its reference to <!-- raw HTML omitted -->list<!-- raw HTML omitted --><br />
 after calling this function.</p>
 <p>MT safe.</p>
 
@@ -2901,7 +2906,7 @@ after calling this function.</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::BufferList to send, return GST_FLOW_ERROR
+        <div class='inline'><p>the Gst::BufferList to send, return GST_FLOW_ERROR<br />
 if not.</p>
 </div>
       
@@ -2941,7 +2946,7 @@ if not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Check and clear the #GST_PAD_FLAG_NEED_RECONFIGURE flag on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and return true
+    <p>Check and clear the #GST_PAD_FLAG_NEED_RECONFIGURE flag on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and return true<br />
 if the flag was set.</p>
 
 
@@ -2981,21 +2986,21 @@ if the flag was set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a stream-id for the source Gst::Pad <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> by combining the
-upstream information with the optional <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> of the stream
-of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> must have a parent Gst::Element and which must have zero
-or one sinkpad. <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> can only be nil if the parent element
+    <p>Creates a stream-id for the source Gst::Pad <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> by combining the<br />
+upstream information with the optional <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> of the stream<br />
+of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> must have a parent Gst::Element and which must have zero<br />
+or one sinkpad. <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> can only be nil if the parent element<br />
 of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has only a single source pad.</p>
-<p>This function generates an unique stream-id by getting the upstream
-stream-start event stream ID and appending <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> to it. If the
-element has no sinkpad it will generate an upstream stream-id by
-doing an URI query on the element and in the worst case just uses
-a random number. Source elements that don't implement the URI
-handler interface should ideally generate a unique, deterministic
+<p>This function generates an unique stream-id by getting the upstream<br />
+stream-start event stream ID and appending <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> to it. If the<br />
+element has no sinkpad it will generate an upstream stream-id by<br />
+doing an URI query on the element and in the worst case just uses<br />
+a random number. Source elements that don't implement the URI<br />
+handler interface should ideally generate a unique, deterministic<br />
 stream-id manually instead.</p>
-<p>Since stream IDs are sorted alphabetically, any numbers in the
-stream ID should be printed with a fixed number of characters,
-preceded by 0's, such as by using the format %03u instead of %u.</p>
+<p>Since stream IDs are sorted alphabetically, any numbers in the<br />
+stream ID should be printed with a fixed number of characters,<br />
+preceded by 0's, such as by using the format <span data-escaped-char>%</span>03u instead of <span data-escaped-char>%</span>u.</p>
 
 
   </div>
@@ -3068,17 +3073,17 @@ preceded by 0's, such as by using the format %03u instead of %u.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a stream-id for the source Gst::Pad <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> by combining the
-upstream information with the optional <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> of the stream
-of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> must have a parent Gst::Element and which must have zero
-or one sinkpad. <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> can only be nil if the parent element
+    <p>Creates a stream-id for the source Gst::Pad <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> by combining the<br />
+upstream information with the optional <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> of the stream<br />
+of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> must have a parent Gst::Element and which must have zero<br />
+or one sinkpad. <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> can only be nil if the parent element<br />
 of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has only a single source pad.</p>
-<p>This function generates an unique stream-id by getting the upstream
-stream-start event stream ID and appending <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> to it. If the
-element has no sinkpad it will generate an upstream stream-id by
-doing an URI query on the element and in the worst case just uses
-a random number. Source elements that don't implement the URI
-handler interface should ideally generate a unique, deterministic
+<p>This function generates an unique stream-id by getting the upstream<br />
+stream-start event stream ID and appending <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> to it. If the<br />
+element has no sinkpad it will generate an upstream stream-id by<br />
+doing an URI query on the element and in the worst case just uses<br />
+a random number. Source elements that don't implement the URI<br />
+handler interface should ideally generate a unique, deterministic<br />
 stream-id manually instead.</p>
 
 
@@ -3167,17 +3172,17 @@ stream-id manually instead.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a stream-id for the source Gst::Pad <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> by combining the
-upstream information with the optional <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> of the stream
-of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> must have a parent Gst::Element and which must have zero
-or one sinkpad. <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> can only be nil if the parent element
+    <p>Creates a stream-id for the source Gst::Pad <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> by combining the<br />
+upstream information with the optional <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> of the stream<br />
+of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> must have a parent Gst::Element and which must have zero<br />
+or one sinkpad. <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> can only be nil if the parent element<br />
 of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has only a single source pad.</p>
-<p>This function generates an unique stream-id by getting the upstream
-stream-start event stream ID and appending <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> to it. If the
-element has no sinkpad it will generate an upstream stream-id by
-doing an URI query on the element and in the worst case just uses
-a random number. Source elements that don't implement the URI
-handler interface should ideally generate a unique, deterministic
+<p>This function generates an unique stream-id by getting the upstream<br />
+stream-start event stream ID and appending <!-- raw HTML omitted -->stream_id<!-- raw HTML omitted --> to it. If the<br />
+element has no sinkpad it will generate an upstream stream-id by<br />
+doing an URI query on the element and in the worst case just uses<br />
+a random number. Source elements that don't implement the URI<br />
+handler interface should ideally generate a unique, deterministic<br />
 stream-id manually instead.</p>
 
 
@@ -3266,8 +3271,8 @@ stream-id manually instead.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the capabilities currently configured on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> with the last
-#GST_EVENT_CAPS event.
+    <p>Gets the capabilities currently configured on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> with the last<br />
+#GST_EVENT_CAPS event.<br />
 incremented ref-count or nil when pad has no caps. Unref after usage.</p>
 
 
@@ -3412,7 +3417,7 @@ incremented ref-count or nil when pad has no caps. Unref after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the private data of a pad.
+    <p>Gets the private data of a pad.<br />
 No locking is performed in this function.</p>
 
 
@@ -3452,8 +3457,8 @@ No locking is performed in this function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the given private data gpointer on the pad.
-This function can only be used by the element that owns the pad.
+    <p>Set the given private data gpointer on the pad.<br />
+This function can only be used by the element that owns the pad.<br />
 No locking is performed in this function.</p>
 
 
@@ -3509,9 +3514,9 @@ No locking is performed in this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Invokes the default event handler for the given pad.</p>
-<p>The EOS event will pause the task associated with <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> before it is forwarded
+<p>The EOS event will pause the task associated with <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> before it is forwarded<br />
 to all internally linked pads,</p>
-<p>The event is sent to all pads internally linked to <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. This function
+<p>The event is sent to all pads internally linked to <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. This function<br />
 takes ownership of <!-- raw HTML omitted -->event<!-- raw HTML omitted -->.</p>
 
 
@@ -3585,8 +3590,8 @@ takes ownership of <!-- raw HTML omitted -->event<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calls <!-- raw HTML omitted -->forward<!-- raw HTML omitted --> for all internally linked pads of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. This function deals with
-dynamically changing internal pads and will make sure that the <!-- raw HTML omitted -->forward<!-- raw HTML omitted -->
+    <p>Calls <!-- raw HTML omitted -->forward<!-- raw HTML omitted --> for all internally linked pads of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. This function deals with<br />
+dynamically changing internal pads and will make sure that the <!-- raw HTML omitted -->forward<!-- raw HTML omitted --><br />
 function is only called once for each pad.</p>
 <p>When <!-- raw HTML omitted -->forward<!-- raw HTML omitted --> returns true, no further pads will be processed.</p>
 
@@ -3661,26 +3666,26 @@ function is only called once for each pad.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>When <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is flushing this function returns #GST_FLOW_FLUSHING
+    <p>When <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is flushing this function returns #GST_FLOW_FLUSHING<br />
 immediately and <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is nil.</p>
-<p>Calls the getrange function of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, see Gst::PadGetRangeFunction for a
-description of a getrange function. If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no getrange function
-installed (see gst_pad_set_getrange_function()) this function returns
+<p>Calls the getrange function of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, see Gst::PadGetRangeFunction for a<br />
+description of a getrange function. If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no getrange function<br />
+installed (see gst_pad_set_getrange_function()) this function returns<br />
 #GST_FLOW_NOT_SUPPORTED.</p>
-<p>If <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> points to a variable holding nil, a valid new Gst::Buffer will be
-placed in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> when this function returns #GST_FLOW_OK. The new buffer
+<p>If <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> points to a variable holding nil, a valid new Gst::Buffer will be<br />
+placed in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> when this function returns #GST_FLOW_OK. The new buffer<br />
 must be freed with gst_buffer_unref() after usage.</p>
-<p>When <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> points to a variable that points to a valid Gst::Buffer, the
-buffer will be filled with the result data when this function returns
-#GST_FLOW_OK. If the provided buffer is larger than <!-- raw HTML omitted -->size<!-- raw HTML omitted -->, only
-<!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes will be filled in the result buffer and its size will be updated
+<p>When <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> points to a variable that points to a valid Gst::Buffer, the<br />
+buffer will be filled with the result data when this function returns<br />
+#GST_FLOW_OK. If the provided buffer is larger than <!-- raw HTML omitted -->size<!-- raw HTML omitted -->, only<br />
+<!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes will be filled in the result buffer and its size will be updated<br />
 accordingly.</p>
-<p>Note that less than <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes can be returned in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> when, for example,
-an EOS condition is near or when <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is not large enough to hold <!-- raw HTML omitted -->size<!-- raw HTML omitted -->
+<p>Note that less than <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes can be returned in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> when, for example,<br />
+an EOS condition is near or when <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is not large enough to hold <!-- raw HTML omitted -->size<!-- raw HTML omitted --><br />
 bytes. The caller should check the result buffer size to get the result size.</p>
-<p>When this function returns any other result value than #GST_FLOW_OK, <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->
+<p>When this function returns any other result value than #GST_FLOW_OK, <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --><br />
 will be unchanged.</p>
-<p>This is a lowlevel function. Usually gst_pad_pull_range() is used.
+<p>This is a lowlevel function. Usually gst_pad_pull_range() is used.<br />
 MT safe.</p>
 
 
@@ -3730,7 +3735,7 @@ MT safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to hold the Gst::Buffer,
+        <div class='inline'><p>a pointer to hold the Gst::Buffer,<br />
 returns #GST_FLOW_ERROR if nil.</p>
 </div>
       
@@ -3770,9 +3775,9 @@ returns #GST_FLOW_ERROR if nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a new reference of the sticky event of type <!-- raw HTML omitted -->event_type<!-- raw HTML omitted -->
-from the event.
-<!-- raw HTML omitted -->event_type<!-- raw HTML omitted --> or nil when no event of <!-- raw HTML omitted -->event_type<!-- raw HTML omitted --> was on
+    <p>Returns a new reference of the sticky event of type <!-- raw HTML omitted -->event_type<!-- raw HTML omitted --><br />
+from the event.<br />
+<!-- raw HTML omitted -->event_type<!-- raw HTML omitted --> or nil when no event of <!-- raw HTML omitted -->event_type<!-- raw HTML omitted --> was on<br />
 <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. Unref after usage.</p>
 
 
@@ -3885,7 +3890,7 @@ from the event.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Query if a pad is active
+    <p>Query if a pad is active<br />
 MT safe.</p>
 
 
@@ -3925,9 +3930,9 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if the pad is blocked or not. This function returns the
-last requested state of the pad. It is not certain that the pad
-is actually blocking at this point (see gst_pad_is_blocking()).
+    <p>Checks if the pad is blocked or not. This function returns the<br />
+last requested state of the pad. It is not certain that the pad<br />
+is actually blocking at this point (see gst_pad_is_blocking()).<br />
 MT safe.</p>
 
 
@@ -3967,8 +3972,8 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if the pad is blocking or not. This is a guaranteed state
-of whether the pad is actually blocking on a Gst::Buffer or a #GstEvent.
+    <p>Checks if the pad is blocking or not. This is a guaranteed state<br />
+of whether the pad is actually blocking on a Gst::Buffer or a #GstEvent.<br />
 MT safe.</p>
 
 
@@ -4008,7 +4013,7 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if a <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is linked to another pad or not.
+    <p>Checks if a <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is linked to another pad or not.<br />
 MT safe.</p>
 
 
@@ -4048,9 +4053,9 @@ MT safe.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets an iterator for the pads to which the given pad is linked to inside
+    <p>Gets an iterator for the pads to which the given pad is linked to inside<br />
 of the parent element.</p>
-<p>Each Gst::Pad element yielded by the iterator will have its refcount increased,
+<p>Each Gst::Pad element yielded by the iterator will have its refcount increased,<br />
 so unref after use.</p>
 <p>Free-function: gst_iterator_free</p>
 
@@ -4070,8 +4075,8 @@ so unref after use.</p>
       
       
         &mdash;
-        <div class='inline'><p>a new Gst::Iterator of #GstPad
-or nil when the pad does not have an iterator function
+        <div class='inline'><p>a new Gst::Iterator of #GstPad<br />
+or nil when the pad does not have an iterator function<br />
 configured. Use gst_iterator_free() after usage.</p>
 </div>
       
@@ -4093,11 +4098,11 @@ configured. Use gst_iterator_free() after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Iterate the list of pads to which the given pad is linked to inside of
-the parent element.
-This is the default handler, and thus returns an iterator of all of the
+    <p>Iterate the list of pads to which the given pad is linked to inside of<br />
+the parent element.<br />
+This is the default handler, and thus returns an iterator of all of the<br />
 pads inside the parent element with opposite direction.</p>
-<p>The caller must free this iterator after use with gst_iterator_free().
+<p>The caller must free this iterator after use with gst_iterator_free().<br />
 has no parent. Unref each returned pad with gst_object_unref().</p>
 
 
@@ -4191,7 +4196,7 @@ has no parent. Unref each returned pad with gst_object_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Links the source pad and the sink pad.
+    <p>Links the source pad and the sink pad.<br />
 MT Safe.</p>
 
 
@@ -4229,7 +4234,7 @@ MT Safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>A result code indicating if the connection worked or
+        <div class='inline'><p>A result code indicating if the connection worked or<br />
 what went wrong.</p>
 </div>
       
@@ -4252,10 +4257,10 @@ what went wrong.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Links the source pad and the sink pad.</p>
-<p>This variant of #gst_pad_link provides a more granular control on the
-checks being done when linking. While providing some considerable speedups
-the caller of this method must be aware that wrong usage of those flags
-can cause severe issues. Refer to the documentation of Gst::PadLinkCheck
+<p>This variant of #gst_pad_link provides a more granular control on the<br />
+checks being done when linking. While providing some considerable speedups<br />
+the caller of this method must be aware that wrong usage of those flags<br />
+can cause severe issues. Refer to the documentation of Gst::PadLinkCheck<br />
 for more information.</p>
 <p>MT Safe.</p>
 
@@ -4309,7 +4314,7 @@ for more information.</p>
       
       
         &mdash;
-        <div class='inline'><p>A result code indicating if the connection worked or
+        <div class='inline'><p>A result code indicating if the connection worked or<br />
 what went wrong.</p>
 </div>
       
@@ -4332,9 +4337,9 @@ what went wrong.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Links <!-- raw HTML omitted -->src<!-- raw HTML omitted --> to <!-- raw HTML omitted -->sink<!-- raw HTML omitted -->, creating any Gst::GhostPad's in between as necessary.</p>
-<p>This is a convenience function to save having to create and add intermediate
+<p>This is a convenience function to save having to create and add intermediate<br />
 Gst::GhostPad's as required for linking across #GstBin boundaries.</p>
-<p>If <!-- raw HTML omitted -->src<!-- raw HTML omitted --> or <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> pads don't have parent elements or do not share a common
+<p>If <!-- raw HTML omitted -->src<!-- raw HTML omitted --> or <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> pads don't have parent elements or do not share a common<br />
 ancestor, the link will fail.</p>
 
 
@@ -4394,12 +4399,12 @@ ancestor, the link will fail.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Links <!-- raw HTML omitted -->src<!-- raw HTML omitted --> to <!-- raw HTML omitted -->sink<!-- raw HTML omitted -->, creating any Gst::GhostPad's in between as necessary.</p>
-<p>This is a convenience function to save having to create and add intermediate
+<p>This is a convenience function to save having to create and add intermediate<br />
 Gst::GhostPad's as required for linking across #GstBin boundaries.</p>
-<p>If <!-- raw HTML omitted -->src<!-- raw HTML omitted --> or <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> pads don't have parent elements or do not share a common
+<p>If <!-- raw HTML omitted -->src<!-- raw HTML omitted --> or <!-- raw HTML omitted -->sink<!-- raw HTML omitted --> pads don't have parent elements or do not share a common<br />
 ancestor, the link will fail.</p>
-<p>Calling gst_pad_link_maybe_ghosting_full() with
-<!-- raw HTML omitted -->flags<!-- raw HTML omitted --> == %GST_PAD_LINK_CHECK_DEFAULT is the recommended way of linking
+<p>Calling gst_pad_link_maybe_ghosting_full() with<br />
+<!-- raw HTML omitted -->flags<!-- raw HTML omitted --> == %GST_PAD_LINK_CHECK_DEFAULT is the recommended way of linking<br />
 pads with safety checks applied.</p>
 
 
@@ -4473,7 +4478,7 @@ pads with safety checks applied.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Mark a pad for needing reconfiguration. The next call to
+    <p>Mark a pad for needing reconfiguration. The next call to<br />
 gst_pad_check_reconfigure() will return true after this call.</p>
 
 
@@ -4509,7 +4514,7 @@ gst_pad_check_reconfigure() will return true after this call.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Check the #GST_PAD_FLAG_NEED_RECONFIGURE flag on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and return true
+    <p>Check the #GST_PAD_FLAG_NEED_RECONFIGURE flag on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and return true<br />
 if the flag was set.</p>
 
 
@@ -4673,8 +4678,8 @@ if the flag was set.</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::PadTemplate from which
-this pad was instantiated, or nil if this pad has no
+        <div class='inline'><p>the Gst::PadTemplate from which<br />
+this pad was instantiated, or nil if this pad has no<br />
 template. Unref after usage.</p>
 </div>
       
@@ -4696,7 +4701,7 @@ template. Unref after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the capabilities for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->'s template.
+    <p>Gets the capabilities for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->'s template.<br />
 Unref after usage.</p>
 
 
@@ -4736,9 +4741,9 @@ Unref after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the parent of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, cast to a Gst::Element. If a <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no parent or
-its parent is not an element, return nil.
-caller has a reference on the parent, so unref when you're finished
+    <p>Gets the parent of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, cast to a Gst::Element. If a <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no parent or<br />
+its parent is not an element, return nil.<br />
+caller has a reference on the parent, so unref when you're finished<br />
 with it.</p>
 <p>MT safe.</p>
 
@@ -4779,9 +4784,9 @@ with it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Pause the task of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. This function will also wait until the
-function executed by the task is finished if this function is not
-called from the task function.
+    <p>Pause the task of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. This function will also wait until the<br />
+function executed by the task is finished if this function is not<br />
+called from the task function.<br />
 has no task.</p>
 
 
@@ -4821,8 +4826,8 @@ has no task.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. This function refs the peer pad so
-you need to unref it after use.
+    <p>Gets the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. This function refs the peer pad so<br />
+you need to unref it after use.<br />
 MT safe.</p>
 
 
@@ -4863,8 +4868,8 @@ MT safe.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Performs gst_pad_query() on the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
-<p>The caller is responsible for both the allocation and deallocation of
-the query structure.
+<p>The caller is responsible for both the allocation and deallocation of<br />
+the query structure.<br />
 if <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no peer.</p>
 
 
@@ -4923,7 +4928,7 @@ if <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no peer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Check if the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> accepts <!-- raw HTML omitted -->caps<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no peer, this function
+    <p>Check if the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> accepts <!-- raw HTML omitted -->caps<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no peer, this function<br />
 returns true.</p>
 
 
@@ -4982,14 +4987,14 @@ returns true.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the capabilities of the peer connected to this pad. Similar to
+    <p>Gets the capabilities of the peer connected to this pad. Similar to<br />
 gst_pad_query_caps().</p>
-<p>When called on srcpads <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> contains the caps that
-upstream could produce in the order preferred by upstream. When
-called on sinkpads <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> contains the caps accepted by
-downstream in the preferred order. <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> might be nil but
-if it is not nil the returned caps will be a subset of <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->.
-ref-count. When there is no peer pad, this function returns <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> or,
+<p>When called on srcpads <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> contains the caps that<br />
+upstream could produce in the order preferred by upstream. When<br />
+called on sinkpads <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> contains the caps accepted by<br />
+downstream in the preferred order. <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> might be nil but<br />
+if it is not nil the returned caps will be a subset of <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->.<br />
+ref-count. When there is no peer pad, this function returns <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> or,<br />
 when <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> is nil, ANY caps.</p>
 
 
@@ -5048,7 +5053,7 @@ when <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> is nil, ANY caps.<
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries the peer pad of a given sink pad to convert <!-- raw HTML omitted -->src_val<!-- raw HTML omitted --> in <!-- raw HTML omitted -->src_format<!-- raw HTML omitted -->
+    <p>Queries the peer pad of a given sink pad to convert <!-- raw HTML omitted -->src_val<!-- raw HTML omitted --> in <!-- raw HTML omitted -->src_format<!-- raw HTML omitted --><br />
 to <!-- raw HTML omitted -->dest_format<!-- raw HTML omitted -->.</p>
 
 
@@ -5186,7 +5191,7 @@ to <!-- raw HTML omitted -->dest_format<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>a location in which to store the total
+        <div class='inline'><p>a location in which to store the total<br />
 duration, or nil.</p>
 </div>
       
@@ -5260,7 +5265,7 @@ duration, or nil.</p>
       
       
         &mdash;
-        <div class='inline'><p>a location in which to store the current
+        <div class='inline'><p>a location in which to store the current<br />
 position, or nil.</p>
 </div>
       
@@ -5300,10 +5305,10 @@ position, or nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if all internally linked pads of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> accepts the caps in <!-- raw HTML omitted -->query<!-- raw HTML omitted --> and
+    <p>Checks if all internally linked pads of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> accepts the caps in <!-- raw HTML omitted -->query<!-- raw HTML omitted --> and<br />
 returns the intersection of the results.</p>
-<p>This function is useful as a default accept caps query function for an element
-that can handle any stream format, but requires caps that are acceptable for
+<p>This function is useful as a default accept caps query function for an element<br />
+that can handle any stream format, but requires caps that are acceptable for<br />
 all opposite pads.</p>
 
 
@@ -5362,10 +5367,10 @@ all opposite pads.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Calls gst_pad_query_caps() for all internally linked pads of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and returns
+    <p>Calls gst_pad_query_caps() for all internally linked pads of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and returns<br />
 the intersection of the results.</p>
-<p>This function is useful as a default caps query function for an element
-that can handle any stream format, but requires all its pads to have
+<p>This function is useful as a default caps query function for an element<br />
+that can handle any stream format, but requires all its pads to have<br />
 the same caps.  Two such elements are tee and adder.</p>
 
 
@@ -5425,25 +5430,25 @@ the same caps.  Two such elements are tee and adder.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Pulls a <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> from the peer pad or fills up a provided buffer.</p>
-<p>This function will first trigger the pad block signal if it was
+<p>This function will first trigger the pad block signal if it was<br />
 installed.</p>
-<p>When <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is not linked #GST_FLOW_NOT_LINKED is returned else this
-function returns the result of gst_pad_get_range() on the peer pad.
-See gst_pad_get_range() for a list of return values and for the
+<p>When <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is not linked #GST_FLOW_NOT_LINKED is returned else this<br />
+function returns the result of gst_pad_get_range() on the peer pad.<br />
+See gst_pad_get_range() for a list of return values and for the<br />
 semantics of the arguments of this function.</p>
-<p>If <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> points to a variable holding nil, a valid new Gst::Buffer will be
-placed in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> when this function returns #GST_FLOW_OK. The new buffer
-must be freed with gst_buffer_unref() after usage. When this function
+<p>If <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> points to a variable holding nil, a valid new Gst::Buffer will be<br />
+placed in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> when this function returns #GST_FLOW_OK. The new buffer<br />
+must be freed with gst_buffer_unref() after usage. When this function<br />
 returns any other result value, <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> will still point to nil.</p>
-<p>When <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> points to a variable that points to a valid Gst::Buffer, the
-buffer will be filled with the result data when this function returns
-#GST_FLOW_OK. When this function returns any other result value,
-<!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> will be unchanged. If the provided buffer is larger than <!-- raw HTML omitted -->size<!-- raw HTML omitted -->, only
-<!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes will be filled in the result buffer and its size will be updated
+<p>When <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> points to a variable that points to a valid Gst::Buffer, the<br />
+buffer will be filled with the result data when this function returns<br />
+#GST_FLOW_OK. When this function returns any other result value,<br />
+<!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> will be unchanged. If the provided buffer is larger than <!-- raw HTML omitted -->size<!-- raw HTML omitted -->, only<br />
+<!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes will be filled in the result buffer and its size will be updated<br />
 accordingly.</p>
-<p>Note that less than <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes can be returned in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> when, for example,
-an EOS condition is near or when <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is not large enough to hold <!-- raw HTML omitted -->size<!-- raw HTML omitted -->
-bytes. The caller should check the result buffer size to get the result size.
+<p>Note that less than <!-- raw HTML omitted -->size<!-- raw HTML omitted --> bytes can be returned in <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> when, for example,<br />
+an EOS condition is near or when <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> is not large enough to hold <!-- raw HTML omitted -->size<!-- raw HTML omitted --><br />
+bytes. The caller should check the result buffer size to get the result size.<br />
 MT safe.</p>
 
 
@@ -5493,7 +5498,7 @@ MT safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to hold the Gst::Buffer, returns
+        <div class='inline'><p>a pointer to hold the Gst::Buffer, returns<br />
 GST_FLOW_ERROR if nil.</p>
 </div>
       
@@ -5534,13 +5539,13 @@ GST_FLOW_ERROR if nil.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Pushes a buffer to the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
-<p>This function will call installed block probes before triggering any
+<p>This function will call installed block probes before triggering any<br />
 installed data probes.</p>
-<p>The function proceeds calling gst_pad_chain() on the peer pad and returns
-the value from that function. If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no peer, #GST_FLOW_NOT_LINKED will
+<p>The function proceeds calling gst_pad_chain() on the peer pad and returns<br />
+the value from that function. If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no peer, #GST_FLOW_NOT_LINKED will<br />
 be returned.</p>
-<p>In all cases, success or failure, the caller loses its reference to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->
-after calling this function.
+<p>In all cases, success or failure, the caller loses its reference to <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --><br />
+after calling this function.<br />
 MT safe.</p>
 
 
@@ -5560,7 +5565,7 @@ MT safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::Buffer to push returns GST_FLOW_ERROR
+        <div class='inline'><p>the Gst::Buffer to push returns GST_FLOW_ERROR<br />
 if not.</p>
 </div>
       
@@ -5600,11 +5605,11 @@ if not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sends the event to the peer of the given pad. This function is
-mainly used by elements to send events to their peer
+    <p>Sends the event to the peer of the given pad. This function is<br />
+mainly used by elements to send events to their peer<br />
 elements.</p>
-<p>This function takes ownership of the provided event so you should
-gst_event_ref() it if you want to reuse the event after this call.
+<p>This function takes ownership of the provided event so you should<br />
+gst_event_ref() it if you want to reuse the event after this call.<br />
 MT safe.</p>
 
 
@@ -5664,15 +5669,15 @@ MT safe.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Pushes a buffer list to the peer of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->.</p>
-<p>This function will call installed block probes before triggering any
+<p>This function will call installed block probes before triggering any<br />
 installed data probes.</p>
-<p>The function proceeds calling the chain function on the peer pad and returns
-the value from that function. If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no peer, #GST_FLOW_NOT_LINKED will
-be returned. If the peer pad does not have any installed chainlist function
-every group buffer of the list will be merged into a normal Gst::Buffer and
+<p>The function proceeds calling the chain function on the peer pad and returns<br />
+the value from that function. If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> has no peer, #GST_FLOW_NOT_LINKED will<br />
+be returned. If the peer pad does not have any installed chainlist function<br />
+every group buffer of the list will be merged into a normal Gst::Buffer and<br />
 chained via gst_pad_chain().</p>
-<p>In all cases, success or failure, the caller loses its reference to <!-- raw HTML omitted -->list<!-- raw HTML omitted -->
-after calling this function.
+<p>In all cases, success or failure, the caller loses its reference to <!-- raw HTML omitted -->list<!-- raw HTML omitted --><br />
+after calling this function.<br />
 MT safe.</p>
 
 
@@ -5692,7 +5697,7 @@ MT safe.</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::BufferList to push returns GST_FLOW_ERROR
+        <div class='inline'><p>the Gst::BufferList to push returns GST_FLOW_ERROR<br />
 if not.</p>
 </div>
       
@@ -5732,12 +5737,12 @@ if not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Dispatches a query to a pad. The query should have been allocated by the
-caller via one of the type-specific allocation functions. The element that
-the pad belongs to is responsible for filling the query with an appropriate
-response, which should then be parsed with a type-specific query parsing
+    <p>Dispatches a query to a pad. The query should have been allocated by the<br />
+caller via one of the type-specific allocation functions. The element that<br />
+the pad belongs to is responsible for filling the query with an appropriate<br />
+response, which should then be parsed with a type-specific query parsing<br />
 function.</p>
-<p>Again, the caller is responsible for both the allocation and deallocation of
+<p>Again, the caller is responsible for both the allocation and deallocation of<br />
 the query structure.</p>
 <p>Please also note that some queries might need a running pipeline to work.</p>
 
@@ -5855,18 +5860,18 @@ the query structure.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the capabilities this pad can produce or consume.
-Note that this method doesn't necessarily return the caps set by sending a
-gst_event_new_caps() - use gst_pad_get_current_caps() for that instead.
-gst_pad_query_caps returns all possible caps a pad can operate with, using
-the pad's CAPS query function, If the query fails, this function will return
+    <p>Gets the capabilities this pad can produce or consume.<br />
+Note that this method doesn't necessarily return the caps set by sending a<br />
+gst_event_new_caps() - use gst_pad_get_current_caps() for that instead.<br />
+gst_pad_query_caps returns all possible caps a pad can operate with, using<br />
+the pad's CAPS query function, If the query fails, this function will return<br />
 <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->, if not nil, otherwise ANY.</p>
-<p>When called on sinkpads <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> contains the caps that
-upstream could produce in the order preferred by upstream. When
-called on srcpads <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> contains the caps accepted by
-downstream in the preferred order. <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> might be nil but
+<p>When called on sinkpads <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> contains the caps that<br />
+upstream could produce in the order preferred by upstream. When<br />
+called on srcpads <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> contains the caps accepted by<br />
+downstream in the preferred order. <!-- raw HTML omitted -->filter<!-- raw HTML omitted --> might be nil but<br />
 if it is not nil the returned caps will be a subset of <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->.</p>
-<p>Note that this function does not return writable Gst::Caps, use
+<p>Note that this function does not return writable Gst::Caps, use<br />
 gst_caps_make_writable() before modifying the caps.</p>
 
 
@@ -6028,10 +6033,10 @@ gst_caps_make_writable() before modifying the caps.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Invokes the default query handler for the given pad.
-The query is sent to all pads internally linked to <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. Note that
-if there are many possible sink pads that are internally linked to
-<!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, only one will be sent the query.
+    <p>Invokes the default query handler for the given pad.<br />
+The query is sent to all pads internally linked to <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. Note that<br />
+if there are many possible sink pads that are internally linked to<br />
+<!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, only one will be sent the query.<br />
 Multi-sinkpad elements should implement custom query handlers.</p>
 
 
@@ -6139,7 +6144,7 @@ Multi-sinkpad elements should implement custom query handlers.</p>
       
       
         &mdash;
-        <div class='inline'><p>a location in which to store the total
+        <div class='inline'><p>a location in which to store the total<br />
 duration, or nil.</p>
 </div>
       
@@ -6307,22 +6312,22 @@ duration, or nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sends the event to the pad. This function can be used
+    <p>Sends the event to the pad. This function can be used<br />
 by applications to send events in the pipeline.</p>
-<p>If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is a source pad, <!-- raw HTML omitted -->event<!-- raw HTML omitted --> should be an upstream event. If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is a
-sink pad, <!-- raw HTML omitted -->event<!-- raw HTML omitted --> should be a downstream event. For example, you would not
-send a #GST_EVENT_EOS on a src pad; EOS events only propagate downstream.
-Furthermore, some downstream events have to be serialized with data flow,
-like EOS, while some can travel out-of-band, like #GST_EVENT_FLUSH_START. If
-the event needs to be serialized with data flow, this function will take the
+<p>If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is a source pad, <!-- raw HTML omitted -->event<!-- raw HTML omitted --> should be an upstream event. If <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> is a<br />
+sink pad, <!-- raw HTML omitted -->event<!-- raw HTML omitted --> should be a downstream event. For example, you would not<br />
+send a #GST_EVENT_EOS on a src pad; EOS events only propagate downstream.<br />
+Furthermore, some downstream events have to be serialized with data flow,<br />
+like EOS, while some can travel out-of-band, like #GST_EVENT_FLUSH_START. If<br />
+the event needs to be serialized with data flow, this function will take the<br />
 pad's stream lock while calling its event function.</p>
-<p>To find out whether an event type is upstream, downstream, or downstream and
-serialized, see Gst::EventTypeFlags, gst_event_type_get_flags(),
-#GST_EVENT_IS_UPSTREAM, #GST_EVENT_IS_DOWNSTREAM, and
-#GST_EVENT_IS_SERIALIZED. Note that in practice that an application or
-plugin doesn't need to bother itself with this information; the core handles
+<p>To find out whether an event type is upstream, downstream, or downstream and<br />
+serialized, see Gst::EventTypeFlags, gst_event_type_get_flags(),<br />
+#GST_EVENT_IS_UPSTREAM, #GST_EVENT_IS_DOWNSTREAM, and<br />
+#GST_EVENT_IS_SERIALIZED. Note that in practice that an application or<br />
+plugin doesn't need to bother itself with this information; the core handles<br />
 all necessary locks and checks.</p>
-<p>This function takes ownership of the provided event so you should
+<p>This function takes ownership of the provided event so you should<br />
 gst_event_ref() it if you want to reuse the event after this call.</p>
 
 
@@ -6381,8 +6386,8 @@ gst_event_ref() it if you want to reuse the event after this call.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the given activate function for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. The activate function will
-dispatch to gst_pad_activate_mode() to perform the actual activation.
+    <p>Sets the given activate function for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. The activate function will<br />
+dispatch to gst_pad_activate_mode() to perform the actual activation.<br />
 Only makes sense to set on sink pads.</p>
 <p>Call this function if your sink pad can start a pull-based task.</p>
 
@@ -6468,7 +6473,7 @@ Only makes sense to set on sink pads.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the given activate_mode function for the pad. An activate_mode function
+    <p>Sets the given activate_mode function for the pad. An activate_mode function<br />
 prepares the element for data passing.</p>
 
 
@@ -6553,7 +6558,7 @@ prepares the element for data passing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the given chain function for the pad. The chain function is called to
+    <p>Sets the given chain function for the pad. The chain function is called to<br />
 process a Gst::Buffer input buffer. see #GstPadChainFunction for more details.</p>
 
 
@@ -6638,8 +6643,8 @@ process a Gst::Buffer input buffer. see #GstPadChainFunction for more details.</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the given chain list function for the pad. The chainlist function is
-called to process a Gst::BufferList input buffer list. See
+    <p>Sets the given chain list function for the pad. The chainlist function is<br />
+called to process a Gst::BufferList input buffer list. See<br />
 Gst::PadChainListFunction for more details.</p>
 
 
@@ -6892,8 +6897,8 @@ Gst::PadChainListFunction for more details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the given getrange function for the pad. The getrange function is
-called to produce a new Gst::Buffer to start the processing pipeline. see
+    <p>Sets the given getrange function for the pad. The getrange function is<br />
+called to produce a new Gst::Buffer to start the processing pipeline. see<br />
 Gst::PadGetRangeFunction for a description of the getrange function.</p>
 
 
@@ -7062,13 +7067,13 @@ Gst::PadGetRangeFunction for a description of the getrange function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the given link function for the pad. It will be called when
+    <p>Sets the given link function for the pad. It will be called when<br />
 the pad is linked with another pad.</p>
-<p>The return value #GST_PAD_LINK_OK should be used when the connection can be
+<p>The return value #GST_PAD_LINK_OK should be used when the connection can be<br />
 made.</p>
-<p>The return value #GST_PAD_LINK_REFUSED should be used when the connection
+<p>The return value #GST_PAD_LINK_REFUSED should be used when the connection<br />
 cannot be made for some reason.</p>
-<p>If <!-- raw HTML omitted -->link<!-- raw HTML omitted --> is installed on a source pad, it should call the Gst::PadLinkFunction
+<p>If <!-- raw HTML omitted -->link<!-- raw HTML omitted --> is installed on a source pad, it should call the Gst::PadLinkFunction<br />
 of the peer sink pad, if present.</p>
 
 
@@ -7237,10 +7242,10 @@ of the peer sink pad, if present.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the given unlink function for the pad. It will be called
+    <p>Sets the given unlink function for the pad. It will be called<br />
 when the pad is unlinked.</p>
-<p>Note that the pad's lock is already held when the unlink
-function is called, so most pad functions cannot be called
+<p>Note that the pad's lock is already held when the unlink<br />
+function is called, so most pad functions cannot be called<br />
 from within the callback.</p>
 
 
@@ -7325,9 +7330,9 @@ from within the callback.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If there is a single internal link of the given pad, this function will
-return it. Otherwise, it will return NULL.
-or more than one internal links. Unref returned pad with
+    <p>If there is a single internal link of the given pad, this function will<br />
+return it. Otherwise, it will return NULL.<br />
+or more than one internal links. Unref returned pad with<br />
 gst_object_unref().</p>
 
 
@@ -7367,9 +7372,9 @@ gst_object_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Starts a task that repeatedly calls <!-- raw HTML omitted -->func<!-- raw HTML omitted --> with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->. This function
-is mostly used in pad activation functions to start the dataflow.
-The #GST_PAD_STREAM_LOCK of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> will automatically be acquired
+    <p>Starts a task that repeatedly calls <!-- raw HTML omitted -->func<!-- raw HTML omitted --> with <!-- raw HTML omitted -->user_data<!-- raw HTML omitted -->. This function<br />
+is mostly used in pad activation functions to start the dataflow.<br />
+The #GST_PAD_STREAM_LOCK of <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> will automatically be acquired<br />
 before <!-- raw HTML omitted -->func<!-- raw HTML omitted --> is called.</p>
 
 
@@ -7458,7 +7463,7 @@ before <!-- raw HTML omitted -->func<!-- raw HTML omitted --> is called.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Iterates all sticky events on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and calls <!-- raw HTML omitted -->foreach_func<!-- raw HTML omitted --> for every
+    <p>Iterates all sticky events on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> and calls <!-- raw HTML omitted -->foreach_func<!-- raw HTML omitted --> for every<br />
 event. If <!-- raw HTML omitted -->foreach_func<!-- raw HTML omitted --> returns false the iteration is immediately stopped.</p>
 
 
@@ -7478,7 +7483,7 @@ event. If <!-- raw HTML omitted -->foreach_func<!-- raw HTML omitted --> returns
       
       
         &mdash;
-        <div class='inline'><p>the Gst::PadStickyEventsForeachFunction that
+        <div class='inline'><p>the Gst::PadStickyEventsForeachFunction that<br />
 should be called for every event.</p>
 </div>
       
@@ -7529,12 +7534,12 @@ should be called for every event.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Stop the task of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. This function will also make sure that the
-function executed by the task will effectively stop if not called
+    <p>Stop the task of <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->. This function will also make sure that the<br />
+function executed by the task will effectively stop if not called<br />
 from the GstTaskFunction.</p>
-<p>This function will deadlock if called from the GstTaskFunction of
+<p>This function will deadlock if called from the GstTaskFunction of<br />
 the task. Use gst_task_pause() instead.</p>
-<p>Regardless of whether the pad has a task, the stream lock is acquired and
+<p>Regardless of whether the pad has a task, the stream lock is acquired and<br />
 released so as to ensure that streaming through this pad has finished.</p>
 
 
@@ -7574,7 +7579,7 @@ released so as to ensure that streaming through this pad has finished.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Store the sticky <!-- raw HTML omitted -->event<!-- raw HTML omitted --> on <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->
+    <p>Store the sticky <!-- raw HTML omitted -->event<!-- raw HTML omitted --> on <!-- raw HTML omitted -->pad<!-- raw HTML omitted --><br />
 was flushing or #GST_FLOW_EOS when the pad was EOS.</p>
 
 
@@ -7633,9 +7638,9 @@ was flushing or #GST_FLOW_EOS when the pad was EOS.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the current Gst::Stream for the <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, or nil if none has been
+    <p>Returns the current Gst::Stream for the <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, or nil if none has been<br />
 set yet, i.e. the pad has not received a stream-start event yet.</p>
-<p>This is a convenience wrapper around gst_pad_get_sticky_event() and
+<p>This is a convenience wrapper around gst_pad_get_sticky_event() and<br />
 gst_event_parse_stream().</p>
 
 
@@ -7654,7 +7659,7 @@ gst_event_parse_stream().</p>
       
       
         &mdash;
-        <div class='inline'><p>the current Gst::Stream for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, or nil.
+        <div class='inline'><p>the current Gst::Stream for <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, or nil.<br />
 unref the returned stream when no longer needed.</p>
 </div>
       
@@ -7676,11 +7681,11 @@ unref the returned stream when no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the current stream-id for the <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, or nil if none has been
+    <p>Returns the current stream-id for the <!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, or nil if none has been<br />
 set yet, i.e. the pad has not received a stream-start event yet.</p>
-<p>This is a convenience wrapper around gst_pad_get_sticky_event() and
+<p>This is a convenience wrapper around gst_pad_get_sticky_event() and<br />
 gst_event_parse_stream_start().</p>
-<p>The returned stream-id string should be treated as an opaque string, its
+<p>The returned stream-id string should be treated as an opaque string, its<br />
 contents should not be interpreted.</p>
 
 
@@ -7699,8 +7704,8 @@ contents should not be interpreted.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly-allocated copy of the stream-id for
-<!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, or nil.  g_free() the returned string when no longer
+        <div class='inline'><p>a newly-allocated copy of the stream-id for<br />
+<!-- raw HTML omitted -->pad<!-- raw HTML omitted -->, or nil.  g_free() the returned string when no longer<br />
 needed.</p>
 </div>
       
@@ -7722,7 +7727,7 @@ needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> task state. If no task is currently
+    <p>Get <!-- raw HTML omitted -->pad<!-- raw HTML omitted --> task state. If no task is currently<br />
 set, #GST_TASK_STOPPED is returned.</p>
 
 
@@ -7867,8 +7872,8 @@ set, #GST_TASK_STOPPED is returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unlinks the source pad from the sink pad. Will emit the Gst::Pad::unlinked
-signal on both pads.
+    <p>Unlinks the source pad from the sink pad. Will emit the Gst::Pad::unlinked<br />
+signal on both pads.<br />
 the pads were not linked together.</p>
 <p>MT safe.</p>
 
@@ -7928,11 +7933,11 @@ the pads were not linked together.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A helper function you can use that sets the FIXED_CAPS flag
-This way the default CAPS query will always return the negotiated caps
+    <p>A helper function you can use that sets the FIXED_CAPS flag<br />
+This way the default CAPS query will always return the negotiated caps<br />
 or in case the pad is not negotiated, the padtemplate caps.</p>
-<p>The negotiated caps are the caps of the last CAPS event that passed on the
-pad. Use this function on a pad that, once it negotiated to a CAPS, cannot
+<p>The negotiated caps are the caps of the last CAPS event that passed on the<br />
+pad. Use this function on a pad that, once it negotiated to a CAPS, cannot<br />
 be renegotiated to something else.</p>
 
 
@@ -7964,7 +7969,7 @@ be renegotiated to something else.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

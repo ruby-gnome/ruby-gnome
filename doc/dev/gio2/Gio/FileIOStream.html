@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::FileIOStream";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -209,9 +211,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -239,8 +243,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the entity tag for the file when it has been written.
-This must be called after the stream has been written
+    <p>Gets the entity tag for the file when it has been written.<br />
+This must be called after the stream has been written<br />
 and closed, as the etag can change while writing.</p>
 
 
@@ -280,20 +284,20 @@ and closed, as the etag can change while writing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Queries a file io stream for the given <!-- raw HTML omitted -->attributes<!-- raw HTML omitted -->.
-This function blocks while querying the stream. For the asynchronous
-version of this function, see g_file_io_stream_query_info_async().
-While the stream is blocked, the stream will set the pending flag
-internally, and any other operations on the stream will fail with
+    <p>Queries a file io stream for the given <!-- raw HTML omitted -->attributes<!-- raw HTML omitted -->.<br />
+This function blocks while querying the stream. For the asynchronous<br />
+version of this function, see g_file_io_stream_query_info_async().<br />
+While the stream is blocked, the stream will set the pending flag<br />
+internally, and any other operations on the stream will fail with<br />
 %G_IO_ERROR_PENDING.</p>
-<p>Can fail if the stream was already closed (with <!-- raw HTML omitted -->error<!-- raw HTML omitted --> being set to
-%G_IO_ERROR_CLOSED), the stream has pending operations (with <!-- raw HTML omitted -->error<!-- raw HTML omitted --> being
-set to %G_IO_ERROR_PENDING), or if querying info is not supported for
-the stream's interface (with <!-- raw HTML omitted -->error<!-- raw HTML omitted --> being set to %G_IO_ERROR_NOT_SUPPORTED). I
+<p>Can fail if the stream was already closed (with <!-- raw HTML omitted -->error<!-- raw HTML omitted --> being set to<br />
+%G_IO_ERROR_CLOSED), the stream has pending operations (with <!-- raw HTML omitted -->error<!-- raw HTML omitted --> being<br />
+set to %G_IO_ERROR_PENDING), or if querying info is not supported for<br />
+the stream's interface (with <!-- raw HTML omitted -->error<!-- raw HTML omitted --> being set to %G_IO_ERROR_NOT_SUPPORTED). I<br />
 all cases of failure, nil will be returned.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be set, and nil will
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be set, and nil will<br />
 be returned.</p>
 
 
@@ -367,10 +371,10 @@ be returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously queries the <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> for a GFile::Info. When completed,
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called with a GAsync::Result which can be used to
+    <p>Asynchronously queries the <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> for a GFile::Info. When completed,<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called with a GAsync::Result which can be used to<br />
 finish the operation with g_file_io_stream_query_info_finish().</p>
-<p>For the synchronous version of this function, see
+<p>For the synchronous version of this function, see<br />
 g_file_io_stream_query_info().</p>
 
 
@@ -405,7 +409,7 @@ g_file_io_stream_query_info().</p>
       
       
         &mdash;
-        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the<br />
 request</p>
 </div>
       
@@ -436,7 +440,7 @@ request</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -487,7 +491,7 @@ to call when the request is satisfied</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finalizes the asynchronous query started
+    <p>Finalizes the asynchronous query started<br />
 by g_file_io_stream_query_info_async().</p>
 
 
@@ -542,7 +546,7 @@ by g_file_io_stream_query_info_async().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

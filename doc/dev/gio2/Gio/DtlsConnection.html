@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::DtlsConnection";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,29 +79,30 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GDtlsConnection</code> is the base DTLS connection class type, which wraps
-a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DatagramBased] and provides DTLS encryption on top of it. Its
-subclasses, [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DtlsClientConnection] and
-[iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DtlsServerConnection], implement client-side and server-side DTLS,
+    <p><code>GDtlsConnection</code> is the base DTLS connection class type, which wraps<br />
+a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DatagramBased] and provides DTLS encryption on top of it. Its<br />
+subclasses, [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DtlsClientConnection] and<br />
+[iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DtlsServerConnection], implement client-side and server-side DTLS,<br />
 respectively.</p>
 <p>For TLS support, see [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.TlsConnection].</p>
-<p>As DTLS is datagram based, <code>GDtlsConnection</code> implements
-[iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DatagramBased], presenting a datagram-socket-like API for the
-encrypted connection. This operates over a base datagram connection, which is
+<p>As DTLS is datagram based, <code>GDtlsConnection</code> implements<br />
+[iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DatagramBased], presenting a datagram-socket-like API for the<br />
+encrypted connection. This operates over a base datagram connection, which is<br />
 also a <code>GDatagramBased</code> ([property<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DtlsConnection:base-socket]).</p>
 <p>To close a DTLS connection, use [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DtlsConnection.close].</p>
-<p>Neither [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DtlsServerConnection] or [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DtlsClientConnection]
-set the peer address on their base [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DatagramBased] if it is a
-[class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket] — it is up to the caller to do that if they wish. If they
-do not, and [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket.close] is called on the base socket, the
-<code>GDtlsConnection</code> will not raise a <code>G_IO_ERROR_NOT_CONNECTED</code> error on
+<p>Neither [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DtlsServerConnection] or [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DtlsClientConnection]<br />
+set the peer address on their base [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DatagramBased] if it is a<br />
+[class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket] — it is up to the caller to do that if they wish. If they<br />
+do not, and [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket.close] is called on the base socket, the<br />
+<code>GDtlsConnection</code> will not raise a <code>G_IO_ERROR_NOT_CONNECTED</code> error on<br />
 further I/O.</p>
 
 
@@ -792,6 +794,7 @@ further I/O.</p>
 
       
     </ul>
+    
   
 
 
@@ -872,14 +875,14 @@ further I/O.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the list of application-layer protocols to advertise that the
-caller is willing to speak on this connection. The
-Application-Layer Protocol Negotiation (ALPN) extension will be
-used to negotiate a compatible protocol with the peer; use
-g_dtls_connection_get_negotiated_protocol() to find the negotiated
-protocol after the handshake.  Specifying nil for the the value
+    <p>Sets the list of application-layer protocols to advertise that the<br />
+caller is willing to speak on this connection. The<br />
+Application-Layer Protocol Negotiation (ALPN) extension will be<br />
+used to negotiate a compatible protocol with the peer; use<br />
+g_dtls_connection_get_negotiated_protocol() to find the negotiated<br />
+protocol after the handshake.  Specifying nil for the the value<br />
 of <!-- raw HTML omitted -->protocols<!-- raw HTML omitted --> will disable ALPN negotiation.</p>
-<p>See <a href="https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids">IANA TLS ALPN Protocol IDs</a>
+<p>See <a href="https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids">IANA TLS ALPN Protocol IDs</a><br />
 for a list of registered protocol IDs.</p>
 
 
@@ -899,7 +902,7 @@ for a list of registered protocol IDs.</p>
       
       
         &mdash;
-        <div class='inline'><p>a nil-terminated
+        <div class='inline'><p>a nil-terminated<br />
 array of ALPN protocol names (eg, &quot;http/1.1&quot;, &quot;h2&quot;), or nil</p>
 </div>
       
@@ -935,7 +938,7 @@ array of ALPN protocol names (eg, &quot;http/1.1&quot;, &quot;h2&quot;), or nil<
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets <!-- raw HTML omitted -->conn<!-- raw HTML omitted -->'s certificate, as set by
+    <p>Gets <!-- raw HTML omitted -->conn<!-- raw HTML omitted -->'s certificate, as set by<br />
 g_dtls_connection_set_certificate().</p>
 
 
@@ -975,21 +978,21 @@ g_dtls_connection_set_certificate().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This sets the certificate that <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> will present to its peer
-during the TLS handshake. For a GDtls::ServerConnection, it is
-mandatory to set this, and that will normally be done at construct
+    <p>This sets the certificate that <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> will present to its peer<br />
+during the TLS handshake. For a GDtls::ServerConnection, it is<br />
+mandatory to set this, and that will normally be done at construct<br />
 time.</p>
-<p>For a GDtls::ClientConnection, this is optional. If a handshake fails
-with %G_TLS_ERROR_CERTIFICATE_REQUIRED, that means that the server
-requires a certificate, and if you try connecting again, you should
-call this method first. You can call
-g_dtls_client_connection_get_accepted_cas() on the failed connection
-to get a list of Certificate Authorities that the server will
+<p>For a GDtls::ClientConnection, this is optional. If a handshake fails<br />
+with %G_TLS_ERROR_CERTIFICATE_REQUIRED, that means that the server<br />
+requires a certificate, and if you try connecting again, you should<br />
+call this method first. You can call<br />
+g_dtls_client_connection_get_accepted_cas() on the failed connection<br />
+to get a list of Certificate Authorities that the server will<br />
 accept certificates from.</p>
-<p>(It is also possible that a server will allow the connection with
-or without a certificate; in that case, if you don't provide a
-certificate, you can tell that the server requested one by the fact
-that g_dtls_client_connection_get_accepted_cas() will return
+<p>(It is also possible that a server will allow the connection with<br />
+or without a certificate; in that case, if you don't provide a<br />
+certificate, you can tell that the server requested one by the fact<br />
+that g_dtls_client_connection_get_accepted_cas() will return<br />
 non-nil.)</p>
 
 
@@ -1044,13 +1047,13 @@ non-nil.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the name of the current DTLS ciphersuite, or nil if the
-connection has not handshaked or has been closed. Beware that the TLS
-backend may use any of multiple different naming conventions, because
-OpenSSL and GnuTLS have their own ciphersuite naming conventions that
-are different from each other and different from the standard, IANA-
-registered ciphersuite names. The ciphersuite name is intended to be
-displayed to the user for informative purposes only, and parsing it
+    <p>Returns the name of the current DTLS ciphersuite, or nil if the<br />
+connection has not handshaked or has been closed. Beware that the TLS<br />
+backend may use any of multiple different naming conventions, because<br />
+OpenSSL and GnuTLS have their own ciphersuite naming conventions that<br />
+are different from each other and different from the standard, IANA-<br />
+registered ciphersuite names. The ciphersuite name is intended to be<br />
+displayed to the user for informative purposes only, and parsing it<br />
 is not recommended.</p>
 
 
@@ -1090,20 +1093,20 @@ is not recommended.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Close the DTLS connection. This is equivalent to calling
+    <p>Close the DTLS connection. This is equivalent to calling<br />
 g_dtls_connection_shutdown() to shut down both sides of the connection.</p>
-<p>Closing a GDtls::Connection waits for all buffered but untransmitted data to
-be sent before it completes. It then sends a <code>close_notify</code> DTLS alert to the
-peer and may wait for a <code>close_notify</code> to be received from the peer. It does
-not close the underlying GDtls::Connection:base-socket; that must be closed
+<p>Closing a GDtls::Connection waits for all buffered but untransmitted data to<br />
+be sent before it completes. It then sends a <code>close_notify</code> DTLS alert to the<br />
+peer and may wait for a <code>close_notify</code> to be received from the peer. It does<br />
+not close the underlying GDtls::Connection:base-socket; that must be closed<br />
 separately.</p>
-<p>Once <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> is closed, all other operations will return %G_IO_ERROR_CLOSED.
+<p>Once <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> is closed, all other operations will return %G_IO_ERROR_CLOSED.<br />
 Closing a GDtls::Connection multiple times will not return an error.</p>
-<p>GDtls::Connections will be automatically closed when the last reference is
-dropped, but you might want to call this function to make sure resources are
+<p>GDtls::Connections will be automatically closed when the last reference is<br />
+dropped, but you might want to call this function to make sure resources are<br />
 released as early as possible.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled, the GDtls::Connection may be left
-partially-closed and any pending untransmitted data may be lost. Call
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled, the GDtls::Connection may be left<br />
+partially-closed and any pending untransmitted data may be lost. Call<br />
 g_dtls_connection_close() again to complete closing the GDtls::Connection.</p>
 
 
@@ -1162,7 +1165,7 @@ g_dtls_connection_close() again to complete closing the GDtls::Connection.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously close the DTLS connection. See g_dtls_connection_close() for
+    <p>Asynchronously close the DTLS connection. See g_dtls_connection_close() for<br />
 more information.</p>
 
 
@@ -1262,8 +1265,8 @@ more information.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finish an asynchronous TLS close operation. See g_dtls_connection_close()
-for more information.
+    <p>Finish an asynchronous TLS close operation. See g_dtls_connection_close()<br />
+for more information.<br />
 case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set</p>
 
 
@@ -1322,7 +1325,7 @@ case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the certificate database that <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> uses to verify
+    <p>Gets the certificate database that <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> uses to verify<br />
 peer certificates. See g_dtls_connection_set_database().</p>
 
 
@@ -1362,15 +1365,15 @@ peer certificates. See g_dtls_connection_set_database().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the certificate database that is used to verify peer certificates.
-This is set to the default database by default. See
-g_tls_backend_get_default_database(). If set to nil, then
-peer certificate validation will always set the
-%G_TLS_CERTIFICATE_UNKNOWN_CA error (meaning
-GDtls::Connection::accept-certificate will always be emitted on
-client-side connections, unless that bit is not set in
+    <p>Sets the certificate database that is used to verify peer certificates.<br />
+This is set to the default database by default. See<br />
+g_tls_backend_get_default_database(). If set to nil, then<br />
+peer certificate validation will always set the<br />
+%G_TLS_CERTIFICATE_UNKNOWN_CA error (meaning<br />
+GDtls::Connection::accept-certificate will always be emitted on<br />
+client-side connections, unless that bit is not set in<br />
 GDtls::ClientConnection:validation-flags).</p>
-<p>There are nonintuitive security implications when using a non-default
+<p>There are nonintuitive security implications when using a non-default<br />
 database. See GDtls::Connection:database for details.</p>
 
 
@@ -1425,7 +1428,7 @@ database. See GDtls::Connection:database for details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Used by GDtls::Connection implementations to emit the
+    <p>Used by GDtls::Connection implementations to emit the<br />
 GDtls::Connection::accept-certificate signal.</p>
 
 
@@ -1478,7 +1481,7 @@ GDtls::Connection::accept-certificate signal.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if one of the signal handlers has returned
+        <div class='inline'><p>true if one of the signal handlers has returned<br />
 true to accept <!-- raw HTML omitted -->peer_cert<!-- raw HTML omitted --></p>
 </div>
       
@@ -1562,16 +1565,16 @@ true to accept <!-- raw HTML omitted -->peer_cert<!-- raw HTML omitted --></p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Query the TLS backend for TLS channel binding data of <!-- raw HTML omitted -->type<!-- raw HTML omitted --> for <!-- raw HTML omitted -->conn<!-- raw HTML omitted -->.</p>
-<p>This call retrieves TLS channel binding data as specified in RFC
-<a href="https://tools.ietf.org/html/rfc5056">5056</a>, RFC
-<a href="https://tools.ietf.org/html/rfc5929">5929</a>, and related RFCs.  The
-binding data is returned in <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.  The <!-- raw HTML omitted -->data<!-- raw HTML omitted --> is resized by the callee
-using GByte::Array buffer management and will be freed when the <!-- raw HTML omitted -->data<!-- raw HTML omitted -->
-is destroyed by g_byte_array_unref(). If <!-- raw HTML omitted -->data<!-- raw HTML omitted --> is nil, it will only
-check whether TLS backend is able to fetch the data (e.g. whether <!-- raw HTML omitted -->type<!-- raw HTML omitted -->
-is supported by the TLS backend). It does not guarantee that the data
-will be available though.  That could happen if TLS connection does not
-support <!-- raw HTML omitted -->type<!-- raw HTML omitted --> or the binding data is not available yet due to additional
+<p>This call retrieves TLS channel binding data as specified in RFC<br />
+<a href="https://tools.ietf.org/html/rfc5056">5056</a>, RFC<br />
+<a href="https://tools.ietf.org/html/rfc5929">5929</a>, and related RFCs.  The<br />
+binding data is returned in <!-- raw HTML omitted -->data<!-- raw HTML omitted -->.  The <!-- raw HTML omitted -->data<!-- raw HTML omitted --> is resized by the callee<br />
+using GByte::Array buffer management and will be freed when the <!-- raw HTML omitted -->data<!-- raw HTML omitted --><br />
+is destroyed by g_byte_array_unref(). If <!-- raw HTML omitted -->data<!-- raw HTML omitted --> is nil, it will only<br />
+check whether TLS backend is able to fetch the data (e.g. whether <!-- raw HTML omitted -->type<!-- raw HTML omitted --><br />
+is supported by the TLS backend). It does not guarantee that the data<br />
+will be available though.  That could happen if TLS connection does not<br />
+support <!-- raw HTML omitted -->type<!-- raw HTML omitted --> or the binding data is not available yet due to additional<br />
 negotiation or input required.</p>
 
 
@@ -1606,7 +1609,7 @@ negotiation or input required.</p>
       
       
         &mdash;
-        <div class='inline'><p>GByte::Array is
+        <div class='inline'><p>GByte::Array is<br />
 filled with the binding data, or nil</p>
 </div>
       
@@ -1647,26 +1650,26 @@ filled with the binding data, or nil</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Attempts a TLS handshake on <!-- raw HTML omitted -->conn<!-- raw HTML omitted -->.</p>
-<p>On the client side, it is never necessary to call this method;
-although the connection needs to perform a handshake after
-connecting, GDtls::Connection will handle this for you automatically
-when you try to send or receive data on the connection. You can call
-g_dtls_connection_handshake() manually if you want to know whether
-the initial handshake succeeded or failed (as opposed to just
-immediately trying to use <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> to read or write, in which case,
-if it fails, it may not be possible to tell if it failed before
-or after completing the handshake), but beware that servers may reject
-client authentication after the handshake has completed, so a
+<p>On the client side, it is never necessary to call this method;<br />
+although the connection needs to perform a handshake after<br />
+connecting, GDtls::Connection will handle this for you automatically<br />
+when you try to send or receive data on the connection. You can call<br />
+g_dtls_connection_handshake() manually if you want to know whether<br />
+the initial handshake succeeded or failed (as opposed to just<br />
+immediately trying to use <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> to read or write, in which case,<br />
+if it fails, it may not be possible to tell if it failed before<br />
+or after completing the handshake), but beware that servers may reject<br />
+client authentication after the handshake has completed, so a<br />
 successful handshake does not indicate the connection will be usable.</p>
-<p>Likewise, on the server side, although a handshake is necessary at
-the beginning of the communication, you do not need to call this
+<p>Likewise, on the server side, although a handshake is necessary at<br />
+the beginning of the communication, you do not need to call this<br />
 function explicitly unless you want clearer error reporting.</p>
-<p>Previously, calling g_dtls_connection_handshake() after the initial
-handshake would trigger a rehandshake; however, this usage was
-deprecated in GLib 2.60 because rehandshaking was removed from the
-TLS protocol in TLS 1.3. Since GLib 2.64, calling this function after
+<p>Previously, calling g_dtls_connection_handshake() after the initial<br />
+handshake would trigger a rehandshake; however, this usage was<br />
+deprecated in GLib 2.60 because rehandshaking was removed from the<br />
+TLS protocol in TLS 1.3. Since GLib 2.64, calling this function after<br />
 the initial handshake will no longer do anything.</p>
-<p>GDtls::Connection::accept_certificate may be emitted during the
+<p>GDtls::Connection::accept_certificate may be emitted during the<br />
 handshake.</p>
 
 
@@ -1725,7 +1728,7 @@ handshake.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously performs a TLS handshake on <!-- raw HTML omitted -->conn<!-- raw HTML omitted -->. See
+    <p>Asynchronously performs a TLS handshake on <!-- raw HTML omitted -->conn<!-- raw HTML omitted -->. See<br />
 g_dtls_connection_handshake() for more information.</p>
 
 
@@ -1825,8 +1828,8 @@ g_dtls_connection_handshake() for more information.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finish an asynchronous TLS handshake operation. See
-g_dtls_connection_handshake() for more information.
+    <p>Finish an asynchronous TLS handshake operation. See<br />
+g_dtls_connection_handshake() for more information.<br />
 case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set.</p>
 
 
@@ -1885,8 +1888,8 @@ case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the object that will be used to interact with the user. It will be used
-for things like prompting the user for passwords. If nil is returned, then
+    <p>Get the object that will be used to interact with the user. It will be used<br />
+for things like prompting the user for passwords. If nil is returned, then<br />
 no user interaction will occur for this connection.</p>
 
 
@@ -1926,10 +1929,10 @@ no user interaction will occur for this connection.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the object that will be used to interact with the user. It will be used
+    <p>Set the object that will be used to interact with the user. It will be used<br />
 for things like prompting the user for passwords.</p>
-<p>The <!-- raw HTML omitted -->interaction<!-- raw HTML omitted --> argument will normally be a derived subclass of
-GTls::Interaction. nil can also be provided if no user interaction
+<p>The <!-- raw HTML omitted -->interaction<!-- raw HTML omitted --> argument will normally be a derived subclass of<br />
+GTls::Interaction. nil can also be provided if no user interaction<br />
 should occur for this connection.</p>
 
 
@@ -1984,11 +1987,11 @@ should occur for this connection.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the name of the application-layer protocol negotiated during
+    <p>Gets the name of the application-layer protocol negotiated during<br />
 the handshake.</p>
-<p>If the peer did not use the ALPN extension, or did not advertise a
-protocol that matched one of <!-- raw HTML omitted -->conn<!-- raw HTML omitted -->'s protocols, or the TLS backend
-does not support ALPN, then this will be nil. See
+<p>If the peer did not use the ALPN extension, or did not advertise a<br />
+protocol that matched one of <!-- raw HTML omitted -->conn<!-- raw HTML omitted -->'s protocols, or the TLS backend<br />
+does not support ALPN, then this will be nil. See<br />
 g_dtls_connection_set_advertised_protocols().</p>
 
 
@@ -2028,8 +2031,8 @@ g_dtls_connection_set_advertised_protocols().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets <!-- raw HTML omitted -->conn<!-- raw HTML omitted -->'s peer's certificate after the handshake has completed
-or failed. (It is not set during the emission of
+    <p>Gets <!-- raw HTML omitted -->conn<!-- raw HTML omitted -->'s peer's certificate after the handshake has completed<br />
+or failed. (It is not set during the emission of<br />
 GDtls::Connection::accept-certificate.)</p>
 
 
@@ -2069,8 +2072,8 @@ GDtls::Connection::accept-certificate.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the errors associated with validating <!-- raw HTML omitted -->conn<!-- raw HTML omitted -->'s peer's
-certificate, after the handshake has completed or failed. (It is
+    <p>Gets the errors associated with validating <!-- raw HTML omitted -->conn<!-- raw HTML omitted -->'s peer's<br />
+certificate, after the handshake has completed or failed. (It is<br />
 not set during the emission of GDtls::Connection::accept-certificate.)</p>
 
 
@@ -2110,9 +2113,9 @@ not set during the emission of GDtls::Connection::accept-certificate.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the current DTLS protocol version, which may be
-%G_TLS_PROTOCOL_VERSION_UNKNOWN if the connection has not handshaked, or
-has been closed, or if the TLS backend has implemented a protocol version
+    <p>Returns the current DTLS protocol version, which may be<br />
+%G_TLS_PROTOCOL_VERSION_UNKNOWN if the connection has not handshaked, or<br />
+has been closed, or if the TLS backend has implemented a protocol version<br />
 that is not a recognized GTls::ProtocolVersion.</p>
 
 
@@ -2152,7 +2155,7 @@ that is not a recognized GTls::ProtocolVersion.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> rehandshaking mode. See
+    <p>Gets <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> rehandshaking mode. See<br />
 g_dtls_connection_set_rehandshake_mode() for details.</p>
 
 
@@ -2192,9 +2195,9 @@ g_dtls_connection_set_rehandshake_mode() for details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Since GLib 2.64, changing the rehandshake mode is no longer supported
-and will have no effect. With TLS 1.3, rehandshaking has been removed from
-the TLS protocol, replaced by separate post-handshake authentication and
+    <p>Since GLib 2.64, changing the rehandshake mode is no longer supported<br />
+and will have no effect. With TLS 1.3, rehandshaking has been removed from<br />
+the TLS protocol, replaced by separate post-handshake authentication and<br />
 rekey operations.</p>
 
 
@@ -2249,8 +2252,8 @@ rekey operations.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Tests whether or not <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> expects a proper TLS close notification
-when the connection is closed. See
+    <p>Tests whether or not <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> expects a proper TLS close notification<br />
+when the connection is closed. See<br />
 g_dtls_connection_set_require_close_notify() for details.</p>
 
 
@@ -2290,28 +2293,28 @@ g_dtls_connection_set_require_close_notify() for details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether or not <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> expects a proper TLS close notification
-before the connection is closed. If this is true (the default),
-then <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> will expect to receive a TLS close notification from its
-peer before the connection is closed, and will return a
-%G_TLS_ERROR_EOF error if the connection is closed without proper
-notification (since this may indicate a network error, or
+    <p>Sets whether or not <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> expects a proper TLS close notification<br />
+before the connection is closed. If this is true (the default),<br />
+then <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> will expect to receive a TLS close notification from its<br />
+peer before the connection is closed, and will return a<br />
+%G_TLS_ERROR_EOF error if the connection is closed without proper<br />
+notification (since this may indicate a network error, or<br />
 man-in-the-middle attack).</p>
-<p>In some protocols, the application will know whether or not the
-connection was closed cleanly based on application-level data
-(because the application-level data includes a length field, or is
-somehow self-delimiting); in this case, the close notify is
-redundant and may be omitted. You
-can use g_dtls_connection_set_require_close_notify() to tell <!-- raw HTML omitted -->conn<!-- raw HTML omitted -->
-to allow an &quot;unannounced&quot; connection close, in which case the close
-will show up as a 0-length read, as in a non-TLS
-GDatagram::Based, and it is up to the application to check that
+<p>In some protocols, the application will know whether or not the<br />
+connection was closed cleanly based on application-level data<br />
+(because the application-level data includes a length field, or is<br />
+somehow self-delimiting); in this case, the close notify is<br />
+redundant and may be omitted. You<br />
+can use g_dtls_connection_set_require_close_notify() to tell <!-- raw HTML omitted -->conn<!-- raw HTML omitted --><br />
+to allow an &quot;unannounced&quot; connection close, in which case the close<br />
+will show up as a 0-length read, as in a non-TLS<br />
+GDatagram::Based, and it is up to the application to check that<br />
 the data has been fully received.</p>
-<p>Note that this only affects the behavior when the peer closes the
-connection; when the application calls g_dtls_connection_close_async() on
-<!-- raw HTML omitted -->conn<!-- raw HTML omitted --> itself, this will send a close notification regardless of the
-setting of this property. If you explicitly want to do an unclean
-close, you can close <!-- raw HTML omitted -->conn<!-- raw HTML omitted -->'s GDtls::Connection:base-socket rather
+<p>Note that this only affects the behavior when the peer closes the<br />
+connection; when the application calls g_dtls_connection_close_async() on<br />
+<!-- raw HTML omitted -->conn<!-- raw HTML omitted --> itself, this will send a close notification regardless of the<br />
+setting of this property. If you explicitly want to do an unclean<br />
+close, you can close <!-- raw HTML omitted -->conn<!-- raw HTML omitted -->'s GDtls::Connection:base-socket rather<br />
 than closing <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> itself.</p>
 
 
@@ -2367,16 +2370,16 @@ than closing <!-- raw HTML omitted -->conn<!-- raw HTML omitted --> itself.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Shut down part or all of a DTLS connection.</p>
-<p>If <!-- raw HTML omitted -->shutdown_read<!-- raw HTML omitted --> is true then the receiving side of the connection is shut
-down, and further reading is disallowed. Subsequent calls to
+<p>If <!-- raw HTML omitted -->shutdown_read<!-- raw HTML omitted --> is true then the receiving side of the connection is shut<br />
+down, and further reading is disallowed. Subsequent calls to<br />
 g_datagram_based_receive_messages() will return %G_IO_ERROR_CLOSED.</p>
-<p>If <!-- raw HTML omitted -->shutdown_write<!-- raw HTML omitted --> is true then the sending side of the connection is shut
-down, and further writing is disallowed. Subsequent calls to
+<p>If <!-- raw HTML omitted -->shutdown_write<!-- raw HTML omitted --> is true then the sending side of the connection is shut<br />
+down, and further writing is disallowed. Subsequent calls to<br />
 g_datagram_based_send_messages() will return %G_IO_ERROR_CLOSED.</p>
-<p>It is allowed for both <!-- raw HTML omitted -->shutdown_read<!-- raw HTML omitted --> and <!-- raw HTML omitted -->shutdown_write<!-- raw HTML omitted --> to be TRUE — this
+<p>It is allowed for both <!-- raw HTML omitted -->shutdown_read<!-- raw HTML omitted --> and <!-- raw HTML omitted -->shutdown_write<!-- raw HTML omitted --> to be TRUE — this<br />
 is equivalent to calling g_dtls_connection_close().</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled, the GDtls::Connection may be left
-partially-closed and any pending untransmitted data may be lost. Call
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled, the GDtls::Connection may be left<br />
+partially-closed and any pending untransmitted data may be lost. Call<br />
 g_dtls_connection_shutdown() again to complete closing the GDtls::Connection.</p>
 
 
@@ -2465,7 +2468,7 @@ g_dtls_connection_shutdown() again to complete closing the GDtls::Connection.</p
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously shut down part or all of the DTLS connection. See
+    <p>Asynchronously shut down part or all of the DTLS connection. See<br />
 g_dtls_connection_shutdown() for more information.</p>
 
 
@@ -2595,8 +2598,8 @@ g_dtls_connection_shutdown() for more information.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finish an asynchronous TLS shutdown operation. See
-g_dtls_connection_shutdown() for more information.
+    <p>Finish an asynchronous TLS shutdown operation. See<br />
+g_dtls_connection_shutdown() for more information.<br />
 case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set</p>
 
 
@@ -2651,7 +2654,7 @@ case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

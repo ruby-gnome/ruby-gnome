@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Canvas";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,14 +95,15 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The Clutter::CanvasClass structure contains
+    <p>The Clutter::CanvasClass structure contains<br />
 private data.</p>
 
 
@@ -149,6 +151,7 @@ private data.</p>
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -365,6 +368,7 @@ private data.</p>
 
       
     </ul>
+    
   
 
 
@@ -386,7 +390,7 @@ private data.</p>
   <div class="discussion">
     <p>Creates a new instance of Clutter::Canvas.</p>
 <p>You should call clutter_canvas_set_size() to set the size of the canvas.</p>
-<p>You should call clutter_content_invalidate() every time you wish to
+<p>You should call clutter_content_invalidate() every time you wish to<br />
 draw the contents of the canvas.</p>
 
 
@@ -405,7 +409,7 @@ draw the contents of the canvas.</p>
       
       
         &mdash;
-        <div class='inline'><p>The newly allocated instance of
+        <div class='inline'><p>The newly allocated instance of<br />
 Clutter::Canvas. Use g_object_unref() when done.</p>
 </div>
       
@@ -539,12 +543,12 @@ Clutter::Canvas. Use g_object_unref() when done.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The scaling factor to be applied to the Cairo surface used for
+    <p>The scaling factor to be applied to the Cairo surface used for<br />
 drawing.</p>
-<p>If Clutter::Canvas:scale-factor is set to a negative value, the
-value of the Clutter::Settings:window-scaling-factor property is
+<p>If Clutter::Canvas:scale-factor is set to a negative value, the<br />
+value of the Clutter::Settings:window-scaling-factor property is<br />
 used instead.</p>
-<p>Use Clutter::Canvas:scale-factor-set to check if the scale factor
+<p>Use Clutter::Canvas:scale-factor-set to check if the scale factor<br />
 is set.</p>
 
 
@@ -584,12 +588,12 @@ is set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The scaling factor to be applied to the Cairo surface used for
+    <p>The scaling factor to be applied to the Cairo surface used for<br />
 drawing.</p>
-<p>If Clutter::Canvas:scale-factor is set to a negative value, the
-value of the Clutter::Settings:window-scaling-factor property is
+<p>If Clutter::Canvas:scale-factor is set to a negative value, the<br />
+value of the Clutter::Settings:window-scaling-factor property is<br />
 used instead.</p>
-<p>Use Clutter::Canvas:scale-factor-set to check if the scale factor
+<p>Use Clutter::Canvas:scale-factor-set to check if the scale factor<br />
 is set.</p>
 
 
@@ -658,8 +662,8 @@ is set.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the Clutter::Canvas:scale-factor property is set.</p>
-<p>If the Clutter::Canvas:scale-factor-set property is false
-then Clutter::Canvas will use the #ClutterSettings:window-scaling-factor
+<p>If the Clutter::Canvas:scale-factor-set property is false<br />
+then Clutter::Canvas will use the #ClutterSettings:window-scaling-factor<br />
 property.</p>
 
 
@@ -728,8 +732,8 @@ property.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the Clutter::Canvas:scale-factor property is set.</p>
-<p>If the Clutter::Canvas:scale-factor-set property is false
-then Clutter::Canvas will use the #ClutterSettings:window-scaling-factor
+<p>If the Clutter::Canvas:scale-factor-set property is false<br />
+then Clutter::Canvas will use the #ClutterSettings:window-scaling-factor<br />
 property.</p>
 
 
@@ -770,14 +774,14 @@ property.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the size of the <!-- raw HTML omitted -->canvas<!-- raw HTML omitted -->, and invalidates the content.</p>
-<p>This function will cause the <!-- raw HTML omitted -->canvas<!-- raw HTML omitted --> to be invalidated only
+<p>This function will cause the <!-- raw HTML omitted -->canvas<!-- raw HTML omitted --> to be invalidated only<br />
 if the size of the canvas surface has changed.</p>
-<p>If you want to invalidate the contents of the <!-- raw HTML omitted -->canvas<!-- raw HTML omitted --> when setting
-the size, you can use the return value of the function to conditionally
+<p>If you want to invalidate the contents of the <!-- raw HTML omitted -->canvas<!-- raw HTML omitted --> when setting<br />
+the size, you can use the return value of the function to conditionally<br />
 call clutter_content_invalidate():</p>
-<p>|[
-if (!clutter_canvas_set_size (canvas, width, height))
-clutter_content_invalidate (CLUTTER_CONTENT (canvas));
+<p>|[<br />
+if (!clutter_canvas_set_size (canvas, width, height))<br />
+clutter_content_invalidate (CLUTTER_CONTENT (canvas));<br />
 ]|</p>
 
 
@@ -830,7 +834,7 @@ clutter_content_invalidate (CLUTTER_CONTENT (canvas));
       
       
         &mdash;
-        <div class='inline'><p>this function returns true if the size change
+        <div class='inline'><p>this function returns true if the size change<br />
 caused a content invalidation, and false otherwise</p>
 </div>
       
@@ -954,7 +958,7 @@ caused a content invalidation, and false otherwise</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

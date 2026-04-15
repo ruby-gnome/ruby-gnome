@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::Object";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -223,6 +225,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -806,6 +809,7 @@
 
       
     </ul>
+    
   
 
 
@@ -826,11 +830,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks to see if there is any object named <!-- raw HTML omitted -->name<!-- raw HTML omitted --> in <!-- raw HTML omitted -->list<!-- raw HTML omitted -->. This function
-does not do any locking of any kind. You might want to protect the
-provided list with the lock of the owner of the list. This function
-will lock each Gst::Object in the list to compare the name, so be
-careful when passing a list with a locked object.
+    <p>Checks to see if there is any object named <!-- raw HTML omitted -->name<!-- raw HTML omitted --> in <!-- raw HTML omitted -->list<!-- raw HTML omitted -->. This function<br />
+does not do any locking of any kind. You might want to protect the<br />
+provided list with the lock of the owner of the list. This function<br />
+will lock each Gst::Object in the list to compare the name, so be<br />
+careful when passing a list with a locked object.<br />
 false if it does.</p>
 <p>MT safe. Grabs and releases the LOCK of each object in the list.</p>
 
@@ -851,7 +855,7 @@ false if it does.</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of Gst::Object to
+        <div class='inline'><p>a list of Gst::Object to<br />
 check through</p>
 </div>
       
@@ -906,11 +910,11 @@ check through</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A default deep_notify signal callback for an object. The user data
-should contain a pointer to an array of strings that should be excluded
-from the notify. The default handler will print the new value of the property
+    <p>A default deep_notify signal callback for an object. The user data<br />
+should contain a pointer to an array of strings that should be excluded<br />
+from the notify. The default handler will print the new value of the property<br />
 using g_print.</p>
-<p>MT safe. This function grabs and releases <!-- raw HTML omitted -->object<!-- raw HTML omitted -->'s LOCK for getting its
+<p>MT safe. This function grabs and releases <!-- raw HTML omitted -->object<!-- raw HTML omitted -->'s LOCK for getting its<br />
 path string.</p>
 
 
@@ -975,7 +979,7 @@ path string.</p>
       
       
         &mdash;
-        <div class='inline'><p>a set of user-specified properties to exclude or nil to show
+        <div class='inline'><p>a set of user-specified properties to exclude or nil to show<br />
 all changes.</p>
 </div>
       
@@ -1011,14 +1015,14 @@ all changes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Increase the reference count of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->, and possibly remove the floating
+    <p>Increase the reference count of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->, and possibly remove the floating<br />
 reference, if <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has a floating reference.</p>
-<p>In other words, if the object is floating, then this call &quot;assumes ownership&quot;
-of the floating reference, converting it to a normal reference by clearing
-the floating flag while leaving the reference count unchanged. If the object
-is not floating, then this call adds a new normal reference increasing the
+<p>In other words, if the object is floating, then this call &quot;assumes ownership&quot;<br />
+of the floating reference, converting it to a normal reference by clearing<br />
+the floating flag while leaving the reference count unchanged. If the object<br />
+is not floating, then this call adds a new normal reference increasing the<br />
 reference count by one.</p>
-<p>For more background on &quot;floating references&quot; please see the #GObject
+<p>For more background on &quot;floating references&quot; please see the #GObject<br />
 documentation.</p>
 
 
@@ -1073,8 +1077,8 @@ documentation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Atomically modifies a pointer to point to a new object.
-The reference count of <!-- raw HTML omitted -->oldobj<!-- raw HTML omitted --> is decreased and the reference count of
+    <p>Atomically modifies a pointer to point to a new object.<br />
+The reference count of <!-- raw HTML omitted -->oldobj<!-- raw HTML omitted --> is decreased and the reference count of<br />
 <!-- raw HTML omitted -->newobj<!-- raw HTML omitted --> is increased.</p>
 <p>Either <!-- raw HTML omitted -->newobj<!-- raw HTML omitted --> and the value pointed to by <!-- raw HTML omitted -->oldobj<!-- raw HTML omitted --> may be nil.</p>
 
@@ -1095,7 +1099,7 @@ The reference count of <!-- raw HTML omitted -->oldobj<!-- raw HTML omitted --> 
       
       
         &mdash;
-        <div class='inline'><p>pointer to a place of
+        <div class='inline'><p>pointer to a place of<br />
 a Gst::Object to replace</p>
 </div>
       
@@ -1156,10 +1160,10 @@ a Gst::Object to replace</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Attach the Gst::ControlBinding to the object. If there already was a
+    <p>Attach the Gst::ControlBinding to the object. If there already was a<br />
 Gst::ControlBinding for this property it will be replaced.</p>
-<p>The object's reference count will be incremented, and any floating
-reference will be removed (see gst_object_ref_sink())
+<p>The object's reference count will be incremented, and any floating<br />
+reference will be removed (see gst_object_ref_sink())<br />
 has been setup for a non suitable property, true otherwise.</p>
 
 
@@ -1218,8 +1222,8 @@ has been setup for a non suitable property, true otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function is used to disable all controlled properties of the <!-- raw HTML omitted -->object<!-- raw HTML omitted --> for
-some time, i.e. gst_object_sync_values() will do nothing.
+    <p>This function is used to disable all controlled properties of the <!-- raw HTML omitted -->object<!-- raw HTML omitted --> for<br />
+some time, i.e. gst_object_sync_values() will do nothing.<br />
 or not.</p>
 
 
@@ -1274,13 +1278,13 @@ or not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtain the control-rate for this <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. Audio processing Gst::Element
-objects will use this rate to sub-divide their processing loop and call
-gst_object_sync_values() in between. The length of the processing segment
+    <p>Obtain the control-rate for this <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. Audio processing Gst::Element<br />
+objects will use this rate to sub-divide their processing loop and call<br />
+gst_object_sync_values() in between. The length of the processing segment<br />
 should be up to <!-- raw HTML omitted -->control<!-- raw HTML omitted -->-rate nanoseconds.</p>
-<p>If the <!-- raw HTML omitted -->object<!-- raw HTML omitted --> is not under property control, this will return
+<p>If the <!-- raw HTML omitted -->object<!-- raw HTML omitted --> is not under property control, this will return<br />
 %GST_CLOCK_TIME_NONE. This allows the element to avoid the sub-dividing.</p>
-<p>The control-rate is not expected to change if the element is in
+<p>The control-rate is not expected to change if the element is in<br />
 %GST_STATE_PAUSED or %GST_STATE_PLAYING.</p>
 
 
@@ -1320,11 +1324,11 @@ should be up to <!-- raw HTML omitted -->control<!-- raw HTML omitted -->-rate n
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Change the control-rate for this <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. Audio processing Gst::Element
-objects will use this rate to sub-divide their processing loop and call
-gst_object_sync_values() in between. The length of the processing segment
+    <p>Change the control-rate for this <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. Audio processing Gst::Element<br />
+objects will use this rate to sub-divide their processing loop and call<br />
+gst_object_sync_values() in between. The length of the processing segment<br />
 should be up to <!-- raw HTML omitted -->control<!-- raw HTML omitted -->-rate nanoseconds.</p>
-<p>The control-rate should not change if the element is in %GST_STATE_PAUSED or
+<p>The control-rate should not change if the element is in %GST_STATE_PAUSED or<br />
 %GST_STATE_PLAYING.</p>
 
 
@@ -1379,7 +1383,7 @@ should be up to <!-- raw HTML omitted -->control<!-- raw HTML omitted -->-rate n
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A default error function that uses g_printerr() to display the error message
+    <p>A default error function that uses g_printerr() to display the error message<br />
 and the optional debug string..</p>
 <p>The default handler will simply print the error string using g_print.</p>
 
@@ -1450,8 +1454,8 @@ and the optional debug string..</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the corresponding Gst::ControlBinding for the property. This should be
-unreferenced again after use.
+    <p>Gets the corresponding Gst::ControlBinding for the property. This should be<br />
+unreferenced again after use.<br />
 <!-- raw HTML omitted -->property_name<!-- raw HTML omitted --> or nil if the property is not controlled.</p>
 
 
@@ -1510,10 +1514,10 @@ unreferenced again after use.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a number of #GValues for the given controlled property starting at the
-requested time. The array <!-- raw HTML omitted -->values<!-- raw HTML omitted --> need to hold enough space for <!-- raw HTML omitted -->n_values<!-- raw HTML omitted --> of
+    <p>Gets a number of #GValues for the given controlled property starting at the<br />
+requested time. The array <!-- raw HTML omitted -->values<!-- raw HTML omitted --> need to hold enough space for <!-- raw HTML omitted -->n_values<!-- raw HTML omitted --> of<br />
 #GValue.</p>
-<p>This function is useful if one wants to e.g. draw a graph of the control
+<p>This function is useful if one wants to e.g. draw a graph of the control<br />
 curve or apply a control curve sample by sample.</p>
 
 
@@ -1632,7 +1636,7 @@ curve or apply a control curve sample by sample.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value for the given controlled property at the requested time.
+    <p>Gets the value for the given controlled property at the requested time.<br />
 or nil if the property isn't controlled.</p>
 
 
@@ -1706,13 +1710,13 @@ or nil if the property isn't controlled.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a number of values for the given controlled property starting at the
-requested time. The array <!-- raw HTML omitted -->values<!-- raw HTML omitted --> need to hold enough space for <!-- raw HTML omitted -->n_values<!-- raw HTML omitted --> of
+    <p>Gets a number of values for the given controlled property starting at the<br />
+requested time. The array <!-- raw HTML omitted -->values<!-- raw HTML omitted --> need to hold enough space for <!-- raw HTML omitted -->n_values<!-- raw HTML omitted --> of<br />
 the same type as the objects property's type.</p>
-<p>This function is useful if one wants to e.g. draw a graph of the control
+<p>This function is useful if one wants to e.g. draw a graph of the control<br />
 curve or apply a control curve sample by sample.</p>
-<p>The values are unboxed and ready to be used. The similar function
-gst_object_get_g_value_array() returns the array as #GValues and is
+<p>The values are unboxed and ready to be used. The similar function<br />
+gst_object_get_g_value_array() returns the array as #GValues and is<br />
 better suites for bindings.</p>
 
 
@@ -1870,7 +1874,7 @@ better suites for bindings.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Check if <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has an ancestor <!-- raw HTML omitted -->ancestor<!-- raw HTML omitted --> somewhere up in
+    <p>Check if <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has an ancestor <!-- raw HTML omitted -->ancestor<!-- raw HTML omitted --> somewhere up in<br />
 the hierarchy. One can e.g. check if a Gst::Element is inside a #GstPipeline.</p>
 
 
@@ -1929,8 +1933,8 @@ the hierarchy. One can e.g. check if a Gst::Element is inside a #GstPipeline.</p
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Check if <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has an ancestor <!-- raw HTML omitted -->ancestor<!-- raw HTML omitted --> somewhere up in
-the hierarchy. One can e.g. check if a Gst::Element is inside a #GstPipeline.
+    <p>Check if <!-- raw HTML omitted -->object<!-- raw HTML omitted --> has an ancestor <!-- raw HTML omitted -->ancestor<!-- raw HTML omitted --> somewhere up in<br />
+the hierarchy. One can e.g. check if a Gst::Element is inside a #GstPipeline.<br />
 MT safe. Grabs and releases <!-- raw HTML omitted -->object<!-- raw HTML omitted -->'s locks.</p>
 
 
@@ -1989,8 +1993,8 @@ MT safe. Grabs and releases <!-- raw HTML omitted -->object<!-- raw HTML omitted
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Check if <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is the parent of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.
-E.g. a Gst::Element can check if it owns a given #GstPad.
+    <p>Check if <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is the parent of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.<br />
+E.g. a Gst::Element can check if it owns a given #GstPad.<br />
 MT safe. Grabs and releases <!-- raw HTML omitted -->object<!-- raw HTML omitted -->'s locks.</p>
 
 
@@ -2028,7 +2032,7 @@ MT safe. Grabs and releases <!-- raw HTML omitted -->object<!-- raw HTML omitted
       
       
         &mdash;
-        <div class='inline'><p>false if either <!-- raw HTML omitted -->object<!-- raw HTML omitted --> or <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is nil. true if <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is
+        <div class='inline'><p>false if either <!-- raw HTML omitted -->object<!-- raw HTML omitted --> or <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is nil. true if <!-- raw HTML omitted -->parent<!-- raw HTML omitted --> is<br />
 the parent of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. Otherwise false.</p>
 </div>
       
@@ -2155,10 +2159,10 @@ the parent of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. Otherwis
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The parent of the object. Please note, that when changing the 'parent'
-property, we don't emit #GObject::notify and Gst::Object::deep-notify
-signals due to locking issues. In some cases one can use
-Gst::Bin::element-added or #GstBin::element-removed signals on the parent to
+    <p>The parent of the object. Please note, that when changing the 'parent'<br />
+property, we don't emit #GObject::notify and Gst::Object::deep-notify<br />
+signals due to locking issues. In some cases one can use<br />
+Gst::Bin::element-added or #GstBin::element-removed signals on the parent to<br />
 achieve a similar effect.</p>
 
 
@@ -2198,10 +2202,10 @@ achieve a similar effect.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The parent of the object. Please note, that when changing the 'parent'
-property, we don't emit #GObject::notify and Gst::Object::deep-notify
-signals due to locking issues. In some cases one can use
-Gst::Bin::element-added or #GstBin::element-removed signals on the parent to
+    <p>The parent of the object. Please note, that when changing the 'parent'<br />
+property, we don't emit #GObject::notify and Gst::Object::deep-notify<br />
+signals due to locking issues. In some cases one can use<br />
+Gst::Bin::element-added or #GstBin::element-removed signals on the parent to<br />
 achieve a similar effect.</p>
 
 
@@ -2269,10 +2273,10 @@ achieve a similar effect.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Generates a string describing the path of <!-- raw HTML omitted -->object<!-- raw HTML omitted --> in
+    <p>Generates a string describing the path of <!-- raw HTML omitted -->object<!-- raw HTML omitted --> in<br />
 the object hierarchy. Only useful (or used) for debugging.</p>
-<p>Free-function: g_free
-MT safe. Grabs and releases the Gst::Object's LOCK for all objects
+<p>Free-function: g_free<br />
+MT safe. Grabs and releases the Gst::Object's LOCK for all objects<br />
 in the hierarchy.</p>
 
 
@@ -2291,7 +2295,7 @@ in the hierarchy.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string describing the path of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. You must
+        <div class='inline'><p>a string describing the path of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. You must<br />
 g_free() the string after usage.</p>
 </div>
       
@@ -2313,11 +2317,11 @@ g_free() the string after usage.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Increments the reference count on <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. This function
-does not take the lock on <!-- raw HTML omitted -->object<!-- raw HTML omitted --> because it relies on
+    <p>Increments the reference count on <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. This function<br />
+does not take the lock on <!-- raw HTML omitted -->object<!-- raw HTML omitted --> because it relies on<br />
 atomic refcounting.</p>
-<p>This object returns the input parameter to ease writing
-constructs like :
+<p>This object returns the input parameter to ease writing<br />
+constructs like :<br />
 result = gst_object_ref (object-&gt;parent);</p>
 
 
@@ -2357,7 +2361,7 @@ result = gst_object_ref (object-&gt;parent);</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes the corresponding Gst::ControlBinding. If it was the
+    <p>Removes the corresponding Gst::ControlBinding. If it was the<br />
 last ref of the binding, it will be disposed.</p>
 
 
@@ -2416,9 +2420,9 @@ last ref of the binding, it will be disposed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function is used to disable the control bindings on a property for
-some time, i.e. gst_object_sync_values() will do nothing for the
-property.
+    <p>This function is used to disable the control bindings on a property for<br />
+some time, i.e. gst_object_sync_values() will do nothing for the<br />
+property.<br />
 or not.</p>
 
 
@@ -2488,8 +2492,8 @@ or not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a suggestion for timestamps where buffers should be split
-to get best controller results.
+    <p>Returns a suggestion for timestamps where buffers should be split<br />
+to get best controller results.<br />
 if no control-rate was set.</p>
 
 
@@ -2529,10 +2533,10 @@ if no control-rate was set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the properties of the object, according to the Gst::ControlSources that
+    <p>Sets the properties of the object, according to the Gst::ControlSources that<br />
 (maybe) handle them and for the given timestamp.</p>
-<p>If this function fails, it is most likely the application developers fault.
-Most probably the control sources are not setup correctly.
+<p>If this function fails, it is most likely the application developers fault.<br />
+Most probably the control sources are not setup correctly.<br />
 properties, false otherwise</p>
 
 
@@ -2591,7 +2595,7 @@ properties, false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Clear the parent of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->, removing the associated reference.
+    <p>Clear the parent of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->, removing the associated reference.<br />
 This function decreases the refcount of <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.</p>
 <p>MT safe. Grabs and releases <!-- raw HTML omitted -->object<!-- raw HTML omitted -->'s lock.</p>
 
@@ -2628,10 +2632,10 @@ This function decreases the refcount of <!-- raw HTML omitted -->object<!-- raw 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Decrements the reference count on <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.  If reference count hits
-zero, destroy <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. This function does not take the lock
+    <p>Decrements the reference count on <!-- raw HTML omitted -->object<!-- raw HTML omitted -->.  If reference count hits<br />
+zero, destroy <!-- raw HTML omitted -->object<!-- raw HTML omitted -->. This function does not take the lock<br />
 on <!-- raw HTML omitted -->object<!-- raw HTML omitted --> as it relies on atomic refcounting.</p>
-<p>The unref method should never be called with the LOCK held since
+<p>The unref method should never be called with the LOCK held since<br />
 this might deadlock the dispose function.</p>
 
 
@@ -2663,7 +2667,7 @@ this might deadlock the dispose function.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

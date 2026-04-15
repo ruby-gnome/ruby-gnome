@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Dialog";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -105,8 +106,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk4/dialog.rb<span class="defines">,<br />
+    <dd>lib/gtk4/dialog.rb<span class="defines">,<br>
   lib/gtk4/deprecated.rb</span>
+
 </dd>
   </dl>
   
@@ -549,9 +551,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -564,6 +568,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Window.html" title="Gtk::Window (class)">Window</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Window.html#application-instance_method" title="Gtk::Window#application (method)">#application</a></span>, <span class='object_link'><a href="Window.html#application=-instance_method" title="Gtk::Window#application= (method)">#application=</a></span>, <span class='object_link'><a href="Window.html#auto_startup_notification=-class_method" title="Gtk::Window.auto_startup_notification= (method)">auto_startup_notification=</a></span>, <span class='object_link'><a href="Window.html#child-instance_method" title="Gtk::Window#child (method)">#child</a></span>, <span class='object_link'><a href="Window.html#child=-instance_method" title="Gtk::Window#child= (method)">#child=</a></span>, <span class='object_link'><a href="Window.html#close-instance_method" title="Gtk::Window#close (method)">#close</a></span>, <span class='object_link'><a href="Window.html#decorated-instance_method" title="Gtk::Window#decorated (method)">#decorated</a></span>, <span class='object_link'><a href="Window.html#decorated=-instance_method" title="Gtk::Window#decorated= (method)">#decorated=</a></span>, <span class='object_link'><a href="Window.html#decorated%3F-instance_method" title="Gtk::Window#decorated? (method)">#decorated?</a></span>, <span class='object_link'><a href="Window.html#default_height-instance_method" title="Gtk::Window#default_height (method)">#default_height</a></span>, <span class='object_link'><a href="Window.html#default_height=-instance_method" title="Gtk::Window#default_height= (method)">#default_height=</a></span>, <span class='object_link'><a href="Window.html#default_icon_name-class_method" title="Gtk::Window.default_icon_name (method)">default_icon_name</a></span>, <span class='object_link'><a href="Window.html#default_icon_name=-class_method" title="Gtk::Window.default_icon_name= (method)">default_icon_name=</a></span>, <span class='object_link'><a href="Window.html#default_widget-instance_method" title="Gtk::Window#default_widget (method)">#default_widget</a></span>, <span class='object_link'><a href="Window.html#default_widget=-instance_method" title="Gtk::Window#default_widget= (method)">#default_widget=</a></span>, <span class='object_link'><a href="Window.html#default_width-instance_method" title="Gtk::Window#default_width (method)">#default_width</a></span>, <span class='object_link'><a href="Window.html#default_width=-instance_method" title="Gtk::Window#default_width= (method)">#default_width=</a></span>, <span class='object_link'><a href="Window.html#deletable-instance_method" title="Gtk::Window#deletable (method)">#deletable</a></span>, <span class='object_link'><a href="Window.html#deletable=-instance_method" title="Gtk::Window#deletable= (method)">#deletable=</a></span>, <span class='object_link'><a href="Window.html#deletable%3F-instance_method" title="Gtk::Window#deletable? (method)">#deletable?</a></span>, <span class='object_link'><a href="Window.html#destroy-instance_method" title="Gtk::Window#destroy (method)">#destroy</a></span>, <span class='object_link'><a href="Window.html#destroy_with_parent-instance_method" title="Gtk::Window#destroy_with_parent (method)">#destroy_with_parent</a></span>, <span class='object_link'><a href="Window.html#destroy_with_parent=-instance_method" title="Gtk::Window#destroy_with_parent= (method)">#destroy_with_parent=</a></span>, <span class='object_link'><a href="Window.html#destroy_with_parent%3F-instance_method" title="Gtk::Window#destroy_with_parent? (method)">#destroy_with_parent?</a></span>, <span class='object_link'><a href="Window.html#display-instance_method" title="Gtk::Window#display (method)">#display</a></span>, <span class='object_link'><a href="Window.html#display=-instance_method" title="Gtk::Window#display= (method)">#display=</a></span>, <span class='object_link'><a href="Window.html#focus-instance_method" title="Gtk::Window#focus (method)">#focus</a></span>, <span class='object_link'><a href="Window.html#focus=-instance_method" title="Gtk::Window#focus= (method)">#focus=</a></span>, <span class='object_link'><a href="Window.html#focus_visible-instance_method" title="Gtk::Window#focus_visible (method)">#focus_visible</a></span>, <span class='object_link'><a href="Window.html#focus_visible=-instance_method" title="Gtk::Window#focus_visible= (method)">#focus_visible=</a></span>, <span class='object_link'><a href="Window.html#focus_visible%3F-instance_method" title="Gtk::Window#focus_visible? (method)">#focus_visible?</a></span>, <span class='object_link'><a href="Window.html#focus_widget-instance_method" title="Gtk::Window#focus_widget (method)">#focus_widget</a></span>, <span class='object_link'><a href="Window.html#focus_widget=-instance_method" title="Gtk::Window#focus_widget= (method)">#focus_widget=</a></span>, <span class='object_link'><a href="Window.html#fullscreen-instance_method" title="Gtk::Window#fullscreen (method)">#fullscreen</a></span>, <span class='object_link'><a href="Window.html#fullscreen_on_monitor-instance_method" title="Gtk::Window#fullscreen_on_monitor (method)">#fullscreen_on_monitor</a></span>, <span class='object_link'><a href="Window.html#fullscreened=-instance_method" title="Gtk::Window#fullscreened= (method)">#fullscreened=</a></span>, <span class='object_link'><a href="Window.html#fullscreened%3F-instance_method" title="Gtk::Window#fullscreened? (method)">#fullscreened?</a></span>, <span class='object_link'><a href="Window.html#get_default_size-instance_method" title="Gtk::Window#get_default_size (method)">#get_default_size</a></span>, <span class='object_link'><a href="Window.html#group-instance_method" title="Gtk::Window#group (method)">#group</a></span>, <span class='object_link'><a href="Window.html#handle_menubar_accel-instance_method" title="Gtk::Window#handle_menubar_accel (method)">#handle_menubar_accel</a></span>, <span class='object_link'><a href="Window.html#handle_menubar_accel=-instance_method" title="Gtk::Window#handle_menubar_accel= (method)">#handle_menubar_accel=</a></span>, <span class='object_link'><a href="Window.html#handle_menubar_accel%3F-instance_method" title="Gtk::Window#handle_menubar_accel? (method)">#handle_menubar_accel?</a></span>, <span class='object_link'><a href="Window.html#has_group-instance_method" title="Gtk::Window#has_group (method)">#has_group</a></span>, <span class='object_link'><a href="Window.html#hide_on_close-instance_method" title="Gtk::Window#hide_on_close (method)">#hide_on_close</a></span>, <span class='object_link'><a href="Window.html#hide_on_close=-instance_method" title="Gtk::Window#hide_on_close= (method)">#hide_on_close=</a></span>, <span class='object_link'><a href="Window.html#hide_on_close%3F-instance_method" title="Gtk::Window#hide_on_close? (method)">#hide_on_close?</a></span>, <span class='object_link'><a href="Window.html#icon_name-instance_method" title="Gtk::Window#icon_name (method)">#icon_name</a></span>, <span class='object_link'><a href="Window.html#icon_name=-instance_method" title="Gtk::Window#icon_name= (method)">#icon_name=</a></span>, <span class='object_link'><a href="Window.html#interactive_debugging=-class_method" title="Gtk::Window.interactive_debugging= (method)">interactive_debugging=</a></span>, <span class='object_link'><a href="Window.html#is_active-instance_method" title="Gtk::Window#is_active (method)">#is_active</a></span>, <span class='object_link'><a href="Window.html#is_active=-instance_method" title="Gtk::Window#is_active= (method)">#is_active=</a></span>, <span class='object_link'><a href="Window.html#is_active%3F-instance_method" title="Gtk::Window#is_active? (method)">#is_active?</a></span>, <span class='object_link'><a href="Window.html#is_fullscreen-instance_method" title="Gtk::Window#is_fullscreen (method)">#is_fullscreen</a></span>, <span class='object_link'><a href="Window.html#is_maximized-instance_method" title="Gtk::Window#is_maximized (method)">#is_maximized</a></span>, <span class='object_link'><a href="Window.html#is_suspended-instance_method" title="Gtk::Window#is_suspended (method)">#is_suspended</a></span>, <span class='object_link'><a href="Window.html#list_toplevels-class_method" title="Gtk::Window.list_toplevels (method)">list_toplevels</a></span>, <span class='object_link'><a href="Window.html#maximize-instance_method" title="Gtk::Window#maximize (method)">#maximize</a></span>, <span class='object_link'><a href="Window.html#maximized=-instance_method" title="Gtk::Window#maximized= (method)">#maximized=</a></span>, <span class='object_link'><a href="Window.html#maximized%3F-instance_method" title="Gtk::Window#maximized? (method)">#maximized?</a></span>, <span class='object_link'><a href="Window.html#minimize-instance_method" title="Gtk::Window#minimize (method)">#minimize</a></span>, <span class='object_link'><a href="Window.html#mnemonics_visible-instance_method" title="Gtk::Window#mnemonics_visible (method)">#mnemonics_visible</a></span>, <span class='object_link'><a href="Window.html#mnemonics_visible=-instance_method" title="Gtk::Window#mnemonics_visible= (method)">#mnemonics_visible=</a></span>, <span class='object_link'><a href="Window.html#mnemonics_visible%3F-instance_method" title="Gtk::Window#mnemonics_visible? (method)">#mnemonics_visible?</a></span>, <span class='object_link'><a href="Window.html#modal-instance_method" title="Gtk::Window#modal (method)">#modal</a></span>, <span class='object_link'><a href="Window.html#modal=-instance_method" title="Gtk::Window#modal= (method)">#modal=</a></span>, <span class='object_link'><a href="Window.html#modal%3F-instance_method" title="Gtk::Window#modal? (method)">#modal?</a></span>, <span class='object_link'><a href="Window.html#present-instance_method" title="Gtk::Window#present (method)">#present</a></span>, <span class='object_link'><a href="Window.html#present_with_time-instance_method" title="Gtk::Window#present_with_time (method)">#present_with_time</a></span>, <span class='object_link'><a href="Window.html#resizable-instance_method" title="Gtk::Window#resizable (method)">#resizable</a></span>, <span class='object_link'><a href="Window.html#resizable=-instance_method" title="Gtk::Window#resizable= (method)">#resizable=</a></span>, <span class='object_link'><a href="Window.html#resizable%3F-instance_method" title="Gtk::Window#resizable? (method)">#resizable?</a></span>, <span class='object_link'><a href="Window.html#set_default_size-instance_method" title="Gtk::Window#set_default_size (method)">#set_default_size</a></span>, <span class='object_link'><a href="Window.html#startup_id=-instance_method" title="Gtk::Window#startup_id= (method)">#startup_id=</a></span>, <span class='object_link'><a href="Window.html#suspended=-instance_method" title="Gtk::Window#suspended= (method)">#suspended=</a></span>, <span class='object_link'><a href="Window.html#suspended%3F-instance_method" title="Gtk::Window#suspended? (method)">#suspended?</a></span>, <span class='object_link'><a href="Window.html#title-instance_method" title="Gtk::Window#title (method)">#title</a></span>, <span class='object_link'><a href="Window.html#title=-instance_method" title="Gtk::Window#title= (method)">#title=</a></span>, <span class='object_link'><a href="Window.html#titlebar-instance_method" title="Gtk::Window#titlebar (method)">#titlebar</a></span>, <span class='object_link'><a href="Window.html#titlebar=-instance_method" title="Gtk::Window#titlebar= (method)">#titlebar=</a></span>, <span class='object_link'><a href="Window.html#toplevels-class_method" title="Gtk::Window.toplevels (method)">toplevels</a></span>, <span class='object_link'><a href="Window.html#transient_for-instance_method" title="Gtk::Window#transient_for (method)">#transient_for</a></span>, <span class='object_link'><a href="Window.html#transient_for=-instance_method" title="Gtk::Window#transient_for= (method)">#transient_for=</a></span>, <span class='object_link'><a href="Window.html#unfullscreen-instance_method" title="Gtk::Window#unfullscreen (method)">#unfullscreen</a></span>, <span class='object_link'><a href="Window.html#unmaximize-instance_method" title="Gtk::Window#unmaximize (method)">#unmaximize</a></span>, <span class='object_link'><a href="Window.html#unminimize-instance_method" title="Gtk::Window#unminimize (method)">#unminimize</a></span></p>
 
+  
   
   
   
@@ -592,18 +597,18 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkDialog</code> with the given title and transient parent.</p>
-<p>The <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> argument can be used to make the dialog modal, have it
+<p>The <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> argument can be used to make the dialog modal, have it<br />
 destroyed along with its transient parent, or make it use a headerbar.</p>
-<p>Button text/response ID pairs should be listed in pairs, with a nil
-pointer ending the list. Button text can be arbitrary text. A response
-ID can be any positive number, or one of the values in the
-[enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ResponseType] enumeration. If the user clicks one of these
-buttons, <code>GtkDialog</code> will emit the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog::response] signal
+<p>Button text/response ID pairs should be listed in pairs, with a nil<br />
+pointer ending the list. Button text can be arbitrary text. A response<br />
+ID can be any positive number, or one of the values in the<br />
+[enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ResponseType] enumeration. If the user clicks one of these<br />
+buttons, <code>GtkDialog</code> will emit the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog::response] signal<br />
 with the corresponding response ID.</p>
-<p>If a <code>GtkDialog</code> receives a delete event, it will emit ::response with a
+<p>If a <code>GtkDialog</code> receives a delete event, it will emit ::response with a<br />
 response ID of %GTK_RESPONSE_DELETE_EVENT.</p>
-<p>However, destroying a dialog does not emit the ::response signal;
-so be careful relying on ::response when using the
+<p>However, destroying a dialog does not emit the ::response signal;<br />
+so be careful relying on ::response when using the<br />
 %GTK_DIALOG_DESTROY_WITH_PARENT flag.</p>
 <p>Here’s a simple example:</p>
 <pre class="code c"><code class="c">GtkWindow *main_app_window; // Window the dialog should show up on
@@ -778,11 +783,11 @@ dialog = gtk_dialog_new_with_buttons (&quot;My dialog&quot;,
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds an activatable widget to the action area of a <code>GtkDialog</code>.</p>
-<p>GTK connects a signal handler that will emit the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog::response] signal on the dialog when the widget
-is activated. The widget is appended to the end of the dialog’s action
+<p>GTK connects a signal handler that will emit the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog::response] signal on the dialog when the widget<br />
+is activated. The widget is appended to the end of the dialog’s action<br />
 area.</p>
-<p>If you want to add a non-activatable widget, simply pack it into
+<p>If you want to add a non-activatable widget, simply pack it into<br />
 the <!-- raw HTML omitted -->action_area<!-- raw HTML omitted --> field of the <code>GtkDialog</code> struct.</p>
 
 
@@ -853,9 +858,9 @@ the <!-- raw HTML omitted -->action_area<!-- raw HTML omitted --> field of the <
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a button with the given text.</p>
-<p>GTK arranges things so that clicking the button will emit the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog::response] signal with the given <!-- raw HTML omitted -->response_id<!-- raw HTML omitted -->.
-The button is appended to the end of the dialog’s action area.
+<p>GTK arranges things so that clicking the button will emit the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog::response] signal with the given <!-- raw HTML omitted -->response_id<!-- raw HTML omitted -->.<br />
+The button is appended to the end of the dialog’s action area.<br />
 The button widget is returned, but usually you don’t need it.</p>
 
 
@@ -948,9 +953,9 @@ The button widget is returned, but usually you don’t need it.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a button with the given text.</p>
-<p>GTK arranges things so that clicking the button will emit the
-[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog::response] signal with the given <!-- raw HTML omitted -->response_id<!-- raw HTML omitted -->.
-The button is appended to the end of the dialog’s action area.
+<p>GTK arranges things so that clicking the button will emit the<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog::response] signal with the given <!-- raw HTML omitted -->response_id<!-- raw HTML omitted -->.<br />
+The button is appended to the end of the dialog’s action area.<br />
 The button widget is returned, but usually you don’t need it.</p>
 
 
@@ -1039,9 +1044,9 @@ The button widget is returned, but usually you don’t need it.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds multiple buttons.</p>
-<p>This is the same as calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog.add_button]
-repeatedly. The variable argument list should be nil-terminated
-as with [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog.new_with_buttons]. Each button must have both
+<p>This is the same as calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog.add_button]<br />
+repeatedly. The variable argument list should be nil-terminated<br />
+as with [ctor<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog.new_with_buttons]. Each button must have both<br />
 text and response ID.</p>
 
 
@@ -1172,7 +1177,7 @@ text and response ID.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the response id of a widget in the action area
+    <p>Gets the response id of a widget in the action area<br />
 of a dialog.</p>
 
 
@@ -1210,7 +1215,7 @@ of a dialog.</p>
       
       
         &mdash;
-        <div class='inline'><p>the response id of <!-- raw HTML omitted -->widget<!-- raw HTML omitted -->, or %GTK_RESPONSE_NONE
+        <div class='inline'><p>the response id of <!-- raw HTML omitted -->widget<!-- raw HTML omitted -->, or %GTK_RESPONSE_NONE<br />
 if <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> doesn’t have a response id set.</p>
 </div>
       
@@ -1232,7 +1237,7 @@ if <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> doesn’t have a res
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the widget button that uses the given response ID in the action area
+    <p>Gets the widget button that uses the given response ID in the action area<br />
 of a dialog.</p>
 
 
@@ -1270,7 +1275,7 @@ of a dialog.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> button that uses the given
+        <div class='inline'><p>the <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> button that uses the given<br />
 <!-- raw HTML omitted -->response_id<!-- raw HTML omitted --></p>
 </div>
       
@@ -1310,7 +1315,7 @@ of a dialog.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the widget button that uses the given response ID in the action area
+    <p>Gets the widget button that uses the given response ID in the action area<br />
 of a dialog.</p>
 
 
@@ -1348,7 +1353,7 @@ of a dialog.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> button that uses the given
+        <div class='inline'><p>the <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> button that uses the given<br />
 <!-- raw HTML omitted -->response_id<!-- raw HTML omitted --></p>
 </div>
       
@@ -1385,7 +1390,7 @@ of a dialog.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the header bar of <!-- raw HTML omitted -->dialog<!-- raw HTML omitted -->.</p>
-<p>Note that the headerbar is only used by the dialog if the
+<p>Note that the headerbar is only used by the dialog if the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog:use-header-bar] property is true.</p>
 
 
@@ -1426,18 +1431,18 @@ of a dialog.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkDialog</code> with the given title and transient parent.</p>
-<p>The <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> argument can be used to make the dialog modal, have it
+<p>The <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> argument can be used to make the dialog modal, have it<br />
 destroyed along with its transient parent, or make it use a headerbar.</p>
-<p>Button text/response ID pairs should be listed in pairs, with a nil
-pointer ending the list. Button text can be arbitrary text. A response
-ID can be any positive number, or one of the values in the
-[enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ResponseType] enumeration. If the user clicks one of these
-buttons, <code>GtkDialog</code> will emit the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog::response] signal
+<p>Button text/response ID pairs should be listed in pairs, with a nil<br />
+pointer ending the list. Button text can be arbitrary text. A response<br />
+ID can be any positive number, or one of the values in the<br />
+[enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ResponseType] enumeration. If the user clicks one of these<br />
+buttons, <code>GtkDialog</code> will emit the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Dialog::response] signal<br />
 with the corresponding response ID.</p>
-<p>If a <code>GtkDialog</code> receives a delete event, it will emit ::response with a
+<p>If a <code>GtkDialog</code> receives a delete event, it will emit ::response with a<br />
 response ID of %GTK_RESPONSE_DELETE_EVENT.</p>
-<p>However, destroying a dialog does not emit the ::response signal;
-so be careful relying on ::response when using the
+<p>However, destroying a dialog does not emit the ::response signal;<br />
+so be careful relying on ::response when using the<br />
 %GTK_DIALOG_DESTROY_WITH_PARENT flag.</p>
 <p>Here’s a simple example:</p>
 <pre class="code c"><code class="c">GtkWindow *main_app_window; // Window the dialog should show up on
@@ -1699,7 +1704,7 @@ dialog = gtk_dialog_new_with_buttons (&quot;My dialog&quot;,
 </h3><div class="docstring">
   <div class="discussion">
     <p>A convenient way to sensitize/desensitize dialog buttons.</p>
-<p>Calls <code>gtk_widget_set_sensitive (widget, &lt;b&gt;setting&lt;/b&gt;)</code>
+<p>Calls <code>gtk_widget_set_sensitive (widget, &lt;b&gt;setting&lt;/b&gt;)</code><br />
 for each widget in the dialog’s action area with the given <!-- raw HTML omitted -->response_id<!-- raw HTML omitted -->.</p>
 
 
@@ -1773,13 +1778,13 @@ for each widget in the dialog’s action area with the given <!-- raw HTML omitt
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>true if the dialog uses a headerbar for action buttons
+    <p>true if the dialog uses a headerbar for action buttons<br />
 instead of the action-area.</p>
-<p>For technical reasons, this property is declared as an integer
+<p>For technical reasons, this property is declared as an integer<br />
 property, but you should only set it to true or false.</p>
-<h2>Creating a dialog with headerbar</h2>
-<p>Builtin <code>GtkDialog</code> subclasses such as [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ColorChooserDialog]
-set this property according to platform conventions (using the
+<h2><a href="#creating-a-dialog-with-headerbar" aria-hidden="true" class="anchor" id="creating-a-dialog-with-headerbar"></a>Creating a dialog with headerbar</h2>
+<p>Builtin <code>GtkDialog</code> subclasses such as [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ColorChooserDialog]<br />
+set this property according to platform conventions (using the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-dialogs-use-header] setting).</p>
 <p>Here is how you can achieve the same:</p>
 <pre class="code c"><code class="c">g_object_get (settings, &quot;gtk-dialogs-use-header&quot;, &amp;header, NULL);
@@ -1823,13 +1828,13 @@ dialog = g_object_new (GTK_TYPE_DIALOG, header, TRUE, NULL);
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>true if the dialog uses a headerbar for action buttons
+    <p>true if the dialog uses a headerbar for action buttons<br />
 instead of the action-area.</p>
-<p>For technical reasons, this property is declared as an integer
+<p>For technical reasons, this property is declared as an integer<br />
 property, but you should only set it to true or false.</p>
-<h2>Creating a dialog with headerbar</h2>
-<p>Builtin <code>GtkDialog</code> subclasses such as [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ColorChooserDialog]
-set this property according to platform conventions (using the
+<h2><a href="#creating-a-dialog-with-headerbar" aria-hidden="true" class="anchor" id="creating-a-dialog-with-headerbar"></a>Creating a dialog with headerbar</h2>
+<p>Builtin <code>GtkDialog</code> subclasses such as [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ColorChooserDialog]<br />
+set this property according to platform conventions (using the<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-dialogs-use-header] setting).</p>
 <p>Here is how you can achieve the same:</p>
 <pre class="code c"><code class="c">g_object_get (settings, &quot;gtk-dialogs-use-header&quot;, &amp;header, NULL);
@@ -1949,7 +1954,7 @@ dialog = g_object_new (GTK_TYPE_DIALOG, header, TRUE, NULL);
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

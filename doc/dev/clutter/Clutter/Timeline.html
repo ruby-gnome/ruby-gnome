@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Clutter::Timeline";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -1074,6 +1076,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -1138,14 +1141,14 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a named marker that will be hit when the timeline has reached
+    <p>Adds a named marker that will be hit when the timeline has reached<br />
 the specified <!-- raw HTML omitted -->progress<!-- raw HTML omitted -->.</p>
-<p>Markers are unique string identifiers for a given position on the
-timeline. Once <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> reaches the given <!-- raw HTML omitted -->progress<!-- raw HTML omitted --> of its duration,
-if will emit a ::marker-reached signal for each marker attached to
+<p>Markers are unique string identifiers for a given position on the<br />
+timeline. Once <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> reaches the given <!-- raw HTML omitted -->progress<!-- raw HTML omitted --> of its duration,<br />
+if will emit a ::marker-reached signal for each marker attached to<br />
 that particular point.</p>
-<p>A marker can be removed with clutter_timeline_remove_marker(). The
-timeline can be advanced to a marker using
+<p>A marker can be removed with clutter_timeline_remove_marker(). The<br />
+timeline can be advanced to a marker using<br />
 clutter_timeline_advance_to_marker().</p>
 <p>See also: clutter_timeline_add_marker_at_time()</p>
 
@@ -1216,13 +1219,13 @@ clutter_timeline_advance_to_marker().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a named marker that will be hit when the timeline has been
+    <p>Adds a named marker that will be hit when the timeline has been<br />
 running for <!-- raw HTML omitted -->msecs<!-- raw HTML omitted --> milliseconds.</p>
-<p>Markers are unique string identifiers for a given position on the
-timeline. Once <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> reaches the given <!-- raw HTML omitted -->msecs<!-- raw HTML omitted -->, it will emit
+<p>Markers are unique string identifiers for a given position on the<br />
+timeline. Once <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> reaches the given <!-- raw HTML omitted -->msecs<!-- raw HTML omitted -->, it will emit<br />
 a ::marker-reached signal for each marker attached to that position.</p>
-<p>A marker can be removed with clutter_timeline_remove_marker(). The
-timeline can be advanced to a marker using
+<p>A marker can be removed with clutter_timeline_remove_marker(). The<br />
+timeline can be advanced to a marker using<br />
 clutter_timeline_advance_to_marker().</p>
 <p>See also: clutter_timeline_add_marker()</p>
 
@@ -1293,10 +1296,10 @@ clutter_timeline_advance_to_marker().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Advance timeline to the requested point. The point is given as a
+    <p>Advance timeline to the requested point. The point is given as a<br />
 time in milliseconds since the timeline started.</p>
-<p>The <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> will not emit the Clutter::Timeline::new-frame
-signal for the given time. The first ::new-frame signal after the call to
+<p>The <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> will not emit the Clutter::Timeline::new-frame<br />
+signal for the given time. The first ::new-frame signal after the call to<br />
 clutter_timeline_advance() will be emit the skipped markers.</p>
 
 
@@ -1352,9 +1355,9 @@ clutter_timeline_advance() will be emit the skipped markers.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Advances <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> to the time of the given <!-- raw HTML omitted -->marker_name<!-- raw HTML omitted -->.</p>
-<p>Like clutter_timeline_advance(), this function will not
-emit the Clutter::Timeline::new-frame for the time where <!-- raw HTML omitted -->marker_name<!-- raw HTML omitted -->
-is set, nor it will emit Clutter::Timeline::marker-reached for
+<p>Like clutter_timeline_advance(), this function will not<br />
+emit the Clutter::Timeline::new-frame for the time where <!-- raw HTML omitted -->marker_name<!-- raw HTML omitted --><br />
+is set, nor it will emit Clutter::Timeline::marker-reached for<br />
 <!-- raw HTML omitted -->marker_name<!-- raw HTML omitted -->.</p>
 
 
@@ -1427,7 +1430,7 @@ is set, nor it will emit Clutter::Timeline::marker-reached for
       
       
         &mdash;
-        <div class='inline'><p>true if the timeline should automatically reverse, and
+        <div class='inline'><p>true if the timeline should automatically reverse, and<br />
 false otherwise</p>
 </div>
       
@@ -1449,7 +1452,7 @@ false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If the direction of the timeline should be automatically reversed
+    <p>If the direction of the timeline should be automatically reversed<br />
 when reaching the end.</p>
 
 
@@ -1517,7 +1520,7 @@ when reaching the end.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If the direction of the timeline should be automatically reversed
+    <p>If the direction of the timeline should be automatically reversed<br />
 when reaching the end.</p>
 
 
@@ -1557,10 +1560,10 @@ when reaching the end.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new Clutter::Timeline instance which has property values
-matching that of supplied timeline. The cloned timeline will not
-be started and will not be positioned to the current position of
-the original <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->: you will have to start it with
+    <p>Create a new Clutter::Timeline instance which has property values<br />
+matching that of supplied timeline. The cloned timeline will not<br />
+be started and will not be positioned to the current position of<br />
+the original <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->: you will have to start it with<br />
 clutter_timeline_start().</p>
 <p>The only cloned properties are:</p>
 <ul>
@@ -1586,7 +1589,7 @@ clutter_timeline_start().</p>
       
       
         &mdash;
-        <div class='inline'><p>a new Clutter::Timeline, cloned
+        <div class='inline'><p>a new Clutter::Timeline, cloned<br />
 from <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --></p>
 </div>
       
@@ -1648,7 +1651,7 @@ from <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A delay, in milliseconds, that should be observed by the
+    <p>A delay, in milliseconds, that should be observed by the<br />
 timeline before actually starting.</p>
 
 
@@ -1688,7 +1691,7 @@ timeline before actually starting.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A delay, in milliseconds, that should be observed by the
+    <p>A delay, in milliseconds, that should be observed by the<br />
 timeline before actually starting.</p>
 
 
@@ -1756,11 +1759,11 @@ timeline before actually starting.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the amount of time elapsed since the last
+    <p>Retrieves the amount of time elapsed since the last<br />
 ClutterTimeline::new-frame signal.</p>
-<p>This function is only useful inside handlers for the ::new-frame
-signal, and its behaviour is undefined if the timeline is not
-playing.
+<p>This function is only useful inside handlers for the ::new-frame<br />
+signal, and its behaviour is undefined if the timeline is not<br />
+playing.<br />
 last frame</p>
 
 
@@ -1800,7 +1803,7 @@ last frame</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The direction of the timeline, either %CLUTTER_TIMELINE_FORWARD or
+    <p>The direction of the timeline, either %CLUTTER_TIMELINE_FORWARD or<br />
 %CLUTTER_TIMELINE_BACKWARD.</p>
 
 
@@ -1840,7 +1843,7 @@ last frame</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The direction of the timeline, either %CLUTTER_TIMELINE_FORWARD or
+    <p>The direction of the timeline, either %CLUTTER_TIMELINE_FORWARD or<br />
 %CLUTTER_TIMELINE_BACKWARD.</p>
 
 
@@ -1908,7 +1911,7 @@ last frame</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Duration of the timeline in milliseconds, depending on the
+    <p>Duration of the timeline in milliseconds, depending on the<br />
 ClutterTimeline:fps value.</p>
 
 
@@ -1948,7 +1951,7 @@ ClutterTimeline:fps value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Duration of the timeline in milliseconds, depending on the
+    <p>Duration of the timeline in milliseconds, depending on the<br />
 ClutterTimeline:fps value.</p>
 
 
@@ -2016,11 +2019,11 @@ ClutterTimeline:fps value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the full duration of the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->, taking into account the
+    <p>Retrieves the full duration of the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->, taking into account the<br />
 current value of the Clutter::Timeline:repeat-count property.</p>
-<p>If the Clutter::Timeline:repeat-count property is set to -1, this function
+<p>If the Clutter::Timeline:repeat-count property is set to -1, this function<br />
 will return %G_MAXINT64.</p>
-<p>The returned value is to be considered a hint, and it's only valid
+<p>The returned value is to be considered a hint, and it's only valid<br />
 as long as the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> hasn't been changed.</p>
 
 
@@ -2118,7 +2121,7 @@ as long as the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> hasn't
       
       
         &mdash;
-        <div class='inline'><p>return location for the first control
+        <div class='inline'><p>return location for the first control<br />
 point of the cubic bezier, or nil</p>
 </div>
       
@@ -2134,7 +2137,7 @@ point of the cubic bezier, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the second control
+        <div class='inline'><p>return location for the second control<br />
 point of the cubic bezier, or nil</p>
 </div>
       
@@ -2153,7 +2156,7 @@ point of the cubic bezier, or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> is using a cubic bezier progress
+        <div class='inline'><p>true if the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> is using a cubic bezier progress<br />
 more, and false otherwise</p>
 </div>
       
@@ -2209,7 +2212,7 @@ more, and false otherwise</p>
       
       
         &mdash;
-        <div class='inline'><p>return location for the value change policy,
+        <div class='inline'><p>return location for the value change policy,<br />
 or nil</p>
 </div>
       
@@ -2228,7 +2231,7 @@ or nil</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> is using a step progress
+        <div class='inline'><p>true if the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> is using a step progress<br />
 mode, and false otherwise</p>
 </div>
       
@@ -2347,8 +2350,8 @@ mode, and false otherwise</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the list of markers at time <!-- raw HTML omitted -->msecs<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->msecs<!-- raw HTML omitted --> is a
-negative integer, all the markers attached to <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> will be
+    <p>Retrieves the list of markers at time <!-- raw HTML omitted -->msecs<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->msecs<!-- raw HTML omitted --> is a<br />
+negative integer, all the markers attached to <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> will be<br />
 returned.</p>
 
 
@@ -2401,7 +2404,7 @@ returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly allocated, nil terminated string array containing the names
+        <div class='inline'><p>a newly allocated, nil terminated string array containing the names<br />
 of the markers. Use g_strfreev() when done.</p>
 </div>
       
@@ -2463,9 +2466,9 @@ of the markers. Use g_strfreev() when done.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the timeline should automatically rewind and restart.</p>
-<p>As a side effect, setting this property to true will set the
-Clutter::Timeline:repeat-count property to -1, while setting this
-property to false will set the Clutter::Timeline:repeat-count
+<p>As a side effect, setting this property to true will set the<br />
+Clutter::Timeline:repeat-count property to -1, while setting this<br />
+property to false will set the Clutter::Timeline:repeat-count<br />
 property to 0.</p>
 
 
@@ -2534,9 +2537,9 @@ property to 0.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the timeline should automatically rewind and restart.</p>
-<p>As a side effect, setting this property to true will set the
-Clutter::Timeline:repeat-count property to -1, while setting this
-property to false will set the Clutter::Timeline:repeat-count
+<p>As a side effect, setting this property to true will set the<br />
+Clutter::Timeline:repeat-count property to -1, while setting this<br />
+property to false will set the Clutter::Timeline:repeat-count<br />
 property to 0.</p>
 
 
@@ -2612,8 +2615,8 @@ property to 0.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The position of the timeline in a normalized [-1, 2] interval.</p>
-<p>The return value of this function is determined by the progress
-mode set using clutter_timeline_set_progress_mode(), or by the
+<p>The return value of this function is determined by the progress<br />
+mode set using clutter_timeline_set_progress_mode(), or by the<br />
 progress function set using clutter_timeline_set_progress_func().</p>
 
 
@@ -2815,7 +2818,7 @@ progress function set using clutter_timeline_set_progress_func().</p>
   <div class="discussion">
     <p>Defines how many times the timeline should repeat.</p>
 <p>If the repeat count is 0, the timeline does not repeat.</p>
-<p>If the repeat count is set to -1, the timeline will repeat until it is
+<p>If the repeat count is set to -1, the timeline will repeat until it is<br />
 stopped.</p>
 
 
@@ -2857,7 +2860,7 @@ stopped.</p>
   <div class="discussion">
     <p>Defines how many times the timeline should repeat.</p>
 <p>If the repeat count is 0, the timeline does not repeat.</p>
-<p>If the repeat count is set to -1, the timeline will repeat until it is
+<p>If the repeat count is set to -1, the timeline will repeat until it is<br />
 stopped.</p>
 
 
@@ -2925,8 +2928,8 @@ stopped.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Rewinds Clutter::Timeline to the first frame if its direction is
-%CLUTTER_TIMELINE_FORWARD and the last frame if it is
+    <p>Rewinds Clutter::Timeline to the first frame if its direction is<br />
+%CLUTTER_TIMELINE_FORWARD and the last frame if it is<br />
 %CLUTTER_TIMELINE_BACKWARD.</p>
 
 
@@ -2962,11 +2965,11 @@ stopped.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the Clutter::Timeline:progress-mode of <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->
-to %CLUTTER_CUBIC_BEZIER, and sets the two control
+    <p>Sets the Clutter::Timeline:progress-mode of <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --><br />
+to %CLUTTER_CUBIC_BEZIER, and sets the two control<br />
 points for the cubic bezier.</p>
-<p>The cubic bezier curve is between (0, 0) and (1, 1). The X coordinate
-of the two control points must be in the [ 0, 1 ] range, while the
+<p>The cubic bezier curve is between (0, 0) and (1, 1). The X coordinate<br />
+of the two control points must be in the [ 0, 1 ] range, while the<br />
 Y coordinate of the two control points can exceed this range.</p>
 
 
@@ -3036,13 +3039,13 @@ Y coordinate of the two control points can exceed this range.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a custom progress function for <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->. The progress function will
-be called by clutter_timeline_get_progress() and will be used to compute
-the progress value based on the elapsed time and the total duration of the
+    <p>Sets a custom progress function for <!-- raw HTML omitted -->timeline<!-- raw HTML omitted -->. The progress function will<br />
+be called by clutter_timeline_get_progress() and will be used to compute<br />
+the progress value based on the elapsed time and the total duration of the<br />
 timeline.</p>
-<p>If <!-- raw HTML omitted -->func<!-- raw HTML omitted --> is not nil, the Clutter::Timeline:progress-mode property will
+<p>If <!-- raw HTML omitted -->func<!-- raw HTML omitted --> is not nil, the Clutter::Timeline:progress-mode property will<br />
 be set to %CLUTTER_CUSTOM_MODE.</p>
-<p>If <!-- raw HTML omitted -->func<!-- raw HTML omitted --> is nil, any previously set progress function will be unset, and
+<p>If <!-- raw HTML omitted -->func<!-- raw HTML omitted --> is nil, any previously set progress function will be unset, and<br />
 the Clutter::Timeline:progress-mode property will be set to %CLUTTER_LINEAR.</p>
 
 
@@ -3092,7 +3095,7 @@ the Clutter::Timeline:progress-mode property will be set to %CLUTTER_LINEAR.</p>
       
       
         &mdash;
-        <div class='inline'><p>a function to be called when the progress function is removed
+        <div class='inline'><p>a function to be called when the progress function is removed<br />
 or the timeline is disposed</p>
 </div>
       
@@ -3128,7 +3131,7 @@ or the timeline is disposed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the Clutter::Timeline:progress-mode of the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> to %CLUTTER_STEPS
+    <p>Sets the Clutter::Timeline:progress-mode of the <!-- raw HTML omitted -->timeline<!-- raw HTML omitted --> to %CLUTTER_STEPS<br />
 and provides the parameters of the step function.</p>
 
 
@@ -3163,7 +3166,7 @@ and provides the parameters of the step function.</p>
       
       
         &mdash;
-        <div class='inline'><p>whether the change should happen at the start
+        <div class='inline'><p>whether the change should happen at the start<br />
 or at the end of the step</p>
 </div>
       
@@ -3319,7 +3322,7 @@ or at the end of the step</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

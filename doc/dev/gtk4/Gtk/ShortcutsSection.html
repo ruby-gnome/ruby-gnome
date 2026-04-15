@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::ShortcutsSection";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -100,7 +101,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -328,9 +330,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -342,6 +346,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Box.html" title="Gtk::Box (class)">Box</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Box.html#append-instance_method" title="Gtk::Box#append (method)">#append</a></span>, <span class='object_link'><a href="Box.html#baseline_child-instance_method" title="Gtk::Box#baseline_child (method)">#baseline_child</a></span>, <span class='object_link'><a href="Box.html#baseline_child=-instance_method" title="Gtk::Box#baseline_child= (method)">#baseline_child=</a></span>, <span class='object_link'><a href="Box.html#baseline_position-instance_method" title="Gtk::Box#baseline_position (method)">#baseline_position</a></span>, <span class='object_link'><a href="Box.html#baseline_position=-instance_method" title="Gtk::Box#baseline_position= (method)">#baseline_position=</a></span>, <span class='object_link'><a href="Box.html#homogeneous-instance_method" title="Gtk::Box#homogeneous (method)">#homogeneous</a></span>, <span class='object_link'><a href="Box.html#homogeneous=-instance_method" title="Gtk::Box#homogeneous= (method)">#homogeneous=</a></span>, <span class='object_link'><a href="Box.html#homogeneous%3F-instance_method" title="Gtk::Box#homogeneous? (method)">#homogeneous?</a></span>, <span class='object_link'><a href="Box.html#initialize-instance_method" title="Gtk::Box#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="Box.html#initialize_raw-instance_method" title="Gtk::Box#initialize_raw (method)">#initialize_raw</a></span>, <span class='object_link'><a href="Box.html#insert_child_after-instance_method" title="Gtk::Box#insert_child_after (method)">#insert_child_after</a></span>, <span class='object_link'><a href="Box.html#prepend-instance_method" title="Gtk::Box#prepend (method)">#prepend</a></span>, <span class='object_link'><a href="Box.html#remove-instance_method" title="Gtk::Box#remove (method)">#remove</a></span>, <span class='object_link'><a href="Box.html#reorder_child_after-instance_method" title="Gtk::Box#reorder_child_after (method)">#reorder_child_after</a></span>, <span class='object_link'><a href="Box.html#spacing-instance_method" title="Gtk::Box#spacing (method)">#spacing</a></span>, <span class='object_link'><a href="Box.html#spacing=-instance_method" title="Gtk::Box#spacing= (method)">#spacing=</a></span></p>
 
+  
   
   
   
@@ -379,9 +384,9 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a group to the shortcuts section.</p>
-<p>This is the programmatic equivalent to using [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Builder] and a
+<p>This is the programmatic equivalent to using [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Builder] and a<br />
 <code>&lt;child&gt;</code> tag to add the child.</p>
-<p>Adding children with the <code>GtkBox</code> API is not appropriate, as
+<p>Adding children with the <code>GtkBox</code> API is not appropriate, as<br />
 <code>GtkShortcutsSection</code> manages its children internally.</p>
 
 
@@ -437,8 +442,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>The maximum number of lines to allow per column.</p>
-<p>This property can be used to influence how the groups in this
-section are distributed across pages and columns. The default
+<p>This property can be used to influence how the groups in this<br />
+section are distributed across pages and columns. The default<br />
 value of 15 should work in most cases.</p>
 
 
@@ -479,8 +484,8 @@ value of 15 should work in most cases.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The maximum number of lines to allow per column.</p>
-<p>This property can be used to influence how the groups in this
-section are distributed across pages and columns. The default
+<p>This property can be used to influence how the groups in this<br />
+section are distributed across pages and columns. The default<br />
 value of 15 should work in most cases.</p>
 
 
@@ -548,9 +553,9 @@ value of 15 should work in most cases.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A unique name to identify this section among the sections
+    <p>A unique name to identify this section among the sections<br />
 added to the <code>GtkShortcutsWindow</code>.</p>
-<p>Setting the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsWindow:section-name] property
+<p>Setting the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsWindow:section-name] property<br />
 to this string will make this section shown in the <code>GtkShortcutsWindow</code>.</p>
 
 
@@ -590,9 +595,9 @@ to this string will make this section shown in the <code>GtkShortcutsWindow</cod
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A unique name to identify this section among the sections
+    <p>A unique name to identify this section among the sections<br />
 added to the <code>GtkShortcutsWindow</code>.</p>
-<p>Setting the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsWindow:section-name] property
+<p>Setting the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsWindow:section-name] property<br />
 to this string will make this section shown in the <code>GtkShortcutsWindow</code>.</p>
 
 
@@ -660,9 +665,9 @@ to this string will make this section shown in the <code>GtkShortcutsWindow</cod
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The string to show in the section selector of the <code>GtkShortcutsWindow</code>
+    <p>The string to show in the section selector of the <code>GtkShortcutsWindow</code><br />
 for this section.</p>
-<p>If there is only one section, you don't need to set a title,
+<p>If there is only one section, you don't need to set a title,<br />
 since the section selector will not be shown in this case.</p>
 
 
@@ -702,9 +707,9 @@ since the section selector will not be shown in this case.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The string to show in the section selector of the <code>GtkShortcutsWindow</code>
+    <p>The string to show in the section selector of the <code>GtkShortcutsWindow</code><br />
 for this section.</p>
-<p>If there is only one section, you don't need to set a title,
+<p>If there is only one section, you don't need to set a title,<br />
 since the section selector will not be shown in this case.</p>
 
 
@@ -774,8 +779,8 @@ since the section selector will not be shown in this case.</p>
   <div class="discussion">
     <p>A view name to filter the groups in this section by.</p>
 <p>See [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsGroup:view].</p>
-<p>Applications are expected to use the
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsWindow:view-name] property
+<p>Applications are expected to use the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsWindow:view-name] property<br />
 for this purpose.</p>
 
 
@@ -817,8 +822,8 @@ for this purpose.</p>
   <div class="discussion">
     <p>A view name to filter the groups in this section by.</p>
 <p>See [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsGroup:view].</p>
-<p>Applications are expected to use the
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsWindow:view-name] property
+<p>Applications are expected to use the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ShortcutsWindow:view-name] property<br />
 for this purpose.</p>
 
 
@@ -882,7 +887,7 @@ for this purpose.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

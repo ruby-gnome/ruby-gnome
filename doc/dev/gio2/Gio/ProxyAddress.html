@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::ProxyAddress";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -476,9 +478,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -490,6 +494,7 @@
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="InetSocketAddress.html" title="Gio::InetSocketAddress (class)">InetSocketAddress</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="InetSocketAddress.html#address-instance_method" title="Gio::InetSocketAddress#address (method)">#address</a></span>, <span class='object_link'><a href="InetSocketAddress.html#address=-instance_method" title="Gio::InetSocketAddress#address= (method)">#address=</a></span>, <span class='object_link'><a href="InetSocketAddress.html#flowinfo-instance_method" title="Gio::InetSocketAddress#flowinfo (method)">#flowinfo</a></span>, <span class='object_link'><a href="InetSocketAddress.html#flowinfo=-instance_method" title="Gio::InetSocketAddress#flowinfo= (method)">#flowinfo=</a></span>, <span class='object_link'><a href="InetSocketAddress.html#port-instance_method" title="Gio::InetSocketAddress#port (method)">#port</a></span>, <span class='object_link'><a href="InetSocketAddress.html#port=-instance_method" title="Gio::InetSocketAddress#port= (method)">#port=</a></span>, <span class='object_link'><a href="InetSocketAddress.html#scope_id-instance_method" title="Gio::InetSocketAddress#scope_id (method)">#scope_id</a></span>, <span class='object_link'><a href="InetSocketAddress.html#scope_id=-instance_method" title="Gio::InetSocketAddress#scope_id= (method)">#scope_id=</a></span></p>
 
+  
   
   
   
@@ -514,10 +519,10 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new GProxy::Address for <!-- raw HTML omitted -->inetaddr<!-- raw HTML omitted --> with <!-- raw HTML omitted -->protocol<!-- raw HTML omitted --> that should
+    <p>Creates a new GProxy::Address for <!-- raw HTML omitted -->inetaddr<!-- raw HTML omitted --> with <!-- raw HTML omitted -->protocol<!-- raw HTML omitted --> that should<br />
 tunnel through <!-- raw HTML omitted -->dest_hostname<!-- raw HTML omitted --> and <!-- raw HTML omitted -->dest_port<!-- raw HTML omitted -->.</p>
-<p>(Note that this method doesn't set the GProxy::Address:uri or
-GProxy::Address:destination-protocol fields; use g_object_new()
+<p>(Note that this method doesn't set the GProxy::Address:uri or<br />
+GProxy::Address:destination-protocol fields; use g_object_new()<br />
 directly if you want to set those.)</p>
 
 
@@ -612,7 +617,7 @@ directly if you want to set those.)</p>
       
       
         &mdash;
-        <div class='inline'><p>The username to authenticate to the proxy server
+        <div class='inline'><p>The username to authenticate to the proxy server<br />
 (or nil).</p>
 </div>
       
@@ -628,7 +633,7 @@ directly if you want to set those.)</p>
       
       
         &mdash;
-        <div class='inline'><p>The password to authenticate to the proxy server
+        <div class='inline'><p>The password to authenticate to the proxy server<br />
 (or nil).</p>
 </div>
       
@@ -870,7 +875,7 @@ directly if you want to set those.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The protocol being spoke to the destination host, or nil if
+    <p>The protocol being spoke to the destination host, or nil if<br />
 the GProxy::Address doesn't know.</p>
 
 
@@ -910,7 +915,7 @@ the GProxy::Address doesn't know.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The protocol being spoke to the destination host, or nil if
+    <p>The protocol being spoke to the destination host, or nil if<br />
 the GProxy::Address doesn't know.</p>
 
 
@@ -1190,7 +1195,7 @@ the GProxy::Address doesn't know.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The URI string that the proxy was constructed from (or nil
+    <p>The URI string that the proxy was constructed from (or nil<br />
 if the creator didn't specify this).</p>
 
 
@@ -1230,7 +1235,7 @@ if the creator didn't specify this).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The URI string that the proxy was constructed from (or nil
+    <p>The URI string that the proxy was constructed from (or nil<br />
 if the creator didn't specify this).</p>
 
 
@@ -1400,7 +1405,7 @@ if the creator didn't specify this).</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

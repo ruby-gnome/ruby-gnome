@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::VolumeMonitor";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -165,6 +167,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -289,6 +292,7 @@
 
       
     </ul>
+    
   
 
 
@@ -308,29 +312,29 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function should be called by any GVolume::Monitor
-implementation when a new #GMount object is created that is not
-associated with a #GVolume object. It must be called just before
+    <p>This function should be called by any GVolume::Monitor<br />
+implementation when a new #GMount object is created that is not<br />
+associated with a #GVolume object. It must be called just before<br />
 emitting the <!-- raw HTML omitted -->mount_added<!-- raw HTML omitted --> signal.</p>
-<p>If the return value is not nil, the caller must associate the
-returned #GVolume object with the #GMount. This involves returning
-it in its g_mount_get_volume() implementation. The caller must
-also listen for the &quot;removed&quot; signal on the returned object
+<p>If the return value is not nil, the caller must associate the<br />
+returned #GVolume object with the #GMount. This involves returning<br />
+it in its g_mount_get_volume() implementation. The caller must<br />
+also listen for the &quot;removed&quot; signal on the returned object<br />
 and give up its reference when handling that signal</p>
-<p>Similarly, if implementing g_volume_monitor_adopt_orphan_mount(),
-the implementor must take a reference to <!-- raw HTML omitted -->mount<!-- raw HTML omitted --> and return it in
-its g_volume_get_mount() implemented. Also, the implementor must
-listen for the &quot;unmounted&quot; signal on <!-- raw HTML omitted -->mount<!-- raw HTML omitted --> and give up its
+<p>Similarly, if implementing g_volume_monitor_adopt_orphan_mount(),<br />
+the implementor must take a reference to <!-- raw HTML omitted -->mount<!-- raw HTML omitted --> and return it in<br />
+its g_volume_get_mount() implemented. Also, the implementor must<br />
+listen for the &quot;unmounted&quot; signal on <!-- raw HTML omitted -->mount<!-- raw HTML omitted --> and give up its<br />
 reference upon handling that signal.</p>
 <p>There are two main use cases for this function.</p>
-<p>One is when implementing a user space file system driver that reads
-blocks of a block device that is already represented by the native
-volume monitor (for example a CD Audio file system driver). Such
-a driver will generate its own #GMount object that needs to be
+<p>One is when implementing a user space file system driver that reads<br />
+blocks of a block device that is already represented by the native<br />
+volume monitor (for example a CD Audio file system driver). Such<br />
+a driver will generate its own #GMount object that needs to be<br />
 associated with the #GVolume object that represents the volume.</p>
-<p>The other is for implementing a GVolume::Monitor whose sole purpose
-is to return #GVolume objects representing entries in the users
-&quot;favorite servers&quot; list or similar.
+<p>The other is for implementing a GVolume::Monitor whose sole purpose<br />
+is to return #GVolume objects representing entries in the users<br />
+&quot;favorite servers&quot; list or similar.<br />
 if no wants to adopt the #GMount.</p>
 
 
@@ -407,7 +411,7 @@ if no wants to adopt the #GMount.</p>
       
       
         &mdash;
-        <div class='inline'><p>a reference to the GVolume::Monitor used by gio. Call
+        <div class='inline'><p>a reference to the GVolume::Monitor used by gio. Call<br />
 g_object_unref() when done with it.</p>
 </div>
       
@@ -436,7 +440,7 @@ g_object_unref() when done with it.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets a list of drives connected to the system.</p>
-<p>The returned list should be freed with g_list_free(), after
+<p>The returned list should be freed with g_list_free(), after<br />
 its elements have been unreffed with g_object_unref().</p>
 
 
@@ -513,7 +517,7 @@ its elements have been unreffed with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GMount or nil if no such mount is available.
+        <div class='inline'><p>a #GMount or nil if no such mount is available.<br />
 Free the returned object with g_object_unref().</p>
 </div>
       
@@ -572,7 +576,7 @@ Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GVolume or nil if no such volume is available.
+        <div class='inline'><p>a #GVolume or nil if no such volume is available.<br />
 Free the returned object with g_object_unref().</p>
 </div>
       
@@ -595,7 +599,7 @@ Free the returned object with g_object_unref().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets a list of the mounts on the system.</p>
-<p>The returned list should be freed with g_list_free(), after
+<p>The returned list should be freed with g_list_free(), after<br />
 its elements have been unreffed with g_object_unref().</p>
 
 
@@ -636,7 +640,7 @@ its elements have been unreffed with g_object_unref().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets a list of the volumes on the system.</p>
-<p>The returned list should be freed with g_list_free(), after
+<p>The returned list should be freed with g_list_free(), after<br />
 its elements have been unreffed with g_object_unref().</p>
 
 
@@ -672,7 +676,7 @@ its elements have been unreffed with g_object_unref().</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

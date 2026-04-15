@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::ColumnView";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -880,9 +882,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -909,7 +913,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GtkColumnView</code>.</p>
-<p>You most likely want to call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ColumnView.append_column]
+<p>You most likely want to call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ColumnView.append_column]<br />
 to add columns next.</p>
 
 
@@ -977,7 +981,7 @@ to add columns next.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GtkColumnViewColumn</code> that hasn't been added to a
+        <div class='inline'><p>a <code>GtkColumnViewColumn</code> that hasn't been added to a<br />
 <code>GtkColumnView</code> yet</p>
 </div>
       
@@ -1851,9 +1855,9 @@ to add columns next.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Scroll to the row at the given position - or cell if a column is
+    <p>Scroll to the row at the given position - or cell if a column is<br />
 given - and performs the actions specified in <!-- raw HTML omitted -->flags<!-- raw HTML omitted -->.</p>
-<p>This function works no matter if the listview is shown or focused.
+<p>This function works no matter if the listview is shown or focused.<br />
 If it isn't, then the changes will take effect once that happens.</p>
 
 
@@ -1873,7 +1877,7 @@ If it isn't, then the changes will take effect once that happens.</p>
       
       
         &mdash;
-        <div class='inline'><p>position of the item. Must be less than the number of
+        <div class='inline'><p>position of the item. Must be less than the number of<br />
 items in the view.</p>
 </div>
       
@@ -1889,7 +1893,7 @@ items in the view.</p>
       
       
         &mdash;
-        <div class='inline'><p>The column to scroll to
+        <div class='inline'><p>The column to scroll to<br />
 or nil to not scroll columns.</p>
 </div>
       
@@ -1920,7 +1924,7 @@ or nil to not scroll columns.</p>
       
       
         &mdash;
-        <div class='inline'><p>details of how to perform
+        <div class='inline'><p>details of how to perform<br />
 the scroll operation or nil to scroll into view</p>
 </div>
       
@@ -1956,7 +1960,7 @@ the scroll operation or nil to scroll into view</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the list should show separators
+    <p>Returns whether the list should show separators<br />
 between columns.</p>
 
 
@@ -2102,7 +2106,7 @@ between columns.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the list should show separators
+    <p>Returns whether the list should show separators<br />
 between rows.</p>
 
 
@@ -2248,7 +2252,7 @@ between rows.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether rows will be activated on single click and
+    <p>Returns whether rows will be activated on single click and<br />
 selected on hover.</p>
 
 
@@ -2395,12 +2399,12 @@ selected on hover.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the sorting of the view.</p>
-<p>This function should be used to set up the initial sorting.
-At runtime, users can change the sorting of a column view
+<p>This function should be used to set up the initial sorting.<br />
+At runtime, users can change the sorting of a column view<br />
 by clicking on the list headers.</p>
-<p>This call only has an effect if the sorter returned by
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ColumnView.get_sorter] is set on a sort model,
-and [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ColumnViewColumn.set_sorter] has been called
+<p>This call only has an effect if the sorter returned by<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ColumnView.get_sorter] is set on a sort model,<br />
+and [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.ColumnViewColumn.set_sorter] has been called<br />
 on <!-- raw HTML omitted -->column<!-- raw HTML omitted --> to associate a sorter with the column.</p>
 <p>If <!-- raw HTML omitted -->column<!-- raw HTML omitted --> is nil, the view will be unsorted.</p>
 
@@ -2679,7 +2683,7 @@ on <!-- raw HTML omitted -->column<!-- raw HTML omitted --> to associate a sorte
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

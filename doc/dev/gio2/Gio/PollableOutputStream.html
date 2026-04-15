@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::PollableOutputStream";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,20 +79,21 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gio2/pollable-output-stream.rb</dd>
+    <dd>lib/gio2/pollable-output-stream.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GPollableOutputStream</code> is implemented by [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.OutputStream]s that
-can be polled for readiness to write. This can be used when
-interfacing with a non-GIO API that expects
+    <p><code>GPollableOutputStream</code> is implemented by [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.OutputStream]s that<br />
+can be polled for readiness to write. This can be used when<br />
+interfacing with a non-GIO API that expects<br />
 UNIX-file-descriptor-style asynchronous I/O rather than GIO-style.</p>
-<p>Some classes may implement <code>GPollableOutputStream</code> but have only certain
-instances of that class be pollable. If [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.PollableOutputStream.can_poll]
-returns false, then the behavior of other <code>GPollableOutputStream</code> methods is
+<p>Some classes may implement <code>GPollableOutputStream</code> but have only certain<br />
+instances of that class be pollable. If [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.PollableOutputStream.can_poll]<br />
+returns false, then the behavior of other <code>GPollableOutputStream</code> methods is<br />
 undefined.</p>
 
 
@@ -254,6 +256,7 @@ undefined.</p>
 
       
     </ul>
+    
   
 
 
@@ -273,11 +276,11 @@ undefined.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is actually pollable. Some classes may implement
-GPollable::OutputStream but have only certain instances of that
-class be pollable. If this method returns false, then the behavior
+    <p>Checks if <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is actually pollable. Some classes may implement<br />
+GPollable::OutputStream but have only certain instances of that<br />
+class be pollable. If this method returns false, then the behavior<br />
 of other GPollable::OutputStream methods is undefined.</p>
-<p>For any given stream, the value returned by this method is constant;
+<p>For any given stream, the value returned by this method is constant;<br />
 a stream cannot switch from pollable to non-pollable or vice versa.</p>
 
 
@@ -317,14 +320,14 @@ a stream cannot switch from pollable to non-pollable or vice versa.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a #GSource that triggers when <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> can be written, or
-<!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is triggered or an error occurs. The callback on the
+    <p>Creates a #GSource that triggers when <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> can be written, or<br />
+<!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is triggered or an error occurs. The callback on the<br />
 source is of the GPollable::SourceFunc type.</p>
-<p>As with g_pollable_output_stream_is_writable(), it is possible that
-the stream may not actually be writable even after the source
-triggers, so you should use g_pollable_output_stream_write_nonblocking()
+<p>As with g_pollable_output_stream_is_writable(), it is possible that<br />
+the stream may not actually be writable even after the source<br />
+triggers, so you should use g_pollable_output_stream_write_nonblocking()<br />
 rather than g_output_stream_write() from the callback.</p>
-<p>The behaviour of this method is undefined if
+<p>The behaviour of this method is undefined if<br />
 g_pollable_output_stream_can_poll() returns false for <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.</p>
 
 
@@ -407,14 +410,14 @@ g_pollable_output_stream_can_poll() returns false for <!-- raw HTML omitted -->s
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a #GSource that triggers when <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> can be written, or
-<!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is triggered or an error occurs. The callback on the
+    <p>Creates a #GSource that triggers when <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> can be written, or<br />
+<!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is triggered or an error occurs. The callback on the<br />
 source is of the GPollable::SourceFunc type.</p>
-<p>As with g_pollable_output_stream_is_writable(), it is possible that
-the stream may not actually be writable even after the source
-triggers, so you should use g_pollable_output_stream_write_nonblocking()
+<p>As with g_pollable_output_stream_is_writable(), it is possible that<br />
+the stream may not actually be writable even after the source<br />
+triggers, so you should use g_pollable_output_stream_write_nonblocking()<br />
 rather than g_output_stream_write() from the callback.</p>
-<p>The behaviour of this method is undefined if
+<p>The behaviour of this method is undefined if<br />
 g_pollable_output_stream_can_poll() returns false for <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.</p>
 
 
@@ -488,13 +491,13 @@ g_pollable_output_stream_can_poll() returns false for <!-- raw HTML omitted -->s
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> can be written.</p>
-<p>Note that some stream types may not be able to implement this 100%
-reliably, and it is possible that a call to g_output_stream_write()
-after this returns true would still block. To guarantee
-non-blocking behavior, you should always use
-g_pollable_output_stream_write_nonblocking(), which will return a
+<p>Note that some stream types may not be able to implement this 100%<br />
+reliably, and it is possible that a call to g_output_stream_write()<br />
+after this returns true would still block. To guarantee<br />
+non-blocking behavior, you should always use<br />
+g_pollable_output_stream_write_nonblocking(), which will return a<br />
 %G_IO_ERROR_WOULD_BLOCK error rather than blocking.</p>
-<p>The behaviour of this method is undefined if
+<p>The behaviour of this method is undefined if<br />
 g_pollable_output_stream_can_poll() returns false for <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.</p>
 
 
@@ -513,9 +516,9 @@ g_pollable_output_stream_can_poll() returns false for <!-- raw HTML omitted -->s
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is writable, false if not. If an error
-has occurred on <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->, this will result in
-g_pollable_output_stream_is_writable() returning true, and the
+        <div class='inline'><p>true if <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is writable, false if not. If an error<br />
+has occurred on <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->, this will result in<br />
+g_pollable_output_stream_is_writable() returning true, and the<br />
 next attempt to write will return the error.</p>
 </div>
       
@@ -537,20 +540,20 @@ next attempt to write will return the error.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Attempts to write up to <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> to <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->, as
-with g_output_stream_write(). If <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is not currently writable,
-this will immediately return %G_IO_ERROR_WOULD_BLOCK, and you can
-use g_pollable_output_stream_create_source() to create a #GSource
+    <p>Attempts to write up to <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> to <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->, as<br />
+with g_output_stream_write(). If <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is not currently writable,<br />
+this will immediately return %G_IO_ERROR_WOULD_BLOCK, and you can<br />
+use g_pollable_output_stream_create_source() to create a #GSource<br />
 that will be triggered when <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is writable.</p>
-<p>Note that since this method never blocks, you cannot actually
-use <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> to cancel it. However, it will return an error
-if <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> has already been cancelled when you call, which
-may happen if you call this method after a source triggers due
+<p>Note that since this method never blocks, you cannot actually<br />
+use <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> to cancel it. However, it will return an error<br />
+if <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> has already been cancelled when you call, which<br />
+may happen if you call this method after a source triggers due<br />
 to having been cancelled.</p>
-<p>Also note that if %G_IO_ERROR_WOULD_BLOCK is returned some underlying
-transports like D/TLS require that you re-send the same <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> and
+<p>Also note that if %G_IO_ERROR_WOULD_BLOCK is returned some underlying<br />
+transports like D/TLS require that you re-send the same <!-- raw HTML omitted -->buffer<!-- raw HTML omitted --> and<br />
 <!-- raw HTML omitted -->count<!-- raw HTML omitted --> in the next write call.</p>
-<p>The behaviour of this method is undefined if
+<p>The behaviour of this method is undefined if<br />
 g_pollable_output_stream_can_poll() returns false for <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.</p>
 
 
@@ -570,7 +573,7 @@ g_pollable_output_stream_can_poll() returns false for <!-- raw HTML omitted -->s
       
       
         &mdash;
-        <div class='inline'><p>a buffer to write
+        <div class='inline'><p>a buffer to write<br />
 data from</p>
 </div>
       
@@ -619,7 +622,7 @@ data from</p>
       
       
         &mdash;
-        <div class='inline'><p>the number of bytes written, or -1 on error (including
+        <div class='inline'><p>the number of bytes written, or -1 on error (including<br />
 %G_IO_ERROR_WOULD_BLOCK).</p>
 </div>
       
@@ -641,24 +644,24 @@ data from</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Attempts to write the bytes contained in the <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> to <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->,
-as with g_output_stream_writev(). If <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is not currently writable,
-this will immediately return %<!-- raw HTML omitted -->G_POLLABLE_RETURN_WOULD_BLOCK<!-- raw HTML omitted -->, and you can
-use g_pollable_output_stream_create_source() to create a #GSource
-that will be triggered when <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is writable. <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will <em>not</em> be
+    <p>Attempts to write the bytes contained in the <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> to <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->,<br />
+as with g_output_stream_writev(). If <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is not currently writable,<br />
+this will immediately return %<!-- raw HTML omitted -->G_POLLABLE_RETURN_WOULD_BLOCK<!-- raw HTML omitted -->, and you can<br />
+use g_pollable_output_stream_create_source() to create a #GSource<br />
+that will be triggered when <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is writable. <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will <em>not</em> be<br />
 set in that case.</p>
-<p>Note that since this method never blocks, you cannot actually
-use <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> to cancel it. However, it will return an error
-if <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> has already been cancelled when you call, which
-may happen if you call this method after a source triggers due
+<p>Note that since this method never blocks, you cannot actually<br />
+use <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> to cancel it. However, it will return an error<br />
+if <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> has already been cancelled when you call, which<br />
+may happen if you call this method after a source triggers due<br />
 to having been cancelled.</p>
-<p>Also note that if %G_POLLABLE_RETURN_WOULD_BLOCK is returned some underlying
-transports like D/TLS require that you re-send the same <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> and
+<p>Also note that if %G_POLLABLE_RETURN_WOULD_BLOCK is returned some underlying<br />
+transports like D/TLS require that you re-send the same <!-- raw HTML omitted -->vectors<!-- raw HTML omitted --> and<br />
 <!-- raw HTML omitted -->n_vectors<!-- raw HTML omitted --> in the next write call.</p>
-<p>The behaviour of this method is undefined if
-g_pollable_output_stream_can_poll() returns false for <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.
-if the stream is not currently writable (and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is <em>not</em> set), or
-%G_POLLABLE_RETURN_FAILED if there was an error in which case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will
+<p>The behaviour of this method is undefined if<br />
+g_pollable_output_stream_can_poll() returns false for <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.<br />
+if the stream is not currently writable (and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is <em>not</em> set), or<br />
+%G_POLLABLE_RETURN_FAILED if there was an error in which case <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will<br />
 be set.</p>
 
 
@@ -708,7 +711,7 @@ be set.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the number of bytes that were
+        <div class='inline'><p>location to store the number of bytes that were<br />
 written to the stream</p>
 </div>
       
@@ -759,7 +762,7 @@ written to the stream</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

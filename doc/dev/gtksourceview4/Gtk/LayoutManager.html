@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::LayoutManager";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,15 +95,16 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The <code>GtkLayoutManagerClass</code> structure contains only private data, and
-should only be accessed through the provided API, or when subclassing
+    <p>The <code>GtkLayoutManagerClass</code> structure contains only private data, and<br />
+should only be accessed through the provided API, or when subclassing<br />
 <code>GtkLayoutManager</code>.</p>
 
 
@@ -269,6 +271,7 @@ should only be accessed through the provided API, or when subclassing
 
       
     </ul>
+    
   
 
 
@@ -288,8 +291,8 @@ should only be accessed through the provided API, or when subclassing
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Assigns the given <!-- raw HTML omitted -->width<!-- raw HTML omitted -->, <!-- raw HTML omitted -->height<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->baseline<!-- raw HTML omitted --> to
-a <!-- raw HTML omitted -->widget<!-- raw HTML omitted -->, and computes the position and sizes of the children of
+    <p>Assigns the given <!-- raw HTML omitted -->width<!-- raw HTML omitted -->, <!-- raw HTML omitted -->height<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->baseline<!-- raw HTML omitted --> to<br />
+a <!-- raw HTML omitted -->widget<!-- raw HTML omitted -->, and computes the position and sizes of the children of<br />
 the <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> using the layout management policy of <!-- raw HTML omitted -->manager<!-- raw HTML omitted -->.</p>
 
 
@@ -389,11 +392,11 @@ the <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> using the layout ma
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a <code>GtkLayoutChild</code> instance for the <code>GtkLayoutManager</code>,
+    <p>Retrieves a <code>GtkLayoutChild</code> instance for the <code>GtkLayoutManager</code>,<br />
 creating one if necessary.</p>
 <p>The <!-- raw HTML omitted -->child<!-- raw HTML omitted --> widget must be a child of the widget using <!-- raw HTML omitted -->manager<!-- raw HTML omitted -->.</p>
-<p>The <code>GtkLayoutChild</code> instance is owned by the <code>GtkLayoutManager</code>,
-and is guaranteed to exist as long as <!-- raw HTML omitted -->child<!-- raw HTML omitted --> is a child of the
+<p>The <code>GtkLayoutChild</code> instance is owned by the <code>GtkLayoutManager</code>,<br />
+and is guaranteed to exist as long as <!-- raw HTML omitted -->child<!-- raw HTML omitted --> is a child of the<br />
 <code>GtkWidget</code> using the given <code>GtkLayoutManager</code>.</p>
 
 
@@ -453,7 +456,7 @@ and is guaranteed to exist as long as <!-- raw HTML omitted -->child<!-- raw HTM
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queues a resize on the <code>GtkWidget</code> using <!-- raw HTML omitted -->manager<!-- raw HTML omitted -->, if any.</p>
-<p>This function should be called by subclasses of <code>GtkLayoutManager</code>
+<p>This function should be called by subclasses of <code>GtkLayoutManager</code><br />
 in response to changes to their layout management policies.</p>
 
 
@@ -489,9 +492,9 @@ in response to changes to their layout management policies.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Measures the size of the <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> using <!-- raw HTML omitted -->manager<!-- raw HTML omitted -->, for the
+    <p>Measures the size of the <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> using <!-- raw HTML omitted -->manager<!-- raw HTML omitted -->, for the<br />
 given <!-- raw HTML omitted -->orientation<!-- raw HTML omitted --> and size.</p>
-<p>See the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget] documentation on layout management for
+<p>See the [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget] documentation on layout management for<br />
 more details.</p>
 
 
@@ -541,11 +544,11 @@ more details.</p>
       
       
         &mdash;
-        <div class='inline'><p>Size for the opposite of <!-- raw HTML omitted -->orientation<!-- raw HTML omitted -->; for instance, if
-the <!-- raw HTML omitted -->orientation<!-- raw HTML omitted --> is %GTK_ORIENTATION_HORIZONTAL, this is the height
-of the widget; if the <!-- raw HTML omitted -->orientation<!-- raw HTML omitted --> is %GTK_ORIENTATION_VERTICAL, this
-is the width of the widget. This allows to measure the height for the
-given width, and the width for the given height. Use -1 if the size
+        <div class='inline'><p>Size for the opposite of <!-- raw HTML omitted -->orientation<!-- raw HTML omitted -->; for instance, if<br />
+the <!-- raw HTML omitted -->orientation<!-- raw HTML omitted --> is %GTK_ORIENTATION_HORIZONTAL, this is the height<br />
+of the widget; if the <!-- raw HTML omitted -->orientation<!-- raw HTML omitted --> is %GTK_ORIENTATION_VERTICAL, this<br />
+is the width of the widget. This allows to measure the height for the<br />
+given width, and the width for the given height. Use -1 if the size<br />
 is not known</p>
 </div>
       
@@ -561,7 +564,7 @@ is not known</p>
       
       
         &mdash;
-        <div class='inline'><p>the minimum size for the given size and
+        <div class='inline'><p>the minimum size for the given size and<br />
 orientation</p>
 </div>
       
@@ -577,7 +580,7 @@ orientation</p>
       
       
         &mdash;
-        <div class='inline'><p>the natural, or preferred size for the
+        <div class='inline'><p>the natural, or preferred size for the<br />
 given size and orientation</p>
 </div>
       
@@ -593,7 +596,7 @@ given size and orientation</p>
       
       
         &mdash;
-        <div class='inline'><p>the baseline position for the
+        <div class='inline'><p>the baseline position for the<br />
 minimum size</p>
 </div>
       
@@ -609,7 +612,7 @@ minimum size</p>
       
       
         &mdash;
-        <div class='inline'><p>the baseline position for the
+        <div class='inline'><p>the baseline position for the<br />
 natural size</p>
 </div>
       
@@ -719,7 +722,7 @@ natural size</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

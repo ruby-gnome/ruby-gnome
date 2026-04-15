@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::DrawContext";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -102,8 +104,8 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Base class for objects implementing different rendering methods.</p>
-<p><code>GdkDrawContext</code> is the base object used by contexts implementing different
-rendering methods, such as [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.CairoContext] or [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext].
+<p><code>GdkDrawContext</code> is the base object used by contexts implementing different<br />
+rendering methods, such as [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.CairoContext] or [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext].<br />
 It provides shared functionality between those contexts.</p>
 <p>You will always interact with one of those subclasses.</p>
 <p>A <code>GdkDrawContext</code> is always associated with a single toplevel surface.</p>
@@ -318,6 +320,7 @@ It provides shared functionality between those contexts.</p>
 
       
     </ul>
+    
   
 
 
@@ -337,25 +340,25 @@ It provides shared functionality between those contexts.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Indicates that you are beginning the process of redrawing <!-- raw HTML omitted -->region<!-- raw HTML omitted -->
+    <p>Indicates that you are beginning the process of redrawing <!-- raw HTML omitted -->region<!-- raw HTML omitted --><br />
 on the <!-- raw HTML omitted -->context<!-- raw HTML omitted -->'s surface.</p>
-<p>Calling this function begins a drawing operation using <!-- raw HTML omitted -->context<!-- raw HTML omitted --> on the
-surface that <!-- raw HTML omitted -->context<!-- raw HTML omitted --> was created from. The actual requirements and
-guarantees for the drawing operation vary for different implementations
-of drawing, so a [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.CairoContext] and a [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext]
+<p>Calling this function begins a drawing operation using <!-- raw HTML omitted -->context<!-- raw HTML omitted --> on the<br />
+surface that <!-- raw HTML omitted -->context<!-- raw HTML omitted --> was created from. The actual requirements and<br />
+guarantees for the drawing operation vary for different implementations<br />
+of drawing, so a [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.CairoContext] and a [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext]<br />
 need to be treated differently.</p>
-<p>A call to this function is a requirement for drawing and must be
-followed by a call to [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.end_frame], which will
-complete the drawing operation and ensure the contents become visible
+<p>A call to this function is a requirement for drawing and must be<br />
+followed by a call to [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.end_frame], which will<br />
+complete the drawing operation and ensure the contents become visible<br />
 on screen.</p>
-<p>Note that the <!-- raw HTML omitted -->region<!-- raw HTML omitted --> passed to this function is the minimum region that
-needs to be drawn and depending on implementation, windowing system and
-hardware in use, it might be necessary to draw a larger region. Drawing
-implementation must use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.get_frame_region] to
+<p>Note that the <!-- raw HTML omitted -->region<!-- raw HTML omitted --> passed to this function is the minimum region that<br />
+needs to be drawn and depending on implementation, windowing system and<br />
+hardware in use, it might be necessary to draw a larger region. Drawing<br />
+implementation must use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.get_frame_region] to<br />
 query the region that must be drawn.</p>
-<p>When using GTK, the widget system automatically places calls to
-gdk_draw_context_begin_frame() and gdk_draw_context_end_frame() via the
-use of <a href="../gsk4/class.Renderer.html">GskRenderer</a>s, so application code
+<p>When using GTK, the widget system automatically places calls to<br />
+gdk_draw_context_begin_frame() and gdk_draw_context_end_frame() via the<br />
+use of <a href="../gsk4/class.Renderer.html">GskRenderer</a>s, so application code<br />
 does not need to call these functions explicitly.</p>
 
 
@@ -517,10 +520,10 @@ does not need to call these functions explicitly.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Ends a drawing operation started with gdk_draw_context_begin_frame().</p>
-<p>This makes the drawing available on screen.
+<p>This makes the drawing available on screen.<br />
 See [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.begin_frame] for more details about drawing.</p>
-<p>When using a [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext], this function may call <code>glFlush()</code>
-implicitly before returning; it is not recommended to call <code>glFlush()</code>
+<p>When using a [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext], this function may call <code>glFlush()</code><br />
+implicitly before returning; it is not recommended to call <code>glFlush()</code><br />
 explicitly before calling this function.</p>
 
 
@@ -557,10 +560,10 @@ explicitly before calling this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the region that is currently being repainted.</p>
-<p>After a call to [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.begin_frame] this function will
-return a union of the region passed to that function and the area of the
+<p>After a call to [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.begin_frame] this function will<br />
+return a union of the region passed to that function and the area of the<br />
 surface that the <!-- raw HTML omitted -->context<!-- raw HTML omitted --> determined needs to be repainted.</p>
-<p>If <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is not in between calls to [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.begin_frame]
+<p>If <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is not in between calls to [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.begin_frame]<br />
 and [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.end_frame], nil will be returned.</p>
 
 
@@ -601,8 +604,8 @@ and [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.end
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns true if <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is in the process of drawing to its surface.</p>
-<p>This is the case between calls to [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.begin_frame]
-and [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.end_frame]. In this situation, drawing commands
+<p>This is the case between calls to [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.begin_frame]<br />
+and [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.end_frame]. In this situation, drawing commands<br />
 may be effecting the contents of the <!-- raw HTML omitted -->context<!-- raw HTML omitted -->'s surface.</p>
 
 
@@ -621,7 +624,7 @@ may be effecting the contents of the <!-- raw HTML omitted -->context<!-- raw HT
       
       
         &mdash;
-        <div class='inline'><p>true if the context is between [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.begin_frame]
+        <div class='inline'><p>true if the context is between [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.begin_frame]<br />
 and [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.end_frame] calls.</p>
 </div>
       
@@ -745,7 +748,7 @@ and [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DrawContext.end
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

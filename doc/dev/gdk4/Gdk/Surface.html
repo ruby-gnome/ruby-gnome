@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::Surface";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -99,7 +100,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gdk4/deprecated.rb</dd>
+    <dd>lib/gdk4/deprecated.rb
+</dd>
   </dl>
   
 </div>
@@ -908,6 +910,7 @@
 
       
     </ul>
+    
   
 
 
@@ -974,7 +977,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Emits a short beep associated to <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->.</p>
-<p>If the display of <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> does not support per-surface beeps,
+<p>If the display of <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> does not support per-surface beeps,<br />
 emits a short beep on the display just as [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.beep].</p>
 
 
@@ -1050,9 +1053,9 @@ emits a short beep on the display just as [method<!-- raw HTML omitted -->Gdk<!-
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new <code>GdkGLContext</code> for the <code>GdkSurface</code>.</p>
-<p>The context is disconnected from any particular surface or surface.
-If the creation of the <code>GdkGLContext</code> failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set.
-Before using the returned <code>GdkGLContext</code>, you will need to
+<p>The context is disconnected from any particular surface or surface.<br />
+If the creation of the <code>GdkGLContext</code> failed, <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set.<br />
+Before using the returned <code>GdkGLContext</code>, you will need to<br />
 call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.make_current] or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.realize].</p>
 
 
@@ -1092,17 +1095,17 @@ call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLContext.make
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new Cairo surface that is as compatible as possible with the
+    <p>Create a new Cairo surface that is as compatible as possible with the<br />
 given <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->.</p>
-<p>For example the new surface will have the same fallback resolution
-and font options as <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->. Generally, the new surface will also
-use the same backend as <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->, unless that is not possible for
-some reason. The type of the returned surface may be examined with
+<p>For example the new surface will have the same fallback resolution<br />
+and font options as <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->. Generally, the new surface will also<br />
+use the same backend as <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->, unless that is not possible for<br />
+some reason. The type of the returned surface may be examined with<br />
 cairo_surface_get_type().</p>
-<p>Initially the surface contents are all 0 (transparent if contents
+<p>Initially the surface contents are all 0 (transparent if contents<br />
 have transparency, black otherwise.)</p>
-<p>This function always returns a valid pointer, but it will return a
-pointer to a “nil” surface if <!-- raw HTML omitted -->other<!-- raw HTML omitted --> is already in an error state
+<p>This function always returns a valid pointer, but it will return a<br />
+pointer to a “nil” surface if <!-- raw HTML omitted -->other<!-- raw HTML omitted --> is already in an error state<br />
 or any other error occurs.</p>
 
 
@@ -1170,8 +1173,8 @@ or any other error occurs.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the newly allocated surface. The caller
-owns the surface and should call cairo_surface_destroy() when done
+        <div class='inline'><p>a pointer to the newly allocated surface. The caller<br />
+owns the surface and should call cairo_surface_destroy() when done<br />
 with it.</p>
 </div>
       
@@ -1338,12 +1341,12 @@ with it.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Destroys the window system resources associated with <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> and
+    <p>Destroys the window system resources associated with <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> and<br />
 decrements <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->'s reference count.</p>
-<p>The window system resources for all children of <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> are also
+<p>The window system resources for all children of <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> are also<br />
 destroyed, but the children’s reference counts are not decremented.</p>
-<p>Note that a surface will not be destroyed automatically when its
-reference count reaches zero. You must call this function yourself
+<p>Note that a surface will not be destroyed automatically when its<br />
+reference count reaches zero. You must call this function yourself<br />
 before that happens.</p>
 
 
@@ -1591,9 +1594,9 @@ before that happens.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves a <code>GdkCursor</code> pointer for the <!-- raw HTML omitted -->device<!-- raw HTML omitted --> currently set on the
+    <p>Retrieves a <code>GdkCursor</code> pointer for the <!-- raw HTML omitted -->device<!-- raw HTML omitted --> currently set on the<br />
 specified <code>GdkSurface</code>.</p>
-<p>If the return value is nil then there is no custom cursor set on the
+<p>If the return value is nil then there is no custom cursor set on the<br />
 specified surface, and it is using the cursor for its parent surface.</p>
 <p>Use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface.set_cursor] to unset the cursor of the surface.</p>
 
@@ -1654,7 +1657,7 @@ specified surface, and it is using the cursor for its parent surface.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Obtains the current device position and modifier state.</p>
-<p>The position is given in coordinates relative to the upper
+<p>The position is given in coordinates relative to the upper<br />
 left corner of <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->.</p>
 
 
@@ -1865,9 +1868,9 @@ left corner of <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Hide the surface.</p>
-<p>For toplevel surfaces, withdraws them, so they will no longer be
-known to the window manager; for all surfaces, unmaps them, so
-they won’t be displayed. Normally done automatically as
+<p>For toplevel surfaces, withdraws them, so they will no longer be<br />
+known to the window manager; for all surfaces, unmaps them, so<br />
+they won’t be displayed. Normally done automatically as<br />
 part of <a href="../gtk4/method.Widget.hide.html">gtk_widget_hide()</a>.</p>
 
 
@@ -1903,16 +1906,16 @@ part of <a href="../gtk4/method.Widget.hide.html">gtk_widget_hide()</a>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Apply the region to the surface for the purpose of event
+    <p>Apply the region to the surface for the purpose of event<br />
 handling.</p>
-<p>Mouse events which happen while the pointer position corresponds
-to an unset bit in the mask will be passed on the surface below
+<p>Mouse events which happen while the pointer position corresponds<br />
+to an unset bit in the mask will be passed on the surface below<br />
 <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->.</p>
-<p>An input region is typically used with RGBA surfaces. The alpha
-channel of the surface defines which pixels are invisible and
-allows for nicely antialiased borders, and the input region
+<p>An input region is typically used with RGBA surfaces. The alpha<br />
+channel of the surface defines which pixels are invisible and<br />
+allows for nicely antialiased borders, and the input region<br />
 controls where the surface is “clickable”.</p>
-<p>Use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.supports_input_shapes] to find out if
+<p>Use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.supports_input_shapes] to find out if<br />
 a particular backend supports input regions.</p>
 
 
@@ -2007,7 +2010,7 @@ a particular backend supports input regions.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks whether the surface has been mapped.</p>
-<p>A surface is mapped with [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel.present]
+<p>A surface is mapped with [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Toplevel.present]<br />
 or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Popup.present].</p>
 
 
@@ -2154,16 +2157,16 @@ or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Popup.present].<
 </h3><div class="docstring">
   <div class="discussion">
     <p>Marks a region of the <code>GdkSurface</code> as opaque.</p>
-<p>For optimisation purposes, compositing window managers may
-like to not draw obscured regions of surfaces, or turn off blending
-during for these regions. With RGB windows with no transparency,
-this is just the shape of the window, but with ARGB32 windows, the
-compositor does not know what regions of the window are transparent
+<p>For optimisation purposes, compositing window managers may<br />
+like to not draw obscured regions of surfaces, or turn off blending<br />
+during for these regions. With RGB windows with no transparency,<br />
+this is just the shape of the window, but with ARGB32 windows, the<br />
+compositor does not know what regions of the window are transparent<br />
 or not.</p>
 <p>This function only works for toplevel surfaces.</p>
-<p>GTK will update this property automatically if the <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> background
-is opaque, as we know where the opaque regions are. If your surface
-background is not opaque, please update this property in your
+<p>GTK will update this property automatically if the <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> background<br />
+is opaque, as we know where the opaque regions are. If your surface<br />
+background is not opaque, please update this property in your<br />
 <a href="../gtk4/vfunc.Widget.css_changed.html">GtkWidgetClass.css_changed</a> handler.</p>
 
 
@@ -2183,7 +2186,7 @@ background is not opaque, please update this property in your
       
       
         &mdash;
-        <div class='inline'><p>a region, or nil to make the entire
+        <div class='inline'><p>a region, or nil to make the entire<br />
 surface opaque</p>
 </div>
       
@@ -2219,9 +2222,9 @@ surface opaque</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Forces a [signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface::render] signal emission for <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->
+    <p>Forces a [signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface::render] signal emission for <!-- raw HTML omitted -->surface<!-- raw HTML omitted --><br />
 to be scheduled.</p>
-<p>This function is useful for implementations that track invalid
+<p>This function is useful for implementations that track invalid<br />
 regions on their own.</p>
 
 
@@ -2400,7 +2403,7 @@ regions on their own.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The scale factor of the surface.</p>
-<p>The scale factor is the next larger integer,
+<p>The scale factor is the next larger integer,<br />
 compared to [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface:scale].</p>
 
 
@@ -2441,7 +2444,7 @@ compared to [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surfa
 </h3><div class="docstring">
   <div class="discussion">
     <p>The scale factor of the surface.</p>
-<p>The scale factor is the next larger integer,
+<p>The scale factor is the next larger integer,<br />
 compared to [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface:scale].</p>
 
 
@@ -2510,9 +2513,9 @@ compared to [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surfa
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets a specific <code>GdkCursor</code> for a given device when it gets inside <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->.</p>
-<p>Passing nil for the <!-- raw HTML omitted -->cursor<!-- raw HTML omitted --> argument means that <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> will use the
+<p>Passing nil for the <!-- raw HTML omitted -->cursor<!-- raw HTML omitted --> argument means that <!-- raw HTML omitted -->surface<!-- raw HTML omitted --> will use the<br />
 cursor of its parent surface. Most surfaces should use this default.</p>
-<p>Use [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Cursor.new_from_name] or [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Cursor.new_from_texture]
+<p>Use [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Cursor.new_from_name] or [ctor<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Cursor.new_from_texture]<br />
 to create the cursor. To make the cursor invisible, use %GDK_BLANK_CURSOR.</p>
 
 
@@ -2583,7 +2586,7 @@ to create the cursor. To make the cursor invisible, use %GDK_BLANK_CURSOR.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Translates coordinates between two surfaces.</p>
-<p>Note that this only works if <!-- raw HTML omitted -->to<!-- raw HTML omitted --> and <!-- raw HTML omitted -->from<!-- raw HTML omitted --> are popups or
+<p>Note that this only works if <!-- raw HTML omitted -->to<!-- raw HTML omitted --> and <!-- raw HTML omitted -->from<!-- raw HTML omitted --> are popups or<br />
 transient-for to the same toplevel (directly or indirectly).</p>
 
 
@@ -2774,7 +2777,7 @@ transient-for to the same toplevel (directly or indirectly).</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

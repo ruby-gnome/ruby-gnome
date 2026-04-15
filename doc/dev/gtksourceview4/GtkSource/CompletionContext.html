@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::CompletionContext";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -506,6 +508,7 @@
 
       
     </ul>
+    
   
 
 
@@ -561,7 +564,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the underlying buffer used by the context.</p>
-<p>This is a convenience function to get the buffer via the Gtk::SourceCompletion
+<p>This is a convenience function to get the buffer via the Gtk::SourceCompletion<br />
 property.</p>
 
 
@@ -601,8 +604,8 @@ property.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the &quot;busy&quot; property. This is set to true while the completion
-context is actively fetching proposals from registered
+    <p>Gets the &quot;busy&quot; property. This is set to true while the completion<br />
+context is actively fetching proposals from registered<br />
 Gtk::SourceCompletionProvider's.</p>
 
 
@@ -642,7 +645,7 @@ Gtk::SourceCompletionProvider's.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;busy&quot; property is true while the completion context is
+    <p>The &quot;busy&quot; property is true while the completion context is<br />
 populating completion proposals.</p>
 
 
@@ -710,7 +713,7 @@ populating completion proposals.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The &quot;busy&quot; property is true while the completion context is
+    <p>The &quot;busy&quot; property is true while the completion context is<br />
 populating completion proposals.</p>
 
 
@@ -897,7 +900,7 @@ populating completion proposals.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The &quot;empty&quot; property is true when there are no results.</p>
-<p>It will be notified when the first result is added or the last
+<p>It will be notified when the first result is added or the last<br />
 result is removed.</p>
 
 
@@ -966,7 +969,7 @@ result is removed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The &quot;empty&quot; property is true when there are no results.</p>
-<p>It will be notified when the first result is added or the last
+<p>It will be notified when the first result is added or the last<br />
 result is removed.</p>
 
 
@@ -1006,12 +1009,12 @@ result is removed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the bounds for the completion, which is the beginning of the
-current word (taking break characters into account) to the current
+    <p>Gets the bounds for the completion, which is the beginning of the<br />
+current word (taking break characters into account) to the current<br />
 insertion cursor.</p>
-<p>If <!-- raw HTML omitted -->begin<!-- raw HTML omitted --> is non-nil, it will be set to the start position of the
+<p>If <!-- raw HTML omitted -->begin<!-- raw HTML omitted --> is non-nil, it will be set to the start position of the<br />
 current word being completed.</p>
-<p>If <!-- raw HTML omitted -->end<!-- raw HTML omitted --> is non-nil, it will be set to the insertion cursor for the
+<p>If <!-- raw HTML omitted -->end<!-- raw HTML omitted --> is non-nil, it will be set to the insertion cursor for the<br />
 current word being completed.</p>
 
 
@@ -1086,7 +1089,7 @@ current word being completed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the GList::Model associated with the provider.</p>
-<p>You can connect to Gtk::SourceCompletionContext::model-changed to receive
+<p>You can connect to Gtk::SourceCompletionContext::model-changed to receive<br />
 notifications about when the model has been replaced by a new model.</p>
 
 
@@ -1223,10 +1226,10 @@ notifications about when the model has been replaced by a new model.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function allows providers to update their results for a context
+    <p>This function allows providers to update their results for a context<br />
 outside of a call to [method<!-- raw HTML omitted -->CompletionProvider<!-- raw HTML omitted -->.populate_async].</p>
-<p>This can be used to immediately return results for a provider while it does
-additional asynchronous work. Doing so will allow the completions to
+<p>This can be used to immediately return results for a provider while it does<br />
+additional asynchronous work. Doing so will allow the completions to<br />
 update while the operation is in progress.</p>
 
 
@@ -1370,7 +1373,7 @@ update while the operation is in progress.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

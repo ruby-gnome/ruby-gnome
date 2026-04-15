@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Poppler::Page";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -99,8 +100,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/poppler/page.rb<span class="defines">,<br />
+    <dd>lib/poppler/page.rb<span class="defines">,<br>
   lib/poppler/deprecated.rb</span>
+
 </dd>
   </dl>
   
@@ -260,6 +262,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -1183,6 +1186,7 @@
 
       
     </ul>
+    
   
 
 
@@ -1203,9 +1207,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Frees a list of Poppler::AnnotMapping<!-- raw HTML omitted -->s allocated by
-poppler_page_get_annot_mapping().  It also unreferences the Poppler::Annot<!-- raw HTML omitted -->s
-that each mapping contains, so if you want to keep them around, you need to
+    <p>Frees a list of Poppler::AnnotMapping<!-- raw HTML omitted -->s allocated by<br />
+poppler_page_get_annot_mapping().  It also unreferences the Poppler::Annot<!-- raw HTML omitted -->s<br />
+that each mapping contains, so if you want to keep them around, you need to<br />
 reference them with g_object_ref().</p>
 
 
@@ -1225,7 +1229,7 @@ reference them with g_object_ref().</p>
       
       
         &mdash;
-        <div class='inline'><p>A list of
+        <div class='inline'><p>A list of<br />
 Poppler::AnnotMapping<!-- raw HTML omitted -->s</p>
 </div>
       
@@ -1261,7 +1265,7 @@ Poppler::AnnotMapping<!-- raw HTML omitted -->s</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Frees a list of Poppler::FormFieldMapping<!-- raw HTML omitted -->s allocated by
+    <p>Frees a list of Poppler::FormFieldMapping<!-- raw HTML omitted -->s allocated by<br />
 poppler_page_get_form_field_mapping().</p>
 
 
@@ -1281,7 +1285,7 @@ poppler_page_get_form_field_mapping().</p>
       
       
         &mdash;
-        <div class='inline'><p>A list of
+        <div class='inline'><p>A list of<br />
 Poppler::FormFieldMapping<!-- raw HTML omitted -->s</p>
 </div>
       
@@ -1317,7 +1321,7 @@ Poppler::FormFieldMapping<!-- raw HTML omitted -->s</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Frees a list of Poppler::ImageMapping<!-- raw HTML omitted -->s allocated by
+    <p>Frees a list of Poppler::ImageMapping<!-- raw HTML omitted -->s allocated by<br />
 poppler_page_get_image_mapping().</p>
 
 
@@ -1337,7 +1341,7 @@ poppler_page_get_image_mapping().</p>
       
       
         &mdash;
-        <div class='inline'><p>A list of
+        <div class='inline'><p>A list of<br />
 Poppler::ImageMapping<!-- raw HTML omitted -->s</p>
 </div>
       
@@ -1373,9 +1377,9 @@ Poppler::ImageMapping<!-- raw HTML omitted -->s</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Frees a list of Poppler::LinkMapping<!-- raw HTML omitted -->s allocated by
-poppler_page_get_link_mapping().  It also frees the Poppler::Action<!-- raw HTML omitted -->s
-that each mapping contains, so if you want to keep them around, you need to
+    <p>Frees a list of Poppler::LinkMapping<!-- raw HTML omitted -->s allocated by<br />
+poppler_page_get_link_mapping().  It also frees the Poppler::Action<!-- raw HTML omitted -->s<br />
+that each mapping contains, so if you want to keep them around, you need to<br />
 copy them with poppler_action_copy().</p>
 
 
@@ -1395,7 +1399,7 @@ copy them with poppler_action_copy().</p>
       
       
         &mdash;
-        <div class='inline'><p>A list of
+        <div class='inline'><p>A list of<br />
 Poppler::LinkMapping<!-- raw HTML omitted -->s</p>
 </div>
       
@@ -1431,7 +1435,7 @@ Poppler::LinkMapping<!-- raw HTML omitted -->s</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Frees a list of Poppler::TextAttributes<!-- raw HTML omitted -->s allocated by
+    <p>Frees a list of Poppler::TextAttributes<!-- raw HTML omitted -->s allocated by<br />
 poppler_page_get_text_attributes().</p>
 
 
@@ -1451,7 +1455,7 @@ poppler_page_get_text_attributes().</p>
       
       
         &mdash;
-        <div class='inline'><p>A list of
+        <div class='inline'><p>A list of<br />
 Poppler::TextAttributes<!-- raw HTML omitted -->s</p>
 </div>
       
@@ -1506,7 +1510,7 @@ Poppler::TextAttributes<!-- raw HTML omitted -->s</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GList of
+        <div class='inline'><p>a #GList of<br />
 Poppler::Rectangle</p>
 </div>
       
@@ -1602,8 +1606,8 @@ Poppler::Rectangle</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a list of Poppler::AnnotMapping items that map from a location on
-<!-- raw HTML omitted -->page<!-- raw HTML omitted --> to a Poppler::Annot.  This list must be freed with
+    <p>Returns a list of Poppler::AnnotMapping items that map from a location on<br />
+<!-- raw HTML omitted -->page<!-- raw HTML omitted --> to a Poppler::Annot.  This list must be freed with<br />
 poppler_page_free_annot_mapping() when done.</p>
 
 
@@ -1682,8 +1686,8 @@ poppler_page_free_annot_mapping() when done.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finds <!-- raw HTML omitted -->text<!-- raw HTML omitted --> in <!-- raw HTML omitted -->page<!-- raw HTML omitted --> with the default options (%POPPLER_FIND_DEFAULT) and
-returns a #GList of rectangles for each occurrence of the text on the page.
+    <p>Finds <!-- raw HTML omitted -->text<!-- raw HTML omitted --> in <!-- raw HTML omitted -->page<!-- raw HTML omitted --> with the default options (%POPPLER_FIND_DEFAULT) and<br />
+returns a #GList of rectangles for each occurrence of the text on the page.<br />
 The coordinates are in PDF points.</p>
 
 
@@ -1768,8 +1772,8 @@ The coordinates are in PDF points.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finds <!-- raw HTML omitted -->text<!-- raw HTML omitted --> in <!-- raw HTML omitted -->page<!-- raw HTML omitted --> with the default options (%POPPLER_FIND_DEFAULT) and
-returns a #GList of rectangles for each occurrence of the text on the page.
+    <p>Finds <!-- raw HTML omitted -->text<!-- raw HTML omitted --> in <!-- raw HTML omitted -->page<!-- raw HTML omitted --> with the default options (%POPPLER_FIND_DEFAULT) and<br />
+returns a #GList of rectangles for each occurrence of the text on the page.<br />
 The coordinates are in PDF points.</p>
 
 
@@ -1842,21 +1846,21 @@ The coordinates are in PDF points.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finds <!-- raw HTML omitted -->text<!-- raw HTML omitted --> in <!-- raw HTML omitted -->page<!-- raw HTML omitted --> with the given Poppler::FindFlags options and
-returns a #GList of rectangles for each occurrence of the text on the page.
+    <p>Finds <!-- raw HTML omitted -->text<!-- raw HTML omitted --> in <!-- raw HTML omitted -->page<!-- raw HTML omitted --> with the given Poppler::FindFlags options and<br />
+returns a #GList of rectangles for each occurrence of the text on the page.<br />
 The coordinates are in PDF points.</p>
-<p>When %POPPLER_FIND_MULTILINE is passed in <!-- raw HTML omitted -->options<!-- raw HTML omitted -->, matches may span more than
-one line. In this case, the returned list will contain one Poppler::Rectangle
-for each part of a match. The function poppler_rectangle_find_get_match_continued()
-will return true for all rectangles belonging to the same match, except for
-the last one. If a hyphen was ignored at the end of the part of the match,
-poppler_rectangle_find_get_ignored_hyphen() will return true for that
+<p>When %POPPLER_FIND_MULTILINE is passed in <!-- raw HTML omitted -->options<!-- raw HTML omitted -->, matches may span more than<br />
+one line. In this case, the returned list will contain one Poppler::Rectangle<br />
+for each part of a match. The function poppler_rectangle_find_get_match_continued()<br />
+will return true for all rectangles belonging to the same match, except for<br />
+the last one. If a hyphen was ignored at the end of the part of the match,<br />
+poppler_rectangle_find_get_ignored_hyphen() will return true for that<br />
 rectangle.</p>
-<p>Note that currently matches spanning more than two lines are not found.
+<p>Note that currently matches spanning more than two lines are not found.<br />
 (This limitation may be lifted in a future version.)</p>
-<p>Note also that currently finding multi-line matches backwards is not
-implemented; if you pass %POPPLER_FIND_BACKWARDS and %POPPLER_FIND_MULTILINE
-together, %POPPLER_FIND_MULTILINE will be ignored.
+<p>Note also that currently finding multi-line matches backwards is not<br />
+implemented; if you pass %POPPLER_FIND_BACKWARDS and %POPPLER_FIND_MULTILINE<br />
+together, %POPPLER_FIND_MULTILINE will be ignored.<br />
 of newly allocated Poppler::Rectangle. Free with g_list_free_full() using poppler_rectangle_free().</p>
 
 
@@ -1930,8 +1934,8 @@ of newly allocated Poppler::Rectangle. Free with g_list_free_full() using popple
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a list of Poppler::FormFieldMapping items that map from a
-location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to a form field.  This list must be freed
+    <p>Returns a list of Poppler::FormFieldMapping items that map from a<br />
+location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to a form field.  This list must be freed<br />
 with poppler_page_free_form_field_mapping() when done.</p>
 
 
@@ -2132,8 +2136,8 @@ with poppler_page_free_form_field_mapping() when done.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a region containing the area that would be rendered by
-poppler_page_render_selection().
+    <p>Returns a region containing the area that would be rendered by<br />
+poppler_page_render_selection().<br />
 The returned region must be freed with cairo_region_destroy()</p>
 
 
@@ -2274,7 +2278,7 @@ The returned region must be freed with cairo_region_destroy()</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the contents of the <!-- raw HTML omitted -->selection<!-- raw HTML omitted -->
+        <div class='inline'><p>a pointer to the contents of the <!-- raw HTML omitted -->selection<!-- raw HTML omitted --><br />
 as a string</p>
 </div>
       
@@ -2296,9 +2300,9 @@ as a string</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a region containing the area that would be rendered by
-poppler_page_render_selection() as a #GList of
-Poppler::Rectangle. The returned list must be freed with
+    <p>Returns a region containing the area that would be rendered by<br />
+poppler_page_render_selection() as a #GList of<br />
+Poppler::Rectangle. The returned list must be freed with<br />
 poppler_page_selection_region_free().</p>
 
 
@@ -2506,10 +2510,10 @@ poppler_page_selection_region_free().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the attributes of the text in <!-- raw HTML omitted -->area<!-- raw HTML omitted --> as a #GList of Poppler::TextAttributes.
+    <p>Obtains the attributes of the text in <!-- raw HTML omitted -->area<!-- raw HTML omitted --> as a #GList of Poppler::TextAttributes.<br />
 This list must be freed with poppler_page_free_text_attributes() when done.</p>
-<p>Each list element is a Poppler::TextAttributes struct where start_index and
-end_index indicates the range of text (as returned by poppler_page_get_text_for_area())
+<p>Each list element is a Poppler::TextAttributes struct where start_index and<br />
+end_index indicates the range of text (as returned by poppler_page_get_text_for_area())<br />
 to which text attributes apply.</p>
 
 
@@ -2626,9 +2630,9 @@ to which text attributes apply.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the layout of the text as a list of Poppler::Rectangle
+    <p>Obtains the layout of the text as a list of Poppler::Rectangle<br />
 This array must be freed with g_free() when done.</p>
-<p>The position in the array represents an offset in the text returned by
+<p>The position in the array represents an offset in the text returned by<br />
 poppler_page_get_text()</p>
 <p>See also poppler_page_get_text_layout_for_area().</p>
 
@@ -2703,9 +2707,9 @@ poppler_page_get_text()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the layout of the text contained in <!-- raw HTML omitted -->area<!-- raw HTML omitted --> as a list of Poppler::Rectangle
+    <p>Obtains the layout of the text contained in <!-- raw HTML omitted -->area<!-- raw HTML omitted --> as a list of Poppler::Rectangle<br />
 This array must be freed with g_free() when done.</p>
-<p>The position in the array represents an offset in the text returned by
+<p>The position in the array represents an offset in the text returned by<br />
 poppler_page_get_text_for_area()</p>
 
 
@@ -2794,9 +2798,9 @@ poppler_page_get_text_for_area()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if <!-- raw HTML omitted -->page<!-- raw HTML omitted --> has a thumbnail associated with it.  It also
-fills in <!-- raw HTML omitted -->width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted --> with the width and height of the
-thumbnail.  The values of width and height are not changed if no
+    <p>Returns true if <!-- raw HTML omitted -->page<!-- raw HTML omitted --> has a thumbnail associated with it.  It also<br />
+fills in <!-- raw HTML omitted -->width<!-- raw HTML omitted --> and <!-- raw HTML omitted -->height<!-- raw HTML omitted --> with the width and height of the<br />
+thumbnail.  The values of width and height are not changed if no<br />
 appropriate thumbnail exists.</p>
 
 
@@ -2870,8 +2874,8 @@ appropriate thumbnail exists.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a list of Poppler::ImageMapping items that map from a
-location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to an image of the page. This list must be freed
+    <p>Returns a list of Poppler::ImageMapping items that map from a<br />
+location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to an image of the page. This list must be freed<br />
 with poppler_page_free_image_mapping() when done.</p>
 
 
@@ -2937,8 +2941,8 @@ with poppler_page_free_image_mapping() when done.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a list of Poppler::ImageMapping items that map from a
-location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to an image of the page. This list must be freed
+    <p>Returns a list of Poppler::ImageMapping items that map from a<br />
+location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to an image of the page. This list must be freed<br />
 with poppler_page_free_image_mapping() when done.</p>
 
 
@@ -3137,8 +3141,8 @@ with poppler_page_free_image_mapping() when done.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a list of Poppler::LinkMapping items that map from a
-location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to a Poppler::Action.  This list must be freed
+    <p>Returns a list of Poppler::LinkMapping items that map from a<br />
+location on <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to a Poppler::Action.  This list must be freed<br />
 with poppler_page_free_link_mapping() when done.</p>
 
 
@@ -3232,11 +3236,11 @@ with poppler_page_free_link_mapping() when done.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Render the page to the given cairo context. This function
-is for rendering a page that will be displayed. If you want
-to render a page that will be printed use
-poppler_page_render_for_printing() instead.  Please see the documentation
-for that function for the differences between rendering to the screen and
+    <p>Render the page to the given cairo context. This function<br />
+is for rendering a page that will be displayed. If you want<br />
+to render a page that will be printed use<br />
+poppler_page_render_for_printing() instead.  Please see the documentation<br />
+for that function for the differences between rendering to the screen and<br />
 rendering to a printer.</p>
 
 
@@ -3291,10 +3295,10 @@ rendering to a printer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Render the page to the given cairo context for printing with
-#POPPLER_PRINT_ALL flags selected.  If you want a different set of flags,
+    <p>Render the page to the given cairo context for printing with<br />
+#POPPLER_PRINT_ALL flags selected.  If you want a different set of flags,<br />
 use poppler_page_render_for_printing_with_options().</p>
-<p>The difference between poppler_page_render() and this function is that some
+<p>The difference between poppler_page_render() and this function is that some<br />
 things get rendered differently between screens and printers:</p>
 <!-- raw HTML omitted -->
 
@@ -3350,9 +3354,9 @@ things get rendered differently between screens and printers:</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Render the page to the given cairo context for printing
+    <p>Render the page to the given cairo context for printing<br />
 with the specified options</p>
-<p>See the documentation for poppler_page_render_for_printing() for the
+<p>See the documentation for poppler_page_render_for_printing() for the<br />
 differences between rendering to the screen and rendering to a printer.</p>
 
 
@@ -3422,12 +3426,12 @@ differences between rendering to the screen and rendering to a printer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Render the selection specified by <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> for <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to
-the given cairo context.  The selection will be rendered, using
-<!-- raw HTML omitted -->glyph_color<!-- raw HTML omitted --> for the glyphs and <!-- raw HTML omitted -->background_color<!-- raw HTML omitted --> for the selection
+    <p>Render the selection specified by <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> for <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to<br />
+the given cairo context.  The selection will be rendered, using<br />
+<!-- raw HTML omitted -->glyph_color<!-- raw HTML omitted --> for the glyphs and <!-- raw HTML omitted -->background_color<!-- raw HTML omitted --> for the selection<br />
 background.</p>
-<p>If non-NULL, <!-- raw HTML omitted -->old_selection<!-- raw HTML omitted --> specifies the selection that is already
-rendered to <!-- raw HTML omitted -->cairo<!-- raw HTML omitted -->, in which case this function will (some day)
+<p>If non-NULL, <!-- raw HTML omitted -->old_selection<!-- raw HTML omitted --> specifies the selection that is already<br />
+rendered to <!-- raw HTML omitted -->cairo<!-- raw HTML omitted -->, in which case this function will (some day)<br />
 only render the changed part of the selection.</p>
 
 
@@ -3629,7 +3633,7 @@ only render the changed part of the selection.</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the text of the <!-- raw HTML omitted -->page<!-- raw HTML omitted -->
+        <div class='inline'><p>a pointer to the text of the <!-- raw HTML omitted -->page<!-- raw HTML omitted --><br />
 as a string</p>
 </div>
       
@@ -3651,10 +3655,10 @@ as a string</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains the attributes of the text as a #GList of Poppler::TextAttributes.
+    <p>Obtains the attributes of the text as a #GList of Poppler::TextAttributes.<br />
 This list must be freed with poppler_page_free_text_attributes() when done.</p>
-<p>Each list element is a Poppler::TextAttributes struct where start_index and
-end_index indicates the range of text (as returned by poppler_page_get_text())
+<p>Each list element is a Poppler::TextAttributes struct where start_index and<br />
+end_index indicates the range of text (as returned by poppler_page_get_text())<br />
 to which text attributes apply.</p>
 <p>See also poppler_page_get_text_attributes_for_area()</p>
 
@@ -3761,9 +3765,9 @@ to which text attributes apply.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the embedded thumbnail for the specified page.  If the document
-doesn't have an embedded thumbnail for the page, this function
-returns nil.
+    <p>Get the embedded thumbnail for the specified page.  If the document<br />
+doesn't have an embedded thumbnail for the page, this function<br />
+returns nil.<br />
 doesn't have a thumbnail for this page.</p>
 
 
@@ -3904,7 +3908,7 @@ doesn't have a thumbnail for this page.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

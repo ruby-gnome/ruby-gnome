@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "PangoOT::Info";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -138,6 +140,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -285,6 +288,7 @@
 
       
     </ul>
+    
   
 
 
@@ -341,7 +345,7 @@
       
       
         &mdash;
-        <div class='inline'><p>the <code>PangoOTInfo</code> for <!-- raw HTML omitted -->face<!-- raw HTML omitted -->.
+        <div class='inline'><p>the <code>PangoOTInfo</code> for <!-- raw HTML omitted -->face<!-- raw HTML omitted -->.<br />
 This object will have the same lifetime as <!-- raw HTML omitted -->face<!-- raw HTML omitted -->.</p>
 </div>
       
@@ -370,13 +374,13 @@ This object will have the same lifetime as <!-- raw HTML omitted -->face<!-- raw
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finds the index of a feature.</p>
-<p>If the feature is not found, sets <!-- raw HTML omitted -->feature_index<!-- raw HTML omitted --> to PANGO_OT_NO_FEATURE,
-which is safe to pass to [method<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.add_feature] and similar
+<p>If the feature is not found, sets <!-- raw HTML omitted -->feature_index<!-- raw HTML omitted --> to PANGO_OT_NO_FEATURE,<br />
+which is safe to pass to [method<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.add_feature] and similar<br />
 functions.</p>
-<p>In the future, this may set <!-- raw HTML omitted -->feature_index<!-- raw HTML omitted --> to an special value that if
-used in [method<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.add_feature] will ask Pango to synthesize
-the requested feature based on Unicode properties and data. However, this
-function will still return false in those cases. So, users may want to
+<p>In the future, this may set <!-- raw HTML omitted -->feature_index<!-- raw HTML omitted --> to an special value that if<br />
+used in [method<!-- raw HTML omitted -->PangoOT<!-- raw HTML omitted -->.Ruleset.add_feature] will ask Pango to synthesize<br />
+the requested feature based on Unicode properties and data. However, this<br />
+function will still return false in those cases. So, users may want to<br />
 ignore the return value of this function in certain cases.</p>
 
 
@@ -441,7 +445,7 @@ ignore the return value of this function in certain cases.</p>
       
       
         &mdash;
-        <div class='inline'><p>the index of the language whose features are searched,
+        <div class='inline'><p>the index of the language whose features are searched,<br />
 or %PANGO_OT_DEFAULT_LANGUAGE to use the default language of the script</p>
 </div>
       
@@ -457,7 +461,7 @@ or %PANGO_OT_DEFAULT_LANGUAGE to use the default language of the script</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the index of
+        <div class='inline'><p>location to store the index of<br />
 the feature</p>
 </div>
       
@@ -498,12 +502,12 @@ the feature</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finds the index of a language and its required feature index.</p>
-<p>If the language is not found, sets <!-- raw HTML omitted -->language_index<!-- raw HTML omitted --> to %PANGO_OT_DEFAULT_LANGUAGE
-and the required feature of the default language system is returned in
-required_feature_index. For best compatibility with some fonts, also
-searches the language system tag 'dflt' before falling back to the default
-language system, but that is transparent to the user. The user can simply
-ignore the return value of this function to automatically fall back to the
+<p>If the language is not found, sets <!-- raw HTML omitted -->language_index<!-- raw HTML omitted --> to %PANGO_OT_DEFAULT_LANGUAGE<br />
+and the required feature of the default language system is returned in<br />
+required_feature_index. For best compatibility with some fonts, also<br />
+searches the language system tag 'dflt' before falling back to the default<br />
+language system, but that is transparent to the user. The user can simply<br />
+ignore the return value of this function to automatically fall back to the<br />
 default language system.</p>
 
 
@@ -583,7 +587,7 @@ default language system.</p>
       
       
         &mdash;
-        <div class='inline'><p>location to store the
+        <div class='inline'><p>location to store the<br />
 required feature index of the language</p>
 </div>
       
@@ -624,12 +628,12 @@ required feature index of the language</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finds the index of a script.</p>
-<p>If not found, tries to find the 'DFLT' and then 'dflt' scripts and
-return the index of that in <!-- raw HTML omitted -->script_index<!-- raw HTML omitted -->. If none of those is found
+<p>If not found, tries to find the 'DFLT' and then 'dflt' scripts and<br />
+return the index of that in <!-- raw HTML omitted -->script_index<!-- raw HTML omitted -->. If none of those is found<br />
 either, %PANGO_OT_NO_SCRIPT is placed in <!-- raw HTML omitted -->script_index<!-- raw HTML omitted -->.</p>
-<p>All other functions taking an input script_index parameter know
-how to handle %PANGO_OT_NO_SCRIPT, so one can ignore the return
-value of this function completely and proceed, to enjoy the automatic
+<p>All other functions taking an input script_index parameter know<br />
+how to handle %PANGO_OT_NO_SCRIPT, so one can ignore the return<br />
+value of this function completely and proceed, to enjoy the automatic<br />
 fallback to the 'DFLT'/'dflt' script.</p>
 
 
@@ -782,8 +786,8 @@ fallback to the 'DFLT'/'dflt' script.</p>
       
       
         &mdash;
-        <div class='inline'><p>the index of the language to list features for, or
-%PANGO_OT_DEFAULT_LANGUAGE, to list features for the default
+        <div class='inline'><p>the index of the language to list features for, or<br />
+%PANGO_OT_DEFAULT_LANGUAGE, to list features for the default<br />
 language of the script</p>
 </div>
       
@@ -802,7 +806,7 @@ language of the script</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly-allocated zero-terminated
+        <div class='inline'><p>a newly-allocated zero-terminated<br />
 array containing the tags of the available features</p>
 </div>
       
@@ -891,7 +895,7 @@ array containing the tags of the available features</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly-allocated zero-terminated
+        <div class='inline'><p>a newly-allocated zero-terminated<br />
 array containing the tags of the available languages</p>
 </div>
       
@@ -950,7 +954,7 @@ array containing the tags of the available languages</p>
       
       
         &mdash;
-        <div class='inline'><p>a newly-allocated zero-terminated
+        <div class='inline'><p>a newly-allocated zero-terminated<br />
 array containing the tags of the available scripts</p>
 </div>
       
@@ -968,7 +972,7 @@ array containing the tags of the available scripts</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

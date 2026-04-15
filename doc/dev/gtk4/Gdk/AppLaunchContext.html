@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::AppLaunchContext";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -104,9 +106,9 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p><code>GdkAppLaunchContext</code> handles launching an application in a graphical context.</p>
-<p>It is an implementation of <code>GAppLaunchContext</code> that provides startup
+<p>It is an implementation of <code>GAppLaunchContext</code> that provides startup<br />
 notification and allows to launch applications on a specific workspace.</p>
-<h2>Launching an application</h2>
+<h2><a href="#launching-an-application" aria-hidden="true" class="anchor" id="launching-an-application"></a>Launching an application</h2>
 <pre class="code c"><code class="c">GdkAppLaunchContext *context;
 
 context = gdk_display_get_app_launch_context (display);
@@ -279,6 +281,7 @@ g_object_unref (context);
 
       
     </ul>
+    
   
 
 
@@ -300,14 +303,14 @@ g_object_unref (context);
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the workspace on which applications will be launched.</p>
-<p>This only works when running under a window manager that
-supports multiple workspaces, as described in the
-<a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Manager Hints</a>.
-Specifically this sets the <code>_NET_WM_DESKTOP</code> property described
+<p>This only works when running under a window manager that<br />
+supports multiple workspaces, as described in the<br />
+<a href="http://www.freedesktop.org/Standards/wm-spec">Extended Window Manager Hints</a>.<br />
+Specifically this sets the <code>_NET_WM_DESKTOP</code> property described<br />
 in that spec.</p>
 <p>This only works when using the X11 backend.</p>
-<p>When the workspace is not specified or <!-- raw HTML omitted -->desktop<!-- raw HTML omitted --> is set to -1,
-it is up to the window manager to pick one, typically it will
+<p>When the workspace is not specified or <!-- raw HTML omitted -->desktop<!-- raw HTML omitted --> is set to -1,<br />
+it is up to the window manager to pick one, typically it will<br />
 be the current workspace.</p>
 
 
@@ -468,9 +471,9 @@ be the current workspace.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the icon for applications that are launched with this
+    <p>Sets the icon for applications that are launched with this<br />
 context.</p>
-<p>Window Managers can use this information when displaying startup
+<p>Window Managers can use this information when displaying startup<br />
 notification.</p>
 <p>See also [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.AppLaunchContext.set_icon_name].</p>
 
@@ -527,11 +530,11 @@ notification.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the icon for applications that are launched with this context.</p>
-<p>The <!-- raw HTML omitted -->icon_name<!-- raw HTML omitted --> will be interpreted in the same way as the Icon field
+<p>The <!-- raw HTML omitted -->icon_name<!-- raw HTML omitted --> will be interpreted in the same way as the Icon field<br />
 in desktop files. See also [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.AppLaunchContext.set_icon].</p>
-<p>If both <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> and <!-- raw HTML omitted -->icon_name<!-- raw HTML omitted --> are set, the <!-- raw HTML omitted -->icon_name<!-- raw HTML omitted --> takes priority.
-If neither <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> or <!-- raw HTML omitted -->icon_name<!-- raw HTML omitted --> is set, the icon is taken from either
-the file that is passed to launched application or from the <code>GAppInfo</code>
+<p>If both <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> and <!-- raw HTML omitted -->icon_name<!-- raw HTML omitted --> are set, the <!-- raw HTML omitted -->icon_name<!-- raw HTML omitted --> takes priority.<br />
+If neither <!-- raw HTML omitted -->icon<!-- raw HTML omitted --> or <!-- raw HTML omitted -->icon_name<!-- raw HTML omitted --> is set, the icon is taken from either<br />
+the file that is passed to launched application or from the <code>GAppInfo</code><br />
 for the launched application itself.</p>
 
 
@@ -587,11 +590,11 @@ for the launched application itself.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the timestamp of <!-- raw HTML omitted -->context<!-- raw HTML omitted -->.</p>
-<p>The timestamp should ideally be taken from the event that
+<p>The timestamp should ideally be taken from the event that<br />
 triggered the launch.</p>
-<p>Window managers can use this information to avoid moving the
-focus to the newly launched application when the user is busy
-typing in another window. This is also known as 'focus stealing
+<p>Window managers can use this information to avoid moving the<br />
+focus to the newly launched application when the user is busy<br />
+typing in another window. This is also known as 'focus stealing<br />
 prevention'.</p>
 
 
@@ -642,7 +645,7 @@ prevention'.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

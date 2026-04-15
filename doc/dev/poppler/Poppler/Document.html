@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Poppler::Document";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -99,7 +100,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/poppler/document.rb</dd>
+    <dd>lib/poppler/document.rb
+</dd>
   </dl>
   
 </div>
@@ -2214,6 +2216,7 @@
 
       
     </ul>
+    
   
 
 
@@ -2231,10 +2234,10 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Poppler::Document reading the PDF contents from <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.
-Note that the given GInput::Stream must be seekable or %G_IO_ERROR_NOT_SUPPORTED
-will be returned.
-Possible errors include those in the #POPPLER_ERROR, #G_FILE_ERROR
+    <p>Creates a new Poppler::Document reading the PDF contents from <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.<br />
+Note that the given GInput::Stream must be seekable or %G_IO_ERROR_NOT_SUPPORTED<br />
+will be returned.<br />
+Possible errors include those in the #POPPLER_ERROR, #G_FILE_ERROR<br />
 and #G_IO_ERROR domains.</p>
 
 
@@ -2462,8 +2465,8 @@ and #G_IO_ERROR domains.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a #GList containing Poppler::Attachment<!-- raw HTML omitted -->s.  These attachments
-are unowned, and must be unreffed, and the list must be freed with
+    <p>Returns a #GList containing Poppler::Attachment<!-- raw HTML omitted -->s.  These attachments<br />
+are unowned, and must be unreffed, and the list must be freed with<br />
 g_list_free().</p>
 
 
@@ -2610,9 +2613,9 @@ g_list_free().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a balanced binary tree of all named destinations in <!-- raw HTML omitted -->document<!-- raw HTML omitted --></p>
-<p>The tree key is strings in the form returned by
-poppler_named_dest_to_bytestring() which constains a destination name.
-The tree value is the Poppler::Dest which contains a named destination.
+<p>The tree key is strings in the form returned by<br />
+poppler_named_dest_to_bytestring() which constains a destination name.<br />
+The tree value is the Poppler::Dest which contains a named destination.<br />
 The return value must be freed with g_tree_destroy().</p>
 
 
@@ -2797,7 +2800,7 @@ The return value must be freed with g_tree_destroy().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the document's creation date. If <!-- raw HTML omitted -->creation_datetime<!-- raw HTML omitted --> is nil,
+    <p>Sets the document's creation date. If <!-- raw HTML omitted -->creation_datetime<!-- raw HTML omitted --> is nil,<br />
 CreationDate entry is removed from the document's Info dictionary.</p>
 
 
@@ -3103,10 +3106,10 @@ CreationDate entry is removed from the document's Info dictionary.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a Poppler::Dest for the named destination <!-- raw HTML omitted -->link_name<!-- raw HTML omitted --> in <!-- raw HTML omitted -->document<!-- raw HTML omitted -->.</p>
-<p>Note that named destinations are bytestrings, not string. That means that
-unless <!-- raw HTML omitted -->link_name<!-- raw HTML omitted --> was returned by a poppler function (e.g. is
-Poppler::Dest.named_dest), it needs to be converted to string
-using poppler_named_dest_from_bytestring() before being passed to this
+<p>Note that named destinations are bytestrings, not string. That means that<br />
+unless <!-- raw HTML omitted -->link_name<!-- raw HTML omitted --> was returned by a poppler function (e.g. is<br />
+Poppler::Dest.named_dest), it needs to be converted to string<br />
+using poppler_named_dest_from_bytestring() before being passed to this<br />
 function.</p>
 <p>The returned value must be freed with poppler_dest_free().</p>
 
@@ -3145,7 +3148,7 @@ function.</p>
       
       
         &mdash;
-        <div class='inline'><p>a new Poppler::Dest destination, or nil if
+        <div class='inline'><p>a new Poppler::Dest destination, or nil if<br />
 <!-- raw HTML omitted -->link_name<!-- raw HTML omitted --> is not a destination.</p>
 </div>
       
@@ -3485,8 +3488,8 @@ function.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the Poppler::FormField for the given <!-- raw HTML omitted -->id<!-- raw HTML omitted -->. It must be freed with
-g_object_unref()
+    <p>Returns the Poppler::FormField for the given <!-- raw HTML omitted -->id<!-- raw HTML omitted -->. It must be freed with<br />
+g_object_unref()<br />
 not found</p>
 
 
@@ -3545,12 +3548,12 @@ not found</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the PDF file identifier represented as two byte string arrays of size 32.
-<!-- raw HTML omitted -->permanent_id<!-- raw HTML omitted --> is the permanent identifier that is built based on the file
-contents at the time it was originally created, so that this identifer
-never changes. <!-- raw HTML omitted -->update_id<!-- raw HTML omitted --> is the update identifier that is built based on
+    <p>Returns the PDF file identifier represented as two byte string arrays of size 32.<br />
+<!-- raw HTML omitted -->permanent_id<!-- raw HTML omitted --> is the permanent identifier that is built based on the file<br />
+contents at the time it was originally created, so that this identifer<br />
+never changes. <!-- raw HTML omitted -->update_id<!-- raw HTML omitted --> is the update identifier that is built based on<br />
 the file contents at the time it was last updated.</p>
-<p>Note that returned strings are not null-terminated, they have a fixed
+<p>Note that returned strings are not null-terminated, they have a fixed<br />
 size of 32 bytes.</p>
 
 
@@ -3628,7 +3631,7 @@ size of 32 bytes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the Poppler::Page indexed at <!-- raw HTML omitted -->index<!-- raw HTML omitted -->.  This object is owned by the
+    <p>Returns the Poppler::Page indexed at <!-- raw HTML omitted -->index<!-- raw HTML omitted -->.  This object is owned by the<br />
 caller.</p>
 
 
@@ -3687,8 +3690,8 @@ caller.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the Poppler::Page reference by <!-- raw HTML omitted -->label<!-- raw HTML omitted -->.  This object is owned by the
-caller.  <!-- raw HTML omitted -->label<!-- raw HTML omitted --> is a human-readable string representation of the page number,
+    <p>Returns the Poppler::Page reference by <!-- raw HTML omitted -->label<!-- raw HTML omitted -->.  This object is owned by the<br />
+caller.  <!-- raw HTML omitted -->label<!-- raw HTML omitted --> is a human-readable string representation of the page number,<br />
 and can be document specific.  Typically, it is a value such as &quot;iii&quot; or &quot;3&quot;.</p>
 <p>By default, &quot;1&quot; refers to the first page.</p>
 
@@ -3748,7 +3751,7 @@ and can be document specific.  Typically, it is a value such as &quot;iii&quot; 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Updates values referenced by <!-- raw HTML omitted -->major_version<!-- raw HTML omitted --> &amp; <!-- raw HTML omitted -->minor_version<!-- raw HTML omitted --> with the
+    <p>Updates values referenced by <!-- raw HTML omitted -->major_version<!-- raw HTML omitted --> &amp; <!-- raw HTML omitted -->minor_version<!-- raw HTML omitted --> with the<br />
 major and minor PDF versions of <!-- raw HTML omitted -->document<!-- raw HTML omitted -->.</p>
 
 
@@ -3818,9 +3821,9 @@ major and minor PDF versions of <!-- raw HTML omitted -->document<!-- raw HTML o
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the suggested page ranges to print in the form of array
-of Poppler::PageRange<!-- raw HTML omitted -->s and number of ranges.
-nil pointer means that the document does not specify page ranges
+    <p>Returns the suggested page ranges to print in the form of array<br />
+of Poppler::PageRange<!-- raw HTML omitted -->s and number of ranges.<br />
+nil pointer means that the document does not specify page ranges<br />
 for printing.</p>
 
 
@@ -3858,8 +3861,8 @@ for printing.</p>
       
       
         &mdash;
-        <div class='inline'><p>an array
-of Poppler::PageRange<!-- raw HTML omitted -->s or nil. Free the array when
+        <div class='inline'><p>an array<br />
+of Poppler::PageRange<!-- raw HTML omitted -->s or nil. Free the array when<br />
 it is no longer needed.</p>
 </div>
       
@@ -3985,10 +3988,10 @@ it is no longer needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new Poppler::Document reading the PDF contents from <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.
-Note that the given GInput::Stream must be seekable or %G_IO_ERROR_NOT_SUPPORTED
-will be returned.
-Possible errors include those in the #POPPLER_ERROR, #G_FILE_ERROR
+    <p>Creates a new Poppler::Document reading the PDF contents from <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->.<br />
+Note that the given GInput::Stream must be seekable or %G_IO_ERROR_NOT_SUPPORTED<br />
+will be returned.<br />
+Possible errors include those in the #POPPLER_ERROR, #G_FILE_ERROR<br />
 and #G_IO_ERROR domains.</p>
 
 
@@ -4106,7 +4109,7 @@ and #G_IO_ERROR domains.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether <!-- raw HTML omitted -->document<!-- raw HTML omitted --> is linearized or not. Linearization of PDF
+    <p>Returns whether <!-- raw HTML omitted -->document<!-- raw HTML omitted --> is linearized or not. Linearization of PDF<br />
 enables efficient incremental access of the PDF file in a network environment.</p>
 
 
@@ -4715,7 +4718,7 @@ enables efficient incremental access of the PDF file in a network environment.</
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the document's modification date. If <!-- raw HTML omitted -->modification_date<!-- raw HTML omitted --> is -1, ModDate
+    <p>Sets the document's modification date. If <!-- raw HTML omitted -->modification_date<!-- raw HTML omitted --> is -1, ModDate<br />
 entry is removed from the document's Info dictionary.</p>
 
 
@@ -4809,7 +4812,7 @@ entry is removed from the document's Info dictionary.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the document's modification date. If <!-- raw HTML omitted -->modification_datetime<!-- raw HTML omitted --> is nil,
+    <p>Sets the document's modification date. If <!-- raw HTML omitted -->modification_datetime<!-- raw HTML omitted --> is nil,<br />
 ModDate entry is removed from the document's Info dictionary.</p>
 
 
@@ -4864,7 +4867,7 @@ ModDate entry is removed from the document's Info dictionary.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the number of attachments in a loaded document.
+    <p>Returns the number of attachments in a loaded document.<br />
 See also poppler_document_get_attachments()</p>
 
 
@@ -4947,8 +4950,8 @@ See also poppler_document_get_attachments()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns how many digital signatures <!-- raw HTML omitted -->document<!-- raw HTML omitted --> contains.
-PDF digital signatures ensure that the content hash not been altered since last edit and
+    <p>Returns how many digital signatures <!-- raw HTML omitted -->document<!-- raw HTML omitted --> contains.<br />
+PDF digital signatures ensure that the content hash not been altered since last edit and<br />
 that it was produced by someone the user can trust</p>
 
 
@@ -5239,7 +5242,7 @@ that it was produced by someone the user can trust</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the part of the conforming standard that the <!-- raw HTML omitted -->document<!-- raw HTML omitted --> adheres to
+    <p>Returns the part of the conforming standard that the <!-- raw HTML omitted -->document<!-- raw HTML omitted --> adheres to<br />
 as a Poppler::PDFSubtype.</p>
 
 
@@ -5318,7 +5321,7 @@ as a Poppler::PDFSubtype.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the PDF subtype version of <!-- raw HTML omitted -->document<!-- raw HTML omitted --> as a string.
+    <p>Returns the PDF subtype version of <!-- raw HTML omitted -->document<!-- raw HTML omitted --> as a string.<br />
 the PDF subtype version of <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, or nil</p>
 
 
@@ -5376,7 +5379,7 @@ the PDF subtype version of <!-- raw HTML omitted -->document<!-- raw HTML omitte
       
       
         &mdash;
-        <div class='inline'><p>a new allocated string containing the PDF version
+        <div class='inline'><p>a new allocated string containing the PDF version<br />
 of <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, or nil</p>
 </div>
       
@@ -5926,9 +5929,9 @@ of <!-- raw HTML omitted -->document<!-- raw HTML omitted -->, or nil</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Resets the form fields specified by fields if exclude_fields is FALSE.
-Resets all others if exclude_fields is TRUE.
-All form fields are reset regardless of the exclude_fields flag
+    <p>Resets the form fields specified by fields if exclude_fields is FALSE.<br />
+Resets all others if exclude_fields is TRUE.<br />
+All form fields are reset regardless of the exclude_fields flag<br />
 if fields is empty.</p>
 
 
@@ -5998,10 +6001,10 @@ if fields is empty.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Saves <!-- raw HTML omitted -->document<!-- raw HTML omitted -->. Any change made in the document such as
-form fields filled, annotations added or modified
-will be saved.
-If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be returned. Possible errors
+    <p>Saves <!-- raw HTML omitted -->document<!-- raw HTML omitted -->. Any change made in the document such as<br />
+form fields filled, annotations added or modified<br />
+will be saved.<br />
+If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be returned. Possible errors<br />
 include those in the #G_FILE_ERROR domain.</p>
 
 
@@ -6078,10 +6081,10 @@ include those in the #G_FILE_ERROR domain.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Saves a copy of the original <!-- raw HTML omitted -->document<!-- raw HTML omitted -->.
-Any change made in the document such as
-form fields filled by the user will not be saved.
-If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be returned. Possible errors
+    <p>Saves a copy of the original <!-- raw HTML omitted -->document<!-- raw HTML omitted -->.<br />
+Any change made in the document such as<br />
+form fields filled by the user will not be saved.<br />
+If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be returned. Possible errors<br />
 include those in the #G_FILE_ERROR domain.</p>
 
 
@@ -6158,10 +6161,10 @@ include those in the #G_FILE_ERROR domain.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Saves a copy of the original <!-- raw HTML omitted -->document<!-- raw HTML omitted -->.
-Any change made in the document such as
-form fields filled by the user will not be saved.
-If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be returned. Possible errors
+    <p>Saves a copy of the original <!-- raw HTML omitted -->document<!-- raw HTML omitted -->.<br />
+Any change made in the document such as<br />
+form fields filled by the user will not be saved.<br />
+If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be returned. Possible errors<br />
 include those in the #G_FILE_ERROR domain.</p>
 
 
@@ -6234,10 +6237,10 @@ include those in the #G_FILE_ERROR domain.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Saves <!-- raw HTML omitted -->document<!-- raw HTML omitted -->. Any change made in the document such as
-form fields filled, annotations added or modified
-will be saved.
-If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be returned. Possible errors
+    <p>Saves <!-- raw HTML omitted -->document<!-- raw HTML omitted -->. Any change made in the document such as<br />
+form fields filled, annotations added or modified<br />
+will be saved.<br />
+If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be returned. Possible errors<br />
 include those in the #G_FILE_ERROR domain.</p>
 
 
@@ -6310,13 +6313,13 @@ include those in the #G_FILE_ERROR domain.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Saves <!-- raw HTML omitted -->document<!-- raw HTML omitted -->. Any change made in the document such as
-form fields filled, annotations added or modified
-will be saved if <!-- raw HTML omitted -->include_changes<!-- raw HTML omitted --> is true, or discarded i
+    <p>Saves <!-- raw HTML omitted -->document<!-- raw HTML omitted -->. Any change made in the document such as<br />
+form fields filled, annotations added or modified<br />
+will be saved if <!-- raw HTML omitted -->include_changes<!-- raw HTML omitted --> is true, or discarded i<br />
 <!-- raw HTML omitted -->include_changes<!-- raw HTML omitted --> is false.</p>
-<p>Note that this function takes ownership of <!-- raw HTML omitted -->fd<!-- raw HTML omitted -->; you must not operate on it
+<p>Note that this function takes ownership of <!-- raw HTML omitted -->fd<!-- raw HTML omitted -->; you must not operate on it<br />
 again, nor close it.</p>
-<p>If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be returned. Possible errors
+<p>If <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, false will be returned. Possible errors<br />
 include those in the #G_FILE_ERROR domain.</p>
 
 
@@ -7323,7 +7326,7 @@ include those in the #G_FILE_ERROR domain.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

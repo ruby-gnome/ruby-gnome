@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gdk::Drag";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -102,12 +104,12 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The <code>GdkDrag</code> object represents the source of an ongoing DND operation.</p>
-<p>A <code>GdkDrag</code> is created when a drag is started, and stays alive for duration of
-the DND operation. After a drag has been started with [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drag.begin],
-the caller gets informed about the status of the ongoing drag operation
+<p>A <code>GdkDrag</code> is created when a drag is started, and stays alive for duration of<br />
+the DND operation. After a drag has been started with [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drag.begin],<br />
+the caller gets informed about the status of the ongoing drag operation<br />
 with signals on the <code>GdkDrag</code> object.</p>
-<p>GTK provides a higher level abstraction based on top of these functions,
-and so they are not normally needed in GTK applications. See the
+<p>GTK provides a higher level abstraction based on top of these functions,<br />
+and so they are not normally needed in GTK applications. See the<br />
 &quot;Drag and Drop&quot; section of the GTK documentation for more information.</p>
 
 
@@ -155,6 +157,7 @@ and so they are not normally needed in GTK applications. See the
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -555,6 +558,7 @@ and so they are not normally needed in GTK applications. See the
 
       
     </ul>
+    
   
 
 
@@ -575,15 +579,15 @@ and so they are not normally needed in GTK applications. See the
 </h3><div class="docstring">
   <div class="discussion">
     <p>Starts a drag and creates a new drag context for it.</p>
-<p>This function is called by the drag source. After this call, you
-probably want to set up the drag icon using the surface returned
+<p>This function is called by the drag source. After this call, you<br />
+probably want to set up the drag icon using the surface returned<br />
 by [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drag.get_drag_surface].</p>
-<p>This function returns a reference to the [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drag] object,
-but GTK keeps its own reference as well, as long as the DND operation
+<p>This function returns a reference to the [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drag] object,<br />
+but GTK keeps its own reference as well, as long as the DND operation<br />
 is going on.</p>
-<p>Note: if <!-- raw HTML omitted -->actions<!-- raw HTML omitted --> include %GDK_ACTION_MOVE, you need to listen for
-the [signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drag::dnd-finished] signal and delete the data at
-the source if [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drag.get_selected_action] returns
+<p>Note: if <!-- raw HTML omitted -->actions<!-- raw HTML omitted --> include %GDK_ACTION_MOVE, you need to listen for<br />
+the [signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drag::dnd-finished] signal and delete the data at<br />
+the source if [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drag.get_selected_action] returns<br />
 %GDK_ACTION_MOVE.</p>
 
 
@@ -1147,11 +1151,11 @@ the source if [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drag.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the surface on which the drag icon should be rendered
+    <p>Returns the surface on which the drag icon should be rendered<br />
 during the drag operation.</p>
-<p>Note that the surface may not be available until the drag operation
-has begun. GDK will move the surface in accordance with the ongoing
-drag operation. The surface is owned by <!-- raw HTML omitted -->drag<!-- raw HTML omitted --> and will be destroyed
+<p>Note that the surface may not be available until the drag operation<br />
+has begun. GDK will move the surface in accordance with the ongoing<br />
+drag operation. The surface is owned by <!-- raw HTML omitted -->drag<!-- raw HTML omitted --> and will be destroyed<br />
 when the drag operation is over.</p>
 
 
@@ -1192,12 +1196,12 @@ when the drag operation is over.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Informs GDK that the drop ended.</p>
-<p>Passing false for <!-- raw HTML omitted -->success<!-- raw HTML omitted --> may trigger a drag cancellation
+<p>Passing false for <!-- raw HTML omitted -->success<!-- raw HTML omitted --> may trigger a drag cancellation<br />
 animation.</p>
-<p>This function is called by the drag source, and should be the
+<p>This function is called by the drag source, and should be the<br />
 last call before dropping the reference to the <!-- raw HTML omitted -->drag<!-- raw HTML omitted -->.</p>
-<p>The <code>GdkDrag</code> will only take the first [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drag.drop_done]
-call as effective, if this function is called multiple times,
+<p>The <code>GdkDrag</code> will only take the first [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drag.drop_done]<br />
+call as effective, if this function is called multiple times,<br />
 all subsequent calls will be ignored.</p>
 
 
@@ -1464,7 +1468,7 @@ all subsequent calls will be ignored.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the position of the drag surface that will be kept
+    <p>Sets the position of the drag surface that will be kept<br />
 under the cursor hotspot.</p>
 <p>Initially, the hotspot is at the top left corner of the drag surface.</p>
 
@@ -1637,7 +1641,7 @@ under the cursor hotspot.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

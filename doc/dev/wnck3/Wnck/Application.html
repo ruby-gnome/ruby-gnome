@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Wnck::Application";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -138,6 +140,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -377,6 +380,7 @@
 
       
     </ul>
+    
   
 
 
@@ -396,10 +400,10 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the Wnck::Application corresponding to the group leader with <!-- raw HTML omitted -->xwindow<!-- raw HTML omitted -->
-as X window ID.
-<!-- raw HTML omitted -->xwindow<!-- raw HTML omitted -->, or nil if there no such Wnck::Application could be found. The
-returned Wnck::Application is owned by libwnck and must not be referenced or
+    <p>Gets the Wnck::Application corresponding to the group leader with <!-- raw HTML omitted -->xwindow<!-- raw HTML omitted --><br />
+as X window ID.<br />
+<!-- raw HTML omitted -->xwindow<!-- raw HTML omitted -->, or nil if there no such Wnck::Application could be found. The<br />
+returned Wnck::Application is owned by libwnck and must not be referenced or<br />
 unreferenced.</p>
 
 
@@ -464,10 +468,10 @@ unreferenced.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the icon to be used for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->. If no icon is set for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->, a
-suboptimal heuristic is used to find an appropriate icon. If no icon was
-found, a fallback icon is used.
-reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs to keep
+    <p>Gets the icon to be used for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->. If no icon is set for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->, a<br />
+suboptimal heuristic is used to find an appropriate icon. If no icon was<br />
+found, a fallback icon is used.<br />
+reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs to keep<br />
 the icon around.</p>
 
 
@@ -507,7 +511,7 @@ the icon around.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets whether a default fallback icon is used for <!-- raw HTML omitted -->app<!-- raw HTML omitted --> (because none
+    <p>Gets whether a default fallback icon is used for <!-- raw HTML omitted -->app<!-- raw HTML omitted --> (because none<br />
 was set on <!-- raw HTML omitted -->app<!-- raw HTML omitted -->).</p>
 
 
@@ -547,9 +551,9 @@ was set on <!-- raw HTML omitted -->app<!-- raw HTML omitted -->).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the icon name of <!-- raw HTML omitted -->app<!-- raw HTML omitted --> (to be used when <!-- raw HTML omitted -->app<!-- raw HTML omitted --> is minimized). Since
-there is no way to properly find this name, various suboptimal heuristics
-are used to find it.
+    <p>Gets the icon name of <!-- raw HTML omitted -->app<!-- raw HTML omitted --> (to be used when <!-- raw HTML omitted -->app<!-- raw HTML omitted --> is minimized). Since<br />
+there is no way to properly find this name, various suboptimal heuristics<br />
+are used to find it.<br />
 is available.</p>
 
 
@@ -589,10 +593,10 @@ is available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the mini-icon to be used for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->. If no mini-icon is set for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->,
-a suboptimal heuristic is used to find an appropriate icon. If no mini-icon
-was found, a fallback mini-icon is used.
-reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs to keep
+    <p>Gets the mini-icon to be used for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->. If no mini-icon is set for <!-- raw HTML omitted -->app<!-- raw HTML omitted -->,<br />
+a suboptimal heuristic is used to find an appropriate icon. If no mini-icon<br />
+was found, a fallback mini-icon is used.<br />
+reference the returned <!-- raw HTML omitted -->GdkPixbuf<!-- raw HTML omitted --> if it needs to keep<br />
 the mini-icon around.</p>
 
 
@@ -671,10 +675,10 @@ the mini-icon around.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the name of <!-- raw HTML omitted -->app<!-- raw HTML omitted -->. Since there is no way to properly find this name,
-various suboptimal heuristics are used to find it. GTK+ should probably have
-a function to allow applications to set the _NET_WM_NAME property on the
-group leader as the application name, and the <!-- raw HTML omitted -->EWMH<!-- raw HTML omitted -->
+    <p>Gets the name of <!-- raw HTML omitted -->app<!-- raw HTML omitted -->. Since there is no way to properly find this name,<br />
+various suboptimal heuristics are used to find it. GTK+ should probably have<br />
+a function to allow applications to set the _NET_WM_NAME property on the<br />
+group leader as the application name, and the <!-- raw HTML omitted -->EWMH<!-- raw HTML omitted --><br />
 should say that this is where the application name goes.</p>
 
 
@@ -753,7 +757,7 @@ should say that this is where the application name goes.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the startup sequence ID used for startup notification of <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.
+    <p>Gets the startup sequence ID used for startup notification of <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.<br />
 or nil if none is available.</p>
 
 
@@ -793,8 +797,8 @@ or nil if none is available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the list of Wnck::Window belonging to <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.
-Wnck::Window belonging to <!-- raw HTML omitted -->app<!-- raw HTML omitted -->, or nil if the application contains no
+    <p>Gets the list of Wnck::Window belonging to <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.<br />
+Wnck::Window belonging to <!-- raw HTML omitted -->app<!-- raw HTML omitted -->, or nil if the application contains no<br />
 window. The list should not be modified nor freed, as it is owned by <!-- raw HTML omitted -->app<!-- raw HTML omitted -->.</p>
 
 
@@ -869,7 +873,7 @@ window. The list should not be modified nor freed, as it is owned by <!-- raw HT
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

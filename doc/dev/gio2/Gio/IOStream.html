@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gio::IOStream";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -142,6 +144,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -473,6 +476,7 @@
 
       
     </ul>
+    
   
 
 
@@ -591,31 +595,31 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Closes the stream, releasing resources related to it. This will also
-close the individual input and output streams, if they are not already
+    <p>Closes the stream, releasing resources related to it. This will also<br />
+close the individual input and output streams, if they are not already<br />
 closed.</p>
-<p>Once the stream is closed, all other operations will return
-%G_IO_ERROR_CLOSED. Closing a stream multiple times will not
+<p>Once the stream is closed, all other operations will return<br />
+%G_IO_ERROR_CLOSED. Closing a stream multiple times will not<br />
 return an error.</p>
-<p>Closing a stream will automatically flush any outstanding buffers
+<p>Closing a stream will automatically flush any outstanding buffers<br />
 in the stream.</p>
-<p>Streams will be automatically closed when the last reference
-is dropped, but you might want to call this function to make sure
+<p>Streams will be automatically closed when the last reference<br />
+is dropped, but you might want to call this function to make sure<br />
 resources are released as early as possible.</p>
-<p>Some streams might keep the backing store of the stream (e.g. a file
-descriptor) open after the stream is closed. See the documentation for
+<p>Some streams might keep the backing store of the stream (e.g. a file<br />
+descriptor) open after the stream is closed. See the documentation for<br />
 the individual stream for details.</p>
-<p>On failure the first error that happened will be reported, but the
-close operation will finish as much as possible. A stream that failed
-to close will still return %G_IO_ERROR_CLOSED for all operations.
-Still, it is important to check and report the error to the user,
+<p>On failure the first error that happened will be reported, but the<br />
+close operation will finish as much as possible. A stream that failed<br />
+to close will still return %G_IO_ERROR_CLOSED for all operations.<br />
+Still, it is important to check and report the error to the user,<br />
 otherwise there might be a loss of data as all data might not be written.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not NULL, then the operation can be cancelled by
-triggering the cancellable object from another thread. If the operation
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
-Cancelling a close will still leave the stream closed, but some streams
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not NULL, then the operation can be cancelled by<br />
+triggering the cancellable object from another thread. If the operation<br />
+was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.<br />
+Cancelling a close will still leave the stream closed, but some streams<br />
 can use a faster close that doesn't block to e.g. check errors.</p>
-<p>The default implementation of this method just calls close on the
+<p>The default implementation of this method just calls close on the<br />
 individual input/output streams.</p>
 
 
@@ -674,13 +678,13 @@ individual input/output streams.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Requests an asynchronous close of the stream, releasing resources
-related to it. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be
-called. You can then call g_io_stream_close_finish() to get
+    <p>Requests an asynchronous close of the stream, releasing resources<br />
+related to it. When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be<br />
+called. You can then call g_io_stream_close_finish() to get<br />
 the result of the operation.</p>
 <p>For behaviour details see g_io_stream_close().</p>
-<p>The asynchronous methods have a default fallback that uses threads
-to implement asynchronicity, so they are optional for inheriting
+<p>The asynchronous methods have a default fallback that uses threads<br />
+to implement asynchronicity, so they are optional for inheriting<br />
 classes. However, if you override one you must override all.</p>
 
 
@@ -730,7 +734,7 @@ classes. However, if you override one you must override all.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -1235,8 +1239,8 @@ to call when the request is satisfied</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> to have actions pending. If the pending flag is
-already set or <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is closed, it will return false and set
+    <p>Sets <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> to have actions pending. If the pending flag is<br />
+already set or <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is closed, it will return false and set<br />
 <!-- raw HTML omitted -->error<!-- raw HTML omitted -->.</p>
 
 
@@ -1276,11 +1280,11 @@ already set or <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> is close
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Asynchronously splice the output stream of <!-- raw HTML omitted -->stream1<!-- raw HTML omitted --> to the input stream of
-<!-- raw HTML omitted -->stream2<!-- raw HTML omitted -->, and splice the output stream of <!-- raw HTML omitted -->stream2<!-- raw HTML omitted --> to the input stream of
+    <p>Asynchronously splice the output stream of <!-- raw HTML omitted -->stream1<!-- raw HTML omitted --> to the input stream of<br />
+<!-- raw HTML omitted -->stream2<!-- raw HTML omitted -->, and splice the output stream of <!-- raw HTML omitted -->stream2<!-- raw HTML omitted --> to the input stream of<br />
 <!-- raw HTML omitted -->stream1<!-- raw HTML omitted -->.</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.
-You can then call g_io_stream_splice_finish() to get the
+<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called.<br />
+You can then call g_io_stream_splice_finish() to get the<br />
 result of the operation.</p>
 
 
@@ -1360,7 +1364,7 @@ result of the operation.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback
+        <div class='inline'><p>a GAsync::ReadyCallback<br />
 to call when the request is satisfied</p>
 </div>
       
@@ -1407,7 +1411,7 @@ to call when the request is satisfied</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

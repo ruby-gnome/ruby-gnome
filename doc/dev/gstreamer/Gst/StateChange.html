@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::StateChange";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -78,7 +79,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -97,8 +99,8 @@
   <div class="discussion">
     <p>state change from NULL to READY.</p>
 <ul>
-<li>The element must check if the resources it needs are available. Device
-sinks and -sources typically try to probe the device to constrain their
+<li>The element must check if the resources it needs are available. Device<br />
+sinks and -sources typically try to probe the device to constrain their<br />
 caps.</li>
 <li>The element opens the device (in case feature need to be probed).</li>
 </ul>
@@ -118,12 +120,12 @@ caps.</li>
   <div class="discussion">
     <p>state change from READY to PAUSED.</p>
 <ul>
-<li>The element pads are activated in order to receive data in PAUSED.
+<li>The element pads are activated in order to receive data in PAUSED.<br />
 Streaming threads are started.</li>
-<li>Some elements might need to return %GST_STATE_CHANGE_ASYNC and complete
-the state change when they have enough information. It is a requirement
-for sinks to return %GST_STATE_CHANGE_ASYNC and complete the state change
-when they receive the first buffer or %GST_EVENT_EOS (preroll).
+<li>Some elements might need to return %GST_STATE_CHANGE_ASYNC and complete<br />
+the state change when they have enough information. It is a requirement<br />
+for sinks to return %GST_STATE_CHANGE_ASYNC and complete the state change<br />
+when they receive the first buffer or %GST_EVENT_EOS (preroll).<br />
 Sinks also block the dataflow when in PAUSED.</li>
 <li>A pipeline resets the running_time to 0.</li>
 <li>Live sources return %GST_STATE_CHANGE_NO_PREROLL and don't generate data.</li>
@@ -145,17 +147,17 @@ Sinks also block the dataflow when in PAUSED.</li>
     <p>state change from PAUSED to PLAYING.</p>
 <ul>
 <li>Most elements ignore this state change.</li>
-<li>The pipeline selects a Gst::Clock and distributes this to all the children
-before setting them to PLAYING. This means that it is only allowed to
+<li>The pipeline selects a Gst::Clock and distributes this to all the children<br />
+before setting them to PLAYING. This means that it is only allowed to<br />
 synchronize on the Gst::Clock in the PLAYING state.</li>
-<li>The pipeline uses the Gst::Clock and the running_time to calculate the
-base_time. The base_time is distributed to all children when performing
+<li>The pipeline uses the Gst::Clock and the running_time to calculate the<br />
+base_time. The base_time is distributed to all children when performing<br />
 the state change.</li>
-<li>Sink elements stop blocking on the preroll buffer or event and start
+<li>Sink elements stop blocking on the preroll buffer or event and start<br />
 rendering the data.</li>
-<li>Sinks can post %GST_MESSAGE_EOS in the PLAYING state. It is not allowed
+<li>Sinks can post %GST_MESSAGE_EOS in the PLAYING state. It is not allowed<br />
 to post %GST_MESSAGE_EOS when not in the PLAYING state.</li>
-<li>While streaming in PAUSED or PLAYING elements can create and remove
+<li>While streaming in PAUSED or PLAYING elements can create and remove<br />
 sometimes pads.</li>
 <li>Live sources start generating data and return %GST_STATE_CHANGE_SUCCESS.</li>
 </ul>
@@ -176,15 +178,15 @@ sometimes pads.</li>
     <p>state change from PLAYING to PAUSED.</p>
 <ul>
 <li>Most elements ignore this state change.</li>
-<li>The pipeline calculates the running_time based on the last selected
-Gst::Clock and the base_time. It stores this information to continue
+<li>The pipeline calculates the running_time based on the last selected<br />
+Gst::Clock and the base_time. It stores this information to continue<br />
 playback when going back to the PLAYING state.</li>
 <li>Sinks unblock any Gst::Clock wait calls.</li>
-<li>When a sink does not have a pending buffer to play, it returns
-#GST_STATE_CHANGE_ASYNC from this state change and completes the state
+<li>When a sink does not have a pending buffer to play, it returns<br />
+#GST_STATE_CHANGE_ASYNC from this state change and completes the state<br />
 change when it receives a new buffer or an %GST_EVENT_EOS.</li>
-<li>Any queued %GST_MESSAGE_EOS items are removed since they will be reposted
-when going back to the PLAYING state. The EOS messages are queued in
+<li>Any queued %GST_MESSAGE_EOS items are removed since they will be reposted<br />
+when going back to the PLAYING state. The EOS messages are queued in<br />
 Gst::Bin containers.</li>
 <li>Live sources stop generating data and return %GST_STATE_CHANGE_NO_PREROLL.</li>
 </ul>
@@ -207,7 +209,7 @@ Gst::Bin containers.</li>
 <li>Sinks unblock any waits in the preroll.</li>
 <li>Elements unblock any waits on devices</li>
 <li>Chain or get_range functions return %GST_FLOW_FLUSHING.</li>
-<li>The element pads are deactivated so that streaming becomes impossible and
+<li>The element pads are deactivated so that streaming becomes impossible and<br />
 all streaming threads are stopped.</li>
 <li>The sink forgets all negotiated formats</li>
 <li>Elements remove all sometimes pads</li>
@@ -260,8 +262,8 @@ all streaming threads are stopped.</li>
         <dt id="READY_TO_READY-constant" class="">READY_TO_READY =
           <div class="docstring">
   <div class="discussion">
-    <p>state change from READY to READY,
-This might happen when going to PAUSED asynchronously failed, in that case
+    <p>state change from READY to READY,<br />
+This might happen when going to PAUSED asynchronously failed, in that case<br />
 elements should make sure they are in a proper, coherent READY state. (Since: 1.14)</p>
 
 
@@ -277,8 +279,8 @@ elements should make sure they are in a proper, coherent READY state. (Since: 1.
         <dt id="PAUSED_TO_PAUSED-constant" class="">PAUSED_TO_PAUSED =
           <div class="docstring">
   <div class="discussion">
-    <p>state change from PAUSED to PAUSED.
-This might happen when elements were in PLAYING state and 'lost state',
+    <p>state change from PAUSED to PAUSED.<br />
+This might happen when elements were in PLAYING state and 'lost state',<br />
 they should make sure to go back to real 'PAUSED' state (prerolling for example). (Since: 1.14)</p>
 
 
@@ -322,7 +324,7 @@ they should make sure to go back to real 'PAUSED' state (prerolling for example)
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

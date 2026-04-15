@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Handy::Squeezer";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -625,6 +627,7 @@
 
       
     </ul>
+    
   
 
 
@@ -770,8 +773,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether all children have the same size for the opposite orientation.</p>
-<p>For example, if a squeezer is horizontal and is homogeneous, it will request
-the same height for all its children. If it isn't, the squeezer may change
+<p>For example, if a squeezer is horizontal and is homogeneous, it will request<br />
+the same height for all its children. If it isn't, the squeezer may change<br />
 size when a different child becomes visible.</p>
 
 
@@ -840,8 +843,8 @@ size when a different child becomes visible.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether all children have the same size for the opposite orientation.</p>
-<p>For example, if a squeezer is horizontal and is homogeneous, it will request
-the same height for all its children. If it isn't, the squeezer may change
+<p>For example, if a squeezer is horizontal and is homogeneous, it will request<br />
+the same height for all its children. If it isn't, the squeezer may change<br />
 size when a different child becomes visible.</p>
 
 
@@ -921,9 +924,9 @@ size when a different child becomes visible.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the squeezer interpolates its size when changing the visible child.</p>
-<p>If <code>TRUE</code>, the squeezer will interpolate its size between the one of the
-previous visible child and the one of the new visible child, according to
-the set transition duration and the orientation, e.g. if the squeezer is
+<p>If <code>TRUE</code>, the squeezer will interpolate its size between the one of the<br />
+previous visible child and the one of the new visible child, according to<br />
+the set transition duration and the orientation, e.g. if the squeezer is<br />
 horizontal, it will interpolate the its height.</p>
 
 
@@ -992,9 +995,9 @@ horizontal, it will interpolate the its height.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Whether the squeezer interpolates its size when changing the visible child.</p>
-<p>If <code>TRUE</code>, the squeezer will interpolate its size between the one of the
-previous visible child and the one of the new visible child, according to
-the set transition duration and the orientation, e.g. if the squeezer is
+<p>If <code>TRUE</code>, the squeezer will interpolate its size between the one of the<br />
+previous visible child and the one of the new visible child, according to<br />
+the set transition duration and the orientation, e.g. if the squeezer is<br />
 horizontal, it will interpolate the its height.</p>
 
 
@@ -1035,10 +1038,10 @@ horizontal, it will interpolate the its height.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets whether <!-- raw HTML omitted -->child<!-- raw HTML omitted --> is enabled.</p>
-<p>If a child is disabled, it will be ignored when looking for the child fitting
-the available size best. This allows to programmatically and prematurely hide
+<p>If a child is disabled, it will be ignored when looking for the child fitting<br />
+the available size best. This allows to programmatically and prematurely hide<br />
 a child of <!-- raw HTML omitted -->self<!-- raw HTML omitted --> even if it fits in the available space.</p>
-<p>This can be used e.g. to ensure a certain child is hidden below a certain
+<p>This can be used e.g. to ensure a certain child is hidden below a certain<br />
 window width, or any other constraint you find suitable.</p>
 
 
@@ -1361,8 +1364,8 @@ window width, or any other constraint you find suitable.</p>
   <div class="discussion">
     <p>The type of animation used for transitions between children.</p>
 <p>Available types include various kinds of fades and slides.</p>
-<p>The transition type can be changed without problems at runtime, so it is
-possible to change the animation based on the child that is about to become
+<p>The transition type can be changed without problems at runtime, so it is<br />
+possible to change the animation based on the child that is about to become<br />
 current.</p>
 
 
@@ -1404,8 +1407,8 @@ current.</p>
   <div class="discussion">
     <p>The type of animation used for transitions between children.</p>
 <p>Available types include various kinds of fades and slides.</p>
-<p>The transition type can be changed without problems at runtime, so it is
-possible to change the animation based on the child that is about to become
+<p>The transition type can be changed without problems at runtime, so it is<br />
+possible to change the animation based on the child that is about to become<br />
 current.</p>
 
 
@@ -1580,11 +1583,11 @@ current.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The horizontal alignment, from 0 (start) to 1 (end).</p>
-<p>The xalign property determines the horizontal alignment of the children
-inside the squeezer's size allocation. Compare this to
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign], which determines how the squeezer's size
+<p>The xalign property determines the horizontal alignment of the children<br />
+inside the squeezer's size allocation. Compare this to<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign], which determines how the squeezer's size<br />
 allocation is positioned in the space available for the squeezer.</p>
-<p>This will affect the position of children too wide to fit in the squeezer
+<p>This will affect the position of children too wide to fit in the squeezer<br />
 as they are fading out.</p>
 
 
@@ -1625,11 +1628,11 @@ as they are fading out.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The horizontal alignment, from 0 (start) to 1 (end).</p>
-<p>The xalign property determines the horizontal alignment of the children
-inside the squeezer's size allocation. Compare this to
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign], which determines how the squeezer's size
+<p>The xalign property determines the horizontal alignment of the children<br />
+inside the squeezer's size allocation. Compare this to<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:halign], which determines how the squeezer's size<br />
 allocation is positioned in the space available for the squeezer.</p>
-<p>This will affect the position of children too wide to fit in the squeezer
+<p>This will affect the position of children too wide to fit in the squeezer<br />
 as they are fading out.</p>
 
 
@@ -1698,11 +1701,11 @@ as they are fading out.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The vertical alignment, from 0 (start) to 1 (end).</p>
-<p>The yalign property determines the vertical alignment of the children
-inside the squeezer's size allocation. Compare this to
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:valign], which determines how the squeezer's size
+<p>The yalign property determines the vertical alignment of the children<br />
+inside the squeezer's size allocation. Compare this to<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:valign], which determines how the squeezer's size<br />
 allocation is positioned in the space available for the squeezer.</p>
-<p>This will affect the position of children too tall to fit in the squeezer
+<p>This will affect the position of children too tall to fit in the squeezer<br />
 as they are fading out.</p>
 
 
@@ -1743,11 +1746,11 @@ as they are fading out.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The vertical alignment, from 0 (start) to 1 (end).</p>
-<p>The yalign property determines the vertical alignment of the children
-inside the squeezer's size allocation. Compare this to
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:valign], which determines how the squeezer's size
+<p>The yalign property determines the vertical alignment of the children<br />
+inside the squeezer's size allocation. Compare this to<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget:valign], which determines how the squeezer's size<br />
 allocation is positioned in the space available for the squeezer.</p>
-<p>This will affect the position of children too tall to fit in the squeezer
+<p>This will affect the position of children too tall to fit in the squeezer<br />
 as they are fading out.</p>
 
 
@@ -1811,7 +1814,7 @@ as they are fading out.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

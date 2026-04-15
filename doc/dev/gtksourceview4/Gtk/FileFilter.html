@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::FileFilter";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -96,7 +97,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -104,29 +106,29 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p><code>GtkFileFilter</code> filters files by name or mime type.</p>
-<p><code>GtkFileFilter</code> can be used to restrict the files being shown in a
-<code>GtkFileChooser</code>. Files can be filtered based on their name (with
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_pattern] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_suffix])
+<p><code>GtkFileFilter</code> can be used to restrict the files being shown in a<br />
+<code>GtkFileChooser</code>. Files can be filtered based on their name (with<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_pattern] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_suffix])<br />
 or on their mime type (with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_mime_type]).</p>
-<p>Filtering by mime types handles aliasing and subclassing of mime
-types; e.g. a filter for text/plain also matches a file with mime
-type application/rtf, since application/rtf is a subclass of
-text/plain. Note that <code>GtkFileFilter</code> allows wildcards for the
-subtype of a mime type, so you can e.g. filter for image/*.</p>
-<p>Normally, file filters are used by adding them to a <code>GtkFileChooser</code>
-(see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooser.add_filter]), but it is also possible to
-manually use a file filter on any [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FilterListModel] containing
+<p>Filtering by mime types handles aliasing and subclassing of mime<br />
+types; e.g. a filter for text/plain also matches a file with mime<br />
+type application/rtf, since application/rtf is a subclass of<br />
+text/plain. Note that <code>GtkFileFilter</code> allows wildcards for the<br />
+subtype of a mime type, so you can e.g. filter for image/<span data-escaped-char>*</span>.</p>
+<p>Normally, file filters are used by adding them to a <code>GtkFileChooser</code><br />
+(see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooser.add_filter]), but it is also possible to<br />
+manually use a file filter on any [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FilterListModel] containing<br />
 <code>GFileInfo</code> objects.</p>
-<h1>GtkFileFilter as GtkBuildable</h1>
-<p>The <code>GtkFileFilter</code> implementation of the <code>GtkBuildable</code> interface
-supports adding rules using the <code>&lt;mime-types&gt;</code> and <code>&lt;patterns&gt;</code> and
-<code>&lt;suffixes&gt;</code> elements and listing the rules within. Specifying a
-<code>&lt;mime-type&gt;</code> or <code>&lt;pattern&gt;</code> or <code>&lt;suffix&gt;</code> has the same effect as
-as calling
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_mime_type] or
-[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_pattern] or
+<h1><a href="#gtkfilefilter-as-gtkbuildable" aria-hidden="true" class="anchor" id="gtkfilefilter-as-gtkbuildable"></a>GtkFileFilter as GtkBuildable</h1>
+<p>The <code>GtkFileFilter</code> implementation of the <code>GtkBuildable</code> interface<br />
+supports adding rules using the <code>&lt;mime-types&gt;</code> and <code>&lt;patterns&gt;</code> and<br />
+<code>&lt;suffixes&gt;</code> elements and listing the rules within. Specifying a<br />
+<code>&lt;mime-type&gt;</code> or <code>&lt;pattern&gt;</code> or <code>&lt;suffix&gt;</code> has the same effect as<br />
+as calling<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_mime_type] or<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_pattern] or<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_suffix].</p>
-<p>An example of a UI definition fragment specifying <code>GtkFileFilter</code>
+<p>An example of a UI definition fragment specifying <code>GtkFileFilter</code><br />
 rules:</p>
 <pre class="code xml"><code class="xml">&lt;object class=&quot;GtkFileFilter&quot;&gt;
   &lt;property name=&quot;name&quot; translatable=&quot;yes&quot;&gt;Text and Images&lt;/property&gt;
@@ -443,9 +445,11 @@ rules:</p>
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -471,7 +475,7 @@ rules:</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Deserialize a file filter from a <code>GVariant</code>.</p>
-<p>The variant must be in the format produced by
+<p>The variant must be in the format produced by<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.to_gvariant].</p>
 
 
@@ -575,8 +579,8 @@ rules:</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a rule allowing a shell style glob to a filter.</p>
-<p>Note that it depends on the platform whether pattern
-matching ignores case or not. On Windows, it does, on
+<p>Note that it depends on the platform whether pattern<br />
+matching ignores case or not. On Windows, it does, on<br />
 other platforms, it doesn't.</p>
 
 
@@ -631,9 +635,9 @@ other platforms, it doesn't.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a rule allowing image files in the formats supported
+    <p>Adds a rule allowing image files in the formats supported<br />
 by GdkPixbuf.</p>
-<p>This is equivalent to calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_mime_type]
+<p>This is equivalent to calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_mime_type]<br />
 for all the supported mime types.</p>
 
 
@@ -670,9 +674,9 @@ for all the supported mime types.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a suffix match rule to a filter.</p>
-<p>This is similar to adding a match for the pattern
+<p>This is similar to adding a match for the pattern<br />
 &quot;*.<!-- raw HTML omitted -->suffix<!-- raw HTML omitted -->&quot;.</p>
-<p>In contrast to pattern matches, suffix matches
+<p>In contrast to pattern matches, suffix matches<br />
 are <em>always</em> case-insensitive.</p>
 
 
@@ -727,10 +731,10 @@ are <em>always</em> case-insensitive.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the attributes that need to be filled in for the <code>GFileInfo</code>
+    <p>Gets the attributes that need to be filled in for the <code>GFileInfo</code><br />
 passed to this filter.</p>
-<p>This function will not typically be used by applications;
-it is intended principally for use in the implementation
+<p>This function will not typically be used by applications;<br />
+it is intended principally for use in the implementation<br />
 of <code>GtkFileChooser</code>.</p>
 
 
@@ -825,7 +829,7 @@ of <code>GtkFileChooser</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The human-readable name of the filter.</p>
-<p>This is the string that will be displayed in the file chooser
+<p>This is the string that will be displayed in the file chooser<br />
 user interface if there is a selectable list of filters.</p>
 
 
@@ -866,7 +870,7 @@ user interface if there is a selectable list of filters.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The human-readable name of the filter.</p>
-<p>This is the string that will be displayed in the file chooser
+<p>This is the string that will be displayed in the file chooser<br />
 user interface if there is a selectable list of filters.</p>
 
 
@@ -1077,7 +1081,7 @@ user interface if there is a selectable list of filters.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

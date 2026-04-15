@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gtk::Notebook";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -103,32 +104,33 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/gtk3/deprecated.rb</dd>
+    <dd>lib/gtk3/deprecated.rb
+</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkNotebook</code> is a container whose children are pages switched
+    <p><code>GtkNotebook</code> is a container whose children are pages switched<br />
 between using tabs.</p>
 <p><img src="notebook.png" alt="An example GtkNotebook" /></p>
-<p>There are many configuration options for <code>GtkNotebook</code>. Among
-other things, you can choose on which edge the tabs appear
-(see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Notebook.set_tab_pos]), whether, if there are
-too many tabs to fit the notebook should be made bigger or scrolling
-arrows added (see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Notebook.set_scrollable]), and whether
-there will be a popup menu allowing the users to switch pages.
+<p>There are many configuration options for <code>GtkNotebook</code>. Among<br />
+other things, you can choose on which edge the tabs appear<br />
+(see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Notebook.set_tab_pos]), whether, if there are<br />
+too many tabs to fit the notebook should be made bigger or scrolling<br />
+arrows added (see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Notebook.set_scrollable]), and whether<br />
+there will be a popup menu allowing the users to switch pages.<br />
 (see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Notebook.popup_enable]).</p>
-<h1>GtkNotebook as GtkBuildable</h1>
-<p>The <code>GtkNotebook</code> implementation of the <code>GtkBuildable</code> interface
-supports placing children into tabs by specifying “tab” as the
-“type” attribute of a <code>&lt;child&gt;</code> element. Note that the content
-of the tab must be created before the tab can be filled.
-A tab child can be specified without specifying a <code>&lt;child&gt;</code>
+<h1><a href="#gtknotebook-as-gtkbuildable" aria-hidden="true" class="anchor" id="gtknotebook-as-gtkbuildable"></a>GtkNotebook as GtkBuildable</h1>
+<p>The <code>GtkNotebook</code> implementation of the <code>GtkBuildable</code> interface<br />
+supports placing children into tabs by specifying “tab” as the<br />
+“type” attribute of a <code>&lt;child&gt;</code> element. Note that the content<br />
+of the tab must be created before the tab can be filled.<br />
+A tab child can be specified without specifying a <code>&lt;child&gt;</code><br />
 type attribute.</p>
-<p>To add a child widget in the notebooks action area, specify
-&quot;action-start&quot; or “action-end” as the “type” attribute of the
+<p>To add a child widget in the notebooks action area, specify<br />
+&quot;action-start&quot; or “action-end” as the “type” attribute of the<br />
 <code>&lt;child&gt;</code> element.</p>
 <p>An example of a UI definition fragment with <code>GtkNotebook</code>:</p>
 <pre class="code xml"><code class="xml">&lt;object class=&quot;GtkNotebook&quot;&gt;
@@ -144,7 +146,7 @@ type attribute.</p>
   &lt;/child&gt;
 &lt;/object&gt;
 </code></pre>
-<h1>CSS nodes</h1>
+<h1><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h1>
 <pre class="code ruby"><code class="ruby">notebook
 ├── header.top
 │   ├── [&lt;action widget&gt;]
@@ -163,20 +165,20 @@ type attribute.</p>
     ┊
     ╰── &lt;child&gt;
 </code></pre>
-<p><code>GtkNotebook</code> has a main CSS node with name <code>notebook</code>, a subnode
-with name <code>header</code> and below that a subnode with name <code>tabs</code> which
+<p><code>GtkNotebook</code> has a main CSS node with name <code>notebook</code>, a subnode<br />
+with name <code>header</code> and below that a subnode with name <code>tabs</code> which<br />
 contains one subnode per tab with name <code>tab</code>.</p>
-<p>If action widgets are present, their CSS nodes are placed next
-to the <code>tabs</code> node. If the notebook is scrollable, CSS nodes with
+<p>If action widgets are present, their CSS nodes are placed next<br />
+to the <code>tabs</code> node. If the notebook is scrollable, CSS nodes with<br />
 name <code>arrow</code> are placed as first and last child of the <code>tabs</code> node.</p>
-<p>The main node gets the <code>.frame</code> style class when the notebook
+<p>The main node gets the <code>.frame</code> style class when the notebook<br />
 has a border (see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Notebook.set_show_border]).</p>
-<p>The header node gets one of the style class <code>.top</code>, <code>.bottom</code>,
-<code>.left</code> or <code>.right</code>, depending on where the tabs are placed. For
+<p>The header node gets one of the style class <code>.top</code>, <code>.bottom</code>,<br />
+<code>.left</code> or <code>.right</code>, depending on where the tabs are placed. For<br />
 reorderable pages, the tab node gets the <code>.reorderable-page</code> class.</p>
 <p>A <code>tab</code> node gets the <code>.dnd</code> style class while it is moved with drag-and-drop.</p>
 <p>The nodes are always arranged from left-to-right, regardless of text direction.</p>
-<h1>Accessibility</h1>
+<h1><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h1>
 <p><code>GtkNotebook</code> uses the following roles:</p>
 <ul>
 <li>%GTK_ACCESSIBLE_ROLE_GROUP for the notebook widget</li>
@@ -1428,9 +1430,11 @@ reorderable pages, the tab node gets the <code>.reorderable-page</code> class.</
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -1521,7 +1525,7 @@ reorderable pages, the tab node gets the <code>.reorderable-page</code> class.</
       
       
         &mdash;
-        <div class='inline'><p>the <code>GtkWidget</code> to be used as the label
+        <div class='inline'><p>the <code>GtkWidget</code> to be used as the label<br />
 for the page, or nil to use the default label, “page N”</p>
 </div>
       
@@ -1540,7 +1544,7 @@ for the page, or nil to use the default label, “page N”</p>
       
       
         &mdash;
-        <div class='inline'><p>the index (starting from 0) of the appended
+        <div class='inline'><p>the index (starting from 0) of the appended<br />
 page in the notebook, or -1 if function fails</p>
 </div>
       
@@ -1562,7 +1566,7 @@ page in the notebook, or -1 if function fails</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Appends a page to <!-- raw HTML omitted -->notebook<!-- raw HTML omitted -->, specifying the widget to use as the
+    <p>Appends a page to <!-- raw HTML omitted -->notebook<!-- raw HTML omitted -->, specifying the widget to use as the<br />
 label in the popup menu.</p>
 
 
@@ -1597,7 +1601,7 @@ label in the popup menu.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GtkWidget</code> to be used as the label
+        <div class='inline'><p>the <code>GtkWidget</code> to be used as the label<br />
 for the page, or nil to use the default label, “page N”</p>
 </div>
       
@@ -1613,11 +1617,11 @@ for the page, or nil to use the default label, “page N”</p>
       
       
         &mdash;
-        <div class='inline'><p>the widget to use as a label for the
-page-switch menu, if that is enabled. If nil, and <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted -->
-is a <code>GtkLabel</code> or nil, then the menu label will be a newly
-created label with the same text as <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted -->; if <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted -->
-is not a <code>GtkLabel</code>, <!-- raw HTML omitted -->menu_label<!-- raw HTML omitted --> must be specified if the
+        <div class='inline'><p>the widget to use as a label for the<br />
+page-switch menu, if that is enabled. If nil, and <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted --><br />
+is a <code>GtkLabel</code> or nil, then the menu label will be a newly<br />
+created label with the same text as <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted -->; if <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted --><br />
+is not a <code>GtkLabel</code>, <!-- raw HTML omitted -->menu_label<!-- raw HTML omitted --> must be specified if the<br />
 page-switch menu is to be used.</p>
 </div>
       
@@ -1636,7 +1640,7 @@ page-switch menu is to be used.</p>
       
       
         &mdash;
-        <div class='inline'><p>the index (starting from 0) of the appended
+        <div class='inline'><p>the index (starting from 0) of the appended<br />
 page in the notebook, or -1 if function fails</p>
 </div>
       
@@ -1676,8 +1680,8 @@ page in the notebook, or -1 if function fails</p>
       
       
         &mdash;
-        <div class='inline'><p>the index (starting from 0) of the current
-page in the notebook. If the notebook has no pages,
+        <div class='inline'><p>the index (starting from 0) of the current<br />
+page in the notebook. If the notebook has no pages,<br />
 then -1 will be returned.</p>
 </div>
       
@@ -1700,9 +1704,9 @@ then -1 will be returned.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Switches to the page number <!-- raw HTML omitted -->page_num<!-- raw HTML omitted -->.</p>
-<p>Note that due to historical reasons, GtkNotebook refuses
-to switch to a page unless the child widget is visible.
-Therefore, it is recommended to show child widgets before
+<p>Note that due to historical reasons, GtkNotebook refuses<br />
+to switch to a page unless the child widget is visible.<br />
+Therefore, it is recommended to show child widgets before<br />
 adding them to a notebook.</p>
 
 
@@ -1722,9 +1726,9 @@ adding them to a notebook.</p>
       
       
         &mdash;
-        <div class='inline'><p>index of the page to switch to, starting from 0.
-If negative, the last page will be used. If greater
-than the number of pages in the notebook, nothing
+        <div class='inline'><p>index of the page to switch to, starting from 0.<br />
+If negative, the last page will be used. If greater<br />
+than the number of pages in the notebook, nothing<br />
 will be done.</p>
 </div>
       
@@ -1761,9 +1765,9 @@ will be done.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Removes the child from the notebook.</p>
-<p>This function is very similar to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Notebook.remove_page],
-but additionally informs the notebook that the removal
-is happening as part of a tab DND operation, which should
+<p>This function is very similar to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Notebook.remove_page],<br />
+but additionally informs the notebook that the removal<br />
+is happening as part of a tab DND operation, which should<br />
 not be cancelled.</p>
 
 
@@ -1962,8 +1966,8 @@ not be cancelled.</p>
       
       
         &mdash;
-        <div class='inline'><p>The action widget
-with the given <!-- raw HTML omitted -->pack_type<!-- raw HTML omitted --> or nil when this action
+        <div class='inline'><p>The action widget<br />
+with the given <!-- raw HTML omitted -->pack_type<!-- raw HTML omitted --> or nil when this action<br />
 widget has not been set</p>
 </div>
       
@@ -2022,8 +2026,8 @@ widget has not been set</p>
       
       
         &mdash;
-        <div class='inline'><p>the menu label, or nil
-if the notebook page does not have a menu label other than
+        <div class='inline'><p>the menu label, or nil<br />
+if the notebook page does not have a menu label other than<br />
 the default (the tab label).</p>
 </div>
       
@@ -2045,7 +2049,7 @@ the default (the tab label).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the text of the menu label for the page containing
+    <p>Retrieves the text of the menu label for the page containing<br />
 <!-- raw HTML omitted -->child<!-- raw HTML omitted -->.</p>
 
 
@@ -2083,9 +2087,9 @@ the default (the tab label).</p>
       
       
         &mdash;
-        <div class='inline'><p>the text of the tab label, or nil if
-the widget does not have a menu label other than the default
-menu label, or the menu label widget is not a <code>GtkLabel</code>.
+        <div class='inline'><p>the text of the tab label, or nil if<br />
+the widget does not have a menu label other than the default<br />
+menu label, or the menu label widget is not a <code>GtkLabel</code>.<br />
 The string is owned by the widget and must not be freed.</p>
 </div>
       
@@ -2107,7 +2111,7 @@ The string is owned by the widget and must not be freed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the child widget contained in page number <!-- raw HTML omitted -->page_num<!-- raw HTML omitted -->.
+    <p>Returns the child widget contained in page number <!-- raw HTML omitted -->page_num<!-- raw HTML omitted -->.<br />
 is out of bounds</p>
 
 
@@ -2127,7 +2131,7 @@ is out of bounds</p>
       
       
         &mdash;
-        <div class='inline'><p>the index of a page in the notebook, or -1
+        <div class='inline'><p>the index of a page in the notebook, or -1<br />
 to get the last page</p>
 </div>
       
@@ -2284,7 +2288,7 @@ to get the last page</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the tab label widget for the page <!-- raw HTML omitted -->child<!-- raw HTML omitted -->.</p>
-<p>nil is returned if <!-- raw HTML omitted -->child<!-- raw HTML omitted --> is not in <!-- raw HTML omitted -->notebook<!-- raw HTML omitted --> or
+<p>nil is returned if <!-- raw HTML omitted -->child<!-- raw HTML omitted --> is not in <!-- raw HTML omitted -->notebook<!-- raw HTML omitted --> or<br />
 if no tab label has specifically been set for <!-- raw HTML omitted -->child<!-- raw HTML omitted -->.</p>
 
 
@@ -2343,7 +2347,7 @@ if no tab label has specifically been set for <!-- raw HTML omitted -->child<!--
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the text of the tab label for the page containing
+    <p>Retrieves the text of the tab label for the page containing<br />
 <!-- raw HTML omitted -->child<!-- raw HTML omitted -->.</p>
 
 
@@ -2381,8 +2385,8 @@ if no tab label has specifically been set for <!-- raw HTML omitted -->child<!--
       
       
         &mdash;
-        <div class='inline'><p>the text of the tab label, or nil if
-the tab label widget is not a <code>GtkLabel</code>. The string is owned
+        <div class='inline'><p>the text of the tab label, or nil if<br />
+the tab label widget is not a <code>GtkLabel</code>. The string is owned<br />
 by the widget and must not be freed.</p>
 </div>
       
@@ -2602,7 +2606,7 @@ by the widget and must not be freed.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GtkWidget</code> to be used as the label
+        <div class='inline'><p>the <code>GtkWidget</code> to be used as the label<br />
 for the page, or nil to use the default label, “page N”</p>
 </div>
       
@@ -2618,7 +2622,7 @@ for the page, or nil to use the default label, “page N”</p>
       
       
         &mdash;
-        <div class='inline'><p>the index (starting at 0) at which to insert the page,
+        <div class='inline'><p>the index (starting at 0) at which to insert the page,<br />
 or -1 to append the page after all other pages</p>
 </div>
       
@@ -2637,7 +2641,7 @@ or -1 to append the page after all other pages</p>
       
       
         &mdash;
-        <div class='inline'><p>the index (starting from 0) of the inserted
+        <div class='inline'><p>the index (starting from 0) of the inserted<br />
 page in the notebook, or -1 if function fails</p>
 </div>
       
@@ -2659,7 +2663,7 @@ page in the notebook, or -1 if function fails</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Insert a page into <!-- raw HTML omitted -->notebook<!-- raw HTML omitted --> at the given position, specifying
+    <p>Insert a page into <!-- raw HTML omitted -->notebook<!-- raw HTML omitted --> at the given position, specifying<br />
 the widget to use as the label in the popup menu.</p>
 
 
@@ -2694,7 +2698,7 @@ the widget to use as the label in the popup menu.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GtkWidget</code> to be used as the label
+        <div class='inline'><p>the <code>GtkWidget</code> to be used as the label<br />
 for the page, or nil to use the default label, “page N”</p>
 </div>
       
@@ -2710,11 +2714,11 @@ for the page, or nil to use the default label, “page N”</p>
       
       
         &mdash;
-        <div class='inline'><p>the widget to use as a label for the
-page-switch menu, if that is enabled. If nil, and <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted -->
-is a <code>GtkLabel</code> or nil, then the menu label will be a newly
-created label with the same text as <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted -->; if <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted -->
-is not a <code>GtkLabel</code>, <!-- raw HTML omitted -->menu_label<!-- raw HTML omitted --> must be specified if the
+        <div class='inline'><p>the widget to use as a label for the<br />
+page-switch menu, if that is enabled. If nil, and <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted --><br />
+is a <code>GtkLabel</code> or nil, then the menu label will be a newly<br />
+created label with the same text as <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted -->; if <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted --><br />
+is not a <code>GtkLabel</code>, <!-- raw HTML omitted -->menu_label<!-- raw HTML omitted --> must be specified if the<br />
 page-switch menu is to be used.</p>
 </div>
       
@@ -2730,7 +2734,7 @@ page-switch menu is to be used.</p>
       
       
         &mdash;
-        <div class='inline'><p>the index (starting at 0) at which to insert the page,
+        <div class='inline'><p>the index (starting at 0) at which to insert the page,<br />
 or -1 to append the page after all other pages.</p>
 </div>
       
@@ -2749,7 +2753,7 @@ or -1 to append the page after all other pages.</p>
       
       
         &mdash;
-        <div class='inline'><p>the index (starting from 0) of the inserted
+        <div class='inline'><p>the index (starting from 0) of the inserted<br />
 page in the notebook</p>
 </div>
       
@@ -2952,7 +2956,7 @@ page in the notebook</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finds the index of the page which contains the given child
+    <p>Finds the index of the page which contains the given child<br />
 widget.</p>
 
 
@@ -2990,7 +2994,7 @@ widget.</p>
       
       
         &mdash;
-        <div class='inline'><p>the index of the page containing <!-- raw HTML omitted -->child<!-- raw HTML omitted -->, or
+        <div class='inline'><p>the index of the page containing <!-- raw HTML omitted -->child<!-- raw HTML omitted -->, or<br />
 -1 if <!-- raw HTML omitted -->child<!-- raw HTML omitted --> is not in the notebook</p>
 </div>
       
@@ -3154,7 +3158,7 @@ widget.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Enables the popup menu.</p>
-<p>If the user clicks with the right mouse button on the tab labels,
+<p>If the user clicks with the right mouse button on the tab labels,<br />
 a menu with all the pages will be popped up.</p>
 
 
@@ -3224,7 +3228,7 @@ a menu with all the pages will be popped up.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GtkWidget</code> to be used as the label
+        <div class='inline'><p>the <code>GtkWidget</code> to be used as the label<br />
 for the page, or nil to use the default label, “page N”</p>
 </div>
       
@@ -3243,7 +3247,7 @@ for the page, or nil to use the default label, “page N”</p>
       
       
         &mdash;
-        <div class='inline'><p>the index (starting from 0) of the prepended
+        <div class='inline'><p>the index (starting from 0) of the prepended<br />
 page in the notebook, or -1 if function fails</p>
 </div>
       
@@ -3265,7 +3269,7 @@ page in the notebook, or -1 if function fails</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Prepends a page to <!-- raw HTML omitted -->notebook<!-- raw HTML omitted -->, specifying the widget to use as the
+    <p>Prepends a page to <!-- raw HTML omitted -->notebook<!-- raw HTML omitted -->, specifying the widget to use as the<br />
 label in the popup menu.</p>
 
 
@@ -3300,7 +3304,7 @@ label in the popup menu.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GtkWidget</code> to be used as the label
+        <div class='inline'><p>the <code>GtkWidget</code> to be used as the label<br />
 for the page, or nil to use the default label, “page N”</p>
 </div>
       
@@ -3316,11 +3320,11 @@ for the page, or nil to use the default label, “page N”</p>
       
       
         &mdash;
-        <div class='inline'><p>the widget to use as a label for the
-page-switch menu, if that is enabled. If nil, and <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted -->
-is a <code>GtkLabel</code> or nil, then the menu label will be a newly
-created label with the same text as <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted -->; if <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted -->
-is not a <code>GtkLabel</code>, <!-- raw HTML omitted -->menu_label<!-- raw HTML omitted --> must be specified if the
+        <div class='inline'><p>the widget to use as a label for the<br />
+page-switch menu, if that is enabled. If nil, and <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted --><br />
+is a <code>GtkLabel</code> or nil, then the menu label will be a newly<br />
+created label with the same text as <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted -->; if <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted --><br />
+is not a <code>GtkLabel</code>, <!-- raw HTML omitted -->menu_label<!-- raw HTML omitted --> must be specified if the<br />
 page-switch menu is to be used.</p>
 </div>
       
@@ -3339,7 +3343,7 @@ page-switch menu is to be used.</p>
       
       
         &mdash;
-        <div class='inline'><p>the index (starting from 0) of the prepended
+        <div class='inline'><p>the index (starting from 0) of the prepended<br />
 page in the notebook, or -1 if function fails</p>
 </div>
       
@@ -3397,7 +3401,7 @@ page in the notebook, or -1 if function fails</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes a page from the notebook given its index
+    <p>Removes a page from the notebook given its index<br />
 in the notebook.</p>
 
 
@@ -3417,7 +3421,7 @@ in the notebook.</p>
       
       
         &mdash;
-        <div class='inline'><p>the index of a notebook page, starting
+        <div class='inline'><p>the index of a notebook page, starting<br />
 from 0. If -1, the last page will be removed.</p>
 </div>
       
@@ -3453,9 +3457,9 @@ from 0. If -1, the last page will be removed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reorders the page containing <!-- raw HTML omitted -->child<!-- raw HTML omitted -->, so that it appears in position
+    <p>Reorders the page containing <!-- raw HTML omitted -->child<!-- raw HTML omitted -->, so that it appears in position<br />
 <!-- raw HTML omitted -->position<!-- raw HTML omitted -->.</p>
-<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is greater than or equal to the number of children in
+<p>If <!-- raw HTML omitted -->position<!-- raw HTML omitted --> is greater than or equal to the number of children in<br />
 the list or negative, <!-- raw HTML omitted -->child<!-- raw HTML omitted --> will be moved to the end of the list.</p>
 
 
@@ -3671,8 +3675,8 @@ the list or negative, <!-- raw HTML omitted -->child<!-- raw HTML omitted --> wi
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->widget<!-- raw HTML omitted --> as one of the action widgets.</p>
-<p>Depending on the pack type the widget will be placed before
-or after the tabs. You can use a <code>GtkBox</code> if you need to pack
+<p>Depending on the pack type the widget will be placed before<br />
+or after the tabs. You can use a <code>GtkBox</code> if you need to pack<br />
 more than one widget on the same side.</p>
 
 
@@ -3880,22 +3884,22 @@ more than one widget on the same side.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether the tab can be detached from <!-- raw HTML omitted -->notebook<!-- raw HTML omitted --> to another
+    <p>Sets whether the tab can be detached from <!-- raw HTML omitted -->notebook<!-- raw HTML omitted --> to another<br />
 notebook or widget.</p>
-<p>Note that two notebooks must share a common group identifier
-(see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Notebook.set_group_name]) to allow automatic tabs
+<p>Note that two notebooks must share a common group identifier<br />
+(see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Notebook.set_group_name]) to allow automatic tabs<br />
 interchange between them.</p>
-<p>If you want a widget to interact with a notebook through DnD
-(i.e.: accept dragged tabs from it) it must be set as a drop
-destination by adding to it a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropTarget] controller that accepts
-the GType <code>GTK_TYPE_NOTEBOOK_PAGE</code>. The <code>:value</code> of said drop target will be
-preloaded with a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.NotebookPage] object that corresponds to the
+<p>If you want a widget to interact with a notebook through DnD<br />
+(i.e.: accept dragged tabs from it) it must be set as a drop<br />
+destination by adding to it a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DropTarget] controller that accepts<br />
+the GType <code>GTK_TYPE_NOTEBOOK_PAGE</code>. The <code>:value</code> of said drop target will be<br />
+preloaded with a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.NotebookPage] object that corresponds to the<br />
 dropped tab, so you can process the value via <code>::accept</code> or <code>::drop</code> signals.</p>
-<p>Note that you should use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Notebook.detach_tab] instead
-of [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Notebook.remove_page] if you want to remove the tab
-from the source notebook as part of accepting a drop. Otherwise,
-the source notebook will think that the dragged tab was removed
-from underneath the ongoing drag operation, and will initiate a
+<p>Note that you should use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Notebook.detach_tab] instead<br />
+of [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Notebook.remove_page] if you want to remove the tab<br />
+from the source notebook as part of accepting a drop. Otherwise,<br />
+the source notebook will think that the dragged tab was removed<br />
+from underneath the ongoing drag operation, and will initiate a<br />
 drag cancel animation.</p>
 <pre class="code c"><code class="c">static void
 on_drag_data_received (GtkWidget        *widget,
@@ -3917,7 +3921,7 @@ on_drag_data_received (GtkWidget        *widget,
   gtk_notebook_detach_tab (GTK_NOTEBOOK (notebook), *child);
 }
 </code></pre>
-<p>If you want a notebook to accept drags from other widgets,
+<p>If you want a notebook to accept drags from other widgets,<br />
 you will have to set your own DnD code to do it.</p>
 
 
@@ -3988,7 +3992,7 @@ you will have to set your own DnD code to do it.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Changes the tab label for <!-- raw HTML omitted -->child<!-- raw HTML omitted -->.</p>
-<p>If nil is specified for <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted -->, then the page will
+<p>If nil is specified for <!-- raw HTML omitted -->tab_label<!-- raw HTML omitted -->, then the page will<br />
 have the label “page N”.</p>
 
 
@@ -4023,7 +4027,7 @@ have the label “page N”.</p>
       
       
         &mdash;
-        <div class='inline'><p>the tab label widget to use, or nil
+        <div class='inline'><p>the tab label widget to use, or nil<br />
 for default tab label</p>
 </div>
       
@@ -4059,7 +4063,7 @@ for default tab label</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new label and sets it as the tab label for the page
+    <p>Creates a new label and sets it as the tab label for the page<br />
 containing <!-- raw HTML omitted -->child<!-- raw HTML omitted -->.</p>
 
 
@@ -4129,7 +4133,7 @@ containing <!-- raw HTML omitted -->child<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets whether the notebook tab can be reordered
+    <p>Sets whether the notebook tab can be reordered<br />
 via drag and drop or not.</p>
 
 
@@ -4591,7 +4595,7 @@ via drag and drop or not.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

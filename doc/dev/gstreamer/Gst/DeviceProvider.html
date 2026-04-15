@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Gst::DeviceProvider";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -98,7 +99,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -152,6 +154,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -574,9 +577,11 @@
 
       
     </ul>
+    
   
 
 
+  
   
   
   
@@ -605,7 +610,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create a new device providerfactory capable of instantiating objects of the
+    <p>Create a new device providerfactory capable of instantiating objects of the<br />
 <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and add the factory to <!-- raw HTML omitted -->plugin<!-- raw HTML omitted -->.</p>
 
 
@@ -625,7 +630,7 @@
       
       
         &mdash;
-        <div class='inline'><p>Gst::Plugin to register the device provider with, or nil for
+        <div class='inline'><p>Gst::Plugin to register the device provider with, or nil for<br />
 a static device provider.</p>
 </div>
       
@@ -786,9 +791,9 @@ a static device provider.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Set <!-- raw HTML omitted -->key<!-- raw HTML omitted --> with <!-- raw HTML omitted -->value<!-- raw HTML omitted --> as metadata in <!-- raw HTML omitted -->klass<!-- raw HTML omitted -->.</p>
-<p>Same as gst_device_provider_class_add_metadata(), but <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be a static string
-or an inlined string, as it will not be copied. (GStreamer plugins will
-be made resident once loaded, so this function can be used even from
+<p>Same as gst_device_provider_class_add_metadata(), but <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be a static string<br />
+or an inlined string, as it will not be copied. (GStreamer plugins will<br />
+be made resident once loaded, so this function can be used even from<br />
 dynamically loaded plugins.)</p>
 
 
@@ -931,10 +936,10 @@ dynamically loaded plugins.)</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Posts a message on the provider's Gst::Bus to inform applications that
+    <p>Posts a message on the provider's Gst::Bus to inform applications that<br />
 a new device has been added.</p>
 <p>This is for use by subclasses.</p>
-<p><!-- raw HTML omitted -->device<!-- raw HTML omitted -->'s reference count will be incremented, and any floating reference
+<p><!-- raw HTML omitted -->device<!-- raw HTML omitted -->'s reference count will be incremented, and any floating reference<br />
 will be removed (see gst_object_ref_sink()).</p>
 
 
@@ -989,10 +994,10 @@ will be removed (see gst_object_ref_sink()).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function is used when <!-- raw HTML omitted -->changed_device<!-- raw HTML omitted --> was modified into its new form
-<!-- raw HTML omitted -->device<!-- raw HTML omitted -->. This will post a <code>DEVICE_CHANGED</code> message on the bus to let
-the application know that the device was modified. Gst::Device is immutable
-for MT. safety purposes so this is an &quot;atomic&quot; way of letting the application
+    <p>This function is used when <!-- raw HTML omitted -->changed_device<!-- raw HTML omitted --> was modified into its new form<br />
+<!-- raw HTML omitted -->device<!-- raw HTML omitted -->. This will post a <code>DEVICE_CHANGED</code> message on the bus to let<br />
+the application know that the device was modified. Gst::Device is immutable<br />
+for MT. safety purposes so this is an &quot;atomic&quot; way of letting the application<br />
 know when a device was modified.</p>
 
 
@@ -1062,7 +1067,7 @@ know when a device was modified.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Posts a message on the provider's Gst::Bus to inform applications that
+    <p>Posts a message on the provider's Gst::Bus to inform applications that<br />
 a device has been removed.</p>
 <p>This is for use by subclasses.</p>
 
@@ -1118,9 +1123,9 @@ a device has been removed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a list of devices that this provider understands. This may actually
+    <p>Gets a list of devices that this provider understands. This may actually<br />
 probe the hardware if the provider is not currently started.</p>
-<p>If the provider has been started, this will returned the same Gst::Device
+<p>If the provider has been started, this will returned the same Gst::Device<br />
 objedcts that have been returned by the #GST_MESSAGE_DEVICE_ADDED messages.</p>
 
 
@@ -1139,7 +1144,7 @@ objedcts that have been returned by the #GST_MESSAGE_DEVICE_ADDED messages.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GList of
+        <div class='inline'><p>a #GList of<br />
 Gst::Device</p>
 </div>
       
@@ -1179,7 +1184,7 @@ Gst::Device</p>
       
       
         &mdash;
-        <div class='inline'><p>the Gst::DeviceProviderFactory used for
+        <div class='inline'><p>the Gst::DeviceProviderFactory used for<br />
 creating this device provider. no refcounting is needed.</p>
 </div>
       
@@ -1259,7 +1264,7 @@ creating this device provider. no refcounting is needed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the provider factory names of the Gst::DeviceProvider instances that
+    <p>Get the provider factory names of the Gst::DeviceProvider instances that<br />
 are hidden by <!-- raw HTML omitted -->provider<!-- raw HTML omitted -->.</p>
 
 
@@ -1278,7 +1283,7 @@ are hidden by <!-- raw HTML omitted -->provider<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of hidden providers factory names or nil when
+        <div class='inline'><p>a list of hidden providers factory names or nil when<br />
 nothing is hidden by <!-- raw HTML omitted -->provider<!-- raw HTML omitted -->. Free with g_strfreev.</p>
 </div>
       
@@ -1301,8 +1306,8 @@ nothing is hidden by <!-- raw HTML omitted -->provider<!-- raw HTML omitted -->.
 </h3><div class="docstring">
   <div class="discussion">
     <p>Make <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> hide the devices from the factory with <!-- raw HTML omitted -->name<!-- raw HTML omitted -->.</p>
-<p>This function is used when <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> will also provide the devices reported
-by provider factory <!-- raw HTML omitted -->name<!-- raw HTML omitted -->. A monitor should stop monitoring the
+<p>This function is used when <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> will also provide the devices reported<br />
+by provider factory <!-- raw HTML omitted -->name<!-- raw HTML omitted -->. A monitor should stop monitoring the<br />
 device provider with <!-- raw HTML omitted -->name<!-- raw HTML omitted --> to avoid duplicate devices.</p>
 
 
@@ -1394,9 +1399,9 @@ device provider with <!-- raw HTML omitted -->name<!-- raw HTML omitted --> to a
   <div class="discussion">
     <p>Sets the detailed information for a Gst::DeviceProviderClass.</p>
 <blockquote>
-<p>This function is for use in _class_init functions only.
-for more details and common types. E.g: &quot;Sink/File&quot;
-E.g: &quot;Write stream to a file&quot;
+<p>This function is for use in _class_init functions only.<br />
+for more details and common types. E.g: &quot;Sink/File&quot;<br />
+E.g: &quot;Write stream to a file&quot;<br />
 multiple author metadata. E.g: &quot;Joe Bloggs &lt;joe.blogs at foo.com&gt;&quot;</p>
 </blockquote>
 
@@ -1432,8 +1437,8 @@ multiple author metadata. E.g: &quot;Joe Bloggs &lt;joe.blogs at foo.com&gt;&quo
       
       
         &mdash;
-        <div class='inline'><p>String describing the type of device provider, as an
-unordered list separated with slashes ('/'). See draft-klass.txt of the
+        <div class='inline'><p>String describing the type of device provider, as an<br />
+unordered list separated with slashes ('/'). See draft-klass.txt of the<br />
 design docs</p>
 </div>
       
@@ -1503,14 +1508,14 @@ design docs</p>
 <blockquote>
 <p>This function is for use in _class_init functions only.</p>
 </blockquote>
-<p>Same as gst_device_provider_class_set_metadata(), but <!-- raw HTML omitted -->longname<!-- raw HTML omitted -->, <!-- raw HTML omitted -->classification<!-- raw HTML omitted -->,
-<!-- raw HTML omitted -->description<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->author<!-- raw HTML omitted --> must be static strings or inlined strings, as
-they will not be copied. (GStreamer plugins will be made resident once
-loaded, so this function can be used even from dynamically loaded plugins.)
-an unordered list separated with slashes ('/'). See draft-klass.txt of the
-design docs for more details and common types. E.g: &quot;Sink/File&quot;
-element.  E.g: &quot;Write stream to a file&quot;
-to separate multiple author metadata. E.g: &quot;Joe Bloggs &lt;joe.blogs at
+<p>Same as gst_device_provider_class_set_metadata(), but <!-- raw HTML omitted -->longname<!-- raw HTML omitted -->, <!-- raw HTML omitted -->classification<!-- raw HTML omitted -->,<br />
+<!-- raw HTML omitted -->description<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->author<!-- raw HTML omitted --> must be static strings or inlined strings, as<br />
+they will not be copied. (GStreamer plugins will be made resident once<br />
+loaded, so this function can be used even from dynamically loaded plugins.)<br />
+an unordered list separated with slashes ('/'). See draft-klass.txt of the<br />
+design docs for more details and common types. E.g: &quot;Sink/File&quot;<br />
+element.  E.g: &quot;Write stream to a file&quot;<br />
+to separate multiple author metadata. E.g: &quot;Joe Bloggs &lt;joe.blogs at<br />
 foo.com&gt;&quot;</p>
 
 
@@ -1610,15 +1615,15 @@ foo.com&gt;&quot;</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Starts providering the devices. This will cause #GST_MESSAGE_DEVICE_ADDED
-and #GST_MESSAGE_DEVICE_REMOVED messages to be posted on the provider's bus
+    <p>Starts providering the devices. This will cause #GST_MESSAGE_DEVICE_ADDED<br />
+and #GST_MESSAGE_DEVICE_REMOVED messages to be posted on the provider's bus<br />
 when devices are added or removed from the system.</p>
-<p>Since the Gst::DeviceProvider is a singleton,
-gst_device_provider_start() may already have been called by another
-user of the object, gst_device_provider_stop() needs to be called the same
+<p>Since the Gst::DeviceProvider is a singleton,<br />
+gst_device_provider_start() may already have been called by another<br />
+user of the object, gst_device_provider_stop() needs to be called the same<br />
 number of times.</p>
-<p>After this function has been called, gst_device_provider_get_devices() will
-return the same objects that have been received from the
+<p>After this function has been called, gst_device_provider_get_devices() will<br />
+return the same objects that have been received from the<br />
 #GST_MESSAGE_DEVICE_ADDED messages and will no longer probe.</p>
 
 
@@ -1658,8 +1663,8 @@ return the same objects that have been received from the
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Decreases the use-count by one. If the use count reaches zero, this
-Gst::DeviceProvider will stop providering the devices. This needs to be
+    <p>Decreases the use-count by one. If the use count reaches zero, this<br />
+Gst::DeviceProvider will stop providering the devices. This needs to be<br />
 called the same number of times that gst_device_provider_start() was called.</p>
 
 
@@ -1696,9 +1701,9 @@ called the same number of times that gst_device_provider_start() was called.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Make <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> unhide the devices from factory <!-- raw HTML omitted -->name<!-- raw HTML omitted -->.</p>
-<p>This function is used when <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> will no longer provide the devices
-reported by provider factory <!-- raw HTML omitted -->name<!-- raw HTML omitted -->. A monitor should start
-monitoring the devices from provider factory <!-- raw HTML omitted -->name<!-- raw HTML omitted --> in order to see
+<p>This function is used when <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> will no longer provide the devices<br />
+reported by provider factory <!-- raw HTML omitted -->name<!-- raw HTML omitted -->. A monitor should start<br />
+monitoring the devices from provider factory <!-- raw HTML omitted -->name<!-- raw HTML omitted --> in order to see<br />
 all devices again.</p>
 
 
@@ -1749,7 +1754,7 @@ all devices again.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>

@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "GtkSource::GutterLines";
@@ -33,6 +33,7 @@
     </div>
 
     <div id="main" tabindex="-1">
+      <div id="main_progress" aria-hidden="true"></div>
       <div id="header">
         <div id="menu">
   
@@ -94,7 +95,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>(unknown)</dd>
+    <dd>(unknown)
+</dd>
   </dl>
   
 </div>
@@ -483,6 +485,7 @@
 
       
     </ul>
+    
   
 
 
@@ -503,9 +506,9 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds the class <!-- raw HTML omitted -->name<!-- raw HTML omitted --> to <!-- raw HTML omitted -->line<!-- raw HTML omitted -->.</p>
-<p><!-- raw HTML omitted -->name<!-- raw HTML omitted --> will be converted to a [alias<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Quark] as part of this process. A
-faster version of this function is available via
-[method<!-- raw HTML omitted -->GutterLines<!-- raw HTML omitted -->.add_qclass] for situations where the [alias<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Quark] is
+<p><!-- raw HTML omitted -->name<!-- raw HTML omitted --> will be converted to a [alias<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Quark] as part of this process. A<br />
+faster version of this function is available via<br />
+[method<!-- raw HTML omitted -->GutterLines<!-- raw HTML omitted -->.add_qclass] for situations where the [alias<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Quark] is<br />
 known ahead of time.</p>
 
 
@@ -576,9 +579,9 @@ known ahead of time.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds the class denoted by <!-- raw HTML omitted -->qname<!-- raw HTML omitted --> to <!-- raw HTML omitted -->line<!-- raw HTML omitted -->.</p>
-<p>You may check if a line has <!-- raw HTML omitted -->qname<!-- raw HTML omitted --> by calling
+<p>You may check if a line has <!-- raw HTML omitted -->qname<!-- raw HTML omitted --> by calling<br />
 [method<!-- raw HTML omitted -->GutterLines<!-- raw HTML omitted -->.has_qclass].</p>
-<p>You can remove <!-- raw HTML omitted -->qname<!-- raw HTML omitted --> by calling
+<p>You can remove <!-- raw HTML omitted -->qname<!-- raw HTML omitted --> by calling<br />
 [method<!-- raw HTML omitted -->GutterLines<!-- raw HTML omitted -->.remove_qclass].</p>
 
 
@@ -687,7 +690,7 @@ known ahead of time.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the line number (starting from 0) for the first line that is
+    <p>Gets the line number (starting from 0) for the first line that is<br />
 user visible.</p>
 
 
@@ -896,8 +899,8 @@ user visible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks to see if the line has any GQuark classes set. This can be
-used to help renderer implementations avoid work if nothing has
+    <p>Checks to see if the line has any GQuark classes set. This can be<br />
+used to help renderer implementations avoid work if nothing has<br />
 been set on the class.</p>
 
 
@@ -956,10 +959,10 @@ been set on the class.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks to see if [method<!-- raw HTML omitted -->GutterLines<!-- raw HTML omitted -->.add_class] was called with
+    <p>Checks to see if [method<!-- raw HTML omitted -->GutterLines<!-- raw HTML omitted -->.add_class] was called with<br />
 the <!-- raw HTML omitted -->name<!-- raw HTML omitted --> for <!-- raw HTML omitted -->line<!-- raw HTML omitted -->.</p>
-<p>A faster version of this function is provided via
-[method<!-- raw HTML omitted -->GutterLines<!-- raw HTML omitted -->.has_qclass] for situations where the quark
+<p>A faster version of this function is provided via<br />
+[method<!-- raw HTML omitted -->GutterLines<!-- raw HTML omitted -->.has_qclass] for situations where the quark<br />
 is known ahead of time.</p>
 
 
@@ -1033,7 +1036,7 @@ is known ahead of time.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks to see if [method<!-- raw HTML omitted -->GutterLines<!-- raw HTML omitted -->.add_qclass] was called with
+    <p>Checks to see if [method<!-- raw HTML omitted -->GutterLines<!-- raw HTML omitted -->.add_qclass] was called with<br />
 the quark denoted by <!-- raw HTML omitted -->qname<!-- raw HTML omitted --> for <!-- raw HTML omitted -->line<!-- raw HTML omitted -->.</p>
 
 
@@ -1165,7 +1168,7 @@ the quark denoted by <!-- raw HTML omitted -->qname<!-- raw HTML omitted --> for
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks to see if <!-- raw HTML omitted -->line<!-- raw HTML omitted --> is marked as prelit. Generally, this means
+    <p>Checks to see if <!-- raw HTML omitted -->line<!-- raw HTML omitted --> is marked as prelit. Generally, this means<br />
 the mouse pointer is over the line within the gutter.</p>
 
 
@@ -1224,7 +1227,7 @@ the mouse pointer is over the line within the gutter.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks to see if the view had a selection and if that selection overlaps
+    <p>Checks to see if the view had a selection and if that selection overlaps<br />
 <!-- raw HTML omitted -->line<!-- raw HTML omitted --> in some way.</p>
 
 
@@ -1283,7 +1286,7 @@ the mouse pointer is over the line within the gutter.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the line number (starting from 0) for the last line that is
+    <p>Gets the line number (starting from 0) for the last line that is<br />
 user visible.</p>
 
 
@@ -1324,8 +1327,8 @@ user visible.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Removes the class matching <!-- raw HTML omitted -->name<!-- raw HTML omitted --> from <!-- raw HTML omitted -->line<!-- raw HTML omitted -->.</p>
-<p>A faster version of this function is available via
-[method<!-- raw HTML omitted -->GutterLines<!-- raw HTML omitted -->.remove_qclass] for situations where the
+<p>A faster version of this function is available via<br />
+[method<!-- raw HTML omitted -->GutterLines<!-- raw HTML omitted -->.remove_qclass] for situations where the<br />
 #GQuark is known ahead of time.</p>
 
 
@@ -1395,7 +1398,7 @@ user visible.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reverses a call to [method<!-- raw HTML omitted -->GutterLines<!-- raw HTML omitted -->.add_qclass] by removing
+    <p>Reverses a call to [method<!-- raw HTML omitted -->GutterLines<!-- raw HTML omitted -->.add_qclass] by removing<br />
 the [alias<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Quark] matching <!-- raw HTML omitted -->qname<!-- raw HTML omitted -->.</p>
 
 
@@ -1500,7 +1503,7 @@ the [alias<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Quark] matching
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.41 (ruby-4.0.2).
 </div>
 
     </div>
