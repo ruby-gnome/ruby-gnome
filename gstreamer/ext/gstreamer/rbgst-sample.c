@@ -60,6 +60,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     ssize_t *shape;
     ssize_t *strides;
     gint width;
+    const char *format = NULL;
     gsize n_samples;
     memview_private_data *private_data;
 
@@ -136,7 +137,6 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     view->ndim = 2;
     view->sub_offsets = NULL;
 
-    view->format = NULL;
     switch (audio_info->finfo->format) {
     case GST_AUDIO_FORMAT_UNKNOWN:
         rb_warn("Gst::Sample: format is unknown");
@@ -145,22 +145,22 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
         rb_warn("Gst::Sample: encoded format is not supported");
         break;
     case GST_AUDIO_FORMAT_S8:
-        view->format = "c";
+        format = "c";
         break;
     case GST_AUDIO_FORMAT_U8:
-        view->format = "C";
+        format = "C";
         break;
     case GST_AUDIO_FORMAT_S16LE:
-        view->format = "s<";
+        format = "s<";
         break;
     case GST_AUDIO_FORMAT_S16BE:
-        view->format = "s>";
+        format = "s>";
         break;
     case GST_AUDIO_FORMAT_U16LE:
-        view->format = "S<";
+        format = "S<";
         break;
     case GST_AUDIO_FORMAT_U16BE:
-        view->format = "S>";
+        format = "S>";
         break;
     case GST_AUDIO_FORMAT_S24_32LE:
         rb_warn("Gst::Sample: S24_32LE format is not supported");
@@ -175,16 +175,16 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
         rb_warn("Gst::Sample: U24_32BE format is not supported");
         break;
     case GST_AUDIO_FORMAT_S32LE:
-        view->format = "l<";
+        format = "l<";
         break;
     case GST_AUDIO_FORMAT_S32BE:
-        view->format = "l>";
+        format = "l>";
         break;
     case GST_AUDIO_FORMAT_U32LE:
-        view->format = "L<";
+        format = "L<";
         break;
     case GST_AUDIO_FORMAT_U32BE:
-        view->format = "L>";
+        format = "L>";
         break;
     case GST_AUDIO_FORMAT_S24LE:
         rb_warn("Gst::Sample: S24LE format is not supported");
@@ -224,32 +224,32 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
         break;
     case GST_AUDIO_FORMAT_F32LE:
         if (rb_memory_view_item_size_from_format("e", NULL) == 4) {
-            view->format = "e";
+            format = "e";
         } else {
             rb_warn("Gst::Sample: only environment float size is 4 bytes is supported");
         }
         break;
     case GST_AUDIO_FORMAT_F32BE:
         if (rb_memory_view_item_size_from_format("g", NULL) == 4) {
-            view->format = "g";
+            format = "g";
         } else {
             rb_warn("Gst::Sample: only environment float size is 4 bytes is supported");
         }
         break;
     case GST_AUDIO_FORMAT_F64LE:
         if (rb_memory_view_item_size_from_format("E", NULL) == 8) {
-            view->format = "E";
+            format = "E";
         } else if (rb_memory_view_item_size_from_format("e", NULL) == 8) {
-            view->format = "e";
+            format = "e";
         } else {
             rb_warn("Gst::Sample: only environment double or float size is 8 bytes is supported");
         }
         break;
     case GST_AUDIO_FORMAT_F64BE:
         if (rb_memory_view_item_size_from_format("G", NULL) == 8) {
-            view->format = "G";
+            format = "G";
         } else if (rb_memory_view_item_size_from_format("g", NULL) == 8) {
-            view->format = "g";
+            format = "g";
         } else {
             rb_warn("Gst::Sample: only environment double or float size is 8 bytes is supported");
         }
@@ -270,7 +270,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
 #endif
     }
 
-    if (!view->format) {
+    if (!format) {
         gst_buffer_unmap(buffer, map_info);
         g_free(map_info);
         gst_buffer_unref(buffer);
@@ -296,6 +296,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     shape[1] = audio_info->channels;
     strides[0] = width * audio_info->channels;
     strides[1] = width;
+    view->format = format;
     view->shape = shape;
     view->strides = strides;
 
