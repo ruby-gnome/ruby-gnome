@@ -116,10 +116,10 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
 
         return false;
     }
-    map_info = ALLOC(GstMapInfo);
+    map_info = g_new(GstMapInfo, 1);
     if (!gst_buffer_map(buffer, map_info, is_writable_requested ? GST_MAP_WRITE : GST_MAP_READ)) {
         rb_warn("Gst::Sample: failed to map buffer");
-        xfree(map_info);
+        g_free(map_info);
         gst_audio_info_free(audio_info);
         gst_buffer_unref(buffer);
 
@@ -272,7 +272,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
 
     if (!view->format) {
         gst_buffer_unmap(buffer, map_info);
-        xfree(map_info);
+        g_free(map_info);
         gst_buffer_unref(buffer);
         gst_audio_info_free(audio_info);
 
@@ -282,15 +282,15 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     if (map_info->size % (width * audio_info->channels) != 0) {
         rb_warn("Gst::Sample: buffer size is not aligned with sample width and channels");
         gst_buffer_unmap(buffer, map_info);
-        xfree(map_info);
+        g_free(map_info);
         gst_buffer_unref(buffer);
         gst_audio_info_free(audio_info);
 
         return false;
     }
     n_samples = map_info->size / width / audio_info->channels;
-    shape = ALLOC_N(ssize_t, 2);
-    strides = ALLOC_N(ssize_t, 2);
+    shape = g_new(ssize_t, 2);
+    strides = g_new(ssize_t, 2);
     // Currently, interleaved and row-major audio is supported
     shape[0] = n_samples;
     shape[1] = audio_info->channels;
@@ -299,7 +299,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     view->shape = shape;
     view->strides = strides;
 
-    private_data = ALLOC(memview_private_data);
+    private_data = g_new(memview_private_data, 1);
     private_data->buffer = buffer;
     private_data->map_info = map_info;
 #if RUBY_API_VERSION_MAJOR == 3 && RUBY_API_VERSION_MINOR == 0
@@ -346,8 +346,8 @@ rg_gst_sample_release(VALUE obj, rb_memory_view_t *view)
     GstSample *sample;
     memview_private_data *private_data;
 
-    xfree((void *)view->shape);
-    xfree((void *)view->strides);
+    g_free((gpointer)view->shape);
+    g_free((gpointer)view->strides);
 #if RUBY_API_VERSION_MAJOR == 3 && RUBY_API_VERSION_MINOR == 0
     private_data = (memview_private_data *)view->private;
 #else
@@ -355,8 +355,8 @@ rg_gst_sample_release(VALUE obj, rb_memory_view_t *view)
 #endif
     gst_buffer_unmap(private_data->buffer, private_data->map_info);
     gst_buffer_unref(private_data->buffer);
-    xfree(private_data->map_info);
-    xfree(private_data);
+    g_free(private_data->map_info);
+    g_free(private_data);
     sample = GST_SAMPLE(RVAL2GOBJ(obj));
     gst_sample_unref(sample);
 
