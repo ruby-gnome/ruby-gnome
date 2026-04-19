@@ -117,6 +117,8 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
 
         return false;
     }
+    // Doesn't use ALLOC/ALLOC_N because they may raise an exception and then
+    // the map_info and audio_info won't be freed and the buffer won't be unrefed.
     map_info = g_new(GstMapInfo, 1);
     if (!gst_buffer_map(buffer, map_info, is_writable_requested ? GST_MAP_WRITE : GST_MAP_READ)) {
         rb_warn("Gst::Sample: failed to map buffer");
@@ -281,6 +283,8 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
         return false;
     }
     n_samples = map_info->size / width / audio_info->channels;
+    // Doesn't use ALLOC/ALLOC_N because they may raise an exception and then
+    // the audio_info won't be freed.
     shape = g_new(ssize_t, 2);
     strides = g_new(ssize_t, 2);
     // Currently, interleaved and row-major audio is supported
@@ -291,6 +295,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
 
     gst_audio_info_free(audio_info);
 
+    // Uses g_new instead of ALLOC/ALLOC_N for consistency.
     private_data = g_new(memview_private_data, 1);
     private_data->buffer = buffer;
     private_data->map_info = map_info;
