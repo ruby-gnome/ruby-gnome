@@ -127,15 +127,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
         return false;
     }
 
-    view->data = map_info->data;
-
-    view->obj = obj;
-    view->byte_size = map_info->size;
     width = audio_info->finfo->width / 8;
-    view->item_size = width;
-    view->readonly = !is_writable_requested;
-    view->ndim = 2;
-    view->sub_offsets = NULL;
 
     switch (audio_info->finfo->format) {
     case GST_AUDIO_FORMAT_UNKNOWN:
@@ -296,20 +288,28 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     shape[1] = audio_info->channels;
     strides[0] = width * audio_info->channels;
     strides[1] = width;
-    view->format = format;
-    view->shape = shape;
-    view->strides = strides;
+
+    gst_audio_info_free(audio_info);
 
     private_data = g_new(memview_private_data, 1);
     private_data->buffer = buffer;
     private_data->map_info = map_info;
+
+    view->format = format;
+    view->data = map_info->data;
+    view->obj = obj;
+    view->item_size = width;
+    view->byte_size = map_info->size;
+    view->readonly = !is_writable_requested;
+    view->ndim = 2;
+    view->shape = shape;
+    view->strides = strides;
+    view->sub_offsets = NULL;
 #if RUBY_API_VERSION_MAJOR == 3 && RUBY_API_VERSION_MINOR == 0
     *((void **)&view->private) = private_data;
 #else
     view->private_data = (void *)private_data;
 #endif
-
-    gst_audio_info_free(audio_info);
 
     return true;
 }
