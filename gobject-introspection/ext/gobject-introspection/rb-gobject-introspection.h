@@ -24,7 +24,11 @@
 #include <ruby.h>
 #include <rbgobject.h>
 
-#include <girepository.h>
+#ifdef HAVE_GIREPOSITORY_2_0
+#  include <girepository/girepository.h>
+#else
+#  include <girepository.h>
+#endif
 
 typedef gpointer (*RBGICallbackFinderFunc)(GIArgInfo *info);
 

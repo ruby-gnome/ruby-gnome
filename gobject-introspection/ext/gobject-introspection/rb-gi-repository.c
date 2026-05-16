@@ -29,6 +29,18 @@
 #define RG_TARGET_NAMESPACE rb_cGIRepository
 #define SELF(self) RVAL2GI_REPOSITORY(self)
 
+#ifdef HAVE_GIREPOSITORY_2_0
+GIRepository *
+rb_gi_get_repository(void)
+{
+    static GIRepository *repository = NULL;
+    if (!repository) {
+        repository = gi_repository_new();
+    }
+    return repository;
+}
+#endif
+
 
 /* Returns the singleton process-global default
  * GObjectIntrospection::Repository. It is not currently supported to have
@@ -56,7 +68,17 @@ rg_s_prepend_search_path(VALUE klass, VALUE rb_path)
 static VALUE
 rg_s_search_path(G_GNUC_UNUSED VALUE klass)
 {
+#ifdef HAVE_GIREPOSITORY_2_0
+    gsize n = 0;
+    const char * const *paths = gi_repository_get_search_path(rb_gi_get_repository(), &n);
+    VALUE rb_paths = rb_ary_new();
+    for (gsize i = 0; i < n; i++) {
+        rb_ary_push(rb_paths, rb_str_new_cstr(paths[i]));
+    }
+    return rb_paths;
+#else
     return FILENAMEGSLIST2RVAL(g_irepository_get_search_path());
+#endif
 }
 
 

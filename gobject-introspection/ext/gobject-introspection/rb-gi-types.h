@@ -21,6 +21,49 @@
 #ifndef RB_GI_TYPES_H
 #define RB_GI_TYPES_H
 
+#ifdef HAVE_GIREPOSITORY_2_0
+
+/*
+ * In girepository-2.0, the gi_*_get_type() functions are provided by the
+ * library and return GTypeInstance-based (not GBoxed) types.  We cannot use
+ * those with BOXED2RVAL/RVAL2BOXED, so we register our own GBoxed wrappers
+ * with "RbGI" prefixed type names.  rb-gi-compat.h then overrides the
+ * GI_TYPE_*_INFO macros to point to these wrappers.
+ */
+
+GType rb_gi_base_info_get_type          (void);
+GType rb_gi_callable_info_get_type      (void);
+GType rb_gi_function_info_get_type      (void);
+GType rb_gi_method_info_get_type        (void);
+GType rb_gi_constructor_info_get_type   (void);
+GType rb_gi_callback_info_get_type      (void);
+GType rb_gi_registered_type_info_get_type (void);
+GType rb_gi_struct_info_get_type        (void);
+GType rb_gi_boxed_info_get_type         (void);
+GType rb_gi_enum_info_get_type          (void);
+GType rb_gi_flags_info_get_type         (void);
+GType rb_gi_object_info_get_type        (void);
+GType rb_gi_interface_info_get_type     (void);
+GType rb_gi_constant_info_get_type      (void);
+GType rb_gi_union_info_get_type         (void);
+GType rb_gi_value_info_get_type         (void);
+GType rb_gi_signal_info_get_type        (void);
+GType rb_gi_vfunc_info_get_type         (void);
+GType rb_gi_property_info_get_type      (void);
+GType rb_gi_field_info_get_type         (void);
+GType rb_gi_arg_info_get_type           (void);
+GType rb_gi_type_info_get_type          (void);
+GType rb_gi_unresolved_info_get_type    (void);
+
+#else /* !HAVE_GIREPOSITORY_2_0 */
+
+/*
+ * In gobject-introspection-1.0, these types are not provided by the library;
+ * we register our own GBoxed wrappers.  The function names match the macro
+ * names used in GI_TYPE_*_INFO, which in v1 also come from the system headers
+ * (gibaseinfo.h etc.) so we only declare what isn't already defined there.
+ */
+
 #define GI_TYPE_CALLABLE_INFO        (gi_callable_info_get_type())
 #define GI_TYPE_FUNCTION_INFO        (gi_function_info_get_type())
 #define GI_TYPE_METHOD_INFO          (gi_method_info_get_type())
@@ -67,5 +110,6 @@ GType gi_arg_info_get_type             (void);
 GType gi_type_info_get_type            (void);
 GType gi_unresolved_info_get_type      (void);
 
+#endif /* HAVE_GIREPOSITORY_2_0 */
 
-#endif
+#endif /* RB_GI_TYPES_H */

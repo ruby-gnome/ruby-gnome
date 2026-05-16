@@ -23,6 +23,7 @@
 #define RG_TARGET_NAMESPACE rb_cGITypeInfo
 #define SELF(self) (RVAL2GI_TYPE_INFO(self))
 
+#ifndef HAVE_GIREPOSITORY_2_0
 GType
 gi_type_info_get_type(void)
 {
@@ -34,6 +35,19 @@ gi_type_info_get_type(void)
     }
     return type;
 }
+#else
+GType
+rb_gi_type_info_get_type(void)
+{
+    static GType type = 0;
+    if (type == 0) {
+        type = g_boxed_type_register_static("RbGITypeInfo",
+                                            (GBoxedCopyFunc)gi_base_info_ref,
+                                            (GBoxedFreeFunc)gi_base_info_unref);
+    }
+    return type;
+}
+#endif
 
 static VALUE
 rg_pointer_p(VALUE self)

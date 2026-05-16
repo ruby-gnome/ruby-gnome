@@ -23,17 +23,31 @@
 #define RG_TARGET_NAMESPACE rb_cGIStructInfo
 #define SELF(self) (RVAL2GI_STRUCT_INFO(self))
 
+#ifndef HAVE_GIREPOSITORY_2_0
 GType
 gi_struct_info_get_type(void)
 {
     static GType type = 0;
     if (type == 0) {
-        type = g_boxed_type_register_static("GIStructInfo",
+	type = g_boxed_type_register_static("GIStructInfo",
                                             (GBoxedCopyFunc)g_base_info_ref,
                                             (GBoxedFreeFunc)g_base_info_unref);
     }
     return type;
 }
+#else
+GType
+rb_gi_struct_info_get_type(void)
+{
+    static GType type = 0;
+    if (type == 0) {
+        type = g_boxed_type_register_static("RbGIStructInfo",
+                                            (GBoxedCopyFunc)gi_base_info_ref,
+                                            (GBoxedFreeFunc)gi_base_info_unref);
+    }
+    return type;
+}
+#endif
 
 typedef struct {
     gpointer instance;

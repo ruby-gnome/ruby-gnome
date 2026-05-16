@@ -23,17 +23,31 @@
 #define RG_TARGET_NAMESPACE rb_cGIConstructorInfo
 #define SELF(self) RVAL2GI_FUNCTION_INFO(self)
 
+#ifndef HAVE_GIREPOSITORY_2_0
 GType
 gi_constructor_info_get_type(void)
 {
     static GType type = 0;
     if (type == 0) {
-        type = g_boxed_type_register_static("GIConstructorInfo",
+	type = g_boxed_type_register_static("GIConstructorInfo",
                                             (GBoxedCopyFunc)g_base_info_ref,
                                             (GBoxedFreeFunc)g_base_info_unref);
     }
     return type;
 }
+#else
+GType
+rb_gi_constructor_info_get_type(void)
+{
+    static GType type = 0;
+    if (type == 0) {
+        type = g_boxed_type_register_static("RbGIConstructorInfo",
+                                            (GBoxedCopyFunc)gi_base_info_ref,
+                                            (GBoxedFreeFunc)gi_base_info_unref);
+    }
+    return type;
+}
+#endif
 
 static void
 initialize_receiver(VALUE receiver,

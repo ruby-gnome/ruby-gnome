@@ -25,7 +25,12 @@
 #include <rbglib2conversions.h>
 #include <glib-enum-types.h>
 
-#include <girffi.h>
+#ifdef HAVE_GIREPOSITORY_2_0
+#  include <girepository/girepository.h>
+#  include <girepository/girffi.h>
+#else
+#  include <girffi.h>
+#endif
 #include "gobject-introspection-enum-types.h"
 
 #ifndef GI_CHECK_VERSION
@@ -33,6 +38,7 @@
 #endif
 
 #include "rb-gi-types.h"
+#include "rb-gi-compat.h"
 #include "rb-gi-conversions.h"
 
 #include "rb-gobject-introspection.h"

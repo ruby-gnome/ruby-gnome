@@ -28,7 +28,6 @@ $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s) if mkmf_gnome2_dir.exist?
 
 
 module_name = "gobject_introspection"
-package_id = "gobject-introspection-1.0"
 
 require "mkmf-gnome"
 
@@ -39,15 +38,25 @@ require "mkmf-gnome"
                      top_build_dir: top_build_dir.to_s)
 end
 
+# Try new girepository-2.0 (GLib 2.80+) first, fall back to gobject-introspection-1.0
+have_girepository_2 = pkg_config("girepository-2.0")
+if have_girepository_2
+  package_id = "girepository-2.0"
+  $defs << "-DHAVE_GIREPOSITORY_2_0"
+else
+  package_id = "gobject-introspection-1.0"
+end
+
 unless required_pkg_config_package(package_id,
-                                   :alt_linux => "gobject-introspection-devel",
+                                   :alt_linux => have_girepository_2 ? "libglib2-devel" : "gobject-introspection-devel",
+                                   :alpine_linux => have_girepository_2 ? "glib-dev" : "gobject-introspection-dev",
                                    :conda => "gobject-introspection",
-                                   :debian => "libgirepository1.0-dev",
-                                   :redhat => "pkgconfig(gobject-introspection-1.0)",
+                                   :debian => have_girepository_2 ? "libgirepository-2.0-dev" : "libgirepository1.0-dev",
+                                   :redhat => "pkgconfig(#{package_id})",
                                    :homebrew => "gobject-introspection",
-                                   :arch_linux => "gobject-introspection",
+                                   :arch_linux => have_girepository_2 ? "glib2" : "gobject-introspection",
                                    :macports => "gobject-introspection",
-                                   :msys2 => "gobject-introspection")
+                                   :msys2 => have_girepository_2 ? "glib2" : "gobject-introspection")
   exit(false)
 end
 
@@ -57,9 +66,13 @@ make_version_header("GI", package_id, ".")
 enum_type_prefix = "gobject-introspection-enum-types"
 include_paths = PKGConfig.cflags_only_I(package_id)
 headers = include_paths.split.inject([]) do |result, path|
-  result + Dir.glob(File.join(path.sub(/^-I/, ""), "gi{repository,types}.h"))
+  base = path.sub(/^-I/, "")
+  result +
+    Dir.glob(File.join(base, "gi{repository,types}.h")) +
+    Dir.glob(File.join(base, "girepository", "gi{repository,types}.h"))
 end
-glib_mkenums(enum_type_prefix, headers, "G_TYPE_", ["girepository.h"])
+enum_include = have_girepository_2 ? "girepository/girepository.h" : "girepository.h"
+glib_mkenums(enum_type_prefix, headers, "G_TYPE_", [enum_include])
 
 create_pkg_config_file("Ruby/GObjectIntrospection",
                        package_id, ruby_gnome_version,
