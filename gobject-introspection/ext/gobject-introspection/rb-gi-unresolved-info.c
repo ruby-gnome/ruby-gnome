@@ -22,7 +22,6 @@
 
 #define RG_TUNRESOLVEDET_NAMESPACE rb_cGIUnresolvedInfo
 
-#ifndef HAVE_GIREPOSITORY_2_0
 GType
 gi_unresolved_info_get_type(void)
 {
@@ -34,19 +33,6 @@ gi_unresolved_info_get_type(void)
     }
     return type;
 }
-#else
-GType
-rb_gi_unresolved_info_get_type(void)
-{
-    static GType type = 0;
-    if (type == 0) {
-        type = g_boxed_type_register_static("RbGIUnresolvedInfo",
-                                            (GBoxedCopyFunc)gi_base_info_ref,
-                                            (GBoxedFreeFunc)gi_base_info_unref);
-    }
-    return type;
-}
-#endif
 
 void
 rb_gi_unresolved_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)

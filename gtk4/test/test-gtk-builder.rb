@@ -230,36 +230,6 @@ class TestGtkBuilder < Test::Unit::TestCase
     end
   end
 
-  sub_test_case("virtual_do_constructed") do
-    def test_constructed_via_builder
-      custom_box_class = Class.new(Gtk::Box) do
-        type_register("ConstructedViaBuilder")
-
-        attr_reader :was_constructed
-
-        def virtual_do_constructed
-          @was_constructed = true
-        end
-      end
-
-      xml = <<~XML
-        <?xml version="1.0" encoding="UTF-8"?>
-        <interface>
-          <object class="ConstructedViaBuilder" id="box">
-          </object>
-        </interface>
-      XML
-
-      builder = Gtk::Builder.new
-      builder.add(:string => xml)
-      obj = builder["box"]
-      assert_kind_of(custom_box_class, obj)
-      assert do
-        obj.was_constructed
-      end
-    end
-  end
-
   def test_get_type_from_name
     builder = Gtk::Builder.new
     assert_equal([

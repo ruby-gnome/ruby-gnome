@@ -242,13 +242,6 @@ rbgobj_get_ruby_object_from_gobject(GObject* gobj, gboolean alloc)
         obj = rbgobj_object_alloc_func(GTYPE2CLASS(G_OBJECT_TYPE(gobj)));
         gobj = g_object_ref(gobj);
         rbgobj_gobject_initialize(obj, (gpointer)gobj);
-        {
-            const RGObjClassInfo *cinfo =
-                rbgobj_class_info_lookup_by_gtype(G_OBJECT_TYPE(gobj));
-            if (cinfo && (cinfo->flags & RBGOBJ_DEFINED_BY_RUBY)) {
-                rb_funcall(obj, rb_intern("initialize_post"), 0);
-            }
-        }
         return obj;
     } else {
         return Qnil;

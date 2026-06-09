@@ -23,7 +23,6 @@
 #define RG_TARGET_NAMESPACE rb_cGICallbackInfo
 #define SELF(self) RVAL2GI_BASE_INFO(self)
 
-#ifndef HAVE_GIREPOSITORY_2_0
 GType
 gi_callback_info_get_type(void)
 {
@@ -35,19 +34,6 @@ gi_callback_info_get_type(void)
     }
     return type;
 }
-#else
-GType
-rb_gi_callback_info_get_type(void)
-{
-    static GType type = 0;
-    if (type == 0) {
-        type = g_boxed_type_register_static("RbGICallbackInfo",
-                                            (GBoxedCopyFunc)gi_base_info_ref,
-                                            (GBoxedFreeFunc)gi_base_info_unref);
-    }
-    return type;
-}
-#endif
 
 void
 rb_gi_callback_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)

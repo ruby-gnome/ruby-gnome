@@ -23,7 +23,6 @@
 #define RG_TARGET_NAMESPACE rb_cGIEnumInfo
 #define SELF(self) (RVAL2GI_ENUM_INFO(self))
 
-#ifndef HAVE_GIREPOSITORY_2_0
 GType
 gi_enum_info_get_type(void)
 {
@@ -35,19 +34,6 @@ gi_enum_info_get_type(void)
     }
     return type;
 }
-#else
-GType
-rb_gi_enum_info_get_type(void)
-{
-    static GType type = 0;
-    if (type == 0) {
-        type = g_boxed_type_register_static("RbGIEnumInfo",
-                                            (GBoxedCopyFunc)gi_base_info_ref,
-                                            (GBoxedFreeFunc)gi_base_info_unref);
-    }
-    return type;
-}
-#endif
 
 static VALUE
 rg_n_values(VALUE self)

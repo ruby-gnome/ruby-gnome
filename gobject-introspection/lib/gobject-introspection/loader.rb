@@ -48,7 +48,6 @@ module GObjectIntrospection
         end
         post_load(repository, namespace)
       end
-      setup_gobject_object_vfuncs(repository)
     end
 
     private
@@ -56,14 +55,6 @@ module GObjectIntrospection
     end
 
     def post_load(repository, namespace)
-    end
-
-    def setup_gobject_object_vfuncs(repository)
-      return if GLib::Object.respond_to?(:implement_virtual_function)
-      return unless repository.loaded_namespaces.include?("GObject")
-      info = repository.find("GObject", "Object")
-      return if info.nil?
-      load_virtual_functions(info, GLib::Object)
     end
 
     def load_info(info)
@@ -858,19 +849,6 @@ module GObjectIntrospection
       def implement(implementor_gtype, name)
         info = @infos[name]
         return false if info.nil?
-
-        case info.name
-        when "constructed"
-          # Fires during g_object_new() before the Ruby wrapper is associated;
-          # a C callback would create a conflicting wrapper. Use initialize_post
-          # instead, which runs after the wrapper is fully set up.
-          return implement_via_initialize_post(implementor_gtype, name)
-        when "dispose", "finalize"
-          # These fire during GC finalization when Ruby object allocation is
-          # forbidden, making a C-level callback unsafe.
-          return false
-        end
-
         container = info.container
         vtable_gtype = container.gtype
         if container.respond_to?(:class_struct)
@@ -898,21 +876,6 @@ module GObjectIntrospection
                                                  implementor_gtype,
                                                  vtable_gtype,
                                                  name.to_s)
-        true
-      end
-
-      private
-
-      def implement_via_initialize_post(implementor_gtype, name)
-        klass = implementor_gtype.to_class
-        method_sym = name
-        mod = Module.new do
-          define_method(:initialize_post) do
-            super()
-            __send__(method_sym)
-          end
-        end
-        Module.method(:prepend).unbind.bind_call(klass, mod)
         true
       end
     end

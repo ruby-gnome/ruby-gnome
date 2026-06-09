@@ -86,54 +86,6 @@ class TestLoaderInfo < Test::Unit::TestCase
         not immutable_menu.mutable?
       end
     end
-
-    def test_constructed
-      constructed_class = Class.new(Gio::Vfs) do
-        type_register("ConstructedVfs")
-
-        attr_reader :was_constructed
-
-        def virtual_do_constructed
-          @was_constructed = true
-        end
-      end
-      obj = constructed_class.new
-      assert do
-        obj.was_constructed
-      end
-    end
-
-    def test_constructed_on_gobject_subclass
-      constructed_class = Class.new(GLib::Object) do
-        type_register("ConstructedGObject")
-
-        attr_reader :was_constructed
-
-        def virtual_do_constructed
-          @was_constructed = true
-        end
-      end
-      obj = constructed_class.new
-      assert do
-        obj.was_constructed
-      end
-    end
-
-    def test_constructed_with_prefix
-      constructed_class = Class.new(Gio::Vfs) do
-        type_register("ConstructedVfsWithPrefix")
-
-        attr_reader :was_constructed
-
-        def virtual_do_gobject_constructed
-          @was_constructed = true
-        end
-      end
-      obj = constructed_class.new
-      assert do
-        obj.was_constructed
-      end
-    end
   end
 
   sub_test_case("#==") do

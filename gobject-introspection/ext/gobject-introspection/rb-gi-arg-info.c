@@ -81,7 +81,6 @@ rb_gi_arg_info_is_output_buffer(GIArgInfo *info)
     return element_type_tag == GI_TYPE_TAG_UINT8;
 }
 
-#ifndef HAVE_GIREPOSITORY_2_0
 GType
 gi_arg_info_get_type(void)
 {
@@ -93,19 +92,6 @@ gi_arg_info_get_type(void)
     }
     return type;
 }
-#else
-GType
-rb_gi_arg_info_get_type(void)
-{
-    static GType type = 0;
-    if (type == 0) {
-        type = g_boxed_type_register_static("RbGIArgInfo",
-                                            (GBoxedCopyFunc)gi_base_info_ref,
-                                            (GBoxedFreeFunc)gi_base_info_unref);
-    }
-    return type;
-}
-#endif
 
 static VALUE
 rg_direction(VALUE self)

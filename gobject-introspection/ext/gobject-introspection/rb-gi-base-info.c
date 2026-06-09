@@ -198,53 +198,6 @@ rg_each(VALUE self)
     return Qnil;
 }
 
-#ifdef HAVE_GIREPOSITORY_2_0
-GType
-rb_gi_base_info_get_type(void)
-{
-    static GType type = 0;
-    if (type == 0) {
-        type = g_boxed_type_register_static("RbGIBaseInfo",
-                                            (GBoxedCopyFunc)gi_base_info_ref,
-                                            (GBoxedFreeFunc)gi_base_info_unref);
-    }
-    return type;
-}
-
-GType
-rb_gi_info_type_get_gtype(void)
-{
-    static GType type = 0;
-    if (type == 0) {
-        static const GEnumValue values[] = {
-            { GI_INFO_TYPE_INVALID,    "GI_INFO_TYPE_INVALID",    "invalid"   },
-            { GI_INFO_TYPE_FUNCTION,   "GI_INFO_TYPE_FUNCTION",   "function"  },
-            { GI_INFO_TYPE_CALLBACK,   "GI_INFO_TYPE_CALLBACK",   "callback"  },
-            { GI_INFO_TYPE_STRUCT,     "GI_INFO_TYPE_STRUCT",     "struct"    },
-            { GI_INFO_TYPE_BOXED,      "GI_INFO_TYPE_BOXED",      "boxed"     },
-            { GI_INFO_TYPE_ENUM,       "GI_INFO_TYPE_ENUM",       "enum"      },
-            { GI_INFO_TYPE_FLAGS,      "GI_INFO_TYPE_FLAGS",      "flags"     },
-            { GI_INFO_TYPE_OBJECT,     "GI_INFO_TYPE_OBJECT",     "object"    },
-            { GI_INFO_TYPE_INTERFACE,  "GI_INFO_TYPE_INTERFACE",  "interface" },
-            { GI_INFO_TYPE_CONSTANT,   "GI_INFO_TYPE_CONSTANT",   "constant"  },
-            { GI_INFO_TYPE_INVALID_0,  "GI_INFO_TYPE_INVALID_0",  "invalid-0" },
-            { GI_INFO_TYPE_UNION,      "GI_INFO_TYPE_UNION",      "union"     },
-            { GI_INFO_TYPE_VALUE,      "GI_INFO_TYPE_VALUE",      "value"     },
-            { GI_INFO_TYPE_SIGNAL,     "GI_INFO_TYPE_SIGNAL",     "signal"    },
-            { GI_INFO_TYPE_VFUNC,      "GI_INFO_TYPE_VFUNC",      "vfunc"     },
-            { GI_INFO_TYPE_PROPERTY,   "GI_INFO_TYPE_PROPERTY",   "property"  },
-            { GI_INFO_TYPE_FIELD,      "GI_INFO_TYPE_FIELD",      "field"     },
-            { GI_INFO_TYPE_ARG,        "GI_INFO_TYPE_ARG",        "arg"       },
-            { GI_INFO_TYPE_TYPE,       "GI_INFO_TYPE_TYPE",       "type"      },
-            { GI_INFO_TYPE_UNRESOLVED, "GI_INFO_TYPE_UNRESOLVED", "unresolved"},
-            { 0, NULL, NULL }
-        };
-        type = g_enum_register_static("GIInfoType", values);
-    }
-    return type;
-}
-#endif
-
 void
 rb_gi_base_info_init(VALUE rb_mGI)
 {

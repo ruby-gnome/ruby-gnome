@@ -25,31 +25,17 @@
 
 static VALUE RG_TARGET_NAMESPACE;
 
-#ifndef HAVE_GIREPOSITORY_2_0
 GType
 gi_function_info_get_type(void)
 {
     static GType type = 0;
     if (type == 0) {
-	type = g_boxed_type_register_static("GIFunctionInfo",
+        type = g_boxed_type_register_static("GIFunctionInfo",
                                             (GBoxedCopyFunc)g_base_info_ref,
                                             (GBoxedFreeFunc)g_base_info_unref);
     }
     return type;
 }
-#else
-GType
-rb_gi_function_info_get_type(void)
-{
-    static GType type = 0;
-    if (type == 0) {
-        type = g_boxed_type_register_static("RbGIFunctionInfo",
-                                            (GBoxedCopyFunc)gi_base_info_ref,
-                                            (GBoxedFreeFunc)gi_base_info_unref);
-    }
-    return type;
-}
-#endif
 
 static VALUE
 rg_symbol(VALUE self)
