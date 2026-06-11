@@ -287,6 +287,29 @@ class TestRegex < Test::Unit::TestCase
         end
         assert_equal(" to 3 2 1", modified_string)
       end
+
+      # Regression test: the value carried by `break` must be read back
+      # correctly from the throw data inside the C replace callback. A stale
+      # copy of MRI's internal vm_throw_data layout used to read it at the
+      # wrong offset, yielding a garbage VALUE instead of this string. Using a
+      # long, freshly-allocated (non-literal) replacement makes an accidental
+      # match against garbage effectively impossible.
+      test "break returns a dynamically built value" do
+        regex = GLib::Regex.new("\\d")
+        replacement = "X" * 50
+        modified_string = regex.replace("a1b2c3") do |match_info|
+          break replacement
+        end
+        assert_equal("a#{replacement}b2c3", modified_string)
+      end
+
+      test "break value can be derived from the match" do
+        regex = GLib::Regex.new("[0-9]+")
+        modified_string = regex.replace("foo 12 bar 34") do |match_info|
+          break "<#{match_info.fetch(0)}>"
+        end
+        assert_equal("foo <12> bar 34", modified_string)
+      end
     end
   end
 

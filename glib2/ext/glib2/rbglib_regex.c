@@ -19,16 +19,30 @@
 
 #include "rbgprivate.h"
 
+#include <ruby/version.h> /* for RUBY_API_VERSION_CODE (vm_throw_data layout) */
+
 /* They MRI are internal definitions. Using them reduces
  * maintainability. We should reconsider about using them when they
  * are changed in MRI. */
 /* from vm_core.h */
 #define RUBY_TAG_BREAK 0x2
 
-/* from internal.h */
+/* from internal/imemo.h
+ *
+ * WARNING: This mirrors a private MRI struct so we can read the value
+ * carried by a `break` out of a throw_data (rb_errinfo() after rb_protect
+ * catches RUBY_TAG_BREAK). Its layout MUST be kept in sync with MRI.
+ *
+ * The `reserved` field (an unused IMEMO header slot) was removed in Ruby
+ * 4.1 by commit ff55280320 ("Remove useless reserved field in
+ * vm_throw_data"). With the field present on 4.1+, `throw_obj` is read at
+ * the wrong offset and resolves to `catch_frame` (a VM stack pointer),
+ * which the GC then treats as a garbage object. */
 struct vm_throw_data {
     VALUE flags;
+#if RUBY_API_VERSION_CODE < 40100
     VALUE reserved;
+#endif
     const VALUE throw_obj;
     /* const struct rb_control_frame_struct *catch_frame; */
     /* VALUE throw_state; */
