@@ -132,7 +132,6 @@ typedef struct {
     RGFreeFunc free;
     int flags; /* RGObjClassFlag */
     gchar *name;
-    rb_data_type_t *data_type;
 } RGObjClassInfo;
 
 /* rbgobject.c */
