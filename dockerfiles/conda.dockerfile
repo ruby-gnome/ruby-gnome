@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3
+FROM anaconda/miniconda
 
 RUN \
   echo "debconf debconf/frontend select Noninteractive" | \
@@ -12,6 +12,8 @@ RUN \
 
 COPY environment.yml /
 RUN \
+  conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main && \
+  conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r && \
   conda env create && \
   echo "conda activate ruby-gnome" >> ~/.bashrc
 
