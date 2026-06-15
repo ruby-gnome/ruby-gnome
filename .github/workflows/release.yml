@@ -40,7 +40,7 @@ jobs:
       - name: Build gems
         run: |
           rake gem:build
-      - uses: rubygems/configure-rubygems-credentials@v2.0.0
+      - uses: rubygems/configure-rubygems-credentials@v2.1.0
       - name: Push gems
         run: |
           rake gem:push
