@@ -136,7 +136,7 @@ rg_inspect(VALUE self)
 {
     GParamSpec *pspec = rbgobj_get_param_spec(self);
 
-    return rb_sprintf("#<%" PRIsVALUE "%" PRIsVALUE "#%s",
+    return rb_sprintf("#<%" PRIsVALUE "%" PRIsVALUE "#%s>",
                       CLASS_OF(self),
                       GTYPE2CLASS(pspec->owner_type),
                       g_param_spec_get_name(pspec));
