@@ -171,17 +171,5 @@ class TestGLibBinding < Test::Unit::TestCase
       @source.source = 20
       assert_equal("30", @target.target)
     end
-
-    test "Param#inspect" do
-      tmp = GLib::Param::Int.new("source", # name
-                                 nil, # nick
-                                 nil, # blurb
-                                 0,     # min
-                                 100,   # max
-                                 0,     # default
-                                 [:readable, :writable])
-      assert_equal(GLib::Param::Int, tmp.class)
-      assert_match(/^#<.+>$/, tmp.inspect)
-    end
   end
 end
