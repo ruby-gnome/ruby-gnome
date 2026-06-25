@@ -280,10 +280,26 @@ class TestRegex < Test::Unit::TestCase
         assert_equal(" to to to to", modified_string)
       end
 
-      test "break" do
+      test "nil" do
         regex = GLib::Regex.new("1|2|3|4")
         modified_string = regex.replace(" 4 3 2 1") do |match_info|
-          break "to"
+          if match_info.fetch(0) == "4"
+            "to"
+          else
+            nil
+          end
+        end
+        assert_equal(" to 3 2 1", modified_string)
+      end
+
+      test "false" do
+        regex = GLib::Regex.new("1|2|3|4")
+        modified_string = regex.replace(" 4 3 2 1") do |match_info|
+          if match_info.fetch(0) == "4"
+            "to"
+          else
+            false
+          end
         end
         assert_equal(" to 3 2 1", modified_string)
       end
