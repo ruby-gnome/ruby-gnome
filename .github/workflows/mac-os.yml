@@ -116,6 +116,10 @@ jobs:
       - name: Test GLib
         shell: bash
         run: |
+          sed \
+            -i.bak \
+            -e 's,test/run-test\.rb,test/run-test.rb -v,' \
+            arrow/ci/scripts/c_glib_test.sh
           arrow/ci/scripts/c_glib_test.sh $(pwd)/arrow $(pwd)/arrow/build
       - name: Test Ruby
         shell: bash
