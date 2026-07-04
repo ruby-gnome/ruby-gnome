@@ -22,9 +22,6 @@
 
 #define RG_TARGET_NAMESPACE rb_cGILoader
 
-static const gchar *boxed_class_converters_name = "@@boxed_class_converters";
-static const gchar *object_class_converters_name = "@@object_class_converters";
-
 static VALUE
 rg_s_define_class(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
 {
@@ -192,7 +189,6 @@ rg_s_implement_virtual_function(G_GNUC_UNUSED VALUE klass,
 
 typedef struct {
     GType type;
-    VALUE rb_converters;
     VALUE rb_converter;
 } BoxedInstance2RObjData;
 
@@ -200,7 +196,6 @@ static void
 boxed_class_converter_free(gpointer user_data)
 {
     BoxedInstance2RObjData *data = user_data;
-    rb_ary_delete(data->rb_converters, data->rb_converter);
     g_free(data);
 }
 
@@ -224,7 +219,6 @@ rg_s_register_boxed_class_converter(VALUE klass, VALUE rb_gtype)
 {
     RGConvertTable table;
     BoxedInstance2RObjData *data;
-    VALUE boxed_class_converters;
 
     memset(&table, 0, sizeof(RGConvertTable));
     table.type = rbgobj_gtype_from_ruby(rb_gtype);
@@ -234,8 +228,14 @@ rg_s_register_boxed_class_converter(VALUE klass, VALUE rb_gtype)
     data = g_new(BoxedInstance2RObjData, 1);
     data->type = table.type;
     data->rb_converter = rb_block_proc();
-    boxed_class_converters = rb_cv_get(klass, boxed_class_converters_name);
-    rb_ary_push(boxed_class_converters, data->rb_converter);
+    /* Pin the converter Proc as a permanent GC root. It was previously
+     * cached as a bare VALUE in this g_malloc'd struct, invisible to the
+     * GC: GC.compact could relocate the Proc without updating the cached
+     * pointer, leaving the next conversion to call rb_funcall on a
+     * dangling reference. These converters are process-lifetime singletons
+     * (a handful, registered once per GType), so pinning is the correct
+     * lifetime. */
+    rb_gc_register_mark_object(data->rb_converter);
     table.user_data = data;
     table.notify = boxed_class_converter_free;
 
@@ -246,7 +246,6 @@ rg_s_register_boxed_class_converter(VALUE klass, VALUE rb_gtype)
 
 typedef struct {
     GType type;
-    VALUE rb_converters;
     VALUE rb_converter;
 } ObjectInstance2RObjData;
 
@@ -254,7 +253,6 @@ static void
 object_class_converter_free(gpointer user_data)
 {
     ObjectInstance2RObjData *data = user_data;
-    rb_ary_delete(data->rb_converters, data->rb_converter);
     g_free(data);
 }
 
@@ -292,7 +290,6 @@ rg_s_register_object_class_converter(VALUE klass, VALUE rb_gtype)
 {
     RGConvertTable table;
     ObjectInstance2RObjData *data;
-    VALUE object_class_converters;
 
     memset(&table, 0, sizeof(RGConvertTable));
     table.type = rbgobj_gtype_from_ruby(rb_gtype);
@@ -302,8 +299,8 @@ rg_s_register_object_class_converter(VALUE klass, VALUE rb_gtype)
     data = g_new(ObjectInstance2RObjData, 1);
     data->type = table.type;
     data->rb_converter = rb_block_proc();
-    object_class_converters = rb_cv_get(klass, object_class_converters_name);
-    rb_ary_push(object_class_converters, data->rb_converter);
+    /* See rg_s_register_boxed_class_converter. */
+    rb_gc_register_mark_object(data->rb_converter);
     table.user_data = data;
     table.notify = object_class_converter_free;
 
@@ -376,9 +373,6 @@ rb_gi_loader_init(VALUE rb_mGI)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = rb_define_class_under(rb_mGI, "Loader", rb_cObject);
-
-    rb_cv_set(RG_TARGET_NAMESPACE, boxed_class_converters_name, rb_ary_new());
-    rb_cv_set(RG_TARGET_NAMESPACE, object_class_converters_name, rb_ary_new());
 
     RG_DEF_SMETHOD(define_class, -1);
     RG_DEF_SMETHOD(define_interface, 3);
