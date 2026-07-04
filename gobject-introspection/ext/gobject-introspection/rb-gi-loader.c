@@ -196,6 +196,7 @@ static void
 boxed_class_converter_free(gpointer user_data)
 {
     BoxedInstance2RObjData *data = user_data;
+    rb_gc_unregister_address(&data->rb_converter);
     g_free(data);
 }
 
@@ -228,14 +229,14 @@ rg_s_register_boxed_class_converter(VALUE klass, VALUE rb_gtype)
     data = g_new(BoxedInstance2RObjData, 1);
     data->type = table.type;
     data->rb_converter = rb_block_proc();
-    /* Pin the converter Proc as a permanent GC root. It was previously
-     * cached as a bare VALUE in this g_malloc'd struct, invisible to the
-     * GC: GC.compact could relocate the Proc without updating the cached
-     * pointer, leaving the next conversion to call rb_funcall on a
-     * dangling reference. These converters are process-lifetime singletons
-     * (a handful, registered once per GType), so pinning is the correct
-     * lifetime. */
-    rb_gc_register_mark_object(data->rb_converter);
+    /* Root the converter Proc via the address of its storage, tied to this
+     * entry's lifetime. It was previously cached as a bare VALUE in this
+     * g_malloc'd struct, invisible to the GC, so GC.compact could invalidate
+     * the cached reference and the next conversion would call rb_funcall on
+     * stale memory. rb_gc_register_address keeps the reference valid across
+     * GC and compaction; the matching rb_gc_unregister_address in the free
+     * callback releases the Proc when this converter entry is replaced. */
+    rb_gc_register_address(&data->rb_converter);
     table.user_data = data;
     table.notify = boxed_class_converter_free;
 
@@ -253,6 +254,7 @@ static void
 object_class_converter_free(gpointer user_data)
 {
     ObjectInstance2RObjData *data = user_data;
+    rb_gc_unregister_address(&data->rb_converter);
     g_free(data);
 }
 
@@ -300,7 +302,7 @@ rg_s_register_object_class_converter(VALUE klass, VALUE rb_gtype)
     data->type = table.type;
     data->rb_converter = rb_block_proc();
     /* See rg_s_register_boxed_class_converter. */
-    rb_gc_register_mark_object(data->rb_converter);
+    rb_gc_register_address(&data->rb_converter);
     table.user_data = data;
     table.notify = object_class_converter_free;
 
