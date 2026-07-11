@@ -17,11 +17,52 @@
 require "gst"
 
 module GStreamerTestUtils
+  AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER = 1024
+  AUDIO_TEST_SRC_RAMP = 1
+
   private
   def only_gstreamer_version(major, minor, micro=nil)
     micro ||= 0
     unless Gst::Version.or_later?(major, minor, micro)
       omit("Require GStreamer >= #{major}.#{minor}.#{micro}")
     end
+  end
+
+  def generate_samples(format: "F32LE", layout: "interleaved", rate: 16_000, channels: 1)
+    samples = []
+
+    pipeline = Gst::Pipeline.new("audio-generator")
+    src = Gst::ElementFactory.make("audiotestsrc", nil)
+    convert = Gst::ElementFactory.make("audioconvert", nil)
+    sink = Gst::ElementFactory.make("appsink", nil)
+
+    src.set_property("num-buffers", rate / AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER)
+
+    caps = Gst::Caps.new("audio/x-raw")
+    caps["format"] = format
+    caps["rate", :int] = rate
+    caps["channels", :int] = channels
+    caps["layout"] = layout
+
+    sink.caps = caps
+
+    pipeline << src << convert << sink
+    src >> convert >> sink
+
+    pipeline.play
+    begin
+      loop do
+        sample = sink.try_pull_sample(Gst::SECOND)
+        if sample
+          samples << sample
+        else
+          break
+        end
+      end
+    ensure
+      pipeline.stop
+    end
+
+    samples
   end
 end
