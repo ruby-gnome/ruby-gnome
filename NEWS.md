@@ -1,5 +1,66 @@
 # NEWS
 
+## Ruby-GNOME 4.3.7: 2026-07-13
+
+This is a Pango 1.58.0 support release.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Improvements
+    * `GLib::Regex#replace`: Stopped to use `break` to stop
+      replacement. Return `false` in block instead.
+      * [GH-1713](https://github.com/ruby-gnome/ruby-gnome/issues/1713)
+      * Patch by Randy Stauner.
+
+  * Fixes
+    * `GLib::Param#inspect`: Added missing close `>`
+      * [GH-1715](https://github.com/ruby-gnome/ruby-gnome/issues/1715)
+      * Patch by YAMAMOTO, Masayuki.
+
+#### Ruby/CairoGObject
+
+  * Improvements
+    * RHEL: Install `cairo-gobject-devel` explicitly with
+      rubygems-requirements-system.
+
+#### Ruby/Pango
+
+  * Improvements
+    * Added support for Pango 1.58.0.
+
+#### Ruby/GStreamer
+
+  * Improvements
+    * conda: Install `libxml2-devel` explicitly with
+      rubygems-requirements-system.
+
+    * `Gst::Buffer#map`, `Gst::Buffer#map_range`: Changed to raise an
+      exception from returning `success` boolean on failure for easy
+      to use. This is an incompatible change.
+      * [GH-1707](https://github.com/ruby-gnome/ruby-gnome/issues/1707)
+      * Patch by KITAITI Makoto.
+
+    * `Gst::Buffer#map`, `Gst::Buffer#map_range`: Accepted a block for
+      auto unmap.
+      * [GH-1708](https://github.com/ruby-gnome/ruby-gnome/issues/1708)
+      * Patch by KITAITI Makoto.
+
+    * `Gst::sample`: Added support for MemoryView.
+      auto unmap.
+      * [GH-1634](https://github.com/ruby-gnome/ruby-gnome/issues/1634)
+      * [GH-1704](https://github.com/ruby-gnome/ruby-gnome/issues/1704)
+      * Patch by KITAITI Makoto.
+
+### Thanks
+
+  * KITAITI Makoto
+
+  * YAMAMOTO, Masayuk
+
+  * Randy Stauner
+
 ## Ruby-GNOME 4.3.6: 2026-04-03
 
 This is a `super` support in virtual method release.
