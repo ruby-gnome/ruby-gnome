@@ -64,7 +64,6 @@ cmake \
   -DCMAKE_BUILD_TYPE=Debug \
   -DCMAKE_INSTALL_LIBDIR=lib \
   -DCMAKE_INSTALL_PREFIX=/usr \
-  -DProtobuf_SOURCE=BUNDLED \
   -S arrow/cpp \
   -B arrow.build/cpp
 ninja -C arrow.build/cpp
