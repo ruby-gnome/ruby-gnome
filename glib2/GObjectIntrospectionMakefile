@@ -1,0 +1,20 @@
+all:
+	(cd ext/gobject-introspection && $(MAKE))
+	$(MAKE) -f Makefile.lib
+
+install:
+	(cd ext/gobject-introspection && $(MAKE) install)
+	$(MAKE) -f Makefile.lib install
+
+site-install:
+	(cd ext/gobject-introspection && $(MAKE) site-install)
+	$(MAKE) -f Makefile.lib site-install
+
+clean:
+	(cd ext/gobject-introspection && $(MAKE) clean)
+	$(MAKE) -f Makefile.lib clean
+
+distclean:
+	(cd ext/gobject-introspection && $(MAKE) distclean)
+	$(MAKE) -f Makefile.lib distclean
+	@rm -f Makefile.lib

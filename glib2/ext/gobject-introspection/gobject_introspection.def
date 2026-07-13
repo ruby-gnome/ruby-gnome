@@ -1,0 +1,11 @@
+EXPORTS
+	Init_gobject_introspection
+
+	rb_gi_callback_data_free
+	rb_gi_callback_data_get_metadata
+	rb_gi_callback_data_get_rb_callback
+
+	rb_gi_callback_register_finder
+
+	rb_gi_struct_new_raw
+	rb_gi_struct_get_raw
