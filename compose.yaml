@@ -99,7 +99,7 @@ services:
       /ruby-gnome/dockerfiles/run-test.sh
 
   conda-base:
-    image: continuumio/miniconda3
+    image: anaconda/miniconda
 
   conda:
     image: ghcr.io/${GITHUB_REPOSITORY}:conda

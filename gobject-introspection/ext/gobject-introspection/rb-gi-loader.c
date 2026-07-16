@@ -234,8 +234,8 @@ rg_s_register_boxed_class_converter(VALUE klass, VALUE rb_gtype)
     data = g_new(BoxedInstance2RObjData, 1);
     data->type = table.type;
     data->rb_converter = rb_block_proc();
-    boxed_class_converters = rb_cv_get(klass, boxed_class_converters_name);
-    rb_ary_push(boxed_class_converters, data->rb_converter);
+    data->rb_converters = rb_cv_get(klass, boxed_class_converters_name);
+    rb_ary_push(data->rb_converters, data->rb_converter);
     table.user_data = data;
     table.notify = boxed_class_converter_free;
 
@@ -302,8 +302,8 @@ rg_s_register_object_class_converter(VALUE klass, VALUE rb_gtype)
     data = g_new(ObjectInstance2RObjData, 1);
     data->type = table.type;
     data->rb_converter = rb_block_proc();
-    object_class_converters = rb_cv_get(klass, object_class_converters_name);
-    rb_ary_push(object_class_converters, data->rb_converter);
+    data->rb_converters = rb_cv_get(klass, object_class_converters_name);
+    rb_ary_push(data->rb_converters, data->rb_converter);
     table.user_data = data;
     table.notify = object_class_converter_free;
 

@@ -47,8 +47,13 @@ RUN \
 USER devel
 WORKDIR /home/devel
 
+# Clutter:
+# * clutter-gst-dev isn't available since 3.24
+#
 # Gnumeric: Gnm-*.typelib isn't provided
-ENV RUBY_GNOME_GNUMERIC_ENABLE=no
+ENV \
+  RUBY_GNOME_CLUTTER_GSTREAMER_ENABLE=no \
+  RUBY_GNOME_GNUMERIC_ENABLE=no
 
 # TODO: Enable tests after we fix dbus-run-session's high CPU usage
 # problem.

@@ -18,6 +18,13 @@
 
 set -eux
 
+echo "::group::Prepare conda"
+if which ccache > /dev/null 2>&1; then
+  conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+  conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+fi
+echo "::endgroup::"
+
 echo "::group::Prepare build directory"
 rm -rf ruby-gnome.build
 mkdir -p ruby-gnome.build

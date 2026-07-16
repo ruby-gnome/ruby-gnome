@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2021  Ruby-GNOME Project Team
+# Copyright (C) 2017-2026  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -73,7 +73,7 @@ module PangoCairo
         # ignore
       when /\Acreate_(.+)\z/
         define_method(info, @cairo_context_methods_module, "create_pango_#{$1}")
-      when /\A(.+_path)\z/
+      when /\A(.+_path(?:_for_components)?)\z/
         define_method(info, @cairo_context_methods_module, "pango_#{$1}")
       when /\Ashow_(.+)\z/
         define_method(info, @cairo_context_methods_module, "show_pango_#{$1}")

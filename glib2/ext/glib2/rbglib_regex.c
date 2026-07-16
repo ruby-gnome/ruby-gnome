@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015-2021  Ruby-GNOME Project Team
+ *  Copyright (C) 2015-2026  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -18,24 +18,6 @@
  */
 
 #include "rbgprivate.h"
-
-/* They MRI are internal definitions. Using them reduces
- * maintainability. We should reconsider about using them when they
- * are changed in MRI. */
-/* from vm_core.h */
-#define RUBY_TAG_BREAK 0x2
-
-/* from internal.h */
-struct vm_throw_data {
-    VALUE flags;
-    VALUE reserved;
-    const VALUE throw_obj;
-    /* const struct rb_control_frame_struct *catch_frame; */
-    /* VALUE throw_state; */
-};
-/* from vm_insnhelper.h */
-#define THROW_DATA_VAL(obj) (((struct vm_throw_data *)(obj))->throw_obj)
-
 
 #define RG_TARGET_NAMESPACE cRegex
 #define _SELF(s) ((GRegex*)RVAL2BOXED(s, G_TYPE_REGEX))
@@ -301,26 +283,28 @@ rg_regex_eval_callback(const GMatchInfo *match_info,
 {
     VALUE returned_data;
     RGRegexEvalCallbackData *data = user_data;
+    gboolean stop = FALSE;
 
     data->match_info = match_info;
     returned_data = rb_protect(rg_regex_eval_callback_body,
                                (VALUE)data,
                                &(data->status));
 
-    if (data->status == RUBY_TAG_BREAK) {
-        returned_data = THROW_DATA_VAL(rb_errinfo());
-    }
-
-    if (NIL_P(returned_data)) {
-        gchar *matched;
-        matched = g_match_info_fetch(match_info, 0);
-        g_string_append(result, matched);
-        g_free(matched);
+    if (data->status == 0) {
+        if (RB_TEST(returned_data)) {
+            g_string_append(result, RVAL2CSTR(returned_data));
+        } else {
+            gchar *matched;
+            matched = g_match_info_fetch(match_info, 0);
+            g_string_append(result, matched);
+            g_free(matched);
+            stop = (returned_data == RUBY_Qfalse);
+        }
     } else {
-        g_string_append(result, RVAL2CSTR(returned_data));
+        stop = TRUE;
     }
 
-    return data->status != 0;
+    return stop;
 }
 
 static VALUE
@@ -369,7 +353,7 @@ rg_replace(gint argc, VALUE *argv, VALUE self)
                                                rg_regex_eval_callback,
                                                &data,
                                                &error);
-        if (!(data.status == 0 || data.status == RUBY_TAG_BREAK)) {
+        if (data.status != 0) {
             if (error)
                 g_error_free(error);
             g_free(modified_string);
