@@ -112,7 +112,7 @@
 <p>As the name implies, most labels are used to label another widget<br />
 such as a [class<!-- raw HTML omitted -->Button<!-- raw HTML omitted -->].</p>
 <p><img src="label.png" alt="An example GtkLabel" /></p>
-<h2><a href="#css-nodes" aria-hidden="true" class="anchor" id="css-nodes"></a>CSS nodes</h2>
+<h2 id="css-nodes">CSS nodes<a href="#css-nodes" aria-label="Link to heading 'CSS nodes'" data-heading-content="CSS nodes" class="anchor"></a></h2>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_label'>label</span>
 <span class='id identifier rubyid_├──'>├──</span> <span class='lbracket'>[</span><span class='id identifier rubyid_selection'>selection</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_├──'>├──</span> <span class='lbracket'>[</span><span class='id identifier rubyid_link'>link</span><span class='rbracket'>]</span>
@@ -127,7 +127,7 @@ of style classes may be applied to labels, such as .title, .subtitle,<br />
 <p>If the label has links, there is one subnode per link. These subnodes<br />
 carry the link or visited state depending on whether they have been<br />
 visited. In this case, label node also gets a .link style class.</p>
-<h2><a href="#gtklabel-as-gtkbuildable" aria-hidden="true" class="anchor" id="gtklabel-as-gtkbuildable"></a>GtkLabel as GtkBuildable</h2>
+<h2 id="gtklabel-as-gtkbuildable">GtkLabel as GtkBuildable<a href="#gtklabel-as-gtkbuildable" aria-label="Link to heading 'GtkLabel as GtkBuildable'" data-heading-content="GtkLabel as GtkBuildable" class="anchor"></a></h2>
 <p>The GtkLabel implementation of the GtkBuildable interface supports a<br />
 custom <code>&lt;attributes&gt;</code> element, which supports any number of <code>&lt;attribute&gt;</code><br />
 elements. The <code>&lt;attribute&gt;</code> element has attributes named “name“, “value“,<br />
@@ -146,9 +146,9 @@ Pango attribute applies. If start and end are not specified, the attribute is<br
 applied to the whole text. Note that specifying ranges does not make much<br />
 sense with translatable attributes. Use markup embedded in the translatable<br />
 content instead.</p>
-<h2><a href="#accessibility" aria-hidden="true" class="anchor" id="accessibility"></a>Accessibility</h2>
+<h2 id="accessibility">Accessibility<a href="#accessibility" aria-label="Link to heading 'Accessibility'" data-heading-content="Accessibility" class="anchor"></a></h2>
 <p><code>GtkLabel</code> uses the %GTK_ACCESSIBLE_ROLE_LABEL role.</p>
-<h2><a href="#mnemonics" aria-hidden="true" class="anchor" id="mnemonics"></a>Mnemonics</h2>
+<h2 id="mnemonics">Mnemonics<a href="#mnemonics" aria-label="Link to heading 'Mnemonics'" data-heading-content="Mnemonics" class="anchor"></a></h2>
 <p>Labels may contain “mnemonics”. Mnemonics are underlined characters in the<br />
 label, used for keyboard navigation. Mnemonics are created by providing a<br />
 string with an underscore before the mnemonic character, such as <code>&quot;_File&quot;</code>,<br />
@@ -177,7 +177,7 @@ GtkWidget *entry = gtk_entry_new ();
 GtkWidget *label = gtk_label_new_with_mnemonic (&quot;_Hello&quot;);
 gtk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
 </code></pre>
-<h2><a href="#markup-styled-text" aria-hidden="true" class="anchor" id="markup-styled-text"></a>Markup (styled text)</h2>
+<h2 id="markup-styled-text">Markup (styled text)<a href="#markup-styled-text" aria-label="Link to heading 'Markup (styled text)'" data-heading-content="Markup (styled text)" class="anchor"></a></h2>
 <p>To make it easy to format text in a label (changing colors,<br />
 fonts, etc.), label text can be provided in a simple<br />
 markup format:</p>
@@ -200,12 +200,12 @@ to the entire string (i.e. unless you set the range of each attribute<br />
 to [0, %G_MAXINT)). The reason is that specifying the start_index and<br />
 end_index for a [struct<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.Attribute] requires knowledge of the exact<br />
 string being displayed, so translations will cause problems.</p>
-<h2><a href="#selectable-labels" aria-hidden="true" class="anchor" id="selectable-labels"></a>Selectable labels</h2>
+<h2 id="selectable-labels">Selectable labels<a href="#selectable-labels" aria-label="Link to heading 'Selectable labels'" data-heading-content="Selectable labels" class="anchor"></a></h2>
 <p>Labels can be made selectable with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Label.set_selectable].<br />
 Selectable labels allow the user to copy the label contents to<br />
 the clipboard. Only labels that contain useful-to-copy information—such<br />
 as error messages—should be made selectable.</p>
-<h2><a href="#text-layout" aria-hidden="true" class="anchor" id="text-layout"></a>Text layout</h2>
+<h2 id="text-layout">Text layout<a href="#text-layout" aria-label="Link to heading 'Text layout'" data-heading-content="Text layout" class="anchor"></a></h2>
 <p>A label can contain any number of paragraphs, but will have<br />
 performance problems if it contains more than a small number.<br />
 Paragraphs are separated by newlines or other paragraph separators<br />
@@ -223,7 +223,7 @@ text size is used as the natural width of the label. For wrapping labels,<br />
 width-chars is used as the minimum width, if specified, and max-width-chars<br />
 is used as the natural width. Even if max-width-chars specified, wrapping<br />
 labels will be rewrapped to use all of the available width.</p>
-<h2><a href="#links" aria-hidden="true" class="anchor" id="links"></a>Links</h2>
+<h2 id="links">Links<a href="#links" aria-label="Link to heading 'Links'" data-heading-content="Links" class="anchor"></a></h2>
 <p>GTK supports markup for clickable hyperlinks in addition to regular Pango<br />
 markup. The markup for links is borrowed from HTML, using the <code>&lt;a&gt;</code> with<br />
 “href“, “title“ and “class“ attributes. GTK renders links similar to the<br />
@@ -4659,7 +4659,7 @@ labels size allocation is positioned in the space available for the label.</p>
       <div id="footer">
   Generated by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.44 (ruby-4.0.5).
+  0.9.45 (ruby-4.0.6).
 </div>
 
     </div>
