@@ -22,6 +22,7 @@ jobs:
           - ruby-3.2
           - ruby-3.3
           - ruby-3.4
+          - ruby-4.0
           - ubuntu-22.04
           - ubuntu-24.04
         include:
