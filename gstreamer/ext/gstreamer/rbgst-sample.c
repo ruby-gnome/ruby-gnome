@@ -309,6 +309,8 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
     view->ndim = 2;
     view->shape = shape;
     view->strides = strides;
+    view->item_desc.length = 0;
+    view->item_desc.components = NULL;
     view->sub_offsets = NULL;
 #if RUBY_API_VERSION_MAJOR == 3 && RUBY_API_VERSION_MINOR == 0
     *((void **)&view->private) = private_data;
