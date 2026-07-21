@@ -326,10 +326,12 @@ rg_gst_sample_get(VALUE obj, rb_memory_view_t *view, int flags)
 {
     GstSample *sample;
     GstCaps *caps;
+    bool is_row_major_requested;
     bool is_column_major_requested;
 
+    is_row_major_requested = flags & RUBY_MEMORY_VIEW_ROW_MAJOR;
     is_column_major_requested = flags & RUBY_MEMORY_VIEW_COLUMN_MAJOR;
-    if (is_column_major_requested) {
+    if (is_column_major_requested && !is_row_major_requested) {
         // TODO: column-major support
         rb_warn("Gst::Sample: currently column-major is not supported");
 
