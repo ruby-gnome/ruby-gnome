@@ -14,34 +14,34 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestGLibVersion < Test::Unit::TestCase
-  include GLibTestUtils
+class TestGObjectIntrospectionVersion < Test::Unit::TestCase
+  include GObjectIntrospectionTestUtils
 
   test "STRING" do
-    major = GLib::Version::MAJOR
-    minor = GLib::Version::MINOR
-    micro = GLib::Version::MICRO
+    major = GObjectIntrospection::Version::MAJOR
+    minor = GObjectIntrospection::Version::MINOR
+    micro = GObjectIntrospection::Version::MICRO
     assert_equal([major, minor, micro].join("."),
-                 GLib::Version::STRING)
+                 GObjectIntrospection::Version::STRING)
   end
 
   sub_test_case("#or_later?") do
     test "same" do
-      assert_true(GLib::Version.or_later?(GLib::Version::MAJOR,
-                                          GLib::Version::MINOR,
-                                          GLib::Version::MICRO))
+      assert_true(GObjectIntrospection::Version.or_later?(GObjectIntrospection::Version::MAJOR,
+                                                          GObjectIntrospection::Version::MINOR,
+                                                          GObjectIntrospection::Version::MICRO))
     end
 
     test "later" do
-      assert_true(GLib::Version.or_later?(GLib::Version::MAJOR,
-                                          GLib::Version::MINOR - 1,
-                                          GLib::Version::MICRO))
+      assert_true(GObjectIntrospection::Version.or_later?(GObjectIntrospection::Version::MAJOR,
+                                                          GObjectIntrospection::Version::MINOR - 1,
+                                                          GObjectIntrospection::Version::MICRO))
     end
 
     test "earlier" do
-      assert_false(GLib::Version.or_later?(GLib::Version::MAJOR,
-                                           GLib::Version::MINOR + 1,
-                                           GLib::Version::MICRO))
+      assert_false(GObjectIntrospection::Version.or_later?(GObjectIntrospection::Version::MAJOR,
+                                                           GObjectIntrospection::Version::MINOR + 1,
+                                                           GObjectIntrospection::Version::MICRO))
     end
   end
 end

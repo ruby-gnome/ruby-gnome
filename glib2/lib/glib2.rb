@@ -120,6 +120,19 @@ module GLib
   SIGNAL_HANDLER_PREFIX = "signal_do_"
   VIRTUAL_FUNCTION_IMPLEMENTATION_PREFIX = "virtual_do_"
 
+  class << self
+    def prepend_typelib_path(path)
+      path = Pathname(path) unless path.is_a?(Pathname)
+      return unless path.exist?
+
+      dir = path.to_s
+      dir = dir.gsub("/", File::ALT_SEPARATOR) if File::ALT_SEPARATOR
+      return if Repository.search_path.include?(dir)
+
+      Repository.prepend_search_path(dir)
+    end
+  end
+
   module MetaSignal
     class << self
       def signal_callback(klass, name)
@@ -344,6 +357,20 @@ require "glib2/time-zone"
 require "glib2/value"
 require "glib2/variant"
 require "glib2/variant-type"
+require "glib2/arg-info"
+require "glib2/boxed-info"
+require "glib2/callable-info"
+require "glib2/function-info"
+require "glib2/interface-info"
+require "glib2/object-info"
+require "glib2/registered-type-info"
+require "glib2/repository"
+require "glib2/struct-info"
+require "glib2/type-info"
+require "glib2/type-tag"
+require "glib2/union-info"
+
+require "glib2/loader"
 
 =begin
 Don't we need this?

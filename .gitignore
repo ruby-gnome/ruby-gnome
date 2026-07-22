@@ -49,3 +49,5 @@
 /poppler/test/tmp/
 /tmp/
 /yard_docs/
+/*/.cache/*
+compile_commands.json

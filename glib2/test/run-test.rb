@@ -55,6 +55,7 @@ def run_test(test_dir, dependencies)
     end
   end
 
+  require_relative "gobject-introspection-test-utils"
   require_relative "glib-test-utils"
 
   if block_given?
@@ -68,19 +69,5 @@ def run_test(test_dir, dependencies)
 end
 
 if $PROGRAM_NAME == __FILE__
-  run_test(__dir__, ["glib2", "gobject-introspection"]) do
-    require_relative "./gobject-introspection/gobject-introspection-test-utils"
-
-    begin
-      repository = GObjectIntrospection::Repository.default
-      repository.require("Gio")
-    rescue GObjectIntrospection::RepositoryError
-      puts("Omit because typelib file doesn't exist: #{$!.message}")
-      exit(true)
-    end
-
-    # module Gio
-    #   GObjectIntrospection::Loader.load("Gio", self)
-    # end
-  end
+  run_test(__dir__, ["glib2"])
 end
