@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.homepage      = "https://ruby-gnome.github.io/"
   s.licenses      = ["LGPL-2.1-or-later"]
   s.version       = ruby_glib2_version
-  s.extensions    = ["ext/#{s.name}/extconf.rb", "ext/gobject-introspection/extconf.rb"]
+  s.extensions    = ["ext/#{s.name}/extconf.rb"]
   s.require_paths = ["lib"]
   s.files = [
     "COPYING.LIB",
@@ -41,11 +41,9 @@ Gem::Specification.new do |s|
     "extconf.rb",
     "version.rb",
     "ext/#{s.name}/depend",
-    "ext/gobject-introspection/depend",
   ]
   s.files += Dir.glob("lib/**/*.rb")
   s.files += Dir.glob("ext/#{s.name}/*.{c,h,def,rb}")
-  s.files += Dir.glob("ext/gobject-introspection/*.{c,h,def,rb}")
   s.files += Dir.glob("sample/**/*")
   s.files += Dir.glob("test/**/*")
 
@@ -67,20 +65,6 @@ Gem::Specification.new do |s|
   ].each do |platform, package|
     s.requirements << "system: gobject-2.0>=2.56.0: #{platform}: #{package}"
   end
-
-  # [
-  #   ["alpine_linux", "gobject-introspection-dev"],
-  #   ["alt_linux", "gobject-introspection-devel"],
-  #   ["arch_linux", "gobject-introspection"],
-  #   ["conda", "gobject-introspection"],
-  #   ["debian", "libgirepository1.0-dev"],
-  #   ["homebrew", "gobject-introspection"],
-  #   ["macports", "gobject-introspection"],
-  #   ["msys2", "gobject-introspection"],
-  #   ["rhel", "pkgconfig(gobject-introspection-1.0)"],
-  # ].each do |platform, package|
-  #   s.requirements << "system: gobject-introspection-1.0: #{platform}: #{package}"
-  # end
 
   [
     ["debian", "libgirepository2.0-dev"]
