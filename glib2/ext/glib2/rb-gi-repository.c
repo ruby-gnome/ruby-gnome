@@ -72,12 +72,12 @@ rg_search_path(VALUE self)
 {
     GIRepository *repository;
     const char* const* paths;
-    size_t *n_paths_out = NULL;
+    size_t n_paths_out = 0;
     VALUE rb_ary;
 
     repository = SELF(self);
-    paths = gi_repository_get_search_path(repository, n_paths_out);
-    rb_ary = c_array_to_ruby_array(paths, *n_paths_out);
+    paths = gi_repository_get_search_path(repository, &n_paths_out);
+    rb_ary = c_array_to_ruby_array(paths, n_paths_out);
 
     return rb_ary;
 }
@@ -217,7 +217,7 @@ rg_get_info(VALUE self, VALUE rb_namespace, VALUE rb_n)
     namespace_ = RVAL2CSTR(rb_namespace);
     n = NUM2INT(rb_n);
     info = gi_repository_get_info(repository, namespace_, n);
-    return GI_BASE_INFO2RVAL_WITH_UNREF(info);
+    return GI_BASE_INFO2RVAL(info);
 }
 
 

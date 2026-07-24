@@ -24,10 +24,10 @@ class TestRepository < Test::Unit::TestCase
   end
 
   def test_search_path
-    path = GLib::GObjectIntrospection::Repository.search_path
-    GLib::GObjectIntrospection::Repository.prepend_search_path(__dir__)
+    path = @repository.search_path
+    @repository.prepend_search_path(__dir__)
     assert_equal([__dir__] + path,
-                 GLib::GObjectIntrospection::Repository.search_path)
+                 @repository.search_path)
   end
 
   def test_get_n_infos
@@ -46,7 +46,7 @@ class TestRepository < Test::Unit::TestCase
   end
 
   def test_loaded_namespaces
-    assert_equal(["GLib", "GObject", "Gio"].sort,
+    assert_equal(["GLib", "GObject", "Gio", "GioUnix"].sort,
                  # Gio 2.79.0 or later depend on GModule too
                  @repository.loaded_namespaces.sort - ["GModule"])
   end
@@ -55,7 +55,7 @@ class TestRepository < Test::Unit::TestCase
     namespaces = @repository.collect do |info|
       info.namespace
     end
-    assert_equal(["GLib", "GObject", "Gio"].sort,
+    assert_equal(["GLib", "GObject", "Gio", "GioUnix"].sort,
                  # Gio 2.79.0 or later depend on GModule too
                  namespaces.uniq.sort - ["GModule"])
   end

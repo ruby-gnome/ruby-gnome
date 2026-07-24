@@ -30,62 +30,6 @@
 VALUE
 rb_gi_base_info_to_ruby(GIBaseInfo *info)
 {
-    GType g_type;
-
-    if (!info) {
-	   return Qnil;
-    }
-
-    if (GI_IS_FUNCTION_INFO(info)) {
-        GIFunctionInfoFlags flags;
-
-        flags = gi_function_info_get_flags((GIFunctionInfo *)info);
-        if (flags & GI_FUNCTION_IS_METHOD) {
-            g_type = GI_TYPE_METHOD_INFO;
-        } else if (flags & GI_FUNCTION_IS_CONSTRUCTOR) {
-            g_type = GI_TYPE_CONSTRUCTOR_INFO;
-        } else {
-            g_type = GI_TYPE_FUNCTION_INFO;
-        }
-
-    } else if (GI_IS_CALLBACK_INFO(info)) {
-        g_type = GI_TYPE_CALLBACK_INFO;
-    } else if (GI_IS_STRUCT_INFO(info)) {
-        g_type = GI_TYPE_STRUCT_INFO;
-    } else if (GI_IS_REGISTERED_TYPE_INFO(info) && gi_registered_type_info_is_boxed(GI_REGISTERED_TYPE_INFO(info))) {
-        g_type = GI_TYPE_BOXED_INFO;
-    } else if (GI_IS_ENUM_INFO(info)) {
-        g_type = GI_TYPE_ENUM_INFO;
-    } else if (GI_IS_FLAGS_INFO(info)) {
-        g_type = GI_TYPE_FLAGS_INFO;
-    } else if (GI_IS_OBJECT_INFO(info)) {
-        g_type = GI_TYPE_OBJECT_INFO;
-    } else if (GI_IS_INTERFACE_INFO(info)) {
-        g_type = GI_TYPE_INTERFACE_INFO;
-    } else if (GI_IS_CONSTANT_INFO(info)) {
-        g_type = GI_TYPE_CONSTANT_INFO;
-    } else if (GI_IS_UNION_INFO(info)) {
-        g_type = GI_TYPE_UNION_INFO;
-    } else if (GI_IS_VALUE_INFO(info)) {
-        g_type = GI_TYPE_VALUE_INFO;
-    } else if (GI_IS_SIGNAL_INFO(info)) {
-        g_type = GI_TYPE_SIGNAL_INFO;
-    } else if (GI_IS_VFUNC_INFO(info)) {
-        g_type = GI_TYPE_VFUNC_INFO;
-    } else if (GI_IS_PROPERTY_INFO(info)) {
-        g_type = GI_TYPE_PROPERTY_INFO;
-    } else if (GI_IS_FIELD_INFO(info)) {
-        g_type = GI_TYPE_FIELD_INFO;
-    } else if (GI_IS_ARG_INFO(info)) {
-        g_type = GI_TYPE_ARG_INFO;
-    } else if (GI_IS_TYPE_INFO(info)) {
-        g_type = GI_TYPE_TYPE_INFO;
-    } else if (GI_IS_UNRESOLVED_INFO(info)) {
-        g_type = GI_TYPE_UNRESOLVED_INFO;
-    } else {
-        g_type = GI_TYPE_BASE_INFO;
-    }
-
     return GOBJ2RVAL(info);
 }
 
@@ -105,7 +49,10 @@ rb_gi_base_info_to_ruby_with_unref(GIBaseInfo *info)
 GIBaseInfo *
 rb_gi_base_info_from_ruby(VALUE rb_info)
 {
-    return RVAL2GOBJ(rb_info);
+    GIBaseInfo *info;
+    info = RVAL2GOBJ(rb_info);
+    gi_base_info_ref(info);
+    return info;
 }
 
 static VALUE
