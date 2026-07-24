@@ -24,7 +24,8 @@ Gem::Specification.new do |s|
   s.description   =
     "Ruby/GLib2 provides " +
     "base features for GLib2 based bindings and " +
-    "many useful utility features."
+    "many useful utility features." +
+    "It contains also Ruby binding of GObject Introspection."
   s.author        = "The Ruby-GNOME Project Team"
   s.email         = "ruby-gnome2-devel-en@lists.sourceforge.net"
   s.homepage      = "https://ruby-gnome.github.io/"
@@ -48,6 +49,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("pkg-config", ">= 1.3.5")
   s.add_runtime_dependency("native-package-installer", ">= 1.0.3")
+  s.add_runtime_dependency("glib2", "= #{s.version}")
 
   [
     ["alpine_linux", "glib-dev"],
@@ -62,6 +64,12 @@ Gem::Specification.new do |s|
     ["rhel", "pkgconfig(gobject-2.0)"],
   ].each do |platform, package|
     s.requirements << "system: gobject-2.0>=2.56.0: #{platform}: #{package}"
+  end
+
+  [
+    ["debian", "libgirepository2.0-dev"]
+  ].each do |platform, package|
+    s.requirements << "system: gobject-introspection-2.0: #{platform}: #{package}"
   end
 
   s.metadata["msys2_mingw_dependencies"] = "glib2"

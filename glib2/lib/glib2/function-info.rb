@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2022  Ruby-GNOME Project Team
+# Copyright (C) 2019-2021  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -13,34 +13,15 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-require "pathname"
 
-require "test-unit"
-
-require "glib2"
-
-module GLibTestUtils
-  private
-  def only_glib_version(major, minor, micro)
-    unless GLib.check_version?(major, minor, micro)
-      omit("Require GLib >= #{major}.#{minor}.#{micro}")
+module GLib
+  module GObjectIntrospection
+    class FunctionInfo
+      def inspect
+        super.gsub(/>\z/) do
+          " lock_gvl_default=#{lock_gvl?.inspect}>"
+        end
+      end
     end
-  end
-
-  def only_windows
-    omit("Only for Windows platform") unless GLib.os_win32?
-  end
-
-  def only_not_windows
-    omit("Not for Windows platform") if GLib.os_win32?
-  end
-
-  def only_not_scl
-    omit("Not for SCL environment") if ENV["SCL"]
-  end
-
-  def normalize_path(path)
-    return path unless File::ALT_SEPARATOR
-    path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
   end
 end

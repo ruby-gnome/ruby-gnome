@@ -38,12 +38,23 @@ unless required_pkg_config_package([package_id, 2, 56, 0],
                                    :redhat => "pkgconfig(#{package_id})")
   exit(false)
 end
+
+unless required_pkg_config_package("girepository-2.0",
+                                   :alt_linux => "libglib2-devel",
+                                   :conda => "gobject-introspection",
+                                   :debian => "libgirepository-2.0-dev",
+                                   :redhat => "pkgconfig(girepository-2.0)",
+                                   :homebrew => "gobject-introspection",
+                                   :arch_linux => "glib2",
+                                   :macports => "gobject-introspection",
+                                   :msys2 => "glib2")
+  exit(false)
+end
+
 PKGConfig.have_package('gthread-2.0')
 
 have_header("unistd.h")
 have_header("io.h")
-
-glib_header = "glib.h"
 
 ruby_header = "ruby.h"
 have_func("rb_check_array_type", ruby_header)
@@ -89,10 +100,88 @@ end
 glib_mkenums(enum_types_prefix,
              headers,
              "G_TYPE_",
-             [],
+             ["girepository/girepository.h"],
              preamble: "#include \"rbgprivate.h\"")
 
 $defs << "-DRUBY_GLIB2_COMPILATION"
+
+ensure_objs
+
+case RUBY_PLATFORM
+when /darwin/
+  symbols_in_external_bundles = [
+    "_g_rclosure_attach",
+    "_g_rclosure_attach_gobject",
+    "_g_rclosure_new",
+    "_g_signal_flags_get_type",
+    "_rbg_cGLibObject",
+    "_rbg_cstr2rval",
+    "_rbg_cstr2rval_free",
+    "_rbg_define_method",
+    "_rbg_define_singleton_method",
+    "_rbg_filename_from_ruby",
+    "_rbg_filename_to_ruby",
+    "_rbg_glist2rval",
+    "_rbg_glist2rval_with_type",
+    "_rbg_gslist2rval",
+    "_rbg_gslist2rval_with_type",
+    "_rbg_inspect",
+    "_rbg_is_bytes",
+    "_rbg_is_object",
+    "_rbg_is_value",
+    "_rbg_mGLib",
+    "_rbg_rval2cstr",
+    "_rbg_rval2cstr_accept_nil",
+    "_rbg_rval2cstr_accept_symbol",
+    "_rbg_rval2filenamev",
+    "_rbg_rval2glist",
+    "_rbg_rval2gslist",
+    "_rbg_rval2strv",
+    "_rbg_rval2strv_dup",
+    "_rbg_scan_options",
+    "_rbg_strv2rval",
+    "_rbg_to_array",
+    "_rbg_variant_from_ruby",
+    "_rbg_variant_to_ruby",
+    "_rbgerr_define_gerror",
+    "_rbgerr_gerror2exception",
+    "_rbgerr_ruby_error_quark",
+    "_rbgobj_add_relative",
+    "_rbgobj_boxed_get",
+    "_rbgobj_boxed_unown",
+    "_rbgobj_constant_remap",
+    "_rbgobj_convert_define",
+    "_rbgobj_define_class",
+    "_rbgobj_get_enum",
+    "_rbgobj_get_flags",
+    "_rbgobj_get_ruby_object_from_gobject",
+    "_rbgobj_gobject_initialize",
+    "_rbgobj_gtype_from_ruby",
+    "_rbgobj_gtype_new",
+    "_rbgobj_initialize_gvalue",
+    "_rbgobj_initialize_object",
+    "_rbgobj_instance_from_ruby_object",
+    "_rbgobj_instance_unref",
+    "_rbgobj_lookup_class",
+    "_rbgobj_make_boxed",
+    "_rbgobj_make_boxed_default",
+    "_rbgobj_make_boxed_raw",
+    "_rbgobj_make_enum",
+    "_rbgobj_make_flags",
+    "_rbgobj_object_add_relative",
+    "_rbgobj_object_alloc_func",
+    "_rbgobj_object_remove_relative",
+    "_rbgobj_remove_relative",
+    "_rbgobj_ruby_object_from_instance",
+    "_rbgobj_ruby_object_from_instance2",
+    "_rbgutil_invoke_callback",
+    "_rbgutil_on_callback_error",
+    "_rbgutil_start_callback_dispatch_thread",
+  ]
+  symbols_in_external_bundles.each do |symbol|
+    $DLDFLAGS << " -Wl,-U,#{symbol}"
+  end
+end
 
 create_makefile(module_name)
 

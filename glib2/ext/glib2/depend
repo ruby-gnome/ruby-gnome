@@ -9,6 +9,7 @@ install-headers:
 	$(INSTALL_DATA) $(srcdir)/rbgobject.h $(RUBYARCHDIR)
 	$(INSTALL_DATA) $(srcdir)/rbgcompat.h $(RUBYARCHDIR)
 	$(INSTALL_DATA) glib-enum-types.h $(RUBYARCHDIR)
+	$(INSTALL_DATA) $(srcdir)/rb-gobject-introspection.h $(RUBYARCHDIR)
 
 install: install-pc
 install-pc:

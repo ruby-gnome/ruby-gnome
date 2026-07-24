@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2022  Ruby-GNOME Project Team
+# Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -13,34 +13,28 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-require "pathname"
 
-require "test-unit"
+class TestSignalInfo < Test::Unit::TestCase
+  include GObjectIntrospectionTestUtils
 
-require "glib2"
-
-module GLibTestUtils
-  private
-  def only_glib_version(major, minor, micro)
-    unless GLib.check_version?(major, minor, micro)
-      omit("Require GLib >= #{major}.#{minor}.#{micro}")
-    end
+  def setup
+    @repository = GObjectIntrospection::Repository.default
+    @repository.require("Gio")
+    @object_info = @repository.find("Gio", "Application")
+    @info = @object_info.signals.find {|info| info.name == "startup"}
   end
 
-  def only_windows
-    omit("Only for Windows platform") unless GLib.os_win32?
+  def test_flags
+    require_version(1, 40, 0)
+    assert_equal(GLib::SignalFlags::RUN_FIRST,
+                 @info.flags)
   end
 
-  def only_not_windows
-    omit("Not for Windows platform") if GLib.os_win32?
+  def test_class_closure
+    assert_nil(@info.class_closure)
   end
 
-  def only_not_scl
-    omit("Not for SCL environment") if ENV["SCL"]
-  end
-
-  def normalize_path(path)
-    return path unless File::ALT_SEPARATOR
-    path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
+  def test_true_stops_emit?
+    assert_false(@info.true_stops_emit?)
   end
 end
