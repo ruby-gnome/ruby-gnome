@@ -161,14 +161,33 @@ rg_gst_audio_audio_info_from_memory_view(GstAudioInfo *info, rb_memory_view_t *v
     return true;
 }
 
+static VALUE
+rg_gst_audio_release_buffer_memory_view(VALUE data)
+{
+    rb_memory_view_t *view = (rb_memory_view_t *)data;
+
+    rb_memory_view_release(view);
+    xfree(view);
+}
+
+static void
+rg_gst_audio_queue_buffer_memory_view_release(gpointer data)
+{
+    rbgutil_invoke_callback_async(rg_gst_audio_release_buffer_memory_view, (VALUE)data);
+}
+
 static GstBuffer *
 rg_gst_audio_buffer_from_memory_view(rb_memory_view_t *view)
 {
     GstBuffer *buffer;
 
-    // Currently, copy data for implementation simplicity
-    buffer = gst_buffer_new_memdup(view->data, view->byte_size);
-    rb_memory_view_release(view);
+    buffer = gst_buffer_new_wrapped_full(GST_MEMORY_FLAG_READONLY, // TODO: handle with other flags
+                                         view->data,
+                                         view->byte_size,
+                                         0,
+                                         view->byte_size,
+                                         view,
+                                         rg_gst_audio_queue_buffer_memory_view_release);
 
     return buffer;
 }
@@ -176,7 +195,7 @@ rg_gst_audio_buffer_from_memory_view(rb_memory_view_t *view)
 static GstSample *
 rg_gst_audio_sample_from_memory_view(VALUE src, gint rate)
 {
-    rb_memory_view_t view = {0};
+    rb_memory_view_t *view;
     GstSample *sample;
     GstAudioInfo audio_info;
     GstBuffer *buffer;
@@ -187,16 +206,20 @@ rg_gst_audio_sample_from_memory_view(VALUE src, gint rate)
         rb_raise(rb_eArgError, "MemoryView not available");
     }
 
+    view = ALLOC(rb_memory_view_t);
+
     // Currently, supports only contiguous MemoryView for simplicity
-    if (!rb_memory_view_get(src, &view, RUBY_MEMORY_VIEW_FORMAT | RUBY_MEMORY_VIEW_ANY_CONTIGUOUS) &&
-        !rb_memory_view_get(src, &view, RUBY_MEMORY_VIEW_SIMPLE)) { // for Red Arrow
+    if (!rb_memory_view_get(src, view, RUBY_MEMORY_VIEW_FORMAT | RUBY_MEMORY_VIEW_ANY_CONTIGUOUS) &&
+        !rb_memory_view_get(src, view, RUBY_MEMORY_VIEW_SIMPLE)) { // for Red Arrow
+        xfree(view);
         rb_raise(rb_eArgError, "can't get MemoryView");
     }
-    if (!rg_gst_audio_audio_info_from_memory_view(&audio_info, &view, rate, &err)) {
-        rb_memory_view_release(&view);
+    if (!rg_gst_audio_audio_info_from_memory_view(&audio_info, view, rate, &err)) {
+        rb_memory_view_release(view);
+        xfree(view);
         rb_raise(rb_eArgError, "%s", err);
     }
-    buffer = rg_gst_audio_buffer_from_memory_view(&view);
+    buffer = rg_gst_audio_buffer_from_memory_view(view);
     caps = gst_audio_info_to_caps(&audio_info);
     if (!caps) {
         gst_buffer_unref(buffer);
