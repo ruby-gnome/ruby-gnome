@@ -169,7 +169,7 @@ rg_gst_audio_release_buffer_memory_view(VALUE data)
     rb_memory_view_t *view = (rb_memory_view_t *)data;
 
     rb_memory_view_release(view);
-    xfree(view);
+    g_free(view);
 }
 
 static void
@@ -194,52 +194,71 @@ rg_gst_audio_buffer_from_memory_view(rb_memory_view_t *view)
     return buffer;
 }
 
-static GstSample *
-rg_gst_audio_sample_from_memory_view(VALUE src, VALUE kw_values[AUDIO_MAKE_SAMPLE_KW_SIZE])
+static bool
+rg_gst_audio_sample_from_memory_view(GstSample **sample, VALUE src, VALUE kw_values[AUDIO_MAKE_SAMPLE_KW_SIZE], const char **err)
 {
     rb_memory_view_t *view;
-    GstSample *sample;
     GstAudioInfo audio_info;
     GstBuffer *buffer;
     GstCaps *caps;
-    const char *err = NULL;
     const VALUE rate_v = kw_values[0];
+    long rate_candidate;
     gint rate;
 
     if (NIL_P(rate_v)) {
-        rb_raise(rb_eArgError, "missing keyword: rate");
+        *err = "missing keyword: rate";
+        return false;
     }
-
-    rate = NUM2INT(rate_v);
+    if (!RB_INTEGER_TYPE_P(rate_v)) {
+        *err = "rate must be Integer";
+        return false;
+    }
+    if (!FIXNUM_P(rate_v)) {
+        *err = "rate must be fixnum";
+        return false;
+    }
+    rate_candidate = FIX2LONG(rate_v);
+    if (rate_candidate > G_MAXINT) {
+        *err = "rate too large";
+        return false;
+    }
+    if (rate_candidate <= 0) {
+        *err = "rate must be positive";
+        return false;
+    }
+    rate = (gint)rate_candidate;
 
     if (!rb_memory_view_available_p(src)) {
-        rb_raise(rb_eArgError, "MemoryView not available");
+        *err = "MemoryView not available";
+        return false;
     }
 
-    view = ALLOC(rb_memory_view_t);
+    view = g_new(rb_memory_view_t, 1);
 
     // Currently, supports only contiguous MemoryView for simplicity
     if (!rb_memory_view_get(src, view, RUBY_MEMORY_VIEW_FORMAT | RUBY_MEMORY_VIEW_ANY_CONTIGUOUS) &&
         !rb_memory_view_get(src, view, RUBY_MEMORY_VIEW_SIMPLE)) { // for Red Arrow
-        xfree(view);
-        rb_raise(rb_eArgError, "can't get MemoryView");
+        g_free(view);
+        *err = "can't get MemoryView";
+        return false;
     }
-    if (!rg_gst_audio_audio_info_from_memory_view(&audio_info, view, rate, &err)) {
+    if (!rg_gst_audio_audio_info_from_memory_view(&audio_info, view, rate, err)) {
         rb_memory_view_release(view);
-        xfree(view);
-        rb_raise(rb_eArgError, "%s", err);
+        g_free(view);
+        return false;
     }
     buffer = rg_gst_audio_buffer_from_memory_view(view);
     caps = gst_audio_info_to_caps(&audio_info);
     if (!caps) {
         gst_buffer_unref(buffer);
-        rb_raise(rb_eArgError, "can't get caps from audio info");
+        *err ="can't get caps from audio info";
+        return false;
     }
-    sample = gst_sample_new(buffer, caps, NULL, NULL);
+    *sample = gst_sample_new(buffer, caps, NULL, NULL);
     gst_buffer_unref(buffer);
     gst_caps_unref(caps);
 
-    return sample;
+    return true;
 }
 
 static VALUE
@@ -249,6 +268,7 @@ rg_gst_audio_s_audio_make_sample(int argc, VALUE *argv, VALUE mod)
     VALUE kw_args;
     VALUE kw_values[AUDIO_MAKE_SAMPLE_KW_SIZE];
     GstSample *sample = NULL;
+    const char *err = NULL;
     VALUE rb_sample;
 
     if (argc != 2) {
@@ -258,7 +278,9 @@ rg_gst_audio_s_audio_make_sample(int argc, VALUE *argv, VALUE mod)
     rb_scan_args_kw(RB_SCAN_ARGS_KEYWORDS, argc, argv, "1:", &src, &kw_args);
     rb_get_kwargs(kw_args, audio_make_sample_kw_table, AUDIO_MAKE_SAMPLE_KW_SIZE, 0, kw_values);
 
-    sample = rg_gst_audio_sample_from_memory_view(src, kw_values);
+    if (!rg_gst_audio_sample_from_memory_view(&sample, src, kw_values, &err)) {
+        rb_raise(rb_eArgError, "%s", err);
+    }
 
     rb_sample = BOXED2RVAL(sample, GST_TYPE_SAMPLE);
     gst_sample_unref(sample);
