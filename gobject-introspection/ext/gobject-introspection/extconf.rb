@@ -138,6 +138,7 @@ when /darwin/
     "_rbgutil_invoke_callback",
     "_rbgutil_on_callback_error",
     "_rbgutil_start_callback_dispatch_thread",
+    "_rbgutil_start_destroy_notify_dispatch_thread",
   ]
   symbols_in_external_bundles.each do |symbol|
     $DLDFLAGS << " -Wl,-U,#{symbol}"
