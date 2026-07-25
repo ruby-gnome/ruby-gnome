@@ -120,6 +120,9 @@ extern VALUE rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg);
 extern void rbgutil_start_callback_dispatch_thread(void);
 extern void rbgutil_stop_callback_dispatch_thread(void);
 
+extern void rbgutil_start_destroy_notify_dispatch_thread(void);
+extern void rbgutil_queue_destroy_notify_request(GDestroyNotify destroy_notify, gpointer data);
+
 extern VALUE rbgutil_string_set_utf8_encoding(VALUE string);
 extern gboolean rbgutil_key_equal(VALUE rb_string, const char *key);
 
