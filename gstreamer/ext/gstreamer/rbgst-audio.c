@@ -24,8 +24,10 @@
 #include <gst/audio/audio.h>
 #include "rbgst.h"
 
+#define AUDIO_MAKE_SAMPLE_KW_SIZE 1
+
 static ID id_rate;
-static ID audio_make_sample_kw_table[1];
+static ID audio_make_sample_kw_table[AUDIO_MAKE_SAMPLE_KW_SIZE];
 
 static GstAudioFormat
 rg_gst_audio_audio_format_from_memory_view(rb_memory_view_t *view)
@@ -193,7 +195,7 @@ rg_gst_audio_buffer_from_memory_view(rb_memory_view_t *view)
 }
 
 static GstSample *
-rg_gst_audio_sample_from_memory_view(VALUE src, gint rate)
+rg_gst_audio_sample_from_memory_view(VALUE src, VALUE kw_values[AUDIO_MAKE_SAMPLE_KW_SIZE])
 {
     rb_memory_view_t *view;
     GstSample *sample;
@@ -201,6 +203,14 @@ rg_gst_audio_sample_from_memory_view(VALUE src, gint rate)
     GstBuffer *buffer;
     GstCaps *caps;
     const char *err = NULL;
+    const VALUE rate_v = kw_values[0];
+    gint rate;
+
+    if (NIL_P(rate_v)) {
+        rb_raise(rb_eArgError, "missing keyword: rate");
+    }
+
+    rate = NUM2INT(rate_v);
 
     if (!rb_memory_view_available_p(src)) {
         rb_raise(rb_eArgError, "MemoryView not available");
@@ -236,26 +246,19 @@ static VALUE
 rg_gst_audio_s_audio_make_sample(int argc, VALUE *argv, VALUE mod)
 {
     VALUE src;
-    VALUE rate;
     VALUE kw_args;
-    VALUE kw_values[1] = {Qundef};
-    gint c_rate;
+    VALUE kw_values[AUDIO_MAKE_SAMPLE_KW_SIZE];
     GstSample *sample = NULL;
     VALUE rb_sample;
 
     if (argc != 2) {
-        rb_raise(rb_eArgError, "wrong number of arguments (given %d, expected 1, required keyword: rate)", argc);
+        rb_raise(rb_eArgError, "wrong number of arguments (given %d, expected 1)", argc);
     }
 
     rb_scan_args_kw(RB_SCAN_ARGS_KEYWORDS, argc, argv, "1:", &src, &kw_args);
-    if (NIL_P(kw_args)) {
-        rb_raise(rb_eArgError, "missing keyword: rate");   
-    }
-    rb_get_kwargs(kw_args, audio_make_sample_kw_table, 1, 0, kw_values);
-    rate = kw_values[0];
-    c_rate = NUM2INT(rate);
+    rb_get_kwargs(kw_args, audio_make_sample_kw_table, AUDIO_MAKE_SAMPLE_KW_SIZE, 0, kw_values);
 
-    sample = rg_gst_audio_sample_from_memory_view(src, c_rate);
+    sample = rg_gst_audio_sample_from_memory_view(src, kw_values);
 
     rb_sample = BOXED2RVAL(sample, GST_TYPE_SAMPLE);
     gst_sample_unref(sample);
