@@ -19,6 +19,7 @@
  */
 
 #include <ruby.h>
+#include <ruby/version.h>
 #include <ruby/memory_view.h>
 #include <gst/gstversion.h>
 #include <gst/audio/audio.h>
@@ -113,6 +114,16 @@ rg_gst_audio_audio_format_from_memory_view(rb_memory_view_t *view)
 static bool
 rg_gst_audio_audio_info_from_memory_view(GstAudioInfo *info, rb_memory_view_t *view, gint rate, const char **err)
 {
+/*
+ * When Ruby < 4.1.0, rb_memory_view_is_row_major_contiguous() and
+ * rb_memory_view_is_column_major_contiguous() have a bug and
+ * rg_gst_audio_audio_info_from_memory_view() crashes.
+ */
+#if RUBY_API_VERSION_CODE < 40100
+    *err = "not implemented when Ruby < 4.1.0";
+    return false;
+#endif
+
     GstAudioFormat format;
     GstAudioLayout layout;
     gint channels;
