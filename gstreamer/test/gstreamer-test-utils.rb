@@ -21,6 +21,13 @@ module GStreamerTestUtils
   AUDIO_TEST_SRC_RAMP = 1
 
   private
+  def only_ruby_version(major, minor, micro=nil)
+    micro ||= 0
+    unless RUBY_VERSION[0, 5] >= [major, minor, micro].join(".")
+      omit("Require Ruby >= #{major}.#{minor}.#{micro}")
+    end
+  end
+
   def only_gstreamer_version(major, minor, micro=nil)
     micro ||= 0
     unless Gst::Version.or_later?(major, minor, micro)
