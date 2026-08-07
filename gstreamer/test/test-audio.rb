@@ -20,6 +20,8 @@ class TestAudio < Test::Unit::TestCase
   include GStreamerTestUtils
 
   def test_audio_info
+    only_ruby_version(4, 1, 0)
+
     audio_info = Gst::AudioInfo.new
     audio_info.set_format(:encoded, 44100, 2)
     structure = audio_info.to_caps.structures[0]
@@ -35,6 +37,7 @@ class TestAudio < Test::Unit::TestCase
   end
 
   def test_audio_info_from_caps
+    only_ruby_version(4, 1, 0)
     only_gstreamer_version(1, 20)
 
     caps = Gst::Caps.new("audio/ogg")
@@ -55,6 +58,7 @@ class TestAudio < Test::Unit::TestCase
   end
 
   def test_audio_make_sample
+    only_ruby_version(4, 1, 0)
     only_gstreamer_version(1, 20)
 
     rate = 16000
@@ -84,6 +88,7 @@ class TestAudio < Test::Unit::TestCase
   end
 
   def test_audio_make_sample_stereo
+    only_ruby_version(4, 1, 0)
     only_gstreamer_version(1, 20)
 
     rate = 16000
@@ -113,6 +118,7 @@ class TestAudio < Test::Unit::TestCase
   end
 
   def test_audio_make_sample_s16
+    only_ruby_version(4, 1, 0)
     only_gstreamer_version(1, 20)
 
     rate = 16000
@@ -142,6 +148,7 @@ class TestAudio < Test::Unit::TestCase
   end
 
   def test_audio_make_sample_without_rate
+    only_ruby_version(4, 1, 0)
     only_gstreamer_version(1, 20)
 
     memory_view_producer = generate_samples[0]
@@ -152,6 +159,7 @@ class TestAudio < Test::Unit::TestCase
   end
 
   def test_audio_make_sample_non_memory_view_producer
+    only_ruby_version(4, 1, 0)
     only_gstreamer_version(1, 20)
 
     assert_raise(ArgumentError) do
@@ -160,6 +168,7 @@ class TestAudio < Test::Unit::TestCase
   end
 
   def test_audio_make_sample_without_format
+    only_ruby_version(4, 1, 0)
     only_gstreamer_version(1, 20)
 
     assert_raise ArgumentError do
