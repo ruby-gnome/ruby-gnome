@@ -271,10 +271,6 @@ rg_gst_audio_s_audio_make_sample(int argc, VALUE *argv, VALUE mod)
     const char *err = NULL;
     VALUE rb_sample;
 
-    if (argc != 2) {
-        rb_raise(rb_eArgError, "wrong number of arguments (given %d, expected 1)", argc);
-    }
-
     rb_scan_args_kw(RB_SCAN_ARGS_KEYWORDS, argc, argv, "1:", &src, &kw_args);
     rb_get_kwargs(kw_args, audio_make_sample_kw_table, AUDIO_MAKE_SAMPLE_KW_SIZE, 0, kw_values);
 
