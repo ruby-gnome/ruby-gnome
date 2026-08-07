@@ -62,9 +62,9 @@ class TestAudio < Test::Unit::TestCase
     only_gstreamer_version(1, 20)
 
     rate = 16000
-    memory_view_producers = generate_samples(rate:)
+    memory_view_producers = generate_samples(rate: rate)
     memory_view_producers.each do |memory_view_producer|
-      sample = GstAudio.audio_make_sample(memory_view_producer, rate:)
+      sample = GstAudio.audio_make_sample(memory_view_producer, rate: rate)
       info = Gst::AudioInfo.new(sample.caps)
 
       assert_equal({
@@ -92,9 +92,9 @@ class TestAudio < Test::Unit::TestCase
     only_gstreamer_version(1, 20)
 
     rate = 16000
-    memory_view_producers = generate_samples(channels: 2, rate:)
+    memory_view_producers = generate_samples(channels: 2, rate: rate)
     memory_view_producers.each do |memory_view_producer|
-      sample = GstAudio.audio_make_sample(memory_view_producer, rate:)
+      sample = GstAudio.audio_make_sample(memory_view_producer, rate: rate)
       info = Gst::AudioInfo.new(sample.caps)
 
       assert_equal({
@@ -122,9 +122,9 @@ class TestAudio < Test::Unit::TestCase
     only_gstreamer_version(1, 20)
 
     rate = 16000
-    memory_view_producers = generate_samples(format: "S16LE", rate:)
+    memory_view_producers = generate_samples(format: "S16LE", rate: rate)
     memory_view_producers.each do |memory_view_producer|
-      sample = GstAudio.audio_make_sample(memory_view_producer, rate:)
+      sample = GstAudio.audio_make_sample(memory_view_producer, rate: rate)
       info = Gst::AudioInfo.new(sample.caps)
 
       assert_equal({
