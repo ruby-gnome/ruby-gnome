@@ -3,9 +3,9 @@
 #
 # C language enum description generation library like as glib-mkenums tool.
 #
-# Copyright(C) 2006-2015 Ruby-GNOME2 Project.
+# Copyright (C) 2006-2026 Ruby-GNOME Project Team
 #
-# This program is licenced under the same license of Ruby-GNOME2.
+# This program is licensed under the same license of Ruby-GNOME.
 #
 
 module GLib
@@ -92,7 +92,13 @@ GType #{@enum_name}_get_type (void);
 
     private
     def to_snail_case(name)
-      prefix_processed_name = name.sub(/^[A-Z]/) do |prefix|
+      id_prefix = @options[:id_prefix]
+      if id_prefix
+        id_prefix_pattern = /\A#{Regexp.escape(id_prefix)}/
+      else
+        id_prefix_pattern = /\A[A-Z]/
+      end
+      prefix_processed_name = name.sub(id_prefix_pattern) do |prefix|
         prefix.downcase
       end
       snail_cased_name = prefix_processed_name.gsub(/[A-Z]+/) do |upper_case|
@@ -118,7 +124,7 @@ GType #{@enum_name}_get_type (void);
                 # GLIB_DEPRECATED_TYPE_IN_2_38_FOR(GTestSubprocessFlags)
                 (?:\s+[\w()\s]+)?
                 ;/mx) do |force_flags, constants, name|
-        enum_options = {}
+        enum_options = {id_prefix: options[:id_prefix]}
         enum_options[:force_flags] = !force_flags.nil?
         force_flags_patterns = [(options[:force_flags] || [])].flatten
         if force_flags_patterns.any? {|pattern| pattern === name}

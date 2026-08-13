@@ -1,4 +1,4 @@
-# Copyright (C) 2005-2025  Ruby-GNOME Project Team
+# Copyright (C) 2005-2026  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -344,6 +344,10 @@ require "glib2/time-zone"
 require "glib2/value"
 require "glib2/variant"
 require "glib2/variant-type"
+
+if GLib.const_defined?(:Repository)
+  require_relative "glib2/repository"
+end
 
 =begin
 Don't we need this?

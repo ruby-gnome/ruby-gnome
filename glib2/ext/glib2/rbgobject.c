@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2003-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2003-2026  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *  Copyright (C) 1998-2000  Yukihiro Matsumoto,
  *                           Daisuke Kanda,
@@ -24,6 +24,10 @@
 
 #include "rbgprivate.h"
 #include <ctype.h>
+
+#ifdef HAVE_GIREPOSITORY
+#  include "rbgi-private.h"
+#endif
 
 static ID id_relatives;
 static ID id_delete;
@@ -96,6 +100,11 @@ rbgobj_instance_from_ruby_object(VALUE obj)
     case G_TYPE_PARAM:
         return rbgobj_get_param_spec(obj);
     default:
+#ifdef HAVE_GIREPOSITORY
+      if (fundamental_type == GI_TYPE_BASE_INFO) {
+          return rbgi_base_info_from_ruby(obj);
+      }
+#endif
       {
         gpointer instance;
         if (!rbgobj_convert_robj2instance(fundamental_type, obj, &instance)) {

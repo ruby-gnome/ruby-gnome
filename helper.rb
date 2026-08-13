@@ -78,8 +78,12 @@ module Helper
   ]
 
   def all_packages
-    ALL_PACKAGES.reject do |package|
-      ENV["RUBY_GNOME_#{package.upcase.gsub("-", "_")}_ENABLE"] == "no"
+    if ENV["RUBY_GNOME_GLIB2_GIREPOSITORY_ENABLE"] == "yes"
+      ["glib2"]
+    else
+      ALL_PACKAGES.reject do |package|
+        ENV["RUBY_GNOME_#{package.upcase.gsub("-", "_")}_ENABLE"] == "no"
+      end
     end
   end
 
