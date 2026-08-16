@@ -32,6 +32,7 @@
 G_GNUC_INTERNAL void rbgi_arg_info_init(VALUE mGLib);
 G_GNUC_INTERNAL void rbgi_callable_info_init(VALUE mGLib);
 G_GNUC_INTERNAL void rbgi_base_info_init(VALUE mGLib);
+G_GNUC_INTERNAL void rbgi_interface_info_init(VALUE mGLib);
 G_GNUC_INTERNAL void rbgi_repository_init(VALUE mGLib);
 G_GNUC_INTERNAL void rbgi_type_info_init(VALUE mGLib);
 

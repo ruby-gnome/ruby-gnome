@@ -1306,10 +1306,23 @@ union       GDoubleIEEE754;
     /* TODO */
     /* rbgi_function_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_FUNCTION_INFO, "FunctionInfo", rbg_mGLib());
+    rbgi_interface_info_init(rbg_mGLib());
     /* TODO */
-    /* rbgi_interface_info_init(rbg_mGLib()); */
-    G_DEF_CLASS(GI_TYPE_INTERFACE_INFO, "InterfaceInfo", rbg_mGLib());
+    /* rbgi_object_info_init(rbg_mGLib()); */
+    G_DEF_CLASS(GI_TYPE_OBJECT_INFO, "ObjectInfo", rbg_mGLib());
+    /* TODO */
+    /* rbgi_property_info_init(rbg_mGLib()); */
+    G_DEF_CLASS(GI_TYPE_PROPERTY_INFO, "PropertyInfo", rbg_mGLib());
+    /* TODO */
+    /* rbgi_signal_info_init(rbg_mGLib()); */
+    G_DEF_CLASS(GI_TYPE_SIGNAL_INFO, "SignalInfo", rbg_mGLib());
+    /* TODO */
+    /* rbgi_struct_info_init(rbg_mGLib()); */
+    G_DEF_CLASS(GI_TYPE_STRUCT_INFO, "StructInfo", rbg_mGLib());
     rbgi_type_info_init(rbg_mGLib());
+    /* TODO */
+    /* rbgi_vfunc_info_init(rbg_mGLib()); */
+    G_DEF_CLASS(GI_TYPE_VFUNC_INFO, "VFuncInfo", rbg_mGLib());
 
     /* TODO */
     /* rbgi_array_type_init(rbg_mGLib()); */
