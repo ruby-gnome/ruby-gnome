@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2003-2025  Ruby-GNOME Project Team
+ *  Copyright (C) 2003-2026  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -23,6 +23,7 @@
 
 #include <glib-object.h>
 #include <ruby.h>
+#include <ruby/thread.h>
 #include "rbglib.h"
 #include "rbgutil.h"
 

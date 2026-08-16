@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2007-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2007-2026  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -33,10 +33,6 @@
 #include <fcntl.h>
 #include <errno.h>
 
-#ifndef HAVE_RUBY_NATIVE_THREAD_P
-#  define ruby_native_thread_p() is_ruby_native_thread()
-#endif
-
 static VALUE rbgutil_eGLibCallbackNotInitializedError;
 static ID id_exit_application;
 
@@ -60,8 +56,6 @@ rbgutil_on_callback_error(VALUE error)
 }
 
 /**********************************************************************/
-
-#ifdef HAVE_NATIVETHREAD
 
 typedef struct _CallbackRequest {
     VALUE (*function)(VALUE);
@@ -181,42 +175,31 @@ invoke_callback_in_ruby_thread(VALUE (*func)(VALUE), VALUE arg)
     return request.result;
 }
 
-#ifdef HAVE_RB_THREAD_CALL_WITH_GVL
-extern void *rb_thread_call_with_gvl(void *(*func)(void *), void *data1);
-
 static void *
 invoke_callback_with_gvl(void *arg)
 {
     CallbackRequest *req = (CallbackRequest*)arg;
     return (void *)rbgutil_protect(req->function, req->argument);
 }
-#endif
-
-#endif
 
 /**********************************************************************/
 
 VALUE
 rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg)
 {
-#ifdef HAVE_NATIVETHREAD
     if (ruby_native_thread_p()) {
         if (!GPOINTER_TO_INT(g_private_get(&rg_polling_key))) {
             return rbgutil_protect(func, arg);
         }
-#  ifdef HAVE_RB_THREAD_CALL_WITH_GVL
         {
             CallbackRequest req;
             req.function = func;
             req.argument = arg;
             return (VALUE)rb_thread_call_with_gvl(invoke_callback_with_gvl, &req);
         }
-#  endif
     } else {
         return invoke_callback_in_ruby_thread(func, arg);
     }
-#endif
-    return rbgutil_protect(func, arg);
 }
 
 /**********************************************************************/
@@ -224,7 +207,6 @@ rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg)
 void
 rbgutil_start_callback_dispatch_thread(void)
 {
-#ifdef HAVE_NATIVETHREAD
     VALUE callback_dispatch_thread;
 
     g_mutex_lock(&callback_dispatch_thread_mutex);
@@ -238,13 +220,11 @@ rbgutil_start_callback_dispatch_thread(void)
                     callback_dispatch_thread);
     }
     g_mutex_unlock(&callback_dispatch_thread_mutex);
-#endif
 }
 
 void
 rbgutil_stop_callback_dispatch_thread(void)
 {
-#ifdef HAVE_NATIVETHREAD
     VALUE callback_dispatch_thread;
 
     g_mutex_lock(&callback_dispatch_thread_mutex);
@@ -254,7 +234,6 @@ rbgutil_stop_callback_dispatch_thread(void)
         rb_ivar_set(rbg_mGLib(), id_callback_dispatch_thread, Qnil);
     }
     g_mutex_unlock(&callback_dispatch_thread_mutex);
-#endif
 }
 
 void
@@ -265,11 +244,9 @@ Init_gutil_callback(void)
         rb_define_class_under(rbg_mGLib(), "CallbackNotInitializedError",
                               rb_eRuntimeError);
 
-#ifdef HAVE_NATIVETHREAD
     id_callback_dispatch_thread = rb_intern("callback_dispatch_thread");
     rb_ivar_set(rbg_mGLib(), id_callback_dispatch_thread, Qnil);
 
     callback_request_queue = g_async_queue_new();
     g_mutex_init(&callback_dispatch_thread_mutex);
-#endif
 }
