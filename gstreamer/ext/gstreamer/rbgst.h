@@ -23,6 +23,7 @@
 #include <rb-gobject-introspection.h>
 
 extern void Init_gstreamer (void);
+G_GNUC_INTERNAL extern void rb_gst_init_audio (void);
 G_GNUC_INTERNAL extern void rb_gst_init_child_proxy (void);
 G_GNUC_INTERNAL extern void rb_gst_init_element (void);
 G_GNUC_INTERNAL extern void rb_gst_init_sample (void);
