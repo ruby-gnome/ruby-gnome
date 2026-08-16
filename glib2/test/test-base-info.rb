@@ -18,9 +18,7 @@ class TestBaseInfo < Test::Unit::TestCase
   include GLibTestUtils
 
   def setup
-    unless GLib.const_defined?(:Repository)
-      omit("Need RUBY_GNOME_GLIB2_GIREPOSITORY_ENABLE=yes on build")
-    end
+    only_girepository
     @repository = GLib::Repository.default
     @repository.require("GObject")
     @info = @repository.find("GObject", "Object")

@@ -100,11 +100,6 @@ rbgobj_instance_from_ruby_object(VALUE obj)
     case G_TYPE_PARAM:
         return rbgobj_get_param_spec(obj);
     default:
-#ifdef HAVE_GIREPOSITORY
-      if (fundamental_type == GI_TYPE_BASE_INFO) {
-          return rbgi_base_info_from_ruby(obj);
-      }
-#endif
       {
         gpointer instance;
         if (!rbgobj_convert_robj2instance(fundamental_type, obj, &instance)) {
