@@ -37,7 +37,7 @@ class TestInterfaceInfo < Test::Unit::TestCase
     assert_equal(1, @info.n_properties)
   end
 
-  def test_propertiy
+  def test_property
     assert_kind_of(GLib::PropertyInfo,
                    @info.get_property(0))
   end
@@ -75,7 +75,9 @@ class TestInterfaceInfo < Test::Unit::TestCase
 
   def test_n_vfuncs
     info = @repository.find("Gio", "Volume")
-    assert_operator(0, :<, info.n_vfuncs)
+    assert do
+      info.n_vfuncs > 0
+    end
   end
 
   def test_get_vfunc_n
@@ -88,6 +90,21 @@ class TestInterfaceInfo < Test::Unit::TestCase
     info = @repository.find("Gio", "Volume")
     assert_kind_of(GLib::VFuncInfo,
                    info.get_vfunc("can_eject"))
+  end
+
+  def test_n_constants
+    omit("Find an interface info that has constants")
+    info = @repository.find("Gio", "XXX")
+    assert do
+      info.n_constants > 0
+    end
+  end
+
+  def test_get_constant
+    omit("Find an interface info that has constants")
+    info = @repository.find("Gio", "XXX")
+    assert_kind_of(GLib::ConstantInfo,
+                   info.get_constant(0))
   end
 
   def test_iface_struct

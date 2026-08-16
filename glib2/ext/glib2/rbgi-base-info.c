@@ -84,6 +84,10 @@ rbgi_base_info_instance2robj(gpointer instance, gpointer user_data)
         ID id_CallableInfo;
         RUBY_CONST_ID(id_CallableInfo, "CallableInfo");
         klass = rb_const_get(rbg_mGLib(), id_CallableInfo);
+    } else if (type == GI_TYPE_CONSTANT_INFO) {
+        ID id_ConstantInfo;
+        RUBY_CONST_ID(id_ConstantInfo, "ConstantInfo");
+        klass = rb_const_get(rbg_mGLib(), id_ConstantInfo);
     } else if (type == GI_TYPE_FUNCTION_INFO) {
         ID id_FunctionInfo;
         RUBY_CONST_ID(id_FunctionInfo, "FunctionInfo");

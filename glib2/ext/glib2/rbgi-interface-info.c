@@ -95,7 +95,7 @@ rg_get_signal(VALUE self, VALUE rb_n_or_name)
         const char *name = RVAL2CSTR(rb_n_or_name);
         signal_info = gi_interface_info_find_signal(info, name);
     }
-    return GOBJ2RVAL(signal_info);
+    return GOBJ2RVAL_UNREF(signal_info);
 }
 
 static VALUE
@@ -117,7 +117,7 @@ rg_get_vfunc(VALUE self, VALUE rb_n_or_name)
         const gchar *name = RVAL2CSTR(rb_n_or_name);
         vfunc_info = gi_interface_info_find_vfunc(info, name);
     }
-    return GOBJ2RVAL(vfunc_info);
+    return GOBJ2RVAL_UNREF(vfunc_info);
 }
 
 static VALUE
@@ -139,7 +139,7 @@ static VALUE
 rg_iface_struct(VALUE self)
 {
     GIInterfaceInfo *info = SELF(self);
-    return GOBJ2RVAL(gi_interface_info_get_iface_struct(info));
+    return GOBJ2RVAL_UNREF(gi_interface_info_get_iface_struct(info));
 }
 
 void
