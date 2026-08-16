@@ -92,10 +92,30 @@ rbgi_base_info_instance2robj(gpointer instance, gpointer user_data)
         ID id_InterfaceInfo;
         RUBY_CONST_ID(id_InterfaceInfo, "InterfaceInfo");
         klass = rb_const_get(rbg_mGLib(), id_InterfaceInfo);
+    } else if (type == GI_TYPE_OBJECT_INFO) {
+        ID id_ObjectInfo;
+        RUBY_CONST_ID(id_ObjectInfo, "ObjectInfo");
+        klass = rb_const_get(rbg_mGLib(), id_ObjectInfo);
+    } else if (type == GI_TYPE_PROPERTY_INFO) {
+        ID id_PropertyInfo;
+        RUBY_CONST_ID(id_PropertyInfo, "PropertyInfo");
+        klass = rb_const_get(rbg_mGLib(), id_PropertyInfo);
+    } else if (type == GI_TYPE_SIGNAL_INFO) {
+        ID id_SignalInfo;
+        RUBY_CONST_ID(id_SignalInfo, "SignalInfo");
+        klass = rb_const_get(rbg_mGLib(), id_SignalInfo);
+    } else if (type == GI_TYPE_STRUCT_INFO) {
+        ID id_StructInfo;
+        RUBY_CONST_ID(id_StructInfo, "StructInfo");
+        klass = rb_const_get(rbg_mGLib(), id_StructInfo);
     } else if (type == GI_TYPE_TYPE_INFO) {
         ID id_TypeInfo;
         RUBY_CONST_ID(id_TypeInfo, "TypeInfo");
         klass = rb_const_get(rbg_mGLib(), id_TypeInfo);
+    } else if (type == GI_TYPE_VFUNC_INFO) {
+        ID id_VFuncInfo;
+        RUBY_CONST_ID(id_VFuncInfo, "VFuncInfo");
+        klass = rb_const_get(rbg_mGLib(), id_VFuncInfo);
     }
 
     gi_base_info_ref(info);
