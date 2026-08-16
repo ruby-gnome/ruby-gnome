@@ -28,7 +28,7 @@ static VALUE RG_TARGET_NAMESPACE;
 static void
 rbgi_base_info_free(void *data)
 {
-    GIBaseInfoStack *info = data;
+    GIBaseInfo *info = data;
     gi_base_info_unref(info);
 }
 
@@ -55,33 +55,8 @@ rbgi_base_info_alloc_func(VALUE klass)
                                  NULL);
 }
 
-VALUE
-rbgi_base_info_to_ruby(GIBaseInfo *info)
-{
-    if (!info) {
-        return Qnil;
-    }
-
-    gi_base_info_ref(info);
-    return TypedData_Wrap_Struct(RG_TARGET_NAMESPACE,
-                                 &rbgi_base_info_type,
-                                 info);
-}
-
-VALUE
-rbgi_base_info_to_ruby_take(GIBaseInfo *info)
-{
-    if (!info) {
-        return Qnil;
-    }
-
-    return TypedData_Wrap_Struct(RG_TARGET_NAMESPACE,
-                                 &rbgi_base_info_type,
-                                 info);
-}
-
-GIBaseInfo *
-rbgi_base_info_from_ruby(VALUE rb_info)
+static gpointer
+rbgi_base_info_robj2instance(VALUE rb_info, gpointer user_data)
 {
     GIBaseInfo *info;
     TypedData_Get_Struct(rb_info,
@@ -89,6 +64,48 @@ rbgi_base_info_from_ruby(VALUE rb_info)
                          &rbgi_base_info_type,
                          info);
     return info;
+}
+
+static VALUE
+rbgi_base_info_instance2robj(gpointer instance, gpointer user_data)
+{
+    GIBaseInfo *info = instance;
+    if (!info) {
+        return Qnil;
+    }
+
+    VALUE klass = RG_TARGET_NAMESPACE;
+    GType type = G_TYPE_FROM_INSTANCE(info);
+    if (type == GI_TYPE_ARG_INFO) {
+        ID id_ArgInfo;
+        RUBY_CONST_ID(id_ArgInfo, "ArgInfo");
+        klass = rb_const_get(rbg_mGLib(), id_ArgInfo);
+    } else if (type == GI_TYPE_CALLABLE_INFO) {
+        ID id_CallableInfo;
+        RUBY_CONST_ID(id_CallableInfo, "CallableInfo");
+        klass = rb_const_get(rbg_mGLib(), id_CallableInfo);
+    } else if (type == GI_TYPE_FUNCTION_INFO) {
+        ID id_FunctionInfo;
+        RUBY_CONST_ID(id_FunctionInfo, "FunctionInfo");
+        klass = rb_const_get(rbg_mGLib(), id_FunctionInfo);
+    } else if (type == GI_TYPE_TYPE_INFO) {
+        ID id_TypeInfo;
+        RUBY_CONST_ID(id_TypeInfo, "TypeInfo");
+        klass = rb_const_get(rbg_mGLib(), id_TypeInfo);
+    }
+
+    gi_base_info_ref(info);
+    return TypedData_Wrap_Struct(klass, &rbgi_base_info_type, info);
+}
+
+static void
+rbgi_base_info_unref(gpointer instance, gpointer user_data)
+{
+    GIBaseInfo *info = instance;
+    if (!info) {
+        return;
+    }
+    gi_base_info_unref(info);
 }
 
 static VALUE
@@ -112,10 +129,8 @@ rg_namespace(VALUE self)
 static VALUE
 rg_container(VALUE self)
 {
-    GIBaseInfo *info;
-
-    info = SELF(self);
-    return rbgi_base_info_to_ruby(gi_base_info_get_container(info));
+    GIBaseInfo *info = SELF(self);
+    return GOBJ2RVAL(gi_base_info_get_container(info));
 }
 
 static VALUE
@@ -152,6 +167,22 @@ rbgi_base_info_init(VALUE rb_mGLib)
 {
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GI_TYPE_BASE_INFO, "BaseInfo", rb_mGLib);
     rb_define_alloc_func(RG_TARGET_NAMESPACE, rbgi_base_info_alloc_func);
+
+    RGConvertTable table = {
+      .type = GI_TYPE_BASE_INFO,
+      .klass = RG_TARGET_NAMESPACE,
+      .user_data = NULL,
+      .notify = NULL,
+      .get_superclass = NULL,
+      .type_init_hook = NULL,
+      .rvalue2gvalue = NULL,
+      .gvalue2rvalue = NULL,
+      .initialize = NULL,
+      .robj2instance = rbgi_base_info_robj2instance,
+      .instance2robj = rbgi_base_info_instance2robj,
+      .unref = rbgi_base_info_unref,
+    };
+    RG_DEF_CONVERSION(&table);
 
     rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 

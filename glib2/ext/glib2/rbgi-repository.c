@@ -192,7 +192,7 @@ rg_get_info(VALUE self, VALUE rb_namespace, VALUE rb_n)
     namespace_ = RVAL2CSTR(rb_namespace);
     n = NUM2INT(rb_n);
     info = gi_repository_get_info(repository, namespace_, n);
-    return GI_BASE_INFO2RVAL_TAKE(info);
+    return GOBJ2RVAL_UNREF(info);
 }
 
 
@@ -216,7 +216,6 @@ rg_get_info(VALUE self, VALUE rb_namespace, VALUE rb_n)
  *
  * @return [GLib::BaseInfo] The metadata entry.
  */
-
 static VALUE
 rg_find(int argc, VALUE *argv, VALUE self)
 {
@@ -238,7 +237,7 @@ rg_find(int argc, VALUE *argv, VALUE self)
         info = gi_repository_find_by_name(SELF(self), namespace_, name);
     }
 
-    return GI_BASE_INFO2RVAL(info);
+    return GOBJ2RVAL_UNREF(info);
 }
 
 static VALUE

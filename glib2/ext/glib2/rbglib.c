@@ -1299,7 +1299,17 @@ union       GDoubleIEEE754;
     Init_glib_option();
 
 #ifdef HAVE_GIREPOSITORY
-    rbgi_repository_init(rbg_mGLib());
     rbgi_base_info_init(rbg_mGLib());
+
+    rbgi_arg_info_init(rbg_mGLib());
+    rbgi_callable_info_init(rbg_mGLib());
+    /* TODO */
+    /* rbgi_function_info_init(rbg_mGLib()); */
+    G_DEF_CLASS(GI_TYPE_FUNCTION_INFO, "FunctionInfo", rbg_mGLib());
+    /* TODO */
+    /* rbgi_type_info_init(rbg_mGLib()); */
+    G_DEF_CLASS(GI_TYPE_TYPE_INFO, "TypeInfo", rbg_mGLib());
+
+    rbgi_repository_init(rbg_mGLib());
 #endif
 }

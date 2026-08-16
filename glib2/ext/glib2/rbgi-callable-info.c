@@ -18,23 +18,37 @@
  *  MA  02110-1301  USA
  */
 
-#pragma once
+#ifdef HAVE_GIREPOSITORY
+#include "rbgi-private.h"
 
-#include "rbgprivate.h"
-#include "rbglib2conversions.h"
+#define RG_TARGET_NAMESPACE rb_cGICallableInfo
+#define SELF(self) RVAL2GI_CALLABLE_INFO(self)
 
-#include <girepository/girepository.h>
-#include <girepository/girffi.h>
+static VALUE
+rg_n_args(VALUE self)
+{
+    GICallableInfo *info = SELF(self);
+    return INT2NUM(gi_callable_info_get_n_args(info));
+}
 
-#include "gi-enum-types.h"
-#include "rbgi-conversions.h"
+static VALUE
+rg_get_arg(VALUE self, VALUE rb_n)
+{
+    GICallableInfo *info = SELF(self);
+    gint n = NUM2INT(rb_n);
+    return GOBJ2RVAL_UNREF(gi_callable_info_get_arg(info, n));
+}
 
-G_GNUC_INTERNAL void rbgi_arg_info_init(VALUE mGLib);
-G_GNUC_INTERNAL void rbgi_callable_info_init(VALUE mGLib);
-G_GNUC_INTERNAL void rbgi_base_info_init(VALUE mGLib);
-G_GNUC_INTERNAL void rbgi_repository_init(VALUE mGLib);
+void
+rbgi_callable_info_init(VALUE rb_mGLib)
+{
+    VALUE RG_TARGET_NAMESPACE;
 
-G_GNUC_INTERNAL gboolean
-rbgi_arg_info_is_input_buffer(GIArgInfo *info);
-G_GNUC_INTERNAL gboolean
-rbgi_arg_info_is_output_buffer(GIArgInfo *info);
+    RG_TARGET_NAMESPACE =
+        G_DEF_CLASS(GI_TYPE_CALLABLE_INFO, "CallableInfo", rb_mGLib);
+
+    /* TODO: More methods */
+    RG_DEF_METHOD(n_args, 0);
+    RG_DEF_METHOD(get_arg, 1);
+}
+#endif

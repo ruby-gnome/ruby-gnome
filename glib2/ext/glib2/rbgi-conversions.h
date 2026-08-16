@@ -23,10 +23,10 @@
 #define RVAL2GI_REPOSITORY_LOAD_FLAGS(rb_flags) \
     (RVAL2GFLAGS(rb_flags, GI_TYPE_REPOSITORY_LOAD_FLAGS))
 
-GIBaseInfo *rbgi_base_info_from_ruby(VALUE rb_info);
-VALUE rbgi_base_info_to_ruby(GIBaseInfo *info);
-VALUE rbgi_base_info_to_ruby_take(GIBaseInfo *info);
+#define RVAL2GI_ARG_INFO(rb_info)      GI_ARG_INFO(RVAL2GOBJ(rb_info))
+#define RVAL2GI_BASE_INFO(rb_info)     GI_BASE_INFO(RVAL2GOBJ(rb_info))
+#define RVAL2GI_CALLABLE_INFO(rb_info) GI_CALLABLE_INFO(RVAL2GOBJ(rb_info))
 
-#define RVAL2GI_BASE_INFO(rb_info)   rbgi_base_info_from_ruby(rb_info)
-#define GI_BASE_INFO2RVAL(info)      rbgi_base_info_to_ruby(info)
-#define GI_BASE_INFO2RVAL_TAKE(info) rbgi_base_info_to_ruby_take(info)
+#define GI_DIRECTION2RVAL(direction) (GENUM2RVAL(direction, GI_TYPE_DIRECTION))
+#define GI_SCOPE_TYPE2RVAL(scope)    (GENUM2RVAL(scope, GI_TYPE_SCOPE_TYPE))
+#define GI_TRANSFER2RVAL(transfer)   (GENUM2RVAL(transfer, GI_TYPE_TRANSFER))

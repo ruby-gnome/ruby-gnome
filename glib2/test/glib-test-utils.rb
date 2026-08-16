@@ -40,6 +40,12 @@ module GLibTestUtils
     omit("Not for SCL environment") if ENV["SCL"]
   end
 
+  def only_girepository
+    unless GLib.const_defined?(:Repository)
+      omit("Need RUBY_GNOME_GLIB2_GIREPOSITORY_ENABLE=yes on build")
+    end
+  end
+
   def normalize_path(path)
     return path unless File::ALT_SEPARATOR
     path.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
