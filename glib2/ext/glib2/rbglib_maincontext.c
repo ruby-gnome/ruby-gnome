@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2025  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2026  Ruby-GNOME Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -20,10 +20,6 @@
  */
 
 #include "rbgprivate.h"
-
-#ifdef HAVE_RUBY_THREAD_H
-#  include <ruby/thread.h>
-#endif
 
 GPrivate rg_polling_key = G_PRIVATE_INIT(NULL);
 
@@ -59,7 +55,6 @@ rg_poll_in_blocking_raw(PollInfo *info)
     info->result = default_poll_func(info->ufds, info->nfsd, info->timeout);
 }
 
-#ifdef HAVE_RB_THREAD_CALL_WITHOUT_GVL
 static void *
 rg_poll_in_blocking(void *data)
 {
@@ -67,15 +62,6 @@ rg_poll_in_blocking(void *data)
     rg_poll_in_blocking_raw(info);
     return NULL;
 }
-#else
-static VALUE
-rg_poll_in_blocking(void *data)
-{
-    PollInfo *info = data;
-    rg_poll_in_blocking_raw(info);
-    return Qnil;
-}
-#endif
 
 static gint
 rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
@@ -89,13 +75,8 @@ rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
 
     g_private_set(&rg_polling_key, GINT_TO_POINTER(TRUE));
     if (g_thread_self() == main_thread) {
-#ifdef HAVE_RB_THREAD_CALL_WITHOUT_GVL
         rb_thread_call_without_gvl(rg_poll_in_blocking, &info,
                                    RUBY_UBF_IO, NULL);
-#else
-        rb_thread_blocking_region(rg_poll_in_blocking, &info,
-                                  RUBY_UBF_IO, NULL);
-#endif
     } else {
         rg_poll_in_blocking_raw(&info);
     }
