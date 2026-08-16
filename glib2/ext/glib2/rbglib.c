@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2025  Ruby-GNOME Project Team
+ *  Copyright (C) 2011-2026  Ruby-GNOME Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -22,6 +22,9 @@
 #include <locale.h>
 #include "rbgprivate.h"
 #include "rbglib.h"
+#ifdef HAVE_GIREPOSITORY
+#  include "rbgi-private.h"
+#endif
 
 #define RG_TARGET_NAMESPACE rbg_mGLib()
 
@@ -1294,4 +1297,9 @@ union       GDoubleIEEE754;
     Init_glib_time_zone();
     Init_glib_bytes();
     Init_glib_option();
+
+#ifdef HAVE_GIREPOSITORY
+    rbgi_repository_init(rbg_mGLib());
+    rbgi_base_info_init(rbg_mGLib());
+#endif
 }

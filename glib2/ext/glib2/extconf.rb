@@ -1,4 +1,4 @@
-# Copyright (C) 2002-2025  Ruby-GNOME Project Team
+# Copyright (C) 2002-2026  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -39,6 +39,16 @@ unless required_pkg_config_package([package_id, 2, 56, 0],
   exit(false)
 end
 PKGConfig.have_package('gthread-2.0')
+if ENV["RUBY_GNOME_GLIB2_GIREPOSITORY_ENABLE"] == "yes"
+  have_girepository =
+    required_pkg_config_package(["girepository-2.0", 2, 80, 0],
+                                debian: "libgirepository-2.0-dev")
+else
+  have_girepository = false
+end
+if have_girepository
+  $defs << "-DHAVE_GIREPOSITORY"
+end
 
 have_header("unistd.h")
 have_header("io.h")
@@ -91,6 +101,18 @@ glib_mkenums(enum_types_prefix,
              "G_TYPE_",
              [],
              preamble: "#include \"rbgprivate.h\"")
+
+if have_girepository
+  girepository_headers = include_paths.split.inject([]) do |result, path|
+    result + Dir.glob(File.join(path.sub(/^-I/, ""), "girepository", "*.h"))
+  end
+  glib_mkenums("gi-enum-types",
+               girepository_headers,
+               "GI_TYPE_",
+               [],
+               id_prefix: "GI",
+               preamble: "#include <girepository/girepository.h>")
+end
 
 $defs << "-DRUBY_GLIB2_COMPILATION"
 
