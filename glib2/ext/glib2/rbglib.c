@@ -1300,12 +1300,20 @@ union       GDoubleIEEE754;
 
 #ifdef HAVE_GIREPOSITORY
     rbgi_base_info_init(rbg_mGLib());
+    /* Parent classes must be defined before their child classes. */
+    rbgi_registered_type_info_init(rbg_mGLib());
 
     rbgi_arg_info_init(rbg_mGLib());
     rbgi_callable_info_init(rbg_mGLib());
     /* TODO */
     /* rbgi_constant_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_CONSTANT_INFO, "ConstantInfo", rbg_mGLib());
+    /* TODO */
+    /* rbgi_enum_info_init(rbg_mGLib()); */
+    G_DEF_CLASS(GI_TYPE_ENUM_INFO, "EnumInfo", rbg_mGLib());
+    /* TODO */
+    /* rbgi_flags_info_init(rbg_mGLib()); */
+    G_DEF_CLASS(GI_TYPE_FLAGS_INFO, "FlagsInfo", rbg_mGLib());
     /* TODO */
     /* rbgi_function_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_FUNCTION_INFO, "FunctionInfo", rbg_mGLib());
@@ -1323,6 +1331,9 @@ union       GDoubleIEEE754;
     /* rbgi_struct_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_STRUCT_INFO, "StructInfo", rbg_mGLib());
     rbgi_type_info_init(rbg_mGLib());
+    /* TODO */
+    /* rbgi_union_info_init(rbg_mGLib()); */
+    G_DEF_CLASS(GI_TYPE_UNION_INFO, "UnionInfo", rbg_mGLib());
     /* TODO */
     /* rbgi_vfunc_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_VFUNC_INFO, "VFuncInfo", rbg_mGLib());

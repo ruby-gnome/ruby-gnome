@@ -23,11 +23,13 @@
 #define RVAL2GI_REPOSITORY_LOAD_FLAGS(rb_flags) \
     (RVAL2GFLAGS(rb_flags, GI_TYPE_REPOSITORY_LOAD_FLAGS))
 
-#define RVAL2GI_ARG_INFO(rb_info)       GI_ARG_INFO(RVAL2GOBJ(rb_info))
-#define RVAL2GI_BASE_INFO(rb_info)      GI_BASE_INFO(RVAL2GOBJ(rb_info))
-#define RVAL2GI_CALLABLE_INFO(rb_info)  GI_CALLABLE_INFO(RVAL2GOBJ(rb_info))
-#define RVAL2GI_INTERFACE_INFO(rb_info) GI_INTERFACE_INFO(RVAL2GOBJ(rb_info))
-#define RVAL2GI_TYPE_INFO(rb_info)      GI_TYPE_INFO(RVAL2GOBJ(rb_info))
+#define RVAL2GI_ARG_INFO(rb_info)             GI_ARG_INFO(RVAL2GOBJ(rb_info))
+#define RVAL2GI_BASE_INFO(rb_info)            GI_BASE_INFO(RVAL2GOBJ(rb_info))
+#define RVAL2GI_CALLABLE_INFO(rb_info)        GI_CALLABLE_INFO(RVAL2GOBJ(rb_info))
+#define RVAL2GI_INTERFACE_INFO(rb_info)       GI_INTERFACE_INFO(RVAL2GOBJ(rb_info))
+#define RVAL2GI_REGISTERED_TYPE_INFO(rb_info) \
+    GI_REGISTERED_TYPE_INFO(RVAL2GOBJ(rb_info))
+#define RVAL2GI_TYPE_INFO(rb_info)            GI_TYPE_INFO(RVAL2GOBJ(rb_info))
 
 #define GI_ARRAY_TYPE2RVAL(type)     (GENUM2RVAL(type, GI_TYPE_ARRAY_TYPE))
 #define GI_DIRECTION2RVAL(direction) (GENUM2RVAL(direction, GI_TYPE_DIRECTION))
