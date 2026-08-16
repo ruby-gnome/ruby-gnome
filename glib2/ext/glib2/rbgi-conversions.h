@@ -26,7 +26,10 @@
 #define RVAL2GI_ARG_INFO(rb_info)      GI_ARG_INFO(RVAL2GOBJ(rb_info))
 #define RVAL2GI_BASE_INFO(rb_info)     GI_BASE_INFO(RVAL2GOBJ(rb_info))
 #define RVAL2GI_CALLABLE_INFO(rb_info) GI_CALLABLE_INFO(RVAL2GOBJ(rb_info))
+#define RVAL2GI_TYPE_INFO(rb_info)     GI_TYPE_INFO(RVAL2GOBJ(rb_info))
 
+#define GI_ARRAY_TYPE2RVAL(type)     (GENUM2RVAL(type, GI_TYPE_ARRAY_TYPE))
 #define GI_DIRECTION2RVAL(direction) (GENUM2RVAL(direction, GI_TYPE_DIRECTION))
 #define GI_SCOPE_TYPE2RVAL(scope)    (GENUM2RVAL(scope, GI_TYPE_SCOPE_TYPE))
 #define GI_TRANSFER2RVAL(transfer)   (GENUM2RVAL(transfer, GI_TYPE_TRANSFER))
+#define GI_TYPE_TAG2RVAL(tag)        (GENUM2RVAL(tag, GI_TYPE_TYPE_TAG))

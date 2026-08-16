@@ -1307,8 +1307,16 @@ union       GDoubleIEEE754;
     /* rbgi_function_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_FUNCTION_INFO, "FunctionInfo", rbg_mGLib());
     /* TODO */
-    /* rbgi_type_info_init(rbg_mGLib()); */
-    G_DEF_CLASS(GI_TYPE_TYPE_INFO, "TypeInfo", rbg_mGLib());
+    /* rbgi_interface_info_init(rbg_mGLib()); */
+    G_DEF_CLASS(GI_TYPE_INTERFACE_INFO, "InterfaceInfo", rbg_mGLib());
+    rbgi_type_info_init(rbg_mGLib());
+
+    /* TODO */
+    /* rbgi_array_type_init(rbg_mGLib()); */
+    G_DEF_CLASS(GI_TYPE_ARRAY_TYPE, "ArrayType", rbg_mGLib());
+    /* TODO */
+    /* rbgi_type_tag_init(rbg_mGLib()); */
+    G_DEF_CLASS(GI_TYPE_TYPE_TAG, "TypeTag", rbg_mGLib());
 
     rbgi_repository_init(rbg_mGLib());
 #endif
