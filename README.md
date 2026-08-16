@@ -141,6 +141,21 @@ ruby extconf.rb
 make
 ```
 
+### Out-of-source build
+
+You can also build in a separate directory to keep the source tree
+clean. Run the top-level `extconf.rb` from your build directory:
+
+```bash
+mkdir build
+cd build
+ruby /path/to/ruby-gnome/extconf.rb [subdir]...
+make
+```
+
+All generated files including `Makefile`s and compiled objects are
+placed under the build directory.
+
 ### extconf.rb options
 
 * `--ruby`
