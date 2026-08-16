@@ -160,6 +160,7 @@ EXPORTS
 	rbgutil_protect
 	rbgutil_on_callback_error
 	rbgutil_invoke_callback
+	rbgutil_invoke_callback_async
 	rbgutil_start_callback_dispatch_thread
 	rbgutil_stop_callback_dispatch_thread
 	rbgutil_string_set_utf8_encoding

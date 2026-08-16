@@ -117,6 +117,7 @@ extern void rbgutil_set_properties(VALUE self, VALUE hash);
 extern VALUE rbgutil_protect(VALUE (*proc) (VALUE), VALUE data);
 extern void rbgutil_on_callback_error(VALUE error);
 extern VALUE rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg);
+extern void rbgutil_invoke_callback_async(VALUE (*func)(VALUE), VALUE arg);
 extern void rbgutil_start_callback_dispatch_thread(void);
 extern void rbgutil_stop_callback_dispatch_thread(void);
 

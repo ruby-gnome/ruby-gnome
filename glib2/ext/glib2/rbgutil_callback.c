@@ -61,6 +61,10 @@ typedef struct _CallbackRequest {
     VALUE (*function)(VALUE);
     VALUE argument;
     VALUE result;
+    /* An async request is heap-allocated by the requester, doesn't
+     * report its result and is freed by the dispatch thread. done_mutex
+     * and done_cond are unused for it. */
+    gboolean async;
     GMutex done_mutex;
     GCond done_cond;
 } CallbackRequest;
@@ -72,6 +76,25 @@ static gint callback_pipe_fds[2] = {-1, -1};
 
 #define CALLBACK_PIPE_READY_MESSAGE "R"
 #define CALLBACK_PIPE_READY_MESSAGE_SIZE 1
+
+static CallbackRequest *
+callback_request_new_async(VALUE (*func)(VALUE), VALUE arg)
+{
+    CallbackRequest *request;
+
+    request = g_new0(CallbackRequest, 1);
+    request->function = func;
+    request->argument = arg;
+    request->result = Qnil;
+    request->async = TRUE;
+    return request;
+}
+
+static void
+callback_request_free(CallbackRequest *request)
+{
+    g_free(request);
+}
 
 static VALUE
 exec_callback(VALUE data)
@@ -113,7 +136,14 @@ mainloop(G_GNUC_UNUSED void *user_data)
         if (!request)
             break;
 
-        rb_thread_create(process_request, request);
+        if (request->async) {
+            /* Async callbacks must be fast because they block the
+             * dispatch thread. */
+            rbgutil_protect(exec_callback, (VALUE)request);
+            callback_request_free(request);
+        } else {
+            rb_thread_create(process_request, request);
+        }
     }
 
     close(callback_pipe_fds[0]);
@@ -149,8 +179,8 @@ invoke_callback_in_ruby_thread(VALUE (*func)(VALUE), VALUE arg)
     g_mutex_lock(&callback_dispatch_thread_mutex);
     if (callback_pipe_fds[0] == -1) {
         g_error("Please call rbgutil_start_callback_dispatch_thread() "
-                "to dispatch a callback from non-ruby thread before "
-                "callbacks are requested from non-ruby thread.");
+                "to dispatch a callback from non-Ruby thread before "
+                "callbacks are requested from non-Ruby thread.");
         g_mutex_unlock(&callback_dispatch_thread_mutex);
         return Qnil;
     }
@@ -158,6 +188,7 @@ invoke_callback_in_ruby_thread(VALUE (*func)(VALUE), VALUE arg)
     request.function = func;
     request.argument = arg;
     request.result = Qnil;
+    request.async = FALSE;
     g_mutex_init(&(request.done_mutex));
     g_cond_init(&(request.done_cond));
 
@@ -175,6 +206,22 @@ invoke_callback_in_ruby_thread(VALUE (*func)(VALUE), VALUE arg)
     return request.result;
 }
 
+static void
+invoke_callback_async_in_ruby_thread(VALUE (*func)(VALUE), VALUE arg)
+{
+    g_mutex_lock(&callback_dispatch_thread_mutex);
+    if (callback_pipe_fds[0] == -1) {
+        g_mutex_unlock(&callback_dispatch_thread_mutex);
+        g_error("Please call rbgutil_start_callback_dispatch_thread() "
+                "to dispatch a callback from non-Ruby thread before "
+                "callbacks are requested from non-Ruby thread.");
+        return;
+    }
+
+    queue_callback_request(callback_request_new_async(func, arg));
+    g_mutex_unlock(&callback_dispatch_thread_mutex);
+}
+
 static void *
 invoke_callback_with_gvl(void *arg)
 {
@@ -188,17 +235,42 @@ VALUE
 rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg)
 {
     if (ruby_native_thread_p()) {
-        if (!GPOINTER_TO_INT(g_private_get(&rg_polling_key))) {
-            return rbgutil_protect(func, arg);
-        }
-        {
+        if (GPOINTER_TO_INT(g_private_get(&rg_polling_key))) {
             CallbackRequest req;
             req.function = func;
             req.argument = arg;
             return (VALUE)rb_thread_call_with_gvl(invoke_callback_with_gvl, &req);
+        } else {
+            return rbgutil_protect(func, arg);
         }
     } else {
         return invoke_callback_in_ruby_thread(func, arg);
+    }
+}
+
+/*
+ * Fire-and-forget variant of rbgutil_invoke_callback().
+ *
+ * When this is called from a non-Ruby thread, this doesn't wait for
+ * the callback result; the callback is run later in the callback
+ * dispatch thread. Use this for callbacks that are invoked frequently
+ * from non-Ruby threads and don't need to report a result, such as
+ * GDestroyNotify. See also rbgutil_invoke_callback().
+ */
+void
+rbgutil_invoke_callback_async(VALUE (*func)(VALUE), VALUE arg)
+{
+    if (ruby_native_thread_p()) {
+        if (GPOINTER_TO_INT(g_private_get(&rg_polling_key))) {
+            CallbackRequest request;
+            request.function = func;
+            request.argument = arg;
+            rb_thread_call_with_gvl(invoke_callback_with_gvl, &request);
+        } else {
+            rbgutil_protect(func, arg);
+        }
+    } else {
+      invoke_callback_async_in_ruby_thread(func, arg);
     }
 }
 
