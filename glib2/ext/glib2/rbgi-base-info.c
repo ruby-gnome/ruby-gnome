@@ -88,6 +88,10 @@ rbgi_base_info_instance2robj(gpointer instance, gpointer user_data)
         ID id_FunctionInfo;
         RUBY_CONST_ID(id_FunctionInfo, "FunctionInfo");
         klass = rb_const_get(rbg_mGLib(), id_FunctionInfo);
+    } else if (type == GI_TYPE_INTERFACE_INFO) {
+        ID id_InterfaceInfo;
+        RUBY_CONST_ID(id_InterfaceInfo, "InterfaceInfo");
+        klass = rb_const_get(rbg_mGLib(), id_InterfaceInfo);
     } else if (type == GI_TYPE_TYPE_INFO) {
         ID id_TypeInfo;
         RUBY_CONST_ID(id_TypeInfo, "TypeInfo");
